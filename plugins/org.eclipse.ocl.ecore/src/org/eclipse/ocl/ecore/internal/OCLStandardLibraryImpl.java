@@ -198,7 +198,7 @@ public final class OCLStandardLibraryImpl implements OCLStandardLibrary<EClassif
             return stdlibPackage;
         }
         
-		URI oclStandardLibraryNsURI = URI.createURI(EcoreEnvironment.OCL_STANDARD_LIBRARY_NS_URI);
+		URI oclStandardLibraryNsURI = URI.createURI(NS_URI);
 		URI libraryURI = URIConverter.URI_MAP.get(oclStandardLibraryNsURI);
 		if (libraryURI == null) {
             // standalone case: no library specified, we generate the built-in library.
@@ -217,11 +217,11 @@ public final class OCLStandardLibraryImpl implements OCLStandardLibrary<EClassif
         Resource res = null;
         
         try {
-            Resource load = rset.getResource(URI.createURI(NS_URI), true);
+            Resource load = rset.getResource(oclStandardLibraryNsURI, true);
             
             // transfer the loaded resource contents to a new resource that
             //    decodes URI fragments when resolving objects 
-            res = OCLEcorePlugin.getEcoreResourceFactory().createResource(load.getURI());
+            res = OCLEcorePlugin.getEcoreResourceFactory().createResource(oclStandardLibraryNsURI);
             res.getContents().addAll(load.getContents());
             
             stdlibPackage = (EPackage) res.getContents().get(0);
