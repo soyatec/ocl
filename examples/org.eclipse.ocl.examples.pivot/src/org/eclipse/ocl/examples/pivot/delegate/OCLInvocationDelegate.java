@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
+import org.eclipse.ocl.examples.pivot.Query;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
@@ -69,7 +70,7 @@ public class OCLInvocationDelegate extends BasicInvocationDelegate
 				specification = InvocationBehavior.INSTANCE.getExpressionInOcl(metaModelManager, operation);
 				InvocationBehavior.INSTANCE.validate(operation);
 			}
-			OCL.Query query = ocl.createQuery(specification);
+			Query query = ocl.createQuery(specification);
 			EvaluationEnvironment env = query.getEvaluationEnvironment();
 			List<Parameter> parms = operation.getOwnedParameter();
 			if (!parms.isEmpty()) {

@@ -330,7 +330,7 @@ public final class OCLUtil {
 	 * @return the diagnostic object encapsulating the problem details or
 	 *         <code>null</code> if no problems are available
 	 */
-	public static Diagnostic getEvaluationProblems(QueryBase query) {
+	public static Diagnostic getEvaluationProblems(Query query) {
 
 		if (query instanceof ProblemAware) {
 			ProblemAware problemAware = (ProblemAware) query;

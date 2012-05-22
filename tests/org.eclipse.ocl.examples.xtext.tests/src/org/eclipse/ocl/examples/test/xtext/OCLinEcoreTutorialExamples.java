@@ -41,7 +41,6 @@ import org.eclipse.ocl.examples.domain.validation.DomainSubstitutionLabelProvide
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
 import org.eclipse.ocl.examples.pivot.OCL;
-import org.eclipse.ocl.examples.pivot.Query;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
 import org.eclipse.ocl.examples.pivot.delegate.ValidationDelegate;
@@ -57,7 +56,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCLStandaloneSetup;
  * Tests for the OCLinEcore tutorial using LPG or Pivot delegate URIs on LPG or Pivot evaluator.
  */
 @SuppressWarnings("nls")
-public class DocumentationExamples extends PivotTestCase
+public class OCLinEcoreTutorialExamples extends PivotTestCase
 {
 	public void testOCLinEcoreTutorialUsingLPGForLPG() throws Exception {
 		org.eclipse.ocl.ecore.OCL.initialize(resourceSet);
@@ -210,7 +209,7 @@ public class DocumentationExamples extends PivotTestCase
 			
 			helper.setContext(bookType);
 			ExpressionInOcl query = helper.createQuery("isAvailable()");
-			Query queryEval = ocl.createQuery(query);
+			org.eclipse.ocl.examples.pivot.Query queryEval = ocl.createQuery(query);
 			Value b2Available = queryEval.evaluate(b2Book);
 		    assertFalse(b2Available.asBoolean());
 		    

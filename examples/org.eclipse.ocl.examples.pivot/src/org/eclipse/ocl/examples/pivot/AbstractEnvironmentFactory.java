@@ -141,7 +141,7 @@ public abstract class AbstractEnvironmentFactory implements EnvironmentFactory, 
 			var.setName(next.getName());
 			var.setType(next.getType());
 			var.setRepresentedParameter(next);		
-			result.addElement(var.getName(), var, true);
+//			result.addElement(var.getName(), var, true);
 		}	
 		return result;
 	}

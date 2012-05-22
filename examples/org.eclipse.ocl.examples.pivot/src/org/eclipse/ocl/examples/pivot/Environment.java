@@ -127,7 +127,7 @@ public interface Environment {
 	 * 
 	 * @return the context classifier
 	 */
-//	Type getContextClassifier();
+	Type getContextClassifier();
 	
 	/**
 	 * Obtains the context operation of this environment, if it is an operation
@@ -136,7 +136,7 @@ public interface Environment {
 	 * @return the context operation, or <code>null</code> if this is not an
 	 *     operation environment
 	 */
-//	Operation getContextOperation();
+	Operation getContextOperation();
 	
 	/**
 	 * Obtains the context property of this environment, if it is a property
@@ -145,7 +145,7 @@ public interface Environment {
 	 * @return the context property, or <code>null</code> if this is not a
 	 *     property environment
 	 */
-//	Property getContextProperty();
+	Property getContextProperty();
 	
     /**
      * Obtains the collection of core types representing the OCL Standard

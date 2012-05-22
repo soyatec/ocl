@@ -21,7 +21,6 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
 import org.eclipse.ocl.examples.pivot.OCL;
-import org.eclipse.ocl.examples.pivot.OCLBase;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -74,7 +73,7 @@ public interface OCLHelper {
 	 * 
 	 * @return my context classifier (never <code>null</code>)
 	 */
-//	Type getContextClassifier();
+	Type getContextClassifier();
 	
 	/**
 	 * Sets the operation context of the OCL expression for which syntax or
@@ -96,7 +95,7 @@ public interface OCLHelper {
 	 * @return my context operation, or <code>null</code> if there is only a
 	 *     classifier or attribute context
 	 */
-//	Operation getContextOperation();
+	Operation getContextOperation();
 	
 	/**
 	 * Sets the attribute context of the OCL expression for which syntax or
@@ -118,7 +117,7 @@ public interface OCLHelper {
 	 * @return my context attribute, or <code>null</code> if there is only a
 	 *     classifier or operation context
 	 */
-//	Property getContextAttribute();
+	Property getContextAttribute();
     
     /**
      * Sets the classifier context implied by the specified instance.  The
@@ -174,7 +173,7 @@ public interface OCLHelper {
      * 
      * @return the OCL instance that created me
      */
-    OCLBase getOCL();
+    OCL getOCL();
     
     /**
      * Obtains the environment defining my current

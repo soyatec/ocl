@@ -32,6 +32,7 @@ import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.OclExpression;
 import org.eclipse.ocl.examples.pivot.ParserException;
+import org.eclipse.ocl.examples.pivot.Query;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -108,7 +109,7 @@ public class OCLQueryDelegate implements QueryDelegate
 				String message = DomainUtil.bind(OCLMessages.MismatchedArgumentCount_ERROR_, argCount, parameterVariables.size());
 				throw new OCLDelegateException(message);
 			}
-			OCL.Query query = ocl.createQuery(specification);
+			Query query = ocl.createQuery(specification);
 			EvaluationEnvironment env = query.getEvaluationEnvironment();
 			for (Variable parameterVariable : parameterVariables) {
 				// bind arguments to parameter names

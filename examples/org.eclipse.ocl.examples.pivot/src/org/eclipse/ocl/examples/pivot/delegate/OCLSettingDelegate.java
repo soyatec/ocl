@@ -25,6 +25,7 @@ import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Query;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.osgi.util.NLS;
@@ -60,7 +61,7 @@ public class OCLSettingDelegate extends BasicSettingDelegate.Stateless
 			specification = SettingBehavior.INSTANCE.getExpressionInOcl(metaModelManager, property);
 			SettingBehavior.INSTANCE.validate(property);
 		}
-		OCL.Query query = ocl.createQuery(specification);
+		Query query = ocl.createQuery(specification);
 		try {
 			Value result = query.evaluate(owner);
 			return result.asEcoreObject();

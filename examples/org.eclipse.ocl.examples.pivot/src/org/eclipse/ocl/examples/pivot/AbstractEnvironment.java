@@ -57,8 +57,8 @@ public abstract class AbstractEnvironment extends AbstractBasicEnvironment
 	implements Environment.Internal {
 	
 	private org.eclipse.ocl.examples.pivot.Package contextPackage;
-//	private Operation contextOperation;
-//	private Property contextProperty;
+	private Operation contextOperation;
+	private Property contextProperty;
 
 	private Variable selfVariable;
 
@@ -150,7 +150,7 @@ public abstract class AbstractEnvironment extends AbstractBasicEnvironment
 	}
 	
     // implements the interface method
-/*	public Operation getContextOperation() {
+	public Operation getContextOperation() {
 		if (contextOperation != null) {
 			return contextOperation;
 		} else if (getInternalParent() != null) {
@@ -158,7 +158,7 @@ public abstract class AbstractEnvironment extends AbstractBasicEnvironment
 		}
 		
 		return null;
-	} */
+	}
 
     /**
      * Assigns my context operation.  This method does <em>not</em> create the
@@ -167,11 +167,11 @@ public abstract class AbstractEnvironment extends AbstractBasicEnvironment
      * @param contextOperation my context operation
      */
 	protected void setContextOperation(Operation contextOperation) {
-//		this.contextOperation = contextOperation;
+		this.contextOperation = contextOperation;
 	}
 	
     // implements the interface method
-/*	public Property getContextProperty() {
+	public Property getContextProperty() {
 		if (contextProperty != null) {
 			return contextProperty;
 		} else if (getInternalParent() != null) {
@@ -179,7 +179,7 @@ public abstract class AbstractEnvironment extends AbstractBasicEnvironment
 		}
 		
 		return null;
-	} */
+	}
 
     /**
      * Assigns my context property.
@@ -187,7 +187,7 @@ public abstract class AbstractEnvironment extends AbstractBasicEnvironment
      * @param contextProperty my context property
      */
 	protected void setContextProperty(Property contextProperty) {
-//		this.contextProperty = contextProperty;
+		this.contextProperty = contextProperty;
 	}
 
     // implements the interface method

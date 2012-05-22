@@ -26,7 +26,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 
-
 /**
  * An OCL constraint or query.  The query is validated for correctness
  * when it is created.  The query can subsequently be evaluated on a single
@@ -39,7 +38,7 @@ import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
  * @author Edith Schonberg (edith)
  * @author Christian W. Damus (cdamus)
  */
-public interface QueryBase {
+public interface Query {
 	/**
 	 * Obtains the evaluation environment that I use to evaluate OCL expressions.
 	 * 
@@ -171,5 +170,14 @@ public interface QueryBase {
      * @return my OCL expression
 	 */
 	OclExpression getExpression();
+    
+	/**
+	 * <p>
+	 * Obtains the {@link OCL} that created me.
+	 * </p>
+     * 
+     * @return my originating <tt>OCL</tt> instance
+	 */
+    OCL getOCL();
 }
 
