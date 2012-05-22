@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ocl.Environment;
@@ -197,6 +198,18 @@ public final class OCLStandardLibraryImpl implements OCLStandardLibrary<EClassif
             return stdlibPackage;
         }
         
+		URI oclStandardLibraryNsURI = URI.createURI(NS_URI);
+		URI libraryURI = URIConverter.URI_MAP.get(oclStandardLibraryNsURI);
+		if (libraryURI == null) {
+            // standalone case: no library specified, we generate the built-in library.
+            return build();
+		}
+		URI oclPluginURI = URI.createPlatformPluginURI("org.eclipse.ocl.ecore/model/oclstdlib.ecore", true); //$NON-NLS-1$
+		if (oclPluginURI.equals(libraryURI)) {
+            // normal plugin case: we generate the built-in library.
+            return build();
+		}
+		// Unusual case, try to load an explicit library model
         ResourceSet rset = new ResourceSetImpl();
         // Ensure that an EcoreResource factory is registered for the ecore extension.
         // Note that when running standalone, a registration in the global registry is not certain.
@@ -204,11 +217,11 @@ public final class OCLStandardLibraryImpl implements OCLStandardLibrary<EClassif
         Resource res = null;
         
         try {
-            Resource load = rset.getResource(URI.createURI(NS_URI), true);
+            Resource load = rset.getResource(oclStandardLibraryNsURI, true);
             
             // transfer the loaded resource contents to a new resource that
             //    decodes URI fragments when resolving objects 
-            res = OCLEcorePlugin.getEcoreResourceFactory().createResource(load.getURI());
+            res = OCLEcorePlugin.getEcoreResourceFactory().createResource(oclStandardLibraryNsURI);
             res.getContents().addAll(load.getContents());
             
             stdlibPackage = (EPackage) res.getContents().get(0);
@@ -255,9 +268,8 @@ public final class OCLStandardLibraryImpl implements OCLStandardLibrary<EClassif
             
             return stdlibPackage;
         } catch (Exception e) {
-            // normal case: the library file isn't there because we are
-            //    generating it on the fly.  Let's do that, then
-            
+            // unusual case: the library file isn't there, fallback to
+            //    generating it on the fly.
             return build();
         } finally {
             if (res != null) {

@@ -16,9 +16,6 @@
 
 package org.eclipse.ocl.ecore;
 
-import java.util.Map;
-
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnumLiteral;
@@ -29,7 +26,6 @@ import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.EnvironmentFactory;
@@ -76,11 +72,6 @@ public class OCL extends org.eclipse.ocl.OCL<
 			: Resource.Factory.Registry.INSTANCE;
 		resourceFactoryRegistry.getExtensionToFactoryMap().put(
 			"ecore", new EcoreResourceFactoryImpl()); //$NON-NLS-1$
-		Map<URI,URI> uriMap = resourceSet != null
-				? resourceSet.getURIConverter().getURIMap()
-				: URIConverter.URI_MAP;
-		uriMap.put(URI.createURI(EcoreEnvironment.OCL_STANDARD_LIBRARY_NS_URI),
-			URI.createURI("no-such-protocol:/this/does/not/exist")); //$NON-NLS-1$
 		return null;
 	}
 
