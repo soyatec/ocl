@@ -79,8 +79,10 @@ public class OCL extends org.eclipse.ocl.OCL<
 		Map<URI,URI> uriMap = resourceSet != null
 				? resourceSet.getURIConverter().getURIMap()
 				: URIConverter.URI_MAP;
-		uriMap.put(URI.createURI(EcoreEnvironment.OCL_STANDARD_LIBRARY_NS_URI),
-			URI.createURI("no-such-protocol:/this/does/not/exist")); //$NON-NLS-1$
+		URI oclStandardLibraryNsURI = URI.createURI(EcoreEnvironment.OCL_STANDARD_LIBRARY_NS_URI);
+		if (!uriMap.containsKey(oclStandardLibraryNsURI)) {
+			uriMap.put(oclStandardLibraryNsURI, URI.createURI("no-such-protocol:/this/does/not/exist")); //$NON-NLS-1$
+		}
 		return null;
 	}
 
