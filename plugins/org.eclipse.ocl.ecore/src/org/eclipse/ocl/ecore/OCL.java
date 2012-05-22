@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.EnvironmentFactory;
 import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.ecore.internal.OCLStandardLibraryImpl;
 import org.eclipse.ocl.helper.OCLHelper;
 
 /**
@@ -80,8 +81,8 @@ public class OCL extends org.eclipse.ocl.OCL<
 				? resourceSet.getURIConverter().getURIMap()
 				: URIConverter.URI_MAP;
 		URI oclStandardLibraryNsURI = URI.createURI(EcoreEnvironment.OCL_STANDARD_LIBRARY_NS_URI);
-		if (!uriMap.containsKey(oclStandardLibraryNsURI)) {
-			uriMap.put(oclStandardLibraryNsURI, URI.createURI("no-such-protocol:/this/does/not/exist")); //$NON-NLS-1$
+		if (!uriMap.containsKey(oclStandardLibraryNsURI) && !URIConverter.URI_MAP.containsKey(oclStandardLibraryNsURI)) {
+			uriMap.put(oclStandardLibraryNsURI, OCLStandardLibraryImpl.getPluginURI());
 		}
 		return null;
 	}

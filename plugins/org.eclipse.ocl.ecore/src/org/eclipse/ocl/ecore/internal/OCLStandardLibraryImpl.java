@@ -22,6 +22,7 @@ package org.eclipse.ocl.ecore.internal;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.ECollections;
@@ -37,6 +38,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ocl.Environment;
@@ -201,6 +203,19 @@ public final class OCLStandardLibraryImpl implements OCLStandardLibrary<EClassif
         // Ensure that an EcoreResource factory is registered for the ecore extension.
         // Note that when running standalone, a registration in the global registry is not certain.
         OCL.initialize(rset);
+		Map<URI,URI> uriMap = rset.getURIConverter().getURIMap();
+		URI oclStandardLibraryNsURI = URI.createURI(EcoreEnvironment.OCL_STANDARD_LIBRARY_NS_URI);
+		URI oclStandardLibraryPluginURI = getPluginURI();
+		URI libraryURI = uriMap.get(oclStandardLibraryNsURI);
+		if (libraryURI == null) {
+			if (!uriMap.containsKey(oclStandardLibraryNsURI)) {
+				libraryURI = URIConverter.URI_MAP.get(oclStandardLibraryNsURI);
+			}
+		}
+		if (oclStandardLibraryPluginURI.equals(libraryURI)) {
+            // normal case: we generate it on the fly.
+            return build();
+		}
         Resource res = null;
         
         try {
@@ -266,6 +281,10 @@ public final class OCLStandardLibraryImpl implements OCLStandardLibrary<EClassif
             }
         }
     }
+
+	public static URI getPluginURI() {
+		return URI.createPlatformPluginURI("org.eclipse.ocl.ecore/model/oclstdlib.ecore", true); //$NON-NLS-1
+	}
     
     // this method is used to build the standard library when not loading it
     //   from file
