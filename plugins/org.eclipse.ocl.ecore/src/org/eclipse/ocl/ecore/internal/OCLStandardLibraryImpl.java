@@ -22,7 +22,6 @@ package org.eclipse.ocl.ecore.internal;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.ECollections;
@@ -199,23 +198,22 @@ public final class OCLStandardLibraryImpl implements OCLStandardLibrary<EClassif
             return stdlibPackage;
         }
         
+		URI oclStandardLibraryNsURI = URI.createURI(EcoreEnvironment.OCL_STANDARD_LIBRARY_NS_URI);
+		URI libraryURI = URIConverter.URI_MAP.get(oclStandardLibraryNsURI);
+		if (libraryURI == null) {
+            // standalone case: no library specified, we generate the built-in library.
+            return build();
+		}
+		URI oclPluginURI = URI.createPlatformPluginURI("org.eclipse.ocl.ecore/model/oclstdlib.ecore", true); //$NON-NLS-1$
+		if (oclPluginURI.equals(libraryURI)) {
+            // normal plugin case: we generate the built-in library.
+            return build();
+		}
+		// Unusual case, try to load an explicit library model
         ResourceSet rset = new ResourceSetImpl();
         // Ensure that an EcoreResource factory is registered for the ecore extension.
         // Note that when running standalone, a registration in the global registry is not certain.
         OCL.initialize(rset);
-		Map<URI,URI> uriMap = rset.getURIConverter().getURIMap();
-		URI oclStandardLibraryNsURI = URI.createURI(EcoreEnvironment.OCL_STANDARD_LIBRARY_NS_URI);
-		URI oclStandardLibraryPluginURI = getPluginURI();
-		URI libraryURI = uriMap.get(oclStandardLibraryNsURI);
-		if (libraryURI == null) {
-			if (!uriMap.containsKey(oclStandardLibraryNsURI)) {
-				libraryURI = URIConverter.URI_MAP.get(oclStandardLibraryNsURI);
-			}
-		}
-		if (oclStandardLibraryPluginURI.equals(libraryURI)) {
-            // normal case: we generate it on the fly.
-            return build();
-		}
         Resource res = null;
         
         try {
@@ -270,9 +268,8 @@ public final class OCLStandardLibraryImpl implements OCLStandardLibrary<EClassif
             
             return stdlibPackage;
         } catch (Exception e) {
-            // normal case: the library file isn't there because we are
-            //    generating it on the fly.  Let's do that, then
-            
+            // unusual case: the library file isn't there, fallback to
+            //    generating it on the fly.
             return build();
         } finally {
             if (res != null) {
@@ -281,10 +278,6 @@ public final class OCLStandardLibraryImpl implements OCLStandardLibrary<EClassif
             }
         }
     }
-
-	public static URI getPluginURI() {
-		return URI.createPlatformPluginURI("org.eclipse.ocl.ecore/model/oclstdlib.ecore", true); //$NON-NLS-1
-	}
     
     // this method is used to build the standard library when not loading it
     //   from file
