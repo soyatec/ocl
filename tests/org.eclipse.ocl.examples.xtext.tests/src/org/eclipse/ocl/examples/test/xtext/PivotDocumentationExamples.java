@@ -21,34 +21,22 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
 import org.eclipse.emf.examples.extlibrary.Book;
 import org.eclipse.emf.examples.extlibrary.BookCategory;
 import org.eclipse.emf.examples.extlibrary.EXTLibraryFactory;
 import org.eclipse.emf.examples.extlibrary.EXTLibraryPackage;
 import org.eclipse.emf.examples.extlibrary.Library;
-import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
 import org.eclipse.ocl.examples.pivot.OCL;
-import org.eclipse.ocl.examples.pivot.OclExpression;
-import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.ParserException;
-import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Query;
-import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 
@@ -66,7 +54,7 @@ public class PivotDocumentationExamples extends XtextTestCase
 		return url.openStream();
 	}
 	
-/*	private List<Library> getLibraries() {
+	private List<Library> getLibraries() {
 		return Collections.emptyList();
 	}
 
@@ -76,7 +64,7 @@ public class PivotDocumentationExamples extends XtextTestCase
 		aBook.setTitle("Bleak House");
 		library.getBooks().add(aBook);
 		return library;
-	} */
+	}
 	
 	/*
 	 * This 'test' provides the source text for the 'Parsing OCL Document' example
@@ -86,14 +74,11 @@ public class PivotDocumentationExamples extends XtextTestCase
 		// create an OCL instance for Ecore
 		OCL ocl = OCL.newInstance(new PivotEnvironmentFactory());
 
-		MetaModelManager metaModelManager = ocl.getMetaModelManager();
-		
 		// create an OCL helper object
 		OCLHelper helper = ocl.createOCLHelper();
 
 		// set the OCL context classifier
-		Type pLibrary = metaModelManager.getPivotOfEcore(Type.class, EXTLibraryPackage.Literals.LIBRARY);
-		helper.setContext(pLibrary);
+		helper.setContext(EXTLibraryPackage.Literals.LIBRARY);
 
 		ExpressionInOcl invariant = helper.createInvariant(
 		    "books->forAll(b1, b2 | b1 <> b2 implies b1.title <> b2.title)");
@@ -101,9 +86,8 @@ public class PivotDocumentationExamples extends XtextTestCase
 		ExpressionInOcl query = helper.createQuery(
 		    "books->collect(b : Book | b.category)->asSet()");
 
-		Operation oper = null;
-		Type pEModelElement = metaModelManager.getPivotOfEcore(Type.class, EcorePackage.Literals.EMODEL_ELEMENT);
-		for (Operation next : pEModelElement.getOwnedOperation()) {
+		EOperation oper = null;
+		for (EOperation next : EcorePackage.Literals.EMODEL_ELEMENT.getEOperations()) {
 		    if ("getEAnnotation".equals(next.getName())) {
 		        oper = next;
 		        break;
@@ -113,15 +97,14 @@ public class PivotDocumentationExamples extends XtextTestCase
 		// define a post-condition specifying the value of EModelElement::getEAnnotation(EString).
 		// This operation environment includes variables representing the operation
 		// parameters (in this case, only "source : String") and the operation result
-		Type pEClass = metaModelManager.getPivotOfEcore(Type.class, EcorePackage.Literals.ECLASS);
-		helper.setOperationContext(pEClass, oper);
+		helper.setOperationContext(EcorePackage.Literals.ECLASS, oper);
 		ExpressionInOcl body = helper.createPostcondition(
 		    "result = self.eAnnotations->any(ann | ann.source = source)");
 
 		// define a derivation constraint for the EReference::eReferenceType property
-		Type pEReference = metaModelManager.getPivotOfEcore(Type.class, EcorePackage.Literals.EREFERENCE);
-		Property pEReferenceEReferenceType = metaModelManager.getPivotOfEcore(Property.class, EcorePackage.Literals.EREFERENCE__EREFERENCE_TYPE);
-		helper.setAttributeContext(pEReference, pEReferenceEReferenceType);
+		helper.setAttributeContext(
+		    EcorePackage.Literals.EREFERENCE,
+		    EcorePackage.Literals.EREFERENCE__EREFERENCE_TYPE);
 		ExpressionInOcl derive = helper.createDerivedValueExpression(
 		    "self.eType->any(true).oclAsType(EClass)");
 	
@@ -132,9 +115,9 @@ public class PivotDocumentationExamples extends XtextTestCase
 	/*
 	 * This 'test' provides the source text for the 'Parsing OCL Document' example
 	 * in org.eclipse.ocl.doc/doc/5115-evaluating-constraints.textile
-	 *
+	 */
 	public void test_evaluatingConstraintsExample() throws IOException, ParserException {
-		OCL ocl = OCL.newInstance(EcoreEnvironmentFactory.INSTANCE);
+		OCL ocl = OCL.newInstance(new PivotEnvironmentFactory());
 		OCLHelper helper = ocl.createOCLHelper();
 
 		helper.setContext(EXTLibraryPackage.Literals.LIBRARY);
@@ -179,7 +162,7 @@ public class PivotDocumentationExamples extends XtextTestCase
 		    
 		    System.out.printf("%s: %s%n", next.getName(), categories);
 		}
-	} */
+	}
 
 	/*
 	 * This 'test' provides the source text for the 'Parsing OCL Document' example
@@ -191,7 +174,7 @@ public class PivotDocumentationExamples extends XtextTestCase
 		//-------------------------------------------------------------------------
 		EPackage.Registry registry = new EPackageRegistryImpl();
 		registry.put(EXTLibraryPackage.eNS_URI, EXTLibraryPackage.eINSTANCE);
-		PivotEnvironmentFactory environmentFactory = new PivotEnvironmentFactory(registry);
+		PivotEnvironmentFactory environmentFactory = new PivotEnvironmentFactory(registry, null);
 		OCL ocl = OCL.newInstance(environmentFactory);
 
 		// get an OCL text file via some hypothetical API

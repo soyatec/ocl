@@ -18,6 +18,9 @@
 package org.eclipse.ocl.examples.pivot.helper;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
 import org.eclipse.ocl.examples.pivot.OCL;
@@ -55,8 +58,19 @@ import org.eclipse.ocl.examples.pivot.Type;
  * @author Yasser Lulu
  * @author Christian W. Damus (cdamus)
  */
-public interface OCLHelper {
-    
+public interface OCLHelper
+{
+	/**
+	 * Sets the classifier context of the OCL expression for which syntax or
+     * parsing help is to be provided.
+	 *
+	 * @param context the OCL context classifier
+	 * 
+	 * @see #setOperationContext(Object, Object)
+     * @see #setAttributeContext(Object, Object)
+	 */
+	void setContext(EClassifier context);
+
 	/**
 	 * Sets the classifier context of the OCL expression for which syntax or
      * parsing help is to be provided.
@@ -74,6 +88,20 @@ public interface OCLHelper {
 	 * @return my context classifier (never <code>null</code>)
 	 */
 	Type getContextClassifier();
+	
+	/**
+	 * Sets the operation context of the OCL expression for which syntax or
+     * parsing help is to be provided.  The operation is the model element
+     * against which the OCL will be parsed as an operation applicable to an
+     * OCL type.  Note that the operation needs not necessarily be defined by
+     * the specified context classifier; it could be inherited.
+	 *
+	 * @param context the OCL context classifier
+	 * @param operation the OCL context operation
+	 * 
+	 * @see #setContext(Object)
+	 */
+	void setOperationContext(EClassifier context, EOperation operation);
 	
 	/**
 	 * Sets the operation context of the OCL expression for which syntax or
@@ -110,6 +138,20 @@ public interface OCLHelper {
 	 * @see #setContext(Object)
 	 */
 	void setAttributeContext(Type context, Property property);
+	
+	/**
+	 * Sets the attribute context of the OCL expression for which syntax or
+     * parsing help is to be provided.  The attribute is the model element
+     * against which the OCL will be parsed as an attribute available in an OCL
+     * classifier.  Note that the attribute needs not necessarily be defined by
+     * the specified context classifier; it could be inherited.
+	 *
+	 * @param context the OCL context classifier
+	 * @param property the OCL context attribute
+	 * 
+	 * @see #setContext(Object)
+	 */
+	void setAttributeContext(EClassifier context, EStructuralFeature property);
 
 	/**
 	 * Obtains my context attribute, if my environment is an attribute context.
