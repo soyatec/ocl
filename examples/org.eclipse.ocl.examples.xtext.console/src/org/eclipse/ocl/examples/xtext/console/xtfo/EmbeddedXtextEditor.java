@@ -694,7 +694,9 @@ public class EmbeddedXtextEditor {
 			fSourceViewer.getControl().addDisposeListener(new DisposeListener() {
 				public void widgetDisposed(DisposeEvent e) {
 					IHandlerService handlerService = (IHandlerService) PlatformUI.getWorkbench().getAdapter(IHandlerService.class);
-					handlerService.deactivateHandlers(fHandlerActivations);
+					if (handlerService != null) {
+						handlerService.deactivateHandlers(fHandlerActivations);
+					}
 					fHandlerActivations.clear();
 				}
 			});
@@ -704,36 +706,43 @@ public class EmbeddedXtextEditor {
 			if (fContextActivation != null) {
 				IWorkbench workbench = PlatformUI.getWorkbench();
 				IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
-				IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
-				IEditorPart activeEditor = activePage.getActiveEditor();
-				if (activeEditor != null) {
-					IWorkbenchPartSite site = activeEditor.getSite();
-					IContextService contextService = (IContextService) site.getService(IContextService.class);
-					contextService.deactivateContext(fContextActivation);
+				if (activeWorkbenchWindow != null) {
+					IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+					IEditorPart activeEditor = activePage.getActiveEditor();
+					if (activeEditor != null) {
+						IWorkbenchPartSite site = activeEditor.getSite();
+						IContextService contextService = (IContextService) site.getService(IContextService.class);
+						contextService.deactivateContext(fContextActivation);
+					}
 				}
 			}
 
 			IHandlerService handlerService = (IHandlerService) PlatformUI.getWorkbench().getAdapter(IHandlerService.class);
-			handlerService.deactivateHandlers(fHandlerActivations);
+			if (handlerService != null) {
+				handlerService.deactivateHandlers(fHandlerActivations);
+			}
 		}
 
 		public void focusGained(FocusEvent e) {
 			IWorkbench workbench = PlatformUI.getWorkbench();
 			IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
-			IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
-			IEditorPart activeEditor = activePage.getActiveEditor();
-			if (activeEditor != null) {
-				IWorkbenchPartSite site = activeEditor.getSite();
-				IContextService contextService = (IContextService) site.getService(IContextService.class);
-				fContextActivation = contextService.activateContext(EMBEDEDXTEXT_EDITOR_CONTEXT);
-			}
-			else {
-				fContextActivation = null;
+			if (activeWorkbenchWindow != null) {
+				IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+				IEditorPart activeEditor = activePage.getActiveEditor();
+				if (activeEditor != null) {
+					IWorkbenchPartSite site = activeEditor.getSite();
+					IContextService contextService = (IContextService) site.getService(IContextService.class);
+					fContextActivation = contextService.activateContext(EMBEDEDXTEXT_EDITOR_CONTEXT);
+				}
+				else {
+					fContextActivation = null;
+				}
 			}
 			IHandlerService handlerService = (IHandlerService) workbench.getAdapter(IHandlerService.class);
-			
-			for (ActionHandler actionHandler : fActionHandlers) {
-				fHandlerActivations.add(handlerService.activateHandler(actionHandler.getAction().getId(), actionHandler, fExpression));
+			if (handlerService != null) {
+				for (ActionHandler actionHandler : fActionHandlers) {
+					fHandlerActivations.add(handlerService.activateHandler(actionHandler.getAction().getId(), actionHandler, fExpression));
+				}
 			}
 		}
 	}
