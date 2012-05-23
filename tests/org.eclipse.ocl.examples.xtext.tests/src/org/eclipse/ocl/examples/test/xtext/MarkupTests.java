@@ -17,16 +17,18 @@
 package org.eclipse.ocl.examples.test.xtext;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.ocl.examples.pivot.SemanticException;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.HTMLBuffer;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.markup.Markup;
 import org.eclipse.ocl.examples.xtext.markup.MarkupElement;
 import org.eclipse.ocl.examples.xtext.markup.MarkupPackage;
@@ -58,11 +60,10 @@ public class MarkupTests extends XtextTestCase
 	}
 
 	protected Markup doDecode(String testString) throws IOException {
-		Resource resource = PivotUtil.createXtextResource(metaModelManager, URI.createURI("string.markupocl"), null, testString);
-		
-//		Resource resource = new ResourceSetImpl().createResource(URI.createURI("string.markupocl"));
-//		InputStream inputStream = new ByteArrayInputStream(testString.getBytes());
-//		resource.load(inputStream, null);
+		InputStream inputStream = new URIConverter.ReadableInputStream(testString, "UTF-8");
+		ResourceSetImpl resourceSet = new ResourceSetImpl();
+		Resource resource = resourceSet.createResource(URI.createURI("string.markupocl"));
+		resource.load(inputStream, null);
 		Markup markup = (Markup) resource.getContents().get(0);
 		Iterable<Diagnostic> parseErrors = resource.getErrors();
 		StringBuilder s = null;
