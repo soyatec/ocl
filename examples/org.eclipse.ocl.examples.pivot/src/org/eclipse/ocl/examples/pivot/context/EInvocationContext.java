@@ -40,9 +40,11 @@ public class EInvocationContext extends EClassContext
 	public Map<String, Type> getParameters() {
 		if (parameters == null) {
 			parameters = new HashMap<String, Type>();
-			for (Map.Entry<String, EClassifier> entry : eParameters.entrySet()) {
-				Type type = metaModelManager.getPivotOfEcore(Type.class, entry.getValue());
-				parameters.put(entry.getKey(), type);
+			if (eParameters != null) {
+				for (Map.Entry<String, EClassifier> entry : eParameters.entrySet()) {
+					Type type = metaModelManager.getPivotOfEcore(Type.class, entry.getValue());
+					parameters.put(entry.getKey(), type);
+				}
 			}
 		}
 		return parameters;
