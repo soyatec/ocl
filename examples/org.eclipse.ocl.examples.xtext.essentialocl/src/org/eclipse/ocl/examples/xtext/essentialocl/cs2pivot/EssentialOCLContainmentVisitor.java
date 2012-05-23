@@ -152,6 +152,8 @@ public class EssentialOCLContainmentVisitor extends AbstractEssentialOCLContainm
 	@Override
 	public Continuation<?> visitContextCS(ContextCS csElement) {
 		ExpressionInOcl pivotElement = context.refreshModelElement(ExpressionInOcl.class, PivotPackage.Literals.EXPRESSION_IN_OCL, csElement);
+		pivotElement.setBodyExpression(null);
+		pivotElement.setMessageExpression(null);
 		Resource resource = csElement.eResource();
 		if (resource instanceof BaseResource) {	
 			ParserContext parserContext = ((BaseResource)resource).getParserContext();
