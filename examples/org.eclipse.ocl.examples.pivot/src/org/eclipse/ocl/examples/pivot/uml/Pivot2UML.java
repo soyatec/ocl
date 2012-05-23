@@ -56,14 +56,12 @@ public class Pivot2UML extends AbstractConversion
 	protected final Pivot2UMLDeclarationVisitor pass1 = new Pivot2UMLDeclarationVisitor(this);	
 	protected final Pivot2UMLReferenceVisitor pass2 = new Pivot2UMLReferenceVisitor(this);
 	
-	protected final MetaModelManager metaModelManager;
 //	protected final ResourceSet resourceSet;
 //	protected final Resource csResource;
 //	protected final XMLResource eResource;
-	
 
 	public Pivot2UML(MetaModelManager metaModelManager/*ResourceSet resourceSet, Resource csResource, URI ecoreURI*/) {
-		this.metaModelManager = metaModelManager;
+		super(metaModelManager);
 //		this.resourceSet = resourceSet;
 //		this.csResource = csResource;
 //		this.eResource = (XMLResource) new EcoreResourceFactoryImpl().createResource(ecoreURI);

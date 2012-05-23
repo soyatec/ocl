@@ -40,8 +40,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ocl.examples.common.utils.TracingOption;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AnyType;
-import org.eclipse.ocl.examples.pivot.ClassifierType;
-import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
@@ -54,22 +52,17 @@ import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
-import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
-import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.TypedElement;
-import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
-import org.eclipse.ocl.examples.pivot.UnspecifiedType;
+import org.eclipse.ocl.examples.pivot.context.AbstractBase2PivotConversion;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.MorePivotable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
-import org.eclipse.ocl.examples.pivot.utilities.AbstractConversion;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
@@ -98,7 +91,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
-public class CS2PivotConversion extends AbstractConversion
+public class CS2PivotConversion extends AbstractBase2PivotConversion
 {	
 	private static final Logger logger = Logger.getLogger(CS2PivotConversion.class);
 	public static final TracingOption CONTINUATION = new TracingOption("org.eclipse.ocl.examples.xtext.base", "continuation");  //$NON-NLS-1$//$NON-NLS-2$
@@ -116,7 +109,6 @@ public class CS2PivotConversion extends AbstractConversion
 	}
 	
 	protected final CS2Pivot converter;
-	protected final MetaModelManager metaModelManager;
 	protected final Collection<? extends Resource> csResources;
 	
 	/**
@@ -138,13 +130,6 @@ public class CS2PivotConversion extends AbstractConversion
 	private Map<String, org.eclipse.ocl.examples.pivot.Package> oldPackagesByQualifiedName = null;	// WIP lose this since using nsURIs
 
 	/**
-	 * Set of all expression nodes whose type involves an UnspecifiedType. These are
-	 * created during the left2right pass and are finally resolved to
-	 * minimize invalidity.
-	 */
-	private HashSet<TypedElement> underspecifiedTypedElements = null;
-
-	/**
 	 * The handler for any generated diagnostics. If null (which is deprecated) diagnostics are inserted
 	 * directly into the resource errors list.
 	 */
@@ -152,9 +137,9 @@ public class CS2PivotConversion extends AbstractConversion
 	private final IDiagnosticConsumer diagnosticsConsumer;
 	
 	public CS2PivotConversion(CS2Pivot converter, IDiagnosticConsumer diagnosticsConsumer, Collection<? extends Resource> csResources) {
+		super(converter.getMetaModelManager());
 		this.converter = converter;
 		this.diagnosticsConsumer = diagnosticsConsumer;
-		this.metaModelManager = converter.getMetaModelManager();
 		this.csResources = csResources;
 		this.containmentVisitor = converter.createContainmentVisitor(this);
 		this.left2RightVisitor = converter.createLeft2RightVisitor(this);
@@ -185,13 +170,6 @@ public class CS2PivotConversion extends AbstractConversion
 		INode node = NodeModelUtils.getNode(csElement);
 		Resource.Diagnostic resourceDiagnostic = new ValidationDiagnostic(node, boundMessage);
 		csElement.eResource().getErrors().add(resourceDiagnostic);
-	}
-
-	protected void addUnderspecifiedTypedElement(TypedElement pivotElement) {
-		if (underspecifiedTypedElements == null) {
-			underspecifiedTypedElements  = new HashSet<TypedElement>();
-		}
-		underspecifiedTypedElements.add(pivotElement);
 	}
 
 	/* (non-Javadoc)
@@ -841,13 +819,6 @@ public class CS2PivotConversion extends AbstractConversion
 		return converter.refreshModelElement(pivotClass, pivotEClass, csElement);
 	}
 
-	public void refreshName(NamedElement pivotNamedElement, String newName) {
-		String oldName = pivotNamedElement.getName();
-		if ((newName != oldName) && ((newName == null) || !newName.equals(oldName))) {
-			pivotNamedElement.setName(newName);
-		}
-	}
-
 	public <T extends Element> void refreshPivotList(Class<T> pivotClass, List<? super T> pivotElements,
 			List<? extends ModelElementCS> csElements) {
 		if (pivotElements.isEmpty() && csElements.isEmpty()) {
@@ -893,98 +864,12 @@ public class CS2PivotConversion extends AbstractConversion
 		}
 	}
 
-	protected void resolveUnderspecifiedTypes() {
-		for (TypedElement underspecifiedTypedElement : underspecifiedTypedElements) {
-			Type underspecifiedType = underspecifiedTypedElement.getType();
-			Type resolvedType = resolveUnderspecifiedType(underspecifiedType);
-			underspecifiedTypedElement.setType(resolvedType);
-		}		
-	}
-	
-	protected Type resolveUnderspecifiedType(Type type) {
-		if (type instanceof UnspecifiedType) {
-			return ((UnspecifiedType)type).getLowerBound();
-		}
-		if (type instanceof CollectionType) {
-			CollectionType collectionType = (CollectionType)type;
-			Type resolvedElementType = resolveUnderspecifiedType(collectionType.getElementType());
-			return metaModelManager.getCollectionType(collectionType.getName(), resolvedElementType);
-		}
-		if (type instanceof PrimitiveType) {
-			return type;
-		}
-		if (type instanceof TupleType) {
-			TupleType tupleType = (TupleType)type;
-			List<Property> resolvedProperties = new ArrayList<Property>();
-			for (Property part : ((TupleType)type).getOwnedAttribute()) {
-				if (metaModelManager.isUnderspecified(part.getType())) {
-					Property prop = PivotFactory.eINSTANCE.createProperty();
-					prop.setName(part.getName());
-					prop.setType(resolveUnderspecifiedType(part.getType()));
-					resolvedProperties.add(part);
-				}
-				else {
-					resolvedProperties.add(part);
-				}
-			}
-			return metaModelManager.getTupleType(tupleType.getName(), resolvedProperties, null);
-		}
-		if (type instanceof ClassifierType) {
-			ClassifierType classifierType = (ClassifierType)type;
-			Type resolvedElementType = resolveUnderspecifiedType(classifierType.getInstanceType());
-			return metaModelManager.getClassifierType(resolvedElementType);
-		}
-		throw new UnsupportedOperationException();
-//		return null;
-	}
-
 	public void setReferredIteration(LoopExp expression, Iteration iteration) {
 		expression.setReferredIteration(iteration);
 	}
 
 	public void setReferredOperation(OperationCallExp expression, Operation operation) {
 		expression.setReferredOperation(operation);
-	}
-
-	/**
-	 * Set the type and so potentially satisfy some TypeOfDependency. This method ensures that
-	 * type is not set to null.
-	 * 
-	 * @param pivotExpression
-	 * @param type
-	 */
-	public void setType(TypedElement pivotElement, Type type) {
-	//	PivotUtil.debugObjectUsage("setType ", pivotElement);
-	//	PivotUtil.debugObjectUsage(" to ", type);
-//		if (type != null) {
-//			if (type.eResource() == null) {			// WIP
-	//			PivotUtil.debugObjectUsage("setType orphan ", type);
-//				assert false;
-//			}
-//		}
-//		if (type == null) {
-//			type = metaModelManager.getOclInvalidType();	// FIXME unresolved type with explanation
-//		}
-		if (type != pivotElement.getType()) {
-			pivotElement.setType(type);
-			if (metaModelManager.isUnderspecified(type)) {
-				addUnderspecifiedTypedElement(pivotElement);
-			}
-		}
-		if (type != null) {
-			PivotUtil.debugWellContainedness(type);
-		}
-	}
-
-	public void setTypeWithMultiplicity(TypedElement typedElement, TypedMultiplicityElement typedMultiplicityElement) {
-		if ((typedMultiplicityElement != null) && !typedMultiplicityElement.eIsProxy()) {
-			Type type = metaModelManager.getTypeWithMultiplicity(typedMultiplicityElement);
-			if ((type != null) && !type.eIsProxy()) {
-				setType(typedElement, type);
-				return;
-			}
-		}
-		setType(typedElement, null);
 	}
 
 	/**
@@ -1340,9 +1225,7 @@ public class CS2PivotConversion extends AbstractConversion
 		//
 		//	Resolve UnspecifiedTypes
 		//
-		if (underspecifiedTypedElements != null) {
-			resolveUnderspecifiedTypes();
-		}
+		resolveUnderspecifiedTypes();
 		boolean hasNoMoreErrors = checkForNoErrors(csResources);
 		if (!hasNoMoreErrors) {
 			return false;

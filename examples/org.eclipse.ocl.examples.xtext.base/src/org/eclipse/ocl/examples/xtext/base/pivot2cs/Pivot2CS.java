@@ -57,7 +57,6 @@ public class Pivot2CS extends AbstractConversion implements Adapter
 		return PivotUtil.getAdapter(Pivot2CS.class, resourceSet);
 	}
 	
-	protected final MetaModelManager metaModelManager;
 	private Map<EClass, Factory> factoryMap = new HashMap<EClass, Factory>();
 	
 	/**
@@ -76,14 +75,14 @@ public class Pivot2CS extends AbstractConversion implements Adapter
 	protected CSI2PivotMapping cs2PivotMapping = null;
 	
 	public Pivot2CS(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, MetaModelManager metaModelManager) {
+		super(metaModelManager);
 		this.cs2pivotResourceMap = cs2pivotResourceMap;
-		this.metaModelManager = metaModelManager;
 		metaModelManager.getPivotResourceSet().eAdapters().add(this);	// FIXME Dispose somehow
 	}
 	
 	public Pivot2CS(Pivot2CS aConverter) {
+		super(aConverter.metaModelManager);
 		this.cs2pivotResourceMap = aConverter.cs2pivotResourceMap;
-		this.metaModelManager = aConverter.metaModelManager;
 	}
 
 	protected void addFactory(Factory factory) {

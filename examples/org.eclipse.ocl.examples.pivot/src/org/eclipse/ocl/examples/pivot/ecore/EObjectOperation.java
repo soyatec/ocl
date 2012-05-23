@@ -37,6 +37,8 @@ import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.Variable;
+import org.eclipse.ocl.examples.pivot.context.OperationContext;
+import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -121,7 +123,8 @@ public class EObjectOperation extends AbstractOperation implements LibraryUnaryO
 				MetaModelManager metaModelManager = evaluationVisitor.getMetaModelManager();
 				URI uri = metaModelManager.getResourceIdentifier(operation, null);
 				try {
-					expressionInOcl = PivotUtil.resolveSpecification(metaModelManager, uri, operation, string);
+					ParserContext operationContext = new OperationContext(metaModelManager, uri, operation, null);
+					expressionInOcl = operationContext.parse(string);
 				} catch (ParserException e) {
 					evaluator.throwInvalidEvaluation(e, callExp, sourceValue, "parse failure");
 				}

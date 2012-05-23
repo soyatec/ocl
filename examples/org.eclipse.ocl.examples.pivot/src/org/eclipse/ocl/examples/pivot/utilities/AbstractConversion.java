@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 public abstract class AbstractConversion extends EcoreUtil
 {	// extends EcoreUtil solely to gain access to protected GEN_MODEL_PACKAGE_NS_URI
@@ -59,6 +60,12 @@ public abstract class AbstractConversion extends EcoreUtil
 			if (!Character.isJavaIdentifierPart(name.charAt(i)))
 				return false;
 		return true;
+	}
+	
+	protected final MetaModelManager metaModelManager;
+
+	protected AbstractConversion(MetaModelManager metaModelManager) {
+		this.metaModelManager = metaModelManager;
 	}
 
 	public <T extends EObject> void refreshList(List<? super T> oldElements, List<? extends T> newElements) {

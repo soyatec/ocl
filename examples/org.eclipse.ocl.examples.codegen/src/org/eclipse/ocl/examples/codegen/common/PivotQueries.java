@@ -46,6 +46,11 @@ import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
+import org.eclipse.ocl.examples.pivot.context.ClassContext;
+import org.eclipse.ocl.examples.pivot.context.DiagnosticContext;
+import org.eclipse.ocl.examples.pivot.context.OperationContext;
+import org.eclipse.ocl.examples.pivot.context.ParserContext;
+import org.eclipse.ocl.examples.pivot.context.PropertyContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions;
@@ -154,15 +159,29 @@ public class PivotQueries
 			Resource resource = contextElement.eResource();
 			ResourceSet resourceSet = resource.getResourceSet();
 			MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
+			URI uri = metaModelManager.getResourceIdentifier(specification, null);
+			ParserContext parserContext;
+			if (contextElement instanceof Property) {
+				parserContext = new PropertyContext(metaModelManager, uri, (Property) contextElement);
+			}
+			else if (contextElement instanceof Operation) {
+				parserContext = new OperationContext(metaModelManager, uri, (Operation) contextElement, null);
+			}
+			else if (contextElement instanceof org.eclipse.ocl.examples.pivot.Class) {
+				parserContext = new ClassContext(metaModelManager, uri, (org.eclipse.ocl.examples.pivot.Class) contextElement);
+			}
+			else {
+				logger.error("Unknown context type");
+				return null;
+			}
 			OpaqueExpression opaqueExpression = (OpaqueExpression) specification;
 			String expression = PivotUtil.getBody(opaqueExpression);
 			if (expression == null) {
 				return createExpressionInOclError("Missing expression");
 			}
-			URI uri = metaModelManager.getResourceIdentifier(specification, null);
 			ExpressionInOcl expressionInOcl = null;
-			try {
-				expressionInOcl = PivotUtil.resolveSpecification(metaModelManager, uri, contextElement, expression);
+			try {				
+				expressionInOcl = parserContext.parse(expression);
 			} catch (ParserException e) {
 				logger.error(e.getMessage());
 				return createExpressionInOclError(e.getMessage());
@@ -171,7 +190,8 @@ public class PivotQueries
 				String messageExpression = PivotUtil.getMessage(opaqueExpression);
 				if ((messageExpression != null) && (messageExpression.trim().length() > 0)) {
 					try {
-						PivotUtil.resolveSpecification(metaModelManager, uri, expressionInOcl, messageExpression);
+						parserContext = new DiagnosticContext(parserContext, null);
+						parserContext.parse(messageExpression);
 					} catch (ParserException e) {
 						logger.error("Failed to parse \"" + messageExpression + "\"", e);
 					}

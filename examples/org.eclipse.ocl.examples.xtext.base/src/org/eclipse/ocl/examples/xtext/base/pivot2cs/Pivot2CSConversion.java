@@ -77,7 +77,6 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 	private static final Logger logger = Logger.getLogger(Pivot2CSConversion.class);
 
 	protected final Pivot2CS converter;
-	protected final MetaModelManager metaModelManager;
 	protected final BaseDeclarationVisitor defaultDeclarationVisitor;
 	protected final BaseReferenceVisitor defaultReferenceVisitor;
 	
@@ -88,8 +87,8 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 	private Set<org.eclipse.ocl.examples.pivot.Package> importedPackages = null;
 	
 	public Pivot2CSConversion(Pivot2CS converter) {
+		super(converter.getMetaModelManager());
 		this.converter = converter;
-		this.metaModelManager = converter.getMetaModelManager();
 		this.defaultDeclarationVisitor = converter.createDefaultDeclarationVisitor(this);
 		this.defaultReferenceVisitor = converter.createDefaultReferenceVisitor(this);
 	}

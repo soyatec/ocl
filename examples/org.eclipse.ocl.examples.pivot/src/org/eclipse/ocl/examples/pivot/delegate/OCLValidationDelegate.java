@@ -21,6 +21,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -42,6 +43,9 @@ import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OclExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.ValueSpecification;
+import org.eclipse.ocl.examples.pivot.context.ClassContext;
+import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -128,10 +132,19 @@ public class OCLValidationDelegate implements ValidationDelegate
 		}
 		else if (namedElement instanceof Constraint) {
 			Constraint constraint = (Constraint)namedElement;
-			NamedElement contextType = constraint.getContext();
-			ExpressionInOcl query = ValidationBehavior.INSTANCE.getExpressionInOcl(metaModelManager, contextType, constraint);
+			ExpressionInOcl query;
+			ValueSpecification valueSpecification = constraint.getSpecification();
+			if (valueSpecification instanceof ExpressionInOcl) {
+				query = (ExpressionInOcl) valueSpecification;
+			}
+			else {
+				Type contextType = (Type) constraint.getContext();
+				URI uri = metaModelManager.getResourceIdentifier(constraint, "body");
+				ParserContext classContext = new ClassContext(metaModelManager, uri, contextType);
+				query = ValidationBehavior.INSTANCE.getExpressionInOcl(classContext, constraint);
+			}
 			if (query == null) {
-				String message = DomainUtil.bind(OCLMessages.MissingBodyForInvocationDelegate_ERROR_, contextType);
+				String message = DomainUtil.bind(OCLMessages.MissingBodyForInvocationDelegate_ERROR_, constraint.getContext());
 				throw new OCLDelegateException(message);
 			}
 			ValidationBehavior.INSTANCE.validate(constraint);
@@ -172,7 +185,16 @@ public class OCLValidationDelegate implements ValidationDelegate
 			String message = DomainUtil.bind(OCLMessages.MissingBodyForInvocationDelegate_ERROR_, type);
 			throw new OCLDelegateException(message);
 		}
-		ExpressionInOcl query = ValidationBehavior.INSTANCE.getExpressionInOcl(metaModelManager, type, constraint);
+		ExpressionInOcl query;
+		ValueSpecification valueSpecification = constraint.getSpecification();
+		if (valueSpecification instanceof ExpressionInOcl) {
+			query = (ExpressionInOcl) valueSpecification;
+		}
+		else {
+			URI uri = metaModelManager.getResourceIdentifier(constraint, "body");
+			ParserContext classContext = new ClassContext(metaModelManager, uri, type);
+			query = ValidationBehavior.INSTANCE.getExpressionInOcl(classContext, constraint);
+		}
 		if (query == null) {
 			String message = DomainUtil.bind(OCLMessages.MissingBodyForInvocationDelegate_ERROR_, type);
 			throw new OCLDelegateException(message);

@@ -23,12 +23,9 @@ import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
 import org.eclipse.ocl.examples.pivot.OclExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.Parameter;
-import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
-import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.StructuralFeatureCS;
@@ -53,45 +50,22 @@ public class OCLinEcoreLeft2RightVisitor extends AbstractOCLinEcoreLeft2RightVis
 		if (csExpression != null) {
 			ExpressionInOcl pivotSpecification = PivotUtil.getPivot(ExpressionInOcl.class, csSpecification);
 			pivotConstraint.setSpecification(pivotSpecification);
-	
-			Variable contextVariable = pivotSpecification.getContextVariable();
-			if (contextVariable == null) {
-				contextVariable = PivotFactory.eINSTANCE.createVariable();
-				pivotSpecification.setContextVariable(contextVariable);
-			}
-			context.refreshName(contextVariable, Environment.SELF_VARIABLE_NAME);
+			context.setContextVariable(pivotSpecification, Environment.SELF_VARIABLE_NAME, null);
 			EObject eContainer = csConstraint.eContainer();
 			if (eContainer instanceof TypeCS) {
 				Type contextType = PivotUtil.getPivot(Type.class, (TypeCS)eContainer);
-				context.setType(contextVariable, contextType);
+				context.setClassifierContext(pivotSpecification, contextType);
 			}
 			else if (eContainer instanceof StructuralFeatureCS) {
 				Property contextProperty = PivotUtil.getPivot(Property.class, (StructuralFeatureCS)eContainer);
-				context.setType(contextVariable, contextProperty.getOwningType());
+				context.setPropertyContext(pivotSpecification, contextProperty);
 			}
 			else if (eContainer instanceof OperationCS) {
 				Operation contextOperation = PivotUtil.getPivot(Operation.class, (OperationCS)eContainer);
-				context.setType(contextVariable, contextOperation.getOwningType());
-		        pivotSpecification.getParameterVariable().clear();
-		        for (Parameter parameter : contextOperation.getOwnedParameter()) {
-			        Variable param = PivotFactory.eINSTANCE.createVariable();
-			        param.setName(parameter.getName());
-					context.setTypeWithMultiplicity(param, parameter);
-			        param.setRepresentedParameter(parameter);
-			        pivotSpecification.getParameterVariable().add(param);
-		        }
-		        if (UMLReflection.POSTCONDITION.equals(csConstraint.getStereotype())) {		// FIXME constant
-					Variable resultVariable = pivotSpecification.getResultVariable();
-					if (resultVariable == null) {
-						resultVariable = PivotFactory.eINSTANCE.createVariable();
-					}
-					resultVariable.setName(Environment.RESULT_VARIABLE_NAME);
-					context.setTypeWithMultiplicity(resultVariable, contextOperation);
-					pivotSpecification.setResultVariable(resultVariable);
-		        }
+				boolean isPostCondition = UMLReflection.POSTCONDITION.equals(csConstraint.getStereotype());
+				String resultVariableName = isPostCondition ? Environment.RESULT_VARIABLE_NAME : null;
+				context.setOperationContext(pivotSpecification, contextOperation,resultVariableName);
 			}
-			
-			
 			OclExpression bodyExpression = context.visitLeft2Right(OclExpression.class, csExpression);		
 			pivotSpecification.setBodyExpression(bodyExpression);
 			if (bodyExpression != null) {

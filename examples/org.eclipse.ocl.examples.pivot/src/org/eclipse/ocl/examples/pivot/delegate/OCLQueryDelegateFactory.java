@@ -17,18 +17,11 @@
  */
 package org.eclipse.ocl.examples.pivot.delegate;
 
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.util.QueryDelegate;
 import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
-import org.eclipse.ocl.examples.pivot.Environment;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
-import org.eclipse.ocl.examples.pivot.PivotConstants;
-import org.eclipse.ocl.examples.pivot.PivotFactory;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.Variable;
 
 /**
  * Factory for OCL query delegates.
@@ -60,25 +53,7 @@ public class OCLQueryDelegateFactory extends AbstractOCLDelegateFactory
 
 	public QueryDelegate createQueryDelegate(EClassifier context, Map<String, EClassifier> parameters, String expression) {
 		OCLDelegateDomain delegateDomain = loadDelegateDomain(context.getEPackage());
-		Type modelType = delegateDomain.getPivot(Type.class, context);
-		ExpressionInOcl specification = PivotFactory.eINSTANCE.createExpressionInOcl();
-		specification.getBody().add(expression);
-		specification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
-		Variable contextVariable = PivotFactory.eINSTANCE.createVariable();
-		contextVariable.setName(Environment.SELF_VARIABLE_NAME);
-		contextVariable.setType(modelType);
-		specification.setContextVariable(contextVariable);
-		if (parameters != null) {
-			List<Variable> parameterVariables = specification.getParameterVariable();
-			for (Map.Entry<String, EClassifier> entry : parameters.entrySet()) {
-				Variable parameterVariable = PivotFactory.eINSTANCE.createVariable();
-				parameterVariable.setName(entry.getKey());
-				Type parameterType = delegateDomain.getPivot(Type.class, entry.getValue());
-				parameterVariable.setType(parameterType);
-				parameterVariables.add(parameterVariable);
-			}
-		}
-		return new OCLQueryDelegate(delegateDomain, specification);
+		return new OCLQueryDelegate(delegateDomain, context, parameters, expression);
 	}
 	
 	/**

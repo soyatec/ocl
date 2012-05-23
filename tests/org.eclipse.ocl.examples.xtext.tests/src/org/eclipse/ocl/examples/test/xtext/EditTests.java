@@ -30,12 +30,12 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.SequenceType;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.context.ModelContext;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 
@@ -287,7 +287,8 @@ public class EditTests extends XtextTestCase
 			"}\n" +
 			"}\n";
 		URI outputURI = getProjectFileURI("test.oclstdlib");
-		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) PivotUtil.createXtextResource(metaModelManager, outputURI, null, testDocument);
+		ModelContext modelContext = new ModelContext(metaModelManager, outputURI);
+		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) modelContext.createBaseResource(testDocument);
 		Resource pivotResource = savePivotFromCS(metaModelManager, xtextResource, null);
 		assertResourceErrors("Loading input", xtextResource);
 		assertNoResourceErrors("Loading input", pivotResource);

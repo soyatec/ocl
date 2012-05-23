@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.util.QueryDelegate;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -34,6 +35,7 @@ import org.eclipse.ocl.examples.pivot.OclExpression;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Query;
 import org.eclipse.ocl.examples.pivot.Variable;
+import org.eclipse.ocl.examples.pivot.context.EInvocationContext;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
@@ -48,7 +50,9 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 public class OCLQueryDelegate implements QueryDelegate
 {
 	protected OCLDelegateDomain delegateDomain;
-	protected final ExpressionInOcl specification;
+	protected final EInvocationContext parserContext;
+	protected final String expression;
+	private ExpressionInOcl specification = null;
 
 	/**
 	 * Initializes me with my domain, context, variables, and expression.
@@ -65,9 +69,12 @@ public class OCLQueryDelegate implements QueryDelegate
 	 * @throws ParserException
 	 *             if the expression is invalid
 	 */
-	public OCLQueryDelegate(OCLDelegateDomain delegateDomain, ExpressionInOcl specification) {
+	public OCLQueryDelegate(OCLDelegateDomain delegateDomain, EClassifier context, Map<String, EClassifier> parameters, String expression) {
 		this.delegateDomain = delegateDomain;
-		this.specification = specification;
+		MetaModelManager metaModelManager = delegateDomain.getMetaModelManager();
+		URI uri = metaModelManager.getResourceIdentifier(this, null);
+		this.parserContext = new EInvocationContext(metaModelManager, uri, context, parameters);
+		this.expression = expression;
 	}
 
 	/**
@@ -89,7 +96,7 @@ public class OCLQueryDelegate implements QueryDelegate
 	 */
 	public Object execute(Object target, Map<String, ?> arguments)
 			throws InvocationTargetException {
-		if (specification.getBodyExpression() == null) {
+		if (specification == null) {
 			prepare();
 		}
 		try {
@@ -159,11 +166,8 @@ public class OCLQueryDelegate implements QueryDelegate
 	 * @throws InvocationTargetException wrapping any parser, io exceptions
 	 */
 	public void prepare() throws InvocationTargetException {
-		MetaModelManager metaModelManager = delegateDomain.getMetaModelManager();
 		try {
-			String expression = PivotUtil.getBody(specification);
-			URI uri = metaModelManager.getResourceIdentifier(this, null);
-			PivotUtil.resolveSpecification(metaModelManager, uri, specification, expression);
+			specification = parserContext.parse(expression);
 		} catch (Exception e) {
 			throw new InvocationTargetException(e);
 		}

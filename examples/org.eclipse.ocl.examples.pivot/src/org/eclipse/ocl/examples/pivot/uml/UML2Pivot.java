@@ -205,7 +205,6 @@ public class UML2Pivot extends AbstractConversion implements External2Pivot, Piv
 	
 	private List<Resource.Diagnostic> errors = null;
 	
-	protected final MetaModelManager metaModelManager;
 	protected final Resource umlResource;					// Set via eAdapters.add()
 	
 	protected org.eclipse.ocl.examples.pivot.Package pivotRoot = null;	// Set by importResource
@@ -213,8 +212,8 @@ public class UML2Pivot extends AbstractConversion implements External2Pivot, Piv
 	protected final UML2PivotReferenceSwitch referencePass = new UML2PivotReferenceSwitch(this);
 	
 	public UML2Pivot(Resource umlResource, MetaModelManager metaModelManager) {
+		super(metaModelManager);
 		this.umlResource = umlResource;
-		this.metaModelManager = metaModelManager;
 		metaModelManager.addExternalResource(this);
 		metaModelManager.addListener(this);
 	}

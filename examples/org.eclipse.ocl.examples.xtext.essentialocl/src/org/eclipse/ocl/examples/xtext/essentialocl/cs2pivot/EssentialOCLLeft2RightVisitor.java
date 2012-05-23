@@ -26,7 +26,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.library.LibraryValidator;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -80,7 +79,6 @@ import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
-import org.eclipse.ocl.examples.pivot.evaluation.EvaluationContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
@@ -952,70 +950,18 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 
 	@Override
 	public Element visitContextCS(ContextCS csContext) {
-		NamedElement specificationContext = null;
-		Resource resource = csContext.eResource();
-		if (resource instanceof EvaluationContext) {	
-			specificationContext = ((EvaluationContext)resource).getSpecificationContext();
-		}
-		ExpressionInOcl pivotElement;
-		if (specificationContext instanceof ExpressionInOcl) {
-			pivotElement = (ExpressionInOcl) specificationContext;			
-			context.installPivotUsage(csContext, pivotElement);
-			ExpCS csExpression = csContext.getOwnedExpression();
-			OclExpression expression = context.visitLeft2Right(OclExpression.class, csExpression);
-			if (expression != null) {
-				if (pivotElement.getBodyExpression() == null) {
-					pivotElement.setBodyExpression(expression);
-					context.setType(pivotElement, expression.getType());
-				}
-				else {
-					pivotElement.setMessageExpression(expression);
-				}
-//				context.setType(pivotElement, expression.getType());
-			}
-		}
-		else {
-			pivotElement = context.refreshModelElement(ExpressionInOcl.class, PivotPackage.Literals.EXPRESSION_IN_OCL, csContext);
-			Variable contextVariable = pivotElement.getContextVariable();
-			if (contextVariable == null) {
-				contextVariable = PivotFactory.eINSTANCE.createVariable();
-			}
-	        List<Variable> parameterVariables = pivotElement.getParameterVariable();
-	        parameterVariables.clear();
-			Type contextType;
-			if (specificationContext instanceof Type) {
-				contextType = (Type) specificationContext;
-			}
-			else if (specificationContext instanceof Feature) {
-				contextType = PivotUtil.getOwningType((Feature)specificationContext);
-				if (specificationContext instanceof Operation) {
-					context.setType(contextVariable, contextType);
-					for (Parameter parameter : ((Operation)specificationContext).getOwnedParameter()) {
-				        Variable param = PivotFactory.eINSTANCE.createVariable();
-				        param.setName(parameter.getName());
-						context.setTypeWithMultiplicity(param, parameter);
-				        param.setRepresentedParameter(parameter);
-				        parameterVariables.add(param);
-			        }					
-				}
-				// NB Iteration iterators/results are not externally visible.
-			}
-			else {
-				contextType = metaModelManager.getOclInvalidType();
-			}
-			context.setType(contextVariable, contextType);
-
-			context.refreshName(contextVariable, Environment.SELF_VARIABLE_NAME);
-			pivotElement.setContextVariable(contextVariable);
-	//		context.putPivotElement(contextVariable);
-			
-	//		context.installPivotElement(csContext, pivotElement);
-			ExpCS csExpression = csContext.getOwnedExpression();
-			OclExpression expression = context.visitLeft2Right(OclExpression.class, csExpression);
-			if (expression != null) {
+		ExpressionInOcl pivotElement = PivotUtil.getPivot(ExpressionInOcl.class, csContext);
+		ExpCS csExpression = csContext.getOwnedExpression();
+		OclExpression expression = context.visitLeft2Right(OclExpression.class, csExpression);
+		if (expression != null) {
+			if (pivotElement.getBodyExpression() == null) {
 				pivotElement.setBodyExpression(expression);
 				context.setType(pivotElement, expression.getType());
 			}
+			else {
+				pivotElement.setMessageExpression(expression);
+			}
+//			context.setType(pivotElement, expression.getType());
 		}
 		return pivotElement;
 	}

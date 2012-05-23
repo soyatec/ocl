@@ -23,14 +23,11 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.evaluation.EvaluationContext;
+import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.utilities.IllegalLibraryException;
-import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironment;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.LibraryDiagnostic;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
@@ -39,11 +36,9 @@ import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLCS2Pivot
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.util.CancelIndicator;
 
-public class EssentialOCLCSResource extends LazyLinkingResource
-	implements BaseCSResource, EvaluationContext
+public class EssentialOCLCSResource extends LazyLinkingResource implements BaseCSResource
 {	
-	private PivotEnvironment environment = null;
-	private NamedElement specificationContext = null;
+	private ParserContext parserContext;
 	
 	public EssentialOCLCSResource() {
 		super();
@@ -99,12 +94,8 @@ public class EssentialOCLCSResource extends LazyLinkingResource
 		return "Essential OCL";
 	}
 
-	public PivotEnvironment getEnvironment() {
-		return environment;
-	}
-	
-	public NamedElement getSpecificationContext() {
-		return specificationContext;
+	public ParserContext getParserContext() {
+		return parserContext;
 	}
 
 	public URI resolve(URI uri) {
@@ -225,11 +216,7 @@ public class EssentialOCLCSResource extends LazyLinkingResource
 		}
 	}
 
-	public void setContext(NamedElement pivotContext, Map<String, Type> pivotParameters) {
-		this.specificationContext = pivotContext;		
-	}
-
-	public void setEnvironment(PivotEnvironment environment) {
-		this.environment = environment;
+	public void setParserContext(ParserContext parserContext) {
+		this.parserContext = parserContext;
 	}
 }

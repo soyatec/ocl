@@ -81,6 +81,8 @@ import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.SemanticException;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
+import org.eclipse.ocl.examples.pivot.context.ClassContext;
+import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -88,6 +90,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
+import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironment;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -190,13 +193,14 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 */
     protected void assertBadInvariant(Class<?> exception, int severity,
    		String expression, String messageTemplate, String... bindings) {
-		Resource resource = null;
+		BaseResource resource = null;
         try {
     		PivotEnvironment environment = (PivotEnvironment) helper.getEnvironment();
     		MetaModelManager metaModelManager = environment.getMetaModelManager();
     		Type contextClassifier = environment.getContextClassifier();
     		URI uri = metaModelManager.getResourceIdentifier(expression, null);
-			resource = PivotUtil.createXtextResource(metaModelManager, uri, contextClassifier, expression);
+			ParserContext semanticContext = new ClassContext(metaModelManager, uri, contextClassifier);
+			resource = semanticContext.createBaseResource(expression);
 			PivotUtil.checkResourceErrors(NLS.bind(OCLMessages.ErrorsInResource, expression), resource);
             fail("Should not have parsed \"" + expression + "\"");
         } catch (ParserException e) {
@@ -227,13 +231,14 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 */
      protected void assertBadQuery(Class<?> exception, int severity,
     		 String expression, String messageTemplate, Object... bindings) {
-		Resource resource = null;
+		BaseResource resource = null;
 		try {
     		PivotEnvironment environment = (PivotEnvironment) helper.getEnvironment();
     		MetaModelManager metaModelManager = environment.getMetaModelManager();
     		Type contextClassifier = environment.getContextClassifier();
     		URI uri = metaModelManager.getResourceIdentifier(expression, null);
-			resource = PivotUtil.createXtextResource(metaModelManager, uri, contextClassifier, expression);
+    		ParserContext classContext = new ClassContext(metaModelManager, uri, contextClassifier);
+    		resource = classContext.createBaseResource(expression);
 			PivotUtil.checkResourceErrors(NLS.bind(OCLMessages.ErrorsInResource, expression), resource);
             fail("Should not have parsed \"" + expression + "\"");
         } catch (ParserException e) {

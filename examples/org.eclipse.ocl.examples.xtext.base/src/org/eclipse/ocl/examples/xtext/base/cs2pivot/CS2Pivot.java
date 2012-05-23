@@ -280,8 +280,6 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 		return savedMessageBinder;
 	}
 	
-	protected final MetaModelManager metaModelManager;
-	
 	/**
 	 * Mapping of each CS resource to its corresponding pivot Resource.
 	 */
@@ -298,6 +296,7 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	private Map<Element, ModelElementCS> pivot2cs = null;
 
 	public CS2Pivot(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, MetaModelManager metaModelManager) {
+		super(metaModelManager);
 		Pivot2CS pivot2cs = Pivot2CS.findAdapter(metaModelManager.getPivotResourceSet());
 		if (pivot2cs != null) {
 			this.cs2PivotMapping = pivot2cs.getCs2PivotMapping();
@@ -306,15 +305,14 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 			this.cs2PivotMapping = new CSI2PivotMapping(cs2pivotResourceMap.keySet());
 		}
 		this.cs2pivotResourceMap = cs2pivotResourceMap;
-		this.metaModelManager = metaModelManager;
 		metaModelManager.addListener(this);
 		metaModelManager.getPivotResourceSet().eAdapters().add(this);
 	}
 	
 	protected CS2Pivot(CS2Pivot aConverter) {
+		super(aConverter.metaModelManager);
 		this.cs2pivotResourceMap = aConverter.cs2pivotResourceMap;
 		this.cs2PivotMapping = new CSI2PivotMapping(aConverter.cs2PivotMapping);
-		this.metaModelManager = aConverter.metaModelManager;
 	}
 
 	public String bind(EObject csContext, String messageTemplate, Object... bindings) {

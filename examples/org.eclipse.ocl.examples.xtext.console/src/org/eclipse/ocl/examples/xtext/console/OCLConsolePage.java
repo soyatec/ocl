@@ -52,6 +52,7 @@ import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
 import org.eclipse.ocl.examples.pivot.ParserException;
+import org.eclipse.ocl.examples.pivot.context.EClassContext;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitorImpl;
@@ -60,6 +61,7 @@ import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
+import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironment;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -190,11 +192,11 @@ public class OCLConsolePage extends Page
 	
 	private class EvaluationRunnable implements IRunnableWithProgress
 	{
-		private final XtextResource resource;
+		private final BaseResource resource;
 		private final String expression;
 		private Value value = null;
 		
-		public EvaluationRunnable(XtextResource resource, String expression) {
+		public EvaluationRunnable(BaseResource resource, String expression) {
 			this.resource = resource;
 			this.expression = expression;
 		}
@@ -222,7 +224,7 @@ public class OCLConsolePage extends Page
 			ExpressionInOcl expressionInOcl;
 			try {
 				PivotUtil.checkResourceErrors(null, resource);
-				expressionInOcl = PivotUtil.getExpressionInOcl(resource);
+				expressionInOcl = eClassContext.getExpression(resource);
 			} catch (ParserException e) {
 				value = new ExceptionValue(valueFactory, ConsoleMessages.Result_ParsingFailure, e);
 				return;
@@ -346,7 +348,7 @@ public class OCLConsolePage extends Page
 	private ISelectionService selectionService;
 	private ISelectionListener selectionListener;
 	private EObject contextObject;
-	private EClassifier contextClassifier;
+	private EClassContext eClassContext;
 	
 //	private final CancelableMetaModelManager metaModelManager;
 	private  MetaModelManager nullMetaModelManager = null;
@@ -733,7 +735,7 @@ public class OCLConsolePage extends Page
  
 						public Value exec(XtextResource state) throws Exception {
 							IProgressService progressService = PlatformUI.getWorkbench().getProgressService();
-							EvaluationRunnable runnable = new EvaluationRunnable(state, expression);
+							EvaluationRunnable runnable = new EvaluationRunnable((BaseResource) state, expression);
 							progressService.busyCursorWhile(runnable);
 			       			return runnable.getValue();
 						}});
@@ -918,6 +920,7 @@ public class OCLConsolePage extends Page
 		editorDocument.modify(new IUnitOfWork<Object, XtextResource>()
 		{
 			public Value exec(XtextResource resource) throws Exception {
+				EClassifier contextClassifier = null;
 				Object selectedObject = selected;
 			    if (selectedObject instanceof IOutlineNode) {
 		    	    if (selectedObject instanceof EObjectNode) {
@@ -955,6 +958,7 @@ public class OCLConsolePage extends Page
 				MetaModelManagerResourceSetAdapter.getAdapter(editor.getResourceSet(), metaModelManager);
 		        editorDocument.setContext((EssentialOCLCSResource) resource, contextClassifier, null);
 		        console.setSelection(contextClassifier, contextObject);
+		        eClassContext = contextClassifier != null ? new EClassContext(metaModelManager, null, contextClassifier) : null;
 		        return null;
 			}
 		});

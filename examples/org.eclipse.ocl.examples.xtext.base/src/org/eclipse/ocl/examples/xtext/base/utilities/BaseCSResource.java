@@ -21,9 +21,13 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
 
-public interface BaseCSResource extends Resource
+/**
+ * BaseResource defines the Xtext-dependent extended interface for a Concrete Syntax resource.
+ */
+public interface BaseCSResource extends BaseResource
 {
 	CS2Pivot createCS2Pivot(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, MetaModelManager metaModelManager);
 	MetaModelManager createMetaModelManager();

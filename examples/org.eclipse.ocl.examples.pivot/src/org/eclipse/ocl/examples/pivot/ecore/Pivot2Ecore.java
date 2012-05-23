@@ -312,8 +312,6 @@ public class Pivot2Ecore extends AbstractConversion
 	
 	private List<Resource.Diagnostic> errors = null;
 	
-	
-	protected final MetaModelManager metaModelManager;
 	protected final Pivot2EcoreDeclarationVisitor pass1;	
 	protected final Pivot2EcoreReferenceVisitor pass2;
 	protected final URI ecoreURI;
@@ -321,7 +319,7 @@ public class Pivot2Ecore extends AbstractConversion
 	protected final String primitiveTypesUriPrefix;
 	
 	public Pivot2Ecore(MetaModelManager metaModelManager, URI ecoreURI, Map<String,Object> options) {
-		this.metaModelManager = metaModelManager;
+		super(metaModelManager);
 		this.pass1 = new Pivot2EcoreDeclarationVisitor(this);	
 		this.pass2 = new Pivot2EcoreReferenceVisitor(this);
 		this.ecoreURI = ecoreURI;

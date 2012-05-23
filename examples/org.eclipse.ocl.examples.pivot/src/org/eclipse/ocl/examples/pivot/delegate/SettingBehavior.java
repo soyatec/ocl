@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.pivot.delegate;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EStructuralFeature.Internal.SettingDelegate;
@@ -25,6 +26,9 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
+import org.eclipse.ocl.examples.pivot.ValueSpecification;
+import org.eclipse.ocl.examples.pivot.context.ParserContext;
+import org.eclipse.ocl.examples.pivot.context.PropertyContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.osgi.util.NLS;
@@ -61,7 +65,13 @@ public class SettingBehavior extends AbstractDelegatedBehavior<EStructuralFeatur
 			constraint = getConstraintForStereotype(property, UMLReflection.INITIAL);
 		}
 		if (constraint != null) {
-			ExpressionInOcl expressionInOcl = getExpressionInOcl(metaModelManager, property, constraint);
+			ValueSpecification valueSpecification = constraint.getSpecification();
+			if (valueSpecification instanceof ExpressionInOcl) {
+				return (ExpressionInOcl) valueSpecification;
+			}
+			URI uri = metaModelManager.getResourceIdentifier(constraint, "body");
+			ParserContext propertyContext = new PropertyContext(metaModelManager, uri, property);
+			ExpressionInOcl expressionInOcl = getExpressionInOcl(propertyContext, constraint);
 			if (expressionInOcl != null) {
 				return expressionInOcl;
 			}

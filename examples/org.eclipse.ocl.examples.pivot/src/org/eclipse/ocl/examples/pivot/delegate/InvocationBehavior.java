@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.pivot.delegate;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EOperation.Internal.InvocationDelegate;
 import org.eclipse.emf.ecore.EPackage;
@@ -25,6 +26,9 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
+import org.eclipse.ocl.examples.pivot.ValueSpecification;
+import org.eclipse.ocl.examples.pivot.context.OperationContext;
+import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.osgi.util.NLS;
@@ -63,7 +67,13 @@ public class InvocationBehavior extends AbstractDelegatedBehavior<EOperation, In
 	public ExpressionInOcl getExpressionInOcl(MetaModelManager metaModelManager, Operation operation) throws OCLDelegateException {
 		Constraint constraint = getConstraintForStereotype(operation, UMLReflection.BODY);
 		if (constraint != null) {
-			ExpressionInOcl expressionInOcl = getExpressionInOcl(metaModelManager, operation, constraint);
+			ValueSpecification valueSpecification = constraint.getSpecification();
+			if (valueSpecification instanceof ExpressionInOcl) {
+				return (ExpressionInOcl) valueSpecification;
+			}
+			URI uri = metaModelManager.getResourceIdentifier(constraint, "body");
+			ParserContext operationContext = new OperationContext(metaModelManager, uri, operation, null);
+			ExpressionInOcl expressionInOcl = getExpressionInOcl(operationContext, constraint);
 			if (expressionInOcl != null) {
 				return expressionInOcl;
 			}

@@ -16,9 +16,6 @@
  */
 package org.eclipse.ocl.examples.xtext.oclstdlib.cs2pivot;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -26,11 +23,8 @@ import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
 import org.eclipse.ocl.examples.pivot.OclExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.Parameter;
-import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.StructuralFeatureCS;
@@ -55,59 +49,22 @@ public class OCLstdlibLeft2RightVisitor extends AbstractOCLstdlibLeft2RightVisit
 		if (csExpression != null) {
 			ExpressionInOcl pivotSpecification = PivotUtil.getPivot(ExpressionInOcl.class, csSpecification);
 			pivotConstraint.setSpecification(pivotSpecification);
-	
-			Variable contextVariable = pivotSpecification.getContextVariable();
-			if (contextVariable == null) {
-				contextVariable = PivotFactory.eINSTANCE.createVariable();
-				pivotSpecification.setContextVariable(contextVariable);
-			}
-//			context.putPivotElement(contextVariable);
-			context.refreshName(contextVariable, Environment.SELF_VARIABLE_NAME);
+			context.setContextVariable(pivotSpecification, Environment.SELF_VARIABLE_NAME, null);
 			EObject eContainer = csConstraint.eContainer();
 			if (eContainer instanceof TypeCS) {
 				Type contextType = PivotUtil.getPivot(Type.class, (TypeCS)eContainer);
-				context.setType(contextVariable, contextType);
+				context.setClassifierContext(pivotSpecification, contextType);
 			}
 			else if (eContainer instanceof StructuralFeatureCS) {
 				Property contextProperty = PivotUtil.getPivot(Property.class, (StructuralFeatureCS)eContainer);
-				context.setType(contextVariable, contextProperty.getOwningType());
+				context.setPropertyContext(pivotSpecification, contextProperty);
 			}
 			else if (eContainer instanceof OperationCS) {
 				Operation contextOperation = PivotUtil.getPivot(Operation.class, (OperationCS)eContainer);
-				context.setType(contextVariable, contextOperation.getOwningType());
-				List<Variable> oldVariables = new ArrayList<Variable>(pivotSpecification.getParameterVariable());
-				List<Variable> newVariables = new ArrayList<Variable>();
-		        for (Parameter parameter : contextOperation.getOwnedParameter()) {
-			        String name = parameter.getName();
-					Variable param = PivotUtil.getNamedElement(oldVariables, name);
-			        if (param != null) {
-			        	oldVariables.remove(param);
-			        }
-			        else {
-			        	param = PivotFactory.eINSTANCE.createVariable();
-				        param.setName(name);
-			        }
-					context.setTypeWithMultiplicity(param, parameter);
-			        param.setRepresentedParameter(parameter);
-			        newVariables.add(param);
-		        }
-		        context.refreshList(pivotSpecification.getParameterVariable(), newVariables);
-//		        for (Variable parameterVariable : pivotSpecification.getParameterVariable()) {
-//					context.putPivotElement(parameterVariable);
-//		        }
-		        if ("post".equals(csConstraint.getStereotype())) {		// FIXME constant
-					Variable resultVariable = pivotSpecification.getResultVariable();
-					if (resultVariable == null) {
-						resultVariable = PivotFactory.eINSTANCE.createVariable();
-					}
-					resultVariable.setName(Environment.RESULT_VARIABLE_NAME);
-					context.setTypeWithMultiplicity(resultVariable, contextOperation);
-					pivotSpecification.setResultVariable(resultVariable);
-//					context.putPivotElement(resultVariable);
-		        }
+				boolean isPostCondition = "post".equals(csConstraint.getStereotype());
+				String resultVariableName = isPostCondition ? Environment.RESULT_VARIABLE_NAME : null;
+		        context.setOperationContext(pivotSpecification, contextOperation, resultVariableName);
 			}
-			
-			
 			OclExpression bodyExpression = context.visitLeft2Right(OclExpression.class, csExpression);		
 			pivotSpecification.setBodyExpression(bodyExpression);
 			ExpSpecificationCS csMessageSpecification = (ExpSpecificationCS) csConstraint.getMessageSpecification();

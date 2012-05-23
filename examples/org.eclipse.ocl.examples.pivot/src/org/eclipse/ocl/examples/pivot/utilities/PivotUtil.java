@@ -16,9 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot.utilities;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -39,7 +36,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ocl.examples.common.utils.ClassUtils;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -56,7 +52,6 @@ import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
-import org.eclipse.ocl.examples.pivot.OclExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
@@ -64,7 +59,6 @@ import org.eclipse.ocl.examples.pivot.OrderedSetType;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
-import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
@@ -80,13 +74,10 @@ import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.UnspecifiedType;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
-import org.eclipse.ocl.examples.pivot.evaluation.EvaluationContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
-import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
-import org.eclipse.osgi.util.NLS;
 
 public class PivotUtil extends DomainUtil
 {	
@@ -352,36 +343,6 @@ public class PivotUtil extends DomainUtil
 			}
 		}
 		return outBuffer.toString();
-	}
-
-	/**
-	 * Create an Xtext resource containing the parsed expression within
-	 * a typeContext and supervised by a metaModelManager.
-	 * 
-	 * Provided an EssentialOCL resource registration has been made the
-	 * created resource named internal.essentialocl may be cast to an
-	 * XtextResource. Semantic errors may be found at the Resource.errors
-	 * and may be converted to ParseExceptions by invoking
-	 * checkResourceErrors.
-	 * 
-	 * @param metaModelManager the overall type / meta-model domain
-	 * @param typeContext the type that provides the scope of expression
-	 * @param expression to be parsed
-	 * @return the Xtext resource which may be cast to XtextResource
-	 * 
-	 * @throws IOException if resource loading fails
-	 */
-	public static Resource createXtextResource(MetaModelManager metaModelManager, URI uri,
-			NamedElement typeContext, String expression) throws IOException {
-		InputStream inputStream = new ByteArrayInputStream(expression.getBytes());
-		ResourceSetImpl resourceSet = new ResourceSetImpl();
-		Resource resource = resourceSet.createResource(uri);
-		MetaModelManagerResourceAdapter.getAdapter(resource, metaModelManager);
-		if (resource instanceof EvaluationContext) {
-			((EvaluationContext)resource).setContext(typeContext, null);
-		}
-		resource.load(inputStream, null);
-		return resource;
 	}
 
 	public static void debugObjectUsage(String prefix, EObject element) {
@@ -1111,60 +1072,6 @@ public class PivotUtil extends DomainUtil
 				oldElements.add(newElement);
 			}
 		}
-	}
-
-	public static ExpressionInOcl resolveSpecification(MetaModelManager metaModelManager, URI uri, NamedElement contextClassifier, String expression) throws ParserException {
-		Resource resource = null;
-		try {
-			resource = createXtextResource(metaModelManager, uri, contextClassifier, expression);
-			checkResourceErrors(NLS.bind(OCLMessages.ErrorsInResource, expression), resource);
-			return getExpressionInOcl(resource);
-		} catch (IOException e) {
-//				throw new ParserException("Failed to load expression", e);
-			ExpressionInOcl specification = PivotFactory.eINSTANCE.createExpressionInOcl();
-			OclExpression invalidValueBody = metaModelManager.createInvalidExpression();
-			specification.setBodyExpression(invalidValueBody);
-			return specification;
-		} finally {
-			if (resource != null) {
-				MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.findAdapter(resource);
-				if (adapter != null) {
-					adapter.dispose();
-				}
-			}
-		}
-	}
-
-	public static ExpressionInOcl resolveMessage(MetaModelManager metaModelManager, URI uri, ExpressionInOcl specification, String expression) throws ParserException {
-		try {
-			Resource resource = createXtextResource(metaModelManager, uri, specification, expression);
-			checkResourceErrors(NLS.bind(OCLMessages.ErrorsInResource, expression), resource);
-			return getExpressionInOcl(resource);
-		} catch (IOException e) {
-//				throw new ParserException("Failed to load expression", e);
-			OclExpression invalidValueBody = metaModelManager.createInvalidExpression();
-			specification.setBodyExpression(invalidValueBody);
-			return specification;
-		}			
-	}
-
-	public static ExpressionInOcl getExpressionInOcl(Resource resource) throws ParserException {
-		List<EObject> contents = resource.getContents();
-		int size = contents.size();
-		if (size == 0) {
-			return null;
-		}
-		if (size > 1) {
-			throw new ParserException("Extra returns ignored");
-		}
-		EObject csObject = contents.get(0);
-		if (csObject instanceof Pivotable) {
-			Element pivotElement = ((Pivotable)csObject).getPivot();
-			if (pivotElement instanceof ExpressionInOcl) {
-				return (ExpressionInOcl) pivotElement;
-			}
-		}
-		throw new ParserException("Non-expression ignored");
 	}
 
 	/**

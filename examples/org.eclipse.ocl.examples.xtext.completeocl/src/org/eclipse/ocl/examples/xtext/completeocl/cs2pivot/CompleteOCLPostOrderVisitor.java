@@ -72,64 +72,33 @@ public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLPostOrderVis
 			ExpCS csExpression = csSpecification.getOwnedExpression();
 			if (csExpression != null) {
 				ExpressionInOcl pivotSpecification = PivotUtil.getPivot(ExpressionInOcl.class, csSpecification);
-//				context.installPivotUsage(csSpecification, pivotSpecification);
 				pivotConstraint.setSpecification(pivotSpecification);
-		
-				Variable contextVariable = pivotSpecification.getContextVariable();
-				if (contextVariable == null) {
-					contextVariable = PivotFactory.eINSTANCE.createVariable();
-					pivotSpecification.setContextVariable(contextVariable);
-				}
 				String selfVariableName = Environment.SELF_VARIABLE_NAME;
 				ContextDeclCS contextDecl = csElement.getContextDecl();
 				if (contextDecl instanceof ClassifierContextDeclCS) {
 					ClassifierContextDeclCS csClassifierContextDecl = (ClassifierContextDeclCS)contextDecl;
-					Type contextType = csClassifierContextDecl.getClassifier();
-					if (contextType.eIsProxy()) {
-						contextType = null;
-					}
-					context.setType(contextVariable, contextType);
 					String selfName = csClassifierContextDecl.getSelfName();
 					if (selfName != null) {
 						selfVariableName = selfName;
 					}
 				}
+				context.setContextVariable(pivotSpecification, selfVariableName, null);
+				if (contextDecl instanceof ClassifierContextDeclCS) {
+					ClassifierContextDeclCS csClassifierContextDecl = (ClassifierContextDeclCS)contextDecl;
+					Type contextType = csClassifierContextDecl.getClassifier();
+					context.setClassifierContext(pivotSpecification, contextType);
+				}
 				else if (contextDecl instanceof PropertyContextDeclCS) {
 					PropertyContextDeclCS csPropertyContextDecl = (PropertyContextDeclCS)contextDecl;
 					Property contextProperty = csPropertyContextDecl.getProperty();
-					if ((contextProperty != null) && !contextProperty.eIsProxy()) {
-						context.setType(contextVariable, contextProperty.getOwningType());
-					}
+					context.setPropertyContext(pivotSpecification, contextProperty);
 				}
 				else if (contextDecl instanceof OperationContextDeclCS) {
 					OperationContextDeclCS csOperationContextDecl = (OperationContextDeclCS)contextDecl;
 					Operation contextOperation = csOperationContextDecl.getOperation();
-			        pivotSpecification.getParameterVariable().clear();
-					if ((contextOperation != null) && !contextOperation.eIsProxy()) {
-						context.setType(contextVariable, contextOperation.getOwningType());
-				        for (Parameter parameter : contextOperation.getOwnedParameter()) {
-							if ((parameter != null) && !parameter.eIsProxy()) {
-						        Variable param = PivotFactory.eINSTANCE.createVariable();
-						        param.setName(parameter.getName());
-								context.setTypeWithMultiplicity(param, parameter);
-						        param.setRepresentedParameter(parameter);
-						        pivotSpecification.getParameterVariable().add(param);
-							}
-				        }
-					}
-			        if (csElement instanceof PostCS) {
-						Variable resultVariable = pivotSpecification.getResultVariable();
-						if (resultVariable == null) {
-							resultVariable = PivotFactory.eINSTANCE.createVariable();
-						}
-						resultVariable.setName(Environment.RESULT_VARIABLE_NAME);
-						context.setTypeWithMultiplicity(resultVariable, contextOperation);
-						pivotSpecification.setResultVariable(resultVariable);
-			        }
+					String resultVariableName = csElement instanceof PostCS ? Environment.RESULT_VARIABLE_NAME : null;
+			        context.setOperationContext(pivotSpecification, contextOperation, resultVariableName);
 				}
-				context.refreshName(contextVariable, selfVariableName);
-				
-				
 				OclExpression bodyExpression = context.visitLeft2Right(OclExpression.class, csExpression);		
 				pivotSpecification.setBodyExpression(bodyExpression);
 				pivotSpecification.setType(bodyExpression.getType());

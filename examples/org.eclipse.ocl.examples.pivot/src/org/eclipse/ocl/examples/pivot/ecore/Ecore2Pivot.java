@@ -218,7 +218,6 @@ public class Ecore2Pivot extends AbstractConversion implements External2Pivot, P
 	
 	private List<Resource.Diagnostic> errors = null;
 	
-	protected final MetaModelManager metaModelManager;
 	protected final Resource ecoreResource;					// Set via eAdapters.add()
 	
 	protected org.eclipse.ocl.examples.pivot.Package pivotRoot = null;	// Set by importResource
@@ -227,13 +226,10 @@ public class Ecore2Pivot extends AbstractConversion implements External2Pivot, P
 	private HashMap<EClassifier, Type> ecore2PivotMap = null;
 	
 	public Ecore2Pivot(Resource ecoreResource, MetaModelManager metaModelManager) {
+		super(metaModelManager != null ? metaModelManager : new MetaModelManager());
 		this.ecoreResource = ecoreResource;
-		if (metaModelManager == null) {
-			metaModelManager = new MetaModelManager();
-		}
-		this.metaModelManager = metaModelManager;
-		metaModelManager.addExternalResource(this);
-		metaModelManager.addListener(this);
+		this.metaModelManager.addExternalResource(this);
+		this.metaModelManager.addListener(this);
 	}
 	
 	protected void addCreated(EObject eObject, Element pivotElement) {

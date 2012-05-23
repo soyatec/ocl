@@ -22,7 +22,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
-import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -30,11 +29,12 @@ import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.evaluation.EvaluationContext;
+import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
+import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.scoping.AbstractRootCSAttribution;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ContextCS;
@@ -85,10 +85,11 @@ public class ContextCSAttribution extends AbstractRootCSAttribution
 			}
 			else {
 				Resource resource = target.eResource();
-				if (resource instanceof EvaluationContext) {
-					NamedElement specificationContext = ((EvaluationContext)resource).getSpecificationContext();
-					if (specificationContext != null) {
-						environmentView.computeLookups(specificationContext, null, null, PivotPackage.Literals.NAMED_ELEMENT__OWNED_RULE);
+				if (resource instanceof BaseResource) {
+					ParserContext parserContext = ((BaseResource)resource).getParserContext();
+					Type contextType = parserContext.getClassContext();
+					if (contextType != null) {
+						environmentView.computeLookups(contextType, null, null, PivotPackage.Literals.NAMED_ELEMENT__OWNED_RULE);
 					}
 				}
 			}
