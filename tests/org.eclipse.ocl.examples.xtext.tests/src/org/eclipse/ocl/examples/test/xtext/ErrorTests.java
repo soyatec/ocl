@@ -16,12 +16,12 @@
  */
 package org.eclipse.ocl.examples.test.xtext;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -61,7 +61,7 @@ public class ErrorTests extends PivotTestCase
 			"		invariant loop: Test.allInstances()->iterate(w, h; acc : String = '' | true);\n" +
 			"	}\n" +
 			"}\n";
-		InputStream inputStream = new ByteArrayInputStream(metaModelText.getBytes());
+		InputStream inputStream = new URIConverter.ReadableInputStream(metaModelText, "UTF-8");
 		URI xtextURI = URI.createURI("test.oclinecore");
 		ResourceSet resourceSet = new ResourceSetImpl();
 		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) resourceSet.createResource(xtextURI, null);
@@ -86,7 +86,7 @@ public class ErrorTests extends PivotTestCase
 			"		invariant loop: Test.allInstances->iterate(w, h; acc : String = '' | true);\n" +
 			"	}\n" +
 			"}\n";
-		InputStream inputStream = new ByteArrayInputStream(metaModelText.getBytes());
+		InputStream inputStream = new URIConverter.ReadableInputStream(metaModelText, "UTF-8");
 		URI xtextURI = URI.createURI("test.oclinecore");
 		ResourceSet resourceSet = new ResourceSetImpl();
 		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) resourceSet.createResource(xtextURI, null);

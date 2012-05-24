@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.test.xtext;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import org.eclipse.core.resources.IFile;
@@ -29,6 +28,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -63,7 +63,7 @@ public class EditorTests extends XtextTestCase
 {	
 
 	public void doTestEditor(String editorId, String testFile, String testContent) throws Exception {
-		InputStream inputStream = new ByteArrayInputStream(testContent.getBytes());
+		InputStream inputStream = new URIConverter.ReadableInputStream(testContent, "UTF-8");
 		XtextEditor editor = doTestEditor(editorId, testFile, inputStream);
 		IXtextDocument document = editor.getDocument();
 		String content = document.get();

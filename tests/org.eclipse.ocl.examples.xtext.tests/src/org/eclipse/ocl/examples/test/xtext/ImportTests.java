@@ -16,13 +16,13 @@
  */
 package org.eclipse.ocl.examples.test.xtext;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
@@ -120,7 +120,7 @@ public class ImportTests extends XtextTestCase
 			MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
 			URI libraryURI = getProjectFileURI(fileName);
 			BaseCSResource xtextResource = (BaseCSResource) resourceSet.createResource(libraryURI);
-			InputStream inputStream = new ByteArrayInputStream(testFile.getBytes());
+			InputStream inputStream = new URIConverter.ReadableInputStream(testFile, "UTF-8");
 			xtextResource.load(inputStream, null);
 			Bag<String> actualErrorMessages = new BagImpl<String>();
 			for (Resource.Diagnostic actualError : xtextResource.getErrors()) {
@@ -141,7 +141,7 @@ public class ImportTests extends XtextTestCase
 		ResourceSet resourceSet = new ResourceSetImpl();
 		MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
 		BaseCSResource xtextResource = (BaseCSResource) resourceSet.createResource(libraryURI);
-		InputStream inputStream = new ByteArrayInputStream(testFile.getBytes());
+		InputStream inputStream = new URIConverter.ReadableInputStream(testFile, "UTF-8");
 		xtextResource.load(inputStream, null);
 		assertNoResourceErrors("Load failed", xtextResource);
 		CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.getAdapter(xtextResource, metaModelManager);

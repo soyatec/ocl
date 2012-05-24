@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.test.xtext;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
@@ -26,6 +25,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.SequenceType;
@@ -64,7 +64,7 @@ public class EditTests extends XtextTestCase
 	}
 
 	protected Resource getEcoreFromCS1(MetaModelManager metaModelManager1, String testDocument, URI ecoreURI) throws IOException {
-		InputStream inputStream = new ByteArrayInputStream(testDocument.getBytes());
+		InputStream inputStream = new URIConverter.ReadableInputStream(testDocument, "UTF-8");
 		URI xtextURI = URI.createURI("test.oclinecore");
 		ResourceSet resourceSet = new ResourceSetImpl();
 		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) resourceSet.createResource(xtextURI, null);
@@ -108,7 +108,7 @@ public class EditTests extends XtextTestCase
 		MetaModelManager metaModelManager1 = new MetaModelManager();
 		Resource ecoreResource0 = getEcoreFromCS1(metaModelManager1, testDocument, ecoreURI0);
 		URI ecoreURI1 = getProjectFileURI("test1.ecore");
-		InputStream inputStream = new ByteArrayInputStream(testDocument.getBytes());
+		InputStream inputStream = new URIConverter.ReadableInputStream(testDocument, "UTF-8");
 		URI outputURI = getProjectFileURI("test.oclinecore");
 		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) resourceSet.createResource(outputURI, null);
 		MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
@@ -163,7 +163,7 @@ public class EditTests extends XtextTestCase
 		MetaModelManager metaModelManager1 = new MetaModelManager();
 		Resource ecoreResource0 = getEcoreFromCS1(metaModelManager1, testDocument, ecoreURI0);
 		URI ecoreURI1 = getProjectFileURI("test1.ecore");
-		InputStream inputStream = new ByteArrayInputStream(testDocument.getBytes());
+		InputStream inputStream = new URIConverter.ReadableInputStream(testDocument, "UTF-8");
 		URI outputURI = getProjectFileURI("test.oclinecore");
 		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) resourceSet.createResource(outputURI, null);
 		MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
@@ -243,7 +243,7 @@ public class EditTests extends XtextTestCase
 		MetaModelManager metaModelManager1 = new MetaModelManager();
 		Resource ecoreResource0 = getEcoreFromCS1(metaModelManager1, testDocument, ecoreURI0);
 		URI ecoreURI1 = getProjectFileURI("test1.ecore");
-		InputStream inputStream = new ByteArrayInputStream(testDocument.getBytes());
+		InputStream inputStream = new URIConverter.ReadableInputStream(testDocument, "UTF-8");
 		URI outputURI = getProjectFileURI("test.oclinecore");
 		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) resourceSet.createResource(outputURI, null);
 		MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
