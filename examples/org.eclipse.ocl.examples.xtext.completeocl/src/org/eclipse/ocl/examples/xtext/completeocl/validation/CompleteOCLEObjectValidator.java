@@ -34,9 +34,8 @@ import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
+import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 
 /**
  * A CompleteOCLEObjectValidator validates CompleteOCL invariants during an EMF validation, provided
@@ -102,9 +101,9 @@ public class CompleteOCLEObjectValidator extends BasicCompleteOCLEObjectValidato
 			logger.error("Failed to load Pivot from '" + ecoreResource.getURI() + message);
 			return false;
 		}
-		BaseCSResource xtextResource = null;
+		BaseResource xtextResource = null;
 		try {
-			xtextResource = (BaseCSResource) resourceSet.getResource(oclURI, true);
+			xtextResource = (BaseResource) resourceSet.getResource(oclURI, true);
 		}
 		catch (WrappedException e) {
 			URI retryURI = null;
@@ -118,7 +117,7 @@ public class CompleteOCLEObjectValidator extends BasicCompleteOCLEObjectValidato
 				}
 			}
 			if (retryURI != null) {
-				xtextResource = (BaseCSResource) resourceSet.getResource(retryURI, true);			
+				xtextResource = (BaseResource) resourceSet.getResource(retryURI, true);			
 			}
 			else {
 				throw e;
@@ -129,8 +128,7 @@ public class CompleteOCLEObjectValidator extends BasicCompleteOCLEObjectValidato
 			logger.error("Failed to load '" + oclURI + message);
 			return false;
 		}
-		CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.getAdapter(xtextResource, metaModelManager);
-		Resource pivotResource = adapter.getPivotResource(xtextResource);
+		Resource pivotResource = xtextResource.getPivotResource(metaModelManager);
 		message = PivotUtil.formatResourceDiagnostics(pivotResource.getErrors(), "", "\n");
 		if (message != null) {
 			logger.error("Failed to load Pivot from '" + oclURI + message);

@@ -17,9 +17,11 @@
 
 package org.eclipse.ocl.examples.pivot;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -30,12 +32,15 @@ import org.eclipse.ocl.examples.domain.evaluation.EvaluationHaltedException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
+import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
 import org.eclipse.ocl.examples.pivot.helper.OCLHelperImpl;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.PivotPlugin;
+import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.QueryImpl;
 
@@ -279,6 +284,15 @@ public class OCL {
 	}
 
 	/**
+	 * Return the Pivot resource counterpart of an Xtext csResource.
+	 */
+	public Resource cs2pivot(BaseResource csResource) {
+		MetaModelManager metaModelManager = getMetaModelManager();
+		Resource pivotResource = csResource.getPivotResource(metaModelManager);
+		return pivotResource;
+	}
+
+	/**
 	 * Disposes any objects that I have created while I have been in use. This
 	 * includes disposing of any {@link #getConstraints() constraints} that I
 	 * have parsed and {@linkplain Environment.Internal#dispose() disposing} of
@@ -303,6 +317,18 @@ public class OCL {
 			env.dispose();
 		}
 		getMetaModelManager().dispose();
+	}
+
+	/**
+	 * Return the Pivot resource counterpart of an ecoreResource, specifying the uri of the resulting Ecore resource
+	 * and options for the Pivot2Ecore converter.
+	 */
+	public Resource ecore2pivot(Resource ecoreResource) {
+		MetaModelManager metaModelManager = getMetaModelManager();
+		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager);
+		org.eclipse.ocl.examples.pivot.Package pivotRoot = ecore2Pivot.getPivotRoot();
+		Resource pivotResource = pivotRoot.eResource();
+		return pivotResource;
 	}
 
 	/**
@@ -518,6 +544,28 @@ public class OCL {
 	 */
 	public boolean isParseTracingEnabled() {
 		return traceParsing;
+	}
+
+	/**
+	 * Update the CS resource from a pivotResource.
+	 * 
+	 * For a first update, the csResource may be created by something like
+	 * <p><tt>
+	 * (BaseResource) resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
+	 * </tt>
+	 */
+	public void pivot2cs(Resource pivotResource, BaseResource csResource) {
+		MetaModelManager metaModelManager = getMetaModelManager();
+		csResource.updateFrom(pivotResource, metaModelManager);
+	}
+
+	/**
+	 * Return the Ecore resource counterpart of a pivotResource, specifying the uri of the resulting Ecore resource.
+	 */
+	public Resource pivot2ecore(Resource pivotResource, URI uri) throws IOException {
+		MetaModelManager metaModelManager = getMetaModelManager();
+		Resource ecoreResource = Pivot2Ecore.createResource(metaModelManager, pivotResource, uri, null);
+		return ecoreResource;
 	}
 
 	/**

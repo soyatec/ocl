@@ -21,16 +21,23 @@ import java.util.Map;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
+import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CS;
 import org.eclipse.ocl.examples.xtext.completeocl.cs2pivot.CompleteOCLCS2Pivot;
+import org.eclipse.ocl.examples.xtext.completeocl.pivot2cs.CompleteOCLPivot2CS;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
 
 public class CompleteOCLCSResource extends EssentialOCLCSResource
 {
 	@Override
-	public CS2Pivot createCS2Pivot(
-			Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
+	public CS2Pivot createCS2Pivot(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
 			MetaModelManager metaModelManager) {
 		return new CompleteOCLCS2Pivot(cs2pivotResourceMap, metaModelManager);
+	}
+
+	@Override
+	public Pivot2CS createPivot2CS(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
+			MetaModelManager metaModelManager) {
+		return new CompleteOCLPivot2CS(cs2pivotResourceMap, metaModelManager);
 	}
 
 	@Override

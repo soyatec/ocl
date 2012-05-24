@@ -42,13 +42,13 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainException;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.validation.DomainSubstitutionLabelProvider;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
+import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
+import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
+import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
 import org.eclipse.uml2.uml.profile.l2.L2Package;
 import org.eclipse.uml2.uml.resource.UML302UMLResource;
 import org.eclipse.xtext.resource.XtextResource;
@@ -176,6 +176,30 @@ public class PivotTestCase extends TestCase
 			}
 		}
 	}
+	
+	public static Resource cs2ecore(OCL ocl, String testDocument, URI ecoreURI) throws IOException {
+		MetaModelManager metaModelManager = ocl.getMetaModelManager();
+		InputStream inputStream = new URIConverter.ReadableInputStream(testDocument, "UTF-8");
+		URI xtextURI = URI.createURI("test.oclinecore");
+		ResourceSet resourceSet = new ResourceSetImpl();
+		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) resourceSet.createResource(xtextURI, null);
+		MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
+		xtextResource.load(inputStream, null);
+		assertNoResourceErrors("Loading Xtext", xtextResource);
+		Resource pivotResource = cs2pivot(ocl, xtextResource, null);
+		Resource ecoreResource = pivot2ecore(ocl, pivotResource, ecoreURI, true);
+		return ecoreResource;
+	}
+
+	public static Resource cs2pivot(OCL ocl, BaseResource xtextResource, URI pivotURI) throws IOException {
+		Resource pivotResource = ocl.cs2pivot(xtextResource);
+		assertNoUnresolvedProxies("Unresolved proxies", pivotResource);
+		if (pivotURI != null) {
+			pivotResource.setURI(pivotURI);
+			pivotResource.save(null);
+		}
+		return pivotResource;
+	}
 
 	protected static Value failOn(String expression, Throwable e) {
 		if (e instanceof DomainException) {
@@ -193,19 +217,6 @@ public class PivotTestCase extends TestCase
 		}
 	}
 	
-	public static Resource getEcoreFromCS(MetaModelManager metaModelManager, String testDocument, URI ecoreURI) throws IOException {
-		InputStream inputStream = new URIConverter.ReadableInputStream(testDocument, "UTF-8");
-		URI xtextURI = URI.createURI("test.oclinecore");
-		ResourceSet resourceSet = new ResourceSetImpl();
-		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) resourceSet.createResource(xtextURI, null);
-		MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
-		xtextResource.load(inputStream, null);
-		assertNoResourceErrors("Loading Xtext", xtextResource);
-		Resource pivotResource = savePivotFromCS(metaModelManager, xtextResource, null);
-		Resource ecoreResource = savePivotAsEcore(metaModelManager, pivotResource, ecoreURI, true);
-		return ecoreResource;
-	}
-	
 	public URI getTestModelURI(String localFileName) {
 		if (projectMap == null) {
 			projectMap = new ProjectMap();
@@ -215,13 +226,41 @@ public class PivotTestCase extends TestCase
 		return URI.createURI(urlString + "/" + localFileName);
 	}
 
-	public static Resource savePivotAsEcore(MetaModelManager metaModelManager, Resource pivotResource, URI ecoreURI, boolean validateSaved) throws IOException {
-		return savePivotAsEcore(metaModelManager, pivotResource, ecoreURI, null, validateSaved);
+	public static XtextResource pivot2cs(OCL ocl, ResourceSet resourceSet, Resource pivotResource, URI outputURI) throws IOException {
+		XtextResource xtextResource = (XtextResource) resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
+//		ResourceSet csResourceSet = resourceSet; //new ResourceSetImpl();
+//		csResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("cs", new EcoreResourceFactoryImpl());
+//		csResourceSet.getPackageRegistry().put(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
+//		Resource csResource = csResourceSet.createResource(uri);
+//		URI oclinecoreURI = ecoreResource.getURI().appendFileExtension("oclinecore");
+		ocl.pivot2cs(pivotResource, (BaseResource) xtextResource);
+		assertNoResourceErrors("Conversion failed", xtextResource);
+//		csResource.save(null);
+		//
+		//	CS save and reload
+		//		
+		URI savedURI = pivotResource.getURI();
+		pivotResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension("pivot"));
+		pivotResource.save(null);
+		pivotResource.setURI(savedURI);
+		
+		assertNoDiagnosticErrors("Concrete Syntax validation failed", xtextResource);
+		try {
+			xtextResource.save(null);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			URI xmiURI = outputURI.appendFileExtension(".xmi");
+			Resource xmiResource = resourceSet.createResource(xmiURI);
+			xmiResource.getContents().addAll(xtextResource.getContents());
+			xmiResource.save(null);
+			fail(e.toString());
+		}
+		return xtextResource;
 	}
-	public static Resource savePivotAsEcore(MetaModelManager metaModelManager, Resource pivotResource, URI ecoreURI, Map<String,Object> options, boolean validateSaved) throws IOException {
-		URI uri = ecoreURI != null ? ecoreURI : URI.createURI("test.ecore");
-		Resource ecoreResource = Pivot2Ecore.createResource(metaModelManager, pivotResource, uri, null);
-		assertNoResourceErrors("Ecore2Pivot failed", ecoreResource);
+
+	public static Resource pivot2ecore(OCL ocl, Resource pivotResource, URI ecoreURI, boolean validateSaved) throws IOException {
+		Resource ecoreResource = ocl.pivot2ecore(pivotResource, ecoreURI != null ? ecoreURI : URI.createURI("test.ecore"));
 		if (ecoreURI != null) {
 			ecoreResource.save(null);
 		}
@@ -229,17 +268,6 @@ public class PivotTestCase extends TestCase
 			assertNoValidationErrors("Ecore2Pivot invalid", ecoreResource);
 		}
 		return ecoreResource;
-	}
-
-	public static Resource savePivotFromCS(MetaModelManager metaModelManager, BaseCSResource xtextResource, URI pivotURI) throws IOException {
-		CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.getAdapter(xtextResource, metaModelManager);
-		Resource pivotResource = adapter.getPivotResource(xtextResource);
-		assertNoUnresolvedProxies("Unresolved proxies", pivotResource);
-		if (pivotURI != null) {
-			pivotResource.setURI(pivotURI);
-			pivotResource.save(null);
-		}
-		return pivotResource;
 	}
 
 	public static void unloadResourceSet(ResourceSet resourceSet) {

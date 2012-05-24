@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.essentialocl.utilities;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,9 +31,12 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter
 import org.eclipse.ocl.examples.pivot.utilities.IllegalLibraryException;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.LibraryDiagnostic;
+import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CS;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
+import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLCS2Pivot;
+import org.eclipse.ocl.examples.xtext.essentialocl.pivot2cs.EssentialOCLPivot2CS;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.util.CancelIndicator;
 
@@ -59,10 +63,14 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 		errors.add(new LibraryDiagnostic(e));
 	}
 
-	public CS2Pivot createCS2Pivot(
-			Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
+	public CS2Pivot createCS2Pivot(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
 			MetaModelManager metaModelManager) {
 		return new EssentialOCLCS2Pivot(cs2pivotResourceMap, metaModelManager);
+	}
+
+	public Pivot2CS createPivot2CS(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
+			MetaModelManager metaModelManager) {
+		return new EssentialOCLPivot2CS(cs2pivotResourceMap, metaModelManager);
 	}
 
 	public MetaModelManager createMetaModelManager() {
@@ -96,6 +104,12 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 
 	public ParserContext getParserContext() {
 		return parserContext;
+	}
+
+	public Resource getPivotResource(MetaModelManager metaModelManager) {
+		CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.getAdapter(this, metaModelManager);
+		Resource pivotResource = adapter.getPivotResource(this);
+		return pivotResource;
 	}
 
 	public URI resolve(URI uri) {
@@ -218,5 +232,14 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 
 	public void setParserContext(ParserContext parserContext) {
 		this.parserContext = parserContext;
+	}
+
+	public void updateFrom(Resource pivotResource, MetaModelManager metaModelManager) {		
+		Map<Resource, Resource> cs2PivotResourceMap = new HashMap<Resource, Resource>();
+		if (pivotResource != null) {
+			cs2PivotResourceMap.put(this, pivotResource);
+		}
+		Pivot2CS pivot2cs = createPivot2CS(cs2PivotResourceMap, metaModelManager);
+		pivot2cs.update();
 	}
 }

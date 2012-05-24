@@ -24,9 +24,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
+import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.uml.UML2Ecore2Pivot;
+import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
@@ -69,21 +71,25 @@ public class SerializeTests extends XtextTestCase
 		//
 		//	Ecore to Pivot
 		//		
-		MetaModelManager metaModelManager1 = new MetaModelManager();
+		OCL ocl1 = OCL.newInstance(new PivotEnvironmentFactory());
+		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
 		XtextResource xtextResource = null;
 		try {
-			Resource pivotResource = getPivotFromEcore(metaModelManager1, ecoreResource);
+			Resource pivotResource = ocl1.ecore2pivot(ecoreResource);
+			assertNoResourceErrors("Normalisation failed", pivotResource);
+			assertNoValidationErrors("Normalisation invalid", pivotResource);
 			//
 			//	Pivot to CS
 			//		
-			xtextResource = savePivotAsCS(metaModelManager1, pivotResource, outputURI);
+			xtextResource = pivot2cs(ocl1, resourceSet, pivotResource, outputURI);
 			resourceSet.getResources().clear();
 		}
 		finally {
 			metaModelManager1.dispose();
 			metaModelManager1 = null;
 		}
-		MetaModelManager metaModelManager2 = new MetaModelManager();
+		OCL ocl2 = OCL.newInstance(new PivotEnvironmentFactory());
+		MetaModelManager metaModelManager2 = ocl2.getMetaModelManager();
 		try {
 			BaseCSResource xtextResource2 = (BaseCSResource) resourceSet.createResource(outputURI);
 			MetaModelManagerResourceAdapter.getAdapter(xtextResource2, metaModelManager2);
@@ -95,13 +101,13 @@ public class SerializeTests extends XtextTestCase
 			//	
 			String pivotName2 = stem + "2.ecore.pivot";
 			URI pivotURI2 = getProjectFileURI(pivotName2);
-			Resource pivotResource2 = savePivotFromCS(metaModelManager2, xtextResource2, pivotURI2);
+			Resource pivotResource2 = cs2pivot(ocl2, xtextResource2, pivotURI2);
 			//
 			//	Pivot to Ecore
 			//		
 			String inputName2 = stem + "2.ecore";
 			URI ecoreURI2 = getProjectFileURI(inputName2);
-			Resource ecoreResource2 = savePivotAsEcore(metaModelManager2, pivotResource2, ecoreURI2, options, validateSaved);
+			Resource ecoreResource2 = pivot2ecore(ocl2, pivotResource2, ecoreURI2, validateSaved);
 			//
 			//
 			//
@@ -128,15 +134,16 @@ public class SerializeTests extends XtextTestCase
 		Resource umlResource = loadUML(inputURI);
 		//
 		//	Ecore to Pivot
-		//		
-		MetaModelManager metaModelManager = new MetaModelManager();
+		//
+		OCL ocl = OCL.newInstance();
+		MetaModelManager metaModelManager = ocl.getMetaModelManager();
 		Resource pivotResource = getPivotFromUML(metaModelManager, umlResource);
 		//
 		//	Pivot to CS
 		//		
 		String outputName = stem + ".serialized.oclinecore";
 		URI outputURI = getProjectFileURI(outputName);
-		XtextResource xtextResource = savePivotAsCS(metaModelManager, pivotResource, outputURI);
+		XtextResource xtextResource = pivot2cs(ocl, resourceSet, pivotResource, outputURI);
 		resourceSet.getResources().clear();
 		BaseCSResource xtextResource2 = (BaseCSResource) resourceSet.getResource(outputURI, true);
 		assertNoResourceErrors("Reload failed", xtextResource2);
@@ -146,13 +153,16 @@ public class SerializeTests extends XtextTestCase
 		//	
 		String pivotName2 = stem + "2.ecore.pivot";
 		URI pivotURI2 = getProjectFileURI(pivotName2);
-		Resource pivotResource2 = savePivotFromCS(metaModelManager, xtextResource2, pivotURI2);
+		Resource pivotResource2 = cs2pivot(ocl, xtextResource2, pivotURI2);
 		//
 		//	Pivot to Ecore
-		//		
-		String inputName2 = stem + "2.ecore";
-		URI ecoreURI2 = getProjectFileURI(inputName2);
-		Resource ecoreResource2 = savePivotAsEcore(metaModelManager, pivotResource2, ecoreURI2, true);
+		//
+		Resource ecoreResource2;
+		{
+			String inputName2 = stem + "2.ecore";
+			URI ecoreURI2 = getProjectFileURI(inputName2);
+			ecoreResource2 = pivot2ecore(ocl, pivotResource2, ecoreURI2, true);
+		}
 		//
 		//
 		//

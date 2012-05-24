@@ -73,7 +73,7 @@ import org.eclipse.ocl.examples.pivot.utilities.EnvironmentRegistryImpl;
  * @see AbstractEnvironment
  * @see EnvironmentFactory
  */
-public interface Environment {
+public interface Environment extends BasicEnvironment {
 	/**
 	 * Namespace URI of the OCL core metamodel, used for example as the
 	 * source of certain Ecore annotations.
@@ -304,7 +304,7 @@ public interface Environment {
 	 * 
 	 * @author Christian W. Damus (cdamus)
 	 */
-	interface Internal extends BasicEnvironment, Environment {
+	interface Internal extends Environment {
     
         /**
          * Obtains my parent environment after construction.

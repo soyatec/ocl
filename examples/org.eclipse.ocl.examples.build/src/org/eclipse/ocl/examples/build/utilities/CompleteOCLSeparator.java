@@ -16,9 +16,6 @@
  */
 package org.eclipse.ocl.examples.build.utilities;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -29,13 +26,10 @@ import org.eclipse.emf.mwe.core.lib.WorkflowComponentWithModelSlot;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
-import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CS;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
-import org.eclipse.ocl.examples.xtext.completeocl.pivot2cs.CompleteOCLPivot2CS;
 import org.eclipse.ocl.examples.xtext.completeocl.pivot2cs.CompleteOCLSplitter;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
-import org.eclipse.xtext.resource.XtextResource;
 
 /**
  * Converts a UML resource to its Pivot form.
@@ -90,11 +84,8 @@ public class CompleteOCLSeparator extends WorkflowComponentWithModelSlot
 		URI xtextURI = oclURI != null ? URI.createPlatformResourceURI(oclURI, true) : uri.trimFileExtension().appendFileExtension("ocl");
 		ResourceSetImpl csResourceSet = new ResourceSetImpl();
 		MetaModelManagerResourceSetAdapter.getAdapter(csResourceSet, metaModelManager);
-		XtextResource xtextResource = (XtextResource) csResourceSet.createResource(xtextURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
-		Map<Resource, Resource> cs2PivotResourceMap = new HashMap<Resource, Resource>();
-		cs2PivotResourceMap.put(xtextResource, oclResource);
-		Pivot2CS pivot2cs = new CompleteOCLPivot2CS(cs2PivotResourceMap, metaModelManager);
-		pivot2cs.update();
-		return (BaseCSResource) xtextResource;
+		BaseCSResource xtextResource = (BaseCSResource) csResourceSet.createResource(xtextURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
+		xtextResource.updateFrom(oclResource, metaModelManager);
+		return xtextResource;
 	}
 }

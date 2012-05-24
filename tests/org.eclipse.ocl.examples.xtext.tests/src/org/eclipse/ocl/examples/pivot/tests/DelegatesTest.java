@@ -90,10 +90,9 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
+import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.oclinecore.validation.OCLinEcoreEObjectValidator;
 
@@ -306,12 +305,11 @@ public class DelegatesTest extends PivotTestSuite
 		if (message != null)
 			fail(message);
 		URI oclURI = getTestModelURI(MODEL_WITH_ERRORS_OCL);
-		BaseCSResource xtextResource = (BaseCSResource) resourceSet.getResource(oclURI, true);
+		BaseResource xtextResource = (BaseResource) resourceSet.getResource(oclURI, true);
 		message = PivotUtil.formatResourceDiagnostics(xtextResource.getErrors(), "OCL load", "\n\t");
 		if (message != null)
 			fail(message);
-		CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.getAdapter(xtextResource, metaModelManager);
-		Resource pivotResource = adapter.getPivotResource(xtextResource);
+		Resource pivotResource = xtextResource.getPivotResource(metaModelManager);
 		message = PivotUtil.formatResourceDiagnostics(pivotResource.getErrors(), "Pivot OCL load", "\n\t");
 		if (message != null)
 			fail(message);

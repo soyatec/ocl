@@ -45,9 +45,8 @@ import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
+import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.completeocl.validation.BasicCompleteOCLEObjectValidator;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
@@ -91,9 +90,9 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 
 		public boolean loadCSResource(ResourceSet resourceSet,
 				MetaModelManager metaModelManager, URI oclURI) {
-			BaseCSResource xtextResource = null;
+			BaseResource xtextResource = null;
 			try {
-				xtextResource = (BaseCSResource) resourceSet.getResource(oclURI, true);
+				xtextResource = (BaseResource) resourceSet.getResource(oclURI, true);
 			}
 			catch (WrappedException e) {
 				URI retryURI = null;
@@ -107,7 +106,7 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 					}
 				}
 				if (retryURI != null) {
-					xtextResource = (BaseCSResource) resourceSet.getResource(retryURI, true);			
+					xtextResource = (BaseResource) resourceSet.getResource(retryURI, true);			
 				}
 				else {
 					throw e;
@@ -117,8 +116,7 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 			if (message != null) {
 				return error("Failed to load '" + oclURI, message);
 			}
-			CS2PivotResourceAdapter cs2pivot = CS2PivotResourceAdapter.getAdapter(xtextResource, metaModelManager);
-			Resource pivotResource = cs2pivot.getPivotResource(xtextResource);
+			Resource pivotResource = xtextResource.getPivotResource(metaModelManager);
 			message = PivotUtil.formatResourceDiagnostics(pivotResource.getErrors(), "", "\n");
 			if (message != null) {
 				return error("Failed to load Pivot from '" + oclURI, message);

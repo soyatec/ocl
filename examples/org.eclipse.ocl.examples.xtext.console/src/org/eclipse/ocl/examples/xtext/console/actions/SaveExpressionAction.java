@@ -28,7 +28,6 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.console.OCLConsolePage;
 import org.eclipse.ocl.examples.xtext.console.XtextConsolePlugin;
 import org.eclipse.ocl.examples.xtext.console.messages.ConsoleMessages;
@@ -89,9 +88,7 @@ public class SaveExpressionAction extends Action
 					editorDocument.modify(new IUnitOfWork<Object, XtextResource>()
 					{
 						public Object exec(XtextResource resource) throws Exception {
-							CS2PivotResourceAdapter csAdapter = CS2PivotResourceAdapter.getAdapter((BaseCSResource)resource, null);
-							csAdapter.refreshPivotMappings(null);		// FIXME redundant
-							Resource pivotResource = csAdapter.getPivotResource(resource);
+							Resource pivotResource = ((BaseCSResource)resource).getPivotResource(null);
 							pivotResource.setURI(URI.createFileURI(file));
 							pivotResource.save(saveOptions);
 							return null;

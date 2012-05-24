@@ -70,7 +70,6 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
-import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -82,7 +81,6 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TuplePartCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TupleTypeCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypeRefCS;
-import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CS;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
@@ -95,10 +93,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NestedExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.PrefixExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.TypeNameExpCS;
 import org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcoreStandaloneSetup;
-import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
-import org.eclipse.ocl.examples.xtext.oclinecore.pivot2cs.OCLinEcorePivot2CS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
-import org.eclipse.xtext.resource.XtextResource;
 
 public class XtextTestCase extends PivotTestCase
 {	
@@ -395,42 +390,6 @@ public class XtextTestCase extends PivotTestCase
 	}
 	
 	protected ResourceSet resourceSet;
-
-	protected XtextResource savePivotAsCS(MetaModelManager metaModelManager, Resource pivotResource, URI outputURI) throws IOException {
-//		ResourceSet csResourceSet = resourceSet; //new ResourceSetImpl();
-//		csResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("cs", new EcoreResourceFactoryImpl());
-//		csResourceSet.getPackageRegistry().put(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
-//		Resource csResource = csResourceSet.createResource(uri);
-//		URI oclinecoreURI = ecoreResource.getURI().appendFileExtension("oclinecore");
-		XtextResource xtextResource = (XtextResource) resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
-		Map<Resource, Resource> cs2PivotResourceMap = new HashMap<Resource, Resource>();
-		cs2PivotResourceMap.put(xtextResource, pivotResource);
-		Pivot2CS pivot2cs = new OCLinEcorePivot2CS(cs2PivotResourceMap, metaModelManager);
-		pivot2cs.update();
-		assertNoResourceErrors("Conversion failed", xtextResource);
-//		csResource.save(null);
-		//
-		//	CS save and reload
-		//		
-		URI savedURI = pivotResource.getURI();
-		pivotResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension("pivot"));
-		pivotResource.save(null);
-		pivotResource.setURI(savedURI);
-		
-		assertNoDiagnosticErrors("Concrete Syntax validation failed", xtextResource);
-		try {
-			xtextResource.save(null);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			URI xmiURI = outputURI.appendFileExtension(".xmi");
-			Resource xmiResource = resourceSet.createResource(xmiURI);
-			xmiResource.getContents().addAll(xtextResource.getContents());
-			xmiResource.save(null);
-			fail(e.toString());
-		}
-		return xtextResource;
-	}
 	
 	public void createEcoreFile(MetaModelManager metaModelManager, String fileName, String fileContent) throws IOException {
 		String inputName = fileName + ".oclinecore";
@@ -462,15 +421,6 @@ public class XtextTestCase extends PivotTestCase
 		Writer writer = new FileWriter(file);
 		writer.append(fileContent);
 		writer.close();
-	}
-
-	protected Resource getPivotFromEcore(MetaModelManager metaModelManager, Resource ecoreResource) {
-		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager);
-		org.eclipse.ocl.examples.pivot.Package pivotRoot = ecore2Pivot.getPivotRoot();
-		Resource pivotResource = pivotRoot.eResource();
-		assertNoResourceErrors("Normalisation failed", pivotResource);
-		assertNoValidationErrors("Normalisation invalid", pivotResource);
-		return pivotResource;
 	}
 
 	protected File getProjectFile() {

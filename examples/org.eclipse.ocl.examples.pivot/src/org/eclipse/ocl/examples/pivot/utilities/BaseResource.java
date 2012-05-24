@@ -16,6 +16,7 @@ package org.eclipse.ocl.examples.pivot.utilities;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.pivot.context.ParserContext;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 /**
  * BaseResource defines the Xtext-independent extended interface for a Concrete Syntax resource
@@ -25,5 +26,7 @@ import org.eclipse.ocl.examples.pivot.context.ParserContext;
 public interface BaseResource extends Resource
 {
 	ParserContext getParserContext();
+	Resource getPivotResource(MetaModelManager metaModelManager);
 	void setParserContext(ParserContext parserContext);
+	void updateFrom(Resource pivotResource, MetaModelManager metaModelManager);
 }

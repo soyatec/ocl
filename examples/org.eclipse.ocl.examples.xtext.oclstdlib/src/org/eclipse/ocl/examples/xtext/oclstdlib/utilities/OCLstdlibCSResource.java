@@ -27,11 +27,16 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.cs2pivot.OCLstdlibCS2Pivot;
 public class OCLstdlibCSResource extends EssentialOCLCSResource
 {
 	@Override
-	public CS2Pivot createCS2Pivot(
-			Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
+	public CS2Pivot createCS2Pivot(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
 			MetaModelManager metaModelManager) {
 		return new OCLstdlibCS2Pivot(cs2pivotResourceMap, metaModelManager);
 	}
+
+//	@Override
+//	public Pivot2CS createPivot2CS(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
+//			MetaModelManager metaModelManager) {
+//		return new OCLstdlibPivot2CS(cs2pivotResourceMap, metaModelManager);		// FIXME
+//	}
 
 	@Override
 	public String getEditorName() {

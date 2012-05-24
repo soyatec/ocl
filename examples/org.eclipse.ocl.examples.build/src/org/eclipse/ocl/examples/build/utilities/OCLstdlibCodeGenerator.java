@@ -35,7 +35,6 @@ import org.eclipse.ocl.examples.build.acceleo.GenerateOCLstdlib;
 import org.eclipse.ocl.examples.pivot.utilities.PivotSaver;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
 
 /**
@@ -89,8 +88,7 @@ public class OCLstdlibCodeGenerator extends AbstractWorkflowComponent
 				issues.addError(this, message, null, null, null);
 				return;
 			}
-			CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.getAdapter(xtextResource, null);
-			Resource pivotResource = adapter.getPivotResource(xtextResource);
+			Resource pivotResource = xtextResource.getPivotResource(null);
 			List<Object> arguments = new ArrayList<Object>();
 			arguments.add(javaPackageName);
 			arguments.add(javaClassName);

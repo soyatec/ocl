@@ -27,7 +27,6 @@ import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
-import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLCS2Pivot;
 import org.eclipse.ocl.examples.xtext.oclinecore.utilities.OCLinEcoreCSResource;
 
@@ -59,8 +58,7 @@ public class OCLinEcoreCS2Pivot extends EssentialOCLCS2Pivot
 		}
 
 		public Element importFromResource(MetaModelManager metaModelManager, Resource resource, String uriFragment) {
-			CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.getAdapter((OCLinEcoreCSResource)resource, metaModelManager);
-			Resource pivotResource = adapter.getPivotResource(resource);
+			Resource pivotResource = ((OCLinEcoreCSResource)resource).getPivotResource(metaModelManager);
 			if (pivotResource == null) {
 				return null;
 			}

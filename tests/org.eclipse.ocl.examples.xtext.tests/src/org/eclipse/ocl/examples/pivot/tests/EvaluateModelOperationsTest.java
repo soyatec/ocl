@@ -103,7 +103,7 @@ public class EvaluateModelOperationsTest extends PivotTestSuite
 			"    property anEString : ecore::EString;\n" +
 			"  }\n" +
 			"}\n";
-		Resource metaModel = getEcoreFromCS(metaModelManager, metaModelText, null);
+		Resource metaModel = cs2ecore(ocl, metaModelText, null);
 		EPackage ePackage = (EPackage) metaModel.getContents().get(0);
 		EClass eClass = (EClass) ePackage.getEClassifiers().get(0);
         helper.setContext((Type) metaModelManager.getType(eClass));
@@ -234,7 +234,7 @@ public class EvaluateModelOperationsTest extends PivotTestSuite
 			"    attribute name : String;\n" +
 			"  }\n" +
 			"}\n";
-		Resource metaModel = getEcoreFromCS(metaModelManager, metaModelText, null);
+		Resource metaModel = cs2ecore(ocl, metaModelText, null);
 		EPackage ePackage = (EPackage) metaModel.getContents().get(0);
 		EClass aClass = (EClass) ePackage.getEClassifier("A");
 		EClass bClass = (EClass) ePackage.getEClassifier("B");

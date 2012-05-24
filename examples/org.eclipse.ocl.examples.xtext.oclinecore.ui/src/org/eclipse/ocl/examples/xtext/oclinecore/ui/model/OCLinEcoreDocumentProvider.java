@@ -50,11 +50,10 @@ import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.uml.UML2Ecore2Pivot;
+import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotResourceFactoryImpl;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CS;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
-import org.eclipse.ocl.examples.xtext.oclinecore.pivot2cs.OCLinEcorePivot2CS;
 import org.eclipse.ocl.examples.xtext.oclinecore.ui.OCLinEcoreUiPluginHelper;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
@@ -264,14 +263,9 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider
 				csResourceSet.getPackageRegistry().put(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
 //				Resource csResource = csResourceSet.createResource(uri);
 				URI oclinecoreURI = xmiResource.getURI().appendFileExtension("oclinecore");
-				Resource csResource = resourceSet.createResource(oclinecoreURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
+				BaseResource csResource = (BaseResource) resourceSet.createResource(oclinecoreURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
 				csResource.setURI(xmiResource.getURI());
-				Map<Resource, Resource> cs2PivotResourceMap = new HashMap<Resource, Resource>();
-				if (pivotResource != null) {
-					cs2PivotResourceMap.put(csResource, pivotResource);
-				}
-				Pivot2CS pivot2cs = new OCLinEcorePivot2CS(cs2PivotResourceMap, metaModelManager);
-				pivot2cs.update();
+				csResource.updateFrom(pivotResource, metaModelManager);
 //				csResource.save(null);
 				Resource xtextResource = csResource;		
 				

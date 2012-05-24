@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.SequenceType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.context.ModelContext;
@@ -36,6 +37,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
+import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 
@@ -45,25 +47,29 @@ import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 public class EditTests extends XtextTestCase
 {	
 
-	protected MetaModelManager metaModelManager = null;
+	protected OCL ocl = null;
+//	protected MetaModelManager metaModelManager = null;
 	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		metaModelManager = new MetaModelManager();
+//		metaModelManager = new MetaModelManager();
+		ocl = OCL.newInstance();
+//		ocl = OCL.newInstance(new PivotEnvironmentFactory(new MetaModelManager()));
 	}
 
 	@Override
 	protected void tearDown() throws Exception {
-		if (metaModelManager != null) {
-			metaModelManager.dispose();
-			metaModelManager = null;
-		}
+//		if (metaModelManager != null) {
+//			metaModelManager.dispose();
+//			metaModelManager = null;
+//		}
 		StandardLibraryContribution.REGISTRY.remove(MetaModelManager.DEFAULT_OCL_STDLIB_URI);
 		super.tearDown();
 	}
 
-	protected Resource getEcoreFromCS1(MetaModelManager metaModelManager1, String testDocument, URI ecoreURI) throws IOException {
+	protected Resource getEcoreFromCS1(OCL ocl1, String testDocument, URI ecoreURI) throws IOException {
+		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
 		InputStream inputStream = new URIConverter.ReadableInputStream(testDocument, "UTF-8");
 		URI xtextURI = URI.createURI("test.oclinecore");
 		ResourceSet resourceSet = new ResourceSetImpl();
@@ -72,8 +78,8 @@ public class EditTests extends XtextTestCase
 		xtextResource.load(inputStream, null);
 		assertNoResourceErrors("Loading Xtext", xtextResource);
 		MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager1);
-		Resource pivotResource = savePivotFromCS(metaModelManager1, xtextResource, null);
-		Resource ecoreResource = savePivotAsEcore(metaModelManager1, pivotResource, ecoreURI, true);
+		Resource pivotResource = cs2pivot(ocl1, xtextResource, null);
+		Resource ecoreResource = pivot2ecore(ocl1, pivotResource, ecoreURI, true);
 		adapter.dispose();
 		return ecoreResource;
 	}
@@ -88,7 +94,7 @@ public class EditTests extends XtextTestCase
 		if (validSave) {
 			assertNoValidationErrors(contextMessage, pivotResource);
 		}
-		Resource ecoreResource = savePivotAsEcore(metaModelManager, pivotResource, null, validSave);
+		Resource ecoreResource = pivot2ecore(ocl, pivotResource, null, true);
 		assertNoResourceErrors(contextMessage, ecoreResource);
 		return ecoreResource;
 	}	
@@ -105,42 +111,53 @@ public class EditTests extends XtextTestCase
 			"package p1 : p2 = 'p3' {\n" +
 			"}\n";
 		URI ecoreURI0 = getProjectFileURI("test0.ecore");
-		MetaModelManager metaModelManager1 = new MetaModelManager();
-		Resource ecoreResource0 = getEcoreFromCS1(metaModelManager1, testDocument, ecoreURI0);
-		URI ecoreURI1 = getProjectFileURI("test1.ecore");
-		InputStream inputStream = new URIConverter.ReadableInputStream(testDocument, "UTF-8");
-		URI outputURI = getProjectFileURI("test.oclinecore");
-		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) resourceSet.createResource(outputURI, null);
-		MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
-		xtextResource.load(inputStream, null);
-		Resource pivotResource = savePivotFromCS(metaModelManager, xtextResource, null);
-		Resource ecoreResource1 = savePivotAsEcore(metaModelManager, pivotResource, ecoreURI1, true);
-		assertSameModel(ecoreResource0, ecoreResource1);		
+		OCL ocl1 = OCL.newInstance(new PivotEnvironmentFactory());
+		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
+		Resource ecoreResource0 = getEcoreFromCS1(ocl1, testDocument, ecoreURI0);
+		EssentialOCLCSResource xtextResource;
+		Resource pivotResource;
+		{
+			URI ecoreURI1 = getProjectFileURI("test1.ecore");
+			InputStream inputStream = new URIConverter.ReadableInputStream(testDocument, "UTF-8");
+			URI outputURI = getProjectFileURI("test.oclinecore");
+			xtextResource = (EssentialOCLCSResource) resourceSet.createResource(outputURI, null);
+			MetaModelManagerResourceAdapter.getAdapter(xtextResource, ocl.getMetaModelManager());
+			xtextResource.load(inputStream, null);
+			pivotResource = cs2pivot(ocl, xtextResource, null);
+			Resource ecoreResource1 = pivot2ecore(ocl, pivotResource, ecoreURI1, true);
+			assertSameModel(ecoreResource0, ecoreResource1);
+		}
 		//
 		//	Inserting a leading space has no Ecore effect.
 		//
-		xtextResource.update(0, 0, " ");
-		assertNoResourceErrors("Adding space", xtextResource);
-		URI ecoreURI2 = getProjectFileURI("test2.ecore");
-		Resource ecoreResource2 = savePivotAsEcore(metaModelManager, pivotResource, ecoreURI2, true);
-		assertSameModel(ecoreResource0, ecoreResource2);		
+		{
+			xtextResource.update(0, 0, " ");
+			assertNoResourceErrors("Adding space", xtextResource);
+			URI ecoreURI2 = getProjectFileURI("test2.ecore");
+			Resource ecoreResource2 = pivot2ecore(ocl, pivotResource, ecoreURI2, true);
+			assertSameModel(ecoreResource0, ecoreResource2);
+		}
 		//
 		//	Deleting the leading space has no Ecore effect.
 		//
-		xtextResource.update(0, 1, "");
-		assertNoResourceErrors("Deleting space", xtextResource);
-		URI ecoreURI3 = getProjectFileURI("test3.ecore");
-		Resource ecoreResource3 = savePivotAsEcore(metaModelManager, pivotResource, ecoreURI3, true);
-		assertSameModel(ecoreResource0, ecoreResource3);		
+		{
+			xtextResource.update(0, 1, "");
+			assertNoResourceErrors("Deleting space", xtextResource);
+			URI ecoreURI3 = getProjectFileURI("test3.ecore");
+			Resource ecoreResource3 = pivot2ecore(ocl, pivotResource, ecoreURI3, true);
+			assertSameModel(ecoreResource0, ecoreResource3);
+		}
 		//
 		//	Changing "p1" to "pkg" renames the package.
 		//
-		replace(xtextResource, "p1", "pkg"); 
-		assertNoResourceErrors("Renaming", xtextResource);
-		URI ecoreURI4 = getProjectFileURI("test4.ecore");
-		Resource ecoreResource4 = savePivotAsEcore(metaModelManager, pivotResource, ecoreURI4, true);
-		((EPackage)ecoreResource0.getContents().get(0)).setName("pkg");
-		assertSameModel(ecoreResource0, ecoreResource4);		
+		{
+			replace(xtextResource, "p1", "pkg"); 
+			assertNoResourceErrors("Renaming", xtextResource);
+			URI ecoreURI4 = getProjectFileURI("test4.ecore");
+			Resource ecoreResource4 = pivot2ecore(ocl, pivotResource, ecoreURI4, true);
+			((EPackage)ecoreResource0.getContents().get(0)).setName("pkg");
+			assertSameModel(ecoreResource0, ecoreResource4);		
+		}
 		metaModelManager1.dispose();
 	}	
 
@@ -160,18 +177,21 @@ public class EditTests extends XtextTestCase
 			"	}\n" +
 			"}\n";
 		URI ecoreURI0 = getProjectFileURI("test0.ecore");
-		MetaModelManager metaModelManager1 = new MetaModelManager();
-		Resource ecoreResource0 = getEcoreFromCS1(metaModelManager1, testDocument, ecoreURI0);
+		OCL ocl1 = OCL.newInstance(new PivotEnvironmentFactory());
+		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
+		Resource ecoreResource0 = getEcoreFromCS1(ocl1, testDocument, ecoreURI0);
 		URI ecoreURI1 = getProjectFileURI("test1.ecore");
 		InputStream inputStream = new URIConverter.ReadableInputStream(testDocument, "UTF-8");
 		URI outputURI = getProjectFileURI("test.oclinecore");
 		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) resourceSet.createResource(outputURI, null);
-		MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
+		MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.getAdapter(xtextResource, ocl.getMetaModelManager());
 		xtextResource.load(inputStream, null);
-		Resource pivotResource = savePivotFromCS(metaModelManager, xtextResource, null);
-		Resource ecoreResource1 = savePivotAsEcore(metaModelManager, pivotResource, ecoreURI1, true);
-		assertSameModel(ecoreResource0, ecoreResource1);
-		Type pivotTestClass1 = metaModelManager.getPrimaryType("TestPackage", "TestClass1");
+		Resource pivotResource = cs2pivot(ocl, xtextResource, null);
+		{
+			Resource ecoreResource1 = pivot2ecore(ocl, pivotResource, ecoreURI1, true);
+			assertSameModel(ecoreResource0, ecoreResource1);
+		}
+		Type pivotTestClass1 = ocl.getMetaModelManager().getPrimaryType("TestPackage", "TestClass1");
 		//
 		//	Changing "TestClass1" to "Testing" renames a type and breaks the invariant.
 		//
@@ -182,7 +202,7 @@ public class EditTests extends XtextTestCase
 		//	Changing "Testing" back to "TestClass1" restores the type and the invariant.
 		//
 		assertSameModel(ecoreResource0, doRename(xtextResource, pivotResource, "Testing", "TestClass1"));
-		pivotTestClass1 = metaModelManager.getPrimaryType("TestPackage", "TestClass1");
+		pivotTestClass1 = ocl.getMetaModelManager().getPrimaryType("TestPackage", "TestClass1");
 		//
 		//	Changing "testProperty1" to "tProperty" renames the property and breaks the invariant.
 		//
@@ -240,19 +260,22 @@ public class EditTests extends XtextTestCase
 			"}\n";
 		URI ecoreURI0 = getProjectFileURI("test0.ecore");
 //		System.out.println("*************load-reference*********************************************************");
-		MetaModelManager metaModelManager1 = new MetaModelManager();
-		Resource ecoreResource0 = getEcoreFromCS1(metaModelManager1, testDocument, ecoreURI0);
+		OCL ocl1 = OCL.newInstance(new PivotEnvironmentFactory());
+		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
+		Resource ecoreResource0 = getEcoreFromCS1(ocl1, testDocument, ecoreURI0);
 		URI ecoreURI1 = getProjectFileURI("test1.ecore");
 		InputStream inputStream = new URIConverter.ReadableInputStream(testDocument, "UTF-8");
 		URI outputURI = getProjectFileURI("test.oclinecore");
 		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) resourceSet.createResource(outputURI, null);
-		MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
+		MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.getAdapter(xtextResource, ocl.getMetaModelManager());
 //		System.out.println("*************load*********************************************************");
 		xtextResource.load(inputStream, null);
-		Resource pivotResource = savePivotFromCS(metaModelManager, xtextResource, null);
-		Resource ecoreResource1 = savePivotAsEcore(metaModelManager, pivotResource, ecoreURI1, true);
-		assertSameModel(ecoreResource0, ecoreResource1);
-		Type pivotTestClass1 = metaModelManager.getPrimaryType("TestPackage", "TestClass1");
+		Resource pivotResource = cs2pivot(ocl, xtextResource, null);
+		{
+			Resource ecoreResource1 = pivot2ecore(ocl, pivotResource, ecoreURI1, true);
+			assertSameModel(ecoreResource0, ecoreResource1);
+		}
+		Type pivotTestClass1 = ocl.getMetaModelManager().getPrimaryType("TestPackage", "TestClass1");
 		//
 		//	Changing "TestClass1" to "Testing" renames a type and breaks the referredProperty/referredOperation.
 		//
@@ -262,7 +285,7 @@ public class EditTests extends XtextTestCase
 		//	Changing "Testing" back to "TestClass1" restores the type and the referredProperty/referredOperation.
 		//
 		assertSameModel(ecoreResource0, doRename(xtextResource, pivotResource, "Testing", "TestClass1"));
-		pivotTestClass1 = metaModelManager.getPrimaryType("TestPackage", "TestClass1");
+		pivotTestClass1 = ocl.getMetaModelManager().getPrimaryType("TestPackage", "TestClass1");
 		//
 		//	Changing "TestClass1" to "Testing" renames a type and breaks the referredProperty/referredOperation.
 		//
@@ -272,7 +295,7 @@ public class EditTests extends XtextTestCase
 		//	Changing "Testing" back to "TestClass1" restores the type and the referredProperty/referredOperation.
 		//
 		assertSameModel(ecoreResource0, doRename(xtextResource, pivotResource, "Testing", "TestClass1"));
-		pivotTestClass1 = metaModelManager.getPrimaryType("TestPackage", "TestClass1");
+		pivotTestClass1 = ocl.getMetaModelManager().getPrimaryType("TestPackage", "TestClass1");
 		//
 		adapter.dispose();
 		metaModelManager1.dispose();
@@ -287,15 +310,15 @@ public class EditTests extends XtextTestCase
 			"}\n" +
 			"}\n";
 		URI outputURI = getProjectFileURI("test.oclstdlib");
-		ModelContext modelContext = new ModelContext(metaModelManager, outputURI);
+		ModelContext modelContext = new ModelContext(ocl.getMetaModelManager(), outputURI);
 		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) modelContext.createBaseResource(testDocument);
-		Resource pivotResource = savePivotFromCS(metaModelManager, xtextResource, null);
+		Resource pivotResource = cs2pivot(ocl, xtextResource, null);
 		assertResourceErrors("Loading input", xtextResource);
 		assertNoResourceErrors("Loading input", pivotResource);
 		//
-		Type myType = metaModelManager.getPrimaryType("http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib", "MyType");
-		SequenceType sequenceType = metaModelManager.getSequenceType();
-		TypeServer sequenceTypeServer = metaModelManager.getTypeServer(sequenceType);
+		Type myType = ocl.getMetaModelManager().getPrimaryType("http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib", "MyType");
+		SequenceType sequenceType = ocl.getMetaModelManager().getSequenceType();
+		TypeServer sequenceTypeServer = ocl.getMetaModelManager().getTypeServer(sequenceType);
 		WeakReference<Type> sequenceMyType = new WeakReference<Type>(sequenceTypeServer.findSpecializedType(Collections.singletonList(myType)));
 		assertNull(sequenceMyType.get()); 
 		//
