@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.Model;
@@ -47,6 +48,7 @@ import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLDocumentCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextConstraintCS;
+import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefFeatureCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefOperationCS;
@@ -149,6 +151,15 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 		super(context);
 	}
 
+	protected void refreshConstrainedElements(ContextDeclCS csElement, Element constrainedElement) {
+		for (ContextConstraintCS csRule : csElement.getRules()) {
+			Constraint constraint = PivotUtil.getPivot(Constraint.class, csRule);
+			List<Element> constrainedElements = constraint.getConstrainedElement();
+			constrainedElements.clear();
+			constrainedElements.add(constrainedElement);
+		}
+	}
+
 	@Override
 	public Continuation<?> visitClassifierContextDeclCS(ClassifierContextDeclCS csElement) {
 		CS2Pivot.setElementType(csElement.getPathName(), PivotPackage.Literals.TYPE, csElement, null);
@@ -165,6 +176,7 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 				context.installPivotUsage(csElement, contextClassifier);
 			}
 		}
+		refreshConstrainedElements(csElement, modelClassifier);
 		return null;
 	}
 
@@ -246,6 +258,7 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 		Operation pivotElement = context.refreshModelElement(Operation.class, PivotPackage.Literals.OPERATION, csElement);
 		context.refreshPivotList(Parameter.class, pivotElement.getOwnedParameter(), csElement.getParameters());
 		context.refreshComments(pivotElement, csElement);
+		refreshConstrainedElements(csElement, pivotElement);
 		return null;
 	}
 
@@ -273,6 +286,7 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 		CS2Pivot.setElementType(csElement.getPathName(), PivotPackage.Literals.PROPERTY, csElement, null);
 		Property pivotElement = context.refreshModelElement(Property.class, PivotPackage.Literals.PROPERTY, csElement);
 		context.refreshComments(pivotElement, csElement);
+		refreshConstrainedElements(csElement, pivotElement);
 		return null;
 	}
 }
