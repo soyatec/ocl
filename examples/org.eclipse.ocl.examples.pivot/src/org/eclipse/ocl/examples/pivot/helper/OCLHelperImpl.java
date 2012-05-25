@@ -116,7 +116,7 @@ public class OCLHelperImpl implements OCLHelper
 		return parserContext.parse(expression);
 	}
 	
-	public Property getContextAttribute() {
+	public Property getContextProperty() {
 		return getEnvironment().getContextProperty();
 	}
 	
@@ -143,17 +143,6 @@ public class OCLHelperImpl implements OCLHelper
 	public boolean isValidating() {
 		return validating;
 	}
-	
-	public void setAttributeContext(EClassifier context, EStructuralFeature property) {
-		Type pContext = metaModelManager.getPivotOfEcore(Type.class, context);
-		Property pProperty = metaModelManager.getPivotOfEcore(Property.class, property);
-		setAttributeContext(pContext, pProperty);
-	}
-	
-	public void setAttributeContext(Type context, Property property) {
-        setContext(context);
-		setEnvironment(environmentFactory.createAttributeContext(getEnvironment(), property));
-	}
 
 	public void setContext(EClassifier context) {
 		Type pContext = metaModelManager.getPivotOfEcore(Type.class, context);
@@ -168,9 +157,9 @@ public class OCLHelperImpl implements OCLHelper
 		this.env = env;
 	}
     
-    public void setInstanceAttributeContext(Object instance, Property property) {
+    public void setInstancePropertyContext(Object instance, Property property) {
         setInstanceContext(instance);
-        setEnvironment(environmentFactory.createAttributeContext(getEnvironment(), property));
+        setEnvironment(environmentFactory.createPropertyContext(getEnvironment(), property));
     }
     
     public void setInstanceContext(Object instance) {
@@ -191,6 +180,17 @@ public class OCLHelperImpl implements OCLHelper
 	public void setOperationContext(Type context, Operation operation) {
         setContext(context);
 		setEnvironment(environmentFactory.createOperationContext(getEnvironment(), operation));
+	}
+	
+	public void setPropertyContext(EClassifier context, EStructuralFeature property) {
+		Type pContext = metaModelManager.getPivotOfEcore(Type.class, context);
+		Property pProperty = metaModelManager.getPivotOfEcore(Property.class, property);
+		setPropertyContext(pContext, pProperty);
+	}
+	
+	public void setPropertyContext(Type context, Property property) {
+        setContext(context);
+		setEnvironment(environmentFactory.createPropertyContext(getEnvironment(), property));
 	}
 	
 	void setProblems(Diagnostic problems) {

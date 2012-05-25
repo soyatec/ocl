@@ -22,7 +22,10 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
@@ -236,8 +239,45 @@ public class OCL {
 	 * @return a new helper object
 	 */
     public OCLHelper createOCLHelper() {
-       return new OCLHelperImpl(this);
-    }
+        return new OCLHelperImpl(this);
+     }
+    
+	/**
+	 * Creates a new {@link OCLHelper} instance for convenient parsing of
+	 * embedded constraints and query expressions in the nested environment
+	 * of a specified element which mya be a Type, Operation or Property. The
+	 * helper is particulary useful for parsing constraints embedded in the
+	 * model, in which case the context of a constraint is determined by its
+	 * placement and the textual context declarations are unnecessary.
+	 * 
+	 * @return a new helper object
+	 */
+    public OCLHelper createOCLHelper(EObject element) {
+        OCLHelperImpl helper = new OCLHelperImpl(this);
+        if (element instanceof Type) {
+        	helper.setContext((Type)element);
+        }
+        else if (element instanceof Operation) {
+        	Operation operation = (Operation)element;
+			helper.setOperationContext(operation.getOwningType(), operation);
+        }
+        else if (element instanceof Property) {
+        	Property property = (Property)element;
+			helper.setPropertyContext(property.getOwningType(), property);
+        }
+        else if (element instanceof EClassifier) {
+        	helper.setContext((EClassifier)element);
+        }
+        else if (element instanceof EOperation) {
+        	EOperation operation = (EOperation)element;
+			helper.setOperationContext(operation.getEContainingClass(), operation);
+        }
+        else if (element instanceof EStructuralFeature) {
+        	EStructuralFeature property = (EStructuralFeature)element;
+			helper.setPropertyContext(property.getEContainingClass(), property);
+        }
+		return helper;
+     }
 
 	/**
 	 * Creates a new {@link Query} encapsulating a query expression with the

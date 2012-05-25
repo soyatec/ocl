@@ -165,7 +165,7 @@ public interface EnvironmentFactory {
 	 * 
 	 * @see #createClassifierContext(Environment, Object)
 	 */
-	Environment createAttributeContext(Environment parent, Property property);
+	Environment createPropertyContext(Environment parent, Property property);
 	
 	/**
 	 * Creates a child environment of a specified <code>parent</code>, for

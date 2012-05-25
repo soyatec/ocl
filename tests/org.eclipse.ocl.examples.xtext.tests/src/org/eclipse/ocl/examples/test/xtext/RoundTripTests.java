@@ -38,6 +38,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.uml.Pivot2UML;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
+import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotResource;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot.MessageBinder;
@@ -106,13 +107,13 @@ public class RoundTripTests extends XtextTestCase
 		return xtextResource;
 	}
 	
-	public BaseCSResource createCompleteOCLXtextFromPivot(MetaModelManager metaModelManager, Resource pivotResource, URI xtextURI) throws IOException {
-		XtextResource xtextResource = (XtextResource) resourceSet.createResource(xtextURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
-		((BaseCSResource)xtextResource).updateFrom(pivotResource, metaModelManager);
+	public BaseResource createCompleteOCLXtextFromPivot(MetaModelManager metaModelManager, Resource pivotResource, URI xtextURI) throws IOException {
+		BaseResource xtextResource = (BaseResource) resourceSet.createResource(xtextURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
+		xtextResource.updateFrom(pivotResource, metaModelManager);
 		xtextResource.save(null);
 		assertNoResourceErrors("Conversion failed", xtextResource);
-		assertNoDiagnosticErrors("Concrete Syntax validation failed", xtextResource);
-		return (BaseCSResource) xtextResource;
+		assertNoDiagnosticErrors("Concrete Syntax validation failed", (XtextResource) xtextResource);
+		return xtextResource;
 	}
 	
 	public void doRoundTripFromCompleteOCL(URI inputURI) throws IOException, InterruptedException {
@@ -131,7 +132,7 @@ public class RoundTripTests extends XtextTestCase
 			PivotResource pivotResource1 = createPivotFromXtext(metaModelManager1, xtextResource1, 1);
 			Resource pivotResource2 = CompleteOCLSplitter.separate(metaModelManager1, pivotResource1);
 			@SuppressWarnings("unused")
-			BaseCSResource xtextResource2 = createCompleteOCLXtextFromPivot(metaModelManager1, pivotResource2, outputURI);
+			BaseResource xtextResource2 = createCompleteOCLXtextFromPivot(metaModelManager1, pivotResource2, outputURI);
 			metaModelManager1.dispose();
 			metaModelManager1 = null;
 			//

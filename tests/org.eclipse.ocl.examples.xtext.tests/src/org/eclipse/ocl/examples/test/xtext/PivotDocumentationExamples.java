@@ -26,25 +26,34 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.examples.extlibrary.Book;
 import org.eclipse.emf.examples.extlibrary.BookCategory;
 import org.eclipse.emf.examples.extlibrary.EXTLibraryFactory;
 import org.eclipse.emf.examples.extlibrary.EXTLibraryPackage;
 import org.eclipse.emf.examples.extlibrary.Library;
+import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
 import org.eclipse.ocl.examples.pivot.OCL;
-import org.eclipse.ocl.examples.pivot.OCLInput;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Query;
+import org.eclipse.ocl.examples.pivot.UMLReflection;
+import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
+import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 
 
@@ -59,6 +68,10 @@ public class PivotDocumentationExamples extends XtextTestCase
 		URI uri = getTestModelURI(fileName);
 		URL url = new URL(uri.toString());
 		return url.openStream();
+	}
+	
+	public URI getInputURI(String fileName) throws MalformedURLException, IOException {
+		return getTestModelURI(fileName);
 	}
 	
 	private List<Library> getLibraries() {
@@ -82,10 +95,7 @@ public class PivotDocumentationExamples extends XtextTestCase
 		OCL ocl = OCL.newInstance(new PivotEnvironmentFactory());
 
 		// create an OCL helper object
-		OCLHelper helper = ocl.createOCLHelper();
-
-		// set the OCL context classifier
-		helper.setContext(EXTLibraryPackage.Literals.LIBRARY);
+		OCLHelper helper = ocl.createOCLHelper(EXTLibraryPackage.Literals.LIBRARY);
 
 		ExpressionInOcl invariant = helper.createInvariant(
 		    "books->forAll(b1, b2 | b1 <> b2 implies b1.title <> b2.title)");
@@ -109,7 +119,7 @@ public class PivotDocumentationExamples extends XtextTestCase
 		    "result = self.eAnnotations->any(ann | ann.source = source)");
 
 		// define a derivation constraint for the EReference::eReferenceType property
-		helper.setAttributeContext(
+		helper.setPropertyContext(
 		    EcorePackage.Literals.EREFERENCE,
 		    EcorePackage.Literals.EREFERENCE__EREFERENCE_TYPE);
 		ExpressionInOcl derive = helper.createDerivedValueExpression(
@@ -125,9 +135,7 @@ public class PivotDocumentationExamples extends XtextTestCase
 	 */
 	public void test_evaluatingConstraintsExample() throws IOException, ParserException {
 		OCL ocl = OCL.newInstance(new PivotEnvironmentFactory());
-		OCLHelper helper = ocl.createOCLHelper();
-
-		helper.setContext(EXTLibraryPackage.Literals.LIBRARY);
+		OCLHelper helper = ocl.createOCLHelper(EXTLibraryPackage.Literals.LIBRARY);
 		ExpressionInOcl invariant = helper.createInvariant(
 		    "books->forAll(b1, b2 | b1 <> b2 implies b1.title <> b2.title)");
 		ExpressionInOcl query = helper.createQuery(
@@ -174,7 +182,7 @@ public class PivotDocumentationExamples extends XtextTestCase
 	/*
 	 * This 'test' provides the source text for the 'Parsing OCL Document' example
 	 * in org.eclipse.ocl.doc/doc/5120-parsing-documents.textile
-	 *
+	 */
 	public void test_parsingDocumentsExample() throws IOException, ParserException {
 		//-------------------------------------------------------------------------
 		//	The OCL Input
@@ -185,45 +193,78 @@ public class PivotDocumentationExamples extends XtextTestCase
 		OCL ocl = OCL.newInstance(environmentFactory);
 
 		// get an OCL text file via some hypothetical API
-		InputStream in = getInputStream("/model/parsingDocumentsExample.ocl");
+//		InputStream in = getInputStream("/model/parsingDocumentsExample.ocl");
 
-		Map<String, Constraint> constraintMap = new HashMap<String, Constraint>();
+		URI uri = getInputURI("/model/parsingDocumentsExample.ocl");
+		ResourceSet externalResourceSet = ocl.getMetaModelManager().getExternalResourceSet();
+		BaseResource csResource = (BaseResource) externalResourceSet.getResource(uri, true);
+		Resource pivotResource = ocl.cs2pivot(csResource);
+		Map<String, ExpressionInOcl> constraintMap = new HashMap<String, ExpressionInOcl>();
 
 		// parse the contents as an OCL document
 		try {
-		    OCLInput document = new OCLInput(in);
+//		    OCLInput document = new OCLInput(in);
 		    
-		    List<Constraint> constraints = ocl.parse(document);
-		    for (Constraint next : constraints) {
-		        constraintMap.put(next.getName(), next);
-		        
-		        OclExpression body = next.getSpecification().getBodyExpression();
-		        System.out.printf("%s: %s%n", next.getName(), body);
+//		    List<Constraint> constraints = ocl.parse(document);
+		    for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
+		    	EObject next = tit.next();
+		    	if (next instanceof Constraint) {
+			        Constraint constraint = (Constraint)next;
+					String stereotype = constraint.getStereotype();
+					if (UMLReflection.INVARIANT.equals(stereotype)) {
+				        ValueSpecification specification = constraint.getSpecification();
+				        ExpressionInOcl expressionInOcl = null;
+				        if (specification instanceof ExpressionInOcl) {
+							expressionInOcl = (ExpressionInOcl)specification;
+						}
+						else if (specification instanceof OpaqueExpression){
+							OpaqueExpression opaqueExpression = (OpaqueExpression)specification;
+							String expression = PivotUtil.getBody(opaqueExpression);
+					        Element constrainedElement = constraint.getConstrainedElement().get(0);
+							OCLHelper helper = ocl.createOCLHelper(constrainedElement);
+							expressionInOcl = helper.createInvariant(expression);
+	/*						List<String> languages = opaqueExpression.getLanguage();
+							List<String> bodies = opaqueExpression.getBody();
+							int iMax = Math.min(languages.size(), bodies.size());
+							System.out.printf("%s: %s%n", constraint.getName());
+							for (int i = 0; i < iMax; i++) {
+								System.out.printf("    %s: %s%n", languages.get(i), bodies.get(i));
+							} */
+						}
+				        if (expressionInOcl != null) {
+							String name = constraint.getName();
+							if (name != null) {
+								constraintMap.put(name, expressionInOcl);
+						        System.out.printf("%s: %s%n", name, expressionInOcl.getBodyExpression());
+							}
+						}
+					}
+		    	}
 		    }
 		} finally {
-		    in.close();
+//		    in.close();
 		}
 		//-------------------------------------------------------------------------
 		//	Accessing the Constraints
 		//-------------------------------------------------------------------------
 		Library library = getLibrary();  // get library from a hypothetical source
 
-		OCLHelper helper = ocl.createOCLHelper();
+		OCLHelper helper = ocl.createOCLHelper(EXTLibraryPackage.Literals.LIBRARY);
 
 		// use the constraints defined in the OCL document
 
 		// use the getBooks() additional operation to find a book
-		helper.setContext(EXTLibraryPackage.Literals.LIBRARY);
 		ExpressionInOcl query = helper.createQuery(
 		    "getBooks('Bleak House')->asSequence()->first()");
 
-		Book book = (Book) ocl.evaluate(library, query);
+		Value bookValue = ocl.evaluate(library, query);
+		Book book = (Book) bookValue.asObject();
 		System.out.printf("Got book: %s%n", book);
 
 		// use the unique_title constraint to validate the book
-		System.out.printf("Validate book: %b%n",
-		    ocl.check(book, constraintMap.get("unique_title")));	
-	} */
+		boolean isValid = ocl.check(book, constraintMap.get("unique_title"));
+		System.out.printf("Validate book: %b%n", isValid);	
+	}
 	
 /*	private class MyOppositeEndFinder extends DefaultOppositeEndFinder {
 		public MyOppositeEndFinder() {

@@ -148,7 +148,7 @@ public abstract class AbstractEnvironmentFactory implements EnvironmentFactory, 
 	
     // implements the interface method
 	public Environment
-	createAttributeContext(
+	createPropertyContext(
 			Environment parent,
 			Property property) {
 		

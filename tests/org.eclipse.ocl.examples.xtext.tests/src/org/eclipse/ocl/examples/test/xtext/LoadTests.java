@@ -55,7 +55,8 @@ import org.eclipse.uml2.uml.UMLPackage;
 public class LoadTests extends XtextTestCase
 {	
 	protected MetaModelManager metaModelManager = null;
-	CS2PivotResourceAdapter cs2PivotAdapter = null;
+//	CS2PivotResourceAdapter cs2PivotAdapter = null;
+	protected BaseCSResource xtextResource = null;
 
 	public void checkMonikers(Resource resource) {
 		Map<String, NamedElementCS> sigMap = new HashMap<String, NamedElementCS>();
@@ -248,10 +249,9 @@ public class LoadTests extends XtextTestCase
 		URI cstURI = getProjectFileURI(cstName);
 		URI pivotURI = getProjectFileURI(pivotName);
 		URI savedURI = getProjectFileURI(savedName);
-		BaseCSResource xtextResource = (BaseCSResource) resourceSet.getResource(inputURI, true);
+		xtextResource = (BaseCSResource) resourceSet.getResource(inputURI, true);
 		assertNoResourceErrors("Load failed", xtextResource);
-		cs2PivotAdapter = CS2PivotResourceAdapter.getAdapter(xtextResource, null);
-		Resource pivotResource = cs2PivotAdapter.getPivotResource(xtextResource);
+		Resource pivotResource = xtextResource.getPivotResource(null);
 		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 //		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
 //FIXME		assertNoValidationErrors("Validation errors", xtextResource.getContents().get(0));
@@ -329,10 +329,14 @@ public class LoadTests extends XtextTestCase
 
 	@Override
 	protected void tearDown() throws Exception {
-		if (cs2PivotAdapter != null) {
-			cs2PivotAdapter.dispose();
-			cs2PivotAdapter.getMetaModelManager().dispose();
-			cs2PivotAdapter = null;
+		if (xtextResource != null) {
+			CS2PivotResourceAdapter cs2PivotAdapter = CS2PivotResourceAdapter.findAdapter(xtextResource);
+			if (cs2PivotAdapter != null) {
+				cs2PivotAdapter.dispose();
+				cs2PivotAdapter.getMetaModelManager().dispose();
+				cs2PivotAdapter = null;
+			}
+			xtextResource = null;
 		}
 		MetaModelManagerResourceSetAdapter adapter = MetaModelManagerResourceSetAdapter.findAdapter(resourceSet);
 		if (adapter != null) {

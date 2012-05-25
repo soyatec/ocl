@@ -67,7 +67,7 @@ public interface OCLHelper
 	 * @param context the OCL context classifier
 	 * 
 	 * @see #setOperationContext(Object, Object)
-     * @see #setAttributeContext(Object, Object)
+     * @see #setPropertyContext(Object, Object)
 	 */
 	void setContext(EClassifier context);
 
@@ -78,7 +78,7 @@ public interface OCLHelper
 	 * @param context the OCL context classifier
 	 * 
 	 * @see #setOperationContext(Object, Object)
-     * @see #setAttributeContext(Object, Object)
+     * @see #setPropertyContext(Object, Object)
 	 */
 	void setContext(Type context);
 
@@ -137,7 +137,7 @@ public interface OCLHelper
 	 * 
 	 * @see #setContext(Object)
 	 */
-	void setAttributeContext(Type context, Property property);
+	void setPropertyContext(Type context, Property property);
 	
 	/**
 	 * Sets the attribute context of the OCL expression for which syntax or
@@ -151,7 +151,7 @@ public interface OCLHelper
 	 * 
 	 * @see #setContext(Object)
 	 */
-	void setAttributeContext(EClassifier context, EStructuralFeature property);
+	void setPropertyContext(EClassifier context, EStructuralFeature property);
 
 	/**
 	 * Obtains my context attribute, if my environment is an attribute context.
@@ -159,7 +159,7 @@ public interface OCLHelper
 	 * @return my context attribute, or <code>null</code> if there is only a
 	 *     classifier or operation context
 	 */
-	Property getContextAttribute();
+	Property getContextProperty();
     
     /**
      * Sets the classifier context implied by the specified instance.  The
@@ -204,9 +204,9 @@ public interface OCLHelper
      * @param instance the OCL context instance
      * @param property the OCL context attribute
      * 
-     * @see #setAttributeContext(Object, Object)
+     * @see #setPropertyContext(Object, Object)
      */
-    void setInstanceAttributeContext(Object instance, Property property);
+    void setInstancePropertyContext(Object instance, Property property);
 	
     /**
      * Obtains the OCL instance that created me.  Note that many of the generic
@@ -221,7 +221,7 @@ public interface OCLHelper
      * Obtains the environment defining my current
      * {@linkplain #getContextClassifier() classifier},
      * {@linkplain #getContextOperation() operation}, or
-     * {@linkplain #getContextAttribute() attribute} context.  Accessing the
+     * {@linkplain #getContextProperty() attribute} context.  Accessing the
      * environment is convenient for, e.g., adding variable definitions to
      * insert global objects into the OCL context.
      * 
@@ -230,7 +230,7 @@ public interface OCLHelper
      * 
      * @see #setContext(Object)
      * @see #setOperationContext(Object, Object)
-     * @see #setAttributeContext(Object, Object)
+     * @see #setPropertyContext(Object, Object)
      */
     Environment getEnvironment();
     
@@ -359,7 +359,7 @@ public interface OCLHelper
 	 * @throws ParserException if the <code>expression</code> fails to parse
 	 *    or is not valid for my context property
 	 * 
-	 * @see #setAttributeContext(Object, Object)
+	 * @see #setPropertyContext(Object, Object)
 	 */
 //	Constraint createInitialValueExpression(String expression) throws ParserException;
 
@@ -375,7 +375,7 @@ public interface OCLHelper
 	 * @throws ParserException if the <code>expression</code> fails to parse
 	 *    or is not valid for my context property
 	 * 
-	 * @see #setAttributeContext(Object, Object)
+	 * @see #setPropertyContext(Object, Object)
 	 */
 	ExpressionInOcl createDerivedValueExpression(String expression) throws ParserException;
 
@@ -409,7 +409,7 @@ public interface OCLHelper
 	 * 
 	 * @throws ParserException if the <code>expression</code> fails to parse
 	 */
-//	Property defineAttribute(String defExpression) throws ParserException;
+//	Property defineProperty(String defExpression) throws ParserException;
     
     /**
      * Obtains problems, if any, found in parsing the last OCL constraint or
