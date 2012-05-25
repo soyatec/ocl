@@ -12,7 +12,7 @@
  *
  * </copyright>
  *
- * $Id: ImplicitCompositionProperty.java,v 1.1 2011/04/27 06:19:59 ewillink Exp $
+ * $Id: ExplicitNavigationProperty.java,v 1.2 2011/05/07 16:41:20 ewillink Exp $
  */
 package org.eclipse.ocl.examples.pivot.library;
 
@@ -26,22 +26,24 @@ import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
- * The static instance of ImplicitCompositionProperty supports evaluation of
- * implicit properties for opposites of composition relationships.
+ * The static instance of CompositionProperty supports evaluation of
+ * a property call that navigates a relationship to a container.
  */
-public class ImplicitCompositionProperty extends AbstractProperty
+public class CompositionProperty extends AbstractProperty
 {
-	public static final ImplicitCompositionProperty INSTANCE = new ImplicitCompositionProperty();
+	public static final CompositionProperty INSTANCE = new CompositionProperty();
 
 	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceValue, DomainProperty property) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		EObject thisObject = (EObject) sourceValue.asObject();
-		Object thatObject = thisObject.eContainer();
-		if (thatObject != null) {
-			return valueFactory.valueOf(thatObject);
-		}
-		else {
+		EObject eObject = sourceValue.asNavigableObject(); 
+		Object eValue = eObject.eContainer();
+		if (eValue == null) {
 			return valueFactory.getNull();
 		}
+		else {
+	//		EReference eContainmentFeature = eObject.eContainmentFeature();
+			return valueFactory.valueOf(eValue /*, eContainmentFeature.getEContainingClass()*/);
+		}
+		// ??? Type conformance check
 	}
 }

@@ -29,11 +29,10 @@ import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
+import org.eclipse.ocl.examples.pivot.library.CompositionProperty;
 import org.eclipse.ocl.examples.pivot.library.ConstrainedOperation;
 import org.eclipse.ocl.examples.pivot.library.ConstrainedProperty;
-import org.eclipse.ocl.examples.pivot.library.ExplicitCompositionProperty;
 import org.eclipse.ocl.examples.pivot.library.ExplicitNavigationProperty;
-import org.eclipse.ocl.examples.pivot.library.ImplicitCompositionProperty;
 import org.eclipse.ocl.examples.pivot.library.ImplicitNonCompositionProperty;
 import org.eclipse.ocl.examples.pivot.library.TuplePartProperty;
 import org.eclipse.ocl.examples.pivot.library.UnimplementedOperation;
@@ -120,26 +119,18 @@ public class ImplementationManager
 				}
 			}
 		}
+		Property opposite = property.getOpposite();
+		if ((opposite != null) && opposite.isComposite()) {
+			return CompositionProperty.INSTANCE;
+		}
 		if (property.isImplicit()) {
-			Property opposite = property.getOpposite();
-			if ((opposite != null) && opposite.isComposite()) {
-				return ImplicitCompositionProperty.INSTANCE;
-			}
-			else {
-				return ImplicitNonCompositionProperty.INSTANCE;
-			}
+			return ImplicitNonCompositionProperty.INSTANCE;
 		}
 		else if (property.getOwningType() instanceof TupleType) {
 			return TuplePartProperty.INSTANCE;
 		}
 		else {
-			Property opposite = property.getOpposite();
-			if ((opposite != null) && opposite.isComposite()) {
-				return ExplicitCompositionProperty.INSTANCE;
-			}
-			else {
-				return ExplicitNavigationProperty.INSTANCE;
-			}
+			return ExplicitNavigationProperty.INSTANCE;
 		}
 	}
 	
