@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.library.ConstrainedOperation;
 import org.eclipse.ocl.examples.pivot.library.ConstrainedProperty;
+import org.eclipse.ocl.examples.pivot.library.ExplicitCompositionProperty;
 import org.eclipse.ocl.examples.pivot.library.ExplicitNavigationProperty;
 import org.eclipse.ocl.examples.pivot.library.ImplicitCompositionProperty;
 import org.eclipse.ocl.examples.pivot.library.ImplicitNonCompositionProperty;
@@ -95,8 +96,24 @@ public class ImplementationManager
 				return loadImplementation(property);
 			}
 		}
+		//
+		// An initial 'OCL expression is evaluated at the creation time of the instance' so
+		// if there is an initial constraint do lazy creation evaluation.
+		//
 		for (Constraint constraint : metaModelManager.getLocalConstraints(property)) {
-			if (UMLReflection.BODY.equals(constraint.getStereotype())) {
+			if (UMLReflection.INITIAL.equals(constraint.getStereotype())) {
+				ValueSpecification specification = constraint.getSpecification();
+				if (specification instanceof ExpressionInOcl) {
+					return new ConstrainedProperty((ExpressionInOcl) specification);
+				}
+			}
+		}
+		//
+		// 'A derived value expression is an invariant' so perhaps we'd better evaluate
+		// it to support the lazy practice of using derivation as initial.
+		//
+		for (Constraint constraint : metaModelManager.getLocalConstraints(property)) {
+			if (UMLReflection.DERIVATION.equals(constraint.getStereotype())) {
 				ValueSpecification specification = constraint.getSpecification();
 				if (specification instanceof ExpressionInOcl) {
 					return new ConstrainedProperty((ExpressionInOcl) specification);
@@ -105,7 +122,7 @@ public class ImplementationManager
 		}
 		if (property.isImplicit()) {
 			Property opposite = property.getOpposite();
-			if (opposite.isComposite()) {
+			if ((opposite != null) && opposite.isComposite()) {
 				return ImplicitCompositionProperty.INSTANCE;
 			}
 			else {
@@ -116,7 +133,13 @@ public class ImplementationManager
 			return TuplePartProperty.INSTANCE;
 		}
 		else {
-			return ExplicitNavigationProperty.INSTANCE;
+			Property opposite = property.getOpposite();
+			if ((opposite != null) && opposite.isComposite()) {
+				return ExplicitCompositionProperty.INSTANCE;
+			}
+			else {
+				return ExplicitNavigationProperty.INSTANCE;
+			}
 		}
 	}
 	

@@ -2100,7 +2100,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	 * Create implicit an opposite property if there is no explicit opposite.
 	 */
 	public void installPropertyDeclaration(Property thisProperty) {
-		if (thisProperty.isTransient() || thisProperty.isVolatile()) {
+		if ((thisProperty.isTransient() || thisProperty.isVolatile()) && !thisProperty.isDerived()) {		// FIXME Are any exclusions justified?
 			return;
 		}
 		Property opposite = thisProperty.getOpposite();
