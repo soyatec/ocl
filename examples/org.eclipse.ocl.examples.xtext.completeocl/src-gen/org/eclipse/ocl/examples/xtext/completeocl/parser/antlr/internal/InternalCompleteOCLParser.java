@@ -5685,7 +5685,7 @@ public class InternalCompleteOCLParser extends AbstractInternalAntlrParser {
                     if ( state.backtracking==0 ) {
 
                               current = forceCreateModelElement(
-                                  grammarAccess.getNavigatingArgExpCSAccess().getOclMessageArgCSAction_0_0(),
+                                  grammarAccess.getNavigatingArgExpCSAccess().getOCLMessageArgCSAction_0_0(),
                                   current);
                           
                     }

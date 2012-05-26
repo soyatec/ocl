@@ -88,9 +88,9 @@ public class MarkupFactoryImpl extends EFactoryImpl implements MarkupFactory {
 			case MarkupPackage.MARKUP_ELEMENT: return createMarkupElement();
 			case MarkupPackage.NEW_LINE_ELEMENT: return createNewLineElement();
 			case MarkupPackage.NULL_ELEMENT: return createNullElement();
-			case MarkupPackage.OCL_CODE_ELEMENT: return createOclCodeElement();
-			case MarkupPackage.OCL_EVAL_ELEMENT: return createOclEvalElement();
-			case MarkupPackage.OCL_TEXT_ELEMENT: return createOclTextElement();
+			case MarkupPackage.OCL_CODE_ELEMENT: return createOCLCodeElement();
+			case MarkupPackage.OCL_EVAL_ELEMENT: return createOCLEvalElement();
+			case MarkupPackage.OCL_TEXT_ELEMENT: return createOCLTextElement();
 			case MarkupPackage.TEXT_ELEMENT: return createTextElement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -212,8 +212,8 @@ public class MarkupFactoryImpl extends EFactoryImpl implements MarkupFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclCodeElement createOclCodeElement() {
-		OclCodeElementImpl oclCodeElement = new OclCodeElementImpl();
+	public OCLCodeElement createOCLCodeElement() {
+		OCLCodeElementImpl oclCodeElement = new OCLCodeElementImpl();
 		return oclCodeElement;
 	}
 
@@ -222,8 +222,8 @@ public class MarkupFactoryImpl extends EFactoryImpl implements MarkupFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclEvalElement createOclEvalElement() {
-		OclEvalElementImpl oclEvalElement = new OclEvalElementImpl();
+	public OCLEvalElement createOCLEvalElement() {
+		OCLEvalElementImpl oclEvalElement = new OCLEvalElementImpl();
 		return oclEvalElement;
 	}
 
@@ -232,8 +232,8 @@ public class MarkupFactoryImpl extends EFactoryImpl implements MarkupFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclTextElement createOclTextElement() {
-		OclTextElementImpl oclTextElement = new OclTextElementImpl();
+	public OCLTextElement createOCLTextElement() {
+		OCLTextElementImpl oclTextElement = new OCLTextElementImpl();
 		return oclTextElement;
 	}
 

@@ -33,7 +33,7 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DerCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.IncludeCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InitCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InvCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OclMessageArgCS;
+import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PackageDeclarationCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PostCS;
@@ -99,7 +99,7 @@ public class CompleteOCLCSTFactoryImpl extends EFactoryImpl implements CompleteO
 			case CompleteOCLCSTPackage.INCLUDE_CS: return createIncludeCS();
 			case CompleteOCLCSTPackage.INIT_CS: return createInitCS();
 			case CompleteOCLCSTPackage.INV_CS: return createInvCS();
-			case CompleteOCLCSTPackage.OCL_MESSAGE_ARG_CS: return createOclMessageArgCS();
+			case CompleteOCLCSTPackage.OCL_MESSAGE_ARG_CS: return createOCLMessageArgCS();
 			case CompleteOCLCSTPackage.OPERATION_CONTEXT_DECL_CS: return createOperationContextDeclCS();
 			case CompleteOCLCSTPackage.PACKAGE_DECLARATION_CS: return createPackageDeclarationCS();
 			case CompleteOCLCSTPackage.POST_CS: return createPostCS();
@@ -207,6 +207,17 @@ public class CompleteOCLCSTFactoryImpl extends EFactoryImpl implements CompleteO
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public OCLMessageArgCS createOCLMessageArgCS()
+	{
+		OCLMessageArgCSImpl oclMessageArgCS = new OCLMessageArgCSImpl();
+		return oclMessageArgCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public DefCS createDefCS() {
 		DefCSImpl defCS = new DefCSImpl();
 		return defCS;
@@ -272,16 +283,6 @@ public class CompleteOCLCSTFactoryImpl extends EFactoryImpl implements CompleteO
 	public BodyCS createBodyCS() {
 		BodyCSImpl bodyCS = new BodyCSImpl();
 		return bodyCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public OclMessageArgCS createOclMessageArgCS() {
-		OclMessageArgCSImpl oclMessageArgCS = new OclMessageArgCSImpl();
-		return oclMessageArgCS;
 	}
 
 	/**

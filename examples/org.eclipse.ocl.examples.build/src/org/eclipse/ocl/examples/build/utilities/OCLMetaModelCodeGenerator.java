@@ -11,8 +11,6 @@
  *     E.D.Willink - initial API and implementation
  *
  * </copyright>
- *
- * $Id: OclMetaModelCodeGenerator.java,v 1.3 2011/05/20 15:27:03 ewillink Exp $
  */
 package org.eclipse.ocl.examples.build.utilities;
 
@@ -30,7 +28,7 @@ import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
-import org.eclipse.ocl.examples.build.acceleo.GenerateOclMetaModel;
+import org.eclipse.ocl.examples.build.acceleo.GenerateOCLMetaModel;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.ocl.examples.pivot.Package;
@@ -45,7 +43,7 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
  * Generates the javaFolder/'javaPackageName'/javaClassName.java file providing
  * a static Java-creation of the libraryFile OCL standard library definition.
  */
-public class OclMetaModelCodeGenerator extends AbstractWorkflowComponent
+public class OCLMetaModelCodeGenerator extends AbstractWorkflowComponent
 {
 	private Logger log = Logger.getLogger(getClass());	
 	private ResourceSet resourceSet = null;	
@@ -55,7 +53,7 @@ public class OclMetaModelCodeGenerator extends AbstractWorkflowComponent
 	protected String javaPackageName;
 	protected String libraryFile;
 
-	public OclMetaModelCodeGenerator() {
+	public OCLMetaModelCodeGenerator() {
 		OCLstdlibStandaloneSetup.doSetup();
 	}
 
@@ -117,7 +115,7 @@ public class OclMetaModelCodeGenerator extends AbstractWorkflowComponent
 //			if (orphanage != null) {
 //				((org.eclipse.ocl.examples.pivot.Package)pivotModel).getNestedPackage().add(orphanage);
 //			}
-			GenerateOclMetaModel acceleo = new GenerateOclMetaModel(pivotPackage, outputFolder, arguments);
+			GenerateOCLMetaModel acceleo = new GenerateOCLMetaModel(pivotPackage, outputFolder, arguments);
 			log.info("Generating to ' " + outputFolder + "'");
 			acceleo.generate(null);
 		} catch (IOException e) {

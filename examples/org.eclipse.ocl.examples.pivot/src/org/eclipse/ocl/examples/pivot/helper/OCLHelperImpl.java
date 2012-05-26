@@ -35,11 +35,11 @@ import org.eclipse.ocl.examples.pivot.context.OperationContext;
 import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.context.PropertyContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.model.OclMetaModel;
+import org.eclipse.ocl.examples.pivot.model.OCLMetaModel;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironment;
 
 /**
- * Implementation of the {@link OclMetaModel.Helper} convenience interface.
+ * Implementation of the {@link OCLMetaModel.Helper} convenience interface.
  */
 public class OCLHelperImpl implements OCLHelper
 {

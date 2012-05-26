@@ -1044,25 +1044,25 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "ruleNullElement"
 
 
-    // $ANTLR start "entryRuleOclCodeElement"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:369:1: entryRuleOclCodeElement : ruleOclCodeElement EOF ;
-    public final void entryRuleOclCodeElement() throws RecognitionException {
+    // $ANTLR start "entryRuleOCLCodeElement"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:369:1: entryRuleOCLCodeElement : ruleOCLCodeElement EOF ;
+    public final void entryRuleOCLCodeElement() throws RecognitionException {
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:370:1: ( ruleOclCodeElement EOF )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:371:1: ruleOclCodeElement EOF
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:370:1: ( ruleOCLCodeElement EOF )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:371:1: ruleOCLCodeElement EOF
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclCodeElementRule()); 
+               before(grammarAccess.getOCLCodeElementRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleOclCodeElement_in_entryRuleOclCodeElement728);
-            ruleOclCodeElement();
+            pushFollow(FollowSets000.FOLLOW_ruleOCLCodeElement_in_entryRuleOCLCodeElement728);
+            ruleOCLCodeElement();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclCodeElementRule()); 
+               after(grammarAccess.getOCLCodeElementRule()); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOclCodeElement735); if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOCLCodeElement735); if (state.failed) return ;
 
             }
 
@@ -1075,30 +1075,30 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleOclCodeElement"
+    // $ANTLR end "entryRuleOCLCodeElement"
 
 
-    // $ANTLR start "ruleOclCodeElement"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:378:1: ruleOclCodeElement : ( ( rule__OclCodeElement__Group__0 ) ) ;
-    public final void ruleOclCodeElement() throws RecognitionException {
+    // $ANTLR start "ruleOCLCodeElement"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:378:1: ruleOCLCodeElement : ( ( rule__OCLCodeElement__Group__0 ) ) ;
+    public final void ruleOCLCodeElement() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:382:2: ( ( ( rule__OclCodeElement__Group__0 ) ) )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:383:1: ( ( rule__OclCodeElement__Group__0 ) )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:382:2: ( ( ( rule__OCLCodeElement__Group__0 ) ) )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:383:1: ( ( rule__OCLCodeElement__Group__0 ) )
             {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:383:1: ( ( rule__OclCodeElement__Group__0 ) )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:384:1: ( rule__OclCodeElement__Group__0 )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:383:1: ( ( rule__OCLCodeElement__Group__0 ) )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:384:1: ( rule__OCLCodeElement__Group__0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclCodeElementAccess().getGroup()); 
+               before(grammarAccess.getOCLCodeElementAccess().getGroup()); 
             }
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:385:1: ( rule__OclCodeElement__Group__0 )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:385:2: rule__OclCodeElement__Group__0
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:385:1: ( rule__OCLCodeElement__Group__0 )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:385:2: rule__OCLCodeElement__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__OclCodeElement__Group__0_in_ruleOclCodeElement761);
-            rule__OclCodeElement__Group__0();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLCodeElement__Group__0_in_ruleOCLCodeElement761);
+            rule__OCLCodeElement__Group__0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -1106,7 +1106,7 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclCodeElementAccess().getGroup()); 
+               after(grammarAccess.getOCLCodeElementAccess().getGroup()); 
             }
 
             }
@@ -1126,28 +1126,28 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "ruleOclCodeElement"
+    // $ANTLR end "ruleOCLCodeElement"
 
 
-    // $ANTLR start "entryRuleOclEvalElement"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:397:1: entryRuleOclEvalElement : ruleOclEvalElement EOF ;
-    public final void entryRuleOclEvalElement() throws RecognitionException {
+    // $ANTLR start "entryRuleOCLEvalElement"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:397:1: entryRuleOCLEvalElement : ruleOCLEvalElement EOF ;
+    public final void entryRuleOCLEvalElement() throws RecognitionException {
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:398:1: ( ruleOclEvalElement EOF )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:399:1: ruleOclEvalElement EOF
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:398:1: ( ruleOCLEvalElement EOF )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:399:1: ruleOCLEvalElement EOF
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclEvalElementRule()); 
+               before(grammarAccess.getOCLEvalElementRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleOclEvalElement_in_entryRuleOclEvalElement788);
-            ruleOclEvalElement();
+            pushFollow(FollowSets000.FOLLOW_ruleOCLEvalElement_in_entryRuleOCLEvalElement788);
+            ruleOCLEvalElement();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclEvalElementRule()); 
+               after(grammarAccess.getOCLEvalElementRule()); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOclEvalElement795); if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOCLEvalElement795); if (state.failed) return ;
 
             }
 
@@ -1160,30 +1160,30 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleOclEvalElement"
+    // $ANTLR end "entryRuleOCLEvalElement"
 
 
-    // $ANTLR start "ruleOclEvalElement"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:406:1: ruleOclEvalElement : ( ( rule__OclEvalElement__Group__0 ) ) ;
-    public final void ruleOclEvalElement() throws RecognitionException {
+    // $ANTLR start "ruleOCLEvalElement"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:406:1: ruleOCLEvalElement : ( ( rule__OCLEvalElement__Group__0 ) ) ;
+    public final void ruleOCLEvalElement() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:410:2: ( ( ( rule__OclEvalElement__Group__0 ) ) )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:411:1: ( ( rule__OclEvalElement__Group__0 ) )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:410:2: ( ( ( rule__OCLEvalElement__Group__0 ) ) )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:411:1: ( ( rule__OCLEvalElement__Group__0 ) )
             {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:411:1: ( ( rule__OclEvalElement__Group__0 ) )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:412:1: ( rule__OclEvalElement__Group__0 )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:411:1: ( ( rule__OCLEvalElement__Group__0 ) )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:412:1: ( rule__OCLEvalElement__Group__0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclEvalElementAccess().getGroup()); 
+               before(grammarAccess.getOCLEvalElementAccess().getGroup()); 
             }
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:413:1: ( rule__OclEvalElement__Group__0 )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:413:2: rule__OclEvalElement__Group__0
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:413:1: ( rule__OCLEvalElement__Group__0 )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:413:2: rule__OCLEvalElement__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__OclEvalElement__Group__0_in_ruleOclEvalElement821);
-            rule__OclEvalElement__Group__0();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLEvalElement__Group__0_in_ruleOCLEvalElement821);
+            rule__OCLEvalElement__Group__0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -1191,7 +1191,7 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclEvalElementAccess().getGroup()); 
+               after(grammarAccess.getOCLEvalElementAccess().getGroup()); 
             }
 
             }
@@ -1211,28 +1211,28 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "ruleOclEvalElement"
+    // $ANTLR end "ruleOCLEvalElement"
 
 
-    // $ANTLR start "entryRuleOclTextElement"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:425:1: entryRuleOclTextElement : ruleOclTextElement EOF ;
-    public final void entryRuleOclTextElement() throws RecognitionException {
+    // $ANTLR start "entryRuleOCLTextElement"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:425:1: entryRuleOCLTextElement : ruleOCLTextElement EOF ;
+    public final void entryRuleOCLTextElement() throws RecognitionException {
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:426:1: ( ruleOclTextElement EOF )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:427:1: ruleOclTextElement EOF
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:426:1: ( ruleOCLTextElement EOF )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:427:1: ruleOCLTextElement EOF
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclTextElementRule()); 
+               before(grammarAccess.getOCLTextElementRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleOclTextElement_in_entryRuleOclTextElement848);
-            ruleOclTextElement();
+            pushFollow(FollowSets000.FOLLOW_ruleOCLTextElement_in_entryRuleOCLTextElement848);
+            ruleOCLTextElement();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclTextElementRule()); 
+               after(grammarAccess.getOCLTextElementRule()); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOclTextElement855); if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOCLTextElement855); if (state.failed) return ;
 
             }
 
@@ -1245,30 +1245,30 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleOclTextElement"
+    // $ANTLR end "entryRuleOCLTextElement"
 
 
-    // $ANTLR start "ruleOclTextElement"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:434:1: ruleOclTextElement : ( ( rule__OclTextElement__Group__0 ) ) ;
-    public final void ruleOclTextElement() throws RecognitionException {
+    // $ANTLR start "ruleOCLTextElement"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:434:1: ruleOCLTextElement : ( ( rule__OCLTextElement__Group__0 ) ) ;
+    public final void ruleOCLTextElement() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:438:2: ( ( ( rule__OclTextElement__Group__0 ) ) )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:439:1: ( ( rule__OclTextElement__Group__0 ) )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:438:2: ( ( ( rule__OCLTextElement__Group__0 ) ) )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:439:1: ( ( rule__OCLTextElement__Group__0 ) )
             {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:439:1: ( ( rule__OclTextElement__Group__0 ) )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:440:1: ( rule__OclTextElement__Group__0 )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:439:1: ( ( rule__OCLTextElement__Group__0 ) )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:440:1: ( rule__OCLTextElement__Group__0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclTextElementAccess().getGroup()); 
+               before(grammarAccess.getOCLTextElementAccess().getGroup()); 
             }
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:441:1: ( rule__OclTextElement__Group__0 )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:441:2: rule__OclTextElement__Group__0
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:441:1: ( rule__OCLTextElement__Group__0 )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:441:2: rule__OCLTextElement__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__OclTextElement__Group__0_in_ruleOclTextElement881);
-            rule__OclTextElement__Group__0();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLTextElement__Group__0_in_ruleOCLTextElement881);
+            rule__OCLTextElement__Group__0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -1276,7 +1276,7 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclTextElementAccess().getGroup()); 
+               after(grammarAccess.getOCLTextElementAccess().getGroup()); 
             }
 
             }
@@ -1296,7 +1296,7 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "ruleOclTextElement"
+    // $ANTLR end "ruleOCLTextElement"
 
 
     // $ANTLR start "entryRuleTextElement"
@@ -1661,13 +1661,13 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MarkupElement__Alternatives"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:571:1: rule__MarkupElement__Alternatives : ( ( ruleFontElement ) | ( ruleNewLineElement ) | ( ruleBulletElement ) | ( ruleFigureElement ) | ( ruleFigureRefElement ) | ( ruleFootnoteElement ) | ( ruleHeadingElement ) | ( ruleNullElement ) | ( ruleOclCodeElement ) | ( ruleOclEvalElement ) | ( ruleOclTextElement ) | ( ruleTextElement ) );
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:571:1: rule__MarkupElement__Alternatives : ( ( ruleFontElement ) | ( ruleNewLineElement ) | ( ruleBulletElement ) | ( ruleFigureElement ) | ( ruleFigureRefElement ) | ( ruleFootnoteElement ) | ( ruleHeadingElement ) | ( ruleNullElement ) | ( ruleOCLCodeElement ) | ( ruleOCLEvalElement ) | ( ruleOCLTextElement ) | ( ruleTextElement ) );
     public final void rule__MarkupElement__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:575:1: ( ( ruleFontElement ) | ( ruleNewLineElement ) | ( ruleBulletElement ) | ( ruleFigureElement ) | ( ruleFigureRefElement ) | ( ruleFootnoteElement ) | ( ruleHeadingElement ) | ( ruleNullElement ) | ( ruleOclCodeElement ) | ( ruleOclEvalElement ) | ( ruleOclTextElement ) | ( ruleTextElement ) )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:575:1: ( ( ruleFontElement ) | ( ruleNewLineElement ) | ( ruleBulletElement ) | ( ruleFigureElement ) | ( ruleFigureRefElement ) | ( ruleFootnoteElement ) | ( ruleHeadingElement ) | ( ruleNullElement ) | ( ruleOCLCodeElement ) | ( ruleOCLEvalElement ) | ( ruleOCLTextElement ) | ( ruleTextElement ) )
             int alt3=12;
             alt3 = dfa3.predict(input);
             switch (alt3) {
@@ -1856,21 +1856,21 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 9 :
-                    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:624:6: ( ruleOclCodeElement )
+                    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:624:6: ( ruleOCLCodeElement )
                     {
-                    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:624:6: ( ruleOclCodeElement )
-                    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:625:1: ruleOclCodeElement
+                    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:624:6: ( ruleOCLCodeElement )
+                    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:625:1: ruleOCLCodeElement
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getMarkupElementAccess().getOclCodeElementParserRuleCall_8()); 
+                       before(grammarAccess.getMarkupElementAccess().getOCLCodeElementParserRuleCall_8()); 
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleOclCodeElement_in_rule__MarkupElement__Alternatives1328);
-                    ruleOclCodeElement();
+                    pushFollow(FollowSets000.FOLLOW_ruleOCLCodeElement_in_rule__MarkupElement__Alternatives1328);
+                    ruleOCLCodeElement();
 
                     state._fsp--;
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getMarkupElementAccess().getOclCodeElementParserRuleCall_8()); 
+                       after(grammarAccess.getMarkupElementAccess().getOCLCodeElementParserRuleCall_8()); 
                     }
 
                     }
@@ -1879,21 +1879,21 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 10 :
-                    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:630:6: ( ruleOclEvalElement )
+                    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:630:6: ( ruleOCLEvalElement )
                     {
-                    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:630:6: ( ruleOclEvalElement )
-                    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:631:1: ruleOclEvalElement
+                    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:630:6: ( ruleOCLEvalElement )
+                    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:631:1: ruleOCLEvalElement
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getMarkupElementAccess().getOclEvalElementParserRuleCall_9()); 
+                       before(grammarAccess.getMarkupElementAccess().getOCLEvalElementParserRuleCall_9()); 
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleOclEvalElement_in_rule__MarkupElement__Alternatives1345);
-                    ruleOclEvalElement();
+                    pushFollow(FollowSets000.FOLLOW_ruleOCLEvalElement_in_rule__MarkupElement__Alternatives1345);
+                    ruleOCLEvalElement();
 
                     state._fsp--;
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getMarkupElementAccess().getOclEvalElementParserRuleCall_9()); 
+                       after(grammarAccess.getMarkupElementAccess().getOCLEvalElementParserRuleCall_9()); 
                     }
 
                     }
@@ -1902,21 +1902,21 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 11 :
-                    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:636:6: ( ruleOclTextElement )
+                    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:636:6: ( ruleOCLTextElement )
                     {
-                    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:636:6: ( ruleOclTextElement )
-                    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:637:1: ruleOclTextElement
+                    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:636:6: ( ruleOCLTextElement )
+                    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:637:1: ruleOCLTextElement
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getMarkupElementAccess().getOclTextElementParserRuleCall_10()); 
+                       before(grammarAccess.getMarkupElementAccess().getOCLTextElementParserRuleCall_10()); 
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleOclTextElement_in_rule__MarkupElement__Alternatives1362);
-                    ruleOclTextElement();
+                    pushFollow(FollowSets000.FOLLOW_ruleOCLTextElement_in_rule__MarkupElement__Alternatives1362);
+                    ruleOCLTextElement();
 
                     state._fsp--;
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getMarkupElementAccess().getOclTextElementParserRuleCall_10()); 
+                       after(grammarAccess.getMarkupElementAccess().getOCLTextElementParserRuleCall_10()); 
                     }
 
                     }
@@ -6551,23 +6551,23 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__NullElement__Group__3__Impl"
 
 
-    // $ANTLR start "rule__OclCodeElement__Group__0"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2332:1: rule__OclCodeElement__Group__0 : rule__OclCodeElement__Group__0__Impl rule__OclCodeElement__Group__1 ;
-    public final void rule__OclCodeElement__Group__0() throws RecognitionException {
+    // $ANTLR start "rule__OCLCodeElement__Group__0"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2332:1: rule__OCLCodeElement__Group__0 : rule__OCLCodeElement__Group__0__Impl rule__OCLCodeElement__Group__1 ;
+    public final void rule__OCLCodeElement__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2336:1: ( rule__OclCodeElement__Group__0__Impl rule__OclCodeElement__Group__1 )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2337:2: rule__OclCodeElement__Group__0__Impl rule__OclCodeElement__Group__1
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2336:1: ( rule__OCLCodeElement__Group__0__Impl rule__OCLCodeElement__Group__1 )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2337:2: rule__OCLCodeElement__Group__0__Impl rule__OCLCodeElement__Group__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__OclCodeElement__Group__0__Impl_in_rule__OclCodeElement__Group__04739);
-            rule__OclCodeElement__Group__0__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLCodeElement__Group__0__Impl_in_rule__OCLCodeElement__Group__04739);
+            rule__OCLCodeElement__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__OclCodeElement__Group__1_in_rule__OclCodeElement__Group__04742);
-            rule__OclCodeElement__Group__1();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLCodeElement__Group__1_in_rule__OCLCodeElement__Group__04742);
+            rule__OCLCodeElement__Group__1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -6586,12 +6586,12 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclCodeElement__Group__0"
+    // $ANTLR end "rule__OCLCodeElement__Group__0"
 
 
-    // $ANTLR start "rule__OclCodeElement__Group__0__Impl"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2344:1: rule__OclCodeElement__Group__0__Impl : ( () ) ;
-    public final void rule__OclCodeElement__Group__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__OCLCodeElement__Group__0__Impl"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2344:1: rule__OCLCodeElement__Group__0__Impl : ( () ) ;
+    public final void rule__OCLCodeElement__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -6603,7 +6603,7 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2350:1: ()
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclCodeElementAccess().getOclCodeElementAction_0()); 
+               before(grammarAccess.getOCLCodeElementAccess().getOCLCodeElementAction_0()); 
             }
             // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2351:1: ()
             // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2353:1: 
@@ -6611,7 +6611,7 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclCodeElementAccess().getOclCodeElementAction_0()); 
+               after(grammarAccess.getOCLCodeElementAccess().getOCLCodeElementAction_0()); 
             }
 
             }
@@ -6627,26 +6627,26 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclCodeElement__Group__0__Impl"
+    // $ANTLR end "rule__OCLCodeElement__Group__0__Impl"
 
 
-    // $ANTLR start "rule__OclCodeElement__Group__1"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2363:1: rule__OclCodeElement__Group__1 : rule__OclCodeElement__Group__1__Impl rule__OclCodeElement__Group__2 ;
-    public final void rule__OclCodeElement__Group__1() throws RecognitionException {
+    // $ANTLR start "rule__OCLCodeElement__Group__1"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2363:1: rule__OCLCodeElement__Group__1 : rule__OCLCodeElement__Group__1__Impl rule__OCLCodeElement__Group__2 ;
+    public final void rule__OCLCodeElement__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2367:1: ( rule__OclCodeElement__Group__1__Impl rule__OclCodeElement__Group__2 )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2368:2: rule__OclCodeElement__Group__1__Impl rule__OclCodeElement__Group__2
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2367:1: ( rule__OCLCodeElement__Group__1__Impl rule__OCLCodeElement__Group__2 )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2368:2: rule__OCLCodeElement__Group__1__Impl rule__OCLCodeElement__Group__2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__OclCodeElement__Group__1__Impl_in_rule__OclCodeElement__Group__14800);
-            rule__OclCodeElement__Group__1__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLCodeElement__Group__1__Impl_in_rule__OCLCodeElement__Group__14800);
+            rule__OCLCodeElement__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__OclCodeElement__Group__2_in_rule__OclCodeElement__Group__14803);
-            rule__OclCodeElement__Group__2();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLCodeElement__Group__2_in_rule__OCLCodeElement__Group__14803);
+            rule__OCLCodeElement__Group__2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -6665,12 +6665,12 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclCodeElement__Group__1"
+    // $ANTLR end "rule__OCLCodeElement__Group__1"
 
 
-    // $ANTLR start "rule__OclCodeElement__Group__1__Impl"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2375:1: rule__OclCodeElement__Group__1__Impl : ( 'oclCode' ) ;
-    public final void rule__OclCodeElement__Group__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__OCLCodeElement__Group__1__Impl"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2375:1: rule__OCLCodeElement__Group__1__Impl : ( 'oclCode' ) ;
+    public final void rule__OCLCodeElement__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -6682,11 +6682,11 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2381:1: 'oclCode'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclCodeElementAccess().getOclCodeKeyword_1()); 
+               before(grammarAccess.getOCLCodeElementAccess().getOclCodeKeyword_1()); 
             }
-            match(input,23,FollowSets000.FOLLOW_23_in_rule__OclCodeElement__Group__1__Impl4831); if (state.failed) return ;
+            match(input,23,FollowSets000.FOLLOW_23_in_rule__OCLCodeElement__Group__1__Impl4831); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclCodeElementAccess().getOclCodeKeyword_1()); 
+               after(grammarAccess.getOCLCodeElementAccess().getOclCodeKeyword_1()); 
             }
 
             }
@@ -6706,26 +6706,26 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclCodeElement__Group__1__Impl"
+    // $ANTLR end "rule__OCLCodeElement__Group__1__Impl"
 
 
-    // $ANTLR start "rule__OclCodeElement__Group__2"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2394:1: rule__OclCodeElement__Group__2 : rule__OclCodeElement__Group__2__Impl rule__OclCodeElement__Group__3 ;
-    public final void rule__OclCodeElement__Group__2() throws RecognitionException {
+    // $ANTLR start "rule__OCLCodeElement__Group__2"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2394:1: rule__OCLCodeElement__Group__2 : rule__OCLCodeElement__Group__2__Impl rule__OCLCodeElement__Group__3 ;
+    public final void rule__OCLCodeElement__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2398:1: ( rule__OclCodeElement__Group__2__Impl rule__OclCodeElement__Group__3 )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2399:2: rule__OclCodeElement__Group__2__Impl rule__OclCodeElement__Group__3
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2398:1: ( rule__OCLCodeElement__Group__2__Impl rule__OCLCodeElement__Group__3 )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2399:2: rule__OCLCodeElement__Group__2__Impl rule__OCLCodeElement__Group__3
             {
-            pushFollow(FollowSets000.FOLLOW_rule__OclCodeElement__Group__2__Impl_in_rule__OclCodeElement__Group__24862);
-            rule__OclCodeElement__Group__2__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLCodeElement__Group__2__Impl_in_rule__OCLCodeElement__Group__24862);
+            rule__OCLCodeElement__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__OclCodeElement__Group__3_in_rule__OclCodeElement__Group__24865);
-            rule__OclCodeElement__Group__3();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLCodeElement__Group__3_in_rule__OCLCodeElement__Group__24865);
+            rule__OCLCodeElement__Group__3();
 
             state._fsp--;
             if (state.failed) return ;
@@ -6744,12 +6744,12 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclCodeElement__Group__2"
+    // $ANTLR end "rule__OCLCodeElement__Group__2"
 
 
-    // $ANTLR start "rule__OclCodeElement__Group__2__Impl"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2406:1: rule__OclCodeElement__Group__2__Impl : ( '[' ) ;
-    public final void rule__OclCodeElement__Group__2__Impl() throws RecognitionException {
+    // $ANTLR start "rule__OCLCodeElement__Group__2__Impl"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2406:1: rule__OCLCodeElement__Group__2__Impl : ( '[' ) ;
+    public final void rule__OCLCodeElement__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -6761,11 +6761,11 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2412:1: '['
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclCodeElementAccess().getLeftSquareBracketKeyword_2()); 
+               before(grammarAccess.getOCLCodeElementAccess().getLeftSquareBracketKeyword_2()); 
             }
-            match(input,29,FollowSets000.FOLLOW_29_in_rule__OclCodeElement__Group__2__Impl4893); if (state.failed) return ;
+            match(input,29,FollowSets000.FOLLOW_29_in_rule__OCLCodeElement__Group__2__Impl4893); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclCodeElementAccess().getLeftSquareBracketKeyword_2()); 
+               after(grammarAccess.getOCLCodeElementAccess().getLeftSquareBracketKeyword_2()); 
             }
 
             }
@@ -6785,26 +6785,26 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclCodeElement__Group__2__Impl"
+    // $ANTLR end "rule__OCLCodeElement__Group__2__Impl"
 
 
-    // $ANTLR start "rule__OclCodeElement__Group__3"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2425:1: rule__OclCodeElement__Group__3 : rule__OclCodeElement__Group__3__Impl rule__OclCodeElement__Group__4 ;
-    public final void rule__OclCodeElement__Group__3() throws RecognitionException {
+    // $ANTLR start "rule__OCLCodeElement__Group__3"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2425:1: rule__OCLCodeElement__Group__3 : rule__OCLCodeElement__Group__3__Impl rule__OCLCodeElement__Group__4 ;
+    public final void rule__OCLCodeElement__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2429:1: ( rule__OclCodeElement__Group__3__Impl rule__OclCodeElement__Group__4 )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2430:2: rule__OclCodeElement__Group__3__Impl rule__OclCodeElement__Group__4
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2429:1: ( rule__OCLCodeElement__Group__3__Impl rule__OCLCodeElement__Group__4 )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2430:2: rule__OCLCodeElement__Group__3__Impl rule__OCLCodeElement__Group__4
             {
-            pushFollow(FollowSets000.FOLLOW_rule__OclCodeElement__Group__3__Impl_in_rule__OclCodeElement__Group__34924);
-            rule__OclCodeElement__Group__3__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLCodeElement__Group__3__Impl_in_rule__OCLCodeElement__Group__34924);
+            rule__OCLCodeElement__Group__3__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__OclCodeElement__Group__4_in_rule__OclCodeElement__Group__34927);
-            rule__OclCodeElement__Group__4();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLCodeElement__Group__4_in_rule__OCLCodeElement__Group__34927);
+            rule__OCLCodeElement__Group__4();
 
             state._fsp--;
             if (state.failed) return ;
@@ -6823,26 +6823,26 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclCodeElement__Group__3"
+    // $ANTLR end "rule__OCLCodeElement__Group__3"
 
 
-    // $ANTLR start "rule__OclCodeElement__Group__3__Impl"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2437:1: rule__OclCodeElement__Group__3__Impl : ( ( rule__OclCodeElement__ElementsAssignment_3 )* ) ;
-    public final void rule__OclCodeElement__Group__3__Impl() throws RecognitionException {
+    // $ANTLR start "rule__OCLCodeElement__Group__3__Impl"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2437:1: rule__OCLCodeElement__Group__3__Impl : ( ( rule__OCLCodeElement__ElementsAssignment_3 )* ) ;
+    public final void rule__OCLCodeElement__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2441:1: ( ( ( rule__OclCodeElement__ElementsAssignment_3 )* ) )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2442:1: ( ( rule__OclCodeElement__ElementsAssignment_3 )* )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2441:1: ( ( ( rule__OCLCodeElement__ElementsAssignment_3 )* ) )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2442:1: ( ( rule__OCLCodeElement__ElementsAssignment_3 )* )
             {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2442:1: ( ( rule__OclCodeElement__ElementsAssignment_3 )* )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2443:1: ( rule__OclCodeElement__ElementsAssignment_3 )*
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2442:1: ( ( rule__OCLCodeElement__ElementsAssignment_3 )* )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2443:1: ( rule__OCLCodeElement__ElementsAssignment_3 )*
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclCodeElementAccess().getElementsAssignment_3()); 
+               before(grammarAccess.getOCLCodeElementAccess().getElementsAssignment_3()); 
             }
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2444:1: ( rule__OclCodeElement__ElementsAssignment_3 )*
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2444:1: ( rule__OCLCodeElement__ElementsAssignment_3 )*
             loop19:
             do {
                 int alt19=2;
@@ -6855,10 +6855,10 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
 
                 switch (alt19) {
             	case 1 :
-            	    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2444:2: rule__OclCodeElement__ElementsAssignment_3
+            	    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2444:2: rule__OCLCodeElement__ElementsAssignment_3
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__OclCodeElement__ElementsAssignment_3_in_rule__OclCodeElement__Group__3__Impl4954);
-            	    rule__OclCodeElement__ElementsAssignment_3();
+            	    pushFollow(FollowSets000.FOLLOW_rule__OCLCodeElement__ElementsAssignment_3_in_rule__OCLCodeElement__Group__3__Impl4954);
+            	    rule__OCLCodeElement__ElementsAssignment_3();
 
             	    state._fsp--;
             	    if (state.failed) return ;
@@ -6872,7 +6872,7 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             } while (true);
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclCodeElementAccess().getElementsAssignment_3()); 
+               after(grammarAccess.getOCLCodeElementAccess().getElementsAssignment_3()); 
             }
 
             }
@@ -6892,21 +6892,21 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclCodeElement__Group__3__Impl"
+    // $ANTLR end "rule__OCLCodeElement__Group__3__Impl"
 
 
-    // $ANTLR start "rule__OclCodeElement__Group__4"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2454:1: rule__OclCodeElement__Group__4 : rule__OclCodeElement__Group__4__Impl ;
-    public final void rule__OclCodeElement__Group__4() throws RecognitionException {
+    // $ANTLR start "rule__OCLCodeElement__Group__4"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2454:1: rule__OCLCodeElement__Group__4 : rule__OCLCodeElement__Group__4__Impl ;
+    public final void rule__OCLCodeElement__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2458:1: ( rule__OclCodeElement__Group__4__Impl )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2459:2: rule__OclCodeElement__Group__4__Impl
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2458:1: ( rule__OCLCodeElement__Group__4__Impl )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2459:2: rule__OCLCodeElement__Group__4__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__OclCodeElement__Group__4__Impl_in_rule__OclCodeElement__Group__44985);
-            rule__OclCodeElement__Group__4__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLCodeElement__Group__4__Impl_in_rule__OCLCodeElement__Group__44985);
+            rule__OCLCodeElement__Group__4__Impl();
 
             state._fsp--;
             if (state.failed) return ;
@@ -6925,12 +6925,12 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclCodeElement__Group__4"
+    // $ANTLR end "rule__OCLCodeElement__Group__4"
 
 
-    // $ANTLR start "rule__OclCodeElement__Group__4__Impl"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2465:1: rule__OclCodeElement__Group__4__Impl : ( ']' ) ;
-    public final void rule__OclCodeElement__Group__4__Impl() throws RecognitionException {
+    // $ANTLR start "rule__OCLCodeElement__Group__4__Impl"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2465:1: rule__OCLCodeElement__Group__4__Impl : ( ']' ) ;
+    public final void rule__OCLCodeElement__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -6942,11 +6942,11 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2471:1: ']'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclCodeElementAccess().getRightSquareBracketKeyword_4()); 
+               before(grammarAccess.getOCLCodeElementAccess().getRightSquareBracketKeyword_4()); 
             }
-            match(input,30,FollowSets000.FOLLOW_30_in_rule__OclCodeElement__Group__4__Impl5013); if (state.failed) return ;
+            match(input,30,FollowSets000.FOLLOW_30_in_rule__OCLCodeElement__Group__4__Impl5013); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclCodeElementAccess().getRightSquareBracketKeyword_4()); 
+               after(grammarAccess.getOCLCodeElementAccess().getRightSquareBracketKeyword_4()); 
             }
 
             }
@@ -6966,26 +6966,26 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclCodeElement__Group__4__Impl"
+    // $ANTLR end "rule__OCLCodeElement__Group__4__Impl"
 
 
-    // $ANTLR start "rule__OclEvalElement__Group__0"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2494:1: rule__OclEvalElement__Group__0 : rule__OclEvalElement__Group__0__Impl rule__OclEvalElement__Group__1 ;
-    public final void rule__OclEvalElement__Group__0() throws RecognitionException {
+    // $ANTLR start "rule__OCLEvalElement__Group__0"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2494:1: rule__OCLEvalElement__Group__0 : rule__OCLEvalElement__Group__0__Impl rule__OCLEvalElement__Group__1 ;
+    public final void rule__OCLEvalElement__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2498:1: ( rule__OclEvalElement__Group__0__Impl rule__OclEvalElement__Group__1 )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2499:2: rule__OclEvalElement__Group__0__Impl rule__OclEvalElement__Group__1
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2498:1: ( rule__OCLEvalElement__Group__0__Impl rule__OCLEvalElement__Group__1 )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2499:2: rule__OCLEvalElement__Group__0__Impl rule__OCLEvalElement__Group__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__OclEvalElement__Group__0__Impl_in_rule__OclEvalElement__Group__05054);
-            rule__OclEvalElement__Group__0__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLEvalElement__Group__0__Impl_in_rule__OCLEvalElement__Group__05054);
+            rule__OCLEvalElement__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__OclEvalElement__Group__1_in_rule__OclEvalElement__Group__05057);
-            rule__OclEvalElement__Group__1();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLEvalElement__Group__1_in_rule__OCLEvalElement__Group__05057);
+            rule__OCLEvalElement__Group__1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -7004,12 +7004,12 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclEvalElement__Group__0"
+    // $ANTLR end "rule__OCLEvalElement__Group__0"
 
 
-    // $ANTLR start "rule__OclEvalElement__Group__0__Impl"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2506:1: rule__OclEvalElement__Group__0__Impl : ( () ) ;
-    public final void rule__OclEvalElement__Group__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__OCLEvalElement__Group__0__Impl"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2506:1: rule__OCLEvalElement__Group__0__Impl : ( () ) ;
+    public final void rule__OCLEvalElement__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -7021,7 +7021,7 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2512:1: ()
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclEvalElementAccess().getOclEvalElementAction_0()); 
+               before(grammarAccess.getOCLEvalElementAccess().getOCLEvalElementAction_0()); 
             }
             // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2513:1: ()
             // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2515:1: 
@@ -7029,7 +7029,7 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclEvalElementAccess().getOclEvalElementAction_0()); 
+               after(grammarAccess.getOCLEvalElementAccess().getOCLEvalElementAction_0()); 
             }
 
             }
@@ -7045,26 +7045,26 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclEvalElement__Group__0__Impl"
+    // $ANTLR end "rule__OCLEvalElement__Group__0__Impl"
 
 
-    // $ANTLR start "rule__OclEvalElement__Group__1"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2525:1: rule__OclEvalElement__Group__1 : rule__OclEvalElement__Group__1__Impl rule__OclEvalElement__Group__2 ;
-    public final void rule__OclEvalElement__Group__1() throws RecognitionException {
+    // $ANTLR start "rule__OCLEvalElement__Group__1"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2525:1: rule__OCLEvalElement__Group__1 : rule__OCLEvalElement__Group__1__Impl rule__OCLEvalElement__Group__2 ;
+    public final void rule__OCLEvalElement__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2529:1: ( rule__OclEvalElement__Group__1__Impl rule__OclEvalElement__Group__2 )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2530:2: rule__OclEvalElement__Group__1__Impl rule__OclEvalElement__Group__2
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2529:1: ( rule__OCLEvalElement__Group__1__Impl rule__OCLEvalElement__Group__2 )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2530:2: rule__OCLEvalElement__Group__1__Impl rule__OCLEvalElement__Group__2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__OclEvalElement__Group__1__Impl_in_rule__OclEvalElement__Group__15115);
-            rule__OclEvalElement__Group__1__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLEvalElement__Group__1__Impl_in_rule__OCLEvalElement__Group__15115);
+            rule__OCLEvalElement__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__OclEvalElement__Group__2_in_rule__OclEvalElement__Group__15118);
-            rule__OclEvalElement__Group__2();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLEvalElement__Group__2_in_rule__OCLEvalElement__Group__15118);
+            rule__OCLEvalElement__Group__2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -7083,12 +7083,12 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclEvalElement__Group__1"
+    // $ANTLR end "rule__OCLEvalElement__Group__1"
 
 
-    // $ANTLR start "rule__OclEvalElement__Group__1__Impl"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2537:1: rule__OclEvalElement__Group__1__Impl : ( 'oclEval' ) ;
-    public final void rule__OclEvalElement__Group__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__OCLEvalElement__Group__1__Impl"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2537:1: rule__OCLEvalElement__Group__1__Impl : ( 'oclEval' ) ;
+    public final void rule__OCLEvalElement__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -7100,11 +7100,11 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2543:1: 'oclEval'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclEvalElementAccess().getOclEvalKeyword_1()); 
+               before(grammarAccess.getOCLEvalElementAccess().getOclEvalKeyword_1()); 
             }
-            match(input,24,FollowSets000.FOLLOW_24_in_rule__OclEvalElement__Group__1__Impl5146); if (state.failed) return ;
+            match(input,24,FollowSets000.FOLLOW_24_in_rule__OCLEvalElement__Group__1__Impl5146); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclEvalElementAccess().getOclEvalKeyword_1()); 
+               after(grammarAccess.getOCLEvalElementAccess().getOclEvalKeyword_1()); 
             }
 
             }
@@ -7124,26 +7124,26 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclEvalElement__Group__1__Impl"
+    // $ANTLR end "rule__OCLEvalElement__Group__1__Impl"
 
 
-    // $ANTLR start "rule__OclEvalElement__Group__2"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2556:1: rule__OclEvalElement__Group__2 : rule__OclEvalElement__Group__2__Impl rule__OclEvalElement__Group__3 ;
-    public final void rule__OclEvalElement__Group__2() throws RecognitionException {
+    // $ANTLR start "rule__OCLEvalElement__Group__2"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2556:1: rule__OCLEvalElement__Group__2 : rule__OCLEvalElement__Group__2__Impl rule__OCLEvalElement__Group__3 ;
+    public final void rule__OCLEvalElement__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2560:1: ( rule__OclEvalElement__Group__2__Impl rule__OclEvalElement__Group__3 )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2561:2: rule__OclEvalElement__Group__2__Impl rule__OclEvalElement__Group__3
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2560:1: ( rule__OCLEvalElement__Group__2__Impl rule__OCLEvalElement__Group__3 )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2561:2: rule__OCLEvalElement__Group__2__Impl rule__OCLEvalElement__Group__3
             {
-            pushFollow(FollowSets000.FOLLOW_rule__OclEvalElement__Group__2__Impl_in_rule__OclEvalElement__Group__25177);
-            rule__OclEvalElement__Group__2__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLEvalElement__Group__2__Impl_in_rule__OCLEvalElement__Group__25177);
+            rule__OCLEvalElement__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__OclEvalElement__Group__3_in_rule__OclEvalElement__Group__25180);
-            rule__OclEvalElement__Group__3();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLEvalElement__Group__3_in_rule__OCLEvalElement__Group__25180);
+            rule__OCLEvalElement__Group__3();
 
             state._fsp--;
             if (state.failed) return ;
@@ -7162,12 +7162,12 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclEvalElement__Group__2"
+    // $ANTLR end "rule__OCLEvalElement__Group__2"
 
 
-    // $ANTLR start "rule__OclEvalElement__Group__2__Impl"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2568:1: rule__OclEvalElement__Group__2__Impl : ( '[' ) ;
-    public final void rule__OclEvalElement__Group__2__Impl() throws RecognitionException {
+    // $ANTLR start "rule__OCLEvalElement__Group__2__Impl"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2568:1: rule__OCLEvalElement__Group__2__Impl : ( '[' ) ;
+    public final void rule__OCLEvalElement__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -7179,11 +7179,11 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2574:1: '['
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclEvalElementAccess().getLeftSquareBracketKeyword_2()); 
+               before(grammarAccess.getOCLEvalElementAccess().getLeftSquareBracketKeyword_2()); 
             }
-            match(input,29,FollowSets000.FOLLOW_29_in_rule__OclEvalElement__Group__2__Impl5208); if (state.failed) return ;
+            match(input,29,FollowSets000.FOLLOW_29_in_rule__OCLEvalElement__Group__2__Impl5208); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclEvalElementAccess().getLeftSquareBracketKeyword_2()); 
+               after(grammarAccess.getOCLEvalElementAccess().getLeftSquareBracketKeyword_2()); 
             }
 
             }
@@ -7203,26 +7203,26 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclEvalElement__Group__2__Impl"
+    // $ANTLR end "rule__OCLEvalElement__Group__2__Impl"
 
 
-    // $ANTLR start "rule__OclEvalElement__Group__3"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2587:1: rule__OclEvalElement__Group__3 : rule__OclEvalElement__Group__3__Impl rule__OclEvalElement__Group__4 ;
-    public final void rule__OclEvalElement__Group__3() throws RecognitionException {
+    // $ANTLR start "rule__OCLEvalElement__Group__3"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2587:1: rule__OCLEvalElement__Group__3 : rule__OCLEvalElement__Group__3__Impl rule__OCLEvalElement__Group__4 ;
+    public final void rule__OCLEvalElement__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2591:1: ( rule__OclEvalElement__Group__3__Impl rule__OclEvalElement__Group__4 )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2592:2: rule__OclEvalElement__Group__3__Impl rule__OclEvalElement__Group__4
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2591:1: ( rule__OCLEvalElement__Group__3__Impl rule__OCLEvalElement__Group__4 )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2592:2: rule__OCLEvalElement__Group__3__Impl rule__OCLEvalElement__Group__4
             {
-            pushFollow(FollowSets000.FOLLOW_rule__OclEvalElement__Group__3__Impl_in_rule__OclEvalElement__Group__35239);
-            rule__OclEvalElement__Group__3__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLEvalElement__Group__3__Impl_in_rule__OCLEvalElement__Group__35239);
+            rule__OCLEvalElement__Group__3__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__OclEvalElement__Group__4_in_rule__OclEvalElement__Group__35242);
-            rule__OclEvalElement__Group__4();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLEvalElement__Group__4_in_rule__OCLEvalElement__Group__35242);
+            rule__OCLEvalElement__Group__4();
 
             state._fsp--;
             if (state.failed) return ;
@@ -7241,26 +7241,26 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclEvalElement__Group__3"
+    // $ANTLR end "rule__OCLEvalElement__Group__3"
 
 
-    // $ANTLR start "rule__OclEvalElement__Group__3__Impl"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2599:1: rule__OclEvalElement__Group__3__Impl : ( ( rule__OclEvalElement__ElementsAssignment_3 )* ) ;
-    public final void rule__OclEvalElement__Group__3__Impl() throws RecognitionException {
+    // $ANTLR start "rule__OCLEvalElement__Group__3__Impl"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2599:1: rule__OCLEvalElement__Group__3__Impl : ( ( rule__OCLEvalElement__ElementsAssignment_3 )* ) ;
+    public final void rule__OCLEvalElement__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2603:1: ( ( ( rule__OclEvalElement__ElementsAssignment_3 )* ) )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2604:1: ( ( rule__OclEvalElement__ElementsAssignment_3 )* )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2603:1: ( ( ( rule__OCLEvalElement__ElementsAssignment_3 )* ) )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2604:1: ( ( rule__OCLEvalElement__ElementsAssignment_3 )* )
             {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2604:1: ( ( rule__OclEvalElement__ElementsAssignment_3 )* )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2605:1: ( rule__OclEvalElement__ElementsAssignment_3 )*
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2604:1: ( ( rule__OCLEvalElement__ElementsAssignment_3 )* )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2605:1: ( rule__OCLEvalElement__ElementsAssignment_3 )*
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclEvalElementAccess().getElementsAssignment_3()); 
+               before(grammarAccess.getOCLEvalElementAccess().getElementsAssignment_3()); 
             }
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2606:1: ( rule__OclEvalElement__ElementsAssignment_3 )*
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2606:1: ( rule__OCLEvalElement__ElementsAssignment_3 )*
             loop20:
             do {
                 int alt20=2;
@@ -7273,10 +7273,10 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
 
                 switch (alt20) {
             	case 1 :
-            	    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2606:2: rule__OclEvalElement__ElementsAssignment_3
+            	    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2606:2: rule__OCLEvalElement__ElementsAssignment_3
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__OclEvalElement__ElementsAssignment_3_in_rule__OclEvalElement__Group__3__Impl5269);
-            	    rule__OclEvalElement__ElementsAssignment_3();
+            	    pushFollow(FollowSets000.FOLLOW_rule__OCLEvalElement__ElementsAssignment_3_in_rule__OCLEvalElement__Group__3__Impl5269);
+            	    rule__OCLEvalElement__ElementsAssignment_3();
 
             	    state._fsp--;
             	    if (state.failed) return ;
@@ -7290,7 +7290,7 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             } while (true);
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclEvalElementAccess().getElementsAssignment_3()); 
+               after(grammarAccess.getOCLEvalElementAccess().getElementsAssignment_3()); 
             }
 
             }
@@ -7310,21 +7310,21 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclEvalElement__Group__3__Impl"
+    // $ANTLR end "rule__OCLEvalElement__Group__3__Impl"
 
 
-    // $ANTLR start "rule__OclEvalElement__Group__4"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2616:1: rule__OclEvalElement__Group__4 : rule__OclEvalElement__Group__4__Impl ;
-    public final void rule__OclEvalElement__Group__4() throws RecognitionException {
+    // $ANTLR start "rule__OCLEvalElement__Group__4"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2616:1: rule__OCLEvalElement__Group__4 : rule__OCLEvalElement__Group__4__Impl ;
+    public final void rule__OCLEvalElement__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2620:1: ( rule__OclEvalElement__Group__4__Impl )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2621:2: rule__OclEvalElement__Group__4__Impl
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2620:1: ( rule__OCLEvalElement__Group__4__Impl )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2621:2: rule__OCLEvalElement__Group__4__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__OclEvalElement__Group__4__Impl_in_rule__OclEvalElement__Group__45300);
-            rule__OclEvalElement__Group__4__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLEvalElement__Group__4__Impl_in_rule__OCLEvalElement__Group__45300);
+            rule__OCLEvalElement__Group__4__Impl();
 
             state._fsp--;
             if (state.failed) return ;
@@ -7343,12 +7343,12 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclEvalElement__Group__4"
+    // $ANTLR end "rule__OCLEvalElement__Group__4"
 
 
-    // $ANTLR start "rule__OclEvalElement__Group__4__Impl"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2627:1: rule__OclEvalElement__Group__4__Impl : ( ']' ) ;
-    public final void rule__OclEvalElement__Group__4__Impl() throws RecognitionException {
+    // $ANTLR start "rule__OCLEvalElement__Group__4__Impl"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2627:1: rule__OCLEvalElement__Group__4__Impl : ( ']' ) ;
+    public final void rule__OCLEvalElement__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -7360,11 +7360,11 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2633:1: ']'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclEvalElementAccess().getRightSquareBracketKeyword_4()); 
+               before(grammarAccess.getOCLEvalElementAccess().getRightSquareBracketKeyword_4()); 
             }
-            match(input,30,FollowSets000.FOLLOW_30_in_rule__OclEvalElement__Group__4__Impl5328); if (state.failed) return ;
+            match(input,30,FollowSets000.FOLLOW_30_in_rule__OCLEvalElement__Group__4__Impl5328); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclEvalElementAccess().getRightSquareBracketKeyword_4()); 
+               after(grammarAccess.getOCLEvalElementAccess().getRightSquareBracketKeyword_4()); 
             }
 
             }
@@ -7384,26 +7384,26 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclEvalElement__Group__4__Impl"
+    // $ANTLR end "rule__OCLEvalElement__Group__4__Impl"
 
 
-    // $ANTLR start "rule__OclTextElement__Group__0"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2656:1: rule__OclTextElement__Group__0 : rule__OclTextElement__Group__0__Impl rule__OclTextElement__Group__1 ;
-    public final void rule__OclTextElement__Group__0() throws RecognitionException {
+    // $ANTLR start "rule__OCLTextElement__Group__0"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2656:1: rule__OCLTextElement__Group__0 : rule__OCLTextElement__Group__0__Impl rule__OCLTextElement__Group__1 ;
+    public final void rule__OCLTextElement__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2660:1: ( rule__OclTextElement__Group__0__Impl rule__OclTextElement__Group__1 )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2661:2: rule__OclTextElement__Group__0__Impl rule__OclTextElement__Group__1
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2660:1: ( rule__OCLTextElement__Group__0__Impl rule__OCLTextElement__Group__1 )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2661:2: rule__OCLTextElement__Group__0__Impl rule__OCLTextElement__Group__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__OclTextElement__Group__0__Impl_in_rule__OclTextElement__Group__05369);
-            rule__OclTextElement__Group__0__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLTextElement__Group__0__Impl_in_rule__OCLTextElement__Group__05369);
+            rule__OCLTextElement__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__OclTextElement__Group__1_in_rule__OclTextElement__Group__05372);
-            rule__OclTextElement__Group__1();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLTextElement__Group__1_in_rule__OCLTextElement__Group__05372);
+            rule__OCLTextElement__Group__1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -7422,12 +7422,12 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclTextElement__Group__0"
+    // $ANTLR end "rule__OCLTextElement__Group__0"
 
 
-    // $ANTLR start "rule__OclTextElement__Group__0__Impl"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2668:1: rule__OclTextElement__Group__0__Impl : ( () ) ;
-    public final void rule__OclTextElement__Group__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__OCLTextElement__Group__0__Impl"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2668:1: rule__OCLTextElement__Group__0__Impl : ( () ) ;
+    public final void rule__OCLTextElement__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -7439,7 +7439,7 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2674:1: ()
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclTextElementAccess().getOclTextElementAction_0()); 
+               before(grammarAccess.getOCLTextElementAccess().getOCLTextElementAction_0()); 
             }
             // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2675:1: ()
             // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2677:1: 
@@ -7447,7 +7447,7 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclTextElementAccess().getOclTextElementAction_0()); 
+               after(grammarAccess.getOCLTextElementAccess().getOCLTextElementAction_0()); 
             }
 
             }
@@ -7463,26 +7463,26 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclTextElement__Group__0__Impl"
+    // $ANTLR end "rule__OCLTextElement__Group__0__Impl"
 
 
-    // $ANTLR start "rule__OclTextElement__Group__1"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2687:1: rule__OclTextElement__Group__1 : rule__OclTextElement__Group__1__Impl rule__OclTextElement__Group__2 ;
-    public final void rule__OclTextElement__Group__1() throws RecognitionException {
+    // $ANTLR start "rule__OCLTextElement__Group__1"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2687:1: rule__OCLTextElement__Group__1 : rule__OCLTextElement__Group__1__Impl rule__OCLTextElement__Group__2 ;
+    public final void rule__OCLTextElement__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2691:1: ( rule__OclTextElement__Group__1__Impl rule__OclTextElement__Group__2 )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2692:2: rule__OclTextElement__Group__1__Impl rule__OclTextElement__Group__2
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2691:1: ( rule__OCLTextElement__Group__1__Impl rule__OCLTextElement__Group__2 )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2692:2: rule__OCLTextElement__Group__1__Impl rule__OCLTextElement__Group__2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__OclTextElement__Group__1__Impl_in_rule__OclTextElement__Group__15430);
-            rule__OclTextElement__Group__1__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLTextElement__Group__1__Impl_in_rule__OCLTextElement__Group__15430);
+            rule__OCLTextElement__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__OclTextElement__Group__2_in_rule__OclTextElement__Group__15433);
-            rule__OclTextElement__Group__2();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLTextElement__Group__2_in_rule__OCLTextElement__Group__15433);
+            rule__OCLTextElement__Group__2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -7501,12 +7501,12 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclTextElement__Group__1"
+    // $ANTLR end "rule__OCLTextElement__Group__1"
 
 
-    // $ANTLR start "rule__OclTextElement__Group__1__Impl"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2699:1: rule__OclTextElement__Group__1__Impl : ( 'oclText' ) ;
-    public final void rule__OclTextElement__Group__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__OCLTextElement__Group__1__Impl"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2699:1: rule__OCLTextElement__Group__1__Impl : ( 'oclText' ) ;
+    public final void rule__OCLTextElement__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -7518,11 +7518,11 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2705:1: 'oclText'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclTextElementAccess().getOclTextKeyword_1()); 
+               before(grammarAccess.getOCLTextElementAccess().getOclTextKeyword_1()); 
             }
-            match(input,25,FollowSets000.FOLLOW_25_in_rule__OclTextElement__Group__1__Impl5461); if (state.failed) return ;
+            match(input,25,FollowSets000.FOLLOW_25_in_rule__OCLTextElement__Group__1__Impl5461); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclTextElementAccess().getOclTextKeyword_1()); 
+               after(grammarAccess.getOCLTextElementAccess().getOclTextKeyword_1()); 
             }
 
             }
@@ -7542,26 +7542,26 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclTextElement__Group__1__Impl"
+    // $ANTLR end "rule__OCLTextElement__Group__1__Impl"
 
 
-    // $ANTLR start "rule__OclTextElement__Group__2"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2718:1: rule__OclTextElement__Group__2 : rule__OclTextElement__Group__2__Impl rule__OclTextElement__Group__3 ;
-    public final void rule__OclTextElement__Group__2() throws RecognitionException {
+    // $ANTLR start "rule__OCLTextElement__Group__2"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2718:1: rule__OCLTextElement__Group__2 : rule__OCLTextElement__Group__2__Impl rule__OCLTextElement__Group__3 ;
+    public final void rule__OCLTextElement__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2722:1: ( rule__OclTextElement__Group__2__Impl rule__OclTextElement__Group__3 )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2723:2: rule__OclTextElement__Group__2__Impl rule__OclTextElement__Group__3
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2722:1: ( rule__OCLTextElement__Group__2__Impl rule__OCLTextElement__Group__3 )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2723:2: rule__OCLTextElement__Group__2__Impl rule__OCLTextElement__Group__3
             {
-            pushFollow(FollowSets000.FOLLOW_rule__OclTextElement__Group__2__Impl_in_rule__OclTextElement__Group__25492);
-            rule__OclTextElement__Group__2__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLTextElement__Group__2__Impl_in_rule__OCLTextElement__Group__25492);
+            rule__OCLTextElement__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__OclTextElement__Group__3_in_rule__OclTextElement__Group__25495);
-            rule__OclTextElement__Group__3();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLTextElement__Group__3_in_rule__OCLTextElement__Group__25495);
+            rule__OCLTextElement__Group__3();
 
             state._fsp--;
             if (state.failed) return ;
@@ -7580,12 +7580,12 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclTextElement__Group__2"
+    // $ANTLR end "rule__OCLTextElement__Group__2"
 
 
-    // $ANTLR start "rule__OclTextElement__Group__2__Impl"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2730:1: rule__OclTextElement__Group__2__Impl : ( '[' ) ;
-    public final void rule__OclTextElement__Group__2__Impl() throws RecognitionException {
+    // $ANTLR start "rule__OCLTextElement__Group__2__Impl"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2730:1: rule__OCLTextElement__Group__2__Impl : ( '[' ) ;
+    public final void rule__OCLTextElement__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -7597,11 +7597,11 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2736:1: '['
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclTextElementAccess().getLeftSquareBracketKeyword_2()); 
+               before(grammarAccess.getOCLTextElementAccess().getLeftSquareBracketKeyword_2()); 
             }
-            match(input,29,FollowSets000.FOLLOW_29_in_rule__OclTextElement__Group__2__Impl5523); if (state.failed) return ;
+            match(input,29,FollowSets000.FOLLOW_29_in_rule__OCLTextElement__Group__2__Impl5523); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclTextElementAccess().getLeftSquareBracketKeyword_2()); 
+               after(grammarAccess.getOCLTextElementAccess().getLeftSquareBracketKeyword_2()); 
             }
 
             }
@@ -7621,26 +7621,26 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclTextElement__Group__2__Impl"
+    // $ANTLR end "rule__OCLTextElement__Group__2__Impl"
 
 
-    // $ANTLR start "rule__OclTextElement__Group__3"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2749:1: rule__OclTextElement__Group__3 : rule__OclTextElement__Group__3__Impl rule__OclTextElement__Group__4 ;
-    public final void rule__OclTextElement__Group__3() throws RecognitionException {
+    // $ANTLR start "rule__OCLTextElement__Group__3"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2749:1: rule__OCLTextElement__Group__3 : rule__OCLTextElement__Group__3__Impl rule__OCLTextElement__Group__4 ;
+    public final void rule__OCLTextElement__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2753:1: ( rule__OclTextElement__Group__3__Impl rule__OclTextElement__Group__4 )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2754:2: rule__OclTextElement__Group__3__Impl rule__OclTextElement__Group__4
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2753:1: ( rule__OCLTextElement__Group__3__Impl rule__OCLTextElement__Group__4 )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2754:2: rule__OCLTextElement__Group__3__Impl rule__OCLTextElement__Group__4
             {
-            pushFollow(FollowSets000.FOLLOW_rule__OclTextElement__Group__3__Impl_in_rule__OclTextElement__Group__35554);
-            rule__OclTextElement__Group__3__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLTextElement__Group__3__Impl_in_rule__OCLTextElement__Group__35554);
+            rule__OCLTextElement__Group__3__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__OclTextElement__Group__4_in_rule__OclTextElement__Group__35557);
-            rule__OclTextElement__Group__4();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLTextElement__Group__4_in_rule__OCLTextElement__Group__35557);
+            rule__OCLTextElement__Group__4();
 
             state._fsp--;
             if (state.failed) return ;
@@ -7659,26 +7659,26 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclTextElement__Group__3"
+    // $ANTLR end "rule__OCLTextElement__Group__3"
 
 
-    // $ANTLR start "rule__OclTextElement__Group__3__Impl"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2761:1: rule__OclTextElement__Group__3__Impl : ( ( rule__OclTextElement__ElementsAssignment_3 )* ) ;
-    public final void rule__OclTextElement__Group__3__Impl() throws RecognitionException {
+    // $ANTLR start "rule__OCLTextElement__Group__3__Impl"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2761:1: rule__OCLTextElement__Group__3__Impl : ( ( rule__OCLTextElement__ElementsAssignment_3 )* ) ;
+    public final void rule__OCLTextElement__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2765:1: ( ( ( rule__OclTextElement__ElementsAssignment_3 )* ) )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2766:1: ( ( rule__OclTextElement__ElementsAssignment_3 )* )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2765:1: ( ( ( rule__OCLTextElement__ElementsAssignment_3 )* ) )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2766:1: ( ( rule__OCLTextElement__ElementsAssignment_3 )* )
             {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2766:1: ( ( rule__OclTextElement__ElementsAssignment_3 )* )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2767:1: ( rule__OclTextElement__ElementsAssignment_3 )*
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2766:1: ( ( rule__OCLTextElement__ElementsAssignment_3 )* )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2767:1: ( rule__OCLTextElement__ElementsAssignment_3 )*
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclTextElementAccess().getElementsAssignment_3()); 
+               before(grammarAccess.getOCLTextElementAccess().getElementsAssignment_3()); 
             }
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2768:1: ( rule__OclTextElement__ElementsAssignment_3 )*
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2768:1: ( rule__OCLTextElement__ElementsAssignment_3 )*
             loop21:
             do {
                 int alt21=2;
@@ -7691,10 +7691,10 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
 
                 switch (alt21) {
             	case 1 :
-            	    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2768:2: rule__OclTextElement__ElementsAssignment_3
+            	    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2768:2: rule__OCLTextElement__ElementsAssignment_3
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__OclTextElement__ElementsAssignment_3_in_rule__OclTextElement__Group__3__Impl5584);
-            	    rule__OclTextElement__ElementsAssignment_3();
+            	    pushFollow(FollowSets000.FOLLOW_rule__OCLTextElement__ElementsAssignment_3_in_rule__OCLTextElement__Group__3__Impl5584);
+            	    rule__OCLTextElement__ElementsAssignment_3();
 
             	    state._fsp--;
             	    if (state.failed) return ;
@@ -7708,7 +7708,7 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             } while (true);
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclTextElementAccess().getElementsAssignment_3()); 
+               after(grammarAccess.getOCLTextElementAccess().getElementsAssignment_3()); 
             }
 
             }
@@ -7728,21 +7728,21 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclTextElement__Group__3__Impl"
+    // $ANTLR end "rule__OCLTextElement__Group__3__Impl"
 
 
-    // $ANTLR start "rule__OclTextElement__Group__4"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2778:1: rule__OclTextElement__Group__4 : rule__OclTextElement__Group__4__Impl ;
-    public final void rule__OclTextElement__Group__4() throws RecognitionException {
+    // $ANTLR start "rule__OCLTextElement__Group__4"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2778:1: rule__OCLTextElement__Group__4 : rule__OCLTextElement__Group__4__Impl ;
+    public final void rule__OCLTextElement__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2782:1: ( rule__OclTextElement__Group__4__Impl )
-            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2783:2: rule__OclTextElement__Group__4__Impl
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2782:1: ( rule__OCLTextElement__Group__4__Impl )
+            // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2783:2: rule__OCLTextElement__Group__4__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__OclTextElement__Group__4__Impl_in_rule__OclTextElement__Group__45615);
-            rule__OclTextElement__Group__4__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__OCLTextElement__Group__4__Impl_in_rule__OCLTextElement__Group__45615);
+            rule__OCLTextElement__Group__4__Impl();
 
             state._fsp--;
             if (state.failed) return ;
@@ -7761,12 +7761,12 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclTextElement__Group__4"
+    // $ANTLR end "rule__OCLTextElement__Group__4"
 
 
-    // $ANTLR start "rule__OclTextElement__Group__4__Impl"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2789:1: rule__OclTextElement__Group__4__Impl : ( ']' ) ;
-    public final void rule__OclTextElement__Group__4__Impl() throws RecognitionException {
+    // $ANTLR start "rule__OCLTextElement__Group__4__Impl"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2789:1: rule__OCLTextElement__Group__4__Impl : ( ']' ) ;
+    public final void rule__OCLTextElement__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -7778,11 +7778,11 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:2795:1: ']'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclTextElementAccess().getRightSquareBracketKeyword_4()); 
+               before(grammarAccess.getOCLTextElementAccess().getRightSquareBracketKeyword_4()); 
             }
-            match(input,30,FollowSets000.FOLLOW_30_in_rule__OclTextElement__Group__4__Impl5643); if (state.failed) return ;
+            match(input,30,FollowSets000.FOLLOW_30_in_rule__OCLTextElement__Group__4__Impl5643); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclTextElementAccess().getRightSquareBracketKeyword_4()); 
+               after(grammarAccess.getOCLTextElementAccess().getRightSquareBracketKeyword_4()); 
             }
 
             }
@@ -7802,7 +7802,7 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclTextElement__Group__4__Impl"
+    // $ANTLR end "rule__OCLTextElement__Group__4__Impl"
 
 
     // $ANTLR start "rule__Markup__ElementsAssignment"
@@ -8507,9 +8507,9 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__NullElement__ElementsAssignment_2"
 
 
-    // $ANTLR start "rule__OclCodeElement__ElementsAssignment_3"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:3064:1: rule__OclCodeElement__ElementsAssignment_3 : ( ruleMarkupElement ) ;
-    public final void rule__OclCodeElement__ElementsAssignment_3() throws RecognitionException {
+    // $ANTLR start "rule__OCLCodeElement__ElementsAssignment_3"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:3064:1: rule__OCLCodeElement__ElementsAssignment_3 : ( ruleMarkupElement ) ;
+    public final void rule__OCLCodeElement__ElementsAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -8521,15 +8521,15 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:3070:1: ruleMarkupElement
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclCodeElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
+               before(grammarAccess.getOCLCodeElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleMarkupElement_in_rule__OclCodeElement__ElementsAssignment_36195);
+            pushFollow(FollowSets000.FOLLOW_ruleMarkupElement_in_rule__OCLCodeElement__ElementsAssignment_36195);
             ruleMarkupElement();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclCodeElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
+               after(grammarAccess.getOCLCodeElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
             }
 
             }
@@ -8549,12 +8549,12 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclCodeElement__ElementsAssignment_3"
+    // $ANTLR end "rule__OCLCodeElement__ElementsAssignment_3"
 
 
-    // $ANTLR start "rule__OclEvalElement__ElementsAssignment_3"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:3079:1: rule__OclEvalElement__ElementsAssignment_3 : ( ruleMarkupElement ) ;
-    public final void rule__OclEvalElement__ElementsAssignment_3() throws RecognitionException {
+    // $ANTLR start "rule__OCLEvalElement__ElementsAssignment_3"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:3079:1: rule__OCLEvalElement__ElementsAssignment_3 : ( ruleMarkupElement ) ;
+    public final void rule__OCLEvalElement__ElementsAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -8566,15 +8566,15 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:3085:1: ruleMarkupElement
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclEvalElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
+               before(grammarAccess.getOCLEvalElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleMarkupElement_in_rule__OclEvalElement__ElementsAssignment_36226);
+            pushFollow(FollowSets000.FOLLOW_ruleMarkupElement_in_rule__OCLEvalElement__ElementsAssignment_36226);
             ruleMarkupElement();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclEvalElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
+               after(grammarAccess.getOCLEvalElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
             }
 
             }
@@ -8594,12 +8594,12 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclEvalElement__ElementsAssignment_3"
+    // $ANTLR end "rule__OCLEvalElement__ElementsAssignment_3"
 
 
-    // $ANTLR start "rule__OclTextElement__ElementsAssignment_3"
-    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:3094:1: rule__OclTextElement__ElementsAssignment_3 : ( ruleMarkupElement ) ;
-    public final void rule__OclTextElement__ElementsAssignment_3() throws RecognitionException {
+    // $ANTLR start "rule__OCLTextElement__ElementsAssignment_3"
+    // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:3094:1: rule__OCLTextElement__ElementsAssignment_3 : ( ruleMarkupElement ) ;
+    public final void rule__OCLTextElement__ElementsAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -8611,15 +8611,15 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:3100:1: ruleMarkupElement
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getOclTextElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
+               before(grammarAccess.getOCLTextElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleMarkupElement_in_rule__OclTextElement__ElementsAssignment_36257);
+            pushFollow(FollowSets000.FOLLOW_ruleMarkupElement_in_rule__OCLTextElement__ElementsAssignment_36257);
             ruleMarkupElement();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getOclTextElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
+               after(grammarAccess.getOCLTextElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
             }
 
             }
@@ -8639,7 +8639,7 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__OclTextElement__ElementsAssignment_3"
+    // $ANTLR end "rule__OCLTextElement__ElementsAssignment_3"
 
 
     // $ANTLR start "rule__TextElement__TextAssignment_0"
@@ -8883,17 +8883,17 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
 
     // $ANTLR start synpred19_InternalMarkup
     public final void synpred19_InternalMarkup_fragment() throws RecognitionException {   
-        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:624:6: ( ( ruleOclCodeElement ) )
-        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:624:6: ( ruleOclCodeElement )
+        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:624:6: ( ( ruleOCLCodeElement ) )
+        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:624:6: ( ruleOCLCodeElement )
         {
-        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:624:6: ( ruleOclCodeElement )
-        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:625:1: ruleOclCodeElement
+        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:624:6: ( ruleOCLCodeElement )
+        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:625:1: ruleOCLCodeElement
         {
         if ( state.backtracking==0 ) {
-           before(grammarAccess.getMarkupElementAccess().getOclCodeElementParserRuleCall_8()); 
+           before(grammarAccess.getMarkupElementAccess().getOCLCodeElementParserRuleCall_8()); 
         }
-        pushFollow(FollowSets000.FOLLOW_ruleOclCodeElement_in_synpred19_InternalMarkup1328);
-        ruleOclCodeElement();
+        pushFollow(FollowSets000.FOLLOW_ruleOCLCodeElement_in_synpred19_InternalMarkup1328);
+        ruleOCLCodeElement();
 
         state._fsp--;
         if (state.failed) return ;
@@ -8907,17 +8907,17 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
 
     // $ANTLR start synpred20_InternalMarkup
     public final void synpred20_InternalMarkup_fragment() throws RecognitionException {   
-        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:630:6: ( ( ruleOclEvalElement ) )
-        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:630:6: ( ruleOclEvalElement )
+        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:630:6: ( ( ruleOCLEvalElement ) )
+        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:630:6: ( ruleOCLEvalElement )
         {
-        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:630:6: ( ruleOclEvalElement )
-        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:631:1: ruleOclEvalElement
+        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:630:6: ( ruleOCLEvalElement )
+        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:631:1: ruleOCLEvalElement
         {
         if ( state.backtracking==0 ) {
-           before(grammarAccess.getMarkupElementAccess().getOclEvalElementParserRuleCall_9()); 
+           before(grammarAccess.getMarkupElementAccess().getOCLEvalElementParserRuleCall_9()); 
         }
-        pushFollow(FollowSets000.FOLLOW_ruleOclEvalElement_in_synpred20_InternalMarkup1345);
-        ruleOclEvalElement();
+        pushFollow(FollowSets000.FOLLOW_ruleOCLEvalElement_in_synpred20_InternalMarkup1345);
+        ruleOCLEvalElement();
 
         state._fsp--;
         if (state.failed) return ;
@@ -8931,17 +8931,17 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
 
     // $ANTLR start synpred21_InternalMarkup
     public final void synpred21_InternalMarkup_fragment() throws RecognitionException {   
-        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:636:6: ( ( ruleOclTextElement ) )
-        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:636:6: ( ruleOclTextElement )
+        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:636:6: ( ( ruleOCLTextElement ) )
+        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:636:6: ( ruleOCLTextElement )
         {
-        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:636:6: ( ruleOclTextElement )
-        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:637:1: ruleOclTextElement
+        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:636:6: ( ruleOCLTextElement )
+        // ../org.eclipse.ocl.examples.xtext.markup.ui/src-gen/org/eclipse/ocl/examples/xtext/markup/ui/contentassist/antlr/internal/InternalMarkup.g:637:1: ruleOCLTextElement
         {
         if ( state.backtracking==0 ) {
-           before(grammarAccess.getMarkupElementAccess().getOclTextElementParserRuleCall_10()); 
+           before(grammarAccess.getMarkupElementAccess().getOCLTextElementParserRuleCall_10()); 
         }
-        pushFollow(FollowSets000.FOLLOW_ruleOclTextElement_in_synpred21_InternalMarkup1362);
-        ruleOclTextElement();
+        pushFollow(FollowSets000.FOLLOW_ruleOCLTextElement_in_synpred21_InternalMarkup1362);
+        ruleOCLTextElement();
 
         state._fsp--;
         if (state.failed) return ;
@@ -9191,7 +9191,7 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
             this.transition = DFA3_transition;
         }
         public String getDescription() {
-            return "571:1: rule__MarkupElement__Alternatives : ( ( ruleFontElement ) | ( ruleNewLineElement ) | ( ruleBulletElement ) | ( ruleFigureElement ) | ( ruleFigureRefElement ) | ( ruleFootnoteElement ) | ( ruleHeadingElement ) | ( ruleNullElement ) | ( ruleOclCodeElement ) | ( ruleOclEvalElement ) | ( ruleOclTextElement ) | ( ruleTextElement ) );";
+            return "571:1: rule__MarkupElement__Alternatives : ( ( ruleFontElement ) | ( ruleNewLineElement ) | ( ruleBulletElement ) | ( ruleFigureElement ) | ( ruleFigureRefElement ) | ( ruleFootnoteElement ) | ( ruleHeadingElement ) | ( ruleNullElement ) | ( ruleOCLCodeElement ) | ( ruleOCLEvalElement ) | ( ruleOCLTextElement ) | ( ruleTextElement ) );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -9566,15 +9566,15 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_ruleNullElement_in_entryRuleNullElement668 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleNullElement675 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__NullElement__Group__0_in_ruleNullElement701 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOclCodeElement_in_entryRuleOclCodeElement728 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleOclCodeElement735 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__OclCodeElement__Group__0_in_ruleOclCodeElement761 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOclEvalElement_in_entryRuleOclEvalElement788 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleOclEvalElement795 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__OclEvalElement__Group__0_in_ruleOclEvalElement821 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOclTextElement_in_entryRuleOclTextElement848 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleOclTextElement855 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__OclTextElement__Group__0_in_ruleOclTextElement881 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOCLCodeElement_in_entryRuleOCLCodeElement728 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleOCLCodeElement735 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__OCLCodeElement__Group__0_in_ruleOCLCodeElement761 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOCLEvalElement_in_entryRuleOCLEvalElement788 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleOCLEvalElement795 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__OCLEvalElement__Group__0_in_ruleOCLEvalElement821 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOCLTextElement_in_entryRuleOCLTextElement848 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleOCLTextElement855 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__OCLTextElement__Group__0_in_ruleOCLTextElement881 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTextElement_in_entryRuleTextElement908 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleTextElement915 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TextElement__Alternatives_in_ruleTextElement941 = new BitSet(new long[]{0x0000000000000002L});
@@ -9596,9 +9596,9 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_ruleFootnoteElement_in_rule__MarkupElement__Alternatives1277 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleHeadingElement_in_rule__MarkupElement__Alternatives1294 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleNullElement_in_rule__MarkupElement__Alternatives1311 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOclCodeElement_in_rule__MarkupElement__Alternatives1328 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOclEvalElement_in_rule__MarkupElement__Alternatives1345 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOclTextElement_in_rule__MarkupElement__Alternatives1362 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOCLCodeElement_in_rule__MarkupElement__Alternatives1328 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOCLEvalElement_in_rule__MarkupElement__Alternatives1345 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOCLTextElement_in_rule__MarkupElement__Alternatives1362 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTextElement_in_rule__MarkupElement__Alternatives1379 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_16_in_rule__FontElement__FontAlternatives_0_01412 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_17_in_rule__FontElement__FontAlternatives_0_01432 = new BitSet(new long[]{0x0000000000000002L});
@@ -9742,45 +9742,45 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_rule__NullElement__ElementsAssignment_2_in_rule__NullElement__Group__2__Impl4641 = new BitSet(new long[]{0x000000003FFF02F2L});
         public static final BitSet FOLLOW_rule__NullElement__Group__3__Impl_in_rule__NullElement__Group__34672 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_30_in_rule__NullElement__Group__3__Impl4700 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__OclCodeElement__Group__0__Impl_in_rule__OclCodeElement__Group__04739 = new BitSet(new long[]{0x0000000000800000L});
-        public static final BitSet FOLLOW_rule__OclCodeElement__Group__1_in_rule__OclCodeElement__Group__04742 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__OclCodeElement__Group__1__Impl_in_rule__OclCodeElement__Group__14800 = new BitSet(new long[]{0x0000000020000000L});
-        public static final BitSet FOLLOW_rule__OclCodeElement__Group__2_in_rule__OclCodeElement__Group__14803 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_23_in_rule__OclCodeElement__Group__1__Impl4831 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__OclCodeElement__Group__2__Impl_in_rule__OclCodeElement__Group__24862 = new BitSet(new long[]{0x000000007FFF02F0L});
-        public static final BitSet FOLLOW_rule__OclCodeElement__Group__3_in_rule__OclCodeElement__Group__24865 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_29_in_rule__OclCodeElement__Group__2__Impl4893 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__OclCodeElement__Group__3__Impl_in_rule__OclCodeElement__Group__34924 = new BitSet(new long[]{0x000000007FFF02F0L});
-        public static final BitSet FOLLOW_rule__OclCodeElement__Group__4_in_rule__OclCodeElement__Group__34927 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__OclCodeElement__ElementsAssignment_3_in_rule__OclCodeElement__Group__3__Impl4954 = new BitSet(new long[]{0x000000003FFF02F2L});
-        public static final BitSet FOLLOW_rule__OclCodeElement__Group__4__Impl_in_rule__OclCodeElement__Group__44985 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_30_in_rule__OclCodeElement__Group__4__Impl5013 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__OclEvalElement__Group__0__Impl_in_rule__OclEvalElement__Group__05054 = new BitSet(new long[]{0x0000000001000000L});
-        public static final BitSet FOLLOW_rule__OclEvalElement__Group__1_in_rule__OclEvalElement__Group__05057 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__OclEvalElement__Group__1__Impl_in_rule__OclEvalElement__Group__15115 = new BitSet(new long[]{0x0000000020000000L});
-        public static final BitSet FOLLOW_rule__OclEvalElement__Group__2_in_rule__OclEvalElement__Group__15118 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_24_in_rule__OclEvalElement__Group__1__Impl5146 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__OclEvalElement__Group__2__Impl_in_rule__OclEvalElement__Group__25177 = new BitSet(new long[]{0x000000007FFF02F0L});
-        public static final BitSet FOLLOW_rule__OclEvalElement__Group__3_in_rule__OclEvalElement__Group__25180 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_29_in_rule__OclEvalElement__Group__2__Impl5208 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__OclEvalElement__Group__3__Impl_in_rule__OclEvalElement__Group__35239 = new BitSet(new long[]{0x000000007FFF02F0L});
-        public static final BitSet FOLLOW_rule__OclEvalElement__Group__4_in_rule__OclEvalElement__Group__35242 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__OclEvalElement__ElementsAssignment_3_in_rule__OclEvalElement__Group__3__Impl5269 = new BitSet(new long[]{0x000000003FFF02F2L});
-        public static final BitSet FOLLOW_rule__OclEvalElement__Group__4__Impl_in_rule__OclEvalElement__Group__45300 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_30_in_rule__OclEvalElement__Group__4__Impl5328 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__OclTextElement__Group__0__Impl_in_rule__OclTextElement__Group__05369 = new BitSet(new long[]{0x0000000002000000L});
-        public static final BitSet FOLLOW_rule__OclTextElement__Group__1_in_rule__OclTextElement__Group__05372 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__OclTextElement__Group__1__Impl_in_rule__OclTextElement__Group__15430 = new BitSet(new long[]{0x0000000020000000L});
-        public static final BitSet FOLLOW_rule__OclTextElement__Group__2_in_rule__OclTextElement__Group__15433 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_25_in_rule__OclTextElement__Group__1__Impl5461 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__OclTextElement__Group__2__Impl_in_rule__OclTextElement__Group__25492 = new BitSet(new long[]{0x000000007FFF02F0L});
-        public static final BitSet FOLLOW_rule__OclTextElement__Group__3_in_rule__OclTextElement__Group__25495 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_29_in_rule__OclTextElement__Group__2__Impl5523 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__OclTextElement__Group__3__Impl_in_rule__OclTextElement__Group__35554 = new BitSet(new long[]{0x000000007FFF02F0L});
-        public static final BitSet FOLLOW_rule__OclTextElement__Group__4_in_rule__OclTextElement__Group__35557 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__OclTextElement__ElementsAssignment_3_in_rule__OclTextElement__Group__3__Impl5584 = new BitSet(new long[]{0x000000003FFF02F2L});
-        public static final BitSet FOLLOW_rule__OclTextElement__Group__4__Impl_in_rule__OclTextElement__Group__45615 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_30_in_rule__OclTextElement__Group__4__Impl5643 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__OCLCodeElement__Group__0__Impl_in_rule__OCLCodeElement__Group__04739 = new BitSet(new long[]{0x0000000000800000L});
+        public static final BitSet FOLLOW_rule__OCLCodeElement__Group__1_in_rule__OCLCodeElement__Group__04742 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__OCLCodeElement__Group__1__Impl_in_rule__OCLCodeElement__Group__14800 = new BitSet(new long[]{0x0000000020000000L});
+        public static final BitSet FOLLOW_rule__OCLCodeElement__Group__2_in_rule__OCLCodeElement__Group__14803 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_23_in_rule__OCLCodeElement__Group__1__Impl4831 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__OCLCodeElement__Group__2__Impl_in_rule__OCLCodeElement__Group__24862 = new BitSet(new long[]{0x000000007FFF02F0L});
+        public static final BitSet FOLLOW_rule__OCLCodeElement__Group__3_in_rule__OCLCodeElement__Group__24865 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_29_in_rule__OCLCodeElement__Group__2__Impl4893 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__OCLCodeElement__Group__3__Impl_in_rule__OCLCodeElement__Group__34924 = new BitSet(new long[]{0x000000007FFF02F0L});
+        public static final BitSet FOLLOW_rule__OCLCodeElement__Group__4_in_rule__OCLCodeElement__Group__34927 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__OCLCodeElement__ElementsAssignment_3_in_rule__OCLCodeElement__Group__3__Impl4954 = new BitSet(new long[]{0x000000003FFF02F2L});
+        public static final BitSet FOLLOW_rule__OCLCodeElement__Group__4__Impl_in_rule__OCLCodeElement__Group__44985 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_30_in_rule__OCLCodeElement__Group__4__Impl5013 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__OCLEvalElement__Group__0__Impl_in_rule__OCLEvalElement__Group__05054 = new BitSet(new long[]{0x0000000001000000L});
+        public static final BitSet FOLLOW_rule__OCLEvalElement__Group__1_in_rule__OCLEvalElement__Group__05057 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__OCLEvalElement__Group__1__Impl_in_rule__OCLEvalElement__Group__15115 = new BitSet(new long[]{0x0000000020000000L});
+        public static final BitSet FOLLOW_rule__OCLEvalElement__Group__2_in_rule__OCLEvalElement__Group__15118 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_24_in_rule__OCLEvalElement__Group__1__Impl5146 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__OCLEvalElement__Group__2__Impl_in_rule__OCLEvalElement__Group__25177 = new BitSet(new long[]{0x000000007FFF02F0L});
+        public static final BitSet FOLLOW_rule__OCLEvalElement__Group__3_in_rule__OCLEvalElement__Group__25180 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_29_in_rule__OCLEvalElement__Group__2__Impl5208 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__OCLEvalElement__Group__3__Impl_in_rule__OCLEvalElement__Group__35239 = new BitSet(new long[]{0x000000007FFF02F0L});
+        public static final BitSet FOLLOW_rule__OCLEvalElement__Group__4_in_rule__OCLEvalElement__Group__35242 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__OCLEvalElement__ElementsAssignment_3_in_rule__OCLEvalElement__Group__3__Impl5269 = new BitSet(new long[]{0x000000003FFF02F2L});
+        public static final BitSet FOLLOW_rule__OCLEvalElement__Group__4__Impl_in_rule__OCLEvalElement__Group__45300 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_30_in_rule__OCLEvalElement__Group__4__Impl5328 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__OCLTextElement__Group__0__Impl_in_rule__OCLTextElement__Group__05369 = new BitSet(new long[]{0x0000000002000000L});
+        public static final BitSet FOLLOW_rule__OCLTextElement__Group__1_in_rule__OCLTextElement__Group__05372 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__OCLTextElement__Group__1__Impl_in_rule__OCLTextElement__Group__15430 = new BitSet(new long[]{0x0000000020000000L});
+        public static final BitSet FOLLOW_rule__OCLTextElement__Group__2_in_rule__OCLTextElement__Group__15433 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_25_in_rule__OCLTextElement__Group__1__Impl5461 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__OCLTextElement__Group__2__Impl_in_rule__OCLTextElement__Group__25492 = new BitSet(new long[]{0x000000007FFF02F0L});
+        public static final BitSet FOLLOW_rule__OCLTextElement__Group__3_in_rule__OCLTextElement__Group__25495 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_29_in_rule__OCLTextElement__Group__2__Impl5523 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__OCLTextElement__Group__3__Impl_in_rule__OCLTextElement__Group__35554 = new BitSet(new long[]{0x000000007FFF02F0L});
+        public static final BitSet FOLLOW_rule__OCLTextElement__Group__4_in_rule__OCLTextElement__Group__35557 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__OCLTextElement__ElementsAssignment_3_in_rule__OCLTextElement__Group__3__Impl5584 = new BitSet(new long[]{0x000000003FFF02F2L});
+        public static final BitSet FOLLOW_rule__OCLTextElement__Group__4__Impl_in_rule__OCLTextElement__Group__45615 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_30_in_rule__OCLTextElement__Group__4__Impl5643 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleMarkupElement_in_rule__Markup__ElementsAssignment5689 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_INT_in_rule__BulletElement__LevelAssignment_2_15720 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleMarkupElement_in_rule__BulletElement__ElementsAssignment_45751 = new BitSet(new long[]{0x0000000000000002L});
@@ -9797,9 +9797,9 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_ruleMarkupElement_in_rule__HeadingElement__ElementsAssignment_46102 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_NL_in_rule__NewLineElement__TextAssignment6133 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleMarkupElement_in_rule__NullElement__ElementsAssignment_26164 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMarkupElement_in_rule__OclCodeElement__ElementsAssignment_36195 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMarkupElement_in_rule__OclEvalElement__ElementsAssignment_36226 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMarkupElement_in_rule__OclTextElement__ElementsAssignment_36257 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleMarkupElement_in_rule__OCLCodeElement__ElementsAssignment_36195 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleMarkupElement_in_rule__OCLEvalElement__ElementsAssignment_36226 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleMarkupElement_in_rule__OCLTextElement__ElementsAssignment_36257 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TextElement__TextAlternatives_0_0_in_rule__TextElement__TextAssignment_06288 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleMarkupKeyword_in_rule__TextElement__TextAssignment_16321 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleFontElement_in_synpred11_InternalMarkup1192 = new BitSet(new long[]{0x0000000000000002L});
@@ -9808,9 +9808,9 @@ public class InternalMarkupParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_ruleFigureRefElement_in_synpred15_InternalMarkup1260 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleFootnoteElement_in_synpred16_InternalMarkup1277 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleHeadingElement_in_synpred17_InternalMarkup1294 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOclCodeElement_in_synpred19_InternalMarkup1328 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOclEvalElement_in_synpred20_InternalMarkup1345 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOclTextElement_in_synpred21_InternalMarkup1362 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOCLCodeElement_in_synpred19_InternalMarkup1328 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOCLEvalElement_in_synpred20_InternalMarkup1345 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOCLTextElement_in_synpred21_InternalMarkup1362 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TextElement__TextAssignment_0_in_synpred23_InternalMarkup1480 = new BitSet(new long[]{0x0000000000000002L});
     }
 

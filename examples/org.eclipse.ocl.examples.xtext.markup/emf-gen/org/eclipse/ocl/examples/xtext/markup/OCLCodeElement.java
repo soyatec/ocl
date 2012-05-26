@@ -19,13 +19,13 @@ package org.eclipse.ocl.examples.xtext.markup;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Ocl Eval Element</b></em>'.
+ * A representation of the model object '<em><b>Ocl Code Element</b></em>'.
  * <!-- end-user-doc -->
  *
  *
- * @see org.eclipse.ocl.examples.xtext.markup.MarkupPackage#getOclEvalElement()
+ * @see org.eclipse.ocl.examples.xtext.markup.MarkupPackage#getOCLCodeElement()
  * @model
  * @generated
  */
-public interface OclEvalElement extends CompoundElement {
-} // OclEvalElement
+public interface OCLCodeElement extends CompoundElement {
+} // OclCodeElement

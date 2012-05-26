@@ -2032,7 +2032,7 @@ ruleNavigatingArgExpCS returns [EObject current=null]
 	}
     {
         $current = forceCreateModelElement(
-            grammarAccess.getNavigatingArgExpCSAccess().getOclMessageArgCSAction_0_0(),
+            grammarAccess.getNavigatingArgExpCSAccess().getOCLMessageArgCSAction_0_0(),
             $current);
     }
 )	otherlv_1='?' 

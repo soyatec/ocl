@@ -530,7 +530,7 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleMarkupElement"
-    // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:211:1: ruleMarkupElement returns [EObject current=null] : (this_FontElement_0= ruleFontElement | this_NewLineElement_1= ruleNewLineElement | this_BulletElement_2= ruleBulletElement | this_FigureElement_3= ruleFigureElement | this_FigureRefElement_4= ruleFigureRefElement | this_FootnoteElement_5= ruleFootnoteElement | this_HeadingElement_6= ruleHeadingElement | this_NullElement_7= ruleNullElement | this_OclCodeElement_8= ruleOclCodeElement | this_OclEvalElement_9= ruleOclEvalElement | this_OclTextElement_10= ruleOclTextElement | this_TextElement_11= ruleTextElement ) ;
+    // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:211:1: ruleMarkupElement returns [EObject current=null] : (this_FontElement_0= ruleFontElement | this_NewLineElement_1= ruleNewLineElement | this_BulletElement_2= ruleBulletElement | this_FigureElement_3= ruleFigureElement | this_FigureRefElement_4= ruleFigureRefElement | this_FootnoteElement_5= ruleFootnoteElement | this_HeadingElement_6= ruleHeadingElement | this_NullElement_7= ruleNullElement | this_OCLCodeElement_8= ruleOCLCodeElement | this_OCLEvalElement_9= ruleOCLEvalElement | this_OCLTextElement_10= ruleOCLTextElement | this_TextElement_11= ruleTextElement ) ;
     public final EObject ruleMarkupElement() throws RecognitionException {
         EObject current = null;
 
@@ -550,11 +550,11 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
 
         EObject this_NullElement_7 = null;
 
-        EObject this_OclCodeElement_8 = null;
+        EObject this_OCLCodeElement_8 = null;
 
-        EObject this_OclEvalElement_9 = null;
+        EObject this_OCLEvalElement_9 = null;
 
-        EObject this_OclTextElement_10 = null;
+        EObject this_OCLTextElement_10 = null;
 
         EObject this_TextElement_11 = null;
 
@@ -562,10 +562,10 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:214:28: ( (this_FontElement_0= ruleFontElement | this_NewLineElement_1= ruleNewLineElement | this_BulletElement_2= ruleBulletElement | this_FigureElement_3= ruleFigureElement | this_FigureRefElement_4= ruleFigureRefElement | this_FootnoteElement_5= ruleFootnoteElement | this_HeadingElement_6= ruleHeadingElement | this_NullElement_7= ruleNullElement | this_OclCodeElement_8= ruleOclCodeElement | this_OclEvalElement_9= ruleOclEvalElement | this_OclTextElement_10= ruleOclTextElement | this_TextElement_11= ruleTextElement ) )
-            // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:215:1: (this_FontElement_0= ruleFontElement | this_NewLineElement_1= ruleNewLineElement | this_BulletElement_2= ruleBulletElement | this_FigureElement_3= ruleFigureElement | this_FigureRefElement_4= ruleFigureRefElement | this_FootnoteElement_5= ruleFootnoteElement | this_HeadingElement_6= ruleHeadingElement | this_NullElement_7= ruleNullElement | this_OclCodeElement_8= ruleOclCodeElement | this_OclEvalElement_9= ruleOclEvalElement | this_OclTextElement_10= ruleOclTextElement | this_TextElement_11= ruleTextElement )
+            // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:214:28: ( (this_FontElement_0= ruleFontElement | this_NewLineElement_1= ruleNewLineElement | this_BulletElement_2= ruleBulletElement | this_FigureElement_3= ruleFigureElement | this_FigureRefElement_4= ruleFigureRefElement | this_FootnoteElement_5= ruleFootnoteElement | this_HeadingElement_6= ruleHeadingElement | this_NullElement_7= ruleNullElement | this_OCLCodeElement_8= ruleOCLCodeElement | this_OCLEvalElement_9= ruleOCLEvalElement | this_OCLTextElement_10= ruleOCLTextElement | this_TextElement_11= ruleTextElement ) )
+            // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:215:1: (this_FontElement_0= ruleFontElement | this_NewLineElement_1= ruleNewLineElement | this_BulletElement_2= ruleBulletElement | this_FigureElement_3= ruleFigureElement | this_FigureRefElement_4= ruleFigureRefElement | this_FootnoteElement_5= ruleFootnoteElement | this_HeadingElement_6= ruleHeadingElement | this_NullElement_7= ruleNullElement | this_OCLCodeElement_8= ruleOCLCodeElement | this_OCLEvalElement_9= ruleOCLEvalElement | this_OCLTextElement_10= ruleOCLTextElement | this_TextElement_11= ruleTextElement )
             {
-            // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:215:1: (this_FontElement_0= ruleFontElement | this_NewLineElement_1= ruleNewLineElement | this_BulletElement_2= ruleBulletElement | this_FigureElement_3= ruleFigureElement | this_FigureRefElement_4= ruleFigureRefElement | this_FootnoteElement_5= ruleFootnoteElement | this_HeadingElement_6= ruleHeadingElement | this_NullElement_7= ruleNullElement | this_OclCodeElement_8= ruleOclCodeElement | this_OclEvalElement_9= ruleOclEvalElement | this_OclTextElement_10= ruleOclTextElement | this_TextElement_11= ruleTextElement )
+            // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:215:1: (this_FontElement_0= ruleFontElement | this_NewLineElement_1= ruleNewLineElement | this_BulletElement_2= ruleBulletElement | this_FigureElement_3= ruleFigureElement | this_FigureRefElement_4= ruleFigureRefElement | this_FootnoteElement_5= ruleFootnoteElement | this_HeadingElement_6= ruleHeadingElement | this_NullElement_7= ruleNullElement | this_OCLCodeElement_8= ruleOCLCodeElement | this_OCLEvalElement_9= ruleOCLEvalElement | this_OCLTextElement_10= ruleOCLTextElement | this_TextElement_11= ruleTextElement )
             int alt3=12;
             alt3 = dfa3.predict(input);
             switch (alt3) {
@@ -786,7 +786,7 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 9 :
-                    // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:320:2: this_OclCodeElement_8= ruleOclCodeElement
+                    // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:320:2: this_OCLCodeElement_8= ruleOCLCodeElement
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -795,17 +795,17 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
                     }
                     if ( state.backtracking==0 ) {
                        
-                              newCompositeNode(grammarAccess.getMarkupElementAccess().getOclCodeElementParserRuleCall_8()); 
+                              newCompositeNode(grammarAccess.getMarkupElementAccess().getOCLCodeElementParserRuleCall_8()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleOclCodeElement_in_ruleMarkupElement733);
-                    this_OclCodeElement_8=ruleOclCodeElement();
+                    pushFollow(FollowSets000.FOLLOW_ruleOCLCodeElement_in_ruleMarkupElement733);
+                    this_OCLCodeElement_8=ruleOCLCodeElement();
 
                     state._fsp--;
                     if (state.failed) return current;
                     if ( state.backtracking==0 ) {
                        
-                              current = this_OclCodeElement_8; 
+                              current = this_OCLCodeElement_8; 
                               afterParserOrEnumRuleCall();
                           
                     }
@@ -813,7 +813,7 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 10 :
-                    // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:333:2: this_OclEvalElement_9= ruleOclEvalElement
+                    // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:333:2: this_OCLEvalElement_9= ruleOCLEvalElement
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -822,17 +822,17 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
                     }
                     if ( state.backtracking==0 ) {
                        
-                              newCompositeNode(grammarAccess.getMarkupElementAccess().getOclEvalElementParserRuleCall_9()); 
+                              newCompositeNode(grammarAccess.getMarkupElementAccess().getOCLEvalElementParserRuleCall_9()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleOclEvalElement_in_ruleMarkupElement763);
-                    this_OclEvalElement_9=ruleOclEvalElement();
+                    pushFollow(FollowSets000.FOLLOW_ruleOCLEvalElement_in_ruleMarkupElement763);
+                    this_OCLEvalElement_9=ruleOCLEvalElement();
 
                     state._fsp--;
                     if (state.failed) return current;
                     if ( state.backtracking==0 ) {
                        
-                              current = this_OclEvalElement_9; 
+                              current = this_OCLEvalElement_9; 
                               afterParserOrEnumRuleCall();
                           
                     }
@@ -840,7 +840,7 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 11 :
-                    // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:346:2: this_OclTextElement_10= ruleOclTextElement
+                    // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:346:2: this_OCLTextElement_10= ruleOCLTextElement
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -849,17 +849,17 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
                     }
                     if ( state.backtracking==0 ) {
                        
-                              newCompositeNode(grammarAccess.getMarkupElementAccess().getOclTextElementParserRuleCall_10()); 
+                              newCompositeNode(grammarAccess.getMarkupElementAccess().getOCLTextElementParserRuleCall_10()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleOclTextElement_in_ruleMarkupElement793);
-                    this_OclTextElement_10=ruleOclTextElement();
+                    pushFollow(FollowSets000.FOLLOW_ruleOCLTextElement_in_ruleMarkupElement793);
+                    this_OCLTextElement_10=ruleOCLTextElement();
 
                     state._fsp--;
                     if (state.failed) return current;
                     if ( state.backtracking==0 ) {
                        
-                              current = this_OclTextElement_10; 
+                              current = this_OCLTextElement_10; 
                               afterParserOrEnumRuleCall();
                           
                     }
@@ -2503,30 +2503,30 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleNullElement"
 
 
-    // $ANTLR start "entryRuleOclCodeElement"
-    // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:962:1: entryRuleOclCodeElement returns [EObject current=null] : iv_ruleOclCodeElement= ruleOclCodeElement EOF ;
-    public final EObject entryRuleOclCodeElement() throws RecognitionException {
+    // $ANTLR start "entryRuleOCLCodeElement"
+    // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:962:1: entryRuleOCLCodeElement returns [EObject current=null] : iv_ruleOCLCodeElement= ruleOCLCodeElement EOF ;
+    public final EObject entryRuleOCLCodeElement() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleOclCodeElement = null;
+        EObject iv_ruleOCLCodeElement = null;
 
 
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:963:2: (iv_ruleOclCodeElement= ruleOclCodeElement EOF )
-            // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:964:2: iv_ruleOclCodeElement= ruleOclCodeElement EOF
+            // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:963:2: (iv_ruleOCLCodeElement= ruleOCLCodeElement EOF )
+            // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:964:2: iv_ruleOCLCodeElement= ruleOCLCodeElement EOF
             {
             if ( state.backtracking==0 ) {
-               newCompositeNode(grammarAccess.getOclCodeElementRule()); 
+               newCompositeNode(grammarAccess.getOCLCodeElementRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleOclCodeElement_in_entryRuleOclCodeElement2165);
-            iv_ruleOclCodeElement=ruleOclCodeElement();
+            pushFollow(FollowSets000.FOLLOW_ruleOCLCodeElement_in_entryRuleOCLCodeElement2165);
+            iv_ruleOCLCodeElement=ruleOCLCodeElement();
 
             state._fsp--;
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
-               current =iv_ruleOclCodeElement; 
+               current =iv_ruleOCLCodeElement; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOclCodeElement2175); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOCLCodeElement2175); if (state.failed) return current;
 
             }
 
@@ -2540,12 +2540,12 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleOclCodeElement"
+    // $ANTLR end "entryRuleOCLCodeElement"
 
 
-    // $ANTLR start "ruleOclCodeElement"
-    // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:971:1: ruleOclCodeElement returns [EObject current=null] : ( () otherlv_1= 'oclCode' otherlv_2= '[' ( (lv_elements_3_0= ruleMarkupElement ) )* otherlv_4= ']' ) ;
-    public final EObject ruleOclCodeElement() throws RecognitionException {
+    // $ANTLR start "ruleOCLCodeElement"
+    // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:971:1: ruleOCLCodeElement returns [EObject current=null] : ( () otherlv_1= 'oclCode' otherlv_2= '[' ( (lv_elements_3_0= ruleMarkupElement ) )* otherlv_4= ']' ) ;
+    public final EObject ruleOCLCodeElement() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
@@ -2574,23 +2574,23 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
 
                       current = forceCreateModelElement(
-                          grammarAccess.getOclCodeElementAccess().getOclCodeElementAction_0(),
+                          grammarAccess.getOCLCodeElementAccess().getOCLCodeElementAction_0(),
                           current);
                   
             }
 
             }
 
-            otherlv_1=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleOclCodeElement2224); if (state.failed) return current;
+            otherlv_1=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleOCLCodeElement2224); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-                  	newLeafNode(otherlv_1, grammarAccess.getOclCodeElementAccess().getOclCodeKeyword_1());
+                  	newLeafNode(otherlv_1, grammarAccess.getOCLCodeElementAccess().getOclCodeKeyword_1());
                   
             }
-            otherlv_2=(Token)match(input,27,FollowSets000.FOLLOW_27_in_ruleOclCodeElement2236); if (state.failed) return current;
+            otherlv_2=(Token)match(input,27,FollowSets000.FOLLOW_27_in_ruleOCLCodeElement2236); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-                  	newLeafNode(otherlv_2, grammarAccess.getOclCodeElementAccess().getLeftSquareBracketKeyword_2());
+                  	newLeafNode(otherlv_2, grammarAccess.getOCLCodeElementAccess().getLeftSquareBracketKeyword_2());
                   
             }
             // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:992:1: ( (lv_elements_3_0= ruleMarkupElement ) )*
@@ -2613,10 +2613,10 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
             	       
-            	      	        newCompositeNode(grammarAccess.getOclCodeElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
+            	      	        newCompositeNode(grammarAccess.getOCLCodeElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleMarkupElement_in_ruleOclCodeElement2257);
+            	    pushFollow(FollowSets000.FOLLOW_ruleMarkupElement_in_ruleOCLCodeElement2257);
             	    lv_elements_3_0=ruleMarkupElement();
 
             	    state._fsp--;
@@ -2624,7 +2624,7 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
             	    if ( state.backtracking==0 ) {
 
             	      	        if (current==null) {
-            	      	            current = createModelElementForParent(grammarAccess.getOclCodeElementRule());
+            	      	            current = createModelElementForParent(grammarAccess.getOCLCodeElementRule());
             	      	        }
             	             		add(
             	             			current, 
@@ -2646,10 +2646,10 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_4=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleOclCodeElement2270); if (state.failed) return current;
+            otherlv_4=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleOCLCodeElement2270); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-                  	newLeafNode(otherlv_4, grammarAccess.getOclCodeElementAccess().getRightSquareBracketKeyword_4());
+                  	newLeafNode(otherlv_4, grammarAccess.getOCLCodeElementAccess().getRightSquareBracketKeyword_4());
                   
             }
 
@@ -2671,33 +2671,33 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleOclCodeElement"
+    // $ANTLR end "ruleOCLCodeElement"
 
 
-    // $ANTLR start "entryRuleOclEvalElement"
-    // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:1022:1: entryRuleOclEvalElement returns [EObject current=null] : iv_ruleOclEvalElement= ruleOclEvalElement EOF ;
-    public final EObject entryRuleOclEvalElement() throws RecognitionException {
+    // $ANTLR start "entryRuleOCLEvalElement"
+    // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:1022:1: entryRuleOCLEvalElement returns [EObject current=null] : iv_ruleOCLEvalElement= ruleOCLEvalElement EOF ;
+    public final EObject entryRuleOCLEvalElement() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleOclEvalElement = null;
+        EObject iv_ruleOCLEvalElement = null;
 
 
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:1023:2: (iv_ruleOclEvalElement= ruleOclEvalElement EOF )
-            // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:1024:2: iv_ruleOclEvalElement= ruleOclEvalElement EOF
+            // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:1023:2: (iv_ruleOCLEvalElement= ruleOCLEvalElement EOF )
+            // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:1024:2: iv_ruleOCLEvalElement= ruleOCLEvalElement EOF
             {
             if ( state.backtracking==0 ) {
-               newCompositeNode(grammarAccess.getOclEvalElementRule()); 
+               newCompositeNode(grammarAccess.getOCLEvalElementRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleOclEvalElement_in_entryRuleOclEvalElement2306);
-            iv_ruleOclEvalElement=ruleOclEvalElement();
+            pushFollow(FollowSets000.FOLLOW_ruleOCLEvalElement_in_entryRuleOCLEvalElement2306);
+            iv_ruleOCLEvalElement=ruleOCLEvalElement();
 
             state._fsp--;
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
-               current =iv_ruleOclEvalElement; 
+               current =iv_ruleOCLEvalElement; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOclEvalElement2316); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOCLEvalElement2316); if (state.failed) return current;
 
             }
 
@@ -2711,12 +2711,12 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleOclEvalElement"
+    // $ANTLR end "entryRuleOCLEvalElement"
 
 
-    // $ANTLR start "ruleOclEvalElement"
-    // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:1031:1: ruleOclEvalElement returns [EObject current=null] : ( () otherlv_1= 'oclEval' otherlv_2= '[' ( (lv_elements_3_0= ruleMarkupElement ) )* otherlv_4= ']' ) ;
-    public final EObject ruleOclEvalElement() throws RecognitionException {
+    // $ANTLR start "ruleOCLEvalElement"
+    // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:1031:1: ruleOCLEvalElement returns [EObject current=null] : ( () otherlv_1= 'oclEval' otherlv_2= '[' ( (lv_elements_3_0= ruleMarkupElement ) )* otherlv_4= ']' ) ;
+    public final EObject ruleOCLEvalElement() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
@@ -2745,23 +2745,23 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
 
                       current = forceCreateModelElement(
-                          grammarAccess.getOclEvalElementAccess().getOclEvalElementAction_0(),
+                          grammarAccess.getOCLEvalElementAccess().getOCLEvalElementAction_0(),
                           current);
                   
             }
 
             }
 
-            otherlv_1=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleOclEvalElement2365); if (state.failed) return current;
+            otherlv_1=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleOCLEvalElement2365); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-                  	newLeafNode(otherlv_1, grammarAccess.getOclEvalElementAccess().getOclEvalKeyword_1());
+                  	newLeafNode(otherlv_1, grammarAccess.getOCLEvalElementAccess().getOclEvalKeyword_1());
                   
             }
-            otherlv_2=(Token)match(input,27,FollowSets000.FOLLOW_27_in_ruleOclEvalElement2377); if (state.failed) return current;
+            otherlv_2=(Token)match(input,27,FollowSets000.FOLLOW_27_in_ruleOCLEvalElement2377); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-                  	newLeafNode(otherlv_2, grammarAccess.getOclEvalElementAccess().getLeftSquareBracketKeyword_2());
+                  	newLeafNode(otherlv_2, grammarAccess.getOCLEvalElementAccess().getLeftSquareBracketKeyword_2());
                   
             }
             // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:1052:1: ( (lv_elements_3_0= ruleMarkupElement ) )*
@@ -2784,10 +2784,10 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
             	       
-            	      	        newCompositeNode(grammarAccess.getOclEvalElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
+            	      	        newCompositeNode(grammarAccess.getOCLEvalElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleMarkupElement_in_ruleOclEvalElement2398);
+            	    pushFollow(FollowSets000.FOLLOW_ruleMarkupElement_in_ruleOCLEvalElement2398);
             	    lv_elements_3_0=ruleMarkupElement();
 
             	    state._fsp--;
@@ -2795,7 +2795,7 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
             	    if ( state.backtracking==0 ) {
 
             	      	        if (current==null) {
-            	      	            current = createModelElementForParent(grammarAccess.getOclEvalElementRule());
+            	      	            current = createModelElementForParent(grammarAccess.getOCLEvalElementRule());
             	      	        }
             	             		add(
             	             			current, 
@@ -2817,10 +2817,10 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_4=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleOclEvalElement2411); if (state.failed) return current;
+            otherlv_4=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleOCLEvalElement2411); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-                  	newLeafNode(otherlv_4, grammarAccess.getOclEvalElementAccess().getRightSquareBracketKeyword_4());
+                  	newLeafNode(otherlv_4, grammarAccess.getOCLEvalElementAccess().getRightSquareBracketKeyword_4());
                   
             }
 
@@ -2842,33 +2842,33 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleOclEvalElement"
+    // $ANTLR end "ruleOCLEvalElement"
 
 
-    // $ANTLR start "entryRuleOclTextElement"
-    // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:1082:1: entryRuleOclTextElement returns [EObject current=null] : iv_ruleOclTextElement= ruleOclTextElement EOF ;
-    public final EObject entryRuleOclTextElement() throws RecognitionException {
+    // $ANTLR start "entryRuleOCLTextElement"
+    // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:1082:1: entryRuleOCLTextElement returns [EObject current=null] : iv_ruleOCLTextElement= ruleOCLTextElement EOF ;
+    public final EObject entryRuleOCLTextElement() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleOclTextElement = null;
+        EObject iv_ruleOCLTextElement = null;
 
 
         try {
-            // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:1083:2: (iv_ruleOclTextElement= ruleOclTextElement EOF )
-            // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:1084:2: iv_ruleOclTextElement= ruleOclTextElement EOF
+            // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:1083:2: (iv_ruleOCLTextElement= ruleOCLTextElement EOF )
+            // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:1084:2: iv_ruleOCLTextElement= ruleOCLTextElement EOF
             {
             if ( state.backtracking==0 ) {
-               newCompositeNode(grammarAccess.getOclTextElementRule()); 
+               newCompositeNode(grammarAccess.getOCLTextElementRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleOclTextElement_in_entryRuleOclTextElement2447);
-            iv_ruleOclTextElement=ruleOclTextElement();
+            pushFollow(FollowSets000.FOLLOW_ruleOCLTextElement_in_entryRuleOCLTextElement2447);
+            iv_ruleOCLTextElement=ruleOCLTextElement();
 
             state._fsp--;
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
-               current =iv_ruleOclTextElement; 
+               current =iv_ruleOCLTextElement; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOclTextElement2457); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOCLTextElement2457); if (state.failed) return current;
 
             }
 
@@ -2882,12 +2882,12 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleOclTextElement"
+    // $ANTLR end "entryRuleOCLTextElement"
 
 
-    // $ANTLR start "ruleOclTextElement"
-    // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:1091:1: ruleOclTextElement returns [EObject current=null] : ( () otherlv_1= 'oclText' otherlv_2= '[' ( (lv_elements_3_0= ruleMarkupElement ) )* otherlv_4= ']' ) ;
-    public final EObject ruleOclTextElement() throws RecognitionException {
+    // $ANTLR start "ruleOCLTextElement"
+    // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:1091:1: ruleOCLTextElement returns [EObject current=null] : ( () otherlv_1= 'oclText' otherlv_2= '[' ( (lv_elements_3_0= ruleMarkupElement ) )* otherlv_4= ']' ) ;
+    public final EObject ruleOCLTextElement() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
@@ -2916,23 +2916,23 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
 
                       current = forceCreateModelElement(
-                          grammarAccess.getOclTextElementAccess().getOclTextElementAction_0(),
+                          grammarAccess.getOCLTextElementAccess().getOCLTextElementAction_0(),
                           current);
                   
             }
 
             }
 
-            otherlv_1=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleOclTextElement2506); if (state.failed) return current;
+            otherlv_1=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleOCLTextElement2506); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-                  	newLeafNode(otherlv_1, grammarAccess.getOclTextElementAccess().getOclTextKeyword_1());
+                  	newLeafNode(otherlv_1, grammarAccess.getOCLTextElementAccess().getOclTextKeyword_1());
                   
             }
-            otherlv_2=(Token)match(input,27,FollowSets000.FOLLOW_27_in_ruleOclTextElement2518); if (state.failed) return current;
+            otherlv_2=(Token)match(input,27,FollowSets000.FOLLOW_27_in_ruleOCLTextElement2518); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-                  	newLeafNode(otherlv_2, grammarAccess.getOclTextElementAccess().getLeftSquareBracketKeyword_2());
+                  	newLeafNode(otherlv_2, grammarAccess.getOCLTextElementAccess().getLeftSquareBracketKeyword_2());
                   
             }
             // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:1112:1: ( (lv_elements_3_0= ruleMarkupElement ) )*
@@ -2955,10 +2955,10 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
             	       
-            	      	        newCompositeNode(grammarAccess.getOclTextElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
+            	      	        newCompositeNode(grammarAccess.getOCLTextElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleMarkupElement_in_ruleOclTextElement2539);
+            	    pushFollow(FollowSets000.FOLLOW_ruleMarkupElement_in_ruleOCLTextElement2539);
             	    lv_elements_3_0=ruleMarkupElement();
 
             	    state._fsp--;
@@ -2966,7 +2966,7 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
             	    if ( state.backtracking==0 ) {
 
             	      	        if (current==null) {
-            	      	            current = createModelElementForParent(grammarAccess.getOclTextElementRule());
+            	      	            current = createModelElementForParent(grammarAccess.getOCLTextElementRule());
             	      	        }
             	             		add(
             	             			current, 
@@ -2988,10 +2988,10 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_4=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleOclTextElement2552); if (state.failed) return current;
+            otherlv_4=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleOCLTextElement2552); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-                  	newLeafNode(otherlv_4, grammarAccess.getOclTextElementAccess().getRightSquareBracketKeyword_4());
+                  	newLeafNode(otherlv_4, grammarAccess.getOCLTextElementAccess().getRightSquareBracketKeyword_4());
                   
             }
 
@@ -3013,7 +3013,7 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleOclTextElement"
+    // $ANTLR end "ruleOCLTextElement"
 
 
     // $ANTLR start "entryRuleTextElement"
@@ -3539,19 +3539,19 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
 
     // $ANTLR start synpred19_InternalMarkup
     public final void synpred19_InternalMarkup_fragment() throws RecognitionException {   
-        EObject this_OclCodeElement_8 = null;
+        EObject this_OCLCodeElement_8 = null;
 
 
-        // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:320:2: (this_OclCodeElement_8= ruleOclCodeElement )
-        // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:320:2: this_OclCodeElement_8= ruleOclCodeElement
+        // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:320:2: (this_OCLCodeElement_8= ruleOCLCodeElement )
+        // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:320:2: this_OCLCodeElement_8= ruleOCLCodeElement
         {
         if ( state.backtracking==0 ) {
            
           	  /* */ 
           	
         }
-        pushFollow(FollowSets000.FOLLOW_ruleOclCodeElement_in_synpred19_InternalMarkup733);
-        this_OclCodeElement_8=ruleOclCodeElement();
+        pushFollow(FollowSets000.FOLLOW_ruleOCLCodeElement_in_synpred19_InternalMarkup733);
+        this_OCLCodeElement_8=ruleOCLCodeElement();
 
         state._fsp--;
         if (state.failed) return ;
@@ -3562,19 +3562,19 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
 
     // $ANTLR start synpred20_InternalMarkup
     public final void synpred20_InternalMarkup_fragment() throws RecognitionException {   
-        EObject this_OclEvalElement_9 = null;
+        EObject this_OCLEvalElement_9 = null;
 
 
-        // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:333:2: (this_OclEvalElement_9= ruleOclEvalElement )
-        // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:333:2: this_OclEvalElement_9= ruleOclEvalElement
+        // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:333:2: (this_OCLEvalElement_9= ruleOCLEvalElement )
+        // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:333:2: this_OCLEvalElement_9= ruleOCLEvalElement
         {
         if ( state.backtracking==0 ) {
            
           	  /* */ 
           	
         }
-        pushFollow(FollowSets000.FOLLOW_ruleOclEvalElement_in_synpred20_InternalMarkup763);
-        this_OclEvalElement_9=ruleOclEvalElement();
+        pushFollow(FollowSets000.FOLLOW_ruleOCLEvalElement_in_synpred20_InternalMarkup763);
+        this_OCLEvalElement_9=ruleOCLEvalElement();
 
         state._fsp--;
         if (state.failed) return ;
@@ -3585,19 +3585,19 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
 
     // $ANTLR start synpred21_InternalMarkup
     public final void synpred21_InternalMarkup_fragment() throws RecognitionException {   
-        EObject this_OclTextElement_10 = null;
+        EObject this_OCLTextElement_10 = null;
 
 
-        // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:346:2: (this_OclTextElement_10= ruleOclTextElement )
-        // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:346:2: this_OclTextElement_10= ruleOclTextElement
+        // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:346:2: (this_OCLTextElement_10= ruleOCLTextElement )
+        // ../org.eclipse.ocl.examples.xtext.markup/src-gen/org/eclipse/ocl/examples/xtext/markup/parser/antlr/internal/InternalMarkup.g:346:2: this_OCLTextElement_10= ruleOCLTextElement
         {
         if ( state.backtracking==0 ) {
            
           	  /* */ 
           	
         }
-        pushFollow(FollowSets000.FOLLOW_ruleOclTextElement_in_synpred21_InternalMarkup793);
-        this_OclTextElement_10=ruleOclTextElement();
+        pushFollow(FollowSets000.FOLLOW_ruleOCLTextElement_in_synpred21_InternalMarkup793);
+        this_OCLTextElement_10=ruleOCLTextElement();
 
         state._fsp--;
         if (state.failed) return ;
@@ -3952,7 +3952,7 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
             this.transition = DFA3_transition;
         }
         public String getDescription() {
-            return "215:1: (this_FontElement_0= ruleFontElement | this_NewLineElement_1= ruleNewLineElement | this_BulletElement_2= ruleBulletElement | this_FigureElement_3= ruleFigureElement | this_FigureRefElement_4= ruleFigureRefElement | this_FootnoteElement_5= ruleFootnoteElement | this_HeadingElement_6= ruleHeadingElement | this_NullElement_7= ruleNullElement | this_OclCodeElement_8= ruleOclCodeElement | this_OclEvalElement_9= ruleOclEvalElement | this_OclTextElement_10= ruleOclTextElement | this_TextElement_11= ruleTextElement )";
+            return "215:1: (this_FontElement_0= ruleFontElement | this_NewLineElement_1= ruleNewLineElement | this_BulletElement_2= ruleBulletElement | this_FigureElement_3= ruleFigureElement | this_FigureRefElement_4= ruleFigureRefElement | this_FootnoteElement_5= ruleFootnoteElement | this_HeadingElement_6= ruleHeadingElement | this_NullElement_7= ruleNullElement | this_OCLCodeElement_8= ruleOCLCodeElement | this_OCLEvalElement_9= ruleOCLEvalElement | this_OCLTextElement_10= ruleOCLTextElement | this_TextElement_11= ruleTextElement )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -4319,9 +4319,9 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
         public static final BitSet FOLLOW_ruleFootnoteElement_in_ruleMarkupElement643 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleHeadingElement_in_ruleMarkupElement673 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleNullElement_in_ruleMarkupElement703 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOclCodeElement_in_ruleMarkupElement733 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOclEvalElement_in_ruleMarkupElement763 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOclTextElement_in_ruleMarkupElement793 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOCLCodeElement_in_ruleMarkupElement733 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOCLEvalElement_in_ruleMarkupElement763 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOCLTextElement_in_ruleMarkupElement793 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTextElement_in_ruleMarkupElement823 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleBulletElement_in_entryRuleBulletElement858 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleBulletElement868 = new BitSet(new long[]{0x0000000000000002L});
@@ -4380,24 +4380,24 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
         public static final BitSet FOLLOW_27_in_ruleNullElement2095 = new BitSet(new long[]{0x000000007FFF03B0L});
         public static final BitSet FOLLOW_ruleMarkupElement_in_ruleNullElement2116 = new BitSet(new long[]{0x000000007FFF03B0L});
         public static final BitSet FOLLOW_28_in_ruleNullElement2129 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOclCodeElement_in_entryRuleOclCodeElement2165 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleOclCodeElement2175 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_23_in_ruleOclCodeElement2224 = new BitSet(new long[]{0x0000000008000000L});
-        public static final BitSet FOLLOW_27_in_ruleOclCodeElement2236 = new BitSet(new long[]{0x000000007FFF03B0L});
-        public static final BitSet FOLLOW_ruleMarkupElement_in_ruleOclCodeElement2257 = new BitSet(new long[]{0x000000007FFF03B0L});
-        public static final BitSet FOLLOW_28_in_ruleOclCodeElement2270 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOclEvalElement_in_entryRuleOclEvalElement2306 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleOclEvalElement2316 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_24_in_ruleOclEvalElement2365 = new BitSet(new long[]{0x0000000008000000L});
-        public static final BitSet FOLLOW_27_in_ruleOclEvalElement2377 = new BitSet(new long[]{0x000000007FFF03B0L});
-        public static final BitSet FOLLOW_ruleMarkupElement_in_ruleOclEvalElement2398 = new BitSet(new long[]{0x000000007FFF03B0L});
-        public static final BitSet FOLLOW_28_in_ruleOclEvalElement2411 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOclTextElement_in_entryRuleOclTextElement2447 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleOclTextElement2457 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_25_in_ruleOclTextElement2506 = new BitSet(new long[]{0x0000000008000000L});
-        public static final BitSet FOLLOW_27_in_ruleOclTextElement2518 = new BitSet(new long[]{0x000000007FFF03B0L});
-        public static final BitSet FOLLOW_ruleMarkupElement_in_ruleOclTextElement2539 = new BitSet(new long[]{0x000000007FFF03B0L});
-        public static final BitSet FOLLOW_28_in_ruleOclTextElement2552 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOCLCodeElement_in_entryRuleOCLCodeElement2165 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleOCLCodeElement2175 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_23_in_ruleOCLCodeElement2224 = new BitSet(new long[]{0x0000000008000000L});
+        public static final BitSet FOLLOW_27_in_ruleOCLCodeElement2236 = new BitSet(new long[]{0x000000007FFF03B0L});
+        public static final BitSet FOLLOW_ruleMarkupElement_in_ruleOCLCodeElement2257 = new BitSet(new long[]{0x000000007FFF03B0L});
+        public static final BitSet FOLLOW_28_in_ruleOCLCodeElement2270 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOCLEvalElement_in_entryRuleOCLEvalElement2306 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleOCLEvalElement2316 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_24_in_ruleOCLEvalElement2365 = new BitSet(new long[]{0x0000000008000000L});
+        public static final BitSet FOLLOW_27_in_ruleOCLEvalElement2377 = new BitSet(new long[]{0x000000007FFF03B0L});
+        public static final BitSet FOLLOW_ruleMarkupElement_in_ruleOCLEvalElement2398 = new BitSet(new long[]{0x000000007FFF03B0L});
+        public static final BitSet FOLLOW_28_in_ruleOCLEvalElement2411 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOCLTextElement_in_entryRuleOCLTextElement2447 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleOCLTextElement2457 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_25_in_ruleOCLTextElement2506 = new BitSet(new long[]{0x0000000008000000L});
+        public static final BitSet FOLLOW_27_in_ruleOCLTextElement2518 = new BitSet(new long[]{0x000000007FFF03B0L});
+        public static final BitSet FOLLOW_ruleMarkupElement_in_ruleOCLTextElement2539 = new BitSet(new long[]{0x000000007FFF03B0L});
+        public static final BitSet FOLLOW_28_in_ruleOCLTextElement2552 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTextElement_in_entryRuleTextElement2588 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleTextElement2598 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_ruleTextElement2642 = new BitSet(new long[]{0x0000000064000332L});
@@ -4414,9 +4414,9 @@ public class InternalMarkupParser extends AbstractInternalAntlrParser {
         public static final BitSet FOLLOW_ruleFigureRefElement_in_synpred15_InternalMarkup613 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleFootnoteElement_in_synpred16_InternalMarkup643 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleHeadingElement_in_synpred17_InternalMarkup673 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOclCodeElement_in_synpred19_InternalMarkup733 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOclEvalElement_in_synpred20_InternalMarkup763 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOclTextElement_in_synpred21_InternalMarkup793 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOCLCodeElement_in_synpred19_InternalMarkup733 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOCLEvalElement_in_synpred20_InternalMarkup763 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOCLTextElement_in_synpred21_InternalMarkup793 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_synpred43_InternalMarkup2642 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_WORD_in_synpred43_InternalMarkup2662 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_INT_in_synpred43_InternalMarkup2682 = new BitSet(new long[]{0x0000000000000002L});

@@ -12,11 +12,9 @@
  *
  * </copyright>
  *
- * $Id: GenerateOclMetaModel.mwe2,v 1.2 2011/01/24 20:54:28 ewillink Exp $
- * 
  * Run As->MWE2 Workflow to regenerate the pivot model.
  */
-module GenerateOclMetaModel
+module GenerateOCLMetaModel
 
 import org.eclipse.ocl.examples.build.utilities.*
 import org.eclipse.emf.mwe.utils.*
@@ -26,7 +24,7 @@ import org.eclipse.emf.ecore.resource.impl.*
 var projectName = "org.eclipse.ocl.examples.pivot"
 
 /**
- *	Generate the OCL Meta Model, by converting Pivot.ecore to OclMetaModel.java.
+ *	Generate the OCL Meta Model, by converting Pivot.ecore to OCLMetaModel.java.
  */
 Workflow {
 	bean = ResourceSetImpl : resourceSet {}
@@ -37,12 +35,12 @@ Workflow {
 //    bean = StandaloneSetup { resourceSet = resourceSet
 //    	platformUri = ".."
  //   }
-    component = OclMetaModelCodeGenerator { resourceSet = resourceSet
+    component = OCLMetaModelCodeGenerator { resourceSet = resourceSet
     	projectName = "${projectName}"
     	libraryFile = "model/Pivot.ecore"
     	javaFolder = "emf-gen"
     	javaPackageName = "${projectName}"
-    	javaClassName = "OclMetaModel"
+    	javaClassName = "OCLMetaModel"
     }
 }
 

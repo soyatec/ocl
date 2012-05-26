@@ -141,7 +141,7 @@ SpecificationCS returns ContextSpecificationCS:
 //	('(' ownedType=TypeExpCS ')')?;
 
 NavigatingArgExpCS returns essentialocl::ExpCS:
-	({OclMessageArgCS} '?')
+	({OCLMessageArgCS} '?')
 	| ExpCS
 ;
 

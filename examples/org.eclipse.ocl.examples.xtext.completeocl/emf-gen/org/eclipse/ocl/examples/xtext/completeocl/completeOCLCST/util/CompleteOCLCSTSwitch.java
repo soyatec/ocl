@@ -47,7 +47,7 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.FeatureContextD
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.IncludeCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InitCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InvCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OclMessageArgCS;
+import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PackageDeclarationCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PathNameDeclCS;
@@ -354,8 +354,8 @@ protected T doSwitch(int classifierID, EObject theEObject)
 			}
 			case CompleteOCLCSTPackage.OCL_MESSAGE_ARG_CS:
 			{
-				OclMessageArgCS oclMessageArgCS = (OclMessageArgCS)theEObject;
-				T result = caseOclMessageArgCS(oclMessageArgCS);
+				OCLMessageArgCS oclMessageArgCS = (OCLMessageArgCS)theEObject;
+				T result = caseOCLMessageArgCS(oclMessageArgCS);
 				if (result == null) result = caseExpCS(oclMessageArgCS);
 				if (result == null) result = caseModelElementCS(oclMessageArgCS);
 				if (result == null) result = casePivotableElementCS(oclMessageArgCS);
@@ -733,22 +733,22 @@ protected T doSwitch(int classifierID, EObject theEObject)
 	}
 
   /**
-	 * Returns the result of interpreting the object as an instance of '<em>Ocl Message Arg CS</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>OCL Message Arg CS</em>'.
 	 * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Ocl Message Arg CS</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>OCL Message Arg CS</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-  public T caseOclMessageArgCS(OclMessageArgCS object)
-  {
+	public T caseOCLMessageArgCS(OCLMessageArgCS object)
+	{
 		return null;
 	}
 
-  /**
+/**
 	 * Returns the result of interpreting the object as an instance of '<em>Operation Context Decl CS</em>'.
 	 * <!-- begin-user-doc -->
    * This implementation returns null;

@@ -1183,7 +1183,7 @@ public class CompleteOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NavigatingArgExpCS");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final Action cOclMessageArgCSAction_0_0 = (Action)cGroup_0.eContents().get(0);
+		private final Action cOCLMessageArgCSAction_0_0 = (Action)cGroup_0.eContents().get(0);
 		private final Keyword cQuestionMarkKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
 		private final RuleCall cExpCSParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
@@ -1208,17 +1208,17 @@ public class CompleteOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//
 		//essentialocl::ExpCS:
 		//
-		//	{OclMessageArgCS} "?" | ExpCS;
+		//	{OCLMessageArgCS} "?" | ExpCS;
 		public ParserRule getRule() { return rule; }
 
-		//{OclMessageArgCS} "?" | ExpCS
+		//{OCLMessageArgCS} "?" | ExpCS
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//{OclMessageArgCS} "?"
+		//{OCLMessageArgCS} "?"
 		public Group getGroup_0() { return cGroup_0; }
 
-		//{OclMessageArgCS}
-		public Action getOclMessageArgCSAction_0_0() { return cOclMessageArgCSAction_0_0; }
+		//{OCLMessageArgCS}
+		public Action getOCLMessageArgCSAction_0_0() { return cOCLMessageArgCSAction_0_0; }
 
 		//"?"
 		public Keyword getQuestionMarkKeyword_0_1() { return cQuestionMarkKeyword_0_1; }
@@ -1614,7 +1614,7 @@ public class CompleteOCLGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	//essentialocl::ExpCS:
 	//
-	//	{OclMessageArgCS} "?" | ExpCS;
+	//	{OCLMessageArgCS} "?" | ExpCS;
 	public NavigatingArgExpCSElements getNavigatingArgExpCSAccess() {
 		return (pNavigatingArgExpCS != null) ? pNavigatingArgExpCS : (pNavigatingArgExpCS = new NavigatingArgExpCSElements());
 	}

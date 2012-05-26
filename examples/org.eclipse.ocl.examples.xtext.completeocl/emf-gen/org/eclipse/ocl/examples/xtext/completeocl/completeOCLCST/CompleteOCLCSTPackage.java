@@ -1803,11 +1803,11 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	int INV_CS_FEATURE_COUNT = CONTEXT_CONSTRAINT_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.OclMessageArgCSImpl <em>Ocl Message Arg CS</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.OCLMessageArgCSImpl <em>OCL Message Arg CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.OclMessageArgCSImpl
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getOclMessageArgCS()
+	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.OCLMessageArgCSImpl
+	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getOCLMessageArgCS()
 	 * @generated
 	 */
 	int OCL_MESSAGE_ARG_CS = 15;
@@ -1876,7 +1876,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	int OCL_MESSAGE_ARG_CS__TYPE = EssentialOCLCSTPackage.EXP_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Ocl Message Arg CS</em>' class.
+	 * The number of structural features of the '<em>OCL Message Arg CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2665,6 +2665,27 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	EClass getInvCS();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS <em>OCL Message Arg CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>OCL Message Arg CS</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS
+	 * @generated
+	 */
+	EClass getOCLMessageArgCS();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Type</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS#getType()
+	 * @see #getOCLMessageArgCS()
+	 * @generated
+	 */
+	EReference getOCLMessageArgCS_Type();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS <em>Def CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2820,27 +2841,6 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getBodyCS();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OclMessageArgCS <em>Ocl Message Arg CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Ocl Message Arg CS</em>'.
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OclMessageArgCS
-	 * @generated
-	 */
-	EClass getOclMessageArgCS();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OclMessageArgCS#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Type</em>'.
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OclMessageArgCS#getType()
-	 * @see #getOclMessageArgCS()
-	 * @generated
-	 */
-	EReference getOclMessageArgCS_Type();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -3243,14 +3243,14 @@ public interface CompleteOCLCSTPackage extends EPackage {
 		EClass BODY_CS = eINSTANCE.getBodyCS();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.OclMessageArgCSImpl <em>Ocl Message Arg CS</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.OCLMessageArgCSImpl <em>OCL Message Arg CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.OclMessageArgCSImpl
-		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getOclMessageArgCS()
+		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.OCLMessageArgCSImpl
+		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getOCLMessageArgCS()
 		 * @generated
 		 */
-		EClass OCL_MESSAGE_ARG_CS = eINSTANCE.getOclMessageArgCS();
+		EClass OCL_MESSAGE_ARG_CS = eINSTANCE.getOCLMessageArgCS();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
@@ -3258,7 +3258,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference OCL_MESSAGE_ARG_CS__TYPE = eINSTANCE.getOclMessageArgCS_Type();
+		EReference OCL_MESSAGE_ARG_CS__TYPE = eINSTANCE.getOCLMessageArgCS_Type();
 
 	}
 

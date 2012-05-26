@@ -14,10 +14,10 @@
  *
  * This code is auto-generated
  * from: model/Pivot.ecore
- * by: org.eclipse.ocl.examples.build.acceleo.GenerateOclMetaModel.java
- * defined by: org.eclipse.ocl.examples.build.acceleo.generateOclMetaModel.mtl
- * invoked by: org.eclipse.ocl.examples.build.utilities.OclMetaModelCodeGenerator.java
- * from: org.eclipse.ocl.examples.build.GenerateOclMetaModel.mwe2
+ * by: org.eclipse.ocl.examples.build.acceleo.GenerateOCLMetaModel.java
+ * defined by: org.eclipse.ocl.examples.build.acceleo.generateOCLMetaModel.mtl
+ * invoked by: org.eclipse.ocl.examples.build.utilities.OCLMetaModelCodeGenerator.java
+ * from: org.eclipse.ocl.examples.build.GenerateOCLMetaModel.mwe2
  *
  * Do not edit it.
  *
@@ -44,14 +44,14 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
  * It facilitates efficient model loading without the overheads of model reading.
  */
 @SuppressWarnings({"nls", "unused"})
-public class OclMetaModel extends XMIResourceImpl
+public class OCLMetaModel extends XMIResourceImpl
 {
 	/**
 	 *	The URI of this Standard Library.
 	 */
 	public static final String PIVOT_URI = "http://www.eclipse.org/ocl/3.1.0/Pivot";
 
-	public OclMetaModel(PivotStandardLibrary standardLibrary, String name, String nsPrefix, String nsURI) {
+	public OCLMetaModel(PivotStandardLibrary standardLibrary, String name, String nsPrefix, String nsURI) {
 		super(URI.createURI(PIVOT_URI));
 		Contents contents = new Contents(standardLibrary);
 		Package metaModel = contents.create(name != null ? name : "pivot", nsPrefix != null ? nsPrefix : "pivot", nsURI != null ? nsURI : "http://www.eclipse.org/ocl/3.1.0/Pivot");
@@ -692,7 +692,6 @@ public class OclMetaModel extends XMIResourceImpl
 		protected final Property pr_CollectionRange_first = createProperty("first", _OCLExpression);
 		protected final Property pr_CollectionRange_last = createProperty("last", _OCLExpression);
 		protected final Property pr_CollectionType_elementType = createProperty("elementType", _Type);
-		protected final Property pr_Comment_Element = createProperty("Element", _Element);
 		protected final Property pr_Comment_annotatedElement = createProperty("annotatedElement", _Element);
 		protected final Property pr_Comment_body = createProperty("body", _String);
 		protected final Property pr_Constraint_constrainedElement = createProperty("constrainedElement", _Element);
@@ -709,6 +708,7 @@ public class OclMetaModel extends XMIResourceImpl
 		protected final Property pr_DataType_isSerializable = createProperty("isSerializable", _Boolean);
 		protected final Property pr_Detail_Annotation = createProperty("Annotation", _Annotation);
 		protected final Property pr_Detail_value = createProperty("value", _String);
+		protected final Property pr_Element_Comment = createProperty("Comment", _Comment);
 		protected final Property pr_Element_Constraint = createProperty("Constraint", _Constraint);
 		protected final Property pr_Element_ownedComment = createProperty("ownedComment", _Comment);
 		protected final Property pr_EnumLiteralExp_referredEnumLiteral = createProperty("referredEnumLiteral", _EnumerationLiteral);
@@ -987,15 +987,11 @@ public class OclMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Type_CollectionType);
 			ownedProperties = _Comment.getOwnedAttribute();
-			ownedProperties.add(property = pr_Comment_Element);
-			property.setLower(BigInteger.valueOf(0));
-			property.setImplicit(true);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Element_ownedComment);
 			ownedProperties.add(property = pr_Comment_annotatedElement);
 			property.setLower(BigInteger.valueOf(0));
 			property.setUpper(BigInteger.valueOf(-1));
 			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Element_Comment);
 			ownedProperties.add(property = pr_Comment_body);
 			property.setLower(BigInteger.valueOf(0));
 			property.setIsResolveProxies(true);
@@ -1060,6 +1056,12 @@ public class OclMetaModel extends XMIResourceImpl
 			property.setUpper(BigInteger.valueOf(-1));
 			property.setIsResolveProxies(true);
 			ownedProperties = _Element.getOwnedAttribute();
+			ownedProperties.add(property = pr_Element_Comment);
+			property.setLower(BigInteger.valueOf(0));
+			property.setUpper(BigInteger.valueOf(-1));
+			property.setImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Comment_annotatedElement);
 			ownedProperties.add(property = pr_Element_Constraint);
 			property.setLower(BigInteger.valueOf(0));
 			property.setUpper(BigInteger.valueOf(-1));
@@ -1071,7 +1073,6 @@ public class OclMetaModel extends XMIResourceImpl
 			property.setUpper(BigInteger.valueOf(-1));
 			property.setIsComposite(true);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Comment_Element);
 			ownedProperties = _EnumLiteralExp.getOwnedAttribute();
 			ownedProperties.add(property = pr_EnumLiteralExp_referredEnumLiteral);
 			property.setLower(BigInteger.valueOf(0));

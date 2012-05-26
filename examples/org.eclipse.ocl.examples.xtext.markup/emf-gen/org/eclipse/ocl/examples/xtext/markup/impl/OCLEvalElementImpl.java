@@ -19,7 +19,7 @@ package org.eclipse.ocl.examples.xtext.markup.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.ocl.examples.xtext.markup.MarkupPackage;
-import org.eclipse.ocl.examples.xtext.markup.OclEvalElement;
+import org.eclipse.ocl.examples.xtext.markup.OCLEvalElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,13 +30,13 @@ import org.eclipse.ocl.examples.xtext.markup.OclEvalElement;
  *
  * @generated
  */
-public class OclEvalElementImpl extends CompoundElementImpl implements OclEvalElement {
+public class OCLEvalElementImpl extends CompoundElementImpl implements OCLEvalElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected OclEvalElementImpl() {
+	protected OCLEvalElementImpl() {
 		super();
 	}
 

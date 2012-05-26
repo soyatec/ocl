@@ -39,9 +39,9 @@ import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
 import org.eclipse.ocl.examples.pivot.utilities.PivotResource;
 
-public class QvtoWorkflowComponent extends AbstractWorkflowComponent
+public class QVToWorkflowComponent extends AbstractWorkflowComponent
 {
-	private static final Logger logger = Logger.getLogger(QvtoWorkflowComponent.class);
+	private static final Logger logger = Logger.getLogger(QVToWorkflowComponent.class);
 	
 	private ResourceSet resourceSet = null;	
 	private String uri = null;	

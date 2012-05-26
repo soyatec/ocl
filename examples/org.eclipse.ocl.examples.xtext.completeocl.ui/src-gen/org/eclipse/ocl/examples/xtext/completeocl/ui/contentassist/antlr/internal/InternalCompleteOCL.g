@@ -6606,11 +6606,11 @@ rule__NavigatingArgExpCS__Group_0__0__Impl
     }
 :
 (
-{ before(grammarAccess.getNavigatingArgExpCSAccess().getOclMessageArgCSAction_0_0()); }
+{ before(grammarAccess.getNavigatingArgExpCSAccess().getOCLMessageArgCSAction_0_0()); }
 (
 
 )
-{ after(grammarAccess.getNavigatingArgExpCSAccess().getOclMessageArgCSAction_0_0()); }
+{ after(grammarAccess.getNavigatingArgExpCSAccess().getOCLMessageArgCSAction_0_0()); }
 )
 
 ;

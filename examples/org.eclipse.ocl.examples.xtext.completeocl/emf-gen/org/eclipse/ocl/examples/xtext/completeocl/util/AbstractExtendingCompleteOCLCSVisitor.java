@@ -105,7 +105,7 @@ public abstract class AbstractExtendingCompleteOCLCSVisitor<R, C>
 		return visitContextConstraintCS(object);
 	}
 
-	public R visitOclMessageArgCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OclMessageArgCS object) {
+	public R visitOCLMessageArgCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS object) {
 		return visitExpCS(object);
 	}
 

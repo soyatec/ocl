@@ -93,7 +93,7 @@ import org.eclipse.ocl.examples.pivot.VoidType;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
-import org.eclipse.ocl.examples.pivot.model.OclMetaModel;
+import org.eclipse.ocl.examples.pivot.model.OCLMetaModel;
 import org.eclipse.ocl.examples.pivot.uml.UML2Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.util.Nameable;
 import org.eclipse.ocl.examples.pivot.utilities.CompleteElementIterable;
@@ -1614,7 +1614,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 					}
 				}
 				if (pivotMetaModel == null) {
-					OclMetaModel metaModelResource = new OclMetaModel(this, stdlibPackage.getName(), stdlibPackage.getNsPrefix(), stdlibPackage.getNsURI());	// FIXME duplication of TypeCaches.loadPivotMetaModel
+					OCLMetaModel metaModelResource = new OCLMetaModel(this, stdlibPackage.getName(), stdlibPackage.getNsPrefix(), stdlibPackage.getNsURI());	// FIXME duplication of TypeCaches.loadPivotMetaModel
 					pivotResourceSet.getResources().add(metaModelResource);
 					pivotMetaModel = (org.eclipse.ocl.examples.pivot.Package)metaModelResource.getContents().get(0);
 					addPackage(pivotMetaModel);
@@ -2306,7 +2306,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 				return;
 			}
 		}
-		OclMetaModel metaModelResource = new OclMetaModel(this, pivotLibrary.getName(), pivotLibrary.getNsPrefix(), pivotLibrary.getNsURI());		// Standard meta-model
+		OCLMetaModel metaModelResource = new OCLMetaModel(this, pivotLibrary.getName(), pivotLibrary.getNsPrefix(), pivotLibrary.getNsURI());		// Standard meta-model
 		pivotMetaModel = (org.eclipse.ocl.examples.pivot.Package)metaModelResource.getContents().get(0);
 		addPackage(pivotMetaModel);
 	}

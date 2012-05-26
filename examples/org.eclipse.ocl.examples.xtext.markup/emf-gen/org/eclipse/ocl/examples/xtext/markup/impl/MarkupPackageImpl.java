@@ -34,9 +34,9 @@ import org.eclipse.ocl.examples.xtext.markup.MarkupFactory;
 import org.eclipse.ocl.examples.xtext.markup.MarkupPackage;
 import org.eclipse.ocl.examples.xtext.markup.NewLineElement;
 import org.eclipse.ocl.examples.xtext.markup.NullElement;
-import org.eclipse.ocl.examples.xtext.markup.OclCodeElement;
-import org.eclipse.ocl.examples.xtext.markup.OclEvalElement;
-import org.eclipse.ocl.examples.xtext.markup.OclTextElement;
+import org.eclipse.ocl.examples.xtext.markup.OCLCodeElement;
+import org.eclipse.ocl.examples.xtext.markup.OCLEvalElement;
+import org.eclipse.ocl.examples.xtext.markup.OCLTextElement;
 import org.eclipse.ocl.examples.xtext.markup.TextElement;
 
 /**
@@ -460,7 +460,7 @@ public class MarkupPackageImpl extends EPackageImpl implements MarkupPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getOclCodeElement() {
+	public EClass getOCLCodeElement() {
 		return oclCodeElementEClass;
 	}
 
@@ -469,7 +469,7 @@ public class MarkupPackageImpl extends EPackageImpl implements MarkupPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getOclEvalElement() {
+	public EClass getOCLEvalElement() {
 		return oclEvalElementEClass;
 	}
 
@@ -478,7 +478,7 @@ public class MarkupPackageImpl extends EPackageImpl implements MarkupPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getOclTextElement() {
+	public EClass getOCLTextElement() {
 		return oclTextElementEClass;
 	}
 
@@ -658,11 +658,11 @@ public class MarkupPackageImpl extends EPackageImpl implements MarkupPackage {
 
 		initEClass(nullElementEClass, NullElement.class, "NullElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(oclCodeElementEClass, OclCodeElement.class, "OclCodeElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(oclCodeElementEClass, OCLCodeElement.class, "OCLCodeElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(oclEvalElementEClass, OclEvalElement.class, "OclEvalElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(oclEvalElementEClass, OCLEvalElement.class, "OCLEvalElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(oclTextElementEClass, OclTextElement.class, "OclTextElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(oclTextElementEClass, OCLTextElement.class, "OCLTextElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(textElementEClass, TextElement.class, "TextElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTextElement_Text(), ecorePackage.getEString(), "text", null, 0, -1, TextElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

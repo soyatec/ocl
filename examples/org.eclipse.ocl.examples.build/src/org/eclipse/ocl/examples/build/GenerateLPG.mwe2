@@ -64,73 +64,73 @@ Workflow {
 		dynamicEPackage = "/${projectName}/model/XBNF.ecore"
 		dynamicEPackage = "/${projectName}/model/XBNFwithCardinality.ecore"
     }
-    component = QvtoWorkflowComponent {
+    component = org.eclipse.ocl.examples.build.utilities.QVToWorkflowComponent {
     	resourceSet = resourceSet
     	uri = "/${projectName}/transforms/xtext2xbnf.qvto"
     	in = "${EssentialOCLxtext}"
     	out = "${EssentialOCLxtextXBNF}"
     }
-    component = QvtoWorkflowComponent {
+    component = org.eclipse.ocl.examples.build.utilities.QVToWorkflowComponent {
     	resourceSet = resourceSet
     	uri = "/${projectName}/transforms/xtext2xbnf.qvto"
     	in = "${CompleteOCLxtext}"
     	out = "${CompleteOCLxtextXBNF}"
     }
-    component = QvtoWorkflowComponent {
+    component = org.eclipse.ocl.examples.build.utilities.QVToWorkflowComponent {
     	resourceSet = resourceSet
     	uri = "/${projectName}/transforms/xtext2xbnf.qvto"
     	in = "${OCLinEcorextext}"
     	out = "${OCLinEcorextextXBNF}"
     }
-    component = QvtoWorkflowComponent {
+    component = org.eclipse.ocl.examples.build.utilities.QVToWorkflowComponent {
     	resourceSet = resourceSet
     	uri = "/${projectName}/transforms/xtext2xbnf.qvto"
     	in = "${OCLstdlibxtext}"
     	out = "${OCLstdlibxtextXBNF}"
     }
-    component = QvtoWorkflowComponent {
+    component = org.eclipse.ocl.examples.build.utilities.QVToWorkflowComponent {
     	resourceSet = resourceSet
     	uri = "/${projectName}/transforms/normalize.qvto"
     	in = "${EssentialOCLxtextXBNF}"
     	out = "${EssentialOCLnormalXBNF}"
     }
-    component = QvtoWorkflowComponent {
+    component = org.eclipse.ocl.examples.build.utilities.QVToWorkflowComponent {
     	resourceSet = resourceSet
     	uri = "/${projectName}/transforms/normalize.qvto"
     	in = "${CompleteOCLxtextXBNF}"
     	out = "${CompleteOCLnormalXBNF}"
     }
-    component = QvtoWorkflowComponent {
+    component = org.eclipse.ocl.examples.build.utilities.QVToWorkflowComponent {
     	resourceSet = resourceSet
     	uri = "/${projectName}/transforms/normalize.qvto"
     	in = "${OCLinEcorextextXBNF}"
     	out = "${OCLinEcorenormalXBNF}"
     }
-    component = QvtoWorkflowComponent {
+    component = org.eclipse.ocl.examples.build.utilities.QVToWorkflowComponent {
     	resourceSet = resourceSet
     	uri = "/${projectName}/transforms/normalize.qvto"
     	in = "${OCLstdlibxtextXBNF}"
     	out = "${OCLstdlibnormalXBNF}"
     }
-    component = QvtoWorkflowComponent {
+    component = org.eclipse.ocl.examples.build.utilities.QVToWorkflowComponent {
     	resourceSet = resourceSet
     	uri = "/${projectName}/transforms/inline.qvto"
     	in = "${EssentialOCLnormalXBNF}"
     	out = "${EssentialOCLinlineXBNF}"
     }
-    component = QvtoWorkflowComponent {
+    component = org.eclipse.ocl.examples.build.utilities.QVToWorkflowComponent {
     	resourceSet = resourceSet
     	uri = "/${projectName}/transforms/inline.qvto"
     	in = "${CompleteOCLnormalXBNF}"
     	out = "${CompleteOCLinlineXBNF}"
     }
-    component = QvtoWorkflowComponent {
+    component = org.eclipse.ocl.examples.build.utilities.QVToWorkflowComponent {
     	resourceSet = resourceSet
     	uri = "/${projectName}/transforms/inline.qvto"
     	in = "${OCLinEcorenormalXBNF}"
     	out = "${OCLinEcoreinlineXBNF}"
     }
-    component = QvtoWorkflowComponent {
+    component = org.eclipse.ocl.examples.build.utilities.QVToWorkflowComponent {
     	resourceSet = resourceSet
     	uri = "/${projectName}/transforms/inline.qvto"
     	in = "${OCLstdlibnormalXBNF}"

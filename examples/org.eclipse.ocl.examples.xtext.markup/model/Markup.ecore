@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="markup"
-    nsURI="http://www.eclipse.org/ocl/3.2.0/Markup" nsPrefix="markup">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="markup" nsURI="http://www.eclipse.org/ocl/3.2.0/Markup" nsPrefix="markup">
   <eClassifiers xsi:type="ecore:EClass" name="BulletElement" eSuperTypes="#//CompoundElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         derived="true"/>
@@ -49,9 +47,9 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NullElement" eSuperTypes="#//CompoundElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="OclCodeElement" eSuperTypes="#//CompoundElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="OclEvalElement" eSuperTypes="#//CompoundElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="OclTextElement" eSuperTypes="#//CompoundElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OCLCodeElement" eSuperTypes="#//CompoundElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OCLEvalElement" eSuperTypes="#//CompoundElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OCLTextElement" eSuperTypes="#//CompoundElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="TextElement" eSuperTypes="#//MarkupElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

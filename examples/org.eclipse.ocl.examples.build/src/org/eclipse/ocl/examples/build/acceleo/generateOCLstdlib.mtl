@@ -1,6 +1,6 @@
 [comment encoding = UTF-8 /]
 [module org::eclipse::ocl::examples::build::acceleo::generateOCLstdlib('http://www.eclipse.org/ocl/3.1.0/Pivot','http://www.eclipse.org/emf/2002/Ecore')/]
-[import org::eclipse::ocl::examples::build::acceleo::generateOclCommon/]
+[import org::eclipse::ocl::examples::build::acceleo::generateOCLCommon/]
 
 [template public generate(pkg : Package, javaPackage : String, javaClass : String, sourceFile : String, uri : String) ? (pkg.eContainer() = null)]
 [comment @main /]

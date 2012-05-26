@@ -99,16 +99,16 @@ public class MarkupGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cFootnoteElementParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		private final RuleCall cHeadingElementParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
 		private final RuleCall cNullElementParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
-		private final RuleCall cOclCodeElementParserRuleCall_8 = (RuleCall)cAlternatives.eContents().get(8);
-		private final RuleCall cOclEvalElementParserRuleCall_9 = (RuleCall)cAlternatives.eContents().get(9);
-		private final RuleCall cOclTextElementParserRuleCall_10 = (RuleCall)cAlternatives.eContents().get(10);
+		private final RuleCall cOCLCodeElementParserRuleCall_8 = (RuleCall)cAlternatives.eContents().get(8);
+		private final RuleCall cOCLEvalElementParserRuleCall_9 = (RuleCall)cAlternatives.eContents().get(9);
+		private final RuleCall cOCLTextElementParserRuleCall_10 = (RuleCall)cAlternatives.eContents().get(10);
 		private final RuleCall cTextElementParserRuleCall_11 = (RuleCall)cAlternatives.eContents().get(11);
 		
 		//MarkupElement:
 		//
 		//	FontElement | NewLineElement | BulletElement | FigureElement | FigureRefElement | FootnoteElement | HeadingElement |
 		//
-		//	NullElement | OclCodeElement | OclEvalElement | OclTextElement | // Last to give everything else a try first
+		//	NullElement | OCLCodeElement | OCLEvalElement | OCLTextElement | // Last to give everything else a try first
 		//
 		//
 		//	TextElement;
@@ -116,7 +116,7 @@ public class MarkupGrammarAccess extends AbstractGrammarElementFinder {
 
 		//FontElement | NewLineElement | BulletElement | FigureElement | FigureRefElement | FootnoteElement | HeadingElement |
 		//
-		//NullElement | OclCodeElement | OclEvalElement | OclTextElement | // Last to give everything else a try first
+		//NullElement | OCLCodeElement | OCLEvalElement | OCLTextElement | // Last to give everything else a try first
 		//
 		//
 		//TextElement
@@ -146,14 +146,14 @@ public class MarkupGrammarAccess extends AbstractGrammarElementFinder {
 		//NullElement
 		public RuleCall getNullElementParserRuleCall_7() { return cNullElementParserRuleCall_7; }
 
-		//OclCodeElement
-		public RuleCall getOclCodeElementParserRuleCall_8() { return cOclCodeElementParserRuleCall_8; }
+		//OCLCodeElement
+		public RuleCall getOCLCodeElementParserRuleCall_8() { return cOCLCodeElementParserRuleCall_8; }
 
-		//OclEvalElement
-		public RuleCall getOclEvalElementParserRuleCall_9() { return cOclEvalElementParserRuleCall_9; }
+		//OCLEvalElement
+		public RuleCall getOCLEvalElementParserRuleCall_9() { return cOCLEvalElementParserRuleCall_9; }
 
-		//OclTextElement
-		public RuleCall getOclTextElementParserRuleCall_10() { return cOclTextElementParserRuleCall_10; }
+		//OCLTextElement
+		public RuleCall getOCLTextElementParserRuleCall_10() { return cOCLTextElementParserRuleCall_10; }
 
 		//// Last to give everything else a try first
 		// TextElement
@@ -532,26 +532,26 @@ public class MarkupGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightSquareBracketKeyword_3() { return cRightSquareBracketKeyword_3; }
 	}
 
-	public class OclCodeElementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OclCodeElement");
+	public class OCLCodeElementElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OCLCodeElement");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cOclCodeElementAction_0 = (Action)cGroup.eContents().get(0);
+		private final Action cOCLCodeElementAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cOclCodeKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Keyword cLeftSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cElementsAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cElementsMarkupElementParserRuleCall_3_0 = (RuleCall)cElementsAssignment_3.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		//OclCodeElement:
+		//OCLCodeElement:
 		//
-		//	{OclCodeElement} "oclCode" "[" elements+=MarkupElement* "]";
+		//	{OCLCodeElement} "oclCode" "[" elements+=MarkupElement* "]";
 		public ParserRule getRule() { return rule; }
 
-		//{OclCodeElement} "oclCode" "[" elements+=MarkupElement* "]"
+		//{OCLCodeElement} "oclCode" "[" elements+=MarkupElement* "]"
 		public Group getGroup() { return cGroup; }
 
-		//{OclCodeElement}
-		public Action getOclCodeElementAction_0() { return cOclCodeElementAction_0; }
+		//{OCLCodeElement}
+		public Action getOCLCodeElementAction_0() { return cOCLCodeElementAction_0; }
 
 		//"oclCode"
 		public Keyword getOclCodeKeyword_1() { return cOclCodeKeyword_1; }
@@ -569,26 +569,26 @@ public class MarkupGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightSquareBracketKeyword_4() { return cRightSquareBracketKeyword_4; }
 	}
 
-	public class OclEvalElementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OclEvalElement");
+	public class OCLEvalElementElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OCLEvalElement");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cOclEvalElementAction_0 = (Action)cGroup.eContents().get(0);
+		private final Action cOCLEvalElementAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cOclEvalKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Keyword cLeftSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cElementsAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cElementsMarkupElementParserRuleCall_3_0 = (RuleCall)cElementsAssignment_3.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		//OclEvalElement:
+		//OCLEvalElement:
 		//
-		//	{OclEvalElement} "oclEval" "[" elements+=MarkupElement* "]";
+		//	{OCLEvalElement} "oclEval" "[" elements+=MarkupElement* "]";
 		public ParserRule getRule() { return rule; }
 
-		//{OclEvalElement} "oclEval" "[" elements+=MarkupElement* "]"
+		//{OCLEvalElement} "oclEval" "[" elements+=MarkupElement* "]"
 		public Group getGroup() { return cGroup; }
 
-		//{OclEvalElement}
-		public Action getOclEvalElementAction_0() { return cOclEvalElementAction_0; }
+		//{OCLEvalElement}
+		public Action getOCLEvalElementAction_0() { return cOCLEvalElementAction_0; }
 
 		//"oclEval"
 		public Keyword getOclEvalKeyword_1() { return cOclEvalKeyword_1; }
@@ -606,26 +606,26 @@ public class MarkupGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightSquareBracketKeyword_4() { return cRightSquareBracketKeyword_4; }
 	}
 
-	public class OclTextElementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OclTextElement");
+	public class OCLTextElementElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OCLTextElement");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cOclTextElementAction_0 = (Action)cGroup.eContents().get(0);
+		private final Action cOCLTextElementAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cOclTextKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Keyword cLeftSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cElementsAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cElementsMarkupElementParserRuleCall_3_0 = (RuleCall)cElementsAssignment_3.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		//OclTextElement:
+		//OCLTextElement:
 		//
-		//	{OclTextElement} "oclText" "[" elements+=MarkupElement* "]";
+		//	{OCLTextElement} "oclText" "[" elements+=MarkupElement* "]";
 		public ParserRule getRule() { return rule; }
 
-		//{OclTextElement} "oclText" "[" elements+=MarkupElement* "]"
+		//{OCLTextElement} "oclText" "[" elements+=MarkupElement* "]"
 		public Group getGroup() { return cGroup; }
 
-		//{OclTextElement}
-		public Action getOclTextElementAction_0() { return cOclTextElementAction_0; }
+		//{OCLTextElement}
+		public Action getOCLTextElementAction_0() { return cOCLTextElementAction_0; }
 
 		//"oclText"
 		public Keyword getOclTextKeyword_1() { return cOclTextKeyword_1; }
@@ -724,9 +724,9 @@ public class MarkupGrammarAccess extends AbstractGrammarElementFinder {
 	private HeadingElementElements pHeadingElement;
 	private NewLineElementElements pNewLineElement;
 	private NullElementElements pNullElement;
-	private OclCodeElementElements pOclCodeElement;
-	private OclEvalElementElements pOclEvalElement;
-	private OclTextElementElements pOclTextElement;
+	private OCLCodeElementElements pOCLCodeElement;
+	private OCLEvalElementElements pOCLEvalElement;
+	private OCLTextElementElements pOCLTextElement;
 	private TextElementElements pTextElement;
 	
 	private final Grammar grammar;
@@ -869,7 +869,7 @@ public class MarkupGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	//	FontElement | NewLineElement | BulletElement | FigureElement | FigureRefElement | FootnoteElement | HeadingElement |
 	//
-	//	NullElement | OclCodeElement | OclEvalElement | OclTextElement | // Last to give everything else a try first
+	//	NullElement | OCLCodeElement | OCLEvalElement | OCLTextElement | // Last to give everything else a try first
 	//
 	//
 	//	TextElement;
@@ -969,37 +969,37 @@ public class MarkupGrammarAccess extends AbstractGrammarElementFinder {
 		return getNullElementAccess().getRule();
 	}
 
-	//OclCodeElement:
+	//OCLCodeElement:
 	//
-	//	{OclCodeElement} "oclCode" "[" elements+=MarkupElement* "]";
-	public OclCodeElementElements getOclCodeElementAccess() {
-		return (pOclCodeElement != null) ? pOclCodeElement : (pOclCodeElement = new OclCodeElementElements());
+	//	{OCLCodeElement} "oclCode" "[" elements+=MarkupElement* "]";
+	public OCLCodeElementElements getOCLCodeElementAccess() {
+		return (pOCLCodeElement != null) ? pOCLCodeElement : (pOCLCodeElement = new OCLCodeElementElements());
 	}
 	
-	public ParserRule getOclCodeElementRule() {
-		return getOclCodeElementAccess().getRule();
+	public ParserRule getOCLCodeElementRule() {
+		return getOCLCodeElementAccess().getRule();
 	}
 
-	//OclEvalElement:
+	//OCLEvalElement:
 	//
-	//	{OclEvalElement} "oclEval" "[" elements+=MarkupElement* "]";
-	public OclEvalElementElements getOclEvalElementAccess() {
-		return (pOclEvalElement != null) ? pOclEvalElement : (pOclEvalElement = new OclEvalElementElements());
+	//	{OCLEvalElement} "oclEval" "[" elements+=MarkupElement* "]";
+	public OCLEvalElementElements getOCLEvalElementAccess() {
+		return (pOCLEvalElement != null) ? pOCLEvalElement : (pOCLEvalElement = new OCLEvalElementElements());
 	}
 	
-	public ParserRule getOclEvalElementRule() {
-		return getOclEvalElementAccess().getRule();
+	public ParserRule getOCLEvalElementRule() {
+		return getOCLEvalElementAccess().getRule();
 	}
 
-	//OclTextElement:
+	//OCLTextElement:
 	//
-	//	{OclTextElement} "oclText" "[" elements+=MarkupElement* "]";
-	public OclTextElementElements getOclTextElementAccess() {
-		return (pOclTextElement != null) ? pOclTextElement : (pOclTextElement = new OclTextElementElements());
+	//	{OCLTextElement} "oclText" "[" elements+=MarkupElement* "]";
+	public OCLTextElementElements getOCLTextElementAccess() {
+		return (pOCLTextElement != null) ? pOCLTextElement : (pOCLTextElement = new OCLTextElementElements());
 	}
 	
-	public ParserRule getOclTextElementRule() {
-		return getOclTextElementAccess().getRule();
+	public ParserRule getOCLTextElementRule() {
+		return getOCLTextElementAccess().getRule();
 	}
 
 	//TextElement:

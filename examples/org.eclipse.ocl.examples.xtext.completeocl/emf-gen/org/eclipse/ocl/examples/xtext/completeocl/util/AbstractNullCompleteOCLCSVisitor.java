@@ -101,7 +101,7 @@ public abstract class AbstractNullCompleteOCLCSVisitor<R, C>
 		return null;
 	}
 
-	public R visitOclMessageArgCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OclMessageArgCS object) {
+	public R visitOCLMessageArgCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS object) {
 		return null;
 	}
 

@@ -191,7 +191,7 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 		Map<String, String> results = new HashMap<String, String>();
         File folder = new File("/");       
         List<String> arguments = new ArrayList<String>();
-		Ocl2java4genmodel generator = new Ocl2java4genmodel(genModel, folder, arguments)
+		OCL2Java4genmodel generator = new OCL2Java4genmodel(genModel, folder, arguments)
 		{
 		    public IAcceleoGenerationStrategy getGenerationStrategy() {
 		        return new PreviewStrategy();

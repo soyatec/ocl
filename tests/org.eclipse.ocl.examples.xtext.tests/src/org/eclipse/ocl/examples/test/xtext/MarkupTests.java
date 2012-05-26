@@ -183,7 +183,7 @@ public class MarkupTests extends XtextTestCase
 		doNewlineCountTest(3, "\r\n\r \n");
 	}
 
-	public void testOclEval() throws Exception {
+	public void testOCLEval() throws Exception {
 //		doHtmlTest(null, "45", "oclEval[5a9]");
 		doHtmlTest(null, "45", "oclEval[5*9]");
 		doHtmlTest(EcorePackage.Literals.EBIG_DECIMAL, "EBigDecimal", "oclEval[self.name]");
@@ -191,7 +191,7 @@ public class MarkupTests extends XtextTestCase
 		doHtmlTest(null, "true", "oclEval[null->isEmpty()]");
 	}
 
-	public void testOclText() throws Exception {
+	public void testOCLText() throws Exception {
 		doHtmlTest(null, "<tt>" + htmlEncode("null->isEmpty()") + "</tt>", "oclText[null->isEmpty()]");
 		doBadHtmlTest("oclText[null->isBad()]", SemanticException.class);
 	}

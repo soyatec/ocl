@@ -91,7 +91,7 @@ public class AbstractCompleteOCLLeft2RightVisitor
 		return visitContextConstraintCS(object);
 	}
 
-	public Element visitOclMessageArgCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OclMessageArgCS object) {
+	public Element visitOCLMessageArgCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS object) {
 		return visitExpCS(object);
 	}
 

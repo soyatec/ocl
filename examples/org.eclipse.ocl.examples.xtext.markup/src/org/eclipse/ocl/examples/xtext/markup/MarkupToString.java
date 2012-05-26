@@ -150,7 +150,7 @@ public class MarkupToString extends MarkupSwitch<StringBuilder>
 	}
 
 	@Override
-	public StringBuilder caseOclCodeElement(OclCodeElement object) {
+	public StringBuilder caseOCLCodeElement(OCLCodeElement object) {
 		s.append("oclCode[");
 		caseCompoundElement(object);
 		s.append("]");
@@ -158,7 +158,7 @@ public class MarkupToString extends MarkupSwitch<StringBuilder>
 	}
 
 	@Override
-	public StringBuilder caseOclEvalElement(OclEvalElement object) {
+	public StringBuilder caseOCLEvalElement(OCLEvalElement object) {
 		s.append("oclEval[");
 		caseCompoundElement(object);
 		s.append("]");
@@ -166,7 +166,7 @@ public class MarkupToString extends MarkupSwitch<StringBuilder>
 	}
 
 	@Override
-	public StringBuilder caseOclTextElement(OclTextElement object) {
+	public StringBuilder caseOCLTextElement(OCLTextElement object) {
 		s.append("oclText[");
 		caseCompoundElement(object);
 		s.append("]");

@@ -157,14 +157,14 @@ $$[element.eClass().name/]
 [template public prettyPrint(element : NullElement, scope : Namespace)]
 [/template]
 
-[template public prettyPrint(element : OclCodeElement, scope : Namespace)]
+[template public prettyPrint(element : OCLCodeElement, scope : Namespace)]
 bc.. 
 [for (subElement : MarkupElement | element.elements)][subElement.prettyPrint(scope)/][/for]
 p. 
 
 [/template]
 
-[template public prettyPrint(element : OclTextElement, scope : Namespace)]
+[template public prettyPrint(element : OCLTextElement, scope : Namespace)]
 @[for (subElement : MarkupElement | element.elements)][subElement.prettyPrint(scope)/][/for]@
 [/template]
 

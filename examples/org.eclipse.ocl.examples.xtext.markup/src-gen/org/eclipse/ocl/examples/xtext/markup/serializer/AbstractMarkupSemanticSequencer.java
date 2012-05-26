@@ -13,9 +13,9 @@ import org.eclipse.ocl.examples.xtext.markup.Markup;
 import org.eclipse.ocl.examples.xtext.markup.MarkupPackage;
 import org.eclipse.ocl.examples.xtext.markup.NewLineElement;
 import org.eclipse.ocl.examples.xtext.markup.NullElement;
-import org.eclipse.ocl.examples.xtext.markup.OclCodeElement;
-import org.eclipse.ocl.examples.xtext.markup.OclEvalElement;
-import org.eclipse.ocl.examples.xtext.markup.OclTextElement;
+import org.eclipse.ocl.examples.xtext.markup.OCLCodeElement;
+import org.eclipse.ocl.examples.xtext.markup.OCLEvalElement;
+import org.eclipse.ocl.examples.xtext.markup.OCLTextElement;
 import org.eclipse.ocl.examples.xtext.markup.TextElement;
 import org.eclipse.ocl.examples.xtext.markup.services.MarkupGrammarAccess;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
@@ -98,22 +98,22 @@ public abstract class AbstractMarkupSemanticSequencer extends AbstractDelegating
 				else break;
 			case MarkupPackage.OCL_CODE_ELEMENT:
 				if(context == grammarAccess.getMarkupElementRule() ||
-				   context == grammarAccess.getOclCodeElementRule()) {
-					sequence_OclCodeElement(context, (OclCodeElement) semanticObject); 
+				   context == grammarAccess.getOCLCodeElementRule()) {
+					sequence_OCLCodeElement(context, (OCLCodeElement) semanticObject); 
 					return; 
 				}
 				else break;
 			case MarkupPackage.OCL_EVAL_ELEMENT:
 				if(context == grammarAccess.getMarkupElementRule() ||
-				   context == grammarAccess.getOclEvalElementRule()) {
-					sequence_OclEvalElement(context, (OclEvalElement) semanticObject); 
+				   context == grammarAccess.getOCLEvalElementRule()) {
+					sequence_OCLEvalElement(context, (OCLEvalElement) semanticObject); 
 					return; 
 				}
 				else break;
 			case MarkupPackage.OCL_TEXT_ELEMENT:
 				if(context == grammarAccess.getMarkupElementRule() ||
-				   context == grammarAccess.getOclTextElementRule()) {
-					sequence_OclTextElement(context, (OclTextElement) semanticObject); 
+				   context == grammarAccess.getOCLTextElementRule()) {
+					sequence_OCLTextElement(context, (OCLTextElement) semanticObject); 
 					return; 
 				}
 				else break;
@@ -213,7 +213,7 @@ public abstract class AbstractMarkupSemanticSequencer extends AbstractDelegating
 	 * Constraint:
 	 *     (elements+=MarkupElement*)
 	 */
-	protected void sequence_OclCodeElement(EObject context, OclCodeElement semanticObject) {
+	protected void sequence_OCLCodeElement(EObject context, OCLCodeElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -222,7 +222,7 @@ public abstract class AbstractMarkupSemanticSequencer extends AbstractDelegating
 	 * Constraint:
 	 *     (elements+=MarkupElement*)
 	 */
-	protected void sequence_OclEvalElement(EObject context, OclEvalElement semanticObject) {
+	protected void sequence_OCLEvalElement(EObject context, OCLEvalElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -231,7 +231,7 @@ public abstract class AbstractMarkupSemanticSequencer extends AbstractDelegating
 	 * Constraint:
 	 *     (elements+=MarkupElement*)
 	 */
-	protected void sequence_OclTextElement(EObject context, OclTextElement semanticObject) {
+	protected void sequence_OCLTextElement(EObject context, OCLTextElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

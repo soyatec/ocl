@@ -11,8 +11,6 @@
  *     E.D.Willink - initial API and implementation
  *
  * </copyright>
- *
- * $Id: OclMetaModelCodeGenerator.java,v 1.3 2011/05/20 15:27:03 ewillink Exp $
  */
 package org.eclipse.ocl.examples.build.utilities;
 

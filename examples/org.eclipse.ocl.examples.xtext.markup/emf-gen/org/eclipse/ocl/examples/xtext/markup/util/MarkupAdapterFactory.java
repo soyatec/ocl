@@ -132,16 +132,16 @@ public class MarkupAdapterFactory extends AdapterFactoryImpl {
 				return createNullElementAdapter();
 			}
 			@Override
-			public Adapter caseOclCodeElement(OclCodeElement object) {
-				return createOclCodeElementAdapter();
+			public Adapter caseOCLCodeElement(OCLCodeElement object) {
+				return createOCLCodeElementAdapter();
 			}
 			@Override
-			public Adapter caseOclEvalElement(OclEvalElement object) {
-				return createOclEvalElementAdapter();
+			public Adapter caseOCLEvalElement(OCLEvalElement object) {
+				return createOCLEvalElementAdapter();
 			}
 			@Override
-			public Adapter caseOclTextElement(OclTextElement object) {
-				return createOclTextElementAdapter();
+			public Adapter caseOCLTextElement(OCLTextElement object) {
+				return createOCLTextElementAdapter();
 			}
 			@Override
 			public Adapter caseTextElement(TextElement object) {
@@ -322,44 +322,44 @@ public class MarkupAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.markup.OclCodeElement <em>Ocl Code Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.markup.OCLCodeElement <em>OCL Code Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.xtext.markup.OclCodeElement
+	 * @see org.eclipse.ocl.examples.xtext.markup.OCLCodeElement
 	 * @generated
 	 */
-	public Adapter createOclCodeElementAdapter() {
+	public Adapter createOCLCodeElementAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.markup.OclEvalElement <em>Ocl Eval Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.markup.OCLEvalElement <em>OCL Eval Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.xtext.markup.OclEvalElement
+	 * @see org.eclipse.ocl.examples.xtext.markup.OCLEvalElement
 	 * @generated
 	 */
-	public Adapter createOclEvalElementAdapter() {
+	public Adapter createOCLEvalElementAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.markup.OclTextElement <em>Ocl Text Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.markup.OCLTextElement <em>OCL Text Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.xtext.markup.OclTextElement
+	 * @see org.eclipse.ocl.examples.xtext.markup.OCLTextElement
 	 * @generated
 	 */
-	public Adapter createOclTextElementAdapter() {
+	public Adapter createOCLTextElementAdapter() {
 		return null;
 	}
 

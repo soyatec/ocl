@@ -321,11 +321,11 @@ ruleMarkupElement returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        newCompositeNode(grammarAccess.getMarkupElementAccess().getOclCodeElementParserRuleCall_8()); 
+        newCompositeNode(grammarAccess.getMarkupElementAccess().getOCLCodeElementParserRuleCall_8()); 
     }
-    this_OclCodeElement_8=ruleOclCodeElement
+    this_OCLCodeElement_8=ruleOCLCodeElement
     { 
-        $current = $this_OclCodeElement_8.current; 
+        $current = $this_OCLCodeElement_8.current; 
         afterParserOrEnumRuleCall();
     }
 
@@ -334,11 +334,11 @@ ruleMarkupElement returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        newCompositeNode(grammarAccess.getMarkupElementAccess().getOclEvalElementParserRuleCall_9()); 
+        newCompositeNode(grammarAccess.getMarkupElementAccess().getOCLEvalElementParserRuleCall_9()); 
     }
-    this_OclEvalElement_9=ruleOclEvalElement
+    this_OCLEvalElement_9=ruleOCLEvalElement
     { 
-        $current = $this_OclEvalElement_9.current; 
+        $current = $this_OCLEvalElement_9.current; 
         afterParserOrEnumRuleCall();
     }
 
@@ -347,11 +347,11 @@ ruleMarkupElement returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        newCompositeNode(grammarAccess.getMarkupElementAccess().getOclTextElementParserRuleCall_10()); 
+        newCompositeNode(grammarAccess.getMarkupElementAccess().getOCLTextElementParserRuleCall_10()); 
     }
-    this_OclTextElement_10=ruleOclTextElement
+    this_OCLTextElement_10=ruleOCLTextElement
     { 
-        $current = $this_OclTextElement_10.current; 
+        $current = $this_OCLTextElement_10.current; 
         afterParserOrEnumRuleCall();
     }
 
@@ -958,17 +958,17 @@ ruleNullElement returns [EObject current=null]
 
 
 
-// Entry rule entryRuleOclCodeElement
-entryRuleOclCodeElement returns [EObject current=null] 
+// Entry rule entryRuleOCLCodeElement
+entryRuleOCLCodeElement returns [EObject current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getOclCodeElementRule()); }
-	 iv_ruleOclCodeElement=ruleOclCodeElement 
-	 { $current=$iv_ruleOclCodeElement.current; } 
+	{ newCompositeNode(grammarAccess.getOCLCodeElementRule()); }
+	 iv_ruleOCLCodeElement=ruleOCLCodeElement 
+	 { $current=$iv_ruleOCLCodeElement.current; } 
 	 EOF 
 ;
 
-// Rule OclCodeElement
-ruleOclCodeElement returns [EObject current=null] 
+// Rule OCLCodeElement
+ruleOCLCodeElement returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
@@ -978,25 +978,25 @@ ruleOclCodeElement returns [EObject current=null]
 	}
     {
         $current = forceCreateModelElement(
-            grammarAccess.getOclCodeElementAccess().getOclCodeElementAction_0(),
+            grammarAccess.getOCLCodeElementAccess().getOCLCodeElementAction_0(),
             $current);
     }
 )	otherlv_1='oclCode' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getOclCodeElementAccess().getOclCodeKeyword_1());
+    	newLeafNode(otherlv_1, grammarAccess.getOCLCodeElementAccess().getOclCodeKeyword_1());
     }
 	otherlv_2='[' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getOclCodeElementAccess().getLeftSquareBracketKeyword_2());
+    	newLeafNode(otherlv_2, grammarAccess.getOCLCodeElementAccess().getLeftSquareBracketKeyword_2());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getOclCodeElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
+	        newCompositeNode(grammarAccess.getOCLCodeElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
 	    }
 		lv_elements_3_0=ruleMarkupElement		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getOclCodeElementRule());
+	            $current = createModelElementForParent(grammarAccess.getOCLCodeElementRule());
 	        }
        		add(
        			$current, 
@@ -1009,7 +1009,7 @@ ruleOclCodeElement returns [EObject current=null]
 )
 )*	otherlv_4=']' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getOclCodeElementAccess().getRightSquareBracketKeyword_4());
+    	newLeafNode(otherlv_4, grammarAccess.getOCLCodeElementAccess().getRightSquareBracketKeyword_4());
     }
 )
 ;
@@ -1018,17 +1018,17 @@ ruleOclCodeElement returns [EObject current=null]
 
 
 
-// Entry rule entryRuleOclEvalElement
-entryRuleOclEvalElement returns [EObject current=null] 
+// Entry rule entryRuleOCLEvalElement
+entryRuleOCLEvalElement returns [EObject current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getOclEvalElementRule()); }
-	 iv_ruleOclEvalElement=ruleOclEvalElement 
-	 { $current=$iv_ruleOclEvalElement.current; } 
+	{ newCompositeNode(grammarAccess.getOCLEvalElementRule()); }
+	 iv_ruleOCLEvalElement=ruleOCLEvalElement 
+	 { $current=$iv_ruleOCLEvalElement.current; } 
 	 EOF 
 ;
 
-// Rule OclEvalElement
-ruleOclEvalElement returns [EObject current=null] 
+// Rule OCLEvalElement
+ruleOCLEvalElement returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
@@ -1038,25 +1038,25 @@ ruleOclEvalElement returns [EObject current=null]
 	}
     {
         $current = forceCreateModelElement(
-            grammarAccess.getOclEvalElementAccess().getOclEvalElementAction_0(),
+            grammarAccess.getOCLEvalElementAccess().getOCLEvalElementAction_0(),
             $current);
     }
 )	otherlv_1='oclEval' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getOclEvalElementAccess().getOclEvalKeyword_1());
+    	newLeafNode(otherlv_1, grammarAccess.getOCLEvalElementAccess().getOclEvalKeyword_1());
     }
 	otherlv_2='[' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getOclEvalElementAccess().getLeftSquareBracketKeyword_2());
+    	newLeafNode(otherlv_2, grammarAccess.getOCLEvalElementAccess().getLeftSquareBracketKeyword_2());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getOclEvalElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
+	        newCompositeNode(grammarAccess.getOCLEvalElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
 	    }
 		lv_elements_3_0=ruleMarkupElement		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getOclEvalElementRule());
+	            $current = createModelElementForParent(grammarAccess.getOCLEvalElementRule());
 	        }
        		add(
        			$current, 
@@ -1069,7 +1069,7 @@ ruleOclEvalElement returns [EObject current=null]
 )
 )*	otherlv_4=']' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getOclEvalElementAccess().getRightSquareBracketKeyword_4());
+    	newLeafNode(otherlv_4, grammarAccess.getOCLEvalElementAccess().getRightSquareBracketKeyword_4());
     }
 )
 ;
@@ -1078,17 +1078,17 @@ ruleOclEvalElement returns [EObject current=null]
 
 
 
-// Entry rule entryRuleOclTextElement
-entryRuleOclTextElement returns [EObject current=null] 
+// Entry rule entryRuleOCLTextElement
+entryRuleOCLTextElement returns [EObject current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getOclTextElementRule()); }
-	 iv_ruleOclTextElement=ruleOclTextElement 
-	 { $current=$iv_ruleOclTextElement.current; } 
+	{ newCompositeNode(grammarAccess.getOCLTextElementRule()); }
+	 iv_ruleOCLTextElement=ruleOCLTextElement 
+	 { $current=$iv_ruleOCLTextElement.current; } 
 	 EOF 
 ;
 
-// Rule OclTextElement
-ruleOclTextElement returns [EObject current=null] 
+// Rule OCLTextElement
+ruleOCLTextElement returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
@@ -1098,25 +1098,25 @@ ruleOclTextElement returns [EObject current=null]
 	}
     {
         $current = forceCreateModelElement(
-            grammarAccess.getOclTextElementAccess().getOclTextElementAction_0(),
+            grammarAccess.getOCLTextElementAccess().getOCLTextElementAction_0(),
             $current);
     }
 )	otherlv_1='oclText' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getOclTextElementAccess().getOclTextKeyword_1());
+    	newLeafNode(otherlv_1, grammarAccess.getOCLTextElementAccess().getOclTextKeyword_1());
     }
 	otherlv_2='[' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getOclTextElementAccess().getLeftSquareBracketKeyword_2());
+    	newLeafNode(otherlv_2, grammarAccess.getOCLTextElementAccess().getLeftSquareBracketKeyword_2());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getOclTextElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
+	        newCompositeNode(grammarAccess.getOCLTextElementAccess().getElementsMarkupElementParserRuleCall_3_0()); 
 	    }
 		lv_elements_3_0=ruleMarkupElement		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getOclTextElementRule());
+	            $current = createModelElementForParent(grammarAccess.getOCLTextElementRule());
 	        }
        		add(
        			$current, 
@@ -1129,7 +1129,7 @@ ruleOclTextElement returns [EObject current=null]
 )
 )*	otherlv_4=']' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getOclTextElementAccess().getRightSquareBracketKeyword_4());
+    	newLeafNode(otherlv_4, grammarAccess.getOCLTextElementAccess().getRightSquareBracketKeyword_4());
     }
 )
 ;

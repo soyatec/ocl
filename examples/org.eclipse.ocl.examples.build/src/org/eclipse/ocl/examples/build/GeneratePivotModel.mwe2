@@ -102,13 +102,13 @@ Workflow {
     	javaPackageName = "${projectName}"
     	javaClassName = "Visitor"
     }
-//  	component = @GenerateOclMetaModel {}
-    component = OclMetaModelCodeGenerator { resourceSet = resourceSet
+//  	component = @GenerateOCLMetaModel {}
+    component = OCLMetaModelCodeGenerator { resourceSet = resourceSet
     	projectName = "${projectName}"
     	libraryFile = "model/Pivot.ecore"
     	javaFolder = "emf-gen"
     	javaPackageName = "${projectName}.model"
-    	javaClassName = "OclMetaModel"
+    	javaClassName = "OCLMetaModel"
     }
 //    component = @GeneratePivotTables {}
 //    component = Model2tablesGenerator { resourceSet = resourceSet

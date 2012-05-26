@@ -55,9 +55,9 @@ public class MarkupParser extends AbstractContentAssistParser {
 					put(grammarAccess.getHeadingElementAccess().getGroup(), "rule__HeadingElement__Group__0");
 					put(grammarAccess.getHeadingElementAccess().getGroup_2(), "rule__HeadingElement__Group_2__0");
 					put(grammarAccess.getNullElementAccess().getGroup(), "rule__NullElement__Group__0");
-					put(grammarAccess.getOclCodeElementAccess().getGroup(), "rule__OclCodeElement__Group__0");
-					put(grammarAccess.getOclEvalElementAccess().getGroup(), "rule__OclEvalElement__Group__0");
-					put(grammarAccess.getOclTextElementAccess().getGroup(), "rule__OclTextElement__Group__0");
+					put(grammarAccess.getOCLCodeElementAccess().getGroup(), "rule__OCLCodeElement__Group__0");
+					put(grammarAccess.getOCLEvalElementAccess().getGroup(), "rule__OCLEvalElement__Group__0");
+					put(grammarAccess.getOCLTextElementAccess().getGroup(), "rule__OCLTextElement__Group__0");
 					put(grammarAccess.getMarkupAccess().getElementsAssignment(), "rule__Markup__ElementsAssignment");
 					put(grammarAccess.getBulletElementAccess().getLevelAssignment_2_1(), "rule__BulletElement__LevelAssignment_2_1");
 					put(grammarAccess.getBulletElementAccess().getElementsAssignment_4(), "rule__BulletElement__ElementsAssignment_4");
@@ -74,9 +74,9 @@ public class MarkupParser extends AbstractContentAssistParser {
 					put(grammarAccess.getHeadingElementAccess().getElementsAssignment_4(), "rule__HeadingElement__ElementsAssignment_4");
 					put(grammarAccess.getNewLineElementAccess().getTextAssignment(), "rule__NewLineElement__TextAssignment");
 					put(grammarAccess.getNullElementAccess().getElementsAssignment_2(), "rule__NullElement__ElementsAssignment_2");
-					put(grammarAccess.getOclCodeElementAccess().getElementsAssignment_3(), "rule__OclCodeElement__ElementsAssignment_3");
-					put(grammarAccess.getOclEvalElementAccess().getElementsAssignment_3(), "rule__OclEvalElement__ElementsAssignment_3");
-					put(grammarAccess.getOclTextElementAccess().getElementsAssignment_3(), "rule__OclTextElement__ElementsAssignment_3");
+					put(grammarAccess.getOCLCodeElementAccess().getElementsAssignment_3(), "rule__OCLCodeElement__ElementsAssignment_3");
+					put(grammarAccess.getOCLEvalElementAccess().getElementsAssignment_3(), "rule__OCLEvalElement__ElementsAssignment_3");
+					put(grammarAccess.getOCLTextElementAccess().getElementsAssignment_3(), "rule__OCLTextElement__ElementsAssignment_3");
 					put(grammarAccess.getTextElementAccess().getTextAssignment_0(), "rule__TextElement__TextAssignment_0");
 					put(grammarAccess.getTextElementAccess().getTextAssignment_1(), "rule__TextElement__TextAssignment_1");
 				}

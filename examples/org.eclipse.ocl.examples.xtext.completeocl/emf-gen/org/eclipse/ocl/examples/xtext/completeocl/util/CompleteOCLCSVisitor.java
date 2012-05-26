@@ -44,7 +44,7 @@ public interface CompleteOCLCSVisitor<R> extends org.eclipse.ocl.examples.xtext.
 	R visitIncludeCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.IncludeCS object);
 	R visitInitCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InitCS object);
 	R visitInvCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InvCS object);
-	R visitOclMessageArgCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OclMessageArgCS object);
+	R visitOCLMessageArgCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS object);
 	R visitOperationContextDeclCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS object);
 	R visitPackageDeclarationCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PackageDeclarationCS object);
 	R visitPathNameDeclCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PathNameDeclCS object);

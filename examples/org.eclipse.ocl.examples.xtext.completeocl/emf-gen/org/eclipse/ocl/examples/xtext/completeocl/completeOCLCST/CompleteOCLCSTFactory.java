@@ -117,6 +117,15 @@ public interface CompleteOCLCSTFactory extends EFactory {
 	InvCS createInvCS();
 
 	/**
+	 * Returns a new object of class '<em>OCL Message Arg CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>OCL Message Arg CS</em>'.
+	 * @generated
+	 */
+	OCLMessageArgCS createOCLMessageArgCS();
+
+	/**
 	 * Returns a new object of class '<em>Def CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -178,15 +187,6 @@ public interface CompleteOCLCSTFactory extends EFactory {
 	 * @generated
 	 */
 	BodyCS createBodyCS();
-
-	/**
-	 * Returns a new object of class '<em>Ocl Message Arg CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Ocl Message Arg CS</em>'.
-	 * @generated
-	 */
-	OclMessageArgCS createOclMessageArgCS();
 
 	/**
 	 * Returns the package supported by this factory.

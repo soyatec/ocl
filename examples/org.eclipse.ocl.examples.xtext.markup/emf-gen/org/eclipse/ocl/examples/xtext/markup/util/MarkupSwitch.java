@@ -170,24 +170,24 @@ public class MarkupSwitch<T> extends Switch<T> {
 				return result;
 			}
 			case MarkupPackage.OCL_CODE_ELEMENT: {
-				OclCodeElement oclCodeElement = (OclCodeElement)theEObject;
-				T result = caseOclCodeElement(oclCodeElement);
+				OCLCodeElement oclCodeElement = (OCLCodeElement)theEObject;
+				T result = caseOCLCodeElement(oclCodeElement);
 				if (result == null) result = caseCompoundElement(oclCodeElement);
 				if (result == null) result = caseMarkupElement(oclCodeElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case MarkupPackage.OCL_EVAL_ELEMENT: {
-				OclEvalElement oclEvalElement = (OclEvalElement)theEObject;
-				T result = caseOclEvalElement(oclEvalElement);
+				OCLEvalElement oclEvalElement = (OCLEvalElement)theEObject;
+				T result = caseOCLEvalElement(oclEvalElement);
 				if (result == null) result = caseCompoundElement(oclEvalElement);
 				if (result == null) result = caseMarkupElement(oclEvalElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case MarkupPackage.OCL_TEXT_ELEMENT: {
-				OclTextElement oclTextElement = (OclTextElement)theEObject;
-				T result = caseOclTextElement(oclTextElement);
+				OCLTextElement oclTextElement = (OCLTextElement)theEObject;
+				T result = caseOCLTextElement(oclTextElement);
 				if (result == null) result = caseCompoundElement(oclTextElement);
 				if (result == null) result = caseMarkupElement(oclTextElement);
 				if (result == null) result = defaultCase(theEObject);
@@ -370,47 +370,47 @@ public class MarkupSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Ocl Code Element</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>OCL Code Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Ocl Code Element</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>OCL Code Element</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseOclCodeElement(OclCodeElement object) {
+	public T caseOCLCodeElement(OCLCodeElement object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Ocl Eval Element</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>OCL Eval Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Ocl Eval Element</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>OCL Eval Element</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseOclEvalElement(OclEvalElement object) {
+	public T caseOCLEvalElement(OCLEvalElement object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Ocl Text Element</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>OCL Text Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Ocl Text Element</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>OCL Text Element</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseOclTextElement(OclTextElement object) {
+	public T caseOCLTextElement(OCLTextElement object) {
 		return null;
 	}
 

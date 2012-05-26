@@ -20091,7 +20091,7 @@ public class InternalCompleteOCLParser extends AbstractInternalContentAssistPars
             // ../org.eclipse.ocl.examples.xtext.completeocl.ui/src-gen/org/eclipse/ocl/examples/xtext/completeocl/ui/contentassist/antlr/internal/InternalCompleteOCL.g:6609:1: ()
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getNavigatingArgExpCSAccess().getOclMessageArgCSAction_0_0()); 
+               before(grammarAccess.getNavigatingArgExpCSAccess().getOCLMessageArgCSAction_0_0()); 
             }
             // ../org.eclipse.ocl.examples.xtext.completeocl.ui/src-gen/org/eclipse/ocl/examples/xtext/completeocl/ui/contentassist/antlr/internal/InternalCompleteOCL.g:6610:1: ()
             // ../org.eclipse.ocl.examples.xtext.completeocl.ui/src-gen/org/eclipse/ocl/examples/xtext/completeocl/ui/contentassist/antlr/internal/InternalCompleteOCL.g:6612:1: 
@@ -20099,7 +20099,7 @@ public class InternalCompleteOCLParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getNavigatingArgExpCSAccess().getOclMessageArgCSAction_0_0()); 
+               after(grammarAccess.getNavigatingArgExpCSAccess().getOCLMessageArgCSAction_0_0()); 
             }
 
             }

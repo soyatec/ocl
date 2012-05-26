@@ -15,7 +15,7 @@
  * $Id$
  **/]
 [comment encoding = UTF-8 /]
-[module org::eclipse::ocl::examples::codegen::ecore::ocl2java4genmodel('http://www.eclipse.org/ocl/3.1.0/Pivot','http://www.eclipse.org/emf/2002/GenModel')]
+[module org::eclipse::ocl::examples::codegen::ecore::OCL2Java4genmodel('http://www.eclipse.org/ocl/3.1.0/Pivot','http://www.eclipse.org/emf/2002/GenModel')]
 
 [import org::eclipse::ocl::examples::codegen::common::constantTemplates/]
 [import org::eclipse::ocl::examples::codegen::common::elementQueries/]

@@ -49,13 +49,13 @@ import org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCLStandaloneSetup;
  *
  * @generated
  */
-public class Ocl2java4genmodel extends AbstractAcceleoGenerator {
+public class OCL2Java4genmodel extends AbstractAcceleoGenerator {
     /**
      * The name of the module.
      *
      * @generated
      */
-    public static final String MODULE_FILE_NAME = "/org/eclipse/ocl/examples/codegen/ecore/ocl2java4genmodel";
+    public static final String MODULE_FILE_NAME = "/org/eclipse/ocl/examples/codegen/ecore/OCL2Java4genmodel";
     
     /**
      * The name of the templates that are to be generated.
@@ -85,7 +85,7 @@ public class Ocl2java4genmodel extends AbstractAcceleoGenerator {
      *
      * @generated
      */
-    public Ocl2java4genmodel() {
+    public OCL2Java4genmodel() {
         // Empty implementation
     }
 
@@ -105,7 +105,7 @@ public class Ocl2java4genmodel extends AbstractAcceleoGenerator {
      *             the model cannot be loaded.
      * @generated
      */
-    public Ocl2java4genmodel(URI modelURI, File targetFolder,
+    public OCL2Java4genmodel(URI modelURI, File targetFolder,
             List<? extends Object> arguments) throws IOException {
         initialize(modelURI, targetFolder, arguments);
     }
@@ -126,7 +126,7 @@ public class Ocl2java4genmodel extends AbstractAcceleoGenerator {
      *             This can be thrown in two scenarios : the module cannot be found, or it cannot be loaded.
      * @generated
      */
-    public Ocl2java4genmodel(EObject model, File targetFolder,
+    public OCL2Java4genmodel(EObject model, File targetFolder,
             List<? extends Object> arguments) throws IOException {
         initialize(model, targetFolder, arguments);
     }
@@ -161,7 +161,7 @@ public class Ocl2java4genmodel extends AbstractAcceleoGenerator {
                  * add in "arguments" this "String" attribute.
                  */
                 
-                Ocl2java4genmodel generator = new Ocl2java4genmodel(modelURI, folder, arguments);
+                OCL2Java4genmodel generator = new OCL2Java4genmodel(modelURI, folder, arguments);
                 
                 /*
                  * Add the properties from the launch arguments.

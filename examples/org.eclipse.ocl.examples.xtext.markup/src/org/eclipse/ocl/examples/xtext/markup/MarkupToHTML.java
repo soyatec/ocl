@@ -168,7 +168,7 @@ public class MarkupToHTML extends MarkupSwitch<HTMLBuffer>
 	}
 
 	@Override
-	public HTMLBuffer caseOclCodeElement(OclCodeElement object) {
+	public HTMLBuffer caseOCLCodeElement(OCLCodeElement object) {
 		s.startFontName("pre");
 		String oclString = MarkupToString.toString(object.getElements());		
 		try {
@@ -184,7 +184,7 @@ public class MarkupToHTML extends MarkupSwitch<HTMLBuffer>
 	}
 
 	@Override
-	public HTMLBuffer caseOclEvalElement(OclEvalElement object) {
+	public HTMLBuffer caseOCLEvalElement(OCLEvalElement object) {
 		String oclString = MarkupToString.toString(object.getElements());		
 		try {
 			OCL ocl = getOCL();
@@ -203,7 +203,7 @@ public class MarkupToHTML extends MarkupSwitch<HTMLBuffer>
 	}
 
 	@Override
-	public HTMLBuffer caseOclTextElement(OclTextElement object) {
+	public HTMLBuffer caseOCLTextElement(OCLTextElement object) {
 		s.startFontName("tt");
 		String oclString = MarkupToString.toString(object.getElements());		
 		try {

@@ -91,7 +91,7 @@ public class AbstractCompleteOCLPreOrderVisitor
 		return visitContextConstraintCS(object);
 	}
 
-	public Continuation<?> visitOclMessageArgCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OclMessageArgCS object) {
+	public Continuation<?> visitOCLMessageArgCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS object) {
 		return visitExpCS(object);
 	}
 

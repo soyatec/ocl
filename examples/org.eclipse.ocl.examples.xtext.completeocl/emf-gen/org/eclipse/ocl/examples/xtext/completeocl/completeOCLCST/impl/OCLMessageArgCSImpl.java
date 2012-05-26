@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypeCS;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OclMessageArgCS;
+import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS;
 import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.impl.ExpCSImpl;
 
@@ -35,13 +35,13 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.impl.ExpCSImp
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.OclMessageArgCSImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.OCLMessageArgCSImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class OclMessageArgCSImpl extends ExpCSImpl implements OclMessageArgCS {
+public class OCLMessageArgCSImpl extends ExpCSImpl implements OCLMessageArgCS {
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -57,7 +57,7 @@ public class OclMessageArgCSImpl extends ExpCSImpl implements OclMessageArgCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected OclMessageArgCSImpl() {
+	protected OCLMessageArgCSImpl() {
 		super();
 	}
 
@@ -196,6 +196,6 @@ public class OclMessageArgCSImpl extends ExpCSImpl implements OclMessageArgCS {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(BaseCSVisitor<R> visitor) {
-		return (R) visitor.getAdapter(CompleteOCLCSVisitor.class).visitOclMessageArgCS(this);
+		return (R) visitor.getAdapter(CompleteOCLCSVisitor.class).visitOCLMessageArgCS(this);
 	}
 } //OclMessageArgCSImpl

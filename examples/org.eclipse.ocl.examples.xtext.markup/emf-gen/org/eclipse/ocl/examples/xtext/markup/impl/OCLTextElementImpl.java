@@ -19,24 +19,24 @@ package org.eclipse.ocl.examples.xtext.markup.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.ocl.examples.xtext.markup.MarkupPackage;
-import org.eclipse.ocl.examples.xtext.markup.OclCodeElement;
+import org.eclipse.ocl.examples.xtext.markup.OCLTextElement;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Ocl Code Element</b></em>'.
+ * An implementation of the model object '<em><b>Ocl Text Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class OclCodeElementImpl extends CompoundElementImpl implements OclCodeElement {
+public class OCLTextElementImpl extends CompoundElementImpl implements OCLTextElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected OclCodeElementImpl() {
+	protected OCLTextElementImpl() {
 		super();
 	}
 
@@ -47,7 +47,7 @@ public class OclCodeElementImpl extends CompoundElementImpl implements OclCodeEl
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return MarkupPackage.Literals.OCL_CODE_ELEMENT;
+		return MarkupPackage.Literals.OCL_TEXT_ELEMENT;
 	}
 
-} //OclCodeElementImpl
+} //OclTextElementImpl

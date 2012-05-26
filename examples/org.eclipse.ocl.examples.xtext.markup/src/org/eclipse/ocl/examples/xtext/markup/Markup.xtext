@@ -62,9 +62,9 @@ MarkupElement:
 |	FootnoteElement
 |	HeadingElement
 |	NullElement
-|	OclCodeElement
-|	OclEvalElement
-|	OclTextElement
+|	OCLCodeElement
+|	OCLEvalElement
+|	OCLTextElement
 |	TextElement				// Last to give everything else a try first
 ;
 
@@ -100,16 +100,16 @@ NullElement:
 	{NullElement} '[' elements+=MarkupElement* ']'
 ;
 
-OclCodeElement:
-	{OclCodeElement} 'oclCode' '[' elements+=MarkupElement* ']'
+OCLCodeElement:
+	{OCLCodeElement} 'oclCode' '[' elements+=MarkupElement* ']'
 ;
 
-OclEvalElement:
-	{OclEvalElement} 'oclEval' '[' elements+=MarkupElement* ']'
+OCLEvalElement:
+	{OCLEvalElement} 'oclEval' '[' elements+=MarkupElement* ']'
 ;
 
-OclTextElement:
-	{OclTextElement} 'oclText' '[' elements+=MarkupElement* ']'
+OCLTextElement:
+	{OCLTextElement} 'oclText' '[' elements+=MarkupElement* ']'
 ;
 
 TextElement:

@@ -26,7 +26,7 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DerCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.IncludeCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InitCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InvCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OclMessageArgCS;
+import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PackageDeclarationCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PostCS;
@@ -231,7 +231,7 @@ public abstract class AbstractCompleteOCLSemanticSequencer extends EssentialOCLS
 				else break;
 			case CompleteOCLCSTPackage.OCL_MESSAGE_ARG_CS:
 				if(context == grammarAccess.getNavigatingArgExpCSRule()) {
-					sequence_NavigatingArgExpCS(context, (OclMessageArgCS) semanticObject); 
+					sequence_NavigatingArgExpCS(context, (OCLMessageArgCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -707,9 +707,9 @@ public abstract class AbstractCompleteOCLSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
-	 *     {OclMessageArgCS}
+	 *     {OCLMessageArgCS}
 	 */
-	protected void sequence_NavigatingArgExpCS(EObject context, OclMessageArgCS semanticObject) {
+	protected void sequence_NavigatingArgExpCS(EObject context, OCLMessageArgCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

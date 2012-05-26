@@ -48,7 +48,7 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.FeatureContextD
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.IncludeCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InitCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InvCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OclMessageArgCS;
+import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PackageDeclarationCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PathNameDeclCS;
@@ -197,9 +197,9 @@ public class CompleteOCLCSTAdapterFactory extends AdapterFactoryImpl
 				return createInvCSAdapter();
 			}
 			@Override
-			public Adapter caseOclMessageArgCS(OclMessageArgCS object)
+			public Adapter caseOCLMessageArgCS(OCLMessageArgCS object)
 			{
-				return createOclMessageArgCSAdapter();
+				return createOCLMessageArgCSAdapter();
 			}
 			@Override
 			public Adapter caseOperationContextDeclCS(OperationContextDeclCS object)
@@ -589,21 +589,21 @@ public class CompleteOCLCSTAdapterFactory extends AdapterFactoryImpl
 	}
 
   /**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OclMessageArgCS <em>Ocl Message Arg CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS <em>OCL Message Arg CS</em>}'.
 	 * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OclMessageArgCS
+	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS
 	 * @generated
 	 */
-  public Adapter createOclMessageArgCSAdapter()
-  {
+	public Adapter createOCLMessageArgCSAdapter()
+	{
 		return null;
 	}
 
-  /**
+/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS <em>Operation Context Decl CS</em>}'.
 	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
