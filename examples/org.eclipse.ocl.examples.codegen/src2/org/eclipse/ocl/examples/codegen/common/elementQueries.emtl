@@ -56,7 +56,7 @@
       </expression>
       <type xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
     </ownedModuleElement>
-    <ownedModuleElement xsi:type="mtl:Query" name="getExpressionInOcl" visibility="Public">
+    <ownedModuleElement xsi:type="mtl:Query" name="getExpressionInOCL" visibility="Public">
       <parameter name="specification">
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ValueSpecification"/>
       </parameter>
@@ -71,25 +71,25 @@
         <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="org.eclipse.ocl.examples.codegen.common.PivotQueries">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         </argument>
-        <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="getExpressionInOcl(org.eclipse.ocl.examples.pivot.NamedElement, org.eclipse.ocl.examples.pivot.ValueSpecification)">
+        <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="getExpressionInOCL(org.eclipse.ocl.examples.pivot.NamedElement, org.eclipse.ocl.examples.pivot.ValueSpecification)">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         </argument>
         <argument xsi:type="ocl.ecore:CollectionLiteralExp" eType="/4/Sequence(NamedElement)" kind="Sequence">
           <part xsi:type="ocl.ecore:CollectionItem">
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//NamedElement"/>
-            <item xsi:type="ocl.ecore:VariableExp" name="contextElement" referredVariable="/0/getExpressionInOcl/contextElement">
+            <item xsi:type="ocl.ecore:VariableExp" name="contextElement" referredVariable="/0/getExpressionInOCL/contextElement">
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//NamedElement"/>
             </item>
           </part>
           <part xsi:type="ocl.ecore:CollectionItem">
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ValueSpecification"/>
-            <item xsi:type="ocl.ecore:VariableExp" name="specification" referredVariable="/0/getExpressionInOcl/specification">
+            <item xsi:type="ocl.ecore:VariableExp" name="specification" referredVariable="/0/getExpressionInOCL/specification">
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ValueSpecification"/>
             </item>
           </part>
         </argument>
       </expression>
-      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Query" name="getMoniker" visibility="Public">
       <parameter name="elem">
@@ -184,12 +184,12 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Element"/>
         </eParameters>
       </eOperations>
-      <eOperations name="getExpressionInOcl">
+      <eOperations name="getExpressionInOCL">
         <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
           <contents xsi:type="ocl.ecore:Constraint"/>
         </eAnnotations>
-        <eAnnotations source="MTL" references="/0/getExpressionInOcl"/>
-        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+        <eAnnotations source="MTL" references="/0/getExpressionInOCL"/>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         <eParameters name="specification">
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ValueSpecification"/>
         </eParameters>
@@ -402,52 +402,52 @@
       <details key="end" value="974"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.16" references="/0/getExpressionInOcl">
+    <eAnnotations source="positions.16" references="/0/getExpressionInOCL">
       <details key="start" value="981"/>
       <details key="end" value="1325"/>
       <details key="line" value="26"/>
     </eAnnotations>
-    <eAnnotations source="positions.17" references="/0/getExpressionInOcl/specification">
+    <eAnnotations source="positions.17" references="/0/getExpressionInOCL/specification">
       <details key="start" value="1014"/>
       <details key="end" value="1048"/>
       <details key="line" value="26"/>
     </eAnnotations>
-    <eAnnotations source="positions.18" references="/0/getExpressionInOcl/contextElement">
+    <eAnnotations source="positions.18" references="/0/getExpressionInOCL/contextElement">
       <details key="start" value="1050"/>
       <details key="end" value="1079"/>
       <details key="line" value="26"/>
     </eAnnotations>
-    <eAnnotations source="positions.19" references="/0/getExpressionInOcl/@expression">
+    <eAnnotations source="positions.19" references="/0/getExpressionInOCL/@expression">
       <details key="start" value="1101"/>
       <details key="end" value="1322"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.20" references="/0/getExpressionInOcl/@expression/self">
+    <eAnnotations source="positions.20" references="/0/getExpressionInOCL/@expression/self">
       <details key="start" value="-1"/>
       <details key="end" value="-1"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.21" references="/0/getExpressionInOcl/@expression/@argument.0">
+    <eAnnotations source="positions.21" references="/0/getExpressionInOCL/@expression/@argument.0">
       <details key="start" value="1108"/>
       <details key="end" value="1162"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.22" references="/0/getExpressionInOcl/@expression/@argument.1">
+    <eAnnotations source="positions.22" references="/0/getExpressionInOCL/@expression/@argument.1">
       <details key="start" value="1164"/>
       <details key="end" value="1280"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.23" references="/0/getExpressionInOcl/@expression/@argument.2">
+    <eAnnotations source="positions.23" references="/0/getExpressionInOCL/@expression/@argument.2">
       <details key="start" value="1282"/>
       <details key="end" value="1321"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.24" references="/0/getExpressionInOcl/@expression/@argument.2/@part.0/contextElement">
+    <eAnnotations source="positions.24" references="/0/getExpressionInOCL/@expression/@argument.2/@part.0/contextElement">
       <details key="start" value="1291"/>
       <details key="end" value="1305"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.25" references="/0/getExpressionInOcl/@expression/@argument.2/@part.1/specification">
+    <eAnnotations source="positions.25" references="/0/getExpressionInOCL/@expression/@argument.2/@part.1/specification">
       <details key="start" value="1307"/>
       <details key="end" value="1320"/>
       <details key="line" value="0"/>

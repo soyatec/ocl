@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.eclipse.acceleo.ide.ui.natures.AcceleoNature;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -102,7 +101,7 @@ public class UsageTests extends XtextTestCase
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		AcceleoNature.class.getName();				// Pull in the plugin for Hudson
+//		AcceleoNature.class.getName();				// Pull in the plugin for Hudson
 		OCLinEcoreStandaloneSetup.doSetup();
 		configurePlatformResources();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("pivot", new XMIResourceFactoryImpl()); //$NON-NLS-1$

@@ -21,7 +21,7 @@
         <body xsi:type="mtl:TemplateInvocation" definition="/0/emitExpression.4">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
           <argument xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
             <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression/ast">
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionItem"/>
             </source>
@@ -34,7 +34,7 @@
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
@@ -44,7 +44,7 @@
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
             <definition href="constantTemplates.emtl#/0/isConstant"/>
             <argument xsi:type="ocl.ecore:PropertyCallExp">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
               <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression/ast">
                 <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionItem"/>
               </source>
@@ -64,7 +64,7 @@
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
       </parameter>
       <parameter name="expInOcl">
-        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
       </parameter>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Template" name="emitExpression" visibility="Public">
@@ -81,7 +81,7 @@
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.1/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
@@ -117,7 +117,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </argument>
         <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.1/expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </argument>
       </body>
       <parameter name="ast">
@@ -130,7 +130,7 @@
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
       </parameter>
       <parameter name="expInOcl">
-        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
       </parameter>
       <guard xsi:type="ocl.ecore:OperationCallExp">
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -149,7 +149,7 @@
         <body xsi:type="mtl:TemplateInvocation" definition="/0/emitExpression.4">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
           <argument xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
             <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.2/ast">
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionRange"/>
             </source>
@@ -162,7 +162,7 @@
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.2/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
@@ -172,7 +172,7 @@
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
             <definition href="constantTemplates.emtl#/0/isConstant"/>
             <argument xsi:type="ocl.ecore:PropertyCallExp">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
               <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.2/ast">
                 <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionRange"/>
               </source>
@@ -186,7 +186,7 @@
         <body xsi:type="mtl:TemplateInvocation" definition="/0/emitExpression.4">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
           <argument xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
             <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.2/ast">
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionRange"/>
             </source>
@@ -199,7 +199,7 @@
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.2/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
@@ -209,7 +209,7 @@
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
             <definition href="constantTemplates.emtl#/0/isConstant"/>
             <argument xsi:type="ocl.ecore:PropertyCallExp">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
               <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.2/ast">
                 <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionRange"/>
               </source>
@@ -229,7 +229,7 @@
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
       </parameter>
       <parameter name="expInOcl">
-        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
       </parameter>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Template" name="emitExpression" visibility="Public">
@@ -241,7 +241,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ConstructorExp"/>
         </argument>
         <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.3/expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </argument>
       </body>
       <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" = "/>
@@ -264,7 +264,7 @@
         <body xsi:type="mtl:TemplateInvocation" definition="/0/emitExpression.4">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
           <argument xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
             <source xsi:type="ocl.ecore:VariableExp" name="part" referredVariable="/0/emitExpression.3/@body.5/part">
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ConstructorPart"/>
             </source>
@@ -277,7 +277,7 @@
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.3/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
@@ -292,7 +292,7 @@
             <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ConstructorPart/referredProperty"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.3/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".setValue("/>
@@ -303,7 +303,7 @@
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ConstructorExp"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.3/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=", "/>
@@ -311,14 +311,14 @@
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
           <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
           <argument xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
             <source xsi:type="ocl.ecore:VariableExp" name="part" referredVariable="/0/emitExpression.3/@body.5/part">
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ConstructorPart"/>
             </source>
             <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ConstructorPart/initExpression"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.3/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=");&#xA;"/>
@@ -342,7 +342,7 @@
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
       </parameter>
       <parameter name="expInOcl">
-        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
       </parameter>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Template" name="emitExpression" visibility="Public">
@@ -354,7 +354,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Element"/>
         </argument>
         <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.4/expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </argument>
       </body>
       <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" = &lt;&lt;"/>
@@ -380,7 +380,7 @@
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
       </parameter>
       <parameter name="expInOcl">
-        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
       </parameter>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Template" name="emitExpression" visibility="Public">
@@ -389,7 +389,7 @@
         <body xsi:type="mtl:TemplateInvocation" definition="/0/emitExpression.4">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
           <argument xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
             <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.5/ast">
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp"/>
             </source>
@@ -402,7 +402,7 @@
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.5/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
@@ -412,7 +412,7 @@
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
             <definition href="constantTemplates.emtl#/0/isConstant"/>
             <argument xsi:type="ocl.ecore:PropertyCallExp">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
               <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.5/ast">
                 <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp"/>
               </source>
@@ -432,14 +432,14 @@
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
           <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
           <argument xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
             <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.5/ast">
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp"/>
             </source>
             <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp/condition"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.5/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".isTrue()) {&#xA;"/>
@@ -448,7 +448,7 @@
           <body xsi:type="mtl:TemplateInvocation" definition="/0/emitExpression.4">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
             <argument xsi:type="ocl.ecore:PropertyCallExp">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
               <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.5/ast">
                 <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp"/>
               </source>
@@ -461,7 +461,7 @@
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
             </argument>
             <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.5/expInOcl">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
             </argument>
           </body>
           <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
@@ -471,7 +471,7 @@
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
               <definition href="constantTemplates.emtl#/0/isConstant"/>
               <argument xsi:type="ocl.ecore:PropertyCallExp">
-                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                 <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.5/ast">
                   <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp"/>
                 </source>
@@ -490,14 +490,14 @@
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
           <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
           <argument xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
             <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.5/ast">
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp"/>
             </source>
             <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp/thenExpression"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.5/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=";&#xA;}&#xA;else if ("/>
@@ -505,14 +505,14 @@
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
           <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
           <argument xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
             <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.5/ast">
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp"/>
             </source>
             <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp/condition"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.5/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".isFalse()) {&#xA;"/>
@@ -521,7 +521,7 @@
           <body xsi:type="mtl:TemplateInvocation" definition="/0/emitExpression.4">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
             <argument xsi:type="ocl.ecore:PropertyCallExp">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
               <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.5/ast">
                 <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp"/>
               </source>
@@ -534,7 +534,7 @@
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
             </argument>
             <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.5/expInOcl">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
             </argument>
           </body>
           <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
@@ -544,7 +544,7 @@
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
               <definition href="constantTemplates.emtl#/0/isConstant"/>
               <argument xsi:type="ocl.ecore:PropertyCallExp">
-                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                 <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.5/ast">
                   <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp"/>
                 </source>
@@ -563,14 +563,14 @@
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
           <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
           <argument xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
             <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.5/ast">
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp"/>
             </source>
             <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp/elseExpression"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.5/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=";&#xA;}&#xA;else if ("/>
@@ -578,14 +578,14 @@
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
           <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
           <argument xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
             <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.5/ast">
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp"/>
             </source>
             <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp/condition"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.5/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".isNull()) {&#xA;&#x9;"/>
@@ -606,7 +606,7 @@
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp"/>
             </argument>
             <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.5/expInOcl">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
             </argument>
           </initExpression>
         </letVariable>
@@ -621,7 +621,7 @@
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
       </parameter>
       <parameter name="expInOcl">
-        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
       </parameter>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Template" name="emitExpression" visibility="Public">
@@ -635,7 +635,7 @@
                     <body xsi:type="mtl:TemplateInvocation" definition="/0/emitExpression.4">
                       <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
                       <argument xsi:type="ocl.ecore:PropertyCallExp">
-                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                         <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.6/ast">
                           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IterateExp"/>
                         </source>
@@ -648,14 +648,14 @@
                         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
                       </argument>
                       <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.6/expInOcl">
-                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                       </argument>
                     </body>
                     <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
                     <body xsi:type="mtl:TemplateInvocation" definition="/0/emitExpression.4">
                       <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
                       <argument xsi:type="ocl.ecore:PropertyCallExp">
-                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                         <source xsi:type="ocl.ecore:PropertyCallExp">
                           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable"/>
                           <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.6/ast">
@@ -672,7 +672,7 @@
                         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
                       </argument>
                       <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.6/expInOcl">
-                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                       </argument>
                     </body>
                     <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
@@ -685,7 +685,7 @@
                           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable"/>
                         </argument>
                         <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.6/expInOcl">
-                          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                         </argument>
                       </body>
                       <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="_var = "/>
@@ -730,7 +730,7 @@
                         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
                         <definition href="pivotQueries.emtl#/0/prettyPrint"/>
                         <argument xsi:type="ocl.ecore:PropertyCallExp">
-                          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                           <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.6/ast">
                             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IterateExp"/>
                           </source>
@@ -750,7 +750,7 @@
                         <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IterateExp/result"/>
                       </argument>
                       <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.6/expInOcl">
-                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                       </argument>
                     </body>
                     <body xsi:type="mtl:ForBlock">
@@ -762,7 +762,7 @@
                           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable"/>
                         </argument>
                         <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.6/expInOcl">
-                          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                         </argument>
                       </body>
                       <loopVariable name="i">
@@ -779,7 +779,7 @@
                     <body xsi:type="mtl:TemplateInvocation" definition="/0/emitExpression.4">
                       <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
                       <argument xsi:type="ocl.ecore:PropertyCallExp">
-                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                         <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.6/ast">
                           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IterateExp"/>
                         </source>
@@ -792,7 +792,7 @@
                         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
                       </argument>
                       <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.6/expInOcl">
-                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                       </argument>
                     </body>
                     <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#x9;&#x9;return "/>
@@ -800,14 +800,14 @@
                       <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
                       <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
                       <argument xsi:type="ocl.ecore:PropertyCallExp">
-                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                         <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.6/ast">
                           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IterateExp"/>
                         </source>
                         <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//LoopExp/body"/>
                       </argument>
                       <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.6/expInOcl">
-                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                       </argument>
                     </body>
                     <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=";&#xA;&#x9;}&#xA;};&#xA;&lt;%org.eclipse.ocl.examples.domain.elements.DomainType%> static_"/>
@@ -819,14 +819,14 @@
                       <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
                       <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
                       <argument xsi:type="ocl.ecore:PropertyCallExp">
-                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                         <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.6/ast">
                           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IterateExp"/>
                         </source>
                         <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//CallExp/source"/>
                       </argument>
                       <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.6/expInOcl">
-                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                       </argument>
                     </body>
                     <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".getType();&#xA;&lt;%"/>
@@ -857,7 +857,7 @@
                         <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//LoopExp/referredIteration"/>
                       </argument>
                       <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.6/expInOcl">
-                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                       </argument>
                     </body>
                     <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=");&#xA;&lt;%"/>
@@ -888,7 +888,7 @@
                         <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//TypedElement/type"/>
                       </argument>
                       <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.6/expInOcl">
-                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                       </argument>
                     </body>
                     <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=", body_"/>
@@ -904,7 +904,7 @@
                       <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
                       <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
                       <argument xsi:type="ocl.ecore:PropertyCallExp">
-                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                         <source xsi:type="ocl.ecore:PropertyCallExp">
                           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable"/>
                           <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.6/ast">
@@ -915,7 +915,7 @@
                         <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable/initExpression"/>
                       </argument>
                       <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.6/expInOcl">
-                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                       </argument>
                     </body>
                     <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=");&#xA;&lt;%Value%> "/>
@@ -974,7 +974,7 @@
                     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IterateExp"/>
                   </argument>
                   <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.6/expInOcl">
-                    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                   </argument>
                 </initExpression>
               </letVariable>
@@ -992,7 +992,7 @@
                   <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IterateExp/result"/>
                 </argument>
                 <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.6/expInOcl">
-                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                 </argument>
               </initExpression>
             </letVariable>
@@ -1003,14 +1003,14 @@
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
               <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
               <argument xsi:type="ocl.ecore:PropertyCallExp">
-                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                 <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.6/ast">
                   <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IterateExp"/>
                 </source>
                 <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//CallExp/source"/>
               </argument>
               <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.6/expInOcl">
-                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
               </argument>
             </initExpression>
           </letVariable>
@@ -1039,7 +1039,7 @@
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
       </parameter>
       <parameter name="expInOcl">
-        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
       </parameter>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Template" name="emitExpression" visibility="Public">
@@ -1052,7 +1052,7 @@
                   <body xsi:type="mtl:TemplateInvocation" definition="/0/emitExpression.4">
                     <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
                     <argument xsi:type="ocl.ecore:PropertyCallExp">
-                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                       <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.7/ast">
                         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp"/>
                       </source>
@@ -1065,7 +1065,7 @@
                       <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
                     </argument>
                     <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.7/expInOcl">
-                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                     </argument>
                   </body>
                   <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#xA;/** &#xA; * Implementation of the iterator body.&#xA; */&#xA;&lt;%"/>
@@ -1087,7 +1087,7 @@
                       <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
                       <definition href="pivotQueries.emtl#/0/prettyPrint"/>
                       <argument xsi:type="ocl.ecore:PropertyCallExp">
-                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                         <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.7/ast">
                           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp"/>
                         </source>
@@ -1136,7 +1136,7 @@
                         <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OrderedSet(T)_Class/at"/>
                       </argument>
                       <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.7/expInOcl">
-                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                       </argument>
                     </body>
                     <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" = iterator"/>
@@ -1181,7 +1181,7 @@
                   <body xsi:type="mtl:TemplateInvocation" definition="/0/emitExpression.4">
                     <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
                     <argument xsi:type="ocl.ecore:PropertyCallExp">
-                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                       <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.7/ast">
                         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp"/>
                       </source>
@@ -1194,7 +1194,7 @@
                       <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
                     </argument>
                     <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.7/expInOcl">
-                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                     </argument>
                   </body>
                   <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#x9;&#x9;return "/>
@@ -1202,14 +1202,14 @@
                     <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
                     <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
                     <argument xsi:type="ocl.ecore:PropertyCallExp">
-                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                       <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.7/ast">
                         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp"/>
                       </source>
                       <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//LoopExp/body"/>
                     </argument>
                     <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.7/expInOcl">
-                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                     </argument>
                   </body>
                   <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=";&#xA;&#x9;}&#xA;};&#xA;&lt;%org.eclipse.ocl.examples.domain.elements.DomainType%> static_"/>
@@ -1221,14 +1221,14 @@
                     <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
                     <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
                     <argument xsi:type="ocl.ecore:PropertyCallExp">
-                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                       <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.7/ast">
                         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp"/>
                       </source>
                       <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//CallExp/source"/>
                     </argument>
                     <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.7/expInOcl">
-                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                     </argument>
                   </body>
                   <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".getType();&#xA;&lt;%"/>
@@ -1259,7 +1259,7 @@
                       <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//LoopExp/referredIteration"/>
                     </argument>
                     <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.7/expInOcl">
-                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                     </argument>
                   </body>
                   <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=");&#xA;&lt;%Value%> acc_"/>
@@ -1282,7 +1282,7 @@
                       <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//TypedElement/type"/>
                     </argument>
                     <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.7/expInOcl">
-                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                     </argument>
                   </body>
                   <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=", "/>
@@ -1292,7 +1292,7 @@
                     <argument xsi:type="ocl.ecore:PropertyCallExp">
                       <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
                       <source xsi:type="ocl.ecore:PropertyCallExp">
-                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                         <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.7/ast">
                           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp"/>
                         </source>
@@ -1301,7 +1301,7 @@
                       <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//TypedElement/type"/>
                     </argument>
                     <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.7/expInOcl">
-                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                     </argument>
                   </body>
                   <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=");&#xA;&lt;%"/>
@@ -1328,7 +1328,7 @@
                       <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//TypedElement/type"/>
                     </argument>
                     <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.7/expInOcl">
-                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                     </argument>
                   </body>
                   <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=", body_"/>
@@ -1340,14 +1340,14 @@
                     <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
                     <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
                     <argument xsi:type="ocl.ecore:PropertyCallExp">
-                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                       <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.7/ast">
                         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp"/>
                       </source>
                       <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//CallExp/source"/>
                     </argument>
                     <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.7/expInOcl">
-                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                     </argument>
                   </body>
                   <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=", acc_"/>
@@ -1423,7 +1423,7 @@
                   <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp"/>
                 </argument>
                 <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.7/expInOcl">
-                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                 </argument>
               </initExpression>
             </letVariable>
@@ -1434,14 +1434,14 @@
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
               <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
               <argument xsi:type="ocl.ecore:PropertyCallExp">
-                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                 <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.7/ast">
                   <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp"/>
                 </source>
                 <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//CallExp/source"/>
               </argument>
               <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.7/expInOcl">
-                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
               </argument>
             </initExpression>
           </letVariable>
@@ -1470,7 +1470,7 @@
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
       </parameter>
       <parameter name="expInOcl">
-        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
       </parameter>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Template" name="emitExpression" visibility="Public">
@@ -1478,7 +1478,7 @@
         <body xsi:type="mtl:TemplateInvocation" definition="/0/emitExpression.4">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
           <argument xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
             <source xsi:type="ocl.ecore:PropertyCallExp">
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable"/>
               <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.8/ast">
@@ -1495,7 +1495,7 @@
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.8/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
@@ -1505,7 +1505,7 @@
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
             <definition href="constantTemplates.emtl#/0/isConstant"/>
             <argument xsi:type="ocl.ecore:PropertyCallExp">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
               <source xsi:type="ocl.ecore:PropertyCallExp">
                 <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable"/>
                 <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.8/ast">
@@ -1531,7 +1531,7 @@
           <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//LetExp/variable"/>
         </argument>
         <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.8/expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </argument>
       </body>
       <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" = "/>
@@ -1539,7 +1539,7 @@
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
         <argument xsi:type="ocl.ecore:PropertyCallExp">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
           <source xsi:type="ocl.ecore:PropertyCallExp">
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable"/>
             <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.8/ast">
@@ -1550,7 +1550,7 @@
           <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable/initExpression"/>
         </argument>
         <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.8/expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </argument>
       </body>
       <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=";&#xA;"/>
@@ -1558,7 +1558,7 @@
         <body xsi:type="mtl:TemplateInvocation" definition="/0/emitExpression.4">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
           <argument xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
             <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.8/ast">
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//LetExp"/>
             </source>
@@ -1571,7 +1571,7 @@
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.8/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
@@ -1581,7 +1581,7 @@
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
             <definition href="constantTemplates.emtl#/0/isConstant"/>
             <argument xsi:type="ocl.ecore:PropertyCallExp">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
               <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.8/ast">
                 <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//LetExp"/>
               </source>
@@ -1599,7 +1599,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//LetExp"/>
         </argument>
         <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.8/expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </argument>
       </body>
       <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" = "/>
@@ -1607,14 +1607,14 @@
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
         <argument xsi:type="ocl.ecore:PropertyCallExp">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
           <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.8/ast">
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//LetExp"/>
           </source>
           <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//LetExp/in"/>
         </argument>
         <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.8/expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </argument>
       </body>
       <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=";"/>
@@ -1628,7 +1628,7 @@
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
       </parameter>
       <parameter name="expInOcl">
-        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
       </parameter>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Template" name="emitExpression" visibility="Public">
@@ -1642,7 +1642,7 @@
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
       </parameter>
       <parameter name="expInOcl">
-        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
       </parameter>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Template" name="emitExpression" visibility="Public">
@@ -1656,7 +1656,7 @@
           <body xsi:type="mtl:TemplateInvocation" definition="/0/emitExpression.4">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
             <argument xsi:type="ocl.ecore:PropertyCallExp">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
               <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.10/ast">
                 <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp"/>
               </source>
@@ -1669,7 +1669,7 @@
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
             </argument>
             <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.10/expInOcl">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
             </argument>
           </body>
           <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#x9;left"/>
@@ -1681,14 +1681,14 @@
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
             <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
             <argument xsi:type="ocl.ecore:PropertyCallExp">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
               <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.10/ast">
                 <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp"/>
               </source>
               <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//CallExp/source"/>
             </argument>
             <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.10/expInOcl">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
             </argument>
           </body>
           <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=";&#xA;} catch (&lt;%org.eclipse.ocl.examples.domain.evaluation.InvalidValueException%> e) {&#xA;&#x9;left"/>
@@ -1700,14 +1700,14 @@
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
             <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
             <argument xsi:type="ocl.ecore:PropertyCallExp">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
               <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.10/ast">
                 <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp"/>
               </source>
               <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//CallExp/source"/>
             </argument>
             <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.10/expInOcl">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
             </argument>
           </body>
           <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" = left"/>
@@ -1721,7 +1721,7 @@
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
               <definition href="constantTemplates.emtl#/0/isConstant"/>
               <argument xsi:type="ocl.ecore:PropertyCallExp">
-                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                 <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.10/ast">
                   <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp"/>
                 </source>
@@ -1741,7 +1741,7 @@
             <body xsi:type="mtl:TemplateInvocation" definition="/0/emitExpression.4">
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
               <argument xsi:type="ocl.ecore:VariableExp" name="right" referredVariable="/0/emitExpression.10/@body.0/@body.1/right">
-                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
               </argument>
               <argument xsi:type="ocl.ecore:VariableExp" name="importer" referredVariable="/0/emitExpression.10/importer">
                 <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//NamedElement"/>
@@ -1750,7 +1750,7 @@
                 <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
               </argument>
               <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.10/expInOcl">
-                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
               </argument>
             </body>
             <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#x9;right"/>
@@ -1762,10 +1762,10 @@
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
               <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
               <argument xsi:type="ocl.ecore:VariableExp" name="right" referredVariable="/0/emitExpression.10/@body.0/@body.1/right">
-                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
               </argument>
               <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.10/expInOcl">
-                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
               </argument>
             </body>
             <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=";&#xA;} catch (&lt;%org.eclipse.ocl.examples.domain.evaluation.InvalidValueException%> e) {&#xA;&#x9;right"/>
@@ -1777,10 +1777,10 @@
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
               <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
               <argument xsi:type="ocl.ecore:VariableExp" name="right" referredVariable="/0/emitExpression.10/@body.0/@body.1/right">
-                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
               </argument>
               <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.10/expInOcl">
-                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
               </argument>
             </body>
             <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" = right"/>
@@ -1794,17 +1794,17 @@
                 <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
                 <definition href="constantTemplates.emtl#/0/isConstant"/>
                 <argument xsi:type="ocl.ecore:VariableExp" name="right" referredVariable="/0/emitExpression.10/@body.0/@body.1/right">
-                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                 </argument>
               </source>
               <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean_Class/not"/>
             </ifExpr>
           </body>
           <letVariable name="right">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
             <initExpression xsi:type="ocl.ecore:OperationCallExp">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
-              <source xsi:type="ocl.ecore:PropertyCallExp" eType="/3/OrderedSet(OclExpression)">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp" eType="/3/OrderedSet(OCLExpression)">
                 <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.10/ast">
                   <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp"/>
                 </source>
@@ -1829,7 +1829,7 @@
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.10/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <letVariable name="astName">
@@ -1841,7 +1841,7 @@
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp"/>
             </argument>
             <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.10/expInOcl">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
             </argument>
           </initExpression>
         </letVariable>
@@ -1856,7 +1856,7 @@
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
       </parameter>
       <parameter name="expInOcl">
-        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
       </parameter>
       <guard xsi:type="ocl.ecore:OperationCallExp">
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -1911,7 +1911,7 @@
         <body xsi:type="mtl:TemplateInvocation" definition="/0/emitExpression.4">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
           <argument xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
             <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.11/ast">
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp"/>
             </source>
@@ -1924,7 +1924,7 @@
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.11/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
@@ -1934,7 +1934,7 @@
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
             <definition href="constantTemplates.emtl#/0/isConstant"/>
             <argument xsi:type="ocl.ecore:PropertyCallExp">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
               <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.11/ast">
                 <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp"/>
               </source>
@@ -1948,7 +1948,7 @@
         <body xsi:type="mtl:TemplateInvocation" definition="/0/emitExpression.4">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
           <argument xsi:type="ocl.ecore:VariableExp" name="argument" referredVariable="/0/emitExpression.11/@body.1/argument">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="importer" referredVariable="/0/emitExpression.11/importer">
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//NamedElement"/>
@@ -1957,15 +1957,15 @@
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.11/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
         <loopVariable name="argument">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
         </loopVariable>
-        <iterSet xsi:type="ocl.ecore:IteratorExp" name="reject" eType="/3/OrderedSet(OclExpression)">
-          <source xsi:type="ocl.ecore:PropertyCallExp" eType="/3/OrderedSet(OclExpression)">
+        <iterSet xsi:type="ocl.ecore:IteratorExp" name="reject" eType="/3/OrderedSet(OCLExpression)">
+          <source xsi:type="ocl.ecore:PropertyCallExp" eType="/3/OrderedSet(OCLExpression)">
             <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.11/ast">
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp"/>
             </source>
@@ -1975,11 +1975,11 @@
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
             <definition href="constantTemplates.emtl#/0/isConstant"/>
             <argument xsi:type="ocl.ecore:VariableExp" name="temp1" referredVariable="/0/emitExpression.11/@body.1/reject/temp2">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
             </argument>
           </body>
           <iterator xsi:type="ocl.ecore:Variable" name="temp2">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
           </iterator>
         </iterSet>
       </body>
@@ -1995,7 +1995,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </argument>
         <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.11/expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </argument>
       </body>
       <parameter name="ast">
@@ -2008,7 +2008,7 @@
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
       </parameter>
       <parameter name="expInOcl">
-        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
       </parameter>
       <guard xsi:type="ocl.ecore:OperationCallExp">
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
@@ -2073,10 +2073,10 @@
                 <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
               </argument>
               <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/generateCall/expInOcl">
-                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
               </argument>
               <argument xsi:type="ocl.ecore:PropertyCallExp">
-                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                 <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/generateCall/ast">
                   <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp"/>
                 </source>
@@ -2091,8 +2091,8 @@
                     <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
                     <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
                     <argument xsi:type="ocl.ecore:OperationCallExp">
-                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
-                      <source xsi:type="ocl.ecore:PropertyCallExp" eType="/3/OrderedSet(OclExpression)">
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
+                      <source xsi:type="ocl.ecore:PropertyCallExp" eType="/3/OrderedSet(OCLExpression)">
                         <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/generateCall/ast">
                           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp"/>
                         </source>
@@ -2104,7 +2104,7 @@
                       <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OrderedSet(T)_Class/at"/>
                     </argument>
                     <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/generateCall/expInOcl">
-                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                     </argument>
                   </body>
                   <ifExpr xsi:type="ocl.ecore:OperationCallExp">
@@ -2190,7 +2190,7 @@
                 <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp/referredOperation"/>
               </argument>
               <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/generateCall/expInOcl">
-                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
               </argument>
             </body>
             <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=");&#xA;&lt;%Value%> "/>
@@ -2213,7 +2213,7 @@
                 <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//TypedElement/type"/>
               </argument>
               <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/generateCall/expInOcl">
-                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
               </argument>
             </body>
             <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=", "/>
@@ -2221,14 +2221,14 @@
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
               <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
               <argument xsi:type="ocl.ecore:PropertyCallExp">
-                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                 <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/generateCall/ast">
                   <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp"/>
                 </source>
                 <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//CallExp/source"/>
               </argument>
               <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/generateCall/expInOcl">
-                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
               </argument>
             </body>
             <body xsi:type="mtl:ForBlock">
@@ -2236,16 +2236,16 @@
                 <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
                 <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
                 <argument xsi:type="ocl.ecore:VariableExp" name="argument" referredVariable="/0/generateCall/@body.0/@body.0/@body.0/@body.23/argument">
-                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
                 </argument>
                 <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/generateCall/expInOcl">
-                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
                 </argument>
               </body>
               <loopVariable name="argument">
-                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
               </loopVariable>
-              <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/3/OrderedSet(OclExpression)">
+              <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/3/OrderedSet(OCLExpression)">
                 <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/generateCall/ast">
                   <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp"/>
                 </source>
@@ -2288,7 +2288,7 @@
                 <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp"/>
               </argument>
               <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/generateCall/expInOcl">
-                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
               </argument>
             </initExpression>
           </letVariable>
@@ -2321,7 +2321,7 @@
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
       </parameter>
       <parameter name="expInOcl">
-        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
       </parameter>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Template" name="emitExpression" visibility="Public">
@@ -2329,7 +2329,7 @@
         <body xsi:type="mtl:TemplateInvocation" definition="/0/emitExpression.4">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
           <argument xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
             <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.12/ast">
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//PropertyCallExp"/>
             </source>
@@ -2342,7 +2342,7 @@
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.12/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
@@ -2352,7 +2352,7 @@
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
             <definition href="constantTemplates.emtl#/0/isConstant"/>
             <argument xsi:type="ocl.ecore:PropertyCallExp">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
               <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.12/ast">
                 <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//PropertyCallExp"/>
               </source>
@@ -2371,7 +2371,7 @@
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//PropertyCallExp"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.12/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" = ((&lt;%org.eclipse.ocl.examples.domain.values.TupleValue%>)"/>
@@ -2379,14 +2379,14 @@
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
           <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
           <argument xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
             <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.12/ast">
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//PropertyCallExp"/>
             </source>
             <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//CallExp/source"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.12/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=").getValue("/>
@@ -2401,7 +2401,7 @@
             <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//PropertyCallExp/referredProperty"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.12/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=");&#xA;"/>
@@ -2410,7 +2410,7 @@
           <source xsi:type="ocl.ecore:PropertyCallExp">
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
             <source xsi:type="ocl.ecore:PropertyCallExp">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
               <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.12/ast">
                 <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//PropertyCallExp"/>
               </source>
@@ -2432,7 +2432,7 @@
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//PropertyCallExp"/>
             </argument>
             <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.12/expInOcl">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
             </argument>
           </body>
           <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" = I"/>
@@ -2447,7 +2447,7 @@
               <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//PropertyCallExp/referredProperty"/>
             </argument>
             <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.12/expInOcl">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
             </argument>
           </body>
           <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".evaluate(evaluator, "/>
@@ -2462,7 +2462,7 @@
               <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//TypedElement/type"/>
             </argument>
             <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.12/expInOcl">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
             </argument>
           </body>
           <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=", "/>
@@ -2470,14 +2470,14 @@
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
             <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
             <argument xsi:type="ocl.ecore:PropertyCallExp">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
               <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitExpression.12/ast">
                 <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//PropertyCallExp"/>
               </source>
               <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//CallExp/source"/>
             </argument>
             <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.12/expInOcl">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
             </argument>
           </body>
           <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=", "/>
@@ -2492,7 +2492,7 @@
               <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//PropertyCallExp/referredProperty"/>
             </argument>
             <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.12/expInOcl">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
             </argument>
           </body>
           <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=");&#xA;"/>
@@ -2508,7 +2508,7 @@
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
       </parameter>
       <parameter name="expInOcl">
-        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
       </parameter>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Template" name="emitExpression" visibility="Public">
@@ -2516,7 +2516,7 @@
         <body xsi:type="mtl:TemplateInvocation" definition="/0/emitExpression.4">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
           <argument xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
             <source xsi:type="ocl.ecore:VariableExp" name="part" referredVariable="/0/emitExpression.13/@body.0/part">
               <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//TupleLiteralPart"/>
             </source>
@@ -2529,7 +2529,7 @@
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.13/expInOcl">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
           </argument>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
@@ -2547,7 +2547,7 @@
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
             <definition href="constantTemplates.emtl#/0/isConstant"/>
             <argument xsi:type="ocl.ecore:PropertyCallExp">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
               <source xsi:type="ocl.ecore:VariableExp" name="temp1" referredVariable="/0/emitExpression.13/@body.0/reject/temp3">
                 <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//TupleLiteralPart"/>
               </source>
@@ -2569,7 +2569,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </argument>
         <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/emitExpression.13/expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </argument>
       </body>
       <parameter name="ast">
@@ -2582,7 +2582,7 @@
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
       </parameter>
       <parameter name="expInOcl">
-        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
       </parameter>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Template" name="emitExpression" visibility="Public">
@@ -2596,7 +2596,7 @@
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
       </parameter>
       <parameter name="expInOcl">
-        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
       </parameter>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Template" name="emitExpression" visibility="Public">
@@ -2610,7 +2610,7 @@
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
       </parameter>
       <parameter name="expInOcl">
-        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
       </parameter>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Template" name="generateTypeOf" visibility="Public">
@@ -2619,20 +2619,20 @@
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         <definition href="symbolTemplates.emtl#/0/symbolName.1"/>
         <argument xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/generateTypeOf/ast">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
         </argument>
         <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/generateTypeOf/expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </argument>
       </body>
       <parameter name="genPackage">
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
       </parameter>
       <parameter name="expInOcl">
-        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
       </parameter>
       <parameter name="ast">
-        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
       </parameter>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Template" name="generateTypeOf" visibility="Public">
@@ -2648,14 +2648,14 @@
           <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//VariableExp/referredVariable"/>
         </argument>
         <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/generateTypeOf.1/expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </argument>
       </body>
       <parameter name="genPackage">
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
       </parameter>
       <parameter name="expInOcl">
-        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
       </parameter>
       <parameter name="ast">
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//VariableExp"/>
@@ -2709,7 +2709,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
       <eOperations name="emitExpression">
@@ -2728,7 +2728,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
       <eOperations name="emitExpression">
@@ -2747,7 +2747,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
       <eOperations name="emitExpression">
@@ -2766,7 +2766,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
       <eOperations name="emitExpression">
@@ -2785,7 +2785,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
       <eOperations name="emitExpression">
@@ -2804,7 +2804,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
       <eOperations name="emitExpression">
@@ -2823,7 +2823,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
       <eOperations name="emitExpression">
@@ -2842,7 +2842,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
       <eOperations name="emitExpression">
@@ -2861,7 +2861,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
       <eOperations name="emitExpression">
@@ -2880,7 +2880,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
       <eOperations name="emitExpression">
@@ -2899,7 +2899,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
       <eOperations name="generateCall">
@@ -2918,7 +2918,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
       <eOperations name="emitExpression">
@@ -2937,7 +2937,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
       <eOperations name="emitExpression">
@@ -2956,7 +2956,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
       <eOperations name="emitExpression">
@@ -2975,7 +2975,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
       <eOperations name="emitExpression">
@@ -2994,7 +2994,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
       <eOperations name="generateTypeOf">
@@ -3007,10 +3007,10 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
         <eParameters name="ast">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
         </eParameters>
       </eOperations>
       <eOperations name="generateTypeOf">
@@ -3023,7 +3023,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
         <eParameters name="ast">
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//VariableExp"/>
@@ -3044,7 +3044,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
       <eOperations name="emitLiteral">
@@ -3062,7 +3062,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
       <eOperations name="isConstant">
@@ -3074,7 +3074,7 @@
         </eAnnotations>
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
         <eParameters name="ast">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
         </eParameters>
       </eOperations>
       <eOperations name="isConstantCollectionLiteralPart">
@@ -3128,7 +3128,7 @@
         </eAnnotations>
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         <eParameters name="expr">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
         </eParameters>
       </eOperations>
       <eOperations name="emitQualifiedLiteralName">
@@ -3158,7 +3158,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Element"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
       <eOperations name="symbolName">
@@ -3173,7 +3173,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
       <eOperations name="symbolName">
@@ -3188,7 +3188,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Property"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
       <eOperations name="symbolName">
@@ -3203,7 +3203,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
       <eOperations name="symbolName">
@@ -3218,7 +3218,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable"/>
         </eParameters>
         <eParameters name="expInOcl">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </eParameters>
       </eOperations>
     </eClassifiers>
@@ -3322,9 +3322,9 @@
         <references href="http://www.eclipse.org/emf/2002/GenModel#//GenPackage"/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ExpressionInOcl_Class">
+    <eClassifiers xsi:type="ecore:EClass" name="ExpressionInOCL_Class">
       <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
-        <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOcl"/>
+        <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ConstructorPart_Class">
@@ -3367,9 +3367,9 @@
         <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="OclExpression_Class">
+    <eClassifiers xsi:type="ecore:EClass" name="OCLExpression_Class">
       <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
-        <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+        <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="PrimitiveLiteralExp_Class">
@@ -3506,8 +3506,8 @@
     <eClassifiers xsi:type="ocl.ecore:SetType" name="Set(Parameter)" instanceClassName="java.util.Set">
       <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Parameter"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(OclExpression)" instanceClassName="java.util.LinkedHashSet">
-      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+    <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(OCLExpression)" instanceClassName="java.util.LinkedHashSet">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
     </eClassifiers>
     <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(TupleLiteralPart)" instanceClassName="java.util.LinkedHashSet">
       <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//TupleLiteralPart"/>
@@ -4138,10 +4138,10 @@
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
-    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
-    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp"/>
@@ -4245,10 +4245,10 @@
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
-    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
-    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp"/>

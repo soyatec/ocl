@@ -836,12 +836,12 @@
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Query" name="prettyPrint" visibility="Public">
       <parameter name="expr">
-        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
       </parameter>
       <expression xsi:type="ocl.ecore:OperationCallExp" referredOperation="/1/OclAny_Class/invoke">
         <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
         <source xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/72">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
         </source>
         <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="org.eclipse.ocl.examples.codegen.common.PivotQueries">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
@@ -849,11 +849,11 @@
         <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="prettyPrint(org.eclipse.ocl.examples.pivot.Element)">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         </argument>
-        <argument xsi:type="ocl.ecore:CollectionLiteralExp" eType="/3/Sequence(OclExpression)" kind="Sequence">
+        <argument xsi:type="ocl.ecore:CollectionLiteralExp" eType="/3/Sequence(OCLExpression)" kind="Sequence">
           <part xsi:type="ocl.ecore:CollectionItem">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
             <item xsi:type="ocl.ecore:VariableExp" name="expr" referredVariable="/0/prettyPrint/expr">
-              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
             </item>
           </part>
         </argument>
@@ -1156,7 +1156,7 @@
         <eAnnotations source="MTL" references="/0/prettyPrint"/>
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         <eParameters name="expr">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
         </eParameters>
       </eOperations>
       <eOperations name="prettyPrint">
@@ -1281,9 +1281,9 @@
         <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp"/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="OclExpression_Class">
+    <eClassifiers xsi:type="ecore:EClass" name="OCLExpression_Class">
       <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
-        <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+        <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ValueSpecification_Class">
@@ -1363,8 +1363,8 @@
     <eClassifiers xsi:type="ocl.ecore:SequenceType" name="Sequence(OperationCallExp)" instanceClassName="java.util.List">
       <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ocl.ecore:SequenceType" name="Sequence(OclExpression)" instanceClassName="java.util.List">
-      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+    <eClassifiers xsi:type="ocl.ecore:SequenceType" name="Sequence(OCLExpression)" instanceClassName="java.util.List">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
     </eClassifiers>
     <eClassifiers xsi:type="ocl.ecore:SequenceType" name="Sequence(ValueSpecification)" instanceClassName="java.util.List">
       <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ValueSpecification"/>
@@ -1569,10 +1569,10 @@
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
-    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
-    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OclExpression"/>
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
