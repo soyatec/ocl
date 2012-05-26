@@ -16,7 +16,7 @@
         <ownedAttribute xmi:id="my!AType!referencedAttr" name="referencedAttr" type="#my!BType"
             lower="0" isReadOnly="true" isDerived="true" isTransient="true" isVolatile="true">
           <ownedRule xmi:id="my!AType!referencedAttr!derivation~" stereotype="derivation">
-            <specification xsi:type="pivot:ExpressionInOcl" xmi:id="my!AType!referencedAttr!derivation~!specification">
+            <specification xsi:type="pivot:ExpressionInOCL" xmi:id="my!AType!referencedAttr!derivation~!specification">
               <bodyExpression xsi:type="pivot:OperationCallExp" xmi:id="my!AType!referencedAttr!derivation~!specification!bodyExpression~first"
                   type="#my!BType" referredOperation="#ocl!OrderedCollection{T}!first[my!BType]()">
                 <source xsi:type="pivot:OperationCallExp" xmi:id="my!AType!referencedAttr!derivation~!specification!bodyExpression~first!source~asSequence"
@@ -59,7 +59,7 @@
         <ownedOperation xmi:id="my!AType!referenced()" name="referenced" type="#my!BType"
             lower="0">
           <ownedRule xmi:id="my!AType!referenced()!body~" stereotype="body">
-            <specification xsi:type="pivot:ExpressionInOcl" xmi:id="my!AType!referenced()!body~!specification">
+            <specification xsi:type="pivot:ExpressionInOCL" xmi:id="my!AType!referenced()!body~!specification">
               <bodyExpression xsi:type="pivot:OperationCallExp" xmi:id="my!AType!referenced()!body~!specification!bodyExpression~first"
                   type="#my!BType" referredOperation="#ocl!OrderedCollection{T}!first[my!BType]()">
                 <source xsi:type="pivot:OperationCallExp" xmi:id="my!AType!referenced()!body~!specification!bodyExpression~first!source~asSequence"

@@ -69,7 +69,7 @@ import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -270,10 +270,10 @@ public abstract class PivotTestSuite extends PivotTestCase
 	/**
 	 * Assert that an expression can be parsed as an invariant for a context and return the invariant.
 	 */
-	protected ExpressionInOcl assertInvariant(Type context, String expression) {
+	protected ExpressionInOCL assertInvariant(Type context, String expression) {
 		helper.setContext(context);
 		try {
-			ExpressionInOcl result = helper.createInvariant(expression);
+			ExpressionInOCL result = helper.createInvariant(expression);
 			return result;
 		} catch (Exception e) {
 			failOn(expression, e);
@@ -344,10 +344,10 @@ public abstract class PivotTestSuite extends PivotTestCase
 	/**
 	 * Assert that an expression can be parsed as a query for a context and return the query.
 	 */
-	protected ExpressionInOcl assertQuery(Type context, String expression) {
+	protected ExpressionInOCL assertQuery(Type context, String expression) {
 		helper.setContext(context);
 		try {
-			ExpressionInOcl result = helper.createQuery(expression);
+			ExpressionInOCL result = helper.createQuery(expression);
 			return result;
 		} catch (Exception e) {
 			failOn(expression, e);
@@ -703,7 +703,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		try {
 			String document = "package uml context String" +
 					" inv: " + contextFreeExpression + " endpackage";
-			ExpressionInOcl expr = parse(document);
+			ExpressionInOCL expr = parse(document);
 			
 			result = check(expr, "");
 		} catch (Exception e) {
@@ -716,11 +716,11 @@ public abstract class PivotTestSuite extends PivotTestCase
     protected boolean check(OCLHelper aHelper, Object context,
             String expression) throws ParserException {
         
-    	ExpressionInOcl constraint = aHelper.createInvariant(expression);
+    	ExpressionInOCL constraint = aHelper.createInvariant(expression);
         return ocl.check(context, constraint);
     }
 	
-	protected boolean check(ExpressionInOcl expr, Object self) {
+	protected boolean check(ExpressionInOCL expr, Object self) {
 		boolean result = false;
 		
 		try {
@@ -751,11 +751,11 @@ public abstract class PivotTestSuite extends PivotTestCase
 		}
 	}
 
-	protected ExpressionInOcl createBodyCondition(Operation context, String text) {
+	protected ExpressionInOCL createBodyCondition(Operation context, String text) {
 		OCLHelper helper = ocl.createOCLHelper();
 		helper.setOperationContext(context.getOwningType(), context);
 		
-		ExpressionInOcl result = null;
+		ExpressionInOCL result = null;
 		
 		try {
 			result = helper.createBodyCondition(text);
@@ -799,7 +799,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		return ocl.createOCLHelper();
 	}
 	
-	protected ExpressionInOcl createInvariant(Type context, String expression) {
+	protected ExpressionInOCL createInvariant(Type context, String expression) {
 		return assertInvariant(context, expression);
 	}
 
@@ -890,11 +890,11 @@ public abstract class PivotTestSuite extends PivotTestCase
 		return aPackage;
 	}
 	
-	protected ExpressionInOcl createPostcondition(Operation context, String text) {
+	protected ExpressionInOCL createPostcondition(Operation context, String text) {
 		OCLHelper helper = ocl.createOCLHelper();
 		helper.setOperationContext(context.getOwningType(), context);
 		
-		ExpressionInOcl result = null;
+		ExpressionInOCL result = null;
 		
 		try {
 			result = helper.createPostcondition(text);
@@ -906,11 +906,11 @@ public abstract class PivotTestSuite extends PivotTestCase
 		return result;
 	}
 	
-	protected ExpressionInOcl createPrecondition(Operation context, String text) {
+	protected ExpressionInOCL createPrecondition(Operation context, String text) {
 		OCLHelper helper = ocl.createOCLHelper();
 		helper.setOperationContext(context.getOwningType(), context);
 		
-		ExpressionInOcl result = null;
+		ExpressionInOCL result = null;
 		
 		try {
 			result = helper.createPrecondition(text);
@@ -922,11 +922,11 @@ public abstract class PivotTestSuite extends PivotTestCase
 		return result;
 	}
 	
-	protected ExpressionInOcl createQuery(org.eclipse.ocl.examples.pivot.Class context, String expression) {
+	protected ExpressionInOCL createQuery(org.eclipse.ocl.examples.pivot.Class context, String expression) {
 		return assertQuery(context, expression);
 	}
 	
-	protected ExpressionInOcl createQuery(
+	protected ExpressionInOCL createQuery(
 			EnvironmentFactory envFactory,
 			Type context, String text) {
 		
@@ -934,7 +934,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		OCLHelper helper = localOcl.createOCLHelper();
 		helper.setContext(context);
 		
-		ExpressionInOcl result = null;
+		ExpressionInOCL result = null;
 		
 		try {
 			result = helper.createQuery(text);
@@ -978,7 +978,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		try {
 			String document = "package uml context String" +
 					" inv: " + contextFreeExpression +" endpackage";
-			ExpressionInOcl expr = parse(document);
+			ExpressionInOCL expr = parse(document);
 			
 			result = evaluate(expr, "");
 		} catch (Exception e) {
@@ -1000,7 +1000,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 			}
 			aHelper.setContext(pivotType);
 		}
-		ExpressionInOcl query = aHelper.createQuery(expression);
+		ExpressionInOCL query = aHelper.createQuery(expression);
 //        @SuppressWarnings("unused")
 //		String s = query.toString();
         try {
@@ -1010,7 +1010,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		}
     }
 	
-	protected Object evaluate(ExpressionInOcl expr) {
+	protected Object evaluate(ExpressionInOCL expr) {
 		Object result = null;
 		
 		try {
@@ -1022,7 +1022,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		return result;
 	}
     
-	protected Object evaluate(ExpressionInOcl expr, Object self) {
+	protected Object evaluate(ExpressionInOCL expr, Object self) {
 		Object result = null;
 		
 		try {
@@ -1129,8 +1129,8 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * @param text the OCL text
 	 * @return the OCL expression
 	 */
-	protected ExpressionInOcl parse(String text) {
-		ExpressionInOcl result = parseUnvalidated(text);
+	protected ExpressionInOCL parse(String text) {
+		ExpressionInOCL result = parseUnvalidated(text);
 		validate(result);
 		
 		assertValidToString(result);
@@ -1144,8 +1144,8 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * @param text the OCL text
 	 * @return the OCL constraint expression
 	 */
-	protected ExpressionInOcl parseConstraint(String text) {
-		ExpressionInOcl result = parseConstraintUnvalidated(text);
+	protected ExpressionInOCL parseConstraint(String text) {
+		ExpressionInOCL result = parseConstraintUnvalidated(text);
 		validate(result);
 		
 		assertValidToString(result);
@@ -1160,7 +1160,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * @param text the OCL text
 	 * @return the OCL constraint expression, unvalidated
 	 */
-	protected ExpressionInOcl parseConstraintUnvalidated(String text) {
+	protected ExpressionInOCL parseConstraintUnvalidated(String text) {
 		throw new UnsupportedOperationException();
 /*		List<Constraint> constraints;
 		Constraint constraint = null;
@@ -1174,8 +1174,8 @@ public abstract class PivotTestSuite extends PivotTestCase
 			fail("Parse failed (illegal argument): " + e.getLocalizedMessage());
 		}
 		
-		ExpressionInOcl result = null;
-		result = (ExpressionInOcl) constraint.getSpecification();
+		ExpressionInOCL result = null;
+		result = (ExpressionInOCL) constraint.getSpecification();
 		
 		assertNotNull(result);
 		
@@ -1194,7 +1194,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * @param text the OCL text
 	 * @return the OCL def expression
 	 */
-	protected ExpressionInOcl parseDef(String text) {
+	protected ExpressionInOCL parseDef(String text) {
 		throw new UnsupportedOperationException();
 /*		List<Constraint> constraints ;
 		Constraint constraint = null;
@@ -1208,7 +1208,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 			fail("Parse failed (illegal argument): " + e.getLocalizedMessage());
 		}
 		
-		ExpressionInOcl result = (ExpressionInOcl) constraint.getSpecification();		
+		ExpressionInOCL result = (ExpressionInOCL) constraint.getSpecification();		
 		assertNotNull(result);
 		validate(result);		
 		assertValidToString(result);		
@@ -1222,8 +1222,8 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 *    
 	 * @return the OCL expression, unvalidated
 	 */
-	protected ExpressionInOcl parseUnvalidated(String text) {
-		ExpressionInOcl result = parseConstraintUnvalidated(text);
+	protected ExpressionInOCL parseUnvalidated(String text) {
+		ExpressionInOCL result = parseConstraintUnvalidated(text);
 		
 		// forget the constraint because it interferes with validation
 		EcoreUtil.remove(result);
@@ -1383,7 +1383,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * @param expr the OCL expression to validate
 	 * @param env an environment to use for validation
 	 */
-	protected void validate(ExpressionInOcl expr) {
+	protected void validate(ExpressionInOCL expr) {
 		try {
 			EObject eContainer = expr.eContainer();
 			if ((eContainer != null)

@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.ocl.examples.pivot.Environment;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.ParserException;
@@ -264,7 +264,7 @@ public interface OCLHelper
      * 
      * @throws ParserException if the <code>expression</code> fails to parse
      */
-    ExpressionInOcl createQuery(String expression) throws ParserException;
+    ExpressionInOCL createQuery(String expression) throws ParserException;
 
     /**
      * Creates a constraint of the specified kind, by parsing the given
@@ -296,7 +296,7 @@ public interface OCLHelper
 	 * 
 	 * @throws ParserException if the <code>expression</code> fails to parse
 	 */
-    ExpressionInOcl createInvariant(String expression) throws ParserException;
+    ExpressionInOCL createInvariant(String expression) throws ParserException;
 
 	/**
 	 * Creates an operation precondition constraint.  This is appropriate only
@@ -311,7 +311,7 @@ public interface OCLHelper
 	 * 
 	 * @see #setOperationContext(Object, Object)
 	 */
-	ExpressionInOcl createPrecondition(String expression) throws ParserException;
+	ExpressionInOCL createPrecondition(String expression) throws ParserException;
 
 	/**
 	 * Creates an operation postcondition constraint.  This is appropriate only
@@ -326,7 +326,7 @@ public interface OCLHelper
 	 * 
 	 * @see #setOperationContext(Object, Object)
 	 */
-	ExpressionInOcl createPostcondition(String expression) throws ParserException;
+	ExpressionInOCL createPostcondition(String expression) throws ParserException;
 
 	/**
 	 * Creates an operation body.  This is appropriate only
@@ -345,7 +345,7 @@ public interface OCLHelper
 	 * 
 	 * @see #setOperationContext(Object, Object)
 	 */
-	ExpressionInOcl createBodyCondition(String expression) throws ParserException;
+	ExpressionInOCL createBodyCondition(String expression) throws ParserException;
 
 	/**
 	 * Creates a property initial value expression.  This is appropriate only
@@ -377,7 +377,7 @@ public interface OCLHelper
 	 * 
 	 * @see #setPropertyContext(Object, Object)
 	 */
-	ExpressionInOcl createDerivedValueExpression(String expression) throws ParserException;
+	ExpressionInOCL createDerivedValueExpression(String expression) throws ParserException;
 
 	/**
 	 * Defines an additional operation in the context classifier,

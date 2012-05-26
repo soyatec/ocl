@@ -27,7 +27,7 @@ import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
@@ -45,7 +45,7 @@ public class OCLInvocationDelegate extends BasicInvocationDelegate
 {
 	protected final OCLDelegateDomain delegateDomain;
 	private Operation operation;
-	private ExpressionInOcl specification;
+	private ExpressionInOCL specification;
 
 	/**
 	 * Initializes me with my operation.
@@ -67,7 +67,7 @@ public class OCLInvocationDelegate extends BasicInvocationDelegate
 			ValueFactory valueFactory = metaModelManager.getValueFactory();
 			if (specification == null) {
 				Operation operation = getOperation();
-				specification = InvocationBehavior.INSTANCE.getExpressionInOcl(metaModelManager, operation);
+				specification = InvocationBehavior.INSTANCE.getExpressionInOCL(metaModelManager, operation);
 				InvocationBehavior.INSTANCE.validate(operation);
 			}
 			Query query = ocl.createQuery(specification);

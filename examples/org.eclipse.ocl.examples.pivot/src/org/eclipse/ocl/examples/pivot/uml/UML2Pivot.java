@@ -274,7 +274,7 @@ public class UML2Pivot extends AbstractConversion implements External2Pivot, Piv
 				}
 				if (constraint != null) {
 					String value = entry.getValue();
-					OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOcl
+					OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOCL
 					specification.getBody().add(value);
 					specification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
 					constraint.setSpecification(specification);

@@ -34,7 +34,7 @@ import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
@@ -213,7 +213,7 @@ public class OCLstdlibTests extends XtextTestCase
 			if (javaElement == null) {
 				boolean isExpression = false;
 				for (EObject eObject = fileElement; eObject != null; eObject = eObject.eContainer()) {
-					if ((eObject instanceof ExpressionInOcl) || (eObject instanceof Constraint) || (eObject instanceof Annotation)) {
+					if ((eObject instanceof ExpressionInOCL) || (eObject instanceof Constraint) || (eObject instanceof Annotation)) {
 						isExpression = true;		// Embedded OCL not present in Java
 						break;
 					}

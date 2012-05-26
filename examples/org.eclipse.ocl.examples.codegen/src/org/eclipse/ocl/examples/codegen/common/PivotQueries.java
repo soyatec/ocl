@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
@@ -86,18 +86,18 @@ public class PivotQueries
 		return null;
 	}
 
-	protected static ExpressionInOcl createExpressionInOclError(String string) {
-		ExpressionInOcl expressionInOcl = PivotFactory.eINSTANCE.createExpressionInOcl();
+	protected static ExpressionInOCL createExpressionInOCLError(String string) {
+		ExpressionInOCL expressionInOCL = PivotFactory.eINSTANCE.createExpressionInOCL();
 		StringLiteralExp stringLiteral = PivotFactory.eINSTANCE.createStringLiteralExp();
 		stringLiteral.setStringSymbol(string);
-		expressionInOcl.setMessageExpression(stringLiteral);
-		return expressionInOcl;
+		expressionInOCL.setMessageExpression(stringLiteral);
+		return expressionInOCL;
 	}
 
 	protected static PrettyPrintOptions.Global createOptions(Visitable element) {
 		Namespace scope = null;
-		if (element instanceof ExpressionInOcl) {
-			scope = PivotUtil.getNamespace(((ExpressionInOcl)element).getContextVariable().getType());
+		if (element instanceof ExpressionInOCL) {
+			scope = PivotUtil.getNamespace(((ExpressionInOCL)element).getContextVariable().getType());
 		}
 		else if (element instanceof EObject) {
 			scope = PivotUtil.getNamespace((EObject)element);
@@ -147,13 +147,13 @@ public class PivotQueries
 
 	/**
 	 * Return an OCL AST from a ValueSpecification in the context of a NamedElement. If it is necessary
-	 * to parse OCL concrete syntax and errors result an ExpressionInOcl is returned with a null
+	 * to parse OCL concrete syntax and errors result an ExpressionInOCL is returned with a null
 	 * contextVariable, a null bodyExpression, and a StringLiteral messageExpression
 	 * containing the error messages.
 	 */
-	public static ExpressionInOcl getExpressionInOcl(NamedElement contextElement, ValueSpecification specification) {
-		if (specification instanceof ExpressionInOcl) {
-			return (ExpressionInOcl) specification;
+	public static ExpressionInOCL getExpressionInOCL(NamedElement contextElement, ValueSpecification specification) {
+		if (specification instanceof ExpressionInOCL) {
+			return (ExpressionInOCL) specification;
 		}
 		else if (specification instanceof OpaqueExpression) {
 			Resource resource = contextElement.eResource();
@@ -177,16 +177,16 @@ public class PivotQueries
 			OpaqueExpression opaqueExpression = (OpaqueExpression) specification;
 			String expression = PivotUtil.getBody(opaqueExpression);
 			if (expression == null) {
-				return createExpressionInOclError("Missing expression");
+				return createExpressionInOCLError("Missing expression");
 			}
-			ExpressionInOcl expressionInOcl = null;
+			ExpressionInOCL expressionInOCL = null;
 			try {				
-				expressionInOcl = parserContext.parse(expression);
+				expressionInOCL = parserContext.parse(expression);
 			} catch (ParserException e) {
 				logger.error(e.getMessage());
-				return createExpressionInOclError(e.getMessage());
+				return createExpressionInOCLError(e.getMessage());
 			}
-			if (expressionInOcl != null) {
+			if (expressionInOCL != null) {
 				String messageExpression = PivotUtil.getMessage(opaqueExpression);
 				if ((messageExpression != null) && (messageExpression.trim().length() > 0)) {
 					try {
@@ -197,15 +197,15 @@ public class PivotQueries
 					}
 				}
 			}
-			return expressionInOcl;
+			return expressionInOCL;
 		}
 		else {
 			Resource resource = contextElement.eResource();
 			ResourceSet resourceSet = resource.getResourceSet();
 			MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
-			ExpressionInOcl expressionInOcl = PivotFactory.eINSTANCE.createExpressionInOcl();
-			expressionInOcl.setBodyExpression(metaModelManager.createInvalidExpression());
-			return expressionInOcl;
+			ExpressionInOCL expressionInOCL = PivotFactory.eINSTANCE.createExpressionInOCL();
+			expressionInOCL.setBodyExpression(metaModelManager.createInvalidExpression());
+			return expressionInOCL;
 		}
 	}
 

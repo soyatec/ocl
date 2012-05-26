@@ -61,7 +61,7 @@
 [template public generateTypeRule(pRule : Constraint, pType : Type, genPackage : GenPackage)]
 [let className : String = pType.getQualifiedBodiesClassName(genPackage)]
 [let constraintName : String = '_' + pRule.getRuleStereotype() + '_' + pRule.getRuleName()]
-[let expInOcl : ExpressionInOcl = pRule.specification.getExpressionInOcl(pType)]
+[let expInOcl : ExpressionInOCL = pRule.specification.getExpressionInOCL(pType)]
 [if (expInOcl.contextVariable->notEmpty())]
 /*
 [expInOcl.prettyPrint().trim()/]
@@ -125,7 +125,7 @@ return false; // FIXME errors in OCL definition of [pRule.prettyPrintName()/]
 [template public generateOperationRule(pRule : Constraint, pType : Type, genPackage : GenPackage, pOperation : Operation)]
 [let className : String = pType.getQualifiedBodiesClassName(genPackage)]
 [let constraintName : String = '_' + pOperation.name + '_' + pRule.getRuleStereotype() + '_' + pRule.getRuleName()]
-[let expInOcl : ExpressionInOcl = pRule.specification.getExpressionInOcl(pOperation)]
+[let expInOcl : ExpressionInOCL = pRule.specification.getExpressionInOCL(pOperation)]
 [let ecoreReturnType : String = genPackage.getOperationReturnType(pOperation)]
 [if (expInOcl.contextVariable->notEmpty())]
 [let constants : String = expInOcl.gatherSpecificationConstants(genPackage, pType)]
@@ -169,7 +169,7 @@ return null; // FIXME errors in OCL definition of [pOperation.prettyPrintName()/
 [template public generatePropertyRule(pRule : Constraint, pType : Type, genPackage : GenPackage, pProperty : Property)]
 [let className : String = pType.getQualifiedBodiesClassName(genPackage)]
 [let constraintName : String = '_' + pProperty.name + '_' + pRule.getRuleStereotype() + '_' + pRule.getRuleName()]
-[let expInOcl : ExpressionInOcl = pRule.specification.getExpressionInOcl(pProperty)]
+[let expInOcl : ExpressionInOCL = pRule.specification.getExpressionInOCL(pProperty)]
 [let ecoreReturnType : String = genPackage.getPropertyType(pProperty)]
 [if (expInOcl.contextVariable->notEmpty())]
 [let constants : String = expInOcl.gatherSpecificationConstants(genPackage, pType)]
@@ -203,7 +203,7 @@ return null; // FIXME errors in OCL definition of [pProperty.prettyPrintName()/]
 [/if][/let][/let][/let][/let][/template]
 
 
-[template public gatherSpecificationConstants(expInOcl : ExpressionInOcl, genPackage : GenPackage, pType : Type)]
+[template public gatherSpecificationConstants(expInOcl : ExpressionInOCL, genPackage : GenPackage, pType : Type)]
 final <%ValueFactory%> valueFactory = evaluator.getValueFactory();
 final <%Value%> [defineSymbolName(expInOcl.contextVariable, 'self')/] = valueFactory.valueOf(this);
 [expInOcl.type.gatherConstants(genPackage, expInOcl)/]

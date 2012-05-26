@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
@@ -94,7 +94,7 @@ public class OpaqueExpressionImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpressionInOcl valueExpression;
+	protected ExpressionInOCL valueExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -162,12 +162,12 @@ public class OpaqueExpressionImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExpressionInOcl getValueExpression()
+	public ExpressionInOCL getValueExpression()
 	{
 		if (valueExpression != null && ((EObject)valueExpression).eIsProxy())
 		{
 			InternalEObject oldValueExpression = (InternalEObject)valueExpression;
-			valueExpression = (ExpressionInOcl)eResolveProxy(oldValueExpression);
+			valueExpression = (ExpressionInOCL)eResolveProxy(oldValueExpression);
 			if (valueExpression != oldValueExpression)
 			{
 				if (eNotificationRequired())
@@ -182,7 +182,7 @@ public class OpaqueExpressionImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExpressionInOcl basicGetValueExpression()
+	public ExpressionInOCL basicGetValueExpression()
 	{
 		return valueExpression;
 	}
@@ -192,9 +192,9 @@ public class OpaqueExpressionImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValueExpression(ExpressionInOcl newValueExpression)
+	public void setValueExpression(ExpressionInOCL newValueExpression)
 	{
-		ExpressionInOcl oldValueExpression = valueExpression;
+		ExpressionInOCL oldValueExpression = valueExpression;
 		valueExpression = newValueExpression;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.OPAQUE_EXPRESSION__VALUE_EXPRESSION, oldValueExpression, valueExpression));
@@ -290,7 +290,7 @@ public class OpaqueExpressionImpl
 				getMessage().addAll((Collection<? extends String>)newValue);
 				return;
 			case PivotPackage.OPAQUE_EXPRESSION__VALUE_EXPRESSION:
-				setValueExpression((ExpressionInOcl)newValue);
+				setValueExpression((ExpressionInOCL)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -339,7 +339,7 @@ public class OpaqueExpressionImpl
 				getMessage().clear();
 				return;
 			case PivotPackage.OPAQUE_EXPRESSION__VALUE_EXPRESSION:
-				setValueExpression((ExpressionInOcl)null);
+				setValueExpression((ExpressionInOCL)null);
 				return;
 		}
 		eDynamicUnset(featureID);

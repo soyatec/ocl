@@ -72,7 +72,7 @@ public interface Visitor<R>
 	R visitEnumLiteralExp(org.eclipse.ocl.examples.pivot.EnumLiteralExp object);
 	R visitEnumeration(org.eclipse.ocl.examples.pivot.Enumeration object);
 	R visitEnumerationLiteral(org.eclipse.ocl.examples.pivot.EnumerationLiteral object);
-	R visitExpressionInOcl(org.eclipse.ocl.examples.pivot.ExpressionInOcl object);
+	R visitExpressionInOCL(org.eclipse.ocl.examples.pivot.ExpressionInOCL object);
 	R visitFeature(org.eclipse.ocl.examples.pivot.Feature object);
 	R visitFeatureCallExp(org.eclipse.ocl.examples.pivot.FeatureCallExp object);
 	R visitIfExp(org.eclipse.ocl.examples.pivot.IfExp object);

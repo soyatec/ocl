@@ -27,7 +27,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.MultiplicityElement;
 import org.eclipse.ocl.examples.pivot.NamedElement;
@@ -248,7 +248,7 @@ public abstract class Abstract2Moniker implements PivotConstants
 				append("<<unresolved-proxy>>");	
 			}
 			else {
-				assert element instanceof org.eclipse.ocl.examples.pivot.Package || element instanceof ExpressionInOcl : element.eClass().getName() + " has no parent";	
+				assert element instanceof org.eclipse.ocl.examples.pivot.Package || element instanceof ExpressionInOCL : element.eClass().getName() + " has no parent";	
 			}
 		}
 		append(parentSeparator);

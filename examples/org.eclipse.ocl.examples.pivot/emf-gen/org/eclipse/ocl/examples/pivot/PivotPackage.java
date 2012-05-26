@@ -285,11 +285,11 @@ public interface PivotPackage
 	int OPAQUE_EXPRESSION = 52;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOclImpl <em>Expression In Ocl</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOCLImpl <em>Expression In OCL</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOclImpl
-	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getExpressionInOcl()
+	 * @see org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOCLImpl
+	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getExpressionInOCL()
 	 * @generated
 	 */
 	int EXPRESSION_IN_OCL = 25;
@@ -6218,7 +6218,7 @@ public interface PivotPackage
 	int EXPRESSION_IN_OCL__MESSAGE_EXPRESSION = OPAQUE_EXPRESSION_FEATURE_COUNT + 4;
 
 	/**
-	 * The number of structural features of the '<em>Expression In Ocl</em>' class.
+	 * The number of structural features of the '<em>Expression In OCL</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -6317,7 +6317,7 @@ public interface PivotPackage
 	int EXPRESSION_IN_OCL___IS_NULL = OPAQUE_EXPRESSION___IS_NULL;
 
 	/**
-	 * The number of operations of the '<em>Expression In Ocl</em>' class.
+	 * The number of operations of the '<em>Expression In OCL</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -16517,6 +16517,71 @@ public interface PivotPackage
 	EAttribute getEnumerationLiteral_Value();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL <em>Expression In OCL</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Expression In OCL</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.ExpressionInOCL
+	 * @generated
+	 */
+	EClass getExpressionInOCL();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getBodyExpression <em>Body Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Body Expression</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.ExpressionInOCL#getBodyExpression()
+	 * @see #getExpressionInOCL()
+	 * @generated
+	 */
+	EReference getExpressionInOCL_BodyExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getContextVariable <em>Context Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Context Variable</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.ExpressionInOCL#getContextVariable()
+	 * @see #getExpressionInOCL()
+	 * @generated
+	 */
+	EReference getExpressionInOCL_ContextVariable();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getResultVariable <em>Result Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Result Variable</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.ExpressionInOCL#getResultVariable()
+	 * @see #getExpressionInOCL()
+	 * @generated
+	 */
+	EReference getExpressionInOCL_ResultVariable();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getParameterVariable <em>Parameter Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Parameter Variable</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.ExpressionInOCL#getParameterVariable()
+	 * @see #getExpressionInOCL()
+	 * @generated
+	 */
+	EReference getExpressionInOCL_ParameterVariable();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getMessageExpression <em>Message Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Message Expression</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.ExpressionInOCL#getMessageExpression()
+	 * @see #getExpressionInOCL()
+	 * @generated
+	 */
+	EReference getExpressionInOCL_MessageExpression();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.Enumeration <em>Enumeration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16536,71 +16601,6 @@ public interface PivotPackage
 	 * @generated
 	 */
 	EReference getEnumeration_OwnedLiteral();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.ExpressionInOcl <em>Expression In Ocl</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Expression In Ocl</em>'.
-	 * @see org.eclipse.ocl.examples.pivot.ExpressionInOcl
-	 * @generated
-	 */
-	EClass getExpressionInOcl();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.pivot.ExpressionInOcl#getBodyExpression <em>Body Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Body Expression</em>'.
-	 * @see org.eclipse.ocl.examples.pivot.ExpressionInOcl#getBodyExpression()
-	 * @see #getExpressionInOcl()
-	 * @generated
-	 */
-	EReference getExpressionInOcl_BodyExpression();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.pivot.ExpressionInOcl#getContextVariable <em>Context Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Context Variable</em>'.
-	 * @see org.eclipse.ocl.examples.pivot.ExpressionInOcl#getContextVariable()
-	 * @see #getExpressionInOcl()
-	 * @generated
-	 */
-	EReference getExpressionInOcl_ContextVariable();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.pivot.ExpressionInOcl#getResultVariable <em>Result Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Result Variable</em>'.
-	 * @see org.eclipse.ocl.examples.pivot.ExpressionInOcl#getResultVariable()
-	 * @see #getExpressionInOcl()
-	 * @generated
-	 */
-	EReference getExpressionInOcl_ResultVariable();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.pivot.ExpressionInOcl#getParameterVariable <em>Parameter Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Parameter Variable</em>'.
-	 * @see org.eclipse.ocl.examples.pivot.ExpressionInOcl#getParameterVariable()
-	 * @see #getExpressionInOcl()
-	 * @generated
-	 */
-	EReference getExpressionInOcl_ParameterVariable();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.pivot.ExpressionInOcl#getMessageExpression <em>Message Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Message Expression</em>'.
-	 * @see org.eclipse.ocl.examples.pivot.ExpressionInOcl#getMessageExpression()
-	 * @see #getExpressionInOcl()
-	 * @generated
-	 */
-	EReference getExpressionInOcl_MessageExpression();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.Feature <em>Feature</em>}'.
@@ -20044,14 +20044,14 @@ public interface PivotPackage
 		EReference ENUMERATION__OWNED_LITERAL = eINSTANCE.getEnumeration_OwnedLiteral();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOclImpl <em>Expression In Ocl</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOCLImpl <em>Expression In OCL</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOclImpl
-		 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getExpressionInOcl()
+		 * @see org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOCLImpl
+		 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getExpressionInOCL()
 		 * @generated
 		 */
-		EClass EXPRESSION_IN_OCL = eINSTANCE.getExpressionInOcl();
+		EClass EXPRESSION_IN_OCL = eINSTANCE.getExpressionInOCL();
 
 		/**
 		 * The meta object literal for the '<em><b>Body Expression</b></em>' containment reference feature.
@@ -20059,7 +20059,7 @@ public interface PivotPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXPRESSION_IN_OCL__BODY_EXPRESSION = eINSTANCE.getExpressionInOcl_BodyExpression();
+		EReference EXPRESSION_IN_OCL__BODY_EXPRESSION = eINSTANCE.getExpressionInOCL_BodyExpression();
 
 		/**
 		 * The meta object literal for the '<em><b>Context Variable</b></em>' containment reference feature.
@@ -20067,7 +20067,7 @@ public interface PivotPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXPRESSION_IN_OCL__CONTEXT_VARIABLE = eINSTANCE.getExpressionInOcl_ContextVariable();
+		EReference EXPRESSION_IN_OCL__CONTEXT_VARIABLE = eINSTANCE.getExpressionInOCL_ContextVariable();
 
 		/**
 		 * The meta object literal for the '<em><b>Result Variable</b></em>' containment reference feature.
@@ -20075,7 +20075,7 @@ public interface PivotPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXPRESSION_IN_OCL__RESULT_VARIABLE = eINSTANCE.getExpressionInOcl_ResultVariable();
+		EReference EXPRESSION_IN_OCL__RESULT_VARIABLE = eINSTANCE.getExpressionInOCL_ResultVariable();
 
 		/**
 		 * The meta object literal for the '<em><b>Parameter Variable</b></em>' containment reference list feature.
@@ -20083,7 +20083,7 @@ public interface PivotPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXPRESSION_IN_OCL__PARAMETER_VARIABLE = eINSTANCE.getExpressionInOcl_ParameterVariable();
+		EReference EXPRESSION_IN_OCL__PARAMETER_VARIABLE = eINSTANCE.getExpressionInOCL_ParameterVariable();
 
 		/**
 		 * The meta object literal for the '<em><b>Message Expression</b></em>' containment reference feature.
@@ -20091,7 +20091,7 @@ public interface PivotPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXPRESSION_IN_OCL__MESSAGE_EXPRESSION = eINSTANCE.getExpressionInOcl_MessageExpression();
+		EReference EXPRESSION_IN_OCL__MESSAGE_EXPRESSION = eINSTANCE.getExpressionInOCL_MessageExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.FeatureImpl <em>Feature</em>}' class.

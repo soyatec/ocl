@@ -32,7 +32,7 @@ import org.eclipse.ocl.examples.pivot.CollectionRange;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.IfExp;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
@@ -175,8 +175,8 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
 //    }
 
     @Override
-    public Value visitExpressionInOcl(ExpressionInOcl expression) {
-        return trace(expression, getDelegate().visitExpressionInOcl(expression));
+    public Value visitExpressionInOCL(ExpressionInOCL expression) {
+        return trace(expression, getDelegate().visitExpressionInOCL(expression));
     }
 
     @Override

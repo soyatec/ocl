@@ -21,7 +21,7 @@ import java.util.Map;
 
 import org.eclipse.ocl.examples.pivot.ClassifierType;
 import org.eclipse.ocl.examples.pivot.CollectionType;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
@@ -116,7 +116,7 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 //		return null;
 	}
 
-	public void setContextVariable(ExpressionInOcl pivotSpecification, String selfVariableName, Type contextType) {
+	public void setContextVariable(ExpressionInOCL pivotSpecification, String selfVariableName, Type contextType) {
 		Variable contextVariable = pivotSpecification.getContextVariable();
 		if (contextVariable == null) {
 			contextVariable = PivotFactory.eINSTANCE.createVariable();
@@ -126,7 +126,7 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 		setType(contextVariable, contextType);
 	}
 
-	public void setClassifierContext(ExpressionInOcl pivotSpecification, Type contextType) {
+	public void setClassifierContext(ExpressionInOCL pivotSpecification, Type contextType) {
 		Variable contextVariable = pivotSpecification.getContextVariable();
 		if (contextType.eIsProxy()) {
 			contextType = null;
@@ -134,7 +134,7 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 		setType(contextVariable, contextType);
 	}
 
-	public void setOperationContext(ExpressionInOcl pivotSpecification, Operation contextOperation, String resultName) {
+	public void setOperationContext(ExpressionInOCL pivotSpecification, Operation contextOperation, String resultName) {
 		Variable contextVariable = pivotSpecification.getContextVariable();
 //		pivotSpecification.getParameterVariable().clear();
 		if ((contextOperation != null) && !contextOperation.eIsProxy()) {
@@ -146,7 +146,7 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 		}
 	}
 
-	public void setParameterVariables(ExpressionInOcl pivotSpecification, List<Parameter> parameters) {
+	public void setParameterVariables(ExpressionInOCL pivotSpecification, List<Parameter> parameters) {
 		List<Variable> oldVariables = new ArrayList<Variable>(pivotSpecification.getParameterVariable());
 		List<Variable> newVariables = new ArrayList<Variable>();
 		for (Parameter parameter : parameters) {
@@ -166,7 +166,7 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 		refreshList(pivotSpecification.getParameterVariable(), newVariables);
 	}
 
-	public void setParameterVariables(ExpressionInOcl pivotSpecification, Map<String, Type> parameters) {
+	public void setParameterVariables(ExpressionInOCL pivotSpecification, Map<String, Type> parameters) {
 		List<Variable> oldVariables = new ArrayList<Variable>(pivotSpecification.getParameterVariable());
 		List<Variable> newVariables = new ArrayList<Variable>();
 		for (String name : parameters.keySet()) {
@@ -186,14 +186,14 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 		refreshList(pivotSpecification.getParameterVariable(), newVariables);
 	}
 
-	public void setPropertyContext(ExpressionInOcl pivotSpecification, Property contextProperty) {
+	public void setPropertyContext(ExpressionInOCL pivotSpecification, Property contextProperty) {
 		Variable contextVariable = pivotSpecification.getContextVariable();
 		if ((contextProperty != null) && !contextProperty.eIsProxy()) {
 			setType(contextVariable, contextProperty.getOwningType());
 		}
 	}
 
-	public void setResultVariable(ExpressionInOcl pivotSpecification, Operation contextOperation, String resultName) {
+	public void setResultVariable(ExpressionInOCL pivotSpecification, Operation contextOperation, String resultName) {
 		Variable resultVariable = pivotSpecification.getResultVariable();
 		if (resultVariable == null) {
 			resultVariable = PivotFactory.eINSTANCE.createVariable();

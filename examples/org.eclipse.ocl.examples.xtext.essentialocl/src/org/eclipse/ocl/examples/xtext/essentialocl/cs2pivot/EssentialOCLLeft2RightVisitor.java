@@ -43,7 +43,7 @@ import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.Environment;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.IfExp;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
@@ -252,11 +252,11 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 		}
 		else if (csExp instanceof ContextCS) {
 			ContextCS csContext = (ContextCS) csExp;
-			ExpressionInOcl pivotElement = PivotUtil.getPivot(ExpressionInOcl.class, csContext);
+			ExpressionInOCL pivotElement = PivotUtil.getPivot(ExpressionInOCL.class, csContext);
 			return pivotElement.getContextVariable();
 		}
 		else if (csExp instanceof ExpSpecificationCS) {
-			ExpressionInOcl pivotElement = PivotUtil.getPivot(ExpressionInOcl.class, csExp);
+			ExpressionInOCL pivotElement = PivotUtil.getPivot(ExpressionInOCL.class, csExp);
 			return pivotElement.getContextVariable();
 		}
 		if (eContainer instanceof ContextCS) {
@@ -950,7 +950,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 
 	@Override
 	public Element visitContextCS(ContextCS csContext) {
-		ExpressionInOcl pivotElement = PivotUtil.getPivot(ExpressionInOcl.class, csContext);
+		ExpressionInOCL pivotElement = PivotUtil.getPivot(ExpressionInOCL.class, csContext);
 		ExpCS csExpression = csContext.getOwnedExpression();
 		OclExpression expression = context.visitLeft2Right(OclExpression.class, csExpression);
 		if (expression != null) {
@@ -973,7 +973,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 
 	@Override
 	public Element visitExpSpecificationCS(ExpSpecificationCS object) {
-		ExpressionInOcl pivotElement = PivotUtil.getPivot(ExpressionInOcl.class, object);
+		ExpressionInOCL pivotElement = PivotUtil.getPivot(ExpressionInOCL.class, object);
 		pivotElement.getLanguage().add(PivotConstants.OCL_LANGUAGE);
 		OclExpression expression = context.visitLeft2Right(OclExpression.class, object.getOwnedExpression());
 		pivotElement.setBodyExpression(expression);

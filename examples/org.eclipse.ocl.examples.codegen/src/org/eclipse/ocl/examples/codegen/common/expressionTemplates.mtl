@@ -27,20 +27,20 @@
 [import org::eclipse::ocl::examples::codegen::common::stringQueries/]
 [import org::eclipse::ocl::examples::codegen::common::symbolTemplates/]
 
-[template public emitExpression(ast : CollectionItem, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public emitExpression(ast : CollectionItem, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [if (not ast.item.isConstant())]
 [ast.item.emitExpression(importer, genPackage, expInOcl)/]
 [/if]
 [/template]
 
-[template public emitExpression(ast : CollectionLiteralExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOcl) ? (not ast.isConstant())]
+[template public emitExpression(ast : CollectionLiteralExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ? (not ast.isConstant())]
 [for (part : CollectionLiteralPart | ast.part->reject(isConstantCollectionLiteralPart()))]
 [part.emitExpression(importer, genPackage, expInOcl)/]
 [/for]
 [ast.emitLiteral(genPackage, expInOcl)/]
 [/template]
 
-[template public emitExpression(ast : CollectionRange, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public emitExpression(ast : CollectionRange, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [if (not ast.first.isConstant())]
 [ast.first.emitExpression(importer, genPackage, expInOcl)/]
 [/if]
@@ -49,18 +49,18 @@
 [/if]
 [/template]
 
-[template public emitExpression(ast : ConstructorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public emitExpression(ast : ConstructorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 <%ObjectValue%> [ast.symbolName(expInOcl)/] = [ast.type.emitQualifiedLiteralName(genPackage)/].createInstance(valueFactory);
 [for (part : ConstructorPart | ast.part)]
 [part.initExpression.emitExpression(importer, genPackage, expInOcl)/]
 [part.referredProperty.symbolName(expInOcl)/].setValue([ast.symbolName(expInOcl)/], [part.initExpression.symbolName(expInOcl)/]);
 [/for][/template]
 
-[template public emitExpression(ast : Element, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public emitExpression(ast : Element, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 <%Value%> [ast.symbolName(expInOcl)/] = <<[ast.eClass().name/]>>;
 [/template]
 
-[template public emitExpression(ast : IfExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public emitExpression(ast : IfExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [if (not ast.condition.isConstant())]
 	[ast.condition.emitExpression(importer, genPackage, expInOcl)/]
 [/if]
@@ -85,7 +85,7 @@ else {
 	[astName/] = valueFactory.throwInvalidValueException("invalid if condition");
 }[/let][/template]
 
-[template public emitExpression(ast : IterateExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public emitExpression(ast : IterateExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [let arity : Integer = ast.iterator->size()]
 [let leftVarName : String = ast.source.symbolName(expInOcl)]
 [let accVarName : String = ast.result.symbolName(expInOcl)]
@@ -117,7 +117,7 @@ else {
 <%[managerTypeName/]%> manager_[astName/] = new <%[managerTypeName/]%>(evaluator, [ast.result.type.symbolName(expInOcl)/], body_[astName/], (<%org.eclipse.ocl.examples.domain.values.CollectionValue%>)[leftVarName/], [ast.result.initExpression.symbolName(expInOcl)/]);
 <%Value%> [astName/] = dynamic_[astName/].evaluateIteration(manager_[astName/]);[/let][/let][/let][/let][/let][/let][/let][/template]
 
-[template public emitExpression(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public emitExpression(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [let arity : Integer = ast.iterator->size()]
 [let leftVarName : String = ast.source.symbolName(expInOcl)]
 [let astName : String = ast.symbolName(expInOcl)]
@@ -149,7 +149,7 @@ else {
 <%[managerTypeName/]%> manager_[astName/] = new <%[managerTypeName/]%>(evaluator, [ast.type.symbolName(expInOcl)/], body_[astName/], (<%org.eclipse.ocl.examples.domain.values.CollectionValue%>)[ast.source.symbolName(expInOcl)/], acc_[astName/]);
 <%Value%> [astName/] = dynamic_[astName/].evaluateIteration(manager_[astName/]);[/let][/let][/let][/let][/let][/let][/template]
 
-[template public emitExpression(ast : LetExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public emitExpression(ast : LetExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [if (not ast.variable.initExpression.isConstant())]
 [ast.variable.initExpression.emitExpression(importer, genPackage, expInOcl)/]
 [/if]
@@ -159,9 +159,9 @@ final <%Value%> [ast.variable.symbolName(expInOcl)/] = [ast.variable.initExpress
 [/if]
 final <%Value%> [ast.symbolName(expInOcl)/] = [ast._in.symbolName(expInOcl)/];[/template]
 
-[template public emitExpression(ast : LiteralExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOcl)][/template]
+[template public emitExpression(ast : LiteralExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)][/template]
 
-[template public emitExpression(ast : OperationCallExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOcl) ? ((ast.referredOperation.owningType.name = 'Boolean') and (ast.referredOperation.ownedParameter->size() = 1))]
+[template public emitExpression(ast : OperationCallExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ? ((ast.referredOperation.owningType.name = 'Boolean') and (ast.referredOperation.ownedParameter->size() = 1))]
 [let astName : String = ast.symbolName(expInOcl)]
 [if (not ast.source.isConstant())]
 <%Value%> left[astName/];
@@ -187,7 +187,7 @@ try {
 [/let]
 [ast.generateCall(importer, genPackage, expInOcl)/][/let][/template]
 
-[template public emitExpression(ast : OperationCallExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOcl) ? ((ast.referredOperation.owningType.name <> 'Boolean') or (ast.referredOperation.ownedParameter->size() <> 1))]
+[template public emitExpression(ast : OperationCallExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ? ((ast.referredOperation.owningType.name <> 'Boolean') or (ast.referredOperation.ownedParameter->size() <> 1))]
 [if (not ast.source.isConstant())]
 [ast.source.emitExpression(importer, genPackage, expInOcl)/]
 [/if]
@@ -196,7 +196,7 @@ try {
 [/for]
 [ast.generateCall(importer, genPackage, expInOcl)/][/template]
 
-[template public generateCall(ast : OperationCallExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public generateCall(ast : OperationCallExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [let arity : Integer = ast.referredOperation.ownedParameter->size()]
 [let astName : String = ast.symbolName(expInOcl)]
 [let operationTypeName : String = 'org.eclipse.ocl.examples.domain.library.Library' + genPackage.emitOperationArity(arity)]
@@ -207,7 +207,7 @@ try {
 <%[operationTypeName/]%> dynamic_[astName/] = (<%[operationTypeName/]%>)static_[astName/].lookupImplementation(standardLibrary, [ast.referredOperation.symbolName(expInOcl)/]);
 <%Value%> [astName/] = dynamic_[astName/].evaluate(evaluator, [ast.type.symbolName(expInOcl)/], [ast.source.symbolName(expInOcl)/][for (argument : OclExpression | ast.argument) before (', ') separator (', ')][argument.symbolName(expInOcl)/][/for]);[/let][/let][/let][/template]
 
-[template public emitExpression(ast : PropertyCallExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public emitExpression(ast : PropertyCallExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [if (not ast.source.isConstant())]
 [ast.source.emitExpression(importer, genPackage, expInOcl)/]
 [/if]
@@ -217,18 +217,18 @@ try {
 <%Value%> [ast.symbolName(expInOcl)/] = I[ast.referredProperty.symbolName(expInOcl)/].evaluate(evaluator, [ast.type.symbolName(expInOcl)/], [ast.source.symbolName(expInOcl)/], [ast.referredProperty.symbolName(expInOcl)/]);
 [/if][/template]
 
-[template public emitExpression(ast : TupleLiteralExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public emitExpression(ast : TupleLiteralExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [for (part : TupleLiteralPart | ast.part->reject(initExpression.isConstant()))]
 [part.initExpression.emitExpression(importer, genPackage, expInOcl)/]
 [/for]
 [ast.emitLiteral(genPackage, expInOcl)/][/template]
 
-[template public emitExpression(ast : TypeExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOcl)][/template]
+[template public emitExpression(ast : TypeExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)][/template]
 
-[template public emitExpression(ast : VariableExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOcl)][/template]
+[template public emitExpression(ast : VariableExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)][/template]
 
-[template public generateTypeOf(genPackage : GenPackage, expInOcl : ExpressionInOcl, ast : OclExpression)]
+[template public generateTypeOf(genPackage : GenPackage, expInOcl : ExpressionInOCL, ast : OclExpression)]
 valueFactory.typeOf([ast.symbolName(expInOcl)/][/template]
 
-[template public generateTypeOf(genPackage : GenPackage, expInOcl : ExpressionInOcl, ast : VariableExp)]
+[template public generateTypeOf(genPackage : GenPackage, expInOcl : ExpressionInOCL, ast : VariableExp)]
 valueFactory.typeOf([ast.referredVariable.symbolName(expInOcl)/][/template]

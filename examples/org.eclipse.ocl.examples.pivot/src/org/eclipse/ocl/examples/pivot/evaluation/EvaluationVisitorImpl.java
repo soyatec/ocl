@@ -68,7 +68,7 @@ import org.eclipse.ocl.examples.pivot.ConstructorPart;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.IfExp;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
@@ -354,7 +354,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	}
 
 	@Override
-	public Value visitExpressionInOcl(ExpressionInOcl expression) {
+	public Value visitExpressionInOCL(ExpressionInOCL expression) {
 		return safeVisit(expression.getBodyExpression());
 	}
 

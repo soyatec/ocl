@@ -30,7 +30,7 @@ import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryTernaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
@@ -54,7 +54,7 @@ public class EObjectOperation extends AbstractOperation implements LibraryUnaryO
 {
 	protected final EOperation eFeature;
 	protected ValueSpecification specification;
-	private ExpressionInOcl expressionInOcl = null;
+	private ExpressionInOCL expressionInOCL = null;
 
 	public EObjectOperation(EOperation eFeature, ValueSpecification specification) {
 		this.eFeature = eFeature;
@@ -62,58 +62,58 @@ public class EObjectOperation extends AbstractOperation implements LibraryUnaryO
 	}
 
 	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceValue) throws InvalidValueException {
-//		if (expressionInOcl == null) {		
-//			resolveExpressionInOcl(evaluator, returnType, sourceValue);
+//		if (expressionInOCL == null) {		
+//			resolveExpressionInOCL(evaluator, returnType, sourceValue);
 //		}
 		DomainEvaluator nestedEvaluator = evaluator.createNestedEvaluator();
 		DomainEvaluationEnvironment nestedEvaluationEnvironment = nestedEvaluator.getEvaluationEnvironment();
-		nestedEvaluationEnvironment.add(expressionInOcl.getContextVariable(), sourceValue);
-		return nestedEvaluator.evaluate(expressionInOcl.getBodyExpression());
+		nestedEvaluationEnvironment.add(expressionInOCL.getContextVariable(), sourceValue);
+		return nestedEvaluator.evaluate(expressionInOCL.getBodyExpression());
 	}
 
 	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceValue, Value argumentValue) throws InvalidValueException {
-//		if (expressionInOcl == null) {		
-//			resolveExpressionInOcl(evaluator, returnType, sourceValue);
+//		if (expressionInOCL == null) {		
+//			resolveExpressionInOCL(evaluator, returnType, sourceValue);
 //		}
 		DomainEvaluator nestedEvaluator = evaluator.createNestedEvaluator();
 		DomainEvaluationEnvironment nestedEvaluationEnvironment = nestedEvaluator.getEvaluationEnvironment();
-		nestedEvaluationEnvironment.add(expressionInOcl.getContextVariable(), sourceValue);
-		List<Variable> parameterVariables = expressionInOcl.getParameterVariable();
+		nestedEvaluationEnvironment.add(expressionInOCL.getContextVariable(), sourceValue);
+		List<Variable> parameterVariables = expressionInOCL.getParameterVariable();
 		nestedEvaluationEnvironment.add(parameterVariables.get(0).getRepresentedParameter(), argumentValue);
-		return nestedEvaluator.evaluate(expressionInOcl.getBodyExpression());
+		return nestedEvaluator.evaluate(expressionInOCL.getBodyExpression());
 	}
 
 	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceValue, Value firstArgumentValue, Value secondArgumentValue) throws InvalidValueException {
-//		if (expressionInOcl == null) {		
-//			resolveExpressionInOcl(evaluator, returnType, sourceValue);
+//		if (expressionInOCL == null) {		
+//			resolveExpressionInOCL(evaluator, returnType, sourceValue);
 //		}
 		DomainEvaluator nestedEvaluator = evaluator.createNestedEvaluator();
 		DomainEvaluationEnvironment nestedEvaluationEnvironment = nestedEvaluator.getEvaluationEnvironment();
-		nestedEvaluationEnvironment.add(expressionInOcl.getContextVariable(), sourceValue);
-		List<Variable> parameterVariables = expressionInOcl.getParameterVariable();
+		nestedEvaluationEnvironment.add(expressionInOCL.getContextVariable(), sourceValue);
+		List<Variable> parameterVariables = expressionInOCL.getParameterVariable();
 		nestedEvaluationEnvironment.add(parameterVariables.get(0).getRepresentedParameter(), firstArgumentValue);
 		nestedEvaluationEnvironment.add(parameterVariables.get(1).getRepresentedParameter(), secondArgumentValue);
-		return nestedEvaluator.evaluate(expressionInOcl.getBodyExpression());
+		return nestedEvaluator.evaluate(expressionInOCL.getBodyExpression());
 	}
 
 	public Value evaluate(DomainEvaluator evaluator, DomainCallExp callExp, Value sourceValue, Value... argumentValues) throws InvalidValueException {
-		if (expressionInOcl == null) {		
-			resolveExpressionInOcl(evaluator, callExp, sourceValue);
+		if (expressionInOCL == null) {		
+			resolveExpressionInOCL(evaluator, callExp, sourceValue);
 		}
 		DomainEvaluator nestedEvaluator = evaluator.createNestedEvaluator();
 		DomainEvaluationEnvironment nestedEvaluationEnvironment = nestedEvaluator.getEvaluationEnvironment();
-		nestedEvaluationEnvironment.add(expressionInOcl.getContextVariable(), sourceValue);
-		List<Variable> parameterVariables = expressionInOcl.getParameterVariable();
+		nestedEvaluationEnvironment.add(expressionInOCL.getContextVariable(), sourceValue);
+		List<Variable> parameterVariables = expressionInOCL.getParameterVariable();
 		int iMax = Math.min(parameterVariables.size(), argumentValues.length);
 		for (int i = 0; i < iMax; i++) {
 			nestedEvaluationEnvironment.add(parameterVariables.get(i).getRepresentedParameter(), argumentValues[i]);
 		}
-		return nestedEvaluator.evaluate(expressionInOcl.getBodyExpression());
+		return nestedEvaluator.evaluate(expressionInOCL.getBodyExpression());
 	}
 
-	protected void resolveExpressionInOcl(DomainEvaluator evaluator, DomainCallExp callExp, Value sourceValue) {
-		if (specification instanceof ExpressionInOcl) {
-			expressionInOcl = (ExpressionInOcl) specification;
+	protected void resolveExpressionInOCL(DomainEvaluator evaluator, DomainCallExp callExp, Value sourceValue) {
+		if (specification instanceof ExpressionInOCL) {
+			expressionInOCL = (ExpressionInOCL) specification;
 		}
 		else {
 			if (specification instanceof OpaqueExpression) {
@@ -124,12 +124,12 @@ public class EObjectOperation extends AbstractOperation implements LibraryUnaryO
 				URI uri = metaModelManager.getResourceIdentifier(operation, null);
 				try {
 					ParserContext operationContext = new OperationContext(metaModelManager, uri, operation, null);
-					expressionInOcl = operationContext.parse(string);
+					expressionInOCL = operationContext.parse(string);
 				} catch (ParserException e) {
 					evaluator.throwInvalidEvaluation(e, callExp, sourceValue, "parse failure");
 				}
 			}
-			if (expressionInOcl == null) {
+			if (expressionInOCL == null) {
 				Operation operation = ((OperationCallExp)callExp).getReferredOperation();
 				evaluator.throwInvalidEvaluation(null, callExp, sourceValue, "No specification for '" + operation + "'");
 			}

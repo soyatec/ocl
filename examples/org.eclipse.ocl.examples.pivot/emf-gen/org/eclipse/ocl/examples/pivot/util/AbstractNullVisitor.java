@@ -141,7 +141,7 @@ public abstract class AbstractNullVisitor<R, C>
 		return null;
 	}
 
-	public R visitExpressionInOcl(org.eclipse.ocl.examples.pivot.ExpressionInOcl object) {
+	public R visitExpressionInOCL(org.eclipse.ocl.examples.pivot.ExpressionInOCL object) {
 		return null;
 	}
 

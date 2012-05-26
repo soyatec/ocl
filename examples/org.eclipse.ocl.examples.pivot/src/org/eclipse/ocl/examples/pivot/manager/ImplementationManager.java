@@ -22,7 +22,7 @@ import java.util.List;
 
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.pivot.Constraint;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -79,8 +79,8 @@ public class ImplementationManager
 		for (Constraint constraint : metaModelManager.getLocalConstraints(operation)) {
 			if (UMLReflection.BODY.equals(constraint.getStereotype())) {
 				ValueSpecification specification = constraint.getSpecification();
-				if (specification instanceof ExpressionInOcl) {
-					return new ConstrainedOperation((ExpressionInOcl) specification);
+				if (specification instanceof ExpressionInOCL) {
+					return new ConstrainedOperation((ExpressionInOCL) specification);
 				}
 			}
 		}
@@ -102,8 +102,8 @@ public class ImplementationManager
 		for (Constraint constraint : metaModelManager.getLocalConstraints(property)) {
 			if (UMLReflection.INITIAL.equals(constraint.getStereotype())) {
 				ValueSpecification specification = constraint.getSpecification();
-				if (specification instanceof ExpressionInOcl) {
-					return new ConstrainedProperty((ExpressionInOcl) specification);
+				if (specification instanceof ExpressionInOCL) {
+					return new ConstrainedProperty((ExpressionInOCL) specification);
 				}
 			}
 		}
@@ -114,8 +114,8 @@ public class ImplementationManager
 		for (Constraint constraint : metaModelManager.getLocalConstraints(property)) {
 			if (UMLReflection.DERIVATION.equals(constraint.getStereotype())) {
 				ValueSpecification specification = constraint.getSpecification();
-				if (specification instanceof ExpressionInOcl) {
-					return new ConstrainedProperty((ExpressionInOcl) specification);
+				if (specification instanceof ExpressionInOCL) {
+					return new ConstrainedProperty((ExpressionInOCL) specification);
 				}
 			}
 		}

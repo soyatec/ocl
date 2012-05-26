@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.util.BasicSettingDelegate;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Query;
@@ -39,7 +39,7 @@ public class OCLSettingDelegate extends BasicSettingDelegate.Stateless
 {
 	protected final OCLDelegateDomain delegateDomain;
 	private Property property;
-	private ExpressionInOcl specification;
+	private ExpressionInOCL specification;
 
 	/**
 	 * Initializes me with my structural feature.
@@ -58,7 +58,7 @@ public class OCLSettingDelegate extends BasicSettingDelegate.Stateless
 		MetaModelManager metaModelManager = ocl.getEnvironment().getMetaModelManager();
 		if (specification == null) {
 			Property property = getProperty();
-			specification = SettingBehavior.INSTANCE.getExpressionInOcl(metaModelManager, property);
+			specification = SettingBehavior.INSTANCE.getExpressionInOCL(metaModelManager, property);
 			SettingBehavior.INSTANCE.validate(property);
 		}
 		Query query = ocl.createQuery(specification);

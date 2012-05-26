@@ -18,7 +18,7 @@ package org.eclipse.ocl.examples.xtext.base.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.Constraint;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -38,14 +38,14 @@ public class ConstraintCSAttribution extends AbstractAttribution
 		Constraint pivot = PivotUtil.getPivot(Constraint.class, targetElement);
 		if (pivot != null) {
 			ValueSpecification specification = pivot.getSpecification();
-			if (specification instanceof ExpressionInOcl) {
-				Variable contextVariable = ((ExpressionInOcl)specification).getContextVariable();
+			if (specification instanceof ExpressionInOCL) {
+				Variable contextVariable = ((ExpressionInOCL)specification).getContextVariable();
 				if (contextVariable != null) {
 					environmentView.addNamedElement(contextVariable);
 					Type type = contextVariable.getType();
 					environmentView.addElementsOfScope(type, scopeView);
 				}
-				Variable resultVariable = ((ExpressionInOcl)specification).getResultVariable();
+				Variable resultVariable = ((ExpressionInOCL)specification).getResultVariable();
 				if (resultVariable != null) {
 					environmentView.addNamedElement(resultVariable);
 				}

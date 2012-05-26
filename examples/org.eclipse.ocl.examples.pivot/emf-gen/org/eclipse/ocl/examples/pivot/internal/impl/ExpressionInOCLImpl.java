@@ -11,8 +11,6 @@
  *   E.D.Willink - Initial API and implementation
  *
  * </copyright>
- *
- * $Id: ExpressionInOclImpl.java,v 1.5 2011/05/19 16:55:39 ewillink Exp $
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
@@ -29,7 +27,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OclExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
@@ -44,19 +42,19 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOclImpl#getBodyExpression <em>Body Expression</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOclImpl#getContextVariable <em>Context Variable</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOclImpl#getResultVariable <em>Result Variable</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOclImpl#getParameterVariable <em>Parameter Variable</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOclImpl#getMessageExpression <em>Message Expression</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOCLImpl#getBodyExpression <em>Body Expression</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOCLImpl#getContextVariable <em>Context Variable</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOCLImpl#getResultVariable <em>Result Variable</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOCLImpl#getParameterVariable <em>Parameter Variable</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOCLImpl#getMessageExpression <em>Message Expression</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ExpressionInOclImpl
+public class ExpressionInOCLImpl
 		extends OpaqueExpressionImpl
-		implements ExpressionInOcl {
+		implements ExpressionInOCL {
 
 	/**
 	 * The cached value of the '{@link #getBodyExpression() <em>Body Expression</em>}' containment reference.
@@ -113,7 +111,7 @@ public class ExpressionInOclImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ExpressionInOclImpl() {
+	protected ExpressionInOCLImpl() {
 		super();
 	}
 
@@ -517,7 +515,7 @@ public class ExpressionInOclImpl
 				getMessage().addAll((Collection<? extends String>)newValue);
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__VALUE_EXPRESSION:
-				setValueExpression((ExpressionInOcl)newValue);
+				setValueExpression((ExpressionInOCL)newValue);
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__BODY_EXPRESSION:
 				setBodyExpression((OclExpression)newValue);
@@ -582,7 +580,7 @@ public class ExpressionInOclImpl
 				getMessage().clear();
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__VALUE_EXPRESSION:
-				setValueExpression((ExpressionInOcl)null);
+				setValueExpression((ExpressionInOCL)null);
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__BODY_EXPRESSION:
 				setBodyExpression((OclExpression)null);
@@ -652,7 +650,7 @@ public class ExpressionInOclImpl
 
 	@Override
 	public <R> R accept(Visitor<R> visitor) {
-		return visitor.visitExpressionInOcl(this);
+		return visitor.visitExpressionInOCL(this);
 	}
 
-} //ExpressionInOclImpl
+} //ExpressionInOCLImpl

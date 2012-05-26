@@ -19,16 +19,16 @@ package org.eclipse.ocl.examples.pivot.context;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Type;
 
 public interface Base2PivotConversion
 {
-	void setContextVariable(ExpressionInOcl pivotSpecification, String selfVariableName, Type contextType);
-	void setClassifierContext(ExpressionInOcl pivotSpecification, Type contextType);
-	void setParameterVariables(ExpressionInOcl pivotSpecification, List<Parameter> parameters);
-	void setParameterVariables(ExpressionInOcl pivotSpecification, Map<String, Type> parameters);
-	void setResultVariable(ExpressionInOcl pivotSpecification, Operation contextOperation, String resultName);
+	void setContextVariable(ExpressionInOCL pivotSpecification, String selfVariableName, Type contextType);
+	void setClassifierContext(ExpressionInOCL pivotSpecification, Type contextType);
+	void setParameterVariables(ExpressionInOCL pivotSpecification, List<Parameter> parameters);
+	void setParameterVariables(ExpressionInOCL pivotSpecification, Map<String, Type> parameters);
+	void setResultVariable(ExpressionInOCL pivotSpecification, Operation contextOperation, String resultName);
 }

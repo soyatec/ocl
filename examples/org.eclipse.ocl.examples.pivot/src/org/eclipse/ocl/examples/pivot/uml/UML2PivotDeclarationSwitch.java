@@ -229,7 +229,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 				}
 				if (constraint != null) {
 					String value = entry.getValue();
-					OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOcl
+					OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOCL
 					specification.getBody().add(value);
 					specification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
 					constraint.setSpecification(specification);
@@ -316,7 +316,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 				constraint.setStereotype(UMLReflection.INVARIANT);
 				constraint.setName(entry.getKey());
 				String value = entry.getValue();
-				OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOcl
+				OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOCL
 				specification.getBody().add(value);
 				specification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
 				constraint.setSpecification(specification);

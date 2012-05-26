@@ -11,8 +11,6 @@
  *   E.D.Willink - Initial API and implementation
  *
  * </copyright>
- *
- * $Id: ExpressionInOcl.java,v 1.5 2011/05/19 16:55:39 ewillink Exp $
  */
 package org.eclipse.ocl.examples.pivot;
 
@@ -27,19 +25,19 @@ import org.eclipse.emf.ecore.EClass;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.ExpressionInOcl#getBodyExpression <em>Body Expression</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.ExpressionInOcl#getContextVariable <em>Context Variable</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.ExpressionInOcl#getResultVariable <em>Result Variable</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.ExpressionInOcl#getParameterVariable <em>Parameter Variable</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.ExpressionInOcl#getMessageExpression <em>Message Expression</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getBodyExpression <em>Body Expression</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getContextVariable <em>Context Variable</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getResultVariable <em>Result Variable</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getParameterVariable <em>Parameter Variable</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getMessageExpression <em>Message Expression</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOcl()
+ * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOCL()
  * @model
  * @generated
  */
-public interface ExpressionInOcl
+public interface ExpressionInOCL
 		extends OpaqueExpression {
 
 	/**
@@ -52,15 +50,15 @@ public interface ExpressionInOcl
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Body Expression</em>' containment reference.
 	 * @see #setBodyExpression(OclExpression)
-	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOcl_BodyExpression()
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOCL_BodyExpression()
 	 * @model containment="true" required="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ExpressionInOcl!bodyExpression'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ExpressionInOCL!bodyExpression'"
 	 * @generated
 	 */
 	OclExpression getBodyExpression();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.ExpressionInOcl#getBodyExpression <em>Body Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getBodyExpression <em>Body Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Body Expression</em>' containment reference.
@@ -90,15 +88,15 @@ public interface ExpressionInOcl
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Context Variable</em>' containment reference.
 	 * @see #setContextVariable(Variable)
-	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOcl_ContextVariable()
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOCL_ContextVariable()
 	 * @model containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ExpressionInOcl!contextVariable'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ExpressionInOCL!contextVariable'"
 	 * @generated
 	 */
 	Variable getContextVariable();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.ExpressionInOcl#getContextVariable <em>Context Variable</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getContextVariable <em>Context Variable</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Context Variable</em>' containment reference.
@@ -127,15 +125,15 @@ public interface ExpressionInOcl
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Result Variable</em>' containment reference.
 	 * @see #setResultVariable(Variable)
-	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOcl_ResultVariable()
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOCL_ResultVariable()
 	 * @model containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ExpressionInOcl!resultVariable'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ExpressionInOCL!resultVariable'"
 	 * @generated
 	 */
 	Variable getResultVariable();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.ExpressionInOcl#getResultVariable <em>Result Variable</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getResultVariable <em>Result Variable</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Result Variable</em>' containment reference.
@@ -164,9 +162,9 @@ public interface ExpressionInOcl
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameter Variable</em>' containment reference list.
-	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOcl_ParameterVariable()
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOCL_ParameterVariable()
 	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ExpressionInOcl!parameterVariable'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ExpressionInOCL!parameterVariable'"
 	 * @generated
 	 */
 	EList<Variable> getParameterVariable();
@@ -191,15 +189,15 @@ public interface ExpressionInOcl
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Message Expression</em>' containment reference.
 	 * @see #setMessageExpression(OclExpression)
-	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOcl_MessageExpression()
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOCL_MessageExpression()
 	 * @model containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ExpressionInOcl!messageExpression'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ExpressionInOCL!messageExpression'"
 	 * @generated
 	 */
 	OclExpression getMessageExpression();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.ExpressionInOcl#getMessageExpression <em>Message Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getMessageExpression <em>Message Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Message Expression</em>' containment reference.
@@ -219,4 +217,4 @@ public interface ExpressionInOcl
 	 */
 	OclExpression createMessageExpression(EClass eClass);
 
-} // ExpressionInOcl
+} // ExpressionInOCL

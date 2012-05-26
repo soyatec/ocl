@@ -31,7 +31,7 @@ import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Environment;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OclExpression;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
@@ -225,10 +225,10 @@ public abstract class AbstractEvaluationVisitor
 	@Override
     public Value visitConstraint(Constraint constraint) {
 		ValueSpecification specification = constraint.getSpecification();
-		if (!(specification instanceof ExpressionInOcl)) {
+		if (!(specification instanceof ExpressionInOCL)) {
 			return null;
 		}
-		OclExpression body = ((ExpressionInOcl)specification).getBodyExpression();
+		OclExpression body = ((ExpressionInOCL)specification).getBodyExpression();
 		boolean isBoolean = BOOLEAN_CONSTRAINTS.contains(constraint.getStereotype());
 		
 		if (body == null) {

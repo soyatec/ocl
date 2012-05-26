@@ -17,7 +17,7 @@
 package org.eclipse.ocl.examples.xtext.oclinecore.pivot2cs;
 
 import org.eclipse.ocl.examples.pivot.Constraint;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -43,7 +43,7 @@ public class OCLinEcoreDeclarationVisitor extends EssentialOCLDeclarationVisitor
 		csElement.setCallable(object.isCallable());
 		ValueSpecification specification = object.getSpecification();
 		csElement.setSpecification(context.visitDeclaration(SpecificationCS.class, specification));
-		if (specification instanceof OpaqueExpression) {		// FIXME ExpressionInOcl too??
+		if (specification instanceof OpaqueExpression) {		// FIXME ExpressionInOCL too??
 			OpaqueExpression opaqueExpression = (OpaqueExpression)specification;
 			String message = PivotUtil.getMessage(opaqueExpression);
 			if ((message != null) && (message.length() > 0)) {
@@ -56,7 +56,7 @@ public class OCLinEcoreDeclarationVisitor extends EssentialOCLDeclarationVisitor
 	}
 
 	@Override
-	public ElementCS visitExpressionInOcl(ExpressionInOcl object) {
+	public ElementCS visitExpressionInOCL(ExpressionInOCL object) {
 		OCLinEcoreSpecificationCS csElement = context.refreshElement(OCLinEcoreSpecificationCS.class, OCLinEcoreCSTPackage.Literals.OC_LIN_ECORE_SPECIFICATION_CS, object);
 		csElement.setOwnedExpression(context.visitDeclaration(ExpCS.class, object.getBodyExpression()));
 		return csElement;

@@ -189,7 +189,7 @@ public class OCL {
 	 * @see #evaluate(Object, OCLExpression)
 	 */
 	public boolean check(Object context, Constraint constraint) {
-		ExpressionInOcl specification = (ExpressionInOcl) constraint.getSpecification();
+		ExpressionInOCL specification = (ExpressionInOCL) constraint.getSpecification();
 
 		return check(context, specification);
 	}
@@ -216,7 +216,7 @@ public class OCL {
 	 * @throws IllegalArgumentException
 	 *             if the constraint expression is not boolean-valued
 	 */
-	public boolean check(Object context, ExpressionInOcl specification) {
+	public boolean check(Object context, ExpressionInOCL specification) {
 		DomainStandardLibrary stdlib = getEnvironment().getOCLStandardLibrary();
 		if (specification.getBodyExpression().getType() != stdlib.getBooleanType()) {
 			throw new IllegalArgumentException("constraint is not boolean"); //$NON-NLS-1$
@@ -298,7 +298,7 @@ public class OCL {
 	 * 
 	 * @see #createQuery(Object)
 	 */
-	public Query createQuery(ExpressionInOcl specification) {
+	public Query createQuery(ExpressionInOCL specification) {
 		return new QueryImpl(this, specification);
 	}
 
@@ -320,7 +320,7 @@ public class OCL {
 	 * @see #createQuery(OCLExpression)
 	 */
 	public Query createQuery(Constraint constraint) {
-		return new QueryImpl(this, (ExpressionInOcl) constraint.getSpecification());
+		return new QueryImpl(this, (ExpressionInOCL) constraint.getSpecification());
 	}
 
 	/**
@@ -388,7 +388,7 @@ public class OCL {
 	 * @see #isInvalid(Object)
 	 * @see #check(Object, Object)
 	 */
-	public Value evaluate(Object context, ExpressionInOcl expression) {
+	public Value evaluate(Object context, ExpressionInOCL expression) {
 		evaluationProblems = null;
 		
 		// can determine a more appropriate context from the context

@@ -49,7 +49,7 @@ import org.eclipse.ocl.examples.pivot.Detail;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
 import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.IfExp;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
@@ -176,7 +176,7 @@ public class PivotFactoryImpl
 			case PivotPackage.ENUM_LITERAL_EXP: return (EObject)createEnumLiteralExp();
 			case PivotPackage.ENUMERATION: return (EObject)createEnumeration();
 			case PivotPackage.ENUMERATION_LITERAL: return (EObject)createEnumerationLiteral();
-			case PivotPackage.EXPRESSION_IN_OCL: return (EObject)createExpressionInOcl();
+			case PivotPackage.EXPRESSION_IN_OCL: return (EObject)createExpressionInOCL();
 			case PivotPackage.IF_EXP: return (EObject)createIfExp();
 			case PivotPackage.INTEGER_LITERAL_EXP: return (EObject)createIntegerLiteralExp();
 			case PivotPackage.INVALID_LITERAL_EXP: return (EObject)createInvalidLiteralExp();
@@ -633,9 +633,10 @@ public class PivotFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Enumeration createEnumeration() {
-		EnumerationImpl enumeration = new EnumerationImpl();
-		return enumeration;
+	public ExpressionInOCL createExpressionInOCL()
+	{
+		ExpressionInOCLImpl expressionInOCL = new ExpressionInOCLImpl();
+		return expressionInOCL;
 	}
 
 	/**
@@ -643,9 +644,9 @@ public class PivotFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExpressionInOcl createExpressionInOcl() {
-		ExpressionInOclImpl expressionInOcl = new ExpressionInOclImpl();
-		return expressionInOcl;
+	public Enumeration createEnumeration() {
+		EnumerationImpl enumeration = new EnumerationImpl();
+		return enumeration;
 	}
 
 	/**

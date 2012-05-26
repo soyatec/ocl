@@ -46,7 +46,7 @@ import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.LoopExp;
@@ -643,7 +643,7 @@ public class PivotUtil extends DomainUtil
 		}
 	}
 
-	public static String getConstraintTypeName(ExpressionInOcl expression) {
+	public static String getConstraintTypeName(ExpressionInOCL expression) {
 		return ((NamedElement) expression.eContainer().eContainer()).getName();
 	}
 

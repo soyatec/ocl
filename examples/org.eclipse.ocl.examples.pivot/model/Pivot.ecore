@@ -388,7 +388,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
         eType="#//Integer" defaultValueLiteral="0"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionInOcl" eSuperTypes="#//OpaqueExpression">
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionInOCL" eSuperTypes="#//OpaqueExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="bodyExpression" ordered="false"
         lowerBound="1" eType="#//OclExpression" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="contextVariable" ordered="false"
@@ -1170,7 +1170,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="message" unique="false"
         upperBound="-1" eType="#//String"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="valueExpression" ordered="false"
-        eType="#//ExpressionInOcl" transient="true"/>
+        eType="#//ExpressionInOCL" transient="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//Feature #//Namespace #//TemplateableElement #//ParameterableElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1187,7 +1187,7 @@
     </eAnnotations>
     <eOperations name="CompatibleReturn" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="let bodyConstraint : Constraint = ownedRule->any(stereotype = 'body') in bodyConstraint &lt;> null implies let bodySpecification : ValueSpecification = bodyConstraint.specification in bodySpecification &lt;> null and bodySpecification.oclIsKindOf(ExpressionInOcl) implies CompatibleBody(bodySpecification)"/>
+        <details key="body" value="let bodyConstraint : Constraint = ownedRule->any(stereotype = 'body') in bodyConstraint &lt;> null implies let bodySpecification : ValueSpecification = bodyConstraint.specification in bodySpecification &lt;> null and bodySpecification.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(bodySpecification)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -1359,7 +1359,7 @@
     </eOperations>
     <eOperations name="CompatibleInitialiser" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="isDerived implies let derivedConstraint : Constraint = ownedRule->any(stereotype = 'derivation') in let initialConstraint : Constraint = ownedRule->any(stereotype = 'initial') in let derivedSpecification : ValueSpecification = if derivedConstraint &lt;> null then derivedConstraint.specification else null endif in let initialSpecification : ValueSpecification = if initialConstraint &lt;> null then initialConstraint.specification else null endif in let initialiser : ValueSpecification = if derivedSpecification &lt;> null then derivedSpecification else initialSpecification endif in initialiser &lt;> null and initialiser.oclIsKindOf(ExpressionInOcl) implies CompatibleBody(initialiser)"/>
+        <details key="body" value="isDerived implies let derivedConstraint : Constraint = ownedRule->any(stereotype = 'derivation') in let initialConstraint : Constraint = ownedRule->any(stereotype = 'initial') in let derivedSpecification : ValueSpecification = if derivedConstraint &lt;> null then derivedConstraint.specification else null endif in let initialSpecification : ValueSpecification = if initialConstraint &lt;> null then initialConstraint.specification else null endif in let initialiser : ValueSpecification = if derivedSpecification &lt;> null then derivedSpecification else initialSpecification endif in initialiser &lt;> null and initialiser.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(initialiser)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">

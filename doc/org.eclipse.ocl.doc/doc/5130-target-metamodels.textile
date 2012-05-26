@@ -47,7 +47,7 @@ Because Ecore does not define analogues of some of the UML metaclasses required 
 * @Constraint@: the model of an OCL constraint (when the @language@ is OCL)
 * @CallOperationAction@:  used in the model of message expressions
 * @SendSignalAction@: used in the model of message expressions
-* @ExpressionInOcl@:  it is this metaclass's general class @OpaqueExpression@ that Ecore does not define.  It is elided in the Ecore binding
+* @ExpressionInOCL@:  it is this metaclass's general class @OpaqueExpression@ that Ecore does not define.  It is elided in the Ecore binding
 * @State@:  Ecore provides no behavior modeling capabilities.  The Ecore binding simply substitutes @EObject@
 
 For applications that work exclusively with the Ecore binding for OCL, the @org.eclipse.ocl.ecore@ package defines a subclass of the @OCL@ class that supplies all of the generic type parameter bindings to simplify typing (in the absence of type aliasing in Java). It also provides Ecore-specific convenience factory methods for the @OCL@, itself, and narrows the return type of the factory methods for the @OCLHelper@ and @Query@ interfaces.  These specialized interfaces likewise supply the generic type parameter bindings for Ecore.

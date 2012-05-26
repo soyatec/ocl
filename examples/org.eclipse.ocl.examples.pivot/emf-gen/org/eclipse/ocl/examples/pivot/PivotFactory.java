@@ -326,6 +326,15 @@ public interface PivotFactory
 	EnumerationLiteral createEnumerationLiteral();
 
 	/**
+	 * Returns a new object of class '<em>Expression In OCL</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Expression In OCL</em>'.
+	 * @generated
+	 */
+	ExpressionInOCL createExpressionInOCL();
+
+	/**
 	 * Returns a new object of class '<em>Enumeration</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -333,15 +342,6 @@ public interface PivotFactory
 	 * @generated
 	 */
 	Enumeration createEnumeration();
-
-	/**
-	 * Returns a new object of class '<em>Expression In Ocl</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Expression In Ocl</em>'.
-	 * @generated
-	 */
-	ExpressionInOcl createExpressionInOcl();
 
 	/**
 	 * Returns a new object of class '<em>Opaque Expression</em>'.

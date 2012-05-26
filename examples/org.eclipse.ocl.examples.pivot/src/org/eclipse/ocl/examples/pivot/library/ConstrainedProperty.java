@@ -22,7 +22,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 
@@ -32,17 +32,17 @@ import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
  */
 public class ConstrainedProperty extends AbstractProperty
 {
-	protected final ExpressionInOcl expressionInOcl;
+	protected final ExpressionInOCL expressionInOCL;
 	
-	public ConstrainedProperty(ExpressionInOcl expressionInOcl) {
-		this.expressionInOcl = expressionInOcl;
+	public ConstrainedProperty(ExpressionInOCL expressionInOCL) {
+		this.expressionInOCL = expressionInOCL;
 	}
 
 	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceValue, DomainProperty property) throws InvalidValueException {
 		EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
 		EvaluationVisitor nestedVisitor = evaluationVisitor.createNestedEvaluator();
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();
-		nestedEvaluationEnvironment.add(expressionInOcl.getContextVariable(), sourceValue);
-		return expressionInOcl.accept(nestedVisitor);
+		nestedEvaluationEnvironment.add(expressionInOCL.getContextVariable(), sourceValue);
+		return expressionInOCL.accept(nestedVisitor);
 	}
 }

@@ -28,7 +28,7 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
 import org.eclipse.ocl.examples.pivot.Environment;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.IfExp;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
@@ -191,8 +191,8 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitExpressionInOcl(ExpressionInOcl expression) {
-        return getDelegate().visitExpressionInOcl(expression);
+	public Value visitExpressionInOCL(ExpressionInOCL expression) {
+        return getDelegate().visitExpressionInOCL(expression);
     }
 
     /**

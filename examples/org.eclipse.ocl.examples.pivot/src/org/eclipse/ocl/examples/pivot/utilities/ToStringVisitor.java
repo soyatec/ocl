@@ -42,7 +42,7 @@ import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.FeatureCallExp;
 import org.eclipse.ocl.examples.pivot.IfExp;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
@@ -166,7 +166,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	 * protected String getStereotype(Constraint constraint) { return (uml ==
 	 * null)? null : uml.getStereotype(constraint); }
 	 * 
-	 * @Override protected ExpressionInOcl getSpecification(Constraint
+	 * @Override protected ExpressionInOCL getSpecification(Constraint
 	 * constraint) { return (uml == null)? null :
 	 * uml.getSpecification(constraint); }
 	 */
@@ -563,10 +563,10 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	}
 
 	/**
-	 * Renders an ExpressionInOcl with its context variables and body.
+	 * Renders an ExpressionInOCL with its context variables and body.
 	 */
 	@Override
-	public String visitExpressionInOcl(ExpressionInOcl expression) {
+	public String visitExpressionInOCL(ExpressionInOCL expression) {
 		return safeVisit(expression.getBodyExpression());
 	}
 
@@ -578,7 +578,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
      * {@link #handleExpressionInOCL(ExpressionInOCL, Object, Object, List, Object)}.
      *
     @Override
-	public T visitExpressionInOcl(ExpressionInOcl expression) {
+	public T visitExpressionInOCL(ExpressionInOCL expression) {
         T contextResult = safeVisit(expression.getContextVariable());
         
         Variable resultVar = expression.getResultVariable();
@@ -598,7 +598,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
         
         T bodyResult = safeVisit(expression.getBodyExpression());
         
-        return handleExpressionInOcl(expression, contextResult, resultResult,
+        return handleExpressionInOCL(expression, contextResult, resultResult,
             parameterResults, bodyResult);
     } */
 

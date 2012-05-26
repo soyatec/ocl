@@ -39,7 +39,7 @@ import org.eclipse.ocl.ecore.EcoreEnvironment;
 import org.eclipse.ocl.examples.common.utils.EcoreUtils;
 import org.eclipse.ocl.examples.domain.validation.DomainSubstitutionLabelProvider;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Query;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -209,7 +209,7 @@ public class DocumentationExamples extends PivotTestCase
 			assertEquals(false, ((Boolean)b2IsAvailable).booleanValue());
 			
 			helper.setContext(bookType);
-			ExpressionInOcl query = helper.createQuery("isAvailable()");
+			ExpressionInOCL query = helper.createQuery("isAvailable()");
 			Query queryEval = ocl.createQuery(query);
 			Value b2Available = queryEval.evaluate(b2Book);
 		    assertFalse(b2Available.asBoolean());

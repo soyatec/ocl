@@ -102,13 +102,13 @@ public interface OpaqueExpression
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value Expression</em>' reference.
-	 * @see #setValueExpression(ExpressionInOcl)
+	 * @see #setValueExpression(ExpressionInOCL)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOpaqueExpression_ValueExpression()
 	 * @model transient="true" ordered="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!OpaqueExpression!valueExpression'"
 	 * @generated
 	 */
-	ExpressionInOcl getValueExpression();
+	ExpressionInOCL getValueExpression();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.OpaqueExpression#getValueExpression <em>Value Expression</em>}' reference.
@@ -118,5 +118,5 @@ public interface OpaqueExpression
 	 * @see #getValueExpression()
 	 * @generated
 	 */
-	void setValueExpression(ExpressionInOcl value);
+	void setValueExpression(ExpressionInOCL value);
 } // OpaqueExpression

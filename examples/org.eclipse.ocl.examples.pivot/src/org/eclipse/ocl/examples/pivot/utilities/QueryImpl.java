@@ -30,7 +30,7 @@ import org.eclipse.ocl.examples.domain.evaluation.EvaluationHaltedException;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.Environment;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.OclExpression;
 import org.eclipse.ocl.examples.pivot.ProblemAware;
@@ -60,7 +60,7 @@ public class QueryImpl implements Query, ProblemAware
 {
 	private final OCL ocl;
 	private final Environment environment;
-	private final ExpressionInOcl specification;
+	private final ExpressionInOCL specification;
 	private final OclExpression expression;
 	private DomainModelManager modelManager = null;
 	private EvaluationEnvironment evalEnv;
@@ -74,7 +74,7 @@ public class QueryImpl implements Query, ProblemAware
 	 * @param modelManager may be <code>null</code>, in which case I will use my
 	 *     evaluation environment to create a dynamic extent map
 	 */
-	public QueryImpl(OCL ocl, ExpressionInOcl specification) {		
+	public QueryImpl(OCL ocl, ExpressionInOCL specification) {		
 		this.ocl = ocl;
 		this.environment = ocl.getEnvironment();
 		this.specification = specification;

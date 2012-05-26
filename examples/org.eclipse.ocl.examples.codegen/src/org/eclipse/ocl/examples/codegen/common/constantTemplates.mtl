@@ -25,13 +25,13 @@
 [import org::eclipse::ocl::examples::codegen::common::stringQueries/]
 [import org::eclipse::ocl::examples::codegen::common::symbolTemplates/]
 
-[template public emitConstants(expInOcl : ExpressionInOcl, genPackage : GenPackage)]
+[template public emitConstants(expInOcl : ExpressionInOCL, genPackage : GenPackage)]
 [let constants : String = expInOcl.bodyExpression.emitConstants(genPackage, expInOcl)]
 [emitConstants(constants)/]
 [/let]
 [/template]
 
-[template public gatherConstants(ast : Element, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public gatherConstants(ast : Element, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [ast.emitConstants(genPackage, expInOcl)/]
 [for (pElement : Element | ast.eAllContents()->filter(Element))]
 [pElement.emitConstants(genPackage, expInOcl)/]
@@ -44,24 +44,24 @@
 [uniqueConstant/]
 [/for][/let][/template]
 
-[template protected emitConstants(ast : BagType, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : BagType, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitStandardLibrary()/]
 [ast.elementType.emitConstants(genPackage, expInOcl)/]
 final <%DomainCollectionType%> [ast.symbolName(expInOcl)/] = standardLibrary.getBagType([ast.elementType.symbolName(expInOcl)/]);
 [/template]
 
-[template protected emitConstants(ast : BooleanLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : BooleanLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitValueFactory()/]
 final <%BooleanValue%> [ast.symbolName(expInOcl)/] = valueFactory.get[if (ast.booleanSymbol)]True[else]False[/if]();
 [/template]
 
-[template protected emitConstants(ast : ClassifierType, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : ClassifierType, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitStandardLibrary()/]
 [ast.instanceType.emitConstants(genPackage, expInOcl)/]
 final <%DomainClassifierType%> [ast.symbolName(expInOcl)/] = standardLibrary.getClassifierType([ast.instanceType.symbolName(expInOcl)/]);
 [/template]
 
-[template protected emitConstants(ast : CollectionLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOcl) ? ((ast.part->size() = 1) and (ast.part->filter(CollectionRange)->size() = 1))]
+[template protected emitConstants(ast : CollectionLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL) ? ((ast.part->size() = 1) and (ast.part->filter(CollectionRange)->size() = 1))]
 [ast.type.emitConstants(genPackage, expInOcl)/]
 [if (ast.isConstantCollectionLiteralExp())]
 [for (part : CollectionLiteralPart | ast.part)]
@@ -71,7 +71,7 @@ final <%DomainClassifierType%> [ast.symbolName(expInOcl)/] = standardLibrary.get
 [/if]
 [/template]
 
-[template protected emitConstants(ast : CollectionLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOcl) ? ((ast.part->size() <> 1) or (ast.part->filter(CollectionRange)->size() <> 1))]
+[template protected emitConstants(ast : CollectionLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL) ? ((ast.part->size() <> 1) or (ast.part->filter(CollectionRange)->size() <> 1))]
 [ast.type.emitConstants(genPackage, expInOcl)/]
 [if (ast.isConstantCollectionLiteralExp())]
 [for (part : CollectionLiteralPart | ast.part)]
@@ -81,71 +81,71 @@ final <%DomainClassifierType%> [ast.symbolName(expInOcl)/] = standardLibrary.get
 [/if]
 [/template]
 
-[template protected emitConstants(ast : CollectionItem, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : CollectionItem, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [ast.item.emitConstants(genPackage, expInOcl)/]
 [/template]
 
-[template protected emitConstants(ast : CollectionRange, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : CollectionRange, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [ast.first.emitConstants(genPackage, expInOcl)/]
 [ast.last.emitConstants(genPackage, expInOcl)/]
 [/template]
 
-[template public emitConstants(ast : ConstructorExp, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public emitConstants(ast : ConstructorExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [/template]
 
-[template public emitConstants(ast : ConstructorPart, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public emitConstants(ast : ConstructorPart, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 final <%ExecutorProperty%> [ast.referredProperty.symbolName(expInOcl)/] = [ast.referredProperty.emitQualifiedLiteralName(genPackage)/];
 [/template]
 
-[template protected emitConstants(ast : Element, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : Element, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [/template]
 
-[template protected emitConstants(ast : EnumLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : EnumLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitValueFactory()/]
 final <%Value%> [ast.symbolName(expInOcl)/] = valueFactory.createEnumerationLiteralValue([ast.referredEnumLiteral.emitQualifiedLiteralName(genPackage)/]);
 [/template]
 
-[template protected emitConstants(ast : IntegerLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : IntegerLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitValueFactory()/]
 final <%IntegerValue%> [ast.symbolName(expInOcl)/] = valueFactory.integerValueOf([ast.integerSymbol/]);
 [/template]
 
-[template protected emitConstants(ast : InvalidLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : InvalidLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitValueFactory()/]
 final <%InvalidValue%> [ast.symbolName(expInOcl)/] = valueFactory.getInvalid();
 [/template]
 
-[template protected emitConstants(ast : IterateExp, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : IterateExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitStandardLibrary()/]
 [ast.type.emitConstants(genPackage, expInOcl)/]
 final <%ExecutorOperation%> [ast.referredIteration.symbolName(expInOcl)/] = [ast.referredIteration.emitQualifiedLiteralName(genPackage)/];
 [/template]
 
-[template protected emitConstants(ast : IteratorExp, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : IteratorExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitStandardLibrary()/]
 [ast.type.emitConstants(genPackage, expInOcl)/]
 [ast._body.type.emitConstants(genPackage, expInOcl)/]
 final <%ExecutorOperation%> [ast.referredIteration.symbolName(expInOcl)/] = [ast.referredIteration.emitQualifiedLiteralName(genPackage)/];
 [/template]
 
-[template protected emitConstants(ast : NullLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : NullLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitValueFactory()/]
 final <%NullValue%> [ast.symbolName(expInOcl)/] = valueFactory.getNull();
 [/template]
 
-[template protected emitConstants(ast : OperationCallExp, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : OperationCallExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitStandardLibrary()/]
 [ast.type.emitConstants(genPackage, expInOcl)/]
 final <%ExecutorOperation%> [ast.referredOperation.symbolName(expInOcl)/] = [ast.referredOperation.emitQualifiedLiteralName(genPackage)/];
 [/template]
 
-[template protected emitConstants(ast : OrderedSetType, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : OrderedSetType, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitStandardLibrary()/]
 [ast.elementType.emitConstants(genPackage, expInOcl)/]
 final <%DomainCollectionType%> [ast.symbolName(expInOcl)/] = standardLibrary.getOrderedSetType([ast.elementType.symbolName(expInOcl)/]);
 [/template]
 
-[template protected emitConstants(ast : PropertyCallExp, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : PropertyCallExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitStandardLibrary()/]
 [ast.type.emitConstants(genPackage, expInOcl)/]
 [if (ast.referredProperty.owningType.oclIsKindOf(TupleType))]
@@ -156,29 +156,29 @@ final <%LibraryProperty%> I[ast.referredProperty.symbolName(expInOcl)/] = [ast.r
 [/if]
 [/template]
 
-[template protected emitConstants(ast : RealLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : RealLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitValueFactory()/]
 final <%RealValue%> [ast.symbolName(expInOcl)/] = valueFactory.realValueOf([ast.realSymbol/]);
 [/template]
 
-[template protected emitConstants(ast : SequenceType, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : SequenceType, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitStandardLibrary()/]
 [ast.elementType.emitConstants(genPackage, expInOcl)/]
 final <%DomainCollectionType%> [ast.symbolName(expInOcl)/] = standardLibrary.getSequenceType([ast.elementType.symbolName(expInOcl)/]);
 [/template]
 
-[template protected emitConstants(ast : SetType, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : SetType, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitStandardLibrary()/]
 [ast.elementType.emitConstants(genPackage, expInOcl)/]
 final <%DomainCollectionType%> [ast.symbolName(expInOcl)/] = standardLibrary.getSetType([ast.elementType.symbolName(expInOcl)/]);
 [/template]
 
-[template protected emitConstants(ast : StringLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : StringLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitValueFactory()/]
 final <%StringValue%> [ast.symbolName(expInOcl)/] = valueFactory.stringValueOf("[ast.javaString()/]");
 [/template]
 
-[template protected emitConstants(ast : TupleLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : TupleLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [if (ast.isConstantTupleLiteralExp())]
 [for (part : TupleLiteralPart | ast.part)]
 [part.emitConstants(genPackage, expInOcl)/]
@@ -187,10 +187,10 @@ final <%StringValue%> [ast.symbolName(expInOcl)/] = valueFactory.stringValueOf("
 [/if]
 [/template]
 
-[template protected emitConstants(ast : TupleLiteralPart, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : TupleLiteralPart, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [/template]
 
-[template protected emitConstants(ast : TupleType, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : TupleType, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitStandardLibrary()/]
 [for (part : Property | ast.ownedAttribute)]
 [part.type.emitConstants(genPackage, expInOcl)/]
@@ -201,14 +201,14 @@ final <%DomainTypedElement%> [part.symbolName(expInOcl)/] = standardLibrary.getT
 final <%DomainTupleType%> [ast.symbolName(expInOcl)/] = standardLibrary.getTupleType([for (part : Property | ast.ownedAttribute) separator(', ')][part.symbolName(expInOcl)/][/for]);
 [/template]
 
-[template protected emitConstants(type : Type, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(type : Type, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 final <%ExecutorType%> [type.symbolName(expInOcl)/] = [type.emitQualifiedLiteralName(genPackage)/];
 [/template]
 
-[template protected emitConstants(ast : TypeExp, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : TypeExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 final <%Value%> [type.symbolName(expInOcl)/] = valueFactory.createTypeValue([ast.referredType.emitQualifiedLiteralName(genPackage)/]);[/template]
 
-[template protected emitConstants(ast : UnlimitedNaturalLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template protected emitConstants(ast : UnlimitedNaturalLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitValueFactory()/]
 [if (ast.asIntegerStringOrNull() = null)]
 final <%UnlimitedValue%> [ast.symbolName(expInOcl)/] = valueFactory.getUnlimited();
@@ -217,27 +217,27 @@ final <%IntegerValue%> [ast.symbolName(expInOcl)/] = valueFactory.integerValueOf
 [/if]
 [/template]
 
-[template public emitLiteral(ast : BagType, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public emitLiteral(ast : BagType, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 standardLibrary.getBagType([ast.elementType.emitLiteral(genPackage, expInOcl)/])[/template]
 
-[template public emitLiteral(ast : ClassifierType, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public emitLiteral(ast : ClassifierType, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 standardLibrary.getClassifierType([ast.instanceType.emitLiteral(genPackage, expInOcl)/])[/template]
 
-[template public emitLiteral(ast : CollectionItem, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public emitLiteral(ast : CollectionItem, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 l[ast.eContainer().oclAsType(Element).symbolName(expInOcl)/].add([ast.item.symbolName(expInOcl)/]); // [ast.symbolName(expInOcl)/]
 [/template]
 
-[template public emitLiteral(ast : CollectionLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOcl) ? (ast.part->filter(CollectionRange)->size() = 0)]
+[template public emitLiteral(ast : CollectionLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL) ? (ast.part->filter(CollectionRange)->size() = 0)]
 [let astName : String = ast.symbolName(expInOcl)]
 final <%Value%> [astName/] = valueFactory.create[ast.kind.toString()/]Value([ast.type.symbolName(expInOcl)/][for (part : CollectionItem | ast.part->filter(CollectionItem))], [part.item.symbolName(expInOcl)/][/for]);[/let][/template]
 
-[template public emitLiteral(ast : CollectionLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOcl) ? ((ast.part->size() = 1) and (ast.part->filter(CollectionRange)->size() = 1))]
+[template public emitLiteral(ast : CollectionLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL) ? ((ast.part->size() = 1) and (ast.part->filter(CollectionRange)->size() = 1))]
 [let astName : String = ast.symbolName(expInOcl)]
 [let range : CollectionRange = ast.part->at(1).oclAsType(CollectionRange)]
 final <%IntegerRange%> r[astName/] = valueFactory.createRange([range.first.symbolName(expInOcl)/].asIntegerValue(), [range.last.symbolName(expInOcl)/].asIntegerValue());
 final <%Value%> [astName/] = valueFactory.create[ast.kind.toString()/]Range([ast.type.symbolName(expInOcl)/], r[astName/]);[/let][/let][/template]
 
-[template public emitLiteral(ast : CollectionLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public emitLiteral(ast : CollectionLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [let astName : String = ast.symbolName(expInOcl)]
 final <%java.util.List%><Value> l[astName/] = new <%java.util.ArrayList%><Value>(); 
 final <%Value%> [astName/] = valueFactory.create[ast.kind.toString()/]Value([ast.type.symbolName(expInOcl)/], l[astName/]);
@@ -246,24 +246,24 @@ final <%Value%> [astName/] = valueFactory.create[ast.kind.toString()/]Value([ast
 [/for]
 [/let][/template]
 
-[template public emitLiteral(ast : CollectionLiteralPart, genPackage : GenPackage, expInOcl : ExpressionInOcl)][/template]
+[template public emitLiteral(ast : CollectionLiteralPart, genPackage : GenPackage, expInOcl : ExpressionInOCL)][/template]
 
-[template public emitLiteral(ast : CollectionRange, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public emitLiteral(ast : CollectionRange, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 for (long [ast.symbolName(expInOcl)/] = [ast.first.symbolName(expInOcl)/].asInteger(), z[ast.symbolName(expInOcl)/] = [ast.last.symbolName(expInOcl)/].asInteger(); [ast.symbolName(expInOcl)/] <= z[ast.symbolName(expInOcl)/]; [ast.symbolName(expInOcl)/]++) {
 	l[ast.eContainer().oclAsType(Element).symbolName(expInOcl)/].add(valueFactory.integerValueOf([ast.symbolName(expInOcl)/]));
 } // [ast.symbolName(expInOcl)/]
 [/template]
 
-[template public emitLiteral(ast : OrderedSetType, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public emitLiteral(ast : OrderedSetType, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 standardLibrary.getOrderedSetType([ast.elementType.emitLiteral(genPackage, expInOcl)/])[/template]
 
-[template public emitLiteral(ast : SequenceType, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public emitLiteral(ast : SequenceType, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 standardLibrary.getSequenceType([ast.elementType.emitLiteral(genPackage, expInOcl)/])[/template]
 
-[template public emitLiteral(ast : SetType, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public emitLiteral(ast : SetType, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 standardLibrary.getType([ast.elementType.emitLiteral(genPackage, expInOcl)/])[/template]
 
-[template public emitLiteral(ast : TupleLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public emitLiteral(ast : TupleLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [let astName : String = ast.symbolName(expInOcl)]
 final <%java.util.Map%><<%DomainTypedElement%>, Value> m[astName/] = new <%java.util.HashMap%><<%DomainTypedElement%>, Value>();
 [for (part : TupleLiteralPart | ast.part)]
@@ -271,7 +271,7 @@ m[astName/].put([part.symbolName(expInOcl)/], [part.initExpression.symbolName(ex
 [/for]
 <%TupleValue%> [astName/] = valueFactory.createTupleValue([ast.type.symbolName(expInOcl)/], m[ast.symbolName(expInOcl)/]);[/let][/template]
 
-[template public emitLiteral(ast : Type, genPackage : GenPackage, expInOcl : ExpressionInOcl)]
+[template public emitLiteral(ast : Type, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [ast.emitQualifiedLiteralName(genPackage)/][/template]
 
 [template protected emitStandardLibrary(dummy : OclAny)]

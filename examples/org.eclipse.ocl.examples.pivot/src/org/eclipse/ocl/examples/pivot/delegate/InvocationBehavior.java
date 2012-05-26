@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.pivot.Constraint;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
@@ -64,18 +64,18 @@ public class InvocationBehavior extends AbstractDelegatedBehavior<EOperation, In
 	 * definition.
 	 * @throws OCLDelegateException 
 	 */
-	public ExpressionInOcl getExpressionInOcl(MetaModelManager metaModelManager, Operation operation) throws OCLDelegateException {
+	public ExpressionInOCL getExpressionInOCL(MetaModelManager metaModelManager, Operation operation) throws OCLDelegateException {
 		Constraint constraint = getConstraintForStereotype(operation, UMLReflection.BODY);
 		if (constraint != null) {
 			ValueSpecification valueSpecification = constraint.getSpecification();
-			if (valueSpecification instanceof ExpressionInOcl) {
-				return (ExpressionInOcl) valueSpecification;
+			if (valueSpecification instanceof ExpressionInOCL) {
+				return (ExpressionInOCL) valueSpecification;
 			}
 			URI uri = metaModelManager.getResourceIdentifier(constraint, "body");
 			ParserContext operationContext = new OperationContext(metaModelManager, uri, operation, null);
-			ExpressionInOcl expressionInOcl = getExpressionInOcl(operationContext, constraint);
-			if (expressionInOcl != null) {
-				return expressionInOcl;
+			ExpressionInOCL expressionInOCL = getExpressionInOCL(operationContext, constraint);
+			if (expressionInOCL != null) {
+				return expressionInOCL;
 			}
 		}
 		String message = NLS.bind(OCLMessages.MissingBodyForInvocationDelegate_ERROR_, operation);

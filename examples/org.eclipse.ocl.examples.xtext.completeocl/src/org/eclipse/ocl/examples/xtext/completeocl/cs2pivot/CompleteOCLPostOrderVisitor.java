@@ -23,7 +23,7 @@ import java.util.Map;
 
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Environment;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.NamedElement;
@@ -71,7 +71,7 @@ public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLPostOrderVis
 			ExpSpecificationCS csSpecification = (ExpSpecificationCS) csElement.getSpecification();
 			ExpCS csExpression = csSpecification.getOwnedExpression();
 			if (csExpression != null) {
-				ExpressionInOcl pivotSpecification = PivotUtil.getPivot(ExpressionInOcl.class, csSpecification);
+				ExpressionInOCL pivotSpecification = PivotUtil.getPivot(ExpressionInOCL.class, csSpecification);
 				pivotConstraint.setSpecification(pivotSpecification);
 				String selfVariableName = Environment.SELF_VARIABLE_NAME;
 				ContextDeclCS contextDecl = csElement.getContextDecl();
@@ -130,7 +130,7 @@ public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLPostOrderVis
 		public BasicContinuation<?> execute() {
 			Feature contextFeature = PivotUtil.getPivot(Feature.class, csElement.getFeature());
 			ExpSpecificationCS csSpecification = (ExpSpecificationCS) csElement.getSpecification();
-			ExpressionInOcl pivotSpecification = PivotUtil.getPivot(ExpressionInOcl.class, csSpecification);
+			ExpressionInOCL pivotSpecification = PivotUtil.getPivot(ExpressionInOCL.class, csSpecification);
 			Constraint pivotConstraint = PivotUtil.getPivot(Constraint.class, csElement);
 			pivotConstraint.setSpecification(pivotSpecification);
 

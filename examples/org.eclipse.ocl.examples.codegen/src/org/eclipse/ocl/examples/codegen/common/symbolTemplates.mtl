@@ -21,59 +21,59 @@
 [import org::eclipse::ocl::examples::codegen::common::nameQueries/]
 
 [**
- * The symbolName template provides a semi-readable name for use by any AST node that is unique within a given ExpressionInOcl.
+ * The symbolName template provides a semi-readable name for use by any AST node that is unique within a given ExpressionInOCL.
  **/]
 
-[template public symbolName(ast : BooleanLiteralExp, expInOcl : ExpressionInOcl)]
+[template public symbolName(ast : BooleanLiteralExp, expInOcl : ExpressionInOCL)]
 [ast.defineSymbolName(if ast.booleanSymbol then 'True' else 'False' endif)/][/template]
 
-[template public symbolName(ast : Element, expInOcl : ExpressionInOcl)]
+[template public symbolName(ast : Element, expInOcl : ExpressionInOCL)]
 A_[ast.getSymbolName()/][/template]
 
-[template public symbolName(ast : IntegerLiteralExp, expInOcl : ExpressionInOcl)]
+[template public symbolName(ast : IntegerLiteralExp, expInOcl : ExpressionInOCL)]
 [ast.defineSymbolName('I_' + ast.asIntegerStringOrNull())/][/template]
 
-[template public symbolName(ast : InvalidLiteralExp, expInOcl : ExpressionInOcl)]
+[template public symbolName(ast : InvalidLiteralExp, expInOcl : ExpressionInOCL)]
 [ast.defineSymbolName('Invalid')/][/template]
 
-[template public symbolName(ast : NullLiteralExp, expInOcl : ExpressionInOcl)]
+[template public symbolName(ast : NullLiteralExp, expInOcl : ExpressionInOCL)]
 [ast.defineSymbolName('Null')/][/template]
 
-[template public symbolName(ast : Operation, expInOcl : ExpressionInOcl)]
+[template public symbolName(ast : Operation, expInOcl : ExpressionInOCL)]
 O_[expInOcl.getUniqueText(ast)/][/template]
 
-[template public symbolName(ast : Property, expInOcl : ExpressionInOcl)]
+[template public symbolName(ast : Property, expInOcl : ExpressionInOCL)]
 [if ast.eContainer().oclIsKindOf(TupleType)]
 L_[expInOcl.getUniqueText(ast)/][else]
 P_[expInOcl.getUniqueText(ast)/][/if][/template]
 
-[template public symbolName(ast : RealLiteralExp, expInOcl : ExpressionInOcl)]
+[template public symbolName(ast : RealLiteralExp, expInOcl : ExpressionInOCL)]
 R_[ast.asRealStringOrNull().replaceAll('\\.', '\\_').replaceAll('\\-', '\\_')/][/template]
 
-[template public symbolName(ast : StringLiteralExp, expInOcl : ExpressionInOcl)]
+[template public symbolName(ast : StringLiteralExp, expInOcl : ExpressionInOCL)]
 S_[expInOcl.getUniqueText(ast.stringSymbol)/][/template]
 
-[template public symbolName(ast : TupleLiteralPart, expInOcl : ExpressionInOcl)]
+[template public symbolName(ast : TupleLiteralPart, expInOcl : ExpressionInOCL)]
 L_[expInOcl.getUniqueText(ast)/][/template]
 
-[template public symbolName(ast : TupleType, expInOcl : ExpressionInOcl)]
+[template public symbolName(ast : TupleType, expInOcl : ExpressionInOCL)]
 U_[expInOcl.getUniqueText(ast)/][/template]
 
-[template public symbolName(ast : Type, expInOcl : ExpressionInOcl)]
+[template public symbolName(ast : Type, expInOcl : ExpressionInOCL)]
 T_[expInOcl.getUniqueText(ast)/][/template]
 
-[template public symbolName(ast : TypeExp, expInOcl : ExpressionInOcl)]
+[template public symbolName(ast : TypeExp, expInOcl : ExpressionInOCL)]
 [ast.type.symbolName(expInOcl)/][/template]
 
-[template public symbolName(ast : Variable, expInOcl : ExpressionInOcl)]
-[if ast.eContainer().oclIsKindOf(ExpressionInOcl)]
+[template public symbolName(ast : Variable, expInOcl : ExpressionInOCL)]
+[if ast.eContainer().oclIsKindOf(ExpressionInOCL)]
 [ast.name/][else]
 V_[expInOcl.getUniqueText(ast)/][/if][/template]
 
-[template public symbolName(ast : VariableExp, expInOcl : ExpressionInOcl)]
+[template public symbolName(ast : VariableExp, expInOcl : ExpressionInOCL)]
 [ast.referredVariable.symbolName(expInOcl)/][/template]
 
-[template public symbolName(ast : UnlimitedNaturalLiteralExp, expInOcl : ExpressionInOcl)]
+[template public symbolName(ast : UnlimitedNaturalLiteralExp, expInOcl : ExpressionInOCL)]
 [let value : String = ast.asIntegerStringOrNull()]
 [if (value = null)]
 [ast.defineSymbolName('Unlimited')/][else]

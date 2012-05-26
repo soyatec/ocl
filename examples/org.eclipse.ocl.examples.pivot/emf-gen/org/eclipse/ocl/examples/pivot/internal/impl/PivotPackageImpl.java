@@ -57,7 +57,7 @@ import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
 import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.FeatureCallExp;
 import org.eclipse.ocl.examples.pivot.IfExp;
@@ -269,14 +269,14 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass enumerationEClass = null;
+	private EClass expressionInOCLEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass expressionInOclEClass = null;
+	private EClass enumerationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1444,6 +1444,66 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getExpressionInOCL()
+	{
+		return expressionInOCLEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExpressionInOCL_BodyExpression()
+	{
+		return (EReference)expressionInOCLEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExpressionInOCL_ContextVariable()
+	{
+		return (EReference)expressionInOCLEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExpressionInOCL_ResultVariable()
+	{
+		return (EReference)expressionInOCLEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExpressionInOCL_ParameterVariable()
+	{
+		return (EReference)expressionInOCLEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExpressionInOCL_MessageExpression()
+	{
+		return (EReference)expressionInOCLEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEnumeration() {
 		return enumerationEClass;
 	}
@@ -1455,61 +1515,6 @@ public class PivotPackageImpl
 	 */
 	public EReference getEnumeration_OwnedLiteral() {
 		return (EReference)enumerationEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getExpressionInOcl() {
-		return expressionInOclEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getExpressionInOcl_BodyExpression() {
-		return (EReference)expressionInOclEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getExpressionInOcl_ContextVariable() {
-		return (EReference)expressionInOclEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getExpressionInOcl_ResultVariable() {
-		return (EReference)expressionInOclEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getExpressionInOcl_ParameterVariable() {
-		return (EReference)expressionInOclEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getExpressionInOcl_MessageExpression()
-	{
-		return (EReference)expressionInOclEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -4297,12 +4302,12 @@ public class PivotPackageImpl
 		createEReference(enumerationLiteralEClass, ENUMERATION_LITERAL__ENUMERATION);
 		createEAttribute(enumerationLiteralEClass, ENUMERATION_LITERAL__VALUE);
 
-		expressionInOclEClass = createEClass(EXPRESSION_IN_OCL);
-		createEReference(expressionInOclEClass, EXPRESSION_IN_OCL__BODY_EXPRESSION);
-		createEReference(expressionInOclEClass, EXPRESSION_IN_OCL__CONTEXT_VARIABLE);
-		createEReference(expressionInOclEClass, EXPRESSION_IN_OCL__RESULT_VARIABLE);
-		createEReference(expressionInOclEClass, EXPRESSION_IN_OCL__PARAMETER_VARIABLE);
-		createEReference(expressionInOclEClass, EXPRESSION_IN_OCL__MESSAGE_EXPRESSION);
+		expressionInOCLEClass = createEClass(EXPRESSION_IN_OCL);
+		createEReference(expressionInOCLEClass, EXPRESSION_IN_OCL__BODY_EXPRESSION);
+		createEReference(expressionInOCLEClass, EXPRESSION_IN_OCL__CONTEXT_VARIABLE);
+		createEReference(expressionInOCLEClass, EXPRESSION_IN_OCL__RESULT_VARIABLE);
+		createEReference(expressionInOCLEClass, EXPRESSION_IN_OCL__PARAMETER_VARIABLE);
+		createEReference(expressionInOCLEClass, EXPRESSION_IN_OCL__MESSAGE_EXPRESSION);
 
 		featureEClass = createEClass(FEATURE);
 		createEAttribute(featureEClass, FEATURE__IMPLEMENTATION_CLASS);
@@ -4700,7 +4705,7 @@ public class PivotPackageImpl
 		enumLiteralExpEClass.getESuperTypes().add(this.getLiteralExp());
 		enumerationEClass.getESuperTypes().add(this.getDataType());
 		enumerationLiteralEClass.getESuperTypes().add(this.getNamedElement());
-		expressionInOclEClass.getESuperTypes().add(this.getOpaqueExpression());
+		expressionInOCLEClass.getESuperTypes().add(this.getOpaqueExpression());
 		featureEClass.getESuperTypes().add(this.getTypedMultiplicityElement());
 		featureCallExpEClass.getESuperTypes().add(this.getCallExp());
 		ifExpEClass.getESuperTypes().add(this.getOclExpression());
@@ -4962,12 +4967,12 @@ public class PivotPackageImpl
 		initEReference(getEnumerationLiteral_Enumeration(), this.getEnumeration(), this.getEnumeration_OwnedLiteral(), "enumeration", null, 0, 1, EnumerationLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 		initEAttribute(getEnumerationLiteral_Value(), this.getInteger(), "value", "0", 0, 1, EnumerationLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
-		initEClass(expressionInOclEClass, ExpressionInOcl.class, "ExpressionInOcl", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEReference(getExpressionInOcl_BodyExpression(), this.getOclExpression(), null, "bodyExpression", null, 1, 1, ExpressionInOcl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
-		initEReference(getExpressionInOcl_ContextVariable(), this.getVariable(), null, "contextVariable", null, 0, 1, ExpressionInOcl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
-		initEReference(getExpressionInOcl_ResultVariable(), this.getVariable(), null, "resultVariable", null, 0, 1, ExpressionInOcl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
-		initEReference(getExpressionInOcl_ParameterVariable(), this.getVariable(), null, "parameterVariable", null, 0, -1, ExpressionInOcl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEReference(getExpressionInOcl_MessageExpression(), this.getOclExpression(), null, "messageExpression", null, 0, 1, ExpressionInOcl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEClass(expressionInOCLEClass, ExpressionInOCL.class, "ExpressionInOCL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getExpressionInOCL_BodyExpression(), this.getOclExpression(), null, "bodyExpression", null, 1, 1, ExpressionInOCL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEReference(getExpressionInOCL_ContextVariable(), this.getVariable(), null, "contextVariable", null, 0, 1, ExpressionInOCL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEReference(getExpressionInOCL_ResultVariable(), this.getVariable(), null, "resultVariable", null, 0, 1, ExpressionInOCL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEReference(getExpressionInOCL_ParameterVariable(), this.getVariable(), null, "parameterVariable", null, 0, -1, ExpressionInOCL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getExpressionInOCL_MessageExpression(), this.getOclExpression(), null, "messageExpression", null, 0, 1, ExpressionInOCL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(featureEClass, Feature.class, "Feature", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(getFeature_ImplementationClass(), this.getString(), "implementationClass", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
@@ -5422,7 +5427,7 @@ public class PivotPackageImpl
 		initEAttribute(getOpaqueExpression_Body(), this.getString(), "body", null, 0, -1, OpaqueExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEAttribute(getOpaqueExpression_Language(), this.getString(), "language", null, 0, -1, OpaqueExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEAttribute(getOpaqueExpression_Message(), this.getString(), "message", null, 0, -1, OpaqueExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEReference(getOpaqueExpression_ValueExpression(), this.getExpressionInOcl(), null, "valueExpression", null, 0, 1, OpaqueExpression.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEReference(getOpaqueExpression_ValueExpression(), this.getExpressionInOCL(), null, "valueExpression", null, 0, 1, OpaqueExpression.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getOperation_RaisedException(), this.getType(), null, "raisedException", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$

@@ -46,7 +46,7 @@ import org.eclipse.ocl.common.OCLConstants;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OclExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
@@ -171,8 +171,8 @@ public class Pivot2Ecore extends AbstractConversion
 		Namespace namespace = PivotUtil.getNamespace(specification);
 		PrettyPrintOptions.Global options = PrettyPrinter.createOptions(namespace);
 		options.setBaseURI(ecoreURI);
-		if ((exprString == null) && (specification instanceof ExpressionInOcl)) {
-			exprString = PrettyPrinter.print(((ExpressionInOcl)specification).getBodyExpression(), options);
+		if ((exprString == null) && (specification instanceof ExpressionInOCL)) {
+			exprString = PrettyPrinter.print(((ExpressionInOCL)specification).getBodyExpression(), options);
 		}
 		if (exprString == null) {
 			return false;
@@ -193,8 +193,8 @@ public class Pivot2Ecore extends AbstractConversion
 			else {
 				oclAnnotation.getDetails().put(name, exprString);
 				String messageString = PivotUtil.getMessage((OpaqueExpression) specification);
-				if ((messageString == null) && (specification instanceof ExpressionInOcl)) {
-					OclExpression messageExpression = ((ExpressionInOcl)specification).getMessageExpression();
+				if ((messageString == null) && (specification instanceof ExpressionInOCL)) {
+					OclExpression messageExpression = ((ExpressionInOCL)specification).getMessageExpression();
 					if (messageExpression != null) {
 						messageString = PrettyPrinter.print(messageExpression, options);
 					}

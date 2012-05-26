@@ -19,7 +19,7 @@
 package org.eclipse.ocl.examples.pivot.helper;
 
 import org.eclipse.ocl.examples.pivot.Environment;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OclExpression;
 import org.eclipse.ocl.examples.pivot.util.PivotPlugin;
 
@@ -109,8 +109,8 @@ public class HelperUtil {
 		
 		Object result = element;
 
-/*		if (expr.eContainer() instanceof ExpressionInOcl) {
-			ExpressionInOcl specification = (ExpressionInOcl) expr.eContainer();
+/*		if (expr.eContainer() instanceof ExpressionInOCL) {
+			ExpressionInOCL specification = (ExpressionInOCL) expr.eContainer();
 			
 			Variable contextVariable = specification.getContextVariable();
 			if (contextVariable != null) {
@@ -132,7 +132,7 @@ public class HelperUtil {
 		return result;
 	}
 	public static
-	Object getConstraintContext(Environment env, Object element, ExpressionInOcl expr) {		
+	Object getConstraintContext(Environment env, Object element, ExpressionInOCL expr) {		
 		throw new UnsupportedOperationException();
 /*		Object result = element;
 		Variable contextVariable = expr.getContextVariable();

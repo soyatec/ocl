@@ -43,7 +43,7 @@ import org.eclipse.ocl.examples.pivot.Detail;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.IfExp;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
@@ -516,12 +516,12 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		return ele.getName();
 	}
 
-	protected String image(ExpressionInOcl ele) {
+	protected String image(ExpressionInOCL ele) {
 		return "/org.eclipse.ocl.edit/icons/full/obj16/ExpressionInOCL.gif";
 	}
 
-	protected String text(ExpressionInOcl ele) {
-		return "<ExpressionInOcl>";
+	protected String text(ExpressionInOCL ele) {
+		return "<ExpressionInOCL>";
 	}
 
 	protected String image(IfExp ele) {

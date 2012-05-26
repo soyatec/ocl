@@ -21,7 +21,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -62,7 +62,7 @@ public class ContextCSAttribution extends AbstractRootCSAttribution
 		ContextCS targetElement = (ContextCS)target;
 		environmentView.addFilter(NoImplicitProperties.INSTANCE);
 		try {
-			ExpressionInOcl pivot = PivotUtil.getPivot(ExpressionInOcl.class, targetElement);
+			ExpressionInOCL pivot = PivotUtil.getPivot(ExpressionInOCL.class, targetElement);
 			if ((pivot != null) && (pivot.getContextVariable().getType() != null)) {
 				Variable resultVariable = pivot.getResultVariable();
 				if (resultVariable != null) {

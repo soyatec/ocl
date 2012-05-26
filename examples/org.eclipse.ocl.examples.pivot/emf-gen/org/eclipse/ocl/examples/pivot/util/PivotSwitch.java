@@ -43,7 +43,7 @@ import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
 import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.FeatureCallExp;
 import org.eclipse.ocl.examples.pivot.IfExp;
@@ -512,16 +512,16 @@ public class PivotSwitch<T> extends Switch<T> {
 			}
 			case PivotPackage.EXPRESSION_IN_OCL:
 			{
-				ExpressionInOcl expressionInOcl = (ExpressionInOcl)theEObject;
-				T result = caseExpressionInOcl(expressionInOcl);
-				if (result == null) result = caseOpaqueExpression(expressionInOcl);
-				if (result == null) result = caseValueSpecification(expressionInOcl);
-				if (result == null) result = caseTypedElement(expressionInOcl);
-				if (result == null) result = caseParameterableElement(expressionInOcl);
-				if (result == null) result = caseNamedElement(expressionInOcl);
-				if (result == null) result = caseElement(expressionInOcl);
-				if (result == null) result = caseNameable(expressionInOcl);
-				if (result == null) result = caseVisitable(expressionInOcl);
+				ExpressionInOCL expressionInOCL = (ExpressionInOCL)theEObject;
+				T result = caseExpressionInOCL(expressionInOCL);
+				if (result == null) result = caseOpaqueExpression(expressionInOCL);
+				if (result == null) result = caseValueSpecification(expressionInOCL);
+				if (result == null) result = caseTypedElement(expressionInOCL);
+				if (result == null) result = caseParameterableElement(expressionInOCL);
+				if (result == null) result = caseNamedElement(expressionInOCL);
+				if (result == null) result = caseElement(expressionInOCL);
+				if (result == null) result = caseNameable(expressionInOCL);
+				if (result == null) result = caseVisitable(expressionInOCL);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1721,6 +1721,22 @@ public class PivotSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Expression In OCL</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Expression In OCL</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExpressionInOCL(ExpressionInOCL object)
+	{
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Enumeration</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1732,21 +1748,6 @@ public class PivotSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseEnumeration(Enumeration object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Expression In Ocl</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Expression In Ocl</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseExpressionInOcl(ExpressionInOcl object) {
 		return null;
 	}
 

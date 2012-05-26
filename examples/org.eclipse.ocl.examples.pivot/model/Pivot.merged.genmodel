@@ -685,26 +685,26 @@
       </genFeatures>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass">
-      <ecoreClass href="Pivot.ecore#//ExpressionInOcl"/>
+      <ecoreClass href="Pivot.ecore#//ExpressionInOCL"/>
       <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
           createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//ExpressionInOcl/bodyExpression"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//ExpressionInOCL/bodyExpression"/>
       </genFeatures>
       <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
           createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//ExpressionInOcl/contextVariable"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//ExpressionInOCL/contextVariable"/>
       </genFeatures>
       <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
           createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//ExpressionInOcl/resultVariable"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//ExpressionInOCL/resultVariable"/>
       </genFeatures>
       <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
           createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//ExpressionInOcl/parameterVariable"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//ExpressionInOCL/parameterVariable"/>
       </genFeatures>
-      <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
-          propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//ExpressionInOcl/messageExpression"/>
+      <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
+          createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//ExpressionInOCL/messageExpression"/>
       </genFeatures>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass">

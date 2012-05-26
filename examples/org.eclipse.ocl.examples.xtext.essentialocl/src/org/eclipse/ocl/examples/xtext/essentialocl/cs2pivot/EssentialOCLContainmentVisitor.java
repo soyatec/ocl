@@ -28,7 +28,7 @@ import org.eclipse.ocl.examples.pivot.CollectionLiteralPart;
 import org.eclipse.ocl.examples.pivot.CollectionRange;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.IfExp;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
@@ -151,7 +151,7 @@ public class EssentialOCLContainmentVisitor extends AbstractEssentialOCLContainm
 
 	@Override
 	public Continuation<?> visitContextCS(ContextCS csElement) {
-		ExpressionInOcl pivotElement = context.refreshModelElement(ExpressionInOcl.class, PivotPackage.Literals.EXPRESSION_IN_OCL, csElement);
+		ExpressionInOCL pivotElement = context.refreshModelElement(ExpressionInOCL.class, PivotPackage.Literals.EXPRESSION_IN_OCL, csElement);
 		pivotElement.setBodyExpression(null);
 		pivotElement.setMessageExpression(null);
 		Resource resource = csElement.eResource();
@@ -171,7 +171,7 @@ public class EssentialOCLContainmentVisitor extends AbstractEssentialOCLContainm
 
 	@Override
 	public Continuation<?> visitExpSpecificationCS(ExpSpecificationCS csElement) {
-		ExpressionInOcl pivotElement = context.refreshModelElement(ExpressionInOcl.class, PivotPackage.Literals.EXPRESSION_IN_OCL, csElement);
+		ExpressionInOCL pivotElement = context.refreshModelElement(ExpressionInOCL.class, PivotPackage.Literals.EXPRESSION_IN_OCL, csElement);
 		pivotElement.getLanguage().add(PivotConstants.OCL_LANGUAGE);
 //		pivotElement.getBody().add(csElement.getExprString());
 		pivotElement.getMessage().add(null);

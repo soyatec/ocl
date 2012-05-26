@@ -161,8 +161,8 @@ public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
 		return delegate.visitEnumerationLiteral(object);
 	}
 
-	public R visitExpressionInOcl(org.eclipse.ocl.examples.pivot.ExpressionInOcl object) {
-		return delegate.visitExpressionInOcl(object);
+	public R visitExpressionInOCL(org.eclipse.ocl.examples.pivot.ExpressionInOCL object) {
+		return delegate.visitExpressionInOCL(object);
 	}
 
 	public R visitFeature(org.eclipse.ocl.examples.pivot.Feature object) {

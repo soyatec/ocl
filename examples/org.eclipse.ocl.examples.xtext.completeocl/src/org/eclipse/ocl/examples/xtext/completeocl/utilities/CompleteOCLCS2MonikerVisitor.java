@@ -108,7 +108,7 @@ public class CompleteOCLCS2MonikerVisitor
 	public Boolean visitContextSpecificationCS(ContextSpecificationCS object) {
 		if (object.eContainer() instanceof DefCS) {
 			context.appendParentCS(object, MONIKER_SCOPE_SEPARATOR);
-			context.append(UMLReflection.BODY);		// Emulate the CS-less Constraint in the pivot Feature-Constraint-ExpressionInOcl hierarchy 
+			context.append(UMLReflection.BODY);		// Emulate the CS-less Constraint in the pivot Feature-Constraint-ExpressionInOCL hierarchy 
 			context.append(MONIKER_OPERATOR_SEPARATOR);
 			context.append(MONIKER_SCOPE_SEPARATOR);
 			context.append(PivotPackage.Literals.CONSTRAINT__SPECIFICATION.getName());

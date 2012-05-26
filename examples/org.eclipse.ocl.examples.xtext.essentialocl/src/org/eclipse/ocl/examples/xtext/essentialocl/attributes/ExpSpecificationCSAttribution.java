@@ -17,7 +17,7 @@
 package org.eclipse.ocl.examples.xtext.essentialocl.attributes;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
@@ -33,7 +33,7 @@ public class ExpSpecificationCSAttribution extends AbstractAttribution
 	@Override
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
 		ExpSpecificationCS targetElement = (ExpSpecificationCS)target;
-		ExpressionInOcl pivot = PivotUtil.getPivot(ExpressionInOcl.class, targetElement);
+		ExpressionInOCL pivot = PivotUtil.getPivot(ExpressionInOCL.class, targetElement);
 		if (pivot != null) {
 			Variable resultVariable = pivot.getResultVariable();
 			if (resultVariable != null) {

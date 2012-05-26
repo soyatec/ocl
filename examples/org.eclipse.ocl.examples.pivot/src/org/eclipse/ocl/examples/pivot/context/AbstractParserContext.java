@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OclExpression;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
@@ -63,7 +63,7 @@ public abstract class AbstractParserContext /*extends AdapterImpl*/ implements P
 		return null;
 	}
 
-	public ExpressionInOcl getExpression(BaseResource resource) throws ParserException {
+	public ExpressionInOCL getExpression(BaseResource resource) throws ParserException {
 		List<EObject> contents = resource.getContents();
 		int size = contents.size();
 		if (size == 0) {
@@ -75,8 +75,8 @@ public abstract class AbstractParserContext /*extends AdapterImpl*/ implements P
 		EObject csObject = contents.get(0);
 		if (csObject instanceof Pivotable) {
 			Element pivotElement = ((Pivotable)csObject).getPivot();
-			if (pivotElement instanceof ExpressionInOcl) {
-				return (ExpressionInOcl) pivotElement;
+			if (pivotElement instanceof ExpressionInOCL) {
+				return (ExpressionInOCL) pivotElement;
 			}
 		}
 		throw new ParserException("Non-expression ignored");
@@ -90,13 +90,13 @@ public abstract class AbstractParserContext /*extends AdapterImpl*/ implements P
 		return uri;
 	}
 
-	public void initialize(Base2PivotConversion conversion, ExpressionInOcl expression) {
+	public void initialize(Base2PivotConversion conversion, ExpressionInOCL expression) {
 		List<String> language = expression.getLanguage();
 		language.clear();
 		language.add(PivotConstants.OCL_LANGUAGE);
 	}
 
-	public ExpressionInOcl parse(String expression) throws ParserException {
+	public ExpressionInOCL parse(String expression) throws ParserException {
 		BaseResource resource = null;
 		try {
 			resource = createBaseResource(expression);
@@ -104,7 +104,7 @@ public abstract class AbstractParserContext /*extends AdapterImpl*/ implements P
 			return getExpression(resource);
 		} catch (IOException e) {
 //				throw new ParserException("Failed to load expression", e);
-			ExpressionInOcl specification = PivotFactory.eINSTANCE.createExpressionInOcl();
+			ExpressionInOCL specification = PivotFactory.eINSTANCE.createExpressionInOCL();
 			OclExpression invalidValueBody = metaModelManager.createInvalidExpression();
 			specification.setBodyExpression(invalidValueBody);
 			return specification;

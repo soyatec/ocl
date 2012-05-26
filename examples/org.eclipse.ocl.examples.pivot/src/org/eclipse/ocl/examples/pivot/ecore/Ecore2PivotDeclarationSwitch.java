@@ -147,7 +147,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 				if (eAnnotation != null) {
 					value = eAnnotation.getDetails().get("body");
 				}
-				OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOcl
+				OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOCL
 				specification.getBody().add(value);
 				specification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
 				constraint.setSpecification(specification);
@@ -328,7 +328,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 				}
 				if (constraint != null) {
 					String value = entry.getValue();
-					OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOcl
+					OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOCL
 					specification.getBody().add(value);
 					specification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
 					constraint.setSpecification(specification);
@@ -445,7 +445,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 					constraint.setStereotype(UMLReflection.INVARIANT);
 					constraint.setName(constraintName);
 					String value = entry.getValue();
-					OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOcl
+					OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOCL
 					specification.getBody().add(value);
 					specification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
 					String message = oclAnnotationDetails.get(constraintName + PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX);
@@ -567,7 +567,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 				}
 				if (constraint != null) {
 					String value = entry.getValue();
-					OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOcl
+					OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOCL
 					specification.getBody().add(value);
 					specification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
 					constraint.setSpecification(specification);

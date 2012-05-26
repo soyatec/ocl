@@ -61,7 +61,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.validation.DomainSubstitutionLabelProvider;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
@@ -890,12 +890,12 @@ public class DelegatesTest extends PivotTestSuite
 	 * @throws ParserException 
 	 */
 	public void test_operationDefinedInStdlibBodyRemainsNull() throws ParserException {
-		ExpressionInOcl expr = helper.createQuery("'abc'.oclAsType(String)");
+		ExpressionInOCL expr = helper.createQuery("'abc'.oclAsType(String)");
 		OperationCallExp oce = (OperationCallExp) expr.getBodyExpression();
 		Operation o = oce.getReferredOperation();
 		try {
 			@SuppressWarnings("unused")
-			ExpressionInOcl body = InvocationBehavior.INSTANCE.getExpressionInOcl(metaModelManager, o);
+			ExpressionInOCL body = InvocationBehavior.INSTANCE.getExpressionInOCL(metaModelManager, o);
 			fail("Expected to catch OCLDelegateException");
 		}
 		catch (OCLDelegateException e) {		
@@ -903,7 +903,7 @@ public class DelegatesTest extends PivotTestSuite
 		// and again, now reading from cache
 		try {
 			@SuppressWarnings("unused")
-			ExpressionInOcl bodyStillNull = InvocationBehavior.INSTANCE.getExpressionInOcl(metaModelManager, o);
+			ExpressionInOCL bodyStillNull = InvocationBehavior.INSTANCE.getExpressionInOCL(metaModelManager, o);
 			fail("Expected to catch OCLDelegateException");
 		}
 		catch (OCLDelegateException e) {		

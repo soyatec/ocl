@@ -29,7 +29,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainException;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.OclExpression;
 import org.eclipse.ocl.examples.pivot.ParserException;
@@ -52,7 +52,7 @@ public class OCLQueryDelegate implements QueryDelegate
 	protected OCLDelegateDomain delegateDomain;
 	protected final EInvocationContext parserContext;
 	protected final String expression;
-	private ExpressionInOcl specification = null;
+	private ExpressionInOCL specification = null;
 
 	/**
 	 * Initializes me with my domain, context, variables, and expression.

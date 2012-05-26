@@ -17,7 +17,7 @@ package org.eclipse.ocl.examples.pivot.context;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.examples.pivot.Environment;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
@@ -43,7 +43,7 @@ public class EClassContext extends AbstractParserContext
 	}
 
 	@Override
-	public void initialize(Base2PivotConversion conversion, ExpressionInOcl expression) {
+	public void initialize(Base2PivotConversion conversion, ExpressionInOCL expression) {
 		super.initialize(conversion, expression);
 		conversion.setContextVariable(expression, Environment.SELF_VARIABLE_NAME, getClassContext());
 	}

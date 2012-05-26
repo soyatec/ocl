@@ -1220,7 +1220,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		//	Put all orphan root pivot elements in their resources.
 		//
 		for (Resource csResource : csResources) {
-			installRootContents(csResource);		// FIXME ExpressionInOcl very late
+			installRootContents(csResource);		// FIXME ExpressionInOCL very late
 		}
 		//
 		//	Resolve UnspecifiedTypes

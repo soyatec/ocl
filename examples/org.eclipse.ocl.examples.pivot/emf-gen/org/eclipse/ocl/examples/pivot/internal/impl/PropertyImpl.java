@@ -991,7 +991,7 @@ public class PropertyImpl
 		          else initialSpecification
 		          endif
 		        in initialiser <> null and
-		          initialiser.oclIsKindOf(ExpressionInOcl) implies
+		          initialiser.oclIsKindOf(ExpressionInOCL) implies
 		          CompatibleBody(initialiser)
 		*/
 		try {

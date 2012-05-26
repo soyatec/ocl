@@ -11,26 +11,24 @@
  *     E.D.Willink - initial API and implementation
  *
  * </copyright>
- *
- * $Id: ExpressionInOclAttribution.java,v 1.3 2011/04/20 19:02:27 ewillink Exp $
  */
 package org.eclipse.ocl.examples.pivot.attributes;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 
-public class ExpressionInOclAttribution extends AbstractAttribution
+public class ExpressionInOCLAttribution extends AbstractAttribution
 {
-	public static final ExpressionInOclAttribution INSTANCE = new ExpressionInOclAttribution();
+	public static final ExpressionInOCLAttribution INSTANCE = new ExpressionInOCLAttribution();
 
 	@Override
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
-		ExpressionInOcl targetExpression = (ExpressionInOcl) target;
+		ExpressionInOCL targetExpression = (ExpressionInOCL) target;
 		Variable contextVariable = targetExpression.getContextVariable();
 		if (contextVariable != null) {
 			environmentView.addNamedElement(contextVariable);

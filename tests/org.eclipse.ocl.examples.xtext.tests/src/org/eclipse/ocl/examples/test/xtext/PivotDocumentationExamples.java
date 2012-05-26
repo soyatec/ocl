@@ -43,7 +43,7 @@ import org.eclipse.emf.examples.extlibrary.Library;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.ParserException;
@@ -97,10 +97,10 @@ public class PivotDocumentationExamples extends XtextTestCase
 		// create an OCL helper object
 		OCLHelper helper = ocl.createOCLHelper(EXTLibraryPackage.Literals.LIBRARY);
 
-		ExpressionInOcl invariant = helper.createInvariant(
+		ExpressionInOCL invariant = helper.createInvariant(
 		    "books->forAll(b1, b2 | b1 <> b2 implies b1.title <> b2.title)");
 		   
-		ExpressionInOcl query = helper.createQuery(
+		ExpressionInOCL query = helper.createQuery(
 		    "books->collect(b : Book | b.category)->asSet()");
 
 		EOperation oper = null;
@@ -115,14 +115,14 @@ public class PivotDocumentationExamples extends XtextTestCase
 		// This operation environment includes variables representing the operation
 		// parameters (in this case, only "source : String") and the operation result
 		helper.setOperationContext(EcorePackage.Literals.ECLASS, oper);
-		ExpressionInOcl body = helper.createPostcondition(
+		ExpressionInOCL body = helper.createPostcondition(
 		    "result = self.eAnnotations->any(ann | ann.source = source)");
 
 		// define a derivation constraint for the EReference::eReferenceType property
 		helper.setPropertyContext(
 		    EcorePackage.Literals.EREFERENCE,
 		    EcorePackage.Literals.EREFERENCE__EREFERENCE_TYPE);
-		ExpressionInOcl derive = helper.createDerivedValueExpression(
+		ExpressionInOCL derive = helper.createDerivedValueExpression(
 		    "self.eType->any(true).oclAsType(EClass)");
 	
 		if ((body == derive) && (invariant == query)) { /* the yellow markers go away */ }
@@ -136,9 +136,9 @@ public class PivotDocumentationExamples extends XtextTestCase
 	public void test_evaluatingConstraintsExample() throws IOException, ParserException {
 		OCL ocl = OCL.newInstance(new PivotEnvironmentFactory());
 		OCLHelper helper = ocl.createOCLHelper(EXTLibraryPackage.Literals.LIBRARY);
-		ExpressionInOcl invariant = helper.createInvariant(
+		ExpressionInOCL invariant = helper.createInvariant(
 		    "books->forAll(b1, b2 | b1 <> b2 implies b1.title <> b2.title)");
-		ExpressionInOcl query = helper.createQuery(
+		ExpressionInOCL query = helper.createQuery(
 		    "books->collect(b : Book | b.category)->asSet()");
 
 		// create a Query to evaluate our query expression
@@ -199,7 +199,7 @@ public class PivotDocumentationExamples extends XtextTestCase
 		ResourceSet externalResourceSet = ocl.getMetaModelManager().getExternalResourceSet();
 		BaseResource csResource = (BaseResource) externalResourceSet.getResource(uri, true);
 		Resource pivotResource = ocl.cs2pivot(csResource);
-		Map<String, ExpressionInOcl> constraintMap = new HashMap<String, ExpressionInOcl>();
+		Map<String, ExpressionInOCL> constraintMap = new HashMap<String, ExpressionInOCL>();
 
 		// parse the contents as an OCL document
 		try {
@@ -213,16 +213,16 @@ public class PivotDocumentationExamples extends XtextTestCase
 					String stereotype = constraint.getStereotype();
 					if (UMLReflection.INVARIANT.equals(stereotype)) {
 				        ValueSpecification specification = constraint.getSpecification();
-				        ExpressionInOcl expressionInOcl = null;
-				        if (specification instanceof ExpressionInOcl) {
-							expressionInOcl = (ExpressionInOcl)specification;
+				        ExpressionInOCL expressionInOCL = null;
+				        if (specification instanceof ExpressionInOCL) {
+							expressionInOCL = (ExpressionInOCL)specification;
 						}
 						else if (specification instanceof OpaqueExpression){
 							OpaqueExpression opaqueExpression = (OpaqueExpression)specification;
 							String expression = PivotUtil.getBody(opaqueExpression);
 					        Element constrainedElement = constraint.getConstrainedElement().get(0);
 							OCLHelper helper = ocl.createOCLHelper(constrainedElement);
-							expressionInOcl = helper.createInvariant(expression);
+							expressionInOCL = helper.createInvariant(expression);
 	/*						List<String> languages = opaqueExpression.getLanguage();
 							List<String> bodies = opaqueExpression.getBody();
 							int iMax = Math.min(languages.size(), bodies.size());
@@ -231,11 +231,11 @@ public class PivotDocumentationExamples extends XtextTestCase
 								System.out.printf("    %s: %s%n", languages.get(i), bodies.get(i));
 							} */
 						}
-				        if (expressionInOcl != null) {
+				        if (expressionInOCL != null) {
 							String name = constraint.getName();
 							if (name != null) {
-								constraintMap.put(name, expressionInOcl);
-						        System.out.printf("%s: %s%n", name, expressionInOcl.getBodyExpression());
+								constraintMap.put(name, expressionInOCL);
+						        System.out.printf("%s: %s%n", name, expressionInOCL.getBodyExpression());
 							}
 						}
 					}
@@ -254,7 +254,7 @@ public class PivotDocumentationExamples extends XtextTestCase
 		// use the constraints defined in the OCL document
 
 		// use the getBooks() additional operation to find a book
-		ExpressionInOcl query = helper.createQuery(
+		ExpressionInOCL query = helper.createQuery(
 		    "getBooks('Bleak House')->asSequence()->first()");
 
 		Value bookValue = ocl.evaluate(library, query);
@@ -265,21 +265,4 @@ public class PivotDocumentationExamples extends XtextTestCase
 		boolean isValid = ocl.check(book, constraintMap.get("unique_title"));
 		System.out.printf("Validate book: %b%n", isValid);	
 	}
-	
-/*	private class MyOppositeEndFinder extends DefaultOppositeEndFinder {
-		public MyOppositeEndFinder() {
-			super(EPackage.Registry.INSTANCE);
-		}
-	} */
-	
-	/**
-	 * The following is documented in doc/org.eclipse.ocl.doc/doc/5160-customization.textile
-	 * in section "Customizing Hidden Opposite Lookup and Navigation"
-	 *
-	public void testCustomizingOppositeEndFinder() {
-		OppositeEndFinder oef = new MyOppositeEndFinder();
-		OCL ocl = OCL.newInstance(new EcoreEnvironmentFactoryWithHiddenOpposites(
-			                     EPackage.Registry.INSTANCE, oef));
-		assertSame(oef, ((EcoreEnvironment) ocl.getEnvironment()).getOppositeEndFinder());
-	} */
 }

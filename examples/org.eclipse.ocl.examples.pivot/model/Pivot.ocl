@@ -47,14 +47,14 @@ inv CompatibleInitialiser: isDerived implies
 	let derivedSpecification : ValueSpecification = if derivedConstraint <> null then derivedConstraint.specification else null endif in
 	let initialSpecification : ValueSpecification = if initialConstraint <> null then initialConstraint.specification else null endif in
 	let initialiser: ValueSpecification = if derivedSpecification <> null then derivedSpecification else initialSpecification endif in
-	initialiser <> null and initialiser.oclIsKindOf(ExpressionInOcl) implies CompatibleBody(initialiser)
+	initialiser <> null and initialiser.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(initialiser)
 
 context Operation
 inv CompatibleReturn:
 	let bodyConstraint : Constraint = ownedRule->any(stereotype = 'body') in
 	bodyConstraint <> null implies
 	let bodySpecification : ValueSpecification = bodyConstraint.specification in
-	bodySpecification <> null and bodySpecification.oclIsKindOf(ExpressionInOcl) implies CompatibleBody(bodySpecification)
+	bodySpecification <> null and bodySpecification.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(bodySpecification)
 
 context TypedMultiplicityElement
 def: CompatibleBody(bodySpecification : ValueSpecification) : Boolean =

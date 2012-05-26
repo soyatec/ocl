@@ -16,7 +16,7 @@ package org.eclipse.ocl.examples.pivot.context;
 
 import java.io.IOException;
 
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -27,8 +27,8 @@ import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
  * 
  * A derived context is constructed with the relevant context, then createBaseResource
  * creates a Concrete Syntax resource for a Concrete Syntax expression string. Then parse creates
- * a corresponding Abstract Syntax ExpressionInOcl. initialize is invoked during the parse to
- * install the derived context into the ExpressionInOcl.
+ * a corresponding Abstract Syntax ExpressionInOCL. initialize is invoked during the parse to
+ * install the derived context into the ExpressionInOCL.
  */
 public interface ParserContext // extends Adapter
 {
@@ -49,11 +49,11 @@ public interface ParserContext // extends Adapter
 	Type getClassContext();
 
 	/**
-	 * Extract an Abstract Syntax ExpressionInOcl fronm a Concrete Syntax resource.
+	 * Extract an Abstract Syntax ExpressionInOCL fronm a Concrete Syntax resource.
 	 * 
 	 * @throws ParserException if parsing fails
 	 */
-	ExpressionInOcl getExpression(BaseResource resource) throws ParserException;
+	ExpressionInOCL getExpression(BaseResource resource) throws ParserException;
 
 	/**
 	 * Returbn the MetaModelManager in use.
@@ -61,15 +61,15 @@ public interface ParserContext // extends Adapter
 	MetaModelManager getMetaModelManager();
 
 	/**
-	 * Callback to initialize the ExpressionInOcl with the derived context such as
+	 * Callback to initialize the ExpressionInOCL with the derived context such as
 	 * a contextvariable for the self type, parameter and result variables.
 	 */
-	void initialize(Base2PivotConversion conversion, ExpressionInOcl expression);
+	void initialize(Base2PivotConversion conversion, ExpressionInOCL expression);
 	
 	/**
-	 * Create an Abstract Syntax ExpressionInOcl containing the parsed expression.
+	 * Create an Abstract Syntax ExpressionInOCL containing the parsed expression.
 	 * 
 	 * @throws ParserException if parsing fails
 	 */
-	ExpressionInOcl parse(String expression) throws ParserException;
+	ExpressionInOCL parse(String expression) throws ParserException;
 }

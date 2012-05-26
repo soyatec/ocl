@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.domain.values.StringValue;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -172,7 +172,7 @@ public class MarkupToHTML extends MarkupSwitch<HTMLBuffer>
 		s.startFontName("pre");
 		String oclString = MarkupToString.toString(object.getElements());		
 		try {
-			ExpressionInOcl query = createQuery(oclString);
+			ExpressionInOCL query = createQuery(oclString);
 			String text = PrettyPrinter.print(query);
 			s.append(text);
 		} catch (ParserException e) {
@@ -188,7 +188,7 @@ public class MarkupToHTML extends MarkupSwitch<HTMLBuffer>
 		String oclString = MarkupToString.toString(object.getElements());		
 		try {
 			OCL ocl = getOCL();
-			ExpressionInOcl query = createQuery(oclString);
+			ExpressionInOCL query = createQuery(oclString);
 			Value value = ocl.evaluate(context, query);
 			if (value instanceof StringValue) {
 				s.append(((StringValue)value).stringValue());
@@ -207,7 +207,7 @@ public class MarkupToHTML extends MarkupSwitch<HTMLBuffer>
 		s.startFontName("tt");
 		String oclString = MarkupToString.toString(object.getElements());		
 		try {
-			ExpressionInOcl query = createQuery(oclString);
+			ExpressionInOCL query = createQuery(oclString);
 			PrettyPrintOptions.Global options = PrettyPrinter.createOptions(null);
 			options.setLinelength(Integer.MAX_VALUE);
 			String text = PrettyPrinter.print(query, options);
@@ -243,7 +243,7 @@ public class MarkupToHTML extends MarkupSwitch<HTMLBuffer>
 		return s;
 	}
 
-	protected ExpressionInOcl createQuery(String oclString) throws ParserException {
+	protected ExpressionInOCL createQuery(String oclString) throws ParserException {
 		OCL ocl = getOCL();
 		OCLHelper helper = ocl.createOCLHelper();
 		if (context instanceof EObject) {

@@ -67,14 +67,14 @@ package [genPackage.getQualifiedBodiesPackageName()/];
 public class [className/]
 {
 [for (pConstraint : Constraint | pType.ownedRule->sortedBy(name)) before ('\n') separator ('\n')]
-[let expInOcl : ExpressionInOcl = pConstraint.specification.getExpressionInOcl(pType)]
+[let expInOcl : ExpressionInOCL = pConstraint.specification.getExpressionInOCL(pType)]
 	[expInOcl.generateInvariant(genPackage, pPackage, pType, pConstraint)/]
 [/let]
 [/for]
 [if (pType.oclIsKindOf(Class))]
 [for (pOperation : Operation | pType.oclAsType(Class).getOperations()->sortedBy(getMoniker())) before ('\n') separator ('\n')]
 [for (pConstraint : Constraint | pOperation.ownedRule) separator ('\n')]
-[let expInOcl : ExpressionInOcl = pConstraint.specification.getExpressionInOcl(pOperation)]
+[let expInOcl : ExpressionInOCL = pConstraint.specification.getExpressionInOCL(pOperation)]
 [if (expInOcl.contextVariable->notEmpty())]
 [if (false and pConstraint.stereotype = 'body')]
 	public static [pOperation.type.name/] [pOperation.name/]([pType.name/] self[for (parameter : Parameter | pOperation.ownedParameter)], [parameter.type.name/] [parameter.name/][/for]) {
@@ -97,7 +97,7 @@ public class [className/]
 [/for]
 [for (pProperty : Property | pType.oclAsType(Class).getProperties()->sortedBy(name)) before ('\n') separator ('\n')]
 [for (pConstraint : Constraint | pProperty.ownedRule) separator ('\n')]
-[let expInOcl : ExpressionInOcl = pConstraint.specification.getExpressionInOcl(pProperty)]
+[let expInOcl : ExpressionInOCL = pConstraint.specification.getExpressionInOCL(pProperty)]
 	[expInOcl.generatePropertyConstraint(genPackage, pPackage, pType, pProperty, pConstraint)/]
 [/let]
 [/for]
@@ -107,7 +107,7 @@ public class [className/]
 [/let]
 [/template]
 
-[template public generateInvariant(expInOcl : ExpressionInOcl, genPackage : GenPackage, pPackage : Package, pType : Type, pConstraint : Constraint)]
+[template public generateInvariant(expInOcl : ExpressionInOCL, genPackage : GenPackage, pPackage : Package, pType : Type, pConstraint : Constraint)]
 [let className : String = '_invariant_' + pConstraint.name]
 [let arity : Integer = expInOcl.parameterVariable->size()]
 /** 
@@ -146,7 +146,7 @@ public static class [className/] extends <%Abstract[genPackage.emitOperationArit
 [/if]
 }[/let][/let][/template]
 
-[template public generateOperationConstraint(expInOcl : ExpressionInOcl, genPackage : GenPackage, pPackage : Package, pType : Type, pOperation : Operation, pConstraint : Constraint)]
+[template public generateOperationConstraint(expInOcl : ExpressionInOCL, genPackage : GenPackage, pPackage : Package, pType : Type, pOperation : Operation, pConstraint : Constraint)]
 [let arity : Integer = expInOcl.parameterVariable->size()]
 [let className : String = '_' + pOperation.name + '_' + pConstraint.stereotype + '_' + pConstraint.name]
 /** 
@@ -174,7 +174,7 @@ public static class [className/] extends <%Abstract[genPackage.emitOperationArit
 [/if]
 }[/let][/let][/template]
 
-[template public generatePropertyConstraint(expInOcl : ExpressionInOcl, genPackage : GenPackage, pPackage : Package, pType : Type, pProperty : Property, pConstraint : Constraint)]
+[template public generatePropertyConstraint(expInOcl : ExpressionInOCL, genPackage : GenPackage, pPackage : Package, pType : Type, pProperty : Property, pConstraint : Constraint)]
 [let className : String = '_' + pProperty.name + '_' + pConstraint.stereotype + '_' + pConstraint.name]
 /** 
  * Implementation of the [pType.name/]::[pProperty.name/] '[pConstraint.name/]' <[pConstraint.stereotype/]>.
@@ -198,7 +198,7 @@ public static class [className/] extends <%AbstractProperty%>
 [/if]
 }[/let][/template]
 
-[template public generateErrorMessage(expInOcl : ExpressionInOcl)]
+[template public generateErrorMessage(expInOcl : ExpressionInOCL)]
 /*
 [expInOcl.messageExpression.oclAsType(StringLiteralExp).stringSymbol/]
 */

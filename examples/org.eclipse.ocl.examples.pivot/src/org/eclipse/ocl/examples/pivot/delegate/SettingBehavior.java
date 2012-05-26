@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EStructuralFeature.Internal.SettingDelegate;
 import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.pivot.Constraint;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
@@ -59,21 +59,21 @@ public class SettingBehavior extends AbstractDelegatedBehavior<EStructuralFeatur
 	 * create the relevant parsing environment for a textual definition..
 	 * @throws OCLDelegateException 
 	 */
-	public ExpressionInOcl getExpressionInOcl(MetaModelManager metaModelManager, Property property) throws OCLDelegateException {
+	public ExpressionInOCL getExpressionInOCL(MetaModelManager metaModelManager, Property property) throws OCLDelegateException {
 		Constraint constraint = getConstraintForStereotype(property, UMLReflection.DERIVATION);
 		if (constraint == null) {
 			constraint = getConstraintForStereotype(property, UMLReflection.INITIAL);
 		}
 		if (constraint != null) {
 			ValueSpecification valueSpecification = constraint.getSpecification();
-			if (valueSpecification instanceof ExpressionInOcl) {
-				return (ExpressionInOcl) valueSpecification;
+			if (valueSpecification instanceof ExpressionInOCL) {
+				return (ExpressionInOCL) valueSpecification;
 			}
 			URI uri = metaModelManager.getResourceIdentifier(constraint, "body");
 			ParserContext propertyContext = new PropertyContext(metaModelManager, uri, property);
-			ExpressionInOcl expressionInOcl = getExpressionInOcl(propertyContext, constraint);
-			if (expressionInOcl != null) {
-				return expressionInOcl;
+			ExpressionInOCL expressionInOCL = getExpressionInOCL(propertyContext, constraint);
+			if (expressionInOCL != null) {
+				return expressionInOCL;
 			}
 		}
 		String message = NLS.bind(OCLMessages.MissingDerivationForSettingDelegate_ERROR_, property);

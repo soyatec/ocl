@@ -17,7 +17,7 @@
 
 package org.eclipse.ocl.examples.pivot.tests;
 
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 
@@ -35,7 +35,7 @@ public class PrettyPrinterTest extends PivotSimpleTestSuite
     
 	protected Object assertPrintResults(Object context, String expression) {
 		try {
-			ExpressionInOcl query = helper.createQuery(expression);
+			ExpressionInOCL query = helper.createQuery(expression);
 			String prettyExpression = PrettyPrinter.print(query);
 			assertEquals(expression, prettyExpression);
 		} catch (ParserException e) {
@@ -46,7 +46,7 @@ public class PrettyPrinterTest extends PivotSimpleTestSuite
     
 	protected Object assertPrintResults(Object context, String expression, String expectedExpression) {
 		try {
-			ExpressionInOcl query = helper.createQuery(expression);
+			ExpressionInOCL query = helper.createQuery(expression);
 			String prettyExpression = PrettyPrinter.print(query);
 			assertEquals(expectedExpression, prettyExpression);
 		} catch (ParserException e) {

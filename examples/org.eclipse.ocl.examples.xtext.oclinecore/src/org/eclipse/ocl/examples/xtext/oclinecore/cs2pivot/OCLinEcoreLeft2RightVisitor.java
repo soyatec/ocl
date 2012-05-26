@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Environment;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OclExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -48,7 +48,7 @@ public class OCLinEcoreLeft2RightVisitor extends AbstractOCLinEcoreLeft2RightVis
 		pivotConstraint.setIsCallable(csConstraint.isCallable());
 		ExpCS csExpression = csSpecification.getOwnedExpression();
 		if (csExpression != null) {
-			ExpressionInOcl pivotSpecification = PivotUtil.getPivot(ExpressionInOcl.class, csSpecification);
+			ExpressionInOCL pivotSpecification = PivotUtil.getPivot(ExpressionInOCL.class, csSpecification);
 			pivotConstraint.setSpecification(pivotSpecification);
 			context.setContextVariable(pivotSpecification, Environment.SELF_VARIABLE_NAME, null);
 			EObject eContainer = csConstraint.eContainer();

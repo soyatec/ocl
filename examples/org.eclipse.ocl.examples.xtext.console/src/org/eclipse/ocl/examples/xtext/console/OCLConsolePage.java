@@ -50,7 +50,7 @@ import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.context.EClassContext;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
@@ -221,10 +221,10 @@ public class OCLConsolePage extends Page
 //			}
 //			monitor.worked(2);
 //			monitor.subTask(ConsoleMessages.Progress_AST);
-			ExpressionInOcl expressionInOcl;
+			ExpressionInOCL expressionInOCL;
 			try {
 				PivotUtil.checkResourceErrors(null, resource);
-				expressionInOcl = eClassContext.getExpression(resource);
+				expressionInOCL = eClassContext.getExpression(resource);
 			} catch (ParserException e) {
 				value = new ExceptionValue(valueFactory, ConsoleMessages.Result_ParsingFailure, e);
 				return;
@@ -235,7 +235,7 @@ public class OCLConsolePage extends Page
 			PivotEnvironment environment = envFactory.createEnvironment();
 			PivotEvaluationEnvironment evaluationEnvironment = envFactory.createEvaluationEnvironment();
 			Value contextValue = valueFactory.valueOf(contextObject);
-			evaluationEnvironment.add(expressionInOcl.getContextVariable(), contextValue);
+			evaluationEnvironment.add(expressionInOCL.getContextVariable(), contextValue);
 //			if (modelManager == null) {
 				// let the evaluation environment create one
 				modelManager = evaluationEnvironment.createModelManager(contextObject);
@@ -245,7 +245,7 @@ public class OCLConsolePage extends Page
 			try {
 //				metaModelManager.setMonitor(monitor);
 				EvaluationVisitor evaluationVisitor = new CancelableEvaluationVisitor(monitor, environment, evaluationEnvironment, modelManager);
-		        value = evaluationVisitor.visitExpressionInOcl(expressionInOcl);
+		        value = evaluationVisitor.visitExpressionInOCL(expressionInOCL);
 			} catch (EvaluationHaltedException e) {
 				value = new ExceptionValue(valueFactory, ConsoleMessages.Result_EvaluationTerminated, null);
 			} catch (InvalidEvaluationException e) {

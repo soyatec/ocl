@@ -144,7 +144,7 @@
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_IPg0dYgHEd-aGOJuUCcZBA" name="part" type="_IPg0iYgHEd-aGOJuUCcZBA" isOrdered="true" lower="0" upper="*" isComposite="true"/>
       </ownedMember>
       <ownedMember xmi:type="cmof:Class" xmi:id="_IPg0eIgHEd-aGOJuUCcZBA" name="NullLiteralExp" superClass="_IPg0YIgHEd-aGOJuUCcZBA"/>
-      <ownedMember xmi:type="cmof:Class" xmi:id="_IPg0eogHEd-aGOJuUCcZBA" name="ExpressionInOcl" superClass="_IPg0hIgHEd-aGOJuUCcZBA">
+      <ownedMember xmi:type="cmof:Class" xmi:id="_IPg0eogHEd-aGOJuUCcZBA" name="ExpressionInOCL" superClass="_IPg0hIgHEd-aGOJuUCcZBA">
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_IPg0fIgHEd-aGOJuUCcZBA" name="bodyExpression" type="_IPg0HogHEd-aGOJuUCcZBA" isComposite="true"/>
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_IPg0fYgHEd-aGOJuUCcZBA" name="contextVariable" type="_IPg0MIgHEd-aGOJuUCcZBA" lower="0" isComposite="true"/>
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_IPg0f4gHEd-aGOJuUCcZBA" name="resultVariable" type="_IPg0MIgHEd-aGOJuUCcZBA" lower="0" isComposite="true"/>

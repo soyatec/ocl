@@ -31,7 +31,7 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.IfExp;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
@@ -220,7 +220,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	}
 
 	@Override
-	public Object visitExpressionInOcl(ExpressionInOcl object) {
+	public Object visitExpressionInOCL(ExpressionInOCL object) {
 		safeVisit(object.getBodyExpression());
 		return null;
 	}

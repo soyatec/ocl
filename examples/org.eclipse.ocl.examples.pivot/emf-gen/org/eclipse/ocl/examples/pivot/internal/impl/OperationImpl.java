@@ -55,7 +55,7 @@ import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.MultiplicityElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
@@ -618,7 +618,7 @@ public class OperationImpl
 		in bodyConstraint <> null implies
 		  let bodySpecification : ValueSpecification = bodyConstraint.specification
 		  in bodySpecification <> null and
-		    bodySpecification.oclIsKindOf(ExpressionInOcl) implies
+		    bodySpecification.oclIsKindOf(ExpressionInOCL) implies
 		    CompatibleBody(bodySpecification)
 		*/
 		try {
@@ -1207,8 +1207,8 @@ public class OperationImpl
 				String stereotype = rule.getStereotype();
 				if (UMLReflection.BODY.equals(stereotype)) {
 					ValueSpecification specification = rule.getSpecification();
-					if (specification instanceof ExpressionInOcl) {
-						bodyImplementation = new ConstrainedOperation((ExpressionInOcl) specification);
+					if (specification instanceof ExpressionInOCL) {
+						bodyImplementation = new ConstrainedOperation((ExpressionInOCL) specification);
 					}
 					else if (specification instanceof OpaqueExpression) {
 						String body = PivotUtil.getBody((OpaqueExpression)specification);// FIXME

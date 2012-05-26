@@ -52,7 +52,7 @@ import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
 import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.FeatureCallExp;
 import org.eclipse.ocl.examples.pivot.IfExp;
@@ -666,7 +666,7 @@ public class PivotValidator
 			case PivotPackage.ENUMERATION_LITERAL:
 				return validateEnumerationLiteral((EnumerationLiteral)value, diagnostics, context);
 			case PivotPackage.EXPRESSION_IN_OCL:
-				return validateExpressionInOcl((ExpressionInOcl)value, diagnostics, context);
+				return validateExpressionInOCL((ExpressionInOCL)value, diagnostics, context);
 			case PivotPackage.FEATURE:
 				return validateFeature((Feature)value, diagnostics, context);
 			case PivotPackage.FEATURE_CALL_EXP:
@@ -2029,6 +2029,26 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean validateExpressionInOCL(ExpressionInOCL expressionInOCL, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		if (!validate_NoCircularContainment((EObject)expressionInOCL, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)expressionInOCL, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)expressionInOCL, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)expressionInOCL, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)expressionInOCL, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)expressionInOCL, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)expressionInOCL, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)expressionInOCL, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)expressionInOCL, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(expressionInOCL, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean validateEnumeration(Enumeration enumeration,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!validate_NoCircularContainment((EObject)enumeration, diagnostics, context)) return false;
@@ -2041,26 +2061,6 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)enumeration, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)enumeration, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(enumeration, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateExpressionInOcl(ExpressionInOcl expressionInOcl,
-			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)expressionInOcl, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)expressionInOcl, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)expressionInOcl, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)expressionInOcl, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)expressionInOcl, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)expressionInOcl, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)expressionInOcl, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)expressionInOcl, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)expressionInOcl, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(expressionInOcl, diagnostics, context);
 		return result;
 	}
 

@@ -45,7 +45,7 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OclExpression;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
@@ -127,8 +127,8 @@ public class BasicCompleteOCLEObjectValidator extends EObjectValidator
 				if (UMLReflection.INVARIANT.equals(constraint.getStereotype())) {
 					String constraintName = constraint.getName();
 					ValueSpecification specification = constraint.getSpecification();
-					if (specification instanceof ExpressionInOcl) {			// Ignore OpaqueExpression -- probably from EAnnotations
-						ExpressionInOcl query = (ExpressionInOcl)specification;
+					if (specification instanceof ExpressionInOCL) {			// Ignore OpaqueExpression -- probably from EAnnotations
+						ExpressionInOCL query = (ExpressionInOCL)specification;
 						EvaluationEnvironment evaluationEnvironment = environmentFactory.createEvaluationEnvironment();
 						ValueFactory valueFactory = metaModelManager.getValueFactory();
 						Value value = valueFactory.valueOf(object);

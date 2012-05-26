@@ -30,7 +30,7 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.Detail;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.IfExp;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
@@ -300,7 +300,7 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 	}
 
 	@Override
-	public Object visitExpressionInOcl(ExpressionInOcl object) {
+	public Object visitExpressionInOCL(ExpressionInOCL object) {
 		if (object.eContainer() != null) {
 			context.appendParent(object, MONIKER_SCOPE_SEPARATOR);
 			context.appendRole(object);		

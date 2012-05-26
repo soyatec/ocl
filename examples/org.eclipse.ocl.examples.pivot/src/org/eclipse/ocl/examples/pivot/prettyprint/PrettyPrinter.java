@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
@@ -477,7 +477,7 @@ public class PrettyPrinter
 	//                safeVisit((Visitable) parent);
 				}
 				else  {
-					assert element instanceof org.eclipse.ocl.examples.pivot.Package || element instanceof ExpressionInOcl : element.eClass().getName();	
+					assert element instanceof org.eclipse.ocl.examples.pivot.Package || element instanceof ExpressionInOCL : element.eClass().getName();	
 				}
 			}
 			append(parentSeparator);

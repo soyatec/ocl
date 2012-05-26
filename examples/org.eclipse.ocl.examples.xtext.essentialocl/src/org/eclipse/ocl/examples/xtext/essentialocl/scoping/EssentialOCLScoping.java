@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.ExpressionInOcl;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OclExpression;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -145,7 +145,7 @@ public class EssentialOCLScoping
 					csSource = (NestedExpCS)eContainer;
 				}
 				else if (eContainer instanceof SpecificationCS) {
-					ExpressionInOcl expression = PivotUtil.getPivot(ExpressionInOcl.class, (SpecificationCS)eContainer);
+					ExpressionInOCL expression = PivotUtil.getPivot(ExpressionInOCL.class, (SpecificationCS)eContainer);
 					source = expression!= null ? expression.getContextVariable() : null;
 					break;
 				}
