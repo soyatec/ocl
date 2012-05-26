@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Namespace;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -53,8 +53,8 @@ public class BaseEObjectHoverProvider extends DefaultEObjectHoverProvider
 			if (pivotElement instanceof CallExp) {
 				description = PrettyPrinter.printName(PivotUtil.getReferredFeature((CallExp)pivotElement), namespace);
 			}
-			else if (pivotElement instanceof OclExpression) {
-				description = PrettyPrinter.printType(((OclExpression)pivotElement).getType(), namespace);
+			else if (pivotElement instanceof OCLExpression) {
+				description = PrettyPrinter.printType(((OCLExpression)pivotElement).getType(), namespace);
 			}
 			else {
 				description = PrettyPrinter.print(pivotElement, namespace);

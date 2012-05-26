@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Namespace;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -187,8 +187,8 @@ public class MarkupHoverProvider extends DefaultEObjectHoverProvider
 			else if (pivotElement instanceof VariableExp) {
 				description = PrettyPrinter.print(((VariableExp)pivotElement).getReferredVariable(), prettyPrintOptions);
 			}
-			else if (pivotElement instanceof OclExpression) {
-				description = PrettyPrinter.printType(((OclExpression)pivotElement).getType(), prettyPrintOptions);
+			else if (pivotElement instanceof OCLExpression) {
+				description = PrettyPrinter.printType(((OCLExpression)pivotElement).getType(), prettyPrintOptions);
 			}
 			else {
 				description = PrettyPrinter.print(pivotElement, prettyPrintOptions);

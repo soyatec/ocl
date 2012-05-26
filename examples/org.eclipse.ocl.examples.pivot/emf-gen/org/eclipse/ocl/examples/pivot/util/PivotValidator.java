@@ -76,7 +76,7 @@ import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.NavigationCallExp;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
 import org.eclipse.ocl.examples.pivot.NumericLiteralExp;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
@@ -718,7 +718,7 @@ public class PivotValidator
 			case PivotPackage.NUMERIC_LITERAL_EXP:
 				return validateNumericLiteralExp((NumericLiteralExp)value, diagnostics, context);
 			case PivotPackage.OCL_EXPRESSION:
-				return validateOclExpression((OclExpression)value, diagnostics, context);
+				return validateOCLExpression((OCLExpression)value, diagnostics, context);
 			case PivotPackage.OPAQUE_EXPRESSION:
 				return validateOpaqueExpression((OpaqueExpression)value, diagnostics, context);
 			case PivotPackage.OPERATION:
@@ -1648,26 +1648,6 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateOclExpression(OclExpression oclExpression,
-			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)oclExpression, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)oclExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)oclExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)oclExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)oclExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)oclExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)oclExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)oclExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)oclExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(oclExpression, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean validateBagType(BagType bagType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!validate_NoCircularContainment((EObject)bagType, diagnostics, context)) return false;
@@ -2228,6 +2208,26 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)numericLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)numericLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(numericLiteralExp, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOCLExpression(OCLExpression oclExpression, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		if (!validate_NoCircularContainment((EObject)oclExpression, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)oclExpression, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)oclExpression, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)oclExpression, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)oclExpression, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)oclExpression, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)oclExpression, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)oclExpression, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)oclExpression, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(oclExpression, diagnostics, context);
 		return result;
 	}
 

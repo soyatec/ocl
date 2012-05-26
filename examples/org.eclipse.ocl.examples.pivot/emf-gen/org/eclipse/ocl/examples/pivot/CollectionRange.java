@@ -47,13 +47,13 @@ public interface CollectionRange
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>First</em>' containment reference.
-	 * @see #setFirst(OclExpression)
+	 * @see #setFirst(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionRange_First()
 	 * @model containment="true" required="true" ordered="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!CollectionRange!first'"
 	 * @generated
 	 */
-	OclExpression getFirst();
+	OCLExpression getFirst();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.CollectionRange#getFirst <em>First</em>}' containment reference.
@@ -63,18 +63,18 @@ public interface CollectionRange
 	 * @see #getFirst()
 	 * @generated
 	 */
-	void setFirst(OclExpression value);
+	void setFirst(OCLExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OclExpression} and sets the '<em><b>First</b></em>' containment reference.
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>First</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OclExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OclExpression}.
+	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
 	 * @see #getFirst()
 	 * @generated
 	 */
-	OclExpression createFirst(EClass eClass);
+	OCLExpression createFirst(EClass eClass);
 
 	/**
 	 * Returns the value of the '<em><b>Last</b></em>' containment reference.
@@ -85,13 +85,13 @@ public interface CollectionRange
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Last</em>' containment reference.
-	 * @see #setLast(OclExpression)
+	 * @see #setLast(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionRange_Last()
 	 * @model containment="true" required="true" ordered="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!CollectionRange!last'"
 	 * @generated
 	 */
-	OclExpression getLast();
+	OCLExpression getLast();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.CollectionRange#getLast <em>Last</em>}' containment reference.
@@ -101,17 +101,17 @@ public interface CollectionRange
 	 * @see #getLast()
 	 * @generated
 	 */
-	void setLast(OclExpression value);
+	void setLast(OCLExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OclExpression} and sets the '<em><b>Last</b></em>' containment reference.
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>Last</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OclExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OclExpression}.
+	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
 	 * @see #getLast()
 	 * @generated
 	 */
-	OclExpression createLast(EClass eClass);
+	OCLExpression createLast(EClass eClass);
 
 } // CollectionRange

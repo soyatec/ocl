@@ -46,7 +46,7 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
@@ -151,7 +151,7 @@ public class BasicCompleteOCLEObjectValidator extends EObjectValidator
 							}
 							if (!isOk) {
 								String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
-								OclExpression messageExpression = query.getMessageExpression();
+								OCLExpression messageExpression = query.getMessageExpression();
 								if (messageExpression != null) {
 									try {
 										Value messageResult = messageExpression.accept(evaluationVisitor);

@@ -45,7 +45,7 @@ import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.IfExp;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -70,7 +70,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * @generated
  */
 public class IfExpImpl
-		extends OclExpressionImpl
+		extends OCLExpressionImpl
 		implements IfExp {
 
 	/**
@@ -81,7 +81,7 @@ public class IfExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression condition;
+	protected OCLExpression condition;
 
 	/**
 	 * The cached value of the '{@link #getThenExpression() <em>Then Expression</em>}' containment reference.
@@ -91,7 +91,7 @@ public class IfExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression thenExpression;
+	protected OCLExpression thenExpression;
 
 	/**
 	 * The cached value of the '{@link #getElseExpression() <em>Else Expression</em>}' containment reference.
@@ -101,7 +101,7 @@ public class IfExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression elseExpression;
+	protected OCLExpression elseExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -127,7 +127,7 @@ public class IfExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression getCondition() {
+	public OCLExpression getCondition() {
 		return condition;
 	}
 
@@ -136,9 +136,9 @@ public class IfExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetCondition(OclExpression newCondition,
+	public NotificationChain basicSetCondition(OCLExpression newCondition,
 			NotificationChain msgs) {
-		OclExpression oldCondition = condition;
+		OCLExpression oldCondition = condition;
 		condition = newCondition;
 		if (eNotificationRequired())
 		{
@@ -153,7 +153,7 @@ public class IfExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCondition(OclExpression newCondition) {
+	public void setCondition(OCLExpression newCondition) {
 		if (newCondition != condition)
 		{
 			NotificationChain msgs = null;
@@ -173,8 +173,8 @@ public class IfExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression createCondition(EClass eClass) {
-		OclExpression newCondition = (OclExpression) create(eClass);
+	public OCLExpression createCondition(EClass eClass) {
+		OCLExpression newCondition = (OCLExpression) create(eClass);
 		setCondition(newCondition);
 		return newCondition;
 	}
@@ -184,7 +184,7 @@ public class IfExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression getThenExpression() {
+	public OCLExpression getThenExpression() {
 		return thenExpression;
 	}
 
@@ -194,8 +194,8 @@ public class IfExpImpl
 	 * @generated
 	 */
 	public NotificationChain basicSetThenExpression(
-			OclExpression newThenExpression, NotificationChain msgs) {
-		OclExpression oldThenExpression = thenExpression;
+			OCLExpression newThenExpression, NotificationChain msgs) {
+		OCLExpression oldThenExpression = thenExpression;
 		thenExpression = newThenExpression;
 		if (eNotificationRequired())
 		{
@@ -210,7 +210,7 @@ public class IfExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setThenExpression(OclExpression newThenExpression) {
+	public void setThenExpression(OCLExpression newThenExpression) {
 		if (newThenExpression != thenExpression)
 		{
 			NotificationChain msgs = null;
@@ -230,8 +230,8 @@ public class IfExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression createThenExpression(EClass eClass) {
-		OclExpression newThenExpression = (OclExpression) create(eClass);
+	public OCLExpression createThenExpression(EClass eClass) {
+		OCLExpression newThenExpression = (OCLExpression) create(eClass);
 		setThenExpression(newThenExpression);
 		return newThenExpression;
 	}
@@ -241,7 +241,7 @@ public class IfExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression getElseExpression() {
+	public OCLExpression getElseExpression() {
 		return elseExpression;
 	}
 
@@ -251,8 +251,8 @@ public class IfExpImpl
 	 * @generated
 	 */
 	public NotificationChain basicSetElseExpression(
-			OclExpression newElseExpression, NotificationChain msgs) {
-		OclExpression oldElseExpression = elseExpression;
+			OCLExpression newElseExpression, NotificationChain msgs) {
+		OCLExpression oldElseExpression = elseExpression;
 		elseExpression = newElseExpression;
 		if (eNotificationRequired())
 		{
@@ -267,7 +267,7 @@ public class IfExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setElseExpression(OclExpression newElseExpression) {
+	public void setElseExpression(OCLExpression newElseExpression) {
 		if (newElseExpression != elseExpression)
 		{
 			NotificationChain msgs = null;
@@ -287,8 +287,8 @@ public class IfExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression createElseExpression(EClass eClass) {
-		OclExpression newElseExpression = (OclExpression) create(eClass);
+	public OCLExpression createElseExpression(EClass eClass) {
+		OCLExpression newElseExpression = (OCLExpression) create(eClass);
 		setElseExpression(newElseExpression);
 		return newElseExpression;
 	}
@@ -418,13 +418,13 @@ public class IfExpImpl
 				setType((Type)newValue);
 				return;
 			case PivotPackage.IF_EXP__CONDITION:
-				setCondition((OclExpression)newValue);
+				setCondition((OCLExpression)newValue);
 				return;
 			case PivotPackage.IF_EXP__THEN_EXPRESSION:
-				setThenExpression((OclExpression)newValue);
+				setThenExpression((OCLExpression)newValue);
 				return;
 			case PivotPackage.IF_EXP__ELSE_EXPRESSION:
-				setElseExpression((OclExpression)newValue);
+				setElseExpression((OCLExpression)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -458,13 +458,13 @@ public class IfExpImpl
 				setType((Type)null);
 				return;
 			case PivotPackage.IF_EXP__CONDITION:
-				setCondition((OclExpression)null);
+				setCondition((OCLExpression)null);
 				return;
 			case PivotPackage.IF_EXP__THEN_EXPRESSION:
-				setThenExpression((OclExpression)null);
+				setThenExpression((OCLExpression)null);
 				return;
 			case PivotPackage.IF_EXP__ELSE_EXPRESSION:
-				setElseExpression((OclExpression)null);
+				setElseExpression((OCLExpression)null);
 				return;
 		}
 		eDynamicUnset(featureID);

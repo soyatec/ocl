@@ -173,7 +173,7 @@ try {
 }
 <%Value%> [ast.source.symbolName(expInOcl)/] = left[astName/];
 [/if]
-[let right : OclExpression = ast.argument->at(1)]
+[let right : OCLExpression = ast.argument->at(1)]
 [if (not right.isConstant())]
 <%Value%> right[astName/];
 try {
@@ -191,7 +191,7 @@ try {
 [if (not ast.source.isConstant())]
 [ast.source.emitExpression(importer, genPackage, expInOcl)/]
 [/if]
-[for (argument : OclExpression | ast.argument->reject(isConstant()))]
+[for (argument : OCLExpression | ast.argument->reject(isConstant()))]
 [argument.emitExpression(importer, genPackage, expInOcl)/]
 [/for]
 [ast.generateCall(importer, genPackage, expInOcl)/][/template]
@@ -205,7 +205,7 @@ try {
 [if ast.referredOperation.ownedParameter->at(index).type.oclIsKindOf(SelfType)]
 , [ast.argument->at(index).symbolName(expInOcl)/][/if][/for][/if]);
 <%[operationTypeName/]%> dynamic_[astName/] = (<%[operationTypeName/]%>)static_[astName/].lookupImplementation(standardLibrary, [ast.referredOperation.symbolName(expInOcl)/]);
-<%Value%> [astName/] = dynamic_[astName/].evaluate(evaluator, [ast.type.symbolName(expInOcl)/], [ast.source.symbolName(expInOcl)/][for (argument : OclExpression | ast.argument) before (', ') separator (', ')][argument.symbolName(expInOcl)/][/for]);[/let][/let][/let][/template]
+<%Value%> [astName/] = dynamic_[astName/].evaluate(evaluator, [ast.type.symbolName(expInOcl)/], [ast.source.symbolName(expInOcl)/][for (argument : OCLExpression | ast.argument) before (', ') separator (', ')][argument.symbolName(expInOcl)/][/for]);[/let][/let][/let][/template]
 
 [template public emitExpression(ast : PropertyCallExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [if (not ast.source.isConstant())]
@@ -227,7 +227,7 @@ try {
 
 [template public emitExpression(ast : VariableExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)][/template]
 
-[template public generateTypeOf(genPackage : GenPackage, expInOcl : ExpressionInOCL, ast : OclExpression)]
+[template public generateTypeOf(genPackage : GenPackage, expInOcl : ExpressionInOCL, ast : OCLExpression)]
 valueFactory.typeOf([ast.symbolName(expInOcl)/][/template]
 
 [template public generateTypeOf(genPackage : GenPackage, expInOcl : ExpressionInOCL, ast : VariableExp)]

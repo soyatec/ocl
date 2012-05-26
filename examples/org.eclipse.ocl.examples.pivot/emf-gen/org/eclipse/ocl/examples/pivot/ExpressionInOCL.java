@@ -49,13 +49,13 @@ public interface ExpressionInOCL
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Body Expression</em>' containment reference.
-	 * @see #setBodyExpression(OclExpression)
+	 * @see #setBodyExpression(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOCL_BodyExpression()
 	 * @model containment="true" required="true" ordered="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ExpressionInOCL!bodyExpression'"
 	 * @generated
 	 */
-	OclExpression getBodyExpression();
+	OCLExpression getBodyExpression();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getBodyExpression <em>Body Expression</em>}' containment reference.
@@ -65,18 +65,18 @@ public interface ExpressionInOCL
 	 * @see #getBodyExpression()
 	 * @generated
 	 */
-	void setBodyExpression(OclExpression value);
+	void setBodyExpression(OCLExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OclExpression} and sets the '<em><b>Body Expression</b></em>' containment reference.
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>Body Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OclExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OclExpression}.
+	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
 	 * @see #getBodyExpression()
 	 * @generated
 	 */
-	OclExpression createBodyExpression(EClass eClass);
+	OCLExpression createBodyExpression(EClass eClass);
 
 	/**
 	 * Returns the value of the '<em><b>Context Variable</b></em>' containment reference.
@@ -188,13 +188,13 @@ public interface ExpressionInOCL
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Message Expression</em>' containment reference.
-	 * @see #setMessageExpression(OclExpression)
+	 * @see #setMessageExpression(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOCL_MessageExpression()
 	 * @model containment="true" ordered="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ExpressionInOCL!messageExpression'"
 	 * @generated
 	 */
-	OclExpression getMessageExpression();
+	OCLExpression getMessageExpression();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getMessageExpression <em>Message Expression</em>}' containment reference.
@@ -204,17 +204,17 @@ public interface ExpressionInOCL
 	 * @see #getMessageExpression()
 	 * @generated
 	 */
-	void setMessageExpression(OclExpression value);
+	void setMessageExpression(OCLExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OclExpression} and sets the '<em><b>Message Expression</b></em>' containment reference.
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>Message Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OclExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OclExpression}.
+	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
 	 * @see #getMessageExpression()
 	 * @generated
 	 */
-	OclExpression createMessageExpression(EClass eClass);
+	OCLExpression createMessageExpression(EClass eClass);
 
 } // ExpressionInOCL

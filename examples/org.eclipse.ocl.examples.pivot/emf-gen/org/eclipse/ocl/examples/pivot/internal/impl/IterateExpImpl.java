@@ -46,7 +46,7 @@ import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.IterateExp;
 import org.eclipse.ocl.examples.pivot.Iteration;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -368,13 +368,13 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 				setType((Type)newValue);
 				return;
 			case PivotPackage.ITERATE_EXP__SOURCE:
-				setSource((OclExpression)newValue);
+				setSource((OCLExpression)newValue);
 				return;
 			case PivotPackage.ITERATE_EXP__IMPLICIT:
 				setImplicit((Boolean)newValue);
 				return;
 			case PivotPackage.ITERATE_EXP__BODY:
-				setBody((OclExpression)newValue);
+				setBody((OCLExpression)newValue);
 				return;
 			case PivotPackage.ITERATE_EXP__ITERATOR:
 				getIterator().clear();
@@ -419,13 +419,13 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 				setType((Type)null);
 				return;
 			case PivotPackage.ITERATE_EXP__SOURCE:
-				setSource((OclExpression)null);
+				setSource((OCLExpression)null);
 				return;
 			case PivotPackage.ITERATE_EXP__IMPLICIT:
 				setImplicit(IMPLICIT_EDEFAULT);
 				return;
 			case PivotPackage.ITERATE_EXP__BODY:
-				setBody((OclExpression)null);
+				setBody((OCLExpression)null);
 				return;
 			case PivotPackage.ITERATE_EXP__ITERATOR:
 				getIterator().clear();

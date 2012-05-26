@@ -25,7 +25,7 @@ import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.FeatureCallExp;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -171,7 +171,7 @@ public abstract class FeatureCallExpImpl
 				setType((Type)newValue);
 				return;
 			case PivotPackage.FEATURE_CALL_EXP__SOURCE:
-				setSource((OclExpression)newValue);
+				setSource((OCLExpression)newValue);
 				return;
 			case PivotPackage.FEATURE_CALL_EXP__IMPLICIT:
 				setImplicit((Boolean)newValue);
@@ -211,7 +211,7 @@ public abstract class FeatureCallExpImpl
 				setType((Type)null);
 				return;
 			case PivotPackage.FEATURE_CALL_EXP__SOURCE:
-				setSource((OclExpression)null);
+				setSource((OCLExpression)null);
 				return;
 			case PivotPackage.FEATURE_CALL_EXP__IMPLICIT:
 				setImplicit(IMPLICIT_EDEFAULT);

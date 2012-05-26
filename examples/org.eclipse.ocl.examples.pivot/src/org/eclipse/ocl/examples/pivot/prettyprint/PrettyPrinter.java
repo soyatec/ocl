@@ -32,7 +32,7 @@ import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
@@ -748,7 +748,7 @@ public class PrettyPrinter
 		scope = oldScope;
 	}
 
-	public void precedenceVisit(OclExpression expression, Precedence newPrecedence) {
+	public void precedenceVisit(OCLExpression expression, Precedence newPrecedence) {
 		Precedence savedPrecedcence = currentPrecedence;
 		try {
 			currentPrecedence = newPrecedence;

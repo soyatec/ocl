@@ -169,7 +169,7 @@ public interface Query {
      * 
      * @return my OCL expression
 	 */
-	OclExpression getExpression();
+	OCLExpression getExpression();
     
 	/**
 	 * <p>

@@ -27,7 +27,7 @@ import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
@@ -99,7 +99,7 @@ public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLPostOrderVis
 					String resultVariableName = csElement instanceof PostCS ? Environment.RESULT_VARIABLE_NAME : null;
 			        context.setOperationContext(pivotSpecification, contextOperation, resultVariableName);
 				}
-				OclExpression bodyExpression = context.visitLeft2Right(OclExpression.class, csExpression);		
+				OCLExpression bodyExpression = context.visitLeft2Right(OCLExpression.class, csExpression);		
 				pivotSpecification.setBodyExpression(bodyExpression);
 				pivotSpecification.setType(bodyExpression.getType());
 				ExpSpecificationCS csMessageSpecification = (ExpSpecificationCS) csElement.getMessageSpecification();
@@ -107,7 +107,7 @@ public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLPostOrderVis
 					context.installPivotUsage(csMessageSpecification, pivotSpecification);		//WIP
 					ExpCS csMessageExpression = csMessageSpecification.getOwnedExpression();
 					if (csMessageExpression != null) {
-						OclExpression messageExpression = context.visitLeft2Right(OclExpression.class, csMessageExpression);		
+						OCLExpression messageExpression = context.visitLeft2Right(OCLExpression.class, csMessageExpression);		
 						pivotSpecification.setMessageExpression(messageExpression);
 					}
 				}
@@ -157,7 +157,7 @@ public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLPostOrderVis
 				context.setType(contextVariable, contextProperty.getOwningType());
 			}
 			ExpCS csExpression = csSpecification.getOwnedExpression();
-			OclExpression bodyExpression = context.visitLeft2Right(OclExpression.class, csExpression);		
+			OCLExpression bodyExpression = context.visitLeft2Right(OCLExpression.class, csExpression);		
 			pivotSpecification.setBodyExpression(bodyExpression);
 			context.setType(pivotSpecification, bodyExpression != null ? bodyExpression.getType() : null);
 			if (contextFeature != null) {

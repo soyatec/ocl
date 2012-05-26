@@ -45,7 +45,7 @@ import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.LetExp;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -70,7 +70,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * @generated
  */
 public class LetExpImpl
-		extends OclExpressionImpl
+		extends OCLExpressionImpl
 		implements LetExp {
 
 	/**
@@ -81,7 +81,7 @@ public class LetExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression in;
+	protected OCLExpression in;
 
 	/**
 	 * The cached value of the '{@link #getVariable() <em>Variable</em>}' containment reference.
@@ -117,7 +117,7 @@ public class LetExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression getIn() {
+	public OCLExpression getIn() {
 		return in;
 	}
 
@@ -126,9 +126,9 @@ public class LetExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetIn(OclExpression newIn,
+	public NotificationChain basicSetIn(OCLExpression newIn,
 			NotificationChain msgs) {
-		OclExpression oldIn = in;
+		OCLExpression oldIn = in;
 		in = newIn;
 		if (eNotificationRequired())
 		{
@@ -143,7 +143,7 @@ public class LetExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIn(OclExpression newIn) {
+	public void setIn(OCLExpression newIn) {
 		if (newIn != in)
 		{
 			NotificationChain msgs = null;
@@ -163,8 +163,8 @@ public class LetExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression createIn(EClass eClass) {
-		OclExpression newIn = (OclExpression) create(eClass);
+	public OCLExpression createIn(EClass eClass) {
+		OCLExpression newIn = (OCLExpression) create(eClass);
 		setIn(newIn);
 		return newIn;
 	}
@@ -347,7 +347,7 @@ public class LetExpImpl
 				setType((Type)newValue);
 				return;
 			case PivotPackage.LET_EXP__IN:
-				setIn((OclExpression)newValue);
+				setIn((OCLExpression)newValue);
 				return;
 			case PivotPackage.LET_EXP__VARIABLE:
 				setVariable((Variable)newValue);
@@ -384,7 +384,7 @@ public class LetExpImpl
 				setType((Type)null);
 				return;
 			case PivotPackage.LET_EXP__IN:
-				setIn((OclExpression)null);
+				setIn((OCLExpression)null);
 				return;
 			case PivotPackage.LET_EXP__VARIABLE:
 				setVariable((Variable)null);

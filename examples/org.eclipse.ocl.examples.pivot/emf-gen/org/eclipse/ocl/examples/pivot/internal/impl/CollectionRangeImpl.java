@@ -28,7 +28,7 @@ import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.CollectionRange;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -59,7 +59,7 @@ public class CollectionRangeImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression first;
+	protected OCLExpression first;
 
 	/**
 	 * The cached value of the '{@link #getLast() <em>Last</em>}' containment reference.
@@ -69,7 +69,7 @@ public class CollectionRangeImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression last;
+	protected OCLExpression last;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -95,7 +95,7 @@ public class CollectionRangeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression getFirst() {
+	public OCLExpression getFirst() {
 		return first;
 	}
 
@@ -104,9 +104,9 @@ public class CollectionRangeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetFirst(OclExpression newFirst,
+	public NotificationChain basicSetFirst(OCLExpression newFirst,
 			NotificationChain msgs) {
-		OclExpression oldFirst = first;
+		OCLExpression oldFirst = first;
 		first = newFirst;
 		if (eNotificationRequired())
 		{
@@ -121,7 +121,7 @@ public class CollectionRangeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFirst(OclExpression newFirst) {
+	public void setFirst(OCLExpression newFirst) {
 		if (newFirst != first)
 		{
 			NotificationChain msgs = null;
@@ -141,8 +141,8 @@ public class CollectionRangeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression createFirst(EClass eClass) {
-		OclExpression newFirst = (OclExpression) create(eClass);
+	public OCLExpression createFirst(EClass eClass) {
+		OCLExpression newFirst = (OCLExpression) create(eClass);
 		setFirst(newFirst);
 		return newFirst;
 	}
@@ -152,7 +152,7 @@ public class CollectionRangeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression getLast() {
+	public OCLExpression getLast() {
 		return last;
 	}
 
@@ -161,9 +161,9 @@ public class CollectionRangeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetLast(OclExpression newLast,
+	public NotificationChain basicSetLast(OCLExpression newLast,
 			NotificationChain msgs) {
-		OclExpression oldLast = last;
+		OCLExpression oldLast = last;
 		last = newLast;
 		if (eNotificationRequired())
 		{
@@ -178,7 +178,7 @@ public class CollectionRangeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLast(OclExpression newLast) {
+	public void setLast(OCLExpression newLast) {
 		if (newLast != last)
 		{
 			NotificationChain msgs = null;
@@ -198,8 +198,8 @@ public class CollectionRangeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression createLast(EClass eClass) {
-		OclExpression newLast = (OclExpression) create(eClass);
+	public OCLExpression createLast(EClass eClass) {
+		OCLExpression newLast = (OCLExpression) create(eClass);
 		setLast(newLast);
 		return newLast;
 	}
@@ -290,10 +290,10 @@ public class CollectionRangeImpl
 				setType((Type)newValue);
 				return;
 			case PivotPackage.COLLECTION_RANGE__FIRST:
-				setFirst((OclExpression)newValue);
+				setFirst((OCLExpression)newValue);
 				return;
 			case PivotPackage.COLLECTION_RANGE__LAST:
-				setLast((OclExpression)newValue);
+				setLast((OCLExpression)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -327,10 +327,10 @@ public class CollectionRangeImpl
 				setType((Type)null);
 				return;
 			case PivotPackage.COLLECTION_RANGE__FIRST:
-				setFirst((OclExpression)null);
+				setFirst((OCLExpression)null);
 				return;
 			case PivotPackage.COLLECTION_RANGE__LAST:
-				setLast((OclExpression)null);
+				setLast((OCLExpression)null);
 				return;
 		}
 		eDynamicUnset(featureID);

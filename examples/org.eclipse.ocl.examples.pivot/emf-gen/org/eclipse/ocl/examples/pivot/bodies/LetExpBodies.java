@@ -60,22 +60,22 @@ public class LetExpBodies
 			final ExecutorType T_Pivot_ecore__pivot__Type = PivotTables.Types._Type;
 			final ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
 			final LibraryProperty IP_TypedElement_type = P_TypedElement_type.getImplementation();
-			final ExecutorType T_Pivot_ecore__pivot__OclExpression = PivotTables.Types._OclExpression;
+			final ExecutorType T_Pivot_ecore__pivot__OCLExpression = PivotTables.Types._OCLExpression;
 			final ExecutorProperty P_LetExp_in = PivotTables.Properties._LetExp__in;
 			final LibraryProperty IP_LetExp_in = P_LetExp_in.getImplementation();
 			
 			
-			Value A_symbol_259 = IP_TypedElement_type.evaluate(evaluator, T_Pivot_ecore__pivot__Type, self, P_TypedElement_type);
+			Value A_symbol_30 = IP_TypedElement_type.evaluate(evaluator, T_Pivot_ecore__pivot__Type, self, P_TypedElement_type);
 			
 			
-			Value A_symbol_260 = IP_LetExp_in.evaluate(evaluator, T_Pivot_ecore__pivot__OclExpression, self, P_LetExp_in);
+			Value A_symbol_31 = IP_LetExp_in.evaluate(evaluator, T_Pivot_ecore__pivot__OCLExpression, self, P_LetExp_in);
 			
-			Value A_symbol_261 = IP_TypedElement_type.evaluate(evaluator, T_Pivot_ecore__pivot__Type, A_symbol_260, P_TypedElement_type);
+			Value A_symbol_32 = IP_TypedElement_type.evaluate(evaluator, T_Pivot_ecore__pivot__Type, A_symbol_31, P_TypedElement_type);
 			
-			DomainType static_A_symbol_262 = valueFactory.typeOf(A_symbol_259, A_symbol_261);
-			LibraryBinaryOperation dynamic_A_symbol_262 = (LibraryBinaryOperation)static_A_symbol_262.lookupImplementation(standardLibrary, O_OclAny__eq_);
-			Value A_symbol_262 = dynamic_A_symbol_262.evaluate(evaluator, T_Boolean, A_symbol_259, A_symbol_261);
-			return A_symbol_262;
+			DomainType static_A_symbol_33 = valueFactory.typeOf(A_symbol_30, A_symbol_32);
+			LibraryBinaryOperation dynamic_A_symbol_33 = (LibraryBinaryOperation)static_A_symbol_33.lookupImplementation(standardLibrary, O_OclAny__eq_);
+			Value A_symbol_33 = dynamic_A_symbol_33.evaluate(evaluator, T_Boolean, A_symbol_30, A_symbol_32);
+			return A_symbol_33;
 		}
 	}
 

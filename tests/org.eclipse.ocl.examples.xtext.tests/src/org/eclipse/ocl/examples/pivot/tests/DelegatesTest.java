@@ -639,14 +639,14 @@ public class DelegatesTest extends PivotTestSuite
 	 *
 	public void test_attributeNotDefinedInOCLRemainsNull() throws ParserException {
 		helper.setContext(EcorePackage.eINSTANCE.getEClassifier());
-		OclExpression expr = (OclExpression) helper.createQuery("self.name");
+		OCLExpression expr = (OCLExpression) helper.createQuery("self.name");
 		assertTrue(expr instanceof PropertyCallExp);
 		PropertyCallExp pce = (PropertyCallExp) expr;
 		Property p = pce.getReferredProperty();
-		OclExpression body = SettingBehavior.INSTANCE.getFeatureBody((OCL) ocl, p);
+		OCLExpression body = SettingBehavior.INSTANCE.getFeatureBody((OCL) ocl, p);
 		assertNull(body);
 		// and again, now reading from cache
-		OclExpression bodyStillNull = SettingBehavior.INSTANCE.getFeatureBody((OCL) ocl, p);
+		OCLExpression bodyStillNull = SettingBehavior.INSTANCE.getFeatureBody((OCL) ocl, p);
 		assertNull(bodyStillNull);
 	} */
 
@@ -711,7 +711,7 @@ public class DelegatesTest extends PivotTestSuite
 		OCL ocl = OCL.newInstance();
 		Helper helper = ocl.createOCLHelper();
 		helper.setContext(employeeClass);
-		OclExpression expr = helper.createQuery("self.directReports");
+		OCLExpression expr = helper.createQuery("self.directReports");
 		assertTrue(((Collection<?>) ocl.evaluate(manager, expr)).contains(employee));
 		EStructuralFeature directReportsRef = employeeClass.getEStructuralFeature("directReports");
 		// Now cache a NullLiteralExp as the derivation expression for directReports:
@@ -722,11 +722,11 @@ public class DelegatesTest extends PivotTestSuite
 		try {
 			directReportsAnn.getDetails().remove(SettingBehavior.DERIVATION_CONSTRAINT_KEY);
 			// ensure that the plugin cache doesn't have an expression cached:
-			SettingBehavior.INSTANCE.cacheOclExpression(directReportsRef, nullLiteralExp);
+			SettingBehavior.INSTANCE.cacheOCLExpression(directReportsRef, nullLiteralExp);
 			assertNull(ocl.evaluate(manager, expr));
 		} finally {
 			directReportsAnn.getDetails().put(SettingBehavior.DERIVATION_CONSTRAINT_KEY, derivationExpression);
-			SettingBehavior.INSTANCE.cacheOclExpression(directReportsRef, null);
+			SettingBehavior.INSTANCE.cacheOCLExpression(directReportsRef, null);
 		}
 	} */
 
@@ -743,10 +743,10 @@ public class DelegatesTest extends PivotTestSuite
 		String mustHaveNameConstraint = annotation.getDetails().get(constraintName);
 		Helper helper = OCL.newInstance().createOCLHelper();
 		helper.setContext(employeeClass);
-		OclExpression query = helper.createQuery("false"); // a constraint always returning false
+		OCLExpression query = helper.createQuery("false"); // a constraint always returning false
 		try {
 			annotation.getDetails().remove(constraintName);
-			ValidationBehavior.INSTANCE.cacheOclExpression(employeeClass,
+			ValidationBehavior.INSTANCE.cacheOCLExpression(employeeClass,
 				constraintName, query);
 			assertFalse(
 				"Expected the always-false cached constraint to be used",
@@ -762,9 +762,9 @@ public class DelegatesTest extends PivotTestSuite
 		initPackageRegistrations();
 		initModel(COMPANY_XMI);
 		DiagnosticChain diagnostics = new BasicDiagnostic();
-		ValidationBehavior.INSTANCE.cacheOclExpression(employeeClass, "mustHaveName", null);
+		ValidationBehavior.INSTANCE.cacheOCLExpression(employeeClass, "mustHaveName", null);
 		CompanyValidator.INSTANCE.validateEmployee_mustHaveName((Employee) employee("Amy"), diagnostics, context);
-		OclExpression cached = ValidationBehavior.INSTANCE.getCachedOclExpression(employeeClass, "mustHaveName");
+		OCLExpression cached = ValidationBehavior.INSTANCE.getCachedOCLExpression(employeeClass, "mustHaveName");
 		assertTrue("Expected to find compiled expression in cache",
 			cached != null && !ValidationBehavior.isNoOCLDefinition(cached));
 	} */
@@ -773,9 +773,9 @@ public class DelegatesTest extends PivotTestSuite
 		initPackageRegistrations();
 		initModel(COMPANY_XMI);
 		DiagnosticChain diagnostics = new BasicDiagnostic();
-		ValidationBehavior.INSTANCE.cacheOclExpression(employeeClass, "mustHaveNonEmptyName", null);
+		ValidationBehavior.INSTANCE.cacheOCLExpression(employeeClass, "mustHaveNonEmptyName", null);
 		CompanyValidator.INSTANCE.validateEmployee_mustHaveNonEmptyName((Employee) employee("Amy"), diagnostics, context);
-		OclExpression cached = ValidationBehavior.INSTANCE.getCachedOclExpression(employeeClass, "mustHaveNonEmptyName");
+		OCLExpression cached = ValidationBehavior.INSTANCE.getCachedOCLExpression(employeeClass, "mustHaveNonEmptyName");
 		assertTrue("Expected to find compiled expression in cache",
 			cached != null && !ValidationBehavior.isNoOCLDefinition(cached));
 	} */
@@ -926,7 +926,7 @@ public class DelegatesTest extends PivotTestSuite
 		EObject employee = companyFactory.create(employeeClass);
 		employee.eSet(employeeClass.getEStructuralFeature("manager"), manager);
 		helper.setContext(employeeClass);
-		OclExpression expr = (OclExpression) helper.createQuery("self.reportsTo(self.manager)");
+		OCLExpression expr = (OCLExpression) helper.createQuery("self.reportsTo(self.manager)");
 		assertTrue((Boolean) ocl.evaluate(employee, expr)); // by the default impl, employee reports to manager
 		EOperation reportsToOp = employeeClass.getEOperation(CompanyPackage.EMPLOYEE___REPORTS_TO__EMPLOYEE);
 		// Now cache a BooleanLiteralExp with the "false" literal as the implementation for reportsTo:
@@ -938,11 +938,11 @@ public class DelegatesTest extends PivotTestSuite
 		try {
 			reportsToAnn.getDetails().remove(InvocationBehavior.BODY_CONSTRAINT_KEY);
 			// ensure that the plugin cache doesn't have an expression cached:
-			InvocationBehavior.INSTANCE.cacheOclExpression(reportsToOp, falseLiteralExp);
+			InvocationBehavior.INSTANCE.cacheOCLExpression(reportsToOp, falseLiteralExp);
 			assertFalse((Boolean) ocl.evaluate(employee, expr));
 		} finally {
 			reportsToAnn.getDetails().put(InvocationBehavior.BODY_CONSTRAINT_KEY, body);
-			InvocationBehavior.INSTANCE.cacheOclExpression(reportsToOp, null);
+			InvocationBehavior.INSTANCE.cacheOCLExpression(reportsToOp, null);
 		}
 	} */
 	
@@ -955,7 +955,7 @@ public class DelegatesTest extends PivotTestSuite
 		Helper helper = ocl.createOCLHelper();
 		helper.setContext(employeeClass);
 		String expression = "self.reportsTo(self.manager)";
-		OclExpression expr = helper.createQuery(expression);
+		OCLExpression expr = helper.createQuery(expression);
 		final int TIMES = 1;
 		final int REPEAT = 1;
 		for (int r = 0; r < REPEAT; r++) {

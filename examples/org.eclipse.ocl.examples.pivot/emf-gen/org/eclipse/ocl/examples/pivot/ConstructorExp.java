@@ -33,7 +33,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ConstructorExp extends OclExpression
+public interface ConstructorExp extends OCLExpression
 {
 	/**
 	 * Returns the value of the '<em><b>Part</b></em>' containment reference list.

@@ -29,7 +29,7 @@ import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.NavigationCallExp;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -61,7 +61,7 @@ public abstract class NavigationCallExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<OclExpression> qualifier;
+	protected EList<OCLExpression> qualifier;
 
 	/**
 	 * The cached value of the '{@link #getNavigationSource() <em>Navigation Source</em>}' reference.
@@ -97,11 +97,11 @@ public abstract class NavigationCallExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<OclExpression> getQualifier()
+	public EList<OCLExpression> getQualifier()
 	{
 		if (qualifier == null)
 		{
-			qualifier = new EObjectResolvingEList<OclExpression>(OclExpression.class, this, PivotPackage.NAVIGATION_CALL_EXP__QUALIFIER);
+			qualifier = new EObjectResolvingEList<OCLExpression>(OCLExpression.class, this, PivotPackage.NAVIGATION_CALL_EXP__QUALIFIER);
 		}
 		return qualifier;
 	}
@@ -215,7 +215,7 @@ public abstract class NavigationCallExpImpl
 				setType((Type)newValue);
 				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__SOURCE:
-				setSource((OclExpression)newValue);
+				setSource((OCLExpression)newValue);
 				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__IMPLICIT:
 				setImplicit((Boolean)newValue);
@@ -225,7 +225,7 @@ public abstract class NavigationCallExpImpl
 				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__QUALIFIER:
 				getQualifier().clear();
-				getQualifier().addAll((Collection<? extends OclExpression>)newValue);
+				getQualifier().addAll((Collection<? extends OCLExpression>)newValue);
 				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE:
 				setNavigationSource((Property)newValue);
@@ -262,7 +262,7 @@ public abstract class NavigationCallExpImpl
 				setType((Type)null);
 				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__SOURCE:
-				setSource((OclExpression)null);
+				setSource((OCLExpression)null);
 				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__IMPLICIT:
 				setImplicit(IMPLICIT_EDEFAULT);

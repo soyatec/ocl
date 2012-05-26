@@ -46,7 +46,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * @generated
  */
 public class StateExpImpl
-		extends OclExpressionImpl
+		extends OCLExpressionImpl
 		implements StateExp {
 
 	/**

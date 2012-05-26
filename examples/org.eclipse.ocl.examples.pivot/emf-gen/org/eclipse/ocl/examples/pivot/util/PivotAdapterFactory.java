@@ -68,7 +68,7 @@ import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.NavigationCallExp;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
 import org.eclipse.ocl.examples.pivot.NumericLiteralExp;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
@@ -432,9 +432,9 @@ public class PivotAdapterFactory
 				return createNumericLiteralExpAdapter();
 			}
 			@Override
-			public Adapter caseOclExpression(OclExpression object)
+			public Adapter caseOCLExpression(OCLExpression object)
 			{
-				return createOclExpressionAdapter();
+				return createOCLExpressionAdapter();
 			}
 			@Override
 			public Adapter caseOpaqueExpression(OpaqueExpression object)
@@ -739,20 +739,6 @@ public class PivotAdapterFactory
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.OclExpression <em>Ocl Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.OclExpression
-	 * @generated
-	 */
-	public Adapter createOclExpressionAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.BagType <em>Bag Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1044,6 +1030,21 @@ public class PivotAdapterFactory
 	 * @generated
 	 */
 	public Adapter createNumericLiteralExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.OCLExpression <em>OCL Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.OCLExpression
+	 * @generated
+	 */
+	public Adapter createOCLExpressionAdapter()
+	{
 		return null;
 	}
 

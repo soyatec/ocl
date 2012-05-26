@@ -32,7 +32,7 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -228,7 +228,7 @@ public abstract class AbstractEvaluationVisitor
 		if (!(specification instanceof ExpressionInOCL)) {
 			return null;
 		}
-		OclExpression body = ((ExpressionInOCL)specification).getBodyExpression();
+		OCLExpression body = ((ExpressionInOCL)specification).getBodyExpression();
 		boolean isBoolean = BOOLEAN_CONSTRAINTS.contains(constraint.getStereotype());
 		
 		if (body == null) {

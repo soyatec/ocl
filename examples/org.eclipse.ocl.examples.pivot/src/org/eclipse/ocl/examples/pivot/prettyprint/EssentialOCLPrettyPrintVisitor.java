@@ -40,7 +40,7 @@ import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.IteratorExp;
 import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
@@ -87,7 +87,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	}
 
 	protected void appendSourceNavigation(CallExp object) {
-		OclExpression source = object.getSource();
+		OCLExpression source = object.getSource();
 		if (source != null) {
 			if (!(source instanceof VariableExp) || !((VariableExp)source).isImplicit()) {
 				if ((source instanceof OperationCallExp)
@@ -205,7 +205,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	@Override
 	public String visitConstructorPart(ConstructorPart part) {
 		context.appendName(part.getReferredProperty());
-		OclExpression initExpression = part.getInitExpression();
+		OCLExpression initExpression = part.getInitExpression();
 		if (initExpression != null) {
 			context.append(" = ");
 			safeVisit(initExpression);
@@ -253,7 +253,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	@Override
 	public Object visitIterateExp(IterateExp object) {
 		Iteration referredIteration = object.getReferredIteration();
-		OclExpression body = object.getBody();
+		OCLExpression body = object.getBody();
 		Variable result = object.getResult();
 		if (context.showNames()) {
 			List<Variable> iterators = object.getIterator();
@@ -287,7 +287,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 			context.pop();
 		}
 		else {
-			OclExpression source = object.getSource();
+			OCLExpression source = object.getSource();
 			if (source != null) {
 				safeVisit(source.getType());
 				context.append("::");
@@ -321,7 +321,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	@Override
 	public Object visitIteratorExp(IteratorExp object) {
 		Iteration referredIteration = object.getReferredIteration();
-		OclExpression body = object.getBody();
+		OCLExpression body = object.getBody();
 		if (context.showNames()) {
 			List<Variable> iterators = object.getIterator();
 			appendSourceNavigation(object);
@@ -359,7 +359,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 			}
 		}
 		else {
-			OclExpression source = object.getSource();
+			OCLExpression source = object.getSource();
 			if (source != null) {
 				safeVisit(source.getType());
 				context.append("::");
@@ -403,7 +403,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	}
 
 	@Override
-	public Object visitOclExpression(OclExpression object) {
+	public Object visitOCLExpression(OCLExpression object) {
 		context.append("<");
 		context.append(object.eClass().getName());
 		context.append(">");
@@ -418,8 +418,8 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 
 	@Override
 	public Object visitOperationCallExp(OperationCallExp object) {
-		OclExpression source = object.getSource();
-		List<OclExpression> arguments = object.getArgument();
+		OCLExpression source = object.getSource();
+		List<OCLExpression> arguments = object.getArgument();
 		Operation referredOperation = object.getReferredOperation();
 		if (context.showNames()) {
 			Precedence precedence = referredOperation != null ? referredOperation.getPrecedence() : null;
@@ -429,7 +429,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 					context.appendName(referredOperation);
 					context.push("(", "");
 					String prefix = null; //$NON-NLS-1$
-					for (OclExpression argument : arguments) {
+					for (OCLExpression argument : arguments) {
 						if (prefix != null) {
 							context.next(null, prefix, " ");
 						}
@@ -472,7 +472,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 			context.appendName(referredOperation);
 			context.push("(", "");
 			String prefix = null;
-			for (OclExpression argument : arguments) {
+			for (OCLExpression argument : arguments) {
 				if (prefix != null) {
 					context.next(null, prefix, " ");
 				}
@@ -574,7 +574,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 			context.append(" : ");
 			context.appendQualifiedType(type);
 		}
-		OclExpression initExpression = object.getInitExpression();
+		OCLExpression initExpression = object.getInitExpression();
 		if (initExpression != null) {
 			context.append(" = ");
 			safeVisit(initExpression);

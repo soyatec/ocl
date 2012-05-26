@@ -70,7 +70,7 @@ public abstract class AbstractExtendingVisitor<R, C>
 	}
 
 	public R visitCallExp(org.eclipse.ocl.examples.pivot.CallExp object) {
-		return visitOclExpression(object);
+		return visitOCLExpression(object);
 	}
 
 	public R visitCallOperationAction(org.eclipse.ocl.examples.pivot.CallOperationAction object) {
@@ -114,7 +114,7 @@ public abstract class AbstractExtendingVisitor<R, C>
 	}
 
 	public R visitConstructorExp(org.eclipse.ocl.examples.pivot.ConstructorExp object) {
-		return visitOclExpression(object);
+		return visitOCLExpression(object);
 	}
 
 	public R visitConstructorPart(org.eclipse.ocl.examples.pivot.ConstructorPart object) {
@@ -158,7 +158,7 @@ public abstract class AbstractExtendingVisitor<R, C>
 	}
 
 	public R visitIfExp(org.eclipse.ocl.examples.pivot.IfExp object) {
-		return visitOclExpression(object);
+		return visitOCLExpression(object);
 	}
 
 	public R visitIntegerLiteralExp(org.eclipse.ocl.examples.pivot.IntegerLiteralExp object) {
@@ -190,7 +190,7 @@ public abstract class AbstractExtendingVisitor<R, C>
 	}
 
 	public R visitLetExp(org.eclipse.ocl.examples.pivot.LetExp object) {
-		return visitOclExpression(object);
+		return visitOCLExpression(object);
 	}
 
 	public R visitLibrary(org.eclipse.ocl.examples.pivot.Library object) {
@@ -198,7 +198,7 @@ public abstract class AbstractExtendingVisitor<R, C>
 	}
 
 	public R visitLiteralExp(org.eclipse.ocl.examples.pivot.LiteralExp object) {
-		return visitOclExpression(object);
+		return visitOCLExpression(object);
 	}
 
 	public R visitLoopExp(org.eclipse.ocl.examples.pivot.LoopExp object) {
@@ -206,7 +206,7 @@ public abstract class AbstractExtendingVisitor<R, C>
 	}
 
 	public R visitMessageExp(org.eclipse.ocl.examples.pivot.MessageExp object) {
-		return visitOclExpression(object);
+		return visitOCLExpression(object);
 	}
 
 	public R visitMessageType(org.eclipse.ocl.examples.pivot.MessageType object) {
@@ -241,7 +241,7 @@ public abstract class AbstractExtendingVisitor<R, C>
 		return visitPrimitiveLiteralExp(object);
 	}
 
-	public R visitOclExpression(org.eclipse.ocl.examples.pivot.OclExpression object) {
+	public R visitOCLExpression(org.eclipse.ocl.examples.pivot.OCLExpression object) {
 		return visitTypedElement(object);
 	}
 
@@ -330,7 +330,7 @@ public abstract class AbstractExtendingVisitor<R, C>
 	}
 
 	public R visitStateExp(org.eclipse.ocl.examples.pivot.StateExp object) {
-		return visitOclExpression(object);
+		return visitOCLExpression(object);
 	}
 
 	public R visitStringLiteralExp(org.eclipse.ocl.examples.pivot.StringLiteralExp object) {
@@ -378,7 +378,7 @@ public abstract class AbstractExtendingVisitor<R, C>
 	}
 
 	public R visitTypeExp(org.eclipse.ocl.examples.pivot.TypeExp object) {
-		return visitOclExpression(object);
+		return visitOCLExpression(object);
 	}
 
 	public R visitTypeTemplateParameter(org.eclipse.ocl.examples.pivot.TypeTemplateParameter object) {
@@ -402,7 +402,7 @@ public abstract class AbstractExtendingVisitor<R, C>
 	}
 
 	public R visitUnspecifiedValueExp(org.eclipse.ocl.examples.pivot.UnspecifiedValueExp object) {
-		return visitOclExpression(object);
+		return visitOCLExpression(object);
 	}
 
 	public R visitValueSpecification(org.eclipse.ocl.examples.pivot.ValueSpecification object) {
@@ -418,7 +418,7 @@ public abstract class AbstractExtendingVisitor<R, C>
 	}
 
 	public R visitVariableExp(org.eclipse.ocl.examples.pivot.VariableExp object) {
-		return visitOclExpression(object);
+		return visitOCLExpression(object);
 	}
 
 	public R visitVoidType(org.eclipse.ocl.examples.pivot.VoidType object) {

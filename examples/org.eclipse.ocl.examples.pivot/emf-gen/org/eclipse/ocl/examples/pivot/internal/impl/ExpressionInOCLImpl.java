@@ -28,7 +28,7 @@ import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -64,7 +64,7 @@ public class ExpressionInOCLImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression bodyExpression;
+	protected OCLExpression bodyExpression;
 
 	/**
 	 * The cached value of the '{@link #getContextVariable() <em>Context Variable</em>}' containment reference.
@@ -104,7 +104,7 @@ public class ExpressionInOCLImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression messageExpression;
+	protected OCLExpression messageExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -130,7 +130,7 @@ public class ExpressionInOCLImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression getBodyExpression() {
+	public OCLExpression getBodyExpression() {
 		return bodyExpression;
 	}
 
@@ -140,8 +140,8 @@ public class ExpressionInOCLImpl
 	 * @generated
 	 */
 	public NotificationChain basicSetBodyExpression(
-			OclExpression newBodyExpression, NotificationChain msgs) {
-		OclExpression oldBodyExpression = bodyExpression;
+			OCLExpression newBodyExpression, NotificationChain msgs) {
+		OCLExpression oldBodyExpression = bodyExpression;
 		bodyExpression = newBodyExpression;
 		if (eNotificationRequired())
 		{
@@ -156,7 +156,7 @@ public class ExpressionInOCLImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setBodyExpression(OclExpression newBodyExpression) {
+	public void setBodyExpression(OCLExpression newBodyExpression) {
 		if (newBodyExpression != bodyExpression)
 		{
 			NotificationChain msgs = null;
@@ -176,8 +176,8 @@ public class ExpressionInOCLImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression createBodyExpression(EClass eClass) {
-		OclExpression newBodyExpression = (OclExpression) create(eClass);
+	public OCLExpression createBodyExpression(EClass eClass) {
+		OCLExpression newBodyExpression = (OCLExpression) create(eClass);
 		setBodyExpression(newBodyExpression);
 		return newBodyExpression;
 	}
@@ -326,7 +326,7 @@ public class ExpressionInOCLImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression getMessageExpression()
+	public OCLExpression getMessageExpression()
 	{
 		return messageExpression;
 	}
@@ -336,9 +336,9 @@ public class ExpressionInOCLImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetMessageExpression(OclExpression newMessageExpression, NotificationChain msgs)
+	public NotificationChain basicSetMessageExpression(OCLExpression newMessageExpression, NotificationChain msgs)
 	{
-		OclExpression oldMessageExpression = messageExpression;
+		OCLExpression oldMessageExpression = messageExpression;
 		messageExpression = newMessageExpression;
 		if (eNotificationRequired())
 		{
@@ -353,7 +353,7 @@ public class ExpressionInOCLImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMessageExpression(OclExpression newMessageExpression)
+	public void setMessageExpression(OCLExpression newMessageExpression)
 	{
 		if (newMessageExpression != messageExpression)
 		{
@@ -374,9 +374,9 @@ public class ExpressionInOCLImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression createMessageExpression(EClass eClass)
+	public OCLExpression createMessageExpression(EClass eClass)
 	{
-		OclExpression newMessageExpression = (OclExpression) create(eClass);
+		OCLExpression newMessageExpression = (OCLExpression) create(eClass);
 		setMessageExpression(newMessageExpression);
 		return newMessageExpression;
 	}
@@ -518,7 +518,7 @@ public class ExpressionInOCLImpl
 				setValueExpression((ExpressionInOCL)newValue);
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__BODY_EXPRESSION:
-				setBodyExpression((OclExpression)newValue);
+				setBodyExpression((OCLExpression)newValue);
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__CONTEXT_VARIABLE:
 				setContextVariable((Variable)newValue);
@@ -531,7 +531,7 @@ public class ExpressionInOCLImpl
 				getParameterVariable().addAll((Collection<? extends Variable>)newValue);
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION:
-				setMessageExpression((OclExpression)newValue);
+				setMessageExpression((OCLExpression)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -583,7 +583,7 @@ public class ExpressionInOCLImpl
 				setValueExpression((ExpressionInOCL)null);
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__BODY_EXPRESSION:
-				setBodyExpression((OclExpression)null);
+				setBodyExpression((OCLExpression)null);
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__CONTEXT_VARIABLE:
 				setContextVariable((Variable)null);
@@ -595,7 +595,7 @@ public class ExpressionInOCLImpl
 				getParameterVariable().clear();
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION:
-				setMessageExpression((OclExpression)null);
+				setMessageExpression((OCLExpression)null);
 				return;
 		}
 		eDynamicUnset(featureID);

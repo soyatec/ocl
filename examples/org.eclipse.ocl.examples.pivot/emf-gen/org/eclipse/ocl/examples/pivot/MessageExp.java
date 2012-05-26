@@ -41,7 +41,7 @@ import org.eclipse.emf.ecore.EClass;
  * @generated
  */
 public interface MessageExp
-		extends OclExpression {
+		extends OCLExpression {
 
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' containment reference.
@@ -52,13 +52,13 @@ public interface MessageExp
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Target</em>' containment reference.
-	 * @see #setTarget(OclExpression)
+	 * @see #setTarget(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getMessageExp_Target()
 	 * @model containment="true" required="true" ordered="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MessageExp!target'"
 	 * @generated
 	 */
-	OclExpression getTarget();
+	OCLExpression getTarget();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.MessageExp#getTarget <em>Target</em>}' containment reference.
@@ -68,22 +68,22 @@ public interface MessageExp
 	 * @see #getTarget()
 	 * @generated
 	 */
-	void setTarget(OclExpression value);
+	void setTarget(OCLExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OclExpression} and sets the '<em><b>Target</b></em>' containment reference.
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>Target</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OclExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OclExpression}.
+	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
 	 * @see #getTarget()
 	 * @generated
 	 */
-	OclExpression createTarget(EClass eClass);
+	OCLExpression createTarget(EClass eClass);
 
 	/**
 	 * Returns the value of the '<em><b>Argument</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.OclExpression}.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Argument</em>' containment reference list isn't clear,
@@ -96,18 +96,18 @@ public interface MessageExp
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MessageExp!argument'"
 	 * @generated
 	 */
-	EList<OclExpression> getArgument();
+	EList<OCLExpression> getArgument();
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OclExpression} and appends it to the '<em><b>Argument</b></em>' containment reference list.
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and appends it to the '<em><b>Argument</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OclExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OclExpression}.
+	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
 	 * @see #getArgument()
 	 * @generated
 	 */
-	OclExpression createArgument(EClass eClass);
+	OCLExpression createArgument(EClass eClass);
 
 	/**
 	 * Returns the value of the '<em><b>Called Operation</b></em>' containment reference.

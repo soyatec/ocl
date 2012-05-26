@@ -46,7 +46,7 @@ import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
@@ -151,7 +151,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		}
 	}
 
-	public OclExpression addBadExpressionError(ModelElementCS csElement, String boundMessage) {
+	public OCLExpression addBadExpressionError(ModelElementCS csElement, String boundMessage) {
 		INode node = NodeModelUtils.getNode(csElement);
 		Resource.Diagnostic resourceDiagnostic = new ValidationDiagnostic(node, boundMessage);
 		csElement.eResource().getErrors().add(resourceDiagnostic);

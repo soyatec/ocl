@@ -96,7 +96,7 @@ public interface Visitor<R>
 	R visitNavigationCallExp(org.eclipse.ocl.examples.pivot.NavigationCallExp object);
 	R visitNullLiteralExp(org.eclipse.ocl.examples.pivot.NullLiteralExp object);
 	R visitNumericLiteralExp(org.eclipse.ocl.examples.pivot.NumericLiteralExp object);
-	R visitOclExpression(org.eclipse.ocl.examples.pivot.OclExpression object);
+	R visitOCLExpression(org.eclipse.ocl.examples.pivot.OCLExpression object);
 	R visitOpaqueExpression(org.eclipse.ocl.examples.pivot.OpaqueExpression object);
 	R visitOperation(org.eclipse.ocl.examples.pivot.Operation object);
 	R visitOperationCallExp(org.eclipse.ocl.examples.pivot.OperationCallExp object);

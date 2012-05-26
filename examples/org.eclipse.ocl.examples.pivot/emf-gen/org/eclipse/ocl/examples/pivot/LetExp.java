@@ -38,7 +38,7 @@ import org.eclipse.emf.ecore.EClass;
  * @generated
  */
 public interface LetExp
-		extends OclExpression {
+		extends OCLExpression {
 
 	/**
 	 * Returns the value of the '<em><b>In</b></em>' containment reference.
@@ -49,13 +49,13 @@ public interface LetExp
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>In</em>' containment reference.
-	 * @see #setIn(OclExpression)
+	 * @see #setIn(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getLetExp_In()
 	 * @model containment="true" required="true" ordered="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!LetExp!in'"
 	 * @generated
 	 */
-	OclExpression getIn();
+	OCLExpression getIn();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.LetExp#getIn <em>In</em>}' containment reference.
@@ -65,18 +65,18 @@ public interface LetExp
 	 * @see #getIn()
 	 * @generated
 	 */
-	void setIn(OclExpression value);
+	void setIn(OCLExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OclExpression} and sets the '<em><b>In</b></em>' containment reference.
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>In</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OclExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OclExpression}.
+	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
 	 * @see #getIn()
 	 * @generated
 	 */
-	OclExpression createIn(EClass eClass);
+	OCLExpression createIn(EClass eClass);
 
 	/**
 	 * Returns the value of the '<em><b>Variable</b></em>' containment reference.

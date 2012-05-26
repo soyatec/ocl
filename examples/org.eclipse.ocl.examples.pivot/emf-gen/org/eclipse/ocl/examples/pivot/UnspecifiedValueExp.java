@@ -27,5 +27,5 @@ package org.eclipse.ocl.examples.pivot;
  * @generated
  */
 public interface UnspecifiedValueExp
-		extends OclExpression {
+		extends OCLExpression {
 } // UnspecifiedValueExp

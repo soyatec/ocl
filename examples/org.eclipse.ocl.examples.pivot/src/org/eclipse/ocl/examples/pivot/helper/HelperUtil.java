@@ -20,7 +20,7 @@ package org.eclipse.ocl.examples.pivot.helper;
 
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.util.PivotPlugin;
 
 /**
@@ -105,7 +105,7 @@ public class HelperUtil {
 	Object getConstraintContext(
 			Environment env,
 			Object element,
-			OclExpression expr) {
+			OCLExpression expr) {
 		
 		Object result = element;
 

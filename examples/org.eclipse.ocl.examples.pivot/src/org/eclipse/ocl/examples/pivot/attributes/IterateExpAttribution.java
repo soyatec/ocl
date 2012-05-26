@@ -19,7 +19,7 @@ package org.eclipse.ocl.examples.pivot.attributes;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.ocl.examples.pivot.IterateExp;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
@@ -35,18 +35,18 @@ public class IterateExpAttribution extends AbstractAttribution
 		IterateExp targetExpression = (IterateExp)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
 		if (containmentFeature == PivotPackage.Literals.LOOP_EXP__BODY) {
-			OclExpression source = targetExpression.getSource();
+			OCLExpression source = targetExpression.getSource();
 			environmentView.addElementsOfScope(source.getType(), scopeView);
 			environmentView.addElements(targetExpression.getIterator());
 			environmentView.addNamedElement(targetExpression.getResult());
 		}
 		else if (containmentFeature == PivotPackage.Literals.ITERATE_EXP__RESULT) {
-			OclExpression source = targetExpression.getSource();
+			OCLExpression source = targetExpression.getSource();
 			environmentView.addElements(targetExpression.getIterator());
 			environmentView.addElementsOfScope(source.getType(), scopeView);
 		}
 		else if (containmentFeature == PivotPackage.Literals.LOOP_EXP__ITERATOR) {
-			OclExpression source = targetExpression.getSource();
+			OCLExpression source = targetExpression.getSource();
 			environmentView.addElementsOfScope(source.getType(), scopeView);
 			EObject child = scopeView.getChild();
 			for (Variable iterator : targetExpression.getIterator()) {

@@ -47,7 +47,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * @generated
  */
 public class VariableExpImpl
-		extends OclExpressionImpl
+		extends OCLExpressionImpl
 		implements VariableExp {
 
 	/**

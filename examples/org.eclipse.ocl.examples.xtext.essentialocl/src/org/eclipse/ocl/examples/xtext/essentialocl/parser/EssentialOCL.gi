@@ -364,9 +364,9 @@
 --  Declarations
 -----------------------------------------------------------------------     
     VariableDeclarationCS -> SimpleName
-    VariableDeclarationCS -> SimpleName '=' OclExpressionCS
+    VariableDeclarationCS -> SimpleName '=' OCLExpressionCS
     VariableDeclarationCS -> SimpleName ':' TypeExpCS
-    VariableDeclarationCS -> SimpleName ':' TypeExpCS '=' OclExpressionCS
+    VariableDeclarationCS -> SimpleName ':' TypeExpCS '=' OCLExpressionCS
 
 -----------------------------------------------------------------------
 --  Literals
@@ -384,8 +384,8 @@
     CollectionLiteralPartCSlist ::= CollectionLiteralPartCS
     CollectionLiteralPartCSlist ::= CollectionLiteralPartCSlist ',' CollectionLiteralPartCS
 
-    CollectionLiteralPartCS ::= OclExpressionCS
-    CollectionLiteralPartCS ::= OclExpressionCS '..' OclExpressionCS
+    CollectionLiteralPartCS ::= OCLExpressionCS
+    CollectionLiteralPartCS ::= OCLExpressionCS '..' OCLExpressionCS
 
     PrimitiveLiteralExpCS -> NumberLiteralExpCS
     PrimitiveLiteralExpCS -> StringLiteralExpCS
@@ -399,8 +399,8 @@
     TupleLiteralPartCSlist ::= TupleLiteralPartCS
     TupleLiteralPartCSlist ::= TupleLiteralPartCSlist ',' TupleLiteralPartCS
 
-    TupleLiteralPartCS -> SimpleName '=' OclExpressionCS
-    TupleLiteralPartCS -> SimpleName ':' TypeExpCS '=' OclExpressionCS
+    TupleLiteralPartCS -> SimpleName '=' OCLExpressionCS
+    TupleLiteralPartCS -> SimpleName ':' TypeExpCS '=' OCLExpressionCS
 
     NumberLiteralExpCS ::= INTEGER_LITERAL
     NumberLiteralExpCS ::= REAL_LITERAL
@@ -432,8 +432,8 @@
 -----------------------------------------------------------------------
 --  Expressions
 -----------------------------------------------------------------------
-    OclExpressionCS -> InfixedExpCS
-    OclExpressionCS -> InfixedLetExpCS
+    OCLExpressionCS -> InfixedExpCS
+    OCLExpressionCS -> InfixedLetExpCS
 
 	InfixedExpCS -> PrefixedExpCS
 	InfixedExpCS ::= InfixedExpCS InfixOperator PrefixedExpCS
@@ -465,8 +465,8 @@
 	IndexExpCS ::= NameExpCS '[' ExpCSlist ']'
 	IndexExpCS ::= NameExpCS '[' ExpCSlist ']' '[' ExpCSlist ']'
 	
-	ExpCSlist ::= OclExpressionCS
-	ExpCSlist ::= ExpCSlist ',' OclExpressionCS
+	ExpCSlist ::= OCLExpressionCS
+	ExpCSlist ::= ExpCSlist ',' OCLExpressionCS
 
 	NavigatingExpCSbase -> IndexExpCS
 
@@ -481,24 +481,24 @@
     UntypedExpressionCSlist ::= UntypedExpressionCS
     UntypedExpressionCSlist ::= UntypedExpressionCSlist ',' UntypedExpressionCS
 
-	UntypedExpressionCS -> OclExpressionCS
+	UntypedExpressionCS -> OCLExpressionCS
 
-	TypedExpressionCS ::= OclExpressionCS
-	TypedExpressionCS ::= OclExpressionCS ':' TypeExpCS
+	TypedExpressionCS ::= OCLExpressionCS
+	TypedExpressionCS ::= OCLExpressionCS ':' TypeExpCS
 
-	iteratorAccumulatorCS ::= SimpleName ':' TypeExpCS '=' OclExpressionCS
+	iteratorAccumulatorCS ::= SimpleName ':' TypeExpCS '=' OCLExpressionCS
 
-    IfExpCS ::= if OclExpressionCS then OclExpressionCS else OclExpressionCS endif
+    IfExpCS ::= if OCLExpressionCS then OCLExpressionCS else OCLExpressionCS endif
 
-    LetExpCS ::= let LetVariableCSlist in OclExpressionCS
+    LetExpCS ::= let LetVariableCSlist in OCLExpressionCS
     
     LetVariableCSlist ::= LetVariableCS 
     LetVariableCSlist ::= LetVariableCSlist ',' LetVariableCS
 
-    LetVariableCS ::= SimpleName '=' OclExpressionCS 
-    LetVariableCS ::= SimpleName ':' TypeExpCS '=' OclExpressionCS 
+    LetVariableCS ::= SimpleName '=' OCLExpressionCS 
+    LetVariableCS ::= SimpleName ':' TypeExpCS '=' OCLExpressionCS 
 
-	NestedExpCS  ::= '(' OclExpressionCS ')'
+	NestedExpCS  ::= '(' OCLExpressionCS ')'
         
     SelfExpCS ::= self
 %End

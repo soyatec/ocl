@@ -19,7 +19,7 @@ package org.eclipse.ocl.examples.pivot.attributes;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.ocl.examples.pivot.IteratorExp;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
@@ -35,12 +35,12 @@ public class IteratorExpAttribution extends AbstractAttribution
 		IteratorExp targetExpression = (IteratorExp)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
 		if (containmentFeature == PivotPackage.Literals.LOOP_EXP__BODY) {
-			OclExpression source = targetExpression.getSource();
+			OCLExpression source = targetExpression.getSource();
 			environmentView.addElementsOfScope(source.getType(), scopeView);
 			environmentView.addElements(targetExpression.getIterator());
 		}
 		else if (containmentFeature == PivotPackage.Literals.LOOP_EXP__ITERATOR) {
-			OclExpression source = targetExpression.getSource();
+			OCLExpression source = targetExpression.getSource();
 			environmentView.addElementsOfScope(source.getType(), scopeView);
 			EObject child = scopeView.getChild();
 			for (Variable iterator : targetExpression.getIterator()) {

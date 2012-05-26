@@ -702,7 +702,7 @@ public class OCL {
 	 * 
 	 * @see #validate(Object)
 	 */
-	public void validate(OclExpression expression) throws SemanticException {
+	public void validate(OCLExpression expression) throws SemanticException {
 		throw new UnsupportedOperationException(getClass().getName() + ".validate");
 		// clear out old diagnostics
 /*		ProblemHandler ph = OCLUtil.getAdapter(rootEnvironment,

@@ -41,7 +41,7 @@ import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
@@ -352,7 +352,7 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 	public Object visitLoopExp(LoopExp object) {
 		appendExpPrefix(object);
 		if (object.isImplicit()) {
-			OclExpression body = object.getBody();
+			OCLExpression body = object.getBody();
 			if (body instanceof CallExp) {
 				Feature referredFeature = PivotUtil.getReferredFeature((CallExp) body);
 				context.appendName(referredFeature);

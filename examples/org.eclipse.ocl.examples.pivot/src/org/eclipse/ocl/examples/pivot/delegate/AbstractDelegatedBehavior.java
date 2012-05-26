@@ -39,7 +39,7 @@ import org.eclipse.ocl.examples.domain.validation.DomainSubstitutionLabelProvide
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
@@ -152,7 +152,7 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 						if ((message != null) && (message.length() > 0)) {
 							ParserContext messageContext = new DiagnosticContext(parserContext, constraint);
 							ExpressionInOCL resolveSpecification = messageContext.parse(message);
-							OclExpression messageExpression = resolveSpecification.getBodyExpression();
+							OCLExpression messageExpression = resolveSpecification.getBodyExpression();
 							for (TreeIterator<EObject> tit = messageExpression.eAllContents(); tit.hasNext(); ) {
 								EObject eObject = tit.next();
 								if (eObject instanceof VariableExp) {

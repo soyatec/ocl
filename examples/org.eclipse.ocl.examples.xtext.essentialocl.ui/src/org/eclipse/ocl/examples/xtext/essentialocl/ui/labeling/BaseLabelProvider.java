@@ -62,7 +62,7 @@ import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.NavigationCallExp;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
 import org.eclipse.ocl.examples.pivot.NumericLiteralExp;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.OrderedSetType;
@@ -615,7 +615,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		return "/org.eclipse.ocl.edit/icons/full/obj16/NumericLiteralExp.gif";
 	}
 
-	protected String text(OclExpression ele) {
+	protected String text(OCLExpression ele) {
 		Namespace namespace = PivotUtil.getNamespace(ele.eContainer());
 		StringBuilder s = new StringBuilder();
 		s.append(PrettyPrinter.printName(ele, namespace));

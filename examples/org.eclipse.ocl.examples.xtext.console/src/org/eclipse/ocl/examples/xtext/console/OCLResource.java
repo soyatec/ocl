@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 
 
 /**
@@ -81,7 +81,7 @@ public class OCLResource
 		
 		res.load(Collections.EMPTY_MAP);
 		
-		OclExpression expr = res.getOCLExpression();
+		OCLExpression expr = res.getOCLExpression();
 		if (expr != null) {
 			result = expr.toString();
 		}
@@ -112,7 +112,7 @@ public class OCLResource
         ConstraintKind kind = document.getModelingLevel().setContext(
             helper, document.getOCLContext(), document.getOCLFactory());
 		
-        OclExpression parsed = null;
+        OCLExpression parsed = null;
         
         switch (document.getModelingLevel()) {
             case M2:
@@ -136,7 +136,7 @@ public class OCLResource
 	 * 
 	 * @param expr an OCL expression
 	 */
-	public void setOCLExpression(OclExpression expr) {
+	public void setOCLExpression(OCLExpression expr) {
 		// add my expression as the first root, because I already contain
 		//    variables and EPackages defining dynamically-generated types
 		getContents().add(0, expr);
@@ -147,11 +147,11 @@ public class OCLResource
 	 * 
 	 * @return my OCL expression
 	 */
-	public OclExpression getOCLExpression() {
-		OclExpression result = null;
+	public OCLExpression getOCLExpression() {
+		OCLExpression result = null;
 		
 		if (!getContents().isEmpty()) {
-			result = (OclExpression) getContents().get(0);
+			result = (OCLExpression) getContents().get(0);
 		}
 		
 		return result;

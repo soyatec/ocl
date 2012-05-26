@@ -258,7 +258,7 @@ public interface Environment extends BasicEnvironment {
          * @return the matching registered environment, or <code>null</code> if
          *     none is available
          */
-		Environment getEnvironmentFor(OclExpression expression);
+		Environment getEnvironmentFor(OCLExpression expression);
 		
         /**
          * Obtains a suitable environment for introspection of the specified

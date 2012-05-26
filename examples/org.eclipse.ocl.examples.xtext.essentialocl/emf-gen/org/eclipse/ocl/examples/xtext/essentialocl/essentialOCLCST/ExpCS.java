@@ -63,4 +63,4 @@ public interface ExpCS extends ModelElementCS {
 	 * @generated
 	 */
 	void setParent(OperatorCS value);
-} // OclExpressionCS
+} // ExpCS

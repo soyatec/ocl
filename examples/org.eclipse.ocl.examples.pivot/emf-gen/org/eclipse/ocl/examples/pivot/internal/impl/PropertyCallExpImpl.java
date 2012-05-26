@@ -27,7 +27,7 @@ import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Feature;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
@@ -192,7 +192,7 @@ public class PropertyCallExpImpl
 				setType((Type)newValue);
 				return;
 			case PivotPackage.PROPERTY_CALL_EXP__SOURCE:
-				setSource((OclExpression)newValue);
+				setSource((OCLExpression)newValue);
 				return;
 			case PivotPackage.PROPERTY_CALL_EXP__IMPLICIT:
 				setImplicit((Boolean)newValue);
@@ -202,7 +202,7 @@ public class PropertyCallExpImpl
 				return;
 			case PivotPackage.PROPERTY_CALL_EXP__QUALIFIER:
 				getQualifier().clear();
-				getQualifier().addAll((Collection<? extends OclExpression>)newValue);
+				getQualifier().addAll((Collection<? extends OCLExpression>)newValue);
 				return;
 			case PivotPackage.PROPERTY_CALL_EXP__NAVIGATION_SOURCE:
 				setNavigationSource((Property)newValue);
@@ -242,7 +242,7 @@ public class PropertyCallExpImpl
 				setType((Type)null);
 				return;
 			case PivotPackage.PROPERTY_CALL_EXP__SOURCE:
-				setSource((OclExpression)null);
+				setSource((OCLExpression)null);
 				return;
 			case PivotPackage.PROPERTY_CALL_EXP__IMPLICIT:
 				setImplicit(IMPLICIT_EDEFAULT);

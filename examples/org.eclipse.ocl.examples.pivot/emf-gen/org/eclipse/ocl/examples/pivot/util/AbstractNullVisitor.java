@@ -237,7 +237,7 @@ public abstract class AbstractNullVisitor<R, C>
 		return null;
 	}
 
-	public R visitOclExpression(org.eclipse.ocl.examples.pivot.OclExpression object) {
+	public R visitOCLExpression(org.eclipse.ocl.examples.pivot.OCLExpression object) {
 		return null;
 	}
 

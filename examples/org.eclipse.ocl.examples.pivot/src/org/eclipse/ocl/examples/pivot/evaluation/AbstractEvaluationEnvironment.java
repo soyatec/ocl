@@ -384,7 +384,7 @@ public abstract class AbstractEvaluationEnvironment
         return result;
     }
 
-/*	public NullValue throwInvalidEvaluation(Object value, OclExpression expression,
+/*	public NullValue throwInvalidEvaluation(Object value, OCLExpression expression,
 			String message, Object object)
 			throws InvalidEvaluationException {
 		// TODO Auto-generated method stub

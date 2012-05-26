@@ -47,7 +47,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *
  * @generated
  */
-public class ConstructorExpImpl extends OclExpressionImpl implements ConstructorExp
+public class ConstructorExpImpl extends OCLExpressionImpl implements ConstructorExp
 {
 	/**
 	 * The cached value of the '{@link #getPart() <em>Part</em>}' containment reference list.

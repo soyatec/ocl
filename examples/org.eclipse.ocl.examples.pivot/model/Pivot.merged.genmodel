@@ -561,7 +561,7 @@
       </genFeatures>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass" image="false">
-      <ecoreClass href="Pivot.ecore#//OclExpression"/>
+      <ecoreClass href="Pivot.ecore#//OCLExpression"/>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass">
       <ecoreClass href="Pivot.ecore#//BagType"/>

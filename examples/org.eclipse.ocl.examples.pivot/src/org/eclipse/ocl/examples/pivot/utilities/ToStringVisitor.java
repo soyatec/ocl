@@ -56,7 +56,7 @@ import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.MessageExp;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
@@ -335,7 +335,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 		append("."); //$NON-NLS-1$
 		appendName(ac.getReferredAssociationClass()); //$NON-NLS-1$
 		appendAtPre(ac);
-        List<OclExpression> qualifiers = ac.getQualifier();
+        List<OCLExpression> qualifiers = ac.getQualifier();
 		if (!qualifiers.isEmpty()) {
 			append("[");
 			safeVisit(qualifiers.get(0));
@@ -535,7 +535,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	@Override
 	public String visitConstructorPart(ConstructorPart part) {
 		appendName(part.getReferredProperty());
-		OclExpression initExpression = part.getInitExpression();
+		OCLExpression initExpression = part.getInitExpression();
 		if (initExpression != null) {
 			append(" = ");
 			safeVisit(initExpression);
@@ -785,7 +785,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 		}
 		append("(");
 		String prefix = "";
-		for (OclExpression argument : messageExp.getArgument()) {
+		for (OCLExpression argument : messageExp.getArgument()) {
 			append(prefix);
             safeVisit(argument);
             prefix = ", "; //$NON-NLS-1$
@@ -849,7 +849,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	 */
 	@Override
 	public String visitOperationCallExp(OperationCallExp oc) {
-        OclExpression source = oc.getSource();
+        OCLExpression source = oc.getSource();
 		safeVisit(source);
 		Operation oper = oc.getReferredOperation();
 		if (oper != null) {
@@ -864,7 +864,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 		}
 		append("(");
 		String prefix = "";//$NON-NLS-1$
-		for (OclExpression argument : oc.getArgument()) {
+		for (OCLExpression argument : oc.getArgument()) {
 			append(prefix);
 			safeVisit(argument);
 			prefix = ", ";//$NON-NLS-1$
@@ -915,7 +915,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	public String visitPropertyCallExp(PropertyCallExp pc) {
         // source is null when the property call expression is an
         //    association class navigation qualifier
-        OclExpression source = pc.getSource();
+        OCLExpression source = pc.getSource();
 		safeVisit(source);
 		Property property = pc.getReferredProperty();
         Type sourceType = source != null ? source.getType() : null;
@@ -924,11 +924,11 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 				: PivotConstants.OBJECT_NAVIGATION_OPERATOR);
 		appendName(property);
 		appendAtPre(pc);
-        List<OclExpression> qualifiers = pc.getQualifier();
+        List<OCLExpression> qualifiers = pc.getQualifier();
 		if (!qualifiers.isEmpty()) {
 			append("["); //$NON-NLS-1$
 			String prefix = ""; //$NON-NLS-1$
-			for (OclExpression qualifier : qualifiers) {
+			for (OCLExpression qualifier : qualifiers) {
 				append(prefix);
 				safeVisit(qualifier);
 				prefix = ", "; //$NON-NLS-1$
@@ -1037,7 +1037,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 			append(" : ");
 			appendName(type);
 		}
-		OclExpression initExpression = part.getInitExpression();
+		OCLExpression initExpression = part.getInitExpression();
 		if (initExpression != null) {
 			append(" = ");
 			safeVisit(initExpression);
@@ -1121,7 +1121,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 			append(" : ");
 			safeVisit(type);
 		}
-		OclExpression initExpression = variable.getInitExpression();
+		OCLExpression initExpression = variable.getInitExpression();
 		if (initExpression != null) {
 			append(" = ");
 			safeVisit(initExpression);

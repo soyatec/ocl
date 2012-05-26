@@ -27,13 +27,13 @@ import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.Environment;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 
 /**
  * A specialized visitor that is used for evaluation an
- * {@linkplain OclExpression OCL expression} by walking its AST.
+ * {@linkplain OCLExpression OCL expression} by walking its AST.
  * <p>
  * See the {@link Environment} class for a description of the
  * generic type parameters of this class. 

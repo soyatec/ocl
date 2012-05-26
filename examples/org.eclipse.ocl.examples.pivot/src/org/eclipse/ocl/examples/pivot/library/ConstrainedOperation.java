@@ -29,7 +29,7 @@ import org.eclipse.ocl.examples.domain.library.LibraryTernaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
@@ -54,9 +54,9 @@ public class ConstrainedOperation extends AbstractOperation implements LibraryUn
 		nestedEvaluationEnvironment.add(expressionInOCL.getContextVariable(), sourceValue);
 		List<Variable> parameters = expressionInOCL.getParameterVariable();
 		if (!parameters.isEmpty()) {
-			List<OclExpression> arguments = ((OperationCallExp)callExp).getArgument();
+			List<OCLExpression> arguments = ((OperationCallExp)callExp).getArgument();
 			for (int i = 0; i < parameters.size(); i++) {
-				OclExpression argument = arguments.get(i);
+				OCLExpression argument = arguments.get(i);
 				Value value = argument.accept(evaluationVisitor);
 				nestedEvaluationEnvironment.add(parameters.get(i).getRepresentedParameter(), value);
 			}

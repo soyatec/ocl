@@ -40,7 +40,7 @@ public interface NavigationCallExp
 
 	/**
 	 * Returns the value of the '<em><b>Qualifier</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.OclExpression}.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Qualifier</em>' reference list isn't clear,
@@ -52,7 +52,7 @@ public interface NavigationCallExp
 	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!NavigationCallExp!qualifier'"
 	 * @generated
 	 */
-	EList<OclExpression> getQualifier();
+	EList<OCLExpression> getQualifier();
 
 	/**
 	 * Returns the value of the '<em><b>Navigation Source</b></em>' reference.

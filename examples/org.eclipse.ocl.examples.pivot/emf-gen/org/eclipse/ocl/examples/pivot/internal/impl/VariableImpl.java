@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -62,7 +62,7 @@ public class VariableImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression initExpression;
+	protected OCLExpression initExpression;
 
 	/**
 	 * The cached value of the '{@link #getRepresentedParameter() <em>Represented Parameter</em>}' reference.
@@ -118,7 +118,7 @@ public class VariableImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression getInitExpression() {
+	public OCLExpression getInitExpression() {
 		return initExpression;
 	}
 
@@ -128,8 +128,8 @@ public class VariableImpl
 	 * @generated
 	 */
 	public NotificationChain basicSetInitExpression(
-			OclExpression newInitExpression, NotificationChain msgs) {
-		OclExpression oldInitExpression = initExpression;
+			OCLExpression newInitExpression, NotificationChain msgs) {
+		OCLExpression oldInitExpression = initExpression;
 		initExpression = newInitExpression;
 		if (eNotificationRequired())
 		{
@@ -144,7 +144,7 @@ public class VariableImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInitExpression(OclExpression newInitExpression) {
+	public void setInitExpression(OCLExpression newInitExpression) {
 		if (newInitExpression != initExpression)
 		{
 			NotificationChain msgs = null;
@@ -164,8 +164,8 @@ public class VariableImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression createInitExpression(EClass eClass) {
-		OclExpression newInitExpression = (OclExpression) create(eClass);
+	public OCLExpression createInitExpression(EClass eClass) {
+		OCLExpression newInitExpression = (OCLExpression) create(eClass);
 		setInitExpression(newInitExpression);
 		return newInitExpression;
 	}
@@ -320,7 +320,7 @@ public class VariableImpl
 				setType((Type)newValue);
 				return;
 			case PivotPackage.VARIABLE__INIT_EXPRESSION:
-				setInitExpression((OclExpression)newValue);
+				setInitExpression((OCLExpression)newValue);
 				return;
 			case PivotPackage.VARIABLE__REPRESENTED_PARAMETER:
 				setRepresentedParameter((Parameter)newValue);
@@ -360,7 +360,7 @@ public class VariableImpl
 				setType((Type)null);
 				return;
 			case PivotPackage.VARIABLE__INIT_EXPRESSION:
-				setInitExpression((OclExpression)null);
+				setInitExpression((OCLExpression)null);
 				return;
 			case PivotPackage.VARIABLE__REPRESENTED_PARAMETER:
 				setRepresentedParameter((Parameter)null);

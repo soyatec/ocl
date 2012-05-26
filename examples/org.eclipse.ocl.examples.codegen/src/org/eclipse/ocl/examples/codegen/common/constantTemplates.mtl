@@ -283,7 +283,7 @@ final <%DomainStandardLibrary%> standardLibrary = valueFactory.getStandardLibrar
 final <%ValueFactory%> valueFactory = evaluator.getValueFactory();
 [/template]
 
-[query public isConstant(ast : OclExpression) : Boolean =
+[query public isConstant(ast : OCLExpression) : Boolean =
 if ast.oclIsKindOf(PrimitiveLiteralExp) then isConstantPrimitiveLiteralExp(ast.oclAsType(PrimitiveLiteralExp))
 else if ast.oclIsKindOf(CollectionLiteralExp) then isConstantCollectionLiteralExp(ast.oclAsType(CollectionLiteralExp))
 else if ast.oclIsKindOf(TupleLiteralExp) then isConstantTupleLiteralExp(ast.oclAsType(TupleLiteralExp))

@@ -49,7 +49,7 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LoopExp;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -86,7 +86,7 @@ public abstract class LoopExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression body;
+	protected OCLExpression body;
 
 	/**
 	 * The cached value of the '{@link #getIterator() <em>Iterator</em>}' containment reference list.
@@ -132,7 +132,7 @@ public abstract class LoopExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression getBody() {
+	public OCLExpression getBody() {
 		return body;
 	}
 
@@ -141,9 +141,9 @@ public abstract class LoopExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetBody(OclExpression newBody,
+	public NotificationChain basicSetBody(OCLExpression newBody,
 			NotificationChain msgs) {
-		OclExpression oldBody = body;
+		OCLExpression oldBody = body;
 		body = newBody;
 		if (eNotificationRequired())
 		{
@@ -158,7 +158,7 @@ public abstract class LoopExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setBody(OclExpression newBody) {
+	public void setBody(OCLExpression newBody) {
 		if (newBody != body)
 		{
 			NotificationChain msgs = null;
@@ -178,8 +178,8 @@ public abstract class LoopExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression createBody(EClass eClass) {
-		OclExpression newBody = (OclExpression) create(eClass);
+	public OCLExpression createBody(EClass eClass) {
+		OCLExpression newBody = (OCLExpression) create(eClass);
 		setBody(newBody);
 		return newBody;
 	}
@@ -417,13 +417,13 @@ public abstract class LoopExpImpl
 				setType((Type)newValue);
 				return;
 			case PivotPackage.LOOP_EXP__SOURCE:
-				setSource((OclExpression)newValue);
+				setSource((OCLExpression)newValue);
 				return;
 			case PivotPackage.LOOP_EXP__IMPLICIT:
 				setImplicit((Boolean)newValue);
 				return;
 			case PivotPackage.LOOP_EXP__BODY:
-				setBody((OclExpression)newValue);
+				setBody((OCLExpression)newValue);
 				return;
 			case PivotPackage.LOOP_EXP__ITERATOR:
 				getIterator().clear();
@@ -464,13 +464,13 @@ public abstract class LoopExpImpl
 				setType((Type)null);
 				return;
 			case PivotPackage.LOOP_EXP__SOURCE:
-				setSource((OclExpression)null);
+				setSource((OCLExpression)null);
 				return;
 			case PivotPackage.LOOP_EXP__IMPLICIT:
 				setImplicit(IMPLICIT_EDEFAULT);
 				return;
 			case PivotPackage.LOOP_EXP__BODY:
-				setBody((OclExpression)null);
+				setBody((OCLExpression)null);
 				return;
 			case PivotPackage.LOOP_EXP__ITERATOR:
 				getIterator().clear();

@@ -29,7 +29,7 @@ import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Feature;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -194,7 +194,7 @@ public class AssociationClassCallExpImpl
 				setType((Type)newValue);
 				return;
 			case PivotPackage.ASSOCIATION_CLASS_CALL_EXP__SOURCE:
-				setSource((OclExpression)newValue);
+				setSource((OCLExpression)newValue);
 				return;
 			case PivotPackage.ASSOCIATION_CLASS_CALL_EXP__IMPLICIT:
 				setImplicit((Boolean)newValue);
@@ -204,7 +204,7 @@ public class AssociationClassCallExpImpl
 				return;
 			case PivotPackage.ASSOCIATION_CLASS_CALL_EXP__QUALIFIER:
 				getQualifier().clear();
-				getQualifier().addAll((Collection<? extends OclExpression>)newValue);
+				getQualifier().addAll((Collection<? extends OCLExpression>)newValue);
 				return;
 			case PivotPackage.ASSOCIATION_CLASS_CALL_EXP__NAVIGATION_SOURCE:
 				setNavigationSource((Property)newValue);
@@ -244,7 +244,7 @@ public class AssociationClassCallExpImpl
 				setType((Type)null);
 				return;
 			case PivotPackage.ASSOCIATION_CLASS_CALL_EXP__SOURCE:
-				setSource((OclExpression)null);
+				setSource((OCLExpression)null);
 				return;
 			case PivotPackage.ASSOCIATION_CLASS_CALL_EXP__IMPLICIT:
 				setImplicit(IMPLICIT_EDEFAULT);

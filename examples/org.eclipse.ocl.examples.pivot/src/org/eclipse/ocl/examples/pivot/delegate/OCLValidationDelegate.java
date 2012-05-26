@@ -40,7 +40,7 @@ import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
@@ -100,7 +100,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 	}
 
 	protected String evaluateMessage(EvaluationVisitor evaluationVisitor, String constraintName, ExpressionInOCL query) {
-		OclExpression messageExpression = query.getMessageExpression();
+		OCLExpression messageExpression = query.getMessageExpression();
 		if (messageExpression == null) {
 			return null;
 		}

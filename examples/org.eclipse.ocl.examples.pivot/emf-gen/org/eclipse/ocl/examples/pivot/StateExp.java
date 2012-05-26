@@ -33,7 +33,7 @@ package org.eclipse.ocl.examples.pivot;
  * @generated
  */
 public interface StateExp
-		extends OclExpression {
+		extends OCLExpression {
 
 	/**
 	 * Returns the value of the '<em><b>Referred State</b></em>' reference.

@@ -19,7 +19,7 @@ import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.IterateExp;
 import org.eclipse.ocl.examples.pivot.LoopExp;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -82,7 +82,7 @@ public class InvocationExpCSAttribution extends AbstractAttribution
 					if (csParent instanceof NavigationOperatorCS) {
 						NavigationOperatorCS csNavigationOperator = (NavigationOperatorCS)csParent;
 						ExpCS csSource = csNavigationOperator.getSource();
-						OclExpression source = PivotUtil.getPivot(OclExpression.class, csSource);
+						OCLExpression source = PivotUtil.getPivot(OCLExpression.class, csSource);
 						if (source != null) {
 							Type type = source.getType();
 							if (csNavigationOperator.getName().equals(PivotConstants.COLLECTION_NAVIGATION_OPERATOR)) {
@@ -135,7 +135,7 @@ public class InvocationExpCSAttribution extends AbstractAttribution
 			}
 			Type type = null;
 			if (explicitSource != null) {
-				OclExpression source = PivotUtil.getPivot(OclExpression.class, explicitSource);
+				OCLExpression source = PivotUtil.getPivot(OCLExpression.class, explicitSource);
 				if (source != null) {
 					type = source.getType();
 				}

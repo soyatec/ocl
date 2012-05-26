@@ -21,7 +21,7 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -66,7 +66,7 @@ public class OCLinEcoreLeft2RightVisitor extends AbstractOCLinEcoreLeft2RightVis
 				String resultVariableName = isPostCondition ? Environment.RESULT_VARIABLE_NAME : null;
 				context.setOperationContext(pivotSpecification, contextOperation,resultVariableName);
 			}
-			OclExpression bodyExpression = context.visitLeft2Right(OclExpression.class, csExpression);		
+			OCLExpression bodyExpression = context.visitLeft2Right(OCLExpression.class, csExpression);		
 			pivotSpecification.setBodyExpression(bodyExpression);
 			if (bodyExpression != null) {
 				pivotSpecification.setType(bodyExpression.getType());
@@ -76,7 +76,7 @@ public class OCLinEcoreLeft2RightVisitor extends AbstractOCLinEcoreLeft2RightVis
 				context.installPivotUsage(csMessageSpecification, pivotSpecification);
 				ExpCS csMessageExpression = csMessageSpecification.getOwnedExpression();
 				if (csMessageExpression != null) {
-					OclExpression messageExpression = context.visitLeft2Right(OclExpression.class, csMessageExpression);		
+					OCLExpression messageExpression = context.visitLeft2Right(OCLExpression.class, csMessageExpression);		
 					pivotSpecification.setMessageExpression(messageExpression);
 				}
 			}

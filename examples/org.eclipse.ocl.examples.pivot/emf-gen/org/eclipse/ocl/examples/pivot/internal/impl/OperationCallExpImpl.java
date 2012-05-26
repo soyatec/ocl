@@ -47,7 +47,7 @@ import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Feature;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -84,7 +84,7 @@ public class OperationCallExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<OclExpression> argument;
+	protected EList<OCLExpression> argument;
 
 	/**
 	 * The cached value of the '{@link #getReferredOperation() <em>Referred Operation</em>}' reference.
@@ -120,11 +120,11 @@ public class OperationCallExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<OclExpression> getArgument()
+	public EList<OCLExpression> getArgument()
 	{
 		if (argument == null)
 		{
-			argument = new EObjectContainmentEList<OclExpression>(OclExpression.class, this, PivotPackage.OPERATION_CALL_EXP__ARGUMENT);
+			argument = new EObjectContainmentEList<OCLExpression>(OCLExpression.class, this, PivotPackage.OPERATION_CALL_EXP__ARGUMENT);
 		}
 		return argument;
 	}
@@ -134,8 +134,8 @@ public class OperationCallExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression createArgument(EClass eClass) {
-		OclExpression newArgument = (OclExpression) create(eClass);
+	public OCLExpression createArgument(EClass eClass) {
+		OCLExpression newArgument = (OCLExpression) create(eClass);
 		getArgument().add(newArgument);
 		return newArgument;
 	}
@@ -308,7 +308,7 @@ public class OperationCallExpImpl
 				setType((Type)newValue);
 				return;
 			case PivotPackage.OPERATION_CALL_EXP__SOURCE:
-				setSource((OclExpression)newValue);
+				setSource((OCLExpression)newValue);
 				return;
 			case PivotPackage.OPERATION_CALL_EXP__IMPLICIT:
 				setImplicit((Boolean)newValue);
@@ -318,7 +318,7 @@ public class OperationCallExpImpl
 				return;
 			case PivotPackage.OPERATION_CALL_EXP__ARGUMENT:
 				getArgument().clear();
-				getArgument().addAll((Collection<? extends OclExpression>)newValue);
+				getArgument().addAll((Collection<? extends OCLExpression>)newValue);
 				return;
 			case PivotPackage.OPERATION_CALL_EXP__REFERRED_OPERATION:
 				setReferredOperation((Operation)newValue);
@@ -355,7 +355,7 @@ public class OperationCallExpImpl
 				setType((Type)null);
 				return;
 			case PivotPackage.OPERATION_CALL_EXP__SOURCE:
-				setSource((OclExpression)null);
+				setSource((OCLExpression)null);
 				return;
 			case PivotPackage.OPERATION_CALL_EXP__IMPLICIT:
 				setImplicit(IMPLICIT_EDEFAULT);

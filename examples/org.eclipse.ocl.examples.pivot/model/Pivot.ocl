@@ -312,7 +312,7 @@ No additional well-formedness rules. */
 /** NumericLiteralExp
 No additional well-formedness rules. */
 
-/** OclExpression
+/** OCLExpression
 No additional well-formedness rules. */
 --context MessageExp
 /** If the message is an operation call action, the arguments must conform to the parameters of the operation. */
@@ -350,7 +350,7 @@ inv TargetIsNotACollection: not target.type.oclIsKindOf (CollectionType)
 	let parameters : OrderedSet(Parameter) = operation.ownedParameter in
 	let selfType : Type = operation.owningType in
 	Sequence{1..argument->size()}->forAll (i | 
-		let argument : OclExpression = argument->at(i) in
+		let argument : OCLExpression = argument->at(i) in
 		let parameter : Parameter = parameters->at(i) in
 		let parameterType : Type = parameter.type in
 		argument.type.conformsTo(parameterType.resolveSelfType(selfType))) */

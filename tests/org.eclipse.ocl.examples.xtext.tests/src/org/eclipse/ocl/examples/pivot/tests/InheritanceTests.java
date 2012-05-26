@@ -129,7 +129,7 @@ public class InheritanceTests extends PivotSimpleTestSuite
 			assert !depthNInheritances.hasNext();
 			assert oclAnyInheritance.isSuperInheritanceOf(metaModelManager, ifInheritance);
 			assert !ifInheritance.isSuperInheritanceOf(metaModelManager, oclAnyInheritance);
-			DomainInheritance oclExpressionInheritance = metaModelManager.getInheritance(metaModelManager.getPivotType("OclExpression"));
+			DomainInheritance oclExpressionInheritance = metaModelManager.getInheritance(metaModelManager.getPivotType("OCLExpression"));
 			assert oclExpressionInheritance.isSuperInheritanceOf(metaModelManager, ifInheritance);
 			assert !ifInheritance.isSuperInheritanceOf(metaModelManager, oclExpressionInheritance);
 			DomainInheritance loopExpInheritance = metaModelManager.getInheritance(metaModelManager.getPivotType("LoopExp"));

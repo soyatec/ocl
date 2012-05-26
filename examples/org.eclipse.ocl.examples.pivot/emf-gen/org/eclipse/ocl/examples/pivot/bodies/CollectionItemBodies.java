@@ -60,22 +60,22 @@ public class CollectionItemBodies
 			final ExecutorType T_Pivot_ecore__pivot__Type = PivotTables.Types._Type;
 			final ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
 			final LibraryProperty IP_TypedElement_type = P_TypedElement_type.getImplementation();
-			final ExecutorType T_Pivot_ecore__pivot__OclExpression = PivotTables.Types._OclExpression;
+			final ExecutorType T_Pivot_ecore__pivot__OCLExpression = PivotTables.Types._OCLExpression;
 			final ExecutorProperty P_CollectionItem_item = PivotTables.Properties._CollectionItem__item;
 			final LibraryProperty IP_CollectionItem_item = P_CollectionItem_item.getImplementation();
 			
 			
-			Value A_symbol_325 = IP_TypedElement_type.evaluate(evaluator, T_Pivot_ecore__pivot__Type, self, P_TypedElement_type);
+			Value A_symbol_24 = IP_TypedElement_type.evaluate(evaluator, T_Pivot_ecore__pivot__Type, self, P_TypedElement_type);
 			
 			
-			Value A_symbol_326 = IP_CollectionItem_item.evaluate(evaluator, T_Pivot_ecore__pivot__OclExpression, self, P_CollectionItem_item);
+			Value A_symbol_25 = IP_CollectionItem_item.evaluate(evaluator, T_Pivot_ecore__pivot__OCLExpression, self, P_CollectionItem_item);
 			
-			Value A_symbol_327 = IP_TypedElement_type.evaluate(evaluator, T_Pivot_ecore__pivot__Type, A_symbol_326, P_TypedElement_type);
+			Value A_symbol_26 = IP_TypedElement_type.evaluate(evaluator, T_Pivot_ecore__pivot__Type, A_symbol_25, P_TypedElement_type);
 			
-			DomainType static_A_symbol_328 = valueFactory.typeOf(A_symbol_325, A_symbol_327);
-			LibraryBinaryOperation dynamic_A_symbol_328 = (LibraryBinaryOperation)static_A_symbol_328.lookupImplementation(standardLibrary, O_OclAny__eq_);
-			Value A_symbol_328 = dynamic_A_symbol_328.evaluate(evaluator, T_Boolean, A_symbol_325, A_symbol_327);
-			return A_symbol_328;
+			DomainType static_A_symbol_27 = valueFactory.typeOf(A_symbol_24, A_symbol_26);
+			LibraryBinaryOperation dynamic_A_symbol_27 = (LibraryBinaryOperation)static_A_symbol_27.lookupImplementation(standardLibrary, O_OclAny__eq_);
+			Value A_symbol_27 = dynamic_A_symbol_27.evaluate(evaluator, T_Boolean, A_symbol_24, A_symbol_26);
+			return A_symbol_27;
 		}
 	}
 

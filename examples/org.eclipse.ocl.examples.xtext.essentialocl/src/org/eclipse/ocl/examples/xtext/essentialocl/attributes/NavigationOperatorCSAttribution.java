@@ -18,7 +18,7 @@ package org.eclipse.ocl.examples.xtext.essentialocl.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.CollectionType;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -41,7 +41,7 @@ public class NavigationOperatorCSAttribution extends AbstractAttribution
 		NavigationOperatorCS targetElement = (NavigationOperatorCS)target;
 		EObject child = scopeView.getChild();
 		if (child == targetElement.getArgument()) {
-			OclExpression source = PivotUtil.getPivot(OclExpression.class, targetElement.getSource());
+			OCLExpression source = PivotUtil.getPivot(OCLExpression.class, targetElement.getSource());
 			if (source != null) {
 				Type type = source.getType();
 				if (!targetElement.getName().equals(PivotConstants.COLLECTION_NAVIGATION_OPERATOR)) {

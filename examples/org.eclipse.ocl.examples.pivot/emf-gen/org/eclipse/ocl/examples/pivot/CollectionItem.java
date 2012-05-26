@@ -48,13 +48,13 @@ public interface CollectionItem
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Item</em>' containment reference.
-	 * @see #setItem(OclExpression)
+	 * @see #setItem(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionItem_Item()
 	 * @model containment="true" required="true" ordered="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!CollectionItem!item'"
 	 * @generated
 	 */
-	OclExpression getItem();
+	OCLExpression getItem();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.CollectionItem#getItem <em>Item</em>}' containment reference.
@@ -64,18 +64,18 @@ public interface CollectionItem
 	 * @see #getItem()
 	 * @generated
 	 */
-	void setItem(OclExpression value);
+	void setItem(OCLExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OclExpression} and sets the '<em><b>Item</b></em>' containment reference.
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>Item</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OclExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OclExpression}.
+	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
 	 * @see #getItem()
 	 * @generated
 	 */
-	OclExpression createItem(EClass eClass);
+	OCLExpression createItem(EClass eClass);
 
 	/**
 	 * <!-- begin-user-doc -->

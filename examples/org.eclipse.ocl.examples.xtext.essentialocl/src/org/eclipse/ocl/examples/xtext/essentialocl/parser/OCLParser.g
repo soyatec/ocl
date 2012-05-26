@@ -177,8 +177,8 @@
     initOrDerValuesCS ::= initOrDerValueCS
     initOrDerValuesCS ::= initOrDerValuesCS initOrDerValueCS
 
-    initOrDerValueCS ::= init ':' OclExpressionCS
-    initOrDerValueCS ::= derive ':' OclExpressionCS
+    initOrDerValueCS ::= init ':' OCLExpressionCS
+    initOrDerValueCS ::= derive ':' OCLExpressionCS
 
 	classifierContextDeclCS ::= context NameExpCS invOrDefsCS
 	classifierContextDeclCS ::= context SimpleName ':' NameExpCS invOrDefsCS
@@ -186,21 +186,21 @@
     invOrDefsCS ::= invOrDefCS
     invOrDefsCS ::= invOrDefsCS invOrDefCS
 
-	invOrDefCS ::= inv unreservedSimpleNameCSopt ':' OclExpressionCS
+	invOrDefCS ::= inv unreservedSimpleNameCSopt ':' OCLExpressionCS
     invOrDefCS ::= def unreservedSimpleNameCSopt ':' defExpressionCS
     invOrDefCS ::= static def unreservedSimpleNameCSopt ':' defExpressionCS
 
-	defExpressionCS ::= SimpleName ':' TypeExpCS '=' OclExpressionCS
-	defExpressionCS ::= operationCS1 '=' OclExpressionCS
+	defExpressionCS ::= SimpleName ':' TypeExpCS '=' OCLExpressionCS
+	defExpressionCS ::= operationCS1 '=' OCLExpressionCS
 
 	operationContextDeclCS ::= context operationCS2 prePostOrBodyDeclsCS
 
     prePostOrBodyDeclsCS ::= prePostOrBodyDeclCS
     prePostOrBodyDeclsCS ::= prePostOrBodyDeclsCS prePostOrBodyDeclCS
 
-    prePostOrBodyDeclCS ::= pre unreservedSimpleNameCSopt ':' OclExpressionCS
-    prePostOrBodyDeclCS ::= post unreservedSimpleNameCSopt ':' OclExpressionCS
-    prePostOrBodyDeclCS ::= body unreservedSimpleNameCSopt ':' OclExpressionCS
+    prePostOrBodyDeclCS ::= pre unreservedSimpleNameCSopt ':' OCLExpressionCS
+    prePostOrBodyDeclCS ::= post unreservedSimpleNameCSopt ':' OCLExpressionCS
+    prePostOrBodyDeclCS ::= body unreservedSimpleNameCSopt ':' OCLExpressionCS
 
 	operationCS1 ::= SimpleName '(' parametersCSopt ')' ':' TypeExpCSopt
 	operationCS2 ::= NameExpCS '::' unreservedSimpleNameCS '(' parametersCSopt ')' ':' TypeExpCSopt

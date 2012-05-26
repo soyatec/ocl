@@ -60,20 +60,20 @@ public class IfExpBodies
 			final ExecutorType T_Pivot_ecore__pivot__Type = PivotTables.Types._Type;
 			final ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
 			final LibraryProperty IP_TypedElement_type = P_TypedElement_type.getImplementation();
-			final ExecutorType T_Pivot_ecore__pivot__OclExpression = PivotTables.Types._OclExpression;
+			final ExecutorType T_Pivot_ecore__pivot__OCLExpression = PivotTables.Types._OCLExpression;
 			final ExecutorProperty P_IfExp_condition = PivotTables.Properties._IfExp__condition;
 			final LibraryProperty IP_IfExp_condition = P_IfExp_condition.getImplementation();
 			final Value T_ClassClassifier_Boolean_ = valueFactory.createTypeValue(OCLstdlibTables.Types._Boolean);
 			
 			
-			Value A_symbol_320 = IP_IfExp_condition.evaluate(evaluator, T_Pivot_ecore__pivot__OclExpression, self, P_IfExp_condition);
+			Value A_symbol_34 = IP_IfExp_condition.evaluate(evaluator, T_Pivot_ecore__pivot__OCLExpression, self, P_IfExp_condition);
 			
-			Value A_symbol_321 = IP_TypedElement_type.evaluate(evaluator, T_Pivot_ecore__pivot__Type, A_symbol_320, P_TypedElement_type);
+			Value A_symbol_35 = IP_TypedElement_type.evaluate(evaluator, T_Pivot_ecore__pivot__Type, A_symbol_34, P_TypedElement_type);
 			
-			DomainType static_A_symbol_322 = valueFactory.typeOf(A_symbol_321, T_ClassClassifier_Boolean_);
-			LibraryBinaryOperation dynamic_A_symbol_322 = (LibraryBinaryOperation)static_A_symbol_322.lookupImplementation(standardLibrary, O_OclAny__eq_);
-			Value A_symbol_322 = dynamic_A_symbol_322.evaluate(evaluator, T_Boolean, A_symbol_321, T_ClassClassifier_Boolean_);
-			return A_symbol_322;
+			DomainType static_A_symbol_36 = valueFactory.typeOf(A_symbol_35, T_ClassClassifier_Boolean_);
+			LibraryBinaryOperation dynamic_A_symbol_36 = (LibraryBinaryOperation)static_A_symbol_36.lookupImplementation(standardLibrary, O_OclAny__eq_);
+			Value A_symbol_36 = dynamic_A_symbol_36.evaluate(evaluator, T_Boolean, A_symbol_35, T_ClassClassifier_Boolean_);
+			return A_symbol_36;
 		}
 	}
 

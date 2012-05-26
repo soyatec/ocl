@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
@@ -155,7 +155,7 @@ public class EssentialOCLScoping
 			}
 			if (source == null) {
 				if ((csSource != null) && (csSource != navigationArgument)) {
-					source = PivotUtil.getPivot(OclExpression.class, csSource);
+					source = PivotUtil.getPivot(OCLExpression.class, csSource);
 				}
 			}
 			String typeText = PivotConstants.UNKNOWN_TYPE_TEXT;

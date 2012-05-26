@@ -51,13 +51,13 @@ public interface LoopExp
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Body</em>' containment reference.
-	 * @see #setBody(OclExpression)
+	 * @see #setBody(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getLoopExp_Body()
 	 * @model containment="true" required="true" ordered="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!LoopExp!body'"
 	 * @generated
 	 */
-	OclExpression getBody();
+	OCLExpression getBody();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.LoopExp#getBody <em>Body</em>}' containment reference.
@@ -67,18 +67,18 @@ public interface LoopExp
 	 * @see #getBody()
 	 * @generated
 	 */
-	void setBody(OclExpression value);
+	void setBody(OCLExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OclExpression} and sets the '<em><b>Body</b></em>' containment reference.
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>Body</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OclExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OclExpression}.
+	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
 	 * @see #getBody()
 	 * @generated
 	 */
-	OclExpression createBody(EClass eClass);
+	OCLExpression createBody(EClass eClass);
 
 	/**
 	 * Returns the value of the '<em><b>Iterator</b></em>' containment reference list.

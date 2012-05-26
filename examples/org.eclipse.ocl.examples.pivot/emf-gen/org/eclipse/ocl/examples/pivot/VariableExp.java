@@ -34,7 +34,7 @@ package org.eclipse.ocl.examples.pivot;
  * @generated
  */
 public interface VariableExp
-		extends OclExpression {
+		extends OCLExpression {
 
 	/**
 	 * Returns the value of the '<em><b>Referred Variable</b></em>' reference.

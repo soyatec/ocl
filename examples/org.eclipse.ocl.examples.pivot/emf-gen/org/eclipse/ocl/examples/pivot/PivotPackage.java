@@ -85,11 +85,11 @@ public interface PivotPackage
 	PivotPackage eINSTANCE = org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.OclExpressionImpl <em>Ocl Expression</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.OCLExpressionImpl <em>OCL Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.pivot.internal.impl.OclExpressionImpl
-	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getOclExpression()
+	 * @see org.eclipse.ocl.examples.pivot.internal.impl.OCLExpressionImpl
+	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getOCLExpression()
 	 * @generated
 	 */
 	int OCL_EXPRESSION = 51;
@@ -2318,7 +2318,7 @@ public interface PivotPackage
 	int OCL_EXPRESSION__TYPE = TYPED_ELEMENT__TYPE;
 
 	/**
-	 * The number of structural features of the '<em>Ocl Expression</em>' class.
+	 * The number of structural features of the '<em>OCL Expression</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2345,7 +2345,7 @@ public interface PivotPackage
 	int OCL_EXPRESSION___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = TYPED_ELEMENT___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The number of operations of the '<em>Ocl Expression</em>' class.
+	 * The number of operations of the '<em>OCL Expression</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -16154,16 +16154,6 @@ public interface PivotPackage
 	EOperation getElement__ValidateNotOwnSelf__DiagnosticChain_Map();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.OclExpression <em>Ocl Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Ocl Expression</em>'.
-	 * @see org.eclipse.ocl.examples.pivot.OclExpression
-	 * @generated
-	 */
-	EClass getOclExpression();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.BagType <em>Bag Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16824,6 +16814,16 @@ public interface PivotPackage
 	 * @generated
 	 */
 	EClass getNumericLiteralExp();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.OCLExpression <em>OCL Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>OCL Expression</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.OCLExpression
+	 * @generated
+	 */
+	EClass getOCLExpression();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.InvalidLiteralExp <em>Invalid Literal Exp</em>}'.
@@ -19718,14 +19718,14 @@ public interface PivotPackage
 		EOperation ELEMENT___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = eINSTANCE.getElement__ValidateNotOwnSelf__DiagnosticChain_Map();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.OclExpressionImpl <em>Ocl Expression</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.OCLExpressionImpl <em>OCL Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.pivot.internal.impl.OclExpressionImpl
-		 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getOclExpression()
+		 * @see org.eclipse.ocl.examples.pivot.internal.impl.OCLExpressionImpl
+		 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getOCLExpression()
 		 * @generated
 		 */
-		EClass OCL_EXPRESSION = eINSTANCE.getOclExpression();
+		EClass OCL_EXPRESSION = eINSTANCE.getOCLExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.BagTypeImpl <em>Bag Type</em>}' class.

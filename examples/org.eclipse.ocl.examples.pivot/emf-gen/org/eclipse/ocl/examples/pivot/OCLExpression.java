@@ -11,8 +11,6 @@
  *   E.D.Willink - Initial API and implementation
  *
  * </copyright>
- *
- * $Id: OclExpression.java,v 1.3 2011/03/01 08:47:19 ewillink Exp $
  */
 package org.eclipse.ocl.examples.pivot;
 
@@ -24,12 +22,12 @@ package org.eclipse.ocl.examples.pivot;
  * <!-- end-user-doc -->
  *
  *
- * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOclExpression()
+ * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOCLExpression()
  * @model abstract="true"
  * @generated
  */
-public interface OclExpression
+public interface OCLExpression
 		extends TypedElement, org.eclipse.ocl.examples.domain.elements.DomainExpression {
 
-} // OclExpression
+} // OCLExpression
 

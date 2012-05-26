@@ -45,7 +45,7 @@ import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -79,7 +79,7 @@ public class CollectionItemImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression item;
+	protected OCLExpression item;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -105,7 +105,7 @@ public class CollectionItemImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression getItem() {
+	public OCLExpression getItem() {
 		return item;
 	}
 
@@ -114,9 +114,9 @@ public class CollectionItemImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetItem(OclExpression newItem,
+	public NotificationChain basicSetItem(OCLExpression newItem,
 			NotificationChain msgs) {
-		OclExpression oldItem = item;
+		OCLExpression oldItem = item;
 		item = newItem;
 		if (eNotificationRequired())
 		{
@@ -131,7 +131,7 @@ public class CollectionItemImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setItem(OclExpression newItem) {
+	public void setItem(OCLExpression newItem) {
 		if (newItem != item)
 		{
 			NotificationChain msgs = null;
@@ -151,8 +151,8 @@ public class CollectionItemImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression createItem(EClass eClass) {
-		OclExpression newItem = (OclExpression) create(eClass);
+	public OCLExpression createItem(EClass eClass) {
+		OCLExpression newItem = (OCLExpression) create(eClass);
 		setItem(newItem);
 		return newItem;
 	}
@@ -274,7 +274,7 @@ public class CollectionItemImpl
 				setType((Type)newValue);
 				return;
 			case PivotPackage.COLLECTION_ITEM__ITEM:
-				setItem((OclExpression)newValue);
+				setItem((OCLExpression)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -308,7 +308,7 @@ public class CollectionItemImpl
 				setType((Type)null);
 				return;
 			case PivotPackage.COLLECTION_ITEM__ITEM:
-				setItem((OclExpression)null);
+				setItem((OCLExpression)null);
 				return;
 		}
 		eDynamicUnset(featureID);

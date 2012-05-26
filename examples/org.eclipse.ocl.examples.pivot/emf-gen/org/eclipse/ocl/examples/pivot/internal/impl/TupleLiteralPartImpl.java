@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.TupleLiteralPart;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -58,7 +58,7 @@ public class TupleLiteralPartImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression initExpression;
+	protected OCLExpression initExpression;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,7 +83,7 @@ public class TupleLiteralPartImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression getInitExpression()
+	public OCLExpression getInitExpression()
 	{
 		return initExpression;
 	}
@@ -93,9 +93,9 @@ public class TupleLiteralPartImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetInitExpression(OclExpression newInitExpression, NotificationChain msgs)
+	public NotificationChain basicSetInitExpression(OCLExpression newInitExpression, NotificationChain msgs)
 	{
-		OclExpression oldInitExpression = initExpression;
+		OCLExpression oldInitExpression = initExpression;
 		initExpression = newInitExpression;
 		if (eNotificationRequired())
 		{
@@ -110,7 +110,7 @@ public class TupleLiteralPartImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInitExpression(OclExpression newInitExpression)
+	public void setInitExpression(OCLExpression newInitExpression)
 	{
 		if (newInitExpression != initExpression)
 		{
@@ -131,9 +131,9 @@ public class TupleLiteralPartImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression createInitExpression(EClass eClass)
+	public OCLExpression createInitExpression(EClass eClass)
 	{
-		OclExpression newInitExpression = (OclExpression) create(eClass);
+		OCLExpression newInitExpression = (OCLExpression) create(eClass);
 		setInitExpression(newInitExpression);
 		return newInitExpression;
 	}
@@ -220,7 +220,7 @@ public class TupleLiteralPartImpl
 				setType((Type)newValue);
 				return;
 			case PivotPackage.TUPLE_LITERAL_PART__INIT_EXPRESSION:
-				setInitExpression((OclExpression)newValue);
+				setInitExpression((OCLExpression)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -254,7 +254,7 @@ public class TupleLiteralPartImpl
 				setType((Type)null);
 				return;
 			case PivotPackage.TUPLE_LITERAL_PART__INIT_EXPRESSION:
-				setInitExpression((OclExpression)null);
+				setInitExpression((OCLExpression)null);
 				return;
 		}
 		eDynamicUnset(featureID);

@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
@@ -105,7 +105,7 @@ public abstract class AbstractParserContext /*extends AdapterImpl*/ implements P
 		} catch (IOException e) {
 //				throw new ParserException("Failed to load expression", e);
 			ExpressionInOCL specification = PivotFactory.eINSTANCE.createExpressionInOCL();
-			OclExpression invalidValueBody = metaModelManager.createInvalidExpression();
+			OCLExpression invalidValueBody = metaModelManager.createInvalidExpression();
 			specification.setBodyExpression(invalidValueBody);
 			return specification;
 		} finally {

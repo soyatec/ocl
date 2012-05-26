@@ -37,7 +37,7 @@ import org.eclipse.emf.ecore.EClass;
  * @generated
  */
 public interface CallExp
-		extends OclExpression, org.eclipse.ocl.examples.domain.elements.DomainCallExp {
+		extends OCLExpression, org.eclipse.ocl.examples.domain.elements.DomainCallExp {
 
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' containment reference.
@@ -48,13 +48,13 @@ public interface CallExp
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Source</em>' containment reference.
-	 * @see #setSource(OclExpression)
+	 * @see #setSource(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCallExp_Source()
 	 * @model containment="true" ordered="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!CallExp!source'"
 	 * @generated
 	 */
-	OclExpression getSource();
+	OCLExpression getSource();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.CallExp#getSource <em>Source</em>}' containment reference.
@@ -64,18 +64,18 @@ public interface CallExp
 	 * @see #getSource()
 	 * @generated
 	 */
-	void setSource(OclExpression value);
+	void setSource(OCLExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OclExpression} and sets the '<em><b>Source</b></em>' containment reference.
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OclExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OclExpression}.
+	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
 	 * @see #getSource()
 	 * @generated
 	 */
-	OclExpression createSource(EClass eClass);
+	OCLExpression createSource(EClass eClass);
 
 	/**
 	 * Returns the value of the '<em><b>Implicit</b></em>' attribute.

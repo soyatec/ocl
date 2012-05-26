@@ -47,7 +47,7 @@ import org.eclipse.ocl.examples.pivot.CallOperationAction;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.MessageExp;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.SendSignalAction;
@@ -74,7 +74,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * @generated
  */
 public class MessageExpImpl
-		extends OclExpressionImpl
+		extends OCLExpressionImpl
 		implements MessageExp {
 
 	/**
@@ -85,7 +85,7 @@ public class MessageExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression target;
+	protected OCLExpression target;
 
 	/**
 	 * The cached value of the '{@link #getArgument() <em>Argument</em>}' containment reference list.
@@ -95,7 +95,7 @@ public class MessageExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<OclExpression> argument;
+	protected EList<OCLExpression> argument;
 
 	/**
 	 * The cached value of the '{@link #getCalledOperation() <em>Called Operation</em>}' containment reference.
@@ -142,7 +142,7 @@ public class MessageExpImpl
 	 * @generated
 	 */
 	@Override
-	public OclExpression getTarget() {
+	public OCLExpression getTarget() {
 		return target;
 	}
 
@@ -151,9 +151,9 @@ public class MessageExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTarget(OclExpression newTarget,
+	public NotificationChain basicSetTarget(OCLExpression newTarget,
 			NotificationChain msgs) {
-		OclExpression oldTarget = target;
+		OCLExpression oldTarget = target;
 		target = newTarget;
 		if (eNotificationRequired())
 		{
@@ -168,7 +168,7 @@ public class MessageExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTarget(OclExpression newTarget) {
+	public void setTarget(OCLExpression newTarget) {
 		if (newTarget != target)
 		{
 			NotificationChain msgs = null;
@@ -188,8 +188,8 @@ public class MessageExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression createTarget(EClass eClass) {
-		OclExpression newTarget = (OclExpression) create(eClass);
+	public OCLExpression createTarget(EClass eClass) {
+		OCLExpression newTarget = (OCLExpression) create(eClass);
 		setTarget(newTarget);
 		return newTarget;
 	}
@@ -199,11 +199,11 @@ public class MessageExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<OclExpression> getArgument()
+	public EList<OCLExpression> getArgument()
 	{
 		if (argument == null)
 		{
-			argument = new EObjectContainmentEList<OclExpression>(OclExpression.class, this, PivotPackage.MESSAGE_EXP__ARGUMENT);
+			argument = new EObjectContainmentEList<OCLExpression>(OCLExpression.class, this, PivotPackage.MESSAGE_EXP__ARGUMENT);
 		}
 		return argument;
 	}
@@ -213,8 +213,8 @@ public class MessageExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression createArgument(EClass eClass) {
-		OclExpression newArgument = (OclExpression) create(eClass);
+	public OCLExpression createArgument(EClass eClass) {
+		OCLExpression newArgument = (OCLExpression) create(eClass);
 		getArgument().add(newArgument);
 		return newArgument;
 	}
@@ -497,11 +497,11 @@ public class MessageExpImpl
 				setType((Type)newValue);
 				return;
 			case PivotPackage.MESSAGE_EXP__TARGET:
-				setTarget((OclExpression)newValue);
+				setTarget((OCLExpression)newValue);
 				return;
 			case PivotPackage.MESSAGE_EXP__ARGUMENT:
 				getArgument().clear();
-				getArgument().addAll((Collection<? extends OclExpression>)newValue);
+				getArgument().addAll((Collection<? extends OCLExpression>)newValue);
 				return;
 			case PivotPackage.MESSAGE_EXP__CALLED_OPERATION:
 				setCalledOperation((CallOperationAction)newValue);
@@ -541,7 +541,7 @@ public class MessageExpImpl
 				setType((Type)null);
 				return;
 			case PivotPackage.MESSAGE_EXP__TARGET:
-				setTarget((OclExpression)null);
+				setTarget((OCLExpression)null);
 				return;
 			case PivotPackage.MESSAGE_EXP__ARGUMENT:
 				getArgument().clear();

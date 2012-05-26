@@ -1,13 +1,11 @@
 /**
  * <copyright>
  * </copyright>
- *
- * $Id: OclExpressionImpl.java,v 1.3 2011/03/01 08:47:18 ewillink Exp $
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 
@@ -20,16 +18,16 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *
  * @generated
  */
-public abstract class OclExpressionImpl
+public abstract class OCLExpressionImpl
 		extends TypedElementImpl
-		implements OclExpression {
+		implements OCLExpression {
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected OclExpressionImpl() {
+	protected OCLExpressionImpl() {
 		super();
 	}
 
@@ -45,8 +43,8 @@ public abstract class OclExpressionImpl
 
 	@Override
 	public <R> R accept(Visitor<R> visitor) {
-		return visitor.visitOclExpression(this);
+		return visitor.visitOCLExpression(this);
 	}
 
-} //OclExpressionImpl
+} //OCLExpressionImpl
 

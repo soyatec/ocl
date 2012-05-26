@@ -31,7 +31,7 @@ import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Query;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -175,7 +175,7 @@ public class OCLQueryDelegate implements QueryDelegate
 
 	@Override
 	public String toString() {
-		OclExpression bodyExpression = specification.getBodyExpression();
+		OCLExpression bodyExpression = specification.getBodyExpression();
 		if (bodyExpression != null) {
 			return "<" + delegateDomain.getURI() + ":query> " + bodyExpression; //$NON-NLS-1$ //$NON-NLS-2$
 		}

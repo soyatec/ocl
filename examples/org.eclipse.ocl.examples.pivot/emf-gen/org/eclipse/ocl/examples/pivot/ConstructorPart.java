@@ -71,13 +71,13 @@ public interface ConstructorPart extends Element
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Init Expression</em>' containment reference.
-	 * @see #setInitExpression(OclExpression)
+	 * @see #setInitExpression(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstructorPart_InitExpression()
 	 * @model containment="true" required="true" ordered="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ConstructorPart!initExpression'"
 	 * @generated
 	 */
-	OclExpression getInitExpression();
+	OCLExpression getInitExpression();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.ConstructorPart#getInitExpression <em>Init Expression</em>}' containment reference.
@@ -87,17 +87,17 @@ public interface ConstructorPart extends Element
 	 * @see #getInitExpression()
 	 * @generated
 	 */
-	void setInitExpression(OclExpression value);
+	void setInitExpression(OCLExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OclExpression} and sets the '<em><b>Init Expression</b></em>' containment reference.
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>Init Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OclExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OclExpression}.
+	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
 	 * @see #getInitExpression()
 	 * @generated
 	 */
-	OclExpression createInitExpression(EClass eClass);
+	OCLExpression createInitExpression(EClass eClass);
 
 } // ConstructorPart

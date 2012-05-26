@@ -176,4 +176,4 @@ public class ExpCSImpl extends ModelElementCSImpl implements ExpCS {
 		super.resetPivot();
 		setParent(null);
 	}
-} //OclExpressionCSImpl
+} //ExpCSImpl

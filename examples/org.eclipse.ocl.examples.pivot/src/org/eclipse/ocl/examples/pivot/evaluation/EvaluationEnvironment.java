@@ -243,7 +243,7 @@ public interface EvaluationEnvironment extends DomainEvaluationEnvironment {
 
 	ValueFactory getValueFactory();
 
-//	NullValue throwInvalidEvaluation(Object value, OclExpression expression, String message, Object object) throws InvalidEvaluationException;
+//	NullValue throwInvalidEvaluation(Object value, OCLExpression expression, String message, Object object) throws InvalidEvaluationException;
 
 	NullValue throwInvalidEvaluation(InvalidValueException e) throws InvalidEvaluationException;
 

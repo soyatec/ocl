@@ -43,7 +43,7 @@ public interface OperationCallExp
 
 	/**
 	 * Returns the value of the '<em><b>Argument</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.OclExpression}.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Argument</em>' containment reference list isn't clear,
@@ -56,18 +56,18 @@ public interface OperationCallExp
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!OperationCallExp!argument'"
 	 * @generated
 	 */
-	EList<OclExpression> getArgument();
+	EList<OCLExpression> getArgument();
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OclExpression} and appends it to the '<em><b>Argument</b></em>' containment reference list.
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and appends it to the '<em><b>Argument</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OclExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OclExpression}.
+	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
 	 * @see #getArgument()
 	 * @generated
 	 */
-	OclExpression createArgument(EClass eClass);
+	OCLExpression createArgument(EClass eClass);
 
 	/**
 	 * Returns the value of the '<em><b>Referred Operation</b></em>' reference.

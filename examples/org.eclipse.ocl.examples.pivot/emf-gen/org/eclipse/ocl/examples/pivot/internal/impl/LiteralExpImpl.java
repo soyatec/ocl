@@ -31,7 +31,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * @generated
  */
 public abstract class LiteralExpImpl
-		extends OclExpressionImpl
+		extends OCLExpressionImpl
 		implements LiteralExp {
 
 	/**

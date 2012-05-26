@@ -48,7 +48,7 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Namespace;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -194,7 +194,7 @@ public class Pivot2Ecore extends AbstractConversion
 				oclAnnotation.getDetails().put(name, exprString);
 				String messageString = PivotUtil.getMessage((OpaqueExpression) specification);
 				if ((messageString == null) && (specification instanceof ExpressionInOCL)) {
-					OclExpression messageExpression = ((ExpressionInOCL)specification).getMessageExpression();
+					OCLExpression messageExpression = ((ExpressionInOCL)specification).getMessageExpression();
 					if (messageExpression != null) {
 						messageString = PrettyPrinter.print(messageExpression, options);
 					}

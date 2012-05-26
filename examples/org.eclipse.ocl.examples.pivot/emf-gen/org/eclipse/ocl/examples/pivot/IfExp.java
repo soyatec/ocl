@@ -39,7 +39,7 @@ import org.eclipse.emf.ecore.EClass;
  * @generated
  */
 public interface IfExp
-		extends OclExpression {
+		extends OCLExpression {
 
 	/**
 	 * Returns the value of the '<em><b>Condition</b></em>' containment reference.
@@ -50,13 +50,13 @@ public interface IfExp
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Condition</em>' containment reference.
-	 * @see #setCondition(OclExpression)
+	 * @see #setCondition(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getIfExp_Condition()
 	 * @model containment="true" required="true" ordered="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!IfExp!condition'"
 	 * @generated
 	 */
-	OclExpression getCondition();
+	OCLExpression getCondition();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.IfExp#getCondition <em>Condition</em>}' containment reference.
@@ -66,18 +66,18 @@ public interface IfExp
 	 * @see #getCondition()
 	 * @generated
 	 */
-	void setCondition(OclExpression value);
+	void setCondition(OCLExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OclExpression} and sets the '<em><b>Condition</b></em>' containment reference.
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>Condition</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OclExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OclExpression}.
+	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
 	 * @see #getCondition()
 	 * @generated
 	 */
-	OclExpression createCondition(EClass eClass);
+	OCLExpression createCondition(EClass eClass);
 
 	/**
 	 * Returns the value of the '<em><b>Then Expression</b></em>' containment reference.
@@ -88,13 +88,13 @@ public interface IfExp
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Then Expression</em>' containment reference.
-	 * @see #setThenExpression(OclExpression)
+	 * @see #setThenExpression(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getIfExp_ThenExpression()
 	 * @model containment="true" required="true" ordered="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!IfExp!thenExpression'"
 	 * @generated
 	 */
-	OclExpression getThenExpression();
+	OCLExpression getThenExpression();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.IfExp#getThenExpression <em>Then Expression</em>}' containment reference.
@@ -104,18 +104,18 @@ public interface IfExp
 	 * @see #getThenExpression()
 	 * @generated
 	 */
-	void setThenExpression(OclExpression value);
+	void setThenExpression(OCLExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OclExpression} and sets the '<em><b>Then Expression</b></em>' containment reference.
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>Then Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OclExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OclExpression}.
+	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
 	 * @see #getThenExpression()
 	 * @generated
 	 */
-	OclExpression createThenExpression(EClass eClass);
+	OCLExpression createThenExpression(EClass eClass);
 
 	/**
 	 * Returns the value of the '<em><b>Else Expression</b></em>' containment reference.
@@ -126,13 +126,13 @@ public interface IfExp
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Else Expression</em>' containment reference.
-	 * @see #setElseExpression(OclExpression)
+	 * @see #setElseExpression(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getIfExp_ElseExpression()
 	 * @model containment="true" required="true" ordered="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!IfExp!elseExpression'"
 	 * @generated
 	 */
-	OclExpression getElseExpression();
+	OCLExpression getElseExpression();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.IfExp#getElseExpression <em>Else Expression</em>}' containment reference.
@@ -142,18 +142,18 @@ public interface IfExp
 	 * @see #getElseExpression()
 	 * @generated
 	 */
-	void setElseExpression(OclExpression value);
+	void setElseExpression(OCLExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OclExpression} and sets the '<em><b>Else Expression</b></em>' containment reference.
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>Else Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OclExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OclExpression}.
+	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
 	 * @see #getElseExpression()
 	 * @generated
 	 */
-	OclExpression createElseExpression(EClass eClass);
+	OCLExpression createElseExpression(EClass eClass);
 
 	/**
 	 * <!-- begin-user-doc -->

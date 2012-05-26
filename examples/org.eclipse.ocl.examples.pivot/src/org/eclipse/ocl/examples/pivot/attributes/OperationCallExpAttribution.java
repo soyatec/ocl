@@ -18,7 +18,7 @@ package org.eclipse.ocl.examples.pivot.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
@@ -34,7 +34,7 @@ public class OperationCallExpAttribution extends AbstractAttribution
 		OperationCallExp targetExpression = (OperationCallExp)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
 		if (containmentFeature == PivotPackage.Literals.OPERATION_CALL_EXP__ARGUMENT) {
-			OclExpression source = targetExpression.getSource();
+			OCLExpression source = targetExpression.getSource();
 			environmentView.addElementsOfScope(source.getType(), scopeView);
 		}
 		return scopeView.getParent();

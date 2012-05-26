@@ -100,177 +100,177 @@ public class TypedMultiplicityElementBodies
 			final ExecutorOperation O_OclAny_oclAsType = OCLstdlibTables.Operations._OclAny__oclAsType;
 			
 			
-			Value A_symbol_343 = IP_TypedElement_type.evaluate(evaluator, T_Pivot_ecore__pivot__Type, bodySpecification, P_TypedElement_type);
+			Value A_symbol_105 = IP_TypedElement_type.evaluate(evaluator, T_Pivot_ecore__pivot__Type, bodySpecification, P_TypedElement_type);
 			
-			final Value V_bodyType = A_symbol_343;
+			final Value V_bodyType = A_symbol_105;
 				
-				DomainType static_A_symbol_344 = valueFactory.typeOf(V_bodyType);
-				LibraryBinaryOperation dynamic_A_symbol_344 = (LibraryBinaryOperation)static_A_symbol_344.lookupImplementation(standardLibrary, O_OclAny_oclIsKindOf);
-				Value A_symbol_344 = dynamic_A_symbol_344.evaluate(evaluator, T_Boolean, V_bodyType, T_ClassClassifier_Pivot_ecore__pivot__CollectionType_);
-			Value A_symbol_345;
-			if (A_symbol_344.isTrue()) {
+				DomainType static_A_symbol_106 = valueFactory.typeOf(V_bodyType);
+				LibraryBinaryOperation dynamic_A_symbol_106 = (LibraryBinaryOperation)static_A_symbol_106.lookupImplementation(standardLibrary, O_OclAny_oclIsKindOf);
+				Value A_symbol_106 = dynamic_A_symbol_106.evaluate(evaluator, T_Boolean, V_bodyType, T_ClassClassifier_Pivot_ecore__pivot__CollectionType_);
+			Value A_symbol_107;
+			if (A_symbol_106.isTrue()) {
 				
-				DomainType static_A_symbol_346 = valueFactory.typeOf(V_bodyType);
-				LibraryBinaryOperation dynamic_A_symbol_346 = (LibraryBinaryOperation)static_A_symbol_346.lookupImplementation(standardLibrary, O_OclAny_oclAsType);
-				Value A_symbol_346 = dynamic_A_symbol_346.evaluate(evaluator, T_Pivot_ecore__pivot__CollectionType, V_bodyType, T_ClassClassifier_Pivot_ecore__pivot__CollectionType_);
-				final Value V_bodyCollectionType = A_symbol_346;
+				DomainType static_A_symbol_108 = valueFactory.typeOf(V_bodyType);
+				LibraryBinaryOperation dynamic_A_symbol_108 = (LibraryBinaryOperation)static_A_symbol_108.lookupImplementation(standardLibrary, O_OclAny_oclAsType);
+				Value A_symbol_108 = dynamic_A_symbol_108.evaluate(evaluator, T_Pivot_ecore__pivot__CollectionType, V_bodyType, T_ClassClassifier_Pivot_ecore__pivot__CollectionType_);
+				final Value V_bodyCollectionType = A_symbol_108;
 				
-				Value A_symbol_347 = IP_CollectionType_elementType.evaluate(evaluator, T_Pivot_ecore__pivot__Type, V_bodyCollectionType, P_CollectionType_elementType);
+				Value A_symbol_109 = IP_CollectionType_elementType.evaluate(evaluator, T_Pivot_ecore__pivot__Type, V_bodyCollectionType, P_CollectionType_elementType);
 				
-				final Value V_bodyElementType = A_symbol_347;
-				Value leftA_symbol_348;
+				final Value V_bodyElementType = A_symbol_109;
+				Value leftA_symbol_110;
 				try {
-					Value leftA_symbol_349;
+					Value leftA_symbol_111;
 					try {
 						
 						
-						Value A_symbol_350 = IP_TypedElement_type.evaluate(evaluator, T_Pivot_ecore__pivot__Type, self, P_TypedElement_type);
+						Value A_symbol_112 = IP_TypedElement_type.evaluate(evaluator, T_Pivot_ecore__pivot__Type, self, P_TypedElement_type);
 						
-						DomainType static_A_symbol_351 = valueFactory.typeOf(V_bodyElementType);
-						LibraryBinaryOperation dynamic_A_symbol_351 = (LibraryBinaryOperation)static_A_symbol_351.lookupImplementation(standardLibrary, O_OclType_conformsTo);
-						Value A_symbol_351 = dynamic_A_symbol_351.evaluate(evaluator, T_Boolean, V_bodyElementType, A_symbol_350);
-						leftA_symbol_349 = A_symbol_351;
+						DomainType static_A_symbol_113 = valueFactory.typeOf(V_bodyElementType);
+						LibraryBinaryOperation dynamic_A_symbol_113 = (LibraryBinaryOperation)static_A_symbol_113.lookupImplementation(standardLibrary, O_OclType_conformsTo);
+						Value A_symbol_113 = dynamic_A_symbol_113.evaluate(evaluator, T_Boolean, V_bodyElementType, A_symbol_112);
+						leftA_symbol_111 = A_symbol_113;
 					} catch (InvalidValueException e) {
-						leftA_symbol_349 = valueFactory.createInvalidValue(e);
+						leftA_symbol_111 = valueFactory.createInvalidValue(e);
 					}
-					Value A_symbol_351 = leftA_symbol_349;
-					Value rightA_symbol_349;
+					Value A_symbol_113 = leftA_symbol_111;
+					Value rightA_symbol_111;
 					try {
-						Value leftA_symbol_352;
+						Value leftA_symbol_114;
 						try {
 							
-							Value A_symbol_353 = IP_MultiplicityElement_isOrdered.evaluate(evaluator, T_Boolean, self, P_MultiplicityElement_isOrdered);
+							Value A_symbol_115 = IP_MultiplicityElement_isOrdered.evaluate(evaluator, T_Boolean, self, P_MultiplicityElement_isOrdered);
 							
-							leftA_symbol_352 = A_symbol_353;
+							leftA_symbol_114 = A_symbol_115;
 						} catch (InvalidValueException e) {
-							leftA_symbol_352 = valueFactory.createInvalidValue(e);
+							leftA_symbol_114 = valueFactory.createInvalidValue(e);
 						}
-						Value A_symbol_353 = leftA_symbol_352;
-						Value rightA_symbol_352;
+						Value A_symbol_115 = leftA_symbol_114;
+						Value rightA_symbol_114;
 						try {
-							Value leftA_symbol_354;
+							Value leftA_symbol_116;
 							try {
 								
-								DomainType static_A_symbol_355 = valueFactory.typeOf(V_bodyCollectionType);
-								LibraryBinaryOperation dynamic_A_symbol_355 = (LibraryBinaryOperation)static_A_symbol_355.lookupImplementation(standardLibrary, O_OclType_conformsTo);
-								Value A_symbol_355 = dynamic_A_symbol_355.evaluate(evaluator, T_Boolean, V_bodyCollectionType, T_CollectionClassifier_OrderedSet_OclAny__OclAny_);
-								leftA_symbol_354 = A_symbol_355;
+								DomainType static_A_symbol_117 = valueFactory.typeOf(V_bodyCollectionType);
+								LibraryBinaryOperation dynamic_A_symbol_117 = (LibraryBinaryOperation)static_A_symbol_117.lookupImplementation(standardLibrary, O_OclType_conformsTo);
+								Value A_symbol_117 = dynamic_A_symbol_117.evaluate(evaluator, T_Boolean, V_bodyCollectionType, T_CollectionClassifier_OrderedSet_OclAny__OclAny_);
+								leftA_symbol_116 = A_symbol_117;
 							} catch (InvalidValueException e) {
-								leftA_symbol_354 = valueFactory.createInvalidValue(e);
+								leftA_symbol_116 = valueFactory.createInvalidValue(e);
 							}
-							Value A_symbol_355 = leftA_symbol_354;
-							Value rightA_symbol_354;
+							Value A_symbol_117 = leftA_symbol_116;
+							Value rightA_symbol_116;
 							try {
 								
-								DomainType static_A_symbol_356 = valueFactory.typeOf(V_bodyCollectionType);
-								LibraryBinaryOperation dynamic_A_symbol_356 = (LibraryBinaryOperation)static_A_symbol_356.lookupImplementation(standardLibrary, O_OclType_conformsTo);
-								Value A_symbol_356 = dynamic_A_symbol_356.evaluate(evaluator, T_Boolean, V_bodyCollectionType, T_CollectionClassifier_Sequence_OclAny__OclAny_);
-								rightA_symbol_354 = A_symbol_356;
+								DomainType static_A_symbol_118 = valueFactory.typeOf(V_bodyCollectionType);
+								LibraryBinaryOperation dynamic_A_symbol_118 = (LibraryBinaryOperation)static_A_symbol_118.lookupImplementation(standardLibrary, O_OclType_conformsTo);
+								Value A_symbol_118 = dynamic_A_symbol_118.evaluate(evaluator, T_Boolean, V_bodyCollectionType, T_CollectionClassifier_Sequence_OclAny__OclAny_);
+								rightA_symbol_116 = A_symbol_118;
 							} catch (InvalidValueException e) {
-								rightA_symbol_354 = valueFactory.createInvalidValue(e);
+								rightA_symbol_116 = valueFactory.createInvalidValue(e);
 							}
-							Value A_symbol_356 = rightA_symbol_354;
-							DomainType static_A_symbol_354 = valueFactory.typeOf(A_symbol_355);
-							LibraryBinaryOperation dynamic_A_symbol_354 = (LibraryBinaryOperation)static_A_symbol_354.lookupImplementation(standardLibrary, O_Boolean_or);
-							Value A_symbol_354 = dynamic_A_symbol_354.evaluate(evaluator, T_Boolean, A_symbol_355, A_symbol_356);
-							rightA_symbol_352 = A_symbol_354;
+							Value A_symbol_118 = rightA_symbol_116;
+							DomainType static_A_symbol_116 = valueFactory.typeOf(A_symbol_117);
+							LibraryBinaryOperation dynamic_A_symbol_116 = (LibraryBinaryOperation)static_A_symbol_116.lookupImplementation(standardLibrary, O_Boolean_or);
+							Value A_symbol_116 = dynamic_A_symbol_116.evaluate(evaluator, T_Boolean, A_symbol_117, A_symbol_118);
+							rightA_symbol_114 = A_symbol_116;
 						} catch (InvalidValueException e) {
-							rightA_symbol_352 = valueFactory.createInvalidValue(e);
+							rightA_symbol_114 = valueFactory.createInvalidValue(e);
 						}
-						Value A_symbol_354 = rightA_symbol_352;
-						DomainType static_A_symbol_352 = valueFactory.typeOf(A_symbol_353, A_symbol_354);
-						LibraryBinaryOperation dynamic_A_symbol_352 = (LibraryBinaryOperation)static_A_symbol_352.lookupImplementation(standardLibrary, O_Boolean__eq_);
-						Value A_symbol_352 = dynamic_A_symbol_352.evaluate(evaluator, T_Boolean, A_symbol_353, A_symbol_354);
-						rightA_symbol_349 = A_symbol_352;
+						Value A_symbol_116 = rightA_symbol_114;
+						DomainType static_A_symbol_114 = valueFactory.typeOf(A_symbol_115, A_symbol_116);
+						LibraryBinaryOperation dynamic_A_symbol_114 = (LibraryBinaryOperation)static_A_symbol_114.lookupImplementation(standardLibrary, O_Boolean__eq_);
+						Value A_symbol_114 = dynamic_A_symbol_114.evaluate(evaluator, T_Boolean, A_symbol_115, A_symbol_116);
+						rightA_symbol_111 = A_symbol_114;
 					} catch (InvalidValueException e) {
-						rightA_symbol_349 = valueFactory.createInvalidValue(e);
+						rightA_symbol_111 = valueFactory.createInvalidValue(e);
 					}
-					Value A_symbol_352 = rightA_symbol_349;
-					DomainType static_A_symbol_349 = valueFactory.typeOf(A_symbol_351);
-					LibraryBinaryOperation dynamic_A_symbol_349 = (LibraryBinaryOperation)static_A_symbol_349.lookupImplementation(standardLibrary, O_Boolean_and);
-					Value A_symbol_349 = dynamic_A_symbol_349.evaluate(evaluator, T_Boolean, A_symbol_351, A_symbol_352);
-					leftA_symbol_348 = A_symbol_349;
+					Value A_symbol_114 = rightA_symbol_111;
+					DomainType static_A_symbol_111 = valueFactory.typeOf(A_symbol_113);
+					LibraryBinaryOperation dynamic_A_symbol_111 = (LibraryBinaryOperation)static_A_symbol_111.lookupImplementation(standardLibrary, O_Boolean_and);
+					Value A_symbol_111 = dynamic_A_symbol_111.evaluate(evaluator, T_Boolean, A_symbol_113, A_symbol_114);
+					leftA_symbol_110 = A_symbol_111;
 				} catch (InvalidValueException e) {
-					leftA_symbol_348 = valueFactory.createInvalidValue(e);
+					leftA_symbol_110 = valueFactory.createInvalidValue(e);
 				}
-				Value A_symbol_349 = leftA_symbol_348;
-				Value rightA_symbol_348;
+				Value A_symbol_111 = leftA_symbol_110;
+				Value rightA_symbol_110;
 				try {
-					Value leftA_symbol_357;
+					Value leftA_symbol_119;
 					try {
 						
-						Value A_symbol_358 = IP_MultiplicityElement_isUnique.evaluate(evaluator, T_Boolean, self, P_MultiplicityElement_isUnique);
+						Value A_symbol_120 = IP_MultiplicityElement_isUnique.evaluate(evaluator, T_Boolean, self, P_MultiplicityElement_isUnique);
 						
-						leftA_symbol_357 = A_symbol_358;
+						leftA_symbol_119 = A_symbol_120;
 					} catch (InvalidValueException e) {
-						leftA_symbol_357 = valueFactory.createInvalidValue(e);
+						leftA_symbol_119 = valueFactory.createInvalidValue(e);
 					}
-					Value A_symbol_358 = leftA_symbol_357;
-					Value rightA_symbol_357;
+					Value A_symbol_120 = leftA_symbol_119;
+					Value rightA_symbol_119;
 					try {
-						Value leftA_symbol_359;
+						Value leftA_symbol_121;
 						try {
 							
-							DomainType static_A_symbol_360 = valueFactory.typeOf(V_bodyCollectionType);
-							LibraryBinaryOperation dynamic_A_symbol_360 = (LibraryBinaryOperation)static_A_symbol_360.lookupImplementation(standardLibrary, O_OclType_conformsTo);
-							Value A_symbol_360 = dynamic_A_symbol_360.evaluate(evaluator, T_Boolean, V_bodyCollectionType, T_CollectionClassifier_OrderedSet_OclAny__OclAny_);
-							leftA_symbol_359 = A_symbol_360;
+							DomainType static_A_symbol_122 = valueFactory.typeOf(V_bodyCollectionType);
+							LibraryBinaryOperation dynamic_A_symbol_122 = (LibraryBinaryOperation)static_A_symbol_122.lookupImplementation(standardLibrary, O_OclType_conformsTo);
+							Value A_symbol_122 = dynamic_A_symbol_122.evaluate(evaluator, T_Boolean, V_bodyCollectionType, T_CollectionClassifier_OrderedSet_OclAny__OclAny_);
+							leftA_symbol_121 = A_symbol_122;
 						} catch (InvalidValueException e) {
-							leftA_symbol_359 = valueFactory.createInvalidValue(e);
+							leftA_symbol_121 = valueFactory.createInvalidValue(e);
 						}
-						Value A_symbol_360 = leftA_symbol_359;
-						Value rightA_symbol_359;
+						Value A_symbol_122 = leftA_symbol_121;
+						Value rightA_symbol_121;
 						try {
 							
-							DomainType static_A_symbol_361 = valueFactory.typeOf(V_bodyCollectionType);
-							LibraryBinaryOperation dynamic_A_symbol_361 = (LibraryBinaryOperation)static_A_symbol_361.lookupImplementation(standardLibrary, O_OclType_conformsTo);
-							Value A_symbol_361 = dynamic_A_symbol_361.evaluate(evaluator, T_Boolean, V_bodyCollectionType, T_CollectionClassifier_Set_OclAny__OclAny_);
-							rightA_symbol_359 = A_symbol_361;
+							DomainType static_A_symbol_123 = valueFactory.typeOf(V_bodyCollectionType);
+							LibraryBinaryOperation dynamic_A_symbol_123 = (LibraryBinaryOperation)static_A_symbol_123.lookupImplementation(standardLibrary, O_OclType_conformsTo);
+							Value A_symbol_123 = dynamic_A_symbol_123.evaluate(evaluator, T_Boolean, V_bodyCollectionType, T_CollectionClassifier_Set_OclAny__OclAny_);
+							rightA_symbol_121 = A_symbol_123;
 						} catch (InvalidValueException e) {
-							rightA_symbol_359 = valueFactory.createInvalidValue(e);
+							rightA_symbol_121 = valueFactory.createInvalidValue(e);
 						}
-						Value A_symbol_361 = rightA_symbol_359;
-						DomainType static_A_symbol_359 = valueFactory.typeOf(A_symbol_360);
-						LibraryBinaryOperation dynamic_A_symbol_359 = (LibraryBinaryOperation)static_A_symbol_359.lookupImplementation(standardLibrary, O_Boolean_or);
-						Value A_symbol_359 = dynamic_A_symbol_359.evaluate(evaluator, T_Boolean, A_symbol_360, A_symbol_361);
-						rightA_symbol_357 = A_symbol_359;
+						Value A_symbol_123 = rightA_symbol_121;
+						DomainType static_A_symbol_121 = valueFactory.typeOf(A_symbol_122);
+						LibraryBinaryOperation dynamic_A_symbol_121 = (LibraryBinaryOperation)static_A_symbol_121.lookupImplementation(standardLibrary, O_Boolean_or);
+						Value A_symbol_121 = dynamic_A_symbol_121.evaluate(evaluator, T_Boolean, A_symbol_122, A_symbol_123);
+						rightA_symbol_119 = A_symbol_121;
 					} catch (InvalidValueException e) {
-						rightA_symbol_357 = valueFactory.createInvalidValue(e);
+						rightA_symbol_119 = valueFactory.createInvalidValue(e);
 					}
-					Value A_symbol_359 = rightA_symbol_357;
-					DomainType static_A_symbol_357 = valueFactory.typeOf(A_symbol_358, A_symbol_359);
-					LibraryBinaryOperation dynamic_A_symbol_357 = (LibraryBinaryOperation)static_A_symbol_357.lookupImplementation(standardLibrary, O_Boolean__eq_);
-					Value A_symbol_357 = dynamic_A_symbol_357.evaluate(evaluator, T_Boolean, A_symbol_358, A_symbol_359);
-					rightA_symbol_348 = A_symbol_357;
+					Value A_symbol_121 = rightA_symbol_119;
+					DomainType static_A_symbol_119 = valueFactory.typeOf(A_symbol_120, A_symbol_121);
+					LibraryBinaryOperation dynamic_A_symbol_119 = (LibraryBinaryOperation)static_A_symbol_119.lookupImplementation(standardLibrary, O_Boolean__eq_);
+					Value A_symbol_119 = dynamic_A_symbol_119.evaluate(evaluator, T_Boolean, A_symbol_120, A_symbol_121);
+					rightA_symbol_110 = A_symbol_119;
 				} catch (InvalidValueException e) {
-					rightA_symbol_348 = valueFactory.createInvalidValue(e);
+					rightA_symbol_110 = valueFactory.createInvalidValue(e);
 				}
-				Value A_symbol_357 = rightA_symbol_348;
-				DomainType static_A_symbol_348 = valueFactory.typeOf(A_symbol_349);
-				LibraryBinaryOperation dynamic_A_symbol_348 = (LibraryBinaryOperation)static_A_symbol_348.lookupImplementation(standardLibrary, O_Boolean_and);
-				Value A_symbol_348 = dynamic_A_symbol_348.evaluate(evaluator, T_Boolean, A_symbol_349, A_symbol_357);
-				final Value A_symbol_362 = A_symbol_348;
-				final Value A_symbol_363 = A_symbol_362;
-				A_symbol_345 = A_symbol_363;
+				Value A_symbol_119 = rightA_symbol_110;
+				DomainType static_A_symbol_110 = valueFactory.typeOf(A_symbol_111);
+				LibraryBinaryOperation dynamic_A_symbol_110 = (LibraryBinaryOperation)static_A_symbol_110.lookupImplementation(standardLibrary, O_Boolean_and);
+				Value A_symbol_110 = dynamic_A_symbol_110.evaluate(evaluator, T_Boolean, A_symbol_111, A_symbol_119);
+				final Value A_symbol_124 = A_symbol_110;
+				final Value A_symbol_125 = A_symbol_124;
+				A_symbol_107 = A_symbol_125;
 			}
-			else if (A_symbol_344.isFalse()) {
+			else if (A_symbol_106.isFalse()) {
 				
 				
-				Value A_symbol_364 = IP_TypedElement_type.evaluate(evaluator, T_Pivot_ecore__pivot__Type, self, P_TypedElement_type);
+				Value A_symbol_126 = IP_TypedElement_type.evaluate(evaluator, T_Pivot_ecore__pivot__Type, self, P_TypedElement_type);
 				
-				DomainType static_A_symbol_365 = valueFactory.typeOf(V_bodyType);
-				LibraryBinaryOperation dynamic_A_symbol_365 = (LibraryBinaryOperation)static_A_symbol_365.lookupImplementation(standardLibrary, O_OclType_conformsTo);
-				Value A_symbol_365 = dynamic_A_symbol_365.evaluate(evaluator, T_Boolean, V_bodyType, A_symbol_364);
-				A_symbol_345 = A_symbol_365;
+				DomainType static_A_symbol_127 = valueFactory.typeOf(V_bodyType);
+				LibraryBinaryOperation dynamic_A_symbol_127 = (LibraryBinaryOperation)static_A_symbol_127.lookupImplementation(standardLibrary, O_OclType_conformsTo);
+				Value A_symbol_127 = dynamic_A_symbol_127.evaluate(evaluator, T_Boolean, V_bodyType, A_symbol_126);
+				A_symbol_107 = A_symbol_127;
 			}
-			else if (A_symbol_344.isNull()) {
-				A_symbol_345 = valueFactory.throwInvalidValueException("null if condition");
+			else if (A_symbol_106.isNull()) {
+				A_symbol_107 = valueFactory.throwInvalidValueException("null if condition");
 			}
 			else {
-				A_symbol_345 = valueFactory.throwInvalidValueException("invalid if condition");
+				A_symbol_107 = valueFactory.throwInvalidValueException("invalid if condition");
 			}
-			final Value A_symbol_366 = A_symbol_345;
-			return A_symbol_366;
+			final Value A_symbol_128 = A_symbol_107;
+			return A_symbol_128;
 		}
 	}
 
@@ -289,11 +289,11 @@ public class TypedMultiplicityElementBodies
 			final ValueFactory valueFactory = evaluator.getValueFactory();
 			final StringValue S_name = valueFactory.stringValueOf("name");
 			
-			ObjectValue A_symbol_367 = PivotTables.Types._Parameter.createInstance(valueFactory);
+			ObjectValue A_symbol_129 = PivotTables.Types._Parameter.createInstance(valueFactory);
 			
-			P_NamedElement_name.setValue(A_symbol_367, S_name);
+			P_NamedElement_name.setValue(A_symbol_129, S_name);
 			
-			return A_symbol_367;
+			return A_symbol_129;
 		}
 	}
 }

@@ -45,7 +45,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * @generated
  */
 public class TypeExpImpl
-		extends OclExpressionImpl
+		extends OCLExpressionImpl
 		implements TypeExp {
 
 	/**

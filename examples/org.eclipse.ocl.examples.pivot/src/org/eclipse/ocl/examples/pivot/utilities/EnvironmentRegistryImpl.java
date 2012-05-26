@@ -35,7 +35,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -58,7 +58,7 @@ public class EnvironmentRegistryImpl implements Environment.Registry {
     private static final String E_PACKAGE = "package"; //$NON-NLS-1$
     private static final String A_NS_URI = "nsURI"; //$NON-NLS-1$
     
-	public Environment getEnvironmentFor(OclExpression expression) {
+	public Environment getEnvironmentFor(OCLExpression expression) {
 		return getEnvironmentFor(expression.getType());
 	}
 

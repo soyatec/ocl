@@ -170,7 +170,7 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
     }
 
 //    @Override
-//    public Value visitExpression(OclExpression expression) {
+//    public Value visitExpression(OCLExpression expression) {
 //        return trace(expression, getDelegate().visitExpression(expression));
 //    }
 

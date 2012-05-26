@@ -257,8 +257,8 @@ public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
 		return delegate.visitNumericLiteralExp(object);
 	}
 
-	public R visitOclExpression(org.eclipse.ocl.examples.pivot.OclExpression object) {
-		return delegate.visitOclExpression(object);
+	public R visitOCLExpression(org.eclipse.ocl.examples.pivot.OCLExpression object) {
+		return delegate.visitOCLExpression(object);
 	}
 
 	public R visitOpaqueExpression(org.eclipse.ocl.examples.pivot.OpaqueExpression object) {

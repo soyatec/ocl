@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LambdaType;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
@@ -69,12 +69,12 @@ public class OperationFilter extends AbstractOperationFilter
 		this.expressions = expressions;
 	}
 
-	protected OclExpression getExpressionArgument(int index) {
+	protected OCLExpression getExpressionArgument(int index) {
 		int expIndex = 0;
 		for (NavigatingArgCS csNavigatingArg : csArguments) {
 			if (csNavigatingArg.getRole() == NavigationRole.EXPRESSION) {
 				if (expIndex == index) {
-					return PivotUtil.getPivot(OclExpression.class, csNavigatingArg);
+					return PivotUtil.getPivot(OCLExpression.class, csNavigatingArg);
 				}
 				expIndex++;
 			}
@@ -152,7 +152,7 @@ public class OperationFilter extends AbstractOperationFilter
 		if (iMax > 0) {
 			for (int i = 0; i < iMax; i++) {
 				Parameter parameter = parameters.get(i);
-				OclExpression argument = getExpressionArgument(i);
+				OCLExpression argument = getExpressionArgument(i);
 				if (argument != null) {
 					Type parameterType = parameter.getType();
 					if (parameterType instanceof LambdaType) {
@@ -197,7 +197,7 @@ public class OperationFilter extends AbstractOperationFilter
 			for (int i = 0; i < expressions; i++) {
 				Parameter candidateParameter = candidateParameters.get(i);
 				NavigatingArgCS csExpression = csArguments.get(i);
-				OclExpression expression = PivotUtil.getPivot(OclExpression.class, csExpression);
+				OCLExpression expression = PivotUtil.getPivot(OCLExpression.class, csExpression);
 				if (expression == null) {
 					return false;
 				}

@@ -29,7 +29,7 @@ import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Feature;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -49,7 +49,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * @generated
  */
 public abstract class CallExpImpl
-		extends OclExpressionImpl
+		extends OCLExpressionImpl
 		implements CallExp {
 
 	/**
@@ -60,7 +60,7 @@ public abstract class CallExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression source;
+	protected OCLExpression source;
 
 	/**
 	 * The default value of the '{@link #isImplicit() <em>Implicit</em>}' attribute.
@@ -105,7 +105,7 @@ public abstract class CallExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression getSource() {
+	public OCLExpression getSource() {
 		return source;
 	}
 
@@ -114,9 +114,9 @@ public abstract class CallExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetSource(OclExpression newSource,
+	public NotificationChain basicSetSource(OCLExpression newSource,
 			NotificationChain msgs) {
-		OclExpression oldSource = source;
+		OCLExpression oldSource = source;
 		source = newSource;
 		if (eNotificationRequired())
 		{
@@ -131,7 +131,7 @@ public abstract class CallExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSource(OclExpression newSource) {
+	public void setSource(OCLExpression newSource) {
 		if (newSource != source)
 		{
 			NotificationChain msgs = null;
@@ -151,8 +151,8 @@ public abstract class CallExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression createSource(EClass eClass) {
-		OclExpression newSource = (OclExpression) create(eClass);
+	public OCLExpression createSource(EClass eClass) {
+		OCLExpression newSource = (OCLExpression) create(eClass);
 		setSource(newSource);
 		return newSource;
 	}
@@ -271,7 +271,7 @@ public abstract class CallExpImpl
 				setType((Type)newValue);
 				return;
 			case PivotPackage.CALL_EXP__SOURCE:
-				setSource((OclExpression)newValue);
+				setSource((OCLExpression)newValue);
 				return;
 			case PivotPackage.CALL_EXP__IMPLICIT:
 				setImplicit((Boolean)newValue);
@@ -308,7 +308,7 @@ public abstract class CallExpImpl
 				setType((Type)null);
 				return;
 			case PivotPackage.CALL_EXP__SOURCE:
-				setSource((OclExpression)null);
+				setSource((OCLExpression)null);
 				return;
 			case PivotPackage.CALL_EXP__IMPLICIT:
 				setImplicit(IMPLICIT_EDEFAULT);

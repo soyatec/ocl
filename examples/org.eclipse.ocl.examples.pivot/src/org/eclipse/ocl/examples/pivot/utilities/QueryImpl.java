@@ -32,7 +32,7 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
-import org.eclipse.ocl.examples.pivot.OclExpression;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.ProblemAware;
 import org.eclipse.ocl.examples.pivot.Query;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -61,7 +61,7 @@ public class QueryImpl implements Query, ProblemAware
 	private final OCL ocl;
 	private final Environment environment;
 	private final ExpressionInOCL specification;
-	private final OclExpression expression;
+	private final OCLExpression expression;
 	private DomainModelManager modelManager = null;
 	private EvaluationEnvironment evalEnv;
 	private Diagnostic evalProblems;
@@ -234,7 +234,7 @@ public class QueryImpl implements Query, ProblemAware
 		return evalEnv;
 	}
 
-	public OclExpression getExpression() {
+	public OCLExpression getExpression() {
 		return expression;
 	}
 
