@@ -243,7 +243,7 @@ public class PrettyPrinter
 		PrettyPrintOptions.Global options = new PrettyPrintOptions.Global(scope);
 		options.addReservedNames(PrettyPrinter.reservedNameList);
 		options.addRestrictedNames(PrettyPrinter.reservedNameList);
-		options.setUseParentheses(true);
+//		options.setUseParentheses(true);
 		return options;
 	}
 
