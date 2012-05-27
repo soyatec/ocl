@@ -39,8 +39,8 @@ import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.WorkflowComponentWithModelSlot;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
+import org.eclipse.ocl.common.OCLConstants;
 import org.eclipse.ocl.ecore.delegate.InvocationBehavior;
-import org.eclipse.ocl.ecore.delegate.OCLDelegateDomain;
 import org.eclipse.ocl.ecore.delegate.SettingBehavior;
 import org.eclipse.ocl.ecore.delegate.ValidationBehavior;
 
@@ -69,9 +69,9 @@ public class OCLDelegateActivator extends WorkflowComponentWithModelSlot
 			    	ePackage.getEAnnotations().add(packageAnnotation);
 			    }
 			    EMap<String, String> details = packageAnnotation.getDetails();
-				details.put(InvocationBehavior.NAME, OCLDelegateDomain.OCL_DELEGATE_URI);
-			    details.put(SettingBehavior.NAME, OCLDelegateDomain.OCL_DELEGATE_URI);
-			    details.put(ValidationBehavior.NAME, OCLDelegateDomain.OCL_DELEGATE_URI);
+				details.put(InvocationBehavior.NAME, OCLConstants.OCL_DELEGATE_URI);
+			    details.put(SettingBehavior.NAME, OCLConstants.OCL_DELEGATE_URI);
+			    details.put(ValidationBehavior.NAME, OCLConstants.OCL_DELEGATE_URI);
 			}
 		}
 	}
