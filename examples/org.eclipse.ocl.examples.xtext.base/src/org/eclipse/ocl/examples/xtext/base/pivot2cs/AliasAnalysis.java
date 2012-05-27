@@ -265,6 +265,9 @@ public class AliasAnalysis extends AdapterImpl
 	}
 
 	public List<PathElement> getPath(Element eObject) {
+		if (eObject == null) {
+			return null;
+		}
 		EObject eContainer = eObject.eContainer();
 		if (eContainer == null) {
 			return new ArrayList<PathElement>();
