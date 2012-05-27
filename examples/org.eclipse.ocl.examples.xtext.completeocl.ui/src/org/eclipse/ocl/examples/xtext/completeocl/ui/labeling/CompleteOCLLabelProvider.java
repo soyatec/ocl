@@ -211,6 +211,9 @@ public class CompleteOCLLabelProvider extends EssentialOCLLabelProvider
 	protected String text(PackageDeclarationCS ele) {
 		AliasAnalysis aliasAnalysis = AliasAnalysis.getAdapter(ele.eResource());
 		Element pivot = ele.getPackage();
+		if (pivot == null) {
+			return "<<null>>";
+		}
 		QualifiedPath contextPath = new QualifiedPath(aliasAnalysis.getPath(pivot));
 		return contextPath.toString();
 	}
