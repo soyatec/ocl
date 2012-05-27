@@ -461,8 +461,10 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 		CallExp navigationExp = callExp;
 		Type requiredSourceType = PivotUtil.getOwningType(feature);
 		boolean isDotNavigation = false;
-		if (csElement.getParent() instanceof NavigationOperatorCS) {
-			isDotNavigation = PivotConstants.OBJECT_NAVIGATION_OPERATOR.equals(((NavigationOperatorCS)csElement.getParent()).getName());
+		OperatorCS parent = csElement.getParent();
+		if ((parent instanceof NavigationOperatorCS) && !(parent.getSource() == csElement)) {
+			NavigationOperatorCS navigationOperatorCS = (NavigationOperatorCS)parent;
+			isDotNavigation = PivotConstants.OBJECT_NAVIGATION_OPERATOR.equals(navigationOperatorCS.getName());
 			if (isDotNavigation) {
 				Type actualSourceType = source.getType();
 				if ((actualSourceType instanceof CollectionType) && !(requiredSourceType instanceof CollectionType)) {
