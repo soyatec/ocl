@@ -38,6 +38,7 @@ public class DataTypeAttribution extends AbstractAttribution
 		else {
 			attribution = ClassAttribution.INSTANCE;
 		}
+		environmentView.addElements(PivotUtil.getTypeTemplateParameterables(targetElement));
 		return attribution.computeLookup(target, environmentView, scopeView);
 	}
 }
