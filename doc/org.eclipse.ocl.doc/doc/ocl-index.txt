@@ -17,6 +17,8 @@
 4000-tutorials.textile
 4100-oclinecore-tutorial.textile
 4200-oclinterpreter-tutorial.textile
+4300-complete-ocl-tutorial.textile
+4400-code-generation-tutorial.textile
 
 3000-examples.textile
 3200-oclInterpreterExample.textile
@@ -36,8 +38,10 @@
 5200-delegates.textile
 5210-standalone.textile
 
+6000-pivot-programmers-guide.textile
 6110-pivot-validators.textile
 6200-pivot-evaluator.textile
+6210-pivot-standalone.textile
 
 7000-API.textile
 

@@ -1,0 +1,43 @@
+h2(#PivotStandalone). Pivot Standalone Configuration
+
+If you use Eclipse OCL within Eclipse you should find that the appropriate registrations are provided for you automatically by the plugin registration mechanisms.
+
+However if you use Eclipse OCL outside Eclipse, for instance in JUnit tests, you must provide the corresponding registrations in your code.
+
+h3. Models
+
+For the Pivot metamodel, the required registrations should be provided by invoking
+@org.eclipse.ocl.examples.pivot.OCL.initialize(ResourceSet)@. This initialization ensures that *.ecore is understood.
+
+If *.uml support is also required, invoke
+@org.eclipse.ocl.examples.pivot.uml.UML2Pivot.initialize(ResourceSet)@ as well. 
+This initialization ensures that *.uml is understood and that standard pathmap: locations are resolvable. It also invokes @org.eclipse.uml2.uml.resources.util.UMLResourcesUtil.init(ResourceSet)@ to ensure that all Eclipse and OMG UML namespaces and extensions are registered.
+
+h3. OCL Standard Library
+
+If you want to use the default OCL Standard Library you should invoke @org.eclipse.ocl.examples.pivot.model.OCLstdlib.install()@ which installs a compiled shareable form of @/org.eclipse.ocl.examples.library/model/OCL-2.4.oclstdlib@.
+
+If you want to use an alternate library examine the code for the standard installation above, and if you want to compile
+your library examine the @/org.eclipse.ocl.examples.build/src/org/eclipse/ocl/examples/build/GenerateOCLstdlibModel.mwe2@ launcher for the
+@/org.eclipse.ocl.examples.build/src/org/eclipse/ocl/examples/build/acceleo/generateOCLstdlib.mtl@ Acceleo template.
+
+Note that the library is extensible and importable so you may import your own library that in turn imports the standard library.
+
+h3. Pivot Delegates
+
+If you want to use EMF delegates to dispatch OCL, the required registrations may be
+provided by @org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain.initialize(ResourceSet)@.
+
+This may be invoked with a null argument to install the registrations in the global EPackage.Registry rather than a specified local registry. 
+
+h3. Xtext Editors
+
+Each of the Xtext editors has a standard Xtext startup that ensures that the appropriate Resource registrations are installed. 
+
+bc.. 
+org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup.doSetup().
+org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCLStandaloneSetup.doSetup().
+org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcoreStandaloneSetup.doSetup().
+org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup.doSetup().
+p. 
+

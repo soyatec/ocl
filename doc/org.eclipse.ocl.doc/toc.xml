@@ -1,47 +1,328 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?NLS TYPE="org.eclipse.help.toc"?>
-
-<toc label="OCL Developer Guide">
-	<anchor id="overviews-before" />
-	<topic label="Programmer&apos;s Guide">
-		<topic label="OCL Overview" href="references/overview/OCLOverview.html" />
-		<topic label="Parsing Constraints and Queries" href="references/overview/parsingConstraints.html" />
-		<topic label="Evaluating Constraints and Queries" href="references/overview/evaluatingConstraints.html" />
-		<topic label="Parsing OCL Documents" href="references/overview/parsingDocuments.html" />
-		<topic label="OCL Relationship to Metamodels" href="references/overview/targetMetamodels.html" />
-		<topic label="Content Assist Support" href="references/overview/contentAssist.html" />
-		<topic label="OCL Abstract Syntax Model" href="references/overview/abstractSyntax.html" />
-		<topic label="Advanced Topics">
-			<topic label="Customizing the Environment" href="references/overview/advanced/customization.html" />
-			<topic label="OCL Persistence" href="references/overview/advanced/persistence.html" />
-			<topic label="Creating Metamodel Bindings" href="references/overview/advanced/metamodelBindings.html" />
-			<topic label="Incrementally Re-Evaluating Using Impact Analyzer" href="references/overview/advanced/impactAnalyzer.html" />
-		</topic>
-	</topic>
-	<anchor id="overviews-after" />
-
-	<anchor id="tutorial-before" />
-	<topic label="Tutorials">	
-		<topic label="OCLinEcore Tutorial" href="tutorials/oclinecore/oclInEcoreTutorial.html" />	
-		<topic label="OCL Interpreter Tutorial" href="tutorials/oclInterpreterTutorial.html" />
-	</topic>
-	<anchor id="tutorial-after" />
-
-	<anchor id="example-guide-before" />
-	<topic label="Examples Guide">	
-		<topic label="OCL Interpreter Example" href="references/examples/oclInterpreterExample.html" />	
-	</topic>
-	<anchor id="example-guide-after" />
-	
-	<anchor id="reference-before" />
-	<topic label="Reference">
-		<link toc="topics_Reference.xml"/>
-		<anchor id="reference-ext-pt-before" />
-		<topic label="Extension Points Reference">
-			<topic label="org.eclipse.ocl.environments" href="references/extension-points/org_eclipse_ocl_environments.html" />
-		</topic>
-		<anchor id="reference-ext-pt-after" />
-		<anchor id="other-reference"/>
-	</topic>
-	<anchor id="reference-after" />
+<toc topic="help/index.html" label="OCL Documentation">
+<topic href="help/Overview.html" label="Overview">
+<topic href="help/Overview.html#WhatisOCL" label="What is OCL?"></topic>
+<topic href="help/GettingStarted.html" label="Getting Started"></topic>
+<topic href="help/HowDoesItWork.html" label="How Does It Work?">
+<topic href="help/HowDoesItWork.html#Editing" label="Editing"></topic>
+<topic href="help/HowDoesItWork.html#Execution" label="Execution"></topic>
+<topic href="help/HowDoesItWork.html#Debugging" label="Debugging"></topic>
+<topic href="help/HowDoesItWork.html#Testing" label="Testing"></topic>
+</topic>
+<topic href="help/EclipseOCLisExtensible.html" label="Eclipse OCL is Extensible"></topic>
+<topic href="help/WhoUsesOCLandEclipseOCL.html" label="Who Uses OCL and Eclipse OCL?"></topic>
+<topic href="help/WhoisBehindEclipseOCL.html" label="Who is Behind Eclipse OCL?"></topic>
+<topic href="help/TableofContents.html" label="Table of Contents"></topic>
+<topic href="help/Glossary.html" label="Glossary"></topic>
+</topic>
+<topic href="help/UsersGuide.html" label="Users Guide">
+<topic href="help/UsersGuide.html#EclipseOCLs" label="The two Eclipse OCLs">
+<topic href="help/UsersGuide.html#ThematureEclipseOCLmetamodels" label="The mature Eclipse OCL metamodels"></topic>
+<topic href="help/UsersGuide.html#ThepivotEclipseOCLmetamodel" label="The pivot Eclipse OCL metamodel"></topic>
+<topic href="help/UsersGuide.html#Thetransition" label="The transition"></topic>
+<topic href="help/UsersGuide.html#APIs" label="APIs">
+<topic href="help/UsersGuide.html#ToolAPIs" label="Tool APIs"></topic>
+<topic href="help/UsersGuide.html#InternalAPIs" label="Internal APIs"></topic>
+</topic>
+</topic>
+<topic href="help/EssentialOCL.html" label="The Essential OCL Language">
+<topic href="help/EssentialOCL.html#Syntax" label="Syntax">
+<topic href="help/EssentialOCL.html#GrammarImplementation" label="Grammar Implementation"></topic>
+<topic href="help/EssentialOCL.html#GrammarApproach" label="Grammar Approach"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-Exp" label="OCL Expression"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-PrimaryExp" label="PrimaryExp"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-SelfExp" label="SelfExp"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-PrimitiveLiteralExp" label="PrimitiveLiteralExp"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-NumberLiteralExp" label="NumberLiteralExp"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-StringLiteralExp" label="StringLiteralExp"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-BooleanLiteralExp" label="BooleanLiteralExp"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-UnlimitedNaturalLiteralExp" label="UnlimitedNaturalLiteralExp"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-InvalidLiteralExp" label="InvalidLiteralExp"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-NullLiteralExp" label="NullLiteralExp"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-CollectionLiteralExp" label="CollectionLiteralExp"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-CollectionLiteralPart" label="CollectionLiteralPart"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-TupleLiteralExp" label="TupleLiteralExp"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-TupleLiteralPart" label="TupleLiteralPart"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-TypeLiteralExp" label="TypeLiteralExp"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-NestedExp" label="NestedExp"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-IfExp" label="IfExp"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-LetExp" label="LetExp"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-NameExp" label="NameExp"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-IndexExp" label="IndexExp"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-NavigatingExp" label="NavigatingExp"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-NavigatingArg" label="NavigatingArg"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-PrefixedExp" label="PrefixedExp"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-InfixedExp" label="InfixedExp"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-NavigationOperators" label="NavigationOperators"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-TypeExp" label="TypeExp"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-TypeNameExp" label="TypeNameExp"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-TypeLiteral" label="TypeLiteral"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-PrimitiveType" label="PrimitiveType"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-CollectionType" label="CollectionType"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-TupleType" label="TupleType"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-TuplePart" label="TuplePart"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-UnreservedName" label="UnreservedName"></topic>
+<topic href="help/EssentialOCL.html#EssentialOCL-UnrestrictedName" label="UnrestrictedName"></topic>
+</topic>
+</topic>
+<topic href="help/OCLinEcore.html" label="The OCLinEcore Language">
+<topic href="help/OCLinEcore.html#Syntax2" label="Syntax">
+<topic href="help/OCLinEcore.html#GrammarImplementation2" label="Grammar Implementation"></topic>
+<topic href="help/OCLinEcore.html#Module" label="Module"></topic>
+<topic href="help/OCLinEcore.html#OCLinEcore-Package" label="Package"></topic>
+<topic href="help/OCLinEcore.html#OCLinEcore-Classifier" label="Classifier"></topic>
+<topic href="help/OCLinEcore.html#OCLinEcore-DataType" label="DataType"></topic>
+<topic href="help/OCLinEcore.html#OCLinEcore-Enumeration" label="Enumeration"></topic>
+<topic href="help/OCLinEcore.html#OCLinEcore-EnumerationLiteral" label="EnumerationLiteral"></topic>
+<topic href="help/OCLinEcore.html#OCLinEcore-Class" label="Class"></topic>
+<topic href="help/OCLinEcore.html#OCLinEcore-StructuralFeature" label="StructuralFeature"></topic>
+<topic href="help/OCLinEcore.html#OCLinEcore-Attribute" label="Attribute"></topic>
+<topic href="help/OCLinEcore.html#OCLinEcore-Reference" label="Reference"></topic>
+<topic href="help/OCLinEcore.html#OCLinEcore-Operation" label="Operation"></topic>
+<topic href="help/OCLinEcore.html#OCLinEcore-Parameter" label="Parameter"></topic>
+<topic href="help/OCLinEcore.html#OCLinEcore-TypeRef" label="Types"></topic>
+<topic href="help/OCLinEcore.html#OCLinEcore-Annotations" label="AnnotationElement"></topic>
+<topic href="help/OCLinEcore.html#OCLinEcore-Annotation" label="Annotation"></topic>
+<topic href="help/OCLinEcore.html#OCLinEcore-Detail" label="Detail"></topic>
+<topic href="help/OCLinEcore.html#OCLinEcore-Documentation" label="Documentation"></topic>
+<topic href="help/OCLinEcore.html#OCLinEcore-Constraint" label="Constraints"></topic>
+<topic href="help/OCLinEcore.html#Terminals" label="Terminals"></topic>
+<topic href="help/OCLinEcore.html#Names" label="Names"></topic>
+<topic href="help/OCLinEcore.html#Comments" label="Comments"></topic>
+</topic>
+<topic href="help/OCLinEcore.html#Limitations" label="Limitations"></topic>
+</topic>
+<topic href="help/CompleteOCL.html" label="The Complete OCL Language">
+<topic href="help/CompleteOCL.html#Syntax3" label="Syntax">
+<topic href="help/CompleteOCL.html#GrammarImplementation3" label="Grammar Implementation"></topic>
+<topic href="help/CompleteOCL.html#CompleteOCL-Document" label="Complete OCL Document"></topic>
+<topic href="help/CompleteOCL.html#CompleteOCL-PackageDeclaration" label="PackageDeclaration"></topic>
+<topic href="help/CompleteOCL.html#CompleteOCL-ContextDecl" label="ContextDecl"></topic>
+<topic href="help/CompleteOCL.html#CompleteOCL-ClassifierContextDecl" label="ClassifierContextDecl"></topic>
+<topic href="help/CompleteOCL.html#CompleteOCL-Def" label="Def"></topic>
+<topic href="help/CompleteOCL.html#CompleteOCL-Inv" label="Inv"></topic>
+<topic href="help/CompleteOCL.html#CompleteOCL-OperationContextDecl" label="OperationContextDecl"></topic>
+<topic href="help/CompleteOCL.html#CompleteOCL-Parameter" label="Parameter"></topic>
+<topic href="help/CompleteOCL.html#CompleteOCL-Body" label="Body"></topic>
+<topic href="help/CompleteOCL.html#CompleteOCL-Post" label="Post"></topic>
+<topic href="help/CompleteOCL.html#CompleteOCL-Pre" label="Pre"></topic>
+<topic href="help/CompleteOCL.html#CompleteOCL-PropertyContextDecl" label="PropertyContextDecl"></topic>
+<topic href="help/CompleteOCL.html#CompleteOCL-Init" label="Init"></topic>
+<topic href="help/CompleteOCL.html#CompleteOCL-Der" label="Der"></topic>
+<topic href="help/CompleteOCL.html#CompleteOCL-Specification" label="Specification"></topic>
+<topic href="help/CompleteOCL.html#CompleteOCL-NavigatingExp" label="NavigatingExp"></topic>
+<topic href="help/CompleteOCL.html#CompleteOCL-NavigationOperators" label="NavigationOperators"></topic>
+<topic href="help/CompleteOCL.html#CompleteOCL-UnreservedName" label="UnreservedName"></topic>
+<topic href="help/CompleteOCL.html#CompleteOCL-UnrestrictedName" label="UnrestrictedName"></topic>
+</topic>
+</topic>
+<topic href="help/OCLstdlib.html" label="The OCL Standard Library Language">
+<topic href="help/OCLstdlib.html#Syntax4" label="Syntax">
+<topic href="help/OCLstdlib.html#OCLstdlib-Library" label="OCL Standard Library Document"></topic>
+<topic href="help/OCLstdlib.html#OCLstdlib-Precedence" label="Precedence"></topic>
+<topic href="help/OCLstdlib.html#OCLstdlib-Package" label="Package"></topic>
+<topic href="help/OCLstdlib.html#OCLstdlib-Classifier" label="Class and Classifier"></topic>
+<topic href="help/OCLstdlib.html#OCLstdlib-Inv" label="Inv"></topic>
+<topic href="help/OCLstdlib.html#OCLstdlib-Operation" label="Operation"></topic>
+<topic href="help/OCLstdlib.html#OCLstdlib-LibOperation" label="LibOperation"></topic>
+<topic href="help/OCLstdlib.html#OCLstdlib-LibIteration" label="LibIteration"></topic>
+<topic href="help/OCLstdlib.html#OCLstdlib-Iterator" label="Iterator"></topic>
+<topic href="help/OCLstdlib.html#OCLstdlib-Accumulator" label="Accumulator"></topic>
+<topic href="help/OCLstdlib.html#OCLstdlib-Parameter" label="Parameter"></topic>
+<topic href="help/OCLstdlib.html#OCLstdlib-Pre" label="Pre"></topic>
+<topic href="help/OCLstdlib.html#OCLstdlib-Post" label="Post"></topic>
+<topic href="help/OCLstdlib.html#OCLstdlib-Property" label="LibProperty"></topic>
+<topic href="help/OCLstdlib.html#OCLstdlib-Specification" label="Specification"></topic>
+</topic>
+</topic>
+<topic href="help/Editors.html" label="Editors">
+<topic href="help/Editors.html#Syntaxcoloring" label="Syntax coloring"></topic>
+<topic href="help/Editors.html#Validation" label="Validation"></topic>
+<topic href="help/Editors.html#HoverText" label="Hover Text"></topic>
+<topic href="help/Editors.html#ContentAssist" label="Content Assist"></topic>
+<topic href="help/Editors.html#CodeTemplates" label="Code Templates"></topic>
+<topic href="help/Editors.html#OpenDeclaration" label="Open Declaration"></topic>
+</topic>
+<topic href="help/InteractiveOCL.html" label="Console">
+<topic href="help/InteractiveOCL.html#ContextObjectSelection" label="Context Object Selection"></topic>
+<topic href="help/InteractiveOCL.html#Editing2" label="Editing"></topic>
+<topic href="help/InteractiveOCL.html#EditorKeys" label="Editor Keys"></topic>
+<topic href="help/InteractiveOCL.html#Results" label="Results"></topic>
+<topic href="help/InteractiveOCL.html#ToolBar" label="Tool Bar">
+<topic href="help/InteractiveOCL.html#EcoreUMLbinding" label="Ecore/UML binding"></topic>
+<topic href="help/InteractiveOCL.html#M1M2" label="M1/M2"></topic>
+<topic href="help/InteractiveOCL.html#ClearConsole" label="Clear Console"></topic>
+<topic href="help/InteractiveOCL.html#CloseConsole" label="Close Console"></topic>
+<topic href="help/InteractiveOCL.html#LoadSaveanexpression" label="Load/Save an expression"></topic>
+<topic href="help/InteractiveOCL.html#LoadResource" label="Load Resource"></topic>
+</topic>
+</topic>
+<topic href="help/Integration.html" label="OCL Integration">
+<topic href="help/Integration.html#Integration-OCLinEcore" label="OCL execution in Ecore / EMF Delegates"></topic>
+<topic href="help/Integration.html#Integration-Messages" label="Custom Validation Messages"></topic>
+<topic href="help/Integration.html#Integration-CompleteOCL" label="CompleteOCL Validation"></topic>
+<topic href="help/Integration.html#OCLinEcoreforXtextValidation" label="OCLinEcore for Xtext Validation"></topic>
+<topic href="help/Integration.html#CompleteOCLforXtextValidation" label="Complete OCL for Xtext Validation"></topic>
+</topic>
+</topic>
+<topic href="help/StandardLibrary.html" label="The OCL Standard Library">
+<topic href="help/StandardLibrary.html#Precedences" label="Precedences"></topic>
+<topic href="help/AnyClassifier.html" label="AnyClassifier(T)"></topic>
+<topic href="help/Bag.html" label="Bag(T)"></topic>
+<topic href="help/Boolean.html" label="Boolean"></topic>
+<topic href="help/Class.html" label="Class"></topic>
+<topic href="help/ClassClassifier.html" label="ClassClassifier(T)"></topic>
+<topic href="help/Collection.html" label="Collection(T)"></topic>
+<topic href="help/CollectionClassifier.html" label="CollectionClassifier(T, E)"></topic>
+<topic href="help/Enumeration.html" label="Enumeration"></topic>
+<topic href="help/EnumerationClassifier.html" label="EnumerationClassifier(T)"></topic>
+<topic href="help/EnumerationLiteral.html" label="EnumerationLiteral"></topic>
+<topic href="help/Integer.html" label="Integer"></topic>
+<topic href="help/OclAny.html" label="OclAny"></topic>
+<topic href="help/OclComparable.html" label="OclComparable"></topic>
+<topic href="help/OclElement.html" label="OclElement"></topic>
+<topic href="help/OclInvalid.html" label="OclInvalid"></topic>
+<topic href="help/OclLambda.html" label="OclLambda"></topic>
+<topic href="help/OclMessage.html" label="OclMessage"></topic>
+<topic href="help/OclSelf.html" label="OclSelf"></topic>
+<topic href="help/OclState.html" label="OclState"></topic>
+<topic href="help/OclSummable.html" label="OclSummable"></topic>
+<topic href="help/OclTuple.html" label="OclTuple"></topic>
+<topic href="help/OclType.html" label="OclType"></topic>
+<topic href="help/OclVoid.html" label="OclVoid"></topic>
+<topic href="help/OrderedSet.html" label="OrderedSet(T)"></topic>
+<topic href="help/Real.html" label="Real"></topic>
+<topic href="help/Sequence.html" label="Sequence(T)"></topic>
+<topic href="help/Set.html" label="Set(T)"></topic>
+<topic href="help/String.html" label="String"></topic>
+<topic href="help/Type.html" label="Type"></topic>
+<topic href="help/UniqueCollection.html" label="UniqueCollection(T)"></topic>
+<topic href="help/UnlimitedNatural.html" label="UnlimitedNatural"></topic>
+</topic>
+<topic href="help/Tutorials.html" label="Tutorials">
+<topic href="help/Tutorials.html#OCLinEcoreTutorial" label="OCLinEcore tutorial">
+<topic href="help/Tutorials.html#Overview2" label="Overview"></topic>
+<topic href="help/Tutorials.html#References" label="References"></topic>
+<topic href="help/Tutorials.html#Installation" label="Installing the Eclipse OCL Examples"></topic>
+<topic href="help/Tutorials.html#Troubleshooting" label="Troubleshooting"></topic>
+<topic href="help/Tutorials.html#UsingtheOCLinEcoretexteditorforEcore" label="Using the OCLinEcore text editor for Ecore">
+<topic href="help/Tutorials.html#CreateaNewEMFProject" label="Create a New EMF Project"></topic>
+<topic href="help/Tutorials.html#CreateaNewEcoreModel" label="Create a New Ecore Model"></topic>
+<topic href="help/Tutorials.html#OCLinEcoreMetamodel" label="Edit Ecore Model as OCLinEcore"></topic>
+<topic href="help/Tutorials.html#TheTutorialMetaModel" label="The Tutorial Meta-Model"></topic>
+</topic>
+<topic href="help/Tutorials.html#CreateaDynamicModelInstance" label="Create a Dynamic Model Instance"></topic>
+<topic href="help/Tutorials.html#EnrichthemetamodelwithOCL" label="Enrich the meta-model with OCL"></topic>
+<topic href="help/Tutorials.html#OCLinEcoreTutorial-Console" label="The OCL Console"></topic>
+<topic href="help/Tutorials.html#OCLinEcoreTutorialHelpers" label="Helper Features and Operations"></topic>
+<topic href="help/Tutorials.html#GeneratingJavaCode" label="Generating Java Code">
+<topic href="help/Tutorials.html#JavaDetails" label="Java Details"></topic>
+<topic href="help/Tutorials.html#APIInvariants" label="API Invariants"></topic>
+</topic>
+<topic href="help/Tutorials.html#Summary" label="Summary"></topic>
+</topic>
+<topic href="help/OCLInterpreterTutorial.html" label="Tutorial: Working with OCL">
+<topic href="help/OCLInterpreterTutorial.html#Overview3" label="Overview"></topic>
+<topic href="help/OCLInterpreterTutorial.html#References2" label="References"></topic>
+<topic href="help/OCLInterpreterTutorial.html#ParsingOCLExpressions" label="Parsing OCL Expressions"></topic>
+<topic href="help/OCLInterpreterTutorial.html#ParsingOCLConstraints" label="Parsing OCL Constraints"></topic>
+<topic href="help/OCLInterpreterTutorial.html#EvaluatingOCLExpressionsandConstraints" label="Evaluating OCL Expressions and Constraints"></topic>
+<topic href="help/OCLInterpreterTutorial.html#ImplementingContentAssist" label="Implementing Content Assist"></topic>
+<topic href="help/OCLInterpreterTutorial.html#WorkingwiththeAST" label="Working with the AST"></topic>
+<topic href="help/OCLInterpreterTutorial.html#Serialization" label="Serialization"></topic>
+<topic href="help/OCLInterpreterTutorial.html#Summary2" label="Summary"></topic>
+</topic>
+<topic href="help/CompleteOCLTutorial.html" label="Complete OCL tutorial">
+<topic href="help/CompleteOCLTutorial.html#LoadCompleteOCLResource" label="Load Complete OCL Resource Munu Action"></topic>
+</topic>
+</topic>
+<topic href="help/Examples.html" label="Examples">
+<topic href="help/Examples.html#RoyalAndLoyalExample" label="Royal and Loyal Example Project"></topic>
+<topic href="help/EmptyExample.html" label="Empty Example Project"></topic>
+<topic href="help/OCLinEcoreTutorialExampleProject.html" label="OCLinEcore Tutorial Example Project"></topic>
+<topic href="help/OCLInterpreterExample.html" label="OCL Interpreter Example">
+<topic href="help/OCLInterpreterExample.html#Introduction" label="Introduction"></topic>
+<topic href="help/OCLInterpreterExample.html#References3" label="References"></topic>
+<topic href="help/OCLInterpreterExample.html#Description" label="Description"></topic>
+<topic href="help/OCLInterpreterExample.html#SupportforEcoreandUMLModels" label="Support for Ecore and UML Models"></topic>
+<topic href="help/OCLInterpreterExample.html#ExampleCode" label="Example Code"></topic>
+</topic>
+</topic>
+<topic href="help/ProgrammersGuide.html" label="Ecore/UML Programmers Guide">
+<topic href="help/ProgrammersGuide.html#ParsingConstraints" label="Parsing Constraints and Queries">
+<topic href="help/ProgrammersGuide.html#TheOCLEnvironment" label="The OCL Environment"></topic>
+<topic href="help/ProgrammersGuide.html#CreatinganOCLEnvironment" label="Creating an OCL Environment"></topic>
+<topic href="help/ProgrammersGuide.html#TheOCLHelper" label="The OCL Helper"></topic>
+<topic href="help/ProgrammersGuide.html#OperationandAttributeContexts" label="Operation and Attribute Contexts"></topic>
+</topic>
+<topic href="help/EvaluatingConstraints.html" label="Evaluating Constraints and Queries">
+<topic href="help/EvaluatingConstraints.html#TheOCLQuery" label="The OCL Query"></topic>
+</topic>
+<topic href="help/ParsingDocuments.html" label="Parsing OCL Documents">
+<topic href="help/ParsingDocuments.html#TheOCLInput" label="The OCL Input"></topic>
+<topic href="help/ParsingDocuments.html#AccessingtheConstraints" label="Accessing the Constraints"></topic>
+</topic>
+<topic href="help/TargetMetamodels.html" label="OCL Relationship to Metamodels">
+<topic href="help/TargetMetamodels.html#TheEcoreMetamodelBinding" label="The Ecore Metamodel Binding"></topic>
+<topic href="help/TargetMetamodels.html#TheUMLMetamodelBinding" label="The UML Metamodel Binding"></topic>
+<topic href="help/TargetMetamodels.html#ThePivotMetamodelBinding" label="The Pivot Metamodel Binding"></topic>
+</topic>
+<topic href="help/ContentAssistSupport.html" label="Content Assist Support">
+<topic href="help/ContentAssistSupport.html#SyntaxCompletionChoices" label="Syntax Completion Choices"></topic>
+</topic>
+<topic href="help/AbstractSyntax.html" label="OCL Abstract Syntax Model">
+<topic href="help/AbstractSyntax.html#TheVisitableandVisitorInterfaces" label="The Visitable and Visitor Interfaces"></topic>
+<topic href="help/AbstractSyntax.html#ImplementingaVisitor" label="Implementing a Visitor"></topic>
+<topic href="help/AbstractSyntax.html#HiddenOpposites" label="The OppositePropertyCallExp Extension"></topic>
+</topic>
+<topic href="help/CustomizingtheEnvironment.html" label="Customizing the Environment">
+<topic href="help/CustomizingtheEnvironment.html#DefiningGlobalVariables" label="Defining Global Variables"></topic>
+<topic href="help/CustomizingtheEnvironment.html#DefiningHelperOperationsinJava" label="Defining Helper Operations in Java"></topic>
+<topic href="help/CustomizingtheEnvironment.html#SelectingaPackageLookupStrategy" label="Selecting a Package Lookup Strategy"></topic>
+<topic href="help/CustomizingtheEnvironment.html#CustomizingHiddenOppositeLookupandNavigation" label="Customizing Hidden Opposite Lookup and Navigation"></topic>
+</topic>
+<topic href="help/Persistence.html" label="OCL Persistence">
+<topic href="help/Persistence.html#TheTypeResolver" label="The Type Resolver"></topic>
+</topic>
+<topic href="help/AdvancedMetamodelBindings.html" label="Creating Metamodel Bindings">
+<topic href="help/AdvancedMetamodelBindings.html#TheOCLAbstractSyntaxModel" label="The OCL Abstract Syntax Model"></topic>
+</topic>
+<topic href="help/ImpactAnalyzer.html" label="Incrementally Re-Evaluating OCL Expressions Using the Impact Analyzer">
+<topic href="help/ImpactAnalyzer.html#UsingtheImpactAnalyzerinEMFEditors" label="Using the Impact Analyzer in EMF Editors"></topic>
+<topic href="help/ImpactAnalyzer.html#AlgorithmOutline" label="Algorithm Outline"></topic>
+<topic href="help/ImpactAnalyzer.html#ImpactAnalyzerConfigurationScopes" label="Impact Analyzer Configuration, Scopes"></topic>
+</topic>
+<topic href="help/Delegates.html" label="Delegates">
+<topic href="help/Delegates.html#GenModelSettings" label="GenModel Settings"></topic>
+<topic href="help/Delegates.html#OCLDelegateURI" label="OCL Delegate URIs"></topic>
+<topic href="help/Delegates.html#StandaloneInitialization" label="Standalone Initialization"></topic>
+<topic href="help/Delegates.html#InvocationDelegate" label="Invocation Delegates"></topic>
+<topic href="help/Delegates.html#SettingDelegate" label="Setting Delegates"></topic>
+<topic href="help/Delegates.html#ValidationDelegate" label="Validation Delegates"></topic>
+<topic href="help/Delegates.html#ValidationMessages" label="Validation Messages"></topic>
+<topic href="help/Delegates.html#QueryDelegate" label="Query Delegates"></topic>
+</topic>
+<topic href="help/Standalone.html" label="Ecore/UML Standalone Configuration">
+<topic href="help/Standalone.html#Ecore" label="Ecore"></topic>
+<topic href="help/Standalone.html#UML" label="UML"></topic>
+<topic href="help/Standalone.html#XtextEditors" label="Xtext Editors"></topic>
+</topic>
+</topic>
+<topic href="help/PivotProgrammersGuide.html" label="Pivot Programmers Guide">
+<topic href="help/PivotProgrammersGuide.html#Validators" label="Validators">
+<topic href="help/PivotProgrammersGuide.html#OCLinEcoreEObjectValidator" label="OCLinEcoreEObjectValidator"></topic>
+<topic href="help/PivotProgrammersGuide.html#CompleteOCLEObjectValidator" label="CompleteOCLEObjectValidator"></topic>
+</topic>
+<topic href="help/PivotEvaluator.html" label="The Pivot Evaluator"></topic>
+<topic href="help/PivotStandalone.html" label="Pivot Standalone Configuration">
+<topic href="help/PivotStandalone.html#Models" label="Models"></topic>
+<topic href="help/PivotStandalone.html#OCLStandardLibrary" label="OCL Standard Library"></topic>
+<topic href="help/PivotStandalone.html#PivotDelegates" label="Pivot Delegates"></topic>
+<topic href="help/PivotStandalone.html#XtextEditors2" label="Xtext Editors"></topic>
+</topic>
+</topic>
+<topic href="help/APIReference.html" label="API Reference">
+<topic href="help/APIReference.html#Javadoc" label="Javadoc"></topic>
+<topic href="help/Extensionpoints.html" label="Extension points"></topic>
+</topic>
+<topic href="help/glossary.html" label="A. Glossary"></topic>
 </toc>
