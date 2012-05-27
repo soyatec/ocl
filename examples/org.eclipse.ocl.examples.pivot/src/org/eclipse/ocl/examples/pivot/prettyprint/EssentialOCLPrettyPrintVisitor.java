@@ -412,7 +412,13 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 
 	@Override
 	public Object visitOpaqueExpression(OpaqueExpression object) {
-		context.append(PivotUtil.getBody(object));
+		String body = PivotUtil.getBody(object);
+		if (body != null) {
+			context.append(body);
+		}
+		else {
+			context.append("null -- not specified");
+		}
 		return null;
 	}
 
