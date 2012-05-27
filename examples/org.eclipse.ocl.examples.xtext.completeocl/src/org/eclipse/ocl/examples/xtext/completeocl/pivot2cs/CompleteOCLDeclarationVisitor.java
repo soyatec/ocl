@@ -38,6 +38,7 @@ import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTFactory;
+import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
@@ -214,7 +215,8 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 
 	@Override
 	public ElementCS visitParameter(Parameter object) {
-		VariableCS csElement = context.refreshNamedElement(VariableCS.class, EssentialOCLCSTPackage.Literals.VARIABLE_CS, object);
+//		VariableCS csElement = context.refreshNamedElement(VariableCS.class, EssentialOCLCSTPackage.Literals.VARIABLE_CS, object);
+		ParameterCS csElement = context.refreshNamedElement(ParameterCS.class, BaseCSTPackage.Literals.PARAMETER_CS, object);
 		csElement.setOwnedType(convertTypeRef(object));
 		return csElement;
 	}
