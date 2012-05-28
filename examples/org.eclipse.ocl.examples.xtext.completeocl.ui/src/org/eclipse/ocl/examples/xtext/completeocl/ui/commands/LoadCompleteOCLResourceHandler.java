@@ -20,6 +20,7 @@ import java.util.Set;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceStatus;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -48,10 +49,23 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.completeocl.validation.BasicCompleteOCLEObjectValidator;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.dnd.DND;
+import org.eclipse.swt.dnd.DropTarget;
+import org.eclipse.swt.dnd.DropTargetAdapter;
+import org.eclipse.swt.dnd.DropTargetEvent;
+import org.eclipse.swt.dnd.FileTransfer;
+import org.eclipse.swt.dnd.Transfer;
+import org.eclipse.swt.layout.FormAttachment;
+import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.ISources;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.eclipse.ui.part.ResourceTransfer;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -64,6 +78,51 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 {
 	protected class ResourceDialog extends ExtendedLoadResourceDialog
 	{
+		public class URIDropTargetListener extends DropTargetAdapter
+		{
+			@Override
+			public void dragEnter(DropTargetEvent e) {
+				e.detail = DND.DROP_LINK;
+			}
+
+			@Override
+			public void dragOperationChanged(DropTargetEvent e) {
+				e.detail = DND.DROP_LINK;
+			}
+
+			@Override
+			public void drop(DropTargetEvent event) {
+				Object data = event.data;
+				if (data == null) {
+					event.detail = DND.DROP_NONE;
+					return;
+				}
+				if (data instanceof IResource[]) {
+					StringBuilder s = new StringBuilder();
+					for (IResource resource : (IResource[])data) {
+						if (s.length() > 0) {
+							s.append(" ");
+						}
+						s.append(URI.createPlatformResourceURI(resource.getFullPath().toString(), true));
+					}
+					uriField.setText(s.toString());
+				}
+				else if (data instanceof String[]) {
+					StringBuilder s = new StringBuilder();
+					for (String resource : (String[])data) {
+						if (s.length() > 0) {
+							s.append(" ");
+						}
+						s.append(URI.createFileURI(resource));
+					}
+					uriField.setText(s.toString());
+				}
+				else {
+					uriField.setText(((String) data));
+				}
+			}
+		}
+
 		protected final Shell parent;
 		protected final ResourceSet resourceSet;
 		
@@ -71,6 +130,42 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 			super(parent, domain);
 			this.parent = parent;
 			this.resourceSet = resourceSet;
+			int shellStyle = getShellStyle();
+			int newShellStyle = shellStyle & ~(SWT.APPLICATION_MODAL | SWT.PRIMARY_MODAL | SWT.SYSTEM_MODAL);
+			setShellStyle(newShellStyle);
+		}
+
+		@Override
+		protected void configureShell(Shell shell) {
+			super.configureShell(shell);
+			shell.setText("Load Complete OCL Resource");
+		}
+
+		@Override
+		protected Control createContents(Composite parent) {
+			Control control = super.createContents(parent);
+			int operations = /*DND.DROP_MOVE |*/ DND.DROP_COPY | DND.DROP_LINK;
+			DropTarget target = new DropTarget(uriField, operations);
+			target.setTransfer(new Transfer[] {ResourceTransfer.getInstance(), FileTransfer.getInstance()});
+			target.addDropListener(new URIDropTargetListener());
+			return control;
+		}
+
+		@Override
+		protected Control createDialogArea(Composite parent) {
+			Composite createDialogArea = (Composite) super.createDialogArea(parent);
+			
+			Label helpLabel = new Label(createDialogArea, SWT.CENTER);
+		    helpLabel.setText("You may Drag and Drop from an Eclipse or Operating System Explorer.");
+		    {
+		      FormData data = new FormData();
+		      data.top = new FormAttachment(uriField, 2 * CONTROL_OFFSET);	// Separator is at 1 * CONTROL_OFFSET
+		      data.left = new FormAttachment(0, CONTROL_OFFSET);
+		      data.right = new FormAttachment(100, -CONTROL_OFFSET);
+		      helpLabel.setLayoutData(data);
+		    }
+			
+			return createDialogArea;
 		}
 
 		protected boolean error(String message, Diagnostic diagnostic) {
