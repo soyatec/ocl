@@ -35,6 +35,16 @@
             icon="$nl$/icons/elcl16/oclconsole_co.gif">
          <description>%OCL_Interpreter_description</description>
       </wizard>
+     <wizard id="org.eclipse.ocl.examples.ocl.completeocltutorial"           
+            canFinishEarly="true"
+            category="org.eclipse.ui.Examples/org.eclipse.ocl.examples.category"
+            class="org.eclipse.ocl.examples.internal.wizard.CompleteOCLTutorialWizard"
+            hasPages="false"
+            project="true"
+            name="%CompleteOCL_Tutorial_name"
+            icon="$nl$/icons/OCLModelFile.gif">
+         <description>%CompleteOCL_Tutorial_description</description>
+      </wizard>
      <wizard id="org.eclipse.ocl.examples.ocl.oclinecoretutorial"           
             canFinishEarly="true"
             category="org.eclipse.ui.Examples/org.eclipse.ocl.examples.category"
