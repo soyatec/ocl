@@ -58,9 +58,9 @@ When using the mature OCL Console the contributing tools are
 
 Since these tools are different there may be occasions where the increased OMG compliance of the pivot metamodel gives different behavior to the mature metamodels.
 
-In an intermediate (3.2) release, it is planned to introduce a Java code generator for the pivot metamodel so that all the parsing overheads and significant parts of the execution overheads of OCL embedded in Ecore models occurs at genmodel time rather than during execution. The org.eclipse.ocl.examples.library and org.eclipse.ocl.examples.pivot plugins will be renamed to org.eclipse.ocl.library and org.eclipse.ocl.pivot.
+In the Juno (4.0) release, there is a preliminary Java code generator for the pivot metamodel so that all the parsing overheads and significant parts of the execution overheads of OCL embedded in Ecore models occurs at genmodel time rather than during execution. The org.eclipse.ocl.examples.library and org.eclipse.ocl.examples.pivot plugins will be renamed to org.eclipse.ocl.library and org.eclipse.ocl.pivot.
 
-In the Juno (3.3) release, the transition should be complete and all org.eclipse.ocl.examples.xtext.* plugins will be renamed to org.eclipse.ocl.xtext.*. All functionality should use the new pivot metamodel by default. However the mature Ecore and UML support will remain for compatibility.
+In the Kepler (4.1) release, the transition should be complete and all org.eclipse.ocl.examples.xtext.* plugins will be renamed to org.eclipse.ocl.xtext.*. All functionality should use the new pivot metamodel by default. However the mature Ecore and UML support will remain for compatibility.
 
 h3. APIs
 
