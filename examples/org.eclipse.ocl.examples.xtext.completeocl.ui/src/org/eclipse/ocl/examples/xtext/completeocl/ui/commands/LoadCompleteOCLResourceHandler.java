@@ -45,9 +45,11 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.completeocl.validation.BasicCompleteOCLEObjectValidator;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
@@ -186,6 +188,7 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 		public boolean loadCSResource(ResourceSet resourceSet,
 				MetaModelManager metaModelManager, URI oclURI) {
 			BaseResource xtextResource = null;
+			CompleteOCLStandaloneSetup.doSetup();
 			try {
 				xtextResource = (BaseResource) resourceSet.getResource(oclURI, true);
 			}
@@ -333,6 +336,11 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 				public ResourceSet exec(XtextResource xtextResource) {
 					if (xtextResource == null) {
 						return null;
+					}
+					MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.findAdapter(xtextResource);
+					if (adapter != null) {
+						MetaModelManager metaModelManager = adapter.getMetaModelManager();
+						return metaModelManager.getExternalResourceSet();
 					}
 					ResourceSet resourceSet = xtextResource.getResourceSet();
 					return resourceSet;
