@@ -1,0 +1,19 @@
+import 'http://www.eclipse.org/2008/Xtext'
+
+package xtext
+
+context ReferencedMetamodel
+inv NoAnonymousImports: alias <> null
+
+context Action
+inv NoActions : false
+
+context ParserRule
+inv CamelCaseName : name.matches('[A-Z][A-Za-z]*')
+--inv UpperCaseName : name = name.toUpperCase()
+
+context xtext::TerminalRule
+--inv AA: true
+inv UpperName : name = name.toUpperCase()
+ 
+endpackage
