@@ -16,7 +16,7 @@ package org.eclipse.ocl.ui.internal.preferences;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.ocl.common.preferences.PreferenceableOption;
 import org.eclipse.ocl.common.ui.internal.preferences.AbstractProjectPreferencePage;
 import org.eclipse.ocl.lpg.ProblemHandler;
@@ -109,8 +109,8 @@ public class EcoreAndUmlProjectPreferencePage extends AbstractProjectPreferenceP
 		fields.add(new MyComboFieldEditor((PreferenceableOption<?>) EvaluationOptions.LAX_NULL_HANDLING,
 			EcoreAndUMLUIMessages.LPG_LaxNullHandling, BOOLEANS, fieldEditorParent));
 		String[][] Objects = new String[][] {
-			{ Object.class.getSimpleName(), Object.class.getName() },
-			{ EObject.class.getSimpleName(), EObject.class.getName() }
+			{ "null", null }, //$NON-NLS-1$
+			{ "EObject", EcorePackage.Literals.class.getName() + ".EOBJECT" } //$NON-NLS-1$ //$NON-NLS-2$
 		};
 		fields.add(new MyComboFieldEditor((PreferenceableOption<?>) EvaluationOptions.DYNAMIC_DISPATCH,
 			EcoreAndUMLUIMessages.LPG_DynamicDispatch, BOOLEANS, fieldEditorParent));

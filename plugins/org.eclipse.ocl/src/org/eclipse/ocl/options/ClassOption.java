@@ -14,6 +14,8 @@
  */
 package org.eclipse.ocl.options;
 
+import java.lang.reflect.Field;
+
 import org.eclipse.ocl.common.preferences.PreferenceableOption;
 
 /**
@@ -21,27 +23,38 @@ import org.eclipse.ocl.common.preferences.PreferenceableOption;
  *
  * @since 3.2
  */
-public class ClassOption<T> extends BasicOption<Class<? extends T>> implements PreferenceableOption<Class<? extends T>>
+public class ClassOption<T> extends BasicOption<T> implements PreferenceableOption<T>
 {
 	protected final Class<?> classType;
 	
-	public ClassOption(String pluginId, String key, Class<? extends T> defaultValue, Class<? extends T> classType) {
+	public ClassOption(String pluginId, String key, T defaultValue, Class<? extends T> classType) {
 		super(pluginId, key, defaultValue);
 		this.classType = classType;
 	}
 
 	@SuppressWarnings("unchecked")
-	public Class<? extends T> getValueOf(String string) {
-		if ((string == null) || (string.length() <= 0)) {
+	public T getValueOf(String string) {
+		if (string == null) {
 			return null;
 		}
+		int index = string.lastIndexOf("."); //$NON-NLS-1$
+		if (index <= 0) {
+			return null;
+		}
+		String className = string.substring(0, index);
+		String instanceName = string.substring(index+1);
 		try {
 			ClassLoader classLoader = classType.getClassLoader();
 			if (classLoader == null) {					// May be null for java.lang.Object
 				classLoader = getClass().getClassLoader();
 			}
-			return (Class<T>) classLoader.loadClass(string);
-		} catch (ClassNotFoundException e) {
+			Class<?> loadClass = classLoader.loadClass(className);
+			if (loadClass == null) {
+				return null;
+			}
+			Field field = loadClass.getField(instanceName);
+			return (T) field.get(null);
+		} catch (Exception e) {
 //			e.printStackTrace();
 			return getDefaultValue();
 		}
