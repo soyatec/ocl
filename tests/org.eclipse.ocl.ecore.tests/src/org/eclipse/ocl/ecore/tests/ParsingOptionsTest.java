@@ -19,11 +19,22 @@
 package org.eclipse.ocl.ecore.tests;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EParameter;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.Constraint;
+import org.eclipse.ocl.ecore.SendSignalAction;
+import org.eclipse.ocl.options.Option;
 import org.eclipse.ocl.options.ParsingOptions;
 import org.eclipse.ocl.util.TypeUtil;
 import org.eclipse.ocl.utilities.UMLReflection;
@@ -142,6 +153,23 @@ public class ParsingOptionsTest
 			ocl.getEnvironment(), EcorePackage.Literals.EOBJECT, apple));
 		assertEquals(UMLReflection.STRICT_SUBTYPE, TypeUtil.getRelationship(ocl
 			.getEnvironment(), apple, EcorePackage.Literals.EOBJECT));
+	}
+	
+	public void test_implicitRootClass_option_get_380755() {
+		Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env = ocl.getEnvironment();
+		Option<EClassifier> implicitRootClass = ParsingOptions.implicitRootClass(env);
+		
+		ParsingOptions.setOption(env, implicitRootClass, EcorePackage.Literals.EOBJECT);
+		EClassifier value = ParsingOptions.getValue(env, implicitRootClass);
+		assertSame(EcorePackage.Literals.EOBJECT, value);
+		
+		ParsingOptions.setOption(env, implicitRootClass, null);
+		value = ParsingOptions.getValue(env, implicitRootClass);
+		assertSame(null, value);
+		
+		ParsingOptions.setOption(env, implicitRootClass, EcorePackage.Literals.ECLASS);
+		value = ParsingOptions.getValue(env, implicitRootClass);
+		assertSame(EcorePackage.Literals.ECLASS, value);
 	}
 
 }
