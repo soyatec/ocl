@@ -16,8 +16,8 @@
  */
 package org.eclipse.ocl.examples.xtext.completeocl.validation;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -171,8 +171,9 @@ public class BasicCompleteOCLEObjectValidator extends EObjectValidator
 		}
 	}
 
-	private static BasicCompleteOCLEObjectValidator INSTANCE = new BasicCompleteOCLEObjectValidator();
-	
+	private static final BasicCompleteOCLEObjectValidator INSTANCE = new BasicCompleteOCLEObjectValidator();
+	private static final Map<EPackage, EValidator> eValidators = new HashMap<EPackage, EValidator>();
+
 	/**
 	 * Install Complete OCL validation support in resourceSet for metaModelManager.
 	 */
@@ -192,15 +193,14 @@ public class BasicCompleteOCLEObjectValidator extends EObjectValidator
 	}
 	
 	/**
-	 * Install Complete OCL validation support in validatorRegistry for all ePackages.
+	 * Install Complete OCL validation support for all ePackage.
 	 */
-	public static EObjectValidator install(EValidator.Registry validatorRegistry, Set<EPackage> ePackages) {
-		for (EPackage ePackage : ePackages) {
-			validatorRegistry.put(ePackage, INSTANCE);
+	public static void install(EPackage ePackage) {
+		if (!eValidators.containsKey(ePackage)) {
+			EValidator eValidator = (EValidator) EValidator.Registry.INSTANCE.put(ePackage, INSTANCE);
+			eValidators.put(ePackage, eValidator);
 		}
-		return null;
 	}
-
 
 	/**
 	 * Return the user's ResourceSet, preferably as a data element of the diagnostics, corresponding to
@@ -240,19 +240,30 @@ public class BasicCompleteOCLEObjectValidator extends EObjectValidator
 
 	@Override
 	public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (eObject.eIsProxy()) {
-	        return true;
-	    }
-		return validatePivot(eClass, eObject, diagnostics, context);
+		boolean allOk = true;
+		EPackage ePackage = eClass.getEPackage();
+		EValidator eValidator = eValidators.get(ePackage);
+		if (eValidator != null) {
+			allOk &= eValidator.validate(eClass, eObject, diagnostics, context);
+		}
+		if ((allOk || (diagnostics != null)) && !eObject.eIsProxy()) {
+			allOk &= validatePivot(eClass, eObject, diagnostics, context);
+		}
+		return allOk;
 	}
 
 	@Override
 	public boolean validate(EDataType eDataType, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
-	    if (!eDataType.isInstance(value))
-	    {
-	        return true;
-	    }
-		return validatePivot(eDataType, value, diagnostics, context);
+		boolean allOk = true;
+		EPackage ePackage = eDataType.getEPackage();
+		EValidator eValidator = eValidators.get(ePackage);
+		if (eValidator != null) {
+			allOk &= eValidator.validate(eDataType, value, diagnostics, context);
+		}
+		if ((allOk || (diagnostics != null)) && eDataType.isInstance(value)) {
+			allOk &= validatePivot(eDataType, value, diagnostics, context);
+		}
+		return allOk;
 	}
 
 	protected boolean validatePivot(EClassifier eClassifier, Object object, DiagnosticChain diagnostics, Map<Object, Object> context) {
