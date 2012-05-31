@@ -34,13 +34,12 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EValidator;
-import org.eclipse.emf.ecore.presentation.EcoreActionBarContributor.ExtendedLoadResourceAction.ExtendedLoadResourceDialog;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
+import org.eclipse.emf.edit.ui.action.LoadResourceAction.LoadResourceDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
@@ -78,7 +77,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
  */
 public class LoadCompleteOCLResourceHandler extends AbstractHandler
 {
-	protected class ResourceDialog extends ExtendedLoadResourceDialog
+	protected class ResourceDialog extends LoadResourceDialog
 	{
 		public class URIDropTargetListener extends DropTargetAdapter
 		{
@@ -127,6 +126,7 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 
 		protected final Shell parent;
 		protected final ResourceSet resourceSet;
+		private DropTarget target;
 		
 		protected ResourceDialog(Shell parent, EditingDomain domain, ResourceSet resourceSet) {
 			super(parent, domain);
@@ -147,7 +147,7 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 		protected Control createContents(Composite parent) {
 			Control control = super.createContents(parent);
 			int operations = /*DND.DROP_MOVE |*/ DND.DROP_COPY | DND.DROP_LINK;
-			DropTarget target = new DropTarget(uriField, operations);
+			target = new DropTarget(uriField, operations);
 			target.setTransfer(new Transfer[] {ResourceTransfer.getInstance(), FileTransfer.getInstance()});
 			target.addDropListener(new URIDropTargetListener());
 			return control;
@@ -231,6 +231,12 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 				error(e.getMessage(), (Diagnostic)null);
 				return CANCEL;
 			}
+			finally {
+				if (target != null) {
+					target.dispose();
+					target = null;
+				}
+			}
 		}
 
 		@Override
@@ -273,8 +279,10 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 					return false;
 				}
 			}
-		    BasicCompleteOCLEObjectValidator.install(resourceSet, metaModelManager);
-		    BasicCompleteOCLEObjectValidator.install(EValidator.Registry.INSTANCE, mmPackages);
+	    	BasicCompleteOCLEObjectValidator.install(resourceSet, metaModelManager);
+		    for (EPackage mmPackage : mmPackages) {
+		    	BasicCompleteOCLEObjectValidator.install(mmPackage);
+		    }
 			return true;
 		}
 
