@@ -20,9 +20,6 @@ package org.eclipse.ocl.uml.tests;
 import java.util.HashMap;
 import java.util.Map;
 
-import junit.framework.TestCase;
-
-import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -32,7 +29,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.expressions.OCLExpression;
-import org.eclipse.ocl.internal.helper.PluginFinder;
 import org.eclipse.ocl.tests.TestReflection;
 import org.eclipse.ocl.uml.ExpressionInOCL;
 import org.eclipse.ocl.uml.OCL;
@@ -95,28 +91,11 @@ EnumerationLiteral, State, CallOperationAction, SendSignalAction, Constraint>
 				new UMLEnvironmentFactory().createEnvironment());
 			ResourceSet resourceSet = new ResourceSetImpl();
 		    OCL.initialize(resourceSet);
-			URI testUMLmodelURI;
-			if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
-				final String testPlugInId = getTestPlugInId();
-				PluginFinder pluginFinder = new PluginFinder(testPlugInId);
-				pluginFinder.resolve();
-				String urlString = pluginFinder.get(testPlugInId);
-				if (urlString == null) {
-					TestCase.fail("'" + testPlugInId + "' cannot be found on the class-path"); //$NON-NLS-1$ //$NON-NLS-2$
-				}
-				testUMLmodelURI = URI.createFileURI(urlString + "/model/UML.merged.uml");
-			}
-			else {
-				testUMLmodelURI = URI.createPlatformPluginURI("/org.eclipse.ocl.uml.tests/model/UML.merged.uml", true);
-			}
-					
 			// Make sure that the UML metamodel and primitive types
 			//   libraries are loaded
-			EObject eObject = resourceSet.getResource(testUMLmodelURI, true).getContents().get(0);
-			umlModelMetamodel = (Package) eObject;
 			umlMetamodel = (Package) resourceSet.getResource(
-				URI.createURI(UMLResource.UML_METAMODEL_URI),
-				true).getContents().get(0);
+					URI.createURI(UMLResource.UML_METAMODEL_URI),
+					true).getContents().get(0);
 			umlPrimitiveTypes = (Package) resourceSet.getResource(
 					URI.createURI(UMLResource.UML_PRIMITIVE_TYPES_LIBRARY_URI),
 					true).getContents().get(0);
@@ -150,7 +129,6 @@ EnumerationLiteral, State, CallOperationAction, SendSignalAction, Constraint>
 		super(env);
 	}
 
-	protected static Package umlModelMetamodel;
 	protected static Package umlMetamodel;
 	protected static Package umlPrimitiveTypes;
 	protected static Package ecorePrimitiveTypes;
@@ -288,11 +266,11 @@ EnumerationLiteral, State, CallOperationAction, SendSignalAction, Constraint>
 	}
 
 	public Classifier getClassTypeContext() {
-		return (Classifier) umlModelMetamodel.getOwnedType("Class");
+		return (Classifier) umlMetamodel.getOwnedType("Class");
 	}
 
 	public Classifier getClassifierTypeContext() {
-		return (Classifier) umlModelMetamodel.getOwnedType("Classifier");
+		return (Classifier) umlMetamodel.getOwnedType("Classifier");
 	}
 
 	public Classifier getCollectionKindTypeContext() {		
@@ -301,7 +279,7 @@ EnumerationLiteral, State, CallOperationAction, SendSignalAction, Constraint>
 	}
 
 	public Classifier getCommentTypeContext() {
-		return (Classifier) umlModelMetamodel.getOwnedType("Comment");
+		return (Classifier) umlMetamodel.getOwnedType("Comment");
 	}
 	
 	public java.lang.Class<Constraint> getConstraintClass() {
@@ -337,7 +315,7 @@ EnumerationLiteral, State, CallOperationAction, SendSignalAction, Constraint>
 	}
     
 	public Classifier getMetaclass(String name) {
-        return (Classifier) umlModelMetamodel.getOwnedType(name);
+        return (Classifier) umlMetamodel.getOwnedType(name);
     }
     
 	public Classifier getMetametaclass(String name) {
@@ -382,7 +360,7 @@ EnumerationLiteral, State, CallOperationAction, SendSignalAction, Constraint>
 	}
 
 	public Package getUMLMetamodel() {
-		return umlModelMetamodel;
+		return umlMetamodel;
 	}
 
 	public Package getUMLPrimitiveTypes() {
