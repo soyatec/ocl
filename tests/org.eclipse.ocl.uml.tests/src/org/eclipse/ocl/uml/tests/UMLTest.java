@@ -445,6 +445,18 @@ public class UMLTest
             fail("Failed to parse: " + e.getLocalizedMessage());
         }
     }
+    
+	/**
+	 * Test that getAppliedStereotypes is available and gives plausible results.
+	 */
+    public void test_appliedStereotypes_381237() {
+        Classifier metaclass = getMetaclass("Class");
+		helper.setContext(metaclass);
+
+        assertQueryTrue(metaclass, "self.getAppliedStereotypes()->size() = 1");
+        assertQueryTrue(metaclass, "self.getAppliedStereotype('StandardProfileL2::Metaclass') <> null");
+        assertQueryTrue(metaclass, "self.getAppliedStereotype('MetaClass') = null");
+    }
 
     //
     // Fixture methods
