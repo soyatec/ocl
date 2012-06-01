@@ -101,7 +101,7 @@ public class ParsingOptions {
      * </p>
      */
     public static final Option<?> IMPLICIT_ROOT_CLASS =
-    		new ClassOption<Object>(OCLUtil.PLUGIN_ID, "implict.root.class", null, Object.class); //$NON-NLS-1$
+    		new ObjectOption<Object>(OCLUtil.PLUGIN_ID, "implict.root.class", null, Object.class); //$NON-NLS-1$
 
     
     /**
