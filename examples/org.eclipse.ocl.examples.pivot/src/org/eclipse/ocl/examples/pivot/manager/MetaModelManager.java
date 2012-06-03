@@ -2375,16 +2375,20 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			}
 		}
 		if (resource != null) {
-			for (Factory factory : factoryMap) {
-				if (factory.canHandle(resource)) {
-					return factory.importFromResource(this, resource, uri.fragment());
-				}
-			}
-			throw new IllegalArgumentException("Cannot create pivot from '" + uri + "'");
-//			logger.warn("Cannot convert to pivot for package with URI '" + uri + "'");
+			return loadResource(resource, uri.fragment());
 		}
 		logger.warn("Cannot load package with URI '" + uri + "'");
 		return null;
+	}
+
+	public Element loadResource(Resource resource, String fragmentURI) {
+		for (Factory factory : factoryMap) {
+			if (factory.canHandle(resource)) {
+				return factory.importFromResource(this, resource, fragmentURI);
+			}
+		}
+		throw new IllegalArgumentException("Cannot create pivot from '" + fragmentURI + "'");
+//		logger.warn("Cannot convert to pivot for package with URI '" + uri + "'");
 	}
 
 	public LibraryFeature lookupImplementation(DomainOperation dynamicOperation) throws SecurityException, IllegalArgumentException, ClassNotFoundException, NoSuchFieldException, IllegalAccessException {

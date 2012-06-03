@@ -441,39 +441,47 @@ public class Ecore2Pivot extends AbstractConversion implements External2Pivot, P
 
 	public Resource importObjects(Collection<EObject> ecoreContents, URI pivotURI) {
 		Resource pivotResource = metaModelManager.createResource(pivotURI, PivotPackage.eCONTENT_TYPE);
-		if ((metaModelManager.getLibraryResource() == null) && isPivot(ecoreContents)) {
-			OCLstdlib library = OCLstdlib.create(OCLstdlib.STDLIB_URI, "ocl", "ocl", ((EPackage)ecoreContents.iterator().next()).getNsURI());
-			metaModelManager.loadLibrary(library);
-		}
-		pivotRoot = metaModelManager.createModel(pivotURI.lastSegment(), null);
-		pivotResource.getContents().add(pivotRoot);
-		List<org.eclipse.ocl.examples.pivot.Package> packages = pivotRoot.getNestedPackage();
-		for (EObject eObject : ecoreContents) {
-			Object pivotElement = declarationPass.doInPackageSwitch(eObject);
-			if (pivotElement instanceof org.eclipse.ocl.examples.pivot.Package) {
-				packages.add((org.eclipse.ocl.examples.pivot.Package) pivotElement);
+		try {
+			if ((metaModelManager.getLibraryResource() == null) && isPivot(ecoreContents)) {
+				OCLstdlib library = OCLstdlib.create(OCLstdlib.STDLIB_URI, "ocl", "ocl", ((EPackage)ecoreContents.iterator().next()).getNsURI());
+				metaModelManager.loadLibrary(library);
 			}
-			else {
-				error("Bad ecore content");
-			}
-		}
-		Map<String, Type> resolvedSpecializations = new HashMap<String, Type>();
-		for (EGenericType eGenericType : genericTypes) {
-			Type pivotType = resolveType(resolvedSpecializations, eGenericType);
-			createMap.put(eGenericType, pivotType);
-		}
-		for (EObject eObject : referencers) {
-			referencePass.doInPackageSwitch(eObject);
-		}
-		for (EObject eObject : referencers) {
-			if (eObject instanceof EReference) {
-				Property pivotElement = getCreated(Property.class, eObject);		
-				Property oppositeProperty = pivotElement.getOpposite();
-				if ((oppositeProperty == null) && (eObject.eContainer() instanceof EClass)) {		// Skip annotation references
-					metaModelManager.installPropertyDeclaration(pivotElement);
+			pivotRoot = metaModelManager.createModel(pivotURI.lastSegment(), null);
+			pivotResource.getContents().add(pivotRoot);
+			List<org.eclipse.ocl.examples.pivot.Package> packages = pivotRoot.getNestedPackage();
+			for (EObject eObject : ecoreContents) {
+				Object pivotElement = declarationPass.doInPackageSwitch(eObject);
+				if (pivotElement instanceof org.eclipse.ocl.examples.pivot.Package) {
+					packages.add((org.eclipse.ocl.examples.pivot.Package) pivotElement);
 				}
-				
+				else {
+					error("Bad ecore content");
+				}
 			}
+			Map<String, Type> resolvedSpecializations = new HashMap<String, Type>();
+			for (EGenericType eGenericType : genericTypes) {
+				Type pivotType = resolveType(resolvedSpecializations, eGenericType);
+				createMap.put(eGenericType, pivotType);
+			}
+			for (EObject eObject : referencers) {
+				referencePass.doInPackageSwitch(eObject);
+			}
+			for (EObject eObject : referencers) {
+				if (eObject instanceof EReference) {
+					Property pivotElement = getCreated(Property.class, eObject);		
+					Property oppositeProperty = pivotElement.getOpposite();
+					if ((oppositeProperty == null) && (eObject.eContainer() instanceof EClass)) {		// Skip annotation references
+						metaModelManager.installPropertyDeclaration(pivotElement);
+					}
+					
+				}
+			}
+		}
+		catch (Exception e) {
+			if (errors == null) {
+				errors = new ArrayList<Resource.Diagnostic>();
+			}
+			errors.add(new XMIException("Failked to load '" + pivotURI + "'", e));
 		}
 		if (errors != null) {
 			pivotResource.getErrors().addAll(errors);

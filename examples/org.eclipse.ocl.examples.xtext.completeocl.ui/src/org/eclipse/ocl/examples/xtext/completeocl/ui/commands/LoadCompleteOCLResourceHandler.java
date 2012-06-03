@@ -41,7 +41,7 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.ui.action.LoadResourceAction.LoadResourceDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.ocl.examples.pivot.Package;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
@@ -241,33 +241,33 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 
 		@Override
 		protected boolean processResources() {
-			Set<EPackage> mmPackages = new HashSet<EPackage>();
-			for (Resource resource : resourceSet.getResources()) {
-				for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
-					EObject eObject = tit.next();
-					EClass eClass = eObject.eClass();
-					if (eClass != null) {
-						EPackage mmPackage = eClass.getEPackage();
-						if (mmPackage != null) {
-							mmPackages.add(mmPackage);
-						}
-					}
-				}
- 			}
-			Set<Resource> mmResources = new HashSet<Resource>();
-			for (EPackage mmPackage : mmPackages) {
-				if (mmPackages.add(mmPackage)) {
-					Resource mmResource = EcoreUtil.getRootContainer(mmPackage).eResource();
-					if (mmResource != null) {
-						mmResources.add(mmResource);
-					}
-				}
- 			}
 			MetaModelManagerResourceSetAdapter adapter = MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, null);	// ?? Shared global MMM
 			MetaModelManager metaModelManager = adapter.getMetaModelManager();
+			Set<EPackage> mmPackages = new HashSet<EPackage>();
+			for (Resource resource : resourceSet.getResources()) {
+				Ecore2Pivot ecore2Pivot = Ecore2Pivot.findAdapter(resource, metaModelManager);
+				if (ecore2Pivot == null) {			// Pivot has its own validation
+					for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
+						EObject eObject = tit.next();
+						EClass eClass = eObject.eClass();
+						if (eClass != null) {
+							EPackage mmPackage = eClass.getEPackage();
+							if (mmPackage != null) {
+								mmPackages.add(mmPackage);
+							}
+						}
+					}
+	 			}
+			}
+			Set<Resource> mmResources = new HashSet<Resource>();
+			for (EPackage mmPackage : mmPackages) {
+				Resource mmResource = EcoreUtil.getRootContainer(mmPackage).eResource();
+				if (mmResource != null) {
+					mmResources.add(mmResource);
+				}
+ 			}
 			for (Resource mmResource : mmResources) {
-				Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(mmResource, metaModelManager);
-				Package pivotRoot = ecore2Pivot.getPivotRoot();
+				Element pivotRoot = metaModelManager.loadResource(mmResource, null);
 				String message = PivotUtil.formatResourceDiagnostics(pivotRoot.eResource().getErrors(), "", "\n");
 				if (message != null) {
 					return error("Failed to load Pivot from '" + mmResource.getURI(), message);

@@ -197,7 +197,11 @@ public class BasicCompleteOCLEObjectValidator extends EObjectValidator
 	 */
 	public static void install(EPackage ePackage) {
 		if (!eValidators.containsKey(ePackage)) {
-			EValidator eValidator = (EValidator) EValidator.Registry.INSTANCE.put(ePackage, INSTANCE);
+			Object oldEntry = EValidator.Registry.INSTANCE.put(ePackage, INSTANCE);
+			if (oldEntry instanceof EValidator.Descriptor) {
+				oldEntry = ((EValidator.Descriptor)oldEntry).getEValidator();
+			}
+			EValidator eValidator = (EValidator) oldEntry;
 			eValidators.put(ePackage, eValidator);
 		}
 	}

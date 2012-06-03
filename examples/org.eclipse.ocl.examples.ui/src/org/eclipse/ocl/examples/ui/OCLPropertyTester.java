@@ -33,6 +33,8 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 public class OCLPropertyTester extends PropertyTester
 {
 	private static final String RESOURCE_SET_AVAILABLE = "resourceSetAvailable"; //$NON-NLS-1$
+//	private static Class<?> gefEditPart = null;			// Set to Object.class if not available
+//	private static Method gefEditPart_getModel = null;
 	
 	public static XtextEditor getActiveXtextEditor(IEvaluationContext evaluationContext) {
 		Object o = HandlerUtil.getVariable(evaluationContext, ISources.ACTIVE_EDITOR_NAME);
@@ -51,6 +53,23 @@ public class OCLPropertyTester extends PropertyTester
 		if (receiver instanceof IStructuredSelection) {
 			receiver = ((IStructuredSelection)receiver).getFirstElement();
 		}
+/*		if (gefEditPart == null) {
+			try {
+				gefEditPart = receiver.getClass().getClassLoader().loadClass("org.eclipse.gef.EditPart");
+				gefEditPart_getModel = gefEditPart.getDeclaredMethod("getModel");
+				System.out.println("Resolve EditPart.getModel");
+			}
+			catch (Throwable e) {
+				gefEditPart = Object.class;
+				System.out.println("Failed to resolve EditPart.getModel : " + e.toString());
+			}
+		}
+		if (gefEditPart_getModel != null) {
+			try {
+				receiver = gefEditPart_getModel.invoke(receiver);
+			}
+			catch (Throwable e) {}
+		} */
 		if (receiver instanceof EObject) {
 			Resource resource = ((EObject)receiver).eResource();
 			return (resource != null) && (resource.getResourceSet() != null);
