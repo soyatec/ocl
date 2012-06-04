@@ -232,7 +232,33 @@
 <topic href="help/OCLInterpreterTutorial.html#Summary2" label="Summary"></topic>
 </topic>
 <topic href="help/CompleteOCLTutorial.html" label="Complete OCL tutorial">
-<topic href="help/CompleteOCLTutorial.html#LoadCompleteOCLResource" label="Load Complete OCL Resource Munu Action"></topic>
+<topic href="help/CompleteOCLTutorial.html#LoadCompleteOCLTutorialExampleProject" label="Load Complete OCL Tutorial Example Project"></topic>
+<topic href="help/CompleteOCLTutorial.html#CompleteOCLTutorial-language" label="Complete OCL Language Overview">
+<topic href="help/CompleteOCLTutorial.html#importdeclarations" label="import declarations"></topic>
+<topic href="help/CompleteOCLTutorial.html#packagecontextdeclaration" label="package context declaration"></topic>
+<topic href="help/CompleteOCLTutorial.html#classifiercontextdeclaration" label="classifier context declaration"></topic>
+<topic href="help/CompleteOCLTutorial.html#featuredefinitions" label="feature definitions"></topic>
+<topic href="help/CompleteOCLTutorial.html#classinvariants" label="class invariants"></topic>
+<topic href="help/CompleteOCLTutorial.html#custommessages" label="custom messages"></topic>
+<topic href="help/CompleteOCLTutorial.html#operationandpropertycontextdeclarations" label="operation and property context declarations"></topic>
+</topic>
+<topic href="help/CompleteOCLTutorial.html#LoadCompleteOCLResource" label="Load Complete OCL Resource Menu Action"></topic>
+<topic href="help/CompleteOCLTutorial.html#CompleteOCLTutorial-EcoreComplements" label="Example Complete OCL complements for Ecore">
+<topic href="help/CompleteOCLTutorial.html#DerivationIsVolatile" label="DerivationIsVolatile"></topic>
+<topic href="help/CompleteOCLTutorial.html#DerivationIsTransient" label="DerivationIsTransient"></topic>
+<topic href="help/CompleteOCLTutorial.html#DerivationIsNotComposed" label="DerivationIsNotComposed"></topic>
+<topic href="help/CompleteOCLTutorial.html#DerivationWithOppositeHasOppositeDerivation" label="DerivationWithOppositeHasOppositeDerivation"></topic>
+<topic href="help/CompleteOCLTutorial.html#DerivationIsUninitialized" label="DerivationIsUninitialized"></topic>
+<topic href="help/CompleteOCLTutorial.html#DerivationDoesNotResolveProxies" label="DerivationDoesNotResolveProxies"></topic>
+</topic>
+<topic href="help/CompleteOCLTutorial.html#CompleteOCLTutorial-EcoreValidation" label="Validating Ecore with additional Complete OCL"></topic>
+<topic href="help/CompleteOCLTutorial.html#CompleteOCLTutorial-UMLComplements" label="Example Complete OCL complements for UML"></topic>
+<topic href="help/CompleteOCLTutorial.html#CompleteOCLTutorial-XtextComplements" label="Example Complete OCL complements for Xtext">
+<topic href="help/CompleteOCLTutorial.html#NoAnonymousImports" label="NoAnonymousImports"></topic>
+<topic href="help/CompleteOCLTutorial.html#NoActions" label="NoActions"></topic>
+<topic href="help/CompleteOCLTutorial.html#CamelCaseName" label="CamelCaseName"></topic>
+<topic href="help/CompleteOCLTutorial.html#UpperName" label="UpperName"></topic>
+</topic>
 </topic>
 <topic href="help/CodeGenerationTutorial.html" label="Code Generation tutorial"></topic>
 </topic>

@@ -1,4 +1,20 @@
-import 'http://www.eclipse.org/2008/Xtext'
+/**
+ * <copyright>
+ *
+ * Copyright (c) 2012 E.D.Willink and others.
+ * All rights reserved.   This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   E.D.Willink - Initial API and implementation
+ *
+ * </copyright>
+ *
+ * This file provides additional validation constraints for use during the Complete OCL tutorial.
+ */
+import 'http://www.eclipse.org/2008/Xtext#/'
 
 package xtext
 
@@ -10,10 +26,8 @@ inv NoActions : false
 
 context ParserRule
 inv CamelCaseName : name.matches('[A-Z][A-Za-z]*')
---inv UpperCaseName : name = name.toUpperCase()
 
 context xtext::TerminalRule
---inv AA: true
 inv UpperName : name = name.toUpperCase()
  
 endpackage

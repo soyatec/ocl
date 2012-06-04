@@ -14,19 +14,11 @@
  *
  * This file provides additional validation constraints for use during the Complete OCL tutorial.
  */
-import uml : 'http://www.eclipse.org/uml2/4.0.0/UML'
-
-package uml
+import uml : 'http://www.eclipse.org/uml2/4.0.0/UML#/'
 
 context uml::Class
 	
-	/**
-	 * If a feature has an OCL derivation, it should be volatile; otherwise it is not executed.
-	 */
-
 /**
- * If a feature has an OCL derivation, it should be volatile; otherwise it is not executed.
+ * The first letter of a classname should be uppercase.
  */
 inv CamelCaseName: name.at(1)=name.at(1).toUpperCase()
-
-endpackage

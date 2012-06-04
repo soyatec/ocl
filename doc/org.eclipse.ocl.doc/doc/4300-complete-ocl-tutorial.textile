@@ -1,6 +1,347 @@
 h2(#CompleteOCLTutorial). Complete OCL tutorial
 
-This tutorial was updated for Eclipse Indigo; Eclipse 3.7, EMF 2.7, OCL 3.1.
-* Since it was prepared before release, the precise 3.1.0.v20110nnnn qualification in screenshots is earlier than final release.
+This tutorial was updated for Eclipse Junoo; Eclipse 3.8/4.2, EMF 2.8, OCL 4.0.
 
-h3(#LoadCompleteOCLResource). Load Complete OCL Resource Munu Action 
+h3. Load Complete OCL Tutorial Example Project
+
+All the material for this tutorial is available as part of the CompleteOCLTutorial Example project that you
+may load by selecting *New* then *Example...* using the right button conrtext menu of the Project Explorer. This
+should give the N*New Example* dilog in which you can select the OCL Plugins and the Complete OCL Tutorial.
+
+!{width:50%}images/4300-new-complete-ocl-tutorial.png(New Complete OCL Tutorial Example)!
+
+The resulting project has a few test files.
+
+!{width:50%}images/4300-complete-ocl-tutorial-project.png(Complete OCL Tutorial Project)!
+
+h3(#CompleteOCLTutorial-language). Complete OCL Language Overview
+
+The Complete OCL language is described in detail "elsewhere":#CompleteOCL. In this turrial we will
+double click on *ExtraEcoreValidation.ocl* to show the following text that provides examples of many
+important aspects of the Complete OCL syntax.
+
+!{width:50%}images/4300-extra-ecore-content.png(Extra Ecore OCL)!
+
+h4. import declarations
+
+The import statement is a serious omission from the OMG specification, since without it any attempt to
+align the Complete OCL constraints with external models relies on implementation-specific magic. The import
+statement is therefore an Eclipse OCL extension that is likely to be part of a future OCL specification revision.
+
+Zero or more important statements may be present to specify the URIs of external model elements and optionally
+alias names for those elements. In the example:
+
+bc.. 
+import ecore : 'http://www.eclipse.org/emf/2002/Ecore#/'
+p. 
+
+@http://www.eclipse.org/emf/2002/Ecore@ specifies the URI of the Ecore metamodel and @#/@ is the fragment URI
+navigating to the root element which is the Ecore package. The @ecore@ specifies an alias for this package, which happens
+to be the same as the name of the package. Within Complete OCL document, the imported model element may be referred to by its
+alias.
+
+bq.. 
+The Java API support for using Complete OCL documents with the Ecore and UML bindings requires implementation-specific magic.
+The imported models must be loaded into the package registry by the invoking code. Import statements are not used.
+
+Prior to the Juno release, import statements were not understood and so there was a usage conflict. Preparation of a
+Complete OCL document using the Xtext editor, or usage wuith pivot model and Xtext parser required import statements.
+But re-use with the Ecore and UML LPG parser required the import statements to be removed.
+
+In Juno, the LPG parser ignores the import statements, so they may be left in.
+p. 
+
+h4. package context declaration
+
+A package context declaration may bracket declarations that complement model elements within the
+complemented package.
+
+bc.. 
+package ecore
+
+...
+
+endpackage
+p. 
+
+This specifies that additional Complete OCL declarations will complement the pre-existing declarations of
+the @ecore@ package.
+
+Multiple package context declarations may be used to complement multiple packages.
+
+The package context declaration may be omitted if subsequent classifier context declrations have a fully qualified
+name identifying the package.
+
+h4. classifier context declaration
+
+A classifier context declaration introduces declarations that complement subsequent model elements within the
+complemented classifier.
+
+bc.. 
+context EModelElement
+p. 
+
+The classifier context is terminated by an @context@ or an @endpackage@.
+
+h4. feature definitions
+
+Additional operations and properties may be defined for use within the Complete OCL document. These features
+may be used as if they were part of the complemented meta-model.
+
+bc.. 
+def: asError(verdict : Boolean) : Boolean = if verdict then true else null endif
+
+def: hasDerivation : Boolean = eAnnotations->select(source.startsWith('http://www.eclipse.org/emf/2002/Ecore/OCL'))->notEmpty()
+p. 
+
+A definition starts with the new feature name, then the parameters for operations and the feature type followed by an OCL expression that
+evaluates the operation or the property.
+
+h4. class invariants
+
+Invariants may be imposed on a complemented meta-model. The invariant comprises the name of the invariant followed by an OCL expression that
+evaluates true when the invariant is satisfied.
+
+bc.. 
+inv DerivationIsTransient: hasDerivation implies transient
+p. 
+ 
+These invariants are executed when a model is evaluated in an application that has loaded the complementing Complete OCL document.
+
+The readability of constraints can be significantly enhanced by the use of let-variables or the re-use, as above, of the @hasDerivation@ helper property.  
+
+h4. custom messages
+
+Eclipse OCL supports two extensions to invariants to allow the validation failure messages and severities to be customised.
+
+The invariant name is followed by a parenthesised OCL expression that computes a String to be used as the validation failure message.
+
+The severity of a validation failure may be controlled by the non-true value evaluated by the invariant expression.
+
+* a @false@ return indicates a warning severity
+* a @null@ return indicates an error severity
+* an @invalid@ return indicates a fatal severity
+
+h4. operation and property context declarations
+
+Complete OCL also allows an incomplete operation or property declaration in the complemented meta-model to be completed.
+
+* initial and derived values may be specified for properties.
+* preconditions, a body and postconditions may be specified for operations.
+
+These facilities are limited use since OCLinEcore avoids the need for incomplete meta-models.
+
+h3(#LoadCompleteOCLResource). Load Complete OCL Resource Menu Action 
+
+The major disclaimer in the above is that the Complete OCL only complements the complemented mweta-model in applications
+that have loaded the Complete OCL.
+
+Prior to the Juno release, this meant that Complete OCL was only useable in custom Java applications since no standard
+modeling applications would load the complementing document.
+
+Juno adds the *Load Complete OCL Resource* menu action so that a Complete OCL document may be loaded into a wide variety of applications
+whose ResourceSet is accessible.
+
+!{width:50%}images/4300-load-complete-ocl-resource-menu.png(Load Complete OCL Resource Menu)!
+
+The *Load Complete OCL Resource* menu action is added to the right button menu of apllications with a ResourceSet.
+
+bq.. 
+It has been observed that the extra menu action is not always immediately available, so if you do not see it, hit *Esc* to cancel the menu and right click again.
+p. 
+
+In Juno, suitable applications are
+* an editor generated from an Ecore meta-model
+** the Sample Ecore Editor
+** the UML Model Editor
+** your model editor
+* an editor generated by Xtext
+** the Xtext Editor
+** the MWE2 Editor
+** your DSL editor
+
+In Juno, unsuitable applications are
+* any editor using the EMF Validation rather than EValidator framework
+** Papyrus
+* editors with distinct Abstract and Syntax Trees
+** OCLinEcore
+** Complete OCL
+
+The *Load Complete OCL Resource* menu action activates the *Load Complete OCL Resource* dialog in which you can browse the File system or Workspace for one or more Complete OCL documents to load, or often more conveniently you can just Drag and Drop them from an Operating System Explorer or an Eclipse Explorer.
+
+!{width:50%}images/4300-load-complete-ocl-resource-dialog.png(Load Complete OCL Resource Dialog)!
+
+After clicking OK the documents load.
+
+bq.. 
+Behind the scenes, it is necessary to install global wrappers around all complemented packages. These wrappers are sensitive to the ResourceSet for which complementing has been requested and so although this incurs a small performance penalty for use of the complemented packages in other applications, it should not affect the functional behavior of other applications. 
+p. 
+
+h3(#CompleteOCLTutorial-EcoreComplements). Example Complete OCL complements for Ecore
+
+The Sample Ecore Editor has acquired many useful validation rules, so that for many usages just invoking *Validate* is quite sufficient. But what if it isn't? Perhaps you have some style conventions that you wish to apply. Perhaps the built-in rules are not sufficient.
+
+Prior to Juno and the *Load Complete OCL Resource* capability, your only choice would be to check out the Ecore Editor and create a custom variant. Now you can use Complete OCL to extend the Sample Ecore Editor.
+
+We will revisit the *ExtraEcoreValidation.ocl* document that we used to rectify inadequate checking of derived properties by the Sample Ecore Editor. The document provides six invariants, at least three of which detect problems that were encountered by users during the Indigo release cycle.
+
+h4. DerivationIsVolatile
+
+The EMF code generation templates have a simple treatment of @volatile@. Non-volatile variables have an associated fields which is returned as part of a @get@ operation. This overrides any derivation that might be supplied.
+
+bc.. 
+inv DerivationIsVolatile: asError(hasDerivation implies volatile)
+p. 
+
+We therefore want to diagnose that a derivation is not ignored because of a default non-volatile declaration.
+
+This problem is so serious that the basic expression is wrapped in the @asError@ operation to convert the
+default @true@ / @false@ ok/warning severity into the @true@ / @null@ ok/error severity.
+
+h4. DerivationIsTransient
+
+The EMF code generation templates have a similarly simple treatment of @transient@. Non-transient variables will be
+serilaised as part of a model save. This is not usually appropriate since the derived value is redundant and can be
+recomputed when the model is loaded again.
+
+bc.. 
+inv DerivationIsTransient: hasDerivation implies transient
+p. 
+
+We therefore want to diagnose that a derivation is not serialised because of a default non-transient declaration.
+
+h4. DerivationIsNotComposed
+
+Composition is handled directly by EMF and it is not clear that it is appropriate to define an alternate
+meaning of composition. It is pretty certain that EMF will not permit an alternate semantics.
+
+bc.. 
+inv DerivationIsNotComposed: asError(hasDerivation implies not containment)
+p. 
+
+We therefore want to diagnose if a derivation is attempting to specify alternate composition semantics and
+report an error if this occurs.
+
+h4. DerivationWithOppositeHasOppositeDerivation
+
+Opposites are also handled directly by EMF, but it is possibly to replace this functionality. However if the
+forward functionality is replaced, it is very unlikley that EMF's default reverse functionality will be appropriate.
+
+bc.. 
+inv DerivationWithOppositeHasOppositeDerivation:
+	hasDerivation and eOpposite <> null implies eOpposite.hasDerivation
+p. 
+
+We therefore want to diagnose that a derivation that redefines the forward semantic of opposite also redefines
+the corresponding reverse semantics.
+
+h4. DerivationIsUninitialized
+
+An initial value for a property may be specified as a simple default value or as a derived expression.
+
+bc.. 
+inv DerivationIsUninitialized: hasDerivation implies defaultValue.oclIsUndefined()
+p. 
+
+We want to diagnose the occlusion of the derived expression by a default value.
+
+h4. DerivationDoesNotResolveProxies
+
+Derived expressions are not references.
+
+bc.. 
+inv DerivationDoesNotResolveProxies: hasDerivation implies not resolveProxies
+p. 
+
+We can therefore diagnose whether the EMF proxy resolution logic is not suppressed. 
+
+h3(#CompleteOCLTutorial-EcoreValidation). Validating Ecore with additional Complete OCL
+
+In the "previous section":#CompleteOCLTutorial-EcoreComplements we described additional Complete OCL validation constraints to detect problems with inadequate Sample Ecore diagnosis of derived properties. We will now apply those constraints to a test file.
+
+Select *EcoreTestFile.ecore* and use the right button menu to *Open With -> Sample Ecore Model Editor*. This is probably the default for double-clicking with the left button, but if you open with the OCLinEcore editor the required validation will not work (in Juno).
+
+Now right click within the Sample Ecore Editor pane as described in "Load Complete OCL Resource Menu Action":#LoadCompleteOCLResource and load *ExtraEcoreValidation.ocl*. An additional Resource is shown in the editor tree.
+
+Select a model element such as the *Bad* package and use the right button menu to invoke *Validate*.
+
+!{width:50%}images/4300-extra-ecore-validation.png(Augmented Ecore Validation)!
+
+If we now open *EcoreTestFile.ecore* with the OCLinEcore editor we can see that the *transient* and *volatile* keywords are indeed missing.
+
+!{width:50%}images/4300-extra-ecore-oclinecore.png(Augmented Ecore OCLinEcore)!
+
+h3(#CompleteOCLTutorial-UMLComplements). Example Complete OCL complements for UML
+
+The extension of the Sample Ecore Editor validation described in "Validating Ecore with additional Complete OCL":#CompleteOCLTutorial-EcoreValidation is applicable to any tree editor generated by EMF tooling.
+
+The *ExtraUMLValidation.ocl* file provides a very simple style check that class names start with an upper case letter.
+
+!{width:50%}images/4300-extra-uml-content.png(Augmented UML Content)!
+
+The UML meta-model is imported and an invariant is specified for the Class classifier which is fully quialified to avoid the need for a surrounding package context declaration.
+
+You may load the *PapyrusTestFile.uml* with the UML Model Editor, then load the *ExtraUMLValidation.ocl* select the *Model* and *Validate* in the same way as the Ecore example. 
+
+!{width:50%}images/4300-extra-uml-validation.png(Augmented UML Validation)!
+
+Unfortunately, The Papyrus UML editor does not use the EVlaidtor framework and so loading Complete OCL documents into Papyrus fails to enhace validation capabilities.
+
+h3(#CompleteOCLTutorial-XtextComplements). Example Complete OCL complements for Xtext
+
+Xtext editors use EValidator and so a Complete OCL dcoument may be loaded into an Xtext editor, including Xtext itself, to provide enhanced validation.
+
+The *ExtraXtextValidation.ocl* file provides some demonstration style checks.
+
+!{width:50%}images/4300-extra-xtext-content.png(Augmented Xtext Content)!
+
+The Xtext root packge is imported and within the package declaration context for the *xtext* package, invariants are supplied for four classes. These are all examples of how constraints may use the Xtext model. It is not suggested that users should use all of these constraints for real grammars.
+
+h4. NoAnonymousImports
+
+bc.. 
+context ReferencedMetamodel
+inv NoAnonymousImports: alias <> null
+p. 
+
+This invariant diagnoses whether any import statements omit the @as xxxx@ model name.  
+
+h4. NoActions
+
+bc.. 
+context Action
+inv NoActions : false
+p. 
+
+This invariant diagnoses whenever an @{xxx}@ action statement is used.  
+
+h4. CamelCaseName
+
+bc.. 
+context ParserRule
+inv CamelCaseName : name.matches('[A-Z][A-Za-z]*')
+p. 
+
+This invariant verifies that the name of a parser rule starts with an upper case letter and use only letters.  
+
+h4. UpperName
+
+bc.. 
+context xtext::TerminalRule
+inv UpperName : name = name.toUpperCase()
+p. 
+
+This invariant verifies that the name of a terminal rule is uppercase.  
+
+
+You may load the *XtextTestFile.uml* with the Xtext Editor, then load the *ExtraXtextValidation.ocl* and *Validate* in the same way as the Ecore example. 
+
+The additional validations appear as warning markers in the editor. 
+
+!{width:50%}images/4300-extra-xtext-validation.png(Augmented Xtext Validation)!
+
+bq.. 
+Unfortunately Xtext does not have a nice toString() method for its Concrete Syntax tree so the descriptions of erroneous elements are a little inelegant.
+p. 
+
+You may edit the Xtext test file to delete the "as ecore" in the import statement and see that the additional Complete OCL constraints are contributing to the ongoing functionality of the editor. 
