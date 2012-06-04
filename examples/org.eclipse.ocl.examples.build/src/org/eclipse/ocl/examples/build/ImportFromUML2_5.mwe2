@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.resource.impl.*
 var xmiSlot = "xmi"
 var pivotSlot = "pivot"
 var oclSlot = "ocl"
-var umlFolder = "/UML-2.5/XMI-16-May-2012"
+var umlFolder = "/UML-2.5/XMI-1-Jun-2012"
  
 /**
  *	Generate the Pivot Model, by performing the merge to create the flattened package
@@ -49,7 +49,7 @@ Workflow {
     }
 //    bean = UMLStandaloneSetup { resourceSet = resourceSet }
     bean = OCLStandaloneSetup {}
-    component = XMI2UMLResourceReader { resourceSet = resourceSet skipOnErrors = true
+/*    component = XMI2UMLResourceReader { resourceSet = resourceSet skipOnErrors = true
     	modelSlot = "${xmiSlot}"
     	uri = "${umlFolder}/UML.xmi"
     	nsURI = "http:///UML2-5"
@@ -76,6 +76,34 @@ Workflow {
     component = ResourceWriter { resourceSet = resourceSet skipOnErrors = true
     	modelSlot = "${pivotSlot}"
     	uri = "${umlFolder}/UML.ocl.pivot"
+    } */
+    component = XMI2UMLResourceReader { resourceSet = resourceSet skipOnErrors = true
+    	modelSlot = "${xmiSlot}"
+    	uri = "${umlFolder}/UMLDI.xmi"
+    	nsURI = "http:///UML2-5"
+    }
+    component = UMLAssociationNormalizer { skipOnErrors = true
+    	modelSlot = "${xmiSlot}"
+    	uri = "${umlFolder}/UMLDI.pivot.uml"
+    }
+    component = ResourceWriter { resourceSet = resourceSet skipOnErrors = true
+    	modelSlot = "${xmiSlot}"
+    }
+    component = UML2PivotLoader { skipOnErrors = true
+    	umlSlot = "${xmiSlot}"
+    	modelSlot = "${pivotSlot}"
+    }
+    component = CompleteOCLSeparator { skipOnErrors = true
+    	modelSlot = "${pivotSlot}"
+    	oclSlot = "${oclSlot}"
+    	oclURI = "${umlFolder}/UMLDI.ocl"
+    }
+    component = ResourceWriter { resourceSet = resourceSet skipOnErrors = true
+    	modelSlot = "${oclSlot}"
+    }
+    component = ResourceWriter { resourceSet = resourceSet skipOnErrors = true
+    	modelSlot = "${pivotSlot}"
+    	uri = "${umlFolder}/UMLDI.ocl.pivot"
     }
 }
 
