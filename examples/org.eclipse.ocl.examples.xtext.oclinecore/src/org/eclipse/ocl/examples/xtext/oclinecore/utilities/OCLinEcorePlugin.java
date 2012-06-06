@@ -101,7 +101,7 @@ public final class OCLinEcorePlugin extends EMFPlugin {
 
 		@Override
 		public void start(BundleContext context) throws Exception {
-			OCLinEcoreStandaloneSetup.doSetup();
+			OCLinEcoreStandaloneSetup.init();
 			super.start(context);
 		}
 	}
