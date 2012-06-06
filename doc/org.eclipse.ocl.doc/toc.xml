@@ -232,6 +232,8 @@
 <topic href="help/OCLInterpreterTutorial.html#Summary2" label="Summary"></topic>
 </topic>
 <topic href="help/CompleteOCLTutorial.html" label="Complete OCL tutorial">
+<topic href="help/CompleteOCLTutorial.html#Overview4" label="Overview"></topic>
+<topic href="help/CompleteOCLTutorial.html#CompleteOCLUtility" label="Complete OCL Utility"></topic>
 <topic href="help/CompleteOCLTutorial.html#LoadCompleteOCLTutorialExampleProject" label="Load Complete OCL Tutorial Example Project"></topic>
 <topic href="help/CompleteOCLTutorial.html#CompleteOCLTutorial-language" label="Complete OCL Language Overview">
 <topic href="help/CompleteOCLTutorial.html#importdeclarations" label="import declarations"></topic>
@@ -252,6 +254,7 @@
 <topic href="help/CompleteOCLTutorial.html#DerivationDoesNotResolveProxies" label="DerivationDoesNotResolveProxies"></topic>
 </topic>
 <topic href="help/CompleteOCLTutorial.html#CompleteOCLTutorial-EcoreValidation" label="Validating Ecore with additional Complete OCL"></topic>
+<topic href="help/CompleteOCLTutorial.html#CompleteOCLTutorial-Updating" label="Editing the Complete OCL"></topic>
 <topic href="help/CompleteOCLTutorial.html#CompleteOCLTutorial-UMLComplements" label="Example Complete OCL complements for UML"></topic>
 <topic href="help/CompleteOCLTutorial.html#CompleteOCLTutorial-XtextComplements" label="Example Complete OCL complements for Xtext">
 <topic href="help/CompleteOCLTutorial.html#NoAnonymousImports" label="NoAnonymousImports"></topic>
@@ -259,6 +262,9 @@
 <topic href="help/CompleteOCLTutorial.html#CamelCaseName" label="CamelCaseName"></topic>
 <topic href="help/CompleteOCLTutorial.html#UpperName" label="UpperName"></topic>
 </topic>
+<topic href="help/CompleteOCLTutorial.html#CompleteOCLEditor" label="Complete OCL Editor"></topic>
+<topic href="help/CompleteOCLTutorial.html#RoyalandLoyalExample" label="Royal and Loyal Example"></topic>
+<topic href="help/CompleteOCLTutorial.html#Summary3" label="Summary"></topic>
 </topic>
 <topic href="help/CodeGenerationTutorial.html" label="Code Generation tutorial"></topic>
 </topic>
