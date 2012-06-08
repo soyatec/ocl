@@ -22,7 +22,7 @@ import org.eclipse.ocl.examples.xtext.completeocl.ui.internal.CompleteOCLActivat
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.FollowElementCalculator;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory;
 
 import com.google.common.collect.Multimap;
 
@@ -37,13 +37,13 @@ public class CompleteOCLUiModule extends AbstractCompleteOCLUiModule
 		super(plugin);
 	}
 
-	public static class Bug382088Workaround extends org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.StatefulFactory
+	public static class Bug382088Workaround extends ParserBasedContentAssistContextFactory.StatefulFactory
 	{
 		private int depth = 0;
 
 		@Override
-		protected void computeFollowElements(FollowElementCalculator calculator, FollowElement element,
-				Multimap<Integer, List<AbstractElement>> visited) {
+		protected void computeFollowElements(ParserBasedContentAssistContextFactory.FollowElementCalculator calculator,
+				FollowElement element, Multimap<Integer, List<AbstractElement>> visited) {
 			try {
 				if (++depth < 10) {
 					super.computeFollowElements(calculator, element, visited);
@@ -54,7 +54,7 @@ public class CompleteOCLUiModule extends AbstractCompleteOCLUiModule
 		}		
 	}
 	
-	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.StatefulFactory> bindStatefulFactory() {
+	public Class<? extends ParserBasedContentAssistContextFactory.StatefulFactory> bindStatefulFactory() {
 		return Bug382088Workaround.class;		// BUG 382088
 	}
 }
