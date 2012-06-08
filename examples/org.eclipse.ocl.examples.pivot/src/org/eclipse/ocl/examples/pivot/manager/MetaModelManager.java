@@ -1625,6 +1625,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 
 	public <T extends NamedElement> T getPivotOfEcore(Class<T> pivotClass, EObject eObject) {
+		if (eObject == null) {
+			return null;
+		}
 		Resource metaModel = eObject.eResource();
 		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(metaModel, this);
 		if (ecore2Pivot == null) {
