@@ -30,6 +30,8 @@ should give the *New Example* dialog in which you can select the OCL (OCL Constr
 
 !{width:70%}images/4300-new-complete-ocl-tutorial.png(New Complete OCL Tutorial Example)!
 
+If you do not see these example projects, follow the "Instructions for installing the OCL Editors":#Installation.
+
 The resulting project has a few test files.
 
 !{width:70%}images/4300-complete-ocl-tutorial-project.png(Complete OCL Tutorial Project)!

@@ -202,7 +202,7 @@
 <topic href="help/Tutorials.html#OCLinEcoreTutorial" label="OCLinEcore tutorial">
 <topic href="help/Tutorials.html#Overview2" label="Overview"></topic>
 <topic href="help/Tutorials.html#References" label="References"></topic>
-<topic href="help/Tutorials.html#Installation" label="Installing the Eclipse OCL Examples"></topic>
+<topic href="help/Tutorials.html#OCLinEcoreTutorial-Installation" label="Installing the Eclipse OCL Examples"></topic>
 <topic href="help/Tutorials.html#Troubleshooting" label="Troubleshooting"></topic>
 <topic href="help/Tutorials.html#UsingtheOCLinEcoretexteditorforEcore" label="Using the OCLinEcore text editor for Ecore">
 <topic href="help/Tutorials.html#CreateaNewEMFProject" label="Create a New EMF Project"></topic>
@@ -267,6 +267,9 @@
 <topic href="help/CompleteOCLTutorial.html#Summary3" label="Summary"></topic>
 </topic>
 <topic href="help/CodeGenerationTutorial.html" label="Code Generation tutorial"></topic>
+<topic href="help/Installation.html" label="Installing the Eclipse OCL Examples and Editors">
+<topic href="help/Installation.html#Troubleshooting2" label="Troubleshooting"></topic>
+</topic>
 </topic>
 <topic href="help/Examples.html" label="Examples">
 <topic href="help/Examples.html#RoyalAndLoyalExample" label="Royal and Loyal Example Project"></topic>

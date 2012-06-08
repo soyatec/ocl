@@ -20,6 +20,8 @@
 4300-complete-ocl-tutorial.textile
 4400-code-generation-tutorial.textile
 
+4900-examples-installation.textile
+
 3000-examples.textile
 3200-oclInterpreterExample.textile
 
