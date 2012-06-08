@@ -54,6 +54,8 @@ import org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCLStandaloneSetup;
 
 /**
  * Tests for the OCLinEcore tutorial using LPG or Pivot delegate URIs on LPG or Pivot evaluator.
+ * 
+ * WARNING. These tests fail as plugin tests if an OCLinEcore tutorial project is open.
  */
 @SuppressWarnings("nls")
 public class OCLinEcoreTutorialExamples extends PivotTestCase
