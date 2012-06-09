@@ -20,6 +20,7 @@
          <enabledWhen>
             <adapt type="org.eclipse.core.resources.IResource"/>
          </enabledWhen>
+         <filter name="open" value="true"/>
       </page>
    </extension>
 
