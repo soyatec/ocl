@@ -387,7 +387,7 @@ There are now two validation failures.
 
 !{width:50%}images/4100-two_validation_errors.png(Two Validation Errors)!
 
-h3. Generating Java Code
+h3(#OCLinEcoreTutorial-genmodel). Generating Java Code
 
 We have shown how OCL may be used to enrich Ecore meta-models, how model instances can be created
 and validated and how expressions can be evaluated, all without generating any Java code.

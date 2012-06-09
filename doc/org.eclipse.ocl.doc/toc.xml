@@ -234,7 +234,7 @@
 <topic href="help/Tutorials.html#EnrichthemetamodelwithOCL" label="Enrich the meta-model with OCL"></topic>
 <topic href="help/Tutorials.html#OCLinEcoreTutorial-Console" label="The OCL Console"></topic>
 <topic href="help/Tutorials.html#OCLinEcoreTutorialHelpers" label="Helper Features and Operations"></topic>
-<topic href="help/Tutorials.html#GeneratingJavaCode" label="Generating Java Code">
+<topic href="help/Tutorials.html#OCLinEcoreTutorial-genmodel" label="Generating Java Code">
 <topic href="help/Tutorials.html#JavaDetails" label="Java Details"></topic>
 <topic href="help/Tutorials.html#APIInvariants" label="API Invariants"></topic>
 </topic>
@@ -286,7 +286,11 @@
 <topic href="help/CompleteOCLTutorial.html#RoyalandLoyalExample" label="Royal and Loyal Example"></topic>
 <topic href="help/CompleteOCLTutorial.html#Summary3" label="Summary"></topic>
 </topic>
-<topic href="help/CodeGenerationTutorial.html" label="Code Generation tutorial"></topic>
+<topic href="help/CodeGenerationTutorial.html" label="Code Generation tutorial">
+<topic href="help/CodeGenerationTutorial.html#LoadOCLinEcoreTutorialExampleProject" label="Load OCLinEcore Tutorial Example Project"></topic>
+<topic href="help/CodeGenerationTutorial.html#Directcode" label="Direct code"></topic>
+<topic href="help/CodeGenerationTutorial.html#UsingaGenAnnotation" label="Using a GenAnnotation"></topic>
+</topic>
 <topic href="help/Installation.html" label="Installing the Eclipse OCL Examples and Editors">
 <topic href="help/Installation.html#Troubleshooting2" label="Troubleshooting"></topic>
 </topic>
