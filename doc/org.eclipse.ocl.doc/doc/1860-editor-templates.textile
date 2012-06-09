@@ -1,0 +1,3 @@
+h3(#EditorTemplates). Editor Templates
+
+The standard Xtext editor template facilities are provided for each of the OCL editors.

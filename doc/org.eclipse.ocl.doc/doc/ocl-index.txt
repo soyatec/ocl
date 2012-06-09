@@ -12,6 +12,14 @@
 
 1600-ocl-integration.textile
 
+1800-user-interface.textile
+1810-overall-options.textile
+1820-ecore-uml-options.textile
+1830-uml-options.textile
+1840-model-registry.textile
+1850-syntax-coloring.textile
+1860-editor-templates.textile
+
 2000-ocl-standard-library.textile
 
 4000-tutorials.textile

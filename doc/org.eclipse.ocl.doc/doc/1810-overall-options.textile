@@ -1,0 +1,55 @@
+h3(#OverallOptions). OverallOptions
+
+The two overall options are independent of the Ecore/UML/Pivot bindings.
+
+h4(#DefaultDelegationMode). Default Delegation Mode
+
+The Eclipse OCL project provides two execution engines which may be used to support EMF Delegates.
+
+!{width:70%}images/1810-default-delegation-mode.png(Default Delegation Mode)!
+
+h5(#LPGDelegation). http://www.eclipse.org/emf/2002/Ecore/OCL/LPG
+
+EMF Delegate annotations referencing the @http://www.eclipse.org/emf/2002/Ecore/OCL/LPG@ URI are serviced by the legacy evaluator that uses the LPG parser.
+
+This URI was introduced in the Juno release.
+
+h5(#PivotDelegation). http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot
+
+EMF Delegate annotations referencing the @http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot@ URI are serviced by the new experimental evaluator that uses the UML-aligned Pivot model.
+
+This URI was introduced in the Indigo release and was imposed by the Indigo OCLinEcore editor.
+
+h5(#DefaultDelegation). http://www.eclipse.org/emf/2002/Ecore/OCL
+
+EMF Delegate annotations referencing the @http://www.eclipse.org/emf/2002/Ecore/OCL@ URI are serviced by the evaluator selected on the preference page.
+
+This URI was introduced in the Helios release and was imposed by the Helios OCLinEcore editor.
+
+Use of an Indigo or Juno editor converts the URI to use the pivot evaluator.
+
+h4(#CodeGenerationMode). Code Generation Mode
+
+Juno introduces an experimental ability to replace the delegated interpreted execution of OCL by direct execution of compiled Java code.
+
+!{width:70%}images/1810-code-generation-mode.png(Code Generation Mode)!
+
+This option may be selected to change the realization of OCL option.
+
+h5(#CodeGenerationMode-DELEGATED). Delegate for interpretation at run-time
+
+Selecting the default delegation mode retains the Helios and Indigo functionality whereby *genmodel* encodes the OCL expressions as text strings in a generated model. Each expression is lazily compiled at run-time with the result being cached to reduce overheads for repeated execution.
+
+h5(#CodeGenerationMode-GENERATED). Generate Java code in xxxBodies classes
+
+Selecting Java code generation causes *genmodel* to run Acceleo templates that generate
+* a _Package_ Tables.java file
+* a bodies package with _Class_ Bodies.java files
+
+The tables file contains an optimised model representation allowing polymorphic operations to be dispatched in constant time.
+
+The bodies files contain a Java class for each OCL expression in each model class.
+
+The implementation files provide wrappers around the bodies to support their invocation for the Ecore API.
+
+Disclaimer: the generated code is experimental has yet to be optimized and so is only about five times faster than the interpreted execution. 

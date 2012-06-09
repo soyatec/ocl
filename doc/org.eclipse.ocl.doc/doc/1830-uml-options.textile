@@ -1,0 +1,5 @@
+h3(#UMLOptions). UML Options
+
+The options for the UML binding.
+
+!{width:50%}images/1830-uml-options.png(UML Options)!

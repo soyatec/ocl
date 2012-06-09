@@ -163,6 +163,26 @@
 <topic href="help/Integration.html#OCLinEcoreforXtextValidation" label="OCLinEcore for Xtext Validation"></topic>
 <topic href="help/Integration.html#CompleteOCLforXtextValidation" label="Complete OCL for Xtext Validation"></topic>
 </topic>
+<topic href="help/UserInterface.html" label="User Interface">
+<topic href="help/UserInterface.html#PropertyPages" label="Project Property Pages"></topic>
+<topic href="help/UserInterface.html#PreferencePages" label="Workspace Preference Pages"></topic>
+<topic href="help/UserInterface.html#OverallOptions" label="OverallOptions">
+<topic href="help/UserInterface.html#DefaultDelegationMode" label="Default Delegation Mode">
+<topic href="help/UserInterface.html#LPGDelegation" label="http://www.eclipse.org/emf/2002/Ecore/OCL/LPG"></topic>
+<topic href="help/UserInterface.html#PivotDelegation" label="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"></topic>
+<topic href="help/UserInterface.html#DefaultDelegation" label="http://www.eclipse.org/emf/2002/Ecore/OCL"></topic>
+</topic>
+<topic href="help/UserInterface.html#CodeGenerationMode" label="Code Generation Mode">
+<topic href="help/UserInterface.html#CodeGenerationMode-DELEGATED" label="Delegate for interpretation at run-time"></topic>
+<topic href="help/UserInterface.html#CodeGenerationMode-GENERATED" label="Generate Java code in xxxBodies classes"></topic>
+</topic>
+</topic>
+<topic href="help/UserInterface.html#EcoreUMLOptions" label="Ecore and UML Options"></topic>
+<topic href="help/UserInterface.html#UMLOptions" label="UML Options"></topic>
+<topic href="help/UserInterface.html#ModelRegistry" label="Model Registry"></topic>
+<topic href="help/UserInterface.html#SyntaxColoring" label="Syntax Coloring"></topic>
+<topic href="help/UserInterface.html#EditorTemplates" label="Editor Templates"></topic>
+</topic>
 </topic>
 <topic href="help/StandardLibrary.html" label="The OCL Standard Library">
 <topic href="help/StandardLibrary.html#Precedences" label="Precedences"></topic>
