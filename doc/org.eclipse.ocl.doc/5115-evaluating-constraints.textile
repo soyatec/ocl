@@ -33,7 +33,7 @@ values for "global" variables added to the parsing @Environment@
 by the client.
 
 Another important consideration in the evaluation environment is the
-@allInstances()@ operation, which obtains the entire
+@allInstance()@ operation, which obtains the entire
 extent of a classifier.  For data types, this is a simple problem:  the extent
 of an @Enumeration@ is well defined and the extents of
 other kinds of @DataType@ s are undefined.  For

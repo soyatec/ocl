@@ -1,0 +1,70 @@
+
+h2(#PivotParsingDocuments). Parsing OCL Documents
+
+As we saw in the "Parsing Constraints and Queries":#PivotParsingConstraints topic, the OCL parser provides an "@OCLHelper@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/helper/OCLHelper.html API for parsing constraints embedded in models.  OCL also permits constraints
+to be specified in a text document, as an adjunct to the model.  In this case,
+the concrete syntax for context declarations indicates the context of
+constraints, equivalent to their placement in models.
+
+As an example, consider the following Complete OCL document:
+
+!images/6320-extlibrary.png(External Library)!
+"[Text for cut and paste]":../references/6320-extlibrary.ocl
+
+h3. The OCL Input
+
+The Ecore binding provided an @OCLInput@ class to supervise the OCL source text, and the result of parsing the document was a @List<Constraint>@. The Pivot binding uses an Xtext parser with a UML-aligned output. The input text is therefore specified by
+a URI and loaded by the Xtext parser to create a Concrete Syntax Resource. This may then be converted to the Pivot Abstract Syntax Resource. The Abstract Syntax Resource has a conventional Model, Package, Class, Operation hierarchy in order to provide a coherent composition context for the Constraints.
+
+The Concrete Syntax Resource created by the Xtext parser
+* comprises a CompleteOCLDocumentCS
+* containing a PackageDeclarationCS for @extlibrary@
+* containing a ClassifierContextDeclCS for @Library@
+** containing a DefCS
+*** containing a DefOperationCS for @getBooks@
+*** and a SpecificationCS
+* and a ClassifierContextDeclCS for @Book@
+** containing an InvCS for @unique_title@
+** containing a SpecificationCS
+
+each SpecificationCS contains the parsed OCL Expression tree.
+
+The complementing Abstract Syntax Resource
+* comprises a Model with a @pivot:/..../extlibrary.ocl@ URI
+* containing a Package named @extlibrary@
+* containing a Class named @Library@
+** containing an Operation named @getBooks@
+** containing a body Constraint
+* and a Class named @Book@
+** containing an invariant Constraint for @unique_title@
+
+The complementing Abstract Syntax Resource has the same structure as the complemented Resource
+
+The complemented Abstract Syntax Resource
+* comprises a Model with a @pivot:/..../extlibrary.ecore@ URI
+* containing a Package named @extlibrary@
+* containing a Class named @Library@
+* and a Class named @Book@
+
+There are therefore two Class objects named @Library@, one for each Resource. The objects are distinct in so far as they belong to different resources, which can be separately serialized, and in so far as they may appear distinct to OCL expressions that use reflective access. However they are logically merged and the @MetaModelManager@ provides utility methods that allow the multiple objects to be accessed as a merged object.
+
+Given the @URI@ of an OCL document, simply ask an @OCL@ to parse it:
+
+!images/6320-parsing.png(Parsing the Constraints)!
+"[Text for cut and paste]":../references/6320-parsing.txt
+
+h3. Accessing the Constraints
+
+The @OCL@ returns the list of constraints if they were
+successfully parsed.  They are retained by the OCL (available via the
+@getConstraints()@ method at any time), and in particular,
+any definitions of additional operations or attributes are available for
+subsequent constraint parsing.  Any number of OCL documents may be parsed by
+the same @OCL@ instance, combined also with constraints
+parsed by @OCLHelpers@.  All of these constraints are
+retained by the @OCL@ environment.
+
+!images/6320-accessing.png(Accessing the Constraints)!
+"[Text for cut and paste]":../references/6320-accessing.txt
+
+The source for these examples may be found in the org.eclipse.ocl.examples.xtext.tests plugin in model/parsingDocumentsExample.ocl and in src/org/eclipse/ocl/examples/test/xtext/PivotDocumentationExamples.java.

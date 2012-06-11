@@ -372,12 +372,35 @@
 <topic href="help/PivotProgrammersGuide.html#OCLinEcoreEObjectValidator" label="OCLinEcoreEObjectValidator"></topic>
 <topic href="help/PivotProgrammersGuide.html#CompleteOCLEObjectValidator" label="CompleteOCLEObjectValidator"></topic>
 </topic>
-<topic href="help/PivotEvaluator.html" label="The Pivot Evaluator"></topic>
+<topic href="help/PivotEvaluator.html" label="The Pivot Evaluator">
+<topic href="help/PivotEvaluator.html#PivotValues" label="The Pivot Value System">
+<topic href="help/PivotEvaluator.html#PivotValueConversions" label="Value Conversions"></topic>
+<topic href="help/PivotEvaluator.html#PivotIntegers" label="Polymorphic Integers"></topic>
+<topic href="help/PivotEvaluator.html#PivotCollections" label="Polymorphic Collections"></topic>
+<topic href="help/PivotEvaluator.html#PivotObjects" label="Polymorphic Objects"></topic>
+</topic>
+<topic href="help/PivotEvaluator.html#ThePivotEvaluatorTypeSystem" label="The Pivot Evaluator Type System"></topic>
+<topic href="help/PivotEvaluator.html#ThePivotEvaluatorImplementationSystem" label="The Pivot Evaluator Implementation System"></topic>
+<topic href="help/PivotEvaluator.html#PolymorphicImplementations" label="Polymorphic Implementations"></topic>
+</topic>
 <topic href="help/PivotStandalone.html" label="Pivot Standalone Configuration">
 <topic href="help/PivotStandalone.html#Models" label="Models"></topic>
 <topic href="help/PivotStandalone.html#OCLStandardLibrary" label="OCL Standard Library"></topic>
 <topic href="help/PivotStandalone.html#PivotDelegates" label="Pivot Delegates"></topic>
 <topic href="help/PivotStandalone.html#XtextEditors2" label="Xtext Editors"></topic>
+</topic>
+<topic href="help/PivotParsingConstraints.html" label="Parsing Constraints and Queries">
+<topic href="help/PivotParsingConstraints.html#TheOCLEnvironment2" label="The OCL Environment"></topic>
+<topic href="help/PivotParsingConstraints.html#CreatinganOCLEnvironment2" label="Creating an OCL Environment"></topic>
+<topic href="help/PivotParsingConstraints.html#TheOCLHelper2" label="The OCL Helper"></topic>
+<topic href="help/PivotParsingConstraints.html#OperationandAttributeContexts2" label="Operation and Attribute Contexts"></topic>
+</topic>
+<topic href="help/PivotEvaluatingConstraints.html" label="Evaluating Constraints and Queries">
+<topic href="help/PivotEvaluatingConstraints.html#TheOCLQuery2" label="The OCL Query"></topic>
+</topic>
+<topic href="help/PivotParsingDocuments.html" label="Parsing OCL Documents">
+<topic href="help/PivotParsingDocuments.html#TheOCLInput2" label="The OCL Input"></topic>
+<topic href="help/PivotParsingDocuments.html#AccessingtheConstraints2" label="Accessing the Constraints"></topic>
 </topic>
 </topic>
 <topic href="help/APIReference.html" label="API Reference">

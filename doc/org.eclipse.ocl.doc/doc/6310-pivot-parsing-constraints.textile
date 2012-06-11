@@ -1,9 +1,11 @@
 
-h2(#ParsingConstraints). Parsing Constraints and Queries
+h2(#PivotParsingConstraints). Parsing Constraints and Queries
 
-The OCL parser provides two APIs for parsing constraint and query expressions. The "@OCLHelper@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/helper/OCLHelper.html interface is designed primarily for parsing constraints and query expressions
-embedded in models, such as Ecore or UML models.  The "@OCL@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/OCL.html class serves as the main entrypoint into the parsing API but also implements the
-parsing of "OCL documents":#ParsingDocuments, for example from
+This section may be contrasted with the corresponding "Parsing Constraints and Queries":#ParsingConstraints for the Ecore binding to see examples of the small changes needed to migarte from the Ecore binding to the Pivot binding.
+
+The OCL parser provides two APIs for parsing constraint and query expressions. The "@OCLHelper@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/examples/pivot/helper/OCLHelper.html interface is designed primarily for parsing constraints and query expressions
+embedded in models, such as Ecore or UML models.  The "@OCL@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/examples/pivot/OCL.html class serves as the main entrypoint into the parsing API but also implements the
+parsing of "OCL documents":#PivotParsingDocuments, for example from
 text files.  In both cases, the concept of @Environment@
 is crucial.
 
@@ -14,19 +16,16 @@ API, that clients of the OCL parser interact with:
 
 !{width:100%}images/5110-environment.png(Core OCL Environment API)!
 
-The "@OCL@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/OCL.html class is a generic type; its type parameters represent the various metaclasses
-of the metamodels that OCL works with in the UML/MOF family of OMG specifications.
-For example, @<C>@ represents the Classifier
-concept, @<O>@ the Operation concept, etc.  See
-the discussion of "metamodels supported by OCL":#TargetMetamodels 
-for details of the mappings.  The same type parameter names are used consistently
-throughout the OCL APIs to represent the same metaclasses.
+The "@OCL@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/examples/pivot/OCL.html class is a simple type.
+
+bq.. 
+There is no need for the Ecore/UML template parameters that parameterize the equivalent Ecore/UML class.
+p. 
 
 The @OCL@ class defines instances of autonomous OCL
 parsing and evaluation environments.  It has a single root
-"@Environment@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/Environment.html created by an
-"@EnvironmentFactory@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/EnvironmentFactory.html 
-implementation for a particular EMF-based metamodel.  The OCL environment
+"@Environment@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/examples/pivot/Environment.html created by an
+"@PivotEnvironmentFactory@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/examples/pivot/utilities/PivotEnvironmentFactory.html.  The OCL environment
 consists, conceptually, of the model that is to be constrained together with
 all of the constraints and additional operations and attributes defined (via
 OCL) for the purpose of formulating constraints.
@@ -50,7 +49,7 @@ classifier that defines these features, or it may inherit them from some more
 general classifier.
 
 An @Environment@ may contain named
-"@Variable@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/expressions/Variable.html s
+"@Variable@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/examples/pivot/Variable.html s
 to which OCL expressions can refer.  The most common of these is
 @self@.  Others include the parameters defined by an
 operation (and its @result@), in the case of an
@@ -63,28 +62,23 @@ The static factory methods on the @OCL@ class are used
 to create instances.  It is a good practice to re-use the same OCL instance for
 all parsing and evaluation of constraints and queries on a model while that
 model is loaded (usually in some @ResourceSet@ in an
-editor).  Using the shared environment factory for the Ecore
-"metamodel":#TargetMetamodels, we can create an OCL
+editor). It is also good practice to invoke @dispose()@ to release all
+OCL-related Resource references.
+
+Using the shared Pivot environment factory , we can create an OCL
 environment suitable for parsing OCL constraints on any Ecore model and
 evaluating them on instances of the model:
 
-!images/5110-creating.png(Creating the OCL)!
-"[Text for cut and paste]":../references/5110-creating.txt
+!images/6310-creating.png(Creating the OCL)!
+"[Text for cut and paste]":../references/6310-creating.txt
 
-Several of the type parameters in the @OCL@ generic type
-signature are useful mostly within the OCL API.  We leave them, here, as wildcards.
+Behind the scenes the Pivot variant of the meta-models are maintained by a
+"@MetaModelManager@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/examples/pivot/manager/MetaModelManager.html, which also maintains all the collection and tuple specialization singletons so that they can be shared by subsequent processing.
 
 h3. The OCL Helper
 
 From an OCL instance, we can create a helper object with which to parse constraints
-and additional operation/attribute definitions.  This
-"@OCLHelper@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/helper/OCLHelper.html 
-stores all of the instantiations of OCL template metaclasses (such as
-"@CollectionType(T)@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/types/CollectionType.html 
-and "@TupleType@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/types/TupleType.html 
-and additional operation/attribute definitions in the root environment of the
-@OCL@ that created it.  This ensures that all of these
-constructs are available for reuse in subsequent parsing.
+and additional operation/attribute definitions.
 
 !{width:100%}images/5110-oclhelper.png(OCL Parsing Helper API)! 
 
@@ -98,29 +92,24 @@ API for that purpose:
 * @createPrecondition()@: convenience for pre-condition constraints
 * @createPostcondition()@: convenience for post-condition constraints
 * @createBodyCondition()@: convenience for body conditions
-* @createInitialValueExpression()@: convenience for attribute initial values
 * @createDerivedValueExpression()@: convenience for attribute derived values
-* @defineOperation()@: convenience for additional operation definitions
-* @defineAttribute()@: convenience for additional attribute definitions
 
 Different kinds of constraints require different context environments.  The
 @setContext()@, @setOperationContext()@,
 and @setAttributeContext()@ methods create the appropriate
-nested @Environment@s in the host @OCL@
+nested @Environment@ s in the host @OCL@
 instance's root environment.
 
-The result of parsing a query expression is an
-"@OCLExpression@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/expressions/OCLExpression.html,
-an instance of the "Abstract Syntax Model":#AbstractSyntax .  The
-result of parsing a constraint is an instance of the
-@Constraint@ metaclass defined by the
-@OCL@'s "target metamodel":#TargetMetamodels .
+The result of parsing a query expression or a constraint is an
+"@ExpressionInOCL@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/expressions/ExpressionInOCL.html,
+an instance of the "Abstract Syntax Model":#AbstractSyntax.
 
-!images/5110-context.png(The OCL Context)!
-"[Text for cut and paste]":../references/5110-context.txt
+bq.. 
+The Ecore/UML binding variously produces a Constraint or OCLEXpression result. A Constraint has too much context and an OCLExpression too little. An ExpressionInOCL is just right.
+p. 
 
-Ecore does not define a @Constraint@ metaclass, so the
-OCL "binding":#TargetMetamodels for Ecore supplies one.
+!images/6310-context.png(The OCL Context)!
+"[Text for cut and paste]":../references/6310-context.txt
 
 h3. Operation and Attribute Contexts
 
@@ -132,6 +121,6 @@ consider the @EModelElement::getEAnnotation(EString)@
 operation and @EReference::eReferenceType@ property in the Ecore
 metamodel.  These can be constrained as follows:
 
-!images/5110-define.png(DEfining a constraint)!
-"[Text for cut and paste]":../references/5110-define.txt
+!images/6310-define.png(Defining a constraint)!
+"[Text for cut and paste]":../references/6310-define.txt
 

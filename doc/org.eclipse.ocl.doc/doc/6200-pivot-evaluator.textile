@@ -1,3 +1,4 @@
+
 h2(#PivotEvaluator). The Pivot Evaluator
 
 The Pivot evaluator operates on @Value@ s that represent @Element@ s.
@@ -5,4 +6,95 @@ The Pivot evaluator operates on @Value@ s that represent @Element@ s.
 The @StringValue@ class realises UML's @String@ abstraction observing behavior defined for the @String@ class in the OCL Standard Library model. Note that in UML @String@ is a PrimitveType with undefined representation, @StringValue@ is the reification of that abstraction for evaluation purposes.
 
 In Java, it is convenient to use @java.lang.String@ to realise @StringValue@, but that is an implementation convenience. For @IntegerValue@ there is currently a re-use of @java.lang.BigInteger@; this will be changed so that @IntegerValue@ is a @java.lang.int@ unless a higher precision is necessary; the wrapping of @java.lang.int@ as @IntegerValue@ will therefore have very similar costs and overheads to the conventional boxing of @java.lang.int@ as @java.lang.Integer@.
+
+h3(#PivotValues). The Pivot Value System
+
+For the Pivot evaluator, all evaluations are performed using polymorphic @Value@ s, whereas for the legacy evaluator evaluations were performed on naked types such as Integer, String, Set and EObject.
+
+The @Value@ classes, specified in the OMG OCL specification, therefore act as a pivot between the operation of an OCL engine and the external representations.
+
+Every value has a type.
+
+h4(#PivotValueConversions). Value Conversions
+
+The values are managed by a @ValueFactory@ which provides many utility methods such as @ValueFactory.valueOf(Object)@ for creating a @Value@ from a naked Java object. The reverse conversion from a value to a naked Java object may be be performed by @Value.asObject()@ with
+methods in derived value classes providing stronger type returns.
+
+h4(#PivotIntegers). Polymorphic Integers
+
+The @IntegerValue@ interface has multiple implementations supporting java.lang.int, java.lang.long and java.math.BigInteger underlying representations, so that for most calculations @IntegerIntValueImpl@ is used giving very comparable wrapping of @int@ to @Integer@, except that growth is detected so that @IntegerLongValueImpl@ is used automatically when needed.
+
+This enables the Pivot evaluator to handle unlimited integers as specified by the OMG OCL specification.
+
+bq.. 
+Prior to the Juno release the handling of greater than 32 bit integers in the legacy evaluator was suspect. The Juno release enhances support to allow for 64 bit integers but makes no provision for greater than 64 bit evaluations.
+p. 
+
+h4(#PivotCollections). Polymorphic Collections
+
+The @CollectionValue@ interface has multiple implementations for Bag, OrderedSet, Sequence and Set with implementations that observe OMG OCL semantics.
+
+bq.. 
+The legacy implementation uses Java collections directly, which unfortunately means that the Java semantics for equality is used. Consequently the legacy evaluator incorrectly evaluates @Set{1,1.0}->size()@ as @2@.
+p. 
+
+Using a distinct hierarchy of collection classes opens up opportunities for smart operation, such as in-place update for collections that are rendered redundant by a calculation.
+
+bq.. 
+The legacy implementation creates a new collection at every opportunity.
+p. 
+
+h4(#PivotObjects). Polymorphic Objects
+
+The @ObjectValue@ interface has an implementation for EObject and further implementations for more specialized objects such as types.
+
+The Pivot evaluator can be used on alternate data models by providing an alternate @ObjectValue@ to wrap
+an alternative form of data object.
+
+bq.. 
+The legacy implementation uses EObject directly, which makes use of non-EObject data models rather hard.
+p. 
+
+h3. The Pivot Evaluator Type System
+
+The Pivot Evaluator uses a very lightweight type system so that alternate implementations can be used.
+
+For compiled evaluation, a dispatch-table based implementation is used.
+
+For OCL compilation, a UML-aligned representation of the combined UML, OCL, library and user type systems is used.
+
+bq.. 
+The legacy implementation uses either UML or Ecore meta-models directly, with Ecore as the meta-meta-model. Consequently there was no support for oclType(). REflection was available in the non-OMF Ecore domain, so
+the meta-meta-class is "EClass" rather than "Class".
+p. 
+
+h3. The Pivot Evaluator Implementation System
+
+The Pivot evaluator may be used in an interpreted form similar to the legacy evaluator. In this form the evaluator performs a tree-walk over the Abstract Syntax Tree of the OCL expression. Languages that extend OCL may extend this tree-walk by implementing the relevant visitor evaluations for additional AST nodes.
+
+A preliminary unoptimized code generator is available for the Pivot evaluator for which an Acceleo template walks the AST twice at compile-time; once to generate declarations and constants, and again to generate expression bodies. The Acceleo templates may be extended to support code generation for languages that extend OCL.
+
+h3. Polymorphic Implementations
+
+The OCL Standard Library comprises packages of classes with one class per library feature, each class implementing the polymorphic implementation interface.
+
+Provision of additional library function therefore requires
+* provision of the Java class for the library feature
+* declaration of the library feature 
+
+Library features (properties, operations and iterations) are declared in a Standard Library model that identifies the invocation signature and binds it to a Java implementation.
+
+!{width:70%}images/6200-library-declarations.png(Standard Library Declarations)!
+
+The extract from @/org.eclipse.ocl.examples.library/model/OCL-2.4.oclstdlib@ shows the declaration of the @Collection@ type as a templated type with a @T@ parameter. The @Collection@ type conformsTo (extends/inherits/generalizes) the @OclAny@ type and is an instance of the @CollectionType@ meta-type.
+
+The @asSet@ operation takes no arguments and returns a @Set(T)@, a set of the collection template type. The declaration is bound to @org.eclipse.ocl.examples.library.collection.CollectionAsSetOperation@ which is the Java class name of the implementation.
+
+The @exists@ iteration has two overloads, taking one or two iterators of the collection template type. The iteration body is a lambda expression operating on a collection template element with no additional arguments to return a Boolean value. The iteration also returns a Boolean value. The same Java implementation class is used for both one and two argument forms.
+
+bq.. 
+The corresponding implementations in the legacy evaluator were mostly inlined within the @EvaluationVisitorImpl.visitOperationCallExp@ method and so were difficult to extend.
+
+The corresponding declarations in the legacy evaluator were partially modeled in *oclstdlib.ecore* or *oclstdlib.uml*, although in practice an equivalent manually code model initialization is used. The type declarations used by the parser and analyzer are independently coded and do not support iterations as modeled concepts.
+p. 
 

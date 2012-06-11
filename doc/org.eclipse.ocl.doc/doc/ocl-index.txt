@@ -53,5 +53,9 @@
 6200-pivot-evaluator.textile
 6210-pivot-standalone.textile
 
+6310-pivot-parsing-constraints.textile
+6315-pivot-evaluating-constraints.textile
+6320-pivot-parsing-documents.textile
+
 7000-API.textile
 

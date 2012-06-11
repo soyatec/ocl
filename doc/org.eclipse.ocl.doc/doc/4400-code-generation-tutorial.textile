@@ -46,3 +46,4 @@ If you don't like cutting and pasting into XMI files, you can achieve the same e
 * Use the *Properties View* to set the Detail value to @false@
 
 !{width:70%}images/4400-genannotation.png(GenAnnotation)!
+
