@@ -14,7 +14,7 @@ facade object provides
 "@Query@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/examples/pivot/Query.html
 objects for evaluating constraints and query expressions.
 
-!images/5115-query.png(OCL Query API)!
+!{width:60%}images/6315-query.png(OCL Query API)!
 
 The @Query@ encapsulates an
 "@EvaluationEnvironment@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/examples/pivot/EvaluationEnvironment.html
@@ -50,7 +50,7 @@ So, after optionally setting values of context variables (other than
 of this) and an extent map, simply construct a query and use it to evaluate
 the expression or check the constraint:
 
-!images/6315-check-all.png(Evaluating all Constraints)!
+!{width:70%}images/6315-check-all.png(Evaluating all Constraints)!
 "[Text for cut and paste]":../references/6315-check-all.txt
 
 One of the advantages of the @Query@ API is that a
@@ -59,11 +59,11 @@ above.  The extent of any classifier is only computed once.  For convenience,
 however, in situations where only a single evaluation is required, the
 @OCL@ class provides shortcuts:
 
-!images/6315-check-one.png(Evaluating one Constraint)!
+!{width:70%}images/6315-check-one.png(Evaluating one Constraint)!
 "[Text for cut and paste]":../references/6315-check-one.txt
 
 The @Query@ API also provides methods that work on
 multiple elements.  The first example, above, could be written more succinctly as:
 
-!images/6315-check-quick.png(Evaluating Constraints Quicker)!
+!{width:70%}images/6315-check-quick.png(Evaluating Constraints Quicker)!
 "[Text for cut and paste]":../references/6315-check-quick.txt

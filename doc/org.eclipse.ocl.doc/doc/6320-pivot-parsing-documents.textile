@@ -8,7 +8,7 @@ constraints, equivalent to their placement in models.
 
 As an example, consider the following Complete OCL document:
 
-!images/6320-extlibrary.png(External Library)!
+!{width:70%}images/6320-extlibrary.png(External Library)!
 "[Text for cut and paste]":../references/6320-extlibrary.ocl
 
 h3. The OCL Input
@@ -50,7 +50,7 @@ There are therefore two Class objects named @Library@, one for each Resource. Th
 
 Given the @URI@ of an OCL document, simply ask an @OCL@ to parse it:
 
-!images/6320-parsing.png(Parsing the Constraints)!
+!{width:70%}images/6320-parsing.png(Parsing the Constraints)!
 "[Text for cut and paste]":../references/6320-parsing.txt
 
 h3. Accessing the Constraints
@@ -64,7 +64,7 @@ the same @OCL@ instance, combined also with constraints
 parsed by @OCLHelpers@.  All of these constraints are
 retained by the @OCL@ environment.
 
-!images/6320-accessing.png(Accessing the Constraints)!
+!{width:70%}images/6320-accessing.png(Accessing the Constraints)!
 "[Text for cut and paste]":../references/6320-accessing.txt
 
 The source for these examples may be found in the org.eclipse.ocl.examples.xtext.tests plugin in model/parsingDocumentsExample.ocl and in src/org/eclipse/ocl/examples/test/xtext/PivotDocumentationExamples.java.

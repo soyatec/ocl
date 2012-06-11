@@ -17,3 +17,4 @@ inv unique_title: not library.oclIsUndefined() implies
      library.getBooks(title) = Set{self}
  
 endpackage
+
