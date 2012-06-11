@@ -45,6 +45,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.PivotPlugin;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.pivot.utilities.QueryImpl;
 
 /**
@@ -533,6 +534,26 @@ public class OCL {
 		return problems;
 	}
 
+	/**
+	 * Return the Constraint specification as an ExpressionInOCL, parsing any OpaqueExpression
+	 * that may be encountered.
+	 */
+	public ExpressionInOCL getSpecification(Constraint constraint) throws ParserException {
+		ValueSpecification specification = constraint.getSpecification();
+		ExpressionInOCL expressionInOCL = null;
+		if (specification instanceof ExpressionInOCL) {
+			expressionInOCL = (ExpressionInOCL)specification;
+		}
+		else if (specification instanceof OpaqueExpression){
+			OpaqueExpression opaqueExpression = (OpaqueExpression)specification;
+			String expression = PivotUtil.getBody(opaqueExpression);
+		    Element constrainedElement = constraint.getConstrainedElement().get(0);
+			OCLHelper helper = createOCLHelper(constrainedElement);
+			expressionInOCL = helper.createInvariant(expression);
+		}
+		return expressionInOCL;
+	}
+
 	public ValueFactory getValueFactory() {
 		return getMetaModelManager().getValueFactory();
 	}
@@ -584,6 +605,24 @@ public class OCL {
 	 */
 	public boolean isParseTracingEnabled() {
 		return traceParsing;
+	}
+
+	/**
+	 * Load the Complete OCL document specified by the URI into the external ResourceSet and
+	 * return the concrete syntax resource.
+	 */
+	public BaseResource load(URI uri) {
+		ResourceSet externalResourceSet = getMetaModelManager().getExternalResourceSet();
+		return (BaseResource) externalResourceSet.getResource(uri, true);
+	}
+
+	/**
+	 * Load the Complete OCL document specified by the URI into the external ResourceSet and
+	 * parse the concrete syntax resource returning the resulting abstract syntax resource.
+	 */
+	public Resource parse(URI uri) {
+		BaseResource csResource = load(uri);
+		return cs2pivot(csResource);
 	}
 
 	/**

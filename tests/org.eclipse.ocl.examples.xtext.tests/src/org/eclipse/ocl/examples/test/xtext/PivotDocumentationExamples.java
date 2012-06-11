@@ -34,7 +34,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.examples.extlibrary.Book;
 import org.eclipse.emf.examples.extlibrary.BookCategory;
 import org.eclipse.emf.examples.extlibrary.EXTLibraryFactory;
@@ -42,18 +41,13 @@ import org.eclipse.emf.examples.extlibrary.EXTLibraryPackage;
 import org.eclipse.emf.examples.extlibrary.Library;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.Constraint;
-import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
-import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Query;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
-import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 
 
@@ -193,57 +187,29 @@ public class PivotDocumentationExamples extends XtextTestCase
 		OCL ocl = OCL.newInstance(environmentFactory);
 
 		// get an OCL text file via some hypothetical API
-//		InputStream in = getInputStream("/model/parsingDocumentsExample.ocl");
-
 		URI uri = getInputURI("/model/parsingDocumentsExample.ocl");
-		ResourceSet externalResourceSet = ocl.getMetaModelManager().getExternalResourceSet();
-		BaseResource csResource = (BaseResource) externalResourceSet.getResource(uri, true);
-		Resource pivotResource = ocl.cs2pivot(csResource);
+
 		Map<String, ExpressionInOCL> constraintMap = new HashMap<String, ExpressionInOCL>();
 
 		// parse the contents as an OCL document
-		try {
-//		    OCLInput document = new OCLInput(in);
-		    
-//		    List<Constraint> constraints = ocl.parse(document);
-		    for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
-		    	EObject next = tit.next();
-		    	if (next instanceof Constraint) {
-			        Constraint constraint = (Constraint)next;
-					String stereotype = constraint.getStereotype();
-					if (UMLReflection.INVARIANT.equals(stereotype)) {
-				        ValueSpecification specification = constraint.getSpecification();
-				        ExpressionInOCL expressionInOCL = null;
-				        if (specification instanceof ExpressionInOCL) {
-							expressionInOCL = (ExpressionInOCL)specification;
-						}
-						else if (specification instanceof OpaqueExpression){
-							OpaqueExpression opaqueExpression = (OpaqueExpression)specification;
-							String expression = PivotUtil.getBody(opaqueExpression);
-					        Element constrainedElement = constraint.getConstrainedElement().get(0);
-							OCLHelper helper = ocl.createOCLHelper(constrainedElement);
-							expressionInOCL = helper.createInvariant(expression);
-	/*						List<String> languages = opaqueExpression.getLanguage();
-							List<String> bodies = opaqueExpression.getBody();
-							int iMax = Math.min(languages.size(), bodies.size());
-							System.out.printf("%s: %s%n", constraint.getName());
-							for (int i = 0; i < iMax; i++) {
-								System.out.printf("    %s: %s%n", languages.get(i), bodies.get(i));
-							} */
-						}
-				        if (expressionInOCL != null) {
-							String name = constraint.getName();
-							if (name != null) {
-								constraintMap.put(name, expressionInOCL);
-						        System.out.printf("%s: %s%n", name, expressionInOCL.getBodyExpression());
-							}
+		Resource pivotResource = ocl.parse(uri);
+	    for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
+	    	EObject next = tit.next();
+	    	if (next instanceof Constraint) {
+		        Constraint constraint = (Constraint)next;
+				String stereotype = constraint.getStereotype();
+				if (UMLReflection.INVARIANT.equals(stereotype)) {
+			        ExpressionInOCL expressionInOCL = ocl.getSpecification(constraint);
+			        if (expressionInOCL != null) {
+						String name = constraint.getName();
+						if (name != null) {
+							constraintMap.put(name, expressionInOCL);
+					        System.out.printf("%s: %s%n", name, expressionInOCL.getBodyExpression());
 						}
 					}
-		    	}
-		    }
-		} finally {
-//		    in.close();
-		}
+				}
+	    	}
+	    }
 		//-------------------------------------------------------------------------
 		//	Accessing the Constraints
 		//-------------------------------------------------------------------------
