@@ -1,4 +1,5 @@
-h3(#OverallOptions). OverallOptions
+
+h3(#OverallOptions). Overall Options
 
 The two overall options are independent of the Ecore/UML/Pivot bindings.
 
@@ -12,7 +13,7 @@ h5(#LPGDelegation). http://www.eclipse.org/emf/2002/Ecore/OCL/LPG
 
 EMF Delegate annotations referencing the @http://www.eclipse.org/emf/2002/Ecore/OCL/LPG@ URI are serviced by the legacy evaluator that uses the LPG parser.
 
-This URI was introduced in the Juno release.
+This URI was introduced in the Indigo release.
 
 h5(#PivotDelegation). http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot
 
@@ -22,11 +23,11 @@ This URI was introduced in the Indigo release and was imposed by the Indigo OCLi
 
 h5(#DefaultDelegation). http://www.eclipse.org/emf/2002/Ecore/OCL
 
-EMF Delegate annotations referencing the @http://www.eclipse.org/emf/2002/Ecore/OCL@ URI are serviced by the evaluator selected on the preference page.
+EMF Delegate annotations referencing the @http://www.eclipse.org/emf/2002/Ecore/OCL@ URI are serviced by the evaluator selected on the preference page by the "Default Delegation Mode":#DefaultDelegationMode.
 
 This URI was introduced in the Helios release and was imposed by the Helios OCLinEcore editor.
 
-Use of an Indigo or Juno editor converts the URI to use the pivot evaluator.
+Use of an Indigo or Juno editor converts the URI to use the Pivot evaluator.
 
 h4(#CodeGenerationMode). Code Generation Mode
 
@@ -38,7 +39,7 @@ This option may be selected to change the realization of OCL option.
 
 h5(#CodeGenerationMode-DELEGATED). Delegate for interpretation at run-time
 
-Selecting the default delegation mode retains the Helios and Indigo functionality whereby *genmodel* encodes the OCL expressions as text strings in a generated model. Each expression is lazily compiled at run-time with the result being cached to reduce overheads for repeated execution.
+Selecting the default delegation mode retains the Helios and Indigo functionality whereby *genmodel* generates Java code that encodes the OCL expressions as text strings. Each expression is lazily compiled at run-time with the result being cached to reduce overheads for repeated execution.
 
 h5(#CodeGenerationMode-GENERATED). Generate Java code in xxxBodies classes
 

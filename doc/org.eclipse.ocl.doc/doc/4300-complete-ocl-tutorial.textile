@@ -1,3 +1,4 @@
+
 h2(#CompleteOCLTutorial). Complete OCL tutorial
 
 This tutorial was written for Eclipse Juno: Eclipse 3.8/4.2, EMF 2.8, OCL 4.0.
@@ -68,7 +69,7 @@ The Java API support for using Complete OCL documents with the Ecore and UML bin
 the imported models must be loaded into the package registry by the invoking code. Import statements are not used.
 
 Prior to the Juno release, import statements were not understood and so there was a usage conflict. Preparation of a
-Complete OCL document using the Xtext editor, or usage with pivot model and Xtext parser required import statements.
+Complete OCL document using the Xtext editor, or usage with Pivot model and Xtext parser required import statements.
 But re-use with the Ecore and UML LPG parser required the import statements to be removed.
 
 In Juno, the LPG parser ignores the import statements, so they may be left in.

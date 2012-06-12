@@ -1,6 +1,6 @@
 h2(#Validators). Validators
 
-When using the pivot metamodel, there are two specialized validators available to support integration of OCL in to a larger Ecore environment. 
+When using the Pivot metamodel, there are two specialized validators available to support integration of OCL in to a larger Ecore environment. 
 
 h3(#OCLinEcoreEObjectValidator). OCLinEcoreEObjectValidator
 

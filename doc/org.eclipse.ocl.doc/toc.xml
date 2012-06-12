@@ -17,7 +17,7 @@
 <topic href="help/UsersGuide.html" label="Users Guide">
 <topic href="help/UsersGuide.html#EclipseOCLs" label="The two Eclipse OCLs">
 <topic href="help/UsersGuide.html#ThematureEclipseOCLmetamodels" label="The mature Eclipse OCL metamodels"></topic>
-<topic href="help/UsersGuide.html#ThepivotEclipseOCLmetamodel" label="The pivot Eclipse OCL metamodel"></topic>
+<topic href="help/UsersGuide.html#ThePivotEclipseOCLmetamodel" label="The Pivot Eclipse OCL metamodel"></topic>
 <topic href="help/UsersGuide.html#Thetransition" label="The transition"></topic>
 <topic href="help/UsersGuide.html#APIs" label="APIs">
 <topic href="help/UsersGuide.html#ToolAPIs" label="Tool APIs"></topic>
@@ -117,6 +117,7 @@
 </topic>
 <topic href="help/OCLstdlib.html" label="The OCL Standard Library Language">
 <topic href="help/OCLstdlib.html#Syntax4" label="Syntax">
+<topic href="help/OCLstdlib.html#GrammarImplementation4" label="Grammar Implementation"></topic>
 <topic href="help/OCLstdlib.html#OCLstdlib-Library" label="OCL Standard Library Document"></topic>
 <topic href="help/OCLstdlib.html#OCLstdlib-Precedence" label="Precedence"></topic>
 <topic href="help/OCLstdlib.html#OCLstdlib-Package" label="Package"></topic>
@@ -134,6 +135,7 @@
 <topic href="help/OCLstdlib.html#OCLstdlib-Specification" label="Specification"></topic>
 </topic>
 </topic>
+<topic href="help/Tools.html" label="Tools"></topic>
 <topic href="help/Editors.html" label="Editors">
 <topic href="help/Editors.html#Syntaxcoloring" label="Syntax coloring"></topic>
 <topic href="help/Editors.html#Validation" label="Validation"></topic>

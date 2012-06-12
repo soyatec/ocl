@@ -11,7 +11,7 @@ h3(#PivotValues). The Pivot Value System
 
 For the Pivot evaluator, all evaluations are performed using polymorphic @Value@ s, whereas for the legacy evaluator evaluations were performed on naked types such as Integer, String, Set and EObject.
 
-The @Value@ classes, specified in the OMG OCL specification, therefore act as a pivot between the operation of an OCL engine and the external representations.
+The @Value@ classes, specified in the OMG OCL specification, therefore act as a Pivot between the operation of an OCL engine and the external representations.
 
 Every value has a type.
 

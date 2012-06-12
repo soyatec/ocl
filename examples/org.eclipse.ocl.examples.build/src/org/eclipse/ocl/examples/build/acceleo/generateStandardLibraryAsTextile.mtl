@@ -9,11 +9,12 @@
 [let pPackages : Sequence(Package) = root->asSequence()]
 [let pClasses : Sequence(Class) = pPackages.ownedType->asSequence()]
 [file ('2000-ocl-standard-library.textile', false, 'UTF-8')]
+
 h1(#StandardLibrary). The OCL Standard Library
 
 This documentation on the OCL Standard Library is auto-generated from the
 org.eclipse.ocl.examples.library/model/OCL-2.4.oclstdlib that defines
-the behaviour of the Pivot evaluator and the Xtext editors. It is similar to the OCL 2.3 functionality.
+the behaviour of the Pivot evaluator and the Xtext editors. It is similar to the OCL 2.3.1 functionality.
 It is a prototype of functionality for OCL 2.5 where the use of models may eliminate ambiguities.
 
 The library support for the Ecore and UML bindings in Juno has been upgraded so that the available operations

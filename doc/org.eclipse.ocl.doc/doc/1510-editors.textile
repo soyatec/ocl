@@ -1,3 +1,4 @@
+
 h2(#Editors). Editors
 
 The four editors are all generated using "Xtext":../../org.eclipse.xtext.doc/contents/xtext.html, and so exhibit similar behavior to  other Eclipse editors.
@@ -42,7 +43,8 @@ Syntax errors are detected and offending text is underlined with accompanying an
 
 If there are no syntax errors, semantic validation is performed with similar feedback of problems. Semantic validation is not performed when there are syntax errors since a single syntax error many provoke many hundreds of semantic errors. These can make the original syntax error difficult to resolve.
 
-The use of the well-formedness rules for a final validation of the Abstract Syntax are not yet performed since repeated interpreted execution of many OCL constraints on a large model is a performance concern. This functionality will be activated once the Impact Analyzer has migrated to the pivot metamodel and the Java Code generator for OCL is functional.
+The use of the well-formedness rules for a final validation of the Abstract Syntax is only partially implemented,
+since correction of the OCL in the OMG specifiucation is still work in progress.
 
 By default, the Xtext nature is not added to projects using OCL editors and so no builder runs in the background creating problem markers for OCL files. This is generally beneficial when you have many files for which the over-enthusiastic rebuilds waste build time, or experimental files for which the many errors clutter the Problem View. 
 
@@ -60,19 +62,11 @@ h3. Content Assist
 
 Typing *Ctrl* and *Space* activates the Content Assist pop-up to offer suggestions as to what might be typed to the right of the cursor.
 
-The default Xtext functionality provides many useful suggestions, but does not always handle grammar ambiguities, and does not offer suggestions immediately following punctuation, so no content assist is provided at the end of:
-
-bc.. 
-self.
-p. 
-
-A simple workaround is to trick Xtext by providing an example continuation. Alternatives are offered for the continuation. So type a letter then reposition the cursor following the dot and then type *Ctrl* and *Space*
-
-!{width:100%}images/1510-contentassist.png(Content Assist)!
+!{width:60%}images/1510-contentassist.png(Content Assist)!
 
 h3. Code Templates
 
-Code templates are supported by Xtext but only one template for an OCL Standard Library has been defined.
+Code templates are provided for many of the major constructs and some expression elements.
 
 You may define your own templates. If you would like to contribute them, please raise a Bugzilla.
 

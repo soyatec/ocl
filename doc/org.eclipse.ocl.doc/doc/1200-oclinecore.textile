@@ -1,8 +1,10 @@
+
 h2(#OCLinEcore). The OCLinEcore Language
 
 Ecore Abstract Syntax supports the use of OCL embedded within EAnnotations.
 
-The OCLinEcore language provides a textual Concrete Syntax that makes both Ecore and OCL accessible to users. Examples may be found in  "OCLinEcore Library Metamodel":#OCLinEcoreMetamodel and "OCLinEcore Helpers"#OCLinEcoreTutorialHelpers.
+The OCLinEcore language provides a textual Concrete Syntax that makes both Ecore and OCL accessible to users. Examples may be found in  "OCLinEcore Library Metamodel":#OCLinEcoreMetamodel and
+"OCLinEcore Helpers":#OCLinEcoreTutorialHelpers.
 
 The OCLinEcore tooling provides a rich editing environment based on Xtext with strong semantic checking.
 
@@ -20,12 +22,12 @@ Please follow the "OCLinEcore tutorial":#OCLinEcoreTutorial for an introduction 
 
 h3. Syntax
 
-The OCLinEcore syntax has a consistent structure influence by the informal definitions in OMG specifications and by the Ecore hierarchy. Most Ecore concepts are represented by a syntax of the form:
+The OCLinEcore syntax has a consistent structure influenced by the informal definitions in OMG specifications and by the Ecore hierarchy. Most Ecore concepts are represented by a syntax of the form:
 
 * optional primary adjectives
 * mandatory keyword
-* mandatory name property
-* further properties
+* mandatory name facet
+* further facets
 * an optional braced clause of secondary adjectives
 * an optional braced clause of elements
 ** composed elements
@@ -40,8 +42,8 @@ p.
 
 * @abstract@ is a primary adjective
 * @class@ is a keyword
-* @Example@ is the name property
-* @extends Base@ is a further 'property'
+* @Example@ is the name facet
+* @extends Base@ is a further facet
 * @{ interface }@ supports the secondary interface adjective.
 * @{ ... }@ provides a nested context for class content.
 
@@ -51,7 +53,7 @@ The grammar used by the Xtext editors may be found at:
 
 /src/org/eclipse/ocl/examples/xtext/oclinecore/OCLinEcore.xtext
 
-in the org.eclipse.ocl.examples.xtext.oclinecore plugin. The Complete OCL grammar extends the Essential OCL grammar.
+in the org.eclipse.ocl.examples.xtext.oclinecore plugin. The OCLinEcore grammar extends the Essential OCL grammar.
 
 h4. Module
 
@@ -412,7 +414,7 @@ Documentation comments are supported for all text within @/** ... */@. Unfortuna
 
 h3. Limitations
 
-OCLinEcore supports the full capabilities of Ecore, however the support for upper abd lower bounds on generic types has not been adequately tested.
+OCLinEcore supports the full capabilities of Ecore, however the support for upper and lower bounds on generic types has not been adequately tested.
 
 OCLinEcore provides primary syntaxes for some Ecore conventions such as genmodel annotations and constraints; much more support is needed for feature maps.
 

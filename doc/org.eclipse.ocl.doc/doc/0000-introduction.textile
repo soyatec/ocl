@@ -10,15 +10,15 @@ The Eclipse Modeling Framework (EMF(Eclipse Modeling Framework)) supports the de
 
 * _OCL is EMF and Modeled Behavior_
 
-OCL(Object Constraint Language) provides a modeling language that allows the behavior to be embedded within the structural meta-models or provided as a complement to those meta-models. As a modeling language, OCL understands the models and so OCL code is much more compact than the equivalent Java. OCL code can be statically checked, where as the corresponding Java code often uses reflection and so cannot.  
+OCL(Object Constraint Language) provides a modeling language that allows the behavior to be embedded within the structural meta-models or provided as a complement to those meta-models. As a modeling language, OCL understands the models and so OCL code is much more compact than the equivalent Java. OCL code can be statically checked, whereas the corresponding Java code often uses reflection and so cannot be checked.  
 
-Eclipse OCL is an implementation of the OMG OCL 2.3 specification for use with Ecore and UML meta-models.
+Eclipse OCL is an implementation of the OMG OCL 2.3.1 specification for use with Ecore and UML meta-models.
  
 h2(#GettingStarted). Getting Started
 
-For a very quick demonstration of OCL, you may follow this very abbreviated version of the "OCLinEcore tutorial":#OCLinEcoreTutorial, where you can find "Installation":#Installation instructions. Once you have the OCL Examples and Editors feature installed you may follow the following instructions to get an insight into the capabilities of OCL and the Eclipse OCL tooling.
+For a very quick demonstration of OCL, you may follow this very abbreviated version of the "OCLinEcore tutorial":#OCLinEcoreTutorial, where you can find "Installation":#Installation instructions. Once you have the OCL Examples and Editors feature installed you may follow these instructions to get an insight into the capabilities of OCL and the Eclipse OCL tooling.
 
-Invoke *File->New->Project...* then select *Examples.OCL (Object Constraint Language) Plugins.OCLinEcore Tutorial* and *Finish* to create a small example project called *OCLinEcoreTutorial*. It contains
+Invoke *File->New->Project...* then select *Examples* then *OCL (Object Constraint Language) Plugins* then *OCLinEcore Tutorial* and *Finish* to create a small example project called *OCLinEcoreTutorial*. It contains
 * *model/Tutorial.ecore* - a small Library meta-model
 * *model/Tutorial.xmi* - an even smaller Library model
 
@@ -46,11 +46,11 @@ Select the "Library lib" element and use the right button menu to invoke *Valida
 
 You may evaluate custom OCL queries interactively. From the editor for *Tutorial.xmi*, invoke *Show Xtext OCL Console*. Select "Book b2" in the editor, then in the bottom line of the console enter the OCL expression *loans.member* and then Enter. The results are shown in the panel and identify that all three loans are by "Member m3".
 
-The expression *loans.member* is an abbreviated form of *self.loans->collect(l : Loan | l.member)* and demonstrates OCL's ability to perform many useful navigations over multi-element properties. The expression
+The expression *loans.member* is an abbreviated form of *self.loans->collect(aLoan : Loan | aLoan.member)* and demonstrates OCL's ability to perform many useful navigations over multi-element properties. The expression
 * navigates from self, the Book b2 selection
 * to its loans, using Book::loans which is a derived property defined in OCL
-* for each of the loans, the iterator variable, l, is assigned to the loan and
-** the body, l.member is evaluated to return the member making the loan
+* for each of the loans, the iterator variable, aLoan, is assigned to the loan and
+** the body, aLoan.member is evaluated to return the member making the loan
 * the resulting members are collected to return a collection result
 * the result is displayed on three lines in the results panel
 
@@ -103,15 +103,18 @@ EMF support for dynamic models enables OCL execution of
 
 All OCL execution is currently interpreted and starts from the OCL source text (Concrete Syntax). There is therefore a first time parsing overhead to create the compiled form (Abstract Syntax). The compiled form is cached to avoid repeated parsing costs. 
 
-Provision of a direct Java code generator is planned for the Juno release.
+The preliminary direct Java code generator is described in the "Code Generator Tutorial":#CodeGenerationTutorial.
 
 h3. Debugging
 
 Since OCL is used embedded in a larger environment, debugging is not easy to provide for OCL in isolation. The following approaches may be useful.
 
 * use the hover-text in the semantic editor to understand the expression types
+* use the quick-fixes in the semantic editor for possible corrections
+** if the same fix is suggested more than once, try restarting the editor
+* use the completion assist in the semantic editor for possible syntaxes
 * use intermediate invariants to check partial results
-* use the optional explanation messages for an invariants to provide a 'printf'
+* use the optional explanation messages for an invariant to provide a 'printf'
 * use the "Interactive OCL":#InteractiveOCL console to practice a problematic expression on a model
 * use the Java debugger to follow the execution flow
 
@@ -123,7 +126,7 @@ Once again, since OCL is used embedded in a larger environment, testing is not e
 
 * use the "Interactive OCL":#InteractiveOCL console to practice sub-expressions of a problematic expression on a model
 
-The Eclipse OCL development use an extended JUnit framework that allows the Eclipse OCL code to be tested by assertions such as:
+The Eclipse OCL development uses an extended JUnit framework that allows the Eclipse OCL code to be tested by assertions such as:
 
 bc. 
 assertQueryInvalid(null, "let b : Boolean = null in true and b");
@@ -135,17 +138,17 @@ See the org.eclipse.ocl.examples.xtext.tests plugin for further details.
 
 h2. Eclipse OCL is Extensible
 
-Eclipse OCL is used as a component in a variety of other Eclipse projects such as Acceleo, BIRT, GMF, Modisco, QVTo.
+Eclipse OCL is used as a component in a variety of other Eclipse projects such as Acceleo, BIRT, GMF, Modisco, QVTo. Ecore models are used directly, which leads to some internal difficukties.
 
-The evolution from the mature to the UML-aligned models provides a choice between the mature APIs that offer limited forward functionality, and the experimental new APIs that will be promoted to non-experimental form in the Juno release.
+A new Eclipse OCL is evolving that exploits Xtext and uses Ecore models indirectly via a UML-aligned Pivot models. This provides a choice between the mature APIs that offer limited forward functionality, and the experimental new APIs that will be promoted to non-experimental form in the Kepler release.
 
-The new code already offers a fully modeled Standard Library that can be extended or replaced. The new OCL grammars are extended internally from Essential OCL to OCLinEcore or Complete OCL, but the associated Concrete Syntax to Abstract Syntax is not yet model-driven and so awkward to extend.
+The new code already offers a fully modeled Standard Library that can be extended or replaced. The new OCL grammars are extended internally from Essential OCL to OCLinEcore or Complete OCL, and externally to QVT Core and QVT Relational. The associated Concrete Syntax to Abstract Syntax mapping is not yet model-driven and so harder to extend.
 
-Full extensibility is planned for the Juno release with QVT Core and Relational editors demonstrating that extensibility.
+Full model-driven extensibility is planned for the Kepler release.
 
 h2. Who Uses OCL and Eclipse OCL?
 
-The OCL specification is defined by the OMG(Object Management Group). It originally evolved as part of UML where it is used for the detailed mathematical aspects that are no appropriate for graphical exposition. OCL 2.0 was split off from UML 2.0 in recognition of its greater utility.
+The OCL specification is defined by the OMG(Object Management Group). It originally evolved as part of UML where it is used for the detailed mathematical aspects that are not appropriate for graphical exposition. OCL 2.0 was split off from UML 2.0 in recognition of its greater utility.
 
 Within the OMG context, OCL has been re-used as the foundation for the MOFM2T(Model to Text) Model-to-Text transformation language and the QVT(Query View Transformation) Model-to-Model transformation language. Eclipse implementations of these are available as the Acceleo and QVT Operational projects.
 
@@ -157,7 +160,7 @@ The use of OCL as an execution language has been hindered by the quality of tool
 
 The use of OCL in general should be eased by the provision of good editors exploiting Xtext to provide comprehensive semantic feedback in a familiar editing style.
 
-The use of OCL for execution will be enhanced in the next (Juno) release by providing direct Java code generation for OCL embedded in models. This should alleviate many of the performance concerns for interpreted execution of embedded OCL.
+The use of OCL for execution will be enhanced by providing direct Java code generation for OCL embedded in models. This should alleviate many of the performance concerns for interpreted execution of embedded OCL.
 
 h2. Who is Behind Eclipse OCL?
 
@@ -165,8 +168,9 @@ Eclipse OCL is an Open Source project. The original code for OCL 1.x was contrib
 
 There is now a significant personnel and corporate overlap between the Eclipse OCL committers and the OMG OCL RTF(Revision Task Force) and so Eclipse OCL is pioneering solutions to many of the under-specification problems in the OCL specification.
 
-You can expect future changes in OMG OCL to have an implementation in Eclipse OCL to demonstrate their viability. It is likely that the next version of the OCL specification will use Eclipse OCL and M2T(Model to Text) tooling to eliminate inconsistencies.
+You can expect future changes in OMG OCL to have an implementation in Eclipse OCL to demonstrate their viability. It is likely that the next version of the OCL specification will use Eclipse OCL and M2T(Model to Text) tooling to eliminate inconsistencies. Eclipse OCL is currently in use to check that the OCL used in the UML 2.5 specification is syntactically and semantically correct.
 
+Direct tooling of the UML 2.5 and OCL 2.5 specifications for the Kepler Eclipse release may demonstrate that the OCL aspects of the specifications is also functionally consistent.
 
 h2. Table of Contents
 
