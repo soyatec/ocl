@@ -135,7 +135,6 @@
 <topic href="help/OCLstdlib.html#OCLstdlib-Specification" label="Specification"></topic>
 </topic>
 </topic>
-<topic href="help/Tools.html" label="Tools"></topic>
 <topic href="help/Editors.html" label="Editors">
 <topic href="help/Editors.html#Syntaxcoloring" label="Syntax coloring"></topic>
 <topic href="help/Editors.html#Validation" label="Validation"></topic>
@@ -155,7 +154,6 @@
 <topic href="help/InteractiveOCL.html#ClearConsole" label="Clear Console"></topic>
 <topic href="help/InteractiveOCL.html#CloseConsole" label="Close Console"></topic>
 <topic href="help/InteractiveOCL.html#LoadSaveanexpression" label="Load/Save an expression"></topic>
-<topic href="help/InteractiveOCL.html#LoadResource" label="Load Resource"></topic>
 </topic>
 </topic>
 <topic href="help/Integration.html" label="OCL Integration">
@@ -168,7 +166,7 @@
 <topic href="help/UserInterface.html" label="User Interface">
 <topic href="help/UserInterface.html#PropertyPages" label="Project Property Pages"></topic>
 <topic href="help/UserInterface.html#PreferencePages" label="Workspace Preference Pages"></topic>
-<topic href="help/UserInterface.html#OverallOptions" label="OverallOptions">
+<topic href="help/UserInterface.html#OverallOptions" label="Overall Options">
 <topic href="help/UserInterface.html#DefaultDelegationMode" label="Default Delegation Mode">
 <topic href="help/UserInterface.html#LPGDelegation" label="http://www.eclipse.org/emf/2002/Ecore/OCL/LPG"></topic>
 <topic href="help/UserInterface.html#PivotDelegation" label="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"></topic>

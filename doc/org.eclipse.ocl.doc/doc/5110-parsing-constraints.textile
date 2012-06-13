@@ -68,7 +68,7 @@ editor).  Using the shared environment factory for the Ecore
 environment suitable for parsing OCL constraints on any Ecore model and
 evaluating them on instances of the model:
 
-!images/5110-creating.png(Creating the OCL)!
+!{width:70%}images/5110-creating.png(Creating the OCL)!
 "[Text for cut and paste]":../references/5110-creating.txt
 
 Several of the type parameters in the @OCL@ generic type
@@ -116,7 +116,7 @@ result of parsing a constraint is an instance of the
 @Constraint@ metaclass defined by the
 @OCL@'s "target metamodel":#TargetMetamodels .
 
-!images/5110-context.png(The OCL Context)!
+!{width:70%}images/5110-context.png(The OCL Context)!
 "[Text for cut and paste]":../references/5110-context.txt
 
 Ecore does not define a @Constraint@ metaclass, so the
@@ -132,6 +132,6 @@ consider the @EModelElement::getEAnnotation(EString)@
 operation and @EReference::eReferenceType@ property in the Ecore
 metamodel.  These can be constrained as follows:
 
-!images/5110-define.png(DEfining a constraint)!
+!{width:70%}images/5110-define.png(Defining a constraint)!
 "[Text for cut and paste]":../references/5110-define.txt
 

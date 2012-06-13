@@ -1,3 +1,4 @@
+
 h2(#AbstractSyntax). OCL Abstract Syntax Model
 
 The OCL Abstract Syntax Model is defined by the
@@ -7,7 +8,7 @@ implementation of OCL defines some extensions to this model that provide
 additional services.  The most important of these is support for the
 _Visitor_ design pattern.
 
-!images/5150-ast.png(OCL Visitor API)!
+!{width:70%}images/5150-ast.png(OCL Visitor API)!
 
 h3. The Visitable and Visitor Interfaces
 

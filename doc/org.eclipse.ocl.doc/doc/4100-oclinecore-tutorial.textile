@@ -115,7 +115,7 @@ An almost empty text file appears showing the module, the package keyword and an
 
 Now type (or cut and paste) the following text into the editor and save the file.
 
-!images/4100-metamodel.png(Example Metamodel)!
+!{width:70%}images/4100-metamodel.png(Example Metamodel)!
 "[Text for cut and paste]":../references/4100-metamodel.oclinecore
 
 The syntax is defined in "OCLinEcore":#OCLinEcore. It emulates OMG specifications with

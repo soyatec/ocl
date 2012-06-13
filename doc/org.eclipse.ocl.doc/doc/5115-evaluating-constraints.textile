@@ -51,7 +51,7 @@ So, after optionally setting values of context variables (other than
 of this) and an extent map, simply construct a query and use it to evaluate
 the expression or check the constraint:
 
-!images/5115-check-all.png(Evaluating all Constraints)!
+!{width:70%}images/5115-check-all.png(Evaluating all Constraints)!
 "[Text for cut and paste]":../references/5115-check-all.txt
 
 One of the advantages of the @Query@ API is that a
@@ -60,11 +60,11 @@ above.  The extent of any classifier is only computed once.  For convenience,
 however, in situations where only a single evaluation is required, the
 @OCL@ class provides shortcuts:
 
-!images/5115-check-one.png(Evaluating one Constraint)!
+!{width:70%}images/5115-check-one.png(Evaluating one Constraint)!
 "[Text for cut and paste]":../references/5115-check-one.txt
 
 The @Query@ API also provides methods that work on
 multiple elements.  The first example, above, could be written more succinctly as:
 
-!images/5115-check-quick.png(Evaluating Constraints Quicker)!
+!{width:70%}images/5115-check-quick.png(Evaluating Constraints Quicker)!
 "[Text for cut and paste]":../references/5115-check-quick.txt

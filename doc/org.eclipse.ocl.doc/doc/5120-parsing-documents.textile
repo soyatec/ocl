@@ -8,7 +8,7 @@ constraints, equivalent to their placement in models.
 
 As an example, consider the following Complete OCL document: "
 
-!images/5120-extlibrary.png(External Library)!
+!{width:70%}images/5120-extlibrary.png(External Library)!
 "[Text for cut and paste]":../references/5120-extlibrary.ocl
 
 bq.. 
@@ -24,7 +24,7 @@ input stream.
 
 Given an @OCLInput@, simply ask an @OCL@ to parse it: "
 
-!images/5120-parsing.png(Parsing the Constraints)!
+!{width:70%}images/5120-parsing.png(Parsing the Constraints)!
 "[Text for cut and paste]":../references/5120-parsing.txt
 
 h3. Accessing the Constraints
@@ -38,7 +38,7 @@ the same @OCL@ instance, combined also with constraints
 parsed by @OCLHelpers@.  All of these constraints are
 retained by the @OCL@ environment.
 
-!images/5120-accessing.png(Accessing the Constraints)!
+!{width:70%}images/5120-accessing.png(Accessing the Constraints)!
 "[Text for cut and paste]":../references/5120-accessing.txt
 
 The source for these examples may be found in the org.eclipse.ocl.ecore.tests plugin in model/parsingDocumentsExample.ocl and in src/org/eclipse/ocl/ecore/tests/DocumentationExamples.java.
