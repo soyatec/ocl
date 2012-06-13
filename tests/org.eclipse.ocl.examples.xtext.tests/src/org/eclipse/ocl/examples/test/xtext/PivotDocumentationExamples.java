@@ -183,7 +183,8 @@ public class PivotDocumentationExamples extends XtextTestCase
 		//-------------------------------------------------------------------------
 		EPackage.Registry registry = new EPackageRegistryImpl();
 		registry.put(EXTLibraryPackage.eNS_URI, EXTLibraryPackage.eINSTANCE);
-		PivotEnvironmentFactory environmentFactory = new PivotEnvironmentFactory(registry, null);
+		PivotEnvironmentFactory environmentFactory =
+				new PivotEnvironmentFactory(registry, null);
 		OCL ocl = OCL.newInstance(environmentFactory);
 
 		// get an OCL text file via some hypothetical API
@@ -204,7 +205,8 @@ public class PivotDocumentationExamples extends XtextTestCase
 						String name = constraint.getName();
 						if (name != null) {
 							constraintMap.put(name, expressionInOCL);
-					        System.out.printf("%s: %s%n", name, expressionInOCL.getBodyExpression());
+					        System.out.printf("%s: %s%n", name,
+					        	expressionInOCL.getBodyExpression());
 						}
 					}
 				}

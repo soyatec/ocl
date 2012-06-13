@@ -73,7 +73,7 @@ appContext.getViews().addAll(WorkbenchUtil.getOpenViewIDs());
 appContext.setTime(new Date());
 
 List<Query<EClassifier, EClass, EObject>> queries =
-        new ArrayListlt;Query<EClassifier, EClass, EObject>>(constraints.size());
+    new ArrayListlt;Query<EClassifier, EClass, EObject>>(constraints.size());
 
 for (Constraint next : constraints) {
     Query<EClassifier, EClass, EObject> query = ocl.createQuery(next);
@@ -84,8 +84,8 @@ for (Constraint next : constraints) {
     queries.add(query);
 }
 
-filter(queries);  // applies these filters to the current objects by evaluating
-                  // the OCLS on them.
+filter(queries);  // applies these filters to the current objects
+                  // by evaluating the OCLS on them.
 p. 
  
 h3. Defining Helper Operations in Java
@@ -141,12 +141,16 @@ class MyEnvironment extends EcoreEnvironment {
 	// override this to provide visibility of the inherited protected method
     @Override
     protected void setFactory(
-            EnvironmentFactory<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> factory) {
+      EnvironmentFactory<EPackage, EClassifier, EOperation,
+      EStructuralFeature, EEnumLiteral, EParameter, EObject,
+      CallOperationAction, SendSignalAction, Constraint, EClass, EObject>
+      factory) {
         super.setFactory(factory);
     }
     
-    // use the AbstractEnvironment's mechanism for defining "additional operations"
-    // to add our custom operation to OCL's String primitive type
+    // use the AbstractEnvironment's mechanism for defining
+    // "additional operations" to add our custom operation to
+    // OCL's String primitive type
     private void defineCustomOperations() {
         // pattern-matching operation
         regexMatch = EcoreFactory.eINSTANCE.createEOperation();
@@ -157,7 +161,8 @@ class MyEnvironment extends EcoreEnvironment {
         parm.setEType(getOCLStandardLibrary().getString());
         regexMatch.getEParameters().add(parm);
         
-        // annotate it so that we will recognize it in the evaluation environment
+        // annotate it so that we will recognize it
+        // in the evaluation environment
         EAnnotation annotation = EcoreFactory.eINSTANCE.createEAnnotation();
         annotation.setSource("MyEnvironment");
         regexMatch.getEAnnotations().add(annotation);
@@ -178,11 +183,13 @@ class MyEvaluationEnvironment extends EcoreEvaluationEnvironment {
     }
 
     MyEvaluationEnvironment(
-            EvaluationEnvironment<EClassifier, EOperation, EStructuralFeature, EClass, EObject> parent) {
+            EvaluationEnvironment<EClassifier, EOperation, EStructuralFeature,
+            EClass, EObject> parent) {
         super(parent);
     }
     
-    public Object callOperation(EOperation operation, int opcode, Object source, Object[] args) {
+    public Object callOperation(EOperation operation, int opcode,
+            Object source, Object[] args) {
         if (operation.getEAnnotation("MyEnvironment") == null) {
             // not our custom regex operation
             return super.callOperation(operation, opcode, source, args);
@@ -205,15 +212,21 @@ Finally, we define a specialization of the
 
 bc.. 
 class MyEnvironmentFactory extends EcoreEnvironmentFactory {
-    public Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject>
-    createEnvironment() {
+    public Environment<EPackage, EClassifier, EOperation, EStructuralFeature,
+      EEnumLiteral, EParameter, EObject, CallOperationAction,
+      SendSignalAction, Constraint, EClass, EObject> createEnvironment() {
         MyEnvironment result = new MyEnvironment(getEPackageRegistry());
         result.setFactory(this);
         return result;
     }
     
-    public Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject>
-    createEnvironment(Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> parent) {
+    public Environment<EPackage, EClassifier, EOperation, EStructuralFeature,
+      EEnumLiteral, EParameter, EObject, CallOperationAction,
+      SendSignalAction, Constraint, EClass, EObject>
+      createEnvironment(Environment<EPackage, EClassifier, EOperation,
+      EStructuralFeature, EEnumLiteral, EParameter, EObject,
+      CallOperationAction, SendSignalAction, Constraint, EClass,
+      EObject> parent) {
         if (!(parent instanceof MyEnvironment)) {
             throw new IllegalArgumentException(
                 "Parent environment must be my environment: " + parent);
@@ -224,14 +237,15 @@ class MyEnvironmentFactory extends EcoreEnvironmentFactory {
         return result;
     }
 
-    public EvaluationEnvironment<EClassifier, EOperation, EStructuralFeature, EClass, EObject>
-    createEvaluationEnvironment() {
+    public EvaluationEnvironment<EClassifier, EOperation, EStructuralFeature,
+      EClass, EObject> createEvaluationEnvironment() {
         return new MyEvaluationEnvironment();
     }
 
-    public EvaluationEnvironment<EClassifier, EOperation, EStructuralFeature, EClass, EObject>
-    createEvaluationEnvironment(
-            EvaluationEnvironment<EClassifier, EOperation, EStructuralFeature, EClass, EObject> parent) {
+    public EvaluationEnvironment<EClassifier, EOperation, EStructuralFeature,
+      EClass, EObject> createEvaluationEnvironment(
+      EvaluationEnvironment<EClassifier, EOperation, EStructuralFeature,
+      EClass, EObject> parent) {
         return new MyEvaluationEnvironment(parent);
     }
 }
@@ -286,11 +300,14 @@ bc..
     OCL ocl = OCL.newInstance(new EcoreEnvironmentFactory(r));
     ((EcoreEnvironment) ocl.getEnvironment()).setOption(
         ParsingOptions.PACKAGE_LOOKUP_STRATEGY,
-        ParsingOptions.PACKAGE_LOOKUP_STRATEGIES.LOOKUP_PACKAGE_BY_ALIAS_THEN_NAME);
+        ParsingOptions.PACKAGE_LOOKUP_STRATEGIES.
+            LOOKUP_PACKAGE_BY_ALIAS_THEN_NAME);
     Helper helper = ocl.createOCLHelper();
-    helper.setContext(org.eclipse.ocl.ecore.EcorePackage.eINSTANCE.getOCLExpression());
+    helper.setContext(
+        org.eclipse.ocl.ecore.EcorePackage.eINSTANCE.getOCLExpression());
     org.eclipse.ocl.ecore.OCLExpression expr = helper.createQuery(
-        "self.oclIsKindOf(EMFEcore::EClassifier) and not self.oclIsKindOf(OCLEcore::OCLExpression)");
+        "self.oclIsKindOf(EMFEcore::EClassifier) and not
+         self.oclIsKindOf(OCLEcore::OCLExpression)");
 p. 
 
 In the example above, two packages with ambiguous simple names (EMF Ecore package and
@@ -329,21 +346,21 @@ Obviously, "@ECrossReferenceAdapter@":http://download.eclipse.org/modeling/emf/e
 "@DefaultOppositeEndFinder@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/ecore/DefaultOppositeEndFinder.html, e.g., when the reference lookup based on the Ecore package registry is sufficient and only the navigation behavior shall be redefined:
 
 bc.. 
-  class MyOppositeEndFinder extends DefaultOppositeEndFinder {
-      MyOppositeEndFinder(EPackage.Registry registry) {
-          super(registry);
-      }
+class MyOppositeEndFinder extends DefaultOppositeEndFinder {
+    MyOppositeEndFinder(EPackage.Registry registry) {
+        super(registry);
+    }
       
-      @Override
-      public Object navigateOppositeProperty(EStructuralFeature property, Object target) {
-          Collection<Object> result = null;
-          EObject eTarget = (EObject) target;
-          // do something clever, e.g., using your underlying store's query facility or
-          // the new EMF Query2 component (incubation)
-          // ...
-          return result;
-      }
-  }
+    @Override
+    public Object navigateOppositeProperty(EStructuralFeature property, Object target) {
+        Collection<Object> result = null;
+        EObject eTarget = (EObject) target;
+        // do something clever, e.g., using your underlying store's query facility or
+        // the new EMF Query2 component (incubation)
+        // ...
+        return result;
+    }
+}
 p. 
 
 With this, OCL can be instantiated using the custom opposite end finder as follows:

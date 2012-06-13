@@ -13,7 +13,7 @@ h3. The OCL Environment
 
 The @OCL@ API provides a Facade for the various objects that support different aspects of OCL parsing and evaluation activities in a that spans activities for which the meta-models remain unchanged. A new OCL Facade is required if the meta-models change.
 
-!{width:45%}images/6310-environment.png(Core OCL Environment API)!
+!{width:40%}images/6310-environment.png(Core OCL Environment API)!
 
 The "@OCL@":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/examples/pivot/OCL.html class is a simple type.
 

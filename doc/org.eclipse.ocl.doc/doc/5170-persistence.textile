@@ -42,8 +42,9 @@ Resource modelResource = getResourceSet().getResource(
 OCL<?, EClassifier, ?, ?, ?, ?, ?, ?, ?, Constraint, EClass, EObject> ocl;
 ocl = OCL.newInstance(EcoreEnvironmentFactory.INSTANCE, myResource);
 
-// use the OCL to parse constraints, store them in the Ecore model, and save everything
-//   together in one resource for a consistent, self-contained OCL environment
+// use the OCL to parse constraints, store them in the Ecore model,
+//	  and save everything together in one resource for a consistent,
+//   self-contained OCL environment
 
 ...
 p. 

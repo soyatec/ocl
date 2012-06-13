@@ -68,3 +68,4 @@ retained by the @OCL@ environment.
 "[Text for cut and paste]":../references/6320-accessing.txt
 
 The source for these examples may be found in the org.eclipse.ocl.examples.xtext.tests plugin in model/parsingDocumentsExample.ocl and in src/org/eclipse/ocl/examples/test/xtext/PivotDocumentationExamples.java.
+

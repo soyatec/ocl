@@ -324,7 +324,6 @@
 <topic href="help/TargetMetamodels.html" label="OCL Relationship to Metamodels">
 <topic href="help/TargetMetamodels.html#TheEcoreMetamodelBinding" label="The Ecore Metamodel Binding"></topic>
 <topic href="help/TargetMetamodels.html#TheUMLMetamodelBinding" label="The UML Metamodel Binding"></topic>
-<topic href="help/TargetMetamodels.html#ThePivotMetamodelBinding" label="The Pivot Metamodel Binding"></topic>
 </topic>
 <topic href="help/ContentAssistSupport.html" label="Content Assist Support">
 <topic href="help/ContentAssistSupport.html#SyntaxCompletionChoices" label="Syntax Completion Choices"></topic>
@@ -401,6 +400,9 @@
 <topic href="help/PivotParsingDocuments.html" label="Parsing OCL Documents">
 <topic href="help/PivotParsingDocuments.html#TheOCLInput2" label="The OCL Input"></topic>
 <topic href="help/PivotParsingDocuments.html#AccessingtheConstraints2" label="Accessing the Constraints"></topic>
+</topic>
+<topic href="help/PivotMetamodels.html" label="OCL Relationship to Metamodels">
+<topic href="help/PivotMetamodels.html#ThePivotMetamodelBinding" label="The Pivot Metamodel Binding"></topic>
 </topic>
 </topic>
 <topic href="help/APIReference.html" label="API Reference">

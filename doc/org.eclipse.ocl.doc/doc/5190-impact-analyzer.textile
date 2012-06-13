@@ -12,8 +12,9 @@ The "@ImpactAnalyzerFactory@":http://download.eclipse.org/modeling/mdt/ocl/javad
 Given an "OCL expression":http://download.eclipse.org/modeling/mdt/ocl/javadoc/4.0.0/org/eclipse/ocl/ecore/OCLExpression.html, the factory can be used to create an impact analyzer for a single expression as follows:
 
 bc.. 
-    final OCLExpression e = ...;
-    final ImpactAnalyzer impactAnalyzer = ImpactAnalyzerFactory.INSTANCE.createImpactAnalyzer(
+final OCLExpression e = ...;
+final ImpactAnalyzer impactAnalyzer =
+		ImpactAnalyzerFactory.INSTANCE.createImpactAnalyzer(
     			e,      // the expression to re-evaluate incrementally
     			false,  // whether to re-evaluate when new context objects appear
     			OCLFactory.INSTANCE);
@@ -24,17 +25,19 @@ can then be used to register for notifications that indicate a change which may 
 the value of the expression. Consider the following example:
 
 bc.. 
-    ResourceSet myResourceSet = ...;
-    EventFilter filter = impactAnalyzer.createFilterForExpression();
-    EventManager eventManager = EventManagerFactory.eINSTANCE.getEventManagerFor(myResourceSet);
-    eventManager.subscribe(filter, new AdapterImpl() {
-        public void notifyChanged(Notification notification) {
-            Collection<EObject> valueMayHaveChangedOn = impactAnalyzer.getContextObjects(notification);
-            for (EObject eo : valueMayHaveChangedOn) {
-            	// ... perform some re-evaluation action of e for context eo here
-            }
+ResourceSet myResourceSet = ...;
+EventFilter filter = impactAnalyzer.createFilterForExpression();
+EventManager eventManager =
+	EventManagerFactory.eINSTANCE.getEventManagerFor(myResourceSet);
+eventManager.subscribe(filter, new AdapterImpl() {
+    public void notifyChanged(Notification notification) {
+        Collection<EObject> valueMayHaveChangedOn =
+            impactAnalyzer.getContextObjects(notification);
+        for (EObject eo : valueMayHaveChangedOn) {
+        	// ... perform some re-evaluation action of e for context eo here
         }
-    });
+    }
+});
 p. 
 
 The event manager can be used to register the event filters of several OCL expressions with their respective
@@ -74,15 +77,16 @@ The @org.eclipse.ocl.examples.impactanalyzer.ui@ package provides experimental s
 for embedding the impact analyzer in EMF editors. Adding the lines
 
 bc.. 
-    @SuppressWarnings("unused") // not read; just used to avoid GC from collecting re-validator 
-    private Revalidator revalidator;
+@SuppressWarnings("unused") 			// not read; just used to avoid GC  
+private Revalidator revalidator;		//  from collecting re-validator
 p. 
 
 to the field declarations of an editor class, and adding the lines
 
 bc.. 
-    revalidator = new Revalidator(editingDomain, OCLFactory.INSTANCE, DefaultOppositeEndFinder.getInstance(),
-                                  MyMetamodelEcorePackage.eINSTANCE);
+revalidator = new Revalidator(editingDomain, OCLFactory.INSTANCE,
+                              DefaultOppositeEndFinder.getInstance(),
+                              MyMetamodelEcorePackage.eINSTANCE);
 p. 
 
 at the end of the editor class's @createModel()@ method turns on this experimental
