@@ -1900,26 +1900,28 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 				//
 //				Set<TemplateParameter> templateParameters = typeBindings1.keySet();
 				List<TemplateParameter> templateParameters = PivotUtil.getAllTemplateParameters(unspecializedType);
-				List<ParameterableElement> templateArguments = new ArrayList<ParameterableElement>(templateParameters.size());
-//				boolean isSubstituted = false;
-				for (TemplateParameter templateParameter : templateParameters) {
-					ParameterableElement templateArgument = typeBindings.get(templateParameter);
-					if (templateArgument != null) {
-//						isSubstituted = true;
+				if (templateParameters != null) {
+					List<ParameterableElement> templateArguments = new ArrayList<ParameterableElement>(templateParameters.size());
+//					boolean isSubstituted = false;
+					for (TemplateParameter templateParameter : templateParameters) {
+						ParameterableElement templateArgument = typeBindings.get(templateParameter);
+						if (templateArgument != null) {
+//							isSubstituted = true;
+						}
+						else {
+							templateArgument = templateParameter.getParameteredElement();
+						}
+						if (templateArgument instanceof Type) {
+							templateArgument = getSpecializedType((Type)templateArgument, usageBindings);
+//							isSubstituted = true;
+						}
+						templateArguments.add(templateArgument);
 					}
-					else {
-						templateArgument = templateParameter.getParameteredElement();
-					}
-					if (templateArgument instanceof Type) {
-						templateArgument = getSpecializedType((Type)templateArgument, usageBindings);
-//						isSubstituted = true;
-					}
-					templateArguments.add(templateArgument);
+//					if (!isSubstituted) {
+//						return type;
+//					}
+					return getLibraryType(unspecializedType, templateArguments);
 				}
-//				if (!isSubstituted) {
-//					return type;
-//				}
-				return getLibraryType(unspecializedType, templateArguments);
 			}
 		}
 		return type;

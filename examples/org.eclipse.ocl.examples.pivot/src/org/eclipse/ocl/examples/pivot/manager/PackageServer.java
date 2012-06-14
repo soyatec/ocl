@@ -130,7 +130,8 @@ public class PackageServer extends PackageTracker
 		String className = pivotType.getName();
 		TypeServer typeServer = typeServers.get(className);
 		if (typeServer == null) {
-			typeServer = (TypeServer) EcoreUtil.getAdapter(pivotType.eAdapters(), packageManager);
+			TypeTracker typeTracker = (TypeTracker) EcoreUtil.getAdapter(pivotType.eAdapters(), packageManager);
+			typeServer = typeTracker != null ? typeTracker.getTypeServer() : null;
 			if (typeServer == null) {
 				typeServer = new TypeServer(packageManager, pivotType);
 			}
