@@ -255,7 +255,43 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	public static MessageBinder getMessageBinder() {
 		return messageBinder;
 	}
+	
+	private static long startTime = System.currentTimeMillis();
+	private static Map<Thread,Long> threadRunTimes = new HashMap<Thread,Long>();
+	private static long[] indentRunTimes = new long[100];
+	private static Integer indentation = 0;
+	private static String indents= ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
 
+	public static void printDiagnostic(String message, boolean dispose, int indent) {
+		synchronized (indentation) {
+			if (indent < 0) {
+				indentation--;
+			}
+			long currentTimeMillis = System.currentTimeMillis();
+			Thread currentThread = Thread.currentThread();
+			Long threadStartTime = threadRunTimes.get(currentThread);
+			if (threadStartTime == null) {
+				threadStartTime = currentTimeMillis;
+				threadRunTimes.put(currentThread, threadStartTime);
+			}
+			if (indent > 0) {
+				System.out.printf("%s %8.3f %s -- %6.3f %s\n", indents.substring(0, Math.min(indentation, indents.length()-1)), (currentTimeMillis - startTime) * 0.001, currentThread.getName(),
+					(currentTimeMillis - threadStartTime) * 0.001, message);
+			}
+			else {
+				System.out.printf("%s %8.3f %s -- %6.3f %6.3f %s\n", indents.substring(0, Math.min(indentation, indents.length()-1)), (currentTimeMillis - startTime) * 0.001, currentThread.getName(),
+					(currentTimeMillis - threadStartTime) * 0.001, (currentTimeMillis - indentRunTimes[indentation]) * 0.001, message);
+			}
+			if (dispose) {
+				threadRunTimes.remove(currentThread);
+			}
+			if (indent > 0) {
+				indentRunTimes[indentation] = currentTimeMillis;
+				indentation++;
+			}
+		}
+	}
+	
 	public static void setElementType(PathNameCS pathNameCS, EClass elementType, ElementCS csContext, ScopeFilter scopeFilter) {
 		pathNameCS.setContext(csContext);
 		pathNameCS.setScopeFilter(scopeFilter);
@@ -494,6 +530,7 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	}
 	
 	public synchronized void update(IDiagnosticConsumer diagnosticsConsumer) {
+		printDiagnostic("CS2Pivot.update start", false, 0);
 		Map<String, Element> oldCSI2Pivot = cs2PivotMapping.getMapping();
 		Set<String> newCSIs = cs2PivotMapping.computeCSIs(cs2pivotResourceMap.keySet());
 //		System.out.println("==========================================================================");
@@ -519,5 +556,6 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 		conversion.garbageCollect(cs2pivotResourceMap);
 		cs2PivotMapping.update(cs2pivotResourceMap.keySet());
 		pivot2cs = null;
+		printDiagnostic("CS2Pivot.update end", false, 0);
 	}
 }
