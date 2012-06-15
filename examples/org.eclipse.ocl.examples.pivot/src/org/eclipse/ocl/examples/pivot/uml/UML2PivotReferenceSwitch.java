@@ -20,11 +20,14 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
+import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.uml2.uml.util.UMLSwitch;
 
 public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
@@ -72,6 +75,13 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 	public org.eclipse.ocl.examples.pivot.Class caseClass(org.eclipse.uml2.uml.Class umlClass) {
 		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.getCreated(org.eclipse.ocl.examples.pivot.Class.class, umlClass);
 		doSwitchAll(Type.class, pivotElement.getSuperClass(), umlClass.getSuperClasses());
+		return null;
+	}
+
+	@Override
+	public Constraint caseConstraint(org.eclipse.uml2.uml.Constraint umlConstraint) {
+		Constraint pivotElement = converter.getCreated(Constraint.class, umlConstraint);
+		doSwitchAll(Element.class, pivotElement.getConstrainedElement(), umlConstraint.getConstrainedElements());
 		return null;
 	}
 

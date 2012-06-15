@@ -33,6 +33,13 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
+import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.OCL;
+import org.eclipse.ocl.examples.pivot.Package;
+import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
@@ -41,6 +48,9 @@ import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.uml.UML2Ecore2Pivot;
+import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
+import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
@@ -226,6 +236,84 @@ public class LoadTests extends XtextTestCase
 	//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " saved()");
 			assertNoResourceErrors("Save failed", ecoreResource);
 			ecoreResource.setURI(inputURI);
+		}
+		finally {
+			metaModelManager.dispose();
+			unloadResourceSet(resourceSet);
+		}		
+//		Resource xmiResource = resourceSet.createResource(outputURI);
+//		xmiResource.getContents().addAll(xtextResource.getContents());
+//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " save()");
+//		xmiResource.save(null);
+//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " saved()");
+//		assertNoResourceErrors("Save failed", xmiResource);
+//		return xmiResource;
+	}
+	
+	public void doLoadUML(URI inputURI) throws IOException {
+		long startTime = System.currentTimeMillis();
+		System.out.println("Start at " + startTime);
+		ResourceSet resourceSet = new ResourceSetImpl();
+		getProjectMap().initializeResourceSet(null);
+//		getProjectMap().initializeResourceSet(resourceSet);
+//		UMLResourcesUtil.init(resourceSet);
+		String extension = inputURI.fileExtension();
+		String stem = inputURI.trimFileExtension().lastSegment();
+//		String outputName = stem + "." + extension + ".xmi";
+		String output2Name = stem + ".saved." + extension;
+//		URI outputURI = getProjectFileURI(outputName);
+		URI output2URI = getProjectFileURI(output2Name);
+		if (metaModelManager == null) {
+			metaModelManager = new MetaModelManager();
+		}
+		MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
+		Resource umlResource = null;
+		try {
+			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " getResource()");
+			umlResource = resourceSet.getResource(inputURI, true);
+			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " gotResource()");
+			assertNoResourceErrors("Load failed", umlResource);
+			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " resolveProxies()");
+			assertNoUnresolvedProxies("Unresolved proxies", umlResource);
+			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
+//			assertNoValidationErrors("Validation errors", umlResource.getContents().get(0));
+			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validated()");
+			umlResource.setURI(output2URI);
+			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " save()");
+			umlResource.save(null);
+			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " saved()");
+			assertNoResourceErrors("Save failed", umlResource);
+			umlResource.setURI(inputURI);
+			UML2Pivot adapter = UML2Pivot.getAdapter(umlResource, metaModelManager);
+			Package pivotRoot = adapter.getPivotRoot();
+			Resource pivotResource = pivotRoot.eResource();
+			assertNoResourceErrors("Load failed", pivotResource);
+			URI savedURI = pivotResource.getURI();
+			pivotResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension("pivot"));
+			pivotResource.save(null);
+			pivotResource.setURI(savedURI);
+			OCL ocl = OCL.newInstance(new PivotEnvironmentFactory(null, metaModelManager));
+			for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
+				EObject eObject = tit.next();
+				if (eObject instanceof Constraint) {
+					Constraint constraint = (Constraint)eObject;
+					ExpressionInOCL specification;
+					try {
+						System.out.println(constraint);
+						NamedElement context = constraint.getContext();
+						List<Element> constrainedElements = constraint.getConstrainedElement();
+						for (Element constrainedElement : constrainedElements) {
+							System.out.println("Spurious constrained element: " + constrainedElement);
+						}
+						specification = ocl.getSpecification(constraint);
+						if (specification != null) {
+							constraint.setSpecification(specification);
+						}
+					} catch (ParserException e) {
+						System.out.println(e);
+					}
+				}
+			}
 		}
 		finally {
 			metaModelManager.dispose();
@@ -535,9 +623,12 @@ public class LoadTests extends XtextTestCase
 		doLoad_OCL(URI.createPlatformResourceURI("org.eclipse.ocl.examples.pivot/model/Pivot.ocl", true));
 	}	
 
-
 	public void testLoad_RoyalAndLoyal_ocl() throws IOException, InterruptedException {
 //		Abstract2Moniker.TRACE_MONIKERS.setState(true);
 		doLoad("RoyalAndLoyal", "ocl");
 	}
+	
+//	public void testLoad_UML_2_5() throws IOException, InterruptedException {
+//		doLoadUML(URI.createPlatformResourceURI("UML-2.5/XMI-12-Jun-2012/UML.xmi", true));
+//	}
 }

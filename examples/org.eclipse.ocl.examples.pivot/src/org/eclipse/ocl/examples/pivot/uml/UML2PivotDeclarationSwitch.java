@@ -31,12 +31,15 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreSwitch;
 import org.eclipse.ocl.common.OCLCommon;
 import org.eclipse.ocl.examples.pivot.Annotation;
+import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Detail;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
+import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
@@ -50,6 +53,7 @@ import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
+import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.uml2.uml.util.UMLSwitch;
 
 public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
@@ -116,7 +120,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		doSwitchAll(pivotElement.getOwnedOperation(), umlClass.getOperations(), null);
 		doSwitchAll(pivotElement.getOwnedAttribute(), umlClass.getAttributes(), null);
 		for (org.eclipse.uml2.uml.Classifier umlType : umlClass.getNestedClassifiers()) {
-			doSwitch(umlType);
+//			doSwitch(umlType);
 			Type pivotObject = (Type) doSwitch(umlType);
 			if (pivotObject != null) {
 // WIP				converter.getMetaModelManager().addOrphanClass(pivotObject);
@@ -149,6 +153,28 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	}
 
 	@Override
+	public Comment caseComment(org.eclipse.uml2.uml.Comment umlComment) {
+		Comment pivotElement = converter.refreshElement(Comment.class, PivotPackage.Literals.COMMENT, umlComment);
+		pivotElement.setBody(umlComment.getBody());
+		copyComments(pivotElement, umlComment);
+		return pivotElement;
+	}
+
+	@Override
+	public Constraint caseConstraint(org.eclipse.uml2.uml.Constraint umlConstraint) {
+		Constraint pivotElement = converter.refreshNamedElement(Constraint.class, PivotPackage.Literals.CONSTRAINT, umlConstraint);
+		pivotElement.setSpecification((ValueSpecification) doSwitch(umlConstraint.getSpecification()));
+		copyNamedElement(pivotElement, umlConstraint);
+		if (!umlConstraint.getConstrainedElements().isEmpty()) {
+			converter.queueReference(umlConstraint);	// Defer
+		}
+		else {
+			pivotElement.getConstrainedElement().clear();
+		}
+		return pivotElement;
+	}
+
+	@Override
 	public DataType caseDataType(org.eclipse.uml2.uml.DataType umlDataType) {
 		DataType pivotElement = converter.refreshNamedElement(DataType.class, PivotPackage.Literals.DATA_TYPE, umlDataType);
 		copyDataTypeOrEnum(pivotElement, umlDataType);
@@ -167,8 +193,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	public EnumerationLiteral caseEnumerationLiteral(org.eclipse.uml2.uml.EnumerationLiteral umlEnumLiteral) {
 		EnumerationLiteral pivotElement = converter.refreshNamedElement(EnumerationLiteral.class,
 			PivotPackage.Literals.ENUMERATION_LITERAL, umlEnumLiteral);
-		converter.copyNamedElement(pivotElement, umlEnumLiteral);
-		converter.copyAnnotatedElement(pivotElement, umlEnumLiteral, null);
+		copyNamedElement(pivotElement, umlEnumLiteral);
 //		if (eEnumLiteral.eIsSet(EcorePackage.Literals.EENUM_LITERAL__VALUE)) {
 //			pivotElement.setValue(BigInteger.valueOf(eEnumLiteral.getValue()));
 //		}
@@ -186,6 +211,17 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 				csAnnotation.getDetails().add(csDetail);
 				pivotElement.getAnnotations().add(csAnnotation); */
 //			}
+		return pivotElement;
+	}
+
+	@Override
+	public OpaqueExpression caseOpaqueExpression(org.eclipse.uml2.uml.OpaqueExpression umlExpression) {
+		OpaqueExpression pivotElement = converter.refreshNamedElement(OpaqueExpression.class, PivotPackage.Literals.OPAQUE_EXPRESSION, umlExpression);
+		pivotElement.getBody().clear();
+		pivotElement.getLanguage().clear();
+		pivotElement.getBody().addAll(umlExpression.getBodies());
+		pivotElement.getLanguage().addAll(umlExpression.getLanguages());
+		copyNamedElement(pivotElement, umlExpression);
 		return pivotElement;
 	}
 
@@ -239,8 +275,8 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 			}				
 		}
 //		converter.copyTypedElement(pivotElement, umlOperation, excludedAnnotations);
-		converter.copyNamedElement(pivotElement, umlOperation);
-		converter.copyAnnotatedElement(pivotElement, umlOperation, excludedAnnotations);
+		copyNamedElement(pivotElement, umlOperation);
+		copyConstraints(pivotElement, umlOperation);
 //		converter.copyMultiplicityElement(pivotElement, umlOperation);
 		doSwitchAll(pivotElement.getOwnedParameter(), umlOperation.getOwnedParameters(), null);
 		copyTemplateSignature(pivotElement, umlOperation.getOwnedTemplateSignature());
@@ -255,8 +291,8 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		converter.getMetaModelManager().addPackage(pivotElement);
 		EAnnotation eAnnotation = umlPackage.getEAnnotation(EcorePackage.eNS_URI);
 		List<EAnnotation> exclusions = eAnnotation == null ? Collections.<EAnnotation>emptyList() : Collections.singletonList(eAnnotation);
-		converter.copyNamedElement(pivotElement, umlPackage);
-		converter.copyAnnotatedElement(pivotElement, umlPackage, exclusions);
+		copyNamedElement(pivotElement, umlPackage);
+		copyConstraints(pivotElement, umlPackage);
 //		if (umlPackage.eIsSet(EcorePackage.Literals.EPACKAGE__NS_PREFIX)) {
 //			pivotElement.setNsPrefix(umlPackage.getNsPrefix());
 //		}
@@ -296,6 +332,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 //		pivotElement.setIsID(umlProperty.isID());			
 //		pivotElement.setIsResolveProxies(umlProperty.isResolveProxies());			
 //		if ((umlProperty.getOpposite() != null) || (excludedAnnotations != null) || !umlProperty.getEKeys().isEmpty()) {
+		copyComments(pivotElement, umlProperty);
 		if (umlProperty.getOpposite() != null) {
 			converter.queueReference(umlProperty);	// Defer
 		}
@@ -345,8 +382,8 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 				}
 			}
 		}
-		converter.copyNamedElement(pivotElement, umlClassifier);
-		converter.copyAnnotatedElement(pivotElement, umlClassifier, excludedAnnotations);
+		copyNamedElement(pivotElement, umlClassifier);
+		copyConstraints(pivotElement, umlClassifier);
 //		if (umlClassifier.eIsSet(EcorePackage.Literals.ECLASSIFIER__INSTANCE_CLASS_NAME)) {
 //			pivotElement.setInstanceClassName(umlClassifier.getInstanceClassName());
 //		}
@@ -354,6 +391,14 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 //			pivotElement.eUnset(PivotPackage.Literals.TYPE__INSTANCE_CLASS_NAME);
 //		}
 		copyTemplateSignature(pivotElement, umlClassifier.getOwnedTemplateSignature());
+	}
+
+	protected void copyComments(Element pivotElement, org.eclipse.uml2.uml.Element umlElement) {
+		doSwitchAll(pivotElement.getOwnedComment(), umlElement.getOwnedComments(), null);
+	}
+
+	protected void copyConstraints(Namespace pivotElement, org.eclipse.uml2.uml.Namespace umlElement) {
+		doSwitchAll(pivotElement.getOwnedRule(), umlElement.getOwnedRules(), null);
 	}
 
 	protected void copyDataTypeOrEnum(DataType pivotElement, org.eclipse.uml2.uml.DataType umlDataType) {
@@ -370,6 +415,12 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 				lines.add(splitLines[splitLines.length-1]);
 			}
 		} */
+
+	public void copyNamedElement(NamedElement pivotElement, org.eclipse.uml2.uml.NamedElement umlElement) {
+		converter.copyNamedElement(pivotElement, umlElement);
+		converter.copyAnnotatedElement(pivotElement, umlElement, null);
+		copyComments(pivotElement, umlElement);
+	}
 
 	protected void copyTemplateSignature(TemplateableElement pivotElement, org.eclipse.uml2.uml.TemplateSignature umlTemplateSignature) {
 		if (umlTemplateSignature != null) {

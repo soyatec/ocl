@@ -101,7 +101,7 @@ public class Pivot2UMLDeclarationVisitor
 	}
 
 	protected void copyDetails(EAnnotation umlAnnotation, Annotation pivotAnnotation) {
-		copyModelElement(umlAnnotation, pivotAnnotation);
+		copyEModelElement(umlAnnotation, pivotAnnotation);
 		safeVisitAll(umlAnnotation.getEAnnotations(), pivotAnnotation.getOwnedAnnotation());
 		for (Detail pivotDetail : pivotAnnotation.getOwnedDetail()) {
 			String name = pivotDetail.getName();
@@ -110,8 +110,13 @@ public class Pivot2UMLDeclarationVisitor
 		}
 	}
 
-	protected void copyModelElement(EModelElement umlElement, Element pivotModelElement) {
+	protected void copyEModelElement(EModelElement umlElement, Element pivotModelElement) {
 		context.putCreated(pivotModelElement, umlElement);
+	}
+
+	protected void copyModelElement(org.eclipse.uml2.uml.Element umlElement, Element pivotModelElement) {
+		copyEModelElement(umlElement, pivotModelElement);
+		safeVisitAll(umlElement.getOwnedComments(), pivotModelElement.getOwnedComment());
 	}
 
 	protected void copyMultiplicityElement(org.eclipse.uml2.uml.MultiplicityElement umlMultiplicityElement, TypedMultiplicityElement pivotTypedElement) {
