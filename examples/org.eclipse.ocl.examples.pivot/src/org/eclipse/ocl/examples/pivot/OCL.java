@@ -547,9 +547,11 @@ public class OCL {
 		else if (specification instanceof OpaqueExpression){
 			OpaqueExpression opaqueExpression = (OpaqueExpression)specification;
 			String expression = PivotUtil.getBody(opaqueExpression);
-		    Element constrainedElement = constraint.getConstrainedElement().get(0);
-			OCLHelper helper = createOCLHelper(constrainedElement);
-			expressionInOCL = helper.createInvariant(expression);
+		    if (expression != null) {
+		    	NamedElement contextElement = constraint.getContext();
+				OCLHelper helper = createOCLHelper(contextElement);
+				expressionInOCL = helper.createQuery(expression);
+		    }
 		}
 		return expressionInOCL;
 	}
