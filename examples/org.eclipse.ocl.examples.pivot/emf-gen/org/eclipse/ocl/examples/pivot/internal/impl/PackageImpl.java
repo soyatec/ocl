@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.examples.pivot.Annotation;
@@ -58,6 +59,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PackageImpl#getNestingPackage <em>Nesting Package</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PackageImpl#getNsPrefix <em>Ns Prefix</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PackageImpl#getNsURI <em>Ns URI</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PackageImpl#getImportedPackage <em>Imported Package</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PackageImpl#getOwnedPrecedence <em>Owned Precedence</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PackageImpl#getOwnedType <em>Owned Type</em>}</li>
  * </ul>
@@ -148,6 +150,16 @@ public class PackageImpl
 	 * @ordered
 	 */
 	protected String nsURI = NS_URI_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getImportedPackage() <em>Imported Package</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImportedPackage()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<org.eclipse.ocl.examples.pivot.Package> importedPackage;
 
 	/**
 	 * The cached value of the '{@link #getOwnedPrecedence() <em>Owned Precedence</em>}' containment reference list.
@@ -348,6 +360,20 @@ public class PackageImpl
 		nsURI = newNsURI;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.PACKAGE__NS_URI, oldNsURI, nsURI));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<org.eclipse.ocl.examples.pivot.Package> getImportedPackage()
+	{
+		if (importedPackage == null)
+		{
+			importedPackage = new EObjectResolvingEList<org.eclipse.ocl.examples.pivot.Package>(org.eclipse.ocl.examples.pivot.Package.class, this, PivotPackage.PACKAGE__IMPORTED_PACKAGE);
+		}
+		return importedPackage;
 	}
 
 	/**
@@ -606,6 +632,8 @@ public class PackageImpl
 				return getNsPrefix();
 			case PivotPackage.PACKAGE__NS_URI:
 				return getNsURI();
+			case PivotPackage.PACKAGE__IMPORTED_PACKAGE:
+				return getImportedPackage();
 			case PivotPackage.PACKAGE__OWNED_PRECEDENCE:
 				return getOwnedPrecedence();
 			case PivotPackage.PACKAGE__OWNED_TYPE:
@@ -665,6 +693,10 @@ public class PackageImpl
 			case PivotPackage.PACKAGE__NS_URI:
 				setNsURI((String)newValue);
 				return;
+			case PivotPackage.PACKAGE__IMPORTED_PACKAGE:
+				getImportedPackage().clear();
+				getImportedPackage().addAll((Collection<? extends org.eclipse.ocl.examples.pivot.Package>)newValue);
+				return;
 			case PivotPackage.PACKAGE__OWNED_PRECEDENCE:
 				getOwnedPrecedence().clear();
 				getOwnedPrecedence().addAll((Collection<? extends Precedence>)newValue);
@@ -722,6 +754,9 @@ public class PackageImpl
 			case PivotPackage.PACKAGE__NS_URI:
 				setNsURI(NS_URI_EDEFAULT);
 				return;
+			case PivotPackage.PACKAGE__IMPORTED_PACKAGE:
+				getImportedPackage().clear();
+				return;
 			case PivotPackage.PACKAGE__OWNED_PRECEDENCE:
 				getOwnedPrecedence().clear();
 				return;
@@ -765,6 +800,8 @@ public class PackageImpl
 				return NS_PREFIX_EDEFAULT == null ? nsPrefix != null : !NS_PREFIX_EDEFAULT.equals(nsPrefix);
 			case PivotPackage.PACKAGE__NS_URI:
 				return NS_URI_EDEFAULT == null ? nsURI != null : !NS_URI_EDEFAULT.equals(nsURI);
+			case PivotPackage.PACKAGE__IMPORTED_PACKAGE:
+				return importedPackage != null && !importedPackage.isEmpty();
 			case PivotPackage.PACKAGE__OWNED_PRECEDENCE:
 				return ownedPrecedence != null && !ownedPrecedence.isEmpty();
 			case PivotPackage.PACKAGE__OWNED_TYPE:

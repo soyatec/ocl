@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.EClass;
  *   <li>{@link org.eclipse.ocl.examples.pivot.Package#getNestingPackage <em>Nesting Package</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Package#getNsPrefix <em>Ns Prefix</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Package#getNsURI <em>Ns URI</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Package#getImportedPackage <em>Imported Package</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Package#getOwnedPrecedence <em>Owned Precedence</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Package#getOwnedType <em>Owned Type</em>}</li>
  * </ul>
@@ -120,6 +121,23 @@ public interface Package
 	 * @generated
 	 */
 	void setNsURI(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Imported Package</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Package}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Imported Package</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Imported Package</em>' reference list.
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getPackage_ImportedPackage()
+	 * @model ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Package!importedPackage'"
+	 * @generated
+	 */
+	EList<Package> getImportedPackage();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Precedence</b></em>' containment reference list.

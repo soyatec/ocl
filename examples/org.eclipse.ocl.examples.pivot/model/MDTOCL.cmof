@@ -87,6 +87,7 @@
       <ownedMember xmi:type="cmof:Class" xmi:id="_7uYc4MpAEd-ZL8lMORCEkg" name="Package">
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_AzTvUMpBEd-ZL8lMORCEkg" name="nsPrefix" type="_-0G3sMpAEd-ZL8lMORCEkg" lower="0"/>
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_HIkBMMpBEd-ZL8lMORCEkg" name="nsURI" type="_-0G3sMpAEd-ZL8lMORCEkg" lower="0"/>
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_swFbkLb8EeG1psGotoAUcw" name="importedPackage" type="_7uYc4MpAEd-ZL8lMORCEkg" lower="0" upper="*"/>
       </ownedMember>
       <ownedMember xmi:type="cmof:Interface" xmi:id="_h0T4sN9WEd-5RuvZBdnt0A" name="Pivotable" isAbstract="true"/>
       <ownedMember xmi:type="cmof:PrimitiveType" xmi:id="_-0G3sMpAEd-ZL8lMORCEkg" name="String"/>

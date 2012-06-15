@@ -1183,11 +1183,43 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			lazyLoadPivotMetaModel();
 		}
 		PackageTracker packageTracker = packageManager.findPackageTracker(pkg);
+		Set<org.eclipse.ocl.examples.pivot.Package> allPackages = new HashSet<org.eclipse.ocl.examples.pivot.Package>();
 		if (packageTracker != null) {
-			return packageTracker.getPackageServer().getPackages();
+			for (org.eclipse.ocl.examples.pivot.Package aPackage : packageTracker.getPackageServer().getPackages()) {
+				allPackages.add(aPackage);
+			}
 		}
 		else {
-			return Collections.singletonList(pkg);
+			allPackages.add(pkg);
+		}
+		getAllPackages(allPackages, allPackages);
+		return allPackages;
+	}
+
+	private void getAllPackages(Set<org.eclipse.ocl.examples.pivot.Package> knownPackages, Set<org.eclipse.ocl.examples.pivot.Package> newPackages) {
+		Set<org.eclipse.ocl.examples.pivot.Package> morePackages = null;
+		for (org.eclipse.ocl.examples.pivot.Package newPackage : newPackages) {
+			for (org.eclipse.ocl.examples.pivot.Package importedPackage : newPackage.getImportedPackage()) {
+				if (morePackages == null) {
+					morePackages = new HashSet<org.eclipse.ocl.examples.pivot.Package>();
+				}
+				PackageTracker packageTracker = packageManager.findPackageTracker(importedPackage);
+				if (packageTracker != null) {
+					for (org.eclipse.ocl.examples.pivot.Package aPackage : packageTracker.getPackageServer().getPackages()) {
+						morePackages.add(aPackage);
+					}
+				}
+				else {
+					morePackages.add(importedPackage);
+				}
+			}
+		}
+		if (morePackages != null) {
+			morePackages.removeAll(knownPackages);
+			if (morePackages.size() > 0) {
+				knownPackages.addAll(morePackages);
+				getAllPackages(knownPackages, morePackages);
+			}
 		}
 	}
 

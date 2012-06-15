@@ -593,7 +593,6 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final Operation op_TemplateableElement_isTemplate = createOperation("isTemplate", _Boolean, null, null);
 		protected final Operation op_TemplateableElement_parameterableElements = createOperation("parameterableElements", _ParameterableElement, null, null);
 		protected final Operation op_null_isTemplate = createOperation("isTemplate", _Boolean, null, null);
-		protected final Operation op_Type_resolveSelfType = createOperation("resolveSelfType", _Type, null, null);
 		protected final Operation op_TypedMultiplicityElement_CompatibleBody = createOperation("CompatibleBody", _Boolean, null, null);
 		protected final Operation op_TypedMultiplicityElement_makeParameter = createOperation("makeParameter", _Parameter, null, null);
 		protected final Operation op_ValueSpecification_booleanValue = createOperation("booleanValue", _Boolean, null, null);
@@ -640,10 +639,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedOperations.add(operation = op_TemplateableElement_parameterableElements);
 			operation.setLower(BigInteger.valueOf(0));
 			operation.setUpper(BigInteger.valueOf(-1));
-			ownedOperations = _Type.getOwnedOperation();
-			ownedOperations.add(operation = op_Type_resolveSelfType);
-			ownedParameters = operation.getOwnedParameter();
-			ownedParameters.add(parameter = createParameter("selfType", _Type));
 			ownedOperations = _TypedMultiplicityElement.getOwnedOperation();
 			ownedOperations.add(operation = op_TypedMultiplicityElement_CompatibleBody);
 			ownedParameters = operation.getOwnedParameter();
@@ -782,6 +777,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final Property pr_OperationCallExp_argument = createProperty("argument", _OCLExpression);
 		protected final Property pr_OperationCallExp_referredOperation = createProperty("referredOperation", _Operation);
 		protected final Property pr_null_parameteredElement = createProperty("parameteredElement", _ParameterableElement);
+		protected final Property pr_Package_importedPackage = createProperty("importedPackage", _Package);
 		protected final Property pr_Package_nestedPackage = createProperty("nestedPackage", _Package);
 		protected final Property pr_Package_nestingPackage = createProperty("nestingPackage", _Package);
 		protected final Property pr_Package_nsPrefix = createProperty("nsPrefix", _String);
@@ -1402,6 +1398,10 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Operation_OperationCallExp);
 			ownedProperties = _Package.getOwnedAttribute();
+			ownedProperties.add(property = pr_Package_importedPackage);
+			property.setLower(BigInteger.valueOf(0));
+			property.setUpper(BigInteger.valueOf(-1));
+			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_Package_nestedPackage);
 			property.setLower(BigInteger.valueOf(0));
 			property.setUpper(BigInteger.valueOf(-1));

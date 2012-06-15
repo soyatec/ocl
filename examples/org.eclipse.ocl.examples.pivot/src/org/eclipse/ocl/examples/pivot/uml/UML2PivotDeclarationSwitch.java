@@ -306,6 +306,12 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 				return !(element instanceof org.eclipse.uml2.uml.Association);
 			}
 		});
+		if (!umlPackage.getImportedPackages().isEmpty()) {
+			converter.queueReference(umlPackage);	// Defer
+		}
+		else {
+			pivotElement.getImportedPackage().clear();
+		}
 		return pivotElement;
 	}
 

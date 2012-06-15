@@ -481,7 +481,7 @@ public class Ecore2Pivot extends AbstractConversion implements External2Pivot, P
 			if (errors == null) {
 				errors = new ArrayList<Resource.Diagnostic>();
 			}
-			errors.add(new XMIException("Failked to load '" + pivotURI + "'", e));
+			errors.add(new XMIException("Failed to load '" + pivotURI + "'", e));
 		}
 		if (errors != null) {
 			pivotResource.getErrors().addAll(errors);

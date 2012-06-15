@@ -23,11 +23,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.uml2.uml.util.UMLSwitch;
 
 public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
@@ -89,6 +87,13 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 	public Operation caseOperation(org.eclipse.uml2.uml.Operation umlOperation) {
 		Operation pivotElement = converter.getCreated(Operation.class, umlOperation);
 		doSwitchAll(Type.class, pivotElement.getRaisedException(), umlOperation.getRaisedExceptions());
+		return null;
+	}
+
+	@Override
+	public org.eclipse.ocl.examples.pivot.Package casePackage(org.eclipse.uml2.uml.Package umlPackage) {
+		org.eclipse.ocl.examples.pivot.Package pivotElement = converter.getCreated(org.eclipse.ocl.examples.pivot.Package.class, umlPackage);
+		doSwitchAll(org.eclipse.ocl.examples.pivot.Package.class, pivotElement.getImportedPackage(), umlPackage.getImportedPackages());
 		return null;
 	}
 

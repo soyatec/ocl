@@ -1597,10 +1597,6 @@ public class PivotTables
 		public static final ExecutorOperation _TemplateableElement__parameterableElements = new ExecutorOperation("parameterableElements",
 			Types._TemplateableElement, 1, null);
 	
-		public static final ExecutorOperation _Type__resolveSelfType = new ExecutorOperation("resolveSelfType",
-			Types._Type, 0, org.eclipse.ocl.examples.pivot.bodies.TypeBodies._resolveSelfType_body_.INSTANCE,
-				PivotTables.Types._Type);
-	
 		public static final ExecutorOperation _TypedMultiplicityElement__CompatibleBody = new ExecutorOperation("CompatibleBody",
 			Types._TypedMultiplicityElement, 0, org.eclipse.ocl.examples.pivot.bodies.TypedMultiplicityElementBodies._CompatibleBody_body_.INSTANCE,
 				PivotTables.Types._ValueSpecification);
@@ -1781,12 +1777,13 @@ public class PivotTables
 		public static final ExecutorProperty _OperationCallExp__argument = new ExecutorProperty("argument", Types._OperationCallExp, 0, new EcoreLibraryProperty(PivotPackage.Literals.OPERATION_CALL_EXP__ARGUMENT));
 		public static final ExecutorProperty _OperationCallExp__referredOperation = new ExecutorProperty("referredOperation", Types._OperationCallExp, 1, new EcoreLibraryProperty(PivotPackage.Literals.OPERATION_CALL_EXP__REFERRED_OPERATION));
 	
-		public static final ExecutorProperty _Package__nestedPackage = new ExecutorProperty("nestedPackage", Types._Package, 0, new EcoreLibraryProperty(PivotPackage.Literals.PACKAGE__NESTED_PACKAGE));
-		public static final ExecutorProperty _Package__nestingPackage = new ExecutorProperty("nestingPackage", Types._Package, 1, new EcoreLibraryProperty(PivotPackage.Literals.PACKAGE__NESTING_PACKAGE));
-		public static final ExecutorProperty _Package__nsPrefix = new ExecutorProperty("nsPrefix", Types._Package, 2, new EcoreLibraryProperty(PivotPackage.Literals.PACKAGE__NS_PREFIX));
-		public static final ExecutorProperty _Package__nsURI = new ExecutorProperty("nsURI", Types._Package, 3, new EcoreLibraryProperty(PivotPackage.Literals.PACKAGE__NS_URI));
-		public static final ExecutorProperty _Package__ownedPrecedence = new ExecutorProperty("ownedPrecedence", Types._Package, 4, new EcoreLibraryProperty(PivotPackage.Literals.PACKAGE__OWNED_PRECEDENCE));
-		public static final ExecutorProperty _Package__ownedType = new ExecutorProperty("ownedType", Types._Package, 5, new EcoreLibraryProperty(PivotPackage.Literals.PACKAGE__OWNED_TYPE));
+		public static final ExecutorProperty _Package__importedPackage = new ExecutorProperty("importedPackage", Types._Package, 0, new EcoreLibraryProperty(PivotPackage.Literals.PACKAGE__IMPORTED_PACKAGE));
+		public static final ExecutorProperty _Package__nestedPackage = new ExecutorProperty("nestedPackage", Types._Package, 1, new EcoreLibraryProperty(PivotPackage.Literals.PACKAGE__NESTED_PACKAGE));
+		public static final ExecutorProperty _Package__nestingPackage = new ExecutorProperty("nestingPackage", Types._Package, 2, new EcoreLibraryProperty(PivotPackage.Literals.PACKAGE__NESTING_PACKAGE));
+		public static final ExecutorProperty _Package__nsPrefix = new ExecutorProperty("nsPrefix", Types._Package, 3, new EcoreLibraryProperty(PivotPackage.Literals.PACKAGE__NS_PREFIX));
+		public static final ExecutorProperty _Package__nsURI = new ExecutorProperty("nsURI", Types._Package, 4, new EcoreLibraryProperty(PivotPackage.Literals.PACKAGE__NS_URI));
+		public static final ExecutorProperty _Package__ownedPrecedence = new ExecutorProperty("ownedPrecedence", Types._Package, 5, new EcoreLibraryProperty(PivotPackage.Literals.PACKAGE__OWNED_PRECEDENCE));
+		public static final ExecutorProperty _Package__ownedType = new ExecutorProperty("ownedType", Types._Package, 6, new EcoreLibraryProperty(PivotPackage.Literals.PACKAGE__OWNED_TYPE));
 	
 		public static final ExecutorProperty _Parameter__Variable = new ExecutorProperty("Variable", Types._Parameter, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.VARIABLE__REPRESENTED_PARAMETER));
 		public static final ExecutorProperty _Parameter__operation = new ExecutorProperty("operation", Types._Parameter, 1, new EcoreLibraryProperty(PivotPackage.Literals.PARAMETER__OPERATION));
@@ -3542,9 +3539,7 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _AnyType__Type = {
-		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
-		};
+		private static final ExecutorOperation[] _AnyType__Type = {};
 		private static final ExecutorOperation[] _AnyType__Visitable = {};
 	
 		private static final ExecutorOperation[] _AssociationClass__AssociationClass = {};
@@ -3582,9 +3577,7 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _AssociationClass__Type = {
-		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
-		};
+		private static final ExecutorOperation[] _AssociationClass__Type = {};
 		private static final ExecutorOperation[] _AssociationClass__Visitable = {};
 	
 		private static final ExecutorOperation[] _AssociationClassCallExp__AssociationClassCallExp = {};
@@ -3658,9 +3651,7 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _BagType__Type = {
-		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
-		};
+		private static final ExecutorOperation[] _BagType__Type = {};
 		private static final ExecutorOperation[] _BagType__Visitable = {};
 	
 		private static final ExecutorOperation[] _BooleanLiteralExp__BooleanLiteralExp = {};
@@ -3784,9 +3775,7 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _Class__Type = {
-		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
-		};
+		private static final ExecutorOperation[] _Class__Type = {};
 		private static final ExecutorOperation[] _Class__Visitable = {};
 	
 		private static final ExecutorOperation[] _ClassifierType__ClassifierType = {};
@@ -3824,9 +3813,7 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _ClassifierType__Type = {
-		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
-		};
+		private static final ExecutorOperation[] _ClassifierType__Type = {};
 		private static final ExecutorOperation[] _ClassifierType__Visitable = {};
 	
 		private static final ExecutorOperation[] _CollectionItem__CollectionItem = {};
@@ -3983,9 +3970,7 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _CollectionType__Type = {
-		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
-		};
+		private static final ExecutorOperation[] _CollectionType__Type = {};
 		private static final ExecutorOperation[] _CollectionType__Visitable = {};
 	
 		private static final ExecutorOperation[] _Comment__Comment = {};
@@ -4129,9 +4114,7 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _DataType__Type = {
-		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
-		};
+		private static final ExecutorOperation[] _DataType__Type = {};
 		private static final ExecutorOperation[] _DataType__Visitable = {};
 	
 		private static final ExecutorOperation[] _Detail__Detail = {};
@@ -4251,9 +4234,7 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _Enumeration__Type = {
-		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
-		};
+		private static final ExecutorOperation[] _Enumeration__Type = {};
 		private static final ExecutorOperation[] _Enumeration__Visitable = {};
 	
 		private static final ExecutorOperation[] _EnumerationLiteral__EnumerationLiteral = {};
@@ -4519,9 +4500,7 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _InvalidType__Type = {
-		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
-		};
+		private static final ExecutorOperation[] _InvalidType__Type = {};
 		private static final ExecutorOperation[] _InvalidType__Visitable = {};
 	
 		private static final ExecutorOperation[] _IterateExp__IterateExp = {};
@@ -4672,9 +4651,7 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _LambdaType__Type = {
-		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
-		};
+		private static final ExecutorOperation[] _LambdaType__Type = {};
 		private static final ExecutorOperation[] _LambdaType__Visitable = {};
 	
 		private static final ExecutorOperation[] _LetExp__LetExp = {};
@@ -4863,9 +4840,7 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _MessageType__Type = {
-		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
-		};
+		private static final ExecutorOperation[] _MessageType__Type = {};
 		private static final ExecutorOperation[] _MessageType__Visitable = {};
 	
 		private static final ExecutorOperation[] _Model__Model = {};
@@ -5333,9 +5308,7 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _OrderedSetType__Type = {
-		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
-		};
+		private static final ExecutorOperation[] _OrderedSetType__Type = {};
 		private static final ExecutorOperation[] _OrderedSetType__Visitable = {};
 	
 		private static final ExecutorOperation[] _Package__Package = {};
@@ -5581,9 +5554,7 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _PrimitiveType__Type = {
-		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
-		};
+		private static final ExecutorOperation[] _PrimitiveType__Type = {};
 		private static final ExecutorOperation[] _PrimitiveType__Visitable = {};
 	
 		private static final ExecutorOperation[] _Property__Property = {
@@ -5733,9 +5704,7 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _SelfType__Type = {
-		    PivotTables.Operations._SelfType__resolveSelfType /* resolveSelfType(Type) */
-		};
+		private static final ExecutorOperation[] _SelfType__Type = {};
 		private static final ExecutorOperation[] _SelfType__Visitable = {};
 	
 		private static final ExecutorOperation[] _SendSignalAction__SendSignalAction = {};
@@ -5802,9 +5771,7 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _SequenceType__Type = {
-		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
-		};
+		private static final ExecutorOperation[] _SequenceType__Type = {};
 		private static final ExecutorOperation[] _SequenceType__Visitable = {};
 	
 		private static final ExecutorOperation[] _SetType__SetType = {};
@@ -5844,9 +5811,7 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _SetType__Type = {
-		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
-		};
+		private static final ExecutorOperation[] _SetType__Type = {};
 		private static final ExecutorOperation[] _SetType__Visitable = {};
 	
 		private static final ExecutorOperation[] _Signal__Signal = {};
@@ -6071,9 +6036,7 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _TemplateParameterType__Type = {
-		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
-		};
+		private static final ExecutorOperation[] _TemplateParameterType__Type = {};
 		private static final ExecutorOperation[] _TemplateParameterType__Visitable = {};
 	
 		private static final ExecutorOperation[] _TemplateSignature__TemplateSignature = {};
@@ -6226,14 +6189,10 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _TupleType__Type = {
-		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
-		};
+		private static final ExecutorOperation[] _TupleType__Type = {};
 		private static final ExecutorOperation[] _TupleType__Visitable = {};
 	
-		private static final ExecutorOperation[] _Type__Type = {
-		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
-		};
+		private static final ExecutorOperation[] _Type__Type = {};
 		private static final ExecutorOperation[] _Type__Element = {
 		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
 		};
@@ -6455,9 +6414,7 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _UnspecifiedType__Type = {
-		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
-		};
+		private static final ExecutorOperation[] _UnspecifiedType__Type = {};
 		private static final ExecutorOperation[] _UnspecifiedType__Visitable = {};
 	
 		private static final ExecutorOperation[] _UnspecifiedValueExp__UnspecifiedValueExp = {};
@@ -6691,9 +6648,7 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _VoidType__Type = {
-		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
-		};
+		private static final ExecutorOperation[] _VoidType__Type = {};
 		private static final ExecutorOperation[] _VoidType__Visitable = {};
 	
 		/*
@@ -8562,6 +8517,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _Library = {
 		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
+		    PivotTables.Properties._Package__importedPackage,
 		    PivotTables.Properties._NamedElement__isStatic,
 		    PivotTables.Properties._NamedElement__name,
 		    PivotTables.Properties._Package__nestedPackage,
@@ -8681,6 +8637,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _Model = {
 		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
+		    PivotTables.Properties._Package__importedPackage,
 		    PivotTables.Properties._NamedElement__isStatic,
 		    PivotTables.Properties._NamedElement__name,
 		    PivotTables.Properties._Package__nestedPackage,
@@ -8938,6 +8895,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _Package = {
 		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
+		    PivotTables.Properties._Package__importedPackage,
 		    PivotTables.Properties._NamedElement__isStatic,
 		    PivotTables.Properties._NamedElement__name,
 		    PivotTables.Properties._Package__nestedPackage,

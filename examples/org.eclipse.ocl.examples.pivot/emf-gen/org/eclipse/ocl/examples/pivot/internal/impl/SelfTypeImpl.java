@@ -122,8 +122,6 @@ public class SelfTypeImpl extends ClassImpl implements SelfType
 				return isCompatibleWith((ParameterableElement)arguments.get(0));
 			case PivotPackage.SELF_TYPE___RESOLVE_SELF_TYPE__TYPE:
 				return resolveSelfType((Type)arguments.get(0));
-			case PivotPackage.SELF_TYPE___RESOLVE_SELF_TYPE__TYPE_1:
-				return resolveSelfType((Type)arguments.get(0));
 		}
 		return eDynamicInvoke(operationID, arguments);
 	}
