@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.resource.impl.*
 var xmiSlot = "xmi"
 var pivotSlot = "pivot"
 var oclSlot = "ocl"
-var umlFolder = "/UML-2.5/XMI-1-Jun-2012"
+var umlFolder = "/UML-2.5/XMI-12-Jun-2012"
  
 /**
  *	Generate the Pivot Model, by performing the merge to create the flattened package
