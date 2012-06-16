@@ -54,6 +54,7 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
+import org.eclipse.uml2.uml.ParameterDirectionKind;
 import org.eclipse.uml2.uml.util.UMLSwitch;
 
 public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
@@ -278,7 +279,15 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		copyNamedElement(pivotElement, umlOperation);
 		copyConstraints(pivotElement, umlOperation);
 //		converter.copyMultiplicityElement(pivotElement, umlOperation);
-		doSwitchAll(pivotElement.getOwnedParameter(), umlOperation.getOwnedParameters(), null);
+		for (org.eclipse.uml2.uml.Parameter umlParameter : umlOperation.getOwnedParameters()) {
+			ParameterDirectionKind direction = umlParameter.getDirection();
+			if (direction == ParameterDirectionKind.IN_LITERAL) {
+				Parameter pivotObject = (Parameter) doSwitch(umlParameter);
+				if (pivotObject != null) {
+					pivotElement.getOwnedParameter().add(pivotObject);
+				}
+			}
+		}
 		copyTemplateSignature(pivotElement, umlOperation.getOwnedTemplateSignature());
 //		doSwitchAll(umlOperation.getEGenericExceptions());
 		converter.queueReference(umlOperation);				// For exceptions
@@ -306,7 +315,9 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 				return !(element instanceof org.eclipse.uml2.uml.Association);
 			}
 		});
-		if (!umlPackage.getImportedPackages().isEmpty()) {
+		List<org.eclipse.uml2.uml.Package> importedPackages = umlPackage.getImportedPackages();
+		if (!importedPackages.isEmpty()) {
+			converter.addImportedPackages(importedPackages);
 			converter.queueReference(umlPackage);	// Defer
 		}
 		else {
@@ -325,8 +336,30 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 
 	@Override
 	public PrimitiveType casePrimitiveType(org.eclipse.uml2.uml.PrimitiveType umlPrimitiveType) {
-		PrimitiveType pivotElement = converter.refreshNamedElement(PrimitiveType.class, PivotPackage.Literals.PRIMITIVE_TYPE, umlPrimitiveType);
-		copyClassifier(pivotElement, umlPrimitiveType);
+		PrimitiveType pivotElement = null;
+		String name = umlPrimitiveType.getName();
+		if ("Boolean".equals(name)) {
+			pivotElement = converter.getMetaModelManager().getBooleanType();
+		}
+		else if ("Integer".equals(name)) {
+			pivotElement = converter.getMetaModelManager().getIntegerType();
+		}
+		else if ("Real".equals(name)) {
+			pivotElement = converter.getMetaModelManager().getRealType();
+		}
+		else if ("String".equals(name)) {
+			pivotElement = converter.getMetaModelManager().getStringType();
+		}
+		else if ("UnlimitedNatural".equals(name)) {
+			pivotElement = converter.getMetaModelManager().getUnlimitedNaturalType();
+		}
+		if (pivotElement != null) {
+			converter.addCreated(umlPrimitiveType, pivotElement);
+		}
+		else {
+			pivotElement = converter.refreshNamedElement(PrimitiveType.class, PivotPackage.Literals.PRIMITIVE_TYPE, umlPrimitiveType);
+			copyClassifier(pivotElement, umlPrimitiveType);
+		}
 		return pivotElement;
 	}
 

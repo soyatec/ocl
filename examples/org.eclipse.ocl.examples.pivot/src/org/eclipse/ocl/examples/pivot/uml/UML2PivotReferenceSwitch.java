@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
+import org.eclipse.uml2.uml.ParameterDirectionKind;
 import org.eclipse.uml2.uml.util.UMLSwitch;
 
 public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
@@ -73,6 +74,12 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 	public org.eclipse.ocl.examples.pivot.Class caseClass(org.eclipse.uml2.uml.Class umlClass) {
 		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.getCreated(org.eclipse.ocl.examples.pivot.Class.class, umlClass);
 		doSwitchAll(Type.class, pivotElement.getSuperClass(), umlClass.getSuperClasses());
+		if (pivotElement.getSuperClass().isEmpty()) {
+			org.eclipse.ocl.examples.pivot.Class oclElementType = converter.getMetaModelManager().getOclElementType();
+			if (oclElementType != null) {
+				pivotElement.getSuperClass().add(oclElementType);
+			}
+		}
 		return null;
 	}
 
@@ -87,6 +94,16 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 	public Operation caseOperation(org.eclipse.uml2.uml.Operation umlOperation) {
 		Operation pivotElement = converter.getCreated(Operation.class, umlOperation);
 		doSwitchAll(Type.class, pivotElement.getRaisedException(), umlOperation.getRaisedExceptions());
+		for (org.eclipse.uml2.uml.Parameter umlParameter : umlOperation.getOwnedParameters()) {
+			ParameterDirectionKind direction = umlParameter.getDirection();
+			if (direction == ParameterDirectionKind.RETURN_LITERAL) {
+				org.eclipse.uml2.uml.Type umlType = umlParameter.getType();
+				if (umlType != null) {
+					Type pivotType = converter.resolveType(umlType);
+					pivotElement.setType(pivotType);
+				}
+			}
+		}
 		return null;
 	}
 
