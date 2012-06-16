@@ -550,7 +550,12 @@ public class OCL {
 		    if (expression != null) {
 		    	NamedElement contextElement = constraint.getContext();
 				OCLHelper helper = createOCLHelper(contextElement);
-				expressionInOCL = helper.createQuery(expression);
+				if (contextElement instanceof Operation) {
+					expressionInOCL = helper.createBodyCondition(expression);
+				}
+				else {
+					expressionInOCL = helper.createQuery(expression);
+				}
 		    }
 		}
 		return expressionInOCL;
