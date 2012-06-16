@@ -45,6 +45,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIException;
 import org.eclipse.ocl.common.OCLCommon;
 import org.eclipse.ocl.examples.pivot.Annotation;
@@ -265,6 +266,7 @@ public class UML2Pivot extends AbstractConversion implements External2Pivot, Piv
 	protected org.eclipse.ocl.examples.pivot.Package pivotRoot = null;	// Set by importResource
 	protected final UML2PivotDeclarationSwitch declarationPass = new UML2PivotDeclarationSwitch(this);	
 	protected final UML2PivotReferenceSwitch referencePass = new UML2PivotReferenceSwitch(this);
+	private Set<Resource> importedResources = null;
 	
 	public UML2Pivot(Resource umlResource, MetaModelManager metaModelManager) {
 		super(metaModelManager);
@@ -275,6 +277,22 @@ public class UML2Pivot extends AbstractConversion implements External2Pivot, Piv
 	
 	public void addCreated(EModelElement umlElement, Element pivotElement) {
 		createMap.put(umlElement, pivotElement);
+	}
+
+	public void addImportedPackages(List<org.eclipse.uml2.uml.Package> importedPackages) {
+		for (org.eclipse.uml2.uml.Package importedPackage : importedPackages) {
+			EObject rootContainer = EcoreUtil.getRootContainer(importedPackage);
+			Resource importedResource = rootContainer.eResource();
+			if ((importedResource != null) && (importedResource != umlResource)) {
+//				UML2Pivot adapter = UML2Pivot.findAdapter(importedResource, metaModelManager);
+//				if (adapter == null) {
+					if (importedResources == null) {
+						importedResources = new HashSet<Resource>();
+					}
+					importedResources.add(importedResource);
+//				}
+			}
+		}
 	}
 
 	protected void copyAnnotatedElement(NamedElement pivotElement,
@@ -500,6 +518,15 @@ public class UML2Pivot extends AbstractConversion implements External2Pivot, Piv
 //					metaModelManager.addOrphanType((Type)pivotElement);
 //				}
 //			}
+			if (importedResources != null) {
+				for (Resource importedResource : importedResources) {
+					UML2Pivot adapter = UML2Pivot.getAdapter(importedResource, metaModelManager);
+					adapter.getPivotRoot();
+					for (Map.Entry<EModelElement, Element> entry : adapter.createMap.entrySet()) {
+						addCreated(entry.getKey(), entry.getValue());
+					}
+				}
+			}
 			for (EObject eObject : referencers) {
 				referencePass.doInPackageSwitch(eObject);
 			}
