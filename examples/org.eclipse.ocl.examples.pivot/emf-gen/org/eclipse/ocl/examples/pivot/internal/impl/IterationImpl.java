@@ -30,6 +30,7 @@ import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Iteration;
+import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Precedence;
@@ -240,6 +241,8 @@ public class IterationImpl extends OperationImpl implements Iteration
 			case PivotPackage.ITERATION__PRECEDENCE:
 				if (resolve) return getPrecedence();
 				return basicGetPrecedence();
+			case PivotPackage.ITERATION__REDEFINED_OPERATION:
+				return getRedefinedOperation();
 			case PivotPackage.ITERATION__CLASS:
 				if (resolve) return getClass_();
 				return basicGetClass_();
@@ -331,6 +334,10 @@ public class IterationImpl extends OperationImpl implements Iteration
 			case PivotPackage.ITERATION__PRECEDENCE:
 				setPrecedence((Precedence)newValue);
 				return;
+			case PivotPackage.ITERATION__REDEFINED_OPERATION:
+				getRedefinedOperation().clear();
+				getRedefinedOperation().addAll((Collection<? extends Operation>)newValue);
+				return;
 			case PivotPackage.ITERATION__OWNED_ITERATOR:
 				getOwnedIterator().clear();
 				getOwnedIterator().addAll((Collection<? extends Parameter>)newValue);
@@ -416,6 +423,9 @@ public class IterationImpl extends OperationImpl implements Iteration
 			case PivotPackage.ITERATION__PRECEDENCE:
 				setPrecedence((Precedence)null);
 				return;
+			case PivotPackage.ITERATION__REDEFINED_OPERATION:
+				getRedefinedOperation().clear();
+				return;
 			case PivotPackage.ITERATION__OWNED_ITERATOR:
 				getOwnedIterator().clear();
 				return;
@@ -478,6 +488,8 @@ public class IterationImpl extends OperationImpl implements Iteration
 				return getOwningType() != null;
 			case PivotPackage.ITERATION__PRECEDENCE:
 				return precedence != null;
+			case PivotPackage.ITERATION__REDEFINED_OPERATION:
+				return redefinedOperation != null && !redefinedOperation.isEmpty();
 			case PivotPackage.ITERATION__CLASS:
 				return basicGetClass_() != null;
 			case PivotPackage.ITERATION__OWNED_ITERATOR:

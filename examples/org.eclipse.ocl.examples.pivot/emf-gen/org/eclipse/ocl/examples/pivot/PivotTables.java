@@ -1767,12 +1767,14 @@ public class PivotTables
 	
 		public static final ExecutorProperty _Operation__CallOperationAction = new ExecutorProperty("CallOperationAction", Types._Operation, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.CALL_OPERATION_ACTION__OPERATION));
 		public static final ExecutorProperty _Operation__MessageType = new ExecutorProperty("MessageType", Types._Operation, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.MESSAGE_TYPE__REFERRED_OPERATION));
-		public static final ExecutorProperty _Operation__OperationCallExp = new ExecutorProperty("OperationCallExp", Types._Operation, 2, new EcoreLibraryOppositeProperty(PivotPackage.Literals.OPERATION_CALL_EXP__REFERRED_OPERATION));
-		public static final ExecutorProperty _Operation__class = new ExecutorProperty("class", Types._Operation, 3, new EcoreLibraryProperty(PivotPackage.Literals.OPERATION__CLASS));
-		public static final ExecutorProperty _Operation__ownedParameter = new ExecutorProperty("ownedParameter", Types._Operation, 4, new EcoreLibraryProperty(PivotPackage.Literals.OPERATION__OWNED_PARAMETER));
-		public static final ExecutorProperty _Operation__owningType = new ExecutorProperty("owningType", Types._Operation, 5, new EcoreLibraryProperty(PivotPackage.Literals.OPERATION__OWNING_TYPE));
-		public static final ExecutorProperty _Operation__precedence = new ExecutorProperty("precedence", Types._Operation, 6, new EcoreLibraryProperty(PivotPackage.Literals.OPERATION__PRECEDENCE));
-		public static final ExecutorProperty _Operation__raisedException = new ExecutorProperty("raisedException", Types._Operation, 7, new EcoreLibraryProperty(PivotPackage.Literals.OPERATION__RAISED_EXCEPTION));
+		public static final ExecutorProperty _Operation__Operation = new ExecutorProperty("Operation", Types._Operation, 2, new EcoreLibraryOppositeProperty(PivotPackage.Literals.OPERATION__REDEFINED_OPERATION));
+		public static final ExecutorProperty _Operation__OperationCallExp = new ExecutorProperty("OperationCallExp", Types._Operation, 3, new EcoreLibraryOppositeProperty(PivotPackage.Literals.OPERATION_CALL_EXP__REFERRED_OPERATION));
+		public static final ExecutorProperty _Operation__class = new ExecutorProperty("class", Types._Operation, 4, new EcoreLibraryProperty(PivotPackage.Literals.OPERATION__CLASS));
+		public static final ExecutorProperty _Operation__ownedParameter = new ExecutorProperty("ownedParameter", Types._Operation, 5, new EcoreLibraryProperty(PivotPackage.Literals.OPERATION__OWNED_PARAMETER));
+		public static final ExecutorProperty _Operation__owningType = new ExecutorProperty("owningType", Types._Operation, 6, new EcoreLibraryProperty(PivotPackage.Literals.OPERATION__OWNING_TYPE));
+		public static final ExecutorProperty _Operation__precedence = new ExecutorProperty("precedence", Types._Operation, 7, new EcoreLibraryProperty(PivotPackage.Literals.OPERATION__PRECEDENCE));
+		public static final ExecutorProperty _Operation__raisedException = new ExecutorProperty("raisedException", Types._Operation, 8, new EcoreLibraryProperty(PivotPackage.Literals.OPERATION__RAISED_EXCEPTION));
+		public static final ExecutorProperty _Operation__redefinedOperation = new ExecutorProperty("redefinedOperation", Types._Operation, 9, new EcoreLibraryProperty(PivotPackage.Literals.OPERATION__REDEFINED_OPERATION));
 	
 		public static final ExecutorProperty _OperationCallExp__argument = new ExecutorProperty("argument", Types._OperationCallExp, 0, new EcoreLibraryProperty(PivotPackage.Literals.OPERATION_CALL_EXP__ARGUMENT));
 		public static final ExecutorProperty _OperationCallExp__referredOperation = new ExecutorProperty("referredOperation", Types._OperationCallExp, 1, new EcoreLibraryProperty(PivotPackage.Literals.OPERATION_CALL_EXP__REFERRED_OPERATION));
@@ -1814,6 +1816,8 @@ public class PivotTables
 		public static final ExecutorProperty _Property__keys = new ExecutorProperty("keys", Types._Property, 15, new EcoreLibraryProperty(PivotPackage.Literals.PROPERTY__KEYS));
 		public static final ExecutorProperty _Property__opposite = new ExecutorProperty("opposite", Types._Property, 16, new EcoreLibraryProperty(PivotPackage.Literals.PROPERTY__OPPOSITE));
 		public static final ExecutorProperty _Property__owningType = new ExecutorProperty("owningType", Types._Property, 17, new EcoreLibraryProperty(PivotPackage.Literals.PROPERTY__OWNING_TYPE));
+		public static final ExecutorProperty _Property__redefinedProperty = new ExecutorProperty("redefinedProperty", Types._Property, 18, new EcoreLibraryProperty(PivotPackage.Literals.PROPERTY__REDEFINED_PROPERTY));
+		public static final ExecutorProperty _Property__subsettedProperty = new ExecutorProperty("subsettedProperty", Types._Property, 19, new EcoreLibraryProperty(PivotPackage.Literals.PROPERTY__SUBSETTED_PROPERTY));
 	
 		public static final ExecutorProperty _PropertyCallExp__referredProperty = new ExecutorProperty("referredProperty", Types._PropertyCallExp, 0, new EcoreLibraryProperty(PivotPackage.Literals.PROPERTY_CALL_EXP__REFERRED_PROPERTY));
 	
@@ -8406,6 +8410,7 @@ public class PivotTables
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Iteration__LoopExp,
 		    PivotTables.Properties._Operation__MessageType,
+		    PivotTables.Properties._Operation__Operation,
 		    PivotTables.Properties._Operation__OperationCallExp,
 		    PivotTables.Properties._Operation__class,
 		    PivotTables.Properties._Feature__implementation,
@@ -8426,6 +8431,7 @@ public class PivotTables
 		    PivotTables.Properties._Operation__owningType,
 		    PivotTables.Properties._Operation__precedence,
 		    PivotTables.Properties._Operation__raisedException,
+		    PivotTables.Properties._Operation__redefinedOperation,
 		    PivotTables.Properties._TemplateableElement__templateBinding,
 		    PivotTables.Properties._ParameterableElement__templateParameter,
 		    PivotTables.Properties._TypedElement__type,
@@ -8798,6 +8804,7 @@ public class PivotTables
 		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Operation__MessageType,
+		    PivotTables.Properties._Operation__Operation,
 		    PivotTables.Properties._Operation__OperationCallExp,
 		    PivotTables.Properties._Operation__class,
 		    PivotTables.Properties._Feature__implementation,
@@ -8816,6 +8823,7 @@ public class PivotTables
 		    PivotTables.Properties._Operation__owningType,
 		    PivotTables.Properties._Operation__precedence,
 		    PivotTables.Properties._Operation__raisedException,
+		    PivotTables.Properties._Operation__redefinedOperation,
 		    PivotTables.Properties._TemplateableElement__templateBinding,
 		    PivotTables.Properties._ParameterableElement__templateParameter,
 		    PivotTables.Properties._TypedElement__type,
@@ -9045,6 +9053,8 @@ public class PivotTables
 		    PivotTables.Properties._NamedElement__ownedRule,
 		    PivotTables.Properties._ParameterableElement__owningTemplateParameter,
 		    PivotTables.Properties._Property__owningType,
+		    PivotTables.Properties._Property__redefinedProperty,
+		    PivotTables.Properties._Property__subsettedProperty,
 		    PivotTables.Properties._ParameterableElement__templateParameter,
 		    PivotTables.Properties._TypedElement__type,
 		    PivotTables.Properties._MultiplicityElement__upper

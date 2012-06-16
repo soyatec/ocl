@@ -1213,6 +1213,8 @@
         eType="#//Type" eOpposite="#//Type/ownedOperation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="precedence" ordered="false"
         eType="#//Precedence"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="redefinedOperation" ordered="false"
+        upperBound="-1" eType="#//Operation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="class" ordered="false"
         eType="#//Class" changeable="false" volatile="true" transient="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1423,6 +1425,10 @@
         lowerBound="1" eType="#//Boolean" defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isVolatile" ordered="false"
         lowerBound="1" eType="#//Boolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="redefinedProperty" ordered="false"
+        upperBound="-1" eType="#//Property"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subsettedProperty" ordered="false"
+        upperBound="-1" eType="#//Property"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningType" ordered="false"
         eType="#//Type" eOpposite="#//Type/ownedAttribute"/>
   </eClassifiers>

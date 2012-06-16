@@ -958,22 +958,22 @@ other classifiers.</body>
               <ownedParameter xmi:type="cmof:Parameter" xmi:id="Core-Abstractions-Visibilities-VisibilityKind-bestVisibility-_ownedParameter.0" type="Core-Abstractions-Visibilities-VisibilityKind" direction="return"/>
               <ownedParameter xmi:type="cmof:Parameter" xmi:id="Core-Abstractions-Visibilities-VisibilityKind-bestVisibility-vis" name="vis" type="Core-Abstractions-Visibilities-VisibilityKind" lower="0" upper="*"/>
             </ownedOperation>
-            <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Abstractions-Visibilities-VisibilityKind-public" name="public" classifier="#Core-Abstractions-Visibilities-VisibilityKind" enumeration="Core-Abstractions-Visibilities-VisibilityKind">
+            <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Abstractions-Visibilities-VisibilityKind-public" name="public" enumeration="Core-Abstractions-Visibilities-VisibilityKind">
               <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Abstractions-Visibilities-VisibilityKind-public-_ownedComment.0" annotatedElement="Core-Abstractions-Visibilities-VisibilityKind-public">
                 <body>A public element is visible to all elements that can access the contents of the namespace that owns it.</body>
               </ownedComment>
             </ownedLiteral>
-            <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Abstractions-Visibilities-VisibilityKind-private" name="private" classifier="#Core-Abstractions-Visibilities-VisibilityKind" enumeration="Core-Abstractions-Visibilities-VisibilityKind">
+            <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Abstractions-Visibilities-VisibilityKind-private" name="private" enumeration="Core-Abstractions-Visibilities-VisibilityKind">
               <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Abstractions-Visibilities-VisibilityKind-private-_ownedComment.0" annotatedElement="Core-Abstractions-Visibilities-VisibilityKind-private">
                 <body>A private element is only visible inside the namespace that owns it.</body>
               </ownedComment>
             </ownedLiteral>
-            <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Abstractions-Visibilities-VisibilityKind-protected" name="protected" classifier="#Core-Abstractions-Visibilities-VisibilityKind" enumeration="Core-Abstractions-Visibilities-VisibilityKind">
+            <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Abstractions-Visibilities-VisibilityKind-protected" name="protected" enumeration="Core-Abstractions-Visibilities-VisibilityKind">
               <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Abstractions-Visibilities-VisibilityKind-protected-_ownedComment.0" annotatedElement="Core-Abstractions-Visibilities-VisibilityKind-protected">
                 <body>A protected element is visible to elements that have a generalization relationship to the namespace that owns it.</body>
               </ownedComment>
             </ownedLiteral>
-            <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Abstractions-Visibilities-VisibilityKind-package" name="package" classifier="#Core-Abstractions-Visibilities-VisibilityKind" enumeration="Core-Abstractions-Visibilities-VisibilityKind">
+            <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Abstractions-Visibilities-VisibilityKind-package" name="package" enumeration="Core-Abstractions-Visibilities-VisibilityKind">
               <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Abstractions-Visibilities-VisibilityKind-package-_ownedComment.0" annotatedElement="Core-Abstractions-Visibilities-VisibilityKind-package">
                 <body>A package element is owned by a namespace that is not a package, and is visible to elements that are in the same package as its owning namespace. Only named elements that are not owned by packages can be marked as having package visibility.  Any element marked as having package visibility is visible to all elements within the nearest enclosing package (given that other owning elements have proper visibility).  Outside the nearest enclosing package, an element marked as having package visibility is not visible.</body>
               </ownedComment>
@@ -3570,22 +3570,22 @@ endif</body>
           <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-ParameterDirectionKind-_ownedComment.0" annotatedElement="Core-Constructs-ParameterDirectionKind">
             <body>Parameter direction kind is an enumeration type that defines literals used to specify direction of parameters.</body>
           </ownedComment>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Constructs-ParameterDirectionKind-in" name="in" classifier="#Core-Constructs-ParameterDirectionKind" enumeration="Core-Constructs-ParameterDirectionKind">
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Constructs-ParameterDirectionKind-in" name="in" enumeration="Core-Constructs-ParameterDirectionKind">
             <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-ParameterDirectionKind-in-_ownedComment.0" annotatedElement="Core-Constructs-ParameterDirectionKind-in">
               <body>Indicates that parameter values are passed into the behavioral element by the caller.</body>
             </ownedComment>
           </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Constructs-ParameterDirectionKind-inout" name="inout" classifier="#Core-Constructs-ParameterDirectionKind" enumeration="Core-Constructs-ParameterDirectionKind">
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Constructs-ParameterDirectionKind-inout" name="inout" enumeration="Core-Constructs-ParameterDirectionKind">
             <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-ParameterDirectionKind-inout-_ownedComment.0" annotatedElement="Core-Constructs-ParameterDirectionKind-inout">
               <body>Indicates that parameter values are passed into a behavioral element by the caller and then back out to the caller from the behavioral element.</body>
             </ownedComment>
           </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Constructs-ParameterDirectionKind-out" name="out" classifier="#Core-Constructs-ParameterDirectionKind" enumeration="Core-Constructs-ParameterDirectionKind">
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Constructs-ParameterDirectionKind-out" name="out" enumeration="Core-Constructs-ParameterDirectionKind">
             <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-ParameterDirectionKind-out-_ownedComment.0" annotatedElement="Core-Constructs-ParameterDirectionKind-out">
               <body>Indicates that parameter values are passed from a behavioral element out to the caller.</body>
             </ownedComment>
           </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Constructs-ParameterDirectionKind-return" name="return" classifier="#Core-Constructs-ParameterDirectionKind" enumeration="Core-Constructs-ParameterDirectionKind">
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Constructs-ParameterDirectionKind-return" name="return" enumeration="Core-Constructs-ParameterDirectionKind">
             <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-ParameterDirectionKind-return-_ownedComment.0" annotatedElement="Core-Constructs-ParameterDirectionKind-return">
               <body>Indicates that parameter values are passed as return values from a behavioral element back to the caller.</body>
             </ownedComment>
@@ -3608,22 +3608,22 @@ endif</body>
             <ownedParameter xmi:type="cmof:Parameter" xmi:id="Core-Constructs-VisibilityKind-bestVisibility-_ownedParameter.0" type="Core-Constructs-VisibilityKind" direction="return"/>
             <ownedParameter xmi:type="cmof:Parameter" xmi:id="Core-Constructs-VisibilityKind-bestVisibility-vis" name="vis" type="Core-Constructs-VisibilityKind" lower="0" upper="*"/>
           </ownedOperation>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Constructs-VisibilityKind-public" name="public" classifier="#Core-Constructs-VisibilityKind" enumeration="Core-Constructs-VisibilityKind">
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Constructs-VisibilityKind-public" name="public" enumeration="Core-Constructs-VisibilityKind">
             <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-VisibilityKind-public-_ownedComment.0" annotatedElement="Core-Constructs-VisibilityKind-public">
               <body>A public element is visible to all elements that can access the contents of the namespace that owns it.</body>
             </ownedComment>
           </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Constructs-VisibilityKind-private" name="private" classifier="#Core-Constructs-VisibilityKind" enumeration="Core-Constructs-VisibilityKind">
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Constructs-VisibilityKind-private" name="private" enumeration="Core-Constructs-VisibilityKind">
             <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-VisibilityKind-private-_ownedComment.0" annotatedElement="Core-Constructs-VisibilityKind-private">
               <body>A private element is only visible inside the namespace that owns it.</body>
             </ownedComment>
           </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Constructs-VisibilityKind-protected" name="protected" classifier="#Core-Constructs-VisibilityKind" enumeration="Core-Constructs-VisibilityKind">
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Constructs-VisibilityKind-protected" name="protected" enumeration="Core-Constructs-VisibilityKind">
             <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-VisibilityKind-protected-_ownedComment.0" annotatedElement="Core-Constructs-VisibilityKind-protected">
               <body>A protected element is visible to elements that have a generalization relationship to the namespace that owns it.</body>
             </ownedComment>
           </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Constructs-VisibilityKind-package" name="package" classifier="#Core-Constructs-VisibilityKind" enumeration="Core-Constructs-VisibilityKind">
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="Core-Constructs-VisibilityKind-package" name="package" enumeration="Core-Constructs-VisibilityKind">
             <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-VisibilityKind-package-_ownedComment.0" annotatedElement="Core-Constructs-VisibilityKind-package">
               <body>A package element is owned by a namespace that is not a package, and is visible to elements that are in the same package as its owning namespace. Only named elements that are not owned by packages can be marked as having package visibility.  Any element marked as having package visibility is visible to all elements within the nearest enclosing package (given that other owning elements have proper visibility).  Outside the nearest enclosing package, an element marked as having package visibility is not visible.</body>
             </ownedComment>

@@ -38,6 +38,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getOwnedParameter <em>Owned Parameter</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getOwningType <em>Owning Type</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getPrecedence <em>Precedence</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getRedefinedOperation <em>Redefined Operation</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getClass_ <em>Class</em>}</li>
  * </ul>
  * </p>
@@ -109,6 +110,23 @@ public interface Operation
 	 * @generated
 	 */
 	void setPrecedence(Precedence value);
+
+	/**
+	 * Returns the value of the '<em><b>Redefined Operation</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Operation}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Redefined Operation</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Redefined Operation</em>' reference list.
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation_RedefinedOperation()
+	 * @model ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Operation!redefinedOperation'"
+	 * @generated
+	 */
+	EList<Operation> getRedefinedOperation();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Parameter} and appends it to the '<em><b>Owned Parameter</b></em>' containment reference list.

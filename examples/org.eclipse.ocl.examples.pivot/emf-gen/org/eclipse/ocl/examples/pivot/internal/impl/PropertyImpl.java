@@ -92,6 +92,8 @@ import org.eclipse.osgi.util.NLS;
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isTransient <em>Is Transient</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isUnsettable <em>Is Unsettable</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isVolatile <em>Is Volatile</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getRedefinedProperty <em>Redefined Property</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getSubsettedProperty <em>Subsetted Property</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getOwningType <em>Owning Type</em>}</li>
  * </ul>
  * </p>
@@ -341,6 +343,26 @@ public class PropertyImpl
 	 * @ordered
 	 */
 	protected static final int IS_VOLATILE_EFLAG = 1 << 19;
+
+	/**
+	 * The cached value of the '{@link #getRedefinedProperty() <em>Redefined Property</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRedefinedProperty()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Property> redefinedProperty;
+
+	/**
+	 * The cached value of the '{@link #getSubsettedProperty() <em>Subsetted Property</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSubsettedProperty()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Property> subsettedProperty;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -835,6 +857,34 @@ public class PropertyImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Property> getRedefinedProperty()
+	{
+		if (redefinedProperty == null)
+		{
+			redefinedProperty = new EObjectResolvingEList<Property>(Property.class, this, PivotPackage.PROPERTY__REDEFINED_PROPERTY);
+		}
+		return redefinedProperty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Property> getSubsettedProperty()
+	{
+		if (subsettedProperty == null)
+		{
+			subsettedProperty = new EObjectResolvingEList<Property>(Property.class, this, PivotPackage.PROPERTY__SUBSETTED_PROPERTY);
+		}
+		return subsettedProperty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Type getOwningType()
 	{
 		if (eContainerFeatureID() != PivotPackage.PROPERTY__OWNING_TYPE) return null;
@@ -1168,6 +1218,10 @@ public class PropertyImpl
 				return isUnsettable();
 			case PivotPackage.PROPERTY__IS_VOLATILE:
 				return isVolatile();
+			case PivotPackage.PROPERTY__REDEFINED_PROPERTY:
+				return getRedefinedProperty();
+			case PivotPackage.PROPERTY__SUBSETTED_PROPERTY:
+				return getSubsettedProperty();
 			case PivotPackage.PROPERTY__OWNING_TYPE:
 				return getOwningType();
 		}
@@ -1269,6 +1323,14 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__IS_VOLATILE:
 				setIsVolatile((Boolean)newValue);
 				return;
+			case PivotPackage.PROPERTY__REDEFINED_PROPERTY:
+				getRedefinedProperty().clear();
+				getRedefinedProperty().addAll((Collection<? extends Property>)newValue);
+				return;
+			case PivotPackage.PROPERTY__SUBSETTED_PROPERTY:
+				getSubsettedProperty().clear();
+				getSubsettedProperty().addAll((Collection<? extends Property>)newValue);
+				return;
 			case PivotPackage.PROPERTY__OWNING_TYPE:
 				setOwningType((Type)newValue);
 				return;
@@ -1366,6 +1428,12 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__IS_VOLATILE:
 				setIsVolatile(IS_VOLATILE_EDEFAULT);
 				return;
+			case PivotPackage.PROPERTY__REDEFINED_PROPERTY:
+				getRedefinedProperty().clear();
+				return;
+			case PivotPackage.PROPERTY__SUBSETTED_PROPERTY:
+				getSubsettedProperty().clear();
+				return;
 			case PivotPackage.PROPERTY__OWNING_TYPE:
 				setOwningType((Type)null);
 				return;
@@ -1438,6 +1506,10 @@ public class PropertyImpl
 				return ((eFlags & IS_UNSETTABLE_EFLAG) != 0) != IS_UNSETTABLE_EDEFAULT;
 			case PivotPackage.PROPERTY__IS_VOLATILE:
 				return ((eFlags & IS_VOLATILE_EFLAG) != 0) != IS_VOLATILE_EDEFAULT;
+			case PivotPackage.PROPERTY__REDEFINED_PROPERTY:
+				return redefinedProperty != null && !redefinedProperty.isEmpty();
+			case PivotPackage.PROPERTY__SUBSETTED_PROPERTY:
+				return subsettedProperty != null && !subsettedProperty.isEmpty();
 			case PivotPackage.PROPERTY__OWNING_TYPE:
 				return getOwningType() != null;
 		}

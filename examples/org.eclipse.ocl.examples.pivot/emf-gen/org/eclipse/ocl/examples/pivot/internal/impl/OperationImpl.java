@@ -96,6 +96,7 @@ import org.eclipse.osgi.util.NLS;
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#getOwnedParameter <em>Owned Parameter</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#getOwningType <em>Owning Type</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#getPrecedence <em>Precedence</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#getRedefinedOperation <em>Redefined Operation</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#getClass_ <em>Class</em>}</li>
  * </ul>
  * </p>
@@ -175,6 +176,16 @@ public class OperationImpl
 	 * @ordered
 	 */
 	protected Precedence precedence;
+
+	/**
+	 * The cached value of the '{@link #getRedefinedOperation() <em>Redefined Operation</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRedefinedOperation()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Operation> redefinedOperation;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -500,6 +511,20 @@ public class OperationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Operation> getRedefinedOperation()
+	{
+		if (redefinedOperation == null)
+		{
+			redefinedOperation = new EObjectResolvingEList<Operation>(Operation.class, this, PivotPackage.OPERATION__REDEFINED_OPERATION);
+		}
+		return redefinedOperation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Parameter createOwnedParameter() {
 		Parameter newOwnedParameter = (Parameter) create(PivotPackage.Literals.PARAMETER);
 		getOwnedParameter().add(newOwnedParameter);
@@ -805,6 +830,8 @@ public class OperationImpl
 			case PivotPackage.OPERATION__PRECEDENCE:
 				if (resolve) return getPrecedence();
 				return basicGetPrecedence();
+			case PivotPackage.OPERATION__REDEFINED_OPERATION:
+				return getRedefinedOperation();
 			case PivotPackage.OPERATION__CLASS:
 				if (resolve) return getClass_();
 				return basicGetClass_();
@@ -891,6 +918,10 @@ public class OperationImpl
 			case PivotPackage.OPERATION__PRECEDENCE:
 				setPrecedence((Precedence)newValue);
 				return;
+			case PivotPackage.OPERATION__REDEFINED_OPERATION:
+				getRedefinedOperation().clear();
+				getRedefinedOperation().addAll((Collection<? extends Operation>)newValue);
+				return;
 		}
 		eDynamicSet(featureID, newValue);
 	}
@@ -967,6 +998,9 @@ public class OperationImpl
 			case PivotPackage.OPERATION__PRECEDENCE:
 				setPrecedence((Precedence)null);
 				return;
+			case PivotPackage.OPERATION__REDEFINED_OPERATION:
+				getRedefinedOperation().clear();
+				return;
 		}
 		eDynamicUnset(featureID);
 	}
@@ -1022,6 +1056,8 @@ public class OperationImpl
 				return getOwningType() != null;
 			case PivotPackage.OPERATION__PRECEDENCE:
 				return precedence != null;
+			case PivotPackage.OPERATION__REDEFINED_OPERATION:
+				return redefinedOperation != null && !redefinedOperation.isEmpty();
 			case PivotPackage.OPERATION__CLASS:
 				return basicGetClass_() != null;
 		}

@@ -150,6 +150,15 @@
         </xmi:Extension>
       </ownedMember>
     </ownedMember>
+    <ownedMember xmi:type="cmof:Package" xmi:id="_jPknALeeEeG5G_bt-fBLaA" name="MDT_OCL_Redefinitions">
+      <ownedMember xmi:type="cmof:Class" xmi:id="_nwDIkLeeEeG5G_bt-fBLaA" name="Operation">
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_rJZqALeeEeG5G_bt-fBLaA" name="redefinedOperation" type="_nwDIkLeeEeG5G_bt-fBLaA" lower="0" upper="*"/>
+      </ownedMember>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_pGewALeeEeG5G_bt-fBLaA" name="Property">
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_zU8IELeeEeG5G_bt-fBLaA" name="redefinedProperty" type="_pGewALeeEeG5G_bt-fBLaA" lower="0" upper="*"/>
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_ziCI4LeeEeG5G_bt-fBLaA" name="subsettedProperty" type="_pGewALeeEeG5G_bt-fBLaA" lower="0" upper="*"/>
+      </ownedMember>
+    </ownedMember>
     <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
       <profileApplication xmi:type="cmof:ProfileApplication" xmi:id="_0zzhIMezEd-sJIf4tYBt-g" applyingPackage="_0">
         <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
@@ -283,4 +292,5 @@
   <cmof:Tag xmi:id="_50" name="org.omg.xmi.schemaType" value="http://www.w3.org/2001/XMLSchema#double" element="_SeOZQMo-Ed-ZL8lMORCEkg"/>
   <cmof:Tag xmi:id="_51" name="org.omg.xmi.nsPrefix" value="MDT_OCL_TypedMultiplicity" element="_zNR5QMilEd-sJIf4tYBt-g"/>
   <cmof:Tag xmi:id="_52" name="org.omg.xmi.nsPrefix" value="MDT_OCL_Visiting" element="_tG-HYMeqEd-sJIf4tYBt-g"/>
+  <cmof:Tag xmi:id="_53" name="org.omg.xmi.nsPrefix" value="MDT_OCL_Redefinitions" element="_jPknALeeEeG5G_bt-fBLaA"/>
 </xmi:XMI>

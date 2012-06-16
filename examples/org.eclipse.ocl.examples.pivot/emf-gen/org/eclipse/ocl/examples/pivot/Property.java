@@ -48,6 +48,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#isTransient <em>Is Transient</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#isUnsettable <em>Is Unsettable</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#isVolatile <em>Is Volatile</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getRedefinedProperty <em>Redefined Property</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getSubsettedProperty <em>Subsetted Property</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getOwningType <em>Owning Type</em>}</li>
  * </ul>
  * </p>
@@ -405,6 +407,40 @@ public interface Property
 	 * @generated
 	 */
 	void setIsVolatile(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Redefined Property</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Property}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Redefined Property</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Redefined Property</em>' reference list.
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getProperty_RedefinedProperty()
+	 * @model ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Property!redefinedProperty'"
+	 * @generated
+	 */
+	EList<Property> getRedefinedProperty();
+
+	/**
+	 * Returns the value of the '<em><b>Subsetted Property</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Property}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Subsetted Property</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Subsetted Property</em>' reference list.
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getProperty_SubsettedProperty()
+	 * @model ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Property!subsettedProperty'"
+	 * @generated
+	 */
+	EList<Property> getSubsettedProperty();
 
 	/**
 	 * Returns the value of the '<em><b>Owning Type</b></em>' container reference.

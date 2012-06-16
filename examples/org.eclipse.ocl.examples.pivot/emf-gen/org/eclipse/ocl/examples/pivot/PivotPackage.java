@@ -7811,13 +7811,22 @@ public interface PivotPackage
 	int OPERATION__PRECEDENCE = FEATURE_FEATURE_COUNT + 8;
 
 	/**
+	 * The feature id for the '<em><b>Redefined Operation</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__REDEFINED_OPERATION = FEATURE_FEATURE_COUNT + 9;
+
+	/**
 	 * The feature id for the '<em><b>Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__CLASS = FEATURE_FEATURE_COUNT + 9;
+	int OPERATION__CLASS = FEATURE_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>Operation</em>' class.
@@ -7826,7 +7835,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 10;
+	int OPERATION_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 11;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -8151,6 +8160,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ITERATION__PRECEDENCE = OPERATION__PRECEDENCE;
+
+	/**
+	 * The feature id for the '<em><b>Redefined Operation</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATION__REDEFINED_OPERATION = OPERATION__REDEFINED_OPERATION;
 
 	/**
 	 * The feature id for the '<em><b>Class</b></em>' reference.
@@ -11972,13 +11990,31 @@ public interface PivotPackage
 	int PROPERTY__IS_VOLATILE = FEATURE_FEATURE_COUNT + 15;
 
 	/**
+	 * The feature id for the '<em><b>Redefined Property</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__REDEFINED_PROPERTY = FEATURE_FEATURE_COUNT + 16;
+
+	/**
+	 * The feature id for the '<em><b>Subsetted Property</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__SUBSETTED_PROPERTY = FEATURE_FEATURE_COUNT + 17;
+
+	/**
 	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__OWNING_TYPE = FEATURE_FEATURE_COUNT + 16;
+	int PROPERTY__OWNING_TYPE = FEATURE_FEATURE_COUNT + 18;
 
 	/**
 	 * The number of structural features of the '<em>Property</em>' class.
@@ -11987,7 +12023,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 17;
+	int PROPERTY_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 19;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -18572,6 +18608,28 @@ public interface PivotPackage
 	EAttribute getProperty_IsVolatile();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.ocl.examples.pivot.Property#getRedefinedProperty <em>Redefined Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Redefined Property</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.Property#getRedefinedProperty()
+	 * @see #getProperty()
+	 * @generated
+	 */
+	EReference getProperty_RedefinedProperty();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.ocl.examples.pivot.Property#getSubsettedProperty <em>Subsetted Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Subsetted Property</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.Property#getSubsettedProperty()
+	 * @see #getProperty()
+	 * @generated
+	 */
+	EReference getProperty_SubsettedProperty();
+
+	/**
 	 * Returns the meta object for the container reference '{@link org.eclipse.ocl.examples.pivot.Property#getOwningType <em>Owning Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -18842,6 +18900,17 @@ public interface PivotPackage
 	 * @generated
 	 */
 	EReference getOperation_Precedence();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.ocl.examples.pivot.Operation#getRedefinedOperation <em>Redefined Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Redefined Operation</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.Operation#getRedefinedOperation()
+	 * @see #getOperation()
+	 * @generated
+	 */
+	EReference getOperation_RedefinedOperation();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.pivot.Operation#getClass_ <em>Class</em>}'.
@@ -21677,6 +21746,22 @@ public interface PivotPackage
 		EAttribute PROPERTY__IS_VOLATILE = eINSTANCE.getProperty_IsVolatile();
 
 		/**
+		 * The meta object literal for the '<em><b>Redefined Property</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY__REDEFINED_PROPERTY = eINSTANCE.getProperty_RedefinedProperty();
+
+		/**
+		 * The meta object literal for the '<em><b>Subsetted Property</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY__SUBSETTED_PROPERTY = eINSTANCE.getProperty_SubsettedProperty();
+
+		/**
 		 * The meta object literal for the '<em><b>Owning Type</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -21893,6 +21978,14 @@ public interface PivotPackage
 		 * @generated
 		 */
 		EReference OPERATION__PRECEDENCE = eINSTANCE.getOperation_Precedence();
+
+		/**
+		 * The meta object literal for the '<em><b>Redefined Operation</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION__REDEFINED_OPERATION = eINSTANCE.getOperation_RedefinedOperation();
 
 		/**
 		 * The meta object literal for the '<em><b>Class</b></em>' reference feature.
