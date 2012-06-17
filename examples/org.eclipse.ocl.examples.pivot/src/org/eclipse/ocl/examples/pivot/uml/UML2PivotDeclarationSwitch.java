@@ -18,13 +18,13 @@ package org.eclipse.ocl.examples.pivot.uml;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -52,8 +52,10 @@ import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
+import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
+import org.eclipse.ocl.examples.pivot.delegate.SettingBehavior;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 import org.eclipse.uml2.uml.ParameterDirectionKind;
@@ -202,6 +204,8 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	public DataType caseDataType(org.eclipse.uml2.uml.DataType umlDataType) {
 		DataType pivotElement = converter.refreshNamedElement(DataType.class, PivotPackage.Literals.DATA_TYPE, umlDataType);
 		copyDataTypeOrEnum(pivotElement, umlDataType);
+		doSwitchAll(umlDataType.getAttributes());
+		converter.addProperties(umlDataType.getAttributes(), null);
 		return pivotElement;
 	}
 
@@ -321,8 +325,8 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	public org.eclipse.ocl.examples.pivot.Package casePackage(org.eclipse.uml2.uml.Package umlPackage) {
 		org.eclipse.ocl.examples.pivot.Package pivotElement = converter.refreshNamedElement(org.eclipse.ocl.examples.pivot.Package.class, PivotPackage.Literals.PACKAGE, umlPackage);
 		metaModelManager.addPackage(pivotElement);
-		EAnnotation eAnnotation = umlPackage.getEAnnotation(EcorePackage.eNS_URI);
-		List<EAnnotation> exclusions = eAnnotation == null ? Collections.<EAnnotation>emptyList() : Collections.singletonList(eAnnotation);
+//		EAnnotation eAnnotation = umlPackage.getEAnnotation(EcorePackage.eNS_URI);
+//		List<EAnnotation> exclusions = eAnnotation == null ? Collections.<EAnnotation>emptyList() : Collections.singletonList(eAnnotation);
 		copyNamedElement(pivotElement, umlPackage);
 		copyConstraints(pivotElement, umlPackage);
 //		if (umlPackage.eIsSet(EcorePackage.Literals.EPACKAGE__NS_PREFIX)) {
@@ -357,7 +361,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	@Override
 	public Parameter caseParameter(org.eclipse.uml2.uml.Parameter eObject) {
 		Parameter pivotElement = converter.refreshNamedElement(Parameter.class, PivotPackage.Literals.PARAMETER, eObject);
-		converter.copyTypedElement(pivotElement, eObject, null);
+		copyTypedElement(pivotElement, eObject, null);
 		converter.copyMultiplicityElement(pivotElement, eObject);
 		return pivotElement;
 	}
@@ -396,7 +400,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	@Override
 	public Property caseProperty(org.eclipse.uml2.uml.Property umlProperty) {
 		Property pivotElement = converter.refreshNamedElement(Property.class, PivotPackage.Literals.PROPERTY, umlProperty);
-		converter.copyProperty(pivotElement, umlProperty, null);
+		copyProperty(pivotElement, umlProperty, null);
 		pivotElement.setIsComposite(umlProperty.isComposite());			
 		pivotElement.setImplicit(umlProperty.getClass_() == null);
 //		pivotElement.setIsID(umlProperty.isID());			
@@ -404,6 +408,17 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		copyNamedElement(pivotElement, umlProperty);
 		converter.queueReference(umlProperty);	// Defer
 		return pivotElement;
+	}
+
+	protected void copyAnnotatedElement(NamedElement pivotElement,
+			EModelElement umlElement, List<EAnnotation> excludedAnnotations) {
+		List<Annotation> pivotAnnotations = pivotElement.getOwnedAnnotation();
+		for (EAnnotation eAnnotation : umlElement.getEAnnotations()) {
+			if ((excludedAnnotations == null) || !excludedAnnotations.contains(eAnnotation)) {
+				Annotation pivotAnnotation = (Annotation) doSwitch(eAnnotation);
+				pivotAnnotations.add(pivotAnnotation);
+			}
+		}
 	}
 
 	protected void copyClassifier(org.eclipse.ocl.examples.pivot.Class pivotElement, org.eclipse.uml2.uml.Classifier umlClassifier) {
@@ -483,10 +498,62 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 			}
 		} */
 
-	public void copyNamedElement(NamedElement pivotElement, org.eclipse.uml2.uml.NamedElement umlElement) {
-		converter.copyNamedElement(pivotElement, umlElement);
-		converter.copyAnnotatedElement(pivotElement, umlElement, null);
-		copyComments(pivotElement, umlElement);
+	protected void copyModelElement(Element pivotElement, org.eclipse.uml2.uml.Element umlElement) {
+		converter.setOriginalMapping(pivotElement, umlElement);
+	}
+
+	public void copyNamedElement(NamedElement pivotElement, org.eclipse.uml2.uml.NamedElement umlNamedElement) {
+		copyModelElement(pivotElement, umlNamedElement);
+		String name = umlNamedElement.getName();
+		pivotElement.setName(name);
+		copyAnnotatedElement(pivotElement, umlNamedElement, null);
+		copyComments(pivotElement, umlNamedElement);
+	}
+
+	protected void copyProperty(Property pivotElement, org.eclipse.uml2.uml.Property umlProperty, List<EAnnotation> excludedAnnotations) {
+		EAnnotation oclAnnotation = OCLCommon.getDelegateAnnotation(umlProperty);
+		if (oclAnnotation != null) {
+			excludedAnnotations = new ArrayList<EAnnotation>();
+			excludedAnnotations.add(oclAnnotation);
+			List<Constraint> constraints = pivotElement.getOwnedRule();
+			for (Map.Entry<String,String> entry : oclAnnotation.getDetails().entrySet()) {
+				Constraint constraint = PivotFactory.eINSTANCE.createConstraint();
+				String key = entry.getKey();
+				if (key.equals(SettingBehavior.DERIVATION_CONSTRAINT_KEY)) {
+					constraint.setStereotype(UMLReflection.DERIVATION);
+				}
+				else if (key.equals(SettingBehavior.INITIAL_CONSTRAINT_KEY)) {
+					constraint.setStereotype(UMLReflection.INITIAL);
+				}
+				else
+				{
+					converter.error("Unsupported feature constraint " + key);
+					constraint = null;
+				}
+				if (constraint != null) {
+					String value = entry.getValue();
+					OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOCL
+					specification.getBody().add(value);
+					specification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
+					constraint.setSpecification(specification);
+//						constraint.setExprString(entry.getValue());
+					constraints.add(constraint);
+				}
+			}				
+		}
+		copyTypedElement(pivotElement, umlProperty, excludedAnnotations);
+		converter.copyMultiplicityElement(pivotElement, umlProperty);
+		pivotElement.setIsReadOnly(umlProperty.isReadOnly());			
+		pivotElement.setIsDerived(umlProperty.isDerived());			
+//		pivotElement.setIsTransient(umlProperty.isTransient());			
+//		pivotElement.setIsUnsettable(umlProperty.isUnsettable());			
+//		pivotElement.setIsVolatile(umlProperty.isVolatile());			
+//		if (umlProperty.eIsSet(EcorePackage.Literals.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL)) {
+//			pivotElement.setDefault(eObject.getDefaultValueLiteral());
+//		}
+//		else {
+//			pivotElement.eUnset(PivotPackage.Literals.PROPERTY__DEFAULT);
+//		}
 	}
 
 	protected void copyTemplateSignature(TemplateableElement pivotElement, org.eclipse.uml2.uml.TemplateSignature umlTemplateSignature) {
@@ -497,6 +564,15 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 				pivotElement.setOwnedTemplateSignature(pivotTemplateSignature);
 				doSwitchAll(pivotTemplateSignature.getOwnedParameter(), umlTemplateParameters, null);
 			}
+		}
+	}
+
+	protected void copyTypedElement(TypedMultiplicityElement pivotElement, org.eclipse.uml2.uml.TypedElement umlTypedElement, List<EAnnotation> excludedAnnotations) {
+		copyNamedElement(pivotElement, umlTypedElement);
+		copyAnnotatedElement(pivotElement, umlTypedElement, excludedAnnotations);
+		org.eclipse.uml2.uml.Type umlType = umlTypedElement.getType();
+		if (umlType != null) {
+			converter.queueReference(umlTypedElement);
 		}
 	}
 

@@ -67,6 +67,10 @@ public abstract class AbstractConversion extends EcoreUtil
 	protected AbstractConversion(MetaModelManager metaModelManager) {
 		this.metaModelManager = metaModelManager;
 	}
+	
+	public MetaModelManager getMetaModelManager() {
+		return metaModelManager;
+	}
 
 	public <T extends EObject> void refreshList(List<? super T> oldElements, List<? extends T> newElements) {
 		PivotUtil.refreshList(oldElements, newElements);

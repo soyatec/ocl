@@ -285,10 +285,6 @@ public class Ecore2Pivot extends AbstractConversion implements External2Pivot, P
 		return ecoreResource;
 	}
 
-	public MetaModelManager getMetaModelManager() {
-		return metaModelManager;
-	}
-
 	public <T extends Element> T getPivotOfEcore(Class<T> requiredClass, EObject eObject) {
 		if (pivotRoot == null) {
 			getPivotRoot();
