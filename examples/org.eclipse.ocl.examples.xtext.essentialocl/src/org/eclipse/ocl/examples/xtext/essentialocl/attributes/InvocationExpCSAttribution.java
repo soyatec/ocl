@@ -14,12 +14,19 @@
  */
 package org.eclipse.ocl.examples.xtext.essentialocl.attributes;
 
+import java.util.List;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.CollectionType;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.IterateExp;
+import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -31,6 +38,8 @@ import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.scoping.BaseScopeView;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InfixExpCS;
@@ -43,7 +52,6 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.OperatorCS;
 public class InvocationExpCSAttribution extends AbstractAttribution
 {
 	public static final InvocationExpCSAttribution INSTANCE = new InvocationExpCSAttribution();
-
 
 	@Override
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
@@ -87,7 +95,12 @@ public class InvocationExpCSAttribution extends AbstractAttribution
 							Type type = source.getType();
 							if (csNavigationOperator.getName().equals(PivotConstants.COLLECTION_NAVIGATION_OPERATOR)) {
 								if (type instanceof CollectionType) {		// collection->collection-operation(name...
-									environmentView.addElementsOfScope(((CollectionType)type).getElementType(), scopeView);
+									if (isIteration(environmentView.getMetaModelManager(), csNavigationOperator.getArgument(), type)) {
+										environmentView.addElementsOfScope(((CollectionType)type).getElementType(), scopeView);
+									}
+									else {
+										return scopeView.getParent();
+									}
 								}
 							}
 						}
@@ -106,16 +119,9 @@ public class InvocationExpCSAttribution extends AbstractAttribution
 					environmentView.addNamedElement(((IterateExp)pivot).getResult());
 				}
 			}
-			ScopeFilter filter = ContextCSAttribution.NoImplicitProperties.INSTANCE;
-			try {
-				environmentView.addFilter(filter);
-				ElementCS parent = targetElement.getLogicalParent();
-				BaseScopeView.computeLookups(environmentView, parent, target, PivotPackage.Literals.OPERATION_CALL_EXP__ARGUMENT, null);
-				return null;
-			}
-			finally {
-				environmentView.removeFilter(filter);
-			}
+			ElementCS parent = targetElement.getLogicalParent();
+			BaseScopeView.computeLookups(environmentView, parent, target, PivotPackage.Literals.OPERATION_CALL_EXP__ARGUMENT, null);
+			return null;
 		}
 		else {
 			ExpCS explicitSource = null;
@@ -140,19 +146,66 @@ public class InvocationExpCSAttribution extends AbstractAttribution
 					type = source.getType();
 				}
 			}
-			ScopeFilter filter = createInvocationFilter(environmentView.getMetaModelManager(), targetElement, type);
-			try {
-				environmentView.addFilter(filter);
-				BaseScopeView.computeLookups(environmentView, scopeTarget, target, PivotPackage.Literals.OPERATION_CALL_EXP__REFERRED_OPERATION, null);
-				return null;
+			EClassifier requiredType = environmentView.getRequiredType();
+			EClass operationType = PivotPackage.Literals.OPERATION;
+			if ((requiredType instanceof EClass) && operationType.isSuperTypeOf((EClass)requiredType)) {
+				ScopeFilter filter = createInvocationFilter(environmentView.getMetaModelManager(), targetElement, type);
+				try {
+					environmentView.addFilter(filter);
+					BaseScopeView.computeLookups(environmentView, scopeTarget, target, PivotPackage.Literals.OPERATION_CALL_EXP__REFERRED_OPERATION, null);
+					return null;
+				}
+				finally {
+					environmentView.removeFilter(filter);
+				}
 			}
-			finally {
-				environmentView.removeFilter(filter);
+			else {
+				return scopeView.getParent();
 			}
 		}
 	}
 
 	protected ScopeFilter createInvocationFilter(MetaModelManager metaModelManager, InvocationExpCS targetElement, Type type) {
 		return new OperationFilter(metaModelManager, type, targetElement);
+	}
+
+	public static boolean isIteration(MetaModelManager metaModelManager, ExpCS csExp, Type type) {
+		if (!(csExp instanceof InvocationExpCS)) {
+			return false;
+		}
+		InvocationExpCS csInvocationExp = (InvocationExpCS)csExp;
+		for (NavigatingArgCS csArg : csInvocationExp.getArgument()) {
+			if (csArg.getRole() != NavigationRole.EXPRESSION) {
+				return true;
+			}
+		}
+		PathNameCS pathName = csInvocationExp.getPathName();
+		List<PathElementCS> path = pathName.getPath();
+		if (path.size() != 1) {
+			return false;
+		}
+		PathElementCS csPathElement = path.get(0);
+		Element unresolvedElement = csPathElement.basicGetElement();
+		if ((unresolvedElement != null) && !unresolvedElement.eIsProxy()) {
+			return unresolvedElement instanceof Iteration;
+		}
+		String name = csPathElement.toString();
+		Boolean isIt = isIteration(metaModelManager, type, name);
+		return isIt == Boolean.TRUE;
+	}
+
+	private static Boolean isIteration(MetaModelManager metaModelManager, Type type, String name) {
+		for (Operation operation : metaModelManager.getLocalOperations(type, false)) {
+			if (name.equals(operation.getName())) {
+				return operation instanceof Iteration;		// mixed overload are not allowed
+			}
+		}
+		for (Type superType : metaModelManager.getSuperClasses(type)) {
+			Boolean isIt = isIteration(metaModelManager, superType, name);
+			if (isIt != null) {
+				return isIt;
+			}
+		}
+		return null;
 	}
 }

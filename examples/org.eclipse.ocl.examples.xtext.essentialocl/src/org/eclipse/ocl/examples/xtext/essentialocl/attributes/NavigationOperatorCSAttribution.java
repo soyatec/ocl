@@ -25,7 +25,6 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
-import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
@@ -68,10 +67,15 @@ public class NavigationOperatorCSAttribution extends AbstractAttribution
 				}
 				else {
 					if (type instanceof CollectionType) {		// collection->iteration-operation(iterator-feature)
-						environmentView.addElementsOfScope(((CollectionType)type).getElementType(), scopeView);
+						if (InvocationExpCSAttribution.isIteration(environmentView.getMetaModelManager(), targetElement.getArgument(), type)) {
+							environmentView.addElementsOfScope(((CollectionType)type).getElementType(), scopeView);
+						}
+						else {
+							return scopeView.getParent();
+						}
 					}
 					else {										// object.oclAsSet()->iteration-operation(iterator-feature)
-						environmentView.addElementsOfScope(type, scopeView);
+						environmentView.addElementsOfScope(type, scopeView);		// FIXME Only if iteration
 					}
 					
 				}
@@ -80,15 +84,8 @@ public class NavigationOperatorCSAttribution extends AbstractAttribution
 		}
 		else {
 			ElementCS parent = targetElement.getLogicalParent();
-			ScopeFilter filter = ContextCSAttribution.NoImplicitProperties.INSTANCE;
-			try {
-				environmentView.addFilter(filter);
-				BaseScopeView.computeLookups(environmentView, parent, target, PivotPackage.Literals.CALL_EXP__SOURCE, null);
-				return null;
-			}
-			finally {
-				environmentView.removeFilter(filter);
-			}
+			BaseScopeView.computeLookups(environmentView, parent, target, PivotPackage.Literals.CALL_EXP__SOURCE, null);
+			return null;
 		}
 	}
 }
