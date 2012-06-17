@@ -32,7 +32,9 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Model;
+import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
+import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -170,8 +172,48 @@ public class EnvironmentView
 				values = castValue;
 			}
 			if (!values.contains(element)) {
-				values.add(element);
-				contentsSize++;
+				int oldValuesSize = values.size();
+				if (element instanceof Property) {
+					Property newProperty = (Property)element;
+					values.removeAll(newProperty.getRedefinedProperty());
+					if (!newProperty.isImplicit()) {
+						for (int i = values.size(); --i >= 0; ) {
+							EObject oldValue = values.get(i);
+							if (oldValue instanceof Property) {
+								Property oldProperty = (Property)oldValue;
+								if (oldProperty.isImplicit()) {
+									values.remove(i);
+								}
+							}
+						}
+					}
+					for (EObject oldValue : values) {
+						if (oldValue instanceof Property) {
+							Property oldProperty = (Property)oldValue;
+							if (!oldProperty.isImplicit() && newProperty.isImplicit()) {
+								element = null;
+								break;
+							}
+							if (oldProperty.getRedefinedProperty().contains(element)) {
+								element = null;
+								break;
+							}
+						}
+					}
+				}
+				else if (element instanceof Operation) {
+					values.removeAll(((Operation)element).getRedefinedOperation());
+					for (EObject v : values) {
+						if ((v instanceof Operation) && ((Operation)v).getRedefinedOperation().contains(element)) {
+							element = null;
+							break;
+						}
+					}
+				}
+				if (element != null) {
+					values.add(element);
+				}
+				contentsSize += values.size() - oldValuesSize;
 			}
 		}
 		return 1;
