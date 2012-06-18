@@ -53,6 +53,7 @@ public class NavigationOperatorCSAttribution extends AbstractAttribution
 					}
 					else {										// object.object-operation
 						environmentView.addElementsOfScope(type, scopeView);		
+						environmentView.addElementsOfScope(type.getPackage(), scopeView);						
 					}
 				}
 				else if (scopeView.getContainmentFeature() != PivotPackage.Literals.OPERATION_CALL_EXP__ARGUMENT){

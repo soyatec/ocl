@@ -172,48 +172,8 @@ public class EnvironmentView
 				values = castValue;
 			}
 			if (!values.contains(element)) {
-				int oldValuesSize = values.size();
-				if (element instanceof Property) {
-					Property newProperty = (Property)element;
-					values.removeAll(newProperty.getRedefinedProperty());
-					if (!newProperty.isImplicit()) {
-						for (int i = values.size(); --i >= 0; ) {
-							EObject oldValue = values.get(i);
-							if (oldValue instanceof Property) {
-								Property oldProperty = (Property)oldValue;
-								if (oldProperty.isImplicit()) {
-									values.remove(i);
-								}
-							}
-						}
-					}
-					for (EObject oldValue : values) {
-						if (oldValue instanceof Property) {
-							Property oldProperty = (Property)oldValue;
-							if (!oldProperty.isImplicit() && newProperty.isImplicit()) {
-								element = null;
-								break;
-							}
-							if (oldProperty.getRedefinedProperty().contains(element)) {
-								element = null;
-								break;
-							}
-						}
-					}
-				}
-				else if (element instanceof Operation) {
-					values.removeAll(((Operation)element).getRedefinedOperation());
-					for (EObject v : values) {
-						if ((v instanceof Operation) && ((Operation)v).getRedefinedOperation().contains(element)) {
-							element = null;
-							break;
-						}
-					}
-				}
-				if (element != null) {
-					values.add(element);
-				}
-				contentsSize += values.size() - oldValuesSize;
+				values.add(element);
+				contentsSize++;
 			}
 		}
 		return 1;
@@ -361,6 +321,41 @@ public class EnvironmentView
 		return resolveDuplicates();
 	}
 
+	protected int filterImplicits(EObject match1, EObject match2) {
+		boolean match1IsImplicit = (match1 instanceof Property) && ((Property)match1).isImplicit();
+		boolean match2IsImplicit = (match2 instanceof Property) && ((Property)match2).isImplicit();
+		if (!match1IsImplicit) {
+			return match2IsImplicit ? 1 : 0;				// match2 inferior			
+		}
+		else {
+			return match2IsImplicit ? 0 : -1;				// match1 inferior			
+		}
+	}
+
+	protected int filterRedefinitions(EObject match1, EObject match2) {
+		if ((match1 instanceof Operation) && (match2 instanceof Operation)) {
+			Operation operation1 = (Operation)match1;
+			Operation operation2 = (Operation)match2;
+			if (isRedefinitionOf(operation1, operation2)) {
+				return 1;				// match2 inferior			
+			}
+			if (isRedefinitionOf(operation2, operation1)) {
+				return -1;				// match1 inferior			
+			}
+		}
+		else if ((match1 instanceof Property) && (match2 instanceof Property)) {
+			Property property1 = (Property)match1;
+			Property property2 = (Property)match2;
+			if (isRedefinitionOf(property1, property2)) {
+				return 1;				// match2 inferior			
+			}
+			if (isRedefinitionOf(property2, property1)) {
+				return -1;				// match1 inferior			
+			}
+		}
+		return 0;
+	}
+
 	public EObject getContent() {
 		if (contentsSize == 0) {
 			return null;
@@ -420,6 +415,32 @@ public class EnvironmentView
 		return true;
 	}
 
+	protected boolean isRedefinitionOf(Operation operation1, Operation operation2) {
+		List<Operation> redefinedOperations = operation1.getRedefinedOperation();
+		for (Operation redefinedOperation : redefinedOperations) {
+			if (redefinedOperation == operation2) {
+				return true;
+			}
+			if (isRedefinitionOf(redefinedOperation, operation2)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	protected boolean isRedefinitionOf(Property property1, Property property2) {
+		List<Property> redefinedProperties = property1.getRedefinedProperty();
+		for (Property redefinedProperty : redefinedProperties) {
+			if (redefinedProperty == property2) {
+				return true;
+			}
+			if (isRedefinitionOf(redefinedProperty, property2)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void removeFilter(ScopeFilter filter) {
 		if (matchers != null) {
 			matchers.remove(filter);
@@ -427,35 +448,44 @@ public class EnvironmentView
 	}
 
 	public int resolveDuplicates() {
-		if ((contentsSize > 1) && (resolvers != null) && (getName() != null)) {
+		if ((contentsSize > 1) && (getName() != null)) {
 			int newSize = 0;
 			for (Map.Entry<String, Object> entry : contentsByName.entrySet()) {
 				Object value = entry.getValue();
 				if (value instanceof List<?>) {
 					@SuppressWarnings("unchecked")
 					List<EObject> values = (List<EObject>) value;
-					for (ScopeFilter filter : resolvers) {
-						for (int i = 0; i < values.size()-1;) {
-							EObject reference = values.get(i);
-							Map<TemplateParameter, ParameterableElement> referenceBindings = templateBindings != null ? templateBindings.get(reference) : null;
-							for (int j = i + 1; j < values.size();) {
-								EObject candidate = values.get(j);
-								Map<TemplateParameter, ParameterableElement> candidateBindings = templateBindings != null ? templateBindings.get(candidate) : null;
-								int verdict = filter.compareMatches(reference, referenceBindings, candidate, candidateBindings);
-								if (verdict == 0) {
-									j++;
-								} else if (verdict < 0) {
-									values.remove(i);
-									reference = null;
-									break;
-								} else {
-									values.remove(j);
-									candidate = null;
+					for (int i = 0; i < values.size()-1;) {
+						EObject reference = values.get(i);
+						Map<TemplateParameter, ParameterableElement> referenceBindings = templateBindings != null ? templateBindings.get(reference) : null;
+						for (int j = i + 1; j < values.size();) {
+							EObject candidate = values.get(j);
+							int verdict = filterImplicits(reference, candidate);
+							if (verdict == 0) {
+								verdict = filterRedefinitions(reference, candidate);
+								if ((verdict == 0) && (resolvers != null)) {
+									Map<TemplateParameter, ParameterableElement> candidateBindings = templateBindings != null ? templateBindings.get(candidate) : null;
+									for (ScopeFilter filter : resolvers) {
+										verdict = filter.compareMatches(reference, referenceBindings, candidate, candidateBindings);
+										if (verdict != 0) {
+											break;
+										}
+									}
 								}
 							}
-							if (reference != null) {
-								i++;
+							if (verdict == 0) {
+								j++;
+							} else if (verdict < 0) {
+								values.remove(i);
+								reference = null;
+								break;
+							} else {
+								values.remove(j);
+								candidate = null;
 							}
+						}
+						if (reference != null) {
+							i++;
 						}
 					}
 					newSize += values.size();

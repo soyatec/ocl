@@ -50,9 +50,7 @@ public class ExpSpecificationCSAttribution extends AbstractAttribution
 					if (type != null)
 					{
 						environmentView.addElementsOfScope(type, scopeView);
-						if (!environmentView.hasFinalResult()) {
-							environmentView.addElementsOfScope(type.getPackage(), scopeView);
-						}
+						environmentView.addElementsOfScope(type.getPackage(), scopeView);
 					}
 				}
 			}

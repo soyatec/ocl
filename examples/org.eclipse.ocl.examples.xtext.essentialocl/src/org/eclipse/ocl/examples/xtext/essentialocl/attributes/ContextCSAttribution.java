@@ -56,9 +56,7 @@ public class ContextCSAttribution extends AbstractRootCSAttribution
 				if (!environmentView.hasFinalResult()) {
 					Type type = contextVariable.getType();
 					environmentView.addElementsOfScope(type, scopeView);
-					for (Package pPackage = type.getPackage(); !environmentView.hasFinalResult() && (pPackage != null); pPackage = pPackage.getNestingPackage()) {
-						environmentView.addElementsOfScope(pPackage, scopeView);
-					}
+					environmentView.addElementsOfScope(type.getPackage(), scopeView);
 				}
 			}
 		}

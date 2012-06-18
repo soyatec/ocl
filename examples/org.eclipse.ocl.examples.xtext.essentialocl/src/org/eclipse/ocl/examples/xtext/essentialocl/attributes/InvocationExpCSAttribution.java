@@ -103,6 +103,7 @@ public class InvocationExpCSAttribution extends AbstractAttribution
 									}
 								}
 							}
+							return scopeView.getParent();
 						}
 					}
 				}
