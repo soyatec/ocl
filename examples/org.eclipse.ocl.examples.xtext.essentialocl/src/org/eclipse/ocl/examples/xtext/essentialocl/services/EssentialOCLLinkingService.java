@@ -46,6 +46,8 @@ import com.google.inject.Inject;
 
 public class EssentialOCLLinkingService extends DefaultLinkingService
 {
+	public static boolean DEBUG_RETRY = false;			// Set true to retry for debug tracing
+	
 	public static class Ambiguities extends ExceptionAdapter
 	{
 		private List<EObject> eObjects;
@@ -91,7 +93,7 @@ public class EssentialOCLLinkingService extends DefaultLinkingService
 			}
 			IScope scope = null;
 			String uri = TypesPackage.eNS_URI;
-//			if (ref.getEReferenceType().getEPackage() == TypesPackage.eINSTANCE) {	// FIXME this is costly; don't inflict it when not needed
+//			if (ref.getEReferenceType().getEPackage() == TypesPackage.eINSTANCE) {	// This was costly, so don't inflict it when not needed
 			if (ref.getEReferenceType().getEPackage().getNsURI().equals(uri)) {
 				scope = globalScopeProvider.getScope(context.eResource(), ref, null);
 			}
@@ -130,12 +132,16 @@ public class EssentialOCLLinkingService extends DefaultLinkingService
 				eAdapters.remove(adapter);
 			}
 			if (linkedObjects.size() > 1) {
-				scope.getElements(qualifiedName);	// FIXME conditionalise this retry for debug
+				if (DEBUG_RETRY) {
+					scope.getElements(qualifiedName);
+				}
 				eAdapters.add(new Ambiguities(linkedObjects));
-				return Collections.emptyList();		// BUG FIXME return some form of ambiguity
+				return Collections.emptyList();
 			}
 			if (linkedObjects.size() <= 0) {
-				scope.getElements(qualifiedName);	// FIXME conditionalise this retry for debug
+				if (DEBUG_RETRY) {
+					scope.getElements(qualifiedName);
+				}
 			}
 			return linkedObjects;
 		}
