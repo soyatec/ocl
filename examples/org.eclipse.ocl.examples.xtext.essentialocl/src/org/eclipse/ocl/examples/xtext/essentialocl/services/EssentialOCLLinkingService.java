@@ -20,8 +20,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ocl.examples.pivot.utilities.IllegalLibraryException;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.ExceptionAdapter;
@@ -44,6 +46,29 @@ import com.google.inject.Inject;
 
 public class EssentialOCLLinkingService extends DefaultLinkingService
 {
+	public static class Ambiguities extends ExceptionAdapter
+	{
+		private List<EObject> eObjects;
+		
+		public Ambiguities(List<EObject> eObjects) {
+			super(null);
+			this.eObjects = eObjects;
+		}
+
+		@Override
+		public String getErrorMessage() {
+			StringBuilder s = new StringBuilder();
+			s.append("Ambiguous resolution:");
+			for (EObject eObject : eObjects) {
+				s.append("\n\t");
+				s.append(eObject.eClass().getName());
+				s.append(" : ");
+				s.append(eObject);				
+			}
+			return s.toString();
+		}
+	}
+	
 	private static int depth = -1;
 	
 	@Inject
@@ -99,8 +124,14 @@ public class EssentialOCLLinkingService extends DefaultLinkingService
 			if (traceLookup) {
 				BaseScopeProvider.LOOKUP.println("" + depth + " Lookup " + text + " failed");
 			}
+			List<Adapter> eAdapters = context.eAdapters();
+			Adapter adapter = EcoreUtil.getAdapter(eAdapters, ExceptionAdapter.class);
+			if (adapter != null) {
+				eAdapters.remove(adapter);
+			}
 			if (linkedObjects.size() > 1) {
 				scope.getElements(qualifiedName);	// FIXME conditionalise this retry for debug
+				eAdapters.add(new Ambiguities(linkedObjects));
 				return Collections.emptyList();		// BUG FIXME return some form of ambiguity
 			}
 			if (linkedObjects.size() <= 0) {

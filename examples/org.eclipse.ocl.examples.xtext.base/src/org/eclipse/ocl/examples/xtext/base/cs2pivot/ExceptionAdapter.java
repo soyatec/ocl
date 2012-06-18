@@ -30,12 +30,12 @@ public class ExceptionAdapter extends AdapterImpl
 		this.exception = exception;
 	}
 	
-	public Exception getException() {
-		return exception;
-	}
-	
 	@Override
 	public boolean isAdapterForType(Object type) {
 		return type == ExceptionAdapter.class;
+	}
+
+	public String getErrorMessage() {
+		return exception.getLocalizedMessage();
 	}
 }
