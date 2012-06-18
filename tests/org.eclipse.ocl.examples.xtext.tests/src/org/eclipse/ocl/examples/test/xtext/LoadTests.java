@@ -24,19 +24,21 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
+import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.ocl.examples.pivot.Constraint;
-import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.ParserException;
@@ -254,9 +256,11 @@ public class LoadTests extends XtextTestCase
 		long startTime = System.currentTimeMillis();
 		System.out.println("Start at " + startTime);
 		ResourceSet resourceSet = new ResourceSetImpl();
-		getProjectMap().initializeResourceSet(null);
-//		getProjectMap().initializeResourceSet(resourceSet);
-//		UMLResourcesUtil.init(resourceSet);
+		getProjectMap().initializeResourceSet(resourceSet);
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {			
+			IProjectDescriptor projectDescriptor = getProjectMap().getProjectDescriptor("org.eclipse.uml2.uml");
+			projectDescriptor.initializeURIMap(URIConverter.URI_MAP);		// *.ecore2xml must be global
+		}
 		String extension = inputURI.fileExtension();
 		String stem = inputURI.trimFileExtension().lastSegment();
 //		String outputName = stem + "." + extension + ".xmi";
@@ -285,35 +289,81 @@ public class LoadTests extends XtextTestCase
 			assertNoResourceErrors("Save failed", umlResource);
 			umlResource.setURI(inputURI);
 			UML2Pivot adapter = UML2Pivot.getAdapter(umlResource, metaModelManager);
-			Package pivotRoot = adapter.getPivotRoot();
-			Resource pivotResource = pivotRoot.eResource();
-			assertNoResourceErrors("Load failed", pivotResource);
-			URI savedURI = pivotResource.getURI();
-			pivotResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension("pivot"));
-			pivotResource.save(null);
-			pivotResource.setURI(savedURI);
+			UML2Pivot.Root rootAdapter = adapter.getRoot();
+			Package pivotRoot = rootAdapter.getPivotRoot();
+			List<Resource> allResources = new ArrayList<Resource>();
+			allResources.add(pivotRoot.eResource());
+			for (Resource uResource : rootAdapter.getImportedResources()) {
+				UML2Pivot anAdapter = UML2Pivot.getAdapter(uResource, metaModelManager);
+				Model pivotModel = anAdapter.getPivotRoot();
+				Resource pivotResource = pivotModel.eResource();
+				allResources.add(pivotResource);
+			}
 			OCL ocl = OCL.newInstance(new PivotEnvironmentFactory(null, metaModelManager));
-			for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
-				EObject eObject = tit.next();
-				if (eObject instanceof Constraint) {
-					Constraint constraint = (Constraint)eObject;
-					ExpressionInOCL specification;
-					try {
-						System.out.println(constraint);
-						NamedElement context = constraint.getContext();
-						List<Element> constrainedElements = constraint.getConstrainedElement();
-						for (Element constrainedElement : constrainedElements) {
-							System.out.println("Spurious constrained element: " + constrainedElement);
+			int exceptions = 0;
+			int parses = 0;
+			for (Resource pivotResource : allResources) {
+				assertNoResourceErrors("Load failed", pivotResource);
+				URI savedURI = pivotResource.getURI();
+				pivotResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension("pivot"));
+				if (!EMFPlugin.IS_ECLIPSE_RUNNING) {			// Cannot save to plugins for JUnit plugin tests
+					pivotResource.save(null);
+				}
+				pivotResource.setURI(savedURI);
+				for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
+					EObject eObject = tit.next();
+					if (eObject instanceof Constraint) {
+						Constraint constraint = (Constraint)eObject;
+						ExpressionInOCL specification;
+						boolean donePrint = false;
+						try {
+	/*						NamedElement context = constraint.getContext();
+							List<Element> constrainedElements = constraint.getConstrainedElement();
+					    	Element constrainedElement0 = constrainedElements.get(0);
+					    	if ((constrainedElement0 instanceof Namespace) && (constrainedElement0 != context)) {
+								if (!donePrint) {
+									System.out.println("\n" + constraint);
+									donePrint = true;
+								}
+								System.out.printf("Spurious constrained element for context - %s: %s\n", context.eClass().getName(), context.toString());
+								for (Element constrainedElement : constrainedElements) {
+									System.out.printf("  constrained element - %s: %s\n", constrainedElement.eClass().getName(), constrainedElement.toString());
+								}
+					    	} */
+							long startParseTime = System.currentTimeMillis();
+							parses++;
+							specification = ocl.getSpecification(constraint);
+							if (specification != null) {
+								constraint.setSpecification(specification);
+								long endParseTime = System.currentTimeMillis();
+								int treeSize = 1;
+								for (TreeIterator<EObject> tit2 = specification.eAllContents(); tit2.hasNext(); ) {
+									EObject treeObject = tit2.next();
+									treeSize++;
+								}
+								double parseTime = 0.001 * (endParseTime - startParseTime);
+								double timePerNode = parseTime/treeSize;
+								if (timePerNode > 0.02) {
+									if (!donePrint) {
+										System.out.println("\n" + constraint);
+										donePrint = true;
+									}
+									System.out.printf("Size: %d, Time %6.3f, Time/Node %8.6f\n", treeSize, parseTime, timePerNode);
+								}
+							}
+						} catch (ParserException e) {
+							if (!donePrint) {
+								System.out.println("\n" + constraint);
+								donePrint = true;
+							}
+							System.out.println(e);
+							exceptions++;
 						}
-						specification = ocl.getSpecification(constraint);
-						if (specification != null) {
-							constraint.setSpecification(specification);
-						}
-					} catch (ParserException e) {
-						System.out.println(e);
 					}
 				}
 			}
+			System.out.printf("Exceptions %d, Parses %d\n", exceptions, parses);
+			assertEquals(0, exceptions);
 		}
 		finally {
 			metaModelManager.dispose();
@@ -628,7 +678,7 @@ public class LoadTests extends XtextTestCase
 		doLoad("RoyalAndLoyal", "ocl");
 	}
 	
-//	public void testLoad_UML_2_5() throws IOException, InterruptedException {
-//		doLoadUML(URI.createPlatformResourceURI("UML-2.5/XMI-12-Jun-2012/UML.xmi", true));
-//	}
+	public void testLoad_UML_2_5() throws IOException, InterruptedException {
+		doLoadUML(URI.createPlatformResourceURI("UML-2.5/XMI-12-Jun-2012/UMLDI.xmi", true));
+	}
 }

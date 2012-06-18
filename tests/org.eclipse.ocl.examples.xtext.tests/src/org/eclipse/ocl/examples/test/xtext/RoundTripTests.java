@@ -23,14 +23,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.compare.match.MatchOptions;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.ocl.examples.common.utils.ClassUtils;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
+import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
@@ -120,7 +123,11 @@ public class RoundTripTests extends XtextTestCase
 		MessageBinder savedMessageBinder = CS2Pivot.setMessageBinder(CS2Pivot.MessageBinderWithLineContext.INSTANCE);
 		ProjectMap projectMap = ProjectMap.getAdapter(resourceSet);
 		try {
-			projectMap.initializeResourceSet(null);			
+			projectMap.initializeResourceSet(resourceSet);			
+			if (!EMFPlugin.IS_ECLIPSE_RUNNING) {			
+				IProjectDescriptor projectDescriptor = projectMap.getProjectDescriptor("org.eclipse.uml2.uml");
+				projectDescriptor.initializeURIMap(URIConverter.URI_MAP);		// *.ecore2xml must be global
+			}
 //			UMLUtils.initializeContentHandlers(resourceSet);
 //			UMLUtils.initializeContents(resourceSet);
 //			String inputName = stem + ".ocl";
