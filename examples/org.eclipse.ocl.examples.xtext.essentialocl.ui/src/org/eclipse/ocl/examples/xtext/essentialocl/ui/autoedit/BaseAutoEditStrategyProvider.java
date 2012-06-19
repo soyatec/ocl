@@ -22,33 +22,34 @@ import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
 
 public class BaseAutoEditStrategyProvider extends DefaultAutoEditStrategyProvider
 {
-	@Override
-	protected void configureMultilineComments(IEditStrategyAcceptor acceptor) {
-		acceptor.accept(singleLineTerminals.newInstance("/*", "*/"),IDocument.DEFAULT_CONTENT_TYPE);
-		acceptor.accept(multiLineTerminals.newInstance("/*"," * ", "*/"),IDocument.DEFAULT_CONTENT_TYPE);
-		acceptor.accept(multiLineTerminals.newInstance("/*"," * ", "*/"),TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION);
-	}
+//	@Override
+//	protected void configureMultilineComments(IEditStrategyAcceptor acceptor) {
+//		acceptor.accept(singleLineTerminals.newInstance("/*", "*/"),IDocument.DEFAULT_CONTENT_TYPE);
+//		acceptor.accept(multiLineTerminals.newInstance("/*"," * ", "*/"),IDocument.DEFAULT_CONTENT_TYPE);
+//		acceptor.accept(multiLineTerminals.newInstance("/*"," * ", "*/"),TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION);
+//	}
 
-	@Override
-	protected void configureCurlyBracesBlock(IEditStrategyAcceptor acceptor) {
-		acceptor.accept(singleLineTerminals.newInstance("{", "}"),IDocument.DEFAULT_CONTENT_TYPE);
-		acceptor.accept(multiLineTerminals.newInstance("{", null, "}"),IDocument.DEFAULT_CONTENT_TYPE);
-	}
+//	@Override
+//	protected void configureCurlyBracesBlock(IEditStrategyAcceptor acceptor) {
+//		acceptor.accept(singleLineTerminals.newInstance("{", "}"),IDocument.DEFAULT_CONTENT_TYPE);
+//		acceptor.accept(multiLineTerminals.newInstance("{", null, "}"),IDocument.DEFAULT_CONTENT_TYPE);
+//	}
 
-	@Override
-	protected void configureSquareBrackets(IEditStrategyAcceptor acceptor) {
-		acceptor.accept(singleLineTerminals.newInstance("[", "]"),IDocument.DEFAULT_CONTENT_TYPE);
-		acceptor.accept(multiLineTerminals.newInstance("[", null, "]"),IDocument.DEFAULT_CONTENT_TYPE);
-	}
+//	@Override
+//	protected void configureSquareBrackets(IEditStrategyAcceptor acceptor) {
+//		acceptor.accept(singleLineTerminals.newInstance("[", "]"),IDocument.DEFAULT_CONTENT_TYPE);
+//		acceptor.accept(multiLineTerminals.newInstance("[", null, "]"),IDocument.DEFAULT_CONTENT_TYPE);
+//	}
 
-	@Override
-	protected void configureParenthesis(IEditStrategyAcceptor acceptor) {
-		acceptor.accept(singleLineTerminals.newInstance("(", ")"),IDocument.DEFAULT_CONTENT_TYPE);
-		acceptor.accept(multiLineTerminals.newInstance("(", null, ")"),IDocument.DEFAULT_CONTENT_TYPE);
-	}
+//	@Override
+//	protected void configureParenthesis(IEditStrategyAcceptor acceptor) {
+//		acceptor.accept(singleLineTerminals.newInstance("(", ")"),IDocument.DEFAULT_CONTENT_TYPE);
+//		acceptor.accept(multiLineTerminals.newInstance("(", null, ")"),IDocument.DEFAULT_CONTENT_TYPE);
+//	}
 
 	@Override
 	protected void configureStringLiteral(IEditStrategyAcceptor acceptor) {
+		// Clone of the inherited method excluding the double quote functionality
 		acceptor.accept(partitionInsert.newInstance("'","'"),IDocument.DEFAULT_CONTENT_TYPE);
 		// The following two are registered for the default content type, because on deletion 
 		// the command.offset is cursor-1, which is outside the partition of terminals.length = 1.
