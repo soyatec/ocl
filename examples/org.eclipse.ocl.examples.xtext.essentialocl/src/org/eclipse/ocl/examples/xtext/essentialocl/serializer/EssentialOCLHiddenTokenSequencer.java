@@ -16,13 +16,18 @@
  */
 package org.eclipse.ocl.examples.xtext.essentialocl.serializer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.RootCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLGrammarAccess;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.serializer.sequencer.HiddenTokenSequencer;
 
@@ -38,10 +43,15 @@ public class EssentialOCLHiddenTokenSequencer extends HiddenTokenSequencer
 		if (semanticChild instanceof ModelElementCS) {
 			Element pivot = ((ModelElementCS)semanticChild).getPivot();
 			if (pivot != null) {
-				String commentIndent = getCommentIndent(semanticChild);
-				for (Comment comment : pivot.getOwnedComment()) {
-					String body = "\n" + commentIndent + "/**\n" + commentIndent + " * " + comment.getBody().replaceAll("\\n", "\n" + commentIndent + " * ") + "\n" + commentIndent + " */\n";
-					delegate.acceptComment(grammarAccess.getML_COMMENTRule(), body, null);
+				List<Comment> ownedComment = pivot.getOwnedComment();
+				if (ownedComment.size() > 0) {
+					String commentIndent = getCommentIndent(semanticChild);
+					TerminalRule ml_COMMENTRule = grammarAccess.getML_COMMENTRule();
+					for (Comment comment : ownedComment) {
+						String indentedBody = comment.getBody().replaceAll("\\n", "\n" + commentIndent + " * ");
+						String body = "/**\n" + commentIndent + " * " + indentedBody + "\n" + commentIndent + " */";
+						delegate.acceptComment(ml_COMMENTRule, body, null);
+					}
 				}
 			}
 		}
@@ -62,7 +72,29 @@ public class EssentialOCLHiddenTokenSequencer extends HiddenTokenSequencer
 		return true;
 	}
 
+	private static List<String> indents = new ArrayList<String>();
+	
 	protected String getCommentIndent(EObject semanticChild) {
-		return "\t\t\t\t";
+		int i = 0;
+		EObject eObject = semanticChild;
+		while (eObject != null) {
+			EObject eContainer = eObject.eContainer();
+			if (eContainer instanceof RootCS) {
+				break;
+			}
+			eObject = eContainer;
+			i++;
+		}
+		if (i >= indents.size()) {
+			for (int j = indents.size(); j <= i; j++) {
+				if (j == 0) {
+					indents.add("");
+				}
+				else {
+					indents.add(indents.get(j-1) + "\t");
+				}
+			}
+		}
+		return indents.get(i);
 	}
 }

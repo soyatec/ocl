@@ -67,6 +67,9 @@ public class CompleteOCLFormatter extends AbstractEssentialOCLFormatter
 	    configureTupleLiteralExpCS(c, f.getTupleLiteralExpCSAccess());
 	    configureTupleTypeCS(c, f.getTupleTypeCSAccess());
 
+	    c.setLinewrap(2).before(f.getML_COMMENTRule());
+	    c.setLinewrap(1).after(f.getML_COMMENTRule());
+
 	    {
 			BodyCSElements a = f.getBodyCSAccess();
 //		    c.setLinewrap(2).before(a.getStereotypeBodyKeyword_0_0());

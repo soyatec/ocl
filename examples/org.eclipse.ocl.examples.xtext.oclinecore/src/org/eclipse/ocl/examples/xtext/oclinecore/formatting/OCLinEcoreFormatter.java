@@ -73,6 +73,9 @@ public class OCLinEcoreFormatter extends AbstractEssentialOCLFormatter {
 	    configureTupleLiteralExpCS(c, f.getTupleLiteralExpCSAccess());
 	    configureTupleTypeCS(c, f.getTupleTypeCSAccess());
 
+	    c.setLinewrap(2).before(f.getML_COMMENTRule());
+	    c.setLinewrap(1).after(f.getML_COMMENTRule());
+
 	    c.setLinewrap(1).after(f.getRootPackageCSAccess().getNameAssignment_1_1());
 
 	    c.setLinewrap(2).between(f.getImportCSRule(), f.getPackageCSRule());
