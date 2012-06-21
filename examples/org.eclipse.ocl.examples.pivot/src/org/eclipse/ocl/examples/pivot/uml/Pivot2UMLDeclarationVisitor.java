@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.ocl.examples.common.utils.StringUtils;
 import org.eclipse.ocl.examples.pivot.Annotation;
+import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Detail;
@@ -143,11 +144,11 @@ public class Pivot2UMLDeclarationVisitor
 	protected void copyNamedElement(org.eclipse.uml2.uml.NamedElement umlNamedElement, NamedElement pivotNamedElement) {
 		copyModelElement(umlNamedElement, pivotNamedElement);
 		umlNamedElement.setName(pivotNamedElement.getName());
+		safeVisitAll(umlNamedElement.getOwnedComments(), pivotNamedElement.getOwnedComment());
 	}
 
 	protected void copyTypedElement(org.eclipse.uml2.uml.TypedElement umlTypedElement, TypedMultiplicityElement pivotTypedElement) {
 		copyNamedElement(umlTypedElement, pivotTypedElement);
-//		safeVisitAll(umlTypedElement.getEAnnotations(), pivotTypedElement.getOwnedAnnotation());
 		context.defer(pivotTypedElement);		// Defer type setting
 	}
 
@@ -200,6 +201,13 @@ public class Pivot2UMLDeclarationVisitor
 		context.defer(pivotClass);		// Defer superclass resolution
 		umlClassifier.setIsAbstract(pivotClass.isAbstract());
 		return umlClassifier;
+	}
+
+ 	@Override
+	public EModelElement visitComment(Comment pivotComment) {
+		org.eclipse.uml2.uml.Comment umlComment = UMLFactory.eINSTANCE.createComment();
+		umlComment.setBody(pivotComment.getBody());
+		return umlComment;
 	}
 
 	@Override
