@@ -51,7 +51,7 @@ public class NavigationOperatorCSAttribution extends AbstractAttribution
 						}
 						environmentView.addElementsOfScope(elementType, scopeView);
 					}
-					else {										// object.object-operation
+					else if (type != null) {										// object.object-operation
 						environmentView.addElementsOfScope(type, scopeView);		
 						environmentView.addElementsOfScope(type.getPackage(), scopeView);						
 					}
