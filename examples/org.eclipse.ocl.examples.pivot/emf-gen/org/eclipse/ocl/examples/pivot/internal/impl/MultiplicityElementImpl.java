@@ -19,13 +19,14 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigInteger;
 import java.util.Collection;
-
 import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.MultiplicityElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -291,6 +292,8 @@ public abstract class MultiplicityElementImpl
 		{
 			case PivotPackage.MULTIPLICITY_ELEMENT__OWNED_COMMENT:
 				return getOwnedComment();
+			case PivotPackage.MULTIPLICITY_ELEMENT__APPLIED_STEREOTYPE:
+				return getAppliedStereotype();
 			case PivotPackage.MULTIPLICITY_ELEMENT__IS_ORDERED:
 				return isOrdered();
 			case PivotPackage.MULTIPLICITY_ELEMENT__IS_UNIQUE:
@@ -316,6 +319,10 @@ public abstract class MultiplicityElementImpl
 			case PivotPackage.MULTIPLICITY_ELEMENT__OWNED_COMMENT:
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
+				return;
+			case PivotPackage.MULTIPLICITY_ELEMENT__APPLIED_STEREOTYPE:
+				getAppliedStereotype().clear();
+				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
 				return;
 			case PivotPackage.MULTIPLICITY_ELEMENT__IS_ORDERED:
 				setIsOrdered((Boolean)newValue);
@@ -345,6 +352,9 @@ public abstract class MultiplicityElementImpl
 			case PivotPackage.MULTIPLICITY_ELEMENT__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
+			case PivotPackage.MULTIPLICITY_ELEMENT__APPLIED_STEREOTYPE:
+				getAppliedStereotype().clear();
+				return;
 			case PivotPackage.MULTIPLICITY_ELEMENT__IS_ORDERED:
 				setIsOrdered(IS_ORDERED_EDEFAULT);
 				return;
@@ -372,6 +382,8 @@ public abstract class MultiplicityElementImpl
 		{
 			case PivotPackage.MULTIPLICITY_ELEMENT__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
+			case PivotPackage.MULTIPLICITY_ELEMENT__APPLIED_STEREOTYPE:
+				return appliedStereotype != null && !appliedStereotype.isEmpty();
 			case PivotPackage.MULTIPLICITY_ELEMENT__IS_ORDERED:
 				return ((eFlags & IS_ORDERED_EFLAG) != 0) != IS_ORDERED_EDEFAULT;
 			case PivotPackage.MULTIPLICITY_ELEMENT__IS_UNIQUE:

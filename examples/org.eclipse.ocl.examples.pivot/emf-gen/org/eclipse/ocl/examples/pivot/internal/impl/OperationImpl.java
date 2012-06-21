@@ -53,6 +53,7 @@ import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.Annotation;
+import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -738,6 +739,8 @@ public class OperationImpl
 		{
 			case PivotPackage.OPERATION__OWNED_COMMENT:
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
+			case PivotPackage.OPERATION__APPLIED_STEREOTYPE:
+				return ((InternalEList<?>)getAppliedStereotype()).basicRemove(otherEnd, msgs);
 			case PivotPackage.OPERATION__OWNED_RULE:
 				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.OPERATION__OWNED_ANNOTATION:
@@ -787,6 +790,8 @@ public class OperationImpl
 		{
 			case PivotPackage.OPERATION__OWNED_COMMENT:
 				return getOwnedComment();
+			case PivotPackage.OPERATION__APPLIED_STEREOTYPE:
+				return getAppliedStereotype();
 			case PivotPackage.OPERATION__NAME:
 				return getName();
 			case PivotPackage.OPERATION__OWNED_RULE:
@@ -852,6 +857,10 @@ public class OperationImpl
 			case PivotPackage.OPERATION__OWNED_COMMENT:
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
+				return;
+			case PivotPackage.OPERATION__APPLIED_STEREOTYPE:
+				getAppliedStereotype().clear();
+				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
 				return;
 			case PivotPackage.OPERATION__NAME:
 				setName((String)newValue);
@@ -938,6 +947,9 @@ public class OperationImpl
 			case PivotPackage.OPERATION__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
+			case PivotPackage.OPERATION__APPLIED_STEREOTYPE:
+				getAppliedStereotype().clear();
+				return;
 			case PivotPackage.OPERATION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -1016,6 +1028,8 @@ public class OperationImpl
 		{
 			case PivotPackage.OPERATION__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
+			case PivotPackage.OPERATION__APPLIED_STEREOTYPE:
+				return appliedStereotype != null && !appliedStereotype.isEmpty();
 			case PivotPackage.OPERATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.OPERATION__OWNED_RULE:

@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.examples.pivot.Annotation;
+import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -199,6 +200,8 @@ public abstract class CallExpImpl
 		{
 			case PivotPackage.CALL_EXP__OWNED_COMMENT:
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CALL_EXP__APPLIED_STEREOTYPE:
+				return ((InternalEList<?>)getAppliedStereotype()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CALL_EXP__OWNED_RULE:
 				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CALL_EXP__OWNED_ANNOTATION:
@@ -220,6 +223,8 @@ public abstract class CallExpImpl
 		{
 			case PivotPackage.CALL_EXP__OWNED_COMMENT:
 				return getOwnedComment();
+			case PivotPackage.CALL_EXP__APPLIED_STEREOTYPE:
+				return getAppliedStereotype();
 			case PivotPackage.CALL_EXP__NAME:
 				return getName();
 			case PivotPackage.CALL_EXP__OWNED_RULE:
@@ -252,6 +257,10 @@ public abstract class CallExpImpl
 			case PivotPackage.CALL_EXP__OWNED_COMMENT:
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
+				return;
+			case PivotPackage.CALL_EXP__APPLIED_STEREOTYPE:
+				getAppliedStereotype().clear();
+				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
 				return;
 			case PivotPackage.CALL_EXP__NAME:
 				setName((String)newValue);
@@ -292,6 +301,9 @@ public abstract class CallExpImpl
 			case PivotPackage.CALL_EXP__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
+			case PivotPackage.CALL_EXP__APPLIED_STEREOTYPE:
+				getAppliedStereotype().clear();
+				return;
 			case PivotPackage.CALL_EXP__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -328,6 +340,8 @@ public abstract class CallExpImpl
 		{
 			case PivotPackage.CALL_EXP__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
+			case PivotPackage.CALL_EXP__APPLIED_STEREOTYPE:
+				return appliedStereotype != null && !appliedStereotype.isEmpty();
 			case PivotPackage.CALL_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.CALL_EXP__OWNED_RULE:

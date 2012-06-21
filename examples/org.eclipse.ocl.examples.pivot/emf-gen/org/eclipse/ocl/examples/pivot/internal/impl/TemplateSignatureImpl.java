@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
@@ -238,6 +239,8 @@ public class TemplateSignatureImpl
 		{
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
+			case PivotPackage.TEMPLATE_SIGNATURE__APPLIED_STEREOTYPE:
+				return ((InternalEList<?>)getAppliedStereotype()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_PARAMETER:
 				return ((InternalEList<?>)getOwnedParameter()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TEMPLATE_SIGNATURE__TEMPLATE:
@@ -273,6 +276,8 @@ public class TemplateSignatureImpl
 		{
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
 				return getOwnedComment();
+			case PivotPackage.TEMPLATE_SIGNATURE__APPLIED_STEREOTYPE:
+				return getAppliedStereotype();
 			case PivotPackage.TEMPLATE_SIGNATURE__PARAMETER:
 				return getParameter();
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_PARAMETER:
@@ -296,6 +301,10 @@ public class TemplateSignatureImpl
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
+				return;
+			case PivotPackage.TEMPLATE_SIGNATURE__APPLIED_STEREOTYPE:
+				getAppliedStereotype().clear();
+				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
 				return;
 			case PivotPackage.TEMPLATE_SIGNATURE__PARAMETER:
 				getParameter().clear();
@@ -324,6 +333,9 @@ public class TemplateSignatureImpl
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
+			case PivotPackage.TEMPLATE_SIGNATURE__APPLIED_STEREOTYPE:
+				getAppliedStereotype().clear();
+				return;
 			case PivotPackage.TEMPLATE_SIGNATURE__PARAMETER:
 				getParameter().clear();
 				return;
@@ -348,6 +360,8 @@ public class TemplateSignatureImpl
 		{
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
+			case PivotPackage.TEMPLATE_SIGNATURE__APPLIED_STEREOTYPE:
+				return appliedStereotype != null && !appliedStereotype.isEmpty();
 			case PivotPackage.TEMPLATE_SIGNATURE__PARAMETER:
 				return parameter != null && !parameter.isEmpty();
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_PARAMETER:

@@ -18,8 +18,8 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
-
 import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -261,6 +262,8 @@ public abstract class TemplateableElementImpl
 		{
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_COMMENT:
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
+			case PivotPackage.TEMPLATEABLE_ELEMENT__APPLIED_STEREOTYPE:
+				return ((InternalEList<?>)getAppliedStereotype()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TEMPLATEABLE_ELEMENT__TEMPLATE_BINDING:
 				return ((InternalEList<?>)getTemplateBinding()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_TEMPLATE_SIGNATURE:
@@ -280,6 +283,8 @@ public abstract class TemplateableElementImpl
 		{
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_COMMENT:
 				return getOwnedComment();
+			case PivotPackage.TEMPLATEABLE_ELEMENT__APPLIED_STEREOTYPE:
+				return getAppliedStereotype();
 			case PivotPackage.TEMPLATEABLE_ELEMENT__TEMPLATE_BINDING:
 				return getTemplateBinding();
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_TEMPLATE_SIGNATURE:
@@ -303,6 +308,10 @@ public abstract class TemplateableElementImpl
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_COMMENT:
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
+				return;
+			case PivotPackage.TEMPLATEABLE_ELEMENT__APPLIED_STEREOTYPE:
+				getAppliedStereotype().clear();
+				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
 				return;
 			case PivotPackage.TEMPLATEABLE_ELEMENT__TEMPLATE_BINDING:
 				getTemplateBinding().clear();
@@ -330,6 +339,9 @@ public abstract class TemplateableElementImpl
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
+			case PivotPackage.TEMPLATEABLE_ELEMENT__APPLIED_STEREOTYPE:
+				getAppliedStereotype().clear();
+				return;
 			case PivotPackage.TEMPLATEABLE_ELEMENT__TEMPLATE_BINDING:
 				getTemplateBinding().clear();
 				return;
@@ -354,6 +366,8 @@ public abstract class TemplateableElementImpl
 		{
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
+			case PivotPackage.TEMPLATEABLE_ELEMENT__APPLIED_STEREOTYPE:
+				return appliedStereotype != null && !appliedStereotype.isEmpty();
 			case PivotPackage.TEMPLATEABLE_ELEMENT__TEMPLATE_BINDING:
 				return templateBinding != null && !templateBinding.isEmpty();
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_TEMPLATE_SIGNATURE:

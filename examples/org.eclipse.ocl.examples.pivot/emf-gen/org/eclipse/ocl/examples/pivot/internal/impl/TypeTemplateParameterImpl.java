@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -227,6 +228,8 @@ public class TypeTemplateParameterImpl
 		{
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_COMMENT:
 				return getOwnedComment();
+			case PivotPackage.TYPE_TEMPLATE_PARAMETER__APPLIED_STEREOTYPE:
+				return getAppliedStereotype();
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__SIGNATURE:
 				return getSignature();
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
@@ -260,6 +263,10 @@ public class TypeTemplateParameterImpl
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_COMMENT:
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
+				return;
+			case PivotPackage.TYPE_TEMPLATE_PARAMETER__APPLIED_STEREOTYPE:
+				getAppliedStereotype().clear();
+				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
 				return;
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__SIGNATURE:
 				setSignature((TemplateSignature)newValue);
@@ -299,6 +306,9 @@ public class TypeTemplateParameterImpl
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
+			case PivotPackage.TYPE_TEMPLATE_PARAMETER__APPLIED_STEREOTYPE:
+				getAppliedStereotype().clear();
+				return;
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__SIGNATURE:
 				setSignature((TemplateSignature)null);
 				return;
@@ -335,6 +345,8 @@ public class TypeTemplateParameterImpl
 		{
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
+			case PivotPackage.TYPE_TEMPLATE_PARAMETER__APPLIED_STEREOTYPE:
+				return appliedStereotype != null && !appliedStereotype.isEmpty();
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__SIGNATURE:
 				return getSignature() != null;
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:

@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.examples.pivot.Annotation;
+import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.AssociationClass;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -150,6 +151,8 @@ public class AssociationClassImpl
 		{
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_COMMENT:
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
+			case PivotPackage.ASSOCIATION_CLASS__APPLIED_STEREOTYPE:
+				return ((InternalEList<?>)getAppliedStereotype()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_RULE:
 				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_ANNOTATION:
@@ -185,6 +188,8 @@ public class AssociationClassImpl
 		{
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_COMMENT:
 				return getOwnedComment();
+			case PivotPackage.ASSOCIATION_CLASS__APPLIED_STEREOTYPE:
+				return getAppliedStereotype();
 			case PivotPackage.ASSOCIATION_CLASS__NAME:
 				return getName();
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_RULE:
@@ -237,6 +242,10 @@ public class AssociationClassImpl
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_COMMENT:
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
+				return;
+			case PivotPackage.ASSOCIATION_CLASS__APPLIED_STEREOTYPE:
+				getAppliedStereotype().clear();
+				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
 				return;
 			case PivotPackage.ASSOCIATION_CLASS__NAME:
 				setName((String)newValue);
@@ -312,6 +321,9 @@ public class AssociationClassImpl
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
+			case PivotPackage.ASSOCIATION_CLASS__APPLIED_STEREOTYPE:
+				getAppliedStereotype().clear();
+				return;
 			case PivotPackage.ASSOCIATION_CLASS__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -378,6 +390,8 @@ public class AssociationClassImpl
 		{
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
+			case PivotPackage.ASSOCIATION_CLASS__APPLIED_STEREOTYPE:
+				return appliedStereotype != null && !appliedStereotype.isEmpty();
 			case PivotPackage.ASSOCIATION_CLASS__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_RULE:

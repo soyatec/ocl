@@ -49,6 +49,7 @@ public interface Visitor<R>
 	
 	R visitAnnotation(org.eclipse.ocl.examples.pivot.Annotation object);
 	R visitAnyType(org.eclipse.ocl.examples.pivot.AnyType object);
+	R visitAppliedStereotype(org.eclipse.ocl.examples.pivot.AppliedStereotype object);
 	R visitAssociationClass(org.eclipse.ocl.examples.pivot.AssociationClass object);
 	R visitAssociationClassCallExp(org.eclipse.ocl.examples.pivot.AssociationClassCallExp object);
 	R visitBagType(org.eclipse.ocl.examples.pivot.BagType object);
@@ -68,6 +69,9 @@ public interface Visitor<R>
 	R visitConstructorPart(org.eclipse.ocl.examples.pivot.ConstructorPart object);
 	R visitDataType(org.eclipse.ocl.examples.pivot.DataType object);
 	R visitDetail(org.eclipse.ocl.examples.pivot.Detail object);
+	R visitDynamicElement(org.eclipse.ocl.examples.pivot.DynamicElement object);
+	R visitDynamicProperty(org.eclipse.ocl.examples.pivot.DynamicProperty object);
+	R visitDynamicType(org.eclipse.ocl.examples.pivot.DynamicType object);
 	R visitElement(org.eclipse.ocl.examples.pivot.Element object);
 	R visitEnumLiteralExp(org.eclipse.ocl.examples.pivot.EnumLiteralExp object);
 	R visitEnumeration(org.eclipse.ocl.examples.pivot.Enumeration object);
@@ -119,6 +123,7 @@ public interface Visitor<R>
 	R visitSignal(org.eclipse.ocl.examples.pivot.Signal object);
 	R visitState(org.eclipse.ocl.examples.pivot.State object);
 	R visitStateExp(org.eclipse.ocl.examples.pivot.StateExp object);
+	R visitStereotypedProperty(org.eclipse.ocl.examples.pivot.StereotypedProperty object);
 	R visitStringLiteralExp(org.eclipse.ocl.examples.pivot.StringLiteralExp object);
 	R visitTemplateBinding(org.eclipse.ocl.examples.pivot.TemplateBinding object);
 	R visitTemplateParameter(org.eclipse.ocl.examples.pivot.TemplateParameter object);

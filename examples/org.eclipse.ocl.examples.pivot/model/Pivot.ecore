@@ -51,6 +51,12 @@
         eType="#//Element"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AnyType" eSuperTypes="#//Class"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AppliedStereotype" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredType" ordered="false"
+        lowerBound="1" eType="#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stereotypedProperty" ordered="false"
+        upperBound="-1" eType="#//StereotypedProperty" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AssociationClass" eSuperTypes="#//Class">
     <eStructuralFeatures xsi:type="ecore:EReference" name="unownedAttribute" ordered="false"
         upperBound="-1" eType="#//Property" eOpposite="#//Property/association"/>
@@ -311,6 +317,26 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
         lowerBound="1" upperBound="-1" eType="#//String"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DynamicElement" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metaType" ordered="false"
+        lowerBound="1" eType="#//Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DynamicProperty" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" ordered="false"
+        lowerBound="1" eType="#//Property"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" ordered="false"
+        eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DynamicType" eSuperTypes="#//Type #//DynamicElement">
+    <eAnnotations source="duplicates">
+      <contents xsi:type="ecore:EReference" name="metaType" ordered="false" lowerBound="1"
+          eType="#//Type">
+        <eAnnotations source="redefines" references="#//DynamicElement/metaType"/>
+      </contents>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedProperty" ordered="false"
+        upperBound="-1" eType="#//DynamicProperty" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true" eSuperTypes="#//Visitable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An element is a constituent of a model."/>
@@ -344,6 +370,8 @@
         <details key="documentation" value="The Comments owned by this element."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="appliedStereotype" ordered="false"
+        upperBound="-1" eType="#//AppliedStereotype" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EnumLiteralExp" eSuperTypes="#//LiteralExp">
     <eOperations name="TypeIsEnumerationType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -1459,6 +1487,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="StateExp" eSuperTypes="#//OCLExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredState" ordered="false"
         eType="#//State"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StereotypedProperty" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" ordered="false"
+        lowerBound="1" eType="#//Property"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" ordered="false"
+        eType="#//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StringLiteralExp" eSuperTypes="#//PrimitiveLiteralExp">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="stringSymbol" ordered="false"

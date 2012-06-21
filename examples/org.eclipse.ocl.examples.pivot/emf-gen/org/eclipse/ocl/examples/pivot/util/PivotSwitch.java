@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AnyType;
+import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.AssociationClass;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.BagType;
@@ -39,6 +40,9 @@ import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Detail;
+import org.eclipse.ocl.examples.pivot.DynamicElement;
+import org.eclipse.ocl.examples.pivot.DynamicProperty;
+import org.eclipse.ocl.examples.pivot.DynamicType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
 import org.eclipse.ocl.examples.pivot.Enumeration;
@@ -90,6 +94,7 @@ import org.eclipse.ocl.examples.pivot.SetType;
 import org.eclipse.ocl.examples.pivot.Signal;
 import org.eclipse.ocl.examples.pivot.State;
 import org.eclipse.ocl.examples.pivot.StateExp;
+import org.eclipse.ocl.examples.pivot.StereotypedProperty;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
@@ -199,6 +204,15 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElement(anyType);
 				if (result == null) result = caseNameable(anyType);
 				if (result == null) result = caseVisitable(anyType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PivotPackage.APPLIED_STEREOTYPE:
+			{
+				AppliedStereotype appliedStereotype = (AppliedStereotype)theEObject;
+				T result = caseAppliedStereotype(appliedStereotype);
+				if (result == null) result = caseElement(appliedStereotype);
+				if (result == null) result = caseVisitable(appliedStereotype);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -457,6 +471,39 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElement(detail);
 				if (result == null) result = caseNameable(detail);
 				if (result == null) result = caseVisitable(detail);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PivotPackage.DYNAMIC_ELEMENT:
+			{
+				DynamicElement dynamicElement = (DynamicElement)theEObject;
+				T result = caseDynamicElement(dynamicElement);
+				if (result == null) result = caseElement(dynamicElement);
+				if (result == null) result = caseVisitable(dynamicElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PivotPackage.DYNAMIC_PROPERTY:
+			{
+				DynamicProperty dynamicProperty = (DynamicProperty)theEObject;
+				T result = caseDynamicProperty(dynamicProperty);
+				if (result == null) result = caseElement(dynamicProperty);
+				if (result == null) result = caseVisitable(dynamicProperty);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PivotPackage.DYNAMIC_TYPE:
+			{
+				DynamicType dynamicType = (DynamicType)theEObject;
+				T result = caseDynamicType(dynamicType);
+				if (result == null) result = caseType(dynamicType);
+				if (result == null) result = caseDynamicElement(dynamicType);
+				if (result == null) result = caseNamedElement(dynamicType);
+				if (result == null) result = caseTemplateableElement(dynamicType);
+				if (result == null) result = caseParameterableElement(dynamicType);
+				if (result == null) result = caseElement(dynamicType);
+				if (result == null) result = caseNameable(dynamicType);
+				if (result == null) result = caseVisitable(dynamicType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1168,6 +1215,15 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElement(stateExp);
 				if (result == null) result = caseNameable(stateExp);
 				if (result == null) result = caseVisitable(stateExp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PivotPackage.STEREOTYPED_PROPERTY:
+			{
+				StereotypedProperty stereotypedProperty = (StereotypedProperty)theEObject;
+				T result = caseStereotypedProperty(stereotypedProperty);
+				if (result == null) result = caseElement(stereotypedProperty);
+				if (result == null) result = caseVisitable(stereotypedProperty);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -2256,6 +2312,22 @@ public class PivotSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Stereotyped Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Stereotyped Property</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStereotypedProperty(StereotypedProperty object)
+	{
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>String Literal Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -2891,6 +2963,54 @@ public class PivotSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Dynamic Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Dynamic Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDynamicElement(DynamicElement object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Dynamic Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Dynamic Property</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDynamicProperty(DynamicProperty object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Dynamic Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Dynamic Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDynamicType(DynamicType object)
+	{
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Any Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -2902,6 +3022,22 @@ public class PivotSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAnyType(AnyType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Applied Stereotype</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Applied Stereotype</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAppliedStereotype(AppliedStereotype object)
+	{
 		return null;
 	}
 

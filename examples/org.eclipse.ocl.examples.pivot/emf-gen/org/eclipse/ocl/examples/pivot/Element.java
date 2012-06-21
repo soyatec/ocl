@@ -37,6 +37,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Element#getOwnedComment <em>Owned Comment</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Element#getAppliedStereotype <em>Applied Stereotype</em>}</li>
  * </ul>
  * </p>
  *
@@ -74,6 +75,33 @@ public interface Element
 	 */
 	Comment createOwnedComment();
 	
+	/**
+	 * Returns the value of the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.AppliedStereotype}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Applied Stereotype</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Applied Stereotype</em>' containment reference list.
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getElement_AppliedStereotype()
+	 * @model containment="true" ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Element!appliedStereotype'"
+	 * @generated
+	 */
+	EList<AppliedStereotype> getAppliedStereotype();
+
+	/**
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.AppliedStereotype} and appends it to the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.AppliedStereotype}.
+	 * @see #getAppliedStereotype()
+	 * @generated
+	 */
+	AppliedStereotype createAppliedStereotype();
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
+
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -39,8 +40,8 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.bodies.IteratorExpBodies;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
-import org.eclipse.osgi.util.NLS;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.osgi.util.NLS;
 
 /**
  * <!-- begin-user-doc -->

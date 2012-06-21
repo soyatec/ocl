@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AnyType;
+import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.AssociationClass;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.AssociativityKind;
@@ -48,6 +49,9 @@ import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Detail;
+import org.eclipse.ocl.examples.pivot.DynamicElement;
+import org.eclipse.ocl.examples.pivot.DynamicProperty;
+import org.eclipse.ocl.examples.pivot.DynamicType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
 import org.eclipse.ocl.examples.pivot.Enumeration;
@@ -99,6 +103,7 @@ import org.eclipse.ocl.examples.pivot.SetType;
 import org.eclipse.ocl.examples.pivot.Signal;
 import org.eclipse.ocl.examples.pivot.State;
 import org.eclipse.ocl.examples.pivot.StateExp;
+import org.eclipse.ocl.examples.pivot.StereotypedProperty;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
@@ -619,6 +624,8 @@ public class PivotValidator
 				return validateAnnotation((Annotation)value, diagnostics, context);
 			case PivotPackage.ANY_TYPE:
 				return validateAnyType((AnyType)value, diagnostics, context);
+			case PivotPackage.APPLIED_STEREOTYPE:
+				return validateAppliedStereotype((AppliedStereotype)value, diagnostics, context);
 			case PivotPackage.ASSOCIATION_CLASS:
 				return validateAssociationClass((AssociationClass)value, diagnostics, context);
 			case PivotPackage.ASSOCIATION_CLASS_CALL_EXP:
@@ -657,6 +664,12 @@ public class PivotValidator
 				return validateDataType((DataType)value, diagnostics, context);
 			case PivotPackage.DETAIL:
 				return validateDetail((Detail)value, diagnostics, context);
+			case PivotPackage.DYNAMIC_ELEMENT:
+				return validateDynamicElement((DynamicElement)value, diagnostics, context);
+			case PivotPackage.DYNAMIC_PROPERTY:
+				return validateDynamicProperty((DynamicProperty)value, diagnostics, context);
+			case PivotPackage.DYNAMIC_TYPE:
+				return validateDynamicType((DynamicType)value, diagnostics, context);
 			case PivotPackage.ELEMENT:
 				return validateElement((Element)value, diagnostics, context);
 			case PivotPackage.ENUM_LITERAL_EXP:
@@ -765,6 +778,8 @@ public class PivotValidator
 				return validateState((State)value, diagnostics, context);
 			case PivotPackage.STATE_EXP:
 				return validateStateExp((StateExp)value, diagnostics, context);
+			case PivotPackage.STEREOTYPED_PROPERTY:
+				return validateStereotypedProperty((StereotypedProperty)value, diagnostics, context);
 			case PivotPackage.STRING_LITERAL_EXP:
 				return validateStringLiteralExp((StringLiteralExp)value, diagnostics, context);
 			case PivotPackage.TEMPLATE_BINDING:
@@ -879,6 +894,26 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)anyType, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)anyType, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(anyType, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAppliedStereotype(AppliedStereotype appliedStereotype, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		if (!validate_NoCircularContainment((EObject)appliedStereotype, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)appliedStereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)appliedStereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)appliedStereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)appliedStereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)appliedStereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)appliedStereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)appliedStereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)appliedStereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(appliedStereotype, diagnostics, context);
 		return result;
 	}
 
@@ -1720,6 +1755,66 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)detail, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)detail, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(detail, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateDynamicElement(DynamicElement dynamicElement, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		if (!validate_NoCircularContainment((EObject)dynamicElement, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)dynamicElement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)dynamicElement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)dynamicElement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)dynamicElement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)dynamicElement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)dynamicElement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)dynamicElement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)dynamicElement, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(dynamicElement, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateDynamicProperty(DynamicProperty dynamicProperty, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		if (!validate_NoCircularContainment((EObject)dynamicProperty, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)dynamicProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)dynamicProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)dynamicProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)dynamicProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)dynamicProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)dynamicProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)dynamicProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)dynamicProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(dynamicProperty, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateDynamicType(DynamicType dynamicType, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		if (!validate_NoCircularContainment((EObject)dynamicType, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)dynamicType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)dynamicType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)dynamicType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)dynamicType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)dynamicType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)dynamicType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)dynamicType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)dynamicType, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(dynamicType, diagnostics, context);
 		return result;
 	}
 
@@ -3221,6 +3316,26 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)stateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)stateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(stateExp, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateStereotypedProperty(StereotypedProperty stereotypedProperty, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		if (!validate_NoCircularContainment((EObject)stereotypedProperty, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)stereotypedProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)stereotypedProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)stereotypedProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)stereotypedProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)stereotypedProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)stereotypedProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)stereotypedProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)stereotypedProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(stereotypedProperty, diagnostics, context);
 		return result;
 	}
 

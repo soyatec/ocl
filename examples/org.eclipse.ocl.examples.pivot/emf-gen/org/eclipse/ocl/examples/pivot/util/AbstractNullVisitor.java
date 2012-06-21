@@ -49,6 +49,10 @@ public abstract class AbstractNullVisitor<R, C>
 		return null;
 	}
 
+	public R visitAppliedStereotype(org.eclipse.ocl.examples.pivot.AppliedStereotype object) {
+		return null;
+	}
+
 	public R visitAssociationClass(org.eclipse.ocl.examples.pivot.AssociationClass object) {
 		return null;
 	}
@@ -122,6 +126,18 @@ public abstract class AbstractNullVisitor<R, C>
 	}
 
 	public R visitDetail(org.eclipse.ocl.examples.pivot.Detail object) {
+		return null;
+	}
+
+	public R visitDynamicElement(org.eclipse.ocl.examples.pivot.DynamicElement object) {
+		return null;
+	}
+
+	public R visitDynamicProperty(org.eclipse.ocl.examples.pivot.DynamicProperty object) {
+		return null;
+	}
+
+	public R visitDynamicType(org.eclipse.ocl.examples.pivot.DynamicType object) {
 		return null;
 	}
 
@@ -326,6 +342,10 @@ public abstract class AbstractNullVisitor<R, C>
 	}
 
 	public R visitStateExp(org.eclipse.ocl.examples.pivot.StateExp object) {
+		return null;
+	}
+
+	public R visitStereotypedProperty(org.eclipse.ocl.examples.pivot.StereotypedProperty object) {
 		return null;
 	}
 

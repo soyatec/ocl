@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.pivot.Annotation;
+import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Enumeration;
@@ -165,6 +166,8 @@ public class EnumerationImpl
 		{
 			case PivotPackage.ENUMERATION__OWNED_COMMENT:
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
+			case PivotPackage.ENUMERATION__APPLIED_STEREOTYPE:
+				return ((InternalEList<?>)getAppliedStereotype()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ENUMERATION__OWNED_RULE:
 				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ENUMERATION__OWNED_ANNOTATION:
@@ -200,6 +203,8 @@ public class EnumerationImpl
 		{
 			case PivotPackage.ENUMERATION__OWNED_COMMENT:
 				return getOwnedComment();
+			case PivotPackage.ENUMERATION__APPLIED_STEREOTYPE:
+				return getAppliedStereotype();
 			case PivotPackage.ENUMERATION__NAME:
 				return getName();
 			case PivotPackage.ENUMERATION__OWNED_RULE:
@@ -257,6 +262,10 @@ public class EnumerationImpl
 			case PivotPackage.ENUMERATION__OWNED_COMMENT:
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
+				return;
+			case PivotPackage.ENUMERATION__APPLIED_STEREOTYPE:
+				getAppliedStereotype().clear();
+				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
 				return;
 			case PivotPackage.ENUMERATION__NAME:
 				setName((String)newValue);
@@ -338,6 +347,9 @@ public class EnumerationImpl
 			case PivotPackage.ENUMERATION__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
+			case PivotPackage.ENUMERATION__APPLIED_STEREOTYPE:
+				getAppliedStereotype().clear();
+				return;
 			case PivotPackage.ENUMERATION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -410,6 +422,8 @@ public class EnumerationImpl
 		{
 			case PivotPackage.ENUMERATION__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
+			case PivotPackage.ENUMERATION__APPLIED_STEREOTYPE:
+				return appliedStereotype != null && !appliedStereotype.isEmpty();
 			case PivotPackage.ENUMERATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.ENUMERATION__OWNED_RULE:

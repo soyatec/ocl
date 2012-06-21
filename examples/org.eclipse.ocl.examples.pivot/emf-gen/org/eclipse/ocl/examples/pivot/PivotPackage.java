@@ -92,7 +92,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getOCLExpression()
 	 * @generated
 	 */
-	int OCL_EXPRESSION = 51;
+	int OCL_EXPRESSION = 55;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.CallExpImpl <em>Call Exp</em>}' class.
@@ -102,7 +102,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getCallExp()
 	 * @generated
 	 */
-	int CALL_EXP = 6;
+	int CALL_EXP = 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.FeatureCallExpImpl <em>Feature Call Exp</em>}' class.
@@ -112,7 +112,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getFeatureCallExp()
 	 * @generated
 	 */
-	int FEATURE_CALL_EXP = 27;
+	int FEATURE_CALL_EXP = 31;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.NavigationCallExpImpl <em>Navigation Call Exp</em>}' class.
@@ -122,7 +122,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getNavigationCallExp()
 	 * @generated
 	 */
-	int NAVIGATION_CALL_EXP = 48;
+	int NAVIGATION_CALL_EXP = 52;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.AssociationClassCallExpImpl <em>Association Class Call Exp</em>}' class.
@@ -132,7 +132,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getAssociationClassCallExp()
 	 * @generated
 	 */
-	int ASSOCIATION_CLASS_CALL_EXP = 3;
+	int ASSOCIATION_CLASS_CALL_EXP = 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.DataTypeImpl <em>Data Type</em>}' class.
@@ -142,7 +142,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getDataType()
 	 * @generated
 	 */
-	int DATA_TYPE = 19;
+	int DATA_TYPE = 20;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.CollectionTypeImpl <em>Collection Type</em>}' class.
@@ -152,7 +152,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getCollectionType()
 	 * @generated
 	 */
-	int COLLECTION_TYPE = 14;
+	int COLLECTION_TYPE = 15;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.BagTypeImpl <em>Bag Type</em>}' class.
@@ -162,7 +162,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getBagType()
 	 * @generated
 	 */
-	int BAG_TYPE = 4;
+	int BAG_TYPE = 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.LiteralExpImpl <em>Literal Exp</em>}' class.
@@ -172,7 +172,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getLiteralExp()
 	 * @generated
 	 */
-	int LITERAL_EXP = 38;
+	int LITERAL_EXP = 42;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.PrimitiveLiteralExpImpl <em>Primitive Literal Exp</em>}' class.
@@ -182,7 +182,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getPrimitiveLiteralExp()
 	 * @generated
 	 */
-	int PRIMITIVE_LITERAL_EXP = 63;
+	int PRIMITIVE_LITERAL_EXP = 67;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.BooleanLiteralExpImpl <em>Boolean Literal Exp</em>}' class.
@@ -192,7 +192,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getBooleanLiteralExp()
 	 * @generated
 	 */
-	int BOOLEAN_LITERAL_EXP = 5;
+	int BOOLEAN_LITERAL_EXP = 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.CallOperationActionImpl <em>Call Operation Action</em>}' class.
@@ -202,7 +202,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getCallOperationAction()
 	 * @generated
 	 */
-	int CALL_OPERATION_ACTION = 7;
+	int CALL_OPERATION_ACTION = 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.CollectionLiteralPartImpl <em>Collection Literal Part</em>}' class.
@@ -212,7 +212,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getCollectionLiteralPart()
 	 * @generated
 	 */
-	int COLLECTION_LITERAL_PART = 12;
+	int COLLECTION_LITERAL_PART = 13;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.CollectionItemImpl <em>Collection Item</em>}' class.
@@ -222,7 +222,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getCollectionItem()
 	 * @generated
 	 */
-	int COLLECTION_ITEM = 10;
+	int COLLECTION_ITEM = 11;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.CollectionLiteralExpImpl <em>Collection Literal Exp</em>}' class.
@@ -232,7 +232,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getCollectionLiteralExp()
 	 * @generated
 	 */
-	int COLLECTION_LITERAL_EXP = 11;
+	int COLLECTION_LITERAL_EXP = 12;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.CollectionRangeImpl <em>Collection Range</em>}' class.
@@ -242,7 +242,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getCollectionRange()
 	 * @generated
 	 */
-	int COLLECTION_RANGE = 13;
+	int COLLECTION_RANGE = 14;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.EnumLiteralExpImpl <em>Enum Literal Exp</em>}' class.
@@ -252,7 +252,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getEnumLiteralExp()
 	 * @generated
 	 */
-	int ENUM_LITERAL_EXP = 22;
+	int ENUM_LITERAL_EXP = 26;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.EnumerationLiteralImpl <em>Enumeration Literal</em>}' class.
@@ -262,7 +262,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getEnumerationLiteral()
 	 * @generated
 	 */
-	int ENUMERATION_LITERAL = 24;
+	int ENUMERATION_LITERAL = 28;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.EnumerationImpl <em>Enumeration</em>}' class.
@@ -272,7 +272,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getEnumeration()
 	 * @generated
 	 */
-	int ENUMERATION = 23;
+	int ENUMERATION = 27;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.OpaqueExpressionImpl <em>Opaque Expression</em>}' class.
@@ -282,7 +282,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getOpaqueExpression()
 	 * @generated
 	 */
-	int OPAQUE_EXPRESSION = 52;
+	int OPAQUE_EXPRESSION = 56;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOCLImpl <em>Expression In OCL</em>}' class.
@@ -292,7 +292,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getExpressionInOCL()
 	 * @generated
 	 */
-	int EXPRESSION_IN_OCL = 25;
+	int EXPRESSION_IN_OCL = 29;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.VariableImpl <em>Variable</em>}' class.
@@ -302,7 +302,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getVariable()
 	 * @generated
 	 */
-	int VARIABLE = 94;
+	int VARIABLE = 99;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.IfExpImpl <em>If Exp</em>}' class.
@@ -312,7 +312,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getIfExp()
 	 * @generated
 	 */
-	int IF_EXP = 28;
+	int IF_EXP = 32;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.NumericLiteralExpImpl <em>Numeric Literal Exp</em>}' class.
@@ -322,7 +322,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getNumericLiteralExp()
 	 * @generated
 	 */
-	int NUMERIC_LITERAL_EXP = 50;
+	int NUMERIC_LITERAL_EXP = 54;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.IntegerLiteralExpImpl <em>Integer Literal Exp</em>}' class.
@@ -332,7 +332,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getIntegerLiteralExp()
 	 * @generated
 	 */
-	int INTEGER_LITERAL_EXP = 29;
+	int INTEGER_LITERAL_EXP = 33;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.InvalidLiteralExpImpl <em>Invalid Literal Exp</em>}' class.
@@ -342,7 +342,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getInvalidLiteralExp()
 	 * @generated
 	 */
-	int INVALID_LITERAL_EXP = 30;
+	int INVALID_LITERAL_EXP = 34;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.InvalidTypeImpl <em>Invalid Type</em>}' class.
@@ -352,7 +352,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getInvalidType()
 	 * @generated
 	 */
-	int INVALID_TYPE = 31;
+	int INVALID_TYPE = 35;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.LetExpImpl <em>Let Exp</em>}' class.
@@ -362,7 +362,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getLetExp()
 	 * @generated
 	 */
-	int LET_EXP = 36;
+	int LET_EXP = 40;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.LoopExpImpl <em>Loop Exp</em>}' class.
@@ -372,7 +372,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getLoopExp()
 	 * @generated
 	 */
-	int LOOP_EXP = 39;
+	int LOOP_EXP = 43;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.MessageExpImpl <em>Message Exp</em>}' class.
@@ -382,7 +382,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getMessageExp()
 	 * @generated
 	 */
-	int MESSAGE_EXP = 40;
+	int MESSAGE_EXP = 44;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.SendSignalActionImpl <em>Send Signal Action</em>}' class.
@@ -392,7 +392,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getSendSignalAction()
 	 * @generated
 	 */
-	int SEND_SIGNAL_ACTION = 69;
+	int SEND_SIGNAL_ACTION = 73;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.SignalImpl <em>Signal</em>}' class.
@@ -402,7 +402,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getSignal()
 	 * @generated
 	 */
-	int SIGNAL = 72;
+	int SIGNAL = 76;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.MessageTypeImpl <em>Message Type</em>}' class.
@@ -412,7 +412,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getMessageType()
 	 * @generated
 	 */
-	int MESSAGE_TYPE = 41;
+	int MESSAGE_TYPE = 45;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.NullLiteralExpImpl <em>Null Literal Exp</em>}' class.
@@ -422,7 +422,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getNullLiteralExp()
 	 * @generated
 	 */
-	int NULL_LITERAL_EXP = 49;
+	int NULL_LITERAL_EXP = 53;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationCallExpImpl <em>Operation Call Exp</em>}' class.
@@ -432,7 +432,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getOperationCallExp()
 	 * @generated
 	 */
-	int OPERATION_CALL_EXP = 54;
+	int OPERATION_CALL_EXP = 58;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.OrderedSetTypeImpl <em>Ordered Set Type</em>}' class.
@@ -442,7 +442,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getOrderedSetType()
 	 * @generated
 	 */
-	int ORDERED_SET_TYPE = 56;
+	int ORDERED_SET_TYPE = 60;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.PackageableElementImpl <em>Packageable Element</em>}' class.
@@ -452,7 +452,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getPackageableElement()
 	 * @generated
 	 */
-	int PACKAGEABLE_ELEMENT = 58;
+	int PACKAGEABLE_ELEMENT = 62;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.PrimitiveTypeImpl <em>Primitive Type</em>}' class.
@@ -462,7 +462,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getPrimitiveType()
 	 * @generated
 	 */
-	int PRIMITIVE_TYPE = 64;
+	int PRIMITIVE_TYPE = 68;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyCallExpImpl <em>Property Call Exp</em>}' class.
@@ -472,7 +472,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getPropertyCallExp()
 	 * @generated
 	 */
-	int PROPERTY_CALL_EXP = 66;
+	int PROPERTY_CALL_EXP = 70;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.RealLiteralExpImpl <em>Real Literal Exp</em>}' class.
@@ -482,7 +482,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getRealLiteralExp()
 	 * @generated
 	 */
-	int REAL_LITERAL_EXP = 67;
+	int REAL_LITERAL_EXP = 71;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.SequenceTypeImpl <em>Sequence Type</em>}' class.
@@ -492,7 +492,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getSequenceType()
 	 * @generated
 	 */
-	int SEQUENCE_TYPE = 70;
+	int SEQUENCE_TYPE = 74;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.SetTypeImpl <em>Set Type</em>}' class.
@@ -502,7 +502,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getSetType()
 	 * @generated
 	 */
-	int SET_TYPE = 71;
+	int SET_TYPE = 75;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl <em>State</em>}' class.
@@ -512,7 +512,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getState()
 	 * @generated
 	 */
-	int STATE = 73;
+	int STATE = 77;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.StateExpImpl <em>State Exp</em>}' class.
@@ -522,7 +522,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getStateExp()
 	 * @generated
 	 */
-	int STATE_EXP = 74;
+	int STATE_EXP = 78;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.StringLiteralExpImpl <em>String Literal Exp</em>}' class.
@@ -532,7 +532,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getStringLiteralExp()
 	 * @generated
 	 */
-	int STRING_LITERAL_EXP = 75;
+	int STRING_LITERAL_EXP = 80;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateParameterTypeImpl <em>Template Parameter Type</em>}' class.
@@ -542,7 +542,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTemplateParameterType()
 	 * @generated
 	 */
-	int TEMPLATE_PARAMETER_TYPE = 79;
+	int TEMPLATE_PARAMETER_TYPE = 84;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TupleLiteralExpImpl <em>Tuple Literal Exp</em>}' class.
@@ -552,7 +552,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTupleLiteralExp()
 	 * @generated
 	 */
-	int TUPLE_LITERAL_EXP = 82;
+	int TUPLE_LITERAL_EXP = 87;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TupleLiteralPartImpl <em>Tuple Literal Part</em>}' class.
@@ -562,7 +562,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTupleLiteralPart()
 	 * @generated
 	 */
-	int TUPLE_LITERAL_PART = 83;
+	int TUPLE_LITERAL_PART = 88;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TupleTypeImpl <em>Tuple Type</em>}' class.
@@ -572,7 +572,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTupleType()
 	 * @generated
 	 */
-	int TUPLE_TYPE = 84;
+	int TUPLE_TYPE = 89;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TypeExpImpl <em>Type Exp</em>}' class.
@@ -582,7 +582,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTypeExp()
 	 * @generated
 	 */
-	int TYPE_EXP = 86;
+	int TYPE_EXP = 91;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.UnlimitedNaturalLiteralExpImpl <em>Unlimited Natural Literal Exp</em>}' class.
@@ -592,7 +592,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getUnlimitedNaturalLiteralExp()
 	 * @generated
 	 */
-	int UNLIMITED_NATURAL_LITERAL_EXP = 90;
+	int UNLIMITED_NATURAL_LITERAL_EXP = 95;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.UnspecifiedValueExpImpl <em>Unspecified Value Exp</em>}' class.
@@ -602,7 +602,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getUnspecifiedValueExp()
 	 * @generated
 	 */
-	int UNSPECIFIED_VALUE_EXP = 92;
+	int UNSPECIFIED_VALUE_EXP = 97;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.VariableExpImpl <em>Variable Exp</em>}' class.
@@ -612,7 +612,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getVariableExp()
 	 * @generated
 	 */
-	int VARIABLE_EXP = 96;
+	int VARIABLE_EXP = 101;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.VoidTypeImpl <em>Void Type</em>}' class.
@@ -622,7 +622,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getVoidType()
 	 * @generated
 	 */
-	int VOID_TYPE = 99;
+	int VOID_TYPE = 104;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.util.Pivotable <em>Pivotable</em>}' class.
@@ -632,7 +632,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getPivotable()
 	 * @generated
 	 */
-	int PIVOTABLE = 61;
+	int PIVOTABLE = 65;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.util.Visitable <em>Visitable</em>}' class.
@@ -642,7 +642,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getVisitable()
 	 * @generated
 	 */
-	int VISITABLE = 97;
+	int VISITABLE = 102;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.ElementImpl <em>Element</em>}' class.
@@ -652,7 +652,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getElement()
 	 * @generated
 	 */
-	int ELEMENT = 21;
+	int ELEMENT = 25;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.NamedElementImpl <em>Named Element</em>}' class.
@@ -662,7 +662,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getNamedElement()
 	 * @generated
 	 */
-	int NAMED_ELEMENT = 46;
+	int NAMED_ELEMENT = 50;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.AnnotationImpl <em>Annotation</em>}' class.
@@ -682,7 +682,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getType()
 	 * @generated
 	 */
-	int TYPE = 85;
+	int TYPE = 90;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl <em>Class</em>}' class.
@@ -692,7 +692,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getClass_()
 	 * @generated
 	 */
-	int CLASS = 8;
+	int CLASS = 9;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateableElementImpl <em>Templateable Element</em>}' class.
@@ -702,7 +702,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTemplateableElement()
 	 * @generated
 	 */
-	int TEMPLATEABLE_ELEMENT = 81;
+	int TEMPLATEABLE_ELEMENT = 86;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateBindingImpl <em>Template Binding</em>}' class.
@@ -712,7 +712,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTemplateBinding()
 	 * @generated
 	 */
-	int TEMPLATE_BINDING = 76;
+	int TEMPLATE_BINDING = 81;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateSignatureImpl <em>Template Signature</em>}' class.
@@ -722,7 +722,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTemplateSignature()
 	 * @generated
 	 */
-	int TEMPLATE_SIGNATURE = 80;
+	int TEMPLATE_SIGNATURE = 85;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateParameterImpl <em>Template Parameter</em>}' class.
@@ -732,7 +732,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTemplateParameter()
 	 * @generated
 	 */
-	int TEMPLATE_PARAMETER = 77;
+	int TEMPLATE_PARAMETER = 82;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.ParameterableElementImpl <em>Parameterable Element</em>}' class.
@@ -742,7 +742,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getParameterableElement()
 	 * @generated
 	 */
-	int PARAMETERABLE_ELEMENT = 60;
+	int PARAMETERABLE_ELEMENT = 64;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateParameterSubstitutionImpl <em>Template Parameter Substitution</em>}' class.
@@ -752,7 +752,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTemplateParameterSubstitution()
 	 * @generated
 	 */
-	int TEMPLATE_PARAMETER_SUBSTITUTION = 78;
+	int TEMPLATE_PARAMETER_SUBSTITUTION = 83;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.PackageImpl <em>Package</em>}' class.
@@ -762,7 +762,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getPackage()
 	 * @generated
 	 */
-	int PACKAGE = 57;
+	int PACKAGE = 61;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.NamespaceImpl <em>Namespace</em>}' class.
@@ -772,7 +772,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getNamespace()
 	 * @generated
 	 */
-	int NAMESPACE = 47;
+	int NAMESPACE = 51;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.PrecedenceImpl <em>Precedence</em>}' class.
@@ -782,7 +782,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getPrecedence()
 	 * @generated
 	 */
-	int PRECEDENCE = 62;
+	int PRECEDENCE = 66;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TypeTemplateParameterImpl <em>Type Template Parameter</em>}' class.
@@ -792,7 +792,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTypeTemplateParameter()
 	 * @generated
 	 */
-	int TYPE_TEMPLATE_PARAMETER = 87;
+	int TYPE_TEMPLATE_PARAMETER = 92;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.MultiplicityElementImpl <em>Multiplicity Element</em>}' class.
@@ -802,7 +802,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getMultiplicityElement()
 	 * @generated
 	 */
-	int MULTIPLICITY_ELEMENT = 44;
+	int MULTIPLICITY_ELEMENT = 48;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TypedMultiplicityElementImpl <em>Typed Multiplicity Element</em>}' class.
@@ -812,7 +812,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTypedMultiplicityElement()
 	 * @generated
 	 */
-	int TYPED_MULTIPLICITY_ELEMENT = 89;
+	int TYPED_MULTIPLICITY_ELEMENT = 94;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl <em>Property</em>}' class.
@@ -822,7 +822,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getProperty()
 	 * @generated
 	 */
-	int PROPERTY = 65;
+	int PROPERTY = 69;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TypedElementImpl <em>Typed Element</em>}' class.
@@ -832,7 +832,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTypedElement()
 	 * @generated
 	 */
-	int TYPED_ELEMENT = 88;
+	int TYPED_ELEMENT = 93;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.AssociationClassImpl <em>Association Class</em>}' class.
@@ -842,7 +842,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getAssociationClass()
 	 * @generated
 	 */
-	int ASSOCIATION_CLASS = 2;
+	int ASSOCIATION_CLASS = 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl <em>Operation</em>}' class.
@@ -852,7 +852,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getOperation()
 	 * @generated
 	 */
-	int OPERATION = 53;
+	int OPERATION = 57;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.ParameterImpl <em>Parameter</em>}' class.
@@ -862,7 +862,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getParameter()
 	 * @generated
 	 */
-	int PARAMETER = 59;
+	int PARAMETER = 63;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.VariableDeclarationImpl <em>Variable Declaration</em>}' class.
@@ -872,7 +872,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getVariableDeclaration()
 	 * @generated
 	 */
-	int VARIABLE_DECLARATION = 95;
+	int VARIABLE_DECLARATION = 100;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationTemplateParameterImpl <em>Operation Template Parameter</em>}' class.
@@ -882,7 +882,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getOperationTemplateParameter()
 	 * @generated
 	 */
-	int OPERATION_TEMPLATE_PARAMETER = 55;
+	int OPERATION_TEMPLATE_PARAMETER = 59;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.CommentImpl <em>Comment</em>}' class.
@@ -892,7 +892,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getComment()
 	 * @generated
 	 */
-	int COMMENT = 15;
+	int COMMENT = 16;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.ConstraintImpl <em>Constraint</em>}' class.
@@ -902,7 +902,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getConstraint()
 	 * @generated
 	 */
-	int CONSTRAINT = 16;
+	int CONSTRAINT = 17;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.ValueSpecificationImpl <em>Value Specification</em>}' class.
@@ -912,7 +912,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getValueSpecification()
 	 * @generated
 	 */
-	int VALUE_SPECIFICATION = 93;
+	int VALUE_SPECIFICATION = 98;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.util.Nameable <em>Nameable</em>}' class.
@@ -922,7 +922,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getNameable()
 	 * @generated
 	 */
-	int NAMEABLE = 45;
+	int NAMEABLE = 49;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.DetailImpl <em>Detail</em>}' class.
@@ -932,7 +932,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getDetail()
 	 * @generated
 	 */
-	int DETAIL = 20;
+	int DETAIL = 21;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.AnyTypeImpl <em>Any Type</em>}' class.
@@ -952,7 +952,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getFeature()
 	 * @generated
 	 */
-	int FEATURE = 26;
+	int FEATURE = 30;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.IterateExpImpl <em>Iterate Exp</em>}' class.
@@ -962,7 +962,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getIterateExp()
 	 * @generated
 	 */
-	int ITERATE_EXP = 32;
+	int ITERATE_EXP = 36;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.IterationImpl <em>Iteration</em>}' class.
@@ -972,7 +972,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getIteration()
 	 * @generated
 	 */
-	int ITERATION = 33;
+	int ITERATION = 37;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.IteratorExpImpl <em>Iterator Exp</em>}' class.
@@ -982,7 +982,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getIteratorExp()
 	 * @generated
 	 */
-	int ITERATOR_EXP = 34;
+	int ITERATOR_EXP = 38;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.LibraryImpl <em>Library</em>}' class.
@@ -992,7 +992,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getLibrary()
 	 * @generated
 	 */
-	int LIBRARY = 37;
+	int LIBRARY = 41;
 
 	/**
 	 * The number of structural features of the '<em>Visitable</em>' class.
@@ -1022,13 +1022,22 @@ public interface PivotPackage
 	int ELEMENT__OWNED_COMMENT = VISITABLE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT__APPLIED_STEREOTYPE = VISITABLE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ELEMENT_FEATURE_COUNT = VISITABLE_FEATURE_COUNT + 1;
+	int ELEMENT_FEATURE_COUNT = VISITABLE_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -1065,6 +1074,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int NAMED_ELEMENT__OWNED_COMMENT = ELEMENT__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT__APPLIED_STEREOTYPE = ELEMENT__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1146,6 +1164,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ANNOTATION__OWNED_COMMENT = NAMED_ELEMENT__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION__APPLIED_STEREOTYPE = NAMED_ELEMENT__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1254,6 +1281,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TYPE__OWNED_COMMENT = NAMED_ELEMENT__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE__APPLIED_STEREOTYPE = NAMED_ELEMENT__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1461,6 +1497,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int CLASS__OWNED_COMMENT = TYPE__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__APPLIED_STEREOTYPE = TYPE__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1688,6 +1733,15 @@ public interface PivotPackage
 	int ANY_TYPE__OWNED_COMMENT = CLASS__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANY_TYPE__APPLIED_STEREOTYPE = CLASS__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1904,6 +1958,88 @@ public interface PivotPackage
 	int ANY_TYPE_OPERATION_COUNT = CLASS_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.AppliedStereotypeImpl <em>Applied Stereotype</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.ocl.examples.pivot.internal.impl.AppliedStereotypeImpl
+	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getAppliedStereotype()
+	 * @generated
+	 */
+	int APPLIED_STEREOTYPE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLIED_STEREOTYPE__OWNED_COMMENT = ELEMENT__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLIED_STEREOTYPE__APPLIED_STEREOTYPE = ELEMENT__APPLIED_STEREOTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLIED_STEREOTYPE__REFERRED_TYPE = ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Stereotyped Property</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLIED_STEREOTYPE__STEREOTYPED_PROPERTY = ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Applied Stereotype</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLIED_STEREOTYPE_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLIED_STEREOTYPE___ALL_OWNED_ELEMENTS = ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLIED_STEREOTYPE___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = ELEMENT___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The number of operations of the '<em>Applied Stereotype</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLIED_STEREOTYPE_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1911,6 +2047,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ASSOCIATION_CLASS__OWNED_COMMENT = CLASS__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_CLASS__APPLIED_STEREOTYPE = CLASS__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2147,6 +2292,15 @@ public interface PivotPackage
 	int TYPED_ELEMENT__OWNED_COMMENT = NAMED_ELEMENT__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_ELEMENT__APPLIED_STEREOTYPE = NAMED_ELEMENT__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2237,6 +2391,15 @@ public interface PivotPackage
 	int OCL_EXPRESSION__OWNED_COMMENT = TYPED_ELEMENT__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OCL_EXPRESSION__APPLIED_STEREOTYPE = TYPED_ELEMENT__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2325,6 +2488,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int CALL_EXP__OWNED_COMMENT = OCL_EXPRESSION__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_EXP__APPLIED_STEREOTYPE = OCL_EXPRESSION__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2433,6 +2605,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int FEATURE_CALL_EXP__OWNED_COMMENT = CALL_EXP__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_CALL_EXP__APPLIED_STEREOTYPE = CALL_EXP__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2550,6 +2731,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int NAVIGATION_CALL_EXP__OWNED_COMMENT = FEATURE_CALL_EXP__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATION_CALL_EXP__APPLIED_STEREOTYPE = FEATURE_CALL_EXP__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2685,6 +2875,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ASSOCIATION_CLASS_CALL_EXP__OWNED_COMMENT = NAVIGATION_CALL_EXP__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_CLASS_CALL_EXP__APPLIED_STEREOTYPE = NAVIGATION_CALL_EXP__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2829,6 +3028,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int DATA_TYPE__OWNED_COMMENT = CLASS__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE__APPLIED_STEREOTYPE = CLASS__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3072,6 +3280,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int COLLECTION_TYPE__OWNED_COMMENT = DATA_TYPE__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TYPE__APPLIED_STEREOTYPE = DATA_TYPE__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3326,6 +3543,15 @@ public interface PivotPackage
 	int BAG_TYPE__OWNED_COMMENT = COLLECTION_TYPE__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BAG_TYPE__APPLIED_STEREOTYPE = COLLECTION_TYPE__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3578,6 +3804,15 @@ public interface PivotPackage
 	int LITERAL_EXP__OWNED_COMMENT = OCL_EXPRESSION__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL_EXP__APPLIED_STEREOTYPE = OCL_EXPRESSION__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3668,6 +3903,15 @@ public interface PivotPackage
 	int PRIMITIVE_LITERAL_EXP__OWNED_COMMENT = LITERAL_EXP__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_LITERAL_EXP__APPLIED_STEREOTYPE = LITERAL_EXP__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3756,6 +4000,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int BOOLEAN_LITERAL_EXP__OWNED_COMMENT = PRIMITIVE_LITERAL_EXP__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_LITERAL_EXP__APPLIED_STEREOTYPE = PRIMITIVE_LITERAL_EXP__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3866,6 +4119,15 @@ public interface PivotPackage
 	int CALL_OPERATION_ACTION__OWNED_COMMENT = NAMED_ELEMENT__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_OPERATION_ACTION__APPLIED_STEREOTYPE = NAMED_ELEMENT__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3954,7 +4216,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getClassifierType()
 	 * @generated
 	 */
-	int CLASSIFIER_TYPE = 9;
+	int CLASSIFIER_TYPE = 10;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -3964,6 +4226,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int CLASSIFIER_TYPE__OWNED_COMMENT = CLASS__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_TYPE__APPLIED_STEREOTYPE = CLASS__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4200,6 +4471,15 @@ public interface PivotPackage
 	int COLLECTION_LITERAL_PART__OWNED_COMMENT = TYPED_ELEMENT__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_LITERAL_PART__APPLIED_STEREOTYPE = TYPED_ELEMENT__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4288,6 +4568,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int COLLECTION_ITEM__OWNED_COMMENT = COLLECTION_LITERAL_PART__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_ITEM__APPLIED_STEREOTYPE = COLLECTION_LITERAL_PART__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4396,6 +4685,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int COLLECTION_LITERAL_EXP__OWNED_COMMENT = LITERAL_EXP__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_LITERAL_EXP__APPLIED_STEREOTYPE = LITERAL_EXP__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4551,6 +4849,15 @@ public interface PivotPackage
 	int COLLECTION_RANGE__OWNED_COMMENT = COLLECTION_LITERAL_PART__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_RANGE__APPLIED_STEREOTYPE = COLLECTION_LITERAL_PART__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4659,6 +4966,15 @@ public interface PivotPackage
 	int COMMENT__OWNED_COMMENT = ELEMENT__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMENT__APPLIED_STEREOTYPE = ELEMENT__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Body</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4720,6 +5036,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int CONSTRAINT__OWNED_COMMENT = NAMED_ELEMENT__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT__APPLIED_STEREOTYPE = NAMED_ELEMENT__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4855,7 +5180,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getConstructorExp()
 	 * @generated
 	 */
-	int CONSTRUCTOR_EXP = 17;
+	int CONSTRUCTOR_EXP = 18;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -4865,6 +5190,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int CONSTRUCTOR_EXP__OWNED_COMMENT = OCL_EXPRESSION__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR_EXP__APPLIED_STEREOTYPE = OCL_EXPRESSION__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4973,7 +5307,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getConstructorPart()
 	 * @generated
 	 */
-	int CONSTRUCTOR_PART = 18;
+	int CONSTRUCTOR_PART = 19;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -4983,6 +5317,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int CONSTRUCTOR_PART__OWNED_COMMENT = ELEMENT__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR_PART__APPLIED_STEREOTYPE = ELEMENT__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Referred Property</b></em>' reference.
@@ -5046,6 +5389,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int DETAIL__OWNED_COMMENT = NAMED_ELEMENT__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DETAIL__APPLIED_STEREOTYPE = NAMED_ELEMENT__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -5129,6 +5481,405 @@ public interface PivotPackage
 	int DETAIL_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.DynamicElementImpl <em>Dynamic Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.ocl.examples.pivot.internal.impl.DynamicElementImpl
+	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getDynamicElement()
+	 * @generated
+	 */
+	int DYNAMIC_ELEMENT = 22;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_ELEMENT__OWNED_COMMENT = ELEMENT__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_ELEMENT__APPLIED_STEREOTYPE = ELEMENT__APPLIED_STEREOTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Meta Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_ELEMENT__META_TYPE = ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Dynamic Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_ELEMENT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_ELEMENT___ALL_OWNED_ELEMENTS = ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_ELEMENT___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = ELEMENT___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The number of operations of the '<em>Dynamic Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_ELEMENT_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.DynamicPropertyImpl <em>Dynamic Property</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.ocl.examples.pivot.internal.impl.DynamicPropertyImpl
+	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getDynamicProperty()
+	 * @generated
+	 */
+	int DYNAMIC_PROPERTY = 23;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_PROPERTY__OWNED_COMMENT = ELEMENT__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_PROPERTY__APPLIED_STEREOTYPE = ELEMENT__APPLIED_STEREOTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_PROPERTY__REFERRED_PROPERTY = ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Default</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_PROPERTY__DEFAULT = ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Dynamic Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_PROPERTY_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_PROPERTY___ALL_OWNED_ELEMENTS = ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_PROPERTY___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = ELEMENT___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The number of operations of the '<em>Dynamic Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_PROPERTY_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.DynamicTypeImpl <em>Dynamic Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.ocl.examples.pivot.internal.impl.DynamicTypeImpl
+	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getDynamicType()
+	 * @generated
+	 */
+	int DYNAMIC_TYPE = 24;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE__OWNED_COMMENT = TYPE__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE__APPLIED_STEREOTYPE = TYPE__APPLIED_STEREOTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE__NAME = TYPE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE__OWNED_RULE = TYPE__OWNED_RULE;
+
+	/**
+	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE__IS_STATIC = TYPE__IS_STATIC;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE__OWNED_ANNOTATION = TYPE__OWNED_ANNOTATION;
+
+	/**
+	 * The feature id for the '<em><b>Template Binding</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE__TEMPLATE_BINDING = TYPE__TEMPLATE_BINDING;
+
+	/**
+	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE__OWNED_TEMPLATE_SIGNATURE = TYPE__OWNED_TEMPLATE_SIGNATURE;
+
+	/**
+	 * The feature id for the '<em><b>Unspecialized Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE__UNSPECIALIZED_ELEMENT = TYPE__UNSPECIALIZED_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Owning Template Parameter</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE__OWNING_TEMPLATE_PARAMETER = TYPE__OWNING_TEMPLATE_PARAMETER;
+
+	/**
+	 * The feature id for the '<em><b>Template Parameter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE__TEMPLATE_PARAMETER = TYPE__TEMPLATE_PARAMETER;
+
+	/**
+	 * The feature id for the '<em><b>Package</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE__PACKAGE = TYPE__PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Owned Attribute</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE__OWNED_ATTRIBUTE = TYPE__OWNED_ATTRIBUTE;
+
+	/**
+	 * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE__OWNED_OPERATION = TYPE__OWNED_OPERATION;
+
+	/**
+	 * The feature id for the '<em><b>Super Class</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE__SUPER_CLASS = TYPE__SUPER_CLASS;
+
+	/**
+	 * The feature id for the '<em><b>Instance Class Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE__INSTANCE_CLASS_NAME = TYPE__INSTANCE_CLASS_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Meta Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE__META_TYPE = TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owned Property</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE__OWNED_PROPERTY = TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Dynamic Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE___ALL_OWNED_ELEMENTS = TYPE___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = TYPE___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Parameterable Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE___PARAMETERABLE_ELEMENTS = TYPE___PARAMETERABLE_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Is Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE___IS_TEMPLATE = TYPE___IS_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Is Template Parameter</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE___IS_TEMPLATE_PARAMETER = TYPE___IS_TEMPLATE_PARAMETER;
+
+	/**
+	 * The operation id for the '<em>Is Compatible With</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
+
+	/**
+	 * The number of operations of the '<em>Dynamic Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE_OPERATION_COUNT = TYPE_OPERATION_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5136,6 +5887,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ENUM_LITERAL_EXP__OWNED_COMMENT = LITERAL_EXP__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_LITERAL_EXP__APPLIED_STEREOTYPE = LITERAL_EXP__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -5244,6 +6004,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ENUMERATION__OWNED_COMMENT = DATA_TYPE__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION__APPLIED_STEREOTYPE = DATA_TYPE__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -5498,6 +6267,15 @@ public interface PivotPackage
 	int ENUMERATION_LITERAL__OWNED_COMMENT = NAMED_ELEMENT__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_LITERAL__APPLIED_STEREOTYPE = NAMED_ELEMENT__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5595,6 +6373,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int VALUE_SPECIFICATION__OWNED_COMMENT = TYPED_ELEMENT__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE_SPECIFICATION__APPLIED_STEREOTYPE = TYPED_ELEMENT__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -5775,6 +6562,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int OPAQUE_EXPRESSION__OWNED_COMMENT = VALUE_SPECIFICATION__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPAQUE_EXPRESSION__APPLIED_STEREOTYPE = VALUE_SPECIFICATION__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -5991,6 +6787,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int EXPRESSION_IN_OCL__OWNED_COMMENT = OPAQUE_EXPRESSION__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_IN_OCL__APPLIED_STEREOTYPE = OPAQUE_EXPRESSION__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -6254,6 +7059,15 @@ public interface PivotPackage
 	int TYPED_MULTIPLICITY_ELEMENT__OWNED_COMMENT = TYPED_ELEMENT__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_MULTIPLICITY_ELEMENT__APPLIED_STEREOTYPE = TYPED_ELEMENT__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6441,6 +7255,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int FEATURE__OWNED_COMMENT = TYPED_MULTIPLICITY_ELEMENT__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE__APPLIED_STEREOTYPE = TYPED_MULTIPLICITY_ELEMENT__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -6650,6 +7473,15 @@ public interface PivotPackage
 	int IF_EXP__OWNED_COMMENT = OCL_EXPRESSION__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF_EXP__APPLIED_STEREOTYPE = OCL_EXPRESSION__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6776,6 +7608,15 @@ public interface PivotPackage
 	int NUMERIC_LITERAL_EXP__OWNED_COMMENT = PRIMITIVE_LITERAL_EXP__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERIC_LITERAL_EXP__APPLIED_STEREOTYPE = PRIMITIVE_LITERAL_EXP__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6864,6 +7705,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int INTEGER_LITERAL_EXP__OWNED_COMMENT = NUMERIC_LITERAL_EXP__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_LITERAL_EXP__APPLIED_STEREOTYPE = NUMERIC_LITERAL_EXP__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -6974,6 +7824,15 @@ public interface PivotPackage
 	int INVALID_LITERAL_EXP__OWNED_COMMENT = LITERAL_EXP__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVALID_LITERAL_EXP__APPLIED_STEREOTYPE = LITERAL_EXP__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7062,6 +7921,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int INVALID_TYPE__OWNED_COMMENT = CLASS__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVALID_TYPE__APPLIED_STEREOTYPE = CLASS__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -7289,6 +8157,15 @@ public interface PivotPackage
 	int LOOP_EXP__OWNED_COMMENT = CALL_EXP__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOP_EXP__APPLIED_STEREOTYPE = CALL_EXP__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7440,6 +8317,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ITERATE_EXP__OWNED_COMMENT = LOOP_EXP__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATE_EXP__APPLIED_STEREOTYPE = LOOP_EXP__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -7629,6 +8515,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int OPERATION__OWNED_COMMENT = FEATURE__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__APPLIED_STEREOTYPE = FEATURE__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -7980,6 +8875,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ITERATION__OWNED_COMMENT = OPERATION__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATION__APPLIED_STEREOTYPE = OPERATION__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -8349,6 +9253,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ITERATOR_EXP__OWNED_COMMENT = LOOP_EXP__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP__APPLIED_STEREOTYPE = LOOP_EXP__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -8763,7 +9676,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getLambdaType()
 	 * @generated
 	 */
-	int LAMBDA_TYPE = 35;
+	int LAMBDA_TYPE = 39;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -8773,6 +9686,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int LAMBDA_TYPE__OWNED_COMMENT = DATA_TYPE__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAMBDA_TYPE__APPLIED_STEREOTYPE = DATA_TYPE__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -9045,6 +9967,15 @@ public interface PivotPackage
 	int LET_EXP__OWNED_COMMENT = OCL_EXPRESSION__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LET_EXP__APPLIED_STEREOTYPE = OCL_EXPRESSION__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9162,6 +10093,15 @@ public interface PivotPackage
 	int NAMESPACE__OWNED_COMMENT = NAMED_ELEMENT__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMESPACE__APPLIED_STEREOTYPE = NAMED_ELEMENT__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9241,6 +10181,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PACKAGE__OWNED_COMMENT = NAMESPACE__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__APPLIED_STEREOTYPE = NAMESPACE__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -9430,7 +10379,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getModel()
 	 * @generated
 	 */
-	int MODEL = 42;
+	int MODEL = 46;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -9440,6 +10389,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int MODEL__OWNED_COMMENT = PACKAGE__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__APPLIED_STEREOTYPE = PACKAGE__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -9631,6 +10589,15 @@ public interface PivotPackage
 	int LIBRARY__OWNED_COMMENT = MODEL__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIBRARY__APPLIED_STEREOTYPE = MODEL__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9820,6 +10787,15 @@ public interface PivotPackage
 	int MESSAGE_EXP__OWNED_COMMENT = OCL_EXPRESSION__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_EXP__APPLIED_STEREOTYPE = OCL_EXPRESSION__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9962,6 +10938,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int MESSAGE_TYPE__OWNED_COMMENT = TYPE__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_TYPE__APPLIED_STEREOTYPE = TYPE__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -10187,7 +11172,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getMorePivotable()
 	 * @generated
 	 */
-	int MORE_PIVOTABLE = 43;
+	int MORE_PIVOTABLE = 47;
 
 	/**
 	 * The number of structural features of the '<em>More Pivotable</em>' class.
@@ -10215,6 +11200,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int MULTIPLICITY_ELEMENT__OWNED_COMMENT = ELEMENT__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MULTIPLICITY_ELEMENT__APPLIED_STEREOTYPE = ELEMENT__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Is Ordered</b></em>' attribute.
@@ -10361,6 +11355,15 @@ public interface PivotPackage
 	int NULL_LITERAL_EXP__OWNED_COMMENT = PRIMITIVE_LITERAL_EXP__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NULL_LITERAL_EXP__APPLIED_STEREOTYPE = PRIMITIVE_LITERAL_EXP__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10449,6 +11452,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int OPERATION_CALL_EXP__OWNED_COMMENT = FEATURE_CALL_EXP__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CALL_EXP__APPLIED_STEREOTYPE = FEATURE_CALL_EXP__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -10595,6 +11607,15 @@ public interface PivotPackage
 	int TEMPLATE_PARAMETER__OWNED_COMMENT = ELEMENT__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_PARAMETER__APPLIED_STEREOTYPE = ELEMENT__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Signature</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10685,6 +11706,15 @@ public interface PivotPackage
 	int OPERATION_TEMPLATE_PARAMETER__OWNED_COMMENT = TEMPLATE_PARAMETER__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_TEMPLATE_PARAMETER__APPLIED_STEREOTYPE = TEMPLATE_PARAMETER__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Signature</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10773,6 +11803,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ORDERED_SET_TYPE__OWNED_COMMENT = COLLECTION_TYPE__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERED_SET_TYPE__APPLIED_STEREOTYPE = COLLECTION_TYPE__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -11027,6 +12066,15 @@ public interface PivotPackage
 	int PARAMETERABLE_ELEMENT__OWNED_COMMENT = ELEMENT__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETERABLE_ELEMENT__APPLIED_STEREOTYPE = ELEMENT__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Owning Template Parameter</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11108,6 +12156,15 @@ public interface PivotPackage
 	int PACKAGEABLE_ELEMENT__OWNED_COMMENT = PARAMETERABLE_ELEMENT__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGEABLE_ELEMENT__APPLIED_STEREOTYPE = PARAMETERABLE_ELEMENT__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Owning Template Parameter</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11187,6 +12244,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PARAMETER__OWNED_COMMENT = TYPED_MULTIPLICITY_ELEMENT__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER__APPLIED_STEREOTYPE = TYPED_MULTIPLICITY_ELEMENT__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -11405,6 +12471,15 @@ public interface PivotPackage
 	int PRECEDENCE__OWNED_COMMENT = NAMED_ELEMENT__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRECEDENCE__APPLIED_STEREOTYPE = NAMED_ELEMENT__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11502,6 +12577,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PRIMITIVE_TYPE__OWNED_COMMENT = DATA_TYPE__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__APPLIED_STEREOTYPE = DATA_TYPE__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -11745,6 +12829,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PROPERTY__OWNED_COMMENT = FEATURE__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__APPLIED_STEREOTYPE = FEATURE__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -12161,6 +13254,15 @@ public interface PivotPackage
 	int PROPERTY_CALL_EXP__OWNED_COMMENT = NAVIGATION_CALL_EXP__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_CALL_EXP__APPLIED_STEREOTYPE = NAVIGATION_CALL_EXP__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12305,6 +13407,15 @@ public interface PivotPackage
 	int REAL_LITERAL_EXP__OWNED_COMMENT = NUMERIC_LITERAL_EXP__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REAL_LITERAL_EXP__APPLIED_STEREOTYPE = NUMERIC_LITERAL_EXP__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12402,7 +13513,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getSelfType()
 	 * @generated
 	 */
-	int SELF_TYPE = 68;
+	int SELF_TYPE = 72;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -12412,6 +13523,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int SELF_TYPE__OWNED_COMMENT = CLASS__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SELF_TYPE__APPLIED_STEREOTYPE = CLASS__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -12648,6 +13768,15 @@ public interface PivotPackage
 	int SEND_SIGNAL_ACTION__OWNED_COMMENT = NAMED_ELEMENT__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEND_SIGNAL_ACTION__APPLIED_STEREOTYPE = NAMED_ELEMENT__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12736,6 +13865,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int SEQUENCE_TYPE__OWNED_COMMENT = COLLECTION_TYPE__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEQUENCE_TYPE__APPLIED_STEREOTYPE = COLLECTION_TYPE__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -12990,6 +14128,15 @@ public interface PivotPackage
 	int SET_TYPE__OWNED_COMMENT = COLLECTION_TYPE__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_TYPE__APPLIED_STEREOTYPE = COLLECTION_TYPE__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13242,6 +14389,15 @@ public interface PivotPackage
 	int SIGNAL__OWNED_COMMENT = NAMED_ELEMENT__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIGNAL__APPLIED_STEREOTYPE = NAMED_ELEMENT__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13323,6 +14479,15 @@ public interface PivotPackage
 	int STATE__OWNED_COMMENT = NAMED_ELEMENT__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__APPLIED_STEREOTYPE = NAMED_ELEMENT__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13402,6 +14567,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int STATE_EXP__OWNED_COMMENT = OCL_EXPRESSION__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_EXP__APPLIED_STEREOTYPE = OCL_EXPRESSION__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -13494,6 +14668,88 @@ public interface PivotPackage
 	int STATE_EXP_OPERATION_COUNT = OCL_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.StereotypedPropertyImpl <em>Stereotyped Property</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.ocl.examples.pivot.internal.impl.StereotypedPropertyImpl
+	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getStereotypedProperty()
+	 * @generated
+	 */
+	int STEREOTYPED_PROPERTY = 79;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEREOTYPED_PROPERTY__OWNED_COMMENT = ELEMENT__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEREOTYPED_PROPERTY__APPLIED_STEREOTYPE = ELEMENT__APPLIED_STEREOTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEREOTYPED_PROPERTY__REFERRED_PROPERTY = ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Default</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEREOTYPED_PROPERTY__DEFAULT = ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Stereotyped Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEREOTYPED_PROPERTY_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEREOTYPED_PROPERTY___ALL_OWNED_ELEMENTS = ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEREOTYPED_PROPERTY___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = ELEMENT___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The number of operations of the '<em>Stereotyped Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEREOTYPED_PROPERTY_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13501,6 +14757,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int STRING_LITERAL_EXP__OWNED_COMMENT = PRIMITIVE_LITERAL_EXP__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_LITERAL_EXP__APPLIED_STEREOTYPE = PRIMITIVE_LITERAL_EXP__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -13602,6 +14867,15 @@ public interface PivotPackage
 	int TEMPLATE_BINDING__OWNED_COMMENT = ELEMENT__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_BINDING__APPLIED_STEREOTYPE = ELEMENT__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Signature</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13672,6 +14946,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_COMMENT = ELEMENT__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_PARAMETER_SUBSTITUTION__APPLIED_STEREOTYPE = ELEMENT__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Formal</b></em>' reference.
@@ -13753,6 +15036,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TEMPLATE_PARAMETER_TYPE__OWNED_COMMENT = TYPE__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_PARAMETER_TYPE__APPLIED_STEREOTYPE = TYPE__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -13971,6 +15263,15 @@ public interface PivotPackage
 	int TEMPLATE_SIGNATURE__OWNED_COMMENT = ELEMENT__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_SIGNATURE__APPLIED_STEREOTYPE = ELEMENT__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Parameter</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14041,6 +15342,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TEMPLATEABLE_ELEMENT__OWNED_COMMENT = ELEMENT__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATEABLE_ELEMENT__APPLIED_STEREOTYPE = ELEMENT__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Template Binding</b></em>' containment reference list.
@@ -14131,6 +15441,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TUPLE_LITERAL_EXP__OWNED_COMMENT = LITERAL_EXP__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_LITERAL_EXP__APPLIED_STEREOTYPE = LITERAL_EXP__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -14232,6 +15551,15 @@ public interface PivotPackage
 	int VARIABLE_DECLARATION__OWNED_COMMENT = TYPED_ELEMENT__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DECLARATION__APPLIED_STEREOTYPE = TYPED_ELEMENT__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14320,6 +15648,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TUPLE_LITERAL_PART__OWNED_COMMENT = VARIABLE_DECLARATION__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_LITERAL_PART__APPLIED_STEREOTYPE = VARIABLE_DECLARATION__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -14419,6 +15756,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TUPLE_TYPE__OWNED_COMMENT = DATA_TYPE__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_TYPE__APPLIED_STEREOTYPE = DATA_TYPE__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -14664,6 +16010,15 @@ public interface PivotPackage
 	int TYPE_EXP__OWNED_COMMENT = OCL_EXPRESSION__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_EXP__APPLIED_STEREOTYPE = OCL_EXPRESSION__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14761,6 +16116,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TYPE_TEMPLATE_PARAMETER__OWNED_COMMENT = TEMPLATE_PARAMETER__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_TEMPLATE_PARAMETER__APPLIED_STEREOTYPE = TEMPLATE_PARAMETER__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Signature</b></em>' container reference.
@@ -14871,6 +16235,15 @@ public interface PivotPackage
 	int UNLIMITED_NATURAL_LITERAL_EXP__OWNED_COMMENT = NUMERIC_LITERAL_EXP__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLIMITED_NATURAL_LITERAL_EXP__APPLIED_STEREOTYPE = NUMERIC_LITERAL_EXP__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14968,7 +16341,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getUnspecifiedType()
 	 * @generated
 	 */
-	int UNSPECIFIED_TYPE = 91;
+	int UNSPECIFIED_TYPE = 96;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -14978,6 +16351,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int UNSPECIFIED_TYPE__OWNED_COMMENT = CLASS__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNSPECIFIED_TYPE__APPLIED_STEREOTYPE = CLASS__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -15223,6 +16605,15 @@ public interface PivotPackage
 	int UNSPECIFIED_VALUE_EXP__OWNED_COMMENT = OCL_EXPRESSION__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNSPECIFIED_VALUE_EXP__APPLIED_STEREOTYPE = OCL_EXPRESSION__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15311,6 +16702,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int VARIABLE__OWNED_COMMENT = VARIABLE_DECLARATION__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE__APPLIED_STEREOTYPE = VARIABLE_DECLARATION__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -15430,6 +16830,15 @@ public interface PivotPackage
 	int VARIABLE_EXP__OWNED_COMMENT = OCL_EXPRESSION__OWNED_COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_EXP__APPLIED_STEREOTYPE = OCL_EXPRESSION__APPLIED_STEREOTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15536,7 +16945,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getVisitor()
 	 * @generated
 	 */
-	int VISITOR = 98;
+	int VISITOR = 103;
 
 	/**
 	 * The number of structural features of the '<em>Visitor</em>' class.
@@ -15564,6 +16973,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int VOID_TYPE__OWNED_COMMENT = CLASS__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_TYPE__APPLIED_STEREOTYPE = CLASS__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -15789,7 +17207,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getAssociativityKind()
 	 * @generated
 	 */
-	int ASSOCIATIVITY_KIND = 100;
+	int ASSOCIATIVITY_KIND = 105;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.CollectionKind <em>Collection Kind</em>}' enum.
@@ -15799,7 +17217,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getCollectionKind()
 	 * @generated
 	 */
-	int COLLECTION_KIND = 101;
+	int COLLECTION_KIND = 106;
 
 	/**
 	 * The meta object id for the '<em>Boolean</em>' data type.
@@ -15808,7 +17226,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getBoolean()
 	 * @generated
 	 */
-	int BOOLEAN = 102;
+	int BOOLEAN = 107;
 
 	/**
 	 * The meta object id for the '<em>Int</em>' data type.
@@ -15817,7 +17235,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getInt()
 	 * @generated
 	 */
-	int INT = 103;
+	int INT = 108;
 
 	/**
 	 * The meta object id for the '<em>Integer</em>' data type.
@@ -15827,7 +17245,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getInteger()
 	 * @generated
 	 */
-	int INTEGER = 104;
+	int INTEGER = 109;
 
 	/**
 	 * The meta object id for the '<em>Library Feature</em>' data type.
@@ -15837,7 +17255,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getLibraryFeature()
 	 * @generated
 	 */
-	int LIBRARY_FEATURE = 105;
+	int LIBRARY_FEATURE = 110;
 
 	/**
 	 * The meta object id for the '<em>Object</em>' data type.
@@ -15847,7 +17265,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getObject()
 	 * @generated
 	 */
-	int OBJECT = 106;
+	int OBJECT = 111;
 
 	/**
 	 * The meta object id for the '<em>Real</em>' data type.
@@ -15857,7 +17275,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getReal()
 	 * @generated
 	 */
-	int REAL = 107;
+	int REAL = 112;
 
 	/**
 	 * The meta object id for the '<em>String</em>' data type.
@@ -15867,7 +17285,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getString()
 	 * @generated
 	 */
-	int STRING = 108;
+	int STRING = 113;
 
 	/**
 	 * The meta object id for the '<em>Throwable</em>' data type.
@@ -15877,7 +17295,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getThrowable()
 	 * @generated
 	 */
-	int THROWABLE = 109;
+	int THROWABLE = 114;
 
 	/**
 	 * The meta object id for the '<em>Unlimited Natural</em>' data type.
@@ -15887,7 +17305,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getUnlimitedNatural()
 	 * @generated
 	 */
-	int UNLIMITED_NATURAL = 110;
+	int UNLIMITED_NATURAL = 115;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.Annotation <em>Annotation</em>}'.
@@ -16006,6 +17424,17 @@ public interface PivotPackage
 	 * @generated
 	 */
 	EReference getElement_OwnedComment();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.pivot.Element#getAppliedStereotype <em>Applied Stereotype</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Applied Stereotype</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.Element#getAppliedStereotype()
+	 * @see #getElement()
+	 * @generated
+	 */
+	EReference getElement_AppliedStereotype();
 
 	/**
 	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.Element#allOwnedElements() <em>All Owned Elements</em>}' operation.
@@ -17612,6 +19041,38 @@ public interface PivotPackage
 	 * @generated
 	 */
 	EReference getStateExp_ReferredState();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.StereotypedProperty <em>Stereotyped Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Stereotyped Property</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.StereotypedProperty
+	 * @generated
+	 */
+	EClass getStereotypedProperty();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.pivot.StereotypedProperty#getReferredProperty <em>Referred Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred Property</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.StereotypedProperty#getReferredProperty()
+	 * @see #getStereotypedProperty()
+	 * @generated
+	 */
+	EReference getStereotypedProperty_ReferredProperty();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.pivot.StereotypedProperty#getDefault <em>Default</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.StereotypedProperty#getDefault()
+	 * @see #getStereotypedProperty()
+	 * @generated
+	 */
+	EAttribute getStereotypedProperty_Default();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.StringLiteralExp <em>String Literal Exp</em>}'.
@@ -19248,6 +20709,80 @@ public interface PivotPackage
 	EAttribute getDetail_Value();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.DynamicElement <em>Dynamic Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Dynamic Element</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.DynamicElement
+	 * @generated
+	 */
+	EClass getDynamicElement();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.pivot.DynamicElement#getMetaType <em>Meta Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Meta Type</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.DynamicElement#getMetaType()
+	 * @see #getDynamicElement()
+	 * @generated
+	 */
+	EReference getDynamicElement_MetaType();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.DynamicProperty <em>Dynamic Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Dynamic Property</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.DynamicProperty
+	 * @generated
+	 */
+	EClass getDynamicProperty();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.pivot.DynamicProperty#getReferredProperty <em>Referred Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred Property</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.DynamicProperty#getReferredProperty()
+	 * @see #getDynamicProperty()
+	 * @generated
+	 */
+	EReference getDynamicProperty_ReferredProperty();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.pivot.DynamicProperty#getDefault <em>Default</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.DynamicProperty#getDefault()
+	 * @see #getDynamicProperty()
+	 * @generated
+	 */
+	EAttribute getDynamicProperty_Default();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.DynamicType <em>Dynamic Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Dynamic Type</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.DynamicType
+	 * @generated
+	 */
+	EClass getDynamicType();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.pivot.DynamicType#getOwnedProperty <em>Owned Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Property</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.DynamicType#getOwnedProperty()
+	 * @see #getDynamicType()
+	 * @generated
+	 */
+	EReference getDynamicType_OwnedProperty();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.AnyType <em>Any Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -19256,6 +20791,38 @@ public interface PivotPackage
 	 * @generated
 	 */
 	EClass getAnyType();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.AppliedStereotype <em>Applied Stereotype</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Applied Stereotype</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.AppliedStereotype
+	 * @generated
+	 */
+	EClass getAppliedStereotype();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.pivot.AppliedStereotype#getReferredType <em>Referred Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred Type</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.AppliedStereotype#getReferredType()
+	 * @see #getAppliedStereotype()
+	 * @generated
+	 */
+	EReference getAppliedStereotype_ReferredType();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.pivot.AppliedStereotype#getStereotypedProperty <em>Stereotyped Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Stereotyped Property</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.AppliedStereotype#getStereotypedProperty()
+	 * @see #getAppliedStereotype()
+	 * @generated
+	 */
+	EReference getAppliedStereotype_StereotypedProperty();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.AssociationClassCallExp <em>Association Class Call Exp</em>}'.
@@ -19608,6 +21175,14 @@ public interface PivotPackage
 		 * @generated
 		 */
 		EReference ELEMENT__OWNED_COMMENT = eINSTANCE.getElement_OwnedComment();
+
+		/**
+		 * The meta object literal for the '<em><b>Applied Stereotype</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ELEMENT__APPLIED_STEREOTYPE = eINSTANCE.getElement_AppliedStereotype();
 
 		/**
 		 * The meta object literal for the '<em><b>All Owned Elements</b></em>' operation.
@@ -20948,6 +22523,32 @@ public interface PivotPackage
 		EReference STATE_EXP__REFERRED_STATE = eINSTANCE.getStateExp_ReferredState();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.StereotypedPropertyImpl <em>Stereotyped Property</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.ocl.examples.pivot.internal.impl.StereotypedPropertyImpl
+		 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getStereotypedProperty()
+		 * @generated
+		 */
+		EClass STEREOTYPED_PROPERTY = eINSTANCE.getStereotypedProperty();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STEREOTYPED_PROPERTY__REFERRED_PROPERTY = eINSTANCE.getStereotypedProperty_ReferredProperty();
+
+		/**
+		 * The meta object literal for the '<em><b>Default</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STEREOTYPED_PROPERTY__DEFAULT = eINSTANCE.getStereotypedProperty_Default();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.StringLiteralExpImpl <em>String Literal Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -22264,6 +23865,68 @@ public interface PivotPackage
 		EAttribute DETAIL__VALUE = eINSTANCE.getDetail_Value();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.DynamicElementImpl <em>Dynamic Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.ocl.examples.pivot.internal.impl.DynamicElementImpl
+		 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getDynamicElement()
+		 * @generated
+		 */
+		EClass DYNAMIC_ELEMENT = eINSTANCE.getDynamicElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Meta Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DYNAMIC_ELEMENT__META_TYPE = eINSTANCE.getDynamicElement_MetaType();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.DynamicPropertyImpl <em>Dynamic Property</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.ocl.examples.pivot.internal.impl.DynamicPropertyImpl
+		 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getDynamicProperty()
+		 * @generated
+		 */
+		EClass DYNAMIC_PROPERTY = eINSTANCE.getDynamicProperty();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DYNAMIC_PROPERTY__REFERRED_PROPERTY = eINSTANCE.getDynamicProperty_ReferredProperty();
+
+		/**
+		 * The meta object literal for the '<em><b>Default</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DYNAMIC_PROPERTY__DEFAULT = eINSTANCE.getDynamicProperty_Default();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.DynamicTypeImpl <em>Dynamic Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.ocl.examples.pivot.internal.impl.DynamicTypeImpl
+		 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getDynamicType()
+		 * @generated
+		 */
+		EClass DYNAMIC_TYPE = eINSTANCE.getDynamicType();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Property</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DYNAMIC_TYPE__OWNED_PROPERTY = eINSTANCE.getDynamicType_OwnedProperty();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.AnyTypeImpl <em>Any Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -22272,6 +23935,32 @@ public interface PivotPackage
 		 * @generated
 		 */
 		EClass ANY_TYPE = eINSTANCE.getAnyType();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.AppliedStereotypeImpl <em>Applied Stereotype</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.ocl.examples.pivot.internal.impl.AppliedStereotypeImpl
+		 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getAppliedStereotype()
+		 * @generated
+		 */
+		EClass APPLIED_STEREOTYPE = eINSTANCE.getAppliedStereotype();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference APPLIED_STEREOTYPE__REFERRED_TYPE = eINSTANCE.getAppliedStereotype_ReferredType();
+
+		/**
+		 * The meta object literal for the '<em><b>Stereotyped Property</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference APPLIED_STEREOTYPE__STEREOTYPED_PROPERTY = eINSTANCE.getAppliedStereotype_StereotypedProperty();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.AssociationClassCallExpImpl <em>Association Class Call Exp</em>}' class.

@@ -30,6 +30,22 @@
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_5M7LAHSdEeC3-tVPqYIPdQ" name="unspecializedElement" type="_z_998HSdEeC3-tVPqYIPdQ" lower="0"/>
       </ownedMember>
     </ownedMember>
+    <ownedMember xmi:type="cmof:Package" xmi:id="_B_MXsLtdEeGaF-l-UpovSA" name="MDT_OCL_Dynamics">
+      <ownedMember xmi:type="cmof:Class" xmi:id="_Iq84gLtyEeGaF-l-UpovSA" name="DynamicElement" superClass="_VoU6cLtdEeGaF-l-UpovSA">
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_Iq84grtyEeGaF-l-UpovSA" name="metaType" type="_wP0RwLoxEeGoaKB2Aghcrw"/>
+      </ownedMember>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_fGbMkLtdEeGaF-l-UpovSA" name="DynamicProperty" superClass="_eVCuQLoxEeGoaKB2Aghcrw">
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_fGbMkrtdEeGaF-l-UpovSA" name="referredProperty" type="_nISxQLtdEeGaF-l-UpovSA"/>
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_fGbMk7tdEeGaF-l-UpovSA" name="default" type="_p5yUELpCEeGoaKB2Aghcrw" lower="0"/>
+      </ownedMember>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_HLQM4LtdEeGaF-l-UpovSA" name="DynamicType" superClass="_Iq84gLtyEeGaF-l-UpovSA _J_a9oLtdEeGaF-l-UpovSA">
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_O8mpULtdEeGaF-l-UpovSA" name="metaType" type="_wP0RwLoxEeGoaKB2Aghcrw"/>
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_tJnagLtdEeGaF-l-UpovSA" name="ownedProperty" type="_fGbMkLtdEeGaF-l-UpovSA" lower="0" upper="*" isComposite="true"/>
+      </ownedMember>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_VoU6cLtdEeGaF-l-UpovSA" name="Element" isAbstract="true"/>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_nISxQLtdEeGaF-l-UpovSA" name="Property"/>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_J_a9oLtdEeGaF-l-UpovSA" name="Type" isAbstract="true"/>
+    </ownedMember>
     <ownedMember xmi:type="cmof:Package" xmi:id="_F95X8BNKEeCpr6XKiuQP7w" name="MDT_OCL_Ecore">
       <ownedMember xmi:type="cmof:PrimitiveType" xmi:id="_rfGIcBNKEeCpr6XKiuQP7w" name="Boolean"/>
       <ownedMember xmi:type="cmof:Class" xmi:id="_I7AsgBNOEeCpr6XKiuQP7w" name="Class">
@@ -126,6 +142,31 @@
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_ttCmEPPiEd-7P5P8zTFtow" name="booleanSymbol" type="_Pk2YYMo-Ed-ZL8lMORCEkg"/>
       </ownedMember>
     </ownedMember>
+    <ownedMember xmi:type="cmof:Package" xmi:id="_jPknALeeEeG5G_bt-fBLaA" name="MDT_OCL_Redefinitions">
+      <ownedMember xmi:type="cmof:Class" xmi:id="_nwDIkLeeEeG5G_bt-fBLaA" name="Operation">
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_rJZqALeeEeG5G_bt-fBLaA" name="redefinedOperation" type="_nwDIkLeeEeG5G_bt-fBLaA" lower="0" upper="*"/>
+      </ownedMember>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_pGewALeeEeG5G_bt-fBLaA" name="Property">
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_zU8IELeeEeG5G_bt-fBLaA" name="redefinedProperty" type="_pGewALeeEeG5G_bt-fBLaA" lower="0" upper="*"/>
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_ziCI4LeeEeG5G_bt-fBLaA" name="subsettedProperty" type="_pGewALeeEeG5G_bt-fBLaA" lower="0" upper="*"/>
+      </ownedMember>
+    </ownedMember>
+    <ownedMember xmi:type="cmof:Package" xmi:id="_Ojs8cLoxEeGoaKB2Aghcrw" name="MDT_OCL_Stereotypes">
+      <ownedMember xmi:type="cmof:Class" xmi:id="_eVCuQLoxEeGoaKB2Aghcrw" name="Element" isAbstract="true">
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_eVCuQboxEeGoaKB2Aghcrw" name="appliedStereotype" type="_h8QFgLoxEeGoaKB2Aghcrw" lower="0" upper="*" isComposite="true"/>
+      </ownedMember>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_h8QFgLoxEeGoaKB2Aghcrw" name="AppliedStereotype" superClass="_eVCuQLoxEeGoaKB2Aghcrw">
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_sckpoLoxEeGoaKB2Aghcrw" name="referredType" type="_wP0RwLoxEeGoaKB2Aghcrw"/>
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_2iXlMLpCEeGoaKB2Aghcrw" name="stereotypedProperty" type="_OzIP0LpCEeGoaKB2Aghcrw" lower="0" upper="*" isComposite="true"/>
+      </ownedMember>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_U4nnYLpCEeGoaKB2Aghcrw" name="Property"/>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_OzIP0LpCEeGoaKB2Aghcrw" name="StereotypedProperty" superClass="_eVCuQLoxEeGoaKB2Aghcrw">
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_OzIP0rpCEeGoaKB2Aghcrw" name="referredProperty" type="_U4nnYLpCEeGoaKB2Aghcrw"/>
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_rRaOULpCEeGoaKB2Aghcrw" name="default" type="_p5yUELpCEeGoaKB2Aghcrw" lower="0"/>
+      </ownedMember>
+      <ownedMember xmi:type="cmof:PrimitiveType" xmi:id="_p5yUELpCEeGoaKB2Aghcrw" name="String"/>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_wP0RwLoxEeGoaKB2Aghcrw" name="Type" isAbstract="true"/>
+    </ownedMember>
     <ownedMember xmi:type="cmof:Package" xmi:id="_zNR5QMilEd-sJIf4tYBt-g" name="MDT_OCL_TypedMultiplicity">
       <ownedMember xmi:type="cmof:Class" xmi:id="_7WjzQB51EeCxNNh5B6u04A" name="Feature" isAbstract="true" superClass="_9HMksMilEd-sJIf4tYBt-g"/>
       <ownedMember xmi:type="cmof:Class" xmi:id="_1tWpUMilEd-sJIf4tYBt-g" name="MultiplicityElement" isAbstract="true"/>
@@ -148,15 +189,6 @@
             </ownedParameter>
           </ownedTemplateSignature>
         </xmi:Extension>
-      </ownedMember>
-    </ownedMember>
-    <ownedMember xmi:type="cmof:Package" xmi:id="_jPknALeeEeG5G_bt-fBLaA" name="MDT_OCL_Redefinitions">
-      <ownedMember xmi:type="cmof:Class" xmi:id="_nwDIkLeeEeG5G_bt-fBLaA" name="Operation">
-        <ownedAttribute xmi:type="cmof:Property" xmi:id="_rJZqALeeEeG5G_bt-fBLaA" name="redefinedOperation" type="_nwDIkLeeEeG5G_bt-fBLaA" lower="0" upper="*"/>
-      </ownedMember>
-      <ownedMember xmi:type="cmof:Class" xmi:id="_pGewALeeEeG5G_bt-fBLaA" name="Property">
-        <ownedAttribute xmi:type="cmof:Property" xmi:id="_zU8IELeeEeG5G_bt-fBLaA" name="redefinedProperty" type="_pGewALeeEeG5G_bt-fBLaA" lower="0" upper="*"/>
-        <ownedAttribute xmi:type="cmof:Property" xmi:id="_ziCI4LeeEeG5G_bt-fBLaA" name="subsettedProperty" type="_pGewALeeEeG5G_bt-fBLaA" lower="0" upper="*"/>
       </ownedMember>
     </ownedMember>
     <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
@@ -278,19 +310,21 @@
   <cmof:Tag xmi:id="_36" name="org.omg.xmi.nsPrefix" value="MDTOCL" element="_0"/>
   <cmof:Tag xmi:id="_37" name="org.omg.xmi.nsPrefix" value="MDT_OCL_Annotations" element="_peTNMMo_Ed-ZL8lMORCEkg"/>
   <cmof:Tag xmi:id="_38" name="org.omg.xmi.nsPrefix" value="MDT_OCL_Cache" element="_dkSmoDxsEeCYibdAWnk0AQ"/>
-  <cmof:Tag xmi:id="_39" name="org.omg.xmi.nsPrefix" value="MDT_OCL_Ecore" element="_F95X8BNKEeCpr6XKiuQP7w"/>
-  <cmof:Tag xmi:id="_40" name="org.omg.xmi.schemaType" value="http://www.w3.org/2001/XMLSchema#boolean" element="_rfGIcBNKEeCpr6XKiuQP7w"/>
-  <cmof:Tag xmi:id="_41" name="org.omg.xmi.schemaType" value="http://www.w3.org/2001/XMLSchema#integer" element="_BIn1oBNLEeCpr6XKiuQP7w"/>
-  <cmof:Tag xmi:id="_42" name="org.omg.xmi.nsPrefix" value="MDT_OCL_Evaluation" element="_A11esMerEd-sJIf4tYBt-g"/>
-  <cmof:Tag xmi:id="_43" name="org.omg.xmi.nsPrefix" value="MDT_OCL_Framework" element="_431tkMpAEd-ZL8lMORCEkg"/>
-  <cmof:Tag xmi:id="_44" name="org.omg.xmi.schemaType" value="http://www.w3.org/2001/XMLSchema#boolean" element="_zVCV0PlzEd-EJPIg-mDVJA"/>
-  <cmof:Tag xmi:id="_45" name="org.omg.xmi.nsPrefix" value="MDT_OCL_Precedences" element="_t35skMlAEd-bx742yyafXQ"/>
-  <cmof:Tag xmi:id="_46" name="org.omg.xmi.schemaType" value="http://www.w3.org/2001/XMLSchema#integer" element="_XXNRYMlBEd-bx742yyafXQ"/>
-  <cmof:Tag xmi:id="_47" name="org.omg.xmi.nsPrefix" value="MDT_OCL_PrimitiveTypes" element="_MvNA8Mo-Ed-ZL8lMORCEkg"/>
-  <cmof:Tag xmi:id="_48" name="org.omg.xmi.schemaType" value="http://www.w3.org/2001/XMLSchema#boolean" element="_Pk2YYMo-Ed-ZL8lMORCEkg"/>
-  <cmof:Tag xmi:id="_49" name="org.omg.xmi.schemaType" value="http://www.w3.org/2001/XMLSchema#integer" element="_SUQk8Mo-Ed-ZL8lMORCEkg"/>
-  <cmof:Tag xmi:id="_50" name="org.omg.xmi.schemaType" value="http://www.w3.org/2001/XMLSchema#double" element="_SeOZQMo-Ed-ZL8lMORCEkg"/>
-  <cmof:Tag xmi:id="_51" name="org.omg.xmi.nsPrefix" value="MDT_OCL_TypedMultiplicity" element="_zNR5QMilEd-sJIf4tYBt-g"/>
-  <cmof:Tag xmi:id="_52" name="org.omg.xmi.nsPrefix" value="MDT_OCL_Visiting" element="_tG-HYMeqEd-sJIf4tYBt-g"/>
-  <cmof:Tag xmi:id="_53" name="org.omg.xmi.nsPrefix" value="MDT_OCL_Redefinitions" element="_jPknALeeEeG5G_bt-fBLaA"/>
+  <cmof:Tag xmi:id="_39" name="org.omg.xmi.nsPrefix" value="MDT_OCL_Dynamics" element="_B_MXsLtdEeGaF-l-UpovSA"/>
+  <cmof:Tag xmi:id="_40" name="org.omg.xmi.nsPrefix" value="MDT_OCL_Ecore" element="_F95X8BNKEeCpr6XKiuQP7w"/>
+  <cmof:Tag xmi:id="_41" name="org.omg.xmi.schemaType" value="http://www.w3.org/2001/XMLSchema#boolean" element="_rfGIcBNKEeCpr6XKiuQP7w"/>
+  <cmof:Tag xmi:id="_42" name="org.omg.xmi.schemaType" value="http://www.w3.org/2001/XMLSchema#integer" element="_BIn1oBNLEeCpr6XKiuQP7w"/>
+  <cmof:Tag xmi:id="_43" name="org.omg.xmi.nsPrefix" value="MDT_OCL_Evaluation" element="_A11esMerEd-sJIf4tYBt-g"/>
+  <cmof:Tag xmi:id="_44" name="org.omg.xmi.nsPrefix" value="MDT_OCL_Framework" element="_431tkMpAEd-ZL8lMORCEkg"/>
+  <cmof:Tag xmi:id="_45" name="org.omg.xmi.schemaType" value="http://www.w3.org/2001/XMLSchema#boolean" element="_zVCV0PlzEd-EJPIg-mDVJA"/>
+  <cmof:Tag xmi:id="_46" name="org.omg.xmi.nsPrefix" value="MDT_OCL_Precedences" element="_t35skMlAEd-bx742yyafXQ"/>
+  <cmof:Tag xmi:id="_47" name="org.omg.xmi.schemaType" value="http://www.w3.org/2001/XMLSchema#integer" element="_XXNRYMlBEd-bx742yyafXQ"/>
+  <cmof:Tag xmi:id="_48" name="org.omg.xmi.nsPrefix" value="MDT_OCL_PrimitiveTypes" element="_MvNA8Mo-Ed-ZL8lMORCEkg"/>
+  <cmof:Tag xmi:id="_49" name="org.omg.xmi.schemaType" value="http://www.w3.org/2001/XMLSchema#boolean" element="_Pk2YYMo-Ed-ZL8lMORCEkg"/>
+  <cmof:Tag xmi:id="_50" name="org.omg.xmi.schemaType" value="http://www.w3.org/2001/XMLSchema#integer" element="_SUQk8Mo-Ed-ZL8lMORCEkg"/>
+  <cmof:Tag xmi:id="_51" name="org.omg.xmi.schemaType" value="http://www.w3.org/2001/XMLSchema#double" element="_SeOZQMo-Ed-ZL8lMORCEkg"/>
+  <cmof:Tag xmi:id="_52" name="org.omg.xmi.nsPrefix" value="MDT_OCL_Redefinitions" element="_jPknALeeEeG5G_bt-fBLaA"/>
+  <cmof:Tag xmi:id="_53" name="org.omg.xmi.nsPrefix" value="MDT_OCL_Stereotypes" element="_Ojs8cLoxEeGoaKB2Aghcrw"/>
+  <cmof:Tag xmi:id="_54" name="org.omg.xmi.nsPrefix" value="MDT_OCL_TypedMultiplicity" element="_zNR5QMilEd-sJIf4tYBt-g"/>
+  <cmof:Tag xmi:id="_55" name="org.omg.xmi.nsPrefix" value="MDT_OCL_Visiting" element="_tG-HYMeqEd-sJIf4tYBt-g"/>
 </xmi:XMI>

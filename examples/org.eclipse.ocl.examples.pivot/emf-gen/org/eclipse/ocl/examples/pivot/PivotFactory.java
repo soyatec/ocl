@@ -218,6 +218,33 @@ public interface PivotFactory
 	Detail createDetail();
 
 	/**
+	 * Returns a new object of class '<em>Dynamic Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Dynamic Element</em>'.
+	 * @generated
+	 */
+	DynamicElement createDynamicElement();
+
+	/**
+	 * Returns a new object of class '<em>Dynamic Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Dynamic Property</em>'.
+	 * @generated
+	 */
+	DynamicProperty createDynamicProperty();
+
+	/**
+	 * Returns a new object of class '<em>Dynamic Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Dynamic Type</em>'.
+	 * @generated
+	 */
+	DynamicType createDynamicType();
+
+	/**
 	 * Returns a new object of class '<em>Any Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -225,6 +252,15 @@ public interface PivotFactory
 	 * @generated
 	 */
 	AnyType createAnyType();
+
+	/**
+	 * Returns a new object of class '<em>Applied Stereotype</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Applied Stereotype</em>'.
+	 * @generated
+	 */
+	AppliedStereotype createAppliedStereotype();
 
 	/**
 	 * Returns a new object of class '<em>Association Class Call Exp</em>'.
@@ -594,6 +630,15 @@ public interface PivotFactory
 	 * @generated
 	 */
 	StateExp createStateExp();
+
+	/**
+	 * Returns a new object of class '<em>Stereotyped Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Stereotyped Property</em>'.
+	 * @generated
+	 */
+	StereotypedProperty createStereotypedProperty();
 
 	/**
 	 * Returns a new object of class '<em>String Literal Exp</em>'.

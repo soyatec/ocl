@@ -22,6 +22,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AnyType;
+import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.AssociationClass;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.BagType;
@@ -40,6 +41,9 @@ import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Detail;
+import org.eclipse.ocl.examples.pivot.DynamicElement;
+import org.eclipse.ocl.examples.pivot.DynamicProperty;
+import org.eclipse.ocl.examples.pivot.DynamicType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
 import org.eclipse.ocl.examples.pivot.Enumeration;
@@ -91,6 +95,7 @@ import org.eclipse.ocl.examples.pivot.SetType;
 import org.eclipse.ocl.examples.pivot.Signal;
 import org.eclipse.ocl.examples.pivot.State;
 import org.eclipse.ocl.examples.pivot.StateExp;
+import org.eclipse.ocl.examples.pivot.StereotypedProperty;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
@@ -187,6 +192,11 @@ public class PivotAdapterFactory
 				return createAnyTypeAdapter();
 			}
 			@Override
+			public Adapter caseAppliedStereotype(AppliedStereotype object)
+			{
+				return createAppliedStereotypeAdapter();
+			}
+			@Override
 			public Adapter caseAssociationClass(AssociationClass object)
 			{
 				return createAssociationClassAdapter();
@@ -280,6 +290,21 @@ public class PivotAdapterFactory
 			public Adapter caseDetail(Detail object)
 			{
 				return createDetailAdapter();
+			}
+			@Override
+			public Adapter caseDynamicElement(DynamicElement object)
+			{
+				return createDynamicElementAdapter();
+			}
+			@Override
+			public Adapter caseDynamicProperty(DynamicProperty object)
+			{
+				return createDynamicPropertyAdapter();
+			}
+			@Override
+			public Adapter caseDynamicType(DynamicType object)
+			{
+				return createDynamicTypeAdapter();
 			}
 			@Override
 			public Adapter caseElement(Element object)
@@ -550,6 +575,11 @@ public class PivotAdapterFactory
 			public Adapter caseStateExp(StateExp object)
 			{
 				return createStateExpAdapter();
+			}
+			@Override
+			public Adapter caseStereotypedProperty(StereotypedProperty object)
+			{
+				return createStereotypedPropertyAdapter();
 			}
 			@Override
 			public Adapter caseStringLiteralExp(StringLiteralExp object)
@@ -1435,6 +1465,21 @@ public class PivotAdapterFactory
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.StereotypedProperty <em>Stereotyped Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.StereotypedProperty
+	 * @generated
+	 */
+	public Adapter createStereotypedPropertyAdapter()
+	{
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.StringLiteralExp <em>String Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -2027,6 +2072,51 @@ public class PivotAdapterFactory
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.DynamicElement <em>Dynamic Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.DynamicElement
+	 * @generated
+	 */
+	public Adapter createDynamicElementAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.DynamicProperty <em>Dynamic Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.DynamicProperty
+	 * @generated
+	 */
+	public Adapter createDynamicPropertyAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.DynamicType <em>Dynamic Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.DynamicType
+	 * @generated
+	 */
+	public Adapter createDynamicTypeAdapter()
+	{
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.AnyType <em>Any Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -2037,6 +2127,21 @@ public class PivotAdapterFactory
 	 * @generated
 	 */
 	public Adapter createAnyTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.AppliedStereotype <em>Applied Stereotype</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.AppliedStereotype
+	 * @generated
+	 */
+	public Adapter createAppliedStereotypeAdapter()
+	{
 		return null;
 	}
 

@@ -69,6 +69,10 @@ public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
 		return delegate.visitAnyType(object);
 	}
 
+	public R visitAppliedStereotype(org.eclipse.ocl.examples.pivot.AppliedStereotype object) {
+		return delegate.visitAppliedStereotype(object);
+	}
+
 	public R visitAssociationClass(org.eclipse.ocl.examples.pivot.AssociationClass object) {
 		return delegate.visitAssociationClass(object);
 	}
@@ -143,6 +147,18 @@ public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
 
 	public R visitDetail(org.eclipse.ocl.examples.pivot.Detail object) {
 		return delegate.visitDetail(object);
+	}
+
+	public R visitDynamicElement(org.eclipse.ocl.examples.pivot.DynamicElement object) {
+		return delegate.visitDynamicElement(object);
+	}
+
+	public R visitDynamicProperty(org.eclipse.ocl.examples.pivot.DynamicProperty object) {
+		return delegate.visitDynamicProperty(object);
+	}
+
+	public R visitDynamicType(org.eclipse.ocl.examples.pivot.DynamicType object) {
+		return delegate.visitDynamicType(object);
 	}
 
 	public R visitElement(org.eclipse.ocl.examples.pivot.Element object) {
@@ -347,6 +363,10 @@ public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
 
 	public R visitStateExp(org.eclipse.ocl.examples.pivot.StateExp object) {
 		return delegate.visitStateExp(object);
+	}
+
+	public R visitStereotypedProperty(org.eclipse.ocl.examples.pivot.StereotypedProperty object) {
+		return delegate.visitStereotypedProperty(object);
 	}
 
 	public R visitStringLiteralExp(org.eclipse.ocl.examples.pivot.StringLiteralExp object) {

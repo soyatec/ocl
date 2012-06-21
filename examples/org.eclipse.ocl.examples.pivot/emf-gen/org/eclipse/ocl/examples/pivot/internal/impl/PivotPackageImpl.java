@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AnyType;
+import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.AssociationClass;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.AssociativityKind;
@@ -53,6 +54,9 @@ import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Detail;
+import org.eclipse.ocl.examples.pivot.DynamicElement;
+import org.eclipse.ocl.examples.pivot.DynamicProperty;
+import org.eclipse.ocl.examples.pivot.DynamicType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
 import org.eclipse.ocl.examples.pivot.Enumeration;
@@ -105,6 +109,7 @@ import org.eclipse.ocl.examples.pivot.SetType;
 import org.eclipse.ocl.examples.pivot.Signal;
 import org.eclipse.ocl.examples.pivot.State;
 import org.eclipse.ocl.examples.pivot.StateExp;
+import org.eclipse.ocl.examples.pivot.StereotypedProperty;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
@@ -514,6 +519,13 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass stereotypedPropertyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass stringLiteralExpEClass = null;
 
 	/**
@@ -808,7 +820,35 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass dynamicElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dynamicPropertyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dynamicTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass anyTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass appliedStereotypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1091,6 +1131,16 @@ public class PivotPackageImpl
 	 */
 	public EReference getElement_OwnedComment() {
 		return (EReference)elementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getElement_AppliedStereotype()
+	{
+		return (EReference)elementEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2574,6 +2624,36 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getStereotypedProperty()
+	{
+		return stereotypedPropertyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStereotypedProperty_ReferredProperty()
+	{
+		return (EReference)stereotypedPropertyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStereotypedProperty_Default()
+	{
+		return (EAttribute)stereotypedPropertyEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getStringLiteralExp() {
 		return stringLiteralExpEClass;
 	}
@@ -4001,8 +4081,108 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDynamicElement()
+	{
+		return dynamicElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDynamicElement_MetaType()
+	{
+		return (EReference)dynamicElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDynamicProperty()
+	{
+		return dynamicPropertyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDynamicProperty_ReferredProperty()
+	{
+		return (EReference)dynamicPropertyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDynamicProperty_Default()
+	{
+		return (EAttribute)dynamicPropertyEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDynamicType()
+	{
+		return dynamicTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDynamicType_OwnedProperty()
+	{
+		return (EReference)dynamicTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getAnyType() {
 		return anyTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAppliedStereotype()
+	{
+		return appliedStereotypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAppliedStereotype_ReferredType()
+	{
+		return (EReference)appliedStereotypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAppliedStereotype_StereotypedProperty()
+	{
+		return (EReference)appliedStereotypeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -4242,6 +4422,10 @@ public class PivotPackageImpl
 
 		anyTypeEClass = createEClass(ANY_TYPE);
 
+		appliedStereotypeEClass = createEClass(APPLIED_STEREOTYPE);
+		createEReference(appliedStereotypeEClass, APPLIED_STEREOTYPE__REFERRED_TYPE);
+		createEReference(appliedStereotypeEClass, APPLIED_STEREOTYPE__STEREOTYPED_PROPERTY);
+
 		associationClassEClass = createEClass(ASSOCIATION_CLASS);
 		createEReference(associationClassEClass, ASSOCIATION_CLASS__UNOWNED_ATTRIBUTE);
 
@@ -4317,8 +4501,19 @@ public class PivotPackageImpl
 		detailEClass = createEClass(DETAIL);
 		createEAttribute(detailEClass, DETAIL__VALUE);
 
+		dynamicElementEClass = createEClass(DYNAMIC_ELEMENT);
+		createEReference(dynamicElementEClass, DYNAMIC_ELEMENT__META_TYPE);
+
+		dynamicPropertyEClass = createEClass(DYNAMIC_PROPERTY);
+		createEReference(dynamicPropertyEClass, DYNAMIC_PROPERTY__REFERRED_PROPERTY);
+		createEAttribute(dynamicPropertyEClass, DYNAMIC_PROPERTY__DEFAULT);
+
+		dynamicTypeEClass = createEClass(DYNAMIC_TYPE);
+		createEReference(dynamicTypeEClass, DYNAMIC_TYPE__OWNED_PROPERTY);
+
 		elementEClass = createEClass(ELEMENT);
 		createEReference(elementEClass, ELEMENT__OWNED_COMMENT);
+		createEReference(elementEClass, ELEMENT__APPLIED_STEREOTYPE);
 		createEOperation(elementEClass, ELEMENT___ALL_OWNED_ELEMENTS);
 		createEOperation(elementEClass, ELEMENT___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP);
 
@@ -4568,6 +4763,10 @@ public class PivotPackageImpl
 		stateExpEClass = createEClass(STATE_EXP);
 		createEReference(stateExpEClass, STATE_EXP__REFERRED_STATE);
 
+		stereotypedPropertyEClass = createEClass(STEREOTYPED_PROPERTY);
+		createEReference(stereotypedPropertyEClass, STEREOTYPED_PROPERTY__REFERRED_PROPERTY);
+		createEAttribute(stereotypedPropertyEClass, STEREOTYPED_PROPERTY__DEFAULT);
+
 		stringLiteralExpEClass = createEClass(STRING_LITERAL_EXP);
 		createEAttribute(stringLiteralExpEClass, STRING_LITERAL_EXP__STRING_SYMBOL);
 
@@ -4715,6 +4914,7 @@ public class PivotPackageImpl
 		// Add supertypes to classes
 		annotationEClass.getESuperTypes().add(this.getNamedElement());
 		anyTypeEClass.getESuperTypes().add(this.getClass_());
+		appliedStereotypeEClass.getESuperTypes().add(this.getElement());
 		associationClassEClass.getESuperTypes().add(this.getClass_());
 		associationClassCallExpEClass.getESuperTypes().add(this.getNavigationCallExp());
 		bagTypeEClass.getESuperTypes().add(this.getCollectionType());
@@ -4735,6 +4935,10 @@ public class PivotPackageImpl
 		constructorPartEClass.getESuperTypes().add(this.getElement());
 		dataTypeEClass.getESuperTypes().add(this.getClass_());
 		detailEClass.getESuperTypes().add(this.getNamedElement());
+		dynamicElementEClass.getESuperTypes().add(this.getElement());
+		dynamicPropertyEClass.getESuperTypes().add(this.getElement());
+		dynamicTypeEClass.getESuperTypes().add(this.getType());
+		dynamicTypeEClass.getESuperTypes().add(this.getDynamicElement());
 		elementEClass.getESuperTypes().add(this.getVisitable());
 		enumLiteralExpEClass.getESuperTypes().add(this.getLiteralExp());
 		enumerationEClass.getESuperTypes().add(this.getDataType());
@@ -4793,6 +4997,7 @@ public class PivotPackageImpl
 		signalEClass.getESuperTypes().add(this.getNamedElement());
 		stateEClass.getESuperTypes().add(this.getNamedElement());
 		stateExpEClass.getESuperTypes().add(this.getOCLExpression());
+		stereotypedPropertyEClass.getESuperTypes().add(this.getElement());
 		stringLiteralExpEClass.getESuperTypes().add(this.getPrimitiveLiteralExp());
 		templateBindingEClass.getESuperTypes().add(this.getElement());
 		templateParameterEClass.getESuperTypes().add(this.getElement());
@@ -4828,6 +5033,10 @@ public class PivotPackageImpl
 		initEReference(getAnnotation_Reference(), this.getElement(), null, "reference", null, 0, -1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(anyTypeEClass, AnyType.class, "AnyType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+		initEClass(appliedStereotypeEClass, AppliedStereotype.class, "AppliedStereotype", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getAppliedStereotype_ReferredType(), this.getType(), null, "referredType", null, 1, 1, AppliedStereotype.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEReference(getAppliedStereotype_StereotypedProperty(), this.getStereotypedProperty(), null, "stereotypedProperty", null, 0, -1, AppliedStereotype.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(associationClassEClass, AssociationClass.class, "AssociationClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getAssociationClass_UnownedAttribute(), this.getProperty(), this.getProperty_Association(), "unownedAttribute", null, 0, -1, AssociationClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
@@ -4968,8 +5177,19 @@ public class PivotPackageImpl
 		initEClass(detailEClass, Detail.class, "Detail", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(getDetail_Value(), this.getString(), "value", null, 1, -1, Detail.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 
+		initEClass(dynamicElementEClass, DynamicElement.class, "DynamicElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getDynamicElement_MetaType(), this.getType(), null, "metaType", null, 1, 1, DynamicElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(dynamicPropertyEClass, DynamicProperty.class, "DynamicProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getDynamicProperty_ReferredProperty(), this.getProperty(), null, "referredProperty", null, 1, 1, DynamicProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(getDynamicProperty_Default(), this.getString(), "default", null, 0, 1, DynamicProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(dynamicTypeEClass, DynamicType.class, "DynamicType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getDynamicType_OwnedProperty(), this.getDynamicProperty(), null, "ownedProperty", null, 0, -1, DynamicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+
 		initEClass(elementEClass, Element.class, "Element", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getElement_OwnedComment(), this.getComment(), null, "ownedComment", null, 0, -1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEReference(getElement_AppliedStereotype(), this.getAppliedStereotype(), null, "appliedStereotype", null, 0, -1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 
 		initEOperation(getElement__AllOwnedElements(), this.getElement(), "allOwnedElements", 0, -1, IS_UNIQUE, !IS_ORDERED); //$NON-NLS-1$
 
@@ -5586,6 +5806,10 @@ public class PivotPackageImpl
 		initEClass(stateExpEClass, StateExp.class, "StateExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getStateExp_ReferredState(), this.getState(), null, "referredState", null, 0, 1, StateExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 
+		initEClass(stereotypedPropertyEClass, StereotypedProperty.class, "StereotypedProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getStereotypedProperty_ReferredProperty(), this.getProperty(), null, "referredProperty", null, 1, 1, StereotypedProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(getStereotypedProperty_Default(), this.getString(), "default", null, 0, 1, StereotypedProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+
 		initEClass(stringLiteralExpEClass, StringLiteralExp.class, "StringLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(getStringLiteralExp_StringSymbol(), this.getString(), "stringSymbol", null, 1, 1, StringLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 
@@ -5745,7 +5969,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																																																																																																																																																																																																																			
+		   });																																																																																																																																																																																																																																																																																													
 	}
 
 	/**
@@ -5756,13 +5980,19 @@ public class PivotPackageImpl
 	 */
 	protected void createDuplicatesAnnotations()
 	{
-		String source = "duplicates"; //$NON-NLS-1$																		
+		String source = "duplicates"; //$NON-NLS-1$																				
 		addAnnotation
 		  (classEClass, 
 		   source, 
 		   new String[] 
 		   {
-		   });																																																				
+		   });																																						
+		addAnnotation
+		  (dynamicTypeEClass, 
+		   source, 
+		   new String[] 
+		   {
+		   });																					
 		addAnnotation
 		  (featureEClass, 
 		   source, 
@@ -5780,7 +6010,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																	
+		   });																																																																																			
 		addAnnotation
 		  (typeEClass, 
 		   source, 
@@ -5803,7 +6033,7 @@ public class PivotPackageImpl
 	 */
 	protected void createSubsetsAnnotations()
 	{
-		String source = "subsets"; //$NON-NLS-1$																																																																																																																																																																																								
+		String source = "subsets"; //$NON-NLS-1$																																																																																																																																																																																																
 		addAnnotation
 		  (getParameterableElement_OwningTemplateParameter(), 
 		   source, 
@@ -5813,7 +6043,7 @@ public class PivotPackageImpl
 		   new URI[] 
 		   {
 			 URI.createURI(eNS_URI).appendFragment("//ParameterableElement/templateParameter") //$NON-NLS-1$
-		   });																																								
+		   });																																										
 		addAnnotation
 		  (getTemplateParameter_OwnedParameteredElement(), 
 		   source, 
