@@ -45,6 +45,8 @@ import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.uml2.uml.Classifier;
+import org.eclipse.uml2.uml.Interface;
 import org.eclipse.uml2.uml.ParameterableElement;
 import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.UMLPackage;
@@ -177,18 +179,27 @@ public class Pivot2UMLDeclarationVisitor
 	}
 
 	@Override
-	public org.eclipse.uml2.uml.Class visitClass(org.eclipse.ocl.examples.pivot.Class pivotClass) {
+	public org.eclipse.uml2.uml.Classifier visitClass(org.eclipse.ocl.examples.pivot.Class pivotClass) {
 		if (pivotClass.getTemplateBinding().size() > 0) {
 			return null;
 		}
-		org.eclipse.uml2.uml.Class umlClass = UMLFactory.eINSTANCE.createClass();
-		copyClassifier(umlClass, pivotClass);
-		umlClass.setIsAbstract(pivotClass.isAbstract());
-//		umlClass.setIsInterface(pivotClass.isInterface());
+		Classifier umlClassifier;
+		if (pivotClass.isInterface()) {
+			Interface umlInterface = UMLFactory.eINSTANCE.createInterface();
+			safeVisitAll(umlInterface.getOwnedOperations(), pivotClass.getOwnedOperation());
+			safeVisitAll(umlInterface.getOwnedAttributes(), pivotClass.getOwnedAttribute());
+			umlClassifier = umlInterface;
+		}
+		else {
+			org.eclipse.uml2.uml.Class umlClass = UMLFactory.eINSTANCE.createClass();
+			safeVisitAll(umlClass.getOwnedOperations(), pivotClass.getOwnedOperation());
+			safeVisitAll(umlClass.getOwnedAttributes(), pivotClass.getOwnedAttribute());
+			umlClassifier = umlClass;
+		}
+		copyClassifier(umlClassifier, pivotClass);
 		context.defer(pivotClass);		// Defer superclass resolution
-		safeVisitAll(umlClass.getOwnedOperations(), pivotClass.getOwnedOperation());
-		safeVisitAll(umlClass.getOwnedAttributes(), pivotClass.getOwnedAttribute());
-		return umlClass;
+		umlClassifier.setIsAbstract(pivotClass.isAbstract());
+		return umlClassifier;
 	}
 
 	@Override

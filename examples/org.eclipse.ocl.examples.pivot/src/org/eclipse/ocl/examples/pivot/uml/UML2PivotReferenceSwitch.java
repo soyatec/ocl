@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.pivot.uml;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -26,6 +27,8 @@ import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.uml2.uml.Generalization;
 import org.eclipse.uml2.uml.ParameterDirectionKind;
 import org.eclipse.uml2.uml.util.UMLSwitch;
 
@@ -61,6 +64,28 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 	public Constraint caseConstraint(org.eclipse.uml2.uml.Constraint umlConstraint) {
 		Constraint pivotElement = converter.getCreated(Constraint.class, umlConstraint);
 		doSwitchAll(Element.class, pivotElement.getConstrainedElement(), umlConstraint.getConstrainedElements());
+		return null;
+	}
+
+	@Override
+	public org.eclipse.ocl.examples.pivot.Class caseInterface(org.eclipse.uml2.uml.Interface umlInterface) {
+		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.getCreated(org.eclipse.ocl.examples.pivot.Class.class, umlInterface);
+		List<Generalization> umlGeneralizations = umlInterface.getGeneralizations();
+		List<Type> newSuperTypes = new ArrayList<Type>(Math.max(1, umlGeneralizations.size()));
+		for (org.eclipse.uml2.uml.Generalization umlGeneralization : umlGeneralizations) {
+			org.eclipse.uml2.uml.Classifier umlGeneral = umlGeneralization.getGeneral();
+			Type pivotGeneral = converter.getCreated(Type.class, umlGeneral);
+			if (!newSuperTypes.contains(pivotGeneral)) {
+				newSuperTypes.add(pivotGeneral);
+			}
+		}
+		if (newSuperTypes.isEmpty()) {
+			org.eclipse.ocl.examples.pivot.Class oclElementType = converter.getMetaModelManager().getOclElementType();
+			if (oclElementType != null) {
+				newSuperTypes.add(oclElementType);
+			}
+		}
+		PivotUtil.refreshList(pivotElement.getSuperClass(), newSuperTypes);
 		return null;
 	}
 
