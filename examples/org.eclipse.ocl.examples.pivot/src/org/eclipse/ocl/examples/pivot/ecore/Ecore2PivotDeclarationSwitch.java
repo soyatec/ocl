@@ -78,14 +78,14 @@ import org.eclipse.ocl.examples.pivot.utilities.Pivot2Moniker;
 
 public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 {
-	protected final Ecore2Pivot converter;
+	protected final AbstractEcore2Pivot converter;
 	
-	public Ecore2PivotDeclarationSwitch(Ecore2Pivot converter) {
+	public Ecore2PivotDeclarationSwitch(AbstractEcore2Pivot converter) {
 		this.converter = converter;
 	}
 	
 	@Override
-	public Annotation caseEAnnotation(EAnnotation eObject) {
+	public Object caseEAnnotation(EAnnotation eObject) {
 		String source = eObject.getSource();
 		EMap<String, String> details = eObject.getDetails();
 		Annotation pivotElement = PivotFactory.eINSTANCE.createAnnotation();
@@ -108,7 +108,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 	}
 
 	@Override
-	public Property caseEAttribute(EAttribute eObject) {
+	public Object caseEAttribute(EAttribute eObject) {
 		Property pivotElement = converter.refreshNamedElement(Property.class, PivotPackage.Literals.PROPERTY, eObject);
 		copyStructuralFeature(pivotElement, eObject, null);
 		pivotElement.setIsID(eObject.isID());			
@@ -116,7 +116,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 	}
 
 	@Override
-	public org.eclipse.ocl.examples.pivot.Class caseEClass(EClass eObject) {
+	public Object caseEClass(EClass eObject) {
 		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.refreshNamedElement(org.eclipse.ocl.examples.pivot.Class.class, PivotPackage.Literals.CLASS, eObject);
 		copyClassifier(pivotElement, eObject);
 		pivotElement.setIsAbstract(eObject.isAbstract());			
@@ -165,7 +165,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 	}
 
 	@Override
-	public DataType caseEDataType(EDataType eObject) {
+	public Object caseEDataType(EDataType eObject) {
 		DataType pivotElement = converter.refreshNamedElement(DataType.class, PivotPackage.Literals.DATA_TYPE, eObject);
 		copyDataTypeOrEnum(pivotElement, eObject);
 		Class<?> instanceClass = eObject.getInstanceClass();
@@ -242,7 +242,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 	}
 
 	@Override
-	public Enumeration caseEEnum(EEnum eObject) {
+	public Object caseEEnum(EEnum eObject) {
 		Enumeration pivotElement = converter.refreshNamedElement(Enumeration.class, PivotPackage.Literals.ENUMERATION, eObject);
 		copyDataTypeOrEnum(pivotElement, eObject);
 		doSwitchAll(pivotElement.getOwnedLiteral(), eObject.getELiterals());
@@ -250,7 +250,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 	}
 
 	@Override
-	public EnumerationLiteral caseEEnumLiteral(EEnumLiteral eEnumLiteral) {
+	public Object caseEEnumLiteral(EEnumLiteral eEnumLiteral) {
 		EnumerationLiteral pivotElement = converter.refreshNamedElement(EnumerationLiteral.class,
 			PivotPackage.Literals.ENUMERATION_LITERAL, eEnumLiteral);
 		copyNamedElement(pivotElement, eEnumLiteral);
@@ -283,7 +283,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 	}
 
 	@Override
-	public Operation caseEOperation(EOperation eObject) {
+	public Object caseEOperation(EOperation eObject) {
 		Operation pivotElement = converter.refreshNamedElement(Operation.class, PivotPackage.Literals.OPERATION, eObject);
 		List<EAnnotation> excludedAnnotations =  null;
 		EAnnotation oclAnnotation = OCLCommon.getDelegateAnnotation(eObject);
@@ -347,7 +347,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 	}
 
 	@Override
-	public org.eclipse.ocl.examples.pivot.Package caseEPackage(EPackage eObject) {
+	public Object caseEPackage(EPackage eObject) {
 		org.eclipse.ocl.examples.pivot.Package pivotElement = converter.refreshNamedElement(org.eclipse.ocl.examples.pivot.Package.class, PivotPackage.Literals.PACKAGE, eObject);
 		if (eObject.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)) {
 			pivotElement.setNsURI(eObject.getNsURI());
@@ -371,14 +371,14 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 	}
 
 	@Override
-	public Parameter caseEParameter(EParameter eObject) {
+	public Object caseEParameter(EParameter eObject) {
 		Parameter pivotElement = converter.refreshNamedElement(Parameter.class, PivotPackage.Literals.PARAMETER, eObject);
 		copyTypedMultiplicityElement(pivotElement, eObject, null);
 		return pivotElement;
 	}
 
 	@Override
-	public Property caseEReference(EReference eObject) {
+	public Object caseEReference(EReference eObject) {
 		Property pivotElement = converter.refreshNamedElement(Property.class, PivotPackage.Literals.PROPERTY, eObject);	
 		List<EAnnotation> excludedAnnotations = null;
 		EAnnotation oppositeRole = eObject.getEAnnotation(EMOFExtendedMetaData.EMOF_PACKAGE_NS_URI_2_0);
@@ -405,7 +405,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 	}
 
 	@Override
-	public Element caseETypeParameter(ETypeParameter eObject) {
+	public Object caseETypeParameter(ETypeParameter eObject) {
 		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.refreshNamedElement(org.eclipse.ocl.examples.pivot.Class.class, PivotPackage.Literals.CLASS, eObject);
 		converter.addMapping(eObject, pivotElement);
 		String name = eObject.getName();

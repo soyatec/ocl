@@ -31,10 +31,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EGenericType;
-import org.eclipse.emf.ecore.EModelElement;
-import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -45,7 +42,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIException;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -53,13 +49,11 @@ import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
-import org.eclipse.ocl.examples.pivot.utilities.AbstractConversion;
 import org.eclipse.ocl.examples.pivot.utilities.AliasAdapter;
-import org.eclipse.ocl.examples.pivot.utilities.External2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.PivotObjectImpl;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
-public class Ecore2Pivot extends AbstractConversion implements External2Pivot, PivotConstants
+public class Ecore2Pivot extends AbstractEcore2Pivot
 {
 	private static final class Factory implements MetaModelManager.Factory
 	{
@@ -236,10 +230,12 @@ public class Ecore2Pivot extends AbstractConversion implements External2Pivot, P
 		createMap.put(eObject, pivotElement);
 	}
 
+	@Override
 	public void addGenericType(EGenericType eObject) {
 		genericTypes.add(eObject);
 	}
 	
+	@Override
 	public void addMapping(EObject eObject, Element pivotElement) {
 		if (pivotElement instanceof PivotObjectImpl) {
 			((PivotObjectImpl)pivotElement).setTarget(eObject);
@@ -262,7 +258,8 @@ public class Ecore2Pivot extends AbstractConversion implements External2Pivot, P
 		getTarget().eAdapters().remove(this);
 	}
 
-	protected void error(String message) {
+	@Override
+	public void error(String message) {
 		if (errors == null) {
 			errors = new ArrayList<Resource.Diagnostic>();
 		}
@@ -530,7 +527,8 @@ public class Ecore2Pivot extends AbstractConversion implements External2Pivot, P
 
 	public void notifyChanged(Notification notification) {}
 
-	public void queueReference(EModelElement eObject) {
+	@Override
+	public void queueReference(EObject eObject) {
 		referencers.add(eObject);
 	}
 
@@ -553,21 +551,6 @@ public class Ecore2Pivot extends AbstractConversion implements External2Pivot, P
 		pivotDetail.getValue().add(value);
 		pivotAnnotation.getOwnedDetail().add(pivotDetail);
 	} */
-
-	protected <T extends NamedElement> T refreshNamedElement(Class<T> pivotClass,
-			EClass pivotEClass, ENamedElement eNamedElement) {
-		EFactory eFactoryInstance = pivotEClass.getEPackage().getEFactoryInstance();
-		EObject pivotElement = eFactoryInstance.create(pivotEClass);
-		if (!pivotClass.isAssignableFrom(pivotElement.getClass())) {
-			throw new ClassCastException();
-		}
-		@SuppressWarnings("unchecked")
-		T castElement = (T) pivotElement;
-		if (eNamedElement != null) {
-			castElement.setName(eNamedElement.getName());
-		}
-		return castElement;
-	}
 	
 	protected Type resolveDataType(EGenericType eGenericType) {
 		assert eGenericType.getETypeArguments().isEmpty();
