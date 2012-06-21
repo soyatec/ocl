@@ -24,6 +24,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextDeclCS;
@@ -186,6 +188,7 @@ public class PackageDeclarationCSImpl extends PathNameDeclCSImpl implements Pack
 		if (pathName == null) {
 			return null;
 		}
+		CS2Pivot.setElementType(pathName, PivotPackage.Literals.PACKAGE, this, null);
 		return (org.eclipse.ocl.examples.pivot.Package) pathName.getElement();
 	}
 } //PackageDeclarationCSImpl

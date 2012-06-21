@@ -338,7 +338,6 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 
 	@Override
 	public Continuation<?> visitClassifierContextDeclCS(ClassifierContextDeclCS csElement) {
-		CS2Pivot.setElementType(csElement.getPathName(), PivotPackage.Literals.TYPE, csElement, null);
 		Type modelClassifier = csElement.getClassifier();
 		Type contextClassifier = refreshContextType(modelClassifier, csElement);
 		refreshConstrainedElements(csElement, contextClassifier);
@@ -463,7 +462,6 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 
 	@Override
 	public Continuation<?> visitPackageDeclarationCS(PackageDeclarationCS csElement) {
-		CS2Pivot.setElementType(csElement.getPathName(), PivotPackage.Literals.PACKAGE, csElement, null);
 		org.eclipse.ocl.examples.pivot.Package modelPackage = csElement.getPackage();
 		refreshContextPackage(modelPackage, csElement);
 		return null;
@@ -471,7 +469,6 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 
 	@Override
 	public Continuation<?> visitPropertyContextDeclCS(PropertyContextDeclCS csElement) {
-		CS2Pivot.setElementType(csElement.getPathName(), PivotPackage.Literals.PROPERTY, csElement, null);
 		Property modelProperty = csElement.getProperty();
 		Property contextProperty = context.refreshModelElement(Property.class, PivotPackage.Literals.PROPERTY, csElement);
 		if ((modelProperty != null) && !modelProperty.eIsProxy()) {

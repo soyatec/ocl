@@ -17,7 +17,9 @@
 package org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS;
@@ -104,6 +106,7 @@ public class PropertyContextDeclCSImpl extends FeatureContextDeclCSImpl implemen
 		if (pathName == null) {
 			return null;
 		}
+		CS2Pivot.setElementType(pathName, PivotPackage.Literals.PROPERTY, this, null);
 		return (Property) pathName.getElement();
 	}
 } //PropertyContextDeclCSImpl
