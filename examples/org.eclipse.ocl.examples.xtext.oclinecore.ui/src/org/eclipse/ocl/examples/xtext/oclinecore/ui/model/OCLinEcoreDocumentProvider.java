@@ -49,7 +49,7 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
-import org.eclipse.ocl.examples.pivot.uml.UML2Ecore2Pivot;
+import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotResourceFactoryImpl;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -257,7 +257,7 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider
 						persistAs = PERSIST_AS_PIVOT;
 					}
 					else if (xmiRoot instanceof org.eclipse.uml2.uml.Package) {
-						UML2Ecore2Pivot uml2Pivot = UML2Ecore2Pivot.getAdapter(xmiResource, metaModelManager);
+						UML2Pivot uml2Pivot = UML2Pivot.getAdapter(xmiResource, metaModelManager);
 						org.eclipse.ocl.examples.pivot.Package pivotRoot = uml2Pivot.getPivotRoot();
 						pivotResource = pivotRoot.eResource();
 						persistAs = PERSIST_AS_OCLINECORE;		// FIXME

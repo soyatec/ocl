@@ -38,6 +38,7 @@ import org.apache.log4j.spi.LoggingEvent;
 import org.apache.log4j.spi.ThrowableInformation;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.compare.diff.metamodel.DiffModel;
@@ -61,6 +62,7 @@ import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -491,6 +493,9 @@ public class XtextTestCase extends PivotTestCase
 	@Override
 	protected void setUp() throws Exception {
     	testCaseAppender.install();
+    	if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+    		OCL.initialize(null);
+    	}
 		CompleteOCLStandaloneSetup.doSetup();
 		OCLinEcoreStandaloneSetup.doSetup();
 		OCLstdlibStandaloneSetup.doSetup();

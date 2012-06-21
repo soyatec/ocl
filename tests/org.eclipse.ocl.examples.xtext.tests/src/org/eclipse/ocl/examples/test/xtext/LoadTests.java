@@ -49,7 +49,6 @@ import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
-import org.eclipse.ocl.examples.pivot.uml.UML2Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -257,6 +256,9 @@ public class LoadTests extends XtextTestCase
 		System.out.println("Start at " + startTime);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		getProjectMap().initializeResourceSet(resourceSet);
+		if (!resourceSet.getURIConverter().exists(inputURI, null)) {
+			return;
+		}			
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {			
 			IProjectDescriptor projectDescriptor = getProjectMap().getProjectDescriptor("org.eclipse.uml2.uml");
 			projectDescriptor.initializeURIMap(URIConverter.URI_MAP);		// *.ecore2xml must be global
@@ -337,8 +339,7 @@ public class LoadTests extends XtextTestCase
 								constraint.setSpecification(specification);
 								long endParseTime = System.currentTimeMillis();
 								int treeSize = 1;
-								for (TreeIterator<EObject> tit2 = specification.eAllContents(); tit2.hasNext(); ) {
-									EObject treeObject = tit2.next();
+								for (TreeIterator<EObject> tit2 = specification.eAllContents(); tit2.hasNext(); tit2.next()) {
 									treeSize++;
 								}
 								double parseTime = 0.001 * (endParseTime - startParseTime);
@@ -649,7 +650,7 @@ public class LoadTests extends XtextTestCase
 	public void testLoad_Fruit_ocl() throws IOException, InterruptedException {
 		metaModelManager = new MetaModelManager();
 		ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
-		assertNull(UML2Ecore2Pivot.initialize(resourceSet));
+		assertNull(OCL.initialize(resourceSet));
 		UMLPackage.eINSTANCE.getClass();
 		doLoad("Fruit", "ocl");
 	}	
@@ -680,8 +681,6 @@ public class LoadTests extends XtextTestCase
 	
 	public void testLoad_UML_2_5() throws IOException, InterruptedException {
 		URI uml_2_5 = URI.createPlatformResourceURI("UML-2.5/XMI-12-Jun-2012/UMLDI.xmi", true);
-		if (uml_2_5.isFile()) {		// FIXME test actual rather than potential file
-			doLoadUML(uml_2_5);
-		}
+		doLoadUML(uml_2_5);
 	}
 }

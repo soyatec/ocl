@@ -95,6 +95,7 @@ import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.model.OCLMetaModel;
 import org.eclipse.ocl.examples.pivot.uml.UML2Ecore2Pivot;
+import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.util.Nameable;
 import org.eclipse.ocl.examples.pivot.utilities.CompleteElementIterable;
 import org.eclipse.ocl.examples.pivot.utilities.External2Pivot;
@@ -386,7 +387,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	
 	static {
 		Ecore2Pivot.FACTORY.getClass();
-		UML2Ecore2Pivot.FACTORY.getClass();
+		UML2Pivot.FACTORY.getClass();
 	}
 	
 	private static final Logger logger = Logger.getLogger(MetaModelManager.class);

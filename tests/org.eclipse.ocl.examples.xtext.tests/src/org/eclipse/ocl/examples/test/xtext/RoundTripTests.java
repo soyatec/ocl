@@ -35,6 +35,7 @@ import org.eclipse.ocl.examples.common.utils.ClassUtils;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -48,6 +49,7 @@ import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot.MessageBinder;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.completeocl.pivot2cs.CompleteOCLSplitter;
+import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLLinkingService;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 import org.eclipse.uml2.uml.UMLPackage;
@@ -124,6 +126,9 @@ public class RoundTripTests extends XtextTestCase
 		ProjectMap projectMap = ProjectMap.getAdapter(resourceSet);
 		try {
 			projectMap.initializeResourceSet(resourceSet);			
+			if (!resourceSet.getURIConverter().exists(inputURI, null)) {
+				return;
+			}			
 			if (!EMFPlugin.IS_ECLIPSE_RUNNING) {			
 				IProjectDescriptor projectDescriptor = projectMap.getProjectDescriptor("org.eclipse.uml2.uml");
 				projectDescriptor.initializeURIMap(URIConverter.URI_MAP);		// *.ecore2xml must be global
@@ -245,7 +250,7 @@ public class RoundTripTests extends XtextTestCase
 //		Environment.Registry.INSTANCE.registerEnvironment(
 //			new UMLEnvironmentFactory().createEnvironment());
 		ResourceSet resourceSet = new ResourceSetImpl();
-		assertNull(UML2Pivot.initialize(resourceSet));
+		assertNull(OCL.initialize(resourceSet));
 		resourceSet.getPackageRegistry().put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
 //		assertNull(org.eclipse.ocl.uml.OCL.initialize(null));		
 //		org.eclipse.uml2.uml.Package umlMetamodel = (org.eclipse.uml2.uml.Package) resourceSet.getResource(
@@ -354,6 +359,7 @@ public class RoundTripTests extends XtextTestCase
 	}
 
 	public void testCompleteOCLRoundTrip_Fruit() throws IOException, InterruptedException {
+		EssentialOCLLinkingService.DEBUG_RETRY = true;
 		doRoundTripFromCompleteOCL(getProjectFileURI("Fruit.ocl"));
 	}
 
@@ -366,10 +372,8 @@ public class RoundTripTests extends XtextTestCase
 	}
 
 	public void testCompleteOCLRoundTrip_UML() throws IOException, InterruptedException {
-		URI uml_2_5 = URI.createPlatformResourceURI("/UML-2.5/XMI-5-Jan-2012/Semanticed UML.ocl", false);
-		if (uml_2_5.isFile()) {		// FIXME test actual rather than potential file
-			doRoundTripFromCompleteOCL(uml_2_5);
-		}
+		URI uml_2_5 = URI.createPlatformResourceURI("UML-2.5/XMI-5-Jan-2012/Semanticed UML.ocl", false);
+		doRoundTripFromCompleteOCL(uml_2_5);
 	}
 
 	public void testOCLinEcoreCSTRoundTrip() throws IOException, InterruptedException {

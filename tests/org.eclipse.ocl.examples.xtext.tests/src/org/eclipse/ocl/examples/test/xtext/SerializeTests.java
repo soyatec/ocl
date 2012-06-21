@@ -28,6 +28,7 @@ import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.uml.UML2Ecore2Pivot;
+import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
@@ -167,15 +168,15 @@ public class SerializeTests extends XtextTestCase
 		//
 		//
 //		assertSameModel(pivotResource, pivotResource2);
-		UML2Ecore2Pivot uml2Ecore2Pivot = UML2Ecore2Pivot.getAdapter(umlResource, metaModelManager);
+		UML2Ecore2Pivot uml2Ecore2Pivot = UML2Ecore2Pivot.getAdapter(umlResource, metaModelManager);	// FIXME Use UML2Pivot
 		Resource ecoreResource = uml2Ecore2Pivot.getEcoreResource();
 		assertSameModel(ecoreResource, ecoreResource2);		
 		return xtextResource;
 	}
 
 	protected Resource getPivotFromUML(MetaModelManager metaModelManager, Resource umlResource) {
-		UML2Ecore2Pivot uml2Ecore2Pivot = UML2Ecore2Pivot.getAdapter(umlResource, metaModelManager);
-		org.eclipse.ocl.examples.pivot.Package pivotRoot = uml2Ecore2Pivot.getPivotRoot();
+		UML2Pivot uml2Pivot = UML2Pivot.getAdapter(umlResource, metaModelManager);
+		org.eclipse.ocl.examples.pivot.Package pivotRoot = uml2Pivot.getPivotRoot();
 		Resource pivotResource = pivotRoot.eResource();
 		assertNoResourceErrors("Normalisation failed", pivotResource);
 		assertNoValidationErrors("Normalisation invalid", pivotResource);
@@ -184,7 +185,7 @@ public class SerializeTests extends XtextTestCase
 
 	protected Resource loadUML(URI inputURI) {
 //		ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
-		assertNull(UML2Ecore2Pivot.initialize(resourceSet));
+		assertNull(OCL.initialize(resourceSet));
 		Resource umlResource = resourceSet.getResource(inputURI, true);
 		mapOwnURI(umlResource);
 //		List<String> conversionErrors = new ArrayList<String>();
