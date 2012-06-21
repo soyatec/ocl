@@ -46,8 +46,10 @@ import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIException;
+import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Model;
@@ -66,6 +68,8 @@ import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.utilities.AliasAdapter;
 import org.eclipse.ocl.examples.pivot.utilities.PivotObjectImpl;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.uml2.uml.resource.UMLResource;
+import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
 
 public abstract class UML2Pivot extends AbstractEcore2Pivot
 {
@@ -185,6 +189,47 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 			return null;
 		}
 		return conversion.getCreated(Element.class, eObject);
+	}
+
+	/**
+	 * Initialize registries to support OCL and UML usage. This method is
+	 * intended for initialization of standalone behaviors for which plugin extension
+	 * registrations have not been applied.
+	 *<p> 
+	 * A null resourceSet may be provided to initialize the global package registry
+	 * and global URI mapping registry.
+	 *<p> 
+	 * A non-null resourceSet may be provided to identify specific package
+	 * and global URI mapping registries.
+	 * <p>
+	 * This method is used to configure the ResourceSet used to load the OCL Standard Library.
+
+	 * @param resourceSet to be initialized or null for global initialization
+	 * @return a failure reason, null if successful
+	 */
+	public static String initialize(ResourceSet resourceSet) {
+		UMLResourcesUtil.init(resourceSet);
+		final String resourcesPluginId = "org.eclipse.uml2.uml.resources"; //$NON-NLS-1$
+		String resourcesLocation = null;
+		StandaloneProjectMap projectMap = StandaloneProjectMap.findAdapter(resourceSet);
+		if (projectMap != null) {
+			URI locationURI = projectMap.getLocation(resourcesPluginId);
+			if (locationURI != null) {
+				resourcesLocation = locationURI.toString();
+				while (resourcesLocation.endsWith("/")) {
+					resourcesLocation = resourcesLocation.substring(0, resourcesLocation.length()-1);
+				}
+			}
+		}
+		if (resourcesLocation == null)
+			return "'" + resourcesPluginId + "' not found on class-path"; //$NON-NLS-1$
+		Map<URI, URI> uriMap = resourceSet != null
+			? resourceSet.getURIConverter().getURIMap()
+			: URIConverter.URI_MAP;		
+		uriMap.put(URI.createURI(UMLResource.PROFILES_PATHMAP), URI.createURI(resourcesLocation + "/profiles/")); //$NON-NLS-1$
+		uriMap.put(URI.createURI(UMLResource.METAMODELS_PATHMAP), URI.createURI(resourcesLocation + "/metamodels/")); //$NON-NLS-1$
+		uriMap.put(URI.createURI(UMLResource.LIBRARIES_PATHMAP), URI.createURI(resourcesLocation + "/libraries/")); //$NON-NLS-1$
+		return null;
 	}
 
 	public static boolean isUML(Resource resource) {
