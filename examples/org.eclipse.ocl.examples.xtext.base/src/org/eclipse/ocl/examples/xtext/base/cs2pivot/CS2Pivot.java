@@ -195,7 +195,7 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	public static String getUnresolvedProxyText(EReference eReference, EObject csContext, String linkText) {
 		ExceptionAdapter exceptionAdapter = PivotUtil.getAdapter(ExceptionAdapter.class, csContext);
 		if (exceptionAdapter != null) {
-			return exceptionAdapter.getException().getLocalizedMessage();
+			return exceptionAdapter.getErrorMessage();
 		}
 		UnresolvedProxyMessageProvider unresolvedProxyMessageProvider = unresolvedProxyMessageProviderMap.get(eReference);
 		if (unresolvedProxyMessageProvider != null) {
