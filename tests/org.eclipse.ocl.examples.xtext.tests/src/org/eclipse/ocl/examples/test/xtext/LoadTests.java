@@ -253,7 +253,7 @@ public class LoadTests extends XtextTestCase
 	
 	public void doLoadUML(URI inputURI) throws IOException {
 		long startTime = System.currentTimeMillis();
-		System.out.println("Start at " + startTime);
+//		System.out.println("Start at " + startTime);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		getProjectMap().initializeResourceSet(resourceSet);
 		if (!resourceSet.getURIConverter().exists(inputURI, null)) {

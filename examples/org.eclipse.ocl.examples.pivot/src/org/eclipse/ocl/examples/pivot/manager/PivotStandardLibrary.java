@@ -85,6 +85,11 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	
 	private Map<String, Type> nameToLibraryTypeMap = null;
 
+	/**
+	 * Names of all iterations in the libraries.
+	 */
+//	private Set<String> iterationNames = new HashSet<String>();
+
 	protected void defineLibraryType(Type pivotType) {
 		if (nameToLibraryTypeMap == null) {
 			nameToLibraryTypeMap = new HashMap<String, Type>();
@@ -94,6 +99,11 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 		if ((oldType != null) && (oldType != pivotType)) {
 			logger.warn("Conflicting pivot type '" + name + "'");
 		}
+//		for (Operation operation : pivotType.getOwnedOperation()) {
+//			if (operation instanceof Iteration) {
+//				iterationNames.add(operation.getName());
+//			}
+//		}
 	}
 
 	@Override
@@ -507,6 +517,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 		}
 		return unlimitedNaturalType;
 	}
+
+//	public boolean isIteration(String name) {
+//		return iterationNames.contains(name);
+//	}
 
 	public boolean isOrdered(Type sourceType) {
 		if (sourceType instanceof OrderedSetType) {

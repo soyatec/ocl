@@ -105,6 +105,60 @@ public class EditTests extends XtextTestCase
 		xtextResource.update(index, oldString.length(), newString);
 	}	
 
+	public void testEdit_Reclass_ecore_383285() throws Exception {
+		String testDocument_class = 
+				"package p1 : p2 = 'p3' {\n" +
+				"    class C : 'java.lang.Object';\n" +
+				"}\n";
+		String testDocument_datatype = 
+				"package p1 : p2 = 'p3' {\n" +
+				"    datatype C : 'java.lang.Object';\n" +
+				"}\n";
+		URI ecoreURI_class = getProjectFileURI("test-class.ecore");
+		URI ecoreURI_datatype = getProjectFileURI("test-datatype.ecore");
+		OCL ocl_class = OCL.newInstance(new PivotEnvironmentFactory());
+		OCL ocl_datatype = OCL.newInstance(new PivotEnvironmentFactory());
+		MetaModelManager metaModelManager_class = ocl_class.getMetaModelManager();
+		MetaModelManager metaModelManager_datatype = ocl_datatype.getMetaModelManager();
+		Resource ecoreResource_class = getEcoreFromCS1(ocl_class, testDocument_class, ecoreURI_class);
+		Resource ecoreResource_datatype = getEcoreFromCS1(ocl_datatype, testDocument_datatype, ecoreURI_datatype);
+		EssentialOCLCSResource xtextResource;
+		Resource pivotResource;
+		{
+			URI ecoreURI1 = getProjectFileURI("test1.ecore");
+			InputStream inputStream = new URIConverter.ReadableInputStream(testDocument_class, "UTF-8");
+			URI outputURI = getProjectFileURI("test.oclinecore");
+			xtextResource = (EssentialOCLCSResource) resourceSet.createResource(outputURI, null);
+			MetaModelManagerResourceAdapter.getAdapter(xtextResource, ocl.getMetaModelManager());
+			xtextResource.load(inputStream, null);
+			pivotResource = cs2pivot(ocl, xtextResource, null);
+			Resource ecoreResource1 = pivot2ecore(ocl, pivotResource, ecoreURI1, true);
+			assertSameModel(ecoreResource_class, ecoreResource1);
+		}
+		//
+		//	Change "class" to "datatype" and see EClass change to EDataType.
+		//
+		{
+			replace(xtextResource, "class", "datatype");
+			assertNoResourceErrors("Reclassing to datatype", xtextResource);
+			URI ecoreURI2 = getProjectFileURI("test2.ecore");
+			Resource ecoreResource2 = pivot2ecore(ocl, pivotResource, ecoreURI2, false);
+			assertSameModel(ecoreResource_datatype, ecoreResource2);
+		}
+		//
+		//	Change "datatype" back to "class" and see EDataType change back to EClass.
+		//
+		{
+			replace(xtextResource, "datatype", "class");
+			assertNoResourceErrors("Reclassing to class", xtextResource);
+			URI ecoreURI3 = getProjectFileURI("test3.ecore");
+			Resource ecoreResource3 = pivot2ecore(ocl, pivotResource, ecoreURI3, true);
+			assertSameModel(ecoreResource_class, ecoreResource3);
+		}
+		metaModelManager_class.dispose();
+		metaModelManager_datatype.dispose();
+	}	
+
 	public void testEdit_Rename_ecore() throws Exception {
 		String testDocument = 
 			"module m1 \n" +

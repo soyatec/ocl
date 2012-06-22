@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
-import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
@@ -99,7 +98,7 @@ public class BaseDocument extends XtextDocument implements ConsoleContext
 	@Override
 	public <T> T readOnly(IUnitOfWork<T, XtextResource> work) {
 		if (myStateAccess.isWriteLocked()) {
-			CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".readOnly skip " + work.getClass().getName(), false, 0);
+//			CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".readOnly skip " + work.getClass().getName(), false, 0);
 			Class<?> workClass = work.getClass();
 			String workClassName = workClass.getName();
 			if (workClassName.startsWith("org.eclipse.xtext.ui.editor.hover.AbstractEObjectHover")) {
@@ -119,16 +118,16 @@ public class BaseDocument extends XtextDocument implements ConsoleContext
 			}
 			return null;
 		}
-		CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".readOnly start " + work.getClass().getName(), false, +1);
+//		CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".readOnly start " + work.getClass().getName(), false, +1);
 		try {
 			return super.readOnly(work);
 		}
 		finally {
-			CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".readOnly end " + work.getClass().getName(), false, -1);
+//			CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".readOnly end " + work.getClass().getName(), false, -1);
 		}
 	}
 
-	@Override
+/*	@Override
 	public <T> T modify(IUnitOfWork<T, XtextResource> work) {
 		CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".modify start " + work.getClass().getName(), false, +1);
 		try {
@@ -137,9 +136,9 @@ public class BaseDocument extends XtextDocument implements ConsoleContext
 		finally {
 			CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".modify end " + work.getClass().getName(), false, -1);
 		}
-	}
+	} */
 
-	@Override
+/*	@Override
 	public <T> T internalModify(IUnitOfWork<T, XtextResource> work) {
 		if (myStateAccess.isWriteLocked()) {
 			CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".internalModify skip " + work.getClass().getName(), false, 0);
@@ -157,7 +156,7 @@ public class BaseDocument extends XtextDocument implements ConsoleContext
 		finally {
 			CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".internalModify end " + work.getClass().getName(), false, -1);
 		}
-	}
+	} */
 
 	public void setContext(final EClassifier ecoreContext, final Map<String, EClassifier> ecoreParameters) {
 		modify(new IUnitOfWork<Object, XtextResource>()

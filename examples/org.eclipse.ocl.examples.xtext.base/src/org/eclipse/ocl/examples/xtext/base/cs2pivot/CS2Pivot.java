@@ -430,10 +430,6 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	public Notifier getTarget() {
 		return metaModelManager.getPivotResourceSet();
 	}
-
-	public MetaModelManager getMetaModelManager() {
-		return metaModelManager;
-	}
 	
 	/**
 	 * Install the mapping from a CS element that defines a pivot element to the defined pivot element. The definition
@@ -509,7 +505,7 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 //			logger.trace("Creating " + pivotEClass.getName() + " : " + moniker); //$NON-NLS-1$ //$NON-NLS-2$
 			pivotElement = (Element) pivotEClass.getEPackage().getEFactoryInstance().create(pivotEClass);
 		}
-		else if (pivotClass != pivotElement.getClass()) {
+		else if (pivotEClass != pivotElement.eClass()) {
 //			logger.trace("Recreating " + pivotEClass.getName() + " : " + moniker); //$NON-NLS-1$ //$NON-NLS-2$
 			pivotElement = (Element) pivotEClass.getEPackage().getEFactoryInstance().create(pivotEClass);
 		}
@@ -530,7 +526,7 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	}
 	
 	public synchronized void update(IDiagnosticConsumer diagnosticsConsumer) {
-		printDiagnostic("CS2Pivot.update start", false, 0);
+//		printDiagnostic("CS2Pivot.update start", false, 0);
 		Map<String, Element> oldCSI2Pivot = cs2PivotMapping.getMapping();
 		Set<String> newCSIs = cs2PivotMapping.computeCSIs(cs2pivotResourceMap.keySet());
 //		System.out.println("==========================================================================");
@@ -556,6 +552,6 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 		conversion.garbageCollect(cs2pivotResourceMap);
 		cs2PivotMapping.update(cs2pivotResourceMap.keySet());
 		pivot2cs = null;
-		printDiagnostic("CS2Pivot.update end", false, 0);
+//		printDiagnostic("CS2Pivot.update end", false, 0);
 	}
 }

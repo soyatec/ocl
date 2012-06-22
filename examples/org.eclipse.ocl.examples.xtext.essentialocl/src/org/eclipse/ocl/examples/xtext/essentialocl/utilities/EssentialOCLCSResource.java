@@ -88,7 +88,7 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 
 	@Override
 	protected void doLinking() {
-		CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".doLinking start", false, +1);
+//		CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".doLinking start", false, +1);
 		List<Diagnostic> errors = getErrors();
 		if (errors.size() > 0) {
 			for (int i = errors.size(); --i >= 0; ) {
@@ -99,17 +99,17 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 			}
 		}
 		super.doLinking();
-		CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".doLinking end", false, -1);
+//		CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".doLinking end", false, -1);
 	}
 
 	@Override
 	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
-		CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".doLoad start", false, +1);
+//		CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".doLoad start", false, +1);
 		try {
 			super.doLoad(inputStream, options);
 		}
 		finally {
-			CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".doLoad end", true, -1);
+//			CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".doLoad end", true, -1);
 		}
 	}
 
