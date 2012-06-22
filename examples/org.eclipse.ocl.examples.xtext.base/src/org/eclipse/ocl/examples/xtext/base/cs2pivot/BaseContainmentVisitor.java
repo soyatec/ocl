@@ -105,6 +105,18 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 		}
 	}
 
+
+	protected Continuation<?> refreshClass(org.eclipse.ocl.examples.pivot.Class pivotElement, ClassCS csElement) {
+		List<String> qualifiers = csElement.getQualifier();
+		pivotElement.setIsAbstract(qualifiers.contains("abstract"));
+		pivotElement.setIsInterface(qualifiers.contains("interface"));
+		pivotElement.setIsStatic(qualifiers.contains("static"));
+		context.refreshPivotList(Property.class, pivotElement.getOwnedAttribute(), csElement.getOwnedProperty());
+		context.refreshPivotList(Operation.class, pivotElement.getOwnedOperation(), csElement.getOwnedOperation());
+		refreshClassifier(pivotElement, csElement);
+		return null;
+	}
+
 	protected Type refreshClassifier(Type pivotElement, ClassifierCS csElement) {
 		if (csElement.eIsSet(BaseCSTPackage.Literals.CLASSIFIER_CS__INSTANCE_CLASS_NAME)) {
 			pivotElement.setInstanceClassName(csElement.getInstanceClassName());
@@ -215,14 +227,7 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 	public Continuation<?> visitClassCS(ClassCS csElement) {
 		org.eclipse.ocl.examples.pivot.Class pivotElement = refreshNamedElement(org.eclipse.ocl.examples.pivot.Class.class,
 			PivotPackage.Literals.CLASS, csElement);
-		List<String> qualifiers = csElement.getQualifier();
-		pivotElement.setIsAbstract(qualifiers.contains("abstract"));
-		pivotElement.setIsInterface(qualifiers.contains("interface"));
-		pivotElement.setIsStatic(qualifiers.contains("static"));
-		context.refreshPivotList(Property.class, pivotElement.getOwnedAttribute(), csElement.getOwnedProperty());
-		context.refreshPivotList(Operation.class, pivotElement.getOwnedOperation(), csElement.getOwnedOperation());
-		refreshClassifier(pivotElement, csElement);
-		return null;
+		return refreshClass(pivotElement, csElement);
 	}
 
 	@Override

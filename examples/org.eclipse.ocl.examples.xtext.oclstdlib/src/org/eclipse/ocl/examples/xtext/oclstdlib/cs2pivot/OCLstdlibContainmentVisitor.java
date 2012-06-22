@@ -22,7 +22,6 @@ import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Precedence;
-import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibClassCS;
@@ -49,10 +48,9 @@ public class OCLstdlibContainmentVisitor extends AbstractOCLstdlibContainmentVis
 			eClass = PivotPackage.Literals.CLASS;
 		}
 		@SuppressWarnings("unchecked")
-		Class<Type> instanceClass = (Class<Type>)eClass.getInstanceClass();
-		@SuppressWarnings("unused")
-		Type pivotElement = refreshNamedElement(instanceClass, eClass, csElement);
-		return visitClassCS(csElement);
+		Class<org.eclipse.ocl.examples.pivot.Class> instanceClass = (Class<org.eclipse.ocl.examples.pivot.Class>)eClass.getInstanceClass();
+		org.eclipse.ocl.examples.pivot.Class pivotElement = refreshNamedElement(instanceClass, eClass, csElement);
+		return refreshClass(pivotElement, csElement);
 	}
 
 	@Override
