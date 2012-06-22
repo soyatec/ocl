@@ -843,7 +843,8 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 	  
 	@Override
 	public Element visitBinaryOperatorCS(BinaryOperatorCS csOperator) {
-		OperationCallExp expression = PivotUtil.getPivot(OperationCallExp.class, csOperator);
+		OperationCallExp expression = context.refreshModelElement(OperationCallExp.class, PivotPackage.Literals.OPERATION_CALL_EXP, csOperator);
+		context.refreshName(expression, csOperator.getName());
 		OCLExpression source = context.visitLeft2Right(OCLExpression.class, csOperator.getSource());
 		expression.setSource(source);
 		OCLExpression argument = context.visitLeft2Right(OCLExpression.class, csOperator.getArgument());
@@ -1272,7 +1273,8 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 
 	@Override
 	public Element visitUnaryOperatorCS(UnaryOperatorCS csOperator) {
-		OperationCallExp expression = PivotUtil.getPivot(OperationCallExp.class, csOperator);
+		OperationCallExp expression = context.refreshModelElement(OperationCallExp.class, PivotPackage.Literals.OPERATION_CALL_EXP, csOperator);
+		context.refreshName(expression, csOperator.getName());
 		OCLExpression source = context.visitLeft2Right(OCLExpression.class, csOperator.getSource());
 		expression.setSource(source);
 		resolveOperationCall(expression, csOperator, new UnaryOperationFilter(metaModelManager, source.getType()));
