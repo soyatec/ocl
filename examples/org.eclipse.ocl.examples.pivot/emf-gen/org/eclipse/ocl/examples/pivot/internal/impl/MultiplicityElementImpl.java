@@ -30,6 +30,7 @@ import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.MultiplicityElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 
 /**
@@ -409,6 +410,8 @@ public abstract class MultiplicityElementImpl
 		{
 			case PivotPackage.MULTIPLICITY_ELEMENT___ALL_OWNED_ELEMENTS:
 				return allOwnedElements();
+			case PivotPackage.MULTIPLICITY_ELEMENT___GET_VALUE__TYPE_STRING:
+				return getValue((Type)arguments.get(0), (String)arguments.get(1));
 			case PivotPackage.MULTIPLICITY_ELEMENT___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP:
 				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.MULTIPLICITY_ELEMENT___LOWER_BOUND:

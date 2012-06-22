@@ -109,6 +109,8 @@ public class SelfTypeImpl extends ClassImpl implements SelfType
 		{
 			case PivotPackage.SELF_TYPE___ALL_OWNED_ELEMENTS:
 				return allOwnedElements();
+			case PivotPackage.SELF_TYPE___GET_VALUE__TYPE_STRING:
+				return getValue((Type)arguments.get(0), (String)arguments.get(1));
 			case PivotPackage.SELF_TYPE___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP:
 				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.SELF_TYPE___PARAMETERABLE_ELEMENTS:

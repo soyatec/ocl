@@ -561,6 +561,8 @@ public class CollectionLiteralExpImpl
 		{
 			case PivotPackage.COLLECTION_LITERAL_EXP___ALL_OWNED_ELEMENTS:
 				return allOwnedElements();
+			case PivotPackage.COLLECTION_LITERAL_EXP___GET_VALUE__TYPE_STRING:
+				return getValue((Type)arguments.get(0), (String)arguments.get(1));
 			case PivotPackage.COLLECTION_LITERAL_EXP___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP:
 				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.COLLECTION_LITERAL_EXP___VALIDATE_COLLECTION_KIND_IS_CONCRETE__DIAGNOSTICCHAIN_MAP:

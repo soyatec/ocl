@@ -616,6 +616,8 @@ public class MessageExpImpl
 		{
 			case PivotPackage.MESSAGE_EXP___ALL_OWNED_ELEMENTS:
 				return allOwnedElements();
+			case PivotPackage.MESSAGE_EXP___GET_VALUE__TYPE_STRING:
+				return getValue((Type)arguments.get(0), (String)arguments.get(1));
 			case PivotPackage.MESSAGE_EXP___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP:
 				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.MESSAGE_EXP___VALIDATE_ONE_CALL_OR_ONE_SEND__DIAGNOSTICCHAIN_MAP:

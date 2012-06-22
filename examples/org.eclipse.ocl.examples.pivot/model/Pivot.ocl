@@ -366,4 +366,7 @@ inv ArgumentCount: argument->size() = referredOperation.ownedParameter->size()
 --p.kind <> ParameterDirectionKind::return or
 --p.kind <> ParameterDirectionKind::out)
 
+context Element
+def: getValue(stereotype : Type, propertyName : String) : Element = null
+
 endpackage

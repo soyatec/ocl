@@ -602,6 +602,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		}
 		
 		protected final Operation op_Element_allOwnedElements = createOperation("allOwnedElements", _Element, null, null);
+		protected final Operation op_Element_getValue = createOperation("getValue", _Element, null, null);
 		protected final Operation op_MultiplicityElement_includesCardinality = createOperation("includesCardinality", _Boolean, null, null);
 		protected final Operation op_MultiplicityElement_includesMultiplicity = createOperation("includesMultiplicity", _Boolean, null, null);
 		protected final Operation op_MultiplicityElement_isMultivalued = createOperation("isMultivalued", _Boolean, null, null);
@@ -632,6 +633,10 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedOperations.add(operation = op_Element_allOwnedElements);
 			operation.setLower(BigInteger.valueOf(0));
 			operation.setUpper(BigInteger.valueOf(-1));
+			ownedOperations.add(operation = op_Element_getValue);
+			ownedParameters = operation.getOwnedParameter();
+			ownedParameters.add(parameter = createParameter("stereotype", _Type));
+			ownedParameters.add(parameter = createParameter("propertyName", _String));
 			ownedOperations = _MultiplicityElement.getOwnedOperation();
 			ownedOperations.add(operation = op_MultiplicityElement_includesCardinality);
 			ownedParameters = operation.getOwnedParameter();

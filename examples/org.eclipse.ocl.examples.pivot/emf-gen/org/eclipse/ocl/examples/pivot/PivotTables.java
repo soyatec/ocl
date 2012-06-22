@@ -1426,6 +1426,10 @@ public class PivotTables
 	
 		public static final ExecutorOperation _Element__allOwnedElements = new ExecutorOperation("allOwnedElements",
 			Types._Element, 0, org.eclipse.ocl.examples.pivot.bodies.ElementBodies._allOwnedElements_body_.INSTANCE);
+		public static final ExecutorOperation _Element__getValue = new ExecutorOperation("getValue",
+			Types._Element, 1, org.eclipse.ocl.examples.pivot.bodies.ElementBodies._getValue_body_.INSTANCE,
+				PivotTables.Types._Type,
+				PivotTables.Types._String);
 	
 		public static final ExecutorOperation _Enumeration__allInstances = new ExecutorOperation("allInstances",
 			Types._Enumeration, 0, org.eclipse.ocl.examples.library.enumeration.EnumerationAllInstancesOperation.INSTANCE);
@@ -3611,7 +3615,8 @@ public class PivotTables
 	public static class FragmentOperations {
 		private static final ExecutorOperation[] _Annotation__Annotation = {};
 		private static final ExecutorOperation[] _Annotation__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _Annotation__Nameable = {};
 		private static final ExecutorOperation[] _Annotation__NamedElement = {};
@@ -3639,7 +3644,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _AnyType__AnyType = {};
 		private static final ExecutorOperation[] _AnyType__Class = {};
 		private static final ExecutorOperation[] _AnyType__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _AnyType__Nameable = {};
 		private static final ExecutorOperation[] _AnyType__NamedElement = {};
@@ -3676,7 +3682,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _AppliedStereotype__AppliedStereotype = {};
 		private static final ExecutorOperation[] _AppliedStereotype__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _AppliedStereotype__OclAny = {
 		    OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
@@ -3702,7 +3709,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _AssociationClass__AssociationClass = {};
 		private static final ExecutorOperation[] _AssociationClass__Class = {};
 		private static final ExecutorOperation[] _AssociationClass__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _AssociationClass__Nameable = {};
 		private static final ExecutorOperation[] _AssociationClass__NamedElement = {};
@@ -3740,7 +3748,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _AssociationClassCallExp__AssociationClassCallExp = {};
 		private static final ExecutorOperation[] _AssociationClassCallExp__CallExp = {};
 		private static final ExecutorOperation[] _AssociationClassCallExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _AssociationClassCallExp__FeatureCallExp = {};
 		private static final ExecutorOperation[] _AssociationClassCallExp__Nameable = {};
@@ -3776,7 +3785,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _BagType__CollectionType = {};
 		private static final ExecutorOperation[] _BagType__DataType = {};
 		private static final ExecutorOperation[] _BagType__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _BagType__Nameable = {};
 		private static final ExecutorOperation[] _BagType__NamedElement = {};
@@ -3813,7 +3823,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _BooleanLiteralExp__BooleanLiteralExp = {};
 		private static final ExecutorOperation[] _BooleanLiteralExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _BooleanLiteralExp__LiteralExp = {};
 		private static final ExecutorOperation[] _BooleanLiteralExp__Nameable = {};
@@ -3844,7 +3855,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _CallExp__CallExp = {};
 		private static final ExecutorOperation[] _CallExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _CallExp__Nameable = {};
 		private static final ExecutorOperation[] _CallExp__NamedElement = {};
@@ -3873,7 +3885,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _CallOperationAction__CallOperationAction = {};
 		private static final ExecutorOperation[] _CallOperationAction__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _CallOperationAction__Nameable = {};
 		private static final ExecutorOperation[] _CallOperationAction__NamedElement = {};
@@ -3900,7 +3913,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _Class__Class = {};
 		private static final ExecutorOperation[] _Class__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _Class__Nameable = {};
 		private static final ExecutorOperation[] _Class__NamedElement = {};
@@ -3938,7 +3952,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _ClassifierType__ClassifierType = {};
 		private static final ExecutorOperation[] _ClassifierType__Class = {};
 		private static final ExecutorOperation[] _ClassifierType__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _ClassifierType__Nameable = {};
 		private static final ExecutorOperation[] _ClassifierType__NamedElement = {};
@@ -3976,7 +3991,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _CollectionItem__CollectionItem = {};
 		private static final ExecutorOperation[] _CollectionItem__CollectionLiteralPart = {};
 		private static final ExecutorOperation[] _CollectionItem__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _CollectionItem__Nameable = {};
 		private static final ExecutorOperation[] _CollectionItem__NamedElement = {};
@@ -4006,7 +4022,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _CollectionLiteralExp__CollectionLiteralExp = {};
 		private static final ExecutorOperation[] _CollectionLiteralExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _CollectionLiteralExp__LiteralExp = {};
 		private static final ExecutorOperation[] _CollectionLiteralExp__Nameable = {};
@@ -4036,7 +4053,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _CollectionLiteralPart__CollectionLiteralPart = {};
 		private static final ExecutorOperation[] _CollectionLiteralPart__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _CollectionLiteralPart__Nameable = {};
 		private static final ExecutorOperation[] _CollectionLiteralPart__NamedElement = {};
@@ -4065,7 +4083,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _CollectionRange__CollectionRange = {};
 		private static final ExecutorOperation[] _CollectionRange__CollectionLiteralPart = {};
 		private static final ExecutorOperation[] _CollectionRange__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _CollectionRange__Nameable = {};
 		private static final ExecutorOperation[] _CollectionRange__NamedElement = {};
@@ -4095,7 +4114,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _CollectionType__Class = {};
 		private static final ExecutorOperation[] _CollectionType__DataType = {};
 		private static final ExecutorOperation[] _CollectionType__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _CollectionType__Nameable = {};
 		private static final ExecutorOperation[] _CollectionType__NamedElement = {};
@@ -4132,7 +4152,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _Comment__Comment = {};
 		private static final ExecutorOperation[] _Comment__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _Comment__OclAny = {
 		    OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
@@ -4157,7 +4178,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _Constraint__Constraint = {};
 		private static final ExecutorOperation[] _Constraint__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _Constraint__Nameable = {};
 		private static final ExecutorOperation[] _Constraint__NamedElement = {};
@@ -4184,7 +4206,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _ConstructorExp__ConstructorExp = {};
 		private static final ExecutorOperation[] _ConstructorExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _ConstructorExp__Nameable = {};
 		private static final ExecutorOperation[] _ConstructorExp__NamedElement = {};
@@ -4213,7 +4236,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _ConstructorPart__ConstructorPart = {};
 		private static final ExecutorOperation[] _ConstructorPart__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _ConstructorPart__OclAny = {
 		    OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
@@ -4239,7 +4263,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _DataType__DataType = {};
 		private static final ExecutorOperation[] _DataType__Class = {};
 		private static final ExecutorOperation[] _DataType__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _DataType__Nameable = {};
 		private static final ExecutorOperation[] _DataType__NamedElement = {};
@@ -4276,7 +4301,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _Detail__Detail = {};
 		private static final ExecutorOperation[] _Detail__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _Detail__Nameable = {};
 		private static final ExecutorOperation[] _Detail__NamedElement = {};
@@ -4303,7 +4329,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _DynamicElement__DynamicElement = {};
 		private static final ExecutorOperation[] _DynamicElement__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _DynamicElement__OclAny = {
 		    OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
@@ -4328,7 +4355,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _DynamicProperty__DynamicProperty = {};
 		private static final ExecutorOperation[] _DynamicProperty__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _DynamicProperty__OclAny = {
 		    OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
@@ -4354,7 +4382,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _DynamicType__DynamicType = {};
 		private static final ExecutorOperation[] _DynamicType__DynamicElement = {};
 		private static final ExecutorOperation[] _DynamicType__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _DynamicType__Nameable = {};
 		private static final ExecutorOperation[] _DynamicType__NamedElement = {};
@@ -4389,7 +4418,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _DynamicType__Visitable = {};
 	
 		private static final ExecutorOperation[] _Element__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _Element__OclAny = {
 		    OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
@@ -4414,7 +4444,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _EnumLiteralExp__EnumLiteralExp = {};
 		private static final ExecutorOperation[] _EnumLiteralExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _EnumLiteralExp__LiteralExp = {};
 		private static final ExecutorOperation[] _EnumLiteralExp__Nameable = {};
@@ -4446,7 +4477,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _Enumeration__Class = {};
 		private static final ExecutorOperation[] _Enumeration__DataType = {};
 		private static final ExecutorOperation[] _Enumeration__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _Enumeration__Nameable = {};
 		private static final ExecutorOperation[] _Enumeration__NamedElement = {};
@@ -4483,7 +4515,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _EnumerationLiteral__EnumerationLiteral = {};
 		private static final ExecutorOperation[] _EnumerationLiteral__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _EnumerationLiteral__Nameable = {};
 		private static final ExecutorOperation[] _EnumerationLiteral__NamedElement = {};
@@ -4510,7 +4543,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _ExpressionInOCL__ExpressionInOCL = {};
 		private static final ExecutorOperation[] _ExpressionInOCL__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _ExpressionInOCL__Nameable = {};
 		private static final ExecutorOperation[] _ExpressionInOCL__NamedElement = {};
@@ -4551,7 +4585,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _Feature__Feature = {};
 		private static final ExecutorOperation[] _Feature__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _Feature__MultiplicityElement = {
 		    PivotTables.Operations._MultiplicityElement__includesCardinality /* includesCardinality(Integer) */,
@@ -4591,7 +4626,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _FeatureCallExp__FeatureCallExp = {};
 		private static final ExecutorOperation[] _FeatureCallExp__CallExp = {};
 		private static final ExecutorOperation[] _FeatureCallExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _FeatureCallExp__Nameable = {};
 		private static final ExecutorOperation[] _FeatureCallExp__NamedElement = {};
@@ -4620,7 +4656,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _IfExp__IfExp = {};
 		private static final ExecutorOperation[] _IfExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _IfExp__Nameable = {};
 		private static final ExecutorOperation[] _IfExp__NamedElement = {};
@@ -4649,7 +4686,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _IntegerLiteralExp__IntegerLiteralExp = {};
 		private static final ExecutorOperation[] _IntegerLiteralExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _IntegerLiteralExp__LiteralExp = {};
 		private static final ExecutorOperation[] _IntegerLiteralExp__Nameable = {};
@@ -4681,7 +4719,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _InvalidLiteralExp__InvalidLiteralExp = {};
 		private static final ExecutorOperation[] _InvalidLiteralExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _InvalidLiteralExp__LiteralExp = {};
 		private static final ExecutorOperation[] _InvalidLiteralExp__Nameable = {};
@@ -4712,7 +4751,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _InvalidType__InvalidType = {};
 		private static final ExecutorOperation[] _InvalidType__Class = {};
 		private static final ExecutorOperation[] _InvalidType__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _InvalidType__Nameable = {};
 		private static final ExecutorOperation[] _InvalidType__NamedElement = {};
@@ -4750,7 +4790,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _IterateExp__IterateExp = {};
 		private static final ExecutorOperation[] _IterateExp__CallExp = {};
 		private static final ExecutorOperation[] _IterateExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _IterateExp__LoopExp = {};
 		private static final ExecutorOperation[] _IterateExp__Nameable = {};
@@ -4780,7 +4821,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _Iteration__Iteration = {};
 		private static final ExecutorOperation[] _Iteration__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _Iteration__Feature = {};
 		private static final ExecutorOperation[] _Iteration__MultiplicityElement = {
@@ -4831,7 +4873,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _IteratorExp__IteratorExp = {};
 		private static final ExecutorOperation[] _IteratorExp__CallExp = {};
 		private static final ExecutorOperation[] _IteratorExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _IteratorExp__LoopExp = {};
 		private static final ExecutorOperation[] _IteratorExp__Nameable = {};
@@ -4863,7 +4906,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _LambdaType__Class = {};
 		private static final ExecutorOperation[] _LambdaType__DataType = {};
 		private static final ExecutorOperation[] _LambdaType__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _LambdaType__Nameable = {};
 		private static final ExecutorOperation[] _LambdaType__NamedElement = {};
@@ -4900,7 +4944,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _LetExp__LetExp = {};
 		private static final ExecutorOperation[] _LetExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _LetExp__Nameable = {};
 		private static final ExecutorOperation[] _LetExp__NamedElement = {};
@@ -4929,7 +4974,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _Library__Library = {};
 		private static final ExecutorOperation[] _Library__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _Library__Model = {};
 		private static final ExecutorOperation[] _Library__Nameable = {};
@@ -4965,7 +5011,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _LiteralExp__LiteralExp = {};
 		private static final ExecutorOperation[] _LiteralExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _LiteralExp__Nameable = {};
 		private static final ExecutorOperation[] _LiteralExp__NamedElement = {};
@@ -4995,7 +5042,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _LoopExp__LoopExp = {};
 		private static final ExecutorOperation[] _LoopExp__CallExp = {};
 		private static final ExecutorOperation[] _LoopExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _LoopExp__Nameable = {};
 		private static final ExecutorOperation[] _LoopExp__NamedElement = {};
@@ -5024,7 +5072,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _MessageExp__MessageExp = {};
 		private static final ExecutorOperation[] _MessageExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _MessageExp__Nameable = {};
 		private static final ExecutorOperation[] _MessageExp__NamedElement = {};
@@ -5053,7 +5102,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _MessageType__MessageType = {};
 		private static final ExecutorOperation[] _MessageType__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _MessageType__Nameable = {};
 		private static final ExecutorOperation[] _MessageType__NamedElement = {};
@@ -5089,7 +5139,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _Model__Model = {};
 		private static final ExecutorOperation[] _Model__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _Model__Nameable = {};
 		private static final ExecutorOperation[] _Model__NamedElement = {};
@@ -5149,7 +5200,8 @@ public class PivotTables
 		    PivotTables.Operations._MultiplicityElement__upperBound /* upperBound() */
 		};
 		private static final ExecutorOperation[] _MultiplicityElement__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _MultiplicityElement__OclAny = {
 		    OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
@@ -5195,7 +5247,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _NamedElement__NamedElement = {};
 		private static final ExecutorOperation[] _NamedElement__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _NamedElement__Nameable = {};
 		private static final ExecutorOperation[] _NamedElement__OclAny = {
@@ -5221,7 +5274,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _Namespace__Namespace = {};
 		private static final ExecutorOperation[] _Namespace__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _Namespace__Nameable = {};
 		private static final ExecutorOperation[] _Namespace__NamedElement = {};
@@ -5249,7 +5303,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _NavigationCallExp__NavigationCallExp = {};
 		private static final ExecutorOperation[] _NavigationCallExp__CallExp = {};
 		private static final ExecutorOperation[] _NavigationCallExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _NavigationCallExp__FeatureCallExp = {};
 		private static final ExecutorOperation[] _NavigationCallExp__Nameable = {};
@@ -5279,7 +5334,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _NullLiteralExp__NullLiteralExp = {};
 		private static final ExecutorOperation[] _NullLiteralExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _NullLiteralExp__LiteralExp = {};
 		private static final ExecutorOperation[] _NullLiteralExp__Nameable = {};
@@ -5310,7 +5366,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _NumericLiteralExp__NumericLiteralExp = {};
 		private static final ExecutorOperation[] _NumericLiteralExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _NumericLiteralExp__LiteralExp = {};
 		private static final ExecutorOperation[] _NumericLiteralExp__Nameable = {};
@@ -5341,7 +5398,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _OCLExpression__OCLExpression = {};
 		private static final ExecutorOperation[] _OCLExpression__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _OCLExpression__Nameable = {};
 		private static final ExecutorOperation[] _OCLExpression__NamedElement = {};
@@ -5371,7 +5429,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _OpaqueExpression__OpaqueExpression = {};
 		private static final ExecutorOperation[] _OpaqueExpression__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _OpaqueExpression__Nameable = {};
 		private static final ExecutorOperation[] _OpaqueExpression__NamedElement = {};
@@ -5411,7 +5470,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _Operation__Operation = {};
 		private static final ExecutorOperation[] _Operation__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _Operation__Feature = {};
 		private static final ExecutorOperation[] _Operation__MultiplicityElement = {
@@ -5461,7 +5521,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _OperationCallExp__OperationCallExp = {};
 		private static final ExecutorOperation[] _OperationCallExp__CallExp = {};
 		private static final ExecutorOperation[] _OperationCallExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _OperationCallExp__FeatureCallExp = {};
 		private static final ExecutorOperation[] _OperationCallExp__Nameable = {};
@@ -5491,7 +5552,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _OperationTemplateParameter__OperationTemplateParameter = {};
 		private static final ExecutorOperation[] _OperationTemplateParameter__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _OperationTemplateParameter__OclAny = {
 		    OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
@@ -5520,7 +5582,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _OrderedSetType__CollectionType = {};
 		private static final ExecutorOperation[] _OrderedSetType__DataType = {};
 		private static final ExecutorOperation[] _OrderedSetType__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _OrderedSetType__Nameable = {};
 		private static final ExecutorOperation[] _OrderedSetType__NamedElement = {};
@@ -5557,7 +5620,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _Package__Package = {};
 		private static final ExecutorOperation[] _Package__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _Package__Nameable = {};
 		private static final ExecutorOperation[] _Package__NamedElement = {};
@@ -5589,7 +5653,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _PackageableElement__PackageableElement = {};
 		private static final ExecutorOperation[] _PackageableElement__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _PackageableElement__OclAny = {
 		    OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
@@ -5618,7 +5683,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _Parameter__Parameter = {};
 		private static final ExecutorOperation[] _Parameter__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _Parameter__MultiplicityElement = {
 		    PivotTables.Operations._MultiplicityElement__includesCardinality /* includesCardinality(Integer) */,
@@ -5661,7 +5727,8 @@ public class PivotTables
 		    PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
 		};
 		private static final ExecutorOperation[] _ParameterableElement__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _ParameterableElement__OclAny = {
 		    OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
@@ -5707,7 +5774,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _Precedence__Precedence = {};
 		private static final ExecutorOperation[] _Precedence__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _Precedence__Nameable = {};
 		private static final ExecutorOperation[] _Precedence__NamedElement = {};
@@ -5734,7 +5802,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _PrimitiveLiteralExp__PrimitiveLiteralExp = {};
 		private static final ExecutorOperation[] _PrimitiveLiteralExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _PrimitiveLiteralExp__LiteralExp = {};
 		private static final ExecutorOperation[] _PrimitiveLiteralExp__Nameable = {};
@@ -5766,7 +5835,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _PrimitiveType__Class = {};
 		private static final ExecutorOperation[] _PrimitiveType__DataType = {};
 		private static final ExecutorOperation[] _PrimitiveType__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _PrimitiveType__Nameable = {};
 		private static final ExecutorOperation[] _PrimitiveType__NamedElement = {};
@@ -5805,7 +5875,8 @@ public class PivotTables
 		    PivotTables.Operations._Property__isAttribute /* isAttribute(Property) */
 		};
 		private static final ExecutorOperation[] _Property__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _Property__Feature = {};
 		private static final ExecutorOperation[] _Property__MultiplicityElement = {
@@ -5850,7 +5921,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _PropertyCallExp__PropertyCallExp = {};
 		private static final ExecutorOperation[] _PropertyCallExp__CallExp = {};
 		private static final ExecutorOperation[] _PropertyCallExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _PropertyCallExp__FeatureCallExp = {};
 		private static final ExecutorOperation[] _PropertyCallExp__Nameable = {};
@@ -5881,7 +5953,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _RealLiteralExp__RealLiteralExp = {};
 		private static final ExecutorOperation[] _RealLiteralExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _RealLiteralExp__LiteralExp = {};
 		private static final ExecutorOperation[] _RealLiteralExp__Nameable = {};
@@ -5916,7 +5989,8 @@ public class PivotTables
 		};
 		private static final ExecutorOperation[] _SelfType__Class = {};
 		private static final ExecutorOperation[] _SelfType__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _SelfType__Nameable = {};
 		private static final ExecutorOperation[] _SelfType__NamedElement = {};
@@ -5953,7 +6027,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _SendSignalAction__SendSignalAction = {};
 		private static final ExecutorOperation[] _SendSignalAction__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _SendSignalAction__Nameable = {};
 		private static final ExecutorOperation[] _SendSignalAction__NamedElement = {};
@@ -5983,7 +6058,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _SequenceType__CollectionType = {};
 		private static final ExecutorOperation[] _SequenceType__DataType = {};
 		private static final ExecutorOperation[] _SequenceType__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _SequenceType__Nameable = {};
 		private static final ExecutorOperation[] _SequenceType__NamedElement = {};
@@ -6023,7 +6099,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _SetType__CollectionType = {};
 		private static final ExecutorOperation[] _SetType__DataType = {};
 		private static final ExecutorOperation[] _SetType__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _SetType__Nameable = {};
 		private static final ExecutorOperation[] _SetType__NamedElement = {};
@@ -6060,7 +6137,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _Signal__Signal = {};
 		private static final ExecutorOperation[] _Signal__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _Signal__Nameable = {};
 		private static final ExecutorOperation[] _Signal__NamedElement = {};
@@ -6087,7 +6165,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _State__State = {};
 		private static final ExecutorOperation[] _State__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _State__Nameable = {};
 		private static final ExecutorOperation[] _State__NamedElement = {};
@@ -6114,7 +6193,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _StateExp__StateExp = {};
 		private static final ExecutorOperation[] _StateExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _StateExp__Nameable = {};
 		private static final ExecutorOperation[] _StateExp__NamedElement = {};
@@ -6143,7 +6223,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _StereotypedProperty__StereotypedProperty = {};
 		private static final ExecutorOperation[] _StereotypedProperty__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _StereotypedProperty__OclAny = {
 		    OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
@@ -6168,7 +6249,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _StringLiteralExp__StringLiteralExp = {};
 		private static final ExecutorOperation[] _StringLiteralExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _StringLiteralExp__LiteralExp = {};
 		private static final ExecutorOperation[] _StringLiteralExp__Nameable = {};
@@ -6199,7 +6281,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _TemplateBinding__TemplateBinding = {};
 		private static final ExecutorOperation[] _TemplateBinding__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _TemplateBinding__OclAny = {
 		    OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
@@ -6224,7 +6307,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _TemplateParameter__TemplateParameter = {};
 		private static final ExecutorOperation[] _TemplateParameter__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _TemplateParameter__OclAny = {
 		    OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
@@ -6249,7 +6333,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _TemplateParameterSubstitution__TemplateParameterSubstitution = {};
 		private static final ExecutorOperation[] _TemplateParameterSubstitution__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _TemplateParameterSubstitution__OclAny = {
 		    OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
@@ -6274,7 +6359,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _TemplateParameterType__TemplateParameterType = {};
 		private static final ExecutorOperation[] _TemplateParameterType__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _TemplateParameterType__Nameable = {};
 		private static final ExecutorOperation[] _TemplateParameterType__NamedElement = {};
@@ -6310,7 +6396,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _TemplateSignature__TemplateSignature = {};
 		private static final ExecutorOperation[] _TemplateSignature__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _TemplateSignature__OclAny = {
 		    OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
@@ -6338,7 +6425,8 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
 		private static final ExecutorOperation[] _TemplateableElement__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _TemplateableElement__OclAny = {
 		    OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
@@ -6365,7 +6453,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _TupleLiteralExp__TupleLiteralExp = {};
 		private static final ExecutorOperation[] _TupleLiteralExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _TupleLiteralExp__LiteralExp = {};
 		private static final ExecutorOperation[] _TupleLiteralExp__Nameable = {};
@@ -6395,7 +6484,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _TupleLiteralPart__TupleLiteralPart = {};
 		private static final ExecutorOperation[] _TupleLiteralPart__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _TupleLiteralPart__Nameable = {};
 		private static final ExecutorOperation[] _TupleLiteralPart__NamedElement = {};
@@ -6426,7 +6516,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _TupleType__Class = {};
 		private static final ExecutorOperation[] _TupleType__DataType = {};
 		private static final ExecutorOperation[] _TupleType__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _TupleType__Nameable = {};
 		private static final ExecutorOperation[] _TupleType__NamedElement = {};
@@ -6463,7 +6554,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _Type__Type = {};
 		private static final ExecutorOperation[] _Type__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _Type__Nameable = {};
 		private static final ExecutorOperation[] _Type__NamedElement = {};
@@ -6498,7 +6590,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _TypeExp__TypeExp = {};
 		private static final ExecutorOperation[] _TypeExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _TypeExp__Nameable = {};
 		private static final ExecutorOperation[] _TypeExp__NamedElement = {};
@@ -6527,7 +6620,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _TypeTemplateParameter__TypeTemplateParameter = {};
 		private static final ExecutorOperation[] _TypeTemplateParameter__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _TypeTemplateParameter__OclAny = {
 		    OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
@@ -6553,7 +6647,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _TypedElement__TypedElement = {};
 		private static final ExecutorOperation[] _TypedElement__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _TypedElement__Nameable = {};
 		private static final ExecutorOperation[] _TypedElement__NamedElement = {};
@@ -6583,7 +6678,8 @@ public class PivotTables
 		    PivotTables.Operations._TypedMultiplicityElement__makeParameter /* makeParameter() */
 		};
 		private static final ExecutorOperation[] _TypedMultiplicityElement__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _TypedMultiplicityElement__MultiplicityElement = {
 		    PivotTables.Operations._MultiplicityElement__includesCardinality /* includesCardinality(Integer) */,
@@ -6618,7 +6714,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _UnlimitedNaturalLiteralExp__UnlimitedNaturalLiteralExp = {};
 		private static final ExecutorOperation[] _UnlimitedNaturalLiteralExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _UnlimitedNaturalLiteralExp__LiteralExp = {};
 		private static final ExecutorOperation[] _UnlimitedNaturalLiteralExp__Nameable = {};
@@ -6651,7 +6748,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _UnspecifiedType__UnspecifiedType = {};
 		private static final ExecutorOperation[] _UnspecifiedType__Class = {};
 		private static final ExecutorOperation[] _UnspecifiedType__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _UnspecifiedType__Nameable = {};
 		private static final ExecutorOperation[] _UnspecifiedType__NamedElement = {};
@@ -6688,7 +6786,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _UnspecifiedValueExp__UnspecifiedValueExp = {};
 		private static final ExecutorOperation[] _UnspecifiedValueExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _UnspecifiedValueExp__Nameable = {};
 		private static final ExecutorOperation[] _UnspecifiedValueExp__NamedElement = {};
@@ -6724,7 +6823,8 @@ public class PivotTables
 		    PivotTables.Operations._ValueSpecification__unlimitedValue /* unlimitedValue() */
 		};
 		private static final ExecutorOperation[] _ValueSpecification__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _ValueSpecification__Nameable = {};
 		private static final ExecutorOperation[] _ValueSpecification__NamedElement = {};
@@ -6756,7 +6856,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _Variable__Variable = {};
 		private static final ExecutorOperation[] _Variable__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _Variable__Nameable = {};
 		private static final ExecutorOperation[] _Variable__NamedElement = {};
@@ -6785,7 +6886,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _VariableDeclaration__VariableDeclaration = {};
 		private static final ExecutorOperation[] _VariableDeclaration__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _VariableDeclaration__Nameable = {};
 		private static final ExecutorOperation[] _VariableDeclaration__NamedElement = {};
@@ -6813,7 +6915,8 @@ public class PivotTables
 	
 		private static final ExecutorOperation[] _VariableExp__VariableExp = {};
 		private static final ExecutorOperation[] _VariableExp__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _VariableExp__Nameable = {};
 		private static final ExecutorOperation[] _VariableExp__NamedElement = {};
@@ -6885,7 +6988,8 @@ public class PivotTables
 		private static final ExecutorOperation[] _VoidType__VoidType = {};
 		private static final ExecutorOperation[] _VoidType__Class = {};
 		private static final ExecutorOperation[] _VoidType__Element = {
-		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */
+		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final ExecutorOperation[] _VoidType__Nameable = {};
 		private static final ExecutorOperation[] _VoidType__NamedElement = {};

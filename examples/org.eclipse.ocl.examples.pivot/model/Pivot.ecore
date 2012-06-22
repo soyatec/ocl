@@ -346,6 +346,13 @@
         <details key="body" value="oclContents()"/>
       </eAnnotations>
     </eOperations>
+    <eOperations name="getValue" ordered="false" lowerBound="1" eType="#//Element">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="null"/>
+      </eAnnotations>
+      <eParameters name="stereotype" ordered="false" lowerBound="1" eType="#//Type"/>
+      <eParameters name="propertyName" ordered="false" lowerBound="1" eType="#//String"/>
+    </eOperations>
     <eOperations name="not_own_self" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Elements that must be owned must have an owner."/>

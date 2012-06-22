@@ -114,6 +114,15 @@ public interface Element
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @model required="true" ordered="false" stereotypeRequired="true" stereotypeOrdered="false" propertyNameDataType="org.eclipse.ocl.examples.pivot.String" propertyNameRequired="true" propertyNameOrdered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='/*\nnull\n\052/\ntry {\n\tfinal <%org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator%> evaluator = new <%org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager%>(this, null, <%org.eclipse.ocl.examples.pivot.PivotTables%>.LIBRARY);\n\tfinal <%org.eclipse.ocl.examples.domain.values.ValueFactory%> valueFactory = evaluator.getValueFactory();\n\tfinal <%org.eclipse.ocl.examples.domain.values.Value%> self = valueFactory.valueOf(this);\n\tfinal <%org.eclipse.ocl.examples.library.executor.ExecutorType%> T_OclVoid = <%org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables%>.Types._OclVoid;\n\t\n\tfinal <%org.eclipse.ocl.examples.domain.elements.DomainType%> returnType = T_OclVoid;\n\tfinal <%org.eclipse.ocl.examples.domain.values.Value%> result = <%org.eclipse.ocl.examples.pivot.bodies.ElementBodies%>._getValue_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(stereotype), valueFactory.valueOf(propertyName));\n\treturn (Element) result.asEcoreObject();\n} catch (<%org.eclipse.ocl.examples.domain.evaluation.InvalidValueException%> e) {\n\tthrow new <%org.eclipse.emf.common.util.WrappedException%>(\"Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.ElementBodies\", e);\n}\n'"
+	 * @generated
+	 */
+	Element getValue(Type stereotype, String propertyName);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Elements that must be owned must have an owner.
 	 * <!-- end-model-doc -->

@@ -1049,13 +1049,22 @@ public interface PivotPackage
 	int ELEMENT___ALL_OWNED_ELEMENTS = VISITABLE_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT___GET_VALUE__TYPE_STRING = VISITABLE_OPERATION_COUNT + 1;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ELEMENT___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = VISITABLE_OPERATION_COUNT + 1;
+	int ELEMENT___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = VISITABLE_OPERATION_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Element</em>' class.
@@ -1064,7 +1073,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ELEMENT_OPERATION_COUNT = VISITABLE_OPERATION_COUNT + 2;
+	int ELEMENT_OPERATION_COUNT = VISITABLE_OPERATION_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -1137,6 +1146,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int NAMED_ELEMENT___ALL_OWNED_ELEMENTS = ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT___GET_VALUE__TYPE_STRING = ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -1254,6 +1272,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ANNOTATION___ALL_OWNED_ELEMENTS = NAMED_ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION___GET_VALUE__TYPE_STRING = NAMED_ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -1434,6 +1461,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TYPE___ALL_OWNED_ELEMENTS = NAMED_ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE___GET_VALUE__TYPE_STRING = NAMED_ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -1670,6 +1706,15 @@ public interface PivotPackage
 	int CLASS___ALL_OWNED_ELEMENTS = TYPE___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS___GET_VALUE__TYPE_STRING = TYPE___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1904,6 +1949,15 @@ public interface PivotPackage
 	int ANY_TYPE___ALL_OWNED_ELEMENTS = CLASS___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANY_TYPE___GET_VALUE__TYPE_STRING = CLASS___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2020,6 +2074,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int APPLIED_STEREOTYPE___ALL_OWNED_ELEMENTS = ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLIED_STEREOTYPE___GET_VALUE__TYPE_STRING = ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -2229,6 +2292,15 @@ public interface PivotPackage
 	int ASSOCIATION_CLASS___ALL_OWNED_ELEMENTS = CLASS___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_CLASS___GET_VALUE__TYPE_STRING = CLASS___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2364,6 +2436,15 @@ public interface PivotPackage
 	int TYPED_ELEMENT___ALL_OWNED_ELEMENTS = NAMED_ELEMENT___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_ELEMENT___GET_VALUE__TYPE_STRING = NAMED_ELEMENT___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2461,6 +2542,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int OCL_EXPRESSION___ALL_OWNED_ELEMENTS = TYPED_ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OCL_EXPRESSION___GET_VALUE__TYPE_STRING = TYPED_ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -2578,6 +2668,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int CALL_EXP___ALL_OWNED_ELEMENTS = OCL_EXPRESSION___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_EXP___GET_VALUE__TYPE_STRING = OCL_EXPRESSION___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -2704,6 +2803,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int FEATURE_CALL_EXP___ALL_OWNED_ELEMENTS = CALL_EXP___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_CALL_EXP___GET_VALUE__TYPE_STRING = CALL_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -2848,6 +2956,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int NAVIGATION_CALL_EXP___ALL_OWNED_ELEMENTS = FEATURE_CALL_EXP___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATION_CALL_EXP___GET_VALUE__TYPE_STRING = FEATURE_CALL_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -3001,6 +3118,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ASSOCIATION_CLASS_CALL_EXP___ALL_OWNED_ELEMENTS = NAVIGATION_CALL_EXP___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_CLASS_CALL_EXP___GET_VALUE__TYPE_STRING = NAVIGATION_CALL_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -3217,6 +3343,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int DATA_TYPE___ALL_OWNED_ELEMENTS = CLASS___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE___GET_VALUE__TYPE_STRING = CLASS___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -3480,6 +3615,15 @@ public interface PivotPackage
 	int COLLECTION_TYPE___ALL_OWNED_ELEMENTS = DATA_TYPE___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TYPE___GET_VALUE__TYPE_STRING = DATA_TYPE___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3741,6 +3885,15 @@ public interface PivotPackage
 	int BAG_TYPE___ALL_OWNED_ELEMENTS = COLLECTION_TYPE___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BAG_TYPE___GET_VALUE__TYPE_STRING = COLLECTION_TYPE___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3876,6 +4029,15 @@ public interface PivotPackage
 	int LITERAL_EXP___ALL_OWNED_ELEMENTS = OCL_EXPRESSION___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL_EXP___GET_VALUE__TYPE_STRING = OCL_EXPRESSION___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3973,6 +4135,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PRIMITIVE_LITERAL_EXP___ALL_OWNED_ELEMENTS = LITERAL_EXP___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_LITERAL_EXP___GET_VALUE__TYPE_STRING = LITERAL_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -4083,6 +4254,15 @@ public interface PivotPackage
 	int BOOLEAN_LITERAL_EXP___ALL_OWNED_ELEMENTS = PRIMITIVE_LITERAL_EXP___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_LITERAL_EXP___GET_VALUE__TYPE_STRING = PRIMITIVE_LITERAL_EXP___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4189,6 +4369,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int CALL_OPERATION_ACTION___ALL_OWNED_ELEMENTS = NAMED_ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_OPERATION_ACTION___GET_VALUE__TYPE_STRING = NAMED_ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -4408,6 +4597,15 @@ public interface PivotPackage
 	int CLASSIFIER_TYPE___ALL_OWNED_ELEMENTS = CLASS___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_TYPE___GET_VALUE__TYPE_STRING = CLASS___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4543,6 +4741,15 @@ public interface PivotPackage
 	int COLLECTION_LITERAL_PART___ALL_OWNED_ELEMENTS = TYPED_ELEMENT___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_LITERAL_PART___GET_VALUE__TYPE_STRING = TYPED_ELEMENT___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4649,6 +4856,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int COLLECTION_ITEM___ALL_OWNED_ELEMENTS = COLLECTION_LITERAL_PART___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_ITEM___GET_VALUE__TYPE_STRING = COLLECTION_LITERAL_PART___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -4775,6 +4991,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int COLLECTION_LITERAL_EXP___ALL_OWNED_ELEMENTS = LITERAL_EXP___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_LITERAL_EXP___GET_VALUE__TYPE_STRING = LITERAL_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -4939,6 +5164,15 @@ public interface PivotPackage
 	int COLLECTION_RANGE___ALL_OWNED_ELEMENTS = COLLECTION_LITERAL_PART___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_RANGE___GET_VALUE__TYPE_STRING = COLLECTION_LITERAL_PART___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5009,6 +5243,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int COMMENT___ALL_OWNED_ELEMENTS = ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMENT___GET_VALUE__TYPE_STRING = ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -5144,6 +5387,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int CONSTRAINT___ALL_OWNED_ELEMENTS = NAMED_ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT___GET_VALUE__TYPE_STRING = NAMED_ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -5282,6 +5534,15 @@ public interface PivotPackage
 	int CONSTRUCTOR_EXP___ALL_OWNED_ELEMENTS = OCL_EXPRESSION___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR_EXP___GET_VALUE__TYPE_STRING = OCL_EXPRESSION___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5362,6 +5623,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int CONSTRUCTOR_PART___ALL_OWNED_ELEMENTS = ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR_PART___GET_VALUE__TYPE_STRING = ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -5463,6 +5733,15 @@ public interface PivotPackage
 	int DETAIL___ALL_OWNED_ELEMENTS = NAMED_ELEMENT___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DETAIL___GET_VALUE__TYPE_STRING = NAMED_ELEMENT___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5534,6 +5813,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int DYNAMIC_ELEMENT___ALL_OWNED_ELEMENTS = ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_ELEMENT___GET_VALUE__TYPE_STRING = ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -5616,6 +5904,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int DYNAMIC_PROPERTY___ALL_OWNED_ELEMENTS = ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_PROPERTY___GET_VALUE__TYPE_STRING = ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -5826,6 +6123,15 @@ public interface PivotPackage
 	int DYNAMIC_TYPE___ALL_OWNED_ELEMENTS = TYPE___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE___GET_VALUE__TYPE_STRING = TYPE___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5968,6 +6274,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ENUM_LITERAL_EXP___ALL_OWNED_ELEMENTS = LITERAL_EXP___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_LITERAL_EXP___GET_VALUE__TYPE_STRING = LITERAL_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -6204,6 +6519,15 @@ public interface PivotPackage
 	int ENUMERATION___ALL_OWNED_ELEMENTS = DATA_TYPE___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION___GET_VALUE__TYPE_STRING = DATA_TYPE___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6348,6 +6672,15 @@ public interface PivotPackage
 	int ENUMERATION_LITERAL___ALL_OWNED_ELEMENTS = NAMED_ELEMENT___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_LITERAL___GET_VALUE__TYPE_STRING = NAMED_ELEMENT___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6463,6 +6796,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int VALUE_SPECIFICATION___ALL_OWNED_ELEMENTS = TYPED_ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE_SPECIFICATION___GET_VALUE__TYPE_STRING = TYPED_ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -6688,6 +7030,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int OPAQUE_EXPRESSION___ALL_OWNED_ELEMENTS = VALUE_SPECIFICATION___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPAQUE_EXPRESSION___GET_VALUE__TYPE_STRING = VALUE_SPECIFICATION___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -6960,6 +7311,15 @@ public interface PivotPackage
 	int EXPRESSION_IN_OCL___ALL_OWNED_ELEMENTS = OPAQUE_EXPRESSION___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_IN_OCL___GET_VALUE__TYPE_STRING = OPAQUE_EXPRESSION___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7165,6 +7525,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TYPED_MULTIPLICITY_ELEMENT___ALL_OWNED_ELEMENTS = TYPED_ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_MULTIPLICITY_ELEMENT___GET_VALUE__TYPE_STRING = TYPED_ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -7383,6 +7752,15 @@ public interface PivotPackage
 	int FEATURE___ALL_OWNED_ELEMENTS = TYPED_MULTIPLICITY_ELEMENT___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE___GET_VALUE__TYPE_STRING = TYPED_MULTIPLICITY_ELEMENT___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7572,6 +7950,15 @@ public interface PivotPackage
 	int IF_EXP___ALL_OWNED_ELEMENTS = OCL_EXPRESSION___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF_EXP___GET_VALUE__TYPE_STRING = OCL_EXPRESSION___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7678,6 +8065,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int NUMERIC_LITERAL_EXP___ALL_OWNED_ELEMENTS = PRIMITIVE_LITERAL_EXP___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERIC_LITERAL_EXP___GET_VALUE__TYPE_STRING = PRIMITIVE_LITERAL_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -7788,6 +8184,15 @@ public interface PivotPackage
 	int INTEGER_LITERAL_EXP___ALL_OWNED_ELEMENTS = NUMERIC_LITERAL_EXP___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_LITERAL_EXP___GET_VALUE__TYPE_STRING = NUMERIC_LITERAL_EXP___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7894,6 +8299,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int INVALID_LITERAL_EXP___ALL_OWNED_ELEMENTS = LITERAL_EXP___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVALID_LITERAL_EXP___GET_VALUE__TYPE_STRING = LITERAL_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -8094,6 +8508,15 @@ public interface PivotPackage
 	int INVALID_TYPE___ALL_OWNED_ELEMENTS = CLASS___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVALID_TYPE___GET_VALUE__TYPE_STRING = CLASS___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8274,6 +8697,15 @@ public interface PivotPackage
 	int LOOP_EXP___ALL_OWNED_ELEMENTS = CALL_EXP___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOP_EXP___GET_VALUE__TYPE_STRING = CALL_EXP___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8443,6 +8875,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ITERATE_EXP___ALL_OWNED_ELEMENTS = LOOP_EXP___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATE_EXP___GET_VALUE__TYPE_STRING = LOOP_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -8740,6 +9181,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int OPERATION___ALL_OWNED_ELEMENTS = FEATURE___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION___GET_VALUE__TYPE_STRING = FEATURE___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -9120,6 +9570,15 @@ public interface PivotPackage
 	int ITERATION___ALL_OWNED_ELEMENTS = OPERATION___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATION___GET_VALUE__TYPE_STRING = OPERATION___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9370,6 +9829,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ITERATOR_EXP___ALL_OWNED_ELEMENTS = LOOP_EXP___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___GET_VALUE__TYPE_STRING = LOOP_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -9904,6 +10372,15 @@ public interface PivotPackage
 	int LAMBDA_TYPE___ALL_OWNED_ELEMENTS = DATA_TYPE___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAMBDA_TYPE___GET_VALUE__TYPE_STRING = DATA_TYPE___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10057,6 +10534,15 @@ public interface PivotPackage
 	int LET_EXP___ALL_OWNED_ELEMENTS = OCL_EXPRESSION___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LET_EXP___GET_VALUE__TYPE_STRING = OCL_EXPRESSION___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10154,6 +10640,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int NAMESPACE___ALL_OWNED_ELEMENTS = NAMED_ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMESPACE___GET_VALUE__TYPE_STRING = NAMED_ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -10334,6 +10829,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PACKAGE___ALL_OWNED_ELEMENTS = NAMESPACE___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE___GET_VALUE__TYPE_STRING = NAMESPACE___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -10544,6 +11048,15 @@ public interface PivotPackage
 	int MODEL___ALL_OWNED_ELEMENTS = PACKAGE___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL___GET_VALUE__TYPE_STRING = PACKAGE___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10742,6 +11255,15 @@ public interface PivotPackage
 	int LIBRARY___ALL_OWNED_ELEMENTS = MODEL___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIBRARY___GET_VALUE__TYPE_STRING = MODEL___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10893,6 +11415,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int MESSAGE_EXP___ALL_OWNED_ELEMENTS = OCL_EXPRESSION___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_EXP___GET_VALUE__TYPE_STRING = OCL_EXPRESSION___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -11111,6 +11642,15 @@ public interface PivotPackage
 	int MESSAGE_TYPE___ALL_OWNED_ELEMENTS = TYPE___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_TYPE___GET_VALUE__TYPE_STRING = TYPE___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11263,6 +11803,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int MULTIPLICITY_ELEMENT___ALL_OWNED_ELEMENTS = ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MULTIPLICITY_ELEMENT___GET_VALUE__TYPE_STRING = ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -11427,6 +11976,15 @@ public interface PivotPackage
 	int NULL_LITERAL_EXP___ALL_OWNED_ELEMENTS = PRIMITIVE_LITERAL_EXP___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NULL_LITERAL_EXP___GET_VALUE__TYPE_STRING = PRIMITIVE_LITERAL_EXP___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11571,6 +12129,15 @@ public interface PivotPackage
 	int OPERATION_CALL_EXP___ALL_OWNED_ELEMENTS = FEATURE_CALL_EXP___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CALL_EXP___GET_VALUE__TYPE_STRING = FEATURE_CALL_EXP___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11679,6 +12246,15 @@ public interface PivotPackage
 	int TEMPLATE_PARAMETER___ALL_OWNED_ELEMENTS = ELEMENT___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_PARAMETER___GET_VALUE__TYPE_STRING = ELEMENT___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11776,6 +12352,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int OPERATION_TEMPLATE_PARAMETER___ALL_OWNED_ELEMENTS = TEMPLATE_PARAMETER___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_TEMPLATE_PARAMETER___GET_VALUE__TYPE_STRING = TEMPLATE_PARAMETER___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -12003,6 +12588,15 @@ public interface PivotPackage
 	int ORDERED_SET_TYPE___ALL_OWNED_ELEMENTS = COLLECTION_TYPE___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERED_SET_TYPE___GET_VALUE__TYPE_STRING = COLLECTION_TYPE___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12111,6 +12705,15 @@ public interface PivotPackage
 	int PARAMETERABLE_ELEMENT___ALL_OWNED_ELEMENTS = ELEMENT___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETERABLE_ELEMENT___GET_VALUE__TYPE_STRING = ELEMENT___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12199,6 +12802,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PACKAGEABLE_ELEMENT___ALL_OWNED_ELEMENTS = PARAMETERABLE_ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGEABLE_ELEMENT___GET_VALUE__TYPE_STRING = PARAMETERABLE_ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -12361,6 +12973,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PARAMETER___ALL_OWNED_ELEMENTS = TYPED_MULTIPLICITY_ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER___GET_VALUE__TYPE_STRING = TYPED_MULTIPLICITY_ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -12550,6 +13171,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PRECEDENCE___ALL_OWNED_ELEMENTS = NAMED_ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRECEDENCE___GET_VALUE__TYPE_STRING = NAMED_ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -12766,6 +13396,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PRIMITIVE_TYPE___ALL_OWNED_ELEMENTS = DATA_TYPE___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE___GET_VALUE__TYPE_STRING = DATA_TYPE___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -13128,6 +13767,15 @@ public interface PivotPackage
 	int PROPERTY___ALL_OWNED_ELEMENTS = FEATURE___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY___GET_VALUE__TYPE_STRING = FEATURE___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13380,6 +14028,15 @@ public interface PivotPackage
 	int PROPERTY_CALL_EXP___ALL_OWNED_ELEMENTS = NAVIGATION_CALL_EXP___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_CALL_EXP___GET_VALUE__TYPE_STRING = NAVIGATION_CALL_EXP___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13486,6 +14143,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int REAL_LITERAL_EXP___ALL_OWNED_ELEMENTS = NUMERIC_LITERAL_EXP___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REAL_LITERAL_EXP___GET_VALUE__TYPE_STRING = NUMERIC_LITERAL_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -13696,6 +14362,15 @@ public interface PivotPackage
 	int SELF_TYPE___ALL_OWNED_ELEMENTS = CLASS___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SELF_TYPE___GET_VALUE__TYPE_STRING = CLASS___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13838,6 +14513,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int SEND_SIGNAL_ACTION___ALL_OWNED_ELEMENTS = NAMED_ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEND_SIGNAL_ACTION___GET_VALUE__TYPE_STRING = NAMED_ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -14063,6 +14747,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int SEQUENCE_TYPE___ALL_OWNED_ELEMENTS = COLLECTION_TYPE___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEQUENCE_TYPE___GET_VALUE__TYPE_STRING = COLLECTION_TYPE___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -14326,6 +15019,15 @@ public interface PivotPackage
 	int SET_TYPE___ALL_OWNED_ELEMENTS = COLLECTION_TYPE___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_TYPE___GET_VALUE__TYPE_STRING = COLLECTION_TYPE___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14452,6 +15154,15 @@ public interface PivotPackage
 	int SIGNAL___ALL_OWNED_ELEMENTS = NAMED_ELEMENT___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIGNAL___GET_VALUE__TYPE_STRING = NAMED_ELEMENT___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14540,6 +15251,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int STATE___ALL_OWNED_ELEMENTS = NAMED_ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE___GET_VALUE__TYPE_STRING = NAMED_ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -14650,6 +15370,15 @@ public interface PivotPackage
 	int STATE_EXP___ALL_OWNED_ELEMENTS = OCL_EXPRESSION___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_EXP___GET_VALUE__TYPE_STRING = OCL_EXPRESSION___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14730,6 +15459,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int STEREOTYPED_PROPERTY___ALL_OWNED_ELEMENTS = ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEREOTYPED_PROPERTY___GET_VALUE__TYPE_STRING = ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -14840,6 +15578,15 @@ public interface PivotPackage
 	int STRING_LITERAL_EXP___ALL_OWNED_ELEMENTS = PRIMITIVE_LITERAL_EXP___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_LITERAL_EXP___GET_VALUE__TYPE_STRING = PRIMITIVE_LITERAL_EXP___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14919,6 +15666,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TEMPLATE_BINDING___ALL_OWNED_ELEMENTS = ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_BINDING___GET_VALUE__TYPE_STRING = ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -15009,6 +15765,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TEMPLATE_PARAMETER_SUBSTITUTION___ALL_OWNED_ELEMENTS = ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_PARAMETER_SUBSTITUTION___GET_VALUE__TYPE_STRING = ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -15200,6 +15965,15 @@ public interface PivotPackage
 	int TEMPLATE_PARAMETER_TYPE___ALL_OWNED_ELEMENTS = TYPE___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_PARAMETER_TYPE___GET_VALUE__TYPE_STRING = TYPE___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15317,6 +16091,15 @@ public interface PivotPackage
 	int TEMPLATE_SIGNATURE___ALL_OWNED_ELEMENTS = ELEMENT___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_SIGNATURE___GET_VALUE__TYPE_STRING = ELEMENT___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15396,6 +16179,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TEMPLATEABLE_ELEMENT___ALL_OWNED_ELEMENTS = ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATEABLE_ELEMENT___GET_VALUE__TYPE_STRING = ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -15524,6 +16316,15 @@ public interface PivotPackage
 	int TUPLE_LITERAL_EXP___ALL_OWNED_ELEMENTS = LITERAL_EXP___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_LITERAL_EXP___GET_VALUE__TYPE_STRING = LITERAL_EXP___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15621,6 +16422,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int VARIABLE_DECLARATION___ALL_OWNED_ELEMENTS = TYPED_ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DECLARATION___GET_VALUE__TYPE_STRING = TYPED_ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -15729,6 +16539,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TUPLE_LITERAL_PART___ALL_OWNED_ELEMENTS = VARIABLE_DECLARATION___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_LITERAL_PART___GET_VALUE__TYPE_STRING = VARIABLE_DECLARATION___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -15947,6 +16766,15 @@ public interface PivotPackage
 	int TUPLE_TYPE___ALL_OWNED_ELEMENTS = DATA_TYPE___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_TYPE___GET_VALUE__TYPE_STRING = DATA_TYPE___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16091,6 +16919,15 @@ public interface PivotPackage
 	int TYPE_EXP___ALL_OWNED_ELEMENTS = OCL_EXPRESSION___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_EXP___GET_VALUE__TYPE_STRING = OCL_EXPRESSION___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16208,6 +17045,15 @@ public interface PivotPackage
 	int TYPE_TEMPLATE_PARAMETER___ALL_OWNED_ELEMENTS = TEMPLATE_PARAMETER___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_TEMPLATE_PARAMETER___GET_VALUE__TYPE_STRING = TEMPLATE_PARAMETER___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16314,6 +17160,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int UNLIMITED_NATURAL_LITERAL_EXP___ALL_OWNED_ELEMENTS = NUMERIC_LITERAL_EXP___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLIMITED_NATURAL_LITERAL_EXP___GET_VALUE__TYPE_STRING = NUMERIC_LITERAL_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -16542,6 +17397,15 @@ public interface PivotPackage
 	int UNSPECIFIED_TYPE___ALL_OWNED_ELEMENTS = CLASS___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNSPECIFIED_TYPE___GET_VALUE__TYPE_STRING = CLASS___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16677,6 +17541,15 @@ public interface PivotPackage
 	int UNSPECIFIED_VALUE_EXP___ALL_OWNED_ELEMENTS = OCL_EXPRESSION___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNSPECIFIED_VALUE_EXP___GET_VALUE__TYPE_STRING = OCL_EXPRESSION___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16803,6 +17676,15 @@ public interface PivotPackage
 	int VARIABLE___ALL_OWNED_ELEMENTS = VARIABLE_DECLARATION___ALL_OWNED_ELEMENTS;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE___GET_VALUE__TYPE_STRING = VARIABLE_DECLARATION___GET_VALUE__TYPE_STRING;
+
+	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16918,6 +17800,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int VARIABLE_EXP___ALL_OWNED_ELEMENTS = OCL_EXPRESSION___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_EXP___GET_VALUE__TYPE_STRING = OCL_EXPRESSION___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -17144,6 +18035,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int VOID_TYPE___ALL_OWNED_ELEMENTS = CLASS___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_TYPE___GET_VALUE__TYPE_STRING = CLASS___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -17445,6 +18345,16 @@ public interface PivotPackage
 	 * @generated
 	 */
 	EOperation getElement__AllOwnedElements();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.Element#getValue(org.eclipse.ocl.examples.pivot.Type, java.lang.String) <em>Get Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Value</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.Element#getValue(org.eclipse.ocl.examples.pivot.Type, java.lang.String)
+	 * @generated
+	 */
+	EOperation getElement__GetValue__Type_String();
 
 	/**
 	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.Element#validateNotOwnSelf(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Not Own Self</em>}' operation.
@@ -21191,6 +22101,14 @@ public interface PivotPackage
 		 * @generated
 		 */
 		EOperation ELEMENT___ALL_OWNED_ELEMENTS = eINSTANCE.getElement__AllOwnedElements();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ELEMENT___GET_VALUE__TYPE_STRING = eINSTANCE.getElement__GetValue__Type_String();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate Not Own Self</b></em>' operation.

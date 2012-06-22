@@ -1158,9 +1158,19 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getElement__ValidateNotOwnSelf__DiagnosticChain_Map()
+	public EOperation getElement__GetValue__Type_String()
 	{
 		return elementEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getElement__ValidateNotOwnSelf__DiagnosticChain_Map()
+	{
+		return elementEClass.getEOperations().get(2);
 	}
 
 	/**
@@ -4515,6 +4525,7 @@ public class PivotPackageImpl
 		createEReference(elementEClass, ELEMENT__OWNED_COMMENT);
 		createEReference(elementEClass, ELEMENT__APPLIED_STEREOTYPE);
 		createEOperation(elementEClass, ELEMENT___ALL_OWNED_ELEMENTS);
+		createEOperation(elementEClass, ELEMENT___GET_VALUE__TYPE_STRING);
 		createEOperation(elementEClass, ELEMENT___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP);
 
 		enumLiteralExpEClass = createEClass(ENUM_LITERAL_EXP);
@@ -5192,6 +5203,10 @@ public class PivotPackageImpl
 		initEReference(getElement_AppliedStereotype(), this.getAppliedStereotype(), null, "appliedStereotype", null, 0, -1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 
 		initEOperation(getElement__AllOwnedElements(), this.getElement(), "allOwnedElements", 0, -1, IS_UNIQUE, !IS_ORDERED); //$NON-NLS-1$
+
+		op = initEOperation(getElement__GetValue__Type_String(), this.getElement(), "getValue", 1, 1, IS_UNIQUE, !IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, this.getType(), "stereotype", 1, 1, IS_UNIQUE, !IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, this.getString(), "propertyName", 1, 1, IS_UNIQUE, !IS_ORDERED); //$NON-NLS-1$
 
 		op = initEOperation(getElement__ValidateNotOwnSelf__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateNotOwnSelf", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
@@ -5969,7 +5984,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																																																																																																																																																																																																																													
+		   });																																																																																																																																																																																																																																																																																														
 	}
 
 	/**
@@ -5992,7 +6007,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																					
+		   });																						
 		addAnnotation
 		  (featureEClass, 
 		   source, 
@@ -6033,7 +6048,7 @@ public class PivotPackageImpl
 	 */
 	protected void createSubsetsAnnotations()
 	{
-		String source = "subsets"; //$NON-NLS-1$																																																																																																																																																																																																
+		String source = "subsets"; //$NON-NLS-1$																																																																																																																																																																																																	
 		addAnnotation
 		  (getParameterableElement_OwningTemplateParameter(), 
 		   source, 
