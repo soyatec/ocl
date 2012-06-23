@@ -86,11 +86,13 @@ public class ProjectMapTest extends TestCase
 	}
 	
 	public void testProjectMap_JavaVMTypes() {				// Usually just a plugin; always a plugin on Hudson
+		EPackage.Registry.INSTANCE.put(org.eclipse.xtext.common.types.TypesPackage.eNS_URI, org.eclipse.xtext.common.types.TypesPackage.eINSTANCE);
 		String modelPath = "org.eclipse.xtext.common.types/model/JavaVMTypes.ecore";
 		doTestProjectMapRegistered(org.eclipse.xtext.common.types.TypesPackage.eINSTANCE, modelPath);
 	}
 	
 	public void testProjectMap_Pivot() {					// Almost certainly a workspace project; always a project on Hudson
+		EPackage.Registry.INSTANCE.put(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
 		String modelPath = PivotPackage.class.getPackage().getName() + "/model/Pivot.ecore";
 		doTestProjectMapRegistered(PivotPackage.eINSTANCE, modelPath);
 	}

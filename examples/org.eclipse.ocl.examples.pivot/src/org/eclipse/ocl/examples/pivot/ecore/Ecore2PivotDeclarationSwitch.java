@@ -355,11 +355,13 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		if (eObject.eIsSet(EcorePackage.Literals.EPACKAGE__NS_PREFIX)) {
 			pivotElement.setNsPrefix(eObject.getNsPrefix());
 		}
-		converter.getMetaModelManager().addPackage(pivotElement);
-		String moniker = Pivot2Moniker.toString(pivotElement);
-		AliasAdapter adapter = AliasAdapter.getAdapter(eObject.eResource());
-		if (adapter != null) {
-			adapter.getAliasMap().put(eObject, moniker);
+		if (!(eObject.eContainer() instanceof EAnnotation)) {
+			converter.getMetaModelManager().addPackage(pivotElement);
+			String moniker = Pivot2Moniker.toString(pivotElement);
+			AliasAdapter adapter = AliasAdapter.getAdapter(eObject.eResource());
+			if (adapter != null) {
+				adapter.getAliasMap().put(eObject, moniker);
+			}
 		}
 		EAnnotation eAnnotation = eObject.getEAnnotation(EcorePackage.eNS_URI);
 		List<EAnnotation> exclusions = eAnnotation == null ? Collections.<EAnnotation>emptyList() : Collections.singletonList(eAnnotation);

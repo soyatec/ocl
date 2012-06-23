@@ -30,6 +30,8 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -38,19 +40,34 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil.UnresolvedProxyCrossReferencer;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
+import org.eclipse.ocl.examples.domain.types.AbstractStandardLibrary;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.validation.DomainSubstitutionLabelProvider;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.OCL;
+import org.eclipse.ocl.examples.pivot.PivotStandaloneSetup;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
+import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
+import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.BaseStandaloneSetup;
+import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
+import org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCLStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
+import org.eclipse.ocl.examples.xtext.markup.MarkupStandaloneSetup;
+import org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcoreStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
+import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
 import org.eclipse.uml2.uml.profile.l2.L2Package;
 import org.eclipse.uml2.uml.resource.UML302UMLResource;
+import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 
 /**
@@ -59,6 +76,8 @@ import org.eclipse.xtext.resource.XtextResource;
 @SuppressWarnings("nls")
 public class PivotTestCase extends TestCase
 {
+	public static boolean DEBUG_GC = false;
+	public static boolean DEBUG_ID = false;
 	public static final String PLUGIN_ID = "org.eclipse.ocl.examples.xtext.tests";
 	private static ProjectMap projectMap = null;
 
@@ -284,26 +303,117 @@ public class PivotTestCase extends TestCase
 			System.out.println(string);
 		}		
 	}
+	
+	private GlobalStateMemento makeCopyOfGlobalState = null;
 
 	@Override
 	protected void setUp() throws Exception {
+		if (DEBUG_GC) {
+			XMLNamespacePackage.eINSTANCE.getClass();
+			makeCopyOfGlobalState = new GlobalStateMemento();
+		}
 		super.setUp();
-//		debugPrintln("-----Starting " + getClass().getSimpleName() + "." + getName() + "-----");
+		if (DEBUG_ID) {
+			debugPrintln("-----Starting " + getClass().getSimpleName() + "." + getName() + "-----");
+		}
 		EPackage.Registry.INSTANCE.put(UML302UMLResource.STANDARD_PROFILE_NS_URI, L2Package.eINSTANCE);
 	}
 
 	@Override
 	protected void tearDown() throws Exception {
-//		OCLstdlib.uninstall();	
-//		CompleteOCLStandaloneSetup.doTearDown();
-//		EssentialOCLStandaloneSetup.doTearDown();
-//		MarkupStandaloneSetup.doTearDown();
-//		OCLinEcoreStandaloneSetup.doTearDown();
-//		OCLstdlibStandaloneSetup.doTearDown();
-//		System.gc();
-//		System.runFinalization();
-//		MetaModelManagerResourceAdapter.INSTANCES.show();
-//		debugPrintln("==> Finish " + getName());
+		if (DEBUG_GC) {
+			OCLstdlib.uninstall();
+			PivotStandaloneSetup.doTearDown();
+			BaseStandaloneSetup.doTearDown();
+			CompleteOCLStandaloneSetup.doTearDown();
+			EssentialOCLStandaloneSetup.doTearDown();
+			MarkupStandaloneSetup.doTearDown();
+			OCLinEcoreStandaloneSetup.doTearDown();
+			OCLstdlibStandaloneSetup.doTearDown();
+			PivotEnvironmentFactory.disposeGlobalRegistryInstance();
+			makeCopyOfGlobalState.restoreGlobalState();
+			makeCopyOfGlobalState = null;
+//			System.gc();
+//			System.runFinalization();
+			AbstractStandardLibrary.expungeAll();
+//			OCLstdlib.decontain();
+			System.gc();
+			System.runFinalization();
+//			MetaModelManagerResourceAdapter.INSTANCES.show();
+		}
+		if (DEBUG_ID) {
+			debugPrintln("==> Finish " + getName());
+		}
 		super.tearDown();
+	}
+	
+	public static class GlobalStateMemento
+	{
+		private HashMap<EPackage, Object> validatorReg;
+		private HashMap<String, Object> epackageReg;
+		private HashMap<String, Object> protocolToFactoryMap;
+		private HashMap<String, Object> extensionToFactoryMap;
+		private HashMap<String, Object> contentTypeIdentifierToFactoryMap;
+		private HashMap<String, Object> protocolToServiceProviderMap;
+		private HashMap<String, Object> extensionToServiceProviderMap;
+		private HashMap<String, Object> contentTypeIdentifierToServiceProviderMap;
+
+		public GlobalStateMemento() {
+			validatorReg = new HashMap<EPackage, Object>(EValidator.Registry.INSTANCE);
+			epackageReg = new HashMap<String, Object>(EPackage.Registry.INSTANCE);
+			protocolToFactoryMap = new HashMap<String, Object>(Resource.Factory.Registry.INSTANCE.getProtocolToFactoryMap());
+			extensionToFactoryMap = new HashMap<String, Object>(Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap());
+			contentTypeIdentifierToFactoryMap = new HashMap<String, Object>(Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap());
+
+			protocolToServiceProviderMap = new HashMap<String, Object>(IResourceServiceProvider.Registry.INSTANCE.getProtocolToFactoryMap());
+			extensionToServiceProviderMap = new HashMap<String, Object>(IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap());
+			contentTypeIdentifierToServiceProviderMap = new HashMap<String, Object>(IResourceServiceProvider.Registry.INSTANCE.getContentTypeToFactoryMap());
+		}
+	
+		public void restoreGlobalState() {
+			clearGlobalRegistries();
+			EValidator.Registry.INSTANCE.putAll(validatorReg);
+			EPackage.Registry.INSTANCE.putAll(epackageReg);
+			
+			Resource.Factory.Registry.INSTANCE.getProtocolToFactoryMap().putAll(protocolToFactoryMap);
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().putAll(extensionToFactoryMap);
+			Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap().putAll(contentTypeIdentifierToFactoryMap);
+			
+			IResourceServiceProvider.Registry.INSTANCE.getProtocolToFactoryMap().putAll(protocolToServiceProviderMap);
+			IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().putAll(extensionToServiceProviderMap);
+			IResourceServiceProvider.Registry.INSTANCE.getContentTypeToFactoryMap().putAll(contentTypeIdentifierToServiceProviderMap);
+		}
+		
+		public static void clearGlobalRegistries() {
+//			Registry eValidatorRegistry = EValidator.Registry.INSTANCE;
+//			for (EPackage key : eValidatorRegistry.keySet()) {
+//				Object object = eValidatorRegistry.get(key);
+//				System.out.println("key : " + key.getNsURI() + " => " + object.getClass().getName());
+//			}
+			EValidator.Registry.INSTANCE.clear();
+			EPackage.Registry.INSTANCE.clear();
+			Resource.Factory.Registry.INSTANCE.getProtocolToFactoryMap().clear();
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().clear();
+			Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap().clear();
+			
+			IResourceServiceProvider.Registry.INSTANCE.getProtocolToFactoryMap().clear();
+			IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().clear();
+			IResourceServiceProvider.Registry.INSTANCE.getContentTypeToFactoryMap().clear();
+			initializeDefaults();
+		}
+		
+		public static void initializeDefaults() {
+			//EMF Standalone setup
+			if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore"))
+				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+					"ecore", new EcoreResourceFactoryImpl());
+			if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xmi"))
+				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+					"xmi", new XMIResourceFactoryImpl());
+			if (!EPackage.Registry.INSTANCE.containsKey(EcorePackage.eNS_URI))
+				EPackage.Registry.INSTANCE.put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
+			if (!EPackage.Registry.INSTANCE.containsKey(XtextPackage.eNS_URI))
+				EPackage.Registry.INSTANCE.put(XtextPackage.eNS_URI, XtextPackage.eINSTANCE);
+		}
 	}
 }

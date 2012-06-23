@@ -492,6 +492,7 @@ public class XtextTestCase extends PivotTestCase
 	
 	@Override
 	protected void setUp() throws Exception {
+		super.setUp();
     	testCaseAppender.install();
     	if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
     		OCL.initialize(null);
@@ -499,7 +500,6 @@ public class XtextTestCase extends PivotTestCase
 		CompleteOCLStandaloneSetup.doSetup();
 		OCLinEcoreStandaloneSetup.doSetup();
 		OCLstdlibStandaloneSetup.doSetup();
-		super.setUp();
 		resourceSet = new ResourceSetImpl();
 		ProjectMap.initializeURIResourceMap(resourceSet);
 		Map<URI, URI> uriMap = resourceSet.getURIConverter().getURIMap();

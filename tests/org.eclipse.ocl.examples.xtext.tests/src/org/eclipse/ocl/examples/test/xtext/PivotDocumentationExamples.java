@@ -120,6 +120,8 @@ public class PivotDocumentationExamples extends XtextTestCase
 		    "self.eType->any(true).oclAsType(EClass)");
 	
 		if ((body == derive) && (invariant == query)) { /* the yellow markers go away */ }
+		
+		ocl.dispose();
 	}
 	
 	
@@ -171,6 +173,8 @@ public class PivotDocumentationExamples extends XtextTestCase
 		    
 		    System.out.printf("%s: %s%n", next.getName(), categories);
 		}
+
+		ocl.dispose();
 	}
 
 	/*
@@ -232,5 +236,7 @@ public class PivotDocumentationExamples extends XtextTestCase
 		// use the unique_title constraint to validate the book
 		boolean isValid = ocl.check(book, constraintMap.get("unique_title"));
 		System.out.printf("Validate book: %b%n", isValid);	
+
+		ocl.dispose();
 	}
 }

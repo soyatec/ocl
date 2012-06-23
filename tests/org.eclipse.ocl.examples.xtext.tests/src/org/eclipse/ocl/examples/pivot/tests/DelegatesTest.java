@@ -25,7 +25,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import noreflectioncompany.NoreflectioncompanyFactory;
 import noreflectioncompany.NoreflectioncompanyPackage;
+import noreflectioncompany.util.NoreflectioncompanyValidator;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -96,9 +98,13 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.oclinecore.validation.OCLinEcoreEObjectValidator;
 
+import codegen.company.CodegencompanyFactory;
 import codegen.company.CodegencompanyPackage;
+import codegen.company.util.CodegencompanyValidator;
 
+import company.CompanyFactory;
 import company.CompanyPackage;
+import company.util.CompanyValidator;
 
 /**
  * Tests for the OCL delegate implementations.
@@ -229,6 +235,24 @@ public class DelegatesTest extends PivotTestSuite
 		}
 		EValidator.Registry.INSTANCE.remove(null);
 		PivotEnvironmentFactory.disposeGlobalRegistryInstance();
+		if (EPackage.Registry.INSTANCE.getEFactory(CompanyPackage.eNS_URI) instanceof CompanyFactory) {
+			DelegateEPackageAdapter adapter = DelegateEPackageAdapter.findAdapter(CompanyPackage.eINSTANCE);
+			if (adapter != null) {
+				adapter.unloadDelegates();
+			}
+		}
+		if (EPackage.Registry.INSTANCE.getEFactory(NoreflectioncompanyPackage.eNS_URI) instanceof NoreflectioncompanyFactory) {
+			DelegateEPackageAdapter adapter = DelegateEPackageAdapter.findAdapter(NoreflectioncompanyPackage.eINSTANCE);
+			if (adapter != null) {
+				adapter.unloadDelegates();
+			}
+		}
+		if (EPackage.Registry.INSTANCE.getEFactory(CodegencompanyPackage.eNS_URI) instanceof CodegencompanyFactory) {
+			DelegateEPackageAdapter adapter = DelegateEPackageAdapter.findAdapter(CodegencompanyPackage.eINSTANCE);
+			if (adapter != null) {
+				adapter.unloadDelegates();
+			}
+		}
 		super.tearDown();
 	}
 
@@ -319,15 +343,22 @@ public class DelegatesTest extends PivotTestSuite
 	protected void initPackageRegistrations() {
 		resourceSet.getPackageRegistry().put(CompanyPackage.eNS_URI, CompanyPackage.eINSTANCE);
 		resourceSet.getPackageRegistry().put(NoreflectioncompanyPackage.eNS_URI, NoreflectioncompanyPackage.eINSTANCE);
+		EValidator.Registry.INSTANCE.put(CompanyPackage.eINSTANCE, CompanyValidator.INSTANCE);
+		EValidator.Registry.INSTANCE.put(NoreflectioncompanyPackage.eINSTANCE, NoreflectioncompanyValidator.INSTANCE);
 	}
 
 	protected void initCodeGeneratedPackageRegistrations() {
 		resourceSet.getPackageRegistry().put(CodegencompanyPackage.eNS_URI, CodegencompanyPackage.eINSTANCE);
+		EValidator.Registry.INSTANCE.put(CodegencompanyPackage.eINSTANCE, CodegencompanyValidator.INSTANCE);
 	}
 
 	protected void removePackageRegistrations() {
 		resourceSet.getPackageRegistry().remove(CompanyPackage.eNS_URI);
 		resourceSet.getPackageRegistry().remove(NoreflectioncompanyPackage.eNS_URI);
+		resourceSet.getPackageRegistry().remove(CodegencompanyPackage.eNS_URI);
+		EValidator.Registry.INSTANCE.remove(CompanyPackage.eNS_URI);
+		EValidator.Registry.INSTANCE.remove(NoreflectioncompanyPackage.eNS_URI);
+		EValidator.Registry.INSTANCE.remove(CodegencompanyPackage.eNS_URI);
 	}
 
 	public void doTest_allInstances(String modelName) {

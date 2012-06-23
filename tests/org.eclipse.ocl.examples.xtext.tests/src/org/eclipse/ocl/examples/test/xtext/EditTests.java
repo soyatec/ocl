@@ -65,6 +65,8 @@ public class EditTests extends XtextTestCase
 //			metaModelManager = null;
 //		}
 		StandardLibraryContribution.REGISTRY.remove(MetaModelManager.DEFAULT_OCL_STDLIB_URI);
+		ocl.dispose();		
+		ocl = null;		
 		super.tearDown();
 	}
 
