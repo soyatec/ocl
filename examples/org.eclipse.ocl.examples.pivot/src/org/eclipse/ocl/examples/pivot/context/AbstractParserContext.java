@@ -21,6 +21,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -110,6 +111,11 @@ public abstract class AbstractParserContext /*extends AdapterImpl*/ implements P
 			return specification;
 		} finally {
 			if (resource != null) {
+				resource.unload();
+				ResourceSet resourceSet = resource.getResourceSet();
+				if (resourceSet != null) {
+					resourceSet.getResources().remove(resource);
+				}
 				MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.findAdapter(resource);
 				if (adapter != null) {
 					adapter.dispose();
