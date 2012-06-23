@@ -27,8 +27,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
-import org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.examples.library.executor.ReflectiveType;
+import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 
 public class EcoreReflectiveType extends ReflectiveType
 {
@@ -80,6 +80,6 @@ public class EcoreReflectiveType extends ReflectiveType
 	}
 
 	public DomainStandardLibrary getStandardLibrary() {
-		return ExecutorStandardLibrary.INSTANCE;
+		return OCLstdlibTables.LIBRARY;
 	}
 }

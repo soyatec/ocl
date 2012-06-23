@@ -22,6 +22,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.types.AbstractInheritance;
+import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 
 public class ExecutorType extends AbstractInheritance implements DomainType, ExecutorTypeArgument
 {
@@ -83,7 +84,7 @@ public class ExecutorType extends AbstractInheritance implements DomainType, Exe
 	}
 
 	public DomainStandardLibrary getStandardLibrary() {
-		return ExecutorStandardLibrary.INSTANCE;
+		return OCLstdlibTables.LIBRARY;
 	}
 	
 	public final FragmentIterable getSuperFragments(int depth) {
