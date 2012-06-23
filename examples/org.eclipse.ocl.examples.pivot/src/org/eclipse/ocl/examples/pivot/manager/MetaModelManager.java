@@ -1034,19 +1034,26 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			}
 		}
 		pivotResourceSet.eAdapters().remove(this);
-		pivotResourceSet.getPackageRegistry().clear();
 		for (Resource resource : pivotResourceSet.getResources()) {
 			resource.unload();
 		}
 		pivotResourceSet.getResources().clear();
+		pivotResourceSet.setPackageRegistry(null);
+		pivotResourceSet.setResourceFactoryRegistry(null);
+		pivotResourceSet.setURIConverter(null);
+//		pivotResourceSet.setURIResourceMap(null);
 		pivotLibraries.clear();	
 		pivotLibraryResource = null;
 		if (externalResourceSet != null) {
+			externalResourceSet.setPackageRegistry(null);
+			externalResourceSet.setResourceFactoryRegistry(null);
+			externalResourceSet.setURIConverter(null);
+			externalResourceSet.setURIResourceMap(null);
 			for (Resource resource : externalResourceSet.getResources()) {
 				resource.unload();
 			}
+			externalResourceSet = null;
 		}
-		externalResourceSet = null;
 		globalNamespaces.clear();
 		globalTypes.clear();
 		external2PivotMap.clear();

@@ -505,7 +505,12 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 //						}
 //					}
 					installImports();
-					installStereotypes();
+					if (eAppliedStereotypes.size() > 0) {
+						if (metaModelManager.getLibraryResource() == OCLstdlib.getDefault()) {
+							throw new IllegalStateException("Stereotypes can only be applied to a copied OCL Standard Library");
+						}
+						installStereotypes();
+					}
 					installProperties();
 					installReferences();
 				}
@@ -513,7 +518,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 					if (errors == null) {
 						errors = new ArrayList<Resource.Diagnostic>();
 					}
-					errors.add(new XMIException("Failed to load '" + pivotURI + "'", e));
+					errors.add(new XMIException("Failed to load '" + pivotURI + "' : " + e.getMessage()));
 				}
 				if (errors != null) {
 					pivotResource.getErrors().addAll(errors);
@@ -750,6 +755,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 					refreshList(newAppliedStereotype.getStereotypedProperty(), newProperties);
 					newAppliedStereotypes.add(newAppliedStereotype);
 				}
+//				System.out.println("Applying stereotypes to " + stereotypedElement);
 				refreshList(stereotypedElement.getAppliedStereotype(), newAppliedStereotypes);
 			}
 		}
