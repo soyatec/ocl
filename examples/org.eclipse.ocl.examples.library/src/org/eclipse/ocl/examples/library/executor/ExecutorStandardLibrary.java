@@ -16,8 +16,9 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -35,12 +36,10 @@ import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 
 public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 {
-	public static final ExecutorStandardLibrary INSTANCE = new ExecutorStandardLibrary();
-	
 //	private Map<EPackage, EcoreExecutorPackage> ePackageMap = new HashMap<EPackage, EcoreExecutorPackage>();
-	private Map<String, EcoreExecutorPackage> ePackageMap = new HashMap<String, EcoreExecutorPackage>();
+	private Map<String, EcoreExecutorPackage> ePackageMap = new WeakHashMap<String, EcoreExecutorPackage>();
 	private Map<DomainPackage, DomainReflectivePackage> domainPackageMap = null;
-	private Map<EClassifier, ExecutorType> typeMap = new HashMap<EClassifier, ExecutorType>();
+	private Map<EClassifier, ExecutorType> typeMap = new WeakHashMap<EClassifier, ExecutorType>();
 //	private Map<Class<?>, DomainEnumeration> enumerationMap = null;
 	
 	public ExecutorStandardLibrary(EcoreExecutorPackage... execPackages) {
@@ -50,7 +49,7 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 		}
 	}
 
-	public void addPackage(EcoreExecutorPackage execPackage) {
+	public synchronized void addPackage(EcoreExecutorPackage execPackage) {
 		@SuppressWarnings("unused")
 		EcoreExecutorPackage oldExecPackage = ePackageMap.put(execPackage.getNsURI(), execPackage);
 //		if ((oldExecPackage != null) && (oldExecPackage != execPackage)) {
@@ -71,6 +70,26 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 	@Override
 	public DomainEvaluator createEvaluator(EObject contextObject, Map<Object, Object> contextMap) {
 		return new EcoreExecutorManager(contextObject, contextMap, this);
+	}
+
+	@Override
+	protected void expunge() {
+		super.expunge();
+/*		if (ePackageMap != null) {			// FIXME Uncommenting this causes NPE failures running tests with aggressive GC
+			for (String pkge : new ArrayList<String>(ePackageMap.keySet())) {
+				ePackageMap.remove(pkge);
+			}
+		} */	
+		if (domainPackageMap != null) {
+			for (DomainPackage pkge : new ArrayList<DomainPackage>(domainPackageMap.keySet())) {
+				domainPackageMap.remove(pkge);
+			}
+		}		
+		if (typeMap != null) {
+			for (EClassifier classifier : new ArrayList<EClassifier>(typeMap.keySet())) {
+				typeMap.remove(classifier);
+			}
+		}	
 	}
 
 /*	@Override
@@ -116,29 +135,33 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 			}
 		}
 		DomainPackage domainPackage = type.getPackage();
-		EcoreExecutorPackage ecoreExecutorPackage = ePackageMap.get(domainPackage.getNsURI());
-		if (ecoreExecutorPackage != null) {
-			ExecutorType executorType = ecoreExecutorPackage.getType(type.getName());
-			if (executorType != null) {
-				return executorType;
+		synchronized (this) {
+			EcoreExecutorPackage ecoreExecutorPackage = ePackageMap.get(domainPackage.getNsURI());
+			if (ecoreExecutorPackage != null) {
+				ExecutorType executorType = ecoreExecutorPackage.getType(type.getName());
+				if (executorType != null) {
+					return executorType;
+				}
+			}
+			if (domainPackageMap == null) {
+				domainPackageMap = new WeakHashMap<DomainPackage, DomainReflectivePackage>();
 			}
 		}
-		if (domainPackageMap == null) {
-			domainPackageMap = new HashMap<DomainPackage, DomainReflectivePackage>();
+		synchronized (domainPackageMap) {
+			DomainReflectivePackage domainExecutorPackage = domainPackageMap.get(domainPackage);
+			if (domainExecutorPackage == null) {
+				domainExecutorPackage = new DomainReflectivePackage(this, domainPackage);
+				domainPackageMap.put(domainPackage, domainExecutorPackage);
+			}
+			return domainExecutorPackage.getInheritance(type);
 		}
-		DomainReflectivePackage domainExecutorPackage = domainPackageMap.get(domainPackage);
-		if (domainExecutorPackage == null) {
-			domainExecutorPackage = new DomainReflectivePackage(this, domainPackage);
-			domainPackageMap.put(domainPackage, domainExecutorPackage);
-		}
-		return domainExecutorPackage.getInheritance(type);
 	}
 
-	public EcoreExecutorPackage getPackage(EPackage ePackage) {
+	public synchronized EcoreExecutorPackage getPackage(EPackage ePackage) {
 		return ePackageMap.get(ePackage.getNsURI());
 	}
 
-	public ExecutorType getOclType(String typeName) {
+	public synchronized ExecutorType getOclType(String typeName) {
 		for (EcoreExecutorPackage dPackage : ePackageMap.values()) {
 // FIXME			if (OCLstdlibTables.PACKAGE.getNsURI().equals(dPackage.getNsURI())) {	
 				ExecutorType type = dPackage.getType(typeName);
@@ -150,7 +173,7 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 		return null;
 	}
 
-	public ExecutorType getType(EClassifier eClassifier) {
+	public synchronized ExecutorType getType(EClassifier eClassifier) {
 		ExecutorType type = typeMap.get(eClassifier);
 		if (type == null) {
 			EcoreExecutorPackage execPackage = getPackage(eClassifier.getEPackage());

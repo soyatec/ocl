@@ -17,9 +17,9 @@
 package org.eclipse.ocl.examples.domain.types;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EObject;
@@ -42,6 +42,11 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 	 */
 	private Map<String, Map<DomainType, DomainTypedElement>> tupleParts = null;		// Lazily created
 		
+/*	protected AbstractStandardLibrary() {
+		System.out.println(Thread.currentThread().getName() + " Create " + debugSimpleName(this));		
+		liveAbstractStandardLibraries.put(this, null);
+	} */
+
 	public boolean conformsToCollectionType(DomainCollectionType firstCollectionType, DomainCollectionType secondCollectionType) {
 		DomainType firstContainerType = firstCollectionType.getContainerType();
 		DomainType secondContainerType = secondCollectionType.getContainerType();
@@ -87,6 +92,14 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 	public void dispose() {
 		tupleParts = null;	
 	}
+
+	protected void expunge() {
+		if (tupleParts != null) {
+			for (String tuplePart : new ArrayList<String>(tupleParts.keySet())) {
+				tupleParts.remove(tuplePart);
+			}
+		}		
+	}
 	
 	public DomainCollectionType getCollectionType(DomainCollectionType containerType, DomainType elementType) {
 		boolean isOrdered = containerType.isOrdered();
@@ -117,13 +130,13 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		throw new UnsupportedOperationException();
 	}
 
-	public DomainTypedElement getTuplePart(String name, DomainType type) {
+	public synchronized DomainTypedElement getTuplePart(String name, DomainType type) {
 		if (tupleParts == null) {
-			tupleParts = new HashMap<String, Map<DomainType, DomainTypedElement>>();
+			tupleParts = new WeakHashMap<String, Map<DomainType, DomainTypedElement>>();
 		}
 		Map<DomainType, DomainTypedElement> typeMap = tupleParts.get(name);
 		if (typeMap == null) {
-			typeMap = new HashMap<DomainType, DomainTypedElement>();
+			typeMap = new WeakHashMap<DomainType, DomainTypedElement>();
 			tupleParts.put(name, typeMap);
 		}
 		DomainTypedElement tupleProperty = typeMap.get(type);
@@ -206,4 +219,39 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		}
 		return true;
 	}
+	
+/*	private static WeakHashMap<AbstractStandardLibrary,Object> liveAbstractStandardLibraries = new WeakHashMap<AbstractStandardLibrary,Object>();
+	
+	public static String debugSimpleName(Object object) {
+		if (object == null) {
+			return "null";
+		}
+		else {
+			return object.getClass().getSimpleName() + "@" + Integer.toHexString(object.hashCode());
+		}
+	} */
+	
+	public static void expungeAll() {
+/*		synchronized(liveAbstractStandardLibraries) {
+			liveAbstractStandardLibraries.size();
+			for (AbstractStandardLibrary key : liveAbstractStandardLibraries.keySet()) {
+				key.expunge();
+			}
+		} */
+	}
+
+/*	@Override
+	protected void finalize() throws Throwable {
+//		System.out.println("Finalize " + debugSimpleName(this));		
+		super.finalize();
+		Set<AbstractStandardLibrary> keySet = liveAbstractStandardLibraries.keySet();
+		if (!keySet.isEmpty()) {
+			StringBuilder s = new StringBuilder();
+			s.append(" live AbstractStandardLibrary:");
+			for (AbstractStandardLibrary stdlib : keySet) {
+				s.append(" @" + Integer.toHexString(stdlib.hashCode()));		
+			}
+//			System.out.println(s);		
+		}
+	} */
 }

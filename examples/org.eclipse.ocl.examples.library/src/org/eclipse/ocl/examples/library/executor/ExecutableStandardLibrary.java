@@ -17,9 +17,9 @@
 package org.eclipse.ocl.examples.library.executor;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.domain.elements.DomainClassifierType;
@@ -35,13 +35,48 @@ import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 
 public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 {
-	private Map<DomainType, DomainClassifierType> classifiers = new HashMap<DomainType, DomainClassifierType>();
-	private Map<DomainType, Map<DomainType, AbstractCollectionType>> specializations = new HashMap<DomainType, Map<DomainType, AbstractCollectionType>>();
-	private Map<String, List<DomainTupleType>> tupleTypeMap = new HashMap<String, List<DomainTupleType>>();
+	/**
+	 * Shared cache of the lazily created lazily deleted Classifier types of each type. 
+	 */
+	private Map<DomainType, DomainClassifierType> classifiers = new WeakHashMap<DomainType, DomainClassifierType>();
+	
+	/**
+	 * Shared cache of the lazily created lazily deleted specializations of each type. 
+	 */
+	private Map<DomainType, Map<DomainType, AbstractCollectionType>> specializations = new WeakHashMap<DomainType, Map<DomainType, AbstractCollectionType>>();
+	
+	/**
+	 * Shared cache of the lazily created lazily deleted tuples. 
+	 */
+	private Map<String, List<DomainTupleType>> tupleTypeMap = new WeakHashMap<String, List<DomainTupleType>>();
 
 	protected abstract DomainClassifierType createClassifierType(DomainType classType);
 	
 	public abstract DomainEvaluator createEvaluator(EObject contextObject, Map<Object, Object> contextMap);
+
+	@Override
+	protected void expunge() {
+		super.expunge();
+		if (classifiers != null) {
+			for (DomainType classifier : new ArrayList<DomainType>(classifiers.keySet())) {
+				classifiers.remove(classifier);
+			}
+		}		
+		if (specializations != null) {
+			for (DomainType type1 : new ArrayList<DomainType>(specializations.keySet())) {
+				Map<DomainType, AbstractCollectionType> specializations2 = specializations.get(type1);
+				for (DomainType type2 : new ArrayList<DomainType>(specializations2.keySet())) {
+					specializations2.remove(type2);
+				}
+				specializations.remove(type1);
+			}
+		}		
+		if (tupleTypeMap != null) {
+			for (String tupleType : new ArrayList<String>(tupleTypeMap.keySet())) {
+				tupleTypeMap.remove(tupleType);
+			}
+		}		
+	}
 
 	public DomainType getAnyClassifierType() {
 		return OCLstdlibTables.Types._AnyClassifier;
@@ -59,7 +94,7 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 		return OCLstdlibTables.Types._Boolean;
 	}
 
-	public DomainClassifierType getClassifierType(DomainType classType) {
+	public synchronized DomainClassifierType getClassifierType(DomainType classType) {
 		DomainClassifierType classifierType = classifiers.get(classType);
 		if (classifierType == null) {
 			classifierType = createClassifierType(classType);
@@ -72,11 +107,11 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 		return OCLstdlibTables.Types._Collection;
 	}
 
-	public DomainCollectionType getCollectionType(DomainType genericType, DomainType elementType) {
+	public synchronized DomainCollectionType getCollectionType(DomainType genericType, DomainType elementType) {
 		AbstractCollectionType specializedType = null;
 		Map<DomainType, AbstractCollectionType> map = specializations.get(genericType);
 		if (map == null) {
-			map = new HashMap<DomainType, AbstractCollectionType>();
+			map = new WeakHashMap<DomainType, AbstractCollectionType>();
 			specializations.put(genericType, map);
 		}
 		else {
@@ -172,28 +207,30 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 			s.append("\n"); //$NON-NLS-1$
 		}
 		String key = s.toString();
-		List<DomainTupleType> tupleTypes = tupleTypeMap.get(key);
-		if (tupleTypes != null) {
-			for (DomainTupleType tupleType : tupleTypes) {
-				int i = 0;
-				for (; i < parts.size(); i++) {
-					List<? extends DomainTypedElement> ownedAttributes = tupleType.getOwnedAttribute();
-					if (ownedAttributes.get(i).getType() != parts.get(i).getType()) {
-						break;
+		synchronized (this) {
+			List<DomainTupleType> tupleTypes = tupleTypeMap.get(key);
+			if (tupleTypes != null) {
+				for (DomainTupleType tupleType : tupleTypes) {
+					int i = 0;
+					for (; i < parts.size(); i++) {
+						List<? extends DomainTypedElement> ownedAttributes = tupleType.getOwnedAttribute();
+						if (ownedAttributes.get(i).getType() != parts.get(i).getType()) {
+							break;
+						}
+					}
+					if (i >= parts.size()) {
+						return tupleType;
 					}
 				}
-				if (i >= parts.size()) {
-					return tupleType;
-				}
 			}
+			else {
+				tupleTypes = new ArrayList<DomainTupleType>();
+				tupleTypeMap.put(key, tupleTypes);
+			}
+			DomainTupleType tupleType = new AbstractTupleType(this, parts);
+			tupleTypes.add(tupleType);
+			return tupleType;
 		}
-		else {
-			tupleTypes = new ArrayList<DomainTupleType>();
-			tupleTypeMap.put(key, tupleTypes);
-		}
-		DomainTupleType tupleType = new AbstractTupleType(this, parts);
-		tupleTypes.add(tupleType);
-		return tupleType;
 	}
 
 	public DomainType getUnlimitedNaturalType() {
