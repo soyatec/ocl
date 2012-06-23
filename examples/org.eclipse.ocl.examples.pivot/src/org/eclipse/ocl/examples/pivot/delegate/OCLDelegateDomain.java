@@ -16,7 +16,12 @@
  */
 package org.eclipse.ocl.examples.pivot.delegate;
 
+import java.util.List;
+
 import org.eclipse.emf.common.EMFPlugin;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -177,6 +182,24 @@ public class OCLDelegateDomain implements DelegateDomain, MetaModelManagerListen
 
 	public void reset() {
 		if (ocl != null) {
+			for (EClassifier eClassifier : ePackage.getEClassifiers()) {
+				List<Adapter> eClassifierAdapters = eClassifier.eAdapters();
+				for (Adapter adapter : eClassifierAdapters) {
+					if (adapter instanceof DelegateEClassifierAdapter) {
+						eClassifierAdapters.remove(adapter);
+						break;
+					}
+				}
+				if (eClassifier instanceof EClass) {
+					EClass eClass = (EClass) eClassifier;
+					for (EOperation eOperation : eClass.getEOperations()) {
+						((EOperation.Internal) eOperation).setInvocationDelegate(null);
+					}
+					for (EStructuralFeature eStructuralFeature : eClass.getEStructuralFeatures()) {
+						((EStructuralFeature.Internal) eStructuralFeature).setSettingDelegate(null);
+					}
+				}
+			}
 			ocl.dispose();
 			ocl = null;
 		}
