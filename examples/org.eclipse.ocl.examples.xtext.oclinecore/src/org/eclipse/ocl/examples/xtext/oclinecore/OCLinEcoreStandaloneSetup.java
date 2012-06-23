@@ -17,7 +17,9 @@
 
 package org.eclipse.ocl.examples.xtext.oclinecore;
 
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.ocl.examples.xtext.oclinecore.cs2pivot.OCLinEcoreCS2Pivot;
+import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
 import org.eclipse.ocl.examples.xtext.oclinecore.utilities.OCLinEcoreCS2MonikerVisitor;
 
 import com.google.inject.Injector;
@@ -35,11 +37,16 @@ public class OCLinEcoreStandaloneSetup extends OCLinEcoreStandaloneSetupGenerate
 			injector = new OCLinEcoreStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
 	}
+	
+	public static void doTearDown() {
+		injector = null;
+	}
 
 	public static void init() {
 		OCLinEcoreCS2MonikerVisitor.FACTORY.getClass();
 		OCLinEcoreCS2Pivot.FACTORY.getClass();
 //		OCLinEcorePivot2CS.FACTORY.getClass();
+		EPackage.Registry.INSTANCE.put(OCLinEcoreCSTPackage.eNS_URI, OCLinEcoreCSTPackage.eINSTANCE);
 	}
 	
 	/**

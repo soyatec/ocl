@@ -17,9 +17,13 @@
 
 package org.eclipse.ocl.examples.xtext.essentialocl;
 
+import java.util.Map;
+
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.examples.xtext.base.BaseStandaloneSetup;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLCSTPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.scoping.EssentialOCLScoping;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCS2MonikerVisitor;
 
@@ -38,6 +42,10 @@ public class EssentialOCLStandaloneSetup extends EssentialOCLStandaloneSetupGene
 			injector = new EssentialOCLStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
 	}
+	
+	public static void doTearDown() {
+		injector = null;
+	}
 
 	public static void init() {
 		BaseStandaloneSetup.doSetup();
@@ -45,6 +53,8 @@ public class EssentialOCLStandaloneSetup extends EssentialOCLStandaloneSetupGene
 		EssentialOCLCS2MonikerVisitor.FACTORY.getClass();
 //		EssentialOCLCS2Pivot.FACTORY.getClass();
 //		EssentialOCLPivot2CS.FACTORY.getClass();
+		EPackage.Registry.INSTANCE.put(EssentialOCLCSTPackage.eNS_URI, EssentialOCLCSTPackage.eINSTANCE);
+//		EValidator.Registry.INSTANCE.put(EssentialOCLCSTPackage.eINSTANCE, EssentialOCLCSTValidator.INSTANCE);
 	}
 	
 	/**
@@ -59,11 +69,11 @@ public class EssentialOCLStandaloneSetup extends EssentialOCLStandaloneSetupGene
 
 	@Override
 	public Injector createInjector() {
-		if (Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xmi"))
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().remove("xmi");
-		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey(Resource.Factory.Registry.DEFAULT_EXTENSION))
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
+		Map<String, Object> globalExtensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
+		if (globalExtensionToFactoryMap.containsKey("xmi"))
+			globalExtensionToFactoryMap.remove("xmi");
+		if (!globalExtensionToFactoryMap.containsKey(Resource.Factory.Registry.DEFAULT_EXTENSION))
+			globalExtensionToFactoryMap.put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
 		return super.createInjector();
 	}
 

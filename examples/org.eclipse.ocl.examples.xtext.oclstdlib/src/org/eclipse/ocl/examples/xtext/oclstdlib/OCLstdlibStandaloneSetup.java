@@ -17,6 +17,10 @@
 
 package org.eclipse.ocl.examples.xtext.oclstdlib;
 
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTPackage;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.util.OCLstdlibCSTValidator;
 import org.eclipse.ocl.examples.xtext.oclstdlib.scoping.OCLstdlibScoping;
 import org.eclipse.ocl.examples.xtext.oclstdlib.utilities.OCLstdlibCS2MonikerVisitor;
 
@@ -35,11 +39,17 @@ public class OCLstdlibStandaloneSetup extends OCLstdlibStandaloneSetupGenerated
 			injector = new OCLstdlibStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
 	}
+	
+	public static void doTearDown() {
+		injector = null;
+	}
 
 	public static void init() {
 		OCLstdlibScoping.init();
 		OCLstdlibCS2MonikerVisitor.FACTORY.getClass();
 //		OCLstdlibCS2Pivot.FACTORY.getClass();
+		EPackage.Registry.INSTANCE.put(OCLstdlibCSTPackage.eNS_URI, OCLstdlibCSTPackage.eINSTANCE);
+		EValidator.Registry.INSTANCE.put(OCLstdlibCSTPackage.eINSTANCE, OCLstdlibCSTValidator.INSTANCE);
 	}
 	
 	/**

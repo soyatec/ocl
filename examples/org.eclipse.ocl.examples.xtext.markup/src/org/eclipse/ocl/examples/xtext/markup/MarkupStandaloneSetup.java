@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.xtext.markup;
 
+import org.eclipse.emf.ecore.EPackage;
+
 import com.google.inject.Injector;
 
 /**
@@ -32,6 +34,14 @@ public class MarkupStandaloneSetup extends MarkupStandaloneSetupGenerated
 		}
 	}
 	
+	public static void doTearDown() {
+		injector = null;
+	}
+
+	public static void init() {
+		EPackage.Registry.INSTANCE.put(MarkupPackage.eNS_URI, MarkupPackage.eINSTANCE);
+	}
+	
 	/**
 	 * Return the Injector for this plugin.
 	 */
@@ -40,6 +50,12 @@ public class MarkupStandaloneSetup extends MarkupStandaloneSetupGenerated
 			doSetup();
 		}
 		return injector;
+	}
+
+	@Override
+	public Injector createInjector() {
+		init();
+		return super.createInjector();
 	}
 }
 

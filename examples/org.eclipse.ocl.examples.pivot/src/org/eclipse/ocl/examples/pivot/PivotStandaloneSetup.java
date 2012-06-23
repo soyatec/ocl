@@ -18,11 +18,13 @@
 package org.eclipse.ocl.examples.pivot;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.examples.pivot.prettyprint.EssentialOCLPrettyPrintVisitor;
 import org.eclipse.ocl.examples.pivot.scoping.PivotScoping;
+import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.utilities.PivotSaver;
 import org.eclipse.ocl.examples.pivot.utilities.ToStringVisitor;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
@@ -42,6 +44,10 @@ public class PivotStandaloneSetup //implements ISetup
 			injector = new PivotStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
 	}
+	
+	public static void doTearDown() {
+		injector = null;
+	}
 
 	public static void init() {
 		EcorePackage.eINSTANCE.getClass();
@@ -50,6 +56,8 @@ public class PivotStandaloneSetup //implements ISetup
 		EssentialOCLPrettyPrintVisitor.FACTORY.getClass();
 		PivotSaver.FACTORY.getClass();
 		ToStringVisitor.FACTORY.getClass();
+		EPackage.Registry.INSTANCE.put(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
+		EValidator.Registry.INSTANCE.put(PivotPackage.eINSTANCE, PivotValidator.INSTANCE);
 	}
 	
 	/**

@@ -18,10 +18,12 @@
 package org.eclipse.ocl.examples.xtext.base;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.examples.pivot.PivotStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
+import org.eclipse.ocl.examples.xtext.base.baseCST.util.BaseCSTValidator;
 import org.eclipse.ocl.examples.xtext.base.scoping.BaseScoping;
 
 import com.google.inject.Guice;
@@ -39,10 +41,16 @@ public class BaseStandaloneSetup //implements ISetup
 			injector = new BaseStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
 	}
+	
+	public static void doTearDown() {
+		injector = null;
+	}
 
 	public static void init() {
 		PivotStandaloneSetup.doSetup();
 		BaseScoping.init();
+		EPackage.Registry.INSTANCE.put(BaseCSTPackage.eNS_URI, BaseCSTPackage.eINSTANCE);
+		EValidator.Registry.INSTANCE.put(BaseCSTPackage.eINSTANCE, BaseCSTValidator.INSTANCE);
 	}
 	
 	/**
