@@ -23,16 +23,24 @@
  */
 package	org.eclipse.ocl.examples.pivot.model;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.WeakHashMap;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.ocl.examples.pivot.*;
 import org.eclipse.ocl.examples.pivot.Class;
-import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 /**
  * This is the http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib Standard Library
@@ -110,6 +118,22 @@ public class OCLstdlib extends XMIResourceImpl
 	}
 	
 	/**
+	 * The Cloner clones the Standard Library instance whenever this non-default library
+	 * is loaded from the registry of Standard Libraries populated by the standard_library 
+	 * extension point.
+	 */
+	public static class Cloner implements StandardLibraryContribution
+	{
+		public StandardLibraryContribution getContribution() {
+			return this;
+		}
+
+		public Resource getResource() {
+			return OCLstdlib.create(OCLstdlib.STDLIB_URI, "ocl", "ocl", OCLstdlib.STDLIB_URI);
+		}
+	}
+	
+	/**
 	 *	Construct a copy of the OCL Standard Library with specified resource URI,
 	 *  and package name, prefix and namespace URI.
 	 */
@@ -125,6 +149,8 @@ public class OCLstdlib extends XMIResourceImpl
 	public OCLstdlib(String uri, Library library) {
 		super(URI.createURI(uri));
 		getContents().add(library);
+//		System.out.println(Thread.currentThread().getName() + " Create " + debugSimpleName(this));		
+//		liveOCLstdlibs.put(this, null);
 	}
 
 	protected static class Contents extends AbstractContents
@@ -3298,4 +3324,57 @@ public class OCLstdlib extends XMIResourceImpl
 			installComment(op_UniqueCollection_UniqueCollection_T_union, "The set consisting of all elements in oclText[self] and all elements in s.");
 		}
 	}
+	
+/*	private static WeakHashMap<OCLstdlib,Object> liveOCLstdlibs = new WeakHashMap<OCLstdlib,Object>();
+	
+	public static String debugSimpleName(Object object) {
+		if (object == null) {
+			return "null";
+		}
+		else {
+			return object.getClass().getSimpleName() + "@" + Integer.toHexString(object.hashCode());
+		}
+	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("Finalize " + debugSimpleName(this));		
+		super.finalize();
+		Set<OCLstdlib> keySet = liveOCLstdlibs.keySet();
+		if (!keySet.isEmpty()) {
+			StringBuilder s = new StringBuilder();
+			s.append(" live");
+			for (OCLstdlib stdlib : keySet) {
+				s.append(" @" + Integer.toHexString(stdlib.hashCode()));		
+			}
+			System.out.println(s);		
+		}
+	} */
+
+/*	public static void decontain() {
+		Map<EObject, Object> allContents = new WeakHashMap<EObject,Object>(1000);
+		for (OCLstdlib oclstdlib : liveOCLstdlibs.keySet()) {
+			for (TreeIterator<EObject> tit = oclstdlib.getAllContents(); tit.hasNext(); ) {
+				allContents.put(tit.next(), null);
+			}
+		}
+		for (EObject eObject : allContents.keySet()) {
+			for (EReference eReference : eObject.eClass().getEAllReferences()) {
+				boolean isUnsettable = eReference.isUnsettable();
+				boolean isChangeable = eReference.isChangeable();
+				if (isChangeable) {
+//					System.out.println("unset : " + debugSimpleName(eObject) + " " + eReference.getName());
+					try {
+						eObject.eUnset(eReference);
+					}
+					catch (Exception e) {}
+				}
+			}
+		}
+		System.gc();
+		System.runFinalization();
+		for (EObject eObject : allContents.keySet()) {
+			System.out.println("   still live : " + debugSimpleName(eObject));
+		}
+	} */
 }
