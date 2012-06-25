@@ -26,13 +26,14 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -44,7 +45,6 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
-import org.eclipse.ocl.examples.domain.types.AbstractStandardLibrary;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.validation.DomainSubstitutionLabelProvider;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -64,6 +64,7 @@ import org.eclipse.ocl.examples.xtext.markup.MarkupStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcoreStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
 import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
+import org.eclipse.ocl.examples.xtext.oclstdlib.ui.OCLstdlibUiModule;
 import org.eclipse.uml2.uml.profile.l2.L2Package;
 import org.eclipse.uml2.uml.resource.UML302UMLResource;
 import org.eclipse.xtext.XtextPackage;
@@ -220,6 +221,43 @@ public class PivotTestCase extends TestCase
 		return pivotResource;
 	}
 
+	public static void doCompleteOCLSetup() {
+    	if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+			CompleteOCLStandaloneSetup.doSetup();
+    	}
+    	else {
+			CompleteOCLStandaloneSetup.init();
+    	}
+	}
+
+	public static void doEssentialOCLSetup() {
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+			EssentialOCLStandaloneSetup.doSetup();
+		}
+		else {
+			EssentialOCLStandaloneSetup.init();
+		}
+	}
+
+	public static void doOCLinEcoreSetup() {
+    	if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+    		OCLinEcoreStandaloneSetup.doSetup();
+    	}
+    	else {
+    		OCLinEcoreStandaloneSetup.init();
+    	}
+	}
+
+	public static void doOCLstdlibSetup() {
+    	OCLstdlibUiModule.USE_RUNTIME_CONFIGURATION = EMFPlugin.IS_ECLIPSE_RUNNING;
+    	if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+			OCLstdlibStandaloneSetup.doSetup();			// FIXME BUG 382058
+    	}
+    	else {
+			OCLstdlibStandaloneSetup.init();
+    	}
+	}
+
 	protected static Value failOn(String expression, Throwable e) {
 		if (e instanceof DomainException) {
 			Throwable eCause = e.getCause();
@@ -322,21 +360,9 @@ public class PivotTestCase extends TestCase
 	@Override
 	protected void tearDown() throws Exception {
 		if (DEBUG_GC) {
-			OCLstdlib.uninstall();
-			PivotStandaloneSetup.doTearDown();
-			BaseStandaloneSetup.doTearDown();
-			CompleteOCLStandaloneSetup.doTearDown();
-			EssentialOCLStandaloneSetup.doTearDown();
-			MarkupStandaloneSetup.doTearDown();
-			OCLinEcoreStandaloneSetup.doTearDown();
-			OCLstdlibStandaloneSetup.doTearDown();
-			PivotEnvironmentFactory.disposeGlobalRegistryInstance();
+			uninstall();
 			makeCopyOfGlobalState.restoreGlobalState();
 			makeCopyOfGlobalState = null;
-//			System.gc();
-//			System.runFinalization();
-			AbstractStandardLibrary.expungeAll();
-//			OCLstdlib.decontain();
 			System.gc();
 			System.runFinalization();
 //			MetaModelManagerResourceAdapter.INSTANCES.show();
@@ -345,6 +371,18 @@ public class PivotTestCase extends TestCase
 			debugPrintln("==> Finish " + getName());
 		}
 		super.tearDown();
+	}
+
+	protected void uninstall() {
+		OCLstdlib.uninstall();
+		PivotStandaloneSetup.doTearDown();
+		BaseStandaloneSetup.doTearDown();
+		CompleteOCLStandaloneSetup.doTearDown();
+		EssentialOCLStandaloneSetup.doTearDown();
+		MarkupStandaloneSetup.doTearDown();
+		OCLinEcoreStandaloneSetup.doTearDown();
+		OCLstdlibStandaloneSetup.doTearDown();
+		PivotEnvironmentFactory.disposeGlobalRegistryInstance();
 	}
 	
 	public static class GlobalStateMemento

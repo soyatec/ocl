@@ -95,7 +95,6 @@ import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.oclinecore.validation.OCLinEcoreEObjectValidator;
 
 import codegen.company.CodegencompanyFactory;
@@ -316,7 +315,7 @@ public class DelegatesTest extends PivotTestSuite
 	}
 
 	protected void initModelWithErrorsAndOcl() {
-		CompleteOCLStandaloneSetup.doSetup();
+		doCompleteOCLSetup();
 		Resource ecoreResource = initModelWithErrors();
 		configureMetaModelManagerForDelegate(companyPackage);
 		MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);

@@ -31,7 +31,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcoreStandaloneSetup;
 
 /**
  * Tests for OclAny operations.
@@ -71,7 +70,7 @@ public class EvaluateModelOperationsTest extends PivotTestSuite
 	@Override
     protected void setUp() throws Exception {
         super.setUp();
-        OCLinEcoreStandaloneSetup.doSetup();
+		doOCLinEcoreSetup();
     }
 
 	/**

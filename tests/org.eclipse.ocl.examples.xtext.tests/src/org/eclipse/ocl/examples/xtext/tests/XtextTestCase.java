@@ -85,7 +85,6 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.TupleTypeCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
-import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.CollectionTypeCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InfixExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InvocationExpCS;
@@ -94,8 +93,6 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigationOpe
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NestedExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.PrefixExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.TypeNameExpCS;
-import org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcoreStandaloneSetup;
-import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
 
 public class XtextTestCase extends PivotTestCase
 {	
@@ -497,9 +494,9 @@ public class XtextTestCase extends PivotTestCase
     	if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
     		OCL.initialize(null);
     	}
-		CompleteOCLStandaloneSetup.doSetup();
-		OCLinEcoreStandaloneSetup.doSetup();
-		OCLstdlibStandaloneSetup.doSetup();
+		doCompleteOCLSetup();
+		doOCLinEcoreSetup();
+		doOCLstdlibSetup();
 		resourceSet = new ResourceSetImpl();
 		ProjectMap.initializeURIResourceMap(resourceSet);
 		Map<URI, URI> uriMap = resourceSet.getURIConverter().getURIMap();

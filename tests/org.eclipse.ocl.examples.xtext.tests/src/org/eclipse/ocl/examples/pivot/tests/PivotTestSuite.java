@@ -94,7 +94,6 @@ import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironment;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCLStandaloneSetup;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 
@@ -1250,7 +1249,7 @@ public abstract class PivotTestSuite extends PivotTestCase
     protected void setUp() throws Exception {
 		super.setUp();
  		OCLstdlib.install();
-		EssentialOCLStandaloneSetup.doSetup();
+ 		doEssentialOCLSetup();
 		metaModelManager = new MetaModelManager();
 		valueFactory = metaModelManager.getValueFactory();
 		if ((resourceSet != null) && DISPOSE_RESOURCE_SET) {

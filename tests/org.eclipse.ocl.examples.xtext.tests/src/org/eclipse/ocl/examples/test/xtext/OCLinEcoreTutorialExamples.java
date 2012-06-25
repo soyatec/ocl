@@ -50,7 +50,6 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.tests.PivotTestCase;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
-import org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCLStandaloneSetup;
 
 /**
  * Tests for the OCLinEcore tutorial using LPG or Pivot delegate URIs on LPG or Pivot evaluator.
@@ -252,7 +251,7 @@ public class OCLinEcoreTutorialExamples extends PivotTestCase
 		super.setUp();
 		resetRegistries();
 		OCLstdlib.install();
-		EssentialOCLStandaloneSetup.doSetup();
+		doEssentialOCLSetup();
 		resourceSet = new ResourceSetImpl();
 	}
 	

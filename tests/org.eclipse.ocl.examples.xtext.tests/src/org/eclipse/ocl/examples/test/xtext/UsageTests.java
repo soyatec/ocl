@@ -48,7 +48,6 @@ import org.eclipse.emf.mwe.core.ConfigurationException;
 import org.eclipse.ocl.examples.codegen.ecore.OCLGeneratorAdapterFactory;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcoreStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 
@@ -102,7 +101,7 @@ public class UsageTests extends XtextTestCase
 	protected void setUp() throws Exception {
 		super.setUp();
 //		AcceleoNature.class.getName();				// Pull in the plugin for Hudson
-		OCLinEcoreStandaloneSetup.doSetup();
+		doOCLinEcoreSetup();
 		configurePlatformResources();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("pivot", new XMIResourceFactoryImpl()); //$NON-NLS-1$
 	}
@@ -114,6 +113,7 @@ public class UsageTests extends XtextTestCase
 			metaModelManager = null;
 		}
 		StandardLibraryContribution.REGISTRY.remove(MetaModelManager.DEFAULT_OCL_STDLIB_URI);
+		uninstall();
 		super.tearDown();
 	}
 	
