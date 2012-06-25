@@ -41,7 +41,7 @@ public class PivotStandaloneSetup //implements ISetup
 	
 	public static void doSetup() {
 		if (injector == null) {
-			injector = new PivotStandaloneSetup().createInjectorAndDoEMFRegistration();
+			new PivotStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
 	}
 	
@@ -64,9 +64,6 @@ public class PivotStandaloneSetup //implements ISetup
 	 * Return the Injector for this plugin.
 	 */
 	public static final Injector getInjector() {
-		if (injector == null) {
-			doSetup();
-		}
 		return injector;
 	}
 
@@ -76,7 +73,8 @@ public class PivotStandaloneSetup //implements ISetup
 		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey(Resource.Factory.Registry.DEFAULT_EXTENSION))
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
-		return Guice.createInjector(/*new org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCLRuntimeModule()*/);
+		injector = Guice.createInjector(/*new PivotRuntimeModule()*/);
+		return injector;
 	}
 
 	public Injector createInjectorAndDoEMFRegistration() {

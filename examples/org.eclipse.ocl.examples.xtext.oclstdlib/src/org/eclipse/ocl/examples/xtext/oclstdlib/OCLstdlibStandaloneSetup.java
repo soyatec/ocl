@@ -36,7 +36,7 @@ public class OCLstdlibStandaloneSetup extends OCLstdlibStandaloneSetupGenerated
 	
 	public static void doSetup() {
 		if (injector == null) {
-			injector = new OCLstdlibStandaloneSetup().createInjectorAndDoEMFRegistration();
+			new OCLstdlibStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
 	}
 	
@@ -56,16 +56,14 @@ public class OCLstdlibStandaloneSetup extends OCLstdlibStandaloneSetupGenerated
 	 * Return the Injector for this plugin.
 	 */
 	public static final Injector getInjector() {
-		if (injector == null) {
-			doSetup();
-		}
 		return injector;
 	}
 
 	@Override
 	public Injector createInjector() {
 		init();
-		return super.createInjector();
+		injector = super.createInjector();
+		return injector;
 	}
 }
 

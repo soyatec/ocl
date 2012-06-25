@@ -30,7 +30,7 @@ public class MarkupStandaloneSetup extends MarkupStandaloneSetupGenerated
 	
 	public static void doSetup() {
 		if (injector == null) {
-			injector = new MarkupStandaloneSetup().createInjectorAndDoEMFRegistration();
+			new MarkupStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
 	}
 	
@@ -38,24 +38,19 @@ public class MarkupStandaloneSetup extends MarkupStandaloneSetupGenerated
 		injector = null;
 	}
 
+	public static Injector getInjector() {
+		return injector;
+	}
+
 	public static void init() {
 		EPackage.Registry.INSTANCE.put(MarkupPackage.eNS_URI, MarkupPackage.eINSTANCE);
-	}
-	
-	/**
-	 * Return the Injector for this plugin.
-	 */
-	public static final Injector getInjector() {
-		if (injector == null) {
-			doSetup();
-		}
-		return injector;
 	}
 
 	@Override
 	public Injector createInjector() {
 		init();
-		return super.createInjector();
+		injector = super.createInjector();
+		return injector;
 	}
 }
 

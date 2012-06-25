@@ -34,7 +34,7 @@ public class CompleteOCLStandaloneSetup extends CompleteOCLStandaloneSetupGenera
 	
 	public static void doSetup() {
 		if (injector == null) {
-			injector = new CompleteOCLStandaloneSetup().createInjectorAndDoEMFRegistration();
+			new CompleteOCLStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
 	}
 	
@@ -54,16 +54,14 @@ public class CompleteOCLStandaloneSetup extends CompleteOCLStandaloneSetupGenera
 	 * Return the Injector for this plugin.
 	 */
 	public static final Injector getInjector() {
-		if (injector == null) {
-			doSetup();
-		}
 		return injector;
 	}
 
 	@Override
 	public Injector createInjector() {
 		init();
-		return super.createInjector();
+		injector = super.createInjector();
+		return injector;
 	}
 }
 

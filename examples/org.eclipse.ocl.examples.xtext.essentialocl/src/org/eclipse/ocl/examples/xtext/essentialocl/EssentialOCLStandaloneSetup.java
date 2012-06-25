@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.xtext.essentialocl;
 
 import java.util.Map;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
@@ -38,8 +39,9 @@ public class EssentialOCLStandaloneSetup extends EssentialOCLStandaloneSetupGene
 	private static Injector injector = null;
 	
 	public static void doSetup() {
+		assert !EMFPlugin.IS_ECLIPSE_RUNNING;			// Enforces Bug 382058 fix
 		if (injector == null) {
-			injector = new EssentialOCLStandaloneSetup().createInjectorAndDoEMFRegistration();
+			new EssentialOCLStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
 	}
 	
@@ -61,9 +63,6 @@ public class EssentialOCLStandaloneSetup extends EssentialOCLStandaloneSetupGene
 	 * Return the Injector for this plugin.
 	 */
 	public static final Injector getInjector() {
-		if (injector == null) {
-			doSetup();
-		}
 		return injector;
 	}
 
@@ -74,7 +73,8 @@ public class EssentialOCLStandaloneSetup extends EssentialOCLStandaloneSetupGene
 			globalExtensionToFactoryMap.remove("xmi");
 		if (!globalExtensionToFactoryMap.containsKey(Resource.Factory.Registry.DEFAULT_EXTENSION))
 			globalExtensionToFactoryMap.put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
-		return super.createInjector();
+		injector = super.createInjector();
+		return injector;
 	}
 
 	@Override
