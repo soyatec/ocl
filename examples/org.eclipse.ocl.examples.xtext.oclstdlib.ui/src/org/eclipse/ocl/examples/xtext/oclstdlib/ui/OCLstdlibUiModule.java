@@ -21,9 +21,15 @@ import com.google.common.collect.Multimap;
 public class OCLstdlibUiModule extends AbstractOCLstdlibUiModule
 {
 	public static final String EDITOR_ID = OCLstdlibActivator.ORG_ECLIPSE_OCL_EXAMPLES_XTEXT_OCLSTDLIB_OCLSTDLIB;
-
+	
+	public static boolean USE_RUNTIME_CONFIGURATION = false;		// Set true for JUnit plugin tests
+	
 	public OCLstdlibUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
+	}
+
+	public Class<? extends org.eclipse.xtext.validation.CompositeEValidator> bindCompositeEValidator() {
+		return org.eclipse.xtext.validation.CompositeEValidator.class;
 	}
 	
 //	@SuppressWarnings("restriction")
@@ -39,6 +45,28 @@ public class OCLstdlibUiModule extends AbstractOCLstdlibUiModule
 	@Override
 	public Class<? extends IJavaProjectProvider> bindIJavaProjectProvider() {
 		return NonXtextResourceSetBasedProjectProvider.class;
+	}
+
+	@Override
+	@SuppressWarnings("restriction")
+	public Class<? extends org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory> bindIJvmTypeProvider$Factory() {
+		if (USE_RUNTIME_CONFIGURATION) {
+			return org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory.class;
+		}
+		else {
+			return super.bindIJvmTypeProvider$Factory();
+		}
+	}
+
+	@Override
+	@SuppressWarnings("restriction")
+	public Class<? extends org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider> bindAbstractTypeScopeProvider() {
+		if (USE_RUNTIME_CONFIGURATION) {
+			return org.eclipse.xtext.common.types.xtext.ClasspathBasedTypeScopeProvider.class;
+		}
+		else {
+			return super.bindAbstractTypeScopeProvider();
+		}
 	}
 
 	public static class Bug382088Workaround extends ParserBasedContentAssistContextFactory.StatefulFactory
