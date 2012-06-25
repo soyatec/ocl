@@ -160,6 +160,12 @@ public class EditorTests extends XtextTestCase
 		assertTrue(documentText.contains("inv CollectNestedTypeIsBag: name = 'collectNested' implies type.oclIsKindOf(BagType)"));
 	}	
 	
+	public void testEditor_OpenCompleteOCLEditor4Fruit_OCL() throws Exception {
+		URI uri = URI.createPlatformPluginURI("org.eclipse.ocl.examples.xtext.tests/src/org/eclipse/ocl/examples/test/xtext/models/Fruit.ocl", true);
+		String documentText = doTestEditor(CompleteOCLUiModule.EDITOR_ID, uri);
+		assertTrue(documentText.contains("body: Color::red"));
+	}	
+	
 	public void testEditor_OpenEssentialOCLEditor() throws Exception {
 		doTestEditor(EssentialOCLUiModule.EDITOR_ID, "test.essentialocl", "1 + 4");
 	}	
