@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -38,45 +39,21 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 	/**
 	 * Shared cache of the lazily created lazily deleted Classifier types of each type. 
 	 */
-	private Map<DomainType, DomainClassifierType> classifiers = new WeakHashMap<DomainType, DomainClassifierType>();
+	private Map<DomainType, WeakReference<DomainClassifierType>> classifiers = new WeakHashMap<DomainType, WeakReference<DomainClassifierType>>();
 	
 	/**
 	 * Shared cache of the lazily created lazily deleted specializations of each type. 
 	 */
-	private Map<DomainType, Map<DomainType, AbstractCollectionType>> specializations = new WeakHashMap<DomainType, Map<DomainType, AbstractCollectionType>>();
+	private Map<DomainType, Map<DomainType, WeakReference<AbstractCollectionType>>> specializations = new WeakHashMap<DomainType, Map<DomainType, WeakReference<AbstractCollectionType>>>();
 	
 	/**
 	 * Shared cache of the lazily created lazily deleted tuples. 
 	 */
-	private Map<String, List<DomainTupleType>> tupleTypeMap = new WeakHashMap<String, List<DomainTupleType>>();
+	private Map<String, List<WeakReference<DomainTupleType>>> tupleTypeMap = new WeakHashMap<String, List<WeakReference<DomainTupleType>>>();
 
 	protected abstract DomainClassifierType createClassifierType(DomainType classType);
 	
 	public abstract DomainEvaluator createEvaluator(EObject contextObject, Map<Object, Object> contextMap);
-
-	@Override
-	protected void expunge() {
-		super.expunge();
-		if (classifiers != null) {
-			for (DomainType classifier : new ArrayList<DomainType>(classifiers.keySet())) {
-				classifiers.remove(classifier);
-			}
-		}		
-		if (specializations != null) {
-			for (DomainType type1 : new ArrayList<DomainType>(specializations.keySet())) {
-				Map<DomainType, AbstractCollectionType> specializations2 = specializations.get(type1);
-				for (DomainType type2 : new ArrayList<DomainType>(specializations2.keySet())) {
-					specializations2.remove(type2);
-				}
-				specializations.remove(type1);
-			}
-		}		
-		if (tupleTypeMap != null) {
-			for (String tupleType : new ArrayList<String>(tupleTypeMap.keySet())) {
-				tupleTypeMap.remove(tupleType);
-			}
-		}		
-	}
 
 	public DomainType getAnyClassifierType() {
 		return OCLstdlibTables.Types._AnyClassifier;
@@ -95,10 +72,10 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 	}
 
 	public synchronized DomainClassifierType getClassifierType(DomainType classType) {
-		DomainClassifierType classifierType = classifiers.get(classType);
+		DomainClassifierType classifierType = weakGet(classifiers, classType);
 		if (classifierType == null) {
 			classifierType = createClassifierType(classType);
-			classifiers.put(classType, classifierType);
+			classifiers.put(classType, new WeakReference<DomainClassifierType>(classifierType));
 		}
 		return classifierType;
 	}
@@ -109,17 +86,17 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 
 	public synchronized DomainCollectionType getCollectionType(DomainType genericType, DomainType elementType) {
 		AbstractCollectionType specializedType = null;
-		Map<DomainType, AbstractCollectionType> map = specializations.get(genericType);
+		Map<DomainType, WeakReference<AbstractCollectionType>> map = specializations.get(genericType);
 		if (map == null) {
-			map = new WeakHashMap<DomainType, AbstractCollectionType>();
+			map = new WeakHashMap<DomainType, WeakReference<AbstractCollectionType>>();
 			specializations.put(genericType, map);
 		}
 		else {
-			specializedType = map.get(elementType);
+			specializedType = weakGet(map, elementType);
 		}
 		if (specializedType == null) {
 			specializedType = new AbstractCollectionType(this, genericType.getName(), genericType, elementType);
-			map.put(elementType, specializedType);
+			map.put(elementType, new WeakReference<AbstractCollectionType>(specializedType));
 		}
 		return specializedType;
 	}
@@ -208,27 +185,34 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 		}
 		String key = s.toString();
 		synchronized (this) {
-			List<DomainTupleType> tupleTypes = tupleTypeMap.get(key);
+			List<WeakReference<DomainTupleType>> tupleTypes = tupleTypeMap.get(key);
 			if (tupleTypes != null) {
-				for (DomainTupleType tupleType : tupleTypes) {
-					int i = 0;
-					for (; i < parts.size(); i++) {
-						List<? extends DomainTypedElement> ownedAttributes = tupleType.getOwnedAttribute();
-						if (ownedAttributes.get(i).getType() != parts.get(i).getType()) {
-							break;
-						}
+				for (int j = tupleTypes.size(); --j >= 0; ) {
+					WeakReference<DomainTupleType> tupleTypeRef = tupleTypes.get(j);
+					DomainTupleType tupleType = tupleTypeRef.get();
+					if (tupleType == null) {
+						tupleTypes.remove(j);		// Trim stale list entry.
 					}
-					if (i >= parts.size()) {
-						return tupleType;
+					else {
+						int i = 0;
+						for (; i < parts.size(); i++) {
+							List<? extends DomainTypedElement> ownedAttributes = tupleType.getOwnedAttribute();
+							if (ownedAttributes.get(i).getType() != parts.get(i).getType()) {
+								break;
+							}
+						}
+						if (i >= parts.size()) {
+							return tupleType;
+						}
 					}
 				}
 			}
 			else {
-				tupleTypes = new ArrayList<DomainTupleType>();
+				tupleTypes = new ArrayList<WeakReference<DomainTupleType>>();
 				tupleTypeMap.put(key, tupleTypes);
 			}
 			DomainTupleType tupleType = new AbstractTupleType(this, parts);
-			tupleTypes.add(tupleType);
+			tupleTypes.add(new WeakReference<DomainTupleType>(tupleType));
 			return tupleType;
 		}
 	}

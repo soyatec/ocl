@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.domain.types;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +41,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 	 * required part definitions to construct a tuple type in the lightweight execution environment. This cache may remain
 	 * unused when using the full pivot environment.
 	 */
-	private Map<String, Map<DomainType, DomainTypedElement>> tupleParts = null;		// Lazily created
+	private Map<String, Map<DomainType, WeakReference<DomainTypedElement>>> tupleParts = null;		// Lazily created
 		
 /*	protected AbstractStandardLibrary() {
 		System.out.println(Thread.currentThread().getName() + " Create " + debugSimpleName(this));		
@@ -92,14 +93,6 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 	public void dispose() {
 		tupleParts = null;	
 	}
-
-	protected void expunge() {
-		if (tupleParts != null) {
-			for (String tuplePart : new ArrayList<String>(tupleParts.keySet())) {
-				tupleParts.remove(tuplePart);
-			}
-		}		
-	}
 	
 	public DomainCollectionType getCollectionType(DomainCollectionType containerType, DomainType elementType) {
 		boolean isOrdered = containerType.isOrdered();
@@ -132,17 +125,17 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 
 	public synchronized DomainTypedElement getTuplePart(String name, DomainType type) {
 		if (tupleParts == null) {
-			tupleParts = new WeakHashMap<String, Map<DomainType, DomainTypedElement>>();
+			tupleParts = new WeakHashMap<String, Map<DomainType, WeakReference<DomainTypedElement>>>();
 		}
-		Map<DomainType, DomainTypedElement> typeMap = tupleParts.get(name);
+		Map<DomainType, WeakReference<DomainTypedElement>> typeMap = tupleParts.get(name);
 		if (typeMap == null) {
-			typeMap = new WeakHashMap<DomainType, DomainTypedElement>();
+			typeMap = new WeakHashMap<DomainType, WeakReference<DomainTypedElement>>();
 			tupleParts.put(name, typeMap);
 		}
-		DomainTypedElement tupleProperty = typeMap.get(type);
+		DomainTypedElement tupleProperty = weakGet(typeMap, type);
 		if (tupleProperty == null) {
 			tupleProperty = new AbstractTuplePart(type, name);
-			typeMap.put(type, tupleProperty);
+			typeMap.put(type, new WeakReference<DomainTypedElement>(tupleProperty));
 		}
 		return tupleProperty;
 	}
@@ -219,6 +212,22 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		}
 		return true;
 	}
+
+	/**
+	 * Return the map.get(key).get() entry if there is one or null if not, removing any stale
+	 * entry that may be encountered.
+	 */
+	protected <K, V> V weakGet(Map<K, WeakReference<V>> map, K key) {
+		WeakReference<V> ref = map.get(key);
+		if (ref == null) {
+			return null;
+		}
+		V value = ref.get();
+		if (value == null) {
+			map.remove(key);
+		}
+		return value;
+	}
 	
 /*	private static WeakHashMap<AbstractStandardLibrary,Object> liveAbstractStandardLibraries = new WeakHashMap<AbstractStandardLibrary,Object>();
 	
@@ -229,18 +238,9 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		else {
 			return object.getClass().getSimpleName() + "@" + Integer.toHexString(object.hashCode());
 		}
-	} */
-	
-	public static void expungeAll() {
-/*		synchronized(liveAbstractStandardLibraries) {
-			liveAbstractStandardLibraries.size();
-			for (AbstractStandardLibrary key : liveAbstractStandardLibraries.keySet()) {
-				key.expunge();
-			}
-		} */
 	}
 
-/*	@Override
+	@Override
 	protected void finalize() throws Throwable {
 //		System.out.println("Finalize " + debugSimpleName(this));		
 		super.finalize();
