@@ -58,6 +58,10 @@ import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 @SuppressWarnings("nls")
 public class PivotDocumentationExamples extends XtextTestCase
 {
+	public void debugPrintf(String format, Object... args) {
+//		System.out.printf(format,  args);
+	}
+	
 	public InputStream getInputStream(String fileName) throws MalformedURLException, IOException {
 		URI uri = getTestModelURI(fileName);
 		URL url = new URL(uri.toString());
@@ -152,7 +156,7 @@ public class PivotDocumentationExamples extends XtextTestCase
 		        @SuppressWarnings("unchecked")
 		        Set<BookCategory> categories = (Set<BookCategory>) queryEval.evaluate(next);
 		        
-		        System.out.printf("%s: %s%n", next.getName(), categories);
+		        debugPrintf("%s: %s%n\n", next.getName(), categories);
 		    }
 		}
 
@@ -162,7 +166,7 @@ public class PivotDocumentationExamples extends XtextTestCase
 		Library lib = getLibrary();  // hypothetical source of a library
 
 		// check whether it satisfies the constraint
-		System.out.printf("%s valid: %b", lib.getName(), ocl.check(lib, invariant));
+		debugPrintf("%s valid: %b\n", lib.getName(), ocl.check(lib, invariant));
 
 		// MoreSuccinct
 
@@ -171,7 +175,7 @@ public class PivotDocumentationExamples extends XtextTestCase
 		    @SuppressWarnings("unchecked")
 		    Set<BookCategory> categories = (Set<BookCategory>) queryEval.evaluate(next);
 		    
-		    System.out.printf("%s: %s%n", next.getName(), categories);
+		    debugPrintf("%s: %s%n\n", next.getName(), categories);
 		}
 
 		ocl.dispose();
@@ -209,7 +213,7 @@ public class PivotDocumentationExamples extends XtextTestCase
 						String name = constraint.getName();
 						if (name != null) {
 							constraintMap.put(name, expressionInOCL);
-					        System.out.printf("%s: %s%n", name,
+							debugPrintf("%s: %s%n\n", name,
 					        	expressionInOCL.getBodyExpression());
 						}
 					}
@@ -231,11 +235,11 @@ public class PivotDocumentationExamples extends XtextTestCase
 
 		Value bookValue = ocl.evaluate(library, query);
 		Book book = (Book) bookValue.asObject();
-		System.out.printf("Got book: %s%n", book);
+		debugPrintf("Got book: %s%n\n", book);
 
 		// use the unique_title constraint to validate the book
 		boolean isValid = ocl.check(book, constraintMap.get("unique_title"));
-		System.out.printf("Validate book: %b%n", isValid);	
+		debugPrintf("Validate book: %b%n\n", isValid);	
 
 		ocl.dispose();
 	}
