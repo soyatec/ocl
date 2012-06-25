@@ -188,7 +188,7 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 		public boolean loadCSResource(ResourceSet resourceSet,
 				MetaModelManager metaModelManager, URI oclURI) {
 			BaseResource xtextResource = null;
-			CompleteOCLStandaloneSetup.doSetup();
+			CompleteOCLStandaloneSetup.init();
 			try {
 				xtextResource = (BaseResource) resourceSet.getResource(oclURI, true);
 			}
