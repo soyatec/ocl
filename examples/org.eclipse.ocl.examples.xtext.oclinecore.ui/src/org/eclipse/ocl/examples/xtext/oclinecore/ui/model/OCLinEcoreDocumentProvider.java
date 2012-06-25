@@ -214,15 +214,14 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider
 			if (isXML) {
 				ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
 				URI uri = uriMap.get(document);
-				Resource xmiResource;
-//				if (resourceSet.getResources().isEmpty()) {
-//					xmiResource = resourceSet.createResource(uri, null);					
-//				}
-//				else {
+				Resource xmiResource = resourceSet.getResource(uri, false);
+				if ((xmiResource == null) || (xmiResource.getResourceSet() == null)) {	// Skip built-ins and try again as a file read.
+					xmiResource = resourceSet.createResource(uri, null);					
+					xmiResource.load(inputStream, null);
+				}
+				else {
 					xmiResource = resourceSet.getResource(uri, true);
-//					xmiResource.unload();
-//				}
-//				xmiResource.load(inputStream, null);
+				}
 				List<Resource.Diagnostic> allErrors = null;
 				for (Resource resource : resourceSet.getResources()) {
 					List<Resource.Diagnostic> errors = resource.getErrors();

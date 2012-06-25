@@ -194,6 +194,6 @@ public class EditorTests extends XtextTestCase
 		URI uri = URI.createPlatformPluginURI(PivotConstants.PIVOT_ECORE, true);
 		String documentText = doTestEditor(OCLinEcoreUiModule.EDITOR_ID, uri);
 		assertTrue(documentText.contains("abstract class Visitable : 'org.eclipse.ocl.examples.pivot.util.Visitable' { interface };"));
-		assertTrue(documentText.contains("reference Type::ownedAttribute"));							// Bug 363141 EAnnotation reference
+		assertTrue(documentText.contains("reference Type::ownedAttribute"));							// Tests Bug 363141 EAnnotation reference
 	}	
 }
