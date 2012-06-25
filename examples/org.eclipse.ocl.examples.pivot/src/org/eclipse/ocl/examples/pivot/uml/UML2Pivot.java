@@ -90,8 +90,8 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		}
 
 		public URI getPackageURI(EObject eObject) {
-			if (eObject instanceof EPackage) {
-				String uri = ((EPackage)eObject).getNsURI();
+			if (eObject instanceof org.eclipse.uml2.uml.Package) {
+				String uri = ((org.eclipse.uml2.uml.Package)eObject).getURI();
 				if (uri != null) {
 					return URI.createURI(uri);
 				}
