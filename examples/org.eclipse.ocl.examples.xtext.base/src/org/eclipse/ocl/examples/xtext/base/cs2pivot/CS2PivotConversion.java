@@ -691,20 +691,24 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		converter.installPivotUsage(csElement, newPivotElement);
 	}
 
-	protected void installRootContents(Resource csResource) {
+	protected void installRootContents(Resource csResource) {	// FIXME This code is no longer needed; delete once QVTd checked
 		for (EObject eObject : csResource.getContents()) {
 			if (eObject instanceof Pivotable) {
 				Element pivotElement = ((Pivotable)eObject).getPivot();
 				if (pivotElement != null) {
 					Resource pivotResource = pivotElement.eResource();
 					if (pivotResource == null) {
-						pivotResource = converter.getPivotResource(csResource);
-						if (pivotResource != null) {
-							pivotResource.getContents().add(pivotElement);
-						}
+						installRootElement(csResource, pivotElement);
 					}
 				}
 			}
+		}
+	}
+
+	public void installRootElement(Resource csResource, Element pivotElement) {
+		Resource pivotResource = converter.getPivotResource(csResource);
+		if (pivotResource != null) {
+			pivotResource.getContents().add(pivotElement);
 		}
 	}
 

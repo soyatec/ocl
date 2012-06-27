@@ -65,8 +65,9 @@ public class OCLstdlibContainmentVisitor extends AbstractOCLstdlibContainmentVis
 
 	@Override
 	public Continuation<?> visitLibRootPackageCS(LibRootPackageCS csElement) {
-		@SuppressWarnings("unused")
-		Library pivotElement = refreshPackage(Library.class, PivotPackage.Literals.LIBRARY, csElement);
+		Library pivotElement = refreshPackage(Library.class, PivotPackage.Literals.LIBRARY, csElement);		
+		metaModelManager.installLibrary(pivotElement);
+		context.installRootElement(csElement.eResource(), pivotElement);		// Ensure containment viable for imported library type references
 		importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
 		return null;
 	}

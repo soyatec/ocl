@@ -884,7 +884,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 			parentPackage.getNestedPackage().add(aPackage);
 		}
 		else {
-			metaModelManager.installPackage(aPackage);
+			metaModelManager.addPackage(aPackage);
 		}
 		return aPackage;
 	}

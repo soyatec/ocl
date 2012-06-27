@@ -2115,29 +2115,22 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return valueFactory;
 	}
 
-	protected void installLibrary(Library pivotLibrary) {
+	public void installLibrary(Library pivotLibrary) {
 		String uri = pivotLibrary.getNsURI();
 		if (pivotLibraries.isEmpty()) {
 			if (uri == null) {
 				throw new IllegalLibraryException(OCLMessages.MissingLibraryURI_ERROR_);
 			}
 			setDefaultStandardLibraryURI(uri);
-			pivotLibraries.add(pivotLibrary);
+			loadLibraryPackage(pivotLibrary);
 		}
 		else if (!pivotLibraries.contains(pivotLibrary)) {
 			String libraryURI = getDefaultStandardLibraryURI();
 			if ((uri != null) && !uri.equals(libraryURI)) {
 				throw new IllegalLibraryException(NLS.bind(OCLMessages.ImportedLibraryURI_ERROR_, uri , libraryURI));
 			}
-			pivotLibraries.add(pivotLibrary);
+			loadLibraryPackage(pivotLibrary);
 		}
-	}
-
-	public void installPackage(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
-		if (pivotPackage instanceof Library) {
-			installLibrary((Library)pivotPackage);
-		}
-		addPackage(pivotPackage);
 	}
 	
 	/**
@@ -2204,9 +2197,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	public void installResource(Resource pivotResource) {
 		for (EObject eObject : pivotResource.getContents()) {
 			if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
-				org.eclipse.ocl.examples.pivot.Package pivotPackage = (org.eclipse.ocl.examples.pivot.Package)eObject;
-				installPackage(pivotPackage);
-//				installPackageContent(pivotPackage);
+				addPackage((org.eclipse.ocl.examples.pivot.Package)eObject);
 			}
 		}
 	}
@@ -2319,25 +2310,28 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		assert (pivotLibraryResource == null) || (pivotLibraryResource == pivotResource);
 		if (pivotResource != null) {
 			pivotLibraryResource = pivotResource;
+			for (EObject eObject : pivotResource.getContents()) {
+				if (eObject instanceof Library) {
+					installLibrary((Library)eObject);
+				}
+			}
 			installResource(pivotResource);
 		}
 		for (org.eclipse.ocl.examples.pivot.Package rootPackage : computePivotRootPackages()) {
 			if (rootPackage instanceof Library) {
-				if (!pivotLibraries.contains(rootPackage)) {
-					pivotLibraries.add((Library) rootPackage);
-				}
-				loadLibraryPackage(rootPackage);
+				loadLibraryPackage((Library) rootPackage);
 			}
 		}
 	}
 
-	protected void loadLibraryPackage(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
-		for (org.eclipse.ocl.examples.pivot.Package nestedPackage : pivotPackage.getNestedPackage()) {
-			loadLibraryPackage(nestedPackage);
+	protected void loadLibraryPackage(Library pivotLibrary) {
+		if (!pivotLibraries.contains(pivotLibrary)) {
+			pivotLibraries.add(pivotLibrary);
 		}
-		for (Type type : pivotPackage.getOwnedType()) {
-			if (PivotUtil.isLibraryType(type)) {
-				defineLibraryType(type);
+		for (Type type : pivotLibrary.getOwnedType()) {
+			Type primaryType = getPrimaryType(type);
+			if ((type == primaryType) && PivotUtil.isLibraryType(type)) {
+				defineLibraryType(primaryType);
 			}
 		}
 	}
