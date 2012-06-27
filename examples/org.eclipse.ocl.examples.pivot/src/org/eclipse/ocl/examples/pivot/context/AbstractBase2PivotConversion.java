@@ -222,14 +222,15 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 //		if (type == null) {
 //			type = metaModelManager.getOclInvalidType();	// FIXME unresolved type with explanation
 //		}
-		if (type != pivotElement.getType()) {
-			pivotElement.setType(type);
-			if (metaModelManager.isUnderspecified(type)) {
+		Type primaryType = metaModelManager.getPrimaryType(type);
+		if (primaryType != pivotElement.getType()) {
+			pivotElement.setType(primaryType);
+			if (metaModelManager.isUnderspecified(primaryType)) {
 				addUnderspecifiedTypedElement(pivotElement);
 			}
 		}
-		if (type != null) {
-			PivotUtil.debugWellContainedness(type);
+		if (primaryType != null) {
+			PivotUtil.debugWellContainedness(primaryType);
 		}
 	}
 

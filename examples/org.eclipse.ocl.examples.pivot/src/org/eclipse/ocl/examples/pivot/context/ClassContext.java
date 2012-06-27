@@ -29,7 +29,7 @@ public class ClassContext extends AbstractParserContext
 	
 	public ClassContext(MetaModelManager metaModelManager, URI uri, Type classContext) {
 		super(metaModelManager, uri);
-		this.classContext = classContext;
+		this.classContext = metaModelManager.getPrimaryType(classContext);
 	}
 
 	@Override

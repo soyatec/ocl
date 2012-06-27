@@ -277,15 +277,10 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 	protected Type getSourceElementType(InvocationExpCS csNavigatingExp, OCLExpression source) {
 		Type sourceType = source.getType();
 		boolean isCollectionNavigation = PivotConstants.COLLECTION_NAVIGATION_OPERATOR.equals(csNavigatingExp.getParent().getName());
-		if (!isCollectionNavigation) {
-			return sourceType;
+		if (isCollectionNavigation && (sourceType instanceof CollectionType)) {
+			sourceType = ((CollectionType)sourceType).getElementType();
 		}
-		if (sourceType instanceof CollectionType) {
-			return ((CollectionType)sourceType).getElementType();
-		}
-		else {
-			return sourceType;
-		}
+		return metaModelManager.getPrimaryType(sourceType);
 	}
 
 	protected EnumLiteralExp resolveEnumLiteral(ExpCS csExp, EnumerationLiteral enumerationLiteral) {
