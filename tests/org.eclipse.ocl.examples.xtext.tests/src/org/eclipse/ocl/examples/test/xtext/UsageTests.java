@@ -147,12 +147,17 @@ public class UsageTests extends XtextTestCase
 	} */
 
 	public void testBug370824() throws Exception {
+		String testProjectName;
 		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+			testProjectName = "Bug370824";
 	        IWorkspace workspace = ResourcesPlugin.getWorkspace();
-	        IProject project = workspace.getRoot().getProject("org.eclipse.ocl.examples.xtext.tests");
+	        IProject project = workspace.getRoot().getProject(testProjectName);
 	        if (!project.exists()) {
 	        	project.create(null);
 	        }
+		}
+		else {
+			testProjectName = "org.eclipse.ocl.examples.xtext.tests";
 		}
 		metaModelManager = new MetaModelManager();
 		String oclinecoreFile =
@@ -168,7 +173,7 @@ public class UsageTests extends XtextTestCase
 		String genmodelFile =
 				"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
 				"<genmodel:GenModel xmi:version=\"2.0\" xmlns:xmi=\"http://www.omg.org/XMI\" xmlns:ecore=\"http://www.eclipse.org/emf/2002/Ecore\"\n" +
-					"    xmlns:genmodel=\"http://www.eclipse.org/emf/2002/GenModel\" modelDirectory=\"/org.eclipse.ocl.examples.xtext.tests/src-gen\" modelPluginID=\"org.eclipse.ocl.examples.xtext.tests.bug370824\"\n" +
+					"    xmlns:genmodel=\"http://www.eclipse.org/emf/2002/GenModel\" modelDirectory=\"/" + testProjectName + "/src-gen\" modelPluginID=\"Bug370824.bug370824\"\n" +
 						"    modelName=\"Bug370824\" importerID=\"org.eclipse.emf.importer.ecore\" complianceLevel=\"5.0\"\n" +
 						"    copyrightFields=\"false\">\n" +
 						"  <foreignModel>Bug370824.ecore</foreignModel>\n" +
