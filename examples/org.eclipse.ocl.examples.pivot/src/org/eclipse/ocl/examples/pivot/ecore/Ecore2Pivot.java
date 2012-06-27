@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.pivot.ecore;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -27,11 +28,14 @@ import java.util.Set;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -41,7 +45,9 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIException;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -91,7 +97,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 				if (eObject == null) {
 					return null;
 				}
-				return conversion.createMap.get(eObject);
+				return conversion.newCreateMap.get(eObject);
 			}
 		}
 	}
@@ -187,18 +193,23 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		if (pivotRoot == null) {
 			return null;
 		}
-		return conversion.createMap.get(eObject);
+		return conversion.newCreateMap.get(eObject);
 	}
 
 	/**
-	 * Mapping of source Ecore objects to their resulting pivot element.
+	 * Mapping of source Ecore objects to their resulting pivot element in a previous conversion.
 	 */
-	private Map<EObject, Element> createMap = new HashMap<EObject, Element>();
+	private Map<String, Element> oldIdMap = null;
+
+	/**
+	 * Mapping of source Ecore objects to their resulting pivot element in the current conversion.
+	 */
+	private Map<EObject, Element> newCreateMap = null;
 
 	/**
 	 * Set of all Ecore objects requiring further work during the reference pass.
 	 */
-	private Set<EObject> referencers = new HashSet<EObject>();
+	private Set<EObject> referencers = null;
 	
 	/**
 	 * Set of all converters used during session.
@@ -208,7 +219,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	/**
 	 * List of all generic types.
 	 */
-	private List<EGenericType> genericTypes = new ArrayList<EGenericType>();
+	private List<EGenericType> genericTypes = null;
 	
 	private List<Resource.Diagnostic> errors = null;
 	
@@ -227,7 +238,13 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	}
 	
 	protected void addCreated(EObject eObject, Element pivotElement) {
-		createMap.put(eObject, pivotElement);
+		Element oldElement = newCreateMap.put(eObject, pivotElement);
+//		if (eObject instanceof ENamedElement) {
+//			assert (oldElement == null) || (oldElement == pivotElement) || ((oldElement instanceof DataType) && (((DataType)oldElement).getBehavioralType() == pivotElement));
+//		}
+//		else {
+//			assert oldElement == null;
+//		}
 	}
 
 	@Override
@@ -240,13 +257,22 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		if (pivotElement instanceof PivotObjectImpl) {
 			((PivotObjectImpl)pivotElement).setTarget(eObject);
 		}
-		if (eObject instanceof EClassifier) {
+		Element pivotElement1 = pivotElement;
+		if (eObject instanceof EDataType) {
 			Type pivotType = getEcore2PivotMap().get(eObject);
 			if (pivotType != null) {  		// If eObject is a known synonym such as EString
-				pivotElement = pivotType;	// remap to the library type
+				pivotElement1 = pivotType;	// remap to the library type
 			}
 		}
-		addCreated(eObject, pivotElement);
+//		Element pivotElement2 = pivotElement;
+//		if (pivotElement instanceof DataType) {
+//			Type behavioralType = ((DataType)pivotElement).getBehavioralType();
+//			if (behavioralType != null) {
+//				pivotElement2 = behavioralType;
+//			}
+//		}
+//		assert pivotElement1 == pivotElement2;
+		addCreated(eObject, pivotElement1);
 	}
 
 	protected URI createPivotURI() {
@@ -286,7 +312,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		if (pivotRoot == null) {
 			getPivotRoot();
 		}
-		Element element = createMap.get(eObject);
+		Element element = newCreateMap.get(eObject);
 		if (element == null) {
 			return null;
 		}
@@ -302,19 +328,19 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		if (pivotRoot == null) {
 			getPivotRoot();
 		}
-		Element element = createMap.get(eObject);
+		Element element = newCreateMap.get(eObject);
 		if (element == null) {
 			Resource resource = eObject.eResource();
 			if ((resource != ecoreResource) && (resource != null)) {
 				Ecore2Pivot converter = getAdapter(resource, metaModelManager);
 				if (allConverters.add(converter)) {
 					converter.getPivotRoot();
-					for (Map.Entry<EObject, Element> entry : converter.createMap.entrySet()) {
-						createMap.put(entry.getKey(), entry.getValue());
+					for (Map.Entry<EObject, Element> entry : converter.newCreateMap.entrySet()) {
+						newCreateMap.put(entry.getKey(), entry.getValue());
 					}
 				}
 			}
-			element = createMap.get(eObject);
+			element = newCreateMap.get(eObject);
 		}
 		if (element == null) {
 			error("Unresolved " + eObject);
@@ -328,7 +354,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	}
 	
 	public Type getPivotType(EObject eObject) {
-		Element pivotElement = createMap.get(eObject);
+		Element pivotElement = newCreateMap.get(eObject);
 		if (pivotElement == null) {
 			Resource resource = eObject.eResource();
 			if ((resource != ecoreResource) && (resource != null)) {
@@ -337,12 +363,12 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 					converter.getPivotRoot();
 //					allEClassifiers.addAll(converter.allEClassifiers);
 //					allNames.addAll(converter.allNames);
-					for (Map.Entry<EObject, Element> entry : converter.createMap.entrySet()) {
-						createMap.put(entry.getKey(), entry.getValue());
+					for (Map.Entry<EObject, Element> entry : converter.newCreateMap.entrySet()) {
+						newCreateMap.put(entry.getKey(), entry.getValue());
 					}
 				}
 			}
-			pivotElement = createMap.get(eObject);
+			pivotElement = newCreateMap.get(eObject);
 		}
 		if (pivotElement == null) {
 			error("Unresolved " + eObject);
@@ -411,7 +437,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 				Map<EObject, String> pivotAliasMap = pivotAdapter.getAliasMap();
 				for (EObject eObject : ecoreAliasMap.keySet()) {
 					String alias = ecoreAliasMap.get(eObject);
-					Element element = createMap.get(eObject);
+					Element element = newCreateMap.get(eObject);
 					pivotAliasMap.put(element, alias);
 				}
 			}
@@ -440,35 +466,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 				metaModelManager.loadLibrary(library);
 			}
 			pivotRoot = metaModelManager.createModel(pivotURI.lastSegment(), null);
-			pivotResource.getContents().add(pivotRoot);
-			List<org.eclipse.ocl.examples.pivot.Package> packages = pivotRoot.getNestedPackage();
-			for (EObject eObject : ecoreContents) {
-				Object pivotElement = declarationPass.doInPackageSwitch(eObject);
-				if (pivotElement instanceof org.eclipse.ocl.examples.pivot.Package) {
-					packages.add((org.eclipse.ocl.examples.pivot.Package) pivotElement);
-				}
-				else {
-					error("Bad ecore content");
-				}
-			}
-			Map<String, Type> resolvedSpecializations = new HashMap<String, Type>();
-			for (EGenericType eGenericType : genericTypes) {
-				Type pivotType = resolveType(resolvedSpecializations, eGenericType);
-				createMap.put(eGenericType, pivotType);
-			}
-			for (EObject eObject : referencers) {
-				referencePass.doInPackageSwitch(eObject);
-			}
-			for (EObject eObject : referencers) {
-				if (eObject instanceof EReference) {
-					Property pivotElement = getCreated(Property.class, eObject);		
-					Property oppositeProperty = pivotElement.getOpposite();
-					if ((oppositeProperty == null) && (eObject.eContainer() instanceof EClass)) {		// Skip annotation references
-						metaModelManager.installPropertyDeclaration(pivotElement);
-					}
-					
-				}
-			}
+			update(pivotResource, ecoreContents);
 		}
 		catch (Exception e) {
 			if (errors == null) {
@@ -551,6 +549,33 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		pivotDetail.getValue().add(value);
 		pivotAnnotation.getOwnedDetail().add(pivotDetail);
 	} */
+
+	@Override
+	public <T extends NamedElement> T refreshNamedElement(Class<T> pivotClass, EClass pivotEClass, ENamedElement eNamedElement) {
+		EObject pivotElement = null;
+		if (oldIdMap != null) {
+			String id = ((XMLResource)eNamedElement.eResource()).getID(eNamedElement);
+			pivotElement = oldIdMap.get(id);
+			if ((pivotElement != null) && (pivotElement.eClass() != pivotEClass)) {
+				pivotElement = null;
+			}
+		}
+		if (pivotElement == null) {
+			EFactory eFactoryInstance = pivotEClass.getEPackage().getEFactoryInstance();
+			pivotElement = eFactoryInstance.create(pivotEClass);
+		}
+		if (!pivotClass.isAssignableFrom(pivotElement.getClass())) {
+			throw new ClassCastException();
+		}
+		@SuppressWarnings("unchecked")
+		T castElement = (T) pivotElement;
+		if (eNamedElement != null) {
+			castElement.setName(eNamedElement.getName());
+		}
+		Element oldElement = newCreateMap.put(eNamedElement, castElement);
+		assert oldElement == null;
+		return castElement;
+	}
 	
 	protected Type resolveDataType(EGenericType eGenericType) {
 		assert eGenericType.getETypeArguments().isEmpty();
@@ -647,7 +672,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		else { 
 			pivotType = resolveSimpleType(eGenericType);
 		}
-		createMap.put(eGenericType, pivotType);
+		newCreateMap.put(eGenericType, pivotType);
 		return pivotType;
 	}
 
@@ -692,5 +717,67 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 
 	public void unsetTarget(Notifier oldTarget) {
 		assert (oldTarget == ecoreResource);
+	}
+
+	public void update(Resource pivotResource, Collection<EObject> ecoreContents) {
+		newCreateMap = new HashMap<EObject, Element>();
+		referencers = new HashSet<EObject>();
+		genericTypes = new ArrayList<EGenericType>();
+		PivotUtil.refreshList(pivotResource.getContents(), Collections.singletonList(pivotRoot));
+		List<org.eclipse.ocl.examples.pivot.Package> newPackages = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();
+		for (EObject eObject : ecoreContents) {
+			Object pivotElement = declarationPass.doInPackageSwitch(eObject);
+			if (pivotElement instanceof org.eclipse.ocl.examples.pivot.Package) {
+				newPackages.add((org.eclipse.ocl.examples.pivot.Package) pivotElement);
+			}
+			else {
+				error("Bad ecore content");
+			}
+		}
+		PivotUtil.refreshList(pivotRoot.getNestedPackage(), newPackages);
+		Map<String, Type> resolvedSpecializations = new HashMap<String, Type>();
+		for (EGenericType eGenericType : genericTypes) {
+			Type pivotType = resolveType(resolvedSpecializations, eGenericType);
+			newCreateMap.put(eGenericType, pivotType);
+		}
+		for (EObject eObject : referencers) {
+			referencePass.doInPackageSwitch(eObject);
+		}
+		for (EObject eObject : referencers) {
+			if (eObject instanceof EReference) {
+				Property pivotElement = getCreated(Property.class, eObject);		
+				Property oppositeProperty = pivotElement.getOpposite();
+				if ((oppositeProperty == null) && (eObject.eContainer() instanceof EClass)) {		// Skip annotation references
+					metaModelManager.installPropertyDeclaration(pivotElement);
+				}
+				
+			}
+		}
+		referencers = null;
+		genericTypes = null;
+		oldIdMap = new HashMap<String, Element>();
+		for (EObject ecoreContent : ecoreContents) {
+			Resource resource = ecoreContent.eResource();
+			if (resource instanceof XMLResource) {
+				XMLResource xmlResource = (XMLResource) resource;
+				String id = xmlResource.getID(ecoreContent);
+				if (id != null) {
+					Element element = newCreateMap.get(ecoreContent);
+					if (element != null) {
+						oldIdMap.put(id, element);
+					}
+				}
+				for (TreeIterator<EObject> tit = ecoreContent.eAllContents(); tit.hasNext(); ) {
+					EObject eObject = tit.next();
+					id = xmlResource.getID(eObject);
+					if (id != null) {
+						Element element = newCreateMap.get(eObject);
+						if (element != null) {
+							oldIdMap.put(id, element);
+						}
+					}
+				}
+			}
+		}
 	}
 }

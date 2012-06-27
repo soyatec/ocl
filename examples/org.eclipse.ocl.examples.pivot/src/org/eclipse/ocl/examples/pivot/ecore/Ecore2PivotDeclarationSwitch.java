@@ -75,6 +75,7 @@ import org.eclipse.ocl.examples.pivot.delegate.SettingBehavior;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.AliasAdapter;
 import org.eclipse.ocl.examples.pivot.utilities.Pivot2Moniker;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 {
@@ -352,8 +353,14 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		if (eObject.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)) {
 			pivotElement.setNsURI(eObject.getNsURI());
 		}
+		else {
+			pivotElement.setNsURI(null);
+		}
 		if (eObject.eIsSet(EcorePackage.Literals.EPACKAGE__NS_PREFIX)) {
 			pivotElement.setNsPrefix(eObject.getNsPrefix());
+		}
+		else {
+			pivotElement.setNsPrefix(null);
 		}
 		if (!(eObject.eContainer() instanceof EAnnotation)) {
 			converter.getMetaModelManager().addPackage(pivotElement);
@@ -629,12 +636,14 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		return doSwitch(classifierID, eObject);
 	}
 
-	public <T extends Element> void doSwitchAll(Collection<T> pivotObjects, List<? extends EObject> eObjects) {
+	public <T extends Element> void doSwitchAll(List<T> pivotObjects, List<? extends EObject> eObjects) {
+		List<T> newList = new ArrayList<T>();
 		for (EObject eObject : eObjects) {
 			@SuppressWarnings("unchecked")
 			T pivotObject = (T) doSwitch(eObject);
-			pivotObjects.add(pivotObject);
+			newList.add(pivotObject);
 		}
+		PivotUtil.refreshList(pivotObjects, newList);
 	}
 
 	public <T extends Element> void doSwitchAll(List<? extends EObject> eObjects) {

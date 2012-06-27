@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.xtext.tests;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.io.Writer;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -54,6 +55,8 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.values.Bag;
@@ -407,6 +410,39 @@ public class XtextTestCase extends PivotTestCase
 			Resource ecoreResource = Pivot2Ecore.createResource(metaModelManager, pivotResource, ecoreURI, null);
 			assertNoResourceErrors("To Ecore errors", ecoreResource);
 			ecoreResource.save(null);
+		}
+		finally {
+			if (adapter != null) {
+				adapter.dispose();
+			}
+		}
+	}
+	
+	public String createEcoreString(MetaModelManager metaModelManager, String fileName, String fileContent, boolean assignIds) throws IOException {
+		String inputName = fileName + ".oclinecore";
+		createOCLinEcoreFile(inputName, fileContent);
+		URI inputURI = getProjectFileURI(inputName);
+		URI ecoreURI = getProjectFileURI(fileName + ".ecore");
+		CS2PivotResourceAdapter adapter = null;
+		try {
+			ResourceSet resourceSet2 = metaModelManager.getExternalResourceSet();
+			BaseCSResource xtextResource = (BaseCSResource) resourceSet2.getResource(inputURI, true);
+			assertNoResourceErrors("Load failed", xtextResource);
+			adapter = CS2PivotResourceAdapter.getAdapter(xtextResource, null);
+			Resource pivotResource = adapter.getPivotResource(xtextResource);
+			assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
+			assertNoValidationErrors("Pivot validation errors", pivotResource.getContents().get(0));
+			XMLResource ecoreResource = Pivot2Ecore.createResource(metaModelManager, pivotResource, ecoreURI, null);
+			assertNoResourceErrors("To Ecore errors", ecoreResource);
+			if (assignIds) {
+				for (TreeIterator<EObject> tit = ecoreResource.getAllContents(); tit.hasNext(); ) {
+					EObject eObject = tit.next();
+					ecoreResource.setID(eObject,  EcoreUtil.generateUUID());
+				}
+			}
+			Writer writer = new StringWriter();
+			ecoreResource.save(writer, null);
+			return writer.toString();
 		}
 		finally {
 			if (adapter != null) {

@@ -38,13 +38,17 @@ import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.ParserException;
+import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
+import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -684,5 +688,125 @@ public class LoadTests extends XtextTestCase
 	public void testLoad_UML_2_5() throws IOException, InterruptedException {
 		URI uml_2_5 = URI.createPlatformResourceURI("UML-2.5/XMI-12-Jun-2012/UMLDI.xmi", true);
 		doLoadUML(uml_2_5);
+	}
+
+	public void testReload_AsReload() throws Exception {
+		MetaModelManager metaModelManager1 = new MetaModelManager();
+		String oclinecoreFileA =
+				"package PackageA : nsPrefixA = 'http://A3'{\n" +
+				"    class ClassA;\n" +
+				"}\n";
+		String ecoreFileA = createEcoreString(metaModelManager1, "Bug382230A", oclinecoreFileA, false);
+		String oclinecoreFileB =
+				"package PackageB : nsPrefixB = 'http://A3'{\n" +
+				"    datatype ClassB;\n" +
+				"}\n";
+		String ecoreFileB = createEcoreString(metaModelManager1, "Bug382230B", oclinecoreFileB, false);
+		String ecoreFileName = "Bug382230.ecore";
+		metaModelManager1.dispose();
+		MetaModelManager metaModelManager2 = new MetaModelManager();
+		URI ecoreURI = URI.createURI(ecoreFileName);
+		XMLResource ecoreResource = (XMLResource) metaModelManager2.getExternalResourceSet().createResource(ecoreURI, null);
+		ecoreResource.load(new URIConverter.ReadableInputStream(ecoreFileA), null);
+		Ecore2Pivot conversion = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager2);
+		Resource pivotResource = conversion.getPivotRoot().eResource();
+		assertEquals(1, pivotResource.getContents().size());
+		Model pivotModel1 = (Model) pivotResource.getContents().get(0);
+		assertEquals(ecoreFileName, pivotModel1.getName());
+		assertEquals(1, pivotModel1.getNestedPackage().size());
+		org.eclipse.ocl.examples.pivot.Package pivotPackage1 = pivotModel1.getNestedPackage().get(0);
+		assertEquals("PackageA", pivotPackage1.getName());
+		assertEquals("nsPrefixA", pivotPackage1.getNsPrefix());
+		assertEquals(1, pivotPackage1.getOwnedType().size());
+		Type pivotType1 = pivotPackage1.getOwnedType().get(0);
+		assertEquals("ClassA", pivotType1.getName());
+		assertEquals("Class", pivotType1.eClass().getName());
+//
+		ecoreResource.unload();
+		ecoreResource.load(new URIConverter.ReadableInputStream(ecoreFileB), null);
+		conversion.update(pivotResource, ecoreResource.getContents());
+		assertEquals(1, pivotResource.getContents().size());
+		Model pivotModel2 = (Model) pivotResource.getContents().get(0);
+		assertEquals(ecoreFileName, pivotModel2.getName());
+		assertEquals(1, pivotModel2.getNestedPackage().size());
+		org.eclipse.ocl.examples.pivot.Package pivotPackage2 = pivotModel2.getNestedPackage().get(0);
+		assertEquals("PackageB", pivotPackage2.getName());
+		assertEquals("nsPrefixB", pivotPackage2.getNsPrefix());
+		assertEquals(1, pivotPackage2.getOwnedType().size());
+		Type pivotType2 = pivotPackage2.getOwnedType().get(0);
+		assertEquals("ClassB", pivotType2.getName());
+		assertEquals("DataType", pivotType2.eClass().getName());
+//		
+		List<org.eclipse.ocl.examples.pivot.Package> allPackages = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();
+		for (org.eclipse.ocl.examples.pivot.Package aPackage : metaModelManager2.getAllPackages()) {
+			if (aPackage instanceof Model) {}
+			else if (aPackage instanceof Library) {}
+			else if (PivotConstants.ORPHANAGE_NAME.equals(aPackage.getName())) {}
+			else {
+				allPackages.add(aPackage);
+			}
+		}
+		assertEquals(1, allPackages.size());
+		metaModelManager2.dispose();
+	}
+
+	public void testReload_AsUpdate() throws Exception {
+		MetaModelManager metaModelManager1 = new MetaModelManager();
+		String oclinecoreFileA =
+				"package PackageA : nsPrefixA = 'http://A3'{\n" +
+				"    class ClassA;\n" +
+				"}\n";
+		String ecoreFileA = createEcoreString(metaModelManager1, "Bug382230", oclinecoreFileA, true);
+		String ecoreFileB = ecoreFileA
+				.replace("PackageA", "PackageB")
+				.replace("nsPrefixA", "nsPrefixB")
+				.replace("xsi:type=\"ecore:EClass\"", "xsi:type=\"ecore:EDataType\"")
+				.replace("ClassA", "ClassB");
+		String ecoreFileName = "Bug382230.ecore";
+		metaModelManager1.dispose();
+		MetaModelManager metaModelManager2 = new MetaModelManager();
+		URI ecoreURI = URI.createURI(ecoreFileName);
+		XMLResource ecoreResource = (XMLResource) metaModelManager2.getExternalResourceSet().createResource(ecoreURI, null);
+		ecoreResource.load(new URIConverter.ReadableInputStream(ecoreFileA), null);
+		Ecore2Pivot conversion = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager2);
+		Resource pivotResource = conversion.getPivotRoot().eResource();
+		assertEquals(1, pivotResource.getContents().size());
+		Model pivotModel1 = (Model) pivotResource.getContents().get(0);
+		assertEquals(ecoreFileName, pivotModel1.getName());
+		assertEquals(1, pivotModel1.getNestedPackage().size());
+		org.eclipse.ocl.examples.pivot.Package pivotPackage1 = pivotModel1.getNestedPackage().get(0);
+		assertEquals("PackageA", pivotPackage1.getName());
+		assertEquals("nsPrefixA", pivotPackage1.getNsPrefix());
+		assertEquals(1, pivotPackage1.getOwnedType().size());
+		Type pivotType1 = pivotPackage1.getOwnedType().get(0);
+		assertEquals("ClassA", pivotType1.getName());
+		assertEquals("Class", pivotType1.eClass().getName());
+//
+		ecoreResource.unload();
+		ecoreResource.load(new URIConverter.ReadableInputStream(ecoreFileB), null);
+		conversion.update(pivotResource, ecoreResource.getContents());
+		assertEquals(1, pivotResource.getContents().size());
+		Model pivotModel2 = (Model) pivotResource.getContents().get(0);
+		assertEquals(ecoreFileName, pivotModel2.getName());
+		assertEquals(1, pivotModel2.getNestedPackage().size());
+		org.eclipse.ocl.examples.pivot.Package pivotPackage2 = pivotModel2.getNestedPackage().get(0);
+		assertEquals("PackageB", pivotPackage2.getName());
+		assertEquals("nsPrefixB", pivotPackage2.getNsPrefix());
+		assertEquals(1, pivotPackage2.getOwnedType().size());
+		Type pivotType2 = pivotPackage2.getOwnedType().get(0);
+		assertEquals("ClassB", pivotType2.getName());
+		assertEquals("DataType", pivotType2.eClass().getName());
+//		
+		List<org.eclipse.ocl.examples.pivot.Package> allPackages = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();
+		for (org.eclipse.ocl.examples.pivot.Package aPackage : metaModelManager2.getAllPackages()) {
+			if (aPackage instanceof Model) {}
+			else if (aPackage instanceof Library) {}
+			else if (PivotConstants.ORPHANAGE_NAME.equals(aPackage.getName())) {}
+			else {
+				allPackages.add(aPackage);
+			}
+		}
+		assertEquals(1, allPackages.size());
+		metaModelManager2.dispose();
 	}
 }
