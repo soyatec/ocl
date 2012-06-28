@@ -383,10 +383,6 @@ public class Pivot2Ecore extends AbstractConversion
 	public final URI getEcoreURI() {
 		return ecoreURI;
 	}
-	
-	public final MetaModelManager getMetaModelManager() {
-		return metaModelManager;
-	}
 
 	public Map<String, Object> getOptions() {
 		return options;

@@ -44,7 +44,6 @@ import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.ocl.examples.pivot.utilities.AbstractConversion;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -158,10 +157,6 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 			declarationVisitorMap.put(eClass, declarationVisitor);
 		}
 		return declarationVisitor;
-	}
-	
-	public MetaModelManager getMetaModelManager() {
-		return metaModelManager;
 	}
 
 	public BaseReferenceVisitor getReferenceVisitor(EClass eClass) {
@@ -423,9 +418,6 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 				if (csElement != null) {
 					csElements.add(csElement);
 				}
-				else {
-					assert csElement != null;
-				}
 			}
 		}
 		return csElements;
@@ -457,9 +449,6 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 				T csElement = visitReference(csClass, eObject);
 				if (csElement != null) {
 					csElements.add(csElement);
-				}
-				else {
-					assert csElement != null;
 				}
 			}
 		}

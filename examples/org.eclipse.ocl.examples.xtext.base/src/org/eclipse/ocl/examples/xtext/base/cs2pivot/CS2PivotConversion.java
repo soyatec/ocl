@@ -60,7 +60,6 @@ import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.context.AbstractBase2PivotConversion;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.MorePivotable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -544,10 +543,6 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		return (T) intermediateCache.get(key);
 	}
 
-	public final MetaModelManager getMetaModelManager() {
-		return metaModelManager;
-	}
-
 	public org.eclipse.ocl.examples.pivot.Package getOldPackageByQualifiedName(PackageCS csElement) {
 		String qualifiedName = getQualifiedName(new StringBuilder(), csElement);
 		return oldPackagesByQualifiedName.get(qualifiedName);
@@ -833,9 +828,6 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 			T pivotElement = PivotUtil.getPivot(pivotClass, csElement);
 			if (pivotElement != null) {
 				newPivotElements.add(pivotElement);
-			}
-			else {
-				assert pivotElement != null;
 			}
 		}
 		PivotUtil.refreshList(pivotElements, newPivotElements);

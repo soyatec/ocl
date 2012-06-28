@@ -57,6 +57,7 @@ public class BaseDocument extends XtextDocument implements ConsoleContext
     private Map<String, EClassifier> parameters;
 	private BaseDocumentLocker myStateAccess;
 
+	@Override
 	protected XtextDocumentLocker createDocumentLocker() {
 		myStateAccess = new BaseDocumentLocker();
 		return myStateAccess;

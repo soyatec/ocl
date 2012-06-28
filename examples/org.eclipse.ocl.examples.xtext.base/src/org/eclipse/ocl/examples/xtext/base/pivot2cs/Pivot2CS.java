@@ -108,10 +108,6 @@ public class Pivot2CS extends AbstractConversion implements Adapter
 		return factoryMap.get(eClass);
 	}
 
-	public MetaModelManager getMetaModelManager() {
-		return metaModelManager;
-	}
-
 	public Resource getPivotResource(Resource csResource) {
 		return cs2pivotResourceMap.get(csResource);
 	}

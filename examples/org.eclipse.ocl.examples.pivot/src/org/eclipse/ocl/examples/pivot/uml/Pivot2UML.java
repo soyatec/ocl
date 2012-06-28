@@ -121,10 +121,6 @@ public class Pivot2UML extends AbstractConversion
 		T castElement = (T) eModelElement;
 		return castElement;
 	}
-	
-	public MetaModelManager getMetaModelManager() {
-		return metaModelManager;
-	}
 
 	public void putCreated(Element pivotElement, EModelElement eModelElement) {
 		EModelElement old = createMap.put(pivotElement, eModelElement);
