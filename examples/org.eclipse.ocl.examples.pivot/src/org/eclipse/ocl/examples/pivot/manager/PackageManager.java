@@ -199,7 +199,20 @@ public class PackageManager
 	}
 
 	void removePackageTracker(PackageTracker packageTracker) {
-		package2tracker.remove(packageTracker.getTarget());
+		if (!package2tracker.isEmpty()) {						// Empty if disposing
+			org.eclipse.ocl.examples.pivot.Package trackedPackage = packageTracker.getTarget();
+			if (trackedPackage != null) {
+				package2tracker.remove(trackedPackage);
+				String nsURI = trackedPackage.getNsURI();
+				@SuppressWarnings("unused")
+				org.eclipse.ocl.examples.pivot.Package removedPackage = uri2package.remove(nsURI);
+				String name = trackedPackage.getName();
+				List<String> uriList = name2uris.get(name);
+				if (uriList != null) {
+					uriList.remove(nsURI);
+				}
+			}
+		}
 	}
 
 	void removeTypeTracker(TypeTracker typeTracker) {
