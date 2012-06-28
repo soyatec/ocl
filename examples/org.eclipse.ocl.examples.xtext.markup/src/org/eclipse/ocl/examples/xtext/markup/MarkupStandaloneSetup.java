@@ -16,8 +16,10 @@
  */
 package org.eclipse.ocl.examples.xtext.markup;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.ecore.EPackage;
 
+import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 /**
@@ -39,6 +41,14 @@ public class MarkupStandaloneSetup extends MarkupStandaloneSetupGenerated
 	}
 
 	public static Injector getInjector() {
+		if (injector == null) {
+			if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+				doSetup();
+			}
+			else {
+				injector = Guice.createInjector(new MarkupRuntimeModule());
+			}
+		}
 		return injector;
 	}
 
