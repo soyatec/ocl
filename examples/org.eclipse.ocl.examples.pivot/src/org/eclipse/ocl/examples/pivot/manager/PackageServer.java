@@ -96,7 +96,7 @@ public class PackageServer extends PackageTracker
 				nestedPackageServers.put(packageName, nestedPackageServer);
 			}
 			else if (nestedPackageTracker instanceof PackageServer) {
-				nestedPackageServers.put(packageName, nestedPackageServer);
+				nestedPackageServers.put(packageName, (PackageServer) nestedPackageTracker);
 				packageManager.addedNestedPrimaryPackage(pivotPackage);
 			}
 			else {
