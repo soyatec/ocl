@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.edit.ui.util.EditUIUtil;
 import org.eclipse.jface.dialogs.ErrorDialog;
@@ -214,14 +215,16 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider
 			if (isXML) {
 				ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
 				URI uri = uriMap.get(document);
-				Resource xmiResource = resourceSet.getResource(uri, false);
+				XMLResource xmiResource = (XMLResource) resourceSet.getResource(uri, false);
+				boolean reload = false;
 				if ((xmiResource == null) || (xmiResource.getResourceSet() == null)) {	// Skip built-ins and try again as a file read.
-					xmiResource = resourceSet.createResource(uri, null);					
-					xmiResource.load(inputStream, null);
+					xmiResource = (XMLResource) resourceSet.createResource(uri, null);					
 				}
 				else {
-					xmiResource = resourceSet.getResource(uri, true);
+					xmiResource.unload();
+					reload = true;
 				}
+				xmiResource.load(inputStream, null);
 				List<Resource.Diagnostic> allErrors = null;
 				for (Resource resource : resourceSet.getResources()) {
 					List<Resource.Diagnostic> errors = resource.getErrors();
@@ -248,6 +251,9 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider
 						Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(xmiResource, metaModelManager);
 						org.eclipse.ocl.examples.pivot.Package pivotRoot = ecore2Pivot.getPivotRoot();
 						pivotResource = pivotRoot.eResource();
+						if (reload) {
+							ecore2Pivot.update(pivotResource, xmiResource.getContents());
+						}
 						diagnoseErrors(pivotResource);
 						persistAs = PERSIST_AS_ECORE;
 					}

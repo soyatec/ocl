@@ -35,7 +35,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EGenericType;
-import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -238,6 +238,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	}
 	
 	protected void addCreated(EObject eObject, Element pivotElement) {
+		@SuppressWarnings("unused")
 		Element oldElement = newCreateMap.put(eObject, pivotElement);
 //		if (eObject instanceof ENamedElement) {
 //			assert (oldElement == null) || (oldElement == pivotElement) || ((oldElement instanceof DataType) && (((DataType)oldElement).getBehavioralType() == pivotElement));
@@ -382,53 +383,8 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		return null;
 	}
 	
-/*	public Collection<EPackage> getReferencedEPackages() {
-		Set<EPackage> ePackages = new HashSet<EPackage>();
-		for (EClassifier eClassifier : allEClassifiers) {
-			EPackage ePackage = eClassifier.getEPackage();
-			if (ePackage != null)
-				ePackages.add(ePackage);
-		}
-		return ePackages;
-	} */
-	
 	public org.eclipse.ocl.examples.pivot.Package getPivotRoot() {
 		if (pivotRoot == null) {
-/*			Resource pivotResource = null;
-			for (EObject eObject : ecoreResource.getContents()) {
-				if (eObject instanceof EPackage) {
-					String nsURI = ((EPackage)eObject).getNsURI();
-					String moniker = null; // WIP metaModelManager.getPackageMoniker(nsURI);
-					if (moniker != null) {
-//						logger.error("Unsupported '" + nsURI + "' conflict");
-						pivotRoot = PivotFactory.eINSTANCE.createPackage();
-						pivotRoot.setNsURI(nsURI);
-						String uri = EcoreUtil.generateUUID() + ".pivot";		// WIP use pivot::
-//						pivotRoot.setMoniker(uri);
-						URI dummyURI = URI.createURI(uri);
-						pivotResource = metaModelManager.getPivotResourceSet().createResource(dummyURI);
-						pivotResource.getContents().add(pivotRoot);
-						pivotResource.getErrors().add(new XMIException("Unsupported '" + nsURI + "' conflict"));		// FIXME better class
-						return pivotRoot;	// FIXME Need Ecore2Pivot to be able to refresh 2 Ecores to 1 Pivot
-/ *						org.eclipse.ocl.examples.pivot.Package existingPackage = metaModelManager.getPrimaryPackage(moniker);
-						if (existingPackage != null) {
-							Resource existingResource = existingPackage.eResource();
-							if (pivotResource == null) {
-								pivotResource = existingResource;
-							}
-							else if (existingResource != pivotResource) {
-								logger.warn("Conflicting content for '" + nsURI + "'");
-								pivotResource = existingResource;
-								break;
-							}
-						} * /
-					}
-				}
-			} */
-//			if (pivotResource != null) {
-//				pivotRoot = (org.eclipse.ocl.examples.pivot.Package)pivotResource.getContents().get(0);
-//			}
-//			else {
 			Resource pivotResource = importObjects(ecoreResource.getContents(), createPivotURI());
 			AliasAdapter ecoreAdapter = AliasAdapter.findAdapter(ecoreResource);
 			if (ecoreAdapter != null) {
@@ -551,10 +507,10 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	} */
 
 	@Override
-	public <T extends NamedElement> T refreshNamedElement(Class<T> pivotClass, EClass pivotEClass, ENamedElement eNamedElement) {
+	public <T extends NamedElement> T refreshElement(Class<T> pivotClass, EClass pivotEClass, EModelElement eModelElement) {
 		EObject pivotElement = null;
 		if (oldIdMap != null) {
-			String id = ((XMLResource)eNamedElement.eResource()).getID(eNamedElement);
+			String id = ((XMLResource)eModelElement.eResource()).getID(eModelElement);
 			pivotElement = oldIdMap.get(id);
 			if ((pivotElement != null) && (pivotElement.eClass() != pivotEClass)) {
 				pivotElement = null;
@@ -569,10 +525,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		}
 		@SuppressWarnings("unchecked")
 		T castElement = (T) pivotElement;
-		if (eNamedElement != null) {
-			castElement.setName(eNamedElement.getName());
-		}
-		Element oldElement = newCreateMap.put(eNamedElement, castElement);
+		Element oldElement = newCreateMap.put(eModelElement, castElement);
 		assert oldElement == null;
 		return castElement;
 	}
@@ -720,6 +673,9 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	}
 
 	public void update(Resource pivotResource, Collection<EObject> ecoreContents) {
+		if (oldIdMap != null) {
+			metaModelManager.getPackageTracker(pivotRoot);
+		}
 		newCreateMap = new HashMap<EObject, Element>();
 		referencers = new HashSet<EObject>();
 		genericTypes = new ArrayList<EGenericType>();

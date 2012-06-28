@@ -19,7 +19,6 @@ package org.eclipse.ocl.examples.pivot.ecore;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -349,7 +348,20 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 
 	@Override
 	public Object caseEPackage(EPackage eObject) {
-		org.eclipse.ocl.examples.pivot.Package pivotElement = converter.refreshNamedElement(org.eclipse.ocl.examples.pivot.Package.class, PivotPackage.Literals.PACKAGE, eObject);
+		org.eclipse.ocl.examples.pivot.Package pivotElement = converter.refreshElement(org.eclipse.ocl.examples.pivot.Package.class, PivotPackage.Literals.PACKAGE, eObject);
+		String oldName = pivotElement.getName();
+		String newName = eObject.getName();
+		String oldNsURI = pivotElement.getNsURI();
+		String newNsURI = eObject.getNsURI();
+		boolean nameChange = (oldName != newName) || ((oldName != null) && !oldName.equals(newName));
+		boolean nsURIChange = (oldNsURI != newNsURI) || ((oldNsURI != null) && !oldNsURI.equals(newNsURI));
+		if (nameChange || nsURIChange) {
+			org.eclipse.ocl.examples.pivot.Package parentPackage = (org.eclipse.ocl.examples.pivot.Package) pivotElement.eContainer();
+			if (parentPackage != null) {
+				parentPackage.getNestedPackage().remove(pivotElement);
+			}
+		}
+		pivotElement.setName(newName);
 		if (eObject.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)) {
 			pivotElement.setNsURI(eObject.getNsURI());
 		}

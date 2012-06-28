@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.pivot.ecore;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -40,7 +41,7 @@ public abstract class AbstractEcore2Pivot extends AbstractConversion implements 
 
 	public abstract void queueReference(EObject eObject);
 
-	public <T extends NamedElement> T refreshNamedElement(Class<T> pivotClass, EClass pivotEClass, ENamedElement eNamedElement) {
+	public <T extends NamedElement> T refreshElement(Class<T> pivotClass, EClass pivotEClass, EModelElement eModelElement) {
 		EFactory eFactoryInstance = pivotEClass.getEPackage().getEFactoryInstance();
 		EObject pivotElement = eFactoryInstance.create(pivotEClass);
 		if (!pivotClass.isAssignableFrom(pivotElement.getClass())) {
@@ -48,6 +49,11 @@ public abstract class AbstractEcore2Pivot extends AbstractConversion implements 
 		}
 		@SuppressWarnings("unchecked")
 		T castElement = (T) pivotElement;
+		return castElement;
+	}
+
+	public <T extends NamedElement> T refreshNamedElement(Class<T> pivotClass, EClass pivotEClass, ENamedElement eNamedElement) {
+		T castElement = refreshElement(pivotClass, pivotEClass, eNamedElement);
 		if (eNamedElement != null) {
 			castElement.setName(eNamedElement.getName());
 		}
