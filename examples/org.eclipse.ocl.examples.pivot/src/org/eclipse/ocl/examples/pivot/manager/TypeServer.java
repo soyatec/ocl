@@ -303,13 +303,13 @@ public class TypeServer extends TypeTracker
 
 	protected PivotReflectivePackage getExecutorPackage() {
 		MetaModelManager metaModelManager = getMetaModelManager();
-		return metaModelManager.getPackageTracker(target.getPackage()).getPackageServer().getExecutorPackage();
+		return metaModelManager.getPackageTracker(getTarget().getPackage()).getPackageServer().getExecutorPackage();
 	}
 
 	public ReflectiveType getExecutorType() {
 		if (executorType == null) {
 			PivotReflectivePackage executorPackage = getExecutorPackage();
-			executorType = executorPackage.getInheritance(target);
+			executorType = executorPackage.getInheritance(getTarget());
 		}
 		return executorType;
 	}
@@ -400,7 +400,7 @@ public class TypeServer extends TypeTracker
 	 */
 	@Override
 	public void notifyChanged(Notification msg) {
-		if ((executorType != null) && (msg.getNotifier() == target)) {
+		if ((executorType != null) && (msg.getNotifier() == getTarget())) {
 			if (msg.getFeature() == PivotPackage.Literals.TYPE__SUPER_CLASS) {
 				switch (msg.getEventType()) {
 					case Notification.ADD:
@@ -421,11 +421,24 @@ public class TypeServer extends TypeTracker
 
 	void removedType(Type pivotType) {
 		TypeTracker typeTracker = packageManager.findTypeTracker(pivotType);
-		if (typeTracker == this) {
+		if (typeTracker != this) {
+			trackers.remove(typeTracker);
+		}
+		else if (trackers.size() <= 1) {
 			dispose();
 		}
-		else {
-			trackers.remove(typeTracker);
+		else {	
+			for (TypeTracker typeTrackerToUpgrade : trackers) {
+				if (typeTrackerToUpgrade instanceof TypeClient) {
+					Type fromType = getTarget();
+					Type toType = typeTrackerToUpgrade.getTarget();
+					packageManager.reassignTypeServer(this, toType);
+					trackers.remove(typeTrackerToUpgrade);
+					fromType.eAdapters().remove(this);
+					toType.eAdapters().add(this);
+					break;
+				}
+			}
 		}
 	}
 	

@@ -198,6 +198,20 @@ public class PackageManager
 		}
 	}
 
+	void reassignPackageServer(PackageServer packageServer, org.eclipse.ocl.examples.pivot.Package toPackage) {
+		org.eclipse.ocl.examples.pivot.Package fromPackage = packageServer.getTarget();
+		PackageTracker removedPackageTracker = package2tracker.remove(fromPackage);
+		assert removedPackageTracker == packageServer;
+		package2tracker.put(toPackage, packageServer);
+	}
+
+	void reassignTypeServer(TypeServer typeServer, Type toType) {
+		Type fromType = typeServer.getTarget();
+		TypeTracker removedTypeTracker = type2tracker.remove(fromType);
+		assert removedTypeTracker == typeServer;
+		type2tracker.put(toType, typeServer);
+	}
+
 	void removePackageTracker(PackageTracker packageTracker) {
 		if (!package2tracker.isEmpty()) {						// Empty if disposing
 			org.eclipse.ocl.examples.pivot.Package trackedPackage = packageTracker.getTarget();

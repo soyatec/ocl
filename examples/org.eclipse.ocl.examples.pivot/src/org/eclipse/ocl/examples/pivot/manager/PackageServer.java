@@ -183,7 +183,7 @@ public class PackageServer extends PackageTracker
 
 	public PivotReflectivePackage getExecutorPackage() {
 		if (executorPackage == null) {
-			executorPackage = new PivotReflectivePackage(getMetaModelManager(), target);
+			executorPackage = new PivotReflectivePackage(getMetaModelManager(), getTarget());
 		}
 		return executorPackage ;
 	}
@@ -242,11 +242,24 @@ public class PackageServer extends PackageTracker
 
 	void removedPackage(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
 		PackageTracker packageTracker = packageManager.findPackageTracker(pivotPackage);
-		if (packageTracker == this) {
+		if (packageTracker != this) {
+			trackers.remove(packageTracker);
+		}
+		else if (trackers.size() <= 1) {
 			dispose();
 		}
-		else {
-			trackers.remove(packageTracker);
+		else {	
+			for (PackageTracker packageTrackerToUpgrade : trackers) {
+				if (packageTrackerToUpgrade instanceof PackageClient) {
+					org.eclipse.ocl.examples.pivot.Package fromPackage = getTarget();
+					org.eclipse.ocl.examples.pivot.Package toPackage = packageTrackerToUpgrade.getTarget();
+					packageManager.reassignPackageServer(this, toPackage);
+					trackers.remove(packageTrackerToUpgrade);
+					fromPackage.eAdapters().remove(this);
+					toPackage.eAdapters().add(this);
+					break;
+				}
+			}
 		}
 	}
 }

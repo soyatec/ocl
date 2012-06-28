@@ -30,11 +30,15 @@ import org.eclipse.ocl.examples.pivot.Type;
 public abstract class PackageTracker implements Adapter.Internal
 {	
 	protected final PackageManager packageManager;
-	protected final org.eclipse.ocl.examples.pivot.Package target;
+	
+	/**
+	 * The Package tracked by this tracker. It may be reassigned to upgrade a residual client,
+	 * if this tracker is a server and when the Package this server tracks is removed.
+	 */
+	private org.eclipse.ocl.examples.pivot.Package target;
 
 	protected PackageTracker(PackageManager packageManager, org.eclipse.ocl.examples.pivot.Package target) {
 		this.packageManager = packageManager;
-		this.target = target;
 		target.eAdapters().add(this);
 		packageManager.addPackageTracker(target, this);
 	}
@@ -47,7 +51,9 @@ public abstract class PackageTracker implements Adapter.Internal
 
 	public void dispose() {
 		packageManager.removePackageTracker(this);
-		target.eAdapters().remove(this);
+		if (target != null) {
+			target.eAdapters().remove(this);
+		}
 	}
 
 	public MetaModelManager getMetaModelManager() {
@@ -166,7 +172,7 @@ public abstract class PackageTracker implements Adapter.Internal
 	}
 
 	public void setTarget(Notifier newTarget) {
-		assert target == newTarget;
+		target = (org.eclipse.ocl.examples.pivot.Package) newTarget;
 	}
 
 	@Override
@@ -175,7 +181,6 @@ public abstract class PackageTracker implements Adapter.Internal
 	}
 
 	public void unsetTarget(Notifier oldTarget) {
-		assert target == oldTarget;
-//		target = null;
+		target = null;
 	}
 }

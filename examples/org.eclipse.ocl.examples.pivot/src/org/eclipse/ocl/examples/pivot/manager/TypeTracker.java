@@ -29,18 +29,24 @@ import org.eclipse.ocl.examples.pivot.Type;
 public abstract class TypeTracker implements Adapter.Internal
 {
 	protected final PackageManager packageManager;
-	protected final Type target;
+
+	/**
+	 * The Type tracked by this tracker. It may be reassigned to upgrade a residual client,
+	 * if this tracker is a server and when the Type this server tracks is removed.
+	 */
+	private Type target;
 
 	protected TypeTracker(PackageManager packageManager, Type target) {
 		this.packageManager = packageManager;
-		this.target = target;
 		target.eAdapters().add(this);
 		packageManager.addTypeTracker(target, this);
 	}
 
 	public void dispose() {
 		packageManager.removeTypeTracker(this);
-		target.eAdapters().remove(this);
+		if (target != null) {
+			target.eAdapters().remove(this);
+		}
 	}
 
 	public final MetaModelManager getMetaModelManager() {
@@ -146,7 +152,7 @@ public abstract class TypeTracker implements Adapter.Internal
 	}
 
 	public void setTarget(Notifier newTarget) {
-		assert target == newTarget;
+		target = (Type) newTarget;
 	}
 
 	@Override
@@ -155,6 +161,6 @@ public abstract class TypeTracker implements Adapter.Internal
 	}
 
 	public void unsetTarget(Notifier oldTarget) {
-		assert target == oldTarget;
+		target = null;
 	}
 }
