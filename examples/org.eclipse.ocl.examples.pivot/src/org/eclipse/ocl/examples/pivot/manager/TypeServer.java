@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -75,6 +76,8 @@ public class TypeServer extends TypeTracker
 	 * Map from property name to the list of properties to be treated as merged. 
 	 */
 	private final Map<String, List<Property>> property2properties = new HashMap<String, List<Property>>();
+	
+	private PackageServer packageServer;			// Null value assigned by setTarget();
 	
 	/**
 	 * Compiled inheritance relationships used by compiled expressions.
@@ -302,8 +305,7 @@ public class TypeServer extends TypeTracker
 	}
 
 	protected PivotReflectivePackage getExecutorPackage() {
-		MetaModelManager metaModelManager = getMetaModelManager();
-		return metaModelManager.getPackageTracker(getTarget().getPackage()).getPackageServer().getExecutorPackage();
+		return packageServer.getExecutorPackage();
 	}
 
 	public ReflectiveType getExecutorType() {
@@ -432,7 +434,7 @@ public class TypeServer extends TypeTracker
 				if (typeTrackerToUpgrade instanceof TypeClient) {
 					Type fromType = getTarget();
 					Type toType = typeTrackerToUpgrade.getTarget();
-					packageManager.reassignTypeServer(this, toType);
+					packageServer.reassignTypeServer(this, toType);
 					trackers.remove(typeTrackerToUpgrade);
 					fromType.eAdapters().remove(this);
 					toType.eAdapters().add(this);
@@ -516,5 +518,20 @@ public class TypeServer extends TypeTracker
 				specializedClass.getSuperClass().add(superType);
 			}
 		}
+	}
+
+	@Override
+	public void setTarget(Notifier newTarget) {
+		super.setTarget(newTarget);
+		MetaModelManager metaModelManager = getMetaModelManager();
+		org.eclipse.ocl.examples.pivot.Package targetPackage = ((Type)newTarget).getPackage();
+		packageServer = metaModelManager.getPackageTracker(targetPackage).getPackageServer();
+		assert packageServer != null;
+	}
+
+	@Override
+	public void unsetTarget(Notifier oldTarget) {
+		packageServer = null;
+		super.unsetTarget(oldTarget);
 	}
 }

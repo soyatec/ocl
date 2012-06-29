@@ -117,7 +117,17 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 
 	@Override
 	public Object caseEClass(EClass eObject) {
-		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.refreshNamedElement(org.eclipse.ocl.examples.pivot.Class.class, PivotPackage.Literals.CLASS, eObject);
+		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.refreshElement(org.eclipse.ocl.examples.pivot.Class.class, PivotPackage.Literals.CLASS, eObject);
+		String oldName = pivotElement.getName();
+		String newName = eObject.getName();
+		boolean nameChange = (oldName != newName) || ((oldName != null) && !oldName.equals(newName));
+		if (nameChange) {
+			org.eclipse.ocl.examples.pivot.Package parentPackage = pivotElement.getPackage();
+			if (parentPackage != null) {
+				parentPackage.getOwnedType().remove(pivotElement);
+			}
+		}
+		pivotElement.setName(newName);
 		copyClassifier(pivotElement, eObject);
 		pivotElement.setIsAbstract(eObject.isAbstract());			
 		pivotElement.setIsInterface(eObject.isInterface());			
@@ -166,7 +176,17 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 
 	@Override
 	public Object caseEDataType(EDataType eObject) {
-		DataType pivotElement = converter.refreshNamedElement(DataType.class, PivotPackage.Literals.DATA_TYPE, eObject);
+		DataType pivotElement = converter.refreshElement(DataType.class, PivotPackage.Literals.DATA_TYPE, eObject);
+		String oldName = pivotElement.getName();
+		String newName = eObject.getName();
+		boolean nameChange = (oldName != newName) || ((oldName != null) && !oldName.equals(newName));
+		if (nameChange) {
+			org.eclipse.ocl.examples.pivot.Package parentPackage = pivotElement.getPackage();
+			if (parentPackage != null) {
+				parentPackage.getOwnedType().remove(pivotElement);
+			}
+		}
+		pivotElement.setName(newName);
 		copyDataTypeOrEnum(pivotElement, eObject);
 		Class<?> instanceClass = eObject.getInstanceClass();
 		if (instanceClass != null) {
@@ -243,7 +263,17 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 
 	@Override
 	public Object caseEEnum(EEnum eObject) {
-		Enumeration pivotElement = converter.refreshNamedElement(Enumeration.class, PivotPackage.Literals.ENUMERATION, eObject);
+		Enumeration pivotElement = converter.refreshElement(Enumeration.class, PivotPackage.Literals.ENUMERATION, eObject);
+		String oldName = pivotElement.getName();
+		String newName = eObject.getName();
+		boolean nameChange = (oldName != newName) || ((oldName != null) && !oldName.equals(newName));
+		if (nameChange) {
+			org.eclipse.ocl.examples.pivot.Package parentPackage = pivotElement.getPackage();
+			if (parentPackage != null) {
+				parentPackage.getOwnedType().remove(pivotElement);
+			}
+		}
+		pivotElement.setName(newName);
 		copyDataTypeOrEnum(pivotElement, eObject);
 		doSwitchAll(pivotElement.getOwnedLiteral(), eObject.getELiterals());
 		return pivotElement;

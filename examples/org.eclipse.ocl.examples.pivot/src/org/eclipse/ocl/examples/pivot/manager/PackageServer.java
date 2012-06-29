@@ -223,6 +223,13 @@ public class PackageServer extends PackageTracker
 		}
 		return typeServer.getTypeTracker(pivotType);
 	}
+
+	void reassignTypeServer(TypeServer typeServer, Type toType) {
+		Type fromType = typeServer.getTarget();
+		typeServers.remove(fromType.getName());
+		packageManager.reassignTypeServer(typeServer, toType);
+		typeServers.put(toType.getName(), typeServer);
+	}
 	
 	void removedClient(PackageClient packageClient) {
 		trackers.remove(packageClient);
@@ -253,6 +260,8 @@ public class PackageServer extends PackageTracker
 				if (packageTrackerToUpgrade instanceof PackageClient) {
 					org.eclipse.ocl.examples.pivot.Package fromPackage = getTarget();
 					org.eclipse.ocl.examples.pivot.Package toPackage = packageTrackerToUpgrade.getTarget();
+					fromPackage.getOwnedType().clear();
+					fromPackage.getNestedPackage().clear();
 					packageManager.reassignPackageServer(this, toPackage);
 					trackers.remove(packageTrackerToUpgrade);
 					fromPackage.eAdapters().remove(this);

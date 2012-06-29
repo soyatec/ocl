@@ -199,10 +199,12 @@ public class PackageManager
 	}
 
 	void reassignPackageServer(PackageServer packageServer, org.eclipse.ocl.examples.pivot.Package toPackage) {
-		org.eclipse.ocl.examples.pivot.Package fromPackage = packageServer.getTarget();
-		PackageTracker removedPackageTracker = package2tracker.remove(fromPackage);
-		assert removedPackageTracker == packageServer;
+		removePackageTracker(packageServer);
 		package2tracker.put(toPackage, packageServer);
+		String nsURI = toPackage.getNsURI();
+		if (nsURI != null) {
+			putPackage(nsURI, toPackage);
+		}
 	}
 
 	void reassignTypeServer(TypeServer typeServer, Type toType) {

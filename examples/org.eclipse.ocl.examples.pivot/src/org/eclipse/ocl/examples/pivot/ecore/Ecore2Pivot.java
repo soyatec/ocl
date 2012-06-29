@@ -511,9 +511,11 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		EObject pivotElement = null;
 		if (oldIdMap != null) {
 			String id = ((XMLResource)eModelElement.eResource()).getID(eModelElement);
-			pivotElement = oldIdMap.get(id);
-			if ((pivotElement != null) && (pivotElement.eClass() != pivotEClass)) {
-				pivotElement = null;
+			if (id != null) {
+				pivotElement = oldIdMap.get(id);
+				if ((pivotElement != null) && (pivotElement.eClass() != pivotEClass)) {
+					pivotElement = null;
+				}
 			}
 		}
 		if (pivotElement == null) {
