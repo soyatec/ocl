@@ -34,9 +34,10 @@ public class BaseFragmentProvider extends DefaultFragmentProvider
 		if (eObject != null) {
 			return eObject;
 		}
-		CS2PivotResourceAdapter converter = CS2PivotResourceAdapter.findAdapter((BaseCSResource)resource);
+		BaseCSResource csResource = (BaseCSResource)resource;
+		CS2PivotResourceAdapter converter = CS2PivotResourceAdapter.findAdapter(csResource);
 		if (converter != null) {
-			Resource pivotResource = converter.getPivotResource(resource);
+			Resource pivotResource = converter.getPivotResource(csResource);
 			if (pivotResource != null) {
 				eObject = pivotResource.getEObject(fragment);
 				if (eObject != null) {

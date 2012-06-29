@@ -86,8 +86,9 @@ public class OCLinEcoreDocument extends BaseDocument
 		return readOnly(new IUnitOfWork<XMLResource, XtextResource>()
 			{
 				public XMLResource exec(XtextResource resource) throws Exception {
-					CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.findAdapter((BaseCSResource)resource);
-					XMLResource pivotResource = (XMLResource) adapter.getPivotResource(resource);
+					BaseCSResource csResource = (BaseCSResource)resource;
+					CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.findAdapter(csResource);
+					XMLResource pivotResource = (XMLResource) adapter.getPivotResource(csResource);
 					checkForErrors(pivotResource);
 					return pivotResource;
 				}

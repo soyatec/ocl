@@ -21,12 +21,12 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.common.utils.TracingOption;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
+import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
@@ -55,11 +55,10 @@ public class BaseScopeProvider extends AbstractDeclarativeScopeProvider
 		if (reference.getEReferenceType().getEPackage().getNsURI().equals(TypesPackage.eNS_URI)) {
 			return globalScopeProvider.getScope(csResource, reference, null);
 		}
-		MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.findAdapter(csResource);
-		if (adapter == null) {
+		MetaModelManager metaModelManager = ElementUtil.findMetaModelManager(csResource);
+		if (metaModelManager == null) {
 			return IScope.NULLSCOPE;
 		}
-		MetaModelManager metaModelManager = adapter.getMetaModelManager();
 		ElementCS csElement = (ElementCS) context;
 		Attribution attribution = PivotUtil.getAttribution(csElement);
 		if (attribution == null) {

@@ -950,13 +950,14 @@ public class OCLConsolePage extends Page
 		            	contextObject = null;
 		            	contextClassifier = null;
 		            }
-			    }	        
+			    }
+			    EssentialOCLCSResource csResource = (EssentialOCLCSResource) resource;
 			    MetaModelManager metaModelManager = getMetaModelManager(contextObject);
 				if (contextObject != null) {
-					CS2PivotResourceAdapter.getAdapter(resource, metaModelManager);
+					CS2PivotResourceAdapter.getAdapter(csResource, metaModelManager);
 				}
 				MetaModelManagerResourceSetAdapter.getAdapter(editor.getResourceSet(), metaModelManager);
-		        editorDocument.setContext((EssentialOCLCSResource) resource, contextClassifier, null);
+		        editorDocument.setContext(csResource, contextClassifier, null);
 		        console.setSelection(contextClassifier, contextObject);
 		        eClassContext = contextClassifier != null ? new EClassContext(metaModelManager, null, contextClassifier) : null;
 		        return null;

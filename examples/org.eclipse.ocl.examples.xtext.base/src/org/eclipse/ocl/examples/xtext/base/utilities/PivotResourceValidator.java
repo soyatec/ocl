@@ -137,11 +137,12 @@ public class PivotResourceValidator extends ResourceValidatorImpl
 	}
 
 	@Override
-	public List<Issue> validate(Resource csResource, CheckMode mode, CancelIndicator monitor) {
+	public List<Issue> validate(Resource resource, CheckMode mode, CancelIndicator monitor) {
 //		System.out.println(new Date() + " Validate " + mode + " : " + csResource.getURI() + " on " + Thread.currentThread().getName());
-		List<Issue> issues = super.validate(csResource, mode, monitor);
-		if (!monitor.isCanceled() && (csResource instanceof BaseCSResource)) {
-			CS2PivotResourceAdapter cs2pivotAdapter = CS2PivotResourceAdapter.findAdapter((BaseCSResource)csResource);
+		List<Issue> issues = super.validate(resource, mode, monitor);
+		if (!monitor.isCanceled() && (resource instanceof BaseCSResource)) {
+			BaseCSResource csResource = (BaseCSResource)resource;
+			CS2PivotResourceAdapter cs2pivotAdapter = CS2PivotResourceAdapter.findAdapter(csResource);
 			if (cs2pivotAdapter != null) {
 				Resource pivotResource = cs2pivotAdapter.getPivotResource(csResource);
 				if (pivotResource != null) {

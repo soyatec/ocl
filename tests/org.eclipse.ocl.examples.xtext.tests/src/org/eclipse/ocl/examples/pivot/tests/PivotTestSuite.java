@@ -85,8 +85,8 @@ import org.eclipse.ocl.examples.pivot.context.ClassContext;
 import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
+import org.eclipse.ocl.examples.pivot.manager.AbstractMetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
@@ -214,10 +214,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 			fail(e.getMessage());
 		} finally {
 			if (resource != null) {
-				MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.findAdapter(resource);
-				if (adapter != null) {
-					adapter.dispose();
-				}
+				AbstractMetaModelManagerResourceAdapter.disposeAll(resource);
 			}
 		}	   
     }
@@ -252,10 +249,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 			fail(e.getMessage());
 		} finally {
 			if (resource != null) {
-				MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.findAdapter(resource);
-				if (adapter != null) {
-					adapter.dispose();
-				}
+				AbstractMetaModelManagerResourceAdapter.disposeAll(resource);
 			}
 		}	   
 	}

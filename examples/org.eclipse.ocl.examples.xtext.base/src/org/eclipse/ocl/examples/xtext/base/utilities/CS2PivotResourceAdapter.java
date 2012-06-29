@@ -26,8 +26,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.manager.AbstractMetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
@@ -38,13 +38,14 @@ import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
  * A CS2PivotResourceAdapter enhances the Resource for a Concrete Syntax model
  * to support synchronization with a Pivot model representation.
  */
-public class CS2PivotResourceAdapter extends MetaModelManagerResourceAdapter
+public class CS2PivotResourceAdapter extends AbstractMetaModelManagerResourceAdapter<BaseCSResource>
 {		
 	public static CS2PivotResourceAdapter findAdapter(BaseCSResource csResource) {
 		if (csResource == null) {
 			return null;
 		}
-		MetaModelManagerResourceAdapter adapter = PivotUtil.getAdapter(MetaModelManagerResourceAdapter.class, csResource);
+		return PivotUtil.getAdapter(CS2PivotResourceAdapter.class, csResource);
+/*		MetaModelManagerResourceAdapter adapter = PivotUtil.getAdapter(MetaModelManagerResourceAdapter.class, csResource);
 		if (adapter == null) {
 			return null;
 		}
@@ -56,7 +57,7 @@ public class CS2PivotResourceAdapter extends MetaModelManagerResourceAdapter
 		adapter.dispose();
 		CS2PivotResourceAdapter derivedAdapter = new CS2PivotResourceAdapter(csResource, adapter.getMetaModelManager());
 		eAdapters.add(derivedAdapter);
-		return derivedAdapter;
+		return derivedAdapter; */
 	}
 	
 	public static CS2PivotResourceAdapter getAdapter(BaseCSResource csResource, MetaModelManager metaModelManager) {
@@ -114,8 +115,7 @@ public class CS2PivotResourceAdapter extends MetaModelManagerResourceAdapter
 		return converter;
 	}
 
-	@Override
-	public Resource getPivotResource(Resource csResource) {
+	public Resource getPivotResource(BaseCSResource csResource) {
 		return converter.getPivotResource(csResource);
 	}
 

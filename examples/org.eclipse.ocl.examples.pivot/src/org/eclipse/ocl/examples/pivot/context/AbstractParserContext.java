@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.manager.AbstractMetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
@@ -116,10 +117,7 @@ public abstract class AbstractParserContext /*extends AdapterImpl*/ implements P
 				if (resourceSet != null) {
 					resourceSet.getResources().remove(resource);
 				}
-				MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.findAdapter(resource);
-				if (adapter != null) {
-					adapter.dispose();
-				}
+				AbstractMetaModelManagerResourceAdapter.disposeAll(resource);
 			}
 		}
 	}

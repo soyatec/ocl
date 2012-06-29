@@ -35,13 +35,13 @@ import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.ocl.examples.pivot.utilities.HTMLBuffer;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
+import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.markup.Markup;
 import org.eclipse.ocl.examples.xtext.markup.MarkupUtils;
 import org.eclipse.xtext.nodemodel.INode;
@@ -55,10 +55,7 @@ public class MarkupHoverProvider extends DefaultEObjectHoverProvider
 		MetaModelManager metaModelManager = null;
 		Resource resource = o.eResource();
 		if (resource != null) {
-			MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.findAdapter(resource);
-			if (adapter != null) {
-				metaModelManager = adapter.getMetaModelManager();
-			}
+			metaModelManager = ElementUtil.findMetaModelManager(resource);
 		}
 		String documentation = super.getDocumentation(o);
 		if (documentation == null) {

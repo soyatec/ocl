@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.xtext.base.utilities;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -37,8 +38,8 @@ import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.attributes.RootAttribution;
+import org.eclipse.ocl.examples.pivot.manager.AbstractMetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -74,7 +75,7 @@ public class ElementUtil
 		if (eRoot != null) {
 			Resource resource = eRoot.eResource();
 			if (eObject instanceof ElementCS) {
-				MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.findAdapter(resource);
+				AbstractMetaModelManagerResourceAdapter<?> adapter = AbstractMetaModelManagerResourceAdapter.findAdapter(resource);
 				if (adapter != null) {
 					return adapter.getMetaModelManager();
 				}
@@ -86,6 +87,11 @@ public class ElementUtil
 
 	public static MetaModelManager findMetaModelManager(Resource resource) {
 		if (resource != null) {
+			for (Adapter adapter : resource.eAdapters()) {
+				if (adapter instanceof AbstractMetaModelManagerResourceAdapter) {
+					return ((AbstractMetaModelManagerResourceAdapter<?>)adapter).getMetaModelManager();
+				}
+			}
 			ResourceSet resourceSet = resource.getResourceSet();
 			if (resourceSet != null) {
 				MetaModelManagerResourceSetAdapter adapter = MetaModelManagerResourceSetAdapter.findAdapter(resourceSet);
