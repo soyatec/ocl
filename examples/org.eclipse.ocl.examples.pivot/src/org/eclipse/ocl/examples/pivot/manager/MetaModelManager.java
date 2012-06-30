@@ -99,7 +99,6 @@ import org.eclipse.ocl.examples.pivot.util.Nameable;
 import org.eclipse.ocl.examples.pivot.utilities.CompleteElementIterable;
 import org.eclipse.ocl.examples.pivot.utilities.External2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.IllegalLibraryException;
-import org.eclipse.ocl.examples.pivot.utilities.Pivot2Moniker;
 import org.eclipse.ocl.examples.pivot.utilities.PivotResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotResourceFactoryImpl;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -515,14 +514,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	 * Map of URI to external resource converter.
 	 */
 	private final Map<URI, External2Pivot> external2PivotMap = new HashMap<URI, External2Pivot>();
-	
-	/**
-	 * Map of arbitrary user context to the associated URI used for the concrete syntax
-	 * of an expression. The map is used by getResourceIdentifier to cache URIs for contexts
-	 * that are not Elements. Any object may be used, possibly the OCL string itself,
-	 * provided the object has exactly one associated OCL expression.
-	 */
-	private Map<Object,URI> uriMap = null;
 
 	/**
 	 * Elements protected from garbage collection
@@ -1057,7 +1048,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		globalNamespaces.clear();
 		globalTypes.clear();
 		external2PivotMap.clear();
-		uriMap = null;
 		lockingAnnotation = null;
 		packageManager.dispose();
 		if (tupleManager != null) {
@@ -1840,26 +1830,12 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	 * Return the URI to be used for a concrete syntax resource for an expression associated
 	 * with a uniqueContext. If uniqueContext is an Element the moniker is used as
 	 * part of the URI, otherwise a unique value is created and cached for reuse.
+	 * 
+	 * @Deprecated URIs are auto-generated
 	 */
+	@Deprecated
 	public URI getResourceIdentifier(Object uniqueContext, String subContext) {
-		if (subContext == null) {
-			subContext = "";
-		}
-		URI uri;
-		if (uniqueContext instanceof Element) {
-			uri = URI.createURI(Pivot2Moniker.toString((Element) uniqueContext) + "///" + subContext + ".essentialocl");
-		}
-		else {
-			if (uriMap == null) {
-				uriMap = new HashMap<Object,URI>();
-			}
-			uri = uriMap.get(uniqueContext);
-			if (uri == null) {
-				uri = URI.createURI(EcoreUtil.generateUUID() + subContext + ".essentialocl");
-				uriMap.put(uniqueContext, uri);
-			}
-		}
-		return uri;
+		return URI.createURI(EcoreUtil.generateUUID() + ".essentialocl");
 	}
 
 	public CollectionType getSequenceType(DomainType elementType) {
