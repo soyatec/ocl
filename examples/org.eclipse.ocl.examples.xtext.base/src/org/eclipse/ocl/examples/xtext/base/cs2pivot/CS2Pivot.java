@@ -51,7 +51,6 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.RootCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
-import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CS;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.base.utilities.CSI2PivotMapping;
 import org.eclipse.osgi.util.NLS;
@@ -333,13 +332,7 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 
 	public CS2Pivot(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, MetaModelManager metaModelManager) {
 		super(metaModelManager);
-		Pivot2CS pivot2cs = Pivot2CS.findAdapter(metaModelManager.getPivotResourceSet());
-		if (pivot2cs != null) {
-			this.cs2PivotMapping = pivot2cs.getCs2PivotMapping();
-		}
-		else {
-			this.cs2PivotMapping = new CSI2PivotMapping(cs2pivotResourceMap.keySet());
-		}
+		this.cs2PivotMapping = CSI2PivotMapping.getAdapter(metaModelManager);
 		this.cs2pivotResourceMap = cs2pivotResourceMap;
 		metaModelManager.addListener(this);
 		metaModelManager.getPivotResourceSet().eAdapters().add(this);
@@ -348,7 +341,7 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	protected CS2Pivot(CS2Pivot aConverter) {
 		super(aConverter.metaModelManager);
 		this.cs2pivotResourceMap = aConverter.cs2pivotResourceMap;
-		this.cs2PivotMapping = new CSI2PivotMapping(aConverter.cs2PivotMapping);
+		this.cs2PivotMapping = CSI2PivotMapping.getAdapter(metaModelManager);
 	}
 
 	public String bind(EObject csContext, String messageTemplate, Object... bindings) {
@@ -399,14 +392,10 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	}
 
 	public Element getPivotElement(ModelElementCS csElement) {
-//		String csi = cs2PivotMapping.getCSI(csElement);
-//		return csi2pivot.get(csi);
 		return cs2PivotMapping.get(csElement);
 	}
 
 	public <T extends Element> T getPivotElement(Class<T> pivotClass, ModelElementCS csElement) {
-//		String csi = cs2PivotMapping.getCSI(csElement);
-//		Element pivotElement = csi2pivot.get(csi);
 		Element pivotElement = cs2PivotMapping.get(csElement);
 		if (pivotElement == null) {
 			return null;
@@ -445,8 +434,6 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 				// WIP Queue dead element
 			}
 		}
-//		String csi = cs2PivotMapping.getCSI(csElement);
-//		csi2pivot.put(csi, newPivotElement);
 		cs2PivotMapping.put(csElement, newPivotElement);
 	}
 	
