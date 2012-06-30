@@ -26,31 +26,33 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 
-public abstract class TypeTracker implements Adapter.Internal
+/**
+ * A TypeTracker adapts a Type to coordinate the coherent behaviour of one or more
+ * merged Types as required for Complete OCL type extension.
+ */
+public class TypeTracker implements Adapter.Internal
 {
 	protected final PackageManager packageManager;
+	protected final TypeServer typeServer;
 
 	/**
-	 * The Type tracked by this tracker. It may be reassigned to upgrade a residual client,
-	 * if this tracker is a server and when the Type this server tracks is removed.
+	 * The Type tracked by this tracker.
 	 */
-	private Type target;
-
-	protected TypeTracker(PackageManager packageManager, Type target) {
-		this.packageManager = packageManager;
+	private final Type target;
+	
+	protected TypeTracker(TypeServer typeServer, Type target) {
+		this.packageManager = typeServer.getPackageManager();
+		this.typeServer = typeServer;
+		this.target = target;
 		target.eAdapters().add(this);
 		packageManager.addTypeTracker(target, this);
+		initializeContents();
 	}
 
 	public void dispose() {
+		typeServer.removedTracker(this);
 		packageManager.removeTypeTracker(this);
-		if (target != null) {
-			target.eAdapters().remove(this);
-		}
-	}
-
-	public final MetaModelManager getMetaModelManager() {
-		return packageManager.getMetaModelManager();
+		target.eAdapters().remove(this);
 	}
 
 	public final PackageManager getPackageManager() {
@@ -58,15 +60,16 @@ public abstract class TypeTracker implements Adapter.Internal
 	}
 
 	public Type getPrimaryType() {
-		TypeServer typeServer = getTypeServer();
-		return typeServer != null ? typeServer.getTarget() : null;
+		return typeServer.getPrimaryType();
 	}
 
 	public final Type getTarget() {
 		return target;
 	}
-
-	public abstract TypeServer getTypeServer();
+	
+	public TypeServer getTypeServer() {
+		return typeServer;
+	}
 
 	protected void initializeContents() {
 		TypeServer typeServer = getTypeServer();
@@ -82,9 +85,11 @@ public abstract class TypeTracker implements Adapter.Internal
 		return type == packageManager;
 	}
 
+	/**
+	 * Observe any superclass changes and uninstall all affected Inheritances.
+	 */
 	public void notifyChanged(Notification notification) {
-		TypeServer typeServer = getTypeServer();
-		if (typeServer == null) {
+		if (notification.getNotifier() != target) {
 			return;
 		}
 		int eventType = notification.getEventType();
@@ -149,10 +154,23 @@ public abstract class TypeTracker implements Adapter.Internal
 				}
 			}
 		}
+		else if (feature == PivotPackage.Literals.TYPE__SUPER_CLASS) {
+			switch (eventType) {
+				case Notification.ADD:
+				case Notification.ADD_MANY:
+				case Notification.REMOVE:
+				case Notification.REMOVE_MANY:
+				case Notification.RESOLVE:
+				case Notification.SET:
+				case Notification.UNSET:
+					typeServer.changedInheritance();
+					break;
+			}
+		}
 	}
 
 	public void setTarget(Notifier newTarget) {
-		target = (Type) newTarget;
+		assert target == newTarget;
 	}
 
 	@Override
@@ -161,6 +179,6 @@ public abstract class TypeTracker implements Adapter.Internal
 	}
 
 	public void unsetTarget(Notifier oldTarget) {
-		target = null;
+		assert target == oldTarget;
 	}
 }

@@ -23,8 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -35,7 +33,6 @@ import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
-import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
@@ -50,13 +47,13 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 
 /**
- * A TypeServer adapts the primary Type to coordinate the coherent behaviour of a primary and one or more
- * secondary Types as required for Complete OCL type extension.
+ * A TypeServer serves coordinated behaviour of one or more
+ * merged Types as required for Complete OCL type extension.
  * 
  * For specializeable types, a TypeServer keeps track of zero or more specializations
  * using WeakReferences so that the specializations vanish once no longer required.
  */
-public class TypeServer extends TypeTracker
+public class TypeServer
 {
 	public static Function<TypeTracker, Type> tracker2class = new Function<TypeTracker, Type>()
 	{
@@ -64,6 +61,9 @@ public class TypeServer extends TypeTracker
 			return typeTracker.getTarget();
 		}
 	};
+
+	protected final PackageManager packageManager;
+	private Type primaryType;
 	
 	private final List<TypeTracker> trackers = new ArrayList<TypeTracker>();
 
@@ -89,10 +89,8 @@ public class TypeServer extends TypeTracker
 	 */
 	private Map<ParameterableElement, List<WeakReference<Type>>> firstActual2specializations = null;
 	
-	protected TypeServer(PackageManager packageManager, Type primaryType) {
-		super(packageManager, primaryType);
-		trackers.add(this);
-		initializeContents();
+	protected TypeServer(PackageManager packageManager) {
+		this.packageManager = packageManager;
 	}
 
 	void addOperation(Operation pivotOperation) {
@@ -124,15 +122,21 @@ public class TypeServer extends TypeTracker
 		}
 	}
 	
-	public TypeClient addSecondaryType(Type secondaryType) {
-		TypeClient typeClient = (TypeClient) EcoreUtil.getAdapter(secondaryType.eAdapters(), packageManager);
-		if (typeClient == null) {
-			typeClient = new TypeClient(this, secondaryType);
+	public TypeTracker addType(Type type) {
+		TypeTracker typeTracker = (TypeTracker) EcoreUtil.getAdapter(type.eAdapters(), packageManager);
+		if (typeTracker == null) {
+			typeTracker = new TypeTracker(this, type);
 		}
-		if (!trackers.contains(typeClient)) {
-			trackers.add(typeClient);
+		if (!trackers.contains(typeTracker)) {
+			trackers.add(typeTracker);
+			if (trackers.size() == 1) {
+				MetaModelManager metaModelManager = packageManager.getMetaModelManager();
+				primaryType = trackers.get(0).getTarget();
+				org.eclipse.ocl.examples.pivot.Package targetPackage = primaryType.getPackage();
+				packageServer = metaModelManager.getPackageTracker(targetPackage).getPackageServer();
+			}
 		}
-		return typeClient;
+		return typeTracker;
 	}
 
 	void addedOperation(Object object) {
@@ -148,9 +152,16 @@ public class TypeServer extends TypeTracker
 			addProperty(pivotProperty);
 		}
 	}
+
+	void changedInheritance() {
+		if (executorType != null) {
+			executorType.uninstall();
+			executorType = null;
+		}
+	}
 	
 	protected Type createSpecialization(List<? extends ParameterableElement> templateArguments) {
-		Type unspecializedType = getTarget();
+		Type unspecializedType = primaryType;
 		String typeName = unspecializedType.getName();
 		TemplateSignature templateSignature = unspecializedType.getOwnedTemplateSignature();
 		List<TemplateParameter> templateParameters = templateSignature.getOwnedParameter();
@@ -188,20 +199,18 @@ public class TypeServer extends TypeTracker
 			specializedClassifierType.setInstanceType((Type)templateArgument);
 		}
 		specializedType.setUnspecializedElement(unspecializedType);
-		Orphanage.getOrphanage(getMetaModelManager().getPivotResourceSet()).add(specializedType);
+		MetaModelManager metaModelManager = packageManager.getMetaModelManager();
+		Orphanage.getOrphanage(metaModelManager.getPivotResourceSet()).add(specializedType);
 //		specializeableClassServer.metaModelManager.addOrphanClass(specializedType);
 		return specializedType;
 	}
 
-	@Override
 	public void dispose() {
 		if (!trackers.isEmpty()) {
 			Collection<TypeTracker> savedTypeTrackers = new ArrayList<TypeTracker>(trackers);
 			trackers.clear();
 			for (TypeTracker typeTracker : savedTypeTrackers) {
-				if (typeTracker instanceof TypeClient) {
-					typeTracker.dispose();
-				}
+				typeTracker.dispose();
 			}
 		}
 		property2properties.clear();
@@ -210,7 +219,6 @@ public class TypeServer extends TypeTracker
 			executorType.dispose();
 			executorType = null;
 		}
-		super.dispose();
 	}
 	
 	private List<Operation> findOverload(List<List<Operation>> overloads, Operation requiredOperation) {
@@ -287,7 +295,7 @@ public class TypeServer extends TypeTracker
 	}
 
 	public synchronized Type findSpecializedType(List<? extends ParameterableElement> templateArguments) {
-		TemplateSignature templateSignature = getTarget().getOwnedTemplateSignature();
+		TemplateSignature templateSignature = primaryType.getOwnedTemplateSignature();
 		List<TemplateParameter> templateParameters = templateSignature.getParameter();
 		int iMax = templateParameters.size();
 		if (templateArguments.size() != iMax) {
@@ -304,16 +312,21 @@ public class TypeServer extends TypeTracker
 		return findSpecialization(partialSpecializations, templateArguments);
 	}
 
-	protected PivotReflectivePackage getExecutorPackage() {
-		return packageServer.getExecutorPackage();
-	}
+//	protected PivotReflectivePackage getExecutorPackage() {
+//		return packageServer.getExecutorPackage();
+//	}
 
 	public ReflectiveType getExecutorType() {
 		if (executorType == null) {
-			PivotReflectivePackage executorPackage = getExecutorPackage();
-			executorType = executorPackage.getInheritance(getTarget());
+			PivotReflectivePackage executorPackage = packageServer.getExecutorPackage();
+			executorType = executorPackage.getInheritance(primaryType);
 		}
 		return executorType;
+	}
+
+
+	public final PackageManager getPackageManager() {
+		return packageManager;
 	}
 
 	public Operation getOperation(Operation pivotOperation) {
@@ -338,6 +351,10 @@ public class TypeServer extends TypeTracker
 		return findOverload(overloads, pivotOperation);
 	}
 
+	public Type getPrimaryType() {
+		return primaryType;
+	}
+
 	public Iterable<Property> getProperties(Property pivotProperty) {
 		String propertyName = pivotProperty.getName();
 		return property2properties.get(propertyName);
@@ -352,7 +369,7 @@ public class TypeServer extends TypeTracker
 	}
 
 	public synchronized Type getSpecializedType(List<? extends ParameterableElement> templateArguments) {
-		TemplateSignature templateSignature = getTarget().getOwnedTemplateSignature();
+		TemplateSignature templateSignature = primaryType.getOwnedTemplateSignature();
 		List<TemplateParameter> templateParameters = templateSignature.getParameter();
 		int iMax = templateParameters.size();
 		if (templateArguments.size() != iMax) {
@@ -375,77 +392,25 @@ public class TypeServer extends TypeTracker
 		return specializedType;
 	}
 
-	public Iterable<Type> getTypes() {
-		return Iterables.transform(trackers, tracker2class);
-	}
-	
-	@Override
-	public TypeServer getTypeServer() {
-		return this;
-	}
-
 	public TypeTracker getTypeTracker(Type pivotType) {
 		for (TypeTracker typeTracker : trackers) {
 			if (typeTracker.getTarget() == pivotType) {
 				return typeTracker;
 			}
 		}
-		return addSecondaryType(pivotType);
+		return addType(pivotType);
 	}
 
 	public List<TypeTracker> getTypeTrackers() {
 		return trackers;
 	}
 
-	/**
-	 * Observe any superclass changes and uninstall all affected Inheritances.
-	 */
-	@Override
-	public void notifyChanged(Notification msg) {
-		if ((executorType != null) && (msg.getNotifier() == getTarget())) {
-			if (msg.getFeature() == PivotPackage.Literals.TYPE__SUPER_CLASS) {
-				switch (msg.getEventType()) {
-					case Notification.ADD:
-					case Notification.ADD_MANY:
-					case Notification.REMOVE:
-					case Notification.REMOVE_MANY:
-					case Notification.RESOLVE:
-					case Notification.SET:
-					case Notification.UNSET:
-						executorType.uninstall();
-						executorType = null;
-						break;
-				}
-			}
-		}
-		super.notifyChanged(msg);
-	}
-
-	void removedType(Type pivotType) {
-		TypeTracker typeTracker = packageManager.findTypeTracker(pivotType);
-		if (typeTracker != this) {
-			trackers.remove(typeTracker);
-		}
-		else if (trackers.size() <= 1) {
-			dispose();
-		}
-		else {	
-			for (TypeTracker typeTrackerToUpgrade : trackers) {
-				if (typeTrackerToUpgrade instanceof TypeClient) {
-					Type fromType = getTarget();
-					Type toType = typeTrackerToUpgrade.getTarget();
-					packageServer.reassignTypeServer(this, toType);
-					trackers.remove(typeTrackerToUpgrade);
-					fromType.eAdapters().remove(this);
-					toType.eAdapters().add(this);
-					break;
-				}
-			}
-		}
+	public Iterable<Type> getTypes() {
+		return Iterables.transform(trackers, tracker2class);
 	}
 	
-	void removedClient(TypeClient classClient) {
-		trackers.remove(classClient);
+	void removedTracker(TypeTracker typeTracker) {
+		trackers.remove(typeTracker);
 	}
 
 	void removedOperation(Object object) {
@@ -486,7 +451,20 @@ public class TypeServer extends TypeTracker
 		}
 	}
 
+	void removedType(Type pivotType) {
+		TypeTracker typeTracker = packageManager.findTypeTracker(pivotType);
+		trackers.remove(typeTracker);
+		if (trackers.size() <= 0) {
+			dispose();
+		}
+		else {	
+			primaryType = null;
+			packageServer = null;
+		}
+	}
+
 	protected void resolveSuperClasses(Type specializedClass, Type libraryClass, Map<TemplateParameter, ParameterableElement> allBindings) {
+		MetaModelManager metaModelManager = packageManager.getMetaModelManager();
 		for (Type superType : libraryClass.getSuperClass()) {
 			List<TemplateBinding> superTemplateBindings = superType.getTemplateBinding();
 			if (superTemplateBindings.size() > 0) {
@@ -503,7 +481,7 @@ public class TypeServer extends TypeTracker
 					}
 				}
 				Type unspecializedSuperType = PivotUtil.getUnspecializedTemplateableElement(superType);
-				TypeServer superTypeServer = getMetaModelManager().getTypeServer(unspecializedSuperType);
+				TypeServer superTypeServer = metaModelManager.getTypeServer(unspecializedSuperType);
 /*				List<ParameterableElement> superTemplateArgumentList = new ArrayList<ParameterableElement>();
 				for (TemplateBinding templateBinding : superTemplateBindings) {
 					for (TemplateParameterSubstitution parameterSubstitution : templateBinding.getParameterSubstitution()) {
@@ -520,18 +498,18 @@ public class TypeServer extends TypeTracker
 		}
 	}
 
-	@Override
-	public void setTarget(Notifier newTarget) {
-		super.setTarget(newTarget);
-		MetaModelManager metaModelManager = getMetaModelManager();
-		org.eclipse.ocl.examples.pivot.Package targetPackage = ((Type)newTarget).getPackage();
-		packageServer = metaModelManager.getPackageTracker(targetPackage).getPackageServer();
-		assert packageServer != null;
-	}
+//	@Override
+//	public void setTarget(Notifier newTarget) {
+//		super.setTarget(newTarget);
+//		MetaModelManager metaModelManager = getMetaModelManager();
+//		org.eclipse.ocl.examples.pivot.Package targetPackage = ((Type)newTarget).getPackage();
+//		packageServer = metaModelManager.getPackageTracker(targetPackage).getPackageServer();
+//		assert packageServer != null;
+//	}
 
-	@Override
-	public void unsetTarget(Notifier oldTarget) {
-		packageServer = null;
-		super.unsetTarget(oldTarget);
-	}
+//	@Override
+//	public void unsetTarget(Notifier oldTarget) {
+//		packageServer = null;
+//		super.unsetTarget(oldTarget);
+//	}
 }

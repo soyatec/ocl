@@ -207,13 +207,6 @@ public class PackageManager
 		}
 	}
 
-	void reassignTypeServer(TypeServer typeServer, Type toType) {
-		Type fromType = typeServer.getTarget();
-		TypeTracker removedTypeTracker = type2tracker.remove(fromType);
-		assert removedTypeTracker == typeServer;
-		type2tracker.put(toType, typeServer);
-	}
-
 	void removePackageTracker(PackageTracker packageTracker) {
 		if (!package2tracker.isEmpty()) {						// Empty if disposing
 			org.eclipse.ocl.examples.pivot.Package trackedPackage = packageTracker.getTarget();

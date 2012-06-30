@@ -367,7 +367,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		PrimitiveType pivotElement = converter.refreshNamedElement(PrimitiveType.class, PivotPackage.Literals.PRIMITIVE_TYPE, umlPrimitiveType);
 		if (primaryElement != null) {
 			TypeServer typeServer = metaModelManager.getTypeServer(primaryElement);
-			typeServer.addSecondaryType(pivotElement);
+			typeServer.addType(pivotElement);
 		}
 		copyClassifier(pivotElement, umlPrimitiveType);
 		return pivotElement;

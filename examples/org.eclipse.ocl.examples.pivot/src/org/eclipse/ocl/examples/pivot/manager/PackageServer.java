@@ -124,24 +124,7 @@ public class PackageServer extends PackageTracker
 		if ((pivotType instanceof LambdaType) || (pivotType instanceof TupleType)) {	// FIXME parent not necessarily in place
 			return;
 		}
-		if (typeServers == null) {
-			typeServers = new HashMap<String, TypeServer>();
-		}
-		String className = pivotType.getName();
-		TypeServer typeServer = typeServers.get(className);
-		if (typeServer == null) {
-			TypeTracker typeTracker = (TypeTracker) EcoreUtil.getAdapter(pivotType.eAdapters(), packageManager);
-			typeServer = typeTracker != null ? typeTracker.getTypeServer() : null;
-			if (typeServer == null) {
-				typeServer = new TypeServer(packageManager, pivotType);
-			}
-			if (pivotType.getUnspecializedElement() == null) {
-				typeServers.put(className, typeServer);
-			}
-		}
-		else {
-			typeServer.addSecondaryType(pivotType);
-		}
+		getTypeTracker(pivotType);
 	}
 
 	void addedNestedPackage(Object nestedObject) {
@@ -204,7 +187,7 @@ public class PackageServer extends PackageTracker
 
 	public Type getType(String typeName) {
 		TypeServer typeServer = typeServers.get(typeName);
-		return typeServer != null ? typeServer.getTarget() : null;
+		return typeServer.getPrimaryType();
 	}
 
 	@Override
@@ -215,20 +198,12 @@ public class PackageServer extends PackageTracker
 		String className = pivotType.getName();
 		TypeServer typeServer = typeServers.get(className);
 		if (typeServer == null) {
-			typeServer = (TypeServer) EcoreUtil.getAdapter(pivotType.eAdapters(), packageManager);
-			if (typeServer == null) {
-				typeServer = new TypeServer(packageManager, pivotType);
+			typeServer = new TypeServer(packageManager);
+			if (pivotType.getUnspecializedElement() == null) {
+				typeServers.put(className, typeServer);
 			}
-			typeServers.put(className, typeServer);
 		}
 		return typeServer.getTypeTracker(pivotType);
-	}
-
-	void reassignTypeServer(TypeServer typeServer, Type toType) {
-		Type fromType = typeServer.getTarget();
-		typeServers.remove(fromType.getName());
-		packageManager.reassignTypeServer(typeServer, toType);
-		typeServers.put(toType.getName(), typeServer);
 	}
 	
 	void removedClient(PackageClient packageClient) {
