@@ -197,8 +197,7 @@ public abstract class PivotTestSuite extends PivotTestCase
     		PivotEnvironment environment = (PivotEnvironment) helper.getEnvironment();
     		MetaModelManager metaModelManager = environment.getMetaModelManager();
     		Type contextClassifier = environment.getContextClassifier();
-    		URI uri = metaModelManager.getResourceIdentifier(expression, null);
-			ParserContext semanticContext = new ClassContext(metaModelManager, uri, contextClassifier);
+    		ParserContext semanticContext = new ClassContext(metaModelManager, null, contextClassifier);
 			resource = semanticContext.createBaseResource(expression);
 			PivotUtil.checkResourceErrors(NLS.bind(OCLMessages.ErrorsInResource, expression), resource);
             fail("Should not have parsed \"" + expression + "\"");
@@ -232,8 +231,7 @@ public abstract class PivotTestSuite extends PivotTestCase
     		PivotEnvironment environment = (PivotEnvironment) helper.getEnvironment();
     		MetaModelManager metaModelManager = environment.getMetaModelManager();
     		Type contextClassifier = environment.getContextClassifier();
-    		URI uri = metaModelManager.getResourceIdentifier(expression, null);
-    		ParserContext classContext = new ClassContext(metaModelManager, uri, contextClassifier);
+    		ParserContext classContext = new ClassContext(metaModelManager, null, contextClassifier);
     		resource = classContext.createBaseResource(expression);
 			PivotUtil.checkResourceErrors(NLS.bind(OCLMessages.ErrorsInResource, expression), resource);
             fail("Should not have parsed \"" + expression + "\"");

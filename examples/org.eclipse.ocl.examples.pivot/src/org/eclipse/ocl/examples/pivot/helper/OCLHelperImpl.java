@@ -18,7 +18,6 @@
 package org.eclipse.ocl.examples.pivot.helper;
 
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -69,50 +68,43 @@ public class OCLHelperImpl implements OCLHelper
 		PivotEnvironment environment = (PivotEnvironment) getEnvironment();
 		MetaModelManager metaModelManager = environment.getMetaModelManager();
 		Operation contextOperation = environment.getContextOperation();
-		URI uri = metaModelManager.getResourceIdentifier(expression, null);
-		ParserContext parserContext = new OperationContext(metaModelManager, uri, contextOperation, null);
+		ParserContext parserContext = new OperationContext(metaModelManager, null, contextOperation, null);
 		return parserContext.parse(expression);
 	}
 
 	public ExpressionInOCL createDerivedValueExpression(String expression) throws ParserException {
 		Property contextProperty = getEnvironment().getContextProperty();
-		URI uri = metaModelManager.getResourceIdentifier(expression, null);
-		ParserContext parserContext = new PropertyContext(metaModelManager, uri, contextProperty);
+		ParserContext parserContext = new PropertyContext(metaModelManager, null, contextProperty);
 		return parserContext.parse(expression);
 	}
 
 	public ExpressionInOCL createInvariant(String expression) throws ParserException {
 		Type contextClassifier = getEnvironment().getContextClassifier();
-		URI uri = metaModelManager.getResourceIdentifier(expression, null);
-		ParserContext parserContext = new ClassContext(metaModelManager, uri, contextClassifier);
+		ParserContext parserContext = new ClassContext(metaModelManager, null, contextClassifier);
 		return parserContext.parse(expression);
 	}
 
 	public ExpressionInOCL createPostcondition(String expression) throws ParserException {
 		Operation contextOperation = getEnvironment().getContextOperation();
-		URI uri = metaModelManager.getResourceIdentifier(expression, null);
-		ParserContext parserContext = new OperationContext(metaModelManager, uri, contextOperation, Environment.RESULT_VARIABLE_NAME);
+		ParserContext parserContext = new OperationContext(metaModelManager, null, contextOperation, Environment.RESULT_VARIABLE_NAME);
 		return parserContext.parse(expression);
 	}
 
 	public ExpressionInOCL createPrecondition(String expression) throws ParserException {
 		Operation contextOperation = getEnvironment().getContextOperation();
-		URI uri = metaModelManager.getResourceIdentifier(expression, null);
-		ParserContext parserContext = new OperationContext(metaModelManager, uri, contextOperation, null);
+		ParserContext parserContext = new OperationContext(metaModelManager, null, contextOperation, null);
 		return parserContext.parse(expression);
 	}
 
 	public ExpressionInOCL createQuery(String expression) throws ParserException {
 		Type contextClassifier = getEnvironment().getContextClassifier();
-		URI uri = metaModelManager.getResourceIdentifier(expression, null);
-		ParserContext parserContext = new ClassContext(metaModelManager, uri, contextClassifier);
+		ParserContext parserContext = new ClassContext(metaModelManager, null, contextClassifier);
 		return parserContext.parse(expression);
 	}
 
 	protected ExpressionInOCL createSpecification(String expression) throws ParserException {
 		Type contextClassifier = getEnvironment().getContextClassifier();
-		URI uri = metaModelManager.getResourceIdentifier(expression, null);
-		ParserContext parserContext = new ClassContext(metaModelManager, uri, contextClassifier);
+		ParserContext parserContext = new ClassContext(metaModelManager, null, contextClassifier);
 		return parserContext.parse(expression);
 	}
 	

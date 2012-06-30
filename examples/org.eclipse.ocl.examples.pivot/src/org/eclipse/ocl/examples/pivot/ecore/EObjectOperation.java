@@ -18,7 +18,6 @@ package org.eclipse.ocl.examples.pivot.ecore;
 
 import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -121,9 +120,8 @@ public class EObjectOperation extends AbstractOperation implements LibraryUnaryO
 				String string = PivotUtil.getBody((OpaqueExpression) specification);
 				EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
 				MetaModelManager metaModelManager = evaluationVisitor.getMetaModelManager();
-				URI uri = metaModelManager.getResourceIdentifier(operation, null);
 				try {
-					ParserContext operationContext = new OperationContext(metaModelManager, uri, operation, null);
+					ParserContext operationContext = new OperationContext(metaModelManager, null, operation, null);
 					expressionInOCL = operationContext.parse(string);
 				} catch (ParserException e) {
 					evaluator.throwInvalidEvaluation(e, callExp, sourceValue, "parse failure");

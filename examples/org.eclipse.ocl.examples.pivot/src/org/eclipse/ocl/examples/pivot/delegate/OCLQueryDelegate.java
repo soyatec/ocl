@@ -20,7 +20,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.util.QueryDelegate;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
@@ -72,8 +71,7 @@ public class OCLQueryDelegate implements QueryDelegate
 	public OCLQueryDelegate(OCLDelegateDomain delegateDomain, EClassifier context, Map<String, EClassifier> parameters, String expression) {
 		this.delegateDomain = delegateDomain;
 		MetaModelManager metaModelManager = delegateDomain.getMetaModelManager();
-		URI uri = metaModelManager.getResourceIdentifier(this, null);
-		this.parserContext = new EInvocationContext(metaModelManager, uri, context, parameters);
+		this.parserContext = new EInvocationContext(metaModelManager, null, context, parameters);
 		this.expression = expression;
 	}
 

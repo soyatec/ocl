@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot.delegate;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EOperation.Internal.InvocationDelegate;
 import org.eclipse.emf.ecore.EPackage;
@@ -71,8 +70,7 @@ public class InvocationBehavior extends AbstractDelegatedBehavior<EOperation, In
 			if (valueSpecification instanceof ExpressionInOCL) {
 				return (ExpressionInOCL) valueSpecification;
 			}
-			URI uri = metaModelManager.getResourceIdentifier(constraint, "body");
-			ParserContext operationContext = new OperationContext(metaModelManager, uri, operation, null);
+			ParserContext operationContext = new OperationContext(metaModelManager, null, operation, null);
 			ExpressionInOCL expressionInOCL = getExpressionInOCL(operationContext, constraint);
 			if (expressionInOCL != null) {
 				return expressionInOCL;

@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot.delegate;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EStructuralFeature.Internal.SettingDelegate;
@@ -69,8 +68,7 @@ public class SettingBehavior extends AbstractDelegatedBehavior<EStructuralFeatur
 			if (valueSpecification instanceof ExpressionInOCL) {
 				return (ExpressionInOCL) valueSpecification;
 			}
-			URI uri = metaModelManager.getResourceIdentifier(constraint, "body");
-			ParserContext propertyContext = new PropertyContext(metaModelManager, uri, property);
+			ParserContext propertyContext = new PropertyContext(metaModelManager, null, property);
 			ExpressionInOCL expressionInOCL = getExpressionInOCL(propertyContext, constraint);
 			if (expressionInOCL != null) {
 				return expressionInOCL;

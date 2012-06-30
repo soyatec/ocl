@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -52,8 +51,8 @@ import org.eclipse.ocl.examples.pivot.context.OperationContext;
 import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.context.PropertyContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions;
+import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.ocl.examples.pivot.utilities.Pivot2Moniker;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -159,16 +158,15 @@ public class PivotQueries
 			Resource resource = contextElement.eResource();
 			ResourceSet resourceSet = resource.getResourceSet();
 			MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
-			URI uri = metaModelManager.getResourceIdentifier(specification, null);
 			ParserContext parserContext;
 			if (contextElement instanceof Property) {
-				parserContext = new PropertyContext(metaModelManager, uri, (Property) contextElement);
+				parserContext = new PropertyContext(metaModelManager, null, (Property) contextElement);
 			}
 			else if (contextElement instanceof Operation) {
-				parserContext = new OperationContext(metaModelManager, uri, (Operation) contextElement, null);
+				parserContext = new OperationContext(metaModelManager, null, (Operation) contextElement, null);
 			}
 			else if (contextElement instanceof org.eclipse.ocl.examples.pivot.Class) {
-				parserContext = new ClassContext(metaModelManager, uri, (org.eclipse.ocl.examples.pivot.Class) contextElement);
+				parserContext = new ClassContext(metaModelManager, null, (org.eclipse.ocl.examples.pivot.Class) contextElement);
 			}
 			else {
 				logger.error("Unknown context type");

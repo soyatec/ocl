@@ -21,7 +21,6 @@ import java.util.Map;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -139,8 +138,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 			}
 			else {
 				Type contextType = (Type) constraint.getContext();
-				URI uri = metaModelManager.getResourceIdentifier(constraint, "body");
-				ParserContext classContext = new ClassContext(metaModelManager, uri, contextType);
+				ParserContext classContext = new ClassContext(metaModelManager, null, contextType);
 				query = ValidationBehavior.INSTANCE.getExpressionInOCL(classContext, constraint);
 			}
 			if (query == null) {
@@ -191,8 +189,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 			query = (ExpressionInOCL) valueSpecification;
 		}
 		else {
-			URI uri = metaModelManager.getResourceIdentifier(constraint, "body");
-			ParserContext classContext = new ClassContext(metaModelManager, uri, type);
+			ParserContext classContext = new ClassContext(metaModelManager, null, type);
 			query = ValidationBehavior.INSTANCE.getExpressionInOCL(classContext, constraint);
 		}
 		if (query == null) {
