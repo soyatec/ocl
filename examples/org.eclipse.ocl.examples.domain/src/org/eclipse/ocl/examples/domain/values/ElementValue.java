@@ -20,5 +20,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainElement;
 
 public interface ElementValue extends ObjectValue
 {
+	/**
+	 * @generated NOT
+	 */
 	DomainElement getElement();
 }

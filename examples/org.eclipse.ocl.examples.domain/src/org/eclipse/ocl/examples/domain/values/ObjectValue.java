@@ -18,5 +18,8 @@ package org.eclipse.ocl.examples.domain.values;
 
 public interface ObjectValue extends Value
 {
+	/**
+	 * @generated NOT
+	 */
 	Object getObject();
 }

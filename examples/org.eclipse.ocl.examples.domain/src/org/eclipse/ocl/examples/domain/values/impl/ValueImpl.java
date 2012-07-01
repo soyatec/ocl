@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.domain.values.impl;
 
 import java.util.Iterator;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -38,12 +39,25 @@ import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
-public abstract class AbstractValue implements Value
+/**
+ * @generated NOT
+ */
+public abstract class ValueImpl implements Value
 {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EClass eStaticClass() {
+		return ValuesPackage.Literals.VALUE;
+	}
+
 	protected final ValueFactory valueFactory;
 
-	protected AbstractValue(ValueFactory valueFactory) {
+	protected ValueImpl(ValueFactory valueFactory) {
 		this.valueFactory = valueFactory;
 	}
 

@@ -18,6 +18,9 @@ package org.eclipse.ocl.examples.domain.values;
 
 public interface BooleanValue extends Value
 {
+	/**
+	 * @generated NOT
+	 */
 	interface Accumulator extends BooleanValue {
 		void setValue(boolean value);	
 	}

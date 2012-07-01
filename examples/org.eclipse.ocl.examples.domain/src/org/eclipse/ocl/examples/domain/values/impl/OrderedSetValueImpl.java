@@ -23,6 +23,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -34,11 +35,23 @@ import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
-public class OrderedSetValueImpl
-	extends AbstractCollectionValue<OrderedSet<Value>>
-	implements OrderedSetValue
+/**
+ * @generated NOT
+ */
+public class OrderedSetValueImpl extends CollectionValueImpl implements OrderedSetValue
 {    
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ValuesPackage.Literals.ORDERED_SET_VALUE;
+	}
+
     public static OrderedSetValue intersection(ValueFactory valueFactory, DomainCollectionType type, CollectionValue left, CollectionValue right) throws InvalidValueException
     {
     	assert !left.isUndefined() && !right.isUndefined();
@@ -180,6 +193,11 @@ public class OrderedSetValueImpl
     		return this;
     	}
     }
+    
+	@Override
+	protected OrderedSet<Value> getElements() {
+		return (OrderedSet<Value>) elements;
+	}
 	
 	public String getKind() {
 	    return "OrderedSet";

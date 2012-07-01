@@ -20,5 +20,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 
 public interface ClassifierTypeValue extends TypeValue
 {
+	/**
+	 * @generated NOT
+	 */
 	DomainType getInstanceType();
 }

@@ -26,16 +26,17 @@ import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
- * IntegerLongValueImpl provides an implementation of an IntegerValue using a Java
+ * LongIntegerValueImpl provides an implementation of an IntegerValue using a Java
  * long representation. Operations resulting in numeric growth may return
- * IntegerValueImpl that uses BigInteger.
+ * BigIntegerValueImpl that uses BigInteger.
+ * @generated NOT
  */
-public class IntegerLongValueImpl extends AbstractIntegerValue
+public class LongIntegerValueImpl extends IntegerValueImpl
 {
 	private final long value;			// The value.
 	private BigInteger bigValue = null;	// Lazily computed BigInteger counterpart.
 	
-	public IntegerLongValueImpl(ValueFactory valueFactory, long value) {
+	public LongIntegerValueImpl(ValueFactory valueFactory, long value) {
 		super(valueFactory);
 		this.value = value;
 	}
@@ -53,8 +54,8 @@ public class IntegerLongValueImpl extends AbstractIntegerValue
 	}
 
 	public IntegerValue add(IntegerValue right) {
-		if (right instanceof IntegerLongValueImpl) {
-			long thatValue = ((IntegerLongValueImpl)right).longValue();
+		if (right instanceof LongIntegerValueImpl) {
+			long thatValue = ((LongIntegerValueImpl)right).longValue();
 			long sum = value + thatValue;
 			if (value >= 0) {
 				if ((thatValue >= 0) && (sum >= 0)) {
@@ -96,12 +97,12 @@ public class IntegerLongValueImpl extends AbstractIntegerValue
 	}
 
 	public int compareTo(NumericValue o) {
-		if (o instanceof IntegerIntValueImpl) {
-			int thatValue = ((IntegerIntValueImpl)o).intValue();
+		if (o instanceof IntIntegerValueImpl) {
+			int thatValue = ((IntIntegerValueImpl)o).intValue();
 			return (value < thatValue ? -1 : (value == thatValue ? 0 : 1));
 		}
-		if (o instanceof IntegerLongValueImpl) {
-			long thatValue = ((IntegerLongValueImpl)o).longValue();
+		if (o instanceof LongIntegerValueImpl) {
+			long thatValue = ((LongIntegerValueImpl)o).longValue();
 			return (value < thatValue ? -1 : (value == thatValue ? 0 : 1));
 		}
 		if (o instanceof IntegerValue) {
@@ -131,12 +132,12 @@ public class IntegerLongValueImpl extends AbstractIntegerValue
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof IntegerIntValueImpl) {
-			int thatValue = ((IntegerIntValueImpl)obj).intValue();
+		if (obj instanceof IntIntegerValueImpl) {
+			int thatValue = ((IntIntegerValueImpl)obj).intValue();
 			return value == thatValue;
 		}
-		if (obj instanceof IntegerLongValueImpl) {
-			long thatValue = ((IntegerLongValueImpl)obj).longValue();
+		if (obj instanceof LongIntegerValueImpl) {
+			long thatValue = ((LongIntegerValueImpl)obj).longValue();
 			return value == thatValue;
 		}
 		if (obj instanceof IntegerValue) {
@@ -173,12 +174,12 @@ public class IntegerLongValueImpl extends AbstractIntegerValue
 	}
 
 	public IntegerValue max(IntegerValue right) throws InvalidValueException {
-		if (right instanceof IntegerIntValueImpl) {
-			int thatValue = ((IntegerIntValueImpl)right).intValue();
+		if (right instanceof IntIntegerValueImpl) {
+			int thatValue = ((IntIntegerValueImpl)right).intValue();
 			return value >= thatValue ? this : right;
 		}
-		else if (right instanceof IntegerLongValueImpl) {
-			long thatValue = ((IntegerLongValueImpl)right).longValue();
+		else if (right instanceof LongIntegerValueImpl) {
+			long thatValue = ((LongIntegerValueImpl)right).longValue();
 			return value >= thatValue ? this : right;
 		}
 		else {
@@ -187,12 +188,12 @@ public class IntegerLongValueImpl extends AbstractIntegerValue
 	}
 
 	public IntegerValue min(IntegerValue right) throws InvalidValueException {
-		if (right instanceof IntegerIntValueImpl) {
-			int thatValue = ((IntegerIntValueImpl)right).intValue();
+		if (right instanceof IntIntegerValueImpl) {
+			int thatValue = ((IntIntegerValueImpl)right).intValue();
 			return value <= thatValue ? this : right;
 		}
-		else if (right instanceof IntegerLongValueImpl) {
-			long thatValue = ((IntegerLongValueImpl)right).longValue();
+		else if (right instanceof LongIntegerValueImpl) {
+			long thatValue = ((LongIntegerValueImpl)right).longValue();
 			return value <= thatValue ? this : right;
 		}
 		else {
@@ -225,8 +226,8 @@ public class IntegerLongValueImpl extends AbstractIntegerValue
 	}
 
 	public IntegerValue subtract(IntegerValue right) throws InvalidValueException {
-		if (right instanceof IntegerLongValueImpl) {
-			long thatValue = ((IntegerLongValueImpl)right).longValue();
+		if (right instanceof LongIntegerValueImpl) {
+			long thatValue = ((LongIntegerValueImpl)right).longValue();
 			long diff = value - thatValue;
 			if (value >= 0) {
 				if ((thatValue <= 0) && (diff >= 0)) {

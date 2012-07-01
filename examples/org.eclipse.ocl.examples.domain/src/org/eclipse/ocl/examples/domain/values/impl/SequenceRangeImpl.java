@@ -29,7 +29,10 @@ import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
-public class SequenceRangeImpl extends AbstractSequenceValue<IntegerRange>
+/**
+ * @generated NOT
+ */
+public class SequenceRangeImpl extends SequenceValueImpl
 {	// FIXME Should be AbstractOrderedSet ...
 	public SequenceRangeImpl(ValueFactory valueFactory, DomainCollectionType type, IntegerRange range) {
 		super(valueFactory, type, range);
@@ -37,9 +40,10 @@ public class SequenceRangeImpl extends AbstractSequenceValue<IntegerRange>
 
 	@Override
 	public SequenceValue append(Value value) throws InvalidValueException {
-		IntegerValue nextValue = elements.getLast().add(valueFactory.getOne());
+		IntegerRange theElements = getElements();
+		IntegerValue nextValue = theElements.getLast().add(valueFactory.getOne());
 		if (value.equals(nextValue)) {
-			IntegerRange range = valueFactory.createRange(elements.getFirst(), nextValue);
+			IntegerRange range = valueFactory.createRange(theElements.getFirst(), nextValue);
 			return new SequenceRangeImpl(valueFactory, getCollectionType(), range);
 		}
 		else {
@@ -96,7 +100,7 @@ public class SequenceRangeImpl extends AbstractSequenceValue<IntegerRange>
 
 	@Override
 	public Value first() {
-		return elements.getFirst();
+		return getElements().getFirst();
 	}
 
 	@Override
@@ -105,11 +109,11 @@ public class SequenceRangeImpl extends AbstractSequenceValue<IntegerRange>
 	}
 
 	@Override
-	public List<Value> getElements() {
+	public IntegerRange getElements() {
 		if (elements == null) {
 			createElements();
 		}
-		return elements;
+		return (IntegerRange) elements;
 	}
 
 //    public Type getType(TypeManager typeManager, Type staticType) {
@@ -151,14 +155,15 @@ public class SequenceRangeImpl extends AbstractSequenceValue<IntegerRange>
 
 	@Override
 	public Value last() {
-		return elements.getLast();
+		return getElements().getLast();
 	}
 
 	@Override
 	public SequenceValue prepend(Value value) throws InvalidValueException {
-		IntegerValue previousValue = elements.getFirst().subtract(valueFactory.getOne());
+		IntegerRange theElements = getElements();
+		IntegerValue previousValue = theElements.getFirst().subtract(valueFactory.getOne());
 		if (value.equals(previousValue)) {
-			IntegerRange range = valueFactory.createRange(previousValue, elements.getLast());
+			IntegerRange range = valueFactory.createRange(previousValue, theElements.getLast());
 			return new SequenceRangeImpl(valueFactory, getCollectionType(), range);
 		}
 		else {
@@ -186,9 +191,10 @@ public class SequenceRangeImpl extends AbstractSequenceValue<IntegerRange>
 	@Override
 	public void toString(StringBuilder s, int lengthLimit) {
 		s.append("Sequence{");
-		s.append(elements.getFirst());
+		IntegerRange theElements = getElements();
+		s.append(theElements.getFirst());
 		s.append("..");
-		s.append(elements.getLast());
+		s.append(theElements.getLast());
 		s.append("}");
 		s.toString();
 	}

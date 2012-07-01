@@ -16,14 +16,29 @@
  */
 package org.eclipse.ocl.examples.domain.values.impl;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
-public class NullValueImpl extends AbstractUndefinedCollectionValue implements NullValue
+/**
+ * @generated NOT
+ */
+public class NullValueImpl extends UndefinedCollectionValueImpl implements NullValue
 {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ValuesPackage.Literals.NULL_VALUE;
+	}
+
 	public NullValueImpl(ValueFactory valueFactory) {
 		super(valueFactory);
 	}

@@ -20,5 +20,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 
 public interface CollectionTypeValue extends TypeValue
 {
+	/**
+	 * @generated NOT
+	 */
 	DomainCollectionType getInstanceType();
 }

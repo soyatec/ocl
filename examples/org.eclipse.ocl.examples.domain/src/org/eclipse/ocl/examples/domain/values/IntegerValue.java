@@ -22,18 +22,60 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 public interface IntegerValue extends NumericValue
 {	
+	/**
+	 * @generated NOT
+	 */
 	interface Accumulator extends IntegerValue {
 		void setValue(Integer value);	
 	}
 	
+	/**
+	 * @generated NOT
+	 */
 	BigInteger bigIntegerValue();
+
+	/**
+	 * @generated NOT
+	 */
 	IntegerValue add(IntegerValue right) throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	IntegerValue div(IntegerValue right) throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	RealValue divide(IntegerValue right) throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	IntegerValue max(IntegerValue right) throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	IntegerValue min(IntegerValue right) throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	IntegerValue mod(IntegerValue right) throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	IntegerValue multiply(IntegerValue right) throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	IntegerValue negate() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	IntegerValue subtract(IntegerValue right) throws InvalidValueException;
 }

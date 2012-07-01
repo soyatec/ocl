@@ -18,5 +18,8 @@ package org.eclipse.ocl.examples.domain.values;
 
 public interface InvalidValue extends NullValue
 {	
+	/**
+	 * @generated NOT
+	 */
 	Exception getException();
 }

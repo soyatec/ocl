@@ -14,10 +14,10 @@
  */
 package org.eclipse.ocl.examples.pivot.values;
 
-import org.eclipse.ocl.examples.domain.values.impl.AbstractValueFactory;
+import org.eclipse.ocl.examples.domain.values.impl.ValueFactoryImpl;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
-public class PivotValueFactory extends AbstractValueFactory
+public class PivotValueFactory extends ValueFactoryImpl
 {
 	public PivotValueFactory(MetaModelManager metaModelManager) {
 		super(metaModelManager);

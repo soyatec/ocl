@@ -30,6 +30,7 @@ import org.eclipse.ocl.examples.domain.values.Bag;
  * Default implementation of the {@link Bag} interface.
  * 
  * @author Christian W. Damus (cdamus)
+ * @generated NOT
  */
 public class BagImpl<E> extends AbstractCollection<E> implements Bag<E> {
 

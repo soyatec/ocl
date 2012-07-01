@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010,2011 E.D.Willink and others.
+ * Copyright (c) 2011 E.D.Willink and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,32 +12,70 @@
  *
  * </copyright>
  *
- * $Id: ObjectValueImpl.java,v 1.9 2011/04/20 19:02:47 ewillink Exp $
+ * $Id$
  */
 package org.eclipse.ocl.examples.domain.values.impl;
 
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.ocl.examples.domain.values.ObjectValue;
+import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
-public class ObjectValueImpl extends AbstractObjectValue<Object>
+/**
+ * @generated NOT
+ */
+public abstract class ObjectValueImpl extends ValueImpl implements ObjectValue
 {
-	protected DomainType type = null;
-	
-	public ObjectValueImpl(ValueFactory valueFactory, Object object) {
-		super(valueFactory, object);
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ValuesPackage.Literals.OBJECT_VALUE;
 	}
 
-	public DomainType getType() {
-		if (type == null) {										// WIP A better type
-			DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
-			if (object instanceof Comparable) {
-				type = standardLibrary.getOclComparableType();
-			}
-			else {
-				type = standardLibrary.getAnyClassifierType();
-			}
+	protected final Object object;
+	
+	protected ObjectValueImpl(ValueFactory valueFactory, Object object) {
+		super(valueFactory);
+		this.object = object;
+	}
+
+	public Object asObject() {
+		return object;
+	}
+
+	@Override
+	public ObjectValue asObjectValue() {
+		return this;
+	}
+
+	public Value asValidValue() {
+		return this;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof ObjectValue)) {
+			return false;
 		}
-		return type;
+		return object.equals(((ObjectValue)obj).getObject());
+	}
+
+	public Object getObject() {
+		return object;
+	}
+
+	@Override
+	public int hashCode() {
+		return object.hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return String.valueOf(object);
 	}
 }

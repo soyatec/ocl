@@ -16,14 +16,29 @@
  */
 package org.eclipse.ocl.examples.domain.values.impl;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
-public class BooleanValueImpl extends AbstractValue implements BooleanValue
+/**
+ * @generated NOT
+ */
+public class BooleanValueImpl extends ValueImpl implements BooleanValue
 {	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ValuesPackage.Literals.BOOLEAN_VALUE;
+	}
+
 	public static class Accumulator extends BooleanValueImpl implements BooleanValue.Accumulator
 	{
 		public Accumulator(ValueFactory valueFactory, boolean value) {

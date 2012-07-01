@@ -22,10 +22,33 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 public interface NumericValue extends Value, Comparable<NumericValue>
 {
+	/**
+	 * @generated NOT
+	 */
 	NumericValue abs() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	BigDecimal bigDecimalValue();
+
+	/**
+	 * @generated NOT
+	 */
 	NumericValue negate() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	double doubleValue();
+
+	/**
+	 * @generated NOT
+	 */
 	int signum() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	IntegerValue toIntegerValue() throws InvalidValueException;
 }

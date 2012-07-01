@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.domain.values.impl;
 
 import java.util.Iterator;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -40,9 +41,23 @@ import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
-public class InvalidValueImpl extends AbstractUndefinedCollectionValue implements InvalidValue
+/**
+ * @generated NOT
+ */
+public class InvalidValueImpl extends UndefinedCollectionValueImpl implements InvalidValue
 {	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ValuesPackage.Literals.INVALID_VALUE;
+	}
+
 	protected final InvalidEvaluationException exception;
 
 	public InvalidValueImpl(ValueFactory valueFactory) {

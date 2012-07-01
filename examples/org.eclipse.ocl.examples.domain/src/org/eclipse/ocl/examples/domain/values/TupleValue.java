@@ -31,6 +31,7 @@ public interface TupleValue extends Value {
      * Obtains the tuple's type.
      * 
      * @return its type
+	 * @generated NOT
      */
 	DomainTupleType getType();
 	
@@ -39,6 +40,7 @@ public interface TupleValue extends Value {
      * 
      * @param partName the name of the part
      * @return the corresponding value
+	 * @generated NOT
      */
 	Value getValue(String partName);
     
@@ -47,6 +49,7 @@ public interface TupleValue extends Value {
      * 
      * @param part the tuple part (as an attribute)
      * @return the corresponding value
+	 * @generated NOT
      */
 	Value getValue(DomainTypedElement part);
 }

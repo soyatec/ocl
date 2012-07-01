@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -27,9 +28,23 @@ import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
-public class RealValueImpl extends AbstractValue implements RealValue
+/**
+ * @generated NOT
+ */
+public class RealValueImpl extends ValueImpl implements RealValue
 {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ValuesPackage.Literals.REAL_VALUE;
+	}
+
 	private static final int MINIMUM_SCALE = Double.SIZE/2;		// Gives nearly twice the precision of Double
 
 	protected static RealValue divideBigDecimal(ValueFactory valueFactory, BigDecimal left, BigDecimal right) throws InvalidValueException {

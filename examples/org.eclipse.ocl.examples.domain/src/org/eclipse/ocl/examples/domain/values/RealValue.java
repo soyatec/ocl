@@ -20,15 +20,58 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 public interface RealValue extends NumericValue
 {
+	/**
+	 * @generated NOT
+	 */
 	RealValue abs() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	RealValue add(RealValue right) throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	RealValue divide(RealValue right) throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	IntegerValue floor() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	RealValue max(RealValue right) throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	RealValue min(RealValue right) throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	RealValue multiply(RealValue right) throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	RealValue negate() throws InvalidValueException;	
+
+	/**
+	 * @generated NOT
+	 */
 	IntegerValue round() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	int signum() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	RealValue subtract(RealValue right) throws InvalidValueException;
 }

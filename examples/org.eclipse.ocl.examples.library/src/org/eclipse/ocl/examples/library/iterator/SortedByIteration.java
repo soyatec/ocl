@@ -37,14 +37,14 @@ import org.eclipse.ocl.examples.domain.library.LibraryValidator;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.domain.values.impl.AbstractValue;
+import org.eclipse.ocl.examples.domain.values.impl.ValueImpl;
 
 /**
  * SelectIteration realizes the Collection::sortedBy() library iteration.
  */
 public class SortedByIteration extends AbstractIteration
 {
-	protected static class SortingValue extends AbstractValue implements Comparator<Value>
+	protected static class SortingValue extends ValueImpl implements Comparator<Value>
 	{
 		protected final DomainType type;
 		private final DomainEvaluator evaluator;

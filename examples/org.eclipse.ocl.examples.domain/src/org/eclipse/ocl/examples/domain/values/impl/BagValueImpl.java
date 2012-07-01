@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -34,12 +35,24 @@ import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
-public class BagValueImpl
-	extends AbstractCollectionValue<Bag<Value>>
-	implements BagValue
+/**
+ * @generated NOT
+ */
+public class BagValueImpl extends CollectionValueImpl implements BagValue
 {
-    public static BagValue intersection(ValueFactory valueFactory, DomainCollectionType type, CollectionValue left, CollectionValue right) throws InvalidValueException
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ValuesPackage.Literals.BAG_VALUE;
+	}
+
+	public static BagValue intersection(ValueFactory valueFactory, DomainCollectionType type, CollectionValue left, CollectionValue right) throws InvalidValueException
     {
     	assert !left.isUndefined() && !right.isUndefined();
 		Collection<Value> leftElements = left.asCollection();
@@ -149,7 +162,12 @@ public class BagValueImpl
     		return this;
     	}
     }
-	
+    
+	@Override
+	protected Bag<Value> getElements() {
+		return (Bag<Value>) elements;
+	}
+
 	public String getKind() {
 	    return "Bag";
 	}
@@ -166,11 +184,11 @@ public class BagValueImpl
     public SequenceValue sort(Comparator<Value> comparator) {
     	List<Value> values = new ArrayList<Value>(elements);
     	Collections.sort(values, comparator);
-    	return new SequenceValueImpl(valueFactory, getSequenceType(), values);
+    	return new SparseSequenceValueImpl(valueFactory, getSequenceType(), values);
     }
     
 	public SequenceValue toSequenceValue() {
-		return new SequenceValueImpl(valueFactory, getSequenceType(), elements);
+		return new SparseSequenceValueImpl(valueFactory, getSequenceType(), elements);
 	}
 
 	@Override

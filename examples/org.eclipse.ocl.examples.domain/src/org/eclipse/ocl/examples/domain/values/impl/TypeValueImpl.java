@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.domain.values.impl;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.domain.elements.DomainClassifierType;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
@@ -25,19 +26,34 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
-public abstract class AbstractTypeValueImpl<T extends DomainType> extends AbstractObjectValue<T> implements TypeValue
+/**
+ * @generated NOT
+ */
+public abstract class TypeValueImpl extends ObjectValueImpl implements TypeValue
 {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ValuesPackage.Literals.TYPE_VALUE;
+	}
+
+
 	private DomainClassifierType classifierType;
-	
-	public AbstractTypeValueImpl(ValueFactory valueFactory, T type) {
-		super(valueFactory, type);
+
+	public TypeValueImpl(ValueFactory valueFactory, DomainType object) {
+		super(valueFactory, object);
 		this.classifierType = null;
 	}
 
 	@Override
-	public T asElement() {
-		return object;
+	public DomainType asElement() {
+		return getObject();
 	}
 
 	@Override
@@ -46,18 +62,19 @@ public abstract class AbstractTypeValueImpl<T extends DomainType> extends Abstra
 	}
 
 	@Override
-	public EObject asNavigableObject() throws InvalidValueException {
-		DomainType navigableObject = object;
+	public EObject asNavigableObject()
+			throws InvalidValueException {
+		DomainType navigableObject = getObject();
 		if (navigableObject instanceof EObject) {
 			return (EObject) navigableObject;
-		}
-		else {
-			return (EObject) valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Object", getType());
+		} else {
+			return (EObject) valueFactory.throwInvalidValueException(
+				EvaluatorMessages.TypedValueRequired, "Object", getType());
 		}
 	}
 
 	@Override
-	public AbstractTypeValueImpl<T> asTypeValue() {
+	public TypeValueImpl asTypeValue() {
 		return this;
 	}
 
@@ -69,23 +86,32 @@ public abstract class AbstractTypeValueImpl<T extends DomainType> extends Abstra
 		if (!(that instanceof TypeValue)) {
 			return false;
 		}
-		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
-		DomainInheritance thisInheritance = object.getInheritance(standardLibrary); 
-		DomainInheritance thatInheritance = ((TypeValue)that).getInstanceType().getInheritance(standardLibrary); 
+		DomainStandardLibrary standardLibrary = valueFactory
+			.getStandardLibrary();
+		DomainInheritance thisInheritance = getObject()
+			.getInheritance(standardLibrary);
+		DomainInheritance thatInheritance = ((TypeValue) that)
+			.getInstanceType().getInheritance(standardLibrary);
 		return thisInheritance == thatInheritance;
 	}
 
-	public T getElement() {
-		return object;
+	public DomainType getElement() {
+		return getObject();
 	}
 
-	public T getInstanceType() {
-		return object;
+	public DomainType getInstanceType() {
+		return getObject();
+	}
+
+	@Override
+	public DomainType getObject() {
+		return (DomainType) object;
 	}
 
 	public DomainClassifierType getType() {
 		if (classifierType == null) {
-			classifierType = valueFactory.getStandardLibrary().getClassifierType(object);
+			classifierType = valueFactory.getStandardLibrary()
+				.getClassifierType(getObject());
 		}
 		return classifierType;
 	}

@@ -20,5 +20,8 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 public interface OrderedSetValue extends SequenceValue, UniqueCollectionValue
 {
+	/**
+	 * @generated NOT
+	 */
     OrderedSetValue subOrderedSet(int lower, int upper) throws InvalidValueException;
 }

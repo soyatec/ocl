@@ -34,6 +34,7 @@ package org.eclipse.ocl.examples.domain.values.impl;
 
 import java.math.BigDecimal;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -41,9 +42,23 @@ import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
-public class UnlimitedValueImpl extends AbstractValue implements UnlimitedValue
+/**
+ * @generated NOT
+ */
+public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ValuesPackage.Literals.UNLIMITED_VALUE;
+	}
+
 	public UnlimitedValueImpl(ValueFactory valueFactory) {
 		super(valueFactory);
 	}

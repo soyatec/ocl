@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2011 E.D.Willink and others.
+ * Copyright (c) 2010,2011 E.D.Willink and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,40 +12,35 @@
  *
  * </copyright>
  *
- * $Id$
+ * $Id: ObjectValueImpl.java,v 1.9 2011/04/20 19:02:47 ewillink Exp $
  */
 package org.eclipse.ocl.examples.domain.values.impl;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * @generated NOT
  */
-public class EObjectValueImpl extends ObjectValueImpl
+public class JavaObjectValueImpl extends ObjectValueImpl
 {
-	protected DomainType type = null;			// Lazily computed
+	protected DomainType type = null;
 	
-	public EObjectValueImpl(ValueFactory valueFactory, EObject object) {
+	public JavaObjectValueImpl(ValueFactory valueFactory, Object object) {
 		super(valueFactory, object);
 	}
 
-	@Override
-	public EObject getObject() {
-		return (EObject) object;
-	}
-
 	public DomainType getType() {
-		if (type == null) {
-			this.type = valueFactory.getStandardLibrary().getType(getObject().eClass());
+		if (type == null) {										// WIP A better type
+			DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
+			if (object instanceof Comparable) {
+				type = standardLibrary.getOclComparableType();
+			}
+			else {
+				type = standardLibrary.getAnyClassifierType();
+			}
 		}
 		return type;
-	}
-
-	@Override
-	public String toString() {
-		return DomainUtil.getLabel(getObject());
 	}
 }

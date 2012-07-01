@@ -20,5 +20,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 
 public interface EnumerationTypeValue extends TypeValue
 {
+	/**
+	 * @generated NOT
+	 */
 	DomainEnumeration getEnumeration();
 }

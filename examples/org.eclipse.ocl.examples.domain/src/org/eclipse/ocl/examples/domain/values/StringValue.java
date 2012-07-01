@@ -18,5 +18,8 @@ package org.eclipse.ocl.examples.domain.values;
 
 public interface StringValue extends Value
 {
+	/**
+	 * @generated NOT
+	 */
 	String stringValue();
 }

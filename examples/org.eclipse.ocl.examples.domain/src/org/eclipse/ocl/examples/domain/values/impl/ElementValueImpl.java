@@ -16,22 +16,37 @@
  */
 package org.eclipse.ocl.examples.domain.values.impl;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.values.ElementValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
-public class ElementValueImpl extends AbstractObjectValue<DomainElement> implements ElementValue
+/**
+ * @generated NOT
+ */
+public class ElementValueImpl extends ObjectValueImpl implements ElementValue
 {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ValuesPackage.Literals.ELEMENT_VALUE;
+	}
+
 	protected DomainType type = null;
 	
-	public ElementValueImpl(ValueFactory valueFactory, DomainElement element) {
-		super(valueFactory, element);
+	public ElementValueImpl(ValueFactory valueFactory, DomainElement object) {
+		super(valueFactory, object);
 	}
 
 	@Override
 	public DomainElement asElement() {
-		return object;
+		return getObject();
 	}
 
 	@Override
@@ -40,12 +55,17 @@ public class ElementValueImpl extends AbstractObjectValue<DomainElement> impleme
 	}
 
 	public DomainElement getElement() {
-		return object;
+		return getObject();
+	}
+
+	@Override
+	public DomainElement getObject() {
+		return (DomainElement) object;
 	}
 
 	public DomainType getType() {
 		if (type == null) {
-			type = valueFactory.getStandardLibrary().getType(object);
+			type = valueFactory.getStandardLibrary().getType(getObject());
 		}
 		return type;
 	}

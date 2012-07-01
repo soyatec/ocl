@@ -68,7 +68,10 @@ import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.osgi.util.NLS;
 
-public abstract class AbstractValueFactory implements ValueFactory
+/**
+ * @generated NOT
+ */
+public abstract class ValueFactoryImpl implements ValueFactory
 {
 	public static final BigInteger INTEGER_MAX_VALUE = BigInteger.valueOf(Integer.MAX_VALUE);
 	public static final BigInteger INTEGER_MIN_VALUE = BigInteger.valueOf(Integer.MIN_VALUE);
@@ -87,7 +90,7 @@ public abstract class AbstractValueFactory implements ValueFactory
 
 	protected final DomainStandardLibrary standardLibrary;
 
-	public AbstractValueFactory(DomainStandardLibrary standardLibrary) {
+	public ValueFactoryImpl(DomainStandardLibrary standardLibrary) {
 		this.standardLibrary = standardLibrary;
 	}
 
@@ -150,7 +153,7 @@ public abstract class AbstractValueFactory implements ValueFactory
 					return new OrderedSetValueImpl.Accumulator(this, collectionValueType);
 				}
 				else {
-					return new SequenceValueImpl.Accumulator(this, collectionValueType);
+					return new SparseSequenceValueImpl.Accumulator(this, collectionValueType);
 				}
 			}
 			else {
@@ -280,7 +283,7 @@ public abstract class AbstractValueFactory implements ValueFactory
 	}
 
 	public ObjectValue createObjectValue(Object object) {
-		return new ObjectValueImpl(this, object);
+		return new JavaObjectValueImpl(this, object);
 	}
 
     public OrderedSetValue createOrderedSetOf(Iterable<?> objects) {
@@ -350,7 +353,7 @@ public abstract class AbstractValueFactory implements ValueFactory
 	}
 
 	public SequenceValue createSequenceAccumulatorValue(DomainCollectionType type, List<Value> values) {
-		return new SequenceValueImpl.Accumulator(this, type, values);
+		return new SparseSequenceValueImpl.Accumulator(this, type, values);
 	}
 
 	public SequenceValue createSequenceRange(DomainCollectionType type, IntegerRange range) {
@@ -358,21 +361,21 @@ public abstract class AbstractValueFactory implements ValueFactory
 	}
 
 	public SequenceValue createSequenceValue(DomainCollectionType type, Value... values) {
-		return new SequenceValueImpl(this, type, values);
+		return new SparseSequenceValueImpl(this, type, values);
 	}
 
 	public SequenceValue createSequenceValue(DomainCollectionType type, List<? extends Value> values) {
-		return new SequenceValueImpl(this, type, values);
+		return new SparseSequenceValueImpl(this, type, values);
 	}
 
 	public SequenceValue createSequenceValue(DomainCollectionType type, Collection<? extends Value> values) {
-		return new SequenceValueImpl(this, type, values);
+		return new SparseSequenceValueImpl(this, type, values);
 	}
 
 	public SequenceValue createSequenceValue(Value... values) {
 		DomainType elementType = getElementType(values);
 		DomainCollectionType collectionType = standardLibrary.getSequenceType(elementType);
-		return new SequenceValueImpl(this, collectionType, values);
+		return new SparseSequenceValueImpl(this, collectionType, values);
 	}
 
     public SetValue createSetOf(Object... objects) {
@@ -518,36 +521,36 @@ public abstract class AbstractValueFactory implements ValueFactory
 	}
 
 	public IntegerValue integerValueOf(int value) {
-		return new IntegerIntValueImpl(this, value);
+		return new IntIntegerValueImpl(this, value);
 	}
 
 	public IntegerValue integerValueOf(long value) {
 		if ((Integer.MIN_VALUE <= value) && (value <= Integer.MAX_VALUE)) {
-			return new IntegerIntValueImpl(this, (int) value);
+			return new IntIntegerValueImpl(this, (int) value);
 		}
 		else {
-			return new IntegerLongValueImpl(this, value);
+			return new LongIntegerValueImpl(this, value);
 		}
 	}
 	
 	public IntegerValue integerValueOf(BigInteger value) {
 		if (value.signum() >= 0) {
 			if (value.compareTo(INTEGER_MAX_VALUE) <= 0) {
-				return new IntegerIntValueImpl(this, value.intValue());
+				return new IntIntegerValueImpl(this, value.intValue());
 			}
 			if (value.compareTo(LONG_MAX_VALUE) <= 0) {
-				return new IntegerLongValueImpl(this, value.longValue());
+				return new LongIntegerValueImpl(this, value.longValue());
 			}
 		}
 		else {
 			if (value.compareTo(INTEGER_MIN_VALUE) >= 0) {
-				return new IntegerIntValueImpl(this, value.intValue());
+				return new IntIntegerValueImpl(this, value.intValue());
 			}
 			if (value.compareTo(LONG_MIN_VALUE) >= 0) {
-				return new IntegerLongValueImpl(this, value.longValue());
+				return new LongIntegerValueImpl(this, value.longValue());
 			}
 		}
-		return new IntegerValueImpl(this, value);
+		return new BigIntegerValueImpl(this, value);
 	}
 	
 	/**

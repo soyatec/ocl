@@ -24,5 +24,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
  */
 public interface TypeValue extends ElementValue
 {
+	/**
+	 * @generated NOT
+	 */
 	DomainType getInstanceType();
 }

@@ -37,7 +37,10 @@ import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
-public abstract class AbstractUndefinedCollectionValue extends AbstractUndefinedValue
+/**
+ * @generated NOT
+ */
+public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 {	
 	private static class Iterator implements java.util.Iterator<Value>
 	{
@@ -53,7 +56,7 @@ public abstract class AbstractUndefinedCollectionValue extends AbstractUndefined
 		}
 	}
 
-	protected AbstractUndefinedCollectionValue(ValueFactory valueFactory) {
+	protected UndefinedCollectionValueImpl(ValueFactory valueFactory) {
 		super(valueFactory);
 	}
 

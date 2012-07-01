@@ -34,40 +34,128 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
  */
 public interface Value
 {	
+	/**
+	 * @generated NOT
+	 */
 	public static final String INVALID_NAME = "invalid";
 
+	/**
+	 * @generated NOT
+	 */
 	BagValue asBagValue() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	boolean asBoolean() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	BooleanValue asBooleanValue() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	CollectionValue asCollectionValue() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	Double asDouble() throws InvalidValueException;
 	
 	/**
 	 * Return the Ecore representation of this value.
+	 * @generated NOT
 	 */
 	Object asEcoreObject();
 
+
+	/**
+	 * @generated NOT
+	 */
 	DomainElement asElement(); 
+
+	/**
+	 * @generated NOT
+	 */
 	ElementValue asElementValue() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	Integer asInteger() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	IntegerValue asIntegerValue() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	EObject asNavigableObject() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	Object asObject();
+
+	/**
+	 * @generated NOT
+	 */
 	ObjectValue asObjectValue() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	OrderedSetValue asOrderedSetValue() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	RealValue asRealValue() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	SequenceValue asSequenceValue() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	SetValue asSetValue() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	String asString() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	StringValue asStringValue() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	TypeValue asTypeValue() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	UniqueCollectionValue asUniqueCollectionValue() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	Value asValidValue() throws InvalidValueException;
 	
 	/**
 	 * Return the type of this value determined from its content. In the case of collections
 	 * this may differ from the constructed type. The actual type is used for validating
 	 * oclAsType conversions.
+	 * @generated NOT
 	 */
 	DomainType getActualType();
 
@@ -75,24 +163,87 @@ public interface Value
 	 * 
 	 * Return the type of this value determined from its construction context. In the case of collections
 	 * this may differ from the actual type.
+	 * @generated NOT
 	 */
 	DomainType getType();
+
+	/**
+	 * @generated NOT
+	 */
 	ValueFactory getValueFactory();	
+
+	/**
+	 * @generated NOT
+	 */
 	CollectionValue isCollectionValue();
+
+	/**
+	 * @generated NOT
+	 */
 	boolean isFalse();
+
+	/**
+	 * @generated NOT
+	 */
 	IntegerValue isIntegerValue();
+
+	/**
+	 * @generated NOT
+	 */
 	boolean isInvalid();
+
+	/**
+	 * @generated NOT
+	 */
 	boolean isNull();
+
+	/**
+	 * @generated NOT
+	 */
 	RealValue isRealValue();
+
+	/**
+	 * @generated NOT
+	 */
 	boolean isTrue();
+
+	/**
+	 * @generated NOT
+	 */
 	boolean isUndefined();
+
+	/**
+	 * @generated NOT
+	 */
 	boolean isUnlimited();
+
+	/**
+	 * @generated NOT
+	 */
 	boolean isUnlimitedNatural();
 
+	/**
+	 * @generated NOT
+	 */
 	String oclToString();
 
+	/**
+	 * @generated NOT
+	 */
 	IntegerValue toIntegerValue() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	Iterator<Value> toIteratorValue() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	RealValue toRealValue() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	void toString(StringBuilder s, int sizeLimit);
 }

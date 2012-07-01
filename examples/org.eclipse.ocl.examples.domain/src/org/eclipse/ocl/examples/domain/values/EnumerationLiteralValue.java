@@ -21,7 +21,18 @@ import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 
 public interface EnumerationLiteralValue extends ElementValue
 {
+	/**
+	 * @generated NOT
+	 */
 	DomainEnumerationLiteral getElement();
+
+	/**
+	 * @generated NOT
+	 */
 	String getName();
+
+	/**
+	 * @generated NOT
+	 */
 	DomainEnumeration getType();
 }

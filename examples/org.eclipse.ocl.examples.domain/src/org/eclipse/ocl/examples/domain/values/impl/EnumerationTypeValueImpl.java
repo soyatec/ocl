@@ -16,14 +16,29 @@
  */
 package org.eclipse.ocl.examples.domain.values.impl;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.values.EnumerationTypeValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
-public class EnumerationTypeValueImpl extends AbstractTypeValueImpl<DomainEnumeration> implements EnumerationTypeValue
+/**
+ * @generated NOT
+ */
+public class EnumerationTypeValueImpl extends TypeValueImpl implements EnumerationTypeValue
 {
-	public EnumerationTypeValueImpl(ValueFactory valueFactory, DomainEnumeration type) {
-		super(valueFactory, type);
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ValuesPackage.Literals.ENUMERATION_TYPE_VALUE;
+	}
+
+	public EnumerationTypeValueImpl(ValueFactory valueFactory, DomainEnumeration object) {
+		super(valueFactory, object);
 	}
 	
 	@Override
@@ -40,6 +55,11 @@ public class EnumerationTypeValueImpl extends AbstractTypeValueImpl<DomainEnumer
 	}
 
 	public DomainEnumeration getEnumeration() {
-		return object;
+		return getObject();
+	}
+
+	@Override
+	public DomainEnumeration getObject() {
+		return (DomainEnumeration) object;
 	}
 }

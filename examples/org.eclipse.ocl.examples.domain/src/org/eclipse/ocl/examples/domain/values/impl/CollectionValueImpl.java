@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
@@ -44,14 +45,30 @@ import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
-public abstract class AbstractCollectionValue<C extends Collection<Value>>
-	extends AbstractedCollectionValue
+/**
+ * @generated NOT
+ */
+public abstract class CollectionValueImpl extends ValueImpl implements CollectionValue
 {
-	protected final C elements;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ValuesPackage.Literals.COLLECTION_VALUE;
+	}
+
+	protected final DomainCollectionType type;
+	protected final Collection<Value> elements;
+	private DomainType actualType = null;			// Lazily computed
 	
-	protected AbstractCollectionValue(ValueFactory valueFactory, DomainCollectionType type, C elements) {
-		super(valueFactory, type);
+	protected CollectionValueImpl(ValueFactory valueFactory, DomainCollectionType type, Collection<Value> elements) {
+		super(valueFactory);
+		this.type = type;
 		this.elements = elements;
 		assert elements != null;
 	}
@@ -69,8 +86,17 @@ public abstract class AbstractCollectionValue<C extends Collection<Value>>
 
     @Override
     public BagValue asBagValue() {
-        return valueFactory.createBagValue(getBagType(), getElements());
+        return valueFactory.createBagValue(getBagType(), elements);
     }
+
+	public Collection<Value> asCollection() {
+		return elements;
+	}
+
+	@Override
+	public CollectionValue asCollectionValue() {
+		return this;
+	}
 
 	@Override
 	public Object asEcoreObject() {
@@ -81,20 +107,32 @@ public abstract class AbstractCollectionValue<C extends Collection<Value>>
 		return ecoreResult;
 	}
 
+	public List<Value> asList() {
+		return new ArrayList<Value>(elements);
+	}
+
+	public Object asObject() {
+		return elements;
+	}
+
     @Override
 	public OrderedSetValue asOrderedSetValue() {
-        return valueFactory.createOrderedSetValue(getOrderedSetType(), getElements());
+        return valueFactory.createOrderedSetValue(getOrderedSetType(), elements);
     }
 
     @Override
     public SequenceValue asSequenceValue() {
-        return valueFactory.createSequenceValue(getSequenceType(), getElements());
+        return valueFactory.createSequenceValue(getSequenceType(), elements);
     }
 
     @Override
     public SetValue asSetValue() {
-        return valueFactory.createSetValue(getSetType(), getElements());
+        return valueFactory.createSetValue(getSetType(), elements);
     }
+
+	public Value asValidValue() {
+		return this;
+	}
 
     /**
      * Implementation of the OCL
@@ -167,6 +205,32 @@ public abstract class AbstractCollectionValue<C extends Collection<Value>>
 		return flattened;
 	}
 
+	@Override
+	public DomainType getActualType() {
+		if (actualType == null) {
+			DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
+			DomainType elementType = null;
+			for (Value value : elements) {
+				DomainType valueType = value.getActualType();
+				if (valueType != null) {
+					if (elementType == null) {
+						elementType = valueType;
+					}
+					else {
+						elementType = elementType.getCommonType(standardLibrary, valueType);
+					}
+				}
+			}
+			if (elementType == null) {
+				actualType = type;
+			}
+			else {
+				actualType = standardLibrary.getCollectionType(type, elementType);
+			}
+		}	
+		return actualType;
+	}
+
 	public DomainCollectionType getBagType() {
 		return valueFactory.getStandardLibrary().getBagType(getElementType());
 	}
@@ -179,8 +243,11 @@ public abstract class AbstractCollectionValue<C extends Collection<Value>>
 		return getCollectionType().getElementType();
 	}
 
-	@Override
 	protected Collection<Value> getElements() {
+		return elements;
+	}
+
+	public Collection<Value> getObject() {
 		return elements;
 	}
 
@@ -194,6 +261,10 @@ public abstract class AbstractCollectionValue<C extends Collection<Value>>
 
 	public DomainCollectionType getSetType() {
 		return valueFactory.getStandardLibrary().getSetType(getElementType());
+	}
+
+	public DomainCollectionType getType() {
+		return type;
 	}
 
 	@Override
@@ -244,6 +315,15 @@ public abstract class AbstractCollectionValue<C extends Collection<Value>>
         }
 	}
 
+	@Override
+	public CollectionValue isCollectionValue() {
+		return this;
+	}
+
+	public BooleanValue isEmpty() {
+		return valueFactory.booleanValueOf(intSize() == 0);
+	}
+
 	public Iterator<Value> iterator() {
 		return elements != null ? elements.iterator() : Collections.<Value>emptyList().iterator();
 	}
@@ -269,6 +349,10 @@ public abstract class AbstractCollectionValue<C extends Collection<Value>>
 		}
 		return result;
     }
+
+	public BooleanValue notEmpty() {
+		return valueFactory.booleanValueOf(intSize() != 0);
+	}
 
     public Set<TupleValue> product(CollectionValue c, DomainTupleType tupleType) {   	
     	Set<TupleValue> result = new HashSet<TupleValue>();		
@@ -329,6 +413,10 @@ public abstract class AbstractCollectionValue<C extends Collection<Value>>
         }
 	}
 
+	public IntegerValue size() {
+		return valueFactory.integerValueOf(intSize());
+	}
+
 	public Value sum(DomainEvaluator evaluator, DomainType returnType, LibraryBinaryOperation binaryOperation, Value zero) throws InvalidValueException {
 		Value result = zero;
         for (Value element : elements) {
@@ -336,6 +424,33 @@ public abstract class AbstractCollectionValue<C extends Collection<Value>>
         }
         return result;
     }
+
+	@Override
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		toString(s, 100);
+		return s.toString();
+	}
+
+	@Override
+	public void toString(StringBuilder s, int lengthLimit) {
+		s.append("{");
+		boolean isFirst = true;
+		for (Value element : this) {
+			if (!isFirst) {
+				s.append(",");
+			}
+			if (s.length() < lengthLimit) {
+				element.toString(s, lengthLimit-1);
+			}
+			else {
+				s.append("...");
+				break;
+			}
+			isFirst = false;
+		}
+		s.append("}");		
+	}
 
     public CollectionValue union(CollectionValue c) throws InvalidValueException {
     	if (this instanceof SetValue && c instanceof SetValue) {
@@ -348,7 +463,7 @@ public abstract class AbstractCollectionValue<C extends Collection<Value>>
             return OrderedSetValueImpl.union(valueFactory, getOrderedSetType(), this, c);
         }
         else if (this instanceof SequenceValue || c instanceof SequenceValue) {
-            return SequenceValueImpl.union(valueFactory, getSequenceType(), this, c);
+            return SparseSequenceValueImpl.union(valueFactory, getSequenceType(), this, c);
         }
         else {
             return SetValueImpl.union(valueFactory, getSetType(), this, c);

@@ -26,6 +26,9 @@ import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
+/**
+ * @generated NOT
+ */
 class IntegerRangeImpl extends AbstractList<Value> implements IntegerRange
 {
 	// local iterator class that provides

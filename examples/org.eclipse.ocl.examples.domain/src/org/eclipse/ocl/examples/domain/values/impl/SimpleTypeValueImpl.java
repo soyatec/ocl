@@ -16,14 +16,29 @@
  */
 package org.eclipse.ocl.examples.domain.values.impl;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.values.SimpleTypeValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
-public class SimpleTypeValueImpl extends AbstractTypeValueImpl<DomainType> implements SimpleTypeValue
+/**
+ * @generated NOT
+ */
+public class SimpleTypeValueImpl extends TypeValueImpl implements SimpleTypeValue
 {
-	public SimpleTypeValueImpl(ValueFactory valueFactory, DomainType type) {
-		super(valueFactory, type);
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ValuesPackage.Literals.SIMPLE_TYPE_VALUE;
+	}
+
+	public SimpleTypeValueImpl(ValueFactory valueFactory, DomainType object) {
+		super(valueFactory, object);
 	}
 
 	@Override

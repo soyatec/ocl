@@ -22,5 +22,8 @@ public interface NullValue
 	extends BooleanValue, IntegerValue, RealValue, StringValue, UnlimitedValue,
 		OrderedSetValue, SetValue, ObjectValue, TypeValue
 {
+	/**
+	 * @generated NOT
+	 */
 	NullValue negate() throws InvalidValueException;	
 }

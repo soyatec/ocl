@@ -16,13 +16,28 @@
  */
 package org.eclipse.ocl.examples.domain.values.impl;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.values.StringValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
-public class StringValueImpl extends AbstractValue implements StringValue
+/**
+ * @generated NOT
+ */
+public class StringValueImpl extends ValueImpl implements StringValue
 {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ValuesPackage.Literals.STRING_VALUE;
+	}
+
 	private final String value;
 	
 	public StringValueImpl(ValueFactory valueFactory, String value) {

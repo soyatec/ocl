@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.domain.values.OrderedSet;
 
 /**
  * Default implementation of the {@link OrderedSet} interface.
+ * @generated NOT
  */
 public class OrderedSetImpl<E> extends LinkedHashSet<E> implements OrderedSet<E>
 {

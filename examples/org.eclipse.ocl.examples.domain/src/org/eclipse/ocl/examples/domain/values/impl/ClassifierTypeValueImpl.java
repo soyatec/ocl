@@ -16,14 +16,29 @@
  */
 package org.eclipse.ocl.examples.domain.values.impl;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.ocl.examples.domain.elements.DomainClassifierType;
 import org.eclipse.ocl.examples.domain.values.ClassifierTypeValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
-public class ClassifierTypeValueImpl extends AbstractTypeValueImpl<DomainClassifierType> implements ClassifierTypeValue
+/**
+ * @generated NOT
+ */
+public class ClassifierTypeValueImpl extends TypeValueImpl implements ClassifierTypeValue
 {
-	public ClassifierTypeValueImpl(ValueFactory valueFactory, DomainClassifierType type) {
-		super(valueFactory, type);
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ValuesPackage.Literals.CLASSIFIER_TYPE_VALUE;
+	}
+
+	public ClassifierTypeValueImpl(ValueFactory valueFactory, DomainClassifierType object) {
+		super(valueFactory, object);
 	}
 	
 	@Override

@@ -20,6 +20,13 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 public interface UniqueCollectionValue extends CollectionValue
 {
+	/**
+	 * @generated NOT
+	 */
 	UniqueCollectionValue minus(UniqueCollectionValue set) throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	UniqueCollectionValue symmetricDifference(UniqueCollectionValue set) throws InvalidValueException;       
 }

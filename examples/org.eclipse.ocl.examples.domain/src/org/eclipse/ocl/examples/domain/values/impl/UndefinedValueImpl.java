@@ -29,9 +29,12 @@ import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
-public abstract class AbstractUndefinedValue extends AbstractValue implements NullValue
+/**
+ * @generated NOT
+ */
+public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 {	
-	protected AbstractUndefinedValue(ValueFactory valueFactory) {
+	protected UndefinedValueImpl(ValueFactory valueFactory) {
 		super(valueFactory);
 	}
 

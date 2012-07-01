@@ -20,19 +20,32 @@ package org.eclipse.ocl.examples.domain.values.impl;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
 /**
  * UML implementation of a tuple value.
  * 
  * @author Christian W. Damus (cdamus)
+ * @generated NOT
  */
-public class TupleValueImpl extends AbstractValue implements TupleValue
+public class TupleValueImpl extends ValueImpl implements TupleValue
 {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ValuesPackage.Literals.TUPLE_VALUE;
+	}
+
 	protected final DomainTupleType type;
     private final Map<String, Value> parts = new java.util.HashMap<String, Value>();
     private Integer hashCode = null;

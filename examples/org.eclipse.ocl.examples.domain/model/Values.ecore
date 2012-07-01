@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="values" nsURI="http://ww.eclipse.org/OCL/Values" nsPrefix="values">
+  <eClassifiers xsi:type="ecore:EClass" name="BagValue" eSuperTypes="#//CollectionValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanValue" eSuperTypes="#//Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassifierTypeValue" eSuperTypes="#//TypeValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionValue" abstract="true" eSuperTypes="#//Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionTypeValue" eSuperTypes="#//TypeValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementValue" eSuperTypes="#//ObjectValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteralValue" eSuperTypes="#//ElementValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumerationTypeValue" eSuperTypes="#//TypeValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerValue" eSuperTypes="#//NumericValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InvalidValue" eSuperTypes="#//NullValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NullValue" eSuperTypes="#//BooleanValue #//IntegerValue #//ObjectValue #//OrderedSetValue #//RealValue #//SetValue #//StringValue #//TypeValue #//UnlimitedValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NumericValue" abstract="true" interface="true"
+      eSuperTypes="#//Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectValue" abstract="true" eSuperTypes="#//Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OrderedSetValue" eSuperTypes="#//SequenceValue #//UniqueCollectionValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RealValue" eSuperTypes="#//NumericValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SequenceValue" eSuperTypes="#//CollectionValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SetValue" eSuperTypes="#//BagValue #//UniqueCollectionValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleTypeValue" eSuperTypes="#//TypeValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StringValue" eSuperTypes="#//Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TupleValue" eSuperTypes="#//Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeValue" abstract="true" eSuperTypes="#//ElementValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UniqueCollectionValue" abstract="true"
+      interface="true" eSuperTypes="#//CollectionValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnlimitedValue" eSuperTypes="#//NumericValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true"/>
+</ecore:EPackage>

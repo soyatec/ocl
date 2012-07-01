@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -35,15 +36,28 @@ import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
 //
 //	Note that it is not necessary to adjust set uniqueness for OCL value equivalence
 //	since Value.equals realises OCL equivalence, and so Collection operations that
 //	inherently use Object.equals automatically observe OCL uniqueness.
 //
-public class SetValueImpl extends AbstractCollectionValue<Set<Value>>
-	implements SetValue
+/**
+ * @generated NOT
+ */
+public class SetValueImpl extends CollectionValueImpl implements SetValue
 {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ValuesPackage.Literals.SET_VALUE;
+	}
+
     public static SetValue intersection(ValueFactory valueFactory, DomainCollectionType type, CollectionValue left, CollectionValue right) throws InvalidValueException
     {
     	assert !left.isUndefined() && !right.isUndefined();
@@ -165,6 +179,11 @@ public class SetValueImpl extends AbstractCollectionValue<Set<Value>>
     	}
     }
 	
+	@Override
+	protected Set<Value> getElements() {
+		return (Set<Value>) elements;
+	}
+
 	public String getKind() {
 	    return "Set";
 	}

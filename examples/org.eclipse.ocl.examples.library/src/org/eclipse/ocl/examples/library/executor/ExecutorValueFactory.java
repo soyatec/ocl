@@ -17,9 +17,9 @@
 package org.eclipse.ocl.examples.library.executor;
 
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.values.impl.AbstractValueFactory;
+import org.eclipse.ocl.examples.domain.values.impl.ValueFactoryImpl;
 
-public class ExecutorValueFactory extends AbstractValueFactory
+public class ExecutorValueFactory extends ValueFactoryImpl
 {
 	public ExecutorValueFactory(DomainStandardLibrary standardLibrary) {
 		super(standardLibrary);

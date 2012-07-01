@@ -20,13 +20,48 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 public interface SequenceValue extends CollectionValue
 {
+	/**
+	 * @generated NOT
+	 */
 	SequenceValue append(Value object) throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
     Value at(int index) throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	Value first() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	SequenceValue insertAt(int index, Value object) throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
     IntegerValue indexOf(Value object) throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
     Value last() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
     SequenceValue prepend(Value object) throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
     SequenceValue reverse() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
     SequenceValue subSequence(int lower, int upper) throws InvalidValueException;
 }
