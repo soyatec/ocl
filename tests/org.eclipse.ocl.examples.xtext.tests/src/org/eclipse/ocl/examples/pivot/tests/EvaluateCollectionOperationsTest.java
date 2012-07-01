@@ -36,6 +36,14 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 	public void testCollectionAppend() {
 		assertQueryResults(null, "Sequence{'a', 'b', 'c'}", "Sequence{'a', 'b'}->append('c')");
 		assertQueryResults(null, "OrderedSet{'a', 'b', 'c'}", "OrderedSet{'a', 'b'}->append('c')");
+		assertQueryResults(null, "Sequence{1..4,0}", "Sequence{1..4}->append(0)");
+		assertQueryResults(null, "Sequence{1..4,4}", "Sequence{1..4}->append(4)");
+		assertQueryResults(null, "Sequence{1..5}", "Sequence{1..4}->append(5)");
+		assertQueryResults(null, "Sequence{1..4,6}", "Sequence{1..4}->append(6)");
+		assertQueryResults(null, "OrderedSet{1..4,0}", "OrderedSet{1..4}->append(0)");
+		assertQueryResults(null, "OrderedSet{1..4}", "OrderedSet{1..4}->append(2)");
+		assertQueryResults(null, "OrderedSet{1..5}", "OrderedSet{1..4}->append(5)");
+		assertQueryResults(null, "OrderedSet{1..4,6}", "OrderedSet{1..4}->append(6)");
 		// invalid collection
 		assertQueryInvalid(null, "let s : Sequence(String) = invalid in s->append('a')");
 		assertQueryInvalid(null, "let o : OrderedSet(String) = invalid in o->append('a')");
@@ -107,7 +115,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryEquals(null, getEmptySequenceValue(), "Sequence{}->asSequence()");
 		assertQueryEquals(null, getEmptySequenceValue(), "Bag{}->asSequence()");
 		assertQueryEquals(null, getEmptySequenceValue(), "Set{}->asSequence()");
-		assertQueryEquals(null, getEmptySequenceValue(), "OrderedSet{}->asSequence()");
+		assertQueryEquals(null, getEmptyOrderedSetValue(), "OrderedSet{}->asSequence()");
 
 		assertQueryResults(null, "Sequence{1, 2.0, '3'}", "Sequence{1, 2.0, '3'}->asSequence()");
 //		assertQueryResults(null, "Sequence{1, 2.0, '3'}", "OrderedSet{1, 2.0, '3'}->asSequence()");
@@ -273,6 +281,20 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryTrue(null, "Sequence{1.0} = Sequence{1}");
 		assertQueryTrue(null, "Set{1.0} = Set{1}");
 		assertQueryTrue(null, "Set{Set{1.0}} = Set{Set{1}}");
+
+		assertQueryTrue(null, "Sequence{1,2} = Sequence{1,2}");
+		assertQueryTrue(null, "Sequence{1..2} = Sequence{1..2}");
+		assertQueryTrue(null, "Sequence{1..2} = Sequence{1,2}");
+		assertQueryTrue(null, "Sequence{1,2} = Sequence{1..2}");
+		assertQueryFalse(null, "Sequence{1..2} = Sequence{2,1}");
+		assertQueryFalse(null, "Sequence{1..2} = Sequence{1,2,1}");
+		assertQueryTrue(null, "OrderedSet{1,2} = OrderedSet{1,2}");
+		assertQueryTrue(null, "OrderedSet{1..2} = OrderedSet{1..2}");
+		assertQueryTrue(null, "OrderedSet{1..2} = OrderedSet{1,2}");
+		assertQueryTrue(null, "OrderedSet{1,2} = OrderedSet{1..2}");
+		assertQueryFalse(null, "OrderedSet{1..2} = OrderedSet{2,1}");
+		assertQueryTrue(null, "OrderedSet{1..2} = OrderedSet{1,2,1}");
+		assertQueryFalse(null, "Sequence{1..2} = OrderedSet{1,2}");
 	}
 
 	public void testCollectionEqualOrderedXOrdered() {
@@ -510,7 +532,9 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryResults(null, "Set{'c', 'a'}", "Set{'a', 'b', 'c'}->excluding('b')");
 		assertQueryResults(null, "OrderedSet{'a', 'c'}", "OrderedSet{'a', 'b', 'c'}->excluding('b')");
 		assertQueryResults(null, "Sequence{1,3,4}", "Sequence{1..4}->excluding(2)");
+		assertQueryResults(null, "OrderedSet{1,3,4}", "OrderedSet{1..4}->excluding(2)");
 		assertQueryResults(null, "Sequence{1..3,6..9}", "Sequence{1..4,6,7..9}->excluding(4)");
+		assertQueryResults(null, "OrderedSet{1..3,6..9}", "OrderedSet{1..4,6,7..9}->excluding(4)");
 		// invalid collection
 		assertQueryInvalid(null, "let s : Sequence(String) = invalid in s->excluding('a')");
 		assertQueryInvalid(null, "let b : Bag(String) = invalid in b->excluding('a')");
@@ -1117,6 +1141,12 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryFalse(null, "Sequence{1.0} <> Sequence{1}");
 		assertQueryFalse(null, "Set{1.0} <> Set{1}");
 		assertQueryFalse(null, "Set{Set{1.0}} <> Set{Set{1}}");
+
+		assertQueryFalse(null, "Sequence{1..2} <> Sequence{1,2}");
+		assertQueryFalse(null, "OrderedSet{1..2} <> OrderedSet{1,2}");
+		assertQueryTrue(null, "Sequence{1..2} <> Sequence{2,1}");
+		assertQueryTrue(null, "OrderedSet{1..2} <> OrderedSet{2,1}");
+		assertQueryTrue(null, "Sequence{1..2} <> OrderedSet{1,2}");
 	}
 
 	public void testCollectionNotEqualInvalid() {

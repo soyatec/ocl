@@ -27,7 +27,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.NullValue;
+import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -81,27 +81,19 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof NullValue) {
+		if (!(obj instanceof SequenceValue) || (obj instanceof OrderedSetValue)) {
 			return false;
 		}
-		else if (obj instanceof SequenceValue) {
-			SequenceValue that = (SequenceValue)obj;
-			int i = 0;
-			for (Value thisValue : this) {
-				try {
-					Value thatValue = that.at(i++);
-					if (!thisValue.equals(thatValue)) {
-						return false;
-					}
-				} catch (InvalidValueException e) {
-					return false;
-				}
+		Iterator<Value> theseElements = iterator();
+		Iterator<Value> thoseElements = ((SequenceValue)obj).iterator();
+		while (theseElements.hasNext() && thoseElements.hasNext()) {
+			Value thisValue = theseElements.next();
+			Value thatValue = thoseElements.next();
+			if (!thisValue.equals(thatValue)) {
+				return false;
 			}
-			return true;
 		}
-		else {
-			return false;
-		}
+		return !theseElements.hasNext() && !thoseElements.hasNext();
 	}
 
 	public SequenceValue excluding(Value value) {

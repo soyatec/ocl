@@ -150,7 +150,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
 			boolean isUnique = collectionValueType.isUnique();
 			if (isOrdered) {
 				if (isUnique) {
-					return new OrderedSetValueImpl.Accumulator(this, collectionValueType);
+					return new SparseOrderedSetValueImpl.Accumulator(this, collectionValueType);
 				}
 				else {
 					return new SparseSequenceValueImpl.Accumulator(this, collectionValueType);
@@ -308,22 +308,26 @@ public abstract class ValueFactoryImpl implements ValueFactory
     	return createOrderedSetValue(standardLibrary.getOrderedSetType(elementType), collection);
     }
 
+	public OrderedSetValue createOrderedSetRange(DomainCollectionType type, IntegerRange range) {
+		return new RangeOrderedSetValueImpl(this, type, range);
+	}
+
 	public OrderedSetValue createOrderedSetValue(DomainCollectionType type, Value... values) {
-		return new OrderedSetValueImpl(this, type, values);
+		return new SparseOrderedSetValueImpl(this, type, values);
 	}
 
 	public OrderedSetValue createOrderedSetValue(DomainCollectionType type, OrderedSet<? extends Value> values) {
-		return new OrderedSetValueImpl(this, type, values);
+		return new SparseOrderedSetValueImpl(this, type, values);
 	}
 
 	public OrderedSetValue createOrderedSetValue(DomainCollectionType type, Collection<? extends Value> values) {
-		return new OrderedSetValueImpl(this, type, values);
+		return new SparseOrderedSetValueImpl(this, type, values);
 	}
 
 	public OrderedSetValue createOrderedSetValue(Value... values) {
 		DomainType elementType = getElementType(values);
 		DomainCollectionType collectionType = standardLibrary.getOrderedSetType(elementType);
-		return new OrderedSetValueImpl(this, collectionType, values);
+		return new SparseOrderedSetValueImpl(this, collectionType, values);
 	}
 
     public SequenceValue createSequenceOf(Object... objects) {
@@ -357,7 +361,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
 	}
 
 	public SequenceValue createSequenceRange(DomainCollectionType type, IntegerRange range) {
-		return new SequenceRangeImpl(this, type, range);
+		return new RangeSequenceValueImpl(this, type, range);
 	}
 
 	public SequenceValue createSequenceValue(DomainCollectionType type, Value... values) {

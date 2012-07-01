@@ -357,10 +357,10 @@ public interface ValuesPackage extends EPackage {
 	int SEQUENCE_VALUE_FEATURE_COUNT = COLLECTION_VALUE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.OrderedSetValueImpl <em>Ordered Set Value</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.SparseOrderedSetValueImpl <em>Ordered Set Value</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.domain.values.impl.OrderedSetValueImpl
+	 * @see org.eclipse.ocl.examples.domain.values.impl.SparseOrderedSetValueImpl
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getOrderedSetValue()
 	 * @generated
 	 */
@@ -902,10 +902,10 @@ public interface ValuesPackage extends EPackage {
 		EClass OBJECT_VALUE = eINSTANCE.getObjectValue();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.domain.values.impl.OrderedSetValueImpl <em>Ordered Set Value</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.domain.values.impl.SparseOrderedSetValueImpl <em>Ordered Set Value</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.domain.values.impl.OrderedSetValueImpl
+		 * @see org.eclipse.ocl.examples.domain.values.impl.SparseOrderedSetValueImpl
 		 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getOrderedSetValue()
 		 * @generated
 		 */

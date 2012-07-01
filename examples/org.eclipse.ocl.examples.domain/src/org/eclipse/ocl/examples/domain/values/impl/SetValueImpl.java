@@ -206,7 +206,7 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
     public OrderedSetValue sort(Comparator<Value> comparator) {
     	List<Value> values = new ArrayList<Value>(elements);
     	Collections.sort(values, comparator);
-    	return new OrderedSetValueImpl(valueFactory, getOrderedSetType(), values);
+    	return valueFactory.createOrderedSetValue(getOrderedSetType(), values);
     }
 
     public SetValue symmetricDifference(UniqueCollectionValue set) {       
@@ -222,7 +222,7 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
     }
     
 	public SequenceValue toSequenceValue() {
-		return new OrderedSetValueImpl(valueFactory, getOrderedSetType(), elements);
+		return valueFactory.createOrderedSetValue(getOrderedSetType(), elements);
 	}
 
 	@Override

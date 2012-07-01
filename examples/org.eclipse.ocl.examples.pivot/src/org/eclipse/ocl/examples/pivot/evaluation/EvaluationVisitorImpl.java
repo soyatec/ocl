@@ -51,15 +51,14 @@ import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.domain.values.impl.SequenceRangeImpl;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
-import org.eclipse.ocl.examples.pivot.CollectionKind;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralPart;
 import org.eclipse.ocl.examples.pivot.CollectionRange;
@@ -207,10 +206,10 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
     public Value visitCollectionLiteralExp(CollectionLiteralExp cl) {
 		// construct the appropriate collection from the parts
 		// based on the collection kind.
-		CollectionKind kind = cl.getKind();
 		List<CollectionLiteralPart> parts = cl.getPart();
 		DomainCollectionType type = (DomainCollectionType) cl.getType();
-		if ((kind == CollectionKind.SEQUENCE) && isSimpleRange(cl)) {
+		boolean isOrdered = type.isOrdered();
+		if (isOrdered && isSimpleRange(cl)) {
 			// literal is of the form: Sequence{first..last}.
 			// construct a list with a lazy iterator for it.
 			CollectionRange collRange = (CollectionRange) parts.get(0);
@@ -241,7 +240,13 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 			}
 			// construct a lazy integer list for the range
 			try {
-				return new SequenceRangeImpl(valueFactory, type, valueFactory.createRange(firstInteger, lastInteger));
+				IntegerRange range = valueFactory.createRange(firstInteger, lastInteger);
+				if (type.isUnique()) {
+					return valueFactory.createOrderedSetRange(type, range);
+				}
+				else {
+					return valueFactory.createSequenceRange(type, range);
+				}
 			} catch (InvalidValueException e) {
 				return evaluationEnvironment.throwInvalidEvaluation(e, cl, lastVal, "Non integer first or last element");
 			}

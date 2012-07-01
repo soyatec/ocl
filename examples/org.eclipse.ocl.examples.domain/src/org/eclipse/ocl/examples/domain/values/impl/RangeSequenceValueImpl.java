@@ -32,9 +32,9 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
 /**
  * @generated NOT
  */
-public class SequenceRangeImpl extends SequenceValueImpl
-{	// FIXME Should be AbstractOrderedSet ...
-	public SequenceRangeImpl(ValueFactory valueFactory, DomainCollectionType type, IntegerRange range) {
+public class RangeSequenceValueImpl extends SequenceValueImpl
+{
+	public RangeSequenceValueImpl(ValueFactory valueFactory, DomainCollectionType type, IntegerRange range) {
 		super(valueFactory, type, range);
 	}
 
@@ -44,7 +44,7 @@ public class SequenceRangeImpl extends SequenceValueImpl
 		IntegerValue nextValue = theElements.getLast().add(valueFactory.getOne());
 		if (value.equals(nextValue)) {
 			IntegerRange range = valueFactory.createRange(theElements.getFirst(), nextValue);
-			return new SequenceRangeImpl(valueFactory, getCollectionType(), range);
+			return new RangeSequenceValueImpl(valueFactory, getCollectionType(), range);
 		}
 		else {
 			List<Value> elements = createElements();
@@ -74,29 +74,14 @@ public class SequenceRangeImpl extends SequenceValueImpl
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof SequenceRangeImpl) {
-			SequenceRangeImpl that = (SequenceRangeImpl)obj;
+		if (obj instanceof RangeSequenceValueImpl) {
+			RangeSequenceValueImpl that = (RangeSequenceValueImpl)obj;
 			return this.elements.equals(that.elements);
 		}
 		else {
 			return super.equals(obj);
 		}
 	}
-
-//	public BooleanValue excludes(Value value) {
-		// TODO Auto-generated method stub
-//		return null;
-//	}
-
-//	public BooleanValue excludesAll(CollectionValue c) {
-		// TODO Auto-generated method stub
-//		return null;
-//	}
-
-//	public CollectionValue excluding(Value value) {
-		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 	@Override
 	public Value first() {
@@ -116,42 +101,10 @@ public class SequenceRangeImpl extends SequenceValueImpl
 		return (IntegerRange) elements;
 	}
 
-//    public Type getType(TypeManager typeManager, Type staticType) {
-//    	if (type == null) {
-//    		if ((elements.getFirst() >= 0) && (elements.getLast() >= 0)) {
-//    			type = typeManager.getCollectionType(true, false, typeManager.getUnlimitedNaturalType());
-//    		}
-//    		else{
-//    			type = typeManager.getCollectionType(true, false, typeManager.getIntegerType());
-//    		}
-//    	}
-//		return type;
-//	}
-
-//	public BooleanValue includes(Value value) {
-		// TODO Auto-generated method stub
-//		return null;
-//	}
-
-//	public BooleanValue includesAll(CollectionValue c) {
-		// TODO Auto-generated method stub
-//		return null;
-//	}
-
 	@Override
 	public SequenceValue including(Value value) throws InvalidValueException {
 		return append(value);
 	}
-
-//	public IntegerValue indexOf(Value object) {
-		// TODO Auto-generated method stub
-//		return null;
-//	}
-
-//	public OrderedCollectionValue insertAt(int index, Value object) {
-		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 	@Override
 	public Value last() {
@@ -164,7 +117,7 @@ public class SequenceRangeImpl extends SequenceValueImpl
 		IntegerValue previousValue = theElements.getFirst().subtract(valueFactory.getOne());
 		if (value.equals(previousValue)) {
 			IntegerRange range = valueFactory.createRange(previousValue, theElements.getLast());
-			return new SequenceRangeImpl(valueFactory, getCollectionType(), range);
+			return new RangeSequenceValueImpl(valueFactory, getCollectionType(), range);
 		}
 		else {
 			List<Value> elements = createElements();
@@ -172,16 +125,6 @@ public class SequenceRangeImpl extends SequenceValueImpl
 			return valueFactory.createSequenceValue(getCollectionType(), elements);
 		}
 	}
-
-//	@Override
-//	public SequenceValue reverse() {
-//		return new IntegerRangeValueImpl(valueFactory, getCollectionType(), elements.getLast(), elements.getFirst());
-//	}
-
-//	public SequenceValue subSequence(int lower, int upper) {
-		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 	@Override
 	public Iterator<Value> toIteratorValue() throws InvalidValueException {

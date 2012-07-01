@@ -79,6 +79,7 @@ public interface ValueFactory
 
     OrderedSetValue createOrderedSetOf(Object... objects);
     OrderedSetValue createOrderedSetOf(Iterable<?> objects);
+    OrderedSetValue createOrderedSetRange(DomainCollectionType type, IntegerRange range);
 	OrderedSetValue createOrderedSetValue(DomainCollectionType type, Value... values);
 	OrderedSetValue createOrderedSetValue(DomainCollectionType type, OrderedSet<? extends Value> values);
 	OrderedSetValue createOrderedSetValue(DomainCollectionType type, Collection<? extends Value> values);

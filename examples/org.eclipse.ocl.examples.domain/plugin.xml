@@ -9,7 +9,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://ww.eclipse.org/OCL/Values"
-            class="org.eclipse.ocl.examples.values.impl.ValuesPackageImpl"
+            class="org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl"
             genModel="model/Values.genmodel"/>
    </extension>
 

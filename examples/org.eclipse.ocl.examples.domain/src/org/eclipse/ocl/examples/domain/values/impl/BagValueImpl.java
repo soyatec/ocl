@@ -33,6 +33,7 @@ import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
+import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
@@ -132,7 +133,7 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof BagValueImpl)) {
+		if (!(obj instanceof BagValueImpl) || (obj instanceof SetValue)) {
 			return false;
 		}
 		return elements.equals(((BagValueImpl)obj).elements);
