@@ -112,17 +112,7 @@ public interface OCLstdlibCSTPackage
 	 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.OCLstdlibCSTPackageImpl#getLibPropertyCS()
 	 * @generated
 	 */
-	int LIB_PROPERTY_CS = 5;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibRootPackageCSImpl <em>Lib Root Package CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibRootPackageCSImpl
-	 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.OCLstdlibCSTPackageImpl#getLibRootPackageCS()
-	 * @generated
-	 */
-	int LIB_ROOT_PACKAGE_CS = 6;
+	int LIB_PROPERTY_CS = 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.JavaImplementationCS <em>Java Implementation CS</em>}' class.
@@ -712,6 +702,124 @@ public interface OCLstdlibCSTPackage
 	int LIB_OPERATION_CS_FEATURE_COUNT = BaseCSTPackage.OPERATION_CS_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibPackageCSImpl <em>Lib Package CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibPackageCSImpl
+	 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.OCLstdlibCSTPackageImpl#getLibPackageCS()
+	 * @generated
+	 */
+	int LIB_PACKAGE_CS = 5;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_PACKAGE_CS__LOGICAL_PARENT = BaseCSTPackage.PACKAGE_CS__LOGICAL_PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_PACKAGE_CS__PIVOT = BaseCSTPackage.PACKAGE_CS__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_PACKAGE_CS__OWNED_ANNOTATION = BaseCSTPackage.PACKAGE_CS__OWNED_ANNOTATION;
+
+	/**
+	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_PACKAGE_CS__ORIGINAL_XMI_ID = BaseCSTPackage.PACKAGE_CS__ORIGINAL_XMI_ID;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_PACKAGE_CS__CSI = BaseCSTPackage.PACKAGE_CS__CSI;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_PACKAGE_CS__NAME = BaseCSTPackage.PACKAGE_CS__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_PACKAGE_CS__OWNED_TYPE = BaseCSTPackage.PACKAGE_CS__OWNED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Owned Nested Package</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_PACKAGE_CS__OWNED_NESTED_PACKAGE = BaseCSTPackage.PACKAGE_CS__OWNED_NESTED_PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_PACKAGE_CS__NS_PREFIX = BaseCSTPackage.PACKAGE_CS__NS_PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Ns URI</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_PACKAGE_CS__NS_URI = BaseCSTPackage.PACKAGE_CS__NS_URI;
+
+	/**
+	 * The feature id for the '<em><b>Owned Precedence</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_PACKAGE_CS__OWNED_PRECEDENCE = BaseCSTPackage.PACKAGE_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Lib Package CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_PACKAGE_CS_FEATURE_COUNT = BaseCSTPackage.PACKAGE_CS_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -836,132 +944,6 @@ public interface OCLstdlibCSTPackage
 	 * @ordered
 	 */
 	int LIB_PROPERTY_CS_FEATURE_COUNT = BaseCSTPackage.ATTRIBUTE_CS_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIB_ROOT_PACKAGE_CS__LOGICAL_PARENT = BaseCSTPackage.ROOT_PACKAGE_CS__LOGICAL_PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIB_ROOT_PACKAGE_CS__PIVOT = BaseCSTPackage.ROOT_PACKAGE_CS__PIVOT;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIB_ROOT_PACKAGE_CS__OWNED_ANNOTATION = BaseCSTPackage.ROOT_PACKAGE_CS__OWNED_ANNOTATION;
-
-	/**
-	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIB_ROOT_PACKAGE_CS__ORIGINAL_XMI_ID = BaseCSTPackage.ROOT_PACKAGE_CS__ORIGINAL_XMI_ID;
-
-	/**
-	 * The feature id for the '<em><b>Csi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIB_ROOT_PACKAGE_CS__CSI = BaseCSTPackage.ROOT_PACKAGE_CS__CSI;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIB_ROOT_PACKAGE_CS__NAME = BaseCSTPackage.ROOT_PACKAGE_CS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIB_ROOT_PACKAGE_CS__OWNED_TYPE = BaseCSTPackage.ROOT_PACKAGE_CS__OWNED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Nested Package</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIB_ROOT_PACKAGE_CS__OWNED_NESTED_PACKAGE = BaseCSTPackage.ROOT_PACKAGE_CS__OWNED_NESTED_PACKAGE;
-
-	/**
-	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIB_ROOT_PACKAGE_CS__NS_PREFIX = BaseCSTPackage.ROOT_PACKAGE_CS__NS_PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Ns URI</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIB_ROOT_PACKAGE_CS__NS_URI = BaseCSTPackage.ROOT_PACKAGE_CS__NS_URI;
-
-	/**
-	 * The feature id for the '<em><b>Owned Import</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIB_ROOT_PACKAGE_CS__OWNED_IMPORT = BaseCSTPackage.ROOT_PACKAGE_CS__OWNED_IMPORT;
-
-	/**
-	 * The feature id for the '<em><b>Owned Library</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIB_ROOT_PACKAGE_CS__OWNED_LIBRARY = BaseCSTPackage.ROOT_PACKAGE_CS__OWNED_LIBRARY;
-
-	/**
-	 * The feature id for the '<em><b>Owned Precedence</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIB_ROOT_PACKAGE_CS__OWNED_PRECEDENCE = BaseCSTPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Lib Root Package CS</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIB_ROOT_PACKAGE_CS_FEATURE_COUNT = BaseCSTPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.MetaTypeNameImpl <em>Meta Type Name</em>}' class.
@@ -1169,6 +1151,27 @@ public interface OCLstdlibCSTPackage
 	EAttribute getLibOperationCS_Static();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS <em>Lib Package CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Lib Package CS</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS
+	 * @generated
+	 */
+	EClass getLibPackageCS();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS#getOwnedPrecedence <em>Owned Precedence</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Precedence</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS#getOwnedPrecedence()
+	 * @see #getLibPackageCS()
+	 * @generated
+	 */
+	EReference getLibPackageCS_OwnedPrecedence();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPropertyCS <em>Lib Property CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1188,27 +1191,6 @@ public interface OCLstdlibCSTPackage
 	 * @generated
 	 */
 	EAttribute getLibPropertyCS_Static();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS <em>Lib Root Package CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Lib Root Package CS</em>'.
-	 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS
-	 * @generated
-	 */
-	EClass getLibRootPackageCS();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS#getOwnedPrecedence <em>Owned Precedence</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Precedence</em>'.
-	 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS#getOwnedPrecedence()
-	 * @see #getLibRootPackageCS()
-	 * @generated
-	 */
-	EReference getLibRootPackageCS_OwnedPrecedence();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName <em>Meta Type Name</em>}'.
@@ -1377,6 +1359,24 @@ public interface OCLstdlibCSTPackage
 		EAttribute LIB_OPERATION_CS__STATIC = eINSTANCE.getLibOperationCS_Static();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibPackageCSImpl <em>Lib Package CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibPackageCSImpl
+		 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.OCLstdlibCSTPackageImpl#getLibPackageCS()
+		 * @generated
+		 */
+		EClass LIB_PACKAGE_CS = eINSTANCE.getLibPackageCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Precedence</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LIB_PACKAGE_CS__OWNED_PRECEDENCE = eINSTANCE.getLibPackageCS_OwnedPrecedence();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibPropertyCSImpl <em>Lib Property CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1393,24 +1393,6 @@ public interface OCLstdlibCSTPackage
 		 * @generated
 		 */
 		EAttribute LIB_PROPERTY_CS__STATIC = eINSTANCE.getLibPropertyCS_Static();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibRootPackageCSImpl <em>Lib Root Package CS</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibRootPackageCSImpl
-		 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.OCLstdlibCSTPackageImpl#getLibRootPackageCS()
-		 * @generated
-		 */
-		EClass LIB_ROOT_PACKAGE_CS = eINSTANCE.getLibRootPackageCS();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Precedence</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LIB_ROOT_PACKAGE_CS__OWNED_PRECEDENCE = eINSTANCE.getLibRootPackageCS_OwnedPrecedence();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.MetaTypeNameImpl <em>Meta Type Name</em>}' class.

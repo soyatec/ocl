@@ -22,13 +22,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.*;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibClassCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibConstraintCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPropertyCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTFactory;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTPackage;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS;
@@ -88,8 +88,8 @@ public class OCLstdlibCSTFactoryImpl
 			case OCLstdlibCSTPackage.LIB_CONSTRAINT_CS: return createLibConstraintCS();
 			case OCLstdlibCSTPackage.LIB_ITERATION_CS: return createLibIterationCS();
 			case OCLstdlibCSTPackage.LIB_OPERATION_CS: return createLibOperationCS();
+			case OCLstdlibCSTPackage.LIB_PACKAGE_CS: return createLibPackageCS();
 			case OCLstdlibCSTPackage.LIB_PROPERTY_CS: return createLibPropertyCS();
-			case OCLstdlibCSTPackage.LIB_ROOT_PACKAGE_CS: return createLibRootPackageCS();
 			case OCLstdlibCSTPackage.META_TYPE_NAME: return createMetaTypeName();
 			case OCLstdlibCSTPackage.PRECEDENCE_CS: return createPrecedenceCS();
 			default:
@@ -142,9 +142,10 @@ public class OCLstdlibCSTFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LibPropertyCS createLibPropertyCS() {
-		LibPropertyCSImpl libPropertyCS = new LibPropertyCSImpl();
-		return libPropertyCS;
+	public LibPackageCS createLibPackageCS()
+	{
+		LibPackageCSImpl libPackageCS = new LibPackageCSImpl();
+		return libPackageCS;
 	}
 
 	/**
@@ -152,9 +153,9 @@ public class OCLstdlibCSTFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LibRootPackageCS createLibRootPackageCS() {
-		LibRootPackageCSImpl libRootPackageCS = new LibRootPackageCSImpl();
-		return libRootPackageCS;
+	public LibPropertyCS createLibPropertyCS() {
+		LibPropertyCSImpl libPropertyCS = new LibPropertyCSImpl();
+		return libPropertyCS;
 	}
 
 	/**

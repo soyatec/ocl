@@ -813,24 +813,32 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		}
 	}
 
-	public Collection<org.eclipse.ocl.examples.pivot.Package> computePivotRootPackages() {
-		Set<org.eclipse.ocl.examples.pivot.Package> rootPackages =
-			new HashSet<org.eclipse.ocl.examples.pivot.Package>();
+	public Collection<Library> computeLibraries() {
+		Set<Library> libraries = new HashSet<Library>();
 		if (pivotLibraryResource != null) {
 			for (EObject eObject : pivotLibraryResource.getContents()) {
 				if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
-					rootPackages.add((org.eclipse.ocl.examples.pivot.Package) eObject);
+					computeLibraries(libraries, (org.eclipse.ocl.examples.pivot.Package) eObject);
 				}
 			}
 		}
 		for (Resource pivotResource : pivotResourceSet.getResources()) {
 			for (EObject eObject : pivotResource.getContents()) {
 				if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
-					rootPackages.add((org.eclipse.ocl.examples.pivot.Package) eObject);
+					computeLibraries(libraries, (org.eclipse.ocl.examples.pivot.Package) eObject);
 				}
 			}
 		}
-		return rootPackages;
+		return libraries;
+	}
+
+	private void computeLibraries(Set<Library> libraries, org.eclipse.ocl.examples.pivot.Package aPackage) {
+		if (aPackage instanceof Library) {
+			libraries.add((Library) aPackage);
+		}
+		for (org.eclipse.ocl.examples.pivot.Package nestedPackage : aPackage.getNestedPackage()) {
+			computeLibraries(libraries, nestedPackage);
+		}
 	}
 
 	@Override
@@ -985,8 +993,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 
 	protected PrecedenceManager createPrecedenceManager() {
 		PrecedenceManager precedenceManager = new PrecedenceManager();
-		Collection<org.eclipse.ocl.examples.pivot.Package> rootPackages = computePivotRootPackages();
-		List<String> errors = precedenceManager.compilePrecedences(rootPackages);
+		Collection<Library> libraries = computeLibraries();
+		List<String> errors = precedenceManager.compilePrecedences(libraries);
 		for (String error : errors) {
 			logger.error(error);
 		}
@@ -2293,10 +2301,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			}
 			installResource(pivotResource);
 		}
-		for (org.eclipse.ocl.examples.pivot.Package rootPackage : computePivotRootPackages()) {
-			if (rootPackage instanceof Library) {
-				loadLibraryPackage((Library) rootPackage);
-			}
+		for (Library library : computeLibraries()) {
+			loadLibraryPackage(library);
 		}
 	}
 

@@ -61,12 +61,12 @@ public abstract class AbstractExtendingOCLstdlibCSVisitor<R, C>
 		return visitOperationCS(object);
 	}
 
-	public R visitLibPropertyCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPropertyCS object) {
-		return visitAttributeCS(object);
+	public R visitLibPackageCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS object) {
+		return visitPackageCS(object);
 	}
 
-	public R visitLibRootPackageCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS object) {
-		return visitRootPackageCS(object);
+	public R visitLibPropertyCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPropertyCS object) {
+		return visitAttributeCS(object);
 	}
 
 	public R visitMetaTypeName(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName object) {

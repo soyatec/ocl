@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.ocl.examples.pivot.AssociativityKind;
+import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.manager.PrecedenceManager;
@@ -31,27 +32,27 @@ import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
  */
 public class PrecedenceTests extends XtextTestCase
 {
-	protected Precedence createPrecedence(org.eclipse.ocl.examples.pivot.Package root1, String name, AssociativityKind associativity) {
+	protected Precedence createPrecedence(Library library1, String name, AssociativityKind associativity) {
 		Precedence precedence = PivotFactory.eINSTANCE.createPrecedence();
 		precedence.setName(name);
 		precedence.setAssociativity(associativity);
-		root1.getOwnedPrecedence().add(precedence);
+		library1.getOwnedPrecedence().add(precedence);
 		return precedence;
 	}
 
 	public void testOkAssignPrecedences() {
-		Collection<org.eclipse.ocl.examples.pivot.Package> rootPackages = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();
-		org.eclipse.ocl.examples.pivot.Package root1 = PivotFactory.eINSTANCE.createPackage();
-		Precedence p1a = createPrecedence(root1, "A", AssociativityKind.LEFT);
-		Precedence p1b = createPrecedence(root1, "B", AssociativityKind.LEFT);
-		Precedence p1c = createPrecedence(root1, "D", AssociativityKind.LEFT);
-		rootPackages.add(root1);
-		org.eclipse.ocl.examples.pivot.Package root2 = PivotFactory.eINSTANCE.createPackage();
-		Precedence p2a = createPrecedence(root2, "B", AssociativityKind.LEFT);
-		Precedence p2b = createPrecedence(root2, "C", AssociativityKind.LEFT);
-		Precedence p2c = createPrecedence(root2, "D", AssociativityKind.LEFT);
-		rootPackages.add(root2);
-		List<String> errors = new PrecedenceManager().compilePrecedences(rootPackages);
+		Collection<Library> libraries = new ArrayList<Library>();
+		Library library1 = PivotFactory.eINSTANCE.createLibrary();
+		Precedence p1a = createPrecedence(library1, "A", AssociativityKind.LEFT);
+		Precedence p1b = createPrecedence(library1, "B", AssociativityKind.LEFT);
+		Precedence p1c = createPrecedence(library1, "D", AssociativityKind.LEFT);
+		libraries.add(library1);
+		Library library2 = PivotFactory.eINSTANCE.createLibrary();
+		Precedence p2a = createPrecedence(library2, "B", AssociativityKind.LEFT);
+		Precedence p2b = createPrecedence(library2, "C", AssociativityKind.LEFT);
+		Precedence p2c = createPrecedence(library2, "D", AssociativityKind.LEFT);
+		libraries.add(library2);
+		List<String> errors = new PrecedenceManager().compilePrecedences(libraries);
 		assertEquals(0, p1a.getOrder().intValue());
 		assertEquals(1, p1b.getOrder().intValue());
 		assertEquals(3, p1c.getOrder().intValue());
@@ -62,16 +63,16 @@ public class PrecedenceTests extends XtextTestCase
 	}
 	
 	public void testBadOrderingAssignPrecedences() {
-		Collection<org.eclipse.ocl.examples.pivot.Package> rootPackages = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();
-		org.eclipse.ocl.examples.pivot.Package root1 = PivotFactory.eINSTANCE.createPackage();
-		Precedence p1a = createPrecedence(root1, "A", AssociativityKind.LEFT);
-		Precedence p1b = createPrecedence(root1, "B", AssociativityKind.LEFT);
-		rootPackages.add(root1);
-		org.eclipse.ocl.examples.pivot.Package root2 = PivotFactory.eINSTANCE.createPackage();
-		Precedence p2a = createPrecedence(root2, "B", AssociativityKind.LEFT);
-		Precedence p2b = createPrecedence(root2, "A", AssociativityKind.LEFT);
-		rootPackages.add(root2);
-		List<String> errors = new PrecedenceManager().compilePrecedences(rootPackages);
+		Collection<Library> libraries = new ArrayList<Library>();
+		Library library1 = PivotFactory.eINSTANCE.createLibrary();
+		Precedence p1a = createPrecedence(library1, "A", AssociativityKind.LEFT);
+		Precedence p1b = createPrecedence(library1, "B", AssociativityKind.LEFT);
+		libraries.add(library1);
+		Library library2 = PivotFactory.eINSTANCE.createLibrary();
+		Precedence p2a = createPrecedence(library2, "B", AssociativityKind.LEFT);
+		Precedence p2b = createPrecedence(library2, "A", AssociativityKind.LEFT);
+		libraries.add(library2);
+		List<String> errors = new PrecedenceManager().compilePrecedences(libraries);
 		assertEquals(0, p1a.getOrder().intValue());
 		assertEquals(1, p1b.getOrder().intValue());
 		assertEquals(1, p2a.getOrder().intValue());
@@ -80,32 +81,32 @@ public class PrecedenceTests extends XtextTestCase
 	}
 	
 	public void testBadAssociativityAssignPrecedences() {
-		Collection<org.eclipse.ocl.examples.pivot.Package> rootPackages = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();
-		org.eclipse.ocl.examples.pivot.Package root1 = PivotFactory.eINSTANCE.createPackage();
-		Precedence p1a = createPrecedence(root1, "A", AssociativityKind.LEFT);
-		rootPackages.add(root1);
-		org.eclipse.ocl.examples.pivot.Package root2 = PivotFactory.eINSTANCE.createPackage();
-		Precedence p2a = createPrecedence(root2, "A", AssociativityKind.RIGHT);
-		rootPackages.add(root2);
-		List<String> errors = new PrecedenceManager().compilePrecedences(rootPackages);
+		Collection<Library> libraries = new ArrayList<Library>();
+		Library library1 = PivotFactory.eINSTANCE.createLibrary();
+		Precedence p1a = createPrecedence(library1, "A", AssociativityKind.LEFT);
+		libraries.add(library1);
+		Library library2 = PivotFactory.eINSTANCE.createLibrary();
+		Precedence p2a = createPrecedence(library2, "A", AssociativityKind.RIGHT);
+		libraries.add(library2);
+		List<String> errors = new PrecedenceManager().compilePrecedences(libraries);
 		assertEquals(0, p1a.getOrder().intValue());
 		assertEquals(0, p2a.getOrder().intValue());
 		assertEquals(1, errors.size());
 	}
 	
 	public void testAmbiguousInternalAssignPrecedences() {
-		Collection<org.eclipse.ocl.examples.pivot.Package> rootPackages = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();
-		org.eclipse.ocl.examples.pivot.Package root1 = PivotFactory.eINSTANCE.createPackage();
-		Precedence p1a = createPrecedence(root1, "A", AssociativityKind.LEFT);
-		Precedence p1b = createPrecedence(root1, "B", AssociativityKind.LEFT);
-		Precedence p1c = createPrecedence(root1, "D", AssociativityKind.LEFT);
-		rootPackages.add(root1);
-		org.eclipse.ocl.examples.pivot.Package root2 = PivotFactory.eINSTANCE.createPackage();
-		Precedence p2a = createPrecedence(root2, "A", AssociativityKind.LEFT);
-		Precedence p2b = createPrecedence(root2, "C", AssociativityKind.LEFT);
-		Precedence p2c = createPrecedence(root2, "D", AssociativityKind.LEFT);
-		rootPackages.add(root2);
-		List<String> errors = new PrecedenceManager().compilePrecedences(rootPackages);
+		Collection<Library> libraries = new ArrayList<Library>();
+		Library library1 = PivotFactory.eINSTANCE.createLibrary();
+		Precedence p1a = createPrecedence(library1, "A", AssociativityKind.LEFT);
+		Precedence p1b = createPrecedence(library1, "B", AssociativityKind.LEFT);
+		Precedence p1c = createPrecedence(library1, "D", AssociativityKind.LEFT);
+		libraries.add(library1);
+		Library library2 = PivotFactory.eINSTANCE.createLibrary();
+		Precedence p2a = createPrecedence(library2, "A", AssociativityKind.LEFT);
+		Precedence p2b = createPrecedence(library2, "C", AssociativityKind.LEFT);
+		Precedence p2c = createPrecedence(library2, "D", AssociativityKind.LEFT);
+		libraries.add(library2);
+		List<String> errors = new PrecedenceManager().compilePrecedences(libraries);
 		assertEquals(0, p1a.getOrder().intValue());
 		assertEquals(2, p1b.getOrder().intValue());
 		assertEquals(3, p1c.getOrder().intValue());
@@ -116,16 +117,16 @@ public class PrecedenceTests extends XtextTestCase
 	}
 	
 	public void testAmbiguousTailAssignPrecedences() {
-		Collection<org.eclipse.ocl.examples.pivot.Package> rootPackages = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();
-		org.eclipse.ocl.examples.pivot.Package root1 = PivotFactory.eINSTANCE.createPackage();
-		Precedence p1a = createPrecedence(root1, "A", AssociativityKind.LEFT);
-		Precedence p1b = createPrecedence(root1, "B", AssociativityKind.LEFT);
-		rootPackages.add(root1);
-		org.eclipse.ocl.examples.pivot.Package root2 = PivotFactory.eINSTANCE.createPackage();
-		Precedence p2a = createPrecedence(root2, "A", AssociativityKind.LEFT);
-		Precedence p2b = createPrecedence(root2, "C", AssociativityKind.LEFT);
-		rootPackages.add(root2);
-		List<String> errors = new PrecedenceManager().compilePrecedences(rootPackages);
+		Collection<Library> libraries = new ArrayList<Library>();
+		Library library1 = PivotFactory.eINSTANCE.createLibrary();
+		Precedence p1a = createPrecedence(library1, "A", AssociativityKind.LEFT);
+		Precedence p1b = createPrecedence(library1, "B", AssociativityKind.LEFT);
+		libraries.add(library1);
+		Library library2 = PivotFactory.eINSTANCE.createLibrary();
+		Precedence p2a = createPrecedence(library2, "A", AssociativityKind.LEFT);
+		Precedence p2b = createPrecedence(library2, "C", AssociativityKind.LEFT);
+		libraries.add(library2);
+		List<String> errors = new PrecedenceManager().compilePrecedences(libraries);
 		assertEquals(0, p1a.getOrder().intValue());
 		assertEquals(2, p1b.getOrder().intValue());
 		assertEquals(0, p2a.getOrder().intValue());

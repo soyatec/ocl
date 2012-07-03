@@ -105,164 +105,25 @@ ruleLibrary returns [EObject current=null]
     {
     	newLeafNode(otherlv_1, grammarAccess.getLibraryAccess().getSemicolonKeyword_0_1());
     }
-)*	otherlv_2='library' 
-    {
-    	newLeafNode(otherlv_2, grammarAccess.getLibraryAccess().getLibraryKeyword_1());
-    }
-(
+)*(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getLibraryAccess().getNameNameParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getLibraryAccess().getOwnedNestedPackageLibPackageCSParserRuleCall_1_0()); 
 	    }
-		lv_name_3_0=ruleName		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getLibraryRule());
-	        }
-       		set(
-       			$current, 
-       			"name",
-        		lv_name_3_0, 
-        		"Name");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)(	otherlv_4=':' 
-    {
-    	newLeafNode(otherlv_4, grammarAccess.getLibraryAccess().getColonKeyword_3_0());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getLibraryAccess().getNsPrefixIdentifierParserRuleCall_3_1_0()); 
-	    }
-		lv_nsPrefix_5_0=ruleIdentifier		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getLibraryRule());
-	        }
-       		set(
-       			$current, 
-       			"nsPrefix",
-        		lv_nsPrefix_5_0, 
-        		"Identifier");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)	otherlv_6='=' 
-    {
-    	newLeafNode(otherlv_6, grammarAccess.getLibraryAccess().getEqualsSignKeyword_3_2());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getLibraryAccess().getNsURIURIParserRuleCall_3_3_0()); 
-	    }
-		lv_nsURI_7_0=ruleURI		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getLibraryRule());
-	        }
-       		set(
-       			$current, 
-       			"nsURI",
-        		lv_nsURI_7_0, 
-        		"URI");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))?	otherlv_8='{' 
-    {
-    	newLeafNode(otherlv_8, grammarAccess.getLibraryAccess().getLeftCurlyBracketKeyword_4());
-    }
-((
-(
-		{ 
-	        newCompositeNode(grammarAccess.getLibraryAccess().getOwnedNestedPackagePackageCSParserRuleCall_5_0_0()); 
-	    }
-		lv_ownedNestedPackage_9_0=rulePackageCS		{
+		lv_ownedNestedPackage_2_0=ruleLibPackageCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getLibraryRule());
 	        }
        		add(
        			$current, 
        			"ownedNestedPackage",
-        		lv_ownedNestedPackage_9_0, 
-        		"PackageCS");
+        		lv_ownedNestedPackage_2_0, 
+        		"LibPackageCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)
-    |(	otherlv_10='precedence' 
-    {
-    	newLeafNode(otherlv_10, grammarAccess.getLibraryAccess().getPrecedenceKeyword_5_1_0());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getLibraryAccess().getOwnedPrecedencePrecedenceCSParserRuleCall_5_1_1_0()); 
-	    }
-		lv_ownedPrecedence_11_0=rulePrecedenceCS		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getLibraryRule());
-	        }
-       		add(
-       			$current, 
-       			"ownedPrecedence",
-        		lv_ownedPrecedence_11_0, 
-        		"PrecedenceCS");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)+	otherlv_12=';' 
-    {
-    	newLeafNode(otherlv_12, grammarAccess.getLibraryAccess().getSemicolonKeyword_5_1_2());
-    }
-)
-    |(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getLibraryAccess().getOwnedTypeClassifierCSParserRuleCall_5_2_0()); 
-	    }
-		lv_ownedType_13_0=ruleClassifierCS		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getLibraryRule());
-	        }
-       		add(
-       			$current, 
-       			"ownedType",
-        		lv_ownedType_13_0, 
-        		"ClassifierCS");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)
-    |(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getLibraryAccess().getOwnedAnnotationAnnotationElementCSParserRuleCall_5_3_0()); 
-	    }
-		lv_ownedAnnotation_14_0=ruleAnnotationElementCS		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getLibraryRule());
-	        }
-       		add(
-       			$current, 
-       			"ownedAnnotation",
-        		lv_ownedAnnotation_14_0, 
-        		"AnnotationElementCS");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))*	otherlv_15='}' 
-    {
-    	newLeafNode(otherlv_15, grammarAccess.getLibraryAccess().getRightCurlyBracketKeyword_6());
-    }
-)
+)*)
 ;
 
 
@@ -2353,6 +2214,184 @@ ruleLibOperationCS returns [EObject current=null]
     	newLeafNode(otherlv_21, grammarAccess.getLibOperationCSAccess().getSemicolonKeyword_11_1());
     }
 ))
+;
+
+
+
+
+
+// Entry rule entryRuleLibPackageCS
+entryRuleLibPackageCS returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getLibPackageCSRule()); }
+	 iv_ruleLibPackageCS=ruleLibPackageCS 
+	 { $current=$iv_ruleLibPackageCS.current; } 
+	 EOF 
+;
+
+// Rule LibPackageCS
+ruleLibPackageCS returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='library' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getLibPackageCSAccess().getLibraryKeyword_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getLibPackageCSAccess().getNameNameParserRuleCall_1_0()); 
+	    }
+		lv_name_1_0=ruleName		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getLibPackageCSRule());
+	        }
+       		set(
+       			$current, 
+       			"name",
+        		lv_name_1_0, 
+        		"Name");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_2=':' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getLibPackageCSAccess().getColonKeyword_2_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getLibPackageCSAccess().getNsPrefixIdentifierParserRuleCall_2_1_0()); 
+	    }
+		lv_nsPrefix_3_0=ruleIdentifier		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getLibPackageCSRule());
+	        }
+       		set(
+       			$current, 
+       			"nsPrefix",
+        		lv_nsPrefix_3_0, 
+        		"Identifier");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_4='=' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getLibPackageCSAccess().getEqualsSignKeyword_2_2());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getLibPackageCSAccess().getNsURIURIParserRuleCall_2_3_0()); 
+	    }
+		lv_nsURI_5_0=ruleURI		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getLibPackageCSRule());
+	        }
+       		set(
+       			$current, 
+       			"nsURI",
+        		lv_nsURI_5_0, 
+        		"URI");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?	otherlv_6='{' 
+    {
+    	newLeafNode(otherlv_6, grammarAccess.getLibPackageCSAccess().getLeftCurlyBracketKeyword_3());
+    }
+((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getLibPackageCSAccess().getOwnedNestedPackagePackageCSParserRuleCall_4_0_0()); 
+	    }
+		lv_ownedNestedPackage_7_0=rulePackageCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getLibPackageCSRule());
+	        }
+       		add(
+       			$current, 
+       			"ownedNestedPackage",
+        		lv_ownedNestedPackage_7_0, 
+        		"PackageCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |(	otherlv_8='precedence' 
+    {
+    	newLeafNode(otherlv_8, grammarAccess.getLibPackageCSAccess().getPrecedenceKeyword_4_1_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getLibPackageCSAccess().getOwnedPrecedencePrecedenceCSParserRuleCall_4_1_1_0()); 
+	    }
+		lv_ownedPrecedence_9_0=rulePrecedenceCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getLibPackageCSRule());
+	        }
+       		add(
+       			$current, 
+       			"ownedPrecedence",
+        		lv_ownedPrecedence_9_0, 
+        		"PrecedenceCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)+	otherlv_10=';' 
+    {
+    	newLeafNode(otherlv_10, grammarAccess.getLibPackageCSAccess().getSemicolonKeyword_4_1_2());
+    }
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getLibPackageCSAccess().getOwnedTypeClassifierCSParserRuleCall_4_2_0()); 
+	    }
+		lv_ownedType_11_0=ruleClassifierCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getLibPackageCSRule());
+	        }
+       		add(
+       			$current, 
+       			"ownedType",
+        		lv_ownedType_11_0, 
+        		"ClassifierCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getLibPackageCSAccess().getOwnedAnnotationAnnotationElementCSParserRuleCall_4_3_0()); 
+	    }
+		lv_ownedAnnotation_12_0=ruleAnnotationElementCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getLibPackageCSRule());
+	        }
+       		add(
+       			$current, 
+       			"ownedAnnotation",
+        		lv_ownedAnnotation_12_0, 
+        		"AnnotationElementCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*	otherlv_13='}' 
+    {
+    	newLeafNode(otherlv_13, grammarAccess.getLibPackageCSAccess().getRightCurlyBracketKeyword_5());
+    }
+)
 ;
 
 

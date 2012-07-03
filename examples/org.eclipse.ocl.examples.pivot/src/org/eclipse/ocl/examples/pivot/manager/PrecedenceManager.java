@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Precedence;
@@ -54,16 +55,16 @@ public class PrecedenceManager
 	 * rootPackages.ownedPrecedences. Any inconsistent ordering and
 	 * associativity is diagnosed.
 	 */
-	public List<String> compilePrecedences(Iterable<? extends org.eclipse.ocl.examples.pivot.Package> rootPackages) {
+	public List<String> compilePrecedences(Iterable<? extends Library> libraries) {
 		List<String> errors = new ArrayList<String>();
 		List<String> orderedPrecedences = new ArrayList<String>();
 		nameToPrecedencesMap = new HashMap<String, List<Precedence>>();
 		infixToPrecedenceNameMap = new HashMap<String, String>();
 		prefixToPrecedenceNameMap = new HashMap<String, String>();
-		for (org.eclipse.ocl.examples.pivot.Package rootPackage : rootPackages) {
-			List<Precedence> precedences = rootPackage.getOwnedPrecedence();
+		for (Library library : libraries) {
+			List<Precedence> precedences = library.getOwnedPrecedence();
 			if (precedences.size() > 0) {
-				compilePrecedencePackage(errors, rootPackage);
+				compilePrecedencePackage(errors, library);
 				int prevIndex = -1;
 				List<Precedence> list = null;
 				String name = null;
@@ -137,11 +138,11 @@ public class PrecedenceManager
 		}
 	}
 
-	protected void compilePrecedencePackage(List<String> errors, org.eclipse.ocl.examples.pivot.Package pivotPackage) {
-		for (org.eclipse.ocl.examples.pivot.Package nestedPackage : pivotPackage.getNestedPackage()) {
-			compilePrecedencePackage(errors, nestedPackage);
-		}
-		for (Type type : pivotPackage.getOwnedType()) {
+	protected void compilePrecedencePackage(List<String> errors, Library library) {
+//		for (org.eclipse.ocl.examples.pivot.Package nestedPackage : pivotPackage.getNestedPackage()) {
+//			compilePrecedencePackage(errors, nestedPackage);
+//		}
+		for (Type type : library.getOwnedType()) {
 			if (PivotUtil.isLibraryType(type)) {
 				compilePrecedenceType(errors, type);
 			}

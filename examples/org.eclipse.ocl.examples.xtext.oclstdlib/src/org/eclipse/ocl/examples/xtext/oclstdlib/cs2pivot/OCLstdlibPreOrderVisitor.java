@@ -37,8 +37,8 @@ import org.eclipse.ocl.examples.xtext.base.cs2pivot.SingleContinuation;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibClassCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPropertyCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS;
 import org.eclipse.xtext.common.types.JvmType;
 
@@ -147,9 +147,9 @@ public class OCLstdlibPreOrderVisitor extends AbstractOCLstdlibPreOrderVisitor
 		}
 	}
 
-	protected static class LibraryPrecedenceContinuation extends SingleContinuation<LibRootPackageCS>
+	protected static class LibraryPrecedenceContinuation extends SingleContinuation<LibPackageCS>
 	{
-		private LibraryPrecedenceContinuation(CS2PivotConversion context, LibRootPackageCS csElement) {
+		private LibraryPrecedenceContinuation(CS2PivotConversion context, LibPackageCS csElement) {
 			super(context, null, null, csElement);
 		}
 
@@ -201,9 +201,9 @@ public class OCLstdlibPreOrderVisitor extends AbstractOCLstdlibPreOrderVisitor
 	}
 
 	@Override
-	public Continuation<?> visitLibRootPackageCS(LibRootPackageCS csLibRootPackage) {
-		Continuation<?> superContinuation = super.visitLibRootPackageCS(csLibRootPackage);
-		Continuation<?> localContinuation =  new LibraryPrecedenceContinuation(context, csLibRootPackage);
+	public Continuation<?> visitLibPackageCS(LibPackageCS csLibPackage) {
+		Continuation<?> superContinuation = super.visitLibPackageCS(csLibPackage);
+		Continuation<?> localContinuation =  new LibraryPrecedenceContinuation(context, csLibPackage);
 		return Continuations.combine(superContinuation, localContinuation);
 	}
 

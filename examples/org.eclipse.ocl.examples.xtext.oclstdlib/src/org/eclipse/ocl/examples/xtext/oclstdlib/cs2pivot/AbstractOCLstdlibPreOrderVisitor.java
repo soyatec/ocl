@@ -47,12 +47,12 @@ public class AbstractOCLstdlibPreOrderVisitor
 		return visitOperationCS(object);
 	}
 
-	public Continuation<?> visitLibPropertyCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPropertyCS object) {
-		return visitAttributeCS(object);
+	public Continuation<?> visitLibPackageCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS object) {
+		return visitPackageCS(object);
 	}
 
-	public Continuation<?> visitLibRootPackageCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS object) {
-		return visitRootPackageCS(object);
+	public Continuation<?> visitLibPropertyCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPropertyCS object) {
+		return visitAttributeCS(object);
 	}
 
 	public Continuation<?> visitMetaTypeName(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName object) {

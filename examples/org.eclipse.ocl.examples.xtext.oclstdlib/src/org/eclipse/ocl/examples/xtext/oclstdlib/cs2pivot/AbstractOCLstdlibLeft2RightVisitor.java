@@ -47,12 +47,12 @@ public class AbstractOCLstdlibLeft2RightVisitor
 		return visitOperationCS(object);
 	}
 
-	public Element visitLibPropertyCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPropertyCS object) {
-		return visitAttributeCS(object);
+	public Element visitLibPackageCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS object) {
+		return visitPackageCS(object);
 	}
 
-	public Element visitLibRootPackageCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS object) {
-		return visitRootPackageCS(object);
+	public Element visitLibPropertyCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPropertyCS object) {
+		return visitAttributeCS(object);
 	}
 
 	public Element visitMetaTypeName(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName object) {

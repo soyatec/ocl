@@ -34,8 +34,6 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.NamespaceCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PivotableElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.RootCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.StructuralFeatureCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateableElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypeCS;
@@ -46,8 +44,8 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibClassCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibConstraintCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPropertyCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTPackage;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS;
@@ -192,6 +190,22 @@ public class OCLstdlibCSTSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case OCLstdlibCSTPackage.LIB_PACKAGE_CS:
+			{
+				LibPackageCS libPackageCS = (LibPackageCS)theEObject;
+				T result = caseLibPackageCS(libPackageCS);
+				if (result == null) result = casePackageCS(libPackageCS);
+				if (result == null) result = caseNamespaceCS(libPackageCS);
+				if (result == null) result = caseNamedElementCS(libPackageCS);
+				if (result == null) result = caseModelElementCS(libPackageCS);
+				if (result == null) result = caseNameable(libPackageCS);
+				if (result == null) result = casePivotableElementCS(libPackageCS);
+				if (result == null) result = caseElementCS(libPackageCS);
+				if (result == null) result = casePivotable(libPackageCS);
+				if (result == null) result = caseVisitableCS(libPackageCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case OCLstdlibCSTPackage.LIB_PROPERTY_CS:
 			{
 				LibPropertyCS libPropertyCS = (LibPropertyCS)theEObject;
@@ -208,24 +222,6 @@ public class OCLstdlibCSTSwitch<T>
 				if (result == null) result = caseElementCS(libPropertyCS);
 				if (result == null) result = casePivotable(libPropertyCS);
 				if (result == null) result = caseVisitableCS(libPropertyCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OCLstdlibCSTPackage.LIB_ROOT_PACKAGE_CS:
-			{
-				LibRootPackageCS libRootPackageCS = (LibRootPackageCS)theEObject;
-				T result = caseLibRootPackageCS(libRootPackageCS);
-				if (result == null) result = caseRootPackageCS(libRootPackageCS);
-				if (result == null) result = casePackageCS(libRootPackageCS);
-				if (result == null) result = caseRootCS(libRootPackageCS);
-				if (result == null) result = caseNamespaceCS(libRootPackageCS);
-				if (result == null) result = caseNamedElementCS(libRootPackageCS);
-				if (result == null) result = caseModelElementCS(libRootPackageCS);
-				if (result == null) result = caseNameable(libRootPackageCS);
-				if (result == null) result = casePivotableElementCS(libRootPackageCS);
-				if (result == null) result = caseElementCS(libRootPackageCS);
-				if (result == null) result = casePivotable(libRootPackageCS);
-				if (result == null) result = caseVisitableCS(libRootPackageCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -317,6 +313,22 @@ public class OCLstdlibCSTSwitch<T>
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Lib Package CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Lib Package CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLibPackageCS(LibPackageCS object)
+	{
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Lib Property CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -328,21 +340,6 @@ public class OCLstdlibCSTSwitch<T>
 	 * @generated
 	 */
 	public T caseLibPropertyCS(LibPropertyCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Lib Root Package CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Lib Root Package CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLibRootPackageCS(LibRootPackageCS object) {
 		return null;
 	}
 
@@ -658,36 +655,6 @@ public class OCLstdlibCSTSwitch<T>
 	 * @generated
 	 */
 	public T casePackageCS(PackageCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Root CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Root CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRootCS(RootCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Root Package CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Root Package CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRootPackageCS(RootPackageCS object) {
 		return null;
 	}
 

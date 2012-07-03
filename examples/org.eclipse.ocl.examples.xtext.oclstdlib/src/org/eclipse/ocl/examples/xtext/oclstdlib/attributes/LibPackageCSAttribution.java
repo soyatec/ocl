@@ -25,21 +25,21 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
-import org.eclipse.ocl.examples.xtext.base.attributes.RootPackageCSAttribution;
-import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
+import org.eclipse.ocl.examples.xtext.base.attributes.PackageCSAttribution;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTFactory;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTPackage;
 
-public class LibRootPackageCSAttribution extends RootPackageCSAttribution
+public class LibPackageCSAttribution extends PackageCSAttribution
 {
-	public static final LibRootPackageCSAttribution INSTANCE = new LibRootPackageCSAttribution();
+	public static final LibPackageCSAttribution INSTANCE = new LibPackageCSAttribution();
 
 	private static List<MetaTypeName> metaTypeNames = null;
 
 	@Override
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
-		RootPackageCS targetElement = (RootPackageCS)target;
+		LibPackageCS targetElement = (LibPackageCS)target;
 		if (environmentView.getReference() == OCLstdlibCSTPackage.Literals.LIB_CLASS_CS__META_TYPE_NAME) {
 			if (metaTypeNames == null) {
 				metaTypeNames = new ArrayList<MetaTypeName>();

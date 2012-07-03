@@ -29,8 +29,8 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibClassCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibConstraintCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPropertyCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTFactory;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTPackage;
@@ -80,14 +80,14 @@ public class OCLstdlibCSTPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass libPropertyCSEClass = null;
+	private EClass libPackageCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass libRootPackageCSEClass = null;
+	private EClass libPropertyCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -261,6 +261,26 @@ public class OCLstdlibCSTPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getLibPackageCS()
+	{
+		return libPackageCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getLibPackageCS_OwnedPrecedence()
+	{
+		return (EReference)libPackageCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getLibPropertyCS() {
 		return libPropertyCSEClass;
 	}
@@ -272,24 +292,6 @@ public class OCLstdlibCSTPackageImpl
 	 */
 	public EAttribute getLibPropertyCS_Static() {
 		return (EAttribute)libPropertyCSEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getLibRootPackageCS() {
-		return libRootPackageCSEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getLibRootPackageCS_OwnedPrecedence() {
-		return (EReference)libRootPackageCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -390,11 +392,11 @@ public class OCLstdlibCSTPackageImpl
 		createEReference(libOperationCSEClass, LIB_OPERATION_CS__PRECEDENCE);
 		createEAttribute(libOperationCSEClass, LIB_OPERATION_CS__STATIC);
 
+		libPackageCSEClass = createEClass(LIB_PACKAGE_CS);
+		createEReference(libPackageCSEClass, LIB_PACKAGE_CS__OWNED_PRECEDENCE);
+
 		libPropertyCSEClass = createEClass(LIB_PROPERTY_CS);
 		createEAttribute(libPropertyCSEClass, LIB_PROPERTY_CS__STATIC);
-
-		libRootPackageCSEClass = createEClass(LIB_ROOT_PACKAGE_CS);
-		createEReference(libRootPackageCSEClass, LIB_ROOT_PACKAGE_CS__OWNED_PRECEDENCE);
 
 		metaTypeNameEClass = createEClass(META_TYPE_NAME);
 		createEAttribute(metaTypeNameEClass, META_TYPE_NAME__NAME);
@@ -442,9 +444,9 @@ public class OCLstdlibCSTPackageImpl
 		libIterationCSEClass.getESuperTypes().add(this.getJavaImplementationCS());
 		libOperationCSEClass.getESuperTypes().add(theBaseCSTPackage.getOperationCS());
 		libOperationCSEClass.getESuperTypes().add(this.getJavaImplementationCS());
+		libPackageCSEClass.getESuperTypes().add(theBaseCSTPackage.getPackageCS());
 		libPropertyCSEClass.getESuperTypes().add(theBaseCSTPackage.getAttributeCS());
 		libPropertyCSEClass.getESuperTypes().add(this.getJavaImplementationCS());
-		libRootPackageCSEClass.getESuperTypes().add(theBaseCSTPackage.getRootPackageCS());
 		metaTypeNameEClass.getESuperTypes().add(theBaseCSTPackage.getVisitableCS());
 		metaTypeNameEClass.getESuperTypes().add(thePivotPackage.getNameable());
 		precedenceCSEClass.getESuperTypes().add(theBaseCSTPackage.getNamedElementCS());
@@ -466,11 +468,11 @@ public class OCLstdlibCSTPackageImpl
 		initEReference(getLibOperationCS_Precedence(), thePivotPackage.getPrecedence(), null, "precedence", null, 0, 1, LibOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLibOperationCS_Static(), thePivotPackage.getBoolean(), "static", "false", 0, 1, LibOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(libPackageCSEClass, LibPackageCS.class, "LibPackageCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLibPackageCS_OwnedPrecedence(), this.getPrecedenceCS(), null, "ownedPrecedence", null, 0, -1, LibPackageCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(libPropertyCSEClass, LibPropertyCS.class, "LibPropertyCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLibPropertyCS_Static(), thePivotPackage.getBoolean(), "static", "false", 0, 1, LibPropertyCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(libRootPackageCSEClass, LibRootPackageCS.class, "LibRootPackageCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLibRootPackageCS_OwnedPrecedence(), this.getPrecedenceCS(), null, "ownedPrecedence", null, 0, -1, LibRootPackageCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(metaTypeNameEClass, MetaTypeName.class, "MetaTypeName", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMetaTypeName_Name(), ecorePackage.getEString(), "name", null, 0, 1, MetaTypeName.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

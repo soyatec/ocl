@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.ConstraintCSAttribution;
 import org.eclipse.ocl.examples.xtext.oclstdlib.attributes.LibOperationCSAttribution;
-import org.eclipse.ocl.examples.xtext.oclstdlib.attributes.LibRootPackageCSAttribution;
+import org.eclipse.ocl.examples.xtext.oclstdlib.attributes.LibPackageCSAttribution;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTPackage;
 
 public class OCLstdlibScoping
@@ -30,6 +30,6 @@ public class OCLstdlibScoping
 		registry.put(OCLstdlibCSTPackage.Literals.LIB_CONSTRAINT_CS, ConstraintCSAttribution.INSTANCE);
 		registry.put(OCLstdlibCSTPackage.Literals.LIB_ITERATION_CS, LibOperationCSAttribution.INSTANCE);
 		registry.put(OCLstdlibCSTPackage.Literals.LIB_OPERATION_CS, LibOperationCSAttribution.INSTANCE);
-		registry.put(OCLstdlibCSTPackage.Literals.LIB_ROOT_PACKAGE_CS, LibRootPackageCSAttribution.INSTANCE);
+		registry.put(OCLstdlibCSTPackage.Literals.LIB_PACKAGE_CS, LibPackageCSAttribution.INSTANCE);
 	}
 }

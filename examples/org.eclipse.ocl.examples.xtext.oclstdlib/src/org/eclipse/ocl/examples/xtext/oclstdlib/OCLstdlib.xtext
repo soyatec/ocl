@@ -26,15 +26,9 @@ import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecor
 //import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 //generate OCLstdlib "http://www.eclipse.org/ocl/examples/xtext/oclstdlib/OCLstdlibCST"
 
-Library returns LibRootPackageCS:
+Library returns base::RootPackageCS:
 	(ownedLibrary+=LibraryCS ';')*
-    'library' name=Name
-	(':' nsPrefix=Identifier '=' nsURI=URI)?
-	'{' (ownedNestedPackage+=PackageCS
-		| ('precedence' (ownedPrecedence+=PrecedenceCS)+ ';')
-	    | ownedType+=ClassifierCS
-		| ownedAnnotation+=AnnotationElementCS)*
-	'}'
+	(ownedNestedPackage+=LibPackageCS)*
 ;
 
 Identifier:
@@ -181,6 +175,16 @@ LibOperationCS returns LibOperationCS:
 	     | ownedConstraint+=PreCS)* '}')
 	|';'
 	)
+;
+
+LibPackageCS returns LibPackageCS:
+    'library' name=Name
+	(':' nsPrefix=Identifier '=' nsURI=URI)?
+	'{' (ownedNestedPackage+=PackageCS
+		| ('precedence' (ownedPrecedence+=PrecedenceCS)+ ';')
+	    | ownedType+=ClassifierCS
+		| ownedAnnotation+=AnnotationElementCS)*
+	'}'
 ;
 
 PackageCS returns base::PackageCS:

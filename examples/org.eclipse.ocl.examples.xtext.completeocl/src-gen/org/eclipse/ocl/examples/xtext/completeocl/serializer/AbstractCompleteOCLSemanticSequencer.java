@@ -139,7 +139,7 @@ public abstract class AbstractCompleteOCLSemanticSequencer extends EssentialOCLS
 					return; 
 				}
 				else if(context == grammarAccess.getTypeExpCSRule()) {
-					sequence_TypeExpCS(context, (PrimitiveTypeRefCS) semanticObject); 
+					sequence_PrimitiveTypeCS_TypeExpCS(context, (PrimitiveTypeRefCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -156,7 +156,7 @@ public abstract class AbstractCompleteOCLSemanticSequencer extends EssentialOCLS
 					return; 
 				}
 				else if(context == grammarAccess.getTypeExpCSRule()) {
-					sequence_TypeExpCS(context, (TupleTypeCS) semanticObject); 
+					sequence_TupleTypeCS_TypeExpCS(context, (TupleTypeCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -314,7 +314,7 @@ public abstract class AbstractCompleteOCLSemanticSequencer extends EssentialOCLS
 					return; 
 				}
 				else if(context == grammarAccess.getTypeExpCSRule()) {
-					sequence_TypeExpCS(context, (CollectionTypeCS) semanticObject); 
+					sequence_CollectionTypeCS_TypeExpCS(context, (CollectionTypeCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -380,7 +380,7 @@ public abstract class AbstractCompleteOCLSemanticSequencer extends EssentialOCLS
 				   context == grammarAccess.getPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimaryExpOrLetExpCSRule() ||
 				   context == grammarAccess.getPrimitiveLiteralExpCSRule()) {
-					sequence_PrimitiveLiteralExpCS(context, (InvalidLiteralExpCS) semanticObject); 
+					sequence_InvalidLiteralExpCS(context, (InvalidLiteralExpCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -468,7 +468,7 @@ public abstract class AbstractCompleteOCLSemanticSequencer extends EssentialOCLS
 				   context == grammarAccess.getPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimaryExpOrLetExpCSRule() ||
 				   context == grammarAccess.getPrimitiveLiteralExpCSRule()) {
-					sequence_PrimitiveLiteralExpCS(context, (NullLiteralExpCS) semanticObject); 
+					sequence_NullLiteralExpCS(context, (NullLiteralExpCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -508,7 +508,7 @@ public abstract class AbstractCompleteOCLSemanticSequencer extends EssentialOCLS
 				   context == grammarAccess.getPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimaryExpOrLetExpCSRule() ||
 				   context == grammarAccess.getSelfExpCSRule()) {
-					sequence_ExpCS(context, (SelfExpCS) semanticObject); 
+					sequence_SelfExpCS(context, (SelfExpCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -557,7 +557,7 @@ public abstract class AbstractCompleteOCLSemanticSequencer extends EssentialOCLS
 				else break;
 			case EssentialOCLCSTPackage.TYPE_NAME_EXP_CS:
 				if(context == grammarAccess.getTypeExpCSRule()) {
-					sequence_TypeExpCS(context, (TypeNameExpCS) semanticObject); 
+					sequence_TypeExpCS_TypeNameExpCS(context, (TypeNameExpCS) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getTypeNameExpCSRule()) {
@@ -580,7 +580,7 @@ public abstract class AbstractCompleteOCLSemanticSequencer extends EssentialOCLS
 				   context == grammarAccess.getPrimaryExpOrLetExpCSRule() ||
 				   context == grammarAccess.getPrimitiveLiteralExpCSRule() ||
 				   context == grammarAccess.getUnlimitedNaturalLiteralExpCSRule()) {
-					sequence_PrimitiveLiteralExpCS(context, (UnlimitedNaturalLiteralExpCS) semanticObject); 
+					sequence_UnlimitedNaturalLiteralExpCS(context, (UnlimitedNaturalLiteralExpCS) semanticObject); 
 					return; 
 				}
 				else break;

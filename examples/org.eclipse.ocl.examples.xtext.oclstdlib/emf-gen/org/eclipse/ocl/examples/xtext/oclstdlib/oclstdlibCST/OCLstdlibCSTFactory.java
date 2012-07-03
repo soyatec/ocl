@@ -75,6 +75,15 @@ public interface OCLstdlibCSTFactory
 	LibOperationCS createLibOperationCS();
 
 	/**
+	 * Returns a new object of class '<em>Lib Package CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Lib Package CS</em>'.
+	 * @generated
+	 */
+	LibPackageCS createLibPackageCS();
+
+	/**
 	 * Returns a new object of class '<em>Lib Property CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -82,15 +91,6 @@ public interface OCLstdlibCSTFactory
 	 * @generated
 	 */
 	LibPropertyCS createLibPropertyCS();
-
-	/**
-	 * Returns a new object of class '<em>Lib Root Package CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Lib Root Package CS</em>'.
-	 * @generated
-	 */
-	LibRootPackageCS createLibRootPackageCS();
 
 	/**
 	 * Returns a new object of class '<em>Meta Type Name</em>'.

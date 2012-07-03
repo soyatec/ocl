@@ -12,6 +12,7 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.services.OCLstdlibGrammarAccess.
 import org.eclipse.ocl.examples.xtext.oclstdlib.services.OCLstdlibGrammarAccess.LambdaTypeCSElements;
 import org.eclipse.ocl.examples.xtext.oclstdlib.services.OCLstdlibGrammarAccess.LibIterationCSElements;
 import org.eclipse.ocl.examples.xtext.oclstdlib.services.OCLstdlibGrammarAccess.LibOperationCSElements;
+import org.eclipse.ocl.examples.xtext.oclstdlib.services.OCLstdlibGrammarAccess.LibPackageCSElements;
 import org.eclipse.ocl.examples.xtext.oclstdlib.services.OCLstdlibGrammarAccess.LibPathNameCSElements;
 import org.eclipse.ocl.examples.xtext.oclstdlib.services.OCLstdlibGrammarAccess.LibPropertyCSElements;
 import org.eclipse.ocl.examples.xtext.oclstdlib.services.OCLstdlibGrammarAccess.LibTupleCSElements;
@@ -111,9 +112,9 @@ public class OCLstdlibFormatter extends AbstractEssentialOCLFormatter {
 	    {
 			LibraryElements a = f.getLibraryAccess();
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_0_1());
-			setBraces(c, a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_6());
-		    c.setIndentation(a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_6());
-			setNoSpaceLineWrap(c, a.getSemicolonKeyword_5_1_2());
+//			setBraces(c, a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_6());
+//		    c.setIndentation(a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_6());
+//			setNoSpaceLineWrap(c, a.getSemicolonKeyword_5_1_2());
 	    }
 	    {
 			LibOperationCSElements a = f.getLibOperationCSAccess();
@@ -124,6 +125,13 @@ public class OCLstdlibFormatter extends AbstractEssentialOCLFormatter {
 		    c.setIndentation(a.getLeftCurlyBracketKeyword_11_0_0(), a.getRightCurlyBracketKeyword_11_0_2());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_11_1());
 		    c.setIndentation(a.getEqualsSignGreaterThanSignKeyword_10_0(), a.getSemicolonKeyword_11_1());
+	    }
+	    {
+			LibPackageCSElements a = f.getLibPackageCSAccess();
+//			setNoSpaceLineWrap(c, a.getSemicolonKeyword_0_1());
+			setBraces(c, a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
+		    c.setIndentation(a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
+//			setNoSpaceLineWrap(c, a.getSemicolonKeyword_5_1_2());
 	    }
 	    {
 			LibPathNameCSElements a = f.getLibPathNameCSAccess();

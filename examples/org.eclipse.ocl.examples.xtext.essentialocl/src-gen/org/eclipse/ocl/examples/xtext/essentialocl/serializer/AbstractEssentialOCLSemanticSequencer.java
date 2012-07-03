@@ -96,7 +96,7 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 					return; 
 				}
 				else if(context == grammarAccess.getTypeExpCSRule()) {
-					sequence_TypeExpCS(context, (PrimitiveTypeRefCS) semanticObject); 
+					sequence_PrimitiveTypeCS_TypeExpCS(context, (PrimitiveTypeRefCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -113,7 +113,7 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 					return; 
 				}
 				else if(context == grammarAccess.getTypeExpCSRule()) {
-					sequence_TypeExpCS(context, (TupleTypeCS) semanticObject); 
+					sequence_TupleTypeCS_TypeExpCS(context, (TupleTypeCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -164,7 +164,7 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 					return; 
 				}
 				else if(context == grammarAccess.getTypeExpCSRule()) {
-					sequence_TypeExpCS(context, (CollectionTypeCS) semanticObject); 
+					sequence_CollectionTypeCS_TypeExpCS(context, (CollectionTypeCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -230,7 +230,7 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 				   context == grammarAccess.getPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimaryExpOrLetExpCSRule() ||
 				   context == grammarAccess.getPrimitiveLiteralExpCSRule()) {
-					sequence_PrimitiveLiteralExpCS(context, (InvalidLiteralExpCS) semanticObject); 
+					sequence_InvalidLiteralExpCS(context, (InvalidLiteralExpCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -318,7 +318,7 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 				   context == grammarAccess.getPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimaryExpOrLetExpCSRule() ||
 				   context == grammarAccess.getPrimitiveLiteralExpCSRule()) {
-					sequence_PrimitiveLiteralExpCS(context, (NullLiteralExpCS) semanticObject); 
+					sequence_NullLiteralExpCS(context, (NullLiteralExpCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -358,7 +358,7 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 				   context == grammarAccess.getPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimaryExpOrLetExpCSRule() ||
 				   context == grammarAccess.getSelfExpCSRule()) {
-					sequence_ExpCS(context, (SelfExpCS) semanticObject); 
+					sequence_SelfExpCS(context, (SelfExpCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -407,7 +407,7 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 				else break;
 			case EssentialOCLCSTPackage.TYPE_NAME_EXP_CS:
 				if(context == grammarAccess.getTypeExpCSRule()) {
-					sequence_TypeExpCS(context, (TypeNameExpCS) semanticObject); 
+					sequence_TypeExpCS_TypeNameExpCS(context, (TypeNameExpCS) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getTypeNameExpCSRule()) {
@@ -430,7 +430,7 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 				   context == grammarAccess.getPrimaryExpOrLetExpCSRule() ||
 				   context == grammarAccess.getPrimitiveLiteralExpCSRule() ||
 				   context == grammarAccess.getUnlimitedNaturalLiteralExpCSRule()) {
-					sequence_PrimitiveLiteralExpCS(context, (UnlimitedNaturalLiteralExpCS) semanticObject); 
+					sequence_UnlimitedNaturalLiteralExpCS(context, (UnlimitedNaturalLiteralExpCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -476,6 +476,15 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 	
 	/**
 	 * Constraint:
+	 *     (name=CollectionTypeIdentifier ownedType=TypeExpCS? multiplicity=MultiplicityCS?)
+	 */
+	protected void sequence_CollectionTypeCS_TypeExpCS(EObject context, CollectionTypeCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (property=[Property|UnrestrictedName] initExpression=ExpCS)
 	 */
 	protected void sequence_ConstructorPartCS(EObject context, ConstructorPartCS semanticObject) {
@@ -503,15 +512,6 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 	
 	/**
 	 * Constraint:
-	 *     {SelfExpCS}
-	 */
-	protected void sequence_ExpCS(EObject context, SelfExpCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
 	 *     element=[NamedElement|UnrestrictedName]
 	 */
 	protected void sequence_FirstPathElementCS(EObject context, PathElementCS semanticObject) {
@@ -533,6 +533,15 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 	 *     name=InfixOperator
 	 */
 	protected void sequence_InfixOperatorCS(EObject context, BinaryOperatorCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {InvalidLiteralExpCS}
+	 */
+	protected void sequence_InvalidLiteralExpCS(EObject context, InvalidLiteralExpCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -647,6 +656,15 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 	
 	/**
 	 * Constraint:
+	 *     {NullLiteralExpCS}
+	 */
+	protected void sequence_NullLiteralExpCS(EObject context, NullLiteralExpCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     name=NUMBER_LITERAL
 	 */
 	protected void sequence_NumberLiteralExpCS(EObject context, NumberLiteralExpCS semanticObject) {
@@ -728,36 +746,27 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 	
 	/**
 	 * Constraint:
-	 *     {InvalidLiteralExpCS}
-	 */
-	protected void sequence_PrimitiveLiteralExpCS(EObject context, InvalidLiteralExpCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     {NullLiteralExpCS}
-	 */
-	protected void sequence_PrimitiveLiteralExpCS(EObject context, NullLiteralExpCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     {UnlimitedNaturalLiteralExpCS}
-	 */
-	protected void sequence_PrimitiveLiteralExpCS(EObject context, UnlimitedNaturalLiteralExpCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
 	 *     name=PrimitiveTypeIdentifier
 	 */
 	protected void sequence_PrimitiveTypeCS(EObject context, PrimitiveTypeRefCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (name=PrimitiveTypeIdentifier multiplicity=MultiplicityCS?)
+	 */
+	protected void sequence_PrimitiveTypeCS_TypeExpCS(EObject context, PrimitiveTypeRefCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {SelfExpCS}
+	 */
+	protected void sequence_SelfExpCS(EObject context, SelfExpCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -809,27 +818,9 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 	
 	/**
 	 * Constraint:
-	 *     (name=CollectionTypeIdentifier ownedType=TypeExpCS? multiplicity=MultiplicityCS?)
-	 */
-	protected void sequence_TypeExpCS(EObject context, CollectionTypeCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (name=PrimitiveTypeIdentifier multiplicity=MultiplicityCS?)
-	 */
-	protected void sequence_TypeExpCS(EObject context, PrimitiveTypeRefCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
 	 *     (name='Tuple' (ownedParts+=TuplePartCS ownedParts+=TuplePartCS*)? multiplicity=MultiplicityCS?)
 	 */
-	protected void sequence_TypeExpCS(EObject context, TupleTypeCS semanticObject) {
+	protected void sequence_TupleTypeCS_TypeExpCS(EObject context, TupleTypeCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -838,7 +829,7 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 	 * Constraint:
 	 *     (pathName=PathNameCS multiplicity=MultiplicityCS?)
 	 */
-	protected void sequence_TypeExpCS(EObject context, TypeNameExpCS semanticObject) {
+	protected void sequence_TypeExpCS_TypeNameExpCS(EObject context, TypeNameExpCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -866,6 +857,15 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 	 *     name=PrefixOperator
 	 */
 	protected void sequence_UnaryOperatorCS(EObject context, UnaryOperatorCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {UnlimitedNaturalLiteralExpCS}
+	 */
+	protected void sequence_UnlimitedNaturalLiteralExpCS(EObject context, UnlimitedNaturalLiteralExpCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 }
