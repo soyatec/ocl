@@ -203,10 +203,10 @@ public class CollectionLiteralExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateBagKindIsBag(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateCollectionKindIsConcrete(DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
 		/*
-		kind = CollectionKind::Bag implies type.oclIsKindOf(BagType)
+		kind <> CollectionKind::Collection
 		*/
 		try {
 			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
@@ -215,19 +215,19 @@ public class CollectionLiteralExpImpl
 			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
 			final DomainType returnType = T_Boolean;
-			final Value result = CollectionLiteralExpBodies._invariant_BagKindIsBag.INSTANCE.evaluate(evaluator, returnType, self);
+			final Value result = CollectionLiteralExpBodies._invariant_CollectionKindIsConcrete.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
 			}
 			if (diagnostics != null) {
 				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "BagKindIsBag", EObjectValidator.getObjectLabel(this, context)});
-			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__BAG_KIND_IS_BAG, message, new Object [] { this }));
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "CollectionKindIsConcrete", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__COLLECTION_KIND_IS_CONCRETE, message, new Object [] { this }));
 			}
 			return false;
 		} catch (InvalidValueException e) {
-			String message = NLS.bind(EvaluatorMessages.ValidationEvaluationFailed_ERROR_, new Object[]{"CollectionLiteralExp", "BagKindIsBag", EObjectValidator.getObjectLabel(this, context)});
+			String message = NLS.bind(EvaluatorMessages.ValidationEvaluationFailed_ERROR_, new Object[]{"CollectionLiteralExp", "CollectionKindIsConcrete", EObjectValidator.getObjectLabel(this, context)});
 			throw new WrappedException(message, e);
 		}
 		
@@ -238,11 +238,10 @@ public class CollectionLiteralExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateSequenceKindIsSequence(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateSetKindIsSet(DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
 		/*
-		kind = CollectionKind::Sequence implies
-		type.oclIsKindOf(SequenceType)
+		kind = CollectionKind::Set implies type.oclIsKindOf(SetType)
 		*/
 		try {
 			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
@@ -251,19 +250,19 @@ public class CollectionLiteralExpImpl
 			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
 			final DomainType returnType = T_Boolean;
-			final Value result = CollectionLiteralExpBodies._invariant_SequenceKindIsSequence.INSTANCE.evaluate(evaluator, returnType, self);
+			final Value result = CollectionLiteralExpBodies._invariant_SetKindIsSet.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
 			}
 			if (diagnostics != null) {
 				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "SequenceKindIsSequence", EObjectValidator.getObjectLabel(this, context)});
-			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__SEQUENCE_KIND_IS_SEQUENCE, message, new Object [] { this }));
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "SetKindIsSet", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__SET_KIND_IS_SET, message, new Object [] { this }));
 			}
 			return false;
 		} catch (InvalidValueException e) {
-			String message = NLS.bind(EvaluatorMessages.ValidationEvaluationFailed_ERROR_, new Object[]{"CollectionLiteralExp", "SequenceKindIsSequence", EObjectValidator.getObjectLabel(this, context)});
+			String message = NLS.bind(EvaluatorMessages.ValidationEvaluationFailed_ERROR_, new Object[]{"CollectionLiteralExp", "SetKindIsSet", EObjectValidator.getObjectLabel(this, context)});
 			throw new WrappedException(message, e);
 		}
 		
@@ -310,10 +309,11 @@ public class CollectionLiteralExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateSetKindIsSet(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateSequenceKindIsSequence(DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
 		/*
-		kind = CollectionKind::Set implies type.oclIsKindOf(SetType)
+		kind = CollectionKind::Sequence implies
+		type.oclIsKindOf(SequenceType)
 		*/
 		try {
 			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
@@ -322,19 +322,19 @@ public class CollectionLiteralExpImpl
 			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
 			final DomainType returnType = T_Boolean;
-			final Value result = CollectionLiteralExpBodies._invariant_SetKindIsSet.INSTANCE.evaluate(evaluator, returnType, self);
+			final Value result = CollectionLiteralExpBodies._invariant_SequenceKindIsSequence.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
 			}
 			if (diagnostics != null) {
 				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "SetKindIsSet", EObjectValidator.getObjectLabel(this, context)});
-			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__SET_KIND_IS_SET, message, new Object [] { this }));
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "SequenceKindIsSequence", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__SEQUENCE_KIND_IS_SEQUENCE, message, new Object [] { this }));
 			}
 			return false;
 		} catch (InvalidValueException e) {
-			String message = NLS.bind(EvaluatorMessages.ValidationEvaluationFailed_ERROR_, new Object[]{"CollectionLiteralExp", "SetKindIsSet", EObjectValidator.getObjectLabel(this, context)});
+			String message = NLS.bind(EvaluatorMessages.ValidationEvaluationFailed_ERROR_, new Object[]{"CollectionLiteralExp", "SequenceKindIsSequence", EObjectValidator.getObjectLabel(this, context)});
 			throw new WrappedException(message, e);
 		}
 		
@@ -345,10 +345,10 @@ public class CollectionLiteralExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateCollectionKindIsConcrete(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateBagKindIsBag(DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
 		/*
-		kind <> CollectionKind::Collection
+		kind = CollectionKind::Bag implies type.oclIsKindOf(BagType)
 		*/
 		try {
 			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
@@ -357,19 +357,19 @@ public class CollectionLiteralExpImpl
 			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
 			final DomainType returnType = T_Boolean;
-			final Value result = CollectionLiteralExpBodies._invariant_CollectionKindIsConcrete.INSTANCE.evaluate(evaluator, returnType, self);
+			final Value result = CollectionLiteralExpBodies._invariant_BagKindIsBag.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
 			}
 			if (diagnostics != null) {
 				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "CollectionKindIsConcrete", EObjectValidator.getObjectLabel(this, context)});
-			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__COLLECTION_KIND_IS_CONCRETE, message, new Object [] { this }));
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "BagKindIsBag", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__BAG_KIND_IS_BAG, message, new Object [] { this }));
 			}
 			return false;
 		} catch (InvalidValueException e) {
-			String message = NLS.bind(EvaluatorMessages.ValidationEvaluationFailed_ERROR_, new Object[]{"CollectionLiteralExp", "CollectionKindIsConcrete", EObjectValidator.getObjectLabel(this, context)});
+			String message = NLS.bind(EvaluatorMessages.ValidationEvaluationFailed_ERROR_, new Object[]{"CollectionLiteralExp", "BagKindIsBag", EObjectValidator.getObjectLabel(this, context)});
 			throw new WrappedException(message, e);
 		}
 		

@@ -704,6 +704,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		Resource pivotResource = converter.getPivotResource(csResource);
 		if (pivotResource != null) {
 			pivotResource.getContents().add(pivotElement);
+			metaModelManager.installResource(pivotResource);
 		}
 	}
 

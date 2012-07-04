@@ -405,7 +405,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 			pivotElement.setNsPrefix(null);
 		}
 		if (!(eObject.eContainer() instanceof EAnnotation)) {
-			converter.getMetaModelManager().addPackage(pivotElement);
+//			converter.getMetaModelManager().addPackage(pivotElement);
 			String moniker = Pivot2Moniker.toString(pivotElement);
 			AliasAdapter adapter = AliasAdapter.getAdapter(eObject.eResource());
 			if (adapter != null) {

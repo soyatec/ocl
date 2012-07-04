@@ -467,6 +467,7 @@ public class PivotSaver extends AbstractPivotSaver
 		if (resolvedType == null) {
 			resolvedType = EcoreUtil.copy(referredType);
 			specializations.put(referredType, resolvedType);
+			specializations.put(resolvedType, resolvedType);
 			orphanage.getOwnedType().add(resolvedType);
 		}
 /*			String moniker = Pivot2Moniker.toString(referredType);

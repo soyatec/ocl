@@ -50,6 +50,7 @@ import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.LoopExp;
+import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
@@ -726,6 +727,9 @@ public class PivotUtil extends DomainUtil
 		for (EObject eObject = element; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Type) {
 				return (Namespace) eObject;
+			}
+			if (eObject instanceof Model) {
+				return null;
 			}
 			if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
 				return (Namespace) eObject;

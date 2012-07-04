@@ -32,6 +32,7 @@ import org.eclipse.ocl.examples.pivot.InvalidType;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.Library;
+import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OrderedSetType;
 import org.eclipse.ocl.examples.pivot.Package;
@@ -142,6 +143,14 @@ public class AbstractContents
 		pivotLibrary.setNsPrefix(nsPrefix);
 		pivotLibrary.setNsURI(nsURI);
 		return pivotLibrary;
+	}
+
+	protected Model createModel(String name, String nsPrefix, String nsURI) {
+		Model pivotModel = PivotFactory.eINSTANCE.createModel();
+		pivotModel.setName(name);
+		pivotModel.setNsPrefix(nsPrefix);
+		pivotModel.setNsURI(nsURI);
+		return pivotModel;
 	}
 	
 	protected Operation createOperation(String name, Type type, String implementationClass, LibraryFeature implementation) {

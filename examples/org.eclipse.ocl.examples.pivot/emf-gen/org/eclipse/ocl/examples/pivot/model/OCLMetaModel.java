@@ -51,12 +51,24 @@ public class OCLMetaModel extends XMIResourceImpl
 	 */
 	public static final String PIVOT_URI = "http://www.eclipse.org/ocl/3.1.0/Pivot";
 
-	public OCLMetaModel(PivotStandardLibrary standardLibrary, String name, String nsPrefix, String nsURI) {
-		super(URI.createURI(PIVOT_URI));
+	public static Package create(PivotStandardLibrary standardLibrary, String name, String nsPrefix, String nsURI) {
+		OCLMetaModel resource = new OCLMetaModel(URI.createURI(PIVOT_URI));
 		Contents contents = new Contents(standardLibrary);
-		Package metaModel = contents.create(name != null ? name : "pivot", nsPrefix != null ? nsPrefix : "pivot", nsURI != null ? nsURI : "http://www.eclipse.org/ocl/3.1.0/Pivot");
-		getContents().add(metaModel);
+		Model model = contents.create(name != null ? name : "pivot", nsPrefix != null ? nsPrefix : "pivot", nsURI != null ? nsURI : "http://www.eclipse.org/ocl/3.1.0/Pivot");
+		resource.getContents().add(model);
+		return contents.metamodel;
 	}
+
+	protected OCLMetaModel(URI uri) {
+		super(uri);
+	}
+
+//	public OCLMetaModel(PivotStandardLibrary standardLibrary, String name, String nsPrefix, String nsURI) {
+//		super(URI.createURI(PIVOT_URI));
+//		Contents contents = new Contents(standardLibrary);
+//		Model model = contents.create(name != null ? name : "pivot", nsPrefix != null ? nsPrefix : "pivot", nsURI != null ? nsURI : "http://www.eclipse.org/ocl/3.1.0/Pivot");
+//		getContents().add(model);
+//	}
 
 	protected static class Contents extends AbstractContents
 	{
@@ -71,31 +83,28 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final PrimitiveType _String = standardLibrary.getStringType();
 		protected final PrimitiveType _UnlimitedNatural = standardLibrary.getUnlimitedNaturalType();
 
-		protected Package metaModel;
+		protected Model model;
+		protected Package metamodel;
 
-		protected Package create(String name, String nsPrefix, String nsURI)
+		protected Model create(String name, String nsPrefix, String nsURI)
 		{
-			metaModel = createPackage(name, nsPrefix, nsURI);
+			model = createModel("pivot", "pivot", "http://www.eclipse.org/ocl/3.1.0/Pivot");
+			metamodel = createPackage(name, nsPrefix, nsURI);
 			installPackages();
 			installOclTypes();
 			installPrimitiveTypes();
 			installEnumerations();
 			installParameterTypes();
-			installCollectionTypes();
-			installClassifierTypes();
 			installOperations();
 			installIterations();
 			installProperties();
 			installTemplateSignatures();
-			installTemplateBindings();
-			installPrecedences();
 			installComments();
-			return metaModel;
+			return model;
 		}
 	
-		
 		protected void installPackages() {
-			
+			model.getNestedPackage().add(metamodel);
 		}
 		
 		protected final Class _Annotation = createClass("Annotation");
@@ -214,10 +223,8 @@ public class OCLMetaModel extends XMIResourceImpl
 		
 		protected final Class _Visitor_R = createClass("R");
 		
-		
-		
 		protected void installOclTypes() {
-			final List<Type> ownedTypes = metaModel.getOwnedType();
+			final List<Type> ownedTypes = metamodel.getOwnedType();
 			Type type;
 			List<Type> superClasses;
 			ownedTypes.add(type = _Annotation);
@@ -350,7 +357,7 @@ public class OCLMetaModel extends XMIResourceImpl
 			superClasses.add(_OCLExpression);
 			ownedTypes.add(type = _Library);
 			superClasses = type.getSuperClass();
-			superClasses.add(_Model);
+			superClasses.add(_Package);
 			ownedTypes.add(type = _LibraryFeature);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclElement);
@@ -563,12 +570,12 @@ public class OCLMetaModel extends XMIResourceImpl
 		}
 		
 		protected void installPrimitiveTypes() {
-			final List<Type> ownedTypes = metaModel.getOwnedType();
+			final List<Type> ownedTypes = metamodel.getOwnedType();
 			PrimitiveType type;
 		}
 		
 		protected void installEnumerations() {
-			final List<Type> ownedTypes = metaModel.getOwnedType();
+			final List<Type> ownedTypes = metamodel.getOwnedType();
 			Enumeration type;
 			List<EnumerationLiteral> enumerationLiterals;
 			ownedTypes.add(type = _AssociativityKind);
@@ -589,18 +596,6 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected void installParameterTypes() {
 		}
 		
-		protected void installCollectionTypes() {
-			final List<Type> ownedTypes = metaModel.getOwnedType();
-			CollectionType type;
-			List<Type> superClasses;
-		}
-		
-		protected void installClassifierTypes() {
-			final List<Type> ownedTypes = metaModel.getOwnedType();
-			ClassifierType type;
-			List<Type> superClasses;
-		}
-		
 		protected final Operation op_Element_allOwnedElements = createOperation("allOwnedElements", _Element, null, null);
 		protected final Operation op_Element_getValue = createOperation("getValue", _Element, null, null);
 		protected final Operation op_MultiplicityElement_includesCardinality = createOperation("includesCardinality", _Boolean, null, null);
@@ -615,6 +610,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final Operation op_TemplateableElement_isTemplate = createOperation("isTemplate", _Boolean, null, null);
 		protected final Operation op_TemplateableElement_parameterableElements = createOperation("parameterableElements", _ParameterableElement, null, null);
 		protected final Operation op_null_isTemplate = createOperation("isTemplate", _Boolean, null, null);
+		protected final Operation op_Type_resolveSelfType = createOperation("resolveSelfType", _Type, null, null);
 		protected final Operation op_TypedMultiplicityElement_CompatibleBody = createOperation("CompatibleBody", _Boolean, null, null);
 		protected final Operation op_TypedMultiplicityElement_makeParameter = createOperation("makeParameter", _Parameter, null, null);
 		protected final Operation op_ValueSpecification_booleanValue = createOperation("booleanValue", _Boolean, null, null);
@@ -665,6 +661,10 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedOperations.add(operation = op_TemplateableElement_parameterableElements);
 			operation.setLower(BigInteger.valueOf(0));
 			operation.setUpper(BigInteger.valueOf(-1));
+			ownedOperations = _Type.getOwnedOperation();
+			ownedOperations.add(operation = op_Type_resolveSelfType);
+			ownedParameters = operation.getOwnedParameter();
+			ownedParameters.add(parameter = createParameter("selfType", _Type));
 			ownedOperations = _TypedMultiplicityElement.getOwnedOperation();
 			ownedOperations.add(operation = op_TypedMultiplicityElement_CompatibleBody);
 			ownedParameters = operation.getOwnedParameter();
@@ -716,7 +716,6 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final Property pr_CollectionRange_first = createProperty("first", _OCLExpression);
 		protected final Property pr_CollectionRange_last = createProperty("last", _OCLExpression);
 		protected final Property pr_CollectionType_elementType = createProperty("elementType", _Type);
-		protected final Property pr_Comment_Element = createProperty("Element", _Element);
 		protected final Property pr_Comment_annotatedElement = createProperty("annotatedElement", _Element);
 		protected final Property pr_Comment_body = createProperty("body", _String);
 		protected final Property pr_Constraint_constrainedElement = createProperty("constrainedElement", _Element);
@@ -739,6 +738,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final Property pr_DynamicProperty_referredProperty = createProperty("referredProperty", _Property);
 		protected final Property pr_null_metaType = createProperty("metaType", _Type);
 		protected final Property pr_DynamicType_ownedProperty = createProperty("ownedProperty", _DynamicProperty);
+		protected final Property pr_Element_Comment = createProperty("Comment", _Comment);
 		protected final Property pr_Element_Constraint = createProperty("Constraint", _Constraint);
 		protected final Property pr_Element_appliedStereotype = createProperty("appliedStereotype", _AppliedStereotype);
 		protected final Property pr_Element_ownedComment = createProperty("ownedComment", _Comment);
@@ -1045,15 +1045,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Type_CollectionType);
 			ownedProperties = _Comment.getOwnedAttribute();
-			ownedProperties.add(property = pr_Comment_Element);
-			property.setLower(BigInteger.valueOf(0));
-			property.setImplicit(true);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Element_ownedComment);
 			ownedProperties.add(property = pr_Comment_annotatedElement);
 			property.setLower(BigInteger.valueOf(0));
 			property.setUpper(BigInteger.valueOf(-1));
 			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Element_Comment);
 			ownedProperties.add(property = pr_Comment_body);
 			property.setLower(BigInteger.valueOf(0));
 			property.setIsResolveProxies(true);
@@ -1141,6 +1137,12 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_DynamicProperty_DynamicType);
 			ownedProperties = _Element.getOwnedAttribute();
+			ownedProperties.add(property = pr_Element_Comment);
+			property.setLower(BigInteger.valueOf(0));
+			property.setUpper(BigInteger.valueOf(-1));
+			property.setImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Comment_annotatedElement);
 			ownedProperties.add(property = pr_Element_Constraint);
 			property.setLower(BigInteger.valueOf(0));
 			property.setUpper(BigInteger.valueOf(-1));
@@ -1158,7 +1160,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setUpper(BigInteger.valueOf(-1));
 			property.setIsComposite(true);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Comment_Element);
 			ownedProperties = _EnumLiteralExp.getOwnedAttribute();
 			ownedProperties.add(property = pr_EnumLiteralExp_referredEnumLiteral);
 			property.setLower(BigInteger.valueOf(0));
@@ -1984,15 +1985,6 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final TemplateSignature ts_Visitor = createTemplateSignature(_Visitor, tp_Visitor);
 		
 		protected void installTemplateSignatures() {
-		}
-		
-		protected void installTemplateBindings() {
-		}
-		
-		protected void installPrecedences() {
-		
-			final List<Precedence> ownedPrecedences = metaModel.getOwnedPrecedence();
-		
 		}
 		
 		protected void installComments() {

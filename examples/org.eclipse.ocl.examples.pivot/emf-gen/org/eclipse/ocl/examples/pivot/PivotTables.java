@@ -758,7 +758,6 @@ public class PivotTables
 		
 		public static final ExecutorFragment _Library__Element = new ExecutorFragment(Types._Library, PivotTables.Types._Element);
 		public static final ExecutorFragment _Library__Library = new ExecutorFragment(Types._Library, PivotTables.Types._Library);
-		public static final ExecutorFragment _Library__Model = new ExecutorFragment(Types._Library, PivotTables.Types._Model);
 		public static final ExecutorFragment _Library__Nameable = new ExecutorFragment(Types._Library, PivotTables.Types._Nameable);
 		public static final ExecutorFragment _Library__NamedElement = new ExecutorFragment(Types._Library, PivotTables.Types._NamedElement);
 		public static final ExecutorFragment _Library__Namespace = new ExecutorFragment(Types._Library, PivotTables.Types._Namespace);
@@ -1647,6 +1646,10 @@ public class PivotTables
 		public static final ExecutorOperation _TemplateableElement__parameterableElements = new ExecutorOperation("parameterableElements",
 			Types._TemplateableElement, 1, null);
 	
+		public static final ExecutorOperation _Type__resolveSelfType = new ExecutorOperation("resolveSelfType",
+			Types._Type, 0, org.eclipse.ocl.examples.pivot.bodies.TypeBodies._resolveSelfType_body_.INSTANCE,
+				PivotTables.Types._Type);
+	
 		public static final ExecutorOperation _TypedMultiplicityElement__CompatibleBody = new ExecutorOperation("CompatibleBody",
 			Types._TypedMultiplicityElement, 0, org.eclipse.ocl.examples.pivot.bodies.TypedMultiplicityElementBodies._CompatibleBody_body_.INSTANCE,
 				PivotTables.Types._ValueSpecification);
@@ -1715,9 +1718,8 @@ public class PivotTables
 	
 		public static final ExecutorProperty _CollectionType__elementType = new ExecutorProperty("elementType", Types._CollectionType, 0, new EcoreLibraryProperty(PivotPackage.Literals.COLLECTION_TYPE__ELEMENT_TYPE));
 	
-		public static final ExecutorProperty _Comment__Element = new ExecutorProperty("Element", Types._Comment, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.ELEMENT__OWNED_COMMENT));
-		public static final ExecutorProperty _Comment__annotatedElement = new ExecutorProperty("annotatedElement", Types._Comment, 1, new EcoreLibraryProperty(PivotPackage.Literals.COMMENT__ANNOTATED_ELEMENT));
-		public static final ExecutorProperty _Comment__body = new ExecutorProperty("body", Types._Comment, 2, new EcoreLibraryProperty(PivotPackage.Literals.COMMENT__BODY));
+		public static final ExecutorProperty _Comment__annotatedElement = new ExecutorProperty("annotatedElement", Types._Comment, 0, new EcoreLibraryProperty(PivotPackage.Literals.COMMENT__ANNOTATED_ELEMENT));
+		public static final ExecutorProperty _Comment__body = new ExecutorProperty("body", Types._Comment, 1, new EcoreLibraryProperty(PivotPackage.Literals.COMMENT__BODY));
 	
 		public static final ExecutorProperty _Constraint__constrainedElement = new ExecutorProperty("constrainedElement", Types._Constraint, 0, new EcoreLibraryProperty(PivotPackage.Literals.CONSTRAINT__CONSTRAINED_ELEMENT));
 		public static final ExecutorProperty _Constraint__context = new ExecutorProperty("context", Types._Constraint, 1, new EcoreLibraryProperty(PivotPackage.Literals.CONSTRAINT__CONTEXT));
@@ -1746,9 +1748,10 @@ public class PivotTables
 	
 		public static final ExecutorProperty _DynamicType__ownedProperty = new ExecutorProperty("ownedProperty", Types._DynamicType, 0, new EcoreLibraryProperty(PivotPackage.Literals.DYNAMIC_TYPE__OWNED_PROPERTY));
 	
-		public static final ExecutorProperty _Element__Constraint = new ExecutorProperty("Constraint", Types._Element, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.CONSTRAINT__CONSTRAINED_ELEMENT));
-		public static final ExecutorProperty _Element__appliedStereotype = new ExecutorProperty("appliedStereotype", Types._Element, 1, new EcoreLibraryProperty(PivotPackage.Literals.ELEMENT__APPLIED_STEREOTYPE));
-		public static final ExecutorProperty _Element__ownedComment = new ExecutorProperty("ownedComment", Types._Element, 2, new EcoreLibraryProperty(PivotPackage.Literals.ELEMENT__OWNED_COMMENT));
+		public static final ExecutorProperty _Element__Comment = new ExecutorProperty("Comment", Types._Element, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.COMMENT__ANNOTATED_ELEMENT));
+		public static final ExecutorProperty _Element__Constraint = new ExecutorProperty("Constraint", Types._Element, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.CONSTRAINT__CONSTRAINED_ELEMENT));
+		public static final ExecutorProperty _Element__appliedStereotype = new ExecutorProperty("appliedStereotype", Types._Element, 2, new EcoreLibraryProperty(PivotPackage.Literals.ELEMENT__APPLIED_STEREOTYPE));
+		public static final ExecutorProperty _Element__ownedComment = new ExecutorProperty("ownedComment", Types._Element, 3, new EcoreLibraryProperty(PivotPackage.Literals.ELEMENT__OWNED_COMMENT));
 	
 		public static final ExecutorProperty _EnumLiteralExp__referredEnumLiteral = new ExecutorProperty("referredEnumLiteral", Types._EnumLiteralExp, 0, new EcoreLibraryProperty(PivotPackage.Literals.ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL));
 	
@@ -2604,10 +2607,9 @@ public class PivotTables
 		    Fragments._Library__TemplateableElement /* 4 */,
 		    Fragments._Library__Namespace /* 5 */,
 		    Fragments._Library__Package /* 6 */,
-		    Fragments._Library__Model /* 7 */,
-		    Fragments._Library__Library /* 8 */
+		    Fragments._Library__Library /* 7 */
 		};
-		private static final int[] __Library = { 1,1,2,1,2,1,1,1,1 };
+		private static final int[] __Library = { 1,1,2,1,2,1,1,1 };
 	
 		private static final ExecutorFragment[] _LibraryFeature =
 		{
@@ -3677,7 +3679,9 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _AnyType__Type = {};
+		private static final ExecutorOperation[] _AnyType__Type = {
+		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
+		};
 		private static final ExecutorOperation[] _AnyType__Visitable = {};
 	
 		private static final ExecutorOperation[] _AppliedStereotype__AppliedStereotype = {};
@@ -3742,7 +3746,9 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _AssociationClass__Type = {};
+		private static final ExecutorOperation[] _AssociationClass__Type = {
+		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
+		};
 		private static final ExecutorOperation[] _AssociationClass__Visitable = {};
 	
 		private static final ExecutorOperation[] _AssociationClassCallExp__AssociationClassCallExp = {};
@@ -3818,7 +3824,9 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _BagType__Type = {};
+		private static final ExecutorOperation[] _BagType__Type = {
+		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
+		};
 		private static final ExecutorOperation[] _BagType__Visitable = {};
 	
 		private static final ExecutorOperation[] _BooleanLiteralExp__BooleanLiteralExp = {};
@@ -3946,7 +3954,9 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _Class__Type = {};
+		private static final ExecutorOperation[] _Class__Type = {
+		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
+		};
 		private static final ExecutorOperation[] _Class__Visitable = {};
 	
 		private static final ExecutorOperation[] _ClassifierType__ClassifierType = {};
@@ -3985,7 +3995,9 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _ClassifierType__Type = {};
+		private static final ExecutorOperation[] _ClassifierType__Type = {
+		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
+		};
 		private static final ExecutorOperation[] _ClassifierType__Visitable = {};
 	
 		private static final ExecutorOperation[] _CollectionItem__CollectionItem = {};
@@ -4147,7 +4159,9 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _CollectionType__Type = {};
+		private static final ExecutorOperation[] _CollectionType__Type = {
+		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
+		};
 		private static final ExecutorOperation[] _CollectionType__Visitable = {};
 	
 		private static final ExecutorOperation[] _Comment__Comment = {};
@@ -4296,7 +4310,9 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _DataType__Type = {};
+		private static final ExecutorOperation[] _DataType__Type = {
+		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
+		};
 		private static final ExecutorOperation[] _DataType__Visitable = {};
 	
 		private static final ExecutorOperation[] _Detail__Detail = {};
@@ -4414,7 +4430,9 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _DynamicType__Type = {};
+		private static final ExecutorOperation[] _DynamicType__Type = {
+		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
+		};
 		private static final ExecutorOperation[] _DynamicType__Visitable = {};
 	
 		private static final ExecutorOperation[] _Element__Element = {
@@ -4510,7 +4528,9 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _Enumeration__Type = {};
+		private static final ExecutorOperation[] _Enumeration__Type = {
+		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
+		};
 		private static final ExecutorOperation[] _Enumeration__Visitable = {};
 	
 		private static final ExecutorOperation[] _EnumerationLiteral__EnumerationLiteral = {};
@@ -4784,7 +4804,9 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _InvalidType__Type = {};
+		private static final ExecutorOperation[] _InvalidType__Type = {
+		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
+		};
 		private static final ExecutorOperation[] _InvalidType__Visitable = {};
 	
 		private static final ExecutorOperation[] _IterateExp__IterateExp = {};
@@ -4939,7 +4961,9 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _LambdaType__Type = {};
+		private static final ExecutorOperation[] _LambdaType__Type = {
+		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
+		};
 		private static final ExecutorOperation[] _LambdaType__Visitable = {};
 	
 		private static final ExecutorOperation[] _LetExp__LetExp = {};
@@ -4977,7 +5001,6 @@ public class PivotTables
 		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
-		private static final ExecutorOperation[] _Library__Model = {};
 		private static final ExecutorOperation[] _Library__Nameable = {};
 		private static final ExecutorOperation[] _Library__NamedElement = {};
 		private static final ExecutorOperation[] _Library__Namespace = {};
@@ -5134,7 +5157,9 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _MessageType__Type = {};
+		private static final ExecutorOperation[] _MessageType__Type = {
+		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
+		};
 		private static final ExecutorOperation[] _MessageType__Visitable = {};
 	
 		private static final ExecutorOperation[] _Model__Model = {};
@@ -5615,7 +5640,9 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _OrderedSetType__Type = {};
+		private static final ExecutorOperation[] _OrderedSetType__Type = {
+		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
+		};
 		private static final ExecutorOperation[] _OrderedSetType__Visitable = {};
 	
 		private static final ExecutorOperation[] _Package__Package = {};
@@ -5868,7 +5895,9 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _PrimitiveType__Type = {};
+		private static final ExecutorOperation[] _PrimitiveType__Type = {
+		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
+		};
 		private static final ExecutorOperation[] _PrimitiveType__Visitable = {};
 	
 		private static final ExecutorOperation[] _Property__Property = {
@@ -6022,7 +6051,9 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _SelfType__Type = {};
+		private static final ExecutorOperation[] _SelfType__Type = {
+		    PivotTables.Operations._SelfType__resolveSelfType /* resolveSelfType(Type) */
+		};
 		private static final ExecutorOperation[] _SelfType__Visitable = {};
 	
 		private static final ExecutorOperation[] _SendSignalAction__SendSignalAction = {};
@@ -6091,7 +6122,9 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _SequenceType__Type = {};
+		private static final ExecutorOperation[] _SequenceType__Type = {
+		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
+		};
 		private static final ExecutorOperation[] _SequenceType__Visitable = {};
 	
 		private static final ExecutorOperation[] _SetType__SetType = {};
@@ -6132,7 +6165,9 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _SetType__Type = {};
+		private static final ExecutorOperation[] _SetType__Type = {
+		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
+		};
 		private static final ExecutorOperation[] _SetType__Visitable = {};
 	
 		private static final ExecutorOperation[] _Signal__Signal = {};
@@ -6391,7 +6426,9 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _TemplateParameterType__Type = {};
+		private static final ExecutorOperation[] _TemplateParameterType__Type = {
+		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
+		};
 		private static final ExecutorOperation[] _TemplateParameterType__Visitable = {};
 	
 		private static final ExecutorOperation[] _TemplateSignature__TemplateSignature = {};
@@ -6549,10 +6586,14 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _TupleType__Type = {};
+		private static final ExecutorOperation[] _TupleType__Type = {
+		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
+		};
 		private static final ExecutorOperation[] _TupleType__Visitable = {};
 	
-		private static final ExecutorOperation[] _Type__Type = {};
+		private static final ExecutorOperation[] _Type__Type = {
+		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
+		};
 		private static final ExecutorOperation[] _Type__Element = {
 		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 		    PivotTables.Operations._Element__getValue /* getValue(Type,String) */
@@ -6781,7 +6822,9 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _UnspecifiedType__Type = {};
+		private static final ExecutorOperation[] _UnspecifiedType__Type = {
+		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
+		};
 		private static final ExecutorOperation[] _UnspecifiedType__Visitable = {};
 	
 		private static final ExecutorOperation[] _UnspecifiedValueExp__UnspecifiedValueExp = {};
@@ -7021,7 +7064,9 @@ public class PivotTables
 		    PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 		    PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
 		};
-		private static final ExecutorOperation[] _VoidType__Type = {};
+		private static final ExecutorOperation[] _VoidType__Type = {
+		    PivotTables.Operations._Type__resolveSelfType /* resolveSelfType(Type) */
+		};
 		private static final ExecutorOperation[] _VoidType__Visitable = {};
 	
 		/*
@@ -7472,7 +7517,6 @@ public class PivotTables
 	
 			Fragments._Library__Element.initOperations(_Library__Element);
 			Fragments._Library__Library.initOperations(_Library__Library);
-			Fragments._Library__Model.initOperations(_Library__Model);
 			Fragments._Library__Nameable.initOperations(_Library__Nameable);
 			Fragments._Library__NamedElement.initOperations(_Library__NamedElement);
 			Fragments._Library__Namespace.initOperations(_Library__Namespace);
@@ -8110,6 +8154,7 @@ public class PivotTables
 	 */
 	public static class FragmentProperties {
 		private static final ExecutorProperty[] _Annotation = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Annotation__NamedElement,
 		    PivotTables.Properties._Element__appliedStereotype,
@@ -8127,6 +8172,7 @@ public class PivotTables
 		    PivotTables.Properties._Type__AppliedStereotype,
 		    PivotTables.Properties._Type__ClassifierType,
 		    PivotTables.Properties._Type__CollectionType,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Type__DataType,
 		    PivotTables.Properties._Type__DynamicElement,
@@ -8155,6 +8201,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _AppliedStereotype = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._AppliedStereotype__Element,
 		    PivotTables.Properties._Element__appliedStereotype,
@@ -8168,6 +8215,7 @@ public class PivotTables
 		    PivotTables.Properties._AssociationClass__AssociationClassCallExp,
 		    PivotTables.Properties._Type__ClassifierType,
 		    PivotTables.Properties._Type__CollectionType,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Type__DataType,
 		    PivotTables.Properties._Type__DynamicElement,
@@ -8199,6 +8247,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _AssociationClassCallExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -8228,6 +8277,7 @@ public class PivotTables
 		    PivotTables.Properties._Type__AppliedStereotype,
 		    PivotTables.Properties._Type__ClassifierType,
 		    PivotTables.Properties._Type__CollectionType,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Type__DataType,
 		    PivotTables.Properties._Type__DynamicElement,
@@ -8263,6 +8313,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _BooleanLiteralExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -8284,6 +8335,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _CallExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -8304,6 +8356,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _CallOperationAction = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._CallOperationAction__MessageExp,
 		    PivotTables.Properties._Element__appliedStereotype,
@@ -8319,6 +8372,7 @@ public class PivotTables
 		    PivotTables.Properties._Type__AppliedStereotype,
 		    PivotTables.Properties._Type__ClassifierType,
 		    PivotTables.Properties._Type__CollectionType,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Type__DataType,
 		    PivotTables.Properties._Type__DynamicElement,
@@ -8350,6 +8404,7 @@ public class PivotTables
 		    PivotTables.Properties._Type__AppliedStereotype,
 		    PivotTables.Properties._Type__ClassifierType,
 		    PivotTables.Properties._Type__CollectionType,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Type__DataType,
 		    PivotTables.Properties._Type__DynamicElement,
@@ -8380,6 +8435,7 @@ public class PivotTables
 	
 		private static final ExecutorProperty[] _CollectionItem = {
 		    PivotTables.Properties._CollectionLiteralPart__CollectionLiteralExp,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._NamedElement__isStatic,
@@ -8396,6 +8452,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _CollectionLiteralExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -8417,6 +8474,7 @@ public class PivotTables
 	
 		private static final ExecutorProperty[] _CollectionLiteralPart = {
 		    PivotTables.Properties._CollectionLiteralPart__CollectionLiteralExp,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._NamedElement__isStatic,
@@ -8429,6 +8487,7 @@ public class PivotTables
 	
 		private static final ExecutorProperty[] _CollectionRange = {
 		    PivotTables.Properties._CollectionLiteralPart__CollectionLiteralExp,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._CollectionRange__first,
@@ -8445,6 +8504,7 @@ public class PivotTables
 		    PivotTables.Properties._Type__AppliedStereotype,
 		    PivotTables.Properties._Type__ClassifierType,
 		    PivotTables.Properties._Type__CollectionType,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Type__DataType,
 		    PivotTables.Properties._Type__DynamicElement,
@@ -8476,8 +8536,8 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _Comment = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
-		    PivotTables.Properties._Comment__Element,
 		    PivotTables.Properties._Comment__annotatedElement,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._Comment__body,
@@ -8485,6 +8545,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _Constraint = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._Constraint__constrainedElement,
@@ -8502,6 +8563,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _ConstructorExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -8522,6 +8584,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _ConstructorPart = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._ConstructorPart__ConstructorExp,
 		    PivotTables.Properties._Element__appliedStereotype,
@@ -8534,6 +8597,7 @@ public class PivotTables
 		    PivotTables.Properties._Type__AppliedStereotype,
 		    PivotTables.Properties._Type__ClassifierType,
 		    PivotTables.Properties._Type__CollectionType,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Type__DataType,
 		    PivotTables.Properties._Type__DynamicElement,
@@ -8565,6 +8629,7 @@ public class PivotTables
 	
 		private static final ExecutorProperty[] _Detail = {
 		    PivotTables.Properties._Detail__Annotation,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._NamedElement__isStatic,
@@ -8576,6 +8641,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _DynamicElement = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._DynamicElement__metaType,
@@ -8583,6 +8649,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _DynamicProperty = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._DynamicProperty__DynamicType,
 		    PivotTables.Properties._Element__appliedStereotype,
@@ -8595,6 +8662,7 @@ public class PivotTables
 		    PivotTables.Properties._Type__AppliedStereotype,
 		    PivotTables.Properties._Type__ClassifierType,
 		    PivotTables.Properties._Type__CollectionType,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Type__DataType,
 		    PivotTables.Properties._Type__DynamicElement,
@@ -8623,6 +8691,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _Element = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._Element__ownedComment
@@ -8631,6 +8700,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _EnumLiteralExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -8653,6 +8723,7 @@ public class PivotTables
 		    PivotTables.Properties._Type__AppliedStereotype,
 		    PivotTables.Properties._Type__ClassifierType,
 		    PivotTables.Properties._Type__CollectionType,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Type__DataType,
 		    PivotTables.Properties._Type__DynamicElement,
@@ -8684,6 +8755,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _EnumerationLiteral = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._EnumerationLiteral__EnumLiteralExp,
 		    PivotTables.Properties._Element__appliedStereotype,
@@ -8697,6 +8769,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _ExpressionInOCL = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._ValueSpecification__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
@@ -8720,6 +8793,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _Feature = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._Feature__implementation,
@@ -8739,6 +8813,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _FeatureCallExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -8762,6 +8837,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _IfExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -8789,6 +8865,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _IntegerLiteralExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -8810,6 +8887,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _InvalidLiteralExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -8831,6 +8909,7 @@ public class PivotTables
 		    PivotTables.Properties._Type__AppliedStereotype,
 		    PivotTables.Properties._Type__ClassifierType,
 		    PivotTables.Properties._Type__CollectionType,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Type__DataType,
 		    PivotTables.Properties._Type__DynamicElement,
@@ -8861,6 +8940,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _IterateExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -8886,6 +8966,7 @@ public class PivotTables
 	
 		private static final ExecutorProperty[] _Iteration = {
 		    PivotTables.Properties._Operation__CallOperationAction,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Iteration__LoopExp,
 		    PivotTables.Properties._Operation__MessageType,
@@ -8922,6 +9003,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _IteratorExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -8948,6 +9030,7 @@ public class PivotTables
 		    PivotTables.Properties._Type__AppliedStereotype,
 		    PivotTables.Properties._Type__ClassifierType,
 		    PivotTables.Properties._Type__CollectionType,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Type__DataType,
 		    PivotTables.Properties._Type__DynamicElement,
@@ -8983,6 +9066,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _LetExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -9003,6 +9087,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _Library = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._Package__importedPackage,
@@ -9027,6 +9112,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _LiteralExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -9047,6 +9133,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _LoopExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -9072,6 +9159,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _MessageExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -9097,6 +9185,7 @@ public class PivotTables
 		    PivotTables.Properties._Type__AppliedStereotype,
 		    PivotTables.Properties._Type__ClassifierType,
 		    PivotTables.Properties._Type__CollectionType,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Type__DataType,
 		    PivotTables.Properties._Type__DynamicElement,
@@ -9125,6 +9214,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _Model = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._Package__importedPackage,
@@ -9147,6 +9237,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _MorePivotable = {};
 	
 		private static final ExecutorProperty[] _MultiplicityElement = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._MultiplicityElement__isOrdered,
@@ -9159,6 +9250,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _Nameable = {};
 	
 		private static final ExecutorProperty[] _NamedElement = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._NamedElement__isStatic,
@@ -9169,6 +9261,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _Namespace = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._NamedElement__isStatic,
@@ -9181,6 +9274,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _NavigationCallExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -9206,6 +9300,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _NullLiteralExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -9226,6 +9321,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _NumericLiteralExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -9246,6 +9342,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _OCLExpression = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -9266,6 +9363,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _Object = {};
 	
 		private static final ExecutorProperty[] _OpaqueExpression = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._ValueSpecification__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
@@ -9285,6 +9383,7 @@ public class PivotTables
 	
 		private static final ExecutorProperty[] _Operation = {
 		    PivotTables.Properties._Operation__CallOperationAction,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Operation__MessageType,
 		    PivotTables.Properties._Operation__Operation,
@@ -9318,6 +9417,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _OperationCallExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -9341,6 +9441,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _OperationTemplateParameter = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._TemplateParameter__TemplateParameterSubstitution,
 		    PivotTables.Properties._Element__appliedStereotype,
@@ -9356,6 +9457,7 @@ public class PivotTables
 		    PivotTables.Properties._Type__AppliedStereotype,
 		    PivotTables.Properties._Type__ClassifierType,
 		    PivotTables.Properties._Type__CollectionType,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Type__DataType,
 		    PivotTables.Properties._Type__DynamicElement,
@@ -9387,6 +9489,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _Package = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._Package__importedPackage,
@@ -9407,6 +9510,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _PackageableElement = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._Element__ownedComment,
@@ -9415,6 +9519,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _Parameter = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Parameter__Variable,
 		    PivotTables.Properties._VariableDeclaration__VariableExp,
@@ -9433,6 +9538,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _ParameterableElement = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._Element__ownedComment,
@@ -9443,6 +9549,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _Pivotable = {};
 	
 		private static final ExecutorProperty[] _Precedence = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Precedence__Operation,
 		    PivotTables.Properties._Precedence__Package,
@@ -9459,6 +9566,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _PrimitiveLiteralExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -9480,6 +9588,7 @@ public class PivotTables
 		    PivotTables.Properties._Type__AppliedStereotype,
 		    PivotTables.Properties._Type__ClassifierType,
 		    PivotTables.Properties._Type__CollectionType,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Type__DataType,
 		    PivotTables.Properties._Type__DynamicElement,
@@ -9510,6 +9619,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _Property = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Property__ConstructorPart,
 		    PivotTables.Properties._Property__DynamicProperty,
@@ -9553,6 +9663,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _PropertyCallExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -9581,6 +9692,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _RealLiteralExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -9603,6 +9715,7 @@ public class PivotTables
 		    PivotTables.Properties._Type__AppliedStereotype,
 		    PivotTables.Properties._Type__ClassifierType,
 		    PivotTables.Properties._Type__CollectionType,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Type__DataType,
 		    PivotTables.Properties._Type__DynamicElement,
@@ -9631,6 +9744,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _SendSignalAction = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._SendSignalAction__MessageExp,
 		    PivotTables.Properties._Element__appliedStereotype,
@@ -9646,6 +9760,7 @@ public class PivotTables
 		    PivotTables.Properties._Type__AppliedStereotype,
 		    PivotTables.Properties._Type__ClassifierType,
 		    PivotTables.Properties._Type__CollectionType,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Type__DataType,
 		    PivotTables.Properties._Type__DynamicElement,
@@ -9680,6 +9795,7 @@ public class PivotTables
 		    PivotTables.Properties._Type__AppliedStereotype,
 		    PivotTables.Properties._Type__ClassifierType,
 		    PivotTables.Properties._Type__CollectionType,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Type__DataType,
 		    PivotTables.Properties._Type__DynamicElement,
@@ -9711,6 +9827,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _Signal = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Signal__MessageType,
 		    PivotTables.Properties._Signal__SendSignalAction,
@@ -9723,6 +9840,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _State = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._State__StateExp,
 		    PivotTables.Properties._Element__appliedStereotype,
@@ -9736,6 +9854,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _StateExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -9756,6 +9875,7 @@ public class PivotTables
 	
 		private static final ExecutorProperty[] _StereotypedProperty = {
 		    PivotTables.Properties._StereotypedProperty__AppliedStereotype,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._StereotypedProperty__default,
@@ -9768,6 +9888,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _StringLiteralExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -9787,6 +9908,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _TemplateBinding = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._TemplateBinding__boundElement,
@@ -9796,6 +9918,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _TemplateParameter = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._TemplateParameter__TemplateParameterSubstitution,
 		    PivotTables.Properties._Element__appliedStereotype,
@@ -9808,6 +9931,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _TemplateParameterSubstitution = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._TemplateParameterSubstitution__actual,
 		    PivotTables.Properties._Element__appliedStereotype,
@@ -9821,6 +9945,7 @@ public class PivotTables
 		    PivotTables.Properties._Type__AppliedStereotype,
 		    PivotTables.Properties._Type__ClassifierType,
 		    PivotTables.Properties._Type__CollectionType,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Type__DataType,
 		    PivotTables.Properties._Type__DynamicElement,
@@ -9848,6 +9973,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _TemplateSignature = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._TemplateSignature__TemplateBinding,
 		    PivotTables.Properties._Element__appliedStereotype,
@@ -9858,6 +9984,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _TemplateableElement = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._Element__ownedComment,
@@ -9871,6 +9998,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _TupleLiteralExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -9890,6 +10018,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _TupleLiteralPart = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._TupleLiteralPart__TupleLiteralExp,
 		    PivotTables.Properties._VariableDeclaration__VariableExp,
@@ -9907,6 +10036,7 @@ public class PivotTables
 		    PivotTables.Properties._Type__AppliedStereotype,
 		    PivotTables.Properties._Type__ClassifierType,
 		    PivotTables.Properties._Type__CollectionType,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Type__DataType,
 		    PivotTables.Properties._Type__DynamicElement,
@@ -9940,6 +10070,7 @@ public class PivotTables
 		    PivotTables.Properties._Type__AppliedStereotype,
 		    PivotTables.Properties._Type__ClassifierType,
 		    PivotTables.Properties._Type__CollectionType,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Type__DataType,
 		    PivotTables.Properties._Type__DynamicElement,
@@ -9968,6 +10099,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _TypeExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -9987,6 +10119,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _TypeTemplateParameter = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._TemplateParameter__TemplateParameterSubstitution,
 		    PivotTables.Properties._TypeTemplateParameter__allowSubstitutable,
@@ -10001,6 +10134,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _TypedElement = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._NamedElement__isStatic,
@@ -10012,6 +10146,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _TypedMultiplicityElement = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._MultiplicityElement__isOrdered,
@@ -10031,6 +10166,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _UnlimitedNaturalLiteralExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -10053,6 +10189,7 @@ public class PivotTables
 		    PivotTables.Properties._Type__AppliedStereotype,
 		    PivotTables.Properties._Type__ClassifierType,
 		    PivotTables.Properties._Type__CollectionType,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Type__DataType,
 		    PivotTables.Properties._Type__DynamicElement,
@@ -10085,6 +10222,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _UnspecifiedValueExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -10103,6 +10241,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _ValueSpecification = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._ValueSpecification__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
@@ -10117,6 +10256,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _Variable = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Variable__IterateExp,
 		    PivotTables.Properties._Variable__LetExp,
@@ -10135,6 +10275,7 @@ public class PivotTables
 		};
 	
 		private static final ExecutorProperty[] _VariableDeclaration = {
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._VariableDeclaration__VariableExp,
 		    PivotTables.Properties._Element__appliedStereotype,
@@ -10149,6 +10290,7 @@ public class PivotTables
 		private static final ExecutorProperty[] _VariableExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._OCLExpression__ConstructorPart,
 		    PivotTables.Properties._OCLExpression__LetExp,
@@ -10176,6 +10318,7 @@ public class PivotTables
 		    PivotTables.Properties._Type__AppliedStereotype,
 		    PivotTables.Properties._Type__ClassifierType,
 		    PivotTables.Properties._Type__CollectionType,
+		    PivotTables.Properties._Element__Comment,
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Type__DataType,
 		    PivotTables.Properties._Type__DynamicElement,

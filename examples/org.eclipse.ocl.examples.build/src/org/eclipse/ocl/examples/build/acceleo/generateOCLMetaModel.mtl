@@ -1,11 +1,18 @@
 [comment encoding = UTF-8 /]
 [module org::eclipse::ocl::examples::build::acceleo::generateOCLMetaModel('http://www.eclipse.org/ocl/3.1.0/Pivot','http://www.eclipse.org/emf/2002/Ecore') extends org::eclipse::ocl::examples::build::acceleo::generateOCLCommon/]
 
-[template public generate(pkg : Package, javaPackage : String, javaClass : String, sourceFile : String, uri : String) ? (pkg.nestedPackage->isEmpty())]
+[template public generate(model : Model, javaPackage : String, javaClass : String, sourceFile : String, uri : String)]
 [comment @main /]
-[let allEnumerations : Sequence(Enumeration) = pkg.eAllContents(Enumeration)]
-[let allLambdaTypes : Sequence(LambdaType) = pkg.eAllContents(LambdaType)]
-[let allTupleTypes : Sequence(TupleType) = pkg.eAllContents(TupleType)]
+[let pkg : Package = model.nestedPackage->any(name <> '$$')]
+[let allClassifierTypes : Sequence(ClassifierType) = model.eAllContents(ClassifierType)]
+[let allCollectionTypes : Sequence(CollectionType) = model.eAllContents(CollectionType)]
+[let allEnumerations : Sequence(Enumeration) = model.eAllContents(Enumeration)]
+[let allLambdaTypes : Sequence(LambdaType) = model.eAllContents(LambdaType)]
+[let allPrecedences : Sequence(Precedence) = model.eAllContents(Precedence)]
+[let allTemplateBindings : Sequence(TemplateBinding) = model.eAllContents(TemplateBinding)]
+[let allTemplateSignatures : Sequence(TemplateSignature) = model.eAllContents(TemplateSignature)]
+[let allTupleTypes : Sequence(TupleType) = model.eAllContents(TupleType)]
+[let allTypes : Sequence(Type) = model.eAllContents(Type)]
 [file (javaClass + '.java', false, 'UTF-8')]
 /**
  * <copyright>
@@ -60,12 +67,24 @@ public class [javaClass/] extends XMIResourceImpl
 	 */
 	public static final String PIVOT_URI = "[uri/]";
 
-	public [javaClass/](PivotStandardLibrary standardLibrary, String name, String nsPrefix, String nsURI) {
-		super(URI.createURI(PIVOT_URI));
+	public static Package create(PivotStandardLibrary standardLibrary, String name, String nsPrefix, String nsURI) {
+		[javaClass/] resource = new [javaClass/](URI.createURI(PIVOT_URI));
 		Contents contents = new Contents(standardLibrary);
-		Package metaModel = contents.create(name != null ? name : "[pkg.name/]", nsPrefix != null ? nsPrefix : "[pkg.nsPrefix/]", nsURI != null ? nsURI : "[pkg.nsURI/]");
-		getContents().add(metaModel);
+		Model model = contents.create(name != null ? name : "[pkg.name/]", nsPrefix != null ? nsPrefix : "[pkg.nsPrefix/]", nsURI != null ? nsURI : "[pkg.nsURI/]");
+		resource.getContents().add(model);
+		return contents.metamodel;
 	}
+
+	protected OCLMetaModel(URI uri) {
+		super(uri);
+	}
+
+//	public [javaClass/](PivotStandardLibrary standardLibrary, String name, String nsPrefix, String nsURI) {
+//		super(URI.createURI(PIVOT_URI));
+//		Contents contents = new Contents(standardLibrary);
+//		Model model = contents.create(name != null ? name : "[pkg.name/]", nsPrefix != null ? nsPrefix : "[pkg.nsPrefix/]", nsURI != null ? nsURI : "[pkg.nsURI/]");
+//		getContents().add(model);
+//	}
 
 	protected static class Contents extends AbstractContents
 	{
@@ -73,17 +92,19 @@ public class [javaClass/] extends XMIResourceImpl
 			super(standardLibrary);
 		}
 
-		protected final PrimitiveType [pkg.ownedType->select(name='Boolean')->any(true).getPrefixedSymbolName('_Boolean')/] = standardLibrary.getBooleanType();
-		protected final PrimitiveType [pkg.ownedType->select(name='Integer')->any(true).getPrefixedSymbolName('_Integer')/] = standardLibrary.getIntegerType();
+		protected final PrimitiveType [allTypes->select(name='Boolean')->any(true).getPrefixedSymbolName('_Boolean')/] = standardLibrary.getBooleanType();
+		protected final PrimitiveType [allTypes->select(name='Integer')->any(true).getPrefixedSymbolName('_Integer')/] = standardLibrary.getIntegerType();
 		protected final Class _OclElement = standardLibrary.getOclElementType();
-		protected final PrimitiveType [pkg.ownedType->select(name='Real')->any(true).getPrefixedSymbolName('_Real')/] = standardLibrary.getRealType();
-		protected final PrimitiveType [pkg.ownedType->select(name='String')->any(true).getPrefixedSymbolName('_String')/] = standardLibrary.getStringType();
-		protected final PrimitiveType [pkg.ownedType->select(name='UnlimitedNatural')->any(true).getPrefixedSymbolName('_UnlimitedNatural')/] = standardLibrary.getUnlimitedNaturalType();
+		protected final PrimitiveType [allTypes->select(name='Real')->any(true).getPrefixedSymbolName('_Real')/] = standardLibrary.getRealType();
+		protected final PrimitiveType [allTypes->select(name='String')->any(true).getPrefixedSymbolName('_String')/] = standardLibrary.getStringType();
+		protected final PrimitiveType [allTypes->select(name='UnlimitedNatural')->any(true).getPrefixedSymbolName('_UnlimitedNatural')/] = standardLibrary.getUnlimitedNaturalType();
 
-		protected Package [pkg.getPrefixedSymbolName('metaModel')/];
+		protected Model [model.getPrefixedSymbolName('model')/];
+		protected Package [pkg.getPrefixedSymbolName('metamodel')/];
 
-		protected Package create(String name, String nsPrefix, String nsURI)
+		protected Model create(String name, String nsPrefix, String nsURI)
 		{
+			[model.getSymbolName()/] = createModel("[pkg.name/]", "[pkg.nsPrefix/]", "[pkg.nsURI/]");
 			[pkg.getSymbolName()/] = createPackage(name, nsPrefix, nsURI);
 			installPackages();
 			installOclTypes();
@@ -92,8 +113,12 @@ public class [javaClass/] extends XMIResourceImpl
 			installEnumerations();
 [/if]
 			installParameterTypes();
+[if (allCollectionTypes->notEmpty())]
 			installCollectionTypes();
+[/if]
+[if (allClassifierTypes->notEmpty())]
 			installClassifierTypes();
+[/if]
 [if (allLambdaTypes->notEmpty())]
 			installLambdaTypes();
 [/if]
@@ -103,11 +128,17 @@ public class [javaClass/] extends XMIResourceImpl
 			installOperations();
 			installIterations();
 			installProperties();
+[if (allTemplateSignatures->notEmpty())]
 			installTemplateSignatures();
+[/if]
+[if (allTemplateBindings->notEmpty())]
 			installTemplateBindings();
+[/if]
+[if (allPrecedences->notEmpty())]
 			installPrecedences();
+[/if]
 			installComments();
-			return [pkg.getSymbolName()/];
+			return [model.getSymbolName()/];
 		}
 	
 		[pkg.definePackages()/]
@@ -117,8 +148,12 @@ public class [javaClass/] extends XMIResourceImpl
 		[pkg.declareEnumerations()/]
 [/if]
 		[pkg.declareParameterTypes()/]
+[if (allCollectionTypes->notEmpty())]
 		[pkg.declareCollectionTypes()/]
+[/if]
+[if (allClassifierTypes->notEmpty())]
 		[pkg.declareClassifierTypes()/]
+[/if]
 [if (allTupleTypes->notEmpty())]
 		[pkg.declareTupleTypes()/]
 [/if]
@@ -128,8 +163,12 @@ public class [javaClass/] extends XMIResourceImpl
 		[pkg.defineEnumerations()/]
 [/if]
 		[pkg.defineParameterTypes()/]
+[if (allCollectionTypes->notEmpty())]
 		[pkg.defineCollectionTypes()/]
+[/if]
+[if (allClassifierTypes->notEmpty())]
 		[pkg.defineClassifierTypes()/]
+[/if]
 [if (allTupleTypes->notEmpty())]
 		[pkg.defineTupleTypes()/]
 [/if]	
@@ -139,13 +178,26 @@ public class [javaClass/] extends XMIResourceImpl
 		[pkg.defineOperations()/]
 		[pkg.defineIterations()/]	
 		[pkg.defineProperties()/]
+[if (allTemplateSignatures->notEmpty())]
 		[pkg.defineTemplateSignatures()/]
+[/if]
+[if (allTemplateBindings->notEmpty())]
 		[pkg.defineTemplateBindings()/]
+[/if]
+[if (allPrecedences->notEmpty())]
 		[pkg.definePrecedences()/]
+[/if]
 		[pkg.defineComments()/]
 	}
 }
 [/file]
+[/let]
+[/let]
+[/let]
+[/let]
+[/let]
+[/let]
+[/let]
 [/let]
 [/let]
 [/let]

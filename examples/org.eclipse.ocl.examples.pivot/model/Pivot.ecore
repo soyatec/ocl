@@ -1013,7 +1013,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" ordered="false"
         lowerBound="1" eType="#//Variable" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Library" eSuperTypes="#//Model"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Library" eSuperTypes="#//Package"/>
   <eClassifiers xsi:type="ecore:EClass" name="LiteralExp" abstract="true" eSuperTypes="#//OCLExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="LoopExp" abstract="true" eSuperTypes="#//CallExp">
     <eOperations name="SourceIsCollection" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -1683,6 +1683,12 @@
         <eAnnotations source="redefines" references="#//ParameterableElement/templateParameter"/>
       </contents>
     </eAnnotations>
+    <eOperations name="resolveSelfType" ordered="false" lowerBound="1" eType="#//Type">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="self"/>
+      </eAnnotations>
+      <eParameters name="selfType" ordered="false" lowerBound="1" eType="#//Type"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="package" ordered="false"
         eType="#//Package" eOpposite="#//Package/ownedType">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

@@ -57,18 +57,18 @@ public class IntegerLiteralExpBodies
 			final DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			final ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
-			final ExecutorType T_Pivot_ecore__pivot__Type = PivotTables.Types._Type;
+			final ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
 			final LibraryProperty IP_TypedElement_type = P_TypedElement_type.getImplementation();
 			final Value T_ClassClassifier_Integer_ = valueFactory.createTypeValue(OCLstdlibTables.Types._Integer);
 			
 			
-			Value A_symbol_85 = IP_TypedElement_type.evaluate(evaluator, T_Pivot_ecore__pivot__Type, self, P_TypedElement_type);
+			Value A_symbol_126 = IP_TypedElement_type.evaluate(evaluator, T_Type, self, P_TypedElement_type);
 			
-			DomainType static_A_symbol_86 = valueFactory.typeOf(A_symbol_85, T_ClassClassifier_Integer_);
-			LibraryBinaryOperation dynamic_A_symbol_86 = (LibraryBinaryOperation)static_A_symbol_86.lookupImplementation(standardLibrary, O_OclAny__eq_);
-			Value A_symbol_86 = dynamic_A_symbol_86.evaluate(evaluator, T_Boolean, A_symbol_85, T_ClassClassifier_Integer_);
-			return A_symbol_86;
+			DomainType static_A_symbol_127 = valueFactory.typeOf(A_symbol_126, T_ClassClassifier_Integer_);
+			LibraryBinaryOperation dynamic_A_symbol_127 = (LibraryBinaryOperation)static_A_symbol_127.lookupImplementation(standardLibrary, O_OclAny__eq_);
+			Value A_symbol_127 = dynamic_A_symbol_127.evaluate(evaluator, T_Boolean, A_symbol_126, T_ClassClassifier_Integer_);
+			return A_symbol_127;
 		}
 	}
 

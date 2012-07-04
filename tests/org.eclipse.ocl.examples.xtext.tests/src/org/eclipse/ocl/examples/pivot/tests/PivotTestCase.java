@@ -59,6 +59,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.BaseStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCLStandaloneSetup;
+import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLLinkingService;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.ocl.examples.xtext.markup.MarkupStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcoreStandaloneSetup;
@@ -346,6 +347,7 @@ public class PivotTestCase extends TestCase
 
 	@Override
 	protected void setUp() throws Exception {
+		EssentialOCLLinkingService.DEBUG_RETRY = true;
 		if (DEBUG_GC) {
 			XMLNamespacePackage.eINSTANCE.getClass();
 			makeCopyOfGlobalState = new GlobalStateMemento();

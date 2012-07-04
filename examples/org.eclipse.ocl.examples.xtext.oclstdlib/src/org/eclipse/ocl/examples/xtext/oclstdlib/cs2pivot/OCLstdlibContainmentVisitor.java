@@ -68,7 +68,7 @@ public class OCLstdlibContainmentVisitor extends AbstractOCLstdlibContainmentVis
 	@Override
 	public Continuation<?> visitLibPackageCS(LibPackageCS csElement) {
 		Library pivotElement = refreshPackage(Library.class, PivotPackage.Literals.LIBRARY, csElement);		
-		metaModelManager.installLibrary(pivotElement);
+//		metaModelManager.installLibrary(pivotElement);
 //		context.installRootElement(csElement.eResource(), pivotElement);		// Ensure containment viable for imported library type references
 //		importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
 		return null;
@@ -85,8 +85,9 @@ public class OCLstdlibContainmentVisitor extends AbstractOCLstdlibContainmentVis
 	public Continuation<?> visitRootPackageCS(RootPackageCS csElement) {
 		Model pivotElement = refreshPackage(Model.class, PivotPackage.Literals.MODEL, csElement);		
 //		super.visitRootPackageCS(csElement);		
-//		metaModelManager.installLibrary(pivotElement);
+//		metaModelManager.installLibrary((Library) pivotElement.getNestedPackage().get(0));		// FIXME cast
 		context.installRootElement(csElement.eResource(), pivotElement);		// Ensure containment viable for imported library type references
+		metaModelManager.installModel(pivotElement);
 		importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
 		return null;
 	}

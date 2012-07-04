@@ -17,6 +17,7 @@
 
 package org.eclipse.ocl.examples.pivot.tests;
 
+import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 
 /**
@@ -50,7 +51,8 @@ public abstract class PivotSimpleTestSuite extends PivotTestSuite
         //   pkg5
         //    george
 
-        pkg1 = createPackage(null, "pkg1");
+        Model model = createModel("model");
+        pkg1 = createPackage(model, "pkg1");
         pkg2 = createPackage(pkg1, "pkg2");
         jim = createPackage(pkg2, "jim");
         bob = createPackage(pkg1, "bob");

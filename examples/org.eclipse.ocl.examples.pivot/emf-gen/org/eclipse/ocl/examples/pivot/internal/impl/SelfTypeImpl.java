@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
+import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
@@ -85,9 +86,9 @@ public class SelfTypeImpl extends ClassImpl implements SelfType
 			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
 			final ValueFactory valueFactory = evaluator.getValueFactory();
 			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Pivot_ecore__pivot__Type = PivotTables.Types._Type;
+			final ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			
-			final DomainType returnType = T_Pivot_ecore__pivot__Type;
+			final DomainType returnType = T_Type;
 			final Value result = SelfTypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(selfType));
 			return (Type) result.asEcoreObject();
 		} catch (InvalidValueException e) {
@@ -122,6 +123,8 @@ public class SelfTypeImpl extends ClassImpl implements SelfType
 			case PivotPackage.SELF_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT:
 				return isCompatibleWith((ParameterableElement)arguments.get(0));
 			case PivotPackage.SELF_TYPE___RESOLVE_SELF_TYPE__TYPE:
+				return resolveSelfType((Type)arguments.get(0));
+			case PivotPackage.SELF_TYPE___RESOLVE_SELF_TYPE__TYPE_1:
 				return resolveSelfType((Type)arguments.get(0));
 		}
 		return eDynamicInvoke(operationID, arguments);

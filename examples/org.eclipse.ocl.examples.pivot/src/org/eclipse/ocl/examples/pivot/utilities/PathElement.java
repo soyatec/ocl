@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
@@ -61,7 +62,7 @@ public class PathElement
         EObject parent = element;
         for (; (parent != null) && !(parent instanceof Namespace); parent = parent.eContainer()) {
         }
-        for (; parent instanceof Namespace; parent = parent.eContainer()) {
+        for (; (parent instanceof Namespace) && !(parent instanceof Model); parent = parent.eContainer()) {
             Namespace namespace = (Namespace)parent;
             if (metaModelManager != null) {
             	namespace = metaModelManager.getPrimaryElement(namespace);

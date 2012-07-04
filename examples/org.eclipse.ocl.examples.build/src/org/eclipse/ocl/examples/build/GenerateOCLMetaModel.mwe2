@@ -39,7 +39,7 @@ Workflow {
     	projectName = "${projectName}"
     	libraryFile = "model/Pivot.ecore"
     	javaFolder = "emf-gen"
-    	javaPackageName = "${projectName}"
+    	javaPackageName = "${projectName}.model"
     	javaClassName = "OCLMetaModel"
     }
 }

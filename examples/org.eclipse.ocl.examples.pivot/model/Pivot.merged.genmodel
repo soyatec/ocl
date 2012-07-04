@@ -898,9 +898,6 @@
       <ecoreClass href="Pivot.ecore#//Library"/>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass">
-      <ecoreClass href="Pivot.ecore#//Model"/>
-    </genClasses>
-    <genClasses xsi:type="genmodel:GenClass">
       <ecoreClass href="Pivot.ecore#//MessageExp"/>
       <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
           createChild="true">
@@ -939,6 +936,9 @@
           propertySortChoices="true">
         <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//MessageType/referredOperation"/>
       </genFeatures>
+    </genClasses>
+    <genClasses xsi:type="genmodel:GenClass">
+      <ecoreClass href="Pivot.ecore#//Model"/>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass">
       <ecoreClass href="Pivot.ecore#//NullLiteralExp"/>

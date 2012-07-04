@@ -1362,29 +1362,9 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getCollectionLiteralExp__ValidateBagKindIsBag__DiagnosticChain_Map()
+	public EOperation getCollectionLiteralExp__ValidateCollectionKindIsConcrete__DiagnosticChain_Map()
 	{
-		return collectionLiteralExpEClass.getEOperations().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getCollectionLiteralExp__ValidateSequenceKindIsSequence__DiagnosticChain_Map()
-	{
-		return collectionLiteralExpEClass.getEOperations().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getCollectionLiteralExp__ValidateOrderedSetKindIsOrderedSet__DiagnosticChain_Map()
-	{
-		return collectionLiteralExpEClass.getEOperations().get(2);
+		return collectionLiteralExpEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -1402,9 +1382,29 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getCollectionLiteralExp__ValidateCollectionKindIsConcrete__DiagnosticChain_Map()
+	public EOperation getCollectionLiteralExp__ValidateOrderedSetKindIsOrderedSet__DiagnosticChain_Map()
 	{
-		return collectionLiteralExpEClass.getEOperations().get(0);
+		return collectionLiteralExpEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getCollectionLiteralExp__ValidateSequenceKindIsSequence__DiagnosticChain_Map()
+	{
+		return collectionLiteralExpEClass.getEOperations().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getCollectionLiteralExp__ValidateBagKindIsBag__DiagnosticChain_Map()
+	{
+		return collectionLiteralExpEClass.getEOperations().get(4);
 	}
 
 	/**
@@ -1817,9 +1817,9 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getIterateExp__ValidateOneInitializer__DiagnosticChain_Map()
+	public EOperation getIterateExp__ValidateTypeIsResultType__DiagnosticChain_Map()
 	{
-		return iterateExpEClass.getEOperations().get(2);
+		return iterateExpEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -1837,9 +1837,9 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getIterateExp__ValidateTypeIsResultType__DiagnosticChain_Map()
+	public EOperation getIterateExp__ValidateOneInitializer__DiagnosticChain_Map()
 	{
-		return iterateExpEClass.getEOperations().get(0);
+		return iterateExpEClass.getEOperations().get(2);
 	}
 
 	/**
@@ -1887,269 +1887,9 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getIteratorExp__ValidateIteratorTypeIsSourceElementType__DiagnosticChain_Map()
+	public EOperation getIteratorExp__ValidateAnyHasOneIterator__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(28);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateSortedByElementTypeIsSourceElementType__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(27);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateSortedByIsOrderedIfSourceIsOrdered__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(26);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateSortedByHasOneIterator__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(25);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateRejectOrSelectTypeIsBoolean__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(24);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateRejectOrSelectTypeIsSourceType__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(23);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateRejectOrSelectHasOneIterator__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(22);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateOneBodyTypeIsBoolean__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(21);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateOneTypeIsBoolean__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(20);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateOneHasOneIterator__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(19);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateIsUniqueTypeIsBoolean__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(18);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateIsUniqueHasOneIterator__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(17);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateForAllBodyTypeIsBoolean__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(16);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateForAllTypeIsBoolean__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(15);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateExistsBodyTypeIsBoolean__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(14);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateExistsTypeIsBoolean__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(13);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateCollectNestedTypeIsBodyType__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(12);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateCollectNestedTypeIsBag__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(11);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateCollectNestedHasOneIterator__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(10);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateCollectElementTypeIsSourceElementType__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(9);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateCollectTypeIsUnordered__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateCollectHasOneIterator__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateClosureElementTypeIsSourceElementType__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateClosureSourceElementTypeIsBodyElementType__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateClosureTypeIsUniqueCollection__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateClosureHasOneIterator__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIteratorExp__ValidateAnyBodyTypeIsBoolean__DiagnosticChain_Map()
-	{
-		return iteratorExpEClass.getEOperations().get(2);
+		return iteratorExpEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -2167,9 +1907,269 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getIteratorExp__ValidateAnyHasOneIterator__DiagnosticChain_Map()
+	public EOperation getIteratorExp__ValidateAnyBodyTypeIsBoolean__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(0);
+		return iteratorExpEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateClosureHasOneIterator__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateClosureTypeIsUniqueCollection__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateClosureSourceElementTypeIsBodyElementType__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateClosureElementTypeIsSourceElementType__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateCollectHasOneIterator__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateCollectTypeIsUnordered__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateCollectElementTypeIsSourceElementType__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateCollectNestedHasOneIterator__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateCollectNestedTypeIsBag__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateCollectNestedTypeIsBodyType__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateExistsTypeIsBoolean__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateExistsBodyTypeIsBoolean__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(14);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateForAllTypeIsBoolean__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(15);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateForAllBodyTypeIsBoolean__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(16);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateIsUniqueHasOneIterator__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(17);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateIsUniqueTypeIsBoolean__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(18);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateOneHasOneIterator__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(19);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateOneTypeIsBoolean__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(20);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateOneBodyTypeIsBoolean__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(21);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateRejectOrSelectHasOneIterator__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(22);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateRejectOrSelectTypeIsSourceType__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(23);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateRejectOrSelectTypeIsBoolean__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(24);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateSortedByHasOneIterator__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(25);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateSortedByIsOrderedIfSourceIsOrdered__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(26);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateSortedByElementTypeIsSourceElementType__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(27);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getIteratorExp__ValidateIteratorTypeIsSourceElementType__DiagnosticChain_Map()
+	{
+		return iteratorExpEClass.getEOperations().get(28);
 	}
 
 	/**
@@ -2301,9 +2301,9 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getLoopExp__ValidateNoInitializers__DiagnosticChain_Map()
+	public EOperation getLoopExp__ValidateSourceIsCollection__DiagnosticChain_Map()
 	{
-		return loopExpEClass.getEOperations().get(1);
+		return loopExpEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -2311,9 +2311,9 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getLoopExp__ValidateSourceIsCollection__DiagnosticChain_Map()
+	public EOperation getLoopExp__ValidateNoInitializers__DiagnosticChain_Map()
 	{
-		return loopExpEClass.getEOperations().get(0);
+		return loopExpEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -2366,9 +2366,9 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getMessageExp__ValidateTargetIsNotACollection__DiagnosticChain_Map()
+	public EOperation getMessageExp__ValidateOneCallOrOneSend__DiagnosticChain_Map()
 	{
-		return messageExpEClass.getEOperations().get(1);
+		return messageExpEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -2376,9 +2376,9 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getMessageExp__ValidateOneCallOrOneSend__DiagnosticChain_Map()
+	public EOperation getMessageExp__ValidateTargetIsNotACollection__DiagnosticChain_Map()
 	{
-		return messageExpEClass.getEOperations().get(0);
+		return messageExpEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -2579,7 +2579,7 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getSelfType__ResolveSelfType__Type()
+	public EOperation getSelfType__ResolveSelfType__Type_1()
 	{
 		return selfTypeEClass.getEOperations().get(0);
 	}
@@ -2976,6 +2976,16 @@ public class PivotPackageImpl
 	public EAttribute getType_InstanceClassName()
 	{
 		return (EAttribute)typeEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getType__ResolveSelfType__Type()
+	{
+		return typeEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -4758,7 +4768,7 @@ public class PivotPackageImpl
 		createEAttribute(realLiteralExpEClass, REAL_LITERAL_EXP__REAL_SYMBOL);
 
 		selfTypeEClass = createEClass(SELF_TYPE);
-		createEOperation(selfTypeEClass, SELF_TYPE___RESOLVE_SELF_TYPE__TYPE);
+		createEOperation(selfTypeEClass, SELF_TYPE___RESOLVE_SELF_TYPE__TYPE_1);
 
 		sendSignalActionEClass = createEClass(SEND_SIGNAL_ACTION);
 		createEReference(sendSignalActionEClass, SEND_SIGNAL_ACTION__SIGNAL);
@@ -4828,6 +4838,7 @@ public class PivotPackageImpl
 		createEReference(typeEClass, TYPE__OWNED_OPERATION);
 		createEReference(typeEClass, TYPE__SUPER_CLASS);
 		createEAttribute(typeEClass, TYPE__INSTANCE_CLASS_NAME);
+		createEOperation(typeEClass, TYPE___RESOLVE_SELF_TYPE__TYPE);
 
 		typeExpEClass = createEClass(TYPE_EXP);
 		createEReference(typeExpEClass, TYPE_EXP__REFERRED_TYPE);
@@ -4966,7 +4977,7 @@ public class PivotPackageImpl
 		iteratorExpEClass.getESuperTypes().add(this.getLoopExp());
 		lambdaTypeEClass.getESuperTypes().add(this.getDataType());
 		letExpEClass.getESuperTypes().add(this.getOCLExpression());
-		libraryEClass.getESuperTypes().add(this.getModel());
+		libraryEClass.getESuperTypes().add(this.getPackage());
 		literalExpEClass.getESuperTypes().add(this.getOCLExpression());
 		loopExpEClass.getESuperTypes().add(this.getCallExp());
 		messageExpEClass.getESuperTypes().add(this.getOCLExpression());
@@ -5804,7 +5815,7 @@ public class PivotPackageImpl
 
 		initEClass(selfTypeEClass, SelfType.class, "SelfType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-		op = initEOperation(getSelfType__ResolveSelfType__Type(), this.getType(), "resolveSelfType", 1, 1, IS_UNIQUE, !IS_ORDERED); //$NON-NLS-1$
+		op = initEOperation(getSelfType__ResolveSelfType__Type_1(), this.getType(), "resolveSelfType", 1, 1, IS_UNIQUE, !IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getType(), "selfType", 1, 1, IS_UNIQUE, !IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(sendSignalActionEClass, SendSignalAction.class, "SendSignalAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -5877,6 +5888,9 @@ public class PivotPackageImpl
 		initEReference(getType_OwnedOperation(), this.getOperation(), this.getOperation_OwningType(), "ownedOperation", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEReference(getType_SuperClass(), this.getType(), null, "superClass", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEAttribute(getType_InstanceClassName(), this.getString(), "instanceClassName", null, 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+
+		op = initEOperation(getType__ResolveSelfType__Type(), this.getType(), "resolveSelfType", 1, 1, IS_UNIQUE, !IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, this.getType(), "selfType", 1, 1, IS_UNIQUE, !IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(typeExpEClass, TypeExp.class, "TypeExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getTypeExp_ReferredType(), this.getType(), null, "referredType", null, 0, 1, TypeExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
@@ -5984,7 +5998,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																																																																																																																																																																																																																														
+		   });																																																																																																																																																																																																																																																																																															
 	}
 
 	/**
@@ -6031,7 +6045,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });									
+		   });										
 		addAnnotation
 		  (typeTemplateParameterEClass, 
 		   source, 
@@ -6098,6 +6112,6 @@ public class PivotPackageImpl
 		   new URI[] 
 		   {
 			 URI.createURI(eNS_URI).appendFragment("//TemplateSignature/parameter") //$NON-NLS-1$
-		   });																																								
+		   });																																									
 	}
 } //PivotPackageImpl

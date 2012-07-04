@@ -54,6 +54,7 @@ import org.eclipse.ocl.examples.pivot.IteratorExp;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.MessageExp;
+import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
@@ -210,7 +211,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 		}
 		else {
 			EObject container = object.eContainer();
-			if (container instanceof NamedElement) {
+			if ((container instanceof NamedElement) && !(container instanceof Model)) {
 				appendQualifiedName((NamedElement) container);
 				append("::"); //$NON-NLS-1$
 			}
@@ -369,7 +370,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 				append("null::");
 				appendName(cls);
 			}
-			else if ((pkg.eContainer() != null) || !PivotConstants.OCL_NAME.equals(pkg.getName())) {
+			else if (!(pkg.eContainer() instanceof Model) || !PivotConstants.OCL_NAME.equals(pkg.getName())) {
 				appendQualifiedName(pkg, "::", cls);
 			}
 			else {

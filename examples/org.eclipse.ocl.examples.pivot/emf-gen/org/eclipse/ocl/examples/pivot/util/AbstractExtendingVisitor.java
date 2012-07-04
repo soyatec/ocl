@@ -210,7 +210,7 @@ public abstract class AbstractExtendingVisitor<R, C>
 	}
 
 	public R visitLibrary(org.eclipse.ocl.examples.pivot.Library object) {
-		return visitModel(object);
+		return visitPackage(object);
 	}
 
 	public R visitLiteralExp(org.eclipse.ocl.examples.pivot.LiteralExp object) {

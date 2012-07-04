@@ -63,6 +63,11 @@ public class TupleTypeManager
 			}				
 			return n1.compareTo(n2);
 		}
+
+		@Override
+		public String toString() {
+			return String.valueOf(name) + " : " + String.valueOf(type);
+		}
 	}
 
 	protected final MetaModelManager metaModelManager;

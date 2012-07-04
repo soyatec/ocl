@@ -742,7 +742,6 @@ public class PivotSwitch<T> extends Switch<T> {
 			{
 				Library library = (Library)theEObject;
 				T result = caseLibrary(library);
-				if (result == null) result = caseModel(library);
 				if (result == null) result = casePackage(library);
 				if (result == null) result = caseNamespace(library);
 				if (result == null) result = caseTemplateableElement(library);

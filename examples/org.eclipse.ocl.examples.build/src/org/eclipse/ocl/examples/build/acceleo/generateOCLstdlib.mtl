@@ -2,9 +2,10 @@
 [module org::eclipse::ocl::examples::build::acceleo::generateOCLstdlib('http://www.eclipse.org/ocl/3.1.0/Pivot','http://www.eclipse.org/emf/2002/Ecore')/]
 [import org::eclipse::ocl::examples::build::acceleo::generateOCLCommon/]
 
-[template public generate(pkg : Package, javaPackage : String, javaClass : String, sourceFile : String, uri : String) ? (pkg.eContainer() = null)]
+[template public generate(model : Model, javaPackage : String, javaClass : String, sourceFile : String, uri : String)]
 [comment @main /]
-[let allEnumerations : Sequence(Enumeration) = pkg.eAllContents(Enumeration)]
+[let lib : Library = model.nestedPackage->filter(Library)->any(true)]
+[let allEnumerations : Sequence(Enumeration) = model.eAllContents(Enumeration)]
 [file (javaClass + '.java', false, 'UTF-8')]
 /**
  * <copyright>
@@ -83,8 +84,8 @@ public class [javaClass/] extends XMIResourceImpl
 	public static OCLstdlib getDefault() {
 		if (INSTANCE == null) {
 			Contents contents = new Contents();
-			Library library = contents.create("[pkg.name/]", "[pkg.nsPrefix/]", "[pkg.nsURI/]");
-			INSTANCE = new OCLstdlib(STDLIB_URI, library);
+			Model libraryModel = contents.create("[model.name/]", "[model.nsPrefix/]", "[model.nsURI/]");
+			INSTANCE = new OCLstdlib(STDLIB_URI, libraryModel);
 		}
 		return INSTANCE;
 	}
@@ -137,7 +138,7 @@ public class [javaClass/] extends XMIResourceImpl
 		}
 
 		public Resource getResource() {
-			return OCLstdlib.create("[uri/]", "[pkg.name/]", "[pkg.nsPrefix/]", "[pkg.nsURI/]");
+			return OCLstdlib.create("[uri/]", "[model.name/]", "[model.nsPrefix/]", "[model.nsURI/]");
 		}
 	}
 	
@@ -147,27 +148,30 @@ public class [javaClass/] extends XMIResourceImpl
 	 */
 	public static [javaClass/] create(String uri, String name, String nsPrefix, String nsURI) {
 		Contents contents = new Contents();
-		Library library = contents.create(name, nsPrefix, nsURI);
-		return new [javaClass/](uri, library);
+		Model libraryModel = contents.create(name, nsPrefix, nsURI);
+		return new [javaClass/](uri, libraryModel);
 	}
 	
 	/**
 	 *	Construct an OCL Standard Library with specified resource URI and library content.
 	 */
-	public [javaClass/](String uri, Library library) {
+	public [javaClass/](String uri, Model libraryModel) {
 		super(URI.createURI(uri));
-		getContents().add(library);
+		getContents().add(libraryModel);
 //		System.out.println(Thread.currentThread().getName() + " Create " + debugSimpleName(this));		
 //		liveOCLstdlibs.put(this, null);
 	}
 
 	protected static class Contents extends AbstractContents
 	{
-		protected Library [pkg.getPrefixedSymbolName('library')/];
+		protected Model [model.getPrefixedSymbolName('model')/];
+		protected Library [lib.getPrefixedSymbolName('library')/];
+		// protected Package [model.getOrphanPackage().getPrefixedSymbolName('orphans')/];
 
-		protected Library create(String name, String nsPrefix, String nsURI)
+		protected Model create(String name, String nsPrefix, String nsURI)
 		{
-			[pkg.getPrefixedSymbolName('library')/] = createLibrary("[pkg.name/]", nsPrefix, nsURI);
+			[model.getSymbolName()/] = createModel("[model.name/]", nsPrefix, nsURI);
+			[lib.getSymbolName()/] = createLibrary(name, nsPrefix, nsURI);
 			installPackages();
 			installOclTypes();
 			installPrimitiveTypes();
@@ -186,36 +190,36 @@ public class [javaClass/] extends XMIResourceImpl
 			installTemplateBindings();
 			installPrecedences();
 			installComments();
-			return [pkg.getSymbolName()/];
+			return [model.getSymbolName()/];
 		}
 	
-		[pkg.definePackages()/]
-		[pkg.declareOclTypes()/]
-		[pkg.declarePrimitiveTypes()/]
+		[lib.definePackages()/]
+		[lib.declareOclTypes()/]
+		[lib.declarePrimitiveTypes()/]
 [if (allEnumerations->notEmpty())]
-		[pkg.declareEnumerations()/]
+		[lib.declareEnumerations()/]
 [/if]
-		[pkg.declareParameterTypes()/]
-		[pkg.declareCollectionTypes()/]
-		[pkg.declareClassifierTypes()/]
-		[pkg.declareTupleTypes()/]
-		[pkg.defineOclTypes()/]
-		[pkg.definePrimitiveTypes()/]
+		[lib.declareParameterTypes()/]
+		[lib.declareCollectionTypes()/]
+		[lib.declareClassifierTypes()/]
+		[lib.declareTupleTypes()/]
+		[lib.defineOclTypes()/]
+		[lib.definePrimitiveTypes()/]
 [if (allEnumerations->notEmpty())]
-		[pkg.defineEnumerations()/]
+		[lib.defineEnumerations()/]
 [/if]
-		[pkg.defineParameterTypes()/]
-		[pkg.defineCollectionTypes()/]
-		[pkg.defineClassifierTypes()/]
-		[pkg.defineTupleTypes()/]
-		[pkg.defineLambdaTypes()/]	
-		[pkg.defineOperations()/]	
-		[pkg.defineIterations()/]	
-		[pkg.defineProperties()/]
-		[pkg.defineTemplateSignatures()/]
-		[pkg.defineTemplateBindings()/]
-		[pkg.definePrecedences()/]
-		[pkg.defineComments()/]
+		[lib.defineParameterTypes()/]
+		[lib.defineCollectionTypes()/]
+		[lib.defineClassifierTypes()/]
+		[lib.defineTupleTypes()/]
+		[lib.defineLambdaTypes()/]	
+		[lib.defineOperations()/]	
+		[lib.defineIterations()/]	
+		[lib.defineProperties()/]
+		[lib.defineTemplateSignatures()/]
+		[lib.defineTemplateBindings()/]
+		[lib.definePrecedences()/]
+		[lib.defineComments()/]
 	}
 	
 /*	private static WeakHashMap<OCLstdlib,Object> liveOCLstdlibs = new WeakHashMap<OCLstdlib,Object>();
@@ -272,6 +276,7 @@ public class [javaClass/] extends XMIResourceImpl
 	} */
 }
 [/file]
+[/let]
 [/let]
 [/template]
 

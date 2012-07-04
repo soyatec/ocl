@@ -355,9 +355,9 @@ public abstract class TypedMultiplicityElementImpl
 			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
 			final ValueFactory valueFactory = evaluator.getValueFactory();
 			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Pivot_ecore__pivot__Parameter = PivotTables.Types._Parameter;
+			final ExecutorType T_pivot__Parameter = PivotTables.Types._Parameter;
 			
-			final DomainType returnType = T_Pivot_ecore__pivot__Parameter;
+			final DomainType returnType = T_pivot__Parameter;
 			final Value result = TypedMultiplicityElementBodies._makeParameter_body_.INSTANCE.evaluate(evaluator, returnType, self);
 			return (Parameter) result.asEcoreObject();
 		} catch (InvalidValueException e) {

@@ -171,7 +171,7 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 		if (pivotObject == null) {
 			pivotElement = metaModelManager.createPackage(pivotClass, pivotEClass, name, csElement.getNsURI());
 //			logger.trace("Created " + pivotEClass.getName() + " : " + moniker); //$NON-NLS-1$ //$NON-NLS-2$
-			metaModelManager.addPackage(pivotElement);
+//			metaModelManager.addPackage(pivotElement);
 		}
 		else {
 			if (!pivotClass.isAssignableFrom(pivotObject.getClass())) {

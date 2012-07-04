@@ -57,19 +57,19 @@ public class ParameterableElementBodies
 			final DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			final ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
-			final ExecutorType T_Pivot_ecore__pivot__ParameterableElement = PivotTables.Types._ParameterableElement;
-			final DomainClassifierType T_AnyClassifier_Pivot_ecore__pivot__ParameterableElement_ = standardLibrary.getClassifierType(T_Pivot_ecore__pivot__ParameterableElement);
+			final ExecutorType T_pivot__ParameterableElement = PivotTables.Types._ParameterableElement;
+			final DomainClassifierType T_AnyClassifier_pivot__ParameterableElement_ = standardLibrary.getClassifierType(T_pivot__ParameterableElement);
 			final ExecutorOperation O_OclAny_oclType = OCLstdlibTables.Operations._OclAny__oclType;
 			
 			
 			
-			DomainType static_A_symbol_41 = valueFactory.typeOf(self);
-			LibraryUnaryOperation dynamic_A_symbol_41 = (LibraryUnaryOperation)static_A_symbol_41.lookupImplementation(standardLibrary, O_OclAny_oclType);
-			Value A_symbol_41 = dynamic_A_symbol_41.evaluate(evaluator, T_AnyClassifier_Pivot_ecore__pivot__ParameterableElement_, self);
-			DomainType static_A_symbol_42 = valueFactory.typeOf(p);
-			LibraryBinaryOperation dynamic_A_symbol_42 = (LibraryBinaryOperation)static_A_symbol_42.lookupImplementation(standardLibrary, O_OclAny_oclIsKindOf);
-			Value A_symbol_42 = dynamic_A_symbol_42.evaluate(evaluator, T_Boolean, p, A_symbol_41);
-			return A_symbol_42;
+			DomainType static_A_symbol_163 = valueFactory.typeOf(self);
+			LibraryUnaryOperation dynamic_A_symbol_163 = (LibraryUnaryOperation)static_A_symbol_163.lookupImplementation(standardLibrary, O_OclAny_oclType);
+			Value A_symbol_163 = dynamic_A_symbol_163.evaluate(evaluator, T_AnyClassifier_pivot__ParameterableElement_, self);
+			DomainType static_A_symbol_164 = valueFactory.typeOf(p);
+			LibraryBinaryOperation dynamic_A_symbol_164 = (LibraryBinaryOperation)static_A_symbol_164.lookupImplementation(standardLibrary, O_OclAny_oclIsKindOf);
+			Value A_symbol_164 = dynamic_A_symbol_164.evaluate(evaluator, T_Boolean, p, A_symbol_163);
+			return A_symbol_164;
 		}
 	}
 

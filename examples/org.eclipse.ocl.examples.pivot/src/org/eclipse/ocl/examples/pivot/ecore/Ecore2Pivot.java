@@ -419,7 +419,8 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		try {
 			if ((metaModelManager.getLibraryResource() == null) && isPivot(ecoreContents)) {
 				OCLstdlib library = OCLstdlib.create(OCLstdlib.STDLIB_URI, "ocl", "ocl", ((EPackage)ecoreContents.iterator().next()).getNsURI());
-				metaModelManager.loadLibrary(library);
+//				metaModelManager.loadLibrary(library);
+				metaModelManager.installResource(library);
 			}
 			pivotRoot = metaModelManager.createModel(pivotURI.lastSegment(), null);
 			update(pivotResource, ecoreContents);

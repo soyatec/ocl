@@ -168,7 +168,6 @@ public abstract class ElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	public EList<Element> allOwnedElements()
 	{
 		/*
@@ -184,6 +183,7 @@ public abstract class ElementImpl
 			
 			final DomainType returnType = T_Set_OclElement_;
 			final Value result = ElementBodies._allOwnedElements_body_.INSTANCE.evaluate(evaluator, returnType, self);
+			@SuppressWarnings("unchecked")
 			EList<Element> ecoreResult = (EList<Element>) result.asEcoreObject();
 			return ecoreResult;
 		} catch (InvalidValueException e) {

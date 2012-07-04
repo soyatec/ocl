@@ -4,6 +4,9 @@
 [query public getMoniker(elem : Element) : String =
 invoke('org.eclipse.ocl.examples.build.acceleo.NameQueries', 'getMoniker(org.eclipse.ocl.examples.pivot.Element)', Sequence{elem}) /]
 
+[query public getOrphanPackage(elem : Package) : Package =
+elem.getRootPackage()->closure(nestedPackage)->any(name='$$')/]
+
 [query public getRootPackage(elem : Package) : Package =
 if elem.nestingPackage->notEmpty() then elem.nestingPackage.getRootPackage() else elem endif/]
 
@@ -29,19 +32,19 @@ operation.ownedParameter->select(p : Parameter
 /]
 
 [template public declareClassifierTypes(pkg : Package)]
-[let allClassifierTypes : OrderedSet(ClassifierType) = pkg.eAllContents(ClassifierType)->asSet()->sortedBy(getMoniker())]
+[let allClassifierTypes : OrderedSet(ClassifierType) = pkg.getRootPackage().eAllContents(ClassifierType)->asSet()->sortedBy(getMoniker())]
 [for (type : ClassifierType | allClassifierTypes)]
 protected final ClassifierType [type.getPrefixedSymbolName('_'+type.partialName())/] = createClassifierType("[type.name/]");
 [/for][/let][/template]
 
 [template public declareCollectionTypes(pkg : Package)]
-[let allTypes : OrderedSet(CollectionType) = pkg.eAllContents(CollectionType)->asSet()->sortedBy(getMoniker())]
+[let allTypes : OrderedSet(CollectionType) = pkg.getRootPackage().eAllContents(CollectionType)->asSet()->sortedBy(getMoniker())]
 [for (type : CollectionType | allTypes)]
 protected final [type.eClass().name/] [type.getPrefixedSymbolName('_'+type.partialName())/] = create[type.eClass().name/]("[type.name/]");
 [/for][/let][/template]
 
 [template public declareEnumerations(pkg : Package)]
-[let allEnumerations : OrderedSet(Enumeration) = pkg.eAllContents(Enumeration)->asSet()->sortedBy(getMoniker())]
+[let allEnumerations : OrderedSet(Enumeration) = pkg.getRootPackage().eAllContents(Enumeration)->asSet()->sortedBy(getMoniker())]
 [for (enumeration : Enumeration | allEnumerations)]
 protected final Enumeration [enumeration.getPrefixedSymbolName('_'+enumeration.partialName())/] = createEnumeration("[enumeration.name/]");
 [/for][/let][/template]
@@ -53,19 +56,19 @@ protected final [type.eClass().name/] [type.getPrefixedSymbolName('_'+type.parti
 [/for][/let][/template]
 
 [template public declareParameterTypes(pkg : Package)]
-[let allTypes : OrderedSet(Type) = pkg.eAllContents(Type)->select(owningTemplateParameter <> null)->asSet()->sortedBy(getMoniker())]
+[let allTypes : OrderedSet(Type) = pkg.getRootPackage().eAllContents(Type)->select(owningTemplateParameter <> null)->asSet()->sortedBy(getMoniker())]
 [for (type : Type | allTypes)]
 protected final Class [type.getPrefixedSymbolName('_'+type.partialName())/] = createClass("[type.name/]");
 [/for][/let][/template]
 
 [template public declarePrimitiveTypes(pkg : Package)]
-[let allTypes : OrderedSet(PrimitiveType) = pkg.eAllContents(PrimitiveType)->asSet()->sortedBy(getMoniker())]
+[let allTypes : OrderedSet(PrimitiveType) = pkg.getRootPackage().eAllContents(PrimitiveType)->asSet()->sortedBy(getMoniker())]
 [for (type : PrimitiveType | allTypes)]
 protected final PrimitiveType [type.getPrefixedSymbolName('_'+type.partialName())/] = createPrimitiveType("[type.name/]");
 [/for][/let][/template]
 
 [template public declareTupleTypes(pkg : Package)]
-[let allTupleTypes : OrderedSet(TupleType) = pkg.eAllContents(TupleType)->asSet()->sortedBy(getMoniker())]
+[let allTupleTypes : OrderedSet(TupleType) = pkg.getRootPackage().eAllContents(TupleType)->asSet()->sortedBy(getMoniker())]
 [for (type : TupleType | allTupleTypes)]
 protected final TupleType [type.getPrefixedSymbolName('_'+type.partialName())/] = createTupleType("[type.name/]",
 [for (property : Property | type.ownedAttribute->sortedBy(name)) separator(',\n')]
@@ -73,12 +76,12 @@ protected final TupleType [type.getPrefixedSymbolName('_'+type.partialName())/] 
 [/for][/let][/template]
 
 [template public defineClassifierTypes(pkg : Package)]
-[let allClassifierTypes : OrderedSet(ClassifierType) = pkg.eAllContents(ClassifierType)->asSet()->sortedBy(getMoniker())]
-[let allContainers : Set(Package) = allClassifierTypes.eContainer()->asSet()->excluding(pkg)->filter(Package)]
+[let allClassifierTypes : OrderedSet(ClassifierType) = pkg.getRootPackage().eAllContents(ClassifierType)->asSet()->sortedBy(getMoniker())]
+[let orphanPackage : Package = pkg.getOrphanPackage()]
 protected void installClassifierTypes() {
 	final List<Type> ownedTypes = [pkg.getSymbolName()/].getOwnedType();
-[if (allContainers->notEmpty())]
-	final List<Type> orphanTypes = [allContainers->any(true).getSymbolName()/].getOwnedType();
+[if (orphanPackage->notEmpty())]
+	final List<Type> orphanTypes = [orphanPackage.getSymbolName()/].getOwnedType();
 [/if]
 	ClassifierType type;
 	List<Type> superClasses;
@@ -96,12 +99,12 @@ protected void installClassifierTypes() {
 [/let][/let][/template]
 
 [template public defineCollectionTypes(pkg : Package)]
-[let allCollectionTypes : OrderedSet(CollectionType) = pkg.eAllContents(CollectionType)->asSet()->sortedBy(getMoniker())]
-[let allContainers : Set(Package) = allCollectionTypes.eContainer()->asSet()->excluding(pkg)->filter(Package)]
+[let allCollectionTypes : OrderedSet(CollectionType) = pkg.getRootPackage().eAllContents(CollectionType)->asSet()->sortedBy(getMoniker())]
+[let orphanPackage : Package = pkg.getOrphanPackage()]
 protected void installCollectionTypes() {
 	final List<Type> ownedTypes = [pkg.getSymbolName()/].getOwnedType();
-[if (allContainers->notEmpty())]
-	final List<Type> orphanTypes = [allContainers->any(true).getSymbolName()/].getOwnedType();
+[if (orphanPackage->notEmpty())]
+	final List<Type> orphanTypes = [orphanPackage.getSymbolName()/].getOwnedType();
 [/if]
 	CollectionType type;
 	List<Type> superClasses;
@@ -120,7 +123,7 @@ protected void installCollectionTypes() {
 
 [template public defineComments(pkg : Package)]
 protected void installComments() {
-[let commentedElements : OrderedSet(Element) = pkg.eAllContents(Element)->reject(oclIsKindOf(Constraint))->select(ownedComment->notEmpty())->asSet()->sortedBy(getMoniker())]
+[let commentedElements : OrderedSet(Element) = pkg.getRootPackage().eAllContents(Element)->reject(oclIsKindOf(Constraint))->select(ownedComment->notEmpty())->asSet()->sortedBy(getMoniker())]
 [for (pElement : Element | commentedElements->sortedBy(getMoniker()))]
 [for (pComment : Comment | pElement.ownedComment->sortedBy(_body))]
 	installComment([pElement.getSymbolName()/], "[pComment.javaString()/]");
@@ -131,7 +134,7 @@ protected void installComments() {
 [/template]
 
 [template public defineEnumerations(pkg : Package)]
-[let allEnumerations : OrderedSet(Enumeration) = pkg.eAllContents(Enumeration)->asSet()->sortedBy(getMoniker())]
+[let allEnumerations : OrderedSet(Enumeration) = pkg.getRootPackage().eAllContents(Enumeration)->asSet()->sortedBy(getMoniker())]
 protected void installEnumerations() {
 	final List<Type> ownedTypes = [pkg.getSymbolName()/].getOwnedType();
 	Enumeration type;
@@ -148,7 +151,7 @@ protected void installEnumerations() {
 [/let][/template]
 
 [template public defineIterations(pkg : Package)]
-[let allIterations : OrderedSet(Iteration) = pkg.eAllContents(Iteration)->asSet()->sortedBy(getMoniker())]
+[let allIterations : OrderedSet(Iteration) = pkg.getRootPackage().eAllContents(Iteration)->asSet()->sortedBy(getMoniker())]
 [for (iteration : Iteration | allIterations)]
 protected final Iteration [iteration.getPrefixedSymbolName('it_'+iteration.partialName())/] = createIteration("[iteration.name/]", [iteration.type.getSymbolName()/], [if (iteration.implementationClass->notEmpty())]"[iteration.implementationClass/]", [iteration.implementationClass/].INSTANCE[else]null, null[/if]);
 [/for]
@@ -220,14 +223,15 @@ protected void installIterations() {
 [/template]
 
 [template public defineLambdaTypes(pkg : Package)]
-[let allLambdaTypes : OrderedSet(LambdaType) = pkg.eAllContents(LambdaType)->asSet()->sortedBy(getMoniker())]
+[let allLambdaTypes : OrderedSet(LambdaType) = pkg.getRootPackage().eAllContents(LambdaType)->asSet()->sortedBy(getMoniker())]
 [let allContainers : Set(Package) = allLambdaTypes.eContainer()->asSet()->excluding(pkg)->filter(Package)]
 [for (type : LambdaType | allLambdaTypes)]
 protected final LambdaType [type.getPrefixedSymbolName('_'+type.partialName())/] = createLambdaType("[type.name/]");
 [/for]
 
 protected void installLambdaTypes() {
-	final List<Type> orphanTypes = [allContainers->any(true).getSymbolName()/].getOwnedType();
+[let orphanPackage : Package = pkg.getOrphanPackage()]
+	final List<Type> orphanTypes = [orphanPackage.getSymbolName()/].getOwnedType();
 	LambdaType type;
 	List<Type> superClasses;
 [for (type : LambdaType | allLambdaTypes)]
@@ -240,7 +244,7 @@ protected void installLambdaTypes() {
 	[type.emitSuperClasses()/]
 [/for]
 }
-[/let][/let]
+[/let][/let][/let]
 [/template]
 
 [template public defineOclTypes(pkg : Package)]
@@ -260,7 +264,7 @@ protected void installOclTypes() {
 [/template]
 
 [template public defineOperations(pkg : Package)]
-[let allOperations : OrderedSet(Operation) = pkg.eAllContents(Operation)->reject(oclIsKindOf(Iteration))->reject(isEcoreConstraint())->asSet()->sortedBy(getMoniker())]
+[let allOperations : OrderedSet(Operation) = pkg.getRootPackage().eAllContents(Operation)->reject(oclIsKindOf(Iteration))->reject(isEcoreConstraint())->asSet()->sortedBy(getMoniker())]
 [for (operation : Operation | allOperations)]
 protected final Operation [operation.getPrefixedSymbolName('op_'+operation.partialName())/] = createOperation("[operation.name/]", [operation.type.getSymbolName()/], [if (operation.implementationClass->notEmpty())]"[operation.implementationClass/]", [operation.implementationClass/].INSTANCE[else]null, null[/if]);
 [/for]
@@ -306,49 +310,59 @@ protected void installOperations() {
 [/template]
 
 [template public definePackages(pkg : Package)]
-[let allPackages : OrderedSet(Package) = pkg.eAllContents(Package)->asSet()->sortedBy(getMoniker())]
-[for (pkg : Package | allPackages)]
+[let rootPackage : Package = pkg.getRootPackage()]
+[let allPackages : OrderedSet(Package) = rootPackage.eAllContents(Package)->including(rootPackage)->asSet()->sortedBy(getMoniker())]
+[let morePackages : OrderedSet(Package) = allPackages->excluding(pkg)->excluding(rootPackage)]
+[if (morePackages->notEmpty())]
+[for (pkg : Package | morePackages)]
 protected final [pkg.eClass().name/] [pkg.getPrefixedSymbolName('pk_'+pkg.partialName())/] = create[pkg.eClass().name/]("[pkg.name/]", [if pkg.nsPrefix <> null]"[pkg.nsPrefix/]"[else]null[/if], [if pkg.nsURI <> null]"[pkg.nsURI/]"[else]null[/if]);
 [/for]
-[/let]
 
+[/if]
 protected void installPackages() {
-	[emitPackage(pkg)/]
+	[for (pkg1 : Package | allPackages)][emitPackage(pkg1)/][/for]
 }
-
+[/let]
+[/let]
+[/let]
 [/template]
 
 [template public defineParameterTypes(pkg : Package)]
-[let allTypes : OrderedSet(Type) = pkg.eAllContents(Type)->select(owningTemplateParameter <> null)->asSet()->sortedBy(getMoniker())]
+[let allTypes : OrderedSet(Type) = pkg.getRootPackage().eAllContents(Type)->select(owningTemplateParameter <> null)->asSet()->sortedBy(getMoniker())]
 protected void installParameterTypes() {
 }
 [/let]
 [/template]
 
 [template public definePrecedences(pkg : Package)]
+[let allLibraries : OrderedSet(Library) = pkg.getRootPackage().eAllContents(Library)->asSet()->sortedBy(getMoniker())]
+[if (allLibraries->notEmpty())]
 protected void installPrecedences() {
-[let allPrecedences : OrderedSet(Precedence) = pkg.ownedPrecedence]
+[for (lib : Library | allLibraries)]
+[let allPrecedences : OrderedSet(Precedence) = lib.ownedPrecedence]
 [for (precedence : Precedence | allPrecedences->sortedBy(name))]
 	final Precedence [precedence.getPrefixedSymbolName('prec_'+precedence.partialName())/] = createPrecedence("[precedence.name/]", AssociativityKind.[precedence.associativity.toString().toUpper()/]);
 [/for]
 
-	final List<Precedence> ownedPrecedences = [pkg.getSymbolName()/].getOwnedPrecedence();
+	final List<Precedence> ownedPrecedences = [lib.getSymbolName()/].getOwnedPrecedence();
 [for (precedence : Precedence | allPrecedences)]
 	ownedPrecedences.add([precedence.getSymbolName()/]);
 [/for]
 [/let]
+[/for]
 
-[let allOperations : OrderedSet(Operation) = pkg.eAllContents(Operation)->select(precedence <> null)->asSet()->sortedBy(getMoniker())]
+[let allOperations : OrderedSet(Operation) = pkg.getRootPackage().eAllContents(Operation)->select(precedence <> null)->asSet()->sortedBy(getMoniker())]
 [for (operation : Operation | allOperations)]
 	[operation.getSymbolName()/].setPrecedence([operation.precedence.getSymbolName()/]);
 [/for]
 [/let]
 }
-
+[/if]
+[/let]
 [/template]
 
 [template public definePrimitiveTypes(pkg : Package)]
-[let allTypes : OrderedSet(PrimitiveType) = pkg.eAllContents(PrimitiveType)->asSet()->sortedBy(getMoniker())]
+[let allTypes : OrderedSet(PrimitiveType) = pkg.getRootPackage().eAllContents(PrimitiveType)->asSet()->sortedBy(getMoniker())]
 protected void installPrimitiveTypes() {
 	final List<Type> ownedTypes = [pkg.getSymbolName()/].getOwnedType();
 	PrimitiveType type;
@@ -365,7 +379,7 @@ protected void installPrimitiveTypes() {
 [/template]
 
 [template public defineProperties(pkg : Package)]
-[let allProperties : OrderedSet(Property) = pkg.eAllContents(Property)->reject(eContainer().oclIsKindOf(TupleType))->asSet()->sortedBy(getMoniker())]
+[let allProperties : OrderedSet(Property) = pkg.getRootPackage().eAllContents(Property)->reject(eContainer().oclIsKindOf(TupleType))->asSet()->sortedBy(getMoniker())]
 [for (property : Property | allProperties)]
 protected final Property [property.getPrefixedSymbolName('pr_'+partialName())/] = createProperty("[property.name/]", [property.type.getSymbolName()/]);
 [/for]
@@ -416,7 +430,7 @@ protected void installProperties() {
 
 [template public defineTemplateBindings(pkg : Package)]
 protected void installTemplateBindings() {
-[let allTemplateableElements : OrderedSet(TemplateableElement) = pkg.eAllContents(TemplateableElement)->select(templateBinding->notEmpty())->asSet()->sortedBy(getMoniker())]
+[let allTemplateableElements : OrderedSet(TemplateableElement) = pkg.getRootPackage().eAllContents(TemplateableElement)->select(templateBinding->notEmpty())->asSet()->sortedBy(getMoniker())]
 [for (templateableElement : TemplateableElement | allTemplateableElements)]
 [for (templateBinding : TemplateBinding | templateableElement.templateBinding)]
 	[templateableElement.getSymbolName()/].getTemplateBinding().add(createTemplateBinding([templateBinding.signature.getSymbolName()/],
@@ -430,13 +444,13 @@ protected void installTemplateBindings() {
 [/template]
 
 [template public defineTemplateSignatures(pkg : Package)]
-[let allTemplateParameters : OrderedSet(TemplateParameter) = pkg.eAllContents(TemplateParameter)->asSet()->sortedBy(getMoniker())]
+[let allTemplateParameters : OrderedSet(TemplateParameter) = pkg.getRootPackage().eAllContents(TemplateParameter)->asSet()->sortedBy(getMoniker())]
 [for (templateParameter : TemplateParameter | allTemplateParameters)]
 protected final TypeTemplateParameter [templateParameter.getPrefixedSymbolName('tp_'+templateParameter.partialName())/] = createTypeTemplateParameter([templateParameter.ownedParameteredElement.getSymbolName()/]);
 [/for]
 [/let]
 
-[let allTemplateSignatures : OrderedSet(TemplateSignature) = pkg.eAllContents(TemplateSignature)->asSet()->sortedBy(getMoniker())]
+[let allTemplateSignatures : OrderedSet(TemplateSignature) = pkg.getRootPackage().eAllContents(TemplateSignature)->asSet()->sortedBy(getMoniker())]
 [for (templateSignature : TemplateSignature | allTemplateSignatures)]
 protected final TemplateSignature [templateSignature.getPrefixedSymbolName('ts_'+templateSignature.partialName())/] = createTemplateSignature([templateSignature.template.getSymbolName()/][for (templateParameter : TemplateParameter | templateSignature.ownedParameter)], [templateParameter.getSymbolName()/][/for]);
 [/for]
@@ -448,10 +462,10 @@ protected void installTemplateSignatures() {
 [/template]
 
 [template public defineTupleTypes(pkg : Package)]
-[let allTupleTypes : OrderedSet(TupleType) = pkg.eAllContents(TupleType)->asSet()->sortedBy(getMoniker())]
-[let allContainers : Set(Package) = allTupleTypes.eContainer()->asSet()->excluding(pkg)->filter(Package)]
+[let allTupleTypes : OrderedSet(TupleType) = pkg.getRootPackage().eAllContents(TupleType)->asSet()->sortedBy(getMoniker())]
+[let orphanPackage : Package = pkg.getOrphanPackage()]
 protected void installTupleTypes() {
-	final List<Type> orphanTypes = [allContainers->any(true).getSymbolName()/].getOwnedType();
+	final List<Type> orphanTypes = [orphanPackage.getSymbolName()/].getOwnedType();
 	TupleType type;
 	List<Type> superClasses;
 [for (type : TupleType | allTupleTypes)]
@@ -618,7 +632,7 @@ null[else]
 [/template]
 
 [query public getOclTypes(pkg : Package) : Set(Type) =
-let types : Set(Type) = pkg.eAllContents(Type)->asSet()
+let types : Set(Type) = pkg.getRootPackage().eAllContents(Type)->asSet()
 ->reject(oclIsKindOf(Enumeration))
 ->reject(oclIsKindOf(LambdaType))
 ->reject(oclIsKindOf(CollectionType))

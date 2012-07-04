@@ -1517,13 +1517,22 @@ public interface PivotPackage
 	int TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = NAMED_ELEMENT_OPERATION_COUNT + 3;
 
 	/**
+	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE___RESOLVE_SELF_TYPE__TYPE = NAMED_ELEMENT_OPERATION_COUNT + 4;
+
+	/**
 	 * The number of operations of the '<em>Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 4;
+	int TYPE_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -1758,6 +1767,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
+
+	/**
+	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS___RESOLVE_SELF_TYPE__TYPE = TYPE___RESOLVE_SELF_TYPE__TYPE;
 
 	/**
 	 * The number of operations of the '<em>Class</em>' class.
@@ -2001,6 +2019,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ANY_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
+
+	/**
+	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANY_TYPE___RESOLVE_SELF_TYPE__TYPE = CLASS___RESOLVE_SELF_TYPE__TYPE;
 
 	/**
 	 * The number of operations of the '<em>Any Type</em>' class.
@@ -2344,6 +2371,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ASSOCIATION_CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
+
+	/**
+	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_CLASS___RESOLVE_SELF_TYPE__TYPE = CLASS___RESOLVE_SELF_TYPE__TYPE;
 
 	/**
 	 * The number of operations of the '<em>Association Class</em>' class.
@@ -3399,6 +3435,15 @@ public interface PivotPackage
 	int DATA_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
+	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE___RESOLVE_SELF_TYPE__TYPE = CLASS___RESOLVE_SELF_TYPE__TYPE;
+
+	/**
 	 * The number of operations of the '<em>Data Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3669,6 +3714,15 @@ public interface PivotPackage
 	int COLLECTION_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = DATA_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
+	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TYPE___RESOLVE_SELF_TYPE__TYPE = DATA_TYPE___RESOLVE_SELF_TYPE__TYPE;
+
+	/**
 	 * The number of operations of the '<em>Collection Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3937,6 +3991,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int BAG_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = COLLECTION_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
+
+	/**
+	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BAG_TYPE___RESOLVE_SELF_TYPE__TYPE = COLLECTION_TYPE___RESOLVE_SELF_TYPE__TYPE;
 
 	/**
 	 * The number of operations of the '<em>Bag Type</em>' class.
@@ -4649,6 +4712,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int CLASSIFIER_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
+
+	/**
+	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_TYPE___RESOLVE_SELF_TYPE__TYPE = CLASS___RESOLVE_SELF_TYPE__TYPE;
 
 	/**
 	 * The number of operations of the '<em>Classifier Type</em>' class.
@@ -6177,6 +6249,15 @@ public interface PivotPackage
 	int DYNAMIC_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
+	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE___RESOLVE_SELF_TYPE__TYPE = TYPE___RESOLVE_SELF_TYPE__TYPE;
+
+	/**
 	 * The number of operations of the '<em>Dynamic Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6571,6 +6652,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ENUMERATION___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = DATA_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
+
+	/**
+	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION___RESOLVE_SELF_TYPE__TYPE = DATA_TYPE___RESOLVE_SELF_TYPE__TYPE;
 
 	/**
 	 * The number of operations of the '<em>Enumeration</em>' class.
@@ -8562,6 +8652,15 @@ public interface PivotPackage
 	int INVALID_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
+	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVALID_TYPE___RESOLVE_SELF_TYPE__TYPE = CLASS___RESOLVE_SELF_TYPE__TYPE;
+
+	/**
 	 * The number of operations of the '<em>Invalid Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10426,6 +10525,15 @@ public interface PivotPackage
 	int LAMBDA_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = DATA_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
+	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAMBDA_TYPE___RESOLVE_SELF_TYPE__TYPE = DATA_TYPE___RESOLVE_SELF_TYPE__TYPE;
+
+	/**
 	 * The number of operations of the '<em>Lambda Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10892,7 +11000,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__OWNED_COMMENT = PACKAGE__OWNED_COMMENT;
+	int LIBRARY__OWNED_COMMENT = PACKAGE__OWNED_COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
@@ -10901,7 +11009,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__APPLIED_STEREOTYPE = PACKAGE__APPLIED_STEREOTYPE;
+	int LIBRARY__APPLIED_STEREOTYPE = PACKAGE__APPLIED_STEREOTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -10910,7 +11018,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__NAME = PACKAGE__NAME;
+	int LIBRARY__NAME = PACKAGE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
@@ -10919,7 +11027,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__OWNED_RULE = PACKAGE__OWNED_RULE;
+	int LIBRARY__OWNED_RULE = PACKAGE__OWNED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
@@ -10928,7 +11036,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__IS_STATIC = PACKAGE__IS_STATIC;
+	int LIBRARY__IS_STATIC = PACKAGE__IS_STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -10937,7 +11045,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__OWNED_ANNOTATION = PACKAGE__OWNED_ANNOTATION;
+	int LIBRARY__OWNED_ANNOTATION = PACKAGE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Template Binding</b></em>' containment reference list.
@@ -10946,7 +11054,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__TEMPLATE_BINDING = PACKAGE__TEMPLATE_BINDING;
+	int LIBRARY__TEMPLATE_BINDING = PACKAGE__TEMPLATE_BINDING;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -10955,7 +11063,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__OWNED_TEMPLATE_SIGNATURE = PACKAGE__OWNED_TEMPLATE_SIGNATURE;
+	int LIBRARY__OWNED_TEMPLATE_SIGNATURE = PACKAGE__OWNED_TEMPLATE_SIGNATURE;
 
 	/**
 	 * The feature id for the '<em><b>Unspecialized Element</b></em>' reference.
@@ -10964,7 +11072,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__UNSPECIALIZED_ELEMENT = PACKAGE__UNSPECIALIZED_ELEMENT;
+	int LIBRARY__UNSPECIALIZED_ELEMENT = PACKAGE__UNSPECIALIZED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Nested Package</b></em>' containment reference list.
@@ -10973,7 +11081,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__NESTED_PACKAGE = PACKAGE__NESTED_PACKAGE;
+	int LIBRARY__NESTED_PACKAGE = PACKAGE__NESTED_PACKAGE;
 
 	/**
 	 * The feature id for the '<em><b>Nesting Package</b></em>' container reference.
@@ -10982,7 +11090,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__NESTING_PACKAGE = PACKAGE__NESTING_PACKAGE;
+	int LIBRARY__NESTING_PACKAGE = PACKAGE__NESTING_PACKAGE;
 
 	/**
 	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
@@ -10991,7 +11099,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__NS_PREFIX = PACKAGE__NS_PREFIX;
+	int LIBRARY__NS_PREFIX = PACKAGE__NS_PREFIX;
 
 	/**
 	 * The feature id for the '<em><b>Ns URI</b></em>' attribute.
@@ -11000,7 +11108,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__NS_URI = PACKAGE__NS_URI;
+	int LIBRARY__NS_URI = PACKAGE__NS_URI;
 
 	/**
 	 * The feature id for the '<em><b>Imported Package</b></em>' reference list.
@@ -11009,7 +11117,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__IMPORTED_PACKAGE = PACKAGE__IMPORTED_PACKAGE;
+	int LIBRARY__IMPORTED_PACKAGE = PACKAGE__IMPORTED_PACKAGE;
 
 	/**
 	 * The feature id for the '<em><b>Owned Precedence</b></em>' containment reference list.
@@ -11018,7 +11126,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__OWNED_PRECEDENCE = PACKAGE__OWNED_PRECEDENCE;
+	int LIBRARY__OWNED_PRECEDENCE = PACKAGE__OWNED_PRECEDENCE;
 
 	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
@@ -11027,214 +11135,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__OWNED_TYPE = PACKAGE__OWNED_TYPE;
-
-	/**
-	 * The number of structural features of the '<em>Model</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_FEATURE_COUNT = PACKAGE_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>All Owned Elements</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL___ALL_OWNED_ELEMENTS = PACKAGE___ALL_OWNED_ELEMENTS;
-
-	/**
-	 * The operation id for the '<em>Get Value</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL___GET_VALUE__TYPE_STRING = PACKAGE___GET_VALUE__TYPE_STRING;
-
-	/**
-	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = PACKAGE___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Parameterable Elements</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL___PARAMETERABLE_ELEMENTS = PACKAGE___PARAMETERABLE_ELEMENTS;
-
-	/**
-	 * The operation id for the '<em>Is Template</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL___IS_TEMPLATE = PACKAGE___IS_TEMPLATE;
-
-	/**
-	 * The number of operations of the '<em>Model</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_OPERATION_COUNT = PACKAGE_OPERATION_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__OWNED_COMMENT = MODEL__OWNED_COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__APPLIED_STEREOTYPE = MODEL__APPLIED_STEREOTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__NAME = MODEL__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__OWNED_RULE = MODEL__OWNED_RULE;
-
-	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__IS_STATIC = MODEL__IS_STATIC;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__OWNED_ANNOTATION = MODEL__OWNED_ANNOTATION;
-
-	/**
-	 * The feature id for the '<em><b>Template Binding</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__TEMPLATE_BINDING = MODEL__TEMPLATE_BINDING;
-
-	/**
-	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__OWNED_TEMPLATE_SIGNATURE = MODEL__OWNED_TEMPLATE_SIGNATURE;
-
-	/**
-	 * The feature id for the '<em><b>Unspecialized Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__UNSPECIALIZED_ELEMENT = MODEL__UNSPECIALIZED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Nested Package</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__NESTED_PACKAGE = MODEL__NESTED_PACKAGE;
-
-	/**
-	 * The feature id for the '<em><b>Nesting Package</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__NESTING_PACKAGE = MODEL__NESTING_PACKAGE;
-
-	/**
-	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__NS_PREFIX = MODEL__NS_PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Ns URI</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__NS_URI = MODEL__NS_URI;
-
-	/**
-	 * The feature id for the '<em><b>Imported Package</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__IMPORTED_PACKAGE = MODEL__IMPORTED_PACKAGE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Precedence</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__OWNED_PRECEDENCE = MODEL__OWNED_PRECEDENCE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__OWNED_TYPE = MODEL__OWNED_TYPE;
+	int LIBRARY__OWNED_TYPE = PACKAGE__OWNED_TYPE;
 
 	/**
 	 * The number of structural features of the '<em>Library</em>' class.
@@ -11243,7 +11144,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY_FEATURE_COUNT = MODEL_FEATURE_COUNT + 0;
+	int LIBRARY_FEATURE_COUNT = PACKAGE_FEATURE_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -11252,7 +11153,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY___ALL_OWNED_ELEMENTS = MODEL___ALL_OWNED_ELEMENTS;
+	int LIBRARY___ALL_OWNED_ELEMENTS = PACKAGE___ALL_OWNED_ELEMENTS;
 
 	/**
 	 * The operation id for the '<em>Get Value</em>' operation.
@@ -11261,7 +11162,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY___GET_VALUE__TYPE_STRING = MODEL___GET_VALUE__TYPE_STRING;
+	int LIBRARY___GET_VALUE__TYPE_STRING = PACKAGE___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -11270,7 +11171,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = MODEL___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP;
+	int LIBRARY___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = PACKAGE___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Parameterable Elements</em>' operation.
@@ -11279,7 +11180,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY___PARAMETERABLE_ELEMENTS = MODEL___PARAMETERABLE_ELEMENTS;
+	int LIBRARY___PARAMETERABLE_ELEMENTS = PACKAGE___PARAMETERABLE_ELEMENTS;
 
 	/**
 	 * The operation id for the '<em>Is Template</em>' operation.
@@ -11288,7 +11189,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY___IS_TEMPLATE = MODEL___IS_TEMPLATE;
+	int LIBRARY___IS_TEMPLATE = PACKAGE___IS_TEMPLATE;
 
 	/**
 	 * The number of operations of the '<em>Library</em>' class.
@@ -11297,7 +11198,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY_OPERATION_COUNT = MODEL_OPERATION_COUNT + 0;
+	int LIBRARY_OPERATION_COUNT = PACKAGE_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -11696,6 +11597,15 @@ public interface PivotPackage
 	int MESSAGE_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
+	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_TYPE___RESOLVE_SELF_TYPE__TYPE = TYPE___RESOLVE_SELF_TYPE__TYPE;
+
+	/**
 	 * The number of operations of the '<em>Message Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11703,6 +11613,213 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int MESSAGE_TYPE_OPERATION_COUNT = TYPE_OPERATION_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__OWNED_COMMENT = PACKAGE__OWNED_COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__APPLIED_STEREOTYPE = PACKAGE__APPLIED_STEREOTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__NAME = PACKAGE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__OWNED_RULE = PACKAGE__OWNED_RULE;
+
+	/**
+	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__IS_STATIC = PACKAGE__IS_STATIC;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__OWNED_ANNOTATION = PACKAGE__OWNED_ANNOTATION;
+
+	/**
+	 * The feature id for the '<em><b>Template Binding</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__TEMPLATE_BINDING = PACKAGE__TEMPLATE_BINDING;
+
+	/**
+	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__OWNED_TEMPLATE_SIGNATURE = PACKAGE__OWNED_TEMPLATE_SIGNATURE;
+
+	/**
+	 * The feature id for the '<em><b>Unspecialized Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__UNSPECIALIZED_ELEMENT = PACKAGE__UNSPECIALIZED_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Nested Package</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__NESTED_PACKAGE = PACKAGE__NESTED_PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Nesting Package</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__NESTING_PACKAGE = PACKAGE__NESTING_PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__NS_PREFIX = PACKAGE__NS_PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Ns URI</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__NS_URI = PACKAGE__NS_URI;
+
+	/**
+	 * The feature id for the '<em><b>Imported Package</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__IMPORTED_PACKAGE = PACKAGE__IMPORTED_PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Owned Precedence</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__OWNED_PRECEDENCE = PACKAGE__OWNED_PRECEDENCE;
+
+	/**
+	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__OWNED_TYPE = PACKAGE__OWNED_TYPE;
+
+	/**
+	 * The number of structural features of the '<em>Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_FEATURE_COUNT = PACKAGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL___ALL_OWNED_ELEMENTS = PACKAGE___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL___GET_VALUE__TYPE_STRING = PACKAGE___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = PACKAGE___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Parameterable Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL___PARAMETERABLE_ELEMENTS = PACKAGE___PARAMETERABLE_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Is Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL___IS_TEMPLATE = PACKAGE___IS_TEMPLATE;
+
+	/**
+	 * The number of operations of the '<em>Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_OPERATION_COUNT = PACKAGE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.util.MorePivotable <em>More Pivotable</em>}' class.
@@ -12642,6 +12759,15 @@ public interface PivotPackage
 	int ORDERED_SET_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = COLLECTION_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
+	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERED_SET_TYPE___RESOLVE_SELF_TYPE__TYPE = COLLECTION_TYPE___RESOLVE_SELF_TYPE__TYPE;
+
+	/**
 	 * The number of operations of the '<em>Ordered Set Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13450,6 +13576,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PRIMITIVE_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = DATA_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
+
+	/**
+	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE___RESOLVE_SELF_TYPE__TYPE = DATA_TYPE___RESOLVE_SELF_TYPE__TYPE;
 
 	/**
 	 * The number of operations of the '<em>Primitive Type</em>' class.
@@ -14422,7 +14557,16 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int SELF_TYPE___RESOLVE_SELF_TYPE__TYPE = CLASS_OPERATION_COUNT + 0;
+	int SELF_TYPE___RESOLVE_SELF_TYPE__TYPE = CLASS___RESOLVE_SELF_TYPE__TYPE;
+
+	/**
+	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SELF_TYPE___RESOLVE_SELF_TYPE__TYPE_1 = CLASS_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Self Type</em>' class.
@@ -14803,6 +14947,15 @@ public interface PivotPackage
 	int SEQUENCE_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = COLLECTION_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
+	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEQUENCE_TYPE___RESOLVE_SELF_TYPE__TYPE = COLLECTION_TYPE___RESOLVE_SELF_TYPE__TYPE;
+
+	/**
 	 * The number of operations of the '<em>Sequence Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15071,6 +15224,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int SET_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = COLLECTION_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
+
+	/**
+	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_TYPE___RESOLVE_SELF_TYPE__TYPE = COLLECTION_TYPE___RESOLVE_SELF_TYPE__TYPE;
 
 	/**
 	 * The number of operations of the '<em>Set Type</em>' class.
@@ -16019,6 +16181,15 @@ public interface PivotPackage
 	int TEMPLATE_PARAMETER_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
+	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_PARAMETER_TYPE___RESOLVE_SELF_TYPE__TYPE = TYPE___RESOLVE_SELF_TYPE__TYPE;
+
+	/**
 	 * The number of operations of the '<em>Template Parameter Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16820,6 +16991,15 @@ public interface PivotPackage
 	int TUPLE_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = DATA_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
+	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_TYPE___RESOLVE_SELF_TYPE__TYPE = DATA_TYPE___RESOLVE_SELF_TYPE__TYPE;
+
+	/**
 	 * The number of operations of the '<em>Tuple Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -17449,6 +17629,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int UNSPECIFIED_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
+
+	/**
+	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNSPECIFIED_TYPE___RESOLVE_SELF_TYPE__TYPE = CLASS___RESOLVE_SELF_TYPE__TYPE;
 
 	/**
 	 * The number of operations of the '<em>Unspecified Type</em>' class.
@@ -18091,6 +18280,15 @@ public interface PivotPackage
 	int VOID_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
+	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_TYPE___RESOLVE_SELF_TYPE__TYPE = CLASS___RESOLVE_SELF_TYPE__TYPE;
+
+	/**
 	 * The number of operations of the '<em>Void Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -18575,34 +18773,14 @@ public interface PivotPackage
 	EReference getCollectionLiteralExp_Part();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.CollectionLiteralExp#validateBagKindIsBag(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Bag Kind Is Bag</em>}' operation.
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.CollectionLiteralExp#validateCollectionKindIsConcrete(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Collection Kind Is Concrete</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Bag Kind Is Bag</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.CollectionLiteralExp#validateBagKindIsBag(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @return the meta object for the '<em>Validate Collection Kind Is Concrete</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.CollectionLiteralExp#validateCollectionKindIsConcrete(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
 	 * @generated
 	 */
-	EOperation getCollectionLiteralExp__ValidateBagKindIsBag__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.CollectionLiteralExp#validateSequenceKindIsSequence(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Sequence Kind Is Sequence</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Sequence Kind Is Sequence</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.CollectionLiteralExp#validateSequenceKindIsSequence(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getCollectionLiteralExp__ValidateSequenceKindIsSequence__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.CollectionLiteralExp#validateOrderedSetKindIsOrderedSet(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Ordered Set Kind Is Ordered Set</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Ordered Set Kind Is Ordered Set</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.CollectionLiteralExp#validateOrderedSetKindIsOrderedSet(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getCollectionLiteralExp__ValidateOrderedSetKindIsOrderedSet__DiagnosticChain_Map();
+	EOperation getCollectionLiteralExp__ValidateCollectionKindIsConcrete__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.CollectionLiteralExp#validateSetKindIsSet(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Set Kind Is Set</em>}' operation.
@@ -18615,14 +18793,34 @@ public interface PivotPackage
 	EOperation getCollectionLiteralExp__ValidateSetKindIsSet__DiagnosticChain_Map();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.CollectionLiteralExp#validateCollectionKindIsConcrete(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Collection Kind Is Concrete</em>}' operation.
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.CollectionLiteralExp#validateOrderedSetKindIsOrderedSet(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Ordered Set Kind Is Ordered Set</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Collection Kind Is Concrete</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.CollectionLiteralExp#validateCollectionKindIsConcrete(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @return the meta object for the '<em>Validate Ordered Set Kind Is Ordered Set</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.CollectionLiteralExp#validateOrderedSetKindIsOrderedSet(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
 	 * @generated
 	 */
-	EOperation getCollectionLiteralExp__ValidateCollectionKindIsConcrete__DiagnosticChain_Map();
+	EOperation getCollectionLiteralExp__ValidateOrderedSetKindIsOrderedSet__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.CollectionLiteralExp#validateSequenceKindIsSequence(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Sequence Kind Is Sequence</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Sequence Kind Is Sequence</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.CollectionLiteralExp#validateSequenceKindIsSequence(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getCollectionLiteralExp__ValidateSequenceKindIsSequence__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.CollectionLiteralExp#validateBagKindIsBag(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Bag Kind Is Bag</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Bag Kind Is Bag</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.CollectionLiteralExp#validateBagKindIsBag(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getCollectionLiteralExp__ValidateBagKindIsBag__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.CollectionRange <em>Collection Range</em>}'.
@@ -19080,14 +19278,14 @@ public interface PivotPackage
 	EReference getIterateExp_Result();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IterateExp#validateOneInitializer(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate One Initializer</em>}' operation.
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IterateExp#validateTypeIsResultType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Type Is Result Type</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate One Initializer</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IterateExp#validateOneInitializer(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @return the meta object for the '<em>Validate Type Is Result Type</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IterateExp#validateTypeIsResultType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
 	 * @generated
 	 */
-	EOperation getIterateExp__ValidateOneInitializer__DiagnosticChain_Map();
+	EOperation getIterateExp__ValidateTypeIsResultType__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IterateExp#validateBodyTypeConformsToResultType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Body Type Conforms To Result Type</em>}' operation.
@@ -19100,14 +19298,14 @@ public interface PivotPackage
 	EOperation getIterateExp__ValidateBodyTypeConformsToResultType__DiagnosticChain_Map();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IterateExp#validateTypeIsResultType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Type Is Result Type</em>}' operation.
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IterateExp#validateOneInitializer(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate One Initializer</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Type Is Result Type</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IterateExp#validateTypeIsResultType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @return the meta object for the '<em>Validate One Initializer</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IterateExp#validateOneInitializer(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
 	 * @generated
 	 */
-	EOperation getIterateExp__ValidateTypeIsResultType__DiagnosticChain_Map();
+	EOperation getIterateExp__ValidateOneInitializer__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.Iteration <em>Iteration</em>}'.
@@ -19152,274 +19350,14 @@ public interface PivotPackage
 	EClass getIteratorExp();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateIteratorTypeIsSourceElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Iterator Type Is Source Element Type</em>}' operation.
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateAnyHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Any Has One Iterator</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Iterator Type Is Source Element Type</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateIteratorTypeIsSourceElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @return the meta object for the '<em>Validate Any Has One Iterator</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateAnyHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
 	 * @generated
 	 */
-	EOperation getIteratorExp__ValidateIteratorTypeIsSourceElementType__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateSortedByElementTypeIsSourceElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Sorted By Element Type Is Source Element Type</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Sorted By Element Type Is Source Element Type</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateSortedByElementTypeIsSourceElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateSortedByElementTypeIsSourceElementType__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateSortedByIsOrderedIfSourceIsOrdered(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Sorted By Is Ordered If Source Is Ordered</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Sorted By Is Ordered If Source Is Ordered</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateSortedByIsOrderedIfSourceIsOrdered(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateSortedByIsOrderedIfSourceIsOrdered__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateSortedByHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Sorted By Has One Iterator</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Sorted By Has One Iterator</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateSortedByHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateSortedByHasOneIterator__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateRejectOrSelectTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Reject Or Select Type Is Boolean</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Reject Or Select Type Is Boolean</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateRejectOrSelectTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateRejectOrSelectTypeIsBoolean__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateRejectOrSelectTypeIsSourceType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Reject Or Select Type Is Source Type</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Reject Or Select Type Is Source Type</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateRejectOrSelectTypeIsSourceType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateRejectOrSelectTypeIsSourceType__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateRejectOrSelectHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Reject Or Select Has One Iterator</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Reject Or Select Has One Iterator</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateRejectOrSelectHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateRejectOrSelectHasOneIterator__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateOneBodyTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate One Body Type Is Boolean</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate One Body Type Is Boolean</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateOneBodyTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateOneBodyTypeIsBoolean__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateOneTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate One Type Is Boolean</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate One Type Is Boolean</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateOneTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateOneTypeIsBoolean__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateOneHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate One Has One Iterator</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate One Has One Iterator</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateOneHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateOneHasOneIterator__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateIsUniqueTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Is Unique Type Is Boolean</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Is Unique Type Is Boolean</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateIsUniqueTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateIsUniqueTypeIsBoolean__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateIsUniqueHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Is Unique Has One Iterator</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Is Unique Has One Iterator</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateIsUniqueHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateIsUniqueHasOneIterator__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateForAllBodyTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate For All Body Type Is Boolean</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate For All Body Type Is Boolean</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateForAllBodyTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateForAllBodyTypeIsBoolean__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateForAllTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate For All Type Is Boolean</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate For All Type Is Boolean</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateForAllTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateForAllTypeIsBoolean__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateExistsBodyTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Exists Body Type Is Boolean</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Exists Body Type Is Boolean</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateExistsBodyTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateExistsBodyTypeIsBoolean__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateExistsTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Exists Type Is Boolean</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Exists Type Is Boolean</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateExistsTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateExistsTypeIsBoolean__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectNestedTypeIsBodyType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Collect Nested Type Is Body Type</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Collect Nested Type Is Body Type</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectNestedTypeIsBodyType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateCollectNestedTypeIsBodyType__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectNestedTypeIsBag(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Collect Nested Type Is Bag</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Collect Nested Type Is Bag</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectNestedTypeIsBag(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateCollectNestedTypeIsBag__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectNestedHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Collect Nested Has One Iterator</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Collect Nested Has One Iterator</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectNestedHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateCollectNestedHasOneIterator__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectElementTypeIsSourceElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Collect Element Type Is Source Element Type</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Collect Element Type Is Source Element Type</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectElementTypeIsSourceElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateCollectElementTypeIsSourceElementType__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectTypeIsUnordered(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Collect Type Is Unordered</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Collect Type Is Unordered</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectTypeIsUnordered(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateCollectTypeIsUnordered__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Collect Has One Iterator</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Collect Has One Iterator</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateCollectHasOneIterator__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateClosureElementTypeIsSourceElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Closure Element Type Is Source Element Type</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Closure Element Type Is Source Element Type</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateClosureElementTypeIsSourceElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateClosureElementTypeIsSourceElementType__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateClosureSourceElementTypeIsBodyElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Closure Source Element Type Is Body Element Type</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Closure Source Element Type Is Body Element Type</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateClosureSourceElementTypeIsBodyElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateClosureSourceElementTypeIsBodyElementType__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateClosureTypeIsUniqueCollection(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Closure Type Is Unique Collection</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Closure Type Is Unique Collection</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateClosureTypeIsUniqueCollection(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateClosureTypeIsUniqueCollection__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateClosureHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Closure Has One Iterator</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Closure Has One Iterator</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateClosureHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateClosureHasOneIterator__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateAnyBodyTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Any Body Type Is Boolean</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Any Body Type Is Boolean</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateAnyBodyTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getIteratorExp__ValidateAnyBodyTypeIsBoolean__DiagnosticChain_Map();
+	EOperation getIteratorExp__ValidateAnyHasOneIterator__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateAnyTypeIsSourceElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Any Type Is Source Element Type</em>}' operation.
@@ -19432,14 +19370,274 @@ public interface PivotPackage
 	EOperation getIteratorExp__ValidateAnyTypeIsSourceElementType__DiagnosticChain_Map();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateAnyHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Any Has One Iterator</em>}' operation.
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateAnyBodyTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Any Body Type Is Boolean</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Any Has One Iterator</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateAnyHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @return the meta object for the '<em>Validate Any Body Type Is Boolean</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateAnyBodyTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
 	 * @generated
 	 */
-	EOperation getIteratorExp__ValidateAnyHasOneIterator__DiagnosticChain_Map();
+	EOperation getIteratorExp__ValidateAnyBodyTypeIsBoolean__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateClosureHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Closure Has One Iterator</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Closure Has One Iterator</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateClosureHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateClosureHasOneIterator__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateClosureTypeIsUniqueCollection(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Closure Type Is Unique Collection</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Closure Type Is Unique Collection</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateClosureTypeIsUniqueCollection(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateClosureTypeIsUniqueCollection__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateClosureSourceElementTypeIsBodyElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Closure Source Element Type Is Body Element Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Closure Source Element Type Is Body Element Type</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateClosureSourceElementTypeIsBodyElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateClosureSourceElementTypeIsBodyElementType__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateClosureElementTypeIsSourceElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Closure Element Type Is Source Element Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Closure Element Type Is Source Element Type</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateClosureElementTypeIsSourceElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateClosureElementTypeIsSourceElementType__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Collect Has One Iterator</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Collect Has One Iterator</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateCollectHasOneIterator__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectTypeIsUnordered(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Collect Type Is Unordered</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Collect Type Is Unordered</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectTypeIsUnordered(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateCollectTypeIsUnordered__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectElementTypeIsSourceElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Collect Element Type Is Source Element Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Collect Element Type Is Source Element Type</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectElementTypeIsSourceElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateCollectElementTypeIsSourceElementType__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectNestedHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Collect Nested Has One Iterator</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Collect Nested Has One Iterator</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectNestedHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateCollectNestedHasOneIterator__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectNestedTypeIsBag(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Collect Nested Type Is Bag</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Collect Nested Type Is Bag</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectNestedTypeIsBag(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateCollectNestedTypeIsBag__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectNestedTypeIsBodyType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Collect Nested Type Is Body Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Collect Nested Type Is Body Type</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateCollectNestedTypeIsBodyType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateCollectNestedTypeIsBodyType__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateExistsTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Exists Type Is Boolean</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Exists Type Is Boolean</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateExistsTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateExistsTypeIsBoolean__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateExistsBodyTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Exists Body Type Is Boolean</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Exists Body Type Is Boolean</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateExistsBodyTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateExistsBodyTypeIsBoolean__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateForAllTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate For All Type Is Boolean</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate For All Type Is Boolean</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateForAllTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateForAllTypeIsBoolean__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateForAllBodyTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate For All Body Type Is Boolean</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate For All Body Type Is Boolean</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateForAllBodyTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateForAllBodyTypeIsBoolean__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateIsUniqueHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Is Unique Has One Iterator</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Is Unique Has One Iterator</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateIsUniqueHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateIsUniqueHasOneIterator__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateIsUniqueTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Is Unique Type Is Boolean</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Is Unique Type Is Boolean</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateIsUniqueTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateIsUniqueTypeIsBoolean__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateOneHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate One Has One Iterator</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate One Has One Iterator</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateOneHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateOneHasOneIterator__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateOneTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate One Type Is Boolean</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate One Type Is Boolean</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateOneTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateOneTypeIsBoolean__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateOneBodyTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate One Body Type Is Boolean</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate One Body Type Is Boolean</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateOneBodyTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateOneBodyTypeIsBoolean__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateRejectOrSelectHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Reject Or Select Has One Iterator</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Reject Or Select Has One Iterator</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateRejectOrSelectHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateRejectOrSelectHasOneIterator__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateRejectOrSelectTypeIsSourceType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Reject Or Select Type Is Source Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Reject Or Select Type Is Source Type</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateRejectOrSelectTypeIsSourceType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateRejectOrSelectTypeIsSourceType__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateRejectOrSelectTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Reject Or Select Type Is Boolean</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Reject Or Select Type Is Boolean</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateRejectOrSelectTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateRejectOrSelectTypeIsBoolean__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateSortedByHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Sorted By Has One Iterator</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Sorted By Has One Iterator</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateSortedByHasOneIterator(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateSortedByHasOneIterator__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateSortedByIsOrderedIfSourceIsOrdered(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Sorted By Is Ordered If Source Is Ordered</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Sorted By Is Ordered If Source Is Ordered</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateSortedByIsOrderedIfSourceIsOrdered(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateSortedByIsOrderedIfSourceIsOrdered__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateSortedByElementTypeIsSourceElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Sorted By Element Type Is Source Element Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Sorted By Element Type Is Source Element Type</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateSortedByElementTypeIsSourceElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateSortedByElementTypeIsSourceElementType__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.IteratorExp#validateIteratorTypeIsSourceElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Iterator Type Is Source Element Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Iterator Type Is Source Element Type</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.IteratorExp#validateIteratorTypeIsSourceElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getIteratorExp__ValidateIteratorTypeIsSourceElementType__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.LambdaType <em>Lambda Type</em>}'.
@@ -19580,16 +19778,6 @@ public interface PivotPackage
 	EReference getLoopExp_ReferredIteration();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.LoopExp#validateNoInitializers(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate No Initializers</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate No Initializers</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.LoopExp#validateNoInitializers(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getLoopExp__ValidateNoInitializers__DiagnosticChain_Map();
-
-	/**
 	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.LoopExp#validateSourceIsCollection(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Source Is Collection</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -19598,6 +19786,16 @@ public interface PivotPackage
 	 * @generated
 	 */
 	EOperation getLoopExp__ValidateSourceIsCollection__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.LoopExp#validateNoInitializers(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate No Initializers</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate No Initializers</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.LoopExp#validateNoInitializers(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getLoopExp__ValidateNoInitializers__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.MessageExp <em>Message Exp</em>}'.
@@ -19654,16 +19852,6 @@ public interface PivotPackage
 	EReference getMessageExp_SentSignal();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.MessageExp#validateTargetIsNotACollection(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Target Is Not ACollection</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Target Is Not ACollection</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.MessageExp#validateTargetIsNotACollection(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getMessageExp__ValidateTargetIsNotACollection__DiagnosticChain_Map();
-
-	/**
 	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.MessageExp#validateOneCallOrOneSend(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate One Call Or One Send</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -19672,6 +19860,16 @@ public interface PivotPackage
 	 * @generated
 	 */
 	EOperation getMessageExp__ValidateOneCallOrOneSend__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.MessageExp#validateTargetIsNotACollection(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Target Is Not ACollection</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Target Is Not ACollection</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.MessageExp#validateTargetIsNotACollection(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getMessageExp__ValidateTargetIsNotACollection__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.SendSignalAction <em>Send Signal Action</em>}'.
@@ -19899,7 +20097,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.SelfType#resolveSelfType(org.eclipse.ocl.examples.pivot.Type)
 	 * @generated
 	 */
-	EOperation getSelfType__ResolveSelfType__Type();
+	EOperation getSelfType__ResolveSelfType__Type_1();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.SequenceType <em>Sequence Type</em>}'.
@@ -20343,6 +20541,16 @@ public interface PivotPackage
 	 * @generated
 	 */
 	EAttribute getType_InstanceClassName();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.Type#resolveSelfType(org.eclipse.ocl.examples.pivot.Type) <em>Resolve Self Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Resolve Self Type</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.Type#resolveSelfType(org.eclipse.ocl.examples.pivot.Type)
+	 * @generated
+	 */
+	EOperation getType__ResolveSelfType__Type();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.TemplateableElement <em>Templateable Element</em>}'.
@@ -22309,28 +22517,12 @@ public interface PivotPackage
 		EReference COLLECTION_LITERAL_EXP__PART = eINSTANCE.getCollectionLiteralExp_Part();
 
 		/**
-		 * The meta object literal for the '<em><b>Validate Bag Kind Is Bag</b></em>' operation.
+		 * The meta object literal for the '<em><b>Validate Collection Kind Is Concrete</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation COLLECTION_LITERAL_EXP___VALIDATE_BAG_KIND_IS_BAG__DIAGNOSTICCHAIN_MAP = eINSTANCE.getCollectionLiteralExp__ValidateBagKindIsBag__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Sequence Kind Is Sequence</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation COLLECTION_LITERAL_EXP___VALIDATE_SEQUENCE_KIND_IS_SEQUENCE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getCollectionLiteralExp__ValidateSequenceKindIsSequence__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Ordered Set Kind Is Ordered Set</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation COLLECTION_LITERAL_EXP___VALIDATE_ORDERED_SET_KIND_IS_ORDERED_SET__DIAGNOSTICCHAIN_MAP = eINSTANCE.getCollectionLiteralExp__ValidateOrderedSetKindIsOrderedSet__DiagnosticChain_Map();
+		EOperation COLLECTION_LITERAL_EXP___VALIDATE_COLLECTION_KIND_IS_CONCRETE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getCollectionLiteralExp__ValidateCollectionKindIsConcrete__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate Set Kind Is Set</b></em>' operation.
@@ -22341,12 +22533,28 @@ public interface PivotPackage
 		EOperation COLLECTION_LITERAL_EXP___VALIDATE_SET_KIND_IS_SET__DIAGNOSTICCHAIN_MAP = eINSTANCE.getCollectionLiteralExp__ValidateSetKindIsSet__DiagnosticChain_Map();
 
 		/**
-		 * The meta object literal for the '<em><b>Validate Collection Kind Is Concrete</b></em>' operation.
+		 * The meta object literal for the '<em><b>Validate Ordered Set Kind Is Ordered Set</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation COLLECTION_LITERAL_EXP___VALIDATE_COLLECTION_KIND_IS_CONCRETE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getCollectionLiteralExp__ValidateCollectionKindIsConcrete__DiagnosticChain_Map();
+		EOperation COLLECTION_LITERAL_EXP___VALIDATE_ORDERED_SET_KIND_IS_ORDERED_SET__DIAGNOSTICCHAIN_MAP = eINSTANCE.getCollectionLiteralExp__ValidateOrderedSetKindIsOrderedSet__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Sequence Kind Is Sequence</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation COLLECTION_LITERAL_EXP___VALIDATE_SEQUENCE_KIND_IS_SEQUENCE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getCollectionLiteralExp__ValidateSequenceKindIsSequence__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Bag Kind Is Bag</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation COLLECTION_LITERAL_EXP___VALIDATE_BAG_KIND_IS_BAG__DIAGNOSTICCHAIN_MAP = eINSTANCE.getCollectionLiteralExp__ValidateBagKindIsBag__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.CollectionRangeImpl <em>Collection Range</em>}' class.
@@ -22713,12 +22921,12 @@ public interface PivotPackage
 		EReference ITERATE_EXP__RESULT = eINSTANCE.getIterateExp_Result();
 
 		/**
-		 * The meta object literal for the '<em><b>Validate One Initializer</b></em>' operation.
+		 * The meta object literal for the '<em><b>Validate Type Is Result Type</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation ITERATE_EXP___VALIDATE_ONE_INITIALIZER__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIterateExp__ValidateOneInitializer__DiagnosticChain_Map();
+		EOperation ITERATE_EXP___VALIDATE_TYPE_IS_RESULT_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIterateExp__ValidateTypeIsResultType__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate Body Type Conforms To Result Type</b></em>' operation.
@@ -22729,12 +22937,12 @@ public interface PivotPackage
 		EOperation ITERATE_EXP___VALIDATE_BODY_TYPE_CONFORMS_TO_RESULT_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIterateExp__ValidateBodyTypeConformsToResultType__DiagnosticChain_Map();
 
 		/**
-		 * The meta object literal for the '<em><b>Validate Type Is Result Type</b></em>' operation.
+		 * The meta object literal for the '<em><b>Validate One Initializer</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation ITERATE_EXP___VALIDATE_TYPE_IS_RESULT_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIterateExp__ValidateTypeIsResultType__DiagnosticChain_Map();
+		EOperation ITERATE_EXP___VALIDATE_ONE_INITIALIZER__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIterateExp__ValidateOneInitializer__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.IterationImpl <em>Iteration</em>}' class.
@@ -22773,220 +22981,12 @@ public interface PivotPackage
 		EClass ITERATOR_EXP = eINSTANCE.getIteratorExp();
 
 		/**
-		 * The meta object literal for the '<em><b>Validate Iterator Type Is Source Element Type</b></em>' operation.
+		 * The meta object literal for the '<em><b>Validate Any Has One Iterator</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation ITERATOR_EXP___VALIDATE_ITERATOR_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateIteratorTypeIsSourceElementType__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Sorted By Element Type Is Source Element Type</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_SORTED_BY_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateSortedByElementTypeIsSourceElementType__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Sorted By Is Ordered If Source Is Ordered</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_SORTED_BY_IS_ORDERED_IF_SOURCE_IS_ORDERED__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateSortedByIsOrderedIfSourceIsOrdered__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Sorted By Has One Iterator</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_SORTED_BY_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateSortedByHasOneIterator__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Reject Or Select Type Is Boolean</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateRejectOrSelectTypeIsBoolean__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Reject Or Select Type Is Source Type</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_TYPE_IS_SOURCE_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateRejectOrSelectTypeIsSourceType__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Reject Or Select Has One Iterator</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateRejectOrSelectHasOneIterator__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate One Body Type Is Boolean</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_ONE_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateOneBodyTypeIsBoolean__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate One Type Is Boolean</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_ONE_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateOneTypeIsBoolean__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate One Has One Iterator</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_ONE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateOneHasOneIterator__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Is Unique Type Is Boolean</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_IS_UNIQUE_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateIsUniqueTypeIsBoolean__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Is Unique Has One Iterator</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_IS_UNIQUE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateIsUniqueHasOneIterator__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate For All Body Type Is Boolean</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_FOR_ALL_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateForAllBodyTypeIsBoolean__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate For All Type Is Boolean</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_FOR_ALL_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateForAllTypeIsBoolean__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Exists Body Type Is Boolean</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_EXISTS_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateExistsBodyTypeIsBoolean__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Exists Type Is Boolean</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_EXISTS_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateExistsTypeIsBoolean__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Collect Nested Type Is Body Type</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_COLLECT_NESTED_TYPE_IS_BODY_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateCollectNestedTypeIsBodyType__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Collect Nested Type Is Bag</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_COLLECT_NESTED_TYPE_IS_BAG__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateCollectNestedTypeIsBag__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Collect Nested Has One Iterator</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_COLLECT_NESTED_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateCollectNestedHasOneIterator__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Collect Element Type Is Source Element Type</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_COLLECT_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateCollectElementTypeIsSourceElementType__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Collect Type Is Unordered</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_COLLECT_TYPE_IS_UNORDERED__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateCollectTypeIsUnordered__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Collect Has One Iterator</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_COLLECT_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateCollectHasOneIterator__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Closure Element Type Is Source Element Type</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_CLOSURE_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateClosureElementTypeIsSourceElementType__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Closure Source Element Type Is Body Element Type</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_CLOSURE_SOURCE_ELEMENT_TYPE_IS_BODY_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateClosureSourceElementTypeIsBodyElementType__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Closure Type Is Unique Collection</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_CLOSURE_TYPE_IS_UNIQUE_COLLECTION__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateClosureTypeIsUniqueCollection__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Closure Has One Iterator</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_CLOSURE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateClosureHasOneIterator__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Any Body Type Is Boolean</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ITERATOR_EXP___VALIDATE_ANY_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateAnyBodyTypeIsBoolean__DiagnosticChain_Map();
+		EOperation ITERATOR_EXP___VALIDATE_ANY_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateAnyHasOneIterator__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate Any Type Is Source Element Type</b></em>' operation.
@@ -22997,12 +22997,220 @@ public interface PivotPackage
 		EOperation ITERATOR_EXP___VALIDATE_ANY_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateAnyTypeIsSourceElementType__DiagnosticChain_Map();
 
 		/**
-		 * The meta object literal for the '<em><b>Validate Any Has One Iterator</b></em>' operation.
+		 * The meta object literal for the '<em><b>Validate Any Body Type Is Boolean</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation ITERATOR_EXP___VALIDATE_ANY_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateAnyHasOneIterator__DiagnosticChain_Map();
+		EOperation ITERATOR_EXP___VALIDATE_ANY_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateAnyBodyTypeIsBoolean__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Closure Has One Iterator</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_CLOSURE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateClosureHasOneIterator__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Closure Type Is Unique Collection</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_CLOSURE_TYPE_IS_UNIQUE_COLLECTION__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateClosureTypeIsUniqueCollection__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Closure Source Element Type Is Body Element Type</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_CLOSURE_SOURCE_ELEMENT_TYPE_IS_BODY_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateClosureSourceElementTypeIsBodyElementType__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Closure Element Type Is Source Element Type</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_CLOSURE_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateClosureElementTypeIsSourceElementType__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Collect Has One Iterator</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_COLLECT_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateCollectHasOneIterator__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Collect Type Is Unordered</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_COLLECT_TYPE_IS_UNORDERED__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateCollectTypeIsUnordered__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Collect Element Type Is Source Element Type</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_COLLECT_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateCollectElementTypeIsSourceElementType__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Collect Nested Has One Iterator</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_COLLECT_NESTED_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateCollectNestedHasOneIterator__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Collect Nested Type Is Bag</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_COLLECT_NESTED_TYPE_IS_BAG__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateCollectNestedTypeIsBag__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Collect Nested Type Is Body Type</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_COLLECT_NESTED_TYPE_IS_BODY_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateCollectNestedTypeIsBodyType__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Exists Type Is Boolean</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_EXISTS_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateExistsTypeIsBoolean__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Exists Body Type Is Boolean</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_EXISTS_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateExistsBodyTypeIsBoolean__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate For All Type Is Boolean</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_FOR_ALL_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateForAllTypeIsBoolean__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate For All Body Type Is Boolean</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_FOR_ALL_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateForAllBodyTypeIsBoolean__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Is Unique Has One Iterator</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_IS_UNIQUE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateIsUniqueHasOneIterator__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Is Unique Type Is Boolean</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_IS_UNIQUE_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateIsUniqueTypeIsBoolean__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate One Has One Iterator</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_ONE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateOneHasOneIterator__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate One Type Is Boolean</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_ONE_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateOneTypeIsBoolean__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate One Body Type Is Boolean</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_ONE_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateOneBodyTypeIsBoolean__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Reject Or Select Has One Iterator</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateRejectOrSelectHasOneIterator__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Reject Or Select Type Is Source Type</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_TYPE_IS_SOURCE_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateRejectOrSelectTypeIsSourceType__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Reject Or Select Type Is Boolean</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateRejectOrSelectTypeIsBoolean__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Sorted By Has One Iterator</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_SORTED_BY_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateSortedByHasOneIterator__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Sorted By Is Ordered If Source Is Ordered</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_SORTED_BY_IS_ORDERED_IF_SOURCE_IS_ORDERED__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateSortedByIsOrderedIfSourceIsOrdered__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Sorted By Element Type Is Source Element Type</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_SORTED_BY_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateSortedByElementTypeIsSourceElementType__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Iterator Type Is Source Element Type</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ITERATOR_EXP___VALIDATE_ITERATOR_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getIteratorExp__ValidateIteratorTypeIsSourceElementType__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.LambdaTypeImpl <em>Lambda Type</em>}' class.
@@ -23117,20 +23325,20 @@ public interface PivotPackage
 		EReference LOOP_EXP__REFERRED_ITERATION = eINSTANCE.getLoopExp_ReferredIteration();
 
 		/**
-		 * The meta object literal for the '<em><b>Validate No Initializers</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation LOOP_EXP___VALIDATE_NO_INITIALIZERS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getLoopExp__ValidateNoInitializers__DiagnosticChain_Map();
-
-		/**
 		 * The meta object literal for the '<em><b>Validate Source Is Collection</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EOperation LOOP_EXP___VALIDATE_SOURCE_IS_COLLECTION__DIAGNOSTICCHAIN_MAP = eINSTANCE.getLoopExp__ValidateSourceIsCollection__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate No Initializers</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation LOOP_EXP___VALIDATE_NO_INITIALIZERS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getLoopExp__ValidateNoInitializers__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.MessageExpImpl <em>Message Exp</em>}' class.
@@ -23175,20 +23383,20 @@ public interface PivotPackage
 		EReference MESSAGE_EXP__SENT_SIGNAL = eINSTANCE.getMessageExp_SentSignal();
 
 		/**
-		 * The meta object literal for the '<em><b>Validate Target Is Not ACollection</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation MESSAGE_EXP___VALIDATE_TARGET_IS_NOT_ACOLLECTION__DIAGNOSTICCHAIN_MAP = eINSTANCE.getMessageExp__ValidateTargetIsNotACollection__DiagnosticChain_Map();
-
-		/**
 		 * The meta object literal for the '<em><b>Validate One Call Or One Send</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EOperation MESSAGE_EXP___VALIDATE_ONE_CALL_OR_ONE_SEND__DIAGNOSTICCHAIN_MAP = eINSTANCE.getMessageExp__ValidateOneCallOrOneSend__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Target Is Not ACollection</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation MESSAGE_EXP___VALIDATE_TARGET_IS_NOT_ACOLLECTION__DIAGNOSTICCHAIN_MAP = eINSTANCE.getMessageExp__ValidateTargetIsNotACollection__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.SendSignalActionImpl <em>Send Signal Action</em>}' class.
@@ -23390,7 +23598,7 @@ public interface PivotPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation SELF_TYPE___RESOLVE_SELF_TYPE__TYPE = eINSTANCE.getSelfType__ResolveSelfType__Type();
+		EOperation SELF_TYPE___RESOLVE_SELF_TYPE__TYPE_1 = eINSTANCE.getSelfType__ResolveSelfType__Type_1();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.SequenceTypeImpl <em>Sequence Type</em>}' class.
@@ -23769,6 +23977,14 @@ public interface PivotPackage
 		 * @generated
 		 */
 		EAttribute TYPE__INSTANCE_CLASS_NAME = eINSTANCE.getType_InstanceClassName();
+
+		/**
+		 * The meta object literal for the '<em><b>Resolve Self Type</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TYPE___RESOLVE_SELF_TYPE__TYPE = eINSTANCE.getType__ResolveSelfType__Type();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateableElementImpl <em>Templateable Element</em>}' class.

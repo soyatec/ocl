@@ -39,6 +39,7 @@ import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -79,7 +80,8 @@ public class IteratorsTest extends PivotTestSuite
         // pkg1::pkg3::pkg5
         // pkg1::pkg3::pkg5::george
 
-        pkg1 = createPackage(null, "pkg1");
+        Model model = createModel("model");
+        pkg1 = createPackage(model, "pkg1");
         pkg2 = createPackage(pkg1, "pkg2");
         jim = createPackage(pkg2, "jim");
         bob = createPackage(pkg1, "bob");
@@ -87,6 +89,7 @@ public class IteratorsTest extends PivotTestSuite
         pkg4 = createPackage(pkg3, "pkg4");
         pkg5 = createPackage(pkg3, "pkg5");
         george = createPackage(pkg5, "george");
+        metaModelManager.installModel(model);
         helper.setContext(metaModelManager.getPivotType("Package"));
     }
 

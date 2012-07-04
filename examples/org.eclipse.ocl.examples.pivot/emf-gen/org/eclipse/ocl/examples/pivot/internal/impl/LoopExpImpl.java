@@ -258,41 +258,6 @@ public abstract class LoopExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateNoInitializers(DiagnosticChain diagnostics, Map<Object, Object> context)
-	{
-		/*
-		self.iterator->forAll(initExpression->isEmpty())
-		*/
-		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
-			
-			final DomainType returnType = T_Boolean;
-			final Value result = LoopExpBodies._invariant_NoInitializers.INSTANCE.evaluate(evaluator, returnType, self);
-			final boolean resultIsNull = result.isNull();
-			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
-				return true;
-			}
-			if (diagnostics != null) {
-				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"LoopExp", "NoInitializers", EObjectValidator.getObjectLabel(this, context)});
-			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.LOOP_EXP__NO_INITIALIZERS, message, new Object [] { this }));
-			}
-			return false;
-		} catch (InvalidValueException e) {
-			String message = NLS.bind(EvaluatorMessages.ValidationEvaluationFailed_ERROR_, new Object[]{"LoopExp", "NoInitializers", EObjectValidator.getObjectLabel(this, context)});
-			throw new WrappedException(message, e);
-		}
-		
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean validateSourceIsCollection(DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
 		/*
@@ -318,6 +283,41 @@ public abstract class LoopExpImpl
 			return false;
 		} catch (InvalidValueException e) {
 			String message = NLS.bind(EvaluatorMessages.ValidationEvaluationFailed_ERROR_, new Object[]{"LoopExp", "SourceIsCollection", EObjectValidator.getObjectLabel(this, context)});
+			throw new WrappedException(message, e);
+		}
+		
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateNoInitializers(DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		/*
+		self.iterator->forAll(initExpression->isEmpty())
+		*/
+		try {
+			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final ValueFactory valueFactory = evaluator.getValueFactory();
+			final Value self = valueFactory.valueOf(this);
+			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			
+			final DomainType returnType = T_Boolean;
+			final Value result = LoopExpBodies._invariant_NoInitializers.INSTANCE.evaluate(evaluator, returnType, self);
+			final boolean resultIsNull = result.isNull();
+			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"LoopExp", "NoInitializers", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.LOOP_EXP__NO_INITIALIZERS, message, new Object [] { this }));
+			}
+			return false;
+		} catch (InvalidValueException e) {
+			String message = NLS.bind(EvaluatorMessages.ValidationEvaluationFailed_ERROR_, new Object[]{"LoopExp", "NoInitializers", EObjectValidator.getObjectLabel(this, context)});
 			throw new WrappedException(message, e);
 		}
 		

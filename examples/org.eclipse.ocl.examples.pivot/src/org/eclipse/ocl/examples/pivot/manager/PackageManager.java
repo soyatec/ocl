@@ -19,8 +19,10 @@ package org.eclipse.ocl.examples.pivot.manager;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ocl.examples.pivot.Library;
@@ -37,6 +39,8 @@ public class PackageManager
 	 * The MetaModelManager for which this PackageManager manages the packages.
 	 */
 	protected final MetaModelManager metaModelManager;
+
+	private final Set<Model> models = new HashSet<Model>();
 
 	/**
 	 * Map from package URI to primary package. 
@@ -64,8 +68,48 @@ public class PackageManager
 	protected PackageManager(MetaModelManager metaModelManager) {
 		this.metaModelManager = metaModelManager;
 	}
+	
+	public void addModel(Model pivotModel) {
+		models.add(pivotModel);
+		for (org.eclipse.ocl.examples.pivot.Package pivotPackage : pivotModel.getNestedPackage()) {
+			String nsURI = pivotPackage.getNsURI();
+			org.eclipse.ocl.examples.pivot.Package primaryPackage = null;
+			if (nsURI != null) {										// Explicit nsURI for explicit package (merge)
+				primaryPackage = getPackageByURI(nsURI);
+			}
+			else {
+				String name = pivotPackage.getName();
+				if (name != null) {										// Null nsURI can merge into same named package
+					primaryPackage = getPackageByName(name);
+				}
+				if (primaryPackage == null) {							// Null URI distinct package, so invent a default nsURI
+					nsURI = PivotUtil.getNsURI(pivotPackage);
+					primaryPackage = getPackageByURI(nsURI);
+				}
+			}
+			if (primaryPackage != pivotPackage) {						// Skip recursive call
+				if (primaryPackage != null) {
+					PackageTracker packageTracker = getPackageTracker(primaryPackage);
+					packageTracker.getPackageServer().addSecondaryPackage(pivotPackage);
+				}
+				else {
+					putPackage(nsURI, pivotPackage);
+				}
+			}
+			for (org.eclipse.ocl.examples.pivot.Package nestedPackage : pivotPackage.getNestedPackage()) {
+				addPackages(nestedPackage);
+			}
+		}
+	}
 
-	public void addPackage(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+	void addPackages(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+		addPackage(pivotPackage);
+		for (org.eclipse.ocl.examples.pivot.Package nestedPackage : pivotPackage.getNestedPackage()) {
+			addPackages(nestedPackage);
+		}
+	}
+
+	void addPackage(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
 		String nsURI = pivotPackage.getNsURI();
 		org.eclipse.ocl.examples.pivot.Package primaryPackage = null;
 		if (nsURI != null) {										// Explicit nsURI for explicit package (merge)
@@ -146,11 +190,19 @@ public class PackageManager
 	}
 
 	public Iterable<org.eclipse.ocl.examples.pivot.Package> getAllPackages() {
+		return uri2package.values();		// FIXME
+	}
+
+	public Iterable<org.eclipse.ocl.examples.pivot.Package> getAllPackagesWithUris() {
 		return uri2package.values();
 	}
 
 	public MetaModelManager getMetaModelManager() {
 		return metaModelManager;
+	}
+
+	public Iterable<Model> getModels() {
+		return models;
 	}
 
 	public org.eclipse.ocl.examples.pivot.Package getPackageByName(String name) {

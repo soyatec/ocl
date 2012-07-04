@@ -282,15 +282,15 @@ public class EnvironmentView
 	}
 
 	public void addRootPackages() {
-		for (org.eclipse.ocl.examples.pivot.Package pPackage : metaModelManager.getPackageManager().getAllPackages()) {
-			if (pPackage instanceof Model) {
-				addElements(pPackage.getNestedPackage());
+		for (Model model : metaModelManager.getPackageManager().getModels()) {
+			for (org.eclipse.ocl.examples.pivot.Package pPackage : model.getNestedPackage()) {
+				addNamedElement(pPackage);
 			}
-			else {
-				String nsURI = pPackage.getNsURI();
-				if (nsURI != null) {
-					addElement(nsURI, pPackage);
-				}
+		}
+		for (org.eclipse.ocl.examples.pivot.Package pPackage : metaModelManager.getPackageManager().getAllPackagesWithUris()) {
+			String nsURI = pPackage.getNsURI();
+			if (nsURI != null) {
+				addElement(nsURI, pPackage);
 			}
 		}
 	}

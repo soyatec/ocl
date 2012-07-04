@@ -64,19 +64,21 @@ public class LambdaTypeManager
 			contextMap.put(firstParameterType, lambdasList);
 		}
 		for (LambdaType candidateLambda : lambdasList) {
-			List<? extends Type> candidateTypes = candidateLambda.getParameterType();
-			if (iMax == candidateTypes.size()) {
-			boolean gotIt = true;
-			for (int i = 1; i < iMax; i++) {
-					Type requiredType = parameterTypes.get(i);
-					Type candidateType = candidateTypes.get(i);
-					if (requiredType != candidateType) {
-						gotIt = false;
-						break;
+			if (resultType == candidateLambda.getResultType()) {
+				List<? extends Type> candidateTypes = candidateLambda.getParameterType();
+				if (iMax == candidateTypes.size()) {
+					boolean gotIt = true;
+					for (int i = 1; i < iMax; i++) {
+						Type requiredType = parameterTypes.get(i);
+						Type candidateType = candidateTypes.get(i);
+						if (requiredType != candidateType) {
+							gotIt = false;
+							break;
+						}
 					}
-				}
-				if (gotIt) {
-					return candidateLambda;
+					if (gotIt) {
+						return candidateLambda;
+					}
 				}
 			}
 		}			
@@ -87,6 +89,7 @@ public class LambdaTypeManager
 		lambdaType.setResultType(resultType);
 		lambdaType.getSuperClass().add(metaModelManager.getOclLambdaType());
 		metaModelManager.addOrphanClass(lambdaType);
+		lambdasList.add(lambdaType);
 		return lambdaType;
 	}
 	   
