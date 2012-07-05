@@ -3,11 +3,9 @@
   <validationSets label="main">
     <validationRepositories location="http://download.eclipse.org/modeling/mdt/ocl/updates/milestones"/>
     <validationRepositories location="http://download.eclipse.org/modeling/mdt/ocl/updates/releases"/>
-    <validationRepositories location="http://download.eclipse.org/modeling/mdt/ocl/updates/releases/3.1.0"/>
     <validationRepositories location="http://download.eclipse.org/modeling/mdt/ocl/updates/nightly"/>
     <validationRepositories location="http://download.eclipse.org/modeling/mdt/ocl/updates/maintenance"/>
     <validationRepositories location="http://download.eclipse.org/modeling/mdt/ocl/updates/interim"/>
-    <validationRepositories location="http://download.eclipse.org/modeling/mdt/ocl/updates/staging"/>
   </validationSets>
   <configurations/>
 </aggregator:Aggregation>
