@@ -16,7 +16,9 @@
  */
 package org.eclipse.ocl.examples.pivot.library;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -24,6 +26,8 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.pivot.TemplateableElement;
+import org.eclipse.ocl.examples.pivot.Type;
 
 /**
  * The static instance of CompositionProperty supports evaluation of
@@ -36,7 +40,23 @@ public class CompositionProperty extends AbstractProperty
 	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceValue, DomainProperty property) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		EObject eObject = sourceValue.asNavigableObject(); 
-		Object eValue = eObject.eContainer();
+		Object eValue;
+		EClass eClass = eObject.eClass();
+		EStructuralFeature eFeature = eClass.getEStructuralFeature(property.getName());
+		if (eFeature != null) {
+			// A specialized property such as CollectionType.elementType is returned from the specialized type
+			// An unspecialized property such as CollectionType.ownedOperation is returned from the unspecialized type
+			if ((eObject instanceof Type) && !eObject.eIsSet(eFeature)) {
+				TemplateableElement rawType = ((Type)eObject).getUnspecializedElement();
+				if (rawType != null) {
+					eObject = rawType;
+				}
+			}
+			eValue = eObject.eGet(eFeature);
+		}
+		else {		
+			eValue = eObject.eContainer();		// FIXME this only works for single container type
+		}
 		if (eValue == null) {
 			return valueFactory.getNull();
 		}
