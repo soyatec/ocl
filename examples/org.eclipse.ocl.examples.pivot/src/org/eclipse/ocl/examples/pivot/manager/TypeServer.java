@@ -453,7 +453,9 @@ public class TypeServer
 
 	void removedType(Type pivotType) {
 		TypeTracker typeTracker = packageManager.findTypeTracker(pivotType);
-		trackers.remove(typeTracker);
+		if (typeTracker != null) {
+			typeTracker.dispose();
+		}
 		if (trackers.size() <= 0) {
 			dispose();
 		}
