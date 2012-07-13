@@ -376,6 +376,7 @@ public class PivotSaver extends AbstractPivotSaver
 		if (orphanage == null) {
 			orphanage = PivotFactory.eINSTANCE.createPackage();
 			orphanage.setName(PivotConstants.ORPHANAGE_NAME);
+			orphanage.setNsURI(PivotConstants.ORPHANAGE_URI);
 			resource.getContents().add(orphanage);
 			orphanageClass = PivotFactory.eINSTANCE.createAnyType();		// No superclasses
 			orphanageClass.setName(PivotConstants.ORPHANAGE_NAME);
