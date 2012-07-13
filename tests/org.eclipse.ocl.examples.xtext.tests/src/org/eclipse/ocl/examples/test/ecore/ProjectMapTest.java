@@ -21,7 +21,6 @@ package org.eclipse.ocl.examples.test.ecore;
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.compare.diff.metamodel.DiffPackage;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -74,12 +73,7 @@ public class ProjectMapTest extends TestCase
 		assertEquals(registeredResource, pluginResource);
 		assertEquals(registeredResource, projectResource);
 	}
-	
-	public void testProjectMap_CompareDiff() {				// Usually just a plugin; always a plugin on Hudson
-		String modelPath = "org.eclipse.emf.compare.diff/model/diff.ecore";
-		doTestProjectMapRegistered(DiffPackage.eINSTANCE, modelPath);
-	}
-	
+
 	public void testProjectMap_Ecore() {					// Often just a plugin; always a plugin on Hudson
 		String modelPath = "org.eclipse.emf.ecore/model/Ecore.ecore";
 		doTestProjectMapRegistered(EcorePackage.eINSTANCE, modelPath);

@@ -53,6 +53,7 @@ import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPack
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.EmfFormatter;
 
 /**
  * Test that an Ecore file can be loaded as OCLinEcore then saved back as Ecore.
@@ -239,7 +240,9 @@ public class RoundTripTests extends XtextTestCase
 		BaseCSResource xtextResource3 = createXtextFromURI(metaModelManager3, outputURI);
 		PivotResource pivotResource3 = createPivotFromXtext(metaModelManager3, xtextResource3, 1);
 		((NamedElement)pivotResource3.getContents().get(0)).setName(((NamedElement)pivotResource1.getContents().get(0)).getName());
-    	assertSameModel(pivotResource1, pivotResource3);
+		String expected = EmfFormatter.listToStr(pivotResource1.getContents());
+		String actual = EmfFormatter.listToStr(pivotResource3.getContents()).replace(".regenerated.oclinecore", ".oclinecore");
+		assertEquals(expected, actual);
 		metaModelManager3.dispose();
 	}
 	

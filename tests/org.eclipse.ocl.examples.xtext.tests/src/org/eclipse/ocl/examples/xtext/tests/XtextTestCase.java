@@ -42,13 +42,6 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.compare.diff.metamodel.DiffModel;
-import org.eclipse.emf.compare.diff.metamodel.util.DiffSwitch;
-import org.eclipse.emf.compare.diff.service.DiffService;
-import org.eclipse.emf.compare.match.MatchOptions;
-import org.eclipse.emf.compare.match.metamodel.MatchModel;
-import org.eclipse.emf.compare.match.metamodel.UnmatchElement;
-import org.eclipse.emf.compare.match.service.MatchService;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
@@ -81,7 +74,6 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.tests.PivotTestCase;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.test.xtext.DiffToText;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TuplePartCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TupleTypeCS;
@@ -96,6 +88,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigationOpe
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NestedExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.PrefixExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.TypeNameExpCS;
+import org.eclipse.xtext.util.EmfFormatter;
 
 public class XtextTestCase extends PivotTestCase
 {	
@@ -145,45 +138,9 @@ public class XtextTestCase extends PivotTestCase
 	}
 	
 	public static void assertSameModel(Resource expectedResource, Resource actualResource) throws IOException, InterruptedException {
-		Map<String,Object> options = new HashMap<String,Object>();
-		options.put(MatchOptions.OPTION_IGNORE_XMI_ID, Boolean.TRUE);
-//		options.put(MatchOptions.OPTION_DISTINCT_METAMODELS, Boolean.TRUE);
-		assertSameModel(expectedResource, actualResource, options);
-	}
-	
-	public static void assertSameModel(Resource expectedResource, Resource actualResource, Map<String,Object> options) throws IOException, InterruptedException {
-/*BUG376050		String expected = EmfFormatter.listToStr(expectedResource.getContents());
+		String expected = EmfFormatter.listToStr(expectedResource.getContents());
 		String actual = EmfFormatter.listToStr(actualResource.getContents());
-		assertEquals(expected, actual); */
-        MatchModel match = MatchService.doResourceMatch(actualResource, expectedResource, options);
-        List<UnmatchElement> unmatchedElements = match.getUnmatchedElements();
-        int unmatchedSize = unmatchedElements.size();
-		if (unmatchedSize > 0) {
-			StringBuilder s = new StringBuilder();
-			s.append(unmatchedSize);
-			s.append(" unmatched element(s)");
-			for (UnmatchElement unmatchedElement : unmatchedElements) {
-				s.append("\n");
-				s.append(unmatchedElement.getSide());
-				s.append(": ");
-				EObject element = unmatchedElement.getElement();
-				s.append(element.eClass().getName());
-				s.append(": ");
-				s.append(element.toString());
-			}
-			fail(s.toString());
-		}
-        DiffModel diff = DiffService.doDiff(match, false);
-        int subchanges = diff.getSubchanges();
-		if (subchanges > 0) {
-			StringBuilder s = new StringBuilder();
-			s.append(subchanges);
-			s.append(" changes");
-			DiffSwitch<Boolean> diffSwitch = new DiffToText(s);
-			diffSwitch.doSwitch(diff);
-//            System.out.println(ModelUtils.serialize(diff));
-			fail(s.toString());
-		}
+		assertEquals(expected, actual);
 	}
 	
 	/**
