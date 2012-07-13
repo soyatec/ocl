@@ -245,10 +245,6 @@ public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
 		return delegate.visitMessageType(object);
 	}
 
-	public R visitModel(org.eclipse.ocl.examples.pivot.Model object) {
-		return delegate.visitModel(object);
-	}
-
 	public R visitMultiplicityElement(org.eclipse.ocl.examples.pivot.MultiplicityElement object) {
 		return delegate.visitMultiplicityElement(object);
 	}
@@ -335,6 +331,10 @@ public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
 
 	public R visitRealLiteralExp(org.eclipse.ocl.examples.pivot.RealLiteralExp object) {
 		return delegate.visitRealLiteralExp(object);
+	}
+
+	public R visitRoot(org.eclipse.ocl.examples.pivot.Root object) {
+		return delegate.visitRoot(object);
 	}
 
 	public R visitSelfType(org.eclipse.ocl.examples.pivot.SelfType object) {

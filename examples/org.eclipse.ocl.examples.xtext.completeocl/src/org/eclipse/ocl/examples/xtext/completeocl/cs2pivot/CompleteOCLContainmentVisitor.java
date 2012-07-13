@@ -27,8 +27,6 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.Iteration;
-import org.eclipse.ocl.examples.pivot.Library;
-import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -36,6 +34,7 @@ import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SelfType;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -203,33 +202,37 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 		}
 	}
 
-	protected void installPackageContainment(Model contextModel) {
+	protected void installPackageContainment(Root contextRoot) {
 		Map<org.eclipse.ocl.examples.pivot.Package, Set<org.eclipse.ocl.examples.pivot.Package>> nestedContextPackageMaps =
 				new HashMap<org.eclipse.ocl.examples.pivot.Package, Set<org.eclipse.ocl.examples.pivot.Package>>();
+		Set<org.eclipse.ocl.examples.pivot.Package> nestedContextRoots = new HashSet<org.eclipse.ocl.examples.pivot.Package>();
 		for (org.eclipse.ocl.examples.pivot.Package modelPackage : modelPackage2contextPackage.keySet()) {
 			org.eclipse.ocl.examples.pivot.Package contextPackage = modelPackage2contextPackage.get(modelPackage);
 			org.eclipse.ocl.examples.pivot.Package parentModelPackage = modelPackage.getNestingPackage();
-			org.eclipse.ocl.examples.pivot.Package parentContextPackage = null;
 			if (parentModelPackage != null) {
-				parentContextPackage = modelPackage2contextPackage.get(parentModelPackage);
-			}
-			else if (modelPackage instanceof Library) {			// FIXME BUG 376596 Make Library regular
-				parentContextPackage = contextModel;
-			}
-			if (parentContextPackage != null) {
-				Set<org.eclipse.ocl.examples.pivot.Package> nestedContextPackages = nestedContextPackageMaps.get(parentContextPackage);
-				if (nestedContextPackages == null) {
-					nestedContextPackages = new HashSet<org.eclipse.ocl.examples.pivot.Package>();
-					nestedContextPackageMaps.put(parentContextPackage, nestedContextPackages);
-//					nestedContextPackages.addAll(parentContextPackage.getNestedPackage());
+				org.eclipse.ocl.examples.pivot.Package parentContextPackage = modelPackage2contextPackage.get(parentModelPackage);
+				if (parentContextPackage != null) {
+					Set<org.eclipse.ocl.examples.pivot.Package> nestedContextPackages = nestedContextPackageMaps.get(parentContextPackage);
+					if (nestedContextPackages == null) {
+						nestedContextPackages = new HashSet<org.eclipse.ocl.examples.pivot.Package>();
+						nestedContextPackageMaps.put(parentContextPackage, nestedContextPackages);
+//						nestedContextPackages.addAll(parentContextPackage.getNestedPackage());
+					}
+					nestedContextPackages.add(contextPackage);
 				}
-				nestedContextPackages.add(contextPackage);
+			}
+			else {
+				EObject modelPackageContainer = modelPackage.eContainer();
+				if (modelPackageContainer instanceof Root) {
+					nestedContextRoots.add(contextPackage);
+				}
 			}
 		}
 		for (org.eclipse.ocl.examples.pivot.Package parentContextPackage : nestedContextPackageMaps.keySet()) {
 			Set<org.eclipse.ocl.examples.pivot.Package> nestedContextPackages = nestedContextPackageMaps.get(parentContextPackage);
 			PivotUtil.refreshSet(parentContextPackage.getNestedPackage(), nestedContextPackages);
 		}
+		PivotUtil.refreshSet(contextRoot.getNestedPackage(), nestedContextRoots);
 	}
 
 	protected void installPropertyContainment(Type modelType, Type contextType) {
@@ -294,11 +297,8 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 			contextPackage.setName(modelPackage.getName());
 			contextPackage.setNsURI(modelPackage.getNsURI());
 			modelPackage2contextPackage.put(modelPackage, contextPackage);
-//			metaModelManager.addPackage(contextPackage);
 			org.eclipse.ocl.examples.pivot.Package parentModelPackage = modelPackage.getNestingPackage();
-			if (!(parentModelPackage instanceof Model)) {
-				refreshContextPackage(parentModelPackage, null);
-			}
+			refreshContextPackage(parentModelPackage, null);
 		}
 		if (csElement != null) {
 			context.refreshComments(contextPackage, csElement);
@@ -356,23 +356,16 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 		for (IncludeCS csInclude : csElement.getOwnedInclude()) {
 			csInclude.getNamespace();					// Resolve the proxy to perform the import.
 		}
-		Model contextModel = refreshPackage(Model.class, PivotPackage.Literals.MODEL, csElement);
-//		metaModelManager.addPackage(contextModel);
-		List<org.eclipse.ocl.examples.pivot.Package> modelModels = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();
+		Root contextRoot = refreshRoot(Root.class, PivotPackage.Literals.ROOT, csElement);
+		List<Root> modelRoots = new ArrayList<Root>();
 		for (org.eclipse.ocl.examples.pivot.Package modelPackage : modelPackage2contextPackage.keySet()) {
 			org.eclipse.ocl.examples.pivot.Package parentModelPackage = modelPackage.getNestingPackage();
-			if (parentModelPackage instanceof Model) {
-				org.eclipse.ocl.examples.pivot.Package parentContextPackage = modelPackage2contextPackage.get(parentModelPackage);
-				if (parentContextPackage == null) {
-					modelModels.add(parentModelPackage);
-				}
+			if (parentModelPackage == null) {
+				modelRoots.add((Root) modelPackage.eContainer());
 			}
 		}
-		for (org.eclipse.ocl.examples.pivot.Package modelModel : modelModels) {
-			modelPackage2contextPackage.put(modelModel, contextModel);
-		}
 		installTypeContainment();
-		installPackageContainment(contextModel);
+		installPackageContainment(contextRoot);
 		return null;
 	}
 

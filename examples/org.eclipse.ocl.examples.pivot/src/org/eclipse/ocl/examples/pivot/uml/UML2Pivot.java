@@ -52,13 +52,13 @@ import org.eclipse.emf.ecore.xmi.XMIException;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.StereotypedProperty;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
@@ -104,7 +104,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 				return null;
 			}
 			UML2Pivot conversion = getAdapter(umlResource, metaModelManager);
-			org.eclipse.ocl.examples.pivot.Package pivotRoot = conversion.getPivotRoot();
+			Root pivotRoot = conversion.getPivotRoot();
 			if (uriFragment == null) {
 				return pivotRoot;
 			}
@@ -150,7 +150,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 				return adapter;
 			}
 		}
-		adapter = new Root(resource, metaModelManager);
+		adapter = new Outer(resource, metaModelManager);
 		resource.eAdapters().add(adapter);
 		return adapter;
 	}
@@ -163,7 +163,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 	 * 
 	 * @return the Pivot root package
 	 */
-	public static org.eclipse.ocl.examples.pivot.Package importFromUML(MetaModelManager metaModelManager, String alias, Resource umlResource) {
+	public static Root importFromUML(MetaModelManager metaModelManager, String alias, Resource umlResource) {
 		if (umlResource == null) {
 			return null;
 		}
@@ -184,7 +184,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		}
 		Resource umlResource = eObject.eResource();
 		UML2Pivot conversion = getAdapter(umlResource, metaModelManager);
-		org.eclipse.ocl.examples.pivot.Package pivotRoot = conversion.getPivotRoot();
+		Root pivotRoot = conversion.getPivotRoot();
 		if (pivotRoot == null) {
 			return null;
 		}
@@ -243,14 +243,14 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 	}
 	
 	/**
-	 * A UML2Pivot$Imported adapts an unconverted UML resource that has been imported during
+	 * A UML2Pivot$Inner adapts an unconverted UML resource that has been imported during
 	 * the conversion of some other UML resource.
 	 */
-	public static class Imported extends UML2Pivot
+	public static class Inner extends UML2Pivot
 	{		
-		protected final Root root;
+		protected final Outer root;
 		
-		protected Imported(Resource umlResource, Root root) {
+		protected Inner(Resource umlResource, Outer root) {
 			super(umlResource, root.metaModelManager);
 			this.root = root;
 		}
@@ -301,7 +301,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		}
 		
 		@Override
-		public Model getPivotRoot() {
+		public Root getPivotRoot() {
 			if (pivotRoot == null) {
 				root.getPivotRoot();
 				Resource pivotResource = pivotRoot.eResource();
@@ -317,7 +317,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		}
 
 		@Override
-		public Root getRoot() {
+		public Outer getRoot() {
 			return root;
 		}
 
@@ -328,10 +328,10 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 	}
 	
 	/**
-	 * A UML2Pivot$Root adapts an unconverted UML resource and hosts the additional conversions
+	 * A UML2Pivot$Outer adapts an unconverted UML resource and hosts the additional conversions
 	 * necessary for imported UML resources.
 	 */
-	public static class Root extends UML2Pivot
+	public static class Outer extends UML2Pivot
 	{		
 		/**
 		 * Mapping of source UML objects to their resulting pivot element.
@@ -368,7 +368,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		private Set<org.eclipse.uml2.uml.Property> umlProperties = new HashSet<org.eclipse.uml2.uml.Property>();
 		private List<EObject> eAppliedStereotypes = new ArrayList<EObject>();
 
-		protected Root(Resource umlResource, MetaModelManager metaModelManager) {
+		protected Outer(Resource umlResource, MetaModelManager metaModelManager) {
 			super(umlResource, metaModelManager);
 		}
 		
@@ -482,18 +482,12 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		}
 		
 		@Override
-		public Model getPivotRoot() {
+		public Root getPivotRoot() {
 			if (pivotRoot == null) {
 				URI pivotURI = createPivotURI();
-				Collection<EObject> umlContents = umlResource.getContents();
 				Resource pivotResource = metaModelManager.createResource(pivotURI, PivotPackage.eCONTENT_TYPE);
 				try {
-					if ((metaModelManager.getLibraryResource() == null) && isPivot(umlContents)) {
-						OCLstdlib library = OCLstdlib.create(OCLstdlib.STDLIB_URI, "ocl", "ocl", ((EPackage)umlContents.iterator().next()).getNsURI());			// FIXME
-						metaModelManager.loadLibrary(library);
-					}
-					installDeclarations(pivotResource);
-					
+					installDeclarations(pivotResource);					
 //					Map<String, Type> resolvedSpecializations = new HashMap<String, Type>();
 //					for (EGenericType eGenericType : genericTypes) {
 //						Type pivotType = resolveType(resolvedSpecializations, eGenericType);
@@ -582,7 +576,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 					else {
 						UML2Pivot adapter = UML2Pivot.findAdapter(importedResource, metaModelManager);
 						if (adapter == null) {
-							Imported importedAdapter = new Imported(importedResource, this);
+							Inner importedAdapter = new Inner(importedResource, this);
 							importedResource.eAdapters().add(importedAdapter);
 							URI pivotURI = importedAdapter.createPivotURI();
 							Resource pivotResource = metaModelManager.createResource(pivotURI, PivotPackage.eCONTENT_TYPE);
@@ -772,13 +766,13 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		}
 
 		@Override
-		public Root getRoot() {
+		public Outer getRoot() {
 			return this;
 		}
 	}
 	
 	protected final Resource umlResource;	
-	protected Model pivotRoot = null;	// Set by installDeclarations
+	protected Root pivotRoot = null;	// Set by installDeclarations
 	
 	protected UML2Pivot(Resource umlResource, MetaModelManager metaModelManager) {
 		super(metaModelManager);
@@ -822,23 +816,13 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 	
 	public abstract Type getPivotType(EObject eObject);
 	
-/*	public Collection<EPackage> getReferencedEPackages() {
-		Set<EPackage> ePackages = new HashSet<EPackage>();
-		for (EClassifier eClassifier : allEClassifiers) {
-			EPackage ePackage = eClassifier.getEPackage();
-			if (ePackage != null)
-				ePackages.add(ePackage);
-		}
-		return ePackages;
-	} */
-	
-	public abstract Model getPivotRoot();
+	public abstract Root getPivotRoot();
 
 	public Resource getResource() {
 		return umlResource;
 	}
 	
-	public abstract Root getRoot();
+	public abstract Outer getRoot();
 
 	public Notifier getTarget() {
 		return umlResource;
@@ -850,7 +834,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 
 	protected void installDeclarations(Resource pivotResource) {
 		URI pivotURI = pivotResource.getURI();
-		pivotRoot = metaModelManager.createModel(pivotURI.lastSegment(), null);
+		pivotRoot = metaModelManager.createRoot(pivotURI.lastSegment(), null);
 		pivotResource.getContents().add(pivotRoot);
 		UML2PivotDeclarationSwitch declarationPass = getDeclarationPass();
 		List<org.eclipse.ocl.examples.pivot.Package> rootPackages = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();

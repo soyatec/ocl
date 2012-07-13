@@ -29,6 +29,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.Library;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
@@ -70,7 +72,11 @@ public class LibraryCSAttribution extends AbstractAttribution implements Unresol
 					List<Resource.Diagnostic> errors = importedResource.getErrors();
 					if (errors.size() == 0) {
 						environmentView.addElement(name, importedElement);
-	//					metaModelManager.loadLibrary(importedResource);
+						if (importedElement instanceof Root) {
+							for (EObject pkg : ((Root)importedElement).getNestedPackage()) {
+								environmentView.addElement(name, pkg);								// FIXME Avoid vague duplication
+							}
+						}
 					}
 				}
 				return null;
@@ -101,8 +107,16 @@ public class LibraryCSAttribution extends AbstractAttribution implements Unresol
 				Resource resource = contribution.getResource();
 				try {
 					MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-					metaModelManager.loadLibrary(resource);
-					environmentView.addElement(name, resource.getContents().get(0));
+					metaModelManager.installResource(resource);
+					for (EObject root : resource.getContents()) {
+						if (root instanceof Root) {
+							for (EObject pkg : ((Root)root).getNestedPackage()) {
+								if (pkg instanceof Library) {
+									environmentView.addElement(name, pkg);									
+								}
+							}
+						}
+					}
 				} catch (IllegalLibraryException e) {
 					throwable = e;
 				}

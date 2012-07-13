@@ -54,8 +54,8 @@ public class OCLMetaModel extends XMIResourceImpl
 	public static Package create(PivotStandardLibrary standardLibrary, String name, String nsPrefix, String nsURI) {
 		OCLMetaModel resource = new OCLMetaModel(URI.createURI(PIVOT_URI));
 		Contents contents = new Contents(standardLibrary);
-		Model model = contents.create(name != null ? name : "pivot", nsPrefix != null ? nsPrefix : "pivot", nsURI != null ? nsURI : "http://www.eclipse.org/ocl/3.1.0/Pivot");
-		resource.getContents().add(model);
+		Root root = contents.create(name != null ? name : "pivot", nsPrefix != null ? nsPrefix : "pivot", nsURI != null ? nsURI : "http://www.eclipse.org/ocl/3.1.0/Pivot");
+		resource.getContents().add(root);
 		return contents.metamodel;
 	}
 
@@ -83,12 +83,12 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final PrimitiveType _String = standardLibrary.getStringType();
 		protected final PrimitiveType _UnlimitedNatural = standardLibrary.getUnlimitedNaturalType();
 
-		protected Model model;
+		protected Root root;
 		protected Package metamodel;
 
-		protected Model create(String name, String nsPrefix, String nsURI)
+		protected Root create(String name, String nsPrefix, String nsURI)
 		{
-			model = createModel("pivot", "pivot", "http://www.eclipse.org/ocl/3.1.0/Pivot");
+			root = createRoot("pivot", "http://www.eclipse.org/ocl/3.1.0/Pivot");
 			metamodel = createPackage(name, nsPrefix, nsURI);
 			installPackages();
 			installOclTypes();
@@ -100,11 +100,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			installProperties();
 			installTemplateSignatures();
 			installComments();
-			return model;
+			return root;
 		}
 	
 		protected void installPackages() {
-			model.getNestedPackage().add(metamodel);
+			root.getNestedPackage().add(metamodel);	
 		}
 		
 		protected final Class _Annotation = createClass("Annotation");
@@ -155,7 +155,6 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final Class _LoopExp = createClass("LoopExp");
 		protected final Class _MessageExp = createClass("MessageExp");
 		protected final Class _MessageType = createClass("MessageType");
-		protected final Class _Model = createClass("Model");
 		protected final Class _MorePivotable = createClass("MorePivotable");
 		protected final Class _MultiplicityElement = createClass("MultiplicityElement");
 		protected final Class _Nameable = createClass("Nameable");
@@ -182,6 +181,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final Class _Property = createClass("Property");
 		protected final Class _PropertyCallExp = createClass("PropertyCallExp");
 		protected final Class _RealLiteralExp = createClass("RealLiteralExp");
+		protected final Class _Root = createClass("Root");
 		protected final Class _SelfType = createClass("SelfType");
 		protected final Class _SendSignalAction = createClass("SendSignalAction");
 		protected final Class _SequenceType = createClass("SequenceType");
@@ -373,9 +373,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedTypes.add(type = _MessageType);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Type);
-			ownedTypes.add(type = _Model);
-			superClasses = type.getSuperClass();
-			superClasses.add(_Package);
 			ownedTypes.add(type = _MorePivotable);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclElement);
@@ -461,6 +458,9 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedTypes.add(type = _RealLiteralExp);
 			superClasses = type.getSuperClass();
 			superClasses.add(_NumericLiteralExp);
+			ownedTypes.add(type = _Root);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Namespace);
 			ownedTypes.add(type = _SelfType);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Class);
@@ -716,6 +716,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final Property pr_CollectionRange_first = createProperty("first", _OCLExpression);
 		protected final Property pr_CollectionRange_last = createProperty("last", _OCLExpression);
 		protected final Property pr_CollectionType_elementType = createProperty("elementType", _Type);
+		protected final Property pr_Comment_Element = createProperty("Element", _Element);
 		protected final Property pr_Comment_annotatedElement = createProperty("annotatedElement", _Element);
 		protected final Property pr_Comment_body = createProperty("body", _String);
 		protected final Property pr_Constraint_constrainedElement = createProperty("constrainedElement", _Element);
@@ -738,7 +739,6 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final Property pr_DynamicProperty_referredProperty = createProperty("referredProperty", _Property);
 		protected final Property pr_null_metaType = createProperty("metaType", _Type);
 		protected final Property pr_DynamicType_ownedProperty = createProperty("ownedProperty", _DynamicProperty);
-		protected final Property pr_Element_Comment = createProperty("Comment", _Comment);
 		protected final Property pr_Element_Constraint = createProperty("Constraint", _Constraint);
 		protected final Property pr_Element_appliedStereotype = createProperty("appliedStereotype", _AppliedStereotype);
 		protected final Property pr_Element_ownedComment = createProperty("ownedComment", _Comment);
@@ -815,6 +815,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final Property pr_OperationCallExp_argument = createProperty("argument", _OCLExpression);
 		protected final Property pr_OperationCallExp_referredOperation = createProperty("referredOperation", _Operation);
 		protected final Property pr_null_parameteredElement = createProperty("parameteredElement", _ParameterableElement);
+		protected final Property pr_Package_Root = createProperty("Root", _Root);
 		protected final Property pr_Package_importedPackage = createProperty("importedPackage", _Package);
 		protected final Property pr_Package_nestedPackage = createProperty("nestedPackage", _Package);
 		protected final Property pr_Package_nestingPackage = createProperty("nestingPackage", _Package);
@@ -854,6 +855,8 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final Property pr_Property_subsettedProperty = createProperty("subsettedProperty", _Property);
 		protected final Property pr_PropertyCallExp_referredProperty = createProperty("referredProperty", _Property);
 		protected final Property pr_RealLiteralExp_realSymbol = createProperty("realSymbol", _Real);
+		protected final Property pr_Root_externalURI = createProperty("externalURI", _String);
+		protected final Property pr_Root_nestedPackage = createProperty("nestedPackage", _Package);
 		protected final Property pr_SendSignalAction_MessageExp = createProperty("MessageExp", _MessageExp);
 		protected final Property pr_SendSignalAction_signal = createProperty("signal", _Signal);
 		protected final Property pr_Signal_MessageType = createProperty("MessageType", _MessageType);
@@ -1045,11 +1048,15 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Type_CollectionType);
 			ownedProperties = _Comment.getOwnedAttribute();
+			ownedProperties.add(property = pr_Comment_Element);
+			property.setLower(BigInteger.valueOf(0));
+			property.setImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Element_ownedComment);
 			ownedProperties.add(property = pr_Comment_annotatedElement);
 			property.setLower(BigInteger.valueOf(0));
 			property.setUpper(BigInteger.valueOf(-1));
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Element_Comment);
 			ownedProperties.add(property = pr_Comment_body);
 			property.setLower(BigInteger.valueOf(0));
 			property.setIsResolveProxies(true);
@@ -1137,12 +1144,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_DynamicProperty_DynamicType);
 			ownedProperties = _Element.getOwnedAttribute();
-			ownedProperties.add(property = pr_Element_Comment);
-			property.setLower(BigInteger.valueOf(0));
-			property.setUpper(BigInteger.valueOf(-1));
-			property.setImplicit(true);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Comment_annotatedElement);
 			ownedProperties.add(property = pr_Element_Constraint);
 			property.setLower(BigInteger.valueOf(0));
 			property.setUpper(BigInteger.valueOf(-1));
@@ -1160,6 +1161,7 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setUpper(BigInteger.valueOf(-1));
 			property.setIsComposite(true);
 			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Comment_Element);
 			ownedProperties = _EnumLiteralExp.getOwnedAttribute();
 			ownedProperties.add(property = pr_EnumLiteralExp_referredEnumLiteral);
 			property.setLower(BigInteger.valueOf(0));
@@ -1500,6 +1502,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Operation_OperationCallExp);
 			ownedProperties = _Package.getOwnedAttribute();
+			ownedProperties.add(property = pr_Package_Root);
+			property.setLower(BigInteger.valueOf(0));
+			property.setImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Root_nestedPackage);
 			ownedProperties.add(property = pr_Package_importedPackage);
 			property.setLower(BigInteger.valueOf(0));
 			property.setUpper(BigInteger.valueOf(-1));
@@ -1663,6 +1670,16 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties = _RealLiteralExp.getOwnedAttribute();
 			ownedProperties.add(property = pr_RealLiteralExp_realSymbol);
 			property.setIsResolveProxies(true);
+			ownedProperties = _Root.getOwnedAttribute();
+			ownedProperties.add(property = pr_Root_externalURI);
+			property.setLower(BigInteger.valueOf(0));
+			property.setIsResolveProxies(true);
+			ownedProperties.add(property = pr_Root_nestedPackage);
+			property.setLower(BigInteger.valueOf(0));
+			property.setUpper(BigInteger.valueOf(-1));
+			property.setIsComposite(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Package_Root);
 			ownedProperties = _SendSignalAction.getOwnedAttribute();
 			ownedProperties.add(property = pr_SendSignalAction_MessageExp);
 			property.setLower(BigInteger.valueOf(0));

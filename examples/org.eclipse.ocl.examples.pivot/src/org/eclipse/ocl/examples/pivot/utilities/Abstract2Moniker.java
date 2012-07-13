@@ -35,6 +35,7 @@ import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
@@ -248,7 +249,7 @@ public abstract class Abstract2Moniker implements PivotConstants
 				append("<<unresolved-proxy>>");	
 			}
 			else {
-				assert element instanceof org.eclipse.ocl.examples.pivot.Package || element instanceof ExpressionInOCL : element.eClass().getName() + " has no parent";	
+				assert element instanceof Root || element instanceof ExpressionInOCL : element.eClass().getName() + " has no parent";	
 			}
 		}
 		append(parentSeparator);

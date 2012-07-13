@@ -32,7 +32,6 @@ import org.eclipse.ocl.examples.pivot.InvalidType;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.Library;
-import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OrderedSetType;
 import org.eclipse.ocl.examples.pivot.Package;
@@ -42,6 +41,7 @@ import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SelfType;
 import org.eclipse.ocl.examples.pivot.SequenceType;
 import org.eclipse.ocl.examples.pivot.SetType;
@@ -144,14 +144,6 @@ public class AbstractContents
 		pivotLibrary.setNsURI(nsURI);
 		return pivotLibrary;
 	}
-
-	protected Model createModel(String name, String nsPrefix, String nsURI) {
-		Model pivotModel = PivotFactory.eINSTANCE.createModel();
-		pivotModel.setName(name);
-		pivotModel.setNsPrefix(nsPrefix);
-		pivotModel.setNsURI(nsURI);
-		return pivotModel;
-	}
 	
 	protected Operation createOperation(String name, Type type, String implementationClass, LibraryFeature implementation) {
 		Operation pivotOperation = PivotFactory.eINSTANCE.createOperation();
@@ -201,6 +193,13 @@ public class AbstractContents
 		pivotProperty.setName(name);
 		pivotProperty.setType(type);
 		return pivotProperty;
+	}
+
+	protected Root createRoot(String name, String externalURI) {
+		Root pivotRoot = PivotFactory.eINSTANCE.createRoot();
+		pivotRoot.setName(name);
+		pivotRoot.setExternalURI(externalURI);
+		return pivotRoot;
 	}
 
 	protected SelfType createSelfType(String name) {

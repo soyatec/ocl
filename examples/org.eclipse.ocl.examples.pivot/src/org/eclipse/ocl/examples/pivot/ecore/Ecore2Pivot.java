@@ -52,6 +52,7 @@ import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
@@ -88,7 +89,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 				return null;
 			}
 			Ecore2Pivot conversion = getAdapter(ecoreResource, metaModelManager);
-			org.eclipse.ocl.examples.pivot.Package pivotRoot = conversion.getPivotRoot();
+			Root pivotRoot = conversion.getPivotRoot();
 			if (uriFragment == null) {
 				return pivotRoot;
 			}
@@ -148,7 +149,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	 * 
 	 * @return the Pivot root package
 	 */
-	public static org.eclipse.ocl.examples.pivot.Package importFromEcore(MetaModelManager metaModelManager, String alias, Resource ecoreResource) {
+	public static Root importFromEcore(MetaModelManager metaModelManager, String alias, Resource ecoreResource) {
 		if (ecoreResource == null) {
 			return null;
 		}
@@ -189,7 +190,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		}
 		Resource ecoreResource = eObject.eResource();
 		Ecore2Pivot conversion = getAdapter(ecoreResource, metaModelManager);
-		org.eclipse.ocl.examples.pivot.Package pivotRoot = conversion.getPivotRoot();
+		Root pivotRoot = conversion.getPivotRoot();
 		if (pivotRoot == null) {
 			return null;
 		}
@@ -225,7 +226,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	
 	protected final Resource ecoreResource;					// Set via eAdapters.add()
 	
-	protected org.eclipse.ocl.examples.pivot.Package pivotRoot = null;	// Set by importResource
+	protected Root pivotRoot = null;						// Set by importResource
 	protected final Ecore2PivotDeclarationSwitch declarationPass = new Ecore2PivotDeclarationSwitch(this);	
 	protected final Ecore2PivotReferenceSwitch referencePass = new Ecore2PivotReferenceSwitch(this);
 	private HashMap<EClassifier, Type> ecore2PivotMap = null;
@@ -383,7 +384,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		return null;
 	}
 	
-	public org.eclipse.ocl.examples.pivot.Package getPivotRoot() {
+	public Root getPivotRoot() {
 		if (pivotRoot == null) {
 			Resource pivotResource = importObjects(ecoreResource.getContents(), createPivotURI());
 			AliasAdapter ecoreAdapter = AliasAdapter.findAdapter(ecoreResource);
@@ -419,10 +420,9 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		try {
 			if ((metaModelManager.getLibraryResource() == null) && isPivot(ecoreContents)) {
 				OCLstdlib library = OCLstdlib.create(OCLstdlib.STDLIB_URI, "ocl", "ocl", ((EPackage)ecoreContents.iterator().next()).getNsURI());
-//				metaModelManager.loadLibrary(library);
 				metaModelManager.installResource(library);
 			}
-			pivotRoot = metaModelManager.createModel(pivotURI.lastSegment(), null);
+			pivotRoot = metaModelManager.createRoot(pivotURI.lastSegment(), ecoreResource.getURI().toString());
 			update(pivotResource, ecoreContents);
 		}
 		catch (Exception e) {
@@ -676,9 +676,6 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	}
 
 	public void update(Resource pivotResource, Collection<EObject> ecoreContents) {
-		if (oldIdMap != null) {
-			metaModelManager.getPackageTracker(pivotRoot);
-		}
 		newCreateMap = new HashMap<EObject, Element>();
 		referencers = new HashSet<EObject>();
 		genericTypes = new ArrayList<EGenericType>();

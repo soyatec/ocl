@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.xtext.completeocl.attributes;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.Namespace;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -41,17 +42,25 @@ public class CompleteOCLDocumentCSAttribution extends AbstractRootCSAttribution
 				if (importName != null) {
 					environmentView.addElement(importName, namespace);
 					environmentView.addNamedElement(namespace);
-					if (anImport.isAll() && (namespace instanceof org.eclipse.ocl.examples.pivot.Package)) {
-						org.eclipse.ocl.examples.pivot.Package rootPackage = (org.eclipse.ocl.examples.pivot.Package)namespace;
-						environmentView.addNamedElements(rootPackage.getNestedPackage());
-						environmentView.addNamedElements(rootPackage.getOwnedType());
+					if (namespace instanceof Root) {
+						environmentView.addNamedElements(((Root)namespace).getNestedPackage());
+					} else if (namespace instanceof org.eclipse.ocl.examples.pivot.Package) {		// FIXME This legacy behaviour needs cleaning up
+						if (anImport.isAll()) {
+							org.eclipse.ocl.examples.pivot.Package rootPackage = (org.eclipse.ocl.examples.pivot.Package)namespace;
+							environmentView.addNamedElements(rootPackage.getNestedPackage());
+							environmentView.addNamedElements(rootPackage.getOwnedType());
+						}
 					}
-				} else if (namespace instanceof org.eclipse.ocl.examples.pivot.Package) {		// FIXME This legacy behaviour needs cleaning up
+				} else {
 					environmentView.addNamedElement(namespace);
-					for (org.eclipse.ocl.examples.pivot.Package rootPackage : ((org.eclipse.ocl.examples.pivot.Package)namespace).getNestedPackage()) {
-						environmentView.addNamedElement(rootPackage);		// FIXME Rationalize root of pivot model
-						environmentView.addNamedElements(rootPackage.getNestedPackage());
-						environmentView.addNamedElements(rootPackage.getOwnedType());
+					if (namespace instanceof Root) {
+						environmentView.addNamedElements(((Root)namespace).getNestedPackage());
+					} else if (namespace instanceof org.eclipse.ocl.examples.pivot.Package) {		// FIXME This legacy behaviour needs cleaning up
+						for (org.eclipse.ocl.examples.pivot.Package rootPackage : ((org.eclipse.ocl.examples.pivot.Package)namespace).getNestedPackage()) {
+							environmentView.addNamedElement(rootPackage);		// FIXME Rationalize root of pivot model
+							environmentView.addNamedElements(rootPackage.getNestedPackage());
+							environmentView.addNamedElements(rootPackage.getOwnedType());
+						}
 					}
 				}
 			}

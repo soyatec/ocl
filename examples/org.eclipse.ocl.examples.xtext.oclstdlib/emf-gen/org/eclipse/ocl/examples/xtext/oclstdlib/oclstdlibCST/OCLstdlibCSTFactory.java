@@ -93,6 +93,15 @@ public interface OCLstdlibCSTFactory
 	LibPropertyCS createLibPropertyCS();
 
 	/**
+	 * Returns a new object of class '<em>Lib Root Package CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Lib Root Package CS</em>'.
+	 * @generated
+	 */
+	LibRootPackageCS createLibRootPackageCS();
+
+	/**
 	 * Returns a new object of class '<em>Meta Type Name</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

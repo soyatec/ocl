@@ -16,7 +16,6 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PrimitiveTypeRefCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateBindingCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterSubstitutionCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateSignatureCS;
@@ -64,6 +63,7 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPropertyCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTPackage;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.services.OCLstdlibGrammarAccess;
@@ -186,12 +186,6 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 				}
 				else if(context == grammarAccess.getTypeExpCSRule()) {
 					sequence_PrimitiveTypeCS_TypeExpCS(context, (PrimitiveTypeRefCS) semanticObject); 
-					return; 
-				}
-				else break;
-			case BaseCSTPackage.ROOT_PACKAGE_CS:
-				if(context == grammarAccess.getLibraryRule()) {
-					sequence_Library(context, (RootPackageCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -645,6 +639,12 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 					return; 
 				}
 				else break;
+			case OCLstdlibCSTPackage.LIB_ROOT_PACKAGE_CS:
+				if(context == grammarAccess.getLibraryRule()) {
+					sequence_Library(context, (LibRootPackageCS) semanticObject); 
+					return; 
+				}
+				else break;
 			case OCLstdlibCSTPackage.PRECEDENCE_CS:
 				if(context == grammarAccess.getPrecedenceCSRule()) {
 					sequence_PrecedenceCS(context, (PrecedenceCS) semanticObject); 
@@ -881,7 +881,7 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 	 * Constraint:
 	 *     (ownedLibrary+=LibraryCS* ownedNestedPackage+=LibPackageCS*)
 	 */
-	protected void sequence_Library(EObject context, RootPackageCS semanticObject) {
+	protected void sequence_Library(EObject context, LibRootPackageCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

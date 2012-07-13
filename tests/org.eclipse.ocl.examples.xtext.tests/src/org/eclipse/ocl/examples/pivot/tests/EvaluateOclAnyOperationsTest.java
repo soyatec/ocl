@@ -531,7 +531,7 @@ public class EvaluateOclAnyOperationsTest extends PivotSimpleTestSuite
         assertQueryFalse(pkg1, "self.oclIsTypeOf(UnlimitedNatural)");
         assertQueryFalse(pkg1, "self.oclIsTypeOf(String)");
         assertQueryFalse(pkg1, "self.oclIsTypeOf(OclAny)");
-        assertQueryTrue(pkg1, "self.oclIsTypeOf(ocl::Model)");
+        assertQueryTrue(pkg1, "self.oclIsTypeOf(ocl::Package)");
     }
 
     /**
@@ -575,10 +575,9 @@ public class EvaluateOclAnyOperationsTest extends PivotSimpleTestSuite
      * Tests the oclType() operator for Classifiers.
      */
     public void test_oclType_Classifier() {
-    	Type modelType = metaModelManager.getPivotType("Model");
     	Type packageType = metaModelManager.getPivotType("Package");
-       	assertQueryEquals(pkg1, modelType, "self.oclType()");
-    	assertQueryEquals(pkg1, "Model", "self.oclType().name");
+       	assertQueryEquals(pkg1, packageType, "self.oclType()");
+    	assertQueryEquals(pkg1, "Package", "self.oclType().name");
 		assertQueryEquals(null, packageType, "Package");
     	assertQueryEquals(null, "Package", "Package.name");
     	assertQueryEquals(null, getClassifierType(packageType), "Package.oclType()");

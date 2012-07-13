@@ -32,6 +32,7 @@ import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.ocl.examples.build.acceleo.GenerateOCLstdlib;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.utilities.PivotSaver;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
@@ -97,8 +98,8 @@ public class OCLstdlibCodeGenerator extends AbstractWorkflowComponent
 			EObject pivotModel = pivotResource.getContents().get(0);
 			PivotSaver saver = new PivotSaver(pivotResource);
 			org.eclipse.ocl.examples.pivot.Package orphanage = saver.localizeSpecializations();
-			if ((orphanage != null) && (pivotModel instanceof org.eclipse.ocl.examples.pivot.Package)) {
-				((org.eclipse.ocl.examples.pivot.Package)pivotModel).getNestedPackage().add(orphanage);
+			if ((orphanage != null) && (pivotModel instanceof Root)) {
+				((Root)pivotModel).getNestedPackage().add(orphanage);
 			}
 			GenerateOCLstdlib acceleo = new GenerateOCLstdlib(pivotModel, folder, arguments);
 			log.info("Generating to ' " + folder + "'");

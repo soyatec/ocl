@@ -522,7 +522,12 @@
       </ownedMember>
       <ownedMember xmi:type="cmof:Package" xmi:id="_VymA8IQLEeGSY6MLEc_weQ" name="Models">
         <ownedMember xmi:type="cmof:Class" xmi:id="_ZE--wIQLEeGSY6MLEc_weQ" name="Package"/>
-        <ownedMember xmi:type="cmof:Class" xmi:id="_d4OrUIQLEeGSY6MLEc_weQ" name="Model" superClass="_ZE--wIQLEeGSY6MLEc_weQ"/>
+        <ownedMember xmi:type="cmof:Class" xmi:id="_lqIjIMZ_EeGSosHO1vMMFA" name="Root" superClass="_vUwG8MaCEeGSosHO1vMMFA">
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_UMBmIMaCEeGSosHO1vMMFA" name="nestedPackage" type="_ZE--wIQLEeGSY6MLEc_weQ" lower="0" upper="*" isComposite="true"/>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_diPHkMaCEeGSosHO1vMMFA" name="externalURI" type="_b9hMgMaCEeGSosHO1vMMFA" lower="0"/>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:PrimitiveType" xmi:id="_b9hMgMaCEeGSosHO1vMMFA" name="String"/>
+        <ownedMember xmi:type="cmof:Class" xmi:id="_vUwG8MaCEeGSosHO1vMMFA" name="Namespace" isAbstract="true"/>
       </ownedMember>
     </ownedMember>
     <ownedMember xmi:type="cmof:Package" xmi:id="_xg6fUPF8Ed-BXqn3guNB1A" name="Sub_IsStatic">

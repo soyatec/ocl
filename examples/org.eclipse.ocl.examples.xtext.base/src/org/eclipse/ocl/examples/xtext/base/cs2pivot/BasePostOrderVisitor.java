@@ -28,6 +28,7 @@ import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -53,6 +54,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PrimitiveTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ReferenceCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateBindingCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterSubstitutionCS;
@@ -273,6 +275,13 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 		if (pivotOpposite == null) {
 			context.getMetaModelManager().installPropertyDeclaration(pivotElement);
 		}
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitRootPackageCS(RootPackageCS csPackage) {
+		Root pivotElement = PivotUtil.getPivot(Root.class, csPackage);
+		context.handleVisitNamedElement(csPackage, pivotElement);
 		return null;
 	}
 

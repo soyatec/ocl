@@ -2,10 +2,10 @@
 [module org::eclipse::ocl::examples::build::acceleo::generateOCLstdlib('http://www.eclipse.org/ocl/3.1.0/Pivot','http://www.eclipse.org/emf/2002/Ecore')/]
 [import org::eclipse::ocl::examples::build::acceleo::generateOCLCommon/]
 
-[template public generate(model : Model, javaPackage : String, javaClass : String, sourceFile : String, uri : String)]
+[template public generate(root : Root, javaPackage : String, javaClass : String, sourceFile : String, uri : String)]
 [comment @main /]
-[let lib : Library = model.nestedPackage->filter(Library)->any(true)]
-[let allEnumerations : Sequence(Enumeration) = model.eAllContents(Enumeration)]
+[let lib : Library = root.nestedPackage->filter(Library)->any(true)]
+[let allEnumerations : Sequence(Enumeration) = root.eAllContents(Enumeration)]
 [file (javaClass + '.java', false, 'UTF-8')]
 /**
  * <copyright>
@@ -84,7 +84,7 @@ public class [javaClass/] extends XMIResourceImpl
 	public static OCLstdlib getDefault() {
 		if (INSTANCE == null) {
 			Contents contents = new Contents();
-			Model libraryModel = contents.create("[model.name/]", "[model.nsPrefix/]", "[model.nsURI/]");
+			Root libraryModel = contents.create("[lib.name/]", "[lib.nsPrefix/]", "[lib.nsURI/]");
 			INSTANCE = new OCLstdlib(STDLIB_URI, libraryModel);
 		}
 		return INSTANCE;
@@ -138,7 +138,7 @@ public class [javaClass/] extends XMIResourceImpl
 		}
 
 		public Resource getResource() {
-			return OCLstdlib.create("[uri/]", "[model.name/]", "[model.nsPrefix/]", "[model.nsURI/]");
+			return OCLstdlib.create("[uri/]", "[lib.name/]", "[lib.nsPrefix/]", "[lib.nsURI/]");
 		}
 	}
 	
@@ -148,14 +148,14 @@ public class [javaClass/] extends XMIResourceImpl
 	 */
 	public static [javaClass/] create(String uri, String name, String nsPrefix, String nsURI) {
 		Contents contents = new Contents();
-		Model libraryModel = contents.create(name, nsPrefix, nsURI);
+		Root libraryModel = contents.create(name, nsPrefix, nsURI);
 		return new [javaClass/](uri, libraryModel);
 	}
 	
 	/**
 	 *	Construct an OCL Standard Library with specified resource URI and library content.
 	 */
-	public [javaClass/](String uri, Model libraryModel) {
+	public [javaClass/](String uri, Root libraryModel) {
 		super(URI.createURI(uri));
 		getContents().add(libraryModel);
 //		System.out.println(Thread.currentThread().getName() + " Create " + debugSimpleName(this));		
@@ -164,13 +164,13 @@ public class [javaClass/] extends XMIResourceImpl
 
 	protected static class Contents extends AbstractContents
 	{
-		protected Model [model.getPrefixedSymbolName('model')/];
+		protected Root [root.getPrefixedSymbolName('root')/];
 		protected Library [lib.getPrefixedSymbolName('library')/];
-		// protected Package [model.getOrphanPackage().getPrefixedSymbolName('orphans')/];
+		// protected Package [root.getOrphanPackage().getPrefixedSymbolName('orphans')/];
 
-		protected Model create(String name, String nsPrefix, String nsURI)
+		protected Root create(String name, String nsPrefix, String nsURI)
 		{
-			[model.getSymbolName()/] = createModel("[model.name/]", nsPrefix, nsURI);
+			[root.getSymbolName()/] = createRoot("[root.name/]", nsURI);
 			[lib.getSymbolName()/] = createLibrary(name, nsPrefix, nsURI);
 			installPackages();
 			installOclTypes();
@@ -190,7 +190,7 @@ public class [javaClass/] extends XMIResourceImpl
 			installTemplateBindings();
 			installPrecedences();
 			installComments();
-			return [model.getSymbolName()/];
+			return [root.getSymbolName()/];
 		}
 	
 		[lib.definePackages()/]

@@ -29,20 +29,20 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Feature;
-import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.attributes.RootAttribution;
 import org.eclipse.ocl.examples.pivot.manager.AbstractMetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.attributes.RootCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTFactory;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ClassCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.CollectionTypeRefCS;
@@ -166,11 +166,11 @@ public class ElementUtil
 		return cs2Pivot.getCSElement(obj);
 	}
 	
-	public static RootAttribution getDocumentAttribution(ElementCS context) {
+	public static RootCSAttribution getDocumentAttribution(ElementCS context) {
 		for (ElementCS target = context, parent; (parent = target.getLogicalParent()) != null; target = parent) {
 			Attribution attribution = PivotUtil.getAttribution(parent);
-			if (attribution instanceof RootAttribution) {
-				return (RootAttribution) attribution;
+			if (attribution instanceof RootCSAttribution) {
+				return (RootCSAttribution) attribution;
 			}
 		}
 		return null;
@@ -367,7 +367,7 @@ public class ElementUtil
 				if (!(eContainer instanceof NamedElement)) {
 					break;
 				}
-				if (eContainer instanceof Model) {
+				if (eContainer instanceof Root) {
 					break;				// Skip root package
 				}
 				namedElement = (NamedElement) eContainer;

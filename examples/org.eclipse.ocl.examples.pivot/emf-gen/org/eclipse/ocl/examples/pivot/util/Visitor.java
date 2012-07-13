@@ -93,7 +93,6 @@ public interface Visitor<R>
 	R visitLoopExp(org.eclipse.ocl.examples.pivot.LoopExp object);
 	R visitMessageExp(org.eclipse.ocl.examples.pivot.MessageExp object);
 	R visitMessageType(org.eclipse.ocl.examples.pivot.MessageType object);
-	R visitModel(org.eclipse.ocl.examples.pivot.Model object);
 	R visitMultiplicityElement(org.eclipse.ocl.examples.pivot.MultiplicityElement object);
 	R visitNamedElement(org.eclipse.ocl.examples.pivot.NamedElement object);
 	R visitNamespace(org.eclipse.ocl.examples.pivot.Namespace object);
@@ -116,6 +115,7 @@ public interface Visitor<R>
 	R visitProperty(org.eclipse.ocl.examples.pivot.Property object);
 	R visitPropertyCallExp(org.eclipse.ocl.examples.pivot.PropertyCallExp object);
 	R visitRealLiteralExp(org.eclipse.ocl.examples.pivot.RealLiteralExp object);
+	R visitRoot(org.eclipse.ocl.examples.pivot.Root object);
 	R visitSelfType(org.eclipse.ocl.examples.pivot.SelfType object);
 	R visitSendSignalAction(org.eclipse.ocl.examples.pivot.SendSignalAction object);
 	R visitSequenceType(org.eclipse.ocl.examples.pivot.SequenceType object);

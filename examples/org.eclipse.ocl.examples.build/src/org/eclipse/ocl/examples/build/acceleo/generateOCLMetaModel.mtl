@@ -1,18 +1,18 @@
 [comment encoding = UTF-8 /]
 [module org::eclipse::ocl::examples::build::acceleo::generateOCLMetaModel('http://www.eclipse.org/ocl/3.1.0/Pivot','http://www.eclipse.org/emf/2002/Ecore') extends org::eclipse::ocl::examples::build::acceleo::generateOCLCommon/]
 
-[template public generate(model : Model, javaPackage : String, javaClass : String, sourceFile : String, uri : String)]
+[template public generate(root : Root, javaPackage : String, javaClass : String, sourceFile : String, uri : String)]
 [comment @main /]
-[let pkg : Package = model.nestedPackage->any(name <> '$$')]
-[let allClassifierTypes : Sequence(ClassifierType) = model.eAllContents(ClassifierType)]
-[let allCollectionTypes : Sequence(CollectionType) = model.eAllContents(CollectionType)]
-[let allEnumerations : Sequence(Enumeration) = model.eAllContents(Enumeration)]
-[let allLambdaTypes : Sequence(LambdaType) = model.eAllContents(LambdaType)]
-[let allPrecedences : Sequence(Precedence) = model.eAllContents(Precedence)]
-[let allTemplateBindings : Sequence(TemplateBinding) = model.eAllContents(TemplateBinding)]
-[let allTemplateSignatures : Sequence(TemplateSignature) = model.eAllContents(TemplateSignature)]
-[let allTupleTypes : Sequence(TupleType) = model.eAllContents(TupleType)]
-[let allTypes : Sequence(Type) = model.eAllContents(Type)]
+[let pkg : Package = root.nestedPackage->any(name <> '$$')]
+[let allClassifierTypes : Sequence(ClassifierType) = root.eAllContents(ClassifierType)]
+[let allCollectionTypes : Sequence(CollectionType) = root.eAllContents(CollectionType)]
+[let allEnumerations : Sequence(Enumeration) = root.eAllContents(Enumeration)]
+[let allLambdaTypes : Sequence(LambdaType) = root.eAllContents(LambdaType)]
+[let allPrecedences : Sequence(Precedence) = root.eAllContents(Precedence)]
+[let allTemplateBindings : Sequence(TemplateBinding) = root.eAllContents(TemplateBinding)]
+[let allTemplateSignatures : Sequence(TemplateSignature) = root.eAllContents(TemplateSignature)]
+[let allTupleTypes : Sequence(TupleType) = root.eAllContents(TupleType)]
+[let allTypes : Sequence(Type) = root.eAllContents(Type)]
 [file (javaClass + '.java', false, 'UTF-8')]
 /**
  * <copyright>
@@ -70,8 +70,8 @@ public class [javaClass/] extends XMIResourceImpl
 	public static Package create(PivotStandardLibrary standardLibrary, String name, String nsPrefix, String nsURI) {
 		[javaClass/] resource = new [javaClass/](URI.createURI(PIVOT_URI));
 		Contents contents = new Contents(standardLibrary);
-		Model model = contents.create(name != null ? name : "[pkg.name/]", nsPrefix != null ? nsPrefix : "[pkg.nsPrefix/]", nsURI != null ? nsURI : "[pkg.nsURI/]");
-		resource.getContents().add(model);
+		Root root = contents.create(name != null ? name : "[pkg.name/]", nsPrefix != null ? nsPrefix : "[pkg.nsPrefix/]", nsURI != null ? nsURI : "[pkg.nsURI/]");
+		resource.getContents().add(root);
 		return contents.metamodel;
 	}
 
@@ -99,12 +99,12 @@ public class [javaClass/] extends XMIResourceImpl
 		protected final PrimitiveType [allTypes->select(name='String')->any(true).getPrefixedSymbolName('_String')/] = standardLibrary.getStringType();
 		protected final PrimitiveType [allTypes->select(name='UnlimitedNatural')->any(true).getPrefixedSymbolName('_UnlimitedNatural')/] = standardLibrary.getUnlimitedNaturalType();
 
-		protected Model [model.getPrefixedSymbolName('model')/];
+		protected Root [root.getPrefixedSymbolName('root')/];
 		protected Package [pkg.getPrefixedSymbolName('metamodel')/];
 
-		protected Model create(String name, String nsPrefix, String nsURI)
+		protected Root create(String name, String nsPrefix, String nsURI)
 		{
-			[model.getSymbolName()/] = createModel("[pkg.name/]", "[pkg.nsPrefix/]", "[pkg.nsURI/]");
+			[root.getSymbolName()/] = createRoot("[pkg.name/]", "[pkg.nsURI/]");
 			[pkg.getSymbolName()/] = createPackage(name, nsPrefix, nsURI);
 			installPackages();
 			installOclTypes();
@@ -138,7 +138,7 @@ public class [javaClass/] extends XMIResourceImpl
 			installPrecedences();
 [/if]
 			installComments();
-			return [model.getSymbolName()/];
+			return [root.getSymbolName()/];
 		}
 	
 		[pkg.definePackages()/]

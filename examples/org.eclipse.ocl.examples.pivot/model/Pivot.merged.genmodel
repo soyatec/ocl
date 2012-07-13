@@ -938,9 +938,6 @@
       </genFeatures>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass">
-      <ecoreClass href="Pivot.ecore#//Model"/>
-    </genClasses>
-    <genClasses xsi:type="genmodel:GenClass">
       <ecoreClass href="Pivot.ecore#//NullLiteralExp"/>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass">
@@ -974,6 +971,16 @@
       <ecoreClass href="Pivot.ecore#//RealLiteralExp"/>
       <genFeatures xsi:type="genmodel:GenFeature" createChild="false">
         <ecoreFeature xsi:type="ecore:EAttribute" href="Pivot.ecore#//RealLiteralExp/realSymbol"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses xsi:type="genmodel:GenClass">
+      <ecoreClass href="Pivot.ecore#//Root"/>
+      <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
+          createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//Root/nestedPackage"/>
+      </genFeatures>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="Pivot.ecore#//Root/externalURI"/>
       </genFeatures>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass">

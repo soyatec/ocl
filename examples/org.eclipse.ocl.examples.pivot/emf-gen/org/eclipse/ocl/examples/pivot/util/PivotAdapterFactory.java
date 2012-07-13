@@ -65,7 +65,6 @@ import org.eclipse.ocl.examples.pivot.LiteralExp;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.MessageExp;
 import org.eclipse.ocl.examples.pivot.MessageType;
-import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.MultiplicityElement;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
@@ -88,6 +87,7 @@ import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SelfType;
 import org.eclipse.ocl.examples.pivot.SendSignalAction;
 import org.eclipse.ocl.examples.pivot.SequenceType;
@@ -412,11 +412,6 @@ public class PivotAdapterFactory
 				return createMessageTypeAdapter();
 			}
 			@Override
-			public Adapter caseModel(Model object)
-			{
-				return createModelAdapter();
-			}
-			@Override
 			public Adapter caseMorePivotable(MorePivotable object)
 			{
 				return createMorePivotableAdapter();
@@ -540,6 +535,11 @@ public class PivotAdapterFactory
 			public Adapter caseRealLiteralExp(RealLiteralExp object)
 			{
 				return createRealLiteralExpAdapter();
+			}
+			@Override
+			public Adapter caseRoot(Root object)
+			{
+				return createRootAdapter();
 			}
 			@Override
 			public Adapter caseSelfType(SelfType object)
@@ -1266,21 +1266,6 @@ public class PivotAdapterFactory
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Model <em>Model</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.Model
-	 * @generated
-	 */
-	public Adapter createModelAdapter()
-	{
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.util.MorePivotable <em>More Pivotable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1390,6 +1375,21 @@ public class PivotAdapterFactory
 	 * @generated
 	 */
 	public Adapter createRealLiteralExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Root <em>Root</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.Root
+	 * @generated
+	 */
+	public Adapter createRootAdapter()
+	{
 		return null;
 	}
 

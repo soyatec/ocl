@@ -25,10 +25,10 @@ import org.eclipse.ocl.examples.pivot.attributes.ExpressionInOCLAttribution;
 import org.eclipse.ocl.examples.pivot.attributes.IterateExpAttribution;
 import org.eclipse.ocl.examples.pivot.attributes.IteratorExpAttribution;
 import org.eclipse.ocl.examples.pivot.attributes.LetExpAttribution;
-import org.eclipse.ocl.examples.pivot.attributes.ModelAttribution;
 import org.eclipse.ocl.examples.pivot.attributes.OperationAttribution;
 import org.eclipse.ocl.examples.pivot.attributes.OperationCallExpAttribution;
 import org.eclipse.ocl.examples.pivot.attributes.PackageAttribution;
+import org.eclipse.ocl.examples.pivot.attributes.RootAttribution;
 import org.eclipse.ocl.examples.pivot.attributes.UnspecifiedTypeAttribution;
 import org.eclipse.ocl.examples.pivot.attributes.VoidTypeAttribution;
 
@@ -45,10 +45,10 @@ public class PivotScoping
 		registry.put(PivotPackage.Literals.ITERATE_EXP, IterateExpAttribution.INSTANCE);
 		registry.put(PivotPackage.Literals.ITERATOR_EXP, IteratorExpAttribution.INSTANCE);
 		registry.put(PivotPackage.Literals.LET_EXP, LetExpAttribution.INSTANCE);
-		registry.put(PivotPackage.Literals.MODEL, ModelAttribution.INSTANCE);
 		registry.put(PivotPackage.Literals.OPERATION, OperationAttribution.INSTANCE);
 		registry.put(PivotPackage.Literals.OPERATION_CALL_EXP, OperationCallExpAttribution.INSTANCE);
 		registry.put(PivotPackage.Literals.PACKAGE, PackageAttribution.INSTANCE);
+		registry.put(PivotPackage.Literals.ROOT, RootAttribution.INSTANCE);
 		registry.put(PivotPackage.Literals.UNSPECIFIED_TYPE, UnspecifiedTypeAttribution.INSTANCE);
 		registry.put(PivotPackage.Literals.VOID_TYPE, VoidTypeAttribution.INSTANCE);
 	}

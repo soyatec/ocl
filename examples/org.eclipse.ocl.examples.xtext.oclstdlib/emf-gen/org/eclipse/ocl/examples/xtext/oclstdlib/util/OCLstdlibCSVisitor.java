@@ -35,6 +35,7 @@ public interface OCLstdlibCSVisitor<R> extends org.eclipse.ocl.examples.xtext.es
 	R visitLibOperationCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS object);
 	R visitLibPackageCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS object);
 	R visitLibPropertyCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPropertyCS object);
+	R visitLibRootPackageCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS object);
 	R visitMetaTypeName(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName object);
 	R visitPrecedenceCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS object);
 }

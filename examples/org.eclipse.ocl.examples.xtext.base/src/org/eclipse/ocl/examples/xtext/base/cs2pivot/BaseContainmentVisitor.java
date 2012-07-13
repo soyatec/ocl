@@ -20,13 +20,13 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Detail;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
-import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.MultiplicityElement;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
@@ -36,6 +36,7 @@ import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -171,7 +172,6 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 		if (pivotObject == null) {
 			pivotElement = metaModelManager.createPackage(pivotClass, pivotEClass, name, csElement.getNsURI());
 //			logger.trace("Created " + pivotEClass.getName() + " : " + moniker); //$NON-NLS-1$ //$NON-NLS-2$
-//			metaModelManager.addPackage(pivotElement);
 		}
 		else {
 			if (!pivotClass.isAssignableFrom(pivotObject.getClass())) {
@@ -197,6 +197,56 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 		}
 		context.refreshPivotList(org.eclipse.ocl.examples.pivot.Package.class, pivotElement.getNestedPackage(), csElement.getOwnedNestedPackage());
 		context.refreshPivotList(Type.class, pivotElement.getOwnedType(), csElement.getOwnedType());
+		return pivotElement;
+	}
+
+	protected <T extends Root> T refreshRoot(Class<T> pivotClass, EClass pivotEClass, PackageCS csElement) {
+		Resource csResource = csElement.eResource();
+		Object pivotObject = csElement.getPivot();
+		if (pivotObject == null) {
+			Resource pivotResource = context.converter.getPivotResource(csResource);
+			if (pivotResource != null) {
+				for (EObject oldRoot : pivotResource.getContents()) {
+					if (oldRoot instanceof Root) {
+						pivotObject = oldRoot;
+						break;
+					}
+				}
+			}
+		}
+		URI csURI = null;
+		String name = csElement.getName();
+		if ((name == null) && (csElement.eContainer() == null)) {
+			if (csResource != null) {
+				csURI = csResource.getURI();
+				if (csURI != null) {
+					name = csURI.lastSegment();
+				}
+			}
+		}
+		T pivotElement;
+		if (pivotObject == null) {
+			pivotElement = metaModelManager.createRoot(pivotClass, pivotEClass, name, csElement.getNsURI());
+//			logger.trace("Created " + pivotEClass.getName() + " : " + moniker); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		else {
+			if (!pivotClass.isAssignableFrom(pivotObject.getClass())) {
+				throw new ClassCastException();
+			}
+			@SuppressWarnings("unchecked")
+			T pivotElement2 = (T) pivotObject;
+			pivotElement = pivotElement2;
+//			logger.trace("Reusing " + pivotEClass.getName() + " : " + moniker); //$NON-NLS-1$ //$NON-NLS-2$
+			context.refreshName(pivotElement, name);
+		}
+		context.converter.installPivotDefinition(csElement, pivotElement);
+		context.refreshComments(pivotElement, csElement);
+		String newNsURI = csElement.eResource().getURI().toString(); //csElement.getNsURI();
+		String oldNsURI = pivotElement.getExternalURI();
+		if ((newNsURI != oldNsURI) && ((newNsURI == null) || !newNsURI.equals(oldNsURI))) {
+			pivotElement.setExternalURI(newNsURI);
+		}
+		context.refreshPivotList(org.eclipse.ocl.examples.pivot.Package.class, pivotElement.getNestedPackage(), csElement.getOwnedNestedPackage());
 		return pivotElement;
 	}
 
@@ -361,7 +411,7 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 	@Override
 	public Continuation<?> visitRootPackageCS(RootPackageCS csElement) {
 		importPackages(csElement);
-		refreshPackage(Model.class, PivotPackage.Literals.MODEL, csElement);
+		refreshRoot(Root.class, PivotPackage.Literals.ROOT, csElement);
 		return null;
 	}
 

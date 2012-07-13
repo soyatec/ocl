@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
@@ -289,7 +290,7 @@ public class PivotTests extends XtextTestCase
 		assertNoUnresolvedProxies("Unresolved proxies", ecoreResource);
 //		EcoreAliasCreator.createPackageAliases(ecoreResource);
 		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager);
-		org.eclipse.ocl.examples.pivot.Package pivotRoot = ecore2Pivot.getPivotRoot();
+		Root pivotRoot = ecore2Pivot.getPivotRoot();
 		
 		
 //		checkPivotMonikers(pivotRoot);

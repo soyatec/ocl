@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
@@ -191,20 +192,12 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 
 	@Override
 	public ElementCS visitPackage(org.eclipse.ocl.examples.pivot.Package object) {
-		PackageCS csElement;
-		if (object.eContainer() == null) {
-			// Lose the name to lose the 'module' declaration, there are no annotations
-			csElement = context.refreshElement(RootPackageCS.class, BaseCSTPackage.Literals.ROOT_PACKAGE_CS, object);
-		}
-		else {
-			PackageCS csPackage = context.refreshNamedElement(PackageCS.class, BaseCSTPackage.Literals.PACKAGE_CS, object);
-			context.refreshList(csPackage.getOwnedType(), context.visitDeclarations(ClassifierCS.class, object.getOwnedType(), null));
-			csElement = csPackage;
-		}
-		csElement.setNsPrefix(object.getNsPrefix());
-		csElement.setNsURI(object.getNsURI());
-		context.refreshList(csElement.getOwnedNestedPackage(), context.visitDeclarations(PackageCS.class, object.getNestedPackage(), null));
-		return csElement;
+		PackageCS csPackage = context.refreshNamedElement(PackageCS.class, BaseCSTPackage.Literals.PACKAGE_CS, object);
+		context.refreshList(csPackage.getOwnedType(), context.visitDeclarations(ClassifierCS.class, object.getOwnedType(), null));
+		csPackage.setNsPrefix(object.getNsPrefix());
+		csPackage.setNsURI(object.getNsURI());
+		context.refreshList(csPackage.getOwnedNestedPackage(), context.visitDeclarations(PackageCS.class, object.getNestedPackage(), null));
+		return csPackage;
 	}
 
 	@Override
@@ -237,6 +230,15 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 			context.refreshList(csElement.getKeys(), object.getKeys());
 			return csElement;
 		}
+	}
+
+	@Override
+	public ElementCS visitRoot(Root object) {
+		RootPackageCS csElement = context.refreshElement(RootPackageCS.class, BaseCSTPackage.Literals.ROOT_PACKAGE_CS, object);
+//		csElement.setNsURI(object.getExternalURI());
+		csElement.setNsURI(null);
+		context.refreshList(csElement.getOwnedNestedPackage(), context.visitDeclarations(PackageCS.class, object.getNestedPackage(), null));
+		return csElement;
 	}
 
 	@Override

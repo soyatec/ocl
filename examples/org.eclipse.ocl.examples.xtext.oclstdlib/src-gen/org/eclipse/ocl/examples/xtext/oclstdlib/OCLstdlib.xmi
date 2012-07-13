@@ -20,8 +20,8 @@
       <ePackage href="http://www.eclipse.org/xtext/common/JavaVMTypes#/"/>
     </metamodelDeclarations>
     <rules xsi:type="xtext:ParserRule" name="Library">
-      <type metamodel="/0/@metamodelDeclarations.1">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/BaseCST#//RootPackageCS"/>
+      <type metamodel="/0/@metamodelDeclarations.3">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/OCLstdlibCST#//LibRootPackageCS"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Group" cardinality="*">

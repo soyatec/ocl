@@ -51,6 +51,7 @@ import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
@@ -125,16 +126,15 @@ public class Pivot2Ecore extends AbstractConversion
 		ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
 		XMLResource ecoreResource = (XMLResource) resourceSet.createResource(ecoreURI);
 		List<EObject> contents = ecoreResource.getContents();
-		List<EObject> pivotRoots = pivotResource.getContents();
-		Pivot2Ecore converter = new Pivot2Ecore(metaModelManager, ecoreURI, options);
-		List<? extends EObject> outputObjects = converter.convertAll(pivotRoots);
-		for (EObject eObject : outputObjects) {
-			if ((eObject instanceof EPackage) && !PivotConstants.ORPHANAGE_NAME.equals(((EPackage)eObject).getName())) {
-				List<EPackage> eSubpackages = ((EPackage)eObject).getESubpackages();
-				contents.addAll(eSubpackages);
-				eSubpackages.clear();
+		List<EObject> pivotRoots = new ArrayList<EObject>();
+		for (EObject root : pivotResource.getContents()) {
+			if (root instanceof Root) {
+				pivotRoots.addAll(((Root)root).getNestedPackage());
 			}
 		}
+		Pivot2Ecore converter = new Pivot2Ecore(metaModelManager, ecoreURI, options);
+		List<? extends EObject> outputObjects = converter.convertAll(pivotRoots);
+		contents.addAll(outputObjects);
 		return ecoreResource;
 	}
 	
@@ -339,7 +339,10 @@ public class Pivot2Ecore extends AbstractConversion
 		List<EObject> eObjects = new ArrayList<EObject>();
 		for (EObject pivotObject : pivotObjects) {
 			if (pivotObject instanceof Element) {
-				eObjects.add(pass1.safeVisit((Visitable) pivotObject));
+				EObject ecoreObject = pass1.safeVisit((Visitable) pivotObject);
+				if (ecoreObject != null) {
+					eObjects.add(ecoreObject);
+				}
 			}
 		}
 		for (Element eKey : deferMap) {

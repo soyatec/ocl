@@ -35,11 +35,14 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.NamespaceCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PivotableElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.RootCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.StructuralFeatureCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateableElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypeCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.*;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.JavaImplementationCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibClassCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibConstraintCS;
@@ -148,6 +151,11 @@ public class OCLstdlibCSTAdapterFactory
 				return createLibPropertyCSAdapter();
 			}
 			@Override
+			public Adapter caseLibRootPackageCS(LibRootPackageCS object)
+			{
+				return createLibRootPackageCSAdapter();
+			}
+			@Override
 			public Adapter caseMetaTypeName(MetaTypeName object)
 			{
 				return createMetaTypeNameAdapter();
@@ -253,6 +261,16 @@ public class OCLstdlibCSTAdapterFactory
 				return createAttributeCSAdapter();
 			}
 			@Override
+			public Adapter caseRootCS(RootCS object)
+			{
+				return createRootCSAdapter();
+			}
+			@Override
+			public Adapter caseRootPackageCS(RootPackageCS object)
+			{
+				return createRootPackageCSAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object)
 			{
 				return createEObjectAdapter();
@@ -354,6 +372,21 @@ public class OCLstdlibCSTAdapterFactory
 	 * @generated
 	 */
 	public Adapter createLibPropertyCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS <em>Lib Root Package CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS
+	 * @generated
+	 */
+	public Adapter createLibRootPackageCSAdapter()
+	{
 		return null;
 	}
 
@@ -606,6 +639,36 @@ public class OCLstdlibCSTAdapterFactory
 	 * @generated
 	 */
 	public Adapter createAttributeCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.baseCST.RootCS <em>Root CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.RootCS
+	 * @generated
+	 */
+	public Adapter createRootCSAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS <em>Root Package CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS
+	 * @generated
+	 */
+	public Adapter createRootPackageCSAdapter()
+	{
 		return null;
 	}
 

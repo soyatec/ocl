@@ -33,6 +33,7 @@ import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDe
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
@@ -96,7 +97,7 @@ public class ConstraintMerger extends AbstractProjectComponent
 		});
 //		metaModelManager.getBooleanType();
 		Ecore2Pivot ecore2pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager);
-		org.eclipse.ocl.examples.pivot.Package pivotRoot = ecore2pivot.getPivotRoot();
+		Root pivotRoot = ecore2pivot.getPivotRoot();
 		Resource pivotResource = pivotRoot.eResource();
 //FIXME		diagnoseErrors(pivotResource);
 //		URI fileURI = URI.createPlatformResourceURI(uri, true);

@@ -946,6 +946,133 @@ public interface OCLstdlibCSTPackage
 	int LIB_PROPERTY_CS_FEATURE_COUNT = BaseCSTPackage.ATTRIBUTE_CS_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibRootPackageCSImpl <em>Lib Root Package CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibRootPackageCSImpl
+	 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.OCLstdlibCSTPackageImpl#getLibRootPackageCS()
+	 * @generated
+	 */
+	int LIB_ROOT_PACKAGE_CS = 7;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_ROOT_PACKAGE_CS__LOGICAL_PARENT = BaseCSTPackage.ROOT_PACKAGE_CS__LOGICAL_PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_ROOT_PACKAGE_CS__PIVOT = BaseCSTPackage.ROOT_PACKAGE_CS__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_ROOT_PACKAGE_CS__OWNED_ANNOTATION = BaseCSTPackage.ROOT_PACKAGE_CS__OWNED_ANNOTATION;
+
+	/**
+	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_ROOT_PACKAGE_CS__ORIGINAL_XMI_ID = BaseCSTPackage.ROOT_PACKAGE_CS__ORIGINAL_XMI_ID;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_ROOT_PACKAGE_CS__CSI = BaseCSTPackage.ROOT_PACKAGE_CS__CSI;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_ROOT_PACKAGE_CS__NAME = BaseCSTPackage.ROOT_PACKAGE_CS__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_ROOT_PACKAGE_CS__OWNED_TYPE = BaseCSTPackage.ROOT_PACKAGE_CS__OWNED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Owned Nested Package</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_ROOT_PACKAGE_CS__OWNED_NESTED_PACKAGE = BaseCSTPackage.ROOT_PACKAGE_CS__OWNED_NESTED_PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_ROOT_PACKAGE_CS__NS_PREFIX = BaseCSTPackage.ROOT_PACKAGE_CS__NS_PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Ns URI</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_ROOT_PACKAGE_CS__NS_URI = BaseCSTPackage.ROOT_PACKAGE_CS__NS_URI;
+
+	/**
+	 * The feature id for the '<em><b>Owned Import</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_ROOT_PACKAGE_CS__OWNED_IMPORT = BaseCSTPackage.ROOT_PACKAGE_CS__OWNED_IMPORT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Library</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_ROOT_PACKAGE_CS__OWNED_LIBRARY = BaseCSTPackage.ROOT_PACKAGE_CS__OWNED_LIBRARY;
+
+	/**
+	 * The number of structural features of the '<em>Lib Root Package CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_ROOT_PACKAGE_CS_FEATURE_COUNT = BaseCSTPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.MetaTypeNameImpl <em>Meta Type Name</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -953,7 +1080,7 @@ public interface OCLstdlibCSTPackage
 	 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.OCLstdlibCSTPackageImpl#getMetaTypeName()
 	 * @generated
 	 */
-	int META_TYPE_NAME = 7;
+	int META_TYPE_NAME = 8;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -981,7 +1108,7 @@ public interface OCLstdlibCSTPackage
 	 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.OCLstdlibCSTPackageImpl#getPrecedenceCS()
 	 * @generated
 	 */
-	int PRECEDENCE_CS = 8;
+	int PRECEDENCE_CS = 9;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -1193,6 +1320,16 @@ public interface OCLstdlibCSTPackage
 	EAttribute getLibPropertyCS_Static();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS <em>Lib Root Package CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Lib Root Package CS</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS
+	 * @generated
+	 */
+	EClass getLibRootPackageCS();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName <em>Meta Type Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1393,6 +1530,16 @@ public interface OCLstdlibCSTPackage
 		 * @generated
 		 */
 		EAttribute LIB_PROPERTY_CS__STATIC = eINSTANCE.getLibPropertyCS_Static();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibRootPackageCSImpl <em>Lib Root Package CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibRootPackageCSImpl
+		 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.OCLstdlibCSTPackageImpl#getLibRootPackageCS()
+		 * @generated
+		 */
+		EClass LIB_ROOT_PACKAGE_CS = eINSTANCE.getLibRootPackageCS();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.MetaTypeNameImpl <em>Meta Type Name</em>}' class.

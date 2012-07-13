@@ -75,7 +75,7 @@ public class OCLstdlib extends XMIResourceImpl
 	public static OCLstdlib getDefault() {
 		if (INSTANCE == null) {
 			Contents contents = new Contents();
-			Model libraryModel = contents.create("OCL-2.4.oclstdlib", "", "");
+			Root libraryModel = contents.create("ocl", "ocl", "http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib");
 			INSTANCE = new OCLstdlib(STDLIB_URI, libraryModel);
 		}
 		return INSTANCE;
@@ -129,7 +129,7 @@ public class OCLstdlib extends XMIResourceImpl
 		}
 
 		public Resource getResource() {
-			return OCLstdlib.create("http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib", "OCL-2.4.oclstdlib", "", "");
+			return OCLstdlib.create("http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib", "ocl", "ocl", "http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib");
 		}
 	}
 	
@@ -139,14 +139,14 @@ public class OCLstdlib extends XMIResourceImpl
 	 */
 	public static OCLstdlib create(String uri, String name, String nsPrefix, String nsURI) {
 		Contents contents = new Contents();
-		Model libraryModel = contents.create(name, nsPrefix, nsURI);
+		Root libraryModel = contents.create(name, nsPrefix, nsURI);
 		return new OCLstdlib(uri, libraryModel);
 	}
 	
 	/**
 	 *	Construct an OCL Standard Library with specified resource URI and library content.
 	 */
-	public OCLstdlib(String uri, Model libraryModel) {
+	public OCLstdlib(String uri, Root libraryModel) {
 		super(URI.createURI(uri));
 		getContents().add(libraryModel);
 //		System.out.println(Thread.currentThread().getName() + " Create " + debugSimpleName(this));		
@@ -155,13 +155,13 @@ public class OCLstdlib extends XMIResourceImpl
 
 	protected static class Contents extends AbstractContents
 	{
-		protected Model model;
+		protected Root root;
 		protected Library library;
 		// protected Package orphans;
 
-		protected Model create(String name, String nsPrefix, String nsURI)
+		protected Root create(String name, String nsPrefix, String nsURI)
 		{
-			model = createModel("OCL-2.4.oclstdlib", nsPrefix, nsURI);
+			root = createRoot("OCL-2.4.oclstdlib", nsURI);
 			library = createLibrary(name, nsPrefix, nsURI);
 			installPackages();
 			installOclTypes();
@@ -178,14 +178,14 @@ public class OCLstdlib extends XMIResourceImpl
 			installTemplateBindings();
 			installPrecedences();
 			installComments();
-			return model;
+			return root;
 		}
 	
-		protected final Package orphans = createPackage("$$", null, null);
+		protected final Package orphans = createPackage("$$", null, "http://www.eclipse.org/ocl/3.1.0/orphanage");
 		
 		protected void installPackages() {
-			model.getNestedPackage().add(orphans);
-			model.getNestedPackage().add(library);
+			root.getNestedPackage().add(orphans);
+			root.getNestedPackage().add(library);	
 		}
 		
 		protected final Class _Class = createClass("Class");
@@ -2133,8 +2133,8 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedParameters.add(parameter = createParameter("body", _Lambda_Collection_T));
 			ownedIterations.add(iteration = it_Collection_Collection_T_forAll);
 			ownedParameters = iteration.getOwnedIterator();
-			ownedParameters.add(parameter = createParameter("i", _Collection_T));
 			ownedParameters.add(parameter = createParameter("j", _Collection_T));
+			ownedParameters.add(parameter = createParameter("i", _Collection_T));
 			ownedParameters = iteration.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("body", _Lambda_Collection_T));
 			ownedIterations.add(iteration = it_Collection_Collection_T_forAll_1);

@@ -32,6 +32,7 @@ import org.eclipse.ocl.examples.build.acceleo.GenerateOCLMetaModel;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.ocl.examples.pivot.Package;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
@@ -97,7 +98,7 @@ public class OCLMetaModelCodeGenerator extends AbstractWorkflowComponent
 				return;
 			}
 			Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager);
-			org.eclipse.ocl.examples.pivot.Package pivotRoot = ecore2Pivot.getPivotRoot();
+			Root pivotRoot = ecore2Pivot.getPivotRoot();
 			Package pivotPackage = pivotRoot.getNestedPackage().get(0);
 			Resource pivotResource = pivotRoot.eResource();
 			String pivotErrorsString = PivotUtil.formatResourceDiagnostics(pivotResource.getErrors(), "Converting " + inputURI, "\n");

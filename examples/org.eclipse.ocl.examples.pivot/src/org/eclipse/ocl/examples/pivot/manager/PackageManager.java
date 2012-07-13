@@ -25,8 +25,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.ocl.examples.pivot.Library;
-import org.eclipse.ocl.examples.pivot.Model;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
@@ -40,7 +39,7 @@ public class PackageManager
 	 */
 	protected final MetaModelManager metaModelManager;
 
-	private final Set<Model> models = new HashSet<Model>();
+	private final Set<Root> roots = new HashSet<Root>();
 
 	/**
 	 * Map from package URI to primary package. 
@@ -69,9 +68,9 @@ public class PackageManager
 		this.metaModelManager = metaModelManager;
 	}
 	
-	public void addModel(Model pivotModel) {
-		models.add(pivotModel);
-		for (org.eclipse.ocl.examples.pivot.Package pivotPackage : pivotModel.getNestedPackage()) {
+	public void addRoot(Root pivotRoot) {
+		roots.add(pivotRoot);
+		for (org.eclipse.ocl.examples.pivot.Package pivotPackage : pivotRoot.getNestedPackage()) {
 			String nsURI = pivotPackage.getNsURI();
 			org.eclipse.ocl.examples.pivot.Package primaryPackage = null;
 			if (nsURI != null) {										// Explicit nsURI for explicit package (merge)
@@ -93,7 +92,7 @@ public class PackageManager
 					packageTracker.getPackageServer().addSecondaryPackage(pivotPackage);
 				}
 				else {
-					putPackage(nsURI, pivotPackage);
+					putPackage(nsURI, pivotPackage);					// FIXME Skip orphans
 				}
 			}
 			for (org.eclipse.ocl.examples.pivot.Package nestedPackage : pivotPackage.getNestedPackage()) {
@@ -201,10 +200,6 @@ public class PackageManager
 		return metaModelManager;
 	}
 
-	public Iterable<Model> getModels() {
-		return models;
-	}
-
 	public org.eclipse.ocl.examples.pivot.Package getPackageByName(String name) {
 		List<String> uriList = name2uris.get(name);
 		if ((uriList == null) || uriList.isEmpty()) {
@@ -235,10 +230,14 @@ public class PackageManager
 		return packageTracker;
 	}
 
+	public Iterable<Root> getRoots() {
+		return roots;
+	}
+
 	protected void putPackage(String nsURI, org.eclipse.ocl.examples.pivot.Package pivotPackage) {
 		uri2package.put(nsURI, pivotPackage);
 		String name = pivotPackage.getName();
-		if ((name != null) && ((pivotPackage instanceof Library) || !(pivotPackage instanceof Model))) { // BUG 376596
+		if (name != null) {
 			List<String> uriList = name2uris.get(name);
 			if (uriList == null) {
 				uriList = new ArrayList<String>();

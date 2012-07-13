@@ -5,12 +5,15 @@
 invoke('org.eclipse.ocl.examples.build.acceleo.NameQueries', 'getMoniker(org.eclipse.ocl.examples.pivot.Element)', Sequence{elem}) /]
 
 [query public getOrphanPackage(elem : Package) : Package =
-elem.getRootPackage()->closure(nestedPackage)->any(name='$$')/]
+getOrphanPackage(elem.getRootPackage())/]
 
-[query public getRootPackage(elem : Package) : Package =
-if elem.nestingPackage->notEmpty() then elem.nestingPackage.getRootPackage() else elem endif/]
+[query public getOrphanPackage(elem : Root) : Package =
+elem.nestedPackage->closure(nestedPackage)->union(elem.nestedPackage)->any(name='$$')/]
 
-[query public getSignature(elem : NamedElement) : String = 
+[query public getRootPackage(elem : Package) : Root =
+elem.ancestors(Root)->any(true)/]
+
+[query public getSignature(elem : NamedElement) : String =
 let parent : EObject = elem.eContainer() in
 if not parent.oclIsUndefined() then parent.oclAsType(NamedElement).getSignature() + '::' + elem.name
 else elem.name endif/]
@@ -242,9 +245,9 @@ protected void installLambdaTypes() {
 [/for]
 	type.setResultType([type.resultType.getSymbolName()/]);
 	[type.emitSuperClasses()/]
-[/for]
+[/for][/let]
 }
-[/let][/let][/let]
+[/let][/let]
 [/template]
 
 [template public defineOclTypes(pkg : Package)]
@@ -310,9 +313,9 @@ protected void installOperations() {
 [/template]
 
 [template public definePackages(pkg : Package)]
-[let rootPackage : Package = pkg.getRootPackage()]
-[let allPackages : OrderedSet(Package) = rootPackage.eAllContents(Package)->including(rootPackage)->asSet()->sortedBy(getMoniker())]
-[let morePackages : OrderedSet(Package) = allPackages->excluding(pkg)->excluding(rootPackage)]
+[let rootPackage : Root = pkg.getRootPackage()]
+[let allPackages : OrderedSet(Package) = rootPackage.eAllContents(Package)->asSet()->sortedBy(getMoniker())]
+[let morePackages : OrderedSet(Package) = allPackages->excluding(pkg)]
 [if (morePackages->notEmpty())]
 [for (pkg : Package | morePackages)]
 protected final [pkg.eClass().name/] [pkg.getPrefixedSymbolName('pk_'+pkg.partialName())/] = create[pkg.eClass().name/]("[pkg.name/]", [if pkg.nsPrefix <> null]"[pkg.nsPrefix/]"[else]null[/if], [if pkg.nsURI <> null]"[pkg.nsURI/]"[else]null[/if]);
@@ -320,7 +323,9 @@ protected final [pkg.eClass().name/] [pkg.getPrefixedSymbolName('pk_'+pkg.partia
 
 [/if]
 protected void installPackages() {
+	[emitRoot(rootPackage)/][if (allPackages->notEmpty())]
 	[for (pkg1 : Package | allPackages)][emitPackage(pkg1)/][/for]
+[/if]
 }
 [/let]
 [/let]
@@ -482,6 +487,12 @@ protected void installTupleTypes() {
 [/template]
 
 [template public emitPackage(pkg : Package)]
+[for (nestedPackage : Package | pkg.nestedPackage->sortedBy(name)) separator('\n')]
+[if (nestedPackage.nestedPackage->notEmpty())]
+[emitPackage(nestedPackage)/][/if]
+[pkg.getSymbolName()/].getNestedPackage().add([nestedPackage.getSymbolName()/]);[/for][/template]
+
+[template public emitRoot(pkg : Root)]
 [for (nestedPackage : Package | pkg.nestedPackage->sortedBy(name)) separator('\n')]
 [if (nestedPackage.nestedPackage->notEmpty())]
 [emitPackage(nestedPackage)/][/if]

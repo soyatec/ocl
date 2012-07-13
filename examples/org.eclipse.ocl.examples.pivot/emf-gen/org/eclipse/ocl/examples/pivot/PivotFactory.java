@@ -524,15 +524,6 @@ public interface PivotFactory
 	MessageType createMessageType();
 
 	/**
-	 * Returns a new object of class '<em>Model</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Model</em>'.
-	 * @generated
-	 */
-	Model createModel();
-
-	/**
 	 * Returns a new object of class '<em>Null Literal Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -585,6 +576,15 @@ public interface PivotFactory
 	 * @generated
 	 */
 	RealLiteralExp createRealLiteralExp();
+
+	/**
+	 * Returns a new object of class '<em>Root</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Root</em>'.
+	 * @generated
+	 */
+	Root createRoot();
 
 	/**
 	 * Returns a new object of class '<em>Self Type</em>'.

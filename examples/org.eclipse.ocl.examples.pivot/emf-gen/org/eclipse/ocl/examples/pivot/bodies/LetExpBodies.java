@@ -65,17 +65,17 @@ public class LetExpBodies
 			final LibraryProperty IP_LetExp_in = P_LetExp_in.getImplementation();
 			
 			
-			Value A_symbol_64 = IP_TypedElement_type.evaluate(evaluator, T_Type, self, P_TypedElement_type);
+			Value A_symbol_336 = IP_TypedElement_type.evaluate(evaluator, T_Type, self, P_TypedElement_type);
 			
 			
-			Value A_symbol_65 = IP_LetExp_in.evaluate(evaluator, T_pivot__OCLExpression, self, P_LetExp_in);
+			Value A_symbol_337 = IP_LetExp_in.evaluate(evaluator, T_pivot__OCLExpression, self, P_LetExp_in);
 			
-			Value A_symbol_66 = IP_TypedElement_type.evaluate(evaluator, T_Type, A_symbol_65, P_TypedElement_type);
+			Value A_symbol_338 = IP_TypedElement_type.evaluate(evaluator, T_Type, A_symbol_337, P_TypedElement_type);
 			
-			DomainType static_A_symbol_67 = valueFactory.typeOf(A_symbol_64, A_symbol_66);
-			LibraryBinaryOperation dynamic_A_symbol_67 = (LibraryBinaryOperation)static_A_symbol_67.lookupImplementation(standardLibrary, O_OclAny__eq_);
-			Value A_symbol_67 = dynamic_A_symbol_67.evaluate(evaluator, T_Boolean, A_symbol_64, A_symbol_66);
-			return A_symbol_67;
+			DomainType static_A_symbol_339 = valueFactory.typeOf(A_symbol_336, A_symbol_338);
+			LibraryBinaryOperation dynamic_A_symbol_339 = (LibraryBinaryOperation)static_A_symbol_339.lookupImplementation(standardLibrary, O_OclAny__eq_);
+			Value A_symbol_339 = dynamic_A_symbol_339.evaluate(evaluator, T_Boolean, A_symbol_336, A_symbol_338);
+			return A_symbol_339;
 		}
 	}
 

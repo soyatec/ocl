@@ -65,6 +65,10 @@ public abstract class AbstractNullOCLstdlibCSVisitor<R, C>
 		return null;
 	}
 
+	public R visitLibRootPackageCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS object) {
+		return null;
+	}
+
 	public R visitMetaTypeName(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName object) {
 		return null;
 	}

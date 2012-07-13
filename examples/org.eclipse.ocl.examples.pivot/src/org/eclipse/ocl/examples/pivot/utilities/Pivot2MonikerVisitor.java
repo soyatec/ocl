@@ -52,6 +52,7 @@ import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
@@ -453,6 +454,12 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 	public Object visitRealLiteralExp(RealLiteralExp object) {
 		appendExpPrefix(object);
 		context.append(object.getRealSymbol().toString());
+		return true;
+	}
+
+	@Override
+	public Object visitRoot(Root object) {
+		context.append(MONIKER_ROOT);
 		return true;
 	}
 

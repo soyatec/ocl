@@ -31,10 +31,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -282,8 +282,8 @@ public class EnvironmentView
 	}
 
 	public void addRootPackages() {
-		for (Model model : metaModelManager.getPackageManager().getModels()) {
-			for (org.eclipse.ocl.examples.pivot.Package pPackage : model.getNestedPackage()) {
+		for (Root root : metaModelManager.getPackageManager().getRoots()) {
+			for (org.eclipse.ocl.examples.pivot.Package pPackage : root.getNestedPackage()) {
 				addNamedElement(pPackage);
 			}
 		}

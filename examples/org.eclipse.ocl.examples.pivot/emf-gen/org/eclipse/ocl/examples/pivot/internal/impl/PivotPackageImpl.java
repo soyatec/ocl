@@ -78,7 +78,6 @@ import org.eclipse.ocl.examples.pivot.LiteralExp;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.MessageExp;
 import org.eclipse.ocl.examples.pivot.MessageType;
-import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.MultiplicityElement;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
@@ -102,6 +101,7 @@ import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SelfType;
 import org.eclipse.ocl.examples.pivot.SendSignalAction;
 import org.eclipse.ocl.examples.pivot.SequenceType;
@@ -421,13 +421,6 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass modelEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass morePivotableEClass = null;
 
 	/**
@@ -478,6 +471,13 @@ public class PivotPackageImpl
 	 * @generated
 	 */
 	private EClass realLiteralExpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass rootEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2440,16 +2440,6 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getModel()
-	{
-		return modelEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getMorePivotable()
 	{
 		return morePivotableEClass;
@@ -2562,6 +2552,36 @@ public class PivotPackageImpl
 	 */
 	public EAttribute getRealLiteralExp_RealSymbol() {
 		return (EAttribute)realLiteralExpEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRoot()
+	{
+		return rootEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRoot_NestedPackage()
+	{
+		return (EReference)rootEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRoot_ExternalURI()
+	{
+		return (EAttribute)rootEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -4651,8 +4671,6 @@ public class PivotPackageImpl
 		createEReference(messageTypeEClass, MESSAGE_TYPE__REFERRED_SIGNAL);
 		createEReference(messageTypeEClass, MESSAGE_TYPE__REFERRED_OPERATION);
 
-		modelEClass = createEClass(MODEL);
-
 		morePivotableEClass = createEClass(MORE_PIVOTABLE);
 
 		multiplicityElementEClass = createEClass(MULTIPLICITY_ELEMENT);
@@ -4766,6 +4784,10 @@ public class PivotPackageImpl
 
 		realLiteralExpEClass = createEClass(REAL_LITERAL_EXP);
 		createEAttribute(realLiteralExpEClass, REAL_LITERAL_EXP__REAL_SYMBOL);
+
+		rootEClass = createEClass(ROOT);
+		createEReference(rootEClass, ROOT__NESTED_PACKAGE);
+		createEAttribute(rootEClass, ROOT__EXTERNAL_URI);
 
 		selfTypeEClass = createEClass(SELF_TYPE);
 		createEOperation(selfTypeEClass, SELF_TYPE___RESOLVE_SELF_TYPE__TYPE_1);
@@ -4982,7 +5004,6 @@ public class PivotPackageImpl
 		loopExpEClass.getESuperTypes().add(this.getCallExp());
 		messageExpEClass.getESuperTypes().add(this.getOCLExpression());
 		messageTypeEClass.getESuperTypes().add(this.getType());
-		modelEClass.getESuperTypes().add(this.getPackage());
 		multiplicityElementEClass.getESuperTypes().add(this.getElement());
 		namedElementEClass.getESuperTypes().add(this.getElement());
 		namedElementEClass.getESuperTypes().add(this.getNameable());
@@ -5012,6 +5033,7 @@ public class PivotPackageImpl
 		propertyEClass.getESuperTypes().add(this.getParameterableElement());
 		propertyCallExpEClass.getESuperTypes().add(this.getNavigationCallExp());
 		realLiteralExpEClass.getESuperTypes().add(this.getNumericLiteralExp());
+		rootEClass.getESuperTypes().add(this.getNamespace());
 		selfTypeEClass.getESuperTypes().add(this.getClass_());
 		sendSignalActionEClass.getESuperTypes().add(this.getNamedElement());
 		sequenceTypeEClass.getESuperTypes().add(this.getCollectionType());
@@ -5661,8 +5683,6 @@ public class PivotPackageImpl
 		initEReference(getMessageType_ReferredSignal(), this.getSignal(), null, "referredSignal", null, 0, 1, MessageType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 		initEReference(getMessageType_ReferredOperation(), this.getOperation(), null, "referredOperation", null, 0, 1, MessageType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-
 		initEClass(morePivotableEClass, MorePivotable.class, "MorePivotable", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
 		initEClass(multiplicityElementEClass, MultiplicityElement.class, "MultiplicityElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -5812,6 +5832,10 @@ public class PivotPackageImpl
 
 		initEClass(realLiteralExpEClass, RealLiteralExp.class, "RealLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(getRealLiteralExp_RealSymbol(), this.getReal(), "realSymbol", null, 1, 1, RealLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getRoot_NestedPackage(), this.getPackage(), null, "nestedPackage", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(getRoot_ExternalURI(), this.getString(), "externalURI", null, 0, 1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(selfTypeEClass, SelfType.class, "SelfType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
@@ -5998,7 +6022,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																																																																																																																																																																																																																															
+		   });																																																																																																																																																																																																																																																																																																	
 	}
 
 	/**
@@ -6039,7 +6063,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																			
+		   });																																																																																					
 		addAnnotation
 		  (typeEClass, 
 		   source, 
@@ -6072,7 +6096,7 @@ public class PivotPackageImpl
 		   new URI[] 
 		   {
 			 URI.createURI(eNS_URI).appendFragment("//ParameterableElement/templateParameter") //$NON-NLS-1$
-		   });																																										
+		   });																																												
 		addAnnotation
 		  (getTemplateParameter_OwnedParameteredElement(), 
 		   source, 

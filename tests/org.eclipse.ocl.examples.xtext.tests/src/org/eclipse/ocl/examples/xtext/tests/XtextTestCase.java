@@ -140,27 +140,6 @@ public class XtextTestCase extends PivotTestCase
 		ResourceSet reloadResourceSet = new ResourceSetImpl();
 		reloadResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("pivot", new EcoreResourceFactoryImpl());
 		Resource reloadedPivotResource = reloadResourceSet.getResource(pivotURI, true);
-		MetaModelManager metaModelManager = new MetaModelManager();
-		for (TreeIterator<EObject> tit = reloadedPivotResource.getAllContents(); tit.hasNext(); ) {
-			EObject eObject = tit.next();
-			if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
-				org.eclipse.ocl.examples.pivot.Package pkg = (org.eclipse.ocl.examples.pivot.Package) eObject;
-				metaModelManager.addPackage(pkg);
-			}
-			else {
-				tit.prune();
-			}
-		}
-		for (TreeIterator<EObject> tit = reloadedPivotResource.getAllContents(); tit.hasNext(); ) {
-			EObject eObject = tit.next();
-			if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
-				org.eclipse.ocl.examples.pivot.Package pkg = (org.eclipse.ocl.examples.pivot.Package) eObject;
-				metaModelManager.addPackage(pkg);
-			}
-			else {
-				tit.prune();
-			}
-		}
 		assertNoValidationErrors("Pivot reload validation problems", reloadedPivotResource);
 		unloadResourceSet(reloadResourceSet);
 	}

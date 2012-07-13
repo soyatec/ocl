@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.OCL;
-import org.eclipse.ocl.examples.pivot.Package;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -83,7 +83,7 @@ public class UML2Ecore2Pivot extends Ecore2Pivot
 			if (conversion == null) {
 				conversion = getAdapter(umlResource, metaModelManager);
 			}
-			org.eclipse.ocl.examples.pivot.Package pivotRoot = conversion.getPivotRoot();
+			Root pivotRoot = conversion.getPivotRoot();
 			if (uriFragment == null) {
 				return pivotRoot;
 			}
@@ -164,7 +164,7 @@ public class UML2Ecore2Pivot extends Ecore2Pivot
 	 * 
 	 * @return the Pivot root package
 	 */
-	public static org.eclipse.ocl.examples.pivot.Package importFromUML(MetaModelManager metaModelManager, String alias, Resource umlResource) {
+	public static Root importFromUML(MetaModelManager metaModelManager, String alias, Resource umlResource) {
 		if (umlResource == null) {
 			return null;
 		}
@@ -249,7 +249,7 @@ public class UML2Ecore2Pivot extends Ecore2Pivot
 	}
 
 	@Override
-	public Package getPivotRoot() {
+	public Root getPivotRoot() {
 		if (pivotRoot == null) {
 			List<EObject> contents = umlResource.getContents();
 			if (options == null) {

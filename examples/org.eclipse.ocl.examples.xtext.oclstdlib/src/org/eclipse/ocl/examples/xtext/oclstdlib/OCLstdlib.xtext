@@ -26,7 +26,7 @@ import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecor
 //import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 //generate OCLstdlib "http://www.eclipse.org/ocl/examples/xtext/oclstdlib/OCLstdlibCST"
 
-Library returns base::RootPackageCS:
+Library returns LibRootPackageCS:
 	(ownedLibrary+=LibraryCS ';')*
 	(ownedNestedPackage+=LibPackageCS)*
 ;

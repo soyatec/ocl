@@ -22,13 +22,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.attributes.RootAttribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
+import org.eclipse.ocl.examples.xtext.base.attributes.RootCSAttribution;
 
-public abstract class AbstractRootCSAttribution extends AbstractAttribution implements RootAttribution
+public abstract class AbstractRootCSAttribution extends AbstractAttribution implements RootCSAttribution
 {
 	@Override
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {

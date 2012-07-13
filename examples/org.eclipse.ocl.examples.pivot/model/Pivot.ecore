@@ -1099,7 +1099,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredOperation" ordered="false"
         eType="#//Operation"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//Package"/>
   <eClassifiers xsi:type="ecore:EClass" name="MorePivotable" instanceClassName="org.eclipse.ocl.examples.pivot.util.MorePivotable"
       abstract="true" interface="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="MultiplicityElement" abstract="true"
@@ -1474,6 +1473,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="RealLiteralExp" eSuperTypes="#//NumericLiteralExp">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="realSymbol" ordered="false"
         lowerBound="1" eType="#//Real"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Root" eSuperTypes="#//Namespace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nestedPackage" ordered="false"
+        upperBound="-1" eType="#//Package" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="externalURI" ordered="false"
+        eType="#//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SelfType" eSuperTypes="#//Class">
     <eOperations name="resolveSelfType" ordered="false" lowerBound="1" eType="#//Type">

@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.pivot.OCL;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.uml.UML2Ecore2Pivot;
@@ -176,7 +177,7 @@ public class SerializeTests extends XtextTestCase
 
 	protected Resource getPivotFromUML(MetaModelManager metaModelManager, Resource umlResource) {
 		UML2Pivot uml2Pivot = UML2Pivot.getAdapter(umlResource, metaModelManager);
-		org.eclipse.ocl.examples.pivot.Package pivotRoot = uml2Pivot.getPivotRoot();
+		Root pivotRoot = uml2Pivot.getPivotRoot();
 		Resource pivotResource = pivotRoot.eResource();
 		assertNoResourceErrors("Normalisation failed", pivotResource);
 		assertNoValidationErrors("Normalisation invalid", pivotResource);

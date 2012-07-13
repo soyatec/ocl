@@ -22,11 +22,11 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.ocl.examples.pivot.attributes.RootAttribution;
 import org.eclipse.ocl.examples.pivot.context.EInvocationContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.attributes.RootCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
@@ -63,10 +63,10 @@ public class BaseDocument extends XtextDocument implements ConsoleContext
 		return myStateAccess;
 	}
 
-	protected RootAttribution getDocumentAttribution() {
-		return readOnly(new IUnitOfWork<RootAttribution, XtextResource>()
+	protected RootCSAttribution getDocumentAttribution() {
+		return readOnly(new IUnitOfWork<RootCSAttribution, XtextResource>()
 			{
-				public RootAttribution exec(XtextResource resource) throws Exception {
+				public RootCSAttribution exec(XtextResource resource) throws Exception {
 					if (!resource.getContents().isEmpty()) {
 						ElementCS csElement = (ElementCS) resource.getContents().get(0);
 						Attribution attribution = PivotUtil.getAttribution(csElement);

@@ -64,7 +64,6 @@ import org.eclipse.ocl.examples.pivot.LiteralExp;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.MessageExp;
 import org.eclipse.ocl.examples.pivot.MessageType;
-import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.MultiplicityElement;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
@@ -87,6 +86,7 @@ import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SelfType;
 import org.eclipse.ocl.examples.pivot.SendSignalAction;
 import org.eclipse.ocl.examples.pivot.SequenceType;
@@ -806,20 +806,6 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PivotPackage.MODEL:
-			{
-				Model model = (Model)theEObject;
-				T result = caseModel(model);
-				if (result == null) result = casePackage(model);
-				if (result == null) result = caseNamespace(model);
-				if (result == null) result = caseTemplateableElement(model);
-				if (result == null) result = caseNamedElement(model);
-				if (result == null) result = caseElement(model);
-				if (result == null) result = caseNameable(model);
-				if (result == null) result = caseVisitable(model);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case PivotPackage.MULTIPLICITY_ELEMENT:
 			{
 				MultiplicityElement multiplicityElement = (MultiplicityElement)theEObject;
@@ -1116,6 +1102,18 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElement(realLiteralExp);
 				if (result == null) result = caseNameable(realLiteralExp);
 				if (result == null) result = caseVisitable(realLiteralExp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PivotPackage.ROOT:
+			{
+				Root root = (Root)theEObject;
+				T result = caseRoot(root);
+				if (result == null) result = caseNamespace(root);
+				if (result == null) result = caseNamedElement(root);
+				if (result == null) result = caseElement(root);
+				if (result == null) result = caseNameable(root);
+				if (result == null) result = caseVisitable(root);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -2098,22 +2096,6 @@ public class PivotSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Model</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseModel(Model object)
-	{
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>More Pivotable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -2231,6 +2213,22 @@ public class PivotSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRealLiteralExp(RealLiteralExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Root</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Root</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRoot(Root object)
+	{
 		return null;
 	}
 

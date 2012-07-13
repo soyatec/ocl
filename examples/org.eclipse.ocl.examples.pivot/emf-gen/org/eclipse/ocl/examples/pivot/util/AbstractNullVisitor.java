@@ -225,10 +225,6 @@ public abstract class AbstractNullVisitor<R, C>
 		return null;
 	}
 
-	public R visitModel(org.eclipse.ocl.examples.pivot.Model object) {
-		return null;
-	}
-
 	public R visitMultiplicityElement(org.eclipse.ocl.examples.pivot.MultiplicityElement object) {
 		return null;
 	}
@@ -314,6 +310,10 @@ public abstract class AbstractNullVisitor<R, C>
 	}
 
 	public R visitRealLiteralExp(org.eclipse.ocl.examples.pivot.RealLiteralExp object) {
+		return null;
+	}
+
+	public R visitRoot(org.eclipse.ocl.examples.pivot.Root object) {
 		return null;
 	}
 

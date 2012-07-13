@@ -53,6 +53,7 @@ import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
@@ -479,6 +480,9 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 				if (pObject instanceof org.eclipse.ocl.examples.pivot.Package) {
 					gatherNewPackage(newPackages, pObject);
 				}
+				else if (pObject instanceof Root) {
+					gatherNewPackage(newPackages, pObject);
+				}
 				else {		// CompleteOCL has package references from non-package contexts
 					if (pObject instanceof Type) {
 						gatherNewPackage(newPackages, pObject);
@@ -504,34 +508,31 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 	 * Add any packages and nested packages in eObjects to oldPackages. This
 	 * is invoked at the start of an update to cache the packages for re-use. 
 	 */
-	protected void gatherOldPackages(List<? extends EObject> eObjects) {
-		for (EObject eObject : eObjects) {
-			if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
-				org.eclipse.ocl.examples.pivot.Package pkg = (org.eclipse.ocl.examples.pivot.Package) eObject;
-				String name = pkg.getName();
-				if (name == null) {
-					name = PivotConstants.NULL_ROOT;
-				}
-				String qualifiedName = getQualifiedName(new StringBuilder(), pkg);
-				org.eclipse.ocl.examples.pivot.Package oldPkg = oldPackagesByQualifiedName.put(qualifiedName, pkg);
-				if (oldPkg != null) {
-					logger.warn("Duplicate qualified package name: " + qualifiedName);
-				}
-				if (name.equals(qualifiedName)) {
-					oldPkg = oldPackagesByName.put(name, pkg);
-					if ((oldPkg != null) && name.equals(getQualifiedName(new StringBuilder(), oldPkg))) {
-						logger.warn("Duplicate unqualified package name: " + qualifiedName);
-					}
-				}
-				else {
-					oldPkg = oldPackagesByName.get(name);
-					if (oldPkg == null) {
-						oldPackagesByName.put(name, pkg);
-					}
-				}
-				gatherOldPackages(pkg.getNestedPackage());
+	protected void gatherOldPackages(List<? extends org.eclipse.ocl.examples.pivot.Package> pkgs) {
+		for (org.eclipse.ocl.examples.pivot.Package pkg : pkgs) {
+			String name = pkg.getName();
+			if (name == null) {
+				name = PivotConstants.NULL_ROOT;
 			}
-		}	
+			String qualifiedName = getQualifiedName(new StringBuilder(), pkg);
+			org.eclipse.ocl.examples.pivot.Package oldPkg = oldPackagesByQualifiedName.put(qualifiedName, pkg);
+			if (oldPkg != null) {
+				logger.warn("Duplicate qualified package name: " + qualifiedName);
+			}
+			if (name.equals(qualifiedName)) {
+				oldPkg = oldPackagesByName.put(name, pkg);
+				if ((oldPkg != null) && name.equals(getQualifiedName(new StringBuilder(), oldPkg))) {
+					logger.warn("Duplicate unqualified package name: " + qualifiedName);
+				}
+			}
+			else {
+				oldPkg = oldPackagesByName.get(name);
+				if (oldPkg == null) {
+					oldPackagesByName.put(name, pkg);
+				}
+			}
+			gatherOldPackages(pkg.getNestedPackage());
+		}
 	}
 	
 	public final CS2Pivot getConverter() {
@@ -1117,7 +1118,11 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		oldPackagesByName = new HashMap<String, org.eclipse.ocl.examples.pivot.Package>();
 		oldPackagesByQualifiedName = new HashMap<String, org.eclipse.ocl.examples.pivot.Package>();
 		for (Resource resource : converter.cs2pivotResourceMap.values()) {
-			gatherOldPackages(resource.getContents());
+			for (EObject eObject : resource.getContents()) {
+				if (eObject instanceof Root) {
+					gatherOldPackages(((Root)eObject).getNestedPackage());
+				}
+			}
 		}
 		List<BasicContinuation<?>> continuations = new ArrayList<BasicContinuation<?>>();
 		//
@@ -1178,13 +1183,8 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 			continuations = moreContinuations;
 		}
 		//
-		//	Load the library by loading external content or exploiting the pre-ordered content. 
+		//	Load the library. 
 		//
-		if ((metaModelManager.getLibraryResource() == null) && (metaModelManager.getDefaultStandardLibraryURI() == null))  {
-			for (Resource resource : converter.cs2pivotResourceMap.values()) {
-				metaModelManager.loadLibrary(resource);
-			}
-		}
 		AnyType oclAnyType = metaModelManager.getOclAnyType();
 		if (oclAnyType == null) {
 			return false;				// FIXME throw ??

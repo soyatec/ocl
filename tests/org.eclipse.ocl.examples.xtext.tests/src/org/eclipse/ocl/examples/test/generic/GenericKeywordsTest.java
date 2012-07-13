@@ -20,6 +20,7 @@ package org.eclipse.ocl.examples.test.generic;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.tests.PivotTestSuite;
 
@@ -47,7 +48,7 @@ public abstract class GenericKeywordsTest
 
         // create a little test model for a Smalltalk-like collection class that
         // defines operations corresponding to OCL iterators
-        smalltalk = metaModelManager.createModel("Smalltalk", null);
+        smalltalk = metaModelManager.createPackage(org.eclipse.ocl.examples.pivot.Package.class, PivotPackage.Literals.PACKAGE, "Smalltalk", null);
         registerPackage(smalltalk, "st", "foo://smalltalk");
 
         org.eclipse.ocl.examples.pivot.Class object = createOwnedClass(smalltalk, "Object", false);

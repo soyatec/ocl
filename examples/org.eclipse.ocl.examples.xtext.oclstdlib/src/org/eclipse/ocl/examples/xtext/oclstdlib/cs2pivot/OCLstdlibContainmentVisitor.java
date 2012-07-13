@@ -19,16 +19,16 @@ import org.eclipse.ocl.examples.common.utils.EcoreUtils;
 import org.eclipse.ocl.examples.pivot.AssociativityKind;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.Library;
-import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Precedence;
-import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibClassCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS;
 
@@ -67,10 +67,16 @@ public class OCLstdlibContainmentVisitor extends AbstractOCLstdlibContainmentVis
 
 	@Override
 	public Continuation<?> visitLibPackageCS(LibPackageCS csElement) {
+		@SuppressWarnings("unused")
 		Library pivotElement = refreshPackage(Library.class, PivotPackage.Literals.LIBRARY, csElement);		
-//		metaModelManager.installLibrary(pivotElement);
-//		context.installRootElement(csElement.eResource(), pivotElement);		// Ensure containment viable for imported library type references
-//		importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitLibRootPackageCS(LibRootPackageCS csElement) {
+		Root pivotElement = refreshRoot(Root.class, PivotPackage.Literals.ROOT, csElement);		
+		context.installRootElement(csElement.eResource(), pivotElement);		// Ensure containment viable for imported library type references
+		importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
 		return null;
 	}
 
@@ -78,17 +84,6 @@ public class OCLstdlibContainmentVisitor extends AbstractOCLstdlibContainmentVis
 	public Continuation<?> visitPrecedenceCS(PrecedenceCS csElement) {
 		Precedence pivotElement = refreshNamedElement(Precedence.class, PivotPackage.Literals.PRECEDENCE, csElement);
 		pivotElement.setAssociativity(csElement.isRightAssociative() ? AssociativityKind.RIGHT : AssociativityKind.LEFT);
-		return null;
-	}
-
-	@Override
-	public Continuation<?> visitRootPackageCS(RootPackageCS csElement) {
-		Model pivotElement = refreshPackage(Model.class, PivotPackage.Literals.MODEL, csElement);		
-//		super.visitRootPackageCS(csElement);		
-//		metaModelManager.installLibrary((Library) pivotElement.getNestedPackage().get(0));		// FIXME cast
-		context.installRootElement(csElement.eResource(), pivotElement);		// Ensure containment viable for imported library type references
-		metaModelManager.installModel(pivotElement);
-		importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
 		return null;
 	}
 }

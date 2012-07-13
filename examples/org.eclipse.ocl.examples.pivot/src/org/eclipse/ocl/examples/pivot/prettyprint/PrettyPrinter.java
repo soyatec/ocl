@@ -503,7 +503,8 @@ public class PrettyPrinter
 	        if ((i == 0) && (i < iMax)) {
 	            PathElement rootPathElement = parentPath.get(0);
 				String name = rootPathElement.getName();
-	        	String alias = options.getAlias((Namespace)rootPathElement.getElement());
+	        	Element rootElement = rootPathElement.getElement();
+				String alias = options.getAlias((Namespace)rootElement);
 	        	if (alias != null) {
 	        		append(getName(alias, options.getReservedNames()));
 	        		append("::");               
@@ -519,19 +520,26 @@ public class PrettyPrinter
 	                i++;
 	            }
 	            else {
-	            	URI uri = rootPathElement.getElement().eResource().getURI();
-	            	if (uri != null) {
-	                	if (PivotUtil.isPivotURI(uri)) {
-	                		uri = PivotUtil.getNonPivotURI(uri);
-	                	}
-	                	URI baseURI = options.getBaseURI();
-	                	if (baseURI != null) {
-	                		uri = uri.deresolve(baseURI);
-	                	}
-	            		append(getName(uri.toString(), options.getReservedNames()));
-	            		append("::");               
-	                    i++;
-	            	}
+	            	URI uri;
+	            	if (rootElement.getETarget() != null) {
+		            	EObject eTarget = rootElement.getETarget();
+		            	uri = EcoreUtil.getURI(eTarget);
+		            }
+		            else {
+		            	uri = rootElement.eResource().getURI();
+		            	if (uri != null) {
+		                	if (PivotUtil.isPivotURI(uri)) {
+		                		uri = PivotUtil.getNonPivotURI(uri);
+		                	}
+		            	}
+		            }
+                	URI baseURI = options.getBaseURI();
+                	if (baseURI != null) {
+                		uri = uri.deresolve(baseURI);
+                	}
+            		append(getName(uri.toString(), options.getReservedNames()));
+            		append("::");               
+                    i++;
 	            }
 	        }
 	        while (i < iMax) {

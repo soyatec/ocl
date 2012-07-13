@@ -66,7 +66,6 @@ import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.MessageExp;
 import org.eclipse.ocl.examples.pivot.MessageType;
-import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -81,6 +80,7 @@ import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SelfType;
 import org.eclipse.ocl.examples.pivot.SendSignalAction;
 import org.eclipse.ocl.examples.pivot.SequenceType;
@@ -198,7 +198,6 @@ public class PivotFactoryImpl
 			case PivotPackage.LIBRARY: return (EObject)createLibrary();
 			case PivotPackage.MESSAGE_EXP: return (EObject)createMessageExp();
 			case PivotPackage.MESSAGE_TYPE: return (EObject)createMessageType();
-			case PivotPackage.MODEL: return (EObject)createModel();
 			case PivotPackage.NULL_LITERAL_EXP: return (EObject)createNullLiteralExp();
 			case PivotPackage.OPAQUE_EXPRESSION: return (EObject)createOpaqueExpression();
 			case PivotPackage.OPERATION: return (EObject)createOperation();
@@ -212,6 +211,7 @@ public class PivotFactoryImpl
 			case PivotPackage.PROPERTY: return (EObject)createProperty();
 			case PivotPackage.PROPERTY_CALL_EXP: return (EObject)createPropertyCallExp();
 			case PivotPackage.REAL_LITERAL_EXP: return (EObject)createRealLiteralExp();
+			case PivotPackage.ROOT: return (EObject)createRoot();
 			case PivotPackage.SELF_TYPE: return (EObject)createSelfType();
 			case PivotPackage.SEND_SIGNAL_ACTION: return (EObject)createSendSignalAction();
 			case PivotPackage.SEQUENCE_TYPE: return (EObject)createSequenceType();
@@ -873,17 +873,6 @@ public class PivotFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Model createModel()
-	{
-		ModelImpl model = new ModelImpl();
-		return model;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public NullLiteralExp createNullLiteralExp() {
 		NullLiteralExpImpl nullLiteralExp = new NullLiteralExpImpl();
 		return nullLiteralExp;
@@ -937,6 +926,17 @@ public class PivotFactoryImpl
 	public RealLiteralExp createRealLiteralExp() {
 		RealLiteralExpImpl realLiteralExp = new RealLiteralExpImpl();
 		return realLiteralExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Root createRoot()
+	{
+		RootImpl root = new RootImpl();
+		return root;
 	}
 
 	/**

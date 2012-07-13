@@ -65,6 +65,7 @@ import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
@@ -386,9 +387,12 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		boolean nameChange = (oldName != newName) || ((oldName != null) && !oldName.equals(newName));
 		boolean nsURIChange = (oldNsURI != newNsURI) || ((oldNsURI != null) && !oldNsURI.equals(newNsURI));
 		if (nameChange || nsURIChange) {
-			org.eclipse.ocl.examples.pivot.Package parentPackage = (org.eclipse.ocl.examples.pivot.Package) pivotElement.eContainer();
-			if (parentPackage != null) {
-				parentPackage.getNestedPackage().remove(pivotElement);
+			EObject eContainer = pivotElement.eContainer();
+			if (eContainer instanceof Root) {
+				((Root)eContainer).getNestedPackage().remove(pivotElement);
+			}
+			else if (eContainer instanceof org.eclipse.ocl.examples.pivot.Package) {
+				((org.eclipse.ocl.examples.pivot.Package)eContainer).getNestedPackage().remove(pivotElement);
 			}
 		}
 		pivotElement.setName(newName);
@@ -405,7 +409,6 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 			pivotElement.setNsPrefix(null);
 		}
 		if (!(eObject.eContainer() instanceof EAnnotation)) {
-//			converter.getMetaModelManager().addPackage(pivotElement);
 			String moniker = Pivot2Moniker.toString(pivotElement);
 			AliasAdapter adapter = AliasAdapter.getAdapter(eObject.eResource());
 			if (adapter != null) {

@@ -31,9 +31,12 @@ import org.eclipse.ocl.examples.common.utils.ClassUtils;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.PivotSwitch;
@@ -65,6 +68,7 @@ public class CompleteOCLSplitter
 		for (Constraint constraint : allConstraints) {
 			separator.doSwitch(constraint);
 		}
+		metaModelManager.installResource(oclResource);
 		return oclResource;
 	}
 	
@@ -113,49 +117,29 @@ public class CompleteOCLSplitter
 		public EObject casePackage(org.eclipse.ocl.examples.pivot.Package object) {
 			String name = object.getName();
 			EObject container = object.eContainer();
-			org.eclipse.ocl.examples.pivot.Package separateObject;
-			if (container instanceof org.eclipse.ocl.examples.pivot.Package) {
-				org.eclipse.ocl.examples.pivot.Package parent = (org.eclipse.ocl.examples.pivot.Package) container;
-				org.eclipse.ocl.examples.pivot.Package separateParent = (org.eclipse.ocl.examples.pivot.Package) map.get(parent);
-				if (separateParent == null) {
-					separateParent = (org.eclipse.ocl.examples.pivot.Package) doSwitch(parent);
-					map.put(parent, separateParent);
-					metaModelManager.addPackage(separateParent);
-				}
-				List<org.eclipse.ocl.examples.pivot.Package> separateSiblings = separateParent.getNestedPackage();
-				separateObject = PivotUtil.getNamedElement(separateSiblings, name);
-				if (separateObject == null) {
-					separateObject = (org.eclipse.ocl.examples.pivot.Package) object.eClass().getEPackage().getEFactoryInstance().create(object.eClass());
-					separateObject.setName(name);
-					separateObject.setNsURI(object.getNsURI());
-					separateObject.setNsPrefix(object.getNsPrefix());
-					separateSiblings.add(separateObject);
-					metaModelManager.addPackage(separateObject);
-				}
+			assert container instanceof Namespace;
+			Namespace parent = (Namespace) container;
+			Namespace separateParent = (Namespace) map.get(parent);
+			if (separateParent == null) {
+				separateParent = (Namespace) doSwitch(parent);
+				map.put(parent, separateParent);
+			}
+			List<org.eclipse.ocl.examples.pivot.Package> separateSiblings;
+			if (separateParent instanceof Root) {
+				separateSiblings = ((Root)separateParent).getNestedPackage();
 			}
 			else {
-				List<EObject> separateSiblings = separateResource.getContents();
-				separateObject = (org.eclipse.ocl.examples.pivot.Package) getElementByName(separateSiblings, name);
-				if (separateObject == null) {
-					separateObject = (org.eclipse.ocl.examples.pivot.Package) object.eClass().getEPackage().getEFactoryInstance().create(object.eClass());
-					separateObject.setName(name);
-					separateObject.setNsURI(object.getNsURI());
-					separateObject.setNsPrefix(object.getNsPrefix());
-					separateSiblings.add(separateObject);
-					metaModelManager.addPackage(separateObject);
-				}
+				separateSiblings = ((org.eclipse.ocl.examples.pivot.Package)separateParent).getNestedPackage();
+			}
+			org.eclipse.ocl.examples.pivot.Package separateObject = PivotUtil.getNamedElement(separateSiblings, name);
+			if (separateObject == null) {
+				separateObject = (org.eclipse.ocl.examples.pivot.Package) object.eClass().getEPackage().getEFactoryInstance().create(object.eClass());
+				separateObject.setName(name);
+				separateObject.setNsURI(object.getNsURI());
+				separateObject.setNsPrefix(object.getNsPrefix());
+				separateSiblings.add(separateObject);
 			}
 			return separateObject;
-		}
-
-		protected org.eclipse.ocl.examples.pivot.Package getSeparatePackage(org.eclipse.ocl.examples.pivot.Package element) {
-			org.eclipse.ocl.examples.pivot.Package separate = (org.eclipse.ocl.examples.pivot.Package) map.get(element);
-			if (separate == null) {
-				separate = (org.eclipse.ocl.examples.pivot.Package) doSwitch(element);
-				map.put(element, separate);
-				metaModelManager.addPackage(separate);
-			}
-			return separate;
 		}
 
 		@Override
@@ -174,6 +158,23 @@ public class CompleteOCLSplitter
 		    copier.copyReferences();
 			separateSiblings.add(clone);
 			return clone;
+		}
+
+		@Override
+		public EObject caseRoot(Root object) {
+			String name = object.getName();
+			EObject container = object.eContainer();
+			assert container == null;
+			List<EObject> separateSiblings = separateResource.getContents();
+			Root separateObject = (Root) getElementByName(separateSiblings, name);
+			if (separateObject == null) {
+				separateObject = PivotFactory.eINSTANCE.createRoot();
+				separateObject.setName(name);
+				separateObject.setExternalURI(separateResource.getURI().toString());
+				separateSiblings.add(separateObject);
+//				metaModelManager.addRoot(separateObject);
+			}
+			return separateObject;
 		}
 
 		@Override
@@ -216,5 +217,14 @@ public class CompleteOCLSplitter
 			T castSeparate = (T) separate;
 			return castSeparate;
 		}		
+
+		protected org.eclipse.ocl.examples.pivot.Package getSeparatePackage(org.eclipse.ocl.examples.pivot.Package element) {
+			org.eclipse.ocl.examples.pivot.Package separate = (org.eclipse.ocl.examples.pivot.Package) map.get(element);
+			if (separate == null) {
+				separate = (org.eclipse.ocl.examples.pivot.Package) doSwitch(element);
+				map.put(element, separate);
+			}
+			return separate;
+		}
 	}
 }

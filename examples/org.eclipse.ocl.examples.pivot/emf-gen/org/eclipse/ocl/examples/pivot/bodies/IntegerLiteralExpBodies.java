@@ -63,12 +63,12 @@ public class IntegerLiteralExpBodies
 			final Value T_ClassClassifier_Integer_ = valueFactory.createTypeValue(OCLstdlibTables.Types._Integer);
 			
 			
-			Value A_symbol_126 = IP_TypedElement_type.evaluate(evaluator, T_Type, self, P_TypedElement_type);
+			Value A_symbol_294 = IP_TypedElement_type.evaluate(evaluator, T_Type, self, P_TypedElement_type);
 			
-			DomainType static_A_symbol_127 = valueFactory.typeOf(A_symbol_126, T_ClassClassifier_Integer_);
-			LibraryBinaryOperation dynamic_A_symbol_127 = (LibraryBinaryOperation)static_A_symbol_127.lookupImplementation(standardLibrary, O_OclAny__eq_);
-			Value A_symbol_127 = dynamic_A_symbol_127.evaluate(evaluator, T_Boolean, A_symbol_126, T_ClassClassifier_Integer_);
-			return A_symbol_127;
+			DomainType static_A_symbol_295 = valueFactory.typeOf(A_symbol_294, T_ClassClassifier_Integer_);
+			LibraryBinaryOperation dynamic_A_symbol_295 = (LibraryBinaryOperation)static_A_symbol_295.lookupImplementation(standardLibrary, O_OclAny__eq_);
+			Value A_symbol_295 = dynamic_A_symbol_295.evaluate(evaluator, T_Boolean, A_symbol_294, T_ClassClassifier_Integer_);
+			return A_symbol_295;
 		}
 	}
 

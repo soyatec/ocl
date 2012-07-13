@@ -288,19 +288,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 
 	@Override
 	public org.eclipse.ocl.examples.pivot.Package casePackage(org.eclipse.uml2.uml.Package umlPackage) {
-		org.eclipse.ocl.examples.pivot.Package pivotElement;
-		if (umlPackage instanceof org.eclipse.uml2.uml.Profile) {
-//			pivotElement = converter.refreshNamedElement(Model.class, PivotPackage.Literals.MODEL, umlPackage);
-			pivotElement = converter.refreshNamedElement(org.eclipse.ocl.examples.pivot.Package.class, PivotPackage.Literals.PACKAGE, umlPackage);
-		}
-		else if ((umlPackage instanceof org.eclipse.uml2.uml.Model) && (umlPackage.eContainer() == null)) {
-//			pivotElement = converter.refreshNamedElement(Model.class, PivotPackage.Literals.MODEL, umlPackage);
-			pivotElement = converter.refreshNamedElement(org.eclipse.ocl.examples.pivot.Package.class, PivotPackage.Literals.PACKAGE, umlPackage);
-		}
-		else {
-			pivotElement = converter.refreshNamedElement(org.eclipse.ocl.examples.pivot.Package.class, PivotPackage.Literals.PACKAGE, umlPackage);
-			metaModelManager.addPackage(pivotElement);
-		}
+		org.eclipse.ocl.examples.pivot.Package pivotElement = converter.refreshNamedElement(org.eclipse.ocl.examples.pivot.Package.class, PivotPackage.Literals.PACKAGE, umlPackage);
 //		EAnnotation eAnnotation = umlPackage.getEAnnotation(EcorePackage.eNS_URI);
 //		List<EAnnotation> exclusions = eAnnotation == null ? Collections.<EAnnotation>emptyList() : Collections.singletonList(eAnnotation);
 		copyNamedElement(pivotElement, umlPackage);

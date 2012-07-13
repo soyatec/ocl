@@ -38,7 +38,7 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 		////generate OCLstdlib "http://www.eclipse.org/ocl/examples/xtext/oclstdlib/OCLstdlibCST"
 		// Library returns
 		//
-		//base::RootPackageCS:
+		//LibRootPackageCS:
 		//
 		//	(ownedLibrary+=LibraryCS ";")* ownedNestedPackage+=LibPackageCS*;
 		public ParserRule getRule() { return rule; }
@@ -2399,7 +2399,7 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 	////generate OCLstdlib "http://www.eclipse.org/ocl/examples/xtext/oclstdlib/OCLstdlibCST"
 	// Library returns
 	//
-	//base::RootPackageCS:
+	//LibRootPackageCS:
 	//
 	//	(ownedLibrary+=LibraryCS ";")* ownedNestedPackage+=LibPackageCS*;
 	public LibraryElements getLibraryAccess() {

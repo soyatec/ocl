@@ -54,7 +54,6 @@ import org.eclipse.ocl.examples.pivot.IteratorExp;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.MessageExp;
-import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
@@ -69,6 +68,7 @@ import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.StateExp;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
@@ -211,7 +211,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 		}
 		else {
 			EObject container = object.eContainer();
-			if ((container instanceof NamedElement) && !(container instanceof Model)) {
+			if (!(container instanceof Root) && (container instanceof NamedElement)) {
 				appendQualifiedName((NamedElement) container);
 				append("::"); //$NON-NLS-1$
 			}
@@ -370,7 +370,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 				append("null::");
 				appendName(cls);
 			}
-			else if (!(pkg.eContainer() instanceof Model) || !PivotConstants.OCL_NAME.equals(pkg.getName())) {
+			else if (!(pkg.eContainer() instanceof Root) || !PivotConstants.OCL_NAME.equals(pkg.getName())) {
 				appendQualifiedName(pkg, "::", cls);
 			}
 			else {
@@ -949,6 +949,12 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	@Override
 	public String visitRealLiteralExp(RealLiteralExp rl) {
 		append(rl.getRealSymbol());
+		return null;
+	}
+
+	@Override
+	public String visitRoot(Root root) {
+		appendName(root);
 		return null;
 	}
 

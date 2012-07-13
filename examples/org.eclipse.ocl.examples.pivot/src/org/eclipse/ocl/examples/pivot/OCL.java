@@ -367,7 +367,7 @@ public class OCL {
 	public Resource ecore2pivot(Resource ecoreResource) {
 		MetaModelManager metaModelManager = getMetaModelManager();
 		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager);
-		org.eclipse.ocl.examples.pivot.Package pivotRoot = ecore2Pivot.getPivotRoot();
+		Root pivotRoot = ecore2Pivot.getPivotRoot();
 		Resource pivotResource = pivotRoot.eResource();
 		return pivotResource;
 	}

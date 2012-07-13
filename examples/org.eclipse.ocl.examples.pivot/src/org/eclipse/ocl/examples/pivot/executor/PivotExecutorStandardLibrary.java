@@ -132,7 +132,6 @@ public class PivotExecutorStandardLibrary extends ExecutableStandardLibrary impl
 			pivotPackage = metaModelManager.getPrimaryPackage(domainPackage.getNsURI());
 			if (pivotPackage == null) {
 				pivotPackage = createPackage(domainPackage);
-				metaModelManager.addPackage(pivotPackage);
 			}
 		}
 		return metaModelManager.getPrimaryType(pivotPackage, typeType.getName());

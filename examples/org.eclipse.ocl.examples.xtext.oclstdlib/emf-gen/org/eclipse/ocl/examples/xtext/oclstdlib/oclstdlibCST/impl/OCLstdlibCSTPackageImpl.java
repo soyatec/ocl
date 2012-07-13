@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPropertyCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTFactory;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTPackage;
@@ -88,6 +89,13 @@ public class OCLstdlibCSTPackageImpl
 	 * @generated
 	 */
 	private EClass libPropertyCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass libRootPackageCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -299,6 +307,16 @@ public class OCLstdlibCSTPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getLibRootPackageCS()
+	{
+		return libRootPackageCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMetaTypeName() {
 		return metaTypeNameEClass;
 	}
@@ -398,6 +416,8 @@ public class OCLstdlibCSTPackageImpl
 		libPropertyCSEClass = createEClass(LIB_PROPERTY_CS);
 		createEAttribute(libPropertyCSEClass, LIB_PROPERTY_CS__STATIC);
 
+		libRootPackageCSEClass = createEClass(LIB_ROOT_PACKAGE_CS);
+
 		metaTypeNameEClass = createEClass(META_TYPE_NAME);
 		createEAttribute(metaTypeNameEClass, META_TYPE_NAME__NAME);
 
@@ -447,6 +467,7 @@ public class OCLstdlibCSTPackageImpl
 		libPackageCSEClass.getESuperTypes().add(theBaseCSTPackage.getPackageCS());
 		libPropertyCSEClass.getESuperTypes().add(theBaseCSTPackage.getAttributeCS());
 		libPropertyCSEClass.getESuperTypes().add(this.getJavaImplementationCS());
+		libRootPackageCSEClass.getESuperTypes().add(theBaseCSTPackage.getRootPackageCS());
 		metaTypeNameEClass.getESuperTypes().add(theBaseCSTPackage.getVisitableCS());
 		metaTypeNameEClass.getESuperTypes().add(thePivotPackage.getNameable());
 		precedenceCSEClass.getESuperTypes().add(theBaseCSTPackage.getNamedElementCS());
@@ -473,6 +494,8 @@ public class OCLstdlibCSTPackageImpl
 
 		initEClass(libPropertyCSEClass, LibPropertyCS.class, "LibPropertyCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLibPropertyCS_Static(), thePivotPackage.getBoolean(), "static", "false", 0, 1, LibPropertyCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(libRootPackageCSEClass, LibRootPackageCS.class, "LibRootPackageCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(metaTypeNameEClass, MetaTypeName.class, "MetaTypeName", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMetaTypeName_Name(), ecorePackage.getEString(), "name", null, 0, 1, MetaTypeName.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

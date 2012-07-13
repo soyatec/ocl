@@ -67,10 +67,10 @@ import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
-import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.delegate.DelegateDomain;
 import org.eclipse.ocl.examples.pivot.delegate.DelegateEPackageAdapter;
@@ -323,7 +323,7 @@ public class DelegatesTest extends PivotTestSuite
 		if (message != null)
 			fail(message);
 		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager);
-		Package pivotRoot = ecore2Pivot.getPivotRoot();
+		Root pivotRoot = ecore2Pivot.getPivotRoot();
 		message = PivotUtil.formatResourceDiagnostics(pivotRoot.eResource().getErrors(), "Pivot load", "\n\t");
 		if (message != null)
 			fail(message);
@@ -336,7 +336,9 @@ public class DelegatesTest extends PivotTestSuite
 		message = PivotUtil.formatResourceDiagnostics(pivotResource.getErrors(), "Pivot OCL load", "\n\t");
 		if (message != null)
 			fail(message);
-		PivotInstaller.installDelegates(metaModelManager, pivotRoot);
+		for (org.eclipse.ocl.examples.pivot.Package nestedPackage : pivotRoot.getNestedPackage()) {
+			PivotInstaller.installDelegates(metaModelManager, nestedPackage);
+		}
 	}
 
 	protected void initPackageRegistrations() {

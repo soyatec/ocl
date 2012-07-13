@@ -76,7 +76,7 @@ public class EvaluateClassifierOperationsTest extends PivotSimpleTestSuite
 	public void test_oclContainer() {
 		assertQueryInvalid(pkg2, "invalid.oclContainer()");
 		assertQueryInvalid(pkg2, "null.oclContainer()");
-		assertQueryResults(pkg1, "null", "oclContainer()");
+		assertQueryResults(root, "null", "oclContainer()");
 		assertQueryEquals(pkg2, pkg1, "oclContainer()");
 		assertQueryInvalid(null, "1.oclContainer()", NLS.bind(EvaluatorMessages.TypedValueRequired, "Object", "UnlimitedNatural"), null);
 	}

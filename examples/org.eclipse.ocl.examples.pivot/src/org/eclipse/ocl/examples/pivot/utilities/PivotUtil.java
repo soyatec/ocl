@@ -50,7 +50,6 @@ import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.LoopExp;
-import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
@@ -63,6 +62,7 @@ import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SemanticException;
 import org.eclipse.ocl.examples.pivot.SequenceType;
 import org.eclipse.ocl.examples.pivot.SetType;
@@ -725,11 +725,11 @@ public class PivotUtil extends DomainUtil
 
 	public static Namespace getNamespace(EObject element) {
 		for (EObject eObject = element; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof Root) {
+				return null;
+			}
 			if (eObject instanceof Type) {
 				return (Namespace) eObject;
-			}
-			if (eObject instanceof Model) {
-				return null;
 			}
 			if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
 				return (Namespace) eObject;
@@ -882,6 +882,13 @@ public class PivotUtil extends DomainUtil
 				return;
 			}
 		}
+		else if (element instanceof Root) {
+			String nsURI = ((Root)element).getExternalURI();
+			if (nsURI != null) {
+				s.append(nsURI);
+				return;
+			}
+		}
 		else if (element instanceof EPackage) {
 			String nsURI = ((EPackage)element).getNsURI();
 			if (nsURI != null) {
@@ -890,7 +897,7 @@ public class PivotUtil extends DomainUtil
 			}
 		}
 		EObject eContainer = element.eContainer();
-		if (eContainer instanceof org.eclipse.ocl.examples.pivot.Package) {
+		if ((eContainer instanceof org.eclipse.ocl.examples.pivot.Package) || (eContainer instanceof Root)) {
 			String nsURI = ((org.eclipse.ocl.examples.pivot.Package)element).getNsURI();
 			if (nsURI != null) {
 				s.append(nsURI);

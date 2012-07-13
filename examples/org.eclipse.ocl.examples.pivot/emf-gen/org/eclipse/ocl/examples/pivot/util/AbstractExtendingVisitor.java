@@ -229,10 +229,6 @@ public abstract class AbstractExtendingVisitor<R, C>
 		return visitType(object);
 	}
 
-	public R visitModel(org.eclipse.ocl.examples.pivot.Model object) {
-		return visitPackage(object);
-	}
-
 	public R visitMultiplicityElement(org.eclipse.ocl.examples.pivot.MultiplicityElement object) {
 		return visitElement(object);
 	}
@@ -319,6 +315,10 @@ public abstract class AbstractExtendingVisitor<R, C>
 
 	public R visitRealLiteralExp(org.eclipse.ocl.examples.pivot.RealLiteralExp object) {
 		return visitNumericLiteralExp(object);
+	}
+
+	public R visitRoot(org.eclipse.ocl.examples.pivot.Root object) {
+		return visitNamespace(object);
 	}
 
 	public R visitSelfType(org.eclipse.ocl.examples.pivot.SelfType object) {

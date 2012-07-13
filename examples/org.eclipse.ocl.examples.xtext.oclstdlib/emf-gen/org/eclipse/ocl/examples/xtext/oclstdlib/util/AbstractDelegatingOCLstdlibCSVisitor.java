@@ -65,6 +65,10 @@ public abstract class AbstractDelegatingOCLstdlibCSVisitor<R, C, D extends OCLst
 		return delegate.visitLibPropertyCS(object);
 	}
 
+	public R visitLibRootPackageCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS object) {
+		return delegate.visitLibRootPackageCS(object);
+	}
+
 	public R visitMetaTypeName(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName object) {
 		return delegate.visitMetaTypeName(object);
 	}

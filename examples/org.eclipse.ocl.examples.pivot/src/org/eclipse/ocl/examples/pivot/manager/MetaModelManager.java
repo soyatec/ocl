@@ -68,11 +68,9 @@ import org.eclipse.ocl.examples.pivot.InvalidType;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.Library;
-import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
@@ -80,6 +78,7 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SelfType;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
@@ -607,16 +606,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		getOrphanResource().getContents().add(pivotElement);
 	}
 
-	public void addPackage(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
-		if (pivotPackage instanceof Model) {
-			System.out.println("Indirect addPackage " + pivotPackage);
-			installModel((Model) pivotPackage);
-		}
-		else {
-			System.out.println("Ignored addPackage " + pivotPackage);
-		}
-	}
-
 	/**
 	 * Return -ve if match1 is inferior to match2, +ve if match2 is inferior to match1, or
 	 * zero if both matches are of equal validity.
@@ -824,34 +813,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		}
 	}
 
-	public Collection<Library> computeLibraries() {
-		Set<Library> libraries = new HashSet<Library>();
-		if (pivotLibraryResource != null) {
-			for (EObject eObject : pivotLibraryResource.getContents()) {
-				if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
-					computeLibraries(libraries, (org.eclipse.ocl.examples.pivot.Package) eObject);
-				}
-			}
-		}
-		for (Resource pivotResource : pivotResourceSet.getResources()) {
-			for (EObject eObject : pivotResource.getContents()) {
-				if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
-					computeLibraries(libraries, (org.eclipse.ocl.examples.pivot.Package) eObject);
-				}
-			}
-		}
-		return libraries;
-	}
-
-	private void computeLibraries(Set<Library> libraries, org.eclipse.ocl.examples.pivot.Package aPackage) {
-		if (aPackage instanceof Library) {
-			libraries.add((Library) aPackage);
-		}
-		for (org.eclipse.ocl.examples.pivot.Package nestedPackage : aPackage.getNestedPackage()) {
-			computeLibraries(libraries, nestedPackage);
-		}
-	}
-
 	@Override
 	public boolean conformsToCollectionType(DomainCollectionType firstCollectionType, DomainCollectionType secondCollectionType) {
 		return conformsToCollectionType((CollectionType)firstCollectionType, (CollectionType)secondCollectionType, null);	// FIXME cast
@@ -979,10 +940,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return new LambdaTypeManager(this);
 	}
 
-	public Model createModel(String string, String nsURI) {
-		return createPackage(Model.class, PivotPackage.Literals.MODEL, string, nsURI);
-	}
-
 	protected Resource createOrphanage() {
 		return Orphanage.getOrphanage(pivotResourceSet);
 	}
@@ -993,8 +950,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		T pivotPackage = (T) pivotEClass.getEPackage().getEFactoryInstance().create(pivotEClass);
 		pivotPackage.setName(name);
 		pivotPackage.setNsURI(nsURI);
-//		addPackage(pivotPackage);
-//		installPackage(pivotPackage);
 		return pivotPackage;
 	}
 
@@ -1004,8 +959,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 
 	protected PrecedenceManager createPrecedenceManager() {
 		PrecedenceManager precedenceManager = new PrecedenceManager();
-		Collection<Library> libraries = computeLibraries();
-		List<String> errors = precedenceManager.compilePrecedences(libraries);
+		List<String> errors = precedenceManager.compilePrecedences(pivotLibraries);
 		for (String error : errors) {
 			logger.error(error);
 		}
@@ -1014,6 +968,18 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 
 	public Resource createResource(URI uri, String contentType) {
 		return pivotResourceSet.createResource(uri, contentType);
+	}
+
+	public Root createRoot(String name, String externalURI) {
+		return createRoot(Root.class, PivotPackage.Literals.ROOT, name, externalURI);
+	}
+
+	public <T extends Root> T createRoot(Class<T> pivotClass, EClass pivotEClass, String name, String externalURI) {
+		@SuppressWarnings("unchecked")
+		T pivotRoot = (T) pivotEClass.getEPackage().getEFactoryInstance().create(pivotEClass);
+		pivotRoot.setName(name);
+		pivotRoot.setExternalURI(externalURI);
+		return pivotRoot;
 	}
 	
 	protected TupleTypeManager createTupleManager() {
@@ -1108,30 +1074,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			System.out.println(s);		
 		}
 	} */
-
-/*	public <T extends Type> T findOrphanClass(Class<T> unspecializedType, String moniker) {		
-		List<Type> ownedSpecializations = getOrphanPackage().getOwnedType();
-		for (Type ownedSpecialization : ownedSpecializations) {
-			if (Pivot2Moniker.toString(ownedSpecialization).equals(moniker)) {
-				@SuppressWarnings("unchecked")
-				T castSpecialization = (T)ownedSpecialization;	// FIXME validate
-				return castSpecialization;
-			}
-		}
-		return null;
-	} */
-
-/*	protected <T extends Operation> T findOrphanOperation(Class<T> unspecializedOperation, String moniker) {
-		List<Operation> ownedSpecializations = getOrphanClass().getOwnedOperation();
-		for (Operation ownedSpecialization : ownedSpecializations) {
-			if (Pivot2Moniker.toString(ownedSpecialization).equals(moniker)) {
-				@SuppressWarnings("unchecked")
-				T castSpecialization = (T)ownedSpecialization;	// FIXME validate
-				return castSpecialization;
-			}
-		}
-		return null;
-	} */
 	
 	public PackageTracker findPackageTracker(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
 		return packageManager.findPackageTracker(pivotPackage);
@@ -1189,14 +1131,14 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 
 	public Iterable<org.eclipse.ocl.examples.pivot.Package> getAllPackages() {
 		if (!libraryLoadInProgress && (pivotMetaModel == null))  {
-			lazyLoadPivotMetaModel();
+			getPivotMetaModel();
 		}
 		return packageManager.getAllPackages();
 	}
 
 	public Iterable<org.eclipse.ocl.examples.pivot.Package> getAllPackages(org.eclipse.ocl.examples.pivot.Package pkg, boolean loadPivotMetaModelFirst) {
 		if (!libraryLoadInProgress && loadPivotMetaModelFirst && (pivotMetaModel == null)) {
-			lazyLoadPivotMetaModel();
+			getPivotMetaModel();
 		}
 		PackageTracker packageTracker = packageManager.findPackageTracker(pkg);
 		Set<org.eclipse.ocl.examples.pivot.Package> allPackages = new HashSet<org.eclipse.ocl.examples.pivot.Package>();
@@ -1649,26 +1591,18 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return packageManager.getPackageTracker(pivotPackage);
 	}
 	
-	public org.eclipse.ocl.examples.pivot.Package getPivotMetaModel() {	// WIP duplication
+	public org.eclipse.ocl.examples.pivot.Package getPivotMetaModel() {
 		if (pivotMetaModel == null) {
+			org.eclipse.ocl.examples.pivot.Package stdlibPackage = null;
 			AnyType oclAnyType = getOclAnyType();
 			if (oclAnyType != null) {
-				org.eclipse.ocl.examples.pivot.Package stdlibPackage = oclAnyType.getPackage();
+				stdlibPackage = oclAnyType.getPackage();
+			}
+			else if (!!pivotLibraries.isEmpty()) {
+				stdlibPackage = pivotLibraries.get(0);
+			}
+			if (stdlibPackage != null) {
 				loadPivotMetaModel(stdlibPackage);				
-/*				for (org.eclipse.ocl.examples.pivot.Package aPackage : getAllPackages(stdlibPackage, false)) {
-					Type anyType = PivotUtil.getNamedElement(aPackage.getOwnedType(), PivotPackage.Literals.ELEMENT.getName());
-					if (anyType != null) {
-						pivotMetaModel = aPackage;
-						break;
-					}
-				}
-				if (pivotMetaModel == null) {
-					pivotMetaModel = OCLMetaModel.create(this, stdlibPackage.getName(), stdlibPackage.getNsPrefix(), stdlibPackage.getNsURI());		// Standard meta-model
-					Resource pivotResource = pivotMetaModel.eResource();
-					pivotResourceSet.getResources().add(pivotResource);
-					installResource(pivotMetaModel.eResource());
-					installResource(pivotMetaModel.eResource());
-				} */
 			}
 		}
 		return pivotMetaModel;
@@ -1982,7 +1916,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 //			pivotType = PivotUtil.getUnspecializedTemplateableElement(pivotType);
 //			}
 			if ((pivotMetaModel == null) && (pivotType == getClassType()))  {
-				lazyLoadPivotMetaModel();
+				getPivotMetaModel();
 			}
 			return new CompleteClassSuperClassesIterable(getAllTypes(pivotType));
 		}
@@ -2113,33 +2047,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		}
 		return valueFactory;
 	}
-
-	private void installLibrary(Library pivotLibrary) {
-		String uri = pivotLibrary.getNsURI();
-		if (pivotLibraries.isEmpty()) {
-			if (uri == null) {
-				throw new IllegalLibraryException(OCLMessages.MissingLibraryURI_ERROR_);
-			}
-			setDefaultStandardLibraryURI(uri);
-			loadLibraryPackage(pivotLibrary);
-		}
-		else if (!pivotLibraries.contains(pivotLibrary)) {
-			String libraryURI = getDefaultStandardLibraryURI();
-			if ((uri != null) && !uri.equals(libraryURI)) {
-				throw new IllegalLibraryException(NLS.bind(OCLMessages.ImportedLibraryURI_ERROR_, uri , libraryURI));
-			}
-			loadLibraryPackage(pivotLibrary);
-		}
-	}
-
-	public void installModel(Model pivotModel) {
-		packageManager.addModel(pivotModel);
-		for (org.eclipse.ocl.examples.pivot.Package pivotPackage : pivotModel.getNestedPackage()) {
-			if ((pivotPackage instanceof Library) && !pivotLibraries.contains(pivotPackage)) {
-				pivotLibraries.add((Library)pivotPackage);
-			}
-		}
-	}
 	
 	/**
 	 * Create implicit an opposite property if there is no explicit opposite.
@@ -2204,8 +2111,31 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 
 	public void installResource(Resource pivotResource) {
 		for (EObject eObject : pivotResource.getContents()) {
-			if (eObject instanceof Model) {
-				installModel((Model)eObject);
+			if (eObject instanceof Root) {
+				installRoot((Root)eObject);
+			}
+		}
+	}
+
+	public void installRoot(Root pivotRoot) {
+		packageManager.addRoot(pivotRoot);
+		for (org.eclipse.ocl.examples.pivot.Package pivotPackage : pivotRoot.getNestedPackage()) {
+			if ((pivotPackage instanceof Library) && !pivotLibraries.contains(pivotPackage)) {
+				Library pivotLibrary = (Library)pivotPackage;
+				String uri = pivotLibrary.getNsURI();
+				if (pivotLibraries.isEmpty()) {
+					if (uri == null) {
+						throw new IllegalLibraryException(OCLMessages.MissingLibraryURI_ERROR_);
+					}
+					setDefaultStandardLibraryURI(uri);
+				}
+				else {
+					String libraryURI = getDefaultStandardLibraryURI();
+					if ((uri != null) && !uri.equals(libraryURI)) {
+						throw new IllegalLibraryException(NLS.bind(OCLMessages.ImportedLibraryURI_ERROR_, uri , libraryURI));
+					}
+				}
+				pivotLibraries.add(pivotLibrary);
 			}
 		}
 	}
@@ -2225,12 +2155,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			}
 		}
 		return isUnspecialized;
-	}
-
-	protected void lazyLoadPivotMetaModel() {
-		if (!pivotLibraries.isEmpty()) {
-			loadPivotMetaModel(pivotLibraries.get(0));
-		}
 	}
 
 	public boolean isAdapterForType(Object type) {
@@ -2308,50 +2232,19 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			}
 			installResource(contribution.getResource());
 		}
-		loadLibrary();
-		return pivotLibraryResource;
-	}
-	
-	private void loadLibrary() {
 		assert pivotLibraryResource == null;
 		if (!pivotLibraries.isEmpty()) {
 			pivotLibraryResource = pivotLibraries.get(0).eResource();
-			for (Library library : pivotLibraries) {
-				loadLibraryPackage(library);
-			}
-		}
-	}
-
-	@Deprecated
-	public void loadLibrary(Resource pivotResource) {
-		assert (pivotLibraryResource == null) || (pivotLibraryResource == pivotResource);
-		if (pivotResource != null) {
-			pivotLibraryResource = pivotResource;
-			for (EObject model : pivotResource.getContents()) {
-				if (model instanceof Library) {
-					installLibrary((Library)model);			// BUG 376596 obsolete
-				}
-				for (EObject eObject : model.eContents()) {
-					if (eObject instanceof Library) {
-						installLibrary((Library)eObject);
+			for (Library pivotLibrary : pivotLibraries) {
+				for (Type type : pivotLibrary.getOwnedType()) {
+					Type primaryType = getPrimaryType(type);
+					if ((type == primaryType) && PivotUtil.isLibraryType(type)) {
+						defineLibraryType(primaryType);
 					}
 				}
 			}
-			installResource(pivotResource);
 		}
-		for (Library library : computeLibraries()) {
-			loadLibraryPackage(library);
-		}
-	}
-
-	private void loadLibraryPackage(Library pivotLibrary) {
-		assert pivotLibraries.contains(pivotLibrary);
-		for (Type type : pivotLibrary.getOwnedType()) {
-			Type primaryType = getPrimaryType(type);
-			if ((type == primaryType) && PivotUtil.isLibraryType(type)) {
-				defineLibraryType(primaryType);
-			}
-		}
+		return pivotLibraryResource;
 	}
 
 	/**
@@ -2364,7 +2257,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	 * @param pivotLibrary
 	 */
 	protected void loadPivotMetaModel(org.eclipse.ocl.examples.pivot.Package pivotLibrary) {
-//		PackageTracker libraryTracker = package2tracker.get(pivotLibrary);
 		for (org.eclipse.ocl.examples.pivot.Package libPackage : getAllPackages(pivotLibrary, false)) {
 			if (PivotUtil.getNamedElement(libPackage.getOwnedType(), PivotPackage.Literals.ELEMENT.getName()) != null) {
 				pivotMetaModel = libPackage;	// Custom meta-model
@@ -2373,8 +2265,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		}
 		pivotMetaModel = OCLMetaModel.create(this, pivotLibrary.getName(), pivotLibrary.getNsPrefix(), pivotLibrary.getNsURI());		// Standard meta-model
 		Resource pivotResource = pivotMetaModel.eResource();
-		pivotResourceSet.getResources().add(pivotResource);
-		installResource(pivotMetaModel.eResource());
+//		pivotResourceSet.getResources().add(pivotResource);
+		installResource(pivotResource);
 	}
 
 	public Element loadResource(URI uri, String alias, ResourceSet resourceSet) {

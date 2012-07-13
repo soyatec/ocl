@@ -17,6 +17,7 @@
 
 package org.eclipse.ocl.examples.test.ecore;
 
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.test.generic.GenericDebugTest;
 
 /**
@@ -31,7 +32,8 @@ public class DebugTest extends GenericDebugTest {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        pkg1 = metaModelManager.createModel("pkg1", null);
+        Root root = metaModelManager.createRoot("root", null);
+        pkg1 = createPackage(root, "pkg1");
         helper.setContext(getMetaclass("Model"));
     }
 

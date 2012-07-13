@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -37,10 +38,9 @@ public class RootPackageCSAttribution extends AbstractRootCSAttribution
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
 		RootPackageCS targetElement = (RootPackageCS)target;
 		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-		org.eclipse.ocl.examples.pivot.Package pivotPackage = PivotUtil.getPivot(org.eclipse.ocl.examples.pivot.Package.class, targetElement);
+		Root pivotPackage = PivotUtil.getPivot(Root.class, targetElement);
 		if (pivotPackage != null) {
-			environmentView.addNamedElements(metaModelManager.getLocalPackages(pivotPackage));
-			environmentView.addNamedElements(metaModelManager.getLocalClasses(pivotPackage));
+			environmentView.addNamedElements(pivotPackage.getNestedPackage());
 		}
 		if (environmentView.accepts(PivotPackage.Literals.NAMESPACE)) {
 			for (ImportCS anImport : targetElement.getOwnedImport()) {
@@ -66,11 +66,6 @@ public class RootPackageCSAttribution extends AbstractRootCSAttribution
 					URI baseURI = eResource.getURI();
 		           	environmentView.addImportedElement(baseURI);
 				}
-			}
-		}
-		if (environmentView.accepts(PivotPackage.Literals.PRECEDENCE)) {
-			if (pivotPackage != null) {
-				environmentView.addNamedElements(metaModelManager.getPrecedences(pivotPackage));		// Overrides imports
 			}
 		}
 		return null;
