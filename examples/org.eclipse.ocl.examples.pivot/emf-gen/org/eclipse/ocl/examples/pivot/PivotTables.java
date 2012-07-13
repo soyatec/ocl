@@ -1789,6 +1789,8 @@ public class PivotTables
 		public static final ExecutorProperty _LetExp__in = new ExecutorProperty("in", Types._LetExp, 0, new EcoreLibraryProperty(PivotPackage.Literals.LET_EXP__IN));
 		public static final ExecutorProperty _LetExp__variable = new ExecutorProperty("variable", Types._LetExp, 1, new EcoreLibraryProperty(PivotPackage.Literals.LET_EXP__VARIABLE));
 	
+		public static final ExecutorProperty _Library__ownedPrecedence = new ExecutorProperty("ownedPrecedence", Types._Library, 0, new EcoreLibraryProperty(PivotPackage.Literals.LIBRARY__OWNED_PRECEDENCE));
+	
 		public static final ExecutorProperty _LoopExp__body = new ExecutorProperty("body", Types._LoopExp, 0, new EcoreLibraryProperty(PivotPackage.Literals.LOOP_EXP__BODY));
 		public static final ExecutorProperty _LoopExp__iterator = new ExecutorProperty("iterator", Types._LoopExp, 1, new EcoreLibraryProperty(PivotPackage.Literals.LOOP_EXP__ITERATOR));
 		public static final ExecutorProperty _LoopExp__referredIteration = new ExecutorProperty("referredIteration", Types._LoopExp, 2, new EcoreLibraryProperty(PivotPackage.Literals.LOOP_EXP__REFERRED_ITERATION));
@@ -1849,8 +1851,7 @@ public class PivotTables
 		public static final ExecutorProperty _Package__nestingPackage = new ExecutorProperty("nestingPackage", Types._Package, 3, new EcoreLibraryProperty(PivotPackage.Literals.PACKAGE__NESTING_PACKAGE));
 		public static final ExecutorProperty _Package__nsPrefix = new ExecutorProperty("nsPrefix", Types._Package, 4, new EcoreLibraryProperty(PivotPackage.Literals.PACKAGE__NS_PREFIX));
 		public static final ExecutorProperty _Package__nsURI = new ExecutorProperty("nsURI", Types._Package, 5, new EcoreLibraryProperty(PivotPackage.Literals.PACKAGE__NS_URI));
-		public static final ExecutorProperty _Package__ownedPrecedence = new ExecutorProperty("ownedPrecedence", Types._Package, 6, new EcoreLibraryProperty(PivotPackage.Literals.PACKAGE__OWNED_PRECEDENCE));
-		public static final ExecutorProperty _Package__ownedType = new ExecutorProperty("ownedType", Types._Package, 7, new EcoreLibraryProperty(PivotPackage.Literals.PACKAGE__OWNED_TYPE));
+		public static final ExecutorProperty _Package__ownedType = new ExecutorProperty("ownedType", Types._Package, 6, new EcoreLibraryProperty(PivotPackage.Literals.PACKAGE__OWNED_TYPE));
 	
 		public static final ExecutorProperty _Parameter__Variable = new ExecutorProperty("Variable", Types._Parameter, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.VARIABLE__REPRESENTED_PARAMETER));
 		public static final ExecutorProperty _Parameter__operation = new ExecutorProperty("operation", Types._Parameter, 1, new EcoreLibraryProperty(PivotPackage.Literals.PARAMETER__OPERATION));
@@ -1858,8 +1859,8 @@ public class PivotTables
 		public static final ExecutorProperty _ParameterableElement__owningTemplateParameter = new ExecutorProperty("owningTemplateParameter", Types._ParameterableElement, 0, new EcoreLibraryProperty(PivotPackage.Literals.PARAMETERABLE_ELEMENT__OWNING_TEMPLATE_PARAMETER));
 		public static final ExecutorProperty _ParameterableElement__templateParameter = new ExecutorProperty("templateParameter", Types._ParameterableElement, 1, new EcoreLibraryProperty(PivotPackage.Literals.PARAMETERABLE_ELEMENT__TEMPLATE_PARAMETER));
 	
-		public static final ExecutorProperty _Precedence__Operation = new ExecutorProperty("Operation", Types._Precedence, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.OPERATION__PRECEDENCE));
-		public static final ExecutorProperty _Precedence__Package = new ExecutorProperty("Package", Types._Precedence, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.PACKAGE__OWNED_PRECEDENCE));
+		public static final ExecutorProperty _Precedence__Library = new ExecutorProperty("Library", Types._Precedence, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.LIBRARY__OWNED_PRECEDENCE));
+		public static final ExecutorProperty _Precedence__Operation = new ExecutorProperty("Operation", Types._Precedence, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.OPERATION__PRECEDENCE));
 		public static final ExecutorProperty _Precedence__associativity = new ExecutorProperty("associativity", Types._Precedence, 2, new EcoreLibraryProperty(PivotPackage.Literals.PRECEDENCE__ASSOCIATIVITY));
 		public static final ExecutorProperty _Precedence__order = new ExecutorProperty("order", Types._Precedence, 3, new EcoreLibraryProperty(PivotPackage.Literals.PRECEDENCE__ORDER));
 	
@@ -9052,7 +9053,7 @@ public class PivotTables
 		    PivotTables.Properties._Package__nsURI,
 		    PivotTables.Properties._NamedElement__ownedAnnotation,
 		    PivotTables.Properties._Element__ownedComment,
-		    PivotTables.Properties._Package__ownedPrecedence,
+		    PivotTables.Properties._Library__ownedPrecedence,
 		    PivotTables.Properties._NamedElement__ownedRule,
 		    PivotTables.Properties._TemplateableElement__ownedTemplateSignature,
 		    PivotTables.Properties._Package__ownedType,
@@ -9417,7 +9418,6 @@ public class PivotTables
 		    PivotTables.Properties._Package__nsURI,
 		    PivotTables.Properties._NamedElement__ownedAnnotation,
 		    PivotTables.Properties._Element__ownedComment,
-		    PivotTables.Properties._Package__ownedPrecedence,
 		    PivotTables.Properties._NamedElement__ownedRule,
 		    PivotTables.Properties._TemplateableElement__ownedTemplateSignature,
 		    PivotTables.Properties._Package__ownedType,
@@ -9463,8 +9463,8 @@ public class PivotTables
 	
 		private static final ExecutorProperty[] _Precedence = {
 		    PivotTables.Properties._Element__Constraint,
+		    PivotTables.Properties._Precedence__Library,
 		    PivotTables.Properties._Precedence__Operation,
-		    PivotTables.Properties._Precedence__Package,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._Precedence__associativity,
 		    PivotTables.Properties._NamedElement__isStatic,

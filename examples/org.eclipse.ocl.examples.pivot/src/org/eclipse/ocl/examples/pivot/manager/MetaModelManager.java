@@ -95,7 +95,6 @@ import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.model.OCLMetaModel;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
-import org.eclipse.ocl.examples.pivot.util.Nameable;
 import org.eclipse.ocl.examples.pivot.utilities.CompleteElementIterable;
 import org.eclipse.ocl.examples.pivot.utilities.External2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.IllegalLibraryException;
@@ -1644,9 +1643,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return precedenceManager;
 	}
 
-	public Iterable<? extends Nameable> getPrecedences(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
-		return pivotPackage.getOwnedPrecedence(); // FIXME make package independent
-	}
+//	public Iterable<? extends Nameable> getPrecedences(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+//		return pivotPackage.getOwnedPrecedence(); // FIXME make package independent
+//	}
 	
 	public Precedence getPrefixPrecedence(String operatorName) {
 		PrecedenceManager precedenceManager = getPrecedenceManager();

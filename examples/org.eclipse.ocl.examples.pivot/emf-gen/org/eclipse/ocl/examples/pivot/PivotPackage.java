@@ -10903,22 +10903,13 @@ public interface PivotPackage
 	int PACKAGE__IMPORTED_PACKAGE = NAMESPACE_FEATURE_COUNT + 7;
 
 	/**
-	 * The feature id for the '<em><b>Owned Precedence</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__OWNED_PRECEDENCE = NAMESPACE_FEATURE_COUNT + 8;
-
-	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__OWNED_TYPE = NAMESPACE_FEATURE_COUNT + 9;
+	int PACKAGE__OWNED_TYPE = NAMESPACE_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Package</em>' class.
@@ -10927,7 +10918,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE_FEATURE_COUNT = NAMESPACE_FEATURE_COUNT + 10;
+	int PACKAGE_FEATURE_COUNT = NAMESPACE_FEATURE_COUNT + 9;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -11110,15 +11101,6 @@ public interface PivotPackage
 	int LIBRARY__IMPORTED_PACKAGE = PACKAGE__IMPORTED_PACKAGE;
 
 	/**
-	 * The feature id for the '<em><b>Owned Precedence</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__OWNED_PRECEDENCE = PACKAGE__OWNED_PRECEDENCE;
-
-	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11128,13 +11110,22 @@ public interface PivotPackage
 	int LIBRARY__OWNED_TYPE = PACKAGE__OWNED_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Owned Precedence</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIBRARY__OWNED_PRECEDENCE = PACKAGE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Library</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY_FEATURE_COUNT = PACKAGE_FEATURE_COUNT + 0;
+	int LIBRARY_FEATURE_COUNT = PACKAGE_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -19645,6 +19636,17 @@ public interface PivotPackage
 	EClass getLibrary();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.pivot.Library#getOwnedPrecedence <em>Owned Precedence</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Precedence</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.Library#getOwnedPrecedence()
+	 * @see #getLibrary()
+	 * @generated
+	 */
+	EReference getLibrary_OwnedPrecedence();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.LoopExp <em>Loop Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -20868,17 +20870,6 @@ public interface PivotPackage
 	 * @generated
 	 */
 	EReference getPackage_ImportedPackage();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.pivot.Package#getOwnedPrecedence <em>Owned Precedence</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Precedence</em>'.
-	 * @see org.eclipse.ocl.examples.pivot.Package#getOwnedPrecedence()
-	 * @see #getPackage()
-	 * @generated
-	 */
-	EReference getPackage_OwnedPrecedence();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.pivot.Package#getOwnedType <em>Owned Type</em>}'.
@@ -23223,6 +23214,14 @@ public interface PivotPackage
 		EClass LIBRARY = eINSTANCE.getLibrary();
 
 		/**
+		 * The meta object literal for the '<em><b>Owned Precedence</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LIBRARY__OWNED_PRECEDENCE = eINSTANCE.getLibrary_OwnedPrecedence();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.LoopExpImpl <em>Loop Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -24235,14 +24234,6 @@ public interface PivotPackage
 		 * @generated
 		 */
 		EReference PACKAGE__IMPORTED_PACKAGE = eINSTANCE.getPackage_ImportedPackage();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Precedence</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PACKAGE__OWNED_PRECEDENCE = eINSTANCE.getPackage_OwnedPrecedence();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Type</b></em>' containment reference list feature.

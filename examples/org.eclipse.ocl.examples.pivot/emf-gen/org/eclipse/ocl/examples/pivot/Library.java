@@ -16,12 +16,20 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Library</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Library#getOwnedPrecedence <em>Owned Precedence</em>}</li>
+ * </ul>
+ * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getLibrary()
  * @model
@@ -29,4 +37,31 @@ package org.eclipse.ocl.examples.pivot;
  */
 public interface Library extends org.eclipse.ocl.examples.pivot.Package
 {
+
+	/**
+	 * Returns the value of the '<em><b>Owned Precedence</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Precedence}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Precedence</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Precedence</em>' containment reference list.
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getLibrary_OwnedPrecedence()
+	 * @model containment="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Library!ownedPrecedence'"
+	 * @generated
+	 */
+	EList<Precedence> getOwnedPrecedence();
+
+	/**
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Precedence} and appends it to the '<em><b>Owned Precedence</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.Precedence}.
+	 * @see #getOwnedPrecedence()
+	 * @generated
+	 */
+	Precedence createOwnedPrecedence();
 } // Library

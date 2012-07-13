@@ -2264,6 +2264,16 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getLibrary_OwnedPrecedence()
+	{
+		return (EReference)libraryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getLoopExp() {
 		return loopExpEClass;
 	}
@@ -3340,17 +3350,8 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPackage_OwnedPrecedence() {
-		return (EReference)packageEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getPackage_OwnedType() {
-		return (EReference)packageEClass.getEStructuralFeatures().get(6);
+		return (EReference)packageEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -4649,6 +4650,7 @@ public class PivotPackageImpl
 		createEOperation(letExpEClass, LET_EXP___VALIDATE_TYPE_IS_IN_TYPE__DIAGNOSTICCHAIN_MAP);
 
 		libraryEClass = createEClass(LIBRARY);
+		createEReference(libraryEClass, LIBRARY__OWNED_PRECEDENCE);
 
 		literalExpEClass = createEClass(LITERAL_EXP);
 
@@ -4734,7 +4736,6 @@ public class PivotPackageImpl
 		createEAttribute(packageEClass, PACKAGE__NS_PREFIX);
 		createEAttribute(packageEClass, PACKAGE__NS_URI);
 		createEReference(packageEClass, PACKAGE__IMPORTED_PACKAGE);
-		createEReference(packageEClass, PACKAGE__OWNED_PRECEDENCE);
 		createEReference(packageEClass, PACKAGE__OWNED_TYPE);
 
 		packageableElementEClass = createEClass(PACKAGEABLE_ELEMENT);
@@ -5629,6 +5630,7 @@ public class PivotPackageImpl
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(libraryEClass, Library.class, "Library", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getLibrary_OwnedPrecedence(), this.getPrecedence(), null, "ownedPrecedence", null, 0, -1, Library.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(literalExpEClass, LiteralExp.class, "LiteralExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
@@ -5769,7 +5771,6 @@ public class PivotPackageImpl
 		initEAttribute(getPackage_NsPrefix(), this.getString(), "nsPrefix", null, 0, 1, org.eclipse.ocl.examples.pivot.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 		initEAttribute(getPackage_NsURI(), this.getString(), "nsURI", null, 0, 1, org.eclipse.ocl.examples.pivot.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 		initEReference(getPackage_ImportedPackage(), this.getPackage(), null, "importedPackage", null, 0, -1, org.eclipse.ocl.examples.pivot.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
-		initEReference(getPackage_OwnedPrecedence(), this.getPrecedence(), null, "ownedPrecedence", null, 0, -1, org.eclipse.ocl.examples.pivot.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEReference(getPackage_OwnedType(), this.getType(), this.getType_Package(), "ownedType", null, 0, -1, org.eclipse.ocl.examples.pivot.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(packageableElementEClass, PackageableElement.class, "PackageableElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -6051,7 +6052,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																								
+		   });																																																																																									
 		addAnnotation
 		  (operationEClass, 
 		   source, 
@@ -6063,7 +6064,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																					
+		   });																																																																																				
 		addAnnotation
 		  (typeEClass, 
 		   source, 

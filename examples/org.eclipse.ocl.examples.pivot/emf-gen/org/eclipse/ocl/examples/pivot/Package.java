@@ -38,7 +38,6 @@ import org.eclipse.emf.ecore.EClass;
  *   <li>{@link org.eclipse.ocl.examples.pivot.Package#getNsPrefix <em>Ns Prefix</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Package#getNsURI <em>Ns URI</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Package#getImportedPackage <em>Imported Package</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Package#getOwnedPrecedence <em>Owned Precedence</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Package#getOwnedType <em>Owned Type</em>}</li>
  * </ul>
  * </p>
@@ -138,33 +137,6 @@ public interface Package
 	 * @generated
 	 */
 	EList<Package> getImportedPackage();
-
-	/**
-	 * Returns the value of the '<em><b>Owned Precedence</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Precedence}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Precedence</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Precedence</em>' containment reference list.
-	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getPackage_OwnedPrecedence()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Package!ownedPrecedence'"
-	 * @generated
-	 */
-	EList<Precedence> getOwnedPrecedence();
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Precedence} and appends it to the '<em><b>Owned Precedence</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Precedence}.
-	 * @see #getOwnedPrecedence()
-	 * @generated
-	 */
-	Precedence createOwnedPrecedence();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Type</b></em>' containment reference list.

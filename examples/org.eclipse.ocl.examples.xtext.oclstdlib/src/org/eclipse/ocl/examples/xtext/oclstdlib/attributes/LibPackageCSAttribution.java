@@ -22,9 +22,11 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.attributes.PackageCSAttribution;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName;
@@ -57,6 +59,10 @@ public class LibPackageCSAttribution extends PackageCSAttribution
 			return null;
 		}
 		else {
+			Library pivot = PivotUtil.getPivot(Library.class, targetElement);
+			if (pivot != null) {
+				environmentView.addNamedElements(pivot.getOwnedPrecedence());
+			}
 			return super.computeLookup(targetElement, environmentView, scopeView);
 		}
 	}

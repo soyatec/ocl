@@ -123,7 +123,7 @@
       <ownedMember xmi:type="cmof:Class" xmi:id="_qlRBsMlBEd-bx742yyafXQ" name="Operation">
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_tLJe0MlBEd-bx742yyafXQ" name="precedence" type="_zQ5xkMlAEd-bx742yyafXQ" lower="0"/>
       </ownedMember>
-      <ownedMember xmi:type="cmof:Class" xmi:id="_iGrr0MlBEd-bx742yyafXQ" name="Package">
+      <ownedMember xmi:type="cmof:Class" xmi:id="_iGrr0MlBEd-bx742yyafXQ" name="Library">
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_kJml0MlBEd-bx742yyafXQ" name="ownedPrecedence" type="_zQ5xkMlAEd-bx742yyafXQ" isOrdered="true" lower="0" upper="*" isComposite="true"/>
       </ownedMember>
       <ownedMember xmi:type="cmof:Class" xmi:id="_zQ5xkMlAEd-bx742yyafXQ" name="Precedence" superClass="_wOAoUMlAEd-bx742yyafXQ">

@@ -28,7 +28,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -39,7 +38,6 @@ import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
-import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
@@ -61,7 +59,6 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PackageImpl#getNsPrefix <em>Ns Prefix</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PackageImpl#getNsURI <em>Ns URI</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PackageImpl#getImportedPackage <em>Imported Package</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PackageImpl#getOwnedPrecedence <em>Owned Precedence</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PackageImpl#getOwnedType <em>Owned Type</em>}</li>
  * </ul>
  * </p>
@@ -161,16 +158,6 @@ public class PackageImpl
 	 * @ordered
 	 */
 	protected EList<org.eclipse.ocl.examples.pivot.Package> importedPackage;
-
-	/**
-	 * The cached value of the '{@link #getOwnedPrecedence() <em>Owned Precedence</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedPrecedence()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Precedence> ownedPrecedence;
 
 	/**
 	 * The cached value of the '{@link #getOwnedType() <em>Owned Type</em>}' containment reference list.
@@ -382,31 +369,6 @@ public class PackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Precedence> getOwnedPrecedence()
-	{
-		if (ownedPrecedence == null)
-		{
-			ownedPrecedence = new EObjectContainmentEList<Precedence>(Precedence.class, this, PivotPackage.PACKAGE__OWNED_PRECEDENCE);
-		}
-		return ownedPrecedence;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Precedence createOwnedPrecedence() {
-		Precedence newOwnedPrecedence = (Precedence) create(PivotPackage.Literals.PRECEDENCE);
-		getOwnedPrecedence().add(newOwnedPrecedence);
-		return newOwnedPrecedence;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Type> getOwnedType()
 	{
 		if (ownedType == null)
@@ -578,8 +540,6 @@ public class PackageImpl
 				return ((InternalEList<?>)getNestedPackage()).basicRemove(otherEnd, msgs);
 			case PivotPackage.PACKAGE__NESTING_PACKAGE:
 				return basicSetNestingPackage(null, msgs);
-			case PivotPackage.PACKAGE__OWNED_PRECEDENCE:
-				return ((InternalEList<?>)getOwnedPrecedence()).basicRemove(otherEnd, msgs);
 			case PivotPackage.PACKAGE__OWNED_TYPE:
 				return ((InternalEList<?>)getOwnedType()).basicRemove(otherEnd, msgs);
 		}
@@ -639,8 +599,6 @@ public class PackageImpl
 				return getNsURI();
 			case PivotPackage.PACKAGE__IMPORTED_PACKAGE:
 				return getImportedPackage();
-			case PivotPackage.PACKAGE__OWNED_PRECEDENCE:
-				return getOwnedPrecedence();
 			case PivotPackage.PACKAGE__OWNED_TYPE:
 				return getOwnedType();
 		}
@@ -706,10 +664,6 @@ public class PackageImpl
 				getImportedPackage().clear();
 				getImportedPackage().addAll((Collection<? extends org.eclipse.ocl.examples.pivot.Package>)newValue);
 				return;
-			case PivotPackage.PACKAGE__OWNED_PRECEDENCE:
-				getOwnedPrecedence().clear();
-				getOwnedPrecedence().addAll((Collection<? extends Precedence>)newValue);
-				return;
 			case PivotPackage.PACKAGE__OWNED_TYPE:
 				getOwnedType().clear();
 				getOwnedType().addAll((Collection<? extends Type>)newValue);
@@ -769,9 +723,6 @@ public class PackageImpl
 			case PivotPackage.PACKAGE__IMPORTED_PACKAGE:
 				getImportedPackage().clear();
 				return;
-			case PivotPackage.PACKAGE__OWNED_PRECEDENCE:
-				getOwnedPrecedence().clear();
-				return;
 			case PivotPackage.PACKAGE__OWNED_TYPE:
 				getOwnedType().clear();
 				return;
@@ -816,8 +767,6 @@ public class PackageImpl
 				return NS_URI_EDEFAULT == null ? nsURI != null : !NS_URI_EDEFAULT.equals(nsURI);
 			case PivotPackage.PACKAGE__IMPORTED_PACKAGE:
 				return importedPackage != null && !importedPackage.isEmpty();
-			case PivotPackage.PACKAGE__OWNED_PRECEDENCE:
-				return ownedPrecedence != null && !ownedPrecedence.isEmpty();
 			case PivotPackage.PACKAGE__OWNED_TYPE:
 				return ownedType != null && !ownedType.isEmpty();
 		}

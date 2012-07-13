@@ -304,24 +304,11 @@
       </genFeatures>
       <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
           createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//Package/ownedPrecedence"/>
-      </genFeatures>
-      <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
-          createChild="true">
         <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//Package/ownedType"/>
       </genFeatures>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass" image="false">
       <ecoreClass href="Pivot.ecore#//Namespace"/>
-    </genClasses>
-    <genClasses xsi:type="genmodel:GenClass">
-      <ecoreClass href="Pivot.ecore#//Precedence"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="Pivot.ecore#//Precedence/associativity"/>
-      </genFeatures>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="Pivot.ecore#//Precedence/order"/>
-      </genFeatures>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass">
       <ecoreClass href="Pivot.ecore#//TypeTemplateParameter"/>
@@ -492,6 +479,15 @@
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass">
       <ecoreClass href="Pivot.ecore#//OperationTemplateParameter"/>
+    </genClasses>
+    <genClasses xsi:type="genmodel:GenClass">
+      <ecoreClass href="Pivot.ecore#//Precedence"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="Pivot.ecore#//Precedence/associativity"/>
+      </genFeatures>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="Pivot.ecore#//Precedence/order"/>
+      </genFeatures>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass">
       <ecoreClass href="Pivot.ecore#//AssociationClass"/>
@@ -896,6 +892,10 @@
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass">
       <ecoreClass href="Pivot.ecore#//Library"/>
+      <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
+          createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//Library/ownedPrecedence"/>
+      </genFeatures>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass">
       <ecoreClass href="Pivot.ecore#//MessageExp"/>
