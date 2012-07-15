@@ -25,12 +25,12 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ocl.examples.library.executor.ReflectiveType;
 import org.eclipse.ocl.examples.pivot.ClassifierType;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -39,7 +39,6 @@ import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.executor.PivotReflectivePackage;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
@@ -55,29 +54,30 @@ import com.google.common.collect.Iterables;
  */
 public class TypeServer
 {
-	public static Function<TypeTracker, Type> tracker2class = new Function<TypeTracker, Type>()
+	public static Function<TypeServer, Type> server2type = new Function<TypeServer, Type>()
 	{
-		public Type apply(TypeTracker typeTracker) {
-			return typeTracker.getTarget();
+		public Type apply(TypeServer typeServer) {
+			return typeServer.getPrimaryType();
 		}
 	};
 
+	protected final PackageServer packageServer;
 	protected final PackageManager packageManager;
-	private Type primaryType;
 	
 	private final List<TypeTracker> trackers = new ArrayList<TypeTracker>();
 
 	/**
-	 * Map from operation name to the overload list of operation or a list of operations to be treated as merged. 
+	 * Lazily created map from operation name to the list of overloaded operation which is a list of operations to be treated as merged.
+	 * The inner list of operations have the same name and signature. The outer list have the same name, but distinct signatures. 
 	 */
-	private final Map<String, List<List<Operation>>> operation2operations = new HashMap<String, List<List<Operation>>>();
+	private Map<String, List<List<Operation>>> operation2operations = null;
 
 	/**
-	 * Map from property name to the list of properties to be treated as merged. 
+	 * Lazily created map from property name to the list of properties to be treated as merged. 
 	 */
-	private final Map<String, List<Property>> property2properties = new HashMap<String, List<Property>>();
+	private Map<String, List<Property>> property2properties = null;
 	
-	private PackageServer packageServer;			// Null value assigned by setTarget();
+	private Type primaryType;
 	
 	/**
 	 * Compiled inheritance relationships used by compiled expressions.
@@ -89,67 +89,41 @@ public class TypeServer
 	 */
 	private Map<ParameterableElement, List<WeakReference<Type>>> firstActual2specializations = null;
 	
-	protected TypeServer(PackageManager packageManager) {
-		this.packageManager = packageManager;
+	TypeServer(PackageServer packageServer) {
+		this.packageServer = packageServer;
+		this.packageManager = packageServer.getPackageManager();
 	}
 
-	void addOperation(Operation pivotOperation) {
-		String operationName = pivotOperation.getName();
-		List<List<Operation>> overloads = operation2operations.get(operationName);
-		if (overloads == null) {
-			overloads = new ArrayList<List<Operation>>();
-			operation2operations.put(operationName, overloads);
-		}
-		List<Operation> overload = findOverload(overloads, pivotOperation);
-		if (overload == null) {
-			overload = new ArrayList<Operation>();
-			overloads.add(overload);
-		}
-		if (!overload.contains(pivotOperation)) {
-			overload.add(pivotOperation);
-		}
-	}
-
-	void addProperty(Property pivotProperty) {
-		String propertyName = pivotProperty.getName();
-		List<Property> properties = property2properties.get(propertyName);
-		if (properties == null) {
-			properties = new ArrayList<Property>();
-			property2properties.put(propertyName, properties);
-		}
-		if (!properties.contains(pivotProperty)) {
-			properties.add(pivotProperty);
-		}
-	}
-	
-	public TypeTracker addType(Type type) {
-		TypeTracker typeTracker = (TypeTracker) EcoreUtil.getAdapter(type.eAdapters(), packageManager);
-		if (typeTracker == null) {
-			typeTracker = new TypeTracker(this, type);
-		}
-		if (!trackers.contains(typeTracker)) {
-			trackers.add(typeTracker);
-			if (trackers.size() == 1) {
-				MetaModelManager metaModelManager = packageManager.getMetaModelManager();
-				primaryType = trackers.get(0).getTarget();
-				org.eclipse.ocl.examples.pivot.Package targetPackage = primaryType.getPackage();
-				packageServer = metaModelManager.getPackageTracker(targetPackage).getPackageServer();
+	void addedMemberOperation(Operation pivotOperation) {
+		if (operation2operations != null) {
+			String operationName = pivotOperation.getName();
+			List<List<Operation>> overloads = operation2operations.get(operationName);
+			if (overloads == null) {
+				overloads = new ArrayList<List<Operation>>();
+				operation2operations.put(operationName, overloads);
+			}
+			List<Operation> overload = findOverload(overloads, pivotOperation);
+			if (overload == null) {
+				overload = new ArrayList<Operation>();
+				overloads.add(overload);
+			}
+			if (!overload.contains(pivotOperation)) {
+				overload.add(pivotOperation);
 			}
 		}
-		return typeTracker;
 	}
 
-	void addedOperation(Object object) {
-		if (object instanceof Operation) {
-			Operation pivotOperation = (Operation)object;
-			addOperation(pivotOperation);
-		}
-	}
-
-	void addedProperty(Object object) {
-		if (object instanceof Property) {
-			Property pivotProperty = (Property)object;
-			addProperty(pivotProperty);
+	void addedMemberProperty(Property pivotProperty) {
+		if (property2properties != null) {
+			String propertyName = pivotProperty.getName();
+			List<Property> properties = property2properties.get(propertyName);
+			if (properties == null) {
+				properties = new ArrayList<Property>();
+				property2properties.put(propertyName, properties);
+			}
+			if (!properties.contains(pivotProperty)) {
+				properties.add(pivotProperty);
+			}
 		}
 	}
 
@@ -205,7 +179,7 @@ public class TypeServer
 		return specializedType;
 	}
 
-	public void dispose() {
+	void dispose() {
 		if (!trackers.isEmpty()) {
 			Collection<TypeTracker> savedTypeTrackers = new ArrayList<TypeTracker>(trackers);
 			trackers.clear();
@@ -213,27 +187,35 @@ public class TypeServer
 				typeTracker.dispose();
 			}
 		}
-		property2properties.clear();
-		operation2operations.clear();
+		if (property2properties != null) {
+			property2properties.clear();
+			property2properties = null;
+		}
+		if (operation2operations != null) {
+			operation2operations.clear();
+			operation2operations = null;
+		}
 		if (executorType != null) {
 			executorType.dispose();
 			executorType = null;
 		}
+		packageServer.removedTypeServer(this);
 	}
 	
 	private List<Operation> findOverload(List<List<Operation>> overloads, Operation requiredOperation) {
-		List<? extends TypedElement> requiredParameters;
+		List<Parameter> requiredParameters;
 		if (requiredOperation instanceof Iteration) {
 			requiredParameters = ((Iteration)requiredOperation).getOwnedIterator();
 		}
 		else {
 			requiredParameters = requiredOperation.getOwnedParameter();
 		}
+		MetaModelManager metaModelManager = packageManager.getMetaModelManager();
 		int requiredSize = requiredParameters.size();
 		for (List<Operation> overload : overloads) {
 			if (overload.size() > 0) {
 				Operation operation = overload.get(0);
-				List<? extends TypedElement> actualParameters;
+				List<Parameter> actualParameters;
 				if (operation instanceof Iteration) {
 					actualParameters = ((Iteration)operation).getOwnedIterator();
 				}
@@ -243,10 +225,10 @@ public class TypeServer
 				if (requiredSize == actualParameters.size()) {
 					boolean gotIt = true;
 					for (int i = 0; i < requiredSize; i++) {
-						TypedElement requiredParameter = requiredParameters.get(i);
-						TypedElement actualParameter = actualParameters.get(i);
-						Type requiredType = requiredParameter.getType();
-						Type actualType = actualParameter.getType();
+						Parameter requiredParameter = requiredParameters.get(i);
+						Parameter actualParameter = actualParameters.get(i);
+						Type requiredType = metaModelManager.getTypeWithMultiplicity(requiredParameter);
+						Type actualType = metaModelManager.getTypeWithMultiplicity(actualParameter);
 						if (requiredType != actualType) {
 							gotIt = false;
 							break;
@@ -261,7 +243,7 @@ public class TypeServer
 		return null;
 	}
 
-	protected Type findSpecialization(List<WeakReference<Type>> partialSpecializations, List<? extends ParameterableElement> templateArguments) {
+	Type findSpecialization(List<WeakReference<Type>> partialSpecializations, List<? extends ParameterableElement> templateArguments) {
 		for (int j = partialSpecializations.size(); --j >= 0; ) {
 			Type specializedType = partialSpecializations.get(j).get();
 			if (specializedType == null) {
@@ -324,12 +306,10 @@ public class TypeServer
 		return executorType;
 	}
 
-
-	public final PackageManager getPackageManager() {
-		return packageManager;
-	}
-
-	public Operation getOperation(Operation pivotOperation) {
+	public Operation getMemberOperation(Operation pivotOperation) {
+		if (operation2operations == null) {
+			initMemberOperations();
+		}
 		String operationName = pivotOperation.getName();
 		List<List<Operation>> overloads = operation2operations.get(operationName);
 		if (overloads == null) {
@@ -342,7 +322,10 @@ public class TypeServer
 		return overload.isEmpty() ? null : overload.get(0);
 	}
 
-	public Iterable<Operation> getOperations(Operation pivotOperation) {
+	public Iterable<Operation> getMemberOperations(Operation pivotOperation) {
+		if (operation2operations == null) {
+			initMemberOperations();
+		}
 		String operationName = pivotOperation.getName();
 		List<List<Operation>> overloads = operation2operations.get(operationName);
 		if (overloads == null) {
@@ -351,21 +334,31 @@ public class TypeServer
 		return findOverload(overloads, pivotOperation);
 	}
 
-	public Type getPrimaryType() {
-		return primaryType;
-	}
-
-	public Iterable<Property> getProperties(Property pivotProperty) {
+	public Iterable<Property> getMemberProperties(Property pivotProperty) {
+		if (property2properties == null) {
+			initMemberProperties();
+		}
 		String propertyName = pivotProperty.getName();
 		return property2properties.get(propertyName);
 	}
 
-	public Property getProperty(String propertyName) {
+	public Property getMemberProperty(String propertyName) {
+		if (property2properties == null) {
+			initMemberProperties();
+		}
 		List<Property> properties = property2properties.get(propertyName);
 		if (properties == null) {
 			return null;
 		}
 		return properties.isEmpty() ? null : properties.get(0);
+	}
+
+	public final PackageManager getPackageManager() {
+		return packageManager;
+	}
+
+	public Type getPrimaryType() {
+		return primaryType;
 	}
 
 	public synchronized Type getSpecializedType(List<? extends ParameterableElement> templateArguments) {
@@ -392,30 +385,69 @@ public class TypeServer
 		return specializedType;
 	}
 
+	public Iterable<Type> getTrackedTypes() {
+		return Iterables.transform(trackers, TypeTracker.tracker2type);
+	}
+
 	public TypeTracker getTypeTracker(Type pivotType) {
 		for (TypeTracker typeTracker : trackers) {
 			if (typeTracker.getTarget() == pivotType) {
 				return typeTracker;
 			}
 		}
-		return addType(pivotType);
+		TypeTracker typeTracker = new TypeTracker(this, pivotType);
+		packageManager.addTypeTracker(pivotType, typeTracker);
+		if (operation2operations != null) {
+			initMemberOperations(pivotType);
+		}	
+		if (property2properties != null) {
+			initMemberProperties(pivotType);
+		}	
+		trackers.add(typeTracker);
+		if (trackers.size() == 1) {
+			setPrimaryType();
+		}
+		return typeTracker;
 	}
 
 	public List<TypeTracker> getTypeTrackers() {
 		return trackers;
 	}
 
-	public Iterable<Type> getTypes() {
-		return Iterables.transform(trackers, tracker2class);
-	}
-	
-	void removedTracker(TypeTracker typeTracker) {
-		trackers.remove(typeTracker);
+	private void initMemberOperations() {
+		if (operation2operations == null) {
+			operation2operations = new HashMap<String, List<List<Operation>>>();
+			for (TypeTracker typeTracker : trackers) {
+				Type type = typeTracker.getTarget();
+				initMemberOperations(type);
+			}
+		}	
 	}
 
-	void removedOperation(Object object) {
-		if (object instanceof Operation) {
-			Operation pivotOperation = (Operation)object;
+	private  void initMemberOperations(Type type) {
+		for (Operation pivotOperation : type.getOwnedOperation()) {
+			addedMemberOperation(pivotOperation);
+		}
+	}
+
+	private void initMemberProperties() {
+		if (property2properties == null) {
+			property2properties = new HashMap<String, List<Property>>();
+			for (TypeTracker typeTracker : trackers) {
+				Type type = typeTracker.getTarget();
+				initMemberProperties(type);
+			}
+		}	
+	}
+
+	private  void initMemberProperties(Type type) {
+		for (Property pivotProperty : type.getOwnedAttribute()) {
+			addedMemberProperty(pivotProperty);
+		}
+	}
+
+	void removedMemberOperation(Operation pivotOperation) {
+		if (operation2operations != null) {
 			String operationName = pivotOperation.getName();
 			List<List<Operation>> overloads = operation2operations.get(operationName);
 			if (overloads == null) {
@@ -432,13 +464,11 @@ public class TypeServer
 					}
 				}
 			}
-//			removeOrphan(pivotOperation);
 		}
 	}
 
-	void removedProperty(Object object) {
-		if (object instanceof Property) {
-			Property pivotProperty = (Property)object;
+	void removedMemberProperty(Property pivotProperty) {
+		if (property2properties != null) {
 			String propertyName = pivotProperty.getName();
 			List<Property> properties = property2properties.get(propertyName);
 			if (properties != null) {
@@ -447,25 +477,23 @@ public class TypeServer
 					property2properties.remove(propertyName);
 				}
 			}
-//			removeOrphan(pivotProperty);
 		}
 	}
+	
+	void removeTypeTracker(TypeTracker typeTracker) {
+		trackers.remove(typeTracker);
+		packageManager.removeTypeTracker(typeTracker);
+	}
 
-	void removedType(Type pivotType) {
-		TypeTracker typeTracker = packageManager.findTypeTracker(pivotType);
-		if (typeTracker != null) {
-			typeTracker.dispose();
-		}
+	void removedTypeTracker(TypeTracker typeTracker) {
+		typeTracker.dispose();
+		setPrimaryType();
 		if (trackers.size() <= 0) {
 			dispose();
 		}
-		else {	
-			primaryType = null;
-			packageServer = null;
-		}
 	}
 
-	protected void resolveSuperClasses(Type specializedClass, Type libraryClass, Map<TemplateParameter, ParameterableElement> allBindings) {
+	void resolveSuperClasses(Type specializedClass, Type libraryClass, Map<TemplateParameter, ParameterableElement> allBindings) {
 		MetaModelManager metaModelManager = packageManager.getMetaModelManager();
 		for (Type superType : libraryClass.getSuperClass()) {
 			List<TemplateBinding> superTemplateBindings = superType.getTemplateBinding();
@@ -500,18 +528,17 @@ public class TypeServer
 		}
 	}
 
-//	@Override
-//	public void setTarget(Notifier newTarget) {
-//		super.setTarget(newTarget);
-//		MetaModelManager metaModelManager = getMetaModelManager();
-//		org.eclipse.ocl.examples.pivot.Package targetPackage = ((Type)newTarget).getPackage();
-//		packageServer = metaModelManager.getPackageTracker(targetPackage).getPackageServer();
-//		assert packageServer != null;
-//	}
+	void setPrimaryType() {
+		if (trackers.size() > 0) {
+			primaryType = trackers.get(0).getTarget();
+		}
+		else {
+			primaryType = null;
+		}
+	}
 
-//	@Override
-//	public void unsetTarget(Notifier oldTarget) {
-//		packageServer = null;
-//		super.unsetTarget(oldTarget);
-//	}
+	@Override
+	public String toString() {
+		return String.valueOf(primaryType);
+	}
 }

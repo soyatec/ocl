@@ -26,13 +26,21 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 
+import com.google.common.base.Function;
+
 /**
  * A TypeTracker adapts a Type to coordinate the coherent behaviour of one or more
  * merged Types as required for Complete OCL type extension.
  */
-public class TypeTracker implements Adapter.Internal
+public class TypeTracker implements Adapter.Internal			// FIXME package private
 {
-	protected final PackageManager packageManager;
+	public static Function<TypeTracker, Type> tracker2type = new Function<TypeTracker, Type>()
+	{
+		public Type apply(TypeTracker typeTracker) {
+			return typeTracker.getTarget();
+		}
+	};
+
 	protected final TypeServer typeServer;
 
 	/**
@@ -40,23 +48,15 @@ public class TypeTracker implements Adapter.Internal
 	 */
 	private final Type target;
 	
-	protected TypeTracker(TypeServer typeServer, Type target) {
-		this.packageManager = typeServer.getPackageManager();
+	TypeTracker(TypeServer typeServer, Type target) {
 		this.typeServer = typeServer;
 		this.target = target;
 		target.eAdapters().add(this);
-		packageManager.addTypeTracker(target, this);
-		initializeContents();
 	}
 
-	public void dispose() {
-		typeServer.removedTracker(this);
-		packageManager.removeTypeTracker(this);
+	void dispose() {
+		typeServer.removeTypeTracker(this);
 		target.eAdapters().remove(this);
-	}
-
-	public final PackageManager getPackageManager() {
-		return packageManager;
 	}
 
 	public Type getPrimaryType() {
@@ -70,19 +70,9 @@ public class TypeTracker implements Adapter.Internal
 	public TypeServer getTypeServer() {
 		return typeServer;
 	}
-
-	protected void initializeContents() {
-		TypeServer typeServer = getTypeServer();
-		for (Operation pivotOperation : target.getOwnedOperation()) {
-			typeServer.addOperation(pivotOperation);
-		}
-		for (Property pivotProperty : target.getOwnedAttribute()) {
-			typeServer.addProperty(pivotProperty);
-		}
-	}		
 	
 	public final boolean isAdapterForType(Object type) {
-		return type == packageManager;
+		return type == typeServer.getPackageManager();
 	}
 
 	/**
@@ -98,27 +88,35 @@ public class TypeTracker implements Adapter.Internal
 			switch (eventType) {
 				case Notification.ADD: {
 					Object value = notification.getNewValue();
-					typeServer.addedOperation(value);
+					if (value instanceof Operation) {
+						typeServer.addedMemberOperation((Operation) value);
+					}
 					break;
 				}
 				case Notification.ADD_MANY: {
 					@SuppressWarnings("unchecked")
 					List<Object> values = (List<Object>)notification.getNewValue();
 					for (Object value : values) {
-						typeServer.addedOperation(value);
+						if (value instanceof Operation) {
+							typeServer.addedMemberOperation((Operation) value);
+						}
 					}
 					break;
 				}
 				case Notification.REMOVE: {
 					Object value = notification.getOldValue();
-					typeServer.removedOperation(value);
+					if (value instanceof Operation) {
+						typeServer.removedMemberOperation((Operation) value);
+					}
 					break;
 				}
 				case Notification.REMOVE_MANY: {
 					@SuppressWarnings("unchecked")
 					List<Object> values = (List<Object>)notification.getOldValue();
 					for (Object value : values) {
-						typeServer.removedOperation(value);
+						if (value instanceof Operation) {
+							typeServer.removedMemberOperation((Operation) value);
+						}
 					}
 					break;
 				}
@@ -128,27 +126,35 @@ public class TypeTracker implements Adapter.Internal
 			switch (eventType) {
 				case Notification.ADD: {
 					Object value = notification.getNewValue();
-					typeServer.addedProperty(value);
+					if (value instanceof Property) {
+						typeServer.addedMemberProperty((Property) value);
+					}
 					break;
 				}
 				case Notification.ADD_MANY: {
 					@SuppressWarnings("unchecked")
 					List<Object> values = (List<Object>)notification.getNewValue();
 					for (Object value : values) {
-						typeServer.addedProperty(value);
+						if (value instanceof Property) {
+							typeServer.addedMemberProperty((Property) value);
+						}
 					}
 					break;
 				}
 				case Notification.REMOVE: {
 					Object value = notification.getOldValue();
-					typeServer.removedProperty(value);
+					if (value instanceof Property) {
+						typeServer.removedMemberProperty((Property) value);
+					}
 					break;
 				}
 				case Notification.REMOVE_MANY: {
 					@SuppressWarnings("unchecked")
 					List<Object> values = (List<Object>)notification.getOldValue();
 					for (Object value : values) {
-						typeServer.removedProperty(value);
+						if (value instanceof Property) {
+							typeServer.removedMemberProperty((Property) value);
+						}
 					}
 					break;
 				}

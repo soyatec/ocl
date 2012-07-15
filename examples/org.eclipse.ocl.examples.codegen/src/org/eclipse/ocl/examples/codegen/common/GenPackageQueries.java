@@ -302,7 +302,7 @@ public class GenPackageQueries
 		MetaModelManager metaModelManager = getMetaModelManager(genPackage);
 		PrimitiveType booleanType = metaModelManager.getBooleanType();
 		TypeServer typeServer = metaModelManager.getTypeServer(booleanType);
-		for (Type type : typeServer.getTypes()) {
+		for (Type type : typeServer.getTrackedTypes()) {
 			if (type.getPackage() != thisPackage) {
 				GenPackage gPackage = getGenPackage(genPackage, type.getPackage());
 				return getInterfacePackageName(gPackage) + "." + gPackage.getPrefix() + "Tables";
@@ -364,7 +364,7 @@ public class GenPackageQueries
 		TypeServer typeServer = metaModelManager.getTypeServer(booleanType);
 		boolean gotThatPackage = false;
 		boolean gotThisPackage = false;
-		for (Type type : typeServer.getTypes()) {
+		for (Type type : typeServer.getTrackedTypes()) {
 			if (type.getPackage() == thisPackage) {
 				gotThisPackage = true;
 			}

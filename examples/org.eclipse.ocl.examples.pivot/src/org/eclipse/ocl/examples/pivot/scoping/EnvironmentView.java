@@ -132,10 +132,13 @@ public class EnvironmentView
 		if (elementName == null) {
 			return 0;
 		}
-		element = metaModelManager.getPrimaryElement(element);
+		if (element instanceof Type) {
+			PivotUtil.debugWellContainedness((Type)element);
+		}		
 		if ((name != null) && !name.equals(elementName)) {
 			return 0;
 		}
+		element = metaModelManager.getPrimaryElement(element);
 		if ((name != null) && (matchers != null)) {
 			for (ScopeFilter filter : matchers) {
 				if (!filter.matches(this, forType, element)) {
@@ -237,7 +240,7 @@ public class EnvironmentView
 		List<Type> superClasses = target.getSuperClass();
 		if (superClasses.size() > 0) {
 			for (Type superClass : superClasses) {
-					addElementsOfScope(superClass, scopeView);
+				addElementsOfScope(superClass, scopeView);
 			}
 		}
 		else {

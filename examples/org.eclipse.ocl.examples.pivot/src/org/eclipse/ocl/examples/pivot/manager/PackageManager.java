@@ -29,11 +29,21 @@ import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
+
 /**
  * PackageManager encapsulates the knowledge about known packages and their nsURIs.
  */
-public class PackageManager
+public class PackageManager extends PackageServerParent
 {
+	public static Function<PackageServer, org.eclipse.ocl.examples.pivot.Package> server2package = new Function<PackageServer, org.eclipse.ocl.examples.pivot.Package>()
+	{
+		public org.eclipse.ocl.examples.pivot.Package apply(PackageServer packageServer) {
+			return packageServer.getPrimaryPackage();
+		}
+	};
+
 	/**
 	 * The MetaModelManager for which this PackageManager manages the packages.
 	 */
@@ -44,7 +54,8 @@ public class PackageManager
 	/**
 	 * Map from package URI to primary package. 
 	 */
-	private final Map<String, org.eclipse.ocl.examples.pivot.Package> uri2package = new HashMap<String, org.eclipse.ocl.examples.pivot.Package>();
+	private final Map<String, PackageServer> uri2package = new HashMap<String, PackageServer>();
+//	private final Map<String, org.eclipse.ocl.examples.pivot.Package> uri2package = new HashMap<String, org.eclipse.ocl.examples.pivot.Package>();
 	
 	/**
 	 * Map from package name to package URIs, used solely to support merge of an nsURI-less package such as an OCL stdlib enhancement
@@ -67,77 +78,62 @@ public class PackageManager
 	protected PackageManager(MetaModelManager metaModelManager) {
 		this.metaModelManager = metaModelManager;
 	}
-	
-	public void addRoot(Root pivotRoot) {
-		roots.add(pivotRoot);
-		for (org.eclipse.ocl.examples.pivot.Package pivotPackage : pivotRoot.getNestedPackage()) {
-			String nsURI = pivotPackage.getNsURI();
-			org.eclipse.ocl.examples.pivot.Package primaryPackage = null;
-			if (nsURI != null) {										// Explicit nsURI for explicit package (merge)
-				primaryPackage = getPackageByURI(nsURI);
-			}
-			else {
-				String name = pivotPackage.getName();
-				if (name != null) {										// Null nsURI can merge into same named package
-					primaryPackage = getPackageByName(name);
-				}
-				if (primaryPackage == null) {							// Null URI distinct package, so invent a default nsURI
-					nsURI = PivotUtil.getNsURI(pivotPackage);
-					primaryPackage = getPackageByURI(nsURI);
-				}
-			}
-			if (primaryPackage != pivotPackage) {						// Skip recursive call
-				if (primaryPackage != null) {
-					PackageTracker packageTracker = getPackageTracker(primaryPackage);
-					packageTracker.getPackageServer().addSecondaryPackage(pivotPackage);
-				}
-				else {
-					putPackage(nsURI, pivotPackage);					// FIXME Skip orphans
-				}
-			}
-			for (org.eclipse.ocl.examples.pivot.Package nestedPackage : pivotPackage.getNestedPackage()) {
-				addPackages(nestedPackage);
-			}
-		}
-	}
 
-	void addPackages(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
-		addPackage(pivotPackage);
-		for (org.eclipse.ocl.examples.pivot.Package nestedPackage : pivotPackage.getNestedPackage()) {
-			addPackages(nestedPackage);
-		}
-	}
-
-	void addPackage(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+	void addPackage(PackageServerParent parentPackageServer, org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+		PackageServer packageServer = null;
+		String name = pivotPackage.getName();
 		String nsURI = pivotPackage.getNsURI();
-		org.eclipse.ocl.examples.pivot.Package primaryPackage = null;
+//		org.eclipse.ocl.examples.pivot.Package primaryPackage = null;
 		if (nsURI != null) {										// Explicit nsURI for explicit package (merge)
-			primaryPackage = getPackageByURI(nsURI);
+			packageServer = uri2package.get(nsURI);
+//			primaryPackage = getPackageByURI(nsURI);
 		}
-		else {
-			String name = pivotPackage.getName();
-			if (name != null) {										// Null nsURI can merge into same named package
-				primaryPackage = getPackageByName(name);
-			}
-			if (primaryPackage == null) {							// Null URI distinct package, so invent a default nsURI
-				nsURI = PivotUtil.getNsURI(pivotPackage);
-				primaryPackage = getPackageByURI(nsURI);
-			}
+		else if (name != null) {										// Null nsURI can merge into same named package
+//			primaryPackage = getPackageByName(name);
+			packageServer = getMemberPackageServer(name);
 		}
-		if (primaryPackage != pivotPackage) {						// Skip recursive call
-			if (primaryPackage != null) {
-				PackageTracker packageTracker = getPackageTracker(primaryPackage);
-				packageTracker.getPackageServer().addSecondaryPackage(pivotPackage);
-			}
-			else {
-				putPackage(nsURI, pivotPackage);
-			}
+//			if (primaryPackage == null) {							// Null URI distinct package, so invent a default nsURI
+//				nsURI = PivotUtil.getNsURI(pivotPackage);
+//				primaryPackage = getPackageByURI(nsURI);
+//			}
+		if (packageServer == null) {
+			packageServer = parentPackageServer.getMemberPackageServer(pivotPackage);
+		}
+		packageServer.addTrackedPackage(pivotPackage);
+		
+		
+//		if (primaryPackage != pivotPackage) {						// Skip recursive call
+//			if (primaryPackage != null) {
+//				PackageTracker packageTracker = getPackageTracker(primaryPackage);
+//				packageTracker.getPackageServer().addTrackedPackage(pivotPackage);
+//			}
+//			else {
+//				putPackage(nsURI, pivotPackage);
+//				getPackageTracker(pivotPackage);
+//			}
+//		}
+		for (org.eclipse.ocl.examples.pivot.Package nestedPackage : pivotPackage.getNestedPackage()) {
+			addPackage(packageServer, nestedPackage);
+		}
+	}
+
+	void addPackageServer(PackageServer packageServer) {
+		String nsURI = packageServer.getNsURI();
+		if (nsURI != null) {
+			uri2package.put(nsURI, packageServer);
 		}
 	}
 
 	void addPackageTracker(org.eclipse.ocl.examples.pivot.Package pivotPackage, PackageTracker packageTracker) {
 		PackageTracker oldTracker = package2tracker.put(pivotPackage, packageTracker);
 		assert oldTracker == null;
+	}
+	
+	public synchronized void addRoot(Root pivotRoot) {
+		roots.add(pivotRoot);
+		for (org.eclipse.ocl.examples.pivot.Package pivotPackage : pivotRoot.getNestedPackage()) {
+			addPackage(this, pivotPackage);
+		}
 	}
 
 	void addTypeTracker(Type pivotType, TypeTracker typeTracker) {
@@ -155,18 +151,20 @@ public class PackageManager
 			throw new IllegalArgumentException("Duplicate nsURI '" + nsURI + "'");
 		}
 		else {
-			putPackage(nsURI, pivotPackage);
+//			putPackage(nsURI, pivotPackage);
+			getPackageTracker(pivotPackage);
 		}
 	}
 
-	public void dispose() {
+	@Override
+	public synchronized void dispose() {
 		if (!package2tracker.isEmpty()) {
 			Collection<PackageTracker> savedPackageTrackers = new ArrayList<PackageTracker>(package2tracker.values());
 			package2tracker.clear();
 			for (PackageTracker packageTracker : savedPackageTrackers) {
-				if (packageTracker instanceof PackageServer) {
+//				if (packageTracker instanceof PackageServer) {
 					packageTracker.dispose();
-				}
+//				}
 			}
 		}
 		if (!type2tracker.isEmpty()) {
@@ -178,6 +176,7 @@ public class PackageManager
 		}
 		uri2package.clear();
 		name2uris.clear();
+		super.dispose();
 	}
 
 	public PackageTracker findPackageTracker(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
@@ -189,13 +188,14 @@ public class PackageManager
 	}
 
 	public Iterable<org.eclipse.ocl.examples.pivot.Package> getAllPackages() {
-		return uri2package.values();		// FIXME
+		return Iterables.transform(uri2package.values(), server2package);		// FIXME
 	}
 
 	public Iterable<org.eclipse.ocl.examples.pivot.Package> getAllPackagesWithUris() {
-		return uri2package.values();
+		return Iterables.transform(uri2package.values(), server2package);
 	}
 
+	@Override
 	public MetaModelManager getMetaModelManager() {
 		return metaModelManager;
 	}
@@ -216,25 +216,94 @@ public class PackageManager
 	}
 
 	public org.eclipse.ocl.examples.pivot.Package getPackageByURI(String nsURI) {
-		return uri2package.get(nsURI);
+		PackageServer packageServer = uri2package.get(nsURI);
+		return packageServer != null ? packageServer.getPrimaryPackage() : null;
 	}
 
+	@Override
+	public final PackageManager getPackageManager() {
+		return this;
+	}
+
+	public PackageServer getPackageServer(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+		String nsURI = pivotPackage.getNsURI();
+		PackageServer packageServer = uri2package.get(nsURI);
+		if (packageServer == null) {
+			PackageServerParent packageServerParent = getParentPackageServer(pivotPackage);
+			packageServer = packageServerParent.getMemberPackageServer(pivotPackage);
+		}
+		return packageServer;
+	}
+
+	@Override
 	public PackageTracker getPackageTracker(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
 		PackageTracker packageTracker = findPackageTracker(pivotPackage);
 		if (packageTracker == null) {
 			packageTracker = (PackageTracker) EcoreUtil.getAdapter(pivotPackage.eAdapters(), this);
 			if (packageTracker == null) {
-				packageTracker = new PackageServer(this, pivotPackage);
+				PackageServer packageServer = new PackageServer(this, pivotPackage.getNsURI());
+				packageTracker = packageServer.getPackageTracker(pivotPackage);
 			}
 		}
 		return packageTracker;
 	}
 
+/*	public synchronized Iterable<org.eclipse.ocl.examples.pivot.Package> getPartialPackages(org.eclipse.ocl.examples.pivot.Package pkg) {
+		PackageTracker packageTracker = findPackageTracker(pkg);
+		Set<org.eclipse.ocl.examples.pivot.Package> allPackages = new HashSet<org.eclipse.ocl.examples.pivot.Package>();
+		if (packageTracker != null) {
+			for (org.eclipse.ocl.examples.pivot.Package aPackage : packageTracker.getPackageServer().getTrackedPackages()) {
+				allPackages.add(aPackage);
+			}
+		}
+		else {
+			allPackages.add(pkg);
+		}
+		getAllPartialPackages(allPackages, allPackages);		// FIXME Inconsistent name/functionality
+		return allPackages;
+	} */
+
+/*	private void getAllPartialPackages(Set<org.eclipse.ocl.examples.pivot.Package> knownPackages, Set<org.eclipse.ocl.examples.pivot.Package> newPackages) {
+		Set<org.eclipse.ocl.examples.pivot.Package> morePackages = null;
+		for (org.eclipse.ocl.examples.pivot.Package newPackage : newPackages) {
+			for (org.eclipse.ocl.examples.pivot.Package importedPackage : newPackage.getImportedPackage()) {
+				if (morePackages == null) {
+					morePackages = new HashSet<org.eclipse.ocl.examples.pivot.Package>();
+				}
+				PackageTracker packageTracker = findPackageTracker(importedPackage);
+				if (packageTracker != null) {
+					for (org.eclipse.ocl.examples.pivot.Package aPackage : packageTracker.getPackageServer().getTrackedPackages()) {
+						morePackages.add(aPackage);
+					}
+				}
+				else {
+					morePackages.add(importedPackage);
+				}
+			}
+		}
+		if (morePackages != null) {
+			morePackages.removeAll(knownPackages);
+			if (morePackages.size() > 0) {
+				knownPackages.addAll(morePackages);
+				getAllPartialPackages(knownPackages, morePackages);
+			}
+		}
+	} */
+
 	public Iterable<Root> getRoots() {
 		return roots;
 	}
+	
+	public TypeServer getTypeServer(Type pivotType) {
+		TypeTracker typeTracker = findTypeTracker(pivotType);
+		if (typeTracker == null) {
+			PackageServer packageServer = getPackageServer(pivotType.getPackage());
+			typeTracker = packageServer.getTypeTracker(pivotType);
+		}
+		return typeTracker.getTypeServer();
+	}
 
-	protected void putPackage(String nsURI, org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+/*	protected void putPackage(String nsURI, org.eclipse.ocl.examples.pivot.Package pivotPackage) {
 		uri2package.put(nsURI, pivotPackage);
 		String name = pivotPackage.getName();
 		if (name != null) {
@@ -247,16 +316,16 @@ public class PackageManager
 				uriList.add(nsURI);
 			}
 		}
-	}
+	} */
 
-	void reassignPackageServer(PackageServer packageServer, org.eclipse.ocl.examples.pivot.Package toPackage) {
+/*	void reassignPackageServer(PackageServer packageServer, org.eclipse.ocl.examples.pivot.Package toPackage) {
 		removePackageTracker(packageServer);
 		package2tracker.put(toPackage, packageServer);
 		String nsURI = toPackage.getNsURI();
 		if (nsURI != null) {
 			putPackage(nsURI, toPackage);
 		}
-	}
+	} */
 
 	void removePackageTracker(PackageTracker packageTracker) {
 		if (!package2tracker.isEmpty()) {						// Empty if disposing
@@ -264,8 +333,8 @@ public class PackageManager
 			if (trackedPackage != null) {
 				package2tracker.remove(trackedPackage);
 				String nsURI = trackedPackage.getNsURI();
-				@SuppressWarnings("unused")
-				org.eclipse.ocl.examples.pivot.Package removedPackage = uri2package.remove(nsURI);
+//				@SuppressWarnings("unused")
+//				org.eclipse.ocl.examples.pivot.Package removedPackage = uri2package.remove(nsURI);
 				String name = trackedPackage.getName();
 				List<String> uriList = name2uris.get(name);
 				if (uriList != null) {
@@ -277,5 +346,9 @@ public class PackageManager
 
 	void removeTypeTracker(TypeTracker typeTracker) {
 		type2tracker.remove(typeTracker.getTarget());
+	}
+
+	void removePackageServer(String nsURI) {
+		uri2package.remove(nsURI);
 	}
 }

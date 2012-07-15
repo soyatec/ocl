@@ -196,7 +196,7 @@ public class InvocationExpCSAttribution extends AbstractAttribution
 	}
 
 	private static Boolean isIteration(MetaModelManager metaModelManager, Type type, String name) {
-		for (Operation operation : metaModelManager.getLocalOperations(type, false)) {
+		for (Operation operation : metaModelManager.getLocalOperations(type, Boolean.FALSE)) {
 			if (name.equals(operation.getName())) {
 				return operation instanceof Iteration;		// mixed overload are not allowed
 			}

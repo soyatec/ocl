@@ -36,7 +36,7 @@ public class ConstructorPartCSAttribution extends AbstractAttribution
 	public static void addAllContents(EnvironmentView environmentView, Type forType, ScopeView scopeView,
 			Type pivotClass, Set<Type> alreadyVisited) {
 		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-		environmentView.addNamedElements(forType, metaModelManager.getLocalProperties(pivotClass, false));
+		environmentView.addNamedElements(forType, metaModelManager.getLocalProperties(pivotClass, Boolean.FALSE));
 		alreadyVisited.add(pivotClass);
 		for (Type superClass : metaModelManager.getSuperClasses(pivotClass)) {
 			if (!alreadyVisited.contains(superClass)) {
@@ -54,7 +54,7 @@ public class ConstructorPartCSAttribution extends AbstractAttribution
 			if (pivot != null) {
 				Type type = pivot.getType();
 				MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-				environmentView.addNamedElements(metaModelManager.getLocalProperties(type, false));
+				environmentView.addNamedElements(metaModelManager.getLocalProperties(type, Boolean.FALSE));
 				Set<Type> alreadyVisitedTypes = new HashSet<Type>();
 				for (Type superClass : metaModelManager.getSuperClasses(type)) {
 					addAllContents(environmentView, type, scopeView, superClass, alreadyVisitedTypes);

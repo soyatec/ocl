@@ -312,8 +312,12 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		T csElement = refreshNamedElement(csClass, csEClass, object);
 		Type type = object.getType();
 		if (type != null) {
+			PivotUtil.debugWellContainedness(type);
 			TypedRefCS typeRef = visitReference(TypedRefCS.class, type);
 			csElement.setOwnedType(typeRef);
+		}
+		else {
+			csElement.setOwnedType(null);
 		}
 		refreshList(csElement.getOwnedConstraint(), visitDeclarations(ConstraintCS.class, object.getOwnedRule(), null));
 		return csElement;

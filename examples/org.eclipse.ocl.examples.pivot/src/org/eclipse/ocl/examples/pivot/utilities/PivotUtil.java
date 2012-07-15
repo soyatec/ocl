@@ -379,7 +379,8 @@ public class PivotUtil extends DomainUtil
 			return false;
 		}
 		if (type instanceof CollectionType) {
-			if (!debugWellContainedness(((CollectionType)type).getElementType())) {
+			Type elementType = ((CollectionType)type).getElementType();
+			if ((elementType != null) && !debugWellContainedness(elementType)) {
 				PivotUtil.debugObjectUsage("Badly contained ", type);
 				return false;
 			}

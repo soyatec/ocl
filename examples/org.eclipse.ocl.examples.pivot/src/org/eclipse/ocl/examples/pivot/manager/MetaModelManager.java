@@ -195,32 +195,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		}
 	}
 
-	public class CompletePackagePackagesIterable
-		extends CompleteElementIterable<org.eclipse.ocl.examples.pivot.Package, org.eclipse.ocl.examples.pivot.Package> {
-		
-		public CompletePackagePackagesIterable(Iterable<org.eclipse.ocl.examples.pivot.Package> packages) {
-			super(packages);
-		}
-		
-		@Override
-		protected Iterable<org.eclipse.ocl.examples.pivot.Package> getInnerIterable(org.eclipse.ocl.examples.pivot.Package model) {
-			return model.getNestedPackage();
-		}
-	}
-	
-	public class CompletePackageTypesIterable
-		extends CompleteElementIterable<org.eclipse.ocl.examples.pivot.Package, Type> {
-		
-		public CompletePackageTypesIterable(Iterable<org.eclipse.ocl.examples.pivot.Package> packages) {
-			super(packages);
-		}
-		
-		@Override
-		protected Iterable<Type> getInnerIterable(org.eclipse.ocl.examples.pivot.Package model) {
-			return model.getOwnedType();
-		}
-	}
-
 	/**
 	 * An OrphanServer maintains the set of OrphanClients identifying active references to an orphan element.
 	 * When the final reference is removed the orphan is killed off.
@@ -1121,7 +1095,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		Type pivotClass = pivotOperation.getOwningType();
 		TypeTracker typeTracker = packageManager.findTypeTracker(pivotClass);
 		if (typeTracker != null) {
-			return typeTracker.getTypeServer().getOperations(pivotOperation);
+			return typeTracker.getTypeServer().getMemberOperations(pivotOperation);
 		}
 		else {
 			return Collections.singletonList(pivotOperation);
@@ -1135,51 +1109,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return packageManager.getAllPackages();
 	}
 
-	public Iterable<org.eclipse.ocl.examples.pivot.Package> getAllPackages(org.eclipse.ocl.examples.pivot.Package pkg, boolean loadPivotMetaModelFirst) {
-		if (!libraryLoadInProgress && loadPivotMetaModelFirst && (pivotMetaModel == null)) {
-			getPivotMetaModel();
-		}
-		PackageTracker packageTracker = packageManager.findPackageTracker(pkg);
-		Set<org.eclipse.ocl.examples.pivot.Package> allPackages = new HashSet<org.eclipse.ocl.examples.pivot.Package>();
-		if (packageTracker != null) {
-			for (org.eclipse.ocl.examples.pivot.Package aPackage : packageTracker.getPackageServer().getPackages()) {
-				allPackages.add(aPackage);
-			}
-		}
-		else {
-			allPackages.add(pkg);
-		}
-		getAllPackages(allPackages, allPackages);
-		return allPackages;
-	}
-
-	private void getAllPackages(Set<org.eclipse.ocl.examples.pivot.Package> knownPackages, Set<org.eclipse.ocl.examples.pivot.Package> newPackages) {
-		Set<org.eclipse.ocl.examples.pivot.Package> morePackages = null;
-		for (org.eclipse.ocl.examples.pivot.Package newPackage : newPackages) {
-			for (org.eclipse.ocl.examples.pivot.Package importedPackage : newPackage.getImportedPackage()) {
-				if (morePackages == null) {
-					morePackages = new HashSet<org.eclipse.ocl.examples.pivot.Package>();
-				}
-				PackageTracker packageTracker = packageManager.findPackageTracker(importedPackage);
-				if (packageTracker != null) {
-					for (org.eclipse.ocl.examples.pivot.Package aPackage : packageTracker.getPackageServer().getPackages()) {
-						morePackages.add(aPackage);
-					}
-				}
-				else {
-					morePackages.add(importedPackage);
-				}
-			}
-		}
-		if (morePackages != null) {
-			morePackages.removeAll(knownPackages);
-			if (morePackages.size() > 0) {
-				knownPackages.addAll(morePackages);
-				getAllPackages(knownPackages, morePackages);
-			}
-		}
-	}
-
 	public Iterable<Property> getAllProperties(Property pivotProperty) {
 		if (pivotProperty == null) {
 			return Collections.emptyList();
@@ -1187,7 +1116,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		Type pivotClass = pivotProperty.getOwningType();
 		TypeTracker typeTracker = packageManager.findTypeTracker(pivotClass);
 		if (typeTracker != null) {
-			return typeTracker.getTypeServer().getProperties(pivotProperty);
+			return typeTracker.getTypeServer().getMemberProperties(pivotProperty);
 		}
 		else {
 			return Collections.singletonList(pivotProperty);
@@ -1198,9 +1127,10 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		if (pivotType == null) {
 			return Collections.emptyList();
 		}
+//		return getTypeTracker(pivotType).getTypeServer().getTypes();
 		TypeTracker typeTracker = packageManager.findTypeTracker(pivotType);
 		if (typeTracker != null) {
-			return typeTracker.getTypeServer().getTypes();
+			return typeTracker.getTypeServer().getTrackedTypes();
 		}
 		else  {
 			return Collections.singletonList(pivotType);
@@ -1464,7 +1394,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 
 	public Iterable<Type> getLocalClasses(org.eclipse.ocl.examples.pivot.Package pkg) {
-		return new CompletePackageTypesIterable(getAllPackages(pkg, true));
+		return getPackageServer(pkg).getMemberTypes();
 	}
 
 	public Iterable<Comment> getLocalComments(Operation operation) {
@@ -1534,7 +1464,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 
 	public Iterable<org.eclipse.ocl.examples.pivot.Package> getLocalPackages(org.eclipse.ocl.examples.pivot.Package pkg) {
-		return new CompletePackagePackagesIterable(getAllPackages(pkg, true));
+//		Iterable<org.eclipse.ocl.examples.pivot.Package> partialPackages = getPartialPackages(pkg, true);
+//		return new CompletePackagePackagesIterable(partialPackages);
+		return getPackageServer(pkg).getMemberPackages();
 	}
 
 	public Iterable<Property> getLocalProperties(Type type, Boolean selectStatic) {
@@ -1586,8 +1518,18 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return packageManager;
 	}
 	
-	public PackageTracker getPackageTracker(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
-		return packageManager.getPackageTracker(pivotPackage);
+	public PackageServer getPackageServer(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+		if (pivotMetaModel == null) {
+			getPivotMetaModel();
+		}
+		return packageManager.getPackageServer(pivotPackage);
+	}
+
+	public Iterable<org.eclipse.ocl.examples.pivot.Package> getPartialPackages(org.eclipse.ocl.examples.pivot.Package pkg, boolean loadPivotMetaModelFirst) {
+		if (!libraryLoadInProgress && loadPivotMetaModelFirst && (pivotMetaModel == null)) {
+			getPivotMetaModel();
+		}
+		return packageManager.getPackageServer(pkg).getTrackedPackages();
 	}
 	
 	public org.eclipse.ocl.examples.pivot.Package getPivotMetaModel() {
@@ -1673,7 +1615,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		Type pivotClass = pivotOperation.getOwningType();
 		TypeTracker typeTracker = packageManager.findTypeTracker(pivotClass);
 		if (typeTracker != null) {
-			Operation operation = typeTracker.getTypeServer().getOperation(pivotOperation);
+			Operation operation = typeTracker.getTypeServer().getMemberOperation(pivotOperation);
 			if (operation != null) {
 				return operation;
 			}
@@ -1706,7 +1648,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	public org.eclipse.ocl.examples.pivot.Package getPrimaryPackage(org.eclipse.ocl.examples.pivot.Package parentPackage, String subPackageName) {
 		PackageTracker packageTracker = packageManager.findPackageTracker(parentPackage);
 		if (packageTracker != null) {
-			return packageTracker.getPackageServer().getNestedPackage(subPackageName);
+			return packageTracker.getPackageServer().getMemberPackage(subPackageName);
 		}
 		else {
 			return PivotUtil.getNamedElement(parentPackage.getNestedPackage(), subPackageName);
@@ -1727,7 +1669,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		Type pivotClass = pivotProperty.getOwningType();
 		TypeTracker typeTracker = packageManager.findTypeTracker(pivotClass);
 		if (typeTracker != null) {
-			return typeTracker.getTypeServer().getProperty(pivotProperty.getName());
+			return typeTracker.getTypeServer().getMemberProperty(pivotProperty.getName());
 		}
 		else {
 			return pivotProperty;
@@ -1774,7 +1716,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	public Type getPrimaryType(org.eclipse.ocl.examples.pivot.Package parentPackage, String typeName) {
 		PackageTracker packageTracker = packageManager.findPackageTracker(parentPackage);
 		if (packageTracker != null) {
-			return packageTracker.getPackageServer().getType(typeName);
+			return packageTracker.getPackageServer().getMemberType(typeName);
 		}
 		else {
 			return PivotUtil.getNamedElement(getLocalClasses(parentPackage), typeName);
@@ -1998,16 +1940,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 	
 	public TypeServer getTypeServer(Type pivotType) {
-		return getTypeTracker(pivotType).getTypeServer();
-	}
-	
-	public TypeTracker getTypeTracker(Type pivotType) {
-		TypeTracker typeTracker = packageManager.findTypeTracker(pivotType);
-		if (typeTracker == null) {
-			PackageTracker packageTracker = getPackageTracker(pivotType.getPackage());
-			typeTracker = packageTracker.getTypeTracker(pivotType);
-		}
-		return typeTracker;
+		return packageManager.getTypeServer(pivotType);
 	}
 
 	public Type getTypeWithMultiplicity(TypedMultiplicityElement element) {
@@ -2235,6 +2168,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		if (!pivotLibraries.isEmpty()) {
 			pivotLibraryResource = pivotLibraries.get(0).eResource();
 			for (Library pivotLibrary : pivotLibraries) {
+				packageManager.getPackageServer(pivotLibrary).getMemberTypes();			// FIXME side effect of creating type trackers
 				for (Type type : pivotLibrary.getOwnedType()) {
 					Type primaryType = getPrimaryType(type);
 					if ((type == primaryType) && PivotUtil.isLibraryType(type)) {
@@ -2256,7 +2190,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	 * @param pivotLibrary
 	 */
 	protected void loadPivotMetaModel(org.eclipse.ocl.examples.pivot.Package pivotLibrary) {
-		for (org.eclipse.ocl.examples.pivot.Package libPackage : getAllPackages(pivotLibrary, false)) {
+		for (org.eclipse.ocl.examples.pivot.Package libPackage : getPartialPackages(pivotLibrary, false)) {
 			if (PivotUtil.getNamedElement(libPackage.getOwnedType(), PivotPackage.Literals.ELEMENT.getName()) != null) {
 				pivotMetaModel = libPackage;	// Custom meta-model
 				return;

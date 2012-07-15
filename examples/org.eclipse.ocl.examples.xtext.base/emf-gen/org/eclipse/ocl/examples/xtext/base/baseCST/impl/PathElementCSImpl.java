@@ -24,7 +24,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
@@ -171,6 +173,9 @@ public class PathElementCSImpl extends ElementCSImpl implements PathElementCS
 	 */
 	public void setElement(Element newElement)
 	{
+		if (newElement instanceof Type) {
+			PivotUtil.debugWellContainedness((Type)newElement);
+		}
 		Element oldElement = element;
 		element = newElement;
 		if (eNotificationRequired())

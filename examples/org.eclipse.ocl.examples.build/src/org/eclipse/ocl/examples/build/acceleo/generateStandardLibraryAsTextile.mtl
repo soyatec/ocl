@@ -22,7 +22,7 @@ are similar to those documented here for the Pivot binding.
 
 h2(#Precedences). *Precedences*
 
-[for (pPrecedence : Precedence | pPackages.ownedPrecedence->asSequence()) separator(' > ') ] @[pPrecedence.name/]@ [/for]
+[for (pPrecedence : Precedence | pPackages->filter(Library).ownedPrecedence->asSequence()) separator(' > ') ] @[pPrecedence.name/]@ [/for]
 
 [for (pClass : Class | pClasses->sortedBy(name)) ]
 h2(#[pClass.name/]). **@[pClass.prettyPrint(pClass)/]@**

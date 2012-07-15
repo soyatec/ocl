@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.edit.ui.util.EditUIUtil;
@@ -217,13 +218,13 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider
 				ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
 				URI uri = uriMap.get(document);
 				XMLResource xmiResource = (XMLResource) resourceSet.getResource(uri, false);
-				boolean reload = false;
+				boolean reload1 = false;
 				if ((xmiResource == null) || (xmiResource.getResourceSet() == null)) {	// Skip built-ins and try again as a file read.
 					xmiResource = (XMLResource) resourceSet.createResource(uri, null);					
 				}
 				else {
 					xmiResource.unload();
-					reload = true;
+					reload1 = true;
 				}
 				xmiResource.load(inputStream, null);
 				List<Resource.Diagnostic> allErrors = null;
@@ -252,10 +253,10 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider
 						Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(xmiResource, metaModelManager);
 						Root pivotRoot = ecore2Pivot.getPivotRoot();
 						pivotResource = pivotRoot.eResource();
-						if (reload) {
+						if (reload1) {
 							ecore2Pivot.update(pivotResource, xmiResource.getContents());
 						}
-						diagnoseErrors(pivotResource);
+						diagnoseErrors(pivotResource);		// FIXME On reload, this throws a CoreException which loses the user's source text
 						persistAs = PERSIST_AS_ECORE;
 					}
 					else if (xmiRoot instanceof org.eclipse.ocl.examples.pivot.Package) {
@@ -271,13 +272,21 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider
 					// FIXME general extensibility
 				}
 //				
-				ResourceSet csResourceSet = resourceSet; //new ResourceSetImpl();
-//				csResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("cs", new EcoreResourceFactoryImpl());
+				ResourceSetImpl csResourceSet = (ResourceSetImpl)resourceSet;
 				csResourceSet.getPackageRegistry().put(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
-//				Resource csResource = csResourceSet.createResource(uri);
 				URI oclinecoreURI = xmiResource.getURI().appendFileExtension("oclinecore");
-				BaseResource csResource = (BaseResource) resourceSet.createResource(oclinecoreURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
-				csResource.setURI(xmiResource.getURI());
+				BaseResource csResource = (BaseResource) resourceSet.getResource(oclinecoreURI, false);
+				if (csResource == null) {
+					csResource = (BaseResource) resourceSet.createResource(oclinecoreURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
+				    Map<URI, Resource> map = csResourceSet.getURIResourceMap();
+				    map.put(oclinecoreURI, csResource);
+					csResource.setURI(xmiResource.getURI());
+				}
+				//
+				//	ResourceSet contains
+				//		Ecore XMI resource with *.ecore URI, possibly in URIResourceMap as *.ecore
+				//		OCLinEcore CS resource with *.ecore URI, in URIResourceMap as *.ecore.oclinecore
+				//
 				csResource.updateFrom(pivotResource, metaModelManager);
 //				csResource.save(null);
 				Resource xtextResource = csResource;		

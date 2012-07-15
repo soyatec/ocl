@@ -55,11 +55,11 @@ public class ClassCSAttribution extends AbstractAttribution
 				MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 				if (pivot instanceof ClassifierType) {
 					Type instanceType = ((ClassifierType)pivot).getInstanceType();
-					environmentView.addNamedElements(metaModelManager.getLocalOperations(instanceType, true));
-					environmentView.addNamedElements(metaModelManager.getLocalProperties(instanceType, true));
+					environmentView.addNamedElements(metaModelManager.getLocalOperations(instanceType, Boolean.TRUE));
+					environmentView.addNamedElements(metaModelManager.getLocalProperties(instanceType, Boolean.TRUE));
 				}
-				environmentView.addNamedElements(metaModelManager.getLocalOperations(pivot, false));
-				environmentView.addNamedElements(metaModelManager.getLocalProperties(pivot, false));
+				environmentView.addNamedElements(metaModelManager.getLocalOperations(pivot, Boolean.FALSE));
+				environmentView.addNamedElements(metaModelManager.getLocalProperties(pivot, Boolean.FALSE));
 				environmentView.addElements(PivotUtil.getTypeTemplateParameterables(pivot));
 //				if (!environmentView.hasFinalResult()) {
 //					if (environmentView.getRequiredType() != BaseCSTPackage.Literals.TYPE_CS) { // Avoid creating bindings for nested type parameters

@@ -119,7 +119,7 @@ public class Pivot2EcoreTypeRefVisitor
 		}
 		TypeTracker typeTracker = metaModelManager.findTypeTracker(pivotType);
 		if (typeTracker != null) {
-			for (Type aType : typeTracker.getTypeServer().getTypes()) {
+			for (Type aType : typeTracker.getTypeServer().getTrackedTypes()) {
 				if (!(aType instanceof PrimitiveType)) {
 					EDataType eClassifier = context.getCreated(EDataType.class, pivotType);
 					if (eClassifier != null) {

@@ -24,79 +24,58 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
 
+import com.google.common.base.Function;
+
 /**
  * A PackageTracker adapts a Package to keep the overall managed meta-model in tune with any changes.
  */
-public abstract class PackageTracker implements Adapter.Internal
+class PackageTracker implements Adapter.Internal
 {	
-	protected final PackageManager packageManager;
+	public static Function<PackageTracker, org.eclipse.ocl.examples.pivot.Package> tracker2package = new Function<PackageTracker, org.eclipse.ocl.examples.pivot.Package>()
+	{
+		public org.eclipse.ocl.examples.pivot.Package apply(PackageTracker packageTracker) {
+			return packageTracker.getTarget();
+		}
+	};
+
+	protected final PackageServer packageServer;
 	
 	/**
-	 * The Package tracked by this tracker. It may be reassigned to upgrade a residual client,
-	 * if this tracker is a server and when the Package this server tracks is removed.
+	 * The Package tracked by this tracker.
 	 */
-	private org.eclipse.ocl.examples.pivot.Package target;
+	private final org.eclipse.ocl.examples.pivot.Package target;
 
-	protected PackageTracker(PackageManager packageManager, org.eclipse.ocl.examples.pivot.Package target) {
-		this.packageManager = packageManager;
+	PackageTracker(PackageServer packageServer, org.eclipse.ocl.examples.pivot.Package target) {
+		this.packageServer = packageServer;
+		this.target = target;
 		target.eAdapters().add(this);
-		packageManager.addPackageTracker(target, this);
 	}
 
-	private void addedType(Object pivotType) {
-		if (pivotType instanceof Type) {
-			getPackageServer().addType((Type)pivotType);
-		}
-	}
-
-	public void dispose() {
-		packageManager.removePackageTracker(this);
-		if (target != null) {
-			target.eAdapters().remove(this);
-		}
-	}
-
-	public MetaModelManager getMetaModelManager() {
-		return packageManager.getMetaModelManager();
-	}
-
-	public PackageManager getPackageManager() {
-		return packageManager;
+	void dispose() {
+		packageServer.removePackageTracker(this);
+		target.eAdapters().remove(this);
 	}
 
 	/**
 	 * Return the PackageServer supervising this package merge.
 	 */
-	public abstract PackageServer getPackageServer();
+	final PackageServer getPackageServer() {
+		return packageServer;
+	}
 
 	/**
 	 * Return the primary Package of this package merge.
 	 */
 	org.eclipse.ocl.examples.pivot.Package getPrimaryPackage() {
-		PackageServer packageServer = getPackageServer();
-		return packageServer != null ? packageServer.getTarget() : null;
+		return packageServer.getPrimaryPackage();
 	}
 
 	public org.eclipse.ocl.examples.pivot.Package getTarget() {
 		return target;
 	}
 
-	/**
-	 * Return the TypeTracker for pivotType, creating it if necessary.
-	 */
-	abstract TypeTracker getTypeTracker(Type pivotType);
-
-	protected void initContents(PackageServer packageServer) {
-		for (Type pivotType : target.getOwnedType()) {
-			packageServer.addType(pivotType);
-		}
-		for (org.eclipse.ocl.examples.pivot.Package nestedPackage : target.getNestedPackage()) {
-			packageServer.addNestedPackage(nestedPackage);
-		}
-	}		
-
 	public boolean isAdapterForType(Object type) {
-		return packageManager == type;
+		return type == packageServer.getPackageManager();
 	}
 
 	public void notifyChanged(Notification notification) {
@@ -105,55 +84,74 @@ public abstract class PackageTracker implements Adapter.Internal
 		if (feature == PivotPackage.Literals.PACKAGE__OWNED_TYPE) {
 			switch (eventType) {
 				case Notification.ADD: {
-					addedType(notification.getNewValue());
+					Object value = notification.getNewValue();
+					if (value instanceof Type) {
+						packageServer.addedMemberType((Type)value);
+					}
 					break;
 				}
 				case Notification.ADD_MANY: {
 					@SuppressWarnings("unchecked")
 					List<Object> values = (List<Object>)notification.getNewValue();
 					for (Object value : values) {
-						addedType(value);
+						if (value instanceof Type) {
+							packageServer.addedMemberType((Type)value);
+						}
 					}
 					break;
 				}
 				case Notification.REMOVE: {
-					removedType(notification.getOldValue());
+					Object value = notification.getOldValue();
+					if (value instanceof Type) {
+						packageServer.removedMemberType((Type) value);
+					}
 					break;
 				}
 				case Notification.REMOVE_MANY: {
 					@SuppressWarnings("unchecked")
 					List<Object> values = (List<Object>)notification.getOldValue();
 					for (Object value : values) {
-						removedType(value);
+						if (value instanceof Type) {
+							packageServer.removedMemberType((Type) value);
+						}
 					}
 					break;
 				}
 			}
 		}
 		else if (feature == PivotPackage.Literals.PACKAGE__NESTED_PACKAGE) {
-			PackageServer packageServer = getPackageServer();
 			switch (eventType) {
 				case Notification.ADD: {
-					packageServer.addedNestedPackage(notification.getNewValue());
+					Object value = notification.getNewValue();
+					if (value instanceof org.eclipse.ocl.examples.pivot.Package) {
+						packageServer.addedMemberPackage((org.eclipse.ocl.examples.pivot.Package)value);
+					}
 					break;
 				}
 				case Notification.ADD_MANY: {
 					@SuppressWarnings("unchecked")
 					List<Object> values = (List<Object>)notification.getNewValue();
 					for (Object value : values) {
-						packageServer.addedNestedPackage(value);
+						if (value instanceof org.eclipse.ocl.examples.pivot.Package) {
+							packageServer.addedMemberPackage((org.eclipse.ocl.examples.pivot.Package)value);
+						}
 					}
 					break;
 				}
 				case Notification.REMOVE: {
-					packageServer.removedNestedPackage(notification.getOldValue());
+					Object value = notification.getOldValue();
+					if (value instanceof org.eclipse.ocl.examples.pivot.Package) {
+						packageServer.removedMemberPackage((org.eclipse.ocl.examples.pivot.Package)value);
+					}
 					break;
 				}
 				case Notification.REMOVE_MANY: {
 					@SuppressWarnings("unchecked")
 					List<Object> values = (List<Object>)notification.getOldValue();
 					for (Object value : values) {
-						packageServer.removedNestedPackage(value);
+						if (value instanceof org.eclipse.ocl.examples.pivot.Package) {
+							packageServer.removedMemberPackage((org.eclipse.ocl.examples.pivot.Package)value);
+						}
 					}
 					break;
 				}
@@ -161,18 +159,8 @@ public abstract class PackageTracker implements Adapter.Internal
 		}
 	}
 
-	private void removedType(Object pivotType) {
-		if (pivotType instanceof Type) {
-			TypeTracker typeTracker = packageManager.getMetaModelManager().findTypeTracker((Type)pivotType);
-			if (typeTracker != null) {
-				TypeServer typeServer = typeTracker.getTypeServer();
-				typeServer.removedType((Type)pivotType);
-			}
-		}
-	}
-
 	public void setTarget(Notifier newTarget) {
-		target = (org.eclipse.ocl.examples.pivot.Package) newTarget;
+		assert target == newTarget;
 	}
 
 	@Override
@@ -181,6 +169,6 @@ public abstract class PackageTracker implements Adapter.Internal
 	}
 
 	public void unsetTarget(Notifier oldTarget) {
-		target = null;
+		assert target == oldTarget;
 	}
 }
