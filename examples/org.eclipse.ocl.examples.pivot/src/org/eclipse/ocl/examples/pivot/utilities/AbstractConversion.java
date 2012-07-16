@@ -22,11 +22,10 @@ import java.util.List;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
-public abstract class AbstractConversion extends EcoreUtil
-{	// extends EcoreUtil solely to gain access to protected GEN_MODEL_PACKAGE_NS_URI
+public abstract class AbstractConversion
+{
 	public static interface Predicate<T extends EObject>
 	{
 		boolean filter(T element);
