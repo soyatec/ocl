@@ -20,15 +20,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.AbstractConversion;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.utilities.CSI2PivotMapping;
 
 /**
@@ -36,7 +31,7 @@ import org.eclipse.ocl.examples.xtext.base.utilities.CSI2PivotMapping;
  * and their corresponding Pivot Resources creating a CS2PivotConversion
  * to update.
  */
-public class Pivot2CS extends AbstractConversion implements Adapter
+public class Pivot2CS extends AbstractConversion
 {	
 	public static interface Factory {
 		BaseDeclarationVisitor createDeclarationVisitor(Pivot2CSConversion converter);
@@ -46,13 +41,6 @@ public class Pivot2CS extends AbstractConversion implements Adapter
 		 * Return a list of classes for which this Pivot2CS overrides a base Pivot2CS.
 		 */
 		EClass[] getEClasses();
-	}
-	
-	public static Pivot2CS findAdapter(ResourceSet resourceSet) {
-		if (resourceSet == null) {
-			return null;
-		}
-		return PivotUtil.getAdapter(Pivot2CS.class, resourceSet);
 	}
 	
 	private Map<EClass, Factory> factoryMap = new HashMap<EClass, Factory>();
@@ -65,7 +53,6 @@ public class Pivot2CS extends AbstractConversion implements Adapter
 	public Pivot2CS(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, MetaModelManager metaModelManager) {
 		super(metaModelManager);
 		this.cs2pivotResourceMap = cs2pivotResourceMap;
-		metaModelManager.getPivotResourceSet().eAdapters().add(this);	// FIXME Dispose somehow
 	}
 	
 	public Pivot2CS(Pivot2CS aConverter) {
@@ -77,6 +64,14 @@ public class Pivot2CS extends AbstractConversion implements Adapter
 		for (EClass eClass : factory.getEClasses()) {
 			factoryMap.put(eClass, factory);
 		}
+	}
+
+	public BaseDeclarationVisitor createDefaultDeclarationVisitor(Pivot2CSConversion conversion) {
+		return new BaseDeclarationVisitor(conversion);
+	}
+
+	public BaseReferenceVisitor createDefaultReferenceVisitor(Pivot2CSConversion conversion) {
+		return new BaseReferenceVisitor(conversion);
 	}
 
 	public Collection<? extends Resource> getCSResources() {
@@ -94,22 +89,6 @@ public class Pivot2CS extends AbstractConversion implements Adapter
 	public Collection<? extends Resource> getPivotResources() {
 		return cs2pivotResourceMap.values();
 	}
-
-	public Notifier getTarget() {
-		return metaModelManager.getPivotResourceSet();
-	}
-
-	public boolean isAdapterForType(Object type) {
-		return type == Pivot2CS.class;
-	}
-
-	public void notifyChanged(Notification notification) {
-		// Do nothing.
-	}
-
-	public void setTarget(Notifier newTarget) {
-		assert newTarget == metaModelManager.getPivotResourceSet();
-	}
 	
 	public void update() {
 		Pivot2CSConversion conversion = new Pivot2CSConversion(this);
@@ -117,13 +96,5 @@ public class Pivot2CS extends AbstractConversion implements Adapter
 		conversion.update(csResources);
 		CSI2PivotMapping cs2PivotMapping = CSI2PivotMapping.getAdapter(metaModelManager);
 		cs2PivotMapping.update(csResources);
-	}
-
-	public BaseDeclarationVisitor createDefaultDeclarationVisitor(Pivot2CSConversion conversion) {
-		return new BaseDeclarationVisitor(conversion);
-	}
-
-	public BaseReferenceVisitor createDefaultReferenceVisitor(Pivot2CSConversion conversion) {
-		return new BaseReferenceVisitor(conversion);
 	}
 }
