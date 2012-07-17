@@ -138,6 +138,7 @@ public class PivotResourceValidator extends ResourceValidatorImpl
 
 	@Override
 	public List<Issue> validate(Resource resource, CheckMode mode, CancelIndicator monitor) {
+//		System.out.println(Thread.currentThread().getName() + " validate start " + PivotUtil.debugSimpleName(resource));
 //		System.out.println(new Date() + " Validate " + mode + " : " + csResource.getURI() + " on " + Thread.currentThread().getName());
 		List<Issue> issues = super.validate(resource, mode, monitor);
 		if (!monitor.isCanceled() && (resource instanceof BaseCSResource)) {
@@ -158,6 +159,7 @@ public class PivotResourceValidator extends ResourceValidatorImpl
 				}
 			}
 		}
+//		System.out.println(Thread.currentThread().getName() + " validate end " + PivotUtil.debugSimpleName(resource));
 		return issues;
 	}
 }

@@ -18,7 +18,6 @@ package org.eclipse.ocl.examples.xtext.essentialocl.ui.model;
 
 import java.util.Map;
 
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -96,7 +95,7 @@ public class BaseDocument extends XtextDocument implements ConsoleContext
 			});
 	}
 
-	@Override
+/*	@Override
 	public <T> T readOnly(IUnitOfWork<T, XtextResource> work) {
 		if (myStateAccess.isWriteLocked()) {
 //			CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".readOnly skip " + work.getClass().getName(), false, 0);
@@ -121,12 +120,14 @@ public class BaseDocument extends XtextDocument implements ConsoleContext
 		}
 //		CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".readOnly start " + work.getClass().getName(), false, +1);
 		try {
+  			System.out.println(Thread.currentThread().getName() + " readOnly "  + work.getClass().getName() + " start for " + PivotUtil.debugSimpleName(lastInput));
 			return super.readOnly(work);
 		}
 		finally {
+			System.out.println(Thread.currentThread().getName() + " readOnly "  + work.getClass().getName() + " end for " + PivotUtil.debugSimpleName(lastInput));
 //			CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".readOnly end " + work.getClass().getName(), false, -1);
-		}
-	}
+		} 
+	} */
 
 /*	@Override
 	public <T> T modify(IUnitOfWork<T, XtextResource> work) {
@@ -152,10 +153,12 @@ public class BaseDocument extends XtextDocument implements ConsoleContext
 		}
 		CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".internalModify start " + work.getClass().getName(), false, +1);
 		try {
+			System.out.println(Thread.currentThread().getName() + " internalModify "  + work.getClass().getName() + " start for " + PivotUtil.debugSimpleName(lastInput));
 			return super.internalModify(work);
 		}
 		finally {
-			CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".internalModify end " + work.getClass().getName(), false, -1);
+			System.out.println(Thread.currentThread().getName() + " internalModify "  + work.getClass().getName() + " end for " + PivotUtil.debugSimpleName(lastInput));
+//			CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".internalModify end " + work.getClass().getName(), false, -1);
 		}
 	} */
 
