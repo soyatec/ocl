@@ -62,7 +62,9 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.xtext.parsetree.reconstr.XtextSerializationException;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator.InvalidConcreteSyntaxException;
 
 /**
@@ -169,6 +171,66 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider
 //	public ResourceSet getResourceSet() {
 //		return ((OCLinEcoreResourceForEditorInputFactory) getResourceForEditorInputFactory()).getResourceSet();
 //	}
+	@Override
+	protected void handleElementContentChanged(IFileEditorInput fileEditorInput) {
+		FileInfo info= (FileInfo) getElementInfo(fileEditorInput);
+		if (info == null)
+			return;
+		if (info.fDocument == null) {
+			super.handleElementContentChanged(fileEditorInput);
+		}
+		IDocument document = info.fDocument;
+		String oldContent= document.get();
+		IStatus status= null;
+
+		try {
+
+			try {
+				refreshFile(fileEditorInput.getFile());
+			} catch (CoreException x) {
+				handleCoreException(x, "FileDocumentProvider.handleElementContentChanged"); //$NON-NLS-1$
+			}
+
+			cacheEncodingState(fileEditorInput);
+			setDocumentContent(document, fileEditorInput, info.fEncoding);
+
+		} catch (CoreException x) {
+			status= x.getStatus();
+		}
+
+		String newContent= document.get();
+
+		if ( !newContent.equals(oldContent)) {
+
+			// set the new content and fire content related events
+			fireElementContentAboutToBeReplaced(fileEditorInput);
+
+			removeUnchangedElementListeners(fileEditorInput, info);
+
+			info.fDocument.removeDocumentListener(info);
+			info.fDocument.set(newContent);
+			info.fCanBeSaved= false;
+			info.fModificationStamp= computeModificationStamp(fileEditorInput.getFile());
+			info.fStatus= status;
+
+			addUnchangedElementListeners(fileEditorInput, info);
+
+			fireElementContentReplaced(fileEditorInput);
+
+		} else {
+
+			removeUnchangedElementListeners(fileEditorInput, info);
+
+			// fires only the dirty state related event
+			info.fCanBeSaved= false;
+			info.fModificationStamp= computeModificationStamp(fileEditorInput.getFile());
+			info.fStatus= status;
+
+			addUnchangedElementListeners(fileEditorInput, info);
+
+			fireElementDirtyStateChanged(fileEditorInput, false);
+		}
+	}
 
 	@Override
 	public boolean isDeleted(Object element) {
@@ -207,7 +269,8 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider
 	}
 
 	@Override
-	protected void setDocumentContent(IDocument document, InputStream inputStream, String encoding) throws CoreException {
+	protected void setDocumentContent(final IDocument document, InputStream inputStream, final String encoding) throws CoreException {
+		boolean reload = false;
 		try {
 			if (!inputStream.markSupported()) {
 				inputStream = createResettableInputStream(inputStream);
@@ -218,13 +281,12 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider
 				ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
 				URI uri = uriMap.get(document);
 				XMLResource xmiResource = (XMLResource) resourceSet.getResource(uri, false);
-				boolean reload1 = false;
 				if ((xmiResource == null) || (xmiResource.getResourceSet() == null)) {	// Skip built-ins and try again as a file read.
 					xmiResource = (XMLResource) resourceSet.createResource(uri, null);					
 				}
 				else {
 					xmiResource.unload();
-					reload1 = true;
+					reload = true;
 				}
 				xmiResource.load(inputStream, null);
 				List<Resource.Diagnostic> allErrors = null;
@@ -253,7 +315,7 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider
 						Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(xmiResource, metaModelManager);
 						Root pivotRoot = ecore2Pivot.getPivotRoot();
 						pivotResource = pivotRoot.eResource();
-						if (reload1) {
+						if (reload) {
 							ecore2Pivot.update(pivotResource, xmiResource.getContents());
 						}
 						diagnoseErrors(pivotResource);		// FIXME On reload, this throws a CoreException which loses the user's source text
@@ -333,7 +395,19 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider
 		} catch (IOException e) {
 			throw new CoreException(new Status(IStatus.ERROR, OCLExamplesCommonPlugin.PLUGIN_ID, "Failed to load", e));
 		}
-		super.setDocumentContent(document, inputStream, encoding);
+		if (reload) {
+			final InputStream finalInputStream = inputStream; 
+			((XtextDocument)document).modify(new IUnitOfWork<Object, XtextResource>() {
+
+				public Object exec(XtextResource state) throws Exception {
+					OCLinEcoreDocumentProvider.super.setDocumentContent(document, finalInputStream, encoding);
+					return null;
+				}
+			});
+		}
+		else {
+			super.setDocumentContent(document, inputStream, encoding);
+		}
 	}
 
 	public void setPersistAs(Object element, String persistAs) {
