@@ -20,6 +20,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Package;
 
 import com.google.common.collect.Iterables;
@@ -37,22 +39,9 @@ abstract class PackageServerParent
 
 	protected PackageServerParent() {}
 
-	public void addedMemberPackage(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+	public void addedMemberPackage(@NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
 		PackageServer packageServer = getMemberPackageServer(pivotPackage);
 		packageServer.addTrackedPackage(pivotPackage);
-/*			String nsURI = pivotPackage.getNsURI();
-			org.eclipse.ocl.examples.pivot.Package primaryPackage = null;
-			if (nsURI != null) {										// Explicit nsURI for explicit package (merge)
-				primaryPackage = packageManager.getPackageByURI(nsURI);
-				if (primaryPackage != null) {
-					PackageServer packageServer = packageManager.getPackageTracker(primaryPackage).getPackageServer();
-					if (primaryPackage != pivotPackage) {
-						packageServer.addServedPackage(pivotPackage);
-					}
-					packageServers.put(packageName, packageServer);
-					return;
-				}
-			} */
 	}
 
 	public void dispose() {
@@ -65,8 +54,15 @@ abstract class PackageServerParent
 			packageServers = null;
 		}
 	}
+	
+	void disposedPackageServer(@NonNull PackageServer packageServer) {
+		if (packageServers != null) {
+			packageServers.remove(packageServer.getName());
+		}
+		getPackageManager().disposedPackageServer(packageServer.getNsURI());
+	}
 
-	public org.eclipse.ocl.examples.pivot.Package getMemberPackage(String memberPackageName) {
+	public @Nullable org.eclipse.ocl.examples.pivot.Package getMemberPackage(@NonNull String memberPackageName) {
 		if (packageServers == null) {
 			return null;
 		}
@@ -77,79 +73,64 @@ abstract class PackageServerParent
 		return memberPackageServer.getPrimaryPackage();
 	}
 
-	PackageServer getMemberPackageServer(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+	@NonNull PackageServer getMemberPackageServer(@NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
 		if (packageServers == null) {
 			packageServers = new HashMap<String, PackageServer>();
 		}
 		String name = pivotPackage.getName();
+		if (name == null) {
+			throw new IllegalStateException("Unnamed package");
+		}
 		PackageServer packageServer = packageServers.get(name);
 		if (packageServer == null) {
 			String nsURI = pivotPackage.getNsURI();
-			packageServer = new PackageServer(this, nsURI);
+			packageServer = new PackageServer(this, name, nsURI);
 			packageServers.put(name, packageServer);
-//			packageServer.addTrackedPackage(pivotPackage);
 			if (nsURI != null) {
 				getPackageManager().addPackageServer(packageServer);
 			}
-//			List<String> uriList = name2uris.get(name);
-//			if ((uriList != null) && (uriList.size() == 1)) {
-//				nsURI = uriList.get(0);
-//				addPackage(nsURI, pivotPackage);
-//			}
-//			else {
-//				logger.error("URI-less root package");
-//			}
 		}
 		return packageServer;
 	}
 
-	public PackageServer getMemberPackageServer(String name) {
+	public @Nullable PackageServer getMemberPackageServer(@NonNull String name) {
 		return packageServers != null ? packageServers.get(name) : null;
 	}
 
-	public Iterable<Package> getMemberPackages() {
+	public @NonNull Iterable<Package> getMemberPackages() {
 		if (packageServers == null) {
-			return Collections.emptyList();
+			@SuppressWarnings("null")
+			@NonNull Iterable<Package> emptyList = Collections.emptyList();
+			return emptyList;
 		}
 		else {
-			return Iterables.transform(packageServers.values(), PackageServer.server2package);
+			@SuppressWarnings("null")
+			@NonNull Iterable<Package> transform = Iterables.transform(packageServers.values(), PackageServer.server2package);
+			return transform;
 		}
 	}
 
-	public MetaModelManager getMetaModelManager() {
+	public @NonNull MetaModelManager getMetaModelManager() {
 		return getPackageManager().getMetaModelManager();
 	}
 
-	public abstract PackageManager getPackageManager();
+	public abstract @NonNull PackageManager getPackageManager();
 
-	abstract PackageTracker getPackageTracker(org.eclipse.ocl.examples.pivot.Package pivotPackage);
+	abstract @NonNull PackageTracker getPackageTracker(@NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage);
 
-	PackageServerParent getParentPackageServer(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+	@NonNull PackageServerParent getParentPackageServer(@NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
 		org.eclipse.ocl.examples.pivot.Package pivotPackageParent = pivotPackage.getNestingPackage();
 		if (pivotPackageParent == null) {
 			return this;
 		}
-		else {
-			PackageTracker parentTracker = getPackageTracker(pivotPackageParent);
-			return parentTracker.getPackageServer();
-		}
+		PackageTracker parentTracker = getPackageTracker(pivotPackageParent);
+		return parentTracker.getPackageServer();
 	}
 
-	void removedMemberPackage(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+	void removedMemberPackage(@NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
 		PackageTracker packageTracker = getPackageManager().findPackageTracker(pivotPackage);
 		if (packageTracker != null) {
-			PackageServer packageServer = packageTracker.getPackageServer();
-			packageServer.removedPackageTracker(packageTracker);
-		}
-	}
-	
-	void removePackageServer(PackageServer packageServer) {
-		if (packageServers != null) {
-			packageServers.remove(packageServer);
-		}
-		String nsURI = packageServer.getNsURI();
-		if (nsURI != null) {
-			getPackageManager().removePackageServer(nsURI);
+			packageTracker.dispose();
 		}
 	}
 }

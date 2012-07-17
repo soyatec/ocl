@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -44,8 +46,8 @@ public class PackageServer extends PackageServerParent
 		}
 	};
 
-	protected final PackageServerParent packageServerParent;
-	
+	protected final PackageServerParent packageServerParent;	
+	protected final String name;	
 	protected final String nsURI;
 
 	protected final PackageManager packageManager;
@@ -69,17 +71,14 @@ public class PackageServer extends PackageServerParent
 	 */
 	private PivotReflectivePackage executorPackage = null;
 	
-	protected PackageServer(PackageServerParent packageServerParent, String nsURI) {
+	protected PackageServer(@NonNull PackageServerParent packageServerParent, @NonNull String name, @Nullable String nsURI) {
 		this.packageServerParent = packageServerParent;
 		this.packageManager = packageServerParent.getPackageManager();
+		this.name = name;
 		this.nsURI = nsURI;
-//		packageManager.addedPackageServer(this);
-//		this.primaryPackage = primaryPackage;
-//		trackers.add(this);
-//		initContents(this);
 	}
 	
-	void addedMemberType(Type pivotType) {
+	void addedMemberType(@NonNull Type pivotType) {
 		if ((pivotType instanceof LambdaType) || (pivotType instanceof TupleType)) {	// FIXME parent not necessarily in place
 			return;
 		}
@@ -88,7 +87,7 @@ public class PackageServer extends PackageServerParent
 		}
 	}
 	
-	public PackageTracker addTrackedPackage(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+	public @NonNull PackageTracker addTrackedPackage(@NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
 		PackageTracker packageTracker = (PackageTracker)EcoreUtil.getAdapter(pivotPackage.eAdapters(), packageManager);		// FIXME redundant
 		if (packageTracker == null) {
 			packageTracker = new PackageTracker(this, pivotPackage);
@@ -124,15 +123,32 @@ public class PackageServer extends PackageServerParent
 			}
 			typeServers = null;
 		}
-		packageServerParent.removePackageServer(this);
 		super.dispose();
+		packageServerParent.disposedPackageServer(this);
+	}
+	
+	void disposedPackageTracker(@NonNull PackageTracker packageTracker) {
+		trackers.remove(packageTracker);
+		setPrimaryPackage();
+		if (trackers.size() <= 0) {
+			dispose();
+		}	// FIXME else trash types and other caches
+		packageManager.disposedPackageTracker(packageTracker);
 	}
 
-	public PivotReflectivePackage getExecutorPackage() {
+	void disposedTypeServer(@NonNull TypeServer typeServer) {
+		if (typeServers != null) {
+			typeServers.remove(typeServer.getName());
+		}
+	}
+	
+	public @NonNull PivotReflectivePackage getExecutorPackage() {
 		if (executorPackage == null) {
 			executorPackage = new PivotReflectivePackage(getMetaModelManager(), primaryPackage);
 		}
-		return executorPackage;
+		@SuppressWarnings("null")
+		@NonNull PivotReflectivePackage executorPackage2 = executorPackage;
+		return executorPackage2;
 	}
 
 	public Type getMemberType(String typeName) {
@@ -150,68 +166,59 @@ public class PackageServer extends PackageServerParent
 		return Iterables.transform(typeServers.values(), TypeServer.server2type);
 	}
 
-/*	TypeTracker getNestedPackageTracker(org.eclipse.ocl.examples.pivot.Package nestedPackage) {
-		if (nestedPackageServers == null) {
-			nestedPackageServers = new HashMap<String, PackageServer>();
-		}
-		String nestedPackageName = nestedPackage.getName();
-		PackageServer nestedPackageServer = nestedPackageServers.get(nestedPackageName);
-		if (nestedPackageServer == null) {
-			nestedPackageServer = new PackageServer(packageManager);
-			nestedPackageServers.put(nestedPackageName, nestedPackageServer);
-		}
-		return nestedPackageServer.getPackageTracker(nestedPackage);
-	} */
+	@SuppressWarnings("null")
+	public @NonNull String getName() {
+		return name;
+	}
 
-	public String getNsURI() {
+	@SuppressWarnings("null")
+	public @NonNull String getNsURI() {
 		return nsURI;
 	}
 
+	@SuppressWarnings("null")
 	@Override
-	public final PackageManager getPackageManager() {
+	public final @NonNull PackageManager getPackageManager() {
 		return packageManager;
 	}
 
 	@Override
-	public PackageTracker getPackageTracker(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+	public @NonNull PackageTracker getPackageTracker(@NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
 		for (PackageTracker packageTracker : trackers) {
 			if (packageTracker.getTarget() == pivotPackage) {
 				return packageTracker;
 			}
 		}
 		return addTrackedPackage(pivotPackage);
-//		packageTracker.initializeContents();
 	}
-
-//	public Iterator<Package> getPackagesIterator() {
-//		if (typeServers == null) {
-//			initTypeServers();
-//		}
-//		return Iterators.transform(trackers.iterator(), tracker2package);
-//	}
 
 	/**
 	 * Return the primary Package of this package merge.
 	 */
-	org.eclipse.ocl.examples.pivot.Package getPrimaryPackage() {
-		return primaryPackage;
+	@NonNull org.eclipse.ocl.examples.pivot.Package getPrimaryPackage() {
+		org.eclipse.ocl.examples.pivot.Package thePrimaryPackage = primaryPackage;
+		if (thePrimaryPackage == null) {
+			throw new IllegalStateException("Missing primary package");
+		}
+		return thePrimaryPackage;
 	}
 
-	public Iterable<org.eclipse.ocl.examples.pivot.Package> getTrackedPackages() {
-//		if (typeServers == null) {
-//			initTypeServers();
-//		}
+	@SuppressWarnings("null")
+	public @NonNull Iterable<org.eclipse.ocl.examples.pivot.Package> getTrackedPackages() {
 		return Iterables.transform(trackers, PackageTracker.tracker2package);
 	}
 
-	TypeTracker getTypeTracker(Type pivotType) {
+	@NonNull TypeTracker getTypeTracker(@NonNull Type pivotType) {
 		if (typeServers == null) {
 			initMemberTypes();
 		}
 		String name = pivotType.getName();
+		if (name == null) {
+			throw new IllegalStateException("Unnamed type");
+		}
 		TypeServer typeServer = typeServers.get(name);
 		if (typeServer == null) {
-			typeServer = new TypeServer(this);
+			typeServer = new TypeServer(this, name);
 			if (pivotType.getUnspecializedElement() == null) {
 				typeServers.put(name, typeServer);
 			}
@@ -219,9 +226,11 @@ public class PackageServer extends PackageServerParent
 		return typeServer.getTypeTracker(pivotType);
 	}
 
-	private void initMemberPackages(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+	private void initMemberPackages(@NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
 		for (org.eclipse.ocl.examples.pivot.Package nestedPackage : pivotPackage.getNestedPackage()) {
-			addedMemberPackage(nestedPackage);
+			if (nestedPackage != null) {
+				addedMemberPackage(nestedPackage);
+			}
 		}
 	}		
 	
@@ -234,38 +243,20 @@ public class PackageServer extends PackageServerParent
 		}
 	}
 
-	private void initMemberTypes(org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+	private void initMemberTypes(@NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
 		for (Type pivotType : pivotPackage.getOwnedType()) {
-			addedMemberType(pivotType);
+			if (pivotType != null) {
+				addedMemberType(pivotType);
+			}
 		}
 	}		
-	
-	void removePackageTracker(PackageTracker packageTracker) {
-		trackers.remove(packageTracker);
-		packageManager.removePackageTracker(packageTracker);
-	}
 
-	void removedPackageTracker(PackageTracker packageTracker) {
-		packageTracker.dispose();
-		setPrimaryPackage();
-		if (trackers.size() <= 0) {
-			dispose();
-		}
-	}
-
-	void removedMemberType(Type pivotType) {
+	void removedMemberType(@NonNull Type pivotType) {
 		if (typeServers != null) {
 			TypeTracker typeTracker = packageManager.findTypeTracker(pivotType);
 			if (typeTracker != null) {
-				TypeServer typeServer = typeTracker.getTypeServer();
-				typeServer.removedTypeTracker(typeTracker);
+				typeTracker.dispose();
 			}
-		}
-	}
-
-	void removedTypeServer(TypeServer typeServer) {
-		if (typeServers != null) {
-			typeServers.remove(typeServer);
 		}
 	}
 
