@@ -329,7 +329,11 @@ public class XtextTestCase extends PivotTestCase
 	
 	protected ResourceSet resourceSet;
 	
-	public void createEcoreFile(MetaModelManager metaModelManager, String fileName, String fileContent) throws IOException {
+	public URI createEcoreFile(MetaModelManager metaModelManager, String fileName, String fileContent) throws IOException {
+		return createEcoreFile(metaModelManager, fileName, fileContent, false);
+	}
+	
+	public URI createEcoreFile(MetaModelManager metaModelManager, String fileName, String fileContent, boolean assignIds) throws IOException {
 		String inputName = fileName + ".oclinecore";
 		createOCLinEcoreFile(inputName, fileContent);
 		URI inputURI = getProjectFileURI(inputName);
@@ -343,9 +347,16 @@ public class XtextTestCase extends PivotTestCase
 			Resource pivotResource = adapter.getPivotResource(xtextResource);
 			assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 			assertNoValidationErrors("Pivot validation errors", pivotResource.getContents().get(0));
-			Resource ecoreResource = Pivot2Ecore.createResource(metaModelManager, pivotResource, ecoreURI, null);
+			XMLResource ecoreResource = Pivot2Ecore.createResource(metaModelManager, pivotResource, ecoreURI, null);
 			assertNoResourceErrors("To Ecore errors", ecoreResource);
+			if (assignIds) {
+				for (TreeIterator<EObject> tit = ecoreResource.getAllContents(); tit.hasNext(); ) {
+					EObject eObject = tit.next();
+					ecoreResource.setID(eObject,  EcoreUtil.generateUUID());
+				}
+			}
 			ecoreResource.save(null);
+			return ecoreURI;
 		}
 		finally {
 			if (adapter != null) {

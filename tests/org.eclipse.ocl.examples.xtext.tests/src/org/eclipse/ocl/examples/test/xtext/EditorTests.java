@@ -16,7 +16,12 @@
  */
 package org.eclipse.ocl.examples.test.xtext;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -26,13 +31,20 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
+import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
+import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.base.utilities.PivotDiagnosticConverter;
 import org.eclipse.ocl.examples.xtext.base.utilities.PivotResourceValidator;
 import org.eclipse.ocl.examples.xtext.completeocl.ui.CompleteOCLUiModule;
@@ -61,30 +73,49 @@ import org.eclipse.xtext.validation.CheckMode;
  */
 public class EditorTests extends XtextTestCase
 {	
+	protected FileEditorInput createEcoreFileEditorInput(String projectName, String fileName, String testDocument)throws IOException, CoreException {
+		OCL ocl0 = OCL.newInstance(new PivotEnvironmentFactory());
+		MetaModelManager metaModelManager0 = ocl0.getMetaModelManager();
+		String ecoreString = createEcoreString(metaModelManager0, fileName, testDocument, true);
+		InputStream inputStream = new URIConverter.ReadableInputStream(ecoreString, "UTF-8");
+		FileEditorInput fileEditorInput = createFileEditorInput(projectName, fileName, inputStream);
+		metaModelManager0.dispose();
+		return fileEditorInput;
+	}
+
+	protected FileEditorInput createFileEditorInput(String projectName, String testFile, InputStream inputStream) throws CoreException {
+		IProject project = createProject(projectName);
+		IFile file1 = project.getFile(testFile);
+		file1.create(inputStream, true, null);
+		return new FileEditorInput(file1);
+	}
+
+	protected IProject createProject(String projectName) throws CoreException {
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		IWorkspaceRoot root = workspace.getRoot();
+		IProject project = root.getProject(projectName);
+		if (!project.exists()) {
+			project.create(null);
+		}
+		project.open(null);
+		return project;
+	}
 
 	public void doTestEditor(String editorId, String testFile, String testContent) throws Exception {
 		InputStream inputStream = new URIConverter.ReadableInputStream(testContent, "UTF-8");
-		XtextEditor editor = doTestEditor(editorId, testFile, inputStream);
+		FileEditorInput fileEditorInput = createFileEditorInput("test", testFile, inputStream);
+		XtextEditor editor = doTestEditor(editorId, fileEditorInput);
 		IXtextDocument document = editor.getDocument();
 		String content = document.get();
 		assertEquals(testContent, content);
 	}
 
-	private XtextEditor doTestEditor(String editorId, String testFile, InputStream inputStream) throws CoreException, PartInitException {
-		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		IWorkspaceRoot root = workspace.getRoot();
-		IProject project = root.getProject("test");
-		if (!project.exists()) {
-			project.create(null);
-		}
-		project.open(null);
-		IFile file = project.getFile(testFile);
-		file.create(inputStream, true, null);
-		IEditorInput input = new FileEditorInput(file);
+	protected XtextEditor doTestEditor(String editorId, FileEditorInput fileEditorInput) throws PartInitException, CoreException {
+		IFile file = fileEditorInput.getFile();
 		IWorkbench workbench = PlatformUI.getWorkbench();
 		IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
 		IWorkbenchPage page = activeWorkbenchWindow.getActivePage();
-		XtextEditor editor = (XtextEditor) IDE.openEditor(page, input, editorId, true);
+		XtextEditor editor = (XtextEditor) IDE.openEditor(page, fileEditorInput, editorId, true);
 		String languageName = editor.getLanguageName();
 		assertEquals(editorId, languageName);
 		file.refreshLocal(IResource.DEPTH_INFINITE, null);
@@ -110,7 +141,7 @@ public class EditorTests extends XtextTestCase
 			fail("Markers" + s.toString());
 		}
 		return editor;
-	}	
+	}
 
 	private String doTestEditor(String editorId, URI testFile) throws CoreException, PartInitException {
 		IEditorInput input = new EMFURIEditorInput(testFile);
@@ -136,7 +167,7 @@ public class EditorTests extends XtextTestCase
 		{
 			public Object exec(XtextResource resource) throws Exception {
 				assertNoResourceErrors("Loaded CS", resource);
-				CS2Pivot cs2Pivot = PivotUtil.getAdapter(CS2Pivot.class, resource);
+				CS2Pivot cs2Pivot = PivotUtil.getAdapter(CS2Pivot.class, resource);		// FIXME Wrong class
 				if (cs2Pivot != null) {
 					Resource pivotResource = cs2Pivot.getPivotResource(resource);
 					assertNoResourceErrors("Loaded pivot", pivotResource);
@@ -145,6 +176,34 @@ public class EditorTests extends XtextTestCase
 			}
 		});
 		return document.get();
+	}	
+
+	protected void flushEvents() {
+		IWorkbench workbench = PlatformUI.getWorkbench();
+		while (workbench.getDisplay().readAndDispatch());
+	}
+
+	protected Set<EObject> indexPivotContent(XtextDocument document, final String prefix) {
+		String doc = document.get();
+		final Set<EObject> pivotContent = new HashSet<EObject>();
+		document.readOnly(new IUnitOfWork<Object, XtextResource>()
+		{
+			public Object exec(XtextResource resource) throws Exception {
+//				assertNoResourceErrors("Loaded CS", resource);
+				CS2PivotResourceAdapter cs2Pivot = PivotUtil.getAdapter(CS2PivotResourceAdapter.class, resource);
+				if (cs2Pivot != null) {
+					Resource pivotResource = cs2Pivot.getPivotResource((BaseCSResource) resource);
+					assertNoResourceErrors(prefix, pivotResource);
+					for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
+						EObject eObject = tit.next();
+//						System.out.println(PivotUtil.debugSimpleName(eObject));
+						pivotContent.add(eObject);
+					}
+				}
+				return null;
+			}
+		});
+		return pivotContent;
 	}	
 	
 	public void testEditor_OpenCompleteOCLEditor() throws Exception {
@@ -202,4 +261,42 @@ public class EditorTests extends XtextTestCase
 		assertTrue(documentText.contains("abstract class Visitable : 'org.eclipse.ocl.examples.pivot.util.Visitable' { interface };"));
 		assertTrue(documentText.contains("reference Type::ownedAttribute"));							// Tests Bug 363141 EAnnotation reference
 	}	
+	
+	public void testEditor_OpenOCLinEcoreEditor4Test_Ecore_Update() throws Exception {
+		String testDocument = 
+			"package tutorial : tuttut = 'http://www.eclipse.org/mdt/ocl/oclinecore/tutorial'\n" +
+			"{\n" +
+			"	class Library\n" +
+			"	{\n" +
+			"		property books#library : Book[*] { composes };\n" +
+			"	}\n" +
+			"	class Book\n" +
+			"	{\n" +
+			"		property library#books : Library[?];\n" +
+			"	}\n" +
+			"}\n";
+		FileEditorInput fileEditorInput = createEcoreFileEditorInput("test", "RefreshTest.ecore", testDocument);
+		XtextEditor editor = doTestEditor(OCLinEcoreUiModule.EDITOR_ID, fileEditorInput);
+		XtextDocument document = (XtextDocument) editor.getDocument();
+		Set<EObject> oldPivotContent = indexPivotContent(document, "Loaded pivot");
+		oldPivotContent.toString();
+		IProject iProject = createProject("test");
+		IFile iFile = iProject.getFile("RefreshTest.ecore");
+		Reader reader = new InputStreamReader(iFile.getContents());
+		char[] cbuf = new char[4096];
+		StringBuilder s = new StringBuilder();
+		for (int i; (i = reader.read(cbuf)) > 0; ) {
+			s.append(cbuf, 0, i);
+		}
+		String updatedDocument = s.toString().replace("tuttut", "tut");
+		iFile.setContents(new URIConverter.ReadableInputStream(updatedDocument, "UTF-8"), true, false, null);
+		flushEvents();
+		String newDoc = document.get();
+		Set<EObject> newPivotContent = indexPivotContent(document, "Loaded pivot");
+		assertEquals(oldPivotContent.size(), newPivotContent.size());
+		flushEvents();
+		assertEquals(oldPivotContent, newPivotContent);
+		flushEvents();
+	}
+		
 }

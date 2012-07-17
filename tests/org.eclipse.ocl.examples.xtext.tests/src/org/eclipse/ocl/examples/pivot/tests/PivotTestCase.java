@@ -323,7 +323,7 @@ public class PivotTestCase extends TestCase
 			ecoreResource.save(null);
 		}
 		if (validateSaved) {
-			assertNoValidationErrors("Ecore2Pivot invalid", ecoreResource);
+			assertNoValidationErrors("Pivot2Ecore invalid", ecoreResource);
 		}
 		return ecoreResource;
 	}

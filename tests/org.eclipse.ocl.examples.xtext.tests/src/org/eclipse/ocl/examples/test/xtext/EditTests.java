@@ -18,28 +18,43 @@ package org.eclipse.ocl.examples.test.xtext;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.StringWriter;
 import java.lang.ref.WeakReference;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.ocl.common.OCLConstants;
+import org.eclipse.ocl.common.internal.options.CommonOptions;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.SequenceType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.context.ModelContext;
+import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
+import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
+import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
+import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
+import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
@@ -159,6 +174,109 @@ public class EditTests extends XtextTestCase
 		}
 		metaModelManager_class.dispose();
 		metaModelManager_datatype.dispose();
+	}	
+
+	public void testEdit_Refresh_ecore_382230() throws Exception {
+		CommonOptions.DEFAULT_DELEGATION_MODE.setDefaultValue(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
+		OCLDelegateDomain.initialize(null);
+		OCLDelegateDomain.initialize(null, OCLConstants.OCL_DELEGATE_URI);
+//		OCLDelegateDomain.initialize(null, OCLConstants.OCL_DELEGATE_URI_LPG);
+		OCL ocl0 = OCL.newInstance(new PivotEnvironmentFactory());
+		MetaModelManager metaModelManager0 = ocl0.getMetaModelManager();
+		String testDocument = 
+			"package tutorial : tuttut = 'http://www.eclipse.org/mdt/ocl/oclinecore/tutorial'\n" +
+			"{\n" +
+			"	class Library\n" +
+			"	{\n" +
+			"		property books#library : Book[*] { composes };\n" +
+			"	}\n" +
+			"	class Book\n" +
+			"	{\n" +
+			"		property library#books : Library[?];\n" +
+			"	}\n" +
+			"}\n";
+		URI ecoreURI = createEcoreFile(metaModelManager0, "RefreshTest.ecore", testDocument, true);
+		metaModelManager0.dispose();
+		//
+		//	Load and instrument test document
+		//
+		OCL ocl1 = OCL.newInstance(new PivotEnvironmentFactory());
+		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
+		Resource ecoreResource = metaModelManager1.getExternalResourceSet().getResource(ecoreURI, true);
+		assertNoResourceErrors("Ecore load", ecoreResource);
+		assertNoValidationErrors("Ecore load", ecoreResource);
+		Resource pivotResource = ocl1.ecore2pivot(ecoreResource);
+		assertNoResourceErrors("Pivot load", pivotResource);
+		assertNoValidationErrors("Pivot load", pivotResource);
+		Set<EObject> loadPivotContent = new HashSet<EObject>();
+		for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
+			EObject eObject = tit.next();
+//			System.out.println(PivotUtil.debugSimpleName(eObject));
+			loadPivotContent.add(eObject);
+		}
+		{
+			ResourceSet resourceSet = new ResourceSetImpl();
+			BaseCSResource xtextResource1 = (BaseCSResource) resourceSet.createResource(ecoreURI.appendFileExtension("oclinecore"), OCLinEcoreCSTPackage.eCONTENT_TYPE);
+			xtextResource1.setURI(ecoreURI);
+			ocl1.pivot2cs(pivotResource, xtextResource1);
+			assertNoResourceErrors("Xtext load", xtextResource1);
+			assertNoValidationErrors("Xtext load", xtextResource1);
+			CS2PivotResourceAdapter cs2pivotAdapter1 = CS2PivotResourceAdapter.getAdapter(xtextResource1, null);
+			ListBasedDiagnosticConsumer diagnosticsConsumer1 = new ListBasedDiagnosticConsumer();
+			cs2pivotAdapter1.refreshPivotMappings(diagnosticsConsumer1);
+			Set<EObject> parsePivotContent = new HashSet<EObject>();
+			for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
+				EObject eObject = tit.next();
+//				System.out.println(PivotUtil.debugSimpleName(eObject));
+				parsePivotContent.add(eObject);
+			}
+			assertEquals(loadPivotContent.size(), parsePivotContent.size());
+			assertEquals(loadPivotContent, parsePivotContent);
+		}
+		
+		//
+		//	Reoad and re-instrument test document
+		//
+		StringWriter writer = new StringWriter();
+		OutputStream outputStream = new URIConverter.WriteableOutputStream(writer, "UTF-8");
+		ecoreResource.save(outputStream, null);
+		ecoreResource.unload();
+		InputStream inputStream = new URIConverter.ReadableInputStream(writer.toString().replace("tuttut",  "tut"), "UTF-8");
+		ecoreResource.load(inputStream, null);
+		assertNoResourceErrors("Ecore reload", ecoreResource);
+		assertNoValidationErrors("Ecore reload", ecoreResource);
+		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager1);
+		ecore2Pivot.update(pivotResource, ecoreResource.getContents());
+		assertNoResourceErrors("Pivot reload", ecoreResource);
+		assertNoValidationErrors("Pivot reload", ecoreResource);
+		Set<EObject> newPivotContent = new HashSet<EObject>();
+		for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
+			EObject eObject = tit.next();
+//			System.out.println(PivotUtil.debugSimpleName(eObject));
+			newPivotContent.add(eObject);
+		}
+		assertEquals(loadPivotContent.size(), newPivotContent.size());
+		assertEquals(loadPivotContent, newPivotContent);
+		{
+			ResourceSet resourceSet = new ResourceSetImpl();
+			BaseCSResource xtextResource2 = (BaseCSResource) resourceSet.createResource(ecoreURI.appendFileExtension("oclinecore"), OCLinEcoreCSTPackage.eCONTENT_TYPE);
+			xtextResource2.setURI(ecoreURI);
+			ocl1.pivot2cs(pivotResource, xtextResource2);
+			assertNoResourceErrors("Xtext load", xtextResource2);
+			assertNoValidationErrors("Xtext load", xtextResource2);
+			CS2PivotResourceAdapter cs2pivotAdapter2 = CS2PivotResourceAdapter.getAdapter(xtextResource2, null);
+			ListBasedDiagnosticConsumer diagnosticsConsumer2 = new ListBasedDiagnosticConsumer();
+			cs2pivotAdapter2.refreshPivotMappings(diagnosticsConsumer2);
+			Set<EObject> reparsePivotContent = new HashSet<EObject>();
+			for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
+				EObject eObject = tit.next();
+//				System.out.println(PivotUtil.debugSimpleName(eObject));
+				reparsePivotContent.add(eObject);
+			}
+			assertEquals(loadPivotContent.size(), reparsePivotContent.size());
+			assertEquals(loadPivotContent, reparsePivotContent);
+		}
+		metaModelManager1.dispose();
 	}	
 
 	public void testEdit_Rename_ecore() throws Exception {
