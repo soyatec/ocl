@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.library.executor.LazyModelManager;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -49,7 +50,9 @@ public class PivotModelManager extends LazyModelManager
 		EPackage ePackage = eClass.getEPackage();
 		Type objectType;
 		if (ePackage == PivotPackage.eINSTANCE) {
-			objectType = metaModelManager.getPivotType(eClass.getName());
+			@SuppressWarnings("null")
+			@NonNull String name = eClass.getName();
+			objectType = metaModelManager.getPivotType(name);
 		}
 		else {
 			Resource resource = eClass.eResource();
@@ -64,6 +67,6 @@ public class PivotModelManager extends LazyModelManager
 				objectType = ecoreConverter.getPivotType(eClass);
 			}
 		}
-	    return objectType.conformsTo(metaModelManager, requiredType);
+	    return objectType != null ? objectType.conformsTo(metaModelManager, requiredType) : null;
 	}
 }

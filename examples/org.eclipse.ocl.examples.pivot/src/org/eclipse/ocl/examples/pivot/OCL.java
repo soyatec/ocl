@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.EvaluationHaltedException;
@@ -488,7 +489,7 @@ public class OCL {
 		return evaluationProblems;
 	}
 
-	public MetaModelManager getMetaModelManager() {
+	public @NonNull MetaModelManager getMetaModelManager() {
 		return rootEnvironment.getMetaModelManager();
 	}
 
@@ -648,7 +649,7 @@ public class OCL {
 	/**
 	 * Return the Ecore resource counterpart of a pivotResource, specifying the uri of the resulting Ecore resource.
 	 */
-	public Resource pivot2ecore(Resource pivotResource, URI uri) throws IOException {
+	public Resource pivot2ecore(@NonNull Resource pivotResource, @NonNull URI uri) throws IOException {
 		MetaModelManager metaModelManager = getMetaModelManager();
 		Resource ecoreResource = Pivot2Ecore.createResource(metaModelManager, pivotResource, uri, null);
 		return ecoreResource;

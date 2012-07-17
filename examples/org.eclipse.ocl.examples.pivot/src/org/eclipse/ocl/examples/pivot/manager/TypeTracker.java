@@ -21,6 +21,7 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -48,26 +49,28 @@ public class TypeTracker implements Adapter.Internal			// FIXME package private
 	 */
 	private final Type target;
 	
-	TypeTracker(TypeServer typeServer, Type target) {
+	TypeTracker(@NonNull TypeServer typeServer, @NonNull Type target) {
 		this.typeServer = typeServer;
 		this.target = target;
 		target.eAdapters().add(this);
 	}
 
 	void dispose() {
-		typeServer.removeTypeTracker(this);
+		typeServer.disposedTypeTracker(this);
 		target.eAdapters().remove(this);
 	}
 
-	public Type getPrimaryType() {
+	public @NonNull Type getPrimaryType() {
 		return typeServer.getPrimaryType();
 	}
 
-	public final Type getTarget() {
+	@SuppressWarnings("null")
+	public final @NonNull Type getTarget() {
 		return target;
 	}
 	
-	public TypeServer getTypeServer() {
+	@SuppressWarnings("null")
+	public @NonNull TypeServer getTypeServer() {
 		return typeServer;
 	}
 	

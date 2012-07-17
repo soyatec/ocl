@@ -17,11 +17,13 @@
 package org.eclipse.ocl.examples.pivot.delegate;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.util.QueryDelegate;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
@@ -94,6 +96,8 @@ public class OCLQueryDelegate implements QueryDelegate
 	 */
 	public Object execute(Object target, Map<String, ?> arguments)
 			throws InvocationTargetException {
+		@SuppressWarnings("null")
+		@NonNull Map<String, ?> nonNullArguments =  (arguments != null ? arguments : (Map<String, ?>)Collections.<String, Object>emptyMap());
 		if (specification == null) {
 			prepare();
 		}
@@ -119,9 +123,8 @@ public class OCLQueryDelegate implements QueryDelegate
 			for (Variable parameterVariable : parameterVariables) {
 				// bind arguments to parameter names
 				String name = parameterVariable.getName();
-				@SuppressWarnings("null")
-				Object object = arguments.get(name);
-				if ((object == null) && !arguments.containsKey(name)) {
+				Object object = nonNullArguments.get(name);
+				if ((object == null) && !nonNullArguments.containsKey(name)) {
 					String message = DomainUtil.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, PivotUtil.getBody(specification));
 					throw new OCLDelegateException(message);
 				}

@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.*;
 import org.eclipse.ocl.examples.pivot.Class;
 import org.eclipse.ocl.examples.pivot.Package;
@@ -72,7 +73,8 @@ public class OCLstdlib extends XMIResourceImpl
 	 *  This static definition auto-generated from /org.eclipse.ocl.examples.library/model/OCL-2.4.oclstdlib
 	 *  is used as the default when no overriding copy is registered. 
 	 */
-	public static OCLstdlib getDefault() {
+	@SuppressWarnings("null")
+	public static @NonNull OCLstdlib getDefault() {
 		if (INSTANCE == null) {
 			Contents contents = new Contents();
 			Root libraryModel = contents.create("ocl", "ocl", "http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib");
@@ -112,7 +114,7 @@ public class OCLstdlib extends XMIResourceImpl
 			return this;
 		}
 		
-		public Resource getResource() {
+		public @NonNull Resource getResource() {
 			return getDefault();
 		}
 	}
@@ -128,7 +130,7 @@ public class OCLstdlib extends XMIResourceImpl
 			return this;
 		}
 
-		public Resource getResource() {
+		public @NonNull Resource getResource() {
 			return OCLstdlib.create("http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib", "ocl", "ocl", "http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib");
 		}
 	}
@@ -137,7 +139,7 @@ public class OCLstdlib extends XMIResourceImpl
 	 *	Construct a copy of the OCL Standard Library with specified resource URI,
 	 *  and package name, prefix and namespace URI.
 	 */
-	public static OCLstdlib create(String uri, String name, String nsPrefix, String nsURI) {
+	public static @NonNull OCLstdlib create(String uri, String name, String nsPrefix, String nsURI) {
 		Contents contents = new Contents();
 		Root libraryModel = contents.create(name, nsPrefix, nsURI);
 		return new OCLstdlib(uri, libraryModel);

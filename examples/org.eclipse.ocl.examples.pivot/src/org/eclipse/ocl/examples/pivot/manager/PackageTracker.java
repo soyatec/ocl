@@ -21,6 +21,7 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
 
@@ -45,32 +46,43 @@ class PackageTracker implements Adapter.Internal
 	 */
 	private final org.eclipse.ocl.examples.pivot.Package target;
 
-	PackageTracker(PackageServer packageServer, org.eclipse.ocl.examples.pivot.Package target) {
+	PackageTracker(@NonNull PackageServer packageServer, @NonNull org.eclipse.ocl.examples.pivot.Package target) {
 		this.packageServer = packageServer;
 		this.target = target;
 		target.eAdapters().add(this);
 	}
 
 	void dispose() {
-		packageServer.removePackageTracker(this);
+		PackageManager packageManager = packageServer.getPackageManager();
+		for (Type type : target.getOwnedType()) {
+			if (type != null) {
+				TypeTracker typeTracker = packageManager.findTypeTracker(type);
+				if (typeTracker != null) {
+					typeTracker.dispose();
+				}
+			}
+		}
+		packageServer.disposedPackageTracker(this);
 		target.eAdapters().remove(this);
 	}
 
 	/**
 	 * Return the PackageServer supervising this package merge.
 	 */
-	final PackageServer getPackageServer() {
+	@SuppressWarnings("null")
+	final @NonNull PackageServer getPackageServer() {
 		return packageServer;
 	}
 
 	/**
 	 * Return the primary Package of this package merge.
 	 */
-	org.eclipse.ocl.examples.pivot.Package getPrimaryPackage() {
+	@NonNull org.eclipse.ocl.examples.pivot.Package getPrimaryPackage() {
 		return packageServer.getPrimaryPackage();
 	}
 
-	public org.eclipse.ocl.examples.pivot.Package getTarget() {
+	@SuppressWarnings("null")
+	public @NonNull org.eclipse.ocl.examples.pivot.Package getTarget() {
 		return target;
 	}
 

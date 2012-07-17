@@ -533,11 +533,13 @@ public class PrettyPrinter
 		                	}
 		            	}
 		            }
-                	URI baseURI = options.getBaseURI();
-                	if (baseURI != null) {
-                		uri = uri.deresolve(baseURI);
+                	if (uri != null) {
+                		URI baseURI = options.getBaseURI();
+                    	if (baseURI != null) {
+                    		uri = uri.deresolve(baseURI);
+                    	}
+                		append(getName(uri.toString(), options.getReservedNames()));
                 	}
-            		append(getName(uri.toString(), options.getReservedNames()));
             		append("::");               
                     i++;
 	            }

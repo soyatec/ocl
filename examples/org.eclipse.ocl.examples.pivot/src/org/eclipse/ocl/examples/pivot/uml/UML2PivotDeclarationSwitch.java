@@ -561,6 +561,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		DynamicElement pivotElement;
 		if (umlObject instanceof org.eclipse.uml2.uml.Type) {
 			pivotElement = converter.refreshElement(DynamicType.class, PivotPackage.Literals.DYNAMIC_TYPE, umlObject);
+			((DynamicType)pivotElement).setName(((org.eclipse.uml2.uml.Type)umlObject).getName());
 		}
 		else if (umlObject instanceof org.eclipse.uml2.uml.Element) {
 			pivotElement = converter.refreshElement(DynamicElement.class, PivotPackage.Literals.DYNAMIC_ELEMENT, umlObject);

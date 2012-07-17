@@ -25,6 +25,8 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.library.executor.ReflectiveType;
 import org.eclipse.ocl.examples.pivot.ClassifierType;
 import org.eclipse.ocl.examples.pivot.CollectionType;
@@ -62,6 +64,7 @@ public class TypeServer
 	};
 
 	protected final PackageServer packageServer;
+	protected final String name;
 	protected final PackageManager packageManager;
 	
 	private final List<TypeTracker> trackers = new ArrayList<TypeTracker>();
@@ -89,12 +92,13 @@ public class TypeServer
 	 */
 	private Map<ParameterableElement, List<WeakReference<Type>>> firstActual2specializations = null;
 	
-	TypeServer(PackageServer packageServer) {
+	TypeServer(@NonNull PackageServer packageServer, @NonNull String name) {
 		this.packageServer = packageServer;
+		this.name = name;
 		this.packageManager = packageServer.getPackageManager();
 	}
 
-	void addedMemberOperation(Operation pivotOperation) {
+	void addedMemberOperation(@NonNull Operation pivotOperation) {
 		if (operation2operations != null) {
 			String operationName = pivotOperation.getName();
 			List<List<Operation>> overloads = operation2operations.get(operationName);
@@ -113,7 +117,7 @@ public class TypeServer
 		}
 	}
 
-	void addedMemberProperty(Property pivotProperty) {
+	void addedMemberProperty(@NonNull Property pivotProperty) {
 		if (property2properties != null) {
 			String propertyName = pivotProperty.getName();
 			List<Property> properties = property2properties.get(propertyName);
@@ -134,7 +138,7 @@ public class TypeServer
 		}
 	}
 	
-	protected Type createSpecialization(List<? extends ParameterableElement> templateArguments) {
+	protected @NonNull Type createSpecialization(@NonNull List<? extends ParameterableElement> templateArguments) {
 		Type unspecializedType = primaryType;
 		String typeName = unspecializedType.getName();
 		TemplateSignature templateSignature = unspecializedType.getOwnedTemplateSignature();
@@ -199,10 +203,19 @@ public class TypeServer
 			executorType.dispose();
 			executorType = null;
 		}
-		packageServer.removedTypeServer(this);
+		packageServer.disposedTypeServer(this);
 	}
 	
-	private List<Operation> findOverload(List<List<Operation>> overloads, Operation requiredOperation) {
+	void disposedTypeTracker(@NonNull TypeTracker typeTracker) {
+		trackers.remove(typeTracker);
+		setPrimaryType();
+		if (trackers.size() <= 0) {
+			dispose();
+		}
+		packageManager.disposedTypeTracker(typeTracker);
+	}
+	
+	private @Nullable List<Operation> findOverload(@NonNull List<List<Operation>> overloads, @NonNull Operation requiredOperation) {
 		List<Parameter> requiredParameters;
 		if (requiredOperation instanceof Iteration) {
 			requiredParameters = ((Iteration)requiredOperation).getOwnedIterator();
@@ -243,7 +256,7 @@ public class TypeServer
 		return null;
 	}
 
-	Type findSpecialization(List<WeakReference<Type>> partialSpecializations, List<? extends ParameterableElement> templateArguments) {
+	Type findSpecialization(@NonNull List<WeakReference<Type>> partialSpecializations, @NonNull List<? extends ParameterableElement> templateArguments) {
 		for (int j = partialSpecializations.size(); --j >= 0; ) {
 			Type specializedType = partialSpecializations.get(j).get();
 			if (specializedType == null) {
@@ -276,7 +289,7 @@ public class TypeServer
 		return null;
 	}
 
-	public synchronized Type findSpecializedType(List<? extends ParameterableElement> templateArguments) {
+	public synchronized Type findSpecializedType(@NonNull List<? extends ParameterableElement> templateArguments) {
 		TemplateSignature templateSignature = primaryType.getOwnedTemplateSignature();
 		List<TemplateParameter> templateParameters = templateSignature.getParameter();
 		int iMax = templateParameters.size();
@@ -294,19 +307,17 @@ public class TypeServer
 		return findSpecialization(partialSpecializations, templateArguments);
 	}
 
-//	protected PivotReflectivePackage getExecutorPackage() {
-//		return packageServer.getExecutorPackage();
-//	}
-
-	public ReflectiveType getExecutorType() {
+	public @NonNull ReflectiveType getExecutorType() {
 		if (executorType == null) {
 			PivotReflectivePackage executorPackage = packageServer.getExecutorPackage();
 			executorType = executorPackage.getInheritance(primaryType);
 		}
-		return executorType;
+		@SuppressWarnings("null")
+		@NonNull ReflectiveType executorType2 = executorType;
+		return executorType2;
 	}
 
-	public Operation getMemberOperation(Operation pivotOperation) {
+	public @Nullable Operation getMemberOperation(@NonNull Operation pivotOperation) {
 		if (operation2operations == null) {
 			initMemberOperations();
 		}
@@ -322,7 +333,7 @@ public class TypeServer
 		return overload.isEmpty() ? null : overload.get(0);
 	}
 
-	public Iterable<Operation> getMemberOperations(Operation pivotOperation) {
+	public @Nullable Iterable<Operation> getMemberOperations(@NonNull Operation pivotOperation) {
 		if (operation2operations == null) {
 			initMemberOperations();
 		}
@@ -334,7 +345,7 @@ public class TypeServer
 		return findOverload(overloads, pivotOperation);
 	}
 
-	public Iterable<Property> getMemberProperties(Property pivotProperty) {
+	public @Nullable Iterable<Property> getMemberProperties(@NonNull Property pivotProperty) {
 		if (property2properties == null) {
 			initMemberProperties();
 		}
@@ -342,7 +353,7 @@ public class TypeServer
 		return property2properties.get(propertyName);
 	}
 
-	public Property getMemberProperty(String propertyName) {
+	public @Nullable Property getMemberProperty(@NonNull String propertyName) {
 		if (property2properties == null) {
 			initMemberProperties();
 		}
@@ -353,20 +364,30 @@ public class TypeServer
 		return properties.isEmpty() ? null : properties.get(0);
 	}
 
-	public final PackageManager getPackageManager() {
+	@SuppressWarnings("null")
+	public @NonNull String getName() {
+		return name;
+	}
+
+	@SuppressWarnings("null")
+	public final @NonNull PackageManager getPackageManager() {
 		return packageManager;
 	}
 
-	public Type getPrimaryType() {
-		return primaryType;
+	public @NonNull Type getPrimaryType() {
+		Type thePrimaryType = primaryType;
+		if (thePrimaryType == null) {
+			throw new IllegalStateException("Missing primary type");
+		}
+		return thePrimaryType;
 	}
 
-	public synchronized Type getSpecializedType(List<? extends ParameterableElement> templateArguments) {
+	public synchronized @NonNull Type getSpecializedType(@NonNull List<? extends ParameterableElement> templateArguments) {
 		TemplateSignature templateSignature = primaryType.getOwnedTemplateSignature();
 		List<TemplateParameter> templateParameters = templateSignature.getParameter();
 		int iMax = templateParameters.size();
 		if (templateArguments.size() != iMax) {
-			return null;
+			throw new IllegalArgumentException("Incompatible template argument count");
 		}
 		if (firstActual2specializations == null) {
 			firstActual2specializations = new HashMap<ParameterableElement, List<WeakReference<Type>>>();
@@ -385,11 +406,13 @@ public class TypeServer
 		return specializedType;
 	}
 
-	public Iterable<Type> getTrackedTypes() {
-		return Iterables.transform(trackers, TypeTracker.tracker2type);
+	public @NonNull Iterable<Type> getTrackedTypes() {
+		@SuppressWarnings("null")
+		@NonNull Iterable<Type> transform = Iterables.transform(trackers, TypeTracker.tracker2type);
+		return transform;
 	}
 
-	public TypeTracker getTypeTracker(Type pivotType) {
+	public @NonNull TypeTracker getTypeTracker(@NonNull Type pivotType) {
 		for (TypeTracker typeTracker : trackers) {
 			if (typeTracker.getTarget() == pivotType) {
 				return typeTracker;
@@ -410,7 +433,8 @@ public class TypeServer
 		return typeTracker;
 	}
 
-	public List<TypeTracker> getTypeTrackers() {
+	@SuppressWarnings("null")
+	public @NonNull List<TypeTracker> getTypeTrackers() {
 		return trackers;
 	}
 
@@ -418,15 +442,16 @@ public class TypeServer
 		if (operation2operations == null) {
 			operation2operations = new HashMap<String, List<List<Operation>>>();
 			for (TypeTracker typeTracker : trackers) {
-				Type type = typeTracker.getTarget();
-				initMemberOperations(type);
+				initMemberOperations(typeTracker.getTarget());
 			}
 		}	
 	}
 
-	private  void initMemberOperations(Type type) {
+	private  void initMemberOperations(@NonNull Type type) {
 		for (Operation pivotOperation : type.getOwnedOperation()) {
-			addedMemberOperation(pivotOperation);
+			if (pivotOperation != null) {
+				addedMemberOperation(pivotOperation);
+			}
 		}
 	}
 
@@ -434,19 +459,20 @@ public class TypeServer
 		if (property2properties == null) {
 			property2properties = new HashMap<String, List<Property>>();
 			for (TypeTracker typeTracker : trackers) {
-				Type type = typeTracker.getTarget();
-				initMemberProperties(type);
+				initMemberProperties(typeTracker.getTarget());
 			}
 		}	
 	}
 
-	private  void initMemberProperties(Type type) {
+	private  void initMemberProperties(@NonNull Type type) {
 		for (Property pivotProperty : type.getOwnedAttribute()) {
-			addedMemberProperty(pivotProperty);
+			if (pivotProperty != null) {
+				addedMemberProperty(pivotProperty);
+			}
 		}
 	}
 
-	void removedMemberOperation(Operation pivotOperation) {
+	void removedMemberOperation(@NonNull Operation pivotOperation) {
 		if (operation2operations != null) {
 			String operationName = pivotOperation.getName();
 			List<List<Operation>> overloads = operation2operations.get(operationName);
@@ -467,7 +493,7 @@ public class TypeServer
 		}
 	}
 
-	void removedMemberProperty(Property pivotProperty) {
+	void removedMemberProperty(@NonNull Property pivotProperty) {
 		if (property2properties != null) {
 			String propertyName = pivotProperty.getName();
 			List<Property> properties = property2properties.get(propertyName);
@@ -479,21 +505,8 @@ public class TypeServer
 			}
 		}
 	}
-	
-	void removeTypeTracker(TypeTracker typeTracker) {
-		trackers.remove(typeTracker);
-		packageManager.removeTypeTracker(typeTracker);
-	}
 
-	void removedTypeTracker(TypeTracker typeTracker) {
-		typeTracker.dispose();
-		setPrimaryType();
-		if (trackers.size() <= 0) {
-			dispose();
-		}
-	}
-
-	void resolveSuperClasses(Type specializedClass, Type libraryClass, Map<TemplateParameter, ParameterableElement> allBindings) {
+	void resolveSuperClasses(@NonNull Type specializedClass, @NonNull Type libraryClass, Map<TemplateParameter, ParameterableElement> allBindings) {
 		MetaModelManager metaModelManager = packageManager.getMetaModelManager();
 		for (Type superType : libraryClass.getSuperClass()) {
 			List<TemplateBinding> superTemplateBindings = superType.getTemplateBinding();

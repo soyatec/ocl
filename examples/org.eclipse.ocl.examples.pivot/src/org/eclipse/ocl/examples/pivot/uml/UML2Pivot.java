@@ -722,29 +722,31 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 					}
 					List<StereotypedProperty> oldProperties = newAppliedStereotype.getStereotypedProperty();
 					List<StereotypedProperty> newProperties = new ArrayList<StereotypedProperty>(eAppliedStereotypes.size());
-					for (Property referenceProperty : pivotStereotype.getOwnedAttribute()) {
-						StereotypedProperty newProperty = null;
-						for (StereotypedProperty oldProperty : oldProperties) {
-							if (referenceProperty == oldProperty.getReferredProperty()) {
-								newProperty = oldProperty;
-							}
-						}
-						if (newProperty == null) {
-							newProperty = PivotFactory.eINSTANCE.createStereotypedProperty();
-							newProperty.setReferredProperty(referenceProperty);
-						}
-						String defaultValue = referenceProperty.getDefault();
-						String name = referenceProperty.getName();
-						if (name != null) {
-							for (int i = 0; i < eStructuralFeatures.size(); i++) {
-								EStructuralFeature eFeature = eStructuralFeatures.get(i);
-								if (name.equals(eFeature.getName())) {
-									defaultValue = eFeature.getDefaultValueLiteral();			// FIXME ValueSpecifications
+					if (pivotStereotype != null) {
+						for (Property referenceProperty : pivotStereotype.getOwnedAttribute()) {
+							StereotypedProperty newProperty = null;
+							for (StereotypedProperty oldProperty : oldProperties) {
+								if (referenceProperty == oldProperty.getReferredProperty()) {
+									newProperty = oldProperty;
 								}
 							}
+							if (newProperty == null) {
+								newProperty = PivotFactory.eINSTANCE.createStereotypedProperty();
+								newProperty.setReferredProperty(referenceProperty);
+							}
+							String defaultValue = referenceProperty.getDefault();
+							String name = referenceProperty.getName();
+							if (name != null) {
+								for (int i = 0; i < eStructuralFeatures.size(); i++) {
+									EStructuralFeature eFeature = eStructuralFeatures.get(i);
+									if (name.equals(eFeature.getName())) {
+										defaultValue = eFeature.getDefaultValueLiteral();			// FIXME ValueSpecifications
+									}
+								}
+							}
+							newProperty.setDefault(defaultValue);
+							newProperties.add(newProperty);
 						}
-						newProperty.setDefault(defaultValue);
-						newProperties.add(newProperty);
 					}
 					refreshList(newAppliedStereotype.getStereotypedProperty(), newProperties);
 					newAppliedStereotypes.add(newAppliedStereotype);

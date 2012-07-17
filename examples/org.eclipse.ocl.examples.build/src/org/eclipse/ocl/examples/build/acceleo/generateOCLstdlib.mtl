@@ -45,6 +45,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.*;
 import org.eclipse.ocl.examples.pivot.Class;
 import org.eclipse.ocl.examples.pivot.Package;
@@ -81,7 +82,8 @@ public class [javaClass/] extends XMIResourceImpl
 	 *  This static definition auto-generated from [sourceFile/]
 	 *  is used as the default when no overriding copy is registered. 
 	 */
-	public static OCLstdlib getDefault() {
+	@SuppressWarnings("null")
+	public static @NonNull OCLstdlib getDefault() {
 		if (INSTANCE == null) {
 			Contents contents = new Contents();
 			Root libraryModel = contents.create("[lib.name/]", "[lib.nsPrefix/]", "[lib.nsURI/]");
@@ -121,7 +123,7 @@ public class [javaClass/] extends XMIResourceImpl
 			return this;
 		}
 		
-		public Resource getResource() {
+		public @NonNull Resource getResource() {
 			return getDefault();
 		}
 	}
@@ -137,7 +139,7 @@ public class [javaClass/] extends XMIResourceImpl
 			return this;
 		}
 
-		public Resource getResource() {
+		public @NonNull Resource getResource() {
 			return OCLstdlib.create("[uri/]", "[lib.name/]", "[lib.nsPrefix/]", "[lib.nsURI/]");
 		}
 	}
@@ -146,7 +148,7 @@ public class [javaClass/] extends XMIResourceImpl
 	 *	Construct a copy of the OCL Standard Library with specified resource URI,
 	 *  and package name, prefix and namespace URI.
 	 */
-	public static [javaClass/] create(String uri, String name, String nsPrefix, String nsURI) {
+	public static @NonNull [javaClass/] create(String uri, String name, String nsPrefix, String nsURI) {
 		Contents contents = new Contents();
 		Root libraryModel = contents.create(name, nsPrefix, nsURI);
 		return new [javaClass/](uri, libraryModel);

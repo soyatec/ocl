@@ -42,6 +42,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIException;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.OCLConstants;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -122,7 +124,7 @@ public class Pivot2Ecore extends AbstractConversion
 		return eOperation;
 	}
 
-	public static XMLResource createResource(MetaModelManager metaModelManager, Resource pivotResource, URI ecoreURI, Map<String,Object> options) {
+	public static XMLResource createResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource pivotResource, @NonNull URI ecoreURI, @Nullable Map<String,Object> options) {
 		ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
 		XMLResource ecoreResource = (XMLResource) resourceSet.createResource(ecoreURI);
 		List<EObject> contents = ecoreResource.getContents();
@@ -138,7 +140,7 @@ public class Pivot2Ecore extends AbstractConversion
 		return ecoreResource;
 	}
 	
-	public static Boolean getBoolean(Map<String, Object> options, String key) {
+	public static Boolean getBoolean(Map<String, Object> options, @NonNull String key) {
 		if (options == null) {
 			return false;
 		}
@@ -150,7 +152,7 @@ public class Pivot2Ecore extends AbstractConversion
 		return false;
 	}
 	
-	public static String getString(Map<String, Object> options, String key) {
+	public static String getString(Map<String, Object> options, @NonNull String key) {
 		if (options == null) {
 			return null;
 		}
@@ -162,7 +164,7 @@ public class Pivot2Ecore extends AbstractConversion
 		return null;
 	}
 	
-	public static boolean installDelegate(EModelElement eModelElement, Constraint pivotConstraint, URI ecoreURI) {
+	public static boolean installDelegate(@NonNull EModelElement eModelElement, @NonNull Constraint pivotConstraint, @Nullable URI ecoreURI) {
 		ValueSpecification specification = pivotConstraint.getSpecification();
 		if (!(specification instanceof OpaqueExpression)) {
 			return false;
@@ -238,7 +240,7 @@ public class Pivot2Ecore extends AbstractConversion
 		return true;
 	}
 
-	public static void installDelegate(MetaModelManager metaModelManager, EOperation eOperation) {
+	public static void installDelegate(@NonNull MetaModelManager metaModelManager, @NonNull EOperation eOperation) {
 		List<EAnnotation> eAnnotations = eOperation.getEAnnotations();
 		EAnnotation oclAnnotation = eOperation.getEAnnotation(UML2GenModelUtil.UML2_GEN_MODEL_PACKAGE_1_1_NS_URI);
 		if (oclAnnotation != null) {
@@ -248,7 +250,7 @@ public class Pivot2Ecore extends AbstractConversion
 		}
 	}
 
-	public static void installDelegate(MetaModelManager metaModelManager, EStructuralFeature eFeature) {
+	public static void installDelegate(@NonNull MetaModelManager metaModelManager, @NonNull EStructuralFeature eFeature) {
 		List<EAnnotation> eAnnotations = eFeature.getEAnnotations();
 		EAnnotation oclAnnotation = eFeature.getEAnnotation(UML2GenModelUtil.UML2_GEN_MODEL_PACKAGE_1_1_NS_URI);
 		if (oclAnnotation != null) {
@@ -258,7 +260,7 @@ public class Pivot2Ecore extends AbstractConversion
 		}
 	}
 	
-	public static void installDelegates(MetaModelManager metaModelManager, EClassifier eClassifier, Type pivotType) {
+	public static void installDelegates(@NonNull MetaModelManager metaModelManager, @NonNull EClassifier eClassifier, @NonNull Type pivotType) {
 		StringBuilder s = null;
 		for (Constraint pivotConstraint : metaModelManager.getLocalConstraints(pivotType)) {
 			String constraintName = pivotConstraint.getName();
@@ -286,7 +288,7 @@ public class Pivot2Ecore extends AbstractConversion
 		}
 	}
 
-	public static void installDelegates(EPackage ePackage) {
+	public static void installDelegates(@NonNull EPackage ePackage) {
 		EAnnotation packageAnnotation = ePackage.getEAnnotation(EcorePackage.eNS_URI);
 		if (packageAnnotation == null) {
 			packageAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
@@ -318,7 +320,7 @@ public class Pivot2Ecore extends AbstractConversion
 	protected final Map<String,Object> options;
 	protected final String primitiveTypesUriPrefix;
 	
-	public Pivot2Ecore(MetaModelManager metaModelManager, URI ecoreURI, Map<String,Object> options) {
+	public Pivot2Ecore(@NonNull MetaModelManager metaModelManager, @NonNull URI ecoreURI, Map<String,Object> options) {
 		super(metaModelManager);
 		this.pass1 = new Pivot2EcoreDeclarationVisitor(this);	
 		this.pass2 = new Pivot2EcoreReferenceVisitor(this);
@@ -327,7 +329,7 @@ public class Pivot2Ecore extends AbstractConversion
 		this.primitiveTypesUriPrefix = getString(options, PRIMITIVE_TYPES_URI_PREFIX);
 	}
 
-	protected EObject convert(Element pivotObject) {
+	protected @Nullable EObject convert(@NonNull Element pivotObject) {
 		EObject eObject = pass1.safeVisit(pivotObject);
 		for (Element eKey : deferMap) {
 			pass2.safeVisit(eKey);
@@ -335,7 +337,7 @@ public class Pivot2Ecore extends AbstractConversion
 		return eObject;
 	}
 
-	protected List<EObject> convertAll(List<? extends EObject> pivotObjects) {
+	protected @NonNull List<EObject> convertAll(@NonNull List<? extends EObject> pivotObjects) {
 		List<EObject> eObjects = new ArrayList<EObject>();
 		for (EObject pivotObject : pivotObjects) {
 			if (pivotObject instanceof Element) {
@@ -351,18 +353,18 @@ public class Pivot2Ecore extends AbstractConversion
 		return eObjects;
 	}
 
-	public void defer(Element pivotElement) {
+	public void defer(@NonNull Element pivotElement) {
 		deferMap.add(pivotElement);
 	}
 
-	protected void error(String message) {
+	protected void error(@NonNull String message) {
 		if (errors == null) {
 			errors = new ArrayList<Resource.Diagnostic>();
 		}
 		errors.add(new XMIException(message));
 	}
 
-	public <T extends EObject> T getCreated(Class<T> requiredClass, Element pivotElement) {
+	public <T extends EObject> T getCreated(@NonNull Class<T> requiredClass, @NonNull Element pivotElement) {
 		EModelElement eModelElement = createMap.get(pivotElement);
 //		System.out.println("Get " + PivotUtil.debugSimpleName(pivotElement) + " " + PivotUtil.debugSimpleName(eModelElement));
 		if (eModelElement == null) {
@@ -383,11 +385,12 @@ public class Pivot2Ecore extends AbstractConversion
 		return castElement;
 	}
 
-	public final URI getEcoreURI() {
+	@SuppressWarnings("null")
+	public final @NonNull URI getEcoreURI() {
 		return ecoreURI;
 	}
 
-	public Map<String, Object> getOptions() {
+	public @Nullable Map<String, Object> getOptions() {
 		return options;
 	}
 

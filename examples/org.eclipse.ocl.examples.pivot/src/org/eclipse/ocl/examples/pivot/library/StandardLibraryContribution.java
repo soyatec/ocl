@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.pivot.library;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 
 public interface StandardLibraryContribution extends RegisteredContribution<StandardLibraryContribution>
 {
@@ -27,7 +28,7 @@ public interface StandardLibraryContribution extends RegisteredContribution<Stan
 	{
 		protected StandardLibraryContribution contribution;
 
-		public Descriptor(IConfigurationElement e, String attrName) {
+		public Descriptor(@NonNull IConfigurationElement e, @NonNull String attrName) {
 			super(e, attrName);
 		}
 
@@ -37,7 +38,7 @@ public interface StandardLibraryContribution extends RegisteredContribution<Stan
 			return (StandardLibraryContribution) createInstance;
 		}
 
-		public Resource getResource() {
+		public @NonNull Resource getResource() {
 			return getContribution().getResource();
 		}
 	}
@@ -64,5 +65,5 @@ public interface StandardLibraryContribution extends RegisteredContribution<Stan
 	 * 
 	 * @return the contributing resource.
 	 */
-	Resource getResource();
+	@NonNull Resource getResource();
 }

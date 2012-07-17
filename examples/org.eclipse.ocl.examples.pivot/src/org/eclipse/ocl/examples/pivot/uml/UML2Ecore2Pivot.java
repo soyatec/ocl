@@ -28,20 +28,17 @@ import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.util.UMLUtil;
 import org.eclipse.uml2.uml.util.UMLUtil.UML2EcoreConverter;
 
 public class UML2Ecore2Pivot extends Ecore2Pivot
 {
-	private static final class Factory implements MetaModelManager.Factory
+/*	private static final class Factory implements MetaModelManager.Factory
 	{
 		private Factory() {
 			UMLPackage.eINSTANCE.getClass();
@@ -95,7 +92,7 @@ public class UML2Ecore2Pivot extends Ecore2Pivot
 				return conversion.getPivotOfUML(Element.class, umlObject);
 			}
 		}
-	}
+	} */
 
 	protected static class UML2EcoreConverterWithReverseMap extends UML2EcoreConverter
 	{

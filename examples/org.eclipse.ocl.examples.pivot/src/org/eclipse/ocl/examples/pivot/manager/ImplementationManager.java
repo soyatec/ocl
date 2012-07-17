@@ -174,9 +174,10 @@ public class ImplementationManager
 				if (e != null) {
 					throw e;
 				}
-				@SuppressWarnings("null")
-				Field field = theClass.getField("INSTANCE");
-				implementation = (LibraryFeature) field.get(null);
+				if (theClass != null) {
+					Field field = theClass.getField("INSTANCE");
+					implementation = (LibraryFeature) field.get(null);
+				}
 			}
 		}
 		return implementation;
