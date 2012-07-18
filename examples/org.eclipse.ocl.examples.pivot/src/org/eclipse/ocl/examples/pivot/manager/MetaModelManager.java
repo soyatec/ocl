@@ -1350,6 +1350,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		}
 		Type type2 = (Type) type1.getUnspecializedElement();
 		TypeServer typeServer = getTypeServer(type2 != null ? type2 : type1);
+		if (typeServer == null) {
+			return null;
+		}
 		return typeServer.getExecutorType();
 	}
 
@@ -1396,6 +1399,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			return libraryType;	
 		}
 		TypeServer typeServer = getTypeServer(libraryType);
+		if (typeServer == null) {
+			return null;
+		}
 		@SuppressWarnings("unchecked")
 		T specializedType = (T) typeServer.getSpecializedType(templateArguments);
 		return specializedType;
@@ -1525,7 +1531,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 	
 	public @NonNull PackageServer getPackageServer(@NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
-		if (pivotMetaModel == null) {
+		if (!libraryLoadInProgress && pivotMetaModel == null) {
 			getPivotMetaModel();
 		}
 		return packageManager.getPackageServer(pivotPackage);
@@ -1877,6 +1883,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	
 	protected <T extends Type> T getSpecializedTypeServer(@NonNull T unspecializedType, @NonNull List<? extends ParameterableElement> templateArguments) {
 		TypeServer typeServer = getTypeServer(unspecializedType);
+		if (typeServer == null) {
+			return null;
+		}
 		@SuppressWarnings("unchecked")
 		T specializedType = (T) typeServer.getSpecializedType(templateArguments);
 		return specializedType;
@@ -1974,7 +1983,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return pivotType;
 	}
 	
-	public TypeServer getTypeServer(@NonNull Type pivotType) {
+	public @Nullable TypeServer getTypeServer(@NonNull Type pivotType) {
 		return packageManager.getTypeServer(pivotType);
 	}
 

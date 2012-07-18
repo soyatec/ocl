@@ -139,16 +139,16 @@ public class OCLstdlib extends XMIResourceImpl
 	 *	Construct a copy of the OCL Standard Library with specified resource URI,
 	 *  and package name, prefix and namespace URI.
 	 */
-	public static @NonNull OCLstdlib create(String uri, String name, String nsPrefix, String nsURI) {
+	public static @NonNull OCLstdlib create(@NonNull String uri, @NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI) {
 		Contents contents = new Contents();
-		Root libraryModel = contents.create(name, nsPrefix, nsURI);
+		@NonNull Root libraryModel = contents.create(name, nsPrefix, nsURI);
 		return new OCLstdlib(uri, libraryModel);
 	}
 	
 	/**
 	 *	Construct an OCL Standard Library with specified resource URI and library content.
 	 */
-	public OCLstdlib(String uri, Root libraryModel) {
+	public OCLstdlib(@NonNull String uri, @NonNull Root libraryModel) {
 		super(URI.createURI(uri));
 		getContents().add(libraryModel);
 //		System.out.println(Thread.currentThread().getName() + " Create " + debugSimpleName(this));		
@@ -161,9 +161,9 @@ public class OCLstdlib extends XMIResourceImpl
 		protected Library library;
 		// protected Package orphans;
 
-		protected Root create(String name, String nsPrefix, String nsURI)
+		protected @NonNull Root create(String name, String nsPrefix, String nsURI)
 		{
-			root = createRoot("OCL-2.4.oclstdlib", nsURI);
+			@NonNull Root theRoot = root = createRoot("OCL-2.4.oclstdlib", nsURI);
 			library = createLibrary(name, nsPrefix, nsURI);
 			installPackages();
 			installOclTypes();
@@ -180,7 +180,7 @@ public class OCLstdlib extends XMIResourceImpl
 			installTemplateBindings();
 			installPrecedences();
 			installComments();
-			return root;
+			return theRoot;
 		}
 	
 		protected final Package orphans = createPackage("$$", null, "http://www.eclipse.org/ocl/3.1.0/orphanage");
@@ -386,7 +386,7 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final ClassifierType _ClassClassifier_OclSelf = createClassifierType("ClassClassifier");
 		protected final ClassifierType _ClassClassifier_OclVoid = createClassifierType("ClassClassifier");
 		protected final ClassifierType _ClassClassifier = createClassifierType("ClassClassifier");
-		protected final ClassifierType _CollectionClassifier_OclSelf_Collection_T = createClassifierType("CollectionClassifier");
+		protected final ClassifierType _CollectionClassifier_Collection_T_OclSelf = createClassifierType("CollectionClassifier");
 		protected final ClassifierType _CollectionClassifier = createClassifierType("CollectionClassifier");
 		protected final ClassifierType _EnumerationClassifier_OclSelf = createClassifierType("EnumerationClassifier");
 		protected final ClassifierType _EnumerationClassifier = createClassifierType("EnumerationClassifier");
@@ -1162,7 +1162,7 @@ public class OCLstdlib extends XMIResourceImpl
 			type.setInstanceType(_ClassClassifier_T);
 			superClasses = type.getSuperClass();
 			superClasses.add(_AnyClassifier_ClassClassifier_T);
-			orphanTypes.add(type = _CollectionClassifier_OclSelf_Collection_T);
+			orphanTypes.add(type = _CollectionClassifier_Collection_T_OclSelf);
 			type.setUnspecializedElement(_CollectionClassifier);
 			type.setInstanceType(_OclSelf);
 			superClasses = type.getSuperClass();
@@ -1423,7 +1423,7 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final Operation op_Collection_Collection_T_max = createOperation("max", _Collection_T, "org.eclipse.ocl.examples.library.collection.CollectionMaxOperation", org.eclipse.ocl.examples.library.collection.CollectionMaxOperation.INSTANCE);
 		protected final Operation op_Collection_Collection_T_min = createOperation("min", _Collection_T, "org.eclipse.ocl.examples.library.collection.CollectionMinOperation", org.eclipse.ocl.examples.library.collection.CollectionMinOperation.INSTANCE);
 		protected final Operation op_Collection_Collection_T_notEmpty = createOperation("notEmpty", _Boolean, "org.eclipse.ocl.examples.library.collection.CollectionNotEmptyOperation", org.eclipse.ocl.examples.library.collection.CollectionNotEmptyOperation.INSTANCE);
-		protected final Operation op_Collection_Collection_T_oclType = createOperation("oclType", _CollectionClassifier_OclSelf_Collection_T, "org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation.INSTANCE);
+		protected final Operation op_Collection_Collection_T_oclType = createOperation("oclType", _CollectionClassifier_Collection_T_OclSelf, "org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation.INSTANCE);
 		protected final Operation op_Collection_Collection_T_product = createOperation("product", _Set_Tuple, "org.eclipse.ocl.examples.library.collection.CollectionProductOperation", org.eclipse.ocl.examples.library.collection.CollectionProductOperation.INSTANCE);
 		protected final Operation op_Collection_Collection_T_selectByKind = createOperation("selectByKind", _Collection_Collection_selectByKind_TT, "org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation", org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
 		protected final Operation op_Collection_Collection_T_selectByType = createOperation("selectByType", _Collection_Collection_selectByType_TT, "org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation", org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
@@ -2135,8 +2135,8 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedParameters.add(parameter = createParameter("body", _Lambda_Collection_T));
 			ownedIterations.add(iteration = it_Collection_Collection_T_forAll);
 			ownedParameters = iteration.getOwnedIterator();
-			ownedParameters.add(parameter = createParameter("j", _Collection_T));
 			ownedParameters.add(parameter = createParameter("i", _Collection_T));
+			ownedParameters.add(parameter = createParameter("j", _Collection_T));
 			ownedParameters = iteration.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("body", _Lambda_Collection_T));
 			ownedIterations.add(iteration = it_Collection_Collection_T_forAll_1);
@@ -2429,9 +2429,9 @@ public class OCLstdlib extends XMIResourceImpl
 				createTemplateParameterSubstitution(tp_ClassClassifier, _OclSelf)));
 			_ClassClassifier_OclVoid.getTemplateBinding().add(createTemplateBinding(ts_ClassClassifier,
 				createTemplateParameterSubstitution(tp_ClassClassifier, _OclVoid)));
-			_CollectionClassifier_OclSelf_Collection_T.getTemplateBinding().add(createTemplateBinding(ts_CollectionClassifier,
-				createTemplateParameterSubstitution(tp_CollectionClassifier_1, _OclSelf),
-				createTemplateParameterSubstitution(tp_CollectionClassifier, _Collection_T)));
+			_CollectionClassifier_Collection_T_OclSelf.getTemplateBinding().add(createTemplateBinding(ts_CollectionClassifier,
+				createTemplateParameterSubstitution(tp_CollectionClassifier, _Collection_T),
+				createTemplateParameterSubstitution(tp_CollectionClassifier_1, _OclSelf)));
 			_Collection_Integer.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Integer)));
 			_Collection_String.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,

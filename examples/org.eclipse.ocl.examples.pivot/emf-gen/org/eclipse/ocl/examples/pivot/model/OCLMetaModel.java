@@ -30,6 +30,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.pivot.*;
 import org.eclipse.ocl.examples.pivot.Class;
@@ -51,7 +52,7 @@ public class OCLMetaModel extends XMIResourceImpl
 	 */
 	public static final String PIVOT_URI = "http://www.eclipse.org/ocl/3.1.0/Pivot";
 
-	public static Package create(PivotStandardLibrary standardLibrary, String name, String nsPrefix, String nsURI) {
+	public static Package create(@NonNull PivotStandardLibrary standardLibrary, String name, String nsPrefix, String nsURI) {
 		OCLMetaModel resource = new OCLMetaModel(URI.createURI(PIVOT_URI));
 		Contents contents = new Contents(standardLibrary);
 		Root root = contents.create(name != null ? name : "pivot", nsPrefix != null ? nsPrefix : "pivot", nsURI != null ? nsURI : "http://www.eclipse.org/ocl/3.1.0/Pivot");
@@ -72,7 +73,7 @@ public class OCLMetaModel extends XMIResourceImpl
 
 	protected static class Contents extends AbstractContents
 	{
-		protected Contents(PivotStandardLibrary standardLibrary) {
+		protected Contents(@NonNull PivotStandardLibrary standardLibrary) {
 			super(standardLibrary);
 		}
 

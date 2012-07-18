@@ -259,7 +259,7 @@ public class GenPackageQueries
 		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager);
 		org.eclipse.ocl.examples.pivot.Package pivotPackage = ecore2Pivot.getCreated(org.eclipse.ocl.examples.pivot.Package.class, ePackage);
 		if (pivotPackage.getNsURI().equals(OCLstdlibPackage.eNS_URI)) {				// If generating OCLstdlibTables ...
-			mergeLibrary(metaModelManager, pivotPackage);
+			mergeLibrary(metaModelManager, pivotPackage);			// FIXME: redundant once M2T scans all partial types
 		}
 //		else if (pivotPackage.getNsURI().equals(PivotPackage.eNS_URI)) {			// If generating PivotTables ...
 //			mergeLibrary(metaModelManager, pivotPackage);
@@ -317,6 +317,16 @@ public class GenPackageQueries
 	 */
 	public Boolean hasAnotherType(GenPackage genPackage, Type type) {
 		MetaModelManager metaModelManager = getMetaModelManager(genPackage);
+/*		TypeServer typeServer = metaModelManager.getTypeServer(type);
+		for (Type trackedType : typeServer.getTrackedTypes()) {
+			if (trackedType != type) {
+				GenPackage otherGenPackage = getGenPackage(genPackage, type.getPackage());
+				if (otherGenPackage != genPackage) {
+					return true;
+				}
+			}
+		}
+		return false; */
 		Type primaryType = metaModelManager.getPrimaryType(type);
 //		GenClass genClass = getNamedElement1(genPackage.getGenClasses(), type.getName());
 //		if (genClass == null) {

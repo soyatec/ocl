@@ -148,16 +148,16 @@ public class [javaClass/] extends XMIResourceImpl
 	 *	Construct a copy of the OCL Standard Library with specified resource URI,
 	 *  and package name, prefix and namespace URI.
 	 */
-	public static @NonNull [javaClass/] create(String uri, String name, String nsPrefix, String nsURI) {
+	public static @NonNull [javaClass/] create(@NonNull String uri, @NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI) {
 		Contents contents = new Contents();
-		Root libraryModel = contents.create(name, nsPrefix, nsURI);
+		@NonNull Root libraryModel = contents.create(name, nsPrefix, nsURI);
 		return new [javaClass/](uri, libraryModel);
 	}
 	
 	/**
 	 *	Construct an OCL Standard Library with specified resource URI and library content.
 	 */
-	public [javaClass/](String uri, Root libraryModel) {
+	public [javaClass/](@NonNull String uri, @NonNull Root libraryModel) {
 		super(URI.createURI(uri));
 		getContents().add(libraryModel);
 //		System.out.println(Thread.currentThread().getName() + " Create " + debugSimpleName(this));		
@@ -170,9 +170,9 @@ public class [javaClass/] extends XMIResourceImpl
 		protected Library [lib.getPrefixedSymbolName('library')/];
 		// protected Package [root.getOrphanPackage().getPrefixedSymbolName('orphans')/];
 
-		protected Root create(String name, String nsPrefix, String nsURI)
+		protected @NonNull Root create(String name, String nsPrefix, String nsURI)
 		{
-			[root.getSymbolName()/] = createRoot("[root.name/]", nsURI);
+			@NonNull Root theRoot = [root.getSymbolName()/] = createRoot("[root.name/]", nsURI);
 			[lib.getSymbolName()/] = createLibrary(name, nsPrefix, nsURI);
 			installPackages();
 			installOclTypes();
@@ -192,7 +192,7 @@ public class [javaClass/] extends XMIResourceImpl
 			installTemplateBindings();
 			installPrecedences();
 			installComments();
-			return [root.getSymbolName()/];
+			return theRoot;
 		}
 	
 		[lib.definePackages()/]

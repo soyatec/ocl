@@ -523,7 +523,8 @@ public class TypeServer
 						superTemplateArgumentList.add(actualActual);
 					}
 				}
-				Type unspecializedSuperType = PivotUtil.getUnspecializedTemplateableElement(superType);
+				@SuppressWarnings("null")
+				@NonNull Type unspecializedSuperType = PivotUtil.getUnspecializedTemplateableElement(superType);
 				TypeServer superTypeServer = metaModelManager.getTypeServer(unspecializedSuperType);
 /*				List<ParameterableElement> superTemplateArgumentList = new ArrayList<ParameterableElement>();
 				for (TemplateBinding templateBinding : superTemplateBindings) {
@@ -532,8 +533,10 @@ public class TypeServer
 						superTemplateArgumentList.add(templateArgument);
 					}
 				} */
-				Type specializedSuperType = superTypeServer.getSpecializedType(superTemplateArgumentList);
-				specializedClass.getSuperClass().add(specializedSuperType);
+				if (superTypeServer != null) {
+					Type specializedSuperType = superTypeServer.getSpecializedType(superTemplateArgumentList);
+					specializedClass.getSuperClass().add(specializedSuperType);
+				}
 			}
 			else {
 				specializedClass.getSuperClass().add(superType);
