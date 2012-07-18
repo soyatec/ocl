@@ -87,9 +87,9 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected Root root;
 		protected Package metamodel;
 
-		protected Root create(String name, String nsPrefix, String nsURI)
+		protected @NonNull Root create(@NonNull String name, String nsPrefix, @NonNull String nsURI)
 		{
-			root = createRoot("pivot", "http://www.eclipse.org/ocl/3.1.0/Pivot");
+			@NonNull Root theRoot = root = createRoot("pivot", "http://www.eclipse.org/ocl/3.1.0/Pivot");
 			metamodel = createPackage(name, nsPrefix, nsURI);
 			installPackages();
 			installOclTypes();
@@ -101,7 +101,7 @@ public class OCLMetaModel extends XMIResourceImpl
 			installProperties();
 			installTemplateSignatures();
 			installComments();
-			return root;
+			return theRoot;
 		}
 	
 		protected void installPackages() {

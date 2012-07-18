@@ -161,7 +161,7 @@ public class OCLstdlib extends XMIResourceImpl
 		protected Library library;
 		// protected Package orphans;
 
-		protected @NonNull Root create(String name, String nsPrefix, String nsURI)
+		protected @NonNull Root create(@NonNull String name, String nsPrefix, @NonNull String nsURI)
 		{
 			@NonNull Root theRoot = root = createRoot("OCL-2.4.oclstdlib", nsURI);
 			library = createLibrary(name, nsPrefix, nsURI);

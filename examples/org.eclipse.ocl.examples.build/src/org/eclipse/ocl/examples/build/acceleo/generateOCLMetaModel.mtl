@@ -103,9 +103,9 @@ public class [javaClass/] extends XMIResourceImpl
 		protected Root [root.getPrefixedSymbolName('root')/];
 		protected Package [pkg.getPrefixedSymbolName('metamodel')/];
 
-		protected Root create(String name, String nsPrefix, String nsURI)
+		protected @NonNull Root create(@NonNull String name, String nsPrefix, @NonNull String nsURI)
 		{
-			[root.getSymbolName()/] = createRoot("[pkg.name/]", "[pkg.nsURI/]");
+			@NonNull Root theRoot = [root.getSymbolName()/] = createRoot("[pkg.name/]", "[pkg.nsURI/]");
 			[pkg.getSymbolName()/] = createPackage(name, nsPrefix, nsURI);
 			installPackages();
 			installOclTypes();
@@ -139,7 +139,7 @@ public class [javaClass/] extends XMIResourceImpl
 			installPrecedences();
 [/if]
 			installComments();
-			return [root.getSymbolName()/];
+			return theRoot;
 		}
 	
 		[pkg.definePackages()/]

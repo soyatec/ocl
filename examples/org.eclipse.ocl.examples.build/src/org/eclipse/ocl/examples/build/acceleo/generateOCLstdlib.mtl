@@ -170,7 +170,7 @@ public class [javaClass/] extends XMIResourceImpl
 		protected Library [lib.getPrefixedSymbolName('library')/];
 		// protected Package [root.getOrphanPackage().getPrefixedSymbolName('orphans')/];
 
-		protected @NonNull Root create(String name, String nsPrefix, String nsURI)
+		protected @NonNull Root create(@NonNull String name, String nsPrefix, @NonNull String nsURI)
 		{
 			@NonNull Root theRoot = [root.getSymbolName()/] = createRoot("[root.name/]", nsURI);
 			[lib.getSymbolName()/] = createLibrary(name, nsPrefix, nsURI);

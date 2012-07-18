@@ -58,7 +58,7 @@ import org.eclipse.ocl.examples.pivot.VoidType;
 import org.eclipse.ocl.examples.pivot.manager.PivotStandardLibrary;
 
 public class AbstractContents
-{	
+{	 // FIXME needs field @NonNull to make more @NonNull's practical
 	protected final PivotStandardLibrary standardLibrary;
 	
 	protected AbstractContents() {
@@ -69,55 +69,55 @@ public class AbstractContents
 		this.standardLibrary = standardLibrary;
 	}
 
-	protected @NonNull AnyType createAnyType(String name) {
+	protected @NonNull AnyType createAnyType(@NonNull String name) {
 		AnyType pivotType = PivotFactory.eINSTANCE.createAnyType();
 		pivotType.setName(name);
 		return pivotType;
 	}
 
-	protected @NonNull BagType createBagType(String name) {
+	protected @NonNull BagType createBagType(@NonNull String name) {
 		BagType pivotType = PivotFactory.eINSTANCE.createBagType();
 		pivotType.setName(name);
 		return pivotType;
 	}
 
-	protected @NonNull Class createClass(String name) {
+	protected @NonNull Class createClass(@NonNull String name) {
 		Class pivotType = PivotFactory.eINSTANCE.createClass();
 		pivotType.setName(name);
 		return pivotType;
 	}
 
-	protected @NonNull ClassifierType createClassifierType(String name) {
+	protected @NonNull ClassifierType createClassifierType(@NonNull String name) {
 		ClassifierType pivotType = PivotFactory.eINSTANCE.createClassifierType();
 		pivotType.setName(name);
 		return pivotType;
 	}
 
-	protected @NonNull CollectionType createCollectionType(String name) {
+	protected @NonNull CollectionType createCollectionType(@NonNull String name) {
 		CollectionType pivotType = PivotFactory.eINSTANCE.createCollectionType();
 		pivotType.setName(name);
 		return pivotType;
 	}
 
-	protected @NonNull DataType createDataType(String name) {
+	protected @NonNull DataType createDataType(@NonNull String name) {
 		DataType pivotType = PivotFactory.eINSTANCE.createDataType();
 		pivotType.setName(name);
 		return pivotType;
 	}
 	
-	protected @NonNull Enumeration createEnumeration(String name) {
+	protected @NonNull Enumeration createEnumeration(@NonNull String name) {
 		Enumeration pivotType = PivotFactory.eINSTANCE.createEnumeration();
 		pivotType.setName(name);
 		return pivotType;
 	}
 
-	protected @NonNull EnumerationLiteral createEnumerationLiteral(String name) {
+	protected @NonNull EnumerationLiteral createEnumerationLiteral(@NonNull String name) {
 		EnumerationLiteral pivotEnumerationLiteral = PivotFactory.eINSTANCE.createEnumerationLiteral();
 		pivotEnumerationLiteral.setName(name);
 		return pivotEnumerationLiteral;
 	}
 	
-	protected @NonNull Iteration createIteration(String name, Type type, String implementationClass, LibraryFeature implementation) {
+	protected @NonNull Iteration createIteration(@NonNull String name, Type type, String implementationClass, LibraryFeature implementation) {
 		Iteration pivotIteration = PivotFactory.eINSTANCE.createIteration();
 		pivotIteration.setName(name);
 		pivotIteration.setType(type);
@@ -126,19 +126,19 @@ public class AbstractContents
 		return pivotIteration;
 	}
 
-	protected @NonNull InvalidType createInvalidType(String name) {
+	protected @NonNull InvalidType createInvalidType(@NonNull String name) {
 		InvalidType pivotType = PivotFactory.eINSTANCE.createInvalidType();
 		pivotType.setName(name);
 		return pivotType;
 	}
 	
-	protected @NonNull LambdaType createLambdaType(String name) {
+	protected @NonNull LambdaType createLambdaType(@NonNull String name) {
 		LambdaType pivotType = PivotFactory.eINSTANCE.createLambdaType();
 		pivotType.setName(name);
 		return pivotType;
 	}
 
-	protected @NonNull Library createLibrary(String name, String nsPrefix, String nsURI) {
+	protected @NonNull Library createLibrary(@NonNull String name, String nsPrefix, String nsURI) {
 		Library pivotLibrary = PivotFactory.eINSTANCE.createLibrary();
 		pivotLibrary.setName(name);
 		pivotLibrary.setNsPrefix(nsPrefix);
@@ -146,7 +146,7 @@ public class AbstractContents
 		return pivotLibrary;
 	}
 	
-	protected @NonNull Operation createOperation(String name, Type type, String implementationClass, LibraryFeature implementation) {
+	protected @NonNull Operation createOperation(@NonNull String name, Type type, String implementationClass, LibraryFeature implementation) {
 		Operation pivotOperation = PivotFactory.eINSTANCE.createOperation();
 		pivotOperation.setName(name);
 		pivotOperation.setType(type);
@@ -155,13 +155,13 @@ public class AbstractContents
 		return pivotOperation;
 	}
 
-	protected @NonNull OrderedSetType createOrderedSetType(String name) {
+	protected @NonNull OrderedSetType createOrderedSetType(@NonNull String name) {
 		OrderedSetType pivotType = PivotFactory.eINSTANCE.createOrderedSetType();
 		pivotType.setName(name);
 		return pivotType;
 	}
 
-	protected @NonNull Package createPackage(String name, String nsPrefix, String nsURI) {
+	protected @NonNull Package createPackage(@NonNull String name, String nsPrefix, @NonNull String nsURI) {
 		Package pivotPackage = PivotFactory.eINSTANCE.createPackage();
 		pivotPackage.setName(name);
 		pivotPackage.setNsPrefix(nsPrefix);
@@ -169,53 +169,53 @@ public class AbstractContents
 		return pivotPackage;
 	}
 	
-	protected @NonNull Parameter createParameter(String name, Type type) {
+	protected @NonNull Parameter createParameter(@NonNull String name, Type type) {
 		Parameter pivotParameter = PivotFactory.eINSTANCE.createParameter();
 		pivotParameter.setName(name);
 		pivotParameter.setType(type);
 		return pivotParameter;
 	}
 	
-	protected @NonNull Precedence createPrecedence(String name, AssociativityKind kind) {
+	protected @NonNull Precedence createPrecedence(@NonNull String name, AssociativityKind kind) {
 		Precedence pivotPrecedence = PivotFactory.eINSTANCE.createPrecedence();
 		pivotPrecedence.setName(name);
 		pivotPrecedence.setAssociativity(kind);
 		return pivotPrecedence;
 	}
 	
-	protected @NonNull PrimitiveType createPrimitiveType(String name) {
+	protected @NonNull PrimitiveType createPrimitiveType(@NonNull String name) {
 		PrimitiveType pivotType = PivotFactory.eINSTANCE.createPrimitiveType();
 		pivotType.setName(name);
 		return pivotType;
 	}
 	
-	protected @NonNull Property createProperty(String name, Type type) {
+	protected @NonNull Property createProperty(@NonNull String name, Type type) {
 		Property pivotProperty = PivotFactory.eINSTANCE.createProperty();
 		pivotProperty.setName(name);
 		pivotProperty.setType(type);
 		return pivotProperty;
 	}
 
-	protected @NonNull Root createRoot(String name, String externalURI) {
+	protected @NonNull Root createRoot(@NonNull String name, String externalURI) {
 		Root pivotRoot = PivotFactory.eINSTANCE.createRoot();
 		pivotRoot.setName(name);
 		pivotRoot.setExternalURI(externalURI);
 		return pivotRoot;
 	}
 
-	protected @NonNull SelfType createSelfType(String name) {
+	protected @NonNull SelfType createSelfType(@NonNull String name) {
 		SelfType pivotType = PivotFactory.eINSTANCE.createSelfType();
 		pivotType.setName(name);
 		return pivotType;
 	}
 
-	protected @NonNull SequenceType createSequenceType(String name) {
+	protected @NonNull SequenceType createSequenceType(@NonNull String name) {
 		SequenceType pivotType = PivotFactory.eINSTANCE.createSequenceType();
 		pivotType.setName(name);
 		return pivotType;
 	}
 
-	protected @NonNull SetType createSetType(String name) {
+	protected @NonNull SetType createSetType(@NonNull String name) {
 		SetType pivotType = PivotFactory.eINSTANCE.createSetType();
 		pivotType.setName(name);
 		return pivotType;
@@ -248,7 +248,7 @@ public class AbstractContents
 		return pivotTemplateSignature;
 	}
 	
-	protected @NonNull TupleType createTupleType(String name, Property... properties) {
+	protected @NonNull TupleType createTupleType(@NonNull String name, Property... properties) {
 		TupleType pivotType = PivotFactory.eINSTANCE.createTupleType();
 		pivotType.setName(name);
 		List<Property> ownedProperties = pivotType.getOwnedAttribute();
@@ -264,13 +264,13 @@ public class AbstractContents
 		return pivotTypeTemplateParameter;
 	}
 
-	protected @NonNull VoidType createVoidType(String name) {
+	protected @NonNull VoidType createVoidType(@NonNull String name) {
 		VoidType pivotType = PivotFactory.eINSTANCE.createVoidType();
 		pivotType.setName(name);
 		return pivotType;
 	}
 
-	protected void installComment(Element element, String body) {
+	protected void installComment(Element element, @NonNull String body) {
 		Comment pivotComment = PivotFactory.eINSTANCE.createComment();
 		pivotComment.setBody(body);
 		element.getOwnedComment().add(pivotComment);

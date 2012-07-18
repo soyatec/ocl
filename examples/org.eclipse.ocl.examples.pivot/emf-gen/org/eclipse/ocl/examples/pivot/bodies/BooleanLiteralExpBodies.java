@@ -63,12 +63,12 @@ public class BooleanLiteralExpBodies
 			final Value T_ClassClassifier_Boolean_ = valueFactory.createTypeValue(OCLstdlibTables.Types._Boolean);
 			
 			
-			Value A_symbol_289 = IP_TypedElement_type.evaluate(evaluator, T_Type, self, P_TypedElement_type);
+			Value A_symbol_0 = IP_TypedElement_type.evaluate(evaluator, T_Type, self, P_TypedElement_type);
 			
-			DomainType static_A_symbol_290 = valueFactory.typeOf(A_symbol_289, T_ClassClassifier_Boolean_);
-			LibraryBinaryOperation dynamic_A_symbol_290 = (LibraryBinaryOperation)static_A_symbol_290.lookupImplementation(standardLibrary, O_OclAny__eq_);
-			Value A_symbol_290 = dynamic_A_symbol_290.evaluate(evaluator, T_Boolean, A_symbol_289, T_ClassClassifier_Boolean_);
-			return A_symbol_290;
+			DomainType static_A_symbol_1 = valueFactory.typeOf(A_symbol_0, T_ClassClassifier_Boolean_);
+			LibraryBinaryOperation dynamic_A_symbol_1 = (LibraryBinaryOperation)static_A_symbol_1.lookupImplementation(standardLibrary, O_OclAny__eq_);
+			Value A_symbol_1 = dynamic_A_symbol_1.evaluate(evaluator, T_Boolean, A_symbol_0, T_ClassClassifier_Boolean_);
+			return A_symbol_1;
 		}
 	}
 
