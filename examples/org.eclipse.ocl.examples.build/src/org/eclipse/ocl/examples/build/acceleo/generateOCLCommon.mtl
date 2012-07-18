@@ -511,26 +511,26 @@ superClasses.add(_OclElement);[/if]
 
 [template public partialName(element : CollectionType)] 
 [if element.elementType = null]
-[element.name.javaName()/][else]
-[element.name.javaName()+'_'+element.elementType.partialName()/][/if]
+[element.javaName()/][else]
+[element.javaName()+'_'+element.elementType.partialName()/][/if]
 [/template]
 
 [template public partialName(element : Comment)] 
 [if element._body = null]
 null[else]
-[element._body.substring(1, 12.min(element._body.size())).javaName()/][/if]
+[element.javaName(element._body.substring(1, 12.min(element._body.size())))/][/if]
 [/template]
 
 [template public partialName(element : EnumerationLiteral)] 
 [if element.enumeration = null]
 null[else]
-[element.enumeration.partialName()+'_'+element.name.javaName()/][/if]
+[element.enumeration.partialName()+'_'+element.javaName()/][/if]
 [/template]
 
 [template public partialName(element : LambdaType)] 
 [if element.contextType = null]
 null[else]
-[element.name.javaName() + '_' + element.contextType.partialName()/][/if]
+[element.javaName() + '_' + element.contextType.partialName()/][/if]
 [/template]
 
 [template public partialName(element : OclAny)] 
@@ -548,27 +548,27 @@ null[else]
 [template public partialName(element : Operation)] 
 [if element.owningType = null]
 null[else]
-[element.owningType.partialName()/][/if]_[element.name.javaName()/]
+[element.owningType.partialName()/][/if]_[element.javaName()/]
 [/template]
 
 [template public partialName(element : Package)] 
-[element.name.javaName() /]
+[element.javaName() /]
 [/template]
 
 [template public partialName(element : Parameter)] 
 [if element.eContainer() = null]
 null[else]
-[element.eContainer().partialName()/][/if]_[element.name.javaName()/]
+[element.eContainer().partialName()/][/if]_[element.javaName()/]
 [/template]
 
 [template public partialName(element : Precedence)] 
-[element.name.javaName() /]
+[element.javaName() /]
 [/template]
 
 [template public partialName(element : Property)] 
 [if element.owningType = null]
 null[else]
-[element.owningType.partialName()/][/if]_[element.name.javaName()/]
+[element.owningType.partialName()/][/if]_[element.javaName()/]
 [/template]
 
 [template public partialName(element : TemplateBinding)] 
@@ -600,9 +600,9 @@ null[else]
 
 [template public partialName(element : Type)] 
 [if element.templateParameter <> null]
-[element.templateParameter.simpleName()+'_'+element.name.javaName()/][elseif element.templateBinding->notEmpty()]
-[element.templateBinding.parameterSubstitution->iterate(tps; acc : String = element.name.javaName() | acc +'_'+tps.actual.simpleName())/][else]
-[element.name.javaName()/][/if]
+[element.templateParameter.simpleName()+'_'+element.javaName()/][elseif element.templateBinding->notEmpty()]
+[element.templateBinding.parameterSubstitution->iterate(tps; acc : String = element.javaName() | acc +'_'+tps.actual.simpleName())/][else]
+[element.javaName()/][/if]
 [/template]
 
 [template public simpleName(element : OclAny)] 
@@ -620,7 +620,7 @@ null[else]
 [template public simpleName(element : Operation)] 
 [if element.owningType = null]
 null[else]
-[element.owningType.simpleName()/][/if]_[element.name.javaName()/]
+[element.owningType.simpleName()/][/if]_[element.javaName()/]
 [/template]
 
 [template public simpleName(element : TemplateParameter)] 
@@ -638,8 +638,8 @@ null[else]
 
 [template public simpleName(element : Type)] 
 [if element.templateParameter = null]
-[element.name.javaName()/][else]
-[element.templateParameter.simpleName()+'_'+element.name.javaName()/][/if]
+[element.javaName()/][else]
+[element.templateParameter.simpleName()+'_'+element.javaName()/][/if]
 [/template]
 
 [query public getOclTypes(pkg : Package) : Set(Type) =
@@ -660,7 +660,10 @@ if types->exists(name = 'Boolean') then types
 ->reject(name = 'UnlimitedNatural')
 else types endif /]
 
-[query public javaName(string : String) : String = 
+[query public javaName(element : NamedElement) : String = 
+invoke('org.eclipse.ocl.examples.codegen.common.NameQueries', 'rawEncodeName(java.lang.String)', Sequence{element.name}) /]
+
+[query public javaName(element : OclAny, string : String) : String = 
 invoke('org.eclipse.ocl.examples.codegen.common.NameQueries', 'rawEncodeName(java.lang.String)', Sequence{string}) /]
 
 [query public javaString(aComment : Comment) : String = 
