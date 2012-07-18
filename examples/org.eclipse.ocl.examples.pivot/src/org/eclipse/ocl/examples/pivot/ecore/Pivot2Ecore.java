@@ -90,7 +90,7 @@ public class Pivot2Ecore extends AbstractConversion
 		}
 	}
 
-	public static EOperation createConstraintEOperation(Constraint pivotConstraint, String operationName) {
+	public static @NonNull EOperation createConstraintEOperation(Constraint pivotConstraint, String operationName) {
 		EOperation eOperation = EcoreFactory.eINSTANCE.createEOperation();
 		eOperation.setName(operationName != null ? operationName : "");
 		eOperation.setEType(EcorePackage.Literals.EBOOLEAN);

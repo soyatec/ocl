@@ -189,8 +189,13 @@ public class Pivot2EcoreDeclarationVisitor
 
 	@Override
 	public EObject visitConstraint(@NonNull Constraint pivotConstraint) {
-		EModelElement eModelElement = context.getCreated(EModelElement.class, (Element)pivotConstraint.eContainer());
-		Pivot2Ecore.installDelegate(eModelElement, pivotConstraint, context.getEcoreURI());
+		Element eContainer = (Element)pivotConstraint.eContainer();
+		if (eContainer != null) {
+			EModelElement eModelElement = context.getCreated(EModelElement.class, eContainer);
+			if (eModelElement != null) {
+				Pivot2Ecore.installDelegate(eModelElement, pivotConstraint, context.getEcoreURI());
+			}
+		}
 		return null;
 	}
 

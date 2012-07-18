@@ -717,7 +717,6 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final Property pr_CollectionRange_first = createProperty("first", _OCLExpression);
 		protected final Property pr_CollectionRange_last = createProperty("last", _OCLExpression);
 		protected final Property pr_CollectionType_elementType = createProperty("elementType", _Type);
-		protected final Property pr_Comment_Element = createProperty("Element", _Element);
 		protected final Property pr_Comment_annotatedElement = createProperty("annotatedElement", _Element);
 		protected final Property pr_Comment_body = createProperty("body", _String);
 		protected final Property pr_Constraint_constrainedElement = createProperty("constrainedElement", _Element);
@@ -740,6 +739,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final Property pr_DynamicProperty_referredProperty = createProperty("referredProperty", _Property);
 		protected final Property pr_null_metaType = createProperty("metaType", _Type);
 		protected final Property pr_DynamicType_ownedProperty = createProperty("ownedProperty", _DynamicProperty);
+		protected final Property pr_Element_Comment = createProperty("Comment", _Comment);
 		protected final Property pr_Element_Constraint = createProperty("Constraint", _Constraint);
 		protected final Property pr_Element_appliedStereotype = createProperty("appliedStereotype", _AppliedStereotype);
 		protected final Property pr_Element_ownedComment = createProperty("ownedComment", _Comment);
@@ -1049,15 +1049,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Type_CollectionType);
 			ownedProperties = _Comment.getOwnedAttribute();
-			ownedProperties.add(property = pr_Comment_Element);
-			property.setLower(BigInteger.valueOf(0));
-			property.setImplicit(true);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Element_ownedComment);
 			ownedProperties.add(property = pr_Comment_annotatedElement);
 			property.setLower(BigInteger.valueOf(0));
 			property.setUpper(BigInteger.valueOf(-1));
 			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Element_Comment);
 			ownedProperties.add(property = pr_Comment_body);
 			property.setLower(BigInteger.valueOf(0));
 			property.setIsResolveProxies(true);
@@ -1145,6 +1141,12 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_DynamicProperty_DynamicType);
 			ownedProperties = _Element.getOwnedAttribute();
+			ownedProperties.add(property = pr_Element_Comment);
+			property.setLower(BigInteger.valueOf(0));
+			property.setUpper(BigInteger.valueOf(-1));
+			property.setImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Comment_annotatedElement);
 			ownedProperties.add(property = pr_Element_Constraint);
 			property.setLower(BigInteger.valueOf(0));
 			property.setUpper(BigInteger.valueOf(-1));
@@ -1162,7 +1164,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setUpper(BigInteger.valueOf(-1));
 			property.setIsComposite(true);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Comment_Element);
 			ownedProperties = _EnumLiteralExp.getOwnedAttribute();
 			ownedProperties.add(property = pr_EnumLiteralExp_referredEnumLiteral);
 			property.setLower(BigInteger.valueOf(0));

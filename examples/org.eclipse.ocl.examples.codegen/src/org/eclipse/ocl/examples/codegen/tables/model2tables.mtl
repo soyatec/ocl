@@ -141,7 +141,7 @@ public static final <%[typeName/]%> _[cls.name/] = [if (genPackage.hasAnotherTyp
 [genPackage.getAnotherType(cls).emitQualifiedLiteralName(genPackage)/][else]
 [if (not genPackage.hasEcore(cls))]
 new <%[typeName/]%>("[cls.name/]"[else]
-new <%[typeName/]%>([genPackage.prefix + 'Package.Literals.' + cls.name.upperName()/][/if], PACKAGE, [pPackage.getTypeFlags(cls)/][if (cls.ownedTemplateSignature->notEmpty())]
+new <%[typeName/]%>([genPackage.prefix + 'Package.Literals.' + cls.upperName()/][/if], PACKAGE, [pPackage.getTypeFlags(cls)/][if (cls.ownedTemplateSignature->notEmpty())]
 [for (parameter : TypeTemplateParameter | cls.ownedTemplateSignature.parameter->filter(TypeTemplateParameter))]
 [let parameteredElement : Type = parameter.parameteredElement.oclAsType(Type)]
 , _[cls.name/]_[parameteredElement.name/][/let][/for]
@@ -282,7 +282,7 @@ public static class TypeFragments {[for (cls : Type | types) before('\n') separa
 	 */
 	static {
 [for (cls : Type | types)]
-		[cls.getLiteralName()/].initFragments(_[cls.name/], __[cls.name/][if (genPackage.hasAnotherType(cls))], [genPackage.prefix + 'Package.Literals.' + cls.name.upperName()/][/if]);
+		[cls.getLiteralName()/].initFragments(_[cls.name/], __[cls.name/][if (genPackage.hasAnotherType(cls))], [genPackage.prefix + 'Package.Literals.' + cls.upperName()/][/if]);
 [/for]
 	}
 
@@ -425,7 +425,7 @@ public static class EnumerationLiterals {
 [let enumLiterals : OrderedSet(EnumerationLiteral) = enum.ownedLiteral]
 [for (i : Integer | Sequence{1..enumLiterals->size()}) after ('\n')]
 [let enumLiteral : EnumerationLiteral = enumLiterals->at(i)]
-public static <%EcoreExecutorEnumerationLiteral%> _[enumLiteral.enumeration.name/]__[enumLiteral.name/] = new <%EcoreExecutorEnumerationLiteral%>([genPackage.prefix + 'Package.Literals.' + enum.name.upperName()/].getEEnumLiteral("[enumLiteral.name/]"), Types._[enum.name/], [i-1/]);
+public static <%EcoreExecutorEnumerationLiteral%> _[enumLiteral.enumeration.name/]__[enumLiteral.name/] = new <%EcoreExecutorEnumerationLiteral%>([genPackage.prefix + 'Package.Literals.' + enum.upperName()/].getEEnumLiteral("[enumLiteral.name/]"), Types._[enum.name/], [i-1/]);
 [/let][/for]
 private static final <%EcoreExecutorEnumerationLiteral%>['[]'/] _[enum.name/] = [if enumLiterals->isEmpty()]{[else]
 {
