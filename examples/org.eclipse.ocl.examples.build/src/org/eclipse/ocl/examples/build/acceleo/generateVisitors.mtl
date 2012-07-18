@@ -20,6 +20,9 @@ AbstractDelegatingVisitor
 [file ('AbstractDelegating' + visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  * An AbstractDelegating[visitorClass/] delegates all visits.
  */
@@ -28,15 +31,15 @@ public abstract class AbstractDelegating[visitorClass/]<R, C, D extends [visitor
 	implements [visitorClass/]<R>
 {
 [if (isDerived)]
-    protected AbstractDelegating[visitorClass/](D delegate, C context) {
+    protected AbstractDelegating[visitorClass/](@NonNull D delegate, @NonNull C context) {
         super(delegate, context);
     }
 [else]
     protected final D delegate;
     
-    protected AbstractDelegating[visitorClass/](D delegate, C context) {
+    protected AbstractDelegating[visitorClass/](@NonNull D delegate, @NonNull C context) {
     	super(context);
-        assert delegate != null : "cannot decorate a null visitor"; //$NON-NLS-1$        
+//        assert delegate != null : "cannot decorate a null visitor"; //$NON-NLS-1$        
         this.delegate = delegate;        
 //        delegate.setUndecoratedVisitor(this);
     }
@@ -44,7 +47,7 @@ public abstract class AbstractDelegating[visitorClass/]<R, C, D extends [visitor
     /**
      * Delegates to my decorated visitor.
      */
-//	public Decorable[visitorClass/]<R> createNestedVisitor() {
+//	public @NonNull Decorable[visitorClass/]<R> createNestedVisitor() {
 //        return delegate.createNestedVisitor();
 //	}
   
@@ -53,7 +56,8 @@ public abstract class AbstractDelegating[visitorClass/]<R, C, D extends [visitor
      * 
      * @return my decorated visitor
      */
-    protected final D getDelegate() {
+    @SuppressWarnings("null")
+    protected final @NonNull D getDelegate() {
         return delegate;
     }
 [/if]
@@ -61,12 +65,12 @@ public abstract class AbstractDelegating[visitorClass/]<R, C, D extends [visitor
 [if (isDerived)]
 	@Override
 [/if]
-	public R visiting([visitableClass/] visitable) {
+	public @Nullable R visiting(@NonNull [visitableClass/] visitable) {
 		return delegate.visiting(visitable);
 	}
 [for (eClass : EClass | pkg.eClassifiers->filter(EClass)->select(not interface)->sortedBy(name))]
 
-	public R visit[eClass.name/]([modelPackage/].[eClass.name/] object) {
+	public @Nullable R visit[eClass.name/](@NonNull [modelPackage/].[eClass.name/] object) {
 		return delegate.visit[eClass.name/](object);
 	}
 [/for]
@@ -96,15 +100,15 @@ public abstract class AbstractExtendingDelegating[visitorClass/]<R, C, D extends
 	implements [visitorClass/]<R>
 {
 [if (true)]
-    protected AbstractExtendingDelegating[visitorClass/](D delegate, C context) {
+    protected AbstractExtendingDelegating[visitorClass/](@NonNull D delegate, @NonNull C context) {
         super(delegate, context);
     }
 [else]
     protected final D delegate;
     
-    protected AbstractExtendingDelegating[visitorClass/](D delegate, C context) {
+    protected AbstractExtendingDelegating[visitorClass/](@NonNull D delegate, @NonNull C context) {
     	super(context);
-        assert delegate != null : "cannot decorate a null visitor"; //$NON-NLS-1$        
+//        assert delegate != null : "cannot decorate a null visitor"; //$NON-NLS-1$        
         this.delegate = delegate;        
 //        delegate.setUndecoratedVisitor(this);
     }
@@ -127,13 +131,13 @@ public abstract class AbstractExtendingDelegating[visitorClass/]<R, C, D extends
 [/if]
 
 	@Override
-	public R visiting([visitableClass/] visitable) {
+	public @Nullable R visiting(@NonNull [visitableClass/] visitable) {
 		return delegate.visiting(visitable);
 	}
 [for (eClass : EClass | pkg.eClassifiers->filter(EClass)->select(not interface)->sortedBy(name))]
 [let firstSuperClass : EClass = eClass.firstSuperClass(eClass)]
 
-	public R visit[eClass.name/]([modelPackage/].[eClass.name/] object) {
+	public @Nullable R visit[eClass.name/](@NonNull [modelPackage/].[eClass.name/] object) {
 [if (firstSuperClass = eClass)]
 		return visiting(object);
 [elseif (firstSuperClass.ePackage = eClass.ePackage)]
@@ -157,6 +161,9 @@ AbstractExtendingVisitor
 [file ('AbstractExtending' + visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  * An AbstractExtending[visitorClass/] provides a default implementation for each
  * visitXxx method that delegates to the visitYyy method of the first
@@ -173,13 +180,13 @@ public abstract class AbstractExtending[visitorClass/]<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractExtending[visitorClass/](C context) {
+	protected AbstractExtending[visitorClass/](@Nullable C context) {
 	    super(context);
 	}	
 [for (eClass : EClass | pkg.eClassifiers->filter(EClass)->select(not interface)->sortedBy(name))]
 [let firstSuperClass : EClass = eClass.firstSuperClass(eClass)]
 
-	public R visit[eClass.name/]([modelPackage/].[eClass.name/] object) {
+	public @Nullable R visit[eClass.name/](@NonNull [modelPackage/].[eClass.name/] object) {
 [if (firstSuperClass = eClass)]
 		return visiting(object);
 [else]
@@ -210,13 +217,13 @@ public abstract class [extendsVisitorClass/] extends [visitorBaseClassPath/]
 	 * 
 	 * @param context my initial result value
 	 */
-	protected [extendsVisitorClass/](org.eclipse.ocl.examples.xtext.base.utilities.CS2Moniker cs2Moniker) {
+	protected [extendsVisitorClass/](@NonNull org.eclipse.ocl.examples.xtext.base.utilities.CS2Moniker cs2Moniker) {
 	    super(cs2Moniker);
 	}	
 [for (eClass : EClass | pkg.eClassifiers->filter(EClass)->select(not interface)->sortedBy(name))]
 [let firstSuperClass : EClass = eClass.firstSuperClass(eClass)]
 
-	public Object visit[eClass.name/]([modelPackage/].[eClass.name/] object) {
+	public Object visit[eClass.name/](@NonNull [modelPackage/].[eClass.name/] object) {
 [if (firstSuperClass = eClass)]
 		return visiting(object);
 [else]
@@ -238,6 +245,9 @@ AbstractNullVisitor
 [file ('AbstractNull' + visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  * An AbstractNull[visitorClass/] provides a default implementation for each
  * visitXxx method that returns null.
@@ -250,12 +260,12 @@ public abstract class AbstractNull[visitorClass/]<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractNull[visitorClass/](C context) {
+	protected AbstractNull[visitorClass/](@NonNull C context) {
 	    super(context);
 	}	
 [for (eClass : EClass | pkg.eClassifiers->filter(EClass)->select(not interface)->sortedBy(name))]
 
-	public R visit[eClass.name/]([modelPackage/].[eClass.name/] object) {
+	public @Nullable R visit[eClass.name/](@NonNull [modelPackage/].[eClass.name/] object) {
 		return null;
 	}
 [/for]
@@ -284,12 +294,12 @@ public abstract class AbstractNull[visitorClass/]<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractNull[visitorClass/](C context) {
+	protected AbstractNull[visitorClass/](@NonNull C context) {
 	    super(context);
 	}	
 [for (eClass : EClass | pkg.eClassifiers->filter(EClass)->select(not interface)->sortedBy(name))]
 
-	public R visit[eClass.name/]([modelPackage/].[eClass.name/] object) {
+	public @Nullable R visit[eClass.name/](@NonNull [modelPackage/].[eClass.name/] object) {
 		return null;
 	}
 [/for]
@@ -306,6 +316,9 @@ AbstractVisitor
 [file ('Abstract' + visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  */
 public abstract class Abstract[visitorClass/]<R, C> implements [visitorClass/]<R>
@@ -320,12 +333,12 @@ public abstract class Abstract[visitorClass/]<R, C> implements [visitorClass/]<R
 	 * 
 	 * @param context my initial result value
 	 */
-	protected Abstract[visitorClass/](C context) {
+	protected Abstract[visitorClass/](@Nullable C context) {
 	    this.context = context;
 	}
 
 	@SuppressWarnings("unchecked")
-	public <A> A getAdapter(Class<A> adapter) {
+	public <A> A getAdapter(@NonNull Class<A> adapter) {
 		if (adapter.isAssignableFrom(getClass())) {
 			return (A) this;
 		}
@@ -341,7 +354,7 @@ public abstract class Abstract[visitorClass/]<R, C> implements [visitorClass/]<R
 	 * @return <code>null</code> if the visitable is <code>null</code>;
 	 *     otherwise, the result of visiting it
 	 */
-	public R safeVisit([visitableClass/] v) {
+	public @Nullable R safeVisit(@Nullable [visitableClass/] v) {
 		return (v == null) ? null : v.accept(this);
 	}
 	
@@ -352,11 +365,11 @@ public abstract class Abstract[visitorClass/]<R, C> implements [visitorClass/]<R
 	 * @return <code>null</code> if the visitable is <code>null</code>;
 	 *     otherwise, the result of visiting it
 	 */
-	public R visit([visitableClass/] v) {
+	public @Nullable R visit(@NonNull [visitableClass/] v) {
 		return v.accept(this);
 	}
 
-//	public R visiting([visitableClass/] visitable) {
+//	public @Nullable R visiting(@NonNull [visitableClass/] visitable) {
 //		return null;
 //	}
 }
@@ -372,11 +385,13 @@ DecorableVisitorInterface
 [file ('Decorable' + visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  */
 public interface Decorable[visitorClass/]<R> extends [visitorClass/]<R>[if (visitorBaseClass.size() > 0)], [visitorBasePackage/].Decorable[visitorBaseClass/]<R>[/if]
 {
-	void setUndecoratedVisitor([visitorRootClass/]<R> visitor);
+	void setUndecoratedVisitor(@NonNull [visitorRootClass/]<R> visitor);
 }
 [/file]
 [/template]
@@ -396,7 +411,7 @@ public abstract class Abstract[visitorClass/]<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected Abstract[visitorClass/](C context) {
+	protected Abstract[visitorClass/](@NonNull C context) {
 	    super(context);
 	}
 }
@@ -412,7 +427,7 @@ public abstract class Abstract[visitorClass/]<R, C>
 public interface [visitorClass/]<R>[if (visitorBaseClass.size() > 0)] extends [visitorBasePackage/].[visitorBaseClass/]<R>[/if]
 {
 [for (eClass : EClass | pkg.eClassifiers->filter(EClass)->select(not interface)->sortedBy(name))]
-	R visit[eClass.name/]([modelPackage/].[eClass.name/] object);
+	@Nullable R visit[eClass.name/](@NonNull [modelPackage/].[eClass.name/] object);
 [/for]
 }
 [/file]
@@ -452,6 +467,8 @@ package	[visitorPackage/].util;
 [pkg.generateHeader(visitorPackage, sourceFile)/]
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 public interface [visitableClass/]
 {
@@ -470,7 +487,7 @@ public interface [visitableClass/]
 	 * @param visitor
 	 * @return the result of the visit.
 	 */
-	<R> R accept([visitorClass/]<R> visitor);
+	@Nullable <R> R accept(@NonNull [visitorClass/]<R> visitor);
 	
 	EClass eClass();
 }
@@ -480,6 +497,9 @@ public interface [visitableClass/]
 [template public generateVisitorInterface(pkg : EPackage, visitorPackage : String, modelPackage : String, visitorClass : String, visitableClass : String, sourceFile : String)]
 [file (visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
+
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  */
@@ -495,16 +515,16 @@ public interface [visitorClass/]<R>
 	 *    or <code>null</code> if this object does not
 	 *    have an adapter for the given class
 	 */
-	<A> A getAdapter(Class<A> adapter);
+	@Nullable <A> A getAdapter(@NonNull Class<A> adapter);
 
 	/**
      * Return the result of visiting a visitable for which no more specific pivot type method
      * is available.
      */
-	R visiting([visitableClass/] visitable);
+	@Nullable R visiting(@NonNull [visitableClass/] visitable);
 	
 [for (eClass : EClass | pkg.eClassifiers->filter(EClass)->select(not interface)->sortedBy(name))]
-	R visit[eClass.name/]([modelPackage/].[eClass.name/] object);
+	@Nullable R visit[eClass.name/](@NonNull [modelPackage/].[eClass.name/] object);
 [/for]
 }
 [/file]

@@ -27,6 +27,8 @@ import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -66,7 +68,7 @@ public class Pivot2EcoreTypeRefVisitor
 	}
 
 	@Override
-	public EObject safeVisit(Visitable v) {
+	public EObject safeVisit(@Nullable Visitable v) {
 		if (v instanceof Type) {
 			v = metaModelManager.getPrimaryType((Type)v);
 		}
@@ -84,28 +86,28 @@ public class Pivot2EcoreTypeRefVisitor
 		}
 	}
 
-	public EClassifier visiting(Visitable visitable) {
+	public EClassifier visiting(@NonNull Visitable visitable) {
 		throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for Pivot2Ecore TypeRef pass");
 	}
 
 	@Override
-	public EObject visitAnyType(AnyType object) {
+	public EObject visitAnyType(@NonNull AnyType object) {
 		return EcorePackage.Literals.EOBJECT;			// FIXME Something more reversible
 	}	
 
 	@Override
-	public EObject visitCollectionType(CollectionType object) {
+	public EObject visitCollectionType(@NonNull CollectionType object) {
 		// TODO Auto-generated method stub
 		return super.visitCollectionType(object);
 	}
 
 	@Override
-	public EObject visitInvalidType(InvalidType object) {
+	public EObject visitInvalidType(@NonNull InvalidType object) {
 		return EcorePackage.Literals.EOBJECT;			// FIXME Something more reversible
 	}	
 
 	@Override
-	public EObject visitPrimitiveType(PrimitiveType pivotType) {
+	public EObject visitPrimitiveType(@NonNull PrimitiveType pivotType) {
 		String uri = context.getPrimitiveTypesUriPrefix();
 		if (uri != null) {
 			EDataType eClassifier = context.getCreated(EDataType.class, pivotType);
@@ -149,13 +151,13 @@ public class Pivot2EcoreTypeRefVisitor
 	}
 
 	@Override
-	public EObject visitTemplateBinding(TemplateBinding object) {
+	public EObject visitTemplateBinding(@NonNull TemplateBinding object) {
 		EGenericType eGenericType = EcoreFactory.eINSTANCE.createEGenericType();
 		return eGenericType;
 	}
 
 	@Override
-	public EObject visitTemplateParameterSubstitution(TemplateParameterSubstitution pivotTemplateParameterSubstitution) {
+	public EObject visitTemplateParameterSubstitution(@NonNull TemplateParameterSubstitution pivotTemplateParameterSubstitution) {
 		EObject actualType = safeVisit(pivotTemplateParameterSubstitution.getActual());
 		if (actualType instanceof EGenericType) {
 			return actualType;
@@ -166,7 +168,7 @@ public class Pivot2EcoreTypeRefVisitor
 	}
 
 	@Override
-	public EObject visitType(Type pivotType) {
+	public EObject visitType(@NonNull Type pivotType) {
 		TemplateParameter templateParameter = pivotType.getTemplateParameter();
 		if (templateParameter != null) {
 			ETypeParameter eTypeParameter = context.getCreated(ETypeParameter.class, templateParameter);
@@ -191,7 +193,7 @@ public class Pivot2EcoreTypeRefVisitor
 	}
 
 	@Override
-	public EObject visitVoidType(VoidType object) {
+	public EObject visitVoidType(@NonNull VoidType object) {
 		return EcorePackage.Literals.EOBJECT;			// FIXME Something more reversible
 	}	
 }

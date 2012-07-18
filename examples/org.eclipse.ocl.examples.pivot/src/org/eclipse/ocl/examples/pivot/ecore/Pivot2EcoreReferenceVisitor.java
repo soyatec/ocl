@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Class;
 import org.eclipse.ocl.examples.pivot.CollectionType;
@@ -93,12 +94,12 @@ public class Pivot2EcoreReferenceVisitor
 		}
 	}
 
-	public EObject visiting(Visitable visitable) {
+	public EObject visiting(@NonNull Visitable visitable) {
 		throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for Pivot2Ecore Reference pass");
 	}
 
 	@Override
-	public EObject visitAnnotation(Annotation pivotAnnotation) {
+	public EObject visitAnnotation(@NonNull Annotation pivotAnnotation) {
 		EAnnotation eAnnotation = context.getCreated(EAnnotation.class, pivotAnnotation);
 		eAnnotation.getReferences().clear();
 		for (Element pivotReference : pivotAnnotation.getReference()) {
@@ -114,27 +115,27 @@ public class Pivot2EcoreReferenceVisitor
 	}
 
 	@Override
-	public EObject visitClass(Class pivotClass) {
+	public EObject visitClass(@NonNull Class pivotClass) {
 		EClass eClass = context.getCreated(EClass.class, pivotClass);
 		safeVisitAll(eClass.getEGenericSuperTypes(), eClass.getESuperTypes(), pivotClass.getSuperClass());
 		return eClass;
 	}
 
 	@Override
-	public EObject visitDataType(DataType pivotDataType) {
+	public EObject visitDataType(@NonNull DataType pivotDataType) {
 		EDataType eDataType = context.getCreated(EDataType.class, pivotDataType);
 		return eDataType;
 	}
 
 	@Override
-	public EObject visitOperation(Operation pivotOperation) {
+	public EObject visitOperation(@NonNull Operation pivotOperation) {
 		EOperation eOperation = context.getCreated(EOperation.class, pivotOperation);
 		safeVisitAll(eOperation.getEGenericExceptions(), eOperation.getEExceptions(), pivotOperation.getRaisedException());
 		return super.visitOperation(pivotOperation);
 	}
 
 	@Override
-	public EObject visitPackage(Package pivotPackage) {
+	public EObject visitPackage(@NonNull Package pivotPackage) {
 		EPackage ePackage = context.getCreated(EPackage.class, pivotPackage);
 		boolean needsDelegates = false;
 		for (EClassifier eClassifier : ePackage.getEClassifiers()) {
@@ -174,7 +175,7 @@ public class Pivot2EcoreReferenceVisitor
 	}
 
 	@Override
-	public EObject visitProperty(Property pivotProperty) {
+	public EObject visitProperty(@NonNull Property pivotProperty) {
 		if (pivotProperty.isImplicit()) {
 			return null;
 		}
@@ -204,7 +205,7 @@ public class Pivot2EcoreReferenceVisitor
 	}
 
 	@Override
-	public EObject visitTypeTemplateParameter(TypeTemplateParameter pivotTypeTemplateParameter) {
+	public EObject visitTypeTemplateParameter(@NonNull TypeTemplateParameter pivotTypeTemplateParameter) {
 		ETypeParameter eTypeParameter = context.getCreated(ETypeParameter.class, pivotTypeTemplateParameter);
 		for (Type constrainingType : pivotTypeTemplateParameter.getConstrainingType()) {
 			EGenericType eGenericType = typeRefVisitor.resolveEGenericType(constrainingType);
@@ -214,7 +215,7 @@ public class Pivot2EcoreReferenceVisitor
 	}
 
 	@Override
-	public EObject visitTypedElement(TypedElement pivotTypedElement) {
+	public EObject visitTypedElement(@NonNull TypedElement pivotTypedElement) {
 		ETypedElement eTypedElement = context.getCreated(ETypedElement.class, pivotTypedElement);
 		Type pivotType = pivotTypedElement.getType();
 		if (pivotType == null) {
@@ -242,7 +243,7 @@ public class Pivot2EcoreReferenceVisitor
 	}
 
 	@Override
-	public EObject visitTypedMultiplicityElement(TypedMultiplicityElement pivotTypedElement) {
+	public EObject visitTypedMultiplicityElement(@NonNull TypedMultiplicityElement pivotTypedElement) {
 		Type pivotType = pivotTypedElement.getType();
 		if (pivotType == null) {
 			return null;				// Occurs for Operation return type

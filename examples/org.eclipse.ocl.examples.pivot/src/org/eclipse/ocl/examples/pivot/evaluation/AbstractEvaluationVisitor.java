@@ -20,6 +20,7 @@ package org.eclipse.ocl.examples.pivot.evaluation;
 
 import java.util.Set;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
@@ -131,7 +132,8 @@ public abstract class AbstractEvaluationVisitor
      * 
      * @return my delegate visitor, which may be my own self or some other
      */
-    protected EvaluationVisitor getUndecoratedVisitor() {
+    @SuppressWarnings("null")
+	protected @NonNull EvaluationVisitor getUndecoratedVisitor() {
         return undecoratedVisitor;
     }
 
@@ -223,7 +225,7 @@ public abstract class AbstractEvaluationVisitor
 	 * {@link #visitExpression(OCLExpression)}.
 	 */
 	@Override
-    public Value visitConstraint(Constraint constraint) {
+    public Value visitConstraint(@NonNull Constraint constraint) {
 		ValueSpecification specification = constraint.getSpecification();
 		if (!(specification instanceof ExpressionInOCL)) {
 			return null;
@@ -241,6 +243,9 @@ public abstract class AbstractEvaluationVisitor
 		
 		Value result = body.accept(getUndecoratedVisitor());
 		try {
+			if (result == null) {
+				return evaluationEnvironment.throwInvalidEvaluation("null constraint result");
+			}
 			return result.asBooleanValue();
 		} catch (InvalidValueException e) {
 			return evaluationEnvironment.throwInvalidEvaluation(e);

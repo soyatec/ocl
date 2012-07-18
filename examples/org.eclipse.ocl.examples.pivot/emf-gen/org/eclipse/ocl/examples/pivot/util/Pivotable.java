@@ -16,11 +16,12 @@
  */
 package org.eclipse.ocl.examples.pivot.util;
 
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.utilities.PivotObject;
 
 public interface Pivotable extends PivotObject
 {
-	Element getPivot();
+	@Nullable Element getPivot();
 	void resetPivot();
 }

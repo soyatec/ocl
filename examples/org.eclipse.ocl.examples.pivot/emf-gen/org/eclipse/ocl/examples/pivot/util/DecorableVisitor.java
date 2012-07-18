@@ -25,9 +25,11 @@
  */
 package	org.eclipse.ocl.examples.pivot.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  */
 public interface DecorableVisitor<R> extends Visitor<R>
 {
-	void setUndecoratedVisitor(Visitor<R> visitor);
+	void setUndecoratedVisitor(@NonNull Visitor<R> visitor);
 }

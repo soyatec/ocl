@@ -14,6 +14,7 @@
  */
 package org.eclipse.ocl.examples.pivot.util;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.utilities.PivotObject;
 
@@ -23,5 +24,5 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotObject;
  */
 public interface MorePivotable extends PivotObject
 {
-	Iterable<Element> getMorePivots();
+	@NonNull Iterable<Element> getMorePivots();
 }

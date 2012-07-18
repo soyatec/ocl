@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
@@ -98,14 +99,19 @@ public class OCLValidationDelegate implements ValidationDelegate
 		return evaluationEnvironment;
 	}
 
-	protected String evaluateMessage(EvaluationVisitor evaluationVisitor, String constraintName, ExpressionInOCL query) {
+	protected String evaluateMessage(@NonNull EvaluationVisitor evaluationVisitor, String constraintName, ExpressionInOCL query) {
 		OCLExpression messageExpression = query.getMessageExpression();
 		if (messageExpression == null) {
 			return null;
 		}
 		try {
 			Value result = messageExpression.accept(evaluationVisitor);
-			return result.asString();
+			if (result != null) {
+				return result.asString();
+			}
+			String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
+			String message = DomainUtil.bind(OCLMessages.ValidationMessageIsNotString_ERROR_, PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
+			throw new OCLDelegateException(message);
 		} catch (InvalidValueException e) {
 			String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
 			String message = DomainUtil.bind(OCLMessages.ValidationMessageIsNotString_ERROR_, PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
@@ -207,7 +213,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 		}
 		try {
 			Value result = query.accept(evaluationVisitor);
-			if (result.isNull()) {
+			if ((result == null) || result.isNull()) {
 				String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
 				String message = DomainUtil.bind(OCLMessages.ValidationResultIsNull_ERROR_, PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
 				throw new OCLDelegateException(message);
@@ -235,7 +241,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 		Value result;
 		try {
 			result = query.accept(evaluationVisitor);
-			if (result.isNull()) {
+			if ((result == null) || result.isNull()) {
 				if (diagnostics == null) {
 					String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
 					String message = DomainUtil.bind(OCLMessages.ValidationResultIsNull_ERROR_, PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
@@ -261,7 +267,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 				message = DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_,
 					PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
 			}
-			int severity = result.isNull() ? Diagnostic.ERROR : Diagnostic.WARNING;
+			int severity = (result == null) || result.isNull() ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    diagnostics.add(new BasicDiagnostic(severity, source, code, message, new Object [] { value }));
 		}
 		return false;

@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CallExp;
@@ -145,7 +146,7 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 	}
 
 	@Override
-	public Object visitAnnotation(Annotation object) {
+	public Object visitAnnotation(@NonNull Annotation object) {
 		context.appendParent(object, MONIKER_SCOPE_SEPARATOR);
 		context.append(ANNOTATION_QUOTE);
 		context.append(String.valueOf(object.getName()));
@@ -169,14 +170,14 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 	}
 
 	@Override
-	public Object visitBooleanLiteralExp(BooleanLiteralExp object) {
+	public Object visitBooleanLiteralExp(@NonNull BooleanLiteralExp object) {
 		appendExpPrefix(object);
 		context.append(Boolean.toString(object.isBooleanSymbol()));
 		return true;
 	}
 
 	@Override
-	public Object visitClass(org.eclipse.ocl.examples.pivot.Class object) {
+	public Object visitClass(@NonNull org.eclipse.ocl.examples.pivot.Class object) {
 		TemplateParameter owningTemplateParameter = object.getOwningTemplateParameter();
 		if (owningTemplateParameter != null) {		
 			if (templateBindings != null) {
@@ -220,21 +221,21 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 //	}
 
 	@Override
-	public Object visitCollectionLiteralExp(CollectionLiteralExp object) {
+	public Object visitCollectionLiteralExp(@NonNull CollectionLiteralExp object) {
 		appendExpPrefix(object);
 		context.appendName(object.getType());
 		return true;
 	}
 
 	@Override
-	public Object visitCollectionLiteralPart(CollectionLiteralPart object) {
+	public Object visitCollectionLiteralPart(@NonNull CollectionLiteralPart object) {
 		context.appendParent(object, MONIKER_PART_SEPARATOR);
 		context.appendIndex(object);
 		return true;
 	}
 
 	@Override
-	public Object visitConstraint(Constraint object) {
+	public Object visitConstraint(@NonNull Constraint object) {
 		context.appendParent(object, MONIKER_SCOPE_SEPARATOR);
 		context.append(object.getStereotype());
 		Object container = object.eContainer().eGet(object.eContainingFeature());
@@ -271,7 +272,7 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 	}
 
 	@Override
-	public String visitConstructorExp(ConstructorExp constructorExp) {
+	public String visitConstructorExp(@NonNull ConstructorExp constructorExp) {
 		appendExpPrefix(constructorExp);
 		context.append(MONIKER_TUPLE_LITERAL_EXP);
 //		appendQualifiedName(constructorExp.getReferredType());
@@ -287,21 +288,21 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 	}
 
 	@Override
-	public Object visitDetail(Detail object) {
+	public Object visitDetail(@NonNull Detail object) {
 		context.appendParent(object, BINDINGS_PREFIX);
 		context.append(object.getName());
 		return true;
 	}
 
 	@Override
-	public Object visitEnumLiteralExp(EnumLiteralExp object) {
+	public Object visitEnumLiteralExp(@NonNull EnumLiteralExp object) {
 		appendExpPrefix(object);
 		context.appendName(object.getReferredEnumLiteral());
 		return true;
 	}
 
 	@Override
-	public Object visitExpressionInOCL(ExpressionInOCL object) {
+	public Object visitExpressionInOCL(@NonNull ExpressionInOCL object) {
 		if (object.eContainer() != null) {
 			context.appendParent(object, MONIKER_SCOPE_SEPARATOR);
 			context.appendRole(object);		
@@ -313,28 +314,28 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 	}
 
 	@Override
-	public Object visitIfExp(IfExp object) {
+	public Object visitIfExp(@NonNull IfExp object) {
 		appendExpPrefix(object);
 		context.append(MONIKER_IF_EXP);
 		return true;
 	}
 
 	@Override
-	public Object visitIntegerLiteralExp(IntegerLiteralExp object) {
+	public Object visitIntegerLiteralExp(@NonNull IntegerLiteralExp object) {
 		appendExpPrefix(object);
 		context.append(object.getIntegerSymbol().toString());
 		return true;
 	}
 
 	@Override
-	public Object visitInvalidLiteralExp(InvalidLiteralExp object) {
+	public Object visitInvalidLiteralExp(@NonNull InvalidLiteralExp object) {
 		appendExpPrefix(object);
 		context.append(MONIKER_INVALID_LITERAL_EXP);
 		return true;
 	}
 
 	@Override
-	public Object visitLambdaType(LambdaType object) {
+	public Object visitLambdaType(@NonNull LambdaType object) {
 		context.append(object.getName());
 //		context.appendTemplateParameters(object);
 		Map<TemplateParameter, ParameterableElement> bindings = PivotUtil.getAllTemplateParameterSubstitutions(null, object);
@@ -343,14 +344,14 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 	}
 
 	@Override
-	public Object visitLetExp(LetExp object) {
+	public Object visitLetExp(@NonNull LetExp object) {
 		appendExpPrefix(object);
 		context.append(MONIKER_LET_EXP);
 		return true;
 	}
 
 	@Override
-	public Object visitLoopExp(LoopExp object) {
+	public Object visitLoopExp(@NonNull LoopExp object) {
 		appendExpPrefix(object);
 		if (object.isImplicit()) {
 			OCLExpression body = object.getBody();
@@ -365,21 +366,21 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 	}
 
 	@Override
-	public Object visitNamedElement(NamedElement object) {
+	public Object visitNamedElement(@NonNull NamedElement object) {
 		context.appendParent(object, MONIKER_SCOPE_SEPARATOR);
 		context.appendName(object);
 		return true;
 	}
 
 	@Override
-	public Object visitNullLiteralExp(NullLiteralExp object) {
+	public Object visitNullLiteralExp(@NonNull NullLiteralExp object) {
 		appendExpPrefix(object);
 		context.append(MONIKER_NULL_LITERAL_EXP);
 		return true;
 	}
 
 	@Override
-	public Object visitOperation(Operation object) {
+	public Object visitOperation(@NonNull Operation object) {
 		TemplateParameter owningTemplateParameter = object.getOwningTemplateParameter();
 		if (owningTemplateParameter != null) {			// FIXME does this happen ?
 			TemplateableElement owningTemplateElement = owningTemplateParameter.getSignature().getTemplate();
@@ -415,14 +416,14 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 	}
 
 	@Override
-	public Object visitOperationCallExp(OperationCallExp object) {
+	public Object visitOperationCallExp(@NonNull OperationCallExp object) {
 		appendExpPrefix(object);
 		context.appendName(object.getReferredOperation());
 		return true;
 	}
 
 	@Override
-	public Object visitPackage(org.eclipse.ocl.examples.pivot.Package object) {
+	public Object visitPackage(@NonNull org.eclipse.ocl.examples.pivot.Package object) {
 //		if (!object.hasMoniker()) {
 //			throw new IllegalStateException("No moniker has been configured for " + object);
 //		}
@@ -431,47 +432,47 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 	}
 
 	@Override
-	public Object visitPrecedence(Precedence object) {
+	public Object visitPrecedence(@NonNull Precedence object) {
 		context.appendParent(object, PRECEDENCE_PREFIX);
 		context.appendName(object);
 		return true;
 	}
 
 	@Override
-	public Object visitPrimitiveType(PrimitiveType object) {
+	public Object visitPrimitiveType(@NonNull PrimitiveType object) {
 		context.appendName(object);
 		return true;
 	}
 
 	@Override
-	public Object visitPropertyCallExp(PropertyCallExp object) {
+	public Object visitPropertyCallExp(@NonNull PropertyCallExp object) {
 		appendExpPrefix(object);
 		context.appendName(object.getReferredProperty());
 		return true;
 	}
 
 	@Override
-	public Object visitRealLiteralExp(RealLiteralExp object) {
+	public Object visitRealLiteralExp(@NonNull RealLiteralExp object) {
 		appendExpPrefix(object);
 		context.append(object.getRealSymbol().toString());
 		return true;
 	}
 
 	@Override
-	public Object visitRoot(Root object) {
+	public Object visitRoot(@NonNull Root object) {
 		context.append(MONIKER_ROOT);
 		return true;
 	}
 
 	@Override
-	public Object visitStringLiteralExp(StringLiteralExp object) {
+	public Object visitStringLiteralExp(@NonNull StringLiteralExp object) {
 		appendExpPrefix(object);
 		context.append(MONIKER_STRING_LITERAL_EXP);
 		return true;
 	}
 
 	@Override
-	public Object visitTemplateBinding(TemplateBinding object) {
+	public Object visitTemplateBinding(@NonNull TemplateBinding object) {
 		TemplateSignature signature = object.getSignature();
 		if (signature != null) {
 			context.appendElement(signature.getTemplate());
@@ -481,7 +482,7 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 	}
 
 	@Override
-	public Object visitTemplateParameter(TemplateParameter object) {
+	public Object visitTemplateParameter(@NonNull TemplateParameter object) {
 		TemplateableElement owningTemplateElement = object.getSignature().getTemplate();
 		context.appendElement(owningTemplateElement);
 		context.append(TEMPLATE_PARAMETER_PREFIX);
@@ -490,27 +491,27 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 	}
 
 	@Override
-	public Object visitTemplateParameterSubstitution(TemplateParameterSubstitution object) {
+	public Object visitTemplateParameterSubstitution(@NonNull TemplateParameterSubstitution object) {
 		context.appendElement(object.getTemplateBinding());
 		context.appendName(object.getFormal().getParameteredElement());
 		return true;
 	}
 
 	@Override
-	public Object visitTemplateSignature(TemplateSignature object) {
+	public Object visitTemplateSignature(@NonNull TemplateSignature object) {
 		context.appendParent(object, MONIKER_SCOPE_SEPARATOR);
 		return true;
 	}
 
 	@Override
-	public Object visitTupleLiteralExp(TupleLiteralExp object) {
+	public Object visitTupleLiteralExp(@NonNull TupleLiteralExp object) {
 		appendExpPrefix(object);
 		context.append(MONIKER_TUPLE_LITERAL_EXP);
 		return true;
 	}
 
 	@Override
-	public Object visitTupleType(TupleType object) {
+	public Object visitTupleType(@NonNull TupleType object) {
 		List<Property> ownedAttributes = object.getOwnedAttribute();
 		if (ownedAttributes.isEmpty()) {
 			super.visitTupleType(object);
@@ -523,14 +524,14 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 	}
 
 	@Override
-	public Object visitTypeExp(TypeExp object) {
+	public Object visitTypeExp(@NonNull TypeExp object) {
 		appendExpPrefix(object);
 		context.appendName(object.getReferredType());
 		return true;
 	}
 
 	@Override
-	public Object visitUnlimitedNaturalLiteralExp(UnlimitedNaturalLiteralExp object) {
+	public Object visitUnlimitedNaturalLiteralExp(@NonNull UnlimitedNaturalLiteralExp object) {
 		appendExpPrefix(object);
 		BigInteger unlimitedNaturalSymbol = object.getUnlimitedNaturalSymbol();
 		if (unlimitedNaturalSymbol.signum() < 0) {
@@ -543,20 +544,20 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 	}
 
 	@Override
-	public Object visitVariable(Variable object) {
+	public Object visitVariable(@NonNull Variable object) {
 		appendExpPrefix(object);
 		context.appendName(object);
 		return true;
 	}
 
 	@Override
-	public Object visitVariableExp(VariableExp object) {
+	public Object visitVariableExp(@NonNull VariableExp object) {
 		appendExpPrefix(object);
 		context.appendName(object.getReferredVariable());
 		return true;
 	}
 
-	public Object visiting(Visitable visitable) {
+	public Object visiting(@NonNull Visitable visitable) {
 		throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for Pivot2Moniker");
 	}	
 }

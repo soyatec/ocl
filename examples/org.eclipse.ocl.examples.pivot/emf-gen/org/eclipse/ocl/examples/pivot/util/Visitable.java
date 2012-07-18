@@ -26,6 +26,8 @@
 package	org.eclipse.ocl.examples.pivot.util;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 public interface Visitable
 {
@@ -44,7 +46,7 @@ public interface Visitable
 	 * @param visitor
 	 * @return the result of the visit.
 	 */
-	<R> R accept(Visitor<R> visitor);
+	@Nullable <R> R accept(@NonNull Visitor<R> visitor);
 	
 	EClass eClass();
 }

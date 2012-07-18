@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.pivot.uml;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Class;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -52,7 +53,7 @@ public class Pivot2UMLReferenceVisitor
 		}
 	}
 
-	public EObject visiting(Visitable visitable) {
+	public EObject visiting(@NonNull Visitable visitable) {
 		throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for Pivot2UML Reference pass");
 	}
 
@@ -68,20 +69,20 @@ public class Pivot2UMLReferenceVisitor
 	} */
 
 	@Override
-	public EObject visitClass(Class pivotClass) {
+	public EObject visitClass(@NonNull Class pivotClass) {
 		org.eclipse.uml2.uml.Class umlClass = context.getCreated(org.eclipse.uml2.uml.Class.class, pivotClass);
 		safeVisitAll(umlClass.getSuperClasses(), pivotClass.getSuperClass());
 		return umlClass;
 	}
 
 	@Override
-	public EObject visitDataType(DataType pivotDataType) {
+	public EObject visitDataType(@NonNull DataType pivotDataType) {
 		org.eclipse.uml2.uml.DataType umlDataType = context.getCreated(org.eclipse.uml2.uml.DataType.class, pivotDataType);
 		return umlDataType;
 	}
 
 	@Override
-	public EObject visitOperation(Operation pivotOperation) {
+	public EObject visitOperation(@NonNull Operation pivotOperation) {
 		org.eclipse.uml2.uml.Operation umlOperation = context.getCreated(org.eclipse.uml2.uml.Operation.class, pivotOperation);
 		safeVisitAll(umlOperation.getRaisedExceptions(), pivotOperation.getRaisedException());
 		Type pivotType = pivotOperation.getType();
@@ -94,7 +95,7 @@ public class Pivot2UMLReferenceVisitor
 	}
 
 	@Override
-	public EObject visitPackage(Package pivotPackage) {
+	public EObject visitPackage(@NonNull Package pivotPackage) {
 //		org.eclipse.uml2.uml.Package umlPackage = context.getCreated(org.eclipse.uml2.uml.Package.class, pivotPackage);
 /*		boolean needsDelegates = false;
 		for (EClassifier eClassifier : ePackage.getEClassifiers()) {
@@ -143,7 +144,7 @@ public class Pivot2UMLReferenceVisitor
 	}
 
 	@Override
-	public EObject visitProperty(Property pivotProperty) {
+	public EObject visitProperty(@NonNull Property pivotProperty) {
 		org.eclipse.uml2.uml.Property umlProperty = context.getCreated(org.eclipse.uml2.uml.Property.class, pivotProperty);
 		Property pivotOpposite = pivotProperty.getOpposite();
 		if (pivotOpposite != null) {
@@ -162,7 +163,7 @@ public class Pivot2UMLReferenceVisitor
 	}
 
 	@Override
-	public EObject visitTypeTemplateParameter(TypeTemplateParameter pivotTypeTemplateParameter) {
+	public EObject visitTypeTemplateParameter(@NonNull TypeTemplateParameter pivotTypeTemplateParameter) {
 //		org.eclipse.uml2.uml.ClassifierTemplateParameter umlTypeParameter = context.getCreated(org.eclipse.uml2.uml.ClassifierTemplateParameter.class, pivotTypeTemplateParameter);
 //		for (Type constrainingType : pivotTypeTemplateParameter.getConstrainingType()) {
 //			EGenericType eGenericType = typeRefVisitor.resolveEGenericType(constrainingType);
@@ -172,7 +173,7 @@ public class Pivot2UMLReferenceVisitor
 	}
 
 	@Override
-	public EObject visitTypedElement(TypedElement pivotTypedElement) {
+	public EObject visitTypedElement(@NonNull TypedElement pivotTypedElement) {
 		org.eclipse.uml2.uml.TypedElement umlTypedElement = context.getCreated(org.eclipse.uml2.uml.TypedElement.class, pivotTypedElement);
 		Type pivotType = pivotTypedElement.getType();
 		if (pivotType == null) {

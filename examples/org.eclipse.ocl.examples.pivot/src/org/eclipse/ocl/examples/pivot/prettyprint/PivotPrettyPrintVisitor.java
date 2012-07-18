@@ -18,6 +18,8 @@ package org.eclipse.ocl.examples.pivot.prettyprint;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Class;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LambdaType;
@@ -44,7 +46,7 @@ public class PivotPrettyPrintVisitor extends AbstractExtendingVisitor<Object,Pre
 	}
 	
 	@Override
-	public Object safeVisit(Visitable element) {
+	public Object safeVisit(@Nullable Visitable element) {
 		if (element == null) {
 			return null;
 		}
@@ -65,7 +67,7 @@ public class PivotPrettyPrintVisitor extends AbstractExtendingVisitor<Object,Pre
 	}
 
 	@Override
-	public Object visitClass(Class object) {
+	public Object visitClass(@NonNull Class object) {
 		TemplateParameter owningTemplateParameter = object.getOwningTemplateParameter();
 		if (owningTemplateParameter != null) {
 			return owningTemplateParameter.accept(this);
@@ -74,7 +76,7 @@ public class PivotPrettyPrintVisitor extends AbstractExtendingVisitor<Object,Pre
 	}
 
 	@Override
-	public Object visitLambdaType(LambdaType object) {
+	public Object visitLambdaType(@NonNull LambdaType object) {
 //		appendParent(object.eContainer(), object, "::");
 		context.appendName(object, context.getRestrictedNames());
 		context.append(" ");
@@ -93,7 +95,7 @@ public class PivotPrettyPrintVisitor extends AbstractExtendingVisitor<Object,Pre
 	}
 
 	@Override
-	public Object visitNamedElement(NamedElement object) {
+	public Object visitNamedElement(@NonNull NamedElement object) {
 		if (context.showNames()) {
 			context.appendParent(context.getScope(), object, "::");
 		}
@@ -102,7 +104,7 @@ public class PivotPrettyPrintVisitor extends AbstractExtendingVisitor<Object,Pre
 	}
 
 	@Override
-	public Object visitOperation(Operation object) {
+	public Object visitOperation(@NonNull Operation object) {
 		if (context.showNames()) {
 			context.appendParent(context.getScope(), object, "::");
 			context.appendName(object);
@@ -151,7 +153,7 @@ public class PivotPrettyPrintVisitor extends AbstractExtendingVisitor<Object,Pre
 	}
 
 	@Override
-	public Object visitTemplateParameter(TemplateParameter object) {
+	public Object visitTemplateParameter(@NonNull TemplateParameter object) {
 		if (context.showNames()) {
 //			context.appendParent(context.getScope(), object.getSignature(), "::");
 			context.appendName((NamedElement) object.getParameteredElement());
@@ -163,7 +165,7 @@ public class PivotPrettyPrintVisitor extends AbstractExtendingVisitor<Object,Pre
 	}
 
 	@Override
-	public Object visitTupleType(TupleType object) {
+	public Object visitTupleType(@NonNull TupleType object) {
 		if (context.showNames()) {
 			context.appendParent(context.getScope(), object, "::");
 		}
@@ -190,7 +192,7 @@ public class PivotPrettyPrintVisitor extends AbstractExtendingVisitor<Object,Pre
 	}
 
 	@Override
-	public Object visitType(Type object) {
+	public Object visitType(@NonNull Type object) {
 		if (context.showNames()) {
 			context.appendParent(context.getScope(), object, "::");
 		}
@@ -201,7 +203,7 @@ public class PivotPrettyPrintVisitor extends AbstractExtendingVisitor<Object,Pre
 	}
 
 	@Override
-	public Object visitTypedElement(TypedElement object) {
+	public Object visitTypedElement(@NonNull TypedElement object) {
 		if (context.showNames()) {
 			context.appendParent(context.getScope(), object, "::");
 			context.appendName(object);
@@ -212,7 +214,7 @@ public class PivotPrettyPrintVisitor extends AbstractExtendingVisitor<Object,Pre
 	}
 
 	@Override
-	public Object visitTypedMultiplicityElement(TypedMultiplicityElement object) {
+	public Object visitTypedMultiplicityElement(@NonNull TypedMultiplicityElement object) {
 		if (context.showNames()) {
 			context.appendParent(context.getScope(), object, "::");
 			context.appendName(object);
@@ -222,7 +224,7 @@ public class PivotPrettyPrintVisitor extends AbstractExtendingVisitor<Object,Pre
 		return null;
 	}
 
-	public String visiting(Visitable visitable) {
+	public String visiting(@NonNull Visitable visitable) {
 		return (visitable == null)? PrettyPrinter.NULL_PLACEHOLDER : visitable.getClass().getName();
 	}
 }

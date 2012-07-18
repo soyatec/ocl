@@ -17,6 +17,7 @@
 
 package org.eclipse.ocl.examples.pivot.evaluation;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
@@ -126,7 +127,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitConstraint(Constraint constraint) {
+	public Value visitConstraint(@NonNull Constraint constraint) {
         return getDelegate().visitConstraint(constraint);
     }
 
@@ -135,7 +136,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      */
     @Override
 	public Value visitAssociationClassCallExp(
-            AssociationClassCallExp callExp) {
+            @NonNull AssociationClassCallExp callExp) {
         return getDelegate().visitAssociationClassCallExp(callExp);
     }
 
@@ -143,7 +144,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitBooleanLiteralExp(BooleanLiteralExp literalExp) {
+	public Value visitBooleanLiteralExp(@NonNull BooleanLiteralExp literalExp) {
         return getDelegate().visitBooleanLiteralExp(literalExp);
     }
 
@@ -151,7 +152,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitCollectionItem(CollectionItem item) {
+	public Value visitCollectionItem(@NonNull CollectionItem item) {
         return getDelegate().visitCollectionItem(item);
     }
 
@@ -159,7 +160,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitCollectionLiteralExp(CollectionLiteralExp literalExp) {
+	public Value visitCollectionLiteralExp(@NonNull CollectionLiteralExp literalExp) {
         return getDelegate().visitCollectionLiteralExp(literalExp);
     }
 
@@ -167,7 +168,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitCollectionRange(CollectionRange range) {
+	public Value visitCollectionRange(@NonNull CollectionRange range) {
         return getDelegate().visitCollectionRange(range);
     }
 
@@ -175,7 +176,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitConstructorExp(ConstructorExp constructorExp) {
+	public Value visitConstructorExp(@NonNull ConstructorExp constructorExp) {
         return getDelegate().visitConstructorExp(constructorExp);
     }
 
@@ -183,7 +184,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitEnumLiteralExp(EnumLiteralExp literalExp) {
+	public Value visitEnumLiteralExp(@NonNull EnumLiteralExp literalExp) {
         return getDelegate().visitEnumLiteralExp(literalExp);
     }
 
@@ -191,7 +192,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitExpressionInOCL(ExpressionInOCL expression) {
+	public Value visitExpressionInOCL(@NonNull ExpressionInOCL expression) {
         return getDelegate().visitExpressionInOCL(expression);
     }
 
@@ -199,7 +200,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitIfExp(IfExp ifExp) {
+	public Value visitIfExp(@NonNull IfExp ifExp) {
         return getDelegate().visitIfExp(ifExp);
     }
 
@@ -207,7 +208,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitIntegerLiteralExp(IntegerLiteralExp literalExp) {
+	public Value visitIntegerLiteralExp(@NonNull IntegerLiteralExp literalExp) {
         return getDelegate().visitIntegerLiteralExp(literalExp);
     }
 
@@ -215,7 +216,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitInvalidLiteralExp(InvalidLiteralExp literalExp) {
+	public Value visitInvalidLiteralExp(@NonNull InvalidLiteralExp literalExp) {
         return getDelegate().visitInvalidLiteralExp(literalExp);
     }
 
@@ -223,7 +224,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitLetExp(LetExp letExp) {
+	public Value visitLetExp(@NonNull LetExp letExp) {
         return getDelegate().visitLetExp(letExp);
     }
 
@@ -231,7 +232,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitMessageExp(MessageExp messageExp) {
+	public Value visitMessageExp(@NonNull MessageExp messageExp) {
         return getDelegate().visitMessageExp(messageExp);
     }
 
@@ -239,7 +240,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitNullLiteralExp(NullLiteralExp literalExp) {
+	public Value visitNullLiteralExp(@NonNull NullLiteralExp literalExp) {
         return getDelegate().visitNullLiteralExp(literalExp);
     }
 
@@ -247,7 +248,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitOperationCallExp(OperationCallExp callExp) {
+	public Value visitOperationCallExp(@NonNull OperationCallExp callExp) {
         return getDelegate().visitOperationCallExp(callExp);
     }
 
@@ -255,7 +256,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitPropertyCallExp(PropertyCallExp callExp) {
+	public Value visitPropertyCallExp(@NonNull PropertyCallExp callExp) {
         return getDelegate().visitPropertyCallExp(callExp);
     }
 
@@ -263,7 +264,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitRealLiteralExp(RealLiteralExp literalExp) {
+	public Value visitRealLiteralExp(@NonNull RealLiteralExp literalExp) {
         return getDelegate().visitRealLiteralExp(literalExp);
     }
 
@@ -271,7 +272,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitStateExp(StateExp stateExp) {
+	public Value visitStateExp(@NonNull StateExp stateExp) {
         return getDelegate().visitStateExp(stateExp);
     }
 
@@ -279,7 +280,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitStringLiteralExp(StringLiteralExp literalExp) {
+	public Value visitStringLiteralExp(@NonNull StringLiteralExp literalExp) {
         return getDelegate().visitStringLiteralExp(literalExp);
     }
 
@@ -287,7 +288,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitTupleLiteralExp(TupleLiteralExp literalExp) {
+	public Value visitTupleLiteralExp(@NonNull TupleLiteralExp literalExp) {
         return getDelegate().visitTupleLiteralExp(literalExp);
     }
 
@@ -295,7 +296,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitTupleLiteralPart(TupleLiteralPart part) {
+	public Value visitTupleLiteralPart(@NonNull TupleLiteralPart part) {
         return getDelegate().visitTupleLiteralPart(part);
     }
 
@@ -303,7 +304,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitTypeExp(TypeExp typeExp) {
+	public Value visitTypeExp(@NonNull TypeExp typeExp) {
         return getDelegate().visitTypeExp(typeExp);
     }
 
@@ -312,7 +313,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      */
     @Override
 	public Value visitUnlimitedNaturalLiteralExp(
-            UnlimitedNaturalLiteralExp literalExp) {
+            @NonNull UnlimitedNaturalLiteralExp literalExp) {
         return getDelegate().visitUnlimitedNaturalLiteralExp(literalExp);
     }
 
@@ -320,7 +321,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitUnspecifiedValueExp(UnspecifiedValueExp unspecExp) {
+	public Value visitUnspecifiedValueExp(@NonNull UnspecifiedValueExp unspecExp) {
         return getDelegate().visitUnspecifiedValueExp(unspecExp);
     }
 
@@ -328,7 +329,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitVariable(Variable variable) {
+	public Value visitVariable(@NonNull Variable variable) {
         return getDelegate().visitVariable(variable);
     }
 
@@ -336,14 +337,14 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * Delegates to my decorated visitor.
      */
     @Override
-	public Value visitVariableExp(VariableExp variableExp) {
+	public Value visitVariableExp(@NonNull VariableExp variableExp) {
         return getDelegate().visitVariableExp(variableExp);
     }
 
     /**
      * Delegates to my decorated visitor.
      */
-	public Value visiting(Visitable visitable) {
+	public Value visiting(@NonNull Visitable visitable) {
         return getDelegate().visiting(visitable);
 	}
 }

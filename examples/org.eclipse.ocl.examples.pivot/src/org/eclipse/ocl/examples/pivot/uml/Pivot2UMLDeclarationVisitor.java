@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.common.utils.StringUtils;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
@@ -163,12 +164,12 @@ public class Pivot2UMLDeclarationVisitor
 		}
 	}
 
-	public org.eclipse.uml2.uml.Element visiting(Visitable visitable) {
+	public org.eclipse.uml2.uml.Element visiting(@NonNull Visitable visitable) {
 		throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for Pivot2UML Declaration pass");
 	}
 
 	@Override
-	public EAnnotation visitAnnotation(Annotation pivotAnnotation) {
+	public EAnnotation visitAnnotation(@NonNull Annotation pivotAnnotation) {
 		EAnnotation umlAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
 		copyDetails(umlAnnotation, pivotAnnotation);
 		umlAnnotation.setSource(pivotAnnotation.getName());
@@ -180,7 +181,7 @@ public class Pivot2UMLDeclarationVisitor
 	}
 
 	@Override
-	public org.eclipse.uml2.uml.Classifier visitClass(org.eclipse.ocl.examples.pivot.Class pivotClass) {
+	public org.eclipse.uml2.uml.Classifier visitClass(@NonNull org.eclipse.ocl.examples.pivot.Class pivotClass) {
 		if (pivotClass.getTemplateBinding().size() > 0) {
 			return null;
 		}
@@ -204,14 +205,14 @@ public class Pivot2UMLDeclarationVisitor
 	}
 
  	@Override
-	public EModelElement visitComment(Comment pivotComment) {
+	public EModelElement visitComment(@NonNull Comment pivotComment) {
 		org.eclipse.uml2.uml.Comment umlComment = UMLFactory.eINSTANCE.createComment();
 		umlComment.setBody(pivotComment.getBody());
 		return umlComment;
 	}
 
 	@Override
-	public org.eclipse.uml2.uml.Constraint visitConstraint(Constraint pivotConstraint) {
+	public org.eclipse.uml2.uml.Constraint visitConstraint(@NonNull Constraint pivotConstraint) {
 		ValueSpecification specification = pivotConstraint.getSpecification();
 		if (!(specification instanceof OpaqueExpression)) {
 			return null;
@@ -255,7 +256,7 @@ public class Pivot2UMLDeclarationVisitor
 	}
 
 	@Override
-	public org.eclipse.uml2.uml.DataType visitDataType(DataType pivotDataType) {
+	public org.eclipse.uml2.uml.DataType visitDataType(@NonNull DataType pivotDataType) {
 		if (pivotDataType.getTemplateBinding().size() > 0) {
 			return null;
 		}
@@ -265,7 +266,7 @@ public class Pivot2UMLDeclarationVisitor
 	}
 
 	@Override
-	public org.eclipse.uml2.uml.Enumeration visitEnumeration(Enumeration pivotEnumeration) {
+	public org.eclipse.uml2.uml.Enumeration visitEnumeration(@NonNull Enumeration pivotEnumeration) {
 		if (pivotEnumeration.getTemplateBinding().size() > 0) {
 			return null;
 		}
@@ -276,7 +277,7 @@ public class Pivot2UMLDeclarationVisitor
 	}
 
 	@Override
-	public org.eclipse.uml2.uml.EnumerationLiteral visitEnumerationLiteral(EnumerationLiteral pivotEnumLiteral) {
+	public org.eclipse.uml2.uml.EnumerationLiteral visitEnumerationLiteral(@NonNull EnumerationLiteral pivotEnumLiteral) {
 		org.eclipse.uml2.uml.EnumerationLiteral umlEnumLiteral = UMLFactory.eINSTANCE.createEnumerationLiteral();
 		copyNamedElement(umlEnumLiteral, pivotEnumLiteral);
 //		if (pivotEnumLiteral.eIsSet(PivotPackage.Literals.ENUMERATION_LITERAL__VALUE)) {
@@ -289,7 +290,7 @@ public class Pivot2UMLDeclarationVisitor
 	}
 
 	@Override
-	public org.eclipse.uml2.uml.Operation visitOperation(Operation pivotOperation) {
+	public org.eclipse.uml2.uml.Operation visitOperation(@NonNull Operation pivotOperation) {
 		if (pivotOperation.getTemplateBinding().size() > 0) {
 			return null;
 		}
@@ -309,7 +310,7 @@ public class Pivot2UMLDeclarationVisitor
 	}
 
 	@Override
-	public org.eclipse.uml2.uml.Package visitPackage(Package pivotPackage) {
+	public org.eclipse.uml2.uml.Package visitPackage(@NonNull Package pivotPackage) {
 		org.eclipse.uml2.uml.Package umlPackage = UMLFactory.eINSTANCE.createPackage();
 		copyNamedElement(umlPackage, pivotPackage);
 //		safeVisitAll(ePackage.getEAnnotations(), pivotPackage.getOwnedAnnotation());
@@ -326,7 +327,7 @@ public class Pivot2UMLDeclarationVisitor
 	}
 
 	@Override
-	public org.eclipse.uml2.uml.Parameter visitParameter(Parameter pivotParameter) {
+	public org.eclipse.uml2.uml.Parameter visitParameter(@NonNull Parameter pivotParameter) {
 		org.eclipse.uml2.uml.Parameter umlParameter = UMLFactory.eINSTANCE.createParameter();
 		copyTypedElement(umlParameter, pivotParameter);
 		copyMultiplicityElement(umlParameter, pivotParameter);
@@ -334,7 +335,7 @@ public class Pivot2UMLDeclarationVisitor
 	}
 
 	@Override
-	public org.eclipse.uml2.uml.Element visitPrimitiveType(PrimitiveType pivotPrimitiveType) {
+	public org.eclipse.uml2.uml.Element visitPrimitiveType(@NonNull PrimitiveType pivotPrimitiveType) {
 		if (pivotPrimitiveType.getTemplateBinding().size() > 0) {
 			return null;
 		}
@@ -344,7 +345,7 @@ public class Pivot2UMLDeclarationVisitor
 	}
 
 	@Override
-	public org.eclipse.uml2.uml.Property visitProperty(Property pivotProperty) {
+	public org.eclipse.uml2.uml.Property visitProperty(@NonNull Property pivotProperty) {
 //		Type type = pivotProperty.getType();
 		org.eclipse.uml2.uml.Property umlProperty = UMLFactory.eINSTANCE.createProperty();
 		copyTypedElement(umlProperty, pivotProperty);
@@ -373,7 +374,7 @@ public class Pivot2UMLDeclarationVisitor
 	}
 
 	@Override
-	public org.eclipse.uml2.uml.TemplateSignature visitTemplateSignature(TemplateSignature pivotTemplateSignature) {
+	public org.eclipse.uml2.uml.TemplateSignature visitTemplateSignature(@NonNull TemplateSignature pivotTemplateSignature) {
 		org.eclipse.uml2.uml.TemplateSignature umlTemplateSignature = UMLFactory.eINSTANCE.createRedefinableTemplateSignature();
 		safeVisitAll(umlTemplateSignature.getOwnedParameters(), pivotTemplateSignature.getOwnedParameter());
 //		safeVisitAll(umlTemplateSignature.getParameters(), pivotTemplateSignature.getParameter());
@@ -382,7 +383,7 @@ public class Pivot2UMLDeclarationVisitor
 
 
 	@Override
-	public org.eclipse.uml2.uml.ClassifierTemplateParameter visitTypeTemplateParameter(TypeTemplateParameter pivotTypeTemplateParameter) {
+	public org.eclipse.uml2.uml.ClassifierTemplateParameter visitTypeTemplateParameter(@NonNull TypeTemplateParameter pivotTypeTemplateParameter) {
 		org.eclipse.uml2.uml.ClassifierTemplateParameter umlTypeParameter = UMLFactory.eINSTANCE.createClassifierTemplateParameter();
 		umlTypeParameter.setOwnedParameteredElement((ParameterableElement) safeVisit(pivotTypeTemplateParameter.getOwnedParameteredElement()));
 //		umlTypeParameter.setName(((Type) pivotTypeTemplateParameter.getParameteredElement()).getName());

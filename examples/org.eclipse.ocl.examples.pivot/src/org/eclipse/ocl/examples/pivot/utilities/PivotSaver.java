@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.ClassifierType;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -84,7 +85,7 @@ public class PivotSaver extends AbstractPivotSaver
 		}
 
 		@Override
-		public Object visitClass(org.eclipse.ocl.examples.pivot.Class object) {
+		public Object visitClass(@NonNull org.eclipse.ocl.examples.pivot.Class object) {
 			for (Type superClass : object.getSuperClass()) {
 				if (superClass.getTemplateBinding().size() > 0) {
 					context.addSpecializingElement(object);
@@ -95,14 +96,14 @@ public class PivotSaver extends AbstractPivotSaver
 		}
 
 		@Override
-		public Object visitCollectionType(CollectionType object) {
+		public Object visitCollectionType(@NonNull CollectionType object) {
 			Type referredType = object.getElementType();
 			context.addSpecializingElement(object, referredType);
 			return super.visitCollectionType(object);
 		}
 
 		@Override
-		public Object visitLambdaType(LambdaType object) {
+		public Object visitLambdaType(@NonNull LambdaType object) {
 			boolean doneIt = false;
 			Type referredType = object.getContextType();
 			if (context.addSpecializingElement(object, referredType)) {
@@ -125,21 +126,21 @@ public class PivotSaver extends AbstractPivotSaver
 		}
 
 		@Override
-		public Object visitLoopExp(LoopExp object) {
+		public Object visitLoopExp(@NonNull LoopExp object) {
 			Iteration referredIteration = object.getReferredIteration();
 			context.addSpecializingElement(object, referredIteration);
 			return super.visitLoopExp(object);
 		}
 
 		@Override
-		public Object visitOperationCallExp(OperationCallExp object) {
+		public Object visitOperationCallExp(@NonNull OperationCallExp object) {
 			Operation referredOperation = object.getReferredOperation();
 			context.addSpecializingElement(object, referredOperation);
 			return super.visitOperationCallExp(object);
 		}
 
 		@Override
-		public Object visitProperty(Property object) {
+		public Object visitProperty(@NonNull Property object) {
 			Property opposite = object.getOpposite();
 			if (opposite != null) {
 				Resource eResource = opposite.eResource();
@@ -149,7 +150,7 @@ public class PivotSaver extends AbstractPivotSaver
 		}
 
 		@Override
-		public Object visitTemplateParameterSubstitution(TemplateParameterSubstitution object) {
+		public Object visitTemplateParameterSubstitution(@NonNull TemplateParameterSubstitution object) {
 			ParameterableElement actual = object.getActual();
 			if (actual instanceof Type) {
 				context.addSpecializingElement(object, (Type) actual);
@@ -158,14 +159,14 @@ public class PivotSaver extends AbstractPivotSaver
 		}
 
 		@Override
-		public Object visitTypedElement(TypedElement object) {
+		public Object visitTypedElement(@NonNull TypedElement object) {
 			Type referredType = object.getType();
 			context.addSpecializingElement(object, referredType);
 			return null;
 		}
 
 		@Override
-		public Object visitTypeTemplateParameter(TypeTemplateParameter object) {
+		public Object visitTypeTemplateParameter(@NonNull TypeTemplateParameter object) {
 			for (Type constrainingType : object.getConstrainingType()) {
 				if (context.addSpecializingElement(object, constrainingType)) {
 					break;
@@ -174,7 +175,7 @@ public class PivotSaver extends AbstractPivotSaver
 			return null;
 		}
 
-		public Object visiting(Visitable visitable) {
+		public Object visiting(@NonNull Visitable visitable) {
 			return null;
 		}
 	}
@@ -190,7 +191,7 @@ public class PivotSaver extends AbstractPivotSaver
 		}
 
 		@Override
-		public Object visitClass(org.eclipse.ocl.examples.pivot.Class object) {
+		public Object visitClass(@NonNull org.eclipse.ocl.examples.pivot.Class object) {
 			List<Type> superClasses = object.getSuperClass();
 			for (int i = 0; i < superClasses.size(); i++) {
 				Type referredClass = superClasses.get(i);
@@ -203,7 +204,7 @@ public class PivotSaver extends AbstractPivotSaver
 		}
 
 		@Override
-		public Object visitClassifierType(ClassifierType object) {
+		public Object visitClassifierType(@NonNull ClassifierType object) {
 			Type referredType = object.getInstanceType();
 			Type resolvedType = context.resolveType(referredType);
 			if (resolvedType != null) {
@@ -213,7 +214,7 @@ public class PivotSaver extends AbstractPivotSaver
 		}
 
 		@Override
-		public Object visitCollectionType(CollectionType object) {
+		public Object visitCollectionType(@NonNull CollectionType object) {
 			Type referredType = object.getElementType();
 			Type resolvedType = context.resolveType(referredType);
 			if ((resolvedType != null) && (resolvedType != referredType)) {
@@ -223,7 +224,7 @@ public class PivotSaver extends AbstractPivotSaver
 		}
 
 		@Override
-		public Object visitLambdaType(LambdaType object) {
+		public Object visitLambdaType(@NonNull LambdaType object) {
 			Type referredType = object.getContextType();
 			Type resolvedType = context.resolveType(referredType);
 			if (resolvedType != null) {
@@ -246,7 +247,7 @@ public class PivotSaver extends AbstractPivotSaver
 		}
 
 		@Override
-		public Object visitLoopExp(LoopExp object) {
+		public Object visitLoopExp(@NonNull LoopExp object) {
 			Iteration referredIteration = object.getReferredIteration();
 			Iteration resolvedIteration = context.resolveOperation(referredIteration);
 			if (resolvedIteration != null) {
@@ -256,7 +257,7 @@ public class PivotSaver extends AbstractPivotSaver
 		}
 
 		@Override
-		public Object visitOperationCallExp(OperationCallExp object) {	// FIXME Obsolete once referredOperation is not a specialization
+		public Object visitOperationCallExp(@NonNull OperationCallExp object) {	// FIXME Obsolete once referredOperation is not a specialization
 			Operation referredOperation = object.getReferredOperation();
 			Operation resolvedOperation = context.resolveOperation(referredOperation);
 			if (resolvedOperation != null) {
@@ -266,7 +267,7 @@ public class PivotSaver extends AbstractPivotSaver
 		}
 
 		@Override
-		public Object visitTemplateParameterSubstitution(TemplateParameterSubstitution object) {
+		public Object visitTemplateParameterSubstitution(@NonNull TemplateParameterSubstitution object) {
 			Type referredType = (Type) object.getActual();
 			Type resolvedType = context.resolveType(referredType);
 			if (resolvedType != null) {
@@ -276,7 +277,7 @@ public class PivotSaver extends AbstractPivotSaver
 		}
 
 		@Override
-		public Object visitTypeTemplateParameter(TypeTemplateParameter object) {
+		public Object visitTypeTemplateParameter(@NonNull TypeTemplateParameter object) {
 			List<Type> constrainingTypes = object.getConstrainingType();
 			for (int i = 0; i < constrainingTypes.size(); i++) {
 				Type referredType = constrainingTypes.get(i);
@@ -289,7 +290,7 @@ public class PivotSaver extends AbstractPivotSaver
 		}
 
 		@Override
-		public Object visitTypedElement(TypedElement object) {
+		public Object visitTypedElement(@NonNull TypedElement object) {
 			Type referredType = object.getType();
 			Type resolvedType = context.resolveType(referredType);
 			if (resolvedType != null) {
@@ -298,7 +299,7 @@ public class PivotSaver extends AbstractPivotSaver
 			return null;
 		}
 
-		public Object visiting(Visitable visitable) {
+		public Object visiting(@NonNull Visitable visitable) {
 			throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for PivotSaver Resolve pass");
 		}
 	}

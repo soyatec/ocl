@@ -28,6 +28,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
@@ -318,7 +319,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	}
 
 	@Override
-	public String visitAnyType(AnyType object) {
+	public String visitAnyType(@NonNull AnyType object) {
 		appendName(object);
 		return null;
 	}
@@ -331,7 +332,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	 * @return string source.ref
 	 */
 	@Override
-	public String visitAssociationClassCallExp(AssociationClassCallExp ac) {
+	public String visitAssociationClassCallExp(@NonNull AssociationClassCallExp ac) {
 		safeVisit(ac.getSource());
 		append("."); //$NON-NLS-1$
 		appendName(ac.getReferredAssociationClass()); //$NON-NLS-1$
@@ -353,13 +354,13 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	 * @return the value of the boolean literal as a java.lang.Boolean.
 	 */
 	@Override
-	public String visitBooleanLiteralExp(BooleanLiteralExp bl) {
+	public String visitBooleanLiteralExp(@NonNull BooleanLiteralExp bl) {
 		append(Boolean.toString(bl.isBooleanSymbol()));
 		return null;
 	}
 
 	@Override
-	public String visitClass(org.eclipse.ocl.examples.pivot.Class cls) {
+	public String visitClass(@NonNull org.eclipse.ocl.examples.pivot.Class cls) {
 		TemplateParameter owningTemplateParameter = cls.getOwningTemplateParameter();
 		if (owningTemplateParameter != null) {
 			appendName(cls);
@@ -383,7 +384,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	}
 
 	@Override
-	public String visitClassifierType(ClassifierType object) {
+	public String visitClassifierType(@NonNull ClassifierType object) {
 		appendName(object);
 		if (object.getTemplateBinding().size() > 0) {
 			appendTemplateBindings(object.getTemplateBinding());
@@ -403,7 +404,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
      * Returns the result of {@link #handleCollectionItem(CollectionItem, Object)}
      */
     @Override
-	public String visitCollectionItem(CollectionItem item) {
+	public String visitCollectionItem(@NonNull CollectionItem item) {
     	safeVisit(item.getItem());  	
         return null;
     }
@@ -414,7 +415,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
      * Returns the result of {@link #handleCollectionLiteralExp(CollectionLiteralExp, List)}.
      */
 	@Override
-	public String visitCollectionLiteralExp(CollectionLiteralExp cl) {
+	public String visitCollectionLiteralExp(@NonNull CollectionLiteralExp cl) {
 		// construct the appropriate collection from the parts
 		// based on the collection kind.
 		switch (cl.getKind()) {
@@ -452,7 +453,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
      * Returns the result of {@link #handleCollectionRange(CollectionRange, Object, Object)}.
      */
     @Override
-	public String visitCollectionRange(CollectionRange range) {
+	public String visitCollectionRange(@NonNull CollectionRange range) {
         safeVisit(range.getFirst());
         append(" .. ");
         safeVisit(range.getLast());
@@ -460,7 +461,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
     }
 
 	@Override
-	public String visitCollectionType(CollectionType object) {
+	public String visitCollectionType(@NonNull CollectionType object) {
 		appendName(object);
 		appendTemplateBindings(object.getTemplateBinding());
 		appendTemplateSignature(object.getOwnedTemplateSignature());
@@ -471,7 +472,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	 * Renders a constraint with its context and expression.
 	 */
 	@Override
-	public String visitConstraint(Constraint constraint) {
+	public String visitConstraint(@NonNull Constraint constraint) {
 		List<? extends EObject> constrained = constraint.getConstrainedElement();
 		if (!constrained.isEmpty()) {
 			EObject elem = constrained.get(0);
@@ -517,7 +518,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	 * @return the string representation
 	 */
 	@Override
-	public String visitConstructorExp(ConstructorExp constructorExp) {
+	public String visitConstructorExp(@NonNull ConstructorExp constructorExp) {
 		appendQualifiedName(constructorExp.getType());
 		append("{");//$NON-NLS-1$
 		String prefix = "";
@@ -534,7 +535,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
      * Visits the tuple constructor part's value, if any.
      */
 	@Override
-	public String visitConstructorPart(ConstructorPart part) {
+	public String visitConstructorPart(@NonNull ConstructorPart part) {
 		appendName(part.getReferredProperty());
 		OCLExpression initExpression = part.getInitExpression();
 		if (initExpression != null) {
@@ -552,13 +553,13 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	 * @return the enumeration literal toString()
 	 */
 	@Override
-	public String visitEnumLiteralExp(EnumLiteralExp el) {
+	public String visitEnumLiteralExp(@NonNull EnumLiteralExp el) {
 		appendQualifiedName(el.getReferredEnumLiteral());
 		return null;
 	}
 
 	@Override
-	public String visitEnumerationLiteral(EnumerationLiteral el) {
+	public String visitEnumerationLiteral(@NonNull EnumerationLiteral el) {
 		appendQualifiedName(el.getEnumeration(), "::", el);
 		return null;
 	}
@@ -567,7 +568,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	 * Renders an ExpressionInOCL with its context variables and body.
 	 */
 	@Override
-	public String visitExpressionInOCL(ExpressionInOCL expression) {
+	public String visitExpressionInOCL(@NonNull ExpressionInOCL expression) {
 		return safeVisit(expression.getBodyExpression());
 	}
 
@@ -611,7 +612,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	 * @return the string representation
 	 */
 	@Override
-	public String visitIfExp(IfExp ifExp) {
+	public String visitIfExp(@NonNull IfExp ifExp) {
 		append("if ");  //$NON-NLS-1$
 		safeVisit(ifExp.getCondition());
 		append(" then "); //$NON-NLS-1$
@@ -630,19 +631,19 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	 * @return String
 	 */
 	@Override
-	public String visitIntegerLiteralExp(IntegerLiteralExp il) {
+	public String visitIntegerLiteralExp(@NonNull IntegerLiteralExp il) {
 		append(il.getIntegerSymbol());
 		return null;
 	}
 
 	@Override
-	public String visitInvalidLiteralExp(InvalidLiteralExp il) {
+	public String visitInvalidLiteralExp(@NonNull InvalidLiteralExp il) {
 		append("invalid");
 		return null;
 	}
 
 	@Override
-	public String visitInvalidType(InvalidType object) {
+	public String visitInvalidType(@NonNull InvalidType object) {
 		appendName(object);
 		return null;
 	}
@@ -655,7 +656,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	 * @return the string representation
 	 */
 	@Override
-	public String visitIterateExp(IterateExp callExp) {
+	public String visitIterateExp(@NonNull IterateExp callExp) {
 		safeVisit(callExp.getSource());
 		append("->");
 		appendName(callExp.getReferredIteration());
@@ -677,7 +678,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	}
 
 	@Override
-	public String visitIteration(Iteration iteration) {
+	public String visitIteration(@NonNull Iteration iteration) {
 		appendQualifiedName(iteration.getOwningType(), ".", iteration);
 		appendTemplateBindings(iteration.getTemplateBinding());
 		appendTemplateSignature(iteration.getOwnedTemplateSignature());
@@ -713,7 +714,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	 * @return the string representation
 	 */
 	@Override
-	public String visitIteratorExp(IteratorExp callExp) {
+	public String visitIteratorExp(@NonNull IteratorExp callExp) {
 		safeVisit(callExp.getSource());
 		append("->");
 		appendName(callExp.getReferredIteration());
@@ -733,7 +734,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	}
 
 	@Override
-	public String visitLambdaType(LambdaType lambda) {
+	public String visitLambdaType(@NonNull LambdaType lambda) {
 		appendName(lambda);
 		Type contextType = lambda.getContextType();
 		if (contextType != null) {
@@ -763,7 +764,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	 * @return the string representation
 	 */
 	@Override
-	public String visitLetExp(LetExp letExp) {
+	public String visitLetExp(@NonNull LetExp letExp) {
 		append("let "); //$NON-NLS-1$
 		safeVisit(letExp.getVariable());
 		append(" in "); //$NON-NLS-1$
@@ -776,7 +777,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
      * Returns the result of {@link #handleMessageExp(MessageExp, Object, List)}.
      */
 	@Override
-	public String visitMessageExp(MessageExp messageExp) {
+	public String visitMessageExp(@NonNull MessageExp messageExp) {
 		safeVisit(messageExp.getTarget());
 		append((messageExp.getType() instanceof CollectionType) ? "^^" : "^"); //$NON-NLS-1$//$NON-NLS-2$
 		if (messageExp.getCalledOperation() != null) {
@@ -796,13 +797,13 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	}
 
 	@Override
-	public String visitNullLiteralExp(NullLiteralExp il) {
+	public String visitNullLiteralExp(@NonNull NullLiteralExp il) {
 		append("null");
 		return null;
 	}
 
 	@Override
-	public String visitOpaqueExpression(OpaqueExpression object) {
+	public String visitOpaqueExpression(@NonNull OpaqueExpression object) {
 		String body = PivotUtil.getBody(object);
 		if (body != null) {
 			append(body);
@@ -811,7 +812,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	}
 
 	@Override
-	public String visitOperation(Operation operation) {
+	public String visitOperation(@NonNull Operation operation) {
 		appendQualifiedName(operation.getOwningType(), ".", operation);
 		appendTemplateBindings(operation.getTemplateBinding());
 		appendTemplateSignature(operation.getOwnedTemplateSignature());
@@ -849,7 +850,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	 * @return string
 	 */
 	@Override
-	public String visitOperationCallExp(OperationCallExp oc) {
+	public String visitOperationCallExp(@NonNull OperationCallExp oc) {
         OCLExpression source = oc.getSource();
 		safeVisit(source);
 		Operation oper = oc.getReferredOperation();
@@ -876,31 +877,31 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	}
 
 	@Override
-	public String visitPackage(org.eclipse.ocl.examples.pivot.Package pkg) {
+	public String visitPackage(@NonNull org.eclipse.ocl.examples.pivot.Package pkg) {
 		appendQualifiedName(pkg.getNestingPackage(), "::", pkg);
 		return null;
 	}
 
 	@Override
-	public String visitParameter(Parameter parameter) {
+	public String visitParameter(@NonNull Parameter parameter) {
 		appendQualifiedName((NamedElement) parameter.eContainer(), ".", parameter);
 		return null;
 	}
 
 	@Override
-	public String visitPrecedence(Precedence precedence) {
+	public String visitPrecedence(@NonNull Precedence precedence) {
 		appendName(precedence);
 		return null;
 	}
 
 	@Override
-	public String visitPrimitiveType(PrimitiveType object) {
+	public String visitPrimitiveType(@NonNull PrimitiveType object) {
 		appendName(object);
 		return null;
 	}
 
 	@Override
-	public String visitProperty(Property property) {
+	public String visitProperty(@NonNull Property property) {
 		appendQualifiedName(property.getOwningType(), ".", property);
 		return null;
 	}
@@ -913,7 +914,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	 * @return string source.ref
 	 */
 	@Override
-	public String visitPropertyCallExp(PropertyCallExp pc) {
+	public String visitPropertyCallExp(@NonNull PropertyCallExp pc) {
         // source is null when the property call expression is an
         //    association class navigation qualifier
         OCLExpression source = pc.getSource();
@@ -947,19 +948,19 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	 * @return the value of the real literal as a java.lang.Double.
 	 */
 	@Override
-	public String visitRealLiteralExp(RealLiteralExp rl) {
+	public String visitRealLiteralExp(@NonNull RealLiteralExp rl) {
 		append(rl.getRealSymbol());
 		return null;
 	}
 
 	@Override
-	public String visitRoot(Root root) {
+	public String visitRoot(@NonNull Root root) {
 		appendName(root);
 		return null;
 	}
 
 	@Override
-	public String visitStateExp(StateExp s) {
+	public String visitStateExp(@NonNull StateExp s) {
 		appendName(s);
 		return null;
 	}
@@ -972,7 +973,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	 * @return the value of the string literal as a java.lang.String.
 	 */
 	@Override
-	public String visitStringLiteralExp(StringLiteralExp sl) {
+	public String visitStringLiteralExp(@NonNull StringLiteralExp sl) {
 		append("'");
 		append(sl.getStringSymbol());
 		append("'");
@@ -980,7 +981,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	}
 
 	@Override
-	public String visitTemplateBinding(TemplateBinding object) {
+	public String visitTemplateBinding(@NonNull TemplateBinding object) {
 		// s.append(getQualifiedName(object.getFormal(), "/", (NamedElement)
 		// object.getActual()));
 		appendTemplateBindings(Collections.singletonList(object));
@@ -988,7 +989,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	}
 
 	@Override
-	public String visitTemplateParameter(TemplateParameter object) {
+	public String visitTemplateParameter(@NonNull TemplateParameter object) {
 		TemplateSignature signature = object.getSignature();
 		appendName(signature != null ? (NamedElement) signature.getTemplate() : null);
 		append(".");
@@ -997,7 +998,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	}
 
 	@Override
-	public String visitTemplateParameterSubstitution(TemplateParameterSubstitution object) {
+	public String visitTemplateParameterSubstitution(@NonNull TemplateParameterSubstitution object) {
 		TemplateParameter formal = object.getFormal();
 		appendName(formal != null ? (NamedElement) formal.getParameteredElement() : null);
 		append("/");
@@ -1006,7 +1007,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	}
 
 	@Override
-	public String visitTemplateSignature(TemplateSignature object) {
+	public String visitTemplateSignature(@NonNull TemplateSignature object) {
 		// s.append(getQualifiedName(object.getFormal(), "/", (NamedElement)
 		// object.getActual()));
 		appendTemplateSignature(object);
@@ -1021,7 +1022,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	 * @return the string representation
 	 */
 	@Override
-	public String visitTupleLiteralExp(TupleLiteralExp literalExp) {
+	public String visitTupleLiteralExp(@NonNull TupleLiteralExp literalExp) {
 		append("Tuple{");//$NON-NLS-1$
 		String prefix = "";
 		for (TupleLiteralPart part : literalExp.getPart()) {
@@ -1037,7 +1038,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
      * Visits the tuple literal part's value, if any.
      */
 	@Override
-	public String visitTupleLiteralPart(TupleLiteralPart part) {
+	public String visitTupleLiteralPart(@NonNull TupleLiteralPart part) {
 		appendName(part);
 		Type type = part.getType();
 		if (type != null) {
@@ -1053,7 +1054,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	}
 
 	@Override
-	public String visitTupleType(TupleType object) {
+	public String visitTupleType(@NonNull TupleType object) {
 		appendName(object);
 		append("(");
 		String prefix = "";
@@ -1069,7 +1070,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	}
 
 	@Override
-	public String visitTypeExp(TypeExp t) {
+	public String visitTypeExp(@NonNull TypeExp t) {
 		appendQualifiedName(t.getReferredType());
 		return null;
 	}
@@ -1082,7 +1083,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	 * @return String
 	 */
 	@Override
-	public String visitUnlimitedNaturalLiteralExp(UnlimitedNaturalLiteralExp unl) {
+	public String visitUnlimitedNaturalLiteralExp(@NonNull UnlimitedNaturalLiteralExp unl) {
 		BigInteger symbol = unl.getUnlimitedNaturalSymbol();
 		if (symbol.signum() < 0) {
 			append("*");
@@ -1094,7 +1095,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	}
 
 	@Override
-	public String visitUnspecifiedType(UnspecifiedType object) {
+	public String visitUnspecifiedType(@NonNull UnspecifiedType object) {
 		appendName(object);
 		return null;
 	}
@@ -1107,7 +1108,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	 * @return the string representation
 	 */
 	@Override
-	public String visitUnspecifiedValueExp(UnspecifiedValueExp uv) {
+	public String visitUnspecifiedValueExp(@NonNull UnspecifiedValueExp uv) {
 		append("?"); //$NON-NLS-1$
 		if (uv.getType() != null && !(uv.getType() instanceof VoidType)) {
 			append(" : "); //$NON-NLS-1$
@@ -1121,7 +1122,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
      * Returns the result of {@link #handleVariable(Variable, Object)}.
      */
 	@Override
-	public String visitVariable(Variable variable) {
+	public String visitVariable(@NonNull Variable variable) {
 		appendName(variable);
 		Type type = variable.getType();
 		if (type != null) {
@@ -1144,18 +1145,18 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	 * @return the variable name
 	 */
 	@Override
-	public String visitVariableExp(VariableExp v) {
+	public String visitVariableExp(@NonNull VariableExp v) {
 		appendName(v.getReferredVariable());
 		return null;
 	}
 
 	@Override
-	public String visitVoidType(VoidType object) {
+	public String visitVoidType(@NonNull VoidType object) {
 		appendName(object);
 		return null;
 	}
 
-	public String visiting(Visitable visitable) {
+	public String visiting(@NonNull Visitable visitable) {
 		if (visitable == null) {
 			append(NULL_PLACEHOLDER);
 		}

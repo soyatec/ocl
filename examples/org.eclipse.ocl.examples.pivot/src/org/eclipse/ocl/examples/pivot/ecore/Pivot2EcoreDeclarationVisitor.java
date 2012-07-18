@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.common.utils.StringUtils;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Class;
@@ -147,12 +148,12 @@ public class Pivot2EcoreDeclarationVisitor
 		}
 	}
 
-	public EObject visiting(Visitable visitable) {
+	public EObject visiting(@NonNull Visitable visitable) {
 		throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for Pivot2Ecore Declaration pass");
 	}
 
 	@Override
-	public EObject visitAnnotation(Annotation pivotAnnotation) {
+	public EObject visitAnnotation(@NonNull Annotation pivotAnnotation) {
 		EAnnotation eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
 		copyDetails(eAnnotation, pivotAnnotation);
 		eAnnotation.setSource(pivotAnnotation.getName());
@@ -164,7 +165,7 @@ public class Pivot2EcoreDeclarationVisitor
 	}
 
 	@Override
-	public EObject visitClass(Class pivotClass) {
+	public EObject visitClass(@NonNull Class pivotClass) {
 		if (pivotClass.getTemplateBinding().size() > 0) {
 			return null;
 		}
@@ -187,14 +188,14 @@ public class Pivot2EcoreDeclarationVisitor
 	}
 
 	@Override
-	public EObject visitConstraint(Constraint pivotConstraint) {
+	public EObject visitConstraint(@NonNull Constraint pivotConstraint) {
 		EModelElement eModelElement = context.getCreated(EModelElement.class, (Element)pivotConstraint.eContainer());
 		Pivot2Ecore.installDelegate(eModelElement, pivotConstraint, context.getEcoreURI());
 		return null;
 	}
 
 	@Override
-	public EObject visitDataType(DataType pivotDataType) {
+	public EObject visitDataType(@NonNull DataType pivotDataType) {
 		if (pivotDataType.getTemplateBinding().size() > 0) {
 			return null;
 		}
@@ -204,13 +205,13 @@ public class Pivot2EcoreDeclarationVisitor
 	}
 
 	@Override
-	public EObject visitDetail(Detail object) {
+	public EObject visitDetail(@NonNull Detail object) {
 		// TODO Auto-generated method stub
 		return super.visitDetail(object);
 	}
 
 	@Override
-	public EObject visitEnumeration(Enumeration pivotEnumeration) {
+	public EObject visitEnumeration(@NonNull Enumeration pivotEnumeration) {
 		if (pivotEnumeration.getTemplateBinding().size() > 0) {
 			return null;
 		}
@@ -221,7 +222,7 @@ public class Pivot2EcoreDeclarationVisitor
 	}
 
 	@Override
-	public EObject visitEnumerationLiteral(EnumerationLiteral pivotEnumLiteral) {
+	public EObject visitEnumerationLiteral(@NonNull EnumerationLiteral pivotEnumLiteral) {
 		EEnumLiteral eEnumLiteral = EcoreFactory.eINSTANCE.createEEnumLiteral();
 		copyNamedElement(eEnumLiteral, pivotEnumLiteral);
 		if (pivotEnumLiteral.eIsSet(PivotPackage.Literals.ENUMERATION_LITERAL__VALUE)) {
@@ -234,7 +235,7 @@ public class Pivot2EcoreDeclarationVisitor
 	}
 
 	@Override
-	public EObject visitOperation(Operation pivotOperation) {
+	public EObject visitOperation(@NonNull Operation pivotOperation) {
 		if (pivotOperation.getTemplateBinding().size() > 0) {
 			return null;
 		}
@@ -250,7 +251,7 @@ public class Pivot2EcoreDeclarationVisitor
 	}
 
 	@Override
-	public EObject visitPackage(Package pivotPackage) {
+	public EObject visitPackage(@NonNull Package pivotPackage) {
 		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
 		copyNamedElement(ePackage, pivotPackage);
 		safeVisitAll(ePackage.getEAnnotations(), pivotPackage.getOwnedAnnotation());
@@ -267,14 +268,14 @@ public class Pivot2EcoreDeclarationVisitor
 	}
 
 	@Override
-	public EObject visitParameter(Parameter pivotParameter) {
+	public EObject visitParameter(@NonNull Parameter pivotParameter) {
 		EParameter eParameter = EcoreFactory.eINSTANCE.createEParameter();
 		copyTypedElement(eParameter, pivotParameter);
 		return eParameter;
 	}
 
 	@Override
-	public EObject visitProperty(Property pivotProperty) {
+	public EObject visitProperty(@NonNull Property pivotProperty) {
 		if (pivotProperty.isImplicit()) {
 			return null;
 		}
@@ -313,7 +314,7 @@ public class Pivot2EcoreDeclarationVisitor
 	}
 
 	@Override
-	public EObject visitTypeTemplateParameter(TypeTemplateParameter pivotTypeTemplateParameter) {
+	public EObject visitTypeTemplateParameter(@NonNull TypeTemplateParameter pivotTypeTemplateParameter) {
 		ETypeParameter eTypeParameter = EcoreFactory.eINSTANCE.createETypeParameter();
 		eTypeParameter.setName(((Type) pivotTypeTemplateParameter.getParameteredElement()).getName());
 		context.putCreated(pivotTypeTemplateParameter, eTypeParameter);

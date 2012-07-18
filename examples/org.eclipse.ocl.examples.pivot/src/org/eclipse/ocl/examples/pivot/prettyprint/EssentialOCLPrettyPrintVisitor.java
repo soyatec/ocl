@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.pivot.prettyprint;
 import java.math.BigInteger;
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CallExp;
@@ -113,19 +114,19 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	}
 
 	@Override
-	public Object visitBooleanLiteralExp(BooleanLiteralExp object) {
+	public Object visitBooleanLiteralExp(@NonNull BooleanLiteralExp object) {
 		context.append(Boolean.toString(object.isBooleanSymbol()));
 		return null;
 	}
 
 	@Override
-	public Object visitCollectionItem(CollectionItem object) {
+	public Object visitCollectionItem(@NonNull CollectionItem object) {
 		safeVisit(object.getItem());
 		return null;
 	}
 
 	@Override
-	public Object visitCollectionLiteralExp(CollectionLiteralExp object) {
+	public Object visitCollectionLiteralExp(@NonNull CollectionLiteralExp object) {
 		context.appendName(object.getType(), context.getReservedNames());
 		List<CollectionLiteralPart> parts = object.getPart();
 		if (parts.isEmpty()) {
@@ -146,7 +147,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	}
 
 	@Override
-	public Object visitCollectionRange(CollectionRange object) {
+	public Object visitCollectionRange(@NonNull CollectionRange object) {
 		safeVisit(object.getFirst());
 		context.next("", "..", "");
         safeVisit(object.getLast());
@@ -154,7 +155,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	}
 
 	@Override
-	public Object visitConstraint(Constraint object) {
+	public Object visitConstraint(@NonNull Constraint object) {
 		String stereotype = object.getStereotype();
 		if (UMLReflection.BODY.equals(stereotype)) {
 			context.append("body");
@@ -188,7 +189,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	}
 
     @Override
-	public Value visitConstructorExp(ConstructorExp object) {
+	public Value visitConstructorExp(@NonNull ConstructorExp object) {
 		context.appendQualifiedType(object.getType());
 		context.push("{", "");
 		String prefix = ""; //$NON-NLS-1$
@@ -203,7 +204,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
     }
 
 	@Override
-	public String visitConstructorPart(ConstructorPart part) {
+	public String visitConstructorPart(@NonNull ConstructorPart part) {
 		context.appendName(part.getReferredProperty());
 		OCLExpression initExpression = part.getInitExpression();
 		if (initExpression != null) {
@@ -214,19 +215,19 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	}
 
 	@Override
-	public Object visitEnumLiteralExp(EnumLiteralExp object) {
+	public Object visitEnumLiteralExp(@NonNull EnumLiteralExp object) {
 		safeVisit(object.getReferredEnumLiteral());
 		return null;
 	}
 
 	@Override
-	public Object visitExpressionInOCL(ExpressionInOCL object) {
+	public Object visitExpressionInOCL(@NonNull ExpressionInOCL object) {
 		safeVisit(object.getBodyExpression());
 		return null;
 	}
 
 	@Override
-	public Object visitIfExp(IfExp object) {
+	public Object visitIfExp(@NonNull IfExp object) {
 		context.push("if", " ");
 		safeVisit(object.getCondition());
 		context.exdent(" ", "then", " ");
@@ -239,19 +240,19 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	}
 
 	@Override
-	public Object visitIntegerLiteralExp(IntegerLiteralExp object) {
+	public Object visitIntegerLiteralExp(@NonNull IntegerLiteralExp object) {
 		context.append(object.getIntegerSymbol());
 		return null;
 	}
 
 	@Override
-	public Object visitInvalidLiteralExp(InvalidLiteralExp object) {
+	public Object visitInvalidLiteralExp(@NonNull InvalidLiteralExp object) {
 		context.append("invalid");
 		return null;
 	}
 
 	@Override
-	public Object visitIterateExp(IterateExp object) {
+	public Object visitIterateExp(@NonNull IterateExp object) {
 		Iteration referredIteration = object.getReferredIteration();
 		OCLExpression body = object.getBody();
 		Variable result = object.getResult();
@@ -319,7 +320,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	}
 
 	@Override
-	public Object visitIteratorExp(IteratorExp object) {
+	public Object visitIteratorExp(@NonNull IteratorExp object) {
 		Iteration referredIteration = object.getReferredIteration();
 		OCLExpression body = object.getBody();
 		if (context.showNames()) {
@@ -387,7 +388,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	}
 
 	@Override
-	public Object visitLetExp(LetExp object) {
+	public Object visitLetExp(@NonNull LetExp object) {
 		context.push("let", " ");
 		safeVisit(object.getVariable());
 		context.exdent(" ", "in", " ");
@@ -397,13 +398,13 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	}
 
 	@Override
-	public Object visitNullLiteralExp(NullLiteralExp object) {
+	public Object visitNullLiteralExp(@NonNull NullLiteralExp object) {
 		context.append("null");
 		return null;
 	}
 
 	@Override
-	public Object visitOCLExpression(OCLExpression object) {
+	public Object visitOCLExpression(@NonNull OCLExpression object) {
 		context.append("<");
 		context.append(object.eClass().getName());
 		context.append(">");
@@ -411,7 +412,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	}
 
 	@Override
-	public Object visitOpaqueExpression(OpaqueExpression object) {
+	public Object visitOpaqueExpression(@NonNull OpaqueExpression object) {
 		String body = PivotUtil.getBody(object);
 		if (body != null) {
 			context.append(body);
@@ -423,7 +424,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	}
 
 	@Override
-	public Object visitOperationCallExp(OperationCallExp object) {
+	public Object visitOperationCallExp(@NonNull OperationCallExp object) {
 		OCLExpression source = object.getSource();
 		List<OCLExpression> arguments = object.getArgument();
 		Operation referredOperation = object.getReferredOperation();
@@ -494,7 +495,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	}
 
 	@Override
-	public Object visitParameter(Parameter object) {
+	public Object visitParameter(@NonNull Parameter object) {
 		context.appendName(object);
 		Type type = object.getType();
 		if (type != null) {
@@ -505,7 +506,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	}
 
 	@Override
-	public Object visitPropertyCallExp(PropertyCallExp object) {
+	public Object visitPropertyCallExp(@NonNull PropertyCallExp object) {
 		Property referredProperty = object.getReferredProperty();
 		if (context.showNames()) {
 			appendSourceNavigation(object);
@@ -518,13 +519,13 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	}
 
 	@Override
-	public Object visitRealLiteralExp(RealLiteralExp object) {
+	public Object visitRealLiteralExp(@NonNull RealLiteralExp object) {
 		context.append(object.getRealSymbol());
 		return null;
 	}
 
 	@Override
-	public Object visitStringLiteralExp(StringLiteralExp object) {
+	public Object visitStringLiteralExp(@NonNull StringLiteralExp object) {
 		context.append("'");
 		context.append(PivotUtil.convertToOCLString(object.getStringSymbol()));
 		context.append("'");
@@ -532,7 +533,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	}
 
 	@Override
-	public Object visitTupleLiteralExp(TupleLiteralExp object) {
+	public Object visitTupleLiteralExp(@NonNull TupleLiteralExp object) {
 		context.append("Tuple");
 		context.push("{", "");
 		String prefix = ""; //$NON-NLS-1$
@@ -547,7 +548,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	}
 
 	@Override
-	public Object visitTupleLiteralPart(TupleLiteralPart object) {
+	public Object visitTupleLiteralPart(@NonNull TupleLiteralPart object) {
 		context.appendName(object);
 		context.append(" = ");
 		safeVisit(object.getInitExpression());
@@ -555,13 +556,13 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	}
 
 	@Override
-	public Object visitTypeExp(TypeExp object) {
+	public Object visitTypeExp(@NonNull TypeExp object) {
 		context.appendQualifiedType(object.getReferredType());
 		return null;
 	}
 
 	@Override
-	public Object visitUnlimitedNaturalLiteralExp(UnlimitedNaturalLiteralExp object) {
+	public Object visitUnlimitedNaturalLiteralExp(@NonNull UnlimitedNaturalLiteralExp object) {
 		BigInteger symbol = object.getUnlimitedNaturalSymbol();
 		if (symbol.signum() < 0) {
 			context.append("*");
@@ -573,7 +574,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	}
 
 	@Override
-	public Object visitVariable(Variable object) {
+	public Object visitVariable(@NonNull Variable object) {
 		context.appendName(object);
 		Type type = object.getType();
 		if (type != null) {
@@ -589,7 +590,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	}
 
 	@Override
-	public Object visitVariableExp(VariableExp object) {
+	public Object visitVariableExp(@NonNull VariableExp object) {
 		VariableDeclaration referredVariable = object.getReferredVariable();
 		if ((referredVariable != null) && "self".equals(referredVariable.getName())) {
 			context.appendName(referredVariable, null);

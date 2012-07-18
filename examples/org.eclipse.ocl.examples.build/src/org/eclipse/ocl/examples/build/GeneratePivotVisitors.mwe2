@@ -34,8 +34,9 @@ Workflow {
     	platformUri = ".."
     }
     component = PivotVisitorCodeGenerator { resourceSet = resourceSet
-    	ecoreFile = "/${projectName}/model/Pivot.ecore"
-    	javaFolder = "/${projectName}/emf-gen"
+    	projectName = "${projectName}"
+    	ecoreFile = "model/Pivot.ecore"
+    	javaFolder = "emf-gen"
     	javaPackageName = "${projectName}"
     	javaClassName = "Visitor"
     }
