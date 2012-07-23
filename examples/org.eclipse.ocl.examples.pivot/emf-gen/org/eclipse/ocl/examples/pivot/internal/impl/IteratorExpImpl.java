@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
@@ -27,22 +28,38 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
+import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.validation.ValidationWarning;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
+import org.eclipse.ocl.examples.library.iterator.ClosureIteration;
+import org.eclipse.ocl.examples.library.iterator.SortedByIteration;
+import org.eclipse.ocl.examples.library.oclany.OclComparableCompareToOperation;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.IteratorExp;
+import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
+import org.eclipse.ocl.examples.pivot.TemplateParameter;
+import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.bodies.IteratorExpBodies;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.osgi.util.NLS;
 
 /**
@@ -75,6 +92,88 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	protected EClass eStaticClass()
 	{
 		return PivotPackage.Literals.ITERATOR_EXP;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validateClosureBodyTypeIsConformanttoIteratorType(DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		if (getReferredIteration().getImplementation() != ClosureIteration.INSTANCE) {
+			return true;
+		}
+		Diagnostic diagnostic = null;
+		MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(eResource());
+		Type bodyType = getBody().getType();
+		if (bodyType instanceof CollectionType) {
+			bodyType = ((CollectionType)bodyType).getElementType();
+		}
+		Type iteratorType = getIterator().get(0).getType();
+		Map<TemplateParameter, ParameterableElement> bindings = new HashMap<TemplateParameter, ParameterableElement>();
+		if (!metaModelManager.conformsTo(bodyType, iteratorType, bindings)) {
+			if (diagnostics == null) {
+				return false;
+			}
+			diagnostic = new ValidationWarning(OCLMessages.IncompatibleBodyType_WARNING_, bodyType, iteratorType);
+		}
+		if (diagnostic == null) {
+			return true;
+		}
+	    diagnostics.add(diagnostic);
+		return false;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validateSortedByIteratorTypeIsComparable(DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		if (getReferredIteration().getImplementation() != SortedByIteration.INSTANCE) {
+			return true;
+		}
+		Diagnostic diagnostic = null;
+		MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(eResource());
+		try {
+			@NonNull Type type = DomainUtil.nonNullPivot(getBody().getType());
+			TemplateParameter templateParameter = type.getOwningTemplateParameter();
+			if (templateParameter != null) {
+				Map<TemplateParameter, ParameterableElement> templateParameterSubstitutions = PivotUtil.getAllTemplateParameterSubstitutions(null, (TemplateableElement) getSource().getType());
+				type = (Type) DomainUtil.nonNullPivot(templateParameterSubstitutions.get(templateParameter));
+			}
+			type = PivotUtil.getBehavioralType(type);			// FIXME make this a general facility
+			DomainInheritance comparableType = metaModelManager.getOclComparableType().getInheritance(metaModelManager);
+			DomainInheritance selfType = metaModelManager.getOclSelfType().getInheritance(metaModelManager);
+			DomainOperation staticOperation = comparableType.lookupLocalOperation(metaModelManager, LibraryConstants.COMPARE_TO, selfType);
+			if (staticOperation == null) {
+				if (diagnostics == null) {
+					return false;
+				}
+				diagnostic = new ValidationWarning(OCLMessages.UnresolvedOperation_ERROR_, LibraryConstants.COMPARE_TO, String.valueOf(comparableType));
+			}
+			else {
+				LibraryFeature implementation = type.lookupImplementation(metaModelManager, staticOperation);
+				if (implementation == OclComparableCompareToOperation.INSTANCE) {
+					if (diagnostics == null) {
+						return false;
+					}
+					diagnostic = new ValidationWarning(OCLMessages.UnresolvedOperation_ERROR_, LibraryConstants.COMPARE_TO, String.valueOf(type));
+				}
+			}
+		} catch (Exception e) {
+			if (diagnostics == null) {
+				return false;
+			}
+			diagnostic = new ValidationWarning(e.getLocalizedMessage());
+		}
+		if (diagnostic == null) {
+			return true;
+		}
+	    diagnostics.add(diagnostic);
+		return false;
 	}
 
 	/**
@@ -1143,6 +1242,10 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 				return validateSourceIsCollection((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.ITERATOR_EXP___VALIDATE_NO_INITIALIZERS__DIAGNOSTICCHAIN_MAP:
 				return validateNoInitializers((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case PivotPackage.ITERATOR_EXP___VALIDATE_CLOSURE_BODY_TYPE_IS_CONFORMANTTO_ITERATOR_TYPE__DIAGNOSTICCHAIN_MAP:
+				return validateClosureBodyTypeIsConformanttoIteratorType((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case PivotPackage.ITERATOR_EXP___VALIDATE_SORTED_BY_ITERATOR_TYPE_IS_COMPARABLE__DIAGNOSTICCHAIN_MAP:
+				return validateSortedByIteratorTypeIsComparable((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.ITERATOR_EXP___VALIDATE_ANY_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP:
 				return validateAnyHasOneIterator((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.ITERATOR_EXP___VALIDATE_ANY_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP:

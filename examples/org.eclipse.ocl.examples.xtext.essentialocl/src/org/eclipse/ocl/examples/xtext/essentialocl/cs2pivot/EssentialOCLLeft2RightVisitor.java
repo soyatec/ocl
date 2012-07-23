@@ -23,11 +23,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.ocl.examples.domain.library.LibraryFeature;
-import org.eclipse.ocl.examples.domain.library.LibraryValidator;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CallExp;
@@ -142,7 +139,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 		this.metaModelManager = context.getMetaModelManager();
 	}
 
-	protected OCLExpression zzcheckImplementation(NamedExpCS csNavigatingExp,
+/*	protected OCLExpression zzcheckImplementation(NamedExpCS csNavigatingExp,
 			Feature feature, CallExp callExp, OCLExpression expression) {
 		LibraryFeature implementation;
 		try {
@@ -160,7 +157,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 			}
 		}
 		return expression;
-	}
+	} */
 
 /*	private TemplateParameterSubstitution findFormalParameter(TemplateParameter formalTemplateParameter, Type actualType) {
 		for (TemplateBinding actualTemplateBinding : actualType.getTemplateBinding()) {

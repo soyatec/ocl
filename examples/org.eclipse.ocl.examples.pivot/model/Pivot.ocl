@@ -58,6 +58,12 @@ inv CompatibleReturn:
 inv LoadableImplementation:
 	true
 
+context IteratorExp
+inv ClosureBodyTypeIsConformanttoIteratorType:
+	true
+inv SortedByIteratorTypeIsComparable:
+	true
+
 context TypedMultiplicityElement
 def: CompatibleBody(bodySpecification : ValueSpecification) : Boolean =
 	let bodyType : Type = bodySpecification.type in

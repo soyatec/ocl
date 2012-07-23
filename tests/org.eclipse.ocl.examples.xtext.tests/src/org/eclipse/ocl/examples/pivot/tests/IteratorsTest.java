@@ -453,8 +453,7 @@ public class IteratorsTest extends PivotTestSuite
         // expression
         // is more general than the iterator variable, so cannot be
         // assigned recursively
-        assertBadQuery(SemanticException.class, Diagnostic.ERROR,
-        	"self->closure(getFakes())",
+        assertValidationErrorQuery("self->closure(getFakes())",
         	OCLMessages.IncompatibleBodyType_WARNING_, fake, subFake);
 
         // this should parse OK because the result of the closure expression
@@ -721,8 +720,7 @@ public class IteratorsTest extends PivotTestSuite
     public void test_sortedByRequiresComparability_192729() {
     	Type context = metaModelManager.getPivotType("Package");
     	Type type = metaModelManager.getPivotType("Type");
-     	assertBadQuery(SemanticException.class, Diagnostic.ERROR,
-    		"ownedType->sortedBy(e | e)",
+     	assertValidationErrorQuery("ownedType->sortedBy(e | e)",
         	OCLMessages.UnresolvedOperation_ERROR_, LibraryConstants.COMPARE_TO, type + "");
        
     	assertQuery(context, "ownedType->sortedBy(e | e.name)");

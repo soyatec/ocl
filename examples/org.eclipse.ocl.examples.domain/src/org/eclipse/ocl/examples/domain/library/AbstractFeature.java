@@ -16,25 +16,9 @@
  */
 package org.eclipse.ocl.examples.domain.library;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 
 /**
  */
 public abstract class AbstractFeature implements LibraryFeature
 {
-	public static @Nullable LibraryValidator getLibraryValidator(@NonNull Object contextObject, @NonNull String validatorClassName) {
-		try {
-			Class<?> validatorClass = contextObject.getClass().getClassLoader().loadClass(validatorClassName);
-			return (LibraryValidator) validatorClass.newInstance();
-		} catch (Exception e) {
-			e.printStackTrace();		// WIP FIXME
-			return null;
-		}
-	}
-	
-	public @Nullable LibraryValidator getValidator(@NonNull DomainStandardLibrary standardLibrary) {
-		return null;
-	}
 }

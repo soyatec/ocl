@@ -35,7 +35,6 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
-import org.eclipse.ocl.examples.domain.library.LibraryValidator;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -148,7 +147,6 @@ public class SortedByIteration extends AbstractIteration
 	}
 
 	public static final @NonNull SortedByIteration INSTANCE = new SortedByIteration();
-	private static LibraryValidator validator = null; 
 
 	public @NonNull SortedByIteration.SortingValue createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) throws InvalidValueException {
 		DomainStandardLibrary standardLibrary = evaluator.getValueFactory().getStandardLibrary();
@@ -164,14 +162,6 @@ public class SortedByIteration extends AbstractIteration
 			throw new InvalidValueException(e);
 		}
 		throw new InvalidValueException(NLS.bind(EvaluatorMessages.UndefinedOperation, String.valueOf(comparableType) + "::" + LibraryConstants.COMPARE_TO)); //$NON-NLS-1$
-	}
-
-	@Override
-	public LibraryValidator getValidator(@NonNull DomainStandardLibrary standardLibrary) {
-		if (validator == null) {
-			validator = getLibraryValidator(standardLibrary, "org.eclipse.ocl.examples.pivot.library.validators.ValidateSortedByIteration"); //$NON-NLS-1$
-		}
-		return validator;
 	}
 	
 	@Override

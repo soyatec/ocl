@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.pivot.tests;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -83,6 +84,59 @@ public class PivotTestCase extends TestCase
 	public static final String PLUGIN_ID = "org.eclipse.ocl.examples.xtext.tests";
 	private static ProjectMap projectMap = null;
 
+	public static void assertDiagnostics(String prefix, List<Diagnostic> diagnostics, String... messages) {
+		Map<String, Integer> expected = new HashMap<String, Integer>();
+		for (String message : messages) {
+			Integer count = expected.get(message);
+			count = count == null ? 1 : count + 1;
+			expected.put(message, count);
+		}
+		StringBuilder s1 = null;
+		for (Diagnostic diagnostic : diagnostics) {
+			String actual = diagnostic.getMessage();
+			Integer expectedCount = expected.get(actual);
+			if ((expectedCount == null) || (expectedCount <= 0)) {
+				if (s1 == null) {
+					s1 = new StringBuilder();
+					s1.append("\nUnexpected errors");
+				}
+				s1.append("\n");
+				s1.append(actual);
+			}
+			else {
+				expected.put(actual, expectedCount-1);
+			}
+		}
+		StringBuilder s2 = null;
+		for (String key : expected.keySet()) {
+			Integer count = expected.get(key);
+			while (count-- > 0) {
+				if (s2 == null) {
+					s2 = new StringBuilder();
+					s2.append("\nMissing errors");
+				}
+				s2.append("\n");
+				s2.append(key);
+			}
+		}
+		if (s1 == null) {
+			if (s2 == null) {
+				return;
+			}
+			else {
+				fail(s2.toString());
+			}
+		}
+		else {
+			if (s2 == null) {
+				fail(s1.toString());
+			}
+			else {
+				fail(s1.toString() + s2.toString());
+			}
+		}
+	}
+
 	public static void assertNoDiagnosticErrors(String message, XtextResource xtextResource) {
 		List<Diagnostic> diagnostics = xtextResource.validateConcreteSyntax();
 		if (diagnostics.size() > 0) {
@@ -146,6 +200,10 @@ public class PivotTestCase extends TestCase
 	}
 
 	public static void assertResourceErrors(String prefix, Resource resource, String... messages) {
+		assertResourceDiagnostics(prefix, resource.getErrors(), messages);
+	}
+
+	public static void assertResourceDiagnostics(String prefix, List<Resource.Diagnostic> resourceDiagnostics, String... messages) {
 		Map<String, Integer> expected = new HashMap<String, Integer>();
 		for (String message : messages) {
 			Integer count = expected.get(message);
@@ -153,7 +211,7 @@ public class PivotTestCase extends TestCase
 			expected.put(message, count);
 		}
 		StringBuilder s1 = null;
-		for (Resource.Diagnostic error : resource.getErrors()) {
+		for (Resource.Diagnostic error : resourceDiagnostics) {
 			String actual = error.getMessage();
 			Integer expectedCount = expected.get(actual);
 			if ((expectedCount == null) || (expectedCount <= 0)) {
@@ -196,6 +254,16 @@ public class PivotTestCase extends TestCase
 				fail(s1.toString() + s2.toString());
 			}
 		}
+	}
+
+	public static void assertValidationDiagnostics(String prefix, Resource resource, String... messages) {
+		Map<Object, Object> validationContext = DomainSubstitutionLabelProvider.createDefaultContext(Diagnostician.INSTANCE);
+		List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
+		for (EObject eObject : resource.getContents()) {
+			Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject, validationContext);
+			diagnostics.addAll(diagnostic.getChildren());
+		}
+		assertDiagnostics(prefix, diagnostics, messages);
 	}
 	
 	public static Resource cs2ecore(OCL ocl, String testDocument, URI ecoreURI) throws IOException {

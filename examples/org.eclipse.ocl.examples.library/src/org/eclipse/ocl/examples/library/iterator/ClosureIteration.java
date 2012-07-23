@@ -19,13 +19,11 @@ package org.eclipse.ocl.examples.library.iterator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
-import org.eclipse.ocl.examples.domain.library.LibraryValidator;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -36,18 +34,9 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
 public class ClosureIteration extends AbstractIteration
 {
 	public static final @NonNull ClosureIteration INSTANCE = new ClosureIteration();
-	private static LibraryValidator validator = null; 
 
 	public @NonNull CollectionValue.Accumulator createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) {
 		return evaluator.getValueFactory().createCollectionAccumulatorValue((DomainCollectionType) accumulatorType);
-	}
-
-	@Override
-	public LibraryValidator getValidator(@NonNull DomainStandardLibrary standardLibrary) {
-		if (validator == null) {
-			validator = getLibraryValidator(standardLibrary, "org.eclipse.ocl.examples.pivot.library.validators.ValidateClosureIteration"); //$NON-NLS-1$
-		}
-		return validator;
 	}
 
 	/**
