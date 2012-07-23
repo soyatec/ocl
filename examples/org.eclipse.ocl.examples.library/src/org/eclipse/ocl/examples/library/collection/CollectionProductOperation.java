@@ -18,31 +18,40 @@ package org.eclipse.ocl.examples.library.collection;
 
 import java.util.Set;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.osgi.util.NLS;
 
 /**
  * CollectionProductOperation realises the Collection::product() library operation.
  */
-public class CollectionProductOperation extends AbstractBinaryOperation // FIXME Make this an AbstractBinaryOperation
+public class CollectionProductOperation extends AbstractBinaryOperation
 {
 	public static final CollectionProductOperation INSTANCE = new CollectionProductOperation();
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceVal, Value argVal) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal, @NonNull Value argVal) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		CollectionValue sourceValue = sourceVal.asCollectionValue();
 		CollectionValue argumentValue = argVal.asCollectionValue();
 		DomainCollectionType collType = (DomainCollectionType)returnType;
-		DomainTupleType tupleType = (DomainTupleType) collType.getElementType();
+		DomainTupleType tupleType = (DomainTupleType) DomainUtil.nonNullModel(collType.getElementType());
 		Set<TupleValue> product = sourceValue.product(argumentValue, tupleType);
-        return valueFactory.createSetValue(collType, product);
+        if (product != null) {
+        	return valueFactory.createSetValue(collType, product);
+        }
+        else {
+        	return valueFactory.throwInvalidValueException(NLS.bind(EvaluatorMessages.MissingResult, "product")); //$NON-NLS-1$
+        }
 	}
 }

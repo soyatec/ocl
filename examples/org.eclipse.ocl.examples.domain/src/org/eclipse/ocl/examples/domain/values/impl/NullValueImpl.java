@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.domain.values.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.values.NullValue;
@@ -39,7 +40,7 @@ public class NullValueImpl extends UndefinedCollectionValueImpl implements NullV
 		return ValuesPackage.Literals.NULL_VALUE;
 	}
 
-	public NullValueImpl(ValueFactory valueFactory) {
+	public NullValueImpl(@NonNull ValueFactory valueFactory) {
 		super(valueFactory);
 	}
 
@@ -53,7 +54,7 @@ public class NullValueImpl extends UndefinedCollectionValueImpl implements NullV
 		return null;
 	}
 
-	public Value asValidValue() {
+	public @NonNull Value asValidValue() {
 		return this;
 	}
 
@@ -62,7 +63,7 @@ public class NullValueImpl extends UndefinedCollectionValueImpl implements NullV
 		return obj instanceof NullValue;
 	}
 
-	public DomainType getType() {
+	public @NonNull DomainType getType() {
 		return valueFactory.getStandardLibrary().getOclVoidType();
 	}
 
@@ -75,10 +76,6 @@ public class NullValueImpl extends UndefinedCollectionValueImpl implements NullV
 	public boolean isNull() {
 		return true;
 	}
-
-//	public InvalidValue toInvalidValue() {
-//		return valueFactory.createInvalidValue(this, null, "null", null);
-//	}
 
 	@Override
 	public String toString() {

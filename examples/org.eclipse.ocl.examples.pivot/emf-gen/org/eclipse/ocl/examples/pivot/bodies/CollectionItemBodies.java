@@ -20,6 +20,7 @@
  */
 package org.eclipse.ocl.examples.pivot.bodies;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -47,35 +48,35 @@ public class CollectionItemBodies
 	 */
 	public static class _invariant_TypeIsItemType extends AbstractUnaryOperation
 	{
-		public static _invariant_TypeIsItemType INSTANCE = new _invariant_TypeIsItemType();
+		public static @NonNull _invariant_TypeIsItemType INSTANCE = new _invariant_TypeIsItemType();
 	
 		/*
 		type = item.type
 		*/
-		public Value evaluate(DomainEvaluator evaluator, DomainType returnType, final Value self) throws InvalidValueException {
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
-			final ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
-			final ExecutorType T_Type = OCLstdlibTables.Types._Type;
-			final ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
-			final LibraryProperty IP_TypedElement_type = P_TypedElement_type.getImplementation();
-			final ExecutorType T_pivot__OCLExpression = PivotTables.Types._OCLExpression;
-			final ExecutorProperty P_CollectionItem_item = PivotTables.Properties._CollectionItem__item;
-			final LibraryProperty IP_CollectionItem_item = P_CollectionItem_item.getImplementation();
+		public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Value self) throws InvalidValueException {
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
+			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
+			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
+			final @NonNull LibraryProperty IP_TypedElement_type = P_TypedElement_type.getImplementation();
+			final @NonNull ExecutorType T_pivot__OCLExpression = PivotTables.Types._OCLExpression;
+			final @NonNull ExecutorProperty P_CollectionItem_item = PivotTables.Properties._CollectionItem__item;
+			final @NonNull LibraryProperty IP_CollectionItem_item = P_CollectionItem_item.getImplementation();
 			
 			
-			Value A_symbol_78 = IP_TypedElement_type.evaluate(evaluator, T_Type, self, P_TypedElement_type);
+			Value A_symbol_347 = IP_TypedElement_type.evaluate(evaluator, T_Type, self, P_TypedElement_type);
 			
 			
-			Value A_symbol_79 = IP_CollectionItem_item.evaluate(evaluator, T_pivot__OCLExpression, self, P_CollectionItem_item);
+			Value A_symbol_348 = IP_CollectionItem_item.evaluate(evaluator, T_pivot__OCLExpression, self, P_CollectionItem_item);
 			
-			Value A_symbol_80 = IP_TypedElement_type.evaluate(evaluator, T_Type, A_symbol_79, P_TypedElement_type);
+			Value A_symbol_349 = IP_TypedElement_type.evaluate(evaluator, T_Type, A_symbol_348, P_TypedElement_type);
 			
-			DomainType static_A_symbol_81 = valueFactory.typeOf(A_symbol_78, A_symbol_80);
-			LibraryBinaryOperation dynamic_A_symbol_81 = (LibraryBinaryOperation)static_A_symbol_81.lookupImplementation(standardLibrary, O_OclAny__eq_);
-			Value A_symbol_81 = dynamic_A_symbol_81.evaluate(evaluator, T_Boolean, A_symbol_78, A_symbol_80);
-			return A_symbol_81;
+			DomainType static_A_symbol_350 = valueFactory.typeOf(A_symbol_347, A_symbol_349);
+			LibraryBinaryOperation dynamic_A_symbol_350 = (LibraryBinaryOperation)static_A_symbol_350.lookupImplementation(standardLibrary, O_OclAny__eq_);
+			Value A_symbol_350 = dynamic_A_symbol_350.evaluate(evaluator, T_Boolean, A_symbol_347, A_symbol_349);
+			return A_symbol_350;
 		}
 	}
 

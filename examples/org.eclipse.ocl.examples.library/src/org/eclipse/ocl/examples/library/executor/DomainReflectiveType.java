@@ -18,31 +18,33 @@ package org.eclipse.ocl.examples.library.executor;
 
 import java.util.Iterator;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 public class DomainReflectiveType extends ReflectiveType
 {
-	protected final DomainStandardLibrary standardLibrary;
-	protected final DomainType domainType;
+	protected final @NonNull DomainStandardLibrary standardLibrary;
+	protected final @NonNull DomainType domainType;
 
-	public DomainReflectiveType(DomainReflectivePackage evaluationPackage, DomainType domainType) {
-		super(domainType.getName(), evaluationPackage, computeFlags(domainType));
+	public DomainReflectiveType(@NonNull DomainReflectivePackage evaluationPackage, @NonNull DomainType domainType) {
+		super(DomainUtil.nonNullModel(domainType.getName()), evaluationPackage, computeFlags(domainType));
 		this.standardLibrary = evaluationPackage.getStandardLibrary();
 		this.domainType = domainType;
 	}
 
 	@Override
-	protected AbstractFragment createFragment(DomainInheritance baseInheritance) {
+	protected @NonNull AbstractFragment createFragment(@NonNull DomainInheritance baseInheritance) {
 		return new DomainReflectiveFragment(this, baseInheritance);
 	}
 
 	@Override
-	public Iterable<? extends DomainInheritance> getInitialSuperInheritances() {
+	public @NonNull Iterable<? extends DomainInheritance> getInitialSuperInheritances() {
 		final Iterator<? extends DomainType> iterator = domainType.getLocalSuperTypes().iterator();
 		return new Iterable<DomainInheritance>()
 		{
@@ -65,23 +67,23 @@ public class DomainReflectiveType extends ReflectiveType
 		};
 	}
 
-	public Iterable<? extends DomainOperation> getLocalOperations() {
+	public @NonNull Iterable<? extends DomainOperation> getLocalOperations() {
 		return domainType.getLocalOperations();
 	}
 
-	public Iterable<? extends DomainProperty> getLocalProperties() {
+	public @NonNull Iterable<? extends DomainProperty> getLocalProperties() {
 		return domainType.getLocalProperties();
 	}
 
-	public Iterable<? extends DomainType> getLocalSuperTypes() {
+	public @NonNull Iterable<? extends DomainType> getLocalSuperTypes() {
 		return domainType.getLocalSuperTypes();
 	}
 
-	public String getMetaTypeName() {
+	public @NonNull String getMetaTypeName() {
 		return domainType.getMetaTypeName();
 	}
 
-	public DomainStandardLibrary getStandardLibrary() {
+	public @NonNull DomainStandardLibrary getStandardLibrary() {
 		return standardLibrary;
 	}
 }

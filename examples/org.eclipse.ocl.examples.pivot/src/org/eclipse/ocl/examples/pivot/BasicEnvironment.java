@@ -18,10 +18,7 @@
 package org.eclipse.ocl.examples.pivot;
 
 /**
- * A <code>BasicEnvironment</code> provides input token and output problem support for a text analysis
- * comprising an <code>AbstractAnalyzer</code> for semantic analysis,
- * <code>AbstractParser</code> for syntactic analysis
- * (parsing), and an <code>AbstractLexer</code> for lexical analysis.
+ * A <code>BasicEnvironment</code> provides shared analysis and ebvaluation cuistomization support.
  */
 public interface BasicEnvironment extends Adaptable, Customizable
 {	

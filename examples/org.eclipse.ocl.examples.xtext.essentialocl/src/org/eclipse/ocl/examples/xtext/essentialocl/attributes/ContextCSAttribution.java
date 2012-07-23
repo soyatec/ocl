@@ -41,7 +41,7 @@ public class ContextCSAttribution extends AbstractRootCSAttribution
 		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 		ContextCS targetElement = (ContextCS)target;
 		ExpressionInOCL pivot = PivotUtil.getPivot(ExpressionInOCL.class, targetElement);
-		if ((pivot != null) && (pivot.getContextVariable().getType() != null)) {
+		if ((pivot != null) && (pivot.getContextVariable() != null) && (pivot.getContextVariable().getType() != null)) {
 			Variable resultVariable = pivot.getResultVariable();
 			if (resultVariable != null) {
 				environmentView.addNamedElement(resultVariable);

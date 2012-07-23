@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.ClassifierType;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -59,16 +60,16 @@ public class PivotSaver extends AbstractPivotSaver
 			addFactory(this);
 		}
 
-		public LocateVisitor createLocateVisitor(AbstractPivotSaver saver) {
+		public @NonNull LocateVisitor createLocateVisitor(@NonNull AbstractPivotSaver saver) {
 			return new LocateVisitor(saver);
 		}
 
-		public ResolveVisitor createResolveVisitor(AbstractPivotSaver saver) {
+		public @NonNull ResolveVisitor createResolveVisitor(@NonNull AbstractPivotSaver saver) {
 			return new ResolveVisitor(saver);
 		}
 
-		public EPackage getEPackage() {
-			return PivotPackage.eINSTANCE;
+		public @NonNull EPackage getEPackage() {
+			return DomainUtil.nonNullEMF(PivotPackage.eINSTANCE);
 		}
 	}
 
@@ -80,7 +81,7 @@ public class PivotSaver extends AbstractPivotSaver
 	 */
 	public static class LocateVisitor extends AbstractExtendingVisitor<Object, AbstractPivotSaver> implements AbstractPivotSaver.LocateVisitor
 	{
-		protected LocateVisitor(AbstractPivotSaver context) {
+		protected LocateVisitor(@NonNull AbstractPivotSaver context) {
 			super(context);
 		}
 
@@ -98,7 +99,9 @@ public class PivotSaver extends AbstractPivotSaver
 		@Override
 		public Object visitCollectionType(@NonNull CollectionType object) {
 			Type referredType = object.getElementType();
-			context.addSpecializingElement(object, referredType);
+			if (referredType != null) {
+				context.addSpecializingElement(object, referredType);
+			}
 			return super.visitCollectionType(object);
 		}
 
@@ -106,17 +109,17 @@ public class PivotSaver extends AbstractPivotSaver
 		public Object visitLambdaType(@NonNull LambdaType object) {
 			boolean doneIt = false;
 			Type referredType = object.getContextType();
-			if (context.addSpecializingElement(object, referredType)) {
+			if ((referredType != null) && context.addSpecializingElement(object, referredType)) {
 				doneIt = true;
 			}
 			if (!doneIt) {
 				referredType = object.getResultType();
-				if (context.addSpecializingElement(object, referredType)) {
+				if ((referredType != null) && context.addSpecializingElement(object, referredType)) {
 					doneIt = true;
 				}
 				if (!doneIt) {
 					for (Type parameterType : object.getParameterType()) {
-						if (context.addSpecializingElement(object, parameterType)) {
+						if ((parameterType != null) && context.addSpecializingElement(object, parameterType)) {
 							break;
 						}
 					}
@@ -128,14 +131,18 @@ public class PivotSaver extends AbstractPivotSaver
 		@Override
 		public Object visitLoopExp(@NonNull LoopExp object) {
 			Iteration referredIteration = object.getReferredIteration();
-			context.addSpecializingElement(object, referredIteration);
+			if (referredIteration != null) {
+				context.addSpecializingElement(object, referredIteration);
+			}
 			return super.visitLoopExp(object);
 		}
 
 		@Override
 		public Object visitOperationCallExp(@NonNull OperationCallExp object) {
 			Operation referredOperation = object.getReferredOperation();
-			context.addSpecializingElement(object, referredOperation);
+			if (referredOperation != null) {
+				context.addSpecializingElement(object, referredOperation);
+			}
 			return super.visitOperationCallExp(object);
 		}
 
@@ -161,14 +168,16 @@ public class PivotSaver extends AbstractPivotSaver
 		@Override
 		public Object visitTypedElement(@NonNull TypedElement object) {
 			Type referredType = object.getType();
-			context.addSpecializingElement(object, referredType);
+			if (referredType != null) {
+				context.addSpecializingElement(object, referredType);
+			}
 			return null;
 		}
 
 		@Override
 		public Object visitTypeTemplateParameter(@NonNull TypeTemplateParameter object) {
 			for (Type constrainingType : object.getConstrainingType()) {
-				if (context.addSpecializingElement(object, constrainingType)) {
+				if ((constrainingType != null) && context.addSpecializingElement(object, constrainingType)) {
 					break;
 				}
 			}
@@ -186,7 +195,7 @@ public class PivotSaver extends AbstractPivotSaver
 	 */
 	public static class ResolveVisitor extends AbstractExtendingVisitor<Object, AbstractPivotSaver> implements AbstractPivotSaver.ResolveVisitor
 	{
-		protected ResolveVisitor(AbstractPivotSaver saver) {
+		protected ResolveVisitor(@NonNull AbstractPivotSaver saver) {
 			super(saver);
 		}
 
@@ -194,30 +203,26 @@ public class PivotSaver extends AbstractPivotSaver
 		public Object visitClass(@NonNull org.eclipse.ocl.examples.pivot.Class object) {
 			List<Type> superClasses = object.getSuperClass();
 			for (int i = 0; i < superClasses.size(); i++) {
-				Type referredClass = superClasses.get(i);
+				Type referredClass = DomainUtil.nonNullEntry(superClasses.get(i));
 				Type resolvedClass = context.resolveType(referredClass);
-				if (resolvedClass != null) {
-					superClasses.set(i, resolvedClass);
-				}
+				superClasses.set(i, resolvedClass);
 			}
 			return null;
 		}
 
 		@Override
 		public Object visitClassifierType(@NonNull ClassifierType object) {
-			Type referredType = object.getInstanceType();
+			Type referredType = DomainUtil.nonNullModel(object.getInstanceType());
 			Type resolvedType = context.resolveType(referredType);
-			if (resolvedType != null) {
-				object.setInstanceType(resolvedType);
-			}
+			object.setInstanceType(resolvedType);
 			return super.visitClassifierType(object);
 		}
 
 		@Override
 		public Object visitCollectionType(@NonNull CollectionType object) {
-			Type referredType = object.getElementType();
+			Type referredType = DomainUtil.nonNullModel(object.getElementType());
 			Type resolvedType = context.resolveType(referredType);
-			if ((resolvedType != null) && (resolvedType != referredType)) {
+			if (resolvedType != referredType) {
 				object.setElementType(resolvedType);
 			}
 			return super.visitCollectionType(object);
@@ -225,54 +230,42 @@ public class PivotSaver extends AbstractPivotSaver
 
 		@Override
 		public Object visitLambdaType(@NonNull LambdaType object) {
-			Type referredType = object.getContextType();
+			Type referredType = DomainUtil.nonNullModel(object.getContextType());
 			Type resolvedType = context.resolveType(referredType);
-			if (resolvedType != null) {
-				object.setContextType(resolvedType);
-			}
-			referredType = object.getResultType();
+			object.setContextType(resolvedType);
+			referredType = DomainUtil.nonNullModel(object.getResultType());
 			resolvedType = context.resolveType(referredType);
-			if (resolvedType != null) {
-				object.setResultType(resolvedType);
-			}
+			object.setResultType(resolvedType);
 			List<Type> parameterTypes = object.getParameterType();
 			for (int i = 0; i < parameterTypes.size(); i++) {
-				referredType = parameterTypes.get(i);
+				referredType = DomainUtil.nonNullEntry(parameterTypes.get(i));
 				resolvedType = context.resolveType(referredType);
-				if (resolvedType != null) {
-					parameterTypes.set(i, resolvedType);
-				}
+				parameterTypes.set(i, resolvedType);
 			}
 			return super.visitLambdaType(object);
 		}
 
 		@Override
 		public Object visitLoopExp(@NonNull LoopExp object) {
-			Iteration referredIteration = object.getReferredIteration();
+			Iteration referredIteration = DomainUtil.nonNullModel(object.getReferredIteration());
 			Iteration resolvedIteration = context.resolveOperation(referredIteration);
-			if (resolvedIteration != null) {
-				object.setReferredIteration(resolvedIteration);
-			}
+			object.setReferredIteration(resolvedIteration);
 			return null;
 		}
 
 		@Override
 		public Object visitOperationCallExp(@NonNull OperationCallExp object) {	// FIXME Obsolete once referredOperation is not a specialization
-			Operation referredOperation = object.getReferredOperation();
+			Operation referredOperation = DomainUtil.nonNullModel(object.getReferredOperation());
 			Operation resolvedOperation = context.resolveOperation(referredOperation);
-			if (resolvedOperation != null) {
-				object.setReferredOperation(resolvedOperation);
-			}
+			object.setReferredOperation(resolvedOperation);
 			return null;
 		}
 
 		@Override
 		public Object visitTemplateParameterSubstitution(@NonNull TemplateParameterSubstitution object) {
-			Type referredType = (Type) object.getActual();
+			Type referredType = DomainUtil.nonNullModel((Type) object.getActual());
 			Type resolvedType = context.resolveType(referredType);
-			if (resolvedType != null) {
-				object.setActual(resolvedType);
-			}
+			object.setActual(resolvedType);
 			return null;
 		}
 
@@ -280,22 +273,18 @@ public class PivotSaver extends AbstractPivotSaver
 		public Object visitTypeTemplateParameter(@NonNull TypeTemplateParameter object) {
 			List<Type> constrainingTypes = object.getConstrainingType();
 			for (int i = 0; i < constrainingTypes.size(); i++) {
-				Type referredType = constrainingTypes.get(i);
+				Type referredType = DomainUtil.nonNullEntry(constrainingTypes.get(i));
 				Type resolvedType = context.resolveType(referredType);
-				if (resolvedType != null) {
-					constrainingTypes.set(i, resolvedType);
-				}
+				constrainingTypes.set(i, resolvedType);
 			}
 			return null;
 		}
 
 		@Override
 		public Object visitTypedElement(@NonNull TypedElement object) {
-			Type referredType = object.getType();
+			Type referredType = DomainUtil.nonNullEMF(object.getType());
 			Type resolvedType = context.resolveType(referredType);
-			if (resolvedType != null) {
-				object.setType(resolvedType);
-			}
+			object.setType(resolvedType);
 			return null;
 		}
 
@@ -341,16 +330,13 @@ public class PivotSaver extends AbstractPivotSaver
 	}
 
 	@Override
-	public void addSpecializingElement(Element object) {
+	public void addSpecializingElement(@NonNull Element object) {
 		specializingElements.add(object);
 	}
 
 	@Override
-	public boolean addSpecializingElement(Element object, Operation referredOperation) {
-		if (referredOperation == null) {
-			return false;
-		}
-		else if (!isOrphanOperation(referredOperation)) {
+	public boolean addSpecializingElement(@NonNull Element object, @NonNull Operation referredOperation) {
+		if (!isOrphanOperation(referredOperation)) {
 			return false;
 		}
 		else {
@@ -360,11 +346,8 @@ public class PivotSaver extends AbstractPivotSaver
 	}
 
 	@Override
-	public boolean addSpecializingElement(Element object, Type referredType) {
-		if (referredType == null) {
-			return false;
-		}
-		else if (PivotUtil.isLibraryType(referredType)) {
+	public boolean addSpecializingElement(@NonNull Element object, @NonNull Type referredType) {
+		if (PivotUtil.isLibraryType(referredType)) {
 			return false;
 		}
 		else {
@@ -404,11 +387,9 @@ public class PivotSaver extends AbstractPivotSaver
 		if (specializingElements.size() > 0) {
 			orphanage = getOrphanPackage(resource);
 			for (int i = 0; i < specializingElements.size(); i++) {	// Domain may grow
-				Element element = specializingElements.get(i);
+				Element element = DomainUtil.nonNullEntry(specializingElements.get(i));
 				AbstractPivotSaver.ResolveVisitor resolveVisitor = getResolveVisitor(element);
-				if (resolveVisitor != null) {
 				resolveVisitor.safeVisit(element);
-			}
 			}
 //			List<Type> ownedTypes = orphanage.getOwnedType();
 //			List<Type> sorted = ownedTypes; //WIP PivotUtil.sortByMoniker(new ArrayList<Type>(ownedTypes));
@@ -422,9 +403,7 @@ public class PivotSaver extends AbstractPivotSaver
 		for (EObject eObject : eObjects) {
 			if (eObject instanceof Visitable) {
 				AbstractPivotSaver.LocateVisitor locateVisitor = getLocateVisitor(eObject);
-				if (locateVisitor != null) {
 				locateVisitor.safeVisit((Visitable) eObject);
-			}
 			}
 			locateSpecializations(eObject.eContents());
 		}
@@ -435,7 +414,7 @@ public class PivotSaver extends AbstractPivotSaver
 	 * of a local copy of a specialization.
 	 */
 	@Override
-	public <T extends Operation> T resolveOperation(T referredOperation) {
+	public @NonNull <T extends Operation> T resolveOperation(@NonNull T referredOperation) {
 		if (!isOrphanOperation(referredOperation)) {
 			return referredOperation;
 		}
@@ -446,7 +425,7 @@ public class PivotSaver extends AbstractPivotSaver
 			T castOperation = (T) operation;
 			return castOperation;
 		}
-		T resolvedOperation = EcoreUtil.copy(referredOperation);
+		T resolvedOperation = DomainUtil.nonNullEMF(EcoreUtil.copy(referredOperation));
 		orphanageClass.getOwnedOperation().add(resolvedOperation);
 		operations.put(moniker, resolvedOperation);
 		String newMoniker = Pivot2Moniker.toString(resolvedOperation);
@@ -460,14 +439,14 @@ public class PivotSaver extends AbstractPivotSaver
 	 * of a local copy of a specialization.
 	 */
 	@Override
-	public <T extends Type> T resolveType(T referredType) {
+	public @NonNull <T extends Type> T resolveType(@NonNull T referredType) {
 		if (PivotUtil.isLibraryType(referredType)) {
 			return referredType;
 		}
 		@SuppressWarnings("unchecked")
 		T resolvedType = (T) specializations.get(referredType);
 		if (resolvedType == null) {
-			resolvedType = EcoreUtil.copy(referredType);
+			resolvedType = DomainUtil.nonNullEMF(EcoreUtil.copy(referredType));
 			specializations.put(referredType, resolvedType);
 			specializations.put(resolvedType, resolvedType);
 			orphanage.getOwnedType().add(resolvedType);

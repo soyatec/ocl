@@ -14,10 +14,12 @@
  */
 package org.eclipse.ocl.examples.library.string;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
@@ -28,11 +30,11 @@ public class StringSubstituteAllOperation extends AbstractTernaryOperation
 {
 	public static final StringSubstituteAllOperation INSTANCE = new StringSubstituteAllOperation();
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceValue, Value firstArgumentValue, Value secondArgumentValue) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull Value firstArgumentValue, @NonNull Value secondArgumentValue) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		String sourceString = sourceValue.asString();
 		String oldSubstring = firstArgumentValue.asString();
 		String newSubstring = secondArgumentValue.asString();
-		return valueFactory.stringValueOf(sourceString.replace(oldSubstring, newSubstring));
+		return valueFactory.stringValueOf(DomainUtil.nonNullJava(sourceString.replace(oldSubstring, newSubstring)));
 	}
 }

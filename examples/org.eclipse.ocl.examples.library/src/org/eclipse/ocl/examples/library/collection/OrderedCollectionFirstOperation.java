@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.collection;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
@@ -30,7 +31,7 @@ public class OrderedCollectionFirstOperation extends AbstractUnaryOperation
 {
 	public static final OrderedCollectionFirstOperation INSTANCE = new OrderedCollectionFirstOperation();
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value argument) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value argument) throws InvalidValueException {
 		SequenceValue orderedCollectionValue = argument.asSequenceValue();
 		return orderedCollectionValue.first();
 	}

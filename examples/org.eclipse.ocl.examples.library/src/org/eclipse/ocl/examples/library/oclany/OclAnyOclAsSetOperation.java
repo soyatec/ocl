@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.oclany;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -32,7 +33,7 @@ public class OclAnyOclAsSetOperation extends AbstractUnaryOperation
 {
 	public static final OclAnyOclAsSetOperation INSTANCE = new OclAnyOclAsSetOperation();
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceVal) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		if (sourceVal.isInvalid()) {
 			return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidSource, "oclAsSet"); //$NON-NLS-1$

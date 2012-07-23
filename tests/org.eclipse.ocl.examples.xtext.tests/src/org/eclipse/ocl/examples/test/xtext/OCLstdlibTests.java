@@ -29,6 +29,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.Comment;
@@ -175,9 +176,10 @@ public class OCLstdlibTests extends XtextTestCase
 	 */
 	public void testOCLstdlib() throws Exception {
 		//
-		//	Load oclstdlib.oclstdlib as a file.
+		//	Load OCL stdlib as a file.
 		//
-		URI libraryURI = getProjectFileURI("oclstdlib.oclstdlib");
+		new ProjectMap().initializeResourceSet(resourceSet);
+		URI libraryURI = URI.createPlatformResourceURI("org.eclipse.ocl.examples.library/model/OCL-2.4.oclstdlib", true);
 		BaseCSResource xtextResource = (BaseCSResource) resourceSet.createResource(libraryURI);
 		MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
 		xtextResource.load(null);

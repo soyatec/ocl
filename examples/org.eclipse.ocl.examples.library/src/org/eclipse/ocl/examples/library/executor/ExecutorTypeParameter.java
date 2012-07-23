@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -24,33 +25,28 @@ import org.eclipse.ocl.examples.domain.types.AbstractType;
 
 public class ExecutorTypeParameter extends AbstractType implements ExecutorTypeArgument
 {
-	public ExecutorTypeParameter(DomainStandardLibrary standardLibrary, String name) {
+	public ExecutorTypeParameter(@NonNull DomainStandardLibrary standardLibrary, @NonNull String name) {
 		super(standardLibrary, name);
 	}
 
-	@Deprecated
-	public ExecutorTypeParameter(String name) {
-		super(null, name);
-	}
-
-	public boolean conformsTo(DomainStandardLibrary standardLibrary, DomainType type) {
+	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		throw new UnsupportedOperationException();			// WIP fixme
 	}
 
-	public boolean isEqualTo(DomainStandardLibrary standardLibrary, DomainType type) {
+	public boolean isEqualTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		throw new UnsupportedOperationException();			// WIP fixme
 	}
 
-	public LibraryFeature lookupImplementation(DomainStandardLibrary standardLibrary, DomainOperation staticOperation) {
+	public @NonNull LibraryFeature lookupImplementation(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainOperation staticOperation) {
 		throw new UnsupportedOperationException();			// WIP fixme
 	}
 
-	public DomainOperation lookupOperation(DomainStandardLibrary standardLibrary, String operationName, DomainType... argumentTypes) {
+	public DomainOperation lookupOperation(DomainStandardLibrary standardLibrary, @NonNull String operationName, DomainType... argumentTypes) {
 		throw new UnsupportedOperationException();			// WIP fixme
 	}
 
 	@Override
-	public DomainType getCommonType(DomainStandardLibrary standardLibrary, DomainType type) {
+	public @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		throw new UnsupportedOperationException();			// WIP fixme
 	}
 }

@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.domain.evaluation;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -43,7 +45,7 @@ public interface DomainIterationManager
 	 * @return the iteration space
 	 * @throws InvalidValueException
 	 */
-	DomainIterationManager createNestedIterationManager(CollectionValue value);
+	@NonNull DomainIterationManager createNestedIterationManager(@NonNull CollectionValue value);
 
 	/**
 	 * Evaluate the iteration body for the current iterators and return the evaluation result.
@@ -51,24 +53,24 @@ public interface DomainIterationManager
 	 * This is used by non-iterate iteration that intervene between the body evaluation
 	 * and accumulator update.
 	 */
-	Value evaluateBody();
+	@NonNull Value evaluateBody();
 	
 	/**
 	 * Get the current state of the iterator.
 	 * <br>
 	 * This is only supported for single iterator iterations.
 	 */
-	Value get();
+	@NonNull Value get();
 
 	/**
 	 * Get the current state of the accumulator.
 	 */
-	Value getAccumulatorValue();
+	@NonNull Value getAccumulatorValue();
 
 	/**
 	 * Get the factory for values.
 	 */
-	ValueFactory getValueFactory();
+	@NonNull ValueFactory getValueFactory();
 	
 	/**
 	 * Return true if the iterators have a step to be evaluated. 
@@ -96,5 +98,5 @@ public interface DomainIterationManager
 	 * Returns null for the iteration to continue, non-null to terminate.
 	 * @throws InvalidValueException 
 	 */
-	Value updateBody() throws InvalidValueException;
+	@Nullable Value updateBody() throws InvalidValueException;
 }

@@ -16,10 +16,12 @@
  */
 package org.eclipse.ocl.examples.library.string;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
@@ -30,10 +32,10 @@ public class StringConcatOperation extends AbstractBinaryOperation
 {
 	public static final StringConcatOperation INSTANCE = new StringConcatOperation();
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value left, Value right) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		String leftString = left.asString();
 		String rightString = right.asString();
-		return valueFactory.stringValueOf(leftString.concat(rightString));
+		return valueFactory.stringValueOf(DomainUtil.nonNullJava(leftString.concat(rightString)));
 	}
 }

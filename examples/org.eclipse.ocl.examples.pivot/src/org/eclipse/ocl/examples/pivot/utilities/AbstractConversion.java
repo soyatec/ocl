@@ -22,6 +22,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 public abstract class AbstractConversion
@@ -61,21 +62,21 @@ public abstract class AbstractConversion
 		return true;
 	}
 	
-	protected final MetaModelManager metaModelManager;
+	protected final @NonNull MetaModelManager metaModelManager;
 
-	protected AbstractConversion(MetaModelManager metaModelManager) {
+	protected AbstractConversion(@NonNull MetaModelManager metaModelManager) {
 		this.metaModelManager = metaModelManager;
 	}
 	
-	public MetaModelManager getMetaModelManager() {
+	public @NonNull MetaModelManager getMetaModelManager() {
 		return metaModelManager;
 	}
 
-	public <T extends EObject> void refreshList(List<? super T> oldElements, List<? extends T> newElements) {
+	public <T extends EObject> void refreshList(@NonNull List<? super T> oldElements, @NonNull List<? extends T> newElements) {
 		PivotUtil.refreshList(oldElements, newElements);
 	}
 
-	protected <T extends EObject> void refreshSet(List<? super T> oldElements, Collection<? extends T> newElements) {
+	protected <T extends EObject> void refreshSet(@NonNull List<? super T> oldElements, @NonNull Collection<? extends T> newElements) {
 		PivotUtil.refreshSet(oldElements, newElements);
 	}
 }

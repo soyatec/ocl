@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.domain.values.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainClassifierType;
 import org.eclipse.ocl.examples.domain.values.ClassifierTypeValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -37,7 +38,7 @@ public class ClassifierTypeValueImpl extends TypeValueImpl implements Classifier
 		return ValuesPackage.Literals.CLASSIFIER_TYPE_VALUE;
 	}
 
-	public ClassifierTypeValueImpl(ValueFactory valueFactory, DomainClassifierType object) {
+	public ClassifierTypeValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainClassifierType object) {
 		super(valueFactory, object);
 	}
 	

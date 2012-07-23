@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.domain.values.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.values.SimpleTypeValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -37,7 +38,7 @@ public class SimpleTypeValueImpl extends TypeValueImpl implements SimpleTypeValu
 		return ValuesPackage.Literals.SIMPLE_TYPE_VALUE;
 	}
 
-	public SimpleTypeValueImpl(ValueFactory valueFactory, DomainType object) {
+	public SimpleTypeValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainType object) {
 		super(valueFactory, object);
 	}
 

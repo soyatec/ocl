@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.collection;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
@@ -30,7 +31,7 @@ public class SetMinusOperation extends AbstractBinaryOperation
 {
 	public static final SetMinusOperation INSTANCE = new SetMinusOperation();
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value left, Value right) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
 		UniqueCollectionValue leftValue = left.asUniqueCollectionValue();
 		UniqueCollectionValue rightValue = right.asUniqueCollectionValue();
 		return leftValue.minus(rightValue);

@@ -37,6 +37,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.utils.ClassUtils;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.BagType;
@@ -118,7 +120,7 @@ public class PivotUtil extends DomainUtil
 		}
 	}
 
-	public static void appendMultiplicity(StringBuilder s, int lower, int upper) {
+	public static void appendMultiplicity(@NonNull StringBuilder s, int lower, int upper) {
 		if (upper < 0) {
 			if (lower == 0) {
 				s.append("[*]");
@@ -146,14 +148,14 @@ public class PivotUtil extends DomainUtil
 		}
 	}
 
-	public static void checkResourceErrors(String message, Resource resource) throws ParserException {
+	public static void checkResourceErrors(@NonNull String message, @NonNull Resource resource) throws ParserException {
 		List<Resource.Diagnostic> errors = resource.getErrors();
 		if (errors.size() > 0) {
-			throw new SemanticException(formatResourceDiagnostics(resource.getErrors(), message, "\n"));
+			throw new SemanticException(formatResourceDiagnostics(DomainUtil.nonNullEMF(resource.getErrors()), message, "\n"));
 		}
 	}
 
-	public static boolean conformsTo(EStructuralFeature eStructuralFeature, EClassifier contentType) {
+	public static boolean conformsTo(@Nullable EStructuralFeature eStructuralFeature, @NonNull EClassifier contentType) {
 		if (eStructuralFeature == null) {			// Wildcard match all
 			return true;
 		}
@@ -170,7 +172,7 @@ public class PivotUtil extends DomainUtil
 		return conformsTo(targetType, contentType);
 	}
 
-	public static boolean conformsTo(EClassifier targetType, EClassifier contentType) {
+	public static boolean conformsTo(@Nullable EClassifier targetType, @NonNull EClassifier contentType) {
 		if (targetType == contentType) {
 			return true;
 		}
@@ -187,7 +189,7 @@ public class PivotUtil extends DomainUtil
 	 * Mostly copied from {@link java.util.Properties#loadConvert} via
 	 * {@link org.eclipse.xtext.util.Strings#convertFromJavaString}
 	 */
-	public static String convertFromOCLString(String javaString) {
+	public static@NonNull  String convertFromOCLString(@NonNull String javaString) {
 		char[] in = javaString.toCharArray();
 		int off = 0;
 		int len = javaString.length();
@@ -388,7 +390,7 @@ public class PivotUtil extends DomainUtil
 		return true;
 	}
 
-	public static Type findTypeOf(MetaModelManager metaModelManager, EClassifier eClass) {
+	public static Type findTypeOf(@NonNull MetaModelManager metaModelManager, @NonNull EClassifier eClass) {
 		Resource resource = eClass.eResource();
 		if (resource != null) {
 			Ecore2Pivot adapter = Ecore2Pivot.findAdapter(resource, metaModelManager);
@@ -402,7 +404,7 @@ public class PivotUtil extends DomainUtil
 		return null;
 	}
 
-	public static String formatResourceDiagnostics(List<Resource.Diagnostic> diagnostics, String messagePrefix, String newLine) {
+	public static String formatResourceDiagnostics(@NonNull List<Resource.Diagnostic> diagnostics, @NonNull String messagePrefix, @NonNull String newLine) {
 		if (diagnostics.size() <= 0) {
 			return null;
 		}
@@ -601,7 +603,7 @@ public class PivotUtil extends DomainUtil
 		return attribution;
 	}
 
-	public static Type getBehavioralType(Type type) {		// FIXME fold this into normal code
+	public static @NonNull Type getBehavioralType(@NonNull Type type) {		// FIXME fold this into normal code
 		if (type instanceof DataType) {
 			DataType dataType = (DataType)type;
 			Type behavioralType = dataType.getBehavioralType();
@@ -676,7 +678,7 @@ public class PivotUtil extends DomainUtil
 		return null;				
 	}
 
-	public static Type getOwningType(Feature feature) {
+	public static Type getOwningType(@NonNull Feature feature) {
 		Type owner = null;
 		if (feature instanceof Property) {
 			owner = ((Property)feature).getOwningType();
@@ -687,7 +689,7 @@ public class PivotUtil extends DomainUtil
 		return owner;
 	}
 
-	public static org.eclipse.ocl.examples.pivot.Package getPackage(EObject object) {
+	public static @Nullable org.eclipse.ocl.examples.pivot.Package getPackage(@NonNull EObject object) {
 		for (EObject eObject = object; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
 				return (org.eclipse.ocl.examples.pivot.Package)eObject;
@@ -700,13 +702,14 @@ public class PivotUtil extends DomainUtil
 	 * Return the lower bound for scope resolution lookups in element. This is element
 	 * unless element is an UnspecifiedType in which case the derived type is returned.
 	 */
-	public static Element getLowerBound(Element element) {
+	public static @NonNull Element getLowerBound(@NonNull Element element) {
 		if (element instanceof UnspecifiedType) {
-			return ((UnspecifiedType)element).getLowerBound();
+			Type lowerBound = ((UnspecifiedType)element).getLowerBound();
+			if (lowerBound != null) {
+				return lowerBound;
+			}
 		}
-		else {
-			return element;
-		}
+		return element;
 	}
 
 	public static String getMessage(OpaqueExpression specification) {
@@ -739,14 +742,14 @@ public class PivotUtil extends DomainUtil
 		return null;
 	}
 
-	public static URI getNonPivotURI(URI uri) {
+	public static @NonNull URI getNonPivotURI(@NonNull URI uri) {
 		assert isPivotURI(uri);
 		String[] oldSegments = uri.segments();
 		String[] newSegments = new String[oldSegments.length - 1];
 		newSegments[0] = uri.scheme();
 		System.arraycopy(oldSegments, 1, newSegments, 0, oldSegments.length-1);
-		URI pivotURI = URI.createHierarchicalURI(oldSegments[0], uri.authority(), uri.device(), newSegments,
-				uri.query(), uri.fragment());
+		URI pivotURI = DomainUtil.nonNullEMF(URI.createHierarchicalURI(oldSegments[0], uri.authority(), uri.device(), newSegments,
+				uri.query(), uri.fragment()));
 		return pivotURI;
 	}
 
@@ -766,7 +769,7 @@ public class PivotUtil extends DomainUtil
 		return castElement;
 	}
 
-	public static URI getPivotURI(URI uri) {
+	public static @NonNull URI getPivotURI(@NonNull URI uri) {
 		String oldScheme = uri.scheme();
 		if (oldScheme == null) {
 			oldScheme = "null";
@@ -775,7 +778,8 @@ public class PivotUtil extends DomainUtil
 		String[] newSegments = new String[oldSegments.length + 1];
 		newSegments[0] = oldScheme;
 		System.arraycopy(oldSegments, 0, newSegments, 1, oldSegments.length);
-		URI pivotURI = URI.createHierarchicalURI(SCHEME_PIVOT, uri.authority(), uri.device(), newSegments,
+		@SuppressWarnings("null")
+		@NonNull URI pivotURI = URI.createHierarchicalURI(SCHEME_PIVOT, uri.authority(), uri.device(), newSegments,
 				uri.query(), uri.fragment());
 		return pivotURI;
 	}
@@ -837,7 +841,7 @@ public class PivotUtil extends DomainUtil
 		return results;
 	}
 
-	public static MetaModelManager getMetaModelManager(Resource resource) {
+	public static MetaModelManager getMetaModelManager(@NonNull Resource resource) {
 		MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.getAdapter(resource, null);
 		MetaModelManager metaModelManager = adapter.getMetaModelManager();
 		assert metaModelManager != null;
@@ -847,7 +851,7 @@ public class PivotUtil extends DomainUtil
 	/**
 	 * Return a URI based on the nsURI of the immediate parent package.
 	 */
-	public static String getNsURI(EModelElement element) {
+	public static String getNsURI(@NonNull EModelElement element) {
 		if (element instanceof EPackage) {
 			String nsURI = ((EPackage)element).getNsURI();
 			if (nsURI != null) {
@@ -862,7 +866,7 @@ public class PivotUtil extends DomainUtil
 	/**
 	 * Return a URI based on the nsURI of the immediate parent package.
 	 */
-	public static String getNsURI(Element element) {
+	public static String getNsURI(@NonNull Element element) {
 		if (element instanceof org.eclipse.ocl.examples.pivot.Package) {
 			String nsURI = ((org.eclipse.ocl.examples.pivot.Package)element).getNsURI();
 			if (nsURI != null) {
@@ -875,7 +879,7 @@ public class PivotUtil extends DomainUtil
 		return s.toString();
 	}
 
-	private static void getNsURI(StringBuilder s, EObject element) {
+	private static void getNsURI(@NonNull StringBuilder s, @NonNull EObject element) {
 		if (element instanceof org.eclipse.ocl.examples.pivot.Package) {
 			String nsURI = ((org.eclipse.ocl.examples.pivot.Package)element).getNsURI();
 			if (nsURI != null) {
@@ -905,7 +909,7 @@ public class PivotUtil extends DomainUtil
 				s.append("#/");
 			}
 			else {
-				getNsURI(s, eContainer);
+				getNsURI(s, DomainUtil.nonNullJDT(eContainer));
 			}
 		}
 		else if (eContainer instanceof EPackage) {
@@ -945,7 +949,7 @@ public class PivotUtil extends DomainUtil
 		}
 	}
 
-	public static List<Type> getTypeTemplateParameterables(TemplateableElement templateableElement) {
+	public static @NonNull List<Type> getTypeTemplateParameterables(@NonNull TemplateableElement templateableElement) {
 		if (templateableElement == null) {
 			return Collections.emptyList();
 		}
@@ -967,7 +971,7 @@ public class PivotUtil extends DomainUtil
 		return results;
 	}
 
-	public static <T extends Type> T getUnspecializedTemplateableElement(T templateableElement) {
+	public static @NonNull <T extends Type> T getUnspecializedTemplateableElement(@NonNull T templateableElement) {
 		if (templateableElement == null) {
 			return null;
 		}
@@ -980,7 +984,7 @@ public class PivotUtil extends DomainUtil
 		return (T) castUnspecializedElement;
 	}
 
-	public static boolean isLibraryType(Type type) {
+	public static boolean isLibraryType(@NonNull Type type) {
 		if (type instanceof LambdaType) {
 			return false;
 		}
@@ -992,11 +996,11 @@ public class PivotUtil extends DomainUtil
 		}
 	}
 
-	public static boolean isPivotURI(URI uri) {
+	public static boolean isPivotURI(@NonNull URI uri) {
 		return SCHEME_PIVOT.equals(uri.scheme()) && (uri.segments().length > 0);
 	}
 	
-	public static boolean isValidIdentifier(String value) {
+	public static boolean isValidIdentifier(@Nullable String value) {
 		if (value == null) {
 			return false;
 		}
@@ -1072,7 +1076,7 @@ public class PivotUtil extends DomainUtil
 		assert newElements.size() == elements.size();
 	}
 
-	public static <T extends EObject> void refreshSet(List<? super T> oldElements, Collection<? extends T> newElements) {
+	public static <T extends EObject> void refreshSet(@NonNull List<? super T> oldElements, @NonNull Collection<? extends T> newElements) {
 		for (int i = oldElements.size(); i-- > 0;) {	// Remove any oldElements not in newElements
 			Object oldElement = oldElements.get(i);
 			if (!newElements.contains(oldElement)) {

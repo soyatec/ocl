@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.domain.values;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 public interface NullValue
@@ -25,5 +26,5 @@ public interface NullValue
 	/**
 	 * @generated NOT
 	 */
-	NullValue negate() throws InvalidValueException;	
+	@NonNull NullValue negate() throws InvalidValueException;	
 }

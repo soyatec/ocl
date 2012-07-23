@@ -18,6 +18,8 @@ package org.eclipse.ocl.examples.pivot.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
@@ -30,7 +32,7 @@ public class OperationAttribution extends AbstractAttribution
 	public static final OperationAttribution INSTANCE = new OperationAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		Operation targetOperation = (Operation)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
 //		TypeBindingsCS bindings = scopeView.getBindings();
@@ -38,7 +40,7 @@ public class OperationAttribution extends AbstractAttribution
 		if (containmentFeature == PivotPackage.Literals.OPERATION__OWNED_PARAMETER) {
 		}
 		else {
-			environmentView.addNamedElements(targetOperation.getOwnedParameter());
+			environmentView.addNamedElements(DomainUtil.nonNullEMF(targetOperation.getOwnedParameter()));
 		}
 		environmentView.addElements(PivotUtil.getTypeTemplateParameterables(targetOperation));
 		return scopeView.getParent();

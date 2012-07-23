@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
@@ -23,6 +24,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
 import org.eclipse.ocl.examples.domain.utilities.ArrayIterable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
  * An ExecutorFragment provides the description of the properties and operations defined by some class when accessed by the same
@@ -34,47 +36,40 @@ public class ExecutorFragment extends AbstractFragment
 	private ExecutorOperation[] operations;
 	private ExecutorProperty[] properties;
 
-	public ExecutorFragment(ExecutorType derivedInheritance, DomainInheritance baseInheritance) {
+	public ExecutorFragment(@NonNull ExecutorType derivedInheritance, @NonNull DomainInheritance baseInheritance) {
 		super(derivedInheritance, baseInheritance);
 		this.operations = null;
 		this.properties = null;
 	}
-
-	@Deprecated
-	public ExecutorFragment(ExecutorType derivedInheritance, DomainInheritance baseInheritance, ExecutorOperation[] operations, ExecutorProperty[] properties) {
-		super(derivedInheritance, baseInheritance);
-		this.operations = operations;
-		this.properties = properties;
-	}
 	
-	public LibraryFeature getImplementation(DomainOperation staticOperation) {
+	public @NonNull LibraryFeature getImplementation(@NonNull DomainOperation staticOperation) {
 		int index = staticOperation.getIndex();
 		if (index >= 0) {
-			return operations[index].implementation;
+			return DomainUtil.nonNullState(operations[index].implementation);
 		}
 		else {
 			throw new UnsupportedOperationException();		// WIP 
 		}
 	}
 
-	public Iterable<? extends DomainOperation> getLocalOperations() {
+	public @NonNull Iterable<? extends DomainOperation> getLocalOperations() {
 		return new ArrayIterable<ExecutorOperation>(operations);
 	}
 	
-	public Iterable<? extends DomainProperty> getLocalProperties() {
+	public @NonNull Iterable<? extends DomainProperty> getLocalProperties() {
 		return new ArrayIterable<ExecutorProperty>(properties);
 	}
 
-	public Iterable<? extends DomainType> getLocalSuperTypes() {
+	public @NonNull Iterable<? extends DomainType> getLocalSuperTypes() {
 		throw new UnsupportedOperationException();		// WIP 
 	}
 
-	public void initOperations(ExecutorOperation[] operations) {
+	public void initOperations(@NonNull ExecutorOperation[] operations) {
 		assert this.operations == null;
 		this.operations = operations;
 	}
 
-	public void initProperties(ExecutorProperty[] properties) {
+	public void initProperties(@NonNull ExecutorProperty[] properties) {
 		assert this.properties == null;
 		this.properties = properties;
 	}

@@ -225,6 +225,6 @@ public class PivotPrettyPrintVisitor extends AbstractExtendingVisitor<Object,Pre
 	}
 
 	public String visiting(@NonNull Visitable visitable) {
-		return (visitable == null)? PrettyPrinter.NULL_PLACEHOLDER : visitable.getClass().getName();
+		return visitable.getClass().getName();
 	}
 }

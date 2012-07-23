@@ -17,9 +17,13 @@
 package org.eclipse.ocl.examples.library;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 public interface LibraryConstants
 {
-	static final String PLUGIN_ID = LibraryConstants.class.getPackage().getName();
-	static final URI GEN_MODEL_URI = URI.createPlatformPluginURI("/" + PLUGIN_ID + "/model/oclstdlib.genmodel", true); //$NON-NLS-1$ //$NON-NLS-2$
+	static final @NonNull String PLUGIN_ID = DomainUtil.nonNullModel(LibraryConstants.class.getPackage().getName());
+	static final @NonNull URI GEN_MODEL_URI = DomainUtil.nonNullEMF(URI.createPlatformPluginURI("/" + PLUGIN_ID + "/model/oclstdlib.genmodel", true)); //$NON-NLS-1$ //$NON-NLS-2$
+
+	static final @NonNull String COMPARE_TO = "compareTo"; //$NON-NLS-1$
 }

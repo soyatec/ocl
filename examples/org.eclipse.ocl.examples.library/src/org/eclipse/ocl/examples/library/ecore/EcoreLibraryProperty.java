@@ -18,11 +18,13 @@ package org.eclipse.ocl.examples.library.ecore;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
@@ -32,21 +34,21 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class EcoreLibraryProperty extends AbstractProperty
 {
-	protected final EStructuralFeature eFeature;
+	protected final @NonNull EStructuralFeature eFeature;
 
 
-	public EcoreLibraryProperty(EStructuralFeature eFeature) {
-		this.eFeature = eFeature;
+	public EcoreLibraryProperty(/*@NonNull*/ EStructuralFeature eFeature) {
+		this.eFeature = DomainUtil.nonNullEMF(eFeature);
 	}
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceValue, DomainProperty property) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		EObject eObject = sourceValue.asNavigableObject();
 		Object eValue = eObject.eGet(eFeature);
-		return valueFactory.valueOf(eValue, eFeature);
+		return eValue != null ? valueFactory.valueOf(eValue, eFeature) : valueFactory.getNull();
 	}
 	
-	public EStructuralFeature getEFeature() {
+	public @NonNull EStructuralFeature getEFeature() {
 		return eFeature;
 	}
 

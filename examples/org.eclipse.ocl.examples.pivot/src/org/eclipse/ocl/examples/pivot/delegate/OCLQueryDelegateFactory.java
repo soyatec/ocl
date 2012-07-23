@@ -21,7 +21,9 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.util.QueryDelegate;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
  * Factory for OCL query delegates.
@@ -47,12 +49,18 @@ import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
  */
 public class OCLQueryDelegateFactory extends AbstractOCLDelegateFactory
 		implements QueryDelegate.Factory {
-	public OCLQueryDelegateFactory(String delegateURI) {
+	public OCLQueryDelegateFactory(@NonNull String delegateURI) {
 		super(delegateURI);
 	}
 
 	public QueryDelegate createQueryDelegate(EClassifier context, Map<String, EClassifier> parameters, String expression) {
-		OCLDelegateDomain delegateDomain = loadDelegateDomain(context.getEPackage());
+		if ((context == null) || (expression == null)) {
+			return null;
+		}
+		OCLDelegateDomain delegateDomain = loadDelegateDomain(DomainUtil.nonNullEMF(context.getEPackage()));
+		if (delegateDomain == null) {
+			return null;
+		}
 		return new OCLQueryDelegate(delegateDomain, context, parameters, expression);
 	}
 	
@@ -70,6 +78,9 @@ public class OCLQueryDelegateFactory extends AbstractOCLDelegateFactory
 		@Override
 		public QueryDelegate createQueryDelegate(EClassifier context,
 				Map<String, EClassifier> parameters, String expression) {
+			if ((context == null) || (expression == null)) {
+				return null;
+			}
 			QueryDelegate.Factory.Registry localRegistry = DelegateResourceSetAdapter.getRegistry(
 				context, QueryDelegate.Factory.Registry.class, null);
 			if (localRegistry != null) {

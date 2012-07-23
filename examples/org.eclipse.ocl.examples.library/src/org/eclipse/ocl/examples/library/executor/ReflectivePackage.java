@@ -19,8 +19,10 @@ package org.eclipse.ocl.examples.library.executor;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
  * A ReflectivePackage builds a dispatch table representative of a model package at run-time using a minimal reflective API.
@@ -29,35 +31,35 @@ public abstract class ReflectivePackage extends ExecutorPackage
 {
 	protected Map<DomainType, ReflectiveType> types = null;
 
-	public ReflectivePackage(String name, String nsURI) {
+	public ReflectivePackage(@NonNull String name, String nsURI) {
 		super(name, nsURI);
 	}
 	
 	protected void computeClasses() {
 		types = new HashMap<DomainType, ReflectiveType>();
 		for (DomainType domainType : getDomainTypes()) {
-			ReflectiveType executorType = createExecutorType(domainType);
+			ReflectiveType executorType = createExecutorType(DomainUtil.nonNullEntry(domainType));
 			types.put(domainType, executorType);
 		}
 	}
 
-	protected abstract ReflectiveType createExecutorType(DomainType domainType);
+	protected abstract @NonNull ReflectiveType createExecutorType(@NonNull DomainType domainType);
 
-	protected abstract Iterable<? extends DomainType> getDomainTypes();
+	protected abstract @NonNull Iterable<? extends DomainType> getDomainTypes();
 
-	public ReflectiveType getInheritance(DomainType type) {
+	public @NonNull ReflectiveType getInheritance(@NonNull DomainType type) {
 		if (types == null) {
 			computeClasses();
 		}
-		return types.get(type);
+		return DomainUtil.nonNullState(types.get(type));
 	}
 
-	public Iterable<? extends DomainType> getOwnedType() {
+	public @NonNull Iterable<? extends DomainType> getOwnedType() {
 		if (types == null) {
 			computeClasses();
 		}
-		return types.values();
+		return DomainUtil.nonNullJDT(types.values());
 	}
 
-	protected abstract DomainStandardLibrary getStandardLibrary();
+	protected abstract @NonNull DomainStandardLibrary getStandardLibrary();
 }

@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.pivot.library;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -35,9 +36,9 @@ import org.eclipse.ocl.examples.pivot.Type;
  */
 public class ExplicitNavigationProperty extends AbstractProperty
 {
-	public static final ExplicitNavigationProperty INSTANCE = new ExplicitNavigationProperty();
+	public static final @NonNull ExplicitNavigationProperty INSTANCE = new ExplicitNavigationProperty();
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceValue, DomainProperty property) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		EObject eObject = sourceValue.asNavigableObject(); 
 		EClass eClass = eObject.eClass();
@@ -50,7 +51,13 @@ public class ExplicitNavigationProperty extends AbstractProperty
 				eObject = rawType;
 			}
 		}
-		Object eValue = eObject.eGet(eFeature);
-		return valueFactory.valueOf(eValue, eFeature);
+		if (eFeature != null) {
+			Object eValue = eObject.eGet(eFeature);
+			if (eValue != null) {
+				return valueFactory.valueOf(eValue, eFeature);
+			}
+			
+		}
+		return valueFactory.getNull();
 	}
 }

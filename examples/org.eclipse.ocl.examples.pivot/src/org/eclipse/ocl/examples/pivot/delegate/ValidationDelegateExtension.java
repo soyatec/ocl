@@ -23,6 +23,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An extended interface allowing validators to generate custom diagnostics.
@@ -34,11 +36,11 @@ public interface ValidationDelegateExtension extends EValidator.ValidationDelega
      * Evaluates the given constraint expression against the object in the given context.
      * @return the result of the expression evaluation.
      */
-    boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context, String constraint, String expression, int severity, String source, int code);
+    boolean validate(@NonNull EClass eClass, @NonNull EObject eObject, @Nullable DiagnosticChain diagnostics, Map<Object, Object> context, @NonNull String constraint, String expression, int severity, String source, int code);
 
     /**
      * Evaluates the given constraint expression against the value in the given context.
      * @return the result of the expression evaluation.
      */
-    boolean validate(EDataType eDataType, Object value, DiagnosticChain diagnostics, Map<Object, Object> context, String constraint, String expression, int severity, String source, int code);
+    boolean validate(@NonNull EDataType eDataType, @NonNull Object value, @Nullable DiagnosticChain diagnostics, Map<Object, Object> context, @NonNull String constraint, String expression, int severity, String source, int code);
 }

@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.IndexableIterable;
 
 /**
@@ -32,7 +34,7 @@ public interface DomainInheritance extends DomainType
 	/**
 	 * Return a depth ordered, OclAny-first, OclSelf-last, Iterable of all the super-adapters including this one.
 	 */
-	Iterable<DomainFragment> getAllSuperFragments();
+	@NonNull Iterable<DomainFragment> getAllSuperFragments();
 
 	/**
 	 * Return the inheritance depth of the target type: OclAny is at depth 0.
@@ -42,26 +44,26 @@ public interface DomainInheritance extends DomainType
 	/**
 	 * Return the Standard Library managing the dispatch tables.
 	 */
-	DomainStandardLibrary getStandardLibrary();
+	@NonNull DomainStandardLibrary getStandardLibrary();
 	
 	/**
 	 * Return an Iterable of all the super-inheritances at a specified depth, between 0 and getDepth() inclusive.
 	 */
-	IndexableIterable<DomainFragment> getSuperFragments(int depth);
+	@NonNull IndexableIterable<DomainFragment> getSuperFragments(int depth);
 
 
-	boolean isSubInheritanceOf(DomainInheritance inheritance);
-	boolean isSuperInheritanceOf(DomainStandardLibrary standardLibrary, DomainInheritance inheritance);
+	boolean isSubInheritanceOf(@NonNull DomainInheritance inheritance);
+	boolean isSuperInheritanceOf(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainInheritance inheritance);
 	
-	DomainFragment getFragment(DomainInheritance thatInheritance);
-	DomainFragment getFragment(int fragmentNumber);
+	@Nullable DomainFragment getFragment(@NonNull DomainInheritance thatInheritance);
+	/*@Nullable*/ DomainFragment getFragment(int fragmentNumber);
 	int getIndex(int fragmentNumber);
 	int getIndexes();
 
-	DomainInheritance getCommonInheritance(DomainInheritance inheritance);
+	@NonNull DomainInheritance getCommonInheritance(@NonNull DomainInheritance inheritance);
 
 	boolean isUndefined();
 
-	DomainFragment getSelfFragment();
-	DomainOperation lookupLocalOperation(DomainStandardLibrary standardLibrary, String operationName, DomainInheritance... argumentTypes);
+	@NonNull DomainFragment getSelfFragment();
+	@Nullable DomainOperation lookupLocalOperation(@NonNull DomainStandardLibrary standardLibrary, @NonNull String operationName, DomainInheritance... argumentTypes);
 }

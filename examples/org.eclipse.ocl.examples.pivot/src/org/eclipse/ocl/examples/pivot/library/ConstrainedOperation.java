@@ -18,15 +18,13 @@ package org.eclipse.ocl.examples.pivot.library;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.library.AbstractOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryTernaryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractPolyOperation;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
@@ -39,15 +37,15 @@ import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
  * An instance of ConstrainedOperation supports evaluation of
  * an operation defined by constraints.
  */
-public class ConstrainedOperation extends AbstractOperation implements LibraryUnaryOperation, LibraryBinaryOperation, LibraryTernaryOperation
+public class ConstrainedOperation extends AbstractPolyOperation
 {
-	protected final ExpressionInOCL expressionInOCL;
+	protected final @NonNull ExpressionInOCL expressionInOCL;
 	
-	public ConstrainedOperation(ExpressionInOCL expressionInOCL) {
+	public ConstrainedOperation(@NonNull ExpressionInOCL expressionInOCL) {
 		this.expressionInOCL = expressionInOCL;
 	}
 
-	public Value evaluate(DomainEvaluator evaluator, DomainCallExp callExp, Value sourceValue, Value... argumentValues) throws InvalidEvaluationException, InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Value sourceValue, Value... argumentValues) throws InvalidEvaluationException, InvalidValueException {
 		EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
 		EvaluationVisitor nestedVisitor = evaluationVisitor.createNestedEvaluator();
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();
@@ -61,28 +59,28 @@ public class ConstrainedOperation extends AbstractOperation implements LibraryUn
 				nestedEvaluationEnvironment.add(parameters.get(i).getRepresentedParameter(), value);
 			}
 		}
-		return expressionInOCL.accept(nestedVisitor);
+		return nestedVisitor.evaluate(expressionInOCL);
 	}
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceValue) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue) throws InvalidValueException {
 		EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
 		EvaluationVisitor nestedVisitor = evaluationVisitor.createNestedEvaluator();
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();
 		nestedEvaluationEnvironment.add(expressionInOCL.getContextVariable(), sourceValue);
-		return expressionInOCL.accept(nestedVisitor);
+		return nestedVisitor.evaluate(expressionInOCL);
 	}
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceValue, Value argumentValue) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull Value argumentValue) throws InvalidValueException {
 		EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
 		EvaluationVisitor nestedVisitor = evaluationVisitor.createNestedEvaluator();
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();
 		nestedEvaluationEnvironment.add(expressionInOCL.getContextVariable(), sourceValue);
 		List<Variable> parameters = expressionInOCL.getParameterVariable();
 		nestedEvaluationEnvironment.add(parameters.get(0).getRepresentedParameter(), argumentValue);
-		return expressionInOCL.accept(nestedVisitor);
+		return nestedVisitor.evaluate(expressionInOCL);
 	}
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceValue, Value firstArgumentValue, Value secondArgumentValue) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull Value firstArgumentValue, @NonNull Value secondArgumentValue) throws InvalidValueException {
 		EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
 		EvaluationVisitor nestedVisitor = evaluationVisitor.createNestedEvaluator();
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();
@@ -90,6 +88,6 @@ public class ConstrainedOperation extends AbstractOperation implements LibraryUn
 		List<Variable> parameters = expressionInOCL.getParameterVariable();
 		nestedEvaluationEnvironment.add(parameters.get(0).getRepresentedParameter(), firstArgumentValue);
 		nestedEvaluationEnvironment.add(parameters.get(1).getRepresentedParameter(), secondArgumentValue);
-		return expressionInOCL.accept(nestedVisitor);
+		return nestedVisitor.evaluate(expressionInOCL);
 	}
 }

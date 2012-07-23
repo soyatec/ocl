@@ -32,13 +32,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -723,7 +723,7 @@ public class IteratorsTest extends PivotTestSuite
     	Type type = metaModelManager.getPivotType("Type");
      	assertBadQuery(SemanticException.class, Diagnostic.ERROR,
     		"ownedType->sortedBy(e | e)",
-        	OCLMessages.UnresolvedOperation_ERROR_, EvaluatorMessages.CompareToOperation, type + "");
+        	OCLMessages.UnresolvedOperation_ERROR_, LibraryConstants.COMPARE_TO, type + "");
        
     	assertQuery(context, "ownedType->sortedBy(e | e.name)");
     	loadEPackage("ecore", EcorePackage.eINSTANCE);

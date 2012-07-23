@@ -20,6 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -27,6 +28,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -38,14 +40,14 @@ public class ClassifierOclContentsOperation extends AbstractUnaryOperation
 {
 	public static final ClassifierOclContentsOperation INSTANCE = new ClassifierOclContentsOperation();
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceValue) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		ObjectValue objectVal = sourceValue.asObjectValue();
 		Object object = objectVal.getObject();
 		if (object instanceof EObject) {
 	    	Set<Value> collection = new HashSet<Value>();
 			for (Object eContent : ((EObject)object).eContents()) {
-				collection.add(valueFactory.valueOf(eContent));
+				collection.add(valueFactory.valueOf(DomainUtil.nonNullEntry(eContent)));
 	    	}
 	    	return valueFactory.createSetValue((DomainCollectionType)returnType, collection);
 		}

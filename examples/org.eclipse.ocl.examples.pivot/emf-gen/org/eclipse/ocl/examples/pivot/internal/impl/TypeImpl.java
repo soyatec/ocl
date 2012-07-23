@@ -90,6 +90,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *
  * @generated
  */
+@SuppressWarnings("null")
 public class TypeImpl
 		extends NamedElementImpl
 		implements Type {
@@ -481,13 +482,13 @@ public class TypeImpl
 		p.oclIsKindOf(self.oclType())
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(p));
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(p));
 			return (Boolean) result.asEcoreObject();
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.ParameterableElementBodies", e);
@@ -506,13 +507,13 @@ public class TypeImpl
 		self
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Type = OCLstdlibTables.Types._Type;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			
-			final DomainType returnType = T_Type;
-			final Value result = TypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(selfType));
+			final @NonNull DomainType returnType = T_Type;
+			final @NonNull Value result = TypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(selfType));
 			return (Type) result.asEcoreObject();
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.TypeBodies", e);
@@ -1106,13 +1107,13 @@ public class TypeImpl
 		return visitor.visitType(this);
 	}
 	
-	public boolean conformsTo(DomainStandardLibrary standardLibrary, DomainType type) {
+	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		DomainInheritance thisInheritance = this.getInheritance(standardLibrary);
 		DomainInheritance thatInheritance = type.getInheritance(standardLibrary);
 		return thisInheritance.isSubInheritanceOf(thatInheritance);
 	}
 
-	public ObjectValue createInstance(ValueFactory valueFactory) {
+	public @NonNull ObjectValue createInstance(@NonNull ValueFactory valueFactory) {
 		EObject eTarget = getETarget();
 		if (eTarget instanceof EClass) {
 			EClass eClass = (EClass) eTarget;
@@ -1122,7 +1123,7 @@ public class TypeImpl
 		throw new UnsupportedOperationException();
 	}
 
-	public Value createInstance(ValueFactory valueFactory, String value) {
+	public @NonNull Value createInstance(@NonNull ValueFactory valueFactory, @NonNull String value) {
 		EObject eTarget = getETarget();
 		if (eTarget instanceof EDataType) {
 			EDataType eDataType = (EDataType) eTarget;
@@ -1132,7 +1133,7 @@ public class TypeImpl
 		throw new UnsupportedOperationException();
 	}
 
-	public DomainType getCommonType(DomainStandardLibrary standardLibrary, DomainType type) {
+	public @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		if (type == this) {
 			return this;
 		}
@@ -1141,11 +1142,11 @@ public class TypeImpl
 		return thisInheritance.getCommonInheritance(thatInheritance);
 	}
 
-	public DomainInheritance getInheritance(DomainStandardLibrary standardLibrary) {
+	public @NonNull DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary) {
 		return standardLibrary.getInheritance(this);
 	}
 
-	public DomainType getNormalizedType(DomainStandardLibrary standardLibrary) {
+	public @NonNull DomainType getNormalizedType(@NonNull DomainStandardLibrary standardLibrary) {
 		try {
 			return standardLibrary.getInheritance(this);
 		}
@@ -1154,23 +1155,23 @@ public class TypeImpl
 		}
 	}
 
-	public Iterable<? extends DomainOperation> getLocalOperations() {
+	public @NonNull Iterable<? extends DomainOperation> getLocalOperations() {
 		return getOwnedOperation();
 	}
 
-	public Iterable<? extends DomainProperty> getLocalProperties() {
+	public @NonNull Iterable<? extends DomainProperty> getLocalProperties() {
 		return getOwnedAttribute();
 	}
 
-	public Iterable<? extends DomainType> getLocalSuperTypes() {
+	public @NonNull Iterable<? extends DomainType> getLocalSuperTypes() {
 		return getSuperClass();
 	}
 
-	public String getMetaTypeName() {
+	public @NonNull String getMetaTypeName() {
 		return eClass().getName();
 	}
 
-	public boolean isEqualTo(DomainStandardLibrary standardLibrary, DomainType type) {
+	public boolean isEqualTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		if (this == type) {
 			return true;
 		}
@@ -1179,7 +1180,7 @@ public class TypeImpl
 		return thisType == thatType;
 	}
 
-	public boolean isEqualToUnspecializedType(DomainStandardLibrary standardLibrary, DomainType type) {
+	public boolean isEqualToUnspecializedType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		if (this == type) {
 			return true;
 		}
@@ -1194,7 +1195,7 @@ public class TypeImpl
 		return false;
 	}
 
-	public LibraryFeature lookupImplementation(DomainStandardLibrary standardLibrary, DomainOperation staticOperation) {
+	public @NonNull LibraryFeature lookupImplementation(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainOperation staticOperation) {
 		DomainInheritance inheritance = getInheritance(standardLibrary);
 		return inheritance.lookupImplementation(standardLibrary, staticOperation);
 	}

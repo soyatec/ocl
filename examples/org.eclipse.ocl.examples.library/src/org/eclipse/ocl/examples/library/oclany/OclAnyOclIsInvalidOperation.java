@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.oclany;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
@@ -30,7 +31,7 @@ public class OclAnyOclIsInvalidOperation extends AbstractUnaryOperation
 {
 	public static final OclAnyOclIsInvalidOperation INSTANCE = new OclAnyOclIsInvalidOperation();
 
-	public BooleanValue evaluate(DomainEvaluator evaluator, DomainType returnType, Value argument) {
+	public @NonNull BooleanValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value argument) {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		return valueFactory.booleanValueOf(argument.isInvalid());
 	}

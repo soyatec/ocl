@@ -17,6 +17,8 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 
 /**
  * An interface providing reflection service for the metaclasses that the
@@ -35,47 +37,47 @@ public interface UMLReflection {
      * 
      * @see #getStereotype
      */
-    String INVARIANT = "invariant"; //$NON-NLS-1$
+	@NonNull String INVARIANT = "invariant"; //$NON-NLS-1$
 
     /**
      * Stereotype applied to operation precondition constraints.
      * 
      * @see #getStereotype
      */
-    String PRECONDITION = "precondition"; //$NON-NLS-1$
+    @NonNull String PRECONDITION = "precondition"; //$NON-NLS-1$
 
     /**
      * Stereotype applied to operation postcondition constraints.
      * 
      * @see #getStereotype
      */
-    String POSTCONDITION = "postcondition"; //$NON-NLS-1$
+    @NonNull String POSTCONDITION = "postcondition"; //$NON-NLS-1$
 
     /**
      * Stereotype applied to operation body conditions.
      * 
      * @see #getStereotype
      */
-    String BODY = "body"; //$NON-NLS-1$
+    @NonNull String BODY = "body"; //$NON-NLS-1$
 
     /**
      * Stereotype applied definition expressions.
      * 
      * @see #getStereotype
      */
-    String DEFINITION = "definition"; //$NON-NLS-1$
+    @NonNull String DEFINITION = "definition"; //$NON-NLS-1$
 
     /**
      * Stereotype applied initial value expressions.
      * 
      * @see #getStereotype
      */
-    String INITIAL = "initial"; //$NON-NLS-1$
+    @NonNull String INITIAL = "initial"; //$NON-NLS-1$
 
     /**
      * Stereotype applied derived value expressions.
      * 
      * @see #getStereotype
      */
-    String DERIVATION = "derivation"; //$NON-NLS-1$
+    @NonNull String DERIVATION = "derivation"; //$NON-NLS-1$
 }

@@ -55,6 +55,8 @@ inv CompatibleReturn:
 	bodyConstraint <> null implies
 	let bodySpecification : ValueSpecification = bodyConstraint.specification in
 	bodySpecification <> null and bodySpecification.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(bodySpecification)
+inv LoadableImplementation:
+	true
 
 context TypedMultiplicityElement
 def: CompatibleBody(bodySpecification : ValueSpecification) : Boolean =

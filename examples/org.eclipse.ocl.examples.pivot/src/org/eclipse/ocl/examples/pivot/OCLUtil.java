@@ -78,11 +78,11 @@ public final class OCLUtil {
 			result = null;
 		}
 		
-		if (result == null) {
-			if (adapterType == BasicEnvironment.class) {
-				result = (T) getBasicEnvironment(env);
-			}
-		}
+//		if (result == null) {
+//			if (adapterType == BasicEnvironment.class) {
+//				result = (T) getBasicEnvironment(env);
+//			}
+//		}
 		
 		return result;
 	}
@@ -94,7 +94,7 @@ public final class OCLUtil {
 	 * 
 	 * @param env the environment for which to define an external adapter
 	 * @return the external adapter
-	 */
+	 *
 	private static BasicEnvironment getBasicEnvironment(
 	        final Environment env) {
 	    
@@ -122,7 +122,7 @@ public final class OCLUtil {
 	    }
 	    
 	    return result;
-	}
+	} */
 
 	/**
 	 * Obtains an adapter for the specified interface type.  Even for

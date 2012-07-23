@@ -18,6 +18,9 @@ package org.eclipse.ocl.examples.pivot.utilities;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+
 import com.google.common.collect.Iterators;
 
 /**
@@ -35,7 +38,7 @@ public abstract class CompleteElementIterable<O,I> implements Iterable<I>
 		private java.util.Iterator<I> innerIterator;
 		private I nextValue;
 		
-		public Iterator(Iterable<? extends O> iterables) {
+		public Iterator(@NonNull Iterable<? extends O> iterables) {
 			outerIterator = iterables.iterator();
 			innerIterator = null;
 			advance();
@@ -45,14 +48,14 @@ public abstract class CompleteElementIterable<O,I> implements Iterable<I>
 			while (true) {
 				if (innerIterator != null) {
 					while (innerIterator.hasNext()) {
-						nextValue = getInnerValue(innerIterator.next());
+						nextValue = getInnerValue(DomainUtil.nonNullState(innerIterator.next()));
 						if (nextValue != null) {
 							return true;
 						}
 					}
 				}
 				if (outerIterator.hasNext()) {
-					Iterable<I> innerIterable = getInnerIterable(outerIterator.next());
+					Iterable<I> innerIterable = getInnerIterable(DomainUtil.nonNullState(outerIterator.next()));
 					if (innerIterable != null) {
 						innerIterator = innerIterable.iterator();
 					}
@@ -104,34 +107,34 @@ public abstract class CompleteElementIterable<O,I> implements Iterable<I>
 	 * @param iterable
 	 * @return the inner iterable or null for none.
 	 */
-	protected abstract Iterable<I> getInnerIterable(O iterable);
+	protected abstract Iterable<I> getInnerIterable(@NonNull O iterable);
 
-	protected I getInnerValue(I element) {
+	protected I getInnerValue(@NonNull I element) {
 		return element;
 	}
 
-	public java.util.Iterator<I> iterator() {
+	public @NonNull java.util.Iterator<I> iterator() {
 		if (iterables instanceof List<?>) {
 			@SuppressWarnings("unchecked")
 			List<O> list = (List<O>)iterables;
 			if (list.size() == 0) {
-				return Iterators.emptyIterator();
+				return DomainUtil.nonNullJava(Iterators.<I>emptyIterator());
 			}
 			else if (list.size() == 1) {
-				Iterable<I> innerIterable = getInnerIterable(list.get(0));
+				Iterable<I> innerIterable = getInnerIterable(DomainUtil.nonNullEntry(list.get(0)));
 				if (innerIterable != null) {
-					return innerIterable.iterator();
+					return DomainUtil.nonNullJava(innerIterable.iterator());
 				}
 				else {
-					return Iterators.emptyIterator();
+					return DomainUtil.nonNullJava(Iterators.<I>emptyIterator());
 				}
 			}
 		}
 		if (iterables != null) {
-			return new Iterator(iterables);
+			return new Iterator(DomainUtil.nonNullJDT(iterables));
 		}
 		else {
-			return Iterators.emptyIterator();
+			return DomainUtil.nonNullJava(Iterators.<I>emptyIterator());
 		}
 	}
 }

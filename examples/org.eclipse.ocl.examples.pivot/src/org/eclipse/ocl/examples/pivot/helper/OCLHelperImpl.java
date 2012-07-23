@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -30,22 +31,23 @@ import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.context.ClassContext;
+import org.eclipse.ocl.examples.pivot.context.ModelContext;
 import org.eclipse.ocl.examples.pivot.context.OperationContext;
 import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.context.PropertyContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.model.OCLMetaModel;
-import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironment;
 
 /**
  * Implementation of the {@link OCLMetaModel.Helper} convenience interface.
  */
 public class OCLHelperImpl implements OCLHelper
 {
-    private final OCL ocl;
-	protected final Environment rootEnvironment;
-	protected final MetaModelManager metaModelManager;
-	protected final EnvironmentFactory environmentFactory;
+    private final @NonNull OCL ocl;
+	protected final @NonNull Environment rootEnvironment;
+	protected final @NonNull MetaModelManager metaModelManager;
+
+	protected final @NonNull EnvironmentFactory environmentFactory;
 	private Environment env;
 
 	private boolean validating = true;
@@ -57,53 +59,75 @@ public class OCLHelperImpl implements OCLHelper
 	 * 
 	 * @param ocl the OCL environment
 	 */
-    public OCLHelperImpl(OCL ocl) {
+    public OCLHelperImpl(@NonNull OCL ocl) {
         this.ocl = ocl;
 		this.rootEnvironment = ocl.getEnvironment();
 		this.metaModelManager = rootEnvironment.getMetaModelManager();
 		this.environmentFactory = rootEnvironment.getFactory();
 	}
 
-	public ExpressionInOCL createBodyCondition(String expression) throws ParserException {
-		PivotEnvironment environment = (PivotEnvironment) getEnvironment();
-		MetaModelManager metaModelManager = environment.getMetaModelManager();
-		Operation contextOperation = environment.getContextOperation();
+	public ExpressionInOCL createBodyCondition(@NonNull String expression) throws ParserException {
+		Operation contextOperation = getEnvironment().getContextOperation();
+		if (contextOperation == null) {
+			return null;
+		}
 		ParserContext parserContext = new OperationContext(metaModelManager, null, contextOperation, null);
 		return parserContext.parse(expression);
 	}
 
-	public ExpressionInOCL createDerivedValueExpression(String expression) throws ParserException {
+	public ExpressionInOCL createDerivedValueExpression(@NonNull String expression) throws ParserException {
 		Property contextProperty = getEnvironment().getContextProperty();
+		if (contextProperty == null) {
+			return null;
+		}
 		ParserContext parserContext = new PropertyContext(metaModelManager, null, contextProperty);
 		return parserContext.parse(expression);
 	}
 
-	public ExpressionInOCL createInvariant(String expression) throws ParserException {
+	public ExpressionInOCL createInvariant(@NonNull String expression) throws ParserException {
 		Type contextClassifier = getEnvironment().getContextClassifier();
+		if (contextClassifier == null) {
+			return null;
+		}
 		ParserContext parserContext = new ClassContext(metaModelManager, null, contextClassifier);
 		return parserContext.parse(expression);
 	}
 
-	public ExpressionInOCL createPostcondition(String expression) throws ParserException {
+	public ExpressionInOCL createPostcondition(@NonNull String expression) throws ParserException {
 		Operation contextOperation = getEnvironment().getContextOperation();
+		if (contextOperation == null) {
+			return null;
+		}
 		ParserContext parserContext = new OperationContext(metaModelManager, null, contextOperation, Environment.RESULT_VARIABLE_NAME);
 		return parserContext.parse(expression);
 	}
 
-	public ExpressionInOCL createPrecondition(String expression) throws ParserException {
+	public ExpressionInOCL createPrecondition(@NonNull String expression) throws ParserException {
 		Operation contextOperation = getEnvironment().getContextOperation();
+		if (contextOperation == null) {
+			return null;
+		}
 		ParserContext parserContext = new OperationContext(metaModelManager, null, contextOperation, null);
 		return parserContext.parse(expression);
 	}
 
-	public ExpressionInOCL createQuery(String expression) throws ParserException {
+	public @NonNull ExpressionInOCL createQuery(@NonNull String expression) throws ParserException {
 		Type contextClassifier = getEnvironment().getContextClassifier();
-		ParserContext parserContext = new ClassContext(metaModelManager, null, contextClassifier);
+		ParserContext parserContext;
+		if (contextClassifier != null) {
+			parserContext = new ClassContext(metaModelManager, null, contextClassifier);
+		}
+		else {
+			parserContext = new ModelContext(metaModelManager, null);
+		}
 		return parserContext.parse(expression);
 	}
 
-	protected ExpressionInOCL createSpecification(String expression) throws ParserException {
+	protected ExpressionInOCL createSpecification(@NonNull String expression) throws ParserException {
 		Type contextClassifier = getEnvironment().getContextClassifier();
+		if (contextClassifier == null) {
+			return null;
+		}
 		ParserContext parserContext = new ClassContext(metaModelManager, null, contextClassifier);
 		return parserContext.parse(expression);
 	}
@@ -120,11 +144,16 @@ public class OCLHelperImpl implements OCLHelper
 		return getEnvironment().getContextOperation();
 	}
 	
-	public Environment getEnvironment() {
+	@SuppressWarnings("null")
+	public @NonNull Environment getEnvironment() {
 		return env == null ? rootEnvironment : env;
 	}
 	
-    public OCL getOCL() {
+	public final @NonNull MetaModelManager getMetaModelManager() {
+		return metaModelManager;
+	}
+	
+	public @NonNull OCL getOCL() {
         return ocl;
     }
 	
@@ -136,51 +165,57 @@ public class OCLHelperImpl implements OCLHelper
 		return validating;
 	}
 
-	public void setContext(EClassifier context) {
+	public void setContext(@NonNull EClassifier context) {
 		Type pContext = metaModelManager.getPivotOfEcore(Type.class, context);
-		setContext(pContext);
+		if (pContext != null) {
+			setContext(pContext);
+		}
 	}
 	
-	public void setContext(Type context) {
+	public void setContext(@NonNull Type context) {
 		setEnvironment(environmentFactory.createClassifierContext(getEnvironment(), context));
 	}
 	
-	private void setEnvironment(Environment env) {
+	private void setEnvironment(@NonNull Environment env) {
 		this.env = env;
 	}
     
-    public void setInstancePropertyContext(Object instance, Property property) {
+    public void setInstancePropertyContext(@NonNull Object instance, @NonNull Property property) {
         setInstanceContext(instance);
         setEnvironment(environmentFactory.createPropertyContext(getEnvironment(), property));
     }
     
-    public void setInstanceContext(Object instance) {
+    public void setInstanceContext(@NonNull Object instance) {
         setEnvironment(environmentFactory.createInstanceContext(getEnvironment(), instance));
     }
     
-    public void setInstanceOperationContext(Object instance, Operation operation) {
+    public void setInstanceOperationContext(@NonNull Object instance, @NonNull Operation operation) {
         setInstanceContext(instance);
         setEnvironment(environmentFactory.createOperationContext(getEnvironment(), operation));
     }
 
-	public void setOperationContext(EClassifier context, EOperation operation) {
+	public void setOperationContext(@NonNull EClassifier context, @NonNull EOperation operation) {
 		Type pContext = metaModelManager.getPivotOfEcore(Type.class, context);
 		Operation pOperation = metaModelManager.getPivotOfEcore(Operation.class, operation);
-		setOperationContext(pContext, pOperation);
+		if ((pContext != null) && (pOperation != null)) {
+			setOperationContext(pContext, pOperation);
+		}
 	}
 	
-	public void setOperationContext(Type context, Operation operation) {
+	public void setOperationContext(@NonNull Type context, @NonNull Operation operation) {
         setContext(context);
 		setEnvironment(environmentFactory.createOperationContext(getEnvironment(), operation));
 	}
 	
-	public void setPropertyContext(EClassifier context, EStructuralFeature property) {
+	public void setPropertyContext(@NonNull EClassifier context, @NonNull EStructuralFeature property) {
 		Type pContext = metaModelManager.getPivotOfEcore(Type.class, context);
 		Property pProperty = metaModelManager.getPivotOfEcore(Property.class, property);
-		setPropertyContext(pContext, pProperty);
+		if ((pContext != null) && (pProperty != null)) {
+			setPropertyContext(pContext, pProperty);
+		}
 	}
 	
-	public void setPropertyContext(Type context, Property property) {
+	public void setPropertyContext(@NonNull Type context, @NonNull Property property) {
         setContext(context);
 		setEnvironment(environmentFactory.createPropertyContext(getEnvironment(), property));
 	}

@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.domain.library;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
@@ -38,7 +40,7 @@ public abstract class AbstractIteration extends AbstractFeature implements Libra
 	 * Derived classes may override this method to change the iteration algorithm or override
 	 * the call-backs to customize the default iteration.
 	 */
-	public Value evaluateIteration(DomainIterationManager iterationManager) throws InvalidValueException {
+	public @NonNull Value evaluateIteration(@NonNull DomainIterationManager iterationManager) throws InvalidValueException {
 		for ( ; iterationManager.hasCurrent(); iterationManager.advanceIterators()) {
 			Value resultVal = updateAccumulator(iterationManager);
 			if (resultVal != null) {
@@ -58,7 +60,7 @@ public abstract class AbstractIteration extends AbstractFeature implements Libra
 	 * @param iterationManager the iteration context
 	 * @return the result
 	 */
-	protected Value resolveTerminalValue(DomainIterationManager iterationManager) {
+	protected @NonNull Value resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
 		return iterationManager.getAccumulatorValue();
 	}
 	
@@ -70,5 +72,5 @@ public abstract class AbstractIteration extends AbstractFeature implements Libra
 	 * @return non-null premature result of iteration, or null if complete
 	 * @throws InvalidEvaluationException 
 	 */
-	protected abstract Value updateAccumulator(DomainIterationManager iterationManager);
+	protected abstract @Nullable Value updateAccumulator(@NonNull DomainIterationManager iterationManager);
 }

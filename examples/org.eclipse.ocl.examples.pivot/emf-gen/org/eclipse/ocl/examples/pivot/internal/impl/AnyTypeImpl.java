@@ -62,7 +62,7 @@ public class AnyTypeImpl
 	}
 
 	@Override
-	public boolean conformsTo(DomainStandardLibrary standardLibrary, DomainType type) {
+	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		if (type instanceof AnyType) {
 			return true;
 		}

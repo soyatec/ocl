@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.domain.library;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
@@ -32,5 +34,6 @@ public interface LibraryUnaryOperation extends LibraryOperation {
 	 * @return the evaluated value
 	 * @throws InvalidValueException 
 	 */
-	Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceValue) throws InvalidValueException;
+	@NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue) throws InvalidValueException;
+	@NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Value sourceValue) throws InvalidValueException;
 }

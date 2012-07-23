@@ -26,7 +26,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.AbstractEnvironment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Environment;
@@ -80,8 +83,8 @@ public class PivotEnvironment extends AbstractEnvironment {
         OCL_PACKAGES.put(names, EcorePackage.eINSTANCE);
     } */
 	
-	private final EnvironmentFactory factory;
-	private MetaModelManager metaModelManager;
+	private final @NonNull EnvironmentFactory factory;
+	private final @NonNull MetaModelManager metaModelManager;
 	
 	/**
 	 * Initializes me with a package registry for package look-ups.
@@ -118,7 +121,7 @@ public class PivotEnvironment extends AbstractEnvironment {
 	 * @param resource
 	 *            a resource, which may or may not already have content
 	 */
-	protected PivotEnvironment(PivotEnvironmentFactory factory, Resource resource) {
+	protected PivotEnvironment(@NonNull PivotEnvironmentFactory factory, @Nullable Resource resource) {
 		this.factory = factory;
 		this.metaModelManager = factory.getMetaModelManager();
 	}
@@ -129,14 +132,14 @@ public class PivotEnvironment extends AbstractEnvironment {
      * 
      * @param parent my parent environment
      */
-	protected PivotEnvironment(PivotEnvironment parent) {		
+	protected PivotEnvironment(@NonNull PivotEnvironment parent) {		
 		super(parent);
 		factory = parent.factory;
 		metaModelManager = parent.metaModelManager;
 	}
 
     // implements the inherited specification
-	public EnvironmentFactory getFactory() {
+	public @NonNull EnvironmentFactory getFactory() {
 		return factory;
 	}
 	
@@ -151,7 +154,7 @@ public class PivotEnvironment extends AbstractEnvironment {
 	 * {@link #collectStates} method.
 	 * </p>
 	 */
-	public List<State> getStates(Type owner, List<String> pathPrefix) {
+	public @NonNull List<State> getStates(@NonNull Type owner, @NonNull List<String> pathPrefix) {
 		List<State> result = new ArrayList<State>();
 		
 /*		collectStates(owner, pathPrefix, result);
@@ -188,7 +191,7 @@ public class PivotEnvironment extends AbstractEnvironment {
 		// do nothing
 	}
 	
-	public Constraint getDefinition(Object feature) {
+	public Constraint getDefinition(@NonNull Object feature) {
     	Constraint result = null;
 		ETypedElement typedFeature = (ETypedElement) feature;
     	
@@ -209,16 +212,16 @@ public class PivotEnvironment extends AbstractEnvironment {
     	return result;
 	}
 
-	public MetaModelManager getMetaModelManager() {
+	public @NonNull MetaModelManager getMetaModelManager() {
 		return metaModelManager;
 	}
 
-	public DomainStandardLibrary getOCLStandardLibrary() {
+	public @NonNull DomainStandardLibrary getOCLStandardLibrary() {
 		return metaModelManager;
 	}
 
-	public PivotFactory getOCLFactory() {
-		return PivotFactoryImpl.eINSTANCE;
+	public @NonNull PivotFactory getOCLFactory() {
+		return DomainUtil.nonNullEMF(PivotFactoryImpl.eINSTANCE);
 	}
 
 //	@Override

@@ -16,17 +16,18 @@
  */
 package org.eclipse.ocl.examples.pivot.executor;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.pivot.InvalidType;
 
 public class PivotReflectiveInvalidType extends PivotReflectiveType
 {
-	public PivotReflectiveInvalidType(PivotReflectivePackage executorPackage, InvalidType type) {
+	public PivotReflectiveInvalidType(@NonNull PivotReflectivePackage executorPackage, @NonNull InvalidType type) {
 		super(executorPackage, type);
 	}
 
 	@Override
-	public DomainInheritance getCommonInheritance(DomainInheritance thatInheritance) {
+	public @NonNull DomainInheritance getCommonInheritance(@NonNull DomainInheritance thatInheritance) {
 		return thatInheritance;
 	}
 

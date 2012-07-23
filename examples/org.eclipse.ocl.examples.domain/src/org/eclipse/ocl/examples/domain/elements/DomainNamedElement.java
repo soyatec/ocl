@@ -18,5 +18,5 @@ package org.eclipse.ocl.examples.domain.elements;
 
 public interface DomainNamedElement extends DomainElement
 {
-	String getName();
+	/*@NonNull*/ String getName();
 }

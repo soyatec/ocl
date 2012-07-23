@@ -26,6 +26,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
  * DelegateResourceAdapter extends a Resource to load and unload DelegateDomains
@@ -34,7 +36,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public class DelegateResourceAdapter extends AdapterImpl
 {
-	public static DelegateResourceAdapter getAdapter(Resource resource) {
+	public static @NonNull DelegateResourceAdapter getAdapter(@NonNull Resource resource) {
 		DelegateResourceAdapter adapter = (DelegateResourceAdapter) EcoreUtil.getAdapter(resource.eAdapters(), DelegateResourceAdapter.class);
 		if (adapter == null) {
 			adapter = new DelegateResourceAdapter();
@@ -62,33 +64,33 @@ public class DelegateResourceAdapter extends AdapterImpl
 		    if (eventType == Notification.SET) 
 		    {
 		    	Resource resource = getTarget();
-				EList<EObject> contents = resource.getContents();
+				EList<EObject> contents = DomainUtil.nonNullEMF(resource.getContents());
 		    	if (notification.getNewBooleanValue()) {
 					EPackage.Registry packageRegistry = resource.getResourceSet().getPackageRegistry();
-					installPackages(packageRegistry, contents);
+					installPackages(DomainUtil.nonNullEMF(packageRegistry), contents);
 		    	}
 	    	}
 	    }
 	    else if (featureID == Resource.RESOURCE__CONTENTS) 
 	    {
 	    	if (eventType == Notification.REMOVE) {
-	    		EObject oldValue = (EObject) notification.getOldValue();
+	    		EObject oldValue = (EObject) DomainUtil.nonNullEMF(notification.getOldValue());
 				unloadDelegate(oldValue);
 	    	}
 	    	else if (eventType == Notification.REMOVE_MANY) {
 	    		@SuppressWarnings("unchecked")
-				List<? extends EObject> oldValues = (List<? extends EObject>) notification.getOldValue();
+				List<? extends EObject> oldValues = DomainUtil.nonNullEMF((List<? extends EObject>) notification.getOldValue());
 				unloadDelegates(oldValues);
 	    	}
 	    }
 	}
 
-	protected void installPackages(EPackage.Registry packageRegistry, List<? extends EObject> contents) {
+	protected void installPackages(@NonNull EPackage.Registry packageRegistry, @NonNull List<? extends EObject> contents) {
 		for (EObject eObject : contents) {
 			if (eObject instanceof EPackage) {
 				EPackage ePackage = (EPackage)eObject;
 				packageRegistry.put(ePackage.getNsURI(), ePackage);
-				installPackages(packageRegistry, ePackage.getESubpackages());
+				installPackages(packageRegistry, DomainUtil.nonNullEMF(ePackage.getESubpackages()));
 			}
 		}
 	}
@@ -99,20 +101,20 @@ public class DelegateResourceAdapter extends AdapterImpl
 		super.setTarget(resource);
 	}
 
-	protected void unloadDelegate(EObject eObject) {
+	protected void unloadDelegate(@NonNull EObject eObject) {
 		if (eObject instanceof EPackage) {
 			EPackage ePackage = (EPackage)eObject;
 			DelegateEPackageAdapter adapter = DelegateEPackageAdapter.findAdapter(ePackage);
 			if (adapter != null) {
 				adapter.unloadDelegates();
 			}
-			unloadDelegates(ePackage.getESubpackages());
+			unloadDelegates(DomainUtil.nonNullEMF(ePackage.getESubpackages()));
 		}
 	}
 
-	protected void unloadDelegates(List<? extends EObject> contents) {
+	protected void unloadDelegates(@NonNull List<? extends EObject> contents) {
 		for (EObject eObject : contents) {
-			unloadDelegate(eObject);
+			unloadDelegate(DomainUtil.nonNullEntry(eObject));
 		}		
 	}
 }

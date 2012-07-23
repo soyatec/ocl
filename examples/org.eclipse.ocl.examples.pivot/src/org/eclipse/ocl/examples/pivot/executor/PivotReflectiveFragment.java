@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.pivot.executor;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -25,12 +26,12 @@ import org.eclipse.ocl.examples.pivot.Type;
 
 public class PivotReflectiveFragment extends ReflectiveFragment
 {
-	public PivotReflectiveFragment(PivotReflectiveType derivedInheritance, DomainInheritance baseInheritance) {
+	public PivotReflectiveFragment(@NonNull PivotReflectiveType derivedInheritance, @NonNull DomainInheritance baseInheritance) {
 		super(derivedInheritance, baseInheritance);
 	}
 
 	@Override
-	protected DomainOperation getOperationOverload(DomainOperation baseOperation) {
+	protected @NonNull DomainOperation getOperationOverload(@NonNull DomainOperation baseOperation) {
 		Type pivotType = ((PivotReflectiveType) derivedInheritance).getPivotType();
 		IndexableIterable<? extends DomainType> baseParameterTypes = baseOperation.getParameterType();
 		int iMax = baseParameterTypes.size();
@@ -52,6 +53,6 @@ public class PivotReflectiveFragment extends ReflectiveFragment
 				}
 			}
 		}
-		return null;
+		return baseOperation;			// Shouldn't ever happen.
 	}
 }

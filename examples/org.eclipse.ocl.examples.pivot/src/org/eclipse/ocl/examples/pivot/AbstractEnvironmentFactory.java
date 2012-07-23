@@ -18,6 +18,7 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
@@ -77,8 +78,8 @@ public abstract class AbstractEnvironmentFactory implements EnvironmentFactory, 
      * @param context the package context (must not be <code>null</code>)
      * @return the new nested environment
      */
-	protected Environment createPackageContext(Environment parent,
-			org.eclipse.ocl.examples.pivot.Package context) {
+	protected Environment createPackageContext(@NonNull Environment parent,
+			@NonNull org.eclipse.ocl.examples.pivot.Package context) {
 		
 		Environment result =
 			createEnvironment(parent);
@@ -101,10 +102,7 @@ public abstract class AbstractEnvironmentFactory implements EnvironmentFactory, 
     } */
 	
     // implements the interface method
-	public Environment
-	createClassifierContext(
-			Environment parent,
-			Type context) {
+	public @NonNull Environment createClassifierContext(@NonNull Environment parent, @NonNull Type context) {
         
         Environment result =
             createEnvironment(parent);
@@ -120,16 +118,12 @@ public abstract class AbstractEnvironmentFactory implements EnvironmentFactory, 
 	}
     
     // implements the interface method
-    public Environment
-    createInstanceContext(
-            Environment parent,
-            Object context) {
-        
+    public @NonNull Environment createInstanceContext(@NonNull Environment parent, @NonNull Object context) {       
         return createClassifierContext(parent, getClassifier(context));
     }
 	
     // implements the interface method
-	public Environment createOperationContext(Environment parent, Operation operation) {		
+	public @NonNull Environment createOperationContext(@NonNull Environment parent, @NonNull Operation operation) {		
 		Environment result = createEnvironment(parent);		
 		if (result instanceof AbstractEnvironment) {
 			((AbstractEnvironment) result).setContextOperation(operation);
@@ -147,10 +141,7 @@ public abstract class AbstractEnvironmentFactory implements EnvironmentFactory, 
 	}
 	
     // implements the interface method
-	public Environment
-	createPropertyContext(
-			Environment parent,
-			Property property) {
+	public @NonNull Environment createPropertyContext(@NonNull Environment parent, @NonNull Property property) {
 		
 		Environment result =
 			createEnvironment(parent);
@@ -164,11 +155,9 @@ public abstract class AbstractEnvironmentFactory implements EnvironmentFactory, 
 	}
 	
     // implements the interface method
-	public EvaluationVisitor createEvaluationVisitor(Environment env,
-			EvaluationEnvironment evalEnv,
-			DomainModelManager modelManager) {
-        EvaluationVisitor result =
-            new EvaluationVisitorImpl(env, evalEnv, modelManager);
+	public @NonNull EvaluationVisitor createEvaluationVisitor(@NonNull Environment env, @NonNull EvaluationEnvironment evalEnv,
+			@NonNull DomainModelManager modelManager) {
+        EvaluationVisitor result = new EvaluationVisitorImpl(env, evalEnv, modelManager);
         
         if (isEvaluationTracingEnabled()) {
             // decorate the evaluation visitor with tracing support

@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.library.iterator;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
@@ -30,15 +32,15 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class OneIteration extends AbstractIteration
 {
-	public static final OneIteration INSTANCE = new OneIteration();
+	public static final @NonNull OneIteration INSTANCE = new OneIteration();
 
-	public BooleanValue.Accumulator createAccumulatorValue(DomainEvaluator evaluator, DomainType accumulatorType, DomainType bodyType) {
+	public @NonNull BooleanValue.Accumulator createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		return valueFactory.createBooleanAccumulatorValue();
 	}
 
 	@Override
-    protected Value updateAccumulator(DomainIterationManager iterationManager) {
+    protected @Nullable Value updateAccumulator(@NonNull DomainIterationManager iterationManager) {
 		Value bodyVal = iterationManager.evaluateBody();		
 		if (bodyVal.isUndefined()) {
 			return iterationManager.throwInvalidEvaluation(EvaluatorMessages.UndefinedBody, "one"); 	// Null body is invalid //$NON-NLS-1$

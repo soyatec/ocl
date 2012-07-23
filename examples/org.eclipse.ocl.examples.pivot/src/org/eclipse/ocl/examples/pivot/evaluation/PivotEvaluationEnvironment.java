@@ -19,6 +19,8 @@
 package org.eclipse.ocl.examples.pivot.evaluation;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
@@ -43,7 +45,7 @@ public class PivotEvaluationEnvironment extends AbstractEvaluationEnvironment {
     /**
      * Initializes me.
      */
-    public PivotEvaluationEnvironment(MetaModelManager metaModelManager) {
+    public PivotEvaluationEnvironment(@NonNull MetaModelManager metaModelManager) {
         super(metaModelManager);
     }
 
@@ -53,7 +55,7 @@ public class PivotEvaluationEnvironment extends AbstractEvaluationEnvironment {
      * @param parent
      *            my parent (nesting scope); must not be <code>null</code>
      */
-    public PivotEvaluationEnvironment(EvaluationEnvironment parent) {
+    public PivotEvaluationEnvironment(@NonNull EvaluationEnvironment parent) {
         super(parent);
     }
 
@@ -327,12 +329,12 @@ public class PivotEvaluationEnvironment extends AbstractEvaluationEnvironment {
     } */
 
     // implements the inherited specification
-    public DomainModelManager createModelManager(Object object) {
+   public @NonNull DomainModelManager createModelManager(@Nullable Object object) {
         if (object instanceof ObjectValue) {
             object = ((ObjectValue) object).getObject();
         }
         if (object instanceof EObject) {
-            return new PivotModelManager(metaModelManager, (EObject) object);
+            return new PivotModelManager(getMetaModelManager(), (EObject) object);
         }
         return DomainModelManager.NULL;
     }
@@ -436,7 +438,7 @@ public class PivotEvaluationEnvironment extends AbstractEvaluationEnvironment {
 //    	throw new UnsupportedOperationException(getClass().getName() + ".getInvalidResult");
 //    }
 
-	public ValueFactory getValueFactory() {
+	public @NonNull ValueFactory getValueFactory() {
 		return metaModelManager.getValueFactory();
 	}
 }

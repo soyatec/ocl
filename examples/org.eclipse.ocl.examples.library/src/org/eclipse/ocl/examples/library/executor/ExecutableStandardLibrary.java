@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainClassifierType;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
@@ -32,6 +34,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.types.AbstractCollectionType;
 import org.eclipse.ocl.examples.domain.types.AbstractStandardLibrary;
 import org.eclipse.ocl.examples.domain.types.AbstractTupleType;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 
 public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
@@ -51,27 +54,27 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 	 */
 	private Map<String, List<WeakReference<DomainTupleType>>> tupleTypeMap = new WeakHashMap<String, List<WeakReference<DomainTupleType>>>();
 
-	protected abstract DomainClassifierType createClassifierType(DomainType classType);
+	protected abstract @NonNull DomainClassifierType createClassifierType(@NonNull DomainType classType);
 	
-	public abstract DomainEvaluator createEvaluator(EObject contextObject, Map<Object, Object> contextMap);
+	public abstract @NonNull DomainEvaluator createEvaluator(@NonNull EObject contextObject, @Nullable Map<Object, Object> contextMap);
 
-	public DomainType getAnyClassifierType() {
-		return OCLstdlibTables.Types._AnyClassifier;
+	public @NonNull DomainType getAnyClassifierType() {
+		return DomainUtil.nonNullJava(OCLstdlibTables.Types._AnyClassifier);
 	}
 	
-	public DomainType getBagType() {
-		return OCLstdlibTables.Types._Bag;
+	public @NonNull DomainType getBagType() {
+		return DomainUtil.nonNullJava(OCLstdlibTables.Types._Bag);
 	}
 
-	public DomainCollectionType getBagType(DomainType elementType) {
+	public @NonNull DomainCollectionType getBagType(@NonNull DomainType elementType) {
 		return getCollectionType(getBagType(), elementType);
 	}
 
-	public DomainType getBooleanType() {
-		return OCLstdlibTables.Types._Boolean;
+	public @NonNull DomainType getBooleanType() {
+		return DomainUtil.nonNullJava(OCLstdlibTables.Types._Boolean);
 	}
 
-	public synchronized DomainClassifierType getClassifierType(DomainType classType) {
+	public synchronized @NonNull DomainClassifierType getClassifierType(@NonNull DomainType classType) {
 		DomainClassifierType classifierType = weakGet(classifiers, classType);
 		if (classifierType == null) {
 			classifierType = createClassifierType(classType);
@@ -80,11 +83,11 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 		return classifierType;
 	}
 
-	public DomainType getCollectionType() {
-		return OCLstdlibTables.Types._Collection;
+	public @NonNull DomainType getCollectionType() {
+		return DomainUtil.nonNullJava(OCLstdlibTables.Types._Collection);
 	}
 
-	public synchronized DomainCollectionType getCollectionType(DomainType genericType, DomainType elementType) {
+	public synchronized @NonNull DomainCollectionType getCollectionType(@NonNull DomainType genericType, @NonNull DomainType elementType) {
 		AbstractCollectionType specializedType = null;
 		Map<DomainType, WeakReference<AbstractCollectionType>> map = specializations.get(genericType);
 		if (map == null) {
@@ -95,89 +98,89 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 			specializedType = weakGet(map, elementType);
 		}
 		if (specializedType == null) {
-			specializedType = new AbstractCollectionType(this, genericType.getName(), genericType, elementType);
+			specializedType = new AbstractCollectionType(this, DomainUtil.nonNullModel(genericType.getName()), genericType, elementType);
 			map.put(elementType, new WeakReference<AbstractCollectionType>(specializedType));
 		}
 		return specializedType;
 	}
 
-	public DomainType getEnumerationType() {
-		return OCLstdlibTables.Types._Enumeration;
+	public @NonNull DomainType getEnumerationType() {
+		return DomainUtil.nonNullJava(OCLstdlibTables.Types._Enumeration);
 	}
 
-	public DomainType getIntegerType() {
-		return OCLstdlibTables.Types._Integer;
+	public @NonNull DomainType getIntegerType() {
+		return DomainUtil.nonNullJava(OCLstdlibTables.Types._Integer);
 	}
 
-	public DomainType getOclAnyType() {
-		return OCLstdlibTables.Types._OclAny;
+	public @NonNull DomainType getOclAnyType() {
+		return DomainUtil.nonNullJava(OCLstdlibTables.Types._OclAny);
 	}
 
-	public DomainType getOclComparableType() {
-		return OCLstdlibTables.Types._OclComparable;
+	public @NonNull DomainType getOclComparableType() {
+		return DomainUtil.nonNullJava(OCLstdlibTables.Types._OclComparable);
 	}
 
-	public DomainType getOclElementType() {
-		return OCLstdlibTables.Types._OclElement;
+	public @NonNull DomainType getOclElementType() {
+		return DomainUtil.nonNullJava(OCLstdlibTables.Types._OclElement);
 	}
 
-	public DomainType getOclInvalidType() {
-		return OCLstdlibTables.Types._OclInvalid;
+	public @NonNull DomainType getOclInvalidType() {
+		return DomainUtil.nonNullJava(OCLstdlibTables.Types._OclInvalid);
 	}
 
 	public DomainType getOclMessageType() {
-		return OCLstdlibTables.Types._OclMessage;
+		return DomainUtil.nonNullJava(OCLstdlibTables.Types._OclMessage);
 	}
 
-	public DomainType getOclSelfType() {
-		return OCLstdlibTables.Types._OclSelf;
+	public @NonNull DomainType getOclSelfType() {
+		return DomainUtil.nonNullJava(OCLstdlibTables.Types._OclSelf);
 	}
 
-	public DomainType getOclSummableType() {
-		return OCLstdlibTables.Types._OclSummable;
+	public @NonNull DomainType getOclSummableType() {
+		return DomainUtil.nonNullJava(OCLstdlibTables.Types._OclSummable);
 	}
 
-	public DomainType getOclTupleType() {
-		return OCLstdlibTables.Types._OclTuple;
+	public @NonNull DomainType getOclTupleType() {
+		return DomainUtil.nonNullJava(OCLstdlibTables.Types._OclTuple);
 	}
 
-	public DomainType getOclVoidType() {
-		return OCLstdlibTables.Types._OclVoid;
+	public @NonNull DomainType getOclVoidType() {
+		return DomainUtil.nonNullJava(OCLstdlibTables.Types._OclVoid);
 	}
 
-	public DomainType getOrderedSetType() {
-		return OCLstdlibTables.Types._OrderedSet;
+	public @NonNull DomainType getOrderedSetType() {
+		return DomainUtil.nonNullJava(OCLstdlibTables.Types._OrderedSet);
 	}
 
-	public DomainCollectionType getOrderedSetType(DomainType elementType) {
+	public @NonNull DomainCollectionType getOrderedSetType(@NonNull DomainType elementType) {
 		return getCollectionType(getOrderedSetType(), elementType);
 	}
 
-	public DomainType getRealType() {
-		return OCLstdlibTables.Types._Real;
+	public @NonNull DomainType getRealType() {
+		return DomainUtil.nonNullJava(OCLstdlibTables.Types._Real);
 	}
 
-	public DomainType getSequenceType() {
-		return OCLstdlibTables.Types._Sequence;
+	public @NonNull DomainType getSequenceType() {
+		return DomainUtil.nonNullJava(OCLstdlibTables.Types._Sequence);
 	}
 
-	public DomainCollectionType getSequenceType(DomainType elementType) {
+	public @NonNull DomainCollectionType getSequenceType(@NonNull DomainType elementType) {
 		return getCollectionType(getSequenceType(), elementType);
 	}
 
-	public DomainType getSetType() {
-		return OCLstdlibTables.Types._Set;
+	public @NonNull DomainType getSetType() {
+		return DomainUtil.nonNullJava(OCLstdlibTables.Types._Set);
 	}
 
-	public DomainCollectionType getSetType(DomainType elementType) {
+	public @NonNull DomainCollectionType getSetType(@NonNull DomainType elementType) {
 		return getCollectionType(getSetType(), elementType);
 	}
 
-	public DomainType getStringType() {
-		return OCLstdlibTables.Types._String;
+	public @NonNull DomainType getStringType() {
+		return DomainUtil.nonNullJava(OCLstdlibTables.Types._String);
 	}
 
-	public DomainTupleType getTupleType(List<? extends DomainTypedElement> parts) {
+	public @NonNull DomainTupleType getTupleType(@NonNull List<? extends DomainTypedElement> parts) {
 		StringBuilder s = new StringBuilder();
 		for (DomainTypedElement part : parts) {
 			s.append(part.getName());
@@ -217,7 +220,7 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 		}
 	}
 
-	public DomainType getUnlimitedNaturalType() {
-		return OCLstdlibTables.Types._UnlimitedNatural;
+	public @NonNull DomainType getUnlimitedNaturalType() {
+		return DomainUtil.nonNullJava(OCLstdlibTables.Types._UnlimitedNatural);
 	}
 }

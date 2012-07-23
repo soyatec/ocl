@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.library.iterator;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -31,21 +33,21 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class IsUniqueIteration extends AbstractIteration
 {
-	public static final IsUniqueIteration INSTANCE = new IsUniqueIteration();
+	public static final @NonNull IsUniqueIteration INSTANCE = new IsUniqueIteration();
 
-	public CollectionValue.Accumulator createAccumulatorValue(DomainEvaluator evaluator, DomainType accumulatorType, DomainType bodyType) {
+	public @NonNull CollectionValue.Accumulator createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 		return valueFactory.createCollectionAccumulatorValue(standardLibrary.getSetType(accumulatorType));
 	}
 	
 	@Override
-	protected Value resolveTerminalValue(DomainIterationManager iterationManager) {
+	protected @NonNull Value resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
 		return iterationManager.getValueFactory().getTrue();
 	}
 	
 	@Override
-    protected Value updateAccumulator(DomainIterationManager iterationManager) {
+    protected @Nullable Value updateAccumulator(@NonNull DomainIterationManager iterationManager) {
 		CollectionValue.Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
 		Value bodyVal = iterationManager.evaluateBody();		
 		try {

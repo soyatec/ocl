@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
@@ -69,7 +70,7 @@ public interface OCLHelper
 	 * @see #setOperationContext(Object, Object)
      * @see #setPropertyContext(Object, Object)
 	 */
-	void setContext(EClassifier context);
+	void setContext(@NonNull EClassifier context);
 
 	/**
 	 * Sets the classifier context of the OCL expression for which syntax or
@@ -80,7 +81,7 @@ public interface OCLHelper
 	 * @see #setOperationContext(Object, Object)
      * @see #setPropertyContext(Object, Object)
 	 */
-	void setContext(Type context);
+	void setContext(@NonNull Type context);
 
 	/**
 	 * Obtains my OCL context classifier as a classifier.
@@ -101,7 +102,7 @@ public interface OCLHelper
 	 * 
 	 * @see #setContext(Object)
 	 */
-	void setOperationContext(EClassifier context, EOperation operation);
+	void setOperationContext(@NonNull EClassifier context, @NonNull EOperation operation);
 	
 	/**
 	 * Sets the operation context of the OCL expression for which syntax or
@@ -115,7 +116,7 @@ public interface OCLHelper
 	 * 
 	 * @see #setContext(Object)
 	 */
-	void setOperationContext(Type context, Operation operation);
+	void setOperationContext(@NonNull Type context, @NonNull Operation operation);
 
 	/**
 	 * Obtains my context operation, if my environment is an operation context.
@@ -137,7 +138,7 @@ public interface OCLHelper
 	 * 
 	 * @see #setContext(Object)
 	 */
-	void setPropertyContext(Type context, Property property);
+	void setPropertyContext(@NonNull Type context, @NonNull Property property);
 	
 	/**
 	 * Sets the attribute context of the OCL expression for which syntax or
@@ -151,7 +152,7 @@ public interface OCLHelper
 	 * 
 	 * @see #setContext(Object)
 	 */
-	void setPropertyContext(EClassifier context, EStructuralFeature property);
+	void setPropertyContext(@NonNull EClassifier context, @NonNull EStructuralFeature property);
 
 	/**
 	 * Obtains my context attribute, if my environment is an attribute context.
@@ -174,7 +175,7 @@ public interface OCLHelper
      * 
      * @see #setContext(Object)
      */
-    void setInstanceContext(Object instance);
+    void setInstanceContext(@NonNull Object instance);
     
     /**
      * Sets the operation context implied by the specified instance.  The
@@ -190,7 +191,7 @@ public interface OCLHelper
      * 
      * @see #setOperationContext(Object, Object)
      */
-    void setInstanceOperationContext(Object instance, Operation operation);
+    void setInstanceOperationContext(@NonNull Object instance, @NonNull Operation operation);
     
     /**
      * Sets the operation context implied by the specified instance.  The
@@ -206,7 +207,7 @@ public interface OCLHelper
      * 
      * @see #setPropertyContext(Object, Object)
      */
-    void setInstancePropertyContext(Object instance, Property property);
+    void setInstancePropertyContext(@NonNull Object instance, @NonNull Property property);
 	
     /**
      * Obtains the OCL instance that created me.  Note that many of the generic
@@ -215,7 +216,7 @@ public interface OCLHelper
      * 
      * @return the OCL instance that created me
      */
-    OCL getOCL();
+    @NonNull OCL getOCL();
     
     /**
      * Obtains the environment defining my current
@@ -264,7 +265,7 @@ public interface OCLHelper
      * 
      * @throws ParserException if the <code>expression</code> fails to parse
      */
-    ExpressionInOCL createQuery(String expression) throws ParserException;
+	@NonNull ExpressionInOCL createQuery(@NonNull String expression) throws ParserException;
 
     /**
      * Creates a constraint of the specified kind, by parsing the given
@@ -296,7 +297,7 @@ public interface OCLHelper
 	 * 
 	 * @throws ParserException if the <code>expression</code> fails to parse
 	 */
-    ExpressionInOCL createInvariant(String expression) throws ParserException;
+    ExpressionInOCL createInvariant(@NonNull String expression) throws ParserException;
 
 	/**
 	 * Creates an operation precondition constraint.  This is appropriate only
@@ -311,7 +312,7 @@ public interface OCLHelper
 	 * 
 	 * @see #setOperationContext(Object, Object)
 	 */
-	ExpressionInOCL createPrecondition(String expression) throws ParserException;
+	ExpressionInOCL createPrecondition(@NonNull String expression) throws ParserException;
 
 	/**
 	 * Creates an operation postcondition constraint.  This is appropriate only
@@ -326,7 +327,7 @@ public interface OCLHelper
 	 * 
 	 * @see #setOperationContext(Object, Object)
 	 */
-	ExpressionInOCL createPostcondition(String expression) throws ParserException;
+	ExpressionInOCL createPostcondition(@NonNull String expression) throws ParserException;
 
 	/**
 	 * Creates an operation body.  This is appropriate only
@@ -345,7 +346,7 @@ public interface OCLHelper
 	 * 
 	 * @see #setOperationContext(Object, Object)
 	 */
-	ExpressionInOCL createBodyCondition(String expression) throws ParserException;
+	ExpressionInOCL createBodyCondition(@NonNull String expression) throws ParserException;
 
 	/**
 	 * Creates a property initial value expression.  This is appropriate only
@@ -361,7 +362,7 @@ public interface OCLHelper
 	 * 
 	 * @see #setPropertyContext(Object, Object)
 	 */
-//	Constraint createInitialValueExpression(String expression) throws ParserException;
+//	Constraint createInitialValueExpression(@NonNull String expression) throws ParserException;
 
 	/**
 	 * Creates a property derived value expression.  This is appropriate only
@@ -377,7 +378,7 @@ public interface OCLHelper
 	 * 
 	 * @see #setPropertyContext(Object, Object)
 	 */
-	ExpressionInOCL createDerivedValueExpression(String expression) throws ParserException;
+	ExpressionInOCL createDerivedValueExpression(@NonNull String expression) throws ParserException;
 
 	/**
 	 * Defines an additional operation in the context classifier,
@@ -393,7 +394,7 @@ public interface OCLHelper
 	 * 
 	 * @throws ParserException if the <code>expression</code> fails to parse
 	 */
-//	Operation defineOperation(String defExpression) throws ParserException;
+//	Operation defineOperation(@NonNull String defExpression) throws ParserException;
 
 	/**
 	 * Defines an additional attribute in the context classifier,
@@ -409,7 +410,7 @@ public interface OCLHelper
 	 * 
 	 * @throws ParserException if the <code>expression</code> fails to parse
 	 */
-//	Property defineProperty(String defExpression) throws ParserException;
+//	Property defineProperty(@NonNull String defExpression) throws ParserException;
     
     /**
      * Obtains problems, if any, found in parsing the last OCL constraint or

@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.library.iterator;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -33,15 +35,15 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class ClosureIteration extends AbstractIteration
 {
-	public static final ClosureIteration INSTANCE = new ClosureIteration();
+	public static final @NonNull ClosureIteration INSTANCE = new ClosureIteration();
 	private static LibraryValidator validator = null; 
 
-	public CollectionValue.Accumulator createAccumulatorValue(DomainEvaluator evaluator, DomainType accumulatorType, DomainType bodyType) {
+	public @NonNull CollectionValue.Accumulator createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) {
 		return evaluator.getValueFactory().createCollectionAccumulatorValue((DomainCollectionType) accumulatorType);
 	}
 
 	@Override
-	public LibraryValidator getValidator(DomainStandardLibrary standardLibrary) {
+	public LibraryValidator getValidator(@NonNull DomainStandardLibrary standardLibrary) {
 		if (validator == null) {
 			validator = getLibraryValidator(standardLibrary, "org.eclipse.ocl.examples.pivot.library.validators.ValidateClosureIteration"); //$NON-NLS-1$
 		}
@@ -52,7 +54,7 @@ public class ClosureIteration extends AbstractIteration
 	 * Recursively evaluates the iterator body expression.
 	 */
     @Override
-	protected Value updateAccumulator(DomainIterationManager iterationManager) {
+	protected @Nullable Value updateAccumulator(@NonNull DomainIterationManager iterationManager) {
 		if (!iterationManager.isOuterIteration()) {
 			// If there is the parent is the iterator
 			Value value = iterationManager.get();

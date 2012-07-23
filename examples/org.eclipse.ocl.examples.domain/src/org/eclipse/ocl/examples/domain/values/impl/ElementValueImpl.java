@@ -17,8 +17,10 @@
 package org.eclipse.ocl.examples.domain.values.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ElementValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
@@ -40,33 +42,33 @@ public class ElementValueImpl extends ObjectValueImpl implements ElementValue
 
 	protected DomainType type = null;
 	
-	public ElementValueImpl(ValueFactory valueFactory, DomainElement object) {
+	public ElementValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainElement object) {
 		super(valueFactory, object);
 	}
 
 	@Override
-	public DomainElement asElement() {
+	public @NonNull DomainElement asElement() {
 		return getObject();
 	}
 
 	@Override
-	public ElementValue asElementValue() {
+	public @NonNull ElementValue asElementValue() {
 		return this;
 	}
 
-	public DomainElement getElement() {
+	public @NonNull DomainElement getElement() {
 		return getObject();
 	}
 
 	@Override
-	public DomainElement getObject() {
+	public @NonNull DomainElement getObject() {
 		return (DomainElement) object;
 	}
 
-	public DomainType getType() {
+	public @NonNull DomainType getType() {
 		if (type == null) {
 			type = valueFactory.getStandardLibrary().getType(getObject());
 		}
-		return type;
+		return DomainUtil.nonNullJDT(type);
 	}
 }

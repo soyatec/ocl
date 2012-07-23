@@ -19,7 +19,9 @@ package org.eclipse.ocl.examples.domain.values.impl;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
@@ -36,12 +38,12 @@ public class LongIntegerValueImpl extends IntegerValueImpl
 	private final long value;			// The value.
 	private BigInteger bigValue = null;	// Lazily computed BigInteger counterpart.
 	
-	public LongIntegerValueImpl(ValueFactory valueFactory, long value) {
+	public LongIntegerValueImpl(@NonNull ValueFactory valueFactory, long value) {
 		super(valueFactory);
 		this.value = value;
 	}
 
-	public IntegerValue abs() {
+	public @NonNull IntegerValue abs() {
 		if (value >= 0) {
 			return this;
 		}
@@ -49,78 +51,89 @@ public class LongIntegerValueImpl extends IntegerValueImpl
 			return valueFactory.integerValueOf(-value);
 		}
 		else {
-			return valueFactory.integerValueOf(BigInteger.ONE.shiftLeft(Long.SIZE-1));
+			BigInteger result = DomainUtil.nonNullJava(BigInteger.ONE.shiftLeft(Long.SIZE-1));
+			return valueFactory.integerValueOf(result);
 		}
 	}
 
-	public IntegerValue add(IntegerValue right) {
-		if (right instanceof LongIntegerValueImpl) {
-			long thatValue = ((LongIntegerValueImpl)right).longValue();
-			long sum = value + thatValue;
-			if (value >= 0) {
-				if ((thatValue >= 0) && (sum >= 0)) {
-					return valueFactory.integerValueOf(sum);
+	public @NonNull IntegerValue add(@NonNull IntegerValue right) {
+		try {
+			if (right instanceof LongIntegerValueImpl) {
+				long thatValue = ((LongIntegerValueImpl)right).longValue();
+				long sum = value + thatValue;
+				if (value >= 0) {
+					if ((thatValue >= 0) && (sum >= 0)) {
+						return valueFactory.integerValueOf(sum);
+					}
+				}
+				else {
+					if ((thatValue <= 0) && (sum <= 0)) {
+						return valueFactory.integerValueOf(sum);
+					}
 				}
 			}
-			else {
-				if ((thatValue <= 0) && (sum <= 0)) {
-					return valueFactory.integerValueOf(sum);
-				}
-			}
+			BigInteger result = DomainUtil.nonNullJava(bigIntegerValue().add(right.bigIntegerValue()));
+			return valueFactory.integerValueOf(result);
+		} catch (InvalidValueException e) {
+			return valueFactory.createInvalidValue(e);
 		}
-		return valueFactory.integerValueOf(bigIntegerValue().add(right.bigIntegerValue()));
 	}
 
 	@Override
-	public Double asDouble() {
-		return Double.valueOf(value);
+	public @NonNull Double asDouble() {
+		return DomainUtil.nonNullJava(Double.valueOf(value));
 	}
 	
 	@Override
-	public Integer asInteger() throws InvalidValueException {
-		return Integer.valueOf(intValue());
+	public @NonNull Integer asInteger() throws InvalidValueException {
+		return DomainUtil.nonNullJava(Integer.valueOf(intValue()));
 	}
 
-	public Object asObject() {
-		return value;
+	public @NonNull Object asObject() {
+		return DomainUtil.nonNullJava(Long.valueOf(value));
 	}
 
-	public BigDecimal bigDecimalValue() {
+	public @NonNull BigDecimal bigDecimalValue() {
 		return new BigDecimal(value);
 	}
 
-	public BigInteger bigIntegerValue() {
+	public @NonNull BigInteger bigIntegerValue() {
 		if (bigValue == null) {
 			bigValue = BigInteger.valueOf(value);
 		}
-		return bigValue;
+		return DomainUtil.nonNullJDT(bigValue);
 	}
 
 	public int compareTo(NumericValue o) {
-		if (o instanceof IntIntegerValueImpl) {
-			int thatValue = ((IntIntegerValueImpl)o).intValue();
-			return (value < thatValue ? -1 : (value == thatValue ? 0 : 1));
-		}
-		if (o instanceof LongIntegerValueImpl) {
-			long thatValue = ((LongIntegerValueImpl)o).longValue();
-			return (value < thatValue ? -1 : (value == thatValue ? 0 : 1));
-		}
-		if (o instanceof IntegerValue) {
-			return bigIntegerValue().compareTo(((IntegerValue)o).bigIntegerValue());
-		}
-		else {
-			return Double.compare(doubleValue(), o.doubleValue());
+		try {
+			if (o instanceof IntIntegerValueImpl) {
+				int thatValue = ((IntIntegerValueImpl)o).intValue();
+				return (value < thatValue ? -1 : (value == thatValue ? 0 : 1));
+			}
+			if (o instanceof LongIntegerValueImpl) {
+				long thatValue = ((LongIntegerValueImpl)o).longValue();
+				return (value < thatValue ? -1 : (value == thatValue ? 0 : 1));
+			}
+			if (o instanceof IntegerValue) {
+				return bigIntegerValue().compareTo(((IntegerValue)o).bigIntegerValue());
+			}
+			else {
+				return bigDecimalValue().compareTo(o.bigDecimalValue());
+			}
+		} catch (InvalidValueException e) {
+			return this.hashCode() - o.hashCode();
 		}
 	}
 
-	public IntegerValue div(IntegerValue right) throws InvalidValueException {
+	public @NonNull IntegerValue div(@NonNull IntegerValue right) throws InvalidValueException {
 		if (right.bigIntegerValue().signum() == 0) {
-			return null;
+			return valueFactory.throwInvalidValueException("div zero");
 		}
-		return valueFactory.integerValueOf(bigIntegerValue().divide(right.bigIntegerValue()));
+		BigInteger result = DomainUtil.nonNullJava(bigIntegerValue().divide(right.bigIntegerValue()));
+		return valueFactory.integerValueOf(result);
 	}
 
-	public RealValue divide(IntegerValue right) throws InvalidValueException {
+	public @NonNull RealValue divide(@NonNull IntegerValue right) throws InvalidValueException {
 		BigDecimal bigLeft = bigDecimalValue();
 		BigDecimal bigRight = right.bigDecimalValue();
 		return RealValueImpl.divideBigDecimal(valueFactory, bigLeft, bigRight);
@@ -132,23 +145,26 @@ public class LongIntegerValueImpl extends IntegerValueImpl
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof IntIntegerValueImpl) {
-			int thatValue = ((IntIntegerValueImpl)obj).intValue();
-			return value == thatValue;
+		try {
+			if (obj instanceof IntIntegerValueImpl) {
+				int thatValue = ((IntIntegerValueImpl)obj).intValue();
+				return value == thatValue;
+			}
+			if (obj instanceof LongIntegerValueImpl) {
+				long thatValue = ((LongIntegerValueImpl)obj).longValue();
+				return value == thatValue;
+			}
+			if (obj instanceof IntegerValue) {
+				BigInteger bigIntegerValue = ((IntegerValue)obj).bigIntegerValue();
+				return bigIntegerValue().compareTo(bigIntegerValue) == 0;
+			}
+			if (obj instanceof RealValue) {
+				BigDecimal bigDecimalValue = ((RealValue)obj).bigDecimalValue();
+				return bigDecimalValue().compareTo(bigDecimalValue) == 0;
+			}
+		} catch (InvalidValueException e) {
 		}
-		if (obj instanceof LongIntegerValueImpl) {
-			long thatValue = ((LongIntegerValueImpl)obj).longValue();
-			return value == thatValue;
-		}
-		if (obj instanceof IntegerValue) {
-			BigInteger bigIntegerValue = ((IntegerValue)obj).bigIntegerValue();
-			return (bigIntegerValue != null) && (bigIntegerValue().compareTo(bigIntegerValue) == 0);
-		}
-		if (obj instanceof RealValue) {
-			BigDecimal bigDecimalValue = ((RealValue)obj).bigDecimalValue();
-			return (bigDecimalValue != null) && (bigDecimalValue().compareTo(bigDecimalValue) == 0);
-		}
-		return false;
+		return this == obj;
 	}
 
 	@Override
@@ -173,7 +189,7 @@ public class LongIntegerValueImpl extends IntegerValueImpl
 		return value;
 	}
 
-	public IntegerValue max(IntegerValue right) throws InvalidValueException {
+	public @NonNull IntegerValue max(@NonNull IntegerValue right) throws InvalidValueException {
 		if (right instanceof IntIntegerValueImpl) {
 			int thatValue = ((IntIntegerValueImpl)right).intValue();
 			return value >= thatValue ? this : right;
@@ -187,7 +203,7 @@ public class LongIntegerValueImpl extends IntegerValueImpl
 		}
 	}
 
-	public IntegerValue min(IntegerValue right) throws InvalidValueException {
+	public @NonNull IntegerValue min(@NonNull IntegerValue right) throws InvalidValueException {
 		if (right instanceof IntIntegerValueImpl) {
 			int thatValue = ((IntIntegerValueImpl)right).intValue();
 			return value <= thatValue ? this : right;
@@ -201,23 +217,26 @@ public class LongIntegerValueImpl extends IntegerValueImpl
 		}
 	}
 
-	public IntegerValue mod(IntegerValue right) throws InvalidValueException {
+	public @NonNull IntegerValue mod(@NonNull IntegerValue right) throws InvalidValueException {
 		if (right.bigIntegerValue().signum() == 0) {
-			return null;
+			return valueFactory.throwInvalidValueException("mod zero");
 		}
-		return valueFactory.integerValueOf(bigIntegerValue().remainder(right.bigIntegerValue()));
+		BigInteger result = DomainUtil.nonNullJava(bigIntegerValue().remainder(right.bigIntegerValue()));
+		return valueFactory.integerValueOf(result);
 	}
 
-	public IntegerValue multiply(IntegerValue right) throws InvalidValueException {
-		return valueFactory.integerValueOf(bigIntegerValue().multiply(right.bigIntegerValue()));
+	public @NonNull IntegerValue multiply(@NonNull IntegerValue right) throws InvalidValueException {
+		BigInteger result = DomainUtil.nonNullJava(bigIntegerValue().multiply(right.bigIntegerValue()));
+		return valueFactory.integerValueOf(result);
 	}
 
-	public IntegerValue negate() {
+	public @NonNull IntegerValue negate() {
 		if (value > Long.MIN_VALUE) {
 			return valueFactory.integerValueOf(-value);
 		}
 		else {
-			return valueFactory.integerValueOf(BigInteger.ONE.shiftLeft(Long.SIZE-1));
+			BigInteger result = DomainUtil.nonNullJava(BigInteger.ONE.shiftLeft(Long.SIZE-1));
+			return valueFactory.integerValueOf(result);
 		}
 	}
 
@@ -225,7 +244,7 @@ public class LongIntegerValueImpl extends IntegerValueImpl
 		return Long.signum(value);
 	}
 
-	public IntegerValue subtract(IntegerValue right) throws InvalidValueException {
+	public @NonNull IntegerValue subtract(@NonNull IntegerValue right) throws InvalidValueException {
 		if (right instanceof LongIntegerValueImpl) {
 			long thatValue = ((LongIntegerValueImpl)right).longValue();
 			long diff = value - thatValue;
@@ -240,7 +259,8 @@ public class LongIntegerValueImpl extends IntegerValueImpl
 				}
 			}
 		}
-		return valueFactory.integerValueOf(bigIntegerValue().subtract(right.bigIntegerValue()));
+		BigInteger result = DomainUtil.nonNullJava(bigIntegerValue().subtract(right.bigIntegerValue()));
+		return valueFactory.integerValueOf(result);
 	}
 
 	@Override

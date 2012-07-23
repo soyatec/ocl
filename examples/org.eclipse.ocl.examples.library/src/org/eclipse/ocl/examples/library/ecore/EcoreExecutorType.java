@@ -18,6 +18,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -34,7 +36,7 @@ public class EcoreExecutorType extends ExecutorType
 	 * Construct an executable type descriptor in the absence of a known EClassifier. A subsequent
 	 * call of {@link #init(EClassifier)} may define an EClassifier.
 	 */
-	public EcoreExecutorType(String name, ExecutorPackage evaluationPackage, int flags, ExecutorTypeParameter... typeParameters) {
+	public EcoreExecutorType(@NonNull String name, @NonNull ExecutorPackage evaluationPackage, int flags, ExecutorTypeParameter... typeParameters) {
 		super(name, evaluationPackage, flags, typeParameters);
 		this.eClassifier = null;		
 	}
@@ -42,27 +44,27 @@ public class EcoreExecutorType extends ExecutorType
 	/**
 	 * Construct an executable type descriptor for a known EClassifier.
 	 */
-	public EcoreExecutorType(EClassifier eClassifier, EcoreExecutorPackage evaluationPackage, int flags, ExecutorTypeParameter... typeParameters) {
-		super(eClassifier.getName(), evaluationPackage, flags, typeParameters);
+	public EcoreExecutorType(/*@NonNull*/ EClassifier eClassifier, @NonNull EcoreExecutorPackage evaluationPackage, int flags, ExecutorTypeParameter... typeParameters) {
+		super(DomainUtil.nonNullEMF(eClassifier.getName()), evaluationPackage, flags, typeParameters);
 		this.eClassifier = eClassifier;		
 	}
 
 	@Override
-	public ObjectValue createInstance(ValueFactory valueFactory) {
+	public @NonNull ObjectValue createInstance(@NonNull ValueFactory valueFactory) {
 		if (eClassifier instanceof EClass) {
 			EClass eClass = (EClass)eClassifier;
 			EObject element = eClass.getEPackage().getEFactoryInstance().create(eClass);
-			return valueFactory.createObjectValue(element);
+			return valueFactory.createObjectValue(DomainUtil.nonNullEMF(element));
 		}
 		return super.createInstance(valueFactory);
 	}
 
 	@Override
-	public Value createInstance(ValueFactory valueFactory, String value) {
+	public @NonNull Value createInstance(@NonNull ValueFactory valueFactory, @NonNull String value) {
 		if (eClassifier instanceof EDataType) {
 			EDataType eDataType = (EDataType) eClassifier;
 			Object element = eDataType.getEPackage().getEFactoryInstance().createFromString(eDataType, value);
-			return valueFactory.valueOf(element);
+			return valueFactory.valueOf(DomainUtil.nonNullEMF(element));
 		}
 		return super.createInstance(valueFactory);
 	}
@@ -72,8 +74,8 @@ public class EcoreExecutorType extends ExecutorType
 	}
 
 	@Override
-	public String getMetaTypeName() {
-		return eClassifier.getName();
+	public @NonNull String getMetaTypeName() {
+		return DomainUtil.nonNullPivot(eClassifier.getName());
 	}
 	
 	/**
@@ -82,13 +84,11 @@ public class EcoreExecutorType extends ExecutorType
 	 * enhance an Ecore-unaware package. This occurs for the PivotTables that enhance the
 	 * OCLstdlibTables.
 	 */
-	public EcoreExecutorType initFragments(ExecutorFragment[] fragments, int[] depthCounts, EClassifier eClassifier) {
+	public @NonNull EcoreExecutorType initFragments(@NonNull ExecutorFragment[] fragments, int[] depthCounts, /*@NonNull*/ EClassifier eClassifier) {
 		assert this.eClassifier == null;
 		assert name.equals(eClassifier.getName());
-		this.eClassifier = eClassifier;		
-//		if (eClassifier instanceof EClass) {
-			initFragments(fragments, depthCounts);
-//		}
+		this.eClassifier = DomainUtil.nonNullEMF(eClassifier);		
+		initFragments(fragments, depthCounts);
 		return this;
 	}
 }

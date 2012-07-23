@@ -16,9 +16,12 @@
  */
 package org.eclipse.ocl.examples.domain.library;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 
@@ -27,12 +30,13 @@ public class EvaluatorMultipleIterationManager extends EvaluatorIterationManager
 	protected final ValueIterator[] iterators;
 	protected boolean hasCurrent;
 	
-	public EvaluatorMultipleIterationManager(DomainEvaluator invokingEvaluator, DomainExpression body, CollectionValue collectionValue, DomainTypedElement accumulator, Value accumulatorValue, DomainTypedElement... referredIterators) {
+	public EvaluatorMultipleIterationManager(@NonNull DomainEvaluator invokingEvaluator, @NonNull DomainExpression body, @NonNull CollectionValue collectionValue,
+			@Nullable DomainTypedElement accumulator, @NonNull Value accumulatorValue, DomainTypedElement... referredIterators) {
 		super(invokingEvaluator.createNestedEvaluator(), body, collectionValue, accumulator, accumulatorValue);
 		int iMax = referredIterators.length;
 		ValueIterator[] iterators = new ValueIterator[iMax];
 		for (int i = 0; i < iMax; i++) {
-			ValueIterator valueIterator = new ValueIterator(evaluator, collectionValue, referredIterators[i]);
+			ValueIterator valueIterator = new ValueIterator(evaluator, collectionValue, DomainUtil.nonNullEntry(referredIterators[i]));
 			if (!valueIterator.hasCurrent()) {
 				this.iterators = null;
 				this.hasCurrent = false;
@@ -62,8 +66,12 @@ public class EvaluatorMultipleIterationManager extends EvaluatorIterationManager
 		return false;
 	}
 
-	public Value get(int i) {
-		return iterators[i].get();		
+	public @NonNull Value get(int i) {
+		Value currentValue = iterators[i].get();
+		if (currentValue == null) {
+			throw new IllegalStateException("cannot get() after iteration complete"); //$NON-NLS-1$
+		}
+		return currentValue;		
 	}
 	
 	public boolean hasCurrent() {

@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.oclany;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
@@ -24,16 +25,16 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
-import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.library.LibraryConstants;
 
 /**
  * OclComparableComparisonOperation provides the abstract support for a comparison operation.
  */
 public abstract class OclComparableComparisonOperation extends AbstractBinaryOperation
 {
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value left, Value right) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 		DomainInheritance leftType = left.getType().getInheritance(standardLibrary);
@@ -41,29 +42,24 @@ public abstract class OclComparableComparisonOperation extends AbstractBinaryOpe
 		DomainInheritance commonType = leftType.getCommonInheritance(rightType);
 		DomainInheritance comparableType = standardLibrary.getOclComparableType().getInheritance(standardLibrary);
 		DomainInheritance selfType = standardLibrary.getOclSelfType().getInheritance(standardLibrary);
-		DomainOperation staticOperation = comparableType.lookupLocalOperation(standardLibrary, EvaluatorMessages.CompareToOperation, selfType);
+		DomainOperation staticOperation = comparableType.lookupLocalOperation(standardLibrary, LibraryConstants.COMPARE_TO, selfType);
 		int intComparison;
-		LibraryBinaryOperation implementation;
+		LibraryBinaryOperation implementation = null;
 		try {
-			implementation = (LibraryBinaryOperation) commonType.lookupImplementation(standardLibrary, staticOperation);
+			if (staticOperation != null) {
+				implementation = (LibraryBinaryOperation) commonType.lookupImplementation(standardLibrary, staticOperation);
+			}
 		} catch (Exception e) {
 			throw new InvalidValueException(e);
 		}
 		if (implementation != null) {
 			Value comparison = implementation.evaluate(evaluator, standardLibrary.getIntegerType(), left, right);
 			intComparison = comparison.asInteger();
+			return valueFactory.booleanValueOf(getResultValue(intComparison));
 		}
 		else {
-			Object leftObject = left.asObject();
-			Object rightObject = right.asObject();
-			if (!(leftObject instanceof Comparable<?>)) {
-				return valueFactory.throwInvalidValueException("Unsupported compareTo for ''{0}''", left.getClass().getName()); //$NON-NLS-1$
-			}
-			@SuppressWarnings("unchecked")
-			int comparison = ((Comparable<Object>)leftObject).compareTo(rightObject);
-			intComparison = comparison;
+			return valueFactory.throwInvalidValueException("Unsupported compareTo for ''{0}''", left.getClass().getName()); //$NON-NLS-1$
 		}
-		return valueFactory.booleanValueOf(getResultValue(intComparison));
 	}
 
 	protected abstract boolean getResultValue(Integer comparison);

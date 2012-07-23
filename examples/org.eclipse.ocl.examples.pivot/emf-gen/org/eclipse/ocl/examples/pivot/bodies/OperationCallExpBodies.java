@@ -20,6 +20,7 @@
  */
 package org.eclipse.ocl.examples.pivot.bodies;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -49,48 +50,48 @@ public class OperationCallExpBodies
 	 */
 	public static class _invariant_ArgumentCount extends AbstractUnaryOperation
 	{
-		public static _invariant_ArgumentCount INSTANCE = new _invariant_ArgumentCount();
+		public static @NonNull _invariant_ArgumentCount INSTANCE = new _invariant_ArgumentCount();
 	
 		/*
 		argument->size() = referredOperation.ownedParameter->size()
 		*/
-		public Value evaluate(DomainEvaluator evaluator, DomainType returnType, final Value self) throws InvalidValueException {
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
-			final ExecutorOperation O_Real__eq_ = OCLstdlibTables.Operations._Real___eq_;
-			final ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
-			final ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
-			final ExecutorType T_pivot__OCLExpression = PivotTables.Types._OCLExpression;
-			final DomainCollectionType T_OrderedSet_pivot__OCLExpression_ = standardLibrary.getOrderedSetType(T_pivot__OCLExpression);
-			final ExecutorProperty P_OperationCallExp_argument = PivotTables.Properties._OperationCallExp__argument;
-			final LibraryProperty IP_OperationCallExp_argument = P_OperationCallExp_argument.getImplementation();
-			final ExecutorType T_pivot__Parameter = PivotTables.Types._Parameter;
-			final DomainCollectionType T_OrderedSet_pivot__Parameter_ = standardLibrary.getOrderedSetType(T_pivot__Parameter);
-			final ExecutorProperty P_Operation_ownedParameter = PivotTables.Properties._Operation__ownedParameter;
-			final LibraryProperty IP_Operation_ownedParameter = P_Operation_ownedParameter.getImplementation();
-			final ExecutorType T_pivot__Operation = PivotTables.Types._Operation;
-			final ExecutorProperty P_OperationCallExp_referredOperation = PivotTables.Properties._OperationCallExp__referredOperation;
-			final LibraryProperty IP_OperationCallExp_referredOperation = P_OperationCallExp_referredOperation.getImplementation();
+		public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Value self) throws InvalidValueException {
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull ExecutorOperation O_Real__eq_ = OCLstdlibTables.Operations._Real___eq_;
+			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
+			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
+			final @NonNull ExecutorType T_pivot__OCLExpression = PivotTables.Types._OCLExpression;
+			final @NonNull DomainCollectionType T_OrderedSet_pivot__OCLExpression_ = standardLibrary.getOrderedSetType(T_pivot__OCLExpression);
+			final @NonNull ExecutorProperty P_OperationCallExp_argument = PivotTables.Properties._OperationCallExp__argument;
+			final @NonNull LibraryProperty IP_OperationCallExp_argument = P_OperationCallExp_argument.getImplementation();
+			final @NonNull ExecutorType T_pivot__Parameter = PivotTables.Types._Parameter;
+			final @NonNull DomainCollectionType T_OrderedSet_pivot__Parameter_ = standardLibrary.getOrderedSetType(T_pivot__Parameter);
+			final @NonNull ExecutorProperty P_Operation_ownedParameter = PivotTables.Properties._Operation__ownedParameter;
+			final @NonNull LibraryProperty IP_Operation_ownedParameter = P_Operation_ownedParameter.getImplementation();
+			final @NonNull ExecutorType T_pivot__Operation = PivotTables.Types._Operation;
+			final @NonNull ExecutorProperty P_OperationCallExp_referredOperation = PivotTables.Properties._OperationCallExp__referredOperation;
+			final @NonNull LibraryProperty IP_OperationCallExp_referredOperation = P_OperationCallExp_referredOperation.getImplementation();
 			
 			
-			Value A_symbol_347 = IP_OperationCallExp_argument.evaluate(evaluator, T_OrderedSet_pivot__OCLExpression_, self, P_OperationCallExp_argument);
+			Value A_symbol_329 = IP_OperationCallExp_argument.evaluate(evaluator, T_OrderedSet_pivot__OCLExpression_, self, P_OperationCallExp_argument);
 			
-			DomainType static_A_symbol_348 = valueFactory.typeOf(A_symbol_347);
-			LibraryUnaryOperation dynamic_A_symbol_348 = (LibraryUnaryOperation)static_A_symbol_348.lookupImplementation(standardLibrary, O_Collection_size);
-			Value A_symbol_348 = dynamic_A_symbol_348.evaluate(evaluator, T_Integer, A_symbol_347);
+			DomainType static_A_symbol_330 = valueFactory.typeOf(A_symbol_329);
+			LibraryUnaryOperation dynamic_A_symbol_330 = (LibraryUnaryOperation)static_A_symbol_330.lookupImplementation(standardLibrary, O_Collection_size);
+			Value A_symbol_330 = dynamic_A_symbol_330.evaluate(evaluator, T_Integer, A_symbol_329);
 			
-			Value A_symbol_349 = IP_OperationCallExp_referredOperation.evaluate(evaluator, T_pivot__Operation, self, P_OperationCallExp_referredOperation);
+			Value A_symbol_331 = IP_OperationCallExp_referredOperation.evaluate(evaluator, T_pivot__Operation, self, P_OperationCallExp_referredOperation);
 			
-			Value A_symbol_350 = IP_Operation_ownedParameter.evaluate(evaluator, T_OrderedSet_pivot__Parameter_, A_symbol_349, P_Operation_ownedParameter);
+			Value A_symbol_332 = IP_Operation_ownedParameter.evaluate(evaluator, T_OrderedSet_pivot__Parameter_, A_symbol_331, P_Operation_ownedParameter);
 			
-			DomainType static_A_symbol_351 = valueFactory.typeOf(A_symbol_350);
-			LibraryUnaryOperation dynamic_A_symbol_351 = (LibraryUnaryOperation)static_A_symbol_351.lookupImplementation(standardLibrary, O_Collection_size);
-			Value A_symbol_351 = dynamic_A_symbol_351.evaluate(evaluator, T_Integer, A_symbol_350);
-			DomainType static_A_symbol_352 = valueFactory.typeOf(A_symbol_348, A_symbol_351);
-			LibraryBinaryOperation dynamic_A_symbol_352 = (LibraryBinaryOperation)static_A_symbol_352.lookupImplementation(standardLibrary, O_Real__eq_);
-			Value A_symbol_352 = dynamic_A_symbol_352.evaluate(evaluator, T_Boolean, A_symbol_348, A_symbol_351);
-			return A_symbol_352;
+			DomainType static_A_symbol_333 = valueFactory.typeOf(A_symbol_332);
+			LibraryUnaryOperation dynamic_A_symbol_333 = (LibraryUnaryOperation)static_A_symbol_333.lookupImplementation(standardLibrary, O_Collection_size);
+			Value A_symbol_333 = dynamic_A_symbol_333.evaluate(evaluator, T_Integer, A_symbol_332);
+			DomainType static_A_symbol_334 = valueFactory.typeOf(A_symbol_330, A_symbol_333);
+			LibraryBinaryOperation dynamic_A_symbol_334 = (LibraryBinaryOperation)static_A_symbol_334.lookupImplementation(standardLibrary, O_Real__eq_);
+			Value A_symbol_334 = dynamic_A_symbol_334.evaluate(evaluator, T_Boolean, A_symbol_330, A_symbol_333);
+			return A_symbol_334;
 		}
 	}
 

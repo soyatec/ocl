@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.pivot.delegate;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.OCL;
@@ -31,19 +32,19 @@ interface ValueConverter {
 
 	ValueConverter VERBATIM = new ValueConverter() {
 
-		public Object convert(OCL ocl, Value value) {
+		public @NonNull Object convert(@NonNull OCL ocl, @NonNull Value value) {
 			return value;
 		}
 	};
 
 	ValueConverter LIST = new ValueConverter() {
 
-		public Object convert(OCL ocl, Value value) {
+		public @NonNull Object convert(@NonNull OCL ocl, @NonNull Value value) {
 			Collection<?> collection = (Collection<?>) value;
 			return new BasicEList.UnmodifiableEList<Object>(collection
 				.size(), collection.toArray());
 		}
 	};
 
-	Object convert(OCL ocl, Value value);
+	@NonNull Object convert(@NonNull OCL ocl, @NonNull Value value);
 }

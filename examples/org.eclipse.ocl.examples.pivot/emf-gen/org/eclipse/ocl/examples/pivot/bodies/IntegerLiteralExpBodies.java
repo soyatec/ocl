@@ -20,6 +20,7 @@
  */
 package org.eclipse.ocl.examples.pivot.bodies;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -47,28 +48,28 @@ public class IntegerLiteralExpBodies
 	 */
 	public static class _invariant_TypeIsInteger extends AbstractUnaryOperation
 	{
-		public static _invariant_TypeIsInteger INSTANCE = new _invariant_TypeIsInteger();
+		public static @NonNull _invariant_TypeIsInteger INSTANCE = new _invariant_TypeIsInteger();
 	
 		/*
 		self.type = Integer
 		*/
-		public Value evaluate(DomainEvaluator evaluator, DomainType returnType, final Value self) throws InvalidValueException {
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
-			final ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
-			final ExecutorType T_Type = OCLstdlibTables.Types._Type;
-			final ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
-			final LibraryProperty IP_TypedElement_type = P_TypedElement_type.getImplementation();
-			final Value T_ClassClassifier_Integer_ = valueFactory.createTypeValue(OCLstdlibTables.Types._Integer);
+		public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Value self) throws InvalidValueException {
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
+			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
+			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
+			final @NonNull LibraryProperty IP_TypedElement_type = P_TypedElement_type.getImplementation();
+			final @NonNull Value T_ClassClassifier_Integer_ = valueFactory.createTypeValue(OCLstdlibTables.Types._Integer);
 			
 			
-			Value A_symbol_405 = IP_TypedElement_type.evaluate(evaluator, T_Type, self, P_TypedElement_type);
+			Value A_symbol_4 = IP_TypedElement_type.evaluate(evaluator, T_Type, self, P_TypedElement_type);
 			
-			DomainType static_A_symbol_406 = valueFactory.typeOf(A_symbol_405, T_ClassClassifier_Integer_);
-			LibraryBinaryOperation dynamic_A_symbol_406 = (LibraryBinaryOperation)static_A_symbol_406.lookupImplementation(standardLibrary, O_OclAny__eq_);
-			Value A_symbol_406 = dynamic_A_symbol_406.evaluate(evaluator, T_Boolean, A_symbol_405, T_ClassClassifier_Integer_);
-			return A_symbol_406;
+			DomainType static_A_symbol_5 = valueFactory.typeOf(A_symbol_4, T_ClassClassifier_Integer_);
+			LibraryBinaryOperation dynamic_A_symbol_5 = (LibraryBinaryOperation)static_A_symbol_5.lookupImplementation(standardLibrary, O_OclAny__eq_);
+			Value A_symbol_5 = dynamic_A_symbol_5.evaluate(evaluator, T_Boolean, A_symbol_4, T_ClassClassifier_Integer_);
+			return A_symbol_5;
 		}
 	}
 

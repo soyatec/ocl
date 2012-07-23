@@ -18,7 +18,10 @@ package org.eclipse.ocl.examples.pivot.delegate;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
  * Factory for OCL derived-attribute setting delegates.
@@ -26,13 +29,20 @@ import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
 public class OCLSettingDelegateFactory extends AbstractOCLDelegateFactory
 		implements EStructuralFeature.Internal.SettingDelegate.Factory
 {
-	public OCLSettingDelegateFactory(String delegateURI) {
+	public OCLSettingDelegateFactory(@NonNull String delegateURI) {
 		super(delegateURI);
 	}
 
-	public EStructuralFeature.Internal.SettingDelegate createSettingDelegate(EStructuralFeature structuralFeature) {
+	public @Nullable EStructuralFeature.Internal.SettingDelegate createSettingDelegate(EStructuralFeature structuralFeature) {
+		if (structuralFeature == null) {
+			return null;
+		}
 		EPackage ePackage = structuralFeature.getEContainingClass().getEPackage();
-		return new OCLSettingDelegate(getDelegateDomain(ePackage), structuralFeature);
+		OCLDelegateDomain delegateDomain = getDelegateDomain(DomainUtil.nonNullEMF(ePackage));
+		if (delegateDomain == null) {
+			return null;
+		}
+		return new OCLSettingDelegate(delegateDomain, structuralFeature);
 	}
 	
 	/**
@@ -47,7 +57,10 @@ public class OCLSettingDelegateFactory extends AbstractOCLDelegateFactory
 		}
 
 		@Override
-		public EStructuralFeature.Internal.SettingDelegate createSettingDelegate(EStructuralFeature structuralFeature) {
+		public @Nullable EStructuralFeature.Internal.SettingDelegate createSettingDelegate(EStructuralFeature structuralFeature) {
+			if (structuralFeature == null) {
+				return null;
+			}
 			EStructuralFeature.Internal.SettingDelegate.Factory.Registry localRegistry = DelegateResourceSetAdapter.getRegistry(
 				structuralFeature, EStructuralFeature.Internal.SettingDelegate.Factory.Registry.class, null);
 			if (localRegistry != null) {

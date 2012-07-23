@@ -17,25 +17,26 @@
 package org.eclipse.ocl.examples.library.ecore;
 
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.library.executor.ReflectiveFragment;
 
 public class EcoreReflectiveFragment extends ReflectiveFragment
 {
-	protected final EClassifier eClassifier;
+	protected final @NonNull EClassifier eClassifier;
 
-	public EcoreReflectiveFragment(EcoreReflectiveType derivedInheritance, DomainInheritance baseInheritance) {
+	public EcoreReflectiveFragment(@NonNull EcoreReflectiveType derivedInheritance, @NonNull DomainInheritance baseInheritance) {
 		super(derivedInheritance, baseInheritance);
 		this.eClassifier = derivedInheritance.getEClassifier();		
 	}
 
-	public final EClassifier getEClassifier() {
+	public final @NonNull EClassifier getEClassifier() {
 		return eClassifier;
 	}
 
 	@Override
-	protected DomainOperation getOperationOverload(DomainOperation baseOperation) {
+	protected @NonNull DomainOperation getOperationOverload(@NonNull DomainOperation baseOperation) {
 		throw new UnsupportedOperationException();		// FIXME
 	}
 }

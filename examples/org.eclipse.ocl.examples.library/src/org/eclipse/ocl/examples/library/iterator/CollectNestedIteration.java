@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.library.iterator;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -29,14 +31,14 @@ import org.eclipse.ocl.examples.domain.values.Value;
  */
 public class CollectNestedIteration extends AbstractIteration
 {
-	public static final CollectNestedIteration INSTANCE = new CollectNestedIteration();
+	public static final @NonNull CollectNestedIteration INSTANCE = new CollectNestedIteration();
 
-	public CollectionValue.Accumulator createAccumulatorValue(DomainEvaluator evaluator, DomainType accumulatorType, DomainType bodyType) {
+	public @NonNull CollectionValue.Accumulator createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) {
 		return evaluator.getValueFactory().createCollectionAccumulatorValue((DomainCollectionType) accumulatorType);
 	}
 	
 	@Override
-    protected Value updateAccumulator(DomainIterationManager iterationManager) {
+    protected @Nullable Value updateAccumulator(@NonNull DomainIterationManager iterationManager) {
 		Value bodyVal = iterationManager.evaluateBody();		
 		CollectionValue.Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
 		accumulatorValue.add(bodyVal);

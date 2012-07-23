@@ -78,19 +78,20 @@ public class SelfTypeImpl extends ClassImpl implements SelfType
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Type resolveSelfType(Type selfType)
 	{
 		/*
 		selfType
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Type = OCLstdlibTables.Types._Type;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			
-			final DomainType returnType = T_Type;
-			final Value result = SelfTypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(selfType));
+			final @NonNull DomainType returnType = T_Type;
+			final @NonNull Value result = SelfTypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(selfType));
 			return (Type) result.asEcoreObject();
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.SelfTypeBodies", e);
@@ -137,7 +138,7 @@ public class SelfTypeImpl extends ClassImpl implements SelfType
 	}
 
 	@Override
-	public boolean conformsTo(DomainStandardLibrary standardLibrary, DomainType type) {
+	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		if (this == type) {
 			return true;
 		}

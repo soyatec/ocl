@@ -18,22 +18,24 @@
 package org.eclipse.ocl.examples.pivot.delegate;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * Partial implementation of a factory of OCL delegates for Ecore features.
  */
 public abstract class AbstractOCLDelegateFactory
 {
-	protected final String delegateURI;
+	protected final @NonNull String delegateURI;
 
 	/**
 	 * Construct a factory for an unknown delegate domain; often the global factory.
 	 */
-	protected AbstractOCLDelegateFactory(String delegateURI) {
+	protected AbstractOCLDelegateFactory(@NonNull String delegateURI) {
 		this.delegateURI = delegateURI;
 	}
 
-	protected OCLDelegateDomain getDelegateDomain(EPackage ePackage) {
+	protected @Nullable OCLDelegateDomain getDelegateDomain(@NonNull EPackage ePackage) {
 		DelegateEPackageAdapter ePackageAdapter = DelegateEPackageAdapter.getAdapter(ePackage);
 		OCLDelegateDomain delegateDomain = (OCLDelegateDomain) ePackageAdapter.getDelegateDomain(delegateURI);
 		return delegateDomain;
@@ -42,14 +44,14 @@ public abstract class AbstractOCLDelegateFactory
 	/**
 	 * @nooverride This is not intended to be overridden by clients.
 	 */
-	public String getURI() {
+	public @NonNull String getURI() {
 		return delegateURI;
 	}
 
 	/**
 	 * Return the DelegateDomain for this package, creating one if it does not already exist. 
 	 */
-	protected OCLDelegateDomain loadDelegateDomain(EPackage ePackage) {
+	protected OCLDelegateDomain loadDelegateDomain(@NonNull EPackage ePackage) {
 		DelegateEPackageAdapter ePackageAdapter = DelegateEPackageAdapter.getAdapter(ePackage);
 		return (OCLDelegateDomain) ePackageAdapter.loadDelegateDomain(delegateURI);
 	}

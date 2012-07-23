@@ -19,14 +19,16 @@ package org.eclipse.ocl.examples.pivot.delegate;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EStructuralFeature.Internal.SettingDelegate;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
-import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.context.PropertyContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
@@ -41,16 +43,16 @@ public class SettingBehavior extends AbstractDelegatedBehavior<EStructuralFeatur
 	public static final String INITIAL_CONSTRAINT_KEY = "initial"; //$NON-NLS-1$
 	public static final String NAME = "settingDelegates"; //$NON-NLS-1$
 
-	public SettingDelegate.Factory getDefaultFactory() {
+	public @Nullable SettingDelegate.Factory getDefaultFactory() {
 		return SettingDelegate.Factory.Registry.INSTANCE.getFactory(getName());
 	}
 
-	public SettingDelegate.Factory.Registry getDefaultRegistry() {
-		return SettingDelegate.Factory.Registry.INSTANCE;
+	public @NonNull SettingDelegate.Factory.Registry getDefaultRegistry() {
+		return DomainUtil.nonNullJDT(SettingDelegate.Factory.Registry.INSTANCE);
 	}
 
-	public EPackage getEPackage(EStructuralFeature eStructuralFeature) {
-		return eStructuralFeature.getEContainingClass().getEPackage();
+	public @NonNull EPackage getEPackage(@NonNull EStructuralFeature eStructuralFeature) {
+		return DomainUtil.nonNullEMF(eStructuralFeature.getEContainingClass().getEPackage());
 	}
 
 	/**
@@ -58,7 +60,7 @@ public class SettingBehavior extends AbstractDelegatedBehavior<EStructuralFeatur
 	 * create the relevant parsing environment for a textual definition..
 	 * @throws OCLDelegateException 
 	 */
-	public ExpressionInOCL getExpressionInOCL(MetaModelManager metaModelManager, Property property) throws OCLDelegateException {
+	public @NonNull ExpressionInOCL getExpressionInOCL(@NonNull MetaModelManager metaModelManager, @NonNull Property property) throws OCLDelegateException {
 		Constraint constraint = getConstraintForStereotype(property, UMLReflection.DERIVATION);
 		if (constraint == null) {
 			constraint = getConstraintForStereotype(property, UMLReflection.INITIAL);
@@ -68,7 +70,7 @@ public class SettingBehavior extends AbstractDelegatedBehavior<EStructuralFeatur
 			if (valueSpecification instanceof ExpressionInOCL) {
 				return (ExpressionInOCL) valueSpecification;
 			}
-			ParserContext propertyContext = new PropertyContext(metaModelManager, null, property);
+			PropertyContext propertyContext = new PropertyContext(metaModelManager, null, property);
 			ExpressionInOCL expressionInOCL = getExpressionInOCL(propertyContext, constraint);
 			if (expressionInOCL != null) {
 				return expressionInOCL;
@@ -79,21 +81,21 @@ public class SettingBehavior extends AbstractDelegatedBehavior<EStructuralFeatur
 	}
 
 	@Override
-	public SettingDelegate.Factory getFactory(DelegateDomain delegateDomain, EStructuralFeature eStructuralFeature) {
+	public @Nullable SettingDelegate.Factory getFactory(@NonNull DelegateDomain delegateDomain, @NonNull EStructuralFeature eStructuralFeature) {
 		SettingDelegate.Factory.Registry registry = DelegateResourceSetAdapter.getRegistry(
 			eStructuralFeature, getRegistryClass(), getDefaultRegistry());
-	    return registry.getFactory(delegateDomain.getURI());
+	    return registry != null ? registry.getFactory(delegateDomain.getURI()) : null;
 	}	
 
-	public Class<SettingDelegate.Factory> getFactoryClass() {
+	public @NonNull Class<SettingDelegate.Factory> getFactoryClass() {
 		return SettingDelegate.Factory.class;
 	}
 	
-	public String getName() {
+	public @NonNull String getName() {
 		return NAME;
 	}
 
-	public Class<SettingDelegate.Factory.Registry> getRegistryClass() {
+	public @NonNull Class<SettingDelegate.Factory.Registry> getRegistryClass() {
 		return SettingDelegate.Factory.Registry.class;
 	}
 }

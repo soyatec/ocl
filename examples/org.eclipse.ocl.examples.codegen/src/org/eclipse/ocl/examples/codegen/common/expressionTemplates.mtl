@@ -107,7 +107,7 @@ else {
 /*
 [ast._'body'.prettyPrint().trim()/]
 */
-	public <%Value%> evaluate(<%org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator%> evaluator, <%org.eclipse.ocl.examples.domain.elements.DomainType%> returnType, <%Value%> [ast.result.symbolName(expInOcl)/][for (i : Variable | ast.iterator)], <%Value%> [i.symbolName(expInOcl)/][/for]) throws <%org.eclipse.ocl.examples.domain.evaluation.InvalidValueException%> {
+	public @NonNull <%Value%> evaluate(@NonNull <%org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator%> evaluator, @NonNull <%org.eclipse.ocl.examples.domain.elements.DomainType%> returnType, @NonNull <%Value%> [ast.result.symbolName(expInOcl)/][for (i : Variable | ast.iterator)], @NonNull <%Value%> [i.symbolName(expInOcl)/][/for]) throws <%org.eclipse.ocl.examples.domain.evaluation.InvalidValueException%> {
 		[ast._'body'.emitExpression(importer, genPackage, expInOcl)/]
 		return [ast._'body'.symbolName(expInOcl)/];
 	}
@@ -134,10 +134,10 @@ else {
 /*
 [ast._'body'.prettyPrint().trim()/]
 */
-	public <%Value%> evaluate(<%org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator%> evaluator, <%org.eclipse.ocl.examples.domain.elements.DomainType%> returnType, <%Value%> sourceValue[for (i : Integer | Sequence{1..arity})]
-, <%Value%> iterator[i/][/for]) throws <%org.eclipse.ocl.examples.domain.evaluation.InvalidValueException%> {
+	public @NonNull <%Value%> evaluate(@NonNull <%org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator%> evaluator, @NonNull <%org.eclipse.ocl.examples.domain.elements.DomainType%> returnType, @NonNull <%Value%> sourceValue[for (i : Integer | Sequence{1..arity})]
+, @NonNull <%Value%> iterator[i/][/for]) throws <%org.eclipse.ocl.examples.domain.evaluation.InvalidValueException%> {
 [for (i : Integer | Sequence{1..arity})]
-		final <%Value%> [ast.iterator->at(i).symbolName(expInOcl)/] = iterator[i/];	// iterator: [ast.iterator->at(i).name/]
+		final @NonNull <%Value%> [ast.iterator->at(i).symbolName(expInOcl)/] = iterator[i/];	// iterator: [ast.iterator->at(i).name/]
 [/for]  
 		[ast._'body'.emitExpression(importer, genPackage, expInOcl)/]
 		return [ast._'body'.symbolName(expInOcl)/];
@@ -153,11 +153,11 @@ else {
 [if (not ast.variable.initExpression.isConstant())]
 [ast.variable.initExpression.emitExpression(importer, genPackage, expInOcl)/]
 [/if]
-final <%Value%> [ast.variable.symbolName(expInOcl)/] = [ast.variable.initExpression.symbolName(expInOcl)/];
+final @NonNull <%Value%> [ast.variable.symbolName(expInOcl)/] = [ast.variable.initExpression.symbolName(expInOcl)/];
 [if (not ast._in.isConstant())]
 [ast._in.emitExpression(importer, genPackage, expInOcl)/]
 [/if]
-final <%Value%> [ast.symbolName(expInOcl)/] = [ast._in.symbolName(expInOcl)/];[/template]
+final @NonNull <%Value%> [ast.symbolName(expInOcl)/] = [ast._in.symbolName(expInOcl)/];[/template]
 
 [template public emitExpression(ast : LiteralExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)][/template]
 

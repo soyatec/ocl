@@ -22,6 +22,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
@@ -37,25 +40,22 @@ public abstract class PrettyPrintOptions
 	{
 		private String indentStep = "  ";
 		private int linelength = Integer.MAX_VALUE;
-		private final Set<String> reservedNames = new HashSet<String>();
-		private final Set<String> restrictedNames = new HashSet<String>();
-		private Map<Namespace, String> namespace2alias = new HashMap<Namespace, String>();
+		private final @NonNull Set<String> reservedNames = new HashSet<String>();
+		private final @NonNull Set<String> restrictedNames = new HashSet<String>();
+		private @NonNull Map<Namespace, String> namespace2alias = new HashMap<Namespace, String>();
 		private URI baseURI = null;
-		private MetaModelManager metaModelManager = null;
+		private @Nullable MetaModelManager metaModelManager = null;
 		
 		public Global(Namespace scope) {
 			super(scope);
 		}
 		
-		public void addAliases(Namespace  namespace, String alias) {
-			if (namespace2alias == null) {
-				namespace2alias = new HashMap<Namespace, String>();
-			}
+		public void addAliases(@NonNull Namespace  namespace, @NonNull String alias) {
 			namespace2alias.put(namespace, alias);
 		}
 		
 		@Override
-		public void addReservedNames(Iterable<String> names) {
+		public void addReservedNames(@NonNull Iterable<String> names) {
 			for (String name : names) {
 				reservedNames.add(name);
 				restrictedNames.add(name);
@@ -63,15 +63,15 @@ public abstract class PrettyPrintOptions
 		}
 		
 		@Override
-		public  void addRestrictedNames(Iterable<String> names) {
+		public  void addRestrictedNames(@NonNull Iterable<String> names) {
 			for (String name : names) {
 				restrictedNames.add(name);
 			}
 		}
 		
 		@Override
-		public String getAlias(Namespace namespace) {
-			return namespace2alias != null ? namespace2alias.get(namespace) : null;
+		public @Nullable String getAlias(@NonNull Namespace namespace) {
+			return namespace2alias.get(namespace);
 		}
 
 		@Override
@@ -80,7 +80,7 @@ public abstract class PrettyPrintOptions
 		}
 
 		@Override
-		public Global getGlobalOptions() {
+		public @NonNull Global getGlobalOptions() {
 			return this;
 		}
 
@@ -94,26 +94,26 @@ public abstract class PrettyPrintOptions
 			return linelength;
 		}
 
-		public Set<Namespace> getAliasedNamespaces() {
-			return namespace2alias.keySet();
+		public @NonNull Set<Namespace> getAliasedNamespaces() {
+			return DomainUtil.nonNullJava(namespace2alias.keySet());
 		}
 
 		@Override
-		public MetaModelManager getMetaModelManager() {
+		public @Nullable MetaModelManager getMetaModelManager() {
 			return metaModelManager;
 		}
 		
 		@Override
-		public Set<String> getReservedNames() {
+		public @NonNull Set<String> getReservedNames() {
 			return reservedNames;
 		}
 
 		@Override
-		public Set<String> getRestrictedNames() {
+		public @NonNull Set<String> getRestrictedNames() {
 			return restrictedNames;
 		}
 		
-		public void setAliases(Map<Namespace,String> namespace2alias) {
+		public void setAliases(@NonNull Map<Namespace,String> namespace2alias) {
 			this.namespace2alias = namespace2alias;
 		}
 
@@ -141,44 +141,47 @@ public abstract class PrettyPrintOptions
 	 */
 	public static class Local extends PrettyPrintOptions
 	{
-		private PrettyPrintOptions options;
-		private Set<String> reservedNames = null;
-		private Set<String> restrictedNames = null;
+		private @NonNull PrettyPrintOptions options;
+		private @Nullable Set<String> reservedNames = null;
+		private @Nullable Set<String> restrictedNames = null;
 
-		public Local(PrettyPrintOptions options, Namespace scope) {
+		public Local(@NonNull PrettyPrintOptions options, @Nullable Namespace scope) {
 			super(scope);
 			this.options = options;
 		}
 		
 		@Override
-		public void addReservedNames(Iterable<String> names) {
+		public void addReservedNames(@NonNull Iterable<String> names) {
+			if (reservedNames == null) {
+				reservedNames = new HashSet<String>();
+			}
+			if (restrictedNames == null) {
+				restrictedNames = new HashSet<String>();
+			}
+			Set<String> nonNullReservedNames = DomainUtil.nonNullJDT(reservedNames);
+			Set<String> nonNullRestrictedNames = DomainUtil.nonNullJDT(restrictedNames);
+			for (String name : names) {
+				nonNullReservedNames.add(name);
+				nonNullRestrictedNames.add(name);
+			}
+		}
+		
+		@Override
+		public  void addRestrictedNames(@NonNull Iterable<String> names) {
 			if (reservedNames == null) {
 				reservedNames = new HashSet<String>();
 			}
 			if (reservedNames == null) {
 				restrictedNames = new HashSet<String>();
 			}
+			Set<String> nonNullRestrictedNames = DomainUtil.nonNullJDT(restrictedNames);
 			for (String name : names) {
-				reservedNames.add(name);
-				restrictedNames.add(name);
+				nonNullRestrictedNames.add(name);
 			}
 		}
 		
 		@Override
-		public  void addRestrictedNames(Iterable<String> names) {
-			if (reservedNames == null) {
-				reservedNames = new HashSet<String>();
-			}
-			if (reservedNames == null) {
-				restrictedNames = new HashSet<String>();
-			}
-			for (String name : names) {
-				restrictedNames.add(name);
-			}
-		}
-		
-		@Override
-		public Global getGlobalOptions() {
+		public @NonNull Global getGlobalOptions() {
 			return options.getGlobalOptions();
 		}
 
@@ -193,20 +196,20 @@ public abstract class PrettyPrintOptions
 		}
 	}
 	
-	protected final Namespace scope;
+	protected final @Nullable Namespace scope;
 	
-	public PrettyPrintOptions(Namespace scope) {
+	public PrettyPrintOptions(@Nullable Namespace scope) {
 		this.scope = scope;
 	}
 
-	public abstract void addReservedNames(Iterable<String> names);
+	public abstract void addReservedNames(@NonNull Iterable<String> names);
 	
-	public abstract void addRestrictedNames(Iterable<String> names);
+	public abstract void addRestrictedNames(@NonNull Iterable<String> names);
 
 	/**
 	 * Return a name to be used when referencing element as the first element in a qualified name.
 	 */
-	public String getAlias(Namespace namespace) {
+	public String getAlias(@NonNull Namespace namespace) {
 		return getGlobalOptions().getAlias(namespace);
 	}
 
@@ -218,7 +221,7 @@ public abstract class PrettyPrintOptions
 		return getGlobalOptions().getBaseURI();
 	}
 
-	public abstract Global getGlobalOptions();
+	public abstract @NonNull Global getGlobalOptions();
 
 	public String getIndentStep() {
 		return getGlobalOptions().getIndentStep();
@@ -228,7 +231,7 @@ public abstract class PrettyPrintOptions
 		return getGlobalOptions().getLinelength();
 	}
 
-	public MetaModelManager getMetaModelManager() {
+	public @Nullable MetaModelManager getMetaModelManager() {
 		return getGlobalOptions().getMetaModelManager();
 	}
 
@@ -236,7 +239,7 @@ public abstract class PrettyPrintOptions
 
 	public abstract Set<String> getRestrictedNames();
 
-	public Namespace getScope() {
+	public @Nullable Namespace getScope() {
 		return scope;
 	}
 

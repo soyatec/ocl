@@ -19,6 +19,8 @@ package org.eclipse.ocl.examples.pivot.executor;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManageable;
@@ -28,12 +30,13 @@ public class PivotEcoreExecutorManager extends EcoreExecutorManager implements M
 {
 	protected final MetaModelManager metaModelManager;
 
-	public PivotEcoreExecutorManager(EObject contextObject, Map<Object, Object> contextMap, DomainStandardLibrary standardLibrary, MetaModelManager metaModelManager) {
+	public PivotEcoreExecutorManager(@NonNull EObject contextObject, @Nullable Map<Object, Object> contextMap, @NonNull DomainStandardLibrary standardLibrary, @NonNull MetaModelManager metaModelManager) {
 		super(contextObject, contextMap, standardLibrary);
 		this.metaModelManager = metaModelManager;
 	}
 
-	public MetaModelManager getMetaModelManager() {
+	@SuppressWarnings("null")
+	public @NonNull MetaModelManager getMetaModelManager() {
 		return metaModelManager;
 	}
 }

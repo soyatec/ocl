@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.domain.library;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 
 /**
@@ -32,5 +34,5 @@ public interface LibraryFeature
 	 * @param standardLibrary a context to assist in class loading.
 	 * @return
 	 */
-	LibraryValidator getValidator(DomainStandardLibrary standardLibrary);
+	@Nullable LibraryValidator getValidator(@NonNull DomainStandardLibrary standardLibrary);
 }

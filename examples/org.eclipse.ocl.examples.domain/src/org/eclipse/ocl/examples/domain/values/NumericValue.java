@@ -17,7 +17,9 @@
 package org.eclipse.ocl.examples.domain.values;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 public interface NumericValue extends Value, Comparable<NumericValue>
@@ -25,30 +27,30 @@ public interface NumericValue extends Value, Comparable<NumericValue>
 	/**
 	 * @generated NOT
 	 */
-	NumericValue abs() throws InvalidValueException;
+	@NonNull NumericValue abs() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	BigDecimal bigDecimalValue();
+	@NonNull BigDecimal bigDecimalValue() throws InvalidValueException;
+	
+	/**
+	 * @generated NOT
+	 */
+	@NonNull BigInteger bigIntegerValue() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	NumericValue negate() throws InvalidValueException;
+	@NonNull NumericValue negate() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	double doubleValue();
+	double doubleValue() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
 	int signum() throws InvalidValueException;
-
-	/**
-	 * @generated NOT
-	 */
-	IntegerValue toIntegerValue() throws InvalidValueException;
 }

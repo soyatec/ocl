@@ -18,6 +18,8 @@ package org.eclipse.ocl.examples.pivot.ecore;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -36,21 +38,21 @@ import org.eclipse.ocl.examples.pivot.ValueSpecification;
  */
 public class EObjectProperty extends AbstractProperty
 {
-	protected final EStructuralFeature eFeature;
-	protected ValueSpecification specification;
+	protected final @NonNull EStructuralFeature eFeature;
+	protected @Nullable ValueSpecification specification;
 
-	public EObjectProperty(EStructuralFeature eFeature, ValueSpecification specification) {
+	public EObjectProperty(@NonNull EStructuralFeature eFeature, @Nullable ValueSpecification specification) {
 		this.eFeature = eFeature;
 		this.specification = specification;
 	}
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceValue, DomainProperty property) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		Object object = sourceValue.asObject();
 		if (!(object instanceof EObject)) {
 			return evaluator.throwInvalidEvaluation(null, null, object, "non-EObject");
 		}
 		Object eValue = ((EObject)object).eGet(eFeature);
-		return valueFactory.valueOf(eValue, eFeature);
+		return eValue != null ? valueFactory.valueOf(eValue, eFeature) : valueFactory.getNull();
 	}
 }

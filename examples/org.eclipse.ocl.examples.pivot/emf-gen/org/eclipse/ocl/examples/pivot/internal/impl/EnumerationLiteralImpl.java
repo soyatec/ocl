@@ -32,6 +32,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
@@ -337,6 +338,7 @@ public class EnumerationLiteralImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("null")
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
@@ -377,10 +379,10 @@ public class EnumerationLiteralImpl
 		return visitor.visitEnumerationLiteral(this);
 	}
 
-	public Object asEcoreObject(DomainStandardLibrary standardLibrary) {
+	public Object asEcoreObject(@NonNull DomainStandardLibrary standardLibrary) {
 		DomainType normalizedType = getEnumeration().getNormalizedType(standardLibrary);
 		DomainEnumeration normalizedEnumeration = (DomainEnumeration) normalizedType;
-		DomainEnumerationLiteral enumerationLiteral = normalizedEnumeration.getEnumerationLiteral(getName());
-		return enumerationLiteral.asEcoreObject(standardLibrary);
+		DomainEnumerationLiteral enumerationLiteral = normalizedEnumeration.getEnumerationLiteral(DomainUtil.nonNullModel(getName()));
+		return DomainUtil.nonNullPivot(enumerationLiteral).asEcoreObject(standardLibrary);
 	}
 } //EnumerationLiteralImpl

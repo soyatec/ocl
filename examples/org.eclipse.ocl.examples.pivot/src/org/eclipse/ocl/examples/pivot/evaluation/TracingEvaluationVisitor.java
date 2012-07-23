@@ -69,32 +69,36 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
      * 
      * @param decorated a real evaluation visitor
      */
-    public TracingEvaluationVisitor(EvaluationVisitor decorated) {
+    public TracingEvaluationVisitor(@NonNull EvaluationVisitor decorated) {
         super(decorated);
     }
 
 	@Override
-	public EvaluationVisitor createNestedEvaluator() {
+	public @NonNull EvaluationVisitor createNestedEvaluator() {
 		return new TracingEvaluationVisitor(super.createNestedEvaluator());
 	}
 
-	public Value evaluate(DomainExpression body) {
+	public @NonNull Value evaluate(@NonNull DomainExpression body) {
 		return getDelegate().evaluate(body);
 	}
+
+	public @NonNull Value evaluate(@NonNull ExpressionInOCL expressionInOCL) {
+		return getDelegate().evaluate(expressionInOCL);
+	}
 	
-	public EvaluationVisitor getEvaluator() {
+	public @NonNull EvaluationVisitor getEvaluator() {
 		return getDelegate().getEvaluator();
 	}
 
-	public MetaModelManager getMetaModelManager() {
+	public @NonNull MetaModelManager getMetaModelManager() {
 		return getDelegate().getMetaModelManager();
 	}
 
-	public DomainStandardLibrary getStandardLibrary() {
+	public @NonNull DomainStandardLibrary getStandardLibrary() {
 		return getDelegate().getStandardLibrary();
 	}
 
-	public ValueFactory getValueFactory() {
+	public @NonNull ValueFactory getValueFactory() {
 		return getDelegate().getValueFactory();
 	}
 
@@ -106,15 +110,15 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
 		getDelegate().setCanceled(isCanceled);
 	}
 	
-	public NullValue throwInvalidEvaluation(InvalidValueException e) throws InvalidEvaluationException {
+	public @NonNull NullValue throwInvalidEvaluation(InvalidValueException e) throws InvalidEvaluationException {
 	       return getDelegate().throwInvalidEvaluation(e);
 	}
 
-	public NullValue throwInvalidEvaluation(String message) throws InvalidEvaluationException {
+	public @NonNull NullValue throwInvalidEvaluation(String message) throws InvalidEvaluationException {
         return getDelegate().throwInvalidEvaluation(message);
 	}
 
-	public NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object value, String message, Object... bindings) {
+	public @NonNull NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object value, String message, Object... bindings) {
 	       return getDelegate().throwInvalidEvaluation(e, expression, value, message, bindings);
 	}
     

@@ -22,6 +22,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -29,6 +30,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
@@ -38,13 +40,13 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class ImplicitNonCompositionProperty extends AbstractProperty
 {
-	public static final ImplicitNonCompositionProperty INSTANCE = new ImplicitNonCompositionProperty();
+	public static final @NonNull ImplicitNonCompositionProperty INSTANCE = new ImplicitNonCompositionProperty();
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceValue, DomainProperty thisProperty) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull DomainProperty thisProperty) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		DomainModelManager modelManager = evaluator.getModelManager();
 		DomainProperty thatProperty = thisProperty.getOpposite();
-		DomainType thatType = thisProperty.getType();		
+		DomainType thatType = DomainUtil.nonNullModel(thisProperty.getType());		
 		List<Value> results = new ArrayList<Value>();
 		for (EObject eObject : modelManager.get(thatType)) {	// FIXME Use a cache
 			EClass eClass = eObject.eClass();

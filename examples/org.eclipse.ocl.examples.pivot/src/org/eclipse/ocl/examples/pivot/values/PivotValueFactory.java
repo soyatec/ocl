@@ -14,16 +14,17 @@
  */
 package org.eclipse.ocl.examples.pivot.values;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.values.impl.ValueFactoryImpl;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 public class PivotValueFactory extends ValueFactoryImpl
 {
-	public PivotValueFactory(MetaModelManager metaModelManager) {
+	public PivotValueFactory(@NonNull MetaModelManager metaModelManager) {
 		super(metaModelManager);
 	}
 
-	public MetaModelManager getMetaModelManager() {
+	public @NonNull MetaModelManager getMetaModelManager() {
 		return (MetaModelManager) getStandardLibrary();
 	}
 }

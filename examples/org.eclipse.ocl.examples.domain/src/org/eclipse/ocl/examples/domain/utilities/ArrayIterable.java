@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.domain.utilities;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  * ArrayIterable provides an Iterable for an Array
  */
@@ -54,8 +56,8 @@ public class ArrayIterable<T> implements IndexableIterable<T>
 		this.lastIndex = lastIndex;
 	}
 
-	public T get(int index) {
-		return array[firstIndex + index];
+	public @NonNull T get(int index) {
+		return DomainUtil.nonNullState(array[firstIndex + index]);
 	}		
 	
 	public java.util.Iterator<T> iterator() {

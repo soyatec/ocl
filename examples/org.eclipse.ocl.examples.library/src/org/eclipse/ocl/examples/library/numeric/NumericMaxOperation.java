@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.numeric;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -27,23 +28,22 @@ import org.eclipse.ocl.examples.domain.values.Value;
  */
 public class NumericMaxOperation extends AbstractNumericBinaryOperation
 {
-	public static final NumericMaxOperation INSTANCE = new NumericMaxOperation();
+	public static final @NonNull NumericMaxOperation INSTANCE = new NumericMaxOperation();
 
 	@Override
-	protected IntegerValue evaluateInteger(DomainEvaluator evaluator, IntegerValue left, IntegerValue right) throws InvalidValueException {
+	protected @NonNull IntegerValue evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) throws InvalidValueException {
 		return left.max(right);
 	}
 
 	@Override
-	protected RealValue evaluateReal(DomainEvaluator evaluator, RealValue left, RealValue right) throws InvalidValueException {
+	protected @NonNull RealValue evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) throws InvalidValueException {
 		return left.max(right);
 	}
 
 	@Override
-	protected Value evaluateUnlimited(DomainEvaluator evaluator, Value left, Value right) {
-		if (!left.isUnlimitedNatural() || !right.isUnlimitedNatural()) {
-			return null;
-		}
-		return left.isUnlimited() ? left : right;
+	protected @NonNull Value evaluateUnlimited(@NonNull DomainEvaluator evaluator, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
+		Value leftValue = left.asUnlimitedNaturalValue();
+		Value rightValue = right.asUnlimitedNaturalValue();
+		return left.isUnlimited() ? leftValue : rightValue;
 	}
 }

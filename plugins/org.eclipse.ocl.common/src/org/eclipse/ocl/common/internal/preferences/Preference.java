@@ -14,6 +14,8 @@
  */
 package org.eclipse.ocl.common.internal.preferences;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.preferences.PreferenceableOption;
 
 
@@ -33,7 +35,7 @@ public abstract class Preference<T> implements PreferenceableOption<T>
 	public final String key;
 	public T defaultValue;
 
-	public Preference(String pluginId, String key, T defaultValue) {
+	public Preference(@NonNull String pluginId, @NonNull String key, @Nullable T defaultValue) {
 		this.pluginId = pluginId;
 		this.key = key;
 		this.defaultValue = defaultValue;
@@ -45,11 +47,11 @@ public abstract class Preference<T> implements PreferenceableOption<T>
 	 * 
 	 * @return my key.  Is never <code>null</code>
 	 */
-	public String getKey() {
+	public @NonNull String getKey() {
 		return key;
 	}
 
-	public String getPluginId() {
+	public @NonNull String getPluginId() {
 		return pluginId;
 	}
 
@@ -58,11 +60,11 @@ public abstract class Preference<T> implements PreferenceableOption<T>
 	 * 
 	 * @return my default value, which default-default is <code>null</code>
 	 */
-	public T getDefaultValue() {
+	public @Nullable T getDefaultValue() {
 		return defaultValue;
 	}
 	
-	public void setDefaultValue(T defaultValue) {
+	public void setDefaultValue(@Nullable T defaultValue) {
 		this.defaultValue = defaultValue;
 	}
 	

@@ -19,6 +19,8 @@ package org.eclipse.ocl.examples.pivot.evaluation;
 
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluationEnvironment;
@@ -28,6 +30,7 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.pivot.BasicEnvironment;
 import org.eclipse.ocl.examples.pivot.Class;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -56,7 +59,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
  * @author Tim Klinger (tklinger)
  * @author Christian W. Damus (cdamus)
  */
-public interface EvaluationEnvironment extends DomainEvaluationEnvironment {
+public interface EvaluationEnvironment extends DomainEvaluationEnvironment, BasicEnvironment {
     /**
      * Returns the value associated with the supplied variable declaration
      * 
@@ -64,7 +67,7 @@ public interface EvaluationEnvironment extends DomainEvaluationEnvironment {
      *            the name whose value is to be returned
      * @return the value associated with the name
      */
-	Value getValueOf(VariableDeclaration referredVariable);
+	Value getValueOf(@NonNull VariableDeclaration referredVariable);
 
     /**
      * Replaces the current value of the supplied variable declaration with the supplied value.
@@ -123,7 +126,7 @@ public interface EvaluationEnvironment extends DomainEvaluationEnvironment {
      *    
      * @see #callOperation
      */
-    boolean overrides(Operation operation, int opcode);
+    boolean overrides(@NonNull Operation operation, int opcode);
    
     /**
      * Invokes the specified operation on the given source element, according
@@ -198,7 +201,7 @@ public interface EvaluationEnvironment extends DomainEvaluationEnvironment {
 	 *     classifier extents
 	 * @return the extent map
 	 */
-    DomainModelManager createModelManager(Object object);
+    @NonNull DomainModelManager createModelManager(@Nullable Object object);
     
     /**
      * Queries whether an object is an instance of the specified classifier or
@@ -239,19 +242,19 @@ public interface EvaluationEnvironment extends DomainEvaluationEnvironment {
 	 */
 //	Value getValue(EnumerationLiteral enumerationLiteral);
 
-	MetaModelManager getMetaModelManager();
+    @NonNull MetaModelManager getMetaModelManager();
 
-	ValueFactory getValueFactory();
+	@NonNull ValueFactory getValueFactory();
 
 //	NullValue throwInvalidEvaluation(Object value, OCLExpression expression, String message, Object object) throws InvalidEvaluationException;
 
-	NullValue throwInvalidEvaluation(InvalidValueException e) throws InvalidEvaluationException;
+	@NonNull NullValue throwInvalidEvaluation(InvalidValueException e) throws InvalidEvaluationException;
 
-	NullValue throwInvalidEvaluation(String message) throws InvalidEvaluationException;
+	@NonNull NullValue throwInvalidEvaluation(String message) throws InvalidEvaluationException;
 
-	NullValue throwInvalidEvaluation(String message, DomainExpression expression) throws InvalidEvaluationException;
+	@NonNull NullValue throwInvalidEvaluation(String message, DomainExpression expression) throws InvalidEvaluationException;
 
-	NullValue throwInvalidEvaluation(String message, DomainExpression expression, Object context) throws InvalidEvaluationException;
+	@NonNull NullValue throwInvalidEvaluation(String message, DomainExpression expression, Object context) throws InvalidEvaluationException;
 
-	NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object context, String message, Object... bindings) throws InvalidEvaluationException;
+	@NonNull NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object context, String message, Object... bindings) throws InvalidEvaluationException;
 }

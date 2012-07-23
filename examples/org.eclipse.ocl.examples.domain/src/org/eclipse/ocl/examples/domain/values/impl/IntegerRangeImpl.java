@@ -20,6 +20,7 @@ import java.util.AbstractList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -79,12 +80,12 @@ class IntegerRangeImpl extends AbstractList<Value> implements IntegerRange
 		}
 	}
 	
-	protected final IntegerValue first;			// not null or invalid
-	protected final IntegerValue last;			// not null or invalid
-	protected final IntegerValue fullSize;		// zero if empty
-	protected final Integer size;				// null if fullSize not an Integer
+	protected final @NonNull IntegerValue first;		// not null or invalid
+	protected final @NonNull IntegerValue last;			// not null or invalid
+	protected final @NonNull IntegerValue fullSize;		// zero if empty
+	protected final Integer size;						// null if fullSize not an Integer
 	
-	public IntegerRangeImpl(IntegerValue first, IntegerValue last) throws InvalidValueException {
+	public IntegerRangeImpl(@NonNull IntegerValue first, @NonNull IntegerValue last) throws InvalidValueException {
 		IntegerValue sizeMinusOne = last.subtract(first);
 		this.first = first;
 		this.last = last;
@@ -108,7 +109,7 @@ class IntegerRangeImpl extends AbstractList<Value> implements IntegerRange
 	}
 	
 	@Override
-	public IntegerValue get(int index) {
+	public @NonNull IntegerValue get(int index) {
 		if ((index < 0) || (size == null) || (index >= size)) {
 			throw new NoSuchElementException();
 //			getValueFactory().throwInvalidValueException("Out of range index {0} for range 0..{1}", index, size);
@@ -120,24 +121,24 @@ class IntegerRangeImpl extends AbstractList<Value> implements IntegerRange
 		}
 	}
 
-	public IntegerValue getFirst() {
+	public @NonNull IntegerValue getFirst() {
 		return first;
 	}
 
-	public IntegerValue getLast() {
+	public @NonNull IntegerValue getLast() {
 		return last;
 	}
 
-	public IntegerValue getSize() {
+	public @NonNull IntegerValue getSize() {
 		return fullSize;
 	}
 
-	public ValueFactory getValueFactory() {
+	public @NonNull ValueFactory getValueFactory() {
 		return first.getValueFactory();
 	}
 
     @Override
-	public Iterator<Value> iterator() {
+	public @NonNull Iterator<Value> iterator() {
 		return new IntegerRangeIterator();
 	}
 

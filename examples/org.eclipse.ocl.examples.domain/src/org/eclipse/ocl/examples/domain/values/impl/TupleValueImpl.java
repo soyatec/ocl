@@ -21,6 +21,8 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
@@ -46,8 +48,8 @@ public class TupleValueImpl extends ValueImpl implements TupleValue
 		return ValuesPackage.Literals.TUPLE_VALUE;
 	}
 
-	protected final DomainTupleType type;
-    private final Map<String, Value> parts = new java.util.HashMap<String, Value>();
+	protected final @NonNull DomainTupleType type;
+    private final @NonNull Map<String, Value> parts = new java.util.HashMap<String, Value>();
     private Integer hashCode = null;
 
     /**
@@ -56,7 +58,7 @@ public class TupleValueImpl extends ValueImpl implements TupleValue
      * @param type my type
      * @param values my parts
      */
-    public TupleValueImpl(ValueFactory valueFactory, DomainTupleType type, Map<? extends DomainTypedElement, Value> values) {
+    public TupleValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainTupleType type, @NonNull Map<? extends DomainTypedElement, Value> values) {
 		super(valueFactory);
 		this.type = type;
         for (Map.Entry<? extends DomainTypedElement, Value> entry : values.entrySet()) {
@@ -72,18 +74,23 @@ public class TupleValueImpl extends ValueImpl implements TupleValue
      * @param firstValue my first value
      * @param secondValue my second value
      */
-    public TupleValueImpl(ValueFactory valueFactory, DomainTupleType type, Value firstValue, Value secondValue) {
+    public TupleValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainTupleType type, @NonNull Value firstValue, @NonNull Value secondValue) {
 		super(valueFactory);
 		this.type = type;
         parts.put("first", firstValue);			// FIXME define "first" elsewhere
         parts.put("second", secondValue);
     }
 
-	public Object asObject() {
+	public @NonNull Object asObject() {
 		return parts;
 	}
 
-	public Value asValidValue() {
+    @Override
+	public @NonNull TupleValue asTupleValue() {
+        return this;
+    }
+
+	public @NonNull Value asValidValue() {
 		return this;
 	}
 
@@ -102,18 +109,19 @@ public class TupleValueImpl extends ValueImpl implements TupleValue
         return result;
     }
 
-	public DomainTupleType getType() {
+	public @NonNull DomainTupleType getType() {
 		return type;
 	}
 
     // implements the inherited specification
-    public Value getValue(String partName) {
+    public @Nullable Value getValue(@NonNull String partName) {
         return parts.get(partName);
     }
 
     // implements the inherited specification
-    public Value getValue(DomainTypedElement part) {
-        return getValue(part.getName());
+    public @Nullable Value getValue(@NonNull DomainTypedElement part) {
+        String name = part.getName();
+		return name != null ? getValue(name) : null;
     }
 
     // overrides the inherited implementation

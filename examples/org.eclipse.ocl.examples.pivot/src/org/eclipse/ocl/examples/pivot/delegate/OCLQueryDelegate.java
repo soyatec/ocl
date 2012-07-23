@@ -24,6 +24,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.util.QueryDelegate;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
@@ -50,9 +51,9 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
  */
 public class OCLQueryDelegate implements QueryDelegate
 {
-	protected OCLDelegateDomain delegateDomain;
-	protected final EInvocationContext parserContext;
-	protected final String expression;
+	protected @NonNull OCLDelegateDomain delegateDomain;
+	protected final @NonNull EInvocationContext parserContext;
+	protected final @NonNull String expression;
 	private ExpressionInOCL specification = null;
 
 	/**
@@ -70,7 +71,7 @@ public class OCLQueryDelegate implements QueryDelegate
 	 * @throws ParserException
 	 *             if the expression is invalid
 	 */
-	public OCLQueryDelegate(OCLDelegateDomain delegateDomain, EClassifier context, Map<String, EClassifier> parameters, String expression) {
+	public OCLQueryDelegate(@NonNull OCLDelegateDomain delegateDomain, @NonNull EClassifier context, @Nullable Map<String, EClassifier> parameters, @NonNull String expression) {
 		this.delegateDomain = delegateDomain;
 		MetaModelManager metaModelManager = delegateDomain.getMetaModelManager();
 		this.parserContext = new EInvocationContext(metaModelManager, null, context, parameters);
@@ -94,43 +95,44 @@ public class OCLQueryDelegate implements QueryDelegate
 	 *             in case of failure to prepare or execute the query, usually
 	 *             because of an exception
 	 */
-	public Object execute(Object target, Map<String, ?> arguments)
-			throws InvocationTargetException {
+	public Object execute(@Nullable Object target, Map<String, ?> arguments) throws InvocationTargetException {
 		@SuppressWarnings("null")
-		@NonNull Map<String, ?> nonNullArguments =  (arguments != null ? arguments : (Map<String, ?>)Collections.<String, Object>emptyMap());
-		if (specification == null) {
-			prepare();
-		}
+		@NonNull Map<String, ?> nonNullArguments = (arguments != null ? arguments : (Map<String, ?>)Collections.<String, Object>emptyMap());
 		try {
+			if (specification == null) {
+				prepare();
+			}
+			@SuppressWarnings("null")
+			@NonNull ExpressionInOCL nonNullSpecification = specification;
 			OCL ocl = delegateDomain.getOCL();
 			MetaModelManager metaModelManager = ocl.getMetaModelManager();
 			ValueFactory valueFactory = metaModelManager.getValueFactory();
 			Value targetValue = valueFactory.valueOf(target);
 			DomainType targetType = targetValue.getType();
-			DomainType requiredType = specification.getContextVariable().getType();
-			if (!targetType.conformsTo(metaModelManager, requiredType)) {
+			DomainType requiredType = nonNullSpecification.getContextVariable().getType();
+			if ((requiredType == null) || !targetType.conformsTo(metaModelManager, requiredType)) {
 				String message = DomainUtil.bind(OCLMessages.WrongContextClassifier_ERROR_, targetType, requiredType);
 				throw new OCLDelegateException(message);
 			}
-			List<Variable> parameterVariables = specification.getParameterVariable();
+			List<Variable> parameterVariables = nonNullSpecification.getParameterVariable();
 			int argCount = arguments != null ? arguments.size() : 0;
 			if (parameterVariables.size() != argCount) {
 				String message = DomainUtil.bind(OCLMessages.MismatchedArgumentCount_ERROR_, argCount, parameterVariables.size());
 				throw new OCLDelegateException(message);
 			}
-			Query query = ocl.createQuery(specification);
+			Query query = ocl.createQuery(nonNullSpecification);
 			EvaluationEnvironment env = query.getEvaluationEnvironment();
 			for (Variable parameterVariable : parameterVariables) {
 				// bind arguments to parameter names
 				String name = parameterVariable.getName();
 				Object object = nonNullArguments.get(name);
 				if ((object == null) && !nonNullArguments.containsKey(name)) {
-					String message = DomainUtil.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, PivotUtil.getBody(specification));
+					String message = DomainUtil.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, PivotUtil.getBody(nonNullSpecification));
 					throw new OCLDelegateException(message);
 				}
 				Value value = valueFactory.valueOf(object);
 				targetType = value.getType();
-				requiredType = parameterVariable.getType();
+				requiredType = DomainUtil.nonNullModel(parameterVariable.getType());
 				if (!targetType.conformsTo(metaModelManager, requiredType)) {
 					String message = DomainUtil.bind(OCLMessages.MismatchedArgumentType_ERROR_, name, targetType, requiredType);
 					throw new OCLDelegateException(message);

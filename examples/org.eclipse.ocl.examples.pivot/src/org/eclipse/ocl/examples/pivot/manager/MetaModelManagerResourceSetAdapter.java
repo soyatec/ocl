@@ -22,6 +22,8 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
@@ -30,14 +32,11 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
  */
 public class MetaModelManagerResourceSetAdapter implements MetaModelManagedAdapter
 {		
-	public static MetaModelManagerResourceSetAdapter findAdapter(ResourceSet resourceSet) {
-		if (resourceSet == null) {
-			return null;
-		}
+	public static @Nullable MetaModelManagerResourceSetAdapter findAdapter(@NonNull ResourceSet resourceSet) {
 		return PivotUtil.getAdapter(MetaModelManagerResourceSetAdapter.class, resourceSet);
 	}
 	
-	public static MetaModelManagerResourceSetAdapter getAdapter(ResourceSet resourceSet, MetaModelManager metaModelManager) {
+	public static @NonNull MetaModelManagerResourceSetAdapter getAdapter(@NonNull ResourceSet resourceSet, @Nullable MetaModelManager metaModelManager) {
 		List<Adapter> eAdapters = resourceSet.eAdapters();
 		MetaModelManagerResourceSetAdapter adapter = PivotUtil.getAdapter(MetaModelManagerResourceSetAdapter.class, eAdapters);
 		if (adapter == null) {
@@ -50,10 +49,10 @@ public class MetaModelManagerResourceSetAdapter implements MetaModelManagedAdapt
 		return adapter;
 	}
 	
-	protected final ResourceSet resourceSet;
-	protected final MetaModelManager metaModelManager;
+	protected final @NonNull ResourceSet resourceSet;
+	protected final @NonNull MetaModelManager metaModelManager;
 	
-	public MetaModelManagerResourceSetAdapter(ResourceSet resourceSet, MetaModelManager metaModelManager) {
+	public MetaModelManagerResourceSetAdapter(@NonNull ResourceSet resourceSet, @NonNull MetaModelManager metaModelManager) {
 		this.resourceSet = resourceSet;
 		this.metaModelManager = metaModelManager;
 		metaModelManager.addListener(this);
@@ -63,11 +62,11 @@ public class MetaModelManagerResourceSetAdapter implements MetaModelManagedAdapt
 		resourceSet.eAdapters().remove(this);
 	}
 	
-	public MetaModelManager getMetaModelManager() {
+	public @NonNull MetaModelManager getMetaModelManager() {
 		return metaModelManager;
 	}
 
-	public ResourceSet getTarget() {
+	public @NonNull ResourceSet getTarget() {
 		return resourceSet;
 	}
 
@@ -75,11 +74,11 @@ public class MetaModelManagerResourceSetAdapter implements MetaModelManagedAdapt
 		return type == MetaModelManagerResourceSetAdapter.class;
 	}	
 
-	public boolean isAdapterFor(MetaModelManager metaModelManager) {
+	public boolean isAdapterFor(@NonNull MetaModelManager metaModelManager) {
 		return this.metaModelManager == metaModelManager;
 	}
 
-	public void metaModelManagerDisposed(MetaModelManager metaModelManager) {
+	public void metaModelManagerDisposed(@NonNull MetaModelManager metaModelManager) {
 		dispose();
 	}
 

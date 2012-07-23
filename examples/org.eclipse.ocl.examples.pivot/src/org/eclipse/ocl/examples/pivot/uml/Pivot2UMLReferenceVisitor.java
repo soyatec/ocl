@@ -37,7 +37,7 @@ public class Pivot2UMLReferenceVisitor
 {
 //	protected final Pivot2EcoreTypeRefVisitor typeRefVisitor;
 	
-	public Pivot2UMLReferenceVisitor(Pivot2UML context) {
+	public Pivot2UMLReferenceVisitor(@NonNull Pivot2UML context) {
 		super(context);
 //		typeRefVisitor = new Pivot2EcoreTypeRefVisitor(context);
 	}

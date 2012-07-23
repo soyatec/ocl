@@ -17,6 +17,8 @@
 package org.eclipse.ocl.examples.domain.library;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 
@@ -28,5 +30,5 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
  */
 public interface LibraryValidator
 {
-	Diagnostic validate(DomainStandardLibrary standardLibrary, DomainCallExp callExp);
+	@Nullable Diagnostic validate(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainCallExp callExp);
 }

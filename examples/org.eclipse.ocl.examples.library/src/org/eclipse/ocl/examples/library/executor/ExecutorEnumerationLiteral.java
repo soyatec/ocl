@@ -16,32 +16,33 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 
 public class ExecutorEnumerationLiteral implements DomainEnumerationLiteral
 {
-	protected final String name;
-	protected final DomainEnumeration enumeration;
+	protected final @NonNull String name;
+	protected final @NonNull DomainEnumeration enumeration;
 	protected final int ordinal;
 	
-	public ExecutorEnumerationLiteral(String name, DomainEnumeration enumeration, int ordinal) {
+	public ExecutorEnumerationLiteral(@NonNull String name, @NonNull DomainEnumeration enumeration, int ordinal) {
 		this.name = name;
 		this.enumeration = enumeration;
 		this.ordinal = ordinal;
 	}
 
-	public Object asEcoreObject(DomainStandardLibrary standardLibrary) {
+	public Object asEcoreObject(@NonNull DomainStandardLibrary standardLibrary) {
 //		throw new UnsupportedOperationException();
 		return this;
 	}
 
-	public DomainEnumeration getEnumeration() {
+	public @NonNull DomainEnumeration getEnumeration() {
 		return enumeration;
 	}
 
-	public String getName() {
+	public @NonNull String getName() {
 		return name;
 	}
 	

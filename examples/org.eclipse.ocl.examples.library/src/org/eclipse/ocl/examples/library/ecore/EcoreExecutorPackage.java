@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.library.ecore;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.ocl.examples.domain.utilities.ArrayIterable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorPackage;
 import org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
@@ -28,8 +29,8 @@ public class EcoreExecutorPackage extends ExecutorPackage
 	private ExecutorStandardLibrary standardLibrary = null;
 	private ExecutorType[] types = null;
 
-	public EcoreExecutorPackage(EPackage ePackage) {
-		super(ePackage.getName(), ePackage.getNsURI());
+	public EcoreExecutorPackage(/*@NonNull*/ EPackage ePackage) {
+		super(DomainUtil.nonNullEMF(ePackage.getName()), ePackage.getNsURI());
 		this.ePackage = ePackage;		
 	}
 

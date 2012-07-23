@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot.delegate;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * Factory for OCL delegate domains.
@@ -25,7 +26,7 @@ public class OCLDelegateDomainFactory implements DelegateDomain.Factory
 {	
 	public OCLDelegateDomainFactory() {}
 
-	public OCLDelegateDomain createDelegateDomain(String delegateURI, EPackage ePackage) {
+	public @NonNull OCLDelegateDomain createDelegateDomain(@NonNull String delegateURI, @NonNull EPackage ePackage) {
 		return new OCLDelegateDomain(delegateURI, ePackage);
 	}
 }

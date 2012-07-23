@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.domain.library;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
@@ -26,21 +27,21 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 public abstract class AbstractIterationManager implements DomainIterationManager
 {
-	protected final DomainEvaluator evaluator;
+	protected final @NonNull DomainEvaluator evaluator;
 
-	public AbstractIterationManager(DomainEvaluator evaluator) {
+	public AbstractIterationManager(@NonNull DomainEvaluator evaluator) {
 		this.evaluator = evaluator;
 	}
 
-	public DomainIterationManager createNestedIterationManager(CollectionValue value) {
+	public @NonNull DomainIterationManager createNestedIterationManager(@NonNull CollectionValue value) {
 		throw new UnsupportedOperationException();	// Only required for single iterator managers
 	}
 
-	public Value get() {
+	public @NonNull Value get() {
 		throw new UnsupportedOperationException();	// Only required for single iterator managers
 	}
 
-	public ValueFactory getValueFactory() {
+	public @NonNull ValueFactory getValueFactory() {
 		return evaluator.getValueFactory();
 	}
 
@@ -48,7 +49,7 @@ public abstract class AbstractIterationManager implements DomainIterationManager
 		throw new UnsupportedOperationException();	// Only required for single iterator managers
 	}
 
-	public NullValue throwInvalidEvaluation(InvalidValueException e) {
+	public @NonNull NullValue throwInvalidEvaluation(InvalidValueException e) {
 		return evaluator.throwInvalidEvaluation(e);
 	}
 }

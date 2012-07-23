@@ -15,6 +15,9 @@
 package org.eclipse.ocl.examples.pivot.context;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -24,21 +27,22 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
  */
 public class OperationContext extends ClassContext
 {
-	private final Operation operationContext;
-	private final String resultVariableName;		// Null for none
+	private final @NonNull Operation operationContext;
+	private final @Nullable String resultVariableName;		// Null for none
 	
-	public OperationContext(MetaModelManager metaModelManager, URI uri, Operation operationContext, String resultVariableName) {
-		super(metaModelManager, uri, operationContext.getOwningType());
+	public OperationContext(@NonNull MetaModelManager metaModelManager, @Nullable URI uri, @NonNull Operation operationContext, @Nullable String resultVariableName) {
+		super(metaModelManager, uri, DomainUtil.nonNullModel(operationContext.getOwningType()));
 		this.operationContext = operationContext;
 		this.resultVariableName = resultVariableName;
 	}
 
 	@Override
-	public void initialize(Base2PivotConversion conversion, ExpressionInOCL expression) {
+	public void initialize(@NonNull Base2PivotConversion conversion, @NonNull ExpressionInOCL expression) {
 		super.initialize(conversion, expression);
-		conversion.setParameterVariables(expression, operationContext.getOwnedParameter());
-		if (resultVariableName != null) {
-			conversion.setResultVariable(expression, operationContext, resultVariableName);
+		conversion.setParameterVariables(expression, DomainUtil.nonNullEMF(operationContext.getOwnedParameter()));
+		String resultVariableName2 = resultVariableName;
+		if (resultVariableName2 != null) {
+			conversion.setResultVariable(expression, operationContext, resultVariableName2);
 		}
 	}
 }

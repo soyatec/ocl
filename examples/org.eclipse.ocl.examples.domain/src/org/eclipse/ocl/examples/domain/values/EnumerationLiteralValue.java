@@ -16,8 +16,10 @@
  */
 package org.eclipse.ocl.examples.domain.values;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 public interface EnumerationLiteralValue extends ElementValue
 {
@@ -27,12 +29,13 @@ public interface EnumerationLiteralValue extends ElementValue
 	DomainEnumerationLiteral getElement();
 
 	/**
+	 * @throws InvalidValueException 
 	 * @generated NOT
 	 */
-	String getName();
+	@NonNull String getName() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	DomainEnumeration getType();
+	@NonNull DomainEnumeration getType();
 }

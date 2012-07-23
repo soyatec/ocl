@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot.utilities;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 
@@ -26,7 +27,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 @Deprecated
 public class TypeManagerResourceAdapter extends MetaModelManagerResourceAdapter
 {
-	public TypeManagerResourceAdapter(Resource resource, MetaModelManager metaModelManager) {
+	public TypeManagerResourceAdapter(@NonNull Resource resource, @NonNull MetaModelManager metaModelManager) {
 		super(resource, metaModelManager);
 	}		
 }

@@ -29,9 +29,12 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.ETypedElement;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
+import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -41,17 +44,17 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 public interface ValueFactory
 {
-	BooleanValue booleanValueOf(boolean value);
+	@NonNull BooleanValue booleanValueOf(boolean value);
 		
-    BagValue createBagOf(Object... objects);
-    BagValue createBagOf(Iterable<?> objects);
-	BagValue createBagValue(DomainCollectionType type, Value... values);
-	BagValue createBagValue(DomainCollectionType type, Bag<? extends Value> values);
-	BagValue createBagValue(DomainCollectionType type, Collection<? extends Value> values);
-	BagValue createBagValue(Value... values);
+	@NonNull BagValue createBagOf(Object... objects);
+	@NonNull BagValue createBagOf(@NonNull Iterable<?> objects);
+	@NonNull BagValue createBagValue(@NonNull DomainCollectionType type, Value... values);
+	@NonNull BagValue createBagValue(@NonNull DomainCollectionType type, @NonNull Bag<? extends Value> values);
+	@NonNull BagValue createBagValue(@NonNull DomainCollectionType type, @NonNull Collection<? extends Value> values);
+	@NonNull BagValue createBagValue(Value... values);
 
-	BooleanValue.Accumulator createBooleanAccumulatorValue();
-	CollectionValue.Accumulator createCollectionAccumulatorValue(DomainCollectionType type);
+	@NonNull BooleanValue.Accumulator createBooleanAccumulatorValue();
+	@NonNull CollectionValue.Accumulator createCollectionAccumulatorValue(@NonNull DomainCollectionType type);
     
 	/**
 	 * Creates a new OCL <tt>Collection</tt> of the specified ordering and uniqueness.
@@ -60,86 +63,89 @@ public interface ValueFactory
 	 * @param isUnique the required collection uniqueness
 	 * @return the new collection
 	 */
-	CollectionValue createCollectionValue(boolean isOrdered, boolean isUnique, Value... values);
-	CollectionValue createCollectionValue(boolean isOrdered, boolean isUnique, Collection<Value> values);
-	CollectionValue createCollectionValue(boolean isOrdered, boolean isUnique, DomainType elementType, Value... values);
-	CollectionValue createCollectionValue(boolean isOrdered, boolean isUnique, DomainType elementType, Collection<Value> values);
+	@NonNull CollectionValue createCollectionValue(boolean isOrdered, boolean isUnique, Value... values);
+	@NonNull CollectionValue createCollectionValue(boolean isOrdered, boolean isUnique, @NonNull Collection<Value> values);
+	@NonNull CollectionValue createCollectionValue(boolean isOrdered, boolean isUnique, @NonNull DomainType elementType, Value... values);
+	@NonNull CollectionValue createCollectionValue(boolean isOrdered, boolean isUnique, @NonNull DomainType elementType, @NonNull Collection<Value> values);
 
-	ObjectValue createEObjectValue(EObject eObject);	
-	ElementValue createElementValue(DomainElement element);
+	@NonNull ObjectValue createEObjectValue(@NonNull EObject eObject);	
+	@Nullable ElementValue createElementValue(@NonNull DomainElement element);
 	
-	EnumerationLiteralValue createEnumerationLiteralValue(DomainEnumerationLiteral element);
-	EnumerationLiteralValue createEnumerationLiteralValue(EEnumLiteral eEnumLiteral);
-	EnumerationLiteralValue createEnumerationLiteralValue(Enumerator enumerator, EEnum eEnum);
+	@NonNull EnumerationLiteralValue createEnumerationLiteralValue(@NonNull DomainEnumerationLiteral element);
+	@NonNull EnumerationLiteralValue createEnumerationLiteralValue(@NonNull EEnumLiteral eEnumLiteral);
+	@NonNull EnumerationLiteralValue createEnumerationLiteralValue(@NonNull Enumerator enumerator, @NonNull EEnum eEnum);
 	
-	InvalidValue createInvalidValue(InvalidEvaluationException exception);
-	InvalidValue createInvalidValue(InvalidValueException exception);
+	@NonNull InvalidValue createInvalidValue(@NonNull InvalidEvaluationException exception);
+	@NonNull InvalidValue createInvalidValue(@NonNull InvalidValueException exception);
+	@NonNull InvalidValue createInvalidValue(/*@NonNull*/ String message, @Nullable Throwable e, @Nullable DomainExpression expression, @Nullable Object context);
 
-	ObjectValue createObjectValue(Object object);
+	@NonNull ObjectValue createObjectValue(@NonNull Object object);
 
-    OrderedSetValue createOrderedSetOf(Object... objects);
-    OrderedSetValue createOrderedSetOf(Iterable<?> objects);
-    OrderedSetValue createOrderedSetRange(DomainCollectionType type, IntegerRange range);
-	OrderedSetValue createOrderedSetValue(DomainCollectionType type, Value... values);
-	OrderedSetValue createOrderedSetValue(DomainCollectionType type, OrderedSet<? extends Value> values);
-	OrderedSetValue createOrderedSetValue(DomainCollectionType type, Collection<? extends Value> values);
-	OrderedSetValue createOrderedSetValue(Value... value);
+	@NonNull OrderedSetValue createOrderedSetOf(Object... objects);
+	@NonNull OrderedSetValue createOrderedSetOf(@NonNull Iterable<?> objects);
+	@NonNull OrderedSetValue createOrderedSetRange(@NonNull DomainCollectionType type, @NonNull IntegerRange range);
+	@NonNull OrderedSetValue createOrderedSetValue(@NonNull DomainCollectionType type, Value... values);
+	@NonNull OrderedSetValue createOrderedSetValue(@NonNull DomainCollectionType type, @NonNull OrderedSet<? extends Value> values);
+	@NonNull OrderedSetValue createOrderedSetValue(@NonNull DomainCollectionType type, @NonNull Collection<? extends Value> values);
+	@NonNull OrderedSetValue createOrderedSetValue(Value... value);
 
-	IntegerRange createRange(IntegerValue firstInteger, IntegerValue lastInteger) throws InvalidValueException;
+	@NonNull IntegerRange createRange(@NonNull IntegerValue firstInteger, @NonNull IntegerValue lastInteger) throws InvalidValueException;
 
-	SequenceValue createSequenceAccumulatorValue(DomainCollectionType type, List<Value> values);
-    SequenceValue createSequenceOf(Object... objects);
-    SequenceValue createSequenceOf(Iterable<?> objects);
-	SequenceValue createSequenceRange(DomainCollectionType type, IntegerRange range);
-	SequenceValue createSequenceValue(DomainCollectionType type, Value... values);
-	SequenceValue createSequenceValue(DomainCollectionType type, List<? extends Value> values);
-	SequenceValue createSequenceValue(DomainCollectionType type, Collection<? extends Value> values);
-	SequenceValue createSequenceValue(Value... value);
+	@NonNull SequenceValue.Accumulator createSequenceAccumulatorValue(@NonNull DomainCollectionType type);
+	@NonNull SequenceValue.Accumulator createSequenceAccumulatorValue(@NonNull DomainCollectionType type, @NonNull List<Value> values);
+	@NonNull SequenceValue createSequenceOf(Object... objects);
+	@NonNull SequenceValue createSequenceOf(@NonNull Iterable<?> objects);
+	@NonNull SequenceValue createSequenceRange(@NonNull DomainCollectionType type, @NonNull IntegerRange range);
+	@NonNull SequenceValue createSequenceValue(@NonNull DomainCollectionType type, Value... values);
+	@NonNull SequenceValue createSequenceValue(@NonNull DomainCollectionType type, @NonNull List<? extends Value> values);
+	@NonNull SequenceValue createSequenceValue(@NonNull DomainCollectionType type, @NonNull Collection<? extends Value> values);
+	@NonNull SequenceValue createSequenceValue(Value... value);
 	
-    SetValue createSetOf(Object... objects);
-    SetValue createSetOf(Iterable<?> objects);
-	SetValue createSetValue(DomainCollectionType type, Value... values);
-	SetValue createSetValue(DomainCollectionType type, Set<? extends Value> values);
-	SetValue createSetValue(DomainCollectionType type, Collection<? extends Value> values);
-	SetValue createSetValue(Value... value);
+	@NonNull SetValue createSetOf(Object... objects);
+	@NonNull SetValue createSetOf(@NonNull Iterable<?> objects);
+	@NonNull SetValue createSetValue(@NonNull DomainCollectionType type, Value... values);
+	@NonNull SetValue createSetValue(@NonNull DomainCollectionType type, @NonNull Set<? extends Value> values);
+	@NonNull SetValue createSetValue(@NonNull DomainCollectionType type, @NonNull Collection<? extends Value> values);
+	@NonNull SetValue createSetValue(Value... value);
 	
-	TupleValue createTupleValue(DomainTupleType type, Map<? extends DomainTypedElement, Value> values);
+	@NonNull TupleValue createTupleValue(@NonNull DomainTupleType type, @NonNull Map<? extends DomainTypedElement, Value> values);
 
-	Value createTypeValue(DomainType type);
+	@NonNull Value createTypeValue(@NonNull DomainType type);
 
 	void dispose();
 
-	Object getEcoreValueOf(Value result);
-    DomainType getElementType(Value... values);
-    DomainType getElementType(Iterable<Value> values);
+	Object getEcoreValueOf(@NonNull Value result);
+	@NonNull DomainType getElementType(Value... values);
+	@NonNull DomainType getElementType(@NonNull Iterable<Value> values);
 
-	BooleanValue getFalse();
-	InvalidValue getInvalid();
-	NullValue getNull();
-	IntegerValue getOne();
-	DomainStandardLibrary getStandardLibrary();
-	BooleanValue getTrue();
-	UnlimitedValue getUnlimited();
-	IntegerValue getZero();
+    @NonNull BooleanValue getFalse();
+    @NonNull InvalidValue getInvalid();
+    @NonNull NullValue getNull();
+    @NonNull IntegerValue getOne();
+    @NonNull DomainStandardLibrary getStandardLibrary();
+    @NonNull BooleanValue getTrue();
+    @NonNull UnlimitedValue getUnlimited();
+    @NonNull IntegerValue getZero();
 	
-	IntegerValue integerValueOf(int value);
-	IntegerValue integerValueOf(long value);
-	IntegerValue integerValueOf(BigInteger value);
-	IntegerValue integerValueOf(String aValue) throws InvalidValueException;
+    @NonNull IntegerValue integerValueOf(int value);
+    @NonNull IntegerValue integerValueOf(long value);
+    @NonNull IntegerValue integerValueOf(@NonNull BigInteger value);
+    @NonNull IntegerValue integerValueOf(@NonNull String aValue) throws InvalidValueException;
 	
-	RealValue realValueOf(double value);
-	RealValue realValueOf(BigDecimal value);
-	RealValue realValueOf(IntegerValue integerValue);	
-	RealValue realValueOf(String aValue) throws InvalidValueException;
+    @NonNull RealValue realValueOf(double value);
+    @NonNull RealValue realValueOf(@NonNull BigDecimal value);
+    @NonNull RealValue realValueOf(@NonNull IntegerValue integerValue);	
+    @NonNull RealValue realValueOf(@NonNull String aValue) throws InvalidValueException;
 	
-	StringValue stringValueOf(String value) ;
+    @NonNull StringValue stringValueOf(@NonNull String value) ;
 	
-	InvalidValue throwInvalidValueException(String message, Object... bindings) throws InvalidValueException;
+	@NonNull <T> T throwInvalidValueException(/*@NonNull*/ String message, Object... bindings) throws InvalidValueException;
+//	@NonNull <T> T throwInvalidValueException(@NonNull Throwable e) throws InvalidValueException;
 
-	DomainType typeOf(Value value, Value... values);
+	@NonNull DomainType typeOf(@NonNull Value value, Value... values);
 
-	Value valueOf(Object object);
-	Value valueOf(Object eValue, EClassifier eClassifier);
-	Value valueOf(Object eValue, ETypedElement eFeature);
+	@NonNull Value valueOf(@Nullable Object object);
+	@NonNull Value valueOf(@NonNull Object eValue, @NonNull EClassifier eClassifier);
+	@NonNull Value valueOf(@NonNull Object eValue, @NonNull ETypedElement eFeature);
 }
  

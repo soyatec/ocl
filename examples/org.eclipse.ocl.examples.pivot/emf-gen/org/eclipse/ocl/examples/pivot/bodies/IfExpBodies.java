@@ -20,6 +20,7 @@
  */
 package org.eclipse.ocl.examples.pivot.bodies;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -47,33 +48,33 @@ public class IfExpBodies
 	 */
 	public static class _invariant_ConditionTypeIsBoolean extends AbstractUnaryOperation
 	{
-		public static _invariant_ConditionTypeIsBoolean INSTANCE = new _invariant_ConditionTypeIsBoolean();
+		public static @NonNull _invariant_ConditionTypeIsBoolean INSTANCE = new _invariant_ConditionTypeIsBoolean();
 	
 		/*
 		self.condition.type = Boolean
 		*/
-		public Value evaluate(DomainEvaluator evaluator, DomainType returnType, final Value self) throws InvalidValueException {
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
-			final ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
-			final ExecutorType T_Type = OCLstdlibTables.Types._Type;
-			final ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
-			final LibraryProperty IP_TypedElement_type = P_TypedElement_type.getImplementation();
-			final ExecutorType T_pivot__OCLExpression = PivotTables.Types._OCLExpression;
-			final ExecutorProperty P_IfExp_condition = PivotTables.Properties._IfExp__condition;
-			final LibraryProperty IP_IfExp_condition = P_IfExp_condition.getImplementation();
-			final Value T_ClassClassifier_Boolean_ = valueFactory.createTypeValue(OCLstdlibTables.Types._Boolean);
+		public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Value self) throws InvalidValueException {
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
+			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
+			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
+			final @NonNull LibraryProperty IP_TypedElement_type = P_TypedElement_type.getImplementation();
+			final @NonNull ExecutorType T_pivot__OCLExpression = PivotTables.Types._OCLExpression;
+			final @NonNull ExecutorProperty P_IfExp_condition = PivotTables.Properties._IfExp__condition;
+			final @NonNull LibraryProperty IP_IfExp_condition = P_IfExp_condition.getImplementation();
+			final @NonNull Value T_ClassClassifier_Boolean_ = valueFactory.createTypeValue(OCLstdlibTables.Types._Boolean);
 			
 			
-			Value A_symbol_353 = IP_IfExp_condition.evaluate(evaluator, T_pivot__OCLExpression, self, P_IfExp_condition);
+			Value A_symbol_381 = IP_IfExp_condition.evaluate(evaluator, T_pivot__OCLExpression, self, P_IfExp_condition);
 			
-			Value A_symbol_354 = IP_TypedElement_type.evaluate(evaluator, T_Type, A_symbol_353, P_TypedElement_type);
+			Value A_symbol_382 = IP_TypedElement_type.evaluate(evaluator, T_Type, A_symbol_381, P_TypedElement_type);
 			
-			DomainType static_A_symbol_355 = valueFactory.typeOf(A_symbol_354, T_ClassClassifier_Boolean_);
-			LibraryBinaryOperation dynamic_A_symbol_355 = (LibraryBinaryOperation)static_A_symbol_355.lookupImplementation(standardLibrary, O_OclAny__eq_);
-			Value A_symbol_355 = dynamic_A_symbol_355.evaluate(evaluator, T_Boolean, A_symbol_354, T_ClassClassifier_Boolean_);
-			return A_symbol_355;
+			DomainType static_A_symbol_383 = valueFactory.typeOf(A_symbol_382, T_ClassClassifier_Boolean_);
+			LibraryBinaryOperation dynamic_A_symbol_383 = (LibraryBinaryOperation)static_A_symbol_383.lookupImplementation(standardLibrary, O_OclAny__eq_);
+			Value A_symbol_383 = dynamic_A_symbol_383.evaluate(evaluator, T_Boolean, A_symbol_382, T_ClassClassifier_Boolean_);
+			return A_symbol_383;
 		}
 	}
 

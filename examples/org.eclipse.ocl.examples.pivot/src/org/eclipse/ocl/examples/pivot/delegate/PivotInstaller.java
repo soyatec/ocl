@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -42,10 +43,10 @@ public class PivotInstaller
 	 * @param metaModelManager
 	 * @param pivotPackage
 	 */
-	public static void installDelegates(MetaModelManager metaModelManager, org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+	public static void installDelegates(@NonNull MetaModelManager metaModelManager, @NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
 		boolean hasDelegates = false;
 		for (Type aType : metaModelManager.getLocalClasses(pivotPackage)) {
-			if (installDelegates(metaModelManager, aType)) {
+			if ((aType != null) && installDelegates(metaModelManager, aType)) {
 				hasDelegates = true;
 			}
 		}
@@ -55,7 +56,9 @@ public class PivotInstaller
 			Pivot2Ecore.installDelegates((EPackage) eTarget);
 		}
 		for (org.eclipse.ocl.examples.pivot.Package nestedPackage : metaModelManager.getLocalPackages(pivotPackage)) {
-			installDelegates(metaModelManager, nestedPackage);
+			if (nestedPackage != null) {
+				installDelegates(metaModelManager, nestedPackage);
+			}
 		}
 	}
 
@@ -65,12 +68,12 @@ public class PivotInstaller
 	 * @param metaModelManager
 	 * @param pivotPackage
 	 */
-	private static boolean installDelegates(MetaModelManager metaModelManager, Type pivotType) {
+	private static boolean installDelegates(@NonNull MetaModelManager metaModelManager, @NonNull Type pivotType) {
 		boolean hasDelegates = false;
 		Type primaryType = metaModelManager.getPrimaryType(pivotType);
 		EObject eTarget = primaryType.getETarget();
 		if (eTarget instanceof EClassifier) {
-			EClassifier eClassifier = (EClassifier)eTarget;
+			@NonNull EClassifier eClassifier = (EClassifier)eTarget;
 			for (Constraint constraint : metaModelManager.getLocalConstraints(pivotType)) {
 				EModelElement eContext;
 				if (constraint.isCallable()) {
@@ -83,7 +86,7 @@ public class PivotInstaller
 						}
 					}
 					if (eContext == null) {
-						EOperation eOperation = Pivot2Ecore.createConstraintEOperation(constraint, name);
+						@NonNull EOperation eOperation = Pivot2Ecore.createConstraintEOperation(constraint, name);
 						((EClass) eClassifier).getEOperations().add(eOperation);
 						eContext = eOperation;
 					}
@@ -91,7 +94,7 @@ public class PivotInstaller
 				else {
 					eContext = eClassifier;
 				}
-				if (Pivot2Ecore.installDelegate(eContext, constraint, null)) {
+				if ((eContext != null) && Pivot2Ecore.installDelegate(eContext, constraint, null)) {
 					hasDelegates = true;
 				}
 			}

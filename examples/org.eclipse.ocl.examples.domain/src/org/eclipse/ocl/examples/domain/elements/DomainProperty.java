@@ -16,22 +16,22 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.Value;
-
 
 public interface DomainProperty extends DomainTypedElement
 {
 	/**
 	 * Return the Inheritance dispatch table for the owning type.
 	 */
-	DomainInheritance getInheritance(DomainStandardLibrary standardLibrary);
+	@NonNull DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary);
 
 	/**
 	 * Return the opposite Property if there is one, else null.
 	 */
-	DomainProperty getOpposite();
+	/*@NonNull*/ DomainProperty getOpposite();
 	
-	void setValue(ObjectValue objectValue, Value propertyValue) throws InvalidValueException;
+	void setValue(@NonNull ObjectValue objectValue, @NonNull Value propertyValue) throws InvalidValueException;
 }

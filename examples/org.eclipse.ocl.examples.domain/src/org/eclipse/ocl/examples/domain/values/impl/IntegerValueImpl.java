@@ -17,7 +17,9 @@
 package org.eclipse.ocl.examples.domain.values.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -39,35 +41,40 @@ public abstract class IntegerValueImpl extends ValueImpl implements IntegerValue
 		return ValuesPackage.Literals.INTEGER_VALUE;
 	}
 
-	public IntegerValueImpl(ValueFactory valueFactory) {
+	public IntegerValueImpl(@NonNull ValueFactory valueFactory) {
 		super(valueFactory);
 	}
 	
 	@Override
-	public IntegerValue asIntegerValue() {
+	public @NonNull IntegerValue asIntegerValue() {
 		return this;
 	}
 
-	public Value asValidValue() {
+	@Override
+	public @NonNull RealValue asRealValue() {
+		return valueFactory.realValueOf(this);
+	}
+
+	@Override
+	public @NonNull Value asUnlimitedNaturalValue() throws InvalidValueException {
+		if (isUnlimitedNatural()) {
+			return this;
+		}
+		else {
+			return super.asUnlimitedNaturalValue();
+		}
+	}
+
+	public @NonNull Value asValidValue() {
 		return this;
 	}
 
-	public DomainType getType() {
+	public @NonNull DomainType getType() {
 		return isUnlimitedNatural() ? valueFactory.getStandardLibrary().getUnlimitedNaturalType() : valueFactory.getStandardLibrary().getIntegerType();
 	}
 
 	@Override
-	public IntegerValue isIntegerValue() {
+	public @NonNull IntegerValue isIntegerValue() {
 		return this;
-	}
-
-	@Override
-	public IntegerValue toIntegerValue() {
-		return this;
-	}
-
-	@Override
-	public RealValue toRealValue() {
-		return valueFactory.realValueOf(this);
 	}
 }

@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
@@ -243,13 +244,13 @@ public abstract class ParameterableElementImpl
 		p.oclIsKindOf(self.oclType())
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(p));
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(p));
 			return (Boolean) result.asEcoreObject();
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.ParameterableElementBodies", e);

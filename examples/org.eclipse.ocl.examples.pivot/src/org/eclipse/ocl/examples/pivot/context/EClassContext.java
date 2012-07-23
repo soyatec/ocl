@@ -16,6 +16,9 @@ package org.eclipse.ocl.examples.pivot.context;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -26,24 +29,24 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
  */
 public class EClassContext extends AbstractParserContext
 {
-	protected final EClassifier eClassContext;
+	protected final @NonNull EClassifier eClassContext;
 	private Type classContext = null;
 
-	public EClassContext(MetaModelManager metaModelManager, URI uri, EClassifier eClassContext) {
+	public EClassContext(@NonNull MetaModelManager metaModelManager, @Nullable URI uri, @NonNull EClassifier eClassContext) {
 		super(metaModelManager, uri);
 		this.eClassContext = eClassContext;
 	}
 
 	@Override
-	public Type getClassContext() {
+	public @NonNull Type getClassContext() {
 		if (classContext == null) {
 			classContext = metaModelManager.getPivotOfEcore(Type.class, eClassContext);
 		}
-		return classContext;
+		return DomainUtil.nonNullJDT(classContext);
 	}
 
 	@Override
-	public void initialize(Base2PivotConversion conversion, ExpressionInOCL expression) {
+	public void initialize(@NonNull Base2PivotConversion conversion, @NonNull ExpressionInOCL expression) {
 		super.initialize(conversion, expression);
 		conversion.setContextVariable(expression, Environment.SELF_VARIABLE_NAME, getClassContext());
 	}

@@ -193,13 +193,13 @@ public class OperationCallExpImpl
 		argument->size() = referredOperation.ownedParameter->size()
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = OperationCallExpBodies._invariant_ArgumentCount.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = OperationCallExpBodies._invariant_ArgumentCount.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;

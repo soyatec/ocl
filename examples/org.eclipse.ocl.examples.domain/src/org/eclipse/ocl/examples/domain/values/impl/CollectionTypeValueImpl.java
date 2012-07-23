@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.domain.values.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
@@ -39,7 +40,7 @@ public class CollectionTypeValueImpl extends TypeValueImpl implements Collection
 		return ValuesPackage.Literals.COLLECTION_TYPE_VALUE;
 	}
 
-	public CollectionTypeValueImpl(ValueFactory valueFactory, DomainCollectionType object) {
+	public CollectionTypeValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType object) {
 		super(valueFactory, object);
 	}
 	
@@ -58,12 +59,12 @@ public class CollectionTypeValueImpl extends TypeValueImpl implements Collection
 	}
 
 	@Override
-	public DomainCollectionType getInstanceType() {
+	public @NonNull DomainCollectionType getInstanceType() {
 		return getObject();
 	}
 
 	@Override
-	public DomainCollectionType getObject() {
+	public @NonNull DomainCollectionType getObject() {
 		return (DomainCollectionType) object;
 	}
 }

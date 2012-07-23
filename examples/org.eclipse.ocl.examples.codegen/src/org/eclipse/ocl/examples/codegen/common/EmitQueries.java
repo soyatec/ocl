@@ -25,7 +25,7 @@ import java.util.Map;
 public class EmitQueries
 {
 	/**
-	 * The known classes that templatres may use in unqualified form. The list is here
+	 * The known classes that templates may use in unqualified form. The list is here
 	 * in a Java form to reduce the impact of refactoring on Acceleo templates.
 	 */
 	private static final Class<?>[] knownClasses = {

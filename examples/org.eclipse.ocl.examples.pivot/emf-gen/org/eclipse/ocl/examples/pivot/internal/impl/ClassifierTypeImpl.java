@@ -27,6 +27,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainClassifierType;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.ClassifierType;
@@ -394,11 +395,11 @@ public class ClassifierTypeImpl extends ClassImpl implements ClassifierType
 	}
 
 	@Override
-	public boolean conformsTo(DomainStandardLibrary standardLibrary, DomainType type) {
+	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		if (!(type instanceof DomainClassifierType)) {
 			return super.conformsTo(standardLibrary, type);
 		}
-		return getInstanceType().conformsTo(standardLibrary, ((DomainClassifierType)type).getInstanceType());
+		return getInstanceType().conformsTo(standardLibrary, DomainUtil.nonNullModel(((DomainClassifierType)type).getInstanceType()));
 	}
 
 	public DomainType getContainerType() {

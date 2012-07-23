@@ -17,13 +17,16 @@
 package org.eclipse.ocl.examples.domain.values.impl;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -35,6 +38,7 @@ import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.StringValue;
+import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -46,7 +50,25 @@ import org.eclipse.ocl.examples.domain.values.ValuesPackage;
  */
 public abstract class ValueImpl implements Value
 {
-	/**
+    static class EmptyIterator implements Iterator<Value>
+    {
+        public boolean hasNext() {
+            return false;
+        }
+        public Value next() {
+            throw new NoSuchElementException();
+        }
+        public void remove() {
+            throw new IllegalStateException();
+        }
+    }
+    
+    protected static @NonNull Double NULL_DOUBLE = DomainUtil.nonNullJava(Double.valueOf(0));
+    protected static @NonNull Integer NULL_INTEGER = DomainUtil.nonNullJava(Integer.valueOf(0));
+//    public static EmptyIterator NULL_ITERATOR1 = new EmptyIterator();
+    protected static @NonNull String NULL_STRING = DomainUtil.nonNullJava(String.valueOf(""));    
+
+    /**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -55,13 +77,13 @@ public abstract class ValueImpl implements Value
 		return ValuesPackage.Literals.VALUE;
 	}
 
-	protected final ValueFactory valueFactory;
+	protected final @NonNull ValueFactory valueFactory;
 
-	protected ValueImpl(ValueFactory valueFactory) {
+	protected ValueImpl(@NonNull ValueFactory valueFactory) {
 		this.valueFactory = valueFactory;
 	}
 
-	public BagValue asBagValue() throws InvalidValueException {
+	public @NonNull BagValue asBagValue() throws InvalidValueException {
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Bag", getType());
 	}
 
@@ -70,17 +92,17 @@ public abstract class ValueImpl implements Value
 		return false;
 	}
 
-	public BooleanValue asBooleanValue() throws InvalidValueException {
+	public @NonNull BooleanValue asBooleanValue() throws InvalidValueException {
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Boolean", getType());
 	}
 
-	public CollectionValue asCollectionValue() throws InvalidValueException {
+	public @NonNull CollectionValue asCollectionValue() throws InvalidValueException {
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Collection", getType());
 	}
 
-	public Double asDouble() throws InvalidValueException {
+	public @NonNull Double asDouble() throws InvalidValueException {
 		valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Double", getType());
-		return null;
+		return NULL_DOUBLE;			// Unreachable code
 	}
 
 	public Object asEcoreObject() {
@@ -91,20 +113,20 @@ public abstract class ValueImpl implements Value
 		return null;
 	}
 
-	public ElementValue asElementValue() throws InvalidValueException {
+	public @NonNull ElementValue asElementValue() throws InvalidValueException {
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Element", getType());
 	}
 
-	public Integer asInteger() throws InvalidValueException {
+	public @NonNull Integer asInteger() throws InvalidValueException {
 		valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Integer", getType());
-		return null;
+		return NULL_INTEGER;			// Unreachable code
 	}
 
-	public IntegerValue asIntegerValue() throws InvalidValueException {
+	public @NonNull IntegerValue asIntegerValue() throws InvalidValueException {
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Integer", getType());
 	}
 
-	public EObject asNavigableObject() throws InvalidValueException {
+	public @NonNull EObject asNavigableObject() throws InvalidValueException {
 		Object object = asObject();
 		if (object instanceof EObject) {
 			return (EObject) object;
@@ -114,48 +136,56 @@ public abstract class ValueImpl implements Value
 		}
 	}
 
-	public ObjectValue asObjectValue() throws InvalidValueException {
+	public @NonNull ObjectValue asObjectValue() throws InvalidValueException {
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Object", getType());
 	}
 
-	public OrderedSetValue asOrderedSetValue() throws InvalidValueException {
+	public @NonNull OrderedSetValue asOrderedSetValue() throws InvalidValueException {
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "OrderedSet", getType());
 	}
 
-	public RealValue asRealValue() throws InvalidValueException {
+	public @NonNull RealValue asRealValue() throws InvalidValueException {
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Real", getType());
 	}
 
-	public SequenceValue asSequenceValue() throws InvalidValueException {
+	public @NonNull SequenceValue asSequenceValue() throws InvalidValueException {
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Sequence", getType());
 	}
 
-	public SetValue asSetValue() throws InvalidValueException {
+	public @NonNull SetValue asSetValue() throws InvalidValueException {
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Set", getType());
 	}
 
-	public String asString() throws InvalidValueException {
+	public @NonNull String asString() throws InvalidValueException {
 		valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "String", getType());
-		return null;
+		return NULL_STRING;			// Unreachable code
 	}
 
-	public StringValue asStringValue() throws InvalidValueException {
+	public @NonNull StringValue asStringValue() throws InvalidValueException {
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "String", getType());
 	}
 
-	public TypeValue asTypeValue() throws InvalidValueException {
+	public @NonNull TupleValue asTupleValue() throws InvalidValueException {
+		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Tuple", getType());
+	}
+
+	public @NonNull TypeValue asTypeValue() throws InvalidValueException {
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Type", getType());
 	}
 
-	public UniqueCollectionValue asUniqueCollectionValue() throws InvalidValueException {
+	public @NonNull UniqueCollectionValue asUniqueCollectionValue() throws InvalidValueException {
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Unique Collection", getType());
 	}
 
-	public DomainType getActualType() {
+	public @NonNull Value asUnlimitedNaturalValue() throws InvalidValueException {
+		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "UnlimitedNatural", getType());
+	}
+
+	public @NonNull DomainType getActualType() {
 		return getType();
 	}
 	
-	public ValueFactory getValueFactory() {
+	public final @NonNull ValueFactory getValueFactory() {
 		return valueFactory;
 	}
 
@@ -183,6 +213,10 @@ public abstract class ValueImpl implements Value
 		return null;
 	}
 
+	public StringValue isStringValue() {
+		return null;
+	}
+
 	public boolean isTrue() {
 		return false;
 	}
@@ -199,24 +233,11 @@ public abstract class ValueImpl implements Value
 		return false;
 	}
 
-	public String oclToString() {
-		return toString();
+	public @NonNull String oclToString() {
+		return DomainUtil.nonNullJava(toString());
 	}
 
-	public IntegerValue toIntegerValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.ConvertibleValueRequired, "Integer");
-	}
-	
-	public Iterator<Value> toIteratorValue() throws InvalidValueException {
-		valueFactory.throwInvalidValueException(EvaluatorMessages.ConvertibleValueRequired, "Integer");
-		return null;
-	}
-
-	public RealValue toRealValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.ConvertibleValueRequired, "Real");
-	}
-
-	public void toString(StringBuilder s, int sizeLimit) {
+	public void toString(@NonNull StringBuilder s, int sizeLimit) {
 		s.append(toString());
 	}
 }

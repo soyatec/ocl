@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -48,7 +49,6 @@ import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.context.ClassContext;
 import org.eclipse.ocl.examples.pivot.context.DiagnosticContext;
 import org.eclipse.ocl.examples.pivot.context.OperationContext;
-import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.context.PropertyContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions;
@@ -150,7 +150,7 @@ public class PivotQueries
 	 * contextVariable, a null bodyExpression, and a StringLiteral messageExpression
 	 * containing the error messages.
 	 */
-	public static ExpressionInOCL getExpressionInOCL(NamedElement contextElement, ValueSpecification specification) {
+	public static @NonNull ExpressionInOCL getExpressionInOCL(NamedElement contextElement, ValueSpecification specification) {
 		if (specification instanceof ExpressionInOCL) {
 			return (ExpressionInOCL) specification;
 		}
@@ -158,7 +158,7 @@ public class PivotQueries
 			Resource resource = contextElement.eResource();
 			ResourceSet resourceSet = resource.getResourceSet();
 			MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
-			ParserContext parserContext;
+			ClassContext parserContext;
 			if (contextElement instanceof Property) {
 				parserContext = new PropertyContext(metaModelManager, null, (Property) contextElement);
 			}

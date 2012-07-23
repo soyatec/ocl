@@ -175,15 +175,15 @@ public abstract class ElementImpl
 		oclContents()
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
-			final ExecutorType T_OclElement = OCLstdlibTables.Types._OclElement;
-			final DomainCollectionType T_Set_OclElement_ = standardLibrary.getSetType(T_OclElement);
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
+			final @NonNull ExecutorType T_OclElement = OCLstdlibTables.Types._OclElement;
+			final @NonNull DomainCollectionType T_Set_OclElement_ = standardLibrary.getSetType(T_OclElement);
 			
-			final DomainType returnType = T_Set_OclElement_;
-			final Value result = ElementBodies._allOwnedElements_body_.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Set_OclElement_;
+			final @NonNull Value result = ElementBodies._allOwnedElements_body_.INSTANCE.evaluate(evaluator, returnType, self);
 			@SuppressWarnings("unchecked")
 			EList<Element> ecoreResult = (EList<Element>) result.asEcoreObject();
 			return ecoreResult;
@@ -204,13 +204,13 @@ public abstract class ElementImpl
 		null
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_OclVoid = OCLstdlibTables.Types._OclVoid;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_OclVoid = OCLstdlibTables.Types._OclVoid;
 			
-			final DomainType returnType = T_OclVoid;
-			final Value result = ElementBodies._getValue_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(stereotype), valueFactory.valueOf(propertyName));
+			final @NonNull DomainType returnType = T_OclVoid;
+			final @NonNull Value result = ElementBodies._getValue_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(stereotype), valueFactory.valueOf(propertyName));
 			return (Element) result.asEcoreObject();
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.ElementBodies", e);
@@ -229,13 +229,13 @@ public abstract class ElementImpl
 		not allOwnedElements()->includes(self)
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = ElementBodies._invariant_not_own_self.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = ElementBodies._invariant_not_own_self.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;

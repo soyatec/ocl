@@ -16,11 +16,13 @@
  */
 package org.eclipse.ocl.examples.library.string;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
@@ -31,7 +33,7 @@ public class StringSubstringOperation extends AbstractTernaryOperation
 {
 	public static final StringSubstringOperation INSTANCE = new StringSubstringOperation();
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceValue, Value firstArgumentValue, Value secondArgumentValue) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull Value firstArgumentValue, @NonNull Value secondArgumentValue) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		String sourceString = sourceValue.asString();
 		Integer startInteger = firstArgumentValue.asInteger();
@@ -40,7 +42,7 @@ public class StringSubstringOperation extends AbstractTernaryOperation
 		int lower = startInteger.intValue();
 		int upper = endInteger.intValue();
 		if ((0 < lower) && (lower <= upper) && (upper <= size)) {
-			return valueFactory.stringValueOf(sourceString.substring(lower-1, upper));
+			return valueFactory.stringValueOf(DomainUtil.nonNullJava(sourceString.substring(lower-1, upper)));
 		}
 		else {
 			return valueFactory.throwInvalidValueException(EvaluatorMessages.IndexesOutOfRange, lower, upper, size);

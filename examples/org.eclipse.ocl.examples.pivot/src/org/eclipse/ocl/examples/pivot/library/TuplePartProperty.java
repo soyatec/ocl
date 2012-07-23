@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.pivot.library;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -29,17 +30,14 @@ public class TuplePartProperty extends AbstractProperty
 {
 	public static final LibraryFeature INSTANCE = new TuplePartProperty();
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceValue, DomainProperty property) throws InvalidValueException {
-/*		if (!(sourceValue instanceof TupleValue) || sourceValue.isUndefined()) {
-			if (sourceValue.isInvalid()) {
-				return sourceValue;
-			}
-			else {
-				ValueFactory valueFactory = evaluationVisitor.getValueFactory();
-				return valueFactory.createInvalidValue("non-tuple source");
-			}
-		} */
-		Value resultValue = ((TupleValue)sourceValue).getValue(property);
-		return resultValue;		// null is a static type error so no need to diagnose dynamically
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
+		TupleValue tupleValue = sourceValue.asTupleValue();
+		Value resultValue = tupleValue.getValue(property);
+		if (resultValue != null) {
+			return resultValue;		// null is a static type error so no need to diagnose dynamically
+		}
+		else {
+			return evaluator.getValueFactory().throwInvalidValueException("part '" + property + "' is not a part of '" + sourceValue);
+		}
 	}
 }

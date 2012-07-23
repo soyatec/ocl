@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
@@ -29,19 +30,19 @@ import org.eclipse.ocl.examples.pivot.utilities.External2Pivot;
 
 public abstract class AbstractEcore2Pivot extends AbstractConversion implements External2Pivot, PivotConstants
 {
-	protected AbstractEcore2Pivot(MetaModelManager metaModelManager) {
+	protected AbstractEcore2Pivot(@NonNull MetaModelManager metaModelManager) {
 		super(metaModelManager);
 	}
 	
-	public abstract void addGenericType(EGenericType eObject);
+	public abstract void addGenericType(@NonNull EGenericType eObject);
 
-	public abstract void addMapping(EObject eObject, Element pivotElement);
+	public abstract void addMapping(@NonNull EObject eObject, @NonNull Element pivotElement);
 	
-	public abstract void error(String message);
+	public abstract void error(@NonNull String message);
 
-	public abstract void queueReference(EObject eObject);
+	public abstract void queueReference(@NonNull EObject eObject);
 
-	public <T extends NamedElement> T refreshElement(Class<T> pivotClass, EClass pivotEClass, EModelElement eModelElement) {
+	public @NonNull <T extends NamedElement> T refreshElement(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, @NonNull EModelElement eModelElement) {
 		EFactory eFactoryInstance = pivotEClass.getEPackage().getEFactoryInstance();
 		EObject pivotElement = eFactoryInstance.create(pivotEClass);
 		if (!pivotClass.isAssignableFrom(pivotElement.getClass())) {
@@ -52,11 +53,9 @@ public abstract class AbstractEcore2Pivot extends AbstractConversion implements 
 		return castElement;
 	}
 
-	public <T extends NamedElement> T refreshNamedElement(Class<T> pivotClass, EClass pivotEClass, ENamedElement eNamedElement) {
+	public @NonNull <T extends NamedElement> T refreshNamedElement(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, @NonNull ENamedElement eNamedElement) {
 		T castElement = refreshElement(pivotClass, pivotEClass, eNamedElement);
-		if (eNamedElement != null) {
-			castElement.setName(eNamedElement.getName());
-		}
+		castElement.setName(eNamedElement.getName());
 		return castElement;
 	}
 }

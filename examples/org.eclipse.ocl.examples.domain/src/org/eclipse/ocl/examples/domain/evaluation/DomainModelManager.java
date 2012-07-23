@@ -16,9 +16,11 @@
  */
 package org.eclipse.ocl.examples.domain.evaluation;
 
+import java.util.Collections;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 
 /**
@@ -28,12 +30,13 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
  */
 public interface DomainModelManager
 {
-	DomainModelManager NULL = new DomainModelManager()
+	@NonNull DomainModelManager NULL = new DomainModelManager()
 	{
-		public Set<EObject> get(DomainType type) {
-			return null;
+		@SuppressWarnings("null")
+		public @NonNull Set<EObject> get(@NonNull DomainType type) {
+			return Collections.emptySet();
 		}
 	};
 
-	Set<EObject> get(DomainType type);
+	@NonNull Set<EObject> get(@NonNull DomainType type);
 }

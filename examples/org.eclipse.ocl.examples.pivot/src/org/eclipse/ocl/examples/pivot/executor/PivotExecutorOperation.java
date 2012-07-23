@@ -16,19 +16,21 @@
  */
 package org.eclipse.ocl.examples.pivot.executor;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.pivot.Operation;
 
 public class PivotExecutorOperation extends ExecutorOperation
 {
-	protected final Operation pivotOperation;
+	protected final @NonNull Operation pivotOperation;
 	
-	public PivotExecutorOperation(PivotReflectiveType inheritance, int operationIndex, Operation pivotOperation) {
-		super(pivotOperation.getName(), inheritance, operationIndex, pivotOperation.getImplementation());
+	public PivotExecutorOperation(@NonNull PivotReflectiveType inheritance, int operationIndex, @NonNull Operation pivotOperation) {
+		super(DomainUtil.nonNullModel(pivotOperation.getName()), inheritance, operationIndex, pivotOperation.getImplementation());
 		this.pivotOperation = pivotOperation;		
 	}
 	
-	public final Operation getPivotOperation() {
+	public final @NonNull Operation getPivotOperation() {
 		return pivotOperation;
 	}
 }

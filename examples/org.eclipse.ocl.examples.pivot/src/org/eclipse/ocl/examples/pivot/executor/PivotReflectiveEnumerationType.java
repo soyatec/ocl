@@ -20,8 +20,11 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumerationLiteral;
 import org.eclipse.ocl.examples.library.executor.ExecutorEnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.Enumeration;
@@ -31,29 +34,29 @@ public class PivotReflectiveEnumerationType extends PivotReflectiveType implemen
 {
 	private Map<String, DomainEnumerationLiteral> literals = new HashMap<String, DomainEnumerationLiteral>();
 	
-	public PivotReflectiveEnumerationType(PivotReflectivePackage executorPackage, Enumeration type) {
+	public PivotReflectiveEnumerationType(@NonNull PivotReflectivePackage executorPackage, @NonNull Enumeration type) {
 		super(executorPackage, type);
 		int index = 0;
 		EObject eTarget = type.getETarget();
 		if (eTarget instanceof EEnum) {
 			for (EEnumLiteral eLiteral : ((EEnum)eTarget).getELiterals()) {
-				String enumerationLiteralName = eLiteral.getName();
+				String enumerationLiteralName = DomainUtil.nonNullModel(eLiteral.getName());
 				literals.put(enumerationLiteralName, new EcoreExecutorEnumerationLiteral(eLiteral, this, index++));
 			}
 		}
 		else {
 			for (EnumerationLiteral enumerationLiteral : type.getOwnedLiteral()) {
-				String enumerationLiteralName = enumerationLiteral.getName();
+				String enumerationLiteralName = DomainUtil.nonNullModel(enumerationLiteral.getName());
 				literals.put(enumerationLiteralName, new ExecutorEnumerationLiteral(enumerationLiteralName, this, index++));
 			}
 		}
 	}
 
-	public DomainEnumerationLiteral getEnumerationLiteral(String name) {
+	public @Nullable DomainEnumerationLiteral getEnumerationLiteral(@NonNull String name) {
 		return literals.get(name);
 	}
 
-	public Iterable<? extends DomainEnumerationLiteral> getEnumerationLiterals() {
-		return literals.values();
+	public @NonNull Iterable<? extends DomainEnumerationLiteral> getEnumerationLiterals() {
+		return DomainUtil.nonNullJava(literals.values());
 	}
 }

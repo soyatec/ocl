@@ -20,6 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.ClassifierType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -35,7 +36,7 @@ public class ClassAttribution extends AbstractAttribution
 	public static final ClassAttribution INSTANCE = new ClassAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		org.eclipse.ocl.examples.pivot.Class targetClass = (org.eclipse.ocl.examples.pivot.Class) target;
 		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 		if (targetClass.getOwningTemplateParameter() != null) {
@@ -73,7 +74,9 @@ public class ClassAttribution extends AbstractAttribution
 			Set<Type> alreadyVisitedTypes = new HashSet<Type>();
 //			org.eclipse.ocl.examples.pivot.Class unspecializedTarget = PivotUtil.getUnspecializedTemplateableElement(target);	// FIXME
 			for (Type superClass : metaModelManager.getSuperClasses(targetClass)) {
-				environmentView.addAllContents(targetClass, scopeView, superClass, Boolean.FALSE, alreadyVisitedTypes);
+				if (superClass != null) {
+					environmentView.addAllContents(targetClass, scopeView, superClass, Boolean.FALSE, alreadyVisitedTypes);
+				}
 			}
 //		}
 		return scopeView.getParent();

@@ -103,12 +103,14 @@ public class Pivot2EcoreReferenceVisitor
 		EAnnotation eAnnotation = context.getCreated(EAnnotation.class, pivotAnnotation);
 		eAnnotation.getReferences().clear();
 		for (Element pivotReference : pivotAnnotation.getReference()) {
-			EObject target = context.getCreated(EObject.class, pivotReference);
-			if ((target == null) && (pivotReference instanceof PivotObjectImpl)) {
-				target = ((PivotObjectImpl)pivotReference).getTarget();
-			}
-			if (target != null) {
-				eAnnotation.getReferences().add(target);
+			if (pivotReference != null) {
+				EObject target = context.getCreated(EObject.class, pivotReference);
+				if ((target == null) && (pivotReference instanceof PivotObjectImpl)) {
+					target = ((PivotObjectImpl)pivotReference).getTarget();
+				}
+				if (target != null) {
+					eAnnotation.getReferences().add(target);
+				}
 			}
 		}
 		return eAnnotation;
@@ -137,6 +139,9 @@ public class Pivot2EcoreReferenceVisitor
 	@Override
 	public EObject visitPackage(@NonNull Package pivotPackage) {
 		EPackage ePackage = context.getCreated(EPackage.class, pivotPackage);
+		if (ePackage == null) {
+			return null;
+		}
 		boolean needsDelegates = false;
 		for (EClassifier eClassifier : ePackage.getEClassifiers()) {
 			EAnnotation classifierAnnotation = eClassifier.getEAnnotation(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
@@ -195,9 +200,11 @@ public class Pivot2EcoreReferenceVisitor
 				}
 			}
 			for (Property pivotKey : pivotProperty.getKeys()) {
-				EAttribute eAttribute = context.getCreated(EAttribute.class, pivotKey);
-				if (eAttribute != null) {
-					eReference.getEKeys().add(eAttribute);
+				if (pivotKey != null) {
+					EAttribute eAttribute = context.getCreated(EAttribute.class, pivotKey);
+					if (eAttribute != null) {
+						eReference.getEKeys().add(eAttribute);
+					}
 				}
 			}
 		}

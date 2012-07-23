@@ -20,17 +20,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.library.AbstractOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryTernaryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractPolyOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.StringValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -38,27 +37,27 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
 /**
  * StringTokenizeOperation realises the String::tokenize() library operations.
  */
-public class StringTokenizeOperation extends AbstractOperation implements LibraryUnaryOperation, LibraryBinaryOperation, LibraryTernaryOperation 
+public class StringTokenizeOperation extends AbstractPolyOperation 
 {
 	public static final StringTokenizeOperation INSTANCE = new StringTokenizeOperation();
 	private static final String DELIMS = " \t\n\r\f"; //$NON-NLS-1$
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceValue) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue) throws InvalidValueException {
 		return evaluate(evaluator, (DomainCollectionType)returnType, sourceValue, DELIMS, false);
 	}
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceValue, Value argumentValue) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull Value argumentValue) throws InvalidValueException {
 		boolean returnDelims = argumentValue.asBoolean();
 		return evaluate(evaluator, (DomainCollectionType)returnType, sourceValue, DELIMS, returnDelims);
 	}
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceValue, Value firstArgumentValue, Value secondArgumentValue) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull Value firstArgumentValue, @NonNull Value secondArgumentValue) throws InvalidValueException {
 		String delims = firstArgumentValue.asString();
 		boolean returnDelims = secondArgumentValue.asBoolean();
 		return evaluate(evaluator, (DomainCollectionType)returnType, sourceValue, delims, returnDelims);
 	}
 
-	public Value evaluate(DomainEvaluator evaluator, DomainCallExp callExp, Value sourceValue, Value... argumentValues) throws InvalidEvaluationException, InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Value sourceValue, Value... argumentValues) throws InvalidEvaluationException, InvalidValueException {
 		String delims = DELIMS;
 		boolean returnDelims = false;
 		if (argumentValues.length > 0) {
@@ -70,16 +69,16 @@ public class StringTokenizeOperation extends AbstractOperation implements Librar
 			}
 			delims = argumentValues[0].asString();
 		}
-		return evaluate(evaluator, (DomainCollectionType)callExp.getType(), sourceValue, delims, returnDelims);
+		return evaluate(evaluator, DomainUtil.nonNullPivot((DomainCollectionType)callExp.getType()), sourceValue, delims, returnDelims);
 	}
 
-	public Value evaluate(DomainEvaluator evaluator, DomainCollectionType returnType, Value sourceValue, String delims, boolean returnDelims) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCollectionType returnType, @NonNull Value sourceValue, @NonNull String delims, boolean returnDelims) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		String sourceString = sourceValue.asString();
 		StringTokenizer tokenizer = new StringTokenizer(sourceString, delims, returnDelims);
 		List<StringValue> results = new ArrayList<StringValue>();
 		while (tokenizer.hasMoreTokens()) {
-			results.add(valueFactory.stringValueOf(tokenizer.nextToken()));
+			results.add(valueFactory.stringValueOf(DomainUtil.nonNullJava(tokenizer.nextToken())));
 		}
 		return valueFactory.createSequenceValue(returnType, results);
 	}

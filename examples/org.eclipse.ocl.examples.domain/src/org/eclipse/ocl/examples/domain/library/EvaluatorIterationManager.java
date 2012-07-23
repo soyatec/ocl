@@ -18,11 +18,14 @@ package org.eclipse.ocl.examples.domain.library;
 
 import java.util.Iterator;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluationEnvironment;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -38,14 +41,14 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 		private Iterator<Value> javaIter;
 		private Value value = null;
 
-		public ValueIterator(DomainEvaluator evaluator, CollectionValue collectionValue, DomainTypedElement variable) {
+		public ValueIterator(@NonNull DomainEvaluator evaluator, @NonNull CollectionValue collectionValue, @NonNull DomainTypedElement variable) {
 			this.evaluationEnvironment = evaluator.getEvaluationEnvironment();
 			this.collectionValue = collectionValue;
 			this.variable = variable;
 			reset();
 		}
 		
-		public Value get() {
+		public @Nullable Value get() {
 			return value;
 		}
 
@@ -53,7 +56,7 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 			return value != null;
 		}
 		
-		public Value next() {
+		public @Nullable Value next() {
 			if (!javaIter.hasNext()) {
 				value = null;
 			}
@@ -76,11 +79,11 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 		}
 	}
 
-	protected static ValueIterator[] createIterators(DomainTypedElement[] referredIterators, DomainEvaluator evaluator, CollectionValue collectionValue) {
+	protected static ValueIterator[] createIterators(@NonNull DomainTypedElement[] referredIterators, @NonNull DomainEvaluator evaluator, @NonNull CollectionValue collectionValue) {
 		int iMax = referredIterators.length;
 		ValueIterator[] iterators = new ValueIterator[iMax];
 		for (int i = 0; i < iMax; i++) {
-			DomainTypedElement referredIterator = referredIterators[i];
+			DomainTypedElement referredIterator = DomainUtil.nonNullEntry(referredIterators[i]);
 			ValueIterator valueIterator = new ValueIterator(evaluator, collectionValue, referredIterator);
 			if (!valueIterator.hasCurrent()) {
 				return null;
@@ -90,12 +93,13 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 		return iterators;
 	}
 
-	protected final CollectionValue collectionValue;
-	protected final DomainExpression body;
+	protected final @NonNull CollectionValue collectionValue;
+	protected final @NonNull DomainExpression body;
 	protected final DomainTypedElement accumulatorVariable;
-	private Value accumulatorValue;
+	private @NonNull Value accumulatorValue;
 
-	public EvaluatorIterationManager(DomainEvaluator evaluator, DomainExpression body, CollectionValue collectionValue, DomainTypedElement accumulatorVariable, Value accumulatorValue) {
+	public EvaluatorIterationManager(@NonNull DomainEvaluator evaluator, @NonNull DomainExpression body, @NonNull CollectionValue collectionValue,
+			@Nullable DomainTypedElement accumulatorVariable, @NonNull Value accumulatorValue) {
 		super(evaluator);
 		this.collectionValue = collectionValue;
 		this.body = body;
@@ -106,7 +110,7 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 		}
 	}
 
-	public EvaluatorIterationManager(EvaluatorIterationManager iterationManager, CollectionValue collectionValue) {
+	public EvaluatorIterationManager(@NonNull EvaluatorIterationManager iterationManager, @NonNull CollectionValue collectionValue) {
 		super(iterationManager.evaluator);
 		this.body = iterationManager.body;
 		this.collectionValue = collectionValue;
@@ -114,23 +118,23 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 		this.accumulatorVariable = iterationManager.accumulatorVariable;
 	}
 	
-	public Value getAccumulatorValue() {
+	public @NonNull Value getAccumulatorValue() {
 		return accumulatorValue;
 	}
 
-	public Value evaluateBody() {
+	public @NonNull Value evaluateBody() {
 		return evaluator.evaluate(body);
 	}
 	
-	public CollectionValue getCollectionValue() {
+	public @NonNull CollectionValue getCollectionValue() {
 		return collectionValue;
 	}
 
-	public DomainEvaluationEnvironment getEvaluationEnvironment() {
+	public @NonNull DomainEvaluationEnvironment getEvaluationEnvironment() {
 		return evaluator.getEvaluationEnvironment();
 	}
 
-	public NullValue throwInvalidEvaluation(String message, Object... bindings) throws InvalidEvaluationException {
+	public @NonNull NullValue throwInvalidEvaluation(String message, Object... bindings) throws InvalidEvaluationException {
 		String boundMessage = NLS.bind(message, bindings);
 		throw new InvalidEvaluationException(getEvaluationEnvironment(), boundMessage, null, null, null);
 	}
@@ -141,7 +145,7 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 		return body.toString();
 	}
 
-	public Value updateBody() {
+	public @Nullable Value updateBody() {
 		Value bodyVal = evaluateBody();		
 		this.accumulatorValue = bodyVal;
 		if (accumulatorVariable != null) {

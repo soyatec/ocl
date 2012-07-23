@@ -16,14 +16,15 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 
 public interface DomainFragment
 {
-	DomainFragment getBaseFragment();
-	DomainInheritance getBaseInheritance();
-	DomainInheritance getDerivedInheritance();
-	LibraryFeature getImplementation(DomainOperation staticOperation);
+	@NonNull DomainFragment getBaseFragment();
+	@NonNull DomainInheritance getBaseInheritance();
+	@NonNull DomainInheritance getDerivedInheritance();
+	@NonNull LibraryFeature getImplementation(@NonNull DomainOperation staticOperation);
 //	Iterable<? extends DomainOperation> getOperations();
 //	Iterable<? extends DomainProperty> getProperties();
 //	void initOperations(String name);

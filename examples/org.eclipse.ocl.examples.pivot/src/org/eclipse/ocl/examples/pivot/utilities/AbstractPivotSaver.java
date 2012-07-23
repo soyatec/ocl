@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -34,42 +35,42 @@ public abstract class AbstractPivotSaver
 {
 	public static interface Factory
 	{
-		LocateVisitor createLocateVisitor(AbstractPivotSaver saver);
-		ResolveVisitor createResolveVisitor(AbstractPivotSaver saver);
-		EPackage getEPackage();
+		@NonNull LocateVisitor createLocateVisitor(@NonNull AbstractPivotSaver saver);
+		@NonNull ResolveVisitor createResolveVisitor(@NonNull AbstractPivotSaver saver);
+		@NonNull EPackage getEPackage();
 	}
 	
-	private static Map<EPackage, Factory> factoryMap = new HashMap<EPackage, Factory>();
+	private static @NonNull Map<EPackage, Factory> factoryMap = new HashMap<EPackage, Factory>();
 	
-	public static void addFactory(Factory factory) {
+	public static void addFactory(@NonNull Factory factory) {
 		factoryMap.put(factory.getEPackage(), factory);
 	}
 
 	public static interface LocateVisitor
 	{
-		Object safeVisit(Visitable visitable);		
+		Object safeVisit(@NonNull Visitable visitable);		
 	}
 
 	public static interface ResolveVisitor
 	{
-		Object safeVisit(Visitable visitable);
+		Object safeVisit(@NonNull Visitable visitable);
 	}
 	
 	/**
 	 * The per-EPackage save visitors that identifies type references.
 	 */
-	private Map<EPackage, LocateVisitor> locateVisitors = new HashMap<EPackage, LocateVisitor>();
+	private @NonNull Map<EPackage, LocateVisitor> locateVisitors = new HashMap<EPackage, LocateVisitor>();
 	
 	/**
 	 * The per-EPackage save visitors that identifies type references.
 	 */
-	private Map<EPackage, ResolveVisitor> resolveVisitors = new HashMap<EPackage, ResolveVisitor>();
+	private @NonNull Map<EPackage, ResolveVisitor> resolveVisitors = new HashMap<EPackage, ResolveVisitor>();
 
-	public abstract void addSpecializingElement(Element object);
-	public abstract boolean addSpecializingElement(Element object, Operation referredOperation);
-	public abstract boolean addSpecializingElement(Element object, Type referredType);
+	public abstract void addSpecializingElement(@NonNull Element object);
+	public abstract boolean addSpecializingElement(@NonNull Element object, @NonNull Operation referredOperation);
+	public abstract boolean addSpecializingElement(@NonNull Element object, @NonNull Type referredType);
 
-	protected LocateVisitor getLocateVisitor(EObject eObject) {
+	protected @NonNull LocateVisitor getLocateVisitor(@NonNull EObject eObject) {
 		EPackage ePackage = eObject.eClass().getEPackage();
 		LocateVisitor locateVisitor = locateVisitors.get(ePackage);
 		if (locateVisitor == null) {
@@ -80,7 +81,7 @@ public abstract class AbstractPivotSaver
 		return locateVisitor;
 	}
 
-	protected ResolveVisitor getResolveVisitor(EObject eObject) {
+	protected @NonNull ResolveVisitor getResolveVisitor(@NonNull EObject eObject) {
 		EPackage ePackage = eObject.eClass().getEPackage();
 		ResolveVisitor resolveVisitor = resolveVisitors.get(ePackage);
 		if (resolveVisitor == null) {
@@ -91,6 +92,6 @@ public abstract class AbstractPivotSaver
 		return resolveVisitor;
 	}
 
-	public abstract <T extends Operation> T resolveOperation(T referredOperation);
-	public abstract <T extends Type> T resolveType(T referredType);
+	public abstract @NonNull <T extends Operation> T resolveOperation(@NonNull T referredOperation);
+	public abstract @NonNull <T extends Type> T resolveType(@NonNull T referredType);
 }

@@ -37,43 +37,43 @@ operation.ownedParameter->select(p : Parameter
 [template public declareClassifierTypes(pkg : Package)]
 [let allClassifierTypes : OrderedSet(ClassifierType) = pkg.getRootPackage().eAllContents(ClassifierType)->asSet()->sortedBy(getMoniker())]
 [for (type : ClassifierType | allClassifierTypes)]
-protected final ClassifierType [type.getPrefixedSymbolName('_'+type.partialName())/] = createClassifierType("[type.name/]");
+protected final @NonNull ClassifierType [type.getPrefixedSymbolName('_'+type.partialName())/] = createClassifierType("[type.name/]");
 [/for][/let][/template]
 
 [template public declareCollectionTypes(pkg : Package)]
 [let allTypes : OrderedSet(CollectionType) = pkg.getRootPackage().eAllContents(CollectionType)->asSet()->sortedBy(getMoniker())]
 [for (type : CollectionType | allTypes)]
-protected final [type.eClass().name/] [type.getPrefixedSymbolName('_'+type.partialName())/] = create[type.eClass().name/]("[type.name/]");
+protected final @NonNull [type.eClass().name/] [type.getPrefixedSymbolName('_'+type.partialName())/] = create[type.eClass().name/]("[type.name/]");
 [/for][/let][/template]
 
 [template public declareEnumerations(pkg : Package)]
 [let allEnumerations : OrderedSet(Enumeration) = pkg.getRootPackage().eAllContents(Enumeration)->asSet()->sortedBy(getMoniker())]
 [for (enumeration : Enumeration | allEnumerations)]
-protected final Enumeration [enumeration.getPrefixedSymbolName('_'+enumeration.partialName())/] = createEnumeration("[enumeration.name/]");
+protected final @NonNull Enumeration [enumeration.getPrefixedSymbolName('_'+enumeration.partialName())/] = createEnumeration("[enumeration.name/]");
 [/for][/let][/template]
 
 [template public declareOclTypes(pkg : Package)]
 [let allOclTypes : OrderedSet(Type) = pkg.getOclTypes()->sortedBy(getMoniker())]
 [for (type : Type | allOclTypes)]
-protected final [type.eClass().name/] [type.getPrefixedSymbolName('_'+type.partialName())/] = create[type.eClass().name/]("[type.name/]");
+protected final @NonNull [type.eClass().name/] [type.getPrefixedSymbolName('_'+type.partialName())/] = create[type.eClass().name/]("[type.name/]");
 [/for][/let][/template]
 
 [template public declareParameterTypes(pkg : Package)]
 [let allTypes : OrderedSet(Type) = pkg.getRootPackage().eAllContents(Type)->select(owningTemplateParameter <> null)->asSet()->sortedBy(getMoniker())]
 [for (type : Type | allTypes)]
-protected final Class [type.getPrefixedSymbolName('_'+type.partialName())/] = createClass("[type.name/]");
+protected final @NonNull Class [type.getPrefixedSymbolName('_'+type.partialName())/] = createClass("[type.name/]");
 [/for][/let][/template]
 
 [template public declarePrimitiveTypes(pkg : Package)]
 [let allTypes : OrderedSet(PrimitiveType) = pkg.getRootPackage().eAllContents(PrimitiveType)->asSet()->sortedBy(getMoniker())]
 [for (type : PrimitiveType | allTypes)]
-protected final PrimitiveType [type.getPrefixedSymbolName('_'+type.partialName())/] = createPrimitiveType("[type.name/]");
+protected final @NonNull PrimitiveType [type.getPrefixedSymbolName('_'+type.partialName())/] = createPrimitiveType("[type.name/]");
 [/for][/let][/template]
 
 [template public declareTupleTypes(pkg : Package)]
 [let allTupleTypes : OrderedSet(TupleType) = pkg.getRootPackage().eAllContents(TupleType)->asSet()->sortedBy(getMoniker())]
 [for (type : TupleType | allTupleTypes)]
-protected final TupleType [type.getPrefixedSymbolName('_'+type.partialName())/] = createTupleType("[type.name/]",
+protected final @NonNull TupleType [type.getPrefixedSymbolName('_'+type.partialName())/] = createTupleType("[type.name/]",
 [for (property : Property | type.ownedAttribute->sortedBy(name)) separator(',\n')]
 	createProperty("[property.name/]", [property.type.getSymbolName()/])[/for]);
 [/for][/let][/template]
@@ -156,7 +156,7 @@ protected void installEnumerations() {
 [template public defineIterations(pkg : Package)]
 [let allIterations : OrderedSet(Iteration) = pkg.getRootPackage().eAllContents(Iteration)->asSet()->sortedBy(getMoniker())]
 [for (iteration : Iteration | allIterations)]
-protected final Iteration [iteration.getPrefixedSymbolName('it_'+iteration.partialName())/] = createIteration("[iteration.name/]", [iteration.type.getSymbolName()/], [if (iteration.implementationClass->notEmpty())]"[iteration.implementationClass/]", [iteration.implementationClass/].INSTANCE[else]null, null[/if]);
+protected final @NonNull Iteration [iteration.getPrefixedSymbolName('it_'+iteration.partialName())/] = createIteration("[iteration.name/]", [iteration.type.getSymbolName()/], [if (iteration.implementationClass->notEmpty())]"[iteration.implementationClass/]", [iteration.implementationClass/].INSTANCE[else]null, null[/if]);
 [/for]
 
 protected void installIterations() {
@@ -229,7 +229,7 @@ protected void installIterations() {
 [let allLambdaTypes : OrderedSet(LambdaType) = pkg.getRootPackage().eAllContents(LambdaType)->asSet()->sortedBy(getMoniker())]
 [let allContainers : Set(Package) = allLambdaTypes.eContainer()->asSet()->excluding(pkg)->filter(Package)]
 [for (type : LambdaType | allLambdaTypes)]
-protected final LambdaType [type.getPrefixedSymbolName('_'+type.partialName())/] = createLambdaType("[type.name/]");
+protected final @NonNull LambdaType [type.getPrefixedSymbolName('_'+type.partialName())/] = createLambdaType("[type.name/]");
 [/for]
 
 protected void installLambdaTypes() {
@@ -269,7 +269,7 @@ protected void installOclTypes() {
 [template public defineOperations(pkg : Package)]
 [let allOperations : OrderedSet(Operation) = pkg.getRootPackage().eAllContents(Operation)->reject(oclIsKindOf(Iteration))->reject(isEcoreConstraint())->asSet()->sortedBy(getMoniker())]
 [for (operation : Operation | allOperations)]
-protected final Operation [operation.getPrefixedSymbolName('op_'+operation.partialName())/] = createOperation("[operation.name/]", [operation.type.getSymbolName()/], [if (operation.implementationClass->notEmpty())]"[operation.implementationClass/]", [operation.implementationClass/].INSTANCE[else]null, null[/if]);
+protected final @NonNull Operation [operation.getPrefixedSymbolName('op_'+operation.partialName())/] = createOperation("[operation.name/]", [operation.type.getSymbolName()/], [if (operation.implementationClass->notEmpty())]"[operation.implementationClass/]", [operation.implementationClass/].INSTANCE[else]null, null[/if]);
 [/for]
 
 protected void installOperations() {
@@ -318,7 +318,7 @@ protected void installOperations() {
 [let morePackages : OrderedSet(Package) = allPackages->excluding(pkg)]
 [if (morePackages->notEmpty())]
 [for (pkg : Package | morePackages)]
-protected final [pkg.eClass().name/] [pkg.getPrefixedSymbolName('pk_'+pkg.partialName())/] = create[pkg.eClass().name/]("[pkg.name/]", [if pkg.nsPrefix <> null]"[pkg.nsPrefix/]"[else]null[/if], [if pkg.nsURI <> null]"[pkg.nsURI/]"[else]null[/if]);
+protected final @NonNull [pkg.eClass().name/] [pkg.getPrefixedSymbolName('pk_'+pkg.partialName())/] = create[pkg.eClass().name/]("[pkg.name/]", [if pkg.nsPrefix <> null]"[pkg.nsPrefix/]"[else]null[/if], [if pkg.nsURI <> null]"[pkg.nsURI/]"[else]null[/if]);
 [/for]
 
 [/if]
@@ -386,7 +386,7 @@ protected void installPrimitiveTypes() {
 [template public defineProperties(pkg : Package)]
 [let allProperties : OrderedSet(Property) = pkg.getRootPackage().eAllContents(Property)->reject(eContainer().oclIsKindOf(TupleType))->asSet()->sortedBy(getMoniker())]
 [for (property : Property | allProperties)]
-protected final Property [property.getPrefixedSymbolName('pr_'+partialName())/] = createProperty("[property.name/]", [property.type.getSymbolName()/]);
+protected final @NonNull Property [property.getPrefixedSymbolName('pr_'+partialName())/] = createProperty("[property.name/]", [property.type.getSymbolName()/]);
 [/for]
 
 protected void installProperties() {
@@ -451,13 +451,13 @@ protected void installTemplateBindings() {
 [template public defineTemplateSignatures(pkg : Package)]
 [let allTemplateParameters : OrderedSet(TemplateParameter) = pkg.getRootPackage().eAllContents(TemplateParameter)->asSet()->sortedBy(getMoniker())]
 [for (templateParameter : TemplateParameter | allTemplateParameters)]
-protected final TypeTemplateParameter [templateParameter.getPrefixedSymbolName('tp_'+templateParameter.partialName())/] = createTypeTemplateParameter([templateParameter.ownedParameteredElement.getSymbolName()/]);
+protected final @NonNull TypeTemplateParameter [templateParameter.getPrefixedSymbolName('tp_'+templateParameter.partialName())/] = createTypeTemplateParameter([templateParameter.ownedParameteredElement.getSymbolName()/]);
 [/for]
 [/let]
 
 [let allTemplateSignatures : OrderedSet(TemplateSignature) = pkg.getRootPackage().eAllContents(TemplateSignature)->asSet()->sortedBy(getMoniker())]
 [for (templateSignature : TemplateSignature | allTemplateSignatures)]
-protected final TemplateSignature [templateSignature.getPrefixedSymbolName('ts_'+templateSignature.partialName())/] = createTemplateSignature([templateSignature.template.getSymbolName()/][for (templateParameter : TemplateParameter | templateSignature.ownedParameter)], [templateParameter.getSymbolName()/][/for]);
+protected final @NonNull TemplateSignature [templateSignature.getPrefixedSymbolName('ts_'+templateSignature.partialName())/] = createTemplateSignature([templateSignature.template.getSymbolName()/][for (templateParameter : TemplateParameter | templateSignature.ownedParameter)], [templateParameter.getSymbolName()/][/for]);
 [/for]
 [/let]
 

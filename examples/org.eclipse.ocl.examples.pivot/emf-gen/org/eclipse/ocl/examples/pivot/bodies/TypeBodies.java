@@ -20,6 +20,7 @@
  */
 package org.eclipse.ocl.examples.pivot.bodies;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
@@ -38,12 +39,12 @@ public class TypeBodies
 	 */
 	public static class _resolveSelfType_body_ extends AbstractBinaryOperation
 	{
-		public static _resolveSelfType_body_ INSTANCE = new _resolveSelfType_body_();
+		public static @NonNull _resolveSelfType_body_ INSTANCE = new _resolveSelfType_body_();
 	
 		/*
 		self
 		*/
-		public Value evaluate(DomainEvaluator evaluator, DomainType returnType, final Value self, final Value selfType) throws InvalidValueException {
+		public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Value self, final @NonNull Value selfType) throws InvalidValueException {
 			
 			
 			return self;

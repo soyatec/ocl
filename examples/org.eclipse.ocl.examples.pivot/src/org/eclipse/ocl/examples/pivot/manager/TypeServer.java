@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ReflectiveType;
 import org.eclipse.ocl.examples.pivot.ClassifierType;
 import org.eclipse.ocl.examples.pivot.CollectionType;
@@ -238,8 +239,8 @@ public class TypeServer
 				if (requiredSize == actualParameters.size()) {
 					boolean gotIt = true;
 					for (int i = 0; i < requiredSize; i++) {
-						Parameter requiredParameter = requiredParameters.get(i);
-						Parameter actualParameter = actualParameters.get(i);
+						Parameter requiredParameter = DomainUtil.nonNullEntry(requiredParameters.get(i));
+						Parameter actualParameter = DomainUtil.nonNullEntry(actualParameters.get(i));
 						Type requiredType = metaModelManager.getTypeWithMultiplicity(requiredParameter);
 						Type actualType = metaModelManager.getTypeWithMultiplicity(actualParameter);
 						if (requiredType != actualType) {
@@ -310,7 +311,7 @@ public class TypeServer
 	public @NonNull ReflectiveType getExecutorType() {
 		if (executorType == null) {
 			PivotReflectivePackage executorPackage = packageServer.getExecutorPackage();
-			executorType = executorPackage.getInheritance(primaryType);
+			executorType = executorPackage.getInheritance(DomainUtil.nonNullState(primaryType));
 		}
 		@SuppressWarnings("null")
 		@NonNull ReflectiveType executorType2 = executorType;
@@ -433,7 +434,6 @@ public class TypeServer
 		return typeTracker;
 	}
 
-	@SuppressWarnings("null")
 	public @NonNull List<TypeTracker> getTypeTrackers() {
 		return trackers;
 	}
@@ -533,10 +533,10 @@ public class TypeServer
 						superTemplateArgumentList.add(templateArgument);
 					}
 				} */
-				if (superTypeServer != null) {
+//				if (superTypeServer != null) {
 					Type specializedSuperType = superTypeServer.getSpecializedType(superTemplateArgumentList);
 					specializedClass.getSuperClass().add(specializedSuperType);
-				}
+//				}
 			}
 			else {
 				specializedClass.getSuperClass().add(superType);

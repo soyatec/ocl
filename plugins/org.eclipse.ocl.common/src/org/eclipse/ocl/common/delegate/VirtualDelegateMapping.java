@@ -15,6 +15,8 @@
 package org.eclipse.ocl.common.delegate;
 
 import org.eclipse.emf.ecore.EModelElement;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.OCLConstants;
 import org.eclipse.ocl.common.internal.options.CommonOptions;
 import org.eclipse.ocl.common.internal.preferences.StringPreference;
@@ -26,17 +28,17 @@ import org.eclipse.ocl.common.internal.preferences.StringPreference;
  */
 public class VirtualDelegateMapping extends StringPreference
 {
-	public static VirtualDelegateMapping getRegistry(EModelElement modelElement) {
+	public static VirtualDelegateMapping getRegistry(@NonNull EModelElement modelElement) {
 		VirtualDelegateMapping registry = DelegateResourceSetAdapter.getRegistry(
 			modelElement, VirtualDelegateMapping.class, CommonOptions.DEFAULT_DELEGATION_MODE);
 		return registry;
 	}
 	
-	public VirtualDelegateMapping(String pluginId, String key, String defaultValue) {
+	public VirtualDelegateMapping(@NonNull String pluginId, @NonNull String key, @Nullable String defaultValue) {
 		super(pluginId, key, defaultValue);
 	}
 
-	public String resolve(String delegateURI) {
+	public @NonNull String resolve(@NonNull String delegateURI) {
 		if (OCLConstants.OCL_DELEGATE_URI.equals(delegateURI)) {
 			String defaultValue = getDefaultValue();
 			if (defaultValue != null) {

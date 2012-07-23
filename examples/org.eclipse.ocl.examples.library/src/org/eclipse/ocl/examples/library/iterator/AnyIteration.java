@@ -16,13 +16,17 @@
  */
 package org.eclipse.ocl.examples.library.iterator;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
@@ -31,27 +35,31 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class AnyIteration extends AbstractIteration
 {
-	public static final AnyIteration INSTANCE = new AnyIteration();
+	public static final @NonNull AnyIteration INSTANCE = new AnyIteration();
 
-	public CollectionValue.Accumulator createAccumulatorValue(DomainEvaluator evaluator, DomainType accumulatorType, DomainType bodyType) {
+	public @NonNull SequenceValue.Accumulator createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
-		return valueFactory.createCollectionAccumulatorValue(standardLibrary.getSequenceType(accumulatorType));
+		return valueFactory.createSequenceAccumulatorValue(standardLibrary.getSequenceType(accumulatorType));
 	}
 	
 	@Override
-	protected Value resolveTerminalValue(DomainIterationManager iterationManager) {
-		CollectionValue.Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
-		if (accumulatorValue.intSize() > 0) {
-			return accumulatorValue.asList().get(0);		// Normal something found result.
-		}
-		else {
-			return iterationManager.getValueFactory().getNull();
-		}
+	protected @NonNull Value resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
+		try {
+			SequenceValue.Accumulator accumulatorValue = (SequenceValue.Accumulator)iterationManager.getAccumulatorValue();
+			if (accumulatorValue.intSize() > 0) {
+				return accumulatorValue.at(1);		// Normal something found result.
+			}
+			else {
+				return iterationManager.getValueFactory().getNull();
+			}
+		} catch (InvalidValueException e) {			// Cannot happen
+			return iterationManager.getValueFactory().createInvalidValue(e);
+		} 
 	}
 	
 	@Override
-    protected Value updateAccumulator(DomainIterationManager iterationManager) {
+    protected @Nullable Value updateAccumulator(@NonNull DomainIterationManager iterationManager) {
 		Value bodyVal = iterationManager.evaluateBody();		
 		if (bodyVal.isUndefined()) {
 			return iterationManager.throwInvalidEvaluation(EvaluatorMessages.UndefinedBody, "any"); 	// Null body is invalid //$NON-NLS-1$

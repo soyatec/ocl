@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.library.iterator;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
@@ -28,14 +30,14 @@ import org.eclipse.ocl.examples.domain.values.Value;
  */
 public class IterateIteration extends AbstractIteration
 {
-	public static final IterateIteration INSTANCE = new IterateIteration();
+	public static final @NonNull IterateIteration INSTANCE = new IterateIteration();
 
-	public Value createAccumulatorValue(DomainEvaluator evaluator, DomainType accumulatorType, DomainType bodyType) {
+	public @NonNull Value createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) {
 		throw new UnsupportedOperationException();		// Never used since values are assigned directly as the accumulator
 	}
 	
 	@Override
-	public Value evaluateIteration(DomainIterationManager iterationManager) throws InvalidValueException {
+	public @NonNull Value evaluateIteration(@NonNull DomainIterationManager iterationManager) throws InvalidValueException {
 		for ( ; iterationManager.hasCurrent(); iterationManager.advanceIterators()) {
 			Value resultVal = iterationManager.updateBody();
 			if (resultVal != null) {
@@ -46,7 +48,7 @@ public class IterateIteration extends AbstractIteration
 	}
 
 	@Override
-	protected Value updateAccumulator(DomainIterationManager iterationManager) {
+	protected @Nullable Value updateAccumulator(@NonNull DomainIterationManager iterationManager) {
 		throw new UnsupportedOperationException();		// Never used since evaluateIteration overwritten
 	}
 }

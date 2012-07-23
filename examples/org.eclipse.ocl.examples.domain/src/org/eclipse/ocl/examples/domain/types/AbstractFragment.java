@@ -16,28 +16,29 @@
  */
 package org.eclipse.ocl.examples.domain.types;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainFragment;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 
 public abstract class AbstractFragment implements DomainFragment
 {
-	public final DomainInheritance derivedInheritance;
-	public final DomainInheritance baseInheritance;
+	public final @NonNull DomainInheritance derivedInheritance;
+	public final @NonNull DomainInheritance baseInheritance;
 
-	public AbstractFragment(DomainInheritance derivedInheritance, DomainInheritance baseInheritance) {
+	public AbstractFragment(@NonNull DomainInheritance derivedInheritance, @NonNull DomainInheritance baseInheritance) {
 		this.derivedInheritance = derivedInheritance;
 		this.baseInheritance = baseInheritance;
 	}
 
-	public final DomainFragment getBaseFragment() {
+	public final @NonNull DomainFragment getBaseFragment() {
 		return baseInheritance.getSelfFragment();
 	}
 
-	public final DomainInheritance getBaseInheritance() {
+	public final @NonNull DomainInheritance getBaseInheritance() {
 		return baseInheritance;
 	}
 
-	public final DomainInheritance getDerivedInheritance() {
+	public final @NonNull DomainInheritance getDerivedInheritance() {
 		return derivedInheritance;
 	}
 

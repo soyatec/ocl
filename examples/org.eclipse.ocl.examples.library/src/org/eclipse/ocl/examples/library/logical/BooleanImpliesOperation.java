@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.logical;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
@@ -36,7 +37,7 @@ public class BooleanImpliesOperation extends AbstractBinaryOperation
 		return true;
 	}
 
-	public BooleanValue evaluate(DomainEvaluator evaluator, DomainType returnType, Value left, Value right) throws InvalidValueException {
+	public @NonNull BooleanValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		if (left.isFalse()) {
 			return valueFactory.getTrue();

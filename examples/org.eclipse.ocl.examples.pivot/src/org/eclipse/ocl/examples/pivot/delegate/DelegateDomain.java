@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * A pluggable, dynamic implementation of a delegate domain supervising
@@ -43,8 +44,7 @@ public interface DelegateDomain {
 		 *            the package
 		 * @return its delegate domain
 		 */
-		DelegateDomain createDelegateDomain(String delegateURI,
-				EPackage ePackage);
+		@NonNull DelegateDomain createDelegateDomain(@NonNull String delegateURI, @NonNull EPackage ePackage);
 
 		/**
 		 * A <code>Factory</code> wrapper that is used by the
@@ -61,9 +61,9 @@ public interface DelegateDomain {
 		interface Registry
 				extends Map<String, Object> {
 
-			Factory.Registry INSTANCE = new Impl();
+			@NonNull Factory.Registry INSTANCE = new Impl();
 
-			DelegateDomain.Factory getFactory(String uri);
+			DelegateDomain.Factory getFactory(@NonNull String uri);
 
 			class Impl
 					extends HashMap<String, Object>
@@ -84,7 +84,7 @@ public interface DelegateDomain {
 					}
 				}
 
-				public DelegateDomain.Factory getFactory(String uri) {
+				public DelegateDomain.Factory getFactory(@NonNull String uri) {
 					return (DelegateDomain.Factory) get(uri);
 				}
 			}
@@ -96,7 +96,7 @@ public interface DelegateDomain {
 	 * 
 	 * @return the delegate URI
 	 */
-	String getURI();
+	@NonNull String getURI();
 
 	/**
 	 * Reset this delegate domain releasing any resources cached to support

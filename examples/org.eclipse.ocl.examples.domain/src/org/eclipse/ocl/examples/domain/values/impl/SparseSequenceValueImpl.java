@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -33,7 +34,7 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class SparseSequenceValueImpl extends SequenceValueImpl
 {
-	public static SequenceValue union(ValueFactory valueFactory, DomainCollectionType type, CollectionValue left, CollectionValue right) throws InvalidValueException {
+	public static @NonNull SequenceValue union(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull CollectionValue left, @NonNull CollectionValue right) throws InvalidValueException {
     	assert !left.isUndefined() && !right.isUndefined();
 		Collection<Value> leftElements = left.asCollection();
         Collection<Value> rightElements = right.asCollection();
@@ -50,22 +51,22 @@ public class SparseSequenceValueImpl extends SequenceValueImpl
         } 
     }
 	
-	public static class Accumulator extends SparseSequenceValueImpl implements CollectionValue.Accumulator
+	public static class Accumulator extends SparseSequenceValueImpl implements SequenceValue.Accumulator
 	{
-		public Accumulator(ValueFactory valueFactory, DomainCollectionType type) {
+		public Accumulator(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type) {
 			super(valueFactory, type);
 		}
 
-		public Accumulator(ValueFactory valueFactory, DomainCollectionType type, List<Value> elements) {
+		public Accumulator(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull List<Value> elements) {
 			super(valueFactory, type, elements);
 		}
 
-		public boolean add(Value value) {
+		public boolean add(@NonNull Value value) {
 			return elements.add(value);			
 		}		
 
 	    @Override
-		public SequenceValue append(Value object) throws InvalidValueException {
+		public @NonNull SequenceValue append(@NonNull Value object) throws InvalidValueException {
 			if (object.isInvalid()) {
 	        	valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidSource, "append");
 			}
@@ -74,7 +75,7 @@ public class SparseSequenceValueImpl extends SequenceValueImpl
 	    }
 	}
     
-	public SparseSequenceValueImpl(ValueFactory valueFactory, DomainCollectionType type, Value... elements) {
+	public SparseSequenceValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, Value... elements) {
 		super(valueFactory, type, new ArrayList<Value>());
 		if (elements != null) {
 			for (Value element : elements) {
@@ -83,11 +84,11 @@ public class SparseSequenceValueImpl extends SequenceValueImpl
 		}
 	}
 
-	public SparseSequenceValueImpl(ValueFactory valueFactory, DomainCollectionType type, Collection<? extends Value> elements) {
+	public SparseSequenceValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Collection<? extends Value> elements) {
 		super(valueFactory, type, new ArrayList<Value>(elements));
 	}
 
-	public SparseSequenceValueImpl(ValueFactory valueFactory, DomainCollectionType type, List<Value> elements) {
+	public SparseSequenceValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull List<Value> elements) {
 		super(valueFactory, type, elements);
 	}
 

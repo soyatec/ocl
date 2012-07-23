@@ -25,7 +25,10 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
  * Factory for OCL derived-classifier validation delegates.
@@ -33,16 +36,16 @@ import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
 public class OCLValidationDelegateFactory extends AbstractOCLDelegateFactory
 		implements ValidationDelegate.Factory, ValidationDelegate
 {
-	public OCLValidationDelegateFactory(String delegateURI) {
+	public OCLValidationDelegateFactory(@NonNull String delegateURI) {
 		super(delegateURI);
 	}
 
-	public ValidationDelegate createValidationDelegate(EClassifier classifier) {
-		EPackage ePackage = classifier.getEPackage();
+	public @Nullable ValidationDelegate createValidationDelegate(@NonNull EClassifier classifier) {
+		EPackage ePackage = DomainUtil.nonNullEMF(classifier.getEPackage());
 		return new OCLValidationDelegate(getDelegateDomain(ePackage), classifier);
 	}
 
-	protected ValidationDelegate getValidationDelegate(EClassifier eClassifier) {
+	protected @Nullable ValidationDelegate getValidationDelegate(@NonNull EClassifier eClassifier) {
 		DelegateEClassifierAdapter ecAdapter = DelegateEClassifierAdapter.getAdapter(eClassifier);
 		ValidationDelegate validationDelegate = ecAdapter.getValidationDelegate(delegateURI);
 		return validationDelegate;
@@ -50,19 +53,37 @@ public class OCLValidationDelegateFactory extends AbstractOCLDelegateFactory
 
 	public boolean validate(EClass eClass, EObject eObject,
 			Map<Object, Object> context, EOperation invariant, String expression) {
+		if (eClass == null) {
+			throw new NullPointerException("Null EClass");
+		}
 		ValidationDelegate validationDelegate = getValidationDelegate(eClass);
+		if (validationDelegate == null) {
+			return true;		// FIXME
+		}
 		return validationDelegate.validate(eClass, eObject, context, invariant, expression);
 	}
 
 	public boolean validate(EClass eClass, EObject eObject,
 			Map<Object, Object> context, String constraint, String expression) {
+		if (eClass == null) {
+			throw new NullPointerException("Null EClass");
+		}
 		ValidationDelegate validationDelegate = getValidationDelegate(eClass);
+		if (validationDelegate == null) {
+			return true;		// FIXME
+		}
 		return validationDelegate.validate(eClass, eObject, context, constraint, expression);
 	}
 
 	public boolean validate(EDataType eDataType, Object value,
 			Map<Object, Object> context, String constraint, String expression) {
+		if (eDataType == null) {
+			throw new NullPointerException("Null EDataType");
+		}
 		ValidationDelegate validationDelegate = getValidationDelegate(eDataType);
+		if (validationDelegate == null) {
+			return true;		// FIXME
+		}
 		return validationDelegate.validate(eDataType, value, context, constraint, expression);
 	}
 
@@ -73,17 +94,23 @@ public class OCLValidationDelegateFactory extends AbstractOCLDelegateFactory
 //		return validationDelegate.validate(eClass, eObject, diagnostics, context, invariant, expression, severity, source, code);
 //	}
 
-	public boolean validate(EClass eClass, EObject eObject,
-			DiagnosticChain diagnostics, Map<Object, Object> context,
-			String constraint, String expression, int severity, String source, int code) {
+	public boolean validate(@NonNull EClass eClass, @NonNull EObject eObject,
+			@Nullable DiagnosticChain diagnostics, Map<Object, Object> context,
+			@NonNull String constraint, String expression, int severity, String source, int code) {
 		ValidationDelegate validationDelegate = getValidationDelegate(eClass);
+		if (validationDelegate == null) {
+			return true;		// FIXME
+		}
 		return validationDelegate.validate(eClass, eObject, diagnostics, context, constraint, expression, severity, source, code);
 	}
 
-	public boolean validate(EDataType eDataType, Object value,
-			DiagnosticChain diagnostics, Map<Object, Object> context,
-			String constraint, String expression, int severity, String source, int code) {
+	public boolean validate(@NonNull EDataType eDataType, @NonNull Object value,
+			@Nullable DiagnosticChain diagnostics, Map<Object, Object> context,
+			@NonNull String constraint, String expression, int severity, String source, int code) {
 		ValidationDelegate validationDelegate = getValidationDelegate(eDataType);
+		if (validationDelegate == null) {
+			return true;		// FIXME
+		}
 		return validationDelegate.validate(eDataType, value, diagnostics, context, constraint, expression, severity, source, code);
 	}
 
@@ -99,7 +126,7 @@ public class OCLValidationDelegateFactory extends AbstractOCLDelegateFactory
 		}
 
 		@Override
-		public ValidationDelegate createValidationDelegate(EClassifier classifier) {
+		public @Nullable ValidationDelegate createValidationDelegate(@NonNull EClassifier classifier) {
 			ValidationDelegate.Factory.Registry localRegistry = DelegateResourceSetAdapter.getRegistry(
 				classifier, ValidationDelegate.Factory.Registry.class, null);
 			if (localRegistry != null) {

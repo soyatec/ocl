@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.domain.types;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainFragment;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
@@ -23,6 +25,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.IndexableIterable;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -53,23 +57,23 @@ public abstract class AbstractInheritance implements DomainInheritance
 		private final int firstIndex;
 		private final int lastIndex;
 		
-		public FragmentIterable(DomainFragment[] array) {
+		public FragmentIterable(@NonNull DomainFragment[] array) {
 			this.array = array;
 			this.firstIndex = 0;
 			this.lastIndex = array.length;
 		}
 		
-		public FragmentIterable(DomainFragment[] array, int firstIndex, int lastIndex) {
+		public FragmentIterable(@NonNull DomainFragment[] array, int firstIndex, int lastIndex) {
 			this.array = array;
 			this.firstIndex = firstIndex;
 			this.lastIndex = lastIndex;
 		}
 
-		public DomainFragment get(int index) {
-			return array[firstIndex + index];
+		public @NonNull DomainFragment get(int index) {
+			return DomainUtil.nonNullState(array[firstIndex + index]);
 		}
 		
-		public java.util.Iterator<DomainFragment> iterator() {
+		public @NonNull java.util.Iterator<DomainFragment> iterator() {
 			return new Iterator();
 		}
 
@@ -101,17 +105,17 @@ public abstract class AbstractInheritance implements DomainInheritance
 	public static final int ORDERED = 1 << 0;
 	public static final int UNIQUE = 1 << 1;
 	
-	protected final String name;
-	protected final DomainPackage evaluationPackage;
+	protected final @NonNull String name;
+	protected final @NonNull DomainPackage evaluationPackage;
 	protected final int flags;
 	
-	public AbstractInheritance(String name, DomainPackage evaluationPackage, int flags) {
+	public AbstractInheritance(@NonNull String name, @NonNull DomainPackage evaluationPackage, int flags) {
 		this.name = name;
 		this.evaluationPackage = evaluationPackage;
 		this.flags = flags;
 	}
 
-	public boolean conformsTo(DomainStandardLibrary standardLibrary, DomainType type) {
+	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		DomainInheritance thatInheritance = type.getInheritance(standardLibrary);
 		if (this == thatInheritance) {
 			return true;
@@ -119,15 +123,15 @@ public abstract class AbstractInheritance implements DomainInheritance
 		return thatInheritance.isSuperInheritanceOf(standardLibrary, this);
 	}
 
-	public ObjectValue createInstance(ValueFactory valueFactory) {
+	public @NonNull ObjectValue createInstance(@NonNull ValueFactory valueFactory) {
 		throw new UnsupportedOperationException();
 	}
 
-	public Value createInstance(ValueFactory valueFactory, String value) {
+	public @NonNull Value createInstance(@NonNull ValueFactory valueFactory, @NonNull String value) {
 		throw new UnsupportedOperationException();
 	}
 
-	public DomainInheritance getCommonInheritance(DomainInheritance thatInheritance) {
+	public @NonNull DomainInheritance getCommonInheritance(@NonNull DomainInheritance thatInheritance) {
 		if (this == thatInheritance) {
 			return this;
 		}
@@ -153,14 +157,14 @@ public abstract class AbstractInheritance implements DomainInheritance
 		return getFragment(0).getDerivedInheritance();	// Always OclAny at index 0
 	}
 	
-	public DomainType getCommonType(DomainStandardLibrary standardLibrary, DomainType type) {
+	public @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		DomainInheritance firstInheritance = this;
 		DomainInheritance secondInheritance = type.getInheritance(standardLibrary);
 		DomainInheritance commonInheritance = firstInheritance.getCommonInheritance(secondInheritance);
 		return commonInheritance;
 	}
 
-	public DomainFragment getFragment(DomainInheritance thatInheritance) {
+	public @Nullable DomainFragment getFragment(@NonNull DomainInheritance thatInheritance) {
 		int staticDepth = thatInheritance.getDepth();
 		if (staticDepth <= getDepth()) {
 			int iMax = getIndex(staticDepth+1);
@@ -174,7 +178,7 @@ public abstract class AbstractInheritance implements DomainInheritance
 		return null;
 	}
 
-	public DomainInheritance getInheritance(DomainStandardLibrary standardLibrary) {
+	public @NonNull DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary) {
 		return this;
 	}
 
@@ -182,25 +186,25 @@ public abstract class AbstractInheritance implements DomainInheritance
 		return name;
 	}
 
-	public DomainType getNormalizedType(DomainStandardLibrary standardLibrary) {
+	public @NonNull DomainType getNormalizedType(@NonNull DomainStandardLibrary standardLibrary) {
 		return this;
 	}
 
-	protected DomainInheritance getOclAnyInheritance() {
+	protected @NonNull DomainInheritance getOclAnyInheritance() {
 		DomainStandardLibrary standardLibrary = getStandardLibrary();
 		DomainType oclAnyType = standardLibrary.getOclAnyType();
 		return oclAnyType.getInheritance(standardLibrary);
 	}
 	
-	public final DomainPackage getPackage() {
+	public final @NonNull DomainPackage getPackage() {
 		return evaluationPackage;
 	}
 
-	public boolean isEqualTo(DomainStandardLibrary standardLibrary, DomainType type) {
+	public boolean isEqualTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		return this == type;
 	}
 
-	public boolean isEqualToUnspecializedType(DomainStandardLibrary standardLibrary, DomainType type) {
+	public boolean isEqualToUnspecializedType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		return this == type;
 	}
 
@@ -208,11 +212,11 @@ public abstract class AbstractInheritance implements DomainInheritance
 		return (flags & ORDERED) != 0;
 	}
 
-	public boolean isSubInheritanceOf(DomainInheritance thatInheritance) {
+	public boolean isSubInheritanceOf(@NonNull DomainInheritance thatInheritance) {
 		return getFragment(thatInheritance) != null;
 	}
 
-	public boolean isSuperInheritanceOf(DomainStandardLibrary standardLibrary, DomainInheritance thatInheritance) {
+	public boolean isSuperInheritanceOf(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainInheritance thatInheritance) {
 		return thatInheritance.getFragment(this) != null;
 	}
 
@@ -224,7 +228,7 @@ public abstract class AbstractInheritance implements DomainInheritance
 		return (flags & UNIQUE) != 0;
 	}
 
-	public LibraryFeature lookupImplementation(DomainStandardLibrary standardLibrary, DomainOperation staticOperation) {
+	public @NonNull LibraryFeature lookupImplementation(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainOperation staticOperation) {
 		getDepth();
 		DomainInheritance staticInheritance = staticOperation.getInheritance(standardLibrary);
 		int staticDepth = staticInheritance.getDepth();
@@ -237,10 +241,14 @@ public abstract class AbstractInheritance implements DomainInheritance
 				}
 			}
 		}
-		return staticOperation.getImplementation();			// invoke static op for null and invalid
+		LibraryFeature implementation = staticOperation.getImplementation();	// invoke static op for null and invalid
+		if (implementation == null) {
+			implementation = UnsupportedOperation.INSTANCE;
+		}
+		return DomainUtil.nonNullJDT(implementation);			
 	}
 
-	public DomainOperation lookupLocalOperation(DomainStandardLibrary standardLibrary, String operationName, DomainInheritance... argumentTypes) {
+	public @Nullable DomainOperation lookupLocalOperation(@NonNull DomainStandardLibrary standardLibrary, @NonNull String operationName, DomainInheritance... argumentTypes) {
 		for (DomainOperation localOperation : getLocalOperations()) {
 			if (localOperation.getName().equals(operationName)) {
 				IndexableIterable<? extends DomainType> firstParameterTypes = localOperation.getParameterType();
@@ -249,7 +257,7 @@ public abstract class AbstractInheritance implements DomainInheritance
 					int i = 0;
 					for (; i < iMax; i++) {
 						DomainType firstParameterType = firstParameterTypes.get(i);
-						DomainType secondParameterType = argumentTypes[i];
+						DomainType secondParameterType = DomainUtil.nonNullEntry(argumentTypes[i]);
 						if (!firstParameterType.isEqualTo(standardLibrary, secondParameterType)) {
 							break;
 						}

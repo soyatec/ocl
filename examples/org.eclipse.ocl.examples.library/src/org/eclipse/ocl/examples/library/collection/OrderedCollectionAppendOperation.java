@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.collection;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
@@ -30,7 +31,7 @@ public class OrderedCollectionAppendOperation extends AbstractBinaryOperation
 {
 	public static final OrderedCollectionAppendOperation INSTANCE = new OrderedCollectionAppendOperation();
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value left, Value right) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
 		SequenceValue leftOrderedCollectionValue = left.asSequenceValue();
 		Value rightValue = right.asValidValue();
 		return leftOrderedCollectionValue.append(rightValue);

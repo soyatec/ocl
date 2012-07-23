@@ -45,6 +45,7 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.OCLConstants;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -174,7 +175,7 @@ public class Pivot2Ecore extends AbstractConversion
 		PrettyPrintOptions.Global options = PrettyPrinter.createOptions(namespace);
 		options.setBaseURI(ecoreURI);
 		if ((exprString == null) && (specification instanceof ExpressionInOCL)) {
-			exprString = PrettyPrinter.print(((ExpressionInOCL)specification).getBodyExpression(), options);
+			exprString = PrettyPrinter.print(DomainUtil.nonNullModel(((ExpressionInOCL)specification).getBodyExpression()), options);
 		}
 		if (exprString == null) {
 			return false;
@@ -398,7 +399,7 @@ public class Pivot2Ecore extends AbstractConversion
 		return primitiveTypesUriPrefix;
 	}
 
-	public void putCreated(Element pivotElement, EModelElement eModelElement) {
+	public void putCreated(@NonNull Element pivotElement, @NonNull EModelElement eModelElement) {
 		Element primaryElement = metaModelManager.getPrimaryElement(pivotElement);
 //		System.out.println("Put1 " + PivotUtil.debugSimpleName(pivotElement) + " " + PivotUtil.debugSimpleName(eModelElement));
 		EModelElement oldPivot = createMap.put(pivotElement, eModelElement);

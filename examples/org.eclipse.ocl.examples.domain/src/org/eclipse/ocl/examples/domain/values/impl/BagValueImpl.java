@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -53,7 +54,7 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 		return ValuesPackage.Literals.BAG_VALUE;
 	}
 
-	public static BagValue intersection(ValueFactory valueFactory, DomainCollectionType type, CollectionValue left, CollectionValue right) throws InvalidValueException
+	public static @NonNull BagValue intersection(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull CollectionValue left, @NonNull CollectionValue right) throws InvalidValueException
     {
     	assert !left.isUndefined() && !right.isUndefined();
 		Collection<Value> leftElements = left.asCollection();
@@ -68,16 +69,18 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
         // that are in the larger collection
         Set<Value> minElements = new HashSet<Value>(leftSize < rightSize ? leftElements : rightElements);
         for (Value e : minElements) {
-        	IntegerValue leftCount = left.count(e);
-        	IntegerValue rightCount = right.count(e);
-        	for (int i = Math.min(leftCount.asInteger(), rightCount.asInteger()); i > 0; i--) {
-        		results.add(e);
+        	if (e != null) {
+        		IntegerValue leftCount = left.count(e);
+            	IntegerValue rightCount = right.count(e);
+            	for (int i = Math.min(leftCount.asInteger(), rightCount.asInteger()); i > 0; i--) {
+            		results.add(e);
+            	}
         	}
         }
     	return results.size() > 0 ? new BagValueImpl(valueFactory, type, results) : new BagValueImpl(valueFactory, type);
     }
 
-    public static BagValue union(ValueFactory valueFactory, DomainCollectionType type, CollectionValue left, CollectionValue right) throws InvalidValueException {
+    public static @NonNull BagValue union(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull CollectionValue left, @NonNull CollectionValue right) throws InvalidValueException {
     	assert !left.isUndefined() && !right.isUndefined();
 		Collection<Value> leftElements = left.asCollection();
         Collection<Value> rightElements = right.asCollection();
@@ -96,16 +99,16 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 	
 	public static class Accumulator extends BagValueImpl implements CollectionValue.Accumulator
 	{
-		public Accumulator(ValueFactory valueFactory, DomainCollectionType type) {
+		public Accumulator(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type) {
 			super(valueFactory, type);
 		}
 
-		public boolean add(Value value) {
+		public boolean add(@NonNull Value value) {
 			return elements.add(value);			
 		}		
 	}
 	
-	public BagValueImpl(ValueFactory valueFactory, DomainCollectionType type, Value... elements) {
+	public BagValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, Value... elements) {
 		super(valueFactory, type, new BagImpl<Value>());
 		if (elements != null) {
 			for (Value element : elements) {
@@ -114,7 +117,7 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 		}
 	}
 
-	public BagValueImpl(ValueFactory valueFactory, DomainCollectionType type, Collection<? extends Value> elements) {
+	public BagValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Collection<? extends Value> elements) {
 		super(valueFactory, type, new BagImpl<Value>(elements));
 	}
 
@@ -122,12 +125,12 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 //		this(c.asCollection());
 //	}
 
-	public BagValueImpl(ValueFactory valueFactory, DomainCollectionType type, Bag<Value> elements) {
+	public BagValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Bag<Value> elements) {
 		super(valueFactory, type, elements);
 	}
 
     @Override
-	public BagValue asBagValue() {
+	public @NonNull BagValue asBagValue() {
         return this;
     }
 
@@ -139,7 +142,7 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 		return elements.equals(((BagValueImpl)obj).elements);
 	}
 
-	public BagValue excluding(Value value) {
+	public @NonNull BagValue excluding(@NonNull Value value) {
 		Bag<Value> result = new BagImpl<Value>();
 		for (Value element : elements) {
 			if (!element.equals(value)) {
@@ -154,7 +157,7 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 		}
 	}
 
-    public BagValue flatten() throws InvalidValueException {
+    public @NonNull BagValue flatten() throws InvalidValueException {
     	Bag<Value> flattened = new BagImpl<Value>();
     	if (flatten(flattened)) {
     		return new BagValueImpl(valueFactory, getCollectionType(), flattened);
@@ -165,15 +168,15 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
     }
     
 	@Override
-	protected Bag<Value> getElements() {
+	protected @NonNull Bag<Value> getElements() {
 		return (Bag<Value>) elements;
 	}
 
-	public String getKind() {
+	public @NonNull String getKind() {
 	    return "Bag";
 	}
 
-	public BagValue including(Value value) throws InvalidValueException {
+	public @NonNull BagValue including(@NonNull Value value) throws InvalidValueException {
 		if (value.isInvalid()) {
 			valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidSource, "including");
 		}
@@ -182,18 +185,18 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 		return new BagValueImpl(valueFactory, getCollectionType(), result);
 	}
 	   
-    public SequenceValue sort(Comparator<Value> comparator) {
+    public @NonNull SequenceValue sort(@NonNull Comparator<Value> comparator) {
     	List<Value> values = new ArrayList<Value>(elements);
     	Collections.sort(values, comparator);
     	return new SparseSequenceValueImpl(valueFactory, getSequenceType(), values);
     }
     
-	public SequenceValue toSequenceValue() {
+	public @NonNull SequenceValue toSequenceValue() {
 		return new SparseSequenceValueImpl(valueFactory, getSequenceType(), elements);
 	}
 
 	@Override
-	public void toString(StringBuilder s, int lengthLimit) {
+	public void toString(@NonNull StringBuilder s, int lengthLimit) {
 		s.append("Bag");
 		super.toString(s, lengthLimit);
 	}

@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.pivot.manager;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  * A MetaModelManagerListener reports MetaModelManager changes; most notably disposal.
  */
@@ -26,5 +28,5 @@ public interface MetaModelManagerListener
 	 * 
 	 * @param metaModelManager 
 	 */
-	void metaModelManagerDisposed(MetaModelManager metaModelManager);
+	void metaModelManagerDisposed(@NonNull MetaModelManager metaModelManager);
 }

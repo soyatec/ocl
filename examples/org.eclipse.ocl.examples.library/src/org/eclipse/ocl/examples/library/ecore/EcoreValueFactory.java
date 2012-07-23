@@ -19,6 +19,8 @@ package org.eclipse.ocl.examples.library.ecore;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.values.ElementValue;
@@ -26,12 +28,12 @@ import org.eclipse.ocl.examples.library.executor.ExecutorValueFactory;
 
 public class EcoreValueFactory extends ExecutorValueFactory implements Adapter
 {
-	public EcoreValueFactory(DomainStandardLibrary standardLibrary) {
+	public EcoreValueFactory(@NonNull DomainStandardLibrary standardLibrary) {
 		super(standardLibrary);
 	}
 
 	@Override
-	public ElementValue createElementValue(DomainElement element) {
+	public @Nullable ElementValue createElementValue(@NonNull DomainElement element) {
 		return null;
 	}
 

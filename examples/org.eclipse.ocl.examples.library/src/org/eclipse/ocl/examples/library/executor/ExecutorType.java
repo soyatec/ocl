@@ -16,12 +16,14 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainFragment;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.types.AbstractInheritance;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 
 public class ExecutorType extends AbstractInheritance implements DomainType, ExecutorTypeArgument
@@ -39,12 +41,12 @@ public class ExecutorType extends AbstractInheritance implements DomainType, Exe
 	 */
 	private int[] indexes = null;
 	
-	public ExecutorType(String name, ExecutorPackage evaluationPackage, int flags, ExecutorTypeParameter... typeParameters) {
+	public ExecutorType(@NonNull String name, @NonNull ExecutorPackage evaluationPackage, int flags, ExecutorTypeParameter... typeParameters) {
 		super(name, evaluationPackage, flags);
 	}
 	
-	public FragmentIterable getAllSuperFragments() {
-		return new FragmentIterable(fragments);
+	public @NonNull FragmentIterable getAllSuperFragments() {
+		return new FragmentIterable(DomainUtil.nonNullState(fragments));
 	}
 
 	public int getDepth() {
@@ -63,40 +65,40 @@ public class ExecutorType extends AbstractInheritance implements DomainType, Exe
 		return indexes.length;
 	}
 
-	public Iterable<? extends DomainOperation> getLocalOperations() {
+	public @NonNull Iterable<? extends DomainOperation> getLocalOperations() {
 		return getSelfFragment().getLocalOperations();
 	}
 
-	public Iterable<? extends DomainProperty> getLocalProperties() {
+	public @NonNull Iterable<? extends DomainProperty> getLocalProperties() {
 		return getSelfFragment().getLocalProperties();
 	}
 
-	public Iterable<? extends DomainType> getLocalSuperTypes() {
+	public @NonNull Iterable<? extends DomainType> getLocalSuperTypes() {
 		return getSelfFragment().getLocalSuperTypes();
 	}
 
-	public String getMetaTypeName() {
+	public @NonNull String getMetaTypeName() {
 		throw new UnsupportedOperationException();
 	}
 
-	public ExecutorFragment getSelfFragment() {
-		return (ExecutorFragment) getFragment(fragments.length-1);
+	public @NonNull ExecutorFragment getSelfFragment() {
+		return (ExecutorFragment) DomainUtil.nonNullState(getFragment(fragments.length-1));
 	}
 
-	public DomainStandardLibrary getStandardLibrary() {
+	public @NonNull DomainStandardLibrary getStandardLibrary() {
 		return OCLstdlibTables.LIBRARY;
 	}
 	
-	public final FragmentIterable getSuperFragments(int depth) {
-		return new FragmentIterable(fragments, indexes[depth], indexes[depth+1]);
+	public final @NonNull FragmentIterable getSuperFragments(int depth) {
+		return new FragmentIterable(DomainUtil.nonNullState(fragments), indexes[depth], indexes[depth+1]);
 	}
 
-	public DomainType getType() {
+	public @NonNull DomainType getType() {
 		return this;
 	}
 
-	public void initFragments(ExecutorFragment[] fragments, int[] depthCounts) {
-		if (fragments != null) {
+	public void initFragments(@NonNull ExecutorFragment[] fragments, int[] depthCounts) {
+//		if (fragments != null) {
 			int[] indexes = new int[depthCounts.length+1];
 			indexes[0] = 0;
 			for (int i = 0; i <  depthCounts.length; i++) {
@@ -104,10 +106,10 @@ public class ExecutorType extends AbstractInheritance implements DomainType, Exe
 			}
 			this.fragments = fragments;
 			this.indexes = indexes;
-		}
-		else {
-			this.fragments = null;
-			this.indexes = null;
-		}
+//		}
+//		else {
+//			this.fragments = null;
+//			this.indexes = null;
+//		}
 	}
 }

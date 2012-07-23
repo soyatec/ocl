@@ -19,15 +19,17 @@ package org.eclipse.ocl.examples.domain.values;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  * A range of integer values from the first up to and including the last.
  * If last is less than the first. the range is empty.
  */
 public interface IntegerRange extends List<Value>
 {
-	IntegerValue getFirst();
-	IntegerValue getLast();
-	IntegerValue getSize();	
-	ValueFactory getValueFactory();
-	Iterator<Value> iterator();
+	@NonNull IntegerValue getFirst();
+	@NonNull IntegerValue getLast();
+	@NonNull IntegerValue getSize();	
+	@NonNull ValueFactory getValueFactory();
+	@NonNull Iterator<Value> iterator();
 }

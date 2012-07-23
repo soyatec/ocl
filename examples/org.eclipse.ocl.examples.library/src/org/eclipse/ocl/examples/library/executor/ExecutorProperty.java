@@ -16,24 +16,26 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 
 public class ExecutorProperty implements DomainProperty
 {
-	protected final String name;
-	protected final DomainInheritance executorType;
+	protected final @NonNull String name;
+	protected final @NonNull DomainInheritance executorType;
 	protected final int propertyIndex;
-	protected final LibraryProperty implementation;
+	protected final @NonNull LibraryProperty implementation;
 	protected ExecutorProperty opposite;
 	
-	public ExecutorProperty(String name, DomainInheritance executorType, int propertyIndex, LibraryProperty implementation) {
+	public ExecutorProperty(@NonNull String name, @NonNull DomainInheritance executorType, int propertyIndex, @NonNull LibraryProperty implementation) {
 		this.name = name;
 		this.executorType = executorType;
 		this.propertyIndex = propertyIndex;
@@ -41,31 +43,31 @@ public class ExecutorProperty implements DomainProperty
 		this.opposite = null;
 	}
 
-	public LibraryProperty getImplementation() {
+	public @NonNull LibraryProperty getImplementation() {
 		return implementation;
 	}
 
-	public DomainInheritance getInheritance(DomainStandardLibrary standardLibrary) {
+	public @NonNull DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary) {
 		return executorType;
 	}
 
-	public String getName() {
+	public @NonNull String getName() {
 		return name;
 	}
 
-	public DomainProperty getOpposite() {
-		return opposite;
+	public @NonNull DomainProperty getOpposite() {
+		return DomainUtil.nonNullState(opposite);
 	}
 
-	public DomainType getType() {
+	public @NonNull DomainType getType() {
 		return executorType;
 	}
 
-	void initOpposite(ExecutorProperty opposite) {
+	void initOpposite(@NonNull ExecutorProperty opposite) {
 		this.opposite = opposite;
 	}
 
-	public void setValue(ObjectValue objectValue, Value propertyValue) throws InvalidValueException {
+	public void setValue(@NonNull ObjectValue objectValue, @NonNull Value propertyValue) throws InvalidValueException {
 		throw new UnsupportedOperationException();
 	}
 	

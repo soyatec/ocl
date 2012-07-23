@@ -22,16 +22,18 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainFragment;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
 import org.eclipse.ocl.examples.domain.types.AbstractInheritance;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 public abstract class ReflectiveType extends AbstractInheritance
 {	
-	protected static int computeFlags(DomainType type) {
+	protected static int computeFlags(@NonNull DomainType type) {
 		if (type instanceof DomainCollectionType) {
 			DomainCollectionType collectionType = (DomainCollectionType)type;
 			return (collectionType.isOrdered() ? ORDERED : 0) | (collectionType.isUnique() ? UNIQUE : 0);
@@ -60,25 +62,25 @@ public abstract class ReflectiveType extends AbstractInheritance
 	 */
 	private Set<ReflectiveType> knownSubInheritances = null;
 
-	public ReflectiveType(String name, ExecutorPackage evaluationPackage, int flags, ExecutorTypeParameter... typeParameters) {
+	public ReflectiveType(@NonNull String name, @NonNull ExecutorPackage evaluationPackage, int flags, ExecutorTypeParameter... typeParameters) {
 		super(name, evaluationPackage, flags);
 	}
 
-	public void addSubInheritance(ReflectiveType subInheritance) {
+	public void addSubInheritance(@NonNull ReflectiveType subInheritance) {
 		if (knownSubInheritances == null) {
 			knownSubInheritances = new HashSet<ReflectiveType>();
 		}
 		knownSubInheritances.add(subInheritance);
 	}
 
-	protected abstract AbstractFragment createFragment(DomainInheritance baseInheritance);
+	protected abstract AbstractFragment createFragment(@NonNull DomainInheritance baseInheritance);
 
 	public void dispose() {}
 	
 	/**
 	 * Add this Inheritance and all un-installed super-Inheritances to inheritances.
 	 */
-	public void gatherUninstalledInheritances(List<ReflectiveType> inheritances) {
+	public void gatherUninstalledInheritances(@NonNull List<ReflectiveType> inheritances) {
 		if (!inheritances.contains(this)) {
 			inheritances.add(this);
 			if (fragments == null) {
@@ -91,11 +93,11 @@ public abstract class ReflectiveType extends AbstractInheritance
 		}
 	}
 	
-	public final FragmentIterable getAllSuperFragments() {
+	public final @NonNull FragmentIterable getAllSuperFragments() {
 		if (fragments == null) {
 			initialize();
 		}
-		return new FragmentIterable(fragments);
+		return new FragmentIterable(DomainUtil.nonNullJDT(fragments));
 	}
 
 	public final int getDepth() {
@@ -109,9 +111,9 @@ public abstract class ReflectiveType extends AbstractInheritance
 		return fragments[fragmentNumber];
 	}
 	
-	protected DomainFragment[] getFragments() {
-		return fragments;
-	}
+//	protected @NonNull DomainFragment[] getFragments() {
+//		return fragments;
+//	}
 
 	public int getIndex(int fragmentNumber) {
 		return indexes[fragmentNumber];
@@ -124,20 +126,24 @@ public abstract class ReflectiveType extends AbstractInheritance
 	/**
 	 * Return the immediate superinheritances without reference to the fragments.
 	 */
-	protected abstract Iterable<? extends DomainInheritance> getInitialSuperInheritances();
+	protected abstract @NonNull Iterable<? extends DomainInheritance> getInitialSuperInheritances();
 
-	public DomainFragment getSelfFragment() {
+	public @NonNull DomainFragment getSelfFragment() {
 		if (indexes == null) {
 			initialize();
 		}
-		return getFragment(fragments.length-1);
+		DomainFragment fragment = getFragment(fragments.length-1);
+		if (fragment == null) {
+			throw new IllegalStateException("No self fragment"); //$NON-NLS-1$
+		}
+		return fragment;
 	}
 	
-	public final FragmentIterable getSuperFragments(int depth) {
-		return new FragmentIterable(fragments, indexes[depth], indexes[depth+1]);
+	public final @NonNull FragmentIterable getSuperFragments(int depth) {
+		return new FragmentIterable(DomainUtil.nonNullState(fragments), indexes[depth], indexes[depth+1]);
 	}
 
-	public DomainType getType() {
+	public @NonNull DomainType getType() {
 		return this;
 	}
 
@@ -197,7 +203,8 @@ public abstract class ReflectiveType extends AbstractInheritance
 					}
 					int jMax = superInheritance.getIndex(i+1);
 					for (; j < jMax; j++) {
-						DomainInheritance baseInheritance = superInheritance.getFragment(j).getBaseInheritance();
+						DomainFragment fragment = superInheritance.getFragment(j);
+						DomainInheritance baseInheritance = fragment.getBaseInheritance();
 						if (!some.contains(baseInheritance)) {
 							some.add(baseInheritance);
 							if (baseInheritance instanceof ReflectiveType) {
@@ -219,7 +226,7 @@ public abstract class ReflectiveType extends AbstractInheritance
 				indexes[0] = 0;
 				for (int i = 0; i < superDepths; i++) {
 					for (DomainInheritance some : all.get(i)) {
-						fragments[j++] = createFragment(some);
+						fragments[j++] = createFragment(DomainUtil.nonNullEntry(some));
 					}
 					indexes[i+1] = j;
 				}
@@ -270,7 +277,7 @@ public abstract class ReflectiveType extends AbstractInheritance
 		return fragments != null;
 	}
 
-	public void removeSubInheritance(ReflectiveType subInheritance) {
+	public void removeSubInheritance(@NonNull ReflectiveType subInheritance) {
 		if (knownSubInheritances != null) {
 			knownSubInheritances.remove(subInheritance);
 		}

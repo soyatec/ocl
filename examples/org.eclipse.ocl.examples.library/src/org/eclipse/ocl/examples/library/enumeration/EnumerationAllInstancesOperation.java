@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.library.enumeration;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainClassifierType;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
@@ -27,6 +28,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -38,14 +40,14 @@ public class EnumerationAllInstancesOperation extends AbstractUnaryOperation
 {
 	public static final EnumerationAllInstancesOperation INSTANCE = new EnumerationAllInstancesOperation();
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceVal) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		TypeValue sourceTypeValue = sourceVal.asTypeValue();
 		DomainType sourceType = sourceTypeValue.getInstanceType();
 		Set<Value> results = new HashSet<Value>();
 		DomainEnumeration domainEnumeration = sourceType instanceof DomainEnumeration ? (DomainEnumeration)sourceType : (DomainEnumeration)((DomainClassifierType)sourceType).getInstanceType();
 		for (DomainElement instance : domainEnumeration.getEnumerationLiterals()) {
-			results.add(valueFactory.valueOf(instance));
+			results.add(valueFactory.valueOf(DomainUtil.nonNullEntry(instance)));
 		}
 		return valueFactory.createSetValue((DomainCollectionType)returnType, results);
 	}

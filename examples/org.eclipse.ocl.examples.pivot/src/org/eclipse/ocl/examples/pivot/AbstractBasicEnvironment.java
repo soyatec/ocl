@@ -21,114 +21,38 @@
 package org.eclipse.ocl.examples.pivot;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.options.Option;
 
 /**
  * Partial implementation of the {@link BasicEnvironment} interface, providing
  * default behaviours for most features.
  */
-public abstract class AbstractBasicEnvironment implements BasicEnvironment {
-	private BasicEnvironment parent;					// parent in environment hierarchy
+public abstract class AbstractBasicEnvironment<P extends BasicEnvironment> implements BasicEnvironment
+{	
+	private final @NonNull Map<Option<?>, Object> options = new java.util.HashMap<Option<?>, Object>();
 	
-	private final Map<Option<?>, Object> options =
-	    new java.util.HashMap<Option<?>, Object>();
-	
+	protected @Nullable P parent;					// parent in environment hierarchy
+    
     /**
-     * Initializes me with the specified parent environment, which should be
-     * of the same type as me.
+     * Initializes me with the specified parent environment.
      * 
-     * @param parent an environment of the same type as me (or <code>null</code>)
+     * @param parent an environment (or <code>null</code>)
      */
-	protected AbstractBasicEnvironment(BasicEnvironment parent) {	
+    protected AbstractBasicEnvironment(P parent) {      
 		this.parent = parent;
-	}
+    }
 
-	/**
-	 * The abstract environment implementation is adaptable.  The default
-	 * implementation adapts to and interface actually implemented by the
-	 * receiver in addition to the {@link ProblemHandler} interface.
-	 * <p>
-	 * Subclasses may override or extend this implementation.
-	 * </p>
-	 */
-	@SuppressWarnings("unchecked")
-	public <T> T getAdapter(java.lang.Class<T> adapterType) {
-		T result;
-		
-		if (adapterType.isAssignableFrom(getClass())) {
-			result = (T) this;
-		} else {
-			result = null;
-		}
-		
-		return result;
-	}
-
-    // implements the interface method
-	public BasicEnvironment getParent() {
-		return parent;
-	}
-
-    /**
-     * Assigns me a parent environment after construction.  It is not advisable
-     * to set the parent to <code>null</code> if I previously had one.
-     * 
-     * @param parent my new parent
-     */
-	protected void setParent(BasicEnvironment parent) {
-		this.parent = parent;
-	}
-	
-	protected Map<Option<?>, Object> basicGetOptions() {
+	protected final @NonNull Map<Option<?>, Object> basicGetOptions() {
 	    return options;
 	}
 	
-	public Map<Option<?>, Object> getOptions() {
-		Map<Option<?>, Object> result = (getParent() != null)
-			? new java.util.HashMap<Option<?>, Object>(getParent().getOptions())
-		    : new java.util.HashMap<Option<?>, Object>();
-		
-		result.putAll(basicGetOptions());
-		
-		return result;
-	}
-	
-	public <T> void setOption(Option<T> option, T value) {
-		basicGetOptions().put(option, value);
-	}
-	
-	public <T> void putOptions(Map<? extends Option<T>, ? extends T> options) {
-		Map<Option<?>, Object> myOptions = basicGetOptions();
-		
-		myOptions.clear();
-		myOptions.putAll(options);
-	}
-	
-	public <T> T removeOption(Option<T> option) {
-		T result = getValue(option);
-		
-		basicGetOptions().remove(option);
-		
-		return result;
-	}
-	
-	public <T> Map<Option<T>, T> removeOptions(Collection<Option<T>> options) {
-		Map<Option<T>, T> result = new java.util.HashMap<Option<T>, T>();
-		
-		Map<Option<?>, Object> myOptions = basicGetOptions();
-		
-		for (Option<T> next : options) {
-			result.put(next, getValue(next));
-			myOptions.remove(next);
-		}
-		
-		return result;
-	}
-	
-	public Map<Option<?>, Object> clearOptions() {
-		Map<Option<?>, Object> myOptions = basicGetOptions();
+	public @NonNull Map<Option<?>, Object> clearOptions() {
+		Map<Option<?>, Object> myOptions = options;
 		
 		Map<Option<?>, Object> result = new java.util.HashMap<Option<?>, Object>(
 				myOptions);
@@ -137,21 +61,100 @@ public abstract class AbstractBasicEnvironment implements BasicEnvironment {
 		
 		return result;
 	}
-	
-	public boolean isEnabled(Option<Boolean> option) {
-		Boolean result = getValue(option);
-		return (result == null)? false : result.booleanValue();
+
+	/**
+	 * Implements the interface method by testing whether I am an instance of
+	 * the requested adapter type.
+	 */
+	@SuppressWarnings("unchecked")
+	public <T> T getAdapter(java.lang.Class<T> adapterType) {
+		if (adapterType.isInstance(this)) {
+			return (T) this;
+		} 
+		return null;
 	}
 	
-	public <T> T getValue(Option<T> option) {
+	public Map<Option<?>, Object> getOptions() {
+		P parent2 = parent;
+		Map<Option<?>, Object> result = (parent2 != null)
+			? new HashMap<Option<?>, Object>(parent2.getOptions())
+		    : new HashMap<Option<?>, Object>();
+		
+		result.putAll(options);
+		
+		return result;
+	}
+
+    // implements the interface method
+	public final P getParent() {
+		return parent;
+	}
+	
+	public @Nullable <T> T getValue(@NonNull Option<T> option) {
 		@SuppressWarnings("unchecked")
 		T result = (T) getOptions().get(option);
 		
 		if (result == null) {
-		    result = (getParent() != null)? getParent().getValue(option)
-		        : option.getDefaultValue();
-		}
-		
+		    P parent2 = parent;
+			result = (parent2 != null) ? parent2.getValue(option) : option.getDefaultValue();
+		}		
 		return result;
+	}
+	
+	public boolean isEnabled(@NonNull Option<Boolean> option) {
+		Boolean result = getValue(option);
+		return (result == null)? false : result.booleanValue();
+	}
+    
+    /**
+     * Queries whether I have a non-OK setting for the specified problem option.
+     * In such cases, I will need to be concerned with reporting the problem.
+     * 
+     * @param option the problem option
+     * @return whether I have a setting for it that is not OK
+     * 
+     * @see ProblemHandler.Severity#OK
+     */
+    public boolean notOK(@NonNull Option<ProblemHandler.Severity> option) {
+        ProblemHandler.Severity sev = getValue(option);
+        return (sev != null) && !sev.isOK();
+    }
+	
+	public <T> void putOptions(@NonNull Map<? extends Option<T>, ? extends T> newOptions) {
+		Map<Option<?>, Object> myOptions = options;	
+		myOptions.clear();
+		myOptions.putAll(newOptions);
+	}
+	
+	public @Nullable <T> T removeOption(@NonNull Option<T> option) {
+		T result = getValue(option);	
+		options.remove(option);	
+		return result;
+	}
+	
+	public @NonNull <T> Map<Option<T>, T> removeOptions(@NonNull Collection<Option<T>> unwantedOptions) {
+		Map<Option<T>, T> result = new HashMap<Option<T>, T>();	
+		Map<Option<?>, Object> myOptions = options;		
+		for (Option<T> next : unwantedOptions) {
+			if (next != null) {
+				result.put(next, getValue(next));
+				myOptions.remove(next);
+			}
+		}		
+		return result;
+	}
+	
+	public <T> void setOption(@NonNull Option<T> option, @Nullable T value) {
+		options.put(option, value);
+	}
+
+    /**
+     * Assigns me a parent environment after construction.  It is not advisable
+     * to set the parent to <code>null</code> if I previously had one.
+     * 
+     * @param parent my new parent
+     */
+	protected void setParent(P parent) {
+		this.parent = parent;
 	}
 }

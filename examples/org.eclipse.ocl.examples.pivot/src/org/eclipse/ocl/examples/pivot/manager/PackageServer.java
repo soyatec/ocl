@@ -144,7 +144,7 @@ public class PackageServer extends PackageServerParent
 	
 	public @NonNull PivotReflectivePackage getExecutorPackage() {
 		if (executorPackage == null) {
-			executorPackage = new PivotReflectivePackage(getMetaModelManager(), primaryPackage);
+			executorPackage = new PivotReflectivePackage(getMetaModelManager(), getPrimaryPackage());
 		}
 		@SuppressWarnings("null")
 		@NonNull PivotReflectivePackage executorPackage2 = executorPackage;

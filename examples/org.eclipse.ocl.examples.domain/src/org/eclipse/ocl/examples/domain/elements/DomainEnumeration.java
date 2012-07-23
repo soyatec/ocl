@@ -16,8 +16,11 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 public interface DomainEnumeration extends DomainType
 {
-	DomainEnumerationLiteral getEnumerationLiteral(String name);
-	Iterable<? extends DomainEnumerationLiteral> getEnumerationLiterals();
+	@Nullable DomainEnumerationLiteral getEnumerationLiteral(@NonNull String name);
+	@NonNull Iterable<? extends DomainEnumerationLiteral> getEnumerationLiterals();
 }

@@ -16,17 +16,18 @@
  */
 package org.eclipse.ocl.examples.pivot.executor;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.pivot.VoidType;
 
 public class PivotReflectiveVoidType extends PivotReflectiveType
 {
-	public PivotReflectiveVoidType(PivotReflectivePackage executorPackage, VoidType type) {
+	public PivotReflectiveVoidType(@NonNull PivotReflectivePackage executorPackage, @NonNull VoidType type) {
 		super(executorPackage, type);
 	}
 
 	@Override
-	public DomainInheritance getCommonInheritance(DomainInheritance thatInheritance) {
+	public @NonNull DomainInheritance getCommonInheritance(@NonNull DomainInheritance thatInheritance) {
 		return thatInheritance.isUndefined() ? this : thatInheritance;
 	}
 

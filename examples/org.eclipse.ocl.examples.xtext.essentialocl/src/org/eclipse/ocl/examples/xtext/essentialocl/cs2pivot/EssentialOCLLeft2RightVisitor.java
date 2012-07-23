@@ -142,7 +142,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 		this.metaModelManager = context.getMetaModelManager();
 	}
 
-	protected OCLExpression checkImplementation(NamedExpCS csNavigatingExp,
+	protected OCLExpression zzcheckImplementation(NamedExpCS csNavigatingExp,
 			Feature feature, CallExp callExp, OCLExpression expression) {
 		LibraryFeature implementation;
 		try {
@@ -214,14 +214,14 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 			if (iteratorExp instanceof LoopExp) {
 				for (Variable iterator : ((LoopExp)iteratorExp).getIterator()) {
 					Type type = iterator.getType();
-					if (metaModelManager.conformsTo(type, namedElementType)) {
+					if (metaModelManager.conformsTo(type, namedElementType, null)) {
 						return iterator;
 					}
 				}
 				if (iteratorExp instanceof IterateExp) {
 					Variable iterator = ((IterateExp)iteratorExp).getResult();
 					Type type = iterator.getType();
-					if (metaModelManager.conformsTo(type, namedElementType)) {
+					if (metaModelManager.conformsTo(type, namedElementType, null)) {
 						return iterator;
 					}
 				}
@@ -236,14 +236,14 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 				if (iteratorExp instanceof LoopExp) {
 					for (Variable iterator : ((LoopExp)iteratorExp).getIterator()) {
 						Type type = iterator.getType();
-						if (metaModelManager.conformsTo(type, namedElementType)) {
+						if (metaModelManager.conformsTo(type, namedElementType, null)) {
 							return iterator;
 						}
 					}
 					if (iteratorExp instanceof IterateExp) {
 						Variable iterator = ((IterateExp)iteratorExp).getResult();
 						Type type = iterator.getType();
-						if (metaModelManager.conformsTo(type, namedElementType)) {
+						if (metaModelManager.conformsTo(type, namedElementType, null)) {
 							return iterator;
 						}
 					}
@@ -580,7 +580,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 			if (outerExpression != innerExpression) {
 				resolveOperationReturnType(outerExpression);
 			}
-			return checkImplementation(csNavigatingExp, operation, innerExpression, outerExpression);
+			return outerExpression;
 		}
 		else {
 			return resolveUnknownOperation(csNamedExp);

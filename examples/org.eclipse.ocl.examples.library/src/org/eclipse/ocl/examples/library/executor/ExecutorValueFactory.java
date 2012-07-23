@@ -16,12 +16,13 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.values.impl.ValueFactoryImpl;
 
 public class ExecutorValueFactory extends ValueFactoryImpl
 {
-	public ExecutorValueFactory(DomainStandardLibrary standardLibrary) {
+	public ExecutorValueFactory(@NonNull DomainStandardLibrary standardLibrary) {
 		super(standardLibrary);
 	}
 

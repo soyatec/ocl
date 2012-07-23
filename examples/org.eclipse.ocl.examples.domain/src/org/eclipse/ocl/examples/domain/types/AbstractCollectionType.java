@@ -16,20 +16,21 @@
  */
 package org.eclipse.ocl.examples.domain.types;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 
 public class AbstractCollectionType extends AbstractSpecializedType implements DomainCollectionType
 {
-	protected final DomainType elementType;
+	protected final @NonNull DomainType elementType;
 	
-	public AbstractCollectionType(DomainStandardLibrary standardLibrary, String name, DomainType containerType, DomainType elementType) {
+	public AbstractCollectionType(@NonNull DomainStandardLibrary standardLibrary, @NonNull String name, @NonNull DomainType containerType, @NonNull DomainType elementType) {
 		super(standardLibrary, name, containerType);
 		this.elementType = elementType;
 	}
 
-	public boolean conformsTo(DomainStandardLibrary standardLibrary, DomainType type) {
+	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		if (this == type) {
 			return true;
 		}
@@ -40,14 +41,14 @@ public class AbstractCollectionType extends AbstractSpecializedType implements D
 	}
 
 	@Override
-	public DomainType getCommonType(DomainStandardLibrary standardLibrary, DomainType type) {
+	public @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		if (!(type instanceof AbstractCollectionType)) {
 			return standardLibrary.getOclAnyType();
 		}
 		AbstractCollectionType thatClass = (AbstractCollectionType) type;
 		// FIXME kind
 		DomainType commonContainerClass = containerType;		// FIXME WIP
-		DomainType commonElementClass = elementType.getCommonType(standardLibrary, thatClass.elementType);
+		DomainType commonElementClass = elementType.getCommonType(standardLibrary, thatClass.getElementType());
 		if ((commonContainerClass == containerType) && (commonElementClass == elementType)) {
 			return this;
 		}
@@ -74,7 +75,7 @@ public class AbstractCollectionType extends AbstractSpecializedType implements D
 		}
 	}
 
-	public DomainType getElementType() {
+	public @NonNull DomainType getElementType() {
 		return elementType;
 	}
 
@@ -97,7 +98,7 @@ public class AbstractCollectionType extends AbstractSpecializedType implements D
 		}
 	} */
 
-	public boolean isEqualTo(DomainStandardLibrary standardLibrary, DomainType type) {
+	public boolean isEqualTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		if (this == type) {
 			return true;
 		}

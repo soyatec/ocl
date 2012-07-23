@@ -16,10 +16,9 @@
  */
 package org.eclipse.ocl.examples.domain.values.impl;
 
-import java.util.Iterator;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
@@ -60,12 +59,12 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 
 	protected final InvalidEvaluationException exception;
 
-	public InvalidValueImpl(ValueFactory valueFactory) {
+	public InvalidValueImpl(@NonNull ValueFactory valueFactory) {
 		super(valueFactory);
 		this.exception = null;
 	}
 
-	public InvalidValueImpl(ValueFactory valueFactory, InvalidEvaluationException exception) {
+	public InvalidValueImpl(@NonNull ValueFactory valueFactory, @NonNull InvalidEvaluationException exception) {
 		super(valueFactory);
 		this.exception = exception;
 	}
@@ -80,7 +79,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
-	public BagValue asBagValue() throws InvalidValueException {
+	public @NonNull BagValue asBagValue() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
 		}
@@ -96,7 +95,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
-	public BooleanValue asBooleanValue() throws InvalidValueException {
+	public @NonNull BooleanValue asBooleanValue() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
 		}
@@ -104,7 +103,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
-	public CollectionValue asCollectionValue() throws InvalidValueException {
+	public @NonNull CollectionValue asCollectionValue() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
 		}
@@ -112,7 +111,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
-	public Double asDouble() throws InvalidValueException {
+	public @NonNull Double asDouble() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
 		}
@@ -128,7 +127,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
-	public ElementValue asElementValue() throws InvalidValueException {
+	public @NonNull ElementValue asElementValue() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
 		}
@@ -136,7 +135,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
-	public Integer asInteger() throws InvalidValueException {
+	public @NonNull Integer asInteger() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
 		}
@@ -144,7 +143,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
-	public IntegerValue asIntegerValue() throws InvalidValueException {
+	public @NonNull IntegerValue asIntegerValue() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
 		}
@@ -152,7 +151,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
-	public EObject asNavigableObject() throws InvalidValueException {
+	public @NonNull EObject asNavigableObject() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
 		}
@@ -160,7 +159,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
-	public ObjectValue asObjectValue() throws InvalidValueException {
+	public @NonNull ObjectValue asObjectValue() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
 		}
@@ -168,7 +167,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
-	public OrderedSetValue asOrderedSetValue() throws InvalidValueException {
+	public @NonNull OrderedSetValue asOrderedSetValue() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
 		}
@@ -176,7 +175,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
-	public RealValue asRealValue() throws InvalidValueException {
+	public @NonNull RealValue asRealValue() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
 		}
@@ -184,7 +183,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
-	public SequenceValue asSequenceValue() throws InvalidValueException {
+	public @NonNull SequenceValue asSequenceValue() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
 		}
@@ -192,7 +191,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
-	public SetValue asSetValue() throws InvalidValueException {
+	public @NonNull SetValue asSetValue() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
 		}
@@ -200,7 +199,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
-	public String asString() throws InvalidValueException {
+	public @NonNull String asString() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
 		}
@@ -208,7 +207,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
-	public StringValue asStringValue() throws InvalidValueException {
+	public @NonNull StringValue asStringValue() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
 		}
@@ -216,7 +215,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
-	public TypeValue asTypeValue() throws InvalidValueException {
+	public @NonNull TypeValue asTypeValue() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
 		}
@@ -224,20 +223,19 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
-	public UniqueCollectionValue asUniqueCollectionValue() throws InvalidValueException {
+	public @NonNull UniqueCollectionValue asUniqueCollectionValue() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
 		}
 		return super.asUniqueCollectionValue();
 	}
 
-	public Value asValidValue() throws InvalidValueException {
+	public @NonNull Value asValidValue() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
 		}
 		else {
-			valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "valid", getType());
-			return null;
+			return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "valid", getType());
 		}
 	}
 
@@ -250,7 +248,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 		return exception;
 	}
 
-	public DomainType getType() {
+	public @NonNull DomainType getType() {
 		return valueFactory.getStandardLibrary().getOclInvalidType();
 	}
 
@@ -262,30 +260,6 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	@Override
 	public boolean isInvalid() {
 		return true;
-	}
-
-	@Override
-	public IntegerValue toIntegerValue() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.toIntegerValue();
-	}
-
-	@Override
-	public Iterator<Value> toIteratorValue() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.toIteratorValue();
-	}
-
-	@Override
-	public RealValue toRealValue() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.toRealValue();
 	}
 
 	@Override

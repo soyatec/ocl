@@ -26,8 +26,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
@@ -473,12 +475,12 @@ public class EnumerationImpl
 	}
 
 	@Override
-	public boolean conformsTo(DomainStandardLibrary standardLibrary, DomainType type) {
+	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		return super.conformsTo(standardLibrary, type);
 //		throw new UnsupportedOperationException();		// WIP
 	}
 
-	public EnumerationLiteral getEnumerationLiteral(String name) {
+	public @Nullable EnumerationLiteral getEnumerationLiteral(@NonNull String name) {
 		for (EnumerationLiteral enumerationLiteral : getEnumerationLiterals()) {
 			if (name.equals(enumerationLiteral.getName())) {
 				return enumerationLiteral;
@@ -487,7 +489,7 @@ public class EnumerationImpl
 		return null;
 	}
 
-	public List<EnumerationLiteral> getEnumerationLiterals() {
-		return getOwnedLiteral();
+	public @NonNull List<EnumerationLiteral> getEnumerationLiterals() {
+		return DomainUtil.nonNullEMF(getOwnedLiteral());
 	}
 } //EnumerationImpl

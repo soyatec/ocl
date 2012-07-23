@@ -23,8 +23,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.BasicInvocationDelegate;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -53,24 +55,23 @@ public class OCLInvocationDelegate extends BasicInvocationDelegate
 	 * @param operation
 	 *            the operation that I handle
 	 */
-	public OCLInvocationDelegate(OCLDelegateDomain delegateDomain, EOperation operation) {
+	public OCLInvocationDelegate(@NonNull OCLDelegateDomain delegateDomain, @NonNull EOperation operation) {
 		super(operation);
 		this.delegateDomain = delegateDomain;
 	}
 
 	@Override
-	public Object dynamicInvoke(InternalEObject target, EList<?> arguments)
-			throws InvocationTargetException {
+	public Object dynamicInvoke(InternalEObject target, EList<?> arguments) throws InvocationTargetException {
 		try {
 			OCL ocl = delegateDomain.getOCL();
 			MetaModelManager metaModelManager = ocl.getMetaModelManager();
 			ValueFactory valueFactory = metaModelManager.getValueFactory();
 			if (specification == null) {
-				Operation operation = getOperation();
-				specification = InvocationBehavior.INSTANCE.getExpressionInOCL(metaModelManager, operation);
+				Operation theOperation = getOperation();
+				specification = InvocationBehavior.INSTANCE.getExpressionInOCL(metaModelManager, theOperation);
 				InvocationBehavior.INSTANCE.validate(operation);
 			}
-			Query query = ocl.createQuery(specification);
+			Query query = ocl.createQuery(DomainUtil.nonNullJDT(specification));
 			EvaluationEnvironment env = query.getEvaluationEnvironment();
 			List<Parameter> parms = operation.getOwnedParameter();
 			if (!parms.isEmpty()) {
@@ -93,11 +94,14 @@ public class OCLInvocationDelegate extends BasicInvocationDelegate
 		}
 	}
 
-	public Operation getOperation() {
+	public @NonNull Operation getOperation() {
 		if (operation == null) {
-			operation = delegateDomain.getPivot(Operation.class, eOperation);
+			operation = delegateDomain.getPivot(Operation.class, DomainUtil.nonNullJDT(eOperation));
+			if (operation == null) {
+				throw new OCLDelegateException("No pivot property for " + eOperation) ;
+			}
 		}
-		return operation;
+		return DomainUtil.nonNullJDT(operation);
 	}
 	
 	@Override

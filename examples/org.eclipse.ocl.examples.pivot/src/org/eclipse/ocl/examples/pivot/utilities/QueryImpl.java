@@ -24,6 +24,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.EvaluationHaltedException;
@@ -74,7 +75,7 @@ public class QueryImpl implements Query, ProblemAware
 	 * @param modelManager may be <code>null</code>, in which case I will use my
 	 *     evaluation environment to create a dynamic extent map
 	 */
-	public QueryImpl(OCL ocl, ExpressionInOCL specification) {		
+	public QueryImpl(@NonNull OCL ocl, @NonNull ExpressionInOCL specification) {		
 		this.ocl = ocl;
 		this.environment = ocl.getEnvironment();
 		this.specification = specification;
@@ -140,9 +141,11 @@ public class QueryImpl implements Query, ProblemAware
 		
 		// lazily create the evaluation environment, if not already done by
 		//    the client.  There is no "self" context variable
+		@SuppressWarnings("null")
+		@NonNull Environment nonNullEnvironment = environment;
 		EvaluationVisitor ev =
-			environment.getFactory().createEvaluationVisitor(
-					environment, getEvaluationEnvironment(), getModelManager());
+			nonNullEnvironment.getFactory().createEvaluationVisitor(
+					nonNullEnvironment, getEvaluationEnvironment(), getModelManager());
 		
 		Value result;
 		
@@ -181,9 +184,11 @@ public class QueryImpl implements Query, ProblemAware
 //			myEnv.add(resultVariable, null);
 //		}
 		
+		@SuppressWarnings("null")
+		@NonNull Environment nonNullEnvironment = environment;
 		EvaluationVisitor ev =
-			environment.getFactory().createEvaluationVisitor(
-					environment, myEnv, getModelManager());
+				nonNullEnvironment.getFactory().createEvaluationVisitor(
+					nonNullEnvironment, myEnv, getModelManager());
 		
 		Value result;
 		
@@ -226,7 +231,8 @@ public class QueryImpl implements Query, ProblemAware
 		return result;
 	}
 
-	public EvaluationEnvironment getEvaluationEnvironment() {
+	@SuppressWarnings("null")
+	public @NonNull EvaluationEnvironment getEvaluationEnvironment() {
 		if (evalEnv == null) {
 			evalEnv = environment.getFactory().createEvaluationEnvironment();
 		}
@@ -238,7 +244,8 @@ public class QueryImpl implements Query, ProblemAware
 		return expression;
 	}
 
-	public DomainModelManager getModelManager() {
+	@SuppressWarnings("null")
+	public @NonNull DomainModelManager getModelManager() {
 		if (modelManager == null) {
 			EvaluationEnvironment myEnv = getEvaluationEnvironment();
 			
@@ -250,7 +257,8 @@ public class QueryImpl implements Query, ProblemAware
 		return modelManager;
 	}
 
-	public OCL getOCL() {
+	@SuppressWarnings("null")
+	public @NonNull OCL getOCL() {
 		return ocl;
 	}
 

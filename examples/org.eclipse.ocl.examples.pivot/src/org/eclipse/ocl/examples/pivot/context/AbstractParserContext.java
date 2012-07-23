@@ -25,6 +25,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
@@ -39,41 +42,53 @@ import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.osgi.util.NLS;
 
 public abstract class AbstractParserContext /*extends AdapterImpl*/ implements ParserContext
 {
-	protected final MetaModelManager metaModelManager;
-	protected final URI uri;
+	protected final @NonNull MetaModelManager metaModelManager;
+	protected final @NonNull URI uri;
 	
-	protected AbstractParserContext(MetaModelManager metaModelManager, URI uri) {
+	protected AbstractParserContext(@NonNull MetaModelManager metaModelManager, @Nullable URI uri) {
 		this.metaModelManager = metaModelManager;
-		this.uri = uri != null ? uri : URI.createURI(EcoreUtil.generateUUID() + ".essentialocl");
+		if (uri != null) {
+			this.uri = uri;
+		}
+		else {
+			this.uri = DomainUtil.nonNullEMF(URI.createURI(EcoreUtil.generateUUID() + ".essentialocl"));
+		}
 	}
 
-	public BaseResource createBaseResource(String expression) throws IOException {
+	public @NonNull BaseResource createBaseResource(@NonNull String expression) throws IOException, ParserException {
 		InputStream inputStream = new URIConverter.ReadableInputStream(expression, "UTF-8");
-		ResourceSetImpl resourceSet = new ResourceSetImpl();
-		Resource resource = resourceSet.createResource(uri);
-		BaseResource baseResource = (BaseResource)resource;
-		MetaModelManagerResourceAdapter.getAdapter(resource, metaModelManager);
-		baseResource.setParserContext(this);
-		baseResource.load(inputStream, null);
-		return baseResource;
+		try {
+			ResourceSetImpl resourceSet = new ResourceSetImpl();
+			Resource resource = resourceSet.createResource(uri);
+			if (resource == null) {
+				throw new ParserException("Failed to load '" + uri + "'");
+			}
+			BaseResource baseResource = (BaseResource)resource;
+			MetaModelManagerResourceAdapter.getAdapter(resource, metaModelManager);
+			baseResource.setParserContext(this);
+			baseResource.load(inputStream, null);
+			return baseResource;
+		}
+		finally {
+			inputStream.close();
+		}
 	}
 
-	public Type getClassContext() {
+	public @Nullable Type getClassContext() {
 		return null;
 	}
 
-	public ExpressionInOCL getExpression(BaseResource resource) throws ParserException {
+	public @NonNull ExpressionInOCL getExpression(@NonNull BaseResource resource) throws ParserException {
 		List<EObject> contents = resource.getContents();
 		int size = contents.size();
-		if (size == 0) {
-			return null;
+		if (size < 1) {
+			throw new ParserException("Missing parse returns");
 		}
 		if (size > 1) {
-			throw new ParserException("Extra returns ignored");
+			throw new ParserException("Extra parse returns");
 		}
 		EObject csObject = contents.get(0);
 		if (csObject instanceof Pivotable) {
@@ -85,25 +100,21 @@ public abstract class AbstractParserContext /*extends AdapterImpl*/ implements P
 		throw new ParserException("Non-expression ignored");
 	}
 
-	public MetaModelManager getMetaModelManager() {
+	public @NonNull MetaModelManager getMetaModelManager() {
 		return metaModelManager;
 	}
 
-	public URI getURI() {
-		return uri;
-	}
-
-	public void initialize(Base2PivotConversion conversion, ExpressionInOCL expression) {
+	public void initialize(@NonNull Base2PivotConversion conversion, @NonNull ExpressionInOCL expression) {
 		List<String> language = expression.getLanguage();
 		language.clear();
 		language.add(PivotConstants.OCL_LANGUAGE);
 	}
 
-	public ExpressionInOCL parse(String expression) throws ParserException {
+	public @NonNull ExpressionInOCL parse(@NonNull String expression) throws ParserException {
 		BaseResource resource = null;
 		try {
 			resource = createBaseResource(expression);
-			PivotUtil.checkResourceErrors(NLS.bind(OCLMessages.ErrorsInResource, expression), resource);
+			PivotUtil.checkResourceErrors(DomainUtil.bind(OCLMessages.ErrorsInResource, expression), resource);
 			return getExpression(resource);
 		} catch (IOException e) {
 //				throw new ParserException("Failed to load expression", e);

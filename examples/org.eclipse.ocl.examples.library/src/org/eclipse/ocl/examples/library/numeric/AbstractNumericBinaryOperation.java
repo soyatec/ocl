@@ -16,10 +16,12 @@
  */
 package org.eclipse.ocl.examples.library.numeric;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -30,7 +32,7 @@ import org.eclipse.ocl.examples.domain.values.Value;
  */
 public abstract class AbstractNumericBinaryOperation extends AbstractBinaryOperation
 {
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value left, Value right) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
 		if (left.isUnlimited() || right.isUnlimited()) {
 			return evaluateUnlimited(evaluator, left, right);
 		}
@@ -39,8 +41,8 @@ public abstract class AbstractNumericBinaryOperation extends AbstractBinaryOpera
 		if ((leftInteger != null) && (rightInteger != null)) {
 			return evaluateInteger(evaluator, leftInteger, rightInteger);
 		}
-		RealValue leftReal = left.toRealValue();
-		RealValue rightReal = right.toRealValue();
+		RealValue leftReal = left.asRealValue();
+		RealValue rightReal = right.asRealValue();
 		return evaluateReal(evaluator, leftReal, rightReal);
 	}
 	
@@ -51,7 +53,7 @@ public abstract class AbstractNumericBinaryOperation extends AbstractBinaryOpera
 	 * @return result
 	 * @throws InvalidValueException 
 	 */
-	protected abstract Value evaluateInteger(DomainEvaluator evaluator, IntegerValue left, IntegerValue right) throws InvalidValueException;
+	protected abstract @NonNull Value evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) throws InvalidValueException;
 
 	/**
 	 * Evaluate an operation for which both left and right are Real.
@@ -60,8 +62,8 @@ public abstract class AbstractNumericBinaryOperation extends AbstractBinaryOpera
 	 * @return result
 	 * @throws InvalidValueException 
 	 */
-	protected Value evaluateReal(DomainEvaluator evaluator, RealValue left, RealValue right) throws InvalidValueException {
-		return null;
+	protected @NonNull Value evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) throws InvalidValueException {
+		return evaluator.getValueFactory().throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Real"); //$NON-NLS-1$
 	}
 	
 	/**
@@ -71,16 +73,7 @@ public abstract class AbstractNumericBinaryOperation extends AbstractBinaryOpera
 	 * @param right argument
 	 * @return result
 	 */
-	protected Value evaluateUnlimited(DomainEvaluator evaluator, Value left, Value right) throws InvalidValueException {
-		return null;
-	}
-	
-	/**
-	 * Return the result of evaluating the operation on left and right which are both
-	 * of the same derived Number type. 
-	 * A null return or an exception may be used for invalid.
-	 */
-	protected <T extends Number & Comparable<T>> Object evaluate(DomainEvaluator evaluator, T left, T right) throws InvalidValueException {
-		return null;
+	protected @NonNull Value evaluateUnlimited(@NonNull DomainEvaluator evaluator, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
+		return evaluator.getValueFactory().throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Unlimited"); //$NON-NLS-1$
 	}
 }

@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.domain.library;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
@@ -46,6 +48,6 @@ public interface LibraryOperation extends LibraryFeature
 	 */
 //	Value evaluate(Evaluator evaluator, Value sourceVal, OperationCallExp operationCall)
 //		throws InvalidEvaluationException, InvalidValueException;
-	Value evaluate(DomainEvaluator evaluator, DomainCallExp callExp, Value sourceValue, Value... argumentValues) throws InvalidEvaluationException, InvalidValueException;
+	@Nullable Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Value sourceValue, Value... argumentValues) throws InvalidEvaluationException, InvalidValueException;
 
 }

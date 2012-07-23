@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 
@@ -23,7 +24,7 @@ public class DomainReflectiveFragment extends ReflectiveFragment
 {
 //	protected final EClassifier eClassifier;
 
-	public DomainReflectiveFragment(DomainReflectiveType derivedInheritance, DomainInheritance baseInheritance) {
+	public DomainReflectiveFragment(@NonNull DomainReflectiveType derivedInheritance, @NonNull DomainInheritance baseInheritance) {
 		super(derivedInheritance, baseInheritance);
 //		this.eClassifier = derivedInheritance.getEClassifier();		
 	}
@@ -33,7 +34,7 @@ public class DomainReflectiveFragment extends ReflectiveFragment
 //	}
 
 	@Override
-	protected DomainOperation getOperationOverload(DomainOperation baseOperation) {
+	protected @NonNull DomainOperation getOperationOverload(@NonNull DomainOperation baseOperation) {
 		throw new UnsupportedOperationException();		// FIXME
 	}
 }

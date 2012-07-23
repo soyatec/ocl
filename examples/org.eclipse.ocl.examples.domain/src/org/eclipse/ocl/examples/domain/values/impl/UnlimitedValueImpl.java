@@ -33,11 +33,14 @@
 package org.eclipse.ocl.examples.domain.values.impl;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -59,26 +62,33 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 		return ValuesPackage.Literals.UNLIMITED_VALUE;
 	}
 
-	public UnlimitedValueImpl(ValueFactory valueFactory) {
+	public UnlimitedValueImpl(@NonNull ValueFactory valueFactory) {
 		super(valueFactory);
 	}
 
-	public UnlimitedValueImpl abs() {
+	public @NonNull UnlimitedValueImpl abs() {
 		return this;
 	}
 
-	public Object asObject() {
+	public @NonNull Object asObject() {
 		return this;
 	}
 
-	public Value asValidValue() {
+	@Override
+	public @NonNull Value asUnlimitedNaturalValue() {
 		return this;
 	}
 
-	public BigDecimal bigDecimalValue() {
-		return null;
-//		throw new UnsupportedOperationException(getClass().getName()+ ".bigDecimalValue");
-//		return BigDecimal.valueOf(Double.POSITIVE_INFINITY);
+	public @NonNull Value asValidValue() {
+		return this;
+	}
+
+	public @NonNull BigDecimal bigDecimalValue() {
+		return DomainUtil.nonNullJava(BigDecimal.valueOf(Double.POSITIVE_INFINITY));
+	}
+
+	public @NonNull BigInteger bigIntegerValue() throws InvalidValueException {
+		return DomainUtil.nonNullJava(BigDecimal.valueOf(Double.POSITIVE_INFINITY).toBigInteger());
 	}
 
 	public int compareTo(NumericValue o) {
@@ -89,7 +99,7 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 		throw new UnsupportedOperationException(getClass().getName()+ ".doubleValue");
 	}
 
-	public DomainType getType() {
+	public @NonNull DomainType getType() {
 		return valueFactory.getStandardLibrary().getUnlimitedNaturalType();
 	}
 
@@ -103,9 +113,8 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 		return true;
 	}
 
-	public UnlimitedValue negate() throws InvalidValueException {
-		valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "negate", "UnlimitedValue");
-		return null;
+	public @NonNull UnlimitedValue negate() throws InvalidValueException {
+		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "negate", "UnlimitedValue");
 	}
 
 	public int signum() {

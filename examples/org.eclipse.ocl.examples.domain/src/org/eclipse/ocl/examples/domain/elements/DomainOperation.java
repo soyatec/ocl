@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.utilities.IndexableIterable;
 
@@ -29,17 +31,17 @@ public interface DomainOperation extends DomainNamedElement
 	/**
 	 * Return the implementation of this operation.
 	 */
-	LibraryFeature getImplementation();
+	@Nullable LibraryFeature getImplementation();
 
 	/**
 	 * Return the Inheritance dispatch table for the owning type.
 	 */
-	DomainInheritance getInheritance(DomainStandardLibrary standardLibrary);
+	@NonNull DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary);
 	
 	/**
 	 * Return the ordered list of parameters of this operation.
 	 */
-	IndexableIterable<? extends DomainType> getParameterType();
+	@NonNull IndexableIterable<? extends DomainType> getParameterType();
 
 	/**
 	 * Return true if this is a static operation.

@@ -30,6 +30,9 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
@@ -77,38 +80,38 @@ public class EnvironmentView
 	private List<ScopeFilter> matchers = null;	// Prevailing filters for matching
 	private Set<ScopeFilter> resolvers = null;	// Successful filters for resolving
 
-	public EnvironmentView(MetaModelManager metaModelManager, EStructuralFeature reference, String name) {
+	public EnvironmentView(@NonNull MetaModelManager metaModelManager, @Nullable EStructuralFeature reference, @Nullable String name) {
 		this.metaModelManager = metaModelManager;
 		this.reference = reference;
 		this.requiredType = reference != null ? reference.getEType() : null;
 		this.name = name;
 	}
 
-	public boolean accepts(EClass eClass) {
+	public boolean accepts(@NonNull EClass eClass) {
 		return PivotUtil.conformsTo(requiredType, eClass);
 	}
 
-	public void addAllContents(Type forType, ScopeView scopeView, Type pivotClass, Boolean selectStatic, Set<Type> alreadyVisited) {
+	public void addAllContents(@NonNull Type forType, @NonNull ScopeView scopeView, @NonNull Type pivotClass, @Nullable Boolean selectStatic, @NonNull Set<Type> alreadyVisited) {
 		addNamedElements(forType, metaModelManager.getLocalOperations(pivotClass, selectStatic));
 		addNamedElements(forType, metaModelManager.getLocalProperties(pivotClass, selectStatic));
 		alreadyVisited.add(pivotClass);
 		for (Type superClass : metaModelManager.getSuperClasses(pivotClass)) {
 			if (!alreadyVisited.contains(superClass)) {
-				addAllContents(forType, scopeView, superClass, selectStatic, alreadyVisited);
+				addAllContents(forType, scopeView, DomainUtil.nonNullEntry(superClass), selectStatic, alreadyVisited);
 			}
 		}
 	}
 
-	public void addAllProperties(Type type, Boolean selectStatic) {
+	public void addAllProperties(@NonNull Type type, @Nullable Boolean selectStatic) {
 		addAllProperties(type, type, selectStatic, new HashSet<Type>());
 	}
 
-	protected void addAllProperties(Type forType, Type pivotClass, Boolean selectStatic, Set<Type> alreadyVisited) {
+	protected void addAllProperties(@NonNull Type forType, @NonNull Type pivotClass, @Nullable Boolean selectStatic, @NonNull Set<Type> alreadyVisited) {
 		addNamedElements(metaModelManager.getLocalProperties(pivotClass, selectStatic));
 		alreadyVisited.add(pivotClass);
 		for (Type superClass : metaModelManager.getSuperClasses(pivotClass)) {
 			if (!alreadyVisited.contains(superClass)) {
-				addAllProperties(forType, superClass, selectStatic, alreadyVisited);
+				addAllProperties(forType, DomainUtil.nonNullEntry(superClass), selectStatic, alreadyVisited);
 			}
 		}
 	}
@@ -122,16 +125,13 @@ public class EnvironmentView
 	 *            the element
 	 * @return the number of elements added; 1 if added, 0 if not
 	 */
-	public int addElement(String elementName, EObject element) {
+	public int addElement(@NonNull String elementName, @Nullable EObject element) {
 		return addElement(elementName, null, element);
 	}
-	public int addElement(String elementName, Type forType, EObject element) {
+	public int addElement(@NonNull String elementName, @Nullable Type forType, @Nullable EObject element) {
 		if (element == null) {
 			return 0;
-		}
-		if (elementName == null) {
-			return 0;
-		}
+		}		
 		if (element instanceof Type) {
 			PivotUtil.debugWellContainedness((Type)element);
 		}		
@@ -182,24 +182,27 @@ public class EnvironmentView
 		return 1;
 	}
 
-	public int addElements(Iterable<? extends EObject> elements) {
+	public int addElements(@Nullable Iterable<? extends EObject> elements) {
 		return addElements(null, elements);
 	}
 
-	public int addElements(Type forType, Iterable<? extends EObject> elements) {
+	public int addElements(@Nullable Type forType, @Nullable Iterable<? extends EObject> elements) {
 		int additions = 0;
 		if (elements != null) {
 			for (EObject element : elements) {
 				if (element instanceof Nameable) {
 					Nameable namedElement = (Nameable) element;
-					additions += addElement(namedElement.getName(), forType, namedElement);
+					String elementName = namedElement.getName();
+					if (elementName != null) {
+						additions += addElement(elementName, forType, namedElement);
+					}
 				}
 			}
 		}
 		return additions;
 	}
 
-	public void addElementsOfScope(Element element, ScopeView scopeView) {
+	public void addElementsOfScope(@Nullable Element element, @NonNull ScopeView scopeView) {
 		if (element != null) {
 			element = PivotUtil.getLowerBound(element);
 			Attribution attribution = PivotUtil.getAttribution(element);
@@ -209,34 +212,32 @@ public class EnvironmentView
 		}
 	}
 
-	public void addFilter(ScopeFilter filter) {
+	public void addFilter(@NonNull ScopeFilter filter) {
 		if (matchers == null) {
 			matchers = new ArrayList<ScopeFilter>();
 		}
 		matchers.add(filter);
 	}
 
-	public void addImportedElement(URI baseURI) {
-		if (baseURI != null) {
-	    	if (PivotUtil.isPivotURI(baseURI)) {
-	    		baseURI = PivotUtil.getNonPivotURI(baseURI);
-	    	}
-	    	if (baseURI != null) {
-	    		String name = getName();
-				if (name != null) {
-					URI uri = URI.createURI(name).resolve(baseURI);
-					try {
-						Element importedElement = metaModelManager.loadResource(uri, null, null);				
-						addElement(name, importedElement);
-					} catch (Exception e) {
-						// if it doesn't load just treat it as unresolved
-					}
+	public void addImportedElement(@NonNull URI baseURI) {
+    	if (PivotUtil.isPivotURI(baseURI)) {
+    		baseURI = PivotUtil.getNonPivotURI(baseURI);
+    	}
+		String name = getName();
+		if (name != null) {
+			URI uri = URI.createURI(name).resolve(baseURI);
+			try {
+				Element importedElement = metaModelManager.loadResource(uri, null, null);				
+				if (importedElement != null) {
+					addElement(name, importedElement);
 				}
-	    	}
+			} catch (Exception e) {
+				// if it doesn't load just treat it as unresolved
+			}
 		}
 	}
 
-	public void addInheritedContents(org.eclipse.ocl.examples.pivot.Class target, ScopeView scopeView) {
+	public void addInheritedContents(@NonNull org.eclipse.ocl.examples.pivot.Class target, @NonNull ScopeView scopeView) {
 		List<Type> superClasses = target.getSuperClass();
 		if (superClasses.size() > 0) {
 			for (Type superClass : superClasses) {
@@ -249,37 +250,40 @@ public class EnvironmentView
 		}
 	}
 
-	public void addLibContents(Type libType, ScopeView scopeView) {
-		if (libType == null) {
-			return;
-		}
+	public void addLibContents(@NonNull Type libType, @NonNull ScopeView scopeView) {
 		addElementsOfScope(libType, scopeView);
 		for (Type superClass : libType.getSuperClass()) {
-			addLibContents(superClass, scopeView);
+			if (superClass != null) {
+				addLibContents(superClass, scopeView);
+			}
 		}
 	}
 
-	public int addNamedElement(Nameable namedElement) {
+	public int addNamedElement(@Nullable Nameable namedElement) {
 		return addNamedElement(null, namedElement);
 	}
 
-	public int addNamedElement(Type forType, Nameable namedElement) {
-		if (namedElement != null) {
-			return addElement(namedElement.getName(), forType, namedElement);
+	public int addNamedElement(@Nullable Type forType, @Nullable Nameable namedElement) {
+		if (namedElement == null) {
+			return 0;
 		}
-		return 0;
+		String elementName = namedElement.getName();
+		if (elementName != null) {
+			return addElement(elementName, forType, namedElement);
+		}
+		else {
+			return 0;
+		}
 	}
 
-	public int addNamedElements(Iterable<? extends Nameable> namedElements) {
+	public int addNamedElements(@NonNull Iterable<? extends Nameable> namedElements) {
 		return addNamedElements(null, namedElements);
 	}
 
-	public int addNamedElements(Type forType, Iterable<? extends Nameable> namedElements) {
+	public int addNamedElements(@Nullable Type forType, @NonNull Iterable<? extends Nameable> namedElements) {
 		int additions = 0;
-		if (namedElements != null) {
-			for (Nameable namedElement : namedElements) {
-				additions += addElement(namedElement.getName(), forType, namedElement);
-			}
+		for (Nameable namedElement : namedElements) {
+			additions += addNamedElement(forType, DomainUtil.nonNullEntry(namedElement));
 		}
 		return additions;
 	}
@@ -287,7 +291,7 @@ public class EnvironmentView
 	public void addRootPackages() {
 		for (Root root : metaModelManager.getPackageManager().getRoots()) {
 			for (org.eclipse.ocl.examples.pivot.Package pPackage : root.getNestedPackage()) {
-				addNamedElement(pPackage);
+				addNamedElement(DomainUtil.nonNullEntry(pPackage));
 			}
 		}
 		for (org.eclipse.ocl.examples.pivot.Package pPackage : metaModelManager.getPackageManager().getAllPackagesWithUris()) {
@@ -298,20 +302,26 @@ public class EnvironmentView
 		}
 	}
 
-	public int computeLookups(Element target, EObject child, EStructuralFeature containmentFeature, EReference targetReference) {
+	public int computeLookups(@NonNull Element target, EObject child, EStructuralFeature containmentFeature, EReference targetReference) {
 		Attribution attribution = PivotUtil.getAttribution(target);
-		ScopeView pivotScopeView = new PivotScopeView(metaModelManager, target, attribution, child, containmentFeature, targetReference);
-		return computeLookups(pivotScopeView);
+		if (attribution != null) {
+			ScopeView pivotScopeView = new PivotScopeView(getMetaModelManager(), target, attribution, child, containmentFeature, targetReference);
+			return computeLookups(pivotScopeView);
+		}
+		else {
+			return 0;
+		}
 	}
 	
-	public int computeLookups(ScopeView aScope) {
+	public int computeLookups(@NonNull ScopeView scopeView) {
+		ScopeView aScope = scopeView;
 		try {
 			while ((aScope != null) && !hasFinalResult()) {
-				Attribution aAttribution = aScope.getAttribution();
-				if (aAttribution == null) {
+				EObject aTarget = aScope.getTarget();
+				if (aTarget == null) {
 					break;					// The NULLSCOPEVIEW
 				}
-				EObject aTarget = aScope.getTarget();
+				Attribution aAttribution = aScope.getAttribution();
 				aScope = aAttribution.computeLookup(aTarget, this, aScope);
 			}
 		}
@@ -324,7 +334,7 @@ public class EnvironmentView
 		return resolveDuplicates();
 	}
 
-	protected int filterImplicits(EObject match1, EObject match2) {
+	protected int filterImplicits(@NonNull EObject match1, @NonNull EObject match2) {
 		boolean match1IsImplicit = (match1 instanceof Property) && ((Property)match1).isImplicit();
 		boolean match2IsImplicit = (match2 instanceof Property) && ((Property)match2).isImplicit();
 		if (!match1IsImplicit) {
@@ -335,7 +345,7 @@ public class EnvironmentView
 		}
 	}
 
-	protected int filterRedefinitions(EObject match1, EObject match2) {
+	protected int filterRedefinitions(@NonNull EObject match1, @NonNull EObject match2) {
 		if ((match1 instanceof Operation) && (match2 instanceof Operation)) {
 			Operation operation1 = (Operation)match1;
 			Operation operation2 = (Operation)match2;
@@ -359,7 +369,7 @@ public class EnvironmentView
 		return 0;
 	}
 
-	public EObject getContent() {
+	public @Nullable EObject getContent() {
 		if (contentsSize == 0) {
 			return null;
 		}
@@ -379,11 +389,11 @@ public class EnvironmentView
 		return null;
 	}
 
-	public Set<Map.Entry<String, Object>> getEntries() {
-		return contentsByName.entrySet();
+	public @NonNull Set<Map.Entry<String, Object>> getEntries() {
+		return DomainUtil.nonNullJava(contentsByName.entrySet());
 	}
 
-	public String getName() {
+	public @Nullable String getName() {
 		return name;
 	}
 
@@ -391,7 +401,7 @@ public class EnvironmentView
 		return reference;
 	}
 
-	public EClassifier getRequiredType() {
+	public @Nullable EClassifier getRequiredType() {
 		return requiredType;
 	}
 
@@ -399,7 +409,8 @@ public class EnvironmentView
 		return contentsSize;
 	}
 
-	public MetaModelManager getMetaModelManager() {
+	@SuppressWarnings("null")
+	public @NonNull MetaModelManager getMetaModelManager() {
 		return metaModelManager;
 	}
 
@@ -418,33 +429,33 @@ public class EnvironmentView
 		return true;
 	}
 
-	protected boolean isRedefinitionOf(Operation operation1, Operation operation2) {
+	protected boolean isRedefinitionOf(@NonNull Operation operation1, @NonNull Operation operation2) {
 		List<Operation> redefinedOperations = operation1.getRedefinedOperation();
 		for (Operation redefinedOperation : redefinedOperations) {
 			if (redefinedOperation == operation2) {
 				return true;
 			}
-			if (isRedefinitionOf(redefinedOperation, operation2)) {
+			if (isRedefinitionOf(DomainUtil.nonNullEntry(redefinedOperation), operation2)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	protected boolean isRedefinitionOf(Property property1, Property property2) {
+	protected boolean isRedefinitionOf(@NonNull Property property1, @NonNull Property property2) {
 		List<Property> redefinedProperties = property1.getRedefinedProperty();
 		for (Property redefinedProperty : redefinedProperties) {
 			if (redefinedProperty == property2) {
 				return true;
 			}
-			if (isRedefinitionOf(redefinedProperty, property2)) {
+			if (isRedefinitionOf(DomainUtil.nonNullEntry(redefinedProperty), property2)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public void removeFilter(ScopeFilter filter) {
+	public void removeFilter(@NonNull ScopeFilter filter) {
 		if (matchers != null) {
 			matchers.remove(filter);
 		}
@@ -459,17 +470,18 @@ public class EnvironmentView
 					@SuppressWarnings("unchecked")
 					List<EObject> values = (List<EObject>) value;
 					for (int i = 0; i < values.size()-1;) {
-						EObject reference = values.get(i);
+						EObject reference = DomainUtil.nonNullEntry(values.get(i));
 						Map<TemplateParameter, ParameterableElement> referenceBindings = templateBindings != null ? templateBindings.get(reference) : null;
 						for (int j = i + 1; j < values.size();) {
-							EObject candidate = values.get(j);
-							int verdict = filterImplicits(reference, candidate);
+							@NonNull EObject reference2 = DomainUtil.nonNullJDT(reference);
+							EObject candidate = DomainUtil.nonNullEntry(values.get(j));
+							int verdict = filterImplicits(reference2, candidate);
 							if (verdict == 0) {
-								verdict = filterRedefinitions(reference, candidate);
+								verdict = filterRedefinitions(reference2, candidate);
 								if ((verdict == 0) && (resolvers != null)) {
 									Map<TemplateParameter, ParameterableElement> candidateBindings = templateBindings != null ? templateBindings.get(candidate) : null;
 									for (ScopeFilter filter : resolvers) {
-										verdict = filter.compareMatches(reference, referenceBindings, candidate, candidateBindings);
+										verdict = filter.compareMatches(DomainUtil.nonNullJDT(reference), referenceBindings, DomainUtil.nonNullJDT(candidate), candidateBindings);
 										if (verdict != 0) {
 											break;
 										}
@@ -501,14 +513,14 @@ public class EnvironmentView
 		return getSize();
 	}
 
-	public void setBindings(EObject eObject, Map<TemplateParameter, ParameterableElement> bindings) {
+	public void setBindings(@NonNull EObject eObject, @Nullable Map<TemplateParameter, ParameterableElement> bindings) {
 		if (templateBindings == null) {
 			templateBindings = new HashMap<EObject, Map<TemplateParameter, ParameterableElement>>();
 		}
 		templateBindings.put(eObject, bindings);
 	}
 
-	public void setRequiredType(EClassifier requiredType) {
+	public void setRequiredType(@NonNull EClassifier requiredType) {
 		assert PivotUtil.conformsTo(reference.getEType(), requiredType);
 		this.requiredType = requiredType;
 	}

@@ -23,6 +23,8 @@ import java.util.WeakHashMap;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainClassifierType;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
@@ -30,6 +32,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.types.AbstractClassifierType;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
@@ -61,14 +64,14 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 	}
 
 	@Override
-	protected DomainClassifierType createClassifierType(DomainType classType) {
+	protected @NonNull DomainClassifierType createClassifierType(@NonNull DomainType classType) {
 		DomainType anyClassifierType = getAnyClassifierType();
 		DomainClassifierType classifierType = new AbstractClassifierType(this, anyClassifierType, classType);
 		return classifierType;
 	}
 	
 	@Override
-	public DomainEvaluator createEvaluator(EObject contextObject, Map<Object, Object> contextMap) {
+	public @NonNull DomainEvaluator createEvaluator(@NonNull EObject contextObject, @Nullable Map<Object, Object> contextMap) {
 		return new EcoreExecutorManager(contextObject, contextMap, this);
 	}
 
@@ -98,12 +101,12 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 		return super.getEnumeration(enumerator);
 	} */
 
-	public DomainInheritance getInheritance(DomainType type) {
+	public @NonNull DomainInheritance getInheritance(@NonNull DomainType type) {
 		if (type instanceof DomainInheritance) {
 			return (DomainInheritance) type;
 		}
 		if (type instanceof DomainClassifierType) {
-			DomainType instanceType = ((DomainClassifierType)type).getInstanceType();
+			DomainType instanceType = DomainUtil.nonNullPivot(((DomainClassifierType)type).getInstanceType());
 			DomainClassifierType classifierType = getClassifierType(instanceType);
 			DomainType containerType = classifierType.getContainerType();
 			return containerType.getInheritance(this);
@@ -142,7 +145,7 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 		return weakGet(ePackageMap, ePackage.getNsURI());
 	}
 
-	public synchronized ExecutorType getOclType(String typeName) {
+	public synchronized ExecutorType getOclType(@NonNull String typeName) {
 		for (WeakReference<EcoreExecutorPackage> dPackage : ePackageMap.values()) {
 // FIXME			if (OCLstdlibTables.PACKAGE.getNsURI().equals(dPackage.getNsURI())) {
 			if (dPackage != null) {
@@ -158,7 +161,7 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 		return null;
 	}
 
-	public synchronized ExecutorType getType(EClassifier eClassifier) {
+	public synchronized @NonNull ExecutorType getType(@NonNull EClassifier eClassifier) {
 		ExecutorType type = weakGet(typeMap, eClassifier);
 		if (type == null) {
 			EcoreExecutorPackage execPackage = getPackage(eClassifier.getEPackage());
@@ -167,6 +170,6 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 				typeMap.put(eClassifier, new WeakReference<ExecutorType>(type));
 			}
 		}
-		return type;
+		return DomainUtil.nonNullState(type);
 	}
 }

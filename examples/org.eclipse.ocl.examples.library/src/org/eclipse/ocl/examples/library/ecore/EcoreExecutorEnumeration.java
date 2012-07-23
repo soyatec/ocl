@@ -15,12 +15,17 @@
 package org.eclipse.ocl.examples.library.ecore;
 
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
+import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.ArrayIterable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.executor.ExecutorTypeParameter;
+import org.eclipse.osgi.util.NLS;
 
 public class EcoreExecutorEnumeration extends EcoreExecutorType implements DomainEnumeration
 {
@@ -29,20 +34,23 @@ public class EcoreExecutorEnumeration extends EcoreExecutorType implements Domai
 	/**
 	 * Construct an executable type descriptor for a known EClassifier.
 	 */
-	public EcoreExecutorEnumeration(EEnum eEnum, EcoreExecutorPackage evaluationPackage, int flags, ExecutorTypeParameter... typeParameters) {
-		super(eEnum, evaluationPackage, flags, typeParameters);
+	public EcoreExecutorEnumeration(/*@NonNull*/ EEnum eEnum, @NonNull EcoreExecutorPackage evaluationPackage, int flags, ExecutorTypeParameter... typeParameters) {
+		super(DomainUtil.nonNullEMF(eEnum), evaluationPackage, flags, typeParameters);
 	}
 
 	@Override
-	public ObjectValue createInstance(ValueFactory valueFactory) {
+	public @NonNull ObjectValue createInstance(@NonNull ValueFactory valueFactory) {
 		throw new UnsupportedOperationException();
 	}
 
-	public final EEnum getEEnum() {
-		return (EEnum) eClassifier;
+	public final @NonNull EEnum getEEnum() {
+		if (eClassifier == null) {
+			throw new IllegalStateException(NLS.bind(EvaluatorMessages.IncompleteInitialization, this));
+		}
+		return (EEnum) DomainUtil.nonNullJDT(eClassifier);
 	}
 
-	public EcoreExecutorEnumerationLiteral getEnumerationLiteral(String name) {
+	public @Nullable EcoreExecutorEnumerationLiteral getEnumerationLiteral(@NonNull String name) {
 		for (EcoreExecutorEnumerationLiteral enumerationLiteral : literals) {
 			if (name.equals(enumerationLiteral.getName())) {
 				return enumerationLiteral;
@@ -51,7 +59,7 @@ public class EcoreExecutorEnumeration extends EcoreExecutorType implements Domai
 		return null;
 	}
 
-	public Iterable<? extends DomainEnumerationLiteral> getEnumerationLiterals() {
+	public @NonNull Iterable<? extends DomainEnumerationLiteral> getEnumerationLiterals() {
 		return new ArrayIterable<EcoreExecutorEnumerationLiteral>(literals);
 	}
 	

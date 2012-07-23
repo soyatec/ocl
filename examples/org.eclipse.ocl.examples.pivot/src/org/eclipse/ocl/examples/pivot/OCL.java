@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
@@ -30,10 +31,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.EvaluationHaltedException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
@@ -93,7 +96,7 @@ public class OCL {
      * 
      * @return the new <code>OCL</code>
      */
-	public static OCL newInstance() {
+	public static @NonNull OCL newInstance() {
 		return newInstance(PivotEnvironmentFactory.getGlobalRegistryInstance());
 	}
 	
@@ -104,8 +107,7 @@ public class OCL {
      * @param envFactory an environment factory for Ecore
      * @return the new <code>OCL</code>
      */
-	public static OCL newInstance(EnvironmentFactory envFactory) {
-		
+	public static @NonNull OCL newInstance(@NonNull EnvironmentFactory envFactory) {	
 		return new OCL(envFactory, envFactory.createEnvironment());
 	}
 	
@@ -118,9 +120,7 @@ public class OCL {
      *    (which may be empty for an initially empty environment)
      * @return the new <code>OCL</code>
      */
-	public static OCL newInstance(EnvironmentFactory envFactory,
-			Resource resource) {
-		
+	public static @NonNull OCL newInstance(EnvironmentFactory envFactory, @NonNull Resource resource) {	
 		return new OCL(envFactory, envFactory.loadEnvironment(resource));
 	}
 	
@@ -131,17 +131,17 @@ public class OCL {
      * @param env an environment for Ecore
      * @return the new <code>OCL</code>
      */
-	public static OCL newInstance(Environment env) {	
+	public static @NonNull OCL newInstance(@NonNull Environment env) {	
 		return new OCL(env.getFactory(), env);
 	}
 	
-	private final EnvironmentFactory environmentFactory;
+	private final @NonNull EnvironmentFactory environmentFactory;
 
-	private final Environment rootEnvironment;
+	private final @NonNull Environment rootEnvironment;
 
 	private EvaluationEnvironment evalEnv;
 
-	private DomainModelManager modelManager;
+	private @Nullable DomainModelManager modelManager;
 
 	private List<Constraint> constraints = new java.util.ArrayList<Constraint>();
 
@@ -162,7 +162,7 @@ public class OCL {
 	 * @param rootEnv
 	 *            my root environment
 	 */
-	protected OCL(EnvironmentFactory envFactory, Environment rootEnv) {
+	protected OCL(@NonNull EnvironmentFactory envFactory, @NonNull Environment rootEnv) {
 		this.environmentFactory = envFactory;
 		this.rootEnvironment = rootEnv;
 
@@ -261,22 +261,34 @@ public class OCL {
         }
         else if (element instanceof Operation) {
         	Operation operation = (Operation)element;
-			helper.setOperationContext(operation.getOwningType(), operation);
+			Type owningType = operation.getOwningType();
+			if (owningType != null) {
+				helper.setOperationContext(owningType, operation);
+			}
         }
         else if (element instanceof Property) {
         	Property property = (Property)element;
-			helper.setPropertyContext(property.getOwningType(), property);
+			Type owningType = property.getOwningType();
+			if (owningType != null) {
+				helper.setPropertyContext(owningType, property);
+			}
         }
         else if (element instanceof EClassifier) {
         	helper.setContext((EClassifier)element);
         }
         else if (element instanceof EOperation) {
         	EOperation operation = (EOperation)element;
-			helper.setOperationContext(operation.getEContainingClass(), operation);
+			EClass eContainingClass = operation.getEContainingClass();
+			if (eContainingClass != null) {
+				helper.setOperationContext(eContainingClass, operation);
+			}
         }
         else if (element instanceof EStructuralFeature) {
         	EStructuralFeature property = (EStructuralFeature)element;
-			helper.setPropertyContext(property.getEContainingClass(), property);
+			EClass eContainingClass = property.getEContainingClass();
+			if (eContainingClass != null) {
+				helper.setPropertyContext(eContainingClass, property);
+			}
         }
 		return helper;
      }
@@ -300,7 +312,7 @@ public class OCL {
 	 * 
 	 * @see #createQuery(Object)
 	 */
-	public Query createQuery(ExpressionInOCL specification) {
+	public @NonNull Query createQuery(@NonNull ExpressionInOCL specification) {
 		return new QueryImpl(this, specification);
 	}
 
@@ -321,14 +333,20 @@ public class OCL {
 	 * 
 	 * @see #createQuery(OCLExpression)
 	 */
-	public Query createQuery(Constraint constraint) {
-		return new QueryImpl(this, (ExpressionInOCL) constraint.getSpecification());
+	public Query createQuery(@NonNull Constraint constraint) {
+		ValueSpecification specification = constraint.getSpecification();
+		if (specification instanceof ExpressionInOCL) {
+			return new QueryImpl(this, (ExpressionInOCL) specification);
+		}
+		else {
+			return null;
+		}
 	}
 
 	/**
 	 * Return the Pivot resource counterpart of an Xtext csResource.
 	 */
-	public Resource cs2pivot(BaseResource csResource) {
+	public @NonNull Resource cs2pivot(@NonNull BaseResource csResource) {
 		MetaModelManager metaModelManager = getMetaModelManager();
 		Resource pivotResource = csResource.getPivotResource(metaModelManager);
 		return pivotResource;
@@ -354,10 +372,7 @@ public class OCL {
 		getConstraints().clear();
 
 		// dispose of my environment
-		if (getEnvironment() instanceof Environment.Internal) {
-			Environment.Internal env = (Environment.Internal) getEnvironment();
-			env.dispose();
-		}
+		getEnvironment().dispose();
 		getMetaModelManager().dispose();
 	}
 
@@ -365,12 +380,12 @@ public class OCL {
 	 * Return the Pivot resource counterpart of an ecoreResource, specifying the uri of the resulting Ecore resource
 	 * and options for the Pivot2Ecore converter.
 	 */
-	public Resource ecore2pivot(Resource ecoreResource) {
+	public @NonNull Resource ecore2pivot(@NonNull Resource ecoreResource) {
 		MetaModelManager metaModelManager = getMetaModelManager();
 		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager);
 		Root pivotRoot = ecore2Pivot.getPivotRoot();
 		Resource pivotResource = pivotRoot.eResource();
-		return pivotResource;
+		return DomainUtil.nonNullModel(pivotResource);
 	}
 
 	/**
@@ -390,7 +405,7 @@ public class OCL {
 	 * @see #isInvalid(Object)
 	 * @see #check(Object, Object)
 	 */
-	public Value evaluate(Object context, ExpressionInOCL expression) {
+	public Value evaluate(@Nullable Object context, @NonNull ExpressionInOCL expression) {
 		evaluationProblems = null;
 		
 		// can determine a more appropriate context from the context
@@ -410,7 +425,7 @@ public class OCL {
 		}
 
 		EvaluationVisitor ev = environmentFactory
-			.createEvaluationVisitor(rootEnvironment, localEvalEnv, extents);
+			.createEvaluationVisitor(getEnvironment(), localEvalEnv, extents);
 
 		Value result;
 
@@ -454,7 +469,7 @@ public class OCL {
 	 * 
 	 * @see #getEvaluationEnvironment()
 	 */
-	public Environment getEnvironment() {
+	public @NonNull Environment getEnvironment() {
 		return rootEnvironment;
 	}
 
@@ -471,12 +486,12 @@ public class OCL {
 	 * 
 	 * @see #getEnvironment()
 	 */
-	public EvaluationEnvironment getEvaluationEnvironment() {
+	public @NonNull EvaluationEnvironment getEvaluationEnvironment() {
 		if (evalEnv == null) {
 			evalEnv = environmentFactory.createEvaluationEnvironment();
 		}
 
-		return evalEnv;
+		return DomainUtil.nonNullJDT(evalEnv);
 	}
 	
 	/**
@@ -500,7 +515,7 @@ public class OCL {
 	 * @return the client-provided custom model manager, or <code>null</code> if
 	 *         thie OCL is using the default dynamic extent map implementation
 	 */
-	public DomainModelManager getModelManager() {
+	public @Nullable DomainModelManager getModelManager() {
 		return modelManager;
 	}
 
@@ -619,7 +634,7 @@ public class OCL {
 	 * Load the Complete OCL document specified by the URI into the external ResourceSet and
 	 * return the concrete syntax resource.
 	 */
-	public BaseResource load(URI uri) {
+	public @Nullable BaseResource load(@NonNull URI uri) {
 		ResourceSet externalResourceSet = getMetaModelManager().getExternalResourceSet();
 		return (BaseResource) externalResourceSet.getResource(uri, true);
 	}
@@ -628,9 +643,9 @@ public class OCL {
 	 * Load the Complete OCL document specified by the URI into the external ResourceSet and
 	 * parse the concrete syntax resource returning the resulting abstract syntax resource.
 	 */
-	public Resource parse(URI uri) {
+	public @Nullable Resource parse(@NonNull URI uri) {
 		BaseResource csResource = load(uri);
-		return cs2pivot(csResource);
+		return csResource != null ? cs2pivot(csResource) : null;
 	}
 
 	/**
@@ -641,7 +656,7 @@ public class OCL {
 	 * (BaseResource) resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
 	 * </tt>
 	 */
-	public void pivot2cs(Resource pivotResource, BaseResource csResource) {
+	public void pivot2cs(@NonNull Resource pivotResource, @NonNull BaseResource csResource) {
 		MetaModelManager metaModelManager = getMetaModelManager();
 		csResource.updateFrom(pivotResource, metaModelManager);
 	}
@@ -687,7 +702,7 @@ public class OCL {
 	 *            a custom extent map, or <code>null</code> to use the default
 	 *            dynamic extent map implementation
 	 */
-	public void setModelManager(DomainModelManager modelManager) {
+	public void setModelManager(@Nullable DomainModelManager modelManager) {
 		this.modelManager = modelManager;
 	}
 
@@ -749,7 +764,7 @@ public class OCL {
 	 * 
 	 * @see #validate(Object)
 	 */
-	public void validate(OCLExpression expression) throws SemanticException {
+	public void validate(@NonNull OCLExpression expression) throws SemanticException {
 		throw new UnsupportedOperationException(getClass().getName() + ".validate");
 		// clear out old diagnostics
 /*		ProblemHandler ph = OCLUtil.getAdapter(rootEnvironment,
@@ -783,7 +798,7 @@ public class OCL {
 	 * @throws SemanticException
 	 *             on detection of any well-formedness problem in the constraint
 	 */
-	public void validate(Constraint constraint) throws SemanticException {
+	public void validate(@NonNull Constraint constraint) throws SemanticException {
 		throw new UnsupportedOperationException(getClass().getName() + ".validate");
 		// clear out old diagnostics
 /*		ProblemHandler ph = OCLUtil.getAdapter(rootEnvironment,

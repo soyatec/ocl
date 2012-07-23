@@ -16,6 +16,7 @@ package org.eclipse.ocl.examples.library.ecore;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
@@ -26,12 +27,12 @@ public class EcoreExecutorProperty extends ExecutorProperty
 {
 	protected EStructuralFeature eFeature;
 	
-	public EcoreExecutorProperty(String name, EcoreExecutorType executorType, int propertyIndex, LibraryProperty implementation) {
+	public EcoreExecutorProperty(@NonNull String name, @NonNull EcoreExecutorType executorType, int propertyIndex, @NonNull LibraryProperty implementation) {
 		super(name, executorType, propertyIndex, implementation);
 	}
 
 	@Override
-	public void setValue(ObjectValue objectValue, Value propertyValue) throws InvalidValueException {
+	public void setValue(@NonNull ObjectValue objectValue, @NonNull Value propertyValue) throws InvalidValueException {
 		EObject eObject = objectValue.asNavigableObject();
 		Object eValue = propertyValue.asEcoreObject();
 		eObject.eSet(eFeature, eValue);

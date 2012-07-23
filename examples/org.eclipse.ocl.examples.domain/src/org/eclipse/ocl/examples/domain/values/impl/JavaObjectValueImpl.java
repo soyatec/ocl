@@ -16,8 +16,10 @@
  */
 package org.eclipse.ocl.examples.domain.values.impl;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -27,11 +29,11 @@ public class JavaObjectValueImpl extends ObjectValueImpl
 {
 	protected DomainType type = null;
 	
-	public JavaObjectValueImpl(ValueFactory valueFactory, Object object) {
+	public JavaObjectValueImpl(@NonNull ValueFactory valueFactory, @NonNull Object object) {
 		super(valueFactory, object);
 	}
 
-	public DomainType getType() {
+	public @NonNull DomainType getType() {
 		if (type == null) {										// WIP A better type
 			DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 			if (object instanceof Comparable) {
@@ -41,6 +43,6 @@ public class JavaObjectValueImpl extends ObjectValueImpl
 				type = standardLibrary.getAnyClassifierType();
 			}
 		}
-		return type;
+		return DomainUtil.nonNullJDT(type);
 	}
 }

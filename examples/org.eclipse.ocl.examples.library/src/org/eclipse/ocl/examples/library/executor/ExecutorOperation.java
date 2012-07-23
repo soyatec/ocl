@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
@@ -23,24 +25,25 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.utilities.ArrayIterable;
 import org.eclipse.ocl.examples.domain.utilities.IndexableIterable;
+import org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation;
 
 public class ExecutorOperation implements DomainOperation
 {
-	protected final String name;
-	protected final DomainInheritance inheritance;
+	protected final @NonNull String name;
+	protected final @NonNull DomainInheritance inheritance;
 	protected final int index;
-	protected final LibraryFeature implementation;
+	protected final @NonNull LibraryFeature implementation;
 	protected final ExecutorTypeArgument[] parameterTypes;
 	
-	public ExecutorOperation(String name, DomainInheritance inheritance, int index, LibraryFeature implementation, ExecutorTypeArgument... parameterTypes) {
+	public ExecutorOperation(@NonNull String name, @NonNull DomainInheritance inheritance, int index, @Nullable LibraryFeature implementation, ExecutorTypeArgument... parameterTypes) {
 		this.name = name;
 		this.inheritance = inheritance;
 		this.index = index;
-		this.implementation = implementation;
+		this.implementation = implementation != null ? implementation : OclAnyUnsupportedOperation.INSTANCE;		// FIXME
 		this.parameterTypes = parameterTypes;
 	}
 
-	public LibraryFeature getImplementation() {
+	public @NonNull LibraryFeature getImplementation() {
 		return implementation;
 	}
 
@@ -48,7 +51,7 @@ public class ExecutorOperation implements DomainOperation
 		return index;
 	}
 
-	public final DomainInheritance getInheritance(DomainStandardLibrary standardLibrary) {
+	public final @NonNull DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary) {
 		return inheritance;
 	}
 
@@ -56,7 +59,7 @@ public class ExecutorOperation implements DomainOperation
 		return name;
 	}
 
-	public IndexableIterable<DomainType> getParameterType() {
+	public @NonNull IndexableIterable<DomainType> getParameterType() {
 		return new ArrayIterable<DomainType>(parameterTypes);
 	}
 

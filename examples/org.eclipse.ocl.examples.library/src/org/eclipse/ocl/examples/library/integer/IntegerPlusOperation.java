@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.integer;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
@@ -28,14 +29,11 @@ import org.eclipse.ocl.examples.domain.values.Value;
  */
 public class IntegerPlusOperation extends AbstractBinaryOperation
 {
-	public static final IntegerPlusOperation INSTANCE = new IntegerPlusOperation();
+	public static final @NonNull IntegerPlusOperation INSTANCE = new IntegerPlusOperation();
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value left, Value right) throws InvalidValueException {
-		IntegerValue leftValue = left.toIntegerValue();
-		IntegerValue rightValue = right.toIntegerValue();
-		if ((leftValue != null) && (rightValue != null)) {
-			return leftValue.add(rightValue);
-		}
-		return null;
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
+		IntegerValue leftValue = left.asIntegerValue();
+		IntegerValue rightValue = right.asIntegerValue();
+		return leftValue.add(rightValue);
 	}
 }

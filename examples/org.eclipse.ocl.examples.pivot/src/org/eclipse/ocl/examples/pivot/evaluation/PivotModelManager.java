@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.LazyModelManager;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -35,23 +36,22 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 public class PivotModelManager extends LazyModelManager
 {
-	protected final MetaModelManager metaModelManager;
+	protected final @NonNull MetaModelManager metaModelManager;
 	private Ecore2Pivot ecoreConverter = null;
 	
-	public PivotModelManager(MetaModelManager metaModelManager, EObject context) {
+	public PivotModelManager(@NonNull MetaModelManager metaModelManager, EObject context) {
 		super(context);
 		this.metaModelManager = metaModelManager;
 	}
 
 	// implements the inherited specification
 	@Override
-	protected boolean isInstance(DomainType requiredType, EObject eObject) {
+	protected boolean isInstance(@NonNull DomainType requiredType, @NonNull EObject eObject) {
 		EClass eClass = eObject.eClass();
 		EPackage ePackage = eClass.getEPackage();
 		Type objectType;
 		if (ePackage == PivotPackage.eINSTANCE) {
-			@SuppressWarnings("null")
-			@NonNull String name = eClass.getName();
+			String name = DomainUtil.nonNullEMF(eClass.getName());
 			objectType = metaModelManager.getPivotType(name);
 		}
 		else {
@@ -61,9 +61,11 @@ public class PivotModelManager extends LazyModelManager
 				objectType = ecoreConverter.getPivotType(eClass);
 			}
 			else {
-				Collection<EObject> roots = Collections.singletonList(EcoreUtil.getRootContainer(eClass));
+				@SuppressWarnings("null")
+				@NonNull Collection<EObject> roots = Collections.singletonList(EcoreUtil.getRootContainer(eClass));
 				ecoreConverter = new Ecore2Pivot(null, metaModelManager);
-				ecoreConverter.importObjects(roots, URI.createURI("temp://eval"));
+				URI importURI = DomainUtil.nonNullEMF(URI.createURI("temp://eval"));
+				ecoreConverter.importObjects(roots, importURI);
 				objectType = ecoreConverter.getPivotType(eClass);
 			}
 		}

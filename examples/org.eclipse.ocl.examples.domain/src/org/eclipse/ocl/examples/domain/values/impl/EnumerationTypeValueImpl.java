@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.domain.values.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.values.EnumerationTypeValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -37,7 +38,7 @@ public class EnumerationTypeValueImpl extends TypeValueImpl implements Enumerati
 		return ValuesPackage.Literals.ENUMERATION_TYPE_VALUE;
 	}
 
-	public EnumerationTypeValueImpl(ValueFactory valueFactory, DomainEnumeration object) {
+	public EnumerationTypeValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainEnumeration object) {
 		super(valueFactory, object);
 	}
 	
@@ -54,12 +55,12 @@ public class EnumerationTypeValueImpl extends TypeValueImpl implements Enumerati
 		return thisEnumeration == thatEnumeration;
 	}
 
-	public DomainEnumeration getEnumeration() {
+	public @NonNull DomainEnumeration getEnumeration() {
 		return getObject();
 	}
 
 	@Override
-	public DomainEnumeration getObject() {
+	public @NonNull DomainEnumeration getObject() {
 		return (DomainEnumeration) object;
 	}
 }

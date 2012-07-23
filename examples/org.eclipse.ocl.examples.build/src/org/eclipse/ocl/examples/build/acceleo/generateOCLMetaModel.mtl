@@ -48,6 +48,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.*;
 import org.eclipse.ocl.examples.pivot.Class;
 import org.eclipse.ocl.examples.pivot.Package;
@@ -66,46 +67,33 @@ public class [javaClass/] extends XMIResourceImpl
 	/**
 	 *	The URI of this Standard Library.
 	 */
-	public static final String PIVOT_URI = "[uri/]";
+	public static final @NonNull String PIVOT_URI = "[uri/]";
 
-	public static Package create(@NonNull PivotStandardLibrary standardLibrary, String name, String nsPrefix, String nsURI) {
-		[javaClass/] resource = new [javaClass/](URI.createURI(PIVOT_URI));
-		Contents contents = new Contents(standardLibrary);
-		Root root = contents.create(name != null ? name : "[pkg.name/]", nsPrefix != null ? nsPrefix : "[pkg.nsPrefix/]", nsURI != null ? nsURI : "[pkg.nsURI/]");
-		resource.getContents().add(root);
+	public static @NonNull Package create(@NonNull PivotStandardLibrary standardLibrary, @NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI) {
+		[javaClass/] resource = new [javaClass/](DomainUtil.nonNullEMF(URI.createURI(PIVOT_URI)));
+		Contents contents = new Contents(standardLibrary, name, nsPrefix, nsURI);
+		resource.getContents().add(contents.root);
 		return contents.metamodel;
 	}
 
-	protected OCLMetaModel(URI uri) {
+	protected OCLMetaModel(@NonNull URI uri) {
 		super(uri);
 	}
 
-//	public [javaClass/](PivotStandardLibrary standardLibrary, String name, String nsPrefix, String nsURI) {
-//		super(URI.createURI(PIVOT_URI));
-//		Contents contents = new Contents(standardLibrary);
-//		Model model = contents.create(name != null ? name : "[pkg.name/]", nsPrefix != null ? nsPrefix : "[pkg.nsPrefix/]", nsURI != null ? nsURI : "[pkg.nsURI/]");
-//		getContents().add(model);
-//	}
-
 	protected static class Contents extends AbstractContents
 	{
-		protected Contents(@NonNull PivotStandardLibrary standardLibrary) {
+		protected final @NonNull Root [root.getPrefixedSymbolName('root')/];
+		protected final @NonNull Package [pkg.getPrefixedSymbolName('metamodel')/];
+		protected final @NonNull PrimitiveType [allTypes->select(name='Boolean')->any(true).getPrefixedSymbolName('_Boolean')/] = standardLibrary.getBooleanType();
+		protected final @NonNull PrimitiveType [allTypes->select(name='Integer')->any(true).getPrefixedSymbolName('_Integer')/] = standardLibrary.getIntegerType();
+		protected final @NonNull Class _OclElement = standardLibrary.getOclElementType();
+		protected final @NonNull PrimitiveType [allTypes->select(name='Real')->any(true).getPrefixedSymbolName('_Real')/] = standardLibrary.getRealType();
+		protected final @NonNull PrimitiveType [allTypes->select(name='String')->any(true).getPrefixedSymbolName('_String')/] = standardLibrary.getStringType();
+		protected final @NonNull PrimitiveType [allTypes->select(name='UnlimitedNatural')->any(true).getPrefixedSymbolName('_UnlimitedNatural')/] = standardLibrary.getUnlimitedNaturalType();
+
+		protected Contents(@NonNull PivotStandardLibrary standardLibrary, @NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI) {
 			super(standardLibrary);
-		}
-
-		protected final PrimitiveType [allTypes->select(name='Boolean')->any(true).getPrefixedSymbolName('_Boolean')/] = standardLibrary.getBooleanType();
-		protected final PrimitiveType [allTypes->select(name='Integer')->any(true).getPrefixedSymbolName('_Integer')/] = standardLibrary.getIntegerType();
-		protected final Class _OclElement = standardLibrary.getOclElementType();
-		protected final PrimitiveType [allTypes->select(name='Real')->any(true).getPrefixedSymbolName('_Real')/] = standardLibrary.getRealType();
-		protected final PrimitiveType [allTypes->select(name='String')->any(true).getPrefixedSymbolName('_String')/] = standardLibrary.getStringType();
-		protected final PrimitiveType [allTypes->select(name='UnlimitedNatural')->any(true).getPrefixedSymbolName('_UnlimitedNatural')/] = standardLibrary.getUnlimitedNaturalType();
-
-		protected Root [root.getPrefixedSymbolName('root')/];
-		protected Package [pkg.getPrefixedSymbolName('metamodel')/];
-
-		protected @NonNull Root create(@NonNull String name, String nsPrefix, @NonNull String nsURI)
-		{
-			@NonNull Root theRoot = [root.getSymbolName()/] = createRoot("[pkg.name/]", "[pkg.nsURI/]");
+			[root.getSymbolName()/] = createRoot("[pkg.name/]", "[pkg.nsURI/]");
 			[pkg.getSymbolName()/] = createPackage(name, nsPrefix, nsURI);
 			installPackages();
 			installOclTypes();
@@ -139,7 +127,6 @@ public class [javaClass/] extends XMIResourceImpl
 			installPrecedences();
 [/if]
 			installComments();
-			return theRoot;
 		}
 	
 		[pkg.definePackages()/]

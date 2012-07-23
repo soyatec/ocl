@@ -25,6 +25,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 
 /**
@@ -65,7 +68,7 @@ public class Orphanage extends ResourceImpl
 		}
 	}
 
-	public static final URI ORPHANAGE_URI = URI.createURI(PivotConstants.ORPHANAGE_URI);
+	public static final @NonNull URI ORPHANAGE_URI = DomainUtil.nonNullEMF(URI.createURI(PivotConstants.ORPHANAGE_URI));
 	private static Orphanage INSTANCE = null;
 	
 	public static void disposeInstance() {
@@ -79,10 +82,10 @@ public class Orphanage extends ResourceImpl
 	 * Return the Orphanage for an eObject, which is the Orphanage resource in the same ResourceSet as
 	 * the eObject, else the global Orphanage.
 	 */
-	public static Orphanage getOrphanage(EObject eObject) {
-		if (eObject == null) {
-			return null;
-		}
+	public static Orphanage getOrphanage(@NonNull EObject eObject) {
+//		if (eObject == null) {
+//			return null;
+//		}
 		Resource resource = eObject.eResource();
 		if (resource == null) {
 			return null;
@@ -95,12 +98,12 @@ public class Orphanage extends ResourceImpl
 	 * Return the Orphanage for an eObject, which is the Orphanage resource in the resourceSet
 	 * if non-null, else the global Orphanage.
 	 */
-	public static Orphanage getOrphanage(ResourceSet resourceSet) {
+	public static @NonNull Orphanage getOrphanage(@Nullable ResourceSet resourceSet) {
 		if (resourceSet == null) {
 			if (INSTANCE == null) {
 				INSTANCE = new Orphanage(ORPHANAGE_URI);
 			}
-			return INSTANCE;
+			return DomainUtil.nonNullJDT(INSTANCE);
 		}
 		for (Resource aResource : resourceSet.getResources()) {
 			if (aResource instanceof Orphanage) {
@@ -112,12 +115,12 @@ public class Orphanage extends ResourceImpl
 		return orphanage;
 	}
 	
-	public Orphanage(URI uri) {
+	public Orphanage(@NonNull URI uri) {
 		super(uri);
 		setLoaded(true);
 	}
 
-	public void add(EObject eObject) {
+	public void add(@NonNull EObject eObject) {
 		getContents().add(eObject);
 	}
 
@@ -131,11 +134,11 @@ public class Orphanage extends ResourceImpl
 	}
 
 	@Override
-	public EList<EObject> getContents() {
+	public @NonNull EList<EObject> getContents() {
 	    if (contents == null)
 	    {
 	      contents = new WeakContentsEList();
 	    }
-	    return contents;
+	    return DomainUtil.nonNullJDT(contents);
 	}
 }

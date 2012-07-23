@@ -28,6 +28,8 @@ import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
@@ -98,7 +100,7 @@ public class UML2Ecore2Pivot extends Ecore2Pivot
 	{
 		private Map<EModelElement, org.eclipse.uml2.uml.Element> reverseMap = null;
 		
-		public org.eclipse.uml2.uml.Element getSource(EModelElement eObject) {
+		public org.eclipse.uml2.uml.Element getSource(@NonNull EModelElement eObject) {
 			if (reverseMap == null) {
 				reverseMap = new HashMap<EModelElement, org.eclipse.uml2.uml.Element>();
 				for (Map.Entry<org.eclipse.uml2.uml.Element, EModelElement> entry : elementToEModelElementMap.entrySet()) {
@@ -123,11 +125,7 @@ public class UML2Ecore2Pivot extends Ecore2Pivot
 	// FIXME this is a prehistoric value
 //	private static final String OCL_STANDARD_LIBRARY_NS_URI = "http://www.eclipse.org/ocl/1.1.0/oclstdlib.uml"; //$NON-NLS-1$
 
-	public static UML2Ecore2Pivot findAdapter(Resource resource, MetaModelManager metaModelManager) {
-		assert metaModelManager != null;
-		if (resource == null) {
-			return null;
-		}
+	public static UML2Ecore2Pivot findAdapter(@NonNull Resource resource, @Nullable MetaModelManager metaModelManager) {
 		for (Adapter adapter : resource.eAdapters()) {
 			if (adapter instanceof UML2Ecore2Pivot) {
 				UML2Ecore2Pivot ecore2Pivot = (UML2Ecore2Pivot)adapter;
@@ -139,10 +137,7 @@ public class UML2Ecore2Pivot extends Ecore2Pivot
 		return null;
 	}
 
-	public static UML2Ecore2Pivot getAdapter(Resource resource, MetaModelManager metaModelManager) {
-		if (resource == null) {
-			return null;
-		}
+	public static UML2Ecore2Pivot getAdapter(@NonNull Resource resource, @NonNull MetaModelManager metaModelManager) {
 		List<Adapter> eAdapters = resource.eAdapters();
 		UML2Ecore2Pivot adapter = PivotUtil.getAdapter(UML2Ecore2Pivot.class, resource);
 		if (adapter != null) {
@@ -161,10 +156,7 @@ public class UML2Ecore2Pivot extends Ecore2Pivot
 	 * 
 	 * @return the Pivot root package
 	 */
-	public static Root importFromUML(MetaModelManager metaModelManager, String alias, Resource umlResource) {
-		if (umlResource == null) {
-			return null;
-		}
+	public static Root importFromUML(@NonNull MetaModelManager metaModelManager, String alias, @NonNull Resource umlResource) {
 		UML2Ecore2Pivot conversion = getAdapter(umlResource, metaModelManager);
 		return conversion.getPivotRoot();
 	}
@@ -199,17 +191,17 @@ public class UML2Ecore2Pivot extends Ecore2Pivot
 		return conversion.createMap.get(eObject);
 	} */
 	
-	protected final Resource umlResource;					// Set via eAdapters.add()
+	protected final @NonNull Resource umlResource;					// Set via eAdapters.add()
 	private UML2EcoreConverterWithReverseMap uml2EcoreConverter = null;
 	private Map<String, String> options = null;
 
-	public UML2Ecore2Pivot(Resource umlResource, MetaModelManager metaModelManager) {
+	public UML2Ecore2Pivot(@NonNull Resource umlResource, @NonNull MetaModelManager metaModelManager) {
 		super(metaModelManager.getExternalResourceSet().createResource(umlResource.getURI().appendFileExtension("ecore")), metaModelManager);
 		this.umlResource = umlResource;
 	}
 
 	@Override
-	public void addMapping(EObject eObject, Element pivotElement) {
+	public void addMapping(@NonNull EObject eObject, @NonNull Element pivotElement) {
 		if ((uml2EcoreConverter != null) && (eObject instanceof EModelElement)) {
 			org.eclipse.uml2.uml.Element umlElement = uml2EcoreConverter.getSource((EModelElement)eObject);
 			super.addMapping(umlElement, pivotElement);
@@ -221,8 +213,12 @@ public class UML2Ecore2Pivot extends Ecore2Pivot
 	}
 
 	@Override
-	protected URI createPivotURI() {
-		return PivotUtil.getPivotURI(umlResource.getURI());
+	protected @NonNull URI createPivotURI() {
+		URI uri = umlResource.getURI();
+		if (uri == null) {
+			throw new IllegalStateException("Missing resource URI");
+		}
+		return PivotUtil.getPivotURI(uri);
 	}
 
 	@Override
@@ -232,7 +228,7 @@ public class UML2Ecore2Pivot extends Ecore2Pivot
 	}
 
 	@Override
-	public <T extends Element> T getCreated(Class<T> requiredClass, EObject eObject) {
+	public <T extends Element> T getCreated(@NonNull Class<T> requiredClass, @NonNull EObject eObject) {
 		EObject ecoreObject = (EObject) uml2EcoreConverter.doSwitch(eObject);
 		if (ecoreObject == null) {
 			ecoreObject = eObject;
@@ -240,13 +236,13 @@ public class UML2Ecore2Pivot extends Ecore2Pivot
 		return super.getCreated(requiredClass, ecoreObject);
 	}
 
-	public <T extends Element> T getPivotOfUML(Class<T> requiredClass, EObject eObject) {
+	public <T extends Element> T getPivotOfUML(@NonNull Class<T> requiredClass, @NonNull EObject eObject) {
 		EObject ecoreObject = (EObject) uml2EcoreConverter.doSwitch(eObject);
 		return getPivotOfEcore(requiredClass, ecoreObject);
 	}
 
 	@Override
-	public Root getPivotRoot() {
+	public @NonNull Root getPivotRoot() {
 		if (pivotRoot == null) {
 			List<EObject> contents = umlResource.getContents();
 			if (options == null) {
@@ -277,12 +273,12 @@ public class UML2Ecore2Pivot extends Ecore2Pivot
 	}
 
 	@Override
-	public Resource getResource() {
+	public @Nullable Resource getResource() {
 		return umlResource;
 	}
 
 	@Override
-	public Notifier getTarget() {
+	public @NonNull Notifier getTarget() {
 		return umlResource;
 	}
 

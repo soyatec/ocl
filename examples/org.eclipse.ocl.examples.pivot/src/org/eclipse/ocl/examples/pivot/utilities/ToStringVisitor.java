@@ -1157,12 +1157,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	}
 
 	public String visiting(@NonNull Visitable visitable) {
-		if (visitable == null) {
-			append(NULL_PLACEHOLDER);
-		}
-		else {
-			append(visitable.getClass().getName());
-		}
+		append(visitable.getClass().getName());
 		return null;
 	}
 } // ToStringVisitorImpl

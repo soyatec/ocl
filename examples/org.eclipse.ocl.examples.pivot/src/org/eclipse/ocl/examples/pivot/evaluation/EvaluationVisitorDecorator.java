@@ -70,7 +70,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
 
     private final EvaluationVisitor delegate;
     
-    protected EvaluationVisitorDecorator(EvaluationVisitor decorated) {
+    protected EvaluationVisitorDecorator(@NonNull EvaluationVisitor decorated) {
         super(null);
         assert decorated != null : "cannot decorate a null visitor"; //$NON-NLS-1$
         
@@ -82,7 +82,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
     /**
      * Delegates to my decorated visitor.
      */
-	public EvaluationVisitor createNestedEvaluator() {
+	public @NonNull EvaluationVisitor createNestedEvaluator() {
         return getDelegate().createNestedEvaluator();
 	}
   
@@ -91,7 +91,8 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
      * 
      * @return my decorated visitor
      */
-    protected final EvaluationVisitor getDelegate() {
+    @SuppressWarnings("null")
+	protected final @NonNull EvaluationVisitor getDelegate() {
         return delegate;
     }
     
@@ -105,14 +106,14 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
     /**
      * Obtains my delegate's evaluation environment.
      */
-    public EvaluationEnvironment getEvaluationEnvironment() {
+    public @NonNull EvaluationEnvironment getEvaluationEnvironment() {
         return getDelegate().getEvaluationEnvironment();
     }
 
     /**
      * Obtains my delegate's extent map.
      */
-    public DomainModelManager getModelManager() {
+    public @NonNull DomainModelManager getModelManager() {
         return getDelegate().getModelManager();
     }
 

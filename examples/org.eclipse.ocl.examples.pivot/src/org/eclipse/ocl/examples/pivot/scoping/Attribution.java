@@ -21,6 +21,8 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An Attribution provides a helper to assist in evaluating the inheriteed or synthesized attributes
@@ -56,5 +58,5 @@ public interface Attribution
 	 * @param scopeView the access selectivity to be applied by the lookup
 	 * @return an outer ScopeView in which to continue the lookup, or null if none
 	 */
-	ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView);
+	@Nullable ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView);
 }

@@ -17,7 +17,9 @@
 package org.eclipse.ocl.examples.domain.values.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.StringValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -38,44 +40,50 @@ public class StringValueImpl extends ValueImpl implements StringValue
 		return ValuesPackage.Literals.STRING_VALUE;
 	}
 
-	private final String value;
+	private final @NonNull String value;
 	
-	public StringValueImpl(ValueFactory valueFactory, String value) {
+	public StringValueImpl(@NonNull ValueFactory valueFactory, @NonNull String value) {
 		super(valueFactory);
 		this.value = value;
 	}
 
-	public Object asObject() {
+	public @NonNull Object asObject() {
 		return value;
 	}
 
 	@Override
-	public String asString() {
+	public @NonNull String asString() {
 		return value;
 	}
 
 	@Override
-	public StringValue asStringValue() {
+	public @NonNull StringValue asStringValue() {
 		return this;
 	}
 
-	public Value asValidValue() {
+	public @NonNull Value asValidValue() {
 		return this;
 	}
 
 	public int compareTo(StringValue o) {
-		return value.compareTo(o.stringValue());
+		try {
+			return value.compareTo(o.stringValue());
+		} catch (InvalidValueException e) {
+			return -1;		// o is a NullValue/InvalidValue
+		}
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof StringValue)) {
-			return false;
+		if (obj instanceof StringValue) {
+			try {
+				return value.equals(((StringValue)obj).stringValue());
+			} catch (InvalidValueException e) { /* obj is a NullValue/InvalidValue */ }
 		}
-		return value.equals(((StringValue)obj).stringValue());
+		return false;
 	}
 
-	public DomainType getType() {
+	public @NonNull DomainType getType() {
 		return valueFactory.getStandardLibrary().getStringType();
 	}
 
@@ -84,17 +92,22 @@ public class StringValueImpl extends ValueImpl implements StringValue
 		return value.hashCode();
 	}
 
-	public String stringValue() {
+	@Override
+	public StringValue isStringValue() {
+		return this;
+	}
+
+	public @NonNull String stringValue() {
 		return value;
 	}
 
 	@Override
-	public String toString() {
+	public @NonNull String toString() {
 		return "'" + value + "'";
 	}
 
 	@Override
-	public void toString(StringBuilder s, int sizeLimit) {
+	public void toString(@NonNull StringBuilder s, int sizeLimit) {
 		s.append("'");
 		int length = value.length();
 		int available = sizeLimit - (length + 1);

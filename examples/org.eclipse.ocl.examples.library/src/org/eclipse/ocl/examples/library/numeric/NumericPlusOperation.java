@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.numeric;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -30,12 +31,12 @@ public class NumericPlusOperation extends AbstractNumericBinaryOperation
 	public static final NumericPlusOperation INSTANCE = new NumericPlusOperation();
 
 	@Override
-	protected IntegerValue evaluateInteger(DomainEvaluator evaluator, IntegerValue left, IntegerValue right) throws InvalidValueException {
+	protected @NonNull IntegerValue evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) throws InvalidValueException {
 		return left.add(right);
 	}
 
 	@Override
-	protected RealValue evaluateReal(DomainEvaluator evaluator, RealValue left, RealValue right) throws InvalidValueException {
+	protected @NonNull RealValue evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) throws InvalidValueException {
 		return left.add(right);
 	}
 }

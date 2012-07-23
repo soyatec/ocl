@@ -18,34 +18,36 @@ package org.eclipse.ocl.examples.pivot.executor;
 
 import java.util.Iterator;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ReflectiveType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 public class PivotReflectiveType extends ReflectiveType
 {
-	protected final MetaModelManager metaModelManager;
-	protected final Type type;
+	protected final @NonNull MetaModelManager metaModelManager;
+	protected final @NonNull Type type;
 	
-	public PivotReflectiveType(PivotReflectivePackage executorPackage, Type type) {
-		super(type.getName(), executorPackage, computeFlags(type));
+	public PivotReflectiveType(@NonNull PivotReflectivePackage executorPackage, @NonNull Type type) {
+		super(DomainUtil.nonNullModel(type.getName()), executorPackage, computeFlags(type));
 		this.metaModelManager = executorPackage.getMetaModelManager();
 		this.type = type;
 	}
 
 	@Override
-	protected AbstractFragment createFragment(DomainInheritance baseInheritance) {
+	protected @NonNull AbstractFragment createFragment(@NonNull DomainInheritance baseInheritance) {
 		return new PivotReflectiveFragment(this, baseInheritance);
 	}
 
 	@Override
-	public Iterable<? extends DomainInheritance> getInitialSuperInheritances() {
+	public @NonNull Iterable<? extends DomainInheritance> getInitialSuperInheritances() {
 		final Iterator<Type> iterator = metaModelManager.getSuperClasses(type).iterator();
 		return new Iterable<DomainInheritance>()
 		{
@@ -68,31 +70,31 @@ public class PivotReflectiveType extends ReflectiveType
 		};
 	}
 
-	public Iterable<? extends DomainOperation> getLocalOperations() {
-		return type.getOwnedOperation();
+	public @NonNull Iterable<? extends DomainOperation> getLocalOperations() {
+		return DomainUtil.nonNullEMF(type.getOwnedOperation());
 	}
 
-	public Iterable<? extends DomainProperty> getLocalProperties() {
-		return type.getOwnedAttribute();
+	public @NonNull Iterable<? extends DomainProperty> getLocalProperties() {
+		return DomainUtil.nonNullEMF(type.getOwnedAttribute());
 	}
 
-	public Iterable<? extends DomainType> getLocalSuperTypes() {
-		return type.getSuperClass();
+	public @NonNull Iterable<? extends DomainType> getLocalSuperTypes() {
+		return DomainUtil.nonNullEMF(type.getSuperClass());
 	}
 	
-	public final MetaModelManager getMetaModelManager() {
+	public final @NonNull MetaModelManager getMetaModelManager() {
 		return metaModelManager;
 	}
 
-	public String getMetaTypeName() {
+	public @NonNull String getMetaTypeName() {
 		return type.getMetaTypeName();
 	}
 
-	public final Type getPivotType() {
+	public final @NonNull Type getPivotType() {
 		return type;
 	}
 
-	public final DomainStandardLibrary getStandardLibrary() {
+	public final @NonNull DomainStandardLibrary getStandardLibrary() {
 		return metaModelManager;
 	}
 }

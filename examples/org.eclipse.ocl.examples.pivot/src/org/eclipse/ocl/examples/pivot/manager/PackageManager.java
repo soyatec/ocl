@@ -286,12 +286,12 @@ public class PackageManager extends PackageServerParent
 		return Iterables.transform(rootTrackers, RootTracker.tracker2root);
 	}
 	
-	public @Nullable TypeServer getTypeServer(@NonNull Type pivotType) {
+	public @NonNull TypeServer getTypeServer(@NonNull Type pivotType) {
 		TypeTracker typeTracker = findTypeTracker(pivotType);
 		if (typeTracker == null) {
 			org.eclipse.ocl.examples.pivot.Package pivotPackage = pivotType.getPackage();
 			if (pivotPackage == null) {
-				return null;
+				throw new IllegalStateException("type has no package");
 			}
 			PackageServer packageServer = getPackageServer(pivotPackage);
 			typeTracker = packageServer.getTypeTracker(pivotType);

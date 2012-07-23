@@ -63,7 +63,7 @@ public class TupleTypeImpl
 	}
 
 	@Override
-	public DomainInheritance getInheritance(DomainStandardLibrary standardLibrary) {
+	public @NonNull DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary) {
 		DomainType tupleType = standardLibrary.getOclTupleType();
 		return tupleType.getInheritance(standardLibrary);
 	}

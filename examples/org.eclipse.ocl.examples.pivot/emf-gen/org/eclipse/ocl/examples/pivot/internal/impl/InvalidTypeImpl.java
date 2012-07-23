@@ -62,7 +62,7 @@ public class InvalidTypeImpl
 	}
 
 	@Override
-	public boolean conformsTo(DomainStandardLibrary standardLibrary, DomainType type) {
+	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		return true;
 	}
 } //InvalidTypeImpl

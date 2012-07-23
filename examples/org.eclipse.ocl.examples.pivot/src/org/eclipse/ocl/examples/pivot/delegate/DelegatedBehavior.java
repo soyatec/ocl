@@ -19,26 +19,28 @@ package org.eclipse.ocl.examples.pivot.delegate;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  */
 public interface DelegatedBehavior<E, R, F>
 {
-	F getDefaultFactory();
+	@Nullable F getDefaultFactory();
 	
-	R getDefaultRegistry();
+	@NonNull R getDefaultRegistry();
 	
-	EPackage getEPackage(E eObject);
+	@NonNull EPackage getEPackage(@NonNull E eObject);
 	
-	List<F> getFactories(E eObject);
+	@NonNull List<F> getFactories(@NonNull E eObject);
 	
-	F getFactory(E eObject);
+	@Nullable F getFactory(@NonNull E eObject);
 	
-	Class<? extends F> getFactoryClass();
+	@NonNull Class<? extends F> getFactoryClass();
 
-	String getName();
+	@NonNull String getName();
 	
-	Class<? extends R> getRegistryClass();
+	@NonNull Class<? extends R> getRegistryClass();
 
-	void setDelegates(EPackage ePackage, List<String> delegateURIs);
+	void setDelegates(@NonNull EPackage ePackage, @NonNull List<String> delegateURIs);
 }

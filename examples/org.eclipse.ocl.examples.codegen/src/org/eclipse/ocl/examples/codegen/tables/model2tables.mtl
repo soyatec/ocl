@@ -50,6 +50,7 @@
  */
 package [genPackage.getQualifiedPackageName()/];
 
+import org.eclipse.jdt.annotation.NonNull;
 [prefixImports(knownImports(), genPackage.generateTablesClass(pPackage))/]
 [/file]
 [/let]
@@ -71,12 +72,12 @@ public class [tablesClassName/]
 	/**
 	 *	The package descriptor for the package.
 	 */
-	public static final <%EcoreExecutorPackage%> PACKAGE = new <%EcoreExecutorPackage%>([genPackage.prefix/]Package.eINSTANCE);
+	public static final @NonNull <%EcoreExecutorPackage%> PACKAGE = new <%EcoreExecutorPackage%>([genPackage.prefix/]Package.eINSTANCE);
 
 /**
 	 *	The library of all packages and types.
 	 */
-	public static final <%ExecutorStandardLibrary%> LIBRARY = [if (genPackage.hasSharedLibrary())]<%[genPackage.getSharedLibrary()/]%>.LIBRARY[else]new <%ExecutorStandardLibrary%>(PACKAGE)[/if]; 
+	public static final @NonNull <%ExecutorStandardLibrary%> LIBRARY = [if (genPackage.hasSharedLibrary())]<%[genPackage.getSharedLibrary()/]%>.LIBRARY[else]new <%ExecutorStandardLibrary%>(PACKAGE)[/if]; 
 
 	[pPackage.declareTypes(genPackage)/]
 
@@ -108,7 +109,7 @@ public static class Types {[for (cls : Class | pPackage.ownedType->filter(Class)
     [pPackage.declareType(genPackage, cls)/]
 [/for]
 
-	private static final <%EcoreExecutorType%>['[]'/] types = {
+	private static final @NonNull <%EcoreExecutorType%>['[]'/] types = {
 [for (type : Type | pPackage.ownedType->sortedBy(name)) separator(',\n') after('\n')]
 	    _[type.name/][/for]
 	};
@@ -133,11 +134,11 @@ public static class Types {[for (cls : Class | pPackage.ownedType->filter(Class)
 [if (cls.ownedTemplateSignature->notEmpty())]
 [for (parameter : TypeTemplateParameter | cls.ownedTemplateSignature.parameter->filter(TypeTemplateParameter))]
 [let parameteredElement : Type = parameter.parameteredElement.oclAsType(Type)]
-private static final <%ExecutorTypeParameter%> _[cls.name/]_[parameteredElement.name/] = new <%ExecutorTypeParameter%>(LIBRARY, "[parameteredElement.name/]");
+private static final @NonNull <%ExecutorTypeParameter%> _[cls.name/]_[parameteredElement.name/] = new <%ExecutorTypeParameter%>(LIBRARY, "[parameteredElement.name/]");
 [/let]
 [/for]
 [/if]
-public static final <%[typeName/]%> _[cls.name/] = [if (genPackage.hasAnotherType(cls))]
+public static final @NonNull <%[typeName/]%> _[cls.name/] = [if (genPackage.hasAnotherType(cls))]
 [genPackage.getAnotherType(cls).emitQualifiedLiteralName(genPackage)/][else]
 [if (not genPackage.hasEcore(cls))]
 new <%[typeName/]%>("[cls.name/]"[else]
@@ -159,7 +160,7 @@ public static class Fragments {[for (cls : Class | pPackage.ownedType->filter(Cl
 
 [template public declareFragment(pPackage : Package, genPackage : GenPackage, cls : Class)]
 [for (superCls : Type | cls.getAllSuperTypes()->sortedBy(name))]
-public static final <%ExecutorFragment%> _[cls.name/]__[superCls.name/] = new <%ExecutorFragment%>([cls.getLiteralName()/], [superCls.emitQualifiedLiteralName(genPackage)/]);
+public static final @NonNull <%ExecutorFragment%> _[cls.name/]__[superCls.name/] = new <%ExecutorFragment%>([cls.getLiteralName()/], [superCls.emitQualifiedLiteralName(genPackage)/]);
 [/for]
 [/template]
 
@@ -184,11 +185,11 @@ public static class Operations {[for (cls : Class | pPackage.ownedType->filter(C
 [if (op.ownedTemplateSignature->notEmpty())]
 [for (parameter : TypeTemplateParameter | op.ownedTemplateSignature.parameter->filter(TypeTemplateParameter))]
 [let parameteredElement : Type = parameter.parameteredElement.oclAsType(Type)]
-public static final <%ExecutorTypeParameter%> _[op.getLiteralName()/]_[parameteredElement.name/] = new <%ExecutorTypeParameter%>(LIBRARY, "[parameteredElement.name/]");
+public static final @NonNull <%ExecutorTypeParameter%> _[op.getLiteralName()/]_[parameteredElement.name/] = new <%ExecutorTypeParameter%>(LIBRARY, "[parameteredElement.name/]");
 [/let]
 [/for]
 [/if]
-public static final <%ExecutorOperation%> [op.getLiteralName()/] = new <%ExecutorOperation%>("[op.name/]",
+public static final @NonNull <%ExecutorOperation%> [op.getLiteralName()/] = new <%ExecutorOperation%>("[op.name/]",
 	[op.owningType.getLiteralName()/], [opIndex-1/], [genPackage.getImplementationName(op)/][genPackage.declareParameterTypes(op.ownedParameter.type->asOrderedSet())/]);
 [/template]
 
@@ -244,7 +245,7 @@ public static class Properties {[for (cls : Class | pPackage.ownedType->filter(C
 [let props : OrderedSet(Property) = rawProps->select(prop : Property | genPackage.isProperty(prop))->sortedBy(name)]
 [for (i : Integer | Sequence{1..props->size()}) separator('\n')]
 [let prop : Property = props->at(i)]
-public static final <%ExecutorProperty%> [prop.getLiteralName()/] = new <%ExecutorProperty%>("[prop.name/]", [cls.getLiteralName()/], [i-1/], [genPackage.getImplementationName(prop)/]);[/let][/for][/let][/let]
+public static final @NonNull <%ExecutorProperty%> [prop.getLiteralName()/] = new <%ExecutorProperty%>("[prop.name/]", [cls.getLiteralName()/], [i-1/], [genPackage.getImplementationName(prop)/]);[/let][/for][/let][/let]
 [/template]
 
 [template public declareConstraints(pPackage : Package, genPackage : GenPackage)]
@@ -264,7 +265,7 @@ public static class Constraints {[for (cls : Class | pPackage.ownedType->filter(
 [/template]
 
 [template public declareConstraint(pPackage : Package, genPackage : GenPackage, rule : Constraint, opIndex : Integer, cls : Class)]
-public static final <%ExecutorOperation%> [rule.getLiteralName()/] = new <%ExecutorOperation%>("[cls.getUniqueText(rule)/]",
+public static final @NonNull <%ExecutorOperation%> [rule.getLiteralName()/] = new <%ExecutorOperation%>("[cls.getUniqueText(rule)/]",
 	[cls.getLiteralName()/], [opIndex-1/], [genPackage.getImplementationName(rule)/]);
 [/template]
 
@@ -293,13 +294,13 @@ public static class TypeFragments {[for (cls : Type | types) before('\n') separa
 
 [template public declareTypeFragment(pPackage : Package, cls : Type)]
 [let rawSuperTypes : Set(Type) = cls.getAllSuperTypes()]
-private static final <%ExecutorFragment%>['[]'/] _[cls.name/] =
+private static final @NonNull <%ExecutorFragment%>['[]'/] _[cls.name/] =
 [let superTypes : OrderedSet(Type) = rawSuperTypes->asOrderedSet()->sortedBy(c : Type | (100000+c.getDepth())+c.name)]
 {
 [for (superClass : Type | superTypes) separator(',\n')]    Fragments._[cls.name/]__[superClass.name/] /* [superClass.getDepth()/] */[/for]
 };
 [/let]
-private static final int['[]'/] __[cls.name/] = { [for (i : Integer | Sequence{0..cls.getDepth()}) separator(',')][rawSuperTypes->select(c : Type | c.getDepth() = i)->size()/][/for] };[/let]
+private static final @NonNull int['[]'/] __[cls.name/] = { [for (i : Integer | Sequence{0..cls.getDepth()}) separator(',')][rawSuperTypes->select(c : Type | c.getDepth() = i)->size()/][/for] };[/let]
 [/template]
 
 [template public declareTypeIndexes(pPackage : Package)]
@@ -346,7 +347,7 @@ public static class FragmentOperations {
 [template public declareLocalFragmentOperations(pPackage : Package, genPackage : GenPackage, cls : Type)]
 [let localOps : Set(Operation) = cls.getLocalOperationsOf()]
 [let ops : OrderedSet(Operation) = localOps->sortedBy(getSignature())]
-private static final <%ExecutorOperation%>['[]'/] _[cls.name/]__[cls.name/] = [if ops->isEmpty()]{[else]
+private static final @NonNull <%ExecutorOperation%>['[]'/] _[cls.name/]__[cls.name/] = [if ops->isEmpty()]{[else]
 {
 [for (i : Integer | Sequence{1..ops->size()}) separator (',\n') after ('\n')]
     [ops->at(i).emitQualifiedLiteralName(genPackage)/] /* [ops->at(i).getSignature()/] */[/for]
@@ -356,7 +357,7 @@ private static final <%ExecutorOperation%>['[]'/] _[cls.name/]__[cls.name/] = [i
 [template public declareSuperFragmentOperations(pPackage : Package, genPackage : GenPackage, superCls: Type, cls : Type)]
 [let localOps : Set(Operation) = superCls.getLocalOperationsOf()]
 [let ops : OrderedSet(Operation) = localOps->sortedBy(getSignature())]
-private static final <%ExecutorOperation%>['[]'/] _[cls.name/]__[superCls.name/] = [if ops->isEmpty()]{[else]
+private static final @NonNull <%ExecutorOperation%>['[]'/] _[cls.name/]__[superCls.name/] = [if ops->isEmpty()]{[else]
 {
 [for (i : Integer | Sequence{1..ops->size()}) separator (',\n') after ('\n')]
 [let overloadOp : Operation = cls.getOverloadOp(ops->at(i))]
@@ -389,7 +390,7 @@ public static class FragmentProperties {
 [template public declareFragmentProperty(pPackage : Package, genPackage : GenPackage, cls : Class)]
 [let clsProps : Set(Property) = cls.getAllPropertiesOf()]
 [let props : OrderedSet(Property) = clsProps->select(prop : Property | genPackage.isProperty(prop))->sortedBy(name + '#' + owningType.name)]
-private static final <%ExecutorProperty%>['[]'/] _[cls.name/] = [if props->isEmpty()]{[else]
+private static final @NonNull <%ExecutorProperty%>['[]'/] _[cls.name/] = [if props->isEmpty()]{[else]
 {
 [for (i : Integer | Sequence{1..props->size()}) separator (',\n') after ('\n')]
     [props->at(i).emitQualifiedLiteralName(genPackage)/][/for]
@@ -425,9 +426,9 @@ public static class EnumerationLiterals {
 [let enumLiterals : OrderedSet(EnumerationLiteral) = enum.ownedLiteral]
 [for (i : Integer | Sequence{1..enumLiterals->size()}) after ('\n')]
 [let enumLiteral : EnumerationLiteral = enumLiterals->at(i)]
-public static <%EcoreExecutorEnumerationLiteral%> _[enumLiteral.enumeration.name/]__[enumLiteral.name/] = new <%EcoreExecutorEnumerationLiteral%>([genPackage.prefix + 'Package.Literals.' + enum.upperName()/].getEEnumLiteral("[enumLiteral.name/]"), Types._[enum.name/], [i-1/]);
+public static final @NonNull <%EcoreExecutorEnumerationLiteral%> _[enumLiteral.enumeration.name/]__[enumLiteral.name/] = new <%EcoreExecutorEnumerationLiteral%>([genPackage.prefix + 'Package.Literals.' + enum.upperName()/].getEEnumLiteral("[enumLiteral.name/]"), Types._[enum.name/], [i-1/]);
 [/let][/for]
-private static final <%EcoreExecutorEnumerationLiteral%>['[]'/] _[enum.name/] = [if enumLiterals->isEmpty()]{[else]
+private static final @NonNull <%EcoreExecutorEnumerationLiteral%>['[]'/] _[enum.name/] = [if enumLiterals->isEmpty()]{[else]
 {
 [for (i : Integer | Sequence{1..enumLiterals->size()}) separator (',\n') after ('\n')]
 [let enumLiteral : EnumerationLiteral = enumLiterals->at(i)]

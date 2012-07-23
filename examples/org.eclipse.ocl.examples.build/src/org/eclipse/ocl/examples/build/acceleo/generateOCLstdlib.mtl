@@ -75,7 +75,7 @@ public class [javaClass/] extends XMIResourceImpl
 	/**
 	 *	The URI of this Standard Library.
 	 */
-	public static final String STDLIB_URI = "[uri/]";
+	public static final @NonNull String STDLIB_URI = "[uri/]";
 
 	/**
 	 * Return the default OCL standard Library. 
@@ -170,7 +170,7 @@ public class [javaClass/] extends XMIResourceImpl
 		protected Library [lib.getPrefixedSymbolName('library')/];
 		// protected Package [root.getOrphanPackage().getPrefixedSymbolName('orphans')/];
 
-		protected @NonNull Root create(@NonNull String name, String nsPrefix, @NonNull String nsURI)
+		protected @NonNull Root create(@NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI)
 		{
 			@NonNull Root theRoot = [root.getSymbolName()/] = createRoot("[root.name/]", nsURI);
 			[lib.getSymbolName()/] = createLibrary(name, nsPrefix, nsURI);

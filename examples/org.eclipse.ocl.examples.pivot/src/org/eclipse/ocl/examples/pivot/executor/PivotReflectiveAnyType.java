@@ -18,24 +18,26 @@ package org.eclipse.ocl.examples.pivot.executor;
 
 import java.util.Collections;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.AnyType;
 
 public class PivotReflectiveAnyType extends PivotReflectiveType
 {
-	public PivotReflectiveAnyType(PivotReflectivePackage executorPackage, AnyType type) {
+	public PivotReflectiveAnyType(@NonNull PivotReflectivePackage executorPackage, @NonNull AnyType type) {
 		super(executorPackage, type);
 		installOclAny();
 	}
 
 	@Override
-	public DomainInheritance getCommonInheritance(DomainInheritance thatInheritance) {
+	public @NonNull DomainInheritance getCommonInheritance(@NonNull DomainInheritance thatInheritance) {
 		return this;
 	}
 
 	@Override
-	public Iterable<? extends DomainInheritance> getInitialSuperInheritances() {
-		return Collections.emptyList();
+	public @NonNull Iterable<? extends DomainInheritance> getInitialSuperInheritances() {
+		return DomainUtil.nonNullJava(Collections.<DomainInheritance>emptyList());
 	}
 
 	@Override

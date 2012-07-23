@@ -32,9 +32,12 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.OCLCommon;
 import org.eclipse.ocl.common.delegate.VirtualDelegateMapping;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.validation.DomainSubstitutionLabelProvider;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -44,6 +47,7 @@ import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.VariableExp;
+import org.eclipse.ocl.examples.pivot.context.ClassContext;
 import org.eclipse.ocl.examples.pivot.context.DiagnosticContext;
 import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -56,7 +60,7 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 
 	private static List<DelegatedBehavior<?, ?, ?>> delegatedBehaviors = null;
 
-	public static List<DelegatedBehavior<?, ?, ?>> getDelegatedBehaviors() {
+	public static @NonNull List<DelegatedBehavior<?, ?, ?>> getDelegatedBehaviors() {
 		// FIXME Maybe use an extension point here (but need a common
 		//  Factory, Registry supertype for a user-defined fourth behavior)
 		if (delegatedBehaviors == null) {
@@ -65,10 +69,10 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 			delegatedBehaviors.add(SettingBehavior.INSTANCE);
 			delegatedBehaviors.add(ValidationBehavior.INSTANCE);
 		}
-		return delegatedBehaviors;
+		return DomainUtil.nonNullJDT(delegatedBehaviors);
 	};
 
-	public Constraint getConstraintForStereotype(NamedElement namedElement, String name) {
+	public @Nullable Constraint getConstraintForStereotype(@NonNull NamedElement namedElement, @NonNull String name) {
 		for (Constraint constraint : namedElement.getOwnedRule()) {
 			String stereotype = constraint.getStereotype();
 			if (name.equals(stereotype)) {
@@ -78,7 +82,7 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 		return null;
 	}
 	
-	public List<DelegateDomain> getDelegateDomains(E eObject) {
+	public List<DelegateDomain> getDelegateDomains(@NonNull E eObject) {
 		EPackage ePackage = getEPackage(eObject);
 		DelegateEPackageAdapter adapter = DelegateEPackageAdapter.getAdapter(ePackage);
 		List<DelegateDomain> delegateDomains = new ArrayList<DelegateDomain>();
@@ -91,7 +95,7 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 		return delegateDomains;
 	}
 
-	public List<F> getFactories(E eObject) {
+	public @NonNull List<F> getFactories(@NonNull E eObject) {
 		EPackage ePackage = getEPackage(eObject);
 		DelegateEPackageAdapter adapter = DelegateEPackageAdapter.getAdapter(ePackage);
 		List<F> factories = new ArrayList<F>();
@@ -110,9 +114,9 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 		return factories;
 	}
 
-	protected abstract F getFactory(DelegateDomain delegateDomain, E eObject);
+	protected abstract @Nullable F getFactory(@NonNull DelegateDomain delegateDomain, @NonNull E eObject);
 
-	public F getFactory(E eObject) {
+	public @Nullable F getFactory(@NonNull E eObject) {
 		EPackage ePackage = getEPackage(eObject);
 		DelegateEPackageAdapter adapter = DelegateEPackageAdapter.getAdapter(ePackage);
 		for (DelegateDomain delegateDomain : adapter.getDelegateDomains(this)) {
@@ -128,7 +132,7 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 		return null;
 	}
 
-	protected ExpressionInOCL getExpressionInOCL(ParserContext parserContext, Constraint constraint) {
+	protected ExpressionInOCL getExpressionInOCL(@NonNull ClassContext parserContext, @NonNull Constraint constraint) {
 		ValueSpecification valueSpecification = constraint.getSpecification();
 		if (valueSpecification instanceof ExpressionInOCL) {
 			return (ExpressionInOCL) valueSpecification;
@@ -144,27 +148,30 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 				String expression = PivotUtil.getBody(opaqueExpression);
 				if (expression != null) {
 					expressionInOCL = parserContext.parse(expression);
-					if (expressionInOCL != null) {
+//					if (expressionInOCL != null) {
 						opaqueExpression.setValueExpression(expressionInOCL);
 //						opaqueExpression.setType(expressionInOCL.getType());
 						constraint.setSpecification(expressionInOCL);
 						String message = PivotUtil.getMessage(opaqueExpression);
 						if ((message != null) && (message.length() > 0)) {
 							ParserContext messageContext = new DiagnosticContext(parserContext, constraint);
+							OCLExpression messageExpression = null;
 							ExpressionInOCL resolveSpecification = messageContext.parse(message);
-							OCLExpression messageExpression = resolveSpecification.getBodyExpression();
-							for (TreeIterator<EObject> tit = messageExpression.eAllContents(); tit.hasNext(); ) {
-								EObject eObject = tit.next();
-								if (eObject instanceof VariableExp) {
-									VariableExp variable = (VariableExp)eObject;
-									if (variable.getReferredVariable() == resolveSpecification.getContextVariable()) {
-										variable.setReferredVariable(expressionInOCL.getContextVariable());
+							if (resolveSpecification != null) {
+								messageExpression = resolveSpecification.getBodyExpression();
+								for (TreeIterator<EObject> tit = messageExpression.eAllContents(); tit.hasNext(); ) {
+									EObject eObject = tit.next();
+									if (eObject instanceof VariableExp) {
+										VariableExp variable = (VariableExp)eObject;
+										if (variable.getReferredVariable() == resolveSpecification.getContextVariable()) {
+											variable.setReferredVariable(expressionInOCL.getContextVariable());
+										}
 									}
 								}
 							}
 							expressionInOCL.setMessageExpression(messageExpression);
 						}
-					}
+//					}
 					return expressionInOCL;
 				}
 			} catch (ParserException e) {
@@ -174,7 +181,7 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 		return null;
 	}
 
-	private boolean hasDelegateAnnotation(E eObject, EPackage ePackage, String uri) {
+	private boolean hasDelegateAnnotation(@NonNull E eObject, @NonNull EPackage ePackage, @NonNull String uri) {
 		if (eObject.getEAnnotation(uri) != null) {
 			return true;
 		}
@@ -189,7 +196,7 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 		return false;
 	}
 
-	public void setDelegates(EPackage ePackage, List<String> delegateURIs) {
+	public void setDelegates(@NonNull EPackage ePackage, @Nullable List<String> delegateURIs) {
 		final String name = getName();
 		EAnnotation eAnnotation = ePackage.getEAnnotation(EcorePackage.eNS_URI);
 		if (delegateURIs == null || delegateURIs.isEmpty()) {

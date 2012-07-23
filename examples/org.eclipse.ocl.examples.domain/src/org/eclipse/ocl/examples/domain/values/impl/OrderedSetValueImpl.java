@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -53,7 +54,7 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
 		return ValuesPackage.Literals.ORDERED_SET_VALUE;
 	}
 
-    public static OrderedSetValue intersection(ValueFactory valueFactory, DomainCollectionType type, CollectionValue left, CollectionValue right) throws InvalidValueException
+    public static @NonNull OrderedSetValue intersection(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull CollectionValue left, @NonNull CollectionValue right) throws InvalidValueException
     {
     	assert !left.isUndefined() && !right.isUndefined();
 		Collection<Value> leftElements = left.asCollection();
@@ -70,7 +71,7 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
      	return results.size() > 0 ? valueFactory.createOrderedSetValue(type, results) : valueFactory.createOrderedSetValue(type);
     }
 
-    public static OrderedSetValue union(ValueFactory valueFactory, DomainCollectionType type, CollectionValue left, CollectionValue right) throws InvalidValueException {
+    public static @NonNull OrderedSetValue union(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull CollectionValue left, @NonNull CollectionValue right) throws InvalidValueException {
     	assert !left.isUndefined() && !right.isUndefined();
 		Collection<Value> leftElements = left.asCollection();
         Collection<Value> rightElements = right.asCollection();
@@ -86,27 +87,26 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
     		return valueFactory.createOrderedSetValue(type, result);
         } 
     }
-	public OrderedSetValueImpl(ValueFactory valueFactory,
-			DomainCollectionType type, Collection<Value> elements) {
+	public OrderedSetValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Collection<Value> elements) {
 		super(valueFactory, type, elements);
 	}
 
 	@Override
-	public OrderedSetValueImpl asOrderedSetValue() {
+	public @NonNull OrderedSetValueImpl asOrderedSetValue() {
 		return this;
 	}
 
 	@Override
-	public SequenceValue asSequenceValue() {
+	public @NonNull SequenceValue asSequenceValue() {
 		return this;
 	}
 
 	@Override
-	public UniqueCollectionValue asUniqueCollectionValue() {
+	public @NonNull UniqueCollectionValue asUniqueCollectionValue() {
         return this;
 	}
 	
-    public Value at(int index) throws InvalidValueException {
+    public @NonNull Value at(int index) throws InvalidValueException {
         index = index - 1;        
         if (index < 0 || index >= elements.size()) {
 			valueFactory.throwInvalidValueException(EvaluatorMessages.IndexOutOfRange, index + 1, size());
@@ -115,10 +115,13 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
         for (Iterator<Value> it = iterator(); it.hasNext();) {
         	Value object = it.next();
             if (curr++ == index) {
-                return object;
+                if (object != null) {
+                	return object;
+                }
+                break;
             }
         }
-        return null; // undefined
+		return valueFactory.throwInvalidValueException("Null collection content");
     }
 
 	@Override
@@ -138,7 +141,7 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
 		return !theseElements.hasNext() && !thoseElements.hasNext();
 	}
 
-	public OrderedSetValue excluding(Value value) {
+	public @NonNull OrderedSetValue excluding(@NonNull Value value) {
 		OrderedSet<Value> result = new OrderedSetImpl<Value>();
 		for (Value element : elements) {
 			if (!element.equals(value)) {
@@ -153,11 +156,11 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
 		}
 	}
 
-	public String getKind() {
+	public @NonNull String getKind() {
 	    return "OrderedSet";
 	}
 
-    public IntegerValue indexOf(Value object) throws InvalidValueException {
+    public @NonNull IntegerValue indexOf(@NonNull Value object) throws InvalidValueException {
         int index = 1;        
         for (Value next : elements) {
             if (object.equals(next)) {
@@ -165,11 +168,10 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
             }
             index++;
         }        
-		valueFactory.throwInvalidValueException(EvaluatorMessages.MissingValue, "indexOf");
-		return null;
+		return valueFactory.throwInvalidValueException(EvaluatorMessages.MissingValue, "indexOf");
     }
 
-    public OrderedSetValue insertAt(int index, Value object) throws InvalidValueException {
+    public @NonNull OrderedSetValue insertAt(int index, @NonNull Value object) throws InvalidValueException {
 		if (object.isInvalid()) {
 			valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidSource, "insertAt");
 		}
@@ -200,25 +202,25 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
         return valueFactory.createOrderedSetValue(getCollectionType(), result);
     }
 
-    public OrderedSetValue minus(UniqueCollectionValue set) throws InvalidValueException {
+    public @NonNull OrderedSetValue minus(@NonNull UniqueCollectionValue set) throws InvalidValueException {
     	OrderedSet<Value> result = new OrderedSetImpl<Value>(elements);
         result.removeAll(set.asCollection());
         return valueFactory.createOrderedSetValue(getCollectionType(), result);
     }
 
-	public OrderedSetValue reverse() {
+	public @NonNull OrderedSetValue reverse() {
 		List<Value> elements = asList();
 		Collections.reverse(elements);
         return valueFactory.createOrderedSetValue(getCollectionType(), elements);
     }
     
-    public OrderedSetValue sort(Comparator<Value> comparator) {
+    public @NonNull OrderedSetValue sort(@NonNull Comparator<Value> comparator) {
     	List<Value> values = new ArrayList<Value>(elements);
     	Collections.sort(values, comparator);
     	return valueFactory.createOrderedSetValue(getCollectionType(), values);
     }
 
-    public OrderedSetValue subOrderedSet(int lower, int upper) {
+    public @NonNull OrderedSetValue subOrderedSet(int lower, int upper) {
         lower = lower - 1;
         upper = upper - 1;
         
@@ -246,11 +248,11 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
         return valueFactory.createOrderedSetValue(getCollectionType(), result);
     }
 
-	public SequenceValue subSequence(int lower, int upper) throws InvalidValueException {
+	public @NonNull SequenceValue subSequence(int lower, int upper) throws InvalidValueException {
 		return subOrderedSet(lower, upper);
 	}
 
-    public OrderedSetValue symmetricDifference(UniqueCollectionValue set) {       
+    public @NonNull OrderedSetValue symmetricDifference(@NonNull UniqueCollectionValue set) {       
     	OrderedSet<Value> result = new OrderedSetImpl<Value>(elements);       
         for (Value e : set) {
             if (result.contains(e)) {

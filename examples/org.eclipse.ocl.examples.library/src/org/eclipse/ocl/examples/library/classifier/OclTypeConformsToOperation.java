@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.classifier;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -32,7 +33,7 @@ public class OclTypeConformsToOperation extends AbstractBinaryOperation
 {
 	public static final OclTypeConformsToOperation INSTANCE = new OclTypeConformsToOperation();
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceVal, Value argVal) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal, @NonNull Value argVal) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 		TypeValue thisVal = sourceVal.asTypeValue();

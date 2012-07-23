@@ -30,10 +30,13 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.QueryDelegate;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.OCLConstants;
 import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
 import org.eclipse.ocl.common.delegate.VirtualDelegateMapping;
 import org.eclipse.ocl.common.internal.options.CommonOptions;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
@@ -52,13 +55,13 @@ public class OCLDelegateDomain implements DelegateDomain, MetaModelManagerListen
 	/**
 	 * The delegate URI for Ecore annotations using the Pivot evaluator.
 	 */
-	public static final String OCL_DELEGATE_URI_PIVOT = OCLConstants.OCL_DELEGATE_URI_SLASH + "Pivot"; //$NON-NLS-1$
+	public static final @NonNull String OCL_DELEGATE_URI_PIVOT = OCLConstants.OCL_DELEGATE_URI_SLASH + "Pivot"; //$NON-NLS-1$
 	
 	/**
 	 * Initialize the resourceSet registries, if non-null, or the global registries, if null,
 	 * to support usage of the Pivot OCL Delegate Evaluator for the Pivot OCL Delegate URI. 
 	 */
-	public static void initialize(ResourceSet resourceSet) {
+	public static void initialize(@Nullable ResourceSet resourceSet) {
 		initialize(resourceSet, OCL_DELEGATE_URI_PIVOT);
 	}
 	
@@ -66,7 +69,7 @@ public class OCLDelegateDomain implements DelegateDomain, MetaModelManagerListen
 	 * Initialize the resourceSet registries, if non-null, or the global registries, if null,
 	 * to support usage of the Pivot OCL Delegate Evaluator for the oclDelegateURI. 
 	 */
-	public static void initialize(ResourceSet resourceSet, String oclDelegateURI) {
+	public static void initialize(@Nullable ResourceSet resourceSet, @NonNull String oclDelegateURI) {
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {		// Install the 'plugin' registrations
 			EOperation.Internal.InvocationDelegate.Factory.Registry.INSTANCE.put(oclDelegateURI, new OCLInvocationDelegateFactory.Global());
 			EStructuralFeature.Internal.SettingDelegate.Factory.Registry.INSTANCE.put(oclDelegateURI, new OCLSettingDelegateFactory.Global());
@@ -106,8 +109,8 @@ public class OCLDelegateDomain implements DelegateDomain, MetaModelManagerListen
 		}
 	}
 
-	protected final String uri;
-	protected final EPackage ePackage;
+	protected final @NonNull String uri;
+	protected final @NonNull EPackage ePackage;
 	protected OCL ocl = null;				// Lazily initialized and re-initialized
 	// FIXME Introduce a lightweight function (? a lambda function) to avoid the need for a CompleteEnvironment for queries
 //	private Map<CompletePackage, org.eclipse.ocl.examples.pivot.Package> queryPackages = null;
@@ -124,12 +127,12 @@ public class OCLDelegateDomain implements DelegateDomain, MetaModelManagerListen
 	 * @throws ParserException
 	 *             if the operation's OCL body expression is invalid
 	 */
-	public OCLDelegateDomain(String delegateURI, EPackage ePackage) {
+	public OCLDelegateDomain(@NonNull String delegateURI, @NonNull EPackage ePackage) {
 		this.uri = delegateURI;
 		this.ePackage = ePackage;
 	}
 
-	private PivotEnvironmentFactory getEnvironmentFactory() {
+	private @NonNull PivotEnvironmentFactory getEnvironmentFactory() {
 		Resource res = ePackage.eResource();
 		PivotEnvironmentFactory envFactory = null;
 		if (res != null) {
@@ -153,30 +156,30 @@ public class OCLDelegateDomain implements DelegateDomain, MetaModelManagerListen
 		return envFactory;
 	}
 
-	public final MetaModelManager getMetaModelManager() {
+	public final @NonNull MetaModelManager getMetaModelManager() {
 		return getOCL().getMetaModelManager();
 	}
 
-	public OCL getOCL() {
+	public @NonNull OCL getOCL() {
 		if (ocl == null) {
 			// Delegates are an application-independent extension of EMF
 			//  so we must use the neutral/global context see Bug 338501
 			ocl = OCL.newInstance(getEnvironmentFactory());
 			ocl.getMetaModelManager().addListener(this);
 		}
-		return ocl;
+		return DomainUtil.nonNullJDT(ocl);
 	}
 	
-	public <T extends Element> T getPivot(Class<T> requiredClass, EObject eObject) {
-		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(eObject.eResource(), getOCL().getMetaModelManager());
+	public <T extends Element> T getPivot(@NonNull Class<T> requiredClass, @NonNull EObject eObject) {
+		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(DomainUtil.nonNullEMF(eObject.eResource()), getOCL().getMetaModelManager());
 		return ecore2Pivot.getCreated(requiredClass, eObject);
 	}
 	
-	public final String getURI() {
+	public final @NonNull String getURI() {
 		return uri;
 	}
 
-	public void metaModelManagerDisposed(MetaModelManager metaModelManager) {
+	public void metaModelManagerDisposed(@NonNull MetaModelManager metaModelManager) {
 		reset();
 	}
 

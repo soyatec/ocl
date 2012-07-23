@@ -19,6 +19,7 @@
 package org.eclipse.ocl.examples.pivot;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
@@ -76,7 +77,7 @@ public interface EnvironmentFactory {
 	 * 
 	 * @return a new root environment
 	 */
-	Environment createEnvironment();
+	@NonNull Environment createEnvironment();
 	
 	/**
 	 * Creates an environment suitable for parsing OCL expressions in the
@@ -102,7 +103,7 @@ public interface EnvironmentFactory {
 	 * 
 	 * @param resource a resource containing the persisted environment
 	 */
-	Environment loadEnvironment(Resource resource);
+	@NonNull Environment loadEnvironment(@NonNull Resource resource);
 	
 	/**
 	 * Creates an environment suitable for parsing OCL expressions in the
@@ -116,7 +117,7 @@ public interface EnvironmentFactory {
      * @see #createAttributeContext(Environment, Object)
      * @see #createInstanceContext(Environment, Object)
 	 */
-	Environment createClassifierContext(Environment parent, Type context);
+	@NonNull Environment createClassifierContext(@NonNull Environment parent, @NonNull Type context);
 	
     /**
      * Creates an environment suitable for parsing OCL expressions on the
@@ -137,7 +138,7 @@ public interface EnvironmentFactory {
      * @see #createClassifierContext(Environment, Object)
      * @see DomainStandardLibrary#getOclAny()
      */
-    Environment createInstanceContext(Environment parent, Object context);
+	@NonNull Environment createInstanceContext(@NonNull Environment parent, @NonNull Object context);
     
 	/**
 	 * Creates an environment suitable for parsing OCL expressions on the
@@ -151,7 +152,7 @@ public interface EnvironmentFactory {
 	 * 
 	 * @see #createClassifierContext(Environment, Object)
 	 */
-	Environment createOperationContext(Environment parent, Operation operation);
+	@NonNull Environment createOperationContext(@NonNull Environment parent, @NonNull Operation operation);
 	
 	/**
 	 * Creates an environment suitable for parsing OCL expressions on the
@@ -165,7 +166,7 @@ public interface EnvironmentFactory {
 	 * 
 	 * @see #createClassifierContext(Environment, Object)
 	 */
-	Environment createPropertyContext(Environment parent, Property property);
+	@NonNull Environment createPropertyContext(@NonNull Environment parent, @NonNull Property property);
 	
 	/**
 	 * Creates a child environment of a specified <code>parent</code>, for
@@ -174,7 +175,7 @@ public interface EnvironmentFactory {
 	 * @param parent the parent environment
 	 * @return the child environment
 	 */
-	Environment createEnvironment(Environment parent);
+	@NonNull Environment createEnvironment(@NonNull Environment parent);
 	
 	/**
 	 * Creates a new evaluation environment to track the values of variables in
@@ -182,7 +183,7 @@ public interface EnvironmentFactory {
 	 * 
 	 * @return a new evaluation environment
 	 */
-	EvaluationEnvironment createEvaluationEnvironment();
+	@NonNull EvaluationEnvironment createEvaluationEnvironment();
 	
 	/**
 	 * Creates a new evaluation environment as a nested environment of the
@@ -191,7 +192,7 @@ public interface EnvironmentFactory {
 	 * @param parent a nesting evaluation environment
 	 * @return a new nested evaluation environment
 	 */
-	EvaluationEnvironment createEvaluationEnvironment(EvaluationEnvironment parent);
+	@NonNull EvaluationEnvironment createEvaluationEnvironment(@NonNull EvaluationEnvironment parent);
 	
     /**
      * Creates a new evaluation visitor, for the evaluation of OCL expressions.
@@ -203,7 +204,5 @@ public interface EnvironmentFactory {
      * @param modelManager the map of <tt>Class</tt>es to their extends
      * @return the new evaluation visitor
      */
-	EvaluationVisitor createEvaluationVisitor(Environment env,
-			EvaluationEnvironment evalEnv,
-			DomainModelManager modelManager);
+	@NonNull EvaluationVisitor createEvaluationVisitor(@NonNull Environment env, @NonNull EvaluationEnvironment evalEnv, @NonNull DomainModelManager modelManager);
 }

@@ -46,6 +46,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -967,13 +968,13 @@ public class PropertyImpl
 		p.oclIsKindOf(self.oclType())
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(p));
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(p));
 			return (Boolean) result.asEcoreObject();
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.ParameterableElementBodies", e);
@@ -996,13 +997,13 @@ public class PropertyImpl
 		  .ownedAttribute->includes(self)
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = PropertyBodies._isAttribute_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(p));
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = PropertyBodies._isAttribute_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(p));
 			return (Boolean) result.asEcoreObject();
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.PropertyBodies", e);
@@ -1047,13 +1048,13 @@ public class PropertyImpl
 		          CompatibleBody(initialiser)
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = PropertyBodies._invariant_CompatibleInitialiser.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = PropertyBodies._invariant_CompatibleInitialiser.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -1646,11 +1647,11 @@ public class PropertyImpl
 		return visitor.visitProperty(this);
 	}
 
-	public DomainInheritance getInheritance(DomainStandardLibrary standardLibrary) {
-		return standardLibrary.getInheritance(getOwningType());
+	public @NonNull DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary) {
+		return standardLibrary.getInheritance(DomainUtil.nonNullModel(getOwningType()));
 	}
 
-	public void setValue(ObjectValue objectValue, Value propertyValue) throws InvalidValueException {
+	public void setValue(@NonNull ObjectValue objectValue, @NonNull Value propertyValue) throws InvalidValueException {
 		EObject eTarget = getETarget();
 		if (eTarget instanceof EStructuralFeature) {
 			EStructuralFeature eFeature = (EStructuralFeature) eTarget;

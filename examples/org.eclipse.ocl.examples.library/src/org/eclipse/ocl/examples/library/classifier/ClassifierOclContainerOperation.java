@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.classifier;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -34,7 +35,7 @@ public class ClassifierOclContainerOperation extends AbstractUnaryOperation
 {
 	public static final ClassifierOclContainerOperation INSTANCE = new ClassifierOclContainerOperation();
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceVal) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		ObjectValue objectVal = sourceVal.asObjectValue();
 		Object object = objectVal.getObject();

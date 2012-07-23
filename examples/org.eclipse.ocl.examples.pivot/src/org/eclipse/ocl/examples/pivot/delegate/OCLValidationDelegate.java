@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
@@ -45,7 +46,6 @@ import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.context.ClassContext;
-import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -126,26 +126,33 @@ public class OCLValidationDelegate implements ValidationDelegate
 
 	public boolean validate(EClass eClass, EObject eObject,
 			Map<Object, Object> context, EOperation invariant, String expression) {
+		if (eClass == null) {
+			throw new NullPointerException("Null EClass");
+		}
+		if (eObject == null) {
+			throw new NullPointerException("Null EObject");
+		}
 		MetaModelManager metaModelManager = delegateDomain.getMetaModelManager();
-		NamedElement namedElement = delegateDomain.getPivot(NamedElement.class, invariant);
+		NamedElement namedElement = delegateDomain.getPivot(NamedElement.class, DomainUtil.nonNullEMF(invariant));
 		if (namedElement instanceof Operation) {
 			Operation operation = (Operation)namedElement;
 			ExpressionInOCL query = InvocationBehavior.INSTANCE.getExpressionInOCL(metaModelManager, operation);
 			InvocationBehavior.INSTANCE.validate(operation);
-			return validateExpressionInOCL(eClass, eObject, null, context,
-				invariant.getName(), null, 0, query);
+			return validateExpressionInOCL(eClass, eObject, null, context, invariant.getName(), null, 0, query);
 		}
 		else if (namedElement instanceof Constraint) {
 			Constraint constraint = (Constraint)namedElement;
-			ExpressionInOCL query;
+			ExpressionInOCL query = null;
 			ValueSpecification valueSpecification = constraint.getSpecification();
 			if (valueSpecification instanceof ExpressionInOCL) {
 				query = (ExpressionInOCL) valueSpecification;
 			}
 			else {
 				Type contextType = (Type) constraint.getContext();
-				ParserContext classContext = new ClassContext(metaModelManager, null, contextType);
-				query = ValidationBehavior.INSTANCE.getExpressionInOCL(classContext, constraint);
+				if (contextType != null) {
+					ClassContext classContext = new ClassContext(metaModelManager, null, contextType);
+					query = ValidationBehavior.INSTANCE.getExpressionInOCL(classContext, constraint);
+				}
 			}
 			if (query == null) {
 				String message = DomainUtil.bind(OCLMessages.MissingBodyForInvocationDelegate_ERROR_, constraint.getContext());
@@ -162,26 +169,44 @@ public class OCLValidationDelegate implements ValidationDelegate
 
 	public boolean validate(EClass eClass, EObject eObject,
 			Map<Object, Object> context, String constraintName, String expression) {
+		if (eClass == null) {
+			throw new NullPointerException("Null EClass");
+		}
+		if (eObject == null) {
+			throw new NullPointerException("Null EObject");
+		}
+		if (constraintName == null) {
+			throw new NullPointerException("Null constraint name");
+		}
 		return validatePivot(eClass, eObject, null, context, constraintName, null, 0);
 	}
 
 	public boolean validate(EDataType eDataType, Object value,
 			Map<Object, Object> context, String constraintName, String expression) {
+		if (eDataType == null) {
+			throw new NullPointerException("Null EClass");
+		}
+		if (value == null) {
+			throw new NullPointerException("Null EObject");
+		}
+		if (constraintName == null) {
+			throw new NullPointerException("Null constraint name");
+		}
 		return validatePivot(eDataType, value, null, context, constraintName, null, 0);
 	}
 
-	public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context,
-			String constraintName, String expression, int severity, String source, int code) {
+	public boolean validate(@NonNull EClass eClass, @NonNull EObject eObject, @Nullable DiagnosticChain diagnostics, Map<Object, Object> context,
+			@NonNull String constraintName, String expression, int severity, String source, int code) {
 		return validatePivot(eClass, eObject, diagnostics, context, constraintName, source, code);
 	}
 
-	public boolean validate(EDataType eDataType, Object value, DiagnosticChain diagnostics, Map<Object, Object> context,
-			String constraintName, String expression, int severity, String source, int code) {
+	public boolean validate(@NonNull EDataType eDataType, @NonNull Object value, @Nullable DiagnosticChain diagnostics, Map<Object, Object> context,
+			@NonNull String constraintName, String expression, int severity, String source, int code) {
 		return validatePivot(eDataType, value, diagnostics, context, constraintName, source, code);
 	}
 
-	protected boolean validatePivot(EClassifier eClassifier, Object value, DiagnosticChain diagnostics,
-			Map<Object, Object> context, String constraintName, String source, int code) {
+	protected boolean validatePivot(@NonNull EClassifier eClassifier, @NonNull Object value, @Nullable DiagnosticChain diagnostics,
+			Map<Object, Object> context, @NonNull String constraintName, String source, int code) {
 		MetaModelManager metaModelManager = delegateDomain.getMetaModelManager();
 		Type type = delegateDomain.getPivot(Type.class, eClassifier);
 		Constraint constraint = ValidationBehavior.INSTANCE.getConstraint(metaModelManager, eClassifier, constraintName);
@@ -189,13 +214,13 @@ public class OCLValidationDelegate implements ValidationDelegate
 			String message = DomainUtil.bind(OCLMessages.MissingBodyForInvocationDelegate_ERROR_, type);
 			throw new OCLDelegateException(message);
 		}
-		ExpressionInOCL query;
+		ExpressionInOCL query = null;
 		ValueSpecification valueSpecification = constraint.getSpecification();
 		if (valueSpecification instanceof ExpressionInOCL) {
 			query = (ExpressionInOCL) valueSpecification;
 		}
-		else {
-			ParserContext classContext = new ClassContext(metaModelManager, null, type);
+		else if (type != null) {
+			ClassContext classContext = new ClassContext(metaModelManager, null, type);
 			query = ValidationBehavior.INSTANCE.getExpressionInOCL(classContext, constraint);
 		}
 		if (query == null) {
@@ -230,8 +255,8 @@ public class OCLValidationDelegate implements ValidationDelegate
 		}
 	}
 
-	protected boolean validateExpressionInOCL(EClassifier eClassifier, Object value, DiagnosticChain diagnostics,
-			Map<Object, Object> context, String constraintName, String source, int code, ExpressionInOCL query) {
+	protected boolean validateExpressionInOCL(@NonNull EClassifier eClassifier, @NonNull Object value, @Nullable DiagnosticChain diagnostics,
+			Map<Object, Object> context, String constraintName, String source, int code, @NonNull ExpressionInOCL query) {
 		EvaluationVisitor evaluationVisitor = createEvaluationVisitor(value, query);
 		if (query.getType() != evaluationVisitor.getMetaModelManager().getBooleanType()) {
 			String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());

@@ -16,9 +16,11 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
  * DomainExecutorPackage uses the limited Domain interfaces to construct a package description for use
@@ -28,27 +30,27 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
  */
 public class DomainReflectivePackage extends ReflectivePackage
 {
-	protected final DomainStandardLibrary standardLibrary;
-	protected final DomainPackage domainPackage;
+	protected final @NonNull DomainStandardLibrary standardLibrary;
+	protected final @NonNull DomainPackage domainPackage;
 
-	public DomainReflectivePackage(DomainStandardLibrary standardLibrary, DomainPackage domainPackage) {
-		super(domainPackage.getName(), domainPackage.getNsURI());
+	public DomainReflectivePackage(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainPackage domainPackage) {
+		super(DomainUtil.nonNullPivot(domainPackage.getName()), domainPackage.getNsURI());
 		this.standardLibrary = standardLibrary;
 		this.domainPackage = domainPackage;
 	}
 
 	@Override
-	protected ReflectiveType createExecutorType(final DomainType domainType) {
+	protected @NonNull ReflectiveType createExecutorType(@NonNull DomainType domainType) {
 		return new DomainReflectiveType(this, domainType);
 	}
 
 	@Override
-	protected Iterable<? extends DomainType> getDomainTypes() {
-		return domainPackage.getOwnedType();
+	protected @NonNull Iterable<? extends DomainType> getDomainTypes() {
+		return DomainUtil.nonNullPivot(domainPackage.getOwnedType());
 	}
 	
 	@Override
-	protected DomainStandardLibrary getStandardLibrary() {
+	protected @NonNull DomainStandardLibrary getStandardLibrary() {
 		return standardLibrary;
 	}
 }

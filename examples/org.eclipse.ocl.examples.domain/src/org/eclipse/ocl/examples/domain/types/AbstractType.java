@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.domain.types;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
@@ -28,42 +29,42 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 public abstract class AbstractType implements DomainType	// FIXME rename as perhaps DerivativeType
 {
-	protected final DomainStandardLibrary standardLibrary;
+	protected final @NonNull DomainStandardLibrary standardLibrary;
 
-	protected final String name;
+	protected final @NonNull String name;
 
-	public AbstractType(DomainStandardLibrary standardLibrary, String name) {
+	public AbstractType(@NonNull DomainStandardLibrary standardLibrary, @NonNull String name) {
 		this.standardLibrary = standardLibrary;
 		this.name = name;
 	}
 
-	public ObjectValue createInstance(ValueFactory valueFactory) {
+	public @NonNull ObjectValue createInstance(@NonNull ValueFactory valueFactory) {
 		throw new UnsupportedOperationException();
 	}
 
-	public Value createInstance(ValueFactory valueFactory, String value) {
+	public @NonNull Value createInstance(@NonNull ValueFactory valueFactory, @NonNull String value) {
 		throw new UnsupportedOperationException();
 	}
 
-	public abstract DomainType getCommonType(DomainStandardLibrary standardLibrary, DomainType type);
+	public abstract @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type);
 
-	public DomainInheritance getInheritance(DomainStandardLibrary standardLibrary) {
+	public @NonNull DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary) {
 		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
 	}
 
-	public Iterable<? extends DomainOperation> getLocalOperations() {
+	public @NonNull Iterable<? extends DomainOperation> getLocalOperations() {
 		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
 	}
 
-	public Iterable<? extends DomainProperty> getLocalProperties() {
+	public @NonNull Iterable<? extends DomainProperty> getLocalProperties() {
 		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
 	}
 
-	public Iterable<? extends DomainType> getLocalSuperTypes() {
+	public @NonNull Iterable<? extends DomainType> getLocalSuperTypes() {
 		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
 	}
 
-	public String getMetaTypeName() {
+	public @NonNull String getMetaTypeName() {
 		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
 	}
 	
@@ -71,7 +72,7 @@ public abstract class AbstractType implements DomainType	// FIXME rename as perh
 		return name;
 	}
 
-	public DomainType getNormalizedType(DomainStandardLibrary standardLibrary) {
+	public @NonNull DomainType getNormalizedType(@NonNull DomainStandardLibrary standardLibrary) {
 		return getInheritance(standardLibrary);
 	}
 
@@ -83,7 +84,7 @@ public abstract class AbstractType implements DomainType	// FIXME rename as perh
 		return standardLibrary;
 	}
 
-	public boolean isEqualToUnspecializedType(DomainStandardLibrary standardLibrary, DomainType type) {
+	public boolean isEqualToUnspecializedType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		if (this == type) {
 			return true;
 		}

@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.numeric;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -30,12 +31,12 @@ public class NumericDivideOperation extends AbstractNumericBinaryOperation
 	public static final NumericDivideOperation INSTANCE = new NumericDivideOperation();
 
 	@Override
-	protected Value evaluateInteger(DomainEvaluator evaluator, IntegerValue left, IntegerValue right) throws InvalidValueException {
+	protected @NonNull Value evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) throws InvalidValueException {
 		return left.divide(right);
 	}
 
 	@Override
-	protected Value evaluateReal(DomainEvaluator evaluator, RealValue left, RealValue right) throws InvalidValueException {
+	protected @NonNull Value evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) throws InvalidValueException {
 		return left.divide(right);
 	}
 }

@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.StringValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -30,8 +31,8 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions;
+import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.utilities.HTMLBuffer;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.markup.util.MarkupSwitch;
@@ -190,8 +191,11 @@ public class MarkupToHTML extends MarkupSwitch<HTMLBuffer>
 			OCL ocl = getOCL();
 			ExpressionInOCL query = createQuery(oclString);
 			Value value = ocl.evaluate(context, query);
-			if (value instanceof StringValue) {
-				s.append(((StringValue)value).stringValue());
+			StringValue stringValue = value.isStringValue();
+			if (stringValue != null) {
+				try {
+					s.append(stringValue.stringValue());
+				} catch (InvalidValueException e) { /* Never happens since iStringValue() excludes NullValue/InvalidValue */}
 			}
 			else {
 				s.append(String.valueOf(value));
@@ -210,7 +214,7 @@ public class MarkupToHTML extends MarkupSwitch<HTMLBuffer>
 			ExpressionInOCL query = createQuery(oclString);
 			PrettyPrintOptions.Global options = PrettyPrinter.createOptions(null);
 			options.setLinelength(Integer.MAX_VALUE);
-			String text = PrettyPrinter.print(query, options);
+			String text = query != null ? PrettyPrinter.print(query, options) : PrettyPrinter.NULL_PLACEHOLDER;
 			s.append(text);
 		} catch (ParserException e) {
 			throw new InvalidMarkupException(e);

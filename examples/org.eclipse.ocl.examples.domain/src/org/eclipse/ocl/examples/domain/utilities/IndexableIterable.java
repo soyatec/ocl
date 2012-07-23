@@ -16,11 +16,13 @@
  */
 package org.eclipse.ocl.examples.domain.utilities;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  * IterableWithSize provides an Iterable that can be indexed and has a known size.
  */
 public interface IndexableIterable<T> extends Iterable<T>
 {
-	T get(int index);
+	@NonNull T get(int index);
 	int size();		
 }

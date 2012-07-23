@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.library.iterator;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
@@ -29,19 +31,19 @@ import org.eclipse.ocl.examples.domain.values.Value;
  */
 public class ExistsIteration extends AbstractIteration
 {
-	public static final ExistsIteration INSTANCE = new ExistsIteration();
+	public static final @NonNull ExistsIteration INSTANCE = new ExistsIteration();
 
-	public BooleanValue.Accumulator createAccumulatorValue(DomainEvaluator evaluator, DomainType accumulatorType, DomainType bodyType) {
+	public @NonNull BooleanValue.Accumulator createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) {
 		return evaluator.getValueFactory().createBooleanAccumulatorValue();
 	}
 
 	@Override
-	protected Value resolveTerminalValue(DomainIterationManager iterationManager) {
+	protected @NonNull Value resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
 		return iterationManager.getValueFactory().getFalse();
 	}
 	
 	@Override
-    protected Value updateAccumulator(DomainIterationManager iterationManager) {
+    protected @Nullable Value updateAccumulator(@NonNull DomainIterationManager iterationManager) {
 		Value bodyVal = iterationManager.evaluateBody();
 		if (bodyVal.isUndefined()) {
 			return iterationManager.throwInvalidEvaluation(EvaluatorMessages.UndefinedBody, "exists"); 	// Null body is invalid //$NON-NLS-1$

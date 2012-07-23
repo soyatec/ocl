@@ -17,6 +17,8 @@ package org.eclipse.ocl.examples.pivot.scoping;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -32,7 +34,7 @@ public interface ScopeFilter
 	 * Return -ve if match1 is inferior to match2, +ve if match2 is inferior to match1, or
 	 * zero if both matches are of equal validity.
 	 */
-	int compareMatches(EObject match1, Map<TemplateParameter, ParameterableElement> bindings1, EObject match2, Map<TemplateParameter, ParameterableElement> bindings2);
+	int compareMatches(@NonNull EObject match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1, @NonNull EObject match2, @Nullable Map<TemplateParameter, ParameterableElement> bindings2);
 
 	/**
 	 * Return true if the filter accepts eObject as a candidate for
@@ -40,5 +42,5 @@ public interface ScopeFilter
 	 * 
 	 * @param eObject
 	 */
-	boolean matches(EnvironmentView environmentView, Type forType, EObject eObject);
+	boolean matches(@NonNull EnvironmentView environmentView, @Nullable Type forType, @NonNull EObject eObject);
 }

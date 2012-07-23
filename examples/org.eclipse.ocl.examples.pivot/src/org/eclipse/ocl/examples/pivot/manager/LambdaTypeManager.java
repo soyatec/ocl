@@ -21,6 +21,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
@@ -32,14 +34,14 @@ import org.eclipse.ocl.examples.pivot.Type;
  */
 public class LambdaTypeManager
 {
-	protected final MetaModelManager metaModelManager;
+	protected final @NonNull MetaModelManager metaModelManager;
 	
 	/**
 	 * Map from from context type via first parameter type, which may be null, to list of lambda types sharing context and first parameter types. 
 	 */
-	private final Map<Type, Map<Type, List<LambdaType>>> lambdaTypes = new HashMap<Type, Map<Type, List<LambdaType>>>();
+	private final @NonNull Map<Type, Map<Type, List<LambdaType>>> lambdaTypes = new HashMap<Type, Map<Type, List<LambdaType>>>();
 	
-	protected LambdaTypeManager(MetaModelManager metaModelManager) {
+	protected LambdaTypeManager(@NonNull MetaModelManager metaModelManager) {
 		this.metaModelManager = metaModelManager;
 	}
 
@@ -47,10 +49,7 @@ public class LambdaTypeManager
 		lambdaTypes.clear();
 	}
 	   
-	public LambdaType getLambdaType(String typeName, Type contextType, List<? extends Type> parameterTypes, Type resultType) {
-		if (contextType == null) {
-			return null;
-		}
+	public @NonNull LambdaType getLambdaType(@NonNull String typeName, @NonNull Type contextType, @NonNull List<? extends Type> parameterTypes, @NonNull Type resultType) {
 		Map<Type, List<LambdaType>> contextMap = lambdaTypes.get(contextType);
 		if (contextMap == null) {
 			contextMap = new HashMap<Type, List<LambdaType>>();
@@ -93,11 +92,8 @@ public class LambdaTypeManager
 		return lambdaType;
 	}
 	   
-	public LambdaType getLambdaType(String typeName, Type contextType, List<? extends Type> parameterTypes, Type resultType,
-			Map<TemplateParameter, ParameterableElement> bindings) {
-		if (contextType == null) {
-			return null;
-		}
+	public @NonNull LambdaType getLambdaType(@NonNull String typeName, @NonNull Type contextType, @NonNull List<? extends Type> parameterTypes, @NonNull Type resultType,
+			@Nullable Map<TemplateParameter, ParameterableElement> bindings) {
 		if (bindings == null) {
 			return getLambdaType(typeName, contextType, parameterTypes, resultType);
 		}
@@ -105,9 +101,11 @@ public class LambdaTypeManager
 			Type specializedContextType = metaModelManager.getSpecializedType(contextType, bindings);
 			List<Type> specializedParameterTypes = new ArrayList<Type>();
 			for (Type parameterType : parameterTypes) {
-				specializedParameterTypes.add(metaModelManager.getSpecializedType(parameterType, bindings));
+				if (parameterType != null) {
+					specializedParameterTypes.add(metaModelManager.getSpecializedType(parameterType, bindings));
+				}
 			}
-			Type specializedResultType = resultType != null ? metaModelManager.getSpecializedType(resultType, bindings) : null;
+			Type specializedResultType = metaModelManager.getSpecializedType(resultType, bindings);
 			return getLambdaType(typeName, specializedContextType, specializedParameterTypes, specializedResultType);
 		}
 	}

@@ -71,7 +71,7 @@ public class Pivot2EcoreDeclarationVisitor
 		super(context);
 	}
 
-	protected void copyClassifier(EClassifier eClassifier, Type pivotType) {
+	protected void copyClassifier(@NonNull EClassifier eClassifier, @NonNull Type pivotType) {
 		copyNamedElement(eClassifier, pivotType);
 		copyTemplateSignature(eClassifier.getETypeParameters(), pivotType);
 		safeVisitAll(eClassifier.getEAnnotations(), pivotType.getOwnedAnnotation());
@@ -88,18 +88,16 @@ public class Pivot2EcoreDeclarationVisitor
 			}
 		}
 		MetaModelManager metaModelManager = context.getMetaModelManager();
-		if (metaModelManager != null) {
-			Pivot2Ecore.installDelegates(metaModelManager, eClassifier, pivotType);
-		}
+		Pivot2Ecore.installDelegates(metaModelManager, eClassifier, pivotType);
 	}
 
 
-	protected void copyDataTypeOrEnum(EDataType eDataType, DataType pivotDataType) {
+	protected void copyDataTypeOrEnum(@NonNull EDataType eDataType, @NonNull DataType pivotDataType) {
 		copyClassifier(eDataType, pivotDataType);
 		eDataType.setSerializable(pivotDataType.isSerializable());
 	}
 
-	protected void copyDetails(EAnnotation eAnnotation, Annotation pivotAnnotation) {
+	protected void copyDetails(@NonNull EAnnotation eAnnotation, @NonNull Annotation pivotAnnotation) {
 		copyModelElement(eAnnotation, pivotAnnotation);
 		safeVisitAll(eAnnotation.getEAnnotations(), pivotAnnotation.getOwnedAnnotation());
 		for (Detail pivotDetail : pivotAnnotation.getOwnedDetail()) {
@@ -109,12 +107,12 @@ public class Pivot2EcoreDeclarationVisitor
 		}
 	}
 
-	protected void copyModelElement(EModelElement eModelElement, Element pivotModelElement) {
+	protected void copyModelElement(@NonNull EModelElement eModelElement, @NonNull Element pivotModelElement) {
 		context.putCreated(pivotModelElement, eModelElement);
 		Pivot2Ecore.copyComments(eModelElement, pivotModelElement);
 	}
 
-	protected void copyNamedElement(ENamedElement eNamedElement, NamedElement pivotNamedElement) {
+	protected void copyNamedElement(@NonNull ENamedElement eNamedElement, @NonNull NamedElement pivotNamedElement) {
 		copyModelElement(eNamedElement, pivotNamedElement);
 		eNamedElement.setName(pivotNamedElement.getName());
 	}
@@ -127,7 +125,7 @@ public class Pivot2EcoreDeclarationVisitor
 		}
 	}
 
-	protected void copyTypedElement(ETypedElement eTypedElement, TypedMultiplicityElement pivotTypedElement) {
+	protected void copyTypedElement(@NonNull ETypedElement eTypedElement, @NonNull TypedMultiplicityElement pivotTypedElement) {
 		copyNamedElement(eTypedElement, pivotTypedElement);
 		safeVisitAll(eTypedElement.getEAnnotations(), pivotTypedElement.getOwnedAnnotation());
 		context.defer(pivotTypedElement);		// Defer type setting
@@ -154,7 +152,8 @@ public class Pivot2EcoreDeclarationVisitor
 
 	@Override
 	public EObject visitAnnotation(@NonNull Annotation pivotAnnotation) {
-		EAnnotation eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+		@SuppressWarnings("null")
+		@NonNull EAnnotation eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
 		copyDetails(eAnnotation, pivotAnnotation);
 		eAnnotation.setSource(pivotAnnotation.getName());
 		safeVisitAll(eAnnotation.getContents(), pivotAnnotation.getOwnedContent());
@@ -169,7 +168,8 @@ public class Pivot2EcoreDeclarationVisitor
 		if (pivotClass.getTemplateBinding().size() > 0) {
 			return null;
 		}
-		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
+		@SuppressWarnings("null")
+		@NonNull EClass eClass = EcoreFactory.eINSTANCE.createEClass();
 		copyClassifier(eClass, pivotClass);
 		eClass.setAbstract(pivotClass.isAbstract());
 		eClass.setInterface(pivotClass.isInterface());
@@ -204,7 +204,8 @@ public class Pivot2EcoreDeclarationVisitor
 		if (pivotDataType.getTemplateBinding().size() > 0) {
 			return null;
 		}
-		EDataType eDataType = EcoreFactory.eINSTANCE.createEDataType();
+		@SuppressWarnings("null")
+		@NonNull EDataType eDataType = EcoreFactory.eINSTANCE.createEDataType();
 		copyDataTypeOrEnum(eDataType, pivotDataType);
 		return eDataType;
 	}
@@ -220,7 +221,8 @@ public class Pivot2EcoreDeclarationVisitor
 		if (pivotEnumeration.getTemplateBinding().size() > 0) {
 			return null;
 		}
-		EEnum eEnum = EcoreFactory.eINSTANCE.createEEnum();
+		@SuppressWarnings("null")
+		@NonNull EEnum eEnum = EcoreFactory.eINSTANCE.createEEnum();
 		copyDataTypeOrEnum(eEnum, pivotEnumeration);
 		safeVisitAll(eEnum.getELiterals(), pivotEnumeration.getOwnedLiteral());
 		return eEnum;
@@ -228,7 +230,8 @@ public class Pivot2EcoreDeclarationVisitor
 
 	@Override
 	public EObject visitEnumerationLiteral(@NonNull EnumerationLiteral pivotEnumLiteral) {
-		EEnumLiteral eEnumLiteral = EcoreFactory.eINSTANCE.createEEnumLiteral();
+		@SuppressWarnings("null")
+		@NonNull EEnumLiteral eEnumLiteral = EcoreFactory.eINSTANCE.createEEnumLiteral();
 		copyNamedElement(eEnumLiteral, pivotEnumLiteral);
 		if (pivotEnumLiteral.eIsSet(PivotPackage.Literals.ENUMERATION_LITERAL__VALUE)) {
 			eEnumLiteral.setValue(pivotEnumLiteral.getValue().intValue());
@@ -244,7 +247,8 @@ public class Pivot2EcoreDeclarationVisitor
 		if (pivotOperation.getTemplateBinding().size() > 0) {
 			return null;
 		}
-		EOperation eOperation = EcoreFactory.eINSTANCE.createEOperation();
+		@SuppressWarnings("null")
+		@NonNull EOperation eOperation = EcoreFactory.eINSTANCE.createEOperation();
 		copyTypedElement(eOperation, pivotOperation);
 		copyTemplateSignature(eOperation.getETypeParameters(), pivotOperation);
 		safeVisitAll(eOperation.getEParameters(), pivotOperation.getOwnedParameter());
@@ -257,7 +261,8 @@ public class Pivot2EcoreDeclarationVisitor
 
 	@Override
 	public EObject visitPackage(@NonNull Package pivotPackage) {
-		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
+		@SuppressWarnings("null")
+		@NonNull EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
 		copyNamedElement(ePackage, pivotPackage);
 		safeVisitAll(ePackage.getEAnnotations(), pivotPackage.getOwnedAnnotation());
 		context.defer(pivotPackage);		// Defer delegate annotation analysis
@@ -274,7 +279,8 @@ public class Pivot2EcoreDeclarationVisitor
 
 	@Override
 	public EObject visitParameter(@NonNull Parameter pivotParameter) {
-		EParameter eParameter = EcoreFactory.eINSTANCE.createEParameter();
+		@SuppressWarnings("null")
+		@NonNull EParameter eParameter = EcoreFactory.eINSTANCE.createEParameter();
 		copyTypedElement(eParameter, pivotParameter);
 		return eParameter;
 	}

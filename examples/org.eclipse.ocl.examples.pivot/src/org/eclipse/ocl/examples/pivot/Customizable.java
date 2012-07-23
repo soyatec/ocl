@@ -20,6 +20,8 @@ package org.eclipse.ocl.examples.pivot;
 import java.util.Collection;
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.options.Option;
 
 //import org.eclipse.ocl.Environment;
@@ -57,7 +59,7 @@ public interface Customizable {
      * 
      * @return value of the option
      */
-    <T> T getValue(Option<T> option);
+    @Nullable <T> T getValue(@NonNull Option<T> option);
     
     /**
      * Queries whether the specified boolean-valued option is enabled.
@@ -70,7 +72,7 @@ public interface Customizable {
      * 
      * @return whether the option is enabled
      */
-    boolean isEnabled(Option<Boolean> option);
+    boolean isEnabled(@NonNull Option<Boolean> option);
     
     /**
      * Add an option to apply to my behaviour.
@@ -78,14 +80,14 @@ public interface Customizable {
      * @param option the option
      * @param value the option's value
      */
-    <T> void setOption(Option<T> option, T value);
+    <T> void setOption(@NonNull Option<T> option, @Nullable T value);
     
     /**
      * Adds options to apply to my behaviour.
      * 
      * @param options the options
      */
-    <T> void putOptions(Map<? extends Option<T>, ? extends T> options);
+    <T> void putOptions(@NonNull Map<? extends Option<T>, ? extends T> options);
     
     /**
      * Removes the specified option.
@@ -94,7 +96,7 @@ public interface Customizable {
      * 
      * @return the former value of the option
      */
-    <T> T removeOption(Option<T> option);
+    @Nullable <T> T removeOption(@NonNull Option<T> option);
     
     /**
      * Removes the specified options.
@@ -103,13 +105,13 @@ public interface Customizable {
      * 
      * @return the former values of the options
      */
-    <T> Map<Option<T>, T> removeOptions(Collection<Option<T>> options);
+    @NonNull <T> Map<Option<T>, T> removeOptions(@NonNull Collection<Option<T>> options);
     
     /**
      * Clears all options.
      * 
      * @return the former values of the options
      */
-    Map<Option<?>, Object> clearOptions();
+    @NonNull Map<Option<?>, Object> clearOptions();
 
 }

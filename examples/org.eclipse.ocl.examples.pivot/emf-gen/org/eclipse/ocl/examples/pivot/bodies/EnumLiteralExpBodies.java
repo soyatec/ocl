@@ -20,6 +20,7 @@
  */
 package org.eclipse.ocl.examples.pivot.bodies;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -47,38 +48,38 @@ public class EnumLiteralExpBodies
 	 */
 	public static class _invariant_TypeIsEnumerationType extends AbstractUnaryOperation
 	{
-		public static _invariant_TypeIsEnumerationType INSTANCE = new _invariant_TypeIsEnumerationType();
+		public static @NonNull _invariant_TypeIsEnumerationType INSTANCE = new _invariant_TypeIsEnumerationType();
 	
 		/*
 		self.type = referredEnumLiteral.enumeration
 		*/
-		public Value evaluate(DomainEvaluator evaluator, DomainType returnType, final Value self) throws InvalidValueException {
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
-			final ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
-			final ExecutorType T_Type = OCLstdlibTables.Types._Type;
-			final ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
-			final LibraryProperty IP_TypedElement_type = P_TypedElement_type.getImplementation();
-			final ExecutorType T_Enumeration = OCLstdlibTables.Types._Enumeration;
-			final ExecutorProperty P_EnumerationLiteral_enumeration = PivotTables.Properties._EnumerationLiteral__enumeration;
-			final LibraryProperty IP_EnumerationLiteral_enumeration = P_EnumerationLiteral_enumeration.getImplementation();
-			final ExecutorType T_EnumerationLiteral = OCLstdlibTables.Types._EnumerationLiteral;
-			final ExecutorProperty P_EnumLiteralExp_referredEnumLiteral = PivotTables.Properties._EnumLiteralExp__referredEnumLiteral;
-			final LibraryProperty IP_EnumLiteralExp_referredEnumLiteral = P_EnumLiteralExp_referredEnumLiteral.getImplementation();
+		public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Value self) throws InvalidValueException {
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
+			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
+			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
+			final @NonNull LibraryProperty IP_TypedElement_type = P_TypedElement_type.getImplementation();
+			final @NonNull ExecutorType T_Enumeration = OCLstdlibTables.Types._Enumeration;
+			final @NonNull ExecutorProperty P_EnumerationLiteral_enumeration = PivotTables.Properties._EnumerationLiteral__enumeration;
+			final @NonNull LibraryProperty IP_EnumerationLiteral_enumeration = P_EnumerationLiteral_enumeration.getImplementation();
+			final @NonNull ExecutorType T_EnumerationLiteral = OCLstdlibTables.Types._EnumerationLiteral;
+			final @NonNull ExecutorProperty P_EnumLiteralExp_referredEnumLiteral = PivotTables.Properties._EnumLiteralExp__referredEnumLiteral;
+			final @NonNull LibraryProperty IP_EnumLiteralExp_referredEnumLiteral = P_EnumLiteralExp_referredEnumLiteral.getImplementation();
 			
 			
-			Value A_symbol_20 = IP_TypedElement_type.evaluate(evaluator, T_Type, self, P_TypedElement_type);
+			Value A_symbol_343 = IP_TypedElement_type.evaluate(evaluator, T_Type, self, P_TypedElement_type);
 			
 			
-			Value A_symbol_21 = IP_EnumLiteralExp_referredEnumLiteral.evaluate(evaluator, T_EnumerationLiteral, self, P_EnumLiteralExp_referredEnumLiteral);
+			Value A_symbol_344 = IP_EnumLiteralExp_referredEnumLiteral.evaluate(evaluator, T_EnumerationLiteral, self, P_EnumLiteralExp_referredEnumLiteral);
 			
-			Value A_symbol_22 = IP_EnumerationLiteral_enumeration.evaluate(evaluator, T_Enumeration, A_symbol_21, P_EnumerationLiteral_enumeration);
+			Value A_symbol_345 = IP_EnumerationLiteral_enumeration.evaluate(evaluator, T_Enumeration, A_symbol_344, P_EnumerationLiteral_enumeration);
 			
-			DomainType static_A_symbol_23 = valueFactory.typeOf(A_symbol_20, A_symbol_22);
-			LibraryBinaryOperation dynamic_A_symbol_23 = (LibraryBinaryOperation)static_A_symbol_23.lookupImplementation(standardLibrary, O_OclAny__eq_);
-			Value A_symbol_23 = dynamic_A_symbol_23.evaluate(evaluator, T_Boolean, A_symbol_20, A_symbol_22);
-			return A_symbol_23;
+			DomainType static_A_symbol_346 = valueFactory.typeOf(A_symbol_343, A_symbol_345);
+			LibraryBinaryOperation dynamic_A_symbol_346 = (LibraryBinaryOperation)static_A_symbol_346.lookupImplementation(standardLibrary, O_OclAny__eq_);
+			Value A_symbol_346 = dynamic_A_symbol_346.evaluate(evaluator, T_Boolean, A_symbol_343, A_symbol_345);
+			return A_symbol_346;
 		}
 	}
 

@@ -24,6 +24,7 @@ import java.util.WeakHashMap;
 
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
@@ -33,6 +34,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 {
@@ -48,15 +50,15 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		liveAbstractStandardLibraries.put(this, null);
 	} */
 
-	public boolean conformsToCollectionType(DomainCollectionType firstCollectionType, DomainCollectionType secondCollectionType) {
+	public boolean conformsToCollectionType(@NonNull DomainCollectionType firstCollectionType, @NonNull DomainCollectionType secondCollectionType) {
 		DomainType firstContainerType = firstCollectionType.getContainerType();
 		DomainType secondContainerType = secondCollectionType.getContainerType();
 		if (firstContainerType != secondContainerType) {
-			if (secondContainerType == null) {
+			if ((firstContainerType == null) || (secondContainerType == null)) {
 				return false;
 			}
-			DomainInheritance firstInheritance = firstCollectionType.getInheritance(this);
-			DomainInheritance secondInheritance = secondCollectionType.getInheritance(this);
+			DomainInheritance firstInheritance = firstContainerType.getInheritance(this);
+			DomainInheritance secondInheritance = secondContainerType.getInheritance(this);
 			if (!secondInheritance.isSuperInheritanceOf(this, firstInheritance)) {
 				return false;
 			}
@@ -64,7 +66,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		DomainType firstElementType = firstCollectionType.getElementType();
 		DomainType secondElementType = secondCollectionType.getElementType();
 		if (firstElementType != secondElementType) {
-			if (firstElementType == null) {
+			if ((firstElementType == null) || (secondElementType == null)) {
 				return false;
 			}
 			if (!firstElementType.conformsTo(this, secondElementType)) {
@@ -74,16 +76,13 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		return true;
 	}
 
-	public boolean conformsToLambdaType(DomainLambdaType firstLambdaType, DomainLambdaType secondLambdaType) {
+	public boolean conformsToLambdaType(@NonNull DomainLambdaType firstLambdaType, @NonNull DomainLambdaType secondLambdaType) {
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean conformsToTupleType(DomainTupleType firstTupleType, DomainTupleType secondTupleType) {
+	public boolean conformsToTupleType(@NonNull DomainTupleType firstTupleType, @NonNull DomainTupleType secondTupleType) {
 		if (isEqualToTupleType(firstTupleType, secondTupleType)) {
 			return true;
-		}
-		if (secondTupleType == null) {
-			return false;
 		}
 		DomainInheritance firstInheritance = firstTupleType.getInheritance(this);
 		DomainInheritance secondInheritance = secondTupleType.getInheritance(this);
@@ -94,7 +93,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		tupleParts = null;	
 	}
 	
-	public DomainCollectionType getCollectionType(DomainCollectionType containerType, DomainType elementType) {
+	public @NonNull DomainCollectionType getCollectionType(@NonNull DomainCollectionType containerType, @NonNull DomainType elementType) {
 		boolean isOrdered = containerType.isOrdered();
 		boolean isUnique = containerType.isUnique();
 		if (isOrdered) {
@@ -115,15 +114,15 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		}
 	}
 
-	public DomainEnumeration getEnumeration(Enumerator enumerator) {
+	public DomainEnumeration getEnumeration(@NonNull Enumerator enumerator) {
 		throw new UnsupportedOperationException();
 	}
 
-	public DomainType getMetaType(DomainType instanceType) {
+	public DomainType getMetaType(@NonNull DomainType instanceType) {
 		throw new UnsupportedOperationException();
 	}
 
-	public synchronized DomainTypedElement getTuplePart(String name, DomainType type) {
+	public synchronized @NonNull DomainTypedElement getTuplePart(@NonNull String name, @NonNull DomainType type) {
 		if (tupleParts == null) {
 			tupleParts = new WeakHashMap<String, Map<DomainType, WeakReference<DomainTypedElement>>>();
 		}
@@ -140,7 +139,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		return tupleProperty;
 	}
 	
-	public DomainTupleType getTupleType(DomainTypedElement ... parts) {
+	public @NonNull DomainTupleType getTupleType(DomainTypedElement ... parts) {
 		List<DomainTypedElement> partsList = new ArrayList<DomainTypedElement>(parts.length);
 		for (DomainTypedElement part : parts) {
 			partsList.add(part);
@@ -148,18 +147,18 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		return getTupleType(partsList);
 	}
 
-	public DomainType getType(DomainElement element) {
+	public @NonNull DomainType getType(@NonNull DomainElement element) {
 		if (element instanceof EObject) {
-			return getType(((EObject)element).eClass());
+			return getType(DomainUtil.nonNullEMF(((EObject)element).eClass()));
 		}
 		throw new UnsupportedOperationException();
 	}
 	
-	public boolean isEqualToCollectionType(DomainCollectionType firstCollectionType, DomainCollectionType secondCollectionType) {
+	public boolean isEqualToCollectionType(@NonNull DomainCollectionType firstCollectionType, @NonNull DomainCollectionType secondCollectionType) {
 		DomainType firstContainerType = firstCollectionType.getContainerType();
 		DomainType secondContainerType = secondCollectionType.getContainerType();
 		if (firstContainerType != secondContainerType) {
-			if (firstContainerType == null) {
+			if ((firstContainerType == null) || (secondContainerType == null)) {
 				return false;
 			}
 			if (!firstContainerType.isEqualToUnspecializedType(this, secondContainerType)) {
@@ -169,7 +168,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		DomainType firstElementType = firstCollectionType.getElementType();
 		DomainType secondElementType = secondCollectionType.getElementType();
 		if (firstElementType != secondElementType) {
-			if (firstElementType == null) {
+			if ((firstElementType == null) || (secondElementType == null)) {
 				return false;
 			}
 			if (!firstElementType.isEqualTo(this, secondElementType)) {
@@ -179,7 +178,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		return true;
 	}
 
-	public boolean isEqualToTupleType(DomainTupleType firstTupleType, DomainTupleType secondTupleType) {
+	public boolean isEqualToTupleType(@NonNull DomainTupleType firstTupleType, @NonNull DomainTupleType secondTupleType) {
 		List<? extends DomainTypedElement> firstParts = firstTupleType.getOwnedAttribute();
 		List<? extends DomainTypedElement> secondParts = secondTupleType.getOwnedAttribute();
 		int iMax = firstParts.size();
@@ -192,7 +191,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 			String firstName = firstPart.getName();
 			String secondName = secondPart.getName();
 			if (firstName != secondName)  {
-				if (firstName == null) {
+				if ((firstName == null) || (secondName == null)) {
 					return false;
 				}
 				if (!firstName.equals(secondName)) {
@@ -202,7 +201,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 			DomainType firstType = firstPart.getType();
 			DomainType secondType = secondPart.getType();
 			if (firstType != secondType) {
-				if (firstType == null) {
+				if ((firstType == null) || (secondType == null)) {
 					return false;
 				}
 				if (!firstType.isEqualTo(this, secondType)) {
@@ -217,7 +216,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 	 * Return the map.get(key).get() entry if there is one or null if not, removing any stale
 	 * entry that may be encountered.
 	 */
-	protected <K, V> V weakGet(Map<K, WeakReference<V>> map, K key) {
+	protected <K, V> V weakGet(/*@NonNull*/ Map<K, WeakReference<V>> map, /*@NonNull*/ K key) {
 		WeakReference<V> ref = map.get(key);
 		if (ref == null) {
 			return null;

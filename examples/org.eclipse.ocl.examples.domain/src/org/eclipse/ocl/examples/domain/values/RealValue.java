@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.domain.values;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 public interface RealValue extends NumericValue
@@ -23,47 +24,47 @@ public interface RealValue extends NumericValue
 	/**
 	 * @generated NOT
 	 */
-	RealValue abs() throws InvalidValueException;
+	@NonNull RealValue abs() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	RealValue add(RealValue right) throws InvalidValueException;
+	@NonNull RealValue add(@NonNull RealValue right) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	RealValue divide(RealValue right) throws InvalidValueException;
+	@NonNull RealValue divide(@NonNull RealValue right) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	IntegerValue floor() throws InvalidValueException;
+	@NonNull IntegerValue floor() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	RealValue max(RealValue right) throws InvalidValueException;
+	@NonNull RealValue max(@NonNull RealValue right) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	RealValue min(RealValue right) throws InvalidValueException;
+	@NonNull RealValue min(@NonNull RealValue right) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	RealValue multiply(RealValue right) throws InvalidValueException;
+	@NonNull RealValue multiply(@NonNull RealValue right) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	RealValue negate() throws InvalidValueException;	
+	@NonNull RealValue negate() throws InvalidValueException;	
 
 	/**
 	 * @generated NOT
 	 */
-	IntegerValue round() throws InvalidValueException;
+	@NonNull IntegerValue round() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
@@ -73,5 +74,5 @@ public interface RealValue extends NumericValue
 	/**
 	 * @generated NOT
 	 */
-	RealValue subtract(RealValue right) throws InvalidValueException;
+	@NonNull RealValue subtract(@NonNull RealValue right) throws InvalidValueException;
 }

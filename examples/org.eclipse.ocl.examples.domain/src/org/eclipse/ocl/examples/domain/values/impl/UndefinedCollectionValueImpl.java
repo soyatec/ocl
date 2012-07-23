@@ -21,6 +21,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -56,31 +58,31 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 		}
 	}
 
-	protected UndefinedCollectionValueImpl(ValueFactory valueFactory) {
+	protected UndefinedCollectionValueImpl(@NonNull ValueFactory valueFactory) {
 		super(valueFactory);
 	}
 
-	public SequenceValue append(Value object) throws InvalidValueException {
+	public @NonNull SequenceValue append(@NonNull Value object) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public Collection<Value> asCollection() {
-		return null;
+	public @NonNull Collection<Value> asCollection() throws InvalidValueException {
+		throw new InvalidValueException("Collection value required");
 	}
 
-	public List<Value> asList() {
-		return null;
+	public @NonNull List<Value> asList() throws InvalidValueException {
+		throw new InvalidValueException("List value required");
 	}
 
-	public Value at(int index) throws InvalidValueException {
+	public @NonNull Value at(int index) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-    public IntegerValue count(Value value) throws InvalidValueException {
+    public @NonNull IntegerValue count(@NonNull Value value) throws InvalidValueException {
         return toInvalidValue();
     }
 
-	public CollectionValue createNew() throws InvalidValueException {
+	public @NonNull CollectionValue createNew() throws InvalidValueException {
 		return toInvalidValue();
 	}
 
@@ -89,32 +91,32 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 //		return elements.hashCode();
 //	}
 
-    public BooleanValue excludes(Value value) throws InvalidValueException {
+    public @NonNull BooleanValue excludes(@NonNull Value value) throws InvalidValueException {
     	return toInvalidValue();
     }
 
 
-    public BooleanValue excludesAll(CollectionValue c) throws InvalidValueException {
+    public @NonNull BooleanValue excludesAll(@NonNull CollectionValue c) throws InvalidValueException {
     	return toInvalidValue();
     }
 
-	public CollectionValue excluding(Value value) throws InvalidValueException {
+	public @NonNull CollectionValue excluding(@NonNull Value value) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-    public Value first() throws InvalidValueException {
+    public @NonNull Value first() throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public CollectionValue flatten() throws InvalidValueException {
+	public @NonNull CollectionValue flatten() throws InvalidValueException {
     	return toInvalidValue();
     }
 
-	public boolean flatten(Collection<Value> flattenedElements) {
+	public boolean flatten(@NonNull Collection<Value> flattenedElements) {
 		return false;
 	}
 
-	public DomainCollectionType getCollectionType() {
+	public @NonNull DomainCollectionType getCollectionType() {
 		return (DomainCollectionType) getType();
 	}
 	
@@ -122,23 +124,23 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 	    return "Collection";		// FIXME UOE ??
 	}
 
-    public BooleanValue includes(Value value) throws InvalidValueException {
+    public @NonNull BooleanValue includes(@NonNull Value value) throws InvalidValueException {
     	return toInvalidValue();
     }
 
-    public BooleanValue includesAll(CollectionValue c) throws InvalidValueException {
+    public @NonNull BooleanValue includesAll(@NonNull CollectionValue c) throws InvalidValueException {
     	return toInvalidValue();
    }
 
-	public CollectionValue including(Value value) throws InvalidValueException {
+	public @NonNull CollectionValue including(@NonNull Value value) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public IntegerValue indexOf(Value object) throws InvalidValueException {
+	public @NonNull IntegerValue indexOf(@NonNull Value object) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public SequenceValue insertAt(int index, Value object) throws InvalidValueException {
+	public @NonNull SequenceValue insertAt(int index, @NonNull Value object) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
@@ -146,83 +148,83 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 		return 0;
 	}
 
-	public CollectionValue intersection(CollectionValue c) throws InvalidValueException {
+	public @NonNull CollectionValue intersection(@NonNull CollectionValue c) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public BooleanValue isEmpty() throws InvalidValueException {
+	public @NonNull BooleanValue isEmpty() throws InvalidValueException {
     	return toInvalidValue();
 	}
 
-	public Iterator iterator() {
+	public @NonNull Iterator iterator() {
 		return new Iterator();
 	}
 	
-	public Value last() throws InvalidValueException {
+	public @NonNull Value last() throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public Value maxMin(DomainEvaluator evaluator, DomainType returnType, LibraryBinaryOperation binaryOperation) throws InvalidValueException {
+	public @NonNull Value maxMin(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation binaryOperation) throws InvalidValueException {
     	return toInvalidValue();
 	}
 
-	public NullValue minus(UniqueCollectionValue set) throws InvalidValueException {
+	public @NonNull NullValue minus(@NonNull UniqueCollectionValue set) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public BooleanValue notEmpty() throws InvalidValueException {
+	public @NonNull BooleanValue notEmpty() throws InvalidValueException {
     	return toInvalidValue();
 	}
 
-	public SequenceValue prepend(Value object) throws InvalidValueException {
+	public @NonNull SequenceValue prepend(@NonNull Value object) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public Set<TupleValue> product(CollectionValue c, DomainTupleType tupleType) {
+	public @Nullable Set<TupleValue> product(@NonNull CollectionValue c, @NonNull DomainTupleType tupleType) {
 		return null;
 	}
 
-	public SequenceValue reverse() throws InvalidValueException {
+	public @NonNull SequenceValue reverse() throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public CollectionValue selectByKind(DomainType elementType) throws InvalidValueException {
+	public @NonNull CollectionValue selectByKind(@NonNull DomainType elementType) throws InvalidValueException {
     	return toInvalidValue();
 	}
 
-	public CollectionValue selectByType(DomainType elementType) throws InvalidValueException {
+	public @NonNull CollectionValue selectByType(@NonNull DomainType elementType) throws InvalidValueException {
     	return toInvalidValue();
 	}
 
-	public IntegerValue size() throws InvalidValueException {
+	public @NonNull IntegerValue size() throws InvalidValueException {
     	return toInvalidValue();
 	}
 
-    public SequenceValue sort(Comparator<Value> comparator) throws InvalidValueException {
+    public @NonNull SequenceValue sort(@NonNull Comparator<Value> comparator) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public NullValue subOrderedSet(int lower, int upper) throws InvalidValueException {
+	public @NonNull NullValue subOrderedSet(int lower, int upper) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public NullValue subSequence(int lower, int upper) throws InvalidValueException {
+	public @NonNull NullValue subSequence(int lower, int upper) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public Value sum(DomainEvaluator evaluator, DomainType returnType, LibraryBinaryOperation binaryOperation, Value zero) throws InvalidValueException {
+	public @NonNull Value sum(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation binaryOperation, @NonNull Value zero) throws InvalidValueException {
     	return toInvalidValue();
 	}
 
-	public NullValue symmetricDifference(UniqueCollectionValue set) throws InvalidValueException {
+	public @NonNull NullValue symmetricDifference(@NonNull UniqueCollectionValue set) throws InvalidValueException {
 		return toInvalidValue();
 	}
     
-	public SequenceValue toSequenceValue() {
+	public @NonNull SequenceValue toSequenceValue() {
 		return this;
 	}
 
-	public CollectionValue union(CollectionValue c) {
+	public @NonNull CollectionValue union(@NonNull CollectionValue c) {
         return this;
     }
 }

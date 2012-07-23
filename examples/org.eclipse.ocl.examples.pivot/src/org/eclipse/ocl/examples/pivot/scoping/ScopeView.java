@@ -19,6 +19,8 @@ package org.eclipse.ocl.examples.pivot.scoping;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * ScopeViews support access to some or all of the elements in a scope.
@@ -28,15 +30,15 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  */
 public interface ScopeView
 {
-	Attribution getAttribution();
+	@NonNull Attribution getAttribution();
 
-	EObject getChild();
+	@Nullable EObject getChild();
 
-	EStructuralFeature getContainmentFeature();
+	@Nullable EStructuralFeature getContainmentFeature();
 
-	ScopeView getParent();
+	@Nullable ScopeView getParent();
 
-	EObject getTarget();
+	@Nullable EObject getTarget();
 	
-	EReference getTargetReference();
+	@Nullable EReference getTargetReference();
 }

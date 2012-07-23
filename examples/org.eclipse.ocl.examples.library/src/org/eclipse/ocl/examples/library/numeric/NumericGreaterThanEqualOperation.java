@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.numeric;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -31,19 +32,19 @@ public class NumericGreaterThanEqualOperation extends AbstractNumericBinaryOpera
 	public static final NumericGreaterThanEqualOperation INSTANCE = new NumericGreaterThanEqualOperation();
 
 	@Override
-	protected BooleanValue evaluateInteger(DomainEvaluator evaluator, IntegerValue left, IntegerValue right) {
+	protected @NonNull BooleanValue evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		return valueFactory.booleanValueOf(left.compareTo(right) >= 0);
 	}
 
 	@Override
-	protected BooleanValue evaluateReal(DomainEvaluator evaluator, RealValue left, RealValue right) {
+	protected @NonNull BooleanValue evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		return valueFactory.booleanValueOf(left.compareTo(right) >= 0);
 	}
 
 	@Override
-	protected BooleanValue evaluateUnlimited(DomainEvaluator evaluator, Value left, Value right) {
+	protected @NonNull BooleanValue evaluateUnlimited(@NonNull DomainEvaluator evaluator, @NonNull Value left, @NonNull Value right) {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		return valueFactory.booleanValueOf(left.isUnlimited());
 	}

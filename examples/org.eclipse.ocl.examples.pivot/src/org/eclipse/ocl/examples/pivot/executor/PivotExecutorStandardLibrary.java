@@ -20,12 +20,15 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainClassifierType;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.examples.library.executor.ExecutableStandardLibrary;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
@@ -43,7 +46,7 @@ public class PivotExecutorStandardLibrary extends ExecutableStandardLibrary impl
 {
 //	public static final PivotExecutorStandardLibrary INSTANCE = new PivotExecutorStandardLibrary(new MetaModelManager(), OCLstdlib.STDLIB_URI);
 
-	protected final MetaModelManager metaModelManager;
+	protected final @NonNull MetaModelManager metaModelManager;
 	private Map<DomainType, Type> typeMap = null;
 	private Map<DomainPackage, org.eclipse.ocl.examples.pivot.Package> packageMap = null;
 	
@@ -61,7 +64,7 @@ public class PivotExecutorStandardLibrary extends ExecutableStandardLibrary impl
 	}
 
 	@Override
-	protected DomainClassifierType createClassifierType(DomainType typeType) {
+	protected @NonNull DomainClassifierType createClassifierType(@NonNull DomainType typeType) {
 		ClassifierType anyClassifierType = getAnyClassifierType();
 		ClassifierType classifierType = PivotFactory.eINSTANCE.createClassifierType();
 		classifierType.setName(anyClassifierType.getName());
@@ -71,44 +74,47 @@ public class PivotExecutorStandardLibrary extends ExecutableStandardLibrary impl
 	}
 	
 	@Override
-	public DomainEvaluator createEvaluator(EObject contextObject, Map<Object, Object> contextMap) {
-		return new PivotEcoreExecutorManager(contextObject, contextMap, this, metaModelManager);
+	public @NonNull DomainEvaluator createEvaluator(@NonNull EObject contextObject, @Nullable Map<Object, Object> contextMap) {
+		return new PivotEcoreExecutorManager(contextObject, contextMap, this, getMetaModelManager());
 	}
 
-	protected Package createPackage(DomainPackage domainPackage) {
+	protected @NonNull Package createPackage(@NonNull DomainPackage domainPackage) {
 		org.eclipse.ocl.examples.pivot.Package pivotPackage = PivotFactory.eINSTANCE.createPackage();
 		pivotPackage.setName(domainPackage.getName());
 		pivotPackage.setNsURI(domainPackage.getNsURI());
 		for (DomainType domainType : domainPackage.getOwnedType()) {
-			Type pivotType = createType(domainType);
-			pivotPackage.getOwnedType().add(pivotType);
+			if (domainType != null) {
+				Type pivotType = createType(domainType);
+				pivotPackage.getOwnedType().add(pivotType);
+			}
 		}
 		return pivotPackage;
 	}
 
-	protected Type createType(DomainType domainType) {
+	protected @NonNull Type createType(@NonNull DomainType domainType) {
 		Type pivotType = PivotFactory.eINSTANCE.createType();
 		pivotType.setName(domainType.getName());
 		return pivotType;
 	}
 
 	@Override
-	public ClassifierType getAnyClassifierType() {
+	public @NonNull ClassifierType getAnyClassifierType() {
 		return metaModelManager.getAnyClassifierType();
 	}
 
-	public DomainInheritance getInheritance(DomainType type) {
+	public @NonNull DomainInheritance getInheritance(@NonNull DomainType type) {
 		return metaModelManager.getInheritance(type);
 	}
 
-	public MetaModelManager getMetaModelManager() {
+	public @NonNull MetaModelManager getMetaModelManager() {
 		return metaModelManager;
 	}
 
-	public DomainType getOclType(String typeName) {
+	public DomainType getOclType(@NonNull String typeName) {
 		return PivotTables.PACKAGE.getType(typeName);
 	}
 	
+	@SuppressWarnings("null")
 	protected Type getType(DomainType typeType) {
 		if (typeType instanceof DomainCollectionType) {
 			DomainCollectionType domainCollectionType = (DomainCollectionType)typeType;
@@ -129,17 +135,21 @@ public class PivotExecutorStandardLibrary extends ExecutableStandardLibrary impl
 		DomainPackage domainPackage = typeType.getPackage();
 		org.eclipse.ocl.examples.pivot.Package pivotPackage = packageMap.get(domainPackage);
 		if (pivotPackage == null) {
-			pivotPackage = metaModelManager.getPrimaryPackage(domainPackage.getNsURI());
+			String nsURI = domainPackage.getNsURI();
+			if (nsURI != null) {
+				pivotPackage = metaModelManager.getPrimaryPackage(nsURI);
+			}
 			if (pivotPackage == null) {
 				pivotPackage = createPackage(domainPackage);
 			}
 		}
-		return metaModelManager.getPrimaryType(pivotPackage, typeType.getName());
+		@NonNull org.eclipse.ocl.examples.pivot.Package nonNullPivotPackage = pivotPackage;
+		return metaModelManager.getPrimaryType(nonNullPivotPackage, typeType.getName());
 	}
 
-	public DomainType getType(EClassifier eClassifier) {
-		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(eClassifier.eResource(), metaModelManager);
+	public @NonNull DomainType getType(@NonNull EClassifier eClassifier) {
+		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(DomainUtil.nonNullEMF(eClassifier.eResource()), metaModelManager);
 		Type pivotType = ecore2Pivot.getCreated(Type.class, eClassifier);
-		return pivotType;
+		return DomainUtil.nonNullState(pivotType);
 	}
 }

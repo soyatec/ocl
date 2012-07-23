@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.osgi.util.NLS;
 
@@ -37,8 +38,8 @@ public class DomainUtil
 	private static final AdapterFactory defaultAdapterFactory =
 			new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
-	public static String bind(String messageTemplate, Object... bindings) {
-		return NLS.bind(messageTemplate, bindings);
+	public static @NonNull String bind(String messageTemplate, Object... bindings) {
+		return nonNullJava(NLS.bind(messageTemplate, bindings));
 	}
 	
 	public static String debugFullName(Object object) {
@@ -93,6 +94,70 @@ public class DomainUtil
 		else {			// Never happens
 			return String.valueOf(object);
 		}
+	}
+	
+	/**
+	 * Return aT, checking the assertion that this call would not be necessary if EMF had comprehensive @NonNull annotations.
+	 */
+	@SuppressWarnings("null")
+	public static @NonNull <T> T nonNullEMF(T aT) {// FIXME remove once EMF guarantees non-null
+		assert aT != null;
+		return aT;
+	}
+	
+	/**
+	 * Return aT, checking the assertion that this call would not be necessary if JDT collection entry analysis was more comprehensive.
+	 */
+	@SuppressWarnings("null")
+	public static @NonNull <T> T nonNullEntry(T aT) {// FIXME remove once JDT guarantees non-null entries
+		assert aT != null;
+		return aT;
+	}
+	
+	/**
+	 * Return aT, checking the assertion that this call would not be necessary if JDT null analysis was more comprehensive.
+	 */
+	@SuppressWarnings("null")
+	public static @NonNull <T> T nonNullJDT(T aT) {// FIXME remove once JDT guarantees non-null
+		assert aT != null;
+		return aT;
+	}
+	
+	/**
+	 * Return aT, checking the assertion that this call would not be necessary if Java had comprehensive @NonNull annotations.
+	 */
+	@SuppressWarnings("null")
+	public static @NonNull <T> T nonNullJava(T aT) {// FIXME remove once Java guarantees non-null
+		assert aT != null;
+		return aT;
+	}
+
+	/**
+	 * Return aT, checking the assertion that this call would not be necessary if the Ecore model was guaranteed to be valid.
+	 */
+	@SuppressWarnings("null")
+	public static @NonNull <T> T nonNullModel(T aT) {
+		assert aT != null;			// FIXME Change to InvalidModelException
+		return aT;
+	}
+
+	/**
+	 * Return aT, checking the assertion that this call would not be necessary if the Pivot model was guaranteed to be valid.
+	 */
+	@SuppressWarnings("null")
+	public static @NonNull <T> T nonNullPivot(T aT) {
+		assert aT != null;			// FIXME Change to InvalidModelException
+		return aT;
+	}
+
+	/**
+	 * Return aT, throwing an IllegalStateException if null.
+	 */
+	public static @NonNull <T> T nonNullState(T aT) {
+		if (aT == null) {
+			throw new IllegalStateException();
+		}
+		return aT;
 	}
 
 	/**

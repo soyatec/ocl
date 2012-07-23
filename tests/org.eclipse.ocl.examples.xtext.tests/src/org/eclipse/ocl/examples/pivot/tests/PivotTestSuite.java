@@ -95,6 +95,8 @@ import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironment;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
+import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 
@@ -227,18 +229,22 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 */
      protected void assertBadQuery(Class<?> exception, int severity,
     		 String expression, String messageTemplate, Object... bindings) {
-		BaseResource resource = null;
+		BaseCSResource csResource = null;
 		try {
     		PivotEnvironment environment = (PivotEnvironment) helper.getEnvironment();
     		MetaModelManager metaModelManager = environment.getMetaModelManager();
     		Type contextClassifier = environment.getContextClassifier();
     		ParserContext classContext = new ClassContext(metaModelManager, null, contextClassifier);
-    		resource = classContext.createBaseResource(expression);
-			PivotUtil.checkResourceErrors(NLS.bind(OCLMessages.ErrorsInResource, expression), resource);
+    		csResource = (BaseCSResource) classContext.createBaseResource(expression);
+			PivotUtil.checkResourceErrors(NLS.bind(OCLMessages.ErrorsInResource, expression), csResource);
+			CS2PivotResourceAdapter cs2pivot = CS2PivotResourceAdapter.getAdapter(csResource, metaModelManager);
+			Resource pivotResource = cs2pivot.getPivotResource(csResource);
+			assertNoValidationErrors("Validating", pivotResource);
+			
             fail("Should not have parsed \"" + expression + "\"");
         } catch (ParserException e) {
         	assertEquals("Exception for \"" + expression + "\"", exception, e.getClass());
-        	Resource.Diagnostic diagnostic = getDiagnostic(resource);
+        	Resource.Diagnostic diagnostic = getDiagnostic(csResource);
 //			assertNoException(diagnostic, ClassCastException.class);
 //        	assertNoException(diagnostic, NullPointerException.class);
 //        	assertEquals("Severity for \"" + expression + "\"", severity, diagnostic.getSeverity());
@@ -247,8 +253,8 @@ public abstract class PivotTestSuite extends PivotTestCase
         } catch (IOException e) {
 			fail(e.getMessage());
 		} finally {
-			if (resource != null) {
-				AbstractMetaModelManagerResourceAdapter.disposeAll(resource);
+			if (csResource != null) {
+				AbstractMetaModelManagerResourceAdapter.disposeAll(csResource);
 			}
 		}	   
 	}

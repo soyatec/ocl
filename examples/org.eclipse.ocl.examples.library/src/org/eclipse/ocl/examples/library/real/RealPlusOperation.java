@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.real;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
@@ -28,14 +29,11 @@ import org.eclipse.ocl.examples.domain.values.Value;
  */
 public class RealPlusOperation extends AbstractBinaryOperation
 {
-	public static final RealPlusOperation INSTANCE = new RealPlusOperation();
+	public static final @NonNull RealPlusOperation INSTANCE = new RealPlusOperation();
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value left, Value right) throws InvalidValueException {
-		RealValue leftValue = left.toRealValue();
-		RealValue rightValue = right.toRealValue();
-		if ((leftValue != null) && (rightValue != null)) {
-			return leftValue.add(rightValue);
-		}
-		return null;
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
+		RealValue leftValue = left.asRealValue();
+		RealValue rightValue = right.asRealValue();
+		return leftValue.add(rightValue);
 	}
 }

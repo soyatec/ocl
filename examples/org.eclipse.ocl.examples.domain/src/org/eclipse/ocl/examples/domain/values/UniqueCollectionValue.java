@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.domain.values;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 public interface UniqueCollectionValue extends CollectionValue
@@ -23,10 +24,10 @@ public interface UniqueCollectionValue extends CollectionValue
 	/**
 	 * @generated NOT
 	 */
-	UniqueCollectionValue minus(UniqueCollectionValue set) throws InvalidValueException;
+	@NonNull UniqueCollectionValue minus(@NonNull UniqueCollectionValue set) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	UniqueCollectionValue symmetricDifference(UniqueCollectionValue set) throws InvalidValueException;       
+	@NonNull UniqueCollectionValue symmetricDifference(@NonNull UniqueCollectionValue set) throws InvalidValueException;       
 }

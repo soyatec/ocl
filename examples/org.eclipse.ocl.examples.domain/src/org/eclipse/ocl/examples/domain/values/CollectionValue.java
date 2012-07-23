@@ -19,9 +19,10 @@ package org.eclipse.ocl.examples.domain.values;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -35,53 +36,53 @@ public interface CollectionValue extends Value, Iterable<Value>
 	 * @generated NOT
 	 */
 	interface Accumulator extends CollectionValue {
-		boolean add(Value value);	
+		boolean add(@NonNull Value value);	
 	}
 
 	/**
 	 * @generated NOT
 	 */
-	Collection<Value> asCollection();	
+	@NonNull Collection<Value> asCollection() throws InvalidValueException;	
 
 	/**
 	 * @generated NOT
 	 */
-	List<Value> asList();
+	//@NonNull List<Value> asList() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-    IntegerValue count(Value value) throws InvalidValueException;
+	@NonNull IntegerValue count(@NonNull Value value) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	BooleanValue excludes(Value value) throws InvalidValueException;	
+	@NonNull BooleanValue excludes(@NonNull Value value) throws InvalidValueException;	
 
 	/**
 	 * @generated NOT
 	 */
-	BooleanValue excludesAll(CollectionValue c) throws InvalidValueException;
+	@NonNull BooleanValue excludesAll(@NonNull CollectionValue c) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	CollectionValue excluding(Value value) throws InvalidValueException;
+	@NonNull CollectionValue excluding(@NonNull Value value) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-    CollectionValue flatten() throws InvalidValueException;
+	@NonNull CollectionValue flatten() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	boolean flatten(Collection<Value> flattenedElements) throws InvalidValueException;
+	boolean flatten(@NonNull Collection<Value> flattenedElements) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	DomainCollectionType getCollectionType();
+	@NonNull DomainCollectionType getCollectionType();
 
 	/**
 	 * @generated NOT
@@ -91,17 +92,17 @@ public interface CollectionValue extends Value, Iterable<Value>
 	/**
 	 * @generated NOT
 	 */
-    BooleanValue includes(Value value) throws InvalidValueException;	
+	@NonNull BooleanValue includes(@NonNull Value value) throws InvalidValueException;	
 
 	/**
 	 * @generated NOT
 	 */
-    BooleanValue includesAll(CollectionValue c) throws InvalidValueException;
+	@NonNull BooleanValue includesAll(@NonNull CollectionValue c) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	CollectionValue including(Value value) throws InvalidValueException;
+	@NonNull CollectionValue including(@NonNull Value value) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
@@ -111,65 +112,65 @@ public interface CollectionValue extends Value, Iterable<Value>
 	/**
 	 * @generated NOT
 	 */
-	CollectionValue intersection(CollectionValue c) throws InvalidValueException;
+	@NonNull CollectionValue intersection(@NonNull CollectionValue c) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	BooleanValue isEmpty() throws InvalidValueException;
+	@NonNull BooleanValue isEmpty() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	Iterator<Value> iterator();
+	@NonNull Iterator<Value> iterator();
 
 	/**
 	 * @generated NOT
 	 */
-	Value maxMin(DomainEvaluator evaluator, DomainType returnType, LibraryBinaryOperation binaryOperation) throws InvalidValueException;
+	@NonNull Value maxMin(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation binaryOperation) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	BooleanValue notEmpty() throws InvalidValueException;
+	@NonNull BooleanValue notEmpty() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	Set<TupleValue> product(CollectionValue c, DomainTupleType tupleType) throws InvalidValueException;   	
+	@Nullable Set<TupleValue> product(@NonNull CollectionValue c, @NonNull DomainTupleType tupleType) throws InvalidValueException;   	
 
 	/**
 	 * @generated NOT
 	 */
-	CollectionValue selectByKind(DomainType typeValue) throws InvalidValueException;
+	@NonNull CollectionValue selectByKind(@NonNull DomainType typeValue) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	CollectionValue selectByType(DomainType typeValue) throws InvalidValueException;
+	@NonNull CollectionValue selectByType(@NonNull DomainType typeValue) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	IntegerValue size() throws InvalidValueException;
+	@NonNull IntegerValue size() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	SequenceValue sort(Comparator<Value> comparator) throws InvalidValueException;
+	@NonNull SequenceValue sort(@NonNull Comparator<Value> comparator) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	Value sum(DomainEvaluator evaluator, DomainType returnType, LibraryBinaryOperation binaryOperation, Value zero) throws InvalidValueException;
+	@NonNull Value sum(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation binaryOperation, @NonNull Value zero) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	SequenceValue toSequenceValue() throws InvalidValueException;
+	@Nullable SequenceValue toSequenceValue() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-    CollectionValue union(CollectionValue c) throws InvalidValueException;
+	@NonNull CollectionValue union(@NonNull CollectionValue c) throws InvalidValueException;
 }

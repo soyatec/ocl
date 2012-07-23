@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot.utilities;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 /**
@@ -83,7 +84,7 @@ public class TypeManager extends MetaModelManager
 		super();
 	}
 
-	public TypeManager(ResourceSet pivotResourceSet) {
+	public TypeManager(@NonNull ResourceSet pivotResourceSet) {
 		super(pivotResourceSet);		
 	}
 

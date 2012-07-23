@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainFragment;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
@@ -30,6 +31,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
 import org.eclipse.ocl.examples.domain.utilities.IndexableIterable;
+import org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation;
 
 /**
  * A ReflectiveFragment provides the description of the properties and operations defined by some class when accessed by the same
@@ -40,11 +42,11 @@ public abstract class ReflectiveFragment extends AbstractFragment
 	protected Map<DomainOperation, LibraryFeature> operationMap = null;
 	protected Map<DomainProperty, LibraryFeature> propertyMap = null;
 
-	public ReflectiveFragment(DomainInheritance derivedInheritance, DomainInheritance baseInheritance) {
+	public ReflectiveFragment(@NonNull DomainInheritance derivedInheritance, @NonNull DomainInheritance baseInheritance) {
 		super(derivedInheritance, baseInheritance);
 	}
 
-	public LibraryFeature getImplementation(DomainOperation baseOperation) {
+	public @NonNull LibraryFeature getImplementation(@NonNull DomainOperation baseOperation) {
 		if (operationMap != null) {
 			LibraryFeature libraryFeature = operationMap.get(baseOperation);
 			if (libraryFeature != null) {
@@ -55,9 +57,6 @@ public abstract class ReflectiveFragment extends AbstractFragment
 			operationMap = new HashMap<DomainOperation, LibraryFeature>();		// Optimize to reuse single super map if no local ops
 		}
 		DomainOperation localOperation = getOperationOverload(baseOperation);
-		if (localOperation == null) {
-			localOperation = baseOperation;
-		}
 		LibraryFeature libraryFeature = localOperation.getImplementation();
 		if (derivedInheritance == baseInheritance) {
 			assert localOperation == baseOperation;
@@ -126,12 +125,15 @@ public abstract class ReflectiveFragment extends AbstractFragment
 				}
 			}
 		}
-//		assert libraryFeature != null; -- can be null for OclComparable::compareTo
+		if (libraryFeature == null) {
+			libraryFeature = OclAnyUnsupportedOperation.INSTANCE;
+		}
+//		assert libraryFeature != null; //-- can be null for OclComparable::compareTo
 		operationMap.put(baseOperation, libraryFeature);
 		return libraryFeature;
 	}
 
-	protected abstract DomainOperation getOperationOverload(DomainOperation baseOperation);
+	protected abstract @NonNull DomainOperation getOperationOverload(@NonNull DomainOperation baseOperation);
 
 //	public Iterable<? extends DomainProperty> getProperties() {
 //		return propertyMap != null ? propertyMap.keySet() : Collections.<DomainProperty>emptyList();

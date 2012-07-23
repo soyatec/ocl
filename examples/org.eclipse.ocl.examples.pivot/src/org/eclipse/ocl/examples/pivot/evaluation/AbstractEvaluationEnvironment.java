@@ -17,26 +17,25 @@
 
 package org.eclipse.ocl.examples.pivot.evaluation;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.pivot.AbstractBasicEnvironment;
 import org.eclipse.ocl.examples.pivot.Adaptable;
 import org.eclipse.ocl.examples.pivot.Customizable;
 import org.eclipse.ocl.examples.pivot.Environment;
-import org.eclipse.ocl.examples.pivot.OCLUtil;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
-import org.eclipse.ocl.examples.pivot.options.Option;
 import org.eclipse.osgi.util.NLS;
 
 /**
@@ -55,38 +54,26 @@ import org.eclipse.osgi.util.NLS;
  * 
  * @author Christian W. Damus (cdamus)
  */
-public abstract class AbstractEvaluationEnvironment
-		implements EvaluationEnvironment, Adaptable, Customizable {
+public abstract class AbstractEvaluationEnvironment extends AbstractBasicEnvironment<EvaluationEnvironment>
+		implements EvaluationEnvironment {
 	
-    protected final MetaModelManager metaModelManager;
+    protected final @NonNull MetaModelManager metaModelManager;
 
-	private final EvaluationEnvironment parent;
-    private final Map<DomainTypedElement, Value> variableValues = new HashMap<DomainTypedElement, Value>();
-
-    private final Map<Option<?>, Object> options = new HashMap<Option<?>, Object>();
+    private final @NonNull Map<DomainTypedElement, Value> variableValues = new HashMap<DomainTypedElement, Value>();
     
-    protected AbstractEvaluationEnvironment(MetaModelManager metaModelManager) {
+    protected AbstractEvaluationEnvironment(@NonNull MetaModelManager metaModelManager) {
+    	super(null);
     	this.metaModelManager = metaModelManager;
-    	this.parent = null;
     }
     
-    protected AbstractEvaluationEnvironment(EvaluationEnvironment parent) {	
+    protected AbstractEvaluationEnvironment(@NonNull EvaluationEnvironment parent) {	
+    	super(parent);
     	this.metaModelManager = parent.getMetaModelManager();
-    	this.parent = parent;
     }
     
-	public MetaModelManager getMetaModelManager() {
+	public @NonNull MetaModelManager getMetaModelManager() {
 		return metaModelManager;
 	}
-    
-    /**
-     * Obtains my parent (nesting) environment.
-     * 
-     * @return my parent environment, or <code>null</code> if none
-     */
-    protected EvaluationEnvironment getParent() {
-    	return parent;
-    }
     
     /**
      * Returns the value associated with the supplied name
@@ -95,13 +82,16 @@ public abstract class AbstractEvaluationEnvironment
      *            the name whose value is to be returned
      * @return the value associated with the name
      */
-	public Value getValueOf(VariableDeclaration referredVariable) {
+	public Value getValueOf(@NonNull VariableDeclaration referredVariable) {
     	if (referredVariable instanceof Variable) {
     		assert ((Variable)referredVariable).getRepresentedParameter() == null;
     	}
     	Value object = variableValues.get(referredVariable);
-        if ((object == null) && (parent != null) && !variableValues.containsKey(referredVariable)) {
-        	object = parent.getValueOf(referredVariable);
+        if (object == null) {
+            EvaluationEnvironment parent2 = parent;
+			if ((parent2 != null) && !variableValues.containsKey(referredVariable)) {
+            	object = parent2.getValueOf(referredVariable);
+            }
         }
         return object;
 	}
@@ -182,7 +172,7 @@ public abstract class AbstractEvaluationEnvironment
      * by the OCL Standard Library.  This implementation delegates to the
      * parent environment (if any), otherwise returns <code>false</code>.
      */
-    public boolean overrides(Operation operation, int opcode) {
+    public boolean overrides(@NonNull Operation operation, int opcode) {
     	return (getParent() != null)? getParent().overrides(operation, opcode) : false;
     }
 
@@ -286,103 +276,6 @@ public abstract class AbstractEvaluationEnvironment
 	 */
 //	@Deprecated
 //	protected abstract Object getInvalidResult();
-	
-	/**
-	 * Implements the interface method by testing whether I am an instance of
-	 * the requested adapter type.
-	 */
-	@SuppressWarnings("unchecked")
-	public <T> T getAdapter(Class<T> adapterType) {
-		T result;
-		
-		if (adapterType.isInstance(this)) {
-			result = (T) this;
-		} else {
-			result = null;
-		}
-		
-		return result;
-	}
-    
-    protected Map<Option<?>, Object> basicGetOptions() {
-        return options;
-    }
-    
-    public Map<Option<?>, Object> getOptions() {
-        Customizable parent = (getParent() != null)?
-            OCLUtil.getAdapter(getParent(), Customizable.class) : null;
-            
-        Map<Option<?>, Object> result = (parent != null)
-        	? new java.util.HashMap<Option<?>, Object>(parent.getOptions())
-            : new java.util.HashMap<Option<?>, Object>();
-        
-        result.putAll(basicGetOptions());
-        
-        return result;
-    }
-    
-    public <T> void setOption(Option<T> option, T value) {
-        basicGetOptions().put(option, value);
-    }
-    
-    public <T> void putOptions(Map<? extends Option<T>, ? extends T> options) {
-        Map<Option<?>, Object> myOptions = basicGetOptions();
-        
-        myOptions.clear();
-        myOptions.putAll(options);
-    }
-    
-    public <T> T removeOption(Option<T> option) {
-        T result = getValue(option);
-        
-        basicGetOptions().remove(option);
-        
-        return result;
-    }
-    
-    public <T> Map<Option<T>, T> removeOptions(Collection<Option<T>> options) {
-        Map<Option<T>, T> result = new java.util.HashMap<Option<T>, T>();
-        
-        Map<Option<?>, Object> myOptions = basicGetOptions();
-        
-        for (Option<T> next : options) {
-            result.put(next, getValue(next));
-            myOptions.remove(next);
-        }
-        
-        return result;
-    }
-    
-    public Map<Option<?>, Object> clearOptions() {
-        Map<Option<?>, Object> myOptions = basicGetOptions();
-        
-        Map<Option<?>, Object> result = new java.util.HashMap<Option<?>, Object>(
-                myOptions);
-        
-        myOptions.clear();
-        
-        return result;
-    }
-    
-    public boolean isEnabled(Option<Boolean> option) {
-        Boolean result = getValue(option);
-        return (result == null)? false : result.booleanValue();
-    }
-    
-    public <T> T getValue(Option<T> option) {
-        @SuppressWarnings("unchecked")
-        T result = (T) getOptions().get(option);
-        
-        if (result == null) {
-            Customizable parent = (getParent() != null)?
-                OCLUtil.getAdapter(getParent(), Customizable.class) : null;
-                
-            result = (parent != null)? parent.getValue(option)
-                : option.getDefaultValue();
-        }
-        
-        return result;
-    }
 
 /*	public NullValue throwInvalidEvaluation(Object value, OCLExpression expression,
 			String message, Object object)
@@ -391,23 +284,23 @@ public abstract class AbstractEvaluationEnvironment
 		return null;
 	} */
 
-	public NullValue throwInvalidEvaluation(InvalidValueException e) throws InvalidEvaluationException {
+	public @NonNull NullValue throwInvalidEvaluation(InvalidValueException e) throws InvalidEvaluationException {
 		throw new InvalidEvaluationException(this, e);
 	}
 
-	public NullValue throwInvalidEvaluation(String message) throws InvalidEvaluationException {
+	public @NonNull NullValue throwInvalidEvaluation(String message) throws InvalidEvaluationException {
 		throw new InvalidEvaluationException(this, message, null, null, null);
 	}
 
-	public NullValue throwInvalidEvaluation(String message, DomainExpression expression) throws InvalidEvaluationException {
+	public @NonNull NullValue throwInvalidEvaluation(String message, DomainExpression expression) throws InvalidEvaluationException {
 		throw new InvalidEvaluationException(this, message, null, expression, null);
 	}
 
-	public NullValue throwInvalidEvaluation(String message, DomainExpression expression, Object context) throws InvalidEvaluationException {
+	public @NonNull NullValue throwInvalidEvaluation(String message, DomainExpression expression, Object context) throws InvalidEvaluationException {
 		throw new InvalidEvaluationException(this, message, null, expression, context);
 	}
 
-	public NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object context, String message, Object... bindings) throws InvalidEvaluationException {
+	public @NonNull NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object context, String message, Object... bindings) throws InvalidEvaluationException {
 		String boundMessage = NLS.bind(message, bindings);
 		throw new InvalidEvaluationException(this, boundMessage, e, expression, context);
 	}

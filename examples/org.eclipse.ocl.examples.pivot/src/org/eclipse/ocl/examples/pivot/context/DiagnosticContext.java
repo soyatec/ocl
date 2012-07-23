@@ -21,7 +21,7 @@ import org.eclipse.ocl.examples.pivot.Constraint;
  */
 public class DiagnosticContext extends ClassContext
 {
-	public DiagnosticContext(ParserContext parserContext, Constraint constraint) {
+	public DiagnosticContext(ClassContext parserContext, Constraint constraint) {
 		super(parserContext.getMetaModelManager(), null, parserContext.getClassContext());
 	}
 }

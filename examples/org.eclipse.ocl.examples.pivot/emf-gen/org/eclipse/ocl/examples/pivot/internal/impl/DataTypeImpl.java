@@ -457,7 +457,7 @@ public class DataTypeImpl
 	}
 
 	@Override
-	public DomainInheritance getInheritance(DomainStandardLibrary standardLibrary) {
+	public @NonNull DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary) {
 		DomainType behavioralType = getBehavioralType();
 		return standardLibrary.getInheritance(behavioralType != null ? behavioralType : this);
 	}

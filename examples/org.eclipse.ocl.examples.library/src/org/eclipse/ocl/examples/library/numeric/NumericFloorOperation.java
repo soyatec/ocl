@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.numeric;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
@@ -29,12 +30,12 @@ public class NumericFloorOperation extends AbstractNumericUnaryOperation
 	public static final NumericFloorOperation INSTANCE = new NumericFloorOperation();
 
 	@Override
-	protected Value evaluateInteger(IntegerValue left) {
+	protected @NonNull Value evaluateInteger(@NonNull IntegerValue left) {
 		return left;
 	}
 	
 	@Override
-	protected Value evaluateReal(RealValue left) throws InvalidValueException {
+	protected @NonNull Value evaluateReal(@NonNull RealValue left) throws InvalidValueException {
 		return left.floor();
 	}
 }

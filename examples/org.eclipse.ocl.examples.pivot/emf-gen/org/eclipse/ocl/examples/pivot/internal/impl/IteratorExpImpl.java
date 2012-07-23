@@ -88,13 +88,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		name = 'any' implies iterator->size() = 1
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_AnyHasOneIterator.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_AnyHasOneIterator.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -123,13 +123,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		name = 'any' implies type = source.type.oclAsType(CollectionType).elementType
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_AnyTypeIsSourceElementType.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_AnyTypeIsSourceElementType.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -158,13 +158,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		name = 'any' implies body.type = 'Boolean'
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_AnyBodyTypeIsBoolean.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_AnyBodyTypeIsBoolean.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -193,13 +193,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		name = 'closure' implies iterator->size() = 1
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_ClosureHasOneIterator.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_ClosureHasOneIterator.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -234,13 +234,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		endif
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_ClosureTypeIsUniqueCollection.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_ClosureTypeIsUniqueCollection.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -274,13 +274,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		endif
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_ClosureSourceElementTypeIsBodyElementType.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_ClosureSourceElementTypeIsBodyElementType.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -311,13 +311,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		source.type.oclAsType(CollectionType).elementType
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_ClosureElementTypeIsSourceElementType.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_ClosureElementTypeIsSourceElementType.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -346,13 +346,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		name = 'collect' implies iterator->size() = 1
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_CollectHasOneIterator.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_CollectHasOneIterator.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -387,13 +387,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		endif
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_CollectTypeIsUnordered.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_CollectTypeIsUnordered.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -424,13 +424,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		body.type.oclAsType(CollectionType).elementType
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_CollectElementTypeIsSourceElementType.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_CollectElementTypeIsSourceElementType.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -459,13 +459,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		name = 'collectNested' implies iterator->size() = 1
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_CollectNestedHasOneIterator.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_CollectNestedHasOneIterator.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -494,13 +494,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		name = 'collectNested' implies type.oclIsKindOf(BagType)
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_CollectNestedTypeIsBag.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_CollectNestedTypeIsBag.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -529,13 +529,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		name = 'collectNested' implies type = body.type
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_CollectNestedTypeIsBodyType.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_CollectNestedTypeIsBodyType.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -564,13 +564,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		name = 'exists' implies type = Boolean
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_ExistsTypeIsBoolean.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_ExistsTypeIsBoolean.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -599,13 +599,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		name = 'exists' implies body.type = Boolean
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_ExistsBodyTypeIsBoolean.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_ExistsBodyTypeIsBoolean.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -634,13 +634,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		name = 'forAll' implies type = Boolean
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_ForAllTypeIsBoolean.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_ForAllTypeIsBoolean.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -669,13 +669,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		name = 'forAll' implies body.type = Boolean
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_ForAllBodyTypeIsBoolean.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_ForAllBodyTypeIsBoolean.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -704,13 +704,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		name = 'isUnique' implies iterator->size() = 1
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_IsUniqueHasOneIterator.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_IsUniqueHasOneIterator.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -739,13 +739,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		name = 'isUnique' implies type = Boolean
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_IsUniqueTypeIsBoolean.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_IsUniqueTypeIsBoolean.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -774,13 +774,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		name = 'one' implies iterator->size() = 1
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_OneHasOneIterator.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_OneHasOneIterator.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -809,13 +809,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		name = 'one' implies type = Boolean
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_OneTypeIsBoolean.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_OneTypeIsBoolean.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -844,13 +844,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		name = 'one' implies body.type = Boolean
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_OneBodyTypeIsBoolean.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_OneBodyTypeIsBoolean.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -879,13 +879,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		name = 'reject' or name = 'select' implies iterator->size() = 1
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_RejectOrSelectHasOneIterator.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_RejectOrSelectHasOneIterator.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -914,13 +914,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		name = 'reject' or name = 'select' implies type = source.type
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_RejectOrSelectTypeIsSourceType.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_RejectOrSelectTypeIsSourceType.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -949,13 +949,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		name = 'reject' or name = 'select' implies type = Boolean
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_RejectOrSelectTypeIsBoolean.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_RejectOrSelectTypeIsBoolean.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -984,13 +984,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		name = 'sortedBy' implies iterator->size() = 1
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_SortedByHasOneIterator.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_SortedByHasOneIterator.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -1025,13 +1025,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		endif
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_SortedByIsOrderedIfSourceIsOrdered.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_SortedByIsOrderedIfSourceIsOrdered.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -1062,13 +1062,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		body.type.oclAsType(CollectionType).elementType
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_SortedByElementTypeIsSourceElementType.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_SortedByElementTypeIsSourceElementType.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -1098,13 +1098,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		  source.type.oclAsType(CollectionType).elementType)
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = IteratorExpBodies._invariant_IteratorTypeIsSourceElementType.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = IteratorExpBodies._invariant_IteratorTypeIsSourceElementType.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;

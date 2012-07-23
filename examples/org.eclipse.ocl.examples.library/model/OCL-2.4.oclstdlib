@@ -624,7 +624,7 @@ type OclComparable conformsTo OclAny {
 
 	The compareTo operation should be commutative.
 	*/
-	operation compareTo(that : OclSelf) : Integer;	
+	operation compareTo(that : OclSelf) : Integer => 'org.eclipse.ocl.examples.library.oclany.OclComparableCompareToOperation';	
 	/**
 	True if oclText[self] is greater than oclText[that].
 	**/

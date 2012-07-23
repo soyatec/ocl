@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.domain.evaluation;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -23,20 +24,20 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 public interface DomainEvaluator
 {
-	DomainEvaluator createNestedEvaluator();
-	Value evaluate(DomainExpression body);
-	DomainEvaluationEnvironment getEvaluationEnvironment();
+	@NonNull DomainEvaluator createNestedEvaluator();
+	@NonNull Value evaluate(@NonNull DomainExpression body);
+	@NonNull DomainEvaluationEnvironment getEvaluationEnvironment();
 	/**
 	 * Return the manager of all model instances for use by allInstances() and hidden opposite support.
 	 */
-	DomainModelManager getModelManager();
+	@NonNull DomainModelManager getModelManager();
 
 	/**
 	 * Return the factory for values and indirectly for types.
 	 * 
 	 * @throws EvaluationHaltedException if evaluation has been canceled.
 	 */
-	ValueFactory getValueFactory() throws EvaluationHaltedException;
+	@NonNull ValueFactory getValueFactory() throws EvaluationHaltedException;
 	
 	/**
 	 * Return true if the evaluation has been canceled.
@@ -50,7 +51,7 @@ public interface DomainEvaluator
 	 */
 	void setCanceled(boolean isCanceled);
 
-	NullValue throwInvalidEvaluation(InvalidValueException e) throws InvalidEvaluationException;
+	@NonNull NullValue throwInvalidEvaluation(InvalidValueException e) throws InvalidEvaluationException;
 
-	NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object context, String message, Object... bindings) throws InvalidEvaluationException;
+	@NonNull NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object context, String message, Object... bindings) throws InvalidEvaluationException;
 }

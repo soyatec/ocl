@@ -16,12 +16,13 @@
  */
 package org.eclipse.ocl.examples.library.oclvoid;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * OclVoidAndOperation realises the OclVoid::and() library operation.
@@ -30,11 +31,12 @@ public class OclVoidAndOperation extends AbstractBinaryOperation
 {
 	public static final OclVoidAndOperation INSTANCE = new OclVoidAndOperation();
 
-	public BooleanValue evaluate(DomainEvaluator evaluator, DomainType returnType, Value left, Value right) {
-		ValueFactory valueFactory = evaluator.getValueFactory();
-		if (right == valueFactory.getFalse()) {
-			return valueFactory.getFalse();
+	public @NonNull BooleanValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
+		if (right.isFalse()) {
+			return right.asBooleanValue();			// Simple type cast
 		}
-		return null;
+		else {
+			return left.asBooleanValue();			// Guaranteed exception
+		}
 	}
 }

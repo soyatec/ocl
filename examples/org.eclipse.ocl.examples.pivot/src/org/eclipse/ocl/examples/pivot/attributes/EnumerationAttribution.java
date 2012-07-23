@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot.attributes;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
@@ -27,7 +28,7 @@ public class EnumerationAttribution extends AbstractAttribution
 	public static final EnumerationAttribution INSTANCE = new EnumerationAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		org.eclipse.ocl.examples.pivot.Enumeration targetEnumeration = (org.eclipse.ocl.examples.pivot.Enumeration) target;
 		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 		environmentView.addElements(targetEnumeration.getOwnedLiteral());

@@ -16,12 +16,13 @@
  */
 package org.eclipse.ocl.examples.library.numeric;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 
@@ -31,36 +32,19 @@ import org.eclipse.ocl.examples.domain.values.Value;
  */
 public abstract class AbstractNumericUnaryOperation extends AbstractUnaryOperation
 {
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceVal) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal) throws InvalidValueException {
 		if (sourceVal.isUnlimited()) {
-			return evaluateUnlimited(sourceVal);			
+			return evaluator.getValueFactory().throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Unlimited"); //$NON-NLS-1$
 		}
 		IntegerValue integerValue = sourceVal.isIntegerValue(); 
 		if (integerValue != null) {
 			return evaluateInteger(integerValue);			
 		}
-		RealValue realValue = sourceVal.toRealValue(); 
+		RealValue realValue = sourceVal.asRealValue(); 
 		return evaluateReal(realValue);
 	}
 
-	protected Value evaluateReal(RealValue left) throws InvalidValueException {
-		return evaluateNumeric(left);
-	}
+	protected abstract @NonNull Value evaluateReal(@NonNull RealValue left) throws InvalidValueException;
 	
-	protected Value evaluateInteger(IntegerValue left) throws InvalidValueException {
-		return evaluateNumeric(left);
-	}
-	
-	protected Value evaluateUnlimited(Object left) throws InvalidValueException {
-		return null;
-	}
-	
-	/**
-	 * Return the result of evaluating the operation on left. 
-	 * A null return or an exception may be used for invalid.
-	 * @throws InvalidValueException 
-	 */
-	protected <T extends NumericValue> Value evaluateNumeric(T left) throws InvalidValueException {
-		return null;
-	}
+	protected abstract @NonNull Value evaluateInteger(@NonNull IntegerValue left) throws InvalidValueException;
 }

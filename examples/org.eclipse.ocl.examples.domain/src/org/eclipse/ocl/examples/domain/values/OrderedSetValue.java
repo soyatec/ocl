@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.domain.values;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 public interface OrderedSetValue extends SequenceValue, UniqueCollectionValue
@@ -23,5 +24,5 @@ public interface OrderedSetValue extends SequenceValue, UniqueCollectionValue
 	/**
 	 * @generated NOT
 	 */
-    OrderedSetValue subOrderedSet(int lower, int upper) throws InvalidValueException;
+    @NonNull OrderedSetValue subOrderedSet(int lower, int upper) throws InvalidValueException;
 }

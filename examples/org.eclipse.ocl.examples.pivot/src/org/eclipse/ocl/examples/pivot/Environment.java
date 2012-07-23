@@ -20,6 +20,8 @@ package org.eclipse.ocl.examples.pivot;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.EnvironmentRegistryImpl;
@@ -78,17 +80,23 @@ public interface Environment extends BasicEnvironment {
 	 * Namespace URI of the OCL core metamodel, used for example as the
 	 * source of certain Ecore annotations.
 	 */
-	String OCL_NAMESPACE_URI = "http://www.eclipse.org/ocl/1.1.0/OCL"; //$NON-NLS-1$
+	@NonNull String OCL_NAMESPACE_URI = "http://www.eclipse.org/ocl/1.1.0/OCL"; //$NON-NLS-1$
 	
     /**
      * The name of the context variable 'self'.
      */
-    String SELF_VARIABLE_NAME = "self"; //$NON-NLS-1$
+    @NonNull String SELF_VARIABLE_NAME = "self"; //$NON-NLS-1$
     
     /**
      * The name of the operation result variable 'result'.
      */
-    String RESULT_VARIABLE_NAME = "result"; //$NON-NLS-1$
+    @NonNull String RESULT_VARIABLE_NAME = "result"; //$NON-NLS-1$
+    
+    /**
+     * Disposes of any objects that I have created that should be cleaned
+     * up.
+     */
+    void dispose();
    
 	/**
 	 * Obtains the factory that created me, or an appropriate default factory
@@ -99,7 +107,7 @@ public interface Environment extends BasicEnvironment {
 	 * 
 	 * @see EnvironmentFactory#createEnvironment(Environment)
 	 */
-	EnvironmentFactory getFactory();
+    @NonNull EnvironmentFactory getFactory();
     
     /**
      * Obtains my parent environment, if I have one.  My parent environment
@@ -108,7 +116,7 @@ public interface Environment extends BasicEnvironment {
      * 
      * @return my parent, or <code>null</code> if I am a root environment
     */
-    Environment getParent();
+    @Nullable Environment getParent();
 	
     /**
      * Obtains my context package, if any.  The constraints in an OCL document
@@ -119,7 +127,7 @@ public interface Environment extends BasicEnvironment {
      * 
      * @see #getContextClassifier()
      */
-	org.eclipse.ocl.examples.pivot.Package getContextPackage();
+	@Nullable org.eclipse.ocl.examples.pivot.Package getContextPackage();
 	
 	/**
 	 * Obtains the context classifier of this environment.  This is the type
@@ -127,7 +135,7 @@ public interface Environment extends BasicEnvironment {
 	 * 
 	 * @return the context classifier
 	 */
-	Type getContextClassifier();
+	@Nullable Type getContextClassifier();
 	
 	/**
 	 * Obtains the context operation of this environment, if it is an operation
@@ -136,7 +144,7 @@ public interface Environment extends BasicEnvironment {
 	 * @return the context operation, or <code>null</code> if this is not an
 	 *     operation environment
 	 */
-	Operation getContextOperation();
+	@Nullable Operation getContextOperation();
 	
 	/**
 	 * Obtains the context property of this environment, if it is a property
@@ -145,7 +153,7 @@ public interface Environment extends BasicEnvironment {
 	 * @return the context property, or <code>null</code> if this is not a
 	 *     property environment
 	 */
-	Property getContextProperty();
+	@Nullable Property getContextProperty();
 	
     /**
      * Obtains the collection of core types representing the OCL Standard
@@ -157,9 +165,9 @@ public interface Environment extends BasicEnvironment {
      * 
      * @return the OCL Standard Library implementation for this environment
      */
-	DomainStandardLibrary getOCLStandardLibrary();
+	@NonNull DomainStandardLibrary getOCLStandardLibrary();
 
-	MetaModelManager getMetaModelManager();
+	@NonNull MetaModelManager getMetaModelManager();
 	
 	/**
 	 * Retrieves a list of all possible states of the specified <code>owner</code>
@@ -178,7 +186,7 @@ public interface Environment extends BasicEnvironment {
 	 *    namespace indicated by the path prefix (i.e., only one level of
 	 *    state nesting)
 	 */
-	List<State> getStates(Type owner, List<String> pathPrefix);
+	@NonNull List<State> getStates(@NonNull Type owner, @NonNull List<String> pathPrefix);
 
 	/**
 	 * Adds a variable declaration to the environment.
@@ -193,7 +201,7 @@ public interface Environment extends BasicEnvironment {
      *    it wasn't already declared locally in this environment;
      *    <code>false</code>, otherwise
 	 */	
-	public boolean addElement(String name, Variable elem, boolean explicit);
+	public boolean addElement(@NonNull String name, @NonNull Variable elem, boolean explicit);
 		
 	/**
 	 * Sets the "self" variable that is the implicit source of any property,
@@ -201,7 +209,7 @@ public interface Environment extends BasicEnvironment {
 	 * 
 	 * @param var the "self" variable
 	 */
-	public void setSelfVariable(Variable var);
+	public void setSelfVariable(@NonNull Variable var);
 	
 	/**
 	 * Gets the self variable, looking it up in a parent environment if necessary.
@@ -210,7 +218,7 @@ public interface Environment extends BasicEnvironment {
      *    only be the case in a root environment having only a package context,
      *    if even that)
 	 */
-	public Variable getSelfVariable();
+	public @Nullable Variable getSelfVariable();
     
     /**
      * Obtains the definition constraint of the specified feature, if it is an
@@ -220,7 +228,7 @@ public interface Environment extends BasicEnvironment {
      * @return the definition constraint that defines it, or <code>null</code>
      *    if this feature is not defined by OCL
      */
-	Constraint getDefinition(Object feature);
+	Constraint getDefinition(@NonNull Object feature);
     
     /**
      * Obtains a factory for the creation of types that are parameterized
@@ -230,7 +238,7 @@ public interface Environment extends BasicEnvironment {
      * 
      * @return the appropriate type factory
      */
-    PivotFactory getOCLFactory();
+	@NonNull PivotFactory getOCLFactory();
 	
     /**
      * A registry of environments.  The registry may be consulted to find a
@@ -248,7 +256,7 @@ public interface Environment extends BasicEnvironment {
         /**
          * The shared registry instance.
          */
-		Registry INSTANCE = new EnvironmentRegistryImpl();
+		@NonNull Registry INSTANCE = new EnvironmentRegistryImpl();
 		
         /**
          * Obtains a suitable environment for introspection of the specified
@@ -258,7 +266,7 @@ public interface Environment extends BasicEnvironment {
          * @return the matching registered environment, or <code>null</code> if
          *     none is available
          */
-		Environment getEnvironmentFor(OCLExpression expression);
+		Environment getEnvironmentFor(@NonNull OCLExpression expression);
 		
         /**
          * Obtains a suitable environment for introspection of the specified
@@ -270,61 +278,20 @@ public interface Environment extends BasicEnvironment {
          * @return the matching registered environment, or <code>null</code> if
          *     none is available
          */
-		Environment getEnvironmentFor(Object abstractSyntaxElement);
+		Environment getEnvironmentFor(@NonNull Object abstractSyntaxElement);
 		
         /**
          * Adds the specified environment to the registry.
          * 
          * @param environment an environment to register
          */
-		void registerEnvironment(Environment environment);
+		void registerEnvironment(@NonNull Environment environment);
         
         /**
          * Removes the specified environment from the registry.
          * 
          * @param environment the environment to deregister
          */
-        void deregisterEnvironment(Environment environment);
+        void deregisterEnvironment(@NonNull Environment environment);
 	}
-	
-	/**
-	 * <p>
-	 * An interface that merges the {@link Environment} and
-	 * {@link BasicEnvironment} interfaces that define the
-	 * behaviour realised in abstract form by {@link AbstractEnvironment}.
-	 * The purpose of this interface is primarily for internal use by the
-	 * parser and/or the particular environment implementation and its
-	 * corresponding factory.  Client applications will not usually need to
-	 * use this interface.
-	 * </p><p>
-	 * This interface is not expected to be implemented by clients.  It may
-	 * be implemented by custom {@link Environment} classes, but it is
-	 * recommended to extend the {@link AbstractEnvironment} class.
-	 * </p>
-	 * 
-	 * @author Christian W. Damus (cdamus)
-	 */
-	interface Internal extends Environment {
-    
-        /**
-         * Obtains my parent environment after construction.
-         * 
-         * @return my parent
-         */
-        Environment.Internal getInternalParent();
-    
-        /**
-         * Assigns me a parent environment after construction.  It is not advisable
-         * to set the parent to <code>null</code> if I previously had one.
-         * 
-         * @param parent my new parent
-         */
-        void setInternalParent(Environment.Internal parent);
-        
-        /**
-         * Disposes of any objects that I have created that should be cleaned
-         * up.
-         */
-        void dispose();
-    }
 }

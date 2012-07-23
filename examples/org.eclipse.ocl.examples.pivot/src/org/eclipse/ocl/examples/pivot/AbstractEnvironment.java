@@ -19,11 +19,8 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.options.Option;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * A partial implementation of the {@link Environment} interface providing
@@ -53,20 +50,18 @@ import org.eclipse.ocl.examples.pivot.options.Option;
  * 
  * @author Christian W. Damus (cdamus)
  */
-public abstract class AbstractEnvironment extends AbstractBasicEnvironment
-	implements Environment.Internal {
-	
+public abstract class AbstractEnvironment extends AbstractBasicEnvironment<Environment> implements Environment
+{
 	private org.eclipse.ocl.examples.pivot.Package contextPackage;
 	private Operation contextOperation;
 	private Property contextProperty;
-
 	private Variable selfVariable;
 
     /**
      * Initializes me without a parent environment.
      */
 	protected AbstractEnvironment() {
-		super(null);
+		this(null);
 	}
     
     /**
@@ -74,124 +69,12 @@ public abstract class AbstractEnvironment extends AbstractBasicEnvironment
      * 
      * @param parent an environment (or <code>null</code>)
      */
-    protected AbstractEnvironment(Environment.Internal parent) {      
-        super(parent);
-    }
-	
-    /**
-     * Initializes me with the specified parent environment, which should be
-     * of the same type as me.
-     * 
-     * @param parent an environment of the same type as me (or <code>null</code>)
-     */
-	protected AbstractEnvironment(AbstractEnvironment parent) {	
+    protected AbstractEnvironment(Environment parent) {      
 		super(parent);
-	}
-
-    // implements the interface method
-    public Environment.Internal getInternalParent() {
-        return (Environment.Internal) super.getParent();
     }
-
-    // implements the interface method
-    /**
-     * @deprecated Since 1.2, use the {@link #getInternalParent()} method, instead.
-     */
-	@Override
-	@Deprecated
-	public AbstractEnvironment getParent() {
-		return (AbstractEnvironment) super.getParent();
-	}
-
-    /**
-     * Assigns me a parent environment after construction.  It is not advisable
-     * to set the parent to <code>null</code> if I previously had one.
-     * 
-     * @param parent my new parent
-     */
-    public void setInternalParent(Environment.Internal parent) {
-        super.setParent(parent);
-    }
-
-    /**
-     * Assigns me a parent environment after construction.  It is not advisable
-     * to set the parent to <code>null</code> if I previously had one.
-     * 
-     * @param parent my new parent
-     */
-	protected void setParent(AbstractEnvironment parent) {
-		super.setParent(parent);
-	}
 	
     // implements the interface method
-	public org.eclipse.ocl.examples.pivot.Package getContextPackage() {
-		if (contextPackage != null) {
-			return contextPackage;
-		} else if (getInternalParent() != null) {
-			return getInternalParent().getContextPackage();
-		}
-		
-		return null;
-	}
-
-    /**
-     * Assigns my context package.
-     * 
-     * @param contextPackage my new context package
-     */
-	protected void setContextPackage(org.eclipse.ocl.examples.pivot.Package contextPackage) {
-		this.contextPackage = contextPackage;
-	}
-	
-    // implements the interface method
-	public Type getContextClassifier() {
-		Variable selfVariable = getSelfVariable();
-		return selfVariable != null ? selfVariable.getType() : null;
-	}
-	
-    // implements the interface method
-	public Operation getContextOperation() {
-		if (contextOperation != null) {
-			return contextOperation;
-		} else if (getInternalParent() != null) {
-			return getInternalParent().getContextOperation();
-		}
-		
-		return null;
-	}
-
-    /**
-     * Assigns my context operation.  This method does <em>not</em> create the
-     * variables for parameters and the return result.
-     * 
-     * @param contextOperation my context operation
-     */
-	protected void setContextOperation(Operation contextOperation) {
-		this.contextOperation = contextOperation;
-	}
-	
-    // implements the interface method
-	public Property getContextProperty() {
-		if (contextProperty != null) {
-			return contextProperty;
-		} else if (getInternalParent() != null) {
-			return getInternalParent().getContextProperty();
-		}
-		
-		return null;
-	}
-
-    /**
-     * Assigns my context property.
-     * 
-     * @param contextProperty my context property
-     */
-	protected void setContextProperty(Property contextProperty) {
-		this.contextProperty = contextProperty;
-	}
-
-    // implements the interface method
-	public boolean addElement(String name, Variable elem, boolean isExplicit) {
+	public boolean addElement(@NonNull String name, @NonNull Variable elem, boolean isExplicit) {
 		throw new UnsupportedOperationException();
 /*		// FIXME this is now redundant
 		if (name == null) {
@@ -211,9 +94,108 @@ public abstract class AbstractEnvironment extends AbstractBasicEnvironment
 		
 		return true; */
 	}
+	   
+    /**
+     * I dispose my type resolver, if it is an {@link AbstractTypeResolver}
+     * and I am the root environment (which owns the resolver).
+     */
+    public void dispose() {
+    }    
+	
+    /**
+     * Initializes me with the specified parent environment, which should be
+     * of the same type as me.
+     * 
+     * @param parent an environment of the same type as me (or <code>null</code>)
+     */
+//	protected AbstractEnvironment(AbstractEnvironment parent) {	
+//		this(parent);
+//	}
+	
+    // implements the interface method
+	public @Nullable org.eclipse.ocl.examples.pivot.Package getContextPackage() {
+		if (contextPackage != null) {
+			return contextPackage;
+		}
+		Environment parent2 = parent;
+		if (parent2 != null) {
+			return parent2.getContextPackage();
+		}		
+		return null;
+	}
+	
+    // implements the interface method
+	public @Nullable Type getContextClassifier() {
+		Variable selfVariable = getSelfVariable();
+		return selfVariable != null ? selfVariable.getType() : null;
+	}
+	
+    // implements the interface method
+	public @Nullable Operation getContextOperation() {
+		if (contextOperation != null) {
+			return contextOperation;
+		}
+		Environment parent2 = parent;
+		if (parent2 != null) {
+			return parent2.getContextOperation();
+		}
+		return null;
+	}
+	
+    // implements the interface method
+	public @Nullable Property getContextProperty() {
+		if (contextProperty != null) {
+			return contextProperty;
+		}
+		Environment parent2 = parent;
+		if (parent2 != null) {
+			return parent2.getContextProperty();
+		}	
+		return null;
+	}
+	
+    // implements the interface method
+	public @Nullable Variable getSelfVariable() {
+		Variable result = selfVariable;		
+		if (result == null) {
+			Environment parent2 = parent;
+			if (parent2 != null) {
+				result = parent2.getSelfVariable();
+			}
+		}		
+		return result;
+	}
+
+    /**
+     * Assigns my context operation.  This method does <em>not</em> create the
+     * variables for parameters and the return result.
+     * 
+     * @param contextOperation my context operation
+     */
+	protected void setContextOperation(@Nullable Operation contextOperation) {
+		this.contextOperation = contextOperation;
+	}
+
+    /**
+     * Assigns my context package.
+     * 
+     * @param contextPackage my new context package
+     */
+	protected void setContextPackage(@Nullable org.eclipse.ocl.examples.pivot.Package contextPackage) {
+		this.contextPackage = contextPackage;
+	}
+
+    /**
+     * Assigns my context property.
+     * 
+     * @param contextProperty my context property
+     */
+	protected void setContextProperty(@Nullable Property contextProperty) {
+		this.contextProperty = contextProperty;
+	}
 
     // implements the interface method
-	public void setSelfVariable(Variable var) {
+	public void setSelfVariable(@NonNull Variable var) {
 		selfVariable = var;
 		
 		// ensure that the environment knows its package context
@@ -225,38 +207,6 @@ public abstract class AbstractEnvironment extends AbstractBasicEnvironment
 			}
 		}
 	}
-	
-    // implements the interface method
-	public Variable getSelfVariable() {
-		Variable result = selfVariable;
-		
-		if ((result == null) && (getInternalParent() != null)) {
-			result = getInternalParent().getSelfVariable();
-		}
-		
-		return result;
-	}
-    
-    /**
-     * Queries whether I have a non-OK setting for the specified problem option.
-     * In such cases, I will need to be concerned with reporting the problem.
-     * 
-     * @param option the problem option
-     * @return whether I have a setting for it that is not OK
-     * 
-     * @see ProblemHandler.Severity#OK
-     */
-    public boolean notOK(Option<ProblemHandler.Severity> option) {
-        ProblemHandler.Severity sev = getValue(option);
-        return (sev != null) && !sev.isOK();
-    }
-    
-    /**
-     * I dispose my type resolver, if it is an {@link AbstractTypeResolver}
-     * and I am the root environment (which owns the resolver).
-     */
-    public void dispose() {
-    }    
 
 	//
 	// Nested classes
@@ -269,11 +219,11 @@ public abstract class AbstractEnvironment extends AbstractBasicEnvironment
      * @author Christian W. Damus (cdamus)
 	 */
 	protected final class VariableEntry {
-		final String name;
-		final Variable variable;
+		final @NonNull String name;
+		final @NonNull Variable variable;
 		final boolean isExplicit;
 		
-		VariableEntry(String name, Variable variable, boolean isExplicit) {
+		VariableEntry(@NonNull String name, @NonNull Variable variable, boolean isExplicit) {
 			this.name = name;
 			this.variable = variable;
 			this.isExplicit = isExplicit;

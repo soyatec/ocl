@@ -17,8 +17,9 @@
 package org.eclipse.ocl.examples.pivot.manager;
 
 import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.jdt.annotation.NonNull;
 
 public interface MetaModelManagedAdapter extends Adapter.Internal, MetaModelManagerListener
 {		
-	boolean isAdapterFor(MetaModelManager metaModelManager);
+	boolean isAdapterFor(@NonNull MetaModelManager metaModelManager);
 }

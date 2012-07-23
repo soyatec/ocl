@@ -60,11 +60,11 @@ public abstract class AbstractEvaluationVisitor
     // stereotypes associated with boolean-valued constraints
 	private static Set<String> BOOLEAN_CONSTRAINTS;
 	
-	protected final EvaluationEnvironment evaluationEnvironment;
-	protected final Environment environment;
-	protected final MetaModelManager metaModelManager;	
-	protected final DomainModelManager modelManager;
-	protected final ValueFactory valueFactory;;
+	protected final @NonNull EvaluationEnvironment evaluationEnvironment;
+	protected final @NonNull Environment environment;
+	protected final @NonNull MetaModelManager metaModelManager;	
+	protected final @NonNull DomainModelManager modelManager;
+	protected final @NonNull ValueFactory valueFactory;;
 
     private EvaluationVisitor undecoratedVisitor;
 
@@ -87,10 +87,8 @@ public abstract class AbstractEvaluationVisitor
 	 * @param evalEnv an evaluation environment (map of variable names to values)
 	 * @param modelManager a map of classes to their instance sets
 	 */
-	protected AbstractEvaluationVisitor(
-			Environment env,
-			EvaluationEnvironment evalEnv,
-			DomainModelManager modelManager) {
+	protected AbstractEvaluationVisitor(@NonNull Environment env, @NonNull EvaluationEnvironment evalEnv,
+			@NonNull DomainModelManager modelManager) {
         super(null);
         this.evaluationEnvironment = evalEnv;
         this.environment = env;
@@ -101,25 +99,25 @@ public abstract class AbstractEvaluationVisitor
     }
 
     // implements the interface method
-	public Environment getEnvironment() {
+	public @NonNull Environment getEnvironment() {
 		return environment;
 	}
     
     // implements the interface method
-	public EvaluationEnvironment getEvaluationEnvironment() {
+	public @NonNull EvaluationEnvironment getEvaluationEnvironment() {
 		return evaluationEnvironment;
 	}
 
-	public MetaModelManager getMetaModelManager() {
+	public @NonNull MetaModelManager getMetaModelManager() {
 		return metaModelManager;
 	}
 	
     // implements the interface method
-	public DomainModelManager getModelManager() {
+	public @NonNull DomainModelManager getModelManager() {
 		return modelManager;
 	}
 
-	public DomainStandardLibrary getStandardLibrary() {
+	public @NonNull DomainStandardLibrary getStandardLibrary() {
 		return metaModelManager;
 	}
   
@@ -137,7 +135,7 @@ public abstract class AbstractEvaluationVisitor
         return undecoratedVisitor;
     }
 
-	public ValueFactory getValueFactory() {
+	public @NonNull ValueFactory getValueFactory() {
 		if (isCanceled) {
 			throw new EvaluationHaltedException("Canceled");
 		}
@@ -195,17 +193,17 @@ public abstract class AbstractEvaluationVisitor
 		setUndecoratedVisitor(visitor);
     }
 
-	public NullValue throwInvalidEvaluation(String message) throws InvalidEvaluationException {
+	public @NonNull NullValue throwInvalidEvaluation(String message) throws InvalidEvaluationException {
 		return evaluationEnvironment.throwInvalidEvaluation(message);
 	}
 
 
-	public NullValue throwInvalidEvaluation(InvalidValueException e) throws InvalidEvaluationException {
+	public @NonNull NullValue throwInvalidEvaluation(InvalidValueException e) throws InvalidEvaluationException {
 		return evaluationEnvironment.throwInvalidEvaluation(e);
 	}
 
 
-	public NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object value, String message, Object... bindings) {
+	public @NonNull NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object value, String message, Object... bindings) {
 		return evaluationEnvironment.throwInvalidEvaluation(e, expression, value, message, bindings);
 	}
 	

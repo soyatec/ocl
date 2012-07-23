@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.domain.evaluation;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
@@ -28,18 +29,18 @@ public interface DomainEvaluationVisitor
      * 
 	 * @return the evaluation environment
 	 */
-	DomainEvaluationEnvironment getEvaluationEnvironment();
+	@NonNull DomainEvaluationEnvironment getEvaluationEnvironment();
 
-	DomainEvaluator getEvaluator();
+	@NonNull DomainEvaluator getEvaluator();
 	
 	/**
      * Obtains the mapping of model classes to their extents.
      * 
 	 * @return the model manager
 	 */
-	DomainModelManager getModelManager();
+	@NonNull DomainModelManager getModelManager();
 
-	DomainStandardLibrary getStandardLibrary();
+	@NonNull DomainStandardLibrary getStandardLibrary();
 
-	ValueFactory getValueFactory();
+	@NonNull ValueFactory getValueFactory();
 }

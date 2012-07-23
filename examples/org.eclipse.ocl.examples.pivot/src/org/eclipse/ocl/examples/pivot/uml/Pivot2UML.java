@@ -27,6 +27,8 @@ import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMIException;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
@@ -34,8 +36,9 @@ import org.eclipse.ocl.examples.pivot.utilities.AbstractConversion;
 
 public class Pivot2UML extends AbstractConversion
 {
-	public static List<EObject> createResource(MetaModelManager metaModelManager, Resource pivotResource) {
-		List<EObject> pivotRoots = pivotResource.getContents();
+	public static List<EObject> createResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource pivotResource) {
+		@SuppressWarnings("null")
+		@NonNull List<EObject> pivotRoots = pivotResource.getContents();
 		Pivot2UML converter = new Pivot2UML(metaModelManager);
 		return converter.convertAll(pivotRoots);
 	}
@@ -60,14 +63,14 @@ public class Pivot2UML extends AbstractConversion
 //	protected final Resource csResource;
 //	protected final XMLResource eResource;
 
-	public Pivot2UML(MetaModelManager metaModelManager/*ResourceSet resourceSet, Resource csResource, URI ecoreURI*/) {
+	public Pivot2UML(@NonNull MetaModelManager metaModelManager/*ResourceSet resourceSet, Resource csResource, URI ecoreURI*/) {
 		super(metaModelManager);
 //		this.resourceSet = resourceSet;
 //		this.csResource = csResource;
 //		this.eResource = (XMLResource) new EcoreResourceFactoryImpl().createResource(ecoreURI);
 	}
 	
-	protected EObject convert(Element pivotObject) {
+	protected @Nullable EObject convert(@NonNull Element pivotObject) {
 		EObject eObject = pass1.safeVisit(pivotObject);
 		for (Element eKey : deferMap) {
 			pass2.safeVisit(eKey);
@@ -75,7 +78,7 @@ public class Pivot2UML extends AbstractConversion
 		return eObject;
 	}
 
-	protected List<EObject> convertAll(List<? extends EObject> pivotObjects) {
+	protected @NonNull List<EObject> convertAll(@NonNull List<? extends EObject> pivotObjects) {
 		List<EObject> eObjects = new ArrayList<EObject>();
 		for (EObject pivotObject : pivotObjects) {
 			if (pivotObject instanceof Element) {
@@ -88,7 +91,7 @@ public class Pivot2UML extends AbstractConversion
 		return eObjects;
 	}
 
-	protected void error(String message) {
+	protected void error(@NonNull String message) {
 		if (errors == null) {
 			errors = new ArrayList<Resource.Diagnostic>();
 		}
@@ -105,11 +108,11 @@ public class Pivot2UML extends AbstractConversion
 		return eResource;
 	} */
 
-	public void defer(Element pivotElement) {
+	public void defer(@NonNull Element pivotElement) {
 		deferMap.add(pivotElement);
 	}
 
-	public <T extends EObject> T getCreated(Class<T> requiredClass, Element pivotElement) {
+	public <T extends EObject> T getCreated(@NonNull Class<T> requiredClass, @NonNull Element pivotElement) {
 		EModelElement eModelElement = createMap.get(pivotElement);
 		if (eModelElement == null) {
 			return null;
@@ -122,7 +125,7 @@ public class Pivot2UML extends AbstractConversion
 		return castElement;
 	}
 
-	public void putCreated(Element pivotElement, EModelElement eModelElement) {
+	public void putCreated(@NonNull Element pivotElement, @NonNull EModelElement eModelElement) {
 		EModelElement old = createMap.put(pivotElement, eModelElement);
 		assert old == null;
 	}

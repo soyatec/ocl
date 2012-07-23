@@ -19,6 +19,8 @@ package org.eclipse.ocl.examples.pivot.utilities;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.AbstractEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
@@ -53,7 +55,8 @@ public class PivotEnvironmentFactory extends AbstractEnvironmentFactory {
 		}
 	}
 	
-	public static PivotEnvironmentFactory getGlobalRegistryInstance() {
+	@SuppressWarnings("null")
+	public static @NonNull PivotEnvironmentFactory getGlobalRegistryInstance() {
 		if (globalRegistryInstance == null) {
 			globalRegistryInstance = new PivotEnvironmentFactory();
 		}
@@ -79,20 +82,20 @@ public class PivotEnvironmentFactory extends AbstractEnvironmentFactory {
      * @param reg my package registry (must not be <code>null</code>)
 	 * @param metaModelManager 
 	 */
-	public PivotEnvironmentFactory(EPackage.Registry reg, MetaModelManager metaModelManager) {
+	public PivotEnvironmentFactory(EPackage.Registry reg, @Nullable MetaModelManager metaModelManager) {
 		super();
 		this.registry = reg;
 		this.metaModelManager = metaModelManager != null ? metaModelManager : new MetaModelManager();
 	}
 	
     // implements the inherited specification
-    public PivotEnvironment createEnvironment() {
+    public @NonNull PivotEnvironment createEnvironment() {
 		PivotEnvironment result = new PivotEnvironment(this, null);
 		return result;
 	}
 	
     // implements the inherited specification
-    public PivotEnvironment loadEnvironment(Resource resource) {
+    public @NonNull PivotEnvironment loadEnvironment(@NonNull Resource resource) {
     	PivotEnvironment result = new PivotEnvironment(this, resource);
 		return result;
 	}
@@ -108,7 +111,7 @@ public class PivotEnvironmentFactory extends AbstractEnvironmentFactory {
 	}
 
     // implements the inherited specification
-	public PivotEnvironment createEnvironment(Environment parent) {
+	public @NonNull PivotEnvironment createEnvironment(@NonNull Environment parent) {
 		if (!(parent instanceof PivotEnvironment)) {
 			throw new IllegalArgumentException(
 				"Parent environment must be a Pivot environment: " + parent); //$NON-NLS-1$
@@ -119,22 +122,22 @@ public class PivotEnvironmentFactory extends AbstractEnvironmentFactory {
 	}
 
     // implements the inherited specification
-	public PivotEvaluationEnvironment createEvaluationEnvironment() {
-		return new PivotEvaluationEnvironment(metaModelManager);
+	public @NonNull PivotEvaluationEnvironment createEvaluationEnvironment() {
+		return new PivotEvaluationEnvironment(getMetaModelManager());
 	}
 
     // implements the inherited specification
-	public PivotEvaluationEnvironment createEvaluationEnvironment(EvaluationEnvironment parent) {
+	public @NonNull PivotEvaluationEnvironment createEvaluationEnvironment(@NonNull EvaluationEnvironment parent) {
 		return new PivotEvaluationEnvironment(parent);
 	}
 
 	@Override
 	protected Type getClassifier(Object context) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
-	public MetaModelManager getMetaModelManager() {
+	@SuppressWarnings("null")
+	public @NonNull MetaModelManager getMetaModelManager() {
 		return metaModelManager;
 	}
 }

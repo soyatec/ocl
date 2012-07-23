@@ -16,8 +16,7 @@
  */
 package org.eclipse.ocl.examples.domain.values;
 
-import java.math.BigInteger;
-
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 public interface IntegerValue extends NumericValue
@@ -26,56 +25,51 @@ public interface IntegerValue extends NumericValue
 	 * @generated NOT
 	 */
 	interface Accumulator extends IntegerValue {
-		void setValue(Integer value);	
+		void setValue(@NonNull Integer value);	
 	}
-	
-	/**
-	 * @generated NOT
-	 */
-	BigInteger bigIntegerValue();
 
 	/**
 	 * @generated NOT
 	 */
-	IntegerValue add(IntegerValue right) throws InvalidValueException;
+	@NonNull IntegerValue add(@NonNull IntegerValue right) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	IntegerValue div(IntegerValue right) throws InvalidValueException;
+	@NonNull IntegerValue div(@NonNull IntegerValue right) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	RealValue divide(IntegerValue right) throws InvalidValueException;
+	@NonNull RealValue divide(@NonNull IntegerValue right) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	IntegerValue max(IntegerValue right) throws InvalidValueException;
+	@NonNull IntegerValue max(@NonNull IntegerValue right) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	IntegerValue min(IntegerValue right) throws InvalidValueException;
+	@NonNull IntegerValue min(@NonNull IntegerValue right) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	IntegerValue mod(IntegerValue right) throws InvalidValueException;
+	@NonNull IntegerValue mod(@NonNull IntegerValue right) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	IntegerValue multiply(IntegerValue right) throws InvalidValueException;
+	@NonNull IntegerValue multiply(@NonNull IntegerValue right) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	IntegerValue negate() throws InvalidValueException;
+	@NonNull IntegerValue negate() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	IntegerValue subtract(IntegerValue right) throws InvalidValueException;
+	@NonNull IntegerValue subtract(@NonNull IntegerValue right) throws InvalidValueException;
 }

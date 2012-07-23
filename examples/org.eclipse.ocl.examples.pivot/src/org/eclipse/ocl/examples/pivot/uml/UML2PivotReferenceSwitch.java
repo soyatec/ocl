@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -49,41 +50,37 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 
 	@Override
 	public org.eclipse.ocl.examples.pivot.Class caseClass(org.eclipse.uml2.uml.Class umlClass) {
-		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.getCreated(org.eclipse.ocl.examples.pivot.Class.class, umlClass);
+		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.getCreated(org.eclipse.ocl.examples.pivot.Class.class, DomainUtil.nonNullEMF(umlClass));
 		doSwitchAll(Type.class, pivotElement.getSuperClass(), umlClass.getSuperClasses());
 		if (pivotElement.getSuperClass().isEmpty()) {
 			org.eclipse.ocl.examples.pivot.Class oclElementType = converter.getMetaModelManager().getOclElementType();
-			if (oclElementType != null) {
-				pivotElement.getSuperClass().add(oclElementType);
-			}
+			pivotElement.getSuperClass().add(oclElementType);
 		}
 		return null;
 	}
 
 	@Override
 	public Constraint caseConstraint(org.eclipse.uml2.uml.Constraint umlConstraint) {
-		Constraint pivotElement = converter.getCreated(Constraint.class, umlConstraint);
+		Constraint pivotElement = converter.getCreated(Constraint.class, DomainUtil.nonNullEMF(umlConstraint));
 		doSwitchAll(Element.class, pivotElement.getConstrainedElement(), umlConstraint.getConstrainedElements());
 		return null;
 	}
 
 	@Override
 	public org.eclipse.ocl.examples.pivot.Class caseInterface(org.eclipse.uml2.uml.Interface umlInterface) {
-		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.getCreated(org.eclipse.ocl.examples.pivot.Class.class, umlInterface);
+		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.getCreated(org.eclipse.ocl.examples.pivot.Class.class, DomainUtil.nonNullEMF(umlInterface));
 		List<Generalization> umlGeneralizations = umlInterface.getGeneralizations();
 		List<Type> newSuperTypes = new ArrayList<Type>(Math.max(1, umlGeneralizations.size()));
 		for (org.eclipse.uml2.uml.Generalization umlGeneralization : umlGeneralizations) {
 			org.eclipse.uml2.uml.Classifier umlGeneral = umlGeneralization.getGeneral();
-			Type pivotGeneral = converter.getCreated(Type.class, umlGeneral);
+			Type pivotGeneral = converter.getCreated(Type.class, DomainUtil.nonNullEMF(umlGeneral));
 			if (!newSuperTypes.contains(pivotGeneral)) {
 				newSuperTypes.add(pivotGeneral);
 			}
 		}
 		if (newSuperTypes.isEmpty()) {
 			org.eclipse.ocl.examples.pivot.Class oclElementType = converter.getMetaModelManager().getOclElementType();
-			if (oclElementType != null) {
-				newSuperTypes.add(oclElementType);
-			}
+			newSuperTypes.add(oclElementType);
 		}
 		PivotUtil.refreshList(pivotElement.getSuperClass(), newSuperTypes);
 		return null;
@@ -91,7 +88,7 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 
 	@Override
 	public Operation caseOperation(org.eclipse.uml2.uml.Operation umlOperation) {
-		Operation pivotElement = converter.getCreated(Operation.class, umlOperation);
+		Operation pivotElement = converter.getCreated(Operation.class, DomainUtil.nonNullEMF(umlOperation));
 		doSwitchAll(Type.class, pivotElement.getRaisedException(), umlOperation.getRaisedExceptions());
 		doSwitchAll(Operation.class, pivotElement.getRedefinedOperation(), umlOperation.getRedefinedOperations());
 		for (org.eclipse.uml2.uml.Parameter umlParameter : umlOperation.getOwnedParameters()) {
@@ -110,27 +107,28 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 
 	@Override
 	public org.eclipse.ocl.examples.pivot.Package casePackage(org.eclipse.uml2.uml.Package umlPackage) {
-		org.eclipse.ocl.examples.pivot.Package pivotElement = converter.getCreated(org.eclipse.ocl.examples.pivot.Package.class, umlPackage);
+		org.eclipse.ocl.examples.pivot.Package pivotElement = converter.getCreated(org.eclipse.ocl.examples.pivot.Package.class, DomainUtil.nonNullEMF(umlPackage));
 		doSwitchAll(org.eclipse.ocl.examples.pivot.Package.class, pivotElement.getImportedPackage(), umlPackage.getImportedPackages());
 		return null;
 	}
 
 	@Override
 	public Property caseProperty(org.eclipse.uml2.uml.Property umlProperty) {
-		Property pivotElement = converter.getCreated(Property.class, umlProperty);
-		org.eclipse.uml2.uml.Type umlType = umlProperty.getType();
+		org.eclipse.uml2.uml.Property nonNullProperty = DomainUtil.nonNullEMF(umlProperty);
+		Property pivotElement = converter.getCreated(Property.class, nonNullProperty);
+		org.eclipse.uml2.uml.Type umlType = nonNullProperty.getType();
 		if (umlType != null) {
 			Type pivotType = converter.resolveType(umlType);
 			pivotElement.setType(pivotType);
 		}
-		doSwitchAll(Property.class, pivotElement.getRedefinedProperty(), umlProperty.getRedefinedProperties());
+		doSwitchAll(Property.class, pivotElement.getRedefinedProperty(), nonNullProperty.getRedefinedProperties());
 //		doSwitchAll(Property.class, pivotElement.getSubsettedProperty(), umlProperty.getSubsettedProperties());
 		return null;
 	}
 
 	@Override
 	public EObject caseTypedElement(org.eclipse.uml2.uml.TypedElement umlTypedElement) {
-		TypedElement pivotElement = converter.getCreated(TypedElement.class, umlTypedElement);
+		TypedElement pivotElement = converter.getCreated(TypedElement.class, DomainUtil.nonNullEMF(umlTypedElement));
 		org.eclipse.uml2.uml.Type umlType = umlTypedElement.getType();
 		if (umlType != null) {
 			Type pivotType = converter.resolveType(umlType);
@@ -172,8 +170,9 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 	}
 
 	public <T extends Element> void doSwitchAll(Class<T> pivotClass, Collection<T> pivotElements, List<? extends EObject> eObjects) {
+		Class<T> nonNullPivotClass = DomainUtil.nonNullEMF(pivotClass);
 		for (EObject eObject : eObjects) {
-			T pivotElement = converter.getCreated(pivotClass, eObject);
+			T pivotElement = converter.getCreated(nonNullPivotClass, DomainUtil.nonNullEntry(eObject));
 			pivotElements.add(pivotElement);
 		}
 	}

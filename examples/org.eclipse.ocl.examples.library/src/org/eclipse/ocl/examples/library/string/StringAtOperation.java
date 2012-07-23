@@ -16,10 +16,13 @@
  */
 package org.eclipse.ocl.examples.library.string;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
@@ -29,17 +32,18 @@ public class StringAtOperation extends AbstractBinaryOperation
 {
 	public static final StringAtOperation INSTANCE = new StringAtOperation();
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value left, Value right) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
 		String leftString = left.asString();
 		Integer rightInteger = right.asInteger();
-		if ((leftString != null) && (rightInteger != null)) {
-			int size = leftString.length();
-			int index = rightInteger.intValue();
-			if ((0 < index) && (index <= size)) {
-				char c = leftString.charAt(index-1);
-				return evaluator.getValueFactory().stringValueOf(String.valueOf(c));
-			}
-		}			
-		return null;
+		int size = leftString.length();
+		int index = rightInteger.intValue();
+		if ((0 < index) && (index <= size)) {
+			char c = leftString.charAt(index-1);
+			String result = DomainUtil.nonNullJava(String.valueOf(c));
+			return evaluator.getValueFactory().stringValueOf(result);
+		}
+		else {
+			return evaluator.getValueFactory().throwInvalidValueException(EvaluatorMessages.IndexOutOfRange, index, size);
+		}
 	}
 }

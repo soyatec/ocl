@@ -17,6 +17,7 @@
 
 package org.eclipse.ocl.examples.pivot.evaluation;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -27,6 +28,7 @@ import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.Environment;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -41,9 +43,11 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  */
 public interface EvaluationVisitor extends Visitor<Value>, DomainEvaluator
 {
-	EvaluationVisitor createNestedEvaluator();
+	@NonNull EvaluationVisitor createNestedEvaluator();
 
-	Value evaluate(DomainExpression body);
+	@NonNull Value evaluate(@NonNull DomainExpression body);
+
+	@NonNull Value evaluate(@NonNull ExpressionInOCL expressionInOCL);
 	
 	/**
      * Obtains the environment that provides the metamodel semantics for the
@@ -59,22 +63,22 @@ public interface EvaluationVisitor extends Visitor<Value>, DomainEvaluator
      * 
 	 * @return the evaluation environment
 	 */
-	EvaluationEnvironment getEvaluationEnvironment();
+	@NonNull EvaluationEnvironment getEvaluationEnvironment();
 
-	EvaluationVisitor getEvaluator();
+	@NonNull EvaluationVisitor getEvaluator();
 	
 	/**
      * Obtains the mapping of model classes to their extents.
      * 
 	 * @return the model manager
 	 */
-	DomainModelManager getModelManager();
+	@NonNull DomainModelManager getModelManager();
 
-	MetaModelManager getMetaModelManager();
+	@NonNull MetaModelManager getMetaModelManager();
 
-	DomainStandardLibrary getStandardLibrary();
+	@NonNull DomainStandardLibrary getStandardLibrary();
 
-	ValueFactory getValueFactory();
+	@NonNull ValueFactory getValueFactory();
     
     /**
      * Configures the specified decorated visitor to correctly handle the
@@ -88,9 +92,9 @@ public interface EvaluationVisitor extends Visitor<Value>, DomainEvaluator
      */
 	void setUndecoratedVisitor(EvaluationVisitor evaluationVisitor);
 
-	NullValue throwInvalidEvaluation(InvalidValueException e) throws InvalidEvaluationException;
+	@NonNull NullValue throwInvalidEvaluation(InvalidValueException e) throws InvalidEvaluationException;
 
-	NullValue throwInvalidEvaluation(String message) throws InvalidEvaluationException;
+	@NonNull NullValue throwInvalidEvaluation(String message) throws InvalidEvaluationException;
 
-	NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object value, String message, Object... bindings) throws InvalidEvaluationException;
+	@NonNull NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object value, String message, Object... bindings) throws InvalidEvaluationException;
 }

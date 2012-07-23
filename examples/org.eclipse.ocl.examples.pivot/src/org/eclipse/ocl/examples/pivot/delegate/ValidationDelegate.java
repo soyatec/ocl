@@ -19,6 +19,8 @@ package org.eclipse.ocl.examples.pivot.delegate;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.ValidationDelegateRegistryImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * A revised interface for delegating validation expression evaluation
@@ -39,7 +41,7 @@ public interface ValidationDelegate extends ValidationDelegateExtension // waiti
 		 */
 		interface Descriptor extends EValidator.ValidationDelegate.Descriptor {
 
-			ValidationDelegate.Factory getValidationDelegate();
+			@Nullable ValidationDelegate.Factory getValidationDelegate();
 		}
 
 		/**
@@ -60,8 +62,8 @@ public interface ValidationDelegate extends ValidationDelegateExtension // waiti
 			}
 		}
 
-		ValidationDelegate createValidationDelegate(EClassifier eClassifier);
+		@Nullable ValidationDelegate createValidationDelegate(@NonNull EClassifier eClassifier);
 
-		String getURI();
+		@NonNull String getURI();
 	}
 }

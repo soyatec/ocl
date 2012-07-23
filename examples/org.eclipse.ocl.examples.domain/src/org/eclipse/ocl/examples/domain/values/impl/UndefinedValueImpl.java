@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.domain.values.impl;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -34,23 +35,23 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 {	
-	protected UndefinedValueImpl(ValueFactory valueFactory) {
+	protected UndefinedValueImpl(@NonNull ValueFactory valueFactory) {
 		super(valueFactory);
 	}
 
-	public NullValue abs() throws InvalidValueException {
+	public @NonNull NullValue abs() throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public NullValue add(IntegerValue right) throws InvalidValueException {
+	public @NonNull NullValue add(@NonNull IntegerValue right) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public NullValue add(RealValue right) throws InvalidValueException {
+	public @NonNull NullValue add(@NonNull RealValue right) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public BooleanValue asFalse() {
+	public @NonNull BooleanValue asFalse() {
 		return this;
 	}
 
@@ -62,31 +63,31 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		return null;
 	}
 
-	public BooleanValue asTrue() {
+	public @NonNull BooleanValue asTrue() {
 		return this;
 	}
 
-	public BigDecimal bigDecimalValue() {
-		return null;
+	public @NonNull BigDecimal bigDecimalValue() throws InvalidValueException {
+		return valueFactory.throwInvalidValueException("undefined value has no BigDecimal value");
 	}
 
-	public BigInteger bigIntegerValue() {
-		return null;
+	public @NonNull BigInteger bigIntegerValue() throws InvalidValueException {
+		return valueFactory.throwInvalidValueException("undefined value has no BigInteger value");
 	}
 
 	public int compareTo(NumericValue o) {
 		throw new UnsupportedOperationException("AbstractUndefinedValue.compareTo");
 	}
 
-	public NullValue div(IntegerValue right) throws InvalidValueException {
+	public @NonNull NullValue div(@NonNull IntegerValue right) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public NullValue divide(IntegerValue right) throws InvalidValueException {
+	public @NonNull NullValue divide(@NonNull IntegerValue right) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public NullValue divide(RealValue right) throws InvalidValueException {
+	public @NonNull NullValue divide(@NonNull RealValue right) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
@@ -94,7 +95,7 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		throw new UnsupportedOperationException("InvalidValue.compareTo");
 	}
 
-	public NullValue floor() throws InvalidValueException {
+	public @NonNull NullValue floor() throws InvalidValueException {
 		return toInvalidValue();
 	}
 
@@ -102,8 +103,8 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		return null;
 	}
 
-	public DomainType getInstanceType() {
-		return null;
+	public @NonNull DomainType getInstanceType() throws InvalidValueException {
+		return valueFactory.throwInvalidValueException("undefined value has no instance type");
 	}
 
 	public Object getObject() {
@@ -115,39 +116,39 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		return true;
 	}
 
-	public NullValue max(IntegerValue right) throws InvalidValueException {
+	public @NonNull NullValue max(@NonNull IntegerValue right) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public NullValue max(RealValue right) throws InvalidValueException {
+	public @NonNull NullValue max(@NonNull RealValue right) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public NullValue min(IntegerValue right) throws InvalidValueException {
+	public @NonNull NullValue min(@NonNull IntegerValue right) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public NullValue min(RealValue right) throws InvalidValueException {
+	public @NonNull NullValue min(@NonNull RealValue right) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public NullValue mod(IntegerValue right) throws InvalidValueException {
+	public @NonNull NullValue mod(@NonNull IntegerValue right) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public NullValue multiply(IntegerValue right) throws InvalidValueException {
+	public @NonNull NullValue multiply(@NonNull IntegerValue right) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public NullValue multiply(RealValue right) throws InvalidValueException {
+	public @NonNull NullValue multiply(@NonNull RealValue right) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public NullValue negate() throws InvalidValueException {
+	public @NonNull NullValue negate() throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public NullValue round() throws InvalidValueException {
+	public @NonNull NullValue round() throws InvalidValueException {
 		return toInvalidValue();
 	}
 
@@ -155,20 +156,19 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		throw new UnsupportedOperationException("InvalidValue.compareTo");
 	}
 
-	public String stringValue() {
-		return null;
+	public @NonNull String stringValue() throws InvalidValueException {
+		return valueFactory.throwInvalidValueException("undefined value has no String value");
 	}
 
-	public NullValue subtract(IntegerValue right) throws InvalidValueException {
+	public @NonNull NullValue subtract(@NonNull IntegerValue right) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public NullValue subtract(RealValue right) throws InvalidValueException {
+	public @NonNull NullValue subtract(@NonNull RealValue right) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	protected NullValue toInvalidValue() throws InvalidValueException {
-		valueFactory.throwInvalidValueException(EvaluatorMessages.ConvertibleValueRequired, "Invalid");
-		return null;
+	protected @NonNull NullValue toInvalidValue() throws InvalidValueException {
+		return valueFactory.throwInvalidValueException(EvaluatorMessages.ConvertibleValueRequired, "Invalid");
 	}
 }

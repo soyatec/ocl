@@ -21,7 +21,9 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.types.AbstractStandardLibrary;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.BagType;
 import org.eclipse.ocl.examples.pivot.ClassifierType;
@@ -112,7 +114,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 		super.dispose();
 	}
 
-	public ClassifierType getAnyClassifierType() {
+	public @NonNull ClassifierType getAnyClassifierType() {
 		if (anyClassifierType == null) {
 			Type type = getRequiredLibraryType("AnyClassifier");
 			if (type instanceof ClassifierType) {
@@ -128,10 +130,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("AnyClassifier is not a ClassifierType");
 			}		
 		}
-		return anyClassifierType;
+		return DomainUtil.nonNullJDT(anyClassifierType);
 	}
 
-	public BagType getBagType() {
+	public @NonNull BagType getBagType() {
 		if (bagType == null) {
 			Type type = getRequiredLibraryType("Bag");
 			if (type instanceof BagType) {
@@ -147,10 +149,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("Bag is not a BagType");
 			}		
 		}
-		return bagType;
+		return DomainUtil.nonNullJDT(bagType);
 	}
 
-	public PrimitiveType getBooleanType() {
+	public @NonNull PrimitiveType getBooleanType() {
 		if (booleanType == null) {
 			Type type = getRequiredLibraryType("Boolean");
 			if (type instanceof PrimitiveType) {
@@ -160,10 +162,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("Boolean is not a PrimitiveType");
 			}		
 		}
-		return booleanType;
+		return DomainUtil.nonNullJDT(booleanType);
 	}
 
-	public org.eclipse.ocl.examples.pivot.Class getClassType() {
+	public @NonNull org.eclipse.ocl.examples.pivot.Class getClassType() {
 		if (classType == null) {
 			Type type = getRequiredLibraryType("Class");
 			if (type instanceof org.eclipse.ocl.examples.pivot.Class) {
@@ -173,10 +175,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("Class is not a Class");
 			}		
 		}
-		return classType;
+		return DomainUtil.nonNullJDT(classType);
 	}
 
-	public ClassifierType getClassClassifierType() {
+	public @NonNull ClassifierType getClassClassifierType() {
 		if (classClassifierType == null) {
 			Type type = getRequiredLibraryType("ClassClassifier");
 			if (type instanceof ClassifierType) {
@@ -192,10 +194,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("ClassClassifier is not a ClassifierType");
 			}		
 		}
-		return classClassifierType;
+		return DomainUtil.nonNullJDT(classClassifierType);
 	}
 
-	public ClassifierType getCollectionClassifierType() {
+	public @NonNull ClassifierType getCollectionClassifierType() {
 		if (collectionClassifierType == null) {
 			Type type = getRequiredLibraryType("CollectionClassifier");
 			if (type instanceof ClassifierType) {
@@ -211,10 +213,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("CollectionClassifier is not a ClassifierType");
 			}		
 		}
-		return collectionClassifierType;
+		return DomainUtil.nonNullJDT(collectionClassifierType);
 	}
 
-	public CollectionType getCollectionType() {
+	public @NonNull CollectionType getCollectionType() {
 		if (collectionType == null) {
 			Type type = getRequiredLibraryType("Collection");
 			if (type instanceof CollectionType) {
@@ -230,10 +232,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("Collection is not a CollectionType");
 			}		
 		}
-		return collectionType;
+		return DomainUtil.nonNullJDT(collectionType);
 	}
 
-	public ClassifierType getEnumerationClassifierType() {
+	public @NonNull ClassifierType getEnumerationClassifierType() {
 		if (enumerationClassifierType == null) {
 			Type type = getRequiredLibraryType("EnumerationClassifier");
 			if (type instanceof ClassifierType) {
@@ -249,10 +251,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("EnumerationClassifier is not a ClassifierType");
 			}		
 		}
-		return enumerationClassifierType;
+		return DomainUtil.nonNullJDT(enumerationClassifierType);
 	}
 
-	public org.eclipse.ocl.examples.pivot.Class getEnumerationType() {
+	public @NonNull org.eclipse.ocl.examples.pivot.Class getEnumerationType() {
 		if (enumerationType == null) {
 			Type type = getRequiredLibraryType("Enumeration");
 			if (type instanceof org.eclipse.ocl.examples.pivot.Class) {
@@ -262,10 +264,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("Enumeration is not a Class");
 			}		
 		}
-		return enumerationType;
+		return DomainUtil.nonNullJDT(enumerationType);
 	}
 
-	public PrimitiveType getIntegerType() {
+	public @NonNull PrimitiveType getIntegerType() {
 		if (integerType == null) {
 			Type type = getRequiredLibraryType("Integer");
 			if (type instanceof PrimitiveType) {
@@ -275,10 +277,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("Integer is not a PrimitiveType");
 			}		
 		}
-		return integerType;
+		return DomainUtil.nonNullJDT(integerType);
 	}
 
-	public Type getLibraryType(String typeName) {
+	public Type getLibraryType(@NonNull String typeName) {
 		if (nameToLibraryTypeMap == null) {
 			nameToLibraryTypeMap = new HashMap<String, Type>();
 			loadDefaultLibrary(defaultStandardLibraryURI);
@@ -286,7 +288,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 		return nameToLibraryTypeMap.get(typeName);
 	}
 
-	public AnyType getOclAnyType() {
+	public @NonNull AnyType getOclAnyType() {
 		if (oclAnyType == null) {
 			Type type = getRequiredLibraryType("OclAny");
 			if (type instanceof AnyType) {
@@ -296,10 +298,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("OclAny is not an AnyType");
 			}		
 		}
-		return oclAnyType;
+		return DomainUtil.nonNullJDT(oclAnyType);
 	}
 
-	public org.eclipse.ocl.examples.pivot.Class getOclComparableType() {
+	public @NonNull org.eclipse.ocl.examples.pivot.Class getOclComparableType() {
 		if (oclComparableType == null) {
 			Type type = getRequiredLibraryType("OclComparable");
 			if (type instanceof org.eclipse.ocl.examples.pivot.Class) {
@@ -309,10 +311,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("OclComparable is not a Class");
 			}		
 		}
-		return oclComparableType;
+		return DomainUtil.nonNullJDT(oclComparableType);
 	}
 
-	public org.eclipse.ocl.examples.pivot.Class getOclElementType() {
+	public @NonNull org.eclipse.ocl.examples.pivot.Class getOclElementType() {
 		if (oclElementType == null) {
 			Type type = getRequiredLibraryType("OclElement");
 			if (type instanceof org.eclipse.ocl.examples.pivot.Class) {
@@ -322,10 +324,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("OclElement is not a Class");
 			}		
 		}
-		return oclElementType;
+		return DomainUtil.nonNullJDT(oclElementType);
 	}
 
-	public InvalidType getOclInvalidType() {
+	public @NonNull InvalidType getOclInvalidType() {
 		if (oclInvalidType == null) {
 			Type type = getRequiredLibraryType("OclInvalid");
 			if (type instanceof InvalidType) {
@@ -335,10 +337,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("OclInvalid is not an InvalidType");
 			}		
 		}
-		return oclInvalidType;
+		return DomainUtil.nonNullJDT(oclInvalidType);
 	}
 
-	public org.eclipse.ocl.examples.pivot.Class getOclLambdaType() {
+	public @NonNull org.eclipse.ocl.examples.pivot.Class getOclLambdaType() {
 		if (oclLambdaType == null) {
 			Type type = getRequiredLibraryType("OclLambda");
 			if (type instanceof org.eclipse.ocl.examples.pivot.Class) {
@@ -348,14 +350,14 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("OclLambda is not a Class");
 			}		
 		}
-		return oclLambdaType;
+		return DomainUtil.nonNullJDT(oclLambdaType);
 	}
 
 	public Type getOclMessageType() {
 		return getRequiredLibraryType("OclMessage");
 	}
 
-	public SelfType getOclSelfType() {
+	public @NonNull SelfType getOclSelfType() {
 		if (oclSelfType == null) {
 			Type type = getRequiredLibraryType("OclSelf");
 			if (type instanceof SelfType) {
@@ -365,10 +367,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("OclSelf is not a SelfType");
 			}		
 		}
-		return oclSelfType;
+		return DomainUtil.nonNullJDT(oclSelfType);
 	}
 
-	public org.eclipse.ocl.examples.pivot.Class getOclSummableType() {
+	public @NonNull org.eclipse.ocl.examples.pivot.Class getOclSummableType() {
 		if (oclSummableType == null) {
 			Type type = getRequiredLibraryType("OclSummable");
 			if (type instanceof org.eclipse.ocl.examples.pivot.Class) {
@@ -378,10 +380,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("OclSummable is not a Class");
 			}		
 		}
-		return oclSummableType;
+		return DomainUtil.nonNullJDT(oclSummableType);
 	}
 
-	public org.eclipse.ocl.examples.pivot.Class getOclTupleType() {
+	public @NonNull org.eclipse.ocl.examples.pivot.Class getOclTupleType() {
 		if (oclTupleType == null) {
 			Type type = getRequiredLibraryType("OclTuple");
 			if (type instanceof org.eclipse.ocl.examples.pivot.Class) {
@@ -391,10 +393,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("OclTuple is not a Class");
 			}		
 		}
-		return oclTupleType;
+		return DomainUtil.nonNullJDT(oclTupleType);
 	}
 
-	public VoidType getOclVoidType() {
+	public @NonNull VoidType getOclVoidType() {
 		if (oclVoidType == null) {
 			Type type = getRequiredLibraryType("OclVoid");
 			if (type instanceof VoidType) {
@@ -404,10 +406,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("OclVoid is not a VoidType");
 			}		
 		}
-		return oclVoidType;
+		return DomainUtil.nonNullJDT(oclVoidType);
 	}
 
-	public OrderedSetType getOrderedSetType() {
+	public @NonNull OrderedSetType getOrderedSetType() {
 		if (orderedSetType == null) {
 			Type type = getRequiredLibraryType("OrderedSet");
 			if (type instanceof OrderedSetType) {
@@ -423,10 +425,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("OrderedSet is not an OrderedSetType");
 			}		
 		}
-		return orderedSetType;
+		return DomainUtil.nonNullJDT(orderedSetType);
 	}
 
-	public PrimitiveType getRealType() {
+	public @NonNull PrimitiveType getRealType() {
 		if (realType == null) {
 			Type type = getRequiredLibraryType("Real");
 			if (type instanceof PrimitiveType) {
@@ -436,10 +438,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("Real is not a PrimitiveType");
 			}		
 		}
-		return realType;
+		return DomainUtil.nonNullJDT(realType);
 	}
 
-	public Type getRequiredLibraryType(String typeName) {
+	public Type getRequiredLibraryType(@NonNull String typeName) {
 		Type type = getLibraryType(typeName);
 		if (type == null) {
 //			nameToLibraryTypeMap = null;
@@ -454,7 +456,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 		return type;
 	}
 
-	public SequenceType getSequenceType() {
+	public @NonNull SequenceType getSequenceType() {
 		if (sequenceType == null) {
 			Type type = getRequiredLibraryType("Sequence");
 			if (type instanceof SequenceType) {
@@ -470,10 +472,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("Sequence is not a SequenceType");
 			}		
 		}
-		return sequenceType;
+		return DomainUtil.nonNullJDT(sequenceType);
 	}
 
-	public SetType getSetType() {
+	public @NonNull SetType getSetType() {
 		if (setType == null) {
 			Type type = getRequiredLibraryType("Set");
 			if (type instanceof SetType) {
@@ -489,10 +491,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("Set is not a SetType");
 			}		
 		}
-		return setType;
+		return DomainUtil.nonNullJDT(setType);
 	}
 
-	public PrimitiveType getStringType() {
+	public @NonNull PrimitiveType getStringType() {
 		if (stringType == null) {
 			Type type = getRequiredLibraryType("String");
 			if (type instanceof PrimitiveType) {
@@ -502,10 +504,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("String is not a PrimitiveType");
 			}		
 		}
-		return stringType;
+		return DomainUtil.nonNullJDT(stringType);
 	}
 
-	public PrimitiveType getUnlimitedNaturalType() {
+	public @NonNull PrimitiveType getUnlimitedNaturalType() {
 		if (unlimitedNaturalType == null) {
 			Type type = getRequiredLibraryType("UnlimitedNatural");
 			if (type instanceof PrimitiveType) {
@@ -515,7 +517,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 				throw new IllegalLibraryException("UnlimitedNatural is not a PrimitiveType");
 			}		
 		}
-		return unlimitedNaturalType;
+		return DomainUtil.nonNullJDT(unlimitedNaturalType);
 	}
 
 //	public boolean isIteration(String name) {

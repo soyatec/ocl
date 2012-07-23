@@ -19,15 +19,17 @@ package org.eclipse.ocl.examples.pivot.delegate;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EOperation.Internal.InvocationDelegate;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.context.OperationContext;
-import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.osgi.util.NLS;
@@ -45,16 +47,16 @@ public class InvocationBehavior extends AbstractDelegatedBehavior<EOperation, In
 //		return annotation != null;
 //	}
 
-	public InvocationDelegate.Factory getDefaultFactory() {
+	public @Nullable InvocationDelegate.Factory getDefaultFactory() {
 		return InvocationDelegate.Factory.Registry.INSTANCE.getFactory(getName());
 	}
 
-	public InvocationDelegate.Factory.Registry getDefaultRegistry() {
-		return InvocationDelegate.Factory.Registry.INSTANCE;
+	public @NonNull InvocationDelegate.Factory.Registry getDefaultRegistry() {
+		return DomainUtil.nonNullJDT(InvocationDelegate.Factory.Registry.INSTANCE);
 	}
 
-	public EPackage getEPackage(EOperation eOperation) {
-		return eOperation.getEContainingClass().getEPackage();
+	public @NonNull EPackage getEPackage(@NonNull EOperation eOperation) {
+		return DomainUtil.nonNullEMF(eOperation.getEContainingClass().getEPackage());
 	}
 
 	/**
@@ -63,14 +65,14 @@ public class InvocationBehavior extends AbstractDelegatedBehavior<EOperation, In
 	 * definition.
 	 * @throws OCLDelegateException 
 	 */
-	public ExpressionInOCL getExpressionInOCL(MetaModelManager metaModelManager, Operation operation) throws OCLDelegateException {
+	public @NonNull ExpressionInOCL getExpressionInOCL(@NonNull MetaModelManager metaModelManager, @NonNull Operation operation) throws OCLDelegateException {
 		Constraint constraint = getConstraintForStereotype(operation, UMLReflection.BODY);
 		if (constraint != null) {
 			ValueSpecification valueSpecification = constraint.getSpecification();
 			if (valueSpecification instanceof ExpressionInOCL) {
 				return (ExpressionInOCL) valueSpecification;
 			}
-			ParserContext operationContext = new OperationContext(metaModelManager, null, operation, null);
+			OperationContext operationContext = new OperationContext(metaModelManager, null, operation, null);
 			ExpressionInOCL expressionInOCL = getExpressionInOCL(operationContext, constraint);
 			if (expressionInOCL != null) {
 				return expressionInOCL;
@@ -81,21 +83,21 @@ public class InvocationBehavior extends AbstractDelegatedBehavior<EOperation, In
 	}
 
 	@Override
-	public InvocationDelegate.Factory getFactory(DelegateDomain delegateDomain, EOperation eOperation) {
+	public @Nullable InvocationDelegate.Factory getFactory(@NonNull DelegateDomain delegateDomain, @NonNull EOperation eOperation) {
 		InvocationDelegate.Factory.Registry registry = DelegateResourceSetAdapter.getRegistry(
 			eOperation, getRegistryClass(), getDefaultRegistry());
-	    return registry.getFactory(delegateDomain.getURI());
+	    return registry != null ? registry.getFactory(delegateDomain.getURI()) : null;
 	}
 
-	public Class<InvocationDelegate.Factory> getFactoryClass() {
+	public @NonNull Class<InvocationDelegate.Factory> getFactoryClass() {
 		return InvocationDelegate.Factory.class;
 	}
 	
-	public String getName() {
+	public @NonNull String getName() {
 		return NAME;
 	}
 
-	public Class<InvocationDelegate.Factory.Registry> getRegistryClass() {
+	public @NonNull Class<InvocationDelegate.Factory.Registry> getRegistryClass() {
 		return InvocationDelegate.Factory.Registry.class;
 	}
 }

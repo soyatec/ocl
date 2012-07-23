@@ -28,6 +28,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.CollectionType;
@@ -410,7 +411,7 @@ public class CollectionTypeImpl
 	}
 	
 	@Override
-	public boolean conformsTo(DomainStandardLibrary standardLibrary, DomainType type) {
+	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		if (this == type) {
 			return true;
 		}
@@ -424,13 +425,13 @@ public class CollectionTypeImpl
 	}
 
 	@Override
-	public DomainType getCommonType(DomainStandardLibrary standardLibrary, DomainType type) {
+	public @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		DomainInheritance thisInheritance = this.getInheritance(standardLibrary);
 		DomainInheritance thatInheritance = type.getInheritance(standardLibrary);
 		DomainInheritance commonInheritance = thisInheritance.getCommonInheritance(thatInheritance);
 		if (type instanceof DomainCollectionType) {
 			DomainType thisElementType = this.getElementType();
-			DomainType thatElementType = ((DomainCollectionType)type).getElementType();
+			DomainType thatElementType = DomainUtil.nonNullEMF(((DomainCollectionType)type).getElementType());
 			DomainType commonElementType = thisElementType.getCommonType(standardLibrary, thatElementType);
 			if (commonInheritance instanceof PivotReflectiveType) {
 				DomainCollectionType commonCollectionType = (DomainCollectionType)((PivotReflectiveType)commonInheritance).getPivotType();
@@ -460,12 +461,12 @@ public class CollectionTypeImpl
 		}
 	}
 
-	public Type getContainerType() {
-		return unspecializedElement != null ? (Type)unspecializedElement : this;
+	public @NonNull Type getContainerType() {
+		return unspecializedElement != null ? DomainUtil.nonNullJDT((Type)unspecializedElement) : this;
 	}
 
 	@Override
-	public boolean isEqualTo(DomainStandardLibrary standardLibrary, DomainType type) {
+	public boolean isEqualTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		if (this == type) {
 			return true;
 		}

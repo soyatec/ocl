@@ -69,10 +69,10 @@
 [let constants : String = expInOcl.gatherSpecificationConstants(genPackage, pType)]
 [let arity : Integer = expInOcl.parameterVariable->size()]
 try {
-	final <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, null, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
+	final @NonNull <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, null, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
 	[expInOcl.emitConstants(constants)/]
-	final <%DomainType%> returnType = [expInOcl.type.symbolName(expInOcl)/];
-	final <%Value%> result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, returnType, self);
+	final @NonNull <%DomainType%> returnType = [expInOcl.type.symbolName(expInOcl)/];
+	final @NonNull <%Value%> result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, returnType, self);
 	final boolean resultIsNull = result.isNull();
 	if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 		return true;
@@ -133,10 +133,10 @@ return false; // FIXME errors in OCL definition of [pRule.prettyPrintName()/]
 [expInOcl.prettyPrint().trim()/]
 */
 try {
-	final <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, [if (pRule.isCallable)]context[else]null[/if], <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
+	final @NonNull <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, [if (pRule.isCallable)]context[else]null[/if], <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
 	[expInOcl.emitConstants(constants)/]
-	final <%DomainType%> returnType = [expInOcl.type.symbolName(expInOcl)/];
-	final <%Value%> result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, returnType, self[for (pParameter : Parameter | pOperation.ownedParameter)], valueFactory.valueOf([pParameter.name/])[/for]);
+	final @NonNull <%DomainType%> returnType = [expInOcl.type.symbolName(expInOcl)/];
+	final @NonNull <%Value%> result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, returnType, self[for (pParameter : Parameter | pOperation.ownedParameter)], valueFactory.valueOf([pParameter.name/])[/for]);
 [if (ecoreReturnType.index('<') > 0)]
 	@SuppressWarnings("unchecked")
 	[ecoreReturnType/] ecoreResult = ([ecoreReturnType/]) result.asEcoreObject();
@@ -177,10 +177,10 @@ return null; // FIXME errors in OCL definition of [pOperation.prettyPrintName()/
 [expInOcl.prettyPrint().trim()/]
 */
 try {
-	final <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, null, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
+	final @NonNull <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, null, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
 	[expInOcl.emitConstants(constants)/]
-	final <%DomainType%> returnType = [expInOcl.type.symbolName(expInOcl)/];
-	final <%Value%> result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, returnType, self, [pProperty.emitQualifiedLiteralName(genPackage)/]);
+	final @NonNull <%DomainType%> returnType = [expInOcl.type.symbolName(expInOcl)/];
+	final @NonNull <%Value%> result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, returnType, self, [pProperty.emitQualifiedLiteralName(genPackage)/]);
 [if (ecoreReturnType.index('<') > 0)]
 	@SuppressWarnings("unchecked")
 	[ecoreReturnType/] ecoreResult = ([ecoreReturnType/]) result.asEcoreObject();
@@ -204,8 +204,8 @@ return null; // FIXME errors in OCL definition of [pProperty.prettyPrintName()/]
 
 
 [template public gatherSpecificationConstants(expInOcl : ExpressionInOCL, genPackage : GenPackage, pType : Type)]
-final <%ValueFactory%> valueFactory = evaluator.getValueFactory();
-final <%Value%> [defineSymbolName(expInOcl.contextVariable, 'self')/] = valueFactory.valueOf(this);
+final @NonNull <%ValueFactory%> valueFactory = evaluator.getValueFactory();
+final @NonNull <%Value%> [defineSymbolName(expInOcl.contextVariable, 'self')/] = valueFactory.valueOf(this);
 [expInOcl.type.gatherConstants(genPackage, expInOcl)/]
 [/template]
 

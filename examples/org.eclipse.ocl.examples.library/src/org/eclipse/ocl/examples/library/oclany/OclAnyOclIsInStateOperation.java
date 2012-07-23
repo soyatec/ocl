@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.oclany;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
@@ -29,7 +30,7 @@ public class OclAnyOclIsInStateOperation extends AbstractBinaryOperation
 {
 	public static final OclAnyOclIsInStateOperation INSTANCE = new OclAnyOclIsInStateOperation();
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceVal, Value argVal) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal, @NonNull Value argVal) throws InvalidValueException {
 		throw new UnsupportedOperationException();			// FIXME
 	}
 }

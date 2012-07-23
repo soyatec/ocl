@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.real;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
@@ -31,10 +32,10 @@ public class RealCompareToOperation extends AbstractBinaryOperation
 {
 	public static final RealCompareToOperation INSTANCE = new RealCompareToOperation();
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value left, Value right) throws InvalidValueException {
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		RealValue leftReal = left.toRealValue();
-		RealValue rightReal = right.toRealValue();
+		RealValue leftReal = left.asRealValue();
+		RealValue rightReal = right.asRealValue();
 		return valueFactory.integerValueOf(leftReal.compareTo(rightReal));
 	}
 }

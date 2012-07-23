@@ -19,12 +19,14 @@ package org.eclipse.ocl.examples.library.ecore;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.executor.ReflectiveType;
@@ -32,54 +34,54 @@ import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 
 public class EcoreReflectiveType extends ReflectiveType
 {
-	protected final EClassifier eClassifier;
+	protected final @NonNull EClassifier eClassifier;
 	
-	public EcoreReflectiveType(EcoreExecutorPackage evaluationPackage, int flags, EClassifier eClassifier) {
-		super(eClassifier.getName(), evaluationPackage, flags);
+	public EcoreReflectiveType(@NonNull EcoreExecutorPackage evaluationPackage, int flags, @NonNull EClassifier eClassifier) {
+		super(DomainUtil.nonNullEMF(eClassifier.getName()), evaluationPackage, flags);
 		this.eClassifier = eClassifier;		
 	}
 
 	@Override
-	protected AbstractFragment createFragment(DomainInheritance baseInheritance) {
+	protected @NonNull AbstractFragment createFragment(@NonNull DomainInheritance baseInheritance) {
 		return new EcoreReflectiveFragment(this, baseInheritance);
 	}
 
 	@Override
-	public ObjectValue createInstance(ValueFactory valueFactory) {
+	public @NonNull ObjectValue createInstance(@NonNull ValueFactory valueFactory) {
 		if (eClassifier instanceof EClass) {
 			EClass eClass = (EClass)eClassifier;
 			EObject element = eClass.getEPackage().getEFactoryInstance().create(eClass);
-			return valueFactory.createObjectValue(element);
+			return valueFactory.createObjectValue(DomainUtil.nonNullEMF(element));
 		}
 		return super.createInstance(valueFactory);
 	}
 
-	public final EClassifier getEClassifier() {
+	public final @NonNull EClassifier getEClassifier() {
 		return eClassifier;
 	}
 
 	@Override
-	public Iterable<? extends DomainInheritance> getInitialSuperInheritances() {
+	public @NonNull Iterable<? extends DomainInheritance> getInitialSuperInheritances() {
 		throw new UnsupportedOperationException();		// FIXME
 	}
 
-	public Iterable<? extends DomainOperation> getLocalOperations() {
+	public @NonNull Iterable<? extends DomainOperation> getLocalOperations() {
 		throw new UnsupportedOperationException();		// FIXME
 	}
 
-	public Iterable<? extends DomainProperty> getLocalProperties() {
+	public @NonNull Iterable<? extends DomainProperty> getLocalProperties() {
 		throw new UnsupportedOperationException();		// FIXME
 	}
 
-	public Iterable<? extends DomainType> getLocalSuperTypes() {
+	public @NonNull Iterable<? extends DomainType> getLocalSuperTypes() {
 		throw new UnsupportedOperationException();		// FIXME
 	}
 
-	public String getMetaTypeName() {
-		return eClassifier.getName();
+	public @NonNull String getMetaTypeName() {
+		return DomainUtil.nonNullPivot(eClassifier.getName());
 	}
 
-	public DomainStandardLibrary getStandardLibrary() {
+	public @NonNull DomainStandardLibrary getStandardLibrary() {
 		return OCLstdlibTables.LIBRARY;
 	}
 }

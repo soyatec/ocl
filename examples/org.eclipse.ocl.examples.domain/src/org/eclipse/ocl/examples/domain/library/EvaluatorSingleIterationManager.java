@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.domain.library;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -28,21 +30,21 @@ public class EvaluatorSingleIterationManager
 
 	protected final int depth;
 
-	protected final DomainTypedElement referredIterator;
+	protected final @NonNull DomainTypedElement referredIterator;
 
-	protected final ValueIterator iterator;
+	protected final @NonNull ValueIterator iterator;
 
-	public EvaluatorSingleIterationManager(DomainEvaluator invokingEvaluator,
-			DomainExpression body, CollectionValue collectionValue,
-			DomainTypedElement accumulator, Value accumulatorValue,
-			DomainTypedElement referredIterator) {
+	public EvaluatorSingleIterationManager(@NonNull DomainEvaluator invokingEvaluator,
+			@NonNull DomainExpression body, @NonNull CollectionValue collectionValue,
+			@Nullable DomainTypedElement accumulator, @NonNull Value accumulatorValue,
+			@NonNull DomainTypedElement referredIterator) {
 		super(invokingEvaluator.createNestedEvaluator(), body, collectionValue, accumulator, accumulatorValue);
 		this.depth = 0;
 		this.referredIterator = referredIterator;
 		this.iterator = new ValueIterator(evaluator, collectionValue, referredIterator);
 	}
 
-	protected EvaluatorSingleIterationManager(EvaluatorSingleIterationManager iterationManager, CollectionValue value) {
+	protected EvaluatorSingleIterationManager(@NonNull EvaluatorSingleIterationManager iterationManager, @NonNull CollectionValue value) {
 		super(iterationManager, value);
 		this.depth = iterationManager.depth + 1;
 		this.referredIterator = iterationManager.referredIterator;
@@ -55,13 +57,17 @@ public class EvaluatorSingleIterationManager
 	}
 
 	@Override
-	public DomainIterationManager createNestedIterationManager(CollectionValue value) {
+	public @NonNull DomainIterationManager createNestedIterationManager(@NonNull CollectionValue value) {
 		return new EvaluatorSingleIterationManager(this, value);
 	}
 
 	@Override
-	public Value get() {
-		return iterator.get();
+	public @NonNull Value get() {
+		Value currentValue = iterator.get();
+		if (currentValue == null) {
+			throw new IllegalStateException("cannot get() after iteration complete"); //$NON-NLS-1$
+		}
+		return currentValue;
 	}
 
 	public boolean hasCurrent() {

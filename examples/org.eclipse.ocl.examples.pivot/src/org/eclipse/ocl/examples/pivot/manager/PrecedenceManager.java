@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
@@ -55,7 +57,7 @@ public class PrecedenceManager
 	 * rootPackages.ownedPrecedences. Any inconsistent ordering and
 	 * associativity is diagnosed.
 	 */
-	public List<String> compilePrecedences(Iterable<? extends Library> libraries) {
+	public @NonNull List<String> compilePrecedences(@NonNull Iterable<? extends Library> libraries) {
 		List<String> errors = new ArrayList<String>();
 		List<String> orderedPrecedences = new ArrayList<String>();
 		nameToPrecedencesMap = new HashMap<String, List<Precedence>>();
@@ -114,7 +116,7 @@ public class PrecedenceManager
 		return errors;
 	}
 
-	protected void compilePrecedenceOperation(List<String> errors, Operation operation) {
+	protected void compilePrecedenceOperation(@NonNull List<String> errors, @NonNull Operation operation) {
 		Precedence precedence = operation.getPrecedence();
 		if (precedence != null) {
 			List<Parameter> parameters = operation.getOwnedParameter();
@@ -138,20 +140,22 @@ public class PrecedenceManager
 		}
 	}
 
-	protected void compilePrecedencePackage(List<String> errors, Library library) {
+	protected void compilePrecedencePackage(@NonNull List<String> errors, @NonNull Library library) {
 //		for (org.eclipse.ocl.examples.pivot.Package nestedPackage : pivotPackage.getNestedPackage()) {
 //			compilePrecedencePackage(errors, nestedPackage);
 //		}
 		for (Type type : library.getOwnedType()) {
-			if (PivotUtil.isLibraryType(type)) {
+			if ((type != null) && PivotUtil.isLibraryType(type)) {
 				compilePrecedenceType(errors, type);
 			}
 		}
 	}
 
-	protected void compilePrecedenceType(List<String> errors, Type pivotType) {
+	protected void compilePrecedenceType(@NonNull List<String> errors, @NonNull Type pivotType) {
 		for (Operation operation : pivotType.getOwnedOperation()) {
-			compilePrecedenceOperation(errors, operation);
+			if (operation != null) {
+				compilePrecedenceOperation(errors, operation);
+			}
 		}
 	}
 
@@ -161,7 +165,7 @@ public class PrecedenceManager
 		prefixToPrecedenceNameMap = null;
 	}
 
-	public Precedence getInfixPrecedence(String operatorName) {
+	public @Nullable Precedence getInfixPrecedence(@NonNull String operatorName) {
 		String precedenceName = infixToPrecedenceNameMap.get(operatorName);
 		if (precedenceName == null) {
 			return null;
@@ -173,7 +177,7 @@ public class PrecedenceManager
 		return precedences.get(0);
 	}
 
-	public Precedence getPrefixPrecedence(String operatorName) {
+	public @Nullable Precedence getPrefixPrecedence(@NonNull String operatorName) {
 		String precedenceName = prefixToPrecedenceNameMap.get(operatorName);
 		if (precedenceName == null) {
 			return null;

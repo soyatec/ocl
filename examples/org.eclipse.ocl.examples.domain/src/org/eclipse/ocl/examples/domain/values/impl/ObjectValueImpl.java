@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.domain.values.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -37,9 +38,9 @@ public abstract class ObjectValueImpl extends ValueImpl implements ObjectValue
 		return ValuesPackage.Literals.OBJECT_VALUE;
 	}
 
-	protected final Object object;
+	protected final @NonNull Object object;
 	
-	protected ObjectValueImpl(ValueFactory valueFactory, Object object) {
+	protected ObjectValueImpl(@NonNull ValueFactory valueFactory, @NonNull Object object) {
 		super(valueFactory);
 		this.object = object;
 	}
@@ -49,11 +50,11 @@ public abstract class ObjectValueImpl extends ValueImpl implements ObjectValue
 	}
 
 	@Override
-	public ObjectValue asObjectValue() {
+	public @NonNull ObjectValue asObjectValue() {
 		return this;
 	}
 
-	public Value asValidValue() {
+	public @NonNull Value asValidValue() {
 		return this;
 	}
 
@@ -65,7 +66,7 @@ public abstract class ObjectValueImpl extends ValueImpl implements ObjectValue
 		return object.equals(((ObjectValue)obj).getObject());
 	}
 
-	public Object getObject() {
+	public @NonNull Object getObject() {
 		return object;
 	}
 

@@ -26,6 +26,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Iteration;
@@ -98,7 +99,9 @@ public abstract class Abstract2Moniker implements PivotConstants
 			if (pivotVisitor == null) {
 				pivotVisitor = new Pivot2MonikerVisitor(this);
 			}
-			element.accept(pivotVisitor);
+			@SuppressWarnings("null")
+			@NonNull Pivot2MonikerVisitor nonNullVisitor = pivotVisitor;
+			element.accept(nonNullVisitor);
 		}		
 	}
 	
@@ -113,7 +116,9 @@ public abstract class Abstract2Moniker implements PivotConstants
 			Pivot2MonikerVisitor savedPivotVisitor = pivotVisitor;
 			try {
 				pivotVisitor = new Pivot2MonikerVisitor(this, templateBindings);
-				element.accept(pivotVisitor);
+				@SuppressWarnings("null")
+				@NonNull Pivot2MonikerVisitor nonNullVisitor = pivotVisitor;
+				element.accept(nonNullVisitor);
 			}
 			finally {
 				pivotVisitor = savedPivotVisitor;
@@ -123,7 +128,9 @@ public abstract class Abstract2Moniker implements PivotConstants
 			if (pivotVisitor == null) {
 				pivotVisitor = new Pivot2MonikerVisitor(this);
 			}
-			element.accept(pivotVisitor);
+			@SuppressWarnings("null")
+			@NonNull Pivot2MonikerVisitor nonNullVisitor = pivotVisitor;
+			element.accept(nonNullVisitor);
 		}
 	}
 

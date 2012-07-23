@@ -14,9 +14,11 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 
 public interface DomainEnumerationLiteral extends DomainNamedElement
 {
-	Object asEcoreObject(DomainStandardLibrary standardLibrary);
+	Object asEcoreObject(@NonNull DomainStandardLibrary standardLibrary);
 	DomainEnumeration getEnumeration();
 }

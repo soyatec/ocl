@@ -33,6 +33,7 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
@@ -58,11 +59,11 @@ public class EnvironmentRegistryImpl implements Environment.Registry {
     private static final String E_PACKAGE = "package"; //$NON-NLS-1$
     private static final String A_NS_URI = "nsURI"; //$NON-NLS-1$
     
-	public Environment getEnvironmentFor(OCLExpression expression) {
+	public Environment getEnvironmentFor(@NonNull OCLExpression expression) {
 		return getEnvironmentFor(expression.getType());
 	}
 
-	public Environment getEnvironmentFor(Object abstractSyntaxElement) {
+	public Environment getEnvironmentFor(@NonNull Object abstractSyntaxElement) {
 		
 		if (abstractSyntaxElement instanceof TypedElement) {
 			return getEnvironmentFor(((TypedElement) abstractSyntaxElement).getType());
@@ -94,14 +95,14 @@ public class EnvironmentRegistryImpl implements Environment.Registry {
 		return null;
 	}
 
-	public void registerEnvironment(Environment environment) {
+	public void registerEnvironment(@NonNull Environment environment) {
 
 		if (!environments.contains(environment)) {
 			environments.add(environment);
 		}
 	}
     
-    public void deregisterEnvironment(Environment environment) {
+    public void deregisterEnvironment(@NonNull Environment environment) {
         environments.remove(environment);
     }
 	

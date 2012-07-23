@@ -17,6 +17,8 @@
 
 package org.eclipse.ocl.examples.domain.values;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 
@@ -33,7 +35,7 @@ public interface TupleValue extends Value {
      * @return its type
 	 * @generated NOT
      */
-	DomainTupleType getType();
+	@NonNull DomainTupleType getType();
 	
     /**
      * Queries the value of the specified tuple part.
@@ -42,7 +44,7 @@ public interface TupleValue extends Value {
      * @return the corresponding value
 	 * @generated NOT
      */
-	Value getValue(String partName);
+	@Nullable Value getValue(@NonNull String partName);
     
     /**
      * Queries the value of the specified tuple part.
@@ -51,5 +53,5 @@ public interface TupleValue extends Value {
      * @return the corresponding value
 	 * @generated NOT
      */
-	Value getValue(DomainTypedElement part);
+	@Nullable Value getValue(@NonNull DomainTypedElement part);
 }

@@ -19,6 +19,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.ClassifierType;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -51,20 +54,20 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 	 */
 	private HashSet<TypedElement> underspecifiedTypedElements = null;
 
-	protected AbstractBase2PivotConversion(MetaModelManager metaModelManager) {
+	protected AbstractBase2PivotConversion(@NonNull MetaModelManager metaModelManager) {
 		super(metaModelManager);
 	}
 
-	protected void addUnderspecifiedTypedElement(TypedElement pivotElement) {
+	protected void addUnderspecifiedTypedElement(@NonNull TypedElement pivotElement) {
 		if (underspecifiedTypedElements == null) {
 			underspecifiedTypedElements  = new HashSet<TypedElement>();
 		}
 		underspecifiedTypedElements.add(pivotElement);
 	}
 
-	public void refreshName(NamedElement pivotNamedElement, String newName) {
+	public void refreshName(@NonNull NamedElement pivotNamedElement, @NonNull String newName) {
 		String oldName = pivotNamedElement.getName();
-		if ((newName != oldName) && ((newName == null) || !newName.equals(oldName))) {
+		if ((newName != oldName) && ((newName == null) || !newName.equals(oldName))) {	// FIXME simplify once @NonNull respected by callers
 			pivotNamedElement.setName(newName);
 		}
 	}
@@ -72,21 +75,22 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 	protected void resolveUnderspecifiedTypes() {
 		if (underspecifiedTypedElements != null) {
 			for (TypedElement underspecifiedTypedElement : underspecifiedTypedElements) {
-				Type underspecifiedType = underspecifiedTypedElement.getType();
+				Type underspecifiedType = DomainUtil.nonNullModel(underspecifiedTypedElement.getType());
 				Type resolvedType = resolveUnderspecifiedType(underspecifiedType);
 				underspecifiedTypedElement.setType(resolvedType);
 			}
 		}
 	}
 	
-	protected Type resolveUnderspecifiedType(Type type) {
+	protected @NonNull Type resolveUnderspecifiedType(@NonNull Type type) {
 		if (type instanceof UnspecifiedType) {
-			return ((UnspecifiedType)type).getLowerBound();
+			return DomainUtil.nonNullModel(((UnspecifiedType)type).getLowerBound());
 		}
 		if (type instanceof CollectionType) {
 			CollectionType collectionType = (CollectionType)type;
-			Type resolvedElementType = resolveUnderspecifiedType(collectionType.getElementType());
-			return metaModelManager.getCollectionType(collectionType.getName(), resolvedElementType);
+			Type resolvedElementType = resolveUnderspecifiedType(DomainUtil.nonNullModel(collectionType.getElementType()));
+			return metaModelManager.getCollectionType(PivotUtil.getUnspecializedTemplateableElement(collectionType), resolvedElementType);
+//			return metaModelManager.getCollectionType(DomainUtil.nonNullModel(collectionType.getName()), resolvedElementType);
 		}
 		if (type instanceof PrimitiveType) {
 			return type;
@@ -98,55 +102,61 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 				if (metaModelManager.isUnderspecified(part.getType())) {
 					Property prop = PivotFactory.eINSTANCE.createProperty();
 					prop.setName(part.getName());
-					prop.setType(resolveUnderspecifiedType(part.getType()));
+					prop.setType(resolveUnderspecifiedType(DomainUtil.nonNullModel(part.getType())));
 					resolvedProperties.add(part);
 				}
 				else {
 					resolvedProperties.add(part);
 				}
 			}
-			return metaModelManager.getTupleType(tupleType.getName(), resolvedProperties, null);
+			return metaModelManager.getTupleType(DomainUtil.nonNullModel(tupleType.getName()), resolvedProperties, null);
 		}
 		if (type instanceof ClassifierType) {
 			ClassifierType classifierType = (ClassifierType)type;
-			Type resolvedElementType = resolveUnderspecifiedType(classifierType.getInstanceType());
+			Type resolvedElementType = resolveUnderspecifiedType(DomainUtil.nonNullModel(classifierType.getInstanceType()));
 			return metaModelManager.getClassifierType(resolvedElementType);
 		}
 		throw new UnsupportedOperationException();
 //		return null;
 	}
 
-	public void setContextVariable(ExpressionInOCL pivotSpecification, String selfVariableName, Type contextType) {
+	public void setContextVariable(@NonNull ExpressionInOCL pivotSpecification, @NonNull String selfVariableName, @NonNull Type contextType) {
 		Variable contextVariable = pivotSpecification.getContextVariable();
 		if (contextVariable == null) {
-			contextVariable = PivotFactory.eINSTANCE.createVariable();
+			@SuppressWarnings("null")
+			@NonNull Variable nonNullContextVariable = PivotFactory.eINSTANCE.createVariable();
+			contextVariable = nonNullContextVariable;
 			pivotSpecification.setContextVariable(contextVariable);
 		}
 		refreshName(contextVariable, selfVariableName);
 		setType(contextVariable, contextType);
 	}
 
-	public void setClassifierContext(ExpressionInOCL pivotSpecification, Type contextType) {
+	public void setClassifierContext(@NonNull ExpressionInOCL pivotSpecification, @NonNull Type contextType) {
 		Variable contextVariable = pivotSpecification.getContextVariable();
-		if (contextType.eIsProxy()) {
-			contextType = null;
+		if (contextVariable != null) {
+			if (contextType.eIsProxy()) {
+				setType(contextVariable, null);
+			}
+			else {
+				setType(contextVariable, contextType);
+			}
 		}
-		setType(contextVariable, contextType);
 	}
 
-	public void setOperationContext(ExpressionInOCL pivotSpecification, Operation contextOperation, String resultName) {
+	public void setOperationContext(@NonNull ExpressionInOCL pivotSpecification, @NonNull Operation contextOperation, @Nullable String resultName) {
 		Variable contextVariable = pivotSpecification.getContextVariable();
 //		pivotSpecification.getParameterVariable().clear();
-		if ((contextOperation != null) && !contextOperation.eIsProxy()) {
+		if ((contextVariable != null) && !contextOperation.eIsProxy()) {
 			setType(contextVariable, contextOperation.getOwningType());
-			setParameterVariables(pivotSpecification, contextOperation.getOwnedParameter());
+			setParameterVariables(pivotSpecification, DomainUtil.nonNullEMF(contextOperation.getOwnedParameter()));
 		}
 		if (resultName != null) {
 			setResultVariable(pivotSpecification, contextOperation, resultName);
 		}
 	}
 
-	public void setParameterVariables(ExpressionInOCL pivotSpecification, List<Parameter> parameters) {
+	public void setParameterVariables(@NonNull ExpressionInOCL pivotSpecification, @NonNull List<Parameter> parameters) {
 		List<Variable> oldVariables = new ArrayList<Variable>(pivotSpecification.getParameterVariable());
 		List<Variable> newVariables = new ArrayList<Variable>();
 		for (Parameter parameter : parameters) {
@@ -163,10 +173,10 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 		    param.setRepresentedParameter(parameter);
 		    newVariables.add(param);
 		}
-		refreshList(pivotSpecification.getParameterVariable(), newVariables);
+		refreshList(DomainUtil.nonNullModel(pivotSpecification.getParameterVariable()), newVariables);
 	}
 
-	public void setParameterVariables(ExpressionInOCL pivotSpecification, Map<String, Type> parameters) {
+	public void setParameterVariables(@NonNull ExpressionInOCL pivotSpecification, @NonNull Map<String, Type> parameters) {
 		List<Variable> oldVariables = new ArrayList<Variable>(pivotSpecification.getParameterVariable());
 		List<Variable> newVariables = new ArrayList<Variable>();
 		for (String name : parameters.keySet()) {
@@ -183,24 +193,30 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 //		    param.setRepresentedParameter(parameter);
 		    newVariables.add(param);
 		}
-		refreshList(pivotSpecification.getParameterVariable(), newVariables);
+		refreshList(DomainUtil.nonNullModel(pivotSpecification.getParameterVariable()), newVariables);
 	}
 
-	public void setPropertyContext(ExpressionInOCL pivotSpecification, Property contextProperty) {
+	public void setPropertyContext(@NonNull ExpressionInOCL pivotSpecification, @NonNull Property contextProperty) {
 		Variable contextVariable = pivotSpecification.getContextVariable();
-		if ((contextProperty != null) && !contextProperty.eIsProxy()) {
+		if ((contextVariable != null) && !contextProperty.eIsProxy()) {
 			setType(contextVariable, contextProperty.getOwningType());
 		}
 	}
 
-	public void setResultVariable(ExpressionInOCL pivotSpecification, Operation contextOperation, String resultName) {
-		Variable resultVariable = pivotSpecification.getResultVariable();
-		if (resultVariable == null) {
-			resultVariable = PivotFactory.eINSTANCE.createVariable();
+	public void setResultVariable(@NonNull ExpressionInOCL pivotSpecification, @NonNull Operation contextOperation, @NonNull String resultName) {
+		Type returnType = contextOperation.getType();
+		if (returnType != null) {					// FIXME BUG 385711 Use OclVoid rather than null
+			Variable resultVariable = pivotSpecification.getResultVariable();
+			if (resultVariable == null) {
+				resultVariable = PivotFactory.eINSTANCE.createVariable();
+			}
+			resultVariable.setName(resultName);
+			setTypeWithMultiplicity(resultVariable, contextOperation);
+			pivotSpecification.setResultVariable(resultVariable);
 		}
-		resultVariable.setName(resultName);
-		setTypeWithMultiplicity(resultVariable, contextOperation);
-		pivotSpecification.setResultVariable(resultVariable);
+		else {
+			pivotSpecification.setResultVariable(null);
+		}
 	}
 
 	/**
@@ -210,7 +226,7 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 	 * @param pivotExpression
 	 * @param type
 	 */
-	public void setType(TypedElement pivotElement, Type type) {
+	public void setType(@NonNull TypedElement pivotElement, Type type) {
 	//	PivotUtil.debugObjectUsage("setType ", pivotElement);
 	//	PivotUtil.debugObjectUsage(" to ", type);
 //		if (type != null) {
@@ -222,7 +238,7 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 //		if (type == null) {
 //			type = metaModelManager.getOclInvalidType();	// FIXME unresolved type with explanation
 //		}
-		Type primaryType = metaModelManager.getPrimaryType(type);
+		Type primaryType = type != null ? metaModelManager.getPrimaryType(type) : null;
 		if (primaryType != pivotElement.getType()) {
 			pivotElement.setType(primaryType);
 			if (metaModelManager.isUnderspecified(primaryType)) {
@@ -234,10 +250,10 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 		}
 	}
 
-	public void setTypeWithMultiplicity(TypedElement typedElement, TypedMultiplicityElement typedMultiplicityElement) {
-		if ((typedMultiplicityElement != null) && !typedMultiplicityElement.eIsProxy()) {
+	public void setTypeWithMultiplicity(@NonNull TypedElement typedElement, @NonNull TypedMultiplicityElement typedMultiplicityElement) {
+		if (!typedMultiplicityElement.eIsProxy()) {
 			Type type = metaModelManager.getTypeWithMultiplicity(typedMultiplicityElement);
-			if ((type != null) && !type.eIsProxy()) {
+			if (!type.eIsProxy()) {
 				setType(typedElement, type);
 				return;
 			}

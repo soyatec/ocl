@@ -26,6 +26,7 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 
@@ -80,7 +81,7 @@ public abstract class LazyModelManager implements DomainModelManager {
 	 * 
 	 * @param key a class in the model
 	 */
-	public Set<EObject> get(DomainType type) {
+	public @NonNull Set<EObject> get(@NonNull DomainType type) {
 		// TODO: Optimize by parsing ahead of time to find all EClasses that we will query
 		Set<EObject> result = modelManager.get(type);		
 		if (result == null) {
@@ -88,7 +89,7 @@ public abstract class LazyModelManager implements DomainModelManager {
 			modelManager.put(type, result);			
 			for (Iterator<EObject> iter = EcoreUtil.getAllContents(roots); iter.hasNext();) {
 				EObject next = iter.next();				
-				if (isInstance(type, next)) {
+				if ((next != null) && isInstance(type, next)) {
 					result.add(next);
 				}
 			}
@@ -107,7 +108,7 @@ public abstract class LazyModelManager implements DomainModelManager {
      * @return <code>true</code> if this element is an instance of the given
      *    class; <code>false</code> otherwise
      */
-	protected abstract boolean isInstance(DomainType type, EObject element);
+	protected abstract boolean isInstance(@NonNull DomainType type, @NonNull EObject element);
 	
 	@Override
     public String toString() {

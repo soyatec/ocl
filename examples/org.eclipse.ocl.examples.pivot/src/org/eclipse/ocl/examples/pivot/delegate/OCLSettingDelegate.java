@@ -19,8 +19,10 @@ package org.eclipse.ocl.examples.pivot.delegate;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.BasicSettingDelegate;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
@@ -47,22 +49,22 @@ public class OCLSettingDelegate extends BasicSettingDelegate.Stateless
 	 * @param structuralFeature
 	 *            the structural feature that I handle
 	 */
-	public OCLSettingDelegate(OCLDelegateDomain delegateDomain, EStructuralFeature structuralFeature) {
+	public OCLSettingDelegate(@NonNull OCLDelegateDomain delegateDomain, @NonNull EStructuralFeature structuralFeature) {
 		super(structuralFeature);
 		this.delegateDomain = delegateDomain;
 	}
 
 	@Override
 	protected Object get(InternalEObject owner, boolean resolve, boolean coreType) {
-		OCL ocl = delegateDomain.getOCL();
-		MetaModelManager metaModelManager = ocl.getEnvironment().getMetaModelManager();
-		if (specification == null) {
-			Property property = getProperty();
-			specification = SettingBehavior.INSTANCE.getExpressionInOCL(metaModelManager, property);
-			SettingBehavior.INSTANCE.validate(property);
-		}
-		Query query = ocl.createQuery(specification);
 		try {
+			OCL ocl = delegateDomain.getOCL();
+			MetaModelManager metaModelManager = ocl.getEnvironment().getMetaModelManager();
+			if (specification == null) {
+				Property property = getProperty();
+				specification = SettingBehavior.INSTANCE.getExpressionInOCL(metaModelManager, property);
+				SettingBehavior.INSTANCE.validate(property);
+			}
+			Query query = ocl.createQuery(DomainUtil.nonNullJDT(specification));
 			Value result = query.evaluate(owner);
 			return result.asEcoreObject();
 		}
@@ -72,11 +74,14 @@ public class OCLSettingDelegate extends BasicSettingDelegate.Stateless
 		}
 	}
 
-	public Property getProperty() {
+	public @NonNull Property getProperty() {
 		if (property == null) {
-			property = delegateDomain.getPivot(Property.class, eStructuralFeature);
+			property = delegateDomain.getPivot(Property.class, DomainUtil.nonNullJDT(eStructuralFeature));
+			if (property == null) {
+				throw new OCLDelegateException("No pivot property for " + eStructuralFeature) ;
+			}
 		}
-		return property;
+		return DomainUtil.nonNullJDT(property);
 	}
 
 	@Override

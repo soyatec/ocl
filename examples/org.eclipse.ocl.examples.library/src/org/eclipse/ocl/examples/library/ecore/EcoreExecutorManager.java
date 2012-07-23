@@ -23,17 +23,20 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.executor.ExecutorManager;
 import org.eclipse.ocl.examples.library.executor.LazyModelManager;
 
 public class EcoreExecutorManager extends ExecutorManager
 {
-	protected static ValueFactory getValueFactory(EObject contextObject, Map<Object, Object> contextMap, DomainStandardLibrary standardLibrary) {
+	protected static @NonNull ValueFactory getValueFactory(@NonNull EObject contextObject, @Nullable Map<Object, Object> contextMap, @NonNull DomainStandardLibrary standardLibrary) {
 		if (contextMap != null) {
 			Object valueFactory = contextMap.get(ValueFactory.class);
 			if (valueFactory instanceof ValueFactory) {
@@ -52,32 +55,31 @@ public class EcoreExecutorManager extends ExecutorManager
 		return ecoreValueFactory;
 	}
 
-	private final EObject contextObject;
+	private final @NonNull EObject contextObject;
 	private final Map<Object, Object> contextMap;
 	private LazyModelManager modelManager = null;
 	
-	public EcoreExecutorManager(EObject contextObject, DomainStandardLibrary standardLibrary) {
+	public EcoreExecutorManager(@NonNull EObject contextObject, @NonNull DomainStandardLibrary standardLibrary) {
 		this(contextObject, null, standardLibrary);
 	}
 
-	public EcoreExecutorManager(EObject contextObject, Map<Object, Object> contextMap, DomainStandardLibrary standardLibrary) {
+	public EcoreExecutorManager(@NonNull EObject contextObject, @Nullable Map<Object, Object> contextMap, @NonNull DomainStandardLibrary standardLibrary) {
 		super(getValueFactory(contextObject, contextMap, standardLibrary));
 		this.contextObject = contextObject;
 		this.contextMap = contextMap;
 	}
 
-	public DomainEvaluator createNestedEvaluator() {
+	public @NonNull DomainEvaluator createNestedEvaluator() {
 		return new EcoreExecutorManager(contextObject, contextMap, valueFactory.getStandardLibrary());
 	}
 
-	@Override
-	public DomainModelManager getModelManager() {
+	public @NonNull DomainModelManager getModelManager() {
 		if (modelManager == null) {
 			modelManager = new LazyModelManager(contextObject)
 			{
 				@Override
-				protected boolean isInstance(DomainType type, EObject element) {
-					EClass eClass = element.eClass();
+				protected boolean isInstance(@NonNull DomainType type, @NonNull EObject element) {
+					EClass eClass = DomainUtil.nonNullEMF(element.eClass());
 					DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 					DomainType elementType = standardLibrary.getType(eClass);
 					return elementType.conformsTo(standardLibrary, type);
@@ -85,6 +87,6 @@ public class EcoreExecutorManager extends ExecutorManager
 				
 			};
 		}
-		return modelManager;
+		return DomainUtil.nonNullJDT(modelManager);
 	}
 }

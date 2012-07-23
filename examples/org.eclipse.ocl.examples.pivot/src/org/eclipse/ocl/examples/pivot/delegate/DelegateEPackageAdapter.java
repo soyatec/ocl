@@ -31,8 +31,11 @@ import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
 import org.eclipse.ocl.common.delegate.VirtualDelegateMapping;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
  * DelegateEPackageAdapter extends an EPackage to cache its DelegateDomain
@@ -43,7 +46,7 @@ public class DelegateEPackageAdapter extends AdapterImpl
 	/**
 	 *	Return the DelegateEPackageAdapter for ePackage, if there is one, or null if none.
 	 */
-	public static DelegateEPackageAdapter findAdapter(EPackage ePackage) {
+	public static @Nullable DelegateEPackageAdapter findAdapter(@NonNull EPackage ePackage) {
 		return (DelegateEPackageAdapter) EcoreUtil.getAdapter(ePackage.eAdapters(), DelegateEPackageAdapter.class);
 	}
 
@@ -51,7 +54,7 @@ public class DelegateEPackageAdapter extends AdapterImpl
 	 *	Return the DelegateEPackageAdapter for ePackage, creating
 	 *	one if necessary.
 	 */
-	public static DelegateEPackageAdapter getAdapter(EPackage ePackage) {
+	public static @NonNull DelegateEPackageAdapter getAdapter(@NonNull EPackage ePackage) {
 		DelegateEPackageAdapter adapter = (DelegateEPackageAdapter) EcoreUtil.getAdapter(ePackage.eAdapters(), DelegateEPackageAdapter.class);
 		if (adapter == null) {
 			adapter = new DelegateEPackageAdapter();
@@ -74,11 +77,11 @@ public class DelegateEPackageAdapter extends AdapterImpl
 	 */
 	protected Map<String, List<DelegateDomain>> delegatedBehaviorMap = null;
 
-	protected DelegateDomain createDelegateDomain(String delegateURI) {
-		EPackage ePackage = getTarget();
+	protected @NonNull DelegateDomain createDelegateDomain(@NonNull String delegateURI) {
+		EPackage ePackage = DomainUtil.nonNullState(getTarget());
 		DelegateDomain.Factory.Registry registry = DelegateResourceSetAdapter.getRegistry(
 			ePackage, DelegateDomain.Factory.Registry.class, DelegateDomain.Factory.Registry.INSTANCE);
-		DelegateDomain.Factory factory = registry.getFactory(delegateURI);
+		DelegateDomain.Factory factory = registry != null ? registry.getFactory(delegateURI) : null;
 		if (factory == null) {
 			factory = OCLDelegateDomainFactory.INSTANCE;
 		}
@@ -88,14 +91,14 @@ public class DelegateEPackageAdapter extends AdapterImpl
 	/**
 	 * Return the DelegateDomain for this package and for delegateURI, returning null it does not exist. 
 	 */
-	public DelegateDomain getDelegateDomain(String delegateURI) {
+	public @Nullable DelegateDomain getDelegateDomain(@NonNull String delegateURI) {
 		if (delegateDomainMap == null) {
 			getDelegateDomains();
 		}
 		return delegateDomainMap.get(delegateURI);
 	}
 
-	public Map<String, DelegateDomain> getDelegateDomains() {
+	public @NonNull Map<String, DelegateDomain> getDelegateDomains() {
 		if (delegateDomainMap == null) {
 			delegatedBehaviorMap = new HashMap<String, List<DelegateDomain>>();
 			delegateDomainMap = new HashMap<String, DelegateDomain>();
@@ -109,7 +112,7 @@ public class DelegateEPackageAdapter extends AdapterImpl
 					String delegateURIs = details.get(behaviorName);
 					if (delegateURIs != null) {
 						for (StringTokenizer stringTokenizer = new StringTokenizer(delegateURIs); stringTokenizer.hasMoreTokens();) {
-							String delegateURI = stringTokenizer.nextToken();
+							String delegateURI = DomainUtil.nonNullJava(stringTokenizer.nextToken());
 							String resolvedURI = registry.resolve(delegateURI);
 							initializeDelegatedBehavior(resolvedURI, delegatedBehavior);
 						}
@@ -117,10 +120,10 @@ public class DelegateEPackageAdapter extends AdapterImpl
 				}
 			}
 		}
-		return delegateDomainMap;
+		return DomainUtil.nonNullJDT(delegateDomainMap);
 	}
 
-	public List<DelegateDomain> getDelegateDomains(DelegatedBehavior<?, ?, ?> delegatedBehavior) {
+	public @NonNull List<DelegateDomain> getDelegateDomains(@NonNull DelegatedBehavior<?, ?, ?> delegatedBehavior) {
 		if (delegatedBehaviorMap == null) {
 			getDelegateDomains();
 		}
@@ -128,7 +131,7 @@ public class DelegateEPackageAdapter extends AdapterImpl
 		if (list != null) {
 			return list;
 		} else {
-			return Collections.emptyList();
+			return DomainUtil.nonNullJava(Collections.<DelegateDomain>emptyList());
 		}
 	}
 
@@ -137,7 +140,7 @@ public class DelegateEPackageAdapter extends AdapterImpl
 		return (EPackage) super.getTarget();
 	}
 
-	private void initializeDelegatedBehavior(String delegateURI, DelegatedBehavior<?, ?, ?> delegatedBehavior) {
+	private void initializeDelegatedBehavior(@NonNull String delegateURI, DelegatedBehavior<?, ?, ?> delegatedBehavior) {
 		String behaviorName = delegatedBehavior.getName();
 		synchronized (delegateDomainMap) {
 			DelegateDomain delegateDomain = delegateDomainMap.get(delegateURI);
@@ -166,7 +169,7 @@ public class DelegateEPackageAdapter extends AdapterImpl
 	 *
 	 * @since 3.2
 	 */
-	public DelegateDomain loadDelegateDomain(String delegateURI) {
+	public @NonNull DelegateDomain loadDelegateDomain(@NonNull String delegateURI) {
 		if (delegateDomainMap == null) {
 			getDelegateDomains();
 		}

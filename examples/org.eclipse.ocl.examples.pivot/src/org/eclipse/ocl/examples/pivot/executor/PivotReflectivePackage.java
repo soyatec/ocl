@@ -16,8 +16,10 @@
  */
 package org.eclipse.ocl.examples.pivot.executor;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ReflectivePackage;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.Enumeration;
@@ -28,17 +30,17 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 public class PivotReflectivePackage extends ReflectivePackage
 {
-	protected final MetaModelManager metaModelManager;
-	protected final org.eclipse.ocl.examples.pivot.Package pivotPackage;
+	protected final @NonNull MetaModelManager metaModelManager;
+	protected final @NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage;
 
-	public PivotReflectivePackage(MetaModelManager metaModelManager, org.eclipse.ocl.examples.pivot.Package pivotPackage) {
-		super(pivotPackage.getName(), pivotPackage.getNsURI());
+	public PivotReflectivePackage(@NonNull MetaModelManager metaModelManager, @NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+		super(DomainUtil.nonNullModel(pivotPackage.getName()), pivotPackage.getNsURI());
 		this.metaModelManager = metaModelManager;		
 		this.pivotPackage = pivotPackage;		
 	}
 
 	@Override
-	protected PivotReflectiveType createExecutorType(DomainType domainType) {
+	protected @NonNull PivotReflectiveType createExecutorType(@NonNull DomainType domainType) {
 		if (domainType instanceof InvalidType) {
 			return new PivotReflectiveInvalidType(this, (InvalidType)domainType);
 		}
@@ -57,20 +59,20 @@ public class PivotReflectivePackage extends ReflectivePackage
 	}
 
 	@Override
-	protected Iterable<? extends DomainType> getDomainTypes() {
+	protected @NonNull Iterable<? extends DomainType> getDomainTypes() {
 		return metaModelManager.getLocalClasses(pivotPackage);
 	}
 
-	public final MetaModelManager getMetaModelManager() {
+	public final @NonNull MetaModelManager getMetaModelManager() {
 		return metaModelManager;
 	}
 	
-	public final org.eclipse.ocl.examples.pivot.Package getPivotPackage() {
+	public final @NonNull org.eclipse.ocl.examples.pivot.Package getPivotPackage() {
 		return pivotPackage;
 	}
 	
 	@Override
-	protected DomainStandardLibrary getStandardLibrary() {
+	protected @NonNull DomainStandardLibrary getStandardLibrary() {
 		return metaModelManager;
 	}
 }

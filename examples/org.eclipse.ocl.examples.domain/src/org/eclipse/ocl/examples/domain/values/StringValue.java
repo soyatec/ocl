@@ -16,10 +16,14 @@
  */
 package org.eclipse.ocl.examples.domain.values;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+
 public interface StringValue extends Value
 {
 	/**
+	 * @throws InvalidValueException 
 	 * @generated NOT
 	 */
-	String stringValue();
+	@NonNull String stringValue() throws InvalidValueException;
 }

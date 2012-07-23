@@ -16,6 +16,8 @@ package org.eclipse.ocl.examples.pivot.context;
 
 import java.io.IOException;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -40,36 +42,37 @@ public interface ParserContext // extends Adapter
 	 * PivitUtil.checkResourceErrors.
 	 * 
 	 * @throws IOException if resource loading fails
+	 * @throws ParserException 
 	 */
-	BaseResource createBaseResource(String expression) throws IOException;
+	@Nullable BaseResource createBaseResource(@NonNull String expression) throws IOException, ParserException;
 	
 	/**
 	 * Return the type of the self variable.
 	 */
-	Type getClassContext();
+	@Nullable Type getClassContext();
 
 	/**
 	 * Extract an Abstract Syntax ExpressionInOCL fronm a Concrete Syntax resource.
 	 * 
 	 * @throws ParserException if parsing fails
 	 */
-	ExpressionInOCL getExpression(BaseResource resource) throws ParserException;
+	@Nullable ExpressionInOCL getExpression(@NonNull BaseResource resource) throws ParserException;
 
 	/**
 	 * Returbn the MetaModelManager in use.
 	 */
-	MetaModelManager getMetaModelManager();
+	@NonNull MetaModelManager getMetaModelManager();
 
 	/**
 	 * Callback to initialize the ExpressionInOCL with the derived context such as
 	 * a contextvariable for the self type, parameter and result variables.
 	 */
-	void initialize(Base2PivotConversion conversion, ExpressionInOCL expression);
+	void initialize(@NonNull Base2PivotConversion conversion, @NonNull ExpressionInOCL expression);
 	
 	/**
 	 * Create an Abstract Syntax ExpressionInOCL containing the parsed expression.
 	 * 
 	 * @throws ParserException if parsing fails
 	 */
-	ExpressionInOCL parse(String expression) throws ParserException;
+	@NonNull ExpressionInOCL parse(@NonNull String expression) throws ParserException;
 }

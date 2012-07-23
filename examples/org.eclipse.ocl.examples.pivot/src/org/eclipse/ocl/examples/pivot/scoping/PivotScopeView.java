@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.pivot.scoping;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -36,8 +37,9 @@ public class PivotScopeView implements ScopeView
      */
     public static final ScopeView NULLSCOPEVIEW = new ScopeView()
     {
-		public Attribution getAttribution() {
-			return null;
+		@SuppressWarnings("null")
+		public @NonNull Attribution getAttribution() {
+			return EmptyAttribution.INSTANCE;
 		}
 
 		public EObject getChild() {
@@ -69,7 +71,7 @@ public class PivotScopeView implements ScopeView
 	protected final EReference targetReference;					// Selecting permissible candidate types
 	private ScopeView parent = null;
 	
-	public PivotScopeView(MetaModelManager metaModelManager, Element target, Attribution attribution, EObject child, EStructuralFeature containmentFeature, EReference targetReference) {
+	public PivotScopeView(@NonNull MetaModelManager metaModelManager, @NonNull Element target, @NonNull Attribution attribution, EObject child, EStructuralFeature containmentFeature, EReference targetReference) {
 		this.metaModelManager = metaModelManager;
 		this.attribution = attribution;
 		this.target = target;
@@ -78,7 +80,8 @@ public class PivotScopeView implements ScopeView
 		this.targetReference = targetReference;
 	}
 	
-	public Attribution getAttribution() {
+	@SuppressWarnings("null")
+	public @NonNull Attribution getAttribution() {
 		return attribution;
 	}
 
@@ -90,7 +93,8 @@ public class PivotScopeView implements ScopeView
 		return containmentFeature;
 	}
 
-	public MetaModelManager getMetaModelManager() {
+	@SuppressWarnings("null")
+	public @NonNull MetaModelManager getMetaModelManager() {
 		return metaModelManager;
 	}
 
@@ -108,9 +112,9 @@ public class PivotScopeView implements ScopeView
 			if (parentScope == null) {
 				parent = NULLSCOPEVIEW;
 			}
-			else {
+			else if (aParent != null) {
 				EStructuralFeature eContainingFeature = target.eContainingFeature();
-				parent = new PivotScopeView(metaModelManager, aParent, parentScope, target, eContainingFeature, targetReference);
+				parent = new PivotScopeView(getMetaModelManager(), aParent, parentScope, target, eContainingFeature, targetReference);
 			}
 		}
 		return parent;

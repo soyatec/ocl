@@ -27,6 +27,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Iteration;
@@ -59,8 +62,8 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 public class PrettyPrinter
 {
 	public static final String NULL_PLACEHOLDER = "<null>";
-	public static List<String> reservedNameList = Arrays.asList("and", "else", "endif", "false", "if", "implies", "in", "invalid", "let", "not", "null", "or", "self", "then", "true", "xor");
-	public static List<String> restrictedNameList = Arrays.asList("Bag", "Boolean", "Collection", "Integer", "OclAny", "OclInvalid", "OclVoid", "OrderedSet", "Real", "Sequence", "Set", "String", "Tuple", "UnlimitedNatural");
+	public static @NonNull List<String> reservedNameList = DomainUtil.nonNullJava(Arrays.asList("and", "else", "endif", "false", "if", "implies", "in", "invalid", "let", "not", "null", "or", "self", "then", "true", "xor"));
+	public static @NonNull List<String> restrictedNameList = DomainUtil.nonNullJava(Arrays.asList("Bag", "Boolean", "Collection", "Integer", "OclAny", "OclInvalid", "OclVoid", "OrderedSet", "Real", "Sequence", "Set", "String", "Tuple", "UnlimitedNatural"));
 
 	public static interface Factory
 	{
@@ -231,15 +234,15 @@ public class PrettyPrinter
 		}
 	}
 
-	public static PrettyPrinter createNamePrinter(Element element, PrettyPrintOptions options) {
+	public static PrettyPrinter createNamePrinter(@NonNull Element element, @NonNull PrettyPrintOptions options) {
 		return new PrettyPrinter(options, Mode.NAME, element);
 	}
 
-	public static PrettyPrinter createPrinter(Element element, PrettyPrintOptions options) {
+	public static PrettyPrinter createPrinter(@NonNull Element element, @NonNull PrettyPrintOptions options) {
 		return new PrettyPrinter(options, Mode.FULL, element);
 	}
 
-	public static Global createOptions(Namespace scope) {
+	public static @NonNull Global createOptions(@Nullable Namespace scope) {
 		PrettyPrintOptions.Global options = new PrettyPrintOptions.Global(scope);
 		options.addReservedNames(PrettyPrinter.reservedNameList);
 		options.addRestrictedNames(PrettyPrinter.reservedNameList);
@@ -247,16 +250,13 @@ public class PrettyPrinter
 		return options;
 	}
 
-	public static String print(Element element) {
+	public static String print(@NonNull Element element) {
 		return print(element, createOptions(null));
 	}
-	public static String print(Element element, Namespace namespace) {
+	public static String print(@NonNull Element element, @NonNull Namespace namespace) {
 		return print(element, createOptions(namespace));
 	}
-	public static String print(Element element, PrettyPrintOptions options) {
-		if (element == null) {
-			return NULL_PLACEHOLDER;
-		}
+	public static String print(@NonNull Element element, @NonNull PrettyPrintOptions options) {
 		PrettyPrinter printer = new PrettyPrinter(options, Mode.FULL, element);
 		try {
 			printer.appendElement(element);
@@ -268,16 +268,13 @@ public class PrettyPrinter
 		}
 	}
 
-	public static String printName(Element element) {
+	public static String printName(@NonNull Element element) {
 		return printName(element, createOptions(null));
 	}
-	public static String printName(Element element, Namespace namespace) {
+	public static String printName(@NonNull Element element, @NonNull Namespace namespace) {
 		return printName(element, createOptions(namespace));
 	}
-	public static String printName(Element element, PrettyPrintOptions options) {
-		if (element == null) {
-			return NULL_PLACEHOLDER;
-		}
+	public static String printName(@NonNull Element element, @NonNull PrettyPrintOptions options) {
 		PrettyPrinter printer = createNamePrinter(element, options);
 		try {
 			printer.appendElement(element);
@@ -289,16 +286,13 @@ public class PrettyPrinter
 		}
 	}
 
-	public static String printType(Element element) {
+	public static String printType(@NonNull Element element) {
 		return printType(element, createOptions(null));
 	}
-	public static String printType(Element element, Namespace namespace) {
+	public static String printType(@NonNull Element element, @NonNull Namespace namespace) {
 		return printType(element, createOptions(namespace));
 	}
-	public static String printType(Element element, PrettyPrintOptions options) {
-		if (element == null) {
-			return NULL_PLACEHOLDER;
-		}
+	public static String printType(@NonNull Element element, @NonNull PrettyPrintOptions options) {
 		PrettyPrinter printer = new PrettyPrinter(options, Mode.TYPE, element);
 		try {
 			printer.appendElement(element);
@@ -312,20 +306,20 @@ public class PrettyPrinter
 	
 	private enum Mode { TYPE, NAME, FULL };
 	
-	private final PrettyPrintOptions options;
+	private final @NonNull PrettyPrintOptions options;
 	private String pendingPrefix = "";
-	private StringBuilder pendingText;
+	private final @NonNull StringBuilder pendingText;
 	protected Fragment fragment;
-	private Mode mode;
+	private @NonNull Mode mode;
 	private final AbstractVisitor<Object, PrettyPrinter> visitor;
-	private Namespace scope;
+	private @Nullable Namespace scope;
 	private Precedence currentPrecedence = null;
 
 	/**
 	 * Initializes me.
 	 * @param element 
 	 */
-	private PrettyPrinter(PrettyPrintOptions options, Mode mode, Element element) {
+	private PrettyPrinter(@NonNull PrettyPrintOptions options, @NonNull Mode mode, @NonNull Element element) {
 		this.options = options;
 		this.mode = mode;
 		this.scope = options.getScope();
@@ -504,45 +498,47 @@ public class PrettyPrinter
 	            PathElement rootPathElement = parentPath.get(0);
 				String name = rootPathElement.getName();
 	        	Element rootElement = rootPathElement.getElement();
-				String alias = options.getAlias((Namespace)rootElement);
-	        	if (alias != null) {
-	        		append(getName(alias, options.getReservedNames()));
-	        		append("::");               
-	                i++;
-	            }
-	            else if (PivotConstants.ORPHANAGE_NAME.equals(name)) {
-	                i++;
-	            }
-	            else if (PivotPackage.eNAME.equals(name)) {
-	                i++;
-	            }
-	            else if ("ocl".equals(name)) {            // FIXME constant needed
-	                i++;
-	            }
-	            else {
-	            	URI uri;
-	            	if (rootElement.getETarget() != null) {
-		            	EObject eTarget = rootElement.getETarget();
-		            	uri = EcoreUtil.getURI(eTarget);
+				if (rootElement != null) {
+					String alias = options.getAlias((Namespace)rootElement);
+		        	if (alias != null) {
+		        		append(getName(alias, options.getReservedNames()));
+		        		append("::");               
+		                i++;
+		            }
+		            else if (PivotConstants.ORPHANAGE_NAME.equals(name)) {
+		                i++;
+		            }
+		            else if (PivotPackage.eNAME.equals(name)) {
+		                i++;
+		            }
+		            else if ("ocl".equals(name)) {            // FIXME constant needed
+		                i++;
 		            }
 		            else {
-		            	uri = rootElement.eResource().getURI();
-		            	if (uri != null) {
-		                	if (PivotUtil.isPivotURI(uri)) {
-		                		uri = PivotUtil.getNonPivotURI(uri);
-		                	}
-		            	}
+		            	URI uri;
+		            	if (rootElement.getETarget() != null) {
+			            	EObject eTarget = rootElement.getETarget();
+			            	uri = EcoreUtil.getURI(eTarget);
+			            }
+			            else {
+			            	uri = rootElement.eResource().getURI();
+			            	if (uri != null) {
+			                	if (PivotUtil.isPivotURI(uri)) {
+			                		uri = PivotUtil.getNonPivotURI(uri);
+			                	}
+			            	}
+			            }
+	                	if (uri != null) {
+	                		URI baseURI = options.getBaseURI();
+	                    	if (baseURI != null) {
+	                    		uri = uri.deresolve(baseURI);
+	                    	}
+	                		append(getName(uri.toString(), options.getReservedNames()));
+	                	}
+	            		append("::");               
+	                    i++;
 		            }
-                	if (uri != null) {
-                		URI baseURI = options.getBaseURI();
-                    	if (baseURI != null) {
-                    		uri = uri.deresolve(baseURI);
-                    	}
-                		append(getName(uri.toString(), options.getReservedNames()));
-                	}
-            		append("::");               
-                    i++;
-	            }
+				}
 	        }
 	        while (i < iMax) {
 	            appendElement(parentPath.get(i++).getElement());
@@ -750,11 +746,11 @@ public class PrettyPrinter
 		fragment = fragment.getParent();
 	}
 
-    public void popMode(Mode oldMode) {
+    public void popMode(@NonNull Mode oldMode) {
     	mode = oldMode;
     }
 
-	public void popScope(Namespace oldScope) {
+	public void popScope(@Nullable Namespace oldScope) {
 		scope = oldScope;
 	}
 
@@ -769,13 +765,13 @@ public class PrettyPrinter
 		}
 	}
 
-    public Mode pushMode(Mode newMode) {
+    public @NonNull Mode pushMode(@NonNull Mode newMode) {
     	Mode oldMode = mode;
     	mode = newMode;
     	return oldMode;
     }
 
-	public Namespace pushScope(Namespace newScope) {
+	public @Nullable Namespace pushScope(@Nullable Namespace newScope) {
 		Namespace oldscope = scope;
     	scope = newScope;
     	return oldscope;

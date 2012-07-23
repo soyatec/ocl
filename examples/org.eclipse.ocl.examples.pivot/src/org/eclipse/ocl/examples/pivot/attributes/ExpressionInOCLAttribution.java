@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.pivot.attributes;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -27,7 +28,7 @@ public class ExpressionInOCLAttribution extends AbstractAttribution
 	public static final ExpressionInOCLAttribution INSTANCE = new ExpressionInOCLAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		ExpressionInOCL targetExpression = (ExpressionInOCL) target;
 		Variable contextVariable = targetExpression.getContextVariable();
 		if (contextVariable != null) {

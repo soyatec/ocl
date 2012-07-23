@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.domain.types;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
@@ -27,14 +28,14 @@ import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 
 public class AbstractTupleType extends AbstractType implements DomainTupleType
 {
-	private List<? extends DomainTypedElement> parts;
+	private @NonNull List<? extends DomainTypedElement> parts;
 	
-	public AbstractTupleType(DomainStandardLibrary standardLibrary, List<? extends DomainTypedElement> parts) {
+	public AbstractTupleType(@NonNull DomainStandardLibrary standardLibrary, @NonNull List<? extends DomainTypedElement> parts) {
 		super(standardLibrary, "Tuple");
 		this.parts = parts;
 	}
 
-	public boolean conformsTo(DomainStandardLibrary standardLibrary, DomainType type) {
+	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		if (this == type) {
 			return true;
 		}
@@ -45,18 +46,18 @@ public class AbstractTupleType extends AbstractType implements DomainTupleType
 	}
 
 	@Override
-	public DomainType getCommonType(DomainStandardLibrary standardLibrary, DomainType type) {
+	public @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		if (type != this) {
 			return standardLibrary.getOclAnyType();
 		}
 		return this;
 	}
 
-	public List<? extends DomainTypedElement> getOwnedAttribute() {
+	public @NonNull List<? extends DomainTypedElement> getOwnedAttribute() {
 		return parts;
 	}
 
-	public boolean isEqualTo(DomainStandardLibrary standardLibrary, DomainType type) {
+	public boolean isEqualTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		if (this == type) {
 			return true;
 		}
@@ -66,7 +67,7 @@ public class AbstractTupleType extends AbstractType implements DomainTupleType
 		return standardLibrary.isEqualToTupleType(this, (DomainTupleType)type);
 	}
 
-	public LibraryFeature lookupImplementation(DomainStandardLibrary standardLibrary, DomainOperation staticOperation) {
+	public @NonNull LibraryFeature lookupImplementation(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainOperation staticOperation) {
 		return standardLibrary.getOclTupleType().lookupImplementation(standardLibrary, staticOperation);
 	}
 

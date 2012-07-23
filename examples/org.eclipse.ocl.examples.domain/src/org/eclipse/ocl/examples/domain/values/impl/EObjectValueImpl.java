@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.domain.values.impl;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -28,20 +29,20 @@ public class EObjectValueImpl extends ObjectValueImpl
 {
 	protected DomainType type = null;			// Lazily computed
 	
-	public EObjectValueImpl(ValueFactory valueFactory, EObject object) {
+	public EObjectValueImpl(@NonNull ValueFactory valueFactory, @NonNull EObject object) {
 		super(valueFactory, object);
 	}
 
 	@Override
-	public EObject getObject() {
+	public @NonNull EObject getObject() {
 		return (EObject) object;
 	}
 
-	public DomainType getType() {
+	public @NonNull DomainType getType() {
 		if (type == null) {
-			this.type = valueFactory.getStandardLibrary().getType(getObject().eClass());
+			type = valueFactory.getStandardLibrary().getType(DomainUtil.nonNullEMF(getObject().eClass()));
 		}
-		return type;
+		return DomainUtil.nonNullJDT(type);
 	}
 
 	@Override

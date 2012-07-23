@@ -15,21 +15,23 @@
 package org.eclipse.ocl.examples.library.ecore;
 
 import org.eclipse.emf.ecore.EEnumLiteral;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorEnumerationLiteral;
 
 public class EcoreExecutorEnumerationLiteral extends ExecutorEnumerationLiteral
 {
 	protected final EEnumLiteral eEnumLiteral;
 	
-	public EcoreExecutorEnumerationLiteral(EEnumLiteral eEnumLiteral, DomainEnumeration enumeration, int ordinal) {
-		super(eEnumLiteral.getName(), enumeration, ordinal);
+	public EcoreExecutorEnumerationLiteral(/*@NonNull*/ EEnumLiteral eEnumLiteral, @NonNull DomainEnumeration enumeration, int ordinal) {
+		super(DomainUtil.nonNullEMF(eEnumLiteral.getName()), enumeration, ordinal);
 		this.eEnumLiteral = eEnumLiteral;
 	}
 
 	@Override
-	public Object asEcoreObject(DomainStandardLibrary standardLibrary) {
+	public Object asEcoreObject(@NonNull DomainStandardLibrary standardLibrary) {
 		return eEnumLiteral.getInstance();
 	}
 }

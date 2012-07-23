@@ -28,12 +28,12 @@ public class EvaluatorMessages
 		NLS.initializeMessages(EvaluatorMessages.class.getName(), EvaluatorMessages.class);
 	}
 
-	public static String CompareToOperation;
 	public static String ConvertibleValueRequired;
 	public static String EObjectRequired;
 	public static String EmptyCollection;
 	public static String ImplementationClassLoadFailure;
 	public static String IncompatibleArgumentType;
+	public static String IncompleteInitialization;
 	public static String IndexOutOfRange;
 	public static String IndexesOutOfRange;
 	public static String InvalidArgument;

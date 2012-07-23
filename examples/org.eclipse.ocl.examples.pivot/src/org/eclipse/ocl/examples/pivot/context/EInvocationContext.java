@@ -19,6 +19,8 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -32,12 +34,12 @@ public class EInvocationContext extends EClassContext
 	private final Map<String, EClassifier> eParameters;
 	private Map<String, Type> parameters = null;
 	
-	public EInvocationContext(MetaModelManager metaModelManager, URI uri, EClassifier eClassContext, Map<String, EClassifier> eParameters) {
+	public EInvocationContext(@NonNull MetaModelManager metaModelManager, @Nullable URI uri, @NonNull EClassifier eClassContext, @Nullable Map<String, EClassifier> eParameters) {
 		super(metaModelManager, uri, eClassContext);
 		this.eParameters = eParameters;
 	}
 
-	public Map<String, Type> getParameters() {
+	public @NonNull Map<String, Type> getParameters() {
 		if (parameters == null) {
 			parameters = new HashMap<String, Type>();
 			if (eParameters != null) {
@@ -47,11 +49,13 @@ public class EInvocationContext extends EClassContext
 				}
 			}
 		}
-		return parameters;
+		@SuppressWarnings("null")
+		@NonNull Map<String, Type> nonNullParameters = parameters;
+		return nonNullParameters;
 	}
 
 	@Override
-	public void initialize(Base2PivotConversion conversion, ExpressionInOCL expression) {
+	public void initialize(@NonNull Base2PivotConversion conversion, @NonNull ExpressionInOCL expression) {
 		super.initialize(conversion, expression);
 		conversion.setParameterVariables(expression, getParameters());
 	}

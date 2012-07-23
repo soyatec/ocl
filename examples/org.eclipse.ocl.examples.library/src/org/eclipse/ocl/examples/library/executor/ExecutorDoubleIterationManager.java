@@ -18,12 +18,15 @@ package org.eclipse.ocl.examples.library.executor;
 
 import java.util.Iterator;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractIterationManager;
 import org.eclipse.ocl.examples.domain.library.LibraryTernaryOperation;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -31,17 +34,17 @@ import org.eclipse.osgi.util.NLS;
 
 public class ExecutorDoubleIterationManager extends AbstractIterationManager
 {	
-	protected final DomainType returnType;
-	protected final LibraryTernaryOperation body;
-	private Value accumulatorValue;
-	protected final CollectionValue collectionValue;
-	private Iterator<Value> iteratorValue1;
-	private final Iterator<Value> iteratorValue2;
+	protected final @NonNull DomainType returnType;
+	protected final @NonNull LibraryTernaryOperation body;
+	private @NonNull Value accumulatorValue;
+	protected final @NonNull CollectionValue collectionValue;
+	private @NonNull Iterator<Value> iteratorValue1;
+	private final @NonNull Iterator<Value> iteratorValue2;
 	private Value currentValue1;
 	private Value currentValue2;
 	
-	public ExecutorDoubleIterationManager(DomainEvaluator evaluator, DomainType returnType, LibraryTernaryOperation body,
-			CollectionValue collectionValue, Value accumulatorValue) {
+	public ExecutorDoubleIterationManager(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryTernaryOperation body,
+			@NonNull CollectionValue collectionValue, @NonNull Value accumulatorValue) {
 		super(evaluator);
 		this.returnType = returnType;
 		this.body = body;
@@ -69,15 +72,15 @@ public class ExecutorDoubleIterationManager extends AbstractIterationManager
 		return currentValue1 != null;
 	}
 
-	public Value evaluateBody() {
+	public @NonNull Value evaluateBody() {
 		try {
-			return body.evaluate(evaluator, returnType, accumulatorValue, currentValue1, currentValue2);
+			return internalEvaluate();
 		} catch (InvalidValueException e) {
 			return throwInvalidEvaluation(e);
 		}
 	}
 
-	public Value getAccumulatorValue() {
+	public @NonNull Value getAccumulatorValue() {
 		return accumulatorValue;
 	}
 	
@@ -85,13 +88,18 @@ public class ExecutorDoubleIterationManager extends AbstractIterationManager
 		return currentValue1 != null;
 	}
 
+	private @NonNull Value internalEvaluate() throws InvalidValueException {
+		return body.evaluate(evaluator, returnType, accumulatorValue,
+			DomainUtil.nonNullState(currentValue1), DomainUtil.nonNullState(currentValue2));
+	}
+
 	public NullValue throwInvalidEvaluation(String message, Object... bindings) throws InvalidEvaluationException {
 		String boundMessage = NLS.bind(message, bindings);
 		throw new InvalidEvaluationException(null, boundMessage, null, null, null);
 	}
 
-	public Value updateBody() throws InvalidValueException {
-		this.accumulatorValue = body.evaluate(evaluator, returnType, accumulatorValue, currentValue1, currentValue2);
+	public @Nullable Value updateBody() throws InvalidValueException {
+		this.accumulatorValue = internalEvaluate();
 		return null;					// carry on
 	}
 }

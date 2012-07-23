@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.domain.types;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -23,9 +24,9 @@ import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 
 public abstract class AbstractSpecializedType extends AbstractType
 {
-	protected final DomainType containerType;
+	protected final @NonNull DomainType containerType;
 	
-	public AbstractSpecializedType(DomainStandardLibrary standardLibrary, String name, DomainType containerType) {
+	public AbstractSpecializedType(@NonNull DomainStandardLibrary standardLibrary, @NonNull String name, @NonNull DomainType containerType) {
 		super(standardLibrary, name);
 		this.containerType = containerType;
 	}
@@ -44,7 +45,7 @@ public abstract class AbstractSpecializedType extends AbstractType
 		return containerType.isUnique();
 	}
 
-	public LibraryFeature lookupImplementation(DomainStandardLibrary standardLibrary, DomainOperation staticOperation) {
+	public @NonNull LibraryFeature lookupImplementation(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainOperation staticOperation) {
 		return containerType.lookupImplementation(standardLibrary, staticOperation);
 	}
 }

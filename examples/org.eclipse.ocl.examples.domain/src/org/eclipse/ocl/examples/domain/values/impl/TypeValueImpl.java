@@ -18,12 +18,14 @@ package org.eclipse.ocl.examples.domain.values.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainClassifierType;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
@@ -46,7 +48,7 @@ public abstract class TypeValueImpl extends ObjectValueImpl implements TypeValue
 
 	private DomainClassifierType classifierType;
 
-	public TypeValueImpl(ValueFactory valueFactory, DomainType object) {
+	public TypeValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainType object) {
 		super(valueFactory, object);
 		this.classifierType = null;
 	}
@@ -57,13 +59,12 @@ public abstract class TypeValueImpl extends ObjectValueImpl implements TypeValue
 	}
 
 	@Override
-	public TypeValue asElementValue() {
+	public @NonNull TypeValue asElementValue() {
 		return this;
 	}
 
 	@Override
-	public EObject asNavigableObject()
-			throws InvalidValueException {
+	public @NonNull EObject asNavigableObject() throws InvalidValueException {
 		DomainType navigableObject = getObject();
 		if (navigableObject instanceof EObject) {
 			return (EObject) navigableObject;
@@ -74,7 +75,7 @@ public abstract class TypeValueImpl extends ObjectValueImpl implements TypeValue
 	}
 
 	@Override
-	public TypeValueImpl asTypeValue() {
+	public @NonNull TypeValueImpl asTypeValue() {
 		return this;
 	}
 
@@ -86,33 +87,34 @@ public abstract class TypeValueImpl extends ObjectValueImpl implements TypeValue
 		if (!(that instanceof TypeValue)) {
 			return false;
 		}
-		DomainStandardLibrary standardLibrary = valueFactory
-			.getStandardLibrary();
-		DomainInheritance thisInheritance = getObject()
-			.getInheritance(standardLibrary);
-		DomainInheritance thatInheritance = ((TypeValue) that)
-			.getInstanceType().getInheritance(standardLibrary);
-		return thisInheritance == thatInheritance;
+		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
+		DomainInheritance thisInheritance = getObject().getInheritance(standardLibrary);
+		try {
+			DomainType thatInstanceType = ((TypeValue) that).getInstanceType();
+			DomainInheritance thatInheritance = thatInstanceType.getInheritance(standardLibrary);
+			return thisInheritance == thatInheritance;
+		} catch (InvalidValueException e) {
+			return false;
+		}
 	}
 
-	public DomainType getElement() {
+	public @NonNull DomainType getElement() {
 		return getObject();
 	}
 
-	public DomainType getInstanceType() {
+	public @NonNull DomainType getInstanceType() {
 		return getObject();
 	}
 
 	@Override
-	public DomainType getObject() {
+	public @NonNull DomainType getObject() {
 		return (DomainType) object;
 	}
 
-	public DomainClassifierType getType() {
+	public @NonNull DomainClassifierType getType() {
 		if (classifierType == null) {
-			classifierType = valueFactory.getStandardLibrary()
-				.getClassifierType(getObject());
+			classifierType = valueFactory.getStandardLibrary().getClassifierType(getObject());
 		}
-		return classifierType;
+		return DomainUtil.nonNullJDT(classifierType);
 	}
 }

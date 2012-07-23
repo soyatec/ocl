@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.integer;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
@@ -30,12 +31,9 @@ public class IntegerMinusOperation extends AbstractBinaryOperation
 {
 	public static final IntegerMinusOperation INSTANCE = new IntegerMinusOperation();
 
-	public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value left, Value right) throws InvalidValueException {
-		IntegerValue leftValue = left.toIntegerValue();
-		IntegerValue rightValue = right.toIntegerValue();
-		if ((leftValue != null) && (rightValue != null)) {
-			return leftValue.subtract(rightValue);
-		}
-		return null;
+	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
+		IntegerValue leftValue = left.asIntegerValue();
+		IntegerValue rightValue = right.asIntegerValue();
+		return leftValue.subtract(rightValue);
 	}
 }

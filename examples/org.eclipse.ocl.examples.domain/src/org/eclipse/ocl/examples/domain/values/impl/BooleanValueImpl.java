@@ -17,8 +17,10 @@
 package org.eclipse.ocl.examples.domain.values.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -41,22 +43,22 @@ public class BooleanValueImpl extends ValueImpl implements BooleanValue
 
 	public static class Accumulator extends BooleanValueImpl implements BooleanValue.Accumulator
 	{
-		public Accumulator(ValueFactory valueFactory, boolean value) {
+		public Accumulator(@NonNull ValueFactory valueFactory, boolean value) {
 			super(valueFactory, value);
 		}
 
 		@Override
-		public BooleanValue asBooleanValue() {
+		public @NonNull BooleanValue asBooleanValue() {
 			return valueFactory.booleanValueOf(value);
 		}
 
 		@Override
-		public Value asObject() {
+		public @NonNull Value asObject() {
 			return valueFactory.booleanValueOf(value);
 		}
 
 		@Override
-		public Value asValidValue() {
+		public @NonNull Value asValidValue() {
 			return valueFactory.booleanValueOf(value);
 		}
 
@@ -67,7 +69,7 @@ public class BooleanValueImpl extends ValueImpl implements BooleanValue
 	
 	protected boolean value;
 	
-	public BooleanValueImpl(ValueFactory valueFactory, boolean value) {
+	public BooleanValueImpl(@NonNull ValueFactory valueFactory, boolean value) {
 		super(valueFactory);
 		this.value = value;
 	}
@@ -78,15 +80,15 @@ public class BooleanValueImpl extends ValueImpl implements BooleanValue
 	}
 
 	@Override
-	public BooleanValue asBooleanValue() {
+	public @NonNull BooleanValue asBooleanValue() {
 		return this;
 	}
 
-	public Object asObject() {
-		return value;
+	public @NonNull Object asObject() {
+		return DomainUtil.nonNullJava(Boolean.valueOf(value));
 	}
 
-	public Value asValidValue() {
+	public @NonNull Value asValidValue() {
 		return this;
 	}
 
@@ -101,7 +103,7 @@ public class BooleanValueImpl extends ValueImpl implements BooleanValue
 		return false;
 	}
 
-	public DomainType getType() {
+	public @NonNull DomainType getType() {
 		return valueFactory.getStandardLibrary().getBooleanType();
 	}
 

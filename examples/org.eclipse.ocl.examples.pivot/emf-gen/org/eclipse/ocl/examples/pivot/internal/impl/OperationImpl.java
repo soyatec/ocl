@@ -46,7 +46,9 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.IndexableIterable;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -60,7 +62,6 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.MultiplicityElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
-import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
@@ -79,7 +80,6 @@ import org.eclipse.ocl.examples.pivot.bodies.ParameterableElementBodies;
 import org.eclipse.ocl.examples.pivot.library.ConstrainedOperation;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.osgi.util.NLS;
 
 /**
@@ -618,13 +618,13 @@ public class OperationImpl
 		p.oclIsKindOf(self.oclType())
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(p));
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(p));
 			return (Boolean) result.asEcoreObject();
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.ParameterableElementBodies", e);
@@ -649,13 +649,13 @@ public class OperationImpl
 		    CompatibleBody(bodySpecification)
 		*/
 		try {
-			final DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final ValueFactory valueFactory = evaluator.getValueFactory();
-			final Value self = valueFactory.valueOf(this);
-			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
+			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final DomainType returnType = T_Boolean;
-			final Value result = OperationBodies._invariant_CompatibleReturn.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull DomainType returnType = T_Boolean;
+			final @NonNull Value result = OperationBodies._invariant_CompatibleReturn.INSTANCE.evaluate(evaluator, returnType, self);
 			final boolean resultIsNull = result.isNull();
 			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -1023,6 +1023,7 @@ public class OperationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("null")
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
@@ -1249,13 +1250,12 @@ public class OperationImpl
 	private LibraryFeature bodyImplementation = null;
 	
 	@Override
-	public LibraryFeature getImplementation() {
+	public @NonNull LibraryFeature getImplementation() {
 		LibraryFeature implementation = super.getImplementation();
 		if (implementation != null) {
 			return implementation;
 		}
 		if (bodyImplementation == null) {
-//			List<Constraint> ownedRules = getOwnedRule();
 			for (Constraint rule : getOwnedRule()) {
 				String stereotype = rule.getStereotype();
 				if (UMLReflection.BODY.equals(stereotype)) {
@@ -1263,25 +1263,24 @@ public class OperationImpl
 					if (specification instanceof ExpressionInOCL) {
 						bodyImplementation = new ConstrainedOperation((ExpressionInOCL) specification);
 					}
-					else if (specification instanceof OpaqueExpression) {
-						String body = PivotUtil.getBody((OpaqueExpression)specification);// FIXME
-					}
-					else {} // FIXME
 				}
 			}
 		}
-		return bodyImplementation;
+		if (bodyImplementation == null) {
+			bodyImplementation = UnsupportedOperation.INSTANCE;
+		}
+		return DomainUtil.nonNullJDT(bodyImplementation);
 	}
 
 	public int getIndex() {
 		return -1;		// WIP
 	}
 
-	public DomainInheritance getInheritance(DomainStandardLibrary standardLibrary) {
-		return standardLibrary.getInheritance(getOwningType());
+	public @NonNull DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary) {
+		return standardLibrary.getInheritance(DomainUtil.nonNullEMF(getOwningType()));
 	}
 
-	public IndexableIterable<Type> getParameterType() {
+	public @NonNull IndexableIterable<Type> getParameterType() {
 		return new IndexableIterable<Type>()
 		{
 			public Iterator<Type> iterator()
@@ -1309,8 +1308,8 @@ public class OperationImpl
 				};
 			}
 
-			public Type get(int index) {
-				return getOwnedParameter().get(index).getType();
+			public @NonNull Type get(int index) {
+				return DomainUtil.nonNullEMF(getOwnedParameter().get(index).getType());
 			}
 
 			public int size() {

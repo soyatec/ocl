@@ -16,7 +16,9 @@
  */
 package org.eclipse.ocl.examples.domain.values;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 /**
  * A TypeValue is a value object whose value is a type, such as Boolean. The type of
@@ -25,7 +27,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 public interface TypeValue extends ElementValue
 {
 	/**
+	 * @throws InvalidValueException 
 	 * @generated NOT
 	 */
-	DomainType getInstanceType();
+	@NonNull DomainType getInstanceType() throws InvalidValueException;
 }

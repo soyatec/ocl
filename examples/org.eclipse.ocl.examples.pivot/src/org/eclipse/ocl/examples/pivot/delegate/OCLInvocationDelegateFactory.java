@@ -18,7 +18,10 @@ package org.eclipse.ocl.examples.pivot.delegate;
 
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
  * Factory for OCL operation-invocation delegates.
@@ -26,13 +29,17 @@ import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
 public class OCLInvocationDelegateFactory extends AbstractOCLDelegateFactory
 		implements EOperation.Internal.InvocationDelegate.Factory
 {
-	public OCLInvocationDelegateFactory(String delegateURI) {
+	public OCLInvocationDelegateFactory(@NonNull String delegateURI) {
 		super(delegateURI);
 	}
 
-	public EOperation.Internal.InvocationDelegate createInvocationDelegate(EOperation operation) {
-		EPackage ePackage = operation.getEContainingClass().getEPackage();
-		return new OCLInvocationDelegate(getDelegateDomain(ePackage), operation);
+	public @Nullable EOperation.Internal.InvocationDelegate createInvocationDelegate(EOperation operation) {
+		if (operation == null) {
+			return null;
+		}
+		EPackage ePackage = DomainUtil.nonNullEMF(operation.getEContainingClass().getEPackage());
+		OCLDelegateDomain delegateDomain = getDelegateDomain(ePackage);
+		return delegateDomain != null ? new OCLInvocationDelegate(delegateDomain, operation) : null;
 	}
 	
 	/**
@@ -47,7 +54,10 @@ public class OCLInvocationDelegateFactory extends AbstractOCLDelegateFactory
 		}
 
 		@Override
-		public EOperation.Internal.InvocationDelegate createInvocationDelegate(EOperation operation) {
+		public @Nullable EOperation.Internal.InvocationDelegate createInvocationDelegate(EOperation operation) {
+			if (operation == null) {
+				return null;
+			}
 			EOperation.Internal.InvocationDelegate.Factory.Registry localRegistry = DelegateResourceSetAdapter.getRegistry(
 				operation, EOperation.Internal.InvocationDelegate.Factory.Registry.class, null);
 			if (localRegistry != null) {
