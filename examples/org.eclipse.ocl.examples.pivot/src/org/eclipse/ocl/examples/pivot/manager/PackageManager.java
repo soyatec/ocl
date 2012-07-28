@@ -137,13 +137,18 @@ public class PackageManager extends PackageServerParent
 
 	@Override
 	public synchronized void dispose() {
+		if (!rootTrackers.isEmpty()) {
+			Collection<RootTracker> savedRootTrackers = new ArrayList<RootTracker>(rootTrackers);
+			rootTrackers.clear();
+			for (RootTracker rootTracker : savedRootTrackers) {
+				rootTracker.dispose();
+			}
+		}
 		if (!package2tracker.isEmpty()) {
 			Collection<PackageTracker> savedPackageTrackers = new ArrayList<PackageTracker>(package2tracker.values());
 			package2tracker.clear();
 			for (PackageTracker packageTracker : savedPackageTrackers) {
-//				if (packageTracker instanceof PackageServer) {
-					packageTracker.dispose();
-//				}
+				packageTracker.dispose();
 			}
 		}
 		if (!type2tracker.isEmpty()) {
