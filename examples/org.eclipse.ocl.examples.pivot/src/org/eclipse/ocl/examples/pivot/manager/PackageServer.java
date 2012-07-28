@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.pivot.manager;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.LambdaType;
+import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.executor.PivotReflectivePackage;
@@ -34,10 +36,10 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 
 /**
- * A PackageServer adapts the primary Package to coordinate the coherent behaviour of a primary and one or more
+ * A PackageServer adapts the primary Package to coordinate the coherent behavior of a primary and one or more
  * secondary Packages as required for Complete OCL package extension.
  */
-public class PackageServer extends PackageServerParent
+public abstract class PackageServer implements PackageServerParent
 {
 	public static Function<PackageServer, org.eclipse.ocl.examples.pivot.Package> server2package = new Function<PackageServer, org.eclipse.ocl.examples.pivot.Package>()
 	{
@@ -46,11 +48,15 @@ public class PackageServer extends PackageServerParent
 		}
 	};
 
-	protected final PackageServerParent packageServerParent;	
-	protected final String name;	
-	protected final String nsURI;
+	/**
+	 * Map of (nested) package-name to package server.
+	 */
+	private @Nullable Map<String, PackageServer> packageServers = null;
 
-	protected final PackageManager packageManager;
+	protected final @NonNull String name;	
+	protected final @Nullable String nsURI;
+
+	protected final @NonNull PackageManager packageManager;
 	
 	private org.eclipse.ocl.examples.pivot.Package primaryPackage;
 	
@@ -59,21 +65,21 @@ public class PackageServer extends PackageServerParent
 	/**
 	 * List of all package extensions including this.
 	 */
-	private final List<PackageTracker> trackers = new ArrayList<PackageTracker>();
+	private final @NonNull List<PackageTracker> trackers = new ArrayList<PackageTracker>();
 	
 	/**
 	 * Lazily created map of nested class-name to multi-class server.
 	 */
-	private Map<String, TypeServer> typeServers = null;
+	private @Nullable Map<String, TypeServer> typeServers = null;
 
 	/**
 	 * The Executor package containing the dispatch table representation.
 	 */
-	private PivotReflectivePackage executorPackage = null;
+	private @Nullable PivotReflectivePackage executorPackage = null;
 	
-	protected PackageServer(@NonNull PackageServerParent packageServerParent, @NonNull String name, @Nullable String nsURI) {
-		this.packageServerParent = packageServerParent;
-		this.packageManager = packageServerParent.getPackageManager();
+	protected PackageServer(@NonNull PackageManager packageManager, @NonNull String name, @Nullable String nsURI) {
+//		this.packageServerParent = packageServerParent;
+		this.packageManager = packageManager;
 		this.name = name;
 		this.nsURI = nsURI;
 	}
@@ -106,8 +112,12 @@ public class PackageServer extends PackageServerParent
 		return packageTracker;
 	}
 
-	@Override
-	public void dispose() {
+	public void addedMemberPackage(@NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+		PackageServer packageServer = getMemberPackageServer(pivotPackage);
+		packageServer.addTrackedPackage(pivotPackage);
+	}
+
+	protected void dispose() {
 		if (!trackers.isEmpty()) {
 			Collection<PackageTracker> savedPackageTrackers = new ArrayList<PackageTracker>(trackers);
 			trackers.clear();
@@ -115,18 +125,34 @@ public class PackageServer extends PackageServerParent
 				tracker.dispose();
 			}
 		}
-		if (typeServers != null) {
-			Collection<TypeServer> savedTypeServers = new ArrayList<TypeServer>(typeServers.values());
-			typeServers.clear();
+		Map<String, TypeServer> typeServers2 = typeServers;
+		if (typeServers2 != null) {
+			Collection<TypeServer> savedTypeServers = new ArrayList<TypeServer>(typeServers2.values());
+			typeServers2.clear();
 			for (TypeServer typeServer : savedTypeServers) {
 				typeServer.dispose();
 			}
 			typeServers = null;
 		}
-		super.dispose();
-		packageServerParent.disposedPackageServer(this);
+		Map<String, PackageServer> packageServers2 = packageServers;
+		if (packageServers2 != null) {
+			Collection<PackageServer> savedPackageServers = new ArrayList<PackageServer>(packageServers2.values());
+			packageServers2.clear();
+			for (PackageServer packageServer : savedPackageServers) {
+				packageServer.dispose();
+			}
+			packageServers = null;
+		}
 	}
 	
+	public void disposedPackageServer(@NonNull PackageServer packageServer) {
+		Map<String, PackageServer> packageServers2 = packageServers;
+		if (packageServers2 != null) {
+			packageServers2.remove(packageServer.getName());
+		}
+		getPackageManager().disposedPackageServer(packageServer.getNsURI());
+	}
+
 	void disposedPackageTracker(@NonNull PackageTracker packageTracker) {
 		trackers.remove(packageTracker);
 		setPrimaryPackage();
@@ -137,52 +163,105 @@ public class PackageServer extends PackageServerParent
 	}
 
 	void disposedTypeServer(@NonNull TypeServer typeServer) {
-		if (typeServers != null) {
-			typeServers.remove(typeServer.getName());
+		Map<String, TypeServer> typeServers2 = typeServers;
+		if (typeServers2 != null) {
+			typeServers2.remove(typeServer.getName());
 		}
 	}
 	
 	public @NonNull PivotReflectivePackage getExecutorPackage() {
-		if (executorPackage == null) {
-			executorPackage = new PivotReflectivePackage(getMetaModelManager(), getPrimaryPackage());
+		PivotReflectivePackage executorPackage2 = executorPackage;
+		if (executorPackage2 == null) {
+			executorPackage2 = executorPackage = new PivotReflectivePackage(getMetaModelManager(), getPrimaryPackage());
 		}
-		@SuppressWarnings("null")
-		@NonNull PivotReflectivePackage executorPackage2 = executorPackage;
 		return executorPackage2;
 	}
 
-	public Type getMemberType(String typeName) {
-		if (typeServers == null) {
-			initMemberTypes();
+	public @Nullable org.eclipse.ocl.examples.pivot.Package getMemberPackage(@NonNull String memberPackageName) {
+		Map<String, PackageServer> packageServers2 = packageServers;
+		if (packageServers2 == null) {
+			return null;
 		}
-		TypeServer typeServer = typeServers.get(typeName);
+		PackageServer memberPackageServer = packageServers2.get(memberPackageName);
+		if (memberPackageServer == null) {
+			return null;
+		}
+		return memberPackageServer.getPrimaryPackage();
+	}
+
+	public @NonNull PackageServer getMemberPackageServer(@NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+		Map<String, PackageServer> packageServers2 = packageServers;
+		if (packageServers2 == null) {
+			packageServers2 = packageServers = new HashMap<String, PackageServer>();
+		}
+		String name = pivotPackage.getName();
+		if (name == null) {
+			throw new IllegalStateException("Unnamed package");
+		}
+		PackageServer packageServer = packageServers2.get(name);
+		if (packageServer == null) {
+			String nsURI = pivotPackage.getNsURI();
+			packageServer = new NestedPackageServer(this, name, nsURI);
+			packageServers2.put(name, packageServer);
+			if (nsURI != null) {
+				getPackageManager().addPackageServer(packageServer);
+			}
+		}
+		return packageServer;
+	}
+
+	public @Nullable PackageServer getMemberPackageServer(@NonNull String name) {
+		Map<String, PackageServer> packageServers2 = packageServers;
+		return packageServers2 != null ? packageServers2.get(name) : null;
+	}
+
+	public @NonNull Iterable<Package> getMemberPackages() {
+		Map<String, PackageServer> packageServers2 = packageServers;
+		if (packageServers2 == null) {
+			@SuppressWarnings("null")
+			@NonNull Iterable<Package> emptyList = Collections.emptyList();
+			return emptyList;
+		}
+		else {
+			@SuppressWarnings("null")
+			@NonNull Iterable<Package> transform = Iterables.transform(packageServers2.values(), PackageServer.server2package);
+			return transform;
+		}
+	}
+
+	public Type getMemberType(String typeName) {
+		Map<String, TypeServer> typeServers2 = typeServers;
+		if (typeServers2 == null) {
+			typeServers2 = initMemberTypes();
+		}
+		TypeServer typeServer = typeServers2.get(typeName);
 		return typeServer != null ? typeServer.getPrimaryType() : null;
 	}
 
 	public Iterable<Type> getMemberTypes() {
-		if (typeServers == null) {
-			initMemberTypes();
+		Map<String, TypeServer> typeServers2 = typeServers;
+		if (typeServers2 == null) {
+			typeServers2 = initMemberTypes();
 		}
-		return Iterables.transform(typeServers.values(), TypeServer.server2type);
+		return Iterables.transform(typeServers2.values(), TypeServer.server2type);
 	}
 
-	@SuppressWarnings("null")
+	public @NonNull MetaModelManager getMetaModelManager() {
+		return getPackageManager().getMetaModelManager();
+	}
+
 	public @NonNull String getName() {
 		return name;
 	}
 
-	@SuppressWarnings("null")
-	public @NonNull String getNsURI() {
+	public @Nullable String getNsURI() {
 		return nsURI;
 	}
 
-	@SuppressWarnings("null")
-	@Override
 	public final @NonNull PackageManager getPackageManager() {
 		return packageManager;
 	}
 
-	@Override
 	public @NonNull PackageTracker getPackageTracker(@NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
 		for (PackageTracker packageTracker : trackers) {
 			if (packageTracker.getTarget() == pivotPackage) {
@@ -190,6 +269,15 @@ public class PackageServer extends PackageServerParent
 			}
 		}
 		return addTrackedPackage(pivotPackage);
+	}
+
+	@NonNull PackageServerParent getParentPackageServer(@NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+		org.eclipse.ocl.examples.pivot.Package pivotPackageParent = pivotPackage.getNestingPackage();
+		if (pivotPackageParent == null) {
+			return this;
+		}
+		PackageTracker parentTracker = getPackageTracker(pivotPackageParent);
+		return parentTracker.getPackageServer();
 	}
 
 	/**
@@ -209,18 +297,19 @@ public class PackageServer extends PackageServerParent
 	}
 
 	@NonNull TypeTracker getTypeTracker(@NonNull Type pivotType) {
-		if (typeServers == null) {
-			initMemberTypes();
+		Map<String, TypeServer> typeServers2 = typeServers;
+		if (typeServers2 == null) {
+			typeServers2 = initMemberTypes();
 		}
 		String name = pivotType.getName();
 		if (name == null) {
 			throw new IllegalStateException("Unnamed type");
 		}
-		TypeServer typeServer = typeServers.get(name);
+		TypeServer typeServer = typeServers2.get(name);
 		if (typeServer == null) {
 			typeServer = new TypeServer(this, name);
 			if (pivotType.getUnspecializedElement() == null) {
-				typeServers.put(name, typeServer);
+				typeServers2.put(name, typeServer);
 			}
 		}
 		return typeServer.getTypeTracker(pivotType);
@@ -234,13 +323,15 @@ public class PackageServer extends PackageServerParent
 		}
 	}		
 	
-	private void initMemberTypes() {
-		if (typeServers == null) {
-			typeServers = new HashMap<String, TypeServer>();
+	private @NonNull Map<String, TypeServer> initMemberTypes() {
+		Map<String, TypeServer> typeServers2 = typeServers;
+		if (typeServers2 == null) {
+			typeServers2 = typeServers = new HashMap<String, TypeServer>();
 			for (PackageTracker packageTracker : trackers) {
 				initMemberTypes(packageTracker.getTarget());
 			}
 		}
+		return typeServers2;
 	}
 
 	private void initMemberTypes(@NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
@@ -250,6 +341,13 @@ public class PackageServer extends PackageServerParent
 			}
 		}
 	}		
+
+	void removedMemberPackage(@NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+		PackageTracker packageTracker = getPackageManager().findPackageTracker(pivotPackage);
+		if (packageTracker != null) {
+			packageTracker.dispose();
+		}
+	}
 
 	void removedMemberType(@NonNull Type pivotType) {
 		if (typeServers != null) {

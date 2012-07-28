@@ -64,24 +64,24 @@ public class TypeServer
 		}
 	};
 
-	protected final PackageServer packageServer;
-	protected final String name;
-	protected final PackageManager packageManager;
+	protected final @NonNull PackageServer packageServer;
+	protected final @NonNull String name;
+	protected final @NonNull PackageManager packageManager;
 	
-	private final List<TypeTracker> trackers = new ArrayList<TypeTracker>();
+	private final @NonNull List<TypeTracker> trackers = new ArrayList<TypeTracker>();
 
 	/**
 	 * Lazily created map from operation name to the list of overloaded operation which is a list of operations to be treated as merged.
 	 * The inner list of operations have the same name and signature. The outer list have the same name, but distinct signatures. 
 	 */
-	private Map<String, List<List<Operation>>> operation2operations = null;
+	private @Nullable Map<String, List<List<Operation>>> operation2operations = null;
 
 	/**
 	 * Lazily created map from property name to the list of properties to be treated as merged. 
 	 */
-	private Map<String, List<Property>> property2properties = null;
+	private @Nullable Map<String, List<Property>> property2properties = null;
 	
-	private Type primaryType;
+	private @Nullable Type primaryType;
 	
 	/**
 	 * Compiled inheritance relationships used by compiled expressions.
@@ -91,7 +91,7 @@ public class TypeServer
 	/**
 	 * Map from first actual type to list of specialized types for further actual types. 
 	 */
-	private Map<ParameterableElement, List<WeakReference<Type>>> firstActual2specializations = null;
+	private @Nullable Map<ParameterableElement, List<WeakReference<Type>>> firstActual2specializations = null;
 	
 	TypeServer(@NonNull PackageServer packageServer, @NonNull String name) {
 		this.packageServer = packageServer;
@@ -100,12 +100,13 @@ public class TypeServer
 	}
 
 	void addedMemberOperation(@NonNull Operation pivotOperation) {
-		if (operation2operations != null) {
+		Map<String, List<List<Operation>>> operation2operations2 = operation2operations;
+		if (operation2operations2 != null) {
 			String operationName = pivotOperation.getName();
-			List<List<Operation>> overloads = operation2operations.get(operationName);
+			List<List<Operation>> overloads = operation2operations2.get(operationName);
 			if (overloads == null) {
 				overloads = new ArrayList<List<Operation>>();
-				operation2operations.put(operationName, overloads);
+				operation2operations2.put(operationName, overloads);
 			}
 			List<Operation> overload = findOverload(overloads, pivotOperation);
 			if (overload == null) {
@@ -119,12 +120,13 @@ public class TypeServer
 	}
 
 	void addedMemberProperty(@NonNull Property pivotProperty) {
-		if (property2properties != null) {
+		Map<String, List<Property>> property2properties2 = property2properties;
+		if (property2properties2 != null) {
 			String propertyName = pivotProperty.getName();
-			List<Property> properties = property2properties.get(propertyName);
+			List<Property> properties = property2properties2.get(propertyName);
 			if (properties == null) {
 				properties = new ArrayList<Property>();
-				property2properties.put(propertyName, properties);
+				property2properties2.put(propertyName, properties);
 			}
 			if (!properties.contains(pivotProperty)) {
 				properties.add(pivotProperty);
@@ -140,7 +142,7 @@ public class TypeServer
 	}
 	
 	protected @NonNull Type createSpecialization(@NonNull List<? extends ParameterableElement> templateArguments) {
-		Type unspecializedType = primaryType;
+		Type unspecializedType = getPrimaryType();
 		String typeName = unspecializedType.getName();
 		TemplateSignature templateSignature = unspecializedType.getOwnedTemplateSignature();
 		List<TemplateParameter> templateParameters = templateSignature.getOwnedParameter();
@@ -192,12 +194,14 @@ public class TypeServer
 				typeTracker.dispose();
 			}
 		}
-		if (property2properties != null) {
-			property2properties.clear();
+		Map<String, List<Property>> property2properties2 = property2properties;
+		if (property2properties2 != null) {
+			property2properties2.clear();
 			property2properties = null;
 		}
-		if (operation2operations != null) {
-			operation2operations.clear();
+		Map<String, List<List<Operation>>> operation2operations2 = operation2operations;
+		if (operation2operations2 != null) {
+			operation2operations2.clear();
 			operation2operations = null;
 		}
 		if (executorType != null) {
@@ -291,17 +295,18 @@ public class TypeServer
 	}
 
 	public synchronized Type findSpecializedType(@NonNull List<? extends ParameterableElement> templateArguments) {
-		TemplateSignature templateSignature = primaryType.getOwnedTemplateSignature();
+		TemplateSignature templateSignature = getPrimaryType().getOwnedTemplateSignature();
 		List<TemplateParameter> templateParameters = templateSignature.getParameter();
 		int iMax = templateParameters.size();
 		if (templateArguments.size() != iMax) {
 			return null;
 		}
-		if (firstActual2specializations == null) {
+		Map<ParameterableElement, List<WeakReference<Type>>> firstActual2specializations2 = firstActual2specializations;
+		if (firstActual2specializations2 == null) {
 			return null;
 		}
 		ParameterableElement firstTemplateArgument = templateArguments.get(0);
-		List<WeakReference<Type>> partialSpecializations = firstActual2specializations.get(firstTemplateArgument);
+		List<WeakReference<Type>> partialSpecializations = firstActual2specializations2.get(firstTemplateArgument);
 		if (partialSpecializations == null) {
 			return null;
 		}
@@ -319,11 +324,12 @@ public class TypeServer
 	}
 
 	public @Nullable Operation getMemberOperation(@NonNull Operation pivotOperation) {
-		if (operation2operations == null) {
-			initMemberOperations();
+		Map<String, List<List<Operation>>> operation2operations2 = operation2operations;
+		if (operation2operations2 == null) {
+			operation2operations2 = initMemberOperations();
 		}
 		String operationName = pivotOperation.getName();
-		List<List<Operation>> overloads = operation2operations.get(operationName);
+		List<List<Operation>> overloads = operation2operations2.get(operationName);
 		if (overloads == null) {
 			return null;
 		}
@@ -335,11 +341,12 @@ public class TypeServer
 	}
 
 	public @Nullable Iterable<Operation> getMemberOperations(@NonNull Operation pivotOperation) {
-		if (operation2operations == null) {
-			initMemberOperations();
+		Map<String, List<List<Operation>>> operation2operations2 = operation2operations;
+		if (operation2operations2 == null) {
+			operation2operations2 = initMemberOperations();
 		}
 		String operationName = pivotOperation.getName();
-		List<List<Operation>> overloads = operation2operations.get(operationName);
+		List<List<Operation>> overloads = operation2operations2.get(operationName);
 		if (overloads == null) {
 			return null;
 		}
@@ -347,30 +354,30 @@ public class TypeServer
 	}
 
 	public @Nullable Iterable<Property> getMemberProperties(@NonNull Property pivotProperty) {
-		if (property2properties == null) {
-			initMemberProperties();
+		Map<String, List<Property>> property2properties2 = property2properties;
+		if (property2properties2 == null) {
+			property2properties2 = initMemberProperties();
 		}
 		String propertyName = pivotProperty.getName();
-		return property2properties.get(propertyName);
+		return property2properties2.get(propertyName);
 	}
 
 	public @Nullable Property getMemberProperty(@NonNull String propertyName) {
-		if (property2properties == null) {
-			initMemberProperties();
+		Map<String, List<Property>> property2properties2 = property2properties;
+		if (property2properties2 == null) {
+			property2properties2 = initMemberProperties();
 		}
-		List<Property> properties = property2properties.get(propertyName);
+		List<Property> properties = property2properties2.get(propertyName);
 		if (properties == null) {
 			return null;
 		}
 		return properties.isEmpty() ? null : properties.get(0);
 	}
 
-	@SuppressWarnings("null")
 	public @NonNull String getName() {
 		return name;
 	}
 
-	@SuppressWarnings("null")
 	public final @NonNull PackageManager getPackageManager() {
 		return packageManager;
 	}
@@ -384,20 +391,21 @@ public class TypeServer
 	}
 
 	public synchronized @NonNull Type getSpecializedType(@NonNull List<? extends ParameterableElement> templateArguments) {
-		TemplateSignature templateSignature = primaryType.getOwnedTemplateSignature();
+		TemplateSignature templateSignature = getPrimaryType().getOwnedTemplateSignature();
 		List<TemplateParameter> templateParameters = templateSignature.getParameter();
 		int iMax = templateParameters.size();
 		if (templateArguments.size() != iMax) {
 			throw new IllegalArgumentException("Incompatible template argument count");
 		}
-		if (firstActual2specializations == null) {
-			firstActual2specializations = new HashMap<ParameterableElement, List<WeakReference<Type>>>();
+		Map<ParameterableElement, List<WeakReference<Type>>> firstActual2specializations2 = firstActual2specializations;
+		if (firstActual2specializations2 == null) {
+			firstActual2specializations2 = firstActual2specializations = new HashMap<ParameterableElement, List<WeakReference<Type>>>();
 		}
 		ParameterableElement firstTemplateArgument = templateArguments.get(0);
-		List<WeakReference<Type>> partialSpecializations = firstActual2specializations.get(firstTemplateArgument);
+		List<WeakReference<Type>> partialSpecializations = firstActual2specializations2.get(firstTemplateArgument);
 		if (partialSpecializations == null) {
 			partialSpecializations = new ArrayList<WeakReference<Type>>();
-			firstActual2specializations.put(firstTemplateArgument, partialSpecializations);
+			firstActual2specializations2.put(firstTemplateArgument, partialSpecializations);
 		}
 		Type specializedType = findSpecialization(partialSpecializations, templateArguments);
 		if (specializedType == null) {
@@ -438,16 +446,18 @@ public class TypeServer
 		return trackers;
 	}
 
-	private void initMemberOperations() {
-		if (operation2operations == null) {
-			operation2operations = new HashMap<String, List<List<Operation>>>();
+	private @NonNull Map<String, List<List<Operation>>> initMemberOperations() {
+		Map<String, List<List<Operation>>> operation2operations2 = operation2operations;
+		if (operation2operations2 == null) {
+			operation2operations2 = operation2operations = new HashMap<String, List<List<Operation>>>();
 			for (TypeTracker typeTracker : trackers) {
 				initMemberOperations(typeTracker.getTarget());
 			}
 		}	
+		return operation2operations2;
 	}
 
-	private  void initMemberOperations(@NonNull Type type) {
+	private void initMemberOperations(@NonNull Type type) {
 		for (Operation pivotOperation : type.getOwnedOperation()) {
 			if (pivotOperation != null) {
 				addedMemberOperation(pivotOperation);
@@ -455,16 +465,18 @@ public class TypeServer
 		}
 	}
 
-	private void initMemberProperties() {
-		if (property2properties == null) {
-			property2properties = new HashMap<String, List<Property>>();
+	private @NonNull Map<String, List<Property>> initMemberProperties() {
+		Map<String, List<Property>> property2properties2 = property2properties;
+		if (property2properties2 == null) {
+			property2properties2 = property2properties = new HashMap<String, List<Property>>();
 			for (TypeTracker typeTracker : trackers) {
 				initMemberProperties(typeTracker.getTarget());
 			}
 		}	
+		return property2properties2;
 	}
 
-	private  void initMemberProperties(@NonNull Type type) {
+	private void initMemberProperties(@NonNull Type type) {
 		for (Property pivotProperty : type.getOwnedAttribute()) {
 			if (pivotProperty != null) {
 				addedMemberProperty(pivotProperty);
@@ -473,12 +485,13 @@ public class TypeServer
 	}
 
 	void removedMemberOperation(@NonNull Operation pivotOperation) {
-		if (operation2operations != null) {
+		Map<String, List<List<Operation>>> operation2operations2 = operation2operations;
+		if (operation2operations2 != null) {
 			String operationName = pivotOperation.getName();
-			List<List<Operation>> overloads = operation2operations.get(operationName);
+			List<List<Operation>> overloads = operation2operations2.get(operationName);
 			if (overloads == null) {
 				overloads = new ArrayList<List<Operation>>();
-				operation2operations.put(operationName, overloads);
+				operation2operations2.put(operationName, overloads);
 			}
 			List<Operation> overload = findOverload(overloads, pivotOperation);
 			if (overload != null) {
@@ -486,7 +499,7 @@ public class TypeServer
 				if (overload.isEmpty()) {
 					overloads.remove(overload);
 					if (overloads.isEmpty()) {
-						operation2operations.remove(operationName);
+						operation2operations2.remove(operationName);
 					}
 				}
 			}
@@ -494,13 +507,14 @@ public class TypeServer
 	}
 
 	void removedMemberProperty(@NonNull Property pivotProperty) {
-		if (property2properties != null) {
+		Map<String, List<Property>> property2properties2 = property2properties;
+		if (property2properties2 != null) {
 			String propertyName = pivotProperty.getName();
-			List<Property> properties = property2properties.get(propertyName);
+			List<Property> properties = property2properties2.get(propertyName);
 			if (properties != null) {
 				properties.remove(propertyName);
 				if (properties.isEmpty()) {
-					property2properties.remove(propertyName);
+					property2properties2.remove(propertyName);
 				}
 			}
 		}
@@ -523,7 +537,6 @@ public class TypeServer
 						superTemplateArgumentList.add(actualActual);
 					}
 				}
-				@SuppressWarnings("null")
 				@NonNull Type unspecializedSuperType = PivotUtil.getUnspecializedTemplateableElement(superType);
 				TypeServer superTypeServer = metaModelManager.getTypeServer(unspecializedSuperType);
 /*				List<ParameterableElement> superTemplateArgumentList = new ArrayList<ParameterableElement>();
