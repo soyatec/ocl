@@ -16,8 +16,6 @@
  */
 package org.eclipse.ocl.examples.domain.values.impl;
 
-import java.util.Collection;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
@@ -33,6 +31,14 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
 {    	
+	private static @NonNull OrderedSet<Value> createValue(@NonNull Iterable<? extends Value> elements) {
+		OrderedSet<Value> result = new OrderedSetImpl<Value>();
+		for (Value element : elements) {
+			result.add(element);
+		}
+		return result;
+	}
+
 	public static class Accumulator extends SparseOrderedSetValueImpl implements CollectionValue.Accumulator
 	{
 		public Accumulator(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type) {
@@ -53,8 +59,8 @@ public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
 		}
 	}
 
-	public SparseOrderedSetValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Collection<? extends Value> elements) {
-		super(valueFactory, type, new OrderedSetImpl<Value>(elements));
+	public SparseOrderedSetValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Iterable<? extends Value> elements) {
+		super(valueFactory, type, createValue(elements));
 	}
 
 	public SparseOrderedSetValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull OrderedSet<Value> elements) {

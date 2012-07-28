@@ -35,6 +35,6 @@ public class OclVoidAllInstancesOperation extends AbstractUnaryOperation
 	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		// OclVoid has a single instance: null
-		return valueFactory.createSetValue((DomainCollectionType)returnType, valueFactory.getNull());
+		return valueFactory.createSetValue((DomainCollectionType)returnType, (Value) valueFactory.getNull());
 	}
 }

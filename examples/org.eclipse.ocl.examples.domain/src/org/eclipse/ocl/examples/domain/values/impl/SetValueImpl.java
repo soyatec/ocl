@@ -59,6 +59,14 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 		return ValuesPackage.Literals.SET_VALUE;
 	}
 
+	private static @NonNull Set<Value> createValue(@NonNull Iterable<? extends Value> elements) {
+		Set<Value> result = new HashSet<Value>();
+		for (Value element : elements) {
+			result.add(element);
+		}
+		return result;
+	}
+
     public static @NonNull SetValue intersection(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull CollectionValue left, @NonNull CollectionValue right) throws InvalidValueException
     {
     	assert !left.isUndefined() && !right.isUndefined();
@@ -120,8 +128,8 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 		}
 	}
 
-	public SetValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Collection<? extends Value> elements) {
-		super(valueFactory, type, new HashSet<Value>(elements));
+	public SetValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Iterable<? extends Value> elements) {
+		super(valueFactory, type, createValue(elements));
 	}
 
 //	public SetValue(CollectionValue c) {

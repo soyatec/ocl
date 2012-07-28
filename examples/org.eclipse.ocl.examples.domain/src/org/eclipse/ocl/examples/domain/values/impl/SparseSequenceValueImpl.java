@@ -34,6 +34,14 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class SparseSequenceValueImpl extends SequenceValueImpl
 {
+	private static @NonNull List<Value> createValue(@NonNull Iterable<? extends Value> elements) {
+		List<Value> result = new ArrayList<Value>();
+		for (Value element : elements) {
+			result.add(element);
+		}
+		return result;
+	}
+
 	public static @NonNull SequenceValue union(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull CollectionValue left, @NonNull CollectionValue right) throws InvalidValueException {
     	assert !left.isUndefined() && !right.isUndefined();
 		Collection<Value> leftElements = left.asCollection();
@@ -84,8 +92,8 @@ public class SparseSequenceValueImpl extends SequenceValueImpl
 		}
 	}
 
-	public SparseSequenceValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Collection<? extends Value> elements) {
-		super(valueFactory, type, new ArrayList<Value>(elements));
+	public SparseSequenceValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Iterable<? extends Value> elements) {
+		super(valueFactory, type, createValue(elements));
 	}
 
 	public SparseSequenceValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull List<Value> elements) {

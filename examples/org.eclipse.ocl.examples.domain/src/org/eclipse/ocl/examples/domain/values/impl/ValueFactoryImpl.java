@@ -128,11 +128,11 @@ public abstract class ValueFactoryImpl implements ValueFactory
 		return new BagValueImpl(this, type, values);
 	}
 
-	public @NonNull BagValue createBagValue(@NonNull DomainCollectionType type, @NonNull Bag<? extends Value> values) {
+	public @NonNull BagValue createBagValue(@NonNull DomainCollectionType type, @NonNull Bag<Value> values) {
 		return new BagValueImpl(this, type, values);
 	}
 
-	public @NonNull BagValue createBagValue(@NonNull DomainCollectionType type, @NonNull Collection<? extends Value> values) {
+	public @NonNull BagValue createBagValue(@NonNull DomainCollectionType type, @NonNull Iterable<? extends Value> values) {
 		return new BagValueImpl(this, type, values);
 	}
 
@@ -323,11 +323,11 @@ public abstract class ValueFactoryImpl implements ValueFactory
 		return new SparseOrderedSetValueImpl(this, type, values);
 	}
 
-	public @NonNull OrderedSetValue createOrderedSetValue(@NonNull DomainCollectionType type, @NonNull OrderedSet<? extends Value> values) {
+	public @NonNull OrderedSetValue createOrderedSetValue(@NonNull DomainCollectionType type, @NonNull OrderedSet<Value> values) {
 		return new SparseOrderedSetValueImpl(this, type, values);
 	}
 
-	public @NonNull OrderedSetValue createOrderedSetValue(@NonNull DomainCollectionType type, @NonNull Collection<? extends Value> values) {
+	public @NonNull OrderedSetValue createOrderedSetValue(@NonNull DomainCollectionType type, @NonNull Iterable<? extends Value> values) {
 		return new SparseOrderedSetValueImpl(this, type, values);
 	}
 
@@ -379,11 +379,11 @@ public abstract class ValueFactoryImpl implements ValueFactory
 		return new SparseSequenceValueImpl(this, type, values);
 	}
 
-	public @NonNull SequenceValue createSequenceValue(@NonNull DomainCollectionType type, @NonNull List<? extends Value> values) {
+	public @NonNull SequenceValue createSequenceValue(@NonNull DomainCollectionType type, @NonNull List<Value> values) {
 		return new SparseSequenceValueImpl(this, type, values);
 	}
 
-	public @NonNull SequenceValue createSequenceValue(@NonNull DomainCollectionType type, @NonNull Collection<? extends Value> values) {
+	public @NonNull SequenceValue createSequenceValue(@NonNull DomainCollectionType type, @NonNull Iterable<? extends Value> values) {
 		return new SparseSequenceValueImpl(this, type, values);
 	}
 
@@ -419,11 +419,11 @@ public abstract class ValueFactoryImpl implements ValueFactory
 		return new SetValueImpl(this, type, values);
 	}
 
-	public @NonNull SetValue createSetValue(@NonNull DomainCollectionType type, @NonNull Set<? extends Value> values) {
+	public @NonNull SetValue createSetValue(@NonNull DomainCollectionType type, @NonNull Set<Value> values) {
 		return new SetValueImpl(this, type, values);
 	}
 
-	public @NonNull SetValue createSetValue(@NonNull DomainCollectionType type, @NonNull Collection<? extends Value> values) {
+	public @NonNull SetValue createSetValue(@NonNull DomainCollectionType type, @NonNull Iterable<? extends Value> values) {
 		return new SetValueImpl(this, type, values);
 	}
 

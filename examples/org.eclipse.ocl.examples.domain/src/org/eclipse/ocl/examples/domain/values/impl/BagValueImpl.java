@@ -54,6 +54,14 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 		return ValuesPackage.Literals.BAG_VALUE;
 	}
 
+	private static @NonNull Bag<Value> createValue(@NonNull Iterable<? extends Value> elements) {
+		Bag<Value> result = new BagImpl<Value>();
+		for (Value element : elements) {
+			result.add(element);
+		}
+		return result;
+	}
+
 	public static @NonNull BagValue intersection(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull CollectionValue left, @NonNull CollectionValue right) throws InvalidValueException
     {
     	assert !left.isUndefined() && !right.isUndefined();
@@ -117,8 +125,8 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 		}
 	}
 
-	public BagValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Collection<? extends Value> elements) {
-		super(valueFactory, type, new BagImpl<Value>(elements));
+	public BagValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Iterable<? extends Value> elements) {
+		super(valueFactory, type, createValue(elements));
 	}
 
 //	public BagValue(CollectionValue c) {

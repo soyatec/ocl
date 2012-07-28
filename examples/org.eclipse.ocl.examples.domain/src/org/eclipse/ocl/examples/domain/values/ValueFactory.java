@@ -49,8 +49,8 @@ public interface ValueFactory
 	@NonNull BagValue createBagOf(Object... objects);
 	@NonNull BagValue createBagOf(@NonNull Iterable<?> objects);
 	@NonNull BagValue createBagValue(@NonNull DomainCollectionType type, Value... values);
-	@NonNull BagValue createBagValue(@NonNull DomainCollectionType type, @NonNull Bag<? extends Value> values);
-	@NonNull BagValue createBagValue(@NonNull DomainCollectionType type, @NonNull Collection<? extends Value> values);
+	@NonNull BagValue createBagValue(@NonNull DomainCollectionType type, @NonNull Bag<Value> values);
+	@NonNull BagValue createBagValue(@NonNull DomainCollectionType type, @NonNull Iterable<? extends Value> values);
 	@NonNull BagValue createBagValue(Value... values);
 
 	@NonNull BooleanValue.Accumulator createBooleanAccumulatorValue();
@@ -85,8 +85,8 @@ public interface ValueFactory
 	@NonNull OrderedSetValue createOrderedSetOf(@NonNull Iterable<?> objects);
 	@NonNull OrderedSetValue createOrderedSetRange(@NonNull DomainCollectionType type, @NonNull IntegerRange range);
 	@NonNull OrderedSetValue createOrderedSetValue(@NonNull DomainCollectionType type, Value... values);
-	@NonNull OrderedSetValue createOrderedSetValue(@NonNull DomainCollectionType type, @NonNull OrderedSet<? extends Value> values);
-	@NonNull OrderedSetValue createOrderedSetValue(@NonNull DomainCollectionType type, @NonNull Collection<? extends Value> values);
+	@NonNull OrderedSetValue createOrderedSetValue(@NonNull DomainCollectionType type, @NonNull OrderedSet<Value> values);
+	@NonNull OrderedSetValue createOrderedSetValue(@NonNull DomainCollectionType type, @NonNull Iterable<? extends Value> values);
 	@NonNull OrderedSetValue createOrderedSetValue(Value... value);
 
 	@NonNull IntegerRange createRange(@NonNull IntegerValue firstInteger, @NonNull IntegerValue lastInteger) throws InvalidValueException;
@@ -97,15 +97,15 @@ public interface ValueFactory
 	@NonNull SequenceValue createSequenceOf(@NonNull Iterable<?> objects);
 	@NonNull SequenceValue createSequenceRange(@NonNull DomainCollectionType type, @NonNull IntegerRange range);
 	@NonNull SequenceValue createSequenceValue(@NonNull DomainCollectionType type, Value... values);
-	@NonNull SequenceValue createSequenceValue(@NonNull DomainCollectionType type, @NonNull List<? extends Value> values);
-	@NonNull SequenceValue createSequenceValue(@NonNull DomainCollectionType type, @NonNull Collection<? extends Value> values);
+	@NonNull SequenceValue createSequenceValue(@NonNull DomainCollectionType type, @NonNull List<Value> values);
+	@NonNull SequenceValue createSequenceValue(@NonNull DomainCollectionType type, @NonNull Iterable<? extends Value> values);
 	@NonNull SequenceValue createSequenceValue(Value... value);
 	
 	@NonNull SetValue createSetOf(Object... objects);
 	@NonNull SetValue createSetOf(@NonNull Iterable<?> objects);
 	@NonNull SetValue createSetValue(@NonNull DomainCollectionType type, Value... values);
-	@NonNull SetValue createSetValue(@NonNull DomainCollectionType type, @NonNull Set<? extends Value> values);
-	@NonNull SetValue createSetValue(@NonNull DomainCollectionType type, @NonNull Collection<? extends Value> values);
+	@NonNull SetValue createSetValue(@NonNull DomainCollectionType type, @NonNull Set<Value> values);
+	@NonNull SetValue createSetValue(@NonNull DomainCollectionType type, @NonNull Iterable<? extends Value> values);
 	@NonNull SetValue createSetValue(Value... value);
 	
 	@NonNull TupleValue createTupleValue(@NonNull DomainTupleType type, @NonNull Map<? extends DomainTypedElement, Value> values);
