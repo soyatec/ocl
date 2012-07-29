@@ -1948,6 +1948,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 	
 	public @NonNull TypeServer getTypeServer(@NonNull Type pivotType) {
+		if (!libraryLoadInProgress && pivotMetaModel == null) {
+			getPivotMetaModel();
+		}
 		return packageManager.getTypeServer(pivotType);
 	}
 

@@ -26,11 +26,22 @@ import java.util.Map;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.library.executor.ReflectivePackage;
+import org.eclipse.ocl.examples.pivot.AnyType;
+import org.eclipse.ocl.examples.pivot.Enumeration;
+import org.eclipse.ocl.examples.pivot.InvalidType;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.executor.PivotReflectivePackage;
+import org.eclipse.ocl.examples.pivot.VoidType;
+import org.eclipse.ocl.examples.pivot.executor.PivotReflectiveAnyType;
+import org.eclipse.ocl.examples.pivot.executor.PivotReflectiveEnumerationType;
+import org.eclipse.ocl.examples.pivot.executor.PivotReflectiveInvalidType;
+import org.eclipse.ocl.examples.pivot.executor.PivotReflectiveType;
+import org.eclipse.ocl.examples.pivot.executor.PivotReflectiveVoidType;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -39,7 +50,7 @@ import com.google.common.collect.Iterables;
  * A PackageServer adapts the primary Package to coordinate the coherent behavior of a primary and one or more
  * secondary Packages as required for Complete OCL package extension.
  */
-public abstract class PackageServer implements PackageServerParent
+public abstract class PackageServer extends ReflectivePackage implements PackageServerParent
 {
 	public static Function<PackageServer, org.eclipse.ocl.examples.pivot.Package> server2package = new Function<PackageServer, org.eclipse.ocl.examples.pivot.Package>()
 	{
@@ -53,15 +64,10 @@ public abstract class PackageServer implements PackageServerParent
 	 */
 	private @Nullable Map<String, PackageServer> packageServers = null;
 
-	protected final @NonNull String name;	
-	protected final @Nullable String nsURI;
-
 	protected final @NonNull PackageManager packageManager;
 	
-	private org.eclipse.ocl.examples.pivot.Package primaryPackage;
-	
-	
-	
+	private @Nullable org.eclipse.ocl.examples.pivot.Package primaryPackage;
+		
 	/**
 	 * List of all package extensions including this.
 	 */
@@ -71,17 +77,10 @@ public abstract class PackageServer implements PackageServerParent
 	 * Lazily created map of nested class-name to multi-class server.
 	 */
 	private @Nullable Map<String, TypeServer> typeServers = null;
-
-	/**
-	 * The Executor package containing the dispatch table representation.
-	 */
-	private @Nullable PivotReflectivePackage executorPackage = null;
 	
 	protected PackageServer(@NonNull PackageManager packageManager, @NonNull String name, @Nullable String nsURI) {
-//		this.packageServerParent = packageServerParent;
+		super(name, nsURI);
 		this.packageManager = packageManager;
-		this.name = name;
-		this.nsURI = nsURI;
 	}
 	
 	void addedMemberType(@NonNull Type pivotType) {
@@ -117,6 +116,25 @@ public abstract class PackageServer implements PackageServerParent
 		packageServer.addTrackedPackage(pivotPackage);
 	}
 
+	@Override
+	protected @NonNull PivotReflectiveType createExecutorType(@NonNull DomainType domainType) {
+		if (domainType instanceof InvalidType) {
+			return new PivotReflectiveInvalidType(this, (InvalidType)domainType);
+		}
+		else if (domainType instanceof VoidType) {
+			return new PivotReflectiveVoidType(this, (VoidType)domainType);
+		}
+		else if (domainType instanceof AnyType) {
+			return new PivotReflectiveAnyType(this, (AnyType)domainType);
+		}
+		else if (domainType instanceof Enumeration) {
+			return new PivotReflectiveEnumerationType(this, (Enumeration)domainType);
+		}
+		else {
+			return new PivotReflectiveType(this, (Type) domainType);
+		}
+	}
+
 	protected void dispose() {
 		if (!trackers.isEmpty()) {
 			Collection<PackageTracker> savedPackageTrackers = new ArrayList<PackageTracker>(trackers);
@@ -150,7 +168,7 @@ public abstract class PackageServer implements PackageServerParent
 		if (packageServers2 != null) {
 			packageServers2.remove(packageServer.getName());
 		}
-		getPackageManager().disposedPackageServer(packageServer.getNsURI());
+		packageManager.disposedPackageServer(packageServer.getNsURI());
 	}
 
 	void disposedPackageTracker(@NonNull PackageTracker packageTracker) {
@@ -168,13 +186,11 @@ public abstract class PackageServer implements PackageServerParent
 			typeServers2.remove(typeServer.getName());
 		}
 	}
-	
-	public @NonNull PivotReflectivePackage getExecutorPackage() {
-		PivotReflectivePackage executorPackage2 = executorPackage;
-		if (executorPackage2 == null) {
-			executorPackage2 = executorPackage = new PivotReflectivePackage(getMetaModelManager(), getPrimaryPackage());
-		}
-		return executorPackage2;
+
+	@Override
+	protected @NonNull Iterable<? extends DomainType> getDomainTypes() {
+//		return packageManager.getMetaModelManager().getLocalClasses(getPrimaryPackage());
+		return getMemberTypes();
 	}
 
 	public @Nullable org.eclipse.ocl.examples.pivot.Package getMemberPackage(@NonNull String memberPackageName) {
@@ -204,7 +220,7 @@ public abstract class PackageServer implements PackageServerParent
 			packageServer = new NestedPackageServer(this, name, nsURI);
 			packageServers2.put(name, packageServer);
 			if (nsURI != null) {
-				getPackageManager().addPackageServer(packageServer);
+				packageManager.addPackageServer(packageServer);
 			}
 		}
 		return packageServer;
@@ -238,24 +254,18 @@ public abstract class PackageServer implements PackageServerParent
 		return typeServer != null ? typeServer.getPrimaryType() : null;
 	}
 
-	public Iterable<Type> getMemberTypes() {
+	public @NonNull Iterable<Type> getMemberTypes() {
 		Map<String, TypeServer> typeServers2 = typeServers;
 		if (typeServers2 == null) {
 			typeServers2 = initMemberTypes();
 		}
-		return Iterables.transform(typeServers2.values(), TypeServer.server2type);
+		@SuppressWarnings("null")
+		@NonNull Iterable<Type> transform = Iterables.transform(typeServers2.values(), TypeServer.server2type);
+		return transform;
 	}
 
 	public @NonNull MetaModelManager getMetaModelManager() {
-		return getPackageManager().getMetaModelManager();
-	}
-
-	public @NonNull String getName() {
-		return name;
-	}
-
-	public @Nullable String getNsURI() {
-		return nsURI;
+		return packageManager.getMetaModelManager();
 	}
 
 	public final @NonNull PackageManager getPackageManager() {
@@ -289,6 +299,11 @@ public abstract class PackageServer implements PackageServerParent
 			throw new IllegalStateException("Missing primary package");
 		}
 		return thePrimaryPackage;
+	}
+
+	@Override
+	protected @NonNull DomainStandardLibrary getStandardLibrary() {
+		return packageManager.getMetaModelManager();
 	}
 
 	@SuppressWarnings("null")
@@ -343,7 +358,7 @@ public abstract class PackageServer implements PackageServerParent
 	}		
 
 	void removedMemberPackage(@NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
-		PackageTracker packageTracker = getPackageManager().findPackageTracker(pivotPackage);
+		PackageTracker packageTracker = packageManager.findPackageTracker(pivotPackage);
 		if (packageTracker != null) {
 			packageTracker.dispose();
 		}

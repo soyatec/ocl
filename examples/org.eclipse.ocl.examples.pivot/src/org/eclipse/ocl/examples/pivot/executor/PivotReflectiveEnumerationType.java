@@ -29,13 +29,14 @@ import org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumerationLiteral;
 import org.eclipse.ocl.examples.library.executor.ExecutorEnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
+import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 
 public class PivotReflectiveEnumerationType extends PivotReflectiveType implements DomainEnumeration
 {
 	private Map<String, DomainEnumerationLiteral> literals = new HashMap<String, DomainEnumerationLiteral>();
 	
-	public PivotReflectiveEnumerationType(@NonNull PivotReflectivePackage executorPackage, @NonNull Enumeration type) {
-		super(executorPackage, type);
+	public PivotReflectiveEnumerationType(@NonNull PackageServer packageServer, @NonNull Enumeration type) {
+		super(packageServer, type);
 		int index = 0;
 		EObject eTarget = type.getETarget();
 		if (eTarget instanceof EEnum) {

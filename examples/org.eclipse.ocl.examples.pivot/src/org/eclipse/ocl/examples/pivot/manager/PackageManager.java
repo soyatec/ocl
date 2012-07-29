@@ -186,7 +186,7 @@ public class PackageManager implements PackageServerParent
 		if (packageServers2 != null) {
 			packageServers2.remove(packageServer.getName());
 		}
-		getPackageManager().disposedPackageServer(packageServer.getNsURI());
+		disposedPackageServer(packageServer.getNsURI());
 	}
 
 	void disposedPackageServer(@Nullable String nsURI) {
@@ -254,7 +254,7 @@ public class PackageManager implements PackageServerParent
 			packageServer = new RootPackageServer(this, name, nsURI);
 			packageServers2.put(name, packageServer);
 			if (nsURI != null) {
-				getPackageManager().addPackageServer(packageServer);
+				addPackageServer(packageServer);
 			}
 		}
 		return packageServer;
@@ -286,10 +286,6 @@ public class PackageManager implements PackageServerParent
 	public @Nullable org.eclipse.ocl.examples.pivot.Package getPackageByURI(@NonNull String nsURI) {
 		PackageServer packageServer = uri2package.get(nsURI);
 		return packageServer != null ? packageServer.getPrimaryPackage() : null;
-	}
-
-	public final @NonNull PackageManager getPackageManager() {
-		return this;
 	}
 
 	public @NonNull PackageServer getPackageServer(@NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
@@ -391,7 +387,7 @@ public class PackageManager implements PackageServerParent
 	}
 
 	void removedMemberPackage(@NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
-		PackageTracker packageTracker = getPackageManager().findPackageTracker(pivotPackage);
+		PackageTracker packageTracker = findPackageTracker(pivotPackage);
 		if (packageTracker != null) {
 			packageTracker.dispose();
 		}

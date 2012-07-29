@@ -19,11 +19,12 @@ package org.eclipse.ocl.examples.pivot.executor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.pivot.InvalidType;
+import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 
 public class PivotReflectiveInvalidType extends PivotReflectiveType
 {
-	public PivotReflectiveInvalidType(@NonNull PivotReflectivePackage executorPackage, @NonNull InvalidType type) {
-		super(executorPackage, type);
+	public PivotReflectiveInvalidType(@NonNull PackageServer packageServer, @NonNull InvalidType type) {
+		super(packageServer, type);
 	}
 
 	@Override

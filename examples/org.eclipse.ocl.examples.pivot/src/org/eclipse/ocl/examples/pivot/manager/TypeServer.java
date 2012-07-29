@@ -42,7 +42,6 @@ import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.executor.PivotReflectivePackage;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 import com.google.common.base.Function;
@@ -314,12 +313,10 @@ public class TypeServer
 	}
 
 	public @NonNull ReflectiveType getExecutorType() {
-		if (executorType == null) {
-			PivotReflectivePackage executorPackage = packageServer.getExecutorPackage();
-			executorType = executorPackage.getInheritance(DomainUtil.nonNullState(primaryType));
+		ReflectiveType executorType2 = executorType;
+		if (executorType2 == null) {
+			executorType2 = executorType = packageServer.getInheritance(getPrimaryType());
 		}
-		@SuppressWarnings("null")
-		@NonNull ReflectiveType executorType2 = executorType;
 		return executorType2;
 	}
 

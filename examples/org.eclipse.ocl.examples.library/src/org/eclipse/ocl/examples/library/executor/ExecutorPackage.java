@@ -17,14 +17,15 @@
 package org.eclipse.ocl.examples.library.executor;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 
 public abstract class ExecutorPackage implements DomainPackage
 {
 	protected final @NonNull String name;
-	protected final String nsURI;
+	protected final @Nullable String nsURI;
 
-	protected ExecutorPackage(@NonNull String name, String nsURI) {
+	protected ExecutorPackage(@NonNull String name, @Nullable String nsURI) {
 		this.name = name;
 		this.nsURI = nsURI;
 	}
@@ -33,12 +34,12 @@ public abstract class ExecutorPackage implements DomainPackage
 		return name;
 	}
 
-	public final String getNsURI() {
+	public final @Nullable String getNsURI() {
 		return nsURI;
 	}
 
 	@Override
-	public @NonNull String toString() {
+	public String toString() {
 		return name;
 	}
 }

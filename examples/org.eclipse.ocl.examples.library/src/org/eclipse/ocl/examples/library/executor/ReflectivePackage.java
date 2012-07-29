@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -29,18 +30,19 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
  */
 public abstract class ReflectivePackage extends ExecutorPackage
 {
-	protected Map<DomainType, ReflectiveType> types = null;
+	protected @Nullable Map<DomainType, ReflectiveType> types = null;
 
-	public ReflectivePackage(@NonNull String name, String nsURI) {
+	public ReflectivePackage(@NonNull String name, @Nullable String nsURI) {
 		super(name, nsURI);
 	}
 	
-	protected void computeClasses() {
-		types = new HashMap<DomainType, ReflectiveType>();
+	protected @NonNull Map<DomainType, ReflectiveType> computeClasses() {
+		Map<DomainType, ReflectiveType> types2 = types = new HashMap<DomainType, ReflectiveType>();
 		for (DomainType domainType : getDomainTypes()) {
 			ReflectiveType executorType = createExecutorType(DomainUtil.nonNullEntry(domainType));
-			types.put(domainType, executorType);
+			types2.put(domainType, executorType);
 		}
+		return types2;
 	}
 
 	protected abstract @NonNull ReflectiveType createExecutorType(@NonNull DomainType domainType);
@@ -48,17 +50,19 @@ public abstract class ReflectivePackage extends ExecutorPackage
 	protected abstract @NonNull Iterable<? extends DomainType> getDomainTypes();
 
 	public @NonNull ReflectiveType getInheritance(@NonNull DomainType type) {
-		if (types == null) {
-			computeClasses();
+		Map<DomainType, ReflectiveType> types2 = types;
+		if (types2 == null) {
+			types2 = computeClasses();
 		}
-		return DomainUtil.nonNullState(types.get(type));
+		return DomainUtil.nonNullState(types2.get(type));
 	}
 
 	public @NonNull Iterable<? extends DomainType> getOwnedType() {
-		if (types == null) {
-			computeClasses();
+		Map<DomainType, ReflectiveType> types2 = types;
+		if (types2 == null) {
+			types2 = computeClasses();
 		}
-		return DomainUtil.nonNullJDT(types.values());
+		return DomainUtil.nonNullJDT(types2.values());
 	}
 
 	protected abstract @NonNull DomainStandardLibrary getStandardLibrary();

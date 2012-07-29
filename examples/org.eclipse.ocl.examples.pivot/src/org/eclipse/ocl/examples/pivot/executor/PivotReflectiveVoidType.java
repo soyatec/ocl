@@ -19,11 +19,12 @@ package org.eclipse.ocl.examples.pivot.executor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.pivot.VoidType;
+import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 
 public class PivotReflectiveVoidType extends PivotReflectiveType
 {
-	public PivotReflectiveVoidType(@NonNull PivotReflectivePackage executorPackage, @NonNull VoidType type) {
-		super(executorPackage, type);
+	public PivotReflectiveVoidType(@NonNull PackageServer packageServer, @NonNull VoidType type) {
+		super(packageServer, type);
 	}
 
 	@Override

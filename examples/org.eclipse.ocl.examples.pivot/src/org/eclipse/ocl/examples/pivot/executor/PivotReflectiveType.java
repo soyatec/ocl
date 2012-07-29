@@ -29,15 +29,16 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ReflectiveType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 
 public class PivotReflectiveType extends ReflectiveType
 {
 	protected final @NonNull MetaModelManager metaModelManager;
 	protected final @NonNull Type type;
 	
-	public PivotReflectiveType(@NonNull PivotReflectivePackage executorPackage, @NonNull Type type) {
-		super(DomainUtil.nonNullModel(type.getName()), executorPackage, computeFlags(type));
-		this.metaModelManager = executorPackage.getMetaModelManager();
+	public PivotReflectiveType(@NonNull PackageServer packageServer, @NonNull Type type) {
+		super(DomainUtil.nonNullModel(type.getName()), packageServer, computeFlags(type));
+		this.metaModelManager = packageServer.getMetaModelManager();
 		this.type = type;
 	}
 

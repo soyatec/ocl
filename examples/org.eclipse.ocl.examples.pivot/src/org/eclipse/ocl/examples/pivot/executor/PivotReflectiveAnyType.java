@@ -22,11 +22,12 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.AnyType;
+import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 
 public class PivotReflectiveAnyType extends PivotReflectiveType
 {
-	public PivotReflectiveAnyType(@NonNull PivotReflectivePackage executorPackage, @NonNull AnyType type) {
-		super(executorPackage, type);
+	public PivotReflectiveAnyType(@NonNull PackageServer packageServer, @NonNull AnyType type) {
+		super(packageServer, type);
 		installOclAny();
 	}
 
