@@ -20,8 +20,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.pivot.VoidType;
 import org.eclipse.ocl.examples.pivot.manager.PackageServer;
+import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 
-public class PivotReflectiveVoidType extends PivotReflectiveType
+public class PivotReflectiveVoidType extends TypeServer
 {
 	public PivotReflectiveVoidType(@NonNull PackageServer packageServer, @NonNull VoidType type) {
 		super(packageServer, type);

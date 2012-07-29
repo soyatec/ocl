@@ -1325,7 +1325,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		Type type1 = getType(type);
 		Type type2 = (Type) type1.getUnspecializedElement();
 		TypeServer typeServer = getTypeServer(type2 != null ? type2 : type1);
-		return typeServer.getExecutorType();
+		return typeServer;
 	}
 
 	public @NonNull LambdaTypeManager getLambdaManager() {

@@ -20,6 +20,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +28,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
+import org.eclipse.ocl.examples.domain.elements.DomainOperation;
+import org.eclipse.ocl.examples.domain.elements.DomainProperty;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.types.AbstractFragment;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ReflectiveType;
 import org.eclipse.ocl.examples.pivot.ClassifierType;
@@ -42,6 +49,7 @@ import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.executor.PivotReflectiveFragment;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 import com.google.common.base.Function;
@@ -54,7 +62,7 @@ import com.google.common.collect.Iterables;
  * For specializeable types, a TypeServer keeps track of zero or more specializations
  * using WeakReferences so that the specializations vanish once no longer required.
  */
-public class TypeServer
+public class TypeServer extends ReflectiveType
 {
 	public static Function<TypeServer, Type> server2type = new Function<TypeServer, Type>()
 	{
@@ -64,7 +72,6 @@ public class TypeServer
 	};
 
 	protected final @NonNull PackageServer packageServer;
-	protected final @NonNull String name;
 	protected final @NonNull PackageManager packageManager;
 	
 	private final @NonNull List<TypeTracker> trackers = new ArrayList<TypeTracker>();
@@ -83,18 +90,13 @@ public class TypeServer
 	private @Nullable Type primaryType;
 	
 	/**
-	 * Compiled inheritance relationships used by compiled expressions.
-	 */
-	private ReflectiveType executorType = null;
-	
-	/**
 	 * Map from first actual type to list of specialized types for further actual types. 
 	 */
 	private @Nullable Map<ParameterableElement, List<WeakReference<Type>>> firstActual2specializations = null;
 	
-	TypeServer(@NonNull PackageServer packageServer, @NonNull String name) {
+	protected TypeServer(@NonNull PackageServer packageServer, @NonNull DomainType domainType) {
+		super(DomainUtil.nonNullModel(domainType.getName()), packageServer, computeFlags(domainType));
 		this.packageServer = packageServer;
-		this.name = name;
 		this.packageManager = packageServer.getPackageManager();
 	}
 
@@ -134,10 +136,10 @@ public class TypeServer
 	}
 
 	void changedInheritance() {
-		if (executorType != null) {
-			executorType.uninstall();
-			executorType = null;
-		}
+//		if (executorType != null) {
+			/*executorType.*/uninstall();
+//			executorType = null;
+//		}
 	}
 	
 	protected @NonNull Type createSpecialization(@NonNull List<? extends ParameterableElement> templateArguments) {
@@ -185,7 +187,8 @@ public class TypeServer
 		return specializedType;
 	}
 
-	void dispose() {
+	@Override
+	public void dispose() {
 		if (!trackers.isEmpty()) {
 			Collection<TypeTracker> savedTypeTrackers = new ArrayList<TypeTracker>(trackers);
 			trackers.clear();
@@ -203,10 +206,10 @@ public class TypeServer
 			operation2operations2.clear();
 			operation2operations = null;
 		}
-		if (executorType != null) {
-			executorType.dispose();
-			executorType = null;
-		}
+//		if (executorType != null) {
+//			executorType.dispose();
+//			executorType = null;
+//		}
 		packageServer.disposedTypeServer(this);
 	}
 	
@@ -312,13 +315,13 @@ public class TypeServer
 		return findSpecialization(partialSpecializations, templateArguments);
 	}
 
-	public @NonNull ReflectiveType getExecutorType() {
-		ReflectiveType executorType2 = executorType;
-		if (executorType2 == null) {
-			executorType2 = executorType = packageServer.getInheritance(getPrimaryType());
-		}
-		return executorType2;
-	}
+//	public @NonNull ReflectiveType getExecutorType() {
+//		ReflectiveType executorType2 = executorType;
+//		if (executorType2 == null) {
+//			executorType2 = executorType = packageServer.getInheritance(getPrimaryType());
+//		}
+//		return executorType2;
+//	}
 
 	public @Nullable Operation getMemberOperation(@NonNull Operation pivotOperation) {
 		Map<String, List<List<Operation>>> operation2operations2 = operation2operations;
@@ -371,9 +374,9 @@ public class TypeServer
 		return properties.isEmpty() ? null : properties.get(0);
 	}
 
-	public @NonNull String getName() {
-		return name;
-	}
+//	public @NonNull String getName() {
+//		return name;
+//	}
 
 	public final @NonNull PackageManager getPackageManager() {
 		return packageManager;
@@ -448,7 +451,7 @@ public class TypeServer
 		if (operation2operations2 == null) {
 			operation2operations2 = operation2operations = new HashMap<String, List<List<Operation>>>();
 			for (TypeTracker typeTracker : trackers) {
-				initMemberOperations(typeTracker.getTarget());
+				initMemberOperations(typeTracker.getType());
 			}
 		}	
 		return operation2operations2;
@@ -467,7 +470,7 @@ public class TypeServer
 		if (property2properties2 == null) {
 			property2properties2 = property2properties = new HashMap<String, List<Property>>();
 			for (TypeTracker typeTracker : trackers) {
-				initMemberProperties(typeTracker.getTarget());
+				initMemberProperties(typeTracker.getType());
 			}
 		}	
 		return property2properties2;
@@ -556,7 +559,7 @@ public class TypeServer
 
 	void setPrimaryType() {
 		if (trackers.size() > 0) {
-			primaryType = trackers.get(0).getTarget();
+			primaryType = trackers.get(0).getType();
 		}
 		else {
 			primaryType = null;
@@ -566,5 +569,65 @@ public class TypeServer
 	@Override
 	public String toString() {
 		return String.valueOf(primaryType);
+	}
+
+	//----------------------------------------------------------------
+
+	@Override
+	protected @NonNull AbstractFragment createFragment(@NonNull DomainInheritance baseInheritance) {
+		return new PivotReflectiveFragment(this, baseInheritance);
+	}
+	
+	public @NonNull Iterable<? extends DomainOperation> getLocalOperations() {
+		return DomainUtil.nonNullEMF(getPrimaryType().getOwnedOperation());
+	}
+
+	public @NonNull Iterable<? extends DomainProperty> getLocalProperties() {
+		return DomainUtil.nonNullEMF(getPrimaryType().getOwnedAttribute());
+	}
+
+	public @NonNull Iterable<? extends DomainType> getLocalSuperTypes() {
+		return DomainUtil.nonNullEMF(getPrimaryType().getSuperClass());
+	}
+	
+//	public final @NonNull MetaModelManager getMetaModelManager() {
+//		return packageManager.getMetaModelManager();
+//	}
+
+	public @NonNull String getMetaTypeName() {
+		return getPrimaryType().getMetaTypeName();
+	}
+
+	public final @NonNull Type getPivotType() {
+		return getPrimaryType();
+	}
+
+	public final @NonNull DomainStandardLibrary getStandardLibrary() {
+		return packageManager.getMetaModelManager();
+	}
+
+	@Override
+	public @NonNull Iterable<? extends DomainInheritance> getInitialSuperInheritances() {
+		final @NonNull MetaModelManager metaModelManager = packageManager.getMetaModelManager();
+		final Iterator<Type> iterator = metaModelManager.getSuperClasses(getPrimaryType()).iterator();
+		return new Iterable<DomainInheritance>()
+		{
+			public Iterator<DomainInheritance> iterator() {
+				return new Iterator<DomainInheritance>()
+				{
+					public boolean hasNext() {
+						return iterator.hasNext();
+					}
+
+					public DomainInheritance next() {
+						return iterator.next().getInheritance(metaModelManager);
+					}
+
+					public void remove() {
+						throw new UnsupportedOperationException();
+					}					
+				};
+			}			
+		};
 	}
 }

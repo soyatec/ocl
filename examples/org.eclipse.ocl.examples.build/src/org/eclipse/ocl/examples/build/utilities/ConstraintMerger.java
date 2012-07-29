@@ -140,7 +140,7 @@ public class ConstraintMerger extends AbstractProjectComponent
 						Type pivotType = (Type)eObject;
 						TypeServer typeServer = metaModelManager.getTypeServer(pivotType);
 						for (TypeTracker typeTracker : typeServer.getTypeTrackers()) {
-							Type pType = typeTracker.getTarget();
+							Type pType = typeTracker.getType();
 							if (pType.eResource() == pivotResource) {
 								pType.getOwnedAttribute().addAll(pivotType.getOwnedAttribute());
 								pType.getOwnedOperation().addAll(pivotType.getOwnedOperation());

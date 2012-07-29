@@ -30,8 +30,9 @@ import org.eclipse.ocl.examples.library.executor.ExecutorEnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.manager.PackageServer;
+import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 
-public class PivotReflectiveEnumerationType extends PivotReflectiveType implements DomainEnumeration
+public class PivotReflectiveEnumerationType extends TypeServer implements DomainEnumeration
 {
 	private Map<String, DomainEnumerationLiteral> literals = new HashMap<String, DomainEnumerationLiteral>();
 	

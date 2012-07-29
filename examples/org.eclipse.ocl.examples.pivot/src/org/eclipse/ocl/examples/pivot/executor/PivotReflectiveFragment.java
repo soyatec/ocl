@@ -23,16 +23,17 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.utilities.IndexableIterable;
 import org.eclipse.ocl.examples.library.executor.ReflectiveFragment;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 
 public class PivotReflectiveFragment extends ReflectiveFragment
 {
-	public PivotReflectiveFragment(@NonNull PivotReflectiveType derivedInheritance, @NonNull DomainInheritance baseInheritance) {
+	public PivotReflectiveFragment(@NonNull TypeServer derivedInheritance, @NonNull DomainInheritance baseInheritance) {
 		super(derivedInheritance, baseInheritance);
 	}
 
 	@Override
 	protected @NonNull DomainOperation getOperationOverload(@NonNull DomainOperation baseOperation) {
-		Type pivotType = ((PivotReflectiveType) derivedInheritance).getPivotType();
+		Type pivotType = ((TypeServer) derivedInheritance).getPivotType();
 		IndexableIterable<? extends DomainType> baseParameterTypes = baseOperation.getParameterType();
 		int iMax = baseParameterTypes.size();
 		for (DomainOperation localOperation : pivotType.getOwnedOperation()) {

@@ -20,8 +20,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.pivot.InvalidType;
 import org.eclipse.ocl.examples.pivot.manager.PackageServer;
+import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 
-public class PivotReflectiveInvalidType extends PivotReflectiveType
+public class PivotReflectiveInvalidType extends TypeServer
 {
 	public PivotReflectiveInvalidType(@NonNull PackageServer packageServer, @NonNull InvalidType type) {
 		super(packageServer, type);

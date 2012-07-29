@@ -22,6 +22,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -38,35 +39,42 @@ public class TypeTracker implements Adapter.Internal			// FIXME package private
 	public static Function<TypeTracker, Type> tracker2type = new Function<TypeTracker, Type>()
 	{
 		public Type apply(TypeTracker typeTracker) {
-			return typeTracker.getTarget();
+			return typeTracker.getType();
 		}
 	};
 
-	protected final TypeServer typeServer;
+	protected final @NonNull TypeServer typeServer;
 
 	/**
 	 * The Type tracked by this tracker.
 	 */
-	private final Type target;
+	private final @NonNull DomainType type;
 	
-	TypeTracker(@NonNull TypeServer typeServer, @NonNull Type target) {
+	TypeTracker(@NonNull TypeServer typeServer, @NonNull DomainType type) {
 		this.typeServer = typeServer;
-		this.target = target;
-		target.eAdapters().add(this);
+		this.type = type;
+		if (type instanceof Notifier) {
+			((Notifier)type).eAdapters().add(this);
+		}
 	}
 
 	void dispose() {
 		typeServer.disposedTypeTracker(this);
-		target.eAdapters().remove(this);
+		if (type instanceof Notifier) {
+			((Notifier)type).eAdapters().remove(this);
+		}
 	}
 
 	public @NonNull Type getPrimaryType() {
 		return typeServer.getPrimaryType();
 	}
 
-	@SuppressWarnings("null")
-	public final @NonNull Type getTarget() {
-		return target;
+	public final Notifier getTarget() {
+		return type instanceof Notifier ? (Notifier)type : null;
+	}
+
+	public final @NonNull Type getType() {
+		return (Type) type;				// FIXME WIP Bad cast
 	}
 	
 	@SuppressWarnings("null")
@@ -82,7 +90,7 @@ public class TypeTracker implements Adapter.Internal			// FIXME package private
 	 * Observe any superclass changes and uninstall all affected Inheritances.
 	 */
 	public void notifyChanged(Notification notification) {
-		if (notification.getNotifier() != target) {
+		if (notification.getNotifier() != type) {
 			return;
 		}
 		int eventType = notification.getEventType();
@@ -179,15 +187,15 @@ public class TypeTracker implements Adapter.Internal			// FIXME package private
 	}
 
 	public void setTarget(Notifier newTarget) {
-		assert target == newTarget;
+		assert type == newTarget;
 	}
 
 	@Override
 	public String toString() {
-		return String.valueOf(target);
+		return String.valueOf(type);
 	}
 
 	public void unsetTarget(Notifier oldTarget) {
-		assert target == oldTarget;
+		assert type == oldTarget;
 	}
 }

@@ -42,7 +42,7 @@ import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.executor.PivotReflectiveType;
+import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 
 /**
@@ -433,8 +433,8 @@ public class CollectionTypeImpl
 			DomainType thisElementType = this.getElementType();
 			DomainType thatElementType = DomainUtil.nonNullEMF(((DomainCollectionType)type).getElementType());
 			DomainType commonElementType = thisElementType.getCommonType(standardLibrary, thatElementType);
-			if (commonInheritance instanceof PivotReflectiveType) {
-				DomainCollectionType commonCollectionType = (DomainCollectionType)((PivotReflectiveType)commonInheritance).getPivotType();
+			if (commonInheritance instanceof TypeServer) {
+				DomainCollectionType commonCollectionType = (DomainCollectionType)((TypeServer)commonInheritance).getPivotType();
 				return standardLibrary.getCollectionType(commonCollectionType, commonElementType);
 			}
 			else {

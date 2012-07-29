@@ -40,7 +40,6 @@ import org.eclipse.ocl.examples.pivot.VoidType;
 import org.eclipse.ocl.examples.pivot.executor.PivotReflectiveAnyType;
 import org.eclipse.ocl.examples.pivot.executor.PivotReflectiveEnumerationType;
 import org.eclipse.ocl.examples.pivot.executor.PivotReflectiveInvalidType;
-import org.eclipse.ocl.examples.pivot.executor.PivotReflectiveType;
 import org.eclipse.ocl.examples.pivot.executor.PivotReflectiveVoidType;
 
 import com.google.common.base.Function;
@@ -117,7 +116,12 @@ public abstract class PackageServer extends ReflectivePackage implements Package
 	}
 
 	@Override
-	protected @NonNull PivotReflectiveType createExecutorType(@NonNull DomainType domainType) {
+	protected @NonNull TypeServer createExecutorType(@NonNull DomainType domainType) {
+		return getTypeTracker(((Type)domainType)).getTypeServer();							// FIXME WIP lose cast
+	}
+
+//	@Override
+	protected @NonNull TypeServer createExecutorType2(@NonNull DomainType domainType) {
 		if (domainType instanceof InvalidType) {
 			return new PivotReflectiveInvalidType(this, (InvalidType)domainType);
 		}
@@ -131,7 +135,7 @@ public abstract class PackageServer extends ReflectivePackage implements Package
 			return new PivotReflectiveEnumerationType(this, (Enumeration)domainType);
 		}
 		else {
-			return new PivotReflectiveType(this, (Type) domainType);
+			return new TypeServer(this, domainType);
 		}
 	}
 
@@ -322,7 +326,7 @@ public abstract class PackageServer extends ReflectivePackage implements Package
 		}
 		TypeServer typeServer = typeServers2.get(name);
 		if (typeServer == null) {
-			typeServer = new TypeServer(this, name);
+			typeServer = createExecutorType2(pivotType);
 			if (pivotType.getUnspecializedElement() == null) {
 				typeServers2.put(name, typeServer);
 			}

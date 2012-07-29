@@ -23,8 +23,9 @@ import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.manager.PackageServer;
+import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 
-public class PivotReflectiveAnyType extends PivotReflectiveType
+public class PivotReflectiveAnyType extends TypeServer
 {
 	public PivotReflectiveAnyType(@NonNull PackageServer packageServer, @NonNull AnyType type) {
 		super(packageServer, type);
