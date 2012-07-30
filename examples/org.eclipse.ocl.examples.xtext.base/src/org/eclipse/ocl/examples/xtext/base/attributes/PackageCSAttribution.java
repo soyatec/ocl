@@ -34,7 +34,7 @@ public class PackageCSAttribution extends AbstractAttribution
 		org.eclipse.ocl.examples.pivot.Package pivot = PivotUtil.getPivot(org.eclipse.ocl.examples.pivot.Package.class, targetElement);
 		if (pivot != null) {
 			MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-			environmentView.addNamedElements(metaModelManager.getLocalPackages(pivot));
+			environmentView.addNamedElements(metaModelManager.getMemberPackages(pivot));
 			environmentView.addNamedElements(metaModelManager.getLocalClasses(pivot));
 		}
 		return scopeView.getParent();

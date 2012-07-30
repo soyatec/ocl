@@ -34,7 +34,7 @@ public class DomainReflectivePackage extends ReflectivePackage
 	protected final @NonNull DomainPackage domainPackage;
 
 	public DomainReflectivePackage(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainPackage domainPackage) {
-		super(DomainUtil.nonNullPivot(domainPackage.getName()), domainPackage.getNsURI());
+		super(DomainUtil.nonNullPivot(domainPackage.getName()), domainPackage.getNsPrefix(), domainPackage.getNsURI());
 		this.standardLibrary = standardLibrary;
 		this.domainPackage = domainPackage;
 	}
@@ -47,6 +47,14 @@ public class DomainReflectivePackage extends ReflectivePackage
 	@Override
 	protected @NonNull Iterable<? extends DomainType> getDomainTypes() {
 		return DomainUtil.nonNullPivot(domainPackage.getOwnedType());
+	}
+
+	public Iterable<? extends DomainPackage> getNestedPackage() {
+		return domainPackage.getNestedPackage();			// FIXME Is this recursive??
+	}
+
+	public DomainPackage getNestingPackage() {
+		return domainPackage.getNestingPackage();			// FIXME Is this recursive??
 	}
 	
 	@Override

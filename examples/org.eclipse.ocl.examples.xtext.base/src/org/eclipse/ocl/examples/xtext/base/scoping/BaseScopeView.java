@@ -273,7 +273,7 @@ public class BaseScopeView extends AbstractScope implements IScopeView
 					csRef = csRef.eContainer();
 				}
 				ModelElementCS csContext = (ModelElementCS) csRef.eContainer();
-				AliasAnalysis aliasAnalysis = AliasAnalysis.getAdapter(EcoreUtil.getRootContainer(csContext).eResource());
+				AliasAnalysis aliasAnalysis = AliasAnalysis.getAdapter(EcoreUtil.getRootContainer(csContext).eResource(), metaModelManager);
 				Element context = csContext.getPivot();
 				while ((context != null) && !(context instanceof Namespace) && !(context instanceof Type)) {
 					EObject container = context.eContainer();
@@ -299,7 +299,7 @@ public class BaseScopeView extends AbstractScope implements IScopeView
 				csRef = csRef.eContainer();
 			}
 			Pivotable csContext = (Pivotable) csRef.eContainer();
-			AliasAnalysis aliasAnalysis = AliasAnalysis.getAdapter(csContext.eResource());
+			AliasAnalysis aliasAnalysis = AliasAnalysis.getAdapter(csContext.eResource(), metaModelManager);
 			Element context = csContext.getPivot();
 			while ((context != null) && !(context instanceof Namespace) && !(context instanceof Type)) {
 				EObject container = context.eContainer();

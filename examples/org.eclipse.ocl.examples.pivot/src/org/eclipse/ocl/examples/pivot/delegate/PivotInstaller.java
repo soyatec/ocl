@@ -33,6 +33,7 @@ import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 import org.eclipse.uml2.codegen.ecore.genmodel.util.UML2GenModelUtil;
 
 public class PivotInstaller
@@ -43,19 +44,20 @@ public class PivotInstaller
 	 * @param metaModelManager
 	 * @param pivotPackage
 	 */
-	public static void installDelegates(@NonNull MetaModelManager metaModelManager, @NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+	public static void installDelegates(@NonNull MetaModelManager metaModelManager, @NonNull PackageServer packageServer) {
 		boolean hasDelegates = false;
-		for (Type aType : metaModelManager.getLocalClasses(pivotPackage)) {
+//		for (Type aType : metaModelManager.getLocalClasses(pivotPackage)) {
+		for (Type aType : packageServer.getMemberTypes()) {
 			if ((aType != null) && installDelegates(metaModelManager, aType)) {
 				hasDelegates = true;
 			}
 		}
-		org.eclipse.ocl.examples.pivot.Package primaryPackage = metaModelManager.getPrimaryPackage(pivotPackage);
-		EObject eTarget = primaryPackage.getETarget();
-		if ((eTarget instanceof EPackage) && hasDelegates) {
-			Pivot2Ecore.installDelegates((EPackage) eTarget);
+//		PackageServer packageServer = metaModelManager.getPackageServer(pivotPackage);
+		EPackage ePackage = packageServer.getEPackage();
+		if ((ePackage != null) && hasDelegates) {
+			Pivot2Ecore.installDelegates(ePackage);
 		}
-		for (org.eclipse.ocl.examples.pivot.Package nestedPackage : metaModelManager.getLocalPackages(pivotPackage)) {
+		for (PackageServer nestedPackage : packageServer.getMemberPackages()) {
 			if (nestedPackage != null) {
 				installDelegates(metaModelManager, nestedPackage);
 			}

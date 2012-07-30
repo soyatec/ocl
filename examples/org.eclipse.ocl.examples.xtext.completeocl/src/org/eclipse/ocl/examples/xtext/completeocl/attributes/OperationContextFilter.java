@@ -19,7 +19,7 @@ package org.eclipse.ocl.examples.xtext.completeocl.attributes;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
@@ -40,11 +40,11 @@ public class OperationContextFilter implements ScopeFilter
 		this.csOperationContext = csOperationContext;
 	}
 
-	public int compareMatches(EObject match1, Map<TemplateParameter, ParameterableElement> bindings1, EObject match2, Map<TemplateParameter, ParameterableElement> bindings2) {
+	public int compareMatches(DomainElement match1, Map<TemplateParameter, ParameterableElement> bindings1, DomainElement match2, Map<TemplateParameter, ParameterableElement> bindings2) {
 		return 0;
 	}
 
-	public boolean matches(EnvironmentView environmentView, Type forType, EObject eObject) {
+	public boolean matches(EnvironmentView environmentView, Type forType, DomainElement eObject) {
 		if (!(eObject instanceof Operation)) {
 			return false;
 		}

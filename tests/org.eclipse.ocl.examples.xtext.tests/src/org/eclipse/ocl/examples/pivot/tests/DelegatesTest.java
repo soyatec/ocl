@@ -337,7 +337,7 @@ public class DelegatesTest extends PivotTestSuite
 		if (message != null)
 			fail(message);
 		for (org.eclipse.ocl.examples.pivot.Package nestedPackage : pivotRoot.getNestedPackage()) {
-			PivotInstaller.installDelegates(metaModelManager, nestedPackage);
+			PivotInstaller.installDelegates(metaModelManager, metaModelManager.getPackageServer(nestedPackage));
 		}
 	}
 

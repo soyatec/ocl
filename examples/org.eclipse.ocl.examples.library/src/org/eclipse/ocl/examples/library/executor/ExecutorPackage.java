@@ -23,15 +23,21 @@ import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 public abstract class ExecutorPackage implements DomainPackage
 {
 	protected final @NonNull String name;
+	protected final @Nullable String nsPrefix;
 	protected final @Nullable String nsURI;
 
-	protected ExecutorPackage(@NonNull String name, @Nullable String nsURI) {
+	protected ExecutorPackage(@NonNull String name, @Nullable String nsPrefix, @Nullable String nsURI) {
 		this.name = name;
+		this.nsPrefix = nsPrefix;
 		this.nsURI = nsURI;
 	}
 
 	public final @NonNull String getName() {
 		return name;
+	}
+
+	public final @Nullable String getNsPrefix() {
+		return nsPrefix;
 	}
 
 	public final @Nullable String getNsURI() {

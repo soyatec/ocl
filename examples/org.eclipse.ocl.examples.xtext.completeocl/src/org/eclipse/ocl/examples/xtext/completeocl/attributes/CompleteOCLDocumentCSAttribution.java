@@ -47,7 +47,7 @@ public class CompleteOCLDocumentCSAttribution extends AbstractRootCSAttribution
 					} else if (namespace instanceof org.eclipse.ocl.examples.pivot.Package) {		// FIXME This legacy behaviour needs cleaning up
 						if (anImport.isAll()) {
 							org.eclipse.ocl.examples.pivot.Package rootPackage = (org.eclipse.ocl.examples.pivot.Package)namespace;
-							environmentView.addNamedElements(rootPackage.getNestedPackage());
+							environmentView.addMemberPackages(rootPackage);
 							environmentView.addNamedElements(rootPackage.getOwnedType());
 						}
 					}
@@ -58,7 +58,7 @@ public class CompleteOCLDocumentCSAttribution extends AbstractRootCSAttribution
 					} else if (namespace instanceof org.eclipse.ocl.examples.pivot.Package) {		// FIXME This legacy behaviour needs cleaning up
 						for (org.eclipse.ocl.examples.pivot.Package rootPackage : ((org.eclipse.ocl.examples.pivot.Package)namespace).getNestedPackage()) {
 							environmentView.addNamedElement(rootPackage);		// FIXME Rationalize root of pivot model
-							environmentView.addNamedElements(rootPackage.getNestedPackage());
+							environmentView.addMemberPackages(rootPackage);
 							environmentView.addNamedElements(rootPackage.getOwnedType());
 						}
 					}

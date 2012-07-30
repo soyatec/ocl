@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 
@@ -32,14 +33,12 @@ public class VoidTypeAttribution extends ClassAttribution
 		super.computeLookup(target, environmentView, scopeView);
 		if (!environmentView.hasFinalResult()) {
 			MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-			for (org.eclipse.ocl.examples.pivot.Package primaryPackage : metaModelManager.getAllPackages()) {
-				if (primaryPackage != null) {
-					for (Type aType : metaModelManager.getLocalClasses(primaryPackage)) {
-						if (aType != null) {
-							Type primaryType = metaModelManager.getPrimaryType(aType);
-							environmentView.addNamedElements(metaModelManager.getLocalOperations(primaryType, Boolean.FALSE));
-							environmentView.addNamedElements(metaModelManager.getLocalProperties(primaryType, Boolean.FALSE));
-						}
+			for (PackageServer packageServer : metaModelManager.getAllPackages()) {
+				for (Type aType : packageServer.getMemberTypes()) {
+					if (aType != null) {
+						Type primaryType = metaModelManager.getPrimaryType(aType);
+						environmentView.addNamedElements(metaModelManager.getLocalOperations(primaryType, Boolean.FALSE));
+						environmentView.addNamedElements(metaModelManager.getLocalProperties(primaryType, Boolean.FALSE));
 					}
 				}
 			}

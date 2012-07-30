@@ -37,7 +37,7 @@ public class PackageDeclarationCSAttribution extends AbstractAttribution
 			org.eclipse.ocl.examples.pivot.Package pkg = targetElement.getPackage();
 			if (pkg != null) {
 				MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-				environmentView.addNamedElements(null, metaModelManager.getLocalPackages(pkg));
+				environmentView.addNamedElements(null, metaModelManager.getMemberPackages(pkg));
 				environmentView.addNamedElements(null, metaModelManager.getLocalClasses(pkg));
 //				environmentView.addNamedElements(pkge.getOwnedPrecedence());
 			}

@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
@@ -44,6 +45,8 @@ import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.ocl.examples.pivot.utilities.AbstractConversion;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -101,24 +104,26 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		}
 	}
 
-	protected void createImports(Resource csResource, Set<Package> importedPackages) {
+	protected void createImports(Resource csResource, Set<org.eclipse.ocl.examples.pivot.Package> importedPackages) {
 		AliasAnalysis.dispose(csResource);			// Force reanalysis
+		MetaModelManager metaModelManager = ElementUtil.findMetaModelManager(csResource);
 		URI csURI = csResource.getURI();
 		RootCS documentCS = (RootCS) csResource.getContents().get(0);
 		List<ImportCS> imports = new ArrayList<ImportCS>();
 		for (org.eclipse.ocl.examples.pivot.Package importedPackage : importedPackages) {
+			Package pivotPackage = metaModelManager.getPackageServer(importedPackage).getPivotPackage();
 //			ModelElementCS csElement = createMap.get(importedPackage);
 //			if ((csElement != null) && (csElement.eResource() == xtextResource)) {
 //				continue;		// Don't import defined packages
 //			}
 			ImportCS importCS = BaseCSTFactory.eINSTANCE.createImportCS();
-			AliasAnalysis aliasAnalysis = AliasAnalysis.getAdapter(csResource);
-			String alias = aliasAnalysis.getAlias(importedPackage);
+			AliasAnalysis aliasAnalysis = AliasAnalysis.getAdapter(csResource, metaModelManager);
+			String alias = aliasAnalysis.getAlias(pivotPackage);
 			importCS.setName(alias);
-			importCS.setNamespace(importedPackage);
-			importCS.setPivot(importedPackage);
-			EObject eObject = importedPackage.getETarget();
-			URI fullURI = EcoreUtil.getURI(eObject != null ? eObject : importedPackage);
+			importCS.setNamespace(pivotPackage);
+			importCS.setPivot(pivotPackage);
+			EObject eObject = pivotPackage.getETarget();
+			URI fullURI = EcoreUtil.getURI(eObject != null ? eObject : pivotPackage);
 			URI deresolvedURI = fullURI.deresolve(csURI, true, true, false);
 			importCS.setUri(deresolvedURI.toString());
 			imports.add(importCS);
@@ -200,13 +205,11 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		return csTemplateBindings;
 	}
 
-	public void importPackage(org.eclipse.ocl.examples.pivot.Package importPackage) {
-		assert importPackage != null;
-		org.eclipse.ocl.examples.pivot.Package primaryPackage = metaModelManager.getPrimaryPackage(importPackage);
-		importedPackages.add(primaryPackage);
+	public void importPackage(@NonNull org.eclipse.ocl.examples.pivot.Package importPackage) {
+		importedPackages.add(importPackage);
 	}
 
-	protected <T extends ClassifierCS> T refreshClassifier(Class<T> csClass, EClass csEClass, Type object) {
+	protected <T extends ClassifierCS> T refreshClassifier(@NonNull Class<T> csClass, @NonNull EClass csEClass, @NonNull Type object) {
 		T csElement = refreshNamedElement(csClass, csEClass, object);
 		refreshList(csElement.getOwnedConstraint(), visitDeclarations(ConstraintCS.class, object.getOwnedRule(), null));
 		TemplateSignature ownedTemplateSignature = object.getOwnedTemplateSignature();
@@ -222,7 +225,7 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		return csElement;
 	}
 
-	public <T extends ModelElementCS> T refreshElement(Class<T> csClass, EClass csEClass, Element object) {
+	public <T extends ModelElementCS> T refreshElement(@NonNull Class<T> csClass, @NonNull EClass csEClass, @NonNull Element object) {
 		assert csClass == csEClass.getInstanceClass();
 		EFactory eFactoryInstance = csEClass.getEPackage().getEFactoryInstance();
 		ModelElementCS csElement = (ModelElementCS) eFactoryInstance.create(csEClass);

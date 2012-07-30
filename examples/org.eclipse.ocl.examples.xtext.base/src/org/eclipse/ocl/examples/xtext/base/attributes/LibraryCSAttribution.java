@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.Root;
@@ -73,7 +74,7 @@ public class LibraryCSAttribution extends AbstractAttribution implements Unresol
 					if (errors.size() == 0) {
 						environmentView.addElement(name, importedElement);
 						if (importedElement instanceof Root) {
-							for (EObject pkg : ((Root)importedElement).getNestedPackage()) {
+							for (DomainElement pkg : ((Root)importedElement).getNestedPackage()) {
 								environmentView.addElement(name, pkg);								// FIXME Avoid vague duplication
 							}
 						}
@@ -110,7 +111,7 @@ public class LibraryCSAttribution extends AbstractAttribution implements Unresol
 					metaModelManager.installResource(resource);
 					for (EObject root : resource.getContents()) {
 						if (root instanceof Root) {
-							for (EObject pkg : ((Root)root).getNestedPackage()) {
+							for (DomainElement pkg : ((Root)root).getNestedPackage()) {
 								if (pkg instanceof Library) {
 									environmentView.addElement(name, pkg);									
 								}

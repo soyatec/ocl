@@ -22,6 +22,7 @@ import org.eclipse.ocl.examples.pivot.util.Nameable;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Named Element</b></em>'.
+ * @extends org.eclipse.ocl.examples.domain.elements.DomainNamedElement
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
@@ -43,7 +44,7 @@ import org.eclipse.ocl.examples.pivot.util.Nameable;
  * @generated
  */
 public interface NamedElement
-		extends Element, Nameable {
+		extends Element, Nameable, org.eclipse.ocl.examples.domain.elements.DomainNamedElement {
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Annotation} and appends it to the '<em><b>Owned Annotation</b></em>' containment reference list.

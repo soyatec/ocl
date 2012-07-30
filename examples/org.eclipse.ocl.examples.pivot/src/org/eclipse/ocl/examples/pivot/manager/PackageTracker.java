@@ -22,6 +22,8 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainPackage;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
 
@@ -32,58 +34,65 @@ import com.google.common.base.Function;
  */
 class PackageTracker implements Adapter.Internal
 {	
-	public static Function<PackageTracker, org.eclipse.ocl.examples.pivot.Package> tracker2package = new Function<PackageTracker, org.eclipse.ocl.examples.pivot.Package>()
+	public static Function<PackageTracker, DomainPackage> tracker2package = new Function<PackageTracker, DomainPackage>()
 	{
-		public org.eclipse.ocl.examples.pivot.Package apply(PackageTracker packageTracker) {
-			return packageTracker.getTarget();
+		public DomainPackage apply(PackageTracker packageTracker) {
+			return packageTracker.getPackage();
 		}
 	};
 
-	protected final PackageServer packageServer;
+	protected final @NonNull PackageServer packageServer;
 	
 	/**
 	 * The Package tracked by this tracker.
 	 */
-	private final org.eclipse.ocl.examples.pivot.Package target;
+	private final @NonNull DomainPackage target;
 
-	PackageTracker(@NonNull PackageServer packageServer, @NonNull org.eclipse.ocl.examples.pivot.Package target) {
+	PackageTracker(@NonNull PackageServer packageServer, @NonNull DomainPackage target) {
 		this.packageServer = packageServer;
 		this.target = target;
-		target.eAdapters().add(this);
+		assert !(target instanceof PackageServer);
+		if (target instanceof Notifier) {
+			((Notifier)target).eAdapters().add(this);
+		}
 	}
 
 	void dispose() {
 		PackageManager packageManager = packageServer.getPackageManager();
-		for (Type type : target.getOwnedType()) {
+		for (DomainType type : target.getOwnedType()) {
 			if (type != null) {
-				TypeTracker typeTracker = packageManager.findTypeTracker(type);
+				TypeTracker typeTracker = packageManager.findTypeTracker((Type)type);		// FIX bad cast
 				if (typeTracker != null) {
 					typeTracker.dispose();
 				}
 			}
 		}
 		packageServer.disposedPackageTracker(this);
-		target.eAdapters().remove(this);
+		if (target instanceof Notifier) {
+			((Notifier)target).eAdapters().remove(this);
+		}
+	}
+
+	public @NonNull DomainPackage getPackage() {
+		return target;
 	}
 
 	/**
 	 * Return the PackageServer supervising this package merge.
 	 */
-	@SuppressWarnings("null")
 	final @NonNull PackageServer getPackageServer() {
 		return packageServer;
 	}
 
 	/**
 	 * Return the primary Package of this package merge.
-	 */
-	@NonNull org.eclipse.ocl.examples.pivot.Package getPrimaryPackage() {
+	 *
+	@NonNull DomainPackage getPrimaryPackage() {
 		return packageServer.getPrimaryPackage();
-	}
+	} */
 
-	@SuppressWarnings("null")
-	public @NonNull org.eclipse.ocl.examples.pivot.Package getTarget() {
-		return target;
+	public Notifier getTarget() {
+		return target instanceof Notifier ? (Notifier)target : null;
 	}
 
 	public boolean isAdapterForType(Object type) {

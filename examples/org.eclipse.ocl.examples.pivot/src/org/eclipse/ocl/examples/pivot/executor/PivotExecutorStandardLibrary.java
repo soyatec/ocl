@@ -40,6 +40,7 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManageable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 
 public class PivotExecutorStandardLibrary extends ExecutableStandardLibrary implements MetaModelManageable
@@ -133,7 +134,7 @@ public class PivotExecutorStandardLibrary extends ExecutableStandardLibrary impl
 			packageMap = new HashMap<DomainPackage, org.eclipse.ocl.examples.pivot.Package>();
 		}		
 		DomainPackage domainPackage = typeType.getPackage();
-		org.eclipse.ocl.examples.pivot.Package pivotPackage = packageMap.get(domainPackage);
+		DomainPackage pivotPackage = packageMap.get(domainPackage);
 		if (pivotPackage == null) {
 			String nsURI = domainPackage.getNsURI();
 			if (nsURI != null) {
@@ -143,8 +144,8 @@ public class PivotExecutorStandardLibrary extends ExecutableStandardLibrary impl
 				pivotPackage = createPackage(domainPackage);
 			}
 		}
-		@NonNull org.eclipse.ocl.examples.pivot.Package nonNullPivotPackage = pivotPackage;
-		return metaModelManager.getPrimaryType(nonNullPivotPackage, typeType.getName());
+		@NonNull PackageServer packageServer = metaModelManager.getPackageServer(pivotPackage);
+		return packageServer.getMemberType(typeType.getName());
 	}
 
 	public @NonNull DomainType getType(@NonNull EClassifier eClassifier) {

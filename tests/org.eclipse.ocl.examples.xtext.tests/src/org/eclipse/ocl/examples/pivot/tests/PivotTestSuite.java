@@ -52,6 +52,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
@@ -1133,7 +1134,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		return getOCLStandardLibrary().getIntegerType();
 	}
 
-	protected org.eclipse.ocl.examples.pivot.Package getUMLMetamodel() {
+	protected DomainPackage getUMLMetamodel() {
 		return metaModelManager.getPivotMetaModel();
 	}
 	

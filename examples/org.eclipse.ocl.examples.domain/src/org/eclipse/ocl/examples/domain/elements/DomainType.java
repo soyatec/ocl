@@ -22,7 +22,7 @@ import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
-public interface DomainType extends DomainElement
+public interface DomainType extends DomainNamespace
 {
 	/**
 	 * Return true if this type conform to thatType within standardLibrary.

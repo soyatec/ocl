@@ -16,7 +16,12 @@
  */
 package org.eclipse.ocl.examples.library.ecore;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.utilities.ArrayIterable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorPackage;
@@ -28,14 +33,37 @@ public class EcoreExecutorPackage extends ExecutorPackage
 	protected final EPackage ePackage;
 	private ExecutorStandardLibrary standardLibrary = null;
 	private ExecutorType[] types = null;
+	private @Nullable List<EcoreExecutorPackage> packages = null;
 
 	public EcoreExecutorPackage(/*@NonNull*/ EPackage ePackage) {
-		super(DomainUtil.nonNullEMF(ePackage.getName()), ePackage.getNsURI());
+		super(DomainUtil.nonNullEMF(ePackage.getName()), ePackage.getNsPrefix(), ePackage.getNsURI());
 		this.ePackage = ePackage;		
 	}
 
 	public final EPackage getEPackage() {
 		return ePackage;
+	}
+
+	public Iterable<? extends DomainPackage> getNestedPackage() {
+		List<EcoreExecutorPackage> packages2 = packages;
+		if (packages2 == null) {
+			packages2 = packages = new ArrayList<EcoreExecutorPackage>();
+			for (EPackage eSubPackage : ePackage.getESubpackages()) {
+				EcoreExecutorPackage subPackage = standardLibrary.getPackage(eSubPackage);
+				if (subPackage != null) {
+					packages2.add(subPackage);
+				}
+			}
+		}
+		return packages2;
+	}
+
+	public DomainPackage getNestingPackage() {
+		EPackage eSuperPackage = ePackage.getESuperPackage();
+		if (eSuperPackage == null) {
+			return null;
+		}
+		return standardLibrary.getPackage(eSuperPackage);
 	}
 
 	public Iterable<ExecutorType> getOwnedType() {

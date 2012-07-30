@@ -32,8 +32,8 @@ public abstract class ReflectivePackage extends ExecutorPackage
 {
 	protected @Nullable Map<DomainType, ReflectiveType> types = null;
 
-	public ReflectivePackage(@NonNull String name, @Nullable String nsURI) {
-		super(name, nsURI);
+	public ReflectivePackage(@NonNull String name, @Nullable String nsPrefix, @Nullable String nsURI) {
+		super(name, nsPrefix, nsURI);
 	}
 	
 	protected @NonNull Map<DomainType, ReflectiveType> computeClasses() {

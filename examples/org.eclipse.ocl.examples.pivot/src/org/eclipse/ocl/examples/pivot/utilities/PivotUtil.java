@@ -40,6 +40,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.utils.ClassUtils;
+import org.eclipse.ocl.examples.domain.elements.DomainElement;
+import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
+import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.BagType;
 import org.eclipse.ocl.examples.pivot.CallExp;
@@ -669,7 +672,7 @@ public class PivotUtil extends DomainUtil
 		return depth;
 	}
 
-	public static <T extends NamedElement> T getNamedElement(Iterable<T> elements, String name) {
+	public static <T extends DomainNamedElement> T getNamedElement(Iterable<T> elements, String name) {
 		if (elements == null)
 			return null;
 		for (T element : elements)
@@ -866,16 +869,21 @@ public class PivotUtil extends DomainUtil
 	/**
 	 * Return a URI based on the nsURI of the immediate parent package.
 	 */
-	public static String getNsURI(@NonNull Element element) {
-		if (element instanceof org.eclipse.ocl.examples.pivot.Package) {
-			String nsURI = ((org.eclipse.ocl.examples.pivot.Package)element).getNsURI();
+	public static String getNsURI(@NonNull DomainElement element) {
+		if (element instanceof DomainPackage) {
+			String nsURI = ((DomainPackage)element).getNsURI();
 			if (nsURI != null) {
 				return nsURI;
 			}
 		}
 		StringBuilder s = new StringBuilder();
 		s.append("u_r_i:");
-		getNsURI(s, element);
+		if (element instanceof Element) {
+			getNsURI(s, (Element)element);
+		}
+		else {
+			s.append(element.hashCode());
+		}
 		return s.toString();
 	}
 

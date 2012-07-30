@@ -38,7 +38,6 @@ import org.eclipse.ocl.examples.xtext.base.attributes.ReferenceCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.RootPackageCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.TemplateParameterSubstitutionCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.TemplateSignatureCSAttribution;
-import org.eclipse.ocl.examples.xtext.base.attributes.TupleTypeCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.TypedTypeRefCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
@@ -67,7 +66,7 @@ public class BaseScoping
 		registry.put(BaseCSTPackage.Literals.ROOT_PACKAGE_CS, RootPackageCSAttribution.INSTANCE);
 		registry.put(BaseCSTPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION_CS, TemplateParameterSubstitutionCSAttribution.INSTANCE);
 		registry.put(BaseCSTPackage.Literals.TEMPLATE_SIGNATURE_CS, TemplateSignatureCSAttribution.INSTANCE);
-		registry.put(BaseCSTPackage.Literals.TUPLE_TYPE_CS, TupleTypeCSAttribution.INSTANCE);
+		registry.put(BaseCSTPackage.Literals.TUPLE_TYPE_CS, EmptyAttribution.INSTANCE);
 		registry.put(BaseCSTPackage.Literals.TYPED_TYPE_REF_CS, TypedTypeRefCSAttribution.INSTANCE);
 		CS2Pivot.addUnresolvedProxyMessageProvider(ImportCSAttribution.INSTANCE);			
 		CS2Pivot.addUnresolvedProxyMessageProvider(LibraryCSAttribution.INSTANCE);			

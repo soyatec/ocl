@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.xtext.base.scoping;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ocl.examples.domain.elements.DomainNamespace;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -39,7 +40,7 @@ public abstract class AbstractRootCSAttribution extends AbstractAttribution impl
 			}
 		}
 		if (environmentView.accepts(PivotPackage.Literals.NAMESPACE)) {
-			for (Map.Entry<String, Namespace> entry : metaModelManager.getGlobalNamespaces()) {
+			for (Map.Entry<String, DomainNamespace> entry : metaModelManager.getGlobalNamespaces()) {
 				environmentView.addElement(entry.getKey(), null, entry.getValue());
 			}
 		}

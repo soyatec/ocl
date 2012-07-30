@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.pivot;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Namespace</b></em>'.
+ * @extends org.eclipse.ocl.examples.domain.elements.DomainNamespace
  * <!-- end-user-doc -->
  *
  *
@@ -27,5 +28,5 @@ package org.eclipse.ocl.examples.pivot;
  * @generated
  */
 public interface Namespace
-		extends NamedElement {
+		extends NamedElement, org.eclipse.ocl.examples.domain.elements.DomainNamespace {
 } // Namespace

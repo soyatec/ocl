@@ -32,16 +32,23 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainElement;
+import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
+import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.util.Nameable;
+import org.eclipse.ocl.examples.pivot.manager.PackageManager;
+import org.eclipse.ocl.examples.pivot.manager.PackageServer;
+import org.eclipse.ocl.examples.pivot.manager.RootPackageServer;
+import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 import org.eclipse.ocl.examples.pivot.utilities.IllegalLibraryException;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
@@ -73,7 +80,7 @@ public class EnvironmentView
 																						// EObject
 																						// or
 																						// List<EObject>
-	private Map<EObject, Map<TemplateParameter, ParameterableElement>> templateBindings = null;
+	private Map<DomainElement, Map<TemplateParameter, ParameterableElement>> templateBindings = null;
 
 	private int contentsSize = 0; // Deep size of contentsByName;
 
@@ -125,10 +132,10 @@ public class EnvironmentView
 	 *            the element
 	 * @return the number of elements added; 1 if added, 0 if not
 	 */
-	public int addElement(@NonNull String elementName, @Nullable EObject element) {
+	public int addElement(@NonNull String elementName, @Nullable DomainElement element) {
 		return addElement(elementName, null, element);
 	}
-	public int addElement(@NonNull String elementName, @Nullable Type forType, @Nullable EObject element) {
+	public int addElement(@NonNull String elementName, @Nullable Type forType, @Nullable DomainElement element) {
 		if (element == null) {
 			return 0;
 		}		
@@ -138,13 +145,33 @@ public class EnvironmentView
 		if ((name != null) && !name.equals(elementName)) {
 			return 0;
 		}
-		element = metaModelManager.getPrimaryElement(element);
+		if (element instanceof PackageServer) {
+			element = ((PackageServer)element).getPivotPackage();
+		}
+		else if (element instanceof DomainPackage) {
+			element = metaModelManager.getPackageServer((DomainPackage) element).getPivotPackage();
+		}
+//		else if (element instanceof org.eclipse.ocl.examples.pivot.Package) {
+//			element = ((PackageServer) element).getPrimaryPackage();		// FIXME lose casts
+//		}
+//		else if (element instanceof TypeServer) {
+//			element = ((TypeServer) element).getPrimaryType();		// FIXME lose casts
+//		}
+		else if ((element instanceof EObject) && (element instanceof DomainElement)) {
+			element = (DomainNamedElement) metaModelManager.getPrimaryElement((EObject) element);		// FIXME lose casts
+		}
 		if ((name != null) && (matchers != null)) {
 			for (ScopeFilter filter : matchers) {
 				if (!filter.matches(this, forType, element)) {
 					return 0;
 				}
 			}
+		}
+		/*if (element instanceof PackageServer) {
+			element = ((PackageServer) element).getPrimaryPackage();		// FIXME lose casts
+		}
+		else*/ if (element instanceof TypeServer) {
+			element = ((TypeServer) element).getPrimaryType();		// FIXME lose casts
 		}
 		if (requiredType != null) {
 			if (!requiredType.isInstance(element)) {
@@ -164,14 +191,14 @@ public class EnvironmentView
 			contentsByName.put(elementName, element);
 			contentsSize++;
 		} else {
-			List<EObject> values;
-			if (value instanceof EObject) {
-				values = new ArrayList<EObject>();
-				values.add((EObject) value);
+			List<DomainElement> values;
+			if (value instanceof DomainElement) {
+				values = new ArrayList<DomainElement>();
+				values.add((DomainElement) value);
 				contentsByName.put(elementName, values);
 			} else {
 				@SuppressWarnings("unchecked")
-				List<EObject> castValue = (List<EObject>) value;
+				List<DomainElement> castValue = (List<DomainElement>) value;
 				values = castValue;
 			}
 			if (!values.contains(element)) {
@@ -182,16 +209,16 @@ public class EnvironmentView
 		return 1;
 	}
 
-	public int addElements(@Nullable Iterable<? extends EObject> elements) {
+	public int addElements(@Nullable Iterable<? extends DomainElement> elements) {
 		return addElements(null, elements);
 	}
 
-	public int addElements(@Nullable Type forType, @Nullable Iterable<? extends EObject> elements) {
+	public int addElements(@Nullable Type forType, @Nullable Iterable<? extends DomainElement> elements) {
 		int additions = 0;
 		if (elements != null) {
-			for (EObject element : elements) {
-				if (element instanceof Nameable) {
-					Nameable namedElement = (Nameable) element;
+			for (DomainElement element : elements) {
+				if (element instanceof DomainNamedElement) {
+					DomainNamedElement namedElement = (DomainNamedElement) element;
 					String elementName = namedElement.getName();
 					if (elementName != null) {
 						additions += addElement(elementName, forType, namedElement);
@@ -259,11 +286,29 @@ public class EnvironmentView
 		}
 	}
 
-	public int addNamedElement(@Nullable Nameable namedElement) {
+	public void addMemberPackages(@NonNull DomainPackage aPackage) {
+		PackageServer parentPackageServer = metaModelManager.getPackageServer(aPackage);
+		String name2 = name;
+		if (name2 != null) {
+			PackageServer packageServer = parentPackageServer.getMemberPackage(name2);
+			if (packageServer != null) {
+				addNamedElement(packageServer);
+			}
+		}
+		else {
+			for (PackageServer packageServer : parentPackageServer.getMemberPackages()) {
+				if (packageServer != null) {
+					addNamedElement(packageServer);
+				}
+			}
+		}
+	}
+
+	public int addNamedElement(@Nullable DomainNamedElement namedElement) {
 		return addNamedElement(null, namedElement);
 	}
 
-	public int addNamedElement(@Nullable Type forType, @Nullable Nameable namedElement) {
+	public int addNamedElement(@Nullable Type forType, @Nullable DomainNamedElement namedElement) {
 		if (namedElement == null) {
 			return 0;
 		}
@@ -276,28 +321,42 @@ public class EnvironmentView
 		}
 	}
 
-	public int addNamedElements(@NonNull Iterable<? extends Nameable> namedElements) {
+	public int addNamedElements(@NonNull Iterable<? extends DomainNamedElement> namedElements) {
 		return addNamedElements(null, namedElements);
 	}
 
-	public int addNamedElements(@Nullable Type forType, @NonNull Iterable<? extends Nameable> namedElements) {
+	public int addNamedElements(@Nullable Type forType, @NonNull Iterable<? extends DomainNamedElement> namedElements) {
 		int additions = 0;
-		for (Nameable namedElement : namedElements) {
+		for (DomainNamedElement namedElement : namedElements) {
 			additions += addNamedElement(forType, DomainUtil.nonNullEntry(namedElement));
 		}
 		return additions;
 	}
 
 	public void addRootPackages() {
-		for (Root root : metaModelManager.getPackageManager().getRoots()) {
-			for (org.eclipse.ocl.examples.pivot.Package pPackage : root.getNestedPackage()) {
-				addNamedElement(DomainUtil.nonNullEntry(pPackage));
+		PackageManager packageManager = metaModelManager.getPackageManager();
+		String name2 = name;
+		if (name2 != null) {
+			RootPackageServer rootPackageServer = packageManager.getMemberPackage(name2);
+			if (rootPackageServer != null) {
+				addNamedElement(rootPackageServer);
+			}
+			PackageServer packageServer = packageManager.getPackageByURI(name2);
+			if (packageServer != null) {
+				addElement(name2, packageServer);
 			}
 		}
-		for (org.eclipse.ocl.examples.pivot.Package pPackage : metaModelManager.getPackageManager().getAllPackagesWithUris()) {
-			String nsURI = pPackage.getNsURI();
-			if (nsURI != null) {
-				addElement(nsURI, pPackage);
+		else {
+			for (RootPackageServer rootPackageServer : packageManager.getMemberPackages()) {
+				if (rootPackageServer != null) {
+					addNamedElement(rootPackageServer);
+				}
+			}
+			for (PackageServer packageServer : packageManager.getAllPackagesWithUris()) {
+				String nsURI = packageServer.getNsURI();
+				if (nsURI != null) {
+					addElement(nsURI, packageServer);
+				}
 			}
 		}
 	}
@@ -334,7 +393,7 @@ public class EnvironmentView
 		return resolveDuplicates();
 	}
 
-	protected int filterImplicits(@NonNull EObject match1, @NonNull EObject match2) {
+	protected int filterImplicits(@NonNull DomainElement match1, @NonNull DomainElement match2) {
 		boolean match1IsImplicit = (match1 instanceof Property) && ((Property)match1).isImplicit();
 		boolean match2IsImplicit = (match2 instanceof Property) && ((Property)match2).isImplicit();
 		if (!match1IsImplicit) {
@@ -345,7 +404,7 @@ public class EnvironmentView
 		}
 	}
 
-	protected int filterRedefinitions(@NonNull EObject match1, @NonNull EObject match2) {
+	protected int filterRedefinitions(@NonNull DomainElement match1, @NonNull DomainElement match2) {
 		if ((match1 instanceof Operation) && (match2 instanceof Operation)) {
 			Operation operation1 = (Operation)match1;
 			Operation operation2 = (Operation)match2;
@@ -468,13 +527,13 @@ public class EnvironmentView
 				Object value = entry.getValue();
 				if (value instanceof List<?>) {
 					@SuppressWarnings("unchecked")
-					List<EObject> values = (List<EObject>) value;
+					List<DomainElement> values = (List<DomainElement>) value;
 					for (int i = 0; i < values.size()-1;) {
-						EObject reference = DomainUtil.nonNullEntry(values.get(i));
+						DomainElement reference = DomainUtil.nonNullEntry(values.get(i));
 						Map<TemplateParameter, ParameterableElement> referenceBindings = templateBindings != null ? templateBindings.get(reference) : null;
 						for (int j = i + 1; j < values.size();) {
-							@NonNull EObject reference2 = DomainUtil.nonNullJDT(reference);
-							EObject candidate = DomainUtil.nonNullEntry(values.get(j));
+							@NonNull DomainElement reference2 = DomainUtil.nonNullJDT(reference);
+							DomainElement candidate = DomainUtil.nonNullEntry(values.get(j));
 							int verdict = filterImplicits(reference2, candidate);
 							if (verdict == 0) {
 								verdict = filterRedefinitions(reference2, candidate);
@@ -513,9 +572,9 @@ public class EnvironmentView
 		return getSize();
 	}
 
-	public void setBindings(@NonNull EObject eObject, @Nullable Map<TemplateParameter, ParameterableElement> bindings) {
+	public void setBindings(@NonNull DomainElement eObject, @Nullable Map<TemplateParameter, ParameterableElement> bindings) {
 		if (templateBindings == null) {
-			templateBindings = new HashMap<EObject, Map<TemplateParameter, ParameterableElement>>();
+			templateBindings = new HashMap<DomainElement, Map<TemplateParameter, ParameterableElement>>();
 		}
 		templateBindings.put(eObject, bindings);
 	}

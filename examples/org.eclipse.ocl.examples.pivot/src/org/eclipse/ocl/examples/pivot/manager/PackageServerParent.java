@@ -15,7 +15,7 @@
 package org.eclipse.ocl.examples.pivot.manager;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.Package;
+import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 
 
 
@@ -24,5 +24,5 @@ import org.eclipse.ocl.examples.pivot.Package;
  */
 interface PackageServerParent
 {
-	@NonNull PackageServer getMemberPackageServer(@NonNull Package pivotPackage);
+	@NonNull PackageServer getMemberPackageServer(@NonNull DomainPackage pivotPackage);
 }

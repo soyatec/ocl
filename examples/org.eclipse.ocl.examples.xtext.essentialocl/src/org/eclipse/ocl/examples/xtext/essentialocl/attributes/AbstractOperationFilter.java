@@ -19,9 +19,9 @@ package org.eclipse.ocl.examples.xtext.essentialocl.attributes;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
@@ -43,8 +43,8 @@ public abstract class AbstractOperationFilter implements ScopeFilter
 		this.sourceType = PivotUtil.getBehavioralType(sourceType);
 	}
 
-	public int compareMatches(@NonNull EObject match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1,
-			@NonNull EObject match2, @Nullable Map<TemplateParameter, ParameterableElement> bindings2) {
+	public int compareMatches(@NonNull DomainElement match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1,
+			@NonNull DomainElement match2, @Nullable Map<TemplateParameter, ParameterableElement> bindings2) {
 		int comparison = metaModelManager.compareOperationMatches((Operation)match1, bindings1,
 			(Operation)match2, bindings2);
 //		if (comparison == 0) {
@@ -73,7 +73,7 @@ public abstract class AbstractOperationFilter implements ScopeFilter
 		return bindings;
 	}
 
-	protected void installBindings(@NonNull EnvironmentView environmentView, @NonNull Type forType, @NonNull EObject eObject,
+	protected void installBindings(@NonNull EnvironmentView environmentView, @NonNull Type forType, @NonNull DomainElement eObject,
 			@Nullable Map<TemplateParameter, ParameterableElement> bindings) {
 		environmentView.setBindings(eObject, bindings);
 	}

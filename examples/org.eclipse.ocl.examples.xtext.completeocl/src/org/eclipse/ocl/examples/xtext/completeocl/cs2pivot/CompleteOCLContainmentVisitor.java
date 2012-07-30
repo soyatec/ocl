@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Feature;
@@ -75,7 +76,7 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 			this.csParameters = csParameters;
 		}
 
-		public boolean matches(EnvironmentView environmentView, Type forType, EObject eObject) {
+		public boolean matches(EnvironmentView environmentView, Type forType, DomainElement eObject) {
 			if (eObject instanceof Iteration) {
 				return false;
 			}

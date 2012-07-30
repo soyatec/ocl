@@ -19,8 +19,8 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
@@ -90,12 +90,12 @@ public class EssentialOCLContainmentVisitor extends AbstractEssentialOCLContainm
 	{
 		public static NotOperationFilter INSTANCE = new NotOperationFilter();
 		
-		public int compareMatches(EObject match1, Map<TemplateParameter, ParameterableElement> bindings1,
-				EObject match2, Map<TemplateParameter, ParameterableElement> bindings2) {
+		public int compareMatches(DomainElement match1, Map<TemplateParameter, ParameterableElement> bindings1,
+				DomainElement match2, Map<TemplateParameter, ParameterableElement> bindings2) {
 			return 0;
 		}
 
-		public boolean matches(EnvironmentView environmentView,Type forType, EObject eObject) {
+		public boolean matches(EnvironmentView environmentView,Type forType, DomainElement eObject) {
 			return !(eObject instanceof Operation);
 		}
 	}

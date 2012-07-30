@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -51,7 +52,9 @@ import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
+import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
@@ -393,7 +396,9 @@ public class LoadTests extends XtextTestCase
 		URI cstURI = getProjectFileURI(cstName);
 		URI pivotURI = getProjectFileURI(pivotName);
 		URI savedURI = getProjectFileURI(savedName);
-		xtextResource = (BaseCSResource) resourceSet.getResource(inputURI, true);
+		xtextResource = (BaseCSResource) resourceSet.createResource(inputURI);
+		MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
+		xtextResource.load(null);
 		assertNoResourceErrors("Load failed", xtextResource);
 		Resource pivotResource = xtextResource.getPivotResource(null);
 		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
@@ -737,8 +742,10 @@ public class LoadTests extends XtextTestCase
 		assertEquals("ClassB", pivotType2.getName());
 		assertEquals("DataType", pivotType2.eClass().getName());
 //		
-		List<org.eclipse.ocl.examples.pivot.Package> allPackages = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();
-		for (org.eclipse.ocl.examples.pivot.Package aPackage : metaModelManager2.getAllPackages()) {
+		List<DomainPackage> allPackages = new ArrayList<DomainPackage>();
+//		for (org.eclipse.ocl.examples.pivot.Package aPackage : metaModelManager2.getAllPackages()) {
+		for (PackageServer packageServer : metaModelManager2.getAllPackages()) {
+			org.eclipse.ocl.examples.pivot.Package aPackage = packageServer.getPivotPackage();
 			if (aPackage instanceof Root) {}
 			else if (aPackage instanceof Library) {}
 			else if (PivotConstants.ORPHANAGE_NAME.equals(aPackage.getName())) {}
@@ -822,8 +829,10 @@ public class LoadTests extends XtextTestCase
 		assertEquals(pivotPropertyYYY0, pivotPropertyYYY1.getOpposite());
 		
 //		
-		List<org.eclipse.ocl.examples.pivot.Package> allPackages = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();
-		for (org.eclipse.ocl.examples.pivot.Package aPackage : metaModelManager2.getAllPackages()) {
+		List<DomainPackage> allPackages = new ArrayList<DomainPackage>();
+//		for (org.eclipse.ocl.examples.pivot.Package aPackage : metaModelManager2.getAllPackages()) {
+		for (PackageServer packageServer : metaModelManager2.getAllPackages()) {
+			org.eclipse.ocl.examples.pivot.Package aPackage = packageServer.getPivotPackage();
 			if (aPackage instanceof Root) {}
 			else if (aPackage instanceof Library) {}
 			else if (PivotConstants.ORPHANAGE_NAME.equals(aPackage.getName())) {}

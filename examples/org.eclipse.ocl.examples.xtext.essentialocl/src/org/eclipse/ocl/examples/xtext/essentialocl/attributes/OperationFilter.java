@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LambdaType;
@@ -145,7 +145,7 @@ public class OperationFilter extends AbstractOperationFilter
 	}
 
 	@Override
-	protected void installBindings(EnvironmentView environmentView, Type forType, EObject eObject,
+	protected void installBindings(EnvironmentView environmentView, Type forType, DomainElement eObject,
 			Map<TemplateParameter, ParameterableElement> bindings) {
 		List<Parameter> parameters = ((Operation)eObject).getOwnedParameter();
 		int iMax = parameters.size();
@@ -164,7 +164,7 @@ public class OperationFilter extends AbstractOperationFilter
 		super.installBindings(environmentView, forType, eObject, bindings);
 	}
 
-	public boolean matches(EnvironmentView environmentView, Type forType, EObject eObject) {
+	public boolean matches(EnvironmentView environmentView, Type forType, DomainElement eObject) {
 		if (eObject instanceof Iteration) {
 			Iteration candidateIteration = (Iteration)eObject;
 			int iteratorCount = candidateIteration.getOwnedIterator().size();

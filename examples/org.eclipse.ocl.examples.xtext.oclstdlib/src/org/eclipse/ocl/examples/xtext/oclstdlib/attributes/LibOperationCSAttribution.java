@@ -18,12 +18,12 @@ package org.eclipse.ocl.examples.xtext.oclstdlib.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
-import org.eclipse.ocl.examples.pivot.util.Nameable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
@@ -54,7 +54,7 @@ public class LibOperationCSAttribution extends AbstractAttribution
 				for (TemplateParameterCS csTemplateParameter : csTemplateSignature.getOwnedTemplateParameter()) {
 					TemplateParameter templateParameter = (TemplateParameter) csTemplateParameter.getPivot();
 					if (templateParameter != null) {
-						environmentView.addNamedElement((Nameable) templateParameter.getParameteredElement());
+						environmentView.addNamedElement((DomainNamedElement) templateParameter.getParameteredElement());
 					}
 					else {
 //						environmentView.addNamedElement((INamedElement) csTemplateParameter.getParameteredElement());

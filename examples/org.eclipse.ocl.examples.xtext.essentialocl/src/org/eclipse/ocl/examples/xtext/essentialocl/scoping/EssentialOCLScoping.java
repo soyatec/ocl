@@ -30,6 +30,7 @@ import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
+import org.eclipse.ocl.examples.pivot.scoping.EmptyAttribution;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
@@ -46,7 +47,6 @@ import org.eclipse.ocl.examples.xtext.essentialocl.attributes.ExpSpecificationCS
 import org.eclipse.ocl.examples.xtext.essentialocl.attributes.InvocationExpCSAttribution;
 import org.eclipse.ocl.examples.xtext.essentialocl.attributes.LetExpCSAttribution;
 import org.eclipse.ocl.examples.xtext.essentialocl.attributes.NavigationOperatorCSAttribution;
-import org.eclipse.ocl.examples.xtext.essentialocl.attributes.TupleLiteralExpCSAttribution;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLCSTPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InfixExpCS;
@@ -68,7 +68,7 @@ public class EssentialOCLScoping
 		registry.put(EssentialOCLCSTPackage.Literals.INVOCATION_EXP_CS, InvocationExpCSAttribution.INSTANCE);
 		registry.put(EssentialOCLCSTPackage.Literals.LET_EXP_CS, LetExpCSAttribution.INSTANCE);
 		registry.put(EssentialOCLCSTPackage.Literals.NAVIGATION_OPERATOR_CS, NavigationOperatorCSAttribution.INSTANCE);
-		registry.put(EssentialOCLCSTPackage.Literals.TUPLE_LITERAL_EXP_CS, TupleLiteralExpCSAttribution.INSTANCE);
+		registry.put(EssentialOCLCSTPackage.Literals.TUPLE_LITERAL_EXP_CS, EmptyAttribution.INSTANCE);
 		CS2Pivot.addUnresolvedProxyMessageProvider(new PathElementCSUnresolvedProxyMessageProvider());			
 	}
 	

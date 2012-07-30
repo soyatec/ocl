@@ -30,13 +30,6 @@ import com.google.common.base.Function;
  */
 class RootTracker implements Adapter.Internal
 {	
-	public static Function<RootTracker, Root> tracker2root = new Function<RootTracker, Root>()
-	{
-		public Root apply(RootTracker rootTracker) {
-			return rootTracker.getTarget();
-		}
-	};
-
 	protected final PackageManager packageManager;
 	
 	/**

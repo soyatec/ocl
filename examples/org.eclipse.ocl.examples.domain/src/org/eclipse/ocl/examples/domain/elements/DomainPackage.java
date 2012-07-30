@@ -16,9 +16,11 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
-public interface DomainPackage extends DomainElement
+public interface DomainPackage extends DomainNamespace
 {
-	String getName();
-	String getNsURI();
-	Iterable<? extends DomainType> getOwnedType();
+	/*@NonNull*/ Iterable<? extends DomainPackage>  getNestedPackage();
+	/*@Nullable*/ DomainPackage getNestingPackage();
+	/*@Nullable*/ String getNsPrefix();
+	/*@Nullable*/ String getNsURI();
+	/*@NonNull*/ Iterable<? extends DomainType> getOwnedType();
 }

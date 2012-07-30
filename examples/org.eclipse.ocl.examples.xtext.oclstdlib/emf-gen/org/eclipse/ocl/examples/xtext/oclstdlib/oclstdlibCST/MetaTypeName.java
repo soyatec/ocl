@@ -23,6 +23,7 @@ import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Meta Type Name</b></em>'.
+ * @extends org.eclipse.ocl.examples.domain.elements.DomainNamedElement
  * <!-- end-user-doc -->
  *
  * <p>
@@ -37,7 +38,7 @@ import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
  * @generated
  */
 public interface MetaTypeName
-		extends EObject, VisitableCS, Nameable {
+		extends EObject, VisitableCS, Nameable, org.eclipse.ocl.examples.domain.elements.DomainNamedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

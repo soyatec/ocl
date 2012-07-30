@@ -49,7 +49,7 @@ public class RootPackageCSAttribution extends AbstractRootCSAttribution
 					String importName = anImport.getName();
 					if (importName == null) {
 						if (namespace instanceof org.eclipse.ocl.examples.pivot.Package) {
-							environmentView.addNamedElements(metaModelManager.getLocalPackages((org.eclipse.ocl.examples.pivot.Package)namespace));
+							environmentView.addNamedElements(metaModelManager.getMemberPackages((org.eclipse.ocl.examples.pivot.Package)namespace));
 						}
 					}
 					else {
