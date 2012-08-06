@@ -20,89 +20,34 @@
  */
 -->
 <plugin>
+	<extension point="org.eclipse.ui.commands">
+		<command id="org.eclipse.ocl.examples.xtext.console.ShowEcoreConsoleAction"
+			description="%_UI_ShowOCLConsole_tooltip"			
+			name="%_UI_ShowOCLConsole_label"/>
+	</extension>
 
-     <extension point="org.eclipse.ui.editorActions"> 
-      <editorContribution
-            id="org.eclipse.ocl.examples.xtext.console.ecoreEditorContribution"
-            targetID="org.eclipse.emf.ecore.presentation.EcoreEditorID">
-         <action
-               label="%_UI_ShowOCLConsole_label"
-               class="org.eclipse.ocl.examples.xtext.console.actions.ShowEcoreConsoleDelegate"
-               menubarPath="org.eclipse.emf.ecoreMenuID/additions"
-               icon="$nl$/icons/elcl16/oclconsole_co.gif"
-               id="org.eclipse.ocl.examples.xtext.console.ShowEcoreConsoleAction"/>
-      </editorContribution> 
-      <editorContribution
-            id="org.eclipse.ocl.examples.xtext.console.ecoreReflectiveEditorContribution"
-            targetID="org.eclipse.emf.ecore.presentation.ReflectiveEditorID">
-         <action
-               label="%_UI_ShowOCLConsole_label"
-               class="org.eclipse.ocl.examples.xtext.console.actions.ShowEcoreConsoleDelegate"
-               menubarPath="org.eclipse.emf.ecoreMenuID/additions"
-               icon="$nl$/icons/elcl16/oclconsole_co.gif"
-               id="org.eclipse.ocl.examples.xtext.console.ShowEcoreReflectiveConsoleAction"/>
-      </editorContribution> 
-      <editorContribution
-            id="org.eclipse.ocl.examples.xtext.console.umlEditorContribution"
-            targetID="org.eclipse.uml2.uml.editor.presentation.UMLEditorID">
-         <action
-               label="%_UI_ShowOCLConsole_label"
-               class="org.eclipse.ocl.examples.xtext.console.actions.ShowUMLConsoleDelegate"
-               menubarPath="org.eclipse.uml2.umlMenuID/additions"
-               icon="$nl$/icons/elcl16/oclconsole_co.gif"
-               id="org.eclipse.ocl.examples.xtext.console.ShowUMLConsoleAction"/>
-      </editorContribution> 
-   </extension> 
-   
-   <extension
-         point="org.eclipse.ui.popupMenus">
-      <viewerContribution
-            targetID="org.eclipse.emf.examples.extlibrary.presentation.EXTLibraryEditorID"
-            id="org.eclipse.ocl.examples.extlibraryViewerContribution">
-        <menu
-               label="%_UI_OCLMenu_label"
-               path="additions"
-               id="org.eclipse.oclEngineMenuID">
-            <separator name="additions"/>
-         </menu>
-         <action
-               label="%_UI_ShowConsole_label"
-               class="org.eclipse.ocl.examples.xtext.console.actions.ShowConsoleDelegate"
-               menubarPath="org.eclipse.oclEngineMenuID/additions"
-               icon="$nl$/icons/elcl16/oclconsole_co.gif"
-               id="org.eclipse.ocl.examples.xtext.console.ShowConsoleAction"/>
-      </viewerContribution>
-      <viewerContribution
-            targetID="org.eclipse.emf.ecore.presentation.EcoreEditorID"
-            id="org.eclipse.ocl.examples.ecoreViewerContribution">
-         <action
-               label="%_UI_ShowOCLConsole_label"
-               class="org.eclipse.ocl.examples.xtext.console.actions.ShowEcoreConsoleDelegate"
-               menubarPath="additions"
-               icon="$nl$/icons/elcl16/oclconsole_co.gif"
-               id="org.eclipse.ocl.examples.xtext.console.ShowEcoreConsoleAction"/>
-      </viewerContribution>
-      <viewerContribution
-            targetID="org.eclipse.emf.ecore.presentation.ReflectiveEditorID"
-            id="org.eclipse.ocl.examples.ecoreReflectiveViewerContribution">
-         <action
-               label="%_UI_ShowOCLConsole_label"
-               class="org.eclipse.ocl.examples.xtext.console.actions.ShowEcoreConsoleDelegate"
-               menubarPath="additions"
-               icon="$nl$/icons/elcl16/oclconsole_co.gif"
-               id="org.eclipse.ocl.examples.xtext.console.ShowEcoreReflectiveConsoleAction"/>
-      </viewerContribution>
-      <viewerContribution
-            targetID="org.eclipse.uml2.uml.editor.presentation.UMLEditorID"
-            id="org.eclipse.ocl.examples.umlViewerContribution">
-         <action
-               label="%_UI_ShowOCLConsole_label"
-               class="org.eclipse.ocl.examples.xtext.console.actions.ShowUMLConsoleDelegate"
-               menubarPath="additions"
-               icon="$nl$/icons/elcl16/oclconsole_co.gif"
-               id="org.eclipse.ocl.examples.xtext.console.ShowUMLConsoleAction"/>
-      </viewerContribution>
-   </extension>
+	<extension point="org.eclipse.ui.handlers">
+		<handler commandId="org.eclipse.ocl.examples.xtext.console.ShowEcoreConsoleAction"
+			class="org.eclipse.ocl.examples.xtext.console.actions.ShowConsoleHandler"/>
+	</extension>
+
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:org.eclipse.emf.ecore.presentation.EcoreEditorID?after=additions">
+			<command commandId="org.eclipse.ocl.examples.xtext.console.ShowEcoreConsoleAction"
+              	icon="icons/elcl16/oclconsole_co.gif"
+				tooltip="%_UI_ShowOCLConsole_tooltip"/>
+		</menuContribution>
+		<menuContribution locationURI="popup:org.eclipse.emf.ecore.presentation.ReflectiveEditorID?after=additions">
+			<command commandId="org.eclipse.ocl.examples.xtext.console.ShowEcoreConsoleAction"
+              	icon="icons/elcl16/oclconsole_co.gif"
+				tooltip="%_UI_ShowOCLConsole_tooltip"/>
+		</menuContribution>
+		<menuContribution locationURI="popup:org.eclipse.uml2.uml.editor.presentation.UMLEditorID?after=additions">
+			<command commandId="org.eclipse.ocl.examples.xtext.console.ShowEcoreConsoleAction"
+              	icon="icons/elcl16/oclconsole_co.gif"
+				tooltip="%_UI_ShowOCLConsole_tooltip"/>
+		</menuContribution>
+	</extension>
    
    <extension point="org.eclipse.ui.console.consoleFactories">
       <consoleFactory

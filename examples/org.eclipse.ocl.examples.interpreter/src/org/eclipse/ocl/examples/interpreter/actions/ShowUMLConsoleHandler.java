@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2007 IBM Corporation and others.
+ * Copyright (c) 2007,2012 IBM Corporation and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,10 +9,9 @@
  *
  * Contributors:
  *   IBM - Initial API and implementation
+ *   E.D.Willink - rework Delegate as Handler - 386701
  *
  * </copyright>
- *
- * $Id: ShowUMLConsoleDelegate.java,v 1.1 2010/03/11 10:13:27 ewillink Exp $
  */
 
 package org.eclipse.ocl.examples.interpreter.actions;
@@ -22,25 +21,14 @@ import org.eclipse.ocl.examples.interpreter.console.TargetMetamodel;
 
 
 /**
- * Action delegate that ensures that the OCL Console is active and set to
+ * Action handler that ensures that the OCL Console is active and set to
  * target the UML metamodel.
- * 
- * @Deprecated Use ShowUMLConsoleHandler
+ * @since 3.3
  */
-@Deprecated
-public class ShowUMLConsoleDelegate
-	extends ShowConsoleDelegate {
-	
-	/**
-	 * Initializes me.
-	 */
-	public ShowUMLConsoleDelegate() {
-		super();
-	}
-	
+public class ShowUMLConsoleHandler extends ShowConsoleHandler
+{
 	@Override
     protected void consoleOpened(OCLConsole console) {
 	    console.setTargetMetamodel(TargetMetamodel.UML);
 	}
-
 }
