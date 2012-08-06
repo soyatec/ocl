@@ -21,7 +21,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 
@@ -36,13 +35,16 @@ public class EvaluatorMultipleIterationManager extends EvaluatorIterationManager
 		int iMax = referredIterators.length;
 		ValueIterator[] iterators = new ValueIterator[iMax];
 		for (int i = 0; i < iMax; i++) {
-			ValueIterator valueIterator = new ValueIterator(evaluator, collectionValue, DomainUtil.nonNullEntry(referredIterators[i]));
-			if (!valueIterator.hasCurrent()) {
-				this.iterators = null;
-				this.hasCurrent = false;
-				return;
+			DomainTypedElement referredIterator = referredIterators[i];
+			if (referredIterator != null) {
+				ValueIterator valueIterator = new ValueIterator(evaluator, collectionValue, referredIterator);
+				if (!valueIterator.hasCurrent()) {
+					this.iterators = null;
+					this.hasCurrent = false;
+					return;
+				}
+				iterators[i] = valueIterator;
 			}
-			iterators[i] = valueIterator;
 		}
 		this.iterators = iterators;
 		this.hasCurrent = true;

@@ -39,7 +39,8 @@ public class DomainUtil
 			new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
 	public static @NonNull String bind(String messageTemplate, Object... bindings) {
-		return nonNullJava(NLS.bind(messageTemplate, bindings));
+		@SuppressWarnings("null") @NonNull String result = NLS.bind(messageTemplate, bindings);
+		return result;
 	}
 	
 	public static String debugFullName(Object object) {
@@ -101,33 +102,6 @@ public class DomainUtil
 	 */
 	@SuppressWarnings("null")
 	public static @NonNull <T> T nonNullEMF(T aT) {// FIXME remove once EMF guarantees non-null
-		assert aT != null;
-		return aT;
-	}
-	
-	/**
-	 * Return aT, checking the assertion that this call would not be necessary if JDT collection entry analysis was more comprehensive.
-	 */
-	@SuppressWarnings("null")
-	public static @NonNull <T> T nonNullEntry(T aT) {// FIXME remove once JDT guarantees non-null entries
-		assert aT != null;
-		return aT;
-	}
-	
-	/**
-	 * Return aT, checking the assertion that this call would not be necessary if JDT null analysis was more comprehensive.
-	 */
-	@SuppressWarnings("null")
-	public static @NonNull <T> T nonNullJDT(T aT) {// FIXME remove once JDT guarantees non-null
-		assert aT != null;
-		return aT;
-	}
-	
-	/**
-	 * Return aT, checking the assertion that this call would not be necessary if Java had comprehensive @NonNull annotations.
-	 */
-	@SuppressWarnings("null")
-	public static @NonNull <T> T nonNullJava(T aT) {// FIXME remove once Java guarantees non-null
 		assert aT != null;
 		return aT;
 	}

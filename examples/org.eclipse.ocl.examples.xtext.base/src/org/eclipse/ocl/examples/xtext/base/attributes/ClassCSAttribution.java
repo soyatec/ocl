@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.ocl.examples.pivot.ClassifierType;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -52,18 +51,18 @@ public class ClassCSAttribution extends AbstractAttribution
 				//				environmentView.addElements(PivotPackage.Literals.TYPE, PivotUtil.getTypeTemplateParameterables(pivot));
 			}
 			else {
-				MetaModelManager metaModelManager = environmentView.getMetaModelManager();
+//				MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 				if (pivot instanceof ClassifierType) {
 					Type instanceType = ((ClassifierType)pivot).getInstanceType();
-					environmentView.addNamedElements(metaModelManager.getLocalOperations(instanceType, Boolean.TRUE));
-					environmentView.addNamedElements(metaModelManager.getLocalProperties(instanceType, Boolean.TRUE));
+					environmentView.addAllOperations(instanceType, Boolean.TRUE);
+					environmentView.addAllProperties(instanceType, Boolean.TRUE);
 				}
-				environmentView.addNamedElements(metaModelManager.getLocalOperations(pivot, Boolean.FALSE));
-				environmentView.addNamedElements(metaModelManager.getLocalProperties(pivot, Boolean.FALSE));
-				environmentView.addElements(PivotUtil.getTypeTemplateParameterables(pivot));
+				environmentView.addAllOperations(pivot, Boolean.FALSE);
+				environmentView.addAllProperties(pivot, Boolean.FALSE);
+				environmentView.addAllTypeTemplateParameterables(pivot);
 //				if (!environmentView.hasFinalResult()) {
 //					if (environmentView.getRequiredType() != BaseCSTPackage.Literals.TYPE_CS) { // Avoid creating bindings for nested type parameters
-				environmentView.addInheritedContents(pivot, scopeView);
+//				environmentView.addInheritedContents(pivot, scopeView);
 //				if ((environmentView.getSize() == 0) && (environmentView.getRequiredType() != BaseCSTPackage.Literals.TYPE_CS)) { // Avoid creating bindings for nested type parameters
 //					for (org.eclipse.ocl.examples.pivot.Class superClass : pivot.getSuperClass()) {
 //						ScopeView nestedScopeView = scopeView;

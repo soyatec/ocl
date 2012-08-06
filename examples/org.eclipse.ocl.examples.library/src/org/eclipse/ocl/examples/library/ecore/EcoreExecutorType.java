@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -30,7 +31,7 @@ import org.eclipse.ocl.examples.library.executor.ExecutorTypeParameter;
 
 public class EcoreExecutorType extends ExecutorType
 {
-	protected EClassifier eClassifier;
+	protected @Nullable EClassifier eClassifier;
 	
 	/**
 	 * Construct an executable type descriptor in the absence of a known EClassifier. A subsequent
@@ -45,14 +46,15 @@ public class EcoreExecutorType extends ExecutorType
 	 * Construct an executable type descriptor for a known EClassifier.
 	 */
 	public EcoreExecutorType(/*@NonNull*/ EClassifier eClassifier, @NonNull EcoreExecutorPackage evaluationPackage, int flags, ExecutorTypeParameter... typeParameters) {
-		super(DomainUtil.nonNullEMF(eClassifier.getName()), evaluationPackage, flags, typeParameters);
+		super(DomainUtil.nonNullModel(DomainUtil.nonNullState(eClassifier).getName()), evaluationPackage, flags, typeParameters);
 		this.eClassifier = eClassifier;		
 	}
 
 	@Override
 	public @NonNull ObjectValue createInstance(@NonNull ValueFactory valueFactory) {
-		if (eClassifier instanceof EClass) {
-			EClass eClass = (EClass)eClassifier;
+		EClassifier eClassifier2 = eClassifier;
+		if (eClassifier2 instanceof EClass) {
+			EClass eClass = (EClass)eClassifier2;
 			EObject element = eClass.getEPackage().getEFactoryInstance().create(eClass);
 			return valueFactory.createObjectValue(DomainUtil.nonNullEMF(element));
 		}
@@ -61,8 +63,9 @@ public class EcoreExecutorType extends ExecutorType
 
 	@Override
 	public @NonNull Value createInstance(@NonNull ValueFactory valueFactory, @NonNull String value) {
-		if (eClassifier instanceof EDataType) {
-			EDataType eDataType = (EDataType) eClassifier;
+		EClassifier eClassifier2 = eClassifier;
+		if (eClassifier2 instanceof EDataType) {
+			EDataType eDataType = (EDataType) eClassifier2;
 			Object element = eDataType.getEPackage().getEFactoryInstance().createFromString(eDataType, value);
 			return valueFactory.valueOf(DomainUtil.nonNullEMF(element));
 		}
@@ -75,7 +78,7 @@ public class EcoreExecutorType extends ExecutorType
 
 	@Override
 	public @NonNull String getMetaTypeName() {
-		return DomainUtil.nonNullPivot(eClassifier.getName());
+		return DomainUtil.nonNullModel(DomainUtil.nonNullState(eClassifier).getName());
 	}
 	
 	/**
@@ -87,7 +90,7 @@ public class EcoreExecutorType extends ExecutorType
 	public @NonNull EcoreExecutorType initFragments(@NonNull ExecutorFragment[] fragments, int[] depthCounts, /*@NonNull*/ EClassifier eClassifier) {
 		assert this.eClassifier == null;
 		assert name.equals(eClassifier.getName());
-		this.eClassifier = DomainUtil.nonNullEMF(eClassifier);		
+		this.eClassifier = DomainUtil.nonNullState(eClassifier);		
 		initFragments(fragments, depthCounts);
 		return this;
 	}

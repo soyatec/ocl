@@ -105,18 +105,19 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 			return true;
 		}
 		Diagnostic diagnostic = null;
-		MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(eResource());
+		MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(DomainUtil.nonNullState(eResource()));
 		Type bodyType = getBody().getType();
 		if (bodyType instanceof CollectionType) {
 			bodyType = ((CollectionType)bodyType).getElementType();
 		}
-		Type iteratorType = getIterator().get(0).getType();
+		Type bodyType2 = DomainUtil.nonNullState(bodyType);
+		Type iteratorType = DomainUtil.nonNullState(getIterator().get(0).getType());
 		Map<TemplateParameter, ParameterableElement> bindings = new HashMap<TemplateParameter, ParameterableElement>();
-		if (!metaModelManager.conformsTo(bodyType, iteratorType, bindings)) {
+		if (!metaModelManager.conformsTo(bodyType2, iteratorType, bindings)) {
 			if (diagnostics == null) {
 				return false;
 			}
-			diagnostic = new ValidationWarning(OCLMessages.IncompatibleBodyType_WARNING_, bodyType, iteratorType);
+			diagnostic = new ValidationWarning(OCLMessages.IncompatibleBodyType_WARNING_, bodyType2, iteratorType);
 		}
 		if (diagnostic == null) {
 			return true;
@@ -136,7 +137,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 			return true;
 		}
 		Diagnostic diagnostic = null;
-		MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(eResource());
+		MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(DomainUtil.nonNullState(eResource()));
 		try {
 			@NonNull Type type = DomainUtil.nonNullPivot(getBody().getType());
 			TemplateParameter templateParameter = type.getOwningTemplateParameter();

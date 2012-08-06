@@ -25,7 +25,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluationEnvironment;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -83,12 +82,14 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 		int iMax = referredIterators.length;
 		ValueIterator[] iterators = new ValueIterator[iMax];
 		for (int i = 0; i < iMax; i++) {
-			DomainTypedElement referredIterator = DomainUtil.nonNullEntry(referredIterators[i]);
-			ValueIterator valueIterator = new ValueIterator(evaluator, collectionValue, referredIterator);
-			if (!valueIterator.hasCurrent()) {
-				return null;
+			DomainTypedElement referredIterator = referredIterators[i];
+			if (referredIterator != null) {
+				ValueIterator valueIterator = new ValueIterator(evaluator, collectionValue, referredIterator);
+				if (!valueIterator.hasCurrent()) {
+					return null;
+				}
+				iterators[i] = valueIterator;
 			}
-			iterators[i] = valueIterator;
 		}
 		return iterators;
 	}

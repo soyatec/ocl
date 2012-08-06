@@ -102,10 +102,11 @@ public class EnumerationLiteralValueImpl extends ObjectValueImpl implements Enum
 	}
 
 	public @NonNull DomainEnumeration getType() {
-		if (type == null) {
-			type = getObject().getEnumeration();
+		DomainEnumeration type2 = type;
+		if (type2 == null) {
+			type2 = type = DomainUtil.nonNullState(getObject().getEnumeration());
 		}
-		return DomainUtil.nonNullJDT(type);
+		return type2;
 	}
 
 	@Override

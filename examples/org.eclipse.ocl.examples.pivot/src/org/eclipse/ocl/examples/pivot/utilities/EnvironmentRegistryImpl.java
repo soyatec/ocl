@@ -34,6 +34,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
@@ -59,14 +60,16 @@ public class EnvironmentRegistryImpl implements Environment.Registry {
     private static final String E_PACKAGE = "package"; //$NON-NLS-1$
     private static final String A_NS_URI = "nsURI"; //$NON-NLS-1$
     
-	public Environment getEnvironmentFor(@NonNull OCLExpression expression) {
-		return getEnvironmentFor(expression.getType());
+	public @Nullable Environment getEnvironmentFor(@NonNull OCLExpression expression) {
+		Type type = expression.getType();
+		return type != null ? getEnvironmentFor(type) : null;
 	}
 
-	public Environment getEnvironmentFor(@NonNull Object abstractSyntaxElement) {
+	public @Nullable Environment getEnvironmentFor(@NonNull Object abstractSyntaxElement) {
 		
 		if (abstractSyntaxElement instanceof TypedElement) {
-			return getEnvironmentFor(((TypedElement) abstractSyntaxElement).getType());
+			Type type = ((TypedElement) abstractSyntaxElement).getType();
+			return type != null ? getEnvironmentFor(type) : null;
 		}
 		
 		for (int i = 0; i < environments.size(); i++) {

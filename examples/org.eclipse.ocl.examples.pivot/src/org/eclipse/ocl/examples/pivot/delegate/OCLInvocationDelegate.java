@@ -66,12 +66,13 @@ public class OCLInvocationDelegate extends BasicInvocationDelegate
 			OCL ocl = delegateDomain.getOCL();
 			MetaModelManager metaModelManager = ocl.getMetaModelManager();
 			ValueFactory valueFactory = metaModelManager.getValueFactory();
-			if (specification == null) {
-				Operation theOperation = getOperation();
-				specification = InvocationBehavior.INSTANCE.getExpressionInOCL(metaModelManager, theOperation);
-				InvocationBehavior.INSTANCE.validate(operation);
+			ExpressionInOCL specification2 = specification;
+			if (specification2 == null) {
+				Operation operation2 = getOperation();
+				specification2 = specification = InvocationBehavior.INSTANCE.getExpressionInOCL(metaModelManager, operation2);
+				InvocationBehavior.INSTANCE.validate(operation2);
 			}
-			Query query = ocl.createQuery(DomainUtil.nonNullJDT(specification));
+			Query query = ocl.createQuery(specification2);
 			EvaluationEnvironment env = query.getEvaluationEnvironment();
 			List<Parameter> parms = operation.getOwnedParameter();
 			if (!parms.isEmpty()) {
@@ -95,13 +96,14 @@ public class OCLInvocationDelegate extends BasicInvocationDelegate
 	}
 
 	public @NonNull Operation getOperation() {
-		if (operation == null) {
-			operation = delegateDomain.getPivot(Operation.class, DomainUtil.nonNullJDT(eOperation));
-			if (operation == null) {
+		Operation operation2 = operation;
+		if (operation2 == null) {
+			operation2 = operation = delegateDomain.getPivot(Operation.class, DomainUtil.nonNullEMF(eOperation));
+			if (operation2 == null) {
 				throw new OCLDelegateException("No pivot property for " + eOperation) ;
 			}
 		}
-		return DomainUtil.nonNullJDT(operation);
+		return operation2;
 	}
 	
 	@Override

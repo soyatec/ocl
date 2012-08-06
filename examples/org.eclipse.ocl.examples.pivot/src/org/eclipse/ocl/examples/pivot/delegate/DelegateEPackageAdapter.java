@@ -18,7 +18,6 @@
 package org.eclipse.ocl.examples.pivot.delegate;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -99,9 +98,10 @@ public class DelegateEPackageAdapter extends AdapterImpl
 	}
 
 	public @NonNull Map<String, DelegateDomain> getDelegateDomains() {
-		if (delegateDomainMap == null) {
+		Map<String, DelegateDomain> delegateDomainMap2 = delegateDomainMap;
+		if (delegateDomainMap2 == null) {
 			delegatedBehaviorMap = new HashMap<String, List<DelegateDomain>>();
-			delegateDomainMap = new HashMap<String, DelegateDomain>();
+			delegateDomainMap2 = delegateDomainMap = new HashMap<String, DelegateDomain>();
 			EPackage ePackage = getTarget();
 			EAnnotation eAnnotation = ePackage.getEAnnotation(EcorePackage.eNS_URI);
 			if (eAnnotation != null) {
@@ -112,7 +112,7 @@ public class DelegateEPackageAdapter extends AdapterImpl
 					String delegateURIs = details.get(behaviorName);
 					if (delegateURIs != null) {
 						for (StringTokenizer stringTokenizer = new StringTokenizer(delegateURIs); stringTokenizer.hasMoreTokens();) {
-							String delegateURI = DomainUtil.nonNullJava(stringTokenizer.nextToken());
+							@SuppressWarnings("null") @NonNull String delegateURI = stringTokenizer.nextToken();
 							String resolvedURI = registry.resolve(delegateURI);
 							initializeDelegatedBehavior(resolvedURI, delegatedBehavior);
 						}
@@ -120,7 +120,7 @@ public class DelegateEPackageAdapter extends AdapterImpl
 				}
 			}
 		}
-		return DomainUtil.nonNullJDT(delegateDomainMap);
+		return delegateDomainMap2;
 	}
 
 	public @NonNull List<DelegateDomain> getDelegateDomains(@NonNull DelegatedBehavior<?, ?, ?> delegatedBehavior) {
@@ -131,7 +131,7 @@ public class DelegateEPackageAdapter extends AdapterImpl
 		if (list != null) {
 			return list;
 		} else {
-			return DomainUtil.nonNullJava(Collections.<DelegateDomain>emptyList());
+			return DelegateDomain.EMPTY_LIST;
 		}
 	}
 

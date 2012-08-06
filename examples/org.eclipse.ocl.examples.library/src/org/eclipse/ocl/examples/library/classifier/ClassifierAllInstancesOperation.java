@@ -26,7 +26,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -45,7 +44,9 @@ public class ClassifierAllInstancesOperation extends AbstractUnaryOperation
 		Set<Value> results = new HashSet<Value>();
 		Set<?> instances = modelManager.get(typeVal.getInstanceType());
 		for (Object instance : instances) {
-			results.add(valueFactory.valueOf(DomainUtil.nonNullEntry(instance)));	// FIXME Move to model manager
+			if (instance != null){
+				results.add(valueFactory.valueOf(instance));	// FIXME Move to model manager
+			}
 		}
 		return valueFactory.createSetValue((DomainCollectionType)returnType, results);
 	}

@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -303,9 +304,9 @@ public class GenPackageQueries
 		MetaModelManager metaModelManager = getMetaModelManager(genPackage);
 		PrimitiveType booleanType = metaModelManager.getBooleanType();
 		TypeServer typeServer = metaModelManager.getTypeServer(booleanType);
-		for (Type type : typeServer.getTrackedTypes()) {
+		for (DomainType type : typeServer.getPartialTypes()) {
 			if (type.getPackage() != thisPackage) {
-				GenPackage gPackage = getGenPackage(genPackage, type.getPackage());
+				GenPackage gPackage = getGenPackage(genPackage, (org.eclipse.ocl.examples.pivot.Package)type.getPackage());	// FIXZ Lose cast
 				return getInterfacePackageName(gPackage) + "." + gPackage.getPrefix() + "Tables";
 			}
 		}
@@ -375,7 +376,7 @@ public class GenPackageQueries
 		TypeServer typeServer = metaModelManager.getTypeServer(booleanType);
 		boolean gotThatPackage = false;
 		boolean gotThisPackage = false;
-		for (Type type : typeServer.getTrackedTypes()) {
+		for (DomainType type : typeServer.getPartialTypes()) {
 			if (type.getPackage() == thisPackage) {
 				gotThisPackage = true;
 			}

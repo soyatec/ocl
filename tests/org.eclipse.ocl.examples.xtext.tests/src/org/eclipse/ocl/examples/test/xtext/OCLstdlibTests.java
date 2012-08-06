@@ -28,6 +28,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.pivot.Annotation;
@@ -37,7 +38,6 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
-import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
@@ -163,7 +163,7 @@ public class OCLstdlibTests extends XtextTestCase
 		Resource pivotResource = doLoadFromString("string.oclstdlib", testFile);
 		MetaModelManager metaModelManager = MetaModelManager.getAdapter(pivotResource.getResourceSet());
 		AnyType oclAnyType = metaModelManager.getOclAnyType();
-		Iterable<Operation> ownedOperations = metaModelManager.getLocalOperations(oclAnyType, null);
+		Iterable<? extends DomainOperation> ownedOperations = metaModelManager.getAllOperations(oclAnyType, null);
 		assertEquals(2, Iterables.size(ownedOperations));		// one from OclAny::=
 		metaModelManager.dispose();
 	}
@@ -225,7 +225,9 @@ public class OCLstdlibTests extends XtextTestCase
 				}
 			}
 			assertNotNull("Missing java element for '" + moniker + "'", javaElement);
-			assertEquals(fileElement.getClass(), javaElement.getClass());
+			@SuppressWarnings("null")	// Can be null and we'll have an NPE as the test failure.
+			Class<? extends Element> javaElementClass = javaElement.getClass();
+			assertEquals(fileElement.getClass(), javaElementClass);
 			if (fileElement instanceof TypedElement) {
 				Type fileType = ((TypedElement)fileElement).getType();
 				Type javaType = ((TypedElement)javaElement).getType();

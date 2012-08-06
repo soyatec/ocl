@@ -18,7 +18,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -38,16 +37,19 @@ public class EClassContext extends AbstractParserContext
 	}
 
 	@Override
-	public @NonNull Type getClassContext() {
+	public @Nullable Type getClassContext() {
 		if (classContext == null) {
 			classContext = metaModelManager.getPivotOfEcore(Type.class, eClassContext);
 		}
-		return DomainUtil.nonNullJDT(classContext);
+		return classContext;
 	}
 
 	@Override
 	public void initialize(@NonNull Base2PivotConversion conversion, @NonNull ExpressionInOCL expression) {
 		super.initialize(conversion, expression);
-		conversion.setContextVariable(expression, Environment.SELF_VARIABLE_NAME, getClassContext());
+		Type classContext = getClassContext();
+		if (classContext != null) {
+			conversion.setContextVariable(expression, Environment.SELF_VARIABLE_NAME, classContext);
+		}
 	}
 }

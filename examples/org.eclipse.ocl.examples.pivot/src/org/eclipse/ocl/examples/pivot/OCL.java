@@ -487,11 +487,11 @@ public class OCL {
 	 * @see #getEnvironment()
 	 */
 	public @NonNull EvaluationEnvironment getEvaluationEnvironment() {
-		if (evalEnv == null) {
-			evalEnv = environmentFactory.createEvaluationEnvironment();
+		EvaluationEnvironment evalEnv2 = evalEnv;
+		if (evalEnv2 == null) {
+			evalEnv2 = evalEnv = environmentFactory.createEvaluationEnvironment();
 		}
-
-		return DomainUtil.nonNullJDT(evalEnv);
+		return evalEnv2;
 	}
 	
 	/**

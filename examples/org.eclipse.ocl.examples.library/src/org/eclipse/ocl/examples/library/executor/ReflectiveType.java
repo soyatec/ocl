@@ -78,26 +78,37 @@ public abstract class ReflectiveType extends AbstractInheritance
 	public void dispose() {}
 	
 	/**
-	 * Add this Inheritance and all un-installed super-Inheritances to inheritances.
+	 * Add this Inheritance and all un-installed super-Inheritances to inheritances, returning true if an
+	 * inherirt5ace was already installed.
 	 */
-	public void gatherUninstalledInheritances(@NonNull List<ReflectiveType> inheritances) {
+	public boolean gatherUninstalledInheritances(@NonNull List<ReflectiveType> inheritances) {
+		boolean gotOne = false;
 		if (!inheritances.contains(this)) {
 			inheritances.add(this);
 			if (fragments == null) {
 				for (DomainInheritance superInheritance : getInitialSuperInheritances()) {
 					if (superInheritance instanceof ReflectiveType) {
-						((ReflectiveType)superInheritance).gatherUninstalledInheritances(inheritances);
+						if (((ReflectiveType)superInheritance).gatherUninstalledInheritances(inheritances)) {
+							gotOne = true;		// Transitively installed
+						}
+					}
+					else {
+						gotOne = true;			// Statically installed
 					}
 				}
 			}
+			else {
+				gotOne = true;					// Locally installed
+			}
 		}
+		return gotOne;
 	}
 	
 	public final @NonNull FragmentIterable getAllSuperFragments() {
 		if (fragments == null) {
 			initialize();
 		}
-		return new FragmentIterable(DomainUtil.nonNullJDT(fragments));
+		return new FragmentIterable(DomainUtil.nonNullState(fragments));
 	}
 
 	public final int getDepth() {
@@ -111,9 +122,16 @@ public abstract class ReflectiveType extends AbstractInheritance
 		return fragments[fragmentNumber];
 	}
 	
-//	protected @NonNull DomainFragment[] getFragments() {
-//		return fragments;
-//	}
+	protected @NonNull DomainFragment[] getFragments() {
+		DomainFragment[] fragments2 = fragments;
+		if (fragments2 != null) {
+			return fragments2;
+		}
+		initialize();
+		@SuppressWarnings("null")
+		@NonNull DomainFragment[] fragments3 = fragments;
+		return fragments3;
+	}
 
 	public int getIndex(int fragmentNumber) {
 		return indexes[fragmentNumber];
@@ -149,7 +167,17 @@ public abstract class ReflectiveType extends AbstractInheritance
 
 	protected void initialize() {
 		List<ReflectiveType> uninstalledInheritances = new ArrayList<ReflectiveType>();
-		gatherUninstalledInheritances(uninstalledInheritances);
+		// Detect missing OclAny inheritance
+		// - any installed superclass must inherit from OclAny so ok.
+		// - an all-uninstalled superclass list must include OclAny to be ok.
+		if (!gatherUninstalledInheritances(uninstalledInheritances)) {
+			DomainInheritance oclAnyInheritance = getOclAnyInheritance();
+			if (!uninstalledInheritances.contains(oclAnyInheritance))  {	// FIXME may be an rather than the OclAny - need a way to find the partial types.
+/*				List<ReflectiveType> uninstalledInheritances2 = new ArrayList<ReflectiveType>();
+				gatherUninstalledInheritances(uninstalledInheritances2);
+				assert uninstalledInheritances.contains(oclAnyInheritance); */
+			} 
+		}
 		int oldPendingCount = uninstalledInheritances.size();
 		while (true) {
 			for (ListIterator<ReflectiveType> it = uninstalledInheritances.listIterator(); it.hasNext(); ) {
@@ -190,7 +218,10 @@ public abstract class ReflectiveType extends AbstractInheritance
 			return true;
 		}
 		DomainInheritance oclAnyInheritance = getOclAnyInheritance();
-		if (this != oclAnyInheritance){
+		if (this == oclAnyInheritance) {
+			installOclAny();
+		}
+		else {
 			List<List<DomainInheritance>> all = new ArrayList<List<DomainInheritance>>();
 			for (DomainInheritance superInheritance : getInitialSuperInheritances()) {
 //				installIn(superInheritance, this, all);
@@ -226,7 +257,9 @@ public abstract class ReflectiveType extends AbstractInheritance
 				indexes[0] = 0;
 				for (int i = 0; i < superDepths; i++) {
 					for (DomainInheritance some : all.get(i)) {
-						fragments[j++] = createFragment(DomainUtil.nonNullEntry(some));
+						if (some != null) {
+							fragments[j++] = createFragment(some);
+						}
 					}
 					indexes[i+1] = j;
 				}

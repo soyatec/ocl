@@ -19,7 +19,6 @@ package org.eclipse.ocl.examples.pivot.attributes;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
@@ -40,7 +39,7 @@ public class OperationAttribution extends AbstractAttribution
 		if (containmentFeature == PivotPackage.Literals.OPERATION__OWNED_PARAMETER) {
 		}
 		else {
-			environmentView.addNamedElements(DomainUtil.nonNullEMF(targetOperation.getOwnedParameter()));
+			environmentView.addAllParameters(targetOperation);
 		}
 		environmentView.addElements(PivotUtil.getTypeTemplateParameterables(targetOperation));
 		return scopeView.getParent();

@@ -378,7 +378,7 @@ public class IteratorsTest extends PivotTestSuite
 
         // empty closure
         DomainCollectionType collectionType = expected1.getCollectionType();
-        DomainType elementType = collectionType.getElementType();
+        @SuppressWarnings("unused") DomainType elementType = collectionType.getElementType();
 		assertQueryEquals(pkg1, valueFactory.createSetValue(collectionType), "self.oclAsType(Package)->closure(nestingPackage)");
 //WIP        assertQueryNotEquals(pkg1, getEmptySetValue(), "self->closure(nestingPackage)");
         // empty closure

@@ -114,7 +114,9 @@ public class DelegateResourceAdapter extends AdapterImpl
 
 	protected void unloadDelegates(@NonNull List<? extends EObject> contents) {
 		for (EObject eObject : contents) {
-			unloadDelegate(DomainUtil.nonNullEntry(eObject));
+			if (eObject != null) {
+				unloadDelegate(eObject);
+			}
 		}		
 	}
 }

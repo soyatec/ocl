@@ -17,16 +17,17 @@
 package org.eclipse.ocl.examples.domain.elements;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 
-public interface DomainProperty extends DomainTypedElement
+public interface DomainProperty extends DomainFeature
 {
 	/**
-	 * Return the Inheritance dispatch table for the owning type.
+	 * Return the Inheritance dispatch table for the owning type, or null for an orphan property owned by an Annotation.
 	 */
-	@NonNull DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary);
+	@Nullable DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary);
 
 	/**
 	 * Return the opposite Property if there is one, else null.

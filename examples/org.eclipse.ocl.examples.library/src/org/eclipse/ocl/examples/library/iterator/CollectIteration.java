@@ -24,7 +24,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 
@@ -50,7 +49,9 @@ public class CollectIteration extends AbstractIteration
 			CollectionValue bodyColl = (CollectionValue) bodyVal;
 			try {
 				for (Value value : bodyColl.flatten()) {
-					accumulatorValue.add(DomainUtil.nonNullEntry(value));
+					if (value != null) {
+						accumulatorValue.add(value);
+					}
 				}
 			} catch (InvalidValueException e) {
 				iterationManager.throwInvalidEvaluation(e);

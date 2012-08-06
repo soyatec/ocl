@@ -17,28 +17,24 @@
 package org.eclipse.ocl.examples.xtext.base.attributes;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.Enumeration;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.baseCST.EnumerationCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PivotableElementCS;
 
-public class EnumCSAttribution extends AbstractAttribution
+public class PivotCSAttribution extends AbstractAttribution
 {
-	public static final EnumCSAttribution INSTANCE = new EnumCSAttribution();
+	public static final PivotCSAttribution INSTANCE = new PivotCSAttribution();
 
 	@Override
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
-		EnumerationCS targetElement = (EnumerationCS)target;
-		Enumeration pivot = PivotUtil.getPivot(Enumeration.class, targetElement);
+		PivotableElementCS targetElement = (PivotableElementCS)target;
+		Element pivot = PivotUtil.getPivot(Element.class, targetElement);
 		if (pivot != null) {
-			environmentView.addNamedElements(pivot.getOwnedLiteral());
-			environmentView.addElements(PivotUtil.getTemplateParameters(pivot));
+			environmentView.computeLookups(pivot, scopeView.getChild(), null, scopeView.getTargetReference());
 		}
-		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-		environmentView.addLibContents(metaModelManager.getOclAnyType(), scopeView);
-		return scopeView.getParent();
+		return null;
 	}
 }

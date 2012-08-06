@@ -462,7 +462,8 @@ public class CollectionTypeImpl
 	}
 
 	public @NonNull Type getContainerType() {
-		return unspecializedElement != null ? DomainUtil.nonNullJDT((Type)unspecializedElement) : this;
+		TemplateableElement unspecializedElement2 = unspecializedElement;
+		return unspecializedElement2 != null ? (Type)unspecializedElement2 : this;
 	}
 
 	@Override

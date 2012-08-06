@@ -207,7 +207,7 @@ public class AliasAnalysis extends AdapterImpl
 						domainNamedElement = metaModelManager.getPackageServer((DomainPackage)eObject);
 					}
 					else {
-						domainNamedElement = metaModelManager.getPrimaryElement((NamedElement)eObject);
+//						domainNamedElement = metaModelManager.getPrimaryElement((NamedElement)eObject);
 					}
 				}
 				addName(domainNamedElement.getName(), domainNamedElement);

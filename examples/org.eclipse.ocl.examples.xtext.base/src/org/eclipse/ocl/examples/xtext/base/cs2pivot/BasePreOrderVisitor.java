@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.ocl.examples.pivot.AnyType;
+import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.NamedElement;
@@ -306,6 +307,13 @@ public class BasePreOrderVisitor extends AbstractExtendingBaseCSVisitor<Continua
 
 	@Override
 	public Continuation<?> visitDataTypeCS(DataTypeCS csDataType) {
+		DataType pivotElement = PivotUtil.getPivot(DataType.class, csDataType);
+		List<Type> pivotSuperClasses = pivotElement.getSuperClass();
+		pivotSuperClasses.clear();
+		org.eclipse.ocl.examples.pivot.Class oclElementType = context.getMetaModelManager().getOclElementType();
+		if (oclElementType != null) {
+			pivotSuperClasses.add(oclElementType);
+		}
 		return null;
 	}
 
@@ -316,6 +324,13 @@ public class BasePreOrderVisitor extends AbstractExtendingBaseCSVisitor<Continua
 
 	@Override
 	public Continuation<?> visitEnumerationCS(EnumerationCS csEnumeration) {
+		org.eclipse.ocl.examples.pivot.Enumeration pivotElement = PivotUtil.getPivot(org.eclipse.ocl.examples.pivot.Enumeration.class, csEnumeration);
+		List<Type> pivotSuperClasses = pivotElement.getSuperClass();
+		pivotSuperClasses.clear();
+		org.eclipse.ocl.examples.pivot.Class oclElementType = context.getMetaModelManager().getOclElementType();
+		if (oclElementType != null) {
+			pivotSuperClasses.add(oclElementType);
+		}
 		return null;
 	}
 

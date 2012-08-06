@@ -76,7 +76,7 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 			this.csParameters = csParameters;
 		}
 
-		public boolean matches(EnvironmentView environmentView, Type forType, DomainElement eObject) {
+		public boolean matches(EnvironmentView environmentView, DomainElement eObject) {
 			if (eObject instanceof Iteration) {
 				return false;
 			}
@@ -109,7 +109,7 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 					}
 				}
 				if (bindings != null) {
-					installBindings(environmentView, forType, eObject, bindings);
+					installBindings(environmentView, eObject, bindings);
 				}
 				return true;
 			}

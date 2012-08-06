@@ -206,7 +206,7 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Class _OclType = createClass("OclType");
 		protected final @NonNull VoidType _OclVoid = createVoidType("OclVoid");
 		protected final @NonNull Class _Type = createClass("Type");
-		protected final @NonNull AnyType _$$ = createAnyType("$$");
+//		protected final @NonNull AnyType _$$ = createAnyType("$$");
 		
 		protected final @NonNull PrimitiveType _Boolean = createPrimitiveType("Boolean");
 		protected final @NonNull PrimitiveType _Integer = createPrimitiveType("Integer");
@@ -386,7 +386,7 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull ClassifierType _ClassClassifier_OclSelf = createClassifierType("ClassClassifier");
 		protected final @NonNull ClassifierType _ClassClassifier_OclVoid = createClassifierType("ClassClassifier");
 		protected final @NonNull ClassifierType _ClassClassifier = createClassifierType("ClassClassifier");
-		protected final @NonNull ClassifierType _CollectionClassifier_OclSelf_Collection_T = createClassifierType("CollectionClassifier");
+		protected final @NonNull ClassifierType _CollectionClassifier_Collection_T_OclSelf = createClassifierType("CollectionClassifier");
 		protected final @NonNull ClassifierType _CollectionClassifier = createClassifierType("CollectionClassifier");
 		protected final @NonNull ClassifierType _EnumerationClassifier_OclSelf = createClassifierType("EnumerationClassifier");
 		protected final @NonNull ClassifierType _EnumerationClassifier = createClassifierType("EnumerationClassifier");
@@ -445,7 +445,7 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedTypes.add(type = _Type);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclType);
-			ownedTypes.add(type = _$$);
+//			ownedTypes.add(type = _$$);
 		}
 		
 		protected void installPrimitiveTypes() {
@@ -1162,7 +1162,7 @@ public class OCLstdlib extends XMIResourceImpl
 			type.setInstanceType(_ClassClassifier_T);
 			superClasses = type.getSuperClass();
 			superClasses.add(_AnyClassifier_ClassClassifier_T);
-			orphanTypes.add(type = _CollectionClassifier_OclSelf_Collection_T);
+			orphanTypes.add(type = _CollectionClassifier_Collection_T_OclSelf);
 			type.setUnspecializedElement(_CollectionClassifier);
 			type.setInstanceType(_OclSelf);
 			superClasses = type.getSuperClass();
@@ -1423,7 +1423,7 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Operation op_Collection_Collection_T_max = createOperation("max", _Collection_T, "org.eclipse.ocl.examples.library.collection.CollectionMaxOperation", org.eclipse.ocl.examples.library.collection.CollectionMaxOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T_min = createOperation("min", _Collection_T, "org.eclipse.ocl.examples.library.collection.CollectionMinOperation", org.eclipse.ocl.examples.library.collection.CollectionMinOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T_notEmpty = createOperation("notEmpty", _Boolean, "org.eclipse.ocl.examples.library.collection.CollectionNotEmptyOperation", org.eclipse.ocl.examples.library.collection.CollectionNotEmptyOperation.INSTANCE);
-		protected final @NonNull Operation op_Collection_Collection_T_oclType = createOperation("oclType", _CollectionClassifier_OclSelf_Collection_T, "org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation.INSTANCE);
+		protected final @NonNull Operation op_Collection_Collection_T_oclType = createOperation("oclType", _CollectionClassifier_Collection_T_OclSelf, "org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T_product = createOperation("product", _Set_Tuple, "org.eclipse.ocl.examples.library.collection.CollectionProductOperation", org.eclipse.ocl.examples.library.collection.CollectionProductOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T_selectByKind = createOperation("selectByKind", _Collection_Collection_selectByKind_TT, "org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation", org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T_selectByType = createOperation("selectByType", _Collection_Collection_selectByType_TT, "org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation", org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
@@ -2248,6 +2248,7 @@ public class OCLstdlib extends XMIResourceImpl
 		}
 			
 		protected final @NonNull Property pr_CollectionClassifier_elementType = createProperty("elementType", _CollectionClassifier_E);
+		protected final @NonNull Property pr_Collection_Collection_T_elementType = createProperty("elementType", _Collection_T);
 		protected final @NonNull Property pr_EnumerationClassifier_ownedLiteral = createProperty("ownedLiteral", _OrderedSet_EnumerationLiteral);
 		protected final @NonNull Property pr_OclInvalid_oclBadProperty = createProperty("oclBadProperty", _OclInvalid);
 		
@@ -2256,6 +2257,11 @@ public class OCLstdlib extends XMIResourceImpl
 			Property property;
 			ownedProperties = _CollectionClassifier.getOwnedAttribute();
 			ownedProperties.add(property = pr_CollectionClassifier_elementType);
+			property.setIsResolveProxies(true);
+			property.setImplementationClass("org.eclipse.ocl.examples.library.collection.CollectionClassifierElementTypeProperty");
+			property.setImplementation(org.eclipse.ocl.examples.library.collection.CollectionClassifierElementTypeProperty.INSTANCE);
+			ownedProperties = _Collection_Collection_T_1.getOwnedAttribute();
+			ownedProperties.add(property = pr_Collection_Collection_T_elementType);
 			property.setIsResolveProxies(true);
 			property.setImplementationClass("org.eclipse.ocl.examples.library.collection.CollectionClassifierElementTypeProperty");
 			property.setImplementation(org.eclipse.ocl.examples.library.collection.CollectionClassifierElementTypeProperty.INSTANCE);
@@ -2429,9 +2435,9 @@ public class OCLstdlib extends XMIResourceImpl
 				createTemplateParameterSubstitution(tp_ClassClassifier, _OclSelf)));
 			_ClassClassifier_OclVoid.getTemplateBinding().add(createTemplateBinding(ts_ClassClassifier,
 				createTemplateParameterSubstitution(tp_ClassClassifier, _OclVoid)));
-			_CollectionClassifier_OclSelf_Collection_T.getTemplateBinding().add(createTemplateBinding(ts_CollectionClassifier,
-				createTemplateParameterSubstitution(tp_CollectionClassifier_1, _OclSelf),
-				createTemplateParameterSubstitution(tp_CollectionClassifier, _Collection_T)));
+			_CollectionClassifier_Collection_T_OclSelf.getTemplateBinding().add(createTemplateBinding(ts_CollectionClassifier,
+				createTemplateParameterSubstitution(tp_CollectionClassifier, _Collection_T),
+				createTemplateParameterSubstitution(tp_CollectionClassifier_1, _OclSelf)));
 			_Collection_Integer.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Integer)));
 			_Collection_String.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
@@ -2795,6 +2801,7 @@ public class OCLstdlib extends XMIResourceImpl
 			installComment(it_Collection_Collection_T_collectNested, "The Collection of elements which results from applying body to every member of the source collection.");
 			installComment(it_Collection_Collection_T_collect, "The Collection of elements that results from applying body to every member of the source set.\nThe result is flattened. Notice that this is based on collectNested, which can be of different type depending on the type of source.\ncollectNested is defined individually for each subclass of CollectionType.");
 			installComment(op_Collection_Collection_T_count, "The number of times that object occurs in the collection oclText[self].");
+			installComment(pr_Collection_Collection_T_elementType, "Evaluates to the type of the collection elements.");
 			installComment(op_Collection_Collection_T_excludes, "True if object is not an element of oclText[self], oclText[false] otherwise.");
 			installComment(op_Collection_Collection_T_excludesAll, "Does oclText[self] contain none of the elements of c2 ?");
 			installComment(op_Collection_Collection_T_excluding, "The collection containing all elements of oclText[self] apart from object.");

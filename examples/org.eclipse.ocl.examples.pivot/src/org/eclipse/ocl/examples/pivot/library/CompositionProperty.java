@@ -36,7 +36,7 @@ import org.eclipse.ocl.examples.pivot.Type;
  */
 public class CompositionProperty extends AbstractProperty
 {
-	public static final CompositionProperty INSTANCE = new CompositionProperty();
+	public static final @NonNull CompositionProperty INSTANCE = new CompositionProperty();
 
 	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();

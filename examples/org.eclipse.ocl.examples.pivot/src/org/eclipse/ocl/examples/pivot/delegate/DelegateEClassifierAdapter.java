@@ -56,18 +56,21 @@ public class DelegateEClassifierAdapter extends AdapterImpl {
 	}
 	
 	public @NonNull Map<String, ValidationDelegate> getValidationDelegates() {
-		if (validationDelegateMap == null) {
+		Map<String, ValidationDelegate> validationDelegateMap2 = validationDelegateMap;
+		if (validationDelegateMap2 == null) {
 			EClassifier eClassifier = DomainUtil.nonNullState(getTarget());
-			validationDelegateMap = new HashMap<String, ValidationDelegate>();
+			validationDelegateMap2 = validationDelegateMap = new HashMap<String, ValidationDelegate>();
 			List<ValidationDelegate.Factory> factories = ValidationBehavior.INSTANCE.getFactories(eClassifier);
 			if (eClassifier instanceof EClass) {
 				for (EOperation eOperation : ((EClass)eClassifier).getEOperations()) {
-					if (EcoreUtil.isInvariant(eOperation)) {					
-						List<DelegateDomain> opDelegateDomains = InvocationBehavior.INSTANCE.getDelegateDomains(DomainUtil.nonNullEntry(eOperation));
+					if ((eOperation != null) && EcoreUtil.isInvariant(eOperation)) {					
+						List<DelegateDomain> opDelegateDomains = InvocationBehavior.INSTANCE.getDelegateDomains(eOperation);
 						for (DelegateDomain opDelegateDomain : opDelegateDomains) {
-							ValidationDelegate.Factory opFactory = ValidationBehavior.INSTANCE.getFactory(DomainUtil.nonNullEntry(opDelegateDomain), eClassifier);
-							if (!factories.contains(opFactory)) {
-								factories.add(opFactory);
+							if (opDelegateDomain != null) {
+								ValidationDelegate.Factory opFactory = ValidationBehavior.INSTANCE.getFactory(opDelegateDomain, eClassifier);
+								if (!factories.contains(opFactory)) {
+									factories.add(opFactory);
+								}
 							}
 						}
 					}
@@ -77,12 +80,12 @@ public class DelegateEClassifierAdapter extends AdapterImpl {
 				for (ValidationDelegate.Factory factory : factories) {
 					ValidationDelegate validationDelegate = factory.createValidationDelegate(eClassifier);
 					if (validationDelegate != null) {
-						validationDelegateMap.put(factory.getURI(), validationDelegate);
+						validationDelegateMap2.put(factory.getURI(), validationDelegate);
 					}
 				}
 			} 
 		}
-		return DomainUtil.nonNullJDT(validationDelegateMap);
+		return validationDelegateMap2;
 	}
 
 	@Override

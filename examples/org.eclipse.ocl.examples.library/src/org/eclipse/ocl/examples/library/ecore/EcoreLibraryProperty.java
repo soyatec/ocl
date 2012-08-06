@@ -24,7 +24,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
@@ -37,8 +36,9 @@ public class EcoreLibraryProperty extends AbstractProperty
 	protected final @NonNull EStructuralFeature eFeature;
 
 
+	@SuppressWarnings("null")
 	public EcoreLibraryProperty(/*@NonNull*/ EStructuralFeature eFeature) {
-		this.eFeature = DomainUtil.nonNullEMF(eFeature);
+		this.eFeature = eFeature;
 	}
 
 	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull DomainProperty property) throws InvalidValueException {

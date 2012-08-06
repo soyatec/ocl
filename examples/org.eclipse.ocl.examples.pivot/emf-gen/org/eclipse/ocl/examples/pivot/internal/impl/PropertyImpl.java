@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -46,7 +47,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -1647,8 +1647,14 @@ public class PropertyImpl
 		return visitor.visitProperty(this);
 	}
 
-	public @NonNull DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary) {
-		return standardLibrary.getInheritance(DomainUtil.nonNullModel(getOwningType()));
+	public @Nullable DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary) {
+		Type owningType = getOwningType();
+		if (owningType != null) {
+			return standardLibrary.getInheritance(owningType);
+		}
+		else {
+			return null;
+		}
 	}
 
 	public void setValue(@NonNull ObjectValue objectValue, @NonNull Value propertyValue) throws InvalidValueException {

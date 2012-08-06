@@ -67,6 +67,10 @@ public class ExecutorProperty implements DomainProperty
 		this.opposite = opposite;
 	}
 
+	public boolean isStatic() {
+		return false;								// WIP FIXME
+	}
+
 	public void setValue(@NonNull ObjectValue objectValue, @NonNull Value propertyValue) throws InvalidValueException {
 		throw new UnsupportedOperationException();
 	}

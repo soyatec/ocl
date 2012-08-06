@@ -44,16 +44,16 @@ public class OperationContextFilter implements ScopeFilter
 		return 0;
 	}
 
-	public boolean matches(EnvironmentView environmentView, Type forType, DomainElement eObject) {
+	public boolean matches(EnvironmentView environmentView, DomainElement eObject) {
 		if (!(eObject instanceof Operation)) {
 			return false;
 		}
 		Operation candidateOperation = (Operation) eObject;
 		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-		Type context = metaModelManager.getPrimaryType(candidateOperation.getOwningType());
-		if (context != metaModelManager.getPrimaryElement(forType)) {
-			return false;
-		}
+//		Type context = metaModelManager.getPrimaryType(candidateOperation.getOwningType());
+//		if (context != metaModelManager.getPrimaryElement(forType)) {
+//			return false;
+//		}
 		List<ParameterCS> contextParameters = csOperationContext.getParameters();
 		List<Parameter> candidateParameters = candidateOperation.getOwnedParameter();
 		int iMax = contextParameters.size();

@@ -17,6 +17,7 @@ package	org.eclipse.ocl.examples.pivot.model;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.AssociativityKind;
@@ -161,7 +162,7 @@ public class AbstractContents
 		return pivotType;
 	}
 
-	protected @NonNull Package createPackage(@NonNull String name, String nsPrefix, @NonNull String nsURI) {
+	protected @NonNull Package createPackage(@NonNull String name, @Nullable String nsPrefix, @NonNull String nsURI) {
 		Package pivotPackage = PivotFactory.eINSTANCE.createPackage();
 		pivotPackage.setName(name);
 		pivotPackage.setNsPrefix(nsPrefix);
@@ -169,7 +170,7 @@ public class AbstractContents
 		return pivotPackage;
 	}
 	
-	protected @NonNull Parameter createParameter(@NonNull String name, Type type) {
+	protected @NonNull Parameter createParameter(@NonNull String name, @NonNull Type type) {
 		Parameter pivotParameter = PivotFactory.eINSTANCE.createParameter();
 		pivotParameter.setName(name);
 		pivotParameter.setType(type);

@@ -26,7 +26,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -63,10 +62,12 @@ public abstract class ValueImpl implements Value
         }
     }
     
-    protected static @NonNull Double NULL_DOUBLE = DomainUtil.nonNullJava(Double.valueOf(0));
-    protected static @NonNull Integer NULL_INTEGER = DomainUtil.nonNullJava(Integer.valueOf(0));
-//    public static EmptyIterator NULL_ITERATOR1 = new EmptyIterator();
-    protected static @NonNull String NULL_STRING = DomainUtil.nonNullJava(String.valueOf(""));    
+    @SuppressWarnings("null")
+	protected static @NonNull Double NULL_DOUBLE = Double.valueOf(0);
+    @SuppressWarnings("null")
+	protected static @NonNull Integer NULL_INTEGER = Integer.valueOf(0);
+    @SuppressWarnings("null")
+	protected static @NonNull String NULL_STRING = String.valueOf("");    
 
     /**
 	 * <!-- begin-user-doc -->
@@ -234,7 +235,8 @@ public abstract class ValueImpl implements Value
 	}
 
 	public @NonNull String oclToString() {
-		return DomainUtil.nonNullJava(toString());
+		@SuppressWarnings("null") @NonNull String result = toString();
+		return result;
 	}
 
 	public void toString(@NonNull StringBuilder s, int sizeLimit) {

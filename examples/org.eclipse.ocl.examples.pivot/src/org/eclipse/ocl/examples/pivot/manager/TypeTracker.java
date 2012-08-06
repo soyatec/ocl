@@ -26,7 +26,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.Type;
 
 import com.google.common.base.Function;
 
@@ -34,25 +33,26 @@ import com.google.common.base.Function;
  * A TypeTracker adapts a Type to coordinate the coherent behaviour of one or more
  * merged Types as required for Complete OCL type extension.
  */
-public class TypeTracker implements Adapter.Internal			// FIXME package private
+class TypeTracker implements Adapter.Internal
 {
-	public static Function<TypeTracker, Type> tracker2type = new Function<TypeTracker, Type>()
+	public static Function<TypeTracker, DomainType> tracker2type = new Function<TypeTracker, DomainType>()
 	{
-		public Type apply(TypeTracker typeTracker) {
+		public DomainType apply(TypeTracker typeTracker) {
 			return typeTracker.getType();
 		}
 	};
 
-	protected final @NonNull TypeServer typeServer;
+	protected final @NonNull ExtensibleTypeServer typeServer;
 
 	/**
 	 * The Type tracked by this tracker.
 	 */
 	private final @NonNull DomainType type;
 	
-	TypeTracker(@NonNull TypeServer typeServer, @NonNull DomainType type) {
+	TypeTracker(@NonNull ExtensibleTypeServer typeServer, @NonNull DomainType type) {
 		this.typeServer = typeServer;
 		this.type = type;
+		assert !(type instanceof ExtensibleTypeServer);
 		if (type instanceof Notifier) {
 			((Notifier)type).eAdapters().add(this);
 		}
@@ -65,20 +65,15 @@ public class TypeTracker implements Adapter.Internal			// FIXME package private
 		}
 	}
 
-	public @NonNull Type getPrimaryType() {
-		return typeServer.getPrimaryType();
-	}
-
 	public final Notifier getTarget() {
 		return type instanceof Notifier ? (Notifier)type : null;
 	}
 
-	public final @NonNull Type getType() {
-		return (Type) type;				// FIXME WIP Bad cast
+	public final @NonNull DomainType getType() {
+		return type;
 	}
 	
-	@SuppressWarnings("null")
-	public @NonNull TypeServer getTypeServer() {
+	public @NonNull ExtensibleTypeServer getTypeServer() {
 		return typeServer;
 	}
 	
@@ -181,6 +176,16 @@ public class TypeTracker implements Adapter.Internal			// FIXME package private
 				case Notification.SET:
 				case Notification.UNSET:
 					typeServer.changedInheritance();
+					break;
+			}
+		}
+		else if (feature == PivotPackage.Literals.NAMED_ELEMENT__NAME) {
+			switch (eventType) {
+				case Notification.SET:
+				case Notification.UNSET:
+					PackageServer packageServer = typeServer.getPackageServer();
+					dispose();
+					packageServer.addedMemberType(type);
 					break;
 			}
 		}

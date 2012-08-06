@@ -16,9 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot.attributes;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.ClassifierType;
@@ -29,7 +26,6 @@ import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 public class ClassAttribution extends AbstractAttribution
 {
@@ -41,8 +37,8 @@ public class ClassAttribution extends AbstractAttribution
 		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 		if (targetClass.getOwningTemplateParameter() != null) {
 			Type type = metaModelManager.getOclAnyType(); // WIP use lowerbound
-			environmentView.addNamedElements(type, metaModelManager.getLocalOperations(type, Boolean.FALSE));
-			environmentView.addNamedElements(type, metaModelManager.getLocalProperties(type, Boolean.FALSE));
+			environmentView.addAllOperations(type, Boolean.FALSE);
+			environmentView.addAllProperties(type, Boolean.FALSE);
 			return null;
 		}
 		if (targetClass.getTemplateBinding().size() == 0) {
@@ -50,21 +46,25 @@ public class ClassAttribution extends AbstractAttribution
 			if (scopeTarget instanceof Pivotable) {
 				Element pivot = ((Pivotable)scopeTarget).getPivot();
 				if (pivot == target) {		// Inherited template parameters are invisible.
-					environmentView.addElements(PivotUtil.getTypeTemplateParameterables(targetClass));
+					environmentView.addAllTypeTemplateParameterables(targetClass);
 				}
 			}
 		}
 		if (target instanceof ClassifierType) {
 			Type instanceType = ((ClassifierType)target).getInstanceType();
 			if ((instanceType != null) && (instanceType.getOwningTemplateParameter() == null)) {		// Maybe null
-				environmentView.addNamedElements(instanceType, metaModelManager.getLocalOperations(instanceType, Boolean.TRUE));
-				environmentView.addNamedElements(instanceType, metaModelManager.getLocalProperties(instanceType, Boolean.TRUE));
+//				environmentView.addNamedElements(instanceType, metaModelManager.getLocalOperations(instanceType, Boolean.TRUE));
+//				environmentView.addNamedElements(instanceType, metaModelManager.getLocalProperties(instanceType, Boolean.TRUE));
+				environmentView.addAllOperations(instanceType, Boolean.TRUE);
+				environmentView.addAllProperties(instanceType, null /*Boolean.TRUE*/);		// FIXME
 			}
 		}
-		environmentView.addNamedElements(targetClass, metaModelManager.getLocalOperations(targetClass, Boolean.FALSE));
-		environmentView.addNamedElements(targetClass, metaModelManager.getLocalProperties(targetClass, Boolean.FALSE));
+		environmentView.addAllOperations(targetClass, Boolean.FALSE);
+		environmentView.addAllProperties(targetClass, Boolean.FALSE);
+//		environmentView.addNamedElements(targetClass, metaModelManager.getLocalOperations(targetClass, Boolean.FALSE));
+//		environmentView.addNamedElements(targetClass, metaModelManager.getLocalProperties(targetClass, Boolean.FALSE));
 //		if (!environmentView.hasFinalResult()) {
-			if (target instanceof ClassifierType) {
+/*			if (target instanceof ClassifierType) {
 				Set<Type> alreadyVisitedMetaTypes = new HashSet<Type>();
 				Type instanceType = ((ClassifierType)target).getInstanceType();
 				if ((instanceType != null) && (instanceType.getOwningTemplateParameter() == null)) {		// Maybe null
@@ -78,7 +78,7 @@ public class ClassAttribution extends AbstractAttribution
 					environmentView.addAllContents(targetClass, scopeView, superClass, Boolean.FALSE, alreadyVisitedTypes);
 				}
 			}
-//		}
+//		} */
 		return scopeView.getParent();
 	}
 }

@@ -917,7 +917,9 @@ public class PivotUtil extends DomainUtil
 				s.append("#/");
 			}
 			else {
-				getNsURI(s, DomainUtil.nonNullJDT(eContainer));
+				@SuppressWarnings("null")
+				@NonNull EObject eContainer2 = eContainer;
+				getNsURI(s, eContainer2);
 			}
 		}
 		else if (eContainer instanceof EPackage) {
@@ -958,19 +960,28 @@ public class PivotUtil extends DomainUtil
 	}
 
 	public static @NonNull List<Type> getTypeTemplateParameterables(@NonNull TemplateableElement templateableElement) {
-		if (templateableElement == null) {
-			return Collections.emptyList();
-		}
+//		if (templateableElement == null) {
+//			return MetaModelManager.EMPTY_TYPE_LIST;
+//		}
 		TemplateSignature ownedTemplateSignature = templateableElement.getOwnedTemplateSignature();
 		if (ownedTemplateSignature == null) {
-			return Collections.emptyList();
+			return MetaModelManager.EMPTY_TYPE_LIST;
 		}
 		List<TemplateParameter> templateParameters = ownedTemplateSignature.getParameter();
 		if (templateParameters.size() == 0) {
-			return Collections.emptyList();
+			return MetaModelManager.EMPTY_TYPE_LIST;
 		}
 		if (templateParameters.size() == 1) {
-			return Collections.singletonList((Type)templateParameters.get(0).getParameteredElement());
+			TemplateParameter templateParameter = templateParameters.get(0);
+			if (templateParameter == null) {
+				return MetaModelManager.EMPTY_TYPE_LIST;
+			}
+			ParameterableElement parameteredElement = templateParameter.getParameteredElement();
+			if (!(parameteredElement instanceof Type)) {
+				return MetaModelManager.EMPTY_TYPE_LIST;
+			}
+			@SuppressWarnings("null") @NonNull List<Type> singletonList = Collections.singletonList((Type)parameteredElement);
+			return singletonList;
 		}
 		List<Type> results = new ArrayList<Type>(templateParameters.size());
 		for (TemplateParameter templateParameter : templateParameters) {
@@ -980,9 +991,9 @@ public class PivotUtil extends DomainUtil
 	}
 
 	public static @NonNull <T extends Type> T getUnspecializedTemplateableElement(@NonNull T templateableElement) {
-		if (templateableElement == null) {
-			return null;
-		}
+//		if (templateableElement == null) {
+//			return null;
+//		}
 		TemplateableElement unspecializedElement = templateableElement.getUnspecializedElement();
 		if (unspecializedElement == null) {
 			return templateableElement;

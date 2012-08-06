@@ -17,10 +17,12 @@
 package org.eclipse.ocl.examples.xtext.base.attributes;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.baseCST.DataTypeCS;
 
 public class DataTypeCSAttribution extends AbstractAttribution
 {
@@ -28,9 +30,13 @@ public class DataTypeCSAttribution extends AbstractAttribution
 
 	@Override
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
-//		DataTypeCS targetElement = (DataTypeCS)target;
-		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-		environmentView.addLibContents(metaModelManager.getOclAnyType(), scopeView);
+		DataTypeCS targetElement = (DataTypeCS)target;
+		DataType pivot = PivotUtil.getPivot(DataType.class, targetElement);
+		if (pivot != null) {
+			environmentView.addElements(PivotUtil.getTemplateParameters(pivot));
+			environmentView.addAllProperties(pivot, null);
+			environmentView.addAllOperations(pivot, null);
+		}
 		return scopeView.getParent();
 	}
 }

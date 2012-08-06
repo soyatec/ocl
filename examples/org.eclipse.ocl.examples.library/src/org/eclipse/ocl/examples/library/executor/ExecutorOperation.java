@@ -63,6 +63,11 @@ public class ExecutorOperation implements DomainOperation
 		return new ArrayIterable<DomainType>(parameterTypes);
 	}
 
+	public @NonNull DomainType getType() {
+//		return executorType;
+		throw new UnsupportedOperationException(); // WIP FIXME
+	}
+
 	public boolean isStatic() {
 		return false;								// WIP FIXME
 	}

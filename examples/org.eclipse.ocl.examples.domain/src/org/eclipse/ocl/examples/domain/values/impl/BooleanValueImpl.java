@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -85,7 +84,8 @@ public class BooleanValueImpl extends ValueImpl implements BooleanValue
 	}
 
 	public @NonNull Object asObject() {
-		return DomainUtil.nonNullJava(Boolean.valueOf(value));
+		@SuppressWarnings("null") @NonNull Boolean result = Boolean.valueOf(value);
+		return result;
 	}
 
 	public @NonNull Value asValidValue() {

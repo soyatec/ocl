@@ -26,7 +26,6 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractIterationManager;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -57,10 +56,11 @@ public class ExecutorSingleIterationManager extends AbstractIterationManager
 
 	@Override
 	public @NonNull Value get() {
-		if (currentValue == null) {
+		Value currentValue2 = currentValue;
+		if (currentValue2 == null) {
 			throw new IllegalStateException("cannot get() after iteration complete"); //$NON-NLS-1$
 		}
-		return DomainUtil.nonNullJDT(currentValue);
+		return currentValue2;
 	}
 
 	public @NonNull Value getAccumulatorValue() {

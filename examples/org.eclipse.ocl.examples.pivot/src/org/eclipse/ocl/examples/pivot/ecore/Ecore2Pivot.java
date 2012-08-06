@@ -177,10 +177,8 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	public static Element importFromEcore(@NonNull MetaModelManager metaModelManager, String alias, @NonNull EObject eObject) {
 		Resource ecoreResource = DomainUtil.nonNullEMF(eObject.eResource());
 		Ecore2Pivot conversion = getAdapter(ecoreResource, metaModelManager);
+		@SuppressWarnings("unused")
 		Root pivotRoot = conversion.getPivotRoot();
-		if (pivotRoot == null) {
-			return null;
-		}
 		return conversion.newCreateMap.get(eObject);
 	}
 
@@ -285,23 +283,24 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		errors.add(new XMIException(message));
 	}
 
-	public <T extends Element> T getCreated(@NonNull Class<T> requiredClass, @NonNull EObject eObject) {
+	public @Nullable <T extends Element> T getCreated(@NonNull Class<T> requiredClass, @NonNull EObject eObject) {
 		return getPivotOfEcore(requiredClass, eObject);
 	}
 
 	public @NonNull Map<EClassifier, Type> getEcore2PivotMap() {
-		if (ecore2PivotMap == null) {
-			ecore2PivotMap = new HashMap<EClassifier, Type>();
+		HashMap<EClassifier, Type> ecore2PivotMap2 = ecore2PivotMap;
+		if (ecore2PivotMap2 == null) {
+			ecore2PivotMap2 = ecore2PivotMap = new HashMap<EClassifier, Type>();
 			initializeEcore2PivotMap();
 		}
-		return DomainUtil.nonNullJDT(ecore2PivotMap);
+		return ecore2PivotMap2;
 	}
 
 	public @Nullable Resource getEcoreResource() {
 		return ecoreResource;
 	}
 
-	public <T extends Element> T getPivotOfEcore(@NonNull Class<T> requiredClass, @NonNull EObject eObject) {
+	public @Nullable <T extends Element> T getPivotOfEcore(@NonNull Class<T> requiredClass, @NonNull EObject eObject) {
 		if (pivotRoot == null) {
 			getPivotRoot();
 		}
@@ -376,8 +375,10 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	}
 	
 	public @NonNull Root getPivotRoot() {
-		if (pivotRoot == null) {
-			Resource pivotResource = importObjects(DomainUtil.nonNullEMF(ecoreResource.getContents()), createPivotURI());
+		Root pivotRoot2 = pivotRoot;
+		if (pivotRoot2 == null) {
+			pivotRoot2 = pivotRoot = importObjects(DomainUtil.nonNullEMF(ecoreResource.getContents()), createPivotURI());
+			@SuppressWarnings("null") @NonNull Resource pivotResource = pivotRoot2.eResource();
 			AliasAdapter ecoreAdapter = AliasAdapter.findAdapter(ecoreResource);
 			if (ecoreAdapter != null) {
 				Map<EObject, String> ecoreAliasMap = ecoreAdapter.getAliasMap();
@@ -391,7 +392,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 			}
 			metaModelManager.installResource(pivotResource);
 		}
-		return pivotRoot;
+		return pivotRoot2;
 	}
 
 	public @Nullable Resource getResource() {
@@ -406,30 +407,31 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		return DomainUtil.nonNullEMF(ecoreResource.getURI());
 	}
 
-	public @NonNull Resource importObjects(@NonNull Collection<EObject> ecoreContents, @NonNull URI pivotURI) {
+	public @NonNull Root importObjects(@NonNull Collection<EObject> ecoreContents, @NonNull URI pivotURI) {
 		@NonNull Resource pivotResource = metaModelManager.createResource(pivotURI, PivotPackage.eCONTENT_TYPE);
-		try {
+//		try {
 			if ((metaModelManager.getLibraryResource() == null) && isPivot(ecoreContents)) {
 				String nsURI = ((EPackage)ecoreContents.iterator().next()).getNsURI();
 				if (nsURI != null) {
 					String stdlibUri = OCLstdlib.STDLIB_URI;
 					OCLstdlib library = OCLstdlib.create(stdlibUri, "ocl", "ocl", nsURI);
 					metaModelManager.installResource(library);
+//					metaModelManager.installAs(nsURI, OCLstdlibTables.PACKAGE);
 				}
 			}
-			pivotRoot = metaModelManager.createRoot(pivotURI.lastSegment(), ecoreResource.getURI().toString());
+			Root pivotRoot2 = pivotRoot = metaModelManager.createRoot(pivotURI.lastSegment(), ecoreResource.getURI().toString());
 			update(pivotResource, ecoreContents);
-		}
-		catch (Exception e) {
-			if (errors == null) {
-				errors = new ArrayList<Resource.Diagnostic>();
-			}
-			errors.add(new XMIException("Failed to load '" + pivotURI + "'", e));
-		}
+//		}
+//		catch (Exception e) {
+//			if (errors == null) {
+//				errors = new ArrayList<Resource.Diagnostic>();
+//			}
+//			errors.add(new XMIException("Failed to load '" + pivotURI + "'", e));
+//		}
 		if (errors != null) {
 			pivotResource.getErrors().addAll(errors);
 		}
-		return pivotResource;
+		return pivotRoot2;
 	}
 
 	public void initializeEcore2PivotMap() {
@@ -600,7 +602,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		List<EGenericType> eTypeArguments = eGenericType.getETypeArguments();
 		assert eClassifier == null;
 		assert eTypeArguments.isEmpty();
-		Type pivotType = getCreated(Type.class, eTypeParameter);
+		Type pivotType = eTypeParameter != null ? getCreated(Type.class, eTypeParameter) : null;
 		return pivotType;
 	}
 
@@ -666,11 +668,12 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		for (EObject eObject : referencers) {
 			if (eObject instanceof EReference) {
 				Property pivotElement = getCreated(Property.class, eObject);		
-				Property oppositeProperty = pivotElement.getOpposite();
-				if ((oppositeProperty == null) && (eObject.eContainer() instanceof EClass)) {		// Skip annotation references
-					metaModelManager.installPropertyDeclaration(pivotElement);
-				}
-				
+				if (pivotElement != null) {
+					Property oppositeProperty = pivotElement.getOpposite();
+					if ((oppositeProperty == null) && (eObject.eContainer() instanceof EClass)) {		// Skip annotation references
+						metaModelManager.installPropertyDeclaration(pivotElement);
+					}
+				}				
 			}
 		}
 		referencers = null;

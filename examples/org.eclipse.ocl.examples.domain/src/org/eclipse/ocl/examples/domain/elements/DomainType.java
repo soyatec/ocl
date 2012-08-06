@@ -97,4 +97,5 @@ public interface DomainType extends DomainNamespace
 	 * by the given Standard Library.
 	 */
 	@NonNull LibraryFeature lookupImplementation(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainOperation staticOperation);
+
 }

@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -47,7 +46,9 @@ public class ClassifierOclContentsOperation extends AbstractUnaryOperation
 		if (object instanceof EObject) {
 	    	Set<Value> collection = new HashSet<Value>();
 			for (Object eContent : ((EObject)object).eContents()) {
-				collection.add(valueFactory.valueOf(DomainUtil.nonNullEntry(eContent)));
+				if (eContent != null) {
+					collection.add(valueFactory.valueOf(eContent));
+				}
 	    	}
 	    	return valueFactory.createSetValue((DomainCollectionType)returnType, collection);
 		}

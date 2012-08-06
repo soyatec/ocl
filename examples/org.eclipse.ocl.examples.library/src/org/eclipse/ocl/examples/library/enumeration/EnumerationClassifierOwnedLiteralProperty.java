@@ -27,7 +27,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -46,7 +45,9 @@ public class EnumerationClassifierOwnedLiteralProperty extends AbstractProperty
 		DomainType sourceType = sourceTypeValue.getInstanceType();
 		Set<Value> results = new OrderedSetImpl<Value>();
 		for (DomainElement instance : ((DomainEnumeration)sourceType).getEnumerationLiterals()) {
-			results.add(valueFactory.valueOf(DomainUtil.nonNullEntry(instance)));
+			if (instance != null) {
+				results.add(valueFactory.valueOf(instance));
+			}
 		}
 		return valueFactory.createOrderedSetValue((DomainCollectionType)returnType, results);
 	}

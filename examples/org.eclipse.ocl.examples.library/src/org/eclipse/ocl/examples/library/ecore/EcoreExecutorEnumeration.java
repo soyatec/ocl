@@ -14,6 +14,7 @@
  */
 package org.eclipse.ocl.examples.library.ecore;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -21,7 +22,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.ArrayIterable;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.executor.ExecutorTypeParameter;
@@ -35,7 +35,7 @@ public class EcoreExecutorEnumeration extends EcoreExecutorType implements Domai
 	 * Construct an executable type descriptor for a known EClassifier.
 	 */
 	public EcoreExecutorEnumeration(/*@NonNull*/ EEnum eEnum, @NonNull EcoreExecutorPackage evaluationPackage, int flags, ExecutorTypeParameter... typeParameters) {
-		super(DomainUtil.nonNullEMF(eEnum), evaluationPackage, flags, typeParameters);
+		super(eEnum, evaluationPackage, flags, typeParameters);
 	}
 
 	@Override
@@ -44,10 +44,11 @@ public class EcoreExecutorEnumeration extends EcoreExecutorType implements Domai
 	}
 
 	public final @NonNull EEnum getEEnum() {
-		if (eClassifier == null) {
+		EClassifier eClassifier2 = eClassifier;
+		if (eClassifier2 == null) {
 			throw new IllegalStateException(NLS.bind(EvaluatorMessages.IncompleteInitialization, this));
 		}
-		return (EEnum) DomainUtil.nonNullJDT(eClassifier);
+		return (EEnum) eClassifier2;
 	}
 
 	public @Nullable EcoreExecutorEnumerationLiteral getEnumerationLiteral(@NonNull String name) {

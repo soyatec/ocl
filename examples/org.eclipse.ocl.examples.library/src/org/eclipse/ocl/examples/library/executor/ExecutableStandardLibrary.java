@@ -59,11 +59,11 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 	public abstract @NonNull DomainEvaluator createEvaluator(@NonNull EObject contextObject, @Nullable Map<Object, Object> contextMap);
 
 	public @NonNull DomainType getAnyClassifierType() {
-		return DomainUtil.nonNullJava(OCLstdlibTables.Types._AnyClassifier);
+		return OCLstdlibTables.Types._AnyClassifier;
 	}
 	
 	public @NonNull DomainType getBagType() {
-		return DomainUtil.nonNullJava(OCLstdlibTables.Types._Bag);
+		return OCLstdlibTables.Types._Bag;
 	}
 
 	public @NonNull DomainCollectionType getBagType(@NonNull DomainType elementType) {
@@ -71,7 +71,7 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 	}
 
 	public @NonNull DomainType getBooleanType() {
-		return DomainUtil.nonNullJava(OCLstdlibTables.Types._Boolean);
+		return OCLstdlibTables.Types._Boolean;
 	}
 
 	public synchronized @NonNull DomainClassifierType getClassifierType(@NonNull DomainType classType) {
@@ -84,7 +84,7 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 	}
 
 	public @NonNull DomainType getCollectionType() {
-		return DomainUtil.nonNullJava(OCLstdlibTables.Types._Collection);
+		return OCLstdlibTables.Types._Collection;
 	}
 
 	public synchronized @NonNull DomainCollectionType getCollectionType(@NonNull DomainType genericType, @NonNull DomainType elementType) {
@@ -105,51 +105,51 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 	}
 
 	public @NonNull DomainType getEnumerationType() {
-		return DomainUtil.nonNullJava(OCLstdlibTables.Types._Enumeration);
+		return OCLstdlibTables.Types._Enumeration;
 	}
 
 	public @NonNull DomainType getIntegerType() {
-		return DomainUtil.nonNullJava(OCLstdlibTables.Types._Integer);
+		return OCLstdlibTables.Types._Integer;
 	}
 
 	public @NonNull DomainType getOclAnyType() {
-		return DomainUtil.nonNullJava(OCLstdlibTables.Types._OclAny);
+		return OCLstdlibTables.Types._OclAny;
 	}
 
 	public @NonNull DomainType getOclComparableType() {
-		return DomainUtil.nonNullJava(OCLstdlibTables.Types._OclComparable);
+		return OCLstdlibTables.Types._OclComparable;
 	}
 
 	public @NonNull DomainType getOclElementType() {
-		return DomainUtil.nonNullJava(OCLstdlibTables.Types._OclElement);
+		return OCLstdlibTables.Types._OclElement;
 	}
 
 	public @NonNull DomainType getOclInvalidType() {
-		return DomainUtil.nonNullJava(OCLstdlibTables.Types._OclInvalid);
+		return OCLstdlibTables.Types._OclInvalid;
 	}
 
 	public DomainType getOclMessageType() {
-		return DomainUtil.nonNullJava(OCLstdlibTables.Types._OclMessage);
+		return OCLstdlibTables.Types._OclMessage;
 	}
 
 	public @NonNull DomainType getOclSelfType() {
-		return DomainUtil.nonNullJava(OCLstdlibTables.Types._OclSelf);
+		return OCLstdlibTables.Types._OclSelf;
 	}
 
 	public @NonNull DomainType getOclSummableType() {
-		return DomainUtil.nonNullJava(OCLstdlibTables.Types._OclSummable);
+		return OCLstdlibTables.Types._OclSummable;
 	}
 
 	public @NonNull DomainType getOclTupleType() {
-		return DomainUtil.nonNullJava(OCLstdlibTables.Types._OclTuple);
+		return OCLstdlibTables.Types._OclTuple;
 	}
 
 	public @NonNull DomainType getOclVoidType() {
-		return DomainUtil.nonNullJava(OCLstdlibTables.Types._OclVoid);
+		return OCLstdlibTables.Types._OclVoid;
 	}
 
 	public @NonNull DomainType getOrderedSetType() {
-		return DomainUtil.nonNullJava(OCLstdlibTables.Types._OrderedSet);
+		return OCLstdlibTables.Types._OrderedSet;
 	}
 
 	public @NonNull DomainCollectionType getOrderedSetType(@NonNull DomainType elementType) {
@@ -157,11 +157,11 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 	}
 
 	public @NonNull DomainType getRealType() {
-		return DomainUtil.nonNullJava(OCLstdlibTables.Types._Real);
+		return OCLstdlibTables.Types._Real;
 	}
 
 	public @NonNull DomainType getSequenceType() {
-		return DomainUtil.nonNullJava(OCLstdlibTables.Types._Sequence);
+		return OCLstdlibTables.Types._Sequence;
 	}
 
 	public @NonNull DomainCollectionType getSequenceType(@NonNull DomainType elementType) {
@@ -169,7 +169,7 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 	}
 
 	public @NonNull DomainType getSetType() {
-		return DomainUtil.nonNullJava(OCLstdlibTables.Types._Set);
+		return OCLstdlibTables.Types._Set;
 	}
 
 	public @NonNull DomainCollectionType getSetType(@NonNull DomainType elementType) {
@@ -177,7 +177,7 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 	}
 
 	public @NonNull DomainType getStringType() {
-		return DomainUtil.nonNullJava(OCLstdlibTables.Types._String);
+		return OCLstdlibTables.Types._String;
 	}
 
 	public @NonNull DomainTupleType getTupleType(@NonNull List<? extends DomainTypedElement> parts) {
@@ -221,6 +221,6 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 	}
 
 	public @NonNull DomainType getUnlimitedNaturalType() {
-		return DomainUtil.nonNullJava(OCLstdlibTables.Types._UnlimitedNatural);
+		return OCLstdlibTables.Types._UnlimitedNatural;
 	}
 }

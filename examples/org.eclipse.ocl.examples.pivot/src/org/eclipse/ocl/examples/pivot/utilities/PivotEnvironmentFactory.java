@@ -132,8 +132,8 @@ public class PivotEnvironmentFactory extends AbstractEnvironmentFactory {
 	}
 
 	@Override
-	protected Type getClassifier(Object context) {
-		return null;
+	protected @NonNull Type getClassifier(@NonNull Object context) {
+		throw new UnsupportedOperationException();				// FIXME
 	}
 	
 	@SuppressWarnings("null")

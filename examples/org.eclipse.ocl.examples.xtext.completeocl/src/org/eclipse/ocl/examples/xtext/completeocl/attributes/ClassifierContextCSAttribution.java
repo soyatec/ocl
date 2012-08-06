@@ -16,13 +16,9 @@
  */
 package org.eclipse.ocl.examples.xtext.completeocl.attributes;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -40,16 +36,16 @@ public class ClassifierContextCSAttribution extends AbstractAttribution
 		if (containmentFeature == CompleteOCLCSTPackage.Literals.CONTEXT_DECL_CS__RULES) {
 			Type type = targetElement.getClassifier();
 			if (type != null) {
-				MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-				environmentView.addNamedElements(type, metaModelManager.getLocalOperations(type, Boolean.FALSE));
-				environmentView.addNamedElements(type, metaModelManager.getLocalProperties(type, Boolean.FALSE));
-				if (!environmentView.hasFinalResult()) {
-					Set<Type> alreadyVisitedTypes = new HashSet<Type>();
+//				MetaModelManager metaModelManager = environmentView.getMetaModelManager();
+				environmentView.addAllOperations(type, Boolean.FALSE);
+				environmentView.addAllProperties(type, Boolean.FALSE);
+//				if (!environmentView.hasFinalResult()) {
+//					Set<Type> alreadyVisitedTypes = new HashSet<Type>();
 //					org.eclipse.ocl.examples.pivot.Class unspecializedTarget = PivotUtil.getUnspecializedTemplateableElement(target);	// FIXME
-					for (Type superClass : metaModelManager.getSuperClasses(type)) {
-						environmentView.addAllContents(type, scopeView, superClass, Boolean.FALSE, alreadyVisitedTypes);
-					}
-				}
+//					for (Type superClass : metaModelManager.getSuperClasses(type)) {
+//						environmentView.addAllContents(type, scopeView, superClass, Boolean.FALSE, alreadyVisitedTypes);
+//					}
+//				}
 			}
 		}
 		return scopeView.getParent();

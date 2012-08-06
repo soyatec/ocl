@@ -28,7 +28,7 @@ import org.eclipse.ocl.examples.domain.values.Value;
 
 public class TuplePartProperty extends AbstractProperty
 {
-	public static final LibraryFeature INSTANCE = new TuplePartProperty();
+	public static final @NonNull LibraryFeature INSTANCE = new TuplePartProperty();
 
 	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
 		TupleValue tupleValue = sourceValue.asTupleValue();

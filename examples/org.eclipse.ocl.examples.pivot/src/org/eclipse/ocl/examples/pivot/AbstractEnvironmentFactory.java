@@ -176,7 +176,7 @@ public abstract class AbstractEnvironmentFactory implements EnvironmentFactory, 
      * @return the user model's classifier for this context object, or the
      *     context itself if it is a classifier
      */
-    protected abstract Type getClassifier(Object context);
+    protected abstract @NonNull Type getClassifier(@NonNull Object context);
     
     /**
      * Queries whether tracing of evaluation is enabled.  Tracing

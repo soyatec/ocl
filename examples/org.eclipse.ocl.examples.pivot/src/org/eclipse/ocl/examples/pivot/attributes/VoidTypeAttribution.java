@@ -21,8 +21,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.PackageServer;
+import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
+
+import com.google.common.collect.Lists;
 
 public class VoidTypeAttribution extends ClassAttribution
 {
@@ -33,13 +36,11 @@ public class VoidTypeAttribution extends ClassAttribution
 		super.computeLookup(target, environmentView, scopeView);
 		if (!environmentView.hasFinalResult()) {
 			MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-			for (PackageServer packageServer : metaModelManager.getAllPackages()) {
-				for (Type aType : packageServer.getMemberTypes()) {
-					if (aType != null) {
-						Type primaryType = metaModelManager.getPrimaryType(aType);
-						environmentView.addNamedElements(metaModelManager.getLocalOperations(primaryType, Boolean.FALSE));
-						environmentView.addNamedElements(metaModelManager.getLocalProperties(primaryType, Boolean.FALSE));
-					}
+			for (PackageServer packageServer : Lists.newArrayList(metaModelManager.getAllPackages())) {		// Avoid CME risk
+				for (TypeServer typeServer : packageServer.getMemberTypes()) {
+					Type primaryType = typeServer.getPivotType();
+					environmentView.addAllOperations(primaryType, Boolean.FALSE);
+					environmentView.addAllProperties(primaryType, Boolean.FALSE);
 				}
 			}
 		}

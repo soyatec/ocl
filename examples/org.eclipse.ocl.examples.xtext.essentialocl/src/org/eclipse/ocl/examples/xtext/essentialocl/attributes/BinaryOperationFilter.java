@@ -40,7 +40,7 @@ public class BinaryOperationFilter extends AbstractOperationFilter
 		this.argumentType = PivotUtil.getBehavioralType(argumentType);
 	}
 
-	public boolean matches(EnvironmentView environmentView, Type forType, DomainElement eObject) {
+	public boolean matches(EnvironmentView environmentView, DomainElement eObject) {
 		if (eObject instanceof Iteration) {		
 			return false;
 		}
@@ -60,7 +60,7 @@ public class BinaryOperationFilter extends AbstractOperationFilter
 			}
 			Map<TemplateParameter, ParameterableElement> bindings = getOperationBindings(candidateOperation);
 			if (bindings != null) {
-				installBindings(environmentView, forType, eObject, bindings);
+				installBindings(environmentView, eObject, bindings);
 			}
 			return true;
 		}

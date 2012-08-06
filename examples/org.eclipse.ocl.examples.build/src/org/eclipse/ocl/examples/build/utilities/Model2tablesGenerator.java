@@ -32,6 +32,7 @@ import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.ocl.examples.codegen.tables.Model2tables;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
@@ -42,6 +43,7 @@ public class Model2tablesGenerator extends AbstractWorkflowComponent
 {
 	private Logger log = Logger.getLogger(getClass());	
 	private ResourceSet resourceSet = null;	
+	private boolean genOCLstdlib = false;	
 	protected String genModelFile;
 
 	public void checkConfiguration(Issues issues) {
@@ -60,6 +62,12 @@ public class Model2tablesGenerator extends AbstractWorkflowComponent
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues issues) {
 		URI genModelURI = URI.createPlatformResourceURI(genModelFile, true);
 		log.info("Loading Gen Model '" + genModelURI);
+		if (genOCLstdlib) {
+			final MetaModelManagerResourceSetAdapter adapter = MetaModelManagerResourceSetAdapter.findAdapter(resourceSet);
+			if (adapter != null) {
+				adapter.getMetaModelManager().setLibraryLoadInProgress(true);
+			}
+		}
 		try {
 			ResourceSet resourceSet = getResourceSet();
 			StandaloneProjectMap projectMap = new StandaloneProjectMap();
@@ -91,6 +99,10 @@ public class Model2tablesGenerator extends AbstractWorkflowComponent
 
 	public void setGenModelFile(String genModelFile) {
 		this.genModelFile = genModelFile;
+	}
+
+	public void setGenOCLstdlib(boolean genOCLstdlib) {
+		this.genOCLstdlib = genOCLstdlib;
 	}
 	
 	public void setResourceSet(ResourceSet resourceSet) {

@@ -42,6 +42,7 @@ import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.ui.action.LoadResourceAction.LoadResourceDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
@@ -267,10 +268,14 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 				}
  			}
 			for (Resource mmResource : mmResources) {
-				Element pivotRoot = metaModelManager.loadResource(mmResource, null);
-				String message = PivotUtil.formatResourceDiagnostics(pivotRoot.eResource().getErrors(), "", "\n");
-				if (message != null) {
-					return error("Failed to load Pivot from '" + mmResource.getURI(), message);
+				try {
+					Element pivotRoot = metaModelManager.loadResource(mmResource, null);
+					String message = PivotUtil.formatResourceDiagnostics(pivotRoot.eResource().getErrors(), "", "\n");
+					if (message != null) {
+						return error("Failed to load Pivot from '" + mmResource.getURI(), message);
+					}
+				} catch (ParserException e) {
+					return error("Failed to load Pivot from '" + mmResource.getURI(), e.getMessage());
 				}
 			}
 

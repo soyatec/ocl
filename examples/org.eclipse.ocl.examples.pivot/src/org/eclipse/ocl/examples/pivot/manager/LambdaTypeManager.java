@@ -40,6 +40,8 @@ public class LambdaTypeManager
 	 * Map from from context type via first parameter type, which may be null, to list of lambda types sharing context and first parameter types. 
 	 */
 	private final @NonNull Map<Type, Map<Type, List<LambdaType>>> lambdaTypes = new HashMap<Type, Map<Type, List<LambdaType>>>();
+// FIXME Why does a List map give a moniker test failure
+//	private final @NonNull Map<Type, Map<List<? extends Type>, LambdaType>> lambdaTypes = new HashMap<Type, Map<List<? extends Type>, LambdaType>>();
 	
 	protected LambdaTypeManager(@NonNull MetaModelManager metaModelManager) {
 		this.metaModelManager = metaModelManager;
@@ -48,7 +50,7 @@ public class LambdaTypeManager
 	public void dispose() {
 		lambdaTypes.clear();
 	}
-	   
+	
 	public @NonNull LambdaType getLambdaType(@NonNull String typeName, @NonNull Type contextType, @NonNull List<? extends Type> parameterTypes, @NonNull Type resultType) {
 		Map<Type, List<LambdaType>> contextMap = lambdaTypes.get(contextType);
 		if (contextMap == null) {
@@ -91,6 +93,26 @@ public class LambdaTypeManager
 		lambdasList.add(lambdaType);
 		return lambdaType;
 	}
+	   
+/*	public @NonNull LambdaType getLambdaType(@NonNull String typeName, @NonNull Type contextType, @NonNull List<? extends Type> parameterTypes, @NonNull Type resultType) {
+		Map<List<? extends Type>, LambdaType> contextMap = lambdaTypes.get(contextType);
+		if (contextMap == null) {
+			contextMap = new HashMap<List<? extends Type>, LambdaType>();
+			lambdaTypes.put(contextType, contextMap);
+		}
+		LambdaType lambdaType = contextMap.get(parameterTypes);
+		if (lambdaType == null) {
+			lambdaType = PivotFactory.eINSTANCE.createLambdaType();
+			lambdaType.setName(typeName);
+			lambdaType.setContextType(contextType);
+			lambdaType.getParameterType().addAll(parameterTypes);
+			lambdaType.setResultType(resultType);
+			lambdaType.getSuperClass().add(metaModelManager.getOclLambdaType());
+			metaModelManager.addOrphanClass(lambdaType);
+			contextMap.put(parameterTypes, lambdaType);
+		}
+		return lambdaType;
+	} */
 	   
 	public @NonNull LambdaType getLambdaType(@NonNull String typeName, @NonNull Type contextType, @NonNull List<? extends Type> parameterTypes, @NonNull Type resultType,
 			@Nullable Map<TemplateParameter, ParameterableElement> bindings) {

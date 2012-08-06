@@ -16,8 +16,8 @@
  */
 package org.eclipse.ocl.examples.xtext.oclstdlib.attributes;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -37,20 +37,21 @@ public class LibPackageCSAttribution extends PackageCSAttribution
 {
 	public static final LibPackageCSAttribution INSTANCE = new LibPackageCSAttribution();
 
-	private static List<MetaTypeName> metaTypeNames = null;
+	private static Map<String, MetaTypeName> metaTypeNames = null;
 
 	@Override
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
 		LibPackageCS targetElement = (LibPackageCS)target;
 		if (environmentView.getReference() == OCLstdlibCSTPackage.Literals.LIB_CLASS_CS__META_TYPE_NAME) {
 			if (metaTypeNames == null) {
-				metaTypeNames = new ArrayList<MetaTypeName>();
+				metaTypeNames = new HashMap<String, MetaTypeName>();
 				for (EClassifier eClassifier : PivotPackage.eINSTANCE.getEClassifiers()) {
 					if (eClassifier instanceof EClass) {
 						if (PivotPackage.Literals.CLASS.isSuperTypeOf((EClass) eClassifier)) {
 							MetaTypeName metaTypeName = OCLstdlibCSTFactory.eINSTANCE.createMetaTypeName();
-							metaTypeName.setName(eClassifier.getName());
-							metaTypeNames.add(metaTypeName);
+							String name = eClassifier.getName();
+							metaTypeName.setName(name);
+							metaTypeNames.put(name, metaTypeName);
 						}
 					}
 				}
@@ -61,7 +62,7 @@ public class LibPackageCSAttribution extends PackageCSAttribution
 		else {
 			Library pivot = PivotUtil.getPivot(Library.class, targetElement);
 			if (pivot != null) {
-				environmentView.addNamedElements(pivot.getOwnedPrecedence());
+				environmentView.addAllPrecedences(pivot);
 			}
 			return super.computeLookup(targetElement, environmentView, scopeView);
 		}

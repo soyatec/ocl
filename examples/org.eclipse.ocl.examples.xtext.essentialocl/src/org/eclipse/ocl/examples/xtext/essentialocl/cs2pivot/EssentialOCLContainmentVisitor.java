@@ -41,7 +41,6 @@ import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TupleLiteralExp;
 import org.eclipse.ocl.examples.pivot.TupleLiteralPart;
-import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableExp;
@@ -95,7 +94,7 @@ public class EssentialOCLContainmentVisitor extends AbstractEssentialOCLContainm
 			return 0;
 		}
 
-		public boolean matches(EnvironmentView environmentView,Type forType, DomainElement eObject) {
+		public boolean matches(EnvironmentView environmentView, DomainElement eObject) {
 			return !(eObject instanceof Operation);
 		}
 	}

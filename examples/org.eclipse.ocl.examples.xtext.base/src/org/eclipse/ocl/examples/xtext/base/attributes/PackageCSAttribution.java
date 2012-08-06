@@ -17,7 +17,6 @@
 package org.eclipse.ocl.examples.xtext.base.attributes;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -33,9 +32,8 @@ public class PackageCSAttribution extends AbstractAttribution
 		PackageCS targetElement = (PackageCS)target;
 		org.eclipse.ocl.examples.pivot.Package pivot = PivotUtil.getPivot(org.eclipse.ocl.examples.pivot.Package.class, targetElement);
 		if (pivot != null) {
-			MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-			environmentView.addNamedElements(metaModelManager.getMemberPackages(pivot));
-			environmentView.addNamedElements(metaModelManager.getLocalClasses(pivot));
+			environmentView.addAllPackages(pivot);
+			environmentView.addAllTypes(pivot);
 		}
 		return scopeView.getParent();
 	}

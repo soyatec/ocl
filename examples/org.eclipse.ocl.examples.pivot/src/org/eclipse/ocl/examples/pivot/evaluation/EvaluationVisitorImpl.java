@@ -673,30 +673,34 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 				case 1: {
 					LibraryBinaryOperation binaryOperation = (LibraryBinaryOperation)implementation;
 					if (onlyArgument == null) {
+						OCLExpression argument0 = arguments.get(0);
 						if (binaryOperation.argumentsMayBeInvalid()) {
 							try {
-								onlyArgument = undecoratedVisitor.evaluate(DomainUtil.nonNullEntry(arguments.get(0)));
+								onlyArgument = argument0 != null ? undecoratedVisitor.evaluate(argument0) : valueFactory.getInvalid();
 							} catch (InvalidEvaluationException e) {
 								onlyArgument = valueFactory.createInvalidValue(e);
 							}
 						}
 						else {
-							onlyArgument = undecoratedVisitor.evaluate(DomainUtil.nonNullEntry(arguments.get(0)));
+							onlyArgument = argument0 != null ? undecoratedVisitor.evaluate(argument0) : valueFactory.getInvalid();
 						}
 					}
 					result = binaryOperation.evaluate(evaluator, operationCallExp, sourceValue, onlyArgument);
 					break;
 				}
 				case 2: {
-					Value firstArgument = undecoratedVisitor.evaluate(DomainUtil.nonNullEntry(arguments.get(0)));
-					Value secondArgument = undecoratedVisitor.evaluate(DomainUtil.nonNullEntry(arguments.get(1)));
+					OCLExpression argument0 = arguments.get(0);
+					OCLExpression argument1 = arguments.get(1);
+					Value firstArgument = argument0 != null ? undecoratedVisitor.evaluate(argument0) : valueFactory.getInvalid();
+					Value secondArgument = argument1 != null ? undecoratedVisitor.evaluate(argument1) : valueFactory.getInvalid();
 					result = ((LibraryTernaryOperation)implementation).evaluate(evaluator, operationCallExp, sourceValue, firstArgument, secondArgument);
 					break;
 				}
 				default: {
 					Value[] values = new Value[iSize];
 					for (int i = 0; i < iSize; i++) {
-						values[i] = undecoratedVisitor.evaluate(DomainUtil.nonNullEntry(arguments.get(i)));
+						OCLExpression argumentI = arguments.get(i);
+						values[i] = argumentI != null ? undecoratedVisitor.evaluate(argumentI) : valueFactory.getInvalid();
 					}
 					result = ((LibraryOperation)implementation).evaluate(evaluator, operationCallExp, sourceValue, values);
 					break;
@@ -874,6 +878,9 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 			if (representedParameter != null) {				// Non-null to map iterator actual to formal
 				variableDeclaration = representedParameter;
 			}
+		}
+		if (variableDeclaration == null) {
+			return evaluationEnvironment.throwInvalidEvaluation("Undefined variable", variableExp);
 		}
 		Value value = evaluationEnvironment.getValueOf(variableDeclaration);
 		if (value == null) {

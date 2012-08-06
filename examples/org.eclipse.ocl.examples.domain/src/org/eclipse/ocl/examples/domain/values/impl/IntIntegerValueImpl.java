@@ -21,7 +21,6 @@ import java.math.BigInteger;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
@@ -77,7 +76,7 @@ public class IntIntegerValueImpl extends IntegerValueImpl
 				return valueFactory.integerValueOf(value + thatValue);
 			}
 			else {
-				BigInteger result = DomainUtil.nonNullJava(bigIntegerValue().add(right.bigIntegerValue()));
+				@SuppressWarnings("null") @NonNull BigInteger result = bigIntegerValue().add(right.bigIntegerValue());
 				return valueFactory.integerValueOf(result);
 			}
 		} catch (InvalidValueException e) {
@@ -87,16 +86,19 @@ public class IntIntegerValueImpl extends IntegerValueImpl
 
 	@Override
 	public @NonNull Double asDouble() {
-		return DomainUtil.nonNullJava(Double.valueOf(value));
+		@SuppressWarnings("null") @NonNull Double result = Double.valueOf(value);
+		return result;
 	}
 	
 	@Override
 	public @NonNull Integer asInteger() {
-		return DomainUtil.nonNullJava(Integer.valueOf(value));
+		@SuppressWarnings("null") @NonNull Integer result = Integer.valueOf(value);
+		return result;
 	}
 
 	public @NonNull Object asObject() {
-		return DomainUtil.nonNullJava(Integer.valueOf(value));
+		@SuppressWarnings("null") @NonNull Integer result = Integer.valueOf(value);
+		return result;
 	}
 
 	public @NonNull BigDecimal bigDecimalValue() {
@@ -104,10 +106,13 @@ public class IntIntegerValueImpl extends IntegerValueImpl
 	}
 
 	public @NonNull BigInteger bigIntegerValue() {
-		if (bigValue == null) {
-			bigValue = BigInteger.valueOf(value);
+		BigInteger bigValue2 = bigValue;
+		if (bigValue2 != null) {
+			return bigValue2;
 		}
-		return DomainUtil.nonNullJDT(bigValue);
+		@SuppressWarnings("null")
+		@NonNull BigInteger bigValue3 = bigValue = BigInteger.valueOf(value);
+		return bigValue3;
 	}
 
 	public int compareTo(NumericValue o) {
@@ -135,7 +140,7 @@ public class IntIntegerValueImpl extends IntegerValueImpl
 		if (right.bigIntegerValue().signum() == 0) {
 			return valueFactory.throwInvalidValueException("div zero");
 		}
-		BigInteger result = DomainUtil.nonNullJava(bigIntegerValue().divide(right.bigIntegerValue()));
+		@SuppressWarnings("null") @NonNull BigInteger result = bigIntegerValue().divide(right.bigIntegerValue());
 		return valueFactory.integerValueOf(result);
 	}
 
@@ -228,7 +233,7 @@ public class IntIntegerValueImpl extends IntegerValueImpl
 			return valueFactory.integerValueOf((long)value % thatValue);
 		}
 		else {
-			BigInteger result = DomainUtil.nonNullJava(bigIntegerValue().remainder(right.bigIntegerValue()));
+			@SuppressWarnings("null") @NonNull BigInteger result = bigIntegerValue().remainder(right.bigIntegerValue());
 			return valueFactory.integerValueOf(result);
 		}
 	}
@@ -239,7 +244,7 @@ public class IntIntegerValueImpl extends IntegerValueImpl
 			return valueFactory.integerValueOf((long)value * thatValue);
 		}
 		else {
-			BigInteger result = DomainUtil.nonNullJava(bigIntegerValue().multiply(right.bigIntegerValue()));
+			@SuppressWarnings("null") @NonNull BigInteger result = bigIntegerValue().multiply(right.bigIntegerValue());
 			return valueFactory.integerValueOf(result);
 		}
 	}
@@ -278,7 +283,7 @@ public class IntIntegerValueImpl extends IntegerValueImpl
 			return valueFactory.integerValueOf(value - thatValue);
 		}
 		else {
-			BigInteger result = DomainUtil.nonNullJava(bigIntegerValue().subtract(right.bigIntegerValue()));
+			@SuppressWarnings("null") @NonNull BigInteger result = bigIntegerValue().subtract(right.bigIntegerValue());
 			return valueFactory.integerValueOf(result);
 		}
 	}

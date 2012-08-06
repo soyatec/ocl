@@ -30,7 +30,7 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class UnimplementedOperation extends AbstractUnaryOperation //implements LibraryBinaryOperation
 {
-	public static final UnimplementedOperation INSTANCE = new UnimplementedOperation();
+	public static final @NonNull UnimplementedOperation INSTANCE = new UnimplementedOperation();
 
 	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();

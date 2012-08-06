@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -47,7 +46,9 @@ public class EnumerationAllInstancesOperation extends AbstractUnaryOperation
 		Set<Value> results = new HashSet<Value>();
 		DomainEnumeration domainEnumeration = sourceType instanceof DomainEnumeration ? (DomainEnumeration)sourceType : (DomainEnumeration)((DomainClassifierType)sourceType).getInstanceType();
 		for (DomainElement instance : domainEnumeration.getEnumerationLiterals()) {
-			results.add(valueFactory.valueOf(DomainUtil.nonNullEntry(instance)));
+			if (instance != null) {
+				results.add(valueFactory.valueOf(instance));
+			}
 		}
 		return valueFactory.createSetValue((DomainCollectionType)returnType, results);
 	}

@@ -184,7 +184,7 @@ public class EditorTests extends XtextTestCase
 	}
 
 	protected Set<EObject> indexPivotContent(XtextDocument document, final String prefix) {
-		String doc = document.get();
+		@SuppressWarnings("unused") String doc = document.get();
 		final Set<EObject> pivotContent = new HashSet<EObject>();
 		document.readOnly(new IUnitOfWork<Object, XtextResource>()
 		{
@@ -291,7 +291,7 @@ public class EditorTests extends XtextTestCase
 		String updatedDocument = s.toString().replace("tuttut", "tut");
 		iFile.setContents(new URIConverter.ReadableInputStream(updatedDocument, "UTF-8"), true, false, null);
 		flushEvents();
-		String newDoc = document.get();
+		@SuppressWarnings("unused") String newDoc = document.get();
 		Set<EObject> newPivotContent = indexPivotContent(document, "Loaded pivot");
 		assertEquals(oldPivotContent.size(), newPivotContent.size());
 		flushEvents();

@@ -21,74 +21,77 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
 
 public interface PivotConstants
 {
-	static final String PLUGIN_ID = PivotConstants.class.getPackage().getName();
-	static final String PIVOT_ECORE = PivotConstants.class.getPackage().getName() + "/model/Pivot.ecore";
-	static final URI GEN_MODEL_URI = URI.createPlatformPluginURI("/" + PLUGIN_ID + "/model/Pivot.merged.genmodel", true); //$NON-NLS-1$
+	@SuppressWarnings("null")
+	static final @NonNull String PLUGIN_ID = PivotConstants.class.getPackage().getName();
+	static final @NonNull String PIVOT_ECORE = PivotConstants.class.getPackage().getName() + "/model/Pivot.ecore";
+	@SuppressWarnings("null")
+	static final @NonNull URI GEN_MODEL_URI = URI.createPlatformPluginURI("/" + PLUGIN_ID + "/model/Pivot.merged.genmodel", true); //$NON-NLS-1$
 
-	static final String MESSAGE_ANNOTATION_DETAIL_SUFFIX = "$message";
+	static final @NonNull String MESSAGE_ANNOTATION_DETAIL_SUFFIX = "$message";
 
 	static final int MONIKER_OVERFLOW_LIMIT = 1024;
-	static final String ANNOTATION_QUOTE = "'"; //$NON-NLS-1$
-	static final String BINDINGS_PREFIX = "/"; //$NON-NLS-1$ // FIXME Rename
-	static final String ITERATOR_SEPARATOR = ";"; //$NON-NLS-1$
-	static final String ACCUMULATOR_SEPARATOR = "|"; //$NON-NLS-1$
-	static final String NULL_MARKER = "<<null-element>>"; //$NON-NLS-1$
-	static final String NULL_ROOT = "$null$"; //$NON-NLS-1$
-	static final String OVERFLOW_MARKER = "##"; //$NON-NLS-1$
-	static final String MONIKER_PART_SEPARATOR = "@"; //$NON-NLS-1$
-	static final String MONIKER_SCOPE_SEPARATOR = "!"; //"::"; //$NON-NLS-1$
-	static final String MONIKER_OPERATOR_SEPARATOR = "~"; //$NON-NLS-1$
-	static final String PARAMETER_PREFIX = "("; //$NON-NLS-1$
-	static final String PARAMETER_SEPARATOR = ","; //$NON-NLS-1$
-	static final String PARAMETER_SUFFIX = ")"; //$NON-NLS-1$
-	static final String PRECEDENCE_PREFIX = "~"; //$NON-NLS-1$
-	static final String TEMPLATE_BINDING_PREFIX = "["; //$NON-NLS-1$
-	static final String TEMPLATE_BINDING_SEPARATOR = ","; //$NON-NLS-1$
-	static final String TEMPLATE_BINDING_SUFFIX = "]"; //$NON-NLS-1$
-	static final String TEMPLATE_PARAMETER_PREFIX = "?"; //$NON-NLS-1$
-	static final String TEMPLATE_SIGNATURE_PREFIX = "{"; //$NON-NLS-1$
-	static final String TEMPLATE_SIGNATURE_SEPARATOR = ","; //$NON-NLS-1$
-	static final String TEMPLATE_SIGNATURE_SUFFIX = "}"; //$NON-NLS-1$
-	static final String TUPLE_SIGNATURE_PREFIX = "{"; //$NON-NLS-1$
-	static final String TUPLE_SIGNATURE_PART_SEPARATOR = ","; //$NON-NLS-1$
-	static final String TUPLE_SIGNATURE_TYPE_SEPARATOR = ":"; //$NON-NLS-1$
-	static final String TUPLE_SIGNATURE_SUFFIX = "}"; //$NON-NLS-1$
-	static final String UNRESOLVED_PROXY_MARKER = "<<unresolved-proxy>>"; //$NON-NLS-1$
-	static final String WILDCARD_INDICATOR = "?"; //$NON-NLS-1$
+	static final @NonNull String ANNOTATION_QUOTE = "'"; //$NON-NLS-1$
+	static final @NonNull String BINDINGS_PREFIX = "/"; //$NON-NLS-1$ // FIXME Rename
+	static final @NonNull String ITERATOR_SEPARATOR = ";"; //$NON-NLS-1$
+	static final @NonNull String ACCUMULATOR_SEPARATOR = "|"; //$NON-NLS-1$
+	static final @NonNull String NULL_MARKER = "<<null-element>>"; //$NON-NLS-1$
+	static final @NonNull String NULL_ROOT = "$null$"; //$NON-NLS-1$
+	static final @NonNull String OVERFLOW_MARKER = "##"; //$NON-NLS-1$
+	static final @NonNull String MONIKER_PART_SEPARATOR = "@"; //$NON-NLS-1$
+	static final @NonNull String MONIKER_SCOPE_SEPARATOR = "!"; //"::"; //$NON-NLS-1$
+	static final @NonNull String MONIKER_OPERATOR_SEPARATOR = "~"; //$NON-NLS-1$
+	static final @NonNull String PARAMETER_PREFIX = "("; //$NON-NLS-1$
+	static final @NonNull String PARAMETER_SEPARATOR = ","; //$NON-NLS-1$
+	static final @NonNull String PARAMETER_SUFFIX = ")"; //$NON-NLS-1$
+	static final @NonNull String PRECEDENCE_PREFIX = "~"; //$NON-NLS-1$
+	static final @NonNull String TEMPLATE_BINDING_PREFIX = "["; //$NON-NLS-1$
+	static final @NonNull String TEMPLATE_BINDING_SEPARATOR = ","; //$NON-NLS-1$
+	static final @NonNull String TEMPLATE_BINDING_SUFFIX = "]"; //$NON-NLS-1$
+	static final @NonNull String TEMPLATE_PARAMETER_PREFIX = "?"; //$NON-NLS-1$
+	static final @NonNull String TEMPLATE_SIGNATURE_PREFIX = "{"; //$NON-NLS-1$
+	static final @NonNull String TEMPLATE_SIGNATURE_SEPARATOR = ","; //$NON-NLS-1$
+	static final @NonNull String TEMPLATE_SIGNATURE_SUFFIX = "}"; //$NON-NLS-1$
+	static final @NonNull String TUPLE_SIGNATURE_PREFIX = "{"; //$NON-NLS-1$
+	static final @NonNull String TUPLE_SIGNATURE_PART_SEPARATOR = ","; //$NON-NLS-1$
+	static final @NonNull String TUPLE_SIGNATURE_TYPE_SEPARATOR = ":"; //$NON-NLS-1$
+	static final @NonNull String TUPLE_SIGNATURE_SUFFIX = "}"; //$NON-NLS-1$
+	static final @NonNull String UNRESOLVED_PROXY_MARKER = "<<unresolved-proxy>>"; //$NON-NLS-1$
+	static final @NonNull String WILDCARD_INDICATOR = "?"; //$NON-NLS-1$
 
-	static final String COLLECTION_NAVIGATION_OPERATOR = "->";
-	static final String OBJECT_NAVIGATION_OPERATOR = ".";
-	static final String GREATER_THAN_OPERATOR = ">";
-	static final String GREATER_THAN_OR_EQUAL_OPERATOR = ">=";
-	static final String LESS_THAN_OPERATOR = "<";
-	static final String LESS_THAN_OR_EQUAL_OPERATOR = "<=";
+	static final @NonNull String COLLECTION_NAVIGATION_OPERATOR = "->";
+	static final @NonNull String OBJECT_NAVIGATION_OPERATOR = ".";
+	static final @NonNull String GREATER_THAN_OPERATOR = ">";
+	static final @NonNull String GREATER_THAN_OR_EQUAL_OPERATOR = ">=";
+	static final @NonNull String LESS_THAN_OPERATOR = "<";
+	static final @NonNull String LESS_THAN_OR_EQUAL_OPERATOR = "<=";
 	
-	static final String MONIKER_IF_EXP = "if";
-	static final String MONIKER_INVALID_LITERAL_EXP = "invalid";
-	static final String MONIKER_LET_EXP = "let";
-	static final String MONIKER_NULL_LITERAL_EXP = "null";
-	static final String MONIKER_ROOT = "ROOT";
-	static final String MONIKER_ROOT_EXP = "root";
-	static final String MONIKER_STRING_LITERAL_EXP = "string";
-	static final String MONIKER_TUPLE_LITERAL_EXP = "tuple";
-	static final String MONIKER_UNLIMITED_NATURAL_LITERAL_EXP = "*";
+	static final @NonNull String MONIKER_IF_EXP = "if";
+	static final @NonNull String MONIKER_INVALID_LITERAL_EXP = "invalid";
+	static final @NonNull String MONIKER_LET_EXP = "let";
+	static final @NonNull String MONIKER_NULL_LITERAL_EXP = "null";
+	static final @NonNull String MONIKER_ROOT = "ROOT";
+	static final @NonNull String MONIKER_ROOT_EXP = "root";
+	static final @NonNull String MONIKER_STRING_LITERAL_EXP = "string";
+	static final @NonNull String MONIKER_TUPLE_LITERAL_EXP = "tuple";
+	static final @NonNull String MONIKER_UNLIMITED_NATURAL_LITERAL_EXP = "*";
 
-	static final String MONIKER_EXP_CHILD_PREFIX = "x";
+	static final @NonNull String MONIKER_EXP_CHILD_PREFIX = "x";
 	
-	static final String LIBRARY_MONIKER_PREFIX = "$";
-	static final String ORPHANAGE_NAME = "$$";
-	static final String ORPHANAGE_PREFIX = "orphanage";
-	static final String ORPHANAGE_URI = "http://www.eclipse.org/ocl/3.1.0/orphanage";
+	static final @NonNull String LIBRARY_MONIKER_PREFIX = "$";
+	static final @NonNull String ORPHANAGE_NAME = "$$";
+	static final @NonNull String ORPHANAGE_PREFIX = "orphanage";
+	static final @NonNull String ORPHANAGE_URI = "http://www.eclipse.org/ocl/3.1.0/orphanage";
 
-	static final String UNKNOWN_TYPE_TEXT = "unknown-type";
+	static final @NonNull String UNKNOWN_TYPE_TEXT = "unknown-type";
 
-	static final String WILDCARD_NAME = "wildcard";
+	static final @NonNull String WILDCARD_NAME = "wildcard";
 	
-	static final String OCL_LANGUAGE = "OCL";
-	static final String OCL_NAME = "ocl";
+	static final @NonNull String OCL_LANGUAGE = "OCL";
+	static final @NonNull String OCL_NAME = "ocl";
 	
-	public static Map<EStructuralFeature,String> roleNames = new HashMap<EStructuralFeature,String>();
+	public static @NonNull Map<EStructuralFeature,String> roleNames = new HashMap<EStructuralFeature,String>();
 }

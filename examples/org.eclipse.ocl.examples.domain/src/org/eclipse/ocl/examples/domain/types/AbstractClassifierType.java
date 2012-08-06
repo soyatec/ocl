@@ -85,11 +85,12 @@ public class AbstractClassifierType extends AbstractSpecializedType implements D
 	}
 	
 	protected @NonNull DomainType getNormalizedInstanceType() {
-		if (normalizedInstanceType == null) {
-			normalizedInstanceType = instanceType.getNormalizedType(standardLibrary);
-			hashCode = normalizedInstanceType.hashCode();
+		DomainType normalizedInstanceType2 = normalizedInstanceType;
+		if (normalizedInstanceType2 == null) {
+			normalizedInstanceType2 = normalizedInstanceType = instanceType.getNormalizedType(standardLibrary);
+			hashCode = normalizedInstanceType2.hashCode();
 		}
-		return DomainUtil.nonNullJDT(normalizedInstanceType);
+		return normalizedInstanceType2;
 	}
 
 	@Override

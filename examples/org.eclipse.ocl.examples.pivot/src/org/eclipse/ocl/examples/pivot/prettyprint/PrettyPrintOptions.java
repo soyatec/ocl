@@ -24,7 +24,6 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
@@ -95,7 +94,8 @@ public abstract class PrettyPrintOptions
 		}
 
 		public @NonNull Set<Namespace> getAliasedNamespaces() {
-			return DomainUtil.nonNullJava(namespace2alias.keySet());
+			@SuppressWarnings("null") @NonNull Set<Namespace> result = namespace2alias.keySet();
+			return result;
 		}
 
 		@Override
@@ -152,31 +152,32 @@ public abstract class PrettyPrintOptions
 		
 		@Override
 		public void addReservedNames(@NonNull Iterable<String> names) {
-			if (reservedNames == null) {
-				reservedNames = new HashSet<String>();
+			Set<String> reservedNames2 = reservedNames;
+			Set<String> restrictedNames2 = restrictedNames;
+			if (reservedNames2 == null) {
+				reservedNames2 = reservedNames = new HashSet<String>();
 			}
-			if (restrictedNames == null) {
-				restrictedNames = new HashSet<String>();
+			if (restrictedNames2 == null) {
+				restrictedNames2 = restrictedNames = new HashSet<String>();
 			}
-			Set<String> nonNullReservedNames = DomainUtil.nonNullJDT(reservedNames);
-			Set<String> nonNullRestrictedNames = DomainUtil.nonNullJDT(restrictedNames);
 			for (String name : names) {
-				nonNullReservedNames.add(name);
-				nonNullRestrictedNames.add(name);
+				reservedNames2.add(name);
+				restrictedNames2.add(name);
 			}
 		}
 		
 		@Override
 		public  void addRestrictedNames(@NonNull Iterable<String> names) {
-			if (reservedNames == null) {
-				reservedNames = new HashSet<String>();
+			Set<String> reservedNames2 = reservedNames;
+			Set<String> restrictedNames2 = restrictedNames;
+			if (reservedNames2 == null) {
+				reservedNames2 = reservedNames = new HashSet<String>();
 			}
-			if (reservedNames == null) {
-				restrictedNames = new HashSet<String>();
+			if (restrictedNames2 == null) {
+				restrictedNames2 = restrictedNames = new HashSet<String>();
 			}
-			Set<String> nonNullRestrictedNames = DomainUtil.nonNullJDT(restrictedNames);
 			for (String name : names) {
-				nonNullRestrictedNames.add(name);
+				restrictedNames2.add(name);
 			}
 		}
 		

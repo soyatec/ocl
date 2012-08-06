@@ -48,7 +48,7 @@ public class SettingBehavior extends AbstractDelegatedBehavior<EStructuralFeatur
 	}
 
 	public @NonNull SettingDelegate.Factory.Registry getDefaultRegistry() {
-		return DomainUtil.nonNullJDT(SettingDelegate.Factory.Registry.INSTANCE);
+		return DomainUtil.nonNullEMF(SettingDelegate.Factory.Registry.INSTANCE);
 	}
 
 	public @NonNull EPackage getEPackage(@NonNull EStructuralFeature eStructuralFeature) {

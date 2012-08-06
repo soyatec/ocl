@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ElementValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
@@ -66,9 +65,10 @@ public class ElementValueImpl extends ObjectValueImpl implements ElementValue
 	}
 
 	public @NonNull DomainType getType() {
-		if (type == null) {
-			type = valueFactory.getStandardLibrary().getType(getObject());
+		DomainType type2 = type;
+		if (type2 == null) {
+			type2 = type = valueFactory.getStandardLibrary().getType(getObject());
 		}
-		return DomainUtil.nonNullJDT(type);
+		return type2;
 	}
 }

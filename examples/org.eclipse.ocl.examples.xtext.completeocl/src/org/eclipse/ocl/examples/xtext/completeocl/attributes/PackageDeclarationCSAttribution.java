@@ -18,7 +18,6 @@ package org.eclipse.ocl.examples.xtext.completeocl.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -36,10 +35,8 @@ public class PackageDeclarationCSAttribution extends AbstractAttribution
 		if (containmentFeature == CompleteOCLCSTPackage.Literals.PACKAGE_DECLARATION_CS__CONTEXTS) {
 			org.eclipse.ocl.examples.pivot.Package pkg = targetElement.getPackage();
 			if (pkg != null) {
-				MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-				environmentView.addNamedElements(null, metaModelManager.getMemberPackages(pkg));
-				environmentView.addNamedElements(null, metaModelManager.getLocalClasses(pkg));
-//				environmentView.addNamedElements(pkge.getOwnedPrecedence());
+				environmentView.addAllPackages(pkg);
+				environmentView.addAllTypes(pkg);
 			}
 		}
 		return scopeView.getParent();

@@ -52,7 +52,7 @@ public class InvocationBehavior extends AbstractDelegatedBehavior<EOperation, In
 	}
 
 	public @NonNull InvocationDelegate.Factory.Registry getDefaultRegistry() {
-		return DomainUtil.nonNullJDT(InvocationDelegate.Factory.Registry.INSTANCE);
+		return DomainUtil.nonNullEMF(InvocationDelegate.Factory.Registry.INSTANCE);
 	}
 
 	public @NonNull EPackage getEPackage(@NonNull EOperation eOperation) {

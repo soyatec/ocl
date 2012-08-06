@@ -44,7 +44,7 @@ public class LibOperationCSAttribution extends AbstractAttribution
 			if (containmentFeature == BaseCSTPackage.Literals.OPERATION_CS__OWNED_PARAMETER) {
 			}
 			else {
-				environmentView.addNamedElements(pivot.getOwnedParameter());
+				environmentView.addAllParameters(pivot);
 			}
 			environmentView.addElements(PivotUtil.getTypeTemplateParameterables(pivot));
 		}

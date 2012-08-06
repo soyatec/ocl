@@ -25,6 +25,7 @@ import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
@@ -33,7 +34,7 @@ import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.util.EcoreSwitch;
 import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.DataType;
@@ -61,58 +62,77 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
     public static final Object PROPERTY_OPPOSITE_ROLE_UPPER_KEY = "Property.oppositeUpper"; //$NON-NLS-1$
 
     protected final Ecore2Pivot converter;
+	protected final MetaModelManager metaModelManager;
 	
 	public Ecore2PivotReferenceSwitch(Ecore2Pivot converter) {
 		this.converter = converter;
+		this.metaModelManager = converter.getMetaModelManager();
 	}
 	
 	@Override
 	public Object caseEAnnotation(EAnnotation eObject) {
-		Annotation pivotElement = converter.getCreated(Annotation.class, DomainUtil.nonNullEMF(eObject));
-		doSwitchAll(Element.class, pivotElement.getReference(), eObject.getReferences());
-		return null;
-	}
-
-	@Override
-	public Object caseEClass(EClass eObject) {
-		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.getCreated(org.eclipse.ocl.examples.pivot.Class.class, DomainUtil.nonNullEMF(eObject));
-		doSwitchAll(Type.class, pivotElement.getSuperClass(), eObject.getEGenericSuperTypes());
-		if (pivotElement.getSuperClass().isEmpty()) {
-			org.eclipse.ocl.examples.pivot.Class oclElementType = converter.getMetaModelManager().getOclElementType();
-			pivotElement.getSuperClass().add(oclElementType);
+		@SuppressWarnings("null") @NonNull EAnnotation eObject2 = eObject;
+		Annotation pivotElement = converter.getCreated(Annotation.class, eObject2);
+		if (pivotElement != null) {
+			doSwitchAll(Element.class, pivotElement.getReference(), eObject2.getReferences());
 		}
 		return null;
 	}
 
 	@Override
-	public Object caseEDataType(EDataType eObject) {
-		super.caseEDataType(eObject);
-		Class<?> instanceClass = eObject.getInstanceClass();
-		if (instanceClass != null) {
-			DataType pivotElement = converter.getCreated(DataType.class, eObject);
-			try {
-				MetaModelManager metaModelManager = converter.getMetaModelManager();
-				Method declaredMethod = instanceClass.getDeclaredMethod("compareTo", instanceClass);
-				Operation operation = PivotFactory.eINSTANCE.createOperation();
-				operation.setName(LibraryConstants.COMPARE_TO);
-				operation.setImplementation(new JavaCompareToOperation(declaredMethod));
-				Parameter parameter = PivotFactory.eINSTANCE.createParameter();
-				parameter.setName("that");
-				parameter.setType(metaModelManager.getOclSelfType());
-				operation.getOwnedParameter().add(parameter);
-				operation.setType(metaModelManager.getIntegerType());
-				pivotElement.getOwnedOperation().add(operation);
-				pivotElement.getSuperClass().add(metaModelManager.getOclComparableType());
-			} catch (Exception e) {
+	public Object caseEClass(EClass eObject) {
+		@SuppressWarnings("null") @NonNull EClass eObject2 = eObject;
+		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.getCreated(org.eclipse.ocl.examples.pivot.Class.class, eObject2);
+		if (pivotElement != null) {
+			doSwitchAll(Type.class, pivotElement.getSuperClass(), eObject2.getEGenericSuperTypes());
+			if (pivotElement.getSuperClass().isEmpty()) {
+				org.eclipse.ocl.examples.pivot.Class oclElementType = metaModelManager.getOclElementType();
+				pivotElement.getSuperClass().add(oclElementType);
 			}
 		}
 		return null;
 	}
 
 	@Override
+	public Object caseEDataType(EDataType eObject) {
+		@SuppressWarnings("null") @NonNull EDataType eObject2 = eObject;
+		DataType pivotElement = converter.getCreated(DataType.class, eObject2);
+		if (pivotElement != null) {
+			Class<?> instanceClass = eObject2.getInstanceClass();
+			if (instanceClass != null) {
+				try {
+					Method declaredMethod = instanceClass.getDeclaredMethod("compareTo", instanceClass);
+					if (declaredMethod != null) {
+						Operation operation = PivotFactory.eINSTANCE.createOperation();
+						operation.setName(LibraryConstants.COMPARE_TO);
+						operation.setImplementation(new JavaCompareToOperation(declaredMethod));
+						Parameter parameter = PivotFactory.eINSTANCE.createParameter();
+						parameter.setName("that");
+						parameter.setType(metaModelManager.getOclSelfType());
+						operation.getOwnedParameter().add(parameter);
+						operation.setType(metaModelManager.getIntegerType());
+						pivotElement.getOwnedOperation().add(operation);
+						pivotElement.getSuperClass().add(metaModelManager.getOclComparableType());
+					}
+				} catch (Exception e) {
+				}
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public Object caseEEnum(EEnum eObject) {
+		return null;
+	}
+
+	@Override
 	public Object caseEOperation(EOperation eObject) {
-		Operation pivotElement = converter.getCreated(Operation.class, DomainUtil.nonNullEMF(eObject));
-		doSwitchAll(Type.class, pivotElement.getRaisedException(), eObject.getEGenericExceptions());
+		@SuppressWarnings("null") @NonNull EOperation eObject2 = eObject;
+		Operation pivotElement = converter.getCreated(Operation.class, eObject2);
+		if (pivotElement != null) {
+			doSwitchAll(Type.class, pivotElement.getRaisedException(), eObject2.getEGenericExceptions());
+		}
 		return null;
 	}
 
@@ -180,21 +200,24 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 			pivotElement.setOpposite(oppositeProperty);
 		}
 //		else if (eObject.eContainer() instanceof EClass) {		// Skip annotation references
-//			converter.getMetaModelManager().installPropertyDeclaration(pivotElement);
+//			metaModelManager.installPropertyDeclaration(pivotElement);
 //		}
 		return pivotElement;
 	}
 
 	@Override
 	public TypedElement caseETypedElement(ETypedElement eObject) {
-		TypedElement pivotElement = converter.getCreated(TypedElement.class, DomainUtil.nonNullEMF(eObject));
-		EGenericType eType = eObject.getEGenericType();
-		if (eType != null) {
-			Type pivotType = converter.getPivotType(eType);
-			pivotElement.setType(pivotType);
-		}
-		else {
-			// FIXME Void ???
+		@SuppressWarnings("null") @NonNull ETypedElement eObject2 = eObject;
+		TypedElement pivotElement = converter.getCreated(TypedElement.class, eObject2);
+		if (pivotElement != null) {
+			EGenericType eType = eObject2.getEGenericType();
+			if (eType != null) {
+				Type pivotType = converter.getPivotType(eType);
+				pivotElement.setType(pivotType);
+			}
+			else {
+				// FIXME Void ???
+			}
 		}
 /*		EClassifier eClassifier = eGenericType.getEClassifier();
 			if (eClassifier != null) {
@@ -217,9 +240,12 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 
 	@Override
 	public Object caseETypeParameter(ETypeParameter eObject) {
-		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.getCreated(org.eclipse.ocl.examples.pivot.Class.class, DomainUtil.nonNullEMF(eObject));
-		TypeTemplateParameter typeTemplateParameter = (TypeTemplateParameter) pivotElement.getTemplateParameter();
-		doSwitchAll(Type.class, typeTemplateParameter.getConstrainingType(), eObject.getEBounds());
+		@SuppressWarnings("null") @NonNull ETypeParameter eObject2 = eObject;
+		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.getCreated(org.eclipse.ocl.examples.pivot.Class.class, eObject2);
+		if (pivotElement != null) {
+			TypeTemplateParameter typeTemplateParameter = (TypeTemplateParameter) pivotElement.getTemplateParameter();
+			doSwitchAll(Type.class, typeTemplateParameter.getConstrainingType(), eObject2.getEBounds());
+		}
 		return null;
 	}
 
@@ -229,11 +255,13 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 	}
 
 	public <T extends Element> void doSwitchAll(Class<T> pivotClass, Collection<T> pivotElements, List<? extends EObject> eObjects) {
-		Class<T> nonNullPivotClass = DomainUtil.nonNullEMF(pivotClass);
+		@SuppressWarnings("null") @NonNull Class<T> pivotClass2 = pivotClass;
 		for (EObject eObject : eObjects) {
-			T pivotElement = converter.getPivotElement(nonNullPivotClass, DomainUtil.nonNullEntry(eObject));
-			if (pivotElement != null) {
-				pivotElements.add(pivotElement);
+			if (eObject != null) {
+				T pivotElement = converter.getPivotElement(pivotClass2, eObject);
+				if (pivotElement != null) {
+					pivotElements.add(pivotElement);
+				}
 			}
 		}
 	}

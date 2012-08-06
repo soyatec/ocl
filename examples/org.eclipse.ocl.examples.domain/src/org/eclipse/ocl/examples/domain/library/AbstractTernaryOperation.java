@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.domain.library;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -32,10 +33,14 @@ import org.eclipse.ocl.examples.domain.values.Value;
 public abstract class AbstractTernaryOperation extends AbstractOperation implements LibraryTernaryOperation
 {
 	public @Nullable Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Value sourceValue, Value... argumentValues) throws InvalidValueException {
-		return evaluate(evaluator, DomainUtil.nonNullPivot(callExp.getType()), sourceValue, DomainUtil.nonNullJDT(argumentValues[0]), DomainUtil.nonNullJDT(argumentValues[1]));
+		DomainType returnType = DomainUtil.nonNullPivot(callExp.getType());
+		Value argumentValue0 = DomainUtil.nonNullState(argumentValues[0]);
+		Value argumentValue1 = DomainUtil.nonNullState(argumentValues[1]);
+		return evaluate(evaluator, returnType, sourceValue, argumentValue0, argumentValue1);
 	}
 
 	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Value sourceValue, @NonNull Value firstArgumentValue, @NonNull Value secondArgumentValue) throws InvalidValueException {
-		return evaluate(evaluator, DomainUtil.nonNullPivot(callExp.getType()), sourceValue, firstArgumentValue, secondArgumentValue);
+		DomainType returnType = DomainUtil.nonNullPivot(callExp.getType());
+		return evaluate(evaluator, returnType, sourceValue, firstArgumentValue, secondArgumentValue);
 	}
 }

@@ -45,9 +45,11 @@ public class IteratorExpAttribution extends AbstractAttribution
 			environmentView.addElementsOfScope(source.getType(), scopeView);
 			EObject child = scopeView.getChild();
 			for (Variable iterator : targetExpression.getIterator()) {
-				environmentView.addNamedElement(iterator);
-				if (iterator == child) {
-					break;
+				if (iterator != null) {
+					environmentView.addNamedElement(iterator);
+					if (iterator == child) {
+						break;
+					}
 				}
 			}
 		}

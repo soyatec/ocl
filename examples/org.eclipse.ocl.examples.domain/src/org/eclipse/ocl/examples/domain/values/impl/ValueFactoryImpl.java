@@ -483,31 +483,35 @@ public abstract class ValueFactoryImpl implements ValueFactory
     }
 
 	public @NonNull BooleanValue getFalse() {
-		if (falseValue == null) {
-			falseValue = new BooleanValueImpl(this, false); 
+		BooleanValue falseValue2 = falseValue;
+		if (falseValue2 == null) {
+			falseValue2 = falseValue = new BooleanValueImpl(this, false); 
 		}
-		return DomainUtil.nonNullJDT(falseValue);
+		return falseValue2;
 	}
 
 	public @NonNull InvalidValue getInvalid() {
-		if (invalidValue == null) {
-			invalidValue = new InvalidValueImpl(this); 
+		InvalidValue invalidValue2 = invalidValue;
+		if (invalidValue2 == null) {
+			invalidValue2 = invalidValue = new InvalidValueImpl(this); 
 		}
-		return DomainUtil.nonNullJDT(invalidValue);
+		return invalidValue2;
 	}
 
 	public @NonNull NullValue getNull() {
-		if (nullValue == null) {
-			nullValue = new NullValueImpl(this); 
+		NullValue nullValue2 = nullValue;
+		if (nullValue2 == null) {
+			nullValue2 = nullValue = new NullValueImpl(this); 
 		}
-		return DomainUtil.nonNullJDT(nullValue);
+		return nullValue2;
 	}
 
 	public @NonNull IntegerValue getOne() {
-		if (oneValue == null) {
-			oneValue = integerValueOf(1);
+		IntegerValue oneValue2 = oneValue;
+		if (oneValue2 == null) {
+			oneValue2 = oneValue = integerValueOf(1);
 		}
-		return DomainUtil.nonNullJDT(oneValue);
+		return oneValue2;
 	}
 	
 	public final @NonNull DomainStandardLibrary getStandardLibrary() {
@@ -515,24 +519,27 @@ public abstract class ValueFactoryImpl implements ValueFactory
 	}
 
 	public @NonNull BooleanValue getTrue() {
-		if (trueValue == null) {
-			trueValue = new BooleanValueImpl(this, true); 
+		BooleanValue trueValue2 = trueValue;
+		if (trueValue2 == null) {
+			trueValue2 = trueValue = new BooleanValueImpl(this, true); 
 		}
-		return DomainUtil.nonNullJDT(trueValue);
+		return trueValue2;
 	}
 
 	public @NonNull UnlimitedValue getUnlimited() {
-		if (unlimitedValue == null) {
-			unlimitedValue = new UnlimitedValueImpl(this);
+		UnlimitedValue unlimitedValue2 = unlimitedValue;
+		if (unlimitedValue2 == null) {
+			unlimitedValue2 = unlimitedValue = new UnlimitedValueImpl(this);
 		}
-		return DomainUtil.nonNullJDT(unlimitedValue);
+		return unlimitedValue2;
 	}
 
 	public @NonNull IntegerValue getZero() {
-		if (zeroValue == null) {
-			zeroValue = integerValueOf(0);
+		IntegerValue zeroValue2 = zeroValue;
+		if (zeroValue2 == null) {
+			zeroValue2 = zeroValue = integerValueOf(0);
 		}
-		return DomainUtil.nonNullJDT(zeroValue);
+		return zeroValue2;
 	}
 
 	public @NonNull IntegerValue integerValueOf(int value) {
@@ -577,7 +584,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
 		try {
 			int len = aValue.length();
 			if ((len < maxLongSize) || ((len == maxLongSize) && (maxLongValue.compareTo(aValue) >= 0))) {
-				BigInteger result = DomainUtil.nonNullJava(BigInteger.valueOf(Long.parseLong(aValue)));
+				@SuppressWarnings("null") @NonNull BigInteger result = BigInteger.valueOf(Long.parseLong(aValue));
 				return integerValueOf(result);
 			}
 			else {
@@ -722,7 +729,9 @@ public abstract class ValueFactoryImpl implements ValueFactory
 			Collection<?> eValues = (Collection<?>) eValue;
 			ArrayList<Value> values = new ArrayList<Value>(eValues.size());
 			for (Object eVal : eValues) {
-				values.add(valueOf(DomainUtil.nonNullEntry(eVal), eClassifier));
+				if (eVal != null) {
+					values.add(valueOf(eVal, eClassifier));
+				}
 			}
 			boolean isOrdered = eFeature.isOrdered();
 			boolean isUnique = eFeature.isUnique();

@@ -31,6 +31,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.*;
@@ -53,7 +54,7 @@ public class OCLMetaModel extends XMIResourceImpl
 	 */
 	public static final @NonNull String PIVOT_URI = "http://www.eclipse.org/ocl/3.1.0/Pivot";
 
-	public static @NonNull Package create(@NonNull PivotStandardLibrary standardLibrary, @NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI) {
+	public static @NonNull Package create(@NonNull PivotStandardLibrary standardLibrary, @NonNull String name, @Nullable String nsPrefix, @NonNull String nsURI) {
 		OCLMetaModel resource = new OCLMetaModel(DomainUtil.nonNullEMF(URI.createURI(PIVOT_URI)));
 		Contents contents = new Contents(standardLibrary, name, nsPrefix, nsURI);
 		resource.getContents().add(contents.root);
@@ -75,7 +76,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull PrimitiveType _String = standardLibrary.getStringType();
 		protected final @NonNull PrimitiveType _UnlimitedNatural = standardLibrary.getUnlimitedNaturalType();
 
-		protected Contents(@NonNull PivotStandardLibrary standardLibrary, @NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI) {
+		protected Contents(@NonNull PivotStandardLibrary standardLibrary, @NonNull String name, @Nullable String nsPrefix, @NonNull String nsURI) {
 			super(standardLibrary);
 			root = createRoot("pivot", "http://www.eclipse.org/ocl/3.1.0/Pivot");
 			metamodel = createPackage(name, nsPrefix, nsURI);

@@ -43,6 +43,7 @@ Workflow {
     }
     component = Model2tablesGenerator { resourceSet = resourceSet
     	genModelFile = "/${sourceName}/model/oclstdlib.genmodel"
+    	genOCLstdlib = true
     }
 }
 

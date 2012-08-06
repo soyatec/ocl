@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.domain.library;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -30,10 +31,13 @@ import org.eclipse.ocl.examples.domain.values.Value;
 public abstract class AbstractBinaryOperation extends AbstractOperation implements LibraryBinaryOperation
 {
 	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Value sourceValue, Value... argumentValues) throws InvalidValueException {
-		return evaluate(evaluator, DomainUtil.nonNullPivot(callExp.getType()), sourceValue, DomainUtil.nonNullJDT(argumentValues[0]));
+		DomainType returnType = DomainUtil.nonNullPivot(callExp.getType());
+		Value argumentValue0 = DomainUtil.nonNullState(argumentValues[0]);
+		return evaluate(evaluator, returnType, sourceValue, argumentValue0);
 	}
 
 	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Value sourceValue, @NonNull Value argumentValue) throws InvalidValueException {
-		return evaluate(evaluator, DomainUtil.nonNullPivot(callExp.getType()), sourceValue, argumentValue);
+		DomainType returnType = DomainUtil.nonNullPivot(callExp.getType());
+		return evaluate(evaluator, returnType, sourceValue, argumentValue);
 	}
 }

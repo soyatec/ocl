@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -34,7 +35,10 @@ public class LetExpAttribution extends AbstractAttribution
 		LetExp targetExpression = (LetExp)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
 		if (containmentFeature == PivotPackage.Literals.LET_EXP__IN) {
-			environmentView.addNamedElement(targetExpression.getVariable());
+			Variable variable = targetExpression.getVariable();
+			if (variable != null) {
+				environmentView.addNamedElement(variable);
+			}
 		}
 		return scopeView.getParent();
 	}

@@ -71,7 +71,7 @@ public class EObjectOperation extends AbstractPolyOperation
 		DomainEvaluator nestedEvaluator = evaluator.createNestedEvaluator();
 		DomainEvaluationEnvironment nestedEvaluationEnvironment = nestedEvaluator.getEvaluationEnvironment();
 		nestedEvaluationEnvironment.add(expressionInOCL.getContextVariable(), sourceValue);
-		return nestedEvaluator.evaluate(expressionInOCL.getBodyExpression());
+		return nestedEvaluator.evaluate(DomainUtil.nonNullPivot(expressionInOCL.getBodyExpression()));
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class EObjectOperation extends AbstractPolyOperation
 		nestedEvaluationEnvironment.add(expressionInOCL.getContextVariable(), sourceValue);
 		List<Variable> parameterVariables = expressionInOCL.getParameterVariable();
 		nestedEvaluationEnvironment.add(parameterVariables.get(0).getRepresentedParameter(), argumentValue);
-		return nestedEvaluator.evaluate(expressionInOCL.getBodyExpression());
+		return nestedEvaluator.evaluate(DomainUtil.nonNullPivot(expressionInOCL.getBodyExpression()));
 	}
 
 	@Override
@@ -106,7 +106,7 @@ public class EObjectOperation extends AbstractPolyOperation
 		List<Variable> parameterVariables = expressionInOCL.getParameterVariable();
 		nestedEvaluationEnvironment.add(parameterVariables.get(0).getRepresentedParameter(), firstArgumentValue);
 		nestedEvaluationEnvironment.add(parameterVariables.get(1).getRepresentedParameter(), secondArgumentValue);
-		return nestedEvaluator.evaluate(expressionInOCL.getBodyExpression());
+		return nestedEvaluator.evaluate(DomainUtil.nonNullPivot(expressionInOCL.getBodyExpression()));
 	}
 
 	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Value sourceValue, Value... argumentValues) throws InvalidValueException {
@@ -121,7 +121,7 @@ public class EObjectOperation extends AbstractPolyOperation
 		for (int i = 0; i < iMax; i++) {
 			nestedEvaluationEnvironment.add(parameterVariables.get(i).getRepresentedParameter(), argumentValues[i]);
 		}
-		return nestedEvaluator.evaluate(expressionInOCL.getBodyExpression());
+		return nestedEvaluator.evaluate(DomainUtil.nonNullPivot(expressionInOCL.getBodyExpression()));
 	}
 
 	protected void resolveExpressionInOCL(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Value sourceValue) {

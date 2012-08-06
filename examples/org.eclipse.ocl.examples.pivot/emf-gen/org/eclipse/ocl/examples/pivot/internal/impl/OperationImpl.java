@@ -40,6 +40,7 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -1292,29 +1293,36 @@ public class OperationImpl
 		if (implementation != null) {
 			return implementation;
 		}
-		if (bodyImplementation == null) {
+		LibraryFeature bodyImplementation2 = bodyImplementation;
+		if (bodyImplementation2 == null) {
 			for (Constraint rule : getOwnedRule()) {
 				String stereotype = rule.getStereotype();
 				if (UMLReflection.BODY.equals(stereotype)) {
 					ValueSpecification specification = rule.getSpecification();
 					if (specification instanceof ExpressionInOCL) {
-						bodyImplementation = new ConstrainedOperation((ExpressionInOCL) specification);
+						bodyImplementation2 = bodyImplementation = new ConstrainedOperation((ExpressionInOCL) specification);
 					}
 				}
 			}
 		}
-		if (bodyImplementation == null) {
-			bodyImplementation = UnsupportedOperation.INSTANCE;
+		if (bodyImplementation2 == null) {
+			bodyImplementation2 = bodyImplementation = UnsupportedOperation.INSTANCE;
 		}
-		return DomainUtil.nonNullJDT(bodyImplementation);
+		return bodyImplementation2;
 	}
 
 	public int getIndex() {
 		return -1;		// WIP
 	}
 
-	public @NonNull DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary) {
-		return standardLibrary.getInheritance(DomainUtil.nonNullEMF(getOwningType()));
+	public @Nullable DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary) {
+		Type owningType = getOwningType();
+		if (owningType != null) {
+			return standardLibrary.getInheritance(owningType);
+		}
+		else {
+			return null;
+		}
 	}
 
 	public @NonNull IndexableIterable<Type> getParameterType() {

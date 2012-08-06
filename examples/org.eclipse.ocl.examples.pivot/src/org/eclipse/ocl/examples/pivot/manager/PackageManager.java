@@ -22,12 +22,14 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.WeakHashMap;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Root;
-import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
@@ -62,7 +64,7 @@ public class PackageManager implements PackageServerParent
 	 * Map from each merged type to the TypeTracker that supervises its merge. TypeTrackers are only
 	 * created for merged types, so a missing entry just denotes an unmerged type. 
 	 */
-	private final @NonNull Map<Type, TypeTracker> type2tracker = new HashMap<Type, TypeTracker>();
+	private final @NonNull Map<DomainType, TypeTracker> type2tracker = new WeakHashMap<DomainType, TypeTracker>();
 	
 	protected PackageManager(@NonNull MetaModelManager metaModelManager) {
 		this.metaModelManager = metaModelManager;
@@ -108,7 +110,7 @@ public class PackageManager implements PackageServerParent
 		}
 	}
 
-	void addTypeTracker(@NonNull Type pivotType, @NonNull TypeTracker typeTracker) {
+	void addTypeTracker(@NonNull DomainType pivotType, @NonNull TypeTracker typeTracker) {
 		TypeTracker oldTracker = type2tracker.put(pivotType, typeTracker);
 		assert oldTracker == null;
 	}
@@ -190,12 +192,19 @@ public class PackageManager implements PackageServerParent
 		type2tracker.remove(typeTracker.getTarget());
 	}
 
-	public PackageTracker findPackageTracker(@NonNull DomainPackage pivotPackage) {
+	@Nullable PackageTracker findPackageTracker(@NonNull DomainPackage pivotPackage) {
 		return package2tracker.get(pivotPackage);
 	}
 	
-	public TypeTracker findTypeTracker(@NonNull Type pivotType) {
-		return type2tracker.get(pivotType);
+	@Nullable ExtensibleTypeServer findTypeServer(@NonNull DomainType pivotType) {
+		TypeTracker typeTracker = type2tracker.get(pivotType);
+		return typeTracker != null ? typeTracker.getTypeServer() : null;
+	}
+	
+	@SuppressWarnings("unused")
+	private final @Nullable TypeTracker findTypeTracker(@NonNull DomainType pivotType) {		
+		throw new UnsupportedOperationException("Not implemented since specializations have a TypeServer but no TypeTracker");
+		//return type2tracker.get(pivotType);
 	}
 
 	@SuppressWarnings("null")
@@ -221,7 +230,12 @@ public class PackageManager implements PackageServerParent
 		if (packageServer == null) {
 			String nsPrefix = pivotPackage.getNsPrefix();
 			String nsURI = pivotPackage.getNsURI();
-			packageServer = new RootPackageServer(this, name, nsPrefix, nsURI);
+			if (PivotConstants.ORPHANAGE_URI.equals(nsURI)) {
+				packageServer = new OrphanPackageServer(this, name, nsPrefix, nsURI);
+			}
+			else {
+				packageServer = new RootPackageServer(this, name, nsPrefix, nsURI);
+			}
 			packageServers.put(name, packageServer);
 			if (nsURI != null) {
 				addPackageServer(packageServer);
@@ -331,23 +345,48 @@ public class PackageManager implements PackageServerParent
 //		return Iterables.transform(rootTrackers, RootTracker.tracker2root);
 //	}
 	
-	public @NonNull TypeServer getTypeServer(@NonNull Type pivotType) {
-		TypeTracker typeTracker = findTypeTracker(pivotType);
-		if (typeTracker == null) {
+	public @NonNull TypeServer getTypeServer(@NonNull DomainType pivotType) {
+		if (pivotType instanceof TypeServer) {
+			return (TypeServer)pivotType;
+		}
+		assert metaModelManager.isTypeServeable(pivotType);
+		TypeTracker typeTracker = type2tracker.get(pivotType);
+		if (typeTracker != null) {
+			return typeTracker.getTypeServer();
+		}
+		else {
 			DomainPackage pivotPackage = pivotType.getPackage();
 			if (pivotPackage == null) {
 				throw new IllegalStateException("type has no package");
 			}
 			PackageServer packageServer = getPackageServer(pivotPackage);
-			typeTracker = packageServer.getTypeTracker(pivotType);
+			return packageServer.getTypeServer(pivotType);
 		}
-		return typeTracker.getTypeServer();
 	}
 
-	void removedMemberPackage(@NonNull DomainPackage pivotPackage) {
-		PackageTracker packageTracker = findPackageTracker(pivotPackage);
+//	public void installAs(@NonNull String nsURI, @NonNull EcoreExecutorPackage tablesPackage) {
+//		PackageServer packageServer = uri2package.get(nsURI);
+//		if (packageServer != null) {
+//			packageServer.addTrackedPackage(tablesPackage);
+//			for (DomainPackage nestedPackage : tablesPackage.getNestedPackage()) {
+//				if (nestedPackage != null) {
+//					addPackage(packageServer, nestedPackage);
+//				}
+//			}
+//		}
+//	}
+
+	void removedPackage(@NonNull DomainPackage pivotPackage) {
+		PackageTracker packageTracker = package2tracker.get(pivotPackage);
 		if (packageTracker != null) {
 			packageTracker.dispose();
+		}
+	}
+
+	void removedType(@NonNull DomainType pivotType) {
+		TypeTracker typeTracker = type2tracker.get(pivotType);
+		if (typeTracker != null) {
+			typeTracker.dispose();
 		}
 	}
 }

@@ -19,6 +19,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -26,7 +27,6 @@ import org.eclipse.ocl.examples.pivot.IterateExp;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -191,22 +191,9 @@ public class InvocationExpCSAttribution extends AbstractAttribution
 			return unresolvedElement instanceof Iteration;
 		}
 		String name = csPathElement.toString();
-		Boolean isIt = isIteration(metaModelManager, type, name);
-		return isIt == Boolean.TRUE;
-	}
-
-	private static Boolean isIteration(MetaModelManager metaModelManager, Type type, String name) {
-		for (Operation operation : metaModelManager.getLocalOperations(type, Boolean.FALSE)) {
-			if (name.equals(operation.getName())) {
-				return operation instanceof Iteration;		// mixed overload are not allowed
-			}
+		for (DomainOperation operation : metaModelManager.getAllOperations(type, Boolean.FALSE, name)) {
+			return operation instanceof Iteration;		// mixed overload are not allowed
 		}
-		for (Type superType : metaModelManager.getSuperClasses(type)) {
-			Boolean isIt = isIteration(metaModelManager, superType, name);
-			if (isIt != null) {
-				return isIt;
-			}
-		}
-		return null;
+		return false;
 	}
 }

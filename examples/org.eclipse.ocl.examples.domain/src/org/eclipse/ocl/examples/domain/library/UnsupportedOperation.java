@@ -30,7 +30,7 @@ import org.eclipse.ocl.examples.domain.values.Value;
  */
 public class UnsupportedOperation extends AbstractOperation implements LibraryBinaryOperation
 {
-	public static final UnsupportedOperation INSTANCE = new UnsupportedOperation();
+	public static final @NonNull UnsupportedOperation INSTANCE = new UnsupportedOperation();
 
 	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Value sourceValue, Value... argumentValues) {
 		throw new UnsupportedOperationException();

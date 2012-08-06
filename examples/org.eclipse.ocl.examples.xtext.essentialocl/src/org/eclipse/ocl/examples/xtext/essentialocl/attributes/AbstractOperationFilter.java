@@ -73,7 +73,7 @@ public abstract class AbstractOperationFilter implements ScopeFilter
 		return bindings;
 	}
 
-	protected void installBindings(@NonNull EnvironmentView environmentView, @NonNull Type forType, @NonNull DomainElement eObject,
+	protected void installBindings(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject,
 			@Nullable Map<TemplateParameter, ParameterableElement> bindings) {
 		environmentView.setBindings(eObject, bindings);
 	}

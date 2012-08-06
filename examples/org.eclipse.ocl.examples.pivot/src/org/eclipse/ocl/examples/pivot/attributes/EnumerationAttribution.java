@@ -18,10 +18,10 @@ package org.eclipse.ocl.examples.pivot.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 public class EnumerationAttribution extends AbstractAttribution
 {
@@ -30,12 +30,10 @@ public class EnumerationAttribution extends AbstractAttribution
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		org.eclipse.ocl.examples.pivot.Enumeration targetEnumeration = (org.eclipse.ocl.examples.pivot.Enumeration) target;
-		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-		environmentView.addElements(targetEnumeration.getOwnedLiteral());
-		environmentView.addElementsOfScope(metaModelManager.getEnumerationType(), scopeView);
-		if (!environmentView.hasFinalResult()) {
-			environmentView.addElementsOfScope(metaModelManager.getOclAnyType(), scopeView);
-		}	// FIXME Use EnvironmentView.addInheritedContents consistently
+		environmentView.addAllEnumerationLiterals(targetEnumeration);
+		environmentView.addAllOperations(targetEnumeration, Boolean.FALSE);
+		environmentView.addAllProperties(targetEnumeration, Boolean.FALSE);
+		environmentView.addElements(PivotUtil.getTemplateParameters(targetEnumeration));
 		return scopeView.getParent();
 	}
 }

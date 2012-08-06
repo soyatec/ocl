@@ -145,7 +145,7 @@ public class OperationFilter extends AbstractOperationFilter
 	}
 
 	@Override
-	protected void installBindings(EnvironmentView environmentView, Type forType, DomainElement eObject,
+	protected void installBindings(EnvironmentView environmentView, DomainElement eObject,
 			Map<TemplateParameter, ParameterableElement> bindings) {
 		List<Parameter> parameters = ((Operation)eObject).getOwnedParameter();
 		int iMax = parameters.size();
@@ -161,10 +161,10 @@ public class OperationFilter extends AbstractOperationFilter
 				}
 			}
 		}
-		super.installBindings(environmentView, forType, eObject, bindings);
+		super.installBindings(environmentView, eObject, bindings);
 	}
 
-	public boolean matches(EnvironmentView environmentView, Type forType, DomainElement eObject) {
+	public boolean matches(EnvironmentView environmentView, DomainElement eObject) {
 		if (eObject instanceof Iteration) {
 			Iteration candidateIteration = (Iteration)eObject;
 			int iteratorCount = candidateIteration.getOwnedIterator().size();
@@ -177,7 +177,7 @@ public class OperationFilter extends AbstractOperationFilter
 			}
 			Map<TemplateParameter, ParameterableElement> bindings = getIterationBindings(candidateIteration);
 			if (bindings != null) {
-				installBindings(environmentView, forType, eObject, bindings);
+				installBindings(environmentView, eObject, bindings);
 			}
 			return true;
 		}
@@ -212,7 +212,7 @@ public class OperationFilter extends AbstractOperationFilter
 				}
 			}
 			if (bindings != null) {
-				installBindings(environmentView, forType, eObject, bindings);
+				installBindings(environmentView, eObject, bindings);
 			}
 			return true;
 		}

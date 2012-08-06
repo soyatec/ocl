@@ -231,7 +231,7 @@ public abstract class AbstractInheritance implements DomainInheritance
 	public @NonNull LibraryFeature lookupImplementation(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainOperation staticOperation) {
 		getDepth();
 		DomainInheritance staticInheritance = staticOperation.getInheritance(standardLibrary);
-		int staticDepth = staticInheritance.getDepth();
+		int staticDepth = DomainUtil.nonNullModel(staticInheritance).getDepth();
 		if (staticDepth+1 < getIndexes()) {				// null and invalid may fail here
 			int iMax = getIndex(staticDepth+1);
 			for (int i = getIndex(staticDepth); i < iMax; i++) {
@@ -245,7 +245,7 @@ public abstract class AbstractInheritance implements DomainInheritance
 		if (implementation == null) {
 			implementation = UnsupportedOperation.INSTANCE;
 		}
-		return DomainUtil.nonNullJDT(implementation);			
+		return implementation;			
 	}
 
 	public @Nullable DomainOperation lookupLocalOperation(@NonNull DomainStandardLibrary standardLibrary, @NonNull String operationName, DomainInheritance... argumentTypes) {
@@ -257,8 +257,8 @@ public abstract class AbstractInheritance implements DomainInheritance
 					int i = 0;
 					for (; i < iMax; i++) {
 						DomainType firstParameterType = firstParameterTypes.get(i);
-						DomainType secondParameterType = DomainUtil.nonNullEntry(argumentTypes[i]);
-						if (!firstParameterType.isEqualTo(standardLibrary, secondParameterType)) {
+						DomainType secondParameterType = argumentTypes[i];
+						if ((secondParameterType == null) || !firstParameterType.isEqualTo(standardLibrary, secondParameterType)) {
 							break;
 						}
 					}

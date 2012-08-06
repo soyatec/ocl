@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Root;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -37,10 +36,9 @@ public class RootPackageCSAttribution extends AbstractRootCSAttribution
 	@Override
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
 		RootPackageCS targetElement = (RootPackageCS)target;
-		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 		Root pivotPackage = PivotUtil.getPivot(Root.class, targetElement);
 		if (pivotPackage != null) {
-			environmentView.addNamedElements(pivotPackage.getNestedPackage());
+			environmentView.addAllPackages(pivotPackage);
 		}
 		if (environmentView.accepts(PivotPackage.Literals.NAMESPACE)) {
 			for (ImportCS anImport : targetElement.getOwnedImport()) {
@@ -49,7 +47,7 @@ public class RootPackageCSAttribution extends AbstractRootCSAttribution
 					String importName = anImport.getName();
 					if (importName == null) {
 						if (namespace instanceof org.eclipse.ocl.examples.pivot.Package) {
-							environmentView.addNamedElements(metaModelManager.getMemberPackages((org.eclipse.ocl.examples.pivot.Package)namespace));
+							environmentView.addAllPackages((org.eclipse.ocl.examples.pivot.Package)namespace);
 						}
 					}
 					else {

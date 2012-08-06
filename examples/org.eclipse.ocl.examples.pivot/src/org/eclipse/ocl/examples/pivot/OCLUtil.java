@@ -20,10 +20,11 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import java.lang.ref.Reference;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 
 /**
@@ -33,7 +34,7 @@ import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
  */
 public final class OCLUtil {
     /** Use weak references as the keys to avoid memory leaks. */
-	private static final Map<Environment, Reference<BasicEnvironment>> environments = new java.util.WeakHashMap<Environment, Reference<BasicEnvironment>>();
+//	private static final @NonNull Map<Environment, Reference<BasicEnvironment>> environments = new java.util.WeakHashMap<Environment, Reference<BasicEnvironment>>();
    
 	// prevent instantiation
 	private OCLUtil() {
@@ -64,9 +65,7 @@ public final class OCLUtil {
 	 *     if this environment does not adapt to it
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> T getAdapter(
-	        Environment env,
-	        java.lang.Class<T> adapterType) {
+	public static @Nullable <T> T getAdapter(@NonNull Environment env, @NonNull java.lang.Class<T> adapterType) {
 	    
 		T result;
 		
@@ -140,8 +139,7 @@ public final class OCLUtil {
 	 *     if this environment factory does not adapt to it
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> T getAdapter(EnvironmentFactory factory,
-			java.lang.Class<T> adapterType) {
+	public static @Nullable <T> T getAdapter(@NonNull EnvironmentFactory factory, @NonNull java.lang.Class<T> adapterType) {
 		T result;
 		
 		if (factory instanceof Adaptable) {
@@ -195,7 +193,7 @@ public final class OCLUtil {
 	 * 
 	 * @see #checkForErrors(ProblemHandler)
 	 */
-	public static Diagnostic checkForErrors(Environment env)
+	public static Diagnostic checkForErrors(@NonNull Environment env)
 			throws SyntaxException, SemanticException {
 		throw new UnsupportedOperationException();
 //		return checkForErrors(getAdapter(env, ProblemHandler.class));
@@ -213,7 +211,7 @@ public final class OCLUtil {
 	 * @throws SemanticException if there are any errors in analyzing the
 	 *    abstract syntax 
 	 */
-	public static Diagnostic checkForErrors(ProblemHandler problemHandler)
+	public static Diagnostic checkForErrors(@NonNull ProblemHandler problemHandler)
 			throws SyntaxException, SemanticException {
 		throw new UnsupportedOperationException();		
 /*		Diagnostic result = null;
@@ -269,7 +267,7 @@ public final class OCLUtil {
 	 * @throws SemanticException if there are any errors in analyzing the
 	 *    abstract syntax 
 	 */
-	public static Diagnostic checkForErrorsOrWarnings(ProblemHandler problemHandler)
+	public static Diagnostic checkForErrorsOrWarnings(@NonNull ProblemHandler problemHandler)
 			throws SyntaxException, SemanticException {
 		throw new UnsupportedOperationException();
 /*		
@@ -306,7 +304,7 @@ public final class OCLUtil {
 	 * 
 	 * @see Environment.Registry
 	 */
-	public static Environment getValidationEnvironment(Object target, Map<Object, Object> context) {
+	public static @Nullable Environment getValidationEnvironment(@NonNull Object target, @NonNull Map<Object, Object> context) {
 		Environment result = (Environment) context.get(Environment.class);
 		
 		if (result == null) {
@@ -330,7 +328,7 @@ public final class OCLUtil {
 	 * @return the diagnostic object encapsulating the problem details or
 	 *         <code>null</code> if no problems are available
 	 */
-	public static Diagnostic getEvaluationProblems(Query query) {
+	public static @Nullable Diagnostic getEvaluationProblems(@NonNull Query query) {
 
 		if (query instanceof ProblemAware) {
 			ProblemAware problemAware = (ProblemAware) query;

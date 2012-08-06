@@ -25,7 +25,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
@@ -112,9 +111,10 @@ public abstract class TypeValueImpl extends ObjectValueImpl implements TypeValue
 	}
 
 	public @NonNull DomainClassifierType getType() {
-		if (classifierType == null) {
-			classifierType = valueFactory.getStandardLibrary().getClassifierType(getObject());
+		DomainClassifierType classifierType2 = classifierType;
+		if (classifierType2 == null) {
+			classifierType2 = classifierType = valueFactory.getStandardLibrary().getClassifierType(getObject());
 		}
-		return DomainUtil.nonNullJDT(classifierType);
+		return classifierType2;
 	}
 }

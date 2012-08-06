@@ -22,7 +22,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
@@ -42,7 +41,8 @@ public class StringSubstringOperation extends AbstractTernaryOperation
 		int lower = startInteger.intValue();
 		int upper = endInteger.intValue();
 		if ((0 < lower) && (lower <= upper) && (upper <= size)) {
-			return valueFactory.stringValueOf(DomainUtil.nonNullJava(sourceString.substring(lower-1, upper)));
+			@SuppressWarnings("null") @NonNull String result = sourceString.substring(lower-1, upper);
+			return valueFactory.stringValueOf(result);
 		}
 		else {
 			return valueFactory.throwInvalidValueException(EvaluatorMessages.IndexesOutOfRange, lower, upper, size);

@@ -45,7 +45,7 @@ public class ValidationBehavior extends AbstractDelegatedBehavior<EClassifier, E
 		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(ecoreMetaModel, metaModelManager);
 		Type type = ecore2Pivot.getCreated(Type.class, eClassifier);
 		if (type != null) {
-			Constraint constraint = PivotUtil.getNamedElement(metaModelManager.getLocalConstraints(type), constraintName);
+			Constraint constraint = PivotUtil.getNamedElement(metaModelManager.getAllConstraints(type), constraintName);
 			if (constraint != null) {
 				return constraint;
 			}
@@ -59,7 +59,7 @@ public class ValidationBehavior extends AbstractDelegatedBehavior<EClassifier, E
 	}
 
 	public @NonNull EValidator.ValidationDelegate.Registry getDefaultRegistry() {
-		return DomainUtil.nonNullJDT(ValidationDelegate.Factory.Registry.INSTANCE);
+		return DomainUtil.nonNullEMF(ValidationDelegate.Factory.Registry.INSTANCE);
 	}
 
 	public @NonNull EPackage getEPackage(@NonNull EClassifier eClassifier) {

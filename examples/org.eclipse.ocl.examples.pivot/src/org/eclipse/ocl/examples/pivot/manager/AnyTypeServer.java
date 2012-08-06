@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010 E.D.Willink and others.
+ * Copyright (c) 2011 E.D.Willink and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,29 +12,45 @@
  *
  * </copyright>
  *
- * $Id: Nameable.java,v 1.2 2011/01/24 20:49:36 ewillink Exp $
+ * $Id$
  */
-package org.eclipse.ocl.examples.pivot.executor;
+package org.eclipse.ocl.examples.pivot.manager;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
-import org.eclipse.ocl.examples.pivot.InvalidType;
-import org.eclipse.ocl.examples.pivot.manager.PackageServer;
-import org.eclipse.ocl.examples.pivot.manager.TypeServer;
+import org.eclipse.ocl.examples.pivot.AnyType;
 
-public class PivotReflectiveInvalidType extends TypeServer
+public class AnyTypeServer extends ExtensibleTypeServer
 {
-	public PivotReflectiveInvalidType(@NonNull PackageServer packageServer, @NonNull InvalidType type) {
+	public AnyTypeServer(@NonNull PackageServer packageServer, @NonNull AnyType type) {
 		super(packageServer, type);
 	}
 
 	@Override
 	public @NonNull DomainInheritance getCommonInheritance(@NonNull DomainInheritance thatInheritance) {
-		return thatInheritance;
+		return this;
+	}
+
+	@Override
+	public @NonNull Iterable<? extends DomainInheritance> getInitialSuperInheritances() {
+		return MetaModelManager.EMPTY_TYPE_SERVER_LIST;
+	}
+	
+	@Override
+	public boolean install() {
+		if (!isInstalled()) {
+			installOclAny();
+		}
+		return true;
+	}
+
+	@Override
+	public boolean isInstallable() {
+		return true;
 	}
 
 	@Override
 	public boolean isUndefined() {
-		return true;
+		return false;
 	}
 }

@@ -40,7 +40,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -84,11 +83,13 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 	}
 
 	public @NonNull BigDecimal bigDecimalValue() {
-		return DomainUtil.nonNullJava(BigDecimal.valueOf(Double.POSITIVE_INFINITY));
+		@SuppressWarnings("null") @NonNull BigDecimal result = BigDecimal.valueOf(Double.POSITIVE_INFINITY);
+		return result;
 	}
 
 	public @NonNull BigInteger bigIntegerValue() throws InvalidValueException {
-		return DomainUtil.nonNullJava(BigDecimal.valueOf(Double.POSITIVE_INFINITY).toBigInteger());
+		@SuppressWarnings("null") @NonNull BigInteger result = BigDecimal.valueOf(Double.POSITIVE_INFINITY).toBigInteger();
+		return result;
 	}
 
 	public int compareTo(NumericValue o) {

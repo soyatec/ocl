@@ -78,7 +78,8 @@ public class StringTokenizeOperation extends AbstractPolyOperation
 		StringTokenizer tokenizer = new StringTokenizer(sourceString, delims, returnDelims);
 		List<StringValue> results = new ArrayList<StringValue>();
 		while (tokenizer.hasMoreTokens()) {
-			results.add(valueFactory.stringValueOf(DomainUtil.nonNullJava(tokenizer.nextToken())));
+			@SuppressWarnings("null") @NonNull String nextToken = tokenizer.nextToken();
+			results.add(valueFactory.stringValueOf(nextToken));
 		}
 		return valueFactory.createSequenceValue(returnType, results);
 	}

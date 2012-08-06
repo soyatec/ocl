@@ -454,6 +454,7 @@ public class IterationImpl extends OperationImpl implements Iteration
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("null")
 	@Override
 	public boolean eIsSet(int featureID)
 	{

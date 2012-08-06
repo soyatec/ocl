@@ -22,6 +22,7 @@ import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.WorkflowComponentWithModelSlot;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
+import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
@@ -40,7 +41,12 @@ public class UML2PivotLoader extends WorkflowComponentWithModelSlot
 		log.info("Pivoting '" + resource.getURI() + "'");
 		MetaModelManager metaModelManager = MetaModelManager.getAdapter(resource.getResourceSet());
 		UML2Pivot uml2pivot = UML2Pivot.getAdapter(resource, metaModelManager);
-		Root root = uml2pivot.getPivotRoot();
+		Root root;
+		try {
+			root = uml2pivot.getPivotRoot();
+		} catch (ParserException e) {
+			throw new RuntimeException("Problems pivoting '" + resource.getURI() + "'", e);
+		}
 		Resource resource2 = root.eResource();
 		ctx.set(getModelSlot(), resource2);
 	}

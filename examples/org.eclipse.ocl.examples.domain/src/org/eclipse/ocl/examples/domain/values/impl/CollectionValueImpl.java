@@ -207,7 +207,8 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 
 	@Override
 	public @NonNull DomainType getActualType() {
-		if (actualType == null) {
+		DomainType actualType2 = actualType;
+		if (actualType2 == null) {
 			DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 			DomainType elementType = null;
 			for (Value value : elements) {
@@ -220,13 +221,13 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 				}
 			}
 			if (elementType == null) {
-				actualType = type;
+				actualType2 = actualType = type;
 			}
 			else {
-				actualType = standardLibrary.getCollectionType(type, elementType);
+				actualType2 = actualType = standardLibrary.getCollectionType(type, elementType);
 			}
 		}	
-		return DomainUtil.nonNullJDT(actualType);
+		return actualType2;
 	}
 
 	public @NonNull DomainCollectionType getBagType() {
@@ -323,7 +324,8 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	}
 
 	public @NonNull Iterator<Value> iterator() {
- 		return DomainUtil.nonNullJava(elements.iterator());
+		@SuppressWarnings("null") @NonNull Iterator<Value> result = elements.iterator();
+		return result;
 	}
 
 	public @NonNull Value maxMin(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation binaryOperation) throws InvalidValueException {
@@ -332,8 +334,8 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
         	if (result == null) {
         		result = element;
         	}
-        	else {
-        		result = binaryOperation.evaluate(evaluator, returnType, result, DomainUtil.nonNullEntry(element));
+        	else if (element != null) {
+        		result = binaryOperation.evaluate(evaluator, returnType, result, element);
         		if (result.isUndefined()) {
                 	valueFactory.throwInvalidValueException(EvaluatorMessages.UndefinedResult, "max/min");
         		}
@@ -354,10 +356,12 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
     	Set<TupleValue> result = new HashSet<TupleValue>();		
         for (Value next1 : this) {
         	if (next1 != null) {
+        		@NonNull Value next1a = next1;
         		for (Value next2 : c) {
-            		Value nonNullNext1b = DomainUtil.nonNullJDT(next1);		// FIXME workaround JDT null analysis limitation 
+            		@SuppressWarnings("null")
+					@NonNull Value next1b = next1a;
     				if (next2 != null) {
-    					result.add(new TupleValueImpl(nonNullValueFactory, tupleType, nonNullNext1b, next2));
+    					result.add(new TupleValueImpl(nonNullValueFactory, tupleType, next1b, next2));
     				}
         		}
         	}

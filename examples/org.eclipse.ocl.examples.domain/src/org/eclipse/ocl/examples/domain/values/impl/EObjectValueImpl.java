@@ -39,10 +39,11 @@ public class EObjectValueImpl extends ObjectValueImpl
 	}
 
 	public @NonNull DomainType getType() {
-		if (type == null) {
-			type = valueFactory.getStandardLibrary().getType(DomainUtil.nonNullEMF(getObject().eClass()));
+		DomainType type2 = type;
+		if (type2 == null) {
+			type2 = type = valueFactory.getStandardLibrary().getType(DomainUtil.nonNullEMF(getObject().eClass()));
 		}
-		return DomainUtil.nonNullJDT(type);
+		return type2;
 	}
 
 	@Override

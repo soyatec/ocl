@@ -869,7 +869,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 			if (commonType == null) {
 				commonType = type;
 			}
-			else {
+			else if (commonType != type) {
 				commonType = metaModelManager.getCommonType(commonType, type, null);
 			}
 		}

@@ -21,7 +21,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
-import org.eclipse.ocl.examples.pivot.Type;
 
 /**
  * A ScopeFilter is initially used to reject unwanted name contributions from a scope and
@@ -42,5 +41,5 @@ public interface ScopeFilter
 	 * 
 	 * @param eObject
 	 */
-	boolean matches(@NonNull EnvironmentView environmentView, @Nullable Type forType, @NonNull DomainElement eObject);
+	boolean matches(@NonNull EnvironmentView environmentView,  @NonNull DomainElement eObject);
 }

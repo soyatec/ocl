@@ -61,10 +61,7 @@ class PackageTracker implements Adapter.Internal
 		PackageManager packageManager = packageServer.getPackageManager();
 		for (DomainType type : target.getOwnedType()) {
 			if (type != null) {
-				TypeTracker typeTracker = packageManager.findTypeTracker((Type)type);		// FIX bad cast
-				if (typeTracker != null) {
-					typeTracker.dispose();
-				}
+				packageManager.removedType(type);
 			}
 		}
 		packageServer.disposedPackageTracker(this);

@@ -43,23 +43,23 @@ public class CompleteOCLDocumentCSAttribution extends AbstractRootCSAttribution
 					environmentView.addElement(importName, namespace);
 					environmentView.addNamedElement(namespace);
 					if (namespace instanceof Root) {
-						environmentView.addNamedElements(((Root)namespace).getNestedPackage());
+						environmentView.addAllPackages((Root)namespace);
 					} else if (namespace instanceof org.eclipse.ocl.examples.pivot.Package) {		// FIXME This legacy behaviour needs cleaning up
 						if (anImport.isAll()) {
 							org.eclipse.ocl.examples.pivot.Package rootPackage = (org.eclipse.ocl.examples.pivot.Package)namespace;
-							environmentView.addMemberPackages(rootPackage);
-							environmentView.addNamedElements(rootPackage.getOwnedType());
+							environmentView.addAllPackages(rootPackage);
+							environmentView.addAllTypes(rootPackage);
 						}
 					}
 				} else {
 					environmentView.addNamedElement(namespace);
 					if (namespace instanceof Root) {
-						environmentView.addNamedElements(((Root)namespace).getNestedPackage());
+						environmentView.addAllPackages((Root)namespace);
 					} else if (namespace instanceof org.eclipse.ocl.examples.pivot.Package) {		// FIXME This legacy behaviour needs cleaning up
 						for (org.eclipse.ocl.examples.pivot.Package rootPackage : ((org.eclipse.ocl.examples.pivot.Package)namespace).getNestedPackage()) {
 							environmentView.addNamedElement(rootPackage);		// FIXME Rationalize root of pivot model
-							environmentView.addMemberPackages(rootPackage);
-							environmentView.addNamedElements(rootPackage.getOwnedType());
+							environmentView.addAllPackages(rootPackage);
+							environmentView.addAllTypes(rootPackage);
 						}
 					}
 				}

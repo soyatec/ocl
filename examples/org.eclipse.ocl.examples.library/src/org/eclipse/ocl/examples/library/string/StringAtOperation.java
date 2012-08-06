@@ -22,7 +22,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
@@ -39,7 +38,7 @@ public class StringAtOperation extends AbstractBinaryOperation
 		int index = rightInteger.intValue();
 		if ((0 < index) && (index <= size)) {
 			char c = leftString.charAt(index-1);
-			String result = DomainUtil.nonNullJava(String.valueOf(c));
+			@SuppressWarnings("null") @NonNull String result = String.valueOf(c);
 			return evaluator.getValueFactory().stringValueOf(result);
 		}
 		else {

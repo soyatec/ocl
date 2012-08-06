@@ -18,6 +18,8 @@
 
 package org.eclipse.ocl.examples.pivot.options;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Customizable;
 import org.eclipse.ocl.examples.pivot.OCLUtil;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
@@ -46,7 +48,7 @@ public class EvaluationOptions {
      * specification, use <tt>false</tt>.
      * </p>
      */
-    public static final Option<Boolean> LAX_NULL_HANDLING = new BasicOption<Boolean>(
+    public static final @NonNull Option<Boolean> LAX_NULL_HANDLING = new BasicOption<Boolean>(
             "lax.null.handling", true); //$NON-NLS-1$
 
     /**
@@ -66,8 +68,7 @@ public class EvaluationOptions {
      * 
      * @see Cusotmizable#setOption(Option, Object)
      */
-    public static <T> void setOption(EvaluationEnvironment env,
-            Option<T> option, T value) {
+    public static <T> void setOption(@NonNull EvaluationEnvironment env, @NonNull Option<T> option, @Nullable T value) {
         
         Customizable custom = OCLUtil.getAdapter(env, Customizable.class);
         if (custom != null) {
@@ -88,8 +89,7 @@ public class EvaluationOptions {
      * 
      * @see Customizable#getValue(Option)
      */
-    public static <T> T getValue(EvaluationEnvironment env,
-            Option<T> option) {
+    public static @Nullable <T> T getValue(@NonNull EvaluationEnvironment env, @NonNull Option<T> option) {
         
         Customizable custom = OCLUtil.getAdapter(env, Customizable.class);
         if (custom != null) {

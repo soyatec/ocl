@@ -40,7 +40,6 @@ import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.VoidType;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.manager.TypeTracker;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -119,17 +118,7 @@ public class Pivot2EcoreTypeRefVisitor
 			}
 			return eClassifier;
 		}
-		TypeTracker typeTracker = metaModelManager.findTypeTracker(pivotType);
-		if (typeTracker != null) {
-			for (Type aType : typeTracker.getTypeServer().getTrackedTypes()) {
-				if (!(aType instanceof PrimitiveType)) {
-					EDataType eClassifier = context.getCreated(EDataType.class, pivotType);
-					if (eClassifier != null) {
-						return eClassifier;
-					}
-				}
-			}
-		}
+//		TypeServer typeServer = metaModelManager.getTypeServer(pivotType);	// FIXME use/delete this
 		if (pivotType == metaModelManager.getBooleanType()) {
 			return EcorePackage.Literals.EBOOLEAN;
 		}

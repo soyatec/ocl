@@ -33,6 +33,7 @@ import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OCL;
+import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
@@ -246,7 +247,7 @@ public class RoundTripTests extends XtextTestCase
 		metaModelManager3.dispose();
 	}
 	
-	public void doRoundTripFromUml(String stem) throws IOException, InterruptedException {
+	public void doRoundTripFromUml(String stem) throws IOException, InterruptedException, ParserException {
 //		Environment.Registry.INSTANCE.registerEnvironment(
 //			new UMLEnvironmentFactory().createEnvironment());
 		ResourceSet resourceSet = new ResourceSetImpl();

@@ -23,8 +23,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Root;
 
-import com.google.common.base.Function;
-
 /**
  * A RootTracker adapts a Root to keep the overall managed meta-model in tune with any changes.
  */
@@ -82,7 +80,7 @@ class RootTracker implements Adapter.Internal
 				case Notification.REMOVE: {
 					Object value = notification.getOldValue();
 					if (value instanceof org.eclipse.ocl.examples.pivot.Package) {
-						packageManager.removedMemberPackage((org.eclipse.ocl.examples.pivot.Package)value);
+						packageManager.removedPackage((org.eclipse.ocl.examples.pivot.Package)value);
 					}
 					break;
 				}
@@ -91,7 +89,7 @@ class RootTracker implements Adapter.Internal
 					List<Object> values = (List<Object>)notification.getOldValue();
 					for (Object value : values) {
 						if (value instanceof org.eclipse.ocl.examples.pivot.Package) {
-							packageManager.removedMemberPackage((org.eclipse.ocl.examples.pivot.Package)value);
+							packageManager.removedPackage((org.eclipse.ocl.examples.pivot.Package)value);
 						}
 					}
 					break;

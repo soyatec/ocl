@@ -161,13 +161,14 @@ public class OCLDelegateDomain implements DelegateDomain, MetaModelManagerListen
 	}
 
 	public @NonNull OCL getOCL() {
-		if (ocl == null) {
+		OCL ocl2 = ocl;
+		if (ocl2 == null) {
 			// Delegates are an application-independent extension of EMF
 			//  so we must use the neutral/global context see Bug 338501
-			ocl = OCL.newInstance(getEnvironmentFactory());
-			ocl.getMetaModelManager().addListener(this);
+			ocl2 = ocl = OCL.newInstance(getEnvironmentFactory());
+			ocl2.getMetaModelManager().addListener(this);
 		}
-		return DomainUtil.nonNullJDT(ocl);
+		return ocl2;
 	}
 	
 	public <T extends Element> T getPivot(@NonNull Class<T> requiredClass, @NonNull EObject eObject) {

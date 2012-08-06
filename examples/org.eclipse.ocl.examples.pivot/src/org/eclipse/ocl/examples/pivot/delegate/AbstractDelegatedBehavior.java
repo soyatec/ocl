@@ -37,7 +37,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.OCLCommon;
 import org.eclipse.ocl.common.delegate.VirtualDelegateMapping;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.validation.DomainSubstitutionLabelProvider;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -63,13 +62,14 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 	public static @NonNull List<DelegatedBehavior<?, ?, ?>> getDelegatedBehaviors() {
 		// FIXME Maybe use an extension point here (but need a common
 		//  Factory, Registry supertype for a user-defined fourth behavior)
-		if (delegatedBehaviors == null) {
-			delegatedBehaviors = new ArrayList<DelegatedBehavior<?, ?, ?>>();
-			delegatedBehaviors.add(InvocationBehavior.INSTANCE);
-			delegatedBehaviors.add(SettingBehavior.INSTANCE);
-			delegatedBehaviors.add(ValidationBehavior.INSTANCE);
+		List<DelegatedBehavior<?, ?, ?>> delegatedBehaviors2 = delegatedBehaviors;
+		if (delegatedBehaviors2 == null) {
+			delegatedBehaviors2 = delegatedBehaviors = new ArrayList<DelegatedBehavior<?, ?, ?>>();
+			delegatedBehaviors2.add(InvocationBehavior.INSTANCE);
+			delegatedBehaviors2.add(SettingBehavior.INSTANCE);
+			delegatedBehaviors2.add(ValidationBehavior.INSTANCE);
 		}
-		return DomainUtil.nonNullJDT(delegatedBehaviors);
+		return delegatedBehaviors2;
 	};
 
 	public @Nullable Constraint getConstraintForStereotype(@NonNull NamedElement namedElement, @NonNull String name) {

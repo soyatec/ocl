@@ -74,8 +74,9 @@ public class EcoreExecutorManager extends ExecutorManager
 	}
 
 	public @NonNull DomainModelManager getModelManager() {
-		if (modelManager == null) {
-			modelManager = new LazyModelManager(contextObject)
+		LazyModelManager modelManager2 = modelManager;
+		if (modelManager2 == null) {
+			modelManager2 = modelManager = new LazyModelManager(contextObject)
 			{
 				@Override
 				protected boolean isInstance(@NonNull DomainType type, @NonNull EObject element) {
@@ -87,6 +88,6 @@ public class EcoreExecutorManager extends ExecutorManager
 				
 			};
 		}
-		return DomainUtil.nonNullJDT(modelManager);
+		return modelManager2;
 	}
 }

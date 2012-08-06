@@ -59,12 +59,13 @@ public class OCLSettingDelegate extends BasicSettingDelegate.Stateless
 		try {
 			OCL ocl = delegateDomain.getOCL();
 			MetaModelManager metaModelManager = ocl.getEnvironment().getMetaModelManager();
-			if (specification == null) {
-				Property property = getProperty();
-				specification = SettingBehavior.INSTANCE.getExpressionInOCL(metaModelManager, property);
-				SettingBehavior.INSTANCE.validate(property);
+			ExpressionInOCL specification2 = specification;
+			if (specification2 == null) {
+				Property property2 = getProperty();
+				specification2 = specification = SettingBehavior.INSTANCE.getExpressionInOCL(metaModelManager, property2);
+				SettingBehavior.INSTANCE.validate(property2);
 			}
-			Query query = ocl.createQuery(DomainUtil.nonNullJDT(specification));
+			Query query = ocl.createQuery(specification2);
 			Value result = query.evaluate(owner);
 			return result.asEcoreObject();
 		}
@@ -75,13 +76,14 @@ public class OCLSettingDelegate extends BasicSettingDelegate.Stateless
 	}
 
 	public @NonNull Property getProperty() {
-		if (property == null) {
-			property = delegateDomain.getPivot(Property.class, DomainUtil.nonNullJDT(eStructuralFeature));
-			if (property == null) {
+		Property property2 = property;
+		if (property2 == null) {
+			property2 = property = delegateDomain.getPivot(Property.class, DomainUtil.nonNullEMF(eStructuralFeature));
+			if (property2 == null) {
 				throw new OCLDelegateException("No pivot property for " + eStructuralFeature) ;
 			}
 		}
-		return DomainUtil.nonNullJDT(property);
+		return property2;
 	}
 
 	@Override

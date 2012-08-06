@@ -14,14 +14,10 @@
  */
 package org.eclipse.ocl.examples.xtext.essentialocl.attributes;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -33,7 +29,7 @@ public class ConstructorPartCSAttribution extends AbstractAttribution
 {
 	public static final ConstructorPartCSAttribution INSTANCE = new ConstructorPartCSAttribution();
 
-	public static void addAllContents(EnvironmentView environmentView, Type forType, ScopeView scopeView,
+/*	public static void addAllContents(EnvironmentView environmentView, Type forType, ScopeView scopeView,
 			Type pivotClass, Set<Type> alreadyVisited) {
 		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 		environmentView.addNamedElements(forType, metaModelManager.getLocalProperties(pivotClass, Boolean.FALSE));
@@ -43,7 +39,7 @@ public class ConstructorPartCSAttribution extends AbstractAttribution
 				addAllContents(environmentView, forType, scopeView, superClass, alreadyVisited);
 			}
 		}
-	}
+	} */
 
 	@Override
 	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
@@ -53,12 +49,12 @@ public class ConstructorPartCSAttribution extends AbstractAttribution
 			ConstructorExp pivot = PivotUtil.getPivot(ConstructorExp.class, targetElement);
 			if (pivot != null) {
 				Type type = pivot.getType();
-				MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-				environmentView.addNamedElements(metaModelManager.getLocalProperties(type, Boolean.FALSE));
-				Set<Type> alreadyVisitedTypes = new HashSet<Type>();
-				for (Type superClass : metaModelManager.getSuperClasses(type)) {
-					addAllContents(environmentView, type, scopeView, superClass, alreadyVisitedTypes);
-				}
+//				MetaModelManager metaModelManager = environmentView.getMetaModelManager();
+				environmentView.addAllProperties(type, Boolean.FALSE);
+//				Set<Type> alreadyVisitedTypes = new HashSet<Type>();
+//				for (Type superClass : metaModelManager.getSuperClasses(type)) {
+//					addAllContents(environmentView, type, scopeView, superClass, alreadyVisitedTypes);
+//				}
 			}
 			return null;
 		}

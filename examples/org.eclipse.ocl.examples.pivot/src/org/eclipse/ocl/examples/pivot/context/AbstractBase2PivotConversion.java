@@ -67,7 +67,7 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 
 	public void refreshName(@NonNull NamedElement pivotNamedElement, @NonNull String newName) {
 		String oldName = pivotNamedElement.getName();
-		if ((newName != oldName) && ((newName == null) || !newName.equals(oldName))) {	// FIXME simplify once @NonNull respected by callers
+		if ((newName != oldName) && (/*(newName == null) ||*/ !newName.equals(oldName))) {
 			pivotNamedElement.setName(newName);
 		}
 	}

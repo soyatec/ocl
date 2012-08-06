@@ -25,8 +25,6 @@ import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.pivot.scoping.EmptyAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.ClassCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.ConstraintCSAttribution;
-import org.eclipse.ocl.examples.xtext.base.attributes.DataTypeCSAttribution;
-import org.eclipse.ocl.examples.xtext.base.attributes.EnumCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.ImportCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.LambdaTypeCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.LibraryCSAttribution;
@@ -34,6 +32,7 @@ import org.eclipse.ocl.examples.xtext.base.attributes.OperationCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.PackageCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.PathElementCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.PathNameCSAttribution;
+import org.eclipse.ocl.examples.xtext.base.attributes.PivotCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.ReferenceCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.RootPackageCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.TemplateParameterSubstitutionCSAttribution;
@@ -52,9 +51,9 @@ public class BaseScoping
 		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
 		registry.put(BaseCSTPackage.Literals.CLASS_CS, ClassCSAttribution.INSTANCE);
 		registry.put(BaseCSTPackage.Literals.CONSTRAINT_CS, ConstraintCSAttribution.INSTANCE);
-		registry.put(BaseCSTPackage.Literals.DATA_TYPE_CS, DataTypeCSAttribution.INSTANCE);
+		registry.put(BaseCSTPackage.Literals.DATA_TYPE_CS, PivotCSAttribution.INSTANCE);
 		registry.put(BaseCSTPackage.Literals.ELEMENT_CS, EmptyAttribution.INSTANCE);
-		registry.put(BaseCSTPackage.Literals.ENUMERATION_CS, EnumCSAttribution.INSTANCE);
+		registry.put(BaseCSTPackage.Literals.ENUMERATION_CS, PivotCSAttribution.INSTANCE);
 		registry.put(BaseCSTPackage.Literals.IMPORT_CS, ImportCSAttribution.INSTANCE);	// return new ImportAttribution();		// WIP static instance
 		registry.put(BaseCSTPackage.Literals.LAMBDA_TYPE_CS, LambdaTypeCSAttribution.INSTANCE);
 		registry.put(BaseCSTPackage.Literals.LIBRARY_CS, LibraryCSAttribution.INSTANCE);	// return new LibraryAttribution();		// WIP static instance

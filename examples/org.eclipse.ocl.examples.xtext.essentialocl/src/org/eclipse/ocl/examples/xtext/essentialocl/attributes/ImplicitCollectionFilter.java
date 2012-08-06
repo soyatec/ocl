@@ -38,7 +38,7 @@ public class ImplicitCollectionFilter extends AbstractOperationFilter
 		super(metaModelManager, sourceType);
 	}
 
-	public boolean matches(EnvironmentView environmentView, Type forType, DomainElement eObject) {
+	public boolean matches(EnvironmentView environmentView, DomainElement eObject) {
 		if (eObject instanceof Iteration) {		
 			return false;
 		}
@@ -59,7 +59,7 @@ public class ImplicitCollectionFilter extends AbstractOperationFilter
 				}
 			}
 			if (bindings != null) {
-				installBindings(environmentView, forType, eObject, bindings);
+				installBindings(environmentView, eObject, bindings);
 			}
 			return true;
 		}

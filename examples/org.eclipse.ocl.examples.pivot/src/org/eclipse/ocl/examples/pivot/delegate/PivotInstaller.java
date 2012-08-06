@@ -34,6 +34,7 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.PackageServer;
+import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 import org.eclipse.uml2.codegen.ecore.genmodel.util.UML2GenModelUtil;
 
 public class PivotInstaller
@@ -47,8 +48,8 @@ public class PivotInstaller
 	public static void installDelegates(@NonNull MetaModelManager metaModelManager, @NonNull PackageServer packageServer) {
 		boolean hasDelegates = false;
 //		for (Type aType : metaModelManager.getLocalClasses(pivotPackage)) {
-		for (Type aType : packageServer.getMemberTypes()) {
-			if ((aType != null) && installDelegates(metaModelManager, aType)) {
+		for (TypeServer typeServer : packageServer.getMemberTypes()) {
+			if (installDelegates(metaModelManager, typeServer.getPivotType())) {
 				hasDelegates = true;
 			}
 		}
@@ -100,13 +101,13 @@ public class PivotInstaller
 					hasDelegates = true;
 				}
 			}
-			for (Operation anOperation : metaModelManager.getLocalOperations(pivotType, null)) {
+			for (Operation anOperation : metaModelManager.getMemberOperations(pivotType, null)) {
 				EOperation eOperation = (EOperation)anOperation.getETarget();
 				if (eOperation != null) {
 					Pivot2Ecore.installDelegate(metaModelManager, eOperation);
 				}
 			}
-			for (Property aProperty : metaModelManager.getLocalProperties(pivotType, null)) {
+			for (Property aProperty : metaModelManager.getMemberProperties(pivotType, null)) {
 				EStructuralFeature eFeature = (EStructuralFeature)aProperty.getETarget();
 				if (eFeature != null) {
 					Pivot2Ecore.installDelegate(metaModelManager, eFeature);

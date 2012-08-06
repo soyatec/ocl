@@ -25,7 +25,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
@@ -56,7 +55,7 @@ public class RealValueImpl extends ValueImpl implements RealValue
 				return valueFactory.throwInvalidValueException("divide by zero");
 			}
 			int scale = Math.max(left.scale() - right.scale(), MINIMUM_SCALE);
-			BigDecimal result = DomainUtil.nonNullJava(left.divide(right, scale, RoundingMode.HALF_EVEN));
+			@SuppressWarnings("null") @NonNull BigDecimal result = left.divide(right, scale, RoundingMode.HALF_EVEN);
 			return valueFactory.realValueOf(result);
 		} catch (ArithmeticException e) {
 			throw new InvalidValueException(e);
@@ -66,8 +65,9 @@ public class RealValueImpl extends ValueImpl implements RealValue
 	private final @NonNull BigDecimal value;
 	private Object integerValue = null;	// Lazily computed exact IntegerValue or Exception
 	
+	@SuppressWarnings("null")
 	public RealValueImpl(@NonNull ValueFactory valueFactory, double value) {
-		this(valueFactory, DomainUtil.nonNullJava(BigDecimal.valueOf(value)));
+		this(valueFactory, BigDecimal.valueOf(value));
 	}
 
 	public RealValueImpl(@NonNull ValueFactory valueFactory, @NonNull BigDecimal value) {
@@ -77,13 +77,13 @@ public class RealValueImpl extends ValueImpl implements RealValue
 	}
 
 	public @NonNull RealValue abs() {
-		BigDecimal result = DomainUtil.nonNullJava(value.abs());
+		@SuppressWarnings("null") @NonNull BigDecimal result = value.abs();
 		return valueFactory.realValueOf(result);
 	}
 
 	public @NonNull RealValue add(@NonNull RealValue rightValue) {
 		try {
-			BigDecimal result = DomainUtil.nonNullJava(value.add(rightValue.bigDecimalValue()));
+			@SuppressWarnings("null") @NonNull BigDecimal result = value.add(rightValue.bigDecimalValue());
 			return valueFactory.realValueOf(result);
 		} catch (InvalidValueException e) {
 			return valueFactory.createInvalidValue(EvaluatorMessages.InvalidReal, e, null, rightValue);
@@ -92,7 +92,8 @@ public class RealValueImpl extends ValueImpl implements RealValue
 
 	@Override
 	public @NonNull Double asDouble() {
-		return DomainUtil.nonNullJava(value.doubleValue());
+		@SuppressWarnings("null") @NonNull Double result = value.doubleValue();
+		return result;
 	}
 
 	public @NonNull Object asObject() {
@@ -156,14 +157,14 @@ public class RealValueImpl extends ValueImpl implements RealValue
 	}
 
 	public @NonNull IntegerValue floor() {
-		BigInteger result = DomainUtil.nonNullJava(value.setScale(0, RoundingMode.FLOOR).toBigInteger());
+		@SuppressWarnings("null") @NonNull BigInteger result = value.setScale(0, RoundingMode.FLOOR).toBigInteger();
 		return valueFactory.integerValueOf(result);
 	}
 
 	protected Object getIntegerValue() {
 		if (integerValue == null) {
 			try {
-				BigInteger intValue = DomainUtil.nonNullJava(value.toBigIntegerExact());
+				@SuppressWarnings("null") @NonNull BigInteger intValue = value.toBigIntegerExact();
 				integerValue = valueFactory.integerValueOf(intValue);
 			}
 			catch (ArithmeticException e) {
@@ -195,7 +196,7 @@ public class RealValueImpl extends ValueImpl implements RealValue
 
 	public @NonNull RealValue max(@NonNull RealValue rightValue) {
 		try {
-			BigDecimal result = DomainUtil.nonNullJava(value.max(rightValue.bigDecimalValue()));
+			@SuppressWarnings("null") @NonNull BigDecimal result = value.max(rightValue.bigDecimalValue());
 			return valueFactory.realValueOf(result);
 		} catch (InvalidValueException e) {
 			return valueFactory.createInvalidValue(EvaluatorMessages.InvalidReal, e, null, rightValue);
@@ -204,7 +205,7 @@ public class RealValueImpl extends ValueImpl implements RealValue
 
 	public @NonNull RealValue min(@NonNull RealValue rightValue) {
 		try {
-			BigDecimal result = DomainUtil.nonNullJava(value.min(rightValue.bigDecimalValue()));
+			@SuppressWarnings("null") @NonNull BigDecimal result = value.min(rightValue.bigDecimalValue());
 			return valueFactory.realValueOf(result);
 		} catch (InvalidValueException e) {
 			return valueFactory.createInvalidValue(EvaluatorMessages.InvalidReal, e, null, rightValue);
@@ -213,7 +214,7 @@ public class RealValueImpl extends ValueImpl implements RealValue
 
 	public @NonNull RealValue multiply(@NonNull RealValue rightValue) {
 		try {
-			BigDecimal result = DomainUtil.nonNullJava(value.multiply(rightValue.bigDecimalValue()));
+			@SuppressWarnings("null") @NonNull BigDecimal result = value.multiply(rightValue.bigDecimalValue());
 			return valueFactory.realValueOf(result);
 		} catch (InvalidValueException e) {
 			return valueFactory.createInvalidValue(EvaluatorMessages.InvalidReal, e, null, rightValue);
@@ -221,7 +222,7 @@ public class RealValueImpl extends ValueImpl implements RealValue
 	}
 
 	public @NonNull RealValue negate() {
-		BigDecimal result = DomainUtil.nonNullJava(value.negate());
+		@SuppressWarnings("null") @NonNull BigDecimal result = value.negate();
 		return valueFactory.realValueOf(result);
 	}
 	
@@ -233,7 +234,7 @@ public class RealValueImpl extends ValueImpl implements RealValue
 		else {
 			rounded = value.negate().setScale(0, RoundingMode.HALF_DOWN).negate();
 		}
-		BigInteger result = DomainUtil.nonNullJava(rounded.toBigInteger());
+		@SuppressWarnings("null") @NonNull BigInteger result = rounded.toBigInteger();
 		return valueFactory.integerValueOf(result);
 	}
 
@@ -243,7 +244,7 @@ public class RealValueImpl extends ValueImpl implements RealValue
 
 	public @NonNull RealValue subtract(@NonNull RealValue rightValue) {
 		try {
-			BigDecimal result = DomainUtil.nonNullJava(value.subtract(rightValue.bigDecimalValue()));
+			@SuppressWarnings("null") @NonNull BigDecimal result = value.subtract(rightValue.bigDecimalValue());
 			return valueFactory.realValueOf(result);
 		} catch (InvalidValueException e) {
 			return valueFactory.createInvalidValue(EvaluatorMessages.InvalidReal, e, null, rightValue);

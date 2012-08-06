@@ -203,9 +203,11 @@ public class PivotSaver extends AbstractPivotSaver
 		public Object visitClass(@NonNull org.eclipse.ocl.examples.pivot.Class object) {
 			List<Type> superClasses = object.getSuperClass();
 			for (int i = 0; i < superClasses.size(); i++) {
-				Type referredClass = DomainUtil.nonNullEntry(superClasses.get(i));
-				Type resolvedClass = context.resolveType(referredClass);
-				superClasses.set(i, resolvedClass);
+				Type referredClass = superClasses.get(i);
+				if (referredClass != null) {
+					Type resolvedClass = context.resolveType(referredClass);
+					superClasses.set(i, resolvedClass);
+				}
 			}
 			return null;
 		}
@@ -238,9 +240,11 @@ public class PivotSaver extends AbstractPivotSaver
 			object.setResultType(resolvedType);
 			List<Type> parameterTypes = object.getParameterType();
 			for (int i = 0; i < parameterTypes.size(); i++) {
-				referredType = DomainUtil.nonNullEntry(parameterTypes.get(i));
-				resolvedType = context.resolveType(referredType);
-				parameterTypes.set(i, resolvedType);
+				referredType = parameterTypes.get(i);
+				if (referredType != null) {
+					resolvedType = context.resolveType(referredType);
+					parameterTypes.set(i, resolvedType);
+				}
 			}
 			return super.visitLambdaType(object);
 		}
@@ -273,9 +277,11 @@ public class PivotSaver extends AbstractPivotSaver
 		public Object visitTypeTemplateParameter(@NonNull TypeTemplateParameter object) {
 			List<Type> constrainingTypes = object.getConstrainingType();
 			for (int i = 0; i < constrainingTypes.size(); i++) {
-				Type referredType = DomainUtil.nonNullEntry(constrainingTypes.get(i));
-				Type resolvedType = context.resolveType(referredType);
-				constrainingTypes.set(i, resolvedType);
+				Type referredType = constrainingTypes.get(i);
+				if (referredType != null) {
+					Type resolvedType = context.resolveType(referredType);
+					constrainingTypes.set(i, resolvedType);
+				}
 			}
 			return null;
 		}
@@ -387,9 +393,11 @@ public class PivotSaver extends AbstractPivotSaver
 		if (specializingElements.size() > 0) {
 			orphanage = getOrphanPackage(resource);
 			for (int i = 0; i < specializingElements.size(); i++) {	// Domain may grow
-				Element element = DomainUtil.nonNullEntry(specializingElements.get(i));
-				AbstractPivotSaver.ResolveVisitor resolveVisitor = getResolveVisitor(element);
-				resolveVisitor.safeVisit(element);
+				Element element = specializingElements.get(i);
+				if (element != null) {
+					AbstractPivotSaver.ResolveVisitor resolveVisitor = getResolveVisitor(element);
+					resolveVisitor.safeVisit(element);
+				}
 			}
 //			List<Type> ownedTypes = orphanage.getOwnedType();
 //			List<Type> sorted = ownedTypes; //WIP PivotUtil.sortByMoniker(new ArrayList<Type>(ownedTypes));

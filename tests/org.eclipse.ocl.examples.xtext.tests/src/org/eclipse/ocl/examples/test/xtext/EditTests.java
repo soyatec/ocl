@@ -45,7 +45,7 @@ import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
-import org.eclipse.ocl.examples.pivot.manager.TypeServer;
+import org.eclipse.ocl.examples.pivot.manager.TemplateableTypeServer;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
@@ -491,7 +491,7 @@ public class EditTests extends XtextTestCase
 		//
 		Type myType = ocl.getMetaModelManager().getPrimaryType("http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib", "MyType");
 		SequenceType sequenceType = ocl.getMetaModelManager().getSequenceType();
-		TypeServer sequenceTypeServer = ocl.getMetaModelManager().getTypeServer(sequenceType);
+		TemplateableTypeServer sequenceTypeServer = (TemplateableTypeServer) ocl.getMetaModelManager().getTypeServer(sequenceType);
 		WeakReference<Type> sequenceMyType = new WeakReference<Type>(sequenceTypeServer.findSpecializedType(Collections.singletonList(myType)));
 		assertNull(sequenceMyType.get()); 
 		//

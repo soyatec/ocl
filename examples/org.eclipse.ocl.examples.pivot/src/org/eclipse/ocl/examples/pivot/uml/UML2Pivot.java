@@ -57,6 +57,7 @@ import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OCL;
+import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -103,7 +104,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 			return null;
 		}
 
-		public Element importFromResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource umlResource, @Nullable String uriFragment) {
+		public Element importFromResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource umlResource, @Nullable String uriFragment) throws ParserException {
 			UML2Pivot conversion = getAdapter(umlResource, metaModelManager);
 			Root pivotRoot = conversion.getPivotRoot();
 			if (uriFragment == null) {
@@ -163,8 +164,9 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 	 * @param umlResource the UML resource
 	 * 
 	 * @return the Pivot root package
+	 * @throws ParserException 
 	 */
-	public static Root importFromUML(MetaModelManager metaModelManager, String alias, Resource umlResource) {
+	public static Root importFromUML(MetaModelManager metaModelManager, String alias, Resource umlResource) throws ParserException {
 		if (umlResource == null) {
 			return null;
 		}
@@ -178,17 +180,16 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 	 * @param eObject the UML object
 	 * 
 	 * @return the pivot element
+	 * @throws ParserException 
 	 */
-	public static Element importFromUML(MetaModelManager metaModelManager, String alias, EObject eObject) {
+	public static Element importFromUML(MetaModelManager metaModelManager, String alias, EObject eObject) throws ParserException {
 		if (eObject == null) {
 			return null;
 		}
 		Resource umlResource = eObject.eResource();
 		UML2Pivot conversion = getAdapter(umlResource, metaModelManager);
+		@SuppressWarnings("unused")
 		Root pivotRoot = conversion.getPivotRoot();
-		if (pivotRoot == null) {
-			return null;
-		}
 		return conversion.getCreated(Element.class, eObject);
 	}
 
@@ -302,21 +303,22 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		}
 		
 		@Override
-		public @NonNull Root getPivotRoot() {
-			if (pivotRoot == null) {
-				root.getPivotRoot();
+		public @NonNull Root getPivotRoot() throws ParserException {
+			Root pivotRoot2 = pivotRoot;
+			if (pivotRoot2 == null) {
+				pivotRoot2 = root.getPivotRoot();
 				Resource pivotResource = pivotRoot.eResource();
 				if (pivotResource == null) {
-					throw new IllegalStateException("Missing conatining resource");
+					throw new IllegalStateException("Missing containing resource");
 				}
 //				installAliases(pivotResource);
 				metaModelManager.installResource(pivotResource);
 			}
-			return pivotRoot;
+			return pivotRoot2;
 		}
 		
 		@Override
-		public @NonNull Type getPivotType(@NonNull EObject eObject) {
+		public @Nullable Type getPivotType(@NonNull EObject eObject) {
 			return root.getPivotType(eObject);
 		}
 
@@ -486,12 +488,13 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		}
 		
 		@Override
-		public @NonNull Root getPivotRoot() {
-			if (pivotRoot == null) {
+		public @NonNull Root getPivotRoot() throws ParserException {
+			Root pivotRoot2 = pivotRoot;
+			if (pivotRoot2 == null) {
 				URI pivotURI = createPivotURI();
 				Resource pivotResource = metaModelManager.createResource(pivotURI, PivotPackage.eCONTENT_TYPE);
 				try {
-					installDeclarations(pivotResource);					
+					pivotRoot2 = installDeclarations(pivotResource);					
 //					Map<String, Type> resolvedSpecializations = new HashMap<String, Type>();
 //					for (EGenericType eGenericType : genericTypes) {
 //						Type pivotType = resolveType(resolvedSpecializations, eGenericType);
@@ -513,10 +516,11 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 					installReferences();
 				}
 				catch (Exception e) {
-					if (errors == null) {
-						errors = new ArrayList<Resource.Diagnostic>();
-					}
-					errors.add(new XMIException("Failed to load '" + pivotURI + "' : " + e.getMessage()));
+//					if (errors == null) {
+//						errors = new ArrayList<Resource.Diagnostic>();
+//					}
+//					errors.add(new XMIException("Failed to load '" + pivotURI + "' : " + e.getMessage()));
+					throw new ParserException("Failed to load '" + pivotURI + "' : " + e.getMessage(), e);
 				}
 				if (errors != null) {
 					pivotResource.getErrors().addAll(errors);
@@ -524,7 +528,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 				installAliases(pivotResource);
 				metaModelManager.installResource(pivotResource);
 			}
-			return pivotRoot;
+			return pivotRoot2;
 		}
 		
 		@Override
@@ -535,7 +539,12 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 				if ((resource != umlResource) && (resource != null)) {
 					UML2Pivot converter = getAdapter(resource, metaModelManager);
 					if (allConverters.add(converter)) {
-						converter.getPivotRoot();
+						try {
+							converter.getPivotRoot();
+						} catch (ParserException e) {
+							@SuppressWarnings("null") @NonNull String message = e.getMessage();
+							error(message);
+						}
 //						allEClassifiers.addAll(converter.allEClassifiers);
 //						allNames.addAll(converter.allNames);
 //						for (Map.Entry<EModelElement, Element> entry : converter.createMap.entrySet()) {
@@ -570,7 +579,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 			}
 		}
 
-		protected void installImports() {
+		protected void installImports() throws ParserException {
 			if (importedResources != null) {
 				for (int i = 0; i < importedResources.size(); i++) {			// List may grow re-entrantly
 					Resource importedResource = importedResources.get(i);
@@ -667,9 +676,12 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 				List<org.eclipse.uml2.uml.Property> umlProperties = typeProperties.get(pivotType);
 				List<Property> pivotProperties = new ArrayList<Property>(umlProperties.size());
 				for (org.eclipse.uml2.uml.Property umlProperty : umlProperties) {
-					@NonNull Property pivotProperty = getCreated(Property.class, DomainUtil.nonNullEntry(umlProperty));
-					//assert pivotProperty != null;
-					pivotProperties.add(pivotProperty);
+					if (umlProperty != null) {
+						Property pivotProperty = getCreated(Property.class, umlProperty);
+						if (pivotProperty != null) {
+							pivotProperties.add(pivotProperty);
+						}
+					}
 				}
 				refreshList(DomainUtil.nonNullEMF(pivotType.getOwnedAttribute()), pivotProperties);
 			}
@@ -684,18 +696,20 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 						String featureName = eStructuralFeature.getName();
 						if ((featureName != null) && featureName.startsWith("base_") && (eStructuralFeature instanceof EReference) && eAppliedStereotype.eIsSet(eStructuralFeature)) {
 							EReference eReference = (EReference) eStructuralFeature;
-							EObject eStereotyped = (EObject) eAppliedStereotype.eGet(eReference);
-							Element pivotElement = getCreated(Element.class, (EObject)eStereotyped);
-							if (pivotElement != null) {	
-								List<EObject> eAppliedStereotypes = element2eAppliedStereotypes.get(pivotElement);
-								if (eAppliedStereotypes == null) {
-									eAppliedStereotypes = new ArrayList<EObject>();
-									element2eAppliedStereotypes.put(pivotElement, eAppliedStereotypes);
+							Object eStereotyped = eAppliedStereotype.eGet(eReference);
+							if (eStereotyped instanceof EObject) {
+								Element pivotElement = getCreated(Element.class, (EObject)eStereotyped);
+								if (pivotElement != null) {	
+									List<EObject> eAppliedStereotypes = element2eAppliedStereotypes.get(pivotElement);
+									if (eAppliedStereotypes == null) {
+										eAppliedStereotypes = new ArrayList<EObject>();
+										element2eAppliedStereotypes.put(pivotElement, eAppliedStereotypes);
+									}
+									eAppliedStereotypes.add(eAppliedStereotype);
 								}
-								eAppliedStereotypes.add(eAppliedStereotype);
-							}
-							else {		// FIXME Template Parameters
-								logger.error("Unsupported apply stereotype : " + eAppliedStereotype);
+								else {		// FIXME Template Parameters
+									logger.error("Unsupported apply stereotype : " + eAppliedStereotype);
+								}
 							}
 						}
 					}
@@ -822,13 +836,13 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 	@Override
 	public abstract void error(@NonNull String message);
 
-	public abstract <T extends Element> T getCreated(@NonNull Class<T> requiredClass, @NonNull EObject eObject);
+	public abstract @Nullable <T extends Element> T getCreated(@NonNull Class<T> requiredClass, @NonNull EObject eObject);
 	
 	public abstract @NonNull UML2PivotDeclarationSwitch getDeclarationPass();
 	
-	public abstract Type getPivotType(@NonNull EObject eObject);
+	public abstract @NonNull Root getPivotRoot() throws ParserException;
 	
-	public abstract @NonNull Root getPivotRoot();
+	public abstract @Nullable Type getPivotType(@NonNull EObject eObject);
 
 	public @NonNull Resource getResource() {
 		return umlResource;
@@ -841,13 +855,13 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 	}
 
 	public @NonNull URI getURI() {
-		return DomainUtil.nonNullEMF(umlResource.getURI());
+		return DomainUtil.nonNullState(umlResource.getURI());
 	}
 
-	protected void installDeclarations(@NonNull Resource pivotResource) {
+	protected @NonNull Root installDeclarations(@NonNull Resource pivotResource) {
 		URI pivotURI = pivotResource.getURI();
-		pivotRoot = metaModelManager.createRoot(pivotURI.lastSegment(), null);
-		pivotResource.getContents().add(pivotRoot);
+		Root pivotRoot2 = pivotRoot = metaModelManager.createRoot(pivotURI.lastSegment(), null);
+		pivotResource.getContents().add(pivotRoot2);
 		UML2PivotDeclarationSwitch declarationPass = getDeclarationPass();
 		List<org.eclipse.ocl.examples.pivot.Package> rootPackages = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();
 		for (EObject eObject : umlResource.getContents()) {
@@ -859,7 +873,8 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 				error("Bad UML content : " + eObject.eClass().getName());
 			}
 		}
-		PivotUtil.refreshList(pivotRoot.getNestedPackage(), rootPackages);
+		PivotUtil.refreshList(pivotRoot2.getNestedPackage(), rootPackages);
+		return pivotRoot2;
 	}
 
 	public boolean isAdapterFor(@NonNull MetaModelManager metaModelManager) {
@@ -944,7 +959,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		return castElement;
 	}
 	
-	protected Type resolveDataType(@NonNull EGenericType eGenericType) {
+	protected @Nullable Type resolveDataType(@NonNull EGenericType eGenericType) {
 		assert eGenericType.getETypeArguments().isEmpty();
 		EDataType eClassifier = (EDataType) eGenericType.getEClassifier();
 		Type pivotType = null;
@@ -1018,7 +1033,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		return specializedPivotElement;
 	} */
 
-	protected Type resolveSimpleType(@NonNull EGenericType eGenericType) {
+	protected @Nullable Type resolveSimpleType(@NonNull EGenericType eGenericType) {
 		assert eGenericType.getETypeArguments().isEmpty();
 		EClassifier eClassifier = DomainUtil.nonNullEMF(eGenericType.getEClassifier());
 		Type pivotType = getPivotType(eClassifier);
@@ -1048,7 +1063,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		return pivotType;
 	}
 
-	protected Type resolveType(@NonNull org.eclipse.uml2.uml.Type umlType) {
+	protected @Nullable Type resolveType(@NonNull org.eclipse.uml2.uml.Type umlType) {
 		Type pivotType = getCreated(Type.class, umlType);
 		if (pivotType != null) {
 			return pivotType;
@@ -1103,17 +1118,22 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		return pivotType;
 	}
 
-	protected Type resolveTypeParameter(@NonNull EGenericType eGenericType) {
+	protected @Nullable Type resolveTypeParameter(@NonNull EGenericType eGenericType) {
 		EClassifier eClassifier = eGenericType.getEClassifier();
 		ETypeParameter eTypeParameter = eGenericType.getETypeParameter();
-		List<EGenericType> eTypeArguments = eGenericType.getETypeArguments();
-		assert eClassifier == null;
-		assert eTypeArguments.isEmpty();
-		Type pivotType = getCreated(Type.class, eTypeParameter);
-		return pivotType;
+		if (eTypeParameter != null) {
+			List<EGenericType> eTypeArguments = eGenericType.getETypeArguments();
+			assert eClassifier == null;
+			assert eTypeArguments.isEmpty();
+			Type pivotType = getCreated(Type.class, eTypeParameter);
+			return pivotType;
+		}
+		else {
+			return null;
+		}
 	}
 
-	protected Type resolveWildcardType(@NonNull EGenericType eGenericType) {
+	protected @Nullable Type resolveWildcardType(@NonNull EGenericType eGenericType) {
 		assert eGenericType.getETypeArguments().isEmpty();
 		assert eGenericType.getEClassifier() == null;
 		EClassifier eClassifier = eGenericType.getERawType();

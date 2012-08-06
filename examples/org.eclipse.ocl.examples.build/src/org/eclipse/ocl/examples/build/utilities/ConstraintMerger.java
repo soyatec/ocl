@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Library;
@@ -41,7 +42,6 @@ import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.TypeServer;
-import org.eclipse.ocl.examples.pivot.manager.TypeTracker;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
@@ -139,12 +139,14 @@ public class ConstraintMerger extends AbstractProjectComponent
 					if (eObject instanceof Type) {
 						Type pivotType = (Type)eObject;
 						TypeServer typeServer = metaModelManager.getTypeServer(pivotType);
-						for (TypeTracker typeTracker : typeServer.getTypeTrackers()) {
-							Type pType = typeTracker.getType();
-							if (pType.eResource() == pivotResource) {
-								pType.getOwnedAttribute().addAll(pivotType.getOwnedAttribute());
-								pType.getOwnedOperation().addAll(pivotType.getOwnedOperation());
-								break;
+						for (DomainType dType : typeServer.getPartialTypes()) {
+							if (dType instanceof Type) {
+								Type pType = (Type)dType;
+								if (pType.eResource() == pivotResource) {
+									pType.getOwnedAttribute().addAll(pivotType.getOwnedAttribute());
+									pType.getOwnedOperation().addAll(pivotType.getOwnedOperation());
+									break;
+								}
 							}
 						}
 						tit.prune();

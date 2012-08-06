@@ -12,8 +12,9 @@
  *
  * </copyright>
  */
-package org.eclipse.ocl.examples.pivot.executor;
+package org.eclipse.ocl.examples.pivot.manager;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,14 +30,12 @@ import org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumerationLiteral;
 import org.eclipse.ocl.examples.library.executor.ExecutorEnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
-import org.eclipse.ocl.examples.pivot.manager.PackageServer;
-import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 
-public class PivotReflectiveEnumerationType extends TypeServer implements DomainEnumeration
+public class EnumerationTypeServer extends ExtensibleTypeServer implements DomainEnumeration
 {
 	private Map<String, DomainEnumerationLiteral> literals = new HashMap<String, DomainEnumerationLiteral>();
 	
-	public PivotReflectiveEnumerationType(@NonNull PackageServer packageServer, @NonNull Enumeration type) {
+	public EnumerationTypeServer(@NonNull PackageServer packageServer, @NonNull Enumeration type) {
 		super(packageServer, type);
 		int index = 0;
 		EObject eTarget = type.getETarget();
@@ -59,6 +58,7 @@ public class PivotReflectiveEnumerationType extends TypeServer implements Domain
 	}
 
 	public @NonNull Iterable<? extends DomainEnumerationLiteral> getEnumerationLiterals() {
-		return DomainUtil.nonNullJava(literals.values());
+		@SuppressWarnings("null") @NonNull Collection<DomainEnumerationLiteral> result = literals.values();
+		return result;
 	}
 }

@@ -16,7 +16,9 @@
  */
 package org.eclipse.ocl.examples.pivot.delegate;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -90,6 +92,9 @@ public interface DelegateDomain {
 			}
 		}
 	}
+
+	@SuppressWarnings("null")
+	static final @NonNull List<DelegateDomain> EMPTY_LIST = Collections.emptyList();
 
 	/**
 	 * Get the delegate domain name.

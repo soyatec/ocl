@@ -42,7 +42,7 @@ public class ImplicitCollectFilter extends AbstractOperationFilter
 		this.iteratorType = iteratorType;
 	}
 
-	public boolean matches(EnvironmentView environmentView, Type forType, DomainElement eObject) {
+	public boolean matches(EnvironmentView environmentView, DomainElement eObject) {
 		if (!(eObject instanceof Iteration)) {
 			return false;
 		}
@@ -66,7 +66,7 @@ public class ImplicitCollectFilter extends AbstractOperationFilter
 		Map<TemplateParameter, ParameterableElement> bindings = PivotUtil.getAllTemplateParameterSubstitutions(null, sourceType);
 		TemplateParameter iteratorParameter = templateParameters.get(0);
 		bindings.put(iteratorParameter, iteratorType);
-		installBindings(environmentView, forType, eObject, bindings);
+		installBindings(environmentView, eObject, bindings);
 		return true;
 	}
 }

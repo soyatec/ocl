@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 import com.google.common.collect.Iterators;
+import com.google.common.collect.UnmodifiableIterator;
 
 /**
  * A CompleteElementIterable supports iteration over the multiple iterable contributions
@@ -94,9 +95,9 @@ public abstract class CompleteElementIterable<O,I> implements Iterable<I>
 		}
 	}
 	
-	protected final Iterable<? extends O> iterables;
+	protected final @NonNull Iterable<? extends O> iterables;
 	
-	public CompleteElementIterable(Iterable<? extends O> iterables) {
+	public CompleteElementIterable(@NonNull Iterable<? extends O> iterables) {
 		this.iterables = iterables;
 	}
 	
@@ -118,23 +119,22 @@ public abstract class CompleteElementIterable<O,I> implements Iterable<I>
 			@SuppressWarnings("unchecked")
 			List<O> list = (List<O>)iterables;
 			if (list.size() == 0) {
-				return DomainUtil.nonNullJava(Iterators.<I>emptyIterator());
+				@SuppressWarnings("null") @NonNull UnmodifiableIterator<I> result = Iterators.<I>emptyIterator();
+				return result;
 			}
 			else if (list.size() == 1) {
-				Iterable<I> innerIterable = getInnerIterable(DomainUtil.nonNullEntry(list.get(0)));
-				if (innerIterable != null) {
-					return DomainUtil.nonNullJava(innerIterable.iterator());
+				O listEntry = list.get(0);
+				if (listEntry != null) {
+					Iterable<I> innerIterable = getInnerIterable(listEntry);
+					if (innerIterable != null) {
+						@SuppressWarnings("null") @NonNull java.util.Iterator<I> result = innerIterable.iterator();
+						return result;
+					}
 				}
-				else {
-					return DomainUtil.nonNullJava(Iterators.<I>emptyIterator());
-				}
+				@SuppressWarnings("null") @NonNull UnmodifiableIterator<I> result = Iterators.<I>emptyIterator();
+				return result;
 			}
 		}
-		if (iterables != null) {
-			return new Iterator(DomainUtil.nonNullJDT(iterables));
-		}
-		else {
-			return DomainUtil.nonNullJava(Iterators.<I>emptyIterator());
-		}
+		return new Iterator(iterables);
 	}
 }

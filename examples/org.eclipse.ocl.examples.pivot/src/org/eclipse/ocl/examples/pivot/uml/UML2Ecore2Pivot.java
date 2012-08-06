@@ -100,7 +100,7 @@ public class UML2Ecore2Pivot extends Ecore2Pivot
 	{
 		private Map<EModelElement, org.eclipse.uml2.uml.Element> reverseMap = null;
 		
-		public org.eclipse.uml2.uml.Element getSource(@NonNull EModelElement eObject) {
+		public @Nullable org.eclipse.uml2.uml.Element getSource(@NonNull EModelElement eObject) {
 			if (reverseMap == null) {
 				reverseMap = new HashMap<EModelElement, org.eclipse.uml2.uml.Element>();
 				for (Map.Entry<org.eclipse.uml2.uml.Element, EModelElement> entry : elementToEModelElementMap.entrySet()) {
@@ -118,12 +118,6 @@ public class UML2Ecore2Pivot extends Ecore2Pivot
 		}
 	}
 
-
-//	public static MetaModelManager.Factory FACTORY = new Factory();
-//	private static final Logger logger = Logger.getLogger(UML2Ecore2Pivot.class);
-
-	// FIXME this is a prehistoric value
-//	private static final String OCL_STANDARD_LIBRARY_NS_URI = "http://www.eclipse.org/ocl/1.1.0/oclstdlib.uml"; //$NON-NLS-1$
 
 	public static UML2Ecore2Pivot findAdapter(@NonNull Resource resource, @Nullable MetaModelManager metaModelManager) {
 		for (Adapter adapter : resource.eAdapters()) {
@@ -204,7 +198,9 @@ public class UML2Ecore2Pivot extends Ecore2Pivot
 	public void addMapping(@NonNull EObject eObject, @NonNull Element pivotElement) {
 		if ((uml2EcoreConverter != null) && (eObject instanceof EModelElement)) {
 			org.eclipse.uml2.uml.Element umlElement = uml2EcoreConverter.getSource((EModelElement)eObject);
-			super.addMapping(umlElement, pivotElement);
+			if (umlElement != null) {
+				super.addMapping(umlElement, pivotElement);
+			}
 			addCreated(eObject, pivotElement);
 		}
 		else {
@@ -228,7 +224,7 @@ public class UML2Ecore2Pivot extends Ecore2Pivot
 	}
 
 	@Override
-	public <T extends Element> T getCreated(@NonNull Class<T> requiredClass, @NonNull EObject eObject) {
+	public @Nullable <T extends Element> T getCreated(@NonNull Class<T> requiredClass, @NonNull EObject eObject) {
 		EObject ecoreObject = (EObject) uml2EcoreConverter.doSwitch(eObject);
 		if (ecoreObject == null) {
 			ecoreObject = eObject;
@@ -236,9 +232,9 @@ public class UML2Ecore2Pivot extends Ecore2Pivot
 		return super.getCreated(requiredClass, ecoreObject);
 	}
 
-	public <T extends Element> T getPivotOfUML(@NonNull Class<T> requiredClass, @NonNull EObject eObject) {
+	public @Nullable <T extends Element> T getPivotOfUML(@NonNull Class<T> requiredClass, @NonNull EObject eObject) {
 		EObject ecoreObject = (EObject) uml2EcoreConverter.doSwitch(eObject);
-		return getPivotOfEcore(requiredClass, ecoreObject);
+		return ecoreObject != null ? getPivotOfEcore(requiredClass, ecoreObject) : null;
 	}
 
 	@Override

@@ -20,6 +20,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -42,38 +44,45 @@ import org.eclipse.ocl.examples.pivot.library.UnimplementedOperation;
  */
 public class ImplementationManager
 {		
-	protected final MetaModelManager metaModelManager;
+	protected final @NonNull MetaModelManager metaModelManager;
 
 	/**
 	 * ClassLoaders that may be able to load a library implementation.
 	 */
 	private List<ClassLoader> classLoaders = null;
 	
-	protected ImplementationManager(MetaModelManager metaModelManager) {
+	protected ImplementationManager(@NonNull MetaModelManager metaModelManager) {
 		this.metaModelManager = metaModelManager;
 	}
 
-	public void addClassLoader(ClassLoader classLoader) {
+	public void addClassLoader(@NonNull ClassLoader classLoader) {
 		List<ClassLoader> classLoaders = getClassLoaders();
 		if (!classLoaders.contains(classLoader)) {
 			classLoaders.add(classLoader);
 		}
 	}
 
-	public List<ClassLoader> getClassLoaders() {
-		if (classLoaders == null) {
-			classLoaders = new ArrayList<ClassLoader>();
-			classLoaders.add(metaModelManager.getClass().getClassLoader());
+	public @NonNull List<ClassLoader> getClassLoaders() {
+		List<ClassLoader> classLoaders2 = classLoaders;
+		if (classLoaders2 == null) {
+			classLoaders2 = classLoaders = new ArrayList<ClassLoader>();
+			classLoaders2.add(metaModelManager.getClass().getClassLoader());
 		}
-		return classLoaders;
+		return classLoaders2;
 	}
 
-	protected LibraryFeature getOperationImplementation(Operation operation) throws ClassNotFoundException, SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+	protected @NonNull LibraryFeature getOperationImplementation(@NonNull Operation operation) throws ClassNotFoundException, SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
 		LibraryFeature implementation = operation.getImplementation();
 		String implementationClassName = operation.getImplementationClass();
 		if (implementationClassName != null) {
 			if ((implementation == null) || !implementation.getClass().getName().equals(implementationClassName)) {
-				return loadImplementation(operation);
+				implementation = loadImplementation(operation);
+				if (implementation != null) {
+					return implementation;
+				}
+				else {
+					return UnimplementedOperation.INSTANCE;
+				}
 			}
 		}
 		for (Constraint constraint : metaModelManager.getLocalConstraints(operation)) {
@@ -87,12 +96,18 @@ public class ImplementationManager
 		return UnimplementedOperation.INSTANCE;
 	}
 
-	protected LibraryFeature getPropertyImplementation(Property property) throws ClassNotFoundException, SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+	protected @NonNull LibraryFeature getPropertyImplementation(@NonNull Property property) throws ClassNotFoundException, SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
 		LibraryFeature implementation = property.getImplementation();
 		String implementationClassName = property.getImplementationClass();
 		if (implementationClassName != null) {
 			if ((implementation == null) || !implementation.getClass().getName().equals(implementationClassName)) {
-				return loadImplementation(property);
+				implementation = loadImplementation(property);
+				if (implementation != null) {
+					return implementation;
+				}
+				else {
+					return UnimplementedOperation.INSTANCE;
+				}
 			}
 		}
 		//
@@ -152,13 +167,16 @@ public class ImplementationManager
 	 * @throws IllegalAccessException if the implementation class is not accessible
 	 * @throws IllegalArgumentException if the implementation class is not accessible
 	 */
-	public LibraryFeature loadImplementation(Feature feature) throws ClassNotFoundException, SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+	public @Nullable LibraryFeature loadImplementation(@NonNull Feature feature) throws ClassNotFoundException, SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
 		LibraryFeature implementation = feature.getImplementation();
 		if (implementation == null) {
 			String implementationClassName = feature.getImplementationClass();
 			if (implementationClassName != null) {
 				Class<?> theClass = null;
-				addClassLoader(feature.getClass().getClassLoader());
+				ClassLoader featureClassLoader = feature.getClass().getClassLoader();
+				if (featureClassLoader != null) {
+					addClassLoader(featureClassLoader);
+				}
 				ClassNotFoundException e = null;
 				for (ClassLoader classLoader : getClassLoaders()) {
 					try {

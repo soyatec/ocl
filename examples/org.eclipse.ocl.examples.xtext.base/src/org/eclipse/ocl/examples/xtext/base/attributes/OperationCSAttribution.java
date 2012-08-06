@@ -18,9 +18,7 @@ package org.eclipse.ocl.examples.xtext.base.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -41,11 +39,9 @@ public class OperationCSAttribution extends AbstractAttribution
 			if (containmentFeature == BaseCSTPackage.Literals.OPERATION_CS__OWNED_PARAMETER) {
 			}
 			else {
-				environmentView.addNamedElements(pivot.getOwnedParameter());
+				environmentView.addAllParameters(pivot);
 			}
-			for (TemplateParameter templateParameter : PivotUtil.getTemplateParameters(pivot)) {
-				environmentView.addNamedElement((DomainNamedElement)templateParameter.getParameteredElement());
-			}
+			environmentView.addAllTemplateParameters(pivot);
 		}
 		return scopeView.getParent();
 	}

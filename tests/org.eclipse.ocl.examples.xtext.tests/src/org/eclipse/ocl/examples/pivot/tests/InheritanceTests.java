@@ -220,6 +220,7 @@ public class InheritanceTests extends PivotSimpleTestSuite
 			assertEquals(4, unlimitedNaturalTypeInheritance.getDepth());
 			try {
 				metaModelManager.getIntegerType().getSuperClass().remove(metaModelManager.getRealType());
+				metaModelManager.getIntegerType().getSuperClass().add(metaModelManager.getOclAnyType());
 				assertEquals(2, unlimitedNaturalTypeInheritance.getDepth());
 				assertEquals(1, metaModelManager.getInheritance(metaModelManager.getIntegerType()).getDepth());
 				assertEquals(2, metaModelManager.getInheritance(metaModelManager.getRealType()).getDepth());
