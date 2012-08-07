@@ -25,6 +25,9 @@
  */
 package	org.eclipse.ocl.examples.xtext.completeocl.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  * An AbstractDelegatingCompleteOCLCSVisitor delegates all visits.
  */
@@ -32,100 +35,100 @@ public abstract class AbstractDelegatingCompleteOCLCSVisitor<R, C, D extends Com
 	extends org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractDelegatingEssentialOCLCSVisitor<R, C, D>
 	implements CompleteOCLCSVisitor<R>
 {
-    protected AbstractDelegatingCompleteOCLCSVisitor(D delegate, C context) {
+    protected AbstractDelegatingCompleteOCLCSVisitor(@NonNull D delegate, @NonNull C context) {
         super(delegate, context);
     }
 
 	@Override
-	public R visiting(org.eclipse.ocl.examples.xtext.base.util.VisitableCS visitable) {
+	public @Nullable R visiting(@NonNull org.eclipse.ocl.examples.xtext.base.util.VisitableCS visitable) {
 		return delegate.visiting(visitable);
 	}
 
-	public R visitBodyCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.BodyCS object) {
+	public @Nullable R visitBodyCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.BodyCS object) {
 		return delegate.visitBodyCS(object);
 	}
 
-	public R visitClassifierContextDeclCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS object) {
+	public @Nullable R visitClassifierContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS object) {
 		return delegate.visitClassifierContextDeclCS(object);
 	}
 
-	public R visitCompleteOCLDocumentCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLDocumentCS object) {
+	public @Nullable R visitCompleteOCLDocumentCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLDocumentCS object) {
 		return delegate.visitCompleteOCLDocumentCS(object);
 	}
 
-	public R visitContextConstraintCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextConstraintCS object) {
+	public @Nullable R visitContextConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextConstraintCS object) {
 		return delegate.visitContextConstraintCS(object);
 	}
 
-	public R visitContextDeclCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextDeclCS object) {
+	public @Nullable R visitContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextDeclCS object) {
 		return delegate.visitContextDeclCS(object);
 	}
 
-	public R visitContextSpecificationCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextSpecificationCS object) {
+	public @Nullable R visitContextSpecificationCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextSpecificationCS object) {
 		return delegate.visitContextSpecificationCS(object);
 	}
 
-	public R visitDefCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS object) {
+	public @Nullable R visitDefCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS object) {
 		return delegate.visitDefCS(object);
 	}
 
-	public R visitDefFeatureCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefFeatureCS object) {
+	public @Nullable R visitDefFeatureCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefFeatureCS object) {
 		return delegate.visitDefFeatureCS(object);
 	}
 
-	public R visitDefOperationCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefOperationCS object) {
+	public @Nullable R visitDefOperationCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefOperationCS object) {
 		return delegate.visitDefOperationCS(object);
 	}
 
-	public R visitDefPropertyCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefPropertyCS object) {
+	public @Nullable R visitDefPropertyCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefPropertyCS object) {
 		return delegate.visitDefPropertyCS(object);
 	}
 
-	public R visitDerCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DerCS object) {
+	public @Nullable R visitDerCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DerCS object) {
 		return delegate.visitDerCS(object);
 	}
 
-	public R visitFeatureContextDeclCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.FeatureContextDeclCS object) {
+	public @Nullable R visitFeatureContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.FeatureContextDeclCS object) {
 		return delegate.visitFeatureContextDeclCS(object);
 	}
 
-	public R visitIncludeCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.IncludeCS object) {
+	public @Nullable R visitIncludeCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.IncludeCS object) {
 		return delegate.visitIncludeCS(object);
 	}
 
-	public R visitInitCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InitCS object) {
+	public @Nullable R visitInitCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InitCS object) {
 		return delegate.visitInitCS(object);
 	}
 
-	public R visitInvCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InvCS object) {
+	public @Nullable R visitInvCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InvCS object) {
 		return delegate.visitInvCS(object);
 	}
 
-	public R visitOCLMessageArgCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS object) {
+	public @Nullable R visitOCLMessageArgCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS object) {
 		return delegate.visitOCLMessageArgCS(object);
 	}
 
-	public R visitOperationContextDeclCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS object) {
+	public @Nullable R visitOperationContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS object) {
 		return delegate.visitOperationContextDeclCS(object);
 	}
 
-	public R visitPackageDeclarationCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PackageDeclarationCS object) {
+	public @Nullable R visitPackageDeclarationCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PackageDeclarationCS object) {
 		return delegate.visitPackageDeclarationCS(object);
 	}
 
-	public R visitPathNameDeclCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PathNameDeclCS object) {
+	public @Nullable R visitPathNameDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PathNameDeclCS object) {
 		return delegate.visitPathNameDeclCS(object);
 	}
 
-	public R visitPostCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PostCS object) {
+	public @Nullable R visitPostCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PostCS object) {
 		return delegate.visitPostCS(object);
 	}
 
-	public R visitPreCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PreCS object) {
+	public @Nullable R visitPreCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PreCS object) {
 		return delegate.visitPreCS(object);
 	}
 
-	public R visitPropertyContextDeclCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS object) {
+	public @Nullable R visitPropertyContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS object) {
 		return delegate.visitPropertyContextDeclCS(object);
 	}
 }

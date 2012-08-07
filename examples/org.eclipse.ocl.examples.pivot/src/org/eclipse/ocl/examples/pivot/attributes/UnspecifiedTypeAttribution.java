@@ -16,8 +16,10 @@ package org.eclipse.ocl.examples.pivot.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.UnspecifiedType;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
+import org.eclipse.ocl.examples.pivot.scoping.EmptyAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -30,7 +32,11 @@ public class UnspecifiedTypeAttribution extends AbstractAttribution
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		UnspecifiedType targetElement = (UnspecifiedType) target;
-		Attribution attribution = PivotUtil.getAttribution(targetElement.getLowerBound());
+		Type lowerBound = targetElement.getLowerBound();
+		Attribution attribution = lowerBound != null ? PivotUtil.getAttribution(lowerBound) : null;
+		if (attribution == null) {
+			attribution = EmptyAttribution.INSTANCE;
+		}
 		return attribution.computeLookup(target, environmentView, scopeView);
 	}
 }

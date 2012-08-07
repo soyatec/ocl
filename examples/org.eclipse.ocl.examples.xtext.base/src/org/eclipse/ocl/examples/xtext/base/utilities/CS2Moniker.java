@@ -27,6 +27,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.util.Nameable;
@@ -39,6 +41,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterSubstitutionCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateSignatureCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateableElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.TypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
@@ -52,14 +55,14 @@ public class CS2Moniker
 
 	public static interface Factory {
 
-		public abstract BaseCSVisitor<?> create(CS2Moniker moniker);
+		public abstract BaseCSVisitor<?> create(@NonNull CS2Moniker moniker);
 	}
 
-	public static void addFactory(EPackage ePackage, Factory factory) {
+	public static void addFactory(@NonNull EPackage ePackage, @NonNull Factory factory) {
 		csFactoryMap.put(ePackage, factory);
 	}
 
-	public static String toString(ElementCS csElement) {
+	public static String toString(@NonNull ElementCS csElement) {
 		CS2Moniker moniker = new CS2Moniker(csElement);
 		moniker.appendElementCS(csElement);
 		String string = moniker.toString();
@@ -70,7 +73,7 @@ public class CS2Moniker
 	/**
 	 * The registry of Moniker Visitor Factories for supported EPackages.
 	 */
-	private static Map<EPackage, Factory> csFactoryMap = new HashMap<EPackage, Factory>();
+	private static @NonNull Map<EPackage, Factory> csFactoryMap = new HashMap<EPackage, Factory>();
 
 	/**
 	 * The template parameters defined by csScope and its ancestors. This is
@@ -87,13 +90,13 @@ public class CS2Moniker
 	/**
 	 * The Moniker Visitors created for each required EPackage.
 	 */
-	private Map<EPackage, BaseCSVisitor<?>> csVisitorMap = new HashMap<EPackage, BaseCSVisitor<?>>();
+	private @NonNull Map<EPackage, BaseCSVisitor<?>> csVisitorMap = new HashMap<EPackage, BaseCSVisitor<?>>();
 
-	public CS2Moniker(ElementCS target) {
+	public CS2Moniker(@NonNull ElementCS target) {
 		super(target);
 	}
 
-	public void appendConstraintCSDisambiguator(ConstraintCS csConstraint) {
+	public void appendConstraintCSDisambiguator(@NonNull ConstraintCS csConstraint) {
 		String csConstraintStereotype = csConstraint.getStereotype();
 		EObject csContainer = csConstraint.eContainer();
 		if (csContainer == null) {
@@ -132,8 +135,7 @@ public class CS2Moniker
 		}
 	}
 
-	public void appendElementCS(VisitableCS csVisitable) {
-		assert csVisitable != null;
+	public void appendElementCS(@NonNull VisitableCS csVisitable) {
 		int oldSize = length();
 		EPackage ePackage = csVisitable.eClass().getEPackage();
 		BaseCSVisitor<?> monikerVisitor = getVisitor(ePackage);
@@ -143,7 +145,7 @@ public class CS2Moniker
 		assert length() > oldSize;
 	}
 
-	protected void appendMultiplicityCS(TypedElementCS csTypedElement) {
+	protected void appendMultiplicityCS(@NonNull TypedElementCS csTypedElement) {
 		int lower = ElementUtil.getLower(csTypedElement);
 		int upper = ElementUtil.getUpper(csTypedElement);
 		if (upper != 1) {
@@ -156,7 +158,7 @@ public class CS2Moniker
 		}
 	}
 
-	public void appendNameCS(Nameable csNamedElement) {
+	public void appendNameCS(@Nullable Nameable csNamedElement) {
 		append(csNamedElement != null
 			? csNamedElement.getName()
 			: null);
@@ -169,7 +171,10 @@ public class CS2Moniker
 		if (csIterators != null) {
 			for (ParameterCS csIterator : csIterators) {
 				append(prefix);
-				appendElementCS(csIterator.getOwnedType());
+				TypedRefCS ownedType = csIterator.getOwnedType();
+				if (ownedType != null) {
+					appendElementCS(ownedType);
+				}
 				appendMultiplicityCS(csIterator);
 				prefix = PARAMETER_SEPARATOR;
 			}
@@ -179,7 +184,10 @@ public class CS2Moniker
 			prefix = ITERATOR_SEPARATOR;
 			for (ParameterCS csAccumulator : csAccumulators) {
 				append(prefix);
-				appendElementCS(csAccumulator.getOwnedType());
+				TypedRefCS ownedType = csAccumulator.getOwnedType();
+				if (ownedType != null) {
+					appendElementCS(ownedType);
+				}
 				appendMultiplicityCS(csAccumulator);
 				prefix = PARAMETER_SEPARATOR;
 			}
@@ -239,8 +247,12 @@ public class CS2Moniker
 				String prefix = ""; //$NON-NLS-1$
 				for (TemplateParameterSubstitutionCS templateParameterSubstitution : templateParameterSubstitutions) {
 					append(prefix);
-					appendElementCS(templateParameterSubstitution
-						.getOwnedActualParameter());
+					if (templateParameterSubstitution != null) {
+						TypeRefCS ownedActualParameter = templateParameterSubstitution.getOwnedActualParameter();
+						if (ownedActualParameter != null) {
+							appendElementCS(ownedActualParameter);
+						}
+					}
 					prefix = TEMPLATE_BINDING_SEPARATOR;
 				}
 			}

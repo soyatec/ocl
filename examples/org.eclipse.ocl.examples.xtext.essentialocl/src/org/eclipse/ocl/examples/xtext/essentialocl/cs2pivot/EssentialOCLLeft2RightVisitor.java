@@ -1218,10 +1218,12 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 		VariableExp expression = PivotUtil.getPivot(VariableExp.class, csSelfExp);
 		EnvironmentView environmentView = new EnvironmentView(metaModelManager, PivotPackage.Literals.EXPRESSION_IN_OCL__CONTEXT_VARIABLE, Environment.SELF_VARIABLE_NAME);
 		ElementCS parent = csSelfExp.getLogicalParent();
-		BaseScopeView.computeLookups(environmentView, parent, csSelfExp, csSelfExp.eContainingFeature(), null);
-		VariableDeclaration variableDeclaration = (VariableDeclaration) environmentView.getContent();
-		expression.setReferredVariable(variableDeclaration);
-		context.setType(expression, variableDeclaration != null ? variableDeclaration.getType() : metaModelManager.getOclVoidType());
+		if (parent != null) {
+			BaseScopeView.computeLookups(environmentView, parent, csSelfExp, csSelfExp.eContainingFeature(), null);
+			VariableDeclaration variableDeclaration = (VariableDeclaration) environmentView.getContent();
+			expression.setReferredVariable(variableDeclaration);
+			context.setType(expression, variableDeclaration != null ? variableDeclaration.getType() : metaModelManager.getOclVoidType());
+		}
 		return expression;
 	}
 

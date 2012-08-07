@@ -20,29 +20,30 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 public class BasePivot2CS extends Pivot2CS
 {	
 	private static final class Factory implements Pivot2CS.Factory
 	{
-		private static Pivot2CS.Factory INSTANCE = new Factory();
+		private static @NonNull Pivot2CS.Factory INSTANCE = new Factory();
 
-		public BaseDeclarationVisitor createDeclarationVisitor(Pivot2CSConversion converter) {
+		public @NonNull BaseDeclarationVisitor createDeclarationVisitor(@NonNull Pivot2CSConversion converter) {
 			return new BaseDeclarationVisitor(converter);
 		}
 
-		public BaseReferenceVisitor createReferenceVisitor(Pivot2CSConversion converter) {
+		public @NonNull BaseReferenceVisitor createReferenceVisitor(@NonNull Pivot2CSConversion converter) {
 			return new BaseReferenceVisitor(converter);
 		}
 
-		public EClass[] getEClasses() {
+		public @NonNull EClass[] getEClasses() {
 			return new EClass[] {};
 		}
 	}
 
-	public BasePivot2CS(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
-			MetaModelManager metaModelManager) {
+	public BasePivot2CS(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
+			@NonNull MetaModelManager metaModelManager) {
 		super(cs2pivotResourceMap, metaModelManager);
 		addFactory(Factory.INSTANCE);
 	}

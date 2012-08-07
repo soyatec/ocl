@@ -20,6 +20,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
@@ -29,8 +30,8 @@ import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
  */
 public interface BaseCSResource extends BaseResource
 {
-	CS2Pivot createCS2Pivot(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, MetaModelManager metaModelManager);
-	MetaModelManager createMetaModelManager();
-	String getEditorName();
-	URI resolve(URI uri);
+	@NonNull CS2Pivot createCS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, @NonNull MetaModelManager metaModelManager);
+	@NonNull MetaModelManager createMetaModelManager();
+	@NonNull String getEditorName();
+	@NonNull URI resolve(@NonNull URI uri);
 }

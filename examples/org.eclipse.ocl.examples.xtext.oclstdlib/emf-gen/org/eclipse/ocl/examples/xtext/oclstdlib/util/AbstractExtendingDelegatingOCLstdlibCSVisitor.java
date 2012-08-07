@@ -25,6 +25,8 @@
  */
 package	org.eclipse.ocl.examples.xtext.oclstdlib.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractDelegatingEssentialOCLCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 
@@ -35,48 +37,48 @@ public abstract class AbstractExtendingDelegatingOCLstdlibCSVisitor<R, C, D exte
 	extends AbstractDelegatingEssentialOCLCSVisitor<R, C, D>
 	implements OCLstdlibCSVisitor<R>
 {
-    protected AbstractExtendingDelegatingOCLstdlibCSVisitor(D delegate, C context) {
+    protected AbstractExtendingDelegatingOCLstdlibCSVisitor(@NonNull D delegate, @NonNull C context) {
         super(delegate, context);
     }
 
 	@Override
-	public R visiting(org.eclipse.ocl.examples.xtext.base.util.VisitableCS visitable) {
+	public @Nullable R visiting(@NonNull org.eclipse.ocl.examples.xtext.base.util.VisitableCS visitable) {
 		return delegate.visiting(visitable);
 	}
 
-	public R visitLibClassCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibClassCS object) {
+	public @Nullable R visitLibClassCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibClassCS object) {
 		return delegate.visitClassCS(object);
 	}
 
-	public R visitLibConstraintCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibConstraintCS object) {
+	public @Nullable R visitLibConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibConstraintCS object) {
 		return delegate.visitConstraintCS(object);
 	}
 
-	public R visitLibIterationCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS object) {
+	public @Nullable R visitLibIterationCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS object) {
 		return delegate.visitOperationCS(object);
 	}
 
-	public R visitLibOperationCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS object) {
+	public @Nullable R visitLibOperationCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS object) {
 		return delegate.visitOperationCS(object);
 	}
 
-	public R visitLibPackageCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS object) {
+	public @Nullable R visitLibPackageCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS object) {
 		return delegate.visitPackageCS(object);
 	}
 
-	public R visitLibPropertyCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPropertyCS object) {
+	public @Nullable R visitLibPropertyCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPropertyCS object) {
 		return delegate.visitAttributeCS(object);
 	}
 
-	public R visitLibRootPackageCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS object) {
+	public @Nullable R visitLibRootPackageCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS object) {
 		return delegate.visitRootPackageCS(object);
 	}
 
-	public R visitMetaTypeName(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName object) {
+	public @Nullable R visitMetaTypeName(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName object) {
 		return visiting(object);
 	}
 
-	public R visitPrecedenceCS(org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS object) {
+	public @Nullable R visitPrecedenceCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS object) {
 		return delegate.visitNamedElementCS(object);
 	}
 }

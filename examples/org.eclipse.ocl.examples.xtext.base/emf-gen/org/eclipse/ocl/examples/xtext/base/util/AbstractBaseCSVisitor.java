@@ -25,6 +25,9 @@
  */
 package	org.eclipse.ocl.examples.xtext.base.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  */
 public abstract class AbstractBaseCSVisitor<R, C> implements BaseCSVisitor<R>
@@ -32,19 +35,19 @@ public abstract class AbstractBaseCSVisitor<R, C> implements BaseCSVisitor<R>
     /**
      * Context for the AST visitation.
      */
-    protected final C context;
+    protected final @NonNull C context;
 	
 	/**
 	 * Initializes me with an initial value for my result.
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractBaseCSVisitor(C context) {
+	protected AbstractBaseCSVisitor(@NonNull C context) {
 	    this.context = context;
 	}
 
 	@SuppressWarnings("unchecked")
-	public <A> A getAdapter(Class<A> adapter) {
+	public <A> A getAdapter(@NonNull Class<A> adapter) {
 		if (adapter.isAssignableFrom(getClass())) {
 			return (A) this;
 		}
@@ -60,7 +63,7 @@ public abstract class AbstractBaseCSVisitor<R, C> implements BaseCSVisitor<R>
 	 * @return <code>null</code> if the visitable is <code>null</code>;
 	 *     otherwise, the result of visiting it
 	 */
-	public R safeVisit(org.eclipse.ocl.examples.xtext.base.util.VisitableCS v) {
+	public @Nullable R safeVisit(@Nullable org.eclipse.ocl.examples.xtext.base.util.VisitableCS v) {
 		return (v == null) ? null : v.accept(this);
 	}
 	
@@ -71,11 +74,11 @@ public abstract class AbstractBaseCSVisitor<R, C> implements BaseCSVisitor<R>
 	 * @return <code>null</code> if the visitable is <code>null</code>;
 	 *     otherwise, the result of visiting it
 	 */
-	public R visit(org.eclipse.ocl.examples.xtext.base.util.VisitableCS v) {
+	public @Nullable R visit(@NonNull org.eclipse.ocl.examples.xtext.base.util.VisitableCS v) {
 		return v.accept(this);
 	}
 
-//	public R visiting(org.eclipse.ocl.examples.xtext.base.util.VisitableCS visitable) {
+//	public @Nullable R visiting(@NonNull org.eclipse.ocl.examples.xtext.base.util.VisitableCS visitable) {
 //		return null;
 //	}
 }

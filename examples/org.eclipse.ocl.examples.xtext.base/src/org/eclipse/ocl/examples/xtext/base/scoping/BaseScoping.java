@@ -19,6 +19,8 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
@@ -75,12 +77,13 @@ public class BaseScoping
 	
 	private static final class SimpleNamedElementRefCSTypeUnresolvedProxyMessageProvider extends AbstractUnresolvedProxyMessageProvider
 	{		
+		@SuppressWarnings("null")
 		private SimpleNamedElementRefCSTypeUnresolvedProxyMessageProvider() {
 			super(BaseCSTPackage.Literals.PATH_ELEMENT_CS__ELEMENT);
 		}
 		
 		@Override
-		public String getMessage(EObject context, String linkText) {
+		public @Nullable String getMessage(@NonNull EObject context, @NonNull String linkText) {
 			PathElementCS pathElement = (PathElementCS)context;
 			EClassifier elementType = pathElement.getElementType();
 			PathNameCS pathName = pathElement.getPathName();
@@ -93,19 +96,22 @@ public class BaseScoping
 				}
 			}
 			String element = elementType != null ? elementType.getName() : "unknown";
-			return CS2Pivot.getMessageBinder().bind(context, OCLMessages.Unresolved_ERROR_, element, linkText);
+			@SuppressWarnings("null") @NonNull String messageTemplate = OCLMessages.Unresolved_ERROR_;
+			return CS2Pivot.getMessageBinder().bind(context, messageTemplate, element, linkText);
 		}
 	}
 	
 	private static final class TypedTypeRefCSTypeUnresolvedProxyMessageProvider extends AbstractUnresolvedProxyMessageProvider
 	{		
+		@SuppressWarnings("null")
 		private TypedTypeRefCSTypeUnresolvedProxyMessageProvider() {
 			super(BaseCSTPackage.Literals.TYPED_TYPE_REF_CS__TYPE);
 		}
 		
 		@Override
-		public String getMessage(EObject context, String linkText) {
-			return CS2Pivot.getMessageBinder().bind(context, OCLMessages.UnresolvedType_ERROR_, linkText);
+		public @Nullable String getMessage(@NonNull EObject context, @NonNull String linkText) {
+			@SuppressWarnings("null") @NonNull String messageTemplate = OCLMessages.UnresolvedType_ERROR_;
+			return CS2Pivot.getMessageBinder().bind(context, messageTemplate, linkText);
 		}
 	}
 }

@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -35,9 +36,8 @@ public class PivotScopeView implements ScopeView
 	/**
      * The <code>NULLSCOPEVIEW</code> to be returned by the most outer scope
      */
-    public static final ScopeView NULLSCOPEVIEW = new ScopeView()
+    public static final @NonNull ScopeView NULLSCOPEVIEW = new ScopeView()
     {
-		@SuppressWarnings("null")
 		public @NonNull Attribution getAttribution() {
 			return EmptyAttribution.INSTANCE;
 		}
@@ -50,7 +50,7 @@ public class PivotScopeView implements ScopeView
 			return null;
 		}
 
-		public ScopeView getParent() {
+		public @NonNull ScopeView getParent() {
 			return NULLSCOPEVIEW;
 		}
 
@@ -63,24 +63,23 @@ public class PivotScopeView implements ScopeView
 		}
     };
 	
-	protected final MetaModelManager metaModelManager;
-	protected final Attribution attribution;					// Attributes helper for the target CST node
+	protected final @NonNull MetaModelManager metaModelManager;
+	protected final @NonNull Attribution attribution;					// Attributes helper for the target CST node
 	protected final Element target;								// The target CST node
 	protected final EObject child;								// Child targeted by containmentFeature, null for child-independent
 	protected final EStructuralFeature containmentFeature;		// Selecting child-specific candidates, null for child-independent
 	protected final EReference targetReference;					// Selecting permissible candidate types
 	private ScopeView parent = null;
 	
-	public PivotScopeView(@NonNull MetaModelManager metaModelManager, @NonNull Element target, @NonNull Attribution attribution, EObject child, EStructuralFeature containmentFeature, EReference targetReference) {
+	public PivotScopeView(@NonNull MetaModelManager metaModelManager, @NonNull Element target, @Nullable Attribution attribution, EObject child, EStructuralFeature containmentFeature, EReference targetReference) {
 		this.metaModelManager = metaModelManager;
-		this.attribution = attribution;
+		this.attribution = attribution != null ? attribution : EmptyAttribution.INSTANCE;
 		this.target = target;
 		this.child = child;
 		this.containmentFeature = containmentFeature;
 		this.targetReference = targetReference;
 	}
 	
-	@SuppressWarnings("null")
 	public @NonNull Attribution getAttribution() {
 		return attribution;
 	}
@@ -93,13 +92,13 @@ public class PivotScopeView implements ScopeView
 		return containmentFeature;
 	}
 
-	@SuppressWarnings("null")
 	public @NonNull MetaModelManager getMetaModelManager() {
 		return metaModelManager;
 	}
 
-	public ScopeView getParent() {
-		if (parent == null) {
+	public @NonNull ScopeView getParent() {
+		ScopeView parent2 = parent;
+		if (parent2 == null) {
 			Element aParent = null;
 			Attribution parentScope = null;
 			if (target instanceof Element) {
@@ -110,14 +109,17 @@ public class PivotScopeView implements ScopeView
 				}
 			}
 			if (parentScope == null) {
-				parent = NULLSCOPEVIEW;
+				parent2 = parent = NULLSCOPEVIEW;
 			}
 			else if (aParent != null) {
 				EStructuralFeature eContainingFeature = target.eContainingFeature();
-				parent = new PivotScopeView(getMetaModelManager(), aParent, parentScope, target, eContainingFeature, targetReference);
+				parent2 = parent = new PivotScopeView(getMetaModelManager(), aParent, parentScope, target, eContainingFeature, targetReference);
+			}
+			else {
+				parent2 = parent = NULLSCOPEVIEW;
 			}
 		}
-		return parent;
+		return parent2;
 	}
 
 	public final Element getTarget() {

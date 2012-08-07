@@ -25,6 +25,9 @@
  */
 package	org.eclipse.ocl.examples.xtext.base.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  */
 public interface BaseCSVisitor<R>
@@ -39,57 +42,57 @@ public interface BaseCSVisitor<R>
 	 *    or <code>null</code> if this object does not
 	 *    have an adapter for the given class
 	 */
-	<A> A getAdapter(Class<A> adapter);
+	@Nullable <A> A getAdapter(@NonNull Class<A> adapter);
 
 	/**
      * Return the result of visiting a visitable for which no more specific pivot type method
      * is available.
      */
-	R visiting(org.eclipse.ocl.examples.xtext.base.util.VisitableCS visitable);
+	@Nullable R visiting(@NonNull org.eclipse.ocl.examples.xtext.base.util.VisitableCS visitable);
 	
-	R visitAnnotationCS(org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS object);
-	R visitAnnotationElementCS(org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationElementCS object);
-	R visitAttributeCS(org.eclipse.ocl.examples.xtext.base.baseCST.AttributeCS object);
-	R visitClassCS(org.eclipse.ocl.examples.xtext.base.baseCST.ClassCS object);
-	R visitClassifierCS(org.eclipse.ocl.examples.xtext.base.baseCST.ClassifierCS object);
-	R visitCollectionTypeRefCS(org.eclipse.ocl.examples.xtext.base.baseCST.CollectionTypeRefCS object);
-	R visitConstraintCS(org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS object);
-	R visitDataTypeCS(org.eclipse.ocl.examples.xtext.base.baseCST.DataTypeCS object);
-	R visitDetailCS(org.eclipse.ocl.examples.xtext.base.baseCST.DetailCS object);
-	R visitDocumentationCS(org.eclipse.ocl.examples.xtext.base.baseCST.DocumentationCS object);
-	R visitElementCS(org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS object);
-	R visitElementRefCS(org.eclipse.ocl.examples.xtext.base.baseCST.ElementRefCS object);
-	R visitEnumerationCS(org.eclipse.ocl.examples.xtext.base.baseCST.EnumerationCS object);
-	R visitEnumerationLiteralCS(org.eclipse.ocl.examples.xtext.base.baseCST.EnumerationLiteralCS object);
-	R visitImportCS(org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS object);
-	R visitLambdaTypeCS(org.eclipse.ocl.examples.xtext.base.baseCST.LambdaTypeCS object);
-	R visitLibraryCS(org.eclipse.ocl.examples.xtext.base.baseCST.LibraryCS object);
-	R visitModelElementCS(org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS object);
-	R visitModelElementRefCS(org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementRefCS object);
-	R visitMultiplicityBoundsCS(org.eclipse.ocl.examples.xtext.base.baseCST.MultiplicityBoundsCS object);
-	R visitMultiplicityStringCS(org.eclipse.ocl.examples.xtext.base.baseCST.MultiplicityStringCS object);
-	R visitNamedElementCS(org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS object);
-	R visitOperationCS(org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS object);
-	R visitPackageCS(org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS object);
-	R visitParameterCS(org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS object);
-	R visitPathElementCS(org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS object);
-	R visitPathNameCS(org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS object);
-	R visitPivotableElementCS(org.eclipse.ocl.examples.xtext.base.baseCST.PivotableElementCS object);
-	R visitPrimitiveTypeRefCS(org.eclipse.ocl.examples.xtext.base.baseCST.PrimitiveTypeRefCS object);
-	R visitReferenceCS(org.eclipse.ocl.examples.xtext.base.baseCST.ReferenceCS object);
-	R visitRootPackageCS(org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS object);
-	R visitSpecificationCS(org.eclipse.ocl.examples.xtext.base.baseCST.SpecificationCS object);
-	R visitStructuralFeatureCS(org.eclipse.ocl.examples.xtext.base.baseCST.StructuralFeatureCS object);
-	R visitTemplateBindingCS(org.eclipse.ocl.examples.xtext.base.baseCST.TemplateBindingCS object);
-	R visitTemplateParameterCS(org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterCS object);
-	R visitTemplateParameterSubstitutionCS(org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterSubstitutionCS object);
-	R visitTemplateSignatureCS(org.eclipse.ocl.examples.xtext.base.baseCST.TemplateSignatureCS object);
-	R visitTuplePartCS(org.eclipse.ocl.examples.xtext.base.baseCST.TuplePartCS object);
-	R visitTupleTypeCS(org.eclipse.ocl.examples.xtext.base.baseCST.TupleTypeCS object);
-	R visitTypeParameterCS(org.eclipse.ocl.examples.xtext.base.baseCST.TypeParameterCS object);
-	R visitTypeRefCS(org.eclipse.ocl.examples.xtext.base.baseCST.TypeRefCS object);
-	R visitTypedElementCS(org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS object);
-	R visitTypedRefCS(org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS object);
-	R visitTypedTypeRefCS(org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS object);
-	R visitWildcardTypeRefCS(org.eclipse.ocl.examples.xtext.base.baseCST.WildcardTypeRefCS object);
+	@Nullable R visitAnnotationCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS object);
+	@Nullable R visitAnnotationElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationElementCS object);
+	@Nullable R visitAttributeCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.AttributeCS object);
+	@Nullable R visitClassCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ClassCS object);
+	@Nullable R visitClassifierCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ClassifierCS object);
+	@Nullable R visitCollectionTypeRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.CollectionTypeRefCS object);
+	@Nullable R visitConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS object);
+	@Nullable R visitDataTypeCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.DataTypeCS object);
+	@Nullable R visitDetailCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.DetailCS object);
+	@Nullable R visitDocumentationCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.DocumentationCS object);
+	@Nullable R visitElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS object);
+	@Nullable R visitElementRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ElementRefCS object);
+	@Nullable R visitEnumerationCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.EnumerationCS object);
+	@Nullable R visitEnumerationLiteralCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.EnumerationLiteralCS object);
+	@Nullable R visitImportCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS object);
+	@Nullable R visitLambdaTypeCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.LambdaTypeCS object);
+	@Nullable R visitLibraryCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.LibraryCS object);
+	@Nullable R visitModelElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS object);
+	@Nullable R visitModelElementRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementRefCS object);
+	@Nullable R visitMultiplicityBoundsCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.MultiplicityBoundsCS object);
+	@Nullable R visitMultiplicityStringCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.MultiplicityStringCS object);
+	@Nullable R visitNamedElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS object);
+	@Nullable R visitOperationCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS object);
+	@Nullable R visitPackageCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS object);
+	@Nullable R visitParameterCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS object);
+	@Nullable R visitPathElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS object);
+	@Nullable R visitPathNameCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS object);
+	@Nullable R visitPivotableElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.PivotableElementCS object);
+	@Nullable R visitPrimitiveTypeRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.PrimitiveTypeRefCS object);
+	@Nullable R visitReferenceCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ReferenceCS object);
+	@Nullable R visitRootPackageCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS object);
+	@Nullable R visitSpecificationCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.SpecificationCS object);
+	@Nullable R visitStructuralFeatureCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.StructuralFeatureCS object);
+	@Nullable R visitTemplateBindingCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.TemplateBindingCS object);
+	@Nullable R visitTemplateParameterCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterCS object);
+	@Nullable R visitTemplateParameterSubstitutionCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterSubstitutionCS object);
+	@Nullable R visitTemplateSignatureCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.TemplateSignatureCS object);
+	@Nullable R visitTuplePartCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.TuplePartCS object);
+	@Nullable R visitTupleTypeCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.TupleTypeCS object);
+	@Nullable R visitTypeParameterCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.TypeParameterCS object);
+	@Nullable R visitTypeRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.TypeRefCS object);
+	@Nullable R visitTypedElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS object);
+	@Nullable R visitTypedRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS object);
+	@Nullable R visitTypedTypeRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS object);
+	@Nullable R visitWildcardTypeRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.WildcardTypeRefCS object);
 }

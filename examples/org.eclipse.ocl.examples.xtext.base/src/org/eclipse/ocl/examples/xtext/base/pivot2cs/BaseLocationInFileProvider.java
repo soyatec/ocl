@@ -47,12 +47,14 @@ public class BaseLocationInFileProvider extends DefaultLocationInFileProvider
 				ModelElementCS csModelElement = ElementUtil.getCsElement((Element) eContainer);
 				if (csModelElement != null) {
 					ICompositeNode node = NodeModelUtils.getNode(csModelElement);
-					List<ILeafNode> documentationNodes = CS2Pivot.getDocumentationNodes(node);
-					ILeafNode first = documentationNodes.get(0);
-					ILeafNode last = documentationNodes.get(documentationNodes.size()-1);
-					int start = first.getOffset();
-					int end = last.getOffset() + last.getLength();
-					return new TextRegion(start, end-start);
+					if (node != null) {
+						List<ILeafNode> documentationNodes = CS2Pivot.getDocumentationNodes(node);
+						ILeafNode first = documentationNodes.get(0);
+						ILeafNode last = documentationNodes.get(documentationNodes.size()-1);
+						int start = first.getOffset();
+						int end = last.getOffset() + last.getLength();
+						return new TextRegion(start, end-start);
+					}
 				}
 			}
 		}

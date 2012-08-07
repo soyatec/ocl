@@ -121,7 +121,9 @@ public class InvocationExpCSAttribution extends AbstractAttribution
 				}
 			}
 			ElementCS parent = targetElement.getLogicalParent();
-			BaseScopeView.computeLookups(environmentView, parent, target, PivotPackage.Literals.OPERATION_CALL_EXP__ARGUMENT, null);
+			if (parent != null) {
+				BaseScopeView.computeLookups(environmentView, parent, target, PivotPackage.Literals.OPERATION_CALL_EXP__ARGUMENT, null);
+			}
 			return null;
 		}
 		else {

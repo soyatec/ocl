@@ -58,27 +58,22 @@ import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 public class AliasAnalysis extends AdapterImpl
 {
 	public static void dispose(@NonNull Resource resource) {
-		if (resource != null) {
-			List<Adapter> eAdapters = resource.eAdapters();
-			AliasAnalysis adapter = PivotUtil.getAdapter(AliasAnalysis.class, eAdapters);
-			if (adapter != null) {
-				adapter.dispose();
-			}
+		List<Adapter> eAdapters = resource.eAdapters();
+		AliasAnalysis adapter = PivotUtil.getAdapter(AliasAnalysis.class, eAdapters);
+		if (adapter != null) {
+			adapter.dispose();
 		}
 	}
 
 	public static @NonNull AliasAnalysis getAdapter(@NonNull Resource resource) {
-		if (resource == null) {
-			return null;
-		}
 		MetaModelManager metaModelManager = ElementUtil.findMetaModelManager(resource);
+		if (metaModelManager == null) {
+			throw new IllegalStateException("No MetaModelManager");
+		}
 		return getAdapter(resource, metaModelManager);
 	}
 
 	public static @NonNull AliasAnalysis getAdapter(@NonNull Resource resource, @NonNull MetaModelManager metaModelManager) {
-		if (resource == null) {
-			return null;
-		}
 		List<Adapter> eAdapters = resource.eAdapters();
 		for (Adapter adapter : eAdapters) {
 			if (adapter instanceof AliasAnalysis) {
@@ -121,25 +116,23 @@ public class AliasAnalysis extends AdapterImpl
 	private void computeAliases(@NonNull Set<org.eclipse.ocl.examples.pivot.Package> localPackages,
 			@NonNull Set<org.eclipse.ocl.examples.pivot.Package> otherPackages) {		
 		for (org.eclipse.ocl.examples.pivot.Package localPackage : localPackages) {
-			DomainPackage primaryPackage = localPackage;
-			if (metaModelManager != null) {
-				primaryPackage = metaModelManager.getPackageServer(localPackage);
-			}
-			if ((primaryPackage.getNsPrefix() != null) || (primaryPackage.getNestingPackage() == null)) {
-				if (!allAliases.containsKey(primaryPackage)) {
-					String alias = computeAlias(primaryPackage);
-					allAliases.put(localPackage, alias);
+			if (localPackage != null) {
+				DomainPackage primaryPackage = metaModelManager.getPackageServer(localPackage);
+				if ((primaryPackage.getNsPrefix() != null) || (primaryPackage.getNestingPackage() == null)) {
+					if (!allAliases.containsKey(primaryPackage)) {
+						String alias = computeAlias(primaryPackage);
+						allAliases.put(localPackage, alias);
+					}
 				}
 			}
 		}
 		for (org.eclipse.ocl.examples.pivot.Package otherPackage : otherPackages) {
-			DomainPackage primaryPackage = otherPackage;
-			if (metaModelManager != null) {
-				primaryPackage = metaModelManager.getPackageServer(otherPackage);
-			}
-			if (!allAliases.containsKey(primaryPackage)) {
-				String alias = computeAlias(primaryPackage);
-				allAliases.put(primaryPackage, alias);
+			if (otherPackage != null) {
+				DomainPackage primaryPackage = metaModelManager.getPackageServer(otherPackage);
+				if (!allAliases.containsKey(primaryPackage)) {
+					String alias = computeAlias(primaryPackage);
+					allAliases.put(primaryPackage, alias);
+				}
 			}
 		}
 	}
@@ -149,13 +142,11 @@ public class AliasAnalysis extends AdapterImpl
 	 * register the ambiguity as a usage by null.
 	 */
 	private void addName(@NonNull String name, @NonNull Object primaryElement) {
-		if (name != null) {
-			if (!allNames.containsKey(name)) {
-				allNames.put(name, primaryElement);
-			}
-			else if (allNames.get(name) != primaryElement) {
-				allNames.put(name, null);
-			}
+		if (!allNames.containsKey(name)) {
+			allNames.put(name, primaryElement);
+		}
+		else if (allNames.get(name) != primaryElement) {
+			allNames.put(name, null);
 		}
 	}
 
@@ -199,7 +190,7 @@ public class AliasAnalysis extends AdapterImpl
 			}
 			if (eObject instanceof DomainNamedElement) {
 				DomainNamedElement domainNamedElement = (DomainNamedElement) eObject;
-				if ((metaModelManager != null) && !(eObject instanceof PackageServer)) {
+				if (!(eObject instanceof PackageServer)) {
 					if (eObject instanceof PackageServer) {
 						;
 					}
@@ -210,10 +201,16 @@ public class AliasAnalysis extends AdapterImpl
 //						domainNamedElement = metaModelManager.getPrimaryElement((NamedElement)eObject);
 					}
 				}
-				addName(domainNamedElement.getName(), domainNamedElement);
+				String name = domainNamedElement.getName();
+				if (name != null) {
+					addName(name, domainNamedElement);
+				}
 				if ((eObject instanceof org.eclipse.ocl.examples.pivot.Package) && (csObject instanceof RootPackageCS)) {			// FIXME
 					org.eclipse.ocl.examples.pivot.Package pivotPackage = (org.eclipse.ocl.examples.pivot.Package)eObject;
-					addName(pivotPackage.getNsPrefix(), domainNamedElement);
+					String nsPrefix = pivotPackage.getNsPrefix();
+					if (nsPrefix != null) {
+						addName(nsPrefix, domainNamedElement);
+					}
 					localPackages.add(pivotPackage);
 				}
 				else {
@@ -251,11 +248,12 @@ public class AliasAnalysis extends AdapterImpl
 	 * Return the alias for eObject.
 	 */
 	public @Nullable String getAlias(@NonNull EObject eObject) {
-		if (eObject instanceof Pivotable) {
-			eObject = ((Pivotable)eObject).getPivot();
+		EObject eObject2 = eObject;
+		if (eObject2 instanceof Pivotable) {
+			eObject2 = ((Pivotable)eObject2).getPivot();
 		}
-		if (eObject instanceof DomainPackage) {
-			PackageServer packageServer = metaModelManager.getPackageServer((DomainPackage)eObject);
+		if (eObject2 instanceof DomainPackage) {
+			PackageServer packageServer = metaModelManager.getPackageServer((DomainPackage)eObject2);
 			String alias = allAliases.get(packageServer);
 			if (alias != null) {
 				return alias;
@@ -269,7 +267,7 @@ public class AliasAnalysis extends AdapterImpl
 		return null;
 	}
 	
-	protected @NonNull String getDefaultAlias(@NonNull String name) {
+	protected @NonNull String getDefaultAlias(@Nullable String name) {
 		if (name == null) {
 			return "anon";			// Never happens
 		}
@@ -291,13 +289,11 @@ public class AliasAnalysis extends AdapterImpl
 				break;
 			}
 		}
-		return s.toString();
+		@SuppressWarnings("null") @NonNull String string = s.toString();
+		return string;
 	}
 
 	public @NonNull List<PathElement> getPath(@NonNull Element eObject) {
-		if (eObject == null) {
-			return null;
-		}
 		EObject eContainer = eObject.eContainer();
 		if (eContainer == null) {
 			return new ArrayList<PathElement>();

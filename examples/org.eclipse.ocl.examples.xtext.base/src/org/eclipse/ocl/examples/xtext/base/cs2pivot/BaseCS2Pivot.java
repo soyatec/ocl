@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.xtext.base.cs2pivot;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 /**
@@ -66,32 +67,32 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
  */
 public class BaseCS2Pivot extends CS2Pivot
 {	
-	public BaseCS2Pivot(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
-			MetaModelManager metaModelManager) {
+	public BaseCS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
+			@NonNull MetaModelManager metaModelManager) {
 		super(cs2pivotResourceMap, metaModelManager);
 	}
 
-	public BaseCS2Pivot(BaseCS2Pivot cs2pivot) {
+	public BaseCS2Pivot(@NonNull BaseCS2Pivot cs2pivot) {
 		super(cs2pivot);
 	}
 
 	@Override
-	protected BaseContainmentVisitor createContainmentVisitor(CS2PivotConversion converter) {
+	protected @NonNull BaseContainmentVisitor createContainmentVisitor(@NonNull CS2PivotConversion converter) {
 		return new BaseContainmentVisitor(converter);
 	}
 
 	@Override
-	protected BaseLeft2RightVisitor createLeft2RightVisitor(CS2PivotConversion converter) {
+	protected @NonNull BaseLeft2RightVisitor createLeft2RightVisitor(@NonNull CS2PivotConversion converter) {
 		return new BaseLeft2RightVisitor(converter);
 	}
 
 	@Override
-	protected BasePostOrderVisitor createPostOrderVisitor(CS2PivotConversion converter) {
+	protected @NonNull BasePostOrderVisitor createPostOrderVisitor(@NonNull CS2PivotConversion converter) {
 		return new BasePostOrderVisitor(converter);
 	}
 
 	@Override
-	protected BasePreOrderVisitor createPreOrderVisitor(CS2PivotConversion converter) {
+	protected @NonNull BasePreOrderVisitor createPreOrderVisitor(@NonNull CS2PivotConversion converter) {
 		return new BasePreOrderVisitor(converter);
 	}
 }

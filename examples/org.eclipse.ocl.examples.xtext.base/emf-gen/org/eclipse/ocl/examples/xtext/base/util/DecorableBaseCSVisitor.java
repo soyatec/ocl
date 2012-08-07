@@ -25,9 +25,11 @@
  */
 package	org.eclipse.ocl.examples.xtext.base.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  */
 public interface DecorableBaseCSVisitor<R> extends BaseCSVisitor<R>
 {
-	void setUndecoratedVisitor(org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor<R> visitor);
+	void setUndecoratedVisitor(@NonNull org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor<R> visitor);
 }

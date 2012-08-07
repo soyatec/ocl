@@ -25,6 +25,8 @@
  */
 package	org.eclipse.ocl.examples.xtext.oclinecore.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  */
 public abstract class AbstractOCLinEcoreCSVisitor<R, C>
@@ -36,7 +38,7 @@ public abstract class AbstractOCLinEcoreCSVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractOCLinEcoreCSVisitor(C context) {
+	protected AbstractOCLinEcoreCSVisitor(@NonNull C context) {
 	    super(context);
 	}
 }

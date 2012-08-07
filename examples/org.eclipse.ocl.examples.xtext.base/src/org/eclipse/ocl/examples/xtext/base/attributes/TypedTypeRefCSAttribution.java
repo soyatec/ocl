@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.xtext.base.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
@@ -35,13 +36,16 @@ public class TypedTypeRefCSAttribution extends AbstractAttribution
 	public static final TypedTypeRefCSAttribution INSTANCE = new TypedTypeRefCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		TypedTypeRefCS targetElement = (TypedTypeRefCS)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
 		if (containmentFeature == BaseCSTPackage.Literals.TYPED_TYPE_REF_CS__OWNED_TEMPLATE_BINDING) {
 			MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 			ElementCS parent = targetElement.getLogicalParent();
-			Attribution parentScope = parent != null ? PivotUtil.getAttribution(parent) : null;
+			if (parent == null) {
+				return BaseScopeView.NULLSCOPEVIEW;
+			}
+			Attribution parentScope = PivotUtil.getAttribution(parent);
 			return new BaseScopeView(metaModelManager, parent, parentScope, target, target.eContainingFeature(), null);
 		}
 		else if (containmentFeature == BaseCSTPackage.Literals.TYPED_TYPE_REF_CS__PATH_NAME) {

@@ -27,6 +27,9 @@ public class BaseFragmentProvider extends DefaultFragmentProvider
 	@Override
 	public EObject getEObject(Resource resource, String fragment, Fallback fallback) {
 		// fragment should be a CS fragment
+		if (resource == null) {
+			return null;
+		}
 		if (fragment.startsWith("/")) {
 			return super.getEObject(resource, fragment, fallback);
 		}

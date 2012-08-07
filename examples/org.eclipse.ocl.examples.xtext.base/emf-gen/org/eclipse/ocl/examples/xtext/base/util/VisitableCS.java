@@ -26,6 +26,8 @@
 package	org.eclipse.ocl.examples.xtext.base.util;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 public interface VisitableCS
 {
@@ -44,7 +46,7 @@ public interface VisitableCS
 	 * @param visitor
 	 * @return the result of the visit.
 	 */
-	<R> R accept(BaseCSVisitor<R> visitor);
+	@Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor);
 	
 	EClass eClass();
 }

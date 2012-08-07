@@ -35,6 +35,9 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EContentsEList;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagedAdapter;
@@ -73,22 +76,22 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 {	
 	public static interface UnresolvedProxyMessageProvider
 	{
-		EReference getEReference();	
-		String getMessage(EObject context, String linkText);
+		@NonNull EReference getEReference();	
+		@Nullable String getMessage(@NonNull EObject context, @NonNull String linkText);
 	}
 
 	public static abstract class AbstractUnresolvedProxyMessageProvider implements UnresolvedProxyMessageProvider
 	{
-		protected final EReference eReference;
+		protected final @NonNull EReference eReference;
 		
-		public AbstractUnresolvedProxyMessageProvider(EReference eReference) {
+		public AbstractUnresolvedProxyMessageProvider(@NonNull EReference eReference) {
 			this.eReference = eReference;
 		}
-		public EReference getEReference() {
+		public @NonNull EReference getEReference() {
 			return eReference;
 		}
 		
-		public abstract String getMessage(EObject context, String linkText);
+		public abstract @Nullable String getMessage(@NonNull EObject context, @NonNull String linkText);
 	}
 
 	/**
@@ -128,7 +131,7 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	 */
 	public static interface MessageBinder
 	{
-		String bind(EObject csContext, String messageTemplate, Object... bindings);	
+		@NonNull String bind(@NonNull EObject csContext, @NonNull String messageTemplate, Object... bindings);	
 	}
 
 	/**
@@ -136,10 +139,10 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	 */
 	public static class DefaultMessageBinder implements CS2Pivot.MessageBinder
 	{
-		public static final MessageBinder INSTANCE = new DefaultMessageBinder();
+		public static final @NonNull MessageBinder INSTANCE = new DefaultMessageBinder();
 
-		public String bind(EObject csContext, String messageTemplate, Object... bindings) {
-			return NLS.bind(messageTemplate, bindings);
+		public @NonNull String bind(@NonNull EObject csContext, @NonNull String messageTemplate, Object... bindings) {
+			return DomainUtil.bind(messageTemplate, bindings);
 		}
 	}
 
@@ -150,15 +153,13 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	{
 		public static final MessageBinder INSTANCE = new MessageBinderWithLineContext();
 
-		public String bind(EObject csContext, String messageTemplate, Object... bindings) {
-			String message = NLS.bind(messageTemplate, bindings);
-			if (csContext != null) {
-				ICompositeNode node = NodeModelUtils.getNode(csContext);
-				if (node != null) {
-					int startLine = node.getStartLine();
-					String uri = csContext.eResource().getURI().toString();
-					return uri + ":" + startLine + " " + message;
-				}
+		public @NonNull String bind(@NonNull EObject csContext, @NonNull String messageTemplate, Object... bindings) {
+			String message = DomainUtil.bind(messageTemplate, bindings);
+			ICompositeNode node = NodeModelUtils.getNode(csContext);
+			if (node != null) {
+				int startLine = node.getStartLine();
+				String uri = csContext.eResource().getURI().toString();
+				return uri + ":" + startLine + " " + message;
 			}
 			return message;
 		}
@@ -186,12 +187,12 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 		return element;
 	}
 
-	public static DiagnosticMessage getUnresolvedProxyMessage(EReference eReference, EObject csContext, String linkText) {
+	public static @Nullable DiagnosticMessage getUnresolvedProxyMessage(@NonNull EReference eReference, @NonNull EObject csContext, @NonNull String linkText) {
 		String message = getUnresolvedProxyText(eReference, csContext, linkText);
 		return message != null ? new DiagnosticMessage(message, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC) : null;
 	}	
 
-	public static String getUnresolvedProxyText(EReference eReference, EObject csContext, String linkText) {
+	public static @Nullable String getUnresolvedProxyText(@NonNull EReference eReference, @NonNull EObject csContext, @NonNull String linkText) {
 		ExceptionAdapter exceptionAdapter = PivotUtil.getAdapter(ExceptionAdapter.class, csContext);
 		if (exceptionAdapter != null) {
 			return exceptionAdapter.getErrorMessage();
@@ -200,25 +201,20 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 		if (unresolvedProxyMessageProvider != null) {
 			return unresolvedProxyMessageProvider.getMessage(csContext, linkText);
 		}
-		String messageTemplate = OCLMessages.Unresolved_ERROR_;
+		@SuppressWarnings("null") @NonNull String messageTemplate = OCLMessages.Unresolved_ERROR_;
 		String errorContext = "Unknown";
-		if (eReference != null) {
-			EClass referenceType = eReference.getEReferenceType();
-			if (referenceType != null) {
-				errorContext = referenceType.getName();
-			}
+		EClass referenceType = eReference.getEReferenceType();
+		if (referenceType != null) {
+			errorContext = referenceType.getName();
 		}
 		return messageBinder.bind(csContext, messageTemplate, errorContext, linkText);
 	}	
 	
-	public static CS2Pivot findAdapter(ResourceSet resourceSet) {
-		if (resourceSet == null) {
-			return null;
-		}
+	public static @Nullable CS2Pivot findAdapter(@NonNull ResourceSet resourceSet) {
 		return PivotUtil.getAdapter(CS2Pivot.class, resourceSet);
 	}
 
-	public static List<ILeafNode> getDocumentationNodes(ICompositeNode node) {
+	public static List<ILeafNode> getDocumentationNodes(@NonNull ICompositeNode node) {
 		List<ILeafNode> documentationNodes = null;
 		for (INode childNode : node.getChildren()) {
 			if (!(childNode instanceof ILeafNode)) {
@@ -256,12 +252,12 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	}
 	
 	private static long startTime = System.currentTimeMillis();
-	private static Map<Thread,Long> threadRunTimes = new HashMap<Thread,Long>();
+	private static @NonNull Map<Thread,Long> threadRunTimes = new HashMap<Thread,Long>();
 	private static long[] indentRunTimes = new long[100];
-	private static Integer indentation = 0;
-	private static String indents= ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+	private static @NonNull Integer indentation = 0;
+	private static @NonNull String indents= ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
 
-	public static void printDiagnostic(String message, boolean dispose, int indent) {
+	public static void printDiagnostic(@NonNull String message, boolean dispose, int indent) {
 		synchronized (indentation) {
 			if (indent < 0) {
 				indentation--;
@@ -291,7 +287,7 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 		}
 	}
 	
-	public static void setElementType(PathNameCS pathNameCS, EClass elementType, ElementCS csContext, ScopeFilter scopeFilter) {
+	public static void setElementType(@NonNull PathNameCS pathNameCS, /*@NonNull*/ EClass elementType, @NonNull ElementCS csContext, @Nullable ScopeFilter scopeFilter) {
 		pathNameCS.setContext(csContext);
 		pathNameCS.setScopeFilter(scopeFilter);
 		List<PathElementCS> path = pathNameCS.getPath();
@@ -318,19 +314,19 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	/**
 	 * Mapping of each CS resource to its corresponding pivot Resource.
 	 */
-	protected final Map<? extends Resource, ? extends Resource> cs2pivotResourceMap;
+	protected final @NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap;
 
 	/**
 	 * CS to Pivot mapping controller for aliases and CSIs.
 	 */
-	protected final CSI2PivotMapping cs2PivotMapping;
+	protected final @NonNull CSI2PivotMapping cs2PivotMapping;
 
 	/**
 	 * A lazily created inverse map that may be required for navigation from an outline.
 	 */
 	private Map<Element, ModelElementCS> pivot2cs = null;
 
-	public CS2Pivot(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, MetaModelManager metaModelManager) {
+	public CS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, @NonNull MetaModelManager metaModelManager) {
 		super(metaModelManager);
 		this.cs2PivotMapping = CSI2PivotMapping.getAdapter(metaModelManager);
 		this.cs2pivotResourceMap = cs2pivotResourceMap;
@@ -338,17 +334,17 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 		metaModelManager.getPivotResourceSet().eAdapters().add(this);
 	}
 	
-	protected CS2Pivot(CS2Pivot aConverter) {
+	protected CS2Pivot(@NonNull CS2Pivot aConverter) {
 		super(aConverter.metaModelManager);
 		this.cs2pivotResourceMap = aConverter.cs2pivotResourceMap;
 		this.cs2PivotMapping = CSI2PivotMapping.getAdapter(metaModelManager);
 	}
 
-	public String bind(EObject csContext, String messageTemplate, Object... bindings) {
+	public @NonNull String bind(@NonNull EObject csContext, @NonNull String messageTemplate, Object... bindings) {
 		return messageBinder.bind(csContext, messageTemplate, bindings);
 	}
 
-	public Map<Element, ModelElementCS> computePivot2CSMap() {
+	public @NonNull Map<Element, ModelElementCS> computePivot2CSMap() {
 		Map<Element, ModelElementCS> map = new HashMap<Element, ModelElementCS>();
 		for (Resource csResource : cs2pivotResourceMap.keySet()) {
 			for (Iterator<EObject> it = csResource.getAllContents(); it.hasNext(); ) {
@@ -363,15 +359,15 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 		return map;
 	}
 	
-	protected abstract BaseCSVisitor<Continuation<?>> createContainmentVisitor(CS2PivotConversion cs2PivotConversion);
+	protected abstract @NonNull BaseCSVisitor<Continuation<?>> createContainmentVisitor(@NonNull CS2PivotConversion cs2PivotConversion);
 
-	protected CS2PivotConversion createConversion(IDiagnosticConsumer diagnosticsConsumer, Collection<? extends Resource> csResources) {
+	protected@NonNull  CS2PivotConversion createConversion(@NonNull IDiagnosticConsumer diagnosticsConsumer, @NonNull Collection<? extends Resource> csResources) {
 		return new CS2PivotConversion(this, diagnosticsConsumer, csResources);
 	}
 
-	protected abstract BaseCSVisitor<Element> createLeft2RightVisitor(CS2PivotConversion cs2PivotConversion);
-	protected abstract BaseCSVisitor<Continuation<?>> createPostOrderVisitor(CS2PivotConversion converter) ;
-	protected abstract BaseCSVisitor<Continuation<?>> createPreOrderVisitor(CS2PivotConversion converter);
+	protected abstract @NonNull BaseCSVisitor<Element> createLeft2RightVisitor(@NonNull CS2PivotConversion cs2PivotConversion);
+	protected abstract @NonNull BaseCSVisitor<Continuation<?>> createPostOrderVisitor(@NonNull CS2PivotConversion converter) ;
+	protected abstract @NonNull BaseCSVisitor<Continuation<?>> createPreOrderVisitor(@NonNull CS2PivotConversion converter);
 
 	public void dispose() {
 		cs2pivotResourceMap.clear();
@@ -380,22 +376,23 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 		metaModelManager.getPivotResourceSet().eAdapters().remove(this);
 	}
 
-	public ModelElementCS getCSElement(Element pivotElement) {
+	public ModelElementCS getCSElement(@NonNull Element pivotElement) {
 		if (pivot2cs == null) {
 			pivot2cs = computePivot2CSMap();
 		}
 		return pivot2cs.get(pivotElement);
 	}
 
-	public Collection<? extends Resource> getCSResources() {
-		return cs2pivotResourceMap.keySet();
+	public @NonNull Collection<? extends Resource> getCSResources() {
+		@SuppressWarnings("null") @NonNull Set<? extends Resource> keySet = cs2pivotResourceMap.keySet();
+		return keySet;
 	}
 
-	public Element getPivotElement(ModelElementCS csElement) {
+	public Element getPivotElement(@NonNull ModelElementCS csElement) {
 		return cs2PivotMapping.get(csElement);
 	}
 
-	public <T extends Element> T getPivotElement(Class<T> pivotClass, ModelElementCS csElement) {
+	public @Nullable <T extends Element> T getPivotElement(@NonNull Class<T> pivotClass, @NonNull ModelElementCS csElement) {
 		Element pivotElement = cs2PivotMapping.get(csElement);
 		if (pivotElement == null) {
 			return null;
@@ -408,7 +405,7 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 		return castElement;
 	}
 
-	public Resource getPivotResource(Resource csResource) {
+	public Resource getPivotResource(@NonNull Resource csResource) {
 		return cs2pivotResourceMap.get(csResource);
 	}
 
@@ -424,7 +421,7 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	 * Install the mapping from a CS element that defines a pivot element to the defined pivot element. The definition
 	 * is 'owned' by the CS element, so if the CS element vanishes, so does the pivot element.
 	 */
-	public void installPivotDefinition(ModelElementCS csElement, Element newPivotElement) {
+	public void installPivotDefinition(@NonNull ModelElementCS csElement, @NonNull Element newPivotElement) {
 	//	logger.trace("Installing " + csElement.getDescription()); //$NON-NLS-1$ //$NON-NLS-2$	
 		EObject oldPivotElement = csElement.getPivot();	
 		if (oldPivotElement != newPivotElement) {
@@ -441,7 +438,7 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	 * Install the mapping from a CS element to a completely independent pivot element. If the pivot element vanishes, the
 	 * reference is stale, if the CS element the pivot element is less referenced.
 	 */
-	public void installPivotReference(ElementRefCS csElement, Element newPivotElement, EReference eReference) {
+	public void installPivotReference(@NonNull ElementRefCS csElement, @NonNull Element newPivotElement, @NonNull EReference eReference) {
 		assert eReference.getEContainingClass().isSuperTypeOf(csElement.eClass());
 	//	logger.trace("Installing " + csElement.getDescription()); //$NON-NLS-1$ //$NON-NLS-2$	
 		EObject oldPivotElement = csElement.getPivot();	
@@ -456,7 +453,7 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	 * are associated with a single pivot element. In this case one of the CS elements is the defining CS element and the
 	 * others are users.
 	 */
-	public void installPivotUsage(ModelElementCS csElement, Element newPivotElement) {
+	public void installPivotUsage(@NonNull ModelElementCS csElement, @NonNull Element newPivotElement) {
 	//	logger.trace("Installing " + csElement.getDescription()); //$NON-NLS-1$ //$NON-NLS-2$	
 		EObject oldPivotElement = csElement.getPivot();	
 		if (oldPivotElement != newPivotElement) {
@@ -474,11 +471,11 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 		}
 	}
 
-	public boolean isAdapterFor(MetaModelManager metaModelManager) {
+	public boolean isAdapterFor(@NonNull MetaModelManager metaModelManager) {
 		return this.metaModelManager == metaModelManager;
 	}
 
-	public void metaModelManagerDisposed(MetaModelManager metaModelManager) {
+	public void metaModelManagerDisposed(@NonNull MetaModelManager metaModelManager) {
 		dispose();
 	}
 
@@ -486,21 +483,22 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 		// Do nothing.
 	}
 	
-	public <T extends Element> T refreshModelElement(Class<T> pivotClass, EClass pivotEClass, ModelElementCS csElement) {
+	public @Nullable <T extends Element> T refreshModelElement(@NonNull Class<T> pivotClass, @NonNull EClass pivotEClass, @Nullable ModelElementCS csElement) {
 		Element pivotElement = csElement != null ? getPivotElement(csElement) : null;
-		if (pivotElement == null) {
-//			logger.trace("Creating " + pivotEClass.getName() + " : " + moniker); //$NON-NLS-1$ //$NON-NLS-2$
-			pivotElement = (Element) pivotEClass.getEPackage().getEFactoryInstance().create(pivotEClass);
-		}
-		else if (pivotEClass != pivotElement.eClass()) {
+		@NonNull Element pivotElement2;
+		if ((pivotElement == null) || (pivotEClass != pivotElement.eClass())) {
 //			logger.trace("Recreating " + pivotEClass.getName() + " : " + moniker); //$NON-NLS-1$ //$NON-NLS-2$
-			pivotElement = (Element) pivotEClass.getEPackage().getEFactoryInstance().create(pivotEClass);
+			@SuppressWarnings("null") @NonNull Element pivotElement3 = (Element) pivotEClass.getEPackage().getEFactoryInstance().create(pivotEClass);
+			pivotElement2 = pivotElement3;
+		}
+		else {
+			pivotElement2 = pivotElement;
 		}
 		if (csElement != null) {
-			installPivotDefinition(csElement, pivotElement);
+			installPivotDefinition(csElement, pivotElement2);
 		}
 		@SuppressWarnings("unchecked")
-		T castElement = (T) pivotElement;
+		T castElement = (T) pivotElement2;
 		return castElement;
 	}
 
@@ -512,7 +510,7 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 		assert oldTarget == metaModelManager.getPivotResourceSet();
 	}
 	
-	public synchronized void update(IDiagnosticConsumer diagnosticsConsumer) {
+	public synchronized void update(@NonNull IDiagnosticConsumer diagnosticsConsumer) {
 //		printDiagnostic("CS2Pivot.update start", false, 0);
 		Map<String, Element> oldCSI2Pivot = cs2PivotMapping.getMapping();
 		Set<String> newCSIs = cs2PivotMapping.computeCSIs(cs2pivotResourceMap.keySet());

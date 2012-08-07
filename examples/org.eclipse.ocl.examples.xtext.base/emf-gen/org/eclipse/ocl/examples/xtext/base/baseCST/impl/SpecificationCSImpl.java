@@ -21,6 +21,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.SpecificationCS;
@@ -183,7 +184,7 @@ public class SpecificationCSImpl extends ModelElementCSImpl implements Specifica
 	}
 
 	@Override
-	public <R> R accept(BaseCSVisitor<R> visitor) {
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return visitor.visitSpecificationCS(this);
 	}
 

@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
@@ -42,31 +44,32 @@ public class BaseReferenceVisitor extends AbstractExtendingVisitor<ElementCS, Pi
 {
 	public static final Logger logger = Logger.getLogger(BaseReferenceVisitor.class);
 
-	public BaseReferenceVisitor(Pivot2CSConversion context) {
+	public BaseReferenceVisitor(@NonNull Pivot2CSConversion context) {
 		super(context);		// NB this class is stateless since separate instances exist per CS package
 	}
 
 	@Override
-	public ElementCS visitClass(org.eclipse.ocl.examples.pivot.Class object) {
+	public ElementCS visitClass(@NonNull org.eclipse.ocl.examples.pivot.Class object) {
 		if (object.eContainingFeature() == PivotPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_ACTUAL) {
 			WildcardTypeRefCS csRef = BaseCSTFactory.eINSTANCE.createWildcardTypeRefCS();
 			csRef.setPivot(object);
 			return csRef;
 		}
 		org.eclipse.ocl.examples.pivot.Class scopeClass = context.getScope();
-		org.eclipse.ocl.examples.pivot.Package scopePackage = PivotUtil.getPackage(scopeClass);
+		org.eclipse.ocl.examples.pivot.Package scopePackage = scopeClass != null ? PivotUtil.getPackage(scopeClass) : null;
 		TypedTypeRefCS csRef = BaseCSTFactory.eINSTANCE.createTypedTypeRefCS();
 		Type type = PivotUtil.getUnspecializedTemplateableElement(object);
 		PathNameCS csPathName = csRef.getPathName();
 		if (csPathName == null) {
-			csPathName = BaseCSTFactory.eINSTANCE.createPathNameCS();
+			@SuppressWarnings("null") @NonNull PathNameCS csPathName2 = BaseCSTFactory.eINSTANCE.createPathNameCS();
+			csPathName = csPathName2;
 			csRef.setPathName(csPathName);
 		}
 		context.refreshPathName(csPathName, type, context.getScope());
 		csRef.setPivot(type);		// FIXME object ??
 		if (!(type instanceof PrimitiveType)) {
 			org.eclipse.ocl.examples.pivot.Package objectPackage = PivotUtil.getPackage(type);
-			if (objectPackage.eResource() != scopePackage.eResource()) {
+			if ((objectPackage != null) && (scopePackage != null) && objectPackage.eResource() != scopePackage.eResource()) {
 				context.importPackage(objectPackage);
 			}
 		}
@@ -82,11 +85,14 @@ public class BaseReferenceVisitor extends AbstractExtendingVisitor<ElementCS, Pi
 			List<TemplateParameterSubstitutionCS> csParameterSubstitutions = new ArrayList<TemplateParameterSubstitutionCS>();
 			for (TemplateBinding templateBinding : templateBindings) {
 				for (TemplateParameterSubstitution templateParameterSubstitution : templateBinding.getParameterSubstitution()) {
-					TemplateParameterSubstitutionCS csTemplateParameterSubstitution = BaseCSTFactory.eINSTANCE.createTemplateParameterSubstitutionCS();
-					TypeRefCS csParameterable = context.visitReference(TypeRefCS.class, templateParameterSubstitution.getActual());
-					csTemplateParameterSubstitution.setOwnedActualParameter(csParameterable);
-					csParameterSubstitutions.add(csTemplateParameterSubstitution);
-					csTemplateParameterSubstitution.setPivot(templateParameterSubstitution);
+					ParameterableElement actual = templateParameterSubstitution.getActual();
+					if (actual != null) {
+						TemplateParameterSubstitutionCS csTemplateParameterSubstitution = BaseCSTFactory.eINSTANCE.createTemplateParameterSubstitutionCS();
+						TypeRefCS csParameterable = context.visitReference(TypeRefCS.class, actual);
+						csTemplateParameterSubstitution.setOwnedActualParameter(csParameterable);
+						csParameterSubstitutions.add(csTemplateParameterSubstitution);
+						csTemplateParameterSubstitution.setPivot(templateParameterSubstitution);
+					}
 				}
 			}
 			context.refreshList(csTemplateBinding.getOwnedParameterSubstitution(), csParameterSubstitutions);
@@ -103,7 +109,7 @@ public class BaseReferenceVisitor extends AbstractExtendingVisitor<ElementCS, Pi
 */	}
 
 	@Override
-	public ElementCS visitPrimitiveType(PrimitiveType object) {
+	public ElementCS visitPrimitiveType(@NonNull PrimitiveType object) {
 		PrimitiveTypeRefCS csRef = BaseCSTFactory.eINSTANCE.createPrimitiveTypeRefCS();
 //		Type type = PivotUtil.getUnspecializedTemplateableElement(object);
 //		csRef.setType(type);
@@ -112,7 +118,7 @@ public class BaseReferenceVisitor extends AbstractExtendingVisitor<ElementCS, Pi
 		return csRef;
 	}
 
-	public ElementCS visiting(Visitable visitable) {
+	public ElementCS visiting(@NonNull Visitable visitable) {
 		throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for Pivot2CS Reference pass");
 	}
 }

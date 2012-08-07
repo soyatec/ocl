@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateSignatureCS;
@@ -225,7 +226,7 @@ public abstract class TemplateParameterCSImpl extends NamedElementCSImpl impleme
 	}
 
 	@Override
-	public <R> R accept(BaseCSVisitor<R> visitor) {
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return visitor.visitTemplateParameterCS(this);
 	}
 } //TemplateParameterCSImpl

@@ -582,7 +582,7 @@ public class PivotUtil extends DomainUtil
 		return bindings;
 	}
 
-	public static Attribution getAttribution(EObject eObject) {
+	public static @Nullable Attribution getAttribution(@NonNull EObject eObject) {
 		if (eObject == null) {
 			logger.warn("getAttribution for null");
 			return null;

@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.EnumerationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.EnumerationLiteralCS;
@@ -173,7 +174,7 @@ public class EnumerationCSImpl extends ClassifierCSImpl implements EnumerationCS
 	}
 
 	@Override
-	public <R> R accept(BaseCSVisitor<R> visitor) {
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return visitor.visitEnumerationCS(this);
 	}
 } //EnumCSImpl

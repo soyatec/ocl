@@ -430,7 +430,7 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 
 	@Override
 	public Continuation<?> visitLibraryCS(LibraryCS csElement) {
-		org.eclipse.ocl.examples.pivot.Package pPackage = csElement.getPackage();						// Resolve the proxy to perform the import.
+		Namespace pPackage = csElement.getPackage();						// Resolve the proxy to perform the import.
 		if ((pPackage != null) && !pPackage.eIsProxy()) {
 			context.installPivotUsage(csElement, pPackage);
 		}

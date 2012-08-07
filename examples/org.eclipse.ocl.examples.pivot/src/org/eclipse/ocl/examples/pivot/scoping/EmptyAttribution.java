@@ -16,8 +16,10 @@
  */
 package org.eclipse.ocl.examples.pivot.scoping;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 
 public class EmptyAttribution extends AbstractAttribution
 {
-	public static final EmptyAttribution INSTANCE = new EmptyAttribution();
+	public static final @NonNull EmptyAttribution INSTANCE = new EmptyAttribution();
 }

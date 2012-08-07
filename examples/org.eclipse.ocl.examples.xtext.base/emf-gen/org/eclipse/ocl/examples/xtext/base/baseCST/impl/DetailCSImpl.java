@@ -22,6 +22,7 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.DetailCS;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
@@ -157,7 +158,7 @@ public class DetailCSImpl extends NamedElementCSImpl implements DetailCS {
 	}
 
 	@Override
-	public <R> R accept(BaseCSVisitor<R> visitor) {
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return visitor.visitDetailCS(this);
 	}
 } //DetailCSImpl

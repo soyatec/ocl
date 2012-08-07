@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.xtext.base.baseCST.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.EnumerationLiteralCS;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
@@ -170,7 +171,7 @@ public class EnumerationLiteralCSImpl extends NamedElementCSImpl implements Enum
 	}
 
 	@Override
-	public <R> R accept(BaseCSVisitor<R> visitor) {
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return visitor.visitEnumerationLiteralCS(this);
 	}
 } //EnumLiteralCSImpl

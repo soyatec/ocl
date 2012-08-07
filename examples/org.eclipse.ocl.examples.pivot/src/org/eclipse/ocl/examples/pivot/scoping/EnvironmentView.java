@@ -102,8 +102,9 @@ public class EnvironmentView
 		this.name = name;
 	}
 
-	public boolean accepts(@NonNull EClass eClass) {
-		return PivotUtil.conformsTo(requiredType, eClass);
+	public boolean accepts(/*@NonNull*/ EClass eClass) {
+		@SuppressWarnings("null") @NonNull EClass eClass2 = eClass;
+		return PivotUtil.conformsTo(requiredType, eClass2);
 	}
 
 	public void addAllEnumerationLiterals(org.eclipse.ocl.examples.pivot.Enumeration pivot) {
@@ -465,7 +466,8 @@ public class EnvironmentView
     	}
 		String name = getName();
 		if (name != null) {
-			URI uri = URI.createURI(name).resolve(baseURI);
+			@SuppressWarnings("null")
+			@NonNull URI uri = URI.createURI(name).resolve(baseURI);
 			try {
 				Element importedElement = metaModelManager.loadResource(uri, null, null);				
 				if (importedElement != null) {
@@ -775,8 +777,8 @@ public class EnvironmentView
 		templateBindings.put(eObject, bindings);
 	}
 
-	public void setRequiredType(@NonNull EClassifier requiredType) {
-		assert PivotUtil.conformsTo(reference.getEType(), requiredType);
+	public void setRequiredType(@Nullable EClassifier requiredType) {
+		assert (requiredType == null) || PivotUtil.conformsTo(reference.getEType(), requiredType);
 		this.requiredType = requiredType;
 	}
 

@@ -25,9 +25,11 @@
  */
 package	org.eclipse.ocl.examples.xtext.oclinecore.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  */
 public interface DecorableOCLinEcoreCSVisitor<R> extends OCLinEcoreCSVisitor<R>, org.eclipse.ocl.examples.xtext.essentialocl.util.DecorableEssentialOCLCSVisitor<R>
 {
-	void setUndecoratedVisitor(org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor<R> visitor);
+	void setUndecoratedVisitor(@NonNull org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor<R> visitor);
 }

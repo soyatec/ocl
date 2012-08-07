@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.base.attributes;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -28,7 +29,7 @@ public class PackageCSAttribution extends AbstractAttribution
 	public static final PackageCSAttribution INSTANCE = new PackageCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		PackageCS targetElement = (PackageCS)target;
 		org.eclipse.ocl.examples.pivot.Package pivot = PivotUtil.getPivot(org.eclipse.ocl.examples.pivot.Package.class, targetElement);
 		if (pivot != null) {

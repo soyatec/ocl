@@ -26,6 +26,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerListener;
@@ -41,10 +42,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
  */
 public class CSI2PivotMapping extends AdapterImpl implements MetaModelManagerListener
 {
-	public static CSI2PivotMapping getAdapter(MetaModelManager metaModelManager) {
-		if (metaModelManager == null) {
-			return null;
-		}
+	public static @NonNull CSI2PivotMapping getAdapter(@NonNull MetaModelManager metaModelManager) {
 		List<Adapter> eAdapters = metaModelManager.getPivotResourceSet().eAdapters();
 		for (Adapter adapter : eAdapters) {
 			if (adapter instanceof CSI2PivotMapping) {
@@ -131,7 +129,7 @@ public class CSI2PivotMapping extends AdapterImpl implements MetaModelManagerLis
 		return type == CSI2PivotMapping.class;
 	}
 
-	public void metaModelManagerDisposed(MetaModelManager metaModelManager) {
+	public void metaModelManagerDisposed(@NonNull MetaModelManager metaModelManager) {
 		clear();
 	}
 

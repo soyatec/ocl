@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.xtext.base.scoping;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.common.utils.TracingOption;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
@@ -46,12 +47,18 @@ public class BaseScopeProvider extends AbstractDeclarativeScopeProvider
 	@Inject
 	private IGlobalScopeProvider globalScopeProvider;
 
-	public static final TracingOption LOOKUP = new TracingOption(
+	public static final @NonNull TracingOption LOOKUP = new TracingOption(
 		"org.eclipse.ocl.examples.xtext.base", "lookup"); //$NON-NLS-1$//$NON-NLS-2$
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
+		if (context == null) {
+			return IScope.NULLSCOPE;
+		}
 		Resource csResource = context.eResource();
+		if (csResource == null) {
+			return IScope.NULLSCOPE;
+		}
 		if (reference.getEReferenceType().getEPackage().getNsURI().equals(TypesPackage.eNS_URI)) {
 			return globalScopeProvider.getScope(csResource, reference, null);
 		}

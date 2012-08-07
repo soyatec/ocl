@@ -1460,6 +1460,7 @@ public class PropertyImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("null")
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID)

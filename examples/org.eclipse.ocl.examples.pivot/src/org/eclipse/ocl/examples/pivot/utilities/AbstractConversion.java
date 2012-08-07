@@ -23,16 +23,17 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 public abstract class AbstractConversion
 {
 	public static interface Predicate<T extends EObject>
 	{
-		boolean filter(T element);
+		boolean filter(@NonNull T element);
 	}	
 
-	protected static <T> T basicGet(EObject eObject, EAttribute eFeature, Class<T> resultClass) {
+	protected static <T> T basicGet(@NonNull EObject eObject, @NonNull EAttribute eFeature, @NonNull Class<T> resultClass) {
 		if (!eObject.eIsSet(eFeature)) {
 			return null;
 		}
@@ -41,7 +42,7 @@ public abstract class AbstractConversion
 		return result;
 	}
 
-	public static EPackage getEPackage(EObject eObject) {
+	public static @Nullable EPackage getEPackage(@Nullable EObject eObject) {
 		for (; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof EPackage) {
 				return (EPackage)eObject;
@@ -50,7 +51,7 @@ public abstract class AbstractConversion
 		return null;
 	}
 
-	public static boolean isId(String name) {
+	public static boolean isId(@NonNull String name) {
 		int n = name.length();
 		if (n == 0)
 			return false;
@@ -72,7 +73,7 @@ public abstract class AbstractConversion
 		return metaModelManager;
 	}
 
-	public <T extends EObject> void refreshList(@NonNull List<? super T> oldElements, @NonNull List<? extends T> newElements) {
+	public <T extends EObject> void refreshList(/*@NonNull*/ List<? super T> oldElements, /*@NonNull*/ List<? extends T> newElements) {
 		PivotUtil.refreshList(oldElements, newElements);
 	}
 

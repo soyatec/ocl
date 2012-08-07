@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.xtext.base.scoping;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainNamespace;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -31,16 +32,22 @@ import org.eclipse.ocl.examples.xtext.base.attributes.RootCSAttribution;
 public abstract class AbstractRootCSAttribution extends AbstractAttribution implements RootCSAttribution
 {
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 		if (environmentView.accepts(PivotPackage.Literals.TYPE)) {
 			for (Type type : metaModelManager.getGlobalTypes()) {
-				environmentView.addNamedElement(type);
+				if (type != null) {
+					environmentView.addNamedElement(type);
+				}
 			}
 		}
 		if (environmentView.accepts(PivotPackage.Literals.NAMESPACE)) {
 			for (Map.Entry<String, DomainNamespace> entry : metaModelManager.getGlobalNamespaces()) {
-				environmentView.addElement(entry.getKey(), entry.getValue());
+				String key = entry.getKey();
+				DomainNamespace value = entry.getValue();
+				if ((key != null) && (value != null)) {
+					environmentView.addElement(key, value);
+				}
 			}
 		}
 		return super.computeLookup(target, environmentView, scopeView);

@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
@@ -77,24 +78,24 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 {	
 	private static final Logger logger = Logger.getLogger(Pivot2CSConversion.class);
 
-	protected final Pivot2CS converter;
-	protected final BaseDeclarationVisitor defaultDeclarationVisitor;
-	protected final BaseReferenceVisitor defaultReferenceVisitor;
+	protected final @NonNull Pivot2CS converter;
+	protected final @NonNull BaseDeclarationVisitor defaultDeclarationVisitor;
+	protected final @NonNull BaseReferenceVisitor defaultReferenceVisitor;
 	
 	private org.eclipse.ocl.examples.pivot.Class scope = null;
 
-	private final Map<EClass, BaseDeclarationVisitor> declarationVisitorMap = new HashMap<EClass, BaseDeclarationVisitor>();
-	private final Map<EClass, BaseReferenceVisitor> referenceVisitorMap = new HashMap<EClass, BaseReferenceVisitor>();
+	private final @NonNull Map<EClass, BaseDeclarationVisitor> declarationVisitorMap = new HashMap<EClass, BaseDeclarationVisitor>();
+	private final @NonNull Map<EClass, BaseReferenceVisitor> referenceVisitorMap = new HashMap<EClass, BaseReferenceVisitor>();
 	private Set<org.eclipse.ocl.examples.pivot.Package> importedPackages = null;
 	
-	public Pivot2CSConversion(Pivot2CS converter) {
+	public Pivot2CSConversion(@NonNull Pivot2CS converter) {
 		super(converter.getMetaModelManager());
 		this.converter = converter;
 		this.defaultDeclarationVisitor = converter.createDefaultDeclarationVisitor(this);
 		this.defaultReferenceVisitor = converter.createDefaultReferenceVisitor(this);
 	}
 
-	protected void addBooleanQualifier(List<String> qualifiers, DetailCS csDetail, String csString) {
+	protected void addBooleanQualifier(@NonNull List<String> qualifiers, @NonNull DetailCS csDetail, @NonNull String csString) {
 		if ((csDetail.getValue().size() == 1) && Boolean.valueOf(csDetail.getValue().get(0))) {
 			qualifiers.add(csString);
 		}
@@ -103,29 +104,34 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		}
 	}
 
-	protected void createImports(Resource csResource, Set<org.eclipse.ocl.examples.pivot.Package> importedPackages) {
+	protected void createImports(@NonNull Resource csResource, @NonNull Set<org.eclipse.ocl.examples.pivot.Package> importedPackages) {
 		AliasAnalysis.dispose(csResource);			// Force reanalysis
 		MetaModelManager metaModelManager = ElementUtil.findMetaModelManager(csResource);
+		if (metaModelManager == null) {
+			throw new IllegalStateException("No MetaModelManager");
+		}
 		URI csURI = csResource.getURI();
 		RootCS documentCS = (RootCS) csResource.getContents().get(0);
 		List<ImportCS> imports = new ArrayList<ImportCS>();
 		for (org.eclipse.ocl.examples.pivot.Package importedPackage : importedPackages) {
-			Package pivotPackage = metaModelManager.getPackageServer(importedPackage).getPivotPackage();
-//			ModelElementCS csElement = createMap.get(importedPackage);
-//			if ((csElement != null) && (csElement.eResource() == xtextResource)) {
-//				continue;		// Don't import defined packages
-//			}
-			ImportCS importCS = BaseCSTFactory.eINSTANCE.createImportCS();
-			AliasAnalysis aliasAnalysis = AliasAnalysis.getAdapter(csResource, metaModelManager);
-			String alias = aliasAnalysis.getAlias(pivotPackage);
-			importCS.setName(alias);
-			importCS.setNamespace(pivotPackage);
-			importCS.setPivot(pivotPackage);
-			EObject eObject = pivotPackage.getETarget();
-			URI fullURI = EcoreUtil.getURI(eObject != null ? eObject : pivotPackage);
-			URI deresolvedURI = fullURI.deresolve(csURI, true, true, false);
-			importCS.setUri(deresolvedURI.toString());
-			imports.add(importCS);
+			if (importedPackage != null) {
+				Package pivotPackage = metaModelManager.getPackageServer(importedPackage).getPivotPackage();
+	//			ModelElementCS csElement = createMap.get(importedPackage);
+	//			if ((csElement != null) && (csElement.eResource() == xtextResource)) {
+	//				continue;		// Don't import defined packages
+	//			}
+				ImportCS importCS = BaseCSTFactory.eINSTANCE.createImportCS();
+				AliasAnalysis aliasAnalysis = AliasAnalysis.getAdapter(csResource, metaModelManager);
+				String alias = aliasAnalysis.getAlias(pivotPackage);
+				importCS.setName(alias);
+				importCS.setNamespace(pivotPackage);
+				importCS.setPivot(pivotPackage);
+				EObject eObject = pivotPackage.getETarget();
+				URI fullURI = EcoreUtil.getURI(eObject != null ? eObject : pivotPackage);
+				URI deresolvedURI = fullURI.deresolve(csURI, true, true, false);
+				importCS.setUri(deresolvedURI.toString());
+				imports.add(importCS);
+			}
 		}
 		Collections.sort(imports, new Comparator<ImportCS>()
 		{
@@ -145,15 +151,12 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		documentCS.getOwnedImport().addAll(imports);
 	}
 
-	public BaseDeclarationVisitor getDeclarationVisitor(EClass eClass) {
+	public @Nullable BaseDeclarationVisitor getDeclarationVisitor(@NonNull EClass eClass) {
 		BaseDeclarationVisitor declarationVisitor = declarationVisitorMap.get(eClass);
 		if ((declarationVisitor == null) && !declarationVisitorMap.containsKey(eClass)) {
 			Factory factory = converter.getFactory(eClass);
 			if (factory != null) {
 				declarationVisitor = factory.createDeclarationVisitor(this);
-				if (declarationVisitor == null) {
-					logger.error("No Visitor created for " + eClass.getName());
-				}
 			}
 			else {
 				declarationVisitor = defaultDeclarationVisitor;
@@ -163,15 +166,12 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		return declarationVisitor;
 	}
 
-	public BaseReferenceVisitor getReferenceVisitor(EClass eClass) {
+	public @Nullable BaseReferenceVisitor getReferenceVisitor(@NonNull EClass eClass) {
 		BaseReferenceVisitor referenceVisitor = referenceVisitorMap.get(eClass);
 		if ((referenceVisitor == null) && !referenceVisitorMap.containsKey(eClass)) {
 			Factory factory = converter.getFactory(eClass);
 			if (factory != null) {
 				referenceVisitor = factory.createReferenceVisitor(this);
-				if (referenceVisitor == null) {
-					logger.error("No Visitor created for " + eClass.getName());
-				}
 			}
 			else {
 				referenceVisitor = defaultReferenceVisitor;
@@ -208,7 +208,7 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		importedPackages.add(importPackage);
 	}
 
-	protected <T extends ClassifierCS> T refreshClassifier(@NonNull Class<T> csClass, @NonNull EClass csEClass, @NonNull Type object) {
+	protected <T extends ClassifierCS> T refreshClassifier(@NonNull Class<T> csClass, /*@NonNull*/ EClass csEClass, @NonNull Type object) {
 		T csElement = refreshNamedElement(csClass, csEClass, object);
 		refreshList(csElement.getOwnedConstraint(), visitDeclarations(ConstraintCS.class, object.getOwnedRule(), null));
 		TemplateSignature ownedTemplateSignature = object.getOwnedTemplateSignature();
@@ -224,7 +224,7 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		return csElement;
 	}
 
-	public <T extends ModelElementCS> T refreshElement(@NonNull Class<T> csClass, @NonNull EClass csEClass, @NonNull Element object) {
+	public <T extends ModelElementCS> T refreshElement(@NonNull Class<T> csClass, /*@NonNull*/ EClass csEClass, @NonNull Element object) {
 		assert csClass == csEClass.getInstanceClass();
 		EFactory eFactoryInstance = csEClass.getEPackage().getEFactoryInstance();
 		ModelElementCS csElement = (ModelElementCS) eFactoryInstance.create(csEClass);
@@ -237,7 +237,7 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		return castElement;
 	}
 
-	public <T extends NamedElementCS> T refreshNamedElement(Class<T> csClass, EClass csEClass, NamedElement object) {
+	public <T extends NamedElementCS> T refreshNamedElement(@NonNull Class<T> csClass, /*@NonNull */EClass csEClass, @NonNull NamedElement object) {
 		T csElement = refreshElement(csClass, csEClass, object);
 		String name = object.getName();
 		csElement.setName(name);
@@ -245,7 +245,7 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		return csElement;
 	}
 
-	public void refreshPathName(PathNameCS csPathName, Element element, EObject scope) {
+	public void refreshPathName(@NonNull PathNameCS csPathName, @NonNull Element element, EObject scope) {
 		Element primaryElement = metaModelManager.getPrimaryElement(element);
 		ElementUtil.setPathName(csPathName, primaryElement, scope);
 	}
@@ -293,7 +293,7 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		}
 	}
 
-	public <T extends StructuralFeatureCS> T refreshStructuralFeature(Class<T> csClass, EClass csEClass, Property object) {
+	public <T extends StructuralFeatureCS> T refreshStructuralFeature(@NonNull Class<T> csClass, /*@NonNull */EClass csEClass, @NonNull Property object) {
 		T csElement = refreshTypedMultiplicityElement(csClass, csEClass, object);
 		refreshQualifiers(csElement.getQualifier(), "derived", object.isDerived());
 		refreshQualifiers(csElement.getQualifier(), "readonly", object.isReadOnly());
@@ -310,7 +310,7 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		return csElement;
 	}
 	
-	public <T extends TypedElementCS> T refreshTypedElement(Class<T> csClass, EClass csEClass, TypedElement object) {
+	public <T extends TypedElementCS> T refreshTypedElement(@NonNull Class<T> csClass, /*@NonNull */EClass csEClass, @NonNull TypedElement object) {
 		T csElement = refreshNamedElement(csClass, csEClass, object);
 		Type type = object.getType();
 		if (type != null) {
@@ -325,7 +325,7 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		return csElement;
 	}
 
-	public <T extends TypedElementCS> T refreshTypedMultiplicityElement(Class<T> csClass, EClass csEClass, TypedMultiplicityElement object) {
+	public <T extends TypedElementCS> T refreshTypedMultiplicityElement(@NonNull Class<T> csClass, /*@NonNull */EClass csEClass, @NonNull TypedMultiplicityElement object) {
 		T csElement = refreshTypedElement(csClass, csEClass, object);
 		TypedRefCS csTypeRef = csElement.getOwnedType();
 		if (csTypeRef != null) {
@@ -386,28 +386,38 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 	 * Sequence the update passes to make the pivot match the CS.
 	 * @param csResources 
 	 */
-	public void update(Collection<? extends Resource> csResources) {
+	public void update(@NonNull Collection<? extends Resource> csResources) {
 		Map<Resource, Set<org.eclipse.ocl.examples.pivot.Package>> imports = new HashMap<Resource, Set<org.eclipse.ocl.examples.pivot.Package>>();
 		//
 		//	Perform the pre-order traversal to create the CS for each declaration. A
 		//	separate reference pass is not needed since references are to the pivot model.
 		//
 		for (Resource csResource : csResources) {
-			importedPackages = new HashSet<org.eclipse.ocl.examples.pivot.Package>();
-			Resource pivotResource = converter.getPivotResource(csResource);
-			List<PackageCS> list = visitDeclarations(PackageCS.class, pivotResource.getContents(), null);
-			refreshList(csResource.getContents(), list);
-			imports.put(csResource, importedPackages);
+			if (csResource != null) {
+				importedPackages = new HashSet<org.eclipse.ocl.examples.pivot.Package>();
+				Resource pivotResource = converter.getPivotResource(csResource);
+				if (pivotResource != null) {
+					List<PackageCS> list = visitDeclarations(PackageCS.class, pivotResource.getContents(), null);
+					refreshList(csResource.getContents(), list);
+					imports.put(csResource, importedPackages);
+				}
+			}
 		}
 		for (Resource csResource : csResources) {
-			createImports(csResource, imports.get(csResource));
+			if (csResource != null) {
+				Set<Package> importedPackages2 = imports.get(csResource);
+				if (importedPackages2 != null) {
+					createImports(csResource, importedPackages2);
+				}
+			}
 		}
 	}
 
-	public <T extends ElementCS> T visitDeclaration(Class<T> csClass, EObject eObject) {
-		BaseDeclarationVisitor declarationVisitor = getDeclarationVisitor(eObject.eClass());
+	public @Nullable <T extends ElementCS> T visitDeclaration(@NonNull Class<T> csClass, @NonNull EObject eObject) {
+		@SuppressWarnings("null") @NonNull EClass eClass = eObject.eClass();
+		BaseDeclarationVisitor declarationVisitor = getDeclarationVisitor(eClass);
 		if ((declarationVisitor == null) || !(eObject instanceof Visitable)) {
-			logger.warn("Unsupported declaration " + eObject.eClass().getName());
+			logger.warn("Unsupported declaration " + eClass.getName());
 			return null;
 		}
 		ElementCS csElement = ((Visitable)eObject).accept(declarationVisitor);
@@ -416,10 +426,10 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		return castElement;
 	}
 
-	public <T extends ElementCS, V extends EObject> List<T> visitDeclarations(Class<T> csClass, List<V> eObjects, Pivot2CS.Predicate<V> predicate) {
+	public @NonNull <T extends ElementCS, V extends EObject> List<T> visitDeclarations(@NonNull Class<T> csClass, /*@NonNull*/ List<V> eObjects, @Nullable Pivot2CS.Predicate<V> predicate) {
 		List<T> csElements = new ArrayList<T>();
 		for (V eObject : eObjects) {
-			if ((predicate == null) || predicate.filter(eObject)) {
+			if ((eObject != null) && ((predicate == null) || predicate.filter(eObject))) {
 				T csElement = visitDeclaration(csClass, eObject);
 				if (csElement != null) {
 					csElements.add(csElement);
@@ -429,8 +439,9 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		return csElements;
 	}
 
-	public <T extends ElementCS> T visitReference(Class<T> csClass, EObject eObject) {
-		BaseReferenceVisitor referenceVisitor = getReferenceVisitor(eObject.eClass());
+	public @Nullable <T extends ElementCS> T visitReference(@NonNull Class<T> csClass, @NonNull EObject eObject) {
+		@SuppressWarnings("null") @NonNull EClass eClass = eObject.eClass();
+		BaseReferenceVisitor referenceVisitor = getReferenceVisitor(eClass);
 		if ((referenceVisitor == null) || !(eObject instanceof Visitable)) {
 			logger.warn("Unsupported reference " + eObject.eClass().getName());
 			return null;
@@ -448,10 +459,10 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		return castElement;
 	}
 
-	public <T extends ElementCS, V extends EObject> List<T> visitReferences(Class<T> csClass, List<? extends V> eObjects, Pivot2CS.Predicate<V> predicate) {
+	public @NonNull <T extends ElementCS, V extends EObject> List<T> visitReferences(@NonNull Class<T> csClass, /*@NonNull*/ List<? extends V> eObjects, @Nullable Pivot2CS.Predicate<V> predicate) {
 		List<T> csElements = new ArrayList<T>();
 		for (V eObject : eObjects) {
-			if ((predicate == null) || predicate.filter(eObject)) {
+			if ((eObject != null) && ((predicate == null) || predicate.filter(eObject))) {
 				T csElement = visitReference(csClass, eObject);
 				if (csElement != null) {
 					csElements.add(csElement);

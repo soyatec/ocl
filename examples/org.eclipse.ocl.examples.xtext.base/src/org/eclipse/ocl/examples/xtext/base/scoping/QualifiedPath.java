@@ -130,19 +130,19 @@ public class QualifiedPath extends QualifiedName
 			}
 			if (firstElement instanceof org.eclipse.ocl.examples.pivot.Package) {
 				Resource elementResource = firstElement.eResource();
-				if ((elementResource != csResource) && (elementResource != asResource)) {
+				if ((csResource != null) && (elementResource != csResource) && (elementResource != asResource)) {
 					AliasAnalysis adapter = AliasAnalysis.getAdapter(csResource);
-					if (adapter != null) {
-						if (segmentCount == 1) {
-							String alias = adapter.getAlias(firstElement);
-							if (alias != null) {
-								segments.add(alias);
-								segments.add(getFirstSegment());
-							}
+					if (segmentCount == 1) {
+						String alias = adapter.getAlias(firstElement);
+						if (alias != null) {
+							segments.add(alias);
+							segments.add(getFirstSegment());
 						}
-						else {
-							for (int i = segmentCount - 2; i >= 0; i--) {
-								EObject element = pathElements.get(i).getElement();
+					}
+					else {
+						for (int i = segmentCount - 2; i >= 0; i--) {
+							EObject element = pathElements.get(i).getElement();
+							if (element != null) {
 								String alias = adapter.getAlias(element);
 								if (alias != null) {
 									segments.add(alias);

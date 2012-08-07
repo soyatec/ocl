@@ -85,7 +85,9 @@ public class NavigationOperatorCSAttribution extends AbstractAttribution
 		}
 		else {
 			ElementCS parent = targetElement.getLogicalParent();
-			BaseScopeView.computeLookups(environmentView, parent, target, PivotPackage.Literals.CALL_EXP__SOURCE, null);
+			if (parent != null) {
+				BaseScopeView.computeLookups(environmentView, parent, target, PivotPackage.Literals.CALL_EXP__SOURCE, null);
+			}
 			return null;
 		}
 	}

@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.xtext.base.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -28,7 +29,7 @@ public class TemplateParameterSubstitutionCSAttribution extends AbstractAttribut
 	public static final TemplateParameterSubstitutionCSAttribution INSTANCE = new TemplateParameterSubstitutionCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 //		TemplateParameterSubstitutionCS targetElement = (TemplateParameterSubstitutionCS)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
 		/*if (containmentFeature == BaseCSTPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION_CS__FORMAL_TEMPLATE_PARAMETER) {

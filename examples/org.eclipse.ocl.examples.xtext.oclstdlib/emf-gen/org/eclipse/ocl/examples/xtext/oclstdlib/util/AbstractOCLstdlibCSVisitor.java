@@ -25,6 +25,8 @@
  */
 package	org.eclipse.ocl.examples.xtext.oclstdlib.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  */
 public abstract class AbstractOCLstdlibCSVisitor<R, C>
@@ -36,7 +38,7 @@ public abstract class AbstractOCLstdlibCSVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractOCLstdlibCSVisitor(C context) {
+	protected AbstractOCLstdlibCSVisitor(@NonNull C context) {
 	    super(context);
 	}
 }

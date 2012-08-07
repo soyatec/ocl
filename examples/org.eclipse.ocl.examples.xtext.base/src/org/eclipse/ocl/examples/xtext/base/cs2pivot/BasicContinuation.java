@@ -22,6 +22,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2Moniker;
@@ -39,15 +40,15 @@ public abstract class BasicContinuation<T> implements Continuation<T>
 {
 	static final Logger logger = Logger.getLogger(BasicContinuation.class);
 
-	protected final CS2PivotConversion context;
+	protected final @NonNull CS2PivotConversion context;
 	protected final Element pivotParent;
 	protected final EStructuralFeature pivotFeature;	
-	protected final T csElement;
+	protected final @NonNull T csElement;
 	protected final Dependency[] dependencies;
 	
-	public BasicContinuation(CS2PivotConversion context,
+	public BasicContinuation(@NonNull CS2PivotConversion context,
 			Element pivotParent, EStructuralFeature pivotFeature,
-			T csElement, Dependency... dependencies) {
+			@NonNull T csElement, Dependency... dependencies) {
 		this.context = context;
 		this.pivotParent = pivotParent;
 		this.pivotFeature = pivotFeature;
@@ -56,7 +57,7 @@ public abstract class BasicContinuation<T> implements Continuation<T>
 		assert csElement != null;
 	}
 
-	public void addError(String message) {
+	public void addError(@NonNull String message) {
 		if (csElement instanceof ModelElementCS) {
 			ModelElementCS csModelElement = (ModelElementCS) csElement;
 			INode node = NodeModelUtils.getNode(csModelElement);
@@ -68,7 +69,7 @@ public abstract class BasicContinuation<T> implements Continuation<T>
 		}
 	}
 	
-	public void addTo(List<BasicContinuation<?>> simpleContinuations) {
+	public void addTo(@NonNull List<BasicContinuation<?>> simpleContinuations) {
 		simpleContinuations.add(this);
 	}
 

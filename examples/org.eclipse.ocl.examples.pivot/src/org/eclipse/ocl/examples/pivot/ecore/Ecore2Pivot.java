@@ -87,9 +87,11 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 			return null;
 		}
 
-		public @Nullable Element importFromResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource ecoreResource, @Nullable String uriFragment) {
+		public @Nullable Element importFromResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource ecoreResource, @Nullable URI uri) {
 			Ecore2Pivot conversion = getAdapter(ecoreResource, metaModelManager);
+			conversion.setEcoreURI(uri);
 			Root pivotRoot = conversion.getPivotRoot();
+			String uriFragment = uri != null ? uri.fragment() : null;
 			if (uriFragment == null) {
 				return pivotRoot;
 			}
@@ -215,6 +217,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	protected final Ecore2PivotDeclarationSwitch declarationPass = new Ecore2PivotDeclarationSwitch(this);	
 	protected final Ecore2PivotReferenceSwitch referencePass = new Ecore2PivotReferenceSwitch(this);
 	private HashMap<EClassifier, Type> ecore2PivotMap = null;
+	private URI ecoreURI = null;
 	
 	public Ecore2Pivot(@Nullable Resource ecoreResource, @Nullable MetaModelManager metaModelManager) {
 		super(metaModelManager != null ? metaModelManager : new MetaModelManager());
@@ -419,7 +422,8 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 //					metaModelManager.installAs(nsURI, OCLstdlibTables.PACKAGE);
 				}
 			}
-			Root pivotRoot2 = pivotRoot = metaModelManager.createRoot(pivotURI.lastSegment(), ecoreResource.getURI().toString());
+			URI uri = ecoreURI != null ? ecoreURI : ecoreResource.getURI();
+			Root pivotRoot2 = pivotRoot = metaModelManager.createRoot(pivotURI.lastSegment(), uri.toString());
 			update(pivotResource, ecoreContents);
 //		}
 //		catch (Exception e) {
@@ -629,6 +633,10 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		}
 		pivotElement.setName(name);		
 		return pivotElement;
+	}
+
+	public void setEcoreURI(URI ecoreURI) {
+		this.ecoreURI = ecoreURI;
 	}
 
 	public void setTarget(Notifier newTarget) {

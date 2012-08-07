@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ClassifierCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
@@ -524,7 +525,7 @@ public abstract class ClassifierCSImpl extends NamedElementCSImpl implements Cla
 	}
 
 	@Override
-	public <R> R accept(BaseCSVisitor<R> visitor) {
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return visitor.visitClassifierCS(this);
 	}
 } //ClassifierCSImpl

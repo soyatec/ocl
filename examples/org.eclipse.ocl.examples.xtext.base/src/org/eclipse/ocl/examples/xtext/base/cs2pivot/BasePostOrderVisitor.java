@@ -20,7 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Detail;
@@ -73,7 +76,7 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 {
 	public static class ConstraintCSCompletion extends SingleContinuation<ConstraintCS>
 	{
-		public ConstraintCSCompletion(CS2PivotConversion context, ConstraintCS csElement) {
+		public ConstraintCSCompletion(@NonNull CS2PivotConversion context, @NonNull ConstraintCS csElement) {
 			super(context, null, null, csElement);
 		}
 
@@ -84,11 +87,11 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 		}
 	}
 	
-	public BasePostOrderVisitor(CS2PivotConversion context) {
+	public BasePostOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 
-	protected TemplateableElementCS getTemplateableElementContainer(ElementCS csElement) {
+	protected @Nullable TemplateableElementCS getTemplateableElementContainer(@NonNull ElementCS csElement) {
 		for (EObject eObject = csElement; eObject != null; eObject = eObject.eContainer())
 			if (eObject instanceof TemplateableElementCS) {
 				return (TemplateableElementCS) eObject;
@@ -96,8 +99,8 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 		return null;
 	}
 
-	protected <CST extends ModelElementCS, P extends NamedElement> BasicContinuation<?> refreshList(NamedElement pivotParent, EStructuralFeature pivotFeature,
-		final Class<P> pivotClass, final List<P> pivotElements, List<CST> csElements) {
+	protected <CST extends ModelElementCS, P extends NamedElement> BasicContinuation<?> refreshList(@NonNull NamedElement pivotParent, @NonNull EStructuralFeature pivotFeature,
+		final @NonNull Class<P> pivotClass, final @NonNull List<P> pivotElements, @NonNull List<CST> csElements) {
 		if (csElements.isEmpty()) {
 			context.refreshPivotList(pivotClass, pivotElements, csElements);
 			return null;
@@ -114,45 +117,49 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 		}
 	}
 
-	public Continuation<?> visiting(VisitableCS visitable) {
+	public Continuation<?> visiting(@NonNull VisitableCS visitable) {
 		throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for CS2Pivot PostOrder pass");
 	}
 
 	@Override
-	public Continuation<?> visitAnnotationCS(AnnotationCS csAnnotation) {
+	public Continuation<?> visitAnnotationCS(@NonNull AnnotationCS csAnnotation) {
 		Annotation pivotElement = PivotUtil.getPivot(Annotation.class, csAnnotation);
-		context.handleVisitNamedElement(csAnnotation, pivotElement);
-		context.refreshPivotList(Detail.class, pivotElement.getOwnedDetail(), csAnnotation.getOwnedDetail());
-		context.refreshPivotList(Element.class, pivotElement.getOwnedContent(), csAnnotation.getOwnedContent());
-		List<ModelElementRefCS> csReferences = csAnnotation.getOwnedReference();
-		if (csReferences.size() > 0) {
-			List<Element> references = new ArrayList<Element>(csReferences.size());
-			for (ModelElementRefCS csReference : csReferences) {
-				references.add(csReference.getElement());
+		if (pivotElement != null) {
+			context.handleVisitNamedElement(csAnnotation, pivotElement);
+			context.refreshPivotList(Detail.class, pivotElement.getOwnedDetail(), csAnnotation.getOwnedDetail());
+			context.refreshPivotList(Element.class, pivotElement.getOwnedContent(), csAnnotation.getOwnedContent());
+			List<ModelElementRefCS> csReferences = csAnnotation.getOwnedReference();
+			if (csReferences.size() > 0) {
+				List<Element> references = new ArrayList<Element>(csReferences.size());
+				for (ModelElementRefCS csReference : csReferences) {
+					references.add(csReference.getElement());
+				}
+				context.refreshList(pivotElement.getReference(), references);
 			}
-			context.refreshList(pivotElement.getReference(), references);
-		}
-		else {
-			pivotElement.getReference().clear();
+			else {
+				pivotElement.getReference().clear();
+			}
 		}
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitAnnotationElementCS(AnnotationElementCS csAnnotationElement) {
+	public Continuation<?> visitAnnotationElementCS(@NonNull AnnotationElementCS csAnnotationElement) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitClassifierCS(ClassifierCS csClassifier) {
+	public Continuation<?> visitClassifierCS(@NonNull ClassifierCS csClassifier) {
 		Type pivotElement = PivotUtil.getPivot(Type.class, csClassifier);
-		context.handleVisitNamedElement(csClassifier, pivotElement);
-		context.refreshPivotList(Constraint.class, pivotElement.getOwnedRule(), csClassifier.getOwnedConstraint());
+		if (pivotElement != null) {
+			context.handleVisitNamedElement(csClassifier, pivotElement);
+			context.refreshPivotList(Constraint.class, pivotElement.getOwnedRule(), csClassifier.getOwnedConstraint());
+		}
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitConstraintCS(ConstraintCS csConstraint) {
+	public Continuation<?> visitConstraintCS(@NonNull ConstraintCS csConstraint) {
 		Constraint pivotElement = PivotUtil.getPivot(Constraint.class, csConstraint);
 		pivotElement.setStereotype(csConstraint.getStereotype());
 		if (csConstraint.getSpecification() != null) {
@@ -164,105 +171,116 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 	}
 
 	@Override
-	public Continuation<?> visitDetailCS(DetailCS csDetail) {
+	public Continuation<?> visitDetailCS(@NonNull DetailCS csDetail) {
 		Detail pivotElement = PivotUtil.getPivot(Detail.class, csDetail);
-		context.handleVisitNamedElement(csDetail, pivotElement);
+		if (pivotElement != null) {
+			context.handleVisitNamedElement(csDetail, pivotElement);
 //			refreshPivotList(Detail.class, pivotElement.getOwnedDetail(), csDocumentation.getOwnedDetail());
-		List<String> newValues = csDetail.getValue();
-		List<String> pivotValues = pivotElement.getValue();
-		pivotValues.clear();
-		pivotValues.addAll(newValues);
+			List<String> newValues = csDetail.getValue();
+			List<String> pivotValues = pivotElement.getValue();
+			pivotValues.clear();
+			pivotValues.addAll(newValues);
+		}
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitDocumentationCS(DocumentationCS csDocumentation) {
+	public Continuation<?> visitDocumentationCS(@NonNull DocumentationCS csDocumentation) {
 		Annotation pivotElement = PivotUtil.getPivot(Annotation.class, csDocumentation);
-		context.handleVisitNamedElement(csDocumentation, pivotElement);
-		context.refreshPivotList(Detail.class, pivotElement.getOwnedDetail(), csDocumentation.getOwnedDetail());
+		if (pivotElement != null) {
+			context.handleVisitNamedElement(csDocumentation, pivotElement);
+			context.refreshPivotList(Detail.class, pivotElement.getOwnedDetail(), csDocumentation.getOwnedDetail());
+		}
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitElementCS(ElementCS csElement) {
+	public Continuation<?> visitElementCS(@NonNull ElementCS csElement) {
 		return visiting(csElement);
 	}
 
 	@Override
-	public Continuation<?> visitImportCS(ImportCS object) {
+	public Continuation<?> visitImportCS(@NonNull ImportCS object) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitLambdaTypeCS(LambdaTypeCS object) {
+	public Continuation<?> visitLambdaTypeCS(@NonNull LambdaTypeCS object) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitLibraryCS(LibraryCS object) {
+	public Continuation<?> visitLibraryCS(@NonNull LibraryCS object) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitModelElementCS(ModelElementCS csModelElement) {
+	public Continuation<?> visitModelElementCS(@NonNull ModelElementCS csModelElement) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitModelElementRefCS(ModelElementRefCS object) {
+	public Continuation<?> visitModelElementRefCS(@NonNull ModelElementRefCS object) {
 		Element element = object.getPathName().getElement();
-		context.installPivotReference(object, element, BaseCSTPackage.Literals.PIVOTABLE_ELEMENT_CS__PIVOT);
+		if (element != null) {
+			@SuppressWarnings("null") @NonNull EReference eReference = BaseCSTPackage.Literals.PIVOTABLE_ELEMENT_CS__PIVOT;
+			context.installPivotReference(object, element, eReference);
+		}
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitMultiplicityBoundsCS(MultiplicityBoundsCS object) {
+	public Continuation<?> visitMultiplicityBoundsCS(@NonNull MultiplicityBoundsCS object) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitMultiplicityStringCS(MultiplicityStringCS object) {
+	public Continuation<?> visitMultiplicityStringCS(@NonNull MultiplicityStringCS object) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitNamedElementCS(NamedElementCS csNamedElement) {
+	public Continuation<?> visitNamedElementCS(@NonNull NamedElementCS csNamedElement) {
 		NamedElement pivotElement = PivotUtil.getPivot(NamedElement.class, csNamedElement);
-		context.handleVisitNamedElement(csNamedElement, pivotElement);
+		if (pivotElement != null) {
+			context.handleVisitNamedElement(csNamedElement, pivotElement);
+		}
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitOperationCS(OperationCS csElement) {
+	public Continuation<?> visitOperationCS(@NonNull OperationCS csElement) {
 		Operation pivotOperation = PivotUtil.getPivot(Operation.class, csElement);
 		context.refreshList(Type.class, pivotOperation.getRaisedException(), csElement.getOwnedException());
 		return super.visitOperationCS(csElement);
 	}
 
 	@Override
-	public Continuation<?> visitPackageCS(PackageCS csPackage) {
+	public Continuation<?> visitPackageCS(@NonNull PackageCS csPackage) {
 		org.eclipse.ocl.examples.pivot.Package pivotElement = PivotUtil.getPivot(org.eclipse.ocl.examples.pivot.Package.class, csPackage);
-		context.handleVisitNamedElement(csPackage, pivotElement);
+		if (pivotElement != null) {
+			context.handleVisitNamedElement(csPackage, pivotElement);
+		}
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitPathElementCS(PathElementCS object) {
+	public Continuation<?> visitPathElementCS(@NonNull PathElementCS object) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitPathNameCS(PathNameCS object) {
+	public Continuation<?> visitPathNameCS(@NonNull PathNameCS object) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitPrimitiveTypeRefCS(PrimitiveTypeRefCS csPrimitiveTypeRef) {
+	public Continuation<?> visitPrimitiveTypeRefCS(@NonNull PrimitiveTypeRefCS csPrimitiveTypeRef) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitReferenceCS(ReferenceCS csReference) {
+	public Continuation<?> visitReferenceCS(@NonNull ReferenceCS csReference) {
 		Property pivotElement = PivotUtil.getPivot(Property.class, csReference);
 		Property pivotOpposite = csReference.getOpposite();
 		if ((pivotOpposite != null) && pivotOpposite.eIsProxy()) {
@@ -279,60 +297,64 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 	}
 
 	@Override
-	public Continuation<?> visitRootPackageCS(RootPackageCS csPackage) {
+	public Continuation<?> visitRootPackageCS(@NonNull RootPackageCS csPackage) {
 		Root pivotElement = PivotUtil.getPivot(Root.class, csPackage);
-		context.handleVisitNamedElement(csPackage, pivotElement);
+		if (pivotElement != null) {
+			context.handleVisitNamedElement(csPackage, pivotElement);
+		}
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitTemplateBindingCS(TemplateBindingCS csTemplateBinding) {
+	public Continuation<?> visitTemplateBindingCS(@NonNull TemplateBindingCS csTemplateBinding) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitTemplateParameterCS(TemplateParameterCS csTemplateParameter) {
+	public Continuation<?> visitTemplateParameterCS(@NonNull TemplateParameterCS csTemplateParameter) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitTemplateParameterSubstitutionCS(TemplateParameterSubstitutionCS csTemplateParameterSubstitution) {
+	public Continuation<?> visitTemplateParameterSubstitutionCS(@NonNull TemplateParameterSubstitutionCS csTemplateParameterSubstitution) {
 		return null;
 	}
 	
 	@Override
-	public Continuation<?> visitTemplateSignatureCS(TemplateSignatureCS csTemplateSignature) {
+	public Continuation<?> visitTemplateSignatureCS(@NonNull TemplateSignatureCS csTemplateSignature) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitTuplePartCS(TuplePartCS object) {
+	public Continuation<?> visitTuplePartCS(@NonNull TuplePartCS object) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitTupleTypeCS(TupleTypeCS object) {
+	public Continuation<?> visitTupleTypeCS(@NonNull TupleTypeCS object) {
 		return null;
 	}
 
 	@Override
-	public BasicContinuation<?> visitTypedElementCS(TypedElementCS csTypedElement) {
+	public BasicContinuation<?> visitTypedElementCS(@NonNull TypedElementCS csTypedElement) {
 		TypedElement pivotElement = PivotUtil.getPivot(TypedElement.class, csTypedElement);
-		context.handleVisitNamedElement(csTypedElement, pivotElement);
-		TypedRefCS ownedType = csTypedElement.getOwnedType();
-		Type pivotType = ownedType != null ? PivotUtil.getPivot(Type.class, ownedType) : null;
-		context.setType(pivotElement, pivotType);
-		context.refreshPivotList(Constraint.class, pivotElement.getOwnedRule(), csTypedElement.getOwnedConstraint());
+		if (pivotElement != null) {
+			context.handleVisitNamedElement(csTypedElement, pivotElement);
+			TypedRefCS ownedType = csTypedElement.getOwnedType();
+			Type pivotType = ownedType != null ? PivotUtil.getPivot(Type.class, ownedType) : null;
+			context.setType(pivotElement, pivotType);
+			context.refreshPivotList(Constraint.class, pivotElement.getOwnedRule(), csTypedElement.getOwnedConstraint());
+		}
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitTypedTypeRefCS(TypedTypeRefCS object) {
+	public Continuation<?> visitTypedTypeRefCS(@NonNull TypedTypeRefCS object) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitWildcardTypeRefCS(WildcardTypeRefCS object) {
+	public Continuation<?> visitWildcardTypeRefCS(@NonNull WildcardTypeRefCS object) {
 		return null;
 	}
 }

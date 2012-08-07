@@ -22,6 +22,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.LibraryCS;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
@@ -48,7 +50,7 @@ public class LibraryCSImpl extends NamedElementCSImpl implements LibraryCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected org.eclipse.ocl.examples.pivot.Package package_;
+	protected Namespace package_;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -74,11 +76,11 @@ public class LibraryCSImpl extends NamedElementCSImpl implements LibraryCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.examples.pivot.Package getPackage() {
+	public Namespace getPackage() {
 		if (package_ != null && ((EObject)package_).eIsProxy())
 		{
 			InternalEObject oldPackage = (InternalEObject)package_;
-			package_ = (org.eclipse.ocl.examples.pivot.Package)eResolveProxy(oldPackage);
+			package_ = (Namespace)eResolveProxy(oldPackage);
 			if (package_ != oldPackage)
 			{
 				if (eNotificationRequired())
@@ -93,7 +95,7 @@ public class LibraryCSImpl extends NamedElementCSImpl implements LibraryCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.examples.pivot.Package basicGetPackage() {
+	public Namespace basicGetPackage() {
 		return package_;
 	}
 
@@ -102,9 +104,9 @@ public class LibraryCSImpl extends NamedElementCSImpl implements LibraryCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPackage(org.eclipse.ocl.examples.pivot.Package newPackage)
+	public void setPackage(Namespace newPackage)
 	{
-		org.eclipse.ocl.examples.pivot.Package oldPackage = package_;
+		Namespace oldPackage = package_;
 		package_ = newPackage;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BaseCSTPackage.LIBRARY_CS__PACKAGE, oldPackage, package_));
@@ -136,7 +138,7 @@ public class LibraryCSImpl extends NamedElementCSImpl implements LibraryCS {
 		switch (featureID)
 		{
 			case BaseCSTPackage.LIBRARY_CS__PACKAGE:
-				setPackage((org.eclipse.ocl.examples.pivot.Package)newValue);
+				setPackage((Namespace)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -152,7 +154,7 @@ public class LibraryCSImpl extends NamedElementCSImpl implements LibraryCS {
 		switch (featureID)
 		{
 			case BaseCSTPackage.LIBRARY_CS__PACKAGE:
-				setPackage((org.eclipse.ocl.examples.pivot.Package)null);
+				setPackage((Namespace)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -184,7 +186,7 @@ public class LibraryCSImpl extends NamedElementCSImpl implements LibraryCS {
 	}
 
 	@Override
-	public <R> R accept(BaseCSVisitor<R> visitor) {
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return visitor.visitLibraryCS(this);
 	}
 } //LibraryCSImpl

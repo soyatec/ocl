@@ -25,6 +25,8 @@
  */
 package	org.eclipse.ocl.examples.xtext.essentialocl.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  */
 public abstract class AbstractEssentialOCLCSVisitor<R, C>
@@ -36,7 +38,7 @@ public abstract class AbstractEssentialOCLCSVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractEssentialOCLCSVisitor(C context) {
+	protected AbstractEssentialOCLCSVisitor(@NonNull C context) {
 	    super(context);
 	}
 }

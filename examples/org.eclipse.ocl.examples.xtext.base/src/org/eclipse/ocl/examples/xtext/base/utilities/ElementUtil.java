@@ -26,6 +26,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Feature;
@@ -70,40 +72,40 @@ import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 
 public class ElementUtil
 {
-	public static MetaModelManager findMetaModelManager(EObject eObject) {
+	public static @Nullable MetaModelManager findMetaModelManager(@NonNull EObject eObject) {
 		EObject eRoot = EcoreUtil.getRootContainer(eObject);
 		if (eRoot != null) {
 			Resource resource = eRoot.eResource();
-			if (eObject instanceof ElementCS) {
-				AbstractMetaModelManagerResourceAdapter<?> adapter = AbstractMetaModelManagerResourceAdapter.findAdapter(resource);
-				if (adapter != null) {
-					return adapter.getMetaModelManager();
+			if (resource != null) {
+				if (eObject instanceof ElementCS) {
+					AbstractMetaModelManagerResourceAdapter<?> adapter = AbstractMetaModelManagerResourceAdapter.findAdapter(resource);
+					if (adapter != null) {
+						return adapter.getMetaModelManager();
+					}
 				}
-			}
-			return findMetaModelManager(resource);
-		}
-		return null;
-	}
-
-	public static MetaModelManager findMetaModelManager(Resource resource) {
-		if (resource != null) {
-			for (Adapter adapter : resource.eAdapters()) {
-				if (adapter instanceof AbstractMetaModelManagerResourceAdapter) {
-					return ((AbstractMetaModelManagerResourceAdapter<?>)adapter).getMetaModelManager();
-				}
-			}
-			ResourceSet resourceSet = resource.getResourceSet();
-			if (resourceSet != null) {
-				MetaModelManagerResourceSetAdapter adapter = MetaModelManagerResourceSetAdapter.findAdapter(resourceSet);
-				if (adapter != null) {
-					return adapter.getMetaModelManager();
-				}
+				return findMetaModelManager(resource);
 			}
 		}
 		return null;
 	}
 
-	public static String getCollectionTypeName(TypedElementCS csTypedElement) {
+	public static @Nullable MetaModelManager findMetaModelManager(@NonNull Resource resource) {
+		for (Adapter adapter : resource.eAdapters()) {
+			if (adapter instanceof AbstractMetaModelManagerResourceAdapter) {
+				return ((AbstractMetaModelManagerResourceAdapter<?>)adapter).getMetaModelManager();
+			}
+		}
+		ResourceSet resourceSet = resource.getResourceSet();
+		if (resourceSet != null) {
+			MetaModelManagerResourceSetAdapter adapter = MetaModelManagerResourceSetAdapter.findAdapter(resourceSet);
+			if (adapter != null) {
+				return adapter.getMetaModelManager();
+			}
+		}
+		return null;
+	}
+
+	public static @Nullable String getCollectionTypeName(@NonNull TypedElementCS csTypedElement) {
 		TypedRefCS csTypeRef = csTypedElement.getOwnedType();
 		if (csTypeRef == null) {
 			return null;
@@ -141,7 +143,7 @@ public class ElementUtil
 		return getCollectionName(isOrdered, isUnique);
 	}
 
-	public static String getCollectionName(boolean ordered, boolean unique) {
+	public static @NonNull String getCollectionName(boolean ordered, boolean unique) {
 		if (ordered) {
 			return unique ? "OrderedSet" : "Sequence"; //$NON-NLS-1$ //$NON-NLS-2$
 		}
@@ -150,7 +152,7 @@ public class ElementUtil
 		}
 	}
 	
-	public static ModelElementCS getCsElement(Element obj) {
+	public static @Nullable ModelElementCS getCsElement(@NonNull Element obj) {
 		Resource resource = obj.eResource();
 		if (resource == null) {
 			return null;
@@ -166,7 +168,7 @@ public class ElementUtil
 		return cs2Pivot.getCSElement(obj);
 	}
 	
-	public static RootCSAttribution getDocumentAttribution(ElementCS context) {
+	public static @Nullable RootCSAttribution getDocumentAttribution(@NonNull ElementCS context) {
 		for (ElementCS target = context, parent; (parent = target.getLogicalParent()) != null; target = parent) {
 			Attribution attribution = PivotUtil.getAttribution(parent);
 			if (attribution instanceof RootCSAttribution) {
@@ -176,7 +178,7 @@ public class ElementUtil
 		return null;
 	}
 
-	public static TemplateParameter getFormalTemplateParameter(TemplateParameterSubstitutionCS csTemplateParameterSubstitution) {
+	public static @Nullable TemplateParameter getFormalTemplateParameter(@NonNull TemplateParameterSubstitutionCS csTemplateParameterSubstitution) {
 		TemplateBindingCS csTemplateBinding = csTemplateParameterSubstitution.getOwningTemplateBinding();
 		int index = csTemplateBinding.getOwnedParameterSubstitution().indexOf(csTemplateParameterSubstitution);
 		if (index < 0) {
@@ -191,7 +193,7 @@ public class ElementUtil
 		return templateParameters.get(index);
 	}
 
-	public static ILeafNode getLeafNode(INode node) {
+	public static @Nullable ILeafNode getLeafNode(@NonNull INode node) {
 		ILeafNode leafNode = null;
 		if (node instanceof ILeafNode) {
 			return (ILeafNode) node;
@@ -207,7 +209,7 @@ public class ElementUtil
 		return null;
 	}
 
-	public static int getLower(TypedElementCS csTypedElement) {
+	public static int getLower(@NonNull TypedElementCS csTypedElement) {
 		TypedRefCS csTypeRef = csTypedElement.getOwnedType();
 		if (csTypeRef == null) {
 			return 0;		// e.g. missing Operation return type
@@ -219,7 +221,7 @@ public class ElementUtil
 		return csMultiplicity.getLower();
 	}
 
-	public static <T extends NamedElementCS> T getNamedElementCS(Collection<T> namedElements, String name) {
+	public static @Nullable <T extends NamedElementCS> T getNamedElementCS(@NonNull Collection<T> namedElements, @NonNull String name) {
 		for (T namedElement : namedElements) {
 			if (name.equals(namedElement.getName())) {
 				return namedElement;
@@ -228,7 +230,7 @@ public class ElementUtil
 		return null;
 	}
 
-	public static boolean getQualifier(List<String> qualifiers, String trueString, String falseString, boolean defaultValue) {
+	public static boolean getQualifier(@NonNull List<String> qualifiers, @NonNull String trueString, @NonNull String falseString, boolean defaultValue) {
 		if (qualifiers.contains(trueString)) {
 			return true;
 		}
@@ -240,15 +242,15 @@ public class ElementUtil
 		}
 	}
 
-	public static String getText(ElementCS csElement) {
+	public static String getText(@NonNull ElementCS csElement) {
 		ICompositeNode node = NodeModelUtils.getNode(csElement);
 		return NodeModelUtils.getTokenText(node);
 	}
 
-	public static String getText(TypedTypeRefCS csElement, EReference feature) {
-		List<INode> nodes = NodeModelUtils.findNodesForFeature(csElement, feature);
+	public static @Nullable String getText(@NonNull TypedTypeRefCS csElement, @NonNull EReference feature) {
+		@NonNull List<INode> nodes = NodeModelUtils.findNodesForFeature(csElement, feature);
 //		assert (nodes.size() == 1;
-		if ((nodes == null) || nodes.isEmpty()) {
+		if (nodes.isEmpty()) {
 			return null;
 		}
 		else if (nodes.size() == 1) {
@@ -263,7 +265,7 @@ public class ElementUtil
 		}
 	}
 
-	public static int getUpper(TypedElementCS csTypedElement) {
+	public static int getUpper(@NonNull TypedElementCS csTypedElement) {
 		TypedRefCS csTypeRef = csTypedElement.getOwnedType();
 		if (csTypeRef == null) {
 			return 1;
@@ -275,7 +277,7 @@ public class ElementUtil
 		return csMultiplicity.getUpper();
 	}
 
-	public static boolean hasSyntaxError(List<Diagnostic> diagnostics) {
+	public static boolean hasSyntaxError(@NonNull List<Diagnostic> diagnostics) {
 		for (Diagnostic diagnostic : diagnostics) {
 			if (diagnostic instanceof LibraryDiagnostic) {
 				return true;
@@ -287,7 +289,7 @@ public class ElementUtil
 		return false;
 	}
 
-	public static boolean isInOperation(ElementCS csElement) {
+	public static boolean isInOperation(@NonNull ElementCS csElement) {
 		for (EObject eObject = csElement; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof OperationCS) {
 				return true;
@@ -299,7 +301,7 @@ public class ElementUtil
 		return false;
 	}
 
-	public static boolean isOrdered(TypedElementCS csTypedElement) {
+	public static boolean isOrdered(@NonNull TypedElementCS csTypedElement) {
 		return csTypedElement.getQualifier().contains("ordered");
 	}
 
@@ -307,7 +309,7 @@ public class ElementUtil
 	 * Return true if element is able to be accessed by a qualified path OCLinEcore. Other elements must use a quoted URI.
 	 */
 	@Deprecated  // find and extensible solution
-	public static NamedElement isPathable(EObject element) {
+	public static NamedElement isPathable(@NonNull EObject element) {
 		if (element instanceof Feature) {
 			return (Feature)element;
 		}
@@ -322,11 +324,12 @@ public class ElementUtil
 		}
 	}
 
-	public static boolean isUnique(TypedElementCS csTypedElement) {
-		return getQualifier(csTypedElement.getQualifier(), "unique", "!unique", true);
+	public static boolean isUnique(@NonNull TypedElementCS csTypedElement) {
+		@SuppressWarnings("null") @NonNull List<String> qualifiers = csTypedElement.getQualifier();
+		return getQualifier(qualifiers, "unique", "!unique", true);
 	}
 
-	public static boolean isSpecialization(TemplateBindingCS csTemplateBinding) {
+	public static boolean isSpecialization(@NonNull TemplateBindingCS csTemplateBinding) {
 		TypedTypeRefCS csTypedTypeRef = csTemplateBinding.getOwningTemplateBindableElement();
 		Element type = csTypedTypeRef.getPivot();
 		for (TemplateParameterSubstitutionCS csTemplateParameterSubstitution : csTemplateBinding.getOwnedParameterSubstitution()) {
@@ -348,7 +351,7 @@ public class ElementUtil
 		return false;
 	}
 
-	public static void setPathName(PathNameCS csPathName, Element element, EObject scope) {
+	public static void setPathName(@NonNull PathNameCS csPathName, @NonNull Element element, EObject scope) {
 		List<PathElementCS> csPath = csPathName.getPath();
 		csPath.clear();		// FIXME re-use
 		NamedElement namedElement = isPathable(element);

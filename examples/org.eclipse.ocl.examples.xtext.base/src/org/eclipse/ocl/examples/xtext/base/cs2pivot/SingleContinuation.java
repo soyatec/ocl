@@ -20,17 +20,18 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 
 public abstract class SingleContinuation<T extends EObject> extends BasicContinuation<T>
 {
-	public SingleContinuation(CS2PivotConversion context, Element pivotParent, EStructuralFeature pivotFeature,
-			T csElement, Dependency... dependencies) {
+	public SingleContinuation(@NonNull CS2PivotConversion context, Element pivotParent, EStructuralFeature pivotFeature,
+			@NonNull T csElement, Dependency... dependencies) {
 		super(context, pivotParent, pivotFeature, csElement, dependencies);
 	}
 	
-	public SingleContinuation(CS2PivotConversion context, Element pivotParent, EStructuralFeature pivotFeature,
-			T csElement, List<Dependency> dependencies) {
+	public SingleContinuation(@NonNull CS2PivotConversion context, Element pivotParent, EStructuralFeature pivotFeature,
+			@NonNull T csElement, @NonNull List<Dependency> dependencies) {
 		super(context, pivotParent, pivotFeature, csElement, dependencies.toArray(new Dependency[dependencies.size()]));
 	}
 }

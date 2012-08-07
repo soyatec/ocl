@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.xtext.base.cs2pivot;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS;
@@ -38,86 +39,90 @@ import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
 
 public class BaseLeft2RightVisitor extends AbstractExtendingBaseCSVisitor<Element, CS2PivotConversion>
 {
-	public BaseLeft2RightVisitor(CS2PivotConversion context) {
+	public BaseLeft2RightVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 
 	@Override
-	public Element visitAnnotationCS(AnnotationCS object) {
+	public Element visitAnnotationCS(@NonNull AnnotationCS object) {
 		return null;
 	}
 
 	@Override
-	public Element visitClassifierCS(ClassifierCS object) {
+	public Element visitClassifierCS(@NonNull ClassifierCS object) {
 		return null;
 	}
 
 	@Override
-	public Element visitConstraintCS(ConstraintCS object) {
-		return context.visitLeft2Right(Constraint.class, object.getSpecification());
+	public Element visitConstraintCS(@NonNull ConstraintCS object) {
+		SpecificationCS specification = object.getSpecification();
+		if (specification == null) {
+			return null;
+		}
+		return context.visitLeft2Right(Constraint.class, specification);
 	}
 
 	@Override
-	public Element visitDetailCS(DetailCS object) {
+	public Element visitDetailCS(@NonNull DetailCS object) {
 		return null;
 	}
 
 	@Override
-	public Element visitOperationCS(OperationCS object) {
+	public Element visitOperationCS(@NonNull OperationCS object) {
 		return null;
 	}
 
 	@Override
-	public Element visitParameterCS(ParameterCS object) {
+	public Element visitParameterCS(@NonNull ParameterCS object) {
 		return null;
 	}
 
 	@Override
-	public Element visitSpecificationCS(SpecificationCS object) {
+	public Element visitSpecificationCS(@NonNull SpecificationCS object) {
 		return null;
 	}
 
 	@Override
-	public Element visitStructuralFeatureCS(StructuralFeatureCS object) {
+	public Element visitStructuralFeatureCS(@NonNull StructuralFeatureCS object) {
 		return null;
 	}
 
 	@Override
-	public Element visitTemplateBindingCS(TemplateBindingCS object) {
+	public Element visitTemplateBindingCS(@NonNull TemplateBindingCS object) {
 		return null;
 	}
 
 	@Override
-	public Element visitTemplateParameterCS(TemplateParameterCS object) {
+	public Element visitTemplateParameterCS(@NonNull TemplateParameterCS object) {
 		return null;
 	}
 
 	@Override
-	public Element visitTemplateParameterSubstitutionCS(TemplateParameterSubstitutionCS object) {
+	public Element visitTemplateParameterSubstitutionCS(@NonNull TemplateParameterSubstitutionCS object) {
 		return null;
 	}
 
 	@Override
-	public Element visitTemplateSignatureCS(TemplateSignatureCS object) {
+	public Element visitTemplateSignatureCS(@NonNull TemplateSignatureCS object) {
 		return null;
 	}
 
 	@Override
-	public Element visitTuplePartCS(TuplePartCS object) {
+	public Element visitTuplePartCS(@NonNull TuplePartCS object) {
 		return null;
 	}
 
 	@Override
-	public Element visitTupleTypeCS(TupleTypeCS object) {
+	public Element visitTupleTypeCS(@NonNull TupleTypeCS object) {
 		return null;
 	}
 
 	@Override
-	public Element visitTypeRefCS(TypeRefCS object) {
+	public Element visitTypeRefCS(@NonNull TypeRefCS object) {
 		return null;
 	}
 
-	public Element visiting(VisitableCS visitable) {
+	public Element visiting(@NonNull VisitableCS visitable) {
 		throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for CS2Pivot Left2Right pass");
 	}
 }

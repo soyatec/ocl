@@ -25,6 +25,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.manager.AbstractMetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -40,10 +42,7 @@ import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
  */
 public class CS2PivotResourceAdapter extends AbstractMetaModelManagerResourceAdapter<BaseCSResource>
 {		
-	public static CS2PivotResourceAdapter findAdapter(BaseCSResource csResource) {
-		if (csResource == null) {
-			return null;
-		}
+	public static @Nullable CS2PivotResourceAdapter findAdapter(@NonNull BaseCSResource csResource) {
 		return PivotUtil.getAdapter(CS2PivotResourceAdapter.class, csResource);
 /*		MetaModelManagerResourceAdapter adapter = PivotUtil.getAdapter(MetaModelManagerResourceAdapter.class, csResource);
 		if (adapter == null) {
@@ -60,7 +59,7 @@ public class CS2PivotResourceAdapter extends AbstractMetaModelManagerResourceAda
 		return derivedAdapter; */
 	}
 	
-	public static CS2PivotResourceAdapter getAdapter(BaseCSResource csResource, MetaModelManager metaModelManager) {
+	public static @NonNull CS2PivotResourceAdapter getAdapter(@NonNull BaseCSResource csResource, @Nullable MetaModelManager metaModelManager) {
 		List<Adapter> eAdapters = csResource.eAdapters();
 		CS2PivotResourceAdapter adapter = findAdapter(csResource);
 		if (adapter == null) {
@@ -69,9 +68,14 @@ public class CS2PivotResourceAdapter extends AbstractMetaModelManagerResourceAda
 				if (metaModelManager == null) {
 					metaModelManager = csResource.createMetaModelManager();
 					ResourceSet csResourceSet = csResource.getResourceSet();
-					MetaModelManagerResourceSetAdapter.getAdapter(csResourceSet, metaModelManager);
+					if (csResourceSet != null) {
+						MetaModelManagerResourceSetAdapter.getAdapter(csResourceSet, metaModelManager);
+					}
 				}
-				metaModelManager.addClassLoader(csResource.getClass().getClassLoader());
+				ClassLoader classLoader = csResource.getClass().getClassLoader();
+				if (classLoader != null) {
+					metaModelManager.addClassLoader(classLoader);
+				}
 			}
 			adapter = new CS2PivotResourceAdapter(csResource, metaModelManager);
 			eAdapters.add(adapter);
@@ -79,16 +83,16 @@ public class CS2PivotResourceAdapter extends AbstractMetaModelManagerResourceAda
 		return adapter;
 	}
 	
-	private final CS2Pivot converter;
+	private final @NonNull CS2Pivot converter;
 	
-	public CS2PivotResourceAdapter(BaseCSResource csResource, MetaModelManager metaModelManager) {
+	public CS2PivotResourceAdapter(@NonNull BaseCSResource csResource, @NonNull MetaModelManager metaModelManager) {
 		super(csResource, metaModelManager);
 		Map<Resource, Resource> cs2pivotResourceMap = computeCS2PivotResourceMap(
 			csResource, metaModelManager);
 		converter = csResource.createCS2Pivot(cs2pivotResourceMap, metaModelManager);
 	}
 
-	public Map<Resource, Resource> computeCS2PivotResourceMap(Resource csResource, MetaModelManager metaModelManager) {
+	public @NonNull Map<Resource, Resource> computeCS2PivotResourceMap(@NonNull Resource csResource, @NonNull MetaModelManager metaModelManager) {
 		ResourceSet pivotResourceSet = metaModelManager.getTarget();
 		Map<Resource,Resource> cs2pivotResourceMap = new HashMap<Resource,Resource>();
 	//	ResourceSet csResourceSet = csResource.getResourceSet();
@@ -96,15 +100,17 @@ public class CS2PivotResourceAdapter extends AbstractMetaModelManagerResourceAda
 //		for (Resource acsResource : csResourceSet.getResources()) {
 			Resource acsResource = csResource;
 				URI uri = acsResource.getURI();
-				List<EObject> contents = acsResource.getContents();
-	//			if (!"java".equals(uri.scheme())) { //$NON-NLS-1$
-				if ((contents.size() > 0) && (contents.get(0) instanceof ModelElementCS)) { //$NON-NLS-1$
-					URI pivotURI = PivotUtil.getPivotURI(uri);
-					Resource pivotResource = pivotResourceSet.getResource(pivotURI, false);
-					if (pivotResource == null) {
-						pivotResource = pivotResourceSet.createResource(pivotURI, PivotPackage.eCONTENT_TYPE);
+				if (uri != null) {
+					List<EObject> contents = acsResource.getContents();
+		//			if (!"java".equals(uri.scheme())) { //$NON-NLS-1$
+					if ((contents.size() > 0) && (contents.get(0) instanceof ModelElementCS)) { //$NON-NLS-1$
+						URI pivotURI = PivotUtil.getPivotURI(uri);
+						Resource pivotResource = pivotResourceSet.getResource(pivotURI, false);
+						if (pivotResource == null) {
+							pivotResource = pivotResourceSet.createResource(pivotURI, PivotPackage.eCONTENT_TYPE);
+						}
+						cs2pivotResourceMap.put(acsResource, pivotResource);
 					}
-					cs2pivotResourceMap.put(acsResource, pivotResource);
 				}
 	//		}
 	//	}
@@ -115,7 +121,7 @@ public class CS2PivotResourceAdapter extends AbstractMetaModelManagerResourceAda
 		return converter;
 	}
 
-	public Resource getPivotResource(BaseCSResource csResource) {
+	public Resource getPivotResource(@NonNull BaseCSResource csResource) {
 		return converter.getPivotResource(csResource);
 	}
 
@@ -124,7 +130,7 @@ public class CS2PivotResourceAdapter extends AbstractMetaModelManagerResourceAda
 		return super.isAdapterForType(type) || (type == CS2PivotResourceAdapter.class);
 	}	
 	
-	public void refreshPivotMappings(IDiagnosticConsumer diagnosticsConsumer) throws Exception {
+	public void refreshPivotMappings(@NonNull IDiagnosticConsumer diagnosticsConsumer) throws Exception {
 		try {
 			converter.update(diagnosticsConsumer);
 		}

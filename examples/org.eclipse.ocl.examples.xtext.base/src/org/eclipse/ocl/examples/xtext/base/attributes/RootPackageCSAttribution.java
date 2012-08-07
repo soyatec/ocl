@@ -17,8 +17,10 @@
 package org.eclipse.ocl.examples.xtext.base.attributes;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Root;
@@ -34,13 +36,14 @@ public class RootPackageCSAttribution extends AbstractRootCSAttribution
 	public static final RootPackageCSAttribution INSTANCE = new RootPackageCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		RootPackageCS targetElement = (RootPackageCS)target;
 		Root pivotPackage = PivotUtil.getPivot(Root.class, targetElement);
 		if (pivotPackage != null) {
 			environmentView.addAllPackages(pivotPackage);
 		}
-		if (environmentView.accepts(PivotPackage.Literals.NAMESPACE)) {
+		@SuppressWarnings("null") @NonNull EClass namespace2 = PivotPackage.Literals.NAMESPACE;
+		if (environmentView.accepts(namespace2)) {
 			for (ImportCS anImport : targetElement.getOwnedImport()) {
 				Namespace namespace = anImport.getNamespace();
 				if (!namespace.eIsProxy()) {
@@ -62,7 +65,9 @@ public class RootPackageCSAttribution extends AbstractRootCSAttribution
 				Resource eResource = pivotPackage.eResource();
 				if (eResource != null) {
 					URI baseURI = eResource.getURI();
-		           	environmentView.addImportedElement(baseURI);
+		           	if (baseURI != null) {
+		           		environmentView.addImportedElement(baseURI);
+		           	}
 				}
 			}
 		}

@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.base.baseCST.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TuplePartCS;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
@@ -54,7 +55,7 @@ public class TuplePartCSImpl extends TypedElementCSImpl implements TuplePartCS
 	}
 
 	@Override
-	public <R> R accept(BaseCSVisitor<R> visitor) {
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return visitor.visitTuplePartCS(this);
 	}
 } //TuplePartCSImpl

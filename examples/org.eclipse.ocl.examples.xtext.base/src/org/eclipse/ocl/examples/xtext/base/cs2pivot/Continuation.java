@@ -18,10 +18,12 @@ package org.eclipse.ocl.examples.xtext.base.cs2pivot;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 
 public interface Continuation<T>
 {
-	void addTo(List<BasicContinuation<?>> simpleContinuations);
+	void addTo(@NonNull List<BasicContinuation<?>> simpleContinuations);
 //	boolean canExecute();
 //	BasicContinuation<?> execute();
 }

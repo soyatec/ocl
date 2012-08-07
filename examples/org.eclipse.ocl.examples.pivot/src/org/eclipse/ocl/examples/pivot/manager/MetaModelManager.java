@@ -368,10 +368,10 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		 * @param uriFragment 
 		 * @throws ParserException 
 		 */
-		@Nullable Element importFromResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource resource, @Nullable String uriFragment) throws ParserException;
+		@Nullable Element importFromResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource resource, @Nullable URI uri) throws ParserException;
 	}
 	
-	private static Set<Factory> factoryMap = new HashSet<Factory>();
+	private static @NonNull Set<Factory> factoryMap = new HashSet<Factory>();
 	
 	public static void addFactory(@NonNull Factory factory) {
 		factoryMap.add(factory);
@@ -962,7 +962,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return new ImplementationManager(this);
 	}
 
-	public InvalidLiteralExp createInvalidExpression(/*Object object, String boundMessage, Throwable e*/) {
+	public @NonNull InvalidLiteralExp createInvalidExpression(/*Object object, String boundMessage, Throwable e*/) {
 		InvalidLiteralExp invalidLiteralExp = PivotFactory.eINSTANCE.createInvalidLiteralExp();
 		invalidLiteralExp.setType(getOclInvalidType());
 //		invalidLiteralExp.setObject(object);
@@ -2404,7 +2404,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		installResource(pivotResource);
 	}
 
-	public @Nullable Element loadResource(URI uri, String alias, ResourceSet resourceSet) throws ParserException {
+	public @Nullable Element loadResource(@NonNull URI uri, String alias, ResourceSet resourceSet) throws ParserException {
 		// if (EPackage.Registry.INSTANCE.containsKey(resourceOrNsURI))
 		// return EPackage.Registry.INSTANCE.getEPackage(resourceOrNsURI);
 		Resource resource;
@@ -2470,19 +2470,19 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			}
 		}
 		if (resource != null) {
-			return loadResource(resource, uri.fragment());
+			return loadResource(resource, uri);
 		}
 		logger.warn("Cannot load package with URI '" + uri + "'");
 		return null;
 	}
 
-	public @Nullable Element loadResource(@NonNull Resource resource, @Nullable String fragmentURI) throws ParserException {
+	public @Nullable Element loadResource(@NonNull Resource resource, @Nullable URI uri) throws ParserException {
 		for (Factory factory : factoryMap) {
 			if (factory.canHandle(resource)) {
-				return factory.importFromResource(this, resource, fragmentURI);
+				return factory.importFromResource(this, resource, uri);
 			}
 		}
-		throw new ParserException("Cannot create pivot from '" + fragmentURI + "'");
+		throw new ParserException("Cannot create pivot from '" + uri + "'");
 //		logger.warn("Cannot convert to pivot for package with URI '" + uri + "'");
 	}
 

@@ -26,7 +26,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
@@ -34,6 +37,7 @@ import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
+import org.eclipse.ocl.examples.pivot.scoping.EmptyAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
@@ -65,14 +69,14 @@ public class BaseScopeView extends AbstractScope implements IScopeView
 	/**
      * The <code>NULLSCOPEVIEW</code> to be returned by the most outer scope
      */
-    public static final IScopeView NULLSCOPEVIEW = new IScopeView()
+    public static final @NonNull IScopeView NULLSCOPEVIEW = new IScopeView()
     {
 		public Iterable<IEObjectDescription> getAllElements() {
 	   		return Collections.emptyList();
 		}
 
-		public Attribution getAttribution() {
-			return null;
+		public @NonNull Attribution getAttribution() {
+			return EmptyAttribution.INSTANCE;
 		}
 
 		public EObject getChild() {
@@ -91,7 +95,7 @@ public class BaseScopeView extends AbstractScope implements IScopeView
 	   		return Collections.emptyList();
 		}
 
-		public IScopeView getParent() {
+		public @NonNull IScopeView getParent() {
 			return NULLSCOPEVIEW;
 		}
 
@@ -112,14 +116,14 @@ public class BaseScopeView extends AbstractScope implements IScopeView
 		}
     };
 
-	public static void computeLookups(EnvironmentView environmentView, ElementCS parent, EObject child, EStructuralFeature containmentFeature, EReference targetReference) {
+	public static void computeLookups(@NonNull EnvironmentView environmentView, @NonNull ElementCS parent, EObject child, EStructuralFeature containmentFeature, EReference targetReference) {
 		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-		Attribution attribution = parent != null ? PivotUtil.getAttribution(parent) : null;
+		Attribution attribution = PivotUtil.getAttribution(parent);
 		BaseScopeView baseScopeView = new BaseScopeView(metaModelManager, parent, attribution, child, containmentFeature, targetReference);
 		environmentView.computeLookups(baseScopeView);
 	}
 
-	private static IScopeView getParent(MetaModelManager metaModelManager, EObject target, EReference targetReference) {
+	private static IScopeView getParent(@NonNull MetaModelManager metaModelManager, @NonNull EObject target, EReference targetReference) {
 		EObject parent = null;
 		Attribution parentScope = null;
 		if (target instanceof ElementCS) {
@@ -136,24 +140,24 @@ public class BaseScopeView extends AbstractScope implements IScopeView
 				parent = pParent;
 			}
 		}
-		if (parentScope == null) {
+		if ((parentScope == null) || (parent == null)) {
 			return NULLSCOPEVIEW;
 		}
 		EStructuralFeature eContainingFeature = target.eContainingFeature();
 		return new BaseScopeView(metaModelManager, parent, parentScope, target, eContainingFeature, targetReference);
 	}
 	
-	protected final MetaModelManager metaModelManager;
-	protected final Attribution attribution;					// Attributes helper for the target CST node
-	protected final EObject target;								// The target CST node
+	protected final @NonNull MetaModelManager metaModelManager;
+	protected final @NonNull Attribution attribution;					// Attributes helper for the target CST node
+	protected final @NonNull EObject target;							// The target CST node
 	protected final EObject child;								// Child targeted by containmentFeature, null for child-independent
 	protected final EStructuralFeature containmentFeature;		// Selecting child-specific candidates, null for child-independent
 	protected final EReference targetReference;					// Selecting permissible candidate types
 	
-	public BaseScopeView(MetaModelManager metaModelManager, EObject target, Attribution attribution, EObject child, EStructuralFeature containmentFeature, EReference targetReference) {
+	public BaseScopeView(@NonNull MetaModelManager metaModelManager, @NonNull EObject target, @Nullable Attribution attribution, EObject child, EStructuralFeature containmentFeature, EReference targetReference) {
 		super(getParent(metaModelManager, target, targetReference), false);
 		this.metaModelManager = metaModelManager;
-		this.attribution = attribution;
+		this.attribution = attribution != null ? attribution : EmptyAttribution.INSTANCE;
 		this.target = target;
 		this.child = child;
 		this.containmentFeature = containmentFeature;
@@ -181,7 +185,7 @@ public class BaseScopeView extends AbstractScope implements IScopeView
 		return getDescriptions(environmentView);
 	}
 	
-	public Attribution getAttribution() {
+	public @NonNull Attribution getAttribution() {
 		return attribution;
 	}
 
@@ -191,6 +195,19 @@ public class BaseScopeView extends AbstractScope implements IScopeView
 
 	public EStructuralFeature getContainmentFeature() {
 		return containmentFeature;
+	}
+
+	private @NonNull Element getContextRoot(@NonNull Element context) {
+		while (!(context instanceof Namespace) && !(context instanceof Type)) {
+			EObject container = context.eContainer();
+			if (container instanceof Element) {
+				context = (Element) container;
+			}
+			else {
+				break;
+			}
+		}
+		return context;
 	}
 
 	private IEObjectDescription getDescription(EnvironmentView environmentView) {
@@ -273,17 +290,16 @@ public class BaseScopeView extends AbstractScope implements IScopeView
 					csRef = csRef.eContainer();
 				}
 				ModelElementCS csContext = (ModelElementCS) csRef.eContainer();
-				AliasAnalysis aliasAnalysis = AliasAnalysis.getAdapter(EcoreUtil.getRootContainer(csContext).eResource(), metaModelManager);
-				Element context = csContext.getPivot();
-				while ((context != null) && !(context instanceof Namespace) && !(context instanceof Type)) {
-					EObject container = context.eContainer();
-					if (container instanceof Element) {
-						context = (Element) container;
-					}
-					else {
-						break;
-					}
+				Resource eResource = EcoreUtil.getRootContainer(csContext).eResource();
+				if (eResource == null) {
+					return Collections.emptyList();
 				}
+				AliasAnalysis aliasAnalysis = AliasAnalysis.getAdapter(eResource, metaModelManager);
+				Element context = csContext.getPivot();
+				if (context == null) {
+					return Collections.emptyList();
+				}
+				context = getContextRoot(context);
 				QualifiedPath contextPath = new QualifiedPath(aliasAnalysis.getPath(context));
 				QualifiedPath objectPath = new QualifiedPath(aliasAnalysis.getPath((Element) object));
 				QualifiedPath qualifiedRelativeName = objectPath.deresolve(contextPath);
@@ -299,17 +315,16 @@ public class BaseScopeView extends AbstractScope implements IScopeView
 				csRef = csRef.eContainer();
 			}
 			Pivotable csContext = (Pivotable) csRef.eContainer();
-			AliasAnalysis aliasAnalysis = AliasAnalysis.getAdapter(csContext.eResource(), metaModelManager);
-			Element context = csContext.getPivot();
-			while ((context != null) && !(context instanceof Namespace) && !(context instanceof Type)) {
-				EObject container = context.eContainer();
-				if (container instanceof Element) {
-					context = (Element) container;
-				}
-				else {
-					break;
-				}
+			Resource eResource = csContext.eResource();
+			if (eResource == null) {
+				return Collections.emptyList();
 			}
+			AliasAnalysis aliasAnalysis = AliasAnalysis.getAdapter(eResource, metaModelManager);
+			Element context = csContext.getPivot();
+			if (context == null) {
+				return Collections.emptyList();
+			}
+			context = getContextRoot(context);
 			QualifiedPath contextPath = new QualifiedPath(aliasAnalysis.getPath(context));
 			QualifiedPath objectPath = new QualifiedPath(aliasAnalysis.getPath((Element) object));
 			QualifiedPath qualifiedRelativeName = objectPath.deresolve(contextPath);
@@ -347,8 +362,9 @@ public class BaseScopeView extends AbstractScope implements IScopeView
 		return uri.toString();
 	}
 
+	@SuppressWarnings("null")
 	@Override
-	public IScopeView getParent() {
+	public @NonNull IScopeView getParent() {
 		return (IScopeView) super.getParent();
 	}
 
@@ -380,7 +396,7 @@ public class BaseScopeView extends AbstractScope implements IScopeView
 		}
 	}
 
-	public final EObject getTarget() {
+	public final @NonNull EObject getTarget() {
 		return target;
 	}
 

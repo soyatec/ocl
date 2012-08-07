@@ -94,7 +94,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 			OCL.initialize(resourceSet);
 		}
 
-		public URI getPackageURI(@NonNull EObject eObject) {
+		public @Nullable URI getPackageURI(@NonNull EObject eObject) {
 			if (eObject instanceof org.eclipse.uml2.uml.Package) {
 				String uri = ((org.eclipse.uml2.uml.Package)eObject).getURI();
 				if (uri != null) {
@@ -104,9 +104,11 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 			return null;
 		}
 
-		public Element importFromResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource umlResource, @Nullable String uriFragment) throws ParserException {
+		public @Nullable Element importFromResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource umlResource, @Nullable URI uri) throws ParserException {
 			UML2Pivot conversion = getAdapter(umlResource, metaModelManager);
+			conversion.setUMLURI(uri);
 			Root pivotRoot = conversion.getPivotRoot();
+			String uriFragment = uri != null ? uri.fragment() : null;
 			if (uriFragment == null) {
 				return pivotRoot;
 			}
@@ -122,11 +124,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 
 	public static MetaModelManager.Factory FACTORY = new Factory();
 
-	public static UML2Pivot findAdapter(Resource resource, MetaModelManager metaModelManager) {
-		assert metaModelManager != null;
-		if (resource == null) {
-			return null;
-		}
+	public static @Nullable UML2Pivot findAdapter(@NonNull Resource resource, @NonNull MetaModelManager metaModelManager) {
 		for (Adapter adapter : resource.eAdapters()) {
 			if (adapter instanceof UML2Pivot) {
 				UML2Pivot uml2Pivot = (UML2Pivot)adapter;
@@ -138,10 +136,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		return null;
 	}
 
-	public static UML2Pivot getAdapter(Resource resource, MetaModelManager metaModelManager) {
-		if (resource == null) {
-			return null;
-		}
+	public static @NonNull UML2Pivot getAdapter(@NonNull Resource resource, @Nullable MetaModelManager metaModelManager) {
 		UML2Pivot adapter;
 		if (metaModelManager == null) {
 			metaModelManager = new MetaModelManager();
@@ -166,7 +161,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 	 * @return the Pivot root package
 	 * @throws ParserException 
 	 */
-	public static Root importFromUML(MetaModelManager metaModelManager, String alias, Resource umlResource) throws ParserException {
+	public static Root importFromUML(@NonNull MetaModelManager metaModelManager, String alias, Resource umlResource) throws ParserException {
 		if (umlResource == null) {
 			return null;
 		}
@@ -182,11 +177,14 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 	 * @return the pivot element
 	 * @throws ParserException 
 	 */
-	public static Element importFromUML(MetaModelManager metaModelManager, String alias, EObject eObject) throws ParserException {
+	public static Element importFromUML(@NonNull MetaModelManager metaModelManager, String alias, EObject eObject) throws ParserException {
 		if (eObject == null) {
 			return null;
 		}
 		Resource umlResource = eObject.eResource();
+		if (umlResource == null) {
+			return null;
+		}
 		UML2Pivot conversion = getAdapter(umlResource, metaModelManager);
 		@SuppressWarnings("unused")
 		Root pivotRoot = conversion.getPivotRoot();
@@ -234,7 +232,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		return null;
 	}
 
-	public static boolean isUML(Resource resource) {
+	public static boolean isUML(@NonNull Resource resource) {
 		List<EObject> contents = resource.getContents();
 		for (EObject content : contents) {
 			if (content instanceof org.eclipse.uml2.uml.Package) {
@@ -435,7 +433,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 //				if ("executionSpecification".equals(umlProperty.getName())) {
 //					System.out.println("Add " + umlProperty);
 //				}
-				if ((predicate == null) || predicate.filter(umlProperty)) {
+				if ((umlProperty != null) && ((predicate == null) || predicate.filter(umlProperty))) {
 					umlProperties.add(umlProperty);
 				}
 			}
@@ -795,6 +793,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 	
 	protected final @NonNull Resource umlResource;	
 	protected Root pivotRoot = null;	// Set by installDeclarations
+	private URI umlURI = null;;
 	
 	protected UML2Pivot(@NonNull Resource umlResource, @NonNull MetaModelManager metaModelManager) {
 		super(metaModelManager);
@@ -860,7 +859,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 
 	protected @NonNull Root installDeclarations(@NonNull Resource pivotResource) {
 		URI pivotURI = pivotResource.getURI();
-		Root pivotRoot2 = pivotRoot = metaModelManager.createRoot(pivotURI.lastSegment(), null);
+		Root pivotRoot2 = pivotRoot = metaModelManager.createRoot(pivotURI.lastSegment(), umlURI != null ? umlURI.toString() : null);
 		pivotResource.getContents().add(pivotRoot2);
 		UML2PivotDeclarationSwitch declarationPass = getDeclarationPass();
 		List<org.eclipse.ocl.examples.pivot.Package> rootPackages = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();
@@ -1172,6 +1171,10 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 
 	public void setTarget(Notifier newTarget) {
 		assert (newTarget == null) || (newTarget == umlResource);
+	}
+
+	public void setUMLURI(URI umlURI) {
+		this.umlURI  = umlURI;
 	}
 
 	public void unsetTarget(Notifier oldTarget) {

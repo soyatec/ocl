@@ -16,6 +16,7 @@ package org.eclipse.ocl.examples.xtext.base.attributes;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -28,7 +29,7 @@ public class PathElementCSAttribution extends AbstractAttribution
 	public static final PathElementCSAttribution INSTANCE = new PathElementCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		PathElementCS targetElement = (PathElementCS)target;
 		EClassifier eClassifier = targetElement.getElementType();
 		if (eClassifier == null) {
@@ -38,7 +39,9 @@ public class PathElementCSAttribution extends AbstractAttribution
 		try {
 			environmentView.setRequiredType(eClassifier);
 			ElementCS scopeTarget = targetElement.getLogicalParent();
-			BaseScopeView.computeLookups(environmentView, scopeTarget, target, null, null);
+			if (scopeTarget != null) {
+				BaseScopeView.computeLookups(environmentView, scopeTarget, target, null, null);
+			}
 			return null;
 		}
 		finally {

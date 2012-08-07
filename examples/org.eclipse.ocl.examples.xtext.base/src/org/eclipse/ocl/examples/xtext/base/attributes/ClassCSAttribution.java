@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.xtext.base.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.ClassifierType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
@@ -32,7 +33,7 @@ public class ClassCSAttribution extends AbstractAttribution
 	public static final ClassCSAttribution INSTANCE = new ClassCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		ClassCS targetElement = (ClassCS)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
 //		TypeBindingsCS bindings = scopeView.getBindings();
@@ -54,8 +55,10 @@ public class ClassCSAttribution extends AbstractAttribution
 //				MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 				if (pivot instanceof ClassifierType) {
 					Type instanceType = ((ClassifierType)pivot).getInstanceType();
-					environmentView.addAllOperations(instanceType, Boolean.TRUE);
-					environmentView.addAllProperties(instanceType, Boolean.TRUE);
+					if (instanceType != null) {
+						environmentView.addAllOperations(instanceType, Boolean.TRUE);
+						environmentView.addAllProperties(instanceType, Boolean.TRUE);
+					}
 				}
 				environmentView.addAllOperations(pivot, Boolean.FALSE);
 				environmentView.addAllProperties(pivot, Boolean.FALSE);

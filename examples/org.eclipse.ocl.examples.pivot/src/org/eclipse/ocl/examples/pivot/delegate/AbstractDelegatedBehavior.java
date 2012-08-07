@@ -155,17 +155,14 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 						String message = PivotUtil.getMessage(opaqueExpression);
 						if ((message != null) && (message.length() > 0)) {
 							ParserContext messageContext = new DiagnosticContext(parserContext, constraint);
-							OCLExpression messageExpression = null;
 							ExpressionInOCL resolveSpecification = messageContext.parse(message);
-							if (resolveSpecification != null) {
-								messageExpression = resolveSpecification.getBodyExpression();
-								for (TreeIterator<EObject> tit = messageExpression.eAllContents(); tit.hasNext(); ) {
-									EObject eObject = tit.next();
-									if (eObject instanceof VariableExp) {
-										VariableExp variable = (VariableExp)eObject;
-										if (variable.getReferredVariable() == resolveSpecification.getContextVariable()) {
-											variable.setReferredVariable(expressionInOCL.getContextVariable());
-										}
+							OCLExpression messageExpression = resolveSpecification.getBodyExpression();
+							for (TreeIterator<EObject> tit = messageExpression.eAllContents(); tit.hasNext(); ) {
+								EObject eObject = tit.next();
+								if (eObject instanceof VariableExp) {
+									VariableExp variable = (VariableExp)eObject;
+									if (variable.getReferredVariable() == resolveSpecification.getContextVariable()) {
+										variable.setReferredVariable(expressionInOCL.getContextVariable());
 									}
 								}
 							}

@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.xtext.base.baseCST.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
@@ -111,7 +112,7 @@ public abstract class ElementCSImpl extends EObjectImpl implements ElementCS {
 //		return "<" + eClass().getName() + ">";
 	}
 
-	public <R> R accept(BaseCSVisitor<R> visitor) {
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return visitor.visitElementCS(this);
 	}
 } //ElementCSImpl

@@ -14,6 +14,7 @@
  */
 package org.eclipse.ocl.examples.xtext.base.scoping;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.xtext.scoping.IScope;
 
@@ -24,5 +25,5 @@ import org.eclipse.xtext.scoping.IScope;
  */
 public interface IScopeView extends ScopeView, IScope
 {	
-	IScopeView getParent();
+	@NonNull IScopeView getParent();
 }

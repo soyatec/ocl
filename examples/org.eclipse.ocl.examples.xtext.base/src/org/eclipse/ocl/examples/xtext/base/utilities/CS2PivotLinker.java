@@ -16,9 +16,13 @@
  */
 package org.eclipse.ocl.examples.xtext.base.utilities;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.utilities.IllegalLibraryException;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.LibraryDiagnostic;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
@@ -61,37 +65,40 @@ public class CS2PivotLinker extends LazyLinker
 		Resource eResource = model.eResource();		// FIXME Try to do a narrower refresh
 //		System.out.println(Thread.currentThread().getName() + " afterModelLinked " + getClass().getSimpleName() + "@" + hashCode()
 //			+ " " + eResource.getClass().getSimpleName() + "@" + eResource.hashCode() + " " + eResource.getURI());		
-		if ((eResource instanceof BaseCSResource) && !ElementUtil.hasSyntaxError(eResource.getErrors())) {
-//			System.out.println("Starting to refreshPivotMappings for " + eResource.getURI());
-			BaseCSResource csResource = (BaseCSResource) eResource;
-			try {
-				CS2PivotResourceAdapter resourceAdapter = CS2PivotResourceAdapter.getAdapter(csResource, null);
-				resourceAdapter.refreshPivotMappings(diagnosticsConsumer);		// FIXME redundant
-/*				Resource pivotResource = resourceAdapter.getPivotResource(csResource);
-				ResourceSet resourceSet = csResource.getResourceSet();
-				if (resourceSet instanceof ResourceSetImpl) {
-					ResourceSetImpl resourceSetImpl = (ResourceSetImpl) resourceSet;
-					Map<URI, Resource> uriResourceMap = resourceSetImpl.getURIResourceMap();
-					if (uriResourceMap == null) {
-						uriResourceMap = new HashMap<URI, Resource>();
-						resourceSetImpl.setURIResourceMap(uriResourceMap);
-					}
-					uriResourceMap.put(pivotResource.getURI(), pivotResource);
-				} */
+		if ((diagnosticsConsumer != null) && eResource instanceof BaseCSResource) {
+			@SuppressWarnings("null") @NonNull List<Diagnostic> errors = eResource.getErrors();
+			if (!ElementUtil.hasSyntaxError(errors)) {
+//				System.out.println("Starting to refreshPivotMappings for " + eResource.getURI());
+				BaseCSResource csResource = (BaseCSResource) eResource;
+				try {
+					CS2PivotResourceAdapter resourceAdapter = CS2PivotResourceAdapter.getAdapter(csResource, null);
+					resourceAdapter.refreshPivotMappings(diagnosticsConsumer);		// FIXME redundant
+/*					Resource pivotResource = resourceAdapter.getPivotResource(csResource);
+					ResourceSet resourceSet = csResource.getResourceSet();
+					if (resourceSet instanceof ResourceSetImpl) {
+						ResourceSetImpl resourceSetImpl = (ResourceSetImpl) resourceSet;
+						Map<URI, Resource> uriResourceMap = resourceSetImpl.getURIResourceMap();
+						if (uriResourceMap == null) {
+							uriResourceMap = new HashMap<URI, Resource>();
+							resourceSetImpl.setURIResourceMap(uriResourceMap);
+						}
+						uriResourceMap.put(pivotResource.getURI(), pivotResource);
+					} */
+				}
+				catch (Exception exception) {	// Never let an Exception leak out to abort Xtext
+				    Exception cause = exception instanceof Resource.IOWrappedException ? (Exception)exception.getCause() : exception;
+//			    	DiagnosticWrappedException wrappedException = new DiagnosticWrappedException(cause);
+//					eResource.getErrors().add(wrappedException);
+				    if (cause instanceof IllegalLibraryException) {
+				    	errors.add(new LibraryDiagnostic(cause));
+				    }
+				    else {
+				    	errors.add(new ExceptionDiagnostic(cause));
+				    	BasePlugin.error(0, csResource.getEditorName() + " Editor linking error", cause);
+				    }
+				}
+//				System.out.println("Finished refreshPivotMappings for " + eResource.getURI());
 			}
-			catch (Exception exception) {	// Never let an Exception leak out to abort Xtext
-			    Exception cause = exception instanceof Resource.IOWrappedException ? (Exception)exception.getCause() : exception;
-//			    DiagnosticWrappedException wrappedException = new DiagnosticWrappedException(cause);
-//				eResource.getErrors().add(wrappedException);
-			    if (cause instanceof IllegalLibraryException) {
-			    	eResource.getErrors().add(new LibraryDiagnostic(cause));
-			    }
-			    else {
-			    	eResource.getErrors().add(new ExceptionDiagnostic(cause));
-			    	BasePlugin.error(0, csResource.getEditorName() + " Editor linking error", cause);
-			    }
-			}
-//			System.out.println("Finished refreshPivotMappings for " + eResource.getURI());
 		}
 	}
 }

@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.base.attributes;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
@@ -29,7 +30,7 @@ public class DataTypeCSAttribution extends AbstractAttribution
 	public static final DataTypeCSAttribution INSTANCE = new DataTypeCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		DataTypeCS targetElement = (DataTypeCS)target;
 		DataType pivot = PivotUtil.getPivot(DataType.class, targetElement);
 		if (pivot != null) {

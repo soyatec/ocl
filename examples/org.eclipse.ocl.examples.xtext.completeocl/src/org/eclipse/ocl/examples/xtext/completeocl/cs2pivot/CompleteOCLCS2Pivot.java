@@ -23,6 +23,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
@@ -49,7 +51,7 @@ public class CompleteOCLCS2Pivot extends EssentialOCLCS2Pivot
 			return null;
 		}
 
-		public Element importFromResource(MetaModelManager metaModelManager, Resource resource, String uriFragment) {
+		public @Nullable Element importFromResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource resource, @NonNull URI uri) {
 			Resource pivotResource = ((CompleteOCLCSResource)resource).getPivotResource(metaModelManager);
 			if (pivotResource == null) {
 				return null;
@@ -58,7 +60,7 @@ public class CompleteOCLCS2Pivot extends EssentialOCLCS2Pivot
 			if (contents.size() <= 0) {
 				return null;
 			}
-			if (uriFragment == null) {
+			if ((uri != null) && (uri.fragment() == null)) {
 				return (Element) contents.get(0);
 			}
 			else {

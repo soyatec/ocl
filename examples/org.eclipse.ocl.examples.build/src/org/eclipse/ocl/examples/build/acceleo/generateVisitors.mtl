@@ -89,6 +89,8 @@ AbstractDelegatingVisitor
 [file ('AbstractExtendingDelegating' + visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import [visitorBasePackage/].AbstractDelegating[visitorBaseClass/];
 import [visitorBasePackage/].[visitorBaseClass/];
 
@@ -180,7 +182,7 @@ public abstract class AbstractExtending[visitorClass/]<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractExtending[visitorClass/](@Nullable C context) {
+	protected AbstractExtending[visitorClass/](@NonNull C context) {
 	    super(context);
 	}	
 [for (eClass : EClass | pkg.eClassifiers->filter(EClass)->select(not interface)->sortedBy(name))]
@@ -202,6 +204,9 @@ public abstract class AbstractExtending[visitorClass/]<R, C>
 [template public generateAbstractMonitorVisitor(pkg : EPackage, visitorPackage : String, modelPackage : String, extendsVisitorClass : String, visitorBaseClassPath : String, sourceFile : String)]
 [file (extendsVisitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
+
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An [extendsVisitorClass/] provides a default implementation for each
@@ -282,6 +287,9 @@ DerivedAbstractNullVisitor
 [file ('AbstractNull' + visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  * An AbstractNull[visitorClass/] provides a default implementation for each
  * visitXxx method that returns null.
@@ -326,14 +334,14 @@ public abstract class Abstract[visitorClass/]<R, C> implements [visitorClass/]<R
     /**
      * Context for the AST visitation.
      */
-    protected final C context;
+    protected final @NonNull C context;
 	
 	/**
 	 * Initializes me with an initial value for my result.
 	 * 
 	 * @param context my initial result value
 	 */
-	protected Abstract[visitorClass/](@Nullable C context) {
+	protected Abstract[visitorClass/](@NonNull C context) {
 	    this.context = context;
 	}
 
@@ -400,6 +408,8 @@ public interface Decorable[visitorClass/]<R> extends [visitorClass/]<R>[if (visi
 [file ('Abstract' + visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  */
 public abstract class Abstract[visitorClass/]<R, C>
@@ -421,6 +431,9 @@ public abstract class Abstract[visitorClass/]<R, C>
 [template public generateDerivedVisitorInterface(pkg : EPackage, visitorPackage : String, modelPackage : String, visitorClass : String, visitorBasePackage : String, visitorBaseClass : String, sourceFile : String)]
 [file (visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
+
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  */

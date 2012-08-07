@@ -25,6 +25,9 @@
  */
 package	org.eclipse.ocl.examples.xtext.oclinecore.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  * An AbstractNullOCLinEcoreCSVisitor provides a default implementation for each
  * visitXxx method that returns null.
@@ -37,15 +40,15 @@ public abstract class AbstractNullOCLinEcoreCSVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractNullOCLinEcoreCSVisitor(C context) {
+	protected AbstractNullOCLinEcoreCSVisitor(@NonNull C context) {
 	    super(context);
 	}	
 
-	public R visitOCLinEcoreConstraintCS(org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS object) {
+	public @Nullable R visitOCLinEcoreConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS object) {
 		return null;
 	}
 
-	public R visitOCLinEcoreSpecificationCS(org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreSpecificationCS object) {
+	public @Nullable R visitOCLinEcoreSpecificationCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreSpecificationCS object) {
 		return null;
 	}
 }

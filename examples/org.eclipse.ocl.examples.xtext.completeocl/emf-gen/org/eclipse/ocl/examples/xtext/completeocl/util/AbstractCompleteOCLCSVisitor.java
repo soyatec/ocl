@@ -25,6 +25,8 @@
  */
 package	org.eclipse.ocl.examples.xtext.completeocl.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  */
 public abstract class AbstractCompleteOCLCSVisitor<R, C>
@@ -36,7 +38,7 @@ public abstract class AbstractCompleteOCLCSVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractCompleteOCLCSVisitor(C context) {
+	protected AbstractCompleteOCLCSVisitor(@NonNull C context) {
 	    super(context);
 	}
 }

@@ -52,7 +52,8 @@ public class OCLstdlibContainmentVisitor extends AbstractOCLstdlibContainmentVis
 		@SuppressWarnings("unchecked")
 		Class<org.eclipse.ocl.examples.pivot.Class> instanceClass = (Class<org.eclipse.ocl.examples.pivot.Class>)eClass.getInstanceClass();
 		org.eclipse.ocl.examples.pivot.Class pivotElement = refreshNamedElement(instanceClass, eClass, csElement);
-		return refreshClass(pivotElement, csElement);
+		refreshClass(pivotElement, csElement);
+		return null;
 	}
 
 	@Override

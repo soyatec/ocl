@@ -322,7 +322,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		doSwitchAll(pivotElement.getNestedPackage(), umlPackage2.getNestedPackages(), null);
 		doSwitchAll(pivotElement.getOwnedType(), umlPackage2.getOwnedTypes(), new UML2Pivot.Predicate<org.eclipse.uml2.uml.Type>()
 		{
-			public boolean filter(org.eclipse.uml2.uml.Type element) {
+			public boolean filter(@NonNull org.eclipse.uml2.uml.Type element) {
 				return !(element instanceof org.eclipse.uml2.uml.Association);
 			}
 		});
@@ -415,7 +415,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		@SuppressWarnings("null") @NonNull List<org.eclipse.uml2.uml.Property> umlAttributes = umlClassifier.getAttributes();
 		converter.addProperties(umlAttributes, new UML2Pivot.Predicate<org.eclipse.uml2.uml.Property>()
 		{
-			public boolean filter(org.eclipse.uml2.uml.Property element) {
+			public boolean filter(@NonNull org.eclipse.uml2.uml.Property element) {
 				if (element.getAssociation() == null) {
 					doSwitch(element);
 				}
@@ -623,7 +623,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 
 	public <T extends Element, V extends EObject> void doSwitchAll(/*@NonNull*/ Collection<T> pivotObjects, /*@NonNull*/ List<V> eObjects, @Nullable UML2Pivot.Predicate<V> predicate) {
 		for (V eObject : eObjects) {
-			if ((predicate == null) || predicate.filter(eObject)) {
+			if ((eObject != null) && ((predicate == null) || predicate.filter(eObject))) {
 				@SuppressWarnings("unchecked")
 				T pivotObject = (T) doSwitch(eObject);
 				if (pivotObject != null) {

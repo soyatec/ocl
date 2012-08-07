@@ -21,6 +21,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -73,18 +75,19 @@ public class BaseCS2MonikerVisitor extends AbstractExtendingBaseCSVisitor<Boolea
 	private static final class Factory implements CS2Moniker.Factory
 	{
 		private Factory() {
-			CS2Moniker.addFactory(BaseCSTPackage.eINSTANCE, this);
+			@SuppressWarnings("null") @NonNull BaseCSTPackage eInstance = BaseCSTPackage.eINSTANCE;
+			CS2Moniker.addFactory(eInstance, this);
 			Pivot2MonikerVisitor.initialize();
 		}
 		
-		public BaseCSVisitor<?> create(CS2Moniker context) {
+		public BaseCSVisitor<?> create(@NonNull CS2Moniker context) {
 			return new BaseCS2MonikerVisitor(context);
 		}
 	}
 
 	public static CS2Moniker.Factory FACTORY = new Factory();
 			
-	public BaseCS2MonikerVisitor(CS2Moniker context) {
+	public BaseCS2MonikerVisitor(@NonNull CS2Moniker context) {
 		super(context);
 	}
 
@@ -105,12 +108,12 @@ public class BaseCS2MonikerVisitor extends AbstractExtendingBaseCSVisitor<Boolea
 		return context.toString();
 	}
 
-	public Boolean visiting(VisitableCS visitable) {
+	public Boolean visiting(@NonNull VisitableCS visitable) {
 		throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for CS Moniker");
 	}	
 
 	@Override
-	public Boolean visitAnnotationCS(AnnotationCS object) {
+	public Boolean visitAnnotationCS(@NonNull AnnotationCS object) {
 		context.appendParentCS(object, MONIKER_SCOPE_SEPARATOR);
 		context.append(ANNOTATION_QUOTE);
 		context.append(String.valueOf(object.getName()));
@@ -134,14 +137,14 @@ public class BaseCS2MonikerVisitor extends AbstractExtendingBaseCSVisitor<Boolea
 	}
 
 	@Override
-	public Boolean visitAttributeCS(AttributeCS object) {
+	public Boolean visitAttributeCS(@NonNull AttributeCS object) {
 		context.appendParentCS(object, MONIKER_SCOPE_SEPARATOR);
 		context.appendNameCS(object);
 		return true;
 	}
 
 	@Override
-	public Boolean visitClassifierCS(ClassifierCS object) {
+	public Boolean visitClassifierCS(@NonNull ClassifierCS object) {
 		context.appendParentCS(object, MONIKER_SCOPE_SEPARATOR);
 		context.appendNameCS(object);
 		context.appendTemplateParametersCS(object);
@@ -149,7 +152,7 @@ public class BaseCS2MonikerVisitor extends AbstractExtendingBaseCSVisitor<Boolea
 	}
 
 	@Override
-	public Boolean visitConstraintCS(ConstraintCS csConstraint) {
+	public Boolean visitConstraintCS(@NonNull ConstraintCS csConstraint) {
 		context.appendParentCS(csConstraint, MONIKER_SCOPE_SEPARATOR);
 		context.append(csConstraint.getStereotype());
 		context.appendConstraintCSDisambiguator(csConstraint);
@@ -157,28 +160,28 @@ public class BaseCS2MonikerVisitor extends AbstractExtendingBaseCSVisitor<Boolea
 	}
 
 	@Override
-	public Boolean visitDetailCS(DetailCS object) {
+	public Boolean visitDetailCS(@NonNull DetailCS object) {
 		context.appendParentCS(object, BINDINGS_PREFIX);
 		context.appendNameCS(object);
 		return true;
 	}
 
 	@Override
-	public Boolean visitDocumentationCS(DocumentationCS object) {
+	public Boolean visitDocumentationCS(@NonNull DocumentationCS object) {
 		context.appendParentCS(object, "@");
 		context.append(hashCode());
 		return true;
 	}
 
 	@Override
-	public Boolean visitEnumerationLiteralCS(EnumerationLiteralCS object) {
+	public Boolean visitEnumerationLiteralCS(@NonNull EnumerationLiteralCS object) {
 		context.appendParentCS(object, MONIKER_SCOPE_SEPARATOR);
 		context.appendNameCS(object);
 		return true;
 	}
 
 	@Override
-	public Boolean visitImportCS(ImportCS object) {
+	public Boolean visitImportCS(@NonNull ImportCS object) {
 		context.appendNameCS(object);
 		context.append(" : '");
 		context.append(object.getUri());
@@ -187,7 +190,7 @@ public class BaseCS2MonikerVisitor extends AbstractExtendingBaseCSVisitor<Boolea
 	}
 
 	@Override
-	public Boolean visitLambdaTypeCS(LambdaTypeCS object) {
+	public Boolean visitLambdaTypeCS(@NonNull LambdaTypeCS object) {
 		context.appendNameCS(object);
 		context.appendTemplateParametersCS(object);
 		context.append(MONIKER_OPERATOR_SEPARATOR);
@@ -199,7 +202,9 @@ public class BaseCS2MonikerVisitor extends AbstractExtendingBaseCSVisitor<Boolea
 		String prefix = ""; //$NON-NLS-1$
 		for (TypedRefCS csParameterType : object.getOwnedParameterType()) {
 			context.append(prefix);
-			context.appendElementCS(csParameterType);
+			if (csParameterType != null) {
+				context.appendElementCS(csParameterType);
+			}
 			prefix = PARAMETER_SEPARATOR;
 		}
 		context.append(PARAMETER_SUFFIX);
@@ -211,13 +216,13 @@ public class BaseCS2MonikerVisitor extends AbstractExtendingBaseCSVisitor<Boolea
 	}
 
 	@Override
-	public Boolean visitModelElementRefCS(ModelElementRefCS object) {
+	public Boolean visitModelElementRefCS(@NonNull ModelElementRefCS object) {
 		context.appendElement(object.getElement());
 		return true;
 	}
 
 	@Override
-	public Boolean visitMultiplicityBoundsCS(MultiplicityBoundsCS object) {
+	public Boolean visitMultiplicityBoundsCS(@NonNull MultiplicityBoundsCS object) {
 		context.append("[");
 		context.append(object.getLowerBound());
 		context.append("..");
@@ -227,7 +232,7 @@ public class BaseCS2MonikerVisitor extends AbstractExtendingBaseCSVisitor<Boolea
 	}
 
 	@Override
-	public Boolean visitMultiplicityStringCS(MultiplicityStringCS object) {
+	public Boolean visitMultiplicityStringCS(@NonNull MultiplicityStringCS object) {
 		context.append("[");
 		context.append(object.getStringBounds());
 		context.append("]");
@@ -235,14 +240,14 @@ public class BaseCS2MonikerVisitor extends AbstractExtendingBaseCSVisitor<Boolea
 	}
 
 	@Override
-	public Boolean visitNamedElementCS(NamedElementCS object) {
+	public Boolean visitNamedElementCS(@NonNull NamedElementCS object) {
 		context.appendParentCS(object, MONIKER_SCOPE_SEPARATOR);
 		context.appendNameCS(object);
 		return true;
 	}
 
 	@Override
-	public Boolean visitOperationCS(OperationCS object) {
+	public Boolean visitOperationCS(@NonNull OperationCS object) {
 		context.appendParentCS(object, MONIKER_SCOPE_SEPARATOR);
 		context.appendNameCS(object);
 		context.appendTemplateParametersCS(object);
@@ -251,7 +256,7 @@ public class BaseCS2MonikerVisitor extends AbstractExtendingBaseCSVisitor<Boolea
 	}
 
 	@Override
-	public Boolean visitPackageCS(PackageCS object) {
+	public Boolean visitPackageCS(@NonNull PackageCS object) {
 		Element pivot = PivotUtil.getPivot(Element.class, object);
 		assert pivot != null;
 		context.appendElement(pivot);
@@ -259,56 +264,61 @@ public class BaseCS2MonikerVisitor extends AbstractExtendingBaseCSVisitor<Boolea
 	}
 
 	@Override
-	public Boolean visitParameterCS(ParameterCS object) {
+	public Boolean visitParameterCS(@NonNull ParameterCS object) {
 		context.appendParentCS(object, MONIKER_SCOPE_SEPARATOR);
 		context.appendNameCS(object);
 		return true;
 	}
 
 	@Override
-	public Boolean visitPathElementCS(PathElementCS object) {
+	public Boolean visitPathElementCS(@NonNull PathElementCS object) {
 		safeAppendMonikerOf(object.getElement());
 		return true;
 	}
 
 	@Override
-	public Boolean visitPathNameCS(PathNameCS object) {
+	public Boolean visitPathNameCS(@NonNull PathNameCS object) {
 		safeAppendMonikerOf(object.getElement());
 		return true;
 	}
 
 	@Override
-	public Boolean visitPrimitiveTypeRefCS(PrimitiveTypeRefCS object) {
+	public Boolean visitPrimitiveTypeRefCS(@NonNull PrimitiveTypeRefCS object) {
 		context.appendNameCS(object);
 		return true;
 	}
 
 	@Override
-	public Boolean visitReferenceCS(ReferenceCS object) {
+	public Boolean visitReferenceCS(@NonNull ReferenceCS object) {
 		context.appendParentCS(object, MONIKER_SCOPE_SEPARATOR);
 		context.appendNameCS(object);
 		return true;
 	}
 	
 	@Override
-	public Boolean visitSpecificationCS(SpecificationCS object) {
+	public Boolean visitSpecificationCS(@NonNull SpecificationCS object) {
 		context.appendParentCS(object, MONIKER_SCOPE_SEPARATOR);
 		context.append(PivotPackage.Literals.CONSTRAINT__SPECIFICATION.getName());
 		return true;
 	}
 
 	@Override
-	public Boolean visitTemplateBindingCS(TemplateBindingCS object) {
-		context.appendElementCS(object.getOwningTemplateBindableElement());
+	public Boolean visitTemplateBindingCS(@NonNull TemplateBindingCS object) {
+		TypedTypeRefCS owningTemplateBindableElement = object.getOwningTemplateBindableElement();
+		if (owningTemplateBindableElement != null) {
+			context.appendElementCS(owningTemplateBindableElement);
+		}
 		context.append(BINDINGS_PREFIX);
 		return true;
 	}
 
 	@Override
-	public Boolean visitTemplateParameterCS(TemplateParameterCS object) {
+	public Boolean visitTemplateParameterCS(@NonNull TemplateParameterCS object) {
 //		if (!context.hasEmittedCS(object)) {
 			TemplateableElementCS owningTemplateElement = object.getOwningTemplateSignature().getOwningTemplateElement();
-			context.appendElementCS(owningTemplateElement);
+			if (owningTemplateElement != null) {
+				context.appendElementCS(owningTemplateElement);
+			}
 			context.append(TEMPLATE_PARAMETER_PREFIX);
 //		}
 		context.appendNameCS(object);
@@ -316,28 +326,33 @@ public class BaseCS2MonikerVisitor extends AbstractExtendingBaseCSVisitor<Boolea
 	}
 
 	@Override
-	public Boolean visitTemplateParameterSubstitutionCS(TemplateParameterSubstitutionCS object) {
-		context.appendElementCS(object.getOwningTemplateBinding());
+	public Boolean visitTemplateParameterSubstitutionCS(@NonNull TemplateParameterSubstitutionCS object) {
+		TemplateBindingCS owningTemplateBinding = object.getOwningTemplateBinding();
+		if (owningTemplateBinding != null) {
+			context.appendElementCS(owningTemplateBinding);
+		}
 		TemplateParameter formalTemplateParameter = ElementUtil.getFormalTemplateParameter(object);	
-		context.appendElement(formalTemplateParameter.getParameteredElement());
+		if (formalTemplateParameter != null) {
+			context.appendElement(formalTemplateParameter.getParameteredElement());
+		}
 		return true;
 	}
 
 	@Override
-	public Boolean visitTemplateSignatureCS(TemplateSignatureCS object) {
+	public Boolean visitTemplateSignatureCS(@NonNull TemplateSignatureCS object) {
 		context.appendParentCS(object, MONIKER_SCOPE_SEPARATOR);
 		return true;
 	}
 
 	@Override
-	public Boolean visitTuplePartCS(TuplePartCS object) {
+	public Boolean visitTuplePartCS(@NonNull TuplePartCS object) {
 		context.appendParentCS(object, MONIKER_SCOPE_SEPARATOR);
 		context.appendNameCS(object);
 		return true;
 	}
 
 	@Override
-	public Boolean visitTupleTypeCS(TupleTypeCS object) {
+	public Boolean visitTupleTypeCS(@NonNull TupleTypeCS object) {
 		context.appendNameCS(object);
 		List<TuplePartCS> parts = new ArrayList<TuplePartCS>(object.getOwnedParts());
 		Collections.sort(parts, new Comparator<TuplePartCS>()
@@ -363,11 +378,12 @@ public class BaseCS2MonikerVisitor extends AbstractExtendingBaseCSVisitor<Boolea
 	}
 
 	@Override
-	public Boolean visitTypedTypeRefCS(TypedTypeRefCS object) {
+	public Boolean visitTypedTypeRefCS(@NonNull TypedTypeRefCS object) {
 		try {
 			// Operation template parameters are not resolvable until resolved
 			//  so monikers involving templates are use referencing rather than resolved name. 
-			String text = ElementUtil.getText(object, BaseCSTPackage.Literals.TYPED_TYPE_REF_CS__TYPE);
+			@SuppressWarnings("null") @NonNull EReference eReference = BaseCSTPackage.Literals.TYPED_TYPE_REF_CS__TYPE;
+			String text = ElementUtil.getText(object, eReference);
 			TemplateParameterCS csTemplateParameter = context.getTemplateParameterCS(text);
 			if (csTemplateParameter != null) { 
 				if (!context.hasEmittedCS(csTemplateParameter)) {
@@ -403,7 +419,7 @@ public class BaseCS2MonikerVisitor extends AbstractExtendingBaseCSVisitor<Boolea
 	}
 
 	@Override
-	public Boolean visitWildcardTypeRefCS(WildcardTypeRefCS object) {
+	public Boolean visitWildcardTypeRefCS(@NonNull WildcardTypeRefCS object) {
 		TemplateParameterSubstitutionCS csTemplateParameterSubstitution = (TemplateParameterSubstitutionCS)object.eContainer();
 		TemplateBindingCS csTemplateBinding = csTemplateParameterSubstitution.getOwningTemplateBinding();
 		int index = csTemplateBinding.getOwnedParameterSubstitution().indexOf(csTemplateParameterSubstitution);

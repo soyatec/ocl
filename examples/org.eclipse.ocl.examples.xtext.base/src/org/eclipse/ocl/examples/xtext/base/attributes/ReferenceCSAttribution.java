@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.xtext.base.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -34,7 +35,7 @@ public class ReferenceCSAttribution extends AbstractAttribution
 	public static final ReferenceCSAttribution INSTANCE = new ReferenceCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		ReferenceCS targetElement = (ReferenceCS)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
 		if (containmentFeature == BaseCSTPackage.Literals.REFERENCE_CS__OPPOSITE) {

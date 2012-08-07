@@ -25,6 +25,9 @@
  */
 package	org.eclipse.ocl.examples.xtext.oclinecore.util;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  * An AbstractExtendingOCLinEcoreCSVisitor provides a default implementation for each
  * visitXxx method that delegates to the visitYyy method of the first
@@ -41,15 +44,15 @@ public abstract class AbstractExtendingOCLinEcoreCSVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractExtendingOCLinEcoreCSVisitor(C context) {
+	protected AbstractExtendingOCLinEcoreCSVisitor(@Nullable C context) {
 	    super(context);
 	}	
 
-	public R visitOCLinEcoreConstraintCS(org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS object) {
+	public @Nullable R visitOCLinEcoreConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS object) {
 		return visitConstraintCS(object);
 	}
 
-	public R visitOCLinEcoreSpecificationCS(org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreSpecificationCS object) {
+	public @Nullable R visitOCLinEcoreSpecificationCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreSpecificationCS object) {
 		return visitExpSpecificationCS(object);
 	}
 }

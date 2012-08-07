@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.xtext.base.cs2pivot;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 
 public class Continuations implements Continuation<ModelElementCS>
@@ -43,33 +44,28 @@ public class Continuations implements Continuation<ModelElementCS>
 		return continuations != null ? new Continuations(continuations) : continuation;
 	}
 
-	private List<BasicContinuation<?>> continuations = new ArrayList<BasicContinuation<?>>();
+	private final @NonNull List<BasicContinuation<?>> continuations;
 	
 	public Continuations() {
-		this.continuations = null;
+		this.continuations = new ArrayList<BasicContinuation<?>>();
 	}
 	
-	public Continuations(List<BasicContinuation<?>> continuations) {
+	public Continuations(@NonNull List<BasicContinuation<?>> continuations) {
 		this.continuations = continuations;
 	}
 
-	public void add(BasicContinuation<?> continuation) {
-		if (continuation != null) {
-			if (continuations == null) {
-				continuations = new ArrayList<BasicContinuation<?>>();
-			}
-			continuations.add(continuation);
-		}
+	public void add(@NonNull BasicContinuation<?> continuation) {
+		continuations.add(continuation);
 	}
 	
-	public void addTo(List<BasicContinuation<?>> simpleContinuations) {
+	public void addTo(@NonNull List<BasicContinuation<?>> simpleContinuations) {
 		for (BasicContinuation<?> continuation : continuations) {
 			continuation.addTo(simpleContinuations);
 		}
 	}
 	
 	public Continuation<?> getContinuation() {
-		if ((continuations == null) || continuations.isEmpty()) {
+		if (continuations.isEmpty()) {
 			return null;
 		}
 		else if (continuations.size() == 1) {

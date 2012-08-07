@@ -36,7 +36,7 @@ public interface ScopeView
 
 	@Nullable EStructuralFeature getContainmentFeature();
 
-	@Nullable ScopeView getParent();
+	@NonNull ScopeView getParent();
 
 	@Nullable EObject getTarget();
 	
