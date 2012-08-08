@@ -22,6 +22,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
@@ -35,28 +36,29 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTPackage
 
 public class LibPackageCSAttribution extends PackageCSAttribution
 {
-	public static final LibPackageCSAttribution INSTANCE = new LibPackageCSAttribution();
+	public static final @NonNull LibPackageCSAttribution INSTANCE = new LibPackageCSAttribution();
 
 	private static Map<String, MetaTypeName> metaTypeNames = null;
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		LibPackageCS targetElement = (LibPackageCS)target;
 		if (environmentView.getReference() == OCLstdlibCSTPackage.Literals.LIB_CLASS_CS__META_TYPE_NAME) {
-			if (metaTypeNames == null) {
-				metaTypeNames = new HashMap<String, MetaTypeName>();
+			Map<String, MetaTypeName> metaTypeNames2 = metaTypeNames;
+			if (metaTypeNames2 == null) {
+				metaTypeNames2 = metaTypeNames = new HashMap<String, MetaTypeName>();
 				for (EClassifier eClassifier : PivotPackage.eINSTANCE.getEClassifiers()) {
 					if (eClassifier instanceof EClass) {
 						if (PivotPackage.Literals.CLASS.isSuperTypeOf((EClass) eClassifier)) {
 							MetaTypeName metaTypeName = OCLstdlibCSTFactory.eINSTANCE.createMetaTypeName();
 							String name = eClassifier.getName();
 							metaTypeName.setName(name);
-							metaTypeNames.put(name, metaTypeName);
+							metaTypeNames2.put(name, metaTypeName);
 						}
 					}
 				}
 			}
-			environmentView.addElements(metaTypeNames);
+			environmentView.addElements(metaTypeNames2);
 			return null;
 		}
 		else {

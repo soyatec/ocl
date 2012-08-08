@@ -15,6 +15,8 @@
 package org.eclipse.ocl.examples.xtext.oclstdlib.cs2pivot;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.common.utils.EcoreUtils;
 import org.eclipse.ocl.examples.pivot.AssociativityKind;
 import org.eclipse.ocl.examples.pivot.Iteration;
@@ -34,12 +36,12 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS;
 
 public class OCLstdlibContainmentVisitor extends AbstractOCLstdlibContainmentVisitor
 {
-	public OCLstdlibContainmentVisitor(CS2PivotConversion context) {
+	public OCLstdlibContainmentVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 
 	@Override
-	public Continuation<?> visitLibClassCS(LibClassCS csElement) {
+	public Continuation<?> visitLibClassCS(@NonNull LibClassCS csElement) {
 		EClass eClass = null;
 		MetaTypeName metaType = csElement.getMetaTypeName();
 		if ((metaType != null) && !metaType.eIsProxy()) {
@@ -51,40 +53,53 @@ public class OCLstdlibContainmentVisitor extends AbstractOCLstdlibContainmentVis
 		}
 		@SuppressWarnings("unchecked")
 		Class<org.eclipse.ocl.examples.pivot.Class> instanceClass = (Class<org.eclipse.ocl.examples.pivot.Class>)eClass.getInstanceClass();
-		org.eclipse.ocl.examples.pivot.Class pivotElement = refreshNamedElement(instanceClass, eClass, csElement);
-		refreshClass(pivotElement, csElement);
+		if (instanceClass != null) {
+			org.eclipse.ocl.examples.pivot.Class pivotElement = refreshNamedElement(instanceClass, eClass, csElement);
+			if (pivotElement != null) {
+				refreshClass(pivotElement, csElement);
+			}
+		}
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitLibIterationCS(LibIterationCS csElement) {
+	public Continuation<?> visitLibIterationCS(@NonNull LibIterationCS csElement) {
 		Iteration pivotElement = refreshTypedMultiplicityElement(Iteration.class, PivotPackage.Literals.ITERATION, csElement);
-		context.refreshTemplateSignature(csElement, pivotElement);
-		context.refreshPivotList(Parameter.class, pivotElement.getOwnedIterator(), csElement.getOwnedIterator());
-		context.refreshPivotList(Parameter.class, pivotElement.getOwnedAccumulator(), csElement.getOwnedAccumulator());
-		context.refreshPivotList(Parameter.class, pivotElement.getOwnedParameter(), csElement.getOwnedParameter());
+		if (pivotElement != null) {
+			context.refreshTemplateSignature(csElement, pivotElement);
+			context.refreshPivotList(Parameter.class, pivotElement.getOwnedIterator(), csElement.getOwnedIterator());
+			context.refreshPivotList(Parameter.class, pivotElement.getOwnedAccumulator(), csElement.getOwnedAccumulator());
+			context.refreshPivotList(Parameter.class, pivotElement.getOwnedParameter(), csElement.getOwnedParameter());
+		}
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitLibPackageCS(LibPackageCS csElement) {
+	public Continuation<?> visitLibPackageCS(@NonNull LibPackageCS csElement) {
 		@SuppressWarnings("unused")
 		Library pivotElement = refreshPackage(Library.class, PivotPackage.Literals.LIBRARY, csElement);		
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitLibRootPackageCS(LibRootPackageCS csElement) {
-		Root pivotElement = refreshRoot(Root.class, PivotPackage.Literals.ROOT, csElement);		
-		context.installRootElement(csElement.eResource(), pivotElement);		// Ensure containment viable for imported library type references
-		importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
+	public Continuation<?> visitLibRootPackageCS(@NonNull LibRootPackageCS csElement) {
+		Resource eResource = csElement.eResource();
+		if (eResource != null) {
+			Root pivotElement = refreshRoot(Root.class, PivotPackage.Literals.ROOT, csElement);		
+			if (pivotElement != null) {
+				context.installRootElement(eResource, pivotElement);		// Ensure containment viable for imported library type references
+				importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
+			}
+		}
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitPrecedenceCS(PrecedenceCS csElement) {
+	public Continuation<?> visitPrecedenceCS(@NonNull PrecedenceCS csElement) {
 		Precedence pivotElement = refreshNamedElement(Precedence.class, PivotPackage.Literals.PRECEDENCE, csElement);
-		pivotElement.setAssociativity(csElement.isRightAssociative() ? AssociativityKind.RIGHT : AssociativityKind.LEFT);
+		if (pivotElement != null) {
+			pivotElement.setAssociativity(csElement.isRightAssociative() ? AssociativityKind.RIGHT : AssociativityKind.LEFT);
+		}
 		return null;
 	}
 }

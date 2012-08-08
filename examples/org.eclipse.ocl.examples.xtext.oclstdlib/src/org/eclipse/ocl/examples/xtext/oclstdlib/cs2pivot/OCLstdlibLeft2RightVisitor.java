@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.oclstdlib.cs2pivot;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Environment;
@@ -37,42 +38,52 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS;
 
 public class OCLstdlibLeft2RightVisitor extends AbstractOCLstdlibLeft2RightVisitor
 {
-	public OCLstdlibLeft2RightVisitor(CS2PivotConversion context) {
+	public OCLstdlibLeft2RightVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 
 	@Override
-	public Element visitLibConstraintCS(LibConstraintCS csConstraint) {
+	public Element visitLibConstraintCS(@NonNull LibConstraintCS csConstraint) {
 		Constraint pivotConstraint = PivotUtil.getPivot(Constraint.class, csConstraint);
-		ExpSpecificationCS csSpecification = (ExpSpecificationCS) csConstraint.getSpecification();
-		ExpCS csExpression = csSpecification.getOwnedExpression();
-		if (csExpression != null) {
-			ExpressionInOCL pivotSpecification = PivotUtil.getPivot(ExpressionInOCL.class, csSpecification);
-			pivotConstraint.setSpecification(pivotSpecification);
-			context.setContextVariable(pivotSpecification, Environment.SELF_VARIABLE_NAME, null);
-			EObject eContainer = csConstraint.eContainer();
-			if (eContainer instanceof TypeCS) {
-				Type contextType = PivotUtil.getPivot(Type.class, (TypeCS)eContainer);
-				context.setClassifierContext(pivotSpecification, contextType);
-			}
-			else if (eContainer instanceof StructuralFeatureCS) {
-				Property contextProperty = PivotUtil.getPivot(Property.class, (StructuralFeatureCS)eContainer);
-				context.setPropertyContext(pivotSpecification, contextProperty);
-			}
-			else if (eContainer instanceof OperationCS) {
-				Operation contextOperation = PivotUtil.getPivot(Operation.class, (OperationCS)eContainer);
-				boolean isPostCondition = "post".equals(csConstraint.getStereotype());
-				String resultVariableName = isPostCondition ? Environment.RESULT_VARIABLE_NAME : null;
-		        context.setOperationContext(pivotSpecification, contextOperation, resultVariableName);
-			}
-			OCLExpression bodyExpression = context.visitLeft2Right(OCLExpression.class, csExpression);		
-			pivotSpecification.setBodyExpression(bodyExpression);
-			ExpSpecificationCS csMessageSpecification = (ExpSpecificationCS) csConstraint.getMessageSpecification();
-			if (csMessageSpecification != null) {
-				ExpCS csMessageExpression = csMessageSpecification.getOwnedExpression();
-				if (csMessageExpression != null) {
-					OCLExpression messageExpression = context.visitLeft2Right(OCLExpression.class, csMessageExpression);		
-					pivotSpecification.setMessageExpression(messageExpression);
+		if (pivotConstraint != null) {
+			ExpSpecificationCS csSpecification = (ExpSpecificationCS) csConstraint.getSpecification();
+			ExpCS csExpression = csSpecification.getOwnedExpression();
+			if (csExpression != null) {
+				ExpressionInOCL pivotSpecification = PivotUtil.getPivot(ExpressionInOCL.class, csSpecification);
+				if (pivotSpecification != null) {
+					pivotConstraint.setSpecification(pivotSpecification);
+					context.setContextVariable(pivotSpecification, Environment.SELF_VARIABLE_NAME, null);
+					EObject eContainer = csConstraint.eContainer();
+					if (eContainer instanceof TypeCS) {
+						Type contextType = PivotUtil.getPivot(Type.class, (TypeCS)eContainer);
+						if (contextType != null) {
+							context.setClassifierContext(pivotSpecification, contextType);
+						}
+					}
+					else if (eContainer instanceof StructuralFeatureCS) {
+						Property contextProperty = PivotUtil.getPivot(Property.class, (StructuralFeatureCS)eContainer);
+						if (contextProperty != null) {
+							context.setPropertyContext(pivotSpecification, contextProperty);
+						}
+					}
+					else if (eContainer instanceof OperationCS) {
+						Operation contextOperation = PivotUtil.getPivot(Operation.class, (OperationCS)eContainer);
+						if (contextOperation != null) {
+							boolean isPostCondition = "post".equals(csConstraint.getStereotype());
+							String resultVariableName = isPostCondition ? Environment.RESULT_VARIABLE_NAME : null;
+					        context.setOperationContext(pivotSpecification, contextOperation, resultVariableName);
+						}
+					}
+					OCLExpression bodyExpression = context.visitLeft2Right(OCLExpression.class, csExpression);		
+					pivotSpecification.setBodyExpression(bodyExpression);
+					ExpSpecificationCS csMessageSpecification = (ExpSpecificationCS) csConstraint.getMessageSpecification();
+					if (csMessageSpecification != null) {
+						ExpCS csMessageExpression = csMessageSpecification.getOwnedExpression();
+						if (csMessageExpression != null) {
+							OCLExpression messageExpression = context.visitLeft2Right(OCLExpression.class, csMessageExpression);		
+							pivotSpecification.setMessageExpression(messageExpression);
+						}
+					}
 				}
 			}
 		}
@@ -80,7 +91,7 @@ public class OCLstdlibLeft2RightVisitor extends AbstractOCLstdlibLeft2RightVisit
 	}
 
 	@Override
-	public Element visitPrecedenceCS(PrecedenceCS object) {
+	public Element visitPrecedenceCS(@NonNull PrecedenceCS object) {
 		return null;
 	}
 }

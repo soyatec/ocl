@@ -16,13 +16,14 @@
  */
 package org.eclipse.ocl.examples.xtext.oclstdlib.cs2pivot;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS;
 
 public class OCLstdlibPostOrderVisitor extends AbstractOCLstdlibPostOrderVisitor
 {		
-	public OCLstdlibPostOrderVisitor(CS2PivotConversion context) {
+	public OCLstdlibPostOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 
@@ -56,7 +57,7 @@ public class OCLstdlibPostOrderVisitor extends AbstractOCLstdlibPostOrderVisitor
 	} */
 
 	@Override
-	public Continuation<?> visitPrecedenceCS(PrecedenceCS csPrecedence) {
+	public Continuation<?> visitPrecedenceCS(@NonNull PrecedenceCS csPrecedence) {
 		return null;
 	}
 }

@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName;
@@ -180,8 +181,7 @@ public class MetaTypeNameImpl
 	}
 
 	@SuppressWarnings("unchecked")
-	public <R> R accept(BaseCSVisitor<R> visitor) {
-		return (R) visitor.getAdapter(OCLstdlibCSVisitor.class)
-			.visitMetaTypeName(this);
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((OCLstdlibCSVisitor<?>)visitor).visitMetaTypeName(this);
 	}
 } //MetaTypeNameImpl

@@ -156,7 +156,8 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 		return pivotElement;
 	}
 
-	protected <T extends org.eclipse.ocl.examples.pivot.Package> T refreshPackage(@NonNull Class<T> pivotClass, @NonNull EClass pivotEClass, @NonNull PackageCS csElement) {
+	protected <T extends org.eclipse.ocl.examples.pivot.Package> T refreshPackage(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, @NonNull PackageCS csElement) {
+		assert pivotEClass != null;
 		Object pivotObject = csElement.getPivot();
 		if (pivotObject == null) {
 			pivotObject = context.getOldPackageByQualifiedName(csElement);
@@ -209,7 +210,8 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 		return pivotElement;
 	}
 
-	protected <T extends Root> T refreshRoot(@NonNull Class<T> pivotClass, @NonNull EClass pivotEClass, @NonNull PackageCS csElement) {
+	protected <T extends Root> T refreshRoot(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, @NonNull PackageCS csElement) {
+		assert pivotEClass != null;
 		Resource csResource = csElement.eResource();
 		if (csResource == null) {
 			throw new IllegalStateException("Null resource for root package");
@@ -269,7 +271,7 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 	}
 	
 	protected @Nullable <T extends TypedMultiplicityElement> T  refreshTypedMultiplicityElement(@NonNull Class<T> pivotClass,
-			@NonNull EClass pivotEClass, @NonNull TypedElementCS csTypedElement) {
+			/*@NonNull*/ EClass pivotEClass, @NonNull TypedElementCS csTypedElement) {
 		T pivotElement = refreshNamedElement(pivotClass, pivotEClass, csTypedElement);
 		if (pivotElement != null) {
 			refreshMultiplicity(pivotElement, csTypedElement);

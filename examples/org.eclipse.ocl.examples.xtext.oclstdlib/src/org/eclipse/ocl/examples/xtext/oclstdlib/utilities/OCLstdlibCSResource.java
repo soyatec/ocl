@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.xtext.oclstdlib.utilities;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
@@ -27,8 +28,8 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.cs2pivot.OCLstdlibCS2Pivot;
 public class OCLstdlibCSResource extends EssentialOCLCSResource
 {
 	@Override
-	public CS2Pivot createCS2Pivot(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
-			MetaModelManager metaModelManager) {
+	public @NonNull CS2Pivot createCS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
+			@NonNull MetaModelManager metaModelManager) {
 		return new OCLstdlibCS2Pivot(cs2pivotResourceMap, metaModelManager);
 	}
 
@@ -39,7 +40,7 @@ public class OCLstdlibCSResource extends EssentialOCLCSResource
 //	}
 
 	@Override
-	public String getEditorName() {
+	public @NonNull String getEditorName() {
 		return "OCL Standard Library";
 	}
 }

@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.xtext.oclstdlib.cs2pivot;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLCS2Pivot;
@@ -26,36 +27,36 @@ import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 
 public class OCLstdlibCS2Pivot extends EssentialOCLCS2Pivot
 {	
-	public OCLstdlibCS2Pivot(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, MetaModelManager metaModelManager) {
+	public OCLstdlibCS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, @NonNull MetaModelManager metaModelManager) {
 		super(cs2pivotResourceMap, metaModelManager);
 	}
 	
-	public OCLstdlibCS2Pivot(OCLstdlibCS2Pivot cs2pivot) {
+	public OCLstdlibCS2Pivot(@NonNull OCLstdlibCS2Pivot cs2pivot) {
 		super(cs2pivot);
 	}
 
 	@Override
-	protected OCLstdlibContainmentVisitor createContainmentVisitor(CS2PivotConversion converter) {
+	protected @NonNull OCLstdlibContainmentVisitor createContainmentVisitor(@NonNull CS2PivotConversion converter) {
 		return new OCLstdlibContainmentVisitor(converter);
 	}
 
 	@Override
-	protected OCLstdlibLeft2RightVisitor createLeft2RightVisitor(CS2PivotConversion converter) {
+	protected @NonNull OCLstdlibLeft2RightVisitor createLeft2RightVisitor(@NonNull CS2PivotConversion converter) {
 		return new OCLstdlibLeft2RightVisitor(converter);
 	}
 
 	@Override
-	protected OCLstdlibPostOrderVisitor createPostOrderVisitor(CS2PivotConversion converter) {
+	protected @NonNull OCLstdlibPostOrderVisitor createPostOrderVisitor(@NonNull CS2PivotConversion converter) {
 		return new OCLstdlibPostOrderVisitor(converter);
 	}
 
 	@Override
-	protected OCLstdlibPreOrderVisitor createPreOrderVisitor(CS2PivotConversion converter) {
+	protected @NonNull OCLstdlibPreOrderVisitor createPreOrderVisitor(@NonNull CS2PivotConversion converter) {
 		return new OCLstdlibPreOrderVisitor(converter);
 	}
 
 	@Override
-	public synchronized void update(IDiagnosticConsumer diagnosticsConsumer) {
+	public synchronized void update(@NonNull IDiagnosticConsumer diagnosticsConsumer) {
 		metaModelManager.setLibraryLoadInProgress(true);
 		try {
 			super.update(diagnosticsConsumer);

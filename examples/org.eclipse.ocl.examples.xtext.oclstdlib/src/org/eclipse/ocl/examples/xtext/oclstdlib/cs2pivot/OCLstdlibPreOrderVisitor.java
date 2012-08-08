@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.xtext.oclstdlib.cs2pivot;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.ClassifierType;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Iteration;
@@ -46,20 +47,22 @@ public class OCLstdlibPreOrderVisitor extends AbstractOCLstdlibPreOrderVisitor
 {
 	protected static class ClassifierInstanceTypeContinuation extends SingleContinuation<LibClassCS>
 	{
-		public ClassifierInstanceTypeContinuation(CS2PivotConversion context, LibClassCS csElement) {
+		public ClassifierInstanceTypeContinuation(@NonNull CS2PivotConversion context, @NonNull LibClassCS csElement) {
 			super(context, null, null, csElement);
 		}
 
 		@Override
 		public BasicContinuation<?> execute() {
 			ClassifierType type = PivotUtil.getPivot(ClassifierType.class, csElement);
-			TemplateSignature ownedTemplateSignature = type.getOwnedTemplateSignature();
-			if (ownedTemplateSignature != null) {
-				List<TemplateParameter> parameters = ownedTemplateSignature.getParameter();
-				if (parameters.size() > 0) {
-					TemplateParameter templateParameter = parameters.get(0);
-					if (templateParameter != null) {
-						type.setInstanceType((Type) templateParameter.getParameteredElement());
+			if (type != null) {
+				TemplateSignature ownedTemplateSignature = type.getOwnedTemplateSignature();
+				if (ownedTemplateSignature != null) {
+					List<TemplateParameter> parameters = ownedTemplateSignature.getParameter();
+					if (parameters.size() > 0) {
+						TemplateParameter templateParameter = parameters.get(0);
+						if (templateParameter != null) {
+							type.setInstanceType((Type) templateParameter.getParameteredElement());
+						}
 					}
 				}
 			}
@@ -69,18 +72,20 @@ public class OCLstdlibPreOrderVisitor extends AbstractOCLstdlibPreOrderVisitor
 	
 	protected static class CollectionElementTypeContinuation extends SingleContinuation<LibClassCS>
 	{
-		public CollectionElementTypeContinuation(CS2PivotConversion context, LibClassCS csElement) {
+		public CollectionElementTypeContinuation(@NonNull CS2PivotConversion context, @NonNull LibClassCS csElement) {
 			super(context, null, null, csElement);
 		}
 
 		@Override
 		public BasicContinuation<?> execute() {
 			CollectionType type = PivotUtil.getPivot(CollectionType.class, csElement);
-			TemplateSignature ownedTemplateSignature = type.getOwnedTemplateSignature();
-			if (ownedTemplateSignature != null) {
-				List<TemplateParameter> parameters = ownedTemplateSignature.getParameter();
-				if (parameters.size() > 0) {
-					type.setElementType((Type) parameters.get(0).getParameteredElement());
+			if (type != null) {
+				TemplateSignature ownedTemplateSignature = type.getOwnedTemplateSignature();
+				if (ownedTemplateSignature != null) {
+					List<TemplateParameter> parameters = ownedTemplateSignature.getParameter();
+					if (parameters.size() > 0) {
+						type.setElementType((Type) parameters.get(0).getParameteredElement());
+					}
 				}
 			}
 			return null;
@@ -89,18 +94,20 @@ public class OCLstdlibPreOrderVisitor extends AbstractOCLstdlibPreOrderVisitor
 	
 	protected static class LibIterationContinuation extends SingleContinuation<LibIterationCS>
 	{
-		public LibIterationContinuation(CS2PivotConversion context, LibIterationCS csElement) {
+		public LibIterationContinuation(@NonNull CS2PivotConversion context, @NonNull LibIterationCS csElement) {
 			super(context, null, null, csElement);
 		}
 
 		@Override
 		public BasicContinuation<?> execute() {
 			Iteration pivotIteration = PivotUtil.getPivot(Iteration.class, csElement);
-//			pivotElement.setPrecedence(csIteration.getPrecedence());
-//			pivotElement.setIsStatic(csIteration.isStatic());
-			JvmType implementation = csElement.getImplementation();
-			if ((implementation != null) && !implementation.eIsProxy()) {
-				pivotIteration.setImplementationClass(implementation.getIdentifier());
+			if (pivotIteration != null) {
+//				pivotElement.setPrecedence(csIteration.getPrecedence());
+//				pivotElement.setIsStatic(csIteration.isStatic());
+				JvmType implementation = csElement.getImplementation();
+				if ((implementation != null) && !implementation.eIsProxy()) {
+					pivotIteration.setImplementationClass(implementation.getIdentifier());
+				}
 			}
 			return null;
 		}
@@ -108,22 +115,24 @@ public class OCLstdlibPreOrderVisitor extends AbstractOCLstdlibPreOrderVisitor
 	
 	protected static class LibOperationContinuation extends SingleContinuation<LibOperationCS>
 	{
-		public LibOperationContinuation(CS2PivotConversion context, LibOperationCS csElement) {
+		public LibOperationContinuation(@NonNull CS2PivotConversion context, @NonNull LibOperationCS csElement) {
 			super(context, null, null, csElement);
 		}
 
 		@Override
 		public BasicContinuation<?> execute() {
 			Operation pivotElement = PivotUtil.getPivot(Operation.class, csElement);
-			Precedence precedence = csElement.getPrecedence();
-			if ((precedence != null) && precedence.eIsProxy()) {
-				precedence = null;
-			}
-			pivotElement.setPrecedence(precedence);
-			pivotElement.setIsStatic(csElement.isStatic());
-			JvmType implementation = csElement.getImplementation();
-			if ((implementation != null) && !implementation.eIsProxy()) {
-				pivotElement.setImplementationClass(implementation.getIdentifier());
+			if (pivotElement != null) {
+				Precedence precedence = csElement.getPrecedence();
+				if ((precedence != null) && precedence.eIsProxy()) {
+					precedence = null;
+				}
+				pivotElement.setPrecedence(precedence);
+				pivotElement.setIsStatic(csElement.isStatic());
+				JvmType implementation = csElement.getImplementation();
+				if ((implementation != null) && !implementation.eIsProxy()) {
+					pivotElement.setImplementationClass(implementation.getIdentifier());
+				}
 			}
 			return null;
 		}
@@ -131,17 +140,19 @@ public class OCLstdlibPreOrderVisitor extends AbstractOCLstdlibPreOrderVisitor
 	
 	protected static class LibPropertyContinuation extends SingleContinuation<LibPropertyCS>
 	{
-		public LibPropertyContinuation(CS2PivotConversion context, LibPropertyCS csElement) {
+		public LibPropertyContinuation(@NonNull CS2PivotConversion context, @NonNull LibPropertyCS csElement) {
 			super(context, null, null, csElement);
 		}
 
 		@Override
 		public BasicContinuation<?> execute() {
 			Property pivotElement = PivotUtil.getPivot(Property.class, csElement);
-			pivotElement.setIsStatic(csElement.isStatic());
-			JvmType implementation = csElement.getImplementation();
-			if ((implementation != null) && !implementation.eIsProxy()) {
-				pivotElement.setImplementationClass(implementation.getIdentifier());
+			if (pivotElement != null) {
+				pivotElement.setIsStatic(csElement.isStatic());
+				JvmType implementation = csElement.getImplementation();
+				if ((implementation != null) && !implementation.eIsProxy()) {
+					pivotElement.setImplementationClass(implementation.getIdentifier());
+				}
 			}
 			return null;
 		}
@@ -149,24 +160,26 @@ public class OCLstdlibPreOrderVisitor extends AbstractOCLstdlibPreOrderVisitor
 
 	protected static class LibraryPrecedenceContinuation extends SingleContinuation<LibPackageCS>
 	{
-		private LibraryPrecedenceContinuation(CS2PivotConversion context, LibPackageCS csElement) {
+		private LibraryPrecedenceContinuation(@NonNull CS2PivotConversion context, @NonNull LibPackageCS csElement) {
 			super(context, null, null, csElement);
 		}
 
 		@Override
 		public BasicContinuation<?> execute() {
 			Library pivotElement = PivotUtil.getPivot(Library.class, csElement);
-			context.refreshPivotList(Precedence.class, pivotElement.getOwnedPrecedence(), csElement.getOwnedPrecedence());
+			if (pivotElement != null) {
+				context.refreshPivotList(Precedence.class, pivotElement.getOwnedPrecedence(), csElement.getOwnedPrecedence());
+			}
 			return null;
 		}
 	}
 
-	public OCLstdlibPreOrderVisitor(CS2PivotConversion context) {
+	public OCLstdlibPreOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 
 	@Override
-	public Continuation<?> visitLibClassCS(LibClassCS csLibClass) {
+	public Continuation<?> visitLibClassCS(@NonNull LibClassCS csLibClass) {
 		Type type = PivotUtil.getPivot(Type.class, csLibClass);
 		Continuation<?> continuation = super.visitLibClassCS(csLibClass);
 		if (type instanceof CollectionType) {
@@ -186,29 +199,29 @@ public class OCLstdlibPreOrderVisitor extends AbstractOCLstdlibPreOrderVisitor
 	}
 
 	@Override
-	public Continuation<?> visitLibIterationCS(LibIterationCS csIteration) {
+	public Continuation<?> visitLibIterationCS(@NonNull LibIterationCS csIteration) {
 		return new LibIterationContinuation(context, csIteration);
 	}
 
 	@Override
-	public Continuation<?> visitLibOperationCS(LibOperationCS csOperation) {
+	public Continuation<?> visitLibOperationCS(@NonNull LibOperationCS csOperation) {
 		return new LibOperationContinuation(context, csOperation);
 	}
 
 	@Override
-	public Continuation<?> visitLibPropertyCS(LibPropertyCS csProperty) {
+	public Continuation<?> visitLibPropertyCS(@NonNull LibPropertyCS csProperty) {
 		return new LibPropertyContinuation(context, csProperty);
 	}
 
 	@Override
-	public Continuation<?> visitLibPackageCS(LibPackageCS csLibPackage) {
+	public Continuation<?> visitLibPackageCS(@NonNull LibPackageCS csLibPackage) {
 		Continuation<?> superContinuation = super.visitLibPackageCS(csLibPackage);
 		Continuation<?> localContinuation =  new LibraryPrecedenceContinuation(context, csLibPackage);
 		return Continuations.combine(superContinuation, localContinuation);
 	}
 
 	@Override
-	public Continuation<?> visitPrecedenceCS(PrecedenceCS csPrecedence) {
+	public Continuation<?> visitPrecedenceCS(@NonNull PrecedenceCS csPrecedence) {
 		return null;
 	}
 }

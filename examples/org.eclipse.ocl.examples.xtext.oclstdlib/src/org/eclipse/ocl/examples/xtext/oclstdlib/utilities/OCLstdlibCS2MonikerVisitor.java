@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.xtext.oclstdlib.utilities;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
@@ -41,7 +42,7 @@ public class OCLstdlibCS2MonikerVisitor
 			CS2Moniker.addFactory(OCLstdlibCSTPackage.eINSTANCE, this);
 		}
 		
-		public BaseCSVisitor<?> create(CS2Moniker context) {
+		public @NonNull BaseCSVisitor<?> create(@NonNull CS2Moniker context) {
 			return new OCLstdlibCS2MonikerVisitor(context);
 		}
 	}
@@ -54,7 +55,7 @@ public class OCLstdlibCS2MonikerVisitor
 	}
 
 	@Override
-	public Boolean visitLibClassCS(LibClassCS object) {
+	public Boolean visitLibClassCS(@NonNull LibClassCS object) {
 		MetaTypeName metaType = object.getMetaTypeName();
 		if ((metaType != null) && PrimitiveType.class.getSimpleName().equals(metaType.getName())) {
 //		if (object.getMetaType() instanceof PrimitiveType) {
@@ -65,7 +66,7 @@ public class OCLstdlibCS2MonikerVisitor
 	}
 
 	@Override
-	public Boolean visitLibIterationCS(LibIterationCS object) {
+	public Boolean visitLibIterationCS(@NonNull LibIterationCS object) {
 		context.appendParentCS(object, MONIKER_SCOPE_SEPARATOR);
 		context.appendNameCS(object);
 		context.appendTemplateParametersCS(object);
@@ -74,7 +75,7 @@ public class OCLstdlibCS2MonikerVisitor
 	}
 
 	@Override
-	public Boolean visitPrecedenceCS(PrecedenceCS object) {
+	public Boolean visitPrecedenceCS(@NonNull PrecedenceCS object) {
 		context.appendParentCS(object, PRECEDENCE_PREFIX);
 		context.appendNameCS(object);
 		return true;
