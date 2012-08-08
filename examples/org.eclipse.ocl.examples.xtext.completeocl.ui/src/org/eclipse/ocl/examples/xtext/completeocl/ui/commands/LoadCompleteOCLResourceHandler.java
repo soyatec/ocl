@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.xtext.completeocl.ui.commands;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.commands.AbstractHandler;
@@ -40,6 +41,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.ui.action.LoadResourceAction.LoadResourceDialog;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ParserException;
@@ -126,10 +128,10 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 		}
 
 		protected final Shell parent;
-		protected final ResourceSet resourceSet;
+		protected final @NonNull ResourceSet resourceSet;
 		private DropTarget target;
 		
-		protected ResourceDialog(Shell parent, EditingDomain domain, ResourceSet resourceSet) {
+		protected ResourceDialog(Shell parent, EditingDomain domain, @NonNull ResourceSet resourceSet) {
 			super(parent, domain);
 			this.parent = parent;
 			this.resourceSet = resourceSet;
@@ -186,8 +188,8 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 			return error(message, new BasicDiagnostic("source", 0, detailMessage, null));
 		}
 
-		public boolean loadCSResource(ResourceSet resourceSet,
-				MetaModelManager metaModelManager, URI oclURI) {
+		public boolean loadCSResource(@NonNull ResourceSet resourceSet,
+				@NonNull MetaModelManager metaModelManager, @NonNull URI oclURI) {
 			BaseResource xtextResource = null;
 			CompleteOCLStandaloneSetup.init();
 			try {
@@ -211,12 +213,16 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 					throw e;
 				}
 			}
-			String message = PivotUtil.formatResourceDiagnostics(xtextResource.getErrors(), "", "\n");
+			List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> errors = xtextResource.getErrors();
+			assert errors != null;
+			String message = PivotUtil.formatResourceDiagnostics(errors, "", "\n");
 			if (message != null) {
 				return error("Failed to load '" + oclURI, message);
 			}
 			Resource pivotResource = xtextResource.getPivotResource(metaModelManager);
-			message = PivotUtil.formatResourceDiagnostics(pivotResource.getErrors(), "", "\n");
+			errors = pivotResource.getErrors();
+			assert errors != null;
+			message = PivotUtil.formatResourceDiagnostics(errors, "", "\n");
 			if (message != null) {
 				return error("Failed to load Pivot from '" + oclURI, message);
 			}
@@ -246,6 +252,7 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 			MetaModelManager metaModelManager = adapter.getMetaModelManager();
 			Set<EPackage> mmPackages = new HashSet<EPackage>();
 			for (Resource resource : resourceSet.getResources()) {
+				assert resource != null;
 				Ecore2Pivot ecore2Pivot = Ecore2Pivot.findAdapter(resource, metaModelManager);
 				if (ecore2Pivot == null) {			// Pivot has its own validation
 					for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
@@ -268,11 +275,19 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 				}
  			}
 			for (Resource mmResource : mmResources) {
+				assert mmResource != null;
 				try {
 					Element pivotRoot = metaModelManager.loadResource(mmResource, null);
-					String message = PivotUtil.formatResourceDiagnostics(pivotRoot.eResource().getErrors(), "", "\n");
-					if (message != null) {
-						return error("Failed to load Pivot from '" + mmResource.getURI(), message);
+					if (pivotRoot != null) {
+						List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> errors = pivotRoot.eResource().getErrors();
+						assert errors != null;
+						String message = PivotUtil.formatResourceDiagnostics(errors, "", "\n");
+						if (message != null) {
+							return error("Failed to load Pivot from '" + mmResource.getURI(), message);
+						}
+					}
+					else {
+						return error("Failed to load Pivot from '" + mmResource.getURI(), "");
 					}
 				} catch (ParserException e) {
 					return error("Failed to load Pivot from '" + mmResource.getURI(), e.getMessage());
@@ -280,12 +295,14 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 			}
 
 			for (URI oclURI : getURIs()) {
+				assert oclURI != null;
 				if (!loadCSResource(resourceSet, metaModelManager, oclURI)) {
 					return false;
 				}
 			}
 	    	BasicCompleteOCLEObjectValidator.install(resourceSet, metaModelManager);
 		    for (EPackage mmPackage : mmPackages) {
+		    	assert mmPackage != null;
 		    	BasicCompleteOCLEObjectValidator.install(mmPackage);
 		    }
 			return true;
@@ -307,8 +324,10 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 		if (!(shell instanceof Shell)) {
 			return null;
 		}
-		ResourceDialog dialog = new ResourceDialog((Shell)shell, editingDomain, resourceSet);
-		dialog.open();
+		if (resourceSet != null) {
+			ResourceDialog dialog = new ResourceDialog((Shell)shell, editingDomain, resourceSet);
+			dialog.open();
+		}
 		return null;
 	}
 	

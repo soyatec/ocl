@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.xtext.completeocl.ui.labeling;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -209,7 +210,12 @@ public class CompleteOCLLabelProvider extends EssentialOCLLabelProvider
 	}
 
 	protected String text(PackageDeclarationCS ele) {
-		AliasAnalysis aliasAnalysis = AliasAnalysis.getAdapter(ele.eResource());
+		assert ele != null;
+		Resource eResource = ele.eResource();
+		if (eResource == null) {
+			return "<<null>>";
+		}
+		AliasAnalysis aliasAnalysis = AliasAnalysis.getAdapter(eResource);
 		Element pivot = ele.getPackage();
 		if (pivot == null) {
 			return "<<null>>";
