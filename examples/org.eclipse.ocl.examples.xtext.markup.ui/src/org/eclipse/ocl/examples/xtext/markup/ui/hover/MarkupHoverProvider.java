@@ -28,11 +28,13 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions;
@@ -52,16 +54,22 @@ public class MarkupHoverProvider extends DefaultEObjectHoverProvider
 {
 	@Override
 	protected String getDocumentation(EObject o) {
-		MetaModelManager metaModelManager = null;
 		Resource resource = o.eResource();
-		if (resource != null) {
-			metaModelManager = ElementUtil.findMetaModelManager(resource);
+		if (resource == null) {
+			return null;
+		}
+		MetaModelManager metaModelManager = ElementUtil.findMetaModelManager(resource);
+		if (metaModelManager == null) {
+			return null;
 		}
 		String documentation = super.getDocumentation(o);
 		if (documentation == null) {
 			return null;
 		}
 		IParseResult parseResult = MarkupUtils.decode(documentation);
+		if (parseResult == null) {
+			return null;
+		}
 		Markup markup = (Markup) parseResult.getRootASTElement();
 		if (markup == null) {
 			return null;
@@ -99,6 +107,9 @@ public class MarkupHoverProvider extends DefaultEObjectHoverProvider
 		}
 		if (o instanceof Pivotable) {
 			o = ((Pivotable)o).getPivot();
+		}
+		if (o == null) {
+			return null;
 		}
 		try {
 			return MarkupUtils.toHTML(metaModelManager, o, markup);
@@ -159,16 +170,16 @@ public class MarkupHoverProvider extends DefaultEObjectHoverProvider
 			if ((namespace != null) && (namespace.eContainer() instanceof Namespace)) {
 				namespace = (Namespace) namespace.eContainer();
 			}
-			String description;
+			String description = null;
 			PrettyPrintOptions.Global prettyPrintOptions = new PrettyPrintOptions.Global(namespace)
 			{
 				@Override
-				public Set<String> getReservedNames() {
+				public @Nullable Set<String> getReservedNames() {
 					return null;
 				}
 
 				@Override
-				public Set<String> getRestrictedNames() {
+				public @Nullable Set<String> getRestrictedNames() {
 					return null;
 				}				
 			};
@@ -182,12 +193,18 @@ public class MarkupHoverProvider extends DefaultEObjectHoverProvider
 				description = PrettyPrinter.printType(pivotElement, prettyPrintOptions);
 			}
 			else if (pivotElement instanceof VariableExp) {
-				description = PrettyPrinter.print(((VariableExp)pivotElement).getReferredVariable(), prettyPrintOptions);
+				VariableDeclaration referredVariable = ((VariableExp)pivotElement).getReferredVariable();
+				if (referredVariable != null) {
+					description = PrettyPrinter.print(referredVariable, prettyPrintOptions);
+				}
 			}
 			else if (pivotElement instanceof OCLExpression) {
-				description = PrettyPrinter.printType(((OCLExpression)pivotElement).getType(), prettyPrintOptions);
+				Type type = ((OCLExpression)pivotElement).getType();
+				if (type != null) {
+					description = PrettyPrinter.printType(type, prettyPrintOptions);
+				}
 			}
-			else {
+			if (description == null) {
 				description = PrettyPrinter.print(pivotElement, prettyPrintOptions);
 			}
 //			System.out.println(" => " + description);

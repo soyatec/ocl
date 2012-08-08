@@ -104,12 +104,12 @@ public abstract class PrettyPrintOptions
 		}
 		
 		@Override
-		public @NonNull Set<String> getReservedNames() {
+		public @Nullable Set<String> getReservedNames() {
 			return reservedNames;
 		}
 
 		@Override
-		public @NonNull Set<String> getRestrictedNames() {
+		public @Nullable Set<String> getRestrictedNames() {
 			return restrictedNames;
 		}
 		
@@ -236,9 +236,9 @@ public abstract class PrettyPrintOptions
 		return getGlobalOptions().getMetaModelManager();
 	}
 
-	public abstract Set<String> getReservedNames();
+	public abstract @Nullable Set<String> getReservedNames();
 
-	public abstract Set<String> getRestrictedNames();
+	public abstract @Nullable Set<String> getRestrictedNames();
 
 	public @Nullable Namespace getScope() {
 		return scope;
