@@ -180,7 +180,7 @@ public class BaseDocument extends XtextDocument implements ConsoleContext
         this.parameters = ecoreParameters;
     }
 
-	public @Nullable Object setContext(@NonNull EssentialOCLCSResource resource, @NonNull EClassifier ecoreContext, @Nullable Map<String, EClassifier> ecoreParameters) {
+	public @Nullable Object setContext(@NonNull EssentialOCLCSResource resource, @Nullable EClassifier ecoreContext, @Nullable Map<String, EClassifier> ecoreParameters) {
 		CS2PivotResourceAdapter csAdapter = CS2PivotResourceAdapter.getAdapter(resource, null);
 		MetaModelManager metaModelManager = csAdapter.getMetaModelManager();
 		resource.setParserContext(new EInvocationContext(metaModelManager, resource.getURI(), ecoreContext, ecoreParameters));

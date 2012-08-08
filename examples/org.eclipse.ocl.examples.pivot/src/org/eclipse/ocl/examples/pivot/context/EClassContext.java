@@ -28,10 +28,10 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
  */
 public class EClassContext extends AbstractParserContext
 {
-	protected final @NonNull EClassifier eClassContext;
+	protected final @Nullable EClassifier eClassContext;
 	private Type classContext = null;
 
-	public EClassContext(@NonNull MetaModelManager metaModelManager, @Nullable URI uri, @NonNull EClassifier eClassContext) {
+	public EClassContext(@NonNull MetaModelManager metaModelManager, @Nullable URI uri, @Nullable EClassifier eClassContext) {
 		super(metaModelManager, uri);
 		this.eClassContext = eClassContext;
 	}

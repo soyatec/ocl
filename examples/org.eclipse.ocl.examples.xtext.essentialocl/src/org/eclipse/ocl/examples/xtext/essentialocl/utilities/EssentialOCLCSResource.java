@@ -122,7 +122,7 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 		return parserContext;
 	}
 
-	public @NonNull Resource getPivotResource(@NonNull MetaModelManager metaModelManager) {
+	public @NonNull Resource getPivotResource(@Nullable MetaModelManager metaModelManager) {
 		CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.getAdapter(this, metaModelManager);
 		Resource pivotResource = adapter.getPivotResource(this);
 		if (pivotResource == null) {

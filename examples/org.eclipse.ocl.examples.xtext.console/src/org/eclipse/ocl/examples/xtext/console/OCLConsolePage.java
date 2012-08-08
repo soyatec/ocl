@@ -27,6 +27,9 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -44,6 +47,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.EvaluationHaltedException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
+import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
@@ -128,28 +132,28 @@ public class OCLConsolePage extends Page
 	 */
     protected static class CancelableEvaluationVisitor extends EvaluationVisitorImpl
     {
-		private final IProgressMonitor monitor;
+		private final @NonNull IProgressMonitor monitor;
 		
-		protected CancelableEvaluationVisitor(IProgressMonitor monitor, Environment env, EvaluationEnvironment evalEnv, DomainModelManager modelManager) {
+		protected CancelableEvaluationVisitor(@NonNull IProgressMonitor monitor, @NonNull Environment env, @NonNull EvaluationEnvironment evalEnv, @NonNull DomainModelManager modelManager) {
 			super(env, evalEnv, modelManager);
 			this.monitor = monitor;
 		}
 		
 		@Override
-		public EvaluationVisitor createNestedEvaluator() {
+		public @NonNull EvaluationVisitor createNestedEvaluator() {
 			EnvironmentFactory factory = environment.getFactory();
 	    	EvaluationEnvironment nestedEvalEnv = factory.createEvaluationEnvironment(evaluationEnvironment);
 			return new CancelableEvaluationVisitor(monitor, environment, nestedEvalEnv, modelManager);
 		}
 
 		@Override
-		protected EvaluationVisitor getUndecoratedVisitor() {
+		protected @NonNull EvaluationVisitor getUndecoratedVisitor() {
 			getValueFactory();
 			return super.getUndecoratedVisitor();
 		}
 
 		@Override
-		public ValueFactory getValueFactory() {
+		public @NonNull ValueFactory getValueFactory() {
 			if (monitor.isCanceled()) {
 				setCanceled(true);
 			}
@@ -162,7 +166,7 @@ public class OCLConsolePage extends Page
 		private final String message;
     	private final Exception exception;
     	
-		protected ExceptionValue(ValueFactory valueFactory, String message, Exception exception) {
+		protected ExceptionValue(@NonNull ValueFactory valueFactory, String message, Exception exception) {
 			super(valueFactory);
 			this.message = message;
 			this.exception = exception;
@@ -192,11 +196,11 @@ public class OCLConsolePage extends Page
 	
 	private class EvaluationRunnable implements IRunnableWithProgress
 	{
-		private final BaseResource resource;
-		private final String expression;
+		private final @NonNull BaseResource resource;
+		private final @NonNull String expression;
 		private Value value = null;
 		
-		public EvaluationRunnable(BaseResource resource, String expression) {
+		public EvaluationRunnable(@NonNull BaseResource resource, @NonNull String expression) {
 			this.resource = resource;
 			this.expression = expression;
 		}
@@ -223,7 +227,7 @@ public class OCLConsolePage extends Page
 //			monitor.subTask(ConsoleMessages.Progress_AST);
 			ExpressionInOCL expressionInOCL;
 			try {
-				PivotUtil.checkResourceErrors(null, resource);
+				PivotUtil.checkResourceErrors("", resource); //$NON-NLS-1$
 				expressionInOCL = eClassContext.getExpression(resource);
 			} catch (ParserException e) {
 				value = new ExceptionValue(valueFactory, ConsoleMessages.Result_ParsingFailure, e);
@@ -238,13 +242,13 @@ public class OCLConsolePage extends Page
 			evaluationEnvironment.add(expressionInOCL.getContextVariable(), contextValue);
 //			if (modelManager == null) {
 				// let the evaluation environment create one
-				modelManager = evaluationEnvironment.createModelManager(contextObject);
+				@NonNull DomainModelManager modelManager2 = modelManager = evaluationEnvironment.createModelManager(contextObject);
 //			}
 			monitor.worked(2);
 			monitor.subTask(ConsoleMessages.Progress_Evaluating);
 			try {
 //				metaModelManager.setMonitor(monitor);
-				EvaluationVisitor evaluationVisitor = new CancelableEvaluationVisitor(monitor, environment, evaluationEnvironment, modelManager);
+				EvaluationVisitor evaluationVisitor = new CancelableEvaluationVisitor(monitor, environment, evaluationEnvironment, modelManager2);
 		        value = evaluationVisitor.visitExpressionInOCL(expressionInOCL);
 			} catch (EvaluationHaltedException e) {
 				value = new ExceptionValue(valueFactory, ConsoleMessages.Result_EvaluationTerminated, null);
@@ -734,6 +738,7 @@ public class OCLConsolePage extends Page
         				value = editorDocument.readOnly(new IUnitOfWork<Value, XtextResource>() {
  
 						public Value exec(XtextResource state) throws Exception {
+							assert state != null;
 							IProgressService progressService = PlatformUI.getWorkbench().getProgressService();
 							EvaluationRunnable runnable = new EvaluationRunnable((BaseResource) state, expression);
 							progressService.busyCursorWhile(runnable);
@@ -747,13 +752,16 @@ public class OCLConsolePage extends Page
         				append(((ExceptionValue)value).getMessage(), errorColor, true);
         				append(String.valueOf(value), errorColor, false);
         			}
-        			else if ((value != null) && (value.isCollectionValue() != null)) {
-        				for (Value elementValue : value.isCollectionValue()) {
-        					append(String.valueOf(elementValue), resultsColor, false);
-        				}
-        			}
         			else if (value != null) {
-        				append(String.valueOf(value), resultsColor, false);
+        				CollectionValue collectionValue = value.isCollectionValue();
+						if (collectionValue != null) {
+							for (Value elementValue : collectionValue) {
+	        					append(String.valueOf(elementValue), resultsColor, false);
+	        				}
+						}
+	        			else {
+	        				append(String.valueOf(value), resultsColor, false);
+	        			}
         			}
         			else {
         				append(String.valueOf(value), errorColor, false);
@@ -862,15 +870,16 @@ public class OCLConsolePage extends Page
 		return lastOCLExpression;
 	}
 
-	public MetaModelManager getMetaModelManager(EObject contextObject) {
-		MetaModelManager metaModelManager = ElementUtil.findMetaModelManager(contextObject);
+	public @NonNull MetaModelManager getMetaModelManager(@Nullable EObject contextObject) {
+		MetaModelManager metaModelManager = contextObject != null ? ElementUtil.findMetaModelManager(contextObject) : null;
 		if (metaModelManager != null) {
 			return metaModelManager;
 		}
-		if (nullMetaModelManager == null) {
-			nullMetaModelManager = new MetaModelManager();
+		MetaModelManager nullMetaModelManager2 = nullMetaModelManager;
+		if (nullMetaModelManager2 == null) {
+			nullMetaModelManager2 = nullMetaModelManager = new MetaModelManager();
 		}
-		return nullMetaModelManager;
+		return nullMetaModelManager2;
 	}
 	
 	/**
@@ -951,13 +960,18 @@ public class OCLConsolePage extends Page
 		            	contextClassifier = null;
 		            }
 			    }
-			    EssentialOCLCSResource csResource = (EssentialOCLCSResource) resource;
 			    MetaModelManager metaModelManager = getMetaModelManager(contextObject);
-				if (contextObject != null) {
-					CS2PivotResourceAdapter.getAdapter(csResource, metaModelManager);
-				}
-				MetaModelManagerResourceSetAdapter.getAdapter(editor.getResourceSet(), metaModelManager);
-		        editorDocument.setContext(csResource, contextClassifier, null);
+			    EssentialOCLCSResource csResource = (EssentialOCLCSResource) resource;
+			    if (csResource != null) {
+					if (contextObject != null) {
+						CS2PivotResourceAdapter.getAdapter(csResource, metaModelManager);
+					}
+					ResourceSet resourceSet = editor.getResourceSet();
+					if (resourceSet != null) {
+						MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
+					}
+			        editorDocument.setContext(csResource, contextClassifier, null);
+			    }
 		        console.setSelection(contextClassifier, contextObject);
 		        eClassContext = contextClassifier != null ? new EClassContext(metaModelManager, null, contextClassifier) : null;
 		        return null;

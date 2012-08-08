@@ -34,7 +34,7 @@ public class EInvocationContext extends EClassContext
 	private final Map<String, EClassifier> eParameters;
 	private Map<String, Type> parameters = null;
 	
-	public EInvocationContext(@NonNull MetaModelManager metaModelManager, @Nullable URI uri, @NonNull EClassifier eClassContext, @Nullable Map<String, EClassifier> eParameters) {
+	public EInvocationContext(@NonNull MetaModelManager metaModelManager, @Nullable URI uri, @Nullable EClassifier eClassContext, @Nullable Map<String, EClassifier> eParameters) {
 		super(metaModelManager, uri, eClassContext);
 		this.eParameters = eParameters;
 	}
