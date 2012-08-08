@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.xtext.oclinecore.cs2pivot;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLLeft2RightVisitor;
@@ -27,15 +28,15 @@ public class AbstractOCLinEcoreLeft2RightVisitor
 	//
 	//	This file is maintained by copying from AbstractExtendingOCLinEcoreCSVisitor and changing R to Element.
 	//
-	protected AbstractOCLinEcoreLeft2RightVisitor(CS2PivotConversion context) {
+	protected AbstractOCLinEcoreLeft2RightVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 
-	public Element visitOCLinEcoreConstraintCS(org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS object) {
+	public Element visitOCLinEcoreConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS object) {
 		return visitConstraintCS(object);
 	}
 
-	public Element visitOCLinEcoreSpecificationCS(org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreSpecificationCS object) {
+	public Element visitOCLinEcoreSpecificationCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreSpecificationCS object) {
 		return visitExpSpecificationCS(object);
 	}
 }

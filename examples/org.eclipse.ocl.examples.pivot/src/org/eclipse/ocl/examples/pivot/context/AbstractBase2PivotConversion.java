@@ -120,7 +120,7 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 //		return null;
 	}
 
-	public void setContextVariable(@NonNull ExpressionInOCL pivotSpecification, @NonNull String selfVariableName, @NonNull Type contextType) {
+	public void setContextVariable(@NonNull ExpressionInOCL pivotSpecification, @NonNull String selfVariableName, @Nullable Type contextType) {
 		Variable contextVariable = pivotSpecification.getContextVariable();
 		if (contextVariable == null) {
 			@SuppressWarnings("null")

@@ -37,6 +37,9 @@ public class OCLinEcoreEObjectValidator extends EObjectValidator
 	@Override
 	public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context,
 			String validationDelegate, String constraint, String expression, int severity, String source, int code) {
+		assert eClass != null;
+		assert eObject != null;
+		assert constraint != null;
 	    ValidationDelegate delegate = getValidationDelegateRegistry(context).getValidationDelegate(validationDelegate);
 	    if (delegate instanceof ValidationDelegateExtension) {
 	      try
@@ -78,6 +81,9 @@ public class OCLinEcoreEObjectValidator extends EObjectValidator
 	public boolean validate(EDataType eDataType, Object value, DiagnosticChain diagnostics,
 			Map<Object, Object> context, String validationDelegate, String constraint, String expression, int severity,
 			String source, int code) {
+		assert eDataType != null;
+		assert value != null;
+		assert constraint != null;
 	    ValidationDelegate delegate = getValidationDelegateRegistry(context).getValidationDelegate(validationDelegate);
 	    if (delegate instanceof ValidationDelegateExtension) {
 		      try

@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.xtext.oclinecore.cs2pivot;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLContainmentVisitor;
@@ -27,15 +28,15 @@ public class AbstractOCLinEcoreContainmentVisitor
 	//
 	//	This file is maintained by copying from AbstractExtendingOCLinEcoreCSVisitor and changing R to Continuation<?>.
 	//
-	protected AbstractOCLinEcoreContainmentVisitor(CS2PivotConversion context) {
+	protected AbstractOCLinEcoreContainmentVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 
-	public Continuation<?> visitOCLinEcoreConstraintCS(org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS object) {
+	public Continuation<?> visitOCLinEcoreConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS object) {
 		return visitConstraintCS(object);
 	}
 
-	public Continuation<?> visitOCLinEcoreSpecificationCS(org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreSpecificationCS object) {
+	public Continuation<?> visitOCLinEcoreSpecificationCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreSpecificationCS object) {
 		return visitExpSpecificationCS(object);
 	}
 }

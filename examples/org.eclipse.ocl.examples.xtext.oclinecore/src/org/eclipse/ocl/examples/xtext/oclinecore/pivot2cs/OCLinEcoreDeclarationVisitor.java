@@ -16,8 +16,10 @@
  */
 package org.eclipse.ocl.examples.xtext.oclinecore.pivot2cs;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
@@ -32,40 +34,45 @@ import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreSpecifi
 
 public class OCLinEcoreDeclarationVisitor extends EssentialOCLDeclarationVisitor
 {
-	public OCLinEcoreDeclarationVisitor(Pivot2CSConversion context) {
+	public OCLinEcoreDeclarationVisitor(@NonNull Pivot2CSConversion context) {
 		super(context);
 	}
 
 	@Override
-	public ElementCS visitConstraint(Constraint object) {
+	public ElementCS visitConstraint(@NonNull Constraint object) {
 		OCLinEcoreConstraintCS csElement = context.refreshNamedElement(OCLinEcoreConstraintCS.class, OCLinEcoreCSTPackage.Literals.OC_LIN_ECORE_CONSTRAINT_CS, object);
 		csElement.setStereotype(object.getStereotype());
 		csElement.setCallable(object.isCallable());
 		ValueSpecification specification = object.getSpecification();
-		csElement.setSpecification(context.visitDeclaration(SpecificationCS.class, specification));
-		if (specification instanceof OpaqueExpression) {		// FIXME ExpressionInOCL too??
-			OpaqueExpression opaqueExpression = (OpaqueExpression)specification;
-			String message = PivotUtil.getMessage(opaqueExpression);
-			if ((message != null) && (message.length() > 0)) {
-				OCLinEcoreSpecificationCS csMessageElement = context.refreshElement(OCLinEcoreSpecificationCS.class, OCLinEcoreCSTPackage.Literals.OC_LIN_ECORE_SPECIFICATION_CS, opaqueExpression);
-				csMessageElement.setExprString(message);
-				csElement.setMessageSpecification(csMessageElement);
+		if (specification != null) {
+			csElement.setSpecification(context.visitDeclaration(SpecificationCS.class, specification));
+			if (specification instanceof OpaqueExpression) {		// FIXME ExpressionInOCL too??
+				OpaqueExpression opaqueExpression = (OpaqueExpression)specification;
+				String message = PivotUtil.getMessage(opaqueExpression);
+				if ((message != null) && (message.length() > 0)) {
+					OCLinEcoreSpecificationCS csMessageElement = context.refreshElement(OCLinEcoreSpecificationCS.class, OCLinEcoreCSTPackage.Literals.OC_LIN_ECORE_SPECIFICATION_CS, opaqueExpression);
+					csMessageElement.setExprString(message);
+					csElement.setMessageSpecification(csMessageElement);
+				}
 			}
 		}
 		return csElement;
 	}
 
 	@Override
-	public ElementCS visitExpressionInOCL(ExpressionInOCL object) {
+	public ElementCS visitExpressionInOCL(@NonNull ExpressionInOCL object) {
 		OCLinEcoreSpecificationCS csElement = context.refreshElement(OCLinEcoreSpecificationCS.class, OCLinEcoreCSTPackage.Literals.OC_LIN_ECORE_SPECIFICATION_CS, object);
 //		csElement.setOwnedExpression(context.visitDeclaration(ExpCS.class, object.getBodyExpression()));
-		String body = PrettyPrinter.print(object.getBodyExpression());
-		csElement.setExprString(body);
+		OCLExpression bodyExpression = object.getBodyExpression();
+		if (bodyExpression != null) {
+			String body = PrettyPrinter.print(bodyExpression);
+			csElement.setExprString(body);
+		}
 		return csElement;
 	}
 
 	@Override
-	public ElementCS visitOpaqueExpression(OpaqueExpression object) {
+	public ElementCS visitOpaqueExpression(@NonNull OpaqueExpression object) {
 		String body = PivotUtil.getBody(object);
 		if (body == null) {
 			return null;

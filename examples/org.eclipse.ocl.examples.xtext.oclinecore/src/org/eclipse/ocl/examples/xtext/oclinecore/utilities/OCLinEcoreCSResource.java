@@ -21,6 +21,7 @@ import java.io.OutputStream;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CS;
@@ -31,14 +32,14 @@ import org.eclipse.ocl.examples.xtext.oclinecore.pivot2cs.OCLinEcorePivot2CS;
 public class OCLinEcoreCSResource extends EssentialOCLCSResource
 {
 	@Override
-	public CS2Pivot createCS2Pivot(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
-			MetaModelManager metaModelManager) {
+	public @NonNull CS2Pivot createCS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
+			@NonNull MetaModelManager metaModelManager) {
 		return new OCLinEcoreCS2Pivot(cs2pivotResourceMap, metaModelManager);
 	}
 
 	@Override
-	public Pivot2CS createPivot2CS(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
-			MetaModelManager metaModelManager) {
+	public Pivot2CS createPivot2CS(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
+			@NonNull MetaModelManager metaModelManager) {
 		return new OCLinEcorePivot2CS(cs2pivotResourceMap, metaModelManager);
 	}
 
@@ -50,7 +51,7 @@ public class OCLinEcoreCSResource extends EssentialOCLCSResource
 	}
 
 	@Override
-	public String getEditorName() {
+	public @NonNull String getEditorName() {
 		return "OCL in Ecore";
 	}
 }

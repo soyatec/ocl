@@ -20,6 +20,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
@@ -32,17 +33,17 @@ public class OCLinEcorePivot2CS extends EssentialOCLPivot2CS
 {	
 	private static final class Factory implements Pivot2CS.Factory
 	{
-		private static Pivot2CS.Factory INSTANCE = new Factory();
+		private static @NonNull Pivot2CS.Factory INSTANCE = new Factory();
 
-		public OCLinEcoreDeclarationVisitor createDeclarationVisitor(Pivot2CSConversion converter) {
+		public @NonNull OCLinEcoreDeclarationVisitor createDeclarationVisitor(@NonNull Pivot2CSConversion converter) {
 			return new OCLinEcoreDeclarationVisitor(converter);
 		}
 
-		public BaseReferenceVisitor createReferenceVisitor(Pivot2CSConversion converter) {
+		public @NonNull BaseReferenceVisitor createReferenceVisitor(@NonNull Pivot2CSConversion converter) {
 			return new BaseReferenceVisitor(converter);
 		}
 
-		public EClass[] getEClasses() {
+		public @NonNull EClass[] getEClasses() {
 			return new EClass[] {
 				PivotPackage.Literals.CONSTRAINT,
 				PivotPackage.Literals.OPAQUE_EXPRESSION,
@@ -51,10 +52,11 @@ public class OCLinEcorePivot2CS extends EssentialOCLPivot2CS
 		}
 	}
 		
-	public OCLinEcorePivot2CS(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, MetaModelManager metaModelManager) {
+	public OCLinEcorePivot2CS(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, @NonNull MetaModelManager metaModelManager) {
 		super(cs2pivotResourceMap, metaModelManager);
 		addFactory(Factory.INSTANCE);
 		for (Resource csResource : cs2pivotResourceMap.keySet()) {
+			assert csResource != null;
 			MetaModelManagerResourceAdapter.getAdapter(csResource, metaModelManager);
 		}
 	}

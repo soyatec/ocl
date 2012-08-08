@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.impl.ExpSpecificationCSImpl;
@@ -59,7 +60,7 @@ public class OCLinEcoreSpecificationCSImpl extends ExpSpecificationCSImpl implem
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(BaseCSVisitor<R> visitor) {
-		return (R) visitor.getAdapter(OCLinEcoreCSVisitor.class).visitOCLinEcoreSpecificationCS(this);
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((OCLinEcoreCSVisitor<?>)visitor).visitOCLinEcoreSpecificationCS(this);
 	}
 } //OCLinEcoreSpecificationCSImpl

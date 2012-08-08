@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.xtext.oclinecore.utilities;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2Moniker;
@@ -37,7 +38,7 @@ public class OCLinEcoreCS2MonikerVisitor
 //			roleNames.put(OCLinEcoreCSTPackage.Literals.LIB_CONSTRAINT_CS__OWNED_EXPRESSION, "z");
 		}
 		
-		public BaseCSVisitor<?> create(CS2Moniker context) {
+		public @NonNull BaseCSVisitor<?> create(@NonNull CS2Moniker context) {
 			return new OCLinEcoreCS2MonikerVisitor(context);
 		}
 	}
