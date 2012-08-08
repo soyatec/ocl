@@ -60,7 +60,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
  */
 public class PrettyPrinter
 {
-	public static final String NULL_PLACEHOLDER = "<null>";
+	public static final @NonNull String NULL_PLACEHOLDER = "<null>";
 	@SuppressWarnings("null")
 	public static @NonNull List<String> reservedNameList = Arrays.asList("and", "else", "endif", "false", "if", "implies", "in", "invalid", "let", "not", "null", "or", "self", "then", "true", "xor");
 	@SuppressWarnings("null")
@@ -68,12 +68,13 @@ public class PrettyPrinter
 
 	public static interface Factory
 	{
-		AbstractVisitor<Object, PrettyPrinter> createPrettyPrintVisitor(PrettyPrinter printer);
+		@NonNull AbstractVisitor<Object, PrettyPrinter> createPrettyPrintVisitor(@NonNull PrettyPrinter printer);
 	}
 	
-	private static Map<EPackage, Factory> factoryMap = new HashMap<EPackage, Factory>();
+	private static @NonNull Map<EPackage, Factory> factoryMap = new HashMap<EPackage, Factory>();
 	
-	public static void addFactory(EPackage ePackage, Factory factory) {
+	public static void addFactory(/*@NonNull*/ EPackage ePackage, @NonNull Factory factory) {
+		assert ePackage != null;
 		factoryMap.put(ePackage, factory);
 	}
 	
@@ -203,7 +204,7 @@ public class PrettyPrinter
 			return s.toString();
 		}
 		
-		public String toString(StringBuilder s, String newLine, String indent) {
+		public String toString(@NonNull StringBuilder s, String newLine, String indent) {
 			if ((lineWrap || (newLine != null)) && (prefix != null)) {
 				if (lineWrap) {
 					newLine = "\n";
@@ -482,7 +483,7 @@ public class PrettyPrinter
     	}
 	}
 
-    public void appendQualifiedType(Element element) {
+    public void appendQualifiedType(@NonNull Element element) {
     	Mode savedMode = pushMode(Mode.TYPE);
     	try {
 	        MetaModelManager metaModelManager = options.getGlobalOptions().getMetaModelManager();

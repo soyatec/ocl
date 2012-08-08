@@ -20,12 +20,14 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.BasicContinuation;
@@ -50,7 +52,7 @@ public class EssentialOCLPreOrderVisitor extends AbstractEssentialOCLPreOrderVis
 {
 	protected static class CollectionTypeContinuation extends SingleContinuation<CollectionTypeCS>
 	{
-		public CollectionTypeContinuation(CS2PivotConversion context, CollectionTypeCS csElement) {
+		public CollectionTypeContinuation(@NonNull CS2PivotConversion context, @NonNull CollectionTypeCS csElement) {
 			super(context, null, null, csElement);
 		}
 
@@ -83,12 +85,16 @@ public class EssentialOCLPreOrderVisitor extends AbstractEssentialOCLPreOrderVis
 			MetaModelManager metaModelManager = context.getMetaModelManager();
 			TypedRefCS csElementType = csElement.getOwnedType();
 			Type type;
+			String name = csElement.getName();
+			assert name != null;
 			if (csElementType != null) {
 				Type elementType = PivotUtil.getPivot(Type.class, csElementType);
-				type = metaModelManager.getLibraryType(csElement.getName(), Collections.singletonList(elementType));
+				List<Type> singletonList = Collections.singletonList(elementType);
+				assert singletonList != null;
+				type = metaModelManager.getLibraryType(name, singletonList);
 			}
 			else {
-				type = metaModelManager.getLibraryType(csElement.getName());
+				type = metaModelManager.getLibraryType(name);
 			}
 			csElement.setPivot(type);
 			return null;
@@ -97,7 +103,7 @@ public class EssentialOCLPreOrderVisitor extends AbstractEssentialOCLPreOrderVis
 
 	protected static class TypeNameExpContinuation extends SingleContinuation<TypeNameExpCS>
 	{
-		public TypeNameExpContinuation(CS2PivotConversion context, TypeNameExpCS csElement) {
+		public TypeNameExpContinuation(@NonNull CS2PivotConversion context, @NonNull TypeNameExpCS csElement) {
 			super(context, null, null, csElement);
 		}
 
@@ -114,48 +120,48 @@ public class EssentialOCLPreOrderVisitor extends AbstractEssentialOCLPreOrderVis
 		}
 	}
 
-	public EssentialOCLPreOrderVisitor(CS2PivotConversion context) {
+	public EssentialOCLPreOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 
 	@Override
-	public Continuation<?> visitCollectionTypeCS(CollectionTypeCS csCollectionType) {
+	public Continuation<?> visitCollectionTypeCS(@NonNull CollectionTypeCS csCollectionType) {
 		// Must at least wait till library types defined
 		return new CollectionTypeContinuation(context, csCollectionType);
 	}
 
 	@Override
-	public Continuation<?> visitConstructorExpCS(ConstructorExpCS csConstructorExp) {
+	public Continuation<?> visitConstructorExpCS(@NonNull ConstructorExpCS csConstructorExp) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitContextCS(ContextCS csContext) {
+	public Continuation<?> visitContextCS(@NonNull ContextCS csContext) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitExpCS(ExpCS csExp) {
+	public Continuation<?> visitExpCS(@NonNull ExpCS csExp) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitInvocationExpCS(InvocationExpCS csNavigatingExp) {
+	public Continuation<?> visitInvocationExpCS(@NonNull InvocationExpCS csNavigatingExp) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitNameExpCS(NameExpCS csNameExp) {
+	public Continuation<?> visitNameExpCS(@NonNull NameExpCS csNameExp) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitNavigatingArgCS(NavigatingArgCS csNavigatingArg) {
+	public Continuation<?> visitNavigatingArgCS(@NonNull NavigatingArgCS csNavigatingArg) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitNavigationOperatorCS(NavigationOperatorCS object) {
+	public Continuation<?> visitNavigationOperatorCS(@NonNull NavigationOperatorCS object) {
 		EObject eContainer = object.eContainer();
 		if (eContainer instanceof InfixExpCS) {
 			InfixExpCS csInfixExp = (InfixExpCS)eContainer;
@@ -165,7 +171,9 @@ public class EssentialOCLPreOrderVisitor extends AbstractEssentialOCLPreOrderVis
 				if ((index+1) < expressions.size()) {
 					ExpCS csExp = expressions.get(index+1);
 					if ((csExp instanceof NameExpCS) && !(csExp instanceof InvocationExpCS)) {
-						CS2Pivot.setElementType(((NameExpCS) csExp).getPathName(), PivotPackage.Literals.PROPERTY, csExp, null);
+						PathNameCS pathName = ((NameExpCS) csExp).getPathName();
+						assert pathName != null;
+						CS2Pivot.setElementType(pathName, PivotPackage.Literals.PROPERTY, csExp, null);
 					}
 				}
 			}
@@ -174,17 +182,17 @@ public class EssentialOCLPreOrderVisitor extends AbstractEssentialOCLPreOrderVis
 	}
 
 	@Override
-	public Continuation<?> visitOperatorCS(OperatorCS object) {
+	public Continuation<?> visitOperatorCS(@NonNull OperatorCS object) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitTypeNameExpCS(TypeNameExpCS csTypeNameExp) {
+	public Continuation<?> visitTypeNameExpCS(@NonNull TypeNameExpCS csTypeNameExp) {
 		return new TypeNameExpContinuation(context, csTypeNameExp);
 	}
 
 	@Override
-	public Continuation<?> visitVariableCS(VariableCS csVariable) {
+	public Continuation<?> visitVariableCS(@NonNull VariableCS csVariable) {
 		return null;
 	}
 }

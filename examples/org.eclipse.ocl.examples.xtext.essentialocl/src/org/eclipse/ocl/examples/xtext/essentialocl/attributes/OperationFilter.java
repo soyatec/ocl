@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Iteration;
@@ -42,17 +44,18 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigationRol
 
 public class OperationFilter extends AbstractOperationFilter
 {
-	protected final List<NavigatingArgCS> csArguments;
+	protected final @NonNull List<NavigatingArgCS> csArguments;
 	protected final int iterators;
 	protected final int accumulators;
 	protected final int expressions;
 	
-	public OperationFilter(MetaModelManager metaModelManager, Type sourceType, InvocationExpCS csNavigatingExp) {
+	public OperationFilter(@NonNull MetaModelManager metaModelManager, @Nullable Type sourceType, @NonNull InvocationExpCS csNavigatingExp) {
 		super(metaModelManager, sourceType);
 		int accumulators = 0;
 		int iterators = 0;
 		int expressions = 0;
-		this.csArguments = csNavigatingExp.getArgument();
+		@SuppressWarnings("null") @NonNull List<NavigatingArgCS> csArguments = csNavigatingExp.getArgument();
+		this.csArguments = csArguments;
 		for (NavigatingArgCS csNavigatingArg : csArguments) {
 			if (csNavigatingArg.getRole() == NavigationRole.ITERATOR) {
 				iterators++;
@@ -69,7 +72,7 @@ public class OperationFilter extends AbstractOperationFilter
 		this.expressions = expressions;
 	}
 
-	protected OCLExpression getExpressionArgument(int index) {
+	protected @Nullable OCLExpression getExpressionArgument(int index) {
 		int expIndex = 0;
 		for (NavigatingArgCS csNavigatingArg : csArguments) {
 			if (csNavigatingArg.getRole() == NavigationRole.EXPRESSION) {
@@ -82,9 +85,9 @@ public class OperationFilter extends AbstractOperationFilter
 		return null;
 	}
 
-	protected Map<TemplateParameter, ParameterableElement> getIterationBindings(Iteration candidateIteration) {
+	protected @Nullable Map<TemplateParameter, ParameterableElement> getIterationBindings(@NonNull Iteration candidateIteration) {
 		Type sourceType = this.sourceType;
-		if (!(sourceType instanceof CollectionType) && (candidateIteration.getOwningType() instanceof CollectionType)) {
+		if (!(sourceType instanceof CollectionType) && (candidateIteration.getOwningType() instanceof CollectionType) && (sourceType != null)) {
 			sourceType = metaModelManager.getCollectionType("Set", sourceType);		// Implicit oclAsSet()
 		}
 		if (!(sourceType instanceof CollectionType)) {			// May be InvalidType
@@ -101,9 +104,11 @@ public class OperationFilter extends AbstractOperationFilter
 				if (csArgument.getRole() == NavigationRole.ACCUMULATOR) {
 					if (accIndex < templateParameters.size()) {
 						Variable argument = PivotUtil.getPivot(Variable.class, csArgument);
-						Type argumentType = argument.getType();
-						TemplateParameter accParameter = templateParameters.get(accIndex);
-						bindings.put(accParameter, argumentType);
+						if (argument != null) {
+							Type argumentType = argument.getType();
+							TemplateParameter accParameter = templateParameters.get(accIndex);
+							bindings.put(accParameter, argumentType);
+						}
 					}
 					accIndex++;
 				}
@@ -113,11 +118,11 @@ public class OperationFilter extends AbstractOperationFilter
 	}
 
 	@Override
-	protected Map<TemplateParameter, ParameterableElement> getOperationBindings(Operation candidateOperation) {
+	protected @Nullable Map<TemplateParameter, ParameterableElement> getOperationBindings(@NonNull Operation candidateOperation) {
 		Type sourceType = this.sourceType;
 		Map<TemplateParameter, ParameterableElement> bindings = null;
 		Type containingType = candidateOperation.getOwningType();
-		if (containingType instanceof CollectionType) {
+		if ((containingType instanceof CollectionType) && (sourceType != null)) {
 			if (!(sourceType instanceof CollectionType)) {
 				sourceType = metaModelManager.getCollectionType("Set", sourceType);		// Implicit oclAsSet()
 			}			
@@ -145,8 +150,8 @@ public class OperationFilter extends AbstractOperationFilter
 	}
 
 	@Override
-	protected void installBindings(EnvironmentView environmentView, DomainElement eObject,
-			Map<TemplateParameter, ParameterableElement> bindings) {
+	protected void installBindings(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject,
+			@Nullable Map<TemplateParameter, ParameterableElement> bindings) {
 		List<Parameter> parameters = ((Operation)eObject).getOwnedParameter();
 		int iMax = parameters.size();
 		if (iMax > 0) {
@@ -164,7 +169,7 @@ public class OperationFilter extends AbstractOperationFilter
 		super.installBindings(environmentView, eObject, bindings);
 	}
 
-	public boolean matches(EnvironmentView environmentView, DomainElement eObject) {
+	public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {
 		if (eObject instanceof Iteration) {
 			Iteration candidateIteration = (Iteration)eObject;
 			int iteratorCount = candidateIteration.getOwnedIterator().size();
@@ -196,19 +201,24 @@ public class OperationFilter extends AbstractOperationFilter
 			Map<TemplateParameter, ParameterableElement> bindings = getOperationBindings(candidateOperation);
 			for (int i = 0; i < expressions; i++) {
 				Parameter candidateParameter = candidateParameters.get(i);
-				NavigatingArgCS csExpression = csArguments.get(i);
-				OCLExpression expression = PivotUtil.getPivot(OCLExpression.class, csExpression);
-				if (expression == null) {
-					return false;
-				}
-				Type candidateType = metaModelManager.getTypeWithMultiplicity(candidateParameter);
-				if (candidateType instanceof SelfType) {
-					candidateType = candidateOperation.getOwningType();
-				}
-				Type expressionType = expression.getType();
-				expressionType = PivotUtil.getBehavioralType(expressionType);			// FIXME make this a general facility
-				if (!metaModelManager.conformsTo(expressionType, candidateType, bindings)) {
-					return false;
+				if (candidateParameter != null) {
+					NavigatingArgCS csExpression = csArguments.get(i);
+					OCLExpression expression = PivotUtil.getPivot(OCLExpression.class, csExpression);
+					if (expression == null) {
+						return false;
+					}
+					Type candidateType = metaModelManager.getTypeWithMultiplicity(candidateParameter);
+					if (candidateType instanceof SelfType) {
+						candidateType = candidateOperation.getOwningType();
+					}
+					Type expressionType = expression.getType();
+					if ((expressionType == null) || (candidateType == null)) {
+						return false;
+					}
+					expressionType = PivotUtil.getBehavioralType(expressionType);			// FIXME make this a general facility
+					if (!metaModelManager.conformsTo(expressionType, candidateType, bindings)) {
+						return false;
+					}
 				}
 			}
 			if (bindings != null) {

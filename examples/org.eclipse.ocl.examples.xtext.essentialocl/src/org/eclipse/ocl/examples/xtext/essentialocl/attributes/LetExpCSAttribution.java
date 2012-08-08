@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.xtext.essentialocl.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
@@ -32,7 +33,7 @@ public class LetExpCSAttribution extends AbstractAttribution
 	public static final LetExpCSAttribution INSTANCE = new LetExpCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		LetExpCS targetElement = (LetExpCS)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
 		EObject child = scopeView.getChild();

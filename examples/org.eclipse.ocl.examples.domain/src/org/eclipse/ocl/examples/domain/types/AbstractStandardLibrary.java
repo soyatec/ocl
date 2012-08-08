@@ -216,7 +216,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 	 * Return the map.get(key).get() entry if there is one or null if not, removing any stale
 	 * entry that may be encountered.
 	 */
-	protected <K, V> V weakGet(/*@NonNull*/ Map<K, WeakReference<V>> map, /*@NonNull*/ K key) {
+	protected <K, V> V weakGet(@NonNull Map<K, WeakReference<V>> map, @NonNull K key) {
 		WeakReference<V> ref = map.get(key);
 		if (ref == null) {
 			return null;

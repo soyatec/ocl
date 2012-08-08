@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.essentialocl.attributes;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -28,10 +29,10 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpSpecificat
 
 public class ExpSpecificationCSAttribution extends AbstractAttribution
 {
-	public static final ExpSpecificationCSAttribution INSTANCE = new ExpSpecificationCSAttribution();
+	public static final @NonNull ExpSpecificationCSAttribution INSTANCE = new ExpSpecificationCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		ExpSpecificationCS targetElement = (ExpSpecificationCS)target;
 		ExpressionInOCL pivot = PivotUtil.getPivot(ExpressionInOCL.class, targetElement);
 		if (pivot != null) {
@@ -40,6 +41,7 @@ public class ExpSpecificationCSAttribution extends AbstractAttribution
 				environmentView.addNamedElement(resultVariable);
 			}
 			for (Variable parameterVariable : pivot.getParameterVariable()) {
+				assert parameterVariable != null;
 				environmentView.addNamedElement(parameterVariable);
 			}
 			Variable contextVariable = pivot.getContextVariable();

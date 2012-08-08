@@ -44,7 +44,7 @@ public abstract class AbstractExtendingCompleteOCLCSVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractExtendingCompleteOCLCSVisitor(@Nullable C context) {
+	protected AbstractExtendingCompleteOCLCSVisitor(@NonNull C context) {
 	    super(context);
 	}	
 

@@ -36,8 +36,8 @@ public class EcoreLibraryProperty extends AbstractProperty
 	protected final @NonNull EStructuralFeature eFeature;
 
 
-	@SuppressWarnings("null")
 	public EcoreLibraryProperty(/*@NonNull*/ EStructuralFeature eFeature) {
+		assert eFeature != null;
 		this.eFeature = eFeature;
 	}
 

@@ -26,6 +26,8 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
@@ -43,7 +45,7 @@ import org.eclipse.xtext.util.CancelIndicator;
 
 public class EssentialOCLCSResource extends LazyLinkingResource implements BaseCSResource
 {	
-	private ParserContext parserContext;
+	private @Nullable ParserContext parserContext = null;
 	
 	public EssentialOCLCSResource() {
 		super();
@@ -64,25 +66,25 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 		errors.add(new LibraryDiagnostic(e));
 	}
 
-	public CS2Pivot createCS2Pivot(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
-			MetaModelManager metaModelManager) {
+	public @NonNull CS2Pivot createCS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
+			@NonNull MetaModelManager metaModelManager) {
 		return new EssentialOCLCS2Pivot(cs2pivotResourceMap, metaModelManager);
 	}
 
-	public Pivot2CS createPivot2CS(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
-			MetaModelManager metaModelManager) {
+	public Pivot2CS createPivot2CS(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
+			@NonNull MetaModelManager metaModelManager) {
 		return new EssentialOCLPivot2CS(cs2pivotResourceMap, metaModelManager);
 	}
 
-	public MetaModelManager createMetaModelManager() {
+	public @NonNull MetaModelManager createMetaModelManager() {
 		ResourceSet resourceSet = getResourceSet();
-		MetaModelManagerResourceSetAdapter resourceSetAdapter = MetaModelManagerResourceSetAdapter.findAdapter(resourceSet);
-		if (resourceSetAdapter != null) {
-			return resourceSetAdapter.getMetaModelManager();
+		if (resourceSet != null) {
+			MetaModelManagerResourceSetAdapter resourceSetAdapter = MetaModelManagerResourceSetAdapter.findAdapter(resourceSet);
+			if (resourceSetAdapter != null) {
+				return resourceSetAdapter.getMetaModelManager();
+			}
 		}
-		else {
-			return new MetaModelManager();
-		}
+		return new MetaModelManager();
 	}
 
 	@Override
@@ -112,33 +114,39 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 		}
 	}
 
-	public String getEditorName() {
+	public @NonNull String getEditorName() {
 		return "Essential OCL";
 	}
 
-	public ParserContext getParserContext() {
+	public @Nullable ParserContext getParserContext() {
 		return parserContext;
 	}
 
-	public Resource getPivotResource(MetaModelManager metaModelManager) {
+	public @NonNull Resource getPivotResource(@NonNull MetaModelManager metaModelManager) {
 		CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.getAdapter(this, metaModelManager);
 		Resource pivotResource = adapter.getPivotResource(this);
+		if (pivotResource == null) {
+			throw new IllegalStateException("No Pivot Resource created");
+		}
 		return pivotResource;
 	}
 
-	public URI resolve(URI uri) {
+	public @NonNull URI resolve(@NonNull URI uri) {
 		URI csURI = getURI();
 		if (csURI.isRelative()) {
 			File csRelative = new File(csURI.toFileString());
 			File csAbsolute = csRelative.getAbsoluteFile();
 			csURI = URI.createFileURI(csAbsolute.toString());
 		}
-		return uri.resolve(csURI);
+		URI resolvedURI = uri.resolve(csURI);
+		assert resolvedURI != null;
+		return resolvedURI;
 	}
 
 	@Override
 	public void resolveLazyCrossReferences(CancelIndicator mon) {	// FIXME move to Validation rules
 		List<Diagnostic> errors = getErrors();
+		assert errors != null;
 		if (ElementUtil.hasSyntaxError(errors)) {
 			return;
 		}
@@ -241,15 +249,13 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 		super.resolveLazyCrossReferences(mon);
 	}
 
-	public void setParserContext(ParserContext parserContext) {
+	public void setParserContext(@NonNull ParserContext parserContext) {
 		this.parserContext = parserContext;
 	}
 
-	public void updateFrom(Resource pivotResource, MetaModelManager metaModelManager) {		
+	public void updateFrom(@NonNull Resource pivotResource, @NonNull MetaModelManager metaModelManager) {		
 		Map<Resource, Resource> cs2PivotResourceMap = new HashMap<Resource, Resource>();
-		if (pivotResource != null) {
-			cs2PivotResourceMap.put(this, pivotResource);
-		}
+		cs2PivotResourceMap.put(this, pivotResource);
 		Pivot2CS pivot2cs = createPivot2CS(cs2PivotResourceMap, metaModelManager);
 		pivot2cs.update();
 	}

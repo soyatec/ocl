@@ -19,6 +19,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.CollectionType;
@@ -54,7 +56,7 @@ public class InvocationExpCSAttribution extends AbstractAttribution
 	public static final InvocationExpCSAttribution INSTANCE = new InvocationExpCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		InvocationExpCS targetElement = (InvocationExpCS)target;
 		EObject fromArgument = scopeView.getChild();
 		if (fromArgument instanceof NavigatingArgCS) {
@@ -95,11 +97,9 @@ public class InvocationExpCSAttribution extends AbstractAttribution
 							Type type = source.getType();
 							if (csNavigationOperator.getName().equals(PivotConstants.COLLECTION_NAVIGATION_OPERATOR)) {
 								if (type instanceof CollectionType) {		// collection->collection-operation(name...
-									if (isIteration(environmentView.getMetaModelManager(), csNavigationOperator.getArgument(), type)) {
+									ExpCS csArgument = csNavigationOperator.getArgument();
+									if ((csArgument != null) && isIteration(environmentView.getMetaModelManager(), csArgument, type)) {
 										environmentView.addElementsOfScope(((CollectionType)type).getElementType(), scopeView);
-									}
-									else {
-										return scopeView.getParent();
 									}
 								}
 							}
@@ -111,13 +111,18 @@ public class InvocationExpCSAttribution extends AbstractAttribution
 			else if (((NavigatingArgCS)fromArgument).getRole() == NavigationRole.ITERATOR) {			// Happens during save
 				CallExp pivot = PivotUtil.getPivot(CallExp.class, targetElement);
 				if (pivot instanceof LoopExp) {
-					environmentView.addNamedElements(((LoopExp)pivot).getIterator());
+					List<Variable> iterators = ((LoopExp)pivot).getIterator();
+					assert iterators != null;
+					environmentView.addNamedElements(iterators);
 				}
 			}
 			else if (((NavigatingArgCS)fromArgument).getRole() == NavigationRole.ACCUMULATOR) {
 				CallExp pivot = PivotUtil.getPivot(CallExp.class, targetElement);
 				if (pivot instanceof IterateExp) {
-					environmentView.addNamedElement(((IterateExp)pivot).getResult());
+					Variable result = ((IterateExp)pivot).getResult();
+					if (result != null) {
+						environmentView.addNamedElement(result);
+					}
 				}
 			}
 			ElementCS parent = targetElement.getLogicalParent();
@@ -151,7 +156,7 @@ public class InvocationExpCSAttribution extends AbstractAttribution
 			}
 			EClassifier requiredType = environmentView.getRequiredType();
 			EClass operationType = PivotPackage.Literals.OPERATION;
-			if ((requiredType instanceof EClass) && operationType.isSuperTypeOf((EClass)requiredType)) {
+			if ((scopeTarget != null) && (requiredType instanceof EClass) && operationType.isSuperTypeOf((EClass)requiredType)) {
 				ScopeFilter filter = createInvocationFilter(environmentView.getMetaModelManager(), targetElement, type);
 				try {
 					environmentView.addFilter(filter);
@@ -168,11 +173,11 @@ public class InvocationExpCSAttribution extends AbstractAttribution
 		}
 	}
 
-	protected ScopeFilter createInvocationFilter(MetaModelManager metaModelManager, InvocationExpCS targetElement, Type type) {
+	protected @NonNull ScopeFilter createInvocationFilter(@NonNull MetaModelManager metaModelManager, @NonNull InvocationExpCS targetElement, @Nullable Type type) {
 		return new OperationFilter(metaModelManager, type, targetElement);
 	}
 
-	public static boolean isIteration(MetaModelManager metaModelManager, ExpCS csExp, Type type) {
+	public static boolean isIteration(@NonNull MetaModelManager metaModelManager, @NonNull ExpCS csExp, @NonNull Type type) {
 		if (!(csExp instanceof InvocationExpCS)) {
 			return false;
 		}
@@ -193,6 +198,7 @@ public class InvocationExpCSAttribution extends AbstractAttribution
 			return unresolvedElement instanceof Iteration;
 		}
 		String name = csPathElement.toString();
+		assert name != null;
 		for (DomainOperation operation : metaModelManager.getAllOperations(type, Boolean.FALSE, name)) {
 			return operation instanceof Iteration;		// mixed overload are not allowed
 		}

@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.xtext.essentialocl.attributes;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -34,10 +35,10 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ContextCS;
 
 public class ContextCSAttribution extends AbstractRootCSAttribution
 {
-	public static final ContextCSAttribution INSTANCE = new ContextCSAttribution();
+	public static final @NonNull ContextCSAttribution INSTANCE = new ContextCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 		ContextCS targetElement = (ContextCS)target;
 		ExpressionInOCL pivot = PivotUtil.getPivot(ExpressionInOCL.class, targetElement);
@@ -47,6 +48,7 @@ public class ContextCSAttribution extends AbstractRootCSAttribution
 				environmentView.addNamedElement(resultVariable);
 			}
 			for (Variable parameterVariable : pivot.getParameterVariable()) {
+				assert parameterVariable != null;
 				environmentView.addNamedElement(parameterVariable);
 			}
 			Variable contextVariable = pivot.getContextVariable();
@@ -65,9 +67,11 @@ public class ContextCSAttribution extends AbstractRootCSAttribution
 			Resource resource = target.eResource();
 			if (resource instanceof BaseResource) {
 				ParserContext parserContext = ((BaseResource)resource).getParserContext();
-				Type contextType = parserContext.getClassContext();
-				if (contextType != null) {
-					environmentView.computeLookups(contextType, null, null, PivotPackage.Literals.NAMED_ELEMENT__OWNED_RULE);
+				if (parserContext != null) {
+					Type contextType = parserContext.getClassContext();
+					if (contextType != null) {
+						environmentView.computeLookups(contextType, null, null, PivotPackage.Literals.NAMED_ELEMENT__OWNED_RULE);
+					}
 				}
 			}
 		}
@@ -78,10 +82,12 @@ public class ContextCSAttribution extends AbstractRootCSAttribution
 			Resource eResource = pivot.eResource();
 			if (eResource != null) {
 				URI baseURI = eResource.getURI();
-				URI nonPivotBaseURI = PivotUtil.getNonPivotURI(baseURI);
-				String nonPivotScheme = nonPivotBaseURI.scheme();
-				if ((nonPivotScheme != null) && !"null".equals(nonPivotScheme)) {
-					environmentView.addImportedElement(baseURI);
+				if (baseURI != null) {
+					URI nonPivotBaseURI = PivotUtil.getNonPivotURI(baseURI);
+					String nonPivotScheme = nonPivotBaseURI.scheme();
+					if ((nonPivotScheme != null) && !"null".equals(nonPivotScheme)) {
+						environmentView.addImportedElement(baseURI);
+					}
 				}
 			}
 		}

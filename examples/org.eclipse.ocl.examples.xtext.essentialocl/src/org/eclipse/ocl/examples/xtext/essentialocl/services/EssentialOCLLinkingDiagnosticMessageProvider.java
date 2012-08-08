@@ -29,6 +29,7 @@ public class EssentialOCLLinkingDiagnosticMessageProvider extends LinkingDiagnos
 		EObject csContext = context.getContext();
 		String linkText = context.getLinkText();
 		EReference eReference = context.getReference();
+		assert (eReference != null) && (csContext != null) && (linkText != null);
 		return CS2Pivot.getUnresolvedProxyMessage(eReference, csContext, linkText);
 	}
 }

@@ -101,7 +101,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitable;
  * @author Christian W. Damus (cdamus)
  * @author Edward Willink (ewillink)
  */
-public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
+public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 {	
 	private static final Logger logger = Logger.getLogger(ToStringVisitor.class);
 
@@ -157,7 +157,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, String>
 	 * Initializes me.
 	 */
 	protected ToStringVisitor() {
-		super(null);
+        super(Object.class);						// Useless dummy object as context
 	}
 
 	/*

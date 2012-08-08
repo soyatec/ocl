@@ -44,7 +44,7 @@ public abstract class AbstractExtendingVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractExtendingVisitor(@Nullable C context) {
+	protected AbstractExtendingVisitor(@NonNull C context) {
 	    super(context);
 	}	
 

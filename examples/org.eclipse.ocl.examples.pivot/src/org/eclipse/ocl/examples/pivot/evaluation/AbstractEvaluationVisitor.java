@@ -89,7 +89,7 @@ public abstract class AbstractEvaluationVisitor
 	 */
 	protected AbstractEvaluationVisitor(@NonNull Environment env, @NonNull EvaluationEnvironment evalEnv,
 			@NonNull DomainModelManager modelManager) {
-        super(null);
+        super(Object.class);						// Useless dummy object as context
         this.evaluationEnvironment = evalEnv;
         this.environment = env;
         this.metaModelManager = env.getMetaModelManager();

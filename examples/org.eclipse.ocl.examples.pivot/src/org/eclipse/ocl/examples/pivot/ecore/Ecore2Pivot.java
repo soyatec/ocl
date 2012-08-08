@@ -275,7 +275,10 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 
 	public void dispose() {
 		metaModelManager.removeExternalResource(this);
-		getTarget().eAdapters().remove(this);
+		Notifier target = getTarget();
+		if (target != null) {
+			target.eAdapters().remove(this);
+		}
 	}
 
 	@Override
@@ -402,7 +405,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		return ecoreResource;
 	}
 
-	public /*@NonNull*/ Notifier getTarget() {
+	public @Nullable Notifier getTarget() {
 		return ecoreResource;
 	}
 

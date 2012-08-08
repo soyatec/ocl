@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.essentialocl.attributes;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
@@ -29,17 +30,19 @@ import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.scoping.BaseScopeView;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigationOperatorCS;
 
 public class NavigationOperatorCSAttribution extends AbstractAttribution
 {
-	public static final NavigationOperatorCSAttribution INSTANCE = new NavigationOperatorCSAttribution();
+	public static final @NonNull NavigationOperatorCSAttribution INSTANCE = new NavigationOperatorCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		NavigationOperatorCS targetElement = (NavigationOperatorCS)target;
 		EObject child = scopeView.getChild();
-		if (child == targetElement.getArgument()) {
+		ExpCS csArgument = targetElement.getArgument();
+		if (child == csArgument) {
 			OCLExpression source = PivotUtil.getPivot(OCLExpression.class, targetElement.getSource());
 			if (source != null) {
 				Type type = source.getType();
@@ -62,13 +65,15 @@ public class NavigationOperatorCSAttribution extends AbstractAttribution
 					}
 					else {										// object.oclAsSet()->collection-operation
 						MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-						Type setType = metaModelManager.getSetType(type);
-						environmentView.addElementsOfScope(setType, scopeView);
+						if (type != null) {
+							Type setType = metaModelManager.getSetType(type);
+							environmentView.addElementsOfScope(setType, scopeView);
+						}
 					}
 				}
 				else {
 					if (type instanceof CollectionType) {		// collection->iteration-operation(iterator-feature)
-						if (InvocationExpCSAttribution.isIteration(environmentView.getMetaModelManager(), targetElement.getArgument(), type)) {
+						if ((csArgument != null) && InvocationExpCSAttribution.isIteration(environmentView.getMetaModelManager(), csArgument, type)) {
 							environmentView.addElementsOfScope(((CollectionType)type).getElementType(), scopeView);
 						}
 						else {

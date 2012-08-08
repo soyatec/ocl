@@ -114,6 +114,7 @@ public class DelegateEPackageAdapter extends AdapterImpl
 						for (StringTokenizer stringTokenizer = new StringTokenizer(delegateURIs); stringTokenizer.hasMoreTokens();) {
 							@SuppressWarnings("null") @NonNull String delegateURI = stringTokenizer.nextToken();
 							String resolvedURI = registry.resolve(delegateURI);
+							assert resolvedURI != null;
 							initializeDelegatedBehavior(resolvedURI, delegatedBehavior);
 						}
 					}

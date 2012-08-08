@@ -161,13 +161,13 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 	@Override
 	public Continuation<?> visitConstraintCS(@NonNull ConstraintCS csConstraint) {
 		Constraint pivotElement = PivotUtil.getPivot(Constraint.class, csConstraint);
-		pivotElement.setStereotype(csConstraint.getStereotype());
-		if (csConstraint.getSpecification() != null) {
-			return new ConstraintCSCompletion(context, csConstraint);
+		if (pivotElement != null) {
+			pivotElement.setStereotype(csConstraint.getStereotype());
+			if (csConstraint.getSpecification() != null) {
+				return new ConstraintCSCompletion(context, csConstraint);
+			}
 		}
-		else {
-			return null;
-		}
+		return null;
 	}
 
 	@Override
@@ -251,7 +251,9 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 	@Override
 	public Continuation<?> visitOperationCS(@NonNull OperationCS csElement) {
 		Operation pivotOperation = PivotUtil.getPivot(Operation.class, csElement);
-		context.refreshList(Type.class, pivotOperation.getRaisedException(), csElement.getOwnedException());
+		if (pivotOperation != null) {
+			context.refreshList(Type.class, pivotOperation.getRaisedException(), csElement.getOwnedException());
+		}
 		return super.visitOperationCS(csElement);
 	}
 
@@ -282,16 +284,18 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 	@Override
 	public Continuation<?> visitReferenceCS(@NonNull ReferenceCS csReference) {
 		Property pivotElement = PivotUtil.getPivot(Property.class, csReference);
-		Property pivotOpposite = csReference.getOpposite();
-		if ((pivotOpposite != null) && pivotOpposite.eIsProxy()) {
-			pivotOpposite = null;
-		}
-		pivotElement.setOpposite(pivotOpposite);
-		context.refreshList(pivotElement.getKeys(), csReference.getKeys());
-		BasicContinuation<?> continuation = visitTypedElementCS(csReference);
-		assert continuation == null;
-		if (pivotOpposite == null) {
-			context.getMetaModelManager().installPropertyDeclaration(pivotElement);
+		if (pivotElement != null) {
+			Property pivotOpposite = csReference.getOpposite();
+			if ((pivotOpposite != null) && pivotOpposite.eIsProxy()) {
+				pivotOpposite = null;
+			}
+			pivotElement.setOpposite(pivotOpposite);
+			context.refreshList(pivotElement.getKeys(), csReference.getKeys());
+			BasicContinuation<?> continuation = visitTypedElementCS(csReference);
+			assert continuation == null;
+			if (pivotOpposite == null) {
+				context.getMetaModelManager().installPropertyDeclaration(pivotElement);
+			}
 		}
 		return null;
 	}

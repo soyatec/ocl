@@ -35,14 +35,14 @@ public abstract class AbstractVisitor<R, C> implements Visitor<R>
     /**
      * Context for the AST visitation.
      */
-    protected final C context;
+    protected final @NonNull C context;
 	
 	/**
 	 * Initializes me with an initial value for my result.
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractVisitor(@Nullable C context) {
+	protected AbstractVisitor(@NonNull C context) {
 	    this.context = context;
 	}
 

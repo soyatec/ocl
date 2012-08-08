@@ -40,19 +40,20 @@ import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 {
 //	private Map<EPackage, EcoreExecutorPackage> ePackageMap = new HashMap<EPackage, EcoreExecutorPackage>();
-	private Map<String, WeakReference<EcoreExecutorPackage>> ePackageMap = new WeakHashMap<String, WeakReference<EcoreExecutorPackage>>();
+	private @NonNull Map<String, WeakReference<EcoreExecutorPackage>> ePackageMap = new WeakHashMap<String, WeakReference<EcoreExecutorPackage>>();
 	private Map<DomainPackage, WeakReference<DomainReflectivePackage>> domainPackageMap = null;
-	private Map<EClassifier, WeakReference<ExecutorType>> typeMap = new WeakHashMap<EClassifier, WeakReference<ExecutorType>>();
+	private @NonNull Map<EClassifier, WeakReference<ExecutorType>> typeMap = new WeakHashMap<EClassifier, WeakReference<ExecutorType>>();
 //	private Map<Class<?>, DomainEnumeration> enumerationMap = null;
 	
 	public ExecutorStandardLibrary(EcoreExecutorPackage... execPackages) {
 		OCLstdlibTables.PACKAGE.getClass();
 		for (EcoreExecutorPackage execPackage : execPackages) {
+			assert execPackage != null;
 			addPackage(execPackage);
 		}
 	}
 
-	public synchronized void addPackage(EcoreExecutorPackage execPackage) {
+	public synchronized void addPackage(@NonNull EcoreExecutorPackage execPackage) {
 		@SuppressWarnings("unused")
 		WeakReference<EcoreExecutorPackage> oldExecPackage = ePackageMap.put(execPackage.getNsURI(), new WeakReference<EcoreExecutorPackage>(execPackage));
 //		if ((oldExecPackage != null) && (oldExecPackage != execPackage)) {
@@ -118,31 +119,34 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 			}
 		}
 		DomainPackage domainPackage = type.getPackage();
+		Map<DomainPackage, WeakReference<DomainReflectivePackage>> domainPackageMap2;
 		synchronized (this) {
 			String nsURI = domainPackage.getNsURI();
-			EcoreExecutorPackage ecoreExecutorPackage = weakGet(ePackageMap, nsURI);
+			EcoreExecutorPackage ecoreExecutorPackage = nsURI != null ? weakGet(ePackageMap, nsURI) : null;
 			if (ecoreExecutorPackage != null) {
 				ExecutorType executorType = ecoreExecutorPackage.getType(type.getName());
 				if (executorType != null) {
 					return executorType;
 				}
 			}
-			if (domainPackageMap == null) {
-				domainPackageMap = new WeakHashMap<DomainPackage, WeakReference<DomainReflectivePackage>>();
+			domainPackageMap2 = domainPackageMap;
+			if (domainPackageMap2 == null) {
+				domainPackageMap2 = domainPackageMap = new WeakHashMap<DomainPackage, WeakReference<DomainReflectivePackage>>();
 			}
 		}
-		synchronized (domainPackageMap) {
-			DomainReflectivePackage domainExecutorPackage = weakGet(domainPackageMap, domainPackage);
+		synchronized (domainPackageMap2) {
+			DomainReflectivePackage domainExecutorPackage = weakGet(domainPackageMap2, domainPackage);
 			if (domainExecutorPackage == null) {
 				domainExecutorPackage = new DomainReflectivePackage(this, domainPackage);
-				domainPackageMap.put(domainPackage, new WeakReference<DomainReflectivePackage>(domainExecutorPackage));
+				domainPackageMap2.put(domainPackage, new WeakReference<DomainReflectivePackage>(domainExecutorPackage));
 			}
 			return domainExecutorPackage.getInheritance(type);
 		}
 	}
 
-	public synchronized EcoreExecutorPackage getPackage(EPackage ePackage) {
-		return weakGet(ePackageMap, ePackage.getNsURI());
+	public synchronized @Nullable EcoreExecutorPackage getPackage(@NonNull EPackage ePackage) {
+		String nsURI = ePackage.getNsURI();
+		return nsURI != null ? weakGet(ePackageMap, nsURI) : null;
 	}
 
 	public synchronized ExecutorType getOclType(@NonNull String typeName) {
@@ -164,7 +168,9 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 	public synchronized @NonNull ExecutorType getType(@NonNull EClassifier eClassifier) {
 		ExecutorType type = weakGet(typeMap, eClassifier);
 		if (type == null) {
-			EcoreExecutorPackage execPackage = getPackage(eClassifier.getEPackage());
+			EPackage ePackage = eClassifier.getEPackage();
+			assert ePackage != null;
+			EcoreExecutorPackage execPackage = getPackage(ePackage);
 			if (execPackage != null) {
 				type = execPackage.getType(eClassifier.getName());
 				typeMap.put(eClassifier, new WeakReference<ExecutorType>(type));

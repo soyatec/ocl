@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -48,25 +47,24 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
 
-public class CS2Moniker
-		extends Abstract2Moniker {
-
-	private static final Logger logger = Logger.getLogger(CS2Moniker.class);
-
-	public static interface Factory {
-
-		public abstract BaseCSVisitor<?> create(@NonNull CS2Moniker moniker);
+public class CS2Moniker extends Abstract2Moniker
+{
+	public static interface Factory
+	{
+		public abstract @NonNull BaseCSVisitor<?> create(@NonNull CS2Moniker moniker);
 	}
 
-	public static void addFactory(@NonNull EPackage ePackage, @NonNull Factory factory) {
+	public static void addFactory(/*@NonNull*/ EPackage ePackage, @NonNull Factory factory) {
+		assert ePackage != null;
 		csFactoryMap.put(ePackage, factory);
 	}
 
-	public static String toString(@NonNull ElementCS csElement) {
+	public static @NonNull String toString(@NonNull ElementCS csElement) {
 		CS2Moniker moniker = new CS2Moniker(csElement);
 		moniker.appendElementCS(csElement);
 		String string = moniker.toString();
 		assert !"".equals(string);
+		assert string != null;
 		return string;
 	}
 
@@ -138,10 +136,9 @@ public class CS2Moniker
 	public void appendElementCS(@NonNull VisitableCS csVisitable) {
 		int oldSize = length();
 		EPackage ePackage = csVisitable.eClass().getEPackage();
+		assert ePackage != null;
 		BaseCSVisitor<?> monikerVisitor = getVisitor(ePackage);
-		if (monikerVisitor != null) {
-			csVisitable.accept(monikerVisitor);
-		}
+		csVisitable.accept(monikerVisitor);
 		assert length() > oldSize;
 	}
 
@@ -308,20 +305,15 @@ public class CS2Moniker
 		}
 	}
 
-	public BaseCSVisitor<?> getVisitor(EPackage ePackage) {
+	public @NonNull BaseCSVisitor<?> getVisitor(/*@NonNull*/ EPackage ePackage) {
+		assert ePackage != null;
 		BaseCSVisitor<?> monikerVisitor = csVisitorMap.get(ePackage);
-		if ((monikerVisitor == null) && !csVisitorMap.containsKey(ePackage)) {
+		if (monikerVisitor == null) { //&& !csVisitorMap.containsKey(ePackage)) {
 			Factory factory = csFactoryMap.get(ePackage);
-			if (factory != null) {
-				monikerVisitor = factory.create(this);
-				if (monikerVisitor == null) {
-					logger.error("No Moniker Visitor created for "
-						+ ePackage.getName());
-				}
-			} else {
-				logger.error("No Moniker Visitor Factory registered for "
-					+ ePackage.getName());
+			if (factory == null) {
+				throw new IllegalStateException("No Moniker Visitor created for " + ePackage.getName());
 			}
+			monikerVisitor = factory.create(this);
 			csVisitorMap.put(ePackage, monikerVisitor);
 		}
 		return monikerVisitor;

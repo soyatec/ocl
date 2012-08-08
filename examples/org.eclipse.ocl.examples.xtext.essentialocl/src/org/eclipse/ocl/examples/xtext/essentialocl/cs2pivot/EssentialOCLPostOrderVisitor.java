@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.AssociativityKind;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
@@ -65,7 +66,7 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 
 	protected static class ContextCSCompletion extends SingleContinuation<ContextCS>
 	{
-		public ContextCSCompletion(CS2PivotConversion context, ContextCS csElement) {
+		public ContextCSCompletion(@NonNull CS2PivotConversion context, @NonNull ContextCS csElement) {
 			super(context, null, null, csElement);
 		}
 
@@ -76,9 +77,9 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 		}
 	}
 
-	protected final MetaModelManager metaModelManager;
+	protected final @NonNull MetaModelManager metaModelManager;
 	
-	public EssentialOCLPostOrderVisitor(CS2PivotConversion context) {
+	public EssentialOCLPostOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 		this.metaModelManager = context.getMetaModelManager();
 	}
@@ -140,7 +141,9 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 		Map<Precedence, List<Integer>> precedenceToOperatorIndex = new HashMap<Precedence, List<Integer>>();
 		for (int operatorIndex = 0; operatorIndex < operatorCount; operatorIndex++) {
 			BinaryOperatorCS csOperator = csOperators.get(operatorIndex);
-			Precedence precedence = metaModelManager.getInfixPrecedence(csOperator.getName());
+			String operatorName = csOperator.getName();
+			assert operatorName != null;
+			Precedence precedence = metaModelManager.getInfixPrecedence(operatorName);
 			List<Integer> indexesList = precedenceToOperatorIndex.get(precedence);
 			if (indexesList == null) {
 				indexesList = new ArrayList<Integer>();
@@ -190,8 +193,12 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 			if (!(csParent instanceof BinaryOperatorCS)) {
 				break;
 			}
-			Precedence parentPrecedence = metaModelManager.getInfixPrecedence(csParent.getName());
-			Precedence unaryPrecedence = metaModelManager.getPrefixPrecedence(csOperator.getName());
+			String parentOperatorName = csParent.getName();
+			assert parentOperatorName != null;
+			Precedence parentPrecedence = metaModelManager.getInfixPrecedence(parentOperatorName);
+			String operatorName = csOperator.getName();
+			assert operatorName != null;
+			Precedence unaryPrecedence = metaModelManager.getPrefixPrecedence(operatorName);
 			int parentOrder = parentPrecedence != null ? parentPrecedence.getOrder().intValue() : -1;
 			int unaryOrder = unaryPrecedence != null ? unaryPrecedence.getOrder().intValue() : -1;
 			if (unaryOrder < parentOrder) {
@@ -257,14 +264,21 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 		if (csName instanceof NameExpCS) {
 			PathNameCS csPathName = ((NameExpCS)csName).getPathName();
 			Variable parameter = context.refreshModelElement(Variable.class, PivotPackage.Literals.VARIABLE, csName);
-			ICompositeNode node = NodeModelUtils.getNode(csName);
-			ILeafNode leafNode = ElementUtil.getLeafNode(node);
-			String varName = leafNode.getText();
-			context.refreshName(parameter, varName);
-			List<PathElementCS> path = csPathName.getPath();
-			PathElementCS csPathElement = path.get(path.size()-1);
-			csPathElement.setElement(parameter);	// Resolve the reference that is actually a definition
-			csPathElement.setElementType(null);		// Indicate a definition to the syntax colouring
+			if (parameter != null) {
+				ICompositeNode node = NodeModelUtils.getNode(csName);
+				if (node != null) {
+					ILeafNode leafNode = ElementUtil.getLeafNode(node);
+					if (leafNode != null) {
+						String varName = leafNode.getText();
+						assert varName != null;
+						context.refreshName(parameter, varName);
+						List<PathElementCS> path = csPathName.getPath();
+						PathElementCS csPathElement = path.get(path.size()-1);
+						csPathElement.setElement(parameter);	// Resolve the reference that is actually a definition
+						csPathElement.setElementType(null);		// Indicate a definition to the syntax colouring
+					}
+				}
+			}
 		}
 	}
 
@@ -289,7 +303,7 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 	}
 
 	@Override
-	public Continuation<?> visitCollectionTypeCS(CollectionTypeCS csCollectionType) {
+	public Continuation<?> visitCollectionTypeCS(@NonNull CollectionTypeCS csCollectionType) {
 		// FIXME untemplated collections need type deduction here
 /*		MetaModelManager metaModelManager = context.getMetaModelManager();
 		TypedRefCS csElementType = csCollectionType.getOwnedType();
@@ -306,7 +320,7 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 	}
 
 	@Override
-	public Continuation<?> visitContextCS(ContextCS csContext) {
+	public Continuation<?> visitContextCS(@NonNull ContextCS csContext) {
 		ExpCS ownedExpression = csContext.getOwnedExpression();
 		if (ownedExpression != null) {
 			return new ContextCSCompletion(context, csContext);
@@ -317,12 +331,12 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 	}
 
 	@Override
-	public Continuation<?> visitExpCS(ExpCS csExp) {
+	public Continuation<?> visitExpCS(@NonNull ExpCS csExp) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitInfixExpCS(InfixExpCS csInfixExp) {
+	public Continuation<?> visitInfixExpCS(@NonNull InfixExpCS csInfixExp) {
 		//
 		//	Establish the Infix tree and the per leaf expression parent operator.
 		//
@@ -335,7 +349,7 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 	}
 
 	@Override
-	public Continuation<?> visitInvocationExpCS(InvocationExpCS csNavigatingExp) {
+	public Continuation<?> visitInvocationExpCS(@NonNull InvocationExpCS csNavigatingExp) {
 		List<NavigatingArgCS> csArguments = csNavigatingExp.getArgument();
 		if (csArguments.size() > 0) {
 			// Last argument is always an expression
@@ -376,12 +390,12 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 	}
 
 	@Override
-	public Continuation<?> visitOperatorCS(OperatorCS csOperator) {
+	public Continuation<?> visitOperatorCS(@NonNull OperatorCS csOperator) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitPrefixExpCS(PrefixExpCS csPrefixExp) {
+	public Continuation<?> visitPrefixExpCS(@NonNull PrefixExpCS csPrefixExp) {
 		if (!(csPrefixExp.eContainer() instanceof InfixExpCS)) {
 			initializePrefixOperators(csPrefixExp, null);
 		}
@@ -389,21 +403,23 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 	}
 
 	@Override
-	public Continuation<?> visitSpecificationCS(SpecificationCS csSpecification) {
+	public Continuation<?> visitSpecificationCS(@NonNull SpecificationCS csSpecification) {
 		OpaqueExpression pivotSpecification = PivotUtil.getPivot(OpaqueExpression.class, csSpecification);
-		String exprString = csSpecification.getExprString();
-		pivotSpecification.getBody().add(exprString);
-		pivotSpecification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
+		if (pivotSpecification != null) {
+			String exprString = csSpecification.getExprString();
+			pivotSpecification.getBody().add(exprString);
+			pivotSpecification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
+		}
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitTypeNameExpCS(TypeNameExpCS object) {
+	public Continuation<?> visitTypeNameExpCS(@NonNull TypeNameExpCS object) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitVariableCS(VariableCS csVariable) {
+	public Continuation<?> visitVariableCS(@NonNull VariableCS csVariable) {
 		return null;
 	}	
 }

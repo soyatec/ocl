@@ -70,7 +70,9 @@ public class EssentialOCLValueConverterService extends AbstractDeclarativeValueC
 		@Override
 		protected String internalToValue(String string, INode node) {
 			try {
-				return PivotUtil.convertFromOCLString(string.substring(1, string.length() - 1));
+				String result = string.substring(1, string.length() - 1);
+				assert result != null;
+				return PivotUtil.convertFromOCLString(result);
 			} catch(IllegalArgumentException e) {
 				throw new ValueConverterException(e.getMessage(), node, e);
 			}
@@ -117,7 +119,9 @@ public class EssentialOCLValueConverterService extends AbstractDeclarativeValueC
 		@Override
 		protected String internalToValue(String string, INode node) {
 			try {
-				return PivotUtil.convertFromOCLString(string.substring(2, string.length() - 2));
+				String result = string.substring(2, string.length() - 2);
+				assert result != null;
+				return PivotUtil.convertFromOCLString(result);
 			} catch(IllegalArgumentException e) {
 				throw new ValueConverterException(e.getMessage(), node, e);
 			}
@@ -202,7 +206,9 @@ public class EssentialOCLValueConverterService extends AbstractDeclarativeValueC
 		@Override
 		protected String internalToValue(String string, INode node) {
 			try {
-				return PivotUtil.convertFromOCLString(string.substring(1, string.length() - 1));
+				String result = string.substring(1, string.length() - 1);
+				assert result != null;
+				return PivotUtil.convertFromOCLString(result);
 			} catch(IllegalArgumentException e) {
 				throw new ValueConverterException(e.getMessage(), node, e);
 			}
@@ -219,7 +225,9 @@ public class EssentialOCLValueConverterService extends AbstractDeclarativeValueC
 		@Override
 		protected String internalToValue(String string, INode node) {
 			try {
-				return PivotUtil.convertFromOCLString(string.substring(1, string.length() - 1));
+				String result = string.substring(1, string.length() - 1);
+				assert result != null;
+				return PivotUtil.convertFromOCLString(result);
 			} catch(IllegalArgumentException e) {
 				throw new ValueConverterException(e.getMessage(), node, e);
 			}

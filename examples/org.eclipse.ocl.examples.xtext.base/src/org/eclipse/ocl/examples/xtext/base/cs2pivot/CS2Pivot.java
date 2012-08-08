@@ -84,7 +84,8 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	{
 		protected final @NonNull EReference eReference;
 		
-		public AbstractUnresolvedProxyMessageProvider(@NonNull EReference eReference) {
+		public AbstractUnresolvedProxyMessageProvider(/*@NonNull*/ EReference eReference) {
+			assert eReference != null;
 			this.eReference = eReference;
 		}
 		public @NonNull EReference getEReference() {
@@ -288,6 +289,7 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	}
 	
 	public static void setElementType(@NonNull PathNameCS pathNameCS, /*@NonNull*/ EClass elementType, @NonNull ElementCS csContext, @Nullable ScopeFilter scopeFilter) {
+		assert elementType != null;
 		pathNameCS.setContext(csContext);
 		pathNameCS.setScopeFilter(scopeFilter);
 		List<PathElementCS> path = pathNameCS.getPath();
@@ -340,7 +342,8 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 		this.cs2PivotMapping = CSI2PivotMapping.getAdapter(metaModelManager);
 	}
 
-	public @NonNull String bind(@NonNull EObject csContext, @NonNull String messageTemplate, Object... bindings) {
+	public @NonNull String bind(@NonNull EObject csContext, /*@NonNull*/ String messageTemplate, Object... bindings) {
+		assert messageTemplate != null;
 		return messageBinder.bind(csContext, messageTemplate, bindings);
 	}
 

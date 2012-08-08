@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.xtext.essentialocl.attributes;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -33,14 +34,14 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 public class BinaryOperationFilter extends AbstractOperationFilter
 {
-	protected final Type argumentType;
+	protected final @NonNull Type argumentType;
 	
-	public BinaryOperationFilter(MetaModelManager metaModelManager, Type sourceType, Type argumentType) {
+	public BinaryOperationFilter(@NonNull MetaModelManager metaModelManager, @NonNull Type sourceType, @NonNull Type argumentType) {
 		super(metaModelManager, sourceType);
 		this.argumentType = PivotUtil.getBehavioralType(argumentType);
 	}
 
-	public boolean matches(EnvironmentView environmentView, DomainElement eObject) {
+	public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {
 		if (eObject instanceof Iteration) {		
 			return false;
 		}
@@ -55,7 +56,7 @@ public class BinaryOperationFilter extends AbstractOperationFilter
 			if (candidateType instanceof SelfType) {
 				candidateType = candidateOperation.getOwningType();
 			}
-			if (!metaModelManager.conformsTo(argumentType, candidateType, null)) {
+			if ((candidateType == null) || !metaModelManager.conformsTo(argumentType, candidateType, null)) {
 				return false;
 			}
 			Map<TemplateParameter, ParameterableElement> bindings = getOperationBindings(candidateOperation);

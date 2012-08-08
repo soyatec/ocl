@@ -143,7 +143,12 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 			TemplateParameter templateParameter = type.getOwningTemplateParameter();
 			if (templateParameter != null) {
 				Map<TemplateParameter, ParameterableElement> templateParameterSubstitutions = PivotUtil.getAllTemplateParameterSubstitutions(null, (TemplateableElement) getSource().getType());
-				type = (Type) DomainUtil.nonNullPivot(templateParameterSubstitutions.get(templateParameter));
+				if (templateParameterSubstitutions != null) {
+					ParameterableElement resolvedTemplateParameter = templateParameterSubstitutions.get(templateParameter);
+					if (resolvedTemplateParameter instanceof Type) {
+						type = (Type) resolvedTemplateParameter;
+					}
+				}
 			}
 			type = PivotUtil.getBehavioralType(type);			// FIXME make this a general facility
 			DomainInheritance comparableType = metaModelManager.getOclComparableType().getInheritance(metaModelManager);

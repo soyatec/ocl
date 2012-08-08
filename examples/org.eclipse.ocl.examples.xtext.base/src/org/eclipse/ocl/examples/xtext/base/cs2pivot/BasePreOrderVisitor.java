@@ -88,11 +88,13 @@ public class BasePreOrderVisitor extends AbstractExtendingBaseCSVisitor<Continua
 		@Override
 		public BasicContinuation<?> execute() {
 			org.eclipse.ocl.examples.pivot.Class pivotElement = PivotUtil.getPivot(org.eclipse.ocl.examples.pivot.Class.class, csElement);
-			List<Type> superClasses = pivotElement.getSuperClass();
-			context.refreshList(Type.class, superClasses, csElement.getOwnedSuperType());
-			if (superClasses.isEmpty()) {
-				org.eclipse.ocl.examples.pivot.Class oclElementType = context.getMetaModelManager().getOclElementType();
-				pivotElement.getSuperClass().add(oclElementType);
+			if (pivotElement != null) {
+				List<Type> superClasses = pivotElement.getSuperClass();
+				context.refreshList(Type.class, superClasses, csElement.getOwnedSuperType());
+				if (superClasses.isEmpty()) {
+					org.eclipse.ocl.examples.pivot.Class oclElementType = context.getMetaModelManager().getOclElementType();
+					pivotElement.getSuperClass().add(oclElementType);
+				}
 			}
 			return null;
 		}
@@ -315,6 +317,9 @@ public class BasePreOrderVisitor extends AbstractExtendingBaseCSVisitor<Continua
 	@Override
 	public Continuation<?> visitClassCS(@NonNull ClassCS csClass) {
 		org.eclipse.ocl.examples.pivot.Class pivotElement = PivotUtil.getPivot(org.eclipse.ocl.examples.pivot.Class.class, csClass);
+		if (pivotElement == null) {
+			return null;
+		}
 		Continuations continuations = new Continuations();
 		if (csClass.getOwnedTemplateSignature() != null) {
 			continuations.add(new TemplateSignatureContinuation(context, pivotElement, csClass));
@@ -336,10 +341,12 @@ public class BasePreOrderVisitor extends AbstractExtendingBaseCSVisitor<Continua
 	@Override
 	public Continuation<?> visitDataTypeCS(@NonNull DataTypeCS csDataType) {
 		DataType pivotElement = PivotUtil.getPivot(DataType.class, csDataType);
-		List<Type> pivotSuperClasses = pivotElement.getSuperClass();
-		pivotSuperClasses.clear();
-		org.eclipse.ocl.examples.pivot.Class oclElementType = context.getMetaModelManager().getOclElementType();
-		pivotSuperClasses.add(oclElementType);
+		if (pivotElement != null) {
+			List<Type> pivotSuperClasses = pivotElement.getSuperClass();
+			pivotSuperClasses.clear();
+			org.eclipse.ocl.examples.pivot.Class oclElementType = context.getMetaModelManager().getOclElementType();
+			pivotSuperClasses.add(oclElementType);
+		}
 		return null;
 	}
 
@@ -351,10 +358,12 @@ public class BasePreOrderVisitor extends AbstractExtendingBaseCSVisitor<Continua
 	@Override
 	public Continuation<?> visitEnumerationCS(@NonNull EnumerationCS csEnumeration) {
 		org.eclipse.ocl.examples.pivot.Enumeration pivotElement = PivotUtil.getPivot(org.eclipse.ocl.examples.pivot.Enumeration.class, csEnumeration);
-		List<Type> pivotSuperClasses = pivotElement.getSuperClass();
-		pivotSuperClasses.clear();
-		org.eclipse.ocl.examples.pivot.Class oclElementType = context.getMetaModelManager().getOclElementType();
-		pivotSuperClasses.add(oclElementType);
+		if (pivotElement != null) {
+			List<Type> pivotSuperClasses = pivotElement.getSuperClass();
+			pivotSuperClasses.clear();
+			org.eclipse.ocl.examples.pivot.Class oclElementType = context.getMetaModelManager().getOclElementType();
+			pivotSuperClasses.add(oclElementType);
+		}
 		return null;
 	}
 

@@ -147,7 +147,7 @@ public class AbstractContents
 		return pivotLibrary;
 	}
 	
-	protected @NonNull Operation createOperation(@NonNull String name, @NonNull Type type, /*@NonNull*/ String implementationClass, /*@NonNull*/ LibraryFeature implementation) {
+	protected @NonNull Operation createOperation(@NonNull String name, @NonNull Type type, @Nullable String implementationClass, @Nullable LibraryFeature implementation) {
 		Operation pivotOperation = PivotFactory.eINSTANCE.createOperation();
 		pivotOperation.setName(name);
 		pivotOperation.setType(type);
@@ -178,6 +178,7 @@ public class AbstractContents
 	}
 	
 	protected @NonNull Precedence createPrecedence(@NonNull String name, /*@NonNull*/ AssociativityKind kind) {
+		assert kind != null;
 		Precedence pivotPrecedence = PivotFactory.eINSTANCE.createPrecedence();
 		pivotPrecedence.setName(name);
 		pivotPrecedence.setAssociativity(kind);

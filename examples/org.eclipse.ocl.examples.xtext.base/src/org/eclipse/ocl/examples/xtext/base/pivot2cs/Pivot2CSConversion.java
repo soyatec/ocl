@@ -427,6 +427,7 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 	}
 
 	public @NonNull <T extends ElementCS, V extends EObject> List<T> visitDeclarations(@NonNull Class<T> csClass, /*@NonNull*/ List<V> eObjects, @Nullable Pivot2CS.Predicate<V> predicate) {
+		assert eObjects != null;
 		List<T> csElements = new ArrayList<T>();
 		for (V eObject : eObjects) {
 			if ((eObject != null) && ((predicate == null) || predicate.filter(eObject))) {
@@ -460,6 +461,7 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 	}
 
 	public @NonNull <T extends ElementCS, V extends EObject> List<T> visitReferences(@NonNull Class<T> csClass, /*@NonNull*/ List<? extends V> eObjects, @Nullable Pivot2CS.Predicate<V> predicate) {
+		assert eObjects != null;
 		List<T> csElements = new ArrayList<T>();
 		for (V eObject : eObjects) {
 			if ((eObject != null) && ((predicate == null) || predicate.filter(eObject))) {

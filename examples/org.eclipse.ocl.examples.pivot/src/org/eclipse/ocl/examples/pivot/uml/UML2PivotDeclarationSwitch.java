@@ -622,6 +622,8 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	}
 
 	public <T extends Element, V extends EObject> void doSwitchAll(/*@NonNull*/ Collection<T> pivotObjects, /*@NonNull*/ List<V> eObjects, @Nullable UML2Pivot.Predicate<V> predicate) {
+		assert pivotObjects != null;
+		assert eObjects != null;
 		for (V eObject : eObjects) {
 			if ((eObject != null) && ((predicate == null) || predicate.filter(eObject))) {
 				@SuppressWarnings("unchecked")

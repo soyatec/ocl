@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.essentialocl.pivot2cs;
 
 import org.apache.log4j.Logger;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.BaseDeclarationVisitor;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CSConversion;
 
@@ -24,7 +25,7 @@ public class EssentialOCLDeclarationVisitor extends BaseDeclarationVisitor
 {
 	static final Logger logger = Logger.getLogger(EssentialOCLDeclarationVisitor.class);
 
-	public EssentialOCLDeclarationVisitor(Pivot2CSConversion context) {
+	public EssentialOCLDeclarationVisitor(@NonNull Pivot2CSConversion context) {
 		super(context);
 	}	
 }

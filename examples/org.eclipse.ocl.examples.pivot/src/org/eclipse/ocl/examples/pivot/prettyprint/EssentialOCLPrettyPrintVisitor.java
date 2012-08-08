@@ -76,18 +76,18 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 			PrettyPrinter.addFactory(PivotPackage.eINSTANCE, this);
 		}
 
-		public AbstractVisitor<Object, PrettyPrinter> createPrettyPrintVisitor(PrettyPrinter printer) {
+		public @NonNull AbstractVisitor<Object, PrettyPrinter> createPrettyPrintVisitor(@NonNull PrettyPrinter printer) {
 			return new EssentialOCLPrettyPrintVisitor(printer);
 		}
 	}
 
-	public static PrettyPrinter.Factory FACTORY = new Factory();
+	public static @NonNull PrettyPrinter.Factory FACTORY = new Factory();
 
-	public EssentialOCLPrettyPrintVisitor(PrettyPrinter context) {
+	public EssentialOCLPrettyPrintVisitor(@NonNull PrettyPrinter context) {
 		super(context);
 	}
 
-	protected void appendSourceNavigation(CallExp object) {
+	protected void appendSourceNavigation(@NonNull CallExp object) {
 		OCLExpression source = object.getSource();
 		if (source != null) {
 			if (!(source instanceof VariableExp) || !((VariableExp)source).isImplicit()) {
@@ -190,7 +190,10 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 
     @Override
 	public Value visitConstructorExp(@NonNull ConstructorExp object) {
-		context.appendQualifiedType(object.getType());
+		Type type = object.getType();
+		if (type != null) {
+			context.appendQualifiedType(type);
+		}
 		context.push("{", "");
 		String prefix = ""; //$NON-NLS-1$
 		for (ConstructorPart part : object.getPart()) {
@@ -557,7 +560,10 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 
 	@Override
 	public Object visitTypeExp(@NonNull TypeExp object) {
-		context.appendQualifiedType(object.getReferredType());
+		Type type = object.getReferredType();
+		if (type != null) {
+			context.appendQualifiedType(type);
+		}
 		return null;
 	}
 

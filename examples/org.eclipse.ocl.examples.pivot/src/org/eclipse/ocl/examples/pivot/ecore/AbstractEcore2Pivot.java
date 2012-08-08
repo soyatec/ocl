@@ -43,6 +43,7 @@ public abstract class AbstractEcore2Pivot extends AbstractConversion implements 
 	public abstract void queueReference(@NonNull EObject eObject);
 
 	public @NonNull <T extends NamedElement> T refreshElement(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, @NonNull EModelElement eModelElement) {
+		assert pivotEClass != null;
 		EFactory eFactoryInstance = pivotEClass.getEPackage().getEFactoryInstance();
 		EObject pivotElement = eFactoryInstance.create(pivotEClass);
 		if (!pivotClass.isAssignableFrom(pivotElement.getClass())) {

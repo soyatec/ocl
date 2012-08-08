@@ -24,6 +24,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.utilities.IllegalLibraryException;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.ExceptionAdapter;
@@ -167,7 +168,10 @@ public class EssentialOCLLinkingService extends DefaultLinkingService
 //		}
 	}
 
-	public String getText(INode node) {
+	public @Nullable String getText(@Nullable INode node) {
+		if (node == null) {
+			return null;
+		}
 		ILeafNode leafNode = ElementUtil.getLeafNode(node);
 		if (leafNode == null) {
 			return null;

@@ -77,7 +77,6 @@ public class BaseScoping
 	
 	private static final class SimpleNamedElementRefCSTypeUnresolvedProxyMessageProvider extends AbstractUnresolvedProxyMessageProvider
 	{		
-		@SuppressWarnings("null")
 		private SimpleNamedElementRefCSTypeUnresolvedProxyMessageProvider() {
 			super(BaseCSTPackage.Literals.PATH_ELEMENT_CS__ELEMENT);
 		}
@@ -103,7 +102,6 @@ public class BaseScoping
 	
 	private static final class TypedTypeRefCSTypeUnresolvedProxyMessageProvider extends AbstractUnresolvedProxyMessageProvider
 	{		
-		@SuppressWarnings("null")
 		private TypedTypeRefCSTypeUnresolvedProxyMessageProvider() {
 			super(BaseCSTPackage.Literals.TYPED_TYPE_REF_CS__TYPE);
 		}

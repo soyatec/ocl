@@ -44,7 +44,7 @@ public abstract class AbstractExtendingOCLinEcoreCSVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractExtendingOCLinEcoreCSVisitor(@Nullable C context) {
+	protected AbstractExtendingOCLinEcoreCSVisitor(@NonNull C context) {
 	    super(context);
 	}	
 

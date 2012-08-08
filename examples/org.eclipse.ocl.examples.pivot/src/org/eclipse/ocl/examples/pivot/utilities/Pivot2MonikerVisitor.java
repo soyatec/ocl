@@ -22,6 +22,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CallExp;
@@ -95,9 +96,9 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 	*/	}
 	}
 	
-	protected final Map<TemplateParameter, ParameterableElement> templateBindings;
+	protected final @Nullable Map<TemplateParameter, ParameterableElement> templateBindings;
 	
-	public Pivot2MonikerVisitor(Abstract2Moniker context) {
+	public Pivot2MonikerVisitor(@NonNull Abstract2Moniker context) {
 		super(context);
 		templateBindings = null;
 		if (!initialized) {
@@ -105,12 +106,12 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 		}
 	}
 
-	public Pivot2MonikerVisitor(Abstract2Moniker context, Map<TemplateParameter, ParameterableElement> templateBindings) {
+	public Pivot2MonikerVisitor(@NonNull Abstract2Moniker context, @Nullable Map<TemplateParameter, ParameterableElement> templateBindings) {
 		super(context);
 		this.templateBindings = templateBindings;
 	}
 
-	public void appendExpPrefix(NamedElement object) {
+	public void appendExpPrefix(@NonNull NamedElement object) {
 		EObject parent = object.eContainer();
 		if (parent instanceof CallExp) {
 			CallExp callExpParent = (CallExp)parent;

@@ -74,6 +74,8 @@ public abstract class AbstractConversion
 	}
 
 	public <T extends EObject> void refreshList(/*@NonNull*/ List<? super T> oldElements, /*@NonNull*/ List<? extends T> newElements) {
+		assert oldElements != null;
+		assert newElements != null;
 		PivotUtil.refreshList(oldElements, newElements);
 	}
 

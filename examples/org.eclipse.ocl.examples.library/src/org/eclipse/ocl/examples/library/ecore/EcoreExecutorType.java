@@ -46,7 +46,7 @@ public class EcoreExecutorType extends ExecutorType
 	 * Construct an executable type descriptor for a known EClassifier.
 	 */
 	public EcoreExecutorType(/*@NonNull*/ EClassifier eClassifier, @NonNull EcoreExecutorPackage evaluationPackage, int flags, ExecutorTypeParameter... typeParameters) {
-		super(DomainUtil.nonNullModel(DomainUtil.nonNullState(eClassifier).getName()), evaluationPackage, flags, typeParameters);
+		super(DomainUtil.nonNullModel(eClassifier.getName()), evaluationPackage, flags, typeParameters);
 		this.eClassifier = eClassifier;		
 	}
 
@@ -88,6 +88,7 @@ public class EcoreExecutorType extends ExecutorType
 	 * OCLstdlibTables.
 	 */
 	public @NonNull EcoreExecutorType initFragments(@NonNull ExecutorFragment[] fragments, int[] depthCounts, /*@NonNull*/ EClassifier eClassifier) {
+		assert eClassifier != null;
 		assert this.eClassifier == null;
 		assert name.equals(eClassifier.getName());
 		this.eClassifier = DomainUtil.nonNullState(eClassifier);		

@@ -71,7 +71,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
     private final EvaluationVisitor delegate;
     
     protected EvaluationVisitorDecorator(@NonNull EvaluationVisitor decorated) {
-        super(null);
+        super(Object.class);						// Useless dummy object as context
         assert decorated != null : "cannot decorate a null visitor"; //$NON-NLS-1$
         
         this.delegate = decorated;

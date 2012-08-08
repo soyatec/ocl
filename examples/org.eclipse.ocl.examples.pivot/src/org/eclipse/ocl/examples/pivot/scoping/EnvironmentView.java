@@ -103,8 +103,8 @@ public class EnvironmentView
 	}
 
 	public boolean accepts(/*@NonNull*/ EClass eClass) {
-		@SuppressWarnings("null") @NonNull EClass eClass2 = eClass;
-		return PivotUtil.conformsTo(requiredType, eClass2);
+		assert eClass != null;
+		return PivotUtil.conformsTo(requiredType, eClass);
 	}
 
 	public void addAllEnumerationLiterals(org.eclipse.ocl.examples.pivot.Enumeration pivot) {

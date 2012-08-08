@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
@@ -88,12 +89,12 @@ public class EssentialOCLCS2MonikerVisitor
 //			roleNames.put(EssentialOCLCSTPackage.Literals.NAVIGATING_EXP_CS__ARGUMENT, "argument");
 		}
 
-		public BaseCSVisitor<?> create(CS2Moniker context) {
+		public @NonNull BaseCSVisitor<?> create(@NonNull CS2Moniker context) {
 			return new EssentialOCLCS2MonikerVisitor(context);
 		}
 	}
 
-	public static CS2Moniker.Factory FACTORY = new Factory();
+	public static @NonNull CS2Moniker.Factory FACTORY = new Factory();
 
 	@SuppressWarnings("unchecked")
 	public EssentialOCLCS2MonikerVisitor(CS2Moniker context) {
@@ -115,7 +116,10 @@ public class EssentialOCLCS2MonikerVisitor
 		}
 		assert pivotingFeature.getEContainingClass().isInstance(pivotingParent);
 		assert pivotingFeature.getEReferenceType().isInstance(pivotingChild);
-		context.append(CS2Moniker.toString(EssentialOCLUtils.getPivotedCS(pivotingParent)));
+		ModelElementCS pivotedCS = EssentialOCLUtils.getPivotedCS(pivotingParent);
+		if (pivotedCS != null) {
+			context.append(CS2Moniker.toString(pivotedCS));
+		}
 		context.append(MONIKER_SCOPE_SEPARATOR);
 		if (pivotingFeature == EssentialOCLCSTPackage.Literals.LET_EXP_CS__IN) {
 			int iMax = ((LetExpCS) pivotingParent).getVariable().size();
@@ -210,12 +214,14 @@ public class EssentialOCLCS2MonikerVisitor
 		}
 		else {
 			ICompositeNode node = NodeModelUtils.getNode(pathName);
-			String text = node.getText().trim();
-			int length = text.length();
-			if (text.startsWith("_'") && text.endsWith("'") && (length >= 3)) {
-				text = text.substring(2, length-1);
+			if (node != null) {
+				String text = node.getText().trim();
+				int length = text.length();
+				if (text.startsWith("_'") && text.endsWith("'") && (length >= 3)) {
+					text = text.substring(2, length-1);
+				}
+				context.append(text);
 			}
-			context.append(text);
 		}
 	}
 
@@ -225,30 +231,30 @@ public class EssentialOCLCS2MonikerVisitor
 	}
 
 	@Override
-	public Boolean visitBooleanLiteralExpCS(BooleanLiteralExpCS object) {
+	public Boolean visitBooleanLiteralExpCS(@NonNull BooleanLiteralExpCS object) {
 		appendExpPrefix(object);
 		context.append(object.getName());
 		return true;
 	}
 
 	@Override
-	public Boolean visitCollectionLiteralExpCS(CollectionLiteralExpCS object) {
+	public Boolean visitCollectionLiteralExpCS(@NonNull CollectionLiteralExpCS object) {
 		appendExpPrefix(object);
 		context.appendNameCS(object.getOwnedType());
 		return true;
 	}
 
 	@Override
-	public Boolean visitCollectionLiteralPartCS(CollectionLiteralPartCS object) {
+	public Boolean visitCollectionLiteralPartCS(@NonNull CollectionLiteralPartCS object) {
 		context.appendParentCS(object, MONIKER_PART_SEPARATOR);
 		context.appendIndex(object);
 		return true;
 	}
 
 	@Override
-	public Boolean visitCollectionTypeCS(CollectionTypeCS object) {
+	public Boolean visitCollectionTypeCS(@NonNull CollectionTypeCS object) {
 		Type specializedPivotType = PivotUtil.getPivot(Type.class, object);
-		Type unspecializedPivotType = PivotUtil.getUnspecializedTemplateableElement(specializedPivotType);
+		Type unspecializedPivotType = specializedPivotType != null ? PivotUtil.getUnspecializedTemplateableElement(specializedPivotType) : null;
 		context.appendParent(unspecializedPivotType, MONIKER_SCOPE_SEPARATOR);
 		context.appendNameCS(object);
 		TypeRefCS type = object.getOwnedType();
@@ -261,7 +267,7 @@ public class EssentialOCLCS2MonikerVisitor
 	}
 
 	@Override
-	public Boolean visitConstructorExpCS(ConstructorExpCS object) {
+	public Boolean visitConstructorExpCS(@NonNull ConstructorExpCS object) {
 		appendExpPrefix(object);
 		appendPathNameCS(object.getPathName());
 //		List<TupleLiteralPartCS> parts = new ArrayList<TupleLiteralPartCS>(object.getOwnedParts());
@@ -276,20 +282,20 @@ public class EssentialOCLCS2MonikerVisitor
 	}
 
 	@Override
-	public Boolean visitContextCS(ContextCS object) {
+	public Boolean visitContextCS(@NonNull ContextCS object) {
 		context.append(MONIKER_ROOT_EXP);
 		return true;
 	}
 
 	@Override
-	public Boolean visitIfExpCS(IfExpCS object) {
+	public Boolean visitIfExpCS(@NonNull IfExpCS object) {
 		appendExpPrefix(object);
 		context.append(MONIKER_IF_EXP);
 		return true;
 	}
 
 	@Override
-	public Boolean visitInfixExpCS(InfixExpCS object) {
+	public Boolean visitInfixExpCS(@NonNull InfixExpCS object) {
 		if (object.getOwnedOperator().get(0).getSource() == null) {
 			context.append("%%tree-less%%");
 			return true;
@@ -300,28 +306,28 @@ public class EssentialOCLCS2MonikerVisitor
 	}
 
 	@Override
-	public Boolean visitInvalidLiteralExpCS(InvalidLiteralExpCS object) {
+	public Boolean visitInvalidLiteralExpCS(@NonNull InvalidLiteralExpCS object) {
 		appendExpPrefix(object);
 		context.append(MONIKER_INVALID_LITERAL_EXP);
 		return true;
 	}
 
 	@Override
-	public Boolean visitInvocationExpCS(InvocationExpCS object) {
+	public Boolean visitInvocationExpCS(@NonNull InvocationExpCS object) {
 		appendExpPrefix(object);
 		context.append("navexp");
 		return true;
 	}
 
 	@Override
-	public Boolean visitLetExpCS(LetExpCS object) {
+	public Boolean visitLetExpCS(@NonNull LetExpCS object) {
 		appendExpPrefix(object);
 		context.append(MONIKER_LET_EXP);
 		return true;
 	}
 
 	@Override
-	public Boolean visitLetVariableCS(LetVariableCS object) {
+	public Boolean visitLetVariableCS(@NonNull LetVariableCS object) {
 		context.appendParentCS(object, MONIKER_SCOPE_SEPARATOR);
 		LetExpCS csLetExp = object.getLetExpression();
 		for (LetVariableCS csVariable : csLetExp.getVariable()) {
@@ -341,77 +347,77 @@ public class EssentialOCLCS2MonikerVisitor
 	}
 
 	@Override
-	public Boolean visitNameExpCS(NameExpCS object) {
+	public Boolean visitNameExpCS(@NonNull NameExpCS object) {
 		appendExpPrefix(object);
 		appendPathNameCS(object.getPathName());
 		return true;
 	}
 
 	@Override
-	public Boolean visitNavigatingArgCS(NavigatingArgCS object) {
+	public Boolean visitNavigatingArgCS(@NonNull NavigatingArgCS object) {
 		appendExpPrefix(object);
 		context.append("navarg");		
 		return true;
 	}
 
 	@Override
-	public Boolean visitNavigationOperatorCS(NavigationOperatorCS object) {
+	public Boolean visitNavigationOperatorCS(@NonNull NavigationOperatorCS object) {
 		appendExpPrefix(object);
 		context.append("navop");		
 		return true;
 	}
 
 	@Override
-	public Boolean visitNestedExpCS(NestedExpCS object) {
+	public Boolean visitNestedExpCS(@NonNull NestedExpCS object) {
 		appendExpPrefix(object);
 		context.append("nested");		
 		return true;
 	}
 
 	@Override
-	public Boolean visitNullLiteralExpCS(NullLiteralExpCS object) {
+	public Boolean visitNullLiteralExpCS(@NonNull NullLiteralExpCS object) {
 		appendExpPrefix(object);
 		context.append(MONIKER_NULL_LITERAL_EXP);
 		return true;
 	}
 
 	@Override
-	public Boolean visitNumberLiteralExpCS(NumberLiteralExpCS object) {
+	public Boolean visitNumberLiteralExpCS(@NonNull NumberLiteralExpCS object) {
 		appendExpPrefix(object);
 		context.append(object.getName().toString());
 		return true;
 	}
 
 	@Override
-	public Boolean visitOperatorCS(OperatorCS object) {
+	public Boolean visitOperatorCS(@NonNull OperatorCS object) {
 		appendExpPrefix(object);
 		context.appendNameCS(object);
 		return true;
 	}
 
 	@Override
-	public Boolean visitPrefixExpCS(PrefixExpCS object) {
+	public Boolean visitPrefixExpCS(@NonNull PrefixExpCS object) {
 		appendExpPrefix(object);
 		context.append("prefix");
 		return true;
 	}
 
 	@Override
-	public Boolean visitSelfExpCS(SelfExpCS object) {
+	public Boolean visitSelfExpCS(@NonNull SelfExpCS object) {
 		appendExpPrefix(object);
 		context.append(Environment.SELF_VARIABLE_NAME);
 		return true;
 	}
 
 	@Override
-	public Boolean visitStringLiteralExpCS(StringLiteralExpCS object) {
+	public Boolean visitStringLiteralExpCS(@NonNull StringLiteralExpCS object) {
 		appendExpPrefix(object);
 		context.append(MONIKER_STRING_LITERAL_EXP);
 		return true;
 	}
 
 	@Override
-	public Boolean visitTupleLiteralExpCS(TupleLiteralExpCS object) {
+	public Boolean visitTupleLiteralExpCS(@NonNull TupleLiteralExpCS object) {
 		appendExpPrefix(object);
 		List<TupleLiteralPartCS> parts = new ArrayList<TupleLiteralPartCS>(object.getOwnedParts());
 		Collections.sort(parts, new Comparator<TupleLiteralPartCS>()
@@ -425,27 +431,27 @@ public class EssentialOCLCS2MonikerVisitor
 	}
 
 	@Override
-	public Boolean visitTupleLiteralPartCS(TupleLiteralPartCS object) {
+	public Boolean visitTupleLiteralPartCS(@NonNull TupleLiteralPartCS object) {
 		context.appendParentCS(object, MONIKER_SCOPE_SEPARATOR);
 		context.appendNameCS(object);
 		return true;
 	}
 
 	@Override
-	public Boolean visitTypeLiteralExpCS(TypeLiteralExpCS object) {
+	public Boolean visitTypeLiteralExpCS(@NonNull TypeLiteralExpCS object) {
 		appendExpPrefix(object);
 		context.append(((Type) object.getOwnedType().getPivot()).getName());
 		return true;
 	}
 
 	@Override
-	public Boolean visitTypeNameExpCS(TypeNameExpCS object) {
+	public Boolean visitTypeNameExpCS(@NonNull TypeNameExpCS object) {
 		context.appendElement(object.getPivot());
 		return true;
 	}
 
 	@Override
-	public Boolean visitUnlimitedNaturalLiteralExpCS(UnlimitedNaturalLiteralExpCS object) {
+	public Boolean visitUnlimitedNaturalLiteralExpCS(@NonNull UnlimitedNaturalLiteralExpCS object) {
 		appendExpPrefix(object);
 		context.append(MONIKER_UNLIMITED_NATURAL_LITERAL_EXP);
 		return true;

@@ -20,6 +20,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -79,7 +80,7 @@ public class EssentialOCLScoping
 		}
 		
 		@Override
-		public String getMessage(EObject eObject, String linkText) {
+		public String getMessage(@NonNull EObject eObject, @NonNull String linkText) {
 			PathElementCS csPathElement = (PathElementCS) eObject;
 			PathNameCS pathName = csPathElement.getPathName();
 			List<PathElementCS> path = pathName.getPath();
@@ -95,6 +96,7 @@ public class EssentialOCLScoping
 			if (csContext == null) {
 				csContext = (ElementCS) pathName.eContainer();
 			}
+			assert csContext != null;
 			String messageTemplate;
 			String argumentText = null;
 			ExpCS navigationArgument = null;
@@ -123,6 +125,7 @@ public class EssentialOCLScoping
 			else {
 				messageTemplate = "Unresolved ''{1}'' ''{0}''";
 			}
+			assert messageTemplate != null;
 			TypedElement source = null;
 			ExpCS csSource = navigationArgument;
 			while (csSource != null) {

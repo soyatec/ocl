@@ -543,8 +543,8 @@ public class PivotUtil extends DomainUtil
 		return result;
 	}
 
-	public static Map<TemplateParameter, ParameterableElement> getAllTemplateParameterSubstitutions(Map<TemplateParameter, ParameterableElement> map,
-			TemplateableElement templateableElement) {
+	public static @Nullable Map<TemplateParameter, ParameterableElement> getAllTemplateParameterSubstitutions(@Nullable Map<TemplateParameter, ParameterableElement> map,
+			@Nullable TemplateableElement templateableElement) {
 		for (EObject eObject = templateableElement; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof TemplateableElement) {
 				for (TemplateBinding templateBinding : ((TemplateableElement) eObject).getTemplateBinding()) {
@@ -583,10 +583,6 @@ public class PivotUtil extends DomainUtil
 	}
 
 	public static @Nullable Attribution getAttribution(@NonNull EObject eObject) {
-		if (eObject == null) {
-			logger.warn("getAttribution for null");
-			return null;
-		}
 		if (eObject.eIsProxy()) {			// Shouldn't happen, but certainly does during development
 			logger.warn("getAttribution for proxy " + eObject);
 			return null;
@@ -681,13 +677,19 @@ public class PivotUtil extends DomainUtil
 		return null;				
 	}
 
-	public static Type getOwningType(@NonNull Feature feature) {
+	public static @NonNull Type getOwningType(@NonNull Feature feature) {
 		Type owner = null;
 		if (feature instanceof Property) {
 			owner = ((Property)feature).getOwningType();
 		}
 		else if (feature instanceof Operation) {
 			owner = ((Operation)feature).getOwningType();
+		}
+		else {
+			throw new IllegalStateException("Unknown feature " + feature.eClass().getName());
+		}
+		if (owner == null) {
+			throw new IllegalStateException("Orphan feature " + feature.eClass().getName());
 		}
 		return owner;
 	}
@@ -715,7 +717,7 @@ public class PivotUtil extends DomainUtil
 		return element;
 	}
 
-	public static String getMessage(OpaqueExpression specification) {
+	public static @Nullable String getMessage(@NonNull OpaqueExpression specification) {
 		List<String> messages = specification.getMessage();
 		List<String> languages = specification.getLanguage();
 		if ((messages == null) || (languages == null)) {
@@ -730,7 +732,7 @@ public class PivotUtil extends DomainUtil
 		return null;
 	}
 
-	public static Namespace getNamespace(EObject element) {
+	public static @Nullable Namespace getNamespace(@Nullable EObject element) {
 		for (EObject eObject = element; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Root) {
 				return null;
@@ -756,7 +758,7 @@ public class PivotUtil extends DomainUtil
 		return pivotURI;
 	}
 
-	public static <T extends Element> T getPivot(Class<T> pivotClass, Pivotable pivotableElement) {
+	public static @Nullable <T extends Element> T getPivot(@NonNull Class<T> pivotClass, @Nullable Pivotable pivotableElement) {
 		if (pivotableElement == null) {
 			return null;
 		}

@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.xtext.essentialocl.attributes;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Iteration;
@@ -32,17 +33,17 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 public class ImplicitCollectFilter extends AbstractOperationFilter
 {
-	protected final Type iteratorType;
+	protected final @NonNull Type iteratorType;
 
 	/**
 	 * Configure an OperationFilter for an implicit collect.
 	 */
-	public ImplicitCollectFilter(MetaModelManager metaModelManager, CollectionType sourceType, Type iteratorType) {
+	public ImplicitCollectFilter(@NonNull MetaModelManager metaModelManager, @NonNull CollectionType sourceType, @NonNull Type iteratorType) {
 		super(metaModelManager, sourceType);
 		this.iteratorType = iteratorType;
 	}
 
-	public boolean matches(EnvironmentView environmentView, DomainElement eObject) {
+	public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {
 		if (!(eObject instanceof Iteration)) {
 			return false;
 		}
@@ -65,7 +66,9 @@ public class ImplicitCollectFilter extends AbstractOperationFilter
 		}
 		Map<TemplateParameter, ParameterableElement> bindings = PivotUtil.getAllTemplateParameterSubstitutions(null, sourceType);
 		TemplateParameter iteratorParameter = templateParameters.get(0);
-		bindings.put(iteratorParameter, iteratorType);
+		if (bindings != null) {
+			bindings.put(iteratorParameter, iteratorType);
+		}
 		installBindings(environmentView, eObject, bindings);
 		return true;
 	}

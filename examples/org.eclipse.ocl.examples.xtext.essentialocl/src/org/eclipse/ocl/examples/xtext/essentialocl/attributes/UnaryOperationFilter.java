@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.xtext.essentialocl.attributes;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -31,11 +32,11 @@ import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 
 public class UnaryOperationFilter extends AbstractOperationFilter
 {
-	public UnaryOperationFilter(MetaModelManager metaModelManager, Type sourceType) {
+	public UnaryOperationFilter(@NonNull MetaModelManager metaModelManager, @NonNull Type sourceType) {
 		super(metaModelManager, sourceType);
 	}
 
-	public boolean matches(EnvironmentView environmentView, DomainElement eObject) {
+	public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {
 		if (eObject instanceof Iteration) {		
 			return false;
 		}

@@ -42,17 +42,17 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 	/**
 	 * Shared cache of the lazily created lazily deleted Classifier types of each type. 
 	 */
-	private Map<DomainType, WeakReference<DomainClassifierType>> classifiers = new WeakHashMap<DomainType, WeakReference<DomainClassifierType>>();
+	private @NonNull Map<DomainType, WeakReference<DomainClassifierType>> classifiers = new WeakHashMap<DomainType, WeakReference<DomainClassifierType>>();
 	
 	/**
 	 * Shared cache of the lazily created lazily deleted specializations of each type. 
 	 */
-	private Map<DomainType, Map<DomainType, WeakReference<AbstractCollectionType>>> specializations = new WeakHashMap<DomainType, Map<DomainType, WeakReference<AbstractCollectionType>>>();
+	private @NonNull Map<DomainType, Map<DomainType, WeakReference<AbstractCollectionType>>> specializations = new WeakHashMap<DomainType, Map<DomainType, WeakReference<AbstractCollectionType>>>();
 	
 	/**
 	 * Shared cache of the lazily created lazily deleted tuples. 
 	 */
-	private Map<String, List<WeakReference<DomainTupleType>>> tupleTypeMap = new WeakHashMap<String, List<WeakReference<DomainTupleType>>>();
+	private @NonNull Map<String, List<WeakReference<DomainTupleType>>> tupleTypeMap = new WeakHashMap<String, List<WeakReference<DomainTupleType>>>();
 
 	protected abstract @NonNull DomainClassifierType createClassifierType(@NonNull DomainType classType);
 	

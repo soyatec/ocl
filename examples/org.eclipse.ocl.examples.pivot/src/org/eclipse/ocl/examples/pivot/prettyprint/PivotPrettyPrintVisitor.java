@@ -41,7 +41,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitable;
  */
 public class PivotPrettyPrintVisitor extends AbstractExtendingVisitor<Object,PrettyPrinter>
 {
-	public PivotPrettyPrintVisitor(PrettyPrinter context) {
+	public PivotPrettyPrintVisitor(@NonNull PrettyPrinter context) {
 		super(context);
 	}
 	

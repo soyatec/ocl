@@ -69,7 +69,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 
 public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, Pivot2CSConversion>
 {
-	public BaseDeclarationVisitor(Pivot2CSConversion context) {
+	public BaseDeclarationVisitor(@NonNull Pivot2CSConversion context) {
 		super(context);		// NB this class is stateless since separate instances exist per CS package
 	}
 

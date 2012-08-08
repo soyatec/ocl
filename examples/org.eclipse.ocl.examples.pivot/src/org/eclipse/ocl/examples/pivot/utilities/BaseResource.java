@@ -16,6 +16,7 @@ package org.eclipse.ocl.examples.pivot.utilities;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
@@ -26,7 +27,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
  */
 public interface BaseResource extends Resource
 {
-	@NonNull ParserContext getParserContext();
+	@Nullable ParserContext getParserContext();
 	@NonNull Resource getPivotResource(@NonNull MetaModelManager metaModelManager);
 	void setParserContext(@NonNull ParserContext parserContext);
 	void updateFrom(@NonNull Resource pivotResource, @NonNull MetaModelManager metaModelManager);

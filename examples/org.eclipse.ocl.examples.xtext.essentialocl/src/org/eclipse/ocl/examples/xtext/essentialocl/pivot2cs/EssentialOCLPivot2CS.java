@@ -20,6 +20,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.BasePivot2CS;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.BaseReferenceVisitor;
@@ -31,22 +32,22 @@ public class EssentialOCLPivot2CS extends BasePivot2CS
 {	
 	private static final class Factory implements Pivot2CS.Factory
 	{
-		private static Pivot2CS.Factory INSTANCE = new Factory();
+		private static @NonNull Pivot2CS.Factory INSTANCE = new Factory();
 
-		public EssentialOCLDeclarationVisitor createDeclarationVisitor(Pivot2CSConversion converter) {
+		public @NonNull EssentialOCLDeclarationVisitor createDeclarationVisitor(@NonNull Pivot2CSConversion converter) {
 			return new EssentialOCLDeclarationVisitor(converter);
 		}
 
-		public BaseReferenceVisitor createReferenceVisitor(Pivot2CSConversion converter) {
+		public @NonNull BaseReferenceVisitor createReferenceVisitor(@NonNull Pivot2CSConversion converter) {
 			return new BaseReferenceVisitor(converter);
 		}
 
-		public EClass[] getEClasses() {
+		public @NonNull EClass[] getEClasses() {
 			return new EClass[]{};
 		}
 	}
 		
-	public EssentialOCLPivot2CS(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, MetaModelManager metaModelManager) {
+	public EssentialOCLPivot2CS(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, @NonNull MetaModelManager metaModelManager) {
 		super(cs2pivotResourceMap, metaModelManager);
 		addFactory(Factory.INSTANCE);
 	}

@@ -632,8 +632,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			if (iteratorCountDelta != 0) {
 				return iteratorCountDelta;
 			}
-			Type referenceType = DomainUtil.nonNullModel(PivotUtil.getOwningType((Iteration)reference));
-			Type candidateType = DomainUtil.nonNullModel(PivotUtil.getOwningType((Iteration)candidate));
+			Type referenceType = PivotUtil.getOwningType((Iteration)reference);
+			Type candidateType = PivotUtil.getOwningType((Iteration)candidate);
 			Type specializedReferenceType = getSpecializedType(referenceType, referenceBindings);
 			Type specializedCandidateType = getSpecializedType(candidateType, candidateBindings);
 			if (referenceType != candidateType) {
@@ -979,8 +979,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return Orphanage.getOrphanage(pivotResourceSet);
 	}
 
-	public @NonNull <T extends org.eclipse.ocl.examples.pivot.Package> T createPackage(Class<T> pivotClass,
-			EClass pivotEClass, String name, String nsURI) {
+	public @NonNull <T extends org.eclipse.ocl.examples.pivot.Package> T createPackage(@NonNull Class<T> pivotClass,
+			@NonNull EClass pivotEClass, @NonNull String name, @Nullable String nsURI) {
 		@SuppressWarnings("unchecked")
 		T pivotPackage = (T) pivotEClass.getEPackage().getEFactoryInstance().create(pivotEClass);
 		pivotPackage.setName(name);
@@ -1001,7 +1001,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return precedenceManager;
 	}
 
-	public @NonNull Resource createResource(@NonNull URI uri, String contentType) {
+	public @NonNull Resource createResource(@NonNull URI uri, @Nullable String contentType) {
 		Resource createResource = pivotResourceSet.createResource(uri, contentType);
 		if (createResource == null) {
 			throw new IllegalStateException("Failed to create '" + uri + "'");
@@ -1010,10 +1010,11 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 
 	public @NonNull Root createRoot(String name, String externalURI) {
-		return createRoot(Root.class, DomainUtil.nonNullEMF(PivotPackage.Literals.ROOT), name, externalURI);
+		return createRoot(Root.class, PivotPackage.Literals.ROOT, name, externalURI);
 	}
 
-	public @NonNull <T extends Root> T createRoot(@NonNull Class<T> pivotClass, @NonNull EClass pivotEClass, String name, String externalURI) {
+	public @NonNull <T extends Root> T createRoot(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, String name, String externalURI) {
+		assert pivotEClass != null;
 		@SuppressWarnings("unchecked")
 		T pivotRoot = (T) pivotEClass.getEPackage().getEFactoryInstance().create(pivotEClass);
 		pivotRoot.setName(name);
@@ -2143,7 +2144,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	/**
 	 * Create implicit an opposite property if there is no explicit opposite.
 	 */
-	public void installPropertyDeclaration(Property thisProperty) {
+	public void installPropertyDeclaration(@NonNull Property thisProperty) {
 		if ((thisProperty.isTransient() || thisProperty.isVolatile()) && !thisProperty.isDerived()) {		// FIXME Are any exclusions justified?
 			return;
 		}
@@ -2295,7 +2296,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	/**
 	 * Retyurn true if this type involves an UnspecifiedType.
 	 */
-	public boolean isUnderspecified(ParameterableElement type) {
+	public boolean isUnderspecified(@Nullable ParameterableElement type) {
 		if (type == null) {
 			return false;
 		}
@@ -2339,7 +2340,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 
 	@Override
-	protected Resource loadDefaultLibrary(String uri) {
+	protected @Nullable Resource loadDefaultLibrary(@Nullable String uri) {
 		boolean savedLibraryLoadInProgress = libraryLoadInProgress;
 		libraryLoadInProgress = true;
 		try {
@@ -2497,11 +2498,11 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	public void notifyChanged(Notification notification) {
 	}
 
-	public void removeExternalResource(External2Pivot external2Pivot) {
+	public void removeExternalResource(@NonNull External2Pivot external2Pivot) {
 		external2PivotMap.remove(external2Pivot.getURI());
 	}
 
-	public void removeListener(MetaModelManagerListener listener) {
+	public void removeListener(@NonNull MetaModelManagerListener listener) {
 		if (listeners != null) {
 			listeners.remove(listener);
 		}
@@ -2535,7 +2536,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	/**
 	 * Return the un-overloaded operation.
 	 */
-	public Operation resolveBaseOperation(@NonNull Operation operation) {
+	public @NonNull Operation resolveBaseOperation(@NonNull Operation operation) {
 		Set<Operation> allOperations = new HashSet<Operation>();
 		@SuppressWarnings("null") @NonNull Type owningType = operation.getOwningType();
 		@SuppressWarnings("null") @NonNull String operationName = operation.getName();
@@ -2554,7 +2555,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return baseOperation;
 	}
 
-	public Set<Operation> resolveLocalOperation(@NonNull Type pivotClass, @NonNull String operationName, Type... pivotArguments) {
+	public @Nullable Set<Operation> resolveLocalOperation(@NonNull Type pivotClass, @NonNull String operationName, Type... pivotArguments) {
 		@Nullable Map<TemplateParameter, ParameterableElement> templateParameterSubstitutions = null; 	// FIXME
 		Set<Operation> pivotOperations = null;
 		for (Operation pivotOperation : pivotClass.getOwnedOperation()) {

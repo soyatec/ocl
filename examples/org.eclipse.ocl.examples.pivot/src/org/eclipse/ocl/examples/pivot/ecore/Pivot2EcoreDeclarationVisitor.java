@@ -67,7 +67,7 @@ public class Pivot2EcoreDeclarationVisitor
 	extends AbstractExtendingVisitor<EObject, Pivot2Ecore>
 {
 
-	public Pivot2EcoreDeclarationVisitor(Pivot2Ecore context) {
+	public Pivot2EcoreDeclarationVisitor(@NonNull Pivot2Ecore context) {
 		super(context);
 	}
 

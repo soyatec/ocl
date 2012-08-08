@@ -146,7 +146,7 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 		pivotElement.setUpper(BigInteger.valueOf(upper));
 	}
 
-	protected @Nullable <T extends NamedElement> T refreshNamedElement(@NonNull Class<T> pivotClass, @NonNull EClass pivotEClass, @NonNull NamedElementCS csElement) {
+	protected @Nullable <T extends NamedElement> T refreshNamedElement(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, @NonNull NamedElementCS csElement) {
 		T pivotElement = context.refreshModelElement(pivotClass, pivotEClass, csElement);
 		String name = csElement.getName();
 		if ((pivotElement != null) && (name != null)) {
@@ -524,8 +524,10 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 			List<TemplateParameterCS> csTemplateParameters = csElement.getOwnedTemplateParameter();
 			for (TemplateParameterCS csTemplateParameter : csTemplateParameters) {
 				org.eclipse.ocl.examples.pivot.Class pivotTemplateParameterClass = PivotUtil.getPivot(org.eclipse.ocl.examples.pivot.Class.class, csTemplateParameter);
-				TemplateParameter pivotTemplateParameter = pivotTemplateParameterClass.getOwningTemplateParameter();
-				newPivotTemplateParameters.add(pivotTemplateParameter);
+				if (pivotTemplateParameterClass != null) {
+					TemplateParameter pivotTemplateParameter = pivotTemplateParameterClass.getOwningTemplateParameter();
+					newPivotTemplateParameters.add(pivotTemplateParameter);
+				}
 			}
 			PivotUtil.refreshList(pivotElement.getOwnedParameter(), newPivotTemplateParameters);
 		}

@@ -194,6 +194,8 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 	}
 
 	public <T extends Element> void doSwitchAll(@NonNull Class<T> pivotClass, /*@NonNull*/ Collection<T> pivotElements, /*@NonNull*/ List<? extends EObject> eObjects) {
+		assert pivotElements != null;
+		assert eObjects != null;
 		for (EObject eObject : eObjects) {
 			if (eObject != null) {
 				T pivotElement = converter.getCreated(pivotClass, eObject);

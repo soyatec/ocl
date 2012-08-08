@@ -77,42 +77,44 @@ public class EssentialOCLCrossReferenceSerializer extends CrossReferenceSerializ
 			PathNameCS pathName = pathElement.getPathName();
 			int index = pathName.getPath().indexOf(pathElement);
 			Element element = pathElement.getElement();
-			NamedElement namedElement = ElementUtil.isPathable(element);
-			if (namedElement != null) {
-				String name = namedElement.getName();
-				if ((index == 0) && (namedElement instanceof org.eclipse.ocl.examples.pivot.Package)) {
-					EObject root = EcoreUtil.getRootContainer(semanticObject);
-					Resource csResource = root.eResource();
-					Resource asResource = null;
-					if (root instanceof RootPackageCS) {
-						EObject root2 = ((RootPackageCS)root).getPivot();
-						asResource = EcoreUtil.getRootContainer(root2).eResource();
+			if (element != null) {
+				NamedElement namedElement = ElementUtil.isPathable(element);
+				if (namedElement != null) {
+					String name = namedElement.getName();
+					if ((index == 0) && (namedElement instanceof org.eclipse.ocl.examples.pivot.Package)) {
+						EObject root = EcoreUtil.getRootContainer(semanticObject);
+						Resource csResource = root.eResource();
+						Resource asResource = null;
+						if (root instanceof RootPackageCS) {
+							EObject root2 = ((RootPackageCS)root).getPivot();
+							asResource = EcoreUtil.getRootContainer(root2).eResource();
+						}
+						Resource elementResource = namedElement.eResource();
+						if ((elementResource != csResource) && (elementResource != asResource)) {
+							AliasAnalysis adapter = csResource != null ? AliasAnalysis.getAdapter(csResource) : null;
+							if (adapter != null) {
+								String alias = adapter.getAlias(namedElement);
+								if (alias != null) {
+									name = alias;
+								}
+							}	
+						}
 					}
-					Resource elementResource = namedElement.eResource();
-					if ((elementResource != csResource) && (elementResource != asResource)) {
-						AliasAnalysis adapter = AliasAnalysis.getAdapter(csResource);
-						if (adapter != null) {
-							String alias = adapter.getAlias(namedElement);
-							if (alias != null) {
-								name = alias;
-							}
-						}	
-					}
-				}
-				return valueConverter.toString(name, ruleName);
-			}
-			else {
-				URI uri;
-				EObject eTarget = element.getETarget();
-				if (eTarget != null) {
-					uri = EcoreUtil.getURI(eTarget);
+					return valueConverter.toString(name, ruleName);
 				}
 				else {
-					uri = EcoreUtil.getURI(element);
+					URI uri;
+					EObject eTarget = element.getETarget();
+					if (eTarget != null) {
+						uri = EcoreUtil.getURI(eTarget);
+					}
+					else {
+						uri = EcoreUtil.getURI(element);
+					}
+					URI baseURI = semanticObject.eResource().getURI();
+					URI deresolvedURI = uri.deresolve(baseURI, true, true, false);
+					return valueConverter.toString(deresolvedURI.toString(), ruleName);
 				}
-				URI baseURI = semanticObject.eResource().getURI();
-				URI deresolvedURI = uri.deresolve(baseURI, true, true, false);
-				return valueConverter.toString(deresolvedURI.toString(), ruleName);
 			}
 		}
 		boolean foundOne = false;

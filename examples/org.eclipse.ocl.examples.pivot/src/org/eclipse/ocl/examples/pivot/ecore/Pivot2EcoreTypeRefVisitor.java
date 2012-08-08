@@ -47,9 +47,9 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 public class Pivot2EcoreTypeRefVisitor
 	extends AbstractExtendingVisitor<EObject, Pivot2Ecore>
 {
-	protected final MetaModelManager metaModelManager;
+	protected final @NonNull MetaModelManager metaModelManager;
 	
-	public Pivot2EcoreTypeRefVisitor(Pivot2Ecore context) {
+	public Pivot2EcoreTypeRefVisitor(@NonNull Pivot2Ecore context) {
 		super(context);
 		this.metaModelManager = context.getMetaModelManager();
 	}

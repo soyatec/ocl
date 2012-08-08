@@ -179,14 +179,14 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 	/* (non-Javadoc)
 	 * @see org.eclipse.ocl.examples.xtext.base.cs2pivot.DiagnosticHandler#addWarning(org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS, java.lang.String, java.lang.Object)
 	 */
-	public void addWarning(@NonNull ModelElementCS csElement, @NonNull String message, Object... bindings) {
+	public void addWarning(@NonNull ModelElementCS csElement, /*@NonNull*/ String message, Object... bindings) {
 		String boundMessage = NLS.bind(message, bindings);
 		INode node = NodeModelUtils.getNode(csElement);
 		Resource.Diagnostic resourceDiagnostic = new ValidationDiagnostic(node, boundMessage);
 		csElement.eResource().getErrors().add(resourceDiagnostic);
 	}
 
-	public @NonNull String bind(@NonNull EObject csContext, @NonNull String messageTemplate, Object... bindings) {
+	public @NonNull String bind(@NonNull EObject csContext, /*@NonNull*/ String messageTemplate, Object... bindings) {
 		return converter.bind(csContext, messageTemplate, bindings);
 	}
 
@@ -806,6 +806,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 	}
 
 	public <T extends Element> void refreshList(@NonNull Class<T> pivotClass, List<T> pivotElements, /*@NonNull*/ List<? extends PivotableElementCS> csElements) {
+		assert csElements != null;
 		if (!pivotElements.isEmpty() ||!csElements.isEmpty()) {
 			List<T> newPivotElements = new ArrayList<T>();
 			for (PivotableElementCS csElement : csElements) {
@@ -831,12 +832,15 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 	 * @param csElement
 	 * @return
 	 */
-	public @Nullable <T extends Element> T refreshModelElement(@NonNull Class<T> pivotClass, @NonNull EClass pivotEClass, @Nullable ModelElementCS csElement) {
+	public @Nullable <T extends Element> T refreshModelElement(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, @Nullable ModelElementCS csElement) {
+		assert pivotEClass != null;
 		return converter.refreshModelElement(pivotClass, pivotEClass, csElement);
 	}
 
-	public <T extends Element> void refreshPivotList(Class<T> pivotClass, List<? super T> pivotElements,
-			List<? extends ModelElementCS> csElements) {
+	public <T extends Element> void refreshPivotList(@NonNull Class<T> pivotClass, /*@NonNull*/ List<? super T> pivotElements,
+			/*@NonNull*/ List<? extends ModelElementCS> csElements) {
+		assert pivotElements != null;
+		assert csElements != null;
 		if (pivotElements.isEmpty() && csElements.isEmpty()) {
 			return;
 		}
@@ -864,7 +868,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		}
 	}
 
-	protected void resetPivotMappings(Collection<? extends Resource> csResources) {
+	protected void resetPivotMappings(@NonNull Collection<? extends Resource> csResources) {
 		for (Resource csResource : csResources) {
 			for (TreeIterator<EObject> tit = csResource.getAllContents(); tit.hasNext(); ) {
 				EObject eObject = tit.next();
@@ -877,11 +881,11 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		}
 	}
 
-	public void setReferredIteration(@NonNull LoopExp expression, @NonNull Iteration iteration) {
+	public void setReferredIteration(@NonNull LoopExp expression, @Nullable Iteration iteration) {
 		expression.setReferredIteration(iteration);
 	}
 
-	public void setReferredOperation(@NonNull OperationCallExp expression, @NonNull Operation operation) {
+	public void setReferredOperation(@NonNull OperationCallExp expression, @Nullable Operation operation) {
 		expression.setReferredOperation(operation);
 	}
 
@@ -1307,9 +1311,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 	}
 
 	public <T extends Element> T visitLeft2Right(@NonNull Class<T> pivotClass, @NonNull VisitableCS csObject) {
-		if (csObject == null) {
-			return null;
-		}
+		assert csObject != null;
 		Element element = csObject.accept(left2RightVisitor);
 		if (element == null) {
 			return null;

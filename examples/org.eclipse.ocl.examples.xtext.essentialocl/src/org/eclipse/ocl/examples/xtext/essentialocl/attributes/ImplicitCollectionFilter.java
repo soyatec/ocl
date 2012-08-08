@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -34,11 +35,11 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 public class ImplicitCollectionFilter extends AbstractOperationFilter
 {
-	public ImplicitCollectionFilter(MetaModelManager metaModelManager, Type sourceType) {
+	public ImplicitCollectionFilter(@NonNull MetaModelManager metaModelManager, @NonNull Type sourceType) {
 		super(metaModelManager, sourceType);
 	}
 
-	public boolean matches(EnvironmentView environmentView, DomainElement eObject) {
+	public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {
 		if (eObject instanceof Iteration) {		
 			return false;
 		}

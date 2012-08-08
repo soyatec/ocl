@@ -36,27 +36,22 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 public abstract class AbstractOperationFilter implements ScopeFilter
 {
 	protected final @NonNull MetaModelManager metaModelManager;
-	protected final @NonNull Type sourceType;
+	protected final @Nullable Type sourceType;
 	
-	public AbstractOperationFilter(@NonNull MetaModelManager metaModelManager, @NonNull Type sourceType) {
+	public AbstractOperationFilter(@NonNull MetaModelManager metaModelManager, @Nullable Type sourceType) {
 		this.metaModelManager = metaModelManager;
-		this.sourceType = PivotUtil.getBehavioralType(sourceType);
+		this.sourceType = sourceType != null ? PivotUtil.getBehavioralType(sourceType) : null;
 	}
 
 	public int compareMatches(@NonNull DomainElement match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1,
 			@NonNull DomainElement match2, @Nullable Map<TemplateParameter, ParameterableElement> bindings2) {
-		int comparison = metaModelManager.compareOperationMatches((Operation)match1, bindings1,
-			(Operation)match2, bindings2);
-//		if (comparison == 0) {
-//			metaModelManager.compareOperationMatches((Operation)match1, bindings1,
-//				(Operation)match2, bindings2);	// FIXME Debugging
-//		}
-		return comparison;
+		return metaModelManager.compareOperationMatches((Operation)match1, bindings1, (Operation)match2, bindings2);
 	}
 
-	protected Map<TemplateParameter, ParameterableElement> getOperationBindings(@NonNull Operation candidateOperation) {
+	protected @Nullable Map<TemplateParameter, ParameterableElement> getOperationBindings(@NonNull Operation candidateOperation) {
 		Type sourceType = this.sourceType;
-		if (!(sourceType instanceof CollectionType) && (candidateOperation.getOwningType() instanceof CollectionType)) {
+		if (!(sourceType instanceof CollectionType) && (candidateOperation.getOwningType() instanceof CollectionType) && (sourceType != null)) {
+			assert sourceType != null;
 			sourceType = metaModelManager.getCollectionType("Set", sourceType);		// Implicit oclAsSet()
 		}			
 		Map<TemplateParameter, ParameterableElement> bindings = PivotUtil.getAllTemplateParameterSubstitutions(null, sourceType);

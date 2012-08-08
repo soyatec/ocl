@@ -54,9 +54,9 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotObjectImpl;
 public class Pivot2EcoreReferenceVisitor
 	extends AbstractExtendingVisitor<EObject, Pivot2Ecore>
 {
-	protected final Pivot2EcoreTypeRefVisitor typeRefVisitor;
+	protected final @NonNull Pivot2EcoreTypeRefVisitor typeRefVisitor;
 	
-	public Pivot2EcoreReferenceVisitor(Pivot2Ecore context) {
+	public Pivot2EcoreReferenceVisitor(@NonNull Pivot2Ecore context) {
 		super(context);
 		typeRefVisitor = new Pivot2EcoreTypeRefVisitor(context);
 	}

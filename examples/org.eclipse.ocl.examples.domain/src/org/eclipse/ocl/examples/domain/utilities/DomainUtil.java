@@ -100,7 +100,6 @@ public class DomainUtil
 	/**
 	 * Return aT, checking the assertion that this call would not be necessary if EMF had comprehensive @NonNull annotations.
 	 */
-	@SuppressWarnings("null")
 	public static @NonNull <T> T nonNullEMF(T aT) {// FIXME remove once EMF guarantees non-null
 		assert aT != null;
 		return aT;
@@ -109,7 +108,6 @@ public class DomainUtil
 	/**
 	 * Return aT, checking the assertion that this call would not be necessary if the Ecore model was guaranteed to be valid.
 	 */
-	@SuppressWarnings("null")
 	public static @NonNull <T> T nonNullModel(T aT) {
 		assert aT != null;			// FIXME Change to InvalidModelException
 		return aT;
@@ -118,7 +116,6 @@ public class DomainUtil
 	/**
 	 * Return aT, checking the assertion that this call would not be necessary if the Pivot model was guaranteed to be valid.
 	 */
-	@SuppressWarnings("null")
 	public static @NonNull <T> T nonNullPivot(T aT) {
 		assert aT != null;			// FIXME Change to InvalidModelException
 		return aT;

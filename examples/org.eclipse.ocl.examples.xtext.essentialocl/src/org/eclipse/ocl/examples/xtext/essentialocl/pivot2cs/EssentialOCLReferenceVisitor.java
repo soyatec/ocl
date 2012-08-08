@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.essentialocl.pivot2cs;
 
 import org.apache.log4j.Logger;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.TupleType;
@@ -36,26 +37,32 @@ public class EssentialOCLReferenceVisitor extends BaseReferenceVisitor
 {
 	public static final Logger logger = Logger.getLogger(BaseReferenceVisitor.class);
 
-	public EssentialOCLReferenceVisitor(Pivot2CSConversion context) {
+	public EssentialOCLReferenceVisitor(@NonNull Pivot2CSConversion context) {
 		super(context);		// NB this class is stateless since separate instances exist per CS package
 	}
 
 	@Override
-	public ElementCS visitClass(org.eclipse.ocl.examples.pivot.Class object) {
+	public ElementCS visitClass(@NonNull org.eclipse.ocl.examples.pivot.Class object) {
 		return visitType(object);
 	}
 
 	@Override
-	public ElementCS visitCollectionType(CollectionType object) {
+	public ElementCS visitCollectionType(@NonNull CollectionType object) {
 		CollectionTypeRefCS csRef = BaseCSTFactory.eINSTANCE.createCollectionTypeRefCS();
 		csRef.setPivot(object);	
 // FIXME		csRef.setType(object.getElementType());
-		context.importPackage(object.getElementType().getPackage());
+		Type elementType = object.getElementType();
+		if (elementType != null) {
+			org.eclipse.ocl.examples.pivot.Package typePackage = elementType.getPackage();
+			if (typePackage != null) {
+				context.importPackage(typePackage);
+			}
+		}
 		return csRef;
 	}
 
 	@Override
-	public ElementCS visitPrimitiveType(PrimitiveType object) {
+	public ElementCS visitPrimitiveType(@NonNull PrimitiveType object) {
 		PrimitiveTypeRefCS csRef = BaseCSTFactory.eINSTANCE.createPrimitiveTypeRefCS();
 		csRef.setPivot(object);	
 		csRef.setName(object.getName());
@@ -63,7 +70,7 @@ public class EssentialOCLReferenceVisitor extends BaseReferenceVisitor
 	}
 
 	@Override
-	public ElementCS visitTupleType(TupleType object) {
+	public ElementCS visitTupleType(@NonNull TupleType object) {
 		TupleTypeCS csRef = BaseCSTFactory.eINSTANCE.createTupleTypeCS();
 		csRef.setPivot(object);	
 //		csRef.setType(object.getElementType());		// FIXME parts
@@ -71,17 +78,21 @@ public class EssentialOCLReferenceVisitor extends BaseReferenceVisitor
 	}
 
 	@Override
-	public ElementCS visitType(Type object) {
+	public ElementCS visitType(@NonNull Type object) {
 		TypeNameExpCS csRef = EssentialOCLCSTFactory.eINSTANCE.createTypeNameExpCS();
 		csRef.setPivot(object);
 //		csRef.setElement(object);
 		PathNameCS csPathName = csRef.getPathName();
 		if (csPathName == null) {
 			csPathName = BaseCSTFactory.eINSTANCE.createPathNameCS();
+			assert csPathName != null;
 			csRef.setPathName(csPathName);
 		}
 		context.refreshPathName(csPathName, object, null);
-		context.importPackage(object.getPackage());
+		org.eclipse.ocl.examples.pivot.Package typePackage = object.getPackage();
+		if (typePackage != null) {
+			context.importPackage(typePackage);
+		}
 		return csRef;
 	}
 }

@@ -635,6 +635,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
 	}
 
 	public @NonNull <T> T throwInvalidValueException(@NonNull Throwable e, /*@NonNull*/ String message, Object... bindings) throws InvalidValueException {
+		assert message != null;
 		String boundMessage = NLS.bind(message, bindings);
 		throw new InvalidValueException(boundMessage, e);
 	}

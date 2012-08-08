@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -80,18 +81,18 @@ public class BaseCS2MonikerVisitor extends AbstractExtendingBaseCSVisitor<Boolea
 			Pivot2MonikerVisitor.initialize();
 		}
 		
-		public BaseCSVisitor<?> create(@NonNull CS2Moniker context) {
+		public @NonNull BaseCSVisitor<?> create(@NonNull CS2Moniker context) {
 			return new BaseCS2MonikerVisitor(context);
 		}
 	}
 
-	public static CS2Moniker.Factory FACTORY = new Factory();
+	public static @NonNull CS2Moniker.Factory FACTORY = new Factory();
 			
 	public BaseCS2MonikerVisitor(@NonNull CS2Moniker context) {
 		super(context);
 	}
 
-	public void safeAppendMonikerOf(Element element) {
+	public void safeAppendMonikerOf(@Nullable Element element) {
 		if (element == null) {
 			context.append(NULL_MARKER);
 		}
