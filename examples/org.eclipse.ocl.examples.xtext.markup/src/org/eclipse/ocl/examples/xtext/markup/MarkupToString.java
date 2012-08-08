@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.xtext.markup;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.markup.util.MarkupSwitch;
 
 /**
@@ -27,17 +28,23 @@ import org.eclipse.ocl.examples.xtext.markup.util.MarkupSwitch;
  */
 public class MarkupToString extends MarkupSwitch<StringBuilder>
 {
-	public static String toString(MarkupElement element) {
+	public static @NonNull String toString(@NonNull MarkupElement element) {
 		MarkupToString toString = new MarkupToString();
-		return toString.doSwitch(element).toString();
+		StringBuilder switchResult = toString.doSwitch(element);
+		assert switchResult != null;
+		String result = switchResult.toString();
+		assert result != null;
+		return result;
 	}
 
-	public static String toString(List<MarkupElement> elements) {
+	public static @NonNull String toString(@NonNull List<MarkupElement> elements) {
 		MarkupToString toString = new MarkupToString();
 		for (MarkupElement element : elements) {
 			toString.doSwitch(element);
 		}
-		return toString.toString();
+		String string = toString.toString();
+		assert string != null;
+		return string;
 	}
 	
 	protected final StringBuilder s = new StringBuilder();

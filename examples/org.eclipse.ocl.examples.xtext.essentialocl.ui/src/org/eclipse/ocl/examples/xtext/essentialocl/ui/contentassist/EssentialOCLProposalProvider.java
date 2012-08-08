@@ -86,14 +86,16 @@ public class EssentialOCLProposalProvider extends AbstractEssentialOCLProposalPr
 	protected EObject getPathScope(EObject model, ContentAssistContext context) {
 		int offset = context.getOffset();
 		INode currentNode = context.getCurrentNode();
-		INode offsetNode = NodeModelUtils.findLeafNodeAtOffset(currentNode, offset);
-		EObject eObject = NodeModelUtils.findActualSemanticObjectFor(offsetNode);
-		if (!(eObject instanceof PathElementCS)) {
-			offsetNode = NodeModelUtils.findLeafNodeAtOffset(currentNode, offset-1);
-			eObject = NodeModelUtils.findActualSemanticObjectFor(offsetNode);
-		}
-		if (eObject instanceof PathElementCS) {
-			model = eObject;
+		if (currentNode != null) {
+			INode offsetNode = NodeModelUtils.findLeafNodeAtOffset(currentNode, offset);
+			EObject eObject = NodeModelUtils.findActualSemanticObjectFor(offsetNode);
+			if (!(eObject instanceof PathElementCS)) {
+				offsetNode = NodeModelUtils.findLeafNodeAtOffset(currentNode, offset-1);
+				eObject = NodeModelUtils.findActualSemanticObjectFor(offsetNode);
+			}
+			if (eObject instanceof PathElementCS) {
+				model = eObject;
+			}
 		}
 		return model;
 	}

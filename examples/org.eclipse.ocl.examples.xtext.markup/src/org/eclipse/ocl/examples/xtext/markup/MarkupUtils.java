@@ -19,6 +19,8 @@ package org.eclipse.ocl.examples.xtext.markup;
 import java.io.Reader;
 import java.io.StringReader;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.xtext.markup.parser.antlr.MarkupParser;
 import org.eclipse.ocl.examples.xtext.markup.util.MarkupSwitch;
@@ -44,7 +46,7 @@ public class MarkupUtils extends MarkupSwitch<StringBuilder>
 		return (Markup)rootASTElement;
 	} */
 
-	public static IParseResult decode(String text) {
+	public static @Nullable IParseResult decode(@NonNull String text) {
 //		System.out.println("decode: " + text);	
 		Injector injector = MarkupStandaloneSetup.getInjector();
 		MarkupParser parser = injector.getInstance(MarkupParser.class);
@@ -52,7 +54,7 @@ public class MarkupUtils extends MarkupSwitch<StringBuilder>
 		return parser.parse(reader);
 	}
 
-	public static int getNewlineCount(NewLineElement element) {
+	public static int getNewlineCount(@NonNull NewLineElement element) {
 		int lineCount = 0;
 		String s = element.getText();
 		int iMax = s.length();
@@ -80,7 +82,7 @@ public class MarkupUtils extends MarkupSwitch<StringBuilder>
 		return lineCount;
 	}
 
-	public static String toHTML(MetaModelManager metaModelManager, Object context, Markup markup) throws Exception {
+	public static String toHTML(@NonNull MetaModelManager metaModelManager, @NonNull Object context, @NonNull Markup markup) throws Exception {
 		return MarkupToHTML.toString(metaModelManager, context, markup);
 	}
 }

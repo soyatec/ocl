@@ -40,6 +40,7 @@ public final class ElementNode extends EObjectNode
 		if (getEObjectURI() != null) {
 			return getDocument().readOnly(new IUnitOfWork<T, XtextResource>() {
 				public T exec(XtextResource state) throws Exception {
+					assert state != null;
 					BaseCSResource csResource = (BaseCSResource)state;
 					CS2PivotResourceAdapter converter = CS2PivotResourceAdapter.findAdapter(csResource);
 					if (converter != null) {

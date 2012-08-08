@@ -616,11 +616,18 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	protected String text(OCLExpression ele) {
+		assert ele != null;
 		Namespace namespace = PivotUtil.getNamespace(ele.eContainer());
+		if (namespace == null) {
+			return "";
+		}
 		StringBuilder s = new StringBuilder();
 		s.append(PrettyPrinter.printName(ele, namespace));
 		s.append(" : ");
-		s.append(PrettyPrinter.printType(ele.getType(), namespace));
+		Type type = ele.getType();
+		if (type != null) {
+			s.append(PrettyPrinter.printType(type, namespace));
+		}
 		return s.toString();
 	}
 
@@ -677,6 +684,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	protected String text(Precedence ele) {
+		assert ele != null;
 		return PrettyPrinter.print(ele);
 	}
 
@@ -800,6 +808,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	protected String text(Variable ele) {
+		assert ele != null;
 		return PrettyPrinter.print(ele);
 	}
 

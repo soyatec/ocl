@@ -20,14 +20,16 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.text.IDocument;
 
 public interface ConsoleContext extends IDocument
 {
 //	ModelingLevel getModelingLevel();
-	EObject getOCLContext();
+	@Nullable EObject getOCLContext();
 //	IOCLFactory<Object> getOCLFactory();
-	Map<String, EClassifier> getOCLParameters();
+	@Nullable Map<String, EClassifier> getOCLParameters();
 //	void setModelingLevel(ModelingLevel level);
-	void setContext(EClassifier context, Map<String, EClassifier> parameters);
+	void setContext(@NonNull EClassifier context, @Nullable Map<String, EClassifier> parameters);
 }

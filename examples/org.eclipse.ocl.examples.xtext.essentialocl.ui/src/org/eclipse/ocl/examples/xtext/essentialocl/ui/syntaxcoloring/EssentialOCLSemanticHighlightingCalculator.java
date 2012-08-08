@@ -21,6 +21,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
@@ -28,15 +29,18 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculato
 public class EssentialOCLSemanticHighlightingCalculator implements ISemanticHighlightingCalculator
 {
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		if (resource == null)
-			return;
-		ICompositeNode rootNode = resource.getParseResult().getRootNode();
-		for (INode abstractNode : rootNode.getAsTreeIterable()) {
-			if (abstractNode.getGrammarElement() instanceof CrossReference) {
-				EObject semanticElement = abstractNode.getSemanticElement();
-				if (!(semanticElement instanceof PathElementCS) || (((PathElementCS)semanticElement).getElementType() != null)) {
-					acceptor.addPosition(abstractNode.getOffset(), abstractNode.getLength(),
-						EssentialOCLHighlightingConfiguration.CROSS_REF);
+		if (resource != null) {
+			IParseResult parseResult = resource.getParseResult();
+			if (parseResult != null) {
+				ICompositeNode rootNode = parseResult.getRootNode();
+				for (INode abstractNode : rootNode.getAsTreeIterable()) {
+					if (abstractNode.getGrammarElement() instanceof CrossReference) {
+						EObject semanticElement = abstractNode.getSemanticElement();
+						if (!(semanticElement instanceof PathElementCS) || (((PathElementCS)semanticElement).getElementType() != null)) {
+							acceptor.addPosition(abstractNode.getOffset(), abstractNode.getLength(),
+								EssentialOCLHighlightingConfiguration.CROSS_REF);
+						}
+					}
 				}
 			}
 		}

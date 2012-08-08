@@ -16,11 +16,15 @@
  */
 package org.eclipse.ocl.examples.xtext.markup;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.StringValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -50,7 +54,7 @@ public class MarkupToHTML extends MarkupSwitch<HTMLBuffer>
 		}		
 	}
 	
-	public static String toString(MetaModelManager metaModelManager, Object context, MarkupElement element) throws Exception {
+	public static String toString(@NonNull MetaModelManager metaModelManager, @NonNull Object context, @NonNull MarkupElement element) throws Exception {
 		MarkupToHTML toString = new MarkupToHTML(metaModelManager, context);
 		try {
 			return toString.doSwitch(element).toString();
@@ -59,12 +63,12 @@ public class MarkupToHTML extends MarkupSwitch<HTMLBuffer>
 		}
 	}
 	
-	private OCL ocl = null;
-	private MetaModelManager metaModelManager;
-	protected final Object context;
-	protected final HTMLBuffer s = new HTMLBuffer();
+	private @Nullable OCL ocl = null;
+	private @NonNull MetaModelManager metaModelManager;
+	protected final @NonNull Object context;
+	protected final @NonNull HTMLBuffer s = new HTMLBuffer();
 
-	public MarkupToHTML(MetaModelManager metaModelManager, Object context) {
+	public MarkupToHTML(@NonNull MetaModelManager metaModelManager, @NonNull Object context) {
 		this.metaModelManager = metaModelManager;
 		this.context = context;
 	}	
@@ -147,6 +151,7 @@ public class MarkupToHTML extends MarkupSwitch<HTMLBuffer>
 
 	@Override
 	public HTMLBuffer caseNewLineElement(NewLineElement object) {
+		assert object != null;
 		int newLines = MarkupUtils.getNewlineCount(object);
 		if (newLines <= 1) {
 			s.append("\n");
@@ -171,7 +176,9 @@ public class MarkupToHTML extends MarkupSwitch<HTMLBuffer>
 	@Override
 	public HTMLBuffer caseOCLCodeElement(OCLCodeElement object) {
 		s.startFontName("pre");
-		String oclString = MarkupToString.toString(object.getElements());		
+		List<MarkupElement> elements = object.getElements();
+		assert elements != null;
+		String oclString = MarkupToString.toString(elements);		
 		try {
 			ExpressionInOCL query = createQuery(oclString);
 			String text = PrettyPrinter.print(query);
@@ -186,7 +193,9 @@ public class MarkupToHTML extends MarkupSwitch<HTMLBuffer>
 
 	@Override
 	public HTMLBuffer caseOCLEvalElement(OCLEvalElement object) {
-		String oclString = MarkupToString.toString(object.getElements());		
+		List<MarkupElement> elements = object.getElements();
+		assert elements != null;
+		String oclString = MarkupToString.toString(elements);		
 		try {
 			OCL ocl = getOCL();
 			ExpressionInOCL query = createQuery(oclString);
@@ -209,12 +218,14 @@ public class MarkupToHTML extends MarkupSwitch<HTMLBuffer>
 	@Override
 	public HTMLBuffer caseOCLTextElement(OCLTextElement object) {
 		s.startFontName("tt");
-		String oclString = MarkupToString.toString(object.getElements());		
+		List<MarkupElement> elements = object.getElements();
+		assert elements != null;
+		String oclString = MarkupToString.toString(elements);		
 		try {
 			ExpressionInOCL query = createQuery(oclString);
 			PrettyPrintOptions.Global options = PrettyPrinter.createOptions(null);
 			options.setLinelength(Integer.MAX_VALUE);
-			String text = query != null ? PrettyPrinter.print(query, options) : PrettyPrinter.NULL_PLACEHOLDER;
+			String text = PrettyPrinter.print(query, options);
 			s.append(text);
 		} catch (ParserException e) {
 			throw new InvalidMarkupException(e);
@@ -247,18 +258,24 @@ public class MarkupToHTML extends MarkupSwitch<HTMLBuffer>
 		return s;
 	}
 
-	protected ExpressionInOCL createQuery(String oclString) throws ParserException {
+	protected @NonNull ExpressionInOCL createQuery(@NonNull String oclString) throws ParserException {
 		OCL ocl = getOCL();
 		OCLHelper helper = ocl.createOCLHelper();
 		if (context instanceof EObject) {
 			EClass eClass = ((EObject)context).eClass();
-			Type pivotType = metaModelManager.getPivotType(eClass.getName());
+			String name = eClass.getName();
+			assert name != null;
+			Type pivotType = metaModelManager.getPivotType(name);
 			if (pivotType == null) {
 				Resource resource = eClass.eResource();
-				Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(resource, metaModelManager);
-				pivotType = ecore2Pivot.getCreated(Type.class, eClass);
+				if (resource != null) {
+					Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(resource, metaModelManager);
+					pivotType = ecore2Pivot.getCreated(Type.class, eClass);
+				}
 			}
-			helper.setContext(pivotType);
+			if (pivotType != null) {
+				helper.setContext(pivotType);
+			}
 		}
 		return helper.createQuery(oclString);
 	}
@@ -271,16 +288,14 @@ public class MarkupToHTML extends MarkupSwitch<HTMLBuffer>
 		return s;
 	}
 
-	protected OCL getOCL() {
-		if (ocl == null) {
+	protected @NonNull OCL getOCL() {
+		OCL ocl2 = ocl;
+		if (ocl2 == null) {
 			Registry packageRegistry = null; //resourceSet.getPackageRegistry();
 			PivotEnvironmentFactory envFactory = new PivotEnvironmentFactory(packageRegistry, metaModelManager);
-			ocl = OCL.newInstance(envFactory);
-			if (metaModelManager == null) {
-				metaModelManager = envFactory.getMetaModelManager();
-			}
+			ocl2 = ocl = OCL.newInstance(envFactory);
 		}
-		return ocl;
+		return ocl2;
 	}
 
 	@Override

@@ -16,7 +16,10 @@
  */
 package org.eclipse.ocl.examples.xtext.markup;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.markup.util.MarkupSwitch;
 
 /**
@@ -25,15 +28,17 @@ import org.eclipse.ocl.examples.xtext.markup.util.MarkupSwitch;
  */
 public class MarkupToTree extends MarkupSwitch<StringBuilder>
 {
-	public static String toString(MarkupElement element) {
+	public static @NonNull String toString(@NonNull MarkupElement element) {
 		MarkupToTree toString = new MarkupToTree();
-		return toString.doSwitch(element).toString();
+		String result = toString.doSwitch(element).toString();
+		assert result != null;
+		return result;
 	}
 	
-	protected final StringBuilder s = new StringBuilder();
+	protected final @NonNull StringBuilder s = new StringBuilder();
 	private int depth = 0;
 
-	protected void appendClass(EObject object) {
+	protected void appendClass(@NonNull EObject object) {
 		for (int i = 0; i < depth; i++) {
 			s.append("  ");
 		}
@@ -41,14 +46,14 @@ public class MarkupToTree extends MarkupSwitch<StringBuilder>
 		s.append(": ");
 	}
 
-	protected void appendIndented(MarkupElement object) {
+	protected void appendIndented(@NonNull MarkupElement object) {
 		s.append("\n");
 		depth++;
 		doSwitch(object);
 		depth--;
 	}
 
-	protected void appendIndented(Iterable<MarkupElement> objects) {
+	protected void appendIndented(@NonNull Iterable<MarkupElement> objects) {
 		s.append("\n");
 		depth++;
 		for (MarkupElement element : objects) {
@@ -59,22 +64,29 @@ public class MarkupToTree extends MarkupSwitch<StringBuilder>
 
 	@Override
 	public StringBuilder caseBulletElement(BulletElement object) {
+		assert object != null;
 		appendClass(object);
 		s.append(" ");
 		s.append(object.getLevel());
-		appendIndented(object.getElements());
+		List<MarkupElement> elements = object.getElements();
+		assert elements != null;
+		appendIndented(elements);
 		return s;
 	}
 	
 	@Override
 	public StringBuilder caseCompoundElement(CompoundElement object) {
+		assert object != null;
 		appendClass(object);
-		appendIndented(object.getElements());
+		List<MarkupElement> elements = object.getElements();
+		assert elements != null;
+		appendIndented(elements);
 		return s;
 	}
 
 	@Override
 	public StringBuilder caseFigureElement(FigureElement object) {
+		assert object != null;
 		appendClass(object);
 		s.append(" ");
 		s.append(object.getSrc());
@@ -90,6 +102,7 @@ public class MarkupToTree extends MarkupSwitch<StringBuilder>
 
 	@Override
 	public StringBuilder caseFigureRefElement(FigureRefElement object) {
+		assert object != null;
 		appendClass(object);
 		s.append(" ");
 		s.append(object.getRef().getDef());
@@ -99,24 +112,31 @@ public class MarkupToTree extends MarkupSwitch<StringBuilder>
 
 	@Override
 	public StringBuilder caseFontElement(FontElement object) {
+		assert object != null;
 		String font = object.getFont();
 		appendClass(object);
 		s.append(font);
-		appendIndented(object.getElements());
+		List<MarkupElement> elements = object.getElements();
+		assert elements != null;
+		appendIndented(elements);
 		return s;
 	}
 
 	@Override
 	public StringBuilder caseHeadingElement(HeadingElement object) {
+		assert object != null;
 		appendClass(object);
 		s.append(" ");
 		s.append(object.getLevel());
-		appendIndented(object.getElements());
+		List<MarkupElement> elements = object.getElements();
+		assert elements != null;
+		appendIndented(elements);
 		return s;
 	}
 
 	@Override
 	public StringBuilder caseNewLineElement(NewLineElement object) {
+		assert object != null;
 		appendClass(object);
 		s.append(object.getText().replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t"));
 		s.append("\n");
@@ -125,6 +145,7 @@ public class MarkupToTree extends MarkupSwitch<StringBuilder>
 
 	@Override
 	public StringBuilder caseTextElement(TextElement object) {
+		assert object != null;
 		appendClass(object);
 		for (String text : object.getText()) {
 			s.append(text.replace("\t", "\\t"));
@@ -135,6 +156,7 @@ public class MarkupToTree extends MarkupSwitch<StringBuilder>
 
 	@Override
 	public StringBuilder defaultCase(EObject object) {
+		assert object != null;
 		appendClass(object);
 		s.append("\n");
 		return s;

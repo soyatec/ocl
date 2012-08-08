@@ -26,15 +26,19 @@ public class BaseURIEditorOpener extends GlobalURIEditorOpener
 {
 	@Override
 	public IEditorPart open(URI uri, boolean select) {
-		if (PivotUtil.isPivotURI(uri)) {
-			uri = PivotUtil.getNonPivotURI(uri);		// FIXME map AST to CST URI too
+		if (uri != null) {
+			if (PivotUtil.isPivotURI(uri)) {
+				uri = PivotUtil.getNonPivotURI(uri);		// FIXME map AST to CST URI too
+			}
 		}
 		return super.open(uri, select);
 	}
 
 	@Override
 	public IEditorPart open(URI referenceOwnerURI, EReference reference, int indexInList, boolean select) {
-		referenceOwnerURI = PivotUtil.isPivotURI(referenceOwnerURI) ? PivotUtil.getNonPivotURI(referenceOwnerURI) : referenceOwnerURI;
+		if (referenceOwnerURI != null) {
+			referenceOwnerURI = PivotUtil.isPivotURI(referenceOwnerURI) ? PivotUtil.getNonPivotURI(referenceOwnerURI) : referenceOwnerURI;
+		}
 		return super.open(referenceOwnerURI, reference, indexInList, select);
 	}
 }
