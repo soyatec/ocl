@@ -31,6 +31,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.plugin.OCLExamplesCommonPlugin;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.uml.Pivot2UML;
@@ -82,12 +84,16 @@ public class OCLinEcoreDocument extends BaseDocument
 		}
 	}
 
-	protected XMLResource getPivotResouce() throws CoreException {
+	protected @Nullable XMLResource getPivotResouce() throws CoreException {
 		return readOnly(new IUnitOfWork<XMLResource, XtextResource>()
 			{
 				public XMLResource exec(XtextResource resource) throws Exception {
+					assert resource != null;
 					BaseCSResource csResource = (BaseCSResource)resource;
 					CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.findAdapter(csResource);
+					if (adapter == null) {
+						return null;
+					}
 					XMLResource pivotResource = (XMLResource) adapter.getPivotResource(csResource);
 					checkForErrors(pivotResource);
 					return pivotResource;
@@ -98,20 +104,25 @@ public class OCLinEcoreDocument extends BaseDocument
 	/**
 	 * Write the XMI representation of the Ecore to be saved.
 	 */
-	public void saveAsEcore(final Writer writer, final URI ecoreURI) throws IOException, CoreException {
+	public void saveAsEcore(final @NonNull Writer writer, final @NonNull URI ecoreURI) throws IOException, CoreException {
 		readOnly(new IUnitOfWork<Object, XtextResource>()
 			{
 				public Object exec(XtextResource resource) throws Exception {
+					assert resource != null;
 					XMLResource pivotResource = getPivotResouce();
-					CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.findAdapter((BaseCSResource)resource);
-					Resource csResource = adapter.getTarget();
-					checkForErrors(csResource);
-					XMLResource ecoreResource = Pivot2Ecore.createResource(adapter.getMetaModelManager(), pivotResource, ecoreURI, null);
-//					ResourceSetImpl resourceSet = new ResourceSetImpl();
-//					XMLResource ecoreResource = (XMLResource) resourceSet.createResource(ecoreURI);
-//					ecoreResource.getContents().addAll(ecoreContents);
-					ecoreResource.save(writer, null);
-					checkForErrors(ecoreResource);
+					if (pivotResource != null) {
+						CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.findAdapter((BaseCSResource)resource);
+						if (adapter != null) {
+							Resource csResource = adapter.getTarget();
+							checkForErrors(csResource);
+							XMLResource ecoreResource = Pivot2Ecore.createResource(adapter.getMetaModelManager(), pivotResource, ecoreURI, null);
+		//					ResourceSetImpl resourceSet = new ResourceSetImpl();
+		//					XMLResource ecoreResource = (XMLResource) resourceSet.createResource(ecoreURI);
+		//					ecoreResource.getContents().addAll(ecoreContents);
+							ecoreResource.save(writer, null);
+							checkForErrors(ecoreResource);
+						}
+					}
 					return null;
 				}
 			});
@@ -120,27 +131,34 @@ public class OCLinEcoreDocument extends BaseDocument
 	/**
 	 * Write the XMI representation of the Pivot to be saved.
 	 */
-	public void saveAsPivot(StringWriter writer) throws CoreException, IOException {
+	public void saveAsPivot(@NonNull StringWriter writer) throws CoreException, IOException {
 		XMLResource pivotResource = getPivotResouce();
-		pivotResource.save(writer, null);
+		if (pivotResource != null) {
+			pivotResource.save(writer, null);
+		}
 	}
 
 	/**
 	 * Write the XMI representation of the UML to be saved.
 	 */
-	public void saveAsUML(final Writer writer, final URI umlURI) throws IOException, CoreException {
+	public void saveAsUML(final @NonNull Writer writer, final @NonNull URI umlURI) throws IOException, CoreException {
 		readOnly(new IUnitOfWork<Object, XtextResource>()
 			{
 				public Object exec(XtextResource resource) throws Exception {
+					assert resource != null;
 					XMLResource pivotResource = getPivotResouce();
-					CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.findAdapter((BaseCSResource)resource);
-					List<EObject> umlContents = Pivot2UML.createResource(adapter.getMetaModelManager(), pivotResource);
-					ResourceSetImpl resourceSet = new ResourceSetImpl();
-	//				URI umlURI = URI.createURI("internal.uml");
-					UMLResource umlResource = (UMLResource) resourceSet.createResource(umlURI);
-					umlResource.getContents().addAll(umlContents);
-					checkForErrors(umlResource);
-					umlResource.save(writer, null);
+					if (pivotResource != null) {
+						CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.findAdapter((BaseCSResource)resource);
+						if (adapter != null) {
+							List<EObject> umlContents = Pivot2UML.createResource(adapter.getMetaModelManager(), pivotResource);
+							ResourceSetImpl resourceSet = new ResourceSetImpl();
+			//				URI umlURI = URI.createURI("internal.uml");
+							UMLResource umlResource = (UMLResource) resourceSet.createResource(umlURI);
+							umlResource.getContents().addAll(umlContents);
+							checkForErrors(umlResource);
+							umlResource.save(writer, null);
+						}
+					}
 					return null;
 				}
 			});
@@ -149,17 +167,22 @@ public class OCLinEcoreDocument extends BaseDocument
 	/**
 	 * Write the XMI representation of the Ecore to be saved.
 	 */
-	public void saveInEcore(final Writer writer, final URI ecoreURI) throws IOException, CoreException {
+	public void saveInEcore(final @NonNull Writer writer, final @NonNull URI ecoreURI) throws IOException, CoreException {
 		readOnly(new IUnitOfWork<Object, XtextResource>()
 			{
 				public Object exec(XtextResource resource) throws Exception {
+					assert resource != null;
 					XMLResource pivotResource = getPivotResouce();
-					CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.findAdapter((BaseCSResource)resource);
-					Map<String,Object> options = new HashMap<String,Object>();
-					options.put(Pivot2Ecore.PRIMITIVE_TYPES_URI_PREFIX, "primitives.ecore#//");
-					XMLResource ecoreResource = Pivot2Ecore.createResource(adapter.getMetaModelManager(), pivotResource, ecoreURI, options);
-					ecoreResource.save(writer, null);
-					checkForErrors(ecoreResource);
+					if (pivotResource != null) {
+						CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.findAdapter((BaseCSResource)resource);
+						if (adapter != null) {
+							Map<String,Object> options = new HashMap<String,Object>();
+							options.put(Pivot2Ecore.PRIMITIVE_TYPES_URI_PREFIX, "primitives.ecore#//");
+							XMLResource ecoreResource = Pivot2Ecore.createResource(adapter.getMetaModelManager(), pivotResource, ecoreURI, options);
+							ecoreResource.save(writer, null);
+							checkForErrors(ecoreResource);
+						}
+					}
 					return null;
 				}
 			});

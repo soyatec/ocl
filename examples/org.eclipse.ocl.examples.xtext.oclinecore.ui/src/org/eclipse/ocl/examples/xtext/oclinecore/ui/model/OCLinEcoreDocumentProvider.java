@@ -34,6 +34,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -136,7 +137,10 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider
 			StringWriter xmlWriter = new StringWriter();
 			try {
 				URI uri = EditUIUtil.getURI((IFileEditorInput)element);
-				if (PERSIST_AS_ECORE.equals(saveAs)) {
+				if (uri == null) {
+					log.warn("No URI");
+				}
+				else if (PERSIST_AS_ECORE.equals(saveAs)) {
 					((OCLinEcoreDocument) document).saveAsEcore(xmlWriter, uri);
 				}
 				else if (PERSIST_IN_ECORE.equals(saveAs)) {
@@ -258,6 +262,7 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider
 
 	@Override
 	protected void loadResource(XtextResource resource, String document, String encoding) throws CoreException {
+		assert resource != null;
 		MetaModelManagerResourceAdapter.getAdapter(resource, metaModelManager);
 		super.loadResource(resource, document, encoding);
 	}
@@ -310,16 +315,19 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider
 				}
 //				RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, "", ecoreResource);		
 				Resource pivotResource = null;
-				if (xmiResource.getContents().size() > 0) {
-					EObject xmiRoot = xmiResource.getContents().get(0);
+				EList<EObject> contents = xmiResource.getContents();
+				if (contents.size() > 0) {
+					EObject xmiRoot = contents.get(0);
 					if (xmiRoot instanceof EPackage) {
 						Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(xmiResource, metaModelManager);
 						Root pivotRoot = ecore2Pivot.getPivotRoot();
 						pivotResource = pivotRoot.eResource();
-						if (reload) {
-							ecore2Pivot.update(pivotResource, xmiResource.getContents());
+						if (pivotResource != null) {
+							if (reload) {
+								ecore2Pivot.update(pivotResource, contents);
+							}
+							diagnoseErrors(pivotResource);		// FIXME On reload, this throws a CoreException which loses the user's source text
 						}
-						diagnoseErrors(pivotResource);		// FIXME On reload, this throws a CoreException which loses the user's source text
 						persistAs = PERSIST_AS_ECORE;
 					}
 					else if (xmiRoot instanceof org.eclipse.ocl.examples.pivot.Package) {
@@ -333,6 +341,9 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider
 						persistAs = PERSIST_AS_OCLINECORE;		// FIXME
 					}
 					// FIXME general extensibility
+				}
+				if (pivotResource == null) {
+					throw new CoreException(new Status(IStatus.ERROR, OCLExamplesCommonPlugin.PLUGIN_ID, "Failed to load"));
 				}
 //				
 				ResourceSetImpl csResourceSet = (ResourceSetImpl)resourceSet;
