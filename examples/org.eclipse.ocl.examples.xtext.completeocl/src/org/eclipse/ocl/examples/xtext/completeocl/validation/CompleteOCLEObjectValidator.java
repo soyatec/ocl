@@ -14,6 +14,7 @@
  */
 package org.eclipse.ocl.examples.xtext.completeocl.validation;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -28,8 +29,11 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -48,16 +52,16 @@ public class CompleteOCLEObjectValidator extends BasicCompleteOCLEObjectValidato
 {	
 	private static final Logger logger = Logger.getLogger(CompleteOCLEObjectValidator.class);
 
-	protected final MetaModelManager metaModelManager;
-	protected final EPackage ePackage;
-	protected final URI oclURI;
+	protected final @NonNull MetaModelManager metaModelManager;
+	protected final @NonNull EPackage ePackage;
+	protected final @NonNull URI oclURI;
 	private Ecore2Pivot ecore2Pivot = null;
 	
 	/**
 	 * Construct a validator to apply the CompleteOCL invariants from oclURI to ePackage.
 	 */
 	@Deprecated
-	public CompleteOCLEObjectValidator(EPackage ePackage, URI oclURI) {
+	public CompleteOCLEObjectValidator(@NonNull EPackage ePackage, @NonNull URI oclURI) {
 		this(ePackage, oclURI, null);
 	}
 	
@@ -65,11 +69,14 @@ public class CompleteOCLEObjectValidator extends BasicCompleteOCLEObjectValidato
 	 * Construct a validator to apply the CompleteOCL invariants from oclURI to ePackage
 	 * for the meta-models managed by metaModelManager.
 	 */
-	public CompleteOCLEObjectValidator(EPackage ePackage, URI oclURI, MetaModelManager metaModelManager) {
+	public CompleteOCLEObjectValidator(@NonNull EPackage ePackage, @NonNull URI oclURI, @Nullable MetaModelManager metaModelManager) {
 		this.metaModelManager = metaModelManager != null ? metaModelManager : new MetaModelManager();
 		this.ePackage = ePackage;
 		this.oclURI = oclURI;
-		install(ePackage.eResource().getResourceSet(), metaModelManager);
+		ResourceSet resourceSet = ePackage.eResource().getResourceSet();
+		if (resourceSet != null) {
+			install(resourceSet, this.metaModelManager);
+		}
 	}
 	
 	@Override
@@ -87,16 +94,23 @@ public class CompleteOCLEObjectValidator extends BasicCompleteOCLEObjectValidato
 	 */
 	public boolean initialize() {
 		Resource ecoreResource = ePackage.eResource();
+		if (ecoreResource == null) {
+			return false;
+		}
 		ecore2Pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
-		String message = PivotUtil.formatResourceDiagnostics(ecoreResource.getErrors(), "", "\n");
+		List<Diagnostic> errors = ecoreResource.getErrors();
+		assert errors != null;
+		String message = PivotUtil.formatResourceDiagnostics(errors, "", "\n");
 		if (message != null) {
 			logger.error("Failed to load Ecore '" + ecoreResource.getURI() + message);
 			return false;
 		}
 		Root pivotRoot = ecore2Pivot.getPivotRoot();
-		message = PivotUtil.formatResourceDiagnostics(pivotRoot.eResource().getErrors(), "", "\n");
+		errors = pivotRoot.eResource().getErrors();
+		assert errors != null;
+		message = PivotUtil.formatResourceDiagnostics(errors, "", "\n");
 		if (message != null) {
 			logger.error("Failed to load Pivot from '" + ecoreResource.getURI() + message);
 			return false;
@@ -123,13 +137,17 @@ public class CompleteOCLEObjectValidator extends BasicCompleteOCLEObjectValidato
 				throw e;
 			}
 		}
-		message = PivotUtil.formatResourceDiagnostics(xtextResource.getErrors(), "", "\n");
+		errors = xtextResource.getErrors();
+		assert errors != null;
+		message = PivotUtil.formatResourceDiagnostics(errors, "", "\n");
 		if (message != null) {
 			logger.error("Failed to load '" + oclURI + message);
 			return false;
 		}
 		Resource pivotResource = xtextResource.getPivotResource(metaModelManager);
-		message = PivotUtil.formatResourceDiagnostics(pivotResource.getErrors(), "", "\n");
+		errors = pivotResource.getErrors();
+		assert errors != null;
+		message = PivotUtil.formatResourceDiagnostics(errors, "", "\n");
 		if (message != null) {
 			logger.error("Failed to load Pivot from '" + oclURI + message);
 			return false;
@@ -138,13 +156,16 @@ public class CompleteOCLEObjectValidator extends BasicCompleteOCLEObjectValidato
 	}
 
 	@Override
-	protected boolean validatePivot(EClassifier eClassifier, Object object,
-			DiagnosticChain diagnostics, Map<Object, Object> context) {
+	protected boolean validatePivot(@NonNull EClassifier eClassifier, @NonNull Object object,
+			@Nullable DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (ecore2Pivot == null) {
 			initialize();	
 			Resource eResource = ((EObject)object).eResource();
 			if (eResource != null) {
-				install(eResource.getResourceSet(), metaModelManager);
+				ResourceSet resourceSet = eResource.getResourceSet();
+				if (resourceSet != null) {
+					install(resourceSet, metaModelManager);
+				}
 			}
 		}
 		return super.validatePivot(eClassifier, object, diagnostics, context);

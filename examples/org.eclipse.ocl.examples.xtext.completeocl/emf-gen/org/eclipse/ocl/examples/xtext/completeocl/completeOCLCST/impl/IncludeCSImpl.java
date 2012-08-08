@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.examples.pivot.Namespace;
 
@@ -191,7 +192,7 @@ public class IncludeCSImpl extends NamedElementCSImpl implements IncludeCS
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(BaseCSVisitor<R> visitor) {
-		return (R) visitor.getAdapter(CompleteOCLCSVisitor.class).visitIncludeCS(this);
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitIncludeCS(this);
 	}
 } //IncludeCSImpl

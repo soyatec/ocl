@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.xtext.completeocl.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -26,10 +27,10 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PackageDeclarat
 
 public class PackageDeclarationCSAttribution extends AbstractAttribution
 {
-	public static final PackageDeclarationCSAttribution INSTANCE = new PackageDeclarationCSAttribution();
+	public static final @NonNull PackageDeclarationCSAttribution INSTANCE = new PackageDeclarationCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		PackageDeclarationCS targetElement = (PackageDeclarationCS)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
 		if (containmentFeature == CompleteOCLCSTPackage.Literals.PACKAGE_DECLARATION_CS__CONTEXTS) {

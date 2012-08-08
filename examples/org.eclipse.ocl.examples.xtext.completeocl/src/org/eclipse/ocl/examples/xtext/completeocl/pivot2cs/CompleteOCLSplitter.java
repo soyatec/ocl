@@ -27,6 +27,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.utils.ClassUtils;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -47,7 +49,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
  */
 public class CompleteOCLSplitter
 {
-	public static Resource separate(MetaModelManager metaModelManager, Resource resource) {
+	public static @Nullable Resource separate(@NonNull MetaModelManager metaModelManager, @NonNull Resource resource) {
 		List<Constraint> allConstraints = new ArrayList<Constraint>();
 		for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
@@ -64,21 +66,23 @@ public class CompleteOCLSplitter
 		URI uri = resource.getURI();
 		URI oclURI = uri.trimFileExtension().appendFileExtension("ocl.pivot");
 		Resource oclResource = resource.getResourceSet().createResource(oclURI);	
-		Separator separator = new Separator(metaModelManager, oclResource);
-		for (Constraint constraint : allConstraints) {
-			separator.doSwitch(constraint);
+		if (oclResource != null) {
+			Separator separator = new Separator(metaModelManager, oclResource);
+			for (Constraint constraint : allConstraints) {
+				separator.doSwitch(constraint);
+			}
+			metaModelManager.installResource(oclResource);
 		}
-		metaModelManager.installResource(oclResource);
 		return oclResource;
 	}
 	
 	public static class Separator extends PivotSwitch<EObject>
 	{
-		protected final MetaModelManager metaModelManager;
-		protected final Resource separateResource;
-		private final Map<NamedElement, NamedElement> map = new HashMap<NamedElement, NamedElement>();
+		protected final @NonNull MetaModelManager metaModelManager;
+		protected final @NonNull Resource separateResource;
+		private final @NonNull Map<NamedElement, NamedElement> map = new HashMap<NamedElement, NamedElement>();
 
-		public Separator(MetaModelManager metaModelManager, Resource separateResource) {
+		public Separator(@NonNull MetaModelManager metaModelManager, @NonNull Resource separateResource) {
 			this.metaModelManager = metaModelManager;
 			this.separateResource = separateResource;
 		}

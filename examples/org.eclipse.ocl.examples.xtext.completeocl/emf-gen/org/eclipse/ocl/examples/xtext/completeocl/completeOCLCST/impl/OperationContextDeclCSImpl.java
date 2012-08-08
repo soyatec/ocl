@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
@@ -254,8 +255,8 @@ public class OperationContextDeclCSImpl extends FeatureContextDeclCSImpl impleme
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(BaseCSVisitor<R> visitor) {
-		return (R) visitor.getAdapter(CompleteOCLCSVisitor.class).visitOperationContextDeclCS(this);
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitOperationContextDeclCS(this);
 	}
 
 	/**

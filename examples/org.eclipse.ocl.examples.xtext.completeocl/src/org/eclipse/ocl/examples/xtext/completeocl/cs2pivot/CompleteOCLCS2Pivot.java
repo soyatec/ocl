@@ -33,7 +33,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLCS2Pivot
 
 public class CompleteOCLCS2Pivot extends EssentialOCLCS2Pivot
 {	
-	public static MetaModelManager.Factory FACTORY = new Factory();
+	public static @NonNull MetaModelManager.Factory FACTORY = new Factory();
 
 	private static final class Factory implements MetaModelManager.Factory
 	{
@@ -41,21 +41,18 @@ public class CompleteOCLCS2Pivot extends EssentialOCLCS2Pivot
 			MetaModelManager.addFactory(this);
 		}
 
-		public boolean canHandle(Resource resource) {
+		public boolean canHandle(@NonNull Resource resource) {
 			return resource instanceof CompleteOCLCSResource;
 		}
 
-		public void configure(ResourceSet resourceSet) {}
+		public void configure(@NonNull ResourceSet resourceSet) {}
 
-		public URI getPackageURI(EObject eObject) {
+		public URI getPackageURI(@NonNull EObject eObject) {
 			return null;
 		}
 
-		public @Nullable Element importFromResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource resource, @NonNull URI uri) {
+		public @Nullable Element importFromResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource resource, @Nullable URI uri) {
 			Resource pivotResource = ((CompleteOCLCSResource)resource).getPivotResource(metaModelManager);
-			if (pivotResource == null) {
-				return null;
-			}
 			List<EObject> contents = pivotResource.getContents();
 			if (contents.size() <= 0) {
 				return null;
@@ -69,27 +66,27 @@ public class CompleteOCLCS2Pivot extends EssentialOCLCS2Pivot
 		}
 	}
 		
-	public CompleteOCLCS2Pivot(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, MetaModelManager metaModelManager) {
+	public CompleteOCLCS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, @NonNull MetaModelManager metaModelManager) {
 		super(cs2pivotResourceMap, metaModelManager);
 	}
 
 	@Override
-	protected CompleteOCLContainmentVisitor createContainmentVisitor(CS2PivotConversion converter) {
+	protected @NonNull CompleteOCLContainmentVisitor createContainmentVisitor(@NonNull CS2PivotConversion converter) {
 		return new CompleteOCLContainmentVisitor(converter);
 	}
 
 	@Override
-	protected CompleteOCLLeft2RightVisitor createLeft2RightVisitor(CS2PivotConversion converter) {
+	protected @NonNull CompleteOCLLeft2RightVisitor createLeft2RightVisitor(@NonNull CS2PivotConversion converter) {
 		return new CompleteOCLLeft2RightVisitor(converter);
 	}
 
 	@Override
-	protected CompleteOCLPostOrderVisitor createPostOrderVisitor(CS2PivotConversion converter) {
+	protected @NonNull CompleteOCLPostOrderVisitor createPostOrderVisitor(@NonNull CS2PivotConversion converter) {
 		return new CompleteOCLPostOrderVisitor(converter);
 	}
 
 	@Override
-	protected CompleteOCLPreOrderVisitor createPreOrderVisitor(CS2PivotConversion converter) {
+	protected @NonNull CompleteOCLPreOrderVisitor createPreOrderVisitor(@NonNull CS2PivotConversion converter) {
 		return new CompleteOCLPreOrderVisitor(converter);
 	}
 }

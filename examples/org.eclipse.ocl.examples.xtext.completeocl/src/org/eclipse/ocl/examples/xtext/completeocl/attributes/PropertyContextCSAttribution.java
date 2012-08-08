@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.xtext.completeocl.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
@@ -28,26 +29,20 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContext
 
 public class PropertyContextCSAttribution extends AbstractAttribution
 {
-	public static final PropertyContextCSAttribution INSTANCE = new PropertyContextCSAttribution();
+	public static final @NonNull PropertyContextCSAttribution INSTANCE = new PropertyContextCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		PropertyContextDeclCS targetElement = (PropertyContextDeclCS)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
 		if (containmentFeature == CompleteOCLCSTPackage.Literals.CONTEXT_DECL_CS__RULES) {
 			Property property = targetElement.getProperty();
 			if (property != null) {
 				Type type = property.getOwningType();
-//				MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-				environmentView.addAllOperations(type, Boolean.FALSE);
-				environmentView.addAllProperties(type, Boolean.FALSE);
-//				if (!environmentView.hasFinalResult()) {
-//					Set<Type> alreadyVisitedTypes = new HashSet<Type>();
-//					org.eclipse.ocl.examples.pivot.Class unspecializedTarget = PivotUtil.getUnspecializedTemplateableElement(target);	// FIXME
-//					for (Type superClass : metaModelManager.getSuperClasses(type)) {
-//						environmentView.addAllContents(type, scopeView, superClass, Boolean.FALSE, alreadyVisitedTypes);
-//					}
-//				}
+				if (type != null) {
+					environmentView.addAllOperations(type, Boolean.FALSE);
+					environmentView.addAllProperties(type, Boolean.FALSE);
+				}
 			}
 		}
 		return scopeView.getParent();

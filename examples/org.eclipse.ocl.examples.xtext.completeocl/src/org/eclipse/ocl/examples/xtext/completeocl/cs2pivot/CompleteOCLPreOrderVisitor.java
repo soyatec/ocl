@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.xtext.completeocl.cs2pivot;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS;
@@ -26,32 +27,32 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContext
 
 public class CompleteOCLPreOrderVisitor extends AbstractCompleteOCLPreOrderVisitor
 {	
-	public CompleteOCLPreOrderVisitor(CS2PivotConversion context) {
+	public CompleteOCLPreOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 
 	@Override
-	public Continuation<?> visitClassifierContextDeclCS(ClassifierContextDeclCS csElement) {
+	public Continuation<?> visitClassifierContextDeclCS(@NonNull ClassifierContextDeclCS csElement) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitDefCS(DefCS object) {
+	public Continuation<?> visitDefCS(@NonNull DefCS object) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitOperationContextDeclCS(OperationContextDeclCS csElement) {
+	public Continuation<?> visitOperationContextDeclCS(@NonNull OperationContextDeclCS csElement) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitPackageDeclarationCS(PackageDeclarationCS csElement) {
+	public Continuation<?> visitPackageDeclarationCS(@NonNull PackageDeclarationCS csElement) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitPropertyContextDeclCS(PropertyContextDeclCS csElement) {
+	public Continuation<?> visitPropertyContextDeclCS(@NonNull PropertyContextDeclCS csElement) {
 		return null;
 	}
 }

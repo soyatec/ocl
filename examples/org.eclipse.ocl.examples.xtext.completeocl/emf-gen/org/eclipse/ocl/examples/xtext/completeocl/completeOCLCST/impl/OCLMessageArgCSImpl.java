@@ -21,6 +21,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypeCS;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage;
@@ -195,7 +196,7 @@ public class OCLMessageArgCSImpl extends ExpCSImpl implements OCLMessageArgCS {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(BaseCSVisitor<R> visitor) {
-		return (R) visitor.getAdapter(CompleteOCLCSVisitor.class).visitOCLMessageArgCS(this);
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitOCLMessageArgCS(this);
 	}
 } //OclMessageArgCSImpl

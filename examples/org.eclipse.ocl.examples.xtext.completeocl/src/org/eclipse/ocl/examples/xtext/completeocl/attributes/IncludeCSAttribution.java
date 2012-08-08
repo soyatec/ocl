@@ -25,7 +25,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
@@ -43,7 +46,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
 public class IncludeCSAttribution extends AbstractAttribution implements UnresolvedProxyMessageProvider
 {
-	public static final IncludeCSAttribution INSTANCE = new IncludeCSAttribution();
+	public static final @NonNull IncludeCSAttribution INSTANCE = new IncludeCSAttribution();
 
 	private static class IncludeAdapter extends AdapterImpl
 	{
@@ -51,18 +54,65 @@ public class IncludeCSAttribution extends AbstractAttribution implements Unresol
 		private Element importedElement = null;
 		private Throwable throwable = null;
 	
-		public ScopeView computeLookup(IncludeCS targetElement, EnvironmentView environmentView, ScopeView scopeView) {
+		public ScopeView computeLookup(@NonNull IncludeCS targetElement, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 			EReference targetReference = scopeView.getTargetReference();
 			if (targetReference == CompleteOCLCSTPackage.Literals.INCLUDE_CS__NAMESPACE) {
-				String name = environmentView.getName();
-				if (name != null) {
-					importComplement(targetElement, environmentView);
-				}
-				if (importedElement != null) {
-					Resource importedResource = importedElement.eResource();
+//				String name = environmentView.getName();
+//				if (name != null) {
+				importComplement(targetElement, environmentView);
+//				}
+				Element importedElement2 = importedElement;
+				if (importedElement2 != null) {
+					Resource importedResource = importedElement2.eResource();
 					List<Resource.Diagnostic> errors = importedResource.getErrors();
 					if (errors.size() == 0) {
-						environmentView.addElement(name, importedElement);
+//						environmentView.addElement(name, importedElement);
+						if (importedElement2 instanceof Root) {
+							Root root = (Root)importedElement2;
+							String externalURI = root.getExternalURI();
+							if (externalURI != null) {
+								String name = environmentView.getName();
+								if (name != null) {
+									URI envURI = URI.createURI(name);
+									URI extURI = URI.createURI(externalURI);
+									URI resolvedURI = envURI.resolve(extURI);
+									if (resolvedURI.equals(extURI)) {
+										environmentView.addElement(name, root);
+									}
+								}
+							}
+						}
+/*						else {
+							if (importedElement2 instanceof DomainNamedElement) {
+								String name = ((DomainNamedElement)importedElement2).getName();
+								if (name != null) {
+									environmentView.addElement(name, importedElement2);
+								}
+							}
+							if (importedElement2 instanceof DomainPackage) {
+								String nsURI = ((DomainPackage)importedElement2).getNsURI();
+								if (nsURI != null) {
+									environmentView.addElement(nsURI, importedElement2);
+									String suffixedName = nsURI + "#/";
+									if (suffixedName.equals(environmentView.getName())) {					// FIXME deprecated compatibility
+										environmentView.addElement(suffixedName, importedElement2);
+									}
+								}
+							}
+							if (importedElement2 instanceof PivotObjectImpl) {
+								EObject originalElement = ((PivotObjectImpl)importedElement2).getTarget();
+								if (originalElement != null) {
+									EObject eContainer = EcoreUtil.getRootContainer(importedElement2);
+									if (eContainer instanceof Root) {
+										String name = ((Root)eContainer).getName();
+										if (name != null) {
+											String uriFragment = originalElement.eResource().getURIFragment(originalElement);
+											environmentView.addElement(name + '#' + uriFragment, importedElement2);
+										}
+									}
+								}
+							}
+						} */
 					}
 				}
 				return null;
@@ -83,19 +133,21 @@ public class IncludeCSAttribution extends AbstractAttribution implements Unresol
 			return throwable != null ? throwable.getMessage() : null;
 		}
 	
-		protected void importComplement(IncludeCS target, EnvironmentView environmentView) {
+		protected void importComplement(@NonNull IncludeCS target, @NonNull EnvironmentView environmentView) {
 			String name = environmentView.getName();
 			if (name == null) {
 				return;
 			}
 			BaseCSResource csResource = (BaseCSResource) target.eResource();
+			URI uri2;
 			try {
 				URI newURI = URI.createURI(name);
+				assert newURI != null;
 				newURI = csResource.resolve(newURI);
 				if (newURI.equals(uri)) {
 					return;
 				}
-				uri = newURI;					// Lock out recursive attempt from EcoreUtil.resolveProxy
+				uri2 = uri = newURI;					// Lock out recursive attempt from EcoreUtil.resolveProxy
 				importedElement = null;
 				throwable = null;
 			} catch (WrappedException e) {
@@ -107,19 +159,19 @@ public class IncludeCSAttribution extends AbstractAttribution implements Unresol
 			}
 			try {
 				MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-				importedElement = metaModelManager.loadResource(uri, target.getName(), csResource.getResourceSet());				
+				importedElement = metaModelManager.loadResource(uri2, target.getName(), csResource.getResourceSet());				
 				Resource importedResource = importedElement.eResource();
 				List<Resource.Diagnostic> warnings = importedResource.getWarnings();
 				if (warnings.size() > 0) {
 					INode node = NodeModelUtils.getNode(target);
-					String errorMessage = PivotUtil.formatResourceDiagnostics(warnings, NLS.bind(OCLMessages.WarningsInURI, uri), "\n\t");
+					String errorMessage = PivotUtil.formatResourceDiagnostics(warnings, DomainUtil.bind(OCLMessages.WarningsInURI, uri2), "\n\t");
 					Resource.Diagnostic resourceDiagnostic = new ValidationDiagnostic(node, errorMessage);
 					csResource.getWarnings().add(resourceDiagnostic);
 				}
 				List<Resource.Diagnostic> errors = importedResource.getErrors();
 				if (errors.size() > 0) {
 					INode node = NodeModelUtils.getNode(target);
-					String errorMessage = PivotUtil.formatResourceDiagnostics(errors, NLS.bind(OCLMessages.ErrorsInURI, uri), "\n\t");
+					String errorMessage = PivotUtil.formatResourceDiagnostics(errors, DomainUtil.bind(OCLMessages.ErrorsInURI, uri2), "\n\t");
 					Resource.Diagnostic resourceDiagnostic = new ValidationDiagnostic(node, errorMessage);
 					csResource.getErrors().add(resourceDiagnostic);
 				}
@@ -137,7 +189,7 @@ public class IncludeCSAttribution extends AbstractAttribution implements Unresol
 	}
 	
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		IncludeCS targetElement = (IncludeCS)target;
 		IncludeAdapter adapter = PivotUtil.getAdapter(IncludeAdapter.class, targetElement);
 		if (adapter == null) {
@@ -147,11 +199,12 @@ public class IncludeCSAttribution extends AbstractAttribution implements Unresol
 		return adapter.computeLookup(targetElement, environmentView, scopeView);
 	}
 
-	public EReference getEReference() {
-		return CompleteOCLCSTPackage.Literals.INCLUDE_CS__NAMESPACE;
+	public @NonNull EReference getEReference() {
+		@SuppressWarnings("null") @NonNull EReference eReference = CompleteOCLCSTPackage.Literals.INCLUDE_CS__NAMESPACE;
+		return eReference;
 	}
 
-	public String getMessage(EObject context, String linkText) {
+	public String getMessage(@NonNull EObject context, @NonNull String linkText) {
 		IncludeAdapter adapter = PivotUtil.getAdapter(IncludeAdapter.class, context);
 		if (adapter != null) {
 			String message = adapter.getMessage();

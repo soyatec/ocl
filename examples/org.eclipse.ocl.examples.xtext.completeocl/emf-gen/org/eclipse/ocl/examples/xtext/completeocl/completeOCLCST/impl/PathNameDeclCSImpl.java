@@ -15,13 +15,16 @@
 package org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl;
 
 import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
@@ -206,18 +209,19 @@ public abstract class PathNameDeclCSImpl extends ModelElementCSImpl implements P
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(BaseCSVisitor<R> visitor) {
-		return (R) visitor.getAdapter(CompleteOCLCSVisitor.class).visitPathNameDeclCS(this);
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitPathNameDeclCS(this);
 	}
 
-	public Iterable<Element> getMorePivots() {
+	public @NonNull Iterable<Element> getMorePivots() {
 		if (pathName == null) {
-			return Collections.<Element>emptyList();
+			return MetaModelManager.EMPTY_ELEMENT_LIST;
 		}
 		Element pElement = pathName.getElement();
 		if (pElement == null) {
-			return Collections.<Element>emptyList();
+			return MetaModelManager.EMPTY_ELEMENT_LIST;
 		}
-		return Collections.<Element>singletonList(pElement);
+		@SuppressWarnings("null") @NonNull List<Element> singletonList = Collections.<Element>singletonList(pElement);
+		return singletonList;
 	}
 } //NamedElementDeclCSImpl

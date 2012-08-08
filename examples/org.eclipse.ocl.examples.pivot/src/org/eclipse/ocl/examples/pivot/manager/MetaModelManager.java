@@ -391,6 +391,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	public static final @NonNull List<Constraint> EMPTY_CONSTRAINT_LIST = Collections.<Constraint>emptyList();
 
 	@SuppressWarnings("null")
+	public static final @NonNull List<Element> EMPTY_ELEMENT_LIST = Collections.<Element>emptyList();
+
+	@SuppressWarnings("null")
 	public static final @NonNull List<Operation> EMPTY_OPERATION_LIST = Collections.<Operation>emptyList();
 
 	@SuppressWarnings("null")

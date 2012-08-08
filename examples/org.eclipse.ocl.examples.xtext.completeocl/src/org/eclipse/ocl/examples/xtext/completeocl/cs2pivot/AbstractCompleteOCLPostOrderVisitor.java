@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.xtext.completeocl.cs2pivot;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
 import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
@@ -27,95 +28,95 @@ public class AbstractCompleteOCLPostOrderVisitor
 	//
 	//	This file is maintained by copying from AbstractExtendingCompleteOCLCSVisitor and changing R to Continuation<?>.
 	//
-	protected AbstractCompleteOCLPostOrderVisitor(CS2PivotConversion context) {
+	protected AbstractCompleteOCLPostOrderVisitor(@NonNull CS2PivotConversion context) {
 	    super(context);
 	}	
 
-	public Continuation<?> visitBodyCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.BodyCS object) {
+	public Continuation<?> visitBodyCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.BodyCS object) {
 		return visitContextConstraintCS(object);
 	}
 
-	public Continuation<?> visitClassifierContextDeclCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS object) {
+	public Continuation<?> visitClassifierContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS object) {
 		return visitContextDeclCS(object);
 	}
 
-	public Continuation<?> visitCompleteOCLDocumentCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLDocumentCS object) {
+	public Continuation<?> visitCompleteOCLDocumentCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLDocumentCS object) {
 		return visitPackageCS(object);
 	}
 
-	public Continuation<?> visitContextConstraintCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextConstraintCS object) {
+	public Continuation<?> visitContextConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextConstraintCS object) {
 		return visitConstraintCS(object);
 	}
 
-	public Continuation<?> visitContextDeclCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextDeclCS object) {
+	public Continuation<?> visitContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextDeclCS object) {
 		return visitPathNameDeclCS(object);
 	}
 
-	public Continuation<?> visitContextSpecificationCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextSpecificationCS object) {
+	public Continuation<?> visitContextSpecificationCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextSpecificationCS object) {
 		return visitExpSpecificationCS(object);
 	}
 
-	public Continuation<?> visitDefCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS object) {
+	public Continuation<?> visitDefCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS object) {
 		return visitContextConstraintCS(object);
 	}
 
-	public Continuation<?> visitDefFeatureCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefFeatureCS object) {
+	public Continuation<?> visitDefFeatureCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefFeatureCS object) {
 		return visitTypedElementCS(object);
 	}
 
-	public Continuation<?> visitDefOperationCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefOperationCS object) {
+	public Continuation<?> visitDefOperationCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefOperationCS object) {
 		return visitDefFeatureCS(object);
 	}
 
-	public Continuation<?> visitDefPropertyCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefPropertyCS object) {
+	public Continuation<?> visitDefPropertyCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefPropertyCS object) {
 		return visitDefFeatureCS(object);
 	}
 
-	public Continuation<?> visitDerCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DerCS object) {
+	public Continuation<?> visitDerCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DerCS object) {
 		return visitContextConstraintCS(object);
 	}
 
-	public Continuation<?> visitFeatureContextDeclCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.FeatureContextDeclCS object) {
+	public Continuation<?> visitFeatureContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.FeatureContextDeclCS object) {
 		return visitContextDeclCS(object);
 	}
 
-	public Continuation<?> visitIncludeCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.IncludeCS object) {
+	public Continuation<?> visitIncludeCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.IncludeCS object) {
 		return visitNamedElementCS(object);
 	}
 
-	public Continuation<?> visitInitCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InitCS object) {
+	public Continuation<?> visitInitCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InitCS object) {
 		return visitContextConstraintCS(object);
 	}
 
-	public Continuation<?> visitInvCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InvCS object) {
+	public Continuation<?> visitInvCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InvCS object) {
 		return visitContextConstraintCS(object);
 	}
 
-	public Continuation<?> visitOCLMessageArgCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS object) {
+	public Continuation<?> visitOCLMessageArgCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS object) {
 		return visitExpCS(object);
 	}
 
-	public Continuation<?> visitOperationContextDeclCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS object) {
+	public Continuation<?> visitOperationContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS object) {
 		return visitFeatureContextDeclCS(object);
 	}
 
-	public Continuation<?> visitPackageDeclarationCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PackageDeclarationCS object) {
+	public Continuation<?> visitPackageDeclarationCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PackageDeclarationCS object) {
 		return visitPathNameDeclCS(object);
 	}
 
-	public Continuation<?> visitPathNameDeclCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PathNameDeclCS object) {
+	public Continuation<?> visitPathNameDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PathNameDeclCS object) {
 		return visitModelElementCS(object);
 	}
 
-	public Continuation<?> visitPostCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PostCS object) {
+	public Continuation<?> visitPostCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PostCS object) {
 		return visitContextConstraintCS(object);
 	}
 
-	public Continuation<?> visitPreCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PreCS object) {
+	public Continuation<?> visitPreCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PreCS object) {
 		return visitContextConstraintCS(object);
 	}
 
-	public Continuation<?> visitPropertyContextDeclCS(org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS object) {
+	public Continuation<?> visitPropertyContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS object) {
 		return visitFeatureContextDeclCS(object);
 	}
 }

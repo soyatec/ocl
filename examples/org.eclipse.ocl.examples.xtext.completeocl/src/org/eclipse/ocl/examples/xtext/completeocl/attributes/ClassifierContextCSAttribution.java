@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.xtext.completeocl.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
@@ -27,25 +28,17 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTP
 
 public class ClassifierContextCSAttribution extends AbstractAttribution
 {
-	public static final ClassifierContextCSAttribution INSTANCE = new ClassifierContextCSAttribution();
+	public static final @NonNull ClassifierContextCSAttribution INSTANCE = new ClassifierContextCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		ClassifierContextDeclCS targetElement = (ClassifierContextDeclCS)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
 		if (containmentFeature == CompleteOCLCSTPackage.Literals.CONTEXT_DECL_CS__RULES) {
 			Type type = targetElement.getClassifier();
 			if (type != null) {
-//				MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 				environmentView.addAllOperations(type, Boolean.FALSE);
 				environmentView.addAllProperties(type, Boolean.FALSE);
-//				if (!environmentView.hasFinalResult()) {
-//					Set<Type> alreadyVisitedTypes = new HashSet<Type>();
-//					org.eclipse.ocl.examples.pivot.Class unspecializedTarget = PivotUtil.getUnspecializedTemplateableElement(target);	// FIXME
-//					for (Type superClass : metaModelManager.getSuperClasses(type)) {
-//						environmentView.addAllContents(type, scopeView, superClass, Boolean.FALSE, alreadyVisitedTypes);
-//					}
-//				}
 			}
 		}
 		return scopeView.getParent();

@@ -18,11 +18,13 @@ package org.eclipse.ocl.examples.xtext.completeocl.utilities;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2Moniker;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS;
@@ -53,7 +55,7 @@ public class CompleteOCLCS2MonikerVisitor
 //			roleNames.put(CompleteOCLCSTPackage.Literals.LIB_CONSTRAINT_CS__OWNED_EXPRESSION, "z");
 		}
 		
-		public BaseCSVisitor<?> create(CS2Moniker context) {
+		public @NonNull BaseCSVisitor<?> create(@NonNull CS2Moniker context) {
 			return new CompleteOCLCS2MonikerVisitor(context);
 		}
 	}
@@ -82,20 +84,23 @@ public class CompleteOCLCS2MonikerVisitor
 		String prefix = ""; //$NON-NLS-1$
 		for (ParameterCS csParameter : csParameters) {
 			context.append(prefix);
-			context.appendElementCS(csParameter.getOwnedType());
+			TypedRefCS ownedType = csParameter.getOwnedType();
+			if (ownedType != null) {
+				context.appendElementCS(ownedType);
+			}
 			prefix = PARAMETER_SEPARATOR;
 		}
 		context.append(PARAMETER_SUFFIX);
 	}
 
 	@Override
-	public Boolean visitClassifierContextDeclCS(ClassifierContextDeclCS object) {
+	public Boolean visitClassifierContextDeclCS(@NonNull ClassifierContextDeclCS object) {
 		safeAppendMonikerOf(object.getClassifier());
 		return true;
 	}
 
 	@Override
-	public Boolean visitContextConstraintCS(ContextConstraintCS object) {
+	public Boolean visitContextConstraintCS(@NonNull ContextConstraintCS object) {
 		throw new IllegalStateException("Context Constraint moniker should be defined on creation");
 //		context.appendElement(object.getContextDecl().getPivot());
 //		context.append(MONIKER_SCOPE_SEPARATOR);
@@ -105,7 +110,7 @@ public class CompleteOCLCS2MonikerVisitor
 	}
 
 	@Override
-	public Boolean visitContextSpecificationCS(ContextSpecificationCS object) {
+	public Boolean visitContextSpecificationCS(@NonNull ContextSpecificationCS object) {
 		if (object.eContainer() instanceof DefCS) {
 			context.appendParentCS(object, MONIKER_SCOPE_SEPARATOR);
 			context.append(UMLReflection.BODY);		// Emulate the CS-less Constraint in the pivot Feature-Constraint-ExpressionInOCL hierarchy 
@@ -130,7 +135,7 @@ public class CompleteOCLCS2MonikerVisitor
 	}
 
 	@Override
-	public Boolean visitDefCS(DefCS object) {
+	public Boolean visitDefCS(@NonNull DefCS object) {
 		context.appendElement(object.getContextDecl().getPivot());
 		context.append(MONIKER_SCOPE_SEPARATOR);
 //		context.append(object.getConstrainedName());
@@ -141,7 +146,7 @@ public class CompleteOCLCS2MonikerVisitor
 	}
 
 	@Override
-	public Boolean visitDefOperationCS(DefOperationCS object) {
+	public Boolean visitDefOperationCS(@NonNull DefOperationCS object) {
 		context.appendElement(object.getDef().getContextDecl().getPivot());
 		context.append(MONIKER_SCOPE_SEPARATOR);
 		context.append(object.getName());
@@ -150,7 +155,7 @@ public class CompleteOCLCS2MonikerVisitor
 	}
 
 	@Override
-	public Boolean visitDefPropertyCS(DefPropertyCS object) {
+	public Boolean visitDefPropertyCS(@NonNull DefPropertyCS object) {
 		context.appendElement(object.getDef().getContextDecl().getPivot());
 		context.append(MONIKER_SCOPE_SEPARATOR);
 		context.append(object.getName());
@@ -158,19 +163,19 @@ public class CompleteOCLCS2MonikerVisitor
 	}
 
 	@Override
-	public Boolean visitOperationContextDeclCS(OperationContextDeclCS object) {
+	public Boolean visitOperationContextDeclCS(@NonNull OperationContextDeclCS object) {
 		safeAppendMonikerOf(object.getOperation());
 		return true;
 	}
 
 	@Override
-	public Boolean visitPackageDeclarationCS(PackageDeclarationCS object) {
+	public Boolean visitPackageDeclarationCS(@NonNull PackageDeclarationCS object) {
 		safeAppendMonikerOf(object.getPackage());
 		return true;
 	}
 
 	@Override
-	public Boolean visitPropertyContextDeclCS(PropertyContextDeclCS object) {
+	public Boolean visitPropertyContextDeclCS(@NonNull PropertyContextDeclCS object) {
 		safeAppendMonikerOf(object.getProperty());
 		return true;
 	}

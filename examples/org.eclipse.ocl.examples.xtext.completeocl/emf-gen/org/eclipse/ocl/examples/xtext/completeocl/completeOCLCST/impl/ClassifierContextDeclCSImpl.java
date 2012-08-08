@@ -19,8 +19,10 @@ package org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS;
@@ -180,8 +182,8 @@ public class ClassifierContextDeclCSImpl extends ContextDeclCSImpl implements Cl
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(BaseCSVisitor<R> visitor) {
-		return (R) visitor.getAdapter(CompleteOCLCSVisitor.class).visitClassifierContextDeclCS(this);
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitClassifierContextDeclCS(this);
 	}
 
 	/**
@@ -191,10 +193,11 @@ public class ClassifierContextDeclCSImpl extends ContextDeclCSImpl implements Cl
 	 */
 	public Type getClassifier()
 	{
-		if (pathName == null) {
+		PathNameCS pathName2 = pathName;
+		if (pathName2 == null) {
 			return null;
 		}
-		CS2Pivot.setElementType(pathName, PivotPackage.Literals.TYPE, this, null);
-		return (Type) pathName.getElement();
+		CS2Pivot.setElementType(pathName2, PivotPackage.Literals.TYPE, this, null);
+		return (Type) pathName2.getElement();
 	}
 } //ClassifierContextDeclCSImpl

@@ -34,6 +34,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
@@ -65,104 +67,104 @@ public class BasicCompleteOCLEObjectValidator extends EObjectValidator
 {
 	private static class ValidationAdapter extends AdapterImpl
 	{
-		public static ValidationAdapter findAdapter(ResourceSet resourceSet) {
-			if (resourceSet != null) {
-				for (Adapter adapter : resourceSet.eAdapters()) {
-					if (adapter instanceof ValidationAdapter) {
-						return (ValidationAdapter)adapter;
-					}
+		public static ValidationAdapter findAdapter(@NonNull ResourceSet resourceSet) {
+			for (Adapter adapter : resourceSet.eAdapters()) {
+				if (adapter instanceof ValidationAdapter) {
+					return (ValidationAdapter)adapter;
 				}
 			}
 			return null;
 		}
 
-		protected final MetaModelManager metaModelManager;
-		protected final EnvironmentFactory environmentFactory;
-		protected final Environment rootEnvironment;
+		protected final @NonNull MetaModelManager metaModelManager;
+		protected final @NonNull EnvironmentFactory environmentFactory;
+		protected final @NonNull Environment rootEnvironment;
 		
-		public ValidationAdapter(MetaModelManager metaModelManager) {
+		public ValidationAdapter(@NonNull MetaModelManager metaModelManager) {
 			this.metaModelManager = metaModelManager;
 			this.environmentFactory = new PivotEnvironmentFactory(null, metaModelManager);
 			this.rootEnvironment = environmentFactory.createEnvironment();
 		}
 
-		public MetaModelManager getMetaModelManager() {
+		public @NonNull MetaModelManager getMetaModelManager() {
 			return metaModelManager;
 		}
 
-		public boolean validate(EClassifier eClassifier, Object object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		public boolean validate(@NonNull EClassifier eClassifier, @NonNull Object object, DiagnosticChain diagnostics, Map<Object, Object> context) {
 			boolean allOk = true;
 			Type type = metaModelManager.getPivotOfEcore(Type.class, eClassifier);
-			for (Constraint constraint : metaModelManager.getAllConstraints(type)) {
-				if (UMLReflection.INVARIANT.equals(constraint.getStereotype())) {
-					String constraintName = constraint.getName();
-					ValueSpecification specification = constraint.getSpecification();
-					if (specification instanceof ExpressionInOCL) {			// Ignore OpaqueExpression -- probably from EAnnotations
-						ExpressionInOCL query = (ExpressionInOCL)specification;
-						EvaluationEnvironment evaluationEnvironment = environmentFactory.createEvaluationEnvironment();
-						ValueFactory valueFactory = metaModelManager.getValueFactory();
-						Value value = valueFactory.valueOf(object);
-						evaluationEnvironment.add(query.getContextVariable(), value);
-						DomainModelManager extents = evaluationEnvironment.createModelManager(object);
-						EvaluationVisitor evaluationVisitor = environmentFactory.createEvaluationVisitor(rootEnvironment, evaluationEnvironment, extents);
-						int severity = Diagnostic.ERROR;
-						String message = null;
-						if (query.getType() != evaluationVisitor.getMetaModelManager().getBooleanType()) {
-							String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
-							message = DomainUtil.bind(OCLMessages.ValidationConstraintIsNotBoolean_ERROR_,
-								PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel);
-						}
-						try {
-							Value expressionResult = query.accept(evaluationVisitor);
-							boolean isOk = false;
-							if (!expressionResult.isNull()) {
-								isOk = expressionResult.asBoolean();
-								severity = Diagnostic.WARNING;
-							}
-							if (!isOk) {
+			if (type != null) {
+				for (Constraint constraint : metaModelManager.getAllConstraints(type)) {
+					if (UMLReflection.INVARIANT.equals(constraint.getStereotype())) {
+						String constraintName = constraint.getName();
+						ValueSpecification specification = constraint.getSpecification();
+						if (specification instanceof ExpressionInOCL) {			// Ignore OpaqueExpression -- probably from EAnnotations
+							ExpressionInOCL query = (ExpressionInOCL)specification;
+							EvaluationEnvironment evaluationEnvironment = environmentFactory.createEvaluationEnvironment();
+							ValueFactory valueFactory = metaModelManager.getValueFactory();
+							Value value = valueFactory.valueOf(object);
+							evaluationEnvironment.add(query.getContextVariable(), value);
+							DomainModelManager extents = evaluationEnvironment.createModelManager(object);
+							EvaluationVisitor evaluationVisitor = environmentFactory.createEvaluationVisitor(rootEnvironment, evaluationEnvironment, extents);
+							int severity = Diagnostic.ERROR;
+							String message = null;
+							if (query.getType() != evaluationVisitor.getMetaModelManager().getBooleanType()) {
 								String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
-								OCLExpression messageExpression = query.getMessageExpression();
-								if (messageExpression != null) {
-									try {
-										Value messageResult = messageExpression.accept(evaluationVisitor);
-										if (!messageResult.isNull()) {
-											message = messageResult.asString();
-										}
-									} catch (InvalidValueException e) {
-										message = DomainUtil.bind(OCLMessages.ValidationMessageIsNotString_ERROR_,
-											PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel);
-										severity = Diagnostic.ERROR;
-									}
-									catch (Exception e) {
-										message = DomainUtil.bind(OCLMessages.ValidationMessageException_ERROR_,
-											PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel, e.getMessage());
-										severity = Diagnostic.ERROR;
-									}
-								}
-								if (message == null) {
-									message = DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_,
-										PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel);
-								}
+								message = DomainUtil.bind(OCLMessages.ValidationConstraintIsNotBoolean_ERROR_,
+									PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel);
 							}
-						} catch (InvalidValueException e) {
-							String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
-							message = DomainUtil.bind(OCLMessages.ValidationResultIsNotBoolean_ERROR_,
-								PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel);
-						} catch (InvalidEvaluationException e) {
-							String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
-							message = DomainUtil.bind(OCLMessages.ValidationResultIsInvalid_ERROR_,
-								PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel);
-						} catch (Throwable e) {
-							String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
-							message = DomainUtil.bind(OCLMessages.ValidationConstraintException_ERROR_,
-								PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel, e.getMessage());
-						}
-						if (message != null) {
-							diagnostics.add(new BasicDiagnostic(severity, DIAGNOSTIC_SOURCE, 0, message, new Object [] { object }));
-						    allOk = false;
-						    if (severity == Diagnostic.ERROR) {
-						    	break;		// Generate many warnings but only one error
-						    }
+							try {
+								Value expressionResult = query.accept(evaluationVisitor);
+								boolean isOk = false;
+								if ((expressionResult != null) && !expressionResult.isNull()) {
+									isOk = expressionResult.asBoolean();
+									severity = Diagnostic.WARNING;
+								}
+								if (!isOk) {
+									String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
+									OCLExpression messageExpression = query.getMessageExpression();
+									if (messageExpression != null) {
+										try {
+											Value messageResult = messageExpression.accept(evaluationVisitor);
+											if ((messageResult != null) && !messageResult.isNull()) {
+												message = messageResult.asString();
+											}
+										} catch (InvalidValueException e) {
+											message = DomainUtil.bind(OCLMessages.ValidationMessageIsNotString_ERROR_,
+												PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel);
+											severity = Diagnostic.ERROR;
+										}
+										catch (Exception e) {
+											message = DomainUtil.bind(OCLMessages.ValidationMessageException_ERROR_,
+												PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel, e.getMessage());
+											severity = Diagnostic.ERROR;
+										}
+									}
+									if (message == null) {
+										message = DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_,
+											PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel);
+									}
+								}
+							} catch (InvalidValueException e) {
+								String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
+								message = DomainUtil.bind(OCLMessages.ValidationResultIsNotBoolean_ERROR_,
+									PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel);
+							} catch (InvalidEvaluationException e) {
+								String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
+								message = DomainUtil.bind(OCLMessages.ValidationResultIsInvalid_ERROR_,
+									PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel);
+							} catch (Throwable e) {
+								String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
+								message = DomainUtil.bind(OCLMessages.ValidationConstraintException_ERROR_,
+									PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel, e.getMessage());
+							}
+							if (message != null) {
+								diagnostics.add(new BasicDiagnostic(severity, DIAGNOSTIC_SOURCE, 0, message, new Object [] { object }));
+							    allOk = false;
+							    if (severity == Diagnostic.ERROR) {
+							    	break;		// Generate many warnings but only one error
+							    }
+							}
 						}
 					}
 				}
@@ -171,31 +173,29 @@ public class BasicCompleteOCLEObjectValidator extends EObjectValidator
 		}
 	}
 
-	private static final BasicCompleteOCLEObjectValidator INSTANCE = new BasicCompleteOCLEObjectValidator();
-	private static final Map<EPackage, EValidator> eValidators = new HashMap<EPackage, EValidator>();
+	private static final @NonNull BasicCompleteOCLEObjectValidator INSTANCE = new BasicCompleteOCLEObjectValidator();
+	private static final @NonNull Map<EPackage, EValidator> eValidators = new HashMap<EPackage, EValidator>();
 
 	/**
 	 * Install Complete OCL validation support in resourceSet for metaModelManager.
 	 */
-	public static void install(ResourceSet resourceSet, MetaModelManager metaModelManager) {
-		if (resourceSet != null) {
-			ValidationAdapter validationAdapter = ValidationAdapter.findAdapter(resourceSet);
-			if (validationAdapter != null) {
-				if (validationAdapter.getMetaModelManager() != metaModelManager) {
-					throw new IllegalArgumentException("Inconsistent metaModelManager");
-				}
+	public static void install(@NonNull ResourceSet resourceSet, @NonNull MetaModelManager metaModelManager) {
+		ValidationAdapter validationAdapter = ValidationAdapter.findAdapter(resourceSet);
+		if (validationAdapter != null) {
+			if (validationAdapter.getMetaModelManager() != metaModelManager) {
+				throw new IllegalArgumentException("Inconsistent metaModelManager");
 			}
-			else {
-				validationAdapter = new ValidationAdapter(metaModelManager);
-				resourceSet.eAdapters().add(validationAdapter);
-			}
+		}
+		else {
+			validationAdapter = new ValidationAdapter(metaModelManager);
+			resourceSet.eAdapters().add(validationAdapter);
 		}
 	}
 	
 	/**
 	 * Install Complete OCL validation support for all ePackage.
 	 */
-	public static void install(EPackage ePackage) {
+	public static void install(@NonNull EPackage ePackage) {
 		if (!eValidators.containsKey(ePackage)) {
 			Object oldEntry = EValidator.Registry.INSTANCE.put(ePackage, INSTANCE);
 			if (oldEntry instanceof EValidator.Descriptor) {
@@ -210,7 +210,7 @@ public class BasicCompleteOCLEObjectValidator extends EObjectValidator
 	 * Return the user's ResourceSet, preferably as a data element of the diagnostics, corresponding to
 	 * the original validation context, else from the object else from the eClassifier.
 	 */
-	protected ResourceSet getResourceSet(EClassifier eClassifier, Object object, DiagnosticChain diagnostics) {
+	protected ResourceSet getResourceSet(@NonNull EClassifier eClassifier, @NonNull Object object, @Nullable DiagnosticChain diagnostics) {
 		ResourceSet resourceSet = null;
 		if (diagnostics instanceof BasicDiagnostic) {
 			for (Object dataObject : ((BasicDiagnostic)diagnostics).getData()) {
@@ -258,6 +258,7 @@ public class BasicCompleteOCLEObjectValidator extends EObjectValidator
 
 	@Override
 	public boolean validate(EDataType eDataType, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		assert value != null;
 		boolean allOk = true;
 		EPackage ePackage = eDataType.getEPackage();
 		EValidator eValidator = eValidators.get(ePackage);
@@ -270,7 +271,7 @@ public class BasicCompleteOCLEObjectValidator extends EObjectValidator
 		return allOk;
 	}
 
-	protected boolean validatePivot(EClassifier eClassifier, Object object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	protected boolean validatePivot(@NonNull EClassifier eClassifier, @NonNull Object object, @Nullable DiagnosticChain diagnostics, Map<Object, Object> context) {
 		ResourceSet resourceSet = getResourceSet(eClassifier, object, diagnostics);
 		if (resourceSet != null) {
 			ValidationAdapter validationAdapter = ValidationAdapter.findAdapter(resourceSet);

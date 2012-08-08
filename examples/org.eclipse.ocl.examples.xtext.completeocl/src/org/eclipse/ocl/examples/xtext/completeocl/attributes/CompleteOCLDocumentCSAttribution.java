@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.completeocl.attributes;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.Root;
@@ -29,10 +30,10 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLDocu
 
 public class CompleteOCLDocumentCSAttribution extends AbstractRootCSAttribution
 {
-	public static final CompleteOCLDocumentCSAttribution INSTANCE = new CompleteOCLDocumentCSAttribution();
+	public static final @NonNull CompleteOCLDocumentCSAttribution INSTANCE = new CompleteOCLDocumentCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		CompleteOCLDocumentCS targetElement = (CompleteOCLDocumentCS)target;
 		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 		for (ImportCS anImport : targetElement.getOwnedImport()) {
@@ -57,6 +58,7 @@ public class CompleteOCLDocumentCSAttribution extends AbstractRootCSAttribution
 						environmentView.addAllPackages((Root)namespace);
 					} else if (namespace instanceof org.eclipse.ocl.examples.pivot.Package) {		// FIXME This legacy behaviour needs cleaning up
 						for (org.eclipse.ocl.examples.pivot.Package rootPackage : ((org.eclipse.ocl.examples.pivot.Package)namespace).getNestedPackage()) {
+							assert rootPackage != null;
 							environmentView.addNamedElement(rootPackage);		// FIXME Rationalize root of pivot model
 							environmentView.addAllPackages(rootPackage);
 							environmentView.addAllTypes(rootPackage);
@@ -68,6 +70,7 @@ public class CompleteOCLDocumentCSAttribution extends AbstractRootCSAttribution
 		if (!environmentView.hasFinalResult()) {
 			metaModelManager.getOclAnyType();
 			for (Library library : metaModelManager.getLibraries()) {
+				assert library != null;
 				environmentView.addNamedElement(library);
 			}
 		}

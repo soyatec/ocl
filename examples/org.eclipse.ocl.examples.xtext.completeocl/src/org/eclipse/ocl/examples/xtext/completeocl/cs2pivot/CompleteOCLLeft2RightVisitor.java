@@ -16,11 +16,12 @@
  */
 package org.eclipse.ocl.examples.xtext.completeocl.cs2pivot;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 
 public class CompleteOCLLeft2RightVisitor extends AbstractCompleteOCLLeft2RightVisitor
 {
-	public CompleteOCLLeft2RightVisitor(CS2PivotConversion context) {
+	public CompleteOCLLeft2RightVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 }

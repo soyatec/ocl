@@ -24,7 +24,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage;
@@ -174,8 +176,8 @@ public class PackageDeclarationCSImpl extends PathNameDeclCSImpl implements Pack
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(BaseCSVisitor<R> visitor) {
-		return (R) visitor.getAdapter(CompleteOCLCSVisitor.class).visitPackageDeclarationCS(this);
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitPackageDeclarationCS(this);
 	}
 
 	/**
@@ -185,10 +187,11 @@ public class PackageDeclarationCSImpl extends PathNameDeclCSImpl implements Pack
 	 */
 	public org.eclipse.ocl.examples.pivot.Package getPackage()
 	{
-		if (pathName == null) {
+		PathNameCS pathName2 = pathName;
+		if (pathName2 == null) {
 			return null;
 		}
-		CS2Pivot.setElementType(pathName, PivotPackage.Literals.PACKAGE, this, null);
-		return (org.eclipse.ocl.examples.pivot.Package) pathName.getElement();
+		CS2Pivot.setElementType(pathName2, PivotPackage.Literals.PACKAGE, this, null);
+		return (org.eclipse.ocl.examples.pivot.Package) pathName2.getElement();
 	}
 } //PackageDeclarationCSImpl

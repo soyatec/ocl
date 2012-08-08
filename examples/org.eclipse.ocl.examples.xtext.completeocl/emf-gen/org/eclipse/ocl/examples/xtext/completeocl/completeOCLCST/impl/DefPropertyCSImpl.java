@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage;
@@ -55,7 +56,7 @@ public class DefPropertyCSImpl extends DefFeatureCSImpl implements DefPropertyCS
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(BaseCSVisitor<R> visitor) {
-		return (R) visitor.getAdapter(CompleteOCLCSVisitor.class).visitDefPropertyCS(this);
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitDefPropertyCS(this);
 	}
 } //DefPropertyCSImpl

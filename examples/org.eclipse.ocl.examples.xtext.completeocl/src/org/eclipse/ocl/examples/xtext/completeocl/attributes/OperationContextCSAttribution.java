@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
@@ -32,10 +33,10 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContex
 
 public class OperationContextCSAttribution extends AbstractAttribution
 {
-	public static final OperationContextCSAttribution INSTANCE = new OperationContextCSAttribution();
+	public static final @NonNull OperationContextCSAttribution INSTANCE = new OperationContextCSAttribution();
 
 	@Override
-	public ScopeView computeLookup(EObject target, EnvironmentView environmentView, ScopeView scopeView) {
+	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		OperationContextDeclCS targetElement = (OperationContextDeclCS)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
 /*		if (containmentFeature == CompleteOCLCSTPackage.Literals.OPERATION_CONTEXT_DECL_CS__OPERATION) {

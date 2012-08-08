@@ -20,6 +20,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
@@ -34,17 +35,17 @@ public class CompleteOCLPivot2CS extends EssentialOCLPivot2CS
 {	
 	private static final class Factory implements Pivot2CS.Factory
 	{
-		private static Pivot2CS.Factory INSTANCE = new Factory();
+		private static @NonNull Pivot2CS.Factory INSTANCE = new Factory();
 
-		public CompleteOCLDeclarationVisitor createDeclarationVisitor(Pivot2CSConversion converter) {
+		public @NonNull CompleteOCLDeclarationVisitor createDeclarationVisitor(@NonNull Pivot2CSConversion converter) {
 			return new CompleteOCLDeclarationVisitor(converter);
 		}
 
-		public BaseReferenceVisitor createReferenceVisitor(Pivot2CSConversion converter) {
+		public @NonNull BaseReferenceVisitor createReferenceVisitor(@NonNull Pivot2CSConversion converter) {
 			return new EssentialOCLReferenceVisitor(converter);
 		}
 
-		public EClass[] getEClasses() {
+		public @NonNull EClass[] getEClasses() {
 			return new EClass[] {
 				PivotPackage.Literals.CLASS,
 				PivotPackage.Literals.CONSTRAINT,
@@ -57,21 +58,22 @@ public class CompleteOCLPivot2CS extends EssentialOCLPivot2CS
 		}
 	}
 		
-	public CompleteOCLPivot2CS(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, MetaModelManager metaModelManager) {
+	public CompleteOCLPivot2CS(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, @NonNull MetaModelManager metaModelManager) {
 		super(cs2pivotResourceMap, metaModelManager);
 		addFactory(Factory.INSTANCE);
 		for (Resource csResource : cs2pivotResourceMap.keySet()) {
+			assert csResource != null;
 			MetaModelManagerResourceAdapter.getAdapter(csResource, metaModelManager);
 		}
 	}
 
 	@Override
-	public BaseDeclarationVisitor createDefaultDeclarationVisitor(Pivot2CSConversion converter) {
+	public @NonNull BaseDeclarationVisitor createDefaultDeclarationVisitor(@NonNull Pivot2CSConversion converter) {
 		return new CompleteOCLDeclarationVisitor(converter);
 	}
 
 	@Override
-	public BaseReferenceVisitor createDefaultReferenceVisitor(Pivot2CSConversion converter) {
+	public @NonNull BaseReferenceVisitor createDefaultReferenceVisitor(@NonNull Pivot2CSConversion converter) {
 		return new EssentialOCLReferenceVisitor(converter);
 	}
 }

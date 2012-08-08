@@ -93,7 +93,7 @@ import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 
 public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Continuation<?>, CS2PivotConversion>
 {
-	protected final MetaModelManager metaModelManager;
+	protected final @NonNull MetaModelManager metaModelManager;
 
 	public BaseContainmentVisitor(@NonNull CS2PivotConversion context) {
 		super(context);

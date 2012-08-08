@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.xtext.completeocl.utilities;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
@@ -31,25 +32,25 @@ import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResou
 public class CompleteOCLCSResource extends EssentialOCLCSResource
 {
 	@Override
-	public CS2Pivot createCS2Pivot(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
-			MetaModelManager metaModelManager) {
+	public @NonNull CS2Pivot createCS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
+			@NonNull MetaModelManager metaModelManager) {
 		return new CompleteOCLCS2Pivot(cs2pivotResourceMap, metaModelManager);
 	}
 
 	@Override
-	public MetaModelManager createMetaModelManager() {
+	public @NonNull MetaModelManager createMetaModelManager() {
 		StandardLibraryContribution.REGISTRY.put(MetaModelManager.DEFAULT_OCL_STDLIB_URI, new OCLstdlib.Cloner());
 		return super.createMetaModelManager();
 	}
 
 	@Override
-	public Pivot2CS createPivot2CS(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
-			MetaModelManager metaModelManager) {
+	public Pivot2CS createPivot2CS(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
+			@NonNull MetaModelManager metaModelManager) {
 		return new CompleteOCLPivot2CS(cs2pivotResourceMap, metaModelManager);
 	}
 
 	@Override
-	public String getEditorName() {
+	public @NonNull String getEditorName() {
 		return "Complete OCL";
 	}
 }

@@ -19,6 +19,8 @@ package org.eclipse.ocl.examples.xtext.completeocl.attributes;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
@@ -34,17 +36,17 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContex
 
 public class OperationContextFilter implements ScopeFilter
 {
-	private final OperationContextDeclCS csOperationContext;
+	private final @NonNull OperationContextDeclCS csOperationContext;
 	
-	public OperationContextFilter(OperationContextDeclCS csOperationContext) {
+	public OperationContextFilter(@NonNull OperationContextDeclCS csOperationContext) {
 		this.csOperationContext = csOperationContext;
 	}
 
-	public int compareMatches(DomainElement match1, Map<TemplateParameter, ParameterableElement> bindings1, DomainElement match2, Map<TemplateParameter, ParameterableElement> bindings2) {
+	public int compareMatches(@NonNull DomainElement match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1, @NonNull DomainElement match2, @Nullable Map<TemplateParameter, ParameterableElement> bindings2) {
 		return 0;
 	}
 
-	public boolean matches(EnvironmentView environmentView, DomainElement eObject) {
+	public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {
 		if (!(eObject instanceof Operation)) {
 			return false;
 		}
@@ -63,8 +65,14 @@ public class OperationContextFilter implements ScopeFilter
 		for (int i = 0; i < iMax; i++) {
 			ParameterCS contextParameter = contextParameters.get(i);
 			Parameter candidateParameter = candidateParameters.get(i);
-			Type contextType = metaModelManager.getPrimaryType(PivotUtil.getPivot(Type.class, contextParameter.getOwnedType()));
-			Type candidateType = metaModelManager.getPrimaryType(candidateParameter.getType());
+			Type contextType = PivotUtil.getPivot(Type.class, contextParameter.getOwnedType());
+			Type candidateType = candidateParameter.getType();
+			if (contextType != null) {
+				contextType = metaModelManager.getPrimaryType(contextType);
+			}
+			if (candidateType != null) {
+				candidateType = metaModelManager.getPrimaryType(candidateType);
+			}
 // FIXME Need to resolve parameter type pivots first
 //			if (contextType != candidateType) {
 //				return false;

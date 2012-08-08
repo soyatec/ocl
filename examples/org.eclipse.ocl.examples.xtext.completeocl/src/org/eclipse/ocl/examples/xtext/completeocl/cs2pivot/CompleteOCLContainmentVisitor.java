@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -31,6 +33,7 @@ import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -47,6 +50,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.LibraryCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
@@ -69,14 +73,14 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 {
 	public class OperationDeclScopeFilter extends AbstractOperationFilter
 	{
-		private final List<ParameterCS> csParameters;
+		private final @NonNull List<ParameterCS> csParameters;
 		
-		public OperationDeclScopeFilter(MetaModelManager metaModelManager, Type sourceType, List<ParameterCS> csParameters) {
+		public OperationDeclScopeFilter(@NonNull MetaModelManager metaModelManager, @Nullable Type sourceType, @NonNull List<ParameterCS> csParameters) {
 			super(metaModelManager, sourceType);
 			this.csParameters = csParameters;
 		}
 
-		public boolean matches(EnvironmentView environmentView, DomainElement eObject) {
+		public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {
 			if (eObject instanceof Iteration) {
 				return false;
 			}
@@ -90,22 +94,24 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 				Map<TemplateParameter, ParameterableElement> bindings = getOperationBindings(candidateOperation);
 				for (int i = 0; i < iMax; i++) {
 					Parameter candidateParameter = candidateParameters.get(i);
-					ParameterCS csParameter = csParameters.get(i);
-					if (csParameter == null) {
-						return false;
-					}
-					TypedRefCS csType = csParameter.getOwnedType();
-					Type pType = PivotUtil.getPivot(Type.class, csType);
-					if (pType == null) {
-						return false;
-					}
-					Type candidateType = metaModelManager.getTypeWithMultiplicity(candidateParameter);
-					if (candidateType instanceof SelfType) {
-						candidateType = candidateOperation.getOwningType();
-					}
-					pType = PivotUtil.getBehavioralType(pType);			// FIXME make this a general facility
-					if (!metaModelManager.conformsTo(pType, candidateType, bindings)) {
-						return false;
+					if (candidateParameter != null) {
+						ParameterCS csParameter = csParameters.get(i);
+						if (csParameter == null) {
+							return false;
+						}
+						TypedRefCS csType = csParameter.getOwnedType();
+						Type pType = PivotUtil.getPivot(Type.class, csType);
+						if (pType == null) {
+							return false;
+						}
+						Type candidateType = metaModelManager.getTypeWithMultiplicity(candidateParameter);
+						if (candidateType instanceof SelfType) {
+							candidateType = candidateOperation.getOwningType();
+						}
+						pType = PivotUtil.getBehavioralType(pType);			// FIXME make this a general facility
+						if ((candidateType == null) || !metaModelManager.conformsTo(pType, candidateType, bindings)) {
+							return false;
+						}
 					}
 				}
 				if (bindings != null) {
@@ -176,11 +182,11 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 	 */
 	private Map<NamedElement, List<Constraint>> modelElement2constraints = new HashMap<NamedElement, List<Constraint>>();
 
-	public CompleteOCLContainmentVisitor(CS2PivotConversion context) {
+	public CompleteOCLContainmentVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 
-	protected void installConstraintContainment(NamedElement contextElement) {
+	protected void installConstraintContainment(@NonNull NamedElement contextElement) {
 		List<Constraint> constraints = modelElement2constraints.get(contextElement);
 		if (constraints == null) {
 			contextElement.getOwnedRule().clear();
@@ -190,7 +196,7 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 		}
 	}
 
-	protected void installOperationContainment(Type modelType, Type contextType) {
+	protected void installOperationContainment(@NonNull Type modelType, @NonNull Type contextType) {
 		List<Operation> contextOperations = modelType2contextOperations.get(modelType);
 		if (contextOperations == null) {
 			contextType.getOwnedOperation().clear();
@@ -198,12 +204,13 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 		else {
 			PivotUtil.refreshList(contextType.getOwnedOperation(), contextOperations);
 			for (Operation contextOperation : contextOperations) {
+				assert contextOperation != null;
 				installConstraintContainment(contextOperation);
 			}
 		}
 	}
 
-	protected void installPackageContainment(Root contextRoot) {
+	protected void installPackageContainment(@NonNull Root contextRoot) {
 		Map<org.eclipse.ocl.examples.pivot.Package, Set<org.eclipse.ocl.examples.pivot.Package>> nestedContextPackageMaps =
 				new HashMap<org.eclipse.ocl.examples.pivot.Package, Set<org.eclipse.ocl.examples.pivot.Package>>();
 		Set<org.eclipse.ocl.examples.pivot.Package> nestedContextRoots = new HashSet<org.eclipse.ocl.examples.pivot.Package>();
@@ -230,13 +237,18 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 			}
 		}
 		for (org.eclipse.ocl.examples.pivot.Package parentContextPackage : nestedContextPackageMaps.keySet()) {
+			List<Package> nestedNestedPackages = parentContextPackage.getNestedPackage();
 			Set<org.eclipse.ocl.examples.pivot.Package> nestedContextPackages = nestedContextPackageMaps.get(parentContextPackage);
-			PivotUtil.refreshSet(parentContextPackage.getNestedPackage(), nestedContextPackages);
+			assert nestedNestedPackages != null;
+			assert nestedContextPackages != null;
+			PivotUtil.refreshSet(nestedNestedPackages, nestedContextPackages);
 		}
-		PivotUtil.refreshSet(contextRoot.getNestedPackage(), nestedContextRoots);
+		List<Package> nestedPackages = contextRoot.getNestedPackage();
+		assert nestedPackages != null;
+		PivotUtil.refreshSet(nestedPackages, nestedContextRoots);
 	}
 
-	protected void installPropertyContainment(Type modelType, Type contextType) {
+	protected void installPropertyContainment(@NonNull Type modelType, @NonNull Type contextType) {
 		List<Property> contextProperties = modelType2contextProperties.get(modelType);
 		if (contextProperties == null) {
 			contextType.getOwnedAttribute().clear();
@@ -244,6 +256,7 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 		else {
 			PivotUtil.refreshList(contextType.getOwnedAttribute(), contextProperties);
 			for (Property contextProperty : contextProperties) {
+				assert contextProperty != null;
 				installConstraintContainment(contextProperty);
 			}
 		}
@@ -254,79 +267,96 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 				new HashMap<org.eclipse.ocl.examples.pivot.Package, Set<Type>>();
 		for (Type modelType : modelType2contextType.keySet()) {
 			Type contextType = modelType2contextType.get(modelType);
-			org.eclipse.ocl.examples.pivot.Package parentModelPackage = modelType.getPackage();
-			org.eclipse.ocl.examples.pivot.Package parentContextPackage = modelPackage2contextPackage.get(parentModelPackage);
-			Set<Type> ownedTypes = nestedContextTypeMaps.get(parentContextPackage);
-			if (ownedTypes == null) {
-				ownedTypes = new HashSet<Type>();
-				nestedContextTypeMaps.put(parentContextPackage, ownedTypes);
-//				ownedTypes.addAll(parentContextPackage.getOwnedType());
+			if (contextType != null) {
+				org.eclipse.ocl.examples.pivot.Package parentModelPackage = modelType.getPackage();
+				org.eclipse.ocl.examples.pivot.Package parentContextPackage = modelPackage2contextPackage.get(parentModelPackage);
+				Set<Type> ownedTypes = nestedContextTypeMaps.get(parentContextPackage);
+				if (ownedTypes == null) {
+					ownedTypes = new HashSet<Type>();
+					nestedContextTypeMaps.put(parentContextPackage, ownedTypes);
+//					ownedTypes.addAll(parentContextPackage.getOwnedType());
+				}
+				ownedTypes.add(contextType);
+				installOperationContainment(modelType, contextType);
+				installPropertyContainment(modelType, contextType);
+				installConstraintContainment(contextType);
 			}
-			ownedTypes.add(contextType);
-			installOperationContainment(modelType, contextType);
-			installPropertyContainment(modelType, contextType);
-			installConstraintContainment(contextType);
 		}
 		for (org.eclipse.ocl.examples.pivot.Package parentContextPackage : nestedContextTypeMaps.keySet()) {
 			Set<Type> ownedTypes = nestedContextTypeMaps.get(parentContextPackage);
-			PivotUtil.refreshSet(parentContextPackage.getOwnedType(), ownedTypes);
+			if (ownedTypes != null) {
+				List<Type> parentOwnedTypes = parentContextPackage.getOwnedType();
+				assert parentOwnedTypes != null;
+				PivotUtil.refreshSet(parentOwnedTypes, ownedTypes);
+			}
 		}
 	}
 
-	protected void refreshConstrainedElements(ContextDeclCS csElement, NamedElement constrainedElement) {
+	protected void refreshConstrainedElements(@NonNull ContextDeclCS csElement, @NonNull NamedElement constrainedElement) {
 		for (ContextConstraintCS csRule : csElement.getRules()) {
 			Constraint constraint = PivotUtil.getPivot(Constraint.class, csRule);
-			List<Element> constrainedElements = constraint.getConstrainedElement();
-			constrainedElements.clear();
-			constrainedElements.add(constrainedElement);
-			List<Constraint> constraints = modelElement2constraints.get(constrainedElement);
-			if (constraints == null) {
-				constraints = new ArrayList<Constraint>();
-				modelElement2constraints.put(constrainedElement, constraints);
+			if (constraint != null) {
+				List<Element> constrainedElements = constraint.getConstrainedElement();
+				constrainedElements.clear();
+				constrainedElements.add(constrainedElement);
+				List<Constraint> constraints = modelElement2constraints.get(constrainedElement);
+				if (constraints == null) {
+					constraints = new ArrayList<Constraint>();
+					modelElement2constraints.put(constrainedElement, constraints);
+				}
+				constraints.add(constraint);
 			}
-			constraints.add(constraint);
 		}
 	}
 
-	protected org.eclipse.ocl.examples.pivot.Package refreshContextPackage(org.eclipse.ocl.examples.pivot.Package modelPackage, PackageDeclarationCS csElement) {
-		if ((modelPackage == null) || modelPackage.eIsProxy()) {
+	protected org.eclipse.ocl.examples.pivot.Package refreshContextPackage(@NonNull org.eclipse.ocl.examples.pivot.Package modelPackage, @Nullable PackageDeclarationCS csElement) {
+		if (modelPackage.eIsProxy()) {
 			return null;
 		}
 		org.eclipse.ocl.examples.pivot.Package contextPackage = modelPackage2contextPackage.get(modelPackage);
 		if (contextPackage == null) {
 			contextPackage = context.refreshModelElement(org.eclipse.ocl.examples.pivot.Package.class, PivotPackage.Literals.PACKAGE, csElement);
-			contextPackage.setName(modelPackage.getName());
-			contextPackage.setNsURI(modelPackage.getNsURI());
-			modelPackage2contextPackage.put(modelPackage, contextPackage);
-			org.eclipse.ocl.examples.pivot.Package parentModelPackage = modelPackage.getNestingPackage();
-			refreshContextPackage(parentModelPackage, null);
+			if (contextPackage != null) {
+				contextPackage.setName(modelPackage.getName());
+				contextPackage.setNsURI(modelPackage.getNsURI());
+				modelPackage2contextPackage.put(modelPackage, contextPackage);
+				org.eclipse.ocl.examples.pivot.Package parentModelPackage = modelPackage.getNestingPackage();
+				if (parentModelPackage != null) {
+					refreshContextPackage(parentModelPackage, null);
+				}
+			}
 		}
-		if (csElement != null) {
+		if ((csElement != null) && (contextPackage != null)) {
 			context.refreshComments(contextPackage, csElement);
 			context.installPivotUsage(csElement, contextPackage);
 		}
 		return contextPackage;
 	}
 
-	protected Type refreshContextType(Type modelClassifier, ClassifierContextDeclCS csElement) {
-		if ((modelClassifier == null) || modelClassifier.eIsProxy()) {
+	protected Type refreshContextType(@NonNull Type modelClassifier, @Nullable ClassifierContextDeclCS csElement) {
+		if (modelClassifier.eIsProxy()) {
 			return null;
 		}
 		Type contextClassifier = modelType2contextType.get(modelClassifier);
 		if (contextClassifier == null) {
 			contextClassifier = context.refreshModelElement(org.eclipse.ocl.examples.pivot.Class.class, PivotPackage.Literals.CLASS, csElement);
-			contextClassifier.setName(modelClassifier.getName());
-			modelType2contextType.put(modelClassifier, contextClassifier);
-			refreshContextPackage(modelClassifier.getPackage(), null);
+			if (contextClassifier != null) {
+				contextClassifier.setName(modelClassifier.getName());
+				modelType2contextType.put(modelClassifier, contextClassifier);
+				org.eclipse.ocl.examples.pivot.Package modelPackage = modelClassifier.getPackage();
+				if (modelPackage != null) {
+					refreshContextPackage(modelPackage, null);
+				}
+			}
 		}
-		if (csElement != null) {
+		if ((csElement != null) && (contextClassifier != null)) {
 			context.refreshComments(contextClassifier, csElement);
 			context.installPivotUsage(csElement, contextClassifier);
 		}
 		return contextClassifier;
 	}
 
-	protected void registerOperation(Type modelClassifier, Operation pivotElement) {
+	protected void registerOperation(@NonNull Type modelClassifier, @NonNull Operation pivotElement) {
 		List<Operation> contextOperations = modelType2contextOperations.get(modelClassifier);
 		if (contextOperations == null) {
 			contextOperations = new ArrayList<Operation>();
@@ -335,7 +365,7 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 		contextOperations.add(pivotElement);
 	}
 
-	protected void registerProperty(Type modelClassifier, Property pivotElement) {
+	protected void registerProperty(@NonNull Type modelClassifier, @NonNull Property pivotElement) {
 		List<Property> contextProperties = modelType2contextProperties.get(modelClassifier);
 		if (contextProperties == null) {
 			contextProperties = new ArrayList<Property>();
@@ -345,77 +375,97 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 	}
 
 	@Override
-	public Continuation<?> visitClassifierContextDeclCS(ClassifierContextDeclCS csElement) {
+	public Continuation<?> visitClassifierContextDeclCS(@NonNull ClassifierContextDeclCS csElement) {
 		Type modelClassifier = csElement.getClassifier();
-		Type contextClassifier = refreshContextType(modelClassifier, csElement);
-		refreshConstrainedElements(csElement, contextClassifier);
+		if (modelClassifier != null) {
+			Type contextClassifier = refreshContextType(modelClassifier, csElement);
+			if (contextClassifier != null) {
+				refreshConstrainedElements(csElement, contextClassifier);
+			}
+		}
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitCompleteOCLDocumentCS(CompleteOCLDocumentCS csElement) {
+	public Continuation<?> visitCompleteOCLDocumentCS(@NonNull CompleteOCLDocumentCS csElement) {
 		for (IncludeCS csInclude : csElement.getOwnedInclude()) {
 			csInclude.getNamespace();					// Resolve the proxy to perform the import.
 		}
 		Root contextRoot = refreshRoot(Root.class, PivotPackage.Literals.ROOT, csElement);
-		List<Root> modelRoots = new ArrayList<Root>();
-		for (org.eclipse.ocl.examples.pivot.Package modelPackage : modelPackage2contextPackage.keySet()) {
-			org.eclipse.ocl.examples.pivot.Package parentModelPackage = modelPackage.getNestingPackage();
-			if (parentModelPackage == null) {
-				modelRoots.add((Root) modelPackage.eContainer());
+		if (contextRoot != null) {
+			List<Root> modelRoots = new ArrayList<Root>();
+			for (org.eclipse.ocl.examples.pivot.Package modelPackage : modelPackage2contextPackage.keySet()) {
+				org.eclipse.ocl.examples.pivot.Package parentModelPackage = modelPackage.getNestingPackage();
+				if (parentModelPackage == null) {
+					modelRoots.add((Root) modelPackage.eContainer());
+				}
+			}
+			installTypeContainment();
+			installPackageContainment(contextRoot);
+		}
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitContextConstraintCS(@NonNull ContextConstraintCS csElement) {
+		Constraint pivotElement = refreshNamedElement(Constraint.class, PivotPackage.Literals.CONSTRAINT, csElement);
+		if (pivotElement != null) {
+			String newStereotype = csElement.getStereotype();
+			String stereotype = getStereotype(newStereotype);
+			pivotElement.setStereotype(stereotype);
+		}
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitDefCS(@NonNull DefCS csElement) {
+		Constraint pivotElement = refreshNamedElement(Constraint.class, PivotPackage.Literals.CONSTRAINT, csElement);
+		if (pivotElement != null) {
+			DefFeatureCS csFeature = csElement.getFeature();
+			pivotElement.setStereotype(csFeature instanceof DefOperationCS ? UMLReflection.BODY : UMLReflection.INITIAL);
+			Feature pivotFeature = PivotUtil.getPivot(Feature.class, csFeature);
+			if (pivotFeature != null) {
+				pivotFeature.setIsStatic(csElement.isStatic());
+				PivotUtil.refreshList(pivotFeature.getOwnedRule(), Collections.singletonList(pivotElement));
 			}
 		}
-		installTypeContainment();
-		installPackageContainment(contextRoot);
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitContextConstraintCS(ContextConstraintCS csElement) {
-		Constraint pivotElement = refreshNamedElement(Constraint.class, PivotPackage.Literals.CONSTRAINT, csElement);
-		String newStereotype = csElement.getStereotype();
-		String stereotype = getStereotype(newStereotype);
-		pivotElement.setStereotype(stereotype);
-		return null;
-	}
-
-	@Override
-	public Continuation<?> visitDefCS(DefCS csElement) {
-		Constraint pivotElement = refreshNamedElement(Constraint.class, PivotPackage.Literals.CONSTRAINT, csElement);
-		DefFeatureCS csFeature = csElement.getFeature();
-		pivotElement.setStereotype(csFeature instanceof DefOperationCS ? UMLReflection.BODY : UMLReflection.INITIAL);
-		Feature pivotFeature = PivotUtil.getPivot(Feature.class, csFeature);
-		pivotFeature.setIsStatic(csElement.isStatic());
-		PivotUtil.refreshList(pivotFeature.getOwnedRule(), Collections.singletonList(pivotElement));
-		return null;
-	}
-
-	@Override
-	public Continuation<?> visitDefOperationCS(DefOperationCS csElement) {
+	public Continuation<?> visitDefOperationCS(@NonNull DefOperationCS csElement) {
 		ClassifierContextDeclCS csClassifierContextDecl = (ClassifierContextDeclCS) csElement.getDef().getContextDecl();
 		Type modelClassifier = csClassifierContextDecl.getClassifier();
-		Operation pivotElement = refreshNamedElement(Operation.class, PivotPackage.Literals.OPERATION, csElement);
-		registerOperation(modelClassifier, pivotElement);
-		context.refreshPivotList(Parameter.class, pivotElement.getOwnedParameter(), csElement.getParameters());
+		if (modelClassifier != null) {
+			Operation pivotElement = refreshNamedElement(Operation.class, PivotPackage.Literals.OPERATION, csElement);
+			if (pivotElement != null) {
+				registerOperation(modelClassifier, pivotElement);
+				context.refreshPivotList(Parameter.class, pivotElement.getOwnedParameter(), csElement.getParameters());
+			}
+		}
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitDefPropertyCS(DefPropertyCS csElement) {
+	public Continuation<?> visitDefPropertyCS(@NonNull DefPropertyCS csElement) {
 		ClassifierContextDeclCS csClassifierContextDecl = (ClassifierContextDeclCS) csElement.getDef().getContextDecl();
 		Type modelClassifier = csClassifierContextDecl.getClassifier();
-		Property pivotElement = refreshNamedElement(Property.class, PivotPackage.Literals.PROPERTY, csElement);
-		registerProperty(modelClassifier, pivotElement);
-		pivotElement.setIsDerived(true);
-		pivotElement.setIsReadOnly(true);
-		pivotElement.setIsTransient(true);
-		pivotElement.setIsVolatile(true);
-		pivotElement.setIsResolveProxies(false);
+		if (modelClassifier != null) {
+			Property pivotElement = refreshNamedElement(Property.class, PivotPackage.Literals.PROPERTY, csElement);
+			if (pivotElement != null) {
+				registerProperty(modelClassifier, pivotElement);
+				pivotElement.setIsDerived(true);
+				pivotElement.setIsReadOnly(true);
+				pivotElement.setIsTransient(true);
+				pivotElement.setIsVolatile(true);
+				pivotElement.setIsResolveProxies(false);
+			}
+		}
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitImportCS(ImportCS csElement) {
+	public Continuation<?> visitImportCS(@NonNull ImportCS csElement) {
 		Namespace namespace = csElement.getNamespace();													// Resolve the proxy to perform the import.
 		if ((namespace != null) && !namespace.eIsProxy()) {
 			context.installPivotUsage(csElement, namespace);
@@ -424,12 +474,12 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 	}
 
 	@Override
-	public Continuation<?> visitIncludeCS(IncludeCS csElement) {
+	public Continuation<?> visitIncludeCS(@NonNull IncludeCS csElement) {
 		return null;		// Suppressed here to avoid reversed post-order
 	}
 
 	@Override
-	public Continuation<?> visitLibraryCS(LibraryCS csElement) {
+	public Continuation<?> visitLibraryCS(@NonNull LibraryCS csElement) {
 		Namespace pPackage = csElement.getPackage();						// Resolve the proxy to perform the import.
 		if ((pPackage != null) && !pPackage.eIsProxy()) {
 			context.installPivotUsage(csElement, pPackage);
@@ -438,51 +488,60 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 	}
 
 	@Override
-	public Continuation<?> visitOperationContextDeclCS(OperationContextDeclCS csElement) {
+	public Continuation<?> visitOperationContextDeclCS(@NonNull OperationContextDeclCS csElement) {
 		List<ParameterCS> csParameters = csElement.getParameters();
-		CS2Pivot.setElementType(csElement.getPathName(), PivotPackage.Literals.OPERATION, csElement,
+		assert csParameters != null;
+		PathNameCS pathName = csElement.getPathName();
+		assert pathName != null;
+		CS2Pivot.setElementType(pathName, PivotPackage.Literals.OPERATION, csElement,
 			new OperationDeclScopeFilter(metaModelManager, null, csParameters));
 		/*
-		 * Types have not yet been resolved so operation overloads are not resolvaeable.
+		 * Types have not yet been resolved so operation overloads are not resolveable.
 		 *
 		Operation modelOperation = csElement.getOperation(); */
-		List<PathElementCS> path = csElement.getPathName().getPath();
+		List<PathElementCS> path = pathName.getPath();
 		int pathSize = path.size();
 		Element modelParent = pathSize >= 2 ? path.get(pathSize-2).getElement() : null;
 		Operation pivotElement = context.refreshModelElement(Operation.class, PivotPackage.Literals.OPERATION, csElement);
-		if (modelParent instanceof Type) {
-			Type modelClassifier = (Type) modelParent;
-			refreshContextType(modelClassifier, null);
-			registerOperation(modelClassifier, pivotElement);
+		if (pivotElement != null) {
+			if (modelParent instanceof Type) {
+				Type modelClassifier = (Type) modelParent;
+				refreshContextType(modelClassifier, null);
+				registerOperation(modelClassifier, pivotElement);
+			}
+			context.refreshPivotList(Parameter.class, pivotElement.getOwnedParameter(), csParameters);
+			context.refreshComments(pivotElement, csElement);
+			refreshConstrainedElements(csElement, pivotElement);
 		}
-		context.refreshPivotList(Parameter.class, pivotElement.getOwnedParameter(), csParameters);
-		context.refreshComments(pivotElement, csElement);
-		refreshConstrainedElements(csElement, pivotElement);
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitPackageDeclarationCS(PackageDeclarationCS csElement) {
+	public Continuation<?> visitPackageDeclarationCS(@NonNull PackageDeclarationCS csElement) {
 		org.eclipse.ocl.examples.pivot.Package modelPackage = csElement.getPackage();
-		refreshContextPackage(modelPackage, csElement);
+		if (modelPackage != null) {
+			refreshContextPackage(modelPackage, csElement);
+		}
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitPropertyContextDeclCS(PropertyContextDeclCS csElement) {
+	public Continuation<?> visitPropertyContextDeclCS(@NonNull PropertyContextDeclCS csElement) {
 		Property modelProperty = csElement.getProperty();
 		Property contextProperty = context.refreshModelElement(Property.class, PivotPackage.Literals.PROPERTY, csElement);
-		if ((modelProperty != null) && !modelProperty.eIsProxy()) {
-			contextProperty.setName(modelProperty.getName());
-			contextProperty.setType(modelProperty.getType());
-			Type modelClassifier = modelProperty.getOwningType();
-			if (modelClassifier != null) {
-				refreshContextType(modelClassifier, null);
-				registerProperty(modelClassifier, contextProperty);
+		if (contextProperty != null) {
+			if ((modelProperty != null) && !modelProperty.eIsProxy()) {
+				contextProperty.setName(modelProperty.getName());
+				contextProperty.setType(modelProperty.getType());
+				Type modelClassifier = modelProperty.getOwningType();
+				if (modelClassifier != null) {
+					refreshContextType(modelClassifier, null);
+					registerProperty(modelClassifier, contextProperty);
+				}
 			}
+			context.refreshComments(contextProperty, csElement);
+			refreshConstrainedElements(csElement, contextProperty);
 		}
-		context.refreshComments(contextProperty, csElement);
-		refreshConstrainedElements(csElement, contextProperty);
 		return null;
 	}
 }

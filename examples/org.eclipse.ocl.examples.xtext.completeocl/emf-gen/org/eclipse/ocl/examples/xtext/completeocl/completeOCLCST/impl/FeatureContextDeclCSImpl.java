@@ -22,6 +22,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ClassCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
@@ -262,7 +263,7 @@ public abstract class FeatureContextDeclCSImpl extends ContextDeclCSImpl impleme
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(BaseCSVisitor<R> visitor) {
-		return (R) visitor.getAdapter(CompleteOCLCSVisitor.class).visitFeatureContextDeclCS(this);
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitFeatureContextDeclCS(this);
 	}
 } //FeatureContextDeclCSImpl
