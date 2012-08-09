@@ -10,6 +10,8 @@
 package codegen.company;
 
 import codegen.company.CodegencompanyTables;
+
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumeration;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumerationLiteral;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorPackage;
@@ -39,7 +41,7 @@ public class CodegencompanyTables
 /**
 	 *	The library of all packages and types.
 	 */
-	public static final ExecutorStandardLibrary LIBRARY = new ExecutorStandardLibrary(PACKAGE); 
+	public static final @NonNull ExecutorStandardLibrary LIBRARY = new ExecutorStandardLibrary(PACKAGE); 
 
 	/**
 	 *	The type descriptors for each type.

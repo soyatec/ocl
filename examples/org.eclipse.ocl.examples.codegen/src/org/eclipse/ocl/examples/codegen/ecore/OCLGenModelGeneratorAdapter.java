@@ -58,6 +58,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.OCLConstants;
 import org.eclipse.ocl.common.OCLCommon;
 import org.eclipse.ocl.common.internal.options.CodeGenerationMode;
@@ -82,14 +84,14 @@ import org.eclipse.uml2.codegen.ecore.genmodel.util.UML2GenModelUtil;
 
 public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 {
-	public static final String OCL_GENMODEL_URI = "http://www.eclipse.org/OCL/GenModel";
-	public static final String USE_DELEGATES_KEY = "Use Delegates";
+	public static final @NonNull String OCL_GENMODEL_URI = "http://www.eclipse.org/OCL/GenModel";
+	public static final @NonNull String USE_DELEGATES_KEY = "Use Delegates";
 
 	/**
 	 * Return  true if the genModel has a {@link OCL_GENMODEL_URI} GenAnnotation with a
 	 * {@link USE_DELEGATES_KEY} detail set to true.
 	 */
-	public static boolean useDelegates(GenModel genModel) {
+	public static boolean useDelegates(@NonNull GenModel genModel) {
 		GenAnnotation genAnnotation = genModel.getGenAnnotation(OCL_GENMODEL_URI);
 		if (genAnnotation != null) {
 			EMap<String, String> details = genAnnotation.getDetails();
@@ -102,72 +104,85 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 		return false;
 	}
 
-	private Set<GenModel> hadDelegates = new HashSet<GenModel>();
+	private @NonNull Set<GenModel> hadDelegates = new HashSet<GenModel>();
 	
-	public OCLGenModelGeneratorAdapter(OCLGeneratorAdapterFactory generatorAdapterFactory) {
+	public OCLGenModelGeneratorAdapter(@NonNull OCLGeneratorAdapterFactory generatorAdapterFactory) {
 		super(generatorAdapterFactory);
 	}
 
-	protected void convertConstraintToOperation(Ecore2Pivot ecore2pivot, GenModel genModel, EClassifier eClassifier, String key, String body, String message) {
+	protected void convertConstraintToOperation(@NonNull Ecore2Pivot ecore2pivot, @NonNull GenModel genModel, @NonNull EClassifier eClassifier, @NonNull String key, @NonNull String body, @Nullable String message) {
 		Type pType = ecore2pivot.getCreated(Type.class, eClassifier);
-		List<Constraint> ownedRules = pType.getOwnedRule();
-		for (Constraint rule : ownedRules) {
-			String ruleName = rule.getName();
-			if (ruleName == null) {
-				ruleName = "";
-			}
-			if (rule.getStereotype().equals(UMLReflection.INVARIANT) && ruleName.equals(key)) {
-				String prefix = UML2GenModelUtil.getInvariantPrefix(genModel);
-				EOperation eOperation = Pivot2Ecore.createConstraintEOperation(rule, prefix + ruleName);
-				((EClass)eClassifier).getEOperations().add(eOperation);
-				ecore2pivot.addMapping(eOperation, rule);
-				EcoreUtil.setAnnotation(eOperation, OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT, "body", body);
-				if (message != null) {
-					EcoreUtil.setAnnotation(eOperation, OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT, "body" + PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX, message);
+		if (pType != null) {
+			List<Constraint> ownedRules = pType.getOwnedRule();
+			for (Constraint rule : ownedRules) {
+				String ruleName = rule.getName();
+				if (ruleName == null) {
+					ruleName = "";
+				}
+				if (rule.getStereotype().equals(UMLReflection.INVARIANT) && ruleName.equals(key)) {
+					String prefix = UML2GenModelUtil.getInvariantPrefix(genModel);
+					EOperation eOperation = Pivot2Ecore.createConstraintEOperation(rule, prefix + ruleName);
+					((EClass)eClassifier).getEOperations().add(eOperation);
+					ecore2pivot.addMapping(eOperation, rule);
+					EcoreUtil.setAnnotation(eOperation, OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT, "body", body);
+					if (message != null) {
+						EcoreUtil.setAnnotation(eOperation, OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT, "body" + PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX, message);
+					}
 				}
 			}
 		}
 	}
 
-	protected void convertConstraintsToOperations(MetaModelManager metaModelManager, GenModel genModel) {
+	protected void convertConstraintsToOperations(@NonNull MetaModelManager metaModelManager, @NonNull GenModel genModel) {
 		List<GenPackage> genPackages = genModel.getAllGenPackagesWithClassifiers();
 		for (GenPackage genPackage : genPackages) {
 			EPackage ecorePackage = genPackage.getEcorePackage();
-			Ecore2Pivot ecore2pivot = Ecore2Pivot.getAdapter(ecorePackage.eResource(), metaModelManager);
-			for (GenClass genClass : genPackage.getGenClasses()) {
-				EClass eClass = genClass.getEcoreClass();
-				EClassifier eClassifier = eClass;
-				List<EAnnotation> obsoleteAnnotations = null;
-				for (EAnnotation eAnnotation : eClassifier.getEAnnotations()) {
-					String source = eAnnotation.getSource();
-					if (OCLCommon.isDelegateURI(source)) {
-						EMap<String, String> details = eAnnotation.getDetails();
-						for (String key : details.keySet()) {
-							if ((key != null) && !key.endsWith(PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX)) {
-								String expression = details.get(key);
-								String messageExpression = details.get(key + PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX);
-								convertConstraintToOperation(ecore2pivot, genModel, eClassifier, key, expression, messageExpression);
+			Resource ecoreResource = ecorePackage.eResource();
+			if (ecoreResource != null) {
+				Ecore2Pivot ecore2pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager);
+				if (ecore2pivot != null) {
+					for (GenClass genClass : genPackage.getGenClasses()) {
+						EClass eClass = genClass.getEcoreClass();
+						if (eClass != null) {
+							EClassifier eClassifier = eClass;
+							List<EAnnotation> obsoleteAnnotations = null;
+							for (EAnnotation eAnnotation : eClassifier.getEAnnotations()) {
+								String source = eAnnotation.getSource();
+								if (OCLCommon.isDelegateURI(source)) {
+									EMap<String, String> details = eAnnotation.getDetails();
+									for (String key : details.keySet()) {
+										if ((key != null) && !key.endsWith(PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX)) {
+											String expression = details.get(key);
+											String messageExpression = details.get(key + PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX);
+											if (expression != null) {
+												assert ecore2pivot != null;
+												assert eClassifier != null;
+												convertConstraintToOperation(ecore2pivot, genModel, eClassifier, key, expression, messageExpression);
+											}
+										}
+									}
+									if (obsoleteAnnotations == null) {
+										obsoleteAnnotations = new ArrayList<EAnnotation>();
+									}
+									obsoleteAnnotations.add(eAnnotation);
+								}
+							    if (EcorePackage.eNS_URI.equals(source))
+							    {
+							      eAnnotation.getDetails().remove("constraints");
+							    }
 							}
+							if (obsoleteAnnotations != null) {
+								eClassifier.getEAnnotations().removeAll(obsoleteAnnotations);
+							}
+							genClass.initialize(eClass);
 						}
-						if (obsoleteAnnotations == null) {
-							obsoleteAnnotations = new ArrayList<EAnnotation>();
-						}
-						obsoleteAnnotations.add(eAnnotation);
 					}
-				    if (EcorePackage.eNS_URI.equals(source))
-				    {
-				      eAnnotation.getDetails().remove("constraints");
-				    }
 				}
-				if (obsoleteAnnotations != null) {
-					eClassifier.getEAnnotations().removeAll(obsoleteAnnotations);
-				}
-				genClass.initialize(eClass);
 			}
 		}
 	}
 
-	protected void createClassBodies(GenModel genModel, Monitor monitor) throws IOException {
+	protected void createClassBodies(@NonNull GenModel genModel, @NonNull Monitor monitor) throws IOException {
 	  		File projectFolder = getProjectFolder(genModel);
         List<String> arguments = new ArrayList<String>();
 		Model2bodies generator = new Model2bodies(genModel, projectFolder, arguments);
@@ -175,7 +190,7 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 //	       folder.refreshLocal(IResource.DEPTH_INFINITE, BasicMonitor.toIProgressMonitor(CodeGenUtil.createMonitor(monitor, 1)));
 	}
 
-	protected void createDispatchTables(GenModel genModel, Monitor monitor) throws IOException {
+	protected void createDispatchTables(@NonNull GenModel genModel, @NonNull Monitor monitor) throws IOException {
 		File projectFolder = getProjectFolder(genModel);
         List<String> arguments = new ArrayList<String>();
         Model2tables generator = new Model2tables(genModel, projectFolder, arguments);
@@ -187,7 +202,7 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 	 * Create a Map of feature identification to body to be embedded in the EMF model.
 	 * @throws IOException 
 	 */
-	protected Map<String, String> createFeatureBodies(GenModel genModel) throws IOException {
+	protected @NonNull Map<String, String> createFeatureBodies(@NonNull GenModel genModel) throws IOException {
 		Map<String, String> results = new HashMap<String, String>();
         File folder = new File("/");       
         List<String> arguments = new ArrayList<String>();
@@ -208,6 +223,7 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 
 	@Override
 	protected Diagnostic doPreGenerate(Object object, Object projectType) {
+		assert object != null;
 		GenModel genModel = (GenModel) object;
 	    try {
 			if ((projectType == MODEL_PROJECT_TYPE) && !useDelegates(genModel) && hasDelegates(genModel)) {
@@ -219,6 +235,9 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 		        createImportManager(genPackage.getReflectionPackageName(), genPackage.getFactoryInterfaceName() + "Tables");	// Only used to suppress NPE
 				Resource genResource = genModel.eResource();
 				ResourceSet resourceSet = genResource.getResourceSet();
+				if (resourceSet == null) {
+					throw new NullPointerException("No ResourceSet for genmodel");
+				}
 				MetaModelManager metaModelManager = MetaModelManager.findAdapter(resourceSet);
 				MetaModelManagerResourceSetAdapter adapter = MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
 				metaModelManager = adapter.getMetaModelManager();
@@ -243,6 +262,7 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 
 	@Override
 	protected Diagnostic generateModel(Object object, Monitor monitor) {
+		assert object != null;
 		GenModel genModel = (GenModel) object;
 	    try {
 			if (!useDelegates(genModel) && hadDelegates.contains(genModel)) {
@@ -276,7 +296,7 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 		return super.generateModel(object, monitor);
 	}
 
-	protected File getProjectFolder(GenModel genModel) {
+	protected File getProjectFolder(@NonNull GenModel genModel) {
 		String modelProjectDirectory = genModel.getModelProjectDirectory();
 		String modelDirectory = genModel.getModelDirectory();
 		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
@@ -299,16 +319,16 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 	/**
 	 * Return true if any local GenPackage is for an EPackage that has OCL validation/setting/invocation delegates.
 	 */
-	protected boolean hasDelegates(GenModel genModel) {
+	protected boolean hasDelegates(@NonNull GenModel genModel) {
 		for (GenPackage genPackage : genModel.getGenPackages()) {
 			EPackage ePackage = genPackage.getEcorePackage();
-			if (hasDelegates(ePackage)) {
+			if ((ePackage != null) && hasDelegates(ePackage)) {
 				return true;
 			}
 		}
 		return false;
 	}
-	protected boolean hasDelegates(EPackage ePackage) {
+	protected boolean hasDelegates(@NonNull EPackage ePackage) {
 		List<String> validationDelegates = EcoreUtil.getValidationDelegates(ePackage);
 		for (String validationDelegate : validationDelegates) {
 			if (OCLCommon.isDelegateURI(validationDelegate)) {
@@ -330,36 +350,47 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 		return false;
 	}
 
-	protected void installJavaBodies(MetaModelManager metaModelManager, GenModel genModel, Map<String, String> results) {
+	protected void installJavaBodies(@NonNull MetaModelManager metaModelManager, @NonNull GenModel genModel, @NonNull Map<String, String> results) {
 		List<GenPackage> genPackages = genModel.getAllGenPackagesWithClassifiers();
 		for (GenPackage genPackage : genPackages) {
 			EPackage ecorePackage = genPackage.getEcorePackage();
-			Ecore2Pivot ecore2pivot = Ecore2Pivot.getAdapter(ecorePackage.eResource(), metaModelManager);
-			for (GenClass genClass : genPackage.getGenClasses()) {
-				EClass eClass = genClass.getEcoreClass();
-				for (EOperation eOperation : eClass.getEOperations()) {
-					installOperation(ecore2pivot, eOperation, results);
-				}
-				for (EStructuralFeature eFeature : eClass.getEStructuralFeatures()) {
-					installProperty(ecore2pivot, eFeature, results);
+			Resource ecoreResource = ecorePackage.eResource();
+			if (ecoreResource != null) {
+				Ecore2Pivot ecore2pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager);
+				if (ecore2pivot != null) {
+					for (GenClass genClass : genPackage.getGenClasses()) {
+						EClass eClass = genClass.getEcoreClass();
+						if (eClass != null) {
+							for (EOperation eOperation : eClass.getEOperations()) {
+								assert ecore2pivot != null;
+								assert eOperation != null;
+								installOperation(ecore2pivot, eOperation, results);
+							}
+							for (EStructuralFeature eFeature : eClass.getEStructuralFeatures()) {
+								assert ecore2pivot != null;
+								assert eFeature != null;
+								installProperty(ecore2pivot, eFeature, results);
+							}
+						}
+					}
 				}
 			}
 		}
 	}
 
-	protected void installOperation(Ecore2Pivot ecore2pivot, EOperation eOperation, Map<String, String> results) {
+	protected void installOperation(@NonNull Ecore2Pivot ecore2pivot, @NonNull EOperation eOperation, @NonNull Map<String, String> results) {
 		Element pOperation = ecore2pivot.getCreated(Element.class, eOperation);
-		String fragmentURI;
+		String fragmentURI = null;
 		if (pOperation instanceof Operation) {
 			fragmentURI = EcoreUtil.getURI(pOperation).fragment().toString();
 		}
-		else {
+		else if (pOperation instanceof Constraint) {
 			Constraint constraint = (Constraint) pOperation;
 			fragmentURI = EcoreUtil.getURI(constraint.eContainer()).fragment().toString() + "==" + constraint.getName();
 		}
-		String body = results.get(fragmentURI);
+		String body = fragmentURI != null ? results.get(fragmentURI) : null;
 		if ((body == null) || (body.trim().length() == 0)) {
-			body = "throw new UnsupportedOperationException();  // FIXME Unimplemented " + Pivot2Moniker.toString(pOperation);
+			body = "throw new UnsupportedOperationException();  // FIXME Unimplemented " + (pOperation != null ? Pivot2Moniker.toString(pOperation) : "");
 		}
 		EcoreUtil.setAnnotation(eOperation, GenModelPackage.eNS_URI, "body", body);
 		List<EAnnotation> eAnnotations = eOperation.getEAnnotations();
@@ -381,12 +412,12 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 		}
 	}
 
-	protected void installProperty(Ecore2Pivot ecore2pivot, EStructuralFeature eFeature, Map<String, String> results) {
+	protected void installProperty(@NonNull Ecore2Pivot ecore2pivot, @NonNull EStructuralFeature eFeature, @NonNull Map<String, String> results) {
 		Property pProperty = ecore2pivot.getCreated(Property.class, eFeature);
 		String fragmentURI = EcoreUtil.getURI(pProperty).fragment().toString();
 		String body = results.get(fragmentURI);
 		if (body == null) {
-			body = "throw new UnsupportedOperationException();  // FIXME Unimplemented " + Pivot2Moniker.toString(pProperty);
+			body = "throw new UnsupportedOperationException();  // FIXME Unimplemented " + (pProperty != null ? Pivot2Moniker.toString(pProperty) : "");
 		}
 		if (body != null) {
 			EcoreUtil.setAnnotation(eFeature, GenModelPackage.eNS_URI, "get", body);
@@ -414,10 +445,10 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 	/**
 	 * Eliminate all OCL validation/setting/invocation delegates.
 	 */
-	protected void pruneDelegates(GenModel genModel) {
+	protected void pruneDelegates(@NonNull GenModel genModel) {
 		for (GenPackage genPackage : genModel.getGenPackages()) {
 			EPackage ePackage = genPackage.getEcorePackage();
-			if (hasDelegates(ePackage)) {
+			if ((ePackage != null) && hasDelegates(ePackage)) {
 				hadDelegates.add(genModel);
 				EcoreUtil.setValidationDelegates(ePackage, pruneDelegates(EcoreUtil.getValidationDelegates(ePackage)));
 				EcoreUtil.setSettingDelegates(ePackage, pruneDelegates(EcoreUtil.getSettingDelegates(ePackage)));
@@ -425,11 +456,13 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 			}
 		}
 	}
-	protected List<String> pruneDelegates(List<String> oldDelegates) {
+	protected List<String> pruneDelegates(@Nullable List<String> oldDelegates) {
 		List<String> newDelegates = new ArrayList<String>();
-		for (String aDelegate : oldDelegates) {
-			if (!OCLCommon.isDelegateURI(aDelegate)) {
-				newDelegates.add(aDelegate);
+		if (oldDelegates != null) {
+			for (String aDelegate : oldDelegates) {
+				if (!OCLCommon.isDelegateURI(aDelegate)) {
+					newDelegates.add(aDelegate);
+				}
 			}
 		}
 		return newDelegates;

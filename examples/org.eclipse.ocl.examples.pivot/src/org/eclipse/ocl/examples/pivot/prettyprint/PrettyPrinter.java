@@ -84,12 +84,12 @@ public class PrettyPrinter
 		private final String prefix;		// null for manditory continuation  of previous fragment
 		private final String text;
 		private final String suffix;
-		private Fragment parent = null;
+		private @Nullable Fragment parent = null;
 		private List<Fragment> children = null;
 		private boolean lineWrap = true;
 		private boolean exdented = false;
 		
-		public Fragment(Fragment parent, int depth, String prefix, String text, String suffix) {
+		public Fragment(@Nullable Fragment parent, int depth, String prefix, String text, String suffix) {
 			this.parent = parent;
 			this.depth = depth;
 			this.prefix = prefix;
@@ -97,7 +97,7 @@ public class PrettyPrinter
 			this.suffix = suffix;
 		}
 		
-		public Fragment addChild(String prefix, String text, String suffix) {
+		public @NonNull Fragment addChild(String prefix, String text, String suffix) {
 //			assert (prefix.length() + text.length() + suffix.length()) > 0;
 			if (children == null) {
 				children = new ArrayList<Fragment>();
@@ -193,7 +193,7 @@ public class PrettyPrinter
 			return length;
 		}
 
-		public Fragment getParent() {
+		public @Nullable Fragment getParent() {
 			return parent;
 		}
 
@@ -236,11 +236,11 @@ public class PrettyPrinter
 		}
 	}
 
-	public static PrettyPrinter createNamePrinter(@NonNull Element element, @NonNull PrettyPrintOptions options) {
+	public static @NonNull PrettyPrinter createNamePrinter(@NonNull Element element, @NonNull PrettyPrintOptions options) {
 		return new PrettyPrinter(options, Mode.NAME, element);
 	}
 
-	public static PrettyPrinter createPrinter(@NonNull Element element, @NonNull PrettyPrintOptions options) {
+	public static @NonNull PrettyPrinter createPrinter(@NonNull Element element, @NonNull PrettyPrintOptions options) {
 		return new PrettyPrinter(options, Mode.FULL, element);
 	}
 
@@ -252,17 +252,19 @@ public class PrettyPrinter
 		return options;
 	}
 
-	public static String print(@NonNull Element element) {
+	public static @NonNull String print(@NonNull Element element) {
 		return print(element, createOptions(null));
 	}
-	public static String print(@NonNull Element element, @NonNull Namespace namespace) {
+	public static @NonNull String print(@NonNull Element element, @NonNull Namespace namespace) {
 		return print(element, createOptions(namespace));
 	}
-	public static String print(@NonNull Element element, @NonNull PrettyPrintOptions options) {
+	public static @NonNull String print(@NonNull Element element, @NonNull PrettyPrintOptions options) {
 		PrettyPrinter printer = new PrettyPrinter(options, Mode.FULL, element);
 		try {
 			printer.appendElement(element);
-			return printer.toString();
+			String string = printer.toString();
+			assert string != null;
+			return string;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -270,17 +272,19 @@ public class PrettyPrinter
 		}
 	}
 
-	public static String printName(@NonNull Element element) {
+	public static @NonNull String printName(@NonNull Element element) {
 		return printName(element, createOptions(null));
 	}
-	public static String printName(@NonNull Element element, @NonNull Namespace namespace) {
+	public static @NonNull String printName(@NonNull Element element, @NonNull Namespace namespace) {
 		return printName(element, createOptions(namespace));
 	}
-	public static String printName(@NonNull Element element, @NonNull PrettyPrintOptions options) {
+	public static @NonNull String printName(@NonNull Element element, @NonNull PrettyPrintOptions options) {
 		PrettyPrinter printer = createNamePrinter(element, options);
 		try {
 			printer.appendElement(element);
-			return printer.toString();
+			String string = printer.toString();
+			assert string != null;
+			return string;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -288,17 +292,19 @@ public class PrettyPrinter
 		}
 	}
 
-	public static String printType(@NonNull Element element) {
+	public static @NonNull String printType(@NonNull Element element) {
 		return printType(element, createOptions(null));
 	}
-	public static String printType(@NonNull Element element, @NonNull Namespace namespace) {
+	public static @NonNull String printType(@NonNull Element element, @NonNull Namespace namespace) {
 		return printType(element, createOptions(namespace));
 	}
-	public static String printType(@NonNull Element element, @NonNull PrettyPrintOptions options) {
+	public static @NonNull String printType(@NonNull Element element, @NonNull PrettyPrintOptions options) {
 		PrettyPrinter printer = new PrettyPrinter(options, Mode.TYPE, element);
 		try {
 			printer.appendElement(element);
-			return printer.toString();
+			String string = printer.toString();
+			assert string != null;
+			return string;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -682,14 +688,15 @@ public class PrettyPrinter
 	 * If it is not necessary to start a new-line after text, emit suffix instead of the new-line.
 	 */
 	public void exdent(String prefix, String text, String suffix) {
-		assert (fragment != null) && (fragment.getParent() != null);
+		Fragment fragmentParent = fragment.getParent();
+		assert (fragment != null) && (fragmentParent != null);
 		if (((pendingPrefix != null) && (pendingPrefix.length() > 0)) || (pendingText.length() > 0)) {
 			fragment.addChild(pendingPrefix, pendingText.toString(), "");
 			pendingPrefix = "";
 			pendingText.setLength(0);
 		}
 		if ((prefix.length() > 0) || (text.length() > 0)) {
-			fragment = fragment.getParent().addChild(prefix, text.toString(), suffix);
+			fragment = fragmentParent.addChild(prefix, text.toString(), suffix);
 			fragment.exdented = true;
 		}
 	}

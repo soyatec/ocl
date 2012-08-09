@@ -12,6 +12,8 @@ package codegen.company.bodies;
 import codegen.company.CodegencompanyTables;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
@@ -57,7 +59,7 @@ public class CompanyBodies
 		/*
 		true
 		*/
-		public Value evaluate(DomainEvaluator evaluator, DomainType returnType, final Value self) throws InvalidValueException {
+		public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Value self) throws InvalidValueException {
 			final ValueFactory valueFactory = evaluator.getValueFactory();
 			final BooleanValue True = valueFactory.getTrue();
 			
@@ -88,7 +90,7 @@ public class CompanyBodies
 	in
 	  table->any(range->includes(employees->size())).size
 		*/
-		public Value evaluate(DomainEvaluator evaluator, DomainType returnType, final Value self, DomainProperty property) throws InvalidValueException {
+		public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Value self, @NonNull DomainProperty property) throws InvalidValueException {
 			final ValueFactory valueFactory = evaluator.getValueFactory();
 			final DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 			final ExecutorType T_Company_ecore__company__CompanySizeKind = CodegencompanyTables.Types._CompanySizeKind;
@@ -156,7 +158,7 @@ public class CompanyBodies
 			/*
 			range->includes(employees->size())
 			*/
-				public Value evaluate(DomainEvaluator evaluator, DomainType returnType, Value sourceValue, Value iterator1) throws InvalidValueException {
+				public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull Value iterator1) throws InvalidValueException {
 					final Value V_1_ = iterator1;	// iterator: 1_
 					
 					Value A_symbol_54 = ((TupleValue)V_1_).getValue(L_range_Sequence_Integer_);

@@ -54,7 +54,7 @@ public class MarkupToHTML extends MarkupSwitch<HTMLBuffer>
 		}		
 	}
 	
-	public static String toString(@NonNull MetaModelManager metaModelManager, @NonNull Object context, @NonNull MarkupElement element) throws Exception {
+	public static String toString(@NonNull MetaModelManager metaModelManager, @Nullable Object context, @NonNull MarkupElement element) throws Exception {
 		MarkupToHTML toString = new MarkupToHTML(metaModelManager, context);
 		try {
 			return toString.doSwitch(element).toString();
@@ -65,10 +65,10 @@ public class MarkupToHTML extends MarkupSwitch<HTMLBuffer>
 	
 	private @Nullable OCL ocl = null;
 	private @NonNull MetaModelManager metaModelManager;
-	protected final @NonNull Object context;
+	protected final @Nullable Object context;
 	protected final @NonNull HTMLBuffer s = new HTMLBuffer();
 
-	public MarkupToHTML(@NonNull MetaModelManager metaModelManager, @NonNull Object context) {
+	public MarkupToHTML(@NonNull MetaModelManager metaModelManager, @Nullable Object context) {
 		this.metaModelManager = metaModelManager;
 		this.context = context;
 	}	

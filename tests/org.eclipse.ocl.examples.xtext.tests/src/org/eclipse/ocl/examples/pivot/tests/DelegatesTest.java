@@ -57,6 +57,7 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.examples.extlibrary.EXTLibraryFactory;
 import org.eclipse.emf.examples.extlibrary.EXTLibraryPackage;
 import org.eclipse.emf.examples.extlibrary.Library;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -179,7 +180,7 @@ public class DelegatesTest extends PivotTestSuite
 		validationDelegateFactoryRegistry.put(oclDelegateURI, new OCLValidationDelegateFactory(oclDelegateURI) {
 
 			@Override
-			public ValidationDelegate createValidationDelegate(EClassifier classifier) {
+			public ValidationDelegate createValidationDelegate(@NonNull EClassifier classifier) {
 				usedLocalRegistry = true;
 				return super.createValidationDelegate(classifier);
 			}

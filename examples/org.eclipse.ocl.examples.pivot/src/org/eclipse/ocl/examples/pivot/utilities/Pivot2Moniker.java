@@ -19,21 +19,23 @@ package org.eclipse.ocl.examples.pivot.utilities;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 
 public class Pivot2Moniker extends Abstract2Moniker
 {
-	public static String toString(Element pivotElement) {
+	public static @NonNull String toString(@NonNull Element pivotElement) {
 		Pivot2Moniker moniker = new Pivot2Moniker(pivotElement);
 		moniker.appendElement(pivotElement);
 		String string = moniker.toString();
 		assert !"".equals(string);
+		assert string != null;
 		return string;
 	}
 
-	public Pivot2Moniker(Element target) {
+	public Pivot2Moniker(@NonNull Element target) {
 		super(target);
 	}
 

@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
@@ -52,8 +53,8 @@ public class ImportTests extends XtextTestCase
 	{
 		public static final SpacedOut INSTANCE = new SpacedOut();
 
-		public Value evaluate(DomainEvaluator evaluator, DomainCallExp callExp,
-				Value sourceValue, Value... argumentValues)
+		public Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp,
+				@NonNull Value sourceValue, Value... argumentValues)
 				throws InvalidEvaluationException, InvalidValueException {
 			String string = sourceValue == null?  Value.INVALID_NAME : sourceValue.oclToString();
 			return evaluator.getValueFactory().stringValueOf(string);

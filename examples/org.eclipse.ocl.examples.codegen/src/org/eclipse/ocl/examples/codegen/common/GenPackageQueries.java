@@ -34,6 +34,8 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.library.LibraryConstants;
@@ -55,25 +57,25 @@ import org.eclipse.uml2.codegen.ecore.genmodel.util.UML2GenModelUtil;
 
 public class GenPackageQueries
 {		
-	public Type getAnotherType(GenPackage genPackage, Type type) {
+	public @NonNull Type getAnotherType(@NonNull GenPackage genPackage, @NonNull Type type) {
 		MetaModelManager metaModelManager = getMetaModelManager(genPackage);
 		Type primaryType = metaModelManager.getPrimaryType(type);
 		return primaryType;
 	}
 	
-	public String getCopyright(GenPackage genPackage, String indentation) {
+	public @Nullable String getCopyright(@NonNull GenPackage genPackage, @NonNull String indentation) {
 		return genPackage.getCopyright(indentation);
 	}
 
-	public String getEcorePackageName(GenPackage genPackage) {
+	public @Nullable String getEcorePackageName(@NonNull GenPackage genPackage) {
 		return genPackage.getEcorePackage().getName();	// Workaround for Acceleo URI resolution bug
 	}
 	
-	public String getFeatureTypeCast(GenPackage genPackage, Feature typedElement) {
+	public @NonNull String getFeatureTypeCast(@NonNull GenPackage genPackage, @NonNull Feature typedElement) {
 		return "(" + typedElement.getClass().getSimpleName() + ")";
 	}
 	
-	public GenClass getGenClass(GenPackage genPackage, Type type) {
+	public @Nullable GenClass getGenClass(@NonNull GenPackage genPackage, @NonNull Type type) {
 		String name = type.getName();
 		for (GenClass genClass : genPackage.getGenClasses()) {
 			String clsName = genClass.getEcoreClass().getName();
@@ -84,7 +86,7 @@ public class GenPackageQueries
 		return null;
 	}
 	
-	public GenFeature getGenFeature(GenPackage genPackage, GenClass genClass, Property property) {
+	public @Nullable GenFeature getGenFeature(@NonNull GenPackage genPackage, @NonNull GenClass genClass, @NonNull Property property) {
 		String name = property.getName();
 		for (GenFeature genFeature : genClass.getGenFeatures()) {
 			String featureName = genFeature.getEcoreFeature().getName();
@@ -95,7 +97,7 @@ public class GenPackageQueries
 		return null;
 	}
 	
-	public GenOperation getGenOperation(GenPackage genPackage, GenClass genClass, Operation operation) {
+	public @Nullable GenOperation getGenOperation(@NonNull GenPackage genPackage, @NonNull GenClass genClass, @NonNull Operation operation) {
 		String name = operation.getName();
 		for (GenOperation genOperation : genClass.getGenOperations()) {
 			if (name.equals(genOperation.getName())) {
@@ -105,17 +107,18 @@ public class GenPackageQueries
 		return null;
 	}
 	
-	public GenPackage getGenPackage(GenPackage genPackage, org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+	public @Nullable GenPackage getGenPackage(@NonNull GenPackage genPackage, @NonNull DomainPackage pivotPackage) {
 //		org.eclipse.ocl.examples.pivot.Package pivotPackage = pivotType.getPackage();
-		if (pivotPackage == null) {
-			return genPackage;	// FIXME
-		}
+//		if (pivotPackage == null) {
+//			return genPackage;	// FIXME
+//		}
 		EPackage firstEPackage = genPackage.getEcorePackage();
 		if (firstEPackage.getName().equals(pivotPackage.getName())) {
 			return genPackage;
 		}
 		GenModel genModel = genPackage.getGenModel();
 		List<GenPackage> usedGenPackages = genModel.getUsedGenPackages();
+		assert usedGenPackages != null;
 //		String nsURI = pivotPackage.getNsURI();
 //		String name = pivotType.getName();
 //		GenPackage usedGenPackage = getNsURIGenPackage(usedGenPackages, nsURI, name);
@@ -124,6 +127,7 @@ public class GenPackageQueries
 //		}		
 		Resource genModelResource = genPackage.eResource();
 		ResourceSet genModelResourceSet = genModelResource.getResourceSet();
+		assert genModelResourceSet != null;
 		MetaModelManager metaModelManager = getMetaModelManager(genPackage);
 		DomainPackage metaModelPackage = metaModelManager.getPivotMetaModel();
 		org.eclipse.ocl.examples.pivot.Package libraryPackage = metaModelManager.getLibraries().get(0);
@@ -144,15 +148,16 @@ public class GenPackageQueries
 		return genPackage;	// FIXME
 	}
 
-	protected MetaModelManager getMetaModelManager(GenPackage genPackage) {
+	protected @NonNull MetaModelManager getMetaModelManager(@NonNull GenPackage genPackage) {
 		Resource genModelResource = genPackage.eResource();
 		ResourceSet genModelResourceSet = genModelResource.getResourceSet();
+		assert genModelResourceSet != null;
 		MetaModelManagerResourceSetAdapter resourceSetAdapter = MetaModelManagerResourceSetAdapter.getAdapter(genModelResourceSet, null);
 		MetaModelManager metaModelManager = resourceSetAdapter.getMetaModelManager();
 		return metaModelManager;
 	}
 	
-	public String getInterfacePackageName(GenPackage genPackage) {
+	public String getInterfacePackageName(@NonNull GenPackage genPackage) {
 		return genPackage.getInterfacePackageName();
 	}
 
@@ -167,7 +172,7 @@ public class GenPackageQueries
 		return null;
 	}
 
-	private <T extends GenPackage> T getMetaModelGenPackage(List<T> genPackages) {
+	private @Nullable <T extends GenPackage> T getMetaModelGenPackage(@NonNull List<T> genPackages) {
 		for (T genPackage : genPackages) {
 			EPackage ecorePackage = genPackage.getEcorePackage();
 			EClassifier eClassifier = ecorePackage.getEClassifier("Element");
@@ -178,19 +183,23 @@ public class GenPackageQueries
 		return null;
 	}
 
-	private <T extends GenClassifier> T getNamedElement1(List<T> genClasses, String name) {
-		for (T genClass : genClasses) {
-			if (genClass.getName().equals(name)) {
-				return genClass;
+	private @Nullable <T extends GenClassifier> T getNamedElement1(@Nullable List<T> genClasses, @NonNull String name) {
+		if (genClasses != null) {
+			for (T genClass : genClasses) {
+				if (genClass.getName().equals(name)) {
+					return genClass;
+				}
 			}
 		}
 		return null;
 	}
 
-	private <T extends GenFeature> T getNamedElement2(List<T> genClasses, String name) {
-		for (T genClass : genClasses) {
-			if (genClass.getName().equals(name)) {
-				return genClass;
+	private @Nullable <T extends GenFeature> T getNamedElement2(@Nullable List<T> genClasses, @NonNull String name) {
+		if (genClasses != null) {
+			for (T genClass : genClasses) {
+				if (genClass.getName().equals(name)) {
+					return genClass;
+				}
 			}
 		}
 		return null;
@@ -208,12 +217,12 @@ public class GenPackageQueries
 		}		
 		return null;
 	} */
-	  protected static boolean isBlank(String string)
-	  {
+	protected static boolean isBlank(@Nullable String string)
+	{
 	    return string == null || string.length() == 0;
-	  }
+	}
 	
-	public String getOperationID(GenPackage genPackage, Type type, Constraint rule, Boolean diagnosticCode) {
+	public String getOperationID(@NonNull GenPackage genPackage, @NonNull Type type, @NonNull Constraint rule, @NonNull Boolean diagnosticCode) {
 		GenClass genClass = getGenClass(genPackage, type);
 		if (genClass != null) {
 			String name;
@@ -243,23 +252,32 @@ public class GenPackageQueries
 		return "<<unknown-OperationId>>";
 	}
 	
-	public String getOperationReturnType(GenPackage genPackage, Operation operation) {
-		GenClass genClass = getGenClass(genPackage, operation.getOwningType());
-		if (genClass != null) {
-			GenOperation genOperation = getGenOperation(genPackage, genClass, operation);
-			if (genOperation != null) {
-				return genOperation.getObjectType(genClass);
+	public String getOperationReturnType(@NonNull GenPackage genPackage, @NonNull Operation operation) {
+		Type owningType = operation.getOwningType();
+		if (owningType != null) {
+			GenClass genClass = getGenClass(genPackage, owningType);
+			if (genClass != null) {
+				GenOperation genOperation = getGenOperation(genPackage, genClass, operation);
+				if (genOperation != null) {
+					return genOperation.getObjectType(genClass);
+				}
 			}
 		}
 		return "";
 	}
 	
-	public org.eclipse.ocl.examples.pivot.Package getPivotPackage(GenPackage genPackage) {
+	public org.eclipse.ocl.examples.pivot.Package getPivotPackage(@NonNull GenPackage genPackage) {
 		EPackage ePackage = genPackage.getEcorePackage();
 		Resource ecoreResource = ePackage.eResource();
+		if (ecoreResource == null) {
+			return null;
+		}
 		MetaModelManager metaModelManager = getMetaModelManager(genPackage);
 		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager);
 		org.eclipse.ocl.examples.pivot.Package pivotPackage = ecore2Pivot.getCreated(org.eclipse.ocl.examples.pivot.Package.class, ePackage);
+		if (pivotPackage == null) {
+			return null;
+		}
 		if (pivotPackage.getNsURI().equals(OCLstdlibPackage.eNS_URI)) {				// If generating OCLstdlibTables ...
 			mergeLibrary(metaModelManager, pivotPackage);			// FIXME: redundant once M2T scans all partial types
 		}
@@ -275,39 +293,51 @@ public class GenPackageQueries
 		return pivotPackage;
 	}
 	
-	public String getPropertyType(GenPackage genPackage, Property property) {
-		GenClass genClass = getGenClass(genPackage, property.getOwningType());
-		if (genClass != null) {
-			GenFeature genFeature = getGenFeature(genPackage, genClass, property);
-			if (genFeature != null) {
-				return genFeature.getObjectType(genClass);
+	public String getPropertyType(@NonNull GenPackage genPackage, @NonNull Property property) {
+		Type owningType = property.getOwningType();
+		if (owningType != null) {
+			GenClass genClass = getGenClass(genPackage, owningType);
+			if (genClass != null) {
+				GenFeature genFeature = getGenFeature(genPackage, genClass, property);
+				if (genFeature != null) {
+					return genFeature.getObjectType(genClass);
+				}
 			}
 		}
 		return "";
 	}
 	
-	public String getQualifyingPackage(GenPackage genPackage, Type type) {
-		GenPackage genPackage2 = getGenPackage(genPackage, type.getPackage());
-		return genPackage2 != null ? (genPackage2.getQualifiedPackageName() + "." + genPackage2.getPrefix() + "Tables") : "";
+	public String getQualifyingPackage(@NonNull GenPackage genPackage, @NonNull Type type) {
+		org.eclipse.ocl.examples.pivot.Package owningPackage = type.getPackage();
+		if (owningPackage != null) {
+			GenPackage genPackage2 = getGenPackage(genPackage, owningPackage);
+			if (genPackage2 != null) {
+				return genPackage2.getQualifiedPackageName() + "." + genPackage2.getPrefix() + "Tables";
+			}
+		}
+		return "";
 	}
 	
-	public String getQualifiedPackageName(GenPackage genPackage) {
+	public String getQualifiedPackageName(@NonNull GenPackage genPackage) {
 		return genPackage.getQualifiedPackageName();
 	}
 	
-	public String getQualifiedValidatorClassName(GenPackage genPackage) {
+	public String getQualifiedValidatorClassName(@NonNull GenPackage genPackage) {
 		return genPackage.getQualifiedValidatorClassName();
 	}
 
-	public String getSharedLibrary(GenPackage genPackage) {
+	public String getSharedLibrary(@NonNull GenPackage genPackage) {
 		org.eclipse.ocl.examples.pivot.Package thisPackage = getPivotPackage(genPackage);
 		MetaModelManager metaModelManager = getMetaModelManager(genPackage);
 		PrimitiveType booleanType = metaModelManager.getBooleanType();
 		TypeServer typeServer = metaModelManager.getTypeServer(booleanType);
 		for (DomainType type : typeServer.getPartialTypes()) {
-			if (type.getPackage() != thisPackage) {
-				GenPackage gPackage = getGenPackage(genPackage, (org.eclipse.ocl.examples.pivot.Package)type.getPackage());	// FIXZ Lose cast
-				return getInterfacePackageName(gPackage) + "." + gPackage.getPrefix() + "Tables";
+			DomainPackage pivotPackage = type.getPackage();
+			if ((pivotPackage != null) && (pivotPackage != thisPackage)) {
+				GenPackage gPackage = getGenPackage(genPackage, pivotPackage);
+				if (gPackage != null) {
+					return getInterfacePackageName(gPackage) + "." + gPackage.getPrefix() + "Tables";
+				}
 			}
 		}
 		return "";
@@ -317,7 +347,7 @@ public class GenPackageQueries
 	 * Return  true if type has another definition counterpart. The Standard Library
 	 * providers a base definition for the pivot model.
 	 */
-	public Boolean hasAnotherType(GenPackage genPackage, Type type) {
+	public @NonNull Boolean hasAnotherType(@NonNull GenPackage genPackage, @NonNull Type type) {
 		MetaModelManager metaModelManager = getMetaModelManager(genPackage);
 /*		TypeServer typeServer = metaModelManager.getTypeServer(type);
 		for (Type trackedType : typeServer.getTrackedTypes()) {
@@ -341,12 +371,24 @@ public class GenPackageQueries
 	 * Return  true if property has an Ecore counterpart. Non-navigable opposites may have a Property
 	 * but no Ecore EReference.
 	 */
-	public Boolean hasEcore(GenPackage genPackage, Property property) {
-		GenClass genClass = getNamedElement1(genPackage.getGenClasses(), property.getOwningType().getName());
+	public @NonNull Boolean hasEcore(@NonNull GenPackage genPackage, @NonNull Property property) {
+		Type owningType = property.getOwningType();
+		if (owningType == null) {
+			return false;
+		}
+		String typeName = owningType.getName();
+		if (typeName == null) {
+			return false;
+		}
+		GenClass genClass = getNamedElement1(genPackage.getGenClasses(), typeName);
 		if (genClass == null) {
 			return false;
 		}
-		GenFeature genFeature = getNamedElement2(genClass.getAllGenFeatures(), property.getName());
+		String propertyName = property.getName();
+		if (propertyName == null) {
+			return false;
+		}
+		GenFeature genFeature = getNamedElement2(genClass.getAllGenFeatures(), propertyName);
 		if (genFeature == null) {
 			return false;
 		}
@@ -357,19 +399,22 @@ public class GenPackageQueries
 	 * Return true if type has an Ecore counterpart. The Standard Library genmodel has
 	 * no Ecore types, unless the Pivot model is also in use.
 	 */
-	public Boolean hasEcore(GenPackage genPackage, Type type) {
-		GenClass genClass = getNamedElement1(genPackage.getGenClasses(), type.getName());
-		if (genClass != null) {
-			return true;
-		}
-		GenEnum genEnum = getNamedElement1(genPackage.getGenEnums(), type.getName());
-		if (genEnum != null) {
-			return true;
+	public @NonNull Boolean hasEcore(@NonNull GenPackage genPackage, @NonNull Type type) {
+		String typeName = type.getName();
+		if (typeName != null) {
+			GenClass genClass = getNamedElement1(genPackage.getGenClasses(), typeName);
+			if (genClass != null) {
+				return true;
+			}
+			GenEnum genEnum = getNamedElement1(genPackage.getGenEnums(), typeName);
+			if (genEnum != null) {
+				return true;
+			}
 		}
 		return false;
 	}
 
-	public Boolean hasSharedLibrary(GenPackage genPackage) {
+	public @NonNull Boolean hasSharedLibrary(@NonNull GenPackage genPackage) {
 		org.eclipse.ocl.examples.pivot.Package thisPackage = getPivotPackage(genPackage);
 		MetaModelManager metaModelManager = getMetaModelManager(genPackage);
 		PrimitiveType booleanType = metaModelManager.getBooleanType();
@@ -387,13 +432,15 @@ public class GenPackageQueries
 		return gotThisPackage && gotThatPackage;
 	}
 
-	private GenPackage loadGenPackage(ResourceSet resourceSet, URI genModelURI) {
+	private @NonNull GenPackage loadGenPackage(@NonNull ResourceSet resourceSet, @NonNull URI genModelURI) {
 		Resource resource = resourceSet.getResource(genModelURI, true);
 		GenModel genModel = (GenModel) resource.getContents().get(0);
-		return genModel.getGenPackages().get(0);
+		GenPackage genPackage = genModel.getGenPackages().get(0);
+		assert genPackage != null;
+		return genPackage;
 	}
 	
-	protected void mergeLibrary(MetaModelManager metaModelManager, org.eclipse.ocl.examples.pivot.Package primaryPackage) {
+	protected void mergeLibrary(@NonNull MetaModelManager metaModelManager, @NonNull org.eclipse.ocl.examples.pivot.Package primaryPackage) {
 //		primaryPackage.setName("ocl");
 		List<Type> primaryTypes = primaryPackage.getOwnedType();
 		for (Library library : metaModelManager.getLibraries()) {

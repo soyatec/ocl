@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -65,7 +66,7 @@ public class PivotQueries
 	/**
 	 * Workaround Acceleo's lack of BigInteger support
 	 */
-	public static String asIntegerStringOrNull(Element element) {
+	public static @Nullable String asIntegerStringOrNull(@NonNull Element element) {
 		if (element instanceof IntegerLiteralExp) {
 			return element.toString();
 		}
@@ -78,14 +79,14 @@ public class PivotQueries
 	/**
 	 * Workaround Acceleo's lack of BigDecimal support
 	 */
-	public static String asRealStringOrNull(Element element) {
+	public static @Nullable String asRealStringOrNull(@NonNull Element element) {
 		if (element instanceof RealLiteralExp) {
 			return element.toString();
 		}
 		return null;
 	}
 
-	protected static ExpressionInOCL createExpressionInOCLError(String string) {
+	protected static @NonNull ExpressionInOCL createExpressionInOCLError(@NonNull String string) {
 		ExpressionInOCL expressionInOCL = PivotFactory.eINSTANCE.createExpressionInOCL();
 		StringLiteralExp stringLiteral = PivotFactory.eINSTANCE.createStringLiteralExp();
 		stringLiteral.setStringSymbol(string);
@@ -93,7 +94,7 @@ public class PivotQueries
 		return expressionInOCL;
 	}
 
-	protected static PrettyPrintOptions.Global createOptions(Visitable element) {
+	protected static @NonNull PrettyPrintOptions.Global createOptions(@NonNull Visitable element) {
 		Namespace scope = null;
 		if (element instanceof ExpressionInOCL) {
 			scope = PivotUtil.getNamespace(((ExpressionInOCL)element).getContextVariable().getType());
@@ -115,13 +116,14 @@ public class PivotQueries
 		return createOptions;
 	}
 	
-	protected int getAllSuperClasses(Map<Type, Integer> results, Type aClass) {
+	protected int getAllSuperClasses(@NonNull Map<Type, Integer> results, @NonNull Type aClass) {
 		Integer depth = results.get(aClass);
 		if (depth != null) {
 			return depth;
 		}
 		int myDepth = 0;
 		for (Type superClass : aClass.getSuperClass()) {
+			assert superClass != null;
 			int superDepth = getAllSuperClasses(results, superClass);
 			if (superDepth >= myDepth) {
 				myDepth = superDepth+1;
@@ -131,7 +133,7 @@ public class PivotQueries
 		return myDepth;
 	}
 	
-	public Type getBehavioralType(Type type) {
+	public @Nullable Type getBehavioralType(@NonNull Type type) {
 		if (type instanceof DataType) {
 			DataType dataType = (DataType) type;
 			return dataType.getBehavioralType();
@@ -139,7 +141,7 @@ public class PivotQueries
 		return null;
 	}
 	
-	public int getDepth(Type aClass) {
+	public int getDepth(@NonNull Type aClass) {
 		Map<Type, Integer> results = new HashMap<Type, Integer>();
 		return getAllSuperClasses(results, aClass);
 	}
@@ -150,7 +152,7 @@ public class PivotQueries
 	 * contextVariable, a null bodyExpression, and a StringLiteral messageExpression
 	 * containing the error messages.
 	 */
-	public static @NonNull ExpressionInOCL getExpressionInOCL(NamedElement contextElement, ValueSpecification specification) {
+	public static @Nullable ExpressionInOCL getExpressionInOCL(@NonNull NamedElement contextElement, @NonNull ValueSpecification specification) {
 		if (specification instanceof ExpressionInOCL) {
 			return (ExpressionInOCL) specification;
 		}
@@ -158,17 +160,19 @@ public class PivotQueries
 			Resource resource = contextElement.eResource();
 			ResourceSet resourceSet = resource.getResourceSet();
 			MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
-			ClassContext parserContext;
-			if (contextElement instanceof Property) {
-				parserContext = new PropertyContext(metaModelManager, null, (Property) contextElement);
+			ClassContext parserContext = null;
+			if (metaModelManager != null) {
+				if (contextElement instanceof Property) {
+					parserContext = new PropertyContext(metaModelManager, null, (Property) contextElement);
+				}
+				else if (contextElement instanceof Operation) {
+					parserContext = new OperationContext(metaModelManager, null, (Operation) contextElement, null);
+				}
+				else if (contextElement instanceof org.eclipse.ocl.examples.pivot.Class) {
+					parserContext = new ClassContext(metaModelManager, null, (org.eclipse.ocl.examples.pivot.Class) contextElement);
+				}
 			}
-			else if (contextElement instanceof Operation) {
-				parserContext = new OperationContext(metaModelManager, null, (Operation) contextElement, null);
-			}
-			else if (contextElement instanceof org.eclipse.ocl.examples.pivot.Class) {
-				parserContext = new ClassContext(metaModelManager, null, (org.eclipse.ocl.examples.pivot.Class) contextElement);
-			}
-			else {
+			if (parserContext == null) {
 				logger.error("Unknown context type");
 				return null;
 			}
@@ -181,8 +185,12 @@ public class PivotQueries
 			try {				
 				expressionInOCL = parserContext.parse(expression);
 			} catch (ParserException e) {
-				logger.error(e.getMessage());
-				return createExpressionInOCLError(e.getMessage());
+				String message = e.getMessage();
+				if (message == null) {
+					message = "";
+				}
+				logger.error(message);
+				return createExpressionInOCLError(message);
 			}
 			if (expressionInOCL != null) {
 				String messageExpression = PivotUtil.getMessage(opaqueExpression);
@@ -211,11 +219,11 @@ public class PivotQueries
 		return EcoreUtil.getURI(element).fragment().toString();
 	}
 
-	public static String getMoniker(Element element) {
+	public static @NonNull String getMoniker(@NonNull Element element) {
 		return Pivot2Moniker.toString(element);
 	}
 	
-	public LinkedHashSet<Operation> getOperations(Type type) {
+	public @NonNull LinkedHashSet<Operation> getOperations(@NonNull Type type) {
 		ResourceSet resourceSet = type.eResource().getResourceSet();
 		MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
 		LinkedHashSet<Operation> operations = new LinkedHashSet<Operation>();
@@ -228,7 +236,7 @@ public class PivotQueries
 		return operations;
 	}
 	
-	public LinkedHashSet<Property> getProperties(Type type) {
+	public @NonNull LinkedHashSet<Property> getProperties(@NonNull Type type) {
 		ResourceSet resourceSet = type.eResource().getResourceSet();
 		MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
 		LinkedHashSet<Property> properties = new LinkedHashSet<Property>();
@@ -238,19 +246,17 @@ public class PivotQueries
 		return properties;
 	}
 	
-	public String getSignature(Operation anOperation) {
-		if (anOperation == null) {
+	public String getSignature(@NonNull Operation anOperation) {
+		Type owningType = anOperation.getOwningType();
+		if (owningType == null) {
 			return "null";
 		}
-		String qualifiedSignature = PrettyPrinter.printType(anOperation, (Namespace)anOperation.getOwningType());	// FIXME cast
+		String qualifiedSignature = PrettyPrinter.printType(anOperation, (Namespace)owningType);	// FIXME cast
 		int index = qualifiedSignature.indexOf("::");
 		return index > 0 ? qualifiedSignature.substring(index+2) : qualifiedSignature;	// FIXME with PrettyPrintOptions
 	}
 	
-	public static Boolean isBinarySelf(OperationCallExp callExp) {
-		if (callExp == null) {
-			return false;
-		}
+	public static @NonNull Boolean isBinarySelf(@NonNull OperationCallExp callExp) {
 		Operation operation = callExp.getReferredOperation();
 		if (operation == null) {
 			return false;
@@ -262,12 +268,12 @@ public class PivotQueries
 		return parameters.get(0).getType() instanceof SelfType;
 	}
 	
-	public static String prettyPrint(Element element) {
+	public static @NonNull String prettyPrint(@NonNull Element element) {
 		PrettyPrintOptions.Global createOptions = createOptions(element);
 		return PrettyPrinter.print(element, createOptions);
 	}
 	
-	public static String prettyPrintName(Element element) {
+	public static @NonNull String prettyPrintName(@NonNull Element element) {
 		PrettyPrintOptions.Global createOptions = createOptions(element);
 		return PrettyPrinter.printName(element, createOptions);
 	}
