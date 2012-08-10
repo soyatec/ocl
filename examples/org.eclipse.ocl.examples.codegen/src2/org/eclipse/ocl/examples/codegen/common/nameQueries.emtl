@@ -409,13 +409,39 @@
       </expression>
       <type xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
     </ownedModuleElement>
+    <ownedModuleElement xsi:type="mtl:Query" name="resetSymbolNames" visibility="Public">
+      <parameter name="elem">
+        <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+      </parameter>
+      <expression xsi:type="ocl.ecore:OperationCallExp" referredOperation="/1/OclAny_Class/invoke">
+        <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+        <source xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/41">
+          <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+        </source>
+        <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="org.eclipse.ocl.examples.codegen.common.NameQueries">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        </argument>
+        <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="resetSymbolNames(java.lang.Object)">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        </argument>
+        <argument xsi:type="ocl.ecore:CollectionLiteralExp" eType="/4/Sequence(OclAny)" kind="Sequence">
+          <part xsi:type="ocl.ecore:CollectionItem">
+            <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+            <item xsi:type="ocl.ecore:VariableExp" name="elem" referredVariable="/0/resetSymbolNames/elem">
+              <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+            </item>
+          </part>
+        </argument>
+      </expression>
+      <type xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Query" name="upperName" visibility="Public">
       <parameter name="namedElement">
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//NamedElement"/>
       </parameter>
       <expression xsi:type="ocl.ecore:OperationCallExp" referredOperation="/1/OclAny_Class/invoke">
         <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
-        <source xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/41">
+        <source xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/44">
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//NamedElement"/>
         </source>
         <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="org.eclipse.emf.codegen.util.CodeGenUtil">
@@ -610,6 +636,16 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable"/>
         </eParameters>
       </eOperations>
+      <eOperations name="resetSymbolNames">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/resetSymbolNames"/>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="elem">
+          <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+        </eParameters>
+      </eOperations>
       <eOperations name="upperName">
         <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
           <contents xsi:type="ocl.ecore:Constraint"/>
@@ -786,6 +822,15 @@
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Element"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
@@ -1380,49 +1425,89 @@
       <details key="end" value="3586"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.116" references="/0/upperName">
+    <eAnnotations source="positions.116" references="/0/resetSymbolNames">
       <details key="start" value="3593"/>
-      <details key="end" value="3771"/>
+      <details key="end" value="3769"/>
       <details key="line" value="56"/>
     </eAnnotations>
-    <eAnnotations source="positions.117" references="/0/upperName/namedElement">
-      <details key="start" value="3617"/>
-      <details key="end" value="3644"/>
+    <eAnnotations source="positions.117" references="/0/resetSymbolNames/elem">
+      <details key="start" value="3624"/>
+      <details key="end" value="3637"/>
       <details key="line" value="56"/>
     </eAnnotations>
-    <eAnnotations source="positions.118" references="/0/upperName/@expression">
-      <details key="start" value="3658"/>
-      <details key="end" value="3768"/>
+    <eAnnotations source="positions.118" references="/0/resetSymbolNames/@expression">
+      <details key="start" value="3651"/>
+      <details key="end" value="3766"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.119" references="/0/upperName/@expression/self">
+    <eAnnotations source="positions.119" references="/0/resetSymbolNames/@expression/self">
       <details key="start" value="-1"/>
       <details key="end" value="-1"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.120" references="/0/upperName/@expression/@argument.0">
-      <details key="start" value="3665"/>
-      <details key="end" value="3707"/>
+    <eAnnotations source="positions.120" references="/0/resetSymbolNames/@expression/@argument.0">
+      <details key="start" value="3658"/>
+      <details key="end" value="3711"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.121" references="/0/upperName/@expression/@argument.1">
-      <details key="start" value="3709"/>
-      <details key="end" value="3738"/>
+    <eAnnotations source="positions.121" references="/0/resetSymbolNames/@expression/@argument.1">
+      <details key="start" value="3713"/>
+      <details key="end" value="3749"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.122" references="/0/upperName/@expression/@argument.2">
-      <details key="start" value="3740"/>
-      <details key="end" value="3767"/>
+    <eAnnotations source="positions.122" references="/0/resetSymbolNames/@expression/@argument.2">
+      <details key="start" value="3751"/>
+      <details key="end" value="3765"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.123" references="/0/upperName/@expression/@argument.2/@part.0/@item">
-      <details key="start" value="3749"/>
-      <details key="end" value="3766"/>
+    <eAnnotations source="positions.123" references="/0/resetSymbolNames/@expression/@argument.2/@part.0/elem">
+      <details key="start" value="3760"/>
+      <details key="end" value="3764"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.124" references="/0/upperName/@expression/@argument.2/@part.0/@item/namedElement">
-      <details key="start" value="3749"/>
-      <details key="end" value="3761"/>
+    <eAnnotations source="positions.124" references="/0/upperName">
+      <details key="start" value="3771"/>
+      <details key="end" value="3949"/>
+      <details key="line" value="59"/>
+    </eAnnotations>
+    <eAnnotations source="positions.125" references="/0/upperName/namedElement">
+      <details key="start" value="3795"/>
+      <details key="end" value="3822"/>
+      <details key="line" value="59"/>
+    </eAnnotations>
+    <eAnnotations source="positions.126" references="/0/upperName/@expression">
+      <details key="start" value="3836"/>
+      <details key="end" value="3946"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.127" references="/0/upperName/@expression/self">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.128" references="/0/upperName/@expression/@argument.0">
+      <details key="start" value="3843"/>
+      <details key="end" value="3885"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.129" references="/0/upperName/@expression/@argument.1">
+      <details key="start" value="3887"/>
+      <details key="end" value="3916"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.130" references="/0/upperName/@expression/@argument.2">
+      <details key="start" value="3918"/>
+      <details key="end" value="3945"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.131" references="/0/upperName/@expression/@argument.2/@part.0/@item">
+      <details key="start" value="3927"/>
+      <details key="end" value="3944"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.132" references="/0/upperName/@expression/@argument.2/@part.0/@item/namedElement">
+      <details key="start" value="3927"/>
+      <details key="end" value="3939"/>
       <details key="line" value="0"/>
     </eAnnotations>
   </ecore:EAnnotation>

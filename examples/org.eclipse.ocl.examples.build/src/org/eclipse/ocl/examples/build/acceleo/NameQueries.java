@@ -23,11 +23,15 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 import org.eclipse.ocl.examples.pivot.utilities.Pivot2Moniker;
 
 public class NameQueries
 {
-	public static final Logger logger = Logger.getLogger(NameQueries.class);	
+	public static final Logger logger = Logger.getLogger(NameQueries.class);
+	public static MetaModelManager metaModelManager = null;
 	private static Map<String, Integer> counters = new HashMap<String, Integer>();
 	private static Map<Object, String> definedSymbols = new HashMap<Object, String>();
 
@@ -68,6 +72,14 @@ public class NameQueries
 	public static String getPrefixedSymbolName(String prefix, Object elem) {
 		if (elem == null) {
 			logger.error("getPrefixedSymbolName for '" + prefix + "'and null");
+		}
+		if (elem instanceof Type) {
+			if (metaModelManager != null) {
+				TypeServer typeServer = metaModelManager.getPackageManager().findTypeServer((Type)elem);
+				if (typeServer != null) {
+					elem = typeServer;
+				}
+			}
 		}
 		String symbol = definedSymbols.get(elem);
 		if (symbol == null) {

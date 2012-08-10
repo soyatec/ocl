@@ -322,7 +322,8 @@ public static final int['[]'/] [cls.name/] = { [for (i : Integer | Sequence{0..c
  *	The lists of local operations or local operation overrides for each fragment of each type.
  */
 public static class FragmentOperations {
-[for (cls : Type | pPackage.ownedType->select(c : Type | c.getBehavioralType()->isEmpty())->sortedBy(name)) separator('\n')]
+[let allClasses : OrderedSet(Type) = pPackage.ownedType->select(c : Type | c.getBehavioralType()->isEmpty())->sortedBy(name)]
+[for (cls : Type | allClasses) separator('\n')]
 	[pPackage.declareLocalFragmentOperations(genPackage, cls)/]
 [for (superCls : Type | cls.getAllProperSuperTypes()->sortedBy(name))]
 	[pPackage.declareSuperFragmentOperations(genPackage, superCls, cls)/]
@@ -333,11 +334,11 @@ public static class FragmentOperations {
 	 *	Install the operation descriptors in the fragment descriptors.
 	 */
 	static {
-[for (cls : Type | pPackage.ownedType->sortedBy(name)) separator('\n')]
+[for (cls : Type | allClasses) separator('\n')]
 [let rawSuperTypes : Set(Type) = cls.getAllSuperTypes()]
 [for (superCls : Type | rawSuperTypes->select(c : Type | c.getBehavioralType()->isEmpty())->sortedBy(name))]
 		Fragments._[cls.name/]__[superCls.name/].initOperations(_[cls.name/]__[superCls.name/]);
-[/for][/let][/for]
+[/for][/let][/for][/let]
 	}
 
 	public static void init() {}

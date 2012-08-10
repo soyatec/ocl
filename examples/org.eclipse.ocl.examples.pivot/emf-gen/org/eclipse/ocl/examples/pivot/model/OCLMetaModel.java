@@ -1995,7 +1995,6 @@ public class OCLMetaModel extends XMIResourceImpl
 		}
 		
 		protected void installComments() {
-			installComment(_Boolean, "A Boolean type is used for logical expression, consisting of the predefined values true and false.");
 			installComment(_Class, "A class is a type that has objects as its instances.");
 			installComment(pr_null_ownedAttribute, "The attributes owned by a class. These do not include the inherited attributes. Attributes are represented by instances of Property.");
 			installComment(pr_null_ownedOperation, "The operations owned by a class. These do not include the inherited operations.");
@@ -2014,7 +2013,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			installComment(pr_Enumeration_ownedLiteral, "The ordered set of literals for this Enumeration.");
 			installComment(_EnumerationLiteral, "An enumeration literal is a value of an enumeration.");
 			installComment(pr_EnumerationLiteral_enumeration, "The Enumeration that this EnumerationLiteral is a member of.");
-			installComment(_Integer, "An integer is a primitive type representing integer values.");
 			installComment(_MultiplicityElement, "A multiplicity is a definition of an inclusive interval of non-negative integers beginning with a lower bound and ending with a (possibly infinite) upper bound. A multiplicity element embeds this information to specify the allowable cardinalities for an instantiation of this element.");
 			installComment(op_MultiplicityElement_includesCardinality, "The query includesCardinality() checks whether the specified cardinality is valid for this multiplicity.");
 			installComment(op_MultiplicityElement_includesMultiplicity, "The query includesMultiplicity() checks whether this multiplicity includes all the cardinalities allowed by the specified multiplicity.");
@@ -2056,7 +2054,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			installComment(pr_Property_isDerived, "If isDerived is true, the value of the attribute is derived from information elsewhere.");
 			installComment(pr_Property_isReadOnly, "If isReadOnly is true, the attribute may not be written to after initialization.");
 			installComment(pr_Property_opposite, "Two attributes attr1 and attr2 of two objects o1 and o2 (which may be the same object) may be paired with each other so that o1.attr1 refers to o2 if and only if o2.attr2 refers to o1. In such a case attr1 is the opposite of attr2 and attr2 is the opposite of attr1.");
-			installComment(_String, "A string is a sequence of characters in some suitable character set used to display information about the model. Character sets may include non-Roman alphabets and characters.");
 			installComment(_TemplateBinding, "A template binding represents a relationship between a templateable element and a template. A template binding specifies the substitutions of actual parameters for the formal parameters of the template.");
 			installComment(pr_TemplateBinding_boundElement, "The element that is bound by this binding.");
 			installComment(pr_TemplateBinding_parameterSubstitution, "The parameter substitutions owned by this template binding.");
@@ -2091,7 +2088,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			installComment(pr_TypeTemplateParameter_constrainingType, "The classifiers that constrain the argument that can be used for the parameter. If the allowSubstitutable attribute is true, then any classifier that is compatible with this constraining classifier can be substituted; otherwise, it must be either this classifier or one of its subclasses. If this property is empty, there are no constraints on the classifier that can be used as an argument.");
 			installComment(_TypedElement, "A typed element is a kind of named element that represents an element with a type.");
 			installComment(pr_TypedElement_type, "The type of the TypedElement.");
-			installComment(_UnlimitedNatural, "An unlimited natural is a primitive type representing unlimited natural values.");
 			installComment(_ValueSpecification, "A value specification is the specification of a (possibly empty) set of instances, including both objects and data values.\r\nValueSpecification specializes ParameterableElement to specify that a value specification can be exposed as a formal template parameter, and provided as an actual parameter in a binding of a template.");
 			installComment(op_ValueSpecification_booleanValue, "The query booleanValue() gives a single Boolean value when one can be computed.");
 			installComment(op_ValueSpecification_integerValue, "The query integerValue() gives a single Integer value when one can be computed.");

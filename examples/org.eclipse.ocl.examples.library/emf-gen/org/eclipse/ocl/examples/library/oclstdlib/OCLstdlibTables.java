@@ -270,6 +270,7 @@ public class OCLstdlibTables
 		public static final @NonNull ExecutorFragment _UnlimitedNatural__Real = new ExecutorFragment(Types._UnlimitedNatural, OCLstdlibTables.Types._Real);
 		public static final @NonNull ExecutorFragment _UnlimitedNatural__UnlimitedNatural = new ExecutorFragment(Types._UnlimitedNatural, OCLstdlibTables.Types._UnlimitedNatural);
 		
+		public static final @NonNull ExecutorFragment __Dummy__OclAny = new ExecutorFragment(Types.__Dummy, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment __Dummy___Dummy = new ExecutorFragment(Types.__Dummy, OCLstdlibTables.Types.__Dummy);
 		
 	}
@@ -1241,9 +1242,10 @@ public class OCLstdlibTables
 	
 		private static final @NonNull ExecutorFragment[] __Dummy =
 		{
-		    Fragments.__Dummy___Dummy /* 0 */
+		    Fragments.__Dummy__OclAny /* 0 */,
+		    Fragments.__Dummy___Dummy /* 1 */
 		};
-		private static final @NonNull int[] ___Dummy = { 1 };
+		private static final @NonNull int[] ___Dummy = { 1,1 };
 	
 		/**
 		 *	Install the fragment descriptors in the class descriptors.
@@ -2449,6 +2451,20 @@ public class OCLstdlibTables
 		};
 	
 		private static final @NonNull ExecutorOperation[] __Dummy___Dummy = {};
+		private static final @NonNull ExecutorOperation[] __Dummy__OclAny = {
+		    OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
+		    OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf) */,
+		    OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
+		    OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(AnyClassifier(TT)) */,
+		    OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState) */,
+		    OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
+		    OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(T)(AnyClassifier(T)) */,
+		    OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
+		    OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(T)(AnyClassifier(T)) */,
+		    OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
+		    OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
+		    OCLstdlibTables.Operations._OclAny__toString /* toString() */
+		};
 	
 		/*
 		 *	Install the operation descriptors in the fragment descriptors.
@@ -2585,6 +2601,7 @@ public class OCLstdlibTables
 			Fragments._UnlimitedNatural__Real.initOperations(_UnlimitedNatural__Real);
 			Fragments._UnlimitedNatural__UnlimitedNatural.initOperations(_UnlimitedNatural__UnlimitedNatural);
 	
+			Fragments.__Dummy__OclAny.initOperations(__Dummy__OclAny);
 			Fragments.__Dummy___Dummy.initOperations(__Dummy___Dummy);
 		}
 	

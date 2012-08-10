@@ -126,7 +126,7 @@ protected void installCollectionTypes() {
 
 [template public defineComments(pkg : Package)]
 protected void installComments() {
-[let commentedElements : OrderedSet(Element) = pkg.getRootPackage().eAllContents(Element)->reject(oclIsKindOf(Constraint))->select(ownedComment->notEmpty())->asSet()->sortedBy(getMoniker())]
+[let commentedElements : OrderedSet(Element) = pkg.getRootPackage().eAllContents(Element)->reject(oclIsKindOf(Constraint))->reject(e2 : Element | e2.oclIsKindOf(Type) and getOclTypes()->excludes(e2))->select(ownedComment->notEmpty())->asSet()->sortedBy(getMoniker())]
 [for (pElement : Element | commentedElements->sortedBy(getMoniker()))]
 [for (pComment : Comment | pElement.ownedComment->sortedBy(_body))]
 	installComment([pElement.getSymbolName()/], "[pComment.javaString()/]");

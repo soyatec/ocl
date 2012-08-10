@@ -96,11 +96,17 @@ public class ElementUtil
 			}
 		}
 		ResourceSet resourceSet = resource.getResourceSet();
-		if (resourceSet != null) {
-			MetaModelManagerResourceSetAdapter adapter = MetaModelManagerResourceSetAdapter.findAdapter(resourceSet);
-			if (adapter != null) {
-				return adapter.getMetaModelManager();
-			}
+		return resourceSet != null ? findMetaModelManager(resourceSet) : null;
+	}
+
+	public static MetaModelManager findMetaModelManager(@NonNull ResourceSet resourceSet) {
+		MetaModelManager metaModelManager = MetaModelManager.findAdapter(resourceSet);
+		if (metaModelManager != null) {
+			return metaModelManager;
+		}
+		MetaModelManagerResourceSetAdapter adapter = MetaModelManagerResourceSetAdapter.findAdapter(resourceSet);
+		if (adapter != null) {
+			return adapter.getMetaModelManager();
 		}
 		return null;
 	}

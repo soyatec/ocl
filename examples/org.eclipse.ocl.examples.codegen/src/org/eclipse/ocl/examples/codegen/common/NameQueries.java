@@ -499,4 +499,10 @@ public class NameQueries
 		}
 		return s.toString();
 	}
+
+	public static String resetSymbolNames(Object elem) {
+		counters.clear();
+		definedSymbols.clear();
+		return "";
+	}
 }

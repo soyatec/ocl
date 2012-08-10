@@ -107,6 +107,10 @@ public class GenPackageQueries
 		return null;
 	}
 	
+	@Deprecated
+	public @Nullable GenPackage getGenPackage(@NonNull GenPackage genPackage, @NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+		return getGenPackage(genPackage, (DomainPackage)pivotPackage); 
+	}
 	public @Nullable GenPackage getGenPackage(@NonNull GenPackage genPackage, @NonNull DomainPackage pivotPackage) {
 //		org.eclipse.ocl.examples.pivot.Package pivotPackage = pivotType.getPackage();
 //		if (pivotPackage == null) {

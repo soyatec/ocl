@@ -196,7 +196,7 @@ public class PackageManager implements PackageServerParent
 		return package2tracker.get(pivotPackage);
 	}
 	
-	@Nullable ExtensibleTypeServer findTypeServer(@NonNull DomainType pivotType) {
+	public @Nullable ExtensibleTypeServer findTypeServer(@NonNull DomainType pivotType) {
 		TypeTracker typeTracker = type2tracker.get(pivotType);
 		return typeTracker != null ? typeTracker.getTypeServer() : null;
 	}

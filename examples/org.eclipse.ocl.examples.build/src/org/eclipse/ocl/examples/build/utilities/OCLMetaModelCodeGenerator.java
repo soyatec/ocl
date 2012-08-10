@@ -29,6 +29,7 @@ import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.ocl.examples.build.acceleo.GenerateOCLMetaModel;
+import org.eclipse.ocl.examples.build.acceleo.NameQueries;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.ocl.examples.pivot.Package;
@@ -38,6 +39,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
 
 /**
@@ -89,7 +91,8 @@ public class OCLMetaModelCodeGenerator extends AbstractWorkflowComponent
 		OCLstdlib.install();
 		log.info("Loading Pivot Model '" + inputURI);
 		try {
-			MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
+			MetaModelManager metaModelManager = ElementUtil.findMetaModelManager(resourceSet);
+			NameQueries.metaModelManager = metaModelManager;
 			Resource ecoreResource = resourceSet.getResource(inputURI, true);
 			MetaModelManagerResourceAdapter.getAdapter(ecoreResource, metaModelManager);
 			String ecoreErrorsString = PivotUtil.formatResourceDiagnostics(ecoreResource.getErrors(), "Loading " + inputURI, "\n");
@@ -121,6 +124,8 @@ public class OCLMetaModelCodeGenerator extends AbstractWorkflowComponent
 			acceleo.generate(null);
 		} catch (IOException e) {
 			throw new RuntimeException("Problems running " + getClass().getSimpleName(), e);
+		} finally {
+			NameQueries.metaModelManager = null;			
 		}
 	}
 

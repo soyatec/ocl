@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -40,6 +41,7 @@ import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.VoidType;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -118,7 +120,15 @@ public class Pivot2EcoreTypeRefVisitor
 			}
 			return eClassifier;
 		}
-//		TypeServer typeServer = metaModelManager.getTypeServer(pivotType);	// FIXME use/delete this
+		TypeServer typeServer = metaModelManager.getTypeServer(pivotType);
+		for (DomainType aType : typeServer.getPartialTypes()) {
+			if (!(aType instanceof PrimitiveType)) {
+				EDataType eClassifier = context.getCreated(EDataType.class, pivotType);
+				if (eClassifier != null) {
+					return eClassifier;
+				}
+			}
+		}
 		if (pivotType == metaModelManager.getBooleanType()) {
 			return EcorePackage.Literals.EBOOLEAN;
 		}

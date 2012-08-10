@@ -40,7 +40,7 @@
 [let packagePrefix : String = packagePathPrefix.replaceAll('/', '.')]
 [let className : String = pType.name + genPackage.getBodiesClassSuffix()]
 [file (packagePathPrefix + pPackage.name + '/' + genPackage.getBodiesPackageName() + '/' + className + '.java', false, 'UTF-8')]
-/**
+/**[pType.resetSymbolNames()/]
  * [genPackage.getCopyright(' * ')/]
  *************************************************************************
  * This code is 100% auto-generated

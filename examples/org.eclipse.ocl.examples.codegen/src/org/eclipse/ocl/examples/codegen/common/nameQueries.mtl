@@ -53,5 +53,8 @@ invoke('org.eclipse.ocl.examples.codegen.common.NameQueries', 'getUniqueText(org
 [query public getUniqueText(_context : Element, variable : Variable) : String = 
 invoke('org.eclipse.ocl.examples.codegen.common.NameQueries', 'getUniqueText(org.eclipse.ocl.examples.pivot.Element, org.eclipse.ocl.examples.pivot.Variable)', Sequence{_context, variable}) /]
 
+[query public resetSymbolNames(elem : OclAny) : String = 
+invoke('org.eclipse.ocl.examples.codegen.common.NameQueries', 'resetSymbolNames(java.lang.Object)', Sequence{elem}) /]
+
 [query public upperName(namedElement : NamedElement) : String = 
 invoke('org.eclipse.emf.codegen.util.CodeGenUtil', 'upperName(java.lang.String)', Sequence{namedElement.name}) /]

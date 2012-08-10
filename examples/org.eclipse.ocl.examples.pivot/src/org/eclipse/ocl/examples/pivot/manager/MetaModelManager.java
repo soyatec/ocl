@@ -455,7 +455,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		MetaModelManager adapter = PivotUtil.getAdapter(MetaModelManager.class, eAdapters);
 		if (adapter == null) {
 			adapter = new MetaModelManager(resourceSet);
-			eAdapters.add(adapter);
+//			eAdapters.add(adapter);
 		}
 		return adapter;
 	}
@@ -552,9 +552,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	 * Construct a MetaModelManager that will use projectMap to assist in locating resources.
 	 */
 	public MetaModelManager(@NonNull StandaloneProjectMap projectMap) {
-		this(new ResourceSetImpl());
+		this();
 		pivotResourceSet.eAdapters().add(projectMap);
-		initializePivotResourceSet(pivotResourceSet);
 	}
 
 	/**
