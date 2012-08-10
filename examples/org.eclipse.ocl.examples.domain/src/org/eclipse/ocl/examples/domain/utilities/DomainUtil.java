@@ -62,6 +62,40 @@ public class DomainUtil
 	}
 
 	/**
+	 * Append a multiplicity string such as "[1..5]" to a StringBuilder.
+	 * <br>
+	 * Shortforms such as "[?]",  "[+]",  "[*]",  "[1]",  "[2..*]" are used if possible.
+	 * <br>
+	 * A -ve upper signals unlimited.
+	 */
+	public static void formatMultiplicity(@NonNull StringBuilder s, long lower, long upper) {
+		s.append("[");
+		if (upper < 0) {
+			if (lower == 1) {
+				s.append("+");
+			}
+			else {
+				if (lower != 0) {
+					s.append(lower);
+					s.append("..");
+				}
+				s.append("*");
+			}
+		}
+		else if ((lower == 0) && (upper == 1)) {
+			s.append("?");
+		}
+		else {
+			s.append(lower);
+			if (lower != upper) {
+				s.append("..");
+				s.append(upper);
+			}
+		}
+		s.append("]");
+	}
+
+	/**
 	 * Return a simple readable description of eObject using an IItemLabelProvider if possible.
 	 */
 	public static String getLabel(EObject eObject) {

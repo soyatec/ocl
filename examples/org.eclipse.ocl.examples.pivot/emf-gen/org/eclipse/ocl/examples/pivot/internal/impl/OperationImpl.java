@@ -848,6 +848,8 @@ public class OperationImpl
 				return getLower();
 			case PivotPackage.OPERATION__UPPER:
 				return getUpper();
+			case PivotPackage.OPERATION__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.OPERATION__IMPLEMENTATION_CLASS:
 				return getImplementationClass();
 			case PivotPackage.OPERATION__IMPLEMENTATION:
@@ -927,6 +929,9 @@ public class OperationImpl
 				return;
 			case PivotPackage.OPERATION__UPPER:
 				setUpper((BigInteger)newValue);
+				return;
+			case PivotPackage.OPERATION__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
 				return;
 			case PivotPackage.OPERATION__IMPLEMENTATION_CLASS:
 				setImplementationClass((String)newValue);
@@ -1014,6 +1019,9 @@ public class OperationImpl
 			case PivotPackage.OPERATION__UPPER:
 				setUpper(UPPER_EDEFAULT);
 				return;
+			case PivotPackage.OPERATION__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.OPERATION__IMPLEMENTATION_CLASS:
 				setImplementationClass(IMPLEMENTATION_CLASS_EDEFAULT);
 				return;
@@ -1086,6 +1094,8 @@ public class OperationImpl
 				return LOWER_EDEFAULT == null ? lower != null : !LOWER_EDEFAULT.equals(lower);
 			case PivotPackage.OPERATION__UPPER:
 				return UPPER_EDEFAULT == null ? upper != null : !UPPER_EDEFAULT.equals(upper);
+			case PivotPackage.OPERATION__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.OPERATION__IMPLEMENTATION_CLASS:
 				return IMPLEMENTATION_CLASS_EDEFAULT == null ? implementationClass != null : !IMPLEMENTATION_CLASS_EDEFAULT.equals(implementationClass);
 			case PivotPackage.OPERATION__IMPLEMENTATION:

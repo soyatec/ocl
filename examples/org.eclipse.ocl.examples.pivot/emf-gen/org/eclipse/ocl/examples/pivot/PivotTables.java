@@ -1727,6 +1727,8 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _CollectionRange__last = new ExecutorProperty("last", Types._CollectionRange, 1, new EcoreLibraryProperty(PivotPackage.Literals.COLLECTION_RANGE__LAST));
 	
 		public static final @NonNull ExecutorProperty _CollectionType__elementType = new ExecutorProperty("elementType", Types._CollectionType, 0, new EcoreLibraryProperty(PivotPackage.Literals.COLLECTION_TYPE__ELEMENT_TYPE));
+		public static final @NonNull ExecutorProperty _CollectionType__lower = new ExecutorProperty("lower", Types._CollectionType, 1, new EcoreLibraryProperty(PivotPackage.Literals.COLLECTION_TYPE__LOWER));
+		public static final @NonNull ExecutorProperty _CollectionType__upper = new ExecutorProperty("upper", Types._CollectionType, 2, new EcoreLibraryProperty(PivotPackage.Literals.COLLECTION_TYPE__UPPER));
 	
 		public static final @NonNull ExecutorProperty _Comment__Element = new ExecutorProperty("Element", Types._Comment, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.ELEMENT__OWNED_COMMENT));
 		public static final @NonNull ExecutorProperty _Comment__annotatedElement = new ExecutorProperty("annotatedElement", Types._Comment, 1, new EcoreLibraryProperty(PivotPackage.Literals.COMMENT__ANNOTATED_ELEMENT));
@@ -1816,9 +1818,10 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _MessageType__referredSignal = new ExecutorProperty("referredSignal", Types._MessageType, 1, new EcoreLibraryProperty(PivotPackage.Literals.MESSAGE_TYPE__REFERRED_SIGNAL));
 	
 		public static final @NonNull ExecutorProperty _MultiplicityElement__isOrdered = new ExecutorProperty("isOrdered", Types._MultiplicityElement, 0, new EcoreLibraryProperty(PivotPackage.Literals.MULTIPLICITY_ELEMENT__IS_ORDERED));
-		public static final @NonNull ExecutorProperty _MultiplicityElement__isUnique = new ExecutorProperty("isUnique", Types._MultiplicityElement, 1, new EcoreLibraryProperty(PivotPackage.Literals.MULTIPLICITY_ELEMENT__IS_UNIQUE));
-		public static final @NonNull ExecutorProperty _MultiplicityElement__lower = new ExecutorProperty("lower", Types._MultiplicityElement, 2, new EcoreLibraryProperty(PivotPackage.Literals.MULTIPLICITY_ELEMENT__LOWER));
-		public static final @NonNull ExecutorProperty _MultiplicityElement__upper = new ExecutorProperty("upper", Types._MultiplicityElement, 3, new EcoreLibraryProperty(PivotPackage.Literals.MULTIPLICITY_ELEMENT__UPPER));
+		public static final @NonNull ExecutorProperty _MultiplicityElement__isRequired = new ExecutorProperty("isRequired", Types._MultiplicityElement, 1, new EcoreLibraryProperty(PivotPackage.Literals.MULTIPLICITY_ELEMENT__IS_REQUIRED));
+		public static final @NonNull ExecutorProperty _MultiplicityElement__isUnique = new ExecutorProperty("isUnique", Types._MultiplicityElement, 2, new EcoreLibraryProperty(PivotPackage.Literals.MULTIPLICITY_ELEMENT__IS_UNIQUE));
+		public static final @NonNull ExecutorProperty _MultiplicityElement__lower = new ExecutorProperty("lower", Types._MultiplicityElement, 3, new EcoreLibraryProperty(PivotPackage.Literals.MULTIPLICITY_ELEMENT__LOWER));
+		public static final @NonNull ExecutorProperty _MultiplicityElement__upper = new ExecutorProperty("upper", Types._MultiplicityElement, 4, new EcoreLibraryProperty(PivotPackage.Literals.MULTIPLICITY_ELEMENT__UPPER));
 	
 		public static final @NonNull ExecutorProperty _NamedElement__isStatic = new ExecutorProperty("isStatic", Types._NamedElement, 0, new EcoreLibraryProperty(PivotPackage.Literals.NAMED_ELEMENT__IS_STATIC));
 		public static final @NonNull ExecutorProperty _NamedElement__name = new ExecutorProperty("name", Types._NamedElement, 1, new EcoreLibraryProperty(PivotPackage.Literals.NAMED_ELEMENT__NAME));
@@ -8367,6 +8370,7 @@ public class PivotTables
 		    PivotTables.Properties._Class__isInterface,
 		    PivotTables.Properties._DataType__isSerializable,
 		    PivotTables.Properties._NamedElement__isStatic,
+		    PivotTables.Properties._CollectionType__lower,
 		    PivotTables.Properties._NamedElement__name,
 		    PivotTables.Properties._NamedElement__ownedAnnotation,
 		    PivotTables.Properties._Type__ownedAttribute,
@@ -8379,7 +8383,8 @@ public class PivotTables
 		    PivotTables.Properties._Type__superClass,
 		    PivotTables.Properties._TemplateableElement__templateBinding,
 		    PivotTables.Properties._ParameterableElement__templateParameter,
-		    PivotTables.Properties._TemplateableElement__unspecializedElement
+		    PivotTables.Properties._TemplateableElement__unspecializedElement,
+		    PivotTables.Properties._CollectionType__upper
 		};
 	
 		private static final @NonNull ExecutorProperty[] _Boolean = {};
@@ -8584,6 +8589,7 @@ public class PivotTables
 		    PivotTables.Properties._Class__isInterface,
 		    PivotTables.Properties._DataType__isSerializable,
 		    PivotTables.Properties._NamedElement__isStatic,
+		    PivotTables.Properties._CollectionType__lower,
 		    PivotTables.Properties._NamedElement__name,
 		    PivotTables.Properties._NamedElement__ownedAnnotation,
 		    PivotTables.Properties._Type__ownedAttribute,
@@ -8596,7 +8602,8 @@ public class PivotTables
 		    PivotTables.Properties._Type__superClass,
 		    PivotTables.Properties._TemplateableElement__templateBinding,
 		    PivotTables.Properties._ParameterableElement__templateParameter,
-		    PivotTables.Properties._TemplateableElement__unspecializedElement
+		    PivotTables.Properties._TemplateableElement__unspecializedElement,
+		    PivotTables.Properties._CollectionType__upper
 		};
 	
 		private static final @NonNull ExecutorProperty[] _Comment = {
@@ -8849,6 +8856,7 @@ public class PivotTables
 		    PivotTables.Properties._Feature__implementation,
 		    PivotTables.Properties._Feature__implementationClass,
 		    PivotTables.Properties._MultiplicityElement__isOrdered,
+		    PivotTables.Properties._MultiplicityElement__isRequired,
 		    PivotTables.Properties._NamedElement__isStatic,
 		    PivotTables.Properties._MultiplicityElement__isUnique,
 		    PivotTables.Properties._MultiplicityElement__lower,
@@ -9020,6 +9028,7 @@ public class PivotTables
 		    PivotTables.Properties._Feature__implementation,
 		    PivotTables.Properties._Feature__implementationClass,
 		    PivotTables.Properties._MultiplicityElement__isOrdered,
+		    PivotTables.Properties._MultiplicityElement__isRequired,
 		    PivotTables.Properties._NamedElement__isStatic,
 		    PivotTables.Properties._MultiplicityElement__isUnique,
 		    PivotTables.Properties._MultiplicityElement__lower,
@@ -9255,6 +9264,7 @@ public class PivotTables
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._MultiplicityElement__isOrdered,
+		    PivotTables.Properties._MultiplicityElement__isRequired,
 		    PivotTables.Properties._MultiplicityElement__isUnique,
 		    PivotTables.Properties._MultiplicityElement__lower,
 		    PivotTables.Properties._Element__ownedComment,
@@ -9399,6 +9409,7 @@ public class PivotTables
 		    PivotTables.Properties._Feature__implementation,
 		    PivotTables.Properties._Feature__implementationClass,
 		    PivotTables.Properties._MultiplicityElement__isOrdered,
+		    PivotTables.Properties._MultiplicityElement__isRequired,
 		    PivotTables.Properties._NamedElement__isStatic,
 		    PivotTables.Properties._MultiplicityElement__isUnique,
 		    PivotTables.Properties._MultiplicityElement__lower,
@@ -9476,6 +9487,7 @@ public class PivotTables
 		    PivotTables.Properties._Class__isInterface,
 		    PivotTables.Properties._DataType__isSerializable,
 		    PivotTables.Properties._NamedElement__isStatic,
+		    PivotTables.Properties._CollectionType__lower,
 		    PivotTables.Properties._NamedElement__name,
 		    PivotTables.Properties._NamedElement__ownedAnnotation,
 		    PivotTables.Properties._Type__ownedAttribute,
@@ -9488,7 +9500,8 @@ public class PivotTables
 		    PivotTables.Properties._Type__superClass,
 		    PivotTables.Properties._TemplateableElement__templateBinding,
 		    PivotTables.Properties._ParameterableElement__templateParameter,
-		    PivotTables.Properties._TemplateableElement__unspecializedElement
+		    PivotTables.Properties._TemplateableElement__unspecializedElement,
+		    PivotTables.Properties._CollectionType__upper
 		};
 	
 		private static final @NonNull ExecutorProperty[] _Package = {
@@ -9525,6 +9538,7 @@ public class PivotTables
 		    PivotTables.Properties._VariableDeclaration__VariableExp,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._MultiplicityElement__isOrdered,
+		    PivotTables.Properties._MultiplicityElement__isRequired,
 		    PivotTables.Properties._NamedElement__isStatic,
 		    PivotTables.Properties._MultiplicityElement__isUnique,
 		    PivotTables.Properties._MultiplicityElement__lower,
@@ -9633,6 +9647,7 @@ public class PivotTables
 		    PivotTables.Properties._Property__isID,
 		    PivotTables.Properties._MultiplicityElement__isOrdered,
 		    PivotTables.Properties._Property__isReadOnly,
+		    PivotTables.Properties._MultiplicityElement__isRequired,
 		    PivotTables.Properties._Property__isResolveProxies,
 		    PivotTables.Properties._NamedElement__isStatic,
 		    PivotTables.Properties._Property__isTransient,
@@ -9778,6 +9793,7 @@ public class PivotTables
 		    PivotTables.Properties._Class__isInterface,
 		    PivotTables.Properties._DataType__isSerializable,
 		    PivotTables.Properties._NamedElement__isStatic,
+		    PivotTables.Properties._CollectionType__lower,
 		    PivotTables.Properties._NamedElement__name,
 		    PivotTables.Properties._NamedElement__ownedAnnotation,
 		    PivotTables.Properties._Type__ownedAttribute,
@@ -9790,7 +9806,8 @@ public class PivotTables
 		    PivotTables.Properties._Type__superClass,
 		    PivotTables.Properties._TemplateableElement__templateBinding,
 		    PivotTables.Properties._ParameterableElement__templateParameter,
-		    PivotTables.Properties._TemplateableElement__unspecializedElement
+		    PivotTables.Properties._TemplateableElement__unspecializedElement,
+		    PivotTables.Properties._CollectionType__upper
 		};
 	
 		private static final @NonNull ExecutorProperty[] _SetType = {
@@ -9812,6 +9829,7 @@ public class PivotTables
 		    PivotTables.Properties._Class__isInterface,
 		    PivotTables.Properties._DataType__isSerializable,
 		    PivotTables.Properties._NamedElement__isStatic,
+		    PivotTables.Properties._CollectionType__lower,
 		    PivotTables.Properties._NamedElement__name,
 		    PivotTables.Properties._NamedElement__ownedAnnotation,
 		    PivotTables.Properties._Type__ownedAttribute,
@@ -9824,7 +9842,8 @@ public class PivotTables
 		    PivotTables.Properties._Type__superClass,
 		    PivotTables.Properties._TemplateableElement__templateBinding,
 		    PivotTables.Properties._ParameterableElement__templateParameter,
-		    PivotTables.Properties._TemplateableElement__unspecializedElement
+		    PivotTables.Properties._TemplateableElement__unspecializedElement,
+		    PivotTables.Properties._CollectionType__upper
 		};
 	
 		private static final @NonNull ExecutorProperty[] _Signal = {
@@ -10132,6 +10151,7 @@ public class PivotTables
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._MultiplicityElement__isOrdered,
+		    PivotTables.Properties._MultiplicityElement__isRequired,
 		    PivotTables.Properties._NamedElement__isStatic,
 		    PivotTables.Properties._MultiplicityElement__isUnique,
 		    PivotTables.Properties._MultiplicityElement__lower,

@@ -223,6 +223,8 @@ public class IterationImpl extends OperationImpl implements Iteration
 				return getLower();
 			case PivotPackage.ITERATION__UPPER:
 				return getUpper();
+			case PivotPackage.ITERATION__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.ITERATION__IMPLEMENTATION_CLASS:
 				return getImplementationClass();
 			case PivotPackage.ITERATION__IMPLEMENTATION:
@@ -307,6 +309,9 @@ public class IterationImpl extends OperationImpl implements Iteration
 				return;
 			case PivotPackage.ITERATION__UPPER:
 				setUpper((BigInteger)newValue);
+				return;
+			case PivotPackage.ITERATION__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
 				return;
 			case PivotPackage.ITERATION__IMPLEMENTATION_CLASS:
 				setImplementationClass((String)newValue);
@@ -403,6 +408,9 @@ public class IterationImpl extends OperationImpl implements Iteration
 			case PivotPackage.ITERATION__UPPER:
 				setUpper(UPPER_EDEFAULT);
 				return;
+			case PivotPackage.ITERATION__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.ITERATION__IMPLEMENTATION_CLASS:
 				setImplementationClass(IMPLEMENTATION_CLASS_EDEFAULT);
 				return;
@@ -482,6 +490,8 @@ public class IterationImpl extends OperationImpl implements Iteration
 				return LOWER_EDEFAULT == null ? lower != null : !LOWER_EDEFAULT.equals(lower);
 			case PivotPackage.ITERATION__UPPER:
 				return UPPER_EDEFAULT == null ? upper != null : !UPPER_EDEFAULT.equals(upper);
+			case PivotPackage.ITERATION__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.ITERATION__IMPLEMENTATION_CLASS:
 				return IMPLEMENTATION_CLASS_EDEFAULT == null ? implementationClass != null : !IMPLEMENTATION_CLASS_EDEFAULT.equals(implementationClass);
 			case PivotPackage.ITERATION__IMPLEMENTATION:

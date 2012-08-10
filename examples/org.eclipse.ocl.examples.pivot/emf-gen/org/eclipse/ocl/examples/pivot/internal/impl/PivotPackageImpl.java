@@ -1205,6 +1205,26 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCollectionType_Lower()
+	{
+		return (EAttribute)collectionTypeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCollectionType_Upper()
+	{
+		return (EAttribute)collectionTypeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDataType() {
 		return dataTypeEClass;
 	}
@@ -3697,6 +3717,16 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getMultiplicityElement_IsRequired()
+	{
+		return (EAttribute)multiplicityElementEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EOperation getMultiplicityElement__LowerBound() {
 		return multiplicityElementEClass.getEOperations().get(0);
 	}
@@ -4544,6 +4574,8 @@ public class PivotPackageImpl
 
 		collectionTypeEClass = createEClass(COLLECTION_TYPE);
 		createEReference(collectionTypeEClass, COLLECTION_TYPE__ELEMENT_TYPE);
+		createEAttribute(collectionTypeEClass, COLLECTION_TYPE__LOWER);
+		createEAttribute(collectionTypeEClass, COLLECTION_TYPE__UPPER);
 
 		commentEClass = createEClass(COMMENT);
 		createEAttribute(commentEClass, COMMENT__BODY);
@@ -4712,6 +4744,7 @@ public class PivotPackageImpl
 		createEAttribute(multiplicityElementEClass, MULTIPLICITY_ELEMENT__IS_UNIQUE);
 		createEAttribute(multiplicityElementEClass, MULTIPLICITY_ELEMENT__LOWER);
 		createEAttribute(multiplicityElementEClass, MULTIPLICITY_ELEMENT__UPPER);
+		createEAttribute(multiplicityElementEClass, MULTIPLICITY_ELEMENT__IS_REQUIRED);
 		createEOperation(multiplicityElementEClass, MULTIPLICITY_ELEMENT___LOWER_BOUND);
 		createEOperation(multiplicityElementEClass, MULTIPLICITY_ELEMENT___UPPER_BOUND);
 		createEOperation(multiplicityElementEClass, MULTIPLICITY_ELEMENT___IS_MULTIVALUED);
@@ -5219,6 +5252,8 @@ public class PivotPackageImpl
 
 		initEClass(collectionTypeEClass, CollectionType.class, "CollectionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getCollectionType_ElementType(), this.getType(), null, "elementType", null, 1, 1, CollectionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(getCollectionType_Lower(), this.getInteger(), "lower", "1", 0, 1, CollectionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+		initEAttribute(getCollectionType_Upper(), this.getUnlimitedNatural(), "upper", "1", 0, 1, CollectionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
 		initEClass(commentEClass, Comment.class, "Comment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(getComment_Body(), this.getString(), "body", null, 0, 1, Comment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
@@ -5743,6 +5778,7 @@ public class PivotPackageImpl
 		initEAttribute(getMultiplicityElement_IsUnique(), this.getBoolean(), "isUnique", "true", 1, 1, MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 		initEAttribute(getMultiplicityElement_Lower(), this.getInteger(), "lower", "1", 0, 1, MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 		initEAttribute(getMultiplicityElement_Upper(), this.getUnlimitedNatural(), "upper", "1", 0, 1, MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+		initEAttribute(getMultiplicityElement_IsRequired(), this.getBoolean(), "isRequired", "true", 1, 1, MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
 		initEOperation(getMultiplicityElement__LowerBound(), this.getInteger(), "lowerBound", 1, 1, IS_UNIQUE, !IS_ORDERED); //$NON-NLS-1$
 
@@ -6083,7 +6119,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																																																																																																																																																																																																																																				
+		   });																																																																																																																																																																																																																																																																																																							
 	}
 
 	/**
@@ -6100,7 +6136,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																						
+		   });																																								
 		addAnnotation
 		  (dynamicTypeEClass, 
 		   source, 
@@ -6112,7 +6148,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																											
+		   });																																																																																												
 		addAnnotation
 		  (operationEClass, 
 		   source, 
@@ -6147,7 +6183,7 @@ public class PivotPackageImpl
 	 */
 	protected void createSubsetsAnnotations()
 	{
-		String source = "subsets"; //$NON-NLS-1$																																																																																																																																																																																																				
+		String source = "subsets"; //$NON-NLS-1$																																																																																																																																																																																																							
 		addAnnotation
 		  (getParameterableElement_OwningTemplateParameter(), 
 		   source, 

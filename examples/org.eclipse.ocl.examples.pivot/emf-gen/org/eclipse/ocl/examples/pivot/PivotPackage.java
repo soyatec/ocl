@@ -3642,13 +3642,31 @@ public interface PivotPackage
 	int COLLECTION_TYPE__ELEMENT_TYPE = DATA_TYPE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Lower</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TYPE__LOWER = DATA_TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Upper</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TYPE__UPPER = DATA_TYPE_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Collection Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_TYPE_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 1;
+	int COLLECTION_TYPE_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -3919,6 +3937,24 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int BAG_TYPE__ELEMENT_TYPE = COLLECTION_TYPE__ELEMENT_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Lower</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BAG_TYPE__LOWER = COLLECTION_TYPE__LOWER;
+
+	/**
+	 * The feature id for the '<em><b>Upper</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BAG_TYPE__UPPER = COLLECTION_TYPE__UPPER;
 
 	/**
 	 * The number of structural features of the '<em>Bag Type</em>' class.
@@ -7599,13 +7635,22 @@ public interface PivotPackage
 	int TYPED_MULTIPLICITY_ELEMENT__UPPER = TYPED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_MULTIPLICITY_ELEMENT__IS_REQUIRED = TYPED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Typed Multiplicity Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPED_MULTIPLICITY_ELEMENT_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 4;
+	int TYPED_MULTIPLICITY_ELEMENT_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -7804,6 +7849,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int FEATURE__UPPER = TYPED_MULTIPLICITY_ELEMENT__UPPER;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE__IS_REQUIRED = TYPED_MULTIPLICITY_ELEMENT__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Implementation Class</b></em>' attribute.
@@ -9147,6 +9201,15 @@ public interface PivotPackage
 	int OPERATION__UPPER = FEATURE__UPPER;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__IS_REQUIRED = FEATURE__IS_REQUIRED;
+
+	/**
 	 * The feature id for the '<em><b>Implementation Class</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9523,6 +9586,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ITERATION__UPPER = OPERATION__UPPER;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATION__IS_REQUIRED = OPERATION__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Implementation Class</b></em>' attribute.
@@ -11714,13 +11786,22 @@ public interface PivotPackage
 	int MULTIPLICITY_ELEMENT__UPPER = ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MULTIPLICITY_ELEMENT__IS_REQUIRED = ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Multiplicity Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MULTIPLICITY_ELEMENT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 4;
+	int MULTIPLICITY_ELEMENT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -12497,6 +12578,24 @@ public interface PivotPackage
 	int ORDERED_SET_TYPE__ELEMENT_TYPE = COLLECTION_TYPE__ELEMENT_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Lower</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERED_SET_TYPE__LOWER = COLLECTION_TYPE__LOWER;
+
+	/**
+	 * The feature id for the '<em><b>Upper</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERED_SET_TYPE__UPPER = COLLECTION_TYPE__UPPER;
+
+	/**
 	 * The number of structural features of the '<em>Ordered Set Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12882,6 +12981,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PARAMETER__UPPER = TYPED_MULTIPLICITY_ELEMENT__UPPER;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER__IS_REQUIRED = TYPED_MULTIPLICITY_ELEMENT__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' container reference.
@@ -13503,6 +13611,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PROPERTY__UPPER = FEATURE__UPPER;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__IS_REQUIRED = FEATURE__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Implementation Class</b></em>' attribute.
@@ -14812,6 +14929,24 @@ public interface PivotPackage
 	int SEQUENCE_TYPE__ELEMENT_TYPE = COLLECTION_TYPE__ELEMENT_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Lower</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEQUENCE_TYPE__LOWER = COLLECTION_TYPE__LOWER;
+
+	/**
+	 * The feature id for the '<em><b>Upper</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEQUENCE_TYPE__UPPER = COLLECTION_TYPE__UPPER;
+
+	/**
 	 * The number of structural features of the '<em>Sequence Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15089,6 +15224,24 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int SET_TYPE__ELEMENT_TYPE = COLLECTION_TYPE__ELEMENT_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Lower</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_TYPE__LOWER = COLLECTION_TYPE__LOWER;
+
+	/**
+	 * The feature id for the '<em><b>Upper</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_TYPE__UPPER = COLLECTION_TYPE__UPPER;
 
 	/**
 	 * The number of structural features of the '<em>Set Type</em>' class.
@@ -18533,6 +18686,28 @@ public interface PivotPackage
 	EReference getCollectionType_ElementType();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.pivot.CollectionType#getLower <em>Lower</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Lower</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.CollectionType#getLower()
+	 * @see #getCollectionType()
+	 * @generated
+	 */
+	EAttribute getCollectionType_Lower();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.pivot.CollectionType#getUpper <em>Upper</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Upper</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.CollectionType#getUpper()
+	 * @see #getCollectionType()
+	 * @generated
+	 */
+	EAttribute getCollectionType_Upper();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.DataType <em>Data Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -21305,6 +21480,17 @@ public interface PivotPackage
 	EAttribute getMultiplicityElement_Upper();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.pivot.MultiplicityElement#isRequired <em>Is Required</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Required</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.MultiplicityElement#isRequired()
+	 * @see #getMultiplicityElement()
+	 * @generated
+	 */
+	EAttribute getMultiplicityElement_IsRequired();
+
+	/**
 	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.MultiplicityElement#lowerBound() <em>Lower Bound</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -22352,6 +22538,22 @@ public interface PivotPackage
 		 * @generated
 		 */
 		EReference COLLECTION_TYPE__ELEMENT_TYPE = eINSTANCE.getCollectionType_ElementType();
+
+		/**
+		 * The meta object literal for the '<em><b>Lower</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLLECTION_TYPE__LOWER = eINSTANCE.getCollectionType_Lower();
+
+		/**
+		 * The meta object literal for the '<em><b>Upper</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLLECTION_TYPE__UPPER = eINSTANCE.getCollectionType_Upper();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.DataTypeImpl <em>Data Type</em>}' class.
@@ -24608,6 +24810,14 @@ public interface PivotPackage
 		 * @generated
 		 */
 		EAttribute MULTIPLICITY_ELEMENT__UPPER = eINSTANCE.getMultiplicityElement_Upper();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Required</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MULTIPLICITY_ELEMENT__IS_REQUIRED = eINSTANCE.getMultiplicityElement_IsRequired();
 
 		/**
 		 * The meta object literal for the '<em><b>Lower Bound</b></em>' operation.

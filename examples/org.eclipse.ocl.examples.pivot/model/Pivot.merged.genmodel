@@ -400,6 +400,9 @@
       <genFeatures xsi:type="genmodel:GenFeature" createChild="false">
         <ecoreFeature xsi:type="ecore:EAttribute" href="Pivot.ecore#//MultiplicityElement/upper"/>
       </genFeatures>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="Pivot.ecore#//MultiplicityElement/isRequired"/>
+      </genFeatures>
       <genOperations xsi:type="genmodel:GenOperation">
         <ecoreOperation href="Pivot.ecore#//MultiplicityElement/lowerBound"/>
       </genOperations>
@@ -608,6 +611,12 @@
       <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
           propertySortChoices="true">
         <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//CollectionType/elementType"/>
+      </genFeatures>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="Pivot.ecore#//CollectionType/lower"/>
+      </genFeatures>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="Pivot.ecore#//CollectionType/upper"/>
       </genFeatures>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass">

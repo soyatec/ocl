@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
+import java.math.BigInteger;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -53,6 +54,8 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.CollectionTypeImpl#getElementType <em>Element Type</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.CollectionTypeImpl#getLower <em>Lower</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.CollectionTypeImpl#getUpper <em>Upper</em>}</li>
  * </ul>
  * </p>
  *
@@ -71,6 +74,43 @@ public class CollectionTypeImpl
 	 * @ordered
 	 */
 	protected Type elementType;
+
+	/**
+	 * The default value of the '{@link #getLower() <em>Lower</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLower()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final BigInteger LOWER_EDEFAULT = new BigInteger("1"); //$NON-NLS-1$
+	/**
+	 * The cached value of the '{@link #getLower() <em>Lower</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLower()
+	 * @generated
+	 * @ordered
+	 */
+	protected BigInteger lower = LOWER_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getUpper() <em>Upper</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUpper()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final BigInteger UPPER_EDEFAULT = new BigInteger("1"); //$NON-NLS-1$
+	/**
+	 * The cached value of the '{@link #getUpper() <em>Upper</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUpper()
+	 * @generated
+	 * @ordered
+	 */
+	protected BigInteger upper = UPPER_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -136,6 +176,52 @@ public class CollectionTypeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public BigInteger getLower()
+	{
+		return lower;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLower(BigInteger newLower)
+	{
+		BigInteger oldLower = lower;
+		lower = newLower;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.COLLECTION_TYPE__LOWER, oldLower, lower));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BigInteger getUpper()
+	{
+		return upper;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUpper(BigInteger newUpper)
+	{
+		BigInteger oldUpper = upper;
+		upper = newUpper;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.COLLECTION_TYPE__UPPER, oldUpper, upper));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
@@ -185,6 +271,10 @@ public class CollectionTypeImpl
 			case PivotPackage.COLLECTION_TYPE__ELEMENT_TYPE:
 				if (resolve) return getElementType();
 				return basicGetElementType();
+			case PivotPackage.COLLECTION_TYPE__LOWER:
+				return getLower();
+			case PivotPackage.COLLECTION_TYPE__UPPER:
+				return getUpper();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -270,6 +360,12 @@ public class CollectionTypeImpl
 			case PivotPackage.COLLECTION_TYPE__ELEMENT_TYPE:
 				setElementType((Type)newValue);
 				return;
+			case PivotPackage.COLLECTION_TYPE__LOWER:
+				setLower((BigInteger)newValue);
+				return;
+			case PivotPackage.COLLECTION_TYPE__UPPER:
+				setUpper((BigInteger)newValue);
+				return;
 		}
 		eDynamicSet(featureID, newValue);
 	}
@@ -346,6 +442,12 @@ public class CollectionTypeImpl
 			case PivotPackage.COLLECTION_TYPE__ELEMENT_TYPE:
 				setElementType((Type)null);
 				return;
+			case PivotPackage.COLLECTION_TYPE__LOWER:
+				setLower(LOWER_EDEFAULT);
+				return;
+			case PivotPackage.COLLECTION_TYPE__UPPER:
+				setUpper(UPPER_EDEFAULT);
+				return;
 		}
 		eDynamicUnset(featureID);
 	}
@@ -401,8 +503,22 @@ public class CollectionTypeImpl
 				return behavioralType != null;
 			case PivotPackage.COLLECTION_TYPE__ELEMENT_TYPE:
 				return elementType != null;
+			case PivotPackage.COLLECTION_TYPE__LOWER:
+				return LOWER_EDEFAULT == null ? lower != null : !LOWER_EDEFAULT.equals(lower);
+			case PivotPackage.COLLECTION_TYPE__UPPER:
+				return UPPER_EDEFAULT == null ? upper != null : !UPPER_EDEFAULT.equals(upper);
 		}
 		return eDynamicIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 
 	@Override

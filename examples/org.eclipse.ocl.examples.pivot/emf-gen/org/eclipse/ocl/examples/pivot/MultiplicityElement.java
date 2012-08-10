@@ -34,6 +34,7 @@ import java.math.BigInteger;
  *   <li>{@link org.eclipse.ocl.examples.pivot.MultiplicityElement#isUnique <em>Is Unique</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.MultiplicityElement#getLower <em>Lower</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.MultiplicityElement#getUpper <em>Upper</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.MultiplicityElement#isRequired <em>Is Required</em>}</li>
  * </ul>
  * </p>
  *
@@ -151,6 +152,34 @@ public interface MultiplicityElement
 	 * @generated
 	 */
 	void setUpper(BigInteger value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Required</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Required</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Required</em>' attribute.
+	 * @see #setIsRequired(boolean)
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getMultiplicityElement_IsRequired()
+	 * @model default="true" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true" ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MultiplicityElement!isRequired'"
+	 * @generated
+	 */
+	boolean isRequired();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.MultiplicityElement#isRequired <em>Is Required</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Required</em>' attribute.
+	 * @see #isRequired()
+	 * @generated
+	 */
+	void setIsRequired(boolean value);
 
 	/**
 	 * <!-- begin-user-doc -->

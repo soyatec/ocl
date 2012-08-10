@@ -705,6 +705,8 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Property pr_CollectionRange_first = createProperty("first", _OCLExpression);
 		protected final @NonNull Property pr_CollectionRange_last = createProperty("last", _OCLExpression);
 		protected final @NonNull Property pr_CollectionType_elementType = createProperty("elementType", _Type);
+		protected final @NonNull Property pr_CollectionType_lower = createProperty("lower", _Integer);
+		protected final @NonNull Property pr_CollectionType_upper = createProperty("upper", _UnlimitedNatural);
 		protected final @NonNull Property pr_Comment_Element = createProperty("Element", _Element);
 		protected final @NonNull Property pr_Comment_annotatedElement = createProperty("annotatedElement", _Element);
 		protected final @NonNull Property pr_Comment_body = createProperty("body", _String);
@@ -769,6 +771,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Property pr_MessageType_referredOperation = createProperty("referredOperation", _Operation);
 		protected final @NonNull Property pr_MessageType_referredSignal = createProperty("referredSignal", _Signal);
 		protected final @NonNull Property pr_MultiplicityElement_isOrdered = createProperty("isOrdered", _Boolean);
+		protected final @NonNull Property pr_MultiplicityElement_isRequired = createProperty("isRequired", _Boolean);
 		protected final @NonNull Property pr_MultiplicityElement_isUnique = createProperty("isUnique", _Boolean);
 		protected final @NonNull Property pr_MultiplicityElement_lower = createProperty("lower", _Integer);
 		protected final @NonNull Property pr_MultiplicityElement_upper = createProperty("upper", _UnlimitedNatural);
@@ -1036,6 +1039,12 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties.add(property = pr_CollectionType_elementType);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Type_CollectionType);
+			ownedProperties.add(property = pr_CollectionType_lower);
+			property.setLower(BigInteger.valueOf(0));
+			property.setIsResolveProxies(true);
+			ownedProperties.add(property = pr_CollectionType_upper);
+			property.setLower(BigInteger.valueOf(0));
+			property.setIsResolveProxies(true);
 			ownedProperties = _Comment.getOwnedAttribute();
 			ownedProperties.add(property = pr_Comment_Element);
 			property.setLower(BigInteger.valueOf(0));
@@ -1321,6 +1330,8 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setOpposite(pr_Signal_MessageType);
 			ownedProperties = _MultiplicityElement.getOwnedAttribute();
 			ownedProperties.add(property = pr_MultiplicityElement_isOrdered);
+			property.setIsResolveProxies(true);
+			ownedProperties.add(property = pr_MultiplicityElement_isRequired);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_MultiplicityElement_isUnique);
 			property.setIsResolveProxies(true);

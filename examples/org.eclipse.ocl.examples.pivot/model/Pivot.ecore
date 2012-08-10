@@ -240,6 +240,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="CollectionType" eSuperTypes="#//DataType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elementType" ordered="false"
         lowerBound="1" eType="#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower" ordered="false"
+        eType="#//Integer" defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper" ordered="false"
+        eType="#//UnlimitedNatural" defaultValueLiteral="1"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Comment" eSuperTypes="#//Element">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1184,6 +1188,8 @@
         <details key="documentation" value="Specifies the upper bound of the multiplicity interval."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isRequired" ordered="false"
+        lowerBound="1" eType="#//Boolean" defaultValueLiteral="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Nameable" instanceClassName="org.eclipse.ocl.examples.pivot.util.Nameable"
       abstract="true" interface="true"/>

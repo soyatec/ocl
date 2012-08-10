@@ -135,7 +135,7 @@ public class PropertyImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_READ_ONLY_EFLAG = 1 << 11;
+	protected static final int IS_READ_ONLY_EFLAG = 1 << 12;
 
 	/**
 	 * The default value of the '{@link #getDefault() <em>Default</em>}' attribute.
@@ -175,7 +175,7 @@ public class PropertyImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_COMPOSITE_EFLAG = 1 << 12;
+	protected static final int IS_COMPOSITE_EFLAG = 1 << 13;
 
 	/**
 	 * The default value of the '{@link #isDerived() <em>Is Derived</em>}' attribute.
@@ -195,7 +195,7 @@ public class PropertyImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_DERIVED_EFLAG = 1 << 13;
+	protected static final int IS_DERIVED_EFLAG = 1 << 14;
 
 	/**
 	 * The cached value of the '{@link #getOpposite() <em>Opposite</em>}' reference.
@@ -235,7 +235,7 @@ public class PropertyImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IMPLICIT_EFLAG = 1 << 14;
+	protected static final int IMPLICIT_EFLAG = 1 << 15;
 
 	/**
 	 * The default value of the '{@link #isID() <em>Is ID</em>}' attribute.
@@ -255,7 +255,7 @@ public class PropertyImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_ID_EFLAG = 1 << 15;
+	protected static final int IS_ID_EFLAG = 1 << 16;
 
 	/**
 	 * The cached value of the '{@link #getKeys() <em>Keys</em>}' reference list.
@@ -285,7 +285,7 @@ public class PropertyImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_RESOLVE_PROXIES_EFLAG = 1 << 16;
+	protected static final int IS_RESOLVE_PROXIES_EFLAG = 1 << 17;
 
 	/**
 	 * The default value of the '{@link #isTransient() <em>Is Transient</em>}' attribute.
@@ -305,7 +305,7 @@ public class PropertyImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_TRANSIENT_EFLAG = 1 << 17;
+	protected static final int IS_TRANSIENT_EFLAG = 1 << 18;
 
 	/**
 	 * The default value of the '{@link #isUnsettable() <em>Is Unsettable</em>}' attribute.
@@ -325,7 +325,7 @@ public class PropertyImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_UNSETTABLE_EFLAG = 1 << 18;
+	protected static final int IS_UNSETTABLE_EFLAG = 1 << 19;
 
 	/**
 	 * The default value of the '{@link #isVolatile() <em>Is Volatile</em>}' attribute.
@@ -345,7 +345,7 @@ public class PropertyImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_VOLATILE_EFLAG = 1 << 19;
+	protected static final int IS_VOLATILE_EFLAG = 1 << 20;
 
 	/**
 	 * The cached value of the '{@link #getRedefinedProperty() <em>Redefined Property</em>}' reference list.
@@ -1185,6 +1185,8 @@ public class PropertyImpl
 				return getLower();
 			case PivotPackage.PROPERTY__UPPER:
 				return getUpper();
+			case PivotPackage.PROPERTY__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.PROPERTY__IMPLEMENTATION_CLASS:
 				return getImplementationClass();
 			case PivotPackage.PROPERTY__IMPLEMENTATION:
@@ -1281,6 +1283,9 @@ public class PropertyImpl
 				return;
 			case PivotPackage.PROPERTY__UPPER:
 				setUpper((BigInteger)newValue);
+				return;
+			case PivotPackage.PROPERTY__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
 				return;
 			case PivotPackage.PROPERTY__IMPLEMENTATION_CLASS:
 				setImplementationClass((String)newValue);
@@ -1391,6 +1396,9 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__UPPER:
 				setUpper(UPPER_EDEFAULT);
 				return;
+			case PivotPackage.PROPERTY__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.PROPERTY__IMPLEMENTATION_CLASS:
 				setImplementationClass(IMPLEMENTATION_CLASS_EDEFAULT);
 				return;
@@ -1487,6 +1495,8 @@ public class PropertyImpl
 				return LOWER_EDEFAULT == null ? lower != null : !LOWER_EDEFAULT.equals(lower);
 			case PivotPackage.PROPERTY__UPPER:
 				return UPPER_EDEFAULT == null ? upper != null : !UPPER_EDEFAULT.equals(upper);
+			case PivotPackage.PROPERTY__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.PROPERTY__IMPLEMENTATION_CLASS:
 				return IMPLEMENTATION_CLASS_EDEFAULT == null ? implementationClass != null : !IMPLEMENTATION_CLASS_EDEFAULT.equals(implementationClass);
 			case PivotPackage.PROPERTY__IMPLEMENTATION:

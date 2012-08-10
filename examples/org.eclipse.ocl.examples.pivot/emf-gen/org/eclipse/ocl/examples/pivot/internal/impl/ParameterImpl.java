@@ -210,6 +210,8 @@ public class ParameterImpl
 				return getLower();
 			case PivotPackage.PARAMETER__UPPER:
 				return getUpper();
+			case PivotPackage.PARAMETER__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.PARAMETER__OPERATION:
 				return getOperation();
 		}
@@ -263,6 +265,9 @@ public class ParameterImpl
 			case PivotPackage.PARAMETER__UPPER:
 				setUpper((BigInteger)newValue);
 				return;
+			case PivotPackage.PARAMETER__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
+				return;
 			case PivotPackage.PARAMETER__OPERATION:
 				setOperation((Operation)newValue);
 				return;
@@ -312,6 +317,9 @@ public class ParameterImpl
 			case PivotPackage.PARAMETER__UPPER:
 				setUpper(UPPER_EDEFAULT);
 				return;
+			case PivotPackage.PARAMETER__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.PARAMETER__OPERATION:
 				setOperation((Operation)null);
 				return;
@@ -351,6 +359,8 @@ public class ParameterImpl
 				return LOWER_EDEFAULT == null ? lower != null : !LOWER_EDEFAULT.equals(lower);
 			case PivotPackage.PARAMETER__UPPER:
 				return UPPER_EDEFAULT == null ? upper != null : !UPPER_EDEFAULT.equals(upper);
+			case PivotPackage.PARAMETER__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.PARAMETER__OPERATION:
 				return getOperation() != null;
 		}

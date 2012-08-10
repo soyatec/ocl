@@ -45,6 +45,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.MultiplicityElementImpl#isUnique <em>Is Unique</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.MultiplicityElementImpl#getLower <em>Lower</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.MultiplicityElementImpl#getUpper <em>Upper</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.MultiplicityElementImpl#isRequired <em>Is Required</em>}</li>
  * </ul>
  * </p>
  *
@@ -135,6 +136,26 @@ public abstract class MultiplicityElementImpl
 	protected BigInteger upper = UPPER_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #isRequired() <em>Is Required</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isRequired()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_REQUIRED_EDEFAULT = true;
+
+	/**
+	 * The flag representing the value of the '{@link #isRequired() <em>Is Required</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isRequired()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int IS_REQUIRED_EFLAG = 1 << 10;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -142,6 +163,7 @@ public abstract class MultiplicityElementImpl
 	protected MultiplicityElementImpl() {
 		super();
 		eFlags |= IS_UNIQUE_EFLAG;
+		eFlags |= IS_REQUIRED_EFLAG;
 	}
 
 	/**
@@ -243,6 +265,29 @@ public abstract class MultiplicityElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isRequired()
+	{
+		return (eFlags & IS_REQUIRED_EFLAG) != 0;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsRequired(boolean newIsRequired)
+	{
+		boolean oldIsRequired = (eFlags & IS_REQUIRED_EFLAG) != 0;
+		if (newIsRequired) eFlags |= IS_REQUIRED_EFLAG; else eFlags &= ~IS_REQUIRED_EFLAG;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.MULTIPLICITY_ELEMENT__IS_REQUIRED, oldIsRequired, newIsRequired));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public BigInteger lowerBound() {
 		throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MultiplicityElement!lowerBound()
 	}
@@ -304,6 +349,8 @@ public abstract class MultiplicityElementImpl
 				return getLower();
 			case PivotPackage.MULTIPLICITY_ELEMENT__UPPER:
 				return getUpper();
+			case PivotPackage.MULTIPLICITY_ELEMENT__IS_REQUIRED:
+				return isRequired();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -338,6 +385,9 @@ public abstract class MultiplicityElementImpl
 			case PivotPackage.MULTIPLICITY_ELEMENT__UPPER:
 				setUpper((BigInteger)newValue);
 				return;
+			case PivotPackage.MULTIPLICITY_ELEMENT__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
+				return;
 		}
 		eDynamicSet(featureID, newValue);
 	}
@@ -369,6 +419,9 @@ public abstract class MultiplicityElementImpl
 			case PivotPackage.MULTIPLICITY_ELEMENT__UPPER:
 				setUpper(UPPER_EDEFAULT);
 				return;
+			case PivotPackage.MULTIPLICITY_ELEMENT__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 		}
 		eDynamicUnset(featureID);
 	}
@@ -395,6 +448,8 @@ public abstract class MultiplicityElementImpl
 				return LOWER_EDEFAULT == null ? lower != null : !LOWER_EDEFAULT.equals(lower);
 			case PivotPackage.MULTIPLICITY_ELEMENT__UPPER:
 				return UPPER_EDEFAULT == null ? upper != null : !UPPER_EDEFAULT.equals(upper);
+			case PivotPackage.MULTIPLICITY_ELEMENT__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 		}
 		return eDynamicIsSet(featureID);
 	}
