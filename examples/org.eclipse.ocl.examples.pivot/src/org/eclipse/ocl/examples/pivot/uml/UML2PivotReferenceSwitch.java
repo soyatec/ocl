@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.pivot.uml;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -29,18 +30,22 @@ import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.uml2.uml.Generalization;
 import org.eclipse.uml2.uml.Interface;
+import org.eclipse.uml2.uml.MultiplicityElement;
 import org.eclipse.uml2.uml.ParameterDirectionKind;
 import org.eclipse.uml2.uml.util.UMLSwitch;
 
 public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 {				
 	protected final UML2Pivot converter;
+	protected final MetaModelManager metaModelManager;
 	
 	public UML2PivotReferenceSwitch(UML2Pivot converter) {
 		this.converter = converter;
+		this.metaModelManager = converter.getMetaModelManager();
 	}
 	
 //	@Override
@@ -57,7 +62,7 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 		if (pivotElement != null) {
 			doSwitchAll(Type.class, pivotElement.getSuperClass(), umlClass2.getSuperClasses());
 			if (pivotElement.getSuperClass().isEmpty()) {
-				org.eclipse.ocl.examples.pivot.Class oclElementType = converter.getMetaModelManager().getOclElementType();
+				org.eclipse.ocl.examples.pivot.Class oclElementType = metaModelManager.getOclElementType();
 				pivotElement.getSuperClass().add(oclElementType);
 			}
 		}
@@ -91,7 +96,7 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 				}
 			}
 			if (newSuperTypes.isEmpty()) {
-				org.eclipse.ocl.examples.pivot.Class oclElementType = converter.getMetaModelManager().getOclElementType();
+				org.eclipse.ocl.examples.pivot.Class oclElementType = metaModelManager.getOclElementType();
 				newSuperTypes.add(oclElementType);
 			}
 			PivotUtil.refreshList(pivotElement.getSuperClass(), newSuperTypes);
@@ -114,6 +119,9 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 						Type pivotType = converter.resolveType(umlType);
 						pivotElement.setType(pivotType);
 						converter.copyMultiplicityElement(pivotElement, umlParameter);
+					}
+					else {
+						pivotElement.setType(metaModelManager.getOclVoidType());
 					}
 				}
 			}
@@ -155,27 +163,21 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 			org.eclipse.uml2.uml.Type umlType = umlTypedElement2.getType();
 			if (umlType != null) {
 				Type pivotType = converter.resolveType(umlType);
+				if (umlType instanceof MultiplicityElement) {
+					MultiplicityElement umlMultiplicity = (MultiplicityElement)umlType;
+					long upper = umlMultiplicity.getUpper();
+					if (upper != 1) {
+						long lower = umlMultiplicity.getLower();
+						boolean isOrdered = umlMultiplicity.isOrdered();
+						boolean isUnique = umlMultiplicity.isUnique();
+						pivotType = metaModelManager.getCollectionType(isOrdered, isUnique, pivotType, BigInteger.valueOf(lower), BigInteger.valueOf(upper));
+					}
+				}
 				pivotElement.setType(pivotType);
 			}
 			else {
-				// FIXME Void ???
+				pivotElement.setType(metaModelManager.getOclVoidType());
 			}
-	/*		EClassifier eClassifier = eGenericType.getEClassifier();
-				if (eClassifier != null) {
-					allEClassifiers.add(eClassifier);
-					ClassifierCS csClassifier = getCS(eClassifier, ClassifierCS.class);
-					csTypeRef.setType(csClassifier);
-				}
-				else {
-					ETypeParameter eTypeParameter = eGenericType.getETypeParameter();
-					if (eTypeParameter != null) {
-						TypeParameterCS csTypeParameter = (TypeParameterCS) createMap.get(eTypeParameter);
-						csTypeRef.setType(csTypeParameter);
-					}
-	//				else {
-	//					error("Unresolved " + eGenericType + " in pass2");
-	//				}
-				} */
 		}
 		return null;
 	}

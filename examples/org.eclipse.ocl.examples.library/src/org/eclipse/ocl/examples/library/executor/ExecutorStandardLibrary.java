@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.executor;
 
 import java.lang.ref.WeakReference;
+import java.math.BigInteger;
 import java.util.Map;
 import java.util.WeakHashMap;
 

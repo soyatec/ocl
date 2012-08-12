@@ -49,6 +49,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.PivotPlugin;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
+import org.eclipse.ocl.examples.pivot.utilities.PivotResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.pivot.utilities.QueryImpl;
 
@@ -380,11 +381,11 @@ public class OCL {
 	 * Return the Pivot resource counterpart of an ecoreResource, specifying the uri of the resulting Ecore resource
 	 * and options for the Pivot2Ecore converter.
 	 */
-	public @NonNull Resource ecore2pivot(@NonNull Resource ecoreResource) {
+	public @NonNull PivotResource ecore2pivot(@NonNull Resource ecoreResource) {
 		MetaModelManager metaModelManager = getMetaModelManager();
 		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager);
 		Root pivotRoot = ecore2Pivot.getPivotRoot();
-		Resource pivotResource = pivotRoot.eResource();
+		PivotResource pivotResource = (PivotResource) pivotRoot.eResource();
 		return DomainUtil.nonNullModel(pivotResource);
 	}
 

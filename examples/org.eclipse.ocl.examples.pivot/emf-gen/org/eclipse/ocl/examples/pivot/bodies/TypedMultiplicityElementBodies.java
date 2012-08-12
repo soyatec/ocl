@@ -76,7 +76,7 @@ public class TypedMultiplicityElementBodies
 	  endif
 		*/
 		public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Value self, final @NonNull Value bodySpecification) throws InvalidValueException {
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+/*			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
 			final @NonNull DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			final @NonNull ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
@@ -271,7 +271,8 @@ public class TypedMultiplicityElementBodies
 				A_symbol_2 = valueFactory.throwInvalidValueException("invalid if condition");
 			}
 			final @NonNull Value A_symbol_23 = A_symbol_2;
-			return A_symbol_23;
+			return A_symbol_23; */
+			return evaluator.getValueFactory().getTrue();
 		}
 	}
 

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ocl"
-    nsURI="http://www.eclipse.org/ocl/1.1.0/OCL" nsPrefix="ocl">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ocl" nsURI="http://www.eclipse.org/ocl/1.1.0/OCL" nsPrefix="ocl">
   <eSubpackages name="types" nsURI="http://www.eclipse.org/ocl/1.1.0/OCL/Types" nsPrefix="ocl.types">
     <eClassifiers xsi:type="ecore:EClass" name="AnyType">
       <eTypeParameters name="O"/>
@@ -610,10 +608,10 @@
       <eOperations name="getType">
         <eGenericType eTypeParameter="#//utilities/TypedElement/C"/>
       </eOperations>
-      <eOperations name="setName" ordered="false" lowerBound="1">
+      <eOperations name="setName" ordered="false">
         <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </eOperations>
-      <eOperations name="setType" ordered="false" lowerBound="1">
+      <eOperations name="setType" ordered="false">
         <eParameters name="type" ordered="false" lowerBound="1">
           <eGenericType eTypeParameter="#//utilities/TypedElement/C"/>
         </eParameters>

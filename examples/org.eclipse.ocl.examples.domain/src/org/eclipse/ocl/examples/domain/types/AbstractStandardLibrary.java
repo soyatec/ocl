@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.domain.types;
 
 import java.lang.ref.WeakReference;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -93,7 +94,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		tupleParts = null;	
 	}
 	
-	public @NonNull DomainCollectionType getCollectionType(@NonNull DomainCollectionType containerType, @NonNull DomainType elementType) {
+	public @NonNull DomainCollectionType getCollectionType(@NonNull DomainCollectionType containerType, @NonNull DomainType elementType, BigInteger lower, BigInteger upper) {
 		boolean isOrdered = containerType.isOrdered();
 		boolean isUnique = containerType.isUnique();
 		if (isOrdered) {

@@ -491,17 +491,18 @@ public class EditTests extends XtextTestCase
 		//
 		Type myType = ocl.getMetaModelManager().getPrimaryType("http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib", "MyType");
 		SequenceType sequenceType = ocl.getMetaModelManager().getSequenceType();
+		TemplateableTypeServer.TemplateArguments templateArguments = new TemplateableTypeServer.TemplateArguments(Collections.singletonList(myType), null, null);
 		TemplateableTypeServer sequenceTypeServer = (TemplateableTypeServer) ocl.getMetaModelManager().getTypeServer(sequenceType);
-		WeakReference<Type> sequenceMyType = new WeakReference<Type>(sequenceTypeServer.findSpecializedType(Collections.singletonList(myType)));
+		WeakReference<Type> sequenceMyType = new WeakReference<Type>(sequenceTypeServer.findSpecializedType(templateArguments));
 		assertNull(sequenceMyType.get()); 
 		//
 		doRename(xtextResource, pivotResource, "Boolean", "Sequence(MyType)");
-		sequenceMyType = new WeakReference<Type>(sequenceTypeServer.findSpecializedType(Collections.singletonList(myType)));
+		sequenceMyType = new WeakReference<Type>(sequenceTypeServer.findSpecializedType(templateArguments));
 		assertNotNull(sequenceMyType.get()); 
 		//		
 		doRename(xtextResource, pivotResource, "Sequence(MyType)", "Set(MyType)");
 		System.gc();
-		sequenceMyType = new WeakReference<Type>(sequenceTypeServer.findSpecializedType(Collections.singletonList(myType)));
+		sequenceMyType = new WeakReference<Type>(sequenceTypeServer.findSpecializedType(templateArguments));
 		assertNull(sequenceMyType.get()); 
 	}
 }

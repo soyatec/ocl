@@ -25,7 +25,9 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
@@ -118,48 +120,25 @@ import com.google.inject.Inject;
 public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 
 	@Inject
-	public BaseLabelProvider(AdapterFactoryLabelProvider delegate) {
+	public BaseLabelProvider(@NonNull AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
 
-	protected void appendClass(StringBuilder s, Object object) {
+	protected void appendClass(@NonNull StringBuilder s, Object object) {
 		s.append("<");
 		s.append(object != null ? object.getClass().getSimpleName() : "null");
 		s.append(">");
 	}
 
-	protected void appendMultiplicity(StringBuilder s, TypedMultiplicityElement ele) {
-		int lower = ele.getLower().intValue();
-		int upper = ele.getUpper().intValue();
+	protected void appendMultiplicity(@NonNull StringBuilder s, TypedMultiplicityElement ele) {
+		long lower = ele.getLower().longValue();
+		long upper = ele.getUpper().longValue();
 		if ((lower != 1) || (upper != 1)) {
-			s.append("[");
-			if (upper < 0) {
-				if (lower == 1) {
-					s.append("+");
-				}
-				else {
-					if (lower != 0) {
-						s.append(lower);
-						s.append("..");
-					}
-					s.append("*");
-				}
-			}
-			else if ((lower == 0) && (upper == 1)) {
-				s.append("?");
-			}
-			else {
-				s.append(lower);
-				if (lower != upper) {
-					s.append("..");
-					s.append(upper);
-				}
-			}
-			s.append("]");
+			DomainUtil.formatMultiplicity(s, lower, upper);
 		}
 	}
 
-	protected void appendName(StringBuilder s, NamedElement element) {
+	protected void appendName(@NonNull StringBuilder s, NamedElement element) {
 		if (element != null) {
 			if (element.eIsProxy()) {
 				EcoreUtil.resolve(element, element);
@@ -168,7 +147,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		}	
 	}
 
-	protected void appendName(StringBuilder s, NamedElementCS csElement) {
+	protected void appendName(@NonNull StringBuilder s, NamedElementCS csElement) {
 		if (csElement != null) {
 			if (csElement.eIsProxy()) {
 				EcoreUtil.resolve(csElement, csElement);
@@ -177,23 +156,23 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		}	
 	}
 
-	protected void appendName(StringBuilder s, Nameable csElement) {
+	protected void appendName(@NonNull StringBuilder s, Nameable csElement) {
 		appendString(s, csElement.getName());
 	}
 
-	protected void appendOptionalName(StringBuilder s, Nameable csElement) {
+	protected void appendOptionalName(@NonNull StringBuilder s, Nameable csElement) {
 		if (csElement != null) {
 			appendOptionalString(s, csElement.getName());
 		}	
 	}
 
-	protected void appendOptionalString(StringBuilder s, String string) {
+	protected void appendOptionalString(@NonNull StringBuilder s, String string) {
 		if (string != null) {
 			s.append(string);
 		}	
 	}
 
-	protected void appendParameters(StringBuilder s, List<Parameter> parameters) {
+	protected void appendParameters(@NonNull StringBuilder s, List<Parameter> parameters) {
 		s.append("(");
 		String prefix = "";
 		for (Parameter csParameter : parameters) {
@@ -205,7 +184,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		s.append(")");
 	}
 
-	protected void appendString(StringBuilder s, String string) {
+	protected void appendString(@NonNull StringBuilder s, String string) {
 		if (string != null) {
 			s.append(string);
 		}	
@@ -214,7 +193,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		}	
 	}
 
-	protected void appendString(StringBuilder s, String string, int countLimit) {
+	protected void appendString(@NonNull StringBuilder s, String string, int countLimit) {
 		if (string == null) {
 			s.append("<null>");
 		}	
@@ -227,7 +206,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		}	
 	}
 
-	protected void appendSuperTypes(StringBuilder s, List<? extends Type> superTypes) {
+	protected void appendSuperTypes(@NonNull StringBuilder s, List<? extends Type> superTypes) {
 		if (!superTypes.isEmpty()) {
 			String prefix = " -> ";
 			for (Type superType : superTypes) {
@@ -238,7 +217,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		}
 	}
 
-	protected void appendTemplateBindings(StringBuilder s, TemplateableElement templateableElement) {
+	protected void appendTemplateBindings(@NonNull StringBuilder s, TemplateableElement templateableElement) {
 		if (templateableElement != null) {
 			for (TemplateBinding templateBinding : templateableElement.getTemplateBinding()) {
 				s.append("(");
@@ -256,7 +235,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		}
 	}
 
-	protected void appendTemplateSignature(StringBuilder s, TemplateableElement templateableElement) {
+	protected void appendTemplateSignature(@NonNull StringBuilder s, TemplateableElement templateableElement) {
 		if (templateableElement != null) {
 			TemplateSignature templateSignature = templateableElement.getOwnedTemplateSignature();
 			if (templateSignature != null) {
@@ -275,12 +254,12 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		}
 	}
 
-	protected void appendType(StringBuilder s, Type type) {
+	protected void appendType(@NonNull StringBuilder s, Type type) {
 		appendName(s, type);
 		appendTemplateBindings(s, type);
 	}
 
-	protected void appendType(StringBuilder s, TypeRefCS type) {
+	protected void appendType(@NonNull StringBuilder s, TypeRefCS type) {
 		Element pivot = type.getPivot();
 		appendString(s, safeGetMoniker(pivot));
 	}

@@ -89,7 +89,7 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 		if (type instanceof CollectionType) {
 			CollectionType collectionType = (CollectionType)type;
 			Type resolvedElementType = resolveUnderspecifiedType(DomainUtil.nonNullModel(collectionType.getElementType()));
-			return metaModelManager.getCollectionType(PivotUtil.getUnspecializedTemplateableElement(collectionType), resolvedElementType);
+			return metaModelManager.getCollectionType(PivotUtil.getUnspecializedTemplateableElement(collectionType), resolvedElementType, null, null);
 //			return metaModelManager.getCollectionType(DomainUtil.nonNullModel(collectionType.getName()), resolvedElementType);
 		}
 		if (type instanceof PrimitiveType) {

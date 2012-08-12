@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.essentialocl.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TuplePartCS;
@@ -34,16 +35,16 @@ import com.google.inject.Inject;
 public class EssentialOCLLabelProvider extends BaseLabelProvider
 {
 	@Inject
-	public EssentialOCLLabelProvider(AdapterFactoryLabelProvider delegate) {
+	public EssentialOCLLabelProvider(@NonNull AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
 
-	protected void appendTemplateParameter(StringBuilder s, TemplateParameterCS templateParameter) {
+	protected void appendTemplateParameter(@NonNull StringBuilder s, TemplateParameterCS templateParameter) {
 		appendName(s, templateParameter);
 	}
 
 	@Override
-	protected void appendType(StringBuilder s, Type type) {
+	protected void appendType(@NonNull StringBuilder s, Type type) {
 		if (type instanceof CollectionTypeCS) {
 			appendName(s, (CollectionTypeCS)type);
 			s.append("(");

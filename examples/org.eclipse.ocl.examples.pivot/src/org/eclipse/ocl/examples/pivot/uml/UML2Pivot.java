@@ -812,7 +812,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 
 	protected void copyMultiplicityElement(@NonNull TypedMultiplicityElement pivotElement, @NonNull org.eclipse.uml2.uml.MultiplicityElement umlMultiplicityElement) {
 		int lower = umlMultiplicityElement.getLower();
-		int upper = umlMultiplicityElement.getUpper();
+		int upper = umlMultiplicityElement.getUpper();		// FIXME Obsolete
 		pivotElement.setLower(BigInteger.valueOf(lower));
 		pivotElement.setUpper(BigInteger.valueOf(upper));
 		pivotElement.setIsOrdered(umlMultiplicityElement.isOrdered());			

@@ -16,11 +16,13 @@
  */
 package org.eclipse.ocl.examples.pivot.uml;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Class;
+import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -29,8 +31,11 @@ import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.TypedElement;
+import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
+import org.eclipse.ocl.examples.pivot.VoidType;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
+import org.eclipse.uml2.uml.MultiplicityElement;
 
 public class Pivot2UMLReferenceVisitor
 	extends AbstractExtendingVisitor<EObject, Pivot2UML>
@@ -182,6 +187,57 @@ public class Pivot2UMLReferenceVisitor
 		org.eclipse.uml2.uml.Type umlType = context.getCreated(org.eclipse.uml2.uml.Type.class, pivotType);
 		umlTypedElement.setType(umlType);
 		return null;
+	}
+
+	@Override
+	public EObject visitTypedMultiplicityElement(@NonNull TypedMultiplicityElement pivotTypedElement) {
+		org.eclipse.uml2.uml.TypedElement umlTypedElement = context.getCreated(org.eclipse.uml2.uml.TypedElement.class, pivotTypedElement);
+		Type pivotType = pivotTypedElement.getType();
+		if ((pivotType == null) || (pivotType instanceof VoidType)) {				// Occurs for Operation return type
+			if (umlTypedElement instanceof MultiplicityElement) {
+				MultiplicityElement umlMultiplicityElement = (MultiplicityElement)umlTypedElement;
+				umlMultiplicityElement.setLower(1);
+				umlMultiplicityElement.setUpper(1);
+				umlMultiplicityElement.setIsOrdered(true);
+				umlMultiplicityElement.setIsUnique(true);
+			}
+			umlTypedElement.setType(null);
+			return null;
+		}
+		else if (pivotType instanceof CollectionType) {
+			CollectionType collectionType = (CollectionType)pivotType;
+			Type elementType = collectionType.getElementType();
+			org.eclipse.uml2.uml.Type umlElementType = elementType != null ? context.getCreated(org.eclipse.uml2.uml.Type.class, elementType) : null;
+			umlTypedElement.setType(umlElementType);
+			if (umlTypedElement instanceof MultiplicityElement) {
+				MultiplicityElement umlMultiplicityElement = (MultiplicityElement)umlTypedElement;
+				umlMultiplicityElement.setIsOrdered(collectionType.isOrdered());
+				umlMultiplicityElement.setIsUnique(collectionType.isUnique());
+				BigInteger lower = collectionType.getLower();
+				BigInteger upper = collectionType.getUpper();
+				umlMultiplicityElement.setLower(lower != null ? lower.intValue() : 0);
+				umlMultiplicityElement.setUpper(upper != null ? upper.intValue() : -1);
+			}
+			return null;
+		}
+		else {
+			if (umlTypedElement instanceof MultiplicityElement) {
+				MultiplicityElement umlMultiplicityElement = (MultiplicityElement)umlTypedElement;
+				if (pivotTypedElement.isRequired()) {
+					umlMultiplicityElement.setLower(1);
+					umlMultiplicityElement.setUpper(1);
+				}
+				else {
+					umlMultiplicityElement.setLower(0);
+					umlMultiplicityElement.setUpper(1);
+				}
+				umlMultiplicityElement.setIsUnique(true);
+				umlMultiplicityElement.setIsOrdered(false);		// UML default
+			}
+			org.eclipse.uml2.uml.Type umlType = context.getCreated(org.eclipse.uml2.uml.Type.class, pivotType);
+			umlTypedElement.setType(umlType);
+			return null;
+		}
 	}
 	
 /*	@Override

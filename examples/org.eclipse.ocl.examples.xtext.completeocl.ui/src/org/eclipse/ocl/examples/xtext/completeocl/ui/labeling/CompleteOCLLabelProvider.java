@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
@@ -57,7 +58,7 @@ import com.google.inject.Inject;
 public class CompleteOCLLabelProvider extends EssentialOCLLabelProvider
 {
 	@Inject
-	public CompleteOCLLabelProvider(AdapterFactoryLabelProvider delegate) {
+	public CompleteOCLLabelProvider(@NonNull AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
 

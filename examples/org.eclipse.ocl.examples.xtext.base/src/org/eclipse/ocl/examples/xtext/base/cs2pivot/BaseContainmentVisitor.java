@@ -21,7 +21,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -30,7 +29,6 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Detail;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
-import org.eclipse.ocl.examples.pivot.MultiplicityElement;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -43,7 +41,6 @@ import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS;
@@ -83,7 +80,6 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateSignatureCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TuplePartCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TupleTypeCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypeRefCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.WildcardTypeRefCS;
@@ -135,15 +131,6 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 		}
 		context.refreshTemplateSignature(csElement, pivotElement);
 		return pivotElement;
-	}
-
-	protected <T> void refreshMultiplicity(@NonNull MultiplicityElement pivotElement, @NonNull TypedElementCS csTypedElement) {
-		pivotElement.setIsOrdered(ElementUtil.isOrdered(csTypedElement));
-		pivotElement.setIsUnique(ElementUtil.isUnique(csTypedElement));
-		int lower = ElementUtil.getLower(csTypedElement);
-		int upper = ElementUtil.getUpper(csTypedElement);
-		pivotElement.setLower(BigInteger.valueOf(lower));
-		pivotElement.setUpper(BigInteger.valueOf(upper));
 	}
 
 	protected @Nullable <T extends NamedElement> T refreshNamedElement(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, @NonNull NamedElementCS csElement) {
@@ -270,15 +257,6 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 		pivotElement.setIsSerializable(qualifiers.contains("serializable"));
 	}
 	
-	protected @Nullable <T extends TypedMultiplicityElement> T  refreshTypedMultiplicityElement(@NonNull Class<T> pivotClass,
-			/*@NonNull*/ EClass pivotEClass, @NonNull TypedElementCS csTypedElement) {
-		T pivotElement = refreshNamedElement(pivotClass, pivotEClass, csTypedElement);
-		if (pivotElement != null) {
-			refreshMultiplicity(pivotElement, csTypedElement);
-		}
-		return pivotElement;
-	}
-
 	@Override
 	public Continuation<?> visitAnnotationCS(@NonNull AnnotationCS csElement) {
 		@SuppressWarnings("null") @NonNull EClass eClass = PivotPackage.Literals.ANNOTATION;
@@ -411,7 +389,7 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 	@Override
 	public Continuation<?> visitOperationCS(@NonNull OperationCS csElement) {
 		@SuppressWarnings("null") @NonNull EClass eClass = PivotPackage.Literals.OPERATION;
-		Operation pivotElement = refreshTypedMultiplicityElement(Operation.class, eClass, csElement);
+		Operation pivotElement = refreshNamedElement(Operation.class, eClass, csElement);
 		if (pivotElement != null) {
 			context.refreshTemplateSignature(csElement, pivotElement);
 			context.refreshPivotList(Parameter.class, pivotElement.getOwnedParameter(), csElement.getOwnedParameter());
@@ -429,7 +407,7 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 	@Override
 	public Continuation<?> visitParameterCS(@NonNull ParameterCS csElement) {
 		@SuppressWarnings("null") @NonNull EClass eClass = PivotPackage.Literals.PARAMETER;
-		refreshTypedMultiplicityElement(Parameter.class, eClass, csElement);
+		refreshNamedElement(Parameter.class, eClass, csElement);
 		return null;
 	}
 
@@ -471,7 +449,7 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 	@Override
 	public Continuation<?> visitStructuralFeatureCS(@NonNull StructuralFeatureCS csElement) {
 		@SuppressWarnings("null") @NonNull EClass eClass = PivotPackage.Literals.PROPERTY;
-		Property pivotElement = refreshTypedMultiplicityElement(Property.class, eClass, csElement);
+		Property pivotElement = refreshNamedElement(Property.class, eClass, csElement);
 		if (pivotElement != null) {
 			List<String> qualifiers = csElement.getQualifier();
 			pivotElement.setIsComposite(qualifiers.contains("composes"));
@@ -571,8 +549,7 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 		@SuppressWarnings("null") @NonNull EClass eClass = PivotPackage.Literals.CLASS;
 		org.eclipse.ocl.examples.pivot.Class pivotElement = context.refreshModelElement(org.eclipse.ocl.examples.pivot.Class.class, eClass, null);
 		if (pivotElement != null) {
-			@SuppressWarnings("null") @NonNull EReference eReference = BaseCSTPackage.Literals.PIVOTABLE_ELEMENT_CS__PIVOT;
-			context.installPivotReference(csElement, pivotElement, eReference);
+			context.installPivotReference(csElement, pivotElement, BaseCSTPackage.Literals.PIVOTABLE_ELEMENT_CS__PIVOT);
 		}
 		return null;
 	}

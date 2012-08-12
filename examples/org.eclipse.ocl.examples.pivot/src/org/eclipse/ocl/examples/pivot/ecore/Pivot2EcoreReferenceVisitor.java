@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.pivot.ecore;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +47,7 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
+import org.eclipse.ocl.examples.pivot.VoidType;
 import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
@@ -238,7 +240,6 @@ public class Pivot2EcoreReferenceVisitor
 		else if (eObject instanceof ETypeParameter) {
 			EGenericType eGenericType = EcoreFactory.eINSTANCE.createEGenericType();
 			eGenericType.setETypeParameter((ETypeParameter)eObject);
-//			for (Ex ex : pivotTypedElement.getCon)
 			eTypedElement.setEGenericType(eGenericType);
 		}
 		else {
@@ -251,24 +252,45 @@ public class Pivot2EcoreReferenceVisitor
 
 	@Override
 	public EObject visitTypedMultiplicityElement(@NonNull TypedMultiplicityElement pivotTypedElement) {
+		ETypedElement eTypedElement = context.getCreated(ETypedElement.class, pivotTypedElement);
 		Type pivotType = pivotTypedElement.getType();
-		if (pivotType == null) {
-			return null;				// Occurs for Operation return type
+		if ((pivotType == null) || (pivotType instanceof VoidType)) {				// Occurs for Operation return type
+			eTypedElement.setLowerBound(0);
+			eTypedElement.setUpperBound(1);
+			eTypedElement.setOrdered(true);
+			eTypedElement.setUnique(true);
+			return null;
 		}
 		else if (pivotType instanceof CollectionType) {
-			ETypedElement eTypedElement = context.getCreated(ETypedElement.class, pivotTypedElement);
 			CollectionType collectionType = (CollectionType)pivotType;
 			Type elementType = collectionType.getElementType();
 			EObject eObject = typeRefVisitor.safeVisit(elementType);
-			eTypedElement.setEType((EClassifier)eObject);
+			if (eObject instanceof EGenericType) {
+				eTypedElement.setEGenericType((EGenericType)eObject);
+			}
+			else {
+				eTypedElement.setEType((EClassifier)eObject);
+			}
 			eTypedElement.setOrdered(collectionType.isOrdered());
 			eTypedElement.setUnique(collectionType.isUnique());
-			eTypedElement.setLowerBound(0);
-			eTypedElement.setUpperBound(-1);
+			BigInteger lower = collectionType.getLower();
+			BigInteger upper = collectionType.getUpper();
+			eTypedElement.setLowerBound(lower != null ? lower.intValue() : 0);
+			eTypedElement.setUpperBound(upper != null ? upper.intValue() : -1);
 			return null;
 		}
 		else {
-			return super.visitTypedMultiplicityElement(pivotTypedElement);
+			if (pivotTypedElement.isRequired()) {
+				eTypedElement.setLowerBound(1);
+				eTypedElement.setUpperBound(1);
+			}
+			else {
+				eTypedElement.setLowerBound(0);
+				eTypedElement.setUpperBound(1);
+			}
+			eTypedElement.setUnique(true);
+			eTypedElement.setOrdered(true);		// Ecore default
+			return visitTypedElement(pivotTypedElement);
 		}
 	}
 	

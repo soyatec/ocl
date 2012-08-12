@@ -51,7 +51,6 @@ import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Interface;
 import org.eclipse.uml2.uml.ParameterableElement;
 import org.eclipse.uml2.uml.UMLFactory;
-import org.eclipse.uml2.uml.UMLPackage;
 
 public class Pivot2UMLDeclarationVisitor
 	extends AbstractExtendingVisitor<EModelElement, Pivot2UML>
@@ -123,7 +122,18 @@ public class Pivot2UMLDeclarationVisitor
 		safeVisitAll(umlElement.getOwnedComments(), pivotModelElement.getOwnedComment());
 	}
 
-	protected void copyMultiplicityElement(@NonNull org.eclipse.uml2.uml.MultiplicityElement umlMultiplicityElement, @NonNull TypedMultiplicityElement pivotTypedElement) {
+	protected void copyNamedElement(@NonNull org.eclipse.uml2.uml.NamedElement umlNamedElement, @NonNull NamedElement pivotNamedElement) {
+		copyModelElement(umlNamedElement, pivotNamedElement);
+		umlNamedElement.setName(pivotNamedElement.getName());
+		safeVisitAll(umlNamedElement.getOwnedComments(), pivotNamedElement.getOwnedComment());
+	}
+
+	protected void copyTypedElement(@NonNull org.eclipse.uml2.uml.TypedElement umlTypedElement, @NonNull TypedMultiplicityElement pivotTypedElement) {
+		copyNamedElement(umlTypedElement, pivotTypedElement);
+		context.defer(pivotTypedElement);		// Defer type/multiplicity setting
+	}
+
+/*	protected void zzcopyMultiplicityElement(@NonNull org.eclipse.uml2.uml.MultiplicityElement umlMultiplicityElement, @NonNull TypedMultiplicityElement pivotTypedElement) {
 		Integer lower = pivotTypedElement.getLower().intValue();
 		if (lower.equals(UMLPackage.Literals.MULTIPLICITY_ELEMENT__LOWER.getDefaultValue())) {
 //			umlMultiplicityElement.eUnset(UMLPackage.Literals.MULTIPLICITY_ELEMENT__LOWER);
@@ -138,20 +148,9 @@ public class Pivot2UMLDeclarationVisitor
 		else {
 			umlMultiplicityElement.setUpper(upper);
 		}
-		umlMultiplicityElement.setIsUnique(pivotTypedElement.isUnique());
-		umlMultiplicityElement.setIsOrdered(pivotTypedElement.isOrdered());
-	}
-
-	protected void copyNamedElement(@NonNull org.eclipse.uml2.uml.NamedElement umlNamedElement, @NonNull NamedElement pivotNamedElement) {
-		copyModelElement(umlNamedElement, pivotNamedElement);
-		umlNamedElement.setName(pivotNamedElement.getName());
-		safeVisitAll(umlNamedElement.getOwnedComments(), pivotNamedElement.getOwnedComment());
-	}
-
-	protected void copyTypedElement(@NonNull org.eclipse.uml2.uml.TypedElement umlTypedElement, @NonNull TypedMultiplicityElement pivotTypedElement) {
-		copyNamedElement(umlTypedElement, pivotTypedElement);
-		context.defer(pivotTypedElement);		// Defer type setting
-	}
+//		umlMultiplicityElement.setIsUnique(pivotTypedElement.isUnique());
+//		umlMultiplicityElement.setIsOrdered(pivotTypedElement.isOrdered());
+	} */
 
 	public <T extends EObject> void safeVisitAll(List<T> eObjects, List<? extends Element> pivotObjects) {
 		for (Element pivotObject : pivotObjects) {
@@ -337,7 +336,6 @@ public class Pivot2UMLDeclarationVisitor
 		@SuppressWarnings("null")
 		@NonNull org.eclipse.uml2.uml.Parameter umlParameter = UMLFactory.eINSTANCE.createParameter();
 		copyTypedElement(umlParameter, pivotParameter);
-		copyMultiplicityElement(umlParameter, pivotParameter);
 		return umlParameter;
 	}
 
@@ -358,7 +356,6 @@ public class Pivot2UMLDeclarationVisitor
 		@SuppressWarnings("null")
 		@NonNull org.eclipse.uml2.uml.Property umlProperty = UMLFactory.eINSTANCE.createProperty();
 		copyTypedElement(umlProperty, pivotProperty);
-		copyMultiplicityElement(umlProperty, pivotProperty);
 //		umlProperty.setIsID(pivotProperty.isID());
 		umlProperty.setIsComposite(pivotProperty.isComposite());
 //		umlProperty.setIsResolveProxies(pivotProperty.isResolveProxies());

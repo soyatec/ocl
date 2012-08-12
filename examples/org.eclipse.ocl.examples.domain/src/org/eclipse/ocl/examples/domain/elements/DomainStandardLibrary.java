@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
+import java.math.BigInteger;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -81,7 +82,7 @@ public interface DomainStandardLibrary
 	/**
 	 * Return the specialized collection type for the containerType for elementType.
 	 */
-	@NonNull DomainCollectionType getCollectionType(@NonNull DomainCollectionType containerType, @NonNull DomainType elementType);
+	@NonNull DomainCollectionType getCollectionType(@NonNull DomainCollectionType containerType, @NonNull DomainType elementType, BigInteger lower, BigInteger upper);
 
 	/**
 	 * Return the enumeration for a given enumerator.

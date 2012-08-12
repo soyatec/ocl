@@ -670,19 +670,10 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		copyAnnotatedElement(pivotElement, eTypedElement, excludedAnnotations);
 		int lower = eTypedElement.getLowerBound();
 		int upper = eTypedElement.getUpperBound();
-		pivotElement.setLower(BigInteger.valueOf(lower));
-		pivotElement.setUpper(BigInteger.valueOf(upper));
-		pivotElement.setIsOrdered(eTypedElement.isOrdered());			
-		pivotElement.setIsUnique(eTypedElement.isUnique());			
+		pivotElement.setIsRequired((upper == 1) && (lower == 1));
 		EGenericType eGenericType = eTypedElement.getEGenericType();
 		if (eGenericType != null) {
 			doInPackageSwitch(eGenericType);
-//				EClassifier eClassifier = eGenericType.getEClassifier();
-//				if (eClassifier != null) {
-//					allEClassifiers.add(eClassifier);
-//				}
-//				Element csType = doSwitch(eGenericType);
-//				pivotElement.setType((TypedRefCS) csType);
 			converter.queueReference(eTypedElement);
 		}
 	}

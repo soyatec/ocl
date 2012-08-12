@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.xtext.base.attributes;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -42,6 +43,9 @@ public class ReferenceCSAttribution extends AbstractAttribution
 			TypedRefCS typeRef = targetElement.getOwnedType();
 			if (typeRef instanceof TypedTypeRefCS) {
 				Element type = ((TypedTypeRefCS)typeRef).getPivot();
+				if (type instanceof CollectionType) {
+					type = ((CollectionType)type).getElementType();
+				}
 				if (type instanceof Type) {
 					environmentView.computeLookups(type, null, PivotPackage.Literals.PROPERTY__OPPOSITE, scopeView.getTargetReference());
 				}

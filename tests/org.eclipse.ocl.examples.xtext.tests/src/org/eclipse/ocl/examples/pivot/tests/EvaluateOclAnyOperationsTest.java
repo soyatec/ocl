@@ -724,7 +724,7 @@ public class EvaluateOclAnyOperationsTest extends PivotSimpleTestSuite
     }
 
 	public Type getCollectionType(String collectionName, Type type) {
-		Type collectionType = metaModelManager.getCollectionType(collectionName, type);
+		Type collectionType = metaModelManager.getCollectionType(collectionName, type, null, null);
 		metaModelManager.addLockedElement(collectionType);
 		return collectionType;
 	}

@@ -88,7 +88,7 @@ public class OperationFilter extends AbstractOperationFilter
 	protected @Nullable Map<TemplateParameter, ParameterableElement> getIterationBindings(@NonNull Iteration candidateIteration) {
 		Type sourceType = this.sourceType;
 		if (!(sourceType instanceof CollectionType) && (candidateIteration.getOwningType() instanceof CollectionType) && (sourceType != null)) {
-			sourceType = metaModelManager.getCollectionType("Set", sourceType);		// Implicit oclAsSet()
+			sourceType = metaModelManager.getCollectionType("Set", sourceType, null, null);		// Implicit oclAsSet()
 		}
 		if (!(sourceType instanceof CollectionType)) {			// May be InvalidType
 			return null;
@@ -124,7 +124,7 @@ public class OperationFilter extends AbstractOperationFilter
 		Type containingType = candidateOperation.getOwningType();
 		if ((containingType instanceof CollectionType) && (sourceType != null)) {
 			if (!(sourceType instanceof CollectionType)) {
-				sourceType = metaModelManager.getCollectionType("Set", sourceType);		// Implicit oclAsSet()
+				sourceType = metaModelManager.getCollectionType("Set", sourceType, null, null);		// Implicit oclAsSet()
 			}			
 			Type elementType;
 			if (sourceType instanceof CollectionType) {

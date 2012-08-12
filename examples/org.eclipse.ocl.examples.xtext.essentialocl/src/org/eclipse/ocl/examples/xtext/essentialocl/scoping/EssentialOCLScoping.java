@@ -194,7 +194,7 @@ public class EssentialOCLScoping
 					Type type = pivot.getType();
 					if (pivot instanceof TypedMultiplicityElement) {
 						TypedMultiplicityElement typedMultiplicityElement = (TypedMultiplicityElement)pivot;
-						if (typedMultiplicityElement.isOrdered()) {
+/*						if (typedMultiplicityElement.isOrdered()) {
 							if (typedMultiplicityElement.isUnique()) {
 								s.append("OrderedSet(");
 							}
@@ -209,9 +209,9 @@ public class EssentialOCLScoping
 							else {
 								s.append("Bag(");
 							}
-						}
+						} */
 						s.append(String.valueOf(type));
-						s.append(")");
+//						s.append(")");
 						BigInteger lower = typedMultiplicityElement.getLower();
 						BigInteger upper = typedMultiplicityElement.getUpper();
 						PivotUtil.appendMultiplicity(s, lower.intValue(), upper.intValue());

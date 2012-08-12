@@ -690,7 +690,8 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		} */
 	}
 
-	public void installPivotReference(@NonNull ElementRefCS csElement, @NonNull Element newPivotElement, @NonNull EReference eReference) {
+	public void installPivotReference(@NonNull ElementRefCS csElement, @NonNull Element newPivotElement, /*@NonNull*/ EReference eReference) {
+		assert eReference != null;
 		converter.installPivotReference(csElement, newPivotElement, eReference);
 	}
 	
@@ -936,8 +937,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 						templateBindings.add(templateBinding);					
 					}
 				}
-				@SuppressWarnings("null") @NonNull EReference eReference = BaseCSTPackage.Literals.PIVOTABLE_ELEMENT_CS__PIVOT;
-				installPivotReference(csTemplateBinding, templateBinding, eReference);
+				installPivotReference(csTemplateBinding, templateBinding, BaseCSTPackage.Literals.PIVOTABLE_ELEMENT_CS__PIVOT);
 				@SuppressWarnings("null") @NonNull List<TemplateParameterSubstitution> parameterSubstitutions = templateBinding.getParameterSubstitution();
 				@SuppressWarnings("null") @NonNull List<TemplateParameter> templateParameters = templateSignature.getOwnedParameter();
 				@SuppressWarnings("null") @NonNull List<TemplateParameterSubstitutionCS> csParameterSubstitutions = csTemplateBinding.getOwnedParameterSubstitution();
@@ -1078,8 +1078,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 			specializedPivotElement.setUnspecializedElement(unspecializedPivotElement);
 //WIP			metaModelManager.addOrphanClass(specializedPivotElement); */
 		}
-		@SuppressWarnings("null") @NonNull EReference eReference = BaseCSTPackage.Literals.TYPED_TYPE_REF_CS__TYPE;
-		installPivotReference(csElement, specializedPivotElement, eReference);
+		installPivotReference(csElement, specializedPivotElement, BaseCSTPackage.Literals.TYPED_TYPE_REF_CS__TYPE);
 		if (specializedPivotElement != unspecializedPivotElement) {
 			//
 			//	Refresh the pivot specialization bindings and parameter substitutions

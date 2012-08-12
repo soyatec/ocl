@@ -41,6 +41,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.common.utils.StringUtils;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Class;
+import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Detail;
@@ -128,11 +129,7 @@ public class Pivot2EcoreDeclarationVisitor
 	protected void copyTypedElement(@NonNull ETypedElement eTypedElement, @NonNull TypedMultiplicityElement pivotTypedElement) {
 		copyNamedElement(eTypedElement, pivotTypedElement);
 		safeVisitAll(eTypedElement.getEAnnotations(), pivotTypedElement.getOwnedAnnotation());
-		context.defer(pivotTypedElement);		// Defer type setting
-		eTypedElement.setLowerBound(pivotTypedElement.getLower().intValue());
-		eTypedElement.setUpperBound(pivotTypedElement.getUpper().intValue());
-		eTypedElement.setUnique(pivotTypedElement.isUnique());
-		eTypedElement.setOrdered(pivotTypedElement.isOrdered());
+		context.defer(pivotTypedElement);		// Defer type/multiplicity setting
 	}
 
 	public <T extends EObject> void safeVisitAll(List<T> eObjects, List<? extends Element> pivotObjects) {
@@ -292,6 +289,9 @@ public class Pivot2EcoreDeclarationVisitor
 		}
 		EStructuralFeature eStructuralFeature;
 		Type type = pivotProperty.getType();
+		if (type instanceof CollectionType) {					// One level of unified collection types gets unwrapped.
+			type = ((CollectionType)type).getElementType();
+		}
 		if (type instanceof DataType) {
 			EAttribute eAttribute = EcoreFactory.eINSTANCE.createEAttribute();
 			eAttribute.setID(pivotProperty.isID());

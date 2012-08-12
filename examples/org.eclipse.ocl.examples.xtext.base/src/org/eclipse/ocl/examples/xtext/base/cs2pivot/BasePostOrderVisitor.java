@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -28,12 +27,14 @@ import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Detail;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.MultiplicityElement;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationElementCS;
@@ -71,6 +72,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.WildcardTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.util.AbstractExtendingBaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
+import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 
 public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continuation<?>, CS2PivotConversion>
 {
@@ -87,8 +89,11 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 		}
 	}
 	
+	protected final @NonNull MetaModelManager metaModelManager;
+	
 	public BasePostOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
+		this.metaModelManager= context.getMetaModelManager();
 	}
 
 	protected @Nullable TemplateableElementCS getTemplateableElementContainer(@NonNull ElementCS csElement) {
@@ -223,8 +228,7 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 	public Continuation<?> visitModelElementRefCS(@NonNull ModelElementRefCS object) {
 		Element element = object.getPathName().getElement();
 		if (element != null) {
-			@SuppressWarnings("null") @NonNull EReference eReference = BaseCSTPackage.Literals.PIVOTABLE_ELEMENT_CS__PIVOT;
-			context.installPivotReference(object, element, eReference);
+			context.installPivotReference(object, element, BaseCSTPackage.Literals.PIVOTABLE_ELEMENT_CS__PIVOT);
 		}
 		return null;
 	}
@@ -294,7 +298,7 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 			BasicContinuation<?> continuation = visitTypedElementCS(csReference);
 			assert continuation == null;
 			if (pivotOpposite == null) {
-				context.getMetaModelManager().installPropertyDeclaration(pivotElement);
+				metaModelManager.installPropertyDeclaration(pivotElement);
 			}
 		}
 		return null;
@@ -345,7 +349,24 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 		if (pivotElement != null) {
 			context.handleVisitNamedElement(csTypedElement, pivotElement);
 			TypedRefCS ownedType = csTypedElement.getOwnedType();
-			Type pivotType = ownedType != null ? PivotUtil.getPivot(Type.class, ownedType) : null;
+			Type pivotType = null;
+			if ((ownedType != null) && (pivotElement instanceof MultiplicityElement)) {
+				pivotType = PivotUtil.getPivot(Type.class, ownedType);
+				int lower = ElementUtil.getLower(csTypedElement);
+				int upper = ElementUtil.getUpper(csTypedElement);
+				if (upper == 1) {
+					((MultiplicityElement)pivotElement).setIsRequired(lower == 1);
+				}
+				else {
+//					boolean isOrdered = ElementUtil.isOrdered(csTypedElement);
+//					boolean isUnique = ElementUtil.isUnique(csTypedElement);
+//					pivotType = metaModelManager.getCollectionType(isOrdered, isUnique, pivotType, BigInteger.valueOf(lower), BigInteger.valueOf(upper));
+					((MultiplicityElement)pivotElement).setIsRequired(true);
+				}
+			}
+			if (pivotType == null) {
+				pivotType = metaModelManager.getOclVoidType();
+			}
 			context.setType(pivotElement, pivotType);
 			context.refreshPivotList(Constraint.class, pivotElement.getOwnedRule(), csTypedElement.getOwnedConstraint());
 		}

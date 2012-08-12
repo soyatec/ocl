@@ -173,8 +173,8 @@ public abstract class Abstract2Moniker implements PivotConstants
 		if (upper != 1) {
 			append("[");
 			append(lower);
-			append(multiplicityElement.isOrdered() ? "S" : "s");
-			append(multiplicityElement.isUnique() ? "U" : "u");
+//			append(multiplicityElement.isOrdered() ? "S" : "s");
+//			append(multiplicityElement.isUnique() ? "U" : "u");
 			append(upper);
 			append("]");
 		}

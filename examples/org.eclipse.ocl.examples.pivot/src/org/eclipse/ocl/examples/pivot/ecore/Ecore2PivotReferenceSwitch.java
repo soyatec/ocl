@@ -213,28 +213,19 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 			EGenericType eType = eObject2.getEGenericType();
 			if (eType != null) {
 				Type pivotType = converter.getPivotType(eType);
+				long upper = eObject.getUpperBound();
+				if (upper != 1) {
+					long lower = eObject.getLowerBound();
+					boolean isOrdered = eObject.isOrdered();
+					boolean isUnique = eObject.isUnique();
+					pivotType = metaModelManager.getCollectionType(isOrdered, isUnique, pivotType, BigInteger.valueOf(lower), BigInteger.valueOf(upper));
+				}
 				pivotElement.setType(pivotType);
 			}
 			else {
-				// FIXME Void ???
+				pivotElement.setType(metaModelManager.getOclVoidType());
 			}
 		}
-/*		EClassifier eClassifier = eGenericType.getEClassifier();
-			if (eClassifier != null) {
-				allEClassifiers.add(eClassifier);
-				ClassifierCS csClassifier = getCS(eClassifier, ClassifierCS.class);
-				csTypeRef.setType(csClassifier);
-			}
-			else {
-				ETypeParameter eTypeParameter = eGenericType.getETypeParameter();
-				if (eTypeParameter != null) {
-					TypeParameterCS csTypeParameter = (TypeParameterCS) createMap.get(eTypeParameter);
-					csTypeRef.setType(csTypeParameter);
-				}
-//				else {
-//					error("Unresolved " + eGenericType + " in pass2");
-//				}
-			} */
 		return pivotElement;
 	}
 

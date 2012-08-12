@@ -614,36 +614,39 @@ public class PrettyPrinter
 	}
 
 	public void appendTypedMultiplicity(TypedMultiplicityElement object) {
-		int lower = object.getLower().intValue();
-		int upper = object.getUpper().intValue();
-		if (upper != 1) {
-			if (object.isOrdered()) {
-				if (object.isUnique()) {
-					append("OrderedSet");
-				}
-				else {
-					append("Sequence");
-				}
-			}
-			else {
-				if (object.isUnique()) {
-					append("Set");
-				}
-				else {
-					append("Bag");
-				}
-			}
-			append("(");
+//		int lower = object.getLower().intValue();
+//		int upper = object.getUpper().intValue();
+//		if (upper != 1) {
+//			if (object.isOrdered()) {
+//				if (object.isUnique()) {
+//					append("OrderedSet");
+//				}
+//				else {
+//					append("Sequence");
+//				}
+//			}
+//			else {
+//				if (object.isUnique()) {
+//					append("Set");
+//				}
+//				else {
+//					append("Bag");
+//				}
+//			}
+//			append("(");
+//			appendElement(object.getType());
+//			if ((lower > 0) || (upper >= 0)) {
+//				appendMultiplicity(lower, upper);
+//			}
+//			append(")");
+//		}
+//		else {
 			appendElement(object.getType());
-			if ((lower > 0) || (upper >= 0)) {
-				appendMultiplicity(lower, upper);
+			if (!object.isRequired()) {
+				append("[?]");
 			}
-			append(")");
-		}
-		else {
-			appendElement(object.getType());
-			appendMultiplicity(lower, upper);
-		}
+//			appendMultiplicity(lower, upper);
+//		}
 	}
 
 	public Precedence getCurrentPrecedence() {

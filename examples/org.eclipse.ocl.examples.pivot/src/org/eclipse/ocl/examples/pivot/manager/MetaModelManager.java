@@ -1277,27 +1277,31 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		}
 	}
 
-	public @NonNull CollectionType getCollectionType(boolean isOrdered, boolean isUnique, Type elementType) {
-		@SuppressWarnings("null") @NonNull List<Type> elementTypeAsList = Collections.singletonList(elementType);
-		return getLibraryType(getCollectionType(isOrdered, isUnique), elementTypeAsList);
+//	public @NonNull CollectionType getCollectionType(boolean isOrdered, boolean isUnique, Type elementType) {
+//		return getCollectionType(isOrdered, isUnique, elementType, null, null);
+//	}
+	public @NonNull CollectionType getCollectionType(boolean isOrdered, boolean isUnique, Type elementType, BigInteger lower, BigInteger upper) {
+		List<Type> elementTypeAsList = Collections.singletonList(elementType);
+		assert elementTypeAsList != null;
+		return getLibraryType(getCollectionType(isOrdered, isUnique), elementTypeAsList, lower, upper);
 	}
 	
-	public @NonNull CollectionType getCollectionType(@NonNull CollectionType collectionType, @NonNull DomainType elementType) {
+	public @NonNull CollectionType getCollectionType(@NonNull CollectionType collectionType, @NonNull DomainType elementType, BigInteger lower, BigInteger upper) {
 		@SuppressWarnings("null") @NonNull List<Type> elementTypeAsList = Collections.singletonList(getType(elementType));
-		return getLibraryType(collectionType, elementTypeAsList);
+		return getLibraryType(collectionType, elementTypeAsList, lower, upper);
 	}
 
-	public @Nullable Type getCollectionType(@NonNull String collectionTypeName, @NonNull Type elementType) {
+	public @Nullable Type getCollectionType(@NonNull String collectionTypeName, @NonNull Type elementType, BigInteger lower, BigInteger upper) {
 		if (elementType.eIsProxy()) {
 			return getOclInvalidType();
 		}
 		@SuppressWarnings("null") @NonNull List<Type> elementTypeAsList = Collections.singletonList(elementType);
-		return getLibraryType(collectionTypeName, elementTypeAsList);
+		return getLibraryType(collectionTypeName, elementTypeAsList, lower, upper);
 	}
 	
-	public @NonNull CollectionType getCollectionType(@NonNull DomainType genericType, @NonNull DomainType elementType) {
+	public @NonNull CollectionType getCollectionType(@NonNull DomainType genericType, @NonNull DomainType elementType, BigInteger lower, BigInteger upper) {
 		@SuppressWarnings("null") @NonNull List<Type> elementTypeAsList = Collections.singletonList(getType(elementType));
-		return getLibraryType((CollectionType)getType(genericType), elementTypeAsList);
+		return getLibraryType((CollectionType)getType(genericType), elementTypeAsList, lower, upper);
 	}
 
 	public @NonNull Set<Type> getCommonClasses(@NonNull Type leftClass, @NonNull Type rightClass, @NonNull Set<Type> commonClasses) {
@@ -1464,8 +1468,15 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		Type libraryType = getRequiredLibraryType(string);
 		return getLibraryType(libraryType, templateArguments);
 	}
+	public @Nullable Type getLibraryType(@NonNull String string, @NonNull List<? extends ParameterableElement> templateArguments, BigInteger lower, BigInteger upper) {
+		Type libraryType = getRequiredLibraryType(string);
+		return getLibraryType(libraryType, templateArguments, lower, upper);
+	}
 
 	public @NonNull <T extends Type> T getLibraryType(@NonNull T libraryType, @NonNull List<? extends ParameterableElement> templateArguments) {
+		if (libraryType instanceof CollectionType) {
+			return getLibraryType(libraryType, templateArguments, null, null);
+		}
 		assert libraryType == PivotUtil.getUnspecializedTemplateableElement(libraryType);
 		if ((libraryType == getAnyClassifierType()) && (templateArguments.size() == 1) && (templateArguments.get(0) == libraryType)) {
 			return libraryType;
@@ -1485,6 +1496,29 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		TemplateableTypeServer typeServer = (TemplateableTypeServer) getTypeServer(libraryType);
 		@SuppressWarnings("unchecked")
 		T specializedType = (T) typeServer.getSpecializedType(templateArguments);
+		return specializedType;
+	}
+	public @NonNull <T extends Type> T getLibraryType(@NonNull T libraryType, @NonNull List<? extends ParameterableElement> templateArguments, BigInteger lower, BigInteger upper) {
+		assert libraryType instanceof CollectionType;
+		assert libraryType == PivotUtil.getUnspecializedTemplateableElement(libraryType);
+		if ((libraryType == getAnyClassifierType()) && (templateArguments.size() == 1) && (templateArguments.get(0) == libraryType)) {
+			return libraryType;
+		}
+		TemplateSignature templateSignature = libraryType.getOwnedTemplateSignature();
+		List<TemplateParameter> templateParameters = templateSignature != null ? templateSignature.getParameter() : EMPTY_TEMPLATE_PARAMETER_LIST;
+		if (templateParameters.isEmpty()) {
+			return libraryType;
+		}
+		if (templateArguments.size() != templateParameters.size()) {
+			throw new IllegalArgumentException("Incorrect template bindings for template type");
+		}
+		boolean isUnspecialized = isUnspecialized(templateParameters, templateArguments);
+		if (isUnspecialized) {
+			return libraryType;	
+		}
+		TemplateableTypeServer typeServer = (TemplateableTypeServer) getTypeServer(libraryType);
+		@SuppressWarnings("unchecked")
+		T specializedType = (T) typeServer.getSpecializedType(templateArguments, lower, upper);
 		return specializedType;
 	}
 
@@ -1987,12 +2021,12 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return type;
 	}
 	
-	protected <T extends Type> T getSpecializedTypeServer(@NonNull T unspecializedType, @NonNull List<? extends ParameterableElement> templateArguments) {
-		TemplateableTypeServer typeServer = (TemplateableTypeServer) getTypeServer(unspecializedType);
-		@SuppressWarnings("unchecked")
-		T specializedType = (T) typeServer.getSpecializedType(templateArguments);
-		return specializedType;
-	}
+//	protected <T extends Type> T getSpecializedTypeServer(@NonNull T unspecializedType, @NonNull List<? extends ParameterableElement> templateArguments, long lower, long upper) {
+//		TemplateableTypeServer typeServer = (TemplateableTypeServer) getTypeServer(unspecializedType);
+//		@SuppressWarnings("unchecked")
+//		T specializedType = (T) typeServer.getSpecializedType(templateArguments, lower, upper);
+//		return specializedType;
+//	}
 	
 	
 	public Iterable<Type> getSuperClasses(Type pivotType) {
@@ -2105,7 +2139,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		int upperBound = element.getUpper().intValue();
 		boolean isMany = (upperBound < 0) || (1 < upperBound);
 		if (!isMany) {
-			return elementType;
+			return elementType;							// FIXME this is all that is needed after cleanup.
 		}
 		boolean isOrdered = element.isOrdered();
 		boolean isUnique = element.isUnique();
@@ -2155,6 +2189,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			return;
 		}
 		Type thatType = thisProperty.getType();
+		if (thatType instanceof CollectionType) {
+			thatType = ((CollectionType)thatType).getElementType();
+		}
 		if ((thatType == null) || (thatType instanceof DataType)) {
 			return;
 		}

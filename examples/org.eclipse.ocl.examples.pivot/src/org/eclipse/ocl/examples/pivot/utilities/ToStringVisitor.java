@@ -29,6 +29,8 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
@@ -106,17 +108,17 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 	private static final Logger logger = Logger.getLogger(ToStringVisitor.class);
 
 	public static interface Factory {
-		ToStringVisitor createToStringVisitor();
-		EPackage getEPackage();
+		@NonNull ToStringVisitor createToStringVisitor();
+		@NonNull EPackage getEPackage();
 	}
 	
-	private static Map<EPackage, Factory> factoryMap = new HashMap<EPackage, Factory>();
+	private static @NonNull Map<EPackage, Factory> factoryMap = new HashMap<EPackage, Factory>();
 	
-	public static void addFactory(Factory factory) {
+	public static void addFactory(@NonNull Factory factory) {
 		factoryMap.put(factory.getEPackage(), factory);
 	}
 
-	public static ToStringVisitor create(EObject eObject) {
+	public static @Nullable ToStringVisitor create(@NonNull EObject eObject) {
 		EPackage ePackage = eObject.eClass().getEPackage();
 		Factory factory = factoryMap.get(ePackage);
 		if (factory != null) {
@@ -132,16 +134,18 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 			ToStringVisitor.addFactory(this);
 		}
 
-		public ToStringVisitor createToStringVisitor() {
+		public @NonNull ToStringVisitor createToStringVisitor() {
 			return new ToStringVisitor();
 		}
 
-		public EPackage getEPackage() {
-			return PivotPackage.eINSTANCE;
+		public @NonNull EPackage getEPackage() {
+			PivotPackage eInstance = PivotPackage.eINSTANCE;
+			assert eInstance != null;
+			return eInstance;
 		}
 	}
 
-	public static ToStringVisitor.Factory FACTORY = new MyFactory();
+	public static @NonNull ToStringVisitor.Factory FACTORY = new MyFactory();
 	
 	/**
 	 * Indicates where a required element in the AST was <code>null</code>, so
@@ -149,9 +153,9 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 	 * want just <code>"null"</code> because that would look like the OclVoid
 	 * literal.
 	 */
-	protected static String NULL_PLACEHOLDER = "\"<null>\""; //$NON-NLS-1$
+	protected static @NonNull String NULL_PLACEHOLDER = "\"<null>\""; //$NON-NLS-1$
 
-	protected StringBuilder result = new StringBuilder();
+	protected @NonNull StringBuilder result = new StringBuilder();
 
 	/**
 	 * Initializes me.
@@ -465,6 +469,13 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 		appendName(object);
 		appendTemplateBindings(object.getTemplateBinding());
 		appendTemplateSignature(object.getOwnedTemplateSignature());
+		BigInteger lower = object.getLower();
+		BigInteger upper = object.getUpper();
+		long lowerValue = lower != null ? lower.longValue() : 0l;
+		long upperValue = upper != null ? upper.longValue() : -1l;
+		if ((lowerValue != 0) || (upperValue != -1)) {
+			DomainUtil.formatMultiplicity(result, lowerValue, upperValue);
+		}
 		return null;
 	}
 
@@ -823,16 +834,19 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 				append(",");
 			}
 			Type type = parameter.getType();
-			boolean isMany = parameter.getUpper().intValue() != 1;
-			boolean isOrdered = parameter.isOrdered();
-			boolean isUnique = parameter.isUnique();
-			if (isMany) {
-				append(isOrdered ? isUnique ? "OrderedSet" : "Sequence" : isUnique ? "Set" : "Bag");
-				append("(");
-			}
+//			boolean isMany = parameter.getUpper().intValue() != 1;
+//			boolean isOrdered = parameter.isOrdered();
+//			boolean isUnique = parameter.isUnique();
+//			if (isMany) {
+//				append(isOrdered ? isUnique ? "OrderedSet" : "Sequence" : isUnique ? "Set" : "Bag");
+//				append("(");
+//			}
 			appendQualifiedName(type);
-			if (isMany) {
-				append(")");
+//			if (isMany) {
+//				append(")");
+//			}
+			if (!parameter.isRequired()) {
+				append("[?]");
 			}
 			isFirst = false;
 		}

@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot.manager;
 
 import java.lang.ref.WeakReference;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,7 +44,99 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
  * and additionally supports their specializations.
  */
 public class TemplateableTypeServer extends ExtensibleTypeServer
-{	
+{
+	public static class TemplateArguments extends ArrayList<Object> {
+		private static final long serialVersionUID = 1L;
+		
+		private final int parametersSize;
+		private final int hashCode;
+
+		public TemplateArguments(List<? extends ParameterableElement> parameters) {
+			parametersSize = parameters.size();
+			int hash = 0;
+			for (ParameterableElement parameter : parameters) {
+				hash = 111 * hash + parameter.hashCode();
+				add(parameter);
+			}
+			hashCode = hash;
+		}
+
+		public TemplateArguments(List<? extends ParameterableElement> parameters, BigInteger lower, BigInteger upper) {
+			parametersSize = parameters.size();
+			int hash = 0;
+			for (ParameterableElement parameter : parameters) {
+				hash = 111 * hash + parameter.hashCode();
+				add(parameter);
+			}
+			hash = 111 * hash + (lower != null ? lower.hashCode() : 0);
+			add(lower);
+			hash = 111 * hash + (upper != null ? upper.hashCode() : 0);
+			add(upper);
+			hashCode = hash;
+		}
+		
+		@Override
+		public boolean equals(Object o) {
+			if (!(o instanceof TemplateArguments)) {
+				return false;
+			}
+			TemplateArguments that = (TemplateArguments)o;
+			if (this.hashCode != that.hashCode){
+				return false;
+			}
+			int iMax = this.size();
+			if (iMax != that.size()) {
+				return false;
+			}
+			for (int i = 0; i < iMax; i++) {
+				Object thisParameter = this.get(i);
+				Object thatParameter = that.get(i);
+				if (thisParameter != null) {
+					if (thatParameter != null) {
+						if (!thisParameter.equals(thatParameter)) {
+							return false;
+						}
+					}
+					else {
+						return false;
+					}				
+				}
+				else {
+					if (thatParameter != null) {
+						return false;
+					}
+					else {
+					}				
+				}
+			}
+			return true;
+		}
+
+		@Override
+		public int hashCode() {
+			return hashCode;
+		}
+
+		public int parametersSize() {
+			return parametersSize;
+		}
+
+		@Override
+		public String toString() {
+			StringBuilder s = new StringBuilder();
+			s.append('(');
+			int iMax = this.size();
+			for (int i = 0; i < iMax; i++) {
+				if (i > 0) {
+					s.append(',');
+				}
+				s.append(String.valueOf(this.get(i)));
+			}
+			s.append(')');
+			return s.toString();
+		}		
+	}
+	
 	/**
 	 * Map from actual types to specialization.
 	 * <br>
@@ -52,13 +145,13 @@ public class TemplateableTypeServer extends ExtensibleTypeServer
 	// FIXME tests fail if keys are weak since GC is too aggressive across tests
 	// The actual types are weak keys so that parameterizations using stale types are garbage collected. 
 	//
-	private @Nullable /*WeakHash*/Map<List<? extends ParameterableElement>, WeakReference<Type>> specializations = null;
+	private @Nullable /*WeakHash*/Map<TemplateArguments, WeakReference<Type>> specializations = null;
 
 	protected TemplateableTypeServer(@NonNull PackageServer packageServer, @NonNull DomainType domainType) {
 		super(packageServer, domainType);
 	}
 	
-	protected @NonNull Type createSpecialization(@NonNull List<? extends ParameterableElement> templateArguments) {
+	protected @NonNull Type createSpecialization(@NonNull TemplateArguments templateArguments) {
 		Type unspecializedType = getPivotType();
 		String typeName = unspecializedType.getName();
 		TemplateSignature templateSignature = unspecializedType.getOwnedTemplateSignature();
@@ -72,29 +165,36 @@ public class TemplateableTypeServer extends ExtensibleTypeServer
 		Map<TemplateParameter, ParameterableElement> allBindings = new HashMap<TemplateParameter, ParameterableElement>();
 		for (int i = 0; i < templateParameters.size(); i++) {
 			TemplateParameter formalParameter = templateParameters.get(i);
-			ParameterableElement actualType = templateArguments.get(i);
-			allBindings.put(formalParameter, templateArguments.get(i));
-			TemplateParameterSubstitution templateParameterSubstitution = PivotFactory.eINSTANCE.createTemplateParameterSubstitution();
-			templateParameterSubstitution.setFormal(formalParameter);
-			if ((actualType != null) && (actualType.eResource() == null)) {
-				templateParameterSubstitution.setOwnedActual(actualType);
-			}
-			else {
-				templateParameterSubstitution.setActual(actualType);
-			}
+			Object templateArgument = templateArguments.get(i);
+			if (templateArgument instanceof ParameterableElement) {
+				ParameterableElement actualType = (ParameterableElement) templateArgument;
+				allBindings.put(formalParameter, actualType);
+				TemplateParameterSubstitution templateParameterSubstitution = PivotFactory.eINSTANCE.createTemplateParameterSubstitution();
+				templateParameterSubstitution.setFormal(formalParameter);
+				if (actualType.eResource() == null) {
+					templateParameterSubstitution.setOwnedActual(actualType);
+				}
+				else {
+					templateParameterSubstitution.setActual(actualType);
+				}
 			templateBinding.getParameterSubstitution().add(templateParameterSubstitution);
+			}
 		}
 		specializedType.getTemplateBinding().add(templateBinding);
 		resolveSuperClasses(specializedType, unspecializedType, allBindings);
 		if (specializedType instanceof CollectionType) {
-			ParameterableElement templateArgument = templateArguments.get(0);
+			Type elementType = (Type) templateArguments.get(0);
+			BigInteger lower = (BigInteger) templateArguments.get(1);
+			BigInteger upper = (BigInteger) templateArguments.get(2);
 			CollectionType specializedCollectionType = (CollectionType)specializedType;
-			specializedCollectionType.setElementType((Type) templateArgument);
+			specializedCollectionType.setElementType(elementType);
+			specializedCollectionType.setLower(lower);
+			specializedCollectionType.setUpper(upper);
 		}
 		else if (specializedType instanceof ClassifierType) {
-			ParameterableElement templateArgument = templateArguments.get(0);
+			Type instanceType = (Type) templateArguments.get(0);
 			ClassifierType specializedClassifierType = (ClassifierType)specializedType;
-			specializedClassifierType.setInstanceType((Type)templateArgument);
+			specializedClassifierType.setInstanceType(instanceType);
 		}
 		specializedType.setUnspecializedElement(unspecializedType);
 		MetaModelManager metaModelManager = packageManager.getMetaModelManager();
@@ -103,14 +203,14 @@ public class TemplateableTypeServer extends ExtensibleTypeServer
 		return specializedType;
 	}
 
-	public synchronized @Nullable Type findSpecializedType(@NonNull List<? extends ParameterableElement> templateArguments) {
+	public synchronized @Nullable Type findSpecializedType(@NonNull TemplateArguments templateArguments) {
 		TemplateSignature templateSignature = getPivotType().getOwnedTemplateSignature();
 		List<TemplateParameter> templateParameters = templateSignature.getParameter();
 		int iMax = templateParameters.size();
-		if (templateArguments.size() != iMax) {
+		if (templateArguments.parametersSize() != iMax) {
 			return null;
 		}
-		Map<List<? extends ParameterableElement>, WeakReference<Type>> specializations2 = specializations;
+		Map<TemplateArguments, WeakReference<Type>> specializations2 = specializations;
 		if (specializations2 == null) {
 			return null;
 		}
@@ -131,18 +231,30 @@ public class TemplateableTypeServer extends ExtensibleTypeServer
 	}
 
 	public synchronized @NonNull Type getSpecializedType(@NonNull List<? extends ParameterableElement> templateArguments) {
+		if (getPivotType() instanceof CollectionType) {
+			return getSpecializedType(templateArguments, null, null);			
+		}
+		return getSpecializedType(new TemplateArguments(templateArguments));
+	}
+
+	public synchronized @NonNull Type getSpecializedType(@NonNull List<? extends ParameterableElement> templateArguments, BigInteger lower, BigInteger upper) {
+		assert getPivotType() instanceof CollectionType;
+		return getSpecializedType(new TemplateArguments(templateArguments, lower, upper));
+	}
+
+	public synchronized @NonNull Type getSpecializedType(@NonNull TemplateArguments templateArguments) {
 		TemplateSignature templateSignature = getPivotType().getOwnedTemplateSignature();
 		List<TemplateParameter> templateParameters = templateSignature.getParameter();
 		int iMax = templateParameters.size();
-		if (templateArguments.size() != iMax) {
+		if (templateArguments.parametersSize() != iMax) {
 			throw new IllegalArgumentException("Incompatible template argument count");
 		}
-		Map<List<? extends ParameterableElement>, WeakReference<Type>> specializations2 = specializations;
+		Map<TemplateArguments, WeakReference<Type>> specializations2 = specializations;
 		if (specializations2 == null) {
 			synchronized(this) {
 				specializations2 = specializations;
 				if (specializations2 == null) {
-					specializations2 = specializations = new /*Weak*/HashMap<List<? extends ParameterableElement>, WeakReference<Type>>();
+					specializations2 = specializations = new /*Weak*/HashMap<TemplateArguments, WeakReference<Type>>();
 				}
 			}
 		}

@@ -442,7 +442,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 			ExpCS csName = csArgument.getName();
 			Variable iterator = PivotUtil.getPivot(Variable.class, csName);
 			if (iterator != null) {
-			context.installPivotUsage(csArgument, iterator);
+				context.installPivotUsage(csArgument, iterator);
 				iterator.setRepresentedParameter(iteration.getOwnedIterator().get(pivotIterators.size()));
 				TypedRefCS csType = csArgument.getOwnedType();
 				Type varType = csType != null ? PivotUtil.getPivot(Type.class, csType) : null;
@@ -846,7 +846,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 						}
 						boolean isOrdered = ((CollectionType)bodyType).isOrdered() && ((CollectionType)returnType).isOrdered();
 	//					boolean isUnique = /*((CollectionType)bodyType).isUnique() &&*/ ((CollectionType)returnType).isUnique();
-						returnType = metaModelManager.getCollectionType(isOrdered, false, elementType);
+						returnType = metaModelManager.getCollectionType(isOrdered, false, elementType, null, null);	// FIXME null, null
 					}
 				}
 			}

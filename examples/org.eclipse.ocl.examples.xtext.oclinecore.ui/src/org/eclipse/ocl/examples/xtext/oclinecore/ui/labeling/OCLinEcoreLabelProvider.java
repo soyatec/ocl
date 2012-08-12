@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.oclinecore.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
@@ -40,7 +41,7 @@ import com.google.inject.Inject;
 public class OCLinEcoreLabelProvider extends EssentialOCLLabelProvider {
 
 	@Inject
-	public OCLinEcoreLabelProvider(AdapterFactoryLabelProvider delegate) {
+	public OCLinEcoreLabelProvider(@NonNull AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
 

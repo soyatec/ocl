@@ -346,8 +346,8 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	public Parameter caseParameter(org.eclipse.uml2.uml.Parameter eObject) {
 		@SuppressWarnings("null") @NonNull org.eclipse.uml2.uml.Parameter eObject2 = eObject;
 		Parameter pivotElement = converter.refreshNamedElement(Parameter.class, PivotPackage.Literals.PARAMETER, eObject2);
-		copyTypedElement(pivotElement, eObject2, null);
-		converter.copyMultiplicityElement(pivotElement, eObject2);
+		copyTypedMultiplicityElement(pivotElement, eObject2, null);
+//		converter.copyMultiplicityElement(pivotElement, eObject2);
 		return pivotElement;
 	}
 
@@ -546,8 +546,8 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 				}
 			}				
 		}
-		copyTypedElement(pivotElement, umlProperty, excludedAnnotations);
-		converter.copyMultiplicityElement(pivotElement, umlProperty);
+		copyTypedMultiplicityElement(pivotElement, umlProperty, excludedAnnotations);
+//		converter.copyMultiplicityElement(pivotElement, umlProperty);
 		pivotElement.setIsReadOnly(umlProperty.isReadOnly());			
 		pivotElement.setIsDerived(umlProperty.isDerived());			
 //		pivotElement.setIsTransient(umlProperty.isTransient());			
@@ -572,8 +572,11 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		}
 	}
 
-	protected void copyTypedElement(@NonNull TypedMultiplicityElement pivotElement, @NonNull org.eclipse.uml2.uml.TypedElement umlTypedElement, List<EAnnotation> excludedAnnotations) {
+	protected void copyTypedMultiplicityElement(@NonNull TypedMultiplicityElement pivotElement, @NonNull org.eclipse.uml2.uml.TypedElement umlTypedElement, List<EAnnotation> excludedAnnotations) {
 		copyNamedElement(pivotElement, umlTypedElement);
+		int lower = ((org.eclipse.uml2.uml.MultiplicityElement)umlTypedElement).getLower();
+		int upper = ((org.eclipse.uml2.uml.MultiplicityElement)umlTypedElement).getUpper();
+		pivotElement.setIsRequired((upper == 1) && (lower == 1));
 		org.eclipse.uml2.uml.Type umlType = umlTypedElement.getType();
 		if (umlType != null) {
 			converter.queueReference(umlTypedElement);

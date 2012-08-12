@@ -457,6 +457,7 @@ public class CollectionTypeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("null")
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
@@ -551,7 +552,7 @@ public class CollectionTypeImpl
 			DomainType commonElementType = thisElementType.getCommonType(standardLibrary, thatElementType);
 			if (commonInheritance instanceof TypeServer) {
 				DomainCollectionType commonCollectionType = (DomainCollectionType)((TypeServer)commonInheritance).getPivotType();
-				return standardLibrary.getCollectionType(commonCollectionType, commonElementType);
+				return standardLibrary.getCollectionType(commonCollectionType, commonElementType, null, null);
 			}
 			else {
 				if (commonInheritance.isOrdered()) {

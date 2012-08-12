@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.oclstdlib.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.essentialocl.ui.labeling.BaseLabelProvider;
 
 import com.google.inject.Inject;
@@ -29,7 +30,7 @@ import com.google.inject.Inject;
 public class OCLstdlibLabelProvider extends BaseLabelProvider {
 
 	@Inject
-	public OCLstdlibLabelProvider(AdapterFactoryLabelProvider delegate) {
+	public OCLstdlibLabelProvider(@NonNull AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
 

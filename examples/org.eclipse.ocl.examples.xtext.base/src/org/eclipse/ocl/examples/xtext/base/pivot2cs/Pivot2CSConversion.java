@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
@@ -46,6 +47,7 @@ import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
+import org.eclipse.ocl.examples.pivot.VoidType;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.ocl.examples.pivot.utilities.AbstractConversion;
@@ -313,6 +315,13 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 	public <T extends TypedElementCS> T refreshTypedElement(@NonNull Class<T> csClass, /*@NonNull */EClass csEClass, @NonNull TypedElement object) {
 		T csElement = refreshNamedElement(csClass, csEClass, object);
 		Type type = object.getType();
+		if (type instanceof CollectionType) {
+			PivotUtil.debugWellContainedness(type);
+			type = ((CollectionType)type).getElementType();
+		}
+		else if (type instanceof VoidType) {
+			type = null;
+		}
 		if (type != null) {
 			PivotUtil.debugWellContainedness(type);
 			TypedRefCS typeRef = visitReference(TypedRefCS.class, type);
@@ -329,8 +338,21 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		T csElement = refreshTypedElement(csClass, csEClass, object);
 		TypedRefCS csTypeRef = csElement.getOwnedType();
 		if (csTypeRef != null) {
-			int lower = object.getLower().intValue();
-			int upper = object.getUpper().intValue();
+			int lower;
+			int upper;
+			Type type = object.getType();
+			if (type instanceof CollectionType) {
+				CollectionType collectionType = (CollectionType)type;
+				lower = collectionType.getLower().intValue();
+				upper = collectionType.getUpper().intValue();
+				List<String> qualifiers = csElement.getQualifier();
+				refreshQualifiers(qualifiers, "ordered", "!ordered", collectionType.isOrdered() ? Boolean.TRUE : null);
+				refreshQualifiers(qualifiers, "unique", "!unique", collectionType.isUnique() ? null : Boolean.FALSE);
+			}
+			else {
+				lower = object.isRequired() ? 1 : 0;
+				upper = 1;
+			}
 			if ((lower == 1) && (upper == 1)) {
 				csTypeRef.setMultiplicity(null);
 			}
@@ -371,8 +393,8 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		}
 		// FIXME Obsolete
 		List<String> qualifiers = csElement.getQualifier();
-		refreshQualifiers(qualifiers, "ordered", "!ordered", object.isOrdered() ? Boolean.TRUE : null);
-		refreshQualifiers(qualifiers, "unique", "!unique", object.isUnique() ? null : Boolean.FALSE);
+//		refreshQualifiers(qualifiers, "ordered", "!ordered", object.isOrdered() ? Boolean.TRUE : null);
+//		refreshQualifiers(qualifiers, "unique", "!unique", object.isUnique() ? null : Boolean.FALSE);
 		return csElement;
 	}
 

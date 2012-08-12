@@ -64,7 +64,7 @@ public class OCLstdlibContainmentVisitor extends AbstractOCLstdlibContainmentVis
 
 	@Override
 	public Continuation<?> visitLibIterationCS(@NonNull LibIterationCS csElement) {
-		Iteration pivotElement = refreshTypedMultiplicityElement(Iteration.class, PivotPackage.Literals.ITERATION, csElement);
+		Iteration pivotElement = refreshNamedElement(Iteration.class, PivotPackage.Literals.ITERATION, csElement);
 		if (pivotElement != null) {
 			context.refreshTemplateSignature(csElement, pivotElement);
 			context.refreshPivotList(Parameter.class, pivotElement.getOwnedIterator(), csElement.getOwnedIterator());

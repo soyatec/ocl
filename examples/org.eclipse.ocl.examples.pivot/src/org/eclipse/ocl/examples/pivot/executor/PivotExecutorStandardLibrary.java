@@ -119,7 +119,7 @@ public class PivotExecutorStandardLibrary extends ExecutableStandardLibrary impl
 	protected Type getType(DomainType typeType) {
 		if (typeType instanceof DomainCollectionType) {
 			DomainCollectionType domainCollectionType = (DomainCollectionType)typeType;
-			return metaModelManager.getCollectionType(domainCollectionType.getContainerType(), domainCollectionType.getElementType());
+			return metaModelManager.getCollectionType(domainCollectionType.getContainerType(), domainCollectionType.getElementType(), null, null);
 		}
 		if (typeMap == null) {
 			typeMap = new HashMap<DomainType, Type>();

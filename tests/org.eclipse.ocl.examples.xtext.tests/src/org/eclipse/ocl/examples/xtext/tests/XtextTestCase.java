@@ -44,6 +44,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -51,6 +52,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -92,6 +94,31 @@ import org.eclipse.xtext.util.EmfFormatter;
 
 public class XtextTestCase extends PivotTestCase
 {	
+	
+	public static interface Normalizer {
+		void denormalize();
+	}
+	
+	public static class ETypedElementNormalizer implements Normalizer
+	{
+		protected final @NonNull ETypedElement eTypedElement;
+		protected final boolean wasOrdered;
+		protected final boolean wasUnique;
+		
+		public ETypedElementNormalizer(ETypedElement eTypedElement) {
+			this.eTypedElement = eTypedElement;
+			this.wasOrdered = eTypedElement.isOrdered();
+			this.wasUnique = eTypedElement.isUnique();
+			eTypedElement.setOrdered(true);
+			eTypedElement.setUnique(true);
+		}
+		
+		public void denormalize() {
+			eTypedElement.setOrdered(wasOrdered);
+			eTypedElement.setUnique(wasUnique);
+		}
+	}
+
 	public static final class TestCaseAppender extends ConsoleAppender
 	{
 		private static Logger rootLogger = Logger.getRootLogger();
@@ -138,11 +165,15 @@ public class XtextTestCase extends PivotTestCase
 	}
 	
 	public static void assertSameModel(Resource expectedResource, Resource actualResource) throws IOException, InterruptedException {
+		Set<Normalizer> normalizations = normalize(expectedResource);
 		String expected = EmfFormatter.listToStr(expectedResource.getContents());
 		String actual = EmfFormatter.listToStr(actualResource.getContents());
 		assertEquals(expected, actual);
+		for (Normalizer normalizer : normalizations) {
+			normalizer.denormalize();
+		}
 	}
-	
+
 	/**
 	 * Install a platform:/resource/project... mapping for all folders in
 	 * $WORKSPACE_LOC/* if defined, or $user.dir/../* otherwise.
@@ -325,6 +356,22 @@ public class XtextTestCase extends PivotTestCase
 			return false;
 		}
 		return true;
+	}
+	
+	public static Set<Normalizer> normalize(Resource resource) {
+		Set<Normalizer> normalizers = new HashSet<Normalizer>();
+		for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
+			EObject eObject = tit.next();
+			if (eObject instanceof ETypedElement) {
+				ETypedElement eTypedElement = (ETypedElement) eObject;
+				if (eTypedElement.getUpperBound() == 1) {
+					if (!eTypedElement.isOrdered() || !eTypedElement.isUnique()) {
+						normalizers.add(new ETypedElementNormalizer(eTypedElement));
+					}
+				}
+			}
+		}
+		return normalizers;
 	}
 	
 	protected ResourceSet resourceSet;

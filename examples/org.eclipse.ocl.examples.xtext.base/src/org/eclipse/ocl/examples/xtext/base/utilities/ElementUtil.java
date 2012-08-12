@@ -308,7 +308,9 @@ public class ElementUtil
 	}
 
 	public static boolean isOrdered(@NonNull TypedElementCS csTypedElement) {
-		return csTypedElement.getQualifier().contains("ordered");
+		List<String> qualifiers = csTypedElement.getQualifier();
+		assert qualifiers != null;
+		return getQualifier(qualifiers, "ordered", "!ordered", false);
 	}
 
 	/**
@@ -331,7 +333,8 @@ public class ElementUtil
 	}
 
 	public static boolean isUnique(@NonNull TypedElementCS csTypedElement) {
-		@SuppressWarnings("null") @NonNull List<String> qualifiers = csTypedElement.getQualifier();
+		List<String> qualifiers = csTypedElement.getQualifier();
+		assert qualifiers != null;
 		return getQualifier(qualifiers, "unique", "!unique", true);
 	}
 

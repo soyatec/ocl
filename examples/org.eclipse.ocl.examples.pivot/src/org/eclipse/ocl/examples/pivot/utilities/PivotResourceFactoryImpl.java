@@ -46,6 +46,7 @@ public class PivotResourceFactoryImpl extends ResourceFactoryImpl implements Piv
 	    result.getDefaultSaveOptions().put(XMLResource.OPTION_LINE_WIDTH, 80);
 	    result.getDefaultSaveOptions().put(XMLResource.OPTION_URI_HANDLER, new URIHandlerImpl.PlatformSchemeAware());
 	    result.getDefaultSaveOptions().put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
-		return result;
+	    result.getDefaultSaveOptions().put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
+	    return result;
 	}
 }

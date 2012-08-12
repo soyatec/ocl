@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Detail;
@@ -214,6 +215,9 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 	@Override
 	public ElementCS visitProperty(@NonNull Property object) {
 		Type type = object.getType();
+		if (type instanceof CollectionType) {
+			type = ((CollectionType)type).getElementType();
+		}
 		if (type instanceof DataType) {
 			AttributeCS csElement = context.refreshStructuralFeature(AttributeCS.class, BaseCSTPackage.Literals.ATTRIBUTE_CS, object);
 			context.refreshQualifiers(csElement.getQualifier(), "id", object.isID());

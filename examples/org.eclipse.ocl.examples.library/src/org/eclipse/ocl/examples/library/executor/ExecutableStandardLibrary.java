@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.executor;
 
 import java.lang.ref.WeakReference;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -67,7 +68,7 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 	}
 
 	public @NonNull DomainCollectionType getBagType(@NonNull DomainType elementType) {
-		return getCollectionType(getBagType(), elementType);
+		return getCollectionType(getBagType(), elementType, null, null);
 	}
 
 	public @NonNull DomainType getBooleanType() {
@@ -87,7 +88,7 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 		return OCLstdlibTables.Types._Collection;
 	}
 
-	public synchronized @NonNull DomainCollectionType getCollectionType(@NonNull DomainType genericType, @NonNull DomainType elementType) {
+	public synchronized @NonNull DomainCollectionType getCollectionType(@NonNull DomainType genericType, @NonNull DomainType elementType, BigInteger lower, BigInteger upper) {  // FIXME lower, upper
 		AbstractCollectionType specializedType = null;
 		Map<DomainType, WeakReference<AbstractCollectionType>> map = specializations.get(genericType);
 		if (map == null) {
@@ -153,7 +154,7 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 	}
 
 	public @NonNull DomainCollectionType getOrderedSetType(@NonNull DomainType elementType) {
-		return getCollectionType(getOrderedSetType(), elementType);
+		return getCollectionType(getOrderedSetType(), elementType, null, null);
 	}
 
 	public @NonNull DomainType getRealType() {
@@ -165,7 +166,7 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 	}
 
 	public @NonNull DomainCollectionType getSequenceType(@NonNull DomainType elementType) {
-		return getCollectionType(getSequenceType(), elementType);
+		return getCollectionType(getSequenceType(), elementType, null, null);
 	}
 
 	public @NonNull DomainType getSetType() {
@@ -173,7 +174,7 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 	}
 
 	public @NonNull DomainCollectionType getSetType(@NonNull DomainType elementType) {
-		return getCollectionType(getSetType(), elementType);
+		return getCollectionType(getSetType(), elementType, null, null);
 	}
 
 	public @NonNull DomainType getStringType() {

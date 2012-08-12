@@ -46,7 +46,6 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CSConversion;
-import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.BodyCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage;
@@ -63,8 +62,6 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PathNameDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PostCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PreCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.CollectionTypeCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLCSTFactory;
 import org.eclipse.ocl.examples.xtext.essentialocl.pivot2cs.EssentialOCLDeclarationVisitor;
 
 public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisitor
@@ -79,15 +76,15 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 			return null;
 		}
 		TypedRefCS typeRef = context.visitReference(TypedRefCS.class, type);
-		int upper = object.getUpper().intValue();
-		if (upper == 1) {
+//		int upper = object.getUpper().intValue();
+//		if (upper == 1) {
 			return typeRef;
-		}
+//		}
 //		int lower = object.getLower().intValue();
-		CollectionTypeCS collectionTypeCS = EssentialOCLCSTFactory.eINSTANCE.createCollectionTypeCS();
-		collectionTypeCS.setOwnedType(typeRef);
-		collectionTypeCS.setName(ElementUtil.getCollectionName(object.isOrdered(), object.isUnique()));
-		return collectionTypeCS;
+//		CollectionTypeCS collectionTypeCS = EssentialOCLCSTFactory.eINSTANCE.createCollectionTypeCS();
+//		collectionTypeCS.setOwnedType(typeRef);
+//		collectionTypeCS.setName(ElementUtil.getCollectionName(object.isOrdered(), object.isUnique()));
+//		return collectionTypeCS;
 	}
 
 	protected void gatherPackages(@NonNull List<org.eclipse.ocl.examples.pivot.Package> allPackages, @NonNull List<org.eclipse.ocl.examples.pivot.Package> nestedPackages) {
