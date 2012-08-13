@@ -236,10 +236,10 @@
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_HcolpYgHEd-aGOJuUCcZBA" name="elementType">
           <type xmi:type="cmof:Class" href="Infrastructure.cmof#Core-Basic-Type"/>
         </ownedAttribute>
-        <ownedAttribute xmi:type="cmof:Property" xmi:id="_K91OkOLZEeGCOa0Md3lQkQ" name="lower" lower="0" default="1">
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_K91OkOLZEeGCOa0Md3lQkQ" name="lower" default="0">
           <type xmi:type="cmof:PrimitiveType" href="Infrastructure.cmof#Core-PrimitiveTypes-Integer"/>
         </ownedAttribute>
-        <ownedAttribute xmi:type="cmof:Property" xmi:id="_Q9AiwOLZEeGCOa0Md3lQkQ" name="upper" lower="0" default="1">
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_Q9AiwOLZEeGCOa0Md3lQkQ" name="upper" default="-1">
           <type xmi:type="cmof:PrimitiveType" href="Infrastructure.cmof#Core-PrimitiveTypes-UnlimitedNatural"/>
         </ownedAttribute>
         <superClass xmi:type="cmof:Class" href="Infrastructure.cmof#Core-Basic-DataType"/>

@@ -51,7 +51,7 @@ public interface Parameter
 	 * @see #setOperation(Operation)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getParameter_Operation()
 	 * @see org.eclipse.ocl.examples.pivot.Operation#getOwnedParameter
-	 * @model opposite="ownedParameter" transient="false" ordered="false"
+	 * @model opposite="ownedParameter" transient="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Parameter!operation'"
 	 * @generated
 	 */

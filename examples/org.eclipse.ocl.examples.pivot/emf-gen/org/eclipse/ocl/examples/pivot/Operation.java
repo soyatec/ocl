@@ -95,8 +95,7 @@ public interface Operation
 	 * @return the value of the '<em>Precedence</em>' reference.
 	 * @see #setPrecedence(Precedence)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation_Precedence()
-	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Operation!precedence'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Operation!precedence'"
 	 * @generated
 	 */
 	Precedence getPrecedence();
@@ -151,7 +150,7 @@ public interface Operation
 	 * @see #setOwningType(Type)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation_OwningType()
 	 * @see org.eclipse.ocl.examples.pivot.Type#getOwnedOperation
-	 * @model opposite="ownedOperation" transient="false" ordered="false"
+	 * @model opposite="ownedOperation" transient="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Operation!owningType'"
 	 * @generated
 	 */
@@ -176,7 +175,7 @@ public interface Operation
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Class</em>' reference.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation_Class()
-	 * @model transient="true" changeable="false" volatile="true" ordered="false"
+	 * @model transient="true" changeable="false" volatile="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Operation!class'"
 	 * @generated
 	 */

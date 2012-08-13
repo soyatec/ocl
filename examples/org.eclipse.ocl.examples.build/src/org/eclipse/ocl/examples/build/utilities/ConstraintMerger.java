@@ -82,6 +82,7 @@ public class ConstraintMerger extends AbstractProjectComponent
 //		packageDescriptor.setUseModel(true, null);				// Hide packages installed by CompleteOCLStandaloneSetup
 			
 		MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
+//		metaModelManager.setLibraryLoadInProgress(true);
 		metaModelManager.getExternalResourceSet().getResources().add(ecoreResource);		// Don't load another copy
 		metaModelManager.setDefaultStandardLibraryURI(pivotNsURI);
 		StandardLibraryContribution.REGISTRY.put(pivotNsURI, new OCLstdlib.Loader()
@@ -98,6 +99,8 @@ public class ConstraintMerger extends AbstractProjectComponent
 //		metaModelManager.getBooleanType();
 		Ecore2Pivot ecore2pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager);
 		Root pivotRoot = ecore2pivot.getPivotRoot();
+//		metaModelManager.setPivotMetaModel(pivotRoot.getNestedPackage().get(0));
+//		metaModelManager.setLibraryLoadInProgress(false);
 		Resource pivotResource = pivotRoot.eResource();
 //FIXME		diagnoseErrors(pivotResource);
 //		URI fileURI = URI.createPlatformResourceURI(uri, true);

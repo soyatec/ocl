@@ -83,7 +83,7 @@ public interface TemplateableElement
 	 * @see #setOwnedTemplateSignature(TemplateSignature)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateableElement_OwnedTemplateSignature()
 	 * @see org.eclipse.ocl.examples.pivot.TemplateSignature#getTemplate
-	 * @model opposite="template" containment="true" ordered="false"
+	 * @model opposite="template" containment="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateableElement!ownedTemplateSignature'"
 	 * @generated
 	 */
@@ -120,7 +120,7 @@ public interface TemplateableElement
 	 * @return the value of the '<em>Unspecialized Element</em>' reference.
 	 * @see #setUnspecializedElement(TemplateableElement)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateableElement_UnspecializedElement()
-	 * @model resolveProxies="false" transient="true" ordered="false"
+	 * @model resolveProxies="false" transient="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateableElement!unspecializedElement'"
 	 * @generated
 	 */
@@ -154,7 +154,7 @@ public interface TemplateableElement
 	 * <!-- begin-model-doc -->
 	 * The query isTemplate() returns whether this templateable element is actually a template.
 	 * <!-- end-model-doc -->
-	 * @model kind="operation" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true" ordered="false"
+	 * @model kind="operation" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateableElement!isTemplate()'"
 	 * @generated
 	 */

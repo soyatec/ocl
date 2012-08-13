@@ -67,6 +67,7 @@ public class ConstraintBodies
 			final @NonNull ExecutorType T_pivot__Constraint = PivotTables.Types._Constraint;
 			final @NonNull DomainCollectionType T_OrderedSet_pivot__Constraint_ = standardLibrary.getOrderedSetType(T_pivot__Constraint);
 			final @NonNull ExecutorOperation O_OrderedSet_excluding = OCLstdlibTables.Operations._OrderedSet__excluding;
+			final @NonNull DomainCollectionType T_OrderedSet_pivot__Constraint_1 = standardLibrary.getOrderedSetType(T_pivot__Constraint);
 			final @NonNull ExecutorProperty P_NamedElement_ownedRule = PivotTables.Properties._NamedElement__ownedRule;
 			final @NonNull LibraryProperty IP_NamedElement_ownedRule = P_NamedElement_ownedRule.getImplementation();
 			final @NonNull ExecutorType T_pivot__NamedElement = PivotTables.Types._NamedElement;
@@ -83,7 +84,7 @@ public class ConstraintBodies
 			
 			Value A_symbol_2 = IP_Constraint_context.evaluate(evaluator, T_pivot__NamedElement, self, P_Constraint_context);
 			
-			Value A_symbol_3 = IP_NamedElement_ownedRule.evaluate(evaluator, T_OrderedSet_pivot__Constraint_, A_symbol_2, P_NamedElement_ownedRule);
+			Value A_symbol_3 = IP_NamedElement_ownedRule.evaluate(evaluator, T_OrderedSet_pivot__Constraint_1, A_symbol_2, P_NamedElement_ownedRule);
 			
 			
 			DomainType static_A_symbol_0 = valueFactory.typeOf(A_symbol_3);

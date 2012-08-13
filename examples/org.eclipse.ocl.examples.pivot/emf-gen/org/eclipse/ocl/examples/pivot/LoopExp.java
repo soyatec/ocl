@@ -53,7 +53,7 @@ public interface LoopExp
 	 * @return the value of the '<em>Body</em>' containment reference.
 	 * @see #setBody(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getLoopExp_Body()
-	 * @model containment="true" required="true" ordered="false"
+	 * @model containment="true" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!LoopExp!body'"
 	 * @generated
 	 */
@@ -118,8 +118,7 @@ public interface LoopExp
 	 * @return the value of the '<em>Referred Iteration</em>' reference.
 	 * @see #setReferredIteration(Iteration)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getLoopExp_ReferredIteration()
-	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!LoopExp!referredIteration'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!LoopExp!referredIteration'"
 	 * @generated
 	 */
 	Iteration getReferredIteration();

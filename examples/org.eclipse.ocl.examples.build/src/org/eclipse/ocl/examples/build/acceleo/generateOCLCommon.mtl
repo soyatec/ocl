@@ -43,7 +43,7 @@ protected final @NonNull ClassifierType [type.getPrefixedSymbolName('_'+type.par
 [template public declareCollectionTypes(pkg : Package)]
 [let allTypes : OrderedSet(CollectionType) = pkg.getRootPackage().eAllContents(CollectionType)->asSet()->sortedBy(getMoniker())]
 [for (type : CollectionType | allTypes)]
-protected final @NonNull [type.eClass().name/] [type.getPrefixedSymbolName('_'+type.partialName())/] = create[type.eClass().name/]("[type.name/]");
+protected final @NonNull [type.eClass().name/] [type.getPrefixedSymbolName('_'+type.partialName())/] = create[type.eClass().name/]("[type.name/]", "[type.lower.toString()/]", "[type.upper.toString()/]");
 [/for][/let][/template]
 
 [template public declareEnumerations(pkg : Package)]

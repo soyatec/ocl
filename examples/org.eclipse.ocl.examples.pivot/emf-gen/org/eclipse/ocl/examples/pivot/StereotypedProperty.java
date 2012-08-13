@@ -45,7 +45,7 @@ public interface StereotypedProperty extends Element
 	 * @return the value of the '<em>Referred Property</em>' reference.
 	 * @see #setReferredProperty(Property)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getStereotypedProperty_ReferredProperty()
-	 * @model required="true" ordered="false"
+	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!StereotypedProperty!referredProperty'"
 	 * @generated
 	 */
@@ -72,7 +72,7 @@ public interface StereotypedProperty extends Element
 	 * @return the value of the '<em>Default</em>' attribute.
 	 * @see #setDefault(String)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getStereotypedProperty_Default()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.String" ordered="false"
+	 * @model dataType="org.eclipse.ocl.examples.pivot.String"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!StereotypedProperty!default'"
 	 * @generated
 	 */

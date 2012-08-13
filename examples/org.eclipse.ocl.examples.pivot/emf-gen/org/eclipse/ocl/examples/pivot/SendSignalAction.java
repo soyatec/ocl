@@ -46,7 +46,7 @@ public interface SendSignalAction
 	 * @return the value of the '<em>Signal</em>' reference.
 	 * @see #setSignal(Signal)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getSendSignalAction_Signal()
-	 * @model required="true" ordered="false"
+	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!SendSignalAction!signal'"
 	 * @generated
 	 */

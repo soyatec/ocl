@@ -74,7 +74,7 @@ public interface Constraint
 	 * @return the value of the '<em>Specification</em>' containment reference.
 	 * @see #setSpecification(ValueSpecification)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstraint_Specification()
-	 * @model containment="true" required="true" ordered="false"
+	 * @model containment="true" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Constraint!specification'"
 	 * @generated
 	 */
@@ -114,7 +114,7 @@ public interface Constraint
 	 * @see #setContext(NamedElement)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstraint_Context()
 	 * @see org.eclipse.ocl.examples.pivot.NamedElement#getOwnedRule
-	 * @model opposite="ownedRule" transient="false" ordered="false"
+	 * @model opposite="ownedRule" transient="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Constraint!context'"
 	 * @generated
 	 */
@@ -149,7 +149,7 @@ public interface Constraint
 	 * @return the value of the '<em>Stereotype</em>' attribute.
 	 * @see #setStereotype(String)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstraint_Stereotype()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.String" ordered="false"
+	 * @model dataType="org.eclipse.ocl.examples.pivot.String"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Constraint!stereotype'"
 	 * @generated
 	 */
@@ -177,7 +177,7 @@ public interface Constraint
 	 * @return the value of the '<em>Is Callable</em>' attribute.
 	 * @see #setIsCallable(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstraint_IsCallable()
-	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true" ordered="false"
+	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Constraint!isCallable'"
 	 * @generated
 	 */

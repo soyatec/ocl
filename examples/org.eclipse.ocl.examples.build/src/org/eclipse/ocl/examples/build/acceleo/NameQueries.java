@@ -89,6 +89,9 @@ public class NameQueries
 			symbol = count != null ? prefix + "_" + newCount.toString() : prefix;
 			definedSymbols.put(elem, symbol);
 		}
+		if ("symbol__1".equals(symbol)) {
+			return symbol;			// FIXME Debugging
+		}
 		return symbol;
 	}
 	

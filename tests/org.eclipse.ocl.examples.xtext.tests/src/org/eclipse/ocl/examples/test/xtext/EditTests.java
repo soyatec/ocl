@@ -491,7 +491,7 @@ public class EditTests extends XtextTestCase
 		//
 		Type myType = ocl.getMetaModelManager().getPrimaryType("http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib", "MyType");
 		SequenceType sequenceType = ocl.getMetaModelManager().getSequenceType();
-		TemplateableTypeServer.TemplateArguments templateArguments = new TemplateableTypeServer.TemplateArguments(Collections.singletonList(myType), null, null);
+		TemplateableTypeServer.TemplateArguments templateArguments = new TemplateableTypeServer.TemplateArguments(myType, null, null);
 		TemplateableTypeServer sequenceTypeServer = (TemplateableTypeServer) ocl.getMetaModelManager().getTypeServer(sequenceType);
 		WeakReference<Type> sequenceMyType = new WeakReference<Type>(sequenceTypeServer.findSpecializedType(templateArguments));
 		assertNull(sequenceMyType.get()); 

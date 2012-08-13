@@ -1170,11 +1170,11 @@ public class OCLstdlibTables
 		{
 		    Fragments._OrderedSet__OclAny /* 0 */,
 		    Fragments._OrderedSet__Collection /* 1 */,
+		    Fragments._OrderedSet__OrderedSet /* 1 */,
 		    Fragments._OrderedSet__Sequence /* 2 */,
-		    Fragments._OrderedSet__UniqueCollection /* 2 */,
-		    Fragments._OrderedSet__OrderedSet /* 3 */
+		    Fragments._OrderedSet__UniqueCollection /* 2 */
 		};
-		private static final @NonNull int[] __OrderedSet = { 1,1,2,1 };
+		private static final @NonNull int[] __OrderedSet = { 1,2 };
 	
 		private static final @NonNull ExecutorFragment[] _Real =
 		{
@@ -1197,11 +1197,11 @@ public class OCLstdlibTables
 		{
 		    Fragments._Set__OclAny /* 0 */,
 		    Fragments._Set__Collection /* 1 */,
+		    Fragments._Set__Set /* 1 */,
 		    Fragments._Set__Bag /* 2 */,
-		    Fragments._Set__UniqueCollection /* 2 */,
-		    Fragments._Set__Set /* 3 */
+		    Fragments._Set__UniqueCollection /* 2 */
 		};
-		private static final @NonNull int[] __Set = { 1,1,2,1 };
+		private static final @NonNull int[] __Set = { 1,2 };
 	
 		private static final @NonNull ExecutorFragment[] _String =
 		{

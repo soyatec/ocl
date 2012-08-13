@@ -73,7 +73,7 @@ public interface ConstructorExp extends OCLExpression
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(String)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstructorExp_Value()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.String" ordered="false"
+	 * @model dataType="org.eclipse.ocl.examples.pivot.String"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ConstructorExp!value'"
 	 * @generated
 	 */

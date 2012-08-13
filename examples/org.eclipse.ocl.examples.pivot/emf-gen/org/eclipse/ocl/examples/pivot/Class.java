@@ -51,7 +51,7 @@ public interface Class
 	 * @return the value of the '<em>Is Abstract</em>' attribute.
 	 * @see #setIsAbstract(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getClass_IsAbstract()
-	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true" ordered="false"
+	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Class!isAbstract'"
 	 * @generated
 	 */
@@ -79,7 +79,7 @@ public interface Class
 	 * @return the value of the '<em>Is Interface</em>' attribute.
 	 * @see #setIsInterface(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getClass_IsInterface()
-	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true" ordered="false"
+	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Class!isInterface'"
 	 * @generated
 	 */

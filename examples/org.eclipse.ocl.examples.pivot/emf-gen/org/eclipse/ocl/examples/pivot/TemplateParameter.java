@@ -57,7 +57,7 @@ public interface TemplateParameter
 	 * @see #setSignature(TemplateSignature)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateParameter_Signature()
 	 * @see org.eclipse.ocl.examples.pivot.TemplateSignature#getOwnedParameter
-	 * @model opposite="ownedParameter" required="true" transient="false" ordered="false"
+	 * @model opposite="ownedParameter" required="true" transient="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateParameter!signature'"
 	 * @generated
 	 */
@@ -91,7 +91,7 @@ public interface TemplateParameter
 	 * @see #setOwnedParameteredElement(ParameterableElement)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateParameter_OwnedParameteredElement()
 	 * @see org.eclipse.ocl.examples.pivot.ParameterableElement#getOwningTemplateParameter
-	 * @model opposite="owningTemplateParameter" containment="true" ordered="false"
+	 * @model opposite="owningTemplateParameter" containment="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateParameter!ownedParameteredElement'"
 	 * @generated
 	 */
@@ -128,8 +128,7 @@ public interface TemplateParameter
 	 * @return the value of the '<em>Default</em>' reference.
 	 * @see #setDefault(ParameterableElement)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateParameter_Default()
-	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateParameter!default'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateParameter!default'"
 	 * @generated
 	 */
 	ParameterableElement getDefault();
@@ -160,7 +159,7 @@ public interface TemplateParameter
 	 * @return the value of the '<em>Owned Default</em>' containment reference.
 	 * @see #setOwnedDefault(ParameterableElement)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateParameter_OwnedDefault()
-	 * @model containment="true" ordered="false"
+	 * @model containment="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateParameter!ownedDefault'"
 	 * @generated
 	 */
@@ -199,7 +198,7 @@ public interface TemplateParameter
 	 * @see #setParameteredElement(ParameterableElement)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateParameter_ParameteredElement()
 	 * @see org.eclipse.ocl.examples.pivot.ParameterableElement#getTemplateParameter
-	 * @model opposite="templateParameter" required="true" ordered="false"
+	 * @model opposite="templateParameter" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateParameter!parameteredElement'"
 	 * @generated
 	 */

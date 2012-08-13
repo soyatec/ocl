@@ -66,7 +66,7 @@ public interface NamedElement
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getNamedElement_Name()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.String" ordered="false"
+	 * @model dataType="org.eclipse.ocl.examples.pivot.String"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!NamedElement!name'"
 	 * @generated
 	 */
@@ -122,7 +122,7 @@ public interface NamedElement
 	 * @return the value of the '<em>Is Static</em>' attribute.
 	 * @see #setIsStatic(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getNamedElement_IsStatic()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true" ordered="false"
+	 * @model dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!NamedElement!isStatic'"
 	 * @generated
 	 */

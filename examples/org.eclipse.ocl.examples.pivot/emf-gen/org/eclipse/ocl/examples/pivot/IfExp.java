@@ -52,7 +52,7 @@ public interface IfExp
 	 * @return the value of the '<em>Condition</em>' containment reference.
 	 * @see #setCondition(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getIfExp_Condition()
-	 * @model containment="true" required="true" ordered="false"
+	 * @model containment="true" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!IfExp!condition'"
 	 * @generated
 	 */
@@ -90,7 +90,7 @@ public interface IfExp
 	 * @return the value of the '<em>Then Expression</em>' containment reference.
 	 * @see #setThenExpression(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getIfExp_ThenExpression()
-	 * @model containment="true" required="true" ordered="false"
+	 * @model containment="true" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!IfExp!thenExpression'"
 	 * @generated
 	 */
@@ -128,7 +128,7 @@ public interface IfExp
 	 * @return the value of the '<em>Else Expression</em>' containment reference.
 	 * @see #setElseExpression(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getIfExp_ElseExpression()
-	 * @model containment="true" required="true" ordered="false"
+	 * @model containment="true" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!IfExp!elseExpression'"
 	 * @generated
 	 */

@@ -352,26 +352,7 @@ public abstract class TypedMultiplicityElementImpl
 	public boolean CompatibleBody(ValueSpecification bodySpecification)
 	{
 		/*
-		let bodyType : Type = bodySpecification.type
-		in
-		  if bodyType.oclIsKindOf(CollectionType)
-		  then
-		    let
-		      bodyCollectionType : CollectionType = bodyType.oclAsType(CollectionType)
-		    in
-		      let bodyElementType : Type = bodyCollectionType.elementType
-		      in
-		        bodyElementType.conformsTo(self.type) and self.isOrdered =
-		        (
-		          bodyCollectionType.conformsTo(OrderedSet(OclAny)) or
-		          bodyCollectionType.conformsTo(Sequence(OclAny))
-		        ) and self.isUnique =
-		        (
-		          bodyCollectionType.conformsTo(OrderedSet(OclAny)) or
-		          bodyCollectionType.conformsTo(Set(OclAny))
-		        )
-		  else bodyType.conformsTo(self.type)
-		  endif
+		bodySpecification.type.conformsTo(self.type)
 		*/
 		try {
 			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);

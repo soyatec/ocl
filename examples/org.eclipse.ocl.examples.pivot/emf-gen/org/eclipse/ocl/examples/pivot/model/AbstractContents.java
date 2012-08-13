@@ -14,6 +14,7 @@
  */
 package	org.eclipse.ocl.examples.pivot.model;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -76,9 +77,16 @@ public class AbstractContents
 		return pivotType;
 	}
 
+	@Deprecated
 	protected @NonNull BagType createBagType(@NonNull String name) {
+		return createBagType(name, null, null);
+	}
+
+	protected @NonNull BagType createBagType(@NonNull String name, @Nullable String lower, @Nullable String upper) {
 		BagType pivotType = PivotFactory.eINSTANCE.createBagType();
 		pivotType.setName(name);
+		pivotType.setLower(lower != null ? new BigInteger(lower) : BigInteger.valueOf(0));
+		pivotType.setUpper(upper != null ? new BigInteger(upper) : BigInteger.valueOf(-1));
 		return pivotType;
 	}
 
@@ -94,9 +102,16 @@ public class AbstractContents
 		return pivotType;
 	}
 
+	@Deprecated
 	protected @NonNull CollectionType createCollectionType(@NonNull String name) {
+		return createCollectionType(name, null, null);
+	}
+
+	protected @NonNull CollectionType createCollectionType(@NonNull String name, @Nullable String lower, @Nullable String upper) {
 		CollectionType pivotType = PivotFactory.eINSTANCE.createCollectionType();
 		pivotType.setName(name);
+		pivotType.setLower(lower != null ? new BigInteger(lower) : BigInteger.valueOf(0));
+		pivotType.setUpper(upper != null ? new BigInteger(upper) : BigInteger.valueOf(-1));
 		return pivotType;
 	}
 
@@ -156,9 +171,16 @@ public class AbstractContents
 		return pivotOperation;
 	}
 
+	@Deprecated
 	protected @NonNull OrderedSetType createOrderedSetType(@NonNull String name) {
+		return createOrderedSetType(name, null, null);
+	}
+
+	protected @NonNull OrderedSetType createOrderedSetType(@NonNull String name, @Nullable String lower, @Nullable String upper) {
 		OrderedSetType pivotType = PivotFactory.eINSTANCE.createOrderedSetType();
 		pivotType.setName(name);
+		pivotType.setLower(lower != null ? new BigInteger(lower) : BigInteger.valueOf(0));
+		pivotType.setUpper(upper != null ? new BigInteger(upper) : BigInteger.valueOf(-1));
 		return pivotType;
 	}
 
@@ -211,15 +233,29 @@ public class AbstractContents
 		return pivotType;
 	}
 
+	@Deprecated
 	protected @NonNull SequenceType createSequenceType(@NonNull String name) {
+		return createSequenceType(name, null, null);
+	}
+
+	protected @NonNull SequenceType createSequenceType(@NonNull String name, @Nullable String lower, @Nullable String upper) {
 		SequenceType pivotType = PivotFactory.eINSTANCE.createSequenceType();
 		pivotType.setName(name);
+		pivotType.setLower(lower != null ? new BigInteger(lower) : BigInteger.valueOf(0));
+		pivotType.setUpper(upper != null ? new BigInteger(upper) : BigInteger.valueOf(-1));
 		return pivotType;
 	}
 
+	@Deprecated
 	protected @NonNull SetType createSetType(@NonNull String name) {
+		return createSetType(name, null, null);
+	}
+
+	protected @NonNull SetType createSetType(@NonNull String name, @Nullable String lower, @Nullable String upper) {
 		SetType pivotType = PivotFactory.eINSTANCE.createSetType();
 		pivotType.setName(name);
+		pivotType.setLower(lower != null ? new BigInteger(lower) : BigInteger.valueOf(0));
+		pivotType.setUpper(upper != null ? new BigInteger(upper) : BigInteger.valueOf(-1));
 		return pivotType;
 	}
 

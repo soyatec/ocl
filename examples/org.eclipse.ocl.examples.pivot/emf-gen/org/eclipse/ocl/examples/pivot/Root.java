@@ -87,7 +87,7 @@ public interface Root extends Namespace
 	 * @return the value of the '<em>External URI</em>' attribute.
 	 * @see #setExternalURI(String)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getRoot_ExternalURI()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.String" ordered="false"
+	 * @model dataType="org.eclipse.ocl.examples.pivot.String"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Root!externalURI'"
 	 * @generated
 	 */

@@ -56,7 +56,7 @@ public interface MultiplicityElement
 	 * @return the value of the '<em>Is Ordered</em>' attribute.
 	 * @see #setIsOrdered(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getMultiplicityElement_IsOrdered()
-	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true" ordered="false"
+	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MultiplicityElement!isOrdered'"
 	 * @generated
 	 */
@@ -83,7 +83,7 @@ public interface MultiplicityElement
 	 * @return the value of the '<em>Is Unique</em>' attribute.
 	 * @see #setIsUnique(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getMultiplicityElement_IsUnique()
-	 * @model default="true" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true" ordered="false"
+	 * @model default="true" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MultiplicityElement!isUnique'"
 	 * @generated
 	 */
@@ -110,7 +110,7 @@ public interface MultiplicityElement
 	 * @return the value of the '<em>Lower</em>' attribute.
 	 * @see #setLower(BigInteger)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getMultiplicityElement_Lower()
-	 * @model default="1" dataType="org.eclipse.ocl.examples.pivot.Integer" ordered="false"
+	 * @model default="1" dataType="org.eclipse.ocl.examples.pivot.Integer"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MultiplicityElement!lower'"
 	 * @generated
 	 */
@@ -137,7 +137,7 @@ public interface MultiplicityElement
 	 * @return the value of the '<em>Upper</em>' attribute.
 	 * @see #setUpper(BigInteger)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getMultiplicityElement_Upper()
-	 * @model default="1" dataType="org.eclipse.ocl.examples.pivot.UnlimitedNatural" ordered="false"
+	 * @model default="1" dataType="org.eclipse.ocl.examples.pivot.UnlimitedNatural"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MultiplicityElement!upper'"
 	 * @generated
 	 */
@@ -165,7 +165,7 @@ public interface MultiplicityElement
 	 * @return the value of the '<em>Is Required</em>' attribute.
 	 * @see #setIsRequired(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getMultiplicityElement_IsRequired()
-	 * @model default="true" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true" ordered="false"
+	 * @model default="true" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MultiplicityElement!isRequired'"
 	 * @generated
 	 */
@@ -187,7 +187,7 @@ public interface MultiplicityElement
 	 * <!-- begin-model-doc -->
 	 * The query lowerBound() returns the lower bound of the multiplicity as an integer.
 	 * <!-- end-model-doc -->
-	 * @model dataType="org.eclipse.ocl.examples.pivot.Integer" required="true" ordered="false"
+	 * @model dataType="org.eclipse.ocl.examples.pivot.Integer" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MultiplicityElement!lowerBound()'"
 	 * @generated
 	 */
@@ -199,7 +199,7 @@ public interface MultiplicityElement
 	 * <!-- begin-model-doc -->
 	 * The query upperBound() returns the upper bound of the multiplicity for a bounded multiplicity as an unlimited natural.
 	 * <!-- end-model-doc -->
-	 * @model dataType="org.eclipse.ocl.examples.pivot.UnlimitedNatural" required="true" ordered="false"
+	 * @model dataType="org.eclipse.ocl.examples.pivot.UnlimitedNatural" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MultiplicityElement!upperBound()'"
 	 * @generated
 	 */
@@ -211,7 +211,7 @@ public interface MultiplicityElement
 	 * <!-- begin-model-doc -->
 	 * The query isMultivalued() checks whether this multiplicity has an upper bound greater than one.
 	 * <!-- end-model-doc -->
-	 * @model kind="operation" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true" ordered="false"
+	 * @model kind="operation" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MultiplicityElement!isMultivalued()'"
 	 * @generated
 	 */
@@ -223,7 +223,7 @@ public interface MultiplicityElement
 	 * <!-- begin-model-doc -->
 	 * The query includesCardinality() checks whether the specified cardinality is valid for this multiplicity.
 	 * <!-- end-model-doc -->
-	 * @model dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true" ordered="false" CDataType="org.eclipse.ocl.examples.pivot.Integer" CRequired="true" COrdered="false"
+	 * @model dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true" CDataType="org.eclipse.ocl.examples.pivot.Integer" CRequired="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MultiplicityElement!includesCardinality(http://www.eclipse.org/ocl/3.1.0/Pivot!Integer)'"
 	 * @generated
 	 */
@@ -235,7 +235,7 @@ public interface MultiplicityElement
 	 * <!-- begin-model-doc -->
 	 * The query includesMultiplicity() checks whether this multiplicity includes all the cardinalities allowed by the specified multiplicity.
 	 * <!-- end-model-doc -->
-	 * @model dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true" ordered="false" MRequired="true" MOrdered="false"
+	 * @model dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true" MRequired="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MultiplicityElement!includesMultiplicity(http://www.eclipse.org/ocl/3.1.0/Pivot!MultiplicityElement)'"
 	 * @generated
 	 */

@@ -46,7 +46,7 @@ public interface AppliedStereotype extends Element
 	 * @return the value of the '<em>Referred Type</em>' reference.
 	 * @see #setReferredType(Type)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getAppliedStereotype_ReferredType()
-	 * @model required="true" ordered="false"
+	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!AppliedStereotype!referredType'"
 	 * @generated
 	 */

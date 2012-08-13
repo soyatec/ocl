@@ -85,12 +85,17 @@ public class [javaClass/] extends XMIResourceImpl
 	{
 		protected final @NonNull Root [root.getPrefixedSymbolName('root')/];
 		protected final @NonNull Package [pkg.getPrefixedSymbolName('metamodel')/];
-		protected final @NonNull PrimitiveType [allTypes->select(name='Boolean')->any(true).getPrefixedSymbolName('_Boolean')/] = standardLibrary.getBooleanType();
-		protected final @NonNull PrimitiveType [allTypes->select(name='Integer')->any(true).getPrefixedSymbolName('_Integer')/] = standardLibrary.getIntegerType();
+		[allTypes->defineCollectionTypeName('Bag')/]
+		[allTypes->definePrimitiveTypeName('Boolean')/]
+		[allTypes->defineCollectionTypeName('Collection')/]
+		[allTypes->definePrimitiveTypeName('Integer')/]
 		protected final @NonNull Class _OclElement = standardLibrary.getOclElementType();
-		protected final @NonNull PrimitiveType [allTypes->select(name='Real')->any(true).getPrefixedSymbolName('_Real')/] = standardLibrary.getRealType();
-		protected final @NonNull PrimitiveType [allTypes->select(name='String')->any(true).getPrefixedSymbolName('_String')/] = standardLibrary.getStringType();
-		protected final @NonNull PrimitiveType [allTypes->select(name='UnlimitedNatural')->any(true).getPrefixedSymbolName('_UnlimitedNatural')/] = standardLibrary.getUnlimitedNaturalType();
+		[allTypes->defineCollectionTypeName('OrderedSet')/]
+		[allTypes->definePrimitiveTypeName('Real')/]
+		[allTypes->defineCollectionTypeName('Sequence')/]
+		[allTypes->defineCollectionTypeName('Set')/]
+		[allTypes->definePrimitiveTypeName('String')/]
+		[allTypes->definePrimitiveTypeName('UnlimitedNatural')/]
 
 		protected Contents(@NonNull PivotStandardLibrary standardLibrary, @NonNull String name, @Nullable String nsPrefix, @NonNull String nsURI) {
 			super(standardLibrary);
@@ -190,4 +195,15 @@ public class [javaClass/] extends XMIResourceImpl
 [/let]
 [/let]
 [/let]
+[/template]
+
+[template public defineCollectionTypeName(allTypes : Sequence(Type), typeName : String)]
+[let collectionType : CollectionType = allTypes->select(name=typeName)->filter(CollectionType)->any(true)]
+protected final @NonNull CollectionType [collectionType.getPrefixedSymbolName('_'+typeName)/] = standardLibrary.get[typeName/]Type();
+protected final @NonNull TemplateParameter [collectionType.ownedTemplateSignature.getPrefixedSymbolName('_'+typeName+'_T')/] = standardLibrary.get[typeName/]Type().getOwnedTemplateSignature().getParameter().get(0);
+[/let]
+[/template]
+
+[template public definePrimitiveTypeName(allTypes : Sequence(Type), typeName : String)]
+protected final @NonNull PrimitiveType [allTypes->select(name=typeName)->any(true).getPrefixedSymbolName('_'+typeName)/] = standardLibrary.get[typeName/]Type();
 [/template]

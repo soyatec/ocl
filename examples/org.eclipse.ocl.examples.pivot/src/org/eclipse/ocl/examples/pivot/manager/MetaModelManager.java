@@ -542,6 +542,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	 * MetaModelManagerListener instances to be notified of significant state changes; most notably disposal.
 	 */
 	private List<MetaModelManagerListener> listeners = null;
+
+	private boolean autoLoadPivotMetaModel = true;
 	
 	public MetaModelManager() {
 		this(new ResourceSetImpl());
@@ -1518,7 +1520,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		}
 		TemplateableTypeServer typeServer = (TemplateableTypeServer) getTypeServer(libraryType);
 		@SuppressWarnings("unchecked")
-		T specializedType = (T) typeServer.getSpecializedType(templateArguments, lower, upper);
+		T specializedType = (T) typeServer.getSpecializedType(templateArguments.get(0), lower, upper);
 		return specializedType;
 	}
 
@@ -1678,7 +1680,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 	
 	public @Nullable DomainPackage getPivotMetaModel() {
-		if (pivotMetaModel == null) {
+		if ((pivotMetaModel == null) && autoLoadPivotMetaModel) {
 			org.eclipse.ocl.examples.pivot.Package stdlibPackage = null;
 			getOclAnyType();				// Load a default library if necessary.
 			if (!pivotLibraries.isEmpty()) {
@@ -2128,7 +2130,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 	
 	public @NonNull TypeServer getTypeServer(@NonNull DomainType pivotType) {
-		if (!libraryLoadInProgress && pivotMetaModel == null) {
+		if (!libraryLoadInProgress && (pivotMetaModel == null) && !(pivotType instanceof CollectionType)) {
 			getPivotMetaModel();
 		}
 		return packageManager.getTypeServer(pivotType);
@@ -2430,14 +2432,14 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	protected void loadPivotMetaModel(@NonNull org.eclipse.ocl.examples.pivot.Package pivotLibrary) {
 		for (DomainPackage libPackage : getPartialPackages(pivotLibrary, false)) {
 			if (PivotUtil.getNamedElement(libPackage.getOwnedType(), PivotPackage.Literals.ELEMENT.getName()) != null) {
-				pivotMetaModel = libPackage;	// Custom meta-model
+				setPivotMetaModel(libPackage);	// Custom meta-model
 				return;
 			}
 		}
 		String name = DomainUtil.nonNullState(pivotLibrary.getName());
 		String nsURI = DomainUtil.nonNullState(pivotLibrary.getNsURI());
 		org.eclipse.ocl.examples.pivot.Package oclMetaModel = OCLMetaModel.create(this, name, pivotLibrary.getNsPrefix(), nsURI);
-		pivotMetaModel = oclMetaModel;		// Standard meta-model
+		setPivotMetaModel(oclMetaModel);		// Standard meta-model
 		@SuppressWarnings("null")
 		@NonNull Resource pivotResource = oclMetaModel.eResource();
 //		pivotResourceSet.getResources().add(pivotResource);
@@ -2694,12 +2696,20 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return pivotOperations;
 	}
 
+	public void setAutoLoadPivotMetaModel(boolean autoLoadPivotMetaModel) {
+		this.autoLoadPivotMetaModel  = autoLoadPivotMetaModel;
+	}
+
 	public void setDefaultStandardLibraryURI(String defaultStandardLibraryURI) {
 		this.defaultStandardLibraryURI = defaultStandardLibraryURI;
 	}
 
 	public void setLibraryLoadInProgress(boolean libraryLoadInProgress) {
-		this.libraryLoadInProgress  = libraryLoadInProgress;	
+		this.libraryLoadInProgress = libraryLoadInProgress;	
+	}
+
+	public void setPivotMetaModel(DomainPackage pivotPackage) {
+		pivotMetaModel = pivotPackage;
 	}
 
 	public void setTarget(Notifier newTarget) {

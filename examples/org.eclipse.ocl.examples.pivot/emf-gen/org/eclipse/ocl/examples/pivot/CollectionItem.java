@@ -50,7 +50,7 @@ public interface CollectionItem
 	 * @return the value of the '<em>Item</em>' containment reference.
 	 * @see #setItem(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionItem_Item()
-	 * @model containment="true" required="true" ordered="false"
+	 * @model containment="true" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!CollectionItem!item'"
 	 * @generated
 	 */

@@ -1930,11 +1930,12 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _TemplateBinding__signature = new ExecutorProperty("signature", Types._TemplateBinding, 2, new EcoreLibraryProperty(PivotPackage.Literals.TEMPLATE_BINDING__SIGNATURE));
 	
 		public static final @NonNull ExecutorProperty _TemplateParameter__TemplateParameterSubstitution = new ExecutorProperty("TemplateParameterSubstitution", Types._TemplateParameter, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION__FORMAL));
-		public static final @NonNull ExecutorProperty _TemplateParameter__default = new ExecutorProperty("default", Types._TemplateParameter, 1, new EcoreLibraryProperty(PivotPackage.Literals.TEMPLATE_PARAMETER__DEFAULT));
-		public static final @NonNull ExecutorProperty _TemplateParameter__ownedDefault = new ExecutorProperty("ownedDefault", Types._TemplateParameter, 2, new EcoreLibraryProperty(PivotPackage.Literals.TEMPLATE_PARAMETER__OWNED_DEFAULT));
-		public static final @NonNull ExecutorProperty _TemplateParameter__ownedParameteredElement = new ExecutorProperty("ownedParameteredElement", Types._TemplateParameter, 3, new EcoreLibraryProperty(PivotPackage.Literals.TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT));
-		public static final @NonNull ExecutorProperty _TemplateParameter__parameteredElement = new ExecutorProperty("parameteredElement", Types._TemplateParameter, 4, new EcoreLibraryProperty(PivotPackage.Literals.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT));
-		public static final @NonNull ExecutorProperty _TemplateParameter__signature = new ExecutorProperty("signature", Types._TemplateParameter, 5, new EcoreLibraryProperty(PivotPackage.Literals.TEMPLATE_PARAMETER__SIGNATURE));
+		public static final @NonNull ExecutorProperty _TemplateParameter__TemplateSignature = new ExecutorProperty("TemplateSignature", Types._TemplateParameter, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TEMPLATE_SIGNATURE__PARAMETER));
+		public static final @NonNull ExecutorProperty _TemplateParameter__default = new ExecutorProperty("default", Types._TemplateParameter, 2, new EcoreLibraryProperty(PivotPackage.Literals.TEMPLATE_PARAMETER__DEFAULT));
+		public static final @NonNull ExecutorProperty _TemplateParameter__ownedDefault = new ExecutorProperty("ownedDefault", Types._TemplateParameter, 3, new EcoreLibraryProperty(PivotPackage.Literals.TEMPLATE_PARAMETER__OWNED_DEFAULT));
+		public static final @NonNull ExecutorProperty _TemplateParameter__ownedParameteredElement = new ExecutorProperty("ownedParameteredElement", Types._TemplateParameter, 4, new EcoreLibraryProperty(PivotPackage.Literals.TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT));
+		public static final @NonNull ExecutorProperty _TemplateParameter__parameteredElement = new ExecutorProperty("parameteredElement", Types._TemplateParameter, 5, new EcoreLibraryProperty(PivotPackage.Literals.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT));
+		public static final @NonNull ExecutorProperty _TemplateParameter__signature = new ExecutorProperty("signature", Types._TemplateParameter, 6, new EcoreLibraryProperty(PivotPackage.Literals.TEMPLATE_PARAMETER__SIGNATURE));
 	
 		public static final @NonNull ExecutorProperty _TemplateParameterSubstitution__actual = new ExecutorProperty("actual", Types._TemplateParameterSubstitution, 0, new EcoreLibraryProperty(PivotPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION__ACTUAL));
 		public static final @NonNull ExecutorProperty _TemplateParameterSubstitution__formal = new ExecutorProperty("formal", Types._TemplateParameterSubstitution, 1, new EcoreLibraryProperty(PivotPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION__FORMAL));
@@ -9459,6 +9460,7 @@ public class PivotTables
 		private static final @NonNull ExecutorProperty[] _OperationTemplateParameter = {
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._TemplateParameter__TemplateParameterSubstitution,
+		    PivotTables.Properties._TemplateParameter__TemplateSignature,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._TemplateParameter__default,
 		    PivotTables.Properties._Element__ownedComment,
@@ -9934,6 +9936,7 @@ public class PivotTables
 		private static final @NonNull ExecutorProperty[] _TemplateParameter = {
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._TemplateParameter__TemplateParameterSubstitution,
+		    PivotTables.Properties._TemplateParameter__TemplateSignature,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._TemplateParameter__default,
 		    PivotTables.Properties._Element__ownedComment,
@@ -10125,6 +10128,7 @@ public class PivotTables
 		private static final @NonNull ExecutorProperty[] _TypeTemplateParameter = {
 		    PivotTables.Properties._Element__Constraint,
 		    PivotTables.Properties._TemplateParameter__TemplateParameterSubstitution,
+		    PivotTables.Properties._TemplateParameter__TemplateSignature,
 		    PivotTables.Properties._TypeTemplateParameter__allowSubstitutable,
 		    PivotTables.Properties._Element__appliedStereotype,
 		    PivotTables.Properties._TypeTemplateParameter__constrainingType,

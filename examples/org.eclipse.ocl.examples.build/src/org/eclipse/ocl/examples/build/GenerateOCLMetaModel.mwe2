@@ -38,7 +38,7 @@ Workflow {
     component = OCLMetaModelCodeGenerator { resourceSet = resourceSet
     	projectName = "${projectName}"
     	libraryFile = "model/Pivot.ecore"
-    	javaFolder = "emf-gen"
+    	javaFolder = "emf-gen/temp"
     	javaPackageName = "${projectName}.model"
     	javaClassName = "OCLMetaModel"
     }

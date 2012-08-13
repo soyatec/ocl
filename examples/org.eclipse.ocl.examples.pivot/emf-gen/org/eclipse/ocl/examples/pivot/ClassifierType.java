@@ -49,7 +49,7 @@ public interface ClassifierType extends org.eclipse.ocl.examples.pivot.Class, or
 	 * @return the value of the '<em>Instance Type</em>' reference.
 	 * @see #setInstanceType(Type)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getClassifierType_InstanceType()
-	 * @model required="true" ordered="false"
+	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ClassifierType!instanceType'"
 	 * @generated
 	 */

@@ -48,7 +48,7 @@ public interface TupleLiteralPart
 	 * @return the value of the '<em>Init Expression</em>' containment reference.
 	 * @see #setInitExpression(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTupleLiteralPart_InitExpression()
-	 * @model containment="true" ordered="false"
+	 * @model containment="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TupleLiteralPart!initExpression'"
 	 * @generated
 	 */

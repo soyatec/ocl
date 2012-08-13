@@ -96,7 +96,7 @@ public interface TemplateSignature
 	 * @see #setTemplate(TemplateableElement)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateSignature_Template()
 	 * @see org.eclipse.ocl.examples.pivot.TemplateableElement#getOwnedTemplateSignature
-	 * @model opposite="ownedTemplateSignature" required="true" transient="false" ordered="false"
+	 * @model opposite="ownedTemplateSignature" required="true" transient="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateSignature!template'"
 	 * @generated
 	 */

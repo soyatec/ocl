@@ -50,7 +50,7 @@ public interface IntegerLiteralExp
 	 * @return the value of the '<em>Integer Symbol</em>' attribute.
 	 * @see #setIntegerSymbol(BigInteger)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getIntegerLiteralExp_IntegerSymbol()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.Integer" required="true" ordered="false"
+	 * @model dataType="org.eclipse.ocl.examples.pivot.Integer" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!IntegerLiteralExp!integerSymbol'"
 	 * @generated
 	 */

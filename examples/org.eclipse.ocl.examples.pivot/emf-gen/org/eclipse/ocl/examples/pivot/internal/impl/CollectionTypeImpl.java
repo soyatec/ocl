@@ -83,7 +83,7 @@ public class CollectionTypeImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BigInteger LOWER_EDEFAULT = new BigInteger("1"); //$NON-NLS-1$
+	protected static final BigInteger LOWER_EDEFAULT = new BigInteger("0"); //$NON-NLS-1$
 	/**
 	 * The cached value of the '{@link #getLower() <em>Lower</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -101,7 +101,7 @@ public class CollectionTypeImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BigInteger UPPER_EDEFAULT = new BigInteger("1"); //$NON-NLS-1$
+	protected static final BigInteger UPPER_EDEFAULT = new BigInteger("-1"); //$NON-NLS-1$
 	/**
 	 * The cached value of the '{@link #getUpper() <em>Upper</em>}' attribute.
 	 * <!-- begin-user-doc -->

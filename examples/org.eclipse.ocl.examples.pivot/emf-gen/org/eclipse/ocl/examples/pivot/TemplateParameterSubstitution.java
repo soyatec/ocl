@@ -54,7 +54,7 @@ public interface TemplateParameterSubstitution
 	 * @return the value of the '<em>Formal</em>' reference.
 	 * @see #setFormal(TemplateParameter)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateParameterSubstitution_Formal()
-	 * @model required="true" ordered="false"
+	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateParameterSubstitution!formal'"
 	 * @generated
 	 */
@@ -80,7 +80,7 @@ public interface TemplateParameterSubstitution
 	 * @return the value of the '<em>Actual</em>' reference.
 	 * @see #setActual(ParameterableElement)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateParameterSubstitution_Actual()
-	 * @model required="true" ordered="false"
+	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateParameterSubstitution!actual'"
 	 * @generated
 	 */
@@ -112,7 +112,7 @@ public interface TemplateParameterSubstitution
 	 * @return the value of the '<em>Owned Actual</em>' containment reference.
 	 * @see #setOwnedActual(ParameterableElement)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateParameterSubstitution_OwnedActual()
-	 * @model containment="true" ordered="false"
+	 * @model containment="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateParameterSubstitution!ownedActual'"
 	 * @generated
 	 */
@@ -151,7 +151,7 @@ public interface TemplateParameterSubstitution
 	 * @see #setTemplateBinding(TemplateBinding)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateParameterSubstitution_TemplateBinding()
 	 * @see org.eclipse.ocl.examples.pivot.TemplateBinding#getParameterSubstitution
-	 * @model opposite="parameterSubstitution" required="true" transient="false" ordered="false"
+	 * @model opposite="parameterSubstitution" required="true" transient="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateParameterSubstitution!templateBinding'"
 	 * @generated
 	 */

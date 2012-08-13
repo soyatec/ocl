@@ -47,8 +47,7 @@ public interface VariableExp
 	 * @return the value of the '<em>Referred Variable</em>' reference.
 	 * @see #setReferredVariable(VariableDeclaration)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getVariableExp_ReferredVariable()
-	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!VariableExp!referredVariable'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!VariableExp!referredVariable'"
 	 * @generated
 	 */
 	VariableDeclaration getReferredVariable();
@@ -75,7 +74,7 @@ public interface VariableExp
 	 * @return the value of the '<em>Implicit</em>' attribute.
 	 * @see #setImplicit(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getVariableExp_Implicit()
-	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean" ordered="false"
+	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!VariableExp!implicit'"
 	 * @generated
 	 */

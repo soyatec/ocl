@@ -46,7 +46,7 @@ public interface TemplateParameterType
 	 * @return the value of the '<em>Specification</em>' attribute.
 	 * @see #setSpecification(String)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateParameterType_Specification()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.String" ordered="false"
+	 * @model dataType="org.eclipse.ocl.examples.pivot.String"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateParameterType!specification'"
 	 * @generated
 	 */

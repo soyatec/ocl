@@ -50,7 +50,7 @@ public interface CallExp
 	 * @return the value of the '<em>Source</em>' containment reference.
 	 * @see #setSource(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCallExp_Source()
-	 * @model containment="true" ordered="false"
+	 * @model containment="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!CallExp!source'"
 	 * @generated
 	 */
@@ -89,7 +89,7 @@ public interface CallExp
 	 * @return the value of the '<em>Implicit</em>' attribute.
 	 * @see #setImplicit(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCallExp_Implicit()
-	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean" ordered="false"
+	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!CallExp!implicit'"
 	 * @generated
 	 */

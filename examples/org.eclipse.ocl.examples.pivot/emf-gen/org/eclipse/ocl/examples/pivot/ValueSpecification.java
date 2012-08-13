@@ -42,7 +42,7 @@ public interface ValueSpecification
 	 * <!-- begin-model-doc -->
 	 * The query isComputable() determines whether a value specification can be computed in a model. This operation cannot be fully defined in OCL. A conforming implementation is expected to deliver true for this operation for all value specifications that it can compute, and to compute all of those for which the operation is true. A conforming implementation is expected to be able to compute the value of all literals.
 	 * <!-- end-model-doc -->
-	 * @model kind="operation" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true" ordered="false"
+	 * @model kind="operation" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ValueSpecification!isComputable()'"
 	 * @generated
 	 */
@@ -54,7 +54,7 @@ public interface ValueSpecification
 	 * <!-- begin-model-doc -->
 	 * The query integerValue() gives a single Integer value when one can be computed.
 	 * <!-- end-model-doc -->
-	 * @model dataType="org.eclipse.ocl.examples.pivot.Integer" required="true" ordered="false"
+	 * @model dataType="org.eclipse.ocl.examples.pivot.Integer" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ValueSpecification!integerValue()'"
 	 * @generated
 	 */
@@ -66,7 +66,7 @@ public interface ValueSpecification
 	 * <!-- begin-model-doc -->
 	 * The query booleanValue() gives a single Boolean value when one can be computed.
 	 * <!-- end-model-doc -->
-	 * @model dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true" ordered="false"
+	 * @model dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ValueSpecification!booleanValue()'"
 	 * @generated
 	 */
@@ -78,7 +78,7 @@ public interface ValueSpecification
 	 * <!-- begin-model-doc -->
 	 * The query stringValue() gives a single String value when one can be computed.
 	 * <!-- end-model-doc -->
-	 * @model dataType="org.eclipse.ocl.examples.pivot.String" required="true" ordered="false"
+	 * @model dataType="org.eclipse.ocl.examples.pivot.String" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ValueSpecification!stringValue()'"
 	 * @generated
 	 */
@@ -90,7 +90,7 @@ public interface ValueSpecification
 	 * <!-- begin-model-doc -->
 	 * The query unlimitedValue() gives a single UnlimitedNatural value when one can be computed.
 	 * <!-- end-model-doc -->
-	 * @model dataType="org.eclipse.ocl.examples.pivot.UnlimitedNatural" required="true" ordered="false"
+	 * @model dataType="org.eclipse.ocl.examples.pivot.UnlimitedNatural" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ValueSpecification!unlimitedValue()'"
 	 * @generated
 	 */
@@ -102,7 +102,7 @@ public interface ValueSpecification
 	 * <!-- begin-model-doc -->
 	 * The query isNull() returns true when it can be computed that the value is null.
 	 * <!-- end-model-doc -->
-	 * @model kind="operation" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true" ordered="false"
+	 * @model kind="operation" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ValueSpecification!isNull()'"
 	 * @generated
 	 */

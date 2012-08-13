@@ -61,16 +61,19 @@ public class TemplateableTypeServer extends ExtensibleTypeServer
 			hashCode = hash;
 		}
 
-		public TemplateArguments(List<? extends ParameterableElement> parameters, BigInteger lower, BigInteger upper) {
-			parametersSize = parameters.size();
-			int hash = 0;
-			for (ParameterableElement parameter : parameters) {
-				hash = 111 * hash + parameter.hashCode();
-				add(parameter);
+		public TemplateArguments(ParameterableElement parameter, BigInteger lower, BigInteger upper) {
+			parametersSize = 1;
+			int hash = parameter.hashCode();
+			add(parameter);
+			if (lower == null) {
+				lower = BigInteger.valueOf(0);
 			}
-			hash = 111 * hash + (lower != null ? lower.hashCode() : 0);
+			hash = 111 * hash + lower.hashCode();
 			add(lower);
-			hash = 111 * hash + (upper != null ? upper.hashCode() : 0);
+			if (upper == null) {
+				upper = BigInteger.valueOf(-1);
+			}
+			hash = 111 * hash + upper.hashCode();
 			add(upper);
 			hashCode = hash;
 		}
@@ -232,14 +235,14 @@ public class TemplateableTypeServer extends ExtensibleTypeServer
 
 	public synchronized @NonNull Type getSpecializedType(@NonNull List<? extends ParameterableElement> templateArguments) {
 		if (getPivotType() instanceof CollectionType) {
-			return getSpecializedType(templateArguments, null, null);			
+			return getSpecializedType(templateArguments.get(0), null, null);			
 		}
 		return getSpecializedType(new TemplateArguments(templateArguments));
 	}
 
-	public synchronized @NonNull Type getSpecializedType(@NonNull List<? extends ParameterableElement> templateArguments, BigInteger lower, BigInteger upper) {
+	public synchronized @NonNull Type getSpecializedType(@NonNull ParameterableElement templateArgument, BigInteger lower, BigInteger upper) {
 		assert getPivotType() instanceof CollectionType;
-		return getSpecializedType(new TemplateArguments(templateArguments, lower, upper));
+		return getSpecializedType(new TemplateArguments(templateArgument, lower, upper));
 	}
 
 	public synchronized @NonNull Type getSpecializedType(@NonNull TemplateArguments templateArguments) {

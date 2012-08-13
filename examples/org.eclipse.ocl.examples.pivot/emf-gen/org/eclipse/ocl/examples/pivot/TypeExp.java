@@ -46,8 +46,7 @@ public interface TypeExp
 	 * @return the value of the '<em>Referred Type</em>' reference.
 	 * @see #setReferredType(Type)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTypeExp_ReferredType()
-	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TypeExp!referredType'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TypeExp!referredType'"
 	 * @generated
 	 */
 	Type getReferredType();

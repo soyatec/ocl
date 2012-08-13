@@ -51,7 +51,7 @@ public interface BooleanLiteralExp
 	 * @see #unsetBooleanSymbol()
 	 * @see #setBooleanSymbol(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getBooleanLiteralExp_BooleanSymbol()
-	 * @model unsettable="true" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true" ordered="false"
+	 * @model unsettable="true" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!BooleanLiteralExp!booleanSymbol'"
 	 * @generated
 	 */

@@ -50,7 +50,7 @@ public interface LambdaType extends DataType, org.eclipse.ocl.examples.domain.el
 	 * @return the value of the '<em>Context Type</em>' reference.
 	 * @see #setContextType(Type)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getLambdaType_ContextType()
-	 * @model required="true" ordered="false"
+	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!LambdaType!contextType'"
 	 * @generated
 	 */
@@ -94,7 +94,7 @@ public interface LambdaType extends DataType, org.eclipse.ocl.examples.domain.el
 	 * @return the value of the '<em>Result Type</em>' reference.
 	 * @see #setResultType(Type)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getLambdaType_ResultType()
-	 * @model required="true" ordered="false"
+	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!LambdaType!resultType'"
 	 * @generated
 	 */

@@ -60,7 +60,7 @@ public interface Type
 	 * @see #setPackage(org.eclipse.ocl.examples.pivot.Package)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getType_Package()
 	 * @see org.eclipse.ocl.examples.pivot.Package#getOwnedType
-	 * @model opposite="ownedType" transient="false" ordered="false"
+	 * @model opposite="ownedType" transient="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Type!package'"
 	 * @generated
 	 */
@@ -172,7 +172,7 @@ public interface Type
 	 * @return the value of the '<em>Instance Class Name</em>' attribute.
 	 * @see #setInstanceClassName(String)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getType_InstanceClassName()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.String" ordered="false"
+	 * @model dataType="org.eclipse.ocl.examples.pivot.String"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Type!instanceClassName'"
 	 * @generated
 	 */
@@ -191,7 +191,7 @@ public interface Type
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model required="true" ordered="false" selfTypeRequired="true" selfTypeOrdered="false"
+	 * @model required="true" selfTypeRequired="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='/*\nself\n\052/\ntry {\n\tfinal @NonNull <%org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator%> evaluator = new <%org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager%>(this, null, <%org.eclipse.ocl.examples.pivot.PivotTables%>.LIBRARY);\n\tfinal @NonNull <%org.eclipse.ocl.examples.domain.values.ValueFactory%> valueFactory = evaluator.getValueFactory();\n\tfinal @NonNull <%org.eclipse.ocl.examples.domain.values.Value%> self = valueFactory.valueOf(this);\n\tfinal @NonNull <%org.eclipse.ocl.examples.library.executor.ExecutorType%> T_Type = <%org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables%>.Types._Type;\n\t\n\tfinal @NonNull <%org.eclipse.ocl.examples.domain.elements.DomainType%> returnType = T_Type;\n\tfinal @NonNull <%org.eclipse.ocl.examples.domain.values.Value%> result = <%org.eclipse.ocl.examples.pivot.bodies.TypeBodies%>._resolveSelfType_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(selfType));\n\treturn (Type) result.asEcoreObject();\n} catch (<%org.eclipse.ocl.examples.domain.evaluation.InvalidValueException%> e) {\n\tthrow new <%org.eclipse.emf.common.util.WrappedException%>(\"Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.TypeBodies\", e);\n}\n'"
 	 * @generated
 	 */

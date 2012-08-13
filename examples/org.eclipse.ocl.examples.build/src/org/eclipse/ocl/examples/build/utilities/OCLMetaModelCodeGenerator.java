@@ -38,6 +38,7 @@ import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
+import org.eclipse.ocl.examples.pivot.utilities.PivotSaver;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
@@ -91,8 +92,10 @@ public class OCLMetaModelCodeGenerator extends AbstractWorkflowComponent
 		OCLstdlib.install();
 		log.info("Loading Pivot Model '" + inputURI);
 		try {
-			MetaModelManager metaModelManager = ElementUtil.findMetaModelManager(resourceSet);
+			MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
+//			MetaModelManager metaModelManager = ElementUtil.findMetaModelManager(resourceSet);
 			NameQueries.metaModelManager = metaModelManager;
+//			metaModelManager.getPivotMetaModel();
 			Resource ecoreResource = resourceSet.getResource(inputURI, true);
 			MetaModelManagerResourceAdapter.getAdapter(ecoreResource, metaModelManager);
 			String ecoreErrorsString = PivotUtil.formatResourceDiagnostics(ecoreResource.getErrors(), "Loading " + inputURI, "\n");
@@ -119,6 +122,11 @@ public class OCLMetaModelCodeGenerator extends AbstractWorkflowComponent
 //			if (orphanage != null) {
 //				((org.eclipse.ocl.examples.pivot.Package)pivotModel).getNestedPackage().add(orphanage);
 //			}
+			PivotSaver saver = new PivotSaver(pivotResource);
+			org.eclipse.ocl.examples.pivot.Package orphanage = saver.localizeSpecializations();
+			if ((orphanage != null) && (pivotRoot instanceof Root)) {
+				((Root)pivotRoot).getNestedPackage().add(orphanage);
+			}
 			GenerateOCLMetaModel acceleo = new GenerateOCLMetaModel(pivotPackage, outputFolder, arguments);
 			log.info("Generating to ' " + outputFolder + "'");
 			acceleo.generate(null);

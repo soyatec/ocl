@@ -53,7 +53,7 @@ public interface TemplateBinding
 	 * @return the value of the '<em>Signature</em>' reference.
 	 * @see #setSignature(TemplateSignature)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateBinding_Signature()
-	 * @model required="true" ordered="false"
+	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateBinding!signature'"
 	 * @generated
 	 */
@@ -109,7 +109,7 @@ public interface TemplateBinding
 	 * @see #setBoundElement(TemplateableElement)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateBinding_BoundElement()
 	 * @see org.eclipse.ocl.examples.pivot.TemplateableElement#getTemplateBinding
-	 * @model opposite="templateBinding" required="true" transient="false" ordered="false"
+	 * @model opposite="templateBinding" required="true" transient="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateBinding!boundElement'"
 	 * @generated
 	 */

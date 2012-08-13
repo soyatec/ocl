@@ -54,7 +54,7 @@ public interface CollectionLiteralExp
 	 * @see org.eclipse.ocl.examples.pivot.CollectionKind
 	 * @see #setKind(CollectionKind)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionLiteralExp_Kind()
-	 * @model required="true" ordered="false"
+	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!CollectionLiteralExp!kind'"
 	 * @generated
 	 */

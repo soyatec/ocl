@@ -49,8 +49,7 @@ public interface EnumLiteralExp
 	 * @return the value of the '<em>Referred Enum Literal</em>' reference.
 	 * @see #setReferredEnumLiteral(EnumerationLiteral)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getEnumLiteralExp_ReferredEnumLiteral()
-	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!EnumLiteralExp!referredEnumLiteral'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!EnumLiteralExp!referredEnumLiteral'"
 	 * @generated
 	 */
 	EnumerationLiteral getReferredEnumLiteral();

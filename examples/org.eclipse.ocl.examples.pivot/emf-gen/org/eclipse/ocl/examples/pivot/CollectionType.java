@@ -52,7 +52,7 @@ public interface CollectionType
 	 * @return the value of the '<em>Element Type</em>' reference.
 	 * @see #setElementType(Type)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionType_ElementType()
-	 * @model required="true" ordered="false"
+	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!CollectionType!elementType'"
 	 * @generated
 	 */
@@ -70,7 +70,7 @@ public interface CollectionType
 
 	/**
 	 * Returns the value of the '<em><b>Lower</b></em>' attribute.
-	 * The default value is <code>"1"</code>.
+	 * The default value is <code>"0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Lower</em>' attribute isn't clear,
@@ -80,7 +80,7 @@ public interface CollectionType
 	 * @return the value of the '<em>Lower</em>' attribute.
 	 * @see #setLower(BigInteger)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionType_Lower()
-	 * @model default="1" dataType="org.eclipse.ocl.examples.pivot.Integer" ordered="false"
+	 * @model default="0" dataType="org.eclipse.ocl.examples.pivot.Integer" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!CollectionType!lower'"
 	 * @generated
 	 */
@@ -98,7 +98,7 @@ public interface CollectionType
 
 	/**
 	 * Returns the value of the '<em><b>Upper</b></em>' attribute.
-	 * The default value is <code>"1"</code>.
+	 * The default value is <code>"-1"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Upper</em>' attribute isn't clear,
@@ -108,7 +108,7 @@ public interface CollectionType
 	 * @return the value of the '<em>Upper</em>' attribute.
 	 * @see #setUpper(BigInteger)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionType_Upper()
-	 * @model default="1" dataType="org.eclipse.ocl.examples.pivot.UnlimitedNatural" ordered="false"
+	 * @model default="-1" dataType="org.eclipse.ocl.examples.pivot.UnlimitedNatural" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!CollectionType!upper'"
 	 * @generated
 	 */

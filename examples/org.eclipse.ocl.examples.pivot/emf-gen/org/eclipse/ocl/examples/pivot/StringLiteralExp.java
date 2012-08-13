@@ -46,7 +46,7 @@ public interface StringLiteralExp
 	 * @return the value of the '<em>String Symbol</em>' attribute.
 	 * @see #setStringSymbol(String)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getStringLiteralExp_StringSymbol()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.String" required="true" ordered="false"
+	 * @model dataType="org.eclipse.ocl.examples.pivot.String" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!StringLiteralExp!stringSymbol'"
 	 * @generated
 	 */
