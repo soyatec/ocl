@@ -75,6 +75,11 @@ public class AbstractCollectionType extends AbstractSpecializedType implements D
 		}
 	}
 
+	@Override
+	public DomainCollectionType getContainerType() {
+		return (DomainCollectionType)containerType;
+	}
+
 	public @NonNull DomainType getElementType() {
 		return elementType;
 	}

@@ -578,9 +578,9 @@ public class CollectionTypeImpl
 		}
 	}
 
-	public @NonNull Type getContainerType() {
+	public @NonNull CollectionType getContainerType() {
 		TemplateableElement unspecializedElement2 = unspecializedElement;
-		return unspecializedElement2 != null ? (Type)unspecializedElement2 : this;
+		return unspecializedElement2 != null ? (CollectionType)unspecializedElement2 : this;
 	}
 
 	@Override

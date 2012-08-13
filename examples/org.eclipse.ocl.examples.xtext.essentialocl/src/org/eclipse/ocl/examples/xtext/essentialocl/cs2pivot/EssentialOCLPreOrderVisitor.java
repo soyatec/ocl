@@ -84,16 +84,16 @@ public class EssentialOCLPreOrderVisitor extends AbstractEssentialOCLPreOrderVis
 		public BasicContinuation<?> execute() {
 			MetaModelManager metaModelManager = context.getMetaModelManager();
 			TypedRefCS csElementType = csElement.getOwnedType();
-			Type type;
+			Type type = null;
 			String name = csElement.getName();
 			assert name != null;
 			if (csElementType != null) {
 				Type elementType = PivotUtil.getPivot(Type.class, csElementType);
-				List<Type> singletonList = Collections.singletonList(elementType);
-				assert singletonList != null;
-				type = metaModelManager.getLibraryType(name, singletonList);
+				if (elementType != null) {
+					type = metaModelManager.getCollectionType(name, elementType, null, null);
+				}
 			}
-			else {
+			if (type == null) {
 				type = metaModelManager.getLibraryType(name);
 			}
 			csElement.setPivot(type);

@@ -52,7 +52,7 @@ public abstract class AbstractOperationFilter implements ScopeFilter
 		Type sourceType = this.sourceType;
 		if (!(sourceType instanceof CollectionType) && (candidateOperation.getOwningType() instanceof CollectionType) && (sourceType != null)) {
 			assert sourceType != null;
-			sourceType = metaModelManager.getCollectionType("Set", sourceType, null, null);		// Implicit oclAsSet()
+			sourceType = metaModelManager.getSetType(sourceType, null, null);		// Implicit oclAsSet()
 		}			
 		Map<TemplateParameter, ParameterableElement> bindings = PivotUtil.getAllTemplateParameterSubstitutions(null, sourceType);
 //			PivotUtil.getAllTemplateParameterSubstitutions(bindings, candidateOperation);

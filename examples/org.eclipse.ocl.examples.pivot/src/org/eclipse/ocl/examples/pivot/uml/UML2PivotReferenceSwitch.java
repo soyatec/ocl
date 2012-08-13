@@ -163,7 +163,7 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 			org.eclipse.uml2.uml.Type umlType = umlTypedElement2.getType();
 			if (umlType != null) {
 				Type pivotType = converter.resolveType(umlType);
-				if (umlType instanceof MultiplicityElement) {
+				if ((umlType instanceof MultiplicityElement) && (pivotType != null)) {
 					MultiplicityElement umlMultiplicity = (MultiplicityElement)umlType;
 					long upper = umlMultiplicity.getUpper();
 					if (upper != 1) {

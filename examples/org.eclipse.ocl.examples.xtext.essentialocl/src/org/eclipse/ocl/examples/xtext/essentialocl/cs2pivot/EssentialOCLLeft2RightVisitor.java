@@ -984,9 +984,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 			if (commonType == null) {
 				commonType = metaModelManager.createUnspecifiedType();
 			}
-			List<Type> singletonList = Collections.singletonList(commonType);
-			assert singletonList != null;
-			Type type = metaModelManager.getLibraryType(collectionTypeName, singletonList);
+			Type type = metaModelManager.getCollectionType(collectionTypeName, commonType, null, null);
 			context.setType(expression, type);
 			expression.setKind(PivotUtil.getCollectionKind((CollectionType) type));
 		}

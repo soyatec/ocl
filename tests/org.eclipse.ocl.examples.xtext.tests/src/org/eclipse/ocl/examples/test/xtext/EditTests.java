@@ -21,7 +21,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringWriter;
 import java.lang.ref.WeakReference;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -43,9 +42,9 @@ import org.eclipse.ocl.examples.pivot.context.ModelContext;
 import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
+import org.eclipse.ocl.examples.pivot.manager.CollectionTypeServer;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
-import org.eclipse.ocl.examples.pivot.manager.TemplateableTypeServer;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
@@ -491,8 +490,8 @@ public class EditTests extends XtextTestCase
 		//
 		Type myType = ocl.getMetaModelManager().getPrimaryType("http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib", "MyType");
 		SequenceType sequenceType = ocl.getMetaModelManager().getSequenceType();
-		TemplateableTypeServer.TemplateArguments templateArguments = new TemplateableTypeServer.TemplateArguments(myType, null, null);
-		TemplateableTypeServer sequenceTypeServer = (TemplateableTypeServer) ocl.getMetaModelManager().getTypeServer(sequenceType);
+		CollectionTypeServer.TemplateArguments templateArguments = new CollectionTypeServer.TemplateArguments(myType, null, null);
+		CollectionTypeServer sequenceTypeServer = (CollectionTypeServer) ocl.getMetaModelManager().getTypeServer(sequenceType);
 		WeakReference<Type> sequenceMyType = new WeakReference<Type>(sequenceTypeServer.findSpecializedType(templateArguments));
 		assertNull(sequenceMyType.get()); 
 		//

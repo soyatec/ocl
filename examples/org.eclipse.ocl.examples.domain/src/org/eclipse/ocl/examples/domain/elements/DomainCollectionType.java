@@ -20,7 +20,7 @@ package org.eclipse.ocl.examples.domain.elements;
 
 public interface DomainCollectionType extends DomainType
 {
-	/*@NonNull*/ DomainType getContainerType();		
+	/*@NonNull*/ DomainCollectionType getContainerType();		
 	/*@NonNull*/ DomainType getElementType();
 	boolean isOrdered();
 	boolean isUnique();

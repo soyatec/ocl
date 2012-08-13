@@ -42,6 +42,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.utils.TracingOption;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AnyType;
+import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
@@ -1033,50 +1034,24 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 			logger.error("Nothing to specialize as " + moniker); //$NON-NLS-1$
 			return null;
 		}
-/*WIP		List<Type> templateArguments = new ArrayList<Type>();
-		for (TemplateParameterSubstitutionCS tps : ownedTemplateBinding.getOwnedParameterSubstitution()) {
-			Type templateArgument = PivotUtil.getPivot(Type.class, tps.getOwnedActualParameter());
-			templateArguments.add(templateArgument);
-		}
-		TemplateSignature templateSignature = unspecializedPivotElement.getOwnedTemplateSignature();
-		List<TemplateParameter> templateParameters = templateSignature != null ? templateSignature.getParameter() : Collections.<TemplateParameter>emptyList();
-		boolean isUnspecialized = PivotUtil.isUnspecialized(templateParameters, templateArguments);	// WIP
-		if (isUnspecialized) {
-//			int iMax = templateParameters.size();
-//			assert templateArguments.size() == iMax;
-//			for (int i = 0; i < iMax; i++) {
-//				reusePivotElement(ownedTemplateBinding.getOwnedParameterSubstitution().get(i), templateParameters.get(i).getParameteredElement());
-//			}
-			reusePivotElement(csElement, unspecializedPivotElement);
-			return unspecializedPivotElement;
-		} */
 		//
 		//	Refresh the pivot specialization root
 		//
 		Type specializedPivotElement = PivotUtil.getPivot(Type.class, csElement);
 		if (specializedPivotElement == null) {
-			List<Type> templateArguments = new ArrayList<Type>();
-			for (TemplateParameterSubstitutionCS csTemplateParameterSubstitution : ownedTemplateBinding.getOwnedParameterSubstitution()) {
+			if (unspecializedPivotElement instanceof CollectionType) {
+				TemplateParameterSubstitutionCS csTemplateParameterSubstitution = ownedTemplateBinding.getOwnedParameterSubstitution().get(0);
 				Type templateArgument = PivotUtil.getPivot(Type.class, csTemplateParameterSubstitution.getOwnedActualParameter());
-				templateArguments.add(templateArgument);
+				specializedPivotElement = templateArgument != null ? metaModelManager.getCollectionType((CollectionType) unspecializedPivotElement, templateArgument, null, null) : unspecializedPivotElement;
 			}
-			specializedPivotElement = metaModelManager.getLibraryType(unspecializedPivotElement, templateArguments);
-/*			EClass eClass = unspecializedPivotElement.eClass();
-			@SuppressWarnings("unchecked")
-			Class<? extends Type> pivotClazz = (Class<? extends Type>) eClass.getInstanceClass();
-			Type pivotClass = converter.refreshReferencedElement(pivotClazz, eClass, csElement, BaseCSTPackage.Literals.MODEL_ELEMENT_CS__PIVOT);
-			refreshName(pivotClass, unspecializedPivotElement.getName());
-			specializedPivotElement = pivotClass;
-			if (pivotClass instanceof CollectionType) {
-				Type elementType = PivotUtil.getPivot(Type.class, ownedTemplateBinding.getOwnedParameterSubstitution().get(0).getOwnedActualParameter());
-				((CollectionType)pivotClass).setElementType(elementType);
+			else {
+				List<Type> templateArguments = new ArrayList<Type>();
+				for (TemplateParameterSubstitutionCS csTemplateParameterSubstitution : ownedTemplateBinding.getOwnedParameterSubstitution()) {
+					Type templateArgument = PivotUtil.getPivot(Type.class, csTemplateParameterSubstitution.getOwnedActualParameter());
+					templateArguments.add(templateArgument);
+				}
+				specializedPivotElement = metaModelManager.getLibraryType(unspecializedPivotElement, templateArguments);
 			}
-			else if (pivotClass instanceof ClassifierType) {
-				Type instanceType = PivotUtil.getPivot(Type.class, ownedTemplateBinding.getOwnedParameterSubstitution().get(0).getOwnedActualParameter());
-				((ClassifierType)pivotClass).setInstanceType(instanceType);
-			}
-			specializedPivotElement.setUnspecializedElement(unspecializedPivotElement);
-//WIP			metaModelManager.addOrphanClass(specializedPivotElement); */
 		}
 		installPivotReference(csElement, specializedPivotElement, BaseCSTPackage.Literals.TYPED_TYPE_REF_CS__TYPE);
 		if (specializedPivotElement != unspecializedPivotElement) {
