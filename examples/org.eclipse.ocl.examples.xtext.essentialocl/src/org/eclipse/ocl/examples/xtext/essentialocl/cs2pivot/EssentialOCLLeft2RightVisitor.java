@@ -783,7 +783,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 				Parameter parameter = parameters.get(i);
 				OCLExpression argument = arguments.get(i);
 				if ((parameter != null) && (argument != null)) {
-					Type parameterType = PivotUtil.getBehavioralType(metaModelManager.getTypeWithMultiplicity(parameter));
+					Type parameterType = PivotUtil.getBehavioralType(PivotUtil.getBehavioralType(parameter));
 					Type argumentType = argument.getType();
 					if (argumentType != null) {
 						argumentType = PivotUtil.getBehavioralType(argumentType);
@@ -832,7 +832,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 				}
 			}
 		}
-		Type returnType = metaModelManager.getSpecializedType(metaModelManager.getTypeWithMultiplicity(operation), templateBindings);
+		Type returnType = metaModelManager.getSpecializedType(PivotUtil.getBehavioralType(operation), templateBindings);
 		if ((operation instanceof Iteration) && "collect".equals(operation.getName()) && (callExp instanceof LoopExp) && (returnType instanceof CollectionType)) {
 			OCLExpression body = ((LoopExp)callExp).getBody();
 			if (body != null) {
@@ -864,7 +864,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 			PropertyCallExp innerExpression = context.refreshModelElement(PropertyCallExp.class, PivotPackage.Literals.PROPERTY_CALL_EXP, csNameExp);
 			if (innerExpression != null) {
 				innerExpression.setReferredProperty(property);
-				context.setTypeWithMultiplicity(innerExpression, property);		// FIXME resolve template parameter		
+				context.setBehavioralType(innerExpression, property);		// FIXME resolve template parameter		
 				outerExpression = resolveNavigationFeature(csNameExp, source, property, innerExpression);
 				if (outerExpression != innerExpression) {
 					resolveOperationReturnType(outerExpression);

@@ -81,7 +81,16 @@ public class [javaClass/] extends XMIResourceImpl
 		super(uri);
 	}
 
-	protected static class Contents extends AbstractContents
+	protected static class LibraryContents extends AbstractContents
+	{
+		protected final @NonNull PivotStandardLibrary standardLibrary;
+
+		protected LibraryContents(@NonNull PivotStandardLibrary standardLibrary) {
+			this.standardLibrary = standardLibrary;
+		}
+	}
+
+	protected static class Contents extends LibraryContents
 	{
 		protected final @NonNull Root [root.getPrefixedSymbolName('root')/];
 		protected final @NonNull Package [pkg.getPrefixedSymbolName('metamodel')/];

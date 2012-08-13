@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
-import java.math.BigInteger;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -211,14 +210,6 @@ public abstract class FeatureImpl
 			case PivotPackage.FEATURE__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case PivotPackage.FEATURE__IS_ORDERED:
-				return isOrdered();
-			case PivotPackage.FEATURE__IS_UNIQUE:
-				return isUnique();
-			case PivotPackage.FEATURE__LOWER:
-				return getLower();
-			case PivotPackage.FEATURE__UPPER:
-				return getUpper();
 			case PivotPackage.FEATURE__IS_REQUIRED:
 				return isRequired();
 			case PivotPackage.FEATURE__IMPLEMENTATION_CLASS:
@@ -265,18 +256,6 @@ public abstract class FeatureImpl
 			case PivotPackage.FEATURE__TYPE:
 				setType((Type)newValue);
 				return;
-			case PivotPackage.FEATURE__IS_ORDERED:
-				setIsOrdered((Boolean)newValue);
-				return;
-			case PivotPackage.FEATURE__IS_UNIQUE:
-				setIsUnique((Boolean)newValue);
-				return;
-			case PivotPackage.FEATURE__LOWER:
-				setLower((BigInteger)newValue);
-				return;
-			case PivotPackage.FEATURE__UPPER:
-				setUpper((BigInteger)newValue);
-				return;
 			case PivotPackage.FEATURE__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
 				return;
@@ -321,18 +300,6 @@ public abstract class FeatureImpl
 			case PivotPackage.FEATURE__TYPE:
 				setType((Type)null);
 				return;
-			case PivotPackage.FEATURE__IS_ORDERED:
-				setIsOrdered(IS_ORDERED_EDEFAULT);
-				return;
-			case PivotPackage.FEATURE__IS_UNIQUE:
-				setIsUnique(IS_UNIQUE_EDEFAULT);
-				return;
-			case PivotPackage.FEATURE__LOWER:
-				setLower(LOWER_EDEFAULT);
-				return;
-			case PivotPackage.FEATURE__UPPER:
-				setUpper(UPPER_EDEFAULT);
-				return;
 			case PivotPackage.FEATURE__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
 				return;
@@ -351,7 +318,6 @@ public abstract class FeatureImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("null")
 	@Override
 	public boolean eIsSet(int featureID)
 	{
@@ -371,14 +337,6 @@ public abstract class FeatureImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.FEATURE__TYPE:
 				return type != null;
-			case PivotPackage.FEATURE__IS_ORDERED:
-				return ((eFlags & IS_ORDERED_EFLAG) != 0) != IS_ORDERED_EDEFAULT;
-			case PivotPackage.FEATURE__IS_UNIQUE:
-				return ((eFlags & IS_UNIQUE_EFLAG) != 0) != IS_UNIQUE_EDEFAULT;
-			case PivotPackage.FEATURE__LOWER:
-				return LOWER_EDEFAULT == null ? lower != null : !LOWER_EDEFAULT.equals(lower);
-			case PivotPackage.FEATURE__UPPER:
-				return UPPER_EDEFAULT == null ? upper != null : !UPPER_EDEFAULT.equals(upper);
 			case PivotPackage.FEATURE__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.FEATURE__IMPLEMENTATION_CLASS:

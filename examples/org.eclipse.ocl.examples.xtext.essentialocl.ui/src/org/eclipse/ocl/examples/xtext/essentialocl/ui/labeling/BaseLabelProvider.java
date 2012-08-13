@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
@@ -91,7 +90,6 @@ import org.eclipse.ocl.examples.pivot.TupleLiteralPart;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeExp;
-import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -130,13 +128,13 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		s.append(">");
 	}
 
-	protected void appendMultiplicity(@NonNull StringBuilder s, TypedMultiplicityElement ele) {
+/*	protected void appendMultiplicity(@NonNull StringBuilder s, TypedMultiplicityElement ele) {
 		long lower = ele.getLower().longValue();
 		long upper = ele.getUpper().longValue();
 		if ((lower != 1) || (upper != 1)) {
 			DomainUtil.formatMultiplicity(s, lower, upper);
 		}
-	}
+	} */
 
 	protected void appendName(@NonNull StringBuilder s, NamedElement element) {
 		if (element != null) {
@@ -178,7 +176,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		for (Parameter csParameter : parameters) {
 			s.append(prefix);
 			appendType(s, csParameter.getType());
-			appendMultiplicity(s, csParameter);
+//			appendMultiplicity(s, csParameter);
 			prefix = ", ";
 		}
 		s.append(")");
@@ -550,7 +548,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		appendParameters(s, ele.getOwnedIterator());
 		s.append(" : ");
 		appendType(s, ele.getType());
-		appendMultiplicity(s, ele);
+//		appendMultiplicity(s, ele);
 		return s.toString();
 	}
 
@@ -621,7 +619,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		appendParameters(s, ele.getOwnedParameter());
 		s.append(" : ");
 		appendType(s, ele.getType());
-		appendMultiplicity(s, ele);
+//		appendMultiplicity(s, ele);
 		return s.toString();
 	}
 
@@ -650,7 +648,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		appendName(s, ele);
 		s.append(" : ");
 		appendType(s, ele.getType());
-		appendMultiplicity(s, ele);
+//		appendMultiplicity(s, ele);
 		return s.toString();
 	}
 	
@@ -685,7 +683,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		appendName(s, ele);
 		s.append(" : ");
 		appendType(s, ele.getType());
-		appendMultiplicity(s, ele);
+//		appendMultiplicity(s, ele);
 		return s.toString();
 	}
 

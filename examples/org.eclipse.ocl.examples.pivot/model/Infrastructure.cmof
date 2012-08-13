@@ -1424,7 +1424,7 @@ includesCardinality = (lowerBound() &lt;= C) and (upperBound() >= C)
                 </specification>
               </ownedRule>
               <ownedParameter xmi:type="cmof:Parameter" xmi:id="Core-Abstractions-Multiplicities-MultiplicityElement-includesMultiplicity-_ownedParameter.0" type="Core-PrimitiveTypes-Boolean" direction="return"/>
-              <ownedParameter xmi:type="cmof:Parameter" xmi:id="Core-Abstractions-Multiplicities-MultiplicityElement-includesMultiplicity-M" name="M" type="Core-Basic-MultiplicityElement"/>
+              <ownedParameter xmi:type="cmof:Parameter" xmi:id="Core-Abstractions-Multiplicities-MultiplicityElement-includesMultiplicity-M" name="M"/>
             </ownedOperation>
           </ownedMember>
         </ownedMember>
@@ -1519,7 +1519,7 @@ includesCardinality = (lowerBound() &lt;= C) and (upperBound() >= C)
             </ownedComment>
           </ownedAttribute>
         </ownedMember>
-        <ownedMember xmi:type="cmof:Class" xmi:id="Core-Basic-Operation" name="Operation" superClass="Core-Basic-TypedElement Core-Basic-MultiplicityElement">
+        <ownedMember xmi:type="cmof:Class" xmi:id="Core-Basic-Operation" name="Operation" superClass="Core-Basic-TypedElement">
           <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Basic-Operation-_ownedComment.0" annotatedElement="Core-Basic-Operation">
             <body>An operation is owned by a class and may be invoked in the context of objects that are instances of that class. It is a typed element and a multiplicity element.</body>
           </ownedComment>
@@ -1539,7 +1539,7 @@ includesCardinality = (lowerBound() &lt;= C) and (upperBound() >= C)
             </ownedComment>
           </ownedAttribute>
         </ownedMember>
-        <ownedMember xmi:type="cmof:Class" xmi:id="Core-Basic-Parameter" name="Parameter" superClass="Core-Basic-TypedElement Core-Basic-MultiplicityElement">
+        <ownedMember xmi:type="cmof:Class" xmi:id="Core-Basic-Parameter" name="Parameter" superClass="Core-Basic-TypedElement">
           <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Basic-Parameter-_ownedComment.0" annotatedElement="Core-Basic-Parameter">
             <body>A parameter is a typed element that represents a parameter of an operation.</body>
           </ownedComment>
@@ -1549,7 +1549,7 @@ includesCardinality = (lowerBound() &lt;= C) and (upperBound() >= C)
             </ownedComment>
           </ownedAttribute>
         </ownedMember>
-        <ownedMember xmi:type="cmof:Class" xmi:id="Core-Basic-Property" name="Property" superClass="Core-Basic-TypedElement Core-Basic-MultiplicityElement">
+        <ownedMember xmi:type="cmof:Class" xmi:id="Core-Basic-Property" name="Property" superClass="Core-Basic-TypedElement">
           <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Basic-Property-_ownedComment.0" annotatedElement="Core-Basic-Property">
             <body>A property is a typed element that represents an attribute of a class.</body>
           </ownedComment>
@@ -1663,129 +1663,6 @@ includesCardinality = (lowerBound() &lt;= C) and (upperBound() >= C)
           <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Basic-DataType-_ownedComment.0" annotatedElement="Core-Basic-DataType">
             <body>DataType is an abstract class that acts as a common superclass for different kinds of data types.</body>
           </ownedComment>
-        </ownedMember>
-        <ownedMember xmi:type="cmof:Class" xmi:id="Core-Basic-MultiplicityElement" name="MultiplicityElement" isAbstract="true" superClass="Core-Basic-Element">
-          <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Basic-MultiplicityElement-_ownedComment.0" annotatedElement="Core-Basic-MultiplicityElement">
-            <body>A multiplicity is a definition of an inclusive interval of non-negative integers beginning with a lower bound and ending with a (possibly infinite) upper bound. A multiplicity element embeds this information to specify the allowable cardinalities for an instantiation of this element.</body>
-          </ownedComment>
-          <ownedRule xmi:type="cmof:Constraint" xmi:id="Core-Basic-MultiplicityElement-lower_ge_0" name="lower_ge_0" constrainedElement="Core-Basic-MultiplicityElement" namespace="Core-Basic-MultiplicityElement">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Basic-MultiplicityElement-lower_ge_0-_ownedComment.0" annotatedElement="Core-Basic-MultiplicityElement-lower_ge_0">
-              <body>The lower bound must be a non-negative integer literal.</body>
-            </ownedComment>
-            <specification xmi:type="cmof:OpaqueExpression" xmi:id="Core-Basic-MultiplicityElement-lower_ge_0-_specification">
-              <language>OCL</language>
-              <body>lowerBound()->notEmpty() implies lowerBound() >= 0</body>
-            </specification>
-          </ownedRule>
-          <ownedRule xmi:type="cmof:Constraint" xmi:id="Core-Basic-MultiplicityElement-upper_ge_lower" name="upper_ge_lower" constrainedElement="Core-Basic-MultiplicityElement" namespace="Core-Basic-MultiplicityElement">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Basic-MultiplicityElement-upper_ge_lower-_ownedComment.0" annotatedElement="Core-Basic-MultiplicityElement-upper_ge_lower">
-              <body>The upper bound must be greater than or equal to the lower bound.</body>
-            </ownedComment>
-            <specification xmi:type="cmof:OpaqueExpression" xmi:id="Core-Basic-MultiplicityElement-upper_ge_lower-_specification">
-              <language>OCL</language>
-              <body>(upperBound()->notEmpty() and lowerBound()->notEmpty()) implies upperBound() >= lowerBound()</body>
-            </specification>
-          </ownedRule>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="Core-Basic-MultiplicityElement-isOrdered" name="isOrdered" type="Core-PrimitiveTypes-Boolean" default="false">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Basic-MultiplicityElement-isOrdered-_ownedComment.0" annotatedElement="Core-Basic-MultiplicityElement-isOrdered">
-              <body>For a multivalued multiplicity, this attribute specifies whether the values in an instantiation of this element are sequentially ordered.</body>
-            </ownedComment>
-          </ownedAttribute>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="Core-Basic-MultiplicityElement-isUnique" name="isUnique" type="Core-PrimitiveTypes-Boolean" default="true">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Basic-MultiplicityElement-isUnique-_ownedComment.0" annotatedElement="Core-Basic-MultiplicityElement-isUnique">
-              <body>For a multivalued multiplicity, this attributes specifies whether the values in an instantiation of this element are unique.</body>
-            </ownedComment>
-          </ownedAttribute>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="Core-Basic-MultiplicityElement-lower" name="lower" type="Core-PrimitiveTypes-Integer" lower="0" default="1">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Basic-MultiplicityElement-lower-_ownedComment.0" annotatedElement="Core-Basic-MultiplicityElement-lower">
-              <body>Specifies the lower bound of the multiplicity interval.</body>
-            </ownedComment>
-          </ownedAttribute>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="Core-Basic-MultiplicityElement-upper" name="upper" type="Core-PrimitiveTypes-UnlimitedNatural" lower="0" default="1">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Basic-MultiplicityElement-upper-_ownedComment.0" annotatedElement="Core-Basic-MultiplicityElement-upper">
-              <body>Specifies the upper bound of the multiplicity interval.</body>
-            </ownedComment>
-          </ownedAttribute>
-          <ownedOperation xmi:type="cmof:Operation" xmi:id="Core-Basic-MultiplicityElement-lowerBound" name="lowerBound" bodyCondition="Core-Basic-MultiplicityElement-lowerBound-spec" class="Core-Basic-MultiplicityElement" isQuery="true">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Basic-MultiplicityElement-lowerBound-_ownedComment.0" annotatedElement="Core-Basic-MultiplicityElement-lowerBound">
-              <body>The query lowerBound() returns the lower bound of the multiplicity as an integer.</body>
-            </ownedComment>
-            <ownedRule xmi:type="cmof:Constraint" xmi:id="Core-Basic-MultiplicityElement-lowerBound-spec" name="spec" constrainedElement="Core-Basic-MultiplicityElement-lowerBound" namespace="Core-Basic-MultiplicityElement-lowerBound">
-              <specification xmi:type="cmof:OpaqueExpression" xmi:id="Core-Basic-MultiplicityElement-lowerBound-spec-_specification">
-                <language>OCL</language>
-                <body>if lower->notEmpty() then lower else 1 endif</body>
-              </specification>
-            </ownedRule>
-            <ownedParameter xmi:type="cmof:Parameter" xmi:id="Core-Basic-MultiplicityElement-lowerBound-_ownedParameter.0" type="Core-PrimitiveTypes-Integer" direction="return"/>
-          </ownedOperation>
-          <ownedOperation xmi:type="cmof:Operation" xmi:id="Core-Basic-MultiplicityElement-upperBound" name="upperBound" bodyCondition="Core-Basic-MultiplicityElement-upperBound-spec" class="Core-Basic-MultiplicityElement" isQuery="true">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Basic-MultiplicityElement-upperBound-_ownedComment.0" annotatedElement="Core-Basic-MultiplicityElement-upperBound">
-              <body>The query upperBound() returns the upper bound of the multiplicity for a bounded multiplicity as an unlimited natural.</body>
-            </ownedComment>
-            <ownedRule xmi:type="cmof:Constraint" xmi:id="Core-Basic-MultiplicityElement-upperBound-spec" name="spec" constrainedElement="Core-Basic-MultiplicityElement-upperBound" namespace="Core-Basic-MultiplicityElement-upperBound">
-              <specification xmi:type="cmof:OpaqueExpression" xmi:id="Core-Basic-MultiplicityElement-upperBound-spec-_specification">
-                <language>OCL</language>
-                <body>if upper->notEmpty() then upper else 1 endif</body>
-              </specification>
-            </ownedRule>
-            <ownedParameter xmi:type="cmof:Parameter" xmi:id="Core-Basic-MultiplicityElement-upperBound-_ownedParameter.0" type="Core-PrimitiveTypes-UnlimitedNatural" direction="return"/>
-          </ownedOperation>
-          <ownedOperation xmi:type="cmof:Operation" xmi:id="Core-Basic-MultiplicityElement-isMultivalued" name="isMultivalued" bodyCondition="Core-Basic-MultiplicityElement-isMultivalued-spec" class="Core-Basic-MultiplicityElement" isQuery="true" precondition="Core-Basic-MultiplicityElement-isMultivalued-_ownedRule.0">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Basic-MultiplicityElement-isMultivalued-_ownedComment.0" annotatedElement="Core-Basic-MultiplicityElement-isMultivalued">
-              <body>The query isMultivalued() checks whether this multiplicity has an upper bound greater than one.</body>
-            </ownedComment>
-            <ownedRule xmi:type="cmof:Constraint" xmi:id="Core-Basic-MultiplicityElement-isMultivalued-_ownedRule.0" constrainedElement="Core-Basic-MultiplicityElement-isMultivalued" namespace="Core-Basic-MultiplicityElement-isMultivalued">
-              <specification xmi:type="cmof:OpaqueExpression" xmi:id="Core-Basic-MultiplicityElement-isMultivalued-_ownedRule.0-_specification">
-                <language>OCL</language>
-                <body>upperBound()->notEmpty()</body>
-              </specification>
-            </ownedRule>
-            <ownedRule xmi:type="cmof:Constraint" xmi:id="Core-Basic-MultiplicityElement-isMultivalued-spec" name="spec" constrainedElement="Core-Basic-MultiplicityElement-isMultivalued" namespace="Core-Basic-MultiplicityElement-isMultivalued">
-              <specification xmi:type="cmof:OpaqueExpression" xmi:id="Core-Basic-MultiplicityElement-isMultivalued-spec-_specification">
-                <language>OCL</language>
-                <body>upperBound() > 1</body>
-              </specification>
-            </ownedRule>
-            <ownedParameter xmi:type="cmof:Parameter" xmi:id="Core-Basic-MultiplicityElement-isMultivalued-_ownedParameter.0" type="Core-PrimitiveTypes-Boolean" direction="return"/>
-          </ownedOperation>
-          <ownedOperation xmi:type="cmof:Operation" xmi:id="Core-Basic-MultiplicityElement-includesCardinality" name="includesCardinality" bodyCondition="Core-Basic-MultiplicityElement-includesCardinality-spec" class="Core-Basic-MultiplicityElement" isQuery="true" precondition="Core-Basic-MultiplicityElement-includesCardinality-_ownedRule.0">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Basic-MultiplicityElement-includesCardinality-_ownedComment.0" annotatedElement="Core-Basic-MultiplicityElement-includesCardinality">
-              <body>The query includesCardinality() checks whether the specified cardinality is valid for this multiplicity.</body>
-            </ownedComment>
-            <ownedRule xmi:type="cmof:Constraint" xmi:id="Core-Basic-MultiplicityElement-includesCardinality-_ownedRule.0" constrainedElement="Core-Basic-MultiplicityElement-includesCardinality" namespace="Core-Basic-MultiplicityElement-includesCardinality">
-              <specification xmi:type="cmof:OpaqueExpression" xmi:id="Core-Basic-MultiplicityElement-includesCardinality-_ownedRule.0-_specification">
-                <language>OCL</language>
-                <body>upperBound()->notEmpty() and lowerBound()->notEmpty()</body>
-              </specification>
-            </ownedRule>
-            <ownedRule xmi:type="cmof:Constraint" xmi:id="Core-Basic-MultiplicityElement-includesCardinality-spec" name="spec" constrainedElement="Core-Basic-MultiplicityElement-includesCardinality" namespace="Core-Basic-MultiplicityElement-includesCardinality">
-              <specification xmi:type="cmof:OpaqueExpression" xmi:id="Core-Basic-MultiplicityElement-includesCardinality-spec-_specification">
-                <language>OCL</language>
-                <body>(lowerBound() &lt;= C) and (upperBound() >= C)</body>
-              </specification>
-            </ownedRule>
-            <ownedParameter xmi:type="cmof:Parameter" xmi:id="Core-Basic-MultiplicityElement-includesCardinality-_ownedParameter.0" type="Core-PrimitiveTypes-Boolean" direction="return"/>
-            <ownedParameter xmi:type="cmof:Parameter" xmi:id="Core-Basic-MultiplicityElement-includesCardinality-C" name="C" type="Core-PrimitiveTypes-Integer"/>
-          </ownedOperation>
-          <ownedOperation xmi:type="cmof:Operation" xmi:id="Core-Basic-MultiplicityElement-includesMultiplicity" name="includesMultiplicity" bodyCondition="Core-Basic-MultiplicityElement-includesMultiplicity-spec" class="Core-Basic-MultiplicityElement" isQuery="true" precondition="Core-Basic-MultiplicityElement-includesMultiplicity-_ownedRule.0">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Basic-MultiplicityElement-includesMultiplicity-_ownedComment.0" annotatedElement="Core-Basic-MultiplicityElement-includesMultiplicity">
-              <body>The query includesMultiplicity() checks whether this multiplicity includes all the cardinalities allowed by the specified multiplicity.</body>
-            </ownedComment>
-            <ownedRule xmi:type="cmof:Constraint" xmi:id="Core-Basic-MultiplicityElement-includesMultiplicity-_ownedRule.0" constrainedElement="Core-Basic-MultiplicityElement-includesMultiplicity" namespace="Core-Basic-MultiplicityElement-includesMultiplicity">
-              <specification xmi:type="cmof:OpaqueExpression" xmi:id="Core-Basic-MultiplicityElement-includesMultiplicity-_ownedRule.0-_specification">
-                <language>OCL</language>
-                <body>self.upperBound()->notEmpty() and self.lowerBound()->notEmpty() and M.upperBound()->notEmpty() and M.lowerBound()->notEmpty()</body>
-              </specification>
-            </ownedRule>
-            <ownedRule xmi:type="cmof:Constraint" xmi:id="Core-Basic-MultiplicityElement-includesMultiplicity-spec" name="spec" constrainedElement="Core-Basic-MultiplicityElement-includesMultiplicity" namespace="Core-Basic-MultiplicityElement-includesMultiplicity">
-              <specification xmi:type="cmof:OpaqueExpression" xmi:id="Core-Basic-MultiplicityElement-includesMultiplicity-spec-_specification">
-                <language>OCL</language>
-                <body>(self.lowerBound() &lt;= M.lowerBound()) and (self.upperBound() >= M.upperBound())</body>
-              </specification>
-            </ownedRule>
-            <ownedParameter xmi:type="cmof:Parameter" xmi:id="Core-Basic-MultiplicityElement-includesMultiplicity-_ownedParameter.0" type="Core-PrimitiveTypes-Boolean" direction="return"/>
-            <ownedParameter xmi:type="cmof:Parameter" xmi:id="Core-Basic-MultiplicityElement-includesMultiplicity-M" name="M" type="Core-Basic-MultiplicityElement"/>
-          </ownedOperation>
         </ownedMember>
         <ownedMember xmi:type="cmof:Class" xmi:id="Core-Basic-Element" name="Element" isAbstract="true">
           <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Basic-Element-_ownedComment.0" annotatedElement="Core-Basic-Element">
@@ -2111,129 +1988,6 @@ includesCardinality = (lowerBound() &lt;= C) and (upperBound() >= C)
             </ownedComment>
           </ownedAttribute>
         </ownedMember>
-        <ownedMember xmi:type="cmof:Class" xmi:id="Core-Constructs-MultiplicityElement" name="MultiplicityElement" isAbstract="true" superClass="Core-Constructs-Element">
-          <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-MultiplicityElement-_ownedComment.0" annotatedElement="Core-Constructs-MultiplicityElement">
-            <body>A multiplicity is a definition of an inclusive interval of non-negative integers beginning with a lower bound and ending with a (possibly infinite) upper bound. A multiplicity element embeds this information to specify the allowable cardinalities for an instantiation of this element.</body>
-          </ownedComment>
-          <ownedRule xmi:type="cmof:Constraint" xmi:id="Core-Constructs-MultiplicityElement-upper_ge_lower" name="upper_ge_lower" constrainedElement="Core-Constructs-MultiplicityElement" namespace="Core-Constructs-MultiplicityElement">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-MultiplicityElement-upper_ge_lower-_ownedComment.0" annotatedElement="Core-Constructs-MultiplicityElement-upper_ge_lower">
-              <body>The upper bound must be greater than or equal to the lower bound.</body>
-            </ownedComment>
-            <specification xmi:type="cmof:OpaqueExpression" xmi:id="Core-Constructs-MultiplicityElement-upper_ge_lower-_specification">
-              <language>OCL</language>
-              <body>(upperBound()->notEmpty() and lowerBound()->notEmpty()) implies upperBound() >= lowerBound()</body>
-            </specification>
-          </ownedRule>
-          <ownedRule xmi:type="cmof:Constraint" xmi:id="Core-Constructs-MultiplicityElement-lower_ge_0" name="lower_ge_0" constrainedElement="Core-Constructs-MultiplicityElement" namespace="Core-Constructs-MultiplicityElement">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-MultiplicityElement-lower_ge_0-_ownedComment.0" annotatedElement="Core-Constructs-MultiplicityElement-lower_ge_0">
-              <body>The lower bound must be a non-negative integer literal.</body>
-            </ownedComment>
-            <specification xmi:type="cmof:OpaqueExpression" xmi:id="Core-Constructs-MultiplicityElement-lower_ge_0-_specification">
-              <language>OCL</language>
-              <body>lowerBound()->notEmpty() implies lowerBound() >= 0</body>
-            </specification>
-          </ownedRule>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="Core-Constructs-MultiplicityElement-isOrdered" name="isOrdered" type="Core-PrimitiveTypes-Boolean" default="false">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-MultiplicityElement-isOrdered-_ownedComment.0" annotatedElement="Core-Constructs-MultiplicityElement-isOrdered">
-              <body>For a multivalued multiplicity, this attribute specifies whether the values in an instantiation of this element are sequentially ordered.</body>
-            </ownedComment>
-          </ownedAttribute>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="Core-Constructs-MultiplicityElement-isUnique" name="isUnique" type="Core-PrimitiveTypes-Boolean" default="true">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-MultiplicityElement-isUnique-_ownedComment.0" annotatedElement="Core-Constructs-MultiplicityElement-isUnique">
-              <body>For a multivalued multiplicity, this attributes specifies whether the values in an instantiation of this element are unique.</body>
-            </ownedComment>
-          </ownedAttribute>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="Core-Constructs-MultiplicityElement-lower" name="lower" type="Core-PrimitiveTypes-Integer" lower="0" default="1">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-MultiplicityElement-lower-_ownedComment.0" annotatedElement="Core-Constructs-MultiplicityElement-lower">
-              <body>Specifies the lower bound of the multiplicity interval.</body>
-            </ownedComment>
-          </ownedAttribute>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="Core-Constructs-MultiplicityElement-upper" name="upper" type="Core-PrimitiveTypes-UnlimitedNatural" lower="0" default="1">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-MultiplicityElement-upper-_ownedComment.0" annotatedElement="Core-Constructs-MultiplicityElement-upper">
-              <body>Specifies the upper bound of the multiplicity interval.</body>
-            </ownedComment>
-          </ownedAttribute>
-          <ownedOperation xmi:type="cmof:Operation" xmi:id="Core-Constructs-MultiplicityElement-isMultivalued" name="isMultivalued" bodyCondition="Core-Constructs-MultiplicityElement-isMultivalued-spec" class="Core-Constructs-MultiplicityElement" isQuery="true" precondition="Core-Constructs-MultiplicityElement-isMultivalued-_ownedRule.0">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-MultiplicityElement-isMultivalued-_ownedComment.0" annotatedElement="Core-Constructs-MultiplicityElement-isMultivalued">
-              <body>The query isMultivalued() checks whether this multiplicity has an upper bound greater than one.</body>
-            </ownedComment>
-            <ownedRule xmi:type="cmof:Constraint" xmi:id="Core-Constructs-MultiplicityElement-isMultivalued-_ownedRule.0" constrainedElement="Core-Constructs-MultiplicityElement-isMultivalued" namespace="Core-Constructs-MultiplicityElement-isMultivalued">
-              <specification xmi:type="cmof:OpaqueExpression" xmi:id="Core-Constructs-MultiplicityElement-isMultivalued-_ownedRule.0-_specification">
-                <language>OCL</language>
-                <body>upperBound()->notEmpty()</body>
-              </specification>
-            </ownedRule>
-            <ownedRule xmi:type="cmof:Constraint" xmi:id="Core-Constructs-MultiplicityElement-isMultivalued-spec" name="spec" constrainedElement="Core-Constructs-MultiplicityElement-isMultivalued" namespace="Core-Constructs-MultiplicityElement-isMultivalued">
-              <specification xmi:type="cmof:OpaqueExpression" xmi:id="Core-Constructs-MultiplicityElement-isMultivalued-spec-_specification">
-                <language>OCL</language>
-                <body>upperBound() > 1</body>
-              </specification>
-            </ownedRule>
-            <ownedParameter xmi:type="cmof:Parameter" xmi:id="Core-Constructs-MultiplicityElement-isMultivalued-_ownedParameter.0" type="Core-PrimitiveTypes-Boolean" direction="return"/>
-          </ownedOperation>
-          <ownedOperation xmi:type="cmof:Operation" xmi:id="Core-Constructs-MultiplicityElement-includesMultiplicity" name="includesMultiplicity" bodyCondition="Core-Constructs-MultiplicityElement-includesMultiplicity-spec" class="Core-Constructs-MultiplicityElement" isQuery="true" precondition="Core-Constructs-MultiplicityElement-includesMultiplicity-_ownedRule.0">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-MultiplicityElement-includesMultiplicity-_ownedComment.0" annotatedElement="Core-Constructs-MultiplicityElement-includesMultiplicity">
-              <body>The query includesMultiplicity() checks whether this multiplicity includes all the cardinalities allowed by the specified multiplicity.</body>
-            </ownedComment>
-            <ownedRule xmi:type="cmof:Constraint" xmi:id="Core-Constructs-MultiplicityElement-includesMultiplicity-_ownedRule.0" constrainedElement="Core-Constructs-MultiplicityElement-includesMultiplicity" namespace="Core-Constructs-MultiplicityElement-includesMultiplicity">
-              <specification xmi:type="cmof:OpaqueExpression" xmi:id="Core-Constructs-MultiplicityElement-includesMultiplicity-_ownedRule.0-_specification">
-                <language>OCL</language>
-                <body>self.upperBound()->notEmpty() and self.lowerBound()->notEmpty() and M.upperBound()->notEmpty() and M.lowerBound()->notEmpty()</body>
-              </specification>
-            </ownedRule>
-            <ownedRule xmi:type="cmof:Constraint" xmi:id="Core-Constructs-MultiplicityElement-includesMultiplicity-spec" name="spec" constrainedElement="Core-Constructs-MultiplicityElement-includesMultiplicity" namespace="Core-Constructs-MultiplicityElement-includesMultiplicity">
-              <specification xmi:type="cmof:OpaqueExpression" xmi:id="Core-Constructs-MultiplicityElement-includesMultiplicity-spec-_specification">
-                <language>OCL</language>
-                <body>(self.lowerBound() &lt;= M.lowerBound()) and (self.upperBound() >= M.upperBound())</body>
-              </specification>
-            </ownedRule>
-            <ownedParameter xmi:type="cmof:Parameter" xmi:id="Core-Constructs-MultiplicityElement-includesMultiplicity-_ownedParameter.0" type="Core-PrimitiveTypes-Boolean" direction="return"/>
-            <ownedParameter xmi:type="cmof:Parameter" xmi:id="Core-Constructs-MultiplicityElement-includesMultiplicity-M" name="M" type="Core-Constructs-MultiplicityElement"/>
-          </ownedOperation>
-          <ownedOperation xmi:type="cmof:Operation" xmi:id="Core-Constructs-MultiplicityElement-includesCardinality" name="includesCardinality" bodyCondition="Core-Constructs-MultiplicityElement-includesCardinality-spec" class="Core-Constructs-MultiplicityElement" isQuery="true" precondition="Core-Constructs-MultiplicityElement-includesCardinality-_ownedRule.0">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-MultiplicityElement-includesCardinality-_ownedComment.0" annotatedElement="Core-Constructs-MultiplicityElement-includesCardinality">
-              <body>The query includesCardinality() checks whether the specified cardinality is valid for this multiplicity.</body>
-            </ownedComment>
-            <ownedRule xmi:type="cmof:Constraint" xmi:id="Core-Constructs-MultiplicityElement-includesCardinality-_ownedRule.0" constrainedElement="Core-Constructs-MultiplicityElement-includesCardinality" namespace="Core-Constructs-MultiplicityElement-includesCardinality">
-              <specification xmi:type="cmof:OpaqueExpression" xmi:id="Core-Constructs-MultiplicityElement-includesCardinality-_ownedRule.0-_specification">
-                <language>OCL</language>
-                <body>upperBound()->notEmpty() and lowerBound()->notEmpty()</body>
-              </specification>
-            </ownedRule>
-            <ownedRule xmi:type="cmof:Constraint" xmi:id="Core-Constructs-MultiplicityElement-includesCardinality-spec" name="spec" constrainedElement="Core-Constructs-MultiplicityElement-includesCardinality" namespace="Core-Constructs-MultiplicityElement-includesCardinality">
-              <specification xmi:type="cmof:OpaqueExpression" xmi:id="Core-Constructs-MultiplicityElement-includesCardinality-spec-_specification">
-                <language>OCL</language>
-                <body>(lowerBound() &lt;= C) and (upperBound() >= C)</body>
-              </specification>
-            </ownedRule>
-            <ownedParameter xmi:type="cmof:Parameter" xmi:id="Core-Constructs-MultiplicityElement-includesCardinality-_ownedParameter.0" type="Core-PrimitiveTypes-Boolean" direction="return"/>
-            <ownedParameter xmi:type="cmof:Parameter" xmi:id="Core-Constructs-MultiplicityElement-includesCardinality-C" name="C" type="Core-PrimitiveTypes-Integer"/>
-          </ownedOperation>
-          <ownedOperation xmi:type="cmof:Operation" xmi:id="Core-Constructs-MultiplicityElement-lowerBound" name="lowerBound" bodyCondition="Core-Constructs-MultiplicityElement-lowerBound-spec" class="Core-Constructs-MultiplicityElement" isQuery="true">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-MultiplicityElement-lowerBound-_ownedComment.0" annotatedElement="Core-Constructs-MultiplicityElement-lowerBound">
-              <body>The query lowerBound() returns the lower bound of the multiplicity as an integer.</body>
-            </ownedComment>
-            <ownedRule xmi:type="cmof:Constraint" xmi:id="Core-Constructs-MultiplicityElement-lowerBound-spec" name="spec" constrainedElement="Core-Constructs-MultiplicityElement-lowerBound" namespace="Core-Constructs-MultiplicityElement-lowerBound">
-              <specification xmi:type="cmof:OpaqueExpression" xmi:id="Core-Constructs-MultiplicityElement-lowerBound-spec-_specification">
-                <language>OCL</language>
-                <body>if lower->notEmpty() then lower else 1 endif</body>
-              </specification>
-            </ownedRule>
-            <ownedParameter xmi:type="cmof:Parameter" xmi:id="Core-Constructs-MultiplicityElement-lowerBound-_ownedParameter.0" type="Core-PrimitiveTypes-Integer" direction="return"/>
-          </ownedOperation>
-          <ownedOperation xmi:type="cmof:Operation" xmi:id="Core-Constructs-MultiplicityElement-upperBound" name="upperBound" bodyCondition="Core-Constructs-MultiplicityElement-upperBound-spec" class="Core-Constructs-MultiplicityElement" isQuery="true">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-MultiplicityElement-upperBound-_ownedComment.0" annotatedElement="Core-Constructs-MultiplicityElement-upperBound">
-              <body>The query upperBound() returns the upper bound of the multiplicity for a bounded multiplicity as an unlimited natural.</body>
-            </ownedComment>
-            <ownedRule xmi:type="cmof:Constraint" xmi:id="Core-Constructs-MultiplicityElement-upperBound-spec" name="spec" constrainedElement="Core-Constructs-MultiplicityElement-upperBound" namespace="Core-Constructs-MultiplicityElement-upperBound">
-              <specification xmi:type="cmof:OpaqueExpression" xmi:id="Core-Constructs-MultiplicityElement-upperBound-spec-_specification">
-                <language>OCL</language>
-                <body>if upper->notEmpty() then upper else 1 endif</body>
-              </specification>
-            </ownedRule>
-            <ownedParameter xmi:type="cmof:Parameter" xmi:id="Core-Constructs-MultiplicityElement-upperBound-_ownedParameter.0" type="Core-PrimitiveTypes-UnlimitedNatural" direction="return"/>
-          </ownedOperation>
-        </ownedMember>
         <ownedMember xmi:type="cmof:Class" xmi:id="Core-Constructs-Namespace" name="Namespace" isAbstract="true" superClass="Core-Constructs-NamedElement">
           <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-Namespace-_ownedComment.0" annotatedElement="Core-Constructs-Namespace">
             <body>A namespace is an element in a model that contains a set of named elements that can be identified by name.</body>
@@ -2440,7 +2194,7 @@ endif</body>
             </ownedComment>
           </ownedAttribute>
         </ownedMember>
-        <ownedMember xmi:type="cmof:Class" xmi:id="Core-Constructs-StructuralFeature" name="StructuralFeature" isAbstract="true" superClass="Core-Constructs-Feature Core-Constructs-TypedElement Core-Constructs-MultiplicityElement">
+        <ownedMember xmi:type="cmof:Class" xmi:id="Core-Constructs-StructuralFeature" name="StructuralFeature" isAbstract="true" superClass="Core-Constructs-Feature Core-Constructs-TypedElement">
           <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-StructuralFeature-_ownedComment.0" annotatedElement="Core-Constructs-StructuralFeature">
             <body>A structural feature is a typed feature of a classifier that specifies the structure of instances of the classifier.</body>
           </ownedComment>
@@ -3155,7 +2909,7 @@ forAll(i | op.ownedParameter[i].type.conformsTo(self.ownedParameter[i].type))&#x
             <ownedParameter xmi:type="cmof:Parameter" xmi:id="Core-Constructs-Operation-returnResult-_ownedParameter.0" type="Core-Constructs-Parameter" lower="0" upper="*" direction="return"/>
           </ownedOperation>
         </ownedMember>
-        <ownedMember xmi:type="cmof:Class" xmi:id="Core-Constructs-Parameter" name="Parameter" superClass="Core-Constructs-TypedElement Core-Constructs-MultiplicityElement">
+        <ownedMember xmi:type="cmof:Class" xmi:id="Core-Constructs-Parameter" name="Parameter" superClass="Core-Constructs-TypedElement">
           <ownedComment xmi:type="cmof:Comment" xmi:id="Core-Constructs-Parameter-_ownedComment.0" annotatedElement="Core-Constructs-Parameter">
             <body>A parameter is a specification of an argument used to pass information into or out of an invocation of a behavioral feature.</body>
           </ownedComment>
@@ -4023,12 +3777,12 @@ endif</body>
             <body>References the type of the ExtensionEnd. Note that this association restricts the possible types of an ExtensionEnd to only be Stereotypes.</body>
           </ownedComment>
         </ownedAttribute>
-        <ownedAttribute xmi:type="cmof:Property" xmi:id="Profiles-ExtensionEnd-lower" name="lower" lower="0" default="0" redefinedProperty="Core-Constructs-MultiplicityElement-lower">
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="Profiles-ExtensionEnd-lower" name="lower" lower="0" default="0">
           <ownedComment xmi:type="cmof:Comment" xmi:id="Profiles-ExtensionEnd-lower-_ownedComment.0" annotatedElement="Profiles-ExtensionEnd-lower">
             <body>This redefinition changes the default multiplicity of association ends, since model elements are usually extended by 0 or 1 instance of the extension stereotype.</body>
           </ownedComment>
         </ownedAttribute>
-        <ownedOperation xmi:type="cmof:Operation" xmi:id="Profiles-ExtensionEnd-lowerBound" name="lowerBound" bodyCondition="Profiles-ExtensionEnd-lowerBound-spec" class="Profiles-ExtensionEnd" isQuery="true" redefinedOperation="Core-Constructs-MultiplicityElement-lowerBound">
+        <ownedOperation xmi:type="cmof:Operation" xmi:id="Profiles-ExtensionEnd-lowerBound" name="lowerBound" bodyCondition="Profiles-ExtensionEnd-lowerBound-spec" class="Profiles-ExtensionEnd" isQuery="true">
           <ownedComment xmi:type="cmof:Comment" xmi:id="Profiles-ExtensionEnd-lowerBound-_ownedComment.0" annotatedElement="Profiles-ExtensionEnd-lowerBound">
             <body>The query lowerBound() returns the lower bound of the multiplicity as an Integer. This is a redefinition of the default&#xD;
 lower bound, which normally, for MultiplicityElements, evaluates to 1 if empty.</body>

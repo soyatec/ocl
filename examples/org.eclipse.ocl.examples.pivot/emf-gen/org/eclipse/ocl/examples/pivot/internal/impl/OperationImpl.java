@@ -17,7 +17,6 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.lang.reflect.InvocationTargetException;
-import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
@@ -61,7 +60,6 @@ import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.MultiplicityElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
@@ -840,14 +838,6 @@ public class OperationImpl
 			case PivotPackage.OPERATION__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case PivotPackage.OPERATION__IS_ORDERED:
-				return isOrdered();
-			case PivotPackage.OPERATION__IS_UNIQUE:
-				return isUnique();
-			case PivotPackage.OPERATION__LOWER:
-				return getLower();
-			case PivotPackage.OPERATION__UPPER:
-				return getUpper();
 			case PivotPackage.OPERATION__IS_REQUIRED:
 				return isRequired();
 			case PivotPackage.OPERATION__IMPLEMENTATION_CLASS:
@@ -917,18 +907,6 @@ public class OperationImpl
 				return;
 			case PivotPackage.OPERATION__TYPE:
 				setType((Type)newValue);
-				return;
-			case PivotPackage.OPERATION__IS_ORDERED:
-				setIsOrdered((Boolean)newValue);
-				return;
-			case PivotPackage.OPERATION__IS_UNIQUE:
-				setIsUnique((Boolean)newValue);
-				return;
-			case PivotPackage.OPERATION__LOWER:
-				setLower((BigInteger)newValue);
-				return;
-			case PivotPackage.OPERATION__UPPER:
-				setUpper((BigInteger)newValue);
 				return;
 			case PivotPackage.OPERATION__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
@@ -1007,18 +985,6 @@ public class OperationImpl
 			case PivotPackage.OPERATION__TYPE:
 				setType((Type)null);
 				return;
-			case PivotPackage.OPERATION__IS_ORDERED:
-				setIsOrdered(IS_ORDERED_EDEFAULT);
-				return;
-			case PivotPackage.OPERATION__IS_UNIQUE:
-				setIsUnique(IS_UNIQUE_EDEFAULT);
-				return;
-			case PivotPackage.OPERATION__LOWER:
-				setLower(LOWER_EDEFAULT);
-				return;
-			case PivotPackage.OPERATION__UPPER:
-				setUpper(UPPER_EDEFAULT);
-				return;
 			case PivotPackage.OPERATION__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
 				return;
@@ -1067,7 +1033,6 @@ public class OperationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("null")
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
@@ -1086,14 +1051,6 @@ public class OperationImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.OPERATION__TYPE:
 				return type != null;
-			case PivotPackage.OPERATION__IS_ORDERED:
-				return ((eFlags & IS_ORDERED_EFLAG) != 0) != IS_ORDERED_EDEFAULT;
-			case PivotPackage.OPERATION__IS_UNIQUE:
-				return ((eFlags & IS_UNIQUE_EFLAG) != 0) != IS_UNIQUE_EDEFAULT;
-			case PivotPackage.OPERATION__LOWER:
-				return LOWER_EDEFAULT == null ? lower != null : !LOWER_EDEFAULT.equals(lower);
-			case PivotPackage.OPERATION__UPPER:
-				return UPPER_EDEFAULT == null ? upper != null : !UPPER_EDEFAULT.equals(upper);
 			case PivotPackage.OPERATION__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.OPERATION__IMPLEMENTATION_CLASS:
@@ -1250,16 +1207,6 @@ public class OperationImpl
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
 			case PivotPackage.OPERATION___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP:
 				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case PivotPackage.OPERATION___LOWER_BOUND:
-				return lowerBound();
-			case PivotPackage.OPERATION___UPPER_BOUND:
-				return upperBound();
-			case PivotPackage.OPERATION___IS_MULTIVALUED:
-				return isMultivalued();
-			case PivotPackage.OPERATION___INCLUDES_CARDINALITY__BIGINTEGER:
-				return includesCardinality((BigInteger)arguments.get(0));
-			case PivotPackage.OPERATION___INCLUDES_MULTIPLICITY__MULTIPLICITYELEMENT:
-				return includesMultiplicity((MultiplicityElement)arguments.get(0));
 			case PivotPackage.OPERATION___COMPATIBLE_BODY__VALUESPECIFICATION:
 				return CompatibleBody((ValueSpecification)arguments.get(0));
 			case PivotPackage.OPERATION___MAKE_PARAMETER:

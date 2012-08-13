@@ -78,6 +78,7 @@ import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.UnspecifiedType;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -611,6 +612,10 @@ public class PivotUtil extends DomainUtil
 			}
 		}
 		return type;
+	}
+
+	public static @NonNull Type getBehavioralType(@NonNull TypedElement element) {
+		return PivotUtil.getBehavioralType(DomainUtil.nonNullState(element.getType()));
 	}
 
 	public static String getBody(OpaqueExpression specification) {

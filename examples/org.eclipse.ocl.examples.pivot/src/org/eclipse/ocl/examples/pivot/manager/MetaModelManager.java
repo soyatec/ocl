@@ -94,7 +94,6 @@ import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.UnspecifiedType;
 import org.eclipse.ocl.examples.pivot.VoidType;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
@@ -665,8 +664,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 				candidateConformsToReference = false;
 			}
 			else {
-				Type referenceType = getTypeWithMultiplicity(referenceParameter);
-				Type candidateType = getTypeWithMultiplicity(candidateParameter);
+				Type referenceType = PivotUtil.getBehavioralType(referenceParameter);
+				Type candidateType = PivotUtil.getBehavioralType(candidateParameter);
 				Type specializedReferenceType = getSpecializedType(referenceType, referenceBindings);
 				Type specializedCandidateType = getSpecializedType(candidateType, candidateBindings);
 				if (referenceType != candidateType) {
@@ -2195,37 +2194,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return packageManager.getTypeServer(pivotType);
 	}
 
-	public @NonNull Type getTypeWithMultiplicity(@NonNull TypedMultiplicityElement element) {
-		Type elementType = PivotUtil.getBehavioralType(DomainUtil.nonNullState(element.getType()));
-		int upperBound = element.getUpper().intValue();
-		boolean isMany = (upperBound < 0) || (1 < upperBound);
-		if (!isMany) {
-			return elementType;							// FIXME this is all that is needed after cleanup.
-		}
-		boolean isOrdered = element.isOrdered();
-		boolean isUnique = element.isUnique();
-		CollectionType collectionType;
-		if (isOrdered) {
-			if (isUnique) {
-				collectionType = getOrderedSetType();
-			}
-			else {
-				collectionType = getSequenceType();
-			}
-		}
-		else {
-			if (isUnique) {
-				collectionType = getSetType();
-			}
-			else {
-				collectionType = getBagType();
-			}
-		}
-		assert elementType != null;
-//		@SuppressWarnings("null") @NonNull List<Type> singletonList = Collections.singletonList(elementType);
-		return getCollectionType(collectionType, elementType, element.getLower(), element.getUpper());
-	}
-
 	public @NonNull ValueFactory getValueFactory() {
 		ValueFactory valueFactory2 = valueFactory;
 		if (valueFactory2 == null) {
@@ -2275,7 +2243,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		if (opposite != null) {
 			opposite.setOpposite(null);
 			thisProperty.setOpposite(null);
-			opposite.setUpper(BigInteger.valueOf(-1));
+//FIXME			opposite.setUpper(BigInteger.valueOf(-1));
 			return;
 		}
 		// If there is more than one opposite-less Property to the same type don't create an Ambiguity.
@@ -2289,13 +2257,17 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		opposite = PivotFactory.eINSTANCE.createProperty();
 		opposite.setImplicit(true);
 		opposite.setName(name);
-		opposite.setType(thisType);
-		opposite.setLower(BigInteger.valueOf(0));
+//		opposite.setType(thisType);
+//		opposite.setLower(BigInteger.valueOf(0));
 		if (thisProperty.isComposite()) {
-			opposite.setUpper(BigInteger.valueOf(1));
+//			opposite.setUpper(BigInteger.valueOf(1));
+			opposite.setType(thisType);
+			opposite.setIsRequired(false);
 		}
 		else {
-			opposite.setUpper(BigInteger.valueOf(-1));
+//			opposite.setUpper(BigInteger.valueOf(-1));
+			opposite.setType(getSetType(thisType, null, null));
+			opposite.setIsRequired(true);
 		}
 		thatType.getOwnedAttribute().add(opposite);		// WIP moved for debugging
 		opposite.setOpposite(thisProperty);
@@ -2674,7 +2646,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 							typesConform = false;
 							break;
 						}
-						Type parameterType = getTypeWithMultiplicity(pivotParameter);
+						Type parameterType = PivotUtil.getBehavioralType(pivotParameter);
 						if (parameterType instanceof SelfType) {
 							parameterType = pivotOperation.getOwningType();
 						}

@@ -199,7 +199,7 @@ public class TupleTypeManager
 		Map<String, Type> resolutions =  null;
 		for (Property property : specializedTupleType.getOwnedAttribute()) {
 			if (property != null) {
-				Type propertyType = metaModelManager.getTypeWithMultiplicity(property);
+				Type propertyType = PivotUtil.getBehavioralType(property);
 				Type resolvedPropertyType = metaModelManager.getSpecializedType(propertyType, usageBindings);
 				if (resolvedPropertyType != propertyType) {
 					if (resolutions == null) {

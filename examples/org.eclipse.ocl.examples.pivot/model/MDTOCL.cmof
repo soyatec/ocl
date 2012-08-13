@@ -170,12 +170,11 @@
     <ownedMember xmi:type="cmof:Package" xmi:id="_zNR5QMilEd-sJIf4tYBt-g" name="MDT_OCL_TypedMultiplicity">
       <ownedMember xmi:type="cmof:PrimitiveType" xmi:id="_iauzUOLYEeGCOa0Md3lQkQ" name="Boolean"/>
       <ownedMember xmi:type="cmof:Class" xmi:id="_7WjzQB51EeCxNNh5B6u04A" name="Feature" isAbstract="true" superClass="_9HMksMilEd-sJIf4tYBt-g"/>
-      <ownedMember xmi:type="cmof:Class" xmi:id="_1tWpUMilEd-sJIf4tYBt-g" name="MultiplicityElement" isAbstract="true">
-        <ownedAttribute xmi:type="cmof:Property" xmi:id="_n1w4oOLYEeGCOa0Md3lQkQ" name="isRequired" type="_iauzUOLYEeGCOa0Md3lQkQ" default="true"/>
-      </ownedMember>
       <ownedMember xmi:type="cmof:Class" xmi:id="_4Yv4kMilEd-sJIf4tYBt-g" name="Parameter" superClass="_9HMksMilEd-sJIf4tYBt-g"/>
       <ownedMember xmi:type="cmof:Class" xmi:id="_4oqj4MilEd-sJIf4tYBt-g" name="TypedElement" isAbstract="true"/>
-      <ownedMember xmi:type="cmof:Class" xmi:id="_9HMksMilEd-sJIf4tYBt-g" name="TypedMultiplicityElement" isAbstract="true" superClass="_4oqj4MilEd-sJIf4tYBt-g _1tWpUMilEd-sJIf4tYBt-g"/>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_9HMksMilEd-sJIf4tYBt-g" name="TypedMultiplicityElement" isAbstract="true" superClass="_4oqj4MilEd-sJIf4tYBt-g">
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_n1w4oOLYEeGCOa0Md3lQkQ" name="isRequired" type="_iauzUOLYEeGCOa0Md3lQkQ" default="true"/>
+      </ownedMember>
     </ownedMember>
     <ownedMember xmi:type="cmof:Package" xmi:id="_tG-HYMeqEd-sJIf4tYBt-g" name="MDT_OCL_Visiting">
       <ownedMember xmi:type="cmof:Class" xmi:id="_xBkUsMeqEd-sJIf4tYBt-g" clientDependency="#_lMyWQM-FEd-OX-Zde0V6vA" name="Element" isAbstract="true">

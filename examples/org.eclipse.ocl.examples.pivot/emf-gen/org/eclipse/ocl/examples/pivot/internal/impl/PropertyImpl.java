@@ -17,7 +17,6 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.lang.reflect.InvocationTargetException;
-import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Map;
 
@@ -58,7 +57,6 @@ import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.AssociationClass;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
-import org.eclipse.ocl.examples.pivot.MultiplicityElement;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
@@ -135,7 +133,7 @@ public class PropertyImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_READ_ONLY_EFLAG = 1 << 12;
+	protected static final int IS_READ_ONLY_EFLAG = 1 << 10;
 
 	/**
 	 * The default value of the '{@link #getDefault() <em>Default</em>}' attribute.
@@ -175,7 +173,7 @@ public class PropertyImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_COMPOSITE_EFLAG = 1 << 13;
+	protected static final int IS_COMPOSITE_EFLAG = 1 << 11;
 
 	/**
 	 * The default value of the '{@link #isDerived() <em>Is Derived</em>}' attribute.
@@ -195,7 +193,7 @@ public class PropertyImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_DERIVED_EFLAG = 1 << 14;
+	protected static final int IS_DERIVED_EFLAG = 1 << 12;
 
 	/**
 	 * The cached value of the '{@link #getOpposite() <em>Opposite</em>}' reference.
@@ -235,7 +233,7 @@ public class PropertyImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IMPLICIT_EFLAG = 1 << 15;
+	protected static final int IMPLICIT_EFLAG = 1 << 13;
 
 	/**
 	 * The default value of the '{@link #isID() <em>Is ID</em>}' attribute.
@@ -255,7 +253,7 @@ public class PropertyImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_ID_EFLAG = 1 << 16;
+	protected static final int IS_ID_EFLAG = 1 << 14;
 
 	/**
 	 * The cached value of the '{@link #getKeys() <em>Keys</em>}' reference list.
@@ -285,7 +283,7 @@ public class PropertyImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_RESOLVE_PROXIES_EFLAG = 1 << 17;
+	protected static final int IS_RESOLVE_PROXIES_EFLAG = 1 << 15;
 
 	/**
 	 * The default value of the '{@link #isTransient() <em>Is Transient</em>}' attribute.
@@ -305,7 +303,7 @@ public class PropertyImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_TRANSIENT_EFLAG = 1 << 18;
+	protected static final int IS_TRANSIENT_EFLAG = 1 << 16;
 
 	/**
 	 * The default value of the '{@link #isUnsettable() <em>Is Unsettable</em>}' attribute.
@@ -325,7 +323,7 @@ public class PropertyImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_UNSETTABLE_EFLAG = 1 << 19;
+	protected static final int IS_UNSETTABLE_EFLAG = 1 << 17;
 
 	/**
 	 * The default value of the '{@link #isVolatile() <em>Is Volatile</em>}' attribute.
@@ -345,7 +343,7 @@ public class PropertyImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_VOLATILE_EFLAG = 1 << 20;
+	protected static final int IS_VOLATILE_EFLAG = 1 << 18;
 
 	/**
 	 * The cached value of the '{@link #getRedefinedProperty() <em>Redefined Property</em>}' reference list.
@@ -1177,14 +1175,6 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case PivotPackage.PROPERTY__IS_ORDERED:
-				return isOrdered();
-			case PivotPackage.PROPERTY__IS_UNIQUE:
-				return isUnique();
-			case PivotPackage.PROPERTY__LOWER:
-				return getLower();
-			case PivotPackage.PROPERTY__UPPER:
-				return getUpper();
 			case PivotPackage.PROPERTY__IS_REQUIRED:
 				return isRequired();
 			case PivotPackage.PROPERTY__IMPLEMENTATION_CLASS:
@@ -1271,18 +1261,6 @@ public class PropertyImpl
 				return;
 			case PivotPackage.PROPERTY__TYPE:
 				setType((Type)newValue);
-				return;
-			case PivotPackage.PROPERTY__IS_ORDERED:
-				setIsOrdered((Boolean)newValue);
-				return;
-			case PivotPackage.PROPERTY__IS_UNIQUE:
-				setIsUnique((Boolean)newValue);
-				return;
-			case PivotPackage.PROPERTY__LOWER:
-				setLower((BigInteger)newValue);
-				return;
-			case PivotPackage.PROPERTY__UPPER:
-				setUpper((BigInteger)newValue);
 				return;
 			case PivotPackage.PROPERTY__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
@@ -1384,18 +1362,6 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__TYPE:
 				setType((Type)null);
 				return;
-			case PivotPackage.PROPERTY__IS_ORDERED:
-				setIsOrdered(IS_ORDERED_EDEFAULT);
-				return;
-			case PivotPackage.PROPERTY__IS_UNIQUE:
-				setIsUnique(IS_UNIQUE_EDEFAULT);
-				return;
-			case PivotPackage.PROPERTY__LOWER:
-				setLower(LOWER_EDEFAULT);
-				return;
-			case PivotPackage.PROPERTY__UPPER:
-				setUpper(UPPER_EDEFAULT);
-				return;
 			case PivotPackage.PROPERTY__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
 				return;
@@ -1468,7 +1434,6 @@ public class PropertyImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("null")
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
@@ -1487,14 +1452,6 @@ public class PropertyImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.PROPERTY__TYPE:
 				return type != null;
-			case PivotPackage.PROPERTY__IS_ORDERED:
-				return ((eFlags & IS_ORDERED_EFLAG) != 0) != IS_ORDERED_EDEFAULT;
-			case PivotPackage.PROPERTY__IS_UNIQUE:
-				return ((eFlags & IS_UNIQUE_EFLAG) != 0) != IS_UNIQUE_EDEFAULT;
-			case PivotPackage.PROPERTY__LOWER:
-				return LOWER_EDEFAULT == null ? lower != null : !LOWER_EDEFAULT.equals(lower);
-			case PivotPackage.PROPERTY__UPPER:
-				return UPPER_EDEFAULT == null ? upper != null : !UPPER_EDEFAULT.equals(upper);
 			case PivotPackage.PROPERTY__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.PROPERTY__IMPLEMENTATION_CLASS:
@@ -1617,16 +1574,6 @@ public class PropertyImpl
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
 			case PivotPackage.PROPERTY___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP:
 				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case PivotPackage.PROPERTY___LOWER_BOUND:
-				return lowerBound();
-			case PivotPackage.PROPERTY___UPPER_BOUND:
-				return upperBound();
-			case PivotPackage.PROPERTY___IS_MULTIVALUED:
-				return isMultivalued();
-			case PivotPackage.PROPERTY___INCLUDES_CARDINALITY__BIGINTEGER:
-				return includesCardinality((BigInteger)arguments.get(0));
-			case PivotPackage.PROPERTY___INCLUDES_MULTIPLICITY__MULTIPLICITYELEMENT:
-				return includesMultiplicity((MultiplicityElement)arguments.get(0));
 			case PivotPackage.PROPERTY___COMPATIBLE_BODY__VALUESPECIFICATION:
 				return CompatibleBody((ValueSpecification)arguments.get(0));
 			case PivotPackage.PROPERTY___MAKE_PARAMETER:

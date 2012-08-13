@@ -65,7 +65,6 @@ import org.eclipse.ocl.examples.pivot.LiteralExp;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.MessageExp;
 import org.eclipse.ocl.examples.pivot.MessageType;
-import org.eclipse.ocl.examples.pivot.MultiplicityElement;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.NavigationCallExp;
@@ -415,11 +414,6 @@ public class PivotAdapterFactory
 			public Adapter caseMorePivotable(MorePivotable object)
 			{
 				return createMorePivotableAdapter();
-			}
-			@Override
-			public Adapter caseMultiplicityElement(MultiplicityElement object)
-			{
-				return createMultiplicityElementAdapter();
 			}
 			@Override
 			public Adapter caseNameable(Nameable object)
@@ -1870,20 +1864,6 @@ public class PivotAdapterFactory
 	 * @generated
 	 */
 	public Adapter createTypedElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.MultiplicityElement <em>Multiplicity Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.MultiplicityElement
-	 * @generated
-	 */
-	public Adapter createMultiplicityElementAdapter() {
 		return null;
 	}
 

@@ -78,7 +78,6 @@ import org.eclipse.ocl.examples.pivot.LiteralExp;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.MessageExp;
 import org.eclipse.ocl.examples.pivot.MessageType;
-import org.eclipse.ocl.examples.pivot.MultiplicityElement;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.NavigationCallExp;
@@ -716,13 +715,6 @@ public class PivotPackageImpl
 	 * @generated
 	 */
 	private EClass typedElementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass multiplicityElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -3672,108 +3664,18 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getMultiplicityElement() {
-		return multiplicityElementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getMultiplicityElement_IsOrdered() {
-		return (EAttribute)multiplicityElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getMultiplicityElement_IsUnique() {
-		return (EAttribute)multiplicityElementEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getMultiplicityElement_Lower() {
-		return (EAttribute)multiplicityElementEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getMultiplicityElement_Upper() {
-		return (EAttribute)multiplicityElementEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getMultiplicityElement_IsRequired()
-	{
-		return (EAttribute)multiplicityElementEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getMultiplicityElement__LowerBound() {
-		return multiplicityElementEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getMultiplicityElement__UpperBound() {
-		return multiplicityElementEClass.getEOperations().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getMultiplicityElement__IsMultivalued() {
-		return multiplicityElementEClass.getEOperations().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getMultiplicityElement__IncludesCardinality__BigInteger() {
-		return multiplicityElementEClass.getEOperations().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getMultiplicityElement__IncludesMultiplicity__MultiplicityElement() {
-		return multiplicityElementEClass.getEOperations().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getTypedMultiplicityElement() {
 		return typedMultiplicityElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTypedMultiplicityElement_IsRequired()
+	{
+		return (EAttribute)typedMultiplicityElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -4739,18 +4641,6 @@ public class PivotPackageImpl
 
 		morePivotableEClass = createEClass(MORE_PIVOTABLE);
 
-		multiplicityElementEClass = createEClass(MULTIPLICITY_ELEMENT);
-		createEAttribute(multiplicityElementEClass, MULTIPLICITY_ELEMENT__IS_ORDERED);
-		createEAttribute(multiplicityElementEClass, MULTIPLICITY_ELEMENT__IS_UNIQUE);
-		createEAttribute(multiplicityElementEClass, MULTIPLICITY_ELEMENT__LOWER);
-		createEAttribute(multiplicityElementEClass, MULTIPLICITY_ELEMENT__UPPER);
-		createEAttribute(multiplicityElementEClass, MULTIPLICITY_ELEMENT__IS_REQUIRED);
-		createEOperation(multiplicityElementEClass, MULTIPLICITY_ELEMENT___LOWER_BOUND);
-		createEOperation(multiplicityElementEClass, MULTIPLICITY_ELEMENT___UPPER_BOUND);
-		createEOperation(multiplicityElementEClass, MULTIPLICITY_ELEMENT___IS_MULTIVALUED);
-		createEOperation(multiplicityElementEClass, MULTIPLICITY_ELEMENT___INCLUDES_CARDINALITY__BIGINTEGER);
-		createEOperation(multiplicityElementEClass, MULTIPLICITY_ELEMENT___INCLUDES_MULTIPLICITY__MULTIPLICITYELEMENT);
-
 		nameableEClass = createEClass(NAMEABLE);
 
 		namedElementEClass = createEClass(NAMED_ELEMENT);
@@ -4940,6 +4830,7 @@ public class PivotPackageImpl
 		createEReference(typedElementEClass, TYPED_ELEMENT__TYPE);
 
 		typedMultiplicityElementEClass = createEClass(TYPED_MULTIPLICITY_ELEMENT);
+		createEAttribute(typedMultiplicityElementEClass, TYPED_MULTIPLICITY_ELEMENT__IS_REQUIRED);
 		createEOperation(typedMultiplicityElementEClass, TYPED_MULTIPLICITY_ELEMENT___COMPATIBLE_BODY__VALUESPECIFICATION);
 		createEOperation(typedMultiplicityElementEClass, TYPED_MULTIPLICITY_ELEMENT___MAKE_PARAMETER);
 
@@ -5071,7 +4962,6 @@ public class PivotPackageImpl
 		loopExpEClass.getESuperTypes().add(this.getCallExp());
 		messageExpEClass.getESuperTypes().add(this.getOCLExpression());
 		messageTypeEClass.getESuperTypes().add(this.getType());
-		multiplicityElementEClass.getESuperTypes().add(this.getElement());
 		namedElementEClass.getESuperTypes().add(this.getElement());
 		namedElementEClass.getESuperTypes().add(this.getNameable());
 		namespaceEClass.getESuperTypes().add(this.getNamedElement());
@@ -5126,7 +5016,6 @@ public class PivotPackageImpl
 		typeTemplateParameterEClass.getESuperTypes().add(this.getTemplateParameter());
 		typedElementEClass.getESuperTypes().add(this.getNamedElement());
 		typedMultiplicityElementEClass.getESuperTypes().add(this.getTypedElement());
-		typedMultiplicityElementEClass.getESuperTypes().add(this.getMultiplicityElement());
 		unlimitedNaturalLiteralExpEClass.getESuperTypes().add(this.getNumericLiteralExp());
 		unspecifiedTypeEClass.getESuperTypes().add(this.getClass_());
 		unspecifiedValueExpEClass.getESuperTypes().add(this.getOCLExpression());
@@ -5773,25 +5662,6 @@ public class PivotPackageImpl
 
 		initEClass(morePivotableEClass, MorePivotable.class, "MorePivotable", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-		initEClass(multiplicityElementEClass, MultiplicityElement.class, "MultiplicityElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getMultiplicityElement_IsOrdered(), this.getBoolean(), "isOrdered", "false", 1, 1, MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
-		initEAttribute(getMultiplicityElement_IsUnique(), this.getBoolean(), "isUnique", "true", 1, 1, MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
-		initEAttribute(getMultiplicityElement_Lower(), this.getInteger(), "lower", "1", 0, 1, MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
-		initEAttribute(getMultiplicityElement_Upper(), this.getUnlimitedNatural(), "upper", "1", 0, 1, MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
-		initEAttribute(getMultiplicityElement_IsRequired(), this.getBoolean(), "isRequired", "true", 1, 1, MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
-
-		initEOperation(getMultiplicityElement__LowerBound(), this.getInteger(), "lowerBound", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-
-		initEOperation(getMultiplicityElement__UpperBound(), this.getUnlimitedNatural(), "upperBound", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-
-		initEOperation(getMultiplicityElement__IsMultivalued(), this.getBoolean(), "isMultivalued", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-
-		op = initEOperation(getMultiplicityElement__IncludesCardinality__BigInteger(), this.getBoolean(), "includesCardinality", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, this.getInteger(), "C", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-
-		op = initEOperation(getMultiplicityElement__IncludesMultiplicity__MultiplicityElement(), this.getBoolean(), "includesMultiplicity", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, this.getMultiplicityElement(), "M", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-
 		initEClass(nameableEClass, Nameable.class, "Nameable", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -6024,6 +5894,7 @@ public class PivotPackageImpl
 		initEReference(getTypedElement_Type(), this.getType(), null, "type", null, 0, 1, TypedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(typedMultiplicityElementEClass, TypedMultiplicityElement.class, "TypedMultiplicityElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(getTypedMultiplicityElement_IsRequired(), this.getBoolean(), "isRequired", "true", 1, 1, TypedMultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
 		op = initEOperation(getTypedMultiplicityElement__CompatibleBody__ValueSpecification(), this.getBoolean(), "CompatibleBody", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getValueSpecification(), "bodySpecification", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
@@ -6119,7 +5990,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																																																																																																																																																																																																																																							
+		   });																																																																																																																																																																																																																																																																																													
 	}
 
 	/**
@@ -6148,7 +6019,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																												
+		   });																																																																																	
 		addAnnotation
 		  (operationEClass, 
 		   source, 
@@ -6172,7 +6043,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																					
+		   });																						
 	}
 
 	/**
@@ -6183,7 +6054,7 @@ public class PivotPackageImpl
 	 */
 	protected void createSubsetsAnnotations()
 	{
-		String source = "subsets"; //$NON-NLS-1$																																																																																																																																																																																																							
+		String source = "subsets"; //$NON-NLS-1$																																																																																																																																																																																												
 		addAnnotation
 		  (getParameterableElement_OwningTemplateParameter(), 
 		   source, 
@@ -6233,6 +6104,6 @@ public class PivotPackageImpl
 		   new URI[] 
 		   {
 			 URI.createURI(eNS_URI).appendFragment("//TemplateSignature/parameter") //$NON-NLS-1$
-		   });																																									
+		   });																																										
 	}
 } //PivotPackageImpl

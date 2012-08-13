@@ -27,13 +27,13 @@ import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Detail;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.MultiplicityElement;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
+import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS;
@@ -350,18 +350,15 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 			context.handleVisitNamedElement(csTypedElement, pivotElement);
 			TypedRefCS ownedType = csTypedElement.getOwnedType();
 			Type pivotType = null;
-			if ((ownedType != null) && (pivotElement instanceof MultiplicityElement)) {
+			if ((ownedType != null) && (pivotElement instanceof TypedMultiplicityElement)) {
 				pivotType = PivotUtil.getPivot(Type.class, ownedType);
 				int lower = ElementUtil.getLower(csTypedElement);
 				int upper = ElementUtil.getUpper(csTypedElement);
 				if (upper == 1) {
-					((MultiplicityElement)pivotElement).setIsRequired(lower == 1);
+					((TypedMultiplicityElement)pivotElement).setIsRequired(lower == 1);
 				}
 				else {
-//					boolean isOrdered = ElementUtil.isOrdered(csTypedElement);
-//					boolean isUnique = ElementUtil.isUnique(csTypedElement);
-//					pivotType = metaModelManager.getCollectionType(isOrdered, isUnique, pivotType, BigInteger.valueOf(lower), BigInteger.valueOf(upper));
-					((MultiplicityElement)pivotElement).setIsRequired(true);
+					((TypedMultiplicityElement)pivotElement).setIsRequired(true);
 				}
 			}
 			if (pivotType == null) {

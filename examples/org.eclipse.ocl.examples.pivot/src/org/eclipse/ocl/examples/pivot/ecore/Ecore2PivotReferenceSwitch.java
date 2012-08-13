@@ -159,20 +159,20 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 					Type localType = PivotUtil.getOwningType(pivotElement);
 					oppositeProperty.setType(localType);
 					String uniqueValue = details.get(PROPERTY_OPPOSITE_ROLE_UNIQUE_KEY);
-					if (uniqueValue != null) {
-						oppositeProperty.setIsUnique(Boolean.valueOf(uniqueValue));
-					}
 					String orderedValue = details.get(PROPERTY_OPPOSITE_ROLE_ORDERED_KEY);
-					if (orderedValue != null) {
-						oppositeProperty.setIsOrdered(Boolean.valueOf(orderedValue));
-					}
 					String lowerValue = details.get(PROPERTY_OPPOSITE_ROLE_LOWER_KEY);
-					if (lowerValue != null) {
-						oppositeProperty.setLower(new BigInteger(lowerValue));
-					}
 					String upperValue = details.get(PROPERTY_OPPOSITE_ROLE_UPPER_KEY);
-					if (upperValue != null) {
-						oppositeProperty.setUpper(new BigInteger(upperValue));
+					boolean isOrdered = orderedValue != null ? Boolean.valueOf(orderedValue) : false;
+					boolean isUnique = uniqueValue != null ? Boolean.valueOf(uniqueValue) : true;
+					long lower = lowerValue != null ? Long.parseLong(lowerValue) : 1;
+					long upper = upperValue != null ? Long.parseLong(upperValue) : 1;
+					if (upper != 1) {
+						oppositeProperty.setType(metaModelManager.getCollectionType(isOrdered, isUnique, localType, BigInteger.valueOf(lower), BigInteger.valueOf(upper)));
+						oppositeProperty.setIsRequired(true);
+					}
+					else {
+						oppositeProperty.setType(localType);
+						oppositeProperty.setIsRequired(lower == 1);
 					}
 					remoteType.getOwnedAttribute().add(oppositeProperty);
 					oppositeProperty.setOpposite(pivotElement);

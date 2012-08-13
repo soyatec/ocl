@@ -104,7 +104,7 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 						if (pType == null) {
 							return false;
 						}
-						Type candidateType = metaModelManager.getTypeWithMultiplicity(candidateParameter);
+						Type candidateType = PivotUtil.getBehavioralType(candidateParameter);
 						if (candidateType instanceof SelfType) {
 							candidateType = candidateOperation.getOwningType();
 						}

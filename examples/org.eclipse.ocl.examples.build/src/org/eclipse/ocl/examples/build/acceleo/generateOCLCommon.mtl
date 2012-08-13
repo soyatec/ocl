@@ -168,56 +168,24 @@ protected void installIterations() {
 	ownedIterations = [type.getSymbolName()/].getOwnedOperation();
 [for (iteration : Iteration | type.ownedOperation->intersection(allIterations)->filter(Iteration)->sortedBy(getMoniker()))]
 	ownedIterations.add(iteration = [iteration.getSymbolName()/]);
-[if (iteration.lower <> 1)]
-	iteration.setLower(BigInteger.valueOf([iteration.lower/]));
-[/if][if (iteration.upper <> 1)]
-	iteration.setUpper(BigInteger.valueOf([iteration.upper/]));
-[/if][if (iteration.isOrdered)]
-	iteration.setIsOrdered(true);
-[/if][if (not iteration.isUnique)]
-	iteration.setIsUnique(false);
-[/if][if (iteration.isStatic)]
+[if (iteration.isStatic)]
 	iteration.setIsStatic(true);
 [/if]
 [if (iteration.ownedIterator->notEmpty())]
 	ownedParameters = iteration.getOwnedIterator();
 [for (parameter : Parameter | iteration.ownedIterator)]
 	ownedParameters.add(parameter = createParameter("[parameter.name/]", [parameter.type.getSymbolName()/]));
-[if (parameter.lower <> 1)]
-	parameter.setLower(BigInteger.valueOf([parameter.lower/]));
-[/if][if (parameter.upper <> 1)]
-	parameter.setUpper(BigInteger.valueOf([parameter.upper/]));
-[/if][if (parameter.isOrdered)]
-	parameter.setIsOrdered(true);
-[/if][if (not parameter.isUnique)]
-	parameter.setIsUnique(false);
-[/if][/for][/if]
+[/for][/if]
 [if (iteration.ownedAccumulator->notEmpty())]
 	ownedParameters = iteration.getOwnedAccumulator();
 [for (parameter : Parameter | iteration.ownedAccumulator)]
 	ownedParameters.add(parameter = createParameter("[parameter.name/]", [parameter.type.getSymbolName()/]));
-[if (parameter.lower <> 1)]
-	parameter.setLower(BigInteger.valueOf([parameter.lower/]));
-[/if][if (parameter.upper <> 1)]
-	parameter.setUpper(BigInteger.valueOf([parameter.upper/]));
-[/if][if (parameter.isOrdered)]
-	parameter.setIsOrdered(true);
-[/if][if (not parameter.isUnique)]
-	parameter.setIsUnique(false);
-[/if][/for][/if]
+[/for][/if]
 [if (iteration.ownedParameter->notEmpty())]
 	ownedParameters = iteration.getOwnedParameter();
 [for (parameter : Parameter | iteration.ownedParameter)]
 	ownedParameters.add(parameter = createParameter("[parameter.name/]", [parameter.type.getSymbolName()/]));
-[if (parameter.lower <> 1)]
-	parameter.setLower(BigInteger.valueOf([parameter.lower/]));
-[/if][if (parameter.upper <> 1)]
-	parameter.setUpper(BigInteger.valueOf([parameter.upper/]));
-[/if][if (parameter.isOrdered)]
-	parameter.setIsOrdered(true);
-[/if][if (not parameter.isUnique)]
-	parameter.setIsUnique(false);
-[/if][/for][/if]
+[/for][/if]
 [/for]
 [/for]
 [/let]
@@ -281,30 +249,14 @@ protected void installOperations() {
 	ownedOperations = [type.getSymbolName()/].getOwnedOperation();
 [for (operation : Operation | type.ownedOperation->intersection(allOperations)->sortedBy(getMoniker()))]
 	ownedOperations.add(operation = [operation.getSymbolName()/]);
-[if (operation.lower <> 1)]
-	operation.setLower(BigInteger.valueOf([operation.lower/]));
-[/if][if (operation.upper <> 1)]
-	operation.setUpper(BigInteger.valueOf([operation.upper/]));
-[/if][if (operation.isOrdered)]
-	operation.setIsOrdered(true);
-[/if][if (not operation.isUnique)]
-	operation.setIsUnique(false);
-[/if][if (operation.isStatic)]
+[if (operation.isStatic)]
 	operation.setIsStatic(true);
 [/if]
 [if (operation.ownedParameter->notEmpty())]
 	ownedParameters = operation.getOwnedParameter();
 [for (parameter : Parameter | operation.ownedParameter)]
 	ownedParameters.add(parameter = createParameter("[parameter.name/]", [parameter.type.getSymbolName()/]));
-[if (parameter.lower <> 1)]
-	parameter.setLower(BigInteger.valueOf([parameter.lower/]));
-[/if][if (parameter.upper <> 1)]
-	parameter.setUpper(BigInteger.valueOf([parameter.upper/]));
-[/if][if (parameter.isOrdered)]
-	parameter.setIsOrdered(true);
-[/if][if (not parameter.isUnique)]
-	parameter.setIsUnique(false);
-[/if][/for][/if]
+[/for][/if]
 [/for]
 [/for]
 [/let]
@@ -396,15 +348,7 @@ protected void installProperties() {
 	ownedProperties = [type.getSymbolName()/].getOwnedAttribute();
 [for (property : Property | type.ownedAttribute->intersection(allProperties)->sortedBy(getMoniker()))]
 	ownedProperties.add(property = [property.getSymbolName()/]);
-[if (property.lower <> 1)]
-	property.setLower(BigInteger.valueOf([property.lower/]));
-[/if][if (property.upper <> 1)]
-	property.setUpper(BigInteger.valueOf([property.upper/]));
-[/if][if (property.isOrdered)]
-	property.setIsOrdered(true);
-[/if][if (not property.isUnique)]
-	property.setIsUnique(false);
-[/if][if (property.isComposite)]
+[if (property.isComposite)]
 	property.setIsComposite(true);
 [/if][if (property.isDerived)]
 	property.setIsDerived(true);

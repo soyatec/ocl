@@ -232,10 +232,6 @@ public abstract class AbstractExtendingVisitor<R, C>
 		return visitType(object);
 	}
 
-	public @Nullable R visitMultiplicityElement(@NonNull org.eclipse.ocl.examples.pivot.MultiplicityElement object) {
-		return visitElement(object);
-	}
-
 	public @Nullable R visitNamedElement(@NonNull org.eclipse.ocl.examples.pivot.NamedElement object) {
 		return visitElement(object);
 	}

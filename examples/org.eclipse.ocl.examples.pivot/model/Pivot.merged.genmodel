@@ -387,45 +387,6 @@
       </genFeatures>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass" image="false">
-      <ecoreClass href="Pivot.ecore#//MultiplicityElement"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="Pivot.ecore#//MultiplicityElement/isOrdered"/>
-      </genFeatures>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="Pivot.ecore#//MultiplicityElement/isUnique"/>
-      </genFeatures>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="Pivot.ecore#//MultiplicityElement/lower"/>
-      </genFeatures>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="Pivot.ecore#//MultiplicityElement/upper"/>
-      </genFeatures>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="Pivot.ecore#//MultiplicityElement/isRequired"/>
-      </genFeatures>
-      <genOperations xsi:type="genmodel:GenOperation">
-        <ecoreOperation href="Pivot.ecore#//MultiplicityElement/lowerBound"/>
-      </genOperations>
-      <genOperations xsi:type="genmodel:GenOperation">
-        <ecoreOperation href="Pivot.ecore#//MultiplicityElement/upperBound"/>
-      </genOperations>
-      <genOperations xsi:type="genmodel:GenOperation">
-        <ecoreOperation href="Pivot.ecore#//MultiplicityElement/isMultivalued"/>
-      </genOperations>
-      <genOperations xsi:type="genmodel:GenOperation">
-        <ecoreOperation href="Pivot.ecore#//MultiplicityElement/includesCardinality"/>
-        <genParameters xsi:type="genmodel:GenParameter">
-          <ecoreParameter href="Pivot.ecore#//MultiplicityElement/includesCardinality/C"/>
-        </genParameters>
-      </genOperations>
-      <genOperations xsi:type="genmodel:GenOperation">
-        <ecoreOperation href="Pivot.ecore#//MultiplicityElement/includesMultiplicity"/>
-        <genParameters xsi:type="genmodel:GenParameter">
-          <ecoreParameter href="Pivot.ecore#//MultiplicityElement/includesMultiplicity/M"/>
-        </genParameters>
-      </genOperations>
-    </genClasses>
-    <genClasses xsi:type="genmodel:GenClass" image="false">
       <ecoreClass href="Pivot.ecore#//Feature"/>
       <genFeatures xsi:type="genmodel:GenFeature" createChild="false">
         <ecoreFeature xsi:type="ecore:EAttribute" href="Pivot.ecore#//Feature/implementationClass"/>
@@ -436,6 +397,9 @@
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass" image="false">
       <ecoreClass href="Pivot.ecore#//TypedMultiplicityElement"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="Pivot.ecore#//TypedMultiplicityElement/isRequired"/>
+      </genFeatures>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass">
       <ecoreClass href="Pivot.ecore#//Class"/>

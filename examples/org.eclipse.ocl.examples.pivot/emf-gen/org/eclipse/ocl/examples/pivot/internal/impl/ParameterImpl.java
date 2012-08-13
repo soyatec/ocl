@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
-import java.math.BigInteger;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -202,14 +201,6 @@ public class ParameterImpl
 			case PivotPackage.PARAMETER__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case PivotPackage.PARAMETER__IS_ORDERED:
-				return isOrdered();
-			case PivotPackage.PARAMETER__IS_UNIQUE:
-				return isUnique();
-			case PivotPackage.PARAMETER__LOWER:
-				return getLower();
-			case PivotPackage.PARAMETER__UPPER:
-				return getUpper();
 			case PivotPackage.PARAMETER__IS_REQUIRED:
 				return isRequired();
 			case PivotPackage.PARAMETER__OPERATION:
@@ -253,18 +244,6 @@ public class ParameterImpl
 			case PivotPackage.PARAMETER__TYPE:
 				setType((Type)newValue);
 				return;
-			case PivotPackage.PARAMETER__IS_ORDERED:
-				setIsOrdered((Boolean)newValue);
-				return;
-			case PivotPackage.PARAMETER__IS_UNIQUE:
-				setIsUnique((Boolean)newValue);
-				return;
-			case PivotPackage.PARAMETER__LOWER:
-				setLower((BigInteger)newValue);
-				return;
-			case PivotPackage.PARAMETER__UPPER:
-				setUpper((BigInteger)newValue);
-				return;
 			case PivotPackage.PARAMETER__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
 				return;
@@ -305,18 +284,6 @@ public class ParameterImpl
 			case PivotPackage.PARAMETER__TYPE:
 				setType((Type)null);
 				return;
-			case PivotPackage.PARAMETER__IS_ORDERED:
-				setIsOrdered(IS_ORDERED_EDEFAULT);
-				return;
-			case PivotPackage.PARAMETER__IS_UNIQUE:
-				setIsUnique(IS_UNIQUE_EDEFAULT);
-				return;
-			case PivotPackage.PARAMETER__LOWER:
-				setLower(LOWER_EDEFAULT);
-				return;
-			case PivotPackage.PARAMETER__UPPER:
-				setUpper(UPPER_EDEFAULT);
-				return;
 			case PivotPackage.PARAMETER__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
 				return;
@@ -332,7 +299,6 @@ public class ParameterImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("null")
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
@@ -351,14 +317,6 @@ public class ParameterImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.PARAMETER__TYPE:
 				return type != null;
-			case PivotPackage.PARAMETER__IS_ORDERED:
-				return ((eFlags & IS_ORDERED_EFLAG) != 0) != IS_ORDERED_EDEFAULT;
-			case PivotPackage.PARAMETER__IS_UNIQUE:
-				return ((eFlags & IS_UNIQUE_EFLAG) != 0) != IS_UNIQUE_EDEFAULT;
-			case PivotPackage.PARAMETER__LOWER:
-				return LOWER_EDEFAULT == null ? lower != null : !LOWER_EDEFAULT.equals(lower);
-			case PivotPackage.PARAMETER__UPPER:
-				return UPPER_EDEFAULT == null ? upper != null : !UPPER_EDEFAULT.equals(upper);
 			case PivotPackage.PARAMETER__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.PARAMETER__OPERATION:

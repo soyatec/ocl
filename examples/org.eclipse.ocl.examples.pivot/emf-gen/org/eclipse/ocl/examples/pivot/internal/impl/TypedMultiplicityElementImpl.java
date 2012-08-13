@@ -17,7 +17,6 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.lang.reflect.InvocationTargetException;
-import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Map;
 
@@ -40,7 +39,6 @@ import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
-import org.eclipse.ocl.examples.pivot.MultiplicityElement;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
@@ -56,100 +54,15 @@ import org.eclipse.ocl.examples.pivot.bodies.TypedMultiplicityElementBodies;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TypedMultiplicityElementImpl#isOrdered <em>Is Ordered</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TypedMultiplicityElementImpl#isUnique <em>Is Unique</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TypedMultiplicityElementImpl#getLower <em>Lower</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TypedMultiplicityElementImpl#getUpper <em>Upper</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TypedMultiplicityElementImpl#isRequired <em>Is Required</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-@SuppressWarnings("null")
 public abstract class TypedMultiplicityElementImpl
 		extends TypedElementImpl
 		implements TypedMultiplicityElement {
-
-	/**
-	 * The default value of the '{@link #isOrdered() <em>Is Ordered</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isOrdered()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_ORDERED_EDEFAULT = false;
-
-	/**
-	 * The flag representing the value of the '{@link #isOrdered() <em>Is Ordered</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isOrdered()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int IS_ORDERED_EFLAG = 1 << 9;
-
-	/**
-	 * The default value of the '{@link #isUnique() <em>Is Unique</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isUnique()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_UNIQUE_EDEFAULT = true;
-
-	/**
-	 * The flag representing the value of the '{@link #isUnique() <em>Is Unique</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isUnique()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int IS_UNIQUE_EFLAG = 1 << 10;
-
-	/**
-	 * The default value of the '{@link #getLower() <em>Lower</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLower()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final BigInteger LOWER_EDEFAULT = new BigInteger("1"); //$NON-NLS-1$
-
-	/**
-	 * The cached value of the '{@link #getLower() <em>Lower</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLower()
-	 * @generated
-	 * @ordered
-	 */
-	protected BigInteger lower = LOWER_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getUpper() <em>Upper</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getUpper()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final BigInteger UPPER_EDEFAULT = new BigInteger("1"); //$NON-NLS-1$
-
-	/**
-	 * The cached value of the '{@link #getUpper() <em>Upper</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getUpper()
-	 * @generated
-	 * @ordered
-	 */
-	protected BigInteger upper = UPPER_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isRequired() <em>Is Required</em>}' attribute.
@@ -169,7 +82,7 @@ public abstract class TypedMultiplicityElementImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_REQUIRED_EFLAG = 1 << 11;
+	protected static final int IS_REQUIRED_EFLAG = 1 << 9;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -178,7 +91,6 @@ public abstract class TypedMultiplicityElementImpl
 	 */
 	protected TypedMultiplicityElementImpl() {
 		super();
-		eFlags |= IS_UNIQUE_EFLAG;
 		eFlags |= IS_REQUIRED_EFLAG;
 	}
 
@@ -190,90 +102,6 @@ public abstract class TypedMultiplicityElementImpl
 	@Override
 	protected EClass eStaticClass() {
 		return PivotPackage.Literals.TYPED_MULTIPLICITY_ELEMENT;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isOrdered() {
-		return (eFlags & IS_ORDERED_EFLAG) != 0;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsOrdered(boolean newIsOrdered) {
-		boolean oldIsOrdered = (eFlags & IS_ORDERED_EFLAG) != 0;
-		if (newIsOrdered) eFlags |= IS_ORDERED_EFLAG; else eFlags &= ~IS_ORDERED_EFLAG;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.TYPED_MULTIPLICITY_ELEMENT__IS_ORDERED, oldIsOrdered, newIsOrdered));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isUnique() {
-		return (eFlags & IS_UNIQUE_EFLAG) != 0;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsUnique(boolean newIsUnique) {
-		boolean oldIsUnique = (eFlags & IS_UNIQUE_EFLAG) != 0;
-		if (newIsUnique) eFlags |= IS_UNIQUE_EFLAG; else eFlags &= ~IS_UNIQUE_EFLAG;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.TYPED_MULTIPLICITY_ELEMENT__IS_UNIQUE, oldIsUnique, newIsUnique));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BigInteger getLower() {
-		return lower;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setLower(BigInteger newLower) {
-		BigInteger oldLower = lower;
-		lower = newLower;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.TYPED_MULTIPLICITY_ELEMENT__LOWER, oldLower, lower));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BigInteger getUpper() {
-		return upper;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setUpper(BigInteger newUpper) {
-		BigInteger oldUpper = upper;
-		upper = newUpper;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.TYPED_MULTIPLICITY_ELEMENT__UPPER, oldUpper, upper));
 	}
 
 	/**
@@ -297,51 +125,6 @@ public abstract class TypedMultiplicityElementImpl
 		if (newIsRequired) eFlags |= IS_REQUIRED_EFLAG; else eFlags &= ~IS_REQUIRED_EFLAG;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.TYPED_MULTIPLICITY_ELEMENT__IS_REQUIRED, oldIsRequired, newIsRequired));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BigInteger lowerBound() {
-		throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MultiplicityElement!lowerBound()
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BigInteger upperBound() {
-		throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MultiplicityElement!upperBound()
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isMultivalued() {
-		throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MultiplicityElement!isMultivalued()
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean includesCardinality(BigInteger C) {
-		throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MultiplicityElement!includesCardinality(http://www.eclipse.org/ocl/3.1.0/Pivot!Integer)
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean includesMultiplicity(MultiplicityElement M) {
-		throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MultiplicityElement!includesMultiplicity(http://www.eclipse.org/ocl/3.1.0/Pivot!MultiplicityElement)
 	}
 
 	/**
@@ -418,14 +201,6 @@ public abstract class TypedMultiplicityElementImpl
 			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__IS_ORDERED:
-				return isOrdered();
-			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__IS_UNIQUE:
-				return isUnique();
-			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__LOWER:
-				return getLower();
-			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__UPPER:
-				return getUpper();
 			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__IS_REQUIRED:
 				return isRequired();
 		}
@@ -467,18 +242,6 @@ public abstract class TypedMultiplicityElementImpl
 			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__TYPE:
 				setType((Type)newValue);
 				return;
-			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__IS_ORDERED:
-				setIsOrdered((Boolean)newValue);
-				return;
-			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__IS_UNIQUE:
-				setIsUnique((Boolean)newValue);
-				return;
-			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__LOWER:
-				setLower((BigInteger)newValue);
-				return;
-			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__UPPER:
-				setUpper((BigInteger)newValue);
-				return;
 			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
 				return;
@@ -516,18 +279,6 @@ public abstract class TypedMultiplicityElementImpl
 			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__TYPE:
 				setType((Type)null);
 				return;
-			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__IS_ORDERED:
-				setIsOrdered(IS_ORDERED_EDEFAULT);
-				return;
-			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__IS_UNIQUE:
-				setIsUnique(IS_UNIQUE_EDEFAULT);
-				return;
-			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__LOWER:
-				setLower(LOWER_EDEFAULT);
-				return;
-			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__UPPER:
-				setUpper(UPPER_EDEFAULT);
-				return;
 			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
 				return;
@@ -558,84 +309,10 @@ public abstract class TypedMultiplicityElementImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__TYPE:
 				return type != null;
-			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__IS_ORDERED:
-				return ((eFlags & IS_ORDERED_EFLAG) != 0) != IS_ORDERED_EDEFAULT;
-			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__IS_UNIQUE:
-				return ((eFlags & IS_UNIQUE_EFLAG) != 0) != IS_UNIQUE_EDEFAULT;
-			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__LOWER:
-				return LOWER_EDEFAULT == null ? lower != null : !LOWER_EDEFAULT.equals(lower);
-			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__UPPER:
-				return UPPER_EDEFAULT == null ? upper != null : !UPPER_EDEFAULT.equals(upper);
 			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 		}
 		return eDynamicIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == MultiplicityElement.class)
-		{
-			switch (derivedFeatureID)
-			{
-				case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__IS_ORDERED: return PivotPackage.MULTIPLICITY_ELEMENT__IS_ORDERED;
-				case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__IS_UNIQUE: return PivotPackage.MULTIPLICITY_ELEMENT__IS_UNIQUE;
-				case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__LOWER: return PivotPackage.MULTIPLICITY_ELEMENT__LOWER;
-				case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__UPPER: return PivotPackage.MULTIPLICITY_ELEMENT__UPPER;
-				case PivotPackage.TYPED_MULTIPLICITY_ELEMENT__IS_REQUIRED: return PivotPackage.MULTIPLICITY_ELEMENT__IS_REQUIRED;
-				default: return -1;
-			}
-		}
-		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == MultiplicityElement.class)
-		{
-			switch (baseFeatureID)
-			{
-				case PivotPackage.MULTIPLICITY_ELEMENT__IS_ORDERED: return PivotPackage.TYPED_MULTIPLICITY_ELEMENT__IS_ORDERED;
-				case PivotPackage.MULTIPLICITY_ELEMENT__IS_UNIQUE: return PivotPackage.TYPED_MULTIPLICITY_ELEMENT__IS_UNIQUE;
-				case PivotPackage.MULTIPLICITY_ELEMENT__LOWER: return PivotPackage.TYPED_MULTIPLICITY_ELEMENT__LOWER;
-				case PivotPackage.MULTIPLICITY_ELEMENT__UPPER: return PivotPackage.TYPED_MULTIPLICITY_ELEMENT__UPPER;
-				case PivotPackage.MULTIPLICITY_ELEMENT__IS_REQUIRED: return PivotPackage.TYPED_MULTIPLICITY_ELEMENT__IS_REQUIRED;
-				default: return -1;
-			}
-		}
-		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
-		if (baseClass == MultiplicityElement.class)
-		{
-			switch (baseOperationID)
-			{
-				case PivotPackage.MULTIPLICITY_ELEMENT___LOWER_BOUND: return PivotPackage.TYPED_MULTIPLICITY_ELEMENT___LOWER_BOUND;
-				case PivotPackage.MULTIPLICITY_ELEMENT___UPPER_BOUND: return PivotPackage.TYPED_MULTIPLICITY_ELEMENT___UPPER_BOUND;
-				case PivotPackage.MULTIPLICITY_ELEMENT___IS_MULTIVALUED: return PivotPackage.TYPED_MULTIPLICITY_ELEMENT___IS_MULTIVALUED;
-				case PivotPackage.MULTIPLICITY_ELEMENT___INCLUDES_CARDINALITY__BIGINTEGER: return PivotPackage.TYPED_MULTIPLICITY_ELEMENT___INCLUDES_CARDINALITY__BIGINTEGER;
-				case PivotPackage.MULTIPLICITY_ELEMENT___INCLUDES_MULTIPLICITY__MULTIPLICITYELEMENT: return PivotPackage.TYPED_MULTIPLICITY_ELEMENT___INCLUDES_MULTIPLICITY__MULTIPLICITYELEMENT;
-				default: return -1;
-			}
-		}
-		return super.eDerivedOperationID(baseOperationID, baseClass);
 	}
 
 	/**
@@ -655,16 +332,6 @@ public abstract class TypedMultiplicityElementImpl
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
 			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP:
 				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT___LOWER_BOUND:
-				return lowerBound();
-			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT___UPPER_BOUND:
-				return upperBound();
-			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT___IS_MULTIVALUED:
-				return isMultivalued();
-			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT___INCLUDES_CARDINALITY__BIGINTEGER:
-				return includesCardinality((BigInteger)arguments.get(0));
-			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT___INCLUDES_MULTIPLICITY__MULTIPLICITYELEMENT:
-				return includesMultiplicity((MultiplicityElement)arguments.get(0));
 			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT___COMPATIBLE_BODY__VALUESPECIFICATION:
 				return CompatibleBody((ValueSpecification)arguments.get(0));
 			case PivotPackage.TYPED_MULTIPLICITY_ELEMENT___MAKE_PARAMETER:

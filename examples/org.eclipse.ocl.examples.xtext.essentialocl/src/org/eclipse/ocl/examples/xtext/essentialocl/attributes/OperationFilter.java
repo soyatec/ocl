@@ -207,7 +207,7 @@ public class OperationFilter extends AbstractOperationFilter
 					if (expression == null) {
 						return false;
 					}
-					Type candidateType = metaModelManager.getTypeWithMultiplicity(candidateParameter);
+					Type candidateType = PivotUtil.getBehavioralType(candidateParameter);
 					if (candidateType instanceof SelfType) {
 						candidateType = candidateOperation.getOwningType();
 					}

@@ -57,29 +57,13 @@ import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.VoidType;
-import org.eclipse.ocl.examples.pivot.manager.PivotStandardLibrary;
 
 public class AbstractContents
-{	 // FIXME needs field @NonNull to make more @NonNull's practical
-	protected final PivotStandardLibrary standardLibrary;
-	
-	protected AbstractContents() {
-		this.standardLibrary = null;
-	}
-	
-	protected AbstractContents(@NonNull PivotStandardLibrary standardLibrary) {
-		this.standardLibrary = standardLibrary;
-	}
-
+{
 	protected @NonNull AnyType createAnyType(@NonNull String name) {
 		AnyType pivotType = PivotFactory.eINSTANCE.createAnyType();
 		pivotType.setName(name);
 		return pivotType;
-	}
-
-	@Deprecated
-	protected @NonNull BagType createBagType(@NonNull String name) {
-		return createBagType(name, null, null);
 	}
 
 	protected @NonNull BagType createBagType(@NonNull String name, @Nullable String lower, @Nullable String upper) {
@@ -100,11 +84,6 @@ public class AbstractContents
 		ClassifierType pivotType = PivotFactory.eINSTANCE.createClassifierType();
 		pivotType.setName(name);
 		return pivotType;
-	}
-
-	@Deprecated
-	protected @NonNull CollectionType createCollectionType(@NonNull String name) {
-		return createCollectionType(name, null, null);
 	}
 
 	protected @NonNull CollectionType createCollectionType(@NonNull String name, @Nullable String lower, @Nullable String upper) {
@@ -171,11 +150,6 @@ public class AbstractContents
 		return pivotOperation;
 	}
 
-	@Deprecated
-	protected @NonNull OrderedSetType createOrderedSetType(@NonNull String name) {
-		return createOrderedSetType(name, null, null);
-	}
-
 	protected @NonNull OrderedSetType createOrderedSetType(@NonNull String name, @Nullable String lower, @Nullable String upper) {
 		OrderedSetType pivotType = PivotFactory.eINSTANCE.createOrderedSetType();
 		pivotType.setName(name);
@@ -233,22 +207,12 @@ public class AbstractContents
 		return pivotType;
 	}
 
-	@Deprecated
-	protected @NonNull SequenceType createSequenceType(@NonNull String name) {
-		return createSequenceType(name, null, null);
-	}
-
 	protected @NonNull SequenceType createSequenceType(@NonNull String name, @Nullable String lower, @Nullable String upper) {
 		SequenceType pivotType = PivotFactory.eINSTANCE.createSequenceType();
 		pivotType.setName(name);
 		pivotType.setLower(lower != null ? new BigInteger(lower) : BigInteger.valueOf(0));
 		pivotType.setUpper(upper != null ? new BigInteger(upper) : BigInteger.valueOf(-1));
 		return pivotType;
-	}
-
-	@Deprecated
-	protected @NonNull SetType createSetType(@NonNull String name) {
-		return createSetType(name, null, null);
 	}
 
 	protected @NonNull SetType createSetType(@NonNull String name, @Nullable String lower, @Nullable String upper) {

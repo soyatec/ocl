@@ -34,7 +34,6 @@ import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
-import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.UnspecifiedType;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -120,6 +119,17 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 //		return null;
 	}
 
+	public void setBehavioralType(@NonNull TypedElement targetElement, @NonNull TypedElement sourceElement) {
+		if (!sourceElement.eIsProxy()) {
+			Type type = PivotUtil.getBehavioralType(sourceElement);
+			if (!type.eIsProxy()) {
+				setType(targetElement, type);
+				return;
+			}
+		}
+		setType(targetElement, null);
+	}
+
 	public void setContextVariable(@NonNull ExpressionInOCL pivotSpecification, @NonNull String selfVariableName, @Nullable Type contextType) {
 		Variable contextVariable = pivotSpecification.getContextVariable();
 		if (contextVariable == null) {
@@ -169,7 +179,7 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 		    	param = PivotFactory.eINSTANCE.createVariable();
 		        param.setName(name);
 		    }
-			setTypeWithMultiplicity(param, parameter);
+		    setBehavioralType(param, parameter);
 		    param.setRepresentedParameter(parameter);
 		    newVariables.add(param);
 		}
@@ -211,7 +221,7 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 				resultVariable = PivotFactory.eINSTANCE.createVariable();
 			}
 			resultVariable.setName(resultName);
-			setTypeWithMultiplicity(resultVariable, contextOperation);
+			setBehavioralType(resultVariable, contextOperation);
 			pivotSpecification.setResultVariable(resultVariable);
 		}
 		else {
@@ -248,16 +258,5 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 		if (primaryType != null) {
 			PivotUtil.debugWellContainedness(primaryType);
 		}
-	}
-
-	public void setTypeWithMultiplicity(@NonNull TypedElement typedElement, @NonNull TypedMultiplicityElement typedMultiplicityElement) {
-		if (!typedMultiplicityElement.eIsProxy()) {
-			Type type = metaModelManager.getTypeWithMultiplicity(typedMultiplicityElement);
-			if (!type.eIsProxy()) {
-				setType(typedElement, type);
-				return;
-			}
-		}
-		setType(typedElement, null);
 	}
 }

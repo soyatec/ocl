@@ -1119,65 +1119,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MorePivotable" instanceClassName="org.eclipse.ocl.examples.pivot.util.MorePivotable"
       abstract="true" interface="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="MultiplicityElement" abstract="true"
-      eSuperTypes="#//Element">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A multiplicity is a definition of an inclusive interval of non-negative integers beginning with a lower bound and ending with a (possibly infinite) upper bound. A multiplicity element embeds this information to specify the allowable cardinalities for an instantiation of this element."/>
-    </eAnnotations>
-    <eOperations name="lowerBound" lowerBound="1" eType="#//Integer">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The query lowerBound() returns the lower bound of the multiplicity as an integer."/>
-      </eAnnotations>
-    </eOperations>
-    <eOperations name="upperBound" lowerBound="1" eType="#//UnlimitedNatural">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The query upperBound() returns the upper bound of the multiplicity for a bounded multiplicity as an unlimited natural."/>
-      </eAnnotations>
-    </eOperations>
-    <eOperations name="isMultivalued" lowerBound="1" eType="#//Boolean">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The query isMultivalued() checks whether this multiplicity has an upper bound greater than one."/>
-      </eAnnotations>
-    </eOperations>
-    <eOperations name="includesCardinality" lowerBound="1" eType="#//Boolean">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The query includesCardinality() checks whether the specified cardinality is valid for this multiplicity."/>
-      </eAnnotations>
-      <eParameters name="C" lowerBound="1" eType="#//Integer"/>
-    </eOperations>
-    <eOperations name="includesMultiplicity" lowerBound="1" eType="#//Boolean">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The query includesMultiplicity() checks whether this multiplicity includes all the cardinalities allowed by the specified multiplicity."/>
-      </eAnnotations>
-      <eParameters name="M" lowerBound="1" eType="#//MultiplicityElement"/>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOrdered" lowerBound="1"
-        eType="#//Boolean" defaultValueLiteral="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="For a multivalued multiplicity, this attribute specifies whether the values in an instantiation of this element are sequentially ordered."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnique" lowerBound="1"
-        eType="#//Boolean" defaultValueLiteral="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="For a multivalued multiplicity, this attributes specifies whether the values in an instantiation of this element are unique."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower" eType="#//Integer"
-        defaultValueLiteral="1">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Specifies the lower bound of the multiplicity interval."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper" eType="#//UnlimitedNatural"
-        defaultValueLiteral="1">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Specifies the upper bound of the multiplicity interval."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isRequired" lowerBound="1"
-        eType="#//Boolean" defaultValueLiteral="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Nameable" instanceClassName="org.eclipse.ocl.examples.pivot.util.Nameable"
       abstract="true" interface="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true" eSuperTypes="#//Element #//Nameable">
@@ -1765,7 +1706,7 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypedMultiplicityElement" abstract="true"
-      eSuperTypes="#//TypedElement #//MultiplicityElement">
+      eSuperTypes="#//TypedElement">
     <eOperations name="CompatibleBody" lowerBound="1" eType="#//Boolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
         <details key="body" value="bodySpecification.type.conformsTo(self.type)"/>
@@ -1777,6 +1718,8 @@
         <details key="body" value="Parameter{name = 'name'}"/>
       </eAnnotations>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isRequired" lowerBound="1"
+        eType="#//Boolean" defaultValueLiteral="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnlimitedNaturalLiteralExp" eSuperTypes="#//NumericLiteralExp">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unlimitedNaturalSymbol"

@@ -64,7 +64,6 @@ import org.eclipse.ocl.examples.pivot.LiteralExp;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.MessageExp;
 import org.eclipse.ocl.examples.pivot.MessageType;
-import org.eclipse.ocl.examples.pivot.MultiplicityElement;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.NavigationCallExp;
@@ -578,7 +577,6 @@ public class PivotSwitch<T> extends Switch<T> {
 				T result = caseFeature(feature);
 				if (result == null) result = caseTypedMultiplicityElement(feature);
 				if (result == null) result = caseTypedElement(feature);
-				if (result == null) result = caseMultiplicityElement(feature);
 				if (result == null) result = caseNamedElement(feature);
 				if (result == null) result = caseElement(feature);
 				if (result == null) result = caseNameable(feature);
@@ -685,7 +683,6 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = caseParameterableElement(iteration);
 				if (result == null) result = caseTypedMultiplicityElement(iteration);
 				if (result == null) result = caseTypedElement(iteration);
-				if (result == null) result = caseMultiplicityElement(iteration);
 				if (result == null) result = caseNamedElement(iteration);
 				if (result == null) result = caseElement(iteration);
 				if (result == null) result = caseNameable(iteration);
@@ -806,15 +803,6 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PivotPackage.MULTIPLICITY_ELEMENT:
-			{
-				MultiplicityElement multiplicityElement = (MultiplicityElement)theEObject;
-				T result = caseMultiplicityElement(multiplicityElement);
-				if (result == null) result = caseElement(multiplicityElement);
-				if (result == null) result = caseVisitable(multiplicityElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case PivotPackage.NAMED_ELEMENT:
 			{
 				NamedElement namedElement = (NamedElement)theEObject;
@@ -917,7 +905,6 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = caseParameterableElement(operation);
 				if (result == null) result = caseTypedMultiplicityElement(operation);
 				if (result == null) result = caseTypedElement(operation);
-				if (result == null) result = caseMultiplicityElement(operation);
 				if (result == null) result = caseNamedElement(operation);
 				if (result == null) result = caseElement(operation);
 				if (result == null) result = caseNameable(operation);
@@ -998,7 +985,6 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTypedMultiplicityElement(parameter);
 				if (result == null) result = caseVariableDeclaration(parameter);
 				if (result == null) result = caseTypedElement(parameter);
-				if (result == null) result = caseMultiplicityElement(parameter);
 				if (result == null) result = caseNamedElement(parameter);
 				if (result == null) result = caseElement(parameter);
 				if (result == null) result = caseNameable(parameter);
@@ -1065,7 +1051,6 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = caseParameterableElement(property);
 				if (result == null) result = caseTypedMultiplicityElement(property);
 				if (result == null) result = caseTypedElement(property);
-				if (result == null) result = caseMultiplicityElement(property);
 				if (result == null) result = caseNamedElement(property);
 				if (result == null) result = caseElement(property);
 				if (result == null) result = caseNameable(property);
@@ -1394,7 +1379,6 @@ public class PivotSwitch<T> extends Switch<T> {
 				TypedMultiplicityElement typedMultiplicityElement = (TypedMultiplicityElement)theEObject;
 				T result = caseTypedMultiplicityElement(typedMultiplicityElement);
 				if (result == null) result = caseTypedElement(typedMultiplicityElement);
-				if (result == null) result = caseMultiplicityElement(typedMultiplicityElement);
 				if (result == null) result = caseNamedElement(typedMultiplicityElement);
 				if (result == null) result = caseElement(typedMultiplicityElement);
 				if (result == null) result = caseNameable(typedMultiplicityElement);
@@ -2744,21 +2728,6 @@ public class PivotSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypedElement(TypedElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Multiplicity Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Multiplicity Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseMultiplicityElement(MultiplicityElement object) {
 		return null;
 	}
 

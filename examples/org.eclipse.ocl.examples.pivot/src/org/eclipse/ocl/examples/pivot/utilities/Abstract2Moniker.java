@@ -30,7 +30,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Iteration;
-import org.eclipse.ocl.examples.pivot.MultiplicityElement;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
@@ -167,7 +166,7 @@ public abstract class Abstract2Moniker implements PivotConstants
 		}
 	}
 
-	protected void appendMultiplicity(MultiplicityElement multiplicityElement) {
+/*	protected void appendMultiplicity(MultiplicityElement multiplicityElement) {
 		int lower = multiplicityElement.getLower().intValue();
 		int upper = multiplicityElement.getUpper().intValue();
 		if (upper != 1) {
@@ -178,7 +177,7 @@ public abstract class Abstract2Moniker implements PivotConstants
 			append(upper);
 			append("]");
 		}
-	}
+	} */
 
 	public void appendName(Element monikeredElement) {
 		if (monikeredElement instanceof Type) {		// FIXME migrate to more specific location
@@ -209,7 +208,7 @@ public abstract class Abstract2Moniker implements PivotConstants
 			for (Parameter parameter : iteration.getOwnedIterator()) {
 				s.append(prefix);
 				appendElement(parameter.getType(), templateBindings);
-				appendMultiplicity(parameter);
+//				appendMultiplicity(parameter);
 				prefix = PARAMETER_SEPARATOR;
 			}
 			if (iteration.getOwnedAccumulator().size() > 0) {
@@ -217,7 +216,7 @@ public abstract class Abstract2Moniker implements PivotConstants
 				for (Parameter parameter : iteration.getOwnedAccumulator()) {
 					s.append(prefix);
 					appendElement(parameter.getType(), templateBindings);
-					appendMultiplicity(parameter);
+//					appendMultiplicity(parameter);
 					prefix = PARAMETER_SEPARATOR;
 				}
 			}
@@ -226,7 +225,7 @@ public abstract class Abstract2Moniker implements PivotConstants
 		for (Parameter parameter : operation.getOwnedParameter()) {
 			s.append(prefix);
 			appendElement(parameter.getType(), templateBindings);
-			appendMultiplicity(parameter);
+//			appendMultiplicity(parameter);
 			prefix = PARAMETER_SEPARATOR;
 		}
 		s.append(PARAMETER_SUFFIX);

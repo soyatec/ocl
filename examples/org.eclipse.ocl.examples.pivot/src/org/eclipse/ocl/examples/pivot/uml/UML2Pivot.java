@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot.uml;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -65,7 +64,6 @@ import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.StereotypedProperty;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.ecore.AbstractEcore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
@@ -810,14 +808,14 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 
 	public abstract void addStereotypeApplication(@NonNull EObject stereotypeApplication);
 
-	protected void copyMultiplicityElement(@NonNull TypedMultiplicityElement pivotElement, @NonNull org.eclipse.uml2.uml.MultiplicityElement umlMultiplicityElement) {
+/*	protected void copyMultiplicityElement(@NonNull TypedMultiplicityElement pivotElement, @NonNull org.eclipse.uml2.uml.MultiplicityElement umlMultiplicityElement) {
 		int lower = umlMultiplicityElement.getLower();
 		int upper = umlMultiplicityElement.getUpper();		// FIXME Obsolete
 		pivotElement.setLower(BigInteger.valueOf(lower));
 		pivotElement.setUpper(BigInteger.valueOf(upper));
 		pivotElement.setIsOrdered(umlMultiplicityElement.isOrdered());			
 		pivotElement.setIsUnique(umlMultiplicityElement.isUnique());			
-	}
+	} */
 
 	protected @NonNull URI createPivotURI() {
 		URI uri = umlResource.getURI();

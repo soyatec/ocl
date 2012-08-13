@@ -100,5 +100,6 @@ public class TypedMultiplicityElementBodies
 			return A_symbol_3;
 		}
 	}
+
 }
 

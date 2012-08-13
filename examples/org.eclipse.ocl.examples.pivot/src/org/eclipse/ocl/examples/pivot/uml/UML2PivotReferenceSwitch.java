@@ -118,7 +118,7 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 					if (umlType != null) {
 						Type pivotType = converter.resolveType(umlType);
 						pivotElement.setType(pivotType);
-						converter.copyMultiplicityElement(pivotElement, umlParameter);
+//						converter.copyMultiplicityElement(pivotElement, umlParameter);
 					}
 					else {
 						pivotElement.setType(metaModelManager.getOclVoidType());

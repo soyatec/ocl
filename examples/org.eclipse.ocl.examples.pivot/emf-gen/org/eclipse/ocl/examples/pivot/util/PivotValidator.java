@@ -73,7 +73,6 @@ import org.eclipse.ocl.examples.pivot.LiteralExp;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.MessageExp;
 import org.eclipse.ocl.examples.pivot.MessageType;
-import org.eclipse.ocl.examples.pivot.MultiplicityElement;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.NavigationCallExp;
@@ -738,8 +737,6 @@ public class PivotValidator
 				return validateMessageType((MessageType)value, diagnostics, context);
 			case PivotPackage.MORE_PIVOTABLE:
 				return validateMorePivotable((MorePivotable)value, diagnostics, context);
-			case PivotPackage.MULTIPLICITY_ELEMENT:
-				return validateMultiplicityElement((MultiplicityElement)value, diagnostics, context);
 			case PivotPackage.NAMEABLE:
 				return validateNameable((Nameable)value, diagnostics, context);
 			case PivotPackage.NAMED_ELEMENT:
@@ -1183,27 +1180,6 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)unspecifiedType, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)unspecifiedType, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(unspecifiedType, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateMultiplicityElement(
-			MultiplicityElement multiplicityElement,
-			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)multiplicityElement, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)multiplicityElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)multiplicityElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)multiplicityElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)multiplicityElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)multiplicityElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)multiplicityElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)multiplicityElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)multiplicityElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(multiplicityElement, diagnostics, context);
 		return result;
 	}
 

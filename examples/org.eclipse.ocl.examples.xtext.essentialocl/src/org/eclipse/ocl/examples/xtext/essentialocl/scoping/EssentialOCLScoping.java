@@ -14,7 +14,6 @@
  */
 package org.eclipse.ocl.examples.xtext.essentialocl.scoping;
 
-import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
@@ -212,9 +211,9 @@ public class EssentialOCLScoping
 						} */
 						s.append(String.valueOf(type));
 //						s.append(")");
-						BigInteger lower = typedMultiplicityElement.getLower();
-						BigInteger upper = typedMultiplicityElement.getUpper();
-						PivotUtil.appendMultiplicity(s, lower.intValue(), upper.intValue());
+//						BigInteger lower = typedMultiplicityElement.getLower();
+//						BigInteger upper = typedMultiplicityElement.getUpper();
+//						PivotUtil.appendMultiplicity(s, lower.intValue(), upper.intValue());
 					}
 					else {
 						s.append(String.valueOf(type));
