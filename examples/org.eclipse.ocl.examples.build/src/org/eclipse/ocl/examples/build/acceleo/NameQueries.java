@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -73,7 +74,9 @@ public class NameQueries
 		if (elem == null) {
 			logger.error("getPrefixedSymbolName for '" + prefix + "'and null");
 		}
-		if (elem instanceof Type) {
+		if ((elem instanceof CollectionType) && (((CollectionType)elem).getUnspecializedElement() != null)) {
+		}
+		else if (elem instanceof Type) {
 			if (metaModelManager != null) {
 				TypeServer typeServer = metaModelManager.getPackageManager().findTypeServer((Type)elem);
 				if (typeServer != null) {

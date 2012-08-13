@@ -96,6 +96,7 @@ public class [javaClass/] extends XMIResourceImpl
 		[allTypes->defineCollectionTypeName('Set')/]
 		[allTypes->definePrimitiveTypeName('String')/]
 		[allTypes->definePrimitiveTypeName('UnlimitedNatural')/]
+		[allTypes->defineCollectionTypeName('UniqueCollection')/]
 
 		protected Contents(@NonNull PivotStandardLibrary standardLibrary, @NonNull String name, @Nullable String nsPrefix, @NonNull String nsURI) {
 			super(standardLibrary);
@@ -198,12 +199,17 @@ public class [javaClass/] extends XMIResourceImpl
 [/template]
 
 [template public defineCollectionTypeName(allTypes : Sequence(Type), typeName : String)]
-[let collectionType : CollectionType = allTypes->select(name=typeName)->filter(CollectionType)->any(true)]
-protected final @NonNull CollectionType [collectionType.getPrefixedSymbolName('_'+typeName)/] = standardLibrary.get[typeName/]Type();
-protected final @NonNull TemplateParameter [collectionType.ownedTemplateSignature.getPrefixedSymbolName('_'+typeName+'_T')/] = standardLibrary.get[typeName/]Type().getOwnedTemplateSignature().getParameter().get(0);
-[/let]
+[let collectionType : CollectionType = allTypes->filter(CollectionType)->select(name=typeName).unspecializedElement->excluding(null)->filter(CollectionType)->any(true)]
+[let collectionName : String = collectionType.getPrefixedSymbolName('_'+typeName)]
+[let signatureName : String = collectionType.ownedTemplateSignature.getPrefixedSymbolName('_'+typeName+'_')]
+[let parameterName : String = collectionType.ownedTemplateSignature.parameter->at(1).getPrefixedSymbolName('_'+typeName+'_T')]
+protected final @NonNull CollectionType [collectionName/] = standardLibrary.get[typeName/]Type();
+@SuppressWarnings("null") protected final @NonNull TemplateSignature [signatureName/] = [collectionName/].getOwnedTemplateSignature();
+@SuppressWarnings("null") protected final @NonNull TemplateParameter [parameterName/] = [signatureName/].getParameter().get(0);
+[/let][/let][/let][/let]
 [/template]
 
 [template public definePrimitiveTypeName(allTypes : Sequence(Type), typeName : String)]
 protected final @NonNull PrimitiveType [allTypes->select(name=typeName)->any(true).getPrefixedSymbolName('_'+typeName)/] = standardLibrary.get[typeName/]Type();
+
 [/template]

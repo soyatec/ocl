@@ -218,7 +218,9 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 					long lower = eObject.getLowerBound();
 					boolean isOrdered = eObject.isOrdered();
 					boolean isUnique = eObject.isUnique();
-					pivotType = metaModelManager.getCollectionType(isOrdered, isUnique, pivotType, BigInteger.valueOf(lower), BigInteger.valueOf(upper));
+					if (pivotType != null) {
+						pivotType = metaModelManager.getCollectionType(isOrdered, isUnique, pivotType, BigInteger.valueOf(lower), BigInteger.valueOf(upper));
+					}
 				}
 				pivotElement.setType(pivotType);
 			}

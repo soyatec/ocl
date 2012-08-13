@@ -83,6 +83,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	private SequenceType sequenceType = null;
 	private SetType setType = null;
 	private PrimitiveType stringType = null;
+	private CollectionType uniqueCollectionType = null;
 	private PrimitiveType unlimitedNaturalType = null;
 	
 	private Map<String, Type> nameToLibraryTypeMap = null;
@@ -331,6 +332,14 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 			stringType2 = stringType = resolveRequiredSimpleType(PrimitiveType.class, "String");		
 		}
 		return stringType2;
+	}
+
+	public @NonNull CollectionType getUniqueCollectionType() {
+		CollectionType uniqueCollectionType2 = uniqueCollectionType;
+		if (uniqueCollectionType2 == null) {
+			uniqueCollectionType2 = uniqueCollectionType = resolveRequiredTemplateableType(CollectionType.class, "UniqueCollection", 1);
+		}
+		return uniqueCollectionType2;
 	}
 
 	public @NonNull PrimitiveType getUnlimitedNaturalType() {

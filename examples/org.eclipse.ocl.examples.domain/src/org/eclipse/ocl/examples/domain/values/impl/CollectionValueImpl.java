@@ -224,7 +224,9 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 				actualType2 = actualType = type;
 			}
 			else {
-				actualType2 = actualType = standardLibrary.getCollectionType((DomainCollectionType)((DomainCollectionType)type).getContainerType(), elementType, null, null);
+				DomainCollectionType containerType = ((DomainCollectionType)type).getContainerType();
+				assert containerType != null;
+				actualType2 = actualType = standardLibrary.getCollectionType(containerType, elementType, null, null);
 			}
 		}	
 		return actualType2;

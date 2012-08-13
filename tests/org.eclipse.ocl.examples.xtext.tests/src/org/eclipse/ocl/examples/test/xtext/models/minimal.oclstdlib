@@ -21,5 +21,6 @@ library lib : lib = 'http://minimal.oclstdlib'
 	type Set(T) : SetType conformsTo Collection(T) {}
 	type String : PrimitiveType conformsTo OclAny {}
 	type Tuple : TupleType conformsTo OclAny {}
+	type UniqueCollection(T) : CollectionType conformsTo Collection(T) {}
 	type UnlimitedNatural : PrimitiveType conformsTo Integer {}
 }

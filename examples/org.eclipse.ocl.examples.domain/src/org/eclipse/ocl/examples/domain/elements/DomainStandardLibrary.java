@@ -258,7 +258,15 @@ public interface DomainStandardLibrary
 
 	@NonNull DomainType getType(@NonNull DomainElement element);
 	@NonNull DomainType getType(@NonNull EClassifier eClassifier);
-    
+	
+    /**
+     * Obtains the generic instance of the {@link UniqueCollection} metatype, named
+     * <tt>Set(T)</tt>.
+     * 
+     * @return the <tt>Set(T)</tt> type (an instance of {@link CollectionType})
+     */
+	@NonNull DomainType getUniqueCollectionType();
+   
     /**
      * Obtains the instance of the {@link PrimitiveType} metatype,
      * named <tt>UnlimitedNatural</tt>.

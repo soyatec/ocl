@@ -235,9 +235,6 @@ public class TemplateableTypeServer extends ExtensibleTypeServer
 	}
 
 	public synchronized @NonNull Type getSpecializedType(@NonNull List<? extends ParameterableElement> templateArguments) {
-		if (getPivotType() instanceof CollectionType) {
-			return getSpecializedType(templateArguments.get(0), null, null);			
-		}
 		return getSpecializedType(new TemplateArguments(templateArguments));
 	}
 

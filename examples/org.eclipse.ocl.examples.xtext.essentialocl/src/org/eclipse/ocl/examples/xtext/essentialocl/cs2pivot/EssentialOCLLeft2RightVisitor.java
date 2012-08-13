@@ -840,9 +840,12 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 				if (bodyType != null) {
 					bodyType = PivotUtil.getBehavioralType(bodyType);
 					if (bodyType instanceof CollectionType) {
-						Type elementType = bodyType;
+						@NonNull Type elementType = bodyType;
 						while (elementType instanceof CollectionType) {
-							elementType = ((CollectionType)elementType).getElementType();
+							Type elementType2 = ((CollectionType)elementType).getElementType();
+							if (elementType2 != null) {
+								elementType = elementType2;
+							}
 						}
 						boolean isOrdered = ((CollectionType)bodyType).isOrdered() && ((CollectionType)returnType).isOrdered();
 	//					boolean isUnique = /*((CollectionType)bodyType).isUnique() &&*/ ((CollectionType)returnType).isUnique();

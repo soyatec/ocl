@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;

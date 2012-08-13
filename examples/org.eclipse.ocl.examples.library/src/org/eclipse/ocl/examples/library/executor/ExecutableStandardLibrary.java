@@ -221,6 +221,10 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 		}
 	}
 
+	public @NonNull DomainType getUniqueCollectionType() {
+		return OCLstdlibTables.Types._UniqueCollection;
+	}
+
 	public @NonNull DomainType getUnlimitedNaturalType() {
 		return OCLstdlibTables.Types._UnlimitedNatural;
 	}
