@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
@@ -28,8 +29,13 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Root;
+import org.eclipse.ocl.examples.pivot.TemplateBinding;
+import org.eclipse.ocl.examples.pivot.TemplateParameter;
+import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
@@ -387,6 +393,46 @@ public class PackageManager implements PackageServerParent
 		TypeTracker typeTracker = type2tracker.get(pivotType);
 		if (typeTracker != null) {
 			typeTracker.dispose();
+		}
+	}
+
+	void resolveSuperClasses(@NonNull Type specializedClass, @NonNull Type unspecializedClass, Map<TemplateParameter, ParameterableElement> allBindings) {
+		for (Type superType : unspecializedClass.getSuperClass()) {
+			List<TemplateBinding> superTemplateBindings = superType.getTemplateBinding();
+			if (superTemplateBindings.size() > 0) {
+				List<ParameterableElement> superTemplateArgumentList = new ArrayList<ParameterableElement>();
+				for (TemplateBinding superTemplateBinding : superTemplateBindings) {
+					for (TemplateParameterSubstitution superParameterSubstitution : superTemplateBinding.getParameterSubstitution()) {
+						ParameterableElement superActual = superParameterSubstitution.getActual();
+						TemplateParameter superTemplateParameter = superActual.getTemplateParameter();
+						ParameterableElement actualActual = allBindings.get(superTemplateParameter);
+						superTemplateArgumentList.add(actualActual);
+					}
+				}
+				@NonNull Type unspecializedSuperType = PivotUtil.getUnspecializedTemplateableElement(superType);
+				TypeServer superTypeServer = metaModelManager.getTypeServer(unspecializedSuperType);
+				if ((superTypeServer instanceof CollectionTypeServer) && (superTemplateArgumentList.size() == 1)) {
+					ParameterableElement templateArgument = superTemplateArgumentList.get(0);
+					if (templateArgument instanceof Type) {
+						Type specializedSuperType = ((CollectionTypeServer)superTypeServer).getSpecializedType((Type)templateArgument, null, null);
+						specializedClass.getSuperClass().add(specializedSuperType);
+					}
+				}
+				else if ((superTypeServer instanceof MetaclassServer) && (superTemplateArgumentList.size() == 1)) {
+					ParameterableElement templateArgument = superTemplateArgumentList.get(0);
+					if (templateArgument instanceof Type) {
+						Type specializedSuperType = ((MetaclassServer)superTypeServer).getSpecializedType((Type)templateArgument);
+						specializedClass.getSuperClass().add(specializedSuperType);
+					}
+				}
+				else if (superTypeServer instanceof TemplateableTypeServer) {
+					Type specializedSuperType = ((TemplateableTypeServer)superTypeServer).getSpecializedType(superTemplateArgumentList);
+					specializedClass.getSuperClass().add(specializedSuperType);
+				}
+			}
+			else {
+				specializedClass.getSuperClass().add(superType);
+			}
 		}
 	}
 }

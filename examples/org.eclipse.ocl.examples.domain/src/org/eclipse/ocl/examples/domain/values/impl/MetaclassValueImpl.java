@@ -18,15 +18,15 @@ package org.eclipse.ocl.examples.domain.values.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainClassifierType;
-import org.eclipse.ocl.examples.domain.values.ClassifierTypeValue;
+import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
+import org.eclipse.ocl.examples.domain.values.MetaclassValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
 /**
  * @generated NOT
  */
-public class ClassifierTypeValueImpl extends TypeValueImpl implements ClassifierTypeValue
+public class MetaclassValueImpl extends TypeValueImpl implements MetaclassValue
 {
 	/**
 	 * <!-- begin-user-doc -->
@@ -35,10 +35,10 @@ public class ClassifierTypeValueImpl extends TypeValueImpl implements Classifier
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ValuesPackage.Literals.CLASSIFIER_TYPE_VALUE;
+		return ValuesPackage.Literals.METACLASS_VALUE;
 	}
 
-	public ClassifierTypeValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainClassifierType object) {
+	public MetaclassValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainMetaclass object) {
 		super(valueFactory, object);
 	}
 	
@@ -47,13 +47,13 @@ public class ClassifierTypeValueImpl extends TypeValueImpl implements Classifier
 		if (!super.equals(that)) {
 			return false;
 		}
-		if (!(that instanceof ClassifierTypeValue)) {
+		if (!(that instanceof MetaclassValue)) {
 			return false;
 		}
-		return object.equals(((ClassifierTypeValue)that).getInstanceType());
+		return object.equals(((MetaclassValue)that).getInstanceType());
 //		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 //		DomainInheritance thisInheritance = object.getInstanceType().getInheritance(standardLibrary); 
-//		DomainInheritance thatInheritance = ((ClassifierTypeValue)that).getInstanceType().getInheritance(standardLibrary); 
+//		DomainInheritance thatInheritance = ((MetaclassValue)that).getInstanceType().getInheritance(standardLibrary); 
 //		return thisInheritance == thatInheritance;
 	}
 }

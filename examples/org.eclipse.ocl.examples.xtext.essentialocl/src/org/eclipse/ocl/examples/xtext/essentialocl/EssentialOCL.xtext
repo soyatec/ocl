@@ -165,7 +165,7 @@ CollectionTypeIdentifier returns ecore::EString:
 	| 'OrderedSet';
 
 CollectionTypeCS returns CollectionTypeCS:
-	name=CollectionTypeIdentifier ('(' ownedType=TypeExpCS ')')?;
+	name=CollectionTypeIdentifier ('(' ownedType=TypeExpCS ')' multiplicity=MultiplicityCS?)?;
 
 MultiplicityBoundsCS returns base::MultiplicityBoundsCS:
 	lowerBound=LOWER ('..' upperBound=UPPER)?;
@@ -242,7 +242,7 @@ TypeNameExpCS returns TypeNameExpCS:
 	pathName=PathNameCS;
 
 TypeExpCS returns base::TypedRefCS:
-	(TypeNameExpCS | TypeLiteralCS) (multiplicity=MultiplicityCS)?;
+	TypeNameExpCS | TypeLiteralCS;
 
 	//---------------------------------------------------------------------
 //  Expressions

@@ -28,7 +28,7 @@ import org.eclipse.ocl.examples.pivot.BagType;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.CallOperationAction;
-import org.eclipse.ocl.examples.pivot.ClassifierType;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralPart;
@@ -316,22 +316,6 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElement(class_);
 				if (result == null) result = caseNameable(class_);
 				if (result == null) result = caseVisitable(class_);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case PivotPackage.CLASSIFIER_TYPE:
-			{
-				ClassifierType classifierType = (ClassifierType)theEObject;
-				T result = caseClassifierType(classifierType);
-				if (result == null) result = caseClass(classifierType);
-				if (result == null) result = caseType(classifierType);
-				if (result == null) result = caseNamespace(classifierType);
-				if (result == null) result = caseNamedElement(classifierType);
-				if (result == null) result = caseTemplateableElement(classifierType);
-				if (result == null) result = caseParameterableElement(classifierType);
-				if (result == null) result = caseElement(classifierType);
-				if (result == null) result = caseNameable(classifierType);
-				if (result == null) result = caseVisitable(classifierType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -800,6 +784,22 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElement(messageType);
 				if (result == null) result = caseNameable(messageType);
 				if (result == null) result = caseVisitable(messageType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PivotPackage.METACLASS:
+			{
+				Metaclass metaclass = (Metaclass)theEObject;
+				T result = caseMetaclass(metaclass);
+				if (result == null) result = caseClass(metaclass);
+				if (result == null) result = caseType(metaclass);
+				if (result == null) result = caseNamespace(metaclass);
+				if (result == null) result = caseNamedElement(metaclass);
+				if (result == null) result = caseTemplateableElement(metaclass);
+				if (result == null) result = caseParameterableElement(metaclass);
+				if (result == null) result = caseElement(metaclass);
+				if (result == null) result = caseNameable(metaclass);
+				if (result == null) result = caseVisitable(metaclass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -2080,6 +2080,22 @@ public class PivotSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Metaclass</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Metaclass</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMetaclass(Metaclass object)
+	{
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>More Pivotable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -2516,22 +2532,6 @@ public class PivotSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseClass(org.eclipse.ocl.examples.pivot.Class object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Classifier Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Classifier Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseClassifierType(ClassifierType object)
-	{
 		return null;
 	}
 

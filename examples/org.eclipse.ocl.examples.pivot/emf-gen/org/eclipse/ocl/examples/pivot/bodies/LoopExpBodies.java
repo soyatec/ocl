@@ -131,7 +131,7 @@ public class LoopExpBodies
 			final @NonNull ExecutorType T_pivot__OCLExpression = PivotTables.Types._OCLExpression;
 			final @NonNull ExecutorProperty P_CallExp_source = PivotTables.Properties._CallExp__source;
 			final @NonNull LibraryProperty IP_CallExp_source = P_CallExp_source.getImplementation();
-			final @NonNull Value T_ClassClassifier_pivot__CollectionType_ = valueFactory.createTypeValue(PivotTables.Types._CollectionType);
+			final @NonNull Value T_Metaclass_pivot__CollectionType_ = valueFactory.createTypeValue(PivotTables.Types._CollectionType);
 			
 			
 			Value A_symbol_5 = IP_CallExp_source.evaluate(evaluator, T_pivot__OCLExpression, self, P_CallExp_source);
@@ -140,7 +140,7 @@ public class LoopExpBodies
 			
 			DomainType static_A_symbol_7 = valueFactory.typeOf(A_symbol_6);
 			LibraryBinaryOperation dynamic_A_symbol_7 = (LibraryBinaryOperation)static_A_symbol_7.lookupImplementation(standardLibrary, O_OclAny_oclIsKindOf);
-			Value A_symbol_7 = dynamic_A_symbol_7.evaluate(evaluator, T_Boolean, A_symbol_6, T_ClassClassifier_pivot__CollectionType_);
+			Value A_symbol_7 = dynamic_A_symbol_7.evaluate(evaluator, T_Boolean, A_symbol_6, T_Metaclass_pivot__CollectionType_);
 			return A_symbol_7;
 		}
 	}

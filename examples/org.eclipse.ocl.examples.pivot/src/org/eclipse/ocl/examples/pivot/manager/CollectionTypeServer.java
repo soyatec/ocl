@@ -18,7 +18,6 @@ package org.eclipse.ocl.examples.pivot.manager;
 
 import java.lang.ref.WeakReference;
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +36,6 @@ import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
  * An CollectionTypeServer supports one or more merged collection types as the source for operations, properties or superclasses
@@ -189,7 +187,7 @@ public class CollectionTypeServer extends ExtensibleTypeServer
 		}
 		templateBinding.getParameterSubstitution().add(templateParameterSubstitution);
 		specializedType.getTemplateBinding().add(templateBinding);
-		resolveSuperClasses(specializedType, unspecializedType, allBindings);
+		packageManager.resolveSuperClasses(specializedType, unspecializedType, allBindings);
 		CollectionType specializedCollectionType = (CollectionType)specializedType;
 		specializedCollectionType.setElementType(templateArguments.getElementType());
 		specializedCollectionType.setLower(templateArguments.getLower());
@@ -250,36 +248,6 @@ public class CollectionTypeServer extends ExtensibleTypeServer
 				specializations2.put(templateArguments, new WeakReference<Type>(specializedType));
 			}
 			return specializedType;
-		}
-	}
-
-	void resolveSuperClasses(@NonNull Type specializedClass, @NonNull Type libraryClass, Map<TemplateParameter, ParameterableElement> allBindings) {
-		MetaModelManager metaModelManager = packageManager.getMetaModelManager();
-		for (Type superType : libraryClass.getSuperClass()) {
-			List<TemplateBinding> superTemplateBindings = superType.getTemplateBinding();
-			if (superTemplateBindings.size() > 0) {
-				List<ParameterableElement> superTemplateArgumentList = new ArrayList<ParameterableElement>();
-				for (TemplateBinding superTemplateBinding : superTemplateBindings) {
-					for (TemplateParameterSubstitution superParameterSubstitution : superTemplateBinding.getParameterSubstitution()) {
-						ParameterableElement superActual = superParameterSubstitution.getActual();
-						TemplateParameter superTemplateParameter = superActual.getTemplateParameter();
-						ParameterableElement actualActual = allBindings.get(superTemplateParameter);
-						superTemplateArgumentList.add(actualActual);
-					}
-				}
-				@NonNull Type unspecializedSuperType = PivotUtil.getUnspecializedTemplateableElement(superType);
-				CollectionTypeServer superTypeServer = (CollectionTypeServer) metaModelManager.getTypeServer(unspecializedSuperType);
-				if ((superTypeServer instanceof CollectionTypeServer) && (superTemplateArgumentList.size() == 1)) {
-					ParameterableElement templateArgument = superTemplateArgumentList.get(0);
-					if (templateArgument instanceof Type) {
-						Type specializedSuperType = ((CollectionTypeServer)superTypeServer).getSpecializedType((Type)templateArgument, null, null);
-						specializedClass.getSuperClass().add(specializedSuperType);
-					}
-				}
-			}
-			else {
-				specializedClass.getSuperClass().add(superType);
-			}
 		}
 	}
 }

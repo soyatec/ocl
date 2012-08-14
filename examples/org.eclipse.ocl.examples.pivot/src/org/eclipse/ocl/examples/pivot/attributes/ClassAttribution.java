@@ -18,7 +18,7 @@ package org.eclipse.ocl.examples.pivot.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.ClassifierType;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -50,8 +50,8 @@ public class ClassAttribution extends AbstractAttribution
 				}
 			}
 		}
-		if (target instanceof ClassifierType) {
-			Type instanceType = ((ClassifierType)target).getInstanceType();
+		if (target instanceof Metaclass) {
+			Type instanceType = ((Metaclass)target).getInstanceType();
 			if ((instanceType != null) && (instanceType.getOwningTemplateParameter() == null)) {		// Maybe null
 //				environmentView.addNamedElements(instanceType, metaModelManager.getLocalOperations(instanceType, Boolean.TRUE));
 //				environmentView.addNamedElements(instanceType, metaModelManager.getLocalProperties(instanceType, Boolean.TRUE));
@@ -60,13 +60,13 @@ public class ClassAttribution extends AbstractAttribution
 			}
 		}
 		environmentView.addAllOperations(targetClass, Boolean.FALSE);
-		environmentView.addAllProperties(targetClass, Boolean.FALSE);
+		environmentView.addAllProperties(targetClass, null);
 //		environmentView.addNamedElements(targetClass, metaModelManager.getLocalOperations(targetClass, Boolean.FALSE));
 //		environmentView.addNamedElements(targetClass, metaModelManager.getLocalProperties(targetClass, Boolean.FALSE));
 //		if (!environmentView.hasFinalResult()) {
-/*			if (target instanceof ClassifierType) {
+/*			if (target instanceof Metaclass) {
 				Set<Type> alreadyVisitedMetaTypes = new HashSet<Type>();
-				Type instanceType = ((ClassifierType)target).getInstanceType();
+				Type instanceType = ((Metaclass)target).getInstanceType();
 				if ((instanceType != null) && (instanceType.getOwningTemplateParameter() == null)) {		// Maybe null
 					environmentView.addAllContents(instanceType, scopeView, instanceType, Boolean.TRUE, alreadyVisitedMetaTypes);
 				}

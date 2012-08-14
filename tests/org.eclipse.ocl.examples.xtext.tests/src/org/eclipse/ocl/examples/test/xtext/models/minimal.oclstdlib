@@ -1,12 +1,12 @@
 library lib : lib = 'http://minimal.oclstdlib'
 {
-	type AnyClassifier(T) : ClassifierType conformsTo OclAny {}
 	type Bag(T) : BagType conformsTo Collection(T) {}
 	type Boolean : PrimitiveType conformsTo OclAny {}
 	type Class conformsTo OclAny {}	
 	type Collection(T) : CollectionType conformsTo OclAny {}
 	type Enumeration conformsTo OclAny {}
 	type Integer : PrimitiveType conformsTo Real {}
+	type Metaclass(T) : Metaclass conformsTo OclAny {}
 	type OclAny : AnyType {
 		operation "="(object2 : OclAny) : Boolean;
 	}

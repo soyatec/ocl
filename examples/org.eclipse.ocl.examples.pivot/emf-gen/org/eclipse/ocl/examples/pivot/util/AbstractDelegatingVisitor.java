@@ -105,10 +105,6 @@ public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
 		return delegate.visitClass(object);
 	}
 
-	public @Nullable R visitClassifierType(@NonNull org.eclipse.ocl.examples.pivot.ClassifierType object) {
-		return delegate.visitClassifierType(object);
-	}
-
 	public @Nullable R visitCollectionItem(@NonNull org.eclipse.ocl.examples.pivot.CollectionItem object) {
 		return delegate.visitCollectionItem(object);
 	}
@@ -247,6 +243,10 @@ public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
 
 	public @Nullable R visitMessageType(@NonNull org.eclipse.ocl.examples.pivot.MessageType object) {
 		return delegate.visitMessageType(object);
+	}
+
+	public @Nullable R visitMetaclass(@NonNull org.eclipse.ocl.examples.pivot.Metaclass object) {
+		return delegate.visitMetaclass(object);
 	}
 
 	public @Nullable R visitNamedElement(@NonNull org.eclipse.ocl.examples.pivot.NamedElement object) {

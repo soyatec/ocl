@@ -37,7 +37,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
     protected void setUp() throws Exception {
         super.setUp();
 //      helper.setContext(getMetaclass("Package"));
-        helper.setContext(metaModelManager.getAnyClassifierType());
+        helper.setContext(metaModelManager.getMetaclassType());
     }
 
 	public void testIntValue() {

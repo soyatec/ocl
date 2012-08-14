@@ -76,10 +76,6 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 				return createBooleanValueAdapter();
 			}
 			@Override
-			public Adapter caseClassifierTypeValue(ClassifierTypeValue object) {
-				return createClassifierTypeValueAdapter();
-			}
-			@Override
 			public Adapter caseCollectionValue(CollectionValue object) {
 				return createCollectionValueAdapter();
 			}
@@ -106,6 +102,10 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseInvalidValue(InvalidValue object) {
 				return createInvalidValueAdapter();
+			}
+			@Override
+			public Adapter caseMetaclassValue(MetaclassValue object) {
+				return createMetaclassValueAdapter();
 			}
 			@Override
 			public Adapter caseNullValue(NullValue object) {
@@ -212,20 +212,6 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.values.ClassifierTypeValue <em>Classifier Type Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.domain.values.ClassifierTypeValue
-	 * @generated
-	 */
-	public Adapter createClassifierTypeValueAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.values.CollectionValue <em>Collection Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -320,6 +306,20 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createInvalidValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.values.MetaclassValue <em>Metaclass Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.domain.values.MetaclassValue
+	 * @generated
+	 */
+	public Adapter createMetaclassValueAdapter() {
 		return null;
 	}
 

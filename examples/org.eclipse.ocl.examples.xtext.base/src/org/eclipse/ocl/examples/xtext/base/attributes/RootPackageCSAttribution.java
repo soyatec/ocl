@@ -17,7 +17,6 @@
 package org.eclipse.ocl.examples.xtext.base.attributes;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
@@ -42,8 +41,7 @@ public class RootPackageCSAttribution extends AbstractRootCSAttribution
 		if (pivotPackage != null) {
 			environmentView.addAllPackages(pivotPackage);
 		}
-		@SuppressWarnings("null") @NonNull EClass namespace2 = PivotPackage.Literals.NAMESPACE;
-		if (environmentView.accepts(namespace2)) {
+		if (environmentView.accepts(PivotPackage.Literals.NAMESPACE)) {
 			for (ImportCS anImport : targetElement.getOwnedImport()) {
 				Namespace namespace = anImport.getNamespace();
 				if (!namespace.eIsProxy()) {

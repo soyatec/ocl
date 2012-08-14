@@ -1016,6 +1016,22 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryNull(null, "OrderedSet{null}->last()");
 	}
 
+	public void testCollectionElementType() {
+		assertQueryEquals(null, metaModelManager.getOclAnyType(), "Sequence{1, 2.0, '3'}->elementType");
+		assertQueryEquals(null, metaModelManager.getUnlimitedNaturalType(), "Sequence{1, 2, 3}->elementType");
+		assertQueryEquals(null, metaModelManager.getUnlimitedNaturalType(), "Sequence{1, 2, 3}->oclAsType(Collection(Real))->elementType");
+// FIXME fails because common type is Set(T) and then because T is not type-servable and has no OclAny inheritance
+//		assertQueryEquals(null, metaModelManager.getSetType(), "Sequence{Set{1}, Set{2.0}, Set{'3'}}->elementType");
+// FIXME fails because common type is inadequate for implicit collect
+//				assertQueryEquals(null, metaModelManager.getOclAnyType(), "Sequence{Set{1}, Set{2.0}, Set{'3'}}.elementType");
+	}
+
+	public void testCollectionLower() {
+		assertQueryEquals(null, 0, "Sequence{1, 2.0, '3'}->lower");
+		assertQueryEquals(null, 0, "Sequence{1, 2.0, 3}->oclAsType(Collection(Real))->lower");
+		assertQueryEquals(null, 0, "Set{1, 2.0, 3}->oclAsType(Collection(Real)[2..4])->lower"); // no change to dynamic bound
+	}
+
 	public void testCollectionMax() {
 		assertQueryEquals(null, 2, "Sequence{1, 2}->max()");
 		assertQueryEquals(null, 5.0, "Set{5, 4.0, 3.0, 2, 1}->max()");

@@ -36,7 +36,7 @@ import org.eclipse.ocl.examples.pivot.BagType;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.CallOperationAction;
-import org.eclipse.ocl.examples.pivot.ClassifierType;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
 import org.eclipse.ocl.examples.pivot.CollectionKind;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
@@ -663,8 +663,6 @@ public class PivotValidator
 				return validateCallOperationAction((CallOperationAction)value, diagnostics, context);
 			case PivotPackage.CLASS:
 				return validateClass((org.eclipse.ocl.examples.pivot.Class)value, diagnostics, context);
-			case PivotPackage.CLASSIFIER_TYPE:
-				return validateClassifierType((ClassifierType)value, diagnostics, context);
 			case PivotPackage.COLLECTION_ITEM:
 				return validateCollectionItem((CollectionItem)value, diagnostics, context);
 			case PivotPackage.COLLECTION_LITERAL_EXP:
@@ -735,6 +733,8 @@ public class PivotValidator
 				return validateMessageExp((MessageExp)value, diagnostics, context);
 			case PivotPackage.MESSAGE_TYPE:
 				return validateMessageType((MessageType)value, diagnostics, context);
+			case PivotPackage.METACLASS:
+				return validateMetaclass((Metaclass)value, diagnostics, context);
 			case PivotPackage.MORE_PIVOTABLE:
 				return validateMorePivotable((MorePivotable)value, diagnostics, context);
 			case PivotPackage.NAMEABLE:
@@ -1046,26 +1046,6 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)class_, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)class_, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(class_, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateClassifierType(ClassifierType classifierType, DiagnosticChain diagnostics, Map<Object, Object> context)
-	{
-		if (!validate_NoCircularContainment((EObject)classifierType, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)classifierType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)classifierType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)classifierType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)classifierType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)classifierType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)classifierType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)classifierType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)classifierType, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(classifierType, diagnostics, context);
 		return result;
 	}
 
@@ -3030,6 +3010,26 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)messageType, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)messageType, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(messageType, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateMetaclass(Metaclass metaclass, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		if (!validate_NoCircularContainment((EObject)metaclass, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)metaclass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)metaclass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)metaclass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)metaclass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)metaclass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)metaclass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)metaclass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)metaclass, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(metaclass, diagnostics, context);
 		return result;
 	}
 

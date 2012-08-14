@@ -1,0 +1,144 @@
+/**
+ * <copyright>
+ *
+ * Copyright (c) 2011 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial API and implementation
+ *
+ * </copyright>
+ *
+ * $Id$
+ */
+package org.eclipse.ocl.examples.pivot.manager;
+
+import java.lang.ref.WeakReference;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.pivot.Metaclass;
+import org.eclipse.ocl.examples.pivot.ParameterableElement;
+import org.eclipse.ocl.examples.pivot.PivotFactory;
+import org.eclipse.ocl.examples.pivot.TemplateBinding;
+import org.eclipse.ocl.examples.pivot.TemplateParameter;
+import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
+import org.eclipse.ocl.examples.pivot.TemplateSignature;
+import org.eclipse.ocl.examples.pivot.Type;
+
+/**
+ * An MetaclassServer supports one or more merged types as the source for operations, properties or superclasses
+ * and additionally supports their specializations.
+ */
+public class MetaclassServer extends ExtensibleTypeServer
+{
+	/**
+	 * Map from actual types to specialization.
+	 * <br>
+	 * The specializations are weakly referenced so that stale specializations are garbage collected.
+	 */
+	// FIXME tests fail if keys are weak since GC is too aggressive across tests
+	// The actual types are weak keys so that parameterizations using stale types are garbage collected. 
+	//
+	private @Nullable /*WeakHash*/Map<Type, WeakReference<Metaclass>> specializations = null;
+
+	protected MetaclassServer(@NonNull PackageServer packageServer, @NonNull Metaclass domainType) {
+		super(packageServer, domainType);
+// -- too soon		assert domainType == packageManager.getMetaModelManager().getMetaclassType();
+	}
+	
+	protected @NonNull Metaclass createSpecialization(@NonNull Type type) {
+		MetaModelManager metaModelManager = packageManager.getMetaModelManager();
+		Metaclass metaclassType = metaModelManager.getMetaclassType();
+		Metaclass metaclass = PivotFactory.eINSTANCE.createMetaclass();		
+		metaclass.setName(metaclassType.getName());
+		metaclass.setInstanceType(type);
+		metaclass.setUnspecializedElement(metaclassType);
+		//
+		TemplateSignature templateSignature = metaclassType.getOwnedTemplateSignature();
+		TemplateBinding templateBinding = PivotFactory.eINSTANCE.createTemplateBinding();
+		templateBinding.setSignature(templateSignature);
+		Map<TemplateParameter, ParameterableElement> allBindings = new HashMap<TemplateParameter, ParameterableElement>();
+		TemplateParameter formalParameter = templateSignature.getOwnedParameter().get(0);
+		allBindings.put(formalParameter, type);
+		TemplateParameterSubstitution templateParameterSubstitution = PivotFactory.eINSTANCE.createTemplateParameterSubstitution();
+		templateParameterSubstitution.setFormal(formalParameter);
+		if (type.eResource() == null) {
+			templateParameterSubstitution.setOwnedActual(type);
+		}
+		else {
+			templateParameterSubstitution.setActual(type);
+		}
+		templateBinding.getParameterSubstitution().add(templateParameterSubstitution);
+		metaclass.getTemplateBinding().add(templateBinding);
+		//
+		packageManager.resolveSuperClasses(metaclass, metaclassType, allBindings);
+		//
+		Orphanage orphanage = Orphanage.getOrphanage(metaModelManager.getPivotResourceSet());
+		metaclass.setPackage(orphanage);
+		return metaclass;
+	}
+
+/*	public synchronized @Nullable Metaclass findSpecializedType(@NonNull Type type) {
+		TemplateSignature templateSignature = getPivotType().getOwnedTemplateSignature();
+		List<TemplateParameter> templateParameters = templateSignature.getParameter();
+		int iMax = templateParameters.size();
+		if (iMax != 1) {
+			return null;
+		}
+		Map<Type, WeakReference<Metaclass>> specializations2 = specializations;
+		if (specializations2 == null) {
+			return null;
+		}
+		WeakReference<Metaclass> weakReference = specializations2.get(type);
+		if (weakReference == null) {
+			return null;
+		}
+		Metaclass metaclass = weakReference.get();
+		if (metaclass == null) {
+			synchronized (specializations2) {
+				metaclass = weakReference.get();
+				if (metaclass == null) {
+					specializations2.remove(type);
+				}
+			}
+		}
+		return metaclass;
+	} */
+
+	public synchronized @NonNull Metaclass getSpecializedType(@NonNull Type type) {
+		assert getPivotType() instanceof Metaclass;
+		TemplateSignature templateSignature = getPivotType().getOwnedTemplateSignature();
+		List<TemplateParameter> templateParameters = templateSignature.getParameter();
+		if (templateParameters.size() != 1) {
+			throw new IllegalArgumentException("Incompatible template argument count");
+		}
+		Map<Type, WeakReference<Metaclass>> specializations2 = specializations;
+		if (specializations2 == null) {
+			synchronized(this) {
+				specializations2 = specializations;
+				if (specializations2 == null) {
+					specializations2 = specializations = new /*Weak*/HashMap<Type, WeakReference<Metaclass>>();
+				}
+			}
+		}
+		synchronized (specializations2) {
+			Metaclass specializedType = null;
+			WeakReference<Metaclass> weakReference = specializations2.get(type);
+			if (weakReference != null) {
+				specializedType = weakReference.get();
+			}
+			if (specializedType == null) {
+				specializedType = createSpecialization(type);
+				specializations2.put(type, new WeakReference<Metaclass>(specializedType));
+			}
+			return specializedType;
+		}
+	}
+}

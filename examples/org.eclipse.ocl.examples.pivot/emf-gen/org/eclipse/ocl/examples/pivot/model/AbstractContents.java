@@ -24,7 +24,7 @@ import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.AssociativityKind;
 import org.eclipse.ocl.examples.pivot.BagType;
 import org.eclipse.ocl.examples.pivot.Class;
-import org.eclipse.ocl.examples.pivot.ClassifierType;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.DataType;
@@ -76,12 +76,6 @@ public class AbstractContents
 
 	protected @NonNull Class createClass(@NonNull String name) {
 		Class pivotType = PivotFactory.eINSTANCE.createClass();
-		pivotType.setName(name);
-		return pivotType;
-	}
-
-	protected @NonNull ClassifierType createClassifierType(@NonNull String name) {
-		ClassifierType pivotType = PivotFactory.eINSTANCE.createClassifierType();
 		pivotType.setName(name);
 		return pivotType;
 	}
@@ -139,6 +133,12 @@ public class AbstractContents
 		pivotLibrary.setNsPrefix(nsPrefix);
 		pivotLibrary.setNsURI(nsURI);
 		return pivotLibrary;
+	}
+
+	protected @NonNull Metaclass createMetaclass(@NonNull String name) {
+		Metaclass pivotType = PivotFactory.eINSTANCE.createMetaclass();
+		pivotType.setName(name);
+		return pivotType;
 	}
 	
 	protected @NonNull Operation createOperation(@NonNull String name, @NonNull Type type, @Nullable String implementationClass, @Nullable LibraryFeature implementation) {

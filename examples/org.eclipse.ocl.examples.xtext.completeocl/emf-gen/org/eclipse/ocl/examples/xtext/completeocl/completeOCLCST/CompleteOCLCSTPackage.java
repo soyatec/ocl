@@ -1079,6 +1079,15 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	int DEF_FEATURE_CS__QUALIFIER = BaseCSTPackage.TYPED_ELEMENT_CS__QUALIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEF_FEATURE_CS__OPTIONAL = BaseCSTPackage.TYPED_ELEMENT_CS__OPTIONAL;
+
+	/**
 	 * The feature id for the '<em><b>Def</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1186,6 +1195,15 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int DEF_OPERATION_CS__QUALIFIER = DEF_FEATURE_CS__QUALIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEF_OPERATION_CS__OPTIONAL = DEF_FEATURE_CS__OPTIONAL;
 
 	/**
 	 * The feature id for the '<em><b>Def</b></em>' container reference.
@@ -1304,6 +1322,15 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int DEF_PROPERTY_CS__QUALIFIER = DEF_FEATURE_CS__QUALIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEF_PROPERTY_CS__OPTIONAL = DEF_FEATURE_CS__OPTIONAL;
 
 	/**
 	 * The feature id for the '<em><b>Def</b></em>' container reference.

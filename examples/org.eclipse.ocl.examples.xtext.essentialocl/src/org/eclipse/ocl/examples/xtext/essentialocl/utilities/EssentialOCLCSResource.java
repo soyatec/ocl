@@ -176,7 +176,7 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 				addLibraryError(errors, e);
 			}
 			try {
-				metaModelManager.getAnyClassifierType();
+				metaModelManager.getMetaclassType();
 			} catch (IllegalLibraryException e) {			
 				addLibraryError(errors, e);
 			}

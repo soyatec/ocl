@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.BooleanValue;
-import org.eclipse.ocl.examples.domain.values.ClassifierTypeValue;
+import org.eclipse.ocl.examples.domain.values.MetaclassValue;
 import org.eclipse.ocl.examples.domain.values.CollectionTypeValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.ElementValue;
@@ -60,13 +60,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass classifierTypeValueEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass collectionValueEClass = null;
 
 	/**
@@ -110,6 +103,13 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 	 * @generated
 	 */
 	private EClass invalidValueEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass metaclassValueEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -293,15 +293,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getClassifierTypeValue() {
-		return classifierTypeValueEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getCollectionValue() {
 		return collectionValueEClass;
 	}
@@ -358,6 +349,15 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 	 */
 	public EClass getInvalidValue() {
 		return invalidValueEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMetaclassValue() {
+		return metaclassValueEClass;
 	}
 
 	/**
@@ -518,8 +518,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 
 		booleanValueEClass = createEClass(BOOLEAN_VALUE);
 
-		classifierTypeValueEClass = createEClass(CLASSIFIER_TYPE_VALUE);
-
 		collectionValueEClass = createEClass(COLLECTION_VALUE);
 
 		collectionTypeValueEClass = createEClass(COLLECTION_TYPE_VALUE);
@@ -533,6 +531,8 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 		integerValueEClass = createEClass(INTEGER_VALUE);
 
 		invalidValueEClass = createEClass(INVALID_VALUE);
+
+		metaclassValueEClass = createEClass(METACLASS_VALUE);
 
 		nullValueEClass = createEClass(NULL_VALUE);
 
@@ -593,7 +593,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 		// Add supertypes to classes
 		bagValueEClass.getESuperTypes().add(this.getCollectionValue());
 		booleanValueEClass.getESuperTypes().add(this.getValue());
-		classifierTypeValueEClass.getESuperTypes().add(this.getTypeValue());
 		collectionValueEClass.getESuperTypes().add(this.getValue());
 		collectionTypeValueEClass.getESuperTypes().add(this.getTypeValue());
 		elementValueEClass.getESuperTypes().add(this.getObjectValue());
@@ -601,6 +600,7 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 		enumerationTypeValueEClass.getESuperTypes().add(this.getTypeValue());
 		integerValueEClass.getESuperTypes().add(this.getNumericValue());
 		invalidValueEClass.getESuperTypes().add(this.getNullValue());
+		metaclassValueEClass.getESuperTypes().add(this.getTypeValue());
 		nullValueEClass.getESuperTypes().add(this.getBooleanValue());
 		nullValueEClass.getESuperTypes().add(this.getIntegerValue());
 		nullValueEClass.getESuperTypes().add(this.getObjectValue());
@@ -630,8 +630,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 
 		initEClass(booleanValueEClass, BooleanValue.class, "BooleanValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(classifierTypeValueEClass, ClassifierTypeValue.class, "ClassifierTypeValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(collectionValueEClass, CollectionValue.class, "CollectionValue", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(collectionTypeValueEClass, CollectionTypeValue.class, "CollectionTypeValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -645,6 +643,8 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 		initEClass(integerValueEClass, IntegerValue.class, "IntegerValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(invalidValueEClass, InvalidValue.class, "InvalidValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(metaclassValueEClass, MetaclassValue.class, "MetaclassValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(nullValueEClass, NullValue.class, "NullValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

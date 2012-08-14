@@ -56,6 +56,11 @@ public interface Value
 	/**
 	 * @generated NOT
 	 */
+	@NonNull CollectionTypeValue asCollectionTypeValue() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	@NonNull CollectionValue asCollectionValue() throws InvalidValueException;
 
 	/**

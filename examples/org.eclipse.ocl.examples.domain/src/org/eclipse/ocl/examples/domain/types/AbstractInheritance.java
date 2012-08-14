@@ -144,17 +144,28 @@ public abstract class AbstractInheritance implements DomainInheritance
 		for ( ; staticDepth > 0; --staticDepth) {
 			int iMax = getIndex(staticDepth+1);
 			int jMax = thatInheritance.getIndex(staticDepth+1);
+			DomainInheritance commonInheritance = null;
+			int commonInheritances = 0;
 			for (int i = getIndex(staticDepth); i < iMax; i++) {
 				DomainInheritance thisBaseInheritance = getFragment(i).getBaseInheritance();
 				for (int j = thatInheritance.getIndex(staticDepth); j < jMax; j++) {
 					DomainInheritance thatBaseInheritance = thatInheritance.getFragment(j).getBaseInheritance();
 					if (thisBaseInheritance == thatBaseInheritance) {
-						return thisBaseInheritance;
+						commonInheritances++;
+						commonInheritance = thisBaseInheritance;
+						break;
 					}
 				}
+				if (commonInheritances > 1) { 				// More than one so must go less deep to find uniqueness
+					break;
+				}
+			}
+			if (commonInheritances == 1) {					// Must be unique to avoid arbitrary choice for e.g. Sequence{1, 2.0, '3'}->elementType
+				assert commonInheritance != null;
+				return commonInheritance;
 			}
 		}
-		return getFragment(0).getDerivedInheritance();	// Always OclAny at index 0
+		return getFragment(0).getBaseInheritance();	// Always OclAny at index 0
 	}
 	
 	public @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {

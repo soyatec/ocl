@@ -22,7 +22,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.pivot.ClassifierType;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.NamedElement;
@@ -110,10 +110,10 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 			}
 			return metaModelManager.getTupleType(DomainUtil.nonNullModel(tupleType.getName()), resolvedProperties, null);
 		}
-		if (type instanceof ClassifierType) {
-			ClassifierType classifierType = (ClassifierType)type;
-			Type resolvedElementType = resolveUnderspecifiedType(DomainUtil.nonNullModel(classifierType.getInstanceType()));
-			return metaModelManager.getClassifierType(resolvedElementType);
+		if (type instanceof Metaclass) {
+			Metaclass metaclass = (Metaclass)type;
+			Type resolvedElementType = resolveUnderspecifiedType(DomainUtil.nonNullModel(metaclass.getInstanceType()));
+			return metaModelManager.getMetaclass(resolvedElementType);
 		}
 		throw new UnsupportedOperationException();
 //		return null;

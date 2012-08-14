@@ -170,7 +170,7 @@ public class OCLstdlib extends XMIResourceImpl
 			installPrimitiveTypes();
 			installParameterTypes();
 			installCollectionTypes();
-			installClassifierTypes();
+			installMetaclasses();
 			installLambdaTypes();
 			installTupleTypes();
 			installOperations();
@@ -215,16 +215,12 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull PrimitiveType _UnlimitedNatural = createPrimitiveType("UnlimitedNatural");
 		
 		protected final @NonNull Class _UnlimitedNatural_oclAsType_TT = createClass("TT");
-		protected final @NonNull Class _AnyClassifier_T = createClass("T");
 		protected final @NonNull Class _Bag_collectNested_V = createClass("V");
 		protected final @NonNull Class _Bag_collect_V = createClass("V");
 		protected final @NonNull Class _Bag_flatten_T2 = createClass("T2");
 		protected final @NonNull Class _Bag_selectByKind_TT = createClass("TT");
 		protected final @NonNull Class _Bag_selectByType_TT = createClass("TT");
 		protected final @NonNull Class _Bag_T = createClass("T");
-		protected final @NonNull Class _ClassClassifier_T = createClass("T");
-		protected final @NonNull Class _CollectionClassifier_E = createClass("E");
-		protected final @NonNull Class _CollectionClassifier_T = createClass("T");
 		protected final @NonNull Class _Collection_collectNested_V = createClass("V");
 		protected final @NonNull Class _Collection_collect_V = createClass("V");
 		protected final @NonNull Class _Collection_excludesAll_T2 = createClass("T2");
@@ -235,7 +231,7 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Class _Collection_selectByKind_TT = createClass("TT");
 		protected final @NonNull Class _Collection_selectByType_TT = createClass("TT");
 		protected final @NonNull Class _Collection_T = createClass("T");
-		protected final @NonNull Class _EnumerationClassifier_T = createClass("T");
+		protected final @NonNull Class _Metaclass_T = createClass("T");
 		protected final @NonNull Class _OclAny_oclAsType_TT = createClass("TT");
 		protected final @NonNull Class _OclAny_oclIsKindOf_T = createClass("T");
 		protected final @NonNull Class _OclAny_oclIsTypeOf_T = createClass("T");
@@ -313,35 +309,24 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull CollectionType _UniqueCollection_Set_T = createCollectionType("UniqueCollection"/*T*/, "0", "-1");
 		protected final @NonNull CollectionType _UniqueCollection_UniqueCollection_T = createCollectionType("UniqueCollection"/*T*/, "0", "-1");
 		
-		protected final @NonNull ClassifierType _AnyClassifier_UnlimitedNatural_oclAsType_TT = createClassifierType("AnyClassifier");
-		protected final @NonNull ClassifierType _AnyClassifier_Bag_selectByKind_TT = createClassifierType("AnyClassifier");
-		protected final @NonNull ClassifierType _AnyClassifier_Bag_selectByType_TT = createClassifierType("AnyClassifier");
-		protected final @NonNull ClassifierType _AnyClassifier_ClassClassifier_T = createClassifierType("AnyClassifier");
-		protected final @NonNull ClassifierType _AnyClassifier_CollectionClassifier_T = createClassifierType("AnyClassifier");
-		protected final @NonNull ClassifierType _AnyClassifier_Collection_selectByKind_TT = createClassifierType("AnyClassifier");
-		protected final @NonNull ClassifierType _AnyClassifier_Collection_selectByType_TT = createClassifierType("AnyClassifier");
-		protected final @NonNull ClassifierType _AnyClassifier_EnumerationClassifier_T = createClassifierType("AnyClassifier");
-		protected final @NonNull ClassifierType _AnyClassifier_OclAny_oclAsType_TT = createClassifierType("AnyClassifier");
-		protected final @NonNull ClassifierType _AnyClassifier_OclAny_oclIsKindOf_T = createClassifierType("AnyClassifier");
-		protected final @NonNull ClassifierType _AnyClassifier_OclAny_oclIsTypeOf_T = createClassifierType("AnyClassifier");
-		protected final @NonNull ClassifierType _AnyClassifier_OclInvalid = createClassifierType("AnyClassifier");
-		protected final @NonNull ClassifierType _AnyClassifier_OclSelf = createClassifierType("AnyClassifier");
-		protected final @NonNull ClassifierType _AnyClassifier_OclVoid = createClassifierType("AnyClassifier");
-		protected final @NonNull ClassifierType _AnyClassifier_OrderedSet_selectByKind_TT = createClassifierType("AnyClassifier");
-		protected final @NonNull ClassifierType _AnyClassifier_OrderedSet_selectByType_TT = createClassifierType("AnyClassifier");
-		protected final @NonNull ClassifierType _AnyClassifier_Sequence_selectByKind_TT = createClassifierType("AnyClassifier");
-		protected final @NonNull ClassifierType _AnyClassifier_Sequence_selectByType_TT = createClassifierType("AnyClassifier");
-		protected final @NonNull ClassifierType _AnyClassifier_Set_selectByKind_TT = createClassifierType("AnyClassifier");
-		protected final @NonNull ClassifierType _AnyClassifier_Set_selectByType_TT = createClassifierType("AnyClassifier");
-		protected final @NonNull ClassifierType _AnyClassifier = createClassifierType("AnyClassifier");
-		protected final @NonNull ClassifierType _ClassClassifier_OclInvalid = createClassifierType("ClassClassifier");
-		protected final @NonNull ClassifierType _ClassClassifier_OclSelf = createClassifierType("ClassClassifier");
-		protected final @NonNull ClassifierType _ClassClassifier_OclVoid = createClassifierType("ClassClassifier");
-		protected final @NonNull ClassifierType _ClassClassifier = createClassifierType("ClassClassifier");
-		protected final @NonNull ClassifierType _CollectionClassifier_OclSelf_Collection_T = createClassifierType("CollectionClassifier");
-		protected final @NonNull ClassifierType _CollectionClassifier = createClassifierType("CollectionClassifier");
-		protected final @NonNull ClassifierType _EnumerationClassifier_OclSelf = createClassifierType("EnumerationClassifier");
-		protected final @NonNull ClassifierType _EnumerationClassifier = createClassifierType("EnumerationClassifier");
+		protected final @NonNull Metaclass _Metaclass_UnlimitedNatural_oclAsType_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass _Metaclass_Bag_selectByKind_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass _Metaclass_Bag_selectByType_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass _Metaclass_Collection_selectByKind_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass _Metaclass_Collection_selectByType_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass _Metaclass_OclAny_oclAsType_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass _Metaclass_OclAny_oclIsKindOf_T = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass _Metaclass_OclAny_oclIsTypeOf_T = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass _Metaclass_OclInvalid = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass _Metaclass_OclSelf = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass _Metaclass_OclVoid = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass _Metaclass_OrderedSet_selectByKind_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass _Metaclass_OrderedSet_selectByType_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass _Metaclass_Sequence_selectByKind_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass _Metaclass_Sequence_selectByType_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass _Metaclass_Set_selectByKind_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass _Metaclass_Set_selectByType_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass _Metaclass = createMetaclass("Metaclass");
 		
 		protected final @NonNull TupleType _Tuple = createTupleType("Tuple",
 			createProperty("first", _Collection_T),
@@ -708,173 +693,118 @@ public class OCLstdlib extends XMIResourceImpl
 			superClasses.add(_Collection_UniqueCollection_T);
 		}
 		
-		protected void installClassifierTypes() {
+		protected void installMetaclasses() {
 			final List<Type> ownedTypes = library.getOwnedType();
 			final List<Type> orphanTypes = orphans.getOwnedType();
-			ClassifierType type;
+			Metaclass type;
 			List<Type> superClasses;
-			orphanTypes.add(type = _AnyClassifier_UnlimitedNatural_oclAsType_TT);
-			type.setUnspecializedElement(_AnyClassifier);
+			orphanTypes.add(type = _Metaclass_UnlimitedNatural_oclAsType_TT);
+			type.setUnspecializedElement(_Metaclass);
 			type.setInstanceType(_UnlimitedNatural_oclAsType_TT);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Class);
 			superClasses.add(_OclType);
-			orphanTypes.add(type = _AnyClassifier_Bag_selectByKind_TT);
-			type.setUnspecializedElement(_AnyClassifier);
+			orphanTypes.add(type = _Metaclass_Bag_selectByKind_TT);
+			type.setUnspecializedElement(_Metaclass);
 			type.setInstanceType(_Bag_selectByKind_TT);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Class);
 			superClasses.add(_OclType);
-			orphanTypes.add(type = _AnyClassifier_Bag_selectByType_TT);
-			type.setUnspecializedElement(_AnyClassifier);
+			orphanTypes.add(type = _Metaclass_Bag_selectByType_TT);
+			type.setUnspecializedElement(_Metaclass);
 			type.setInstanceType(_Bag_selectByType_TT);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Class);
 			superClasses.add(_OclType);
-			orphanTypes.add(type = _AnyClassifier_ClassClassifier_T);
-			type.setUnspecializedElement(_AnyClassifier);
-			type.setInstanceType(_ClassClassifier_T);
-			superClasses = type.getSuperClass();
-			superClasses.add(_Class);
-			superClasses.add(_OclType);
-			orphanTypes.add(type = _AnyClassifier_CollectionClassifier_T);
-			type.setUnspecializedElement(_AnyClassifier);
-			type.setInstanceType(_CollectionClassifier_T);
-			superClasses = type.getSuperClass();
-			superClasses.add(_Class);
-			superClasses.add(_OclType);
-			orphanTypes.add(type = _AnyClassifier_Collection_selectByKind_TT);
-			type.setUnspecializedElement(_AnyClassifier);
+			orphanTypes.add(type = _Metaclass_Collection_selectByKind_TT);
+			type.setUnspecializedElement(_Metaclass);
 			type.setInstanceType(_Collection_selectByKind_TT);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Class);
 			superClasses.add(_OclType);
-			orphanTypes.add(type = _AnyClassifier_Collection_selectByType_TT);
-			type.setUnspecializedElement(_AnyClassifier);
+			orphanTypes.add(type = _Metaclass_Collection_selectByType_TT);
+			type.setUnspecializedElement(_Metaclass);
 			type.setInstanceType(_Collection_selectByType_TT);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Class);
 			superClasses.add(_OclType);
-			orphanTypes.add(type = _AnyClassifier_EnumerationClassifier_T);
-			type.setUnspecializedElement(_AnyClassifier);
-			type.setInstanceType(_EnumerationClassifier_T);
-			superClasses = type.getSuperClass();
-			superClasses.add(_Class);
-			superClasses.add(_OclType);
-			orphanTypes.add(type = _AnyClassifier_OclAny_oclAsType_TT);
-			type.setUnspecializedElement(_AnyClassifier);
+			orphanTypes.add(type = _Metaclass_OclAny_oclAsType_TT);
+			type.setUnspecializedElement(_Metaclass);
 			type.setInstanceType(_OclAny_oclAsType_TT);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Class);
 			superClasses.add(_OclType);
-			orphanTypes.add(type = _AnyClassifier_OclAny_oclIsKindOf_T);
-			type.setUnspecializedElement(_AnyClassifier);
+			orphanTypes.add(type = _Metaclass_OclAny_oclIsKindOf_T);
+			type.setUnspecializedElement(_Metaclass);
 			type.setInstanceType(_OclAny_oclIsKindOf_T);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Class);
 			superClasses.add(_OclType);
-			orphanTypes.add(type = _AnyClassifier_OclAny_oclIsTypeOf_T);
-			type.setUnspecializedElement(_AnyClassifier);
+			orphanTypes.add(type = _Metaclass_OclAny_oclIsTypeOf_T);
+			type.setUnspecializedElement(_Metaclass);
 			type.setInstanceType(_OclAny_oclIsTypeOf_T);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Class);
 			superClasses.add(_OclType);
-			orphanTypes.add(type = _AnyClassifier_OclInvalid);
-			type.setUnspecializedElement(_AnyClassifier);
+			orphanTypes.add(type = _Metaclass_OclInvalid);
+			type.setUnspecializedElement(_Metaclass);
 			type.setInstanceType(_OclInvalid);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Class);
 			superClasses.add(_OclType);
-			orphanTypes.add(type = _AnyClassifier_OclSelf);
-			type.setUnspecializedElement(_AnyClassifier);
+			orphanTypes.add(type = _Metaclass_OclSelf);
+			type.setUnspecializedElement(_Metaclass);
 			type.setInstanceType(_OclSelf);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Class);
 			superClasses.add(_OclType);
-			orphanTypes.add(type = _AnyClassifier_OclVoid);
-			type.setUnspecializedElement(_AnyClassifier);
+			orphanTypes.add(type = _Metaclass_OclVoid);
+			type.setUnspecializedElement(_Metaclass);
 			type.setInstanceType(_OclVoid);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Class);
 			superClasses.add(_OclType);
-			orphanTypes.add(type = _AnyClassifier_OrderedSet_selectByKind_TT);
-			type.setUnspecializedElement(_AnyClassifier);
+			orphanTypes.add(type = _Metaclass_OrderedSet_selectByKind_TT);
+			type.setUnspecializedElement(_Metaclass);
 			type.setInstanceType(_OrderedSet_selectByKind_TT);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Class);
 			superClasses.add(_OclType);
-			orphanTypes.add(type = _AnyClassifier_OrderedSet_selectByType_TT);
-			type.setUnspecializedElement(_AnyClassifier);
+			orphanTypes.add(type = _Metaclass_OrderedSet_selectByType_TT);
+			type.setUnspecializedElement(_Metaclass);
 			type.setInstanceType(_OrderedSet_selectByType_TT);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Class);
 			superClasses.add(_OclType);
-			orphanTypes.add(type = _AnyClassifier_Sequence_selectByKind_TT);
-			type.setUnspecializedElement(_AnyClassifier);
+			orphanTypes.add(type = _Metaclass_Sequence_selectByKind_TT);
+			type.setUnspecializedElement(_Metaclass);
 			type.setInstanceType(_Sequence_selectByKind_TT);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Class);
 			superClasses.add(_OclType);
-			orphanTypes.add(type = _AnyClassifier_Sequence_selectByType_TT);
-			type.setUnspecializedElement(_AnyClassifier);
+			orphanTypes.add(type = _Metaclass_Sequence_selectByType_TT);
+			type.setUnspecializedElement(_Metaclass);
 			type.setInstanceType(_Sequence_selectByType_TT);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Class);
 			superClasses.add(_OclType);
-			orphanTypes.add(type = _AnyClassifier_Set_selectByKind_TT);
-			type.setUnspecializedElement(_AnyClassifier);
+			orphanTypes.add(type = _Metaclass_Set_selectByKind_TT);
+			type.setUnspecializedElement(_Metaclass);
 			type.setInstanceType(_Set_selectByKind_TT);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Class);
 			superClasses.add(_OclType);
-			orphanTypes.add(type = _AnyClassifier_Set_selectByType_TT);
-			type.setUnspecializedElement(_AnyClassifier);
+			orphanTypes.add(type = _Metaclass_Set_selectByType_TT);
+			type.setUnspecializedElement(_Metaclass);
 			type.setInstanceType(_Set_selectByType_TT);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Class);
 			superClasses.add(_OclType);
-			ownedTypes.add(type = _AnyClassifier);
-			type.setInstanceType(_AnyClassifier_T);
+			ownedTypes.add(type = _Metaclass);
+			type.setInstanceType(_Metaclass_T);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Class);
 			superClasses.add(_OclType);
-			orphanTypes.add(type = _ClassClassifier_OclInvalid);
-			type.setUnspecializedElement(_ClassClassifier);
-			type.setInstanceType(_OclInvalid);
-			superClasses = type.getSuperClass();
-			superClasses.add(_AnyClassifier_OclInvalid);
-			orphanTypes.add(type = _ClassClassifier_OclSelf);
-			type.setUnspecializedElement(_ClassClassifier);
-			type.setInstanceType(_OclSelf);
-			superClasses = type.getSuperClass();
-			superClasses.add(_OclElement);
-			orphanTypes.add(type = _ClassClassifier_OclVoid);
-			type.setUnspecializedElement(_ClassClassifier);
-			type.setInstanceType(_OclVoid);
-			superClasses = type.getSuperClass();
-			superClasses.add(_AnyClassifier_OclVoid);
-			ownedTypes.add(type = _ClassClassifier);
-			type.setInstanceType(_ClassClassifier_T);
-			superClasses = type.getSuperClass();
-			superClasses.add(_AnyClassifier_ClassClassifier_T);
-			orphanTypes.add(type = _CollectionClassifier_OclSelf_Collection_T);
-			type.setUnspecializedElement(_CollectionClassifier);
-			type.setInstanceType(_OclSelf);
-			superClasses = type.getSuperClass();
-			superClasses.add(_OclElement);
-			ownedTypes.add(type = _CollectionClassifier);
-			type.setInstanceType(_CollectionClassifier_T);
-			superClasses = type.getSuperClass();
-			superClasses.add(_AnyClassifier_CollectionClassifier_T);
-			orphanTypes.add(type = _EnumerationClassifier_OclSelf);
-			type.setUnspecializedElement(_EnumerationClassifier);
-			type.setInstanceType(_OclSelf);
-			superClasses = type.getSuperClass();
-			superClasses.add(_OclElement);
-			ownedTypes.add(type = _EnumerationClassifier);
-			type.setInstanceType(_EnumerationClassifier_T);
-			superClasses = type.getSuperClass();
-			superClasses.add(_AnyClassifier_EnumerationClassifier_T);
 		}
 		
 		protected void installTupleTypes() {
@@ -1099,7 +1029,6 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Operation op_Bag_Bag_T_selectByType = createOperation("selectByType", _Bag_Bag_selectByType_TT, "org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation", org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
 		protected final @NonNull Operation op_Bag_Bag_T_union = createOperation("union", _Bag_Bag_T, "org.eclipse.ocl.examples.library.collection.CollectionUnionOperation", org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE);
 		protected final @NonNull Operation op_Bag_Bag_T_union_1 = createOperation("union", _Set_Bag_T, "org.eclipse.ocl.examples.library.collection.CollectionUnionOperation", org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE);
-		protected final @NonNull Operation op_Class_oclType = createOperation("oclType", _ClassClassifier_OclSelf, "org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T__lt__gt_ = createOperation("<>", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation", org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T__eq_ = createOperation("=", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation", org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T_asBag = createOperation("asBag", _Bag_Collection_T, "org.eclipse.ocl.examples.library.collection.CollectionAsBagOperation", org.eclipse.ocl.examples.library.collection.CollectionAsBagOperation.INSTANCE);
@@ -1118,14 +1047,12 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Operation op_Collection_Collection_T_max = createOperation("max", _Collection_T, "org.eclipse.ocl.examples.library.collection.CollectionMaxOperation", org.eclipse.ocl.examples.library.collection.CollectionMaxOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T_min = createOperation("min", _Collection_T, "org.eclipse.ocl.examples.library.collection.CollectionMinOperation", org.eclipse.ocl.examples.library.collection.CollectionMinOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T_notEmpty = createOperation("notEmpty", _Boolean, "org.eclipse.ocl.examples.library.collection.CollectionNotEmptyOperation", org.eclipse.ocl.examples.library.collection.CollectionNotEmptyOperation.INSTANCE);
-		protected final @NonNull Operation op_Collection_Collection_T_oclType = createOperation("oclType", _CollectionClassifier_OclSelf_Collection_T, "org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T_product = createOperation("product", _Set_Tuple, "org.eclipse.ocl.examples.library.collection.CollectionProductOperation", org.eclipse.ocl.examples.library.collection.CollectionProductOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T_selectByKind = createOperation("selectByKind", _Collection_Collection_selectByKind_TT, "org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation", org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T_selectByType = createOperation("selectByType", _Collection_Collection_selectByType_TT, "org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation", org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T_size = createOperation("size", _Integer, "org.eclipse.ocl.examples.library.collection.CollectionSizeOperation", org.eclipse.ocl.examples.library.collection.CollectionSizeOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T_sum = createOperation("sum", _Collection_T, "org.eclipse.ocl.examples.library.collection.CollectionSumOperation", org.eclipse.ocl.examples.library.collection.CollectionSumOperation.INSTANCE);
 		protected final @NonNull Operation op_Enumeration_allInstances = createOperation("allInstances", _Set_OclSelf, "org.eclipse.ocl.examples.library.enumeration.EnumerationAllInstancesOperation", org.eclipse.ocl.examples.library.enumeration.EnumerationAllInstancesOperation.INSTANCE);
-		protected final @NonNull Operation op_Enumeration_oclType = createOperation("oclType", _EnumerationClassifier_OclSelf, "org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation.INSTANCE);
 		protected final @NonNull Operation op_OclAny__lt__gt_ = createOperation("<>", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation", org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
 		protected final @NonNull Operation op_OclAny__eq_ = createOperation("=", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation", org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
 		protected final @NonNull Operation op_OclAny_oclAsSet = createOperation("oclAsSet", _Set_OclSelf, "org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation.INSTANCE);
@@ -1136,7 +1063,7 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Operation op_OclAny_oclIsNew = createOperation("oclIsNew", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation", org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation.INSTANCE);
 		protected final @NonNull Operation op_OclAny_oclIsTypeOf = createOperation("oclIsTypeOf", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyOclIsTypeOfOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclIsTypeOfOperation.INSTANCE);
 		protected final @NonNull Operation op_OclAny_oclIsUndefined = createOperation("oclIsUndefined", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation.INSTANCE);
-		protected final @NonNull Operation op_OclAny_oclType = createOperation("oclType", _AnyClassifier_OclSelf, "org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation.INSTANCE);
+		protected final @NonNull Operation op_OclAny_oclType = createOperation("oclType", _Metaclass_OclSelf, "org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation.INSTANCE);
 		protected final @NonNull Operation op_OclAny_toString = createOperation("toString", _String, "org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation", org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
 		protected final @NonNull Operation op_OclComparable__lt_ = createOperation("<", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclComparableLessThanOperation", org.eclipse.ocl.examples.library.oclany.OclComparableLessThanOperation.INSTANCE);
 		protected final @NonNull Operation op_OclComparable__lt__eq_ = createOperation("<=", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclComparableLessThanEqualOperation", org.eclipse.ocl.examples.library.oclany.OclComparableLessThanEqualOperation.INSTANCE);
@@ -1410,7 +1337,7 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedOperations = _UnlimitedNatural.getOwnedOperation();
 			ownedOperations.add(operation = op_UnlimitedNatural_oclAsType);
 			ownedParameters = operation.getOwnedParameter();
-			ownedParameters.add(parameter = createParameter("type", _AnyClassifier_UnlimitedNatural_oclAsType_TT));
+			ownedParameters.add(parameter = createParameter("type", _Metaclass_UnlimitedNatural_oclAsType_TT));
 			ownedOperations = _Bag_Bag_T.getOwnedOperation();
 			ownedOperations.add(operation = op_Bag_Bag_T__lt__gt_);
 			ownedParameters = operation.getOwnedParameter();
@@ -1433,18 +1360,16 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedParameters.add(parameter = createParameter("s", _UniqueCollection_Bag_T));
 			ownedOperations.add(operation = op_Bag_Bag_T_selectByKind);
 			ownedParameters = operation.getOwnedParameter();
-			ownedParameters.add(parameter = createParameter("type", _AnyClassifier_Bag_selectByKind_TT));
+			ownedParameters.add(parameter = createParameter("type", _Metaclass_Bag_selectByKind_TT));
 			ownedOperations.add(operation = op_Bag_Bag_T_selectByType);
 			ownedParameters = operation.getOwnedParameter();
-			ownedParameters.add(parameter = createParameter("type", _AnyClassifier_Bag_selectByType_TT));
+			ownedParameters.add(parameter = createParameter("type", _Metaclass_Bag_selectByType_TT));
 			ownedOperations.add(operation = op_Bag_Bag_T_union);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("bag", _Collection_Bag_T));
 			ownedOperations.add(operation = op_Bag_Bag_T_union_1);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("s", _UniqueCollection_Bag_T));
-			ownedOperations = _Class.getOwnedOperation();
-			ownedOperations.add(operation = op_Class_oclType);
 			ownedOperations = _Collection_Collection_T.getOwnedOperation();
 			ownedOperations.add(operation = op_Collection_Collection_T__lt__gt_);
 			ownedParameters = operation.getOwnedParameter();
@@ -1482,22 +1407,20 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedOperations.add(operation = op_Collection_Collection_T_max);
 			ownedOperations.add(operation = op_Collection_Collection_T_min);
 			ownedOperations.add(operation = op_Collection_Collection_T_notEmpty);
-			ownedOperations.add(operation = op_Collection_Collection_T_oclType);
 			ownedOperations.add(operation = op_Collection_Collection_T_product);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("c2", _Collection_Collection_product_T2));
 			ownedOperations.add(operation = op_Collection_Collection_T_selectByKind);
 			ownedParameters = operation.getOwnedParameter();
-			ownedParameters.add(parameter = createParameter("type", _AnyClassifier_Collection_selectByKind_TT));
+			ownedParameters.add(parameter = createParameter("type", _Metaclass_Collection_selectByKind_TT));
 			ownedOperations.add(operation = op_Collection_Collection_T_selectByType);
 			ownedParameters = operation.getOwnedParameter();
-			ownedParameters.add(parameter = createParameter("type", _AnyClassifier_Collection_selectByType_TT));
+			ownedParameters.add(parameter = createParameter("type", _Metaclass_Collection_selectByType_TT));
 			ownedOperations.add(operation = op_Collection_Collection_T_size);
 			ownedOperations.add(operation = op_Collection_Collection_T_sum);
 			ownedOperations = _Enumeration.getOwnedOperation();
 			ownedOperations.add(operation = op_Enumeration_allInstances);
 			operation.setIsStatic(true);
-			ownedOperations.add(operation = op_Enumeration_oclType);
 			ownedOperations = _OclAny.getOwnedOperation();
 			ownedOperations.add(operation = op_OclAny__lt__gt_);
 			ownedParameters = operation.getOwnedParameter();
@@ -1508,18 +1431,18 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedOperations.add(operation = op_OclAny_oclAsSet);
 			ownedOperations.add(operation = op_OclAny_oclAsType);
 			ownedParameters = operation.getOwnedParameter();
-			ownedParameters.add(parameter = createParameter("type", _AnyClassifier_OclAny_oclAsType_TT));
+			ownedParameters.add(parameter = createParameter("type", _Metaclass_OclAny_oclAsType_TT));
 			ownedOperations.add(operation = op_OclAny_oclIsInState);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("statespec", _OclState));
 			ownedOperations.add(operation = op_OclAny_oclIsInvalid);
 			ownedOperations.add(operation = op_OclAny_oclIsKindOf);
 			ownedParameters = operation.getOwnedParameter();
-			ownedParameters.add(parameter = createParameter("type", _AnyClassifier_OclAny_oclIsKindOf_T));
+			ownedParameters.add(parameter = createParameter("type", _Metaclass_OclAny_oclIsKindOf_T));
 			ownedOperations.add(operation = op_OclAny_oclIsNew);
 			ownedOperations.add(operation = op_OclAny_oclIsTypeOf);
 			ownedParameters = operation.getOwnedParameter();
-			ownedParameters.add(parameter = createParameter("type", _AnyClassifier_OclAny_oclIsTypeOf_T));
+			ownedParameters.add(parameter = createParameter("type", _Metaclass_OclAny_oclIsTypeOf_T));
 			ownedOperations.add(operation = op_OclAny_oclIsUndefined);
 			ownedOperations.add(operation = op_OclAny_oclType);
 			ownedOperations.add(operation = op_OclAny_toString);
@@ -1628,10 +1551,10 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedOperations.add(operation = op_OrderedSet_OrderedSet_T_reverse);
 			ownedOperations.add(operation = op_OrderedSet_OrderedSet_T_selectByKind);
 			ownedParameters = operation.getOwnedParameter();
-			ownedParameters.add(parameter = createParameter("type", _AnyClassifier_OrderedSet_selectByKind_TT));
+			ownedParameters.add(parameter = createParameter("type", _Metaclass_OrderedSet_selectByKind_TT));
 			ownedOperations.add(operation = op_OrderedSet_OrderedSet_T_selectByType);
 			ownedParameters = operation.getOwnedParameter();
-			ownedParameters.add(parameter = createParameter("type", _AnyClassifier_OrderedSet_selectByType_TT));
+			ownedParameters.add(parameter = createParameter("type", _Metaclass_OrderedSet_selectByType_TT));
 			ownedOperations.add(operation = op_OrderedSet_OrderedSet_T_subOrderedSet);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("lower", _Integer));
@@ -1680,10 +1603,10 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedOperations.add(operation = op_Sequence_Sequence_T_reverse);
 			ownedOperations.add(operation = op_Sequence_Sequence_T_selectByKind);
 			ownedParameters = operation.getOwnedParameter();
-			ownedParameters.add(parameter = createParameter("type", _AnyClassifier_Sequence_selectByKind_TT));
+			ownedParameters.add(parameter = createParameter("type", _Metaclass_Sequence_selectByKind_TT));
 			ownedOperations.add(operation = op_Sequence_Sequence_T_selectByType);
 			ownedParameters = operation.getOwnedParameter();
-			ownedParameters.add(parameter = createParameter("type", _AnyClassifier_Sequence_selectByType_TT));
+			ownedParameters.add(parameter = createParameter("type", _Metaclass_Sequence_selectByType_TT));
 			ownedOperations.add(operation = op_Sequence_Sequence_T_subSequence);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("lower", _Integer));
@@ -1713,10 +1636,10 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedParameters.add(parameter = createParameter("s", _Collection_Set_T));
 			ownedOperations.add(operation = op_Set_Set_T_selectByKind);
 			ownedParameters = operation.getOwnedParameter();
-			ownedParameters.add(parameter = createParameter("type", _AnyClassifier_Set_selectByKind_TT));
+			ownedParameters.add(parameter = createParameter("type", _Metaclass_Set_selectByKind_TT));
 			ownedOperations.add(operation = op_Set_Set_T_selectByType);
 			ownedParameters = operation.getOwnedParameter();
-			ownedParameters.add(parameter = createParameter("type", _AnyClassifier_Set_selectByType_TT));
+			ownedParameters.add(parameter = createParameter("type", _Metaclass_Set_selectByType_TT));
 			ownedOperations.add(operation = op_Set_Set_T_union);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("s", _Collection_Set_T));
@@ -1830,8 +1753,8 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedParameters.add(parameter = createParameter("body", _Lambda_Collection_T));
 			ownedIterations.add(iteration = it_Collection_Collection_T_forAll);
 			ownedParameters = iteration.getOwnedIterator();
-			ownedParameters.add(parameter = createParameter("i", _Collection_T));
 			ownedParameters.add(parameter = createParameter("j", _Collection_T));
+			ownedParameters.add(parameter = createParameter("i", _Collection_T));
 			ownedParameters = iteration.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("body", _Lambda_Collection_T));
 			ownedIterations.add(iteration = it_Collection_Collection_T_forAll_1);
@@ -1942,44 +1865,48 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedParameters.add(parameter = createParameter("body", _Lambda_UniqueCollection_T));
 		}
 			
-		protected final @NonNull Property pr_CollectionClassifier_elementType = createProperty("elementType", _CollectionClassifier_E);
 		protected final @NonNull Property pr_Collection_Collection_T_elementType = createProperty("elementType", _Collection_T);
-		protected final @NonNull Property pr_EnumerationClassifier_ownedLiteral = createProperty("ownedLiteral", _OrderedSet_EnumerationLiteral);
+		protected final @NonNull Property pr_Collection_Collection_T_lower = createProperty("lower", _Integer);
+		protected final @NonNull Property pr_Collection_Collection_T_upper = createProperty("upper", _Integer);
+		protected final @NonNull Property pr_Enumeration_allLiterals = createProperty("allLiterals", _OrderedSet_EnumerationLiteral);
 		protected final @NonNull Property pr_OclInvalid_oclBadProperty = createProperty("oclBadProperty", _OclInvalid);
 		
 		protected void installProperties() {
 			List<Property> ownedProperties;
 			Property property;
-			ownedProperties = _CollectionClassifier.getOwnedAttribute();
-			ownedProperties.add(property = pr_CollectionClassifier_elementType);
-			property.setIsResolveProxies(true);
-			property.setImplementationClass("org.eclipse.ocl.examples.library.collection.CollectionClassifierElementTypeProperty");
-			property.setImplementation(org.eclipse.ocl.examples.library.collection.CollectionClassifierElementTypeProperty.INSTANCE);
 			ownedProperties = _Collection_Collection_T.getOwnedAttribute();
 			ownedProperties.add(property = pr_Collection_Collection_T_elementType);
 			property.setIsResolveProxies(true);
-			property.setImplementationClass("org.eclipse.ocl.examples.library.collection.CollectionClassifierElementTypeProperty");
-			property.setImplementation(org.eclipse.ocl.examples.library.collection.CollectionClassifierElementTypeProperty.INSTANCE);
-			ownedProperties = _EnumerationClassifier.getOwnedAttribute();
-			ownedProperties.add(property = pr_EnumerationClassifier_ownedLiteral);
+			property.setIsStatic(true);
+			property.setImplementationClass("org.eclipse.ocl.examples.library.collection.CollectionElementTypeProperty");
+			property.setImplementation(org.eclipse.ocl.examples.library.collection.CollectionElementTypeProperty.INSTANCE);
+			ownedProperties.add(property = pr_Collection_Collection_T_lower);
 			property.setIsResolveProxies(true);
-			property.setImplementationClass("org.eclipse.ocl.examples.library.enumeration.EnumerationClassifierOwnedLiteralProperty");
-			property.setImplementation(org.eclipse.ocl.examples.library.enumeration.EnumerationClassifierOwnedLiteralProperty.INSTANCE);
+			property.setIsStatic(true);
+			property.setImplementationClass("org.eclipse.ocl.examples.library.collection.CollectionLowerProperty");
+			property.setImplementation(org.eclipse.ocl.examples.library.collection.CollectionLowerProperty.INSTANCE);
+			ownedProperties.add(property = pr_Collection_Collection_T_upper);
+			property.setIsResolveProxies(true);
+			property.setIsStatic(true);
+			property.setImplementationClass("org.eclipse.ocl.examples.library.collection.CollectionUpperProperty");
+			property.setImplementation(org.eclipse.ocl.examples.library.collection.CollectionUpperProperty.INSTANCE);
+			ownedProperties = _Enumeration.getOwnedAttribute();
+			ownedProperties.add(property = pr_Enumeration_allLiterals);
+			property.setIsResolveProxies(true);
+			property.setIsStatic(true);
+			property.setImplementationClass("org.eclipse.ocl.examples.library.enumeration.EnumerationOwnedLiteralProperty");
+			property.setImplementation(org.eclipse.ocl.examples.library.enumeration.EnumerationOwnedLiteralProperty.INSTANCE);
 			ownedProperties = _OclInvalid.getOwnedAttribute();
 			ownedProperties.add(property = pr_OclInvalid_oclBadProperty);
 			property.setIsResolveProxies(true);
 		}
 		protected final @NonNull TypeTemplateParameter tp_UnlimitedNatural_oclAsType = createTypeTemplateParameter(_UnlimitedNatural_oclAsType_TT);
-		protected final @NonNull TypeTemplateParameter tp_AnyClassifier = createTypeTemplateParameter(_AnyClassifier_T);
 		protected final @NonNull TypeTemplateParameter tp_Bag_Bag_T_collectNested = createTypeTemplateParameter(_Bag_collectNested_V);
 		protected final @NonNull TypeTemplateParameter tp_Bag_Bag_T_collect = createTypeTemplateParameter(_Bag_collect_V);
 		protected final @NonNull TypeTemplateParameter tp_Bag_Bag_T_flatten = createTypeTemplateParameter(_Bag_flatten_T2);
 		protected final @NonNull TypeTemplateParameter tp_Bag_Bag_T_selectByKind = createTypeTemplateParameter(_Bag_selectByKind_TT);
 		protected final @NonNull TypeTemplateParameter tp_Bag_Bag_T_selectByType = createTypeTemplateParameter(_Bag_selectByType_TT);
 		protected final @NonNull TypeTemplateParameter tp_Bag_Bag_T = createTypeTemplateParameter(_Bag_T);
-		protected final @NonNull TypeTemplateParameter tp_ClassClassifier = createTypeTemplateParameter(_ClassClassifier_T);
-		protected final @NonNull TypeTemplateParameter tp_CollectionClassifier = createTypeTemplateParameter(_CollectionClassifier_E);
-		protected final @NonNull TypeTemplateParameter tp_CollectionClassifier_1 = createTypeTemplateParameter(_CollectionClassifier_T);
 		protected final @NonNull TypeTemplateParameter tp_Collection_Collection_T_collectNested = createTypeTemplateParameter(_Collection_collectNested_V);
 		protected final @NonNull TypeTemplateParameter tp_Collection_Collection_T_collect = createTypeTemplateParameter(_Collection_collect_V);
 		protected final @NonNull TypeTemplateParameter tp_Collection_Collection_T_excludesAll = createTypeTemplateParameter(_Collection_excludesAll_T2);
@@ -1990,7 +1917,7 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull TypeTemplateParameter tp_Collection_Collection_T_selectByKind = createTypeTemplateParameter(_Collection_selectByKind_TT);
 		protected final @NonNull TypeTemplateParameter tp_Collection_Collection_T_selectByType = createTypeTemplateParameter(_Collection_selectByType_TT);
 		protected final @NonNull TypeTemplateParameter tp_Collection_Collection_T = createTypeTemplateParameter(_Collection_T);
-		protected final @NonNull TypeTemplateParameter tp_EnumerationClassifier = createTypeTemplateParameter(_EnumerationClassifier_T);
+		protected final @NonNull TypeTemplateParameter tp_Metaclass = createTypeTemplateParameter(_Metaclass_T);
 		protected final @NonNull TypeTemplateParameter tp_OclAny_oclAsType = createTypeTemplateParameter(_OclAny_oclAsType_TT);
 		protected final @NonNull TypeTemplateParameter tp_OclAny_oclIsKindOf = createTypeTemplateParameter(_OclAny_oclIsKindOf_T);
 		protected final @NonNull TypeTemplateParameter tp_OclAny_oclIsTypeOf = createTypeTemplateParameter(_OclAny_oclIsTypeOf_T);
@@ -2011,15 +1938,12 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull TypeTemplateParameter tp_UniqueCollection_UniqueCollection_T = createTypeTemplateParameter(_UniqueCollection_T);
 		
 		protected final @NonNull TemplateSignature ts_UnlimitedNatural_oclAsType = createTemplateSignature(op_UnlimitedNatural_oclAsType, tp_UnlimitedNatural_oclAsType);
-		protected final @NonNull TemplateSignature ts_AnyClassifier = createTemplateSignature(_AnyClassifier, tp_AnyClassifier);
 		protected final @NonNull TemplateSignature ts_Bag_Bag_T = createTemplateSignature(_Bag_Bag_T, tp_Bag_Bag_T);
 		protected final @NonNull TemplateSignature ts_Bag_Bag_T_collectNested = createTemplateSignature(it_Bag_Bag_T_collectNested, tp_Bag_Bag_T_collectNested);
 		protected final @NonNull TemplateSignature ts_Bag_Bag_T_collect = createTemplateSignature(it_Bag_Bag_T_collect, tp_Bag_Bag_T_collect);
 		protected final @NonNull TemplateSignature ts_Bag_Bag_T_flatten = createTemplateSignature(op_Bag_Bag_T_flatten, tp_Bag_Bag_T_flatten);
 		protected final @NonNull TemplateSignature ts_Bag_Bag_T_selectByKind = createTemplateSignature(op_Bag_Bag_T_selectByKind, tp_Bag_Bag_T_selectByKind);
 		protected final @NonNull TemplateSignature ts_Bag_Bag_T_selectByType = createTemplateSignature(op_Bag_Bag_T_selectByType, tp_Bag_Bag_T_selectByType);
-		protected final @NonNull TemplateSignature ts_ClassClassifier = createTemplateSignature(_ClassClassifier, tp_ClassClassifier);
-		protected final @NonNull TemplateSignature ts_CollectionClassifier = createTemplateSignature(_CollectionClassifier, tp_CollectionClassifier_1, tp_CollectionClassifier);
 		protected final @NonNull TemplateSignature ts_Collection_Collection_T = createTemplateSignature(_Collection_Collection_T, tp_Collection_Collection_T);
 		protected final @NonNull TemplateSignature ts_Collection_Collection_T_collectNested = createTemplateSignature(it_Collection_Collection_T_collectNested, tp_Collection_Collection_T_collectNested);
 		protected final @NonNull TemplateSignature ts_Collection_Collection_T_collect = createTemplateSignature(it_Collection_Collection_T_collect, tp_Collection_Collection_T_collect);
@@ -2030,7 +1954,7 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull TemplateSignature ts_Collection_Collection_T_product = createTemplateSignature(op_Collection_Collection_T_product, tp_Collection_Collection_T_product);
 		protected final @NonNull TemplateSignature ts_Collection_Collection_T_selectByKind = createTemplateSignature(op_Collection_Collection_T_selectByKind, tp_Collection_Collection_T_selectByKind);
 		protected final @NonNull TemplateSignature ts_Collection_Collection_T_selectByType = createTemplateSignature(op_Collection_Collection_T_selectByType, tp_Collection_Collection_T_selectByType);
-		protected final @NonNull TemplateSignature ts_EnumerationClassifier = createTemplateSignature(_EnumerationClassifier, tp_EnumerationClassifier);
+		protected final @NonNull TemplateSignature ts_Metaclass = createTemplateSignature(_Metaclass, tp_Metaclass);
 		protected final @NonNull TemplateSignature ts_OclAny_oclAsType = createTemplateSignature(op_OclAny_oclAsType, tp_OclAny_oclAsType);
 		protected final @NonNull TemplateSignature ts_OclAny_oclIsKindOf = createTemplateSignature(op_OclAny_oclIsKindOf, tp_OclAny_oclIsKindOf);
 		protected final @NonNull TemplateSignature ts_OclAny_oclIsTypeOf = createTemplateSignature(op_OclAny_oclIsTypeOf, tp_OclAny_oclIsTypeOf);
@@ -2054,46 +1978,6 @@ public class OCLstdlib extends XMIResourceImpl
 		}
 		
 		protected void installTemplateBindings() {
-			_AnyClassifier_UnlimitedNatural_oclAsType_TT.getTemplateBinding().add(createTemplateBinding(ts_AnyClassifier,
-				createTemplateParameterSubstitution(tp_AnyClassifier, _UnlimitedNatural_oclAsType_TT)));
-			_AnyClassifier_Bag_selectByKind_TT.getTemplateBinding().add(createTemplateBinding(ts_AnyClassifier,
-				createTemplateParameterSubstitution(tp_AnyClassifier, _Bag_selectByKind_TT)));
-			_AnyClassifier_Bag_selectByType_TT.getTemplateBinding().add(createTemplateBinding(ts_AnyClassifier,
-				createTemplateParameterSubstitution(tp_AnyClassifier, _Bag_selectByType_TT)));
-			_AnyClassifier_ClassClassifier_T.getTemplateBinding().add(createTemplateBinding(ts_AnyClassifier,
-				createTemplateParameterSubstitution(tp_AnyClassifier, _ClassClassifier_T)));
-			_AnyClassifier_CollectionClassifier_T.getTemplateBinding().add(createTemplateBinding(ts_AnyClassifier,
-				createTemplateParameterSubstitution(tp_AnyClassifier, _CollectionClassifier_T)));
-			_AnyClassifier_Collection_selectByKind_TT.getTemplateBinding().add(createTemplateBinding(ts_AnyClassifier,
-				createTemplateParameterSubstitution(tp_AnyClassifier, _Collection_selectByKind_TT)));
-			_AnyClassifier_Collection_selectByType_TT.getTemplateBinding().add(createTemplateBinding(ts_AnyClassifier,
-				createTemplateParameterSubstitution(tp_AnyClassifier, _Collection_selectByType_TT)));
-			_AnyClassifier_EnumerationClassifier_T.getTemplateBinding().add(createTemplateBinding(ts_AnyClassifier,
-				createTemplateParameterSubstitution(tp_AnyClassifier, _EnumerationClassifier_T)));
-			_AnyClassifier_OclAny_oclAsType_TT.getTemplateBinding().add(createTemplateBinding(ts_AnyClassifier,
-				createTemplateParameterSubstitution(tp_AnyClassifier, _OclAny_oclAsType_TT)));
-			_AnyClassifier_OclAny_oclIsKindOf_T.getTemplateBinding().add(createTemplateBinding(ts_AnyClassifier,
-				createTemplateParameterSubstitution(tp_AnyClassifier, _OclAny_oclIsKindOf_T)));
-			_AnyClassifier_OclAny_oclIsTypeOf_T.getTemplateBinding().add(createTemplateBinding(ts_AnyClassifier,
-				createTemplateParameterSubstitution(tp_AnyClassifier, _OclAny_oclIsTypeOf_T)));
-			_AnyClassifier_OclInvalid.getTemplateBinding().add(createTemplateBinding(ts_AnyClassifier,
-				createTemplateParameterSubstitution(tp_AnyClassifier, _OclInvalid)));
-			_AnyClassifier_OclSelf.getTemplateBinding().add(createTemplateBinding(ts_AnyClassifier,
-				createTemplateParameterSubstitution(tp_AnyClassifier, _OclSelf)));
-			_AnyClassifier_OclVoid.getTemplateBinding().add(createTemplateBinding(ts_AnyClassifier,
-				createTemplateParameterSubstitution(tp_AnyClassifier, _OclVoid)));
-			_AnyClassifier_OrderedSet_selectByKind_TT.getTemplateBinding().add(createTemplateBinding(ts_AnyClassifier,
-				createTemplateParameterSubstitution(tp_AnyClassifier, _OrderedSet_selectByKind_TT)));
-			_AnyClassifier_OrderedSet_selectByType_TT.getTemplateBinding().add(createTemplateBinding(ts_AnyClassifier,
-				createTemplateParameterSubstitution(tp_AnyClassifier, _OrderedSet_selectByType_TT)));
-			_AnyClassifier_Sequence_selectByKind_TT.getTemplateBinding().add(createTemplateBinding(ts_AnyClassifier,
-				createTemplateParameterSubstitution(tp_AnyClassifier, _Sequence_selectByKind_TT)));
-			_AnyClassifier_Sequence_selectByType_TT.getTemplateBinding().add(createTemplateBinding(ts_AnyClassifier,
-				createTemplateParameterSubstitution(tp_AnyClassifier, _Sequence_selectByType_TT)));
-			_AnyClassifier_Set_selectByKind_TT.getTemplateBinding().add(createTemplateBinding(ts_AnyClassifier,
-				createTemplateParameterSubstitution(tp_AnyClassifier, _Set_selectByKind_TT)));
-			_AnyClassifier_Set_selectByType_TT.getTemplateBinding().add(createTemplateBinding(ts_AnyClassifier,
-				createTemplateParameterSubstitution(tp_AnyClassifier, _Set_selectByType_TT)));
 			_Bag_Bag_collect_V.getTemplateBinding().add(createTemplateBinding(ts_Bag_Bag_T,
 				createTemplateParameterSubstitution(tp_Bag_Bag_T, _Bag_collect_V)));
 			_Bag_Bag_flatten_T2.getTemplateBinding().add(createTemplateBinding(ts_Bag_Bag_T,
@@ -2108,15 +1992,6 @@ public class OCLstdlib extends XMIResourceImpl
 				createTemplateParameterSubstitution(tp_Bag_Bag_T, _Sequence_T)));
 			_Bag_Set_T.getTemplateBinding().add(createTemplateBinding(ts_Bag_Bag_T,
 				createTemplateParameterSubstitution(tp_Bag_Bag_T, _Set_T)));
-			_ClassClassifier_OclInvalid.getTemplateBinding().add(createTemplateBinding(ts_ClassClassifier,
-				createTemplateParameterSubstitution(tp_ClassClassifier, _OclInvalid)));
-			_ClassClassifier_OclSelf.getTemplateBinding().add(createTemplateBinding(ts_ClassClassifier,
-				createTemplateParameterSubstitution(tp_ClassClassifier, _OclSelf)));
-			_ClassClassifier_OclVoid.getTemplateBinding().add(createTemplateBinding(ts_ClassClassifier,
-				createTemplateParameterSubstitution(tp_ClassClassifier, _OclVoid)));
-			_CollectionClassifier_OclSelf_Collection_T.getTemplateBinding().add(createTemplateBinding(ts_CollectionClassifier,
-				createTemplateParameterSubstitution(tp_CollectionClassifier_1, _OclSelf),
-				createTemplateParameterSubstitution(tp_CollectionClassifier, _Collection_T)));
 			_Collection_Integer.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Integer)));
 			_Collection_Bag_T.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
@@ -2143,8 +2018,40 @@ public class OCLstdlib extends XMIResourceImpl
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Set_T)));
 			_Collection_UniqueCollection_T.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _UniqueCollection_T)));
-			_EnumerationClassifier_OclSelf.getTemplateBinding().add(createTemplateBinding(ts_EnumerationClassifier,
-				createTemplateParameterSubstitution(tp_EnumerationClassifier, _OclSelf)));
+			_Metaclass_UnlimitedNatural_oclAsType_TT.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
+				createTemplateParameterSubstitution(tp_Metaclass, _UnlimitedNatural_oclAsType_TT)));
+			_Metaclass_Bag_selectByKind_TT.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
+				createTemplateParameterSubstitution(tp_Metaclass, _Bag_selectByKind_TT)));
+			_Metaclass_Bag_selectByType_TT.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
+				createTemplateParameterSubstitution(tp_Metaclass, _Bag_selectByType_TT)));
+			_Metaclass_Collection_selectByKind_TT.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
+				createTemplateParameterSubstitution(tp_Metaclass, _Collection_selectByKind_TT)));
+			_Metaclass_Collection_selectByType_TT.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
+				createTemplateParameterSubstitution(tp_Metaclass, _Collection_selectByType_TT)));
+			_Metaclass_OclAny_oclAsType_TT.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
+				createTemplateParameterSubstitution(tp_Metaclass, _OclAny_oclAsType_TT)));
+			_Metaclass_OclAny_oclIsKindOf_T.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
+				createTemplateParameterSubstitution(tp_Metaclass, _OclAny_oclIsKindOf_T)));
+			_Metaclass_OclAny_oclIsTypeOf_T.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
+				createTemplateParameterSubstitution(tp_Metaclass, _OclAny_oclIsTypeOf_T)));
+			_Metaclass_OclInvalid.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
+				createTemplateParameterSubstitution(tp_Metaclass, _OclInvalid)));
+			_Metaclass_OclSelf.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
+				createTemplateParameterSubstitution(tp_Metaclass, _OclSelf)));
+			_Metaclass_OclVoid.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
+				createTemplateParameterSubstitution(tp_Metaclass, _OclVoid)));
+			_Metaclass_OrderedSet_selectByKind_TT.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
+				createTemplateParameterSubstitution(tp_Metaclass, _OrderedSet_selectByKind_TT)));
+			_Metaclass_OrderedSet_selectByType_TT.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
+				createTemplateParameterSubstitution(tp_Metaclass, _OrderedSet_selectByType_TT)));
+			_Metaclass_Sequence_selectByKind_TT.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
+				createTemplateParameterSubstitution(tp_Metaclass, _Sequence_selectByKind_TT)));
+			_Metaclass_Sequence_selectByType_TT.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
+				createTemplateParameterSubstitution(tp_Metaclass, _Sequence_selectByType_TT)));
+			_Metaclass_Set_selectByKind_TT.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
+				createTemplateParameterSubstitution(tp_Metaclass, _Set_selectByKind_TT)));
+			_Metaclass_Set_selectByType_TT.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
+				createTemplateParameterSubstitution(tp_Metaclass, _Set_selectByType_TT)));
 			_OrderedSet_Collection_T.getTemplateBinding().add(createTemplateBinding(ts_OrderedSet_OrderedSet_T,
 				createTemplateParameterSubstitution(tp_OrderedSet_OrderedSet_T, _Collection_T)));
 			_OrderedSet_EnumerationLiteral.getTemplateBinding().add(createTemplateBinding(ts_OrderedSet_OrderedSet_T,
@@ -2381,8 +2288,6 @@ public class OCLstdlib extends XMIResourceImpl
 			installComment(it_Bag_Bag_T_sortedBy, "Results in the Sequence containing all elements of the source collection.\nThe element for which body has the lowest value comes first, and so on.\nThe type of the body expression must have the < operation defined.\nThe < operation must return a Boolean value and must be transitive (i.e., if a < b and b < c then a < c).");
 			installComment(op_Bag_Bag_T_union, "The union of oclText[self] and bag; the bag of all elements that are in oclText[self] and all elements that are in bag.");
 			installComment(op_Bag_Bag_T_union_1, "The union of oclText[self] and s; the set of all elements that are in oclText[self] and all elements that are in s.");
-			installComment(op_Class_oclType, "Evaluates to the type of which self is an instance.");
-			installComment(pr_CollectionClassifier_elementType, "Evaluates to the type of the collection elements.");
 			installComment(op_Collection_Collection_T__lt__gt_, "True if c is not equal to oclText[self].");
 			installComment(op_Collection_Collection_T__eq_, "True if c is a collection of the same kind as oclText[self] and contains the same elements in the same quantities and in the same order,\nin the case of an ordered collection type.");
 			installComment(it_Collection_Collection_T_any, "Returns any element in the source collection for which body evaluates to oclText[true].\nIf there is more than one element for which body is oclText[true], one of them is returned.\nThere must be at least one element fulfilling body, otherwise the result of this IteratorExp is oclText[null].");
@@ -2405,10 +2310,10 @@ public class OCLstdlib extends XMIResourceImpl
 			installComment(op_Collection_Collection_T_including, "The collection containing all elements of oclText[self] plus object.");
 			installComment(op_Collection_Collection_T_isEmpty, "Is oclText[self] the empty collection?\n\nNote: oclText[null->isEmpty()] returns oclText[true] in virtue of the implicit casting from oclText[null] to oclText[Bag{}].");
 			installComment(it_Collection_Collection_T_isUnique, "Results in oclText[true] if body evaluates to a different value for each element in the source collection; otherwise, result is oclText[false].");
+			installComment(pr_Collection_Collection_T_lower, "Evaluates to the lower bound on the number of collection elements.");
 			installComment(op_Collection_Collection_T_max, "The element with the maximum value of all elements in oclText[self].\nElements must be of a type supporting the max operation.\nThe max operation - supported by the elements - must take one parameter of type T and be both associative and commutative.\nUnlimitedNatural, Integer and Real fulfill this condition.");
 			installComment(op_Collection_Collection_T_min, "The element with the minimum value of all elements in oclText[self].\nElements must be of a type supporting the min operation.\nThe min operation - supported by the elements - must take one parameter of type T and be both associative and commutative.\nUnlimitedNatural, Integer and Real fulfill this condition.");
 			installComment(op_Collection_Collection_T_notEmpty, "Is oclText[self] not the empty collection?\n\noclText[null->notEmpty()] returns oclText[false] in virtue of the implicit casting from oclText[null] to oclText[Bag{}].");
-			installComment(op_Collection_Collection_T_oclType, "Evaluates to the type of which oclText[self] is an instance.");
 			installComment(it_Collection_Collection_T_one, "Results in oclText[true] if there is exactly one element in the source collection for which body is oclText[true].");
 			installComment(op_Collection_Collection_T_product, "The cartesian product operation of oclText[self] and c2.");
 			installComment(it_Collection_Collection_T_reject, "The sub-collection of the source collection for which body is oclText[false].");
@@ -2416,10 +2321,10 @@ public class OCLstdlib extends XMIResourceImpl
 			installComment(op_Collection_Collection_T_size, "The number of elements in the collection oclText[self].");
 			installComment(it_Collection_Collection_T_sortedBy, "Results in the Collection containing all elements of the source collection.\nThe element for which body has the lowest value comes first, and so on.\nThe type of the body expression must have the < operation defined.\nThe < operation must return a Boolean value and must be transitive (i.e., if a < b and b < c then a < c).");
 			installComment(op_Collection_Collection_T_sum, "The addition of all elements in oclText[self].\nElements must be of an oclText[OclSummable] type to provide the zero() and sum() operations.\nThe e[sum] operation must be both associative: a.sum(b).sum(c) = a.sum(b.sum(c)), and commutative: a.sum(b) = b.sum(a).\nUnlimitedNatural, Integer and Real fulfill this condition.\n\nIf the e[sum] operation is not both associative and commutative, the e[sum] expression is not well-formed,\nwhich may result in unpredictable results during evaluation.\nIf an implementation is able to detect a lack of associativity or commutativity,\nthe implementation may bypass the evaluation and return an oclText[invalid] result.");
+			installComment(pr_Collection_Collection_T_upper, "Evaluates to the upper bound on the number of collection elements.");
 			installComment(_Enumeration, "The Enumeration type is the type of an OrderedSet of EnumerationLiteral.");
 			installComment(op_Enumeration_allInstances, "Return a set of all enumeration values of oclText[self].");
-			installComment(op_Enumeration_oclType, "Evaluates to the type of which oclText[self] is an instance.");
-			installComment(pr_EnumerationClassifier_ownedLiteral, "Evaluates to the literals of the enumeration.");
+			installComment(pr_Enumeration_allLiterals, "Evaluates to the literals of the enumeration.");
 			installComment(_EnumerationLiteral, "The standard type EnumerationLiteral represents a named constant value of an Enumeration.");
 			installComment(_OclAny, "All types in the UML model and the primitive and collection types in the OCL standard library conforms to the type OclAny.\nConceptually, OclAny behaves as a supertype for all the types.\nFeatures of OclAny are available on each object in all OCL expressions.\nOclAny is itself an instance of the metatype AnyType.\n\nAll classes in a UML model inherit all operations defined on OclAny.\nTo avoid name conflicts between properties in the model and the properties inherited from OclAny,\nall names on the properties of OclAny start with \u00E2\u20AC\u02DCocl.\u00E2\u20AC\u2122\nAlthough theoretically there may still be name conflicts, they can be avoided.\nOne can also use qualification by OclAny (name of the type) to explicitly refer to the OclAny properties.\n\nOperations of OclAny, where the instance of OclAny is called object.");
 			installComment(op_OclAny__lt__gt_, "True if oclText[self] is a different object from object2. Infix operator.");

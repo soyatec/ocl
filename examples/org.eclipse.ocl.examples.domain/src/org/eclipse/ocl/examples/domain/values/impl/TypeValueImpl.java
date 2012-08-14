@@ -19,7 +19,7 @@ package org.eclipse.ocl.examples.domain.values.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainClassifierType;
+import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -45,11 +45,11 @@ public abstract class TypeValueImpl extends ObjectValueImpl implements TypeValue
 	}
 
 
-	private DomainClassifierType classifierType;
+	private DomainMetaclass metaclass;
 
 	public TypeValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainType object) {
 		super(valueFactory, object);
-		this.classifierType = null;
+		this.metaclass = null;
 	}
 
 	@Override
@@ -110,11 +110,11 @@ public abstract class TypeValueImpl extends ObjectValueImpl implements TypeValue
 		return (DomainType) object;
 	}
 
-	public @NonNull DomainClassifierType getType() {
-		DomainClassifierType classifierType2 = classifierType;
-		if (classifierType2 == null) {
-			classifierType2 = classifierType = valueFactory.getStandardLibrary().getClassifierType(getObject());
+	public @NonNull DomainMetaclass getType() {
+		DomainMetaclass metaclass2 = metaclass;
+		if (metaclass2 == null) {
+			metaclass2 = metaclass = valueFactory.getStandardLibrary().getMetaclass(getObject());
 		}
-		return classifierType2;
+		return metaclass2;
 	}
 }

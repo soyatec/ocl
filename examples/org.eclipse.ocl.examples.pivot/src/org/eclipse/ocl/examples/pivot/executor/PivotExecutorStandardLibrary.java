@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainClassifierType;
+import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
@@ -32,7 +32,7 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.examples.library.executor.ExecutableStandardLibrary;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
-import org.eclipse.ocl.examples.pivot.ClassifierType;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotTables;
@@ -65,13 +65,13 @@ public class PivotExecutorStandardLibrary extends ExecutableStandardLibrary impl
 	}
 
 	@Override
-	protected @NonNull DomainClassifierType createClassifierType(@NonNull DomainType typeType) {
-		ClassifierType anyClassifierType = getAnyClassifierType();
-		ClassifierType classifierType = PivotFactory.eINSTANCE.createClassifierType();
-		classifierType.setName(anyClassifierType.getName());
-		classifierType.setUnspecializedElement(anyClassifierType);
-		classifierType.setInstanceType(getType(typeType));
-		return classifierType;
+	protected @NonNull DomainMetaclass createMetaclass(@NonNull DomainType typeType) {
+		Metaclass metaclassType = getMetaclassType();
+		Metaclass metaclass = PivotFactory.eINSTANCE.createMetaclass();
+		metaclass.setName(metaclassType.getName());
+		metaclass.setUnspecializedElement(metaclassType);
+		metaclass.setInstanceType(getType(typeType));
+		return metaclass;
 	}
 	
 	@Override
@@ -99,8 +99,8 @@ public class PivotExecutorStandardLibrary extends ExecutableStandardLibrary impl
 	}
 
 	@Override
-	public @NonNull ClassifierType getAnyClassifierType() {
-		return metaModelManager.getAnyClassifierType();
+	public @NonNull Metaclass getMetaclassType() {
+		return metaModelManager.getMetaclassType();
 	}
 
 	public @NonNull DomainInheritance getInheritance(@NonNull DomainType type) {

@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -26,6 +27,7 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.baseCST.MultiplicityCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
@@ -89,7 +91,14 @@ public class EssentialOCLPreOrderVisitor extends AbstractEssentialOCLPreOrderVis
 			if (csElementType != null) {
 				Type elementType = PivotUtil.getPivot(Type.class, csElementType);
 				if (elementType != null) {
-					type = metaModelManager.getCollectionType(name, elementType, null, null);
+					BigInteger lower = null;
+					BigInteger upper = null;
+					MultiplicityCS csMultiplicity = csElement.getMultiplicity();
+					if (csMultiplicity != null) {
+						lower = BigInteger.valueOf(csMultiplicity.getLower());
+						upper = BigInteger.valueOf(csMultiplicity.getUpper());
+					}
+					type = metaModelManager.getCollectionType(name, elementType, lower, upper);
 				}
 			}
 			if (type == null) {

@@ -36,6 +36,7 @@ import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.InvalidType;
 import org.eclipse.ocl.examples.pivot.LambdaType;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -352,6 +353,9 @@ public abstract class PackageServer extends ReflectivePackage implements Package
 			}
 			else if (pivotType instanceof CollectionType) {
 				typeServer = new CollectionTypeServer(this, (CollectionType)pivotType);
+			}
+			else if (pivotType instanceof Metaclass) {
+				typeServer = new MetaclassServer(this, (Metaclass)pivotType);
 			}
 			else {
 				typeServer = new TemplateableTypeServer(this, pivotType);

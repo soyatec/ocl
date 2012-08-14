@@ -18,19 +18,19 @@ package org.eclipse.ocl.examples.domain.types;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainClassifierType;
+import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
-public class AbstractClassifierType extends AbstractSpecializedType implements DomainClassifierType
+public class AbstractMetaclass extends AbstractSpecializedType implements DomainMetaclass
 {
 	protected final @NonNull DomainType instanceType;
 	protected DomainType metaType = null;
 	private DomainType normalizedInstanceType = null;
 	private int hashCode;
 	
-	public AbstractClassifierType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType containerType, @NonNull DomainType instanceType) {
+	public AbstractMetaclass(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType containerType, @NonNull DomainType instanceType) {
 		super(standardLibrary, DomainUtil.nonNullModel(containerType.getName()), containerType);
 		this.instanceType = instanceType;
 	}
@@ -46,20 +46,20 @@ public class AbstractClassifierType extends AbstractSpecializedType implements D
 
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof DomainClassifierType)) {
+		if (!(obj instanceof DomainMetaclass)) {
 			return false;
 		}
 		DomainType thisInstanceType = getNormalizedInstanceType();
-		DomainType thatInstanceType = ((DomainClassifierType)obj).getInstanceType().getNormalizedType(standardLibrary);
+		DomainType thatInstanceType = ((DomainMetaclass)obj).getInstanceType().getNormalizedType(standardLibrary);
 		return thisInstanceType.isEqualTo(standardLibrary, thatInstanceType);
 	} 
 
 	@Override
 	public @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
-		if (!(type instanceof DomainClassifierType)) {
+		if (!(type instanceof DomainMetaclass)) {
 			return standardLibrary.getOclAnyType();
 		}
-		DomainType thatInstanceType = DomainUtil.nonNullModel(((DomainClassifierType)type).getInstanceType());
+		DomainType thatInstanceType = DomainUtil.nonNullModel(((DomainMetaclass)type).getInstanceType());
 		DomainType commonInstanceType = instanceType.getCommonType(standardLibrary, thatInstanceType);
 		if (commonInstanceType == instanceType) {
 			return this;
@@ -68,7 +68,7 @@ public class AbstractClassifierType extends AbstractSpecializedType implements D
 			return type;
 		}
 		else {
-			return standardLibrary.getClassifierType(commonInstanceType);
+			return standardLibrary.getMetaclass(commonInstanceType);
 		}
 	}
 
@@ -105,11 +105,11 @@ public class AbstractClassifierType extends AbstractSpecializedType implements D
 		if (this == type) {
 			return true;
 		}
-		if (!(type instanceof DomainClassifierType)) {
+		if (!(type instanceof DomainMetaclass)) {
 			return false;
 		}
 		DomainType thisInstanceType = getNormalizedInstanceType();
-		DomainType thatInstanceType = ((DomainClassifierType)type).getInstanceType().getNormalizedType(standardLibrary);
+		DomainType thatInstanceType = ((DomainMetaclass)type).getInstanceType().getNormalizedType(standardLibrary);
 		return thisInstanceType.isEqualTo(standardLibrary, thatInstanceType);
 	}
 

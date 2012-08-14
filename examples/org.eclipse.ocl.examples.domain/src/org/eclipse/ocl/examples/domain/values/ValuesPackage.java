@@ -79,7 +79,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getCollectionValue()
 	 * @generated
 	 */
-	int COLLECTION_VALUE = 3;
+	int COLLECTION_VALUE = 2;
 
 	/**
 	 * The number of structural features of the '<em>Collection Value</em>' class.
@@ -155,7 +155,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getElementValue()
 	 * @generated
 	 */
-	int ELEMENT_VALUE = 5;
+	int ELEMENT_VALUE = 4;
 
 	/**
 	 * The number of structural features of the '<em>Element Value</em>' class.
@@ -186,25 +186,6 @@ public interface ValuesPackage extends EPackage {
 	int TYPE_VALUE_FEATURE_COUNT = ELEMENT_VALUE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.ClassifierTypeValueImpl <em>Classifier Type Value</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.domain.values.impl.ClassifierTypeValueImpl
-	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getClassifierTypeValue()
-	 * @generated
-	 */
-	int CLASSIFIER_TYPE_VALUE = 2;
-
-	/**
-	 * The number of structural features of the '<em>Classifier Type Value</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASSIFIER_TYPE_VALUE_FEATURE_COUNT = TYPE_VALUE_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.CollectionTypeValueImpl <em>Collection Type Value</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -212,7 +193,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getCollectionTypeValue()
 	 * @generated
 	 */
-	int COLLECTION_TYPE_VALUE = 4;
+	int COLLECTION_TYPE_VALUE = 3;
 
 	/**
 	 * The number of structural features of the '<em>Collection Type Value</em>' class.
@@ -231,7 +212,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getEnumerationLiteralValue()
 	 * @generated
 	 */
-	int ENUMERATION_LITERAL_VALUE = 6;
+	int ENUMERATION_LITERAL_VALUE = 5;
 
 	/**
 	 * The number of structural features of the '<em>Enumeration Literal Value</em>' class.
@@ -250,7 +231,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getEnumerationTypeValue()
 	 * @generated
 	 */
-	int ENUMERATION_TYPE_VALUE = 7;
+	int ENUMERATION_TYPE_VALUE = 6;
 
 	/**
 	 * The number of structural features of the '<em>Enumeration Type Value</em>' class.
@@ -288,7 +269,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getIntegerValue()
 	 * @generated
 	 */
-	int INTEGER_VALUE = 8;
+	int INTEGER_VALUE = 7;
 
 	/**
 	 * The number of structural features of the '<em>Integer Value</em>' class.
@@ -326,7 +307,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getInvalidValue()
 	 * @generated
 	 */
-	int INVALID_VALUE = 9;
+	int INVALID_VALUE = 8;
 
 	/**
 	 * The number of structural features of the '<em>Invalid Value</em>' class.
@@ -336,6 +317,25 @@ public interface ValuesPackage extends EPackage {
 	 * @ordered
 	 */
 	int INVALID_VALUE_FEATURE_COUNT = NULL_VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.MetaclassValueImpl <em>Metaclass Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.ocl.examples.domain.values.impl.MetaclassValueImpl
+	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getMetaclassValue()
+	 * @generated
+	 */
+	int METACLASS_VALUE = 9;
+
+	/**
+	 * The number of structural features of the '<em>Metaclass Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METACLASS_VALUE_FEATURE_COUNT = TYPE_VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.SequenceValueImpl <em>Sequence Value</em>}' class.
@@ -357,10 +357,10 @@ public interface ValuesPackage extends EPackage {
 	int SEQUENCE_VALUE_FEATURE_COUNT = COLLECTION_VALUE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.SparseOrderedSetValueImpl <em>Ordered Set Value</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.OrderedSetValueImpl <em>Ordered Set Value</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.domain.values.impl.SparseOrderedSetValueImpl
+	 * @see org.eclipse.ocl.examples.domain.values.impl.OrderedSetValueImpl
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getOrderedSetValue()
 	 * @generated
 	 */
@@ -530,16 +530,6 @@ public interface ValuesPackage extends EPackage {
 	EClass getBooleanValue();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.domain.values.ClassifierTypeValue <em>Classifier Type Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Classifier Type Value</em>'.
-	 * @see org.eclipse.ocl.examples.domain.values.ClassifierTypeValue
-	 * @generated
-	 */
-	EClass getClassifierTypeValue();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.domain.values.CollectionValue <em>Collection Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -608,6 +598,16 @@ public interface ValuesPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getInvalidValue();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.domain.values.MetaclassValue <em>Metaclass Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Metaclass Value</em>'.
+	 * @see org.eclipse.ocl.examples.domain.values.MetaclassValue
+	 * @generated
+	 */
+	EClass getMetaclassValue();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.domain.values.NullValue <em>Null Value</em>}'.
@@ -792,16 +792,6 @@ public interface ValuesPackage extends EPackage {
 		EClass BOOLEAN_VALUE = eINSTANCE.getBooleanValue();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.domain.values.impl.ClassifierTypeValueImpl <em>Classifier Type Value</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.domain.values.impl.ClassifierTypeValueImpl
-		 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getClassifierTypeValue()
-		 * @generated
-		 */
-		EClass CLASSIFIER_TYPE_VALUE = eINSTANCE.getClassifierTypeValue();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.domain.values.impl.CollectionValueImpl <em>Collection Value</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -872,6 +862,16 @@ public interface ValuesPackage extends EPackage {
 		EClass INVALID_VALUE = eINSTANCE.getInvalidValue();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.domain.values.impl.MetaclassValueImpl <em>Metaclass Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.ocl.examples.domain.values.impl.MetaclassValueImpl
+		 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getMetaclassValue()
+		 * @generated
+		 */
+		EClass METACLASS_VALUE = eINSTANCE.getMetaclassValue();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.domain.values.impl.NullValueImpl <em>Null Value</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -902,10 +902,10 @@ public interface ValuesPackage extends EPackage {
 		EClass OBJECT_VALUE = eINSTANCE.getObjectValue();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.domain.values.impl.SparseOrderedSetValueImpl <em>Ordered Set Value</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.domain.values.impl.OrderedSetValueImpl <em>Ordered Set Value</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.domain.values.impl.SparseOrderedSetValueImpl
+		 * @see org.eclipse.ocl.examples.domain.values.impl.OrderedSetValueImpl
 		 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getOrderedSetValue()
 		 * @generated
 		 */

@@ -56,13 +56,13 @@ public interface PivotFactory
 	Class createClass();
 
 	/**
-	 * Returns a new object of class '<em>Classifier Type</em>'.
+	 * Returns a new object of class '<em>Metaclass</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Classifier Type</em>'.
+	 * @return a new object of class '<em>Metaclass</em>'.
 	 * @generated
 	 */
-	ClassifierType createClassifierType();
+	Metaclass createMetaclass();
 
 	/**
 	 * Returns a new object of class '<em>Template Binding</em>'.

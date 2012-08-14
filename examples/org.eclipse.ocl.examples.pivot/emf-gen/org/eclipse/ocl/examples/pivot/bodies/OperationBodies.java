@@ -76,7 +76,7 @@ public class OperationBodies
 			final @NonNull NullValue Null = valueFactory.getNull();
 			final @NonNull ExecutorOperation O_Boolean_and = OCLstdlibTables.Operations._Boolean__and;
 			final @NonNull ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
-			final @NonNull Value T_ClassClassifier_pivot__ExpressionInOCL_ = valueFactory.createTypeValue(PivotTables.Types._ExpressionInOCL);
+			final @NonNull Value T_Metaclass_pivot__ExpressionInOCL_ = valueFactory.createTypeValue(PivotTables.Types._ExpressionInOCL);
 			final @NonNull ExecutorOperation O_TypedMultiplicityElement_CompatibleBody = PivotTables.Operations._TypedMultiplicityElement__CompatibleBody;
 			final @NonNull ExecutorType T_pivot__ValueSpecification = PivotTables.Types._ValueSpecification;
 			final @NonNull ExecutorProperty P_Constraint_specification = PivotTables.Properties._Constraint__specification;
@@ -156,7 +156,7 @@ public class OperationBodies
 						
 						DomainType static_A_symbol_10 = valueFactory.typeOf(V_bodySpecification);
 						LibraryBinaryOperation dynamic_A_symbol_10 = (LibraryBinaryOperation)static_A_symbol_10.lookupImplementation(standardLibrary, O_OclAny_oclIsKindOf);
-						Value A_symbol_10 = dynamic_A_symbol_10.evaluate(evaluator, T_Boolean, V_bodySpecification, T_ClassClassifier_pivot__ExpressionInOCL_);
+						Value A_symbol_10 = dynamic_A_symbol_10.evaluate(evaluator, T_Boolean, V_bodySpecification, T_Metaclass_pivot__ExpressionInOCL_);
 						rightA_symbol_8 = A_symbol_10;
 					} catch (InvalidValueException e) {
 						rightA_symbol_8 = valueFactory.createInvalidValue(e);

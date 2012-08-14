@@ -25,13 +25,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainClassifierType;
+import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.types.AbstractClassifierType;
+import org.eclipse.ocl.examples.domain.types.AbstractMetaclass;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorPackage;
@@ -65,10 +65,10 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 	}
 
 	@Override
-	protected @NonNull DomainClassifierType createClassifierType(@NonNull DomainType classType) {
-		DomainType anyClassifierType = getAnyClassifierType();
-		DomainClassifierType classifierType = new AbstractClassifierType(this, anyClassifierType, classType);
-		return classifierType;
+	protected @NonNull DomainMetaclass createMetaclass(@NonNull DomainType classType) {
+		DomainType anyMetaclass = getMetaclassType();
+		DomainMetaclass metaclass = new AbstractMetaclass(this, anyMetaclass, classType);
+		return metaclass;
 	}
 	
 	@Override
@@ -106,10 +106,10 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 		if (type instanceof DomainInheritance) {
 			return (DomainInheritance) type;
 		}
-		if (type instanceof DomainClassifierType) {
-			DomainType instanceType = DomainUtil.nonNullPivot(((DomainClassifierType)type).getInstanceType());
-			DomainClassifierType classifierType = getClassifierType(instanceType);
-			DomainType containerType = classifierType.getContainerType();
+		if (type instanceof DomainMetaclass) {
+			DomainType instanceType = DomainUtil.nonNullPivot(((DomainMetaclass)type).getInstanceType());
+			DomainMetaclass metaclass = getMetaclass(instanceType);
+			DomainType containerType = metaclass.getContainerType();
 			return containerType.getInheritance(this);
 		}
 		if (type instanceof DomainCollectionType) {

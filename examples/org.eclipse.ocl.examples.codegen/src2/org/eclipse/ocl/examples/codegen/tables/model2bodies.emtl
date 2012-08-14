@@ -2374,9 +2374,9 @@
         <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//BagType"/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ClassifierType_Class">
+    <eClassifiers xsi:type="ecore:EClass" name="Metaclass_Class">
       <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
-        <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ClassifierType"/>
+        <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Metaclass"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CollectionItem_Class">

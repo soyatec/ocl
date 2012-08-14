@@ -19,7 +19,7 @@ package org.eclipse.ocl.examples.domain.values;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 
-public interface ClassifierTypeValue extends TypeValue
+public interface MetaclassValue extends TypeValue
 {
 	/**
 	 * @generated NOT

@@ -28,8 +28,8 @@ import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.pivot.ClassifierType;
 import org.eclipse.ocl.examples.pivot.CollectionType;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
@@ -37,7 +37,6 @@ import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
  * An TemplateableTypeServer supports one or more merged types as the source for operations, properties or superclasses
@@ -185,20 +184,11 @@ public class TemplateableTypeServer extends ExtensibleTypeServer
 			}
 		}
 		specializedType.getTemplateBinding().add(templateBinding);
-		resolveSuperClasses(specializedType, unspecializedType, allBindings);
-		if (specializedType instanceof CollectionType) {
-			Type elementType = (Type) templateArguments.get(0);
-			BigInteger lower = (BigInteger) templateArguments.get(1);
-			BigInteger upper = (BigInteger) templateArguments.get(2);
-			CollectionType specializedCollectionType = (CollectionType)specializedType;
-			specializedCollectionType.setElementType(elementType);
-			specializedCollectionType.setLower(lower);
-			specializedCollectionType.setUpper(upper);
-		}
-		else if (specializedType instanceof ClassifierType) {
+		packageManager.resolveSuperClasses(specializedType, unspecializedType, allBindings);
+		if (specializedType instanceof Metaclass) {
 			Type instanceType = (Type) templateArguments.get(0);
-			ClassifierType specializedClassifierType = (ClassifierType)specializedType;
-			specializedClassifierType.setInstanceType(instanceType);
+			Metaclass specializedMetaclass = (Metaclass)specializedType;
+			specializedMetaclass.setInstanceType(instanceType);
 		}
 		specializedType.setUnspecializedElement(unspecializedType);
 		MetaModelManager metaModelManager = packageManager.getMetaModelManager();
@@ -270,43 +260,6 @@ public class TemplateableTypeServer extends ExtensibleTypeServer
 				specializations2.put(templateArguments, new WeakReference<Type>(specializedType));
 			}
 			return specializedType;
-		}
-	}
-
-	void resolveSuperClasses(@NonNull Type specializedClass, @NonNull Type libraryClass, Map<TemplateParameter, ParameterableElement> allBindings) {
-		MetaModelManager metaModelManager = packageManager.getMetaModelManager();
-		for (Type superType : libraryClass.getSuperClass()) {
-			List<TemplateBinding> superTemplateBindings = superType.getTemplateBinding();
-			if (superTemplateBindings.size() > 0) {
-//				Map<TemplateParameter, ParameterableElement> superTemplateArgumentMap = new HashMap<TemplateParameter, ParameterableElement>();
-				List<ParameterableElement> superTemplateArgumentList = new ArrayList<ParameterableElement>();
-				for (TemplateBinding superTemplateBinding : superTemplateBindings) {
-					for (TemplateParameterSubstitution superParameterSubstitution : superTemplateBinding.getParameterSubstitution()) {
-						ParameterableElement superActual = superParameterSubstitution.getActual();
-//						TemplateParameter superFormal = superParameterSubstitution.getFormal();
-						TemplateParameter superTemplateParameter = superActual.getTemplateParameter();
-						ParameterableElement actualActual = allBindings.get(superTemplateParameter);
-//						superTemplateArgumentMap.put(superFormal, actualActual);
-						superTemplateArgumentList.add(actualActual);
-					}
-				}
-				@NonNull Type unspecializedSuperType = PivotUtil.getUnspecializedTemplateableElement(superType);
-				TypeServer superTypeServer = metaModelManager.getTypeServer(unspecializedSuperType);
-/*				List<ParameterableElement> superTemplateArgumentList = new ArrayList<ParameterableElement>();
-				for (TemplateBinding templateBinding : superTemplateBindings) {
-					for (TemplateParameterSubstitution parameterSubstitution : templateBinding.getParameterSubstitution()) {
-						ParameterableElement templateArgument = parameterSubstitution.getActual();
-						superTemplateArgumentList.add(templateArgument);
-					}
-				} */
-				if (superTypeServer instanceof TemplateableTypeServer) {
-					Type specializedSuperType = ((TemplateableTypeServer)superTypeServer).getSpecializedType(superTemplateArgumentList);
-					specializedClass.getSuperClass().add(specializedSuperType);
-				}
-			}
-			else {
-				specializedClass.getSuperClass().add(superType);
-			}
 		}
 	}
 }

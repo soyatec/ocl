@@ -30,7 +30,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CallExp;
-import org.eclipse.ocl.examples.pivot.ClassifierType;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralPart;
@@ -760,8 +760,8 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 			sourceType = source.getType();
 		}
 		if (sourceType != null) {
-			if (operation.isStatic() && (sourceType instanceof ClassifierType)) {
-				sourceType = ((ClassifierType)sourceType).getInstanceType();
+			if (operation.isStatic() && (sourceType instanceof Metaclass)) {
+				sourceType = ((Metaclass)sourceType).getInstanceType();
 			}
 			templateBindings.put(null, sourceType);		// Use the null key to pass OclSelf without creating an object
 		}
@@ -897,7 +897,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 	protected TypeExp resolveTypeExp(@NonNull ExpCS csExp, @NonNull Type type) {
 		TypeExp expression = context.refreshModelElement(TypeExp.class, PivotPackage.Literals.TYPE_EXP, csExp);
 		if (expression != null) {
-			context.setType(expression, metaModelManager.getClassifierType(type));
+			context.setType(expression, metaModelManager.getMetaclass(type));
 			expression.setReferredType(type);
 		}
 		return expression;

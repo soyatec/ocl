@@ -215,12 +215,6 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 		return true;
 	}
 
-//	@Override
-//	public Object visitClassifierType(ClassifierType object) {
-//		context.appendName(object);
-//		return true;
-//	}
-
 	@Override
 	public Object visitCollectionLiteralExp(@NonNull CollectionLiteralExp object) {
 		appendExpPrefix(object);

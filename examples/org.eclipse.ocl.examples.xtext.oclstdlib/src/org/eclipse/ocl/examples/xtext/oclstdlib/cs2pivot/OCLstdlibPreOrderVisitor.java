@@ -19,7 +19,7 @@ package org.eclipse.ocl.examples.xtext.oclstdlib.cs2pivot;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.ClassifierType;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.Library;
@@ -53,7 +53,7 @@ public class OCLstdlibPreOrderVisitor extends AbstractOCLstdlibPreOrderVisitor
 
 		@Override
 		public BasicContinuation<?> execute() {
-			ClassifierType type = PivotUtil.getPivot(ClassifierType.class, csElement);
+			Metaclass type = PivotUtil.getPivot(Metaclass.class, csElement);
 			if (type != null) {
 				TemplateSignature ownedTemplateSignature = type.getOwnedTemplateSignature();
 				if (ownedTemplateSignature != null) {
@@ -186,7 +186,7 @@ public class OCLstdlibPreOrderVisitor extends AbstractOCLstdlibPreOrderVisitor
 			continuation = Continuations.combine(continuation,
 				new CollectionElementTypeContinuation(context, csLibClass));
 		}
-		else if (type instanceof ClassifierType) {
+		else if (type instanceof Metaclass) {
 			continuation = Continuations.combine(continuation,
 				new ClassifierInstanceTypeContinuation(context, csLibClass));
 		}

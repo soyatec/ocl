@@ -84,10 +84,6 @@ public abstract class AbstractNullVisitor<R, C>
 		return null;
 	}
 
-	public @Nullable R visitClassifierType(@NonNull org.eclipse.ocl.examples.pivot.ClassifierType object) {
-		return null;
-	}
-
 	public @Nullable R visitCollectionItem(@NonNull org.eclipse.ocl.examples.pivot.CollectionItem object) {
 		return null;
 	}
@@ -225,6 +221,10 @@ public abstract class AbstractNullVisitor<R, C>
 	}
 
 	public @Nullable R visitMessageType(@NonNull org.eclipse.ocl.examples.pivot.MessageType object) {
+		return null;
+	}
+
+	public @Nullable R visitMetaclass(@NonNull org.eclipse.ocl.examples.pivot.Metaclass object) {
 		return null;
 	}
 

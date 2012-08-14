@@ -40,7 +40,7 @@ public class JavaObjectValueImpl extends ObjectValueImpl
 				type2 = type = standardLibrary.getOclComparableType();
 			}
 			else {
-				type2 = type = standardLibrary.getAnyClassifierType();
+				type2 = type = standardLibrary.getMetaclassType();
 			}
 		}
 		return type2;

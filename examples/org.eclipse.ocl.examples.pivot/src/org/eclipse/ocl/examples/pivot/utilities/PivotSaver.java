@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.pivot.ClassifierType;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Iteration;
@@ -213,14 +213,6 @@ public class PivotSaver extends AbstractPivotSaver
 		}
 
 		@Override
-		public Object visitClassifierType(@NonNull ClassifierType object) {
-			Type referredType = DomainUtil.nonNullModel(object.getInstanceType());
-			Type resolvedType = context.resolveType(referredType);
-			object.setInstanceType(resolvedType);
-			return super.visitClassifierType(object);
-		}
-
-		@Override
 		public Object visitCollectionType(@NonNull CollectionType object) {
 			Type referredType = DomainUtil.nonNullModel(object.getElementType());
 			Type resolvedType = context.resolveType(referredType);
@@ -255,6 +247,14 @@ public class PivotSaver extends AbstractPivotSaver
 			Iteration resolvedIteration = context.resolveOperation(referredIteration);
 			object.setReferredIteration(resolvedIteration);
 			return null;
+		}
+
+		@Override
+		public Object visitMetaclass(@NonNull Metaclass object) {
+			Type referredType = DomainUtil.nonNullModel(object.getInstanceType());
+			Type resolvedType = context.resolveType(referredType);
+			object.setInstanceType(resolvedType);
+			return super.visitMetaclass(object);
 		}
 
 		@Override

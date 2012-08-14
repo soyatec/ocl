@@ -24,7 +24,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
+import org.eclipse.ocl.examples.domain.values.CollectionTypeValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
@@ -37,9 +37,9 @@ public class CollectionClassifierElementTypeProperty extends AbstractProperty
 
 	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		TypeValue sourceTypeValue = sourceValue.asTypeValue();
-		DomainType sourceType = sourceTypeValue.getInstanceType();
-		DomainType elementType = DomainUtil.nonNullModel(((DomainCollectionType)sourceType).getElementType());
+		CollectionTypeValue sourceTypeValue = sourceValue.asCollectionTypeValue();
+		DomainCollectionType sourceType = sourceTypeValue.getInstanceType();
+		DomainType elementType = DomainUtil.nonNullModel(sourceType.getElementType());
 		return valueFactory.createTypeValue(elementType);
 	}
 }

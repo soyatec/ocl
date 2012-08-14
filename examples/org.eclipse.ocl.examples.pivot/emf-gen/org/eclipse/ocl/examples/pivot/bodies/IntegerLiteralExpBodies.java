@@ -61,14 +61,14 @@ public class IntegerLiteralExpBodies
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
 			final @NonNull LibraryProperty IP_TypedElement_type = P_TypedElement_type.getImplementation();
-			final @NonNull Value T_ClassClassifier_Integer_ = valueFactory.createTypeValue(OCLstdlibTables.Types._Integer);
+			final @NonNull Value T_Metaclass_Integer_ = valueFactory.createTypeValue(OCLstdlibTables.Types._Integer);
 			
 			
 			Value A_symbol_0 = IP_TypedElement_type.evaluate(evaluator, T_Type, self, P_TypedElement_type);
 			
-			DomainType static_A_symbol_1 = valueFactory.typeOf(A_symbol_0, T_ClassClassifier_Integer_);
+			DomainType static_A_symbol_1 = valueFactory.typeOf(A_symbol_0, T_Metaclass_Integer_);
 			LibraryBinaryOperation dynamic_A_symbol_1 = (LibraryBinaryOperation)static_A_symbol_1.lookupImplementation(standardLibrary, O_OclAny__eq_);
-			Value A_symbol_1 = dynamic_A_symbol_1.evaluate(evaluator, T_Boolean, A_symbol_0, T_ClassClassifier_Integer_);
+			Value A_symbol_1 = dynamic_A_symbol_1.evaluate(evaluator, T_Boolean, A_symbol_0, T_Metaclass_Integer_);
 			return A_symbol_1;
 		}
 	}

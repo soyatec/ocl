@@ -63,7 +63,7 @@ import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.AnyType;
-import org.eclipse.ocl.examples.pivot.ClassifierType;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -745,9 +745,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		else if (secondType instanceof VoidType) {
 			return false;
 		}
-		else if (firstType instanceof ClassifierType) {
-			if (secondType instanceof ClassifierType) {
-				return conformsToClassifierType((ClassifierType)firstType, (ClassifierType)secondType, bindings);
+		else if (firstType instanceof Metaclass) {
+			if (secondType instanceof Metaclass) {
+				return conformsToMetaclass((Metaclass)firstType, (Metaclass)secondType, bindings);
 			}
 			// Drop-through and maybe match xxClassifoer<xx> against OclType
 		}
@@ -782,58 +782,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return false;
 	}
 
-	protected boolean conformsToClassifierType(@NonNull ClassifierType firstType, @NonNull ClassifierType secondType,
-			@Nullable Map<TemplateParameter, ParameterableElement> bindings) {
-		Type firstElementType = firstType.getInstanceType();
-		Type secondElementType = secondType.getInstanceType();
-		if (bindings != null) {
-			TemplateParameter firstTemplateParameter = firstElementType.getOwningTemplateParameter();
-			if (firstTemplateParameter != null) {
-				ParameterableElement parameterableElement = bindings.get(firstTemplateParameter);
-				if (parameterableElement instanceof Type) {
-					firstElementType = (Type) parameterableElement;
-				}
-			}
-			TemplateParameter secondTemplateParameter = secondElementType.getOwningTemplateParameter();
-			if (secondTemplateParameter != null) {
-				ParameterableElement parameterableElement = bindings.get(secondTemplateParameter);
-				if (parameterableElement instanceof Type) {
-					secondElementType = (Type) parameterableElement;
-				}
-				else if ((parameterableElement == null) && bindings.containsKey(secondTemplateParameter)) {
-					bindings.put(secondTemplateParameter, firstElementType);
-					return true;
-				}
-			}
-		}
-		if ((firstElementType == null) || (secondElementType == null)) {
-			return false;
-		}
-		else if (firstElementType instanceof UnspecifiedType) {
-			Type lowerBound = ((UnspecifiedType)firstElementType).getLowerBound();
-			if ((lowerBound != null) && conformsTo(secondElementType, lowerBound, bindings)) {
-				((UnspecifiedType)firstElementType).setLowerBound(secondElementType);
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-		else if (secondElementType instanceof UnspecifiedType) {
-			Type upperBound = ((UnspecifiedType)secondElementType).getUpperBound();
-			if ((upperBound != null) && conformsTo(upperBound, firstElementType, bindings)) {
-				((UnspecifiedType)secondElementType).setUpperBound(firstElementType);
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-		else {
-			return conformsTo(firstElementType, secondElementType, bindings);
-		}
-	}
-
 	@Override
 	public boolean conformsToCollectionType(@NonNull DomainCollectionType firstCollectionType, @NonNull DomainCollectionType secondCollectionType) {
 		return conformsToCollectionType((CollectionType)firstCollectionType, (CollectionType)secondCollectionType, null);	// FIXME cast
@@ -850,6 +798,21 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		Type secondElementType = secondType.getElementType();
 		if ((firstElementType == null) || (secondElementType == null)) {
 			return false;
+		}
+		BigInteger firstLower = firstType.getLower();
+		BigInteger secondLower = secondType.getLower();
+		if (firstLower.compareTo(secondLower) > 0) {
+			return false;
+		}
+		BigInteger firstUpper = firstType.getUpper();
+		if (firstUpper.signum() >= 0) {
+			BigInteger secondUpper = secondType.getUpper();
+			if (secondUpper.signum() < 0) {
+				return false;
+			}
+			if (firstLower.compareTo(secondLower) < 0) {
+				return false;
+			}
 		}
 		if (bindings != null) {
 //			if (firstElementType != null) {
@@ -935,6 +898,58 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			}
 		}
 		return true;
+	}
+
+	protected boolean conformsToMetaclass(@NonNull Metaclass firstType, @NonNull Metaclass secondType,
+			@Nullable Map<TemplateParameter, ParameterableElement> bindings) {
+		Type firstElementType = firstType.getInstanceType();
+		Type secondElementType = secondType.getInstanceType();
+		if (bindings != null) {
+			TemplateParameter firstTemplateParameter = firstElementType.getOwningTemplateParameter();
+			if (firstTemplateParameter != null) {
+				ParameterableElement parameterableElement = bindings.get(firstTemplateParameter);
+				if (parameterableElement instanceof Type) {
+					firstElementType = (Type) parameterableElement;
+				}
+			}
+			TemplateParameter secondTemplateParameter = secondElementType.getOwningTemplateParameter();
+			if (secondTemplateParameter != null) {
+				ParameterableElement parameterableElement = bindings.get(secondTemplateParameter);
+				if (parameterableElement instanceof Type) {
+					secondElementType = (Type) parameterableElement;
+				}
+				else if ((parameterableElement == null) && bindings.containsKey(secondTemplateParameter)) {
+					bindings.put(secondTemplateParameter, firstElementType);
+					return true;
+				}
+			}
+		}
+		if ((firstElementType == null) || (secondElementType == null)) {
+			return false;
+		}
+		else if (firstElementType instanceof UnspecifiedType) {
+			Type lowerBound = ((UnspecifiedType)firstElementType).getLowerBound();
+			if ((lowerBound != null) && conformsTo(secondElementType, lowerBound, bindings)) {
+				((UnspecifiedType)firstElementType).setLowerBound(secondElementType);
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else if (secondElementType instanceof UnspecifiedType) {
+			Type upperBound = ((UnspecifiedType)secondElementType).getUpperBound();
+			if ((upperBound != null) && conformsTo(upperBound, firstElementType, bindings)) {
+				((UnspecifiedType)secondElementType).setUpperBound(firstElementType);
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			return conformsTo(firstElementType, secondElementType, bindings);
+		}
 	}
 
 	protected boolean conformsToTupleType(@NonNull TupleType actualType, @NonNull TupleType requiredType,
@@ -1241,27 +1256,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return getCollectionType(getBagType(), elementType, lower, upper);
 	}
 
-	public @NonNull ClassifierType getClassifierType(@NonNull DomainType instanceType) {
-		return getClassifierType(getType(instanceType));
-	}
-
-	public @NonNull ClassifierType getClassifierType(@NonNull Type instanceType) {
-		ClassifierType classifierType;
- 		List<Type> templateArguments = new ArrayList<Type>();
- 		templateArguments.add(instanceType);
-		if (instanceType instanceof org.eclipse.ocl.examples.pivot.Enumeration) {
- 			classifierType = getEnumerationClassifierType();
- 		}
- 		else if (instanceType instanceof CollectionType) {
- 			classifierType = getCollectionClassifierType();
- 	 		templateArguments.add(((CollectionType) instanceType).getElementType());
-		}
- 		else {
- 			classifierType =  getClassClassifierType();
-  		}
-		return getLibraryType(classifierType, templateArguments);
-	}
-
 	public @NonNull CollectionType getCollectionType(boolean isOrdered, boolean isUnique) {
 		if (isOrdered) {
 			if (isUnique) {
@@ -1317,13 +1311,13 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return specializedType;
 	}
 
-	public @NonNull Set<Type> getCommonClasses(@NonNull Type leftClass, @NonNull Type rightClass, @NonNull Set<Type> commonClasses) {
+	public @NonNull Set<DomainInheritance> getCommonClasses(@NonNull Type leftClass, @NonNull Type rightClass, @NonNull Set<DomainInheritance> commonClasses) {
 		if (conformsTo(rightClass, leftClass, null)) {
-			commonClasses.add(leftClass);
+			commonClasses.add(leftClass.getInheritance(this));
 		}
 		for (Type superClass : leftClass.getSuperClass()) {
 			if (superClass != null) {
-				Set<Type> commonSuperClasses = getCommonClasses(superClass, rightClass, commonClasses);
+				Set<DomainInheritance> commonSuperClasses = getCommonClasses(superClass, rightClass, commonClasses);
 				commonClasses.addAll(commonSuperClasses);
 			}
 		}
@@ -1353,26 +1347,13 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		if (conformsTo(rightType, leftType, templateParameterSubstitutions)) {
 			return leftType;
 		}
-		Set<Type> commonClasses = getCommonClasses(leftType, rightType, new HashSet<Type>());
-		// FIXME If there are two different common types neither is inherently better
-		Type mostConformant = null;
-		for (Type commonClass : commonClasses) {
-			if (commonClass != null) {
-				if (mostConformant == null) {
-					mostConformant = commonClass;
-				}
-				else if (conformsTo(commonClass, mostConformant, templateParameterSubstitutions)) {
-					mostConformant = commonClass;
-				}
-			}
-		}
-		if (mostConformant == null) {
-			mostConformant = getOclAnyType();			// Never happens since OclAny in conformance tree anyway
-		}
-		return mostConformant;
+		DomainInheritance leftInheritance = leftType.getInheritance(this);
+		DomainInheritance rightInheritance = rightType.getInheritance(this);
+		DomainInheritance commonInheritance = leftInheritance.getCommonInheritance(rightInheritance);
+		return getType(commonInheritance); 
 	}
 
-	public String getDefaultStandardLibraryURI() {
+	public @NonNull String getDefaultStandardLibraryURI() {
 		return defaultStandardLibraryURI;
 	}
 
@@ -1484,10 +1465,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 
 	public @NonNull <T extends Type> T getLibraryType(@NonNull T libraryType, @NonNull List<? extends ParameterableElement> templateArguments) {
 		assert !(libraryType instanceof CollectionType);
+		assert !(libraryType instanceof Metaclass);
 		assert libraryType == PivotUtil.getUnspecializedTemplateableElement(libraryType);
-		if ((libraryType == getAnyClassifierType()) && (templateArguments.size() == 1) && (templateArguments.get(0) == libraryType)) {
-			return libraryType;
-		}
 		TemplateSignature templateSignature = libraryType.getOwnedTemplateSignature();
 		List<TemplateParameter> templateParameters = templateSignature != null ? templateSignature.getParameter() : EMPTY_TEMPLATE_PARAMETER_LIST;
 		if (templateParameters.isEmpty()) {
@@ -1607,12 +1586,33 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		}
 	}
 
+	public @NonNull Metaclass getMetaclass(@NonNull DomainType instanceType) {
+		return getMetaclass(getType(instanceType));
+	}
+
+	public @NonNull Metaclass getMetaclass(@NonNull Type instanceType) {
+		Metaclass metaclassType =  getMetaclassType();
+		if (instanceType == metaclassType) {
+			return metaclassType;
+		}
+		TemplateSignature templateSignature = metaclassType.getOwnedTemplateSignature();
+		List<TemplateParameter> templateParameters = templateSignature.getParameter();
+		boolean isUnspecialized = instanceType == templateParameters.get(0).getParameteredElement();	// Checked in getMetaclassType().
+		if (isUnspecialized) {
+			return metaclassType;	
+		}
+		MetaclassServer typeServer = (MetaclassServer) getTypeServer(metaclassType);
+		Metaclass specializedType = typeServer.getSpecializedType((Type) instanceType);
+		return specializedType;
+	}
+
 	@Override
 	public DomainType getMetaType(@NonNull DomainType instanceType) {
 		if (instanceType instanceof PrimitiveType) {
 			return getPivotType("PrimitiveType");
 		}
-		throw new UnsupportedOperationException();
+//		throw new UnsupportedOperationException();
+		return getMetaclass(instanceType);
 	}
 
 	public @Nullable DomainType getOclType(@NonNull String typeName) {
@@ -1926,64 +1926,20 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 
 	protected @NonNull CollectionType getSpecializedCollectionType(@NonNull CollectionType type, @NonNull Map<TemplateParameter, ParameterableElement> usageBindings) {
-		//
-		//	Get the bindings of the type.
-		//
 		CollectionType unspecializedType = PivotUtil.getUnspecializedTemplateableElement(type);
-	//	List<TemplateParameter> templateParameters = PivotUtil.getAllTemplateParameters(type);
 		Map<TemplateParameter, ParameterableElement> typeBindings = PivotUtil.getAllTemplateParametersAsBindings(type);
 		PivotUtil.getAllTemplateParameterSubstitutions(typeBindings, type);
 		if ((typeBindings != null) && !typeBindings.isEmpty()) {
-			//
-			//	Re-bind the type bindings to use those of the usage.
-			//
-			for (TemplateParameter templateParameter : typeBindings.keySet()) {
-				ParameterableElement parameterableElement = typeBindings.get(templateParameter);
-				if (parameterableElement != null) {
-					TemplateParameter aTemplateParameter = parameterableElement.getOwningTemplateParameter();
-					if (aTemplateParameter != null) {
-						ParameterableElement aParameterableElement = usageBindings.get(aTemplateParameter);
-						if (aParameterableElement != null) {
-							typeBindings.put(templateParameter, aParameterableElement);
-						}
-					}
-					else if (parameterableElement instanceof SelfType) {
-						ParameterableElement aParameterableElement = usageBindings.get(null);
-						if (aParameterableElement != null) {
-							typeBindings.put(templateParameter, aParameterableElement);
-						}
-					}
-				}
+			rebindTemplateBindings(typeBindings, usageBindings);	//	Re-bind the type bindings to use those of the usage.
+			TemplateParameter templateParameter = unspecializedType.getOwnedTemplateSignature().getOwnedParameter().get(0);
+			ParameterableElement templateArgument = typeBindings.get(templateParameter);
+			if (templateArgument == null) {
+				templateArgument = templateParameter.getParameteredElement();
 			}
-			//
-			//	Prepare the template argument list, one template argument per template parameter.
-			//
-//			Set<TemplateParameter> templateParameters = typeBindings1.keySet();
-			List<TemplateParameter> templateParameters = PivotUtil.getAllTemplateParameters(unspecializedType);
-			if (templateParameters != null) {
-				ParameterableElement templateArgument = null;
-//				boolean isSubstituted = false;
-				for (TemplateParameter templateParameter : templateParameters) {
-					templateArgument = typeBindings.get(templateParameter);
-					if (templateArgument != null) {
-//						isSubstituted = true;
-					}
-					else {
-						templateArgument = templateParameter.getParameteredElement();
-					}
-					if (templateArgument instanceof Type) {
-						templateArgument = getSpecializedType((Type)templateArgument, usageBindings);
-//						isSubstituted = true;
-					}
-//					templateArguments.add(templateArgument);
-					break;
-				}
-//				if (!isSubstituted) {
-//					return type;
-//				}
-				if (templateArgument instanceof Type) {
-					return getCollectionType(unspecializedType, (Type)templateArgument, null, null);
-				}
+			if (templateArgument instanceof Type) {
+				Type templateTypeArgument = (Type)templateArgument;
+				templateTypeArgument = getSpecializedType(templateTypeArgument, usageBindings);
+				return getCollectionType(unspecializedType, templateTypeArgument, null, null);
 			}
 		}
 		return type;
@@ -1996,6 +1952,25 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		Type resultType = DomainUtil.nonNullModel(type.getResultType());
 		LambdaType specializedLambdaType = getLambdaType(typeName, contextType, parameterType, resultType, usageBindings);
 		return specializedLambdaType;
+	}
+
+	protected @NonNull Metaclass getSpecializedMetaclass(@NonNull Metaclass type, @NonNull Map<TemplateParameter, ParameterableElement> usageBindings) {
+		Map<TemplateParameter, ParameterableElement> typeBindings = PivotUtil.getAllTemplateParametersAsBindings(type);
+		PivotUtil.getAllTemplateParameterSubstitutions(typeBindings, type);
+		if ((typeBindings != null) && !typeBindings.isEmpty()) {
+			rebindTemplateBindings(typeBindings, usageBindings);	//	Re-bind the type bindings to use those of the usage.
+			TemplateParameter templateParameter = getMetaclassType().getOwnedTemplateSignature().getOwnedParameter().get(0);
+			ParameterableElement templateArgument = typeBindings.get(templateParameter);
+			if (templateArgument == null) {
+				templateArgument = templateParameter.getParameteredElement();
+				assert templateArgument != null;
+			}
+			if (templateArgument instanceof Type) {
+				templateArgument = getSpecializedType((Type)templateArgument, usageBindings);
+			}
+			return (Metaclass) getMetaclass((DomainType) templateArgument);
+		}
+		return type;
 	}
 
 	public @NonNull Type getSpecializedType(@NonNull Type type, @Nullable Map<TemplateParameter, ParameterableElement> usageBindings) {
@@ -2013,6 +1988,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		else if (type instanceof CollectionType) {
 			return getSpecializedCollectionType((CollectionType)type, usageBindings);
 		}
+		else if (type instanceof Metaclass) {
+			return getSpecializedMetaclass((Metaclass)type, usageBindings);
+		}
 		else if (type instanceof TupleType) {
 			return getTupleType((TupleType) type, usageBindings);
 		}
@@ -2024,56 +2002,29 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			//	Get the bindings of the type.
 			//
 			Type unspecializedType = PivotUtil.getUnspecializedTemplateableElement(type);
-	//		List<TemplateParameter> templateParameters = PivotUtil.getAllTemplateParameters(type);
 			Map<TemplateParameter, ParameterableElement> typeBindings = PivotUtil.getAllTemplateParametersAsBindings(type);
 			PivotUtil.getAllTemplateParameterSubstitutions(typeBindings, type);
 			if ((typeBindings != null) && !typeBindings.isEmpty()) {
 				//
 				//	Re-bind the type bindings to use those of the usage.
 				//
-				for (TemplateParameter templateParameter : typeBindings.keySet()) {
-					ParameterableElement parameterableElement = typeBindings.get(templateParameter);
-					if (parameterableElement != null) {
-						TemplateParameter aTemplateParameter = parameterableElement.getOwningTemplateParameter();
-						if (aTemplateParameter != null) {
-							ParameterableElement aParameterableElement = usageBindings.get(aTemplateParameter);
-							if (aParameterableElement != null) {
-								typeBindings.put(templateParameter, aParameterableElement);
-							}
-						}
-						else if (parameterableElement instanceof SelfType) {
-							ParameterableElement aParameterableElement = usageBindings.get(null);
-							if (aParameterableElement != null) {
-								typeBindings.put(templateParameter, aParameterableElement);
-							}
-						}
-					}
-				}
+				rebindTemplateBindings(typeBindings, usageBindings);
 				//
 				//	Prepare the template argument list, one template argument per template parameter.
 				//
-//				Set<TemplateParameter> templateParameters = typeBindings1.keySet();
 				List<TemplateParameter> templateParameters = PivotUtil.getAllTemplateParameters(unspecializedType);
 				if (templateParameters != null) {
 					List<ParameterableElement> templateArguments = new ArrayList<ParameterableElement>(templateParameters.size());
-//					boolean isSubstituted = false;
 					for (TemplateParameter templateParameter : templateParameters) {
 						ParameterableElement templateArgument = typeBindings.get(templateParameter);
-						if (templateArgument != null) {
-//							isSubstituted = true;
-						}
-						else {
+						if (templateArgument == null) {
 							templateArgument = templateParameter.getParameteredElement();
 						}
 						if (templateArgument instanceof Type) {
 							templateArgument = getSpecializedType((Type)templateArgument, usageBindings);
-//							isSubstituted = true;
 						}
 						templateArguments.add(templateArgument);
 					}
-//					if (!isSubstituted) {
-//						return type;
-//					}
 					return getLibraryType(unspecializedType, templateArguments);
 				}
 			}
@@ -2570,6 +2521,31 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	public void notifyChanged(Notification notification) {
 	}
 
+	//
+	//	Re-bind the type bindings to use those of the usage.
+	//
+	protected void rebindTemplateBindings(@NonNull Map<TemplateParameter, ParameterableElement> typeBindings,
+			@NonNull Map<TemplateParameter, ParameterableElement> usageBindings) {
+		for (TemplateParameter templateParameter : typeBindings.keySet()) {
+			ParameterableElement parameterableElement = typeBindings.get(templateParameter);
+			if (parameterableElement != null) {
+				TemplateParameter aTemplateParameter = parameterableElement.getOwningTemplateParameter();
+				if (aTemplateParameter != null) {
+					ParameterableElement aParameterableElement = usageBindings.get(aTemplateParameter);
+					if (aParameterableElement != null) {
+						typeBindings.put(templateParameter, aParameterableElement);
+					}
+				}
+				else if (parameterableElement instanceof SelfType) {
+					ParameterableElement aParameterableElement = usageBindings.get(null);
+					if (aParameterableElement != null) {
+						typeBindings.put(templateParameter, aParameterableElement);
+					}
+				}
+			}
+		}
+	}
+
 	public void removeExternalResource(@NonNull External2Pivot external2Pivot) {
 		external2PivotMap.remove(external2Pivot.getURI());
 	}
@@ -2731,7 +2707,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		this.autoLoadPivotMetaModel  = autoLoadPivotMetaModel;
 	}
 
-	public void setDefaultStandardLibraryURI(String defaultStandardLibraryURI) {
+	public void setDefaultStandardLibraryURI(@NonNull String defaultStandardLibraryURI) {
 		this.defaultStandardLibraryURI = defaultStandardLibraryURI;
 	}
 

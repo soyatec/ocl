@@ -28,6 +28,7 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.BooleanValue;
+import org.eclipse.ocl.examples.domain.values.CollectionTypeValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.ElementValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -95,6 +96,10 @@ public abstract class ValueImpl implements Value
 
 	public @NonNull BooleanValue asBooleanValue() throws InvalidValueException {
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Boolean", getType());
+	}
+
+	public @NonNull CollectionTypeValue asCollectionTypeValue() throws InvalidValueException {
+		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "CollectionType", getType());
 	}
 
 	public @NonNull CollectionValue asCollectionValue() throws InvalidValueException {

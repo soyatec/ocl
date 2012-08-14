@@ -125,7 +125,7 @@ public class MessageExpBodies
 			final @NonNull ExecutorType T_pivot__OCLExpression = PivotTables.Types._OCLExpression;
 			final @NonNull ExecutorProperty P_MessageExp_target = PivotTables.Properties._MessageExp__target;
 			final @NonNull LibraryProperty IP_MessageExp_target = P_MessageExp_target.getImplementation();
-			final @NonNull Value T_ClassClassifier_pivot__CollectionType_ = valueFactory.createTypeValue(PivotTables.Types._CollectionType);
+			final @NonNull Value T_Metaclass_pivot__CollectionType_ = valueFactory.createTypeValue(PivotTables.Types._CollectionType);
 			
 			
 			Value A_symbol_8 = IP_MessageExp_target.evaluate(evaluator, T_pivot__OCLExpression, self, P_MessageExp_target);
@@ -134,7 +134,7 @@ public class MessageExpBodies
 			
 			DomainType static_A_symbol_10 = valueFactory.typeOf(A_symbol_9);
 			LibraryBinaryOperation dynamic_A_symbol_10 = (LibraryBinaryOperation)static_A_symbol_10.lookupImplementation(standardLibrary, O_OclAny_oclIsKindOf);
-			Value A_symbol_10 = dynamic_A_symbol_10.evaluate(evaluator, T_Boolean, A_symbol_9, T_ClassClassifier_pivot__CollectionType_);
+			Value A_symbol_10 = dynamic_A_symbol_10.evaluate(evaluator, T_Boolean, A_symbol_9, T_Metaclass_pivot__CollectionType_);
 			DomainType static_A_symbol_11 = valueFactory.typeOf(A_symbol_10);
 			LibraryUnaryOperation dynamic_A_symbol_11 = (LibraryUnaryOperation)static_A_symbol_11.lookupImplementation(standardLibrary, O_Boolean_not);
 			Value A_symbol_11 = dynamic_A_symbol_11.evaluate(evaluator, T_Boolean, A_symbol_10);

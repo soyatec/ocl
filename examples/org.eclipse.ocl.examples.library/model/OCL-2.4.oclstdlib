@@ -91,10 +91,6 @@ annotation 'http://www.omg.org/ocl'(
 	ClassGroup_PrimitiveTypes='The primitive types defined in the OCL standard library are UnlimitedNatural, Integer, Real, String, and Boolean. They are all instances of the metaclass Primitive from the UML core package.'
 );
 
-type AnyClassifier(T) : ClassifierType conformsTo Class, OclType {
-	annotation 'http://www.omg.org/ocl'(ClassGroup='OCL');
-}
-
 /**
 A bag is a collection with duplicates allowed. That is, one object can be an element of a bag many times.
 There is no ordering defined on the elements in a bag.
@@ -160,8 +156,8 @@ type Bag(T) : BagType conformsTo Collection(T) {
 	The intersection of oclText[self] and s; the set of all elements that are in both oclText[self] and s.
 	**/
 	operation intersection(s : UniqueCollection(T)) : Set(T) => 'org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation';
-	operation selectByKind(TT)(type : AnyClassifier(TT)) : Bag(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation';
-	operation selectByType(TT)(type : AnyClassifier(TT)) : Bag(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation';
+	operation selectByKind(TT)(type : Metaclass(TT)) : Bag(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation';
+	operation selectByType(TT)(type : Metaclass(TT)) : Bag(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation';
 	/**
 	The union of oclText[self] and bag; the bag of all elements that are in oclText[self] and all elements that are in bag.
 	**/
@@ -216,14 +212,7 @@ type Boolean : PrimitiveType conformsTo OclAny {
 	operation xor(b : Boolean) : Boolean precedence=XOR => 'org.eclipse.ocl.examples.library.logical.BooleanXorOperation';
 }
 
-type Class conformsTo OclAny {
-	/**
-	Evaluates to the type of which self is an instance.
-	**/
-	operation oclType() : ClassClassifier(OclSelf) => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation';	
-}
-
-type ClassClassifier(T) : ClassifierType conformsTo AnyClassifier(T) {}
+type Class conformsTo OclAny {}
 
 /**
 Collection is the abstract supertype of all collection types in the OCL Standard Library.
@@ -388,15 +377,11 @@ type Collection(T) : CollectionType conformsTo OclAny {
 	**/
 	operation notEmpty() : Boolean => 'org.eclipse.ocl.examples.library.collection.CollectionNotEmptyOperation';
 	/**
-	Evaluates to the type of which oclText[self] is an instance.
-	**/
-	operation oclType() : CollectionClassifier(OclSelf,T) => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation';
-	/**
 	The cartesian product operation of oclText[self] and c2.
 	**/
 	operation product(T2)(c2 : Collection(T2)) : Set(Tuple(first:T,second:T2)) => 'org.eclipse.ocl.examples.library.collection.CollectionProductOperation';
-	operation selectByKind(TT)(type : AnyClassifier(TT)) : Collection(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation';
-	operation selectByType(TT)(type : AnyClassifier(TT)) : Collection(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation';
+	operation selectByKind(TT)(type : Metaclass(TT)) : Collection(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation';
+	operation selectByType(TT)(type : Metaclass(TT)) : Collection(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation';
 	/**
 	The number of elements in the collection oclText[self].
 	**/
@@ -417,15 +402,15 @@ type Collection(T) : CollectionType conformsTo OclAny {
 	/**
 	Evaluates to the type of the collection elements.
 	**/
-	property elementType : T => 'org.eclipse.ocl.examples.library.collection.CollectionClassifierElementTypeProperty';
-}
-
-type CollectionClassifier(T,E) : ClassifierType conformsTo AnyClassifier(T) {
-	annotation 'http://www.omg.org/ocl'(ClassGroup='OCL');
+	static property elementType : T => 'org.eclipse.ocl.examples.library.collection.CollectionElementTypeProperty';
 	/**
-	Evaluates to the type of the collection elements.
+	Evaluates to the lower bound on the number of collection elements.
 	**/
-	property elementType : E => 'org.eclipse.ocl.examples.library.collection.CollectionClassifierElementTypeProperty';
+	static property lower : Integer => 'org.eclipse.ocl.examples.library.collection.CollectionLowerProperty';
+	/**
+	Evaluates to the upper bound on the number of collection elements.
+	**/
+	static property upper : Integer => 'org.eclipse.ocl.examples.library.collection.CollectionUpperProperty';
 }
 
 /**
@@ -438,20 +423,9 @@ type Enumeration conformsTo OclAny {
 	*/
 	static operation allInstances() : Set(OclSelf) => 'org.eclipse.ocl.examples.library.enumeration.EnumerationAllInstancesOperation';
 	/**
-	Evaluates to the type of which oclText[self] is an instance.
-	**/
-	operation oclType() : EnumerationClassifier(OclSelf) => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation';
-}
-
-/**
- The standard type EnumerationClassifier represents the metatype of an Enumeration.
- **/
-type EnumerationClassifier(T) : ClassifierType conformsTo AnyClassifier(T) {
-	annotation 'http://www.omg.org/ocl'(ClassGroup='OCL');
-	/**
 	Evaluates to the literals of the enumeration.
 	**/
-	property ownedLiteral : OrderedSet(EnumerationLiteral) => 'org.eclipse.ocl.examples.library.enumeration.EnumerationClassifierOwnedLiteralProperty';
+	static property allLiterals : OrderedSet(EnumerationLiteral) => 'org.eclipse.ocl.examples.library.enumeration.EnumerationOwnedLiteralProperty';
 }
 
 /**
@@ -520,6 +494,10 @@ type Integer : PrimitiveType conformsTo Real {
 	operation toString() : String => 'org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation';
 }
 
+type Metaclass(T) : Metaclass conformsTo Class, OclType {
+	annotation 'http://www.omg.org/ocl'(ClassGroup='OCL');
+}
+
 /**
 All types in the UML model and the primitive and collection types in the OCL standard library conforms to the type OclAny.
 Conceptually, OclAny behaves as a supertype for all the types.
@@ -566,7 +544,7 @@ type OclAny : AnyType {
 	However, when casting to a supertype, any features additionally defined by the subtype are suppressed.
 	
 	**/
-	operation oclAsType(TT)(type : AnyClassifier(TT)) : TT => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclAsTypeOperation'
+	operation oclAsType(TT)(type : Metaclass(TT)) : TT => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclAsTypeOperation'
 	{
 		post IsSelf: result = self;
 		post IsType: result.oclIsTypeOf(type);
@@ -586,7 +564,7 @@ type OclAny : AnyType {
 	Evaluates to oclText[true] if the type of oclText[self] conforms to t.
 	That is, oclText[self] is of type t or a subtype of t. 
 	**/
-	operation oclIsKindOf(T)(type : AnyClassifier(T)) : Boolean => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation';
+	operation oclIsKindOf(T)(type : Metaclass(T)) : Boolean => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation';
 	/**
 	Can only be used in a postcondition.
 	Evaluates to oclText[true] if the oclText[self] is created during performing the operation (for instance, it didn’t exist at precondition time). 
@@ -598,7 +576,7 @@ type OclAny : AnyType {
 	/**
 	Evaluates to oclText[true] if oclText[self] is of the type t but not a subtype of t 
 	*/
-	operation oclIsTypeOf(T)(type : AnyClassifier(T)) : Boolean => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclIsTypeOfOperation';
+	operation oclIsTypeOf(T)(type : Metaclass(T)) : Boolean => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclIsTypeOfOperation';
 	/**
 	Evaluates to oclText[true] if the oclText[self] is equal to oclText[invalid] or equal to oclText[null]. 
 	**/
@@ -609,7 +587,7 @@ type OclAny : AnyType {
 	/**
 	Evaluates to the type of which oclText[self] is an instance.
 	**/
-	operation oclType() : AnyClassifier(OclSelf) => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation';
+	operation oclType() : Metaclass(OclSelf) => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation';
 --	operation "."(T)(object2 : OclAny) : T precedence=NAVIGATION => 'org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation';
 	/**
 	Returns a string representation of oclText[self].
@@ -890,8 +868,8 @@ type OrderedSet(T) : OrderedSetType conformsTo Sequence(T),UniqueCollection(T) {
 	The ordered set of elements with same elements but with the opposite order.
 	**/
 	operation reverse() : OrderedSet(T) => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionReverseOperation';
-	operation selectByKind(TT)(type : AnyClassifier(TT)) : OrderedSet(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation';
-	operation selectByType(TT)(type : AnyClassifier(TT)) : OrderedSet(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation';
+	operation selectByKind(TT)(type : Metaclass(TT)) : OrderedSet(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation';
+	operation selectByType(TT)(type : Metaclass(TT)) : OrderedSet(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation';
 	/**
 	The sub-set of oclText[self] starting at number lower, up to and including element number upper.
 	**/
@@ -1078,8 +1056,8 @@ type Sequence(T) : SequenceType conformsTo Collection(T) {
 	The sequence containing the same elements but with the opposite order.
 	**/
 	operation reverse() : Sequence(T) => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionReverseOperation';
-	operation selectByKind(TT)(type : AnyClassifier(TT)) : Sequence(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation';
-	operation selectByType(TT)(type : AnyClassifier(TT)) : Sequence(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation';
+	operation selectByKind(TT)(type : Metaclass(TT)) : Sequence(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation';
+	operation selectByType(TT)(type : Metaclass(TT)) : Sequence(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation';
 	/**
 	The sub-sequence of oclText[self] starting at number lower, up to and including element number upper.
 	**/
@@ -1133,8 +1111,8 @@ type Set(T) : SetType conformsTo Bag(T),UniqueCollection(T) {
 	The intersection of oclText[self] and s (i.e., the set of all elements that are in both oclText[self] and s).
 	**/
 	operation intersection(s : Collection(T)) : Set(T) => 'org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation';
-	operation selectByKind(TT)(type : AnyClassifier(TT)) : Set(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation';
-	operation selectByType(TT)(type : AnyClassifier(TT)) : Set(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation';
+	operation selectByKind(TT)(type : Metaclass(TT)) : Set(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation';
+	operation selectByType(TT)(type : Metaclass(TT)) : Set(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation';
 	/**
 	The set consisting of all elements in oclText[self] and all elements in s.
 	**/
@@ -1344,7 +1322,7 @@ type UnlimitedNatural : PrimitiveType conformsTo Integer {
 	Conversion of e[unlimited] to Real or Integer returns oclText[invalid].
 	
 	**/
-	operation oclAsType(TT)(type : AnyClassifier(TT)) : TT => 'org.eclipse.ocl.examples.library.numeric.UnlimitedNaturalOclAsTypeOperation';
+	operation oclAsType(TT)(type : Metaclass(TT)) : TT => 'org.eclipse.ocl.examples.library.numeric.UnlimitedNaturalOclAsTypeOperation';
 }
 
 }

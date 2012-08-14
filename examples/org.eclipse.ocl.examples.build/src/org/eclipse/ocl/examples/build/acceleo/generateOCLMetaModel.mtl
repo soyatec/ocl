@@ -4,7 +4,7 @@
 [template public generate(root : Root, javaPackage : String, javaClass : String, sourceFile : String, uri : String)]
 [comment @main /]
 [let pkg : Package = root.nestedPackage->any(name <> '$$')]
-[let allClassifierTypes : Sequence(ClassifierType) = root.eAllContents(ClassifierType)]
+[let allMetaclasses : Sequence(Metaclass) = root.eAllContents(Metaclass)]
 [let allCollectionTypes : Sequence(CollectionType) = root.eAllContents(CollectionType)]
 [let allEnumerations : Sequence(Enumeration) = root.eAllContents(Enumeration)]
 [let allLambdaTypes : Sequence(LambdaType) = root.eAllContents(LambdaType)]
@@ -121,8 +121,8 @@ public class [javaClass/] extends XMIResourceImpl
 [if (allCollectionTypes->notEmpty())]
 			installCollectionTypes();
 [/if]
-[if (allClassifierTypes->notEmpty())]
-			installClassifierTypes();
+[if (allMetaclasses->notEmpty())]
+			installMetaclasses();
 [/if]
 [if (allLambdaTypes->notEmpty())]
 			installLambdaTypes();
@@ -155,8 +155,8 @@ public class [javaClass/] extends XMIResourceImpl
 [if (allCollectionTypes->notEmpty())]
 		[pkg.declareCollectionTypes()/]
 [/if]
-[if (allClassifierTypes->notEmpty())]
-		[pkg.declareClassifierTypes()/]
+[if (allMetaclasses->notEmpty())]
+		[pkg.declareMetaclasses()/]
 [/if]
 [if (allTupleTypes->notEmpty())]
 		[pkg.declareTupleTypes()/]
@@ -170,8 +170,8 @@ public class [javaClass/] extends XMIResourceImpl
 [if (allCollectionTypes->notEmpty())]
 		[pkg.defineCollectionTypes()/]
 [/if]
-[if (allClassifierTypes->notEmpty())]
-		[pkg.defineClassifierTypes()/]
+[if (allMetaclasses->notEmpty())]
+		[pkg.defineMetaclasses()/]
 [/if]
 [if (allTupleTypes->notEmpty())]
 		[pkg.defineTupleTypes()/]

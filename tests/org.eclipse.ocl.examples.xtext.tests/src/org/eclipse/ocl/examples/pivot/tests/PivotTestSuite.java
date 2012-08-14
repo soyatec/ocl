@@ -62,7 +62,7 @@ import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
-import org.eclipse.ocl.examples.pivot.ClassifierType;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -1080,12 +1080,6 @@ public abstract class PivotTestSuite extends PivotTestCase
 		// check type
 		return feature;
 	}
-
-	public ClassifierType getClassifierType(Type type) {
-		ClassifierType classifierType = metaModelManager.getClassifierType(type);
-		metaModelManager.addLockedElement(classifierType);
-		return classifierType;
-	}
    
     /**
      * Obtains the diagnostic describing the problem in the last failed parse,
@@ -1113,7 +1107,13 @@ public abstract class PivotTestSuite extends PivotTestCase
 	protected Value getEmptySetValue() {
 		return valueFactory.createSetValue(metaModelManager.getSetType(metaModelManager.getOclVoidType()));
 	}
-    
+
+	public Metaclass getMetaclass(Type type) {
+		Metaclass metaclass = metaModelManager.getMetaclass(type);
+		metaModelManager.addLockedElement(metaclass);
+		return metaclass;
+	}
+   
 	protected Type getMetaclass(String name) {
 		return metaModelManager.getRequiredLibraryType(name);
 	}

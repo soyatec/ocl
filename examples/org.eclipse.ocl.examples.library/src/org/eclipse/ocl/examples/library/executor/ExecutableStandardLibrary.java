@@ -26,7 +26,7 @@ import java.util.WeakHashMap;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainClassifierType;
+import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -43,7 +43,7 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 	/**
 	 * Shared cache of the lazily created lazily deleted Classifier types of each type. 
 	 */
-	private @NonNull Map<DomainType, WeakReference<DomainClassifierType>> classifiers = new WeakHashMap<DomainType, WeakReference<DomainClassifierType>>();
+	private @NonNull Map<DomainType, WeakReference<DomainMetaclass>> classifiers = new WeakHashMap<DomainType, WeakReference<DomainMetaclass>>();
 	
 	/**
 	 * Shared cache of the lazily created lazily deleted specializations of each type. 
@@ -54,13 +54,13 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 	 * Shared cache of the lazily created lazily deleted tuples. 
 	 */
 	private @NonNull Map<String, List<WeakReference<DomainTupleType>>> tupleTypeMap = new WeakHashMap<String, List<WeakReference<DomainTupleType>>>();
-
-	protected abstract @NonNull DomainClassifierType createClassifierType(@NonNull DomainType classType);
 	
 	public abstract @NonNull DomainEvaluator createEvaluator(@NonNull EObject contextObject, @Nullable Map<Object, Object> contextMap);
 
-	public @NonNull DomainType getAnyClassifierType() {
-		return OCLstdlibTables.Types._AnyClassifier;
+	protected abstract @NonNull DomainMetaclass createMetaclass(@NonNull DomainType classType);
+
+	public @NonNull DomainType getMetaclassType() {
+		return OCLstdlibTables.Types._Metaclass;
 	}
 	
 	public @NonNull DomainType getBagType() {
@@ -75,20 +75,11 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 		return OCLstdlibTables.Types._Boolean;
 	}
 
-	public synchronized @NonNull DomainClassifierType getClassifierType(@NonNull DomainType classType) {
-		DomainClassifierType classifierType = weakGet(classifiers, classType);
-		if (classifierType == null) {
-			classifierType = createClassifierType(classType);
-			classifiers.put(classType, new WeakReference<DomainClassifierType>(classifierType));
-		}
-		return classifierType;
-	}
-
 	public @NonNull DomainType getCollectionType() {
 		return OCLstdlibTables.Types._Collection;
 	}
 
-	public synchronized @NonNull DomainCollectionType getCollectionType(@NonNull DomainType genericType, @NonNull DomainType elementType, BigInteger lower, BigInteger upper) {  // FIXME lower, upper
+	public synchronized @NonNull DomainCollectionType getCollectionType(@NonNull DomainType genericType, @NonNull DomainType elementType, @Nullable BigInteger lower, @Nullable BigInteger upper) {
 		AbstractCollectionType specializedType = null;
 		Map<DomainType, WeakReference<AbstractCollectionType>> map = specializations.get(genericType);
 		if (map == null) {
@@ -99,7 +90,7 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 			specializedType = weakGet(map, elementType);
 		}
 		if (specializedType == null) {
-			specializedType = new AbstractCollectionType(this, DomainUtil.nonNullModel(genericType.getName()), genericType, elementType);
+			specializedType = new AbstractCollectionType(this, DomainUtil.nonNullModel(genericType.getName()), genericType, elementType, lower, upper);
 			map.put(elementType, new WeakReference<AbstractCollectionType>(specializedType));
 		}
 		return specializedType;
@@ -111,6 +102,15 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 
 	public @NonNull DomainType getIntegerType() {
 		return OCLstdlibTables.Types._Integer;
+	}
+
+	public synchronized @NonNull DomainMetaclass getMetaclass(@NonNull DomainType classType) {
+		DomainMetaclass metaclass = weakGet(classifiers, classType);
+		if (metaclass == null) {
+			metaclass = createMetaclass(classType);
+			classifiers.put(classType, new WeakReference<DomainMetaclass>(metaclass));
+		}
+		return metaclass;
 	}
 
 	public @NonNull DomainType getOclAnyType() {

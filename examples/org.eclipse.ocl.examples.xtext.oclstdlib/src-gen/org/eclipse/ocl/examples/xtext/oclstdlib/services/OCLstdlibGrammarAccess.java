@@ -3264,7 +3264,7 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 
 	//CollectionTypeCS:
 	//
-	//	name=CollectionTypeIdentifier ("(" ownedType=TypeExpCS ")")?;
+	//	name=CollectionTypeIdentifier ("(" ownedType=TypeExpCS ")" multiplicity=MultiplicityCS?)?;
 	public EssentialOCLGrammarAccess.CollectionTypeCSElements getCollectionTypeCSAccess() {
 		return gaEssentialOCL.getCollectionTypeCSAccess();
 	}
@@ -3502,7 +3502,7 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 
 	//TypeExpCS returns base::TypedRefCS:
 	//
-	//	(TypeNameExpCS | TypeLiteralCS) multiplicity=MultiplicityCS?;
+	//	TypeNameExpCS | TypeLiteralCS;
 	public EssentialOCLGrammarAccess.TypeExpCSElements getTypeExpCSAccess() {
 		return gaEssentialOCL.getTypeExpCSAccess();
 	}

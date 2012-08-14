@@ -43,6 +43,11 @@ public class CollectionTypeValueImpl extends TypeValueImpl implements Collection
 	public CollectionTypeValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType object) {
 		super(valueFactory, object);
 	}
+
+	@Override
+	public @NonNull CollectionTypeValueImpl asCollectionTypeValue() {
+		return this;
+	}
 	
 	@Override
 	public boolean equals(Object that) {

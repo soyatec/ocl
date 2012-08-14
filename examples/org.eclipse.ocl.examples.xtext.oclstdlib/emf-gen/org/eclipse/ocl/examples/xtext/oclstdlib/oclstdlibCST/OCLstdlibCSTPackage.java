@@ -477,6 +477,15 @@ public interface OCLstdlibCSTPackage
 	int LIB_ITERATION_CS__QUALIFIER = BaseCSTPackage.OPERATION_CS__QUALIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_ITERATION_CS__OPTIONAL = BaseCSTPackage.OPERATION_CS__OPTIONAL;
+
+	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -628,6 +637,15 @@ public interface OCLstdlibCSTPackage
 	 * @ordered
 	 */
 	int LIB_OPERATION_CS__QUALIFIER = BaseCSTPackage.OPERATION_CS__QUALIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_OPERATION_CS__OPTIONAL = BaseCSTPackage.OPERATION_CS__OPTIONAL;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -899,6 +917,15 @@ public interface OCLstdlibCSTPackage
 	 * @ordered
 	 */
 	int LIB_PROPERTY_CS__QUALIFIER = BaseCSTPackage.ATTRIBUTE_CS__QUALIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_PROPERTY_CS__OPTIONAL = BaseCSTPackage.ATTRIBUTE_CS__OPTIONAL;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' container reference.

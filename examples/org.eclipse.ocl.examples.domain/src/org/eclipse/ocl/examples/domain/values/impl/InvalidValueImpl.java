@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.BooleanValue;
+import org.eclipse.ocl.examples.domain.values.CollectionTypeValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.ElementValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -100,6 +101,14 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 			throw exception;
 		}
 		return super.asBooleanValue();
+	}
+
+	@Override
+	public @NonNull CollectionTypeValue asCollectionTypeValue() throws InvalidValueException {
+		if (exception != null) {
+			throw exception;
+		}
+		return super.asCollectionTypeValue();
 	}
 
 	@Override

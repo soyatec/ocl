@@ -39,6 +39,7 @@ import org.eclipse.ocl.examples.library.executor.ReflectiveType;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.executor.PivotReflectiveFragment;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -584,6 +585,11 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		Map<String, List<DomainProperty>> name2properties2 = name2properties;
 		if (name2properties2 == null) {
 			name2properties2 = name2properties = new HashMap<String, List<DomainProperty>>();
+			for (DomainType selfType : getPartialTypes()) {
+				if (selfType != null) {
+					initMemberPropertiesFrom(selfType);
+				}
+			}
 			for (DomainInheritance superClass : getAllSuperClasses()) {
 				TypeServer superTypeServer = null;
 				if (superClass instanceof TypeServer) {
@@ -610,6 +616,9 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 	}
 
 	private void initMemberPropertiesFrom(@NonNull DomainType type) {
+		if (type instanceof Type) {
+			type = PivotUtil.getUnspecializedTemplateableElement((Type) type);
+		}
 		for (DomainProperty pivotProperty : type.getLocalProperties()) {
 			if (pivotProperty != null) {
 				addedMemberProperty(pivotProperty);

@@ -29,7 +29,7 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainClassifierType;
+import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
@@ -819,7 +819,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 */
 	@Override
     public Value visitTypeExp(@NonNull TypeExp t) {
-		return valueFactory.createTypeValue(DomainUtil.nonNullModel(((DomainClassifierType)t.getType()).getInstanceType()));
+		return valueFactory.createTypeValue(DomainUtil.nonNullModel(((DomainMetaclass)t.getType()).getInstanceType()));
 	}
     
     /**

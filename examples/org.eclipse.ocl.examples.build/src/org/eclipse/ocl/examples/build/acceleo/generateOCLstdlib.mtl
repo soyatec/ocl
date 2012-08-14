@@ -182,7 +182,7 @@ public class [javaClass/] extends XMIResourceImpl
 [/if]
 			installParameterTypes();
 			installCollectionTypes();
-			installClassifierTypes();
+			installMetaclasses();
 			installLambdaTypes();
 			installTupleTypes();
 			installOperations();
@@ -203,7 +203,7 @@ public class [javaClass/] extends XMIResourceImpl
 [/if]
 		[lib.declareParameterTypes()/]
 		[lib.declareCollectionTypes()/]
-		[lib.declareClassifierTypes()/]
+		[lib.declareMetaclasses()/]
 		[lib.declareTupleTypes()/]
 		[lib.defineOclTypes()/]
 		[lib.definePrimitiveTypes()/]
@@ -212,7 +212,7 @@ public class [javaClass/] extends XMIResourceImpl
 [/if]
 		[lib.defineParameterTypes()/]
 		[lib.defineCollectionTypes()/]
-		[lib.defineClassifierTypes()/]
+		[lib.defineMetaclasses()/]
 		[lib.defineTupleTypes()/]
 		[lib.defineLambdaTypes()/]	
 		[lib.defineOperations()/]	

@@ -19,7 +19,7 @@ package org.eclipse.ocl.examples.xtext.base.attributes;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.ClassifierType;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
@@ -53,8 +53,8 @@ public class ClassCSAttribution extends AbstractAttribution
 			}
 			else {
 //				MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-				if (pivot instanceof ClassifierType) {
-					Type instanceType = ((ClassifierType)pivot).getInstanceType();
+				if (pivot instanceof Metaclass) {
+					Type instanceType = ((Metaclass)pivot).getInstanceType();
 					if (instanceType != null) {
 						environmentView.addAllOperations(instanceType, Boolean.TRUE);
 						environmentView.addAllProperties(instanceType, Boolean.TRUE);

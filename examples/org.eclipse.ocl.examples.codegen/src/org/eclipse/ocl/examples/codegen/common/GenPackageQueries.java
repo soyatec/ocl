@@ -481,8 +481,8 @@ public class GenPackageQueries
 			if (primaryType instanceof Type) {
 				List<Type> primarySuperClasses = primaryType.getSuperClass();
 				Type classType = PivotUtil.getNamedElement(primarySuperClasses, "Class");
-				Type classifierType = PivotUtil.getNamedElement(primarySuperClasses, "Classifier");
-				if ((classType != null) && (classifierType != null)) {
+				Type metaclass = PivotUtil.getNamedElement(primarySuperClasses, "Classifier");
+				if ((classType != null) && (metaclass != null)) {
 					primarySuperClasses.remove(classType);		// WIP FIXME fix at source
 				}
 			}

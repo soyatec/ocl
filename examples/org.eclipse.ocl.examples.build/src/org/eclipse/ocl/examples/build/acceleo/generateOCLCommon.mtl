@@ -34,12 +34,6 @@ operation.ownedParameter->select(p : Parameter
 | (p.name = 'diagnostics') and (p.type.name = 'EDiagnosticChain'))->notEmpty()
 /]
 
-[template public declareClassifierTypes(pkg : Package)]
-[let allClassifierTypes : OrderedSet(ClassifierType) = pkg.getRootPackage().eAllContents(ClassifierType)->asSet()->sortedBy(getMoniker())]
-[for (type : ClassifierType | allClassifierTypes)]
-protected final @NonNull ClassifierType [type.getPrefixedSymbolName('_'+type.partialName())/] = createClassifierType("[type.name/]");
-[/for][/let][/template]
-
 [template public declareCollectionTypes(pkg : Package)]
 [let allTypes : OrderedSet(CollectionType) = pkg.getRootPackage().eAllContents(CollectionType)->asSet()->sortedBy(getMoniker())]
 [for (type : CollectionType | allTypes)]
@@ -50,6 +44,12 @@ protected final @NonNull [type.eClass().name/] [type.getPrefixedSymbolName('_'+t
 [let allEnumerations : OrderedSet(Enumeration) = pkg.getRootPackage().eAllContents(Enumeration)->asSet()->sortedBy(getMoniker())]
 [for (enumeration : Enumeration | allEnumerations)]
 protected final @NonNull Enumeration [enumeration.getPrefixedSymbolName('_'+enumeration.partialName())/] = createEnumeration("[enumeration.name/]");
+[/for][/let][/template]
+
+[template public declareMetaclasses(pkg : Package)]
+[let allMetaclasses : OrderedSet(Metaclass) = pkg.getRootPackage().eAllContents(Metaclass)->asSet()->sortedBy(getMoniker())]
+[for (type : Metaclass | allMetaclasses)]
+protected final @NonNull Metaclass [type.getPrefixedSymbolName('_'+type.partialName())/] = createMetaclass("[type.name/]");
 [/for][/let][/template]
 
 [template public declareOclTypes(pkg : Package)]
@@ -77,29 +77,6 @@ protected final @NonNull TupleType [type.getPrefixedSymbolName('_'+type.partialN
 [for (property : Property | type.ownedAttribute->sortedBy(name)) separator(',\n')]
 	createProperty("[property.name/]", [property.type.getSymbolName()/])[/for]);
 [/for][/let][/template]
-
-[template public defineClassifierTypes(pkg : Package)]
-[let allClassifierTypes : OrderedSet(ClassifierType) = pkg.getRootPackage().eAllContents(ClassifierType)->asSet()->sortedBy(getMoniker())]
-[let orphanPackage : Package = pkg.getOrphanPackage()]
-protected void installClassifierTypes() {
-	final List<Type> ownedTypes = [pkg.getSymbolName()/].getOwnedType();
-[if (orphanPackage->notEmpty())]
-	final List<Type> orphanTypes = [orphanPackage.getSymbolName()/].getOwnedType();
-[/if]
-	ClassifierType type;
-	List<Type> superClasses;
-[for (type : ClassifierType | allClassifierTypes)]
-[if (type.unspecializedElement = null)]
-	ownedTypes.add(type = [type.getSymbolName()/]);
-[else]
-	orphanTypes.add(type = [type.getSymbolName()/]);
-	type.setUnspecializedElement([type.unspecializedElement.getSymbolName()/]);
-[/if]
-	type.setInstanceType([type.instanceType.getSymbolName()/]);
-	[type.emitSuperClasses()/]
-[/for]
-}
-[/let][/let][/template]
 
 [template public defineCollectionTypes(pkg : Package)]
 [let allCollectionTypes : OrderedSet(CollectionType) = pkg.getRootPackage().eAllContents(CollectionType)->asSet()->sortedBy(getMoniker())]
@@ -217,6 +194,29 @@ protected void installLambdaTypes() {
 }
 [/let][/let]
 [/template]
+
+[template public defineMetaclasses(pkg : Package)]
+[let allMetaclasses : OrderedSet(Metaclass) = pkg.getRootPackage().eAllContents(Metaclass)->asSet()->sortedBy(getMoniker())]
+[let orphanPackage : Package = pkg.getOrphanPackage()]
+protected void installMetaclasses() {
+	final List<Type> ownedTypes = [pkg.getSymbolName()/].getOwnedType();
+[if (orphanPackage->notEmpty())]
+	final List<Type> orphanTypes = [orphanPackage.getSymbolName()/].getOwnedType();
+[/if]
+	Metaclass type;
+	List<Type> superClasses;
+[for (type : Metaclass | allMetaclasses)]
+[if (type.unspecializedElement = null)]
+	ownedTypes.add(type = [type.getSymbolName()/]);
+[else]
+	orphanTypes.add(type = [type.getSymbolName()/]);
+	type.setUnspecializedElement([type.unspecializedElement.getSymbolName()/]);
+[/if]
+	type.setInstanceType([type.instanceType.getSymbolName()/]);
+	[type.emitSuperClasses()/]
+[/for]
+}
+[/let][/let][/template]
 
 [template public defineOclTypes(pkg : Package)]
 [let allOclTypes : OrderedSet(Type) = pkg.getOclTypes()->sortedBy(getMoniker())]
@@ -592,7 +592,7 @@ let types : Set(Type) = pkg.getRootPackage().eAllContents(Type)->asSet()
 ->reject(oclIsKindOf(LambdaType))
 ->reject(oclIsKindOf(CollectionType))
 ->reject(oclIsKindOf(PrimitiveType))
-->reject(oclIsKindOf(ClassifierType))
+->reject(oclIsKindOf(Metaclass))
 ->reject(oclIsKindOf(TupleType))
 ->select(owningTemplateParameter = null) in
 if types->exists(name = 'Boolean') then types

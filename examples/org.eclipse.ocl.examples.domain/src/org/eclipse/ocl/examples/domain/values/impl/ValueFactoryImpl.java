@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainClassifierType;
+import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
@@ -438,8 +438,8 @@ public abstract class ValueFactoryImpl implements ValueFactory
 	}
 
 	public @NonNull TypeValue createTypeValue(@NonNull DomainType type) {
-		if (type instanceof DomainClassifierType) {
-			return new ClassifierTypeValueImpl(this, (DomainClassifierType)type);
+		if (type instanceof DomainMetaclass) {
+			return new MetaclassValueImpl(this, (DomainMetaclass)type);
 		}
 		else if (type instanceof DomainCollectionType) {
 			return new CollectionTypeValueImpl(this, (DomainCollectionType)type);

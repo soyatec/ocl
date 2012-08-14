@@ -14,41 +14,40 @@
  *
  * $Id$
  */
-package org.eclipse.ocl.examples.library.enumeration;
-
-import java.util.Set;
+package org.eclipse.ocl.examples.library.collection;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
-import org.eclipse.ocl.examples.domain.elements.DomainElement;
-import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.CollectionTypeValue;
+import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
-import org.eclipse.ocl.examples.domain.values.impl.OrderedSetImpl;
 
 /**
- * EnumerationClassifierOwnedLiteralProperty realizes the EnumerationClassifier::ownedLiteral() library property.
+ * CollectionElementTypeProperty realizes the Collection::elementType() library property.
  */
-public class EnumerationClassifierOwnedLiteralProperty extends AbstractProperty
+public class CollectionElementTypeProperty extends AbstractProperty
 {
-	public static final EnumerationClassifierOwnedLiteralProperty INSTANCE = new EnumerationClassifierOwnedLiteralProperty();
+	public static final CollectionElementTypeProperty INSTANCE = new CollectionElementTypeProperty();
 
 	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		TypeValue sourceTypeValue = sourceValue.asTypeValue();
-		DomainType sourceType = sourceTypeValue.getInstanceType();
-		Set<Value> results = new OrderedSetImpl<Value>();
-		for (DomainElement instance : ((DomainEnumeration)sourceType).getEnumerationLiterals()) {
-			if (instance != null) {
-				results.add(valueFactory.valueOf(instance));
-			}
+		DomainCollectionType sourceType;
+		CollectionValue sourceCollectionValue = sourceValue.isCollectionValue();
+		if (sourceCollectionValue == null) {
+			CollectionTypeValue sourceCollectionTypeValue = sourceValue.asCollectionTypeValue();
+			sourceType = sourceCollectionTypeValue.getInstanceType();
 		}
-		return valueFactory.createOrderedSetValue((DomainCollectionType)returnType, results);
+		else {
+			sourceType = sourceCollectionValue.getCollectionType();
+		}
+		DomainType elementType = DomainUtil.nonNullModel(sourceType.getElementType());
+		return valueFactory.createTypeValue(elementType);
 	}
 }

@@ -16,12 +16,14 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
-
+import java.math.BigInteger;
 
 public interface DomainCollectionType extends DomainType
 {
 	/*@NonNull*/ DomainCollectionType getContainerType();		
 	/*@NonNull*/ DomainType getElementType();
+	/*@NonNull*/ BigInteger getLower();		
+	/*@NonNull*/ BigInteger getUpper();
 	boolean isOrdered();
 	boolean isUnique();
 }

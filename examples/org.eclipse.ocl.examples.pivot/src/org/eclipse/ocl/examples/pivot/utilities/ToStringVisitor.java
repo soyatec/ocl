@@ -34,7 +34,7 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
-import org.eclipse.ocl.examples.pivot.ClassifierType;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralPart;
@@ -388,7 +388,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 	}
 
 	@Override
-	public String visitClassifierType(@NonNull ClassifierType object) {
+	public String visitMetaclass(@NonNull Metaclass object) {
 		appendName(object);
 		if (object.getTemplateBinding().size() > 0) {
 			appendTemplateBindings(object.getTemplateBinding());

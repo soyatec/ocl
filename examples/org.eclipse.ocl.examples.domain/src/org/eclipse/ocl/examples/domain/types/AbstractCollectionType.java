@@ -16,7 +16,10 @@
  */
 package org.eclipse.ocl.examples.domain.types;
 
+import java.math.BigInteger;
+
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -24,10 +27,17 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 public class AbstractCollectionType extends AbstractSpecializedType implements DomainCollectionType
 {
 	protected final @NonNull DomainType elementType;
+	protected final @NonNull BigInteger lower;
+	protected final @NonNull BigInteger upper;
 	
-	public AbstractCollectionType(@NonNull DomainStandardLibrary standardLibrary, @NonNull String name, @NonNull DomainType containerType, @NonNull DomainType elementType) {
+	public AbstractCollectionType(@NonNull DomainStandardLibrary standardLibrary, @NonNull String name,
+			@NonNull DomainType containerType, @NonNull DomainType elementType, @Nullable BigInteger lower, @Nullable BigInteger upper) {
 		super(standardLibrary, name, containerType);
 		this.elementType = elementType;
+		@SuppressWarnings("null") @NonNull BigInteger lower2 = lower != null ? lower : BigInteger.valueOf(0);
+		@SuppressWarnings("null") @NonNull BigInteger upper2 = upper != null ? upper : BigInteger.valueOf(-1);
+		this.lower = lower2;
+		this.upper = upper2;
 	}
 
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
@@ -82,6 +92,14 @@ public class AbstractCollectionType extends AbstractSpecializedType implements D
 
 	public @NonNull DomainType getElementType() {
 		return elementType;
+	}
+
+	public @NonNull BigInteger getLower() {
+		return lower;
+	}
+
+	public @NonNull BigInteger getUpper() {
+		return upper;
 	}
 
 /*	public DomainType getMetaType(DomainStandardLibrary standardLibrary) {

@@ -21,7 +21,7 @@
 package org.eclipse.ocl.examples.pivot.bodies;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainClassifierType;
+import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -59,14 +59,14 @@ public class ParameterableElementBodies
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			final @NonNull ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
 			final @NonNull ExecutorType T_pivot__ParameterableElement = PivotTables.Types._ParameterableElement;
-			final @NonNull DomainClassifierType T_AnyClassifier_pivot__ParameterableElement_ = standardLibrary.getClassifierType(T_pivot__ParameterableElement);
+			final @NonNull DomainMetaclass T_Metaclass_pivot__ParameterableElement_ = standardLibrary.getMetaclass(T_pivot__ParameterableElement);
 			final @NonNull ExecutorOperation O_OclAny_oclType = OCLstdlibTables.Operations._OclAny__oclType;
 			
 			
 			
 			DomainType static_A_symbol_0 = valueFactory.typeOf(self);
 			LibraryUnaryOperation dynamic_A_symbol_0 = (LibraryUnaryOperation)static_A_symbol_0.lookupImplementation(standardLibrary, O_OclAny_oclType);
-			Value A_symbol_0 = dynamic_A_symbol_0.evaluate(evaluator, T_AnyClassifier_pivot__ParameterableElement_, self);
+			Value A_symbol_0 = dynamic_A_symbol_0.evaluate(evaluator, T_Metaclass_pivot__ParameterableElement_, self);
 			DomainType static_A_symbol_1 = valueFactory.typeOf(p);
 			LibraryBinaryOperation dynamic_A_symbol_1 = (LibraryBinaryOperation)static_A_symbol_1.lookupImplementation(standardLibrary, O_OclAny_oclIsKindOf);
 			Value A_symbol_1 = dynamic_A_symbol_1.evaluate(evaluator, T_Boolean, p, A_symbol_0);

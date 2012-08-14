@@ -211,14 +211,14 @@ public static final @NonNull <%ExecutorOperation%> [op.getLiteralName()/] = new 
 (<%DomainType%>)null/*[containerOperation.owningType._package.name/]*/[else]
 <%[prefix/]%>.Operations._[containerOperation.getLiteralName()/]_[type.encodeName()/][/if][/let][/let][/template]
 
-[template public declareParameterType(type : ClassifierType, genPackage : GenPackage)]
-new <%ExecutorSpecializedType%>(LIBRARY, "[type.name/]", [type.instanceType.declareParameterType(genPackage)/])[/template]
-
 [template public declareParameterType(type : CollectionType, genPackage : GenPackage)]
 new <%ExecutorSpecializedType%>(LIBRARY, "[type.name/]", [type.elementType.declareParameterType(genPackage)/])[/template]
 
 [template public declareParameterType(type : LambdaType, genPackage : GenPackage)]
 new <%ExecutorLambdaType%>(LIBRARY, "[type.name/]", [type.contextType.declareParameterType(genPackage)/][genPackage.declareParameterTypes(type.parameterType->asOrderedSet())/])[/template]
+
+[template public declareParameterType(type : Metaclass, genPackage : GenPackage)]
+new <%ExecutorSpecializedType%>(LIBRARY, "[type.name/]", [type.instanceType.declareParameterType(genPackage)/])[/template]
 
 [template public declareParameterType(type : TupleType, genPackage : GenPackage)]
 new <%ExecutorTupleType%>(LIBRARY, "[type.name/]"[genPackage.declareTupleParts(type.ownedAttribute)/])[/template]

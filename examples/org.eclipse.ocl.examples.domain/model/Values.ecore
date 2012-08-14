@@ -3,7 +3,6 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="values" nsURI="http://ww.eclipse.org/OCL/Values" nsPrefix="values">
   <eClassifiers xsi:type="ecore:EClass" name="BagValue" eSuperTypes="#//CollectionValue"/>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanValue" eSuperTypes="#//Value"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ClassifierTypeValue" eSuperTypes="#//TypeValue"/>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionValue" abstract="true" eSuperTypes="#//Value"/>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionTypeValue" eSuperTypes="#//TypeValue"/>
   <eClassifiers xsi:type="ecore:EClass" name="ElementValue" eSuperTypes="#//ObjectValue"/>
@@ -11,6 +10,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="EnumerationTypeValue" eSuperTypes="#//TypeValue"/>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerValue" eSuperTypes="#//NumericValue"/>
   <eClassifiers xsi:type="ecore:EClass" name="InvalidValue" eSuperTypes="#//NullValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MetaclassValue" eSuperTypes="#//TypeValue"/>
   <eClassifiers xsi:type="ecore:EClass" name="NullValue" eSuperTypes="#//BooleanValue #//IntegerValue #//ObjectValue #//OrderedSetValue #//RealValue #//SetValue #//StringValue #//TypeValue #//UnlimitedValue"/>
   <eClassifiers xsi:type="ecore:EClass" name="NumericValue" abstract="true" interface="true"
       eSuperTypes="#//Value"/>

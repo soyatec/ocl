@@ -25,7 +25,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.types.AbstractStandardLibrary;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.BagType;
-import org.eclipse.ocl.examples.pivot.ClassifierType;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.InvalidType;
 import org.eclipse.ocl.examples.pivot.OrderedSetType;
@@ -49,7 +49,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	 * constant is repeated in GenersateOCLstdlibModel.mwe2 an in
 	 * org.eclipse.ocl.examples.library/plugin.xml.
 	 */
-	public static final String DEFAULT_OCL_STDLIB_URI = "http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib";
+	public static final @NonNull String DEFAULT_OCL_STDLIB_URI = "http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib";
 
 	/**
 	 * The URI to provide the default Standard Library. This value may be
@@ -57,18 +57,15 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	 * default. Alternatively the need for default may be bypassed by explicitly
 	 * invoking loadLibrary().
 	 */
-	protected String defaultStandardLibraryURI = DEFAULT_OCL_STDLIB_URI;
+	protected @NonNull String defaultStandardLibraryURI = DEFAULT_OCL_STDLIB_URI;
 
-	private ClassifierType anyClassifierType = null;
 	private BagType bagType = null;
 	private PrimitiveType booleanType = null;
 	private org.eclipse.ocl.examples.pivot.Class classType = null;
-	private ClassifierType classClassifierType = null;
-	private ClassifierType collectionClassifierType = null;
 	private CollectionType collectionType = null;
 	private org.eclipse.ocl.examples.pivot.Class enumerationType = null;
-	private ClassifierType enumerationClassifierType = null;
 	private PrimitiveType integerType = null;
+	private Metaclass metaclassType = null;
 	private AnyType oclAnyType = null;
 	private org.eclipse.ocl.examples.pivot.Class oclComparableType = null;
 	private org.eclipse.ocl.examples.pivot.Class oclElementType = null;
@@ -115,14 +112,6 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 		super.dispose();
 	}
 
-	public @NonNull ClassifierType getAnyClassifierType() {
-		ClassifierType anyClassifierType2 = anyClassifierType;
-		if (anyClassifierType2 == null) {
-			anyClassifierType2 = anyClassifierType = resolveRequiredTemplateableType(ClassifierType.class, "AnyClassifier", 1);		
-		}
-		return anyClassifierType2;
-	}
-
 	public @NonNull BagType getBagType() {
 		BagType bagType2 = bagType;
 		if (bagType2 == null) {
@@ -147,36 +136,12 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 		return classType2;
 	}
 
-	public @NonNull ClassifierType getClassClassifierType() {
-		ClassifierType classClassifierType2 = classClassifierType;
-		if (classClassifierType2 == null) {
-			classClassifierType2 = classClassifierType = resolveRequiredTemplateableType(ClassifierType.class, "ClassClassifier", 1);
-		}
-		return classClassifierType2;
-	}
-
-	public @NonNull ClassifierType getCollectionClassifierType() {
-		ClassifierType collectionClassifierType2 = collectionClassifierType;
-		if (collectionClassifierType2 == null) {
-			collectionClassifierType2 = collectionClassifierType = resolveRequiredTemplateableType(ClassifierType.class, "CollectionClassifier", 2);
-		}
-		return collectionClassifierType2;
-	}
-
 	public @NonNull CollectionType getCollectionType() {
 		CollectionType collectionType2 = collectionType;
 		if (collectionType2 == null) {
 			collectionType2 = collectionType = resolveRequiredTemplateableType(CollectionType.class, "Collection", 1);
 		}
 		return collectionType2;
-	}
-
-	public @NonNull ClassifierType getEnumerationClassifierType() {
-		ClassifierType enumerationClassifierType2 = enumerationClassifierType;
-		if (enumerationClassifierType2 == null) {
-			enumerationClassifierType2 = enumerationClassifierType = resolveRequiredTemplateableType(ClassifierType.class, "EnumerationClassifier", 1);
-		}
-		return enumerationClassifierType2;
 	}
 
 	public @NonNull org.eclipse.ocl.examples.pivot.Class getEnumerationType() {
@@ -201,6 +166,14 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 			loadDefaultLibrary(defaultStandardLibraryURI);
 		}
 		return nameToLibraryTypeMap.get(typeName);
+	}
+
+	public @NonNull Metaclass getMetaclassType() {
+		Metaclass metaclassType2 = metaclassType;
+		if (metaclassType2 == null) {
+			metaclassType2 = metaclassType = resolveRequiredTemplateableType(Metaclass.class, "Metaclass", 1);		
+		}
+		return metaclassType2;
 	}
 
 	public @NonNull AnyType getOclAnyType() {
@@ -380,13 +353,10 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 		bagType = null;
 		booleanType = null;
 		classType = null;
-		classClassifierType = null;
-		anyClassifierType = null;
-		collectionClassifierType = null;
 		collectionType = null;
-		enumerationClassifierType = null;
 		enumerationType = null;
 		integerType = null;
+		metaclassType = null;
 		oclAnyType = null;
 		oclElementType = null;
 		oclInvalidType = null;

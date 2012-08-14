@@ -133,10 +133,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInterface" lowerBound="1"
         eType="#//Boolean" defaultValueLiteral="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ClassifierType" eSuperTypes="#//Class">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="instanceType" lowerBound="1"
-        eType="#//Type"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionItem" eSuperTypes="#//CollectionLiteralPart">
     <eOperations name="TypeIsItemType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1116,6 +1112,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="MessageType" eSuperTypes="#//Type">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredSignal" eType="#//Signal"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredOperation" eType="#//Operation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Metaclass" eSuperTypes="#//Class">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instanceType" lowerBound="1"
+        eType="#//Type"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MorePivotable" instanceClassName="org.eclipse.ocl.examples.pivot.util.MorePivotable"
       abstract="true" interface="true"/>

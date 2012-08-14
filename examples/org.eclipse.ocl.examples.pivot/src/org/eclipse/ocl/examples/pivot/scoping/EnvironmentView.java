@@ -38,7 +38,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.Library;
@@ -108,7 +107,7 @@ public class EnvironmentView
 	}
 
 	public void addAllEnumerationLiterals(org.eclipse.ocl.examples.pivot.Enumeration pivot) {
-		if (accepts(DomainUtil.nonNullEMF(PivotPackage.Literals.ENUMERATION_LITERAL))) {
+		if (accepts(PivotPackage.Literals.ENUMERATION_LITERAL)) {
 			String name2 = name;
 			if (name2 != null) {
 				for (EnumerationLiteral literal : pivot.getOwnedLiteral()) {
@@ -128,7 +127,7 @@ public class EnvironmentView
 	}
 
 	public void addAllOperations(@NonNull Type type, @Nullable Boolean selectStatic) {
-		if (accepts(DomainUtil.nonNullEMF(PivotPackage.Literals.ITERATION))		// If ITERATION is acceptable then so too is OPERATION
+		if (accepts(PivotPackage.Literals.ITERATION)		// If ITERATION is acceptable then so too is OPERATION
 				&& (requiredType != PivotPackage.Literals.NAMESPACE)) {			// Don't really want operations when looking for NAMESPACE
 			assert metaModelManager.isTypeServeable(type);
 			type = PivotUtil.getUnspecializedTemplateableElement(type);
@@ -156,7 +155,7 @@ public class EnvironmentView
 	}
 
 	public void addAllPackages(@NonNull org.eclipse.ocl.examples.pivot.Package pkge) {
-		if (accepts(DomainUtil.nonNullEMF(PivotPackage.Literals.PACKAGE))) {
+		if (accepts(PivotPackage.Literals.PACKAGE)) {
 			PackageServer parentPackageServer = metaModelManager.getPackageServer(pkge);
 			String name2 = name;
 			if (name2 != null) {
@@ -176,7 +175,7 @@ public class EnvironmentView
 	}
 
 	public void addAllPackages(@NonNull Root root) {
-		if (accepts(DomainUtil.nonNullEMF(PivotPackage.Literals.PACKAGE))) {
+		if (accepts(PivotPackage.Literals.PACKAGE)) {
 			String name2 = name;
 			if (name2 != null) {
 				for (org.eclipse.ocl.examples.pivot.Package pkge : root.getNestedPackage()) {
@@ -196,7 +195,7 @@ public class EnvironmentView
 	}
 
 	public void addAllParameters(@NonNull Operation pivot) {
-		if (accepts(DomainUtil.nonNullEMF(PivotPackage.Literals.PARAMETER))) {
+		if (accepts(PivotPackage.Literals.PARAMETER)) {
 			String name2 = name;
 			if (name2 != null) {
 				for (Parameter parameter : pivot.getOwnedParameter()) {
@@ -216,7 +215,7 @@ public class EnvironmentView
 	}
 
 	public void addAllPrecedences(@NonNull Library pivot) {
-		if (accepts(DomainUtil.nonNullEMF(PivotPackage.Literals.PRECEDENCE))) {
+		if (accepts(PivotPackage.Literals.PRECEDENCE)) {
 			String name2 = name;
 			if (name2 != null) {
 				for (Precedence precedence : pivot.getOwnedPrecedence()) {
@@ -236,7 +235,7 @@ public class EnvironmentView
 	}
 	
 	public void addAllProperties(@NonNull Type type, @Nullable Boolean selectStatic) {
-		if (accepts(DomainUtil.nonNullEMF(PivotPackage.Literals.PROPERTY))
+		if (accepts(PivotPackage.Literals.PROPERTY)
 			&& (requiredType != PivotPackage.Literals.NAMESPACE)) {			// Don't really want properties when looking for NAMESPACE
 			assert metaModelManager.isTypeServeable(type);
 			TypeServer typeServer = metaModelManager.getTypeServer(type);
@@ -259,7 +258,7 @@ public class EnvironmentView
 	}
 
 	public void addAllTemplateParameters(@NonNull TemplateableElement pivot) {
-		if (accepts(DomainUtil.nonNullEMF(PivotPackage.Literals.TYPE)) || accepts(DomainUtil.nonNullEMF(PivotPackage.Literals.OPERATION))) {
+		if (accepts(PivotPackage.Literals.TYPE) || accepts(PivotPackage.Literals.OPERATION)) {
 			List<TemplateParameter> templateParameters = PivotUtil.getTemplateParameters(pivot);
 			String name2 = name;
 			if (name2 != null) {
@@ -286,7 +285,7 @@ public class EnvironmentView
 	}
 
 	public void addAllTypeTemplateParameterables(@NonNull TemplateableElement pivot) {
-		if (accepts(DomainUtil.nonNullEMF(PivotPackage.Literals.TYPE))) {
+		if (accepts(PivotPackage.Literals.TYPE)) {
 			List<Type> types = PivotUtil.getTypeTemplateParameterables(pivot);
 			String name2 = name;
 			if (name2 != null) {
@@ -307,7 +306,7 @@ public class EnvironmentView
 	}
 
 	public void addAllTypes(@NonNull org.eclipse.ocl.examples.pivot.Package pkge) {
-		if (accepts(DomainUtil.nonNullEMF(PivotPackage.Literals.CLASS))) {
+		if (accepts(PivotPackage.Literals.CLASS)) {
 			PackageServer packageServer = metaModelManager.getPackageServer(pkge);
 			String name2 = name;
 			if (name2 != null) {
@@ -478,19 +477,6 @@ public class EnvironmentView
 			}
 		}
 	}
-
-/*	public void addInheritedContents(@NonNull org.eclipse.ocl.examples.pivot.Class target, @NonNull ScopeView scopeView) {
-		List<Type> superClasses = target.getSuperClass();
-		if (superClasses.size() > 0) {
-			for (Type superClass : superClasses) {
-				addElementsOfScope(superClass, scopeView);
-			}
-		}
-		else {
-			Type libType = metaModelManager.getAnyClassifierType();
-			addLibContents(libType, scopeView);
-		}
-	} */
 
 	public void addLibContents(@NonNull Type libType, @NonNull ScopeView scopeView) {
 		addElementsOfScope(libType, scopeView);

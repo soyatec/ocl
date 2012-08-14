@@ -55,12 +55,6 @@ final @NonNull <%DomainCollectionType%> [ast.symbolName(expInOcl)/] = standardLi
 final @NonNull <%BooleanValue%> [ast.symbolName(expInOcl)/] = valueFactory.get[if (ast.booleanSymbol)]True[else]False[/if]();
 [/template]
 
-[template protected emitConstants(ast : ClassifierType, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
-[emitStandardLibrary()/]
-[ast.instanceType.emitConstants(genPackage, expInOcl)/]
-final @NonNull <%DomainClassifierType%> [ast.symbolName(expInOcl)/] = standardLibrary.getClassifierType([ast.instanceType.symbolName(expInOcl)/]);
-[/template]
-
 [template protected emitConstants(ast : CollectionLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL) ? ((ast.part->size() = 1) and (ast.part->filter(CollectionRange)->size() = 1))]
 [ast.type.emitConstants(genPackage, expInOcl)/]
 [if (ast.isConstantCollectionLiteralExp())]
@@ -126,6 +120,12 @@ final @NonNull <%ExecutorOperation%> [ast.referredIteration.symbolName(expInOcl)
 [ast.type.emitConstants(genPackage, expInOcl)/]
 [ast._body.type.emitConstants(genPackage, expInOcl)/]
 final @NonNull <%ExecutorOperation%> [ast.referredIteration.symbolName(expInOcl)/] = [ast.referredIteration.emitQualifiedLiteralName(genPackage)/];
+[/template]
+
+[template protected emitConstants(ast : Metaclass, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
+[emitStandardLibrary()/]
+[ast.instanceType.emitConstants(genPackage, expInOcl)/]
+final @NonNull <%DomainMetaclass%> [ast.symbolName(expInOcl)/] = standardLibrary.getMetaclass([ast.instanceType.symbolName(expInOcl)/]);
 [/template]
 
 [template protected emitConstants(ast : NullLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
@@ -220,8 +220,8 @@ final @NonNull <%IntegerValue%> [ast.symbolName(expInOcl)/] = valueFactory.integ
 [template public emitLiteral(ast : BagType, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 standardLibrary.getBagType([ast.elementType.emitLiteral(genPackage, expInOcl)/])[/template]
 
-[template public emitLiteral(ast : ClassifierType, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
-standardLibrary.getClassifierType([ast.instanceType.emitLiteral(genPackage, expInOcl)/])[/template]
+[template public emitLiteral(ast : Metaclass, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
+standardLibrary.getMetaclass([ast.instanceType.emitLiteral(genPackage, expInOcl)/])[/template]
 
 [template public emitLiteral(ast : CollectionItem, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 l[ast.eContainer().oclAsType(Element).symbolName(expInOcl)/].add([ast.item.symbolName(expInOcl)/]); // [ast.symbolName(expInOcl)/]

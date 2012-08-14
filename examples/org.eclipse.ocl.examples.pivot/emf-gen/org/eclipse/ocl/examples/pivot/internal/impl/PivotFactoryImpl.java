@@ -35,7 +35,7 @@ import org.eclipse.ocl.examples.pivot.AssociativityKind;
 import org.eclipse.ocl.examples.pivot.BagType;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CallOperationAction;
-import org.eclipse.ocl.examples.pivot.ClassifierType;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
 import org.eclipse.ocl.examples.pivot.CollectionKind;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
@@ -168,7 +168,6 @@ public class PivotFactoryImpl
 			case PivotPackage.BOOLEAN_LITERAL_EXP: return (EObject)createBooleanLiteralExp();
 			case PivotPackage.CALL_OPERATION_ACTION: return (EObject)createCallOperationAction();
 			case PivotPackage.CLASS: return (EObject)createClass();
-			case PivotPackage.CLASSIFIER_TYPE: return (EObject)createClassifierType();
 			case PivotPackage.COLLECTION_ITEM: return (EObject)createCollectionItem();
 			case PivotPackage.COLLECTION_LITERAL_EXP: return (EObject)createCollectionLiteralExp();
 			case PivotPackage.COLLECTION_RANGE: return (EObject)createCollectionRange();
@@ -198,6 +197,7 @@ public class PivotFactoryImpl
 			case PivotPackage.LIBRARY: return (EObject)createLibrary();
 			case PivotPackage.MESSAGE_EXP: return (EObject)createMessageExp();
 			case PivotPackage.MESSAGE_TYPE: return (EObject)createMessageType();
+			case PivotPackage.METACLASS: return (EObject)createMetaclass();
 			case PivotPackage.NULL_LITERAL_EXP: return (EObject)createNullLiteralExp();
 			case PivotPackage.OPAQUE_EXPRESSION: return (EObject)createOpaqueExpression();
 			case PivotPackage.OPERATION: return (EObject)createOperation();
@@ -340,10 +340,10 @@ public class PivotFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassifierType createClassifierType()
+	public Metaclass createMetaclass()
 	{
-		ClassifierTypeImpl classifierType = new ClassifierTypeImpl();
-		return classifierType;
+		MetaclassImpl metaclass = new MetaclassImpl();
+		return metaclass;
 	}
 
 	/**

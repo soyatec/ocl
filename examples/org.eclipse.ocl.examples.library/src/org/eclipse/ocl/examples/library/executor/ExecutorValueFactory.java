@@ -35,6 +35,6 @@ public class ExecutorValueFactory extends ValueFactoryImpl
 		if (object instanceof EObject) {
 			return new EObjectValueImpl(this, (EObject) object);
 		}
-		return new ObjectValueImpl(this, getStandardLibrary().getAnyClassifierType(), object);	// WIP A better type
+		return new ObjectValueImpl(this, getStandardLibrary().getMetaclassType(), object);	// WIP A better type
 	} */
 }

@@ -74,6 +74,21 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 				return false;
 			}
 		}
+		BigInteger firstLower = firstCollectionType.getLower();
+		BigInteger secondLower = secondCollectionType.getLower();
+		if (firstLower.compareTo(secondLower) > 0) {
+			return false;
+		}
+		BigInteger firstUpper = firstCollectionType.getUpper();
+		if (firstUpper.signum() >= 0) {
+			BigInteger secondUpper = secondCollectionType.getUpper();
+			if (secondUpper.signum() < 0) {
+				return false;
+			}
+			if (firstLower.compareTo(secondLower) < 0) {
+				return false;
+			}
+		}
 		return true;
 	}
 

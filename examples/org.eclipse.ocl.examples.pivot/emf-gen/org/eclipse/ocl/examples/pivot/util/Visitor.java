@@ -60,7 +60,6 @@ public interface Visitor<R>
 	@Nullable R visitCallExp(@NonNull org.eclipse.ocl.examples.pivot.CallExp object);
 	@Nullable R visitCallOperationAction(@NonNull org.eclipse.ocl.examples.pivot.CallOperationAction object);
 	@Nullable R visitClass(@NonNull org.eclipse.ocl.examples.pivot.Class object);
-	@Nullable R visitClassifierType(@NonNull org.eclipse.ocl.examples.pivot.ClassifierType object);
 	@Nullable R visitCollectionItem(@NonNull org.eclipse.ocl.examples.pivot.CollectionItem object);
 	@Nullable R visitCollectionLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.CollectionLiteralExp object);
 	@Nullable R visitCollectionLiteralPart(@NonNull org.eclipse.ocl.examples.pivot.CollectionLiteralPart object);
@@ -96,6 +95,7 @@ public interface Visitor<R>
 	@Nullable R visitLoopExp(@NonNull org.eclipse.ocl.examples.pivot.LoopExp object);
 	@Nullable R visitMessageExp(@NonNull org.eclipse.ocl.examples.pivot.MessageExp object);
 	@Nullable R visitMessageType(@NonNull org.eclipse.ocl.examples.pivot.MessageType object);
+	@Nullable R visitMetaclass(@NonNull org.eclipse.ocl.examples.pivot.Metaclass object);
 	@Nullable R visitNamedElement(@NonNull org.eclipse.ocl.examples.pivot.NamedElement object);
 	@Nullable R visitNamespace(@NonNull org.eclipse.ocl.examples.pivot.Namespace object);
 	@Nullable R visitNavigationCallExp(@NonNull org.eclipse.ocl.examples.pivot.NavigationCallExp object);

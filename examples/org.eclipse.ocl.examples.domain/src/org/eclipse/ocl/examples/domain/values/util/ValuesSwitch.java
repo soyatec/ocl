@@ -81,16 +81,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ValuesPackage.CLASSIFIER_TYPE_VALUE: {
-				ClassifierTypeValue classifierTypeValue = (ClassifierTypeValue)theEObject;
-				T result = caseClassifierTypeValue(classifierTypeValue);
-				if (result == null) result = caseTypeValue(classifierTypeValue);
-				if (result == null) result = caseElementValue(classifierTypeValue);
-				if (result == null) result = caseObjectValue(classifierTypeValue);
-				if (result == null) result = caseValue(classifierTypeValue);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case ValuesPackage.COLLECTION_VALUE: {
 				CollectionValue collectionValue = (CollectionValue)theEObject;
 				T result = caseCollectionValue(collectionValue);
@@ -163,6 +153,16 @@ public class ValuesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseObjectValue(invalidValue);
 				if (result == null) result = caseCollectionValue(invalidValue);
 				if (result == null) result = caseValue(invalidValue);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ValuesPackage.METACLASS_VALUE: {
+				MetaclassValue metaclassValue = (MetaclassValue)theEObject;
+				T result = caseMetaclassValue(metaclassValue);
+				if (result == null) result = caseTypeValue(metaclassValue);
+				if (result == null) result = caseElementValue(metaclassValue);
+				if (result == null) result = caseObjectValue(metaclassValue);
+				if (result == null) result = caseValue(metaclassValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -328,21 +328,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Classifier Type Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Classifier Type Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseClassifierTypeValue(ClassifierTypeValue object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Collection Value</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -444,6 +429,21 @@ public class ValuesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseInvalidValue(InvalidValue object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Metaclass Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Metaclass Value</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMetaclassValue(MetaclassValue object) {
 		return null;
 	}
 

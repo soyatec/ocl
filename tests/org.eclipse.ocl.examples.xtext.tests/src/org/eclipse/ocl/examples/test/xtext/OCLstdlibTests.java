@@ -135,11 +135,11 @@ public class OCLstdlibTests extends XtextTestCase
 			"           post a: elem;\n"+
 			"       }\n"+
 			"    }\n"+
-			"    type AnyClassifier(T) : ClassifierType conformsTo OclAny {}\n"+
 			"    type Class conformsTo OclAny {}\n"+	
 			"    type Boolean : PrimitiveType conformsTo OclAny {}\n"+
 			"    type Enumeration conformsTo OclAny {}\n"+
 			"    type Integer : PrimitiveType conformsTo Real {}\n"+
+			"    type Metaclass(T) : Metaclass conformsTo OclAny {}\n"+
 			"    type OclElement conformsTo OclAny {}\n"+
 			"    type OclInvalid : InvalidType {}\n"+
 			"    type Real : PrimitiveType conformsTo OclAny {}\n"+

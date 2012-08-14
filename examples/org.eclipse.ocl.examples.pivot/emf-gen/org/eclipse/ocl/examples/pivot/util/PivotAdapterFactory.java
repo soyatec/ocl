@@ -29,7 +29,7 @@ import org.eclipse.ocl.examples.pivot.BagType;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.CallOperationAction;
-import org.eclipse.ocl.examples.pivot.ClassifierType;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralPart;
@@ -231,11 +231,6 @@ public class PivotAdapterFactory
 				return createClassAdapter();
 			}
 			@Override
-			public Adapter caseClassifierType(ClassifierType object)
-			{
-				return createClassifierTypeAdapter();
-			}
-			@Override
 			public Adapter caseCollectionItem(CollectionItem object)
 			{
 				return createCollectionItemAdapter();
@@ -409,6 +404,11 @@ public class PivotAdapterFactory
 			public Adapter caseMessageType(MessageType object)
 			{
 				return createMessageTypeAdapter();
+			}
+			@Override
+			public Adapter caseMetaclass(Metaclass object)
+			{
+				return createMetaclassAdapter();
 			}
 			@Override
 			public Adapter caseMorePivotable(MorePivotable object)
@@ -1260,6 +1260,21 @@ public class PivotAdapterFactory
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Metaclass <em>Metaclass</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.Metaclass
+	 * @generated
+	 */
+	public Adapter createMetaclassAdapter()
+	{
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.util.MorePivotable <em>More Pivotable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1667,21 +1682,6 @@ public class PivotAdapterFactory
 	 * @generated
 	 */
 	public Adapter createClassAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.ClassifierType <em>Classifier Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.ClassifierType
-	 * @generated
-	 */
-	public Adapter createClassifierTypeAdapter()
-	{
 		return null;
 	}
 

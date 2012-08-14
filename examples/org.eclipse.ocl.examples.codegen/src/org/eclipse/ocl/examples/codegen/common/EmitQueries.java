@@ -29,7 +29,7 @@ public class EmitQueries
 	 * in a Java form to reduce the impact of refactoring on Acceleo templates.
 	 */
 	private static final Class<?>[] knownClasses = {
-		org.eclipse.ocl.examples.domain.elements.DomainClassifierType.class,
+		org.eclipse.ocl.examples.domain.elements.DomainMetaclass.class,
 		org.eclipse.ocl.examples.domain.elements.DomainCollectionType.class,
 		org.eclipse.ocl.examples.domain.elements.DomainProperty.class,
 		org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary.class,

@@ -878,13 +878,22 @@ public interface BaseCSTPackage extends EPackage {
 	int TYPED_ELEMENT_CS__QUALIFIER = NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_ELEMENT_CS__OPTIONAL = NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Typed Element CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPED_ELEMENT_CS_FEATURE_COUNT = NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
+	int TYPED_ELEMENT_CS_FEATURE_COUNT = NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -966,6 +975,15 @@ public interface BaseCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int FEATURE_CS__QUALIFIER = TYPED_ELEMENT_CS__QUALIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_CS__OPTIONAL = TYPED_ELEMENT_CS__OPTIONAL;
 
 	/**
 	 * The number of structural features of the '<em>Feature CS</em>' class.
@@ -1056,6 +1074,15 @@ public interface BaseCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRUCTURAL_FEATURE_CS__QUALIFIER = FEATURE_CS__QUALIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURAL_FEATURE_CS__OPTIONAL = FEATURE_CS__OPTIONAL;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' container reference.
@@ -1164,6 +1191,15 @@ public interface BaseCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int ATTRIBUTE_CS__QUALIFIER = STRUCTURAL_FEATURE_CS__QUALIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_CS__OPTIONAL = STRUCTURAL_FEATURE_CS__OPTIONAL;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' container reference.
@@ -2783,6 +2819,15 @@ public interface BaseCSTPackage extends EPackage {
 	int OPERATION_CS__QUALIFIER = FEATURE_CS__QUALIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CS__OPTIONAL = FEATURE_CS__OPTIONAL;
+
+	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3006,6 +3051,15 @@ public interface BaseCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int PARAMETER_CS__QUALIFIER = TYPED_ELEMENT_CS__QUALIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_CS__OPTIONAL = TYPED_ELEMENT_CS__OPTIONAL;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' container reference.
@@ -3269,6 +3323,15 @@ public interface BaseCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int REFERENCE_CS__QUALIFIER = STRUCTURAL_FEATURE_CS__QUALIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_CS__OPTIONAL = STRUCTURAL_FEATURE_CS__OPTIONAL;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' container reference.
@@ -3975,6 +4038,15 @@ public interface BaseCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int TUPLE_PART_CS__QUALIFIER = TYPED_ELEMENT_CS__QUALIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_PART_CS__OPTIONAL = TYPED_ELEMENT_CS__OPTIONAL;
 
 	/**
 	 * The number of structural features of the '<em>Tuple Part CS</em>' class.
@@ -5578,6 +5650,17 @@ public interface BaseCSTPackage extends EPackage {
 	EAttribute getTypedElementCS_Qualifier();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS#isOptional <em>Optional</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Optional</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS#isOptional()
+	 * @see #getTypedElementCS()
+	 * @generated
+	 */
+	EAttribute getTypedElementCS_Optional();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS <em>Typed Ref CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6814,6 +6897,14 @@ public interface BaseCSTPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TYPED_ELEMENT_CS__QUALIFIER = eINSTANCE.getTypedElementCS_Qualifier();
+
+		/**
+		 * The meta object literal for the '<em><b>Optional</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TYPED_ELEMENT_CS__OPTIONAL = eINSTANCE.getTypedElementCS_Optional();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.TypedRefCSImpl <em>Typed Ref CS</em>}' class.

@@ -88,10 +88,6 @@ public abstract class AbstractExtendingVisitor<R, C>
 		return visitType(object);
 	}
 
-	public @Nullable R visitClassifierType(@NonNull org.eclipse.ocl.examples.pivot.ClassifierType object) {
-		return visitClass(object);
-	}
-
 	public @Nullable R visitCollectionItem(@NonNull org.eclipse.ocl.examples.pivot.CollectionItem object) {
 		return visitCollectionLiteralPart(object);
 	}
@@ -230,6 +226,10 @@ public abstract class AbstractExtendingVisitor<R, C>
 
 	public @Nullable R visitMessageType(@NonNull org.eclipse.ocl.examples.pivot.MessageType object) {
 		return visitType(object);
+	}
+
+	public @Nullable R visitMetaclass(@NonNull org.eclipse.ocl.examples.pivot.Metaclass object) {
+		return visitClass(object);
 	}
 
 	public @Nullable R visitNamedElement(@NonNull org.eclipse.ocl.examples.pivot.NamedElement object) {
