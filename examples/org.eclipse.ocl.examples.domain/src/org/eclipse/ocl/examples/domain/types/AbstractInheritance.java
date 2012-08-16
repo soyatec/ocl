@@ -22,6 +22,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainFragment;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
+import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
@@ -262,7 +263,7 @@ public abstract class AbstractInheritance implements DomainInheritance
 	public @Nullable DomainOperation lookupLocalOperation(@NonNull DomainStandardLibrary standardLibrary, @NonNull String operationName, DomainInheritance... argumentTypes) {
 		for (DomainOperation localOperation : getLocalOperations()) {
 			if (localOperation.getName().equals(operationName)) {
-				IndexableIterable<? extends DomainType> firstParameterTypes = localOperation.getParameterType();
+				DomainParameterTypes firstParameterTypes = localOperation.getParameterTypes();
 				int iMax = firstParameterTypes.size();
 				if (iMax == argumentTypes.length) {
 					int i = 0;

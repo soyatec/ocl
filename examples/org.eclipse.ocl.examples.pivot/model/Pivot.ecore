@@ -1001,7 +1001,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="LambdaType" eSuperTypes="#//DataType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="contextType" lowerBound="1"
         eType="#//Type"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterType" ordered="false"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterType" unique="false"
         upperBound="-1" eType="#//Type"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="resultType" lowerBound="1"
         eType="#//Type"/>

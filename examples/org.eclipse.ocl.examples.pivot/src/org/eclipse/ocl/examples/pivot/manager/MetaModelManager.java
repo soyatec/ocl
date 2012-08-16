@@ -2252,9 +2252,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		if (pivotType.getOwningTemplateParameter() != null) {
 			return false;
 		}
-		if (pivotType instanceof UnspecifiedType) {
-			return false;
-		}
+//		if (pivotType instanceof UnspecifiedType) {
+//			return false;
+//		}
 		if (pivotType instanceof LambdaType) {
 			return false;
 		}

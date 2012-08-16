@@ -64,13 +64,13 @@ public class ParameterableElementBodies
 			
 			
 			
-			DomainType static_A_symbol_0 = valueFactory.typeOf(self);
-			LibraryUnaryOperation dynamic_A_symbol_0 = (LibraryUnaryOperation)static_A_symbol_0.lookupImplementation(standardLibrary, O_OclAny_oclType);
-			Value A_symbol_0 = dynamic_A_symbol_0.evaluate(evaluator, T_Metaclass_pivot__ParameterableElement_, self);
-			DomainType static_A_symbol_1 = valueFactory.typeOf(p);
-			LibraryBinaryOperation dynamic_A_symbol_1 = (LibraryBinaryOperation)static_A_symbol_1.lookupImplementation(standardLibrary, O_OclAny_oclIsKindOf);
-			Value A_symbol_1 = dynamic_A_symbol_1.evaluate(evaluator, T_Boolean, p, A_symbol_0);
-			return A_symbol_1;
+			DomainType static_A_symbol_ = valueFactory.typeOf(self);
+			LibraryUnaryOperation dynamic_A_symbol_ = (LibraryUnaryOperation)static_A_symbol_.lookupImplementation(standardLibrary, O_OclAny_oclType);
+			Value A_symbol_ = dynamic_A_symbol_.evaluate(evaluator, T_Metaclass_pivot__ParameterableElement_, self);
+			DomainType static_A_symbol__1 = valueFactory.typeOf(p);
+			LibraryBinaryOperation dynamic_A_symbol__1 = (LibraryBinaryOperation)static_A_symbol__1.lookupImplementation(standardLibrary, O_OclAny_oclIsKindOf);
+			Value A_symbol__1 = dynamic_A_symbol__1.evaluate(evaluator, T_Boolean, p, A_symbol_);
+			return A_symbol__1;
 		}
 	}
 

@@ -19,8 +19,8 @@ package org.eclipse.ocl.examples.pivot.executor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
+import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.utilities.IndexableIterable;
 import org.eclipse.ocl.examples.library.executor.ReflectiveFragment;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.TypeServer;
@@ -34,11 +34,11 @@ public class PivotReflectiveFragment extends ReflectiveFragment
 	@Override
 	protected @NonNull DomainOperation getOperationOverload(@NonNull DomainOperation baseOperation) {
 		Type pivotType = ((TypeServer) derivedInheritance).getPivotType();
-		IndexableIterable<? extends DomainType> baseParameterTypes = baseOperation.getParameterType();
+		DomainParameterTypes baseParameterTypes = baseOperation.getParameterTypes();
 		int iMax = baseParameterTypes.size();
 		for (DomainOperation localOperation : pivotType.getOwnedOperation()) {
 			if (localOperation.getName().equals(baseOperation.getName())) {
-				IndexableIterable<? extends DomainType> localParameterTypes = localOperation.getParameterType();
+				DomainParameterTypes localParameterTypes = localOperation.getParameterTypes();
 				if (iMax == localParameterTypes.size()) {
 					int i = 0;
 					for (; i < iMax; i++) {

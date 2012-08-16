@@ -83,6 +83,8 @@ public class [tablesClassName/]
 
 	[pPackage.declareFragments(genPackage)/]
 
+	[pPackage.declareParameterLists(genPackage)/]
+
 	[pPackage.declareOperations(genPackage)/]
 
 	[pPackage.declareProperties(genPackage)/]
@@ -189,11 +191,26 @@ public static final @NonNull <%ExecutorTypeParameter%> _[op.getLiteralName()/]_[
 [/let]
 [/for]
 [/if]
-public static final @NonNull <%ExecutorOperation%> [op.getLiteralName()/] = new <%ExecutorOperation%>("[op.name/]",
-	[op.owningType.getLiteralName()/], [opIndex-1/], [genPackage.getImplementationName(op)/][genPackage.declareParameterTypes(op.ownedParameter.type->asOrderedSet())/]);
+public static final @NonNull <%ExecutorOperation%> [op.getLiteralName()/] = new <%ExecutorOperation%>("[op.name/]", Parameters.[op.ownedParameter.type->getParameterListName()/], [op.owningType.getLiteralName()/],
+	[opIndex-1/], [genPackage.getImplementationName(op)/]);
 [/template]
 
-[template public declareParameterTypes(genPackage : GenPackage, types : OrderedSet(Type))]
+[template public declareParameterLists(pPackage : Package, genPackage : GenPackage)]
+[let classes : Set(Class) = pPackage.ownedType->filter(Class)->select(getOperations()->notEmpty())]
+[let operations : Set(Operation) = classes.getOperations()->asSet()]
+[let parameterTypes : Set(Sequence(Type)) = operations->collectNested(ownedParameter.type)->asSet()]
+/**
+ *	The parameter lists shared by operations.
+ */
+public static class Parameters {[for (types : Sequence(Type) | parameterTypes->sortedBy(getParameterListName())) before('\n')]
+	public static final @NonNull <%DomainParameterTypes%> [types->getParameterListName()/] = new <%DomainParameterTypes%>([for (type : Type | types) separator (', ')][type.declareParameterType(genPackage)/][/for]);
+[/for]}[/let][/let][/let]
+[/template]
+
+[template public declareParameterTypes2(genPackage : GenPackage, types : Sequence(Type))]
+[for (type : Type | types) separator (', ')][type.declareParameterType(genPackage)/][/for][/template]
+
+[template public declareParameterTypes(genPackage : GenPackage, types : Sequence(Type))]
 [for (type : Type | types)],
 	[type.declareParameterType(genPackage)/][/for][/template]
 
@@ -215,7 +232,7 @@ public static final @NonNull <%ExecutorOperation%> [op.getLiteralName()/] = new 
 new <%ExecutorSpecializedType%>(LIBRARY, "[type.name/]", [type.elementType.declareParameterType(genPackage)/])[/template]
 
 [template public declareParameterType(type : LambdaType, genPackage : GenPackage)]
-new <%ExecutorLambdaType%>(LIBRARY, "[type.name/]", [type.contextType.declareParameterType(genPackage)/][genPackage.declareParameterTypes(type.parameterType->asOrderedSet())/])[/template]
+new <%ExecutorLambdaType%>(LIBRARY, "[type.name/]", [type.contextType.declareParameterType(genPackage)/][genPackage.declareParameterTypes(type.parameterType)/])[/template]
 
 [template public declareParameterType(type : Metaclass, genPackage : GenPackage)]
 new <%ExecutorSpecializedType%>(LIBRARY, "[type.name/]", [type.instanceType.declareParameterType(genPackage)/])[/template]
@@ -436,6 +453,9 @@ private static final @NonNull <%EcoreExecutorEnumerationLiteral%>['[]'/] _[enum.
     _[enumLiteral.enumeration.name/]__[enumLiteral.name/][/let][/for]
 [/if]};[/let]
 [/template]
+
+[query public getParameterListName(types : Sequence(Type)) : String = 
+let prefix : String = types->iterate(t : Type; acc : String = '' | acc + '_' + t.name) in types->getPrefixedSymbolName(if prefix = '' then '_' else prefix endif)/]
 
 [query public getTypeFlags(pPackage : Package, elem : Type) : String =
 if (elem.oclIsKindOf(OrderedSetType)) then '<%ExecutorType%>.ORDERED | <%ExecutorType%>.UNIQUE'

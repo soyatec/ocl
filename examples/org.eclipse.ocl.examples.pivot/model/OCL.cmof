@@ -245,7 +245,7 @@
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_FWVUEDapEeCb2LlOxMIQ5w" name="contextType">
           <type xmi:type="cmof:Class" href="Infrastructure.cmof#Core-Basic-Type"/>
         </ownedAttribute>
-        <ownedAttribute xmi:type="cmof:Property" xmi:id="_lpw0ojaoEeCb2LlOxMIQ5w" name="parameterType" lower="0" upper="*">
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_lpw0ojaoEeCb2LlOxMIQ5w" name="parameterType" isOrdered="true" isUnique="false" lower="0" upper="*">
           <type xmi:type="cmof:Class" href="Infrastructure.cmof#Core-Basic-Type"/>
         </ownedAttribute>
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_pgRzMDaoEeCb2LlOxMIQ5w" name="resultType">

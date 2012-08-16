@@ -77,8 +77,7 @@ public interface LambdaType extends DataType, org.eclipse.ocl.examples.domain.el
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameter Type</em>' reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getLambdaType_ParameterType()
-	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!LambdaType!parameterType'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!LambdaType!parameterType'"
 	 * @generated
 	 */
 	EList<Type> getParameterType();

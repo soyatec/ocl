@@ -41,6 +41,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
+import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -1282,41 +1283,13 @@ public class OperationImpl
 		}
 	}
 
-	public @NonNull IndexableIterable<Type> getParameterType() {
-		return new IndexableIterable<Type>()
-		{
-			public Iterator<Type> iterator()
-			{
-				return new Iterator<Type>()
-				{
-					private int curr = 0;
-					
-					public boolean hasNext() {
-						return curr < size();
-					}
-
-					public Type next() {
-						if (curr < size()) {
-							return get(curr++);
-						}
-						else {
-							return null;
-						}
-					}
-
-					public void remove() {
-						throw new UnsupportedOperationException(); 		// Unimplemented optional operation
-					}
-				};
-			}
-
-			public @NonNull Type get(int index) {
-				return DomainUtil.nonNullEMF(getOwnedParameter().get(index).getType());
-			}
-
-			public int size() {
-				return getOwnedParameter().size();
-			}
-		};
+	public @NonNull DomainParameterTypes getParameterTypes() {
+		EList<Parameter> ownedParameter = getOwnedParameter();
+		int iMax = ownedParameter.size();
+		DomainType[] types = new DomainType[iMax];
+		for (int i = 0; i < iMax; i++) {
+			types[i] = ownedParameter.get(i).getType();
+		}
+		return new DomainParameterTypes(types);
 	}
 } //OperationImpl

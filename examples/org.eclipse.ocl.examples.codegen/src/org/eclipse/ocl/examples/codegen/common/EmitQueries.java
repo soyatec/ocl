@@ -31,6 +31,7 @@ public class EmitQueries
 	private static final Class<?>[] knownClasses = {
 		org.eclipse.ocl.examples.domain.elements.DomainMetaclass.class,
 		org.eclipse.ocl.examples.domain.elements.DomainCollectionType.class,
+		org.eclipse.ocl.examples.domain.elements.DomainParameterTypes.class,
 		org.eclipse.ocl.examples.domain.elements.DomainProperty.class,
 		org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary.class,
 		org.eclipse.ocl.examples.domain.elements.DomainTupleType.class,

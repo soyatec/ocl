@@ -69,17 +69,17 @@ public class EnumLiteralExpBodies
 			final @NonNull LibraryProperty IP_EnumLiteralExp_referredEnumLiteral = P_EnumLiteralExp_referredEnumLiteral.getImplementation();
 			
 			
-			Value A_symbol_0 = IP_TypedElement_type.evaluate(evaluator, T_Type, self, P_TypedElement_type);
+			Value A_symbol_ = IP_TypedElement_type.evaluate(evaluator, T_Type, self, P_TypedElement_type);
 			
 			
-			Value A_symbol_1 = IP_EnumLiteralExp_referredEnumLiteral.evaluate(evaluator, T_EnumerationLiteral, self, P_EnumLiteralExp_referredEnumLiteral);
+			Value A_symbol__1 = IP_EnumLiteralExp_referredEnumLiteral.evaluate(evaluator, T_EnumerationLiteral, self, P_EnumLiteralExp_referredEnumLiteral);
 			
-			Value A_symbol_2 = IP_EnumerationLiteral_enumeration.evaluate(evaluator, T_Enumeration, A_symbol_1, P_EnumerationLiteral_enumeration);
+			Value A_symbol__2 = IP_EnumerationLiteral_enumeration.evaluate(evaluator, T_Enumeration, A_symbol__1, P_EnumerationLiteral_enumeration);
 			
-			DomainType static_A_symbol_3 = valueFactory.typeOf(A_symbol_0, A_symbol_2);
-			LibraryBinaryOperation dynamic_A_symbol_3 = (LibraryBinaryOperation)static_A_symbol_3.lookupImplementation(standardLibrary, O_OclAny__eq_);
-			Value A_symbol_3 = dynamic_A_symbol_3.evaluate(evaluator, T_Boolean, A_symbol_0, A_symbol_2);
-			return A_symbol_3;
+			DomainType static_A_symbol__3 = valueFactory.typeOf(A_symbol_, A_symbol__2);
+			LibraryBinaryOperation dynamic_A_symbol__3 = (LibraryBinaryOperation)static_A_symbol__3.lookupImplementation(standardLibrary, O_OclAny__eq_);
+			Value A_symbol__3 = dynamic_A_symbol__3.evaluate(evaluator, T_Boolean, A_symbol_, A_symbol__2);
+			return A_symbol__3;
 		}
 	}
 

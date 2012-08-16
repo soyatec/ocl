@@ -10,6 +10,7 @@
 package org.eclipse.ocl.examples.library.oclstdlib;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorType;
 import org.eclipse.ocl.examples.library.executor.ExecutorFragment;
@@ -245,689 +246,589 @@ public class OCLstdlibTables
 	}
 
 	/**
+	 *	The parameter lists shared by operations.
+	 */
+	public static class Parameters {
+		public static final @NonNull DomainParameterTypes _ = new DomainParameterTypes();
+		public static final @NonNull DomainParameterTypes _Boolean = new DomainParameterTypes(OCLstdlibTables.Types._Boolean);
+		public static final @NonNull DomainParameterTypes _Collection = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Operations.__Collection__excludesAll_T2));
+		public static final @NonNull DomainParameterTypes _Collection_1 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Types._Bag_T));
+		public static final @NonNull DomainParameterTypes _Collection_2 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Types._Sequence_T));
+		public static final @NonNull DomainParameterTypes _Collection_3 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Types._UniqueCollection_T));
+		public static final @NonNull DomainParameterTypes _Collection_4 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Operations.__Collection__product_T2));
+		public static final @NonNull DomainParameterTypes _Collection_5 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Types._OrderedSet_T));
+		public static final @NonNull DomainParameterTypes _Collection_6 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Types._Set_T));
+		public static final @NonNull DomainParameterTypes _Collection_7 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Operations.__Collection__includesAll_T2));
+		public static final @NonNull DomainParameterTypes _Integer = new DomainParameterTypes(OCLstdlibTables.Types._Integer);
+		public static final @NonNull DomainParameterTypes _Integer_Integer = new DomainParameterTypes(OCLstdlibTables.Types._Integer, OCLstdlibTables.Types._Integer);
+		public static final @NonNull DomainParameterTypes _Integer_T = new DomainParameterTypes(OCLstdlibTables.Types._Integer, OCLstdlibTables.Types._OrderedSet_T);
+		public static final @NonNull DomainParameterTypes _Integer_T_1 = new DomainParameterTypes(OCLstdlibTables.Types._Integer, OCLstdlibTables.Types._Sequence_T);
+		public static final @NonNull DomainParameterTypes _Lambda = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Bag_T));
+		public static final @NonNull DomainParameterTypes _Lambda_1 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Sequence_T));
+		public static final @NonNull DomainParameterTypes _Lambda_10 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Set_T));
+		public static final @NonNull DomainParameterTypes _Lambda_11 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._UniqueCollection_T));
+		public static final @NonNull DomainParameterTypes _Lambda_12 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
+		public static final @NonNull DomainParameterTypes _Lambda_13 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._OrderedSet_T));
+		public static final @NonNull DomainParameterTypes _Lambda_14 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._OrderedSet_T));
+		public static final @NonNull DomainParameterTypes _Lambda_15 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Set_T));
+		public static final @NonNull DomainParameterTypes _Lambda_16 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Bag_T));
+		public static final @NonNull DomainParameterTypes _Lambda_17 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Sequence_T));
+		public static final @NonNull DomainParameterTypes _Lambda_18 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Sequence_T));
+		public static final @NonNull DomainParameterTypes _Lambda_19 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
+		public static final @NonNull DomainParameterTypes _Lambda_2 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
+		public static final @NonNull DomainParameterTypes _Lambda_3 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Bag_T));
+		public static final @NonNull DomainParameterTypes _Lambda_4 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
+		public static final @NonNull DomainParameterTypes _Lambda_5 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Sequence_T));
+		public static final @NonNull DomainParameterTypes _Lambda_6 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
+		public static final @NonNull DomainParameterTypes _Lambda_7 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Bag_T));
+		public static final @NonNull DomainParameterTypes _Lambda_8 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Sequence_T));
+		public static final @NonNull DomainParameterTypes _Lambda_9 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Bag_T));
+		public static final @NonNull DomainParameterTypes _Metaclass = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OrderedSet__selectByKind_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_1 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Set__selectByKind_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_10 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__UnlimitedNatural__oclAsType_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_11 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Sequence__selectByType_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_12 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Collection__selectByType_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_13 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Bag__selectByType_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_2 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OclAny__oclIsKindOf_T));
+		public static final @NonNull DomainParameterTypes _Metaclass_3 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OclAny__oclIsTypeOf_T));
+		public static final @NonNull DomainParameterTypes _Metaclass_4 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OrderedSet__selectByType_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_5 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Collection__selectByKind_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_6 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Sequence__selectByKind_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_7 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Bag__selectByKind_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_8 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OclAny__oclAsType_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_9 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Set__selectByType_TT));
+		public static final @NonNull DomainParameterTypes _OclAny = new DomainParameterTypes(OCLstdlibTables.Types._OclAny);
+		public static final @NonNull DomainParameterTypes _OclSelf = new DomainParameterTypes(OCLstdlibTables.Types._OclSelf);
+		public static final @NonNull DomainParameterTypes _OclState = new DomainParameterTypes(OCLstdlibTables.Types._OclState);
+		public static final @NonNull DomainParameterTypes _OclType = new DomainParameterTypes(OCLstdlibTables.Types._OclType);
+		public static final @NonNull DomainParameterTypes _Sequence = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Sequence", OCLstdlibTables.Types._Sequence_T));
+		public static final @NonNull DomainParameterTypes _Sequence_1 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Sequence", OCLstdlibTables.Types._OrderedSet_T));
+		public static final @NonNull DomainParameterTypes _String = new DomainParameterTypes(OCLstdlibTables.Types._String);
+		public static final @NonNull DomainParameterTypes _String_Boolean = new DomainParameterTypes(OCLstdlibTables.Types._String, OCLstdlibTables.Types._Boolean);
+		public static final @NonNull DomainParameterTypes _String_String = new DomainParameterTypes(OCLstdlibTables.Types._String, OCLstdlibTables.Types._String);
+		public static final @NonNull DomainParameterTypes _T = new DomainParameterTypes(OCLstdlibTables.Types._OrderedSet_T);
+		public static final @NonNull DomainParameterTypes _T_1 = new DomainParameterTypes(OCLstdlibTables.Types._Sequence_T);
+		public static final @NonNull DomainParameterTypes _T_2 = new DomainParameterTypes(OCLstdlibTables.Types._Bag_T);
+		public static final @NonNull DomainParameterTypes _T_3 = new DomainParameterTypes(OCLstdlibTables.Types._Collection_T);
+		public static final @NonNull DomainParameterTypes _T_4 = new DomainParameterTypes(OCLstdlibTables.Types._Set_T);
+		public static final @NonNull DomainParameterTypes _UniqueCollection = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "UniqueCollection", OCLstdlibTables.Types._Bag_T));
+		public static final @NonNull DomainParameterTypes _UniqueCollection_1 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "UniqueCollection", OCLstdlibTables.Types._OclAny));
+		public static final @NonNull DomainParameterTypes _UniqueCollection_2 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "UniqueCollection", OCLstdlibTables.Types._Sequence_T));
+	}
+
+	/**
 	 *	The operation descriptors for each operation of each type.
 	 */
 	public static class Operations {
-		public static final @NonNull ExecutorOperation _Bag___lt__gt_ = new ExecutorOperation("<>",
-			Types._Bag, 0, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Bag___eq_ = new ExecutorOperation("=",
-			Types._Bag, 1, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Bag__closure = new ExecutorOperation("closure",
-			Types._Bag, 2, org.eclipse.ocl.examples.library.iterator.ClosureIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Bag_T));
+		public static final @NonNull ExecutorOperation _Bag___lt__gt_ = new ExecutorOperation("<>", Parameters._OclSelf, Types._Bag,
+			0, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Bag___eq_ = new ExecutorOperation("=", Parameters._OclSelf, Types._Bag,
+			1, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Bag__closure = new ExecutorOperation("closure", Parameters._Lambda_3, Types._Bag,
+			2, org.eclipse.ocl.examples.library.iterator.ClosureIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Bag__collect_V = new ExecutorTypeParameter(LIBRARY, "V");
-		public static final @NonNull ExecutorOperation _Bag__collect = new ExecutorOperation("collect",
-			Types._Bag, 3, org.eclipse.ocl.examples.library.iterator.CollectIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Bag_T));
+		public static final @NonNull ExecutorOperation _Bag__collect = new ExecutorOperation("collect", Parameters._Lambda_16, Types._Bag,
+			3, org.eclipse.ocl.examples.library.iterator.CollectIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Bag__collectNested_V = new ExecutorTypeParameter(LIBRARY, "V");
-		public static final @NonNull ExecutorOperation _Bag__collectNested = new ExecutorOperation("collectNested",
-			Types._Bag, 4, org.eclipse.ocl.examples.library.iterator.CollectNestedIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Bag_T));
-		public static final @NonNull ExecutorOperation _Bag__excluding = new ExecutorOperation("excluding",
-			Types._Bag, 5, org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE,
-				OCLstdlibTables.Types._OclAny);
+		public static final @NonNull ExecutorOperation _Bag__collectNested = new ExecutorOperation("collectNested", Parameters._Lambda_9, Types._Bag,
+			4, org.eclipse.ocl.examples.library.iterator.CollectNestedIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _Bag__excluding = new ExecutorOperation("excluding", Parameters._OclAny, Types._Bag,
+			5, org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Bag__flatten_T2 = new ExecutorTypeParameter(LIBRARY, "T2");
-		public static final @NonNull ExecutorOperation _Bag__flatten = new ExecutorOperation("flatten",
-			Types._Bag, 6, org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Bag__including = new ExecutorOperation("including",
-			Types._Bag, 7, org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE,
-				OCLstdlibTables.Types._Bag_T);
-		public static final @NonNull ExecutorOperation _Bag__0_intersection = new ExecutorOperation("intersection",
-			Types._Bag, 8, org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Types._Bag_T));
-		public static final @NonNull ExecutorOperation _Bag__1_intersection = new ExecutorOperation("intersection",
-			Types._Bag, 9, org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "UniqueCollection", OCLstdlibTables.Types._Bag_T));
-		public static final @NonNull ExecutorOperation _Bag__reject = new ExecutorOperation("reject",
-			Types._Bag, 10, org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Bag_T));
-		public static final @NonNull ExecutorOperation _Bag__select = new ExecutorOperation("select",
-			Types._Bag, 11, org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Bag_T));
+		public static final @NonNull ExecutorOperation _Bag__flatten = new ExecutorOperation("flatten", Parameters._, Types._Bag,
+			6, org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Bag__including = new ExecutorOperation("including", Parameters._T_2, Types._Bag,
+			7, org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Bag__0_intersection = new ExecutorOperation("intersection", Parameters._Collection_1, Types._Bag,
+			8, org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Bag__1_intersection = new ExecutorOperation("intersection", Parameters._UniqueCollection, Types._Bag,
+			9, org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Bag__reject = new ExecutorOperation("reject", Parameters._Lambda_7, Types._Bag,
+			10, org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _Bag__select = new ExecutorOperation("select", Parameters._Lambda_7, Types._Bag,
+			11, org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Bag__selectByKind_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _Bag__selectByKind = new ExecutorOperation("selectByKind",
-			Types._Bag, 12, org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Bag__selectByKind_TT));
+		public static final @NonNull ExecutorOperation _Bag__selectByKind = new ExecutorOperation("selectByKind", Parameters._Metaclass_7, Types._Bag,
+			12, org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Bag__selectByType_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _Bag__selectByType = new ExecutorOperation("selectByType",
-			Types._Bag, 13, org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Bag__selectByType_TT));
-		public static final @NonNull ExecutorOperation _Bag__sortedBy = new ExecutorOperation("sortedBy",
-			Types._Bag, 14, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Bag_T));
-		public static final @NonNull ExecutorOperation _Bag__0_union = new ExecutorOperation("union",
-			Types._Bag, 15, org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Types._Bag_T));
-		public static final @NonNull ExecutorOperation _Bag__1_union = new ExecutorOperation("union",
-			Types._Bag, 16, org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "UniqueCollection", OCLstdlibTables.Types._Bag_T));
+		public static final @NonNull ExecutorOperation _Bag__selectByType = new ExecutorOperation("selectByType", Parameters._Metaclass_13, Types._Bag,
+			13, org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Bag__sortedBy = new ExecutorOperation("sortedBy", Parameters._Lambda, Types._Bag,
+			14, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _Bag__0_union = new ExecutorOperation("union", Parameters._Collection_1, Types._Bag,
+			15, org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Bag__1_union = new ExecutorOperation("union", Parameters._UniqueCollection, Types._Bag,
+			16, org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE);
 	
-		public static final @NonNull ExecutorOperation _Boolean___lt__gt_ = new ExecutorOperation("<>",
-			Types._Boolean, 0, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Boolean___eq_ = new ExecutorOperation("=",
-			Types._Boolean, 1, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Boolean__and = new ExecutorOperation("and",
-			Types._Boolean, 2, org.eclipse.ocl.examples.library.logical.BooleanAndOperation.INSTANCE,
-				OCLstdlibTables.Types._Boolean);
-		public static final @NonNull ExecutorOperation _Boolean__implies = new ExecutorOperation("implies",
-			Types._Boolean, 3, org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation.INSTANCE,
-				OCLstdlibTables.Types._Boolean);
-		public static final @NonNull ExecutorOperation _Boolean__not = new ExecutorOperation("not",
-			Types._Boolean, 4, org.eclipse.ocl.examples.library.logical.BooleanNotOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Boolean__or = new ExecutorOperation("or",
-			Types._Boolean, 5, org.eclipse.ocl.examples.library.logical.BooleanOrOperation.INSTANCE,
-				OCLstdlibTables.Types._Boolean);
-		public static final @NonNull ExecutorOperation _Boolean__xor = new ExecutorOperation("xor",
-			Types._Boolean, 6, org.eclipse.ocl.examples.library.logical.BooleanXorOperation.INSTANCE,
-				OCLstdlibTables.Types._Boolean);
-		public static final @NonNull ExecutorOperation _Boolean__allInstances = new ExecutorOperation("allInstances",
-			Types._Boolean, 7, org.eclipse.ocl.examples.library.logical.BooleanAllInstancesOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Boolean__toString = new ExecutorOperation("toString",
-			Types._Boolean, 8, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Boolean___lt__gt_ = new ExecutorOperation("<>", Parameters._OclSelf, Types._Boolean,
+			0, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Boolean___eq_ = new ExecutorOperation("=", Parameters._OclSelf, Types._Boolean,
+			1, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Boolean__and = new ExecutorOperation("and", Parameters._Boolean, Types._Boolean,
+			2, org.eclipse.ocl.examples.library.logical.BooleanAndOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Boolean__implies = new ExecutorOperation("implies", Parameters._Boolean, Types._Boolean,
+			3, org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Boolean__not = new ExecutorOperation("not", Parameters._, Types._Boolean,
+			4, org.eclipse.ocl.examples.library.logical.BooleanNotOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Boolean__or = new ExecutorOperation("or", Parameters._Boolean, Types._Boolean,
+			5, org.eclipse.ocl.examples.library.logical.BooleanOrOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Boolean__xor = new ExecutorOperation("xor", Parameters._Boolean, Types._Boolean,
+			6, org.eclipse.ocl.examples.library.logical.BooleanXorOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Boolean__allInstances = new ExecutorOperation("allInstances", Parameters._, Types._Boolean,
+			7, org.eclipse.ocl.examples.library.logical.BooleanAllInstancesOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Boolean__toString = new ExecutorOperation("toString", Parameters._, Types._Boolean,
+			8, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
 	
-		public static final @NonNull ExecutorOperation _Collection___lt__gt_ = new ExecutorOperation("<>",
-			Types._Collection, 0, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Collection___eq_ = new ExecutorOperation("=",
-			Types._Collection, 1, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Collection__any = new ExecutorOperation("any",
-			Types._Collection, 2, org.eclipse.ocl.examples.library.iterator.AnyIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
-		public static final @NonNull ExecutorOperation _Collection__asBag = new ExecutorOperation("asBag",
-			Types._Collection, 3, org.eclipse.ocl.examples.library.collection.CollectionAsBagOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Collection__asOrderedSet = new ExecutorOperation("asOrderedSet",
-			Types._Collection, 4, org.eclipse.ocl.examples.library.collection.CollectionAsOrderedSetOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Collection__asSequence = new ExecutorOperation("asSequence",
-			Types._Collection, 5, org.eclipse.ocl.examples.library.collection.CollectionAsSequenceOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Collection__asSet = new ExecutorOperation("asSet",
-			Types._Collection, 6, org.eclipse.ocl.examples.library.collection.CollectionAsSetOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection___lt__gt_ = new ExecutorOperation("<>", Parameters._OclSelf, Types._Collection,
+			0, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection___eq_ = new ExecutorOperation("=", Parameters._OclSelf, Types._Collection,
+			1, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__any = new ExecutorOperation("any", Parameters._Lambda_6, Types._Collection,
+			2, org.eclipse.ocl.examples.library.iterator.AnyIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__asBag = new ExecutorOperation("asBag", Parameters._, Types._Collection,
+			3, org.eclipse.ocl.examples.library.collection.CollectionAsBagOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__asOrderedSet = new ExecutorOperation("asOrderedSet", Parameters._, Types._Collection,
+			4, org.eclipse.ocl.examples.library.collection.CollectionAsOrderedSetOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__asSequence = new ExecutorOperation("asSequence", Parameters._, Types._Collection,
+			5, org.eclipse.ocl.examples.library.collection.CollectionAsSequenceOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__asSet = new ExecutorOperation("asSet", Parameters._, Types._Collection,
+			6, org.eclipse.ocl.examples.library.collection.CollectionAsSetOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Collection__collect_V = new ExecutorTypeParameter(LIBRARY, "V");
-		public static final @NonNull ExecutorOperation _Collection__collect = new ExecutorOperation("collect",
-			Types._Collection, 7, org.eclipse.ocl.examples.library.iterator.CollectIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
+		public static final @NonNull ExecutorOperation _Collection__collect = new ExecutorOperation("collect", Parameters._Lambda_12, Types._Collection,
+			7, org.eclipse.ocl.examples.library.iterator.CollectIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Collection__collectNested_V = new ExecutorTypeParameter(LIBRARY, "V");
-		public static final @NonNull ExecutorOperation _Collection__collectNested = new ExecutorOperation("collectNested",
-			Types._Collection, 8, org.eclipse.ocl.examples.library.iterator.CollectNestedIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
-		public static final @NonNull ExecutorOperation _Collection__count = new ExecutorOperation("count",
-			Types._Collection, 9, org.eclipse.ocl.examples.library.collection.CollectionCountOperation.INSTANCE,
-				OCLstdlibTables.Types._OclAny);
-		public static final @NonNull ExecutorOperation _Collection__excludes = new ExecutorOperation("excludes",
-			Types._Collection, 10, org.eclipse.ocl.examples.library.collection.CollectionExcludesOperation.INSTANCE,
-				OCLstdlibTables.Types._OclAny);
+		public static final @NonNull ExecutorOperation _Collection__collectNested = new ExecutorOperation("collectNested", Parameters._Lambda_19, Types._Collection,
+			8, org.eclipse.ocl.examples.library.iterator.CollectNestedIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__count = new ExecutorOperation("count", Parameters._OclAny, Types._Collection,
+			9, org.eclipse.ocl.examples.library.collection.CollectionCountOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__excludes = new ExecutorOperation("excludes", Parameters._OclAny, Types._Collection,
+			10, org.eclipse.ocl.examples.library.collection.CollectionExcludesOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Collection__excludesAll_T2 = new ExecutorTypeParameter(LIBRARY, "T2");
-		public static final @NonNull ExecutorOperation _Collection__excludesAll = new ExecutorOperation("excludesAll",
-			Types._Collection, 11, org.eclipse.ocl.examples.library.collection.CollectionExcludesAllOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Operations.__Collection__excludesAll_T2));
-		public static final @NonNull ExecutorOperation _Collection__excluding = new ExecutorOperation("excluding",
-			Types._Collection, 12, org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE,
-				OCLstdlibTables.Types._OclAny);
-		public static final @NonNull ExecutorOperation _Collection__1_exists = new ExecutorOperation("exists",
-			Types._Collection, 13, org.eclipse.ocl.examples.library.iterator.ExistsIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
-		public static final @NonNull ExecutorOperation _Collection__0_exists = new ExecutorOperation("exists",
-			Types._Collection, 14, org.eclipse.ocl.examples.library.iterator.ExistsIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
+		public static final @NonNull ExecutorOperation _Collection__excludesAll = new ExecutorOperation("excludesAll", Parameters._Collection, Types._Collection,
+			11, org.eclipse.ocl.examples.library.collection.CollectionExcludesAllOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__excluding = new ExecutorOperation("excluding", Parameters._OclAny, Types._Collection,
+			12, org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__1_exists = new ExecutorOperation("exists", Parameters._Lambda_6, Types._Collection,
+			13, org.eclipse.ocl.examples.library.iterator.ExistsIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__0_exists = new ExecutorOperation("exists", Parameters._Lambda_6, Types._Collection,
+			14, org.eclipse.ocl.examples.library.iterator.ExistsIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Collection__flatten_T2 = new ExecutorTypeParameter(LIBRARY, "T2");
-		public static final @NonNull ExecutorOperation _Collection__flatten = new ExecutorOperation("flatten",
-			Types._Collection, 15, org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Collection__1_forAll = new ExecutorOperation("forAll",
-			Types._Collection, 16, org.eclipse.ocl.examples.library.iterator.ForAllIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
-		public static final @NonNull ExecutorOperation _Collection__0_forAll = new ExecutorOperation("forAll",
-			Types._Collection, 17, org.eclipse.ocl.examples.library.iterator.ForAllIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
-		public static final @NonNull ExecutorOperation _Collection__includes = new ExecutorOperation("includes",
-			Types._Collection, 18, org.eclipse.ocl.examples.library.collection.CollectionIncludesOperation.INSTANCE,
-				OCLstdlibTables.Types._OclAny);
+		public static final @NonNull ExecutorOperation _Collection__flatten = new ExecutorOperation("flatten", Parameters._, Types._Collection,
+			15, org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__1_forAll = new ExecutorOperation("forAll", Parameters._Lambda_6, Types._Collection,
+			16, org.eclipse.ocl.examples.library.iterator.ForAllIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__0_forAll = new ExecutorOperation("forAll", Parameters._Lambda_6, Types._Collection,
+			17, org.eclipse.ocl.examples.library.iterator.ForAllIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__includes = new ExecutorOperation("includes", Parameters._OclAny, Types._Collection,
+			18, org.eclipse.ocl.examples.library.collection.CollectionIncludesOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Collection__includesAll_T2 = new ExecutorTypeParameter(LIBRARY, "T2");
-		public static final @NonNull ExecutorOperation _Collection__includesAll = new ExecutorOperation("includesAll",
-			Types._Collection, 19, org.eclipse.ocl.examples.library.collection.CollectionIncludesAllOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Operations.__Collection__includesAll_T2));
-		public static final @NonNull ExecutorOperation _Collection__including = new ExecutorOperation("including",
-			Types._Collection, 20, org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE,
-				OCLstdlibTables.Types._Collection_T);
-		public static final @NonNull ExecutorOperation _Collection__isEmpty = new ExecutorOperation("isEmpty",
-			Types._Collection, 21, org.eclipse.ocl.examples.library.collection.CollectionIsEmptyOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Collection__isUnique = new ExecutorOperation("isUnique",
-			Types._Collection, 22, org.eclipse.ocl.examples.library.iterator.IsUniqueIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
+		public static final @NonNull ExecutorOperation _Collection__includesAll = new ExecutorOperation("includesAll", Parameters._Collection_7, Types._Collection,
+			19, org.eclipse.ocl.examples.library.collection.CollectionIncludesAllOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__including = new ExecutorOperation("including", Parameters._T_3, Types._Collection,
+			20, org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__isEmpty = new ExecutorOperation("isEmpty", Parameters._, Types._Collection,
+			21, org.eclipse.ocl.examples.library.collection.CollectionIsEmptyOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__isUnique = new ExecutorOperation("isUnique", Parameters._Lambda_4, Types._Collection,
+			22, org.eclipse.ocl.examples.library.iterator.IsUniqueIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Collection__iterate_Tacc = new ExecutorTypeParameter(LIBRARY, "Tacc");
-		public static final @NonNull ExecutorOperation _Collection__iterate = new ExecutorOperation("iterate",
-			Types._Collection, 23, org.eclipse.ocl.examples.library.iterator.IterateIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
-		public static final @NonNull ExecutorOperation _Collection__max = new ExecutorOperation("max",
-			Types._Collection, 24, org.eclipse.ocl.examples.library.collection.CollectionMaxOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Collection__min = new ExecutorOperation("min",
-			Types._Collection, 25, org.eclipse.ocl.examples.library.collection.CollectionMinOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Collection__notEmpty = new ExecutorOperation("notEmpty",
-			Types._Collection, 26, org.eclipse.ocl.examples.library.collection.CollectionNotEmptyOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Collection__one = new ExecutorOperation("one",
-			Types._Collection, 27, org.eclipse.ocl.examples.library.iterator.OneIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
+		public static final @NonNull ExecutorOperation _Collection__iterate = new ExecutorOperation("iterate", Parameters._Lambda_2, Types._Collection,
+			23, org.eclipse.ocl.examples.library.iterator.IterateIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__max = new ExecutorOperation("max", Parameters._, Types._Collection,
+			24, org.eclipse.ocl.examples.library.collection.CollectionMaxOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__min = new ExecutorOperation("min", Parameters._, Types._Collection,
+			25, org.eclipse.ocl.examples.library.collection.CollectionMinOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__notEmpty = new ExecutorOperation("notEmpty", Parameters._, Types._Collection,
+			26, org.eclipse.ocl.examples.library.collection.CollectionNotEmptyOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__one = new ExecutorOperation("one", Parameters._Lambda_6, Types._Collection,
+			27, org.eclipse.ocl.examples.library.iterator.OneIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Collection__product_T2 = new ExecutorTypeParameter(LIBRARY, "T2");
-		public static final @NonNull ExecutorOperation _Collection__product = new ExecutorOperation("product",
-			Types._Collection, 28, org.eclipse.ocl.examples.library.collection.CollectionProductOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Operations.__Collection__product_T2));
-		public static final @NonNull ExecutorOperation _Collection__reject = new ExecutorOperation("reject",
-			Types._Collection, 29, org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
-		public static final @NonNull ExecutorOperation _Collection__select = new ExecutorOperation("select",
-			Types._Collection, 30, org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
+		public static final @NonNull ExecutorOperation _Collection__product = new ExecutorOperation("product", Parameters._Collection_4, Types._Collection,
+			28, org.eclipse.ocl.examples.library.collection.CollectionProductOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__reject = new ExecutorOperation("reject", Parameters._Lambda_6, Types._Collection,
+			29, org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__select = new ExecutorOperation("select", Parameters._Lambda_6, Types._Collection,
+			30, org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Collection__selectByKind_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _Collection__selectByKind = new ExecutorOperation("selectByKind",
-			Types._Collection, 31, org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Collection__selectByKind_TT));
+		public static final @NonNull ExecutorOperation _Collection__selectByKind = new ExecutorOperation("selectByKind", Parameters._Metaclass_5, Types._Collection,
+			31, org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Collection__selectByType_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _Collection__selectByType = new ExecutorOperation("selectByType",
-			Types._Collection, 32, org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Collection__selectByType_TT));
-		public static final @NonNull ExecutorOperation _Collection__size = new ExecutorOperation("size",
-			Types._Collection, 33, org.eclipse.ocl.examples.library.collection.CollectionSizeOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Collection__sortedBy = new ExecutorOperation("sortedBy",
-			Types._Collection, 34, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
-		public static final @NonNull ExecutorOperation _Collection__sum = new ExecutorOperation("sum",
-			Types._Collection, 35, org.eclipse.ocl.examples.library.collection.CollectionSumOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__selectByType = new ExecutorOperation("selectByType", Parameters._Metaclass_12, Types._Collection,
+			32, org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__size = new ExecutorOperation("size", Parameters._, Types._Collection,
+			33, org.eclipse.ocl.examples.library.collection.CollectionSizeOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__sortedBy = new ExecutorOperation("sortedBy", Parameters._Lambda_4, Types._Collection,
+			34, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _Collection__sum = new ExecutorOperation("sum", Parameters._, Types._Collection,
+			35, org.eclipse.ocl.examples.library.collection.CollectionSumOperation.INSTANCE);
 	
-		public static final @NonNull ExecutorOperation _Enumeration__allInstances = new ExecutorOperation("allInstances",
-			Types._Enumeration, 0, org.eclipse.ocl.examples.library.enumeration.EnumerationAllInstancesOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Enumeration__allInstances = new ExecutorOperation("allInstances", Parameters._, Types._Enumeration,
+			0, org.eclipse.ocl.examples.library.enumeration.EnumerationAllInstancesOperation.INSTANCE);
 	
-		public static final @NonNull ExecutorOperation _Integer___mul_ = new ExecutorOperation("*",
-			Types._Integer, 0, org.eclipse.ocl.examples.library.numeric.NumericTimesOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Integer___add_ = new ExecutorOperation("+",
-			Types._Integer, 1, org.eclipse.ocl.examples.library.integer.IntegerPlusOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Integer__0__sub_ = new ExecutorOperation("-",
-			Types._Integer, 2, org.eclipse.ocl.examples.library.numeric.NumericNegateOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Integer__1__sub_ = new ExecutorOperation("-",
-			Types._Integer, 3, org.eclipse.ocl.examples.library.integer.IntegerMinusOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Integer___div_ = new ExecutorOperation("/",
-			Types._Integer, 4, org.eclipse.ocl.examples.library.numeric.NumericDivideOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Integer__abs = new ExecutorOperation("abs",
-			Types._Integer, 5, org.eclipse.ocl.examples.library.numeric.NumericAbsOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Integer__compareTo = new ExecutorOperation("compareTo",
-			Types._Integer, 6, org.eclipse.ocl.examples.library.integer.IntegerCompareToOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Integer__div = new ExecutorOperation("div",
-			Types._Integer, 7, org.eclipse.ocl.examples.library.numeric.NumericDivOperation.INSTANCE,
-				OCLstdlibTables.Types._Integer);
-		public static final @NonNull ExecutorOperation _Integer__max = new ExecutorOperation("max",
-			Types._Integer, 8, org.eclipse.ocl.examples.library.numeric.NumericMaxOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Integer__min = new ExecutorOperation("min",
-			Types._Integer, 9, org.eclipse.ocl.examples.library.numeric.NumericMinOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Integer__mod = new ExecutorOperation("mod",
-			Types._Integer, 10, org.eclipse.ocl.examples.library.numeric.NumericModOperation.INSTANCE,
-				OCLstdlibTables.Types._Integer);
-		public static final @NonNull ExecutorOperation _Integer__toString = new ExecutorOperation("toString",
-			Types._Integer, 11, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Integer___mul_ = new ExecutorOperation("*", Parameters._OclSelf, Types._Integer,
+			0, org.eclipse.ocl.examples.library.numeric.NumericTimesOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Integer___add_ = new ExecutorOperation("+", Parameters._OclSelf, Types._Integer,
+			1, org.eclipse.ocl.examples.library.integer.IntegerPlusOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Integer__0__sub_ = new ExecutorOperation("-", Parameters._, Types._Integer,
+			2, org.eclipse.ocl.examples.library.numeric.NumericNegateOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Integer__1__sub_ = new ExecutorOperation("-", Parameters._OclSelf, Types._Integer,
+			3, org.eclipse.ocl.examples.library.integer.IntegerMinusOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Integer___div_ = new ExecutorOperation("/", Parameters._OclSelf, Types._Integer,
+			4, org.eclipse.ocl.examples.library.numeric.NumericDivideOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Integer__abs = new ExecutorOperation("abs", Parameters._, Types._Integer,
+			5, org.eclipse.ocl.examples.library.numeric.NumericAbsOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Integer__compareTo = new ExecutorOperation("compareTo", Parameters._OclSelf, Types._Integer,
+			6, org.eclipse.ocl.examples.library.integer.IntegerCompareToOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Integer__div = new ExecutorOperation("div", Parameters._Integer, Types._Integer,
+			7, org.eclipse.ocl.examples.library.numeric.NumericDivOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Integer__max = new ExecutorOperation("max", Parameters._OclSelf, Types._Integer,
+			8, org.eclipse.ocl.examples.library.numeric.NumericMaxOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Integer__min = new ExecutorOperation("min", Parameters._OclSelf, Types._Integer,
+			9, org.eclipse.ocl.examples.library.numeric.NumericMinOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Integer__mod = new ExecutorOperation("mod", Parameters._Integer, Types._Integer,
+			10, org.eclipse.ocl.examples.library.numeric.NumericModOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Integer__toString = new ExecutorOperation("toString", Parameters._, Types._Integer,
+			11, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
 	
-		public static final @NonNull ExecutorOperation _OclAny___lt__gt_ = new ExecutorOperation("<>",
-			Types._OclAny, 0, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _OclAny___eq_ = new ExecutorOperation("=",
-			Types._OclAny, 1, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _OclAny__oclAsSet = new ExecutorOperation("oclAsSet",
-			Types._OclAny, 2, org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclAny___lt__gt_ = new ExecutorOperation("<>", Parameters._OclSelf, Types._OclAny,
+			0, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclAny___eq_ = new ExecutorOperation("=", Parameters._OclSelf, Types._OclAny,
+			1, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclAny__oclAsSet = new ExecutorOperation("oclAsSet", Parameters._, Types._OclAny,
+			2, org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __OclAny__oclAsType_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _OclAny__oclAsType = new ExecutorOperation("oclAsType",
-			Types._OclAny, 3, org.eclipse.ocl.examples.library.oclany.OclAnyOclAsTypeOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OclAny__oclAsType_TT));
-		public static final @NonNull ExecutorOperation _OclAny__oclIsInState = new ExecutorOperation("oclIsInState",
-			Types._OclAny, 4, org.eclipse.ocl.examples.library.oclany.OclAnyOclIsInStateOperation.INSTANCE,
-				OCLstdlibTables.Types._OclState);
-		public static final @NonNull ExecutorOperation _OclAny__oclIsInvalid = new ExecutorOperation("oclIsInvalid",
-			Types._OclAny, 5, org.eclipse.ocl.examples.library.oclany.OclAnyOclIsInvalidOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclAny__oclAsType = new ExecutorOperation("oclAsType", Parameters._Metaclass_8, Types._OclAny,
+			3, org.eclipse.ocl.examples.library.oclany.OclAnyOclAsTypeOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclAny__oclIsInState = new ExecutorOperation("oclIsInState", Parameters._OclState, Types._OclAny,
+			4, org.eclipse.ocl.examples.library.oclany.OclAnyOclIsInStateOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclAny__oclIsInvalid = new ExecutorOperation("oclIsInvalid", Parameters._, Types._OclAny,
+			5, org.eclipse.ocl.examples.library.oclany.OclAnyOclIsInvalidOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __OclAny__oclIsKindOf_T = new ExecutorTypeParameter(LIBRARY, "T");
-		public static final @NonNull ExecutorOperation _OclAny__oclIsKindOf = new ExecutorOperation("oclIsKindOf",
-			Types._OclAny, 6, org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OclAny__oclIsKindOf_T));
-		public static final @NonNull ExecutorOperation _OclAny__oclIsNew = new ExecutorOperation("oclIsNew",
-			Types._OclAny, 7, org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclAny__oclIsKindOf = new ExecutorOperation("oclIsKindOf", Parameters._Metaclass_2, Types._OclAny,
+			6, org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclAny__oclIsNew = new ExecutorOperation("oclIsNew", Parameters._, Types._OclAny,
+			7, org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __OclAny__oclIsTypeOf_T = new ExecutorTypeParameter(LIBRARY, "T");
-		public static final @NonNull ExecutorOperation _OclAny__oclIsTypeOf = new ExecutorOperation("oclIsTypeOf",
-			Types._OclAny, 8, org.eclipse.ocl.examples.library.oclany.OclAnyOclIsTypeOfOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OclAny__oclIsTypeOf_T));
-		public static final @NonNull ExecutorOperation _OclAny__oclIsUndefined = new ExecutorOperation("oclIsUndefined",
-			Types._OclAny, 9, org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _OclAny__oclType = new ExecutorOperation("oclType",
-			Types._OclAny, 10, org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _OclAny__toString = new ExecutorOperation("toString",
-			Types._OclAny, 11, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclAny__oclIsTypeOf = new ExecutorOperation("oclIsTypeOf", Parameters._Metaclass_3, Types._OclAny,
+			8, org.eclipse.ocl.examples.library.oclany.OclAnyOclIsTypeOfOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclAny__oclIsUndefined = new ExecutorOperation("oclIsUndefined", Parameters._, Types._OclAny,
+			9, org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclAny__oclType = new ExecutorOperation("oclType", Parameters._, Types._OclAny,
+			10, org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclAny__toString = new ExecutorOperation("toString", Parameters._, Types._OclAny,
+			11, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
 	
-		public static final @NonNull ExecutorOperation _OclComparable___lt_ = new ExecutorOperation("<",
-			Types._OclComparable, 0, org.eclipse.ocl.examples.library.oclany.OclComparableLessThanOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _OclComparable___lt__eq_ = new ExecutorOperation("<=",
-			Types._OclComparable, 1, org.eclipse.ocl.examples.library.oclany.OclComparableLessThanEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _OclComparable___gt_ = new ExecutorOperation(">",
-			Types._OclComparable, 2, org.eclipse.ocl.examples.library.oclany.OclComparableGreaterThanOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _OclComparable___gt__eq_ = new ExecutorOperation(">=",
-			Types._OclComparable, 3, org.eclipse.ocl.examples.library.oclany.OclComparableGreaterThanEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _OclComparable__compareTo = new ExecutorOperation("compareTo",
-			Types._OclComparable, 4, org.eclipse.ocl.examples.library.oclany.OclComparableCompareToOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
+		public static final @NonNull ExecutorOperation _OclComparable___lt_ = new ExecutorOperation("<", Parameters._OclSelf, Types._OclComparable,
+			0, org.eclipse.ocl.examples.library.oclany.OclComparableLessThanOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclComparable___lt__eq_ = new ExecutorOperation("<=", Parameters._OclSelf, Types._OclComparable,
+			1, org.eclipse.ocl.examples.library.oclany.OclComparableLessThanEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclComparable___gt_ = new ExecutorOperation(">", Parameters._OclSelf, Types._OclComparable,
+			2, org.eclipse.ocl.examples.library.oclany.OclComparableGreaterThanOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclComparable___gt__eq_ = new ExecutorOperation(">=", Parameters._OclSelf, Types._OclComparable,
+			3, org.eclipse.ocl.examples.library.oclany.OclComparableGreaterThanEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclComparable__compareTo = new ExecutorOperation("compareTo", Parameters._OclSelf, Types._OclComparable,
+			4, org.eclipse.ocl.examples.library.oclany.OclComparableCompareToOperation.INSTANCE);
 	
-		public static final @NonNull ExecutorOperation _OclElement__allInstances = new ExecutorOperation("allInstances",
-			Types._OclElement, 0, org.eclipse.ocl.examples.library.classifier.ClassifierAllInstancesOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _OclElement__oclContainer = new ExecutorOperation("oclContainer",
-			Types._OclElement, 1, org.eclipse.ocl.examples.library.classifier.ClassifierOclContainerOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _OclElement__oclContents = new ExecutorOperation("oclContents",
-			Types._OclElement, 2, org.eclipse.ocl.examples.library.classifier.ClassifierOclContentsOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclElement__allInstances = new ExecutorOperation("allInstances", Parameters._, Types._OclElement,
+			0, org.eclipse.ocl.examples.library.classifier.ClassifierAllInstancesOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclElement__oclContainer = new ExecutorOperation("oclContainer", Parameters._, Types._OclElement,
+			1, org.eclipse.ocl.examples.library.classifier.ClassifierOclContainerOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclElement__oclContents = new ExecutorOperation("oclContents", Parameters._, Types._OclElement,
+			2, org.eclipse.ocl.examples.library.classifier.ClassifierOclContentsOperation.INSTANCE);
 	
-		public static final @NonNull ExecutorOperation _OclInvalid___lt__gt_ = new ExecutorOperation("<>",
-			Types._OclInvalid, 0, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _OclInvalid___eq_ = new ExecutorOperation("=",
-			Types._OclInvalid, 1, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _OclInvalid__allInstances = new ExecutorOperation("allInstances",
-			Types._OclInvalid, 2, org.eclipse.ocl.examples.library.oclinvalid.OclInvalidAllInstancesOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _OclInvalid__oclBadOperation = new ExecutorOperation("oclBadOperation",
-			Types._OclInvalid, 3, null);
-		public static final @NonNull ExecutorOperation _OclInvalid__toString = new ExecutorOperation("toString",
-			Types._OclInvalid, 4, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclInvalid___lt__gt_ = new ExecutorOperation("<>", Parameters._OclSelf, Types._OclInvalid,
+			0, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclInvalid___eq_ = new ExecutorOperation("=", Parameters._OclSelf, Types._OclInvalid,
+			1, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclInvalid__allInstances = new ExecutorOperation("allInstances", Parameters._, Types._OclInvalid,
+			2, org.eclipse.ocl.examples.library.oclinvalid.OclInvalidAllInstancesOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclInvalid__oclBadOperation = new ExecutorOperation("oclBadOperation", Parameters._, Types._OclInvalid,
+			3, null);
+		public static final @NonNull ExecutorOperation _OclInvalid__toString = new ExecutorOperation("toString", Parameters._, Types._OclInvalid,
+			4, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
 	
-		public static final @NonNull ExecutorOperation _OclMessage__hasReturned = new ExecutorOperation("hasReturned",
-			Types._OclMessage, 0, org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _OclMessage__isOperationCall = new ExecutorOperation("isOperationCall",
-			Types._OclMessage, 1, org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _OclMessage__isSignalSent = new ExecutorOperation("isSignalSent",
-			Types._OclMessage, 2, org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _OclMessage__result = new ExecutorOperation("result",
-			Types._OclMessage, 3, org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclMessage__hasReturned = new ExecutorOperation("hasReturned", Parameters._, Types._OclMessage,
+			0, org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclMessage__isOperationCall = new ExecutorOperation("isOperationCall", Parameters._, Types._OclMessage,
+			1, org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclMessage__isSignalSent = new ExecutorOperation("isSignalSent", Parameters._, Types._OclMessage,
+			2, org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclMessage__result = new ExecutorOperation("result", Parameters._, Types._OclMessage,
+			3, org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation.INSTANCE);
 	
-		public static final @NonNull ExecutorOperation _OclSummable__sum = new ExecutorOperation("sum",
-			Types._OclSummable, 0, null,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _OclSummable__zero = new ExecutorOperation("zero",
-			Types._OclSummable, 1, null);
+		public static final @NonNull ExecutorOperation _OclSummable__sum = new ExecutorOperation("sum", Parameters._OclSelf, Types._OclSummable,
+			0, null);
+		public static final @NonNull ExecutorOperation _OclSummable__zero = new ExecutorOperation("zero", Parameters._, Types._OclSummable,
+			1, null);
 	
-		public static final @NonNull ExecutorOperation _OclTuple___lt__gt_ = new ExecutorOperation("<>",
-			Types._OclTuple, 0, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _OclTuple___eq_ = new ExecutorOperation("=",
-			Types._OclTuple, 1, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
+		public static final @NonNull ExecutorOperation _OclTuple___lt__gt_ = new ExecutorOperation("<>", Parameters._OclSelf, Types._OclTuple,
+			0, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclTuple___eq_ = new ExecutorOperation("=", Parameters._OclSelf, Types._OclTuple,
+			1, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
 	
-		public static final @NonNull ExecutorOperation _OclType__conformsTo = new ExecutorOperation("conformsTo",
-			Types._OclType, 0, org.eclipse.ocl.examples.library.classifier.OclTypeConformsToOperation.INSTANCE,
-				OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorOperation _OclType__conformsTo = new ExecutorOperation("conformsTo", Parameters._OclType, Types._OclType,
+			0, org.eclipse.ocl.examples.library.classifier.OclTypeConformsToOperation.INSTANCE);
 	
-		public static final @NonNull ExecutorOperation _OclVoid___lt__gt_ = new ExecutorOperation("<>",
-			Types._OclVoid, 0, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _OclVoid___eq_ = new ExecutorOperation("=",
-			Types._OclVoid, 1, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _OclVoid__and = new ExecutorOperation("and",
-			Types._OclVoid, 2, org.eclipse.ocl.examples.library.oclvoid.OclVoidAndOperation.INSTANCE,
-				OCLstdlibTables.Types._Boolean);
-		public static final @NonNull ExecutorOperation _OclVoid__implies = new ExecutorOperation("implies",
-			Types._OclVoid, 3, org.eclipse.ocl.examples.library.oclvoid.OclVoidImpliesOperation.INSTANCE,
-				OCLstdlibTables.Types._Boolean);
-		public static final @NonNull ExecutorOperation _OclVoid__or = new ExecutorOperation("or",
-			Types._OclVoid, 4, org.eclipse.ocl.examples.library.oclvoid.OclVoidOrOperation.INSTANCE,
-				OCLstdlibTables.Types._Boolean);
-		public static final @NonNull ExecutorOperation _OclVoid__allInstances = new ExecutorOperation("allInstances",
-			Types._OclVoid, 5, org.eclipse.ocl.examples.library.oclvoid.OclVoidAllInstancesOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _OclVoid__toString = new ExecutorOperation("toString",
-			Types._OclVoid, 6, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclVoid___lt__gt_ = new ExecutorOperation("<>", Parameters._OclSelf, Types._OclVoid,
+			0, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclVoid___eq_ = new ExecutorOperation("=", Parameters._OclSelf, Types._OclVoid,
+			1, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclVoid__and = new ExecutorOperation("and", Parameters._Boolean, Types._OclVoid,
+			2, org.eclipse.ocl.examples.library.oclvoid.OclVoidAndOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclVoid__implies = new ExecutorOperation("implies", Parameters._Boolean, Types._OclVoid,
+			3, org.eclipse.ocl.examples.library.oclvoid.OclVoidImpliesOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclVoid__or = new ExecutorOperation("or", Parameters._Boolean, Types._OclVoid,
+			4, org.eclipse.ocl.examples.library.oclvoid.OclVoidOrOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclVoid__allInstances = new ExecutorOperation("allInstances", Parameters._, Types._OclVoid,
+			5, org.eclipse.ocl.examples.library.oclvoid.OclVoidAllInstancesOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclVoid__toString = new ExecutorOperation("toString", Parameters._, Types._OclVoid,
+			6, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
 	
-		public static final @NonNull ExecutorOperation _OrderedSet___sub_ = new ExecutorOperation("-",
-			Types._OrderedSet, 0, org.eclipse.ocl.examples.library.collection.SetMinusOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "UniqueCollection", OCLstdlibTables.Types._OclAny));
-		public static final @NonNull ExecutorOperation _OrderedSet___lt__gt_ = new ExecutorOperation("<>",
-			Types._OrderedSet, 1, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _OrderedSet___eq_ = new ExecutorOperation("=",
-			Types._OrderedSet, 2, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _OrderedSet__append = new ExecutorOperation("append",
-			Types._OrderedSet, 3, org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendOperation.INSTANCE,
-				OCLstdlibTables.Types._OrderedSet_T);
-		public static final @NonNull ExecutorOperation _OrderedSet__excluding = new ExecutorOperation("excluding",
-			Types._OrderedSet, 4, org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE,
-				OCLstdlibTables.Types._OclAny);
+		public static final @NonNull ExecutorOperation _OrderedSet___sub_ = new ExecutorOperation("-", Parameters._UniqueCollection_1, Types._OrderedSet,
+			0, org.eclipse.ocl.examples.library.collection.SetMinusOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OrderedSet___lt__gt_ = new ExecutorOperation("<>", Parameters._OclSelf, Types._OrderedSet,
+			1, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OrderedSet___eq_ = new ExecutorOperation("=", Parameters._OclSelf, Types._OrderedSet,
+			2, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OrderedSet__append = new ExecutorOperation("append", Parameters._T, Types._OrderedSet,
+			3, org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OrderedSet__excluding = new ExecutorOperation("excluding", Parameters._OclAny, Types._OrderedSet,
+			4, org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __OrderedSet__flatten_T2 = new ExecutorTypeParameter(LIBRARY, "T2");
-		public static final @NonNull ExecutorOperation _OrderedSet__flatten = new ExecutorOperation("flatten",
-			Types._OrderedSet, 5, org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _OrderedSet__including = new ExecutorOperation("including",
-			Types._OrderedSet, 6, org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE,
-				OCLstdlibTables.Types._OrderedSet_T);
-		public static final @NonNull ExecutorOperation _OrderedSet__insertAt = new ExecutorOperation("insertAt",
-			Types._OrderedSet, 7, org.eclipse.ocl.examples.library.collection.OrderedCollectionInsertAtOperation.INSTANCE,
-				OCLstdlibTables.Types._Integer,
-				OCLstdlibTables.Types._OrderedSet_T);
-		public static final @NonNull ExecutorOperation _OrderedSet__intersection = new ExecutorOperation("intersection",
-			Types._OrderedSet, 8, org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Types._OrderedSet_T));
-		public static final @NonNull ExecutorOperation _OrderedSet__prepend = new ExecutorOperation("prepend",
-			Types._OrderedSet, 9, org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependOperation.INSTANCE,
-				OCLstdlibTables.Types._OrderedSet_T);
-		public static final @NonNull ExecutorOperation _OrderedSet__reject = new ExecutorOperation("reject",
-			Types._OrderedSet, 10, org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._OrderedSet_T));
-		public static final @NonNull ExecutorOperation _OrderedSet__reverse = new ExecutorOperation("reverse",
-			Types._OrderedSet, 11, org.eclipse.ocl.examples.library.collection.OrderedCollectionReverseOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _OrderedSet__select = new ExecutorOperation("select",
-			Types._OrderedSet, 12, org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._OrderedSet_T));
+		public static final @NonNull ExecutorOperation _OrderedSet__flatten = new ExecutorOperation("flatten", Parameters._, Types._OrderedSet,
+			5, org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OrderedSet__including = new ExecutorOperation("including", Parameters._T, Types._OrderedSet,
+			6, org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OrderedSet__insertAt = new ExecutorOperation("insertAt", Parameters._Integer_T, Types._OrderedSet,
+			7, org.eclipse.ocl.examples.library.collection.OrderedCollectionInsertAtOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OrderedSet__intersection = new ExecutorOperation("intersection", Parameters._Collection_5, Types._OrderedSet,
+			8, org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OrderedSet__prepend = new ExecutorOperation("prepend", Parameters._T, Types._OrderedSet,
+			9, org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OrderedSet__reject = new ExecutorOperation("reject", Parameters._Lambda_13, Types._OrderedSet,
+			10, org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _OrderedSet__reverse = new ExecutorOperation("reverse", Parameters._, Types._OrderedSet,
+			11, org.eclipse.ocl.examples.library.collection.OrderedCollectionReverseOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OrderedSet__select = new ExecutorOperation("select", Parameters._Lambda_13, Types._OrderedSet,
+			12, org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __OrderedSet__selectByKind_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _OrderedSet__selectByKind = new ExecutorOperation("selectByKind",
-			Types._OrderedSet, 13, org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OrderedSet__selectByKind_TT));
+		public static final @NonNull ExecutorOperation _OrderedSet__selectByKind = new ExecutorOperation("selectByKind", Parameters._Metaclass, Types._OrderedSet,
+			13, org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __OrderedSet__selectByType_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _OrderedSet__selectByType = new ExecutorOperation("selectByType",
-			Types._OrderedSet, 14, org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OrderedSet__selectByType_TT));
-		public static final @NonNull ExecutorOperation _OrderedSet__sortedBy = new ExecutorOperation("sortedBy",
-			Types._OrderedSet, 15, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._OrderedSet_T));
-		public static final @NonNull ExecutorOperation _OrderedSet__subOrderedSet = new ExecutorOperation("subOrderedSet",
-			Types._OrderedSet, 16, org.eclipse.ocl.examples.library.collection.OrderedSetSubOrderedSetOperation.INSTANCE,
-				OCLstdlibTables.Types._Integer);
-		public static final @NonNull ExecutorOperation _OrderedSet__union = new ExecutorOperation("union",
-			Types._OrderedSet, 17, org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Sequence", OCLstdlibTables.Types._OrderedSet_T));
+		public static final @NonNull ExecutorOperation _OrderedSet__selectByType = new ExecutorOperation("selectByType", Parameters._Metaclass_4, Types._OrderedSet,
+			14, org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OrderedSet__sortedBy = new ExecutorOperation("sortedBy", Parameters._Lambda_14, Types._OrderedSet,
+			15, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _OrderedSet__subOrderedSet = new ExecutorOperation("subOrderedSet", Parameters._Integer_Integer, Types._OrderedSet,
+			16, org.eclipse.ocl.examples.library.collection.OrderedSetSubOrderedSetOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OrderedSet__union = new ExecutorOperation("union", Parameters._Sequence_1, Types._OrderedSet,
+			17, org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE);
 	
-		public static final @NonNull ExecutorOperation _Real___mul_ = new ExecutorOperation("*",
-			Types._Real, 0, org.eclipse.ocl.examples.library.numeric.NumericTimesOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Real___add_ = new ExecutorOperation("+",
-			Types._Real, 1, org.eclipse.ocl.examples.library.real.RealPlusOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Real__1__sub_ = new ExecutorOperation("-",
-			Types._Real, 2, org.eclipse.ocl.examples.library.numeric.NumericNegateOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real__0__sub_ = new ExecutorOperation("-",
-			Types._Real, 3, org.eclipse.ocl.examples.library.real.RealMinusOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Real___div_ = new ExecutorOperation("/",
-			Types._Real, 4, org.eclipse.ocl.examples.library.numeric.NumericDivideOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Real___lt_ = new ExecutorOperation("<",
-			Types._Real, 5, org.eclipse.ocl.examples.library.numeric.NumericLessThanOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Real___lt__eq_ = new ExecutorOperation("<=",
-			Types._Real, 6, org.eclipse.ocl.examples.library.numeric.NumericLessThanEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Real___lt__gt_ = new ExecutorOperation("<>",
-			Types._Real, 7, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Real___eq_ = new ExecutorOperation("=",
-			Types._Real, 8, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Real___gt_ = new ExecutorOperation(">",
-			Types._Real, 9, org.eclipse.ocl.examples.library.numeric.NumericGreaterThanOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Real___gt__eq_ = new ExecutorOperation(">=",
-			Types._Real, 10, org.eclipse.ocl.examples.library.numeric.NumericGreaterThanEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Real__abs = new ExecutorOperation("abs",
-			Types._Real, 11, org.eclipse.ocl.examples.library.numeric.NumericAbsOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real__compareTo = new ExecutorOperation("compareTo",
-			Types._Real, 12, org.eclipse.ocl.examples.library.real.RealCompareToOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Real__floor = new ExecutorOperation("floor",
-			Types._Real, 13, org.eclipse.ocl.examples.library.numeric.NumericFloorOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real__max = new ExecutorOperation("max",
-			Types._Real, 14, org.eclipse.ocl.examples.library.numeric.NumericMaxOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Real__min = new ExecutorOperation("min",
-			Types._Real, 15, org.eclipse.ocl.examples.library.numeric.NumericMinOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Real__round = new ExecutorOperation("round",
-			Types._Real, 16, org.eclipse.ocl.examples.library.numeric.NumericRoundOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real__toString = new ExecutorOperation("toString",
-			Types._Real, 17, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Real___mul_ = new ExecutorOperation("*", Parameters._OclSelf, Types._Real,
+			0, org.eclipse.ocl.examples.library.numeric.NumericTimesOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Real___add_ = new ExecutorOperation("+", Parameters._OclSelf, Types._Real,
+			1, org.eclipse.ocl.examples.library.real.RealPlusOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Real__1__sub_ = new ExecutorOperation("-", Parameters._, Types._Real,
+			2, org.eclipse.ocl.examples.library.numeric.NumericNegateOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Real__0__sub_ = new ExecutorOperation("-", Parameters._OclSelf, Types._Real,
+			3, org.eclipse.ocl.examples.library.real.RealMinusOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Real___div_ = new ExecutorOperation("/", Parameters._OclSelf, Types._Real,
+			4, org.eclipse.ocl.examples.library.numeric.NumericDivideOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Real___lt_ = new ExecutorOperation("<", Parameters._OclSelf, Types._Real,
+			5, org.eclipse.ocl.examples.library.numeric.NumericLessThanOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Real___lt__eq_ = new ExecutorOperation("<=", Parameters._OclSelf, Types._Real,
+			6, org.eclipse.ocl.examples.library.numeric.NumericLessThanEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Real___lt__gt_ = new ExecutorOperation("<>", Parameters._OclSelf, Types._Real,
+			7, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Real___eq_ = new ExecutorOperation("=", Parameters._OclSelf, Types._Real,
+			8, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Real___gt_ = new ExecutorOperation(">", Parameters._OclSelf, Types._Real,
+			9, org.eclipse.ocl.examples.library.numeric.NumericGreaterThanOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Real___gt__eq_ = new ExecutorOperation(">=", Parameters._OclSelf, Types._Real,
+			10, org.eclipse.ocl.examples.library.numeric.NumericGreaterThanEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Real__abs = new ExecutorOperation("abs", Parameters._, Types._Real,
+			11, org.eclipse.ocl.examples.library.numeric.NumericAbsOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Real__compareTo = new ExecutorOperation("compareTo", Parameters._OclSelf, Types._Real,
+			12, org.eclipse.ocl.examples.library.real.RealCompareToOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Real__floor = new ExecutorOperation("floor", Parameters._, Types._Real,
+			13, org.eclipse.ocl.examples.library.numeric.NumericFloorOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Real__max = new ExecutorOperation("max", Parameters._OclSelf, Types._Real,
+			14, org.eclipse.ocl.examples.library.numeric.NumericMaxOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Real__min = new ExecutorOperation("min", Parameters._OclSelf, Types._Real,
+			15, org.eclipse.ocl.examples.library.numeric.NumericMinOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Real__round = new ExecutorOperation("round", Parameters._, Types._Real,
+			16, org.eclipse.ocl.examples.library.numeric.NumericRoundOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Real__toString = new ExecutorOperation("toString", Parameters._, Types._Real,
+			17, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
 	
-		public static final @NonNull ExecutorOperation _Sequence___lt__gt_ = new ExecutorOperation("<>",
-			Types._Sequence, 0, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Sequence___eq_ = new ExecutorOperation("=",
-			Types._Sequence, 1, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Sequence__append = new ExecutorOperation("append",
-			Types._Sequence, 2, org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendOperation.INSTANCE,
-				OCLstdlibTables.Types._Sequence_T);
-		public static final @NonNull ExecutorOperation _Sequence__at = new ExecutorOperation("at",
-			Types._Sequence, 3, org.eclipse.ocl.examples.library.collection.OrderedCollectionAtOperation.INSTANCE,
-				OCLstdlibTables.Types._Integer);
-		public static final @NonNull ExecutorOperation _Sequence__closure = new ExecutorOperation("closure",
-			Types._Sequence, 4, org.eclipse.ocl.examples.library.iterator.ClosureIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Sequence_T));
+		public static final @NonNull ExecutorOperation _Sequence___lt__gt_ = new ExecutorOperation("<>", Parameters._OclSelf, Types._Sequence,
+			0, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Sequence___eq_ = new ExecutorOperation("=", Parameters._OclSelf, Types._Sequence,
+			1, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Sequence__append = new ExecutorOperation("append", Parameters._T_1, Types._Sequence,
+			2, org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Sequence__at = new ExecutorOperation("at", Parameters._Integer, Types._Sequence,
+			3, org.eclipse.ocl.examples.library.collection.OrderedCollectionAtOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Sequence__closure = new ExecutorOperation("closure", Parameters._Lambda_8, Types._Sequence,
+			4, org.eclipse.ocl.examples.library.iterator.ClosureIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Sequence__collect_V = new ExecutorTypeParameter(LIBRARY, "V");
-		public static final @NonNull ExecutorOperation _Sequence__collect = new ExecutorOperation("collect",
-			Types._Sequence, 5, org.eclipse.ocl.examples.library.iterator.CollectIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Sequence_T));
+		public static final @NonNull ExecutorOperation _Sequence__collect = new ExecutorOperation("collect", Parameters._Lambda_1, Types._Sequence,
+			5, org.eclipse.ocl.examples.library.iterator.CollectIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Sequence__collectNested_V = new ExecutorTypeParameter(LIBRARY, "V");
-		public static final @NonNull ExecutorOperation _Sequence__collectNested = new ExecutorOperation("collectNested",
-			Types._Sequence, 6, org.eclipse.ocl.examples.library.iterator.CollectNestedIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Sequence_T));
-		public static final @NonNull ExecutorOperation _Sequence__excluding = new ExecutorOperation("excluding",
-			Types._Sequence, 7, org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE,
-				OCLstdlibTables.Types._OclAny);
-		public static final @NonNull ExecutorOperation _Sequence__first = new ExecutorOperation("first",
-			Types._Sequence, 8, org.eclipse.ocl.examples.library.collection.OrderedCollectionFirstOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Sequence__collectNested = new ExecutorOperation("collectNested", Parameters._Lambda_18, Types._Sequence,
+			6, org.eclipse.ocl.examples.library.iterator.CollectNestedIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _Sequence__excluding = new ExecutorOperation("excluding", Parameters._OclAny, Types._Sequence,
+			7, org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Sequence__first = new ExecutorOperation("first", Parameters._, Types._Sequence,
+			8, org.eclipse.ocl.examples.library.collection.OrderedCollectionFirstOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Sequence__flatten_T2 = new ExecutorTypeParameter(LIBRARY, "T2");
-		public static final @NonNull ExecutorOperation _Sequence__flatten = new ExecutorOperation("flatten",
-			Types._Sequence, 9, org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Sequence__including = new ExecutorOperation("including",
-			Types._Sequence, 10, org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE,
-				OCLstdlibTables.Types._Sequence_T);
-		public static final @NonNull ExecutorOperation _Sequence__indexOf = new ExecutorOperation("indexOf",
-			Types._Sequence, 11, org.eclipse.ocl.examples.library.collection.OrderedCollectionIndexOfOperation.INSTANCE,
-				OCLstdlibTables.Types._OclAny);
-		public static final @NonNull ExecutorOperation _Sequence__insertAt = new ExecutorOperation("insertAt",
-			Types._Sequence, 12, org.eclipse.ocl.examples.library.collection.OrderedCollectionInsertAtOperation.INSTANCE,
-				OCLstdlibTables.Types._Integer,
-				OCLstdlibTables.Types._Sequence_T);
-		public static final @NonNull ExecutorOperation _Sequence__0_intersection = new ExecutorOperation("intersection",
-			Types._Sequence, 13, org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Types._Sequence_T));
-		public static final @NonNull ExecutorOperation _Sequence__1_intersection = new ExecutorOperation("intersection",
-			Types._Sequence, 14, org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "UniqueCollection", OCLstdlibTables.Types._Sequence_T));
-		public static final @NonNull ExecutorOperation _Sequence__last = new ExecutorOperation("last",
-			Types._Sequence, 15, org.eclipse.ocl.examples.library.collection.OrderedCollectionLastOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Sequence__prepend = new ExecutorOperation("prepend",
-			Types._Sequence, 16, org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependOperation.INSTANCE,
-				OCLstdlibTables.Types._Sequence_T);
-		public static final @NonNull ExecutorOperation _Sequence__reject = new ExecutorOperation("reject",
-			Types._Sequence, 17, org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Sequence_T));
-		public static final @NonNull ExecutorOperation _Sequence__reverse = new ExecutorOperation("reverse",
-			Types._Sequence, 18, org.eclipse.ocl.examples.library.collection.OrderedCollectionReverseOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Sequence__select = new ExecutorOperation("select",
-			Types._Sequence, 19, org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Sequence_T));
+		public static final @NonNull ExecutorOperation _Sequence__flatten = new ExecutorOperation("flatten", Parameters._, Types._Sequence,
+			9, org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Sequence__including = new ExecutorOperation("including", Parameters._T_1, Types._Sequence,
+			10, org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Sequence__indexOf = new ExecutorOperation("indexOf", Parameters._OclAny, Types._Sequence,
+			11, org.eclipse.ocl.examples.library.collection.OrderedCollectionIndexOfOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Sequence__insertAt = new ExecutorOperation("insertAt", Parameters._Integer_T_1, Types._Sequence,
+			12, org.eclipse.ocl.examples.library.collection.OrderedCollectionInsertAtOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Sequence__0_intersection = new ExecutorOperation("intersection", Parameters._Collection_2, Types._Sequence,
+			13, org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Sequence__1_intersection = new ExecutorOperation("intersection", Parameters._UniqueCollection_2, Types._Sequence,
+			14, org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Sequence__last = new ExecutorOperation("last", Parameters._, Types._Sequence,
+			15, org.eclipse.ocl.examples.library.collection.OrderedCollectionLastOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Sequence__prepend = new ExecutorOperation("prepend", Parameters._T_1, Types._Sequence,
+			16, org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Sequence__reject = new ExecutorOperation("reject", Parameters._Lambda_5, Types._Sequence,
+			17, org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _Sequence__reverse = new ExecutorOperation("reverse", Parameters._, Types._Sequence,
+			18, org.eclipse.ocl.examples.library.collection.OrderedCollectionReverseOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Sequence__select = new ExecutorOperation("select", Parameters._Lambda_5, Types._Sequence,
+			19, org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Sequence__selectByKind_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _Sequence__selectByKind = new ExecutorOperation("selectByKind",
-			Types._Sequence, 20, org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Sequence__selectByKind_TT));
+		public static final @NonNull ExecutorOperation _Sequence__selectByKind = new ExecutorOperation("selectByKind", Parameters._Metaclass_6, Types._Sequence,
+			20, org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Sequence__selectByType_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _Sequence__selectByType = new ExecutorOperation("selectByType",
-			Types._Sequence, 21, org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Sequence__selectByType_TT));
-		public static final @NonNull ExecutorOperation _Sequence__sortedBy = new ExecutorOperation("sortedBy",
-			Types._Sequence, 22, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Sequence_T));
-		public static final @NonNull ExecutorOperation _Sequence__subSequence = new ExecutorOperation("subSequence",
-			Types._Sequence, 23, org.eclipse.ocl.examples.library.collection.SequenceSubSequenceOperation.INSTANCE,
-				OCLstdlibTables.Types._Integer);
-		public static final @NonNull ExecutorOperation _Sequence__union = new ExecutorOperation("union",
-			Types._Sequence, 24, org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Sequence", OCLstdlibTables.Types._Sequence_T));
+		public static final @NonNull ExecutorOperation _Sequence__selectByType = new ExecutorOperation("selectByType", Parameters._Metaclass_11, Types._Sequence,
+			21, org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Sequence__sortedBy = new ExecutorOperation("sortedBy", Parameters._Lambda_17, Types._Sequence,
+			22, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _Sequence__subSequence = new ExecutorOperation("subSequence", Parameters._Integer_Integer, Types._Sequence,
+			23, org.eclipse.ocl.examples.library.collection.SequenceSubSequenceOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Sequence__union = new ExecutorOperation("union", Parameters._Sequence, Types._Sequence,
+			24, org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE);
 	
-		public static final @NonNull ExecutorOperation _Set___sub_ = new ExecutorOperation("-",
-			Types._Set, 0, org.eclipse.ocl.examples.library.collection.SetMinusOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "UniqueCollection", OCLstdlibTables.Types._OclAny));
-		public static final @NonNull ExecutorOperation _Set___lt__gt_ = new ExecutorOperation("<>",
-			Types._Set, 1, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Set___eq_ = new ExecutorOperation("=",
-			Types._Set, 2, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _Set__excluding = new ExecutorOperation("excluding",
-			Types._Set, 3, org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE,
-				OCLstdlibTables.Types._OclAny);
+		public static final @NonNull ExecutorOperation _Set___sub_ = new ExecutorOperation("-", Parameters._UniqueCollection_1, Types._Set,
+			0, org.eclipse.ocl.examples.library.collection.SetMinusOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Set___lt__gt_ = new ExecutorOperation("<>", Parameters._OclSelf, Types._Set,
+			1, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Set___eq_ = new ExecutorOperation("=", Parameters._OclSelf, Types._Set,
+			2, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Set__excluding = new ExecutorOperation("excluding", Parameters._OclAny, Types._Set,
+			3, org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Set__flatten_T2 = new ExecutorTypeParameter(LIBRARY, "T2");
-		public static final @NonNull ExecutorOperation _Set__flatten = new ExecutorOperation("flatten",
-			Types._Set, 4, org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Set__including = new ExecutorOperation("including",
-			Types._Set, 5, org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE,
-				OCLstdlibTables.Types._Set_T);
-		public static final @NonNull ExecutorOperation _Set__intersection = new ExecutorOperation("intersection",
-			Types._Set, 6, org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Types._Set_T));
-		public static final @NonNull ExecutorOperation _Set__reject = new ExecutorOperation("reject",
-			Types._Set, 7, org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Set_T));
-		public static final @NonNull ExecutorOperation _Set__select = new ExecutorOperation("select",
-			Types._Set, 8, org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Set_T));
+		public static final @NonNull ExecutorOperation _Set__flatten = new ExecutorOperation("flatten", Parameters._, Types._Set,
+			4, org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Set__including = new ExecutorOperation("including", Parameters._T_4, Types._Set,
+			5, org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Set__intersection = new ExecutorOperation("intersection", Parameters._Collection_6, Types._Set,
+			6, org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Set__reject = new ExecutorOperation("reject", Parameters._Lambda_15, Types._Set,
+			7, org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _Set__select = new ExecutorOperation("select", Parameters._Lambda_15, Types._Set,
+			8, org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Set__selectByKind_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _Set__selectByKind = new ExecutorOperation("selectByKind",
-			Types._Set, 9, org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Set__selectByKind_TT));
+		public static final @NonNull ExecutorOperation _Set__selectByKind = new ExecutorOperation("selectByKind", Parameters._Metaclass_1, Types._Set,
+			9, org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Set__selectByType_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _Set__selectByType = new ExecutorOperation("selectByType",
-			Types._Set, 10, org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Set__selectByType_TT));
-		public static final @NonNull ExecutorOperation _Set__sortedBy = new ExecutorOperation("sortedBy",
-			Types._Set, 11, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Set_T));
-		public static final @NonNull ExecutorOperation _Set__union = new ExecutorOperation("union",
-			Types._Set, 12, org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Types._Set_T));
+		public static final @NonNull ExecutorOperation _Set__selectByType = new ExecutorOperation("selectByType", Parameters._Metaclass_9, Types._Set,
+			10, org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Set__sortedBy = new ExecutorOperation("sortedBy", Parameters._Lambda_10, Types._Set,
+			11, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _Set__union = new ExecutorOperation("union", Parameters._Collection_6, Types._Set,
+			12, org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE);
 	
-		public static final @NonNull ExecutorOperation _String___add_ = new ExecutorOperation("+",
-			Types._String, 0, org.eclipse.ocl.examples.library.string.StringConcatOperation.INSTANCE,
-				OCLstdlibTables.Types._String);
-		public static final @NonNull ExecutorOperation _String___lt_ = new ExecutorOperation("<",
-			Types._String, 1, org.eclipse.ocl.examples.library.string.StringLessThanOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _String___lt__eq_ = new ExecutorOperation("<=",
-			Types._String, 2, org.eclipse.ocl.examples.library.string.StringLessThanEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _String___lt__gt_ = new ExecutorOperation("<>",
-			Types._String, 3, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _String___eq_ = new ExecutorOperation("=",
-			Types._String, 4, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _String___gt_ = new ExecutorOperation(">",
-			Types._String, 5, org.eclipse.ocl.examples.library.string.StringGreaterThanOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _String___gt__eq_ = new ExecutorOperation(">=",
-			Types._String, 6, org.eclipse.ocl.examples.library.string.StringGreaterThanEqualOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _String__at = new ExecutorOperation("at",
-			Types._String, 7, org.eclipse.ocl.examples.library.string.StringAtOperation.INSTANCE,
-				OCLstdlibTables.Types._Integer);
-		public static final @NonNull ExecutorOperation _String__characters = new ExecutorOperation("characters",
-			Types._String, 8, org.eclipse.ocl.examples.library.string.StringCharactersOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__compareTo = new ExecutorOperation("compareTo",
-			Types._String, 9, org.eclipse.ocl.examples.library.string.StringCompareToOperation.INSTANCE,
-				OCLstdlibTables.Types._OclSelf);
-		public static final @NonNull ExecutorOperation _String__concat = new ExecutorOperation("concat",
-			Types._String, 10, org.eclipse.ocl.examples.library.string.StringConcatOperation.INSTANCE,
-				OCLstdlibTables.Types._String);
-		public static final @NonNull ExecutorOperation _String__endsWith = new ExecutorOperation("endsWith",
-			Types._String, 11, org.eclipse.ocl.examples.library.string.StringEndsWithOperation.INSTANCE,
-				OCLstdlibTables.Types._String);
-		public static final @NonNull ExecutorOperation _String__equalsIgnoreCase = new ExecutorOperation("equalsIgnoreCase",
-			Types._String, 12, org.eclipse.ocl.examples.library.string.StringEqualsIgnoreCaseOperation.INSTANCE,
-				OCLstdlibTables.Types._String);
-		public static final @NonNull ExecutorOperation _String__indexOf = new ExecutorOperation("indexOf",
-			Types._String, 13, org.eclipse.ocl.examples.library.string.StringIndexOfOperation.INSTANCE,
-				OCLstdlibTables.Types._String);
-		public static final @NonNull ExecutorOperation _String__lastIndexOf = new ExecutorOperation("lastIndexOf",
-			Types._String, 14, org.eclipse.ocl.examples.library.string.StringLastIndexOfOperation.INSTANCE,
-				OCLstdlibTables.Types._String);
-		public static final @NonNull ExecutorOperation _String__matches = new ExecutorOperation("matches",
-			Types._String, 15, org.eclipse.ocl.examples.library.string.StringMatchesOperation.INSTANCE,
-				OCLstdlibTables.Types._String);
-		public static final @NonNull ExecutorOperation _String__replaceAll = new ExecutorOperation("replaceAll",
-			Types._String, 16, org.eclipse.ocl.examples.library.string.StringReplaceAllOperation.INSTANCE,
-				OCLstdlibTables.Types._String);
-		public static final @NonNull ExecutorOperation _String__replaceFirst = new ExecutorOperation("replaceFirst",
-			Types._String, 17, org.eclipse.ocl.examples.library.string.StringReplaceFirstOperation.INSTANCE,
-				OCLstdlibTables.Types._String);
-		public static final @NonNull ExecutorOperation _String__size = new ExecutorOperation("size",
-			Types._String, 18, org.eclipse.ocl.examples.library.string.StringSizeOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__startsWith = new ExecutorOperation("startsWith",
-			Types._String, 19, org.eclipse.ocl.examples.library.string.StringStartsWithOperation.INSTANCE,
-				OCLstdlibTables.Types._String);
-		public static final @NonNull ExecutorOperation _String__substituteAll = new ExecutorOperation("substituteAll",
-			Types._String, 20, org.eclipse.ocl.examples.library.string.StringSubstituteAllOperation.INSTANCE,
-				OCLstdlibTables.Types._String);
-		public static final @NonNull ExecutorOperation _String__substituteFirst = new ExecutorOperation("substituteFirst",
-			Types._String, 21, org.eclipse.ocl.examples.library.string.StringSubstituteFirstOperation.INSTANCE,
-				OCLstdlibTables.Types._String);
-		public static final @NonNull ExecutorOperation _String__substring = new ExecutorOperation("substring",
-			Types._String, 22, org.eclipse.ocl.examples.library.string.StringSubstringOperation.INSTANCE,
-				OCLstdlibTables.Types._Integer);
-		public static final @NonNull ExecutorOperation _String__toBoolean = new ExecutorOperation("toBoolean",
-			Types._String, 23, org.eclipse.ocl.examples.library.string.StringToBooleanOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__toInteger = new ExecutorOperation("toInteger",
-			Types._String, 24, org.eclipse.ocl.examples.library.string.StringToIntegerOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__toLower = new ExecutorOperation("toLower",
-			Types._String, 25, org.eclipse.ocl.examples.library.string.StringToLowerCaseOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__toLowerCase = new ExecutorOperation("toLowerCase",
-			Types._String, 26, org.eclipse.ocl.examples.library.string.StringToLowerCaseOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__toReal = new ExecutorOperation("toReal",
-			Types._String, 27, org.eclipse.ocl.examples.library.string.StringToRealOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__toString = new ExecutorOperation("toString",
-			Types._String, 28, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__toUpper = new ExecutorOperation("toUpper",
-			Types._String, 29, org.eclipse.ocl.examples.library.string.StringToUpperCaseOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__toUpperCase = new ExecutorOperation("toUpperCase",
-			Types._String, 30, org.eclipse.ocl.examples.library.string.StringToUpperCaseOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__0_tokenize = new ExecutorOperation("tokenize",
-			Types._String, 31, org.eclipse.ocl.examples.library.string.StringTokenizeOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__1_tokenize = new ExecutorOperation("tokenize",
-			Types._String, 32, org.eclipse.ocl.examples.library.string.StringTokenizeOperation.INSTANCE,
-				OCLstdlibTables.Types._String);
-		public static final @NonNull ExecutorOperation _String__2_tokenize = new ExecutorOperation("tokenize",
-			Types._String, 33, org.eclipse.ocl.examples.library.string.StringTokenizeOperation.INSTANCE,
-				OCLstdlibTables.Types._String,
-				OCLstdlibTables.Types._Boolean);
-		public static final @NonNull ExecutorOperation _String__trim = new ExecutorOperation("trim",
-			Types._String, 34, org.eclipse.ocl.examples.library.string.StringTrimOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String___add_ = new ExecutorOperation("+", Parameters._String, Types._String,
+			0, org.eclipse.ocl.examples.library.string.StringConcatOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String___lt_ = new ExecutorOperation("<", Parameters._OclSelf, Types._String,
+			1, org.eclipse.ocl.examples.library.string.StringLessThanOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String___lt__eq_ = new ExecutorOperation("<=", Parameters._OclSelf, Types._String,
+			2, org.eclipse.ocl.examples.library.string.StringLessThanEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String___lt__gt_ = new ExecutorOperation("<>", Parameters._OclSelf, Types._String,
+			3, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String___eq_ = new ExecutorOperation("=", Parameters._OclSelf, Types._String,
+			4, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String___gt_ = new ExecutorOperation(">", Parameters._OclSelf, Types._String,
+			5, org.eclipse.ocl.examples.library.string.StringGreaterThanOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String___gt__eq_ = new ExecutorOperation(">=", Parameters._OclSelf, Types._String,
+			6, org.eclipse.ocl.examples.library.string.StringGreaterThanEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__at = new ExecutorOperation("at", Parameters._Integer, Types._String,
+			7, org.eclipse.ocl.examples.library.string.StringAtOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__characters = new ExecutorOperation("characters", Parameters._, Types._String,
+			8, org.eclipse.ocl.examples.library.string.StringCharactersOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__compareTo = new ExecutorOperation("compareTo", Parameters._OclSelf, Types._String,
+			9, org.eclipse.ocl.examples.library.string.StringCompareToOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__concat = new ExecutorOperation("concat", Parameters._String, Types._String,
+			10, org.eclipse.ocl.examples.library.string.StringConcatOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__endsWith = new ExecutorOperation("endsWith", Parameters._String, Types._String,
+			11, org.eclipse.ocl.examples.library.string.StringEndsWithOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__equalsIgnoreCase = new ExecutorOperation("equalsIgnoreCase", Parameters._String, Types._String,
+			12, org.eclipse.ocl.examples.library.string.StringEqualsIgnoreCaseOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__indexOf = new ExecutorOperation("indexOf", Parameters._String, Types._String,
+			13, org.eclipse.ocl.examples.library.string.StringIndexOfOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__lastIndexOf = new ExecutorOperation("lastIndexOf", Parameters._String, Types._String,
+			14, org.eclipse.ocl.examples.library.string.StringLastIndexOfOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__matches = new ExecutorOperation("matches", Parameters._String, Types._String,
+			15, org.eclipse.ocl.examples.library.string.StringMatchesOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__replaceAll = new ExecutorOperation("replaceAll", Parameters._String_String, Types._String,
+			16, org.eclipse.ocl.examples.library.string.StringReplaceAllOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__replaceFirst = new ExecutorOperation("replaceFirst", Parameters._String_String, Types._String,
+			17, org.eclipse.ocl.examples.library.string.StringReplaceFirstOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__size = new ExecutorOperation("size", Parameters._, Types._String,
+			18, org.eclipse.ocl.examples.library.string.StringSizeOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__startsWith = new ExecutorOperation("startsWith", Parameters._String, Types._String,
+			19, org.eclipse.ocl.examples.library.string.StringStartsWithOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__substituteAll = new ExecutorOperation("substituteAll", Parameters._String_String, Types._String,
+			20, org.eclipse.ocl.examples.library.string.StringSubstituteAllOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__substituteFirst = new ExecutorOperation("substituteFirst", Parameters._String_String, Types._String,
+			21, org.eclipse.ocl.examples.library.string.StringSubstituteFirstOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__substring = new ExecutorOperation("substring", Parameters._Integer_Integer, Types._String,
+			22, org.eclipse.ocl.examples.library.string.StringSubstringOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__toBoolean = new ExecutorOperation("toBoolean", Parameters._, Types._String,
+			23, org.eclipse.ocl.examples.library.string.StringToBooleanOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__toInteger = new ExecutorOperation("toInteger", Parameters._, Types._String,
+			24, org.eclipse.ocl.examples.library.string.StringToIntegerOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__toLower = new ExecutorOperation("toLower", Parameters._, Types._String,
+			25, org.eclipse.ocl.examples.library.string.StringToLowerCaseOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__toLowerCase = new ExecutorOperation("toLowerCase", Parameters._, Types._String,
+			26, org.eclipse.ocl.examples.library.string.StringToLowerCaseOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__toReal = new ExecutorOperation("toReal", Parameters._, Types._String,
+			27, org.eclipse.ocl.examples.library.string.StringToRealOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__toString = new ExecutorOperation("toString", Parameters._, Types._String,
+			28, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__toUpper = new ExecutorOperation("toUpper", Parameters._, Types._String,
+			29, org.eclipse.ocl.examples.library.string.StringToUpperCaseOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__toUpperCase = new ExecutorOperation("toUpperCase", Parameters._, Types._String,
+			30, org.eclipse.ocl.examples.library.string.StringToUpperCaseOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__0_tokenize = new ExecutorOperation("tokenize", Parameters._, Types._String,
+			31, org.eclipse.ocl.examples.library.string.StringTokenizeOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__1_tokenize = new ExecutorOperation("tokenize", Parameters._String, Types._String,
+			32, org.eclipse.ocl.examples.library.string.StringTokenizeOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__2_tokenize = new ExecutorOperation("tokenize", Parameters._String_Boolean, Types._String,
+			33, org.eclipse.ocl.examples.library.string.StringTokenizeOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _String__trim = new ExecutorOperation("trim", Parameters._, Types._String,
+			34, org.eclipse.ocl.examples.library.string.StringTrimOperation.INSTANCE);
 	
-		public static final @NonNull ExecutorOperation _UniqueCollection___sub_ = new ExecutorOperation("-",
-			Types._UniqueCollection, 0, org.eclipse.ocl.examples.library.collection.SetMinusOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "UniqueCollection", OCLstdlibTables.Types._OclAny));
-		public static final @NonNull ExecutorOperation _UniqueCollection__sortedBy = new ExecutorOperation("sortedBy",
-			Types._UniqueCollection, 1, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE,
-				new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._UniqueCollection_T));
-		public static final @NonNull ExecutorOperation _UniqueCollection__symmetricDifference = new ExecutorOperation("symmetricDifference",
-			Types._UniqueCollection, 2, org.eclipse.ocl.examples.library.collection.SetSymmetricDifferenceOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "UniqueCollection", OCLstdlibTables.Types._OclAny));
-		public static final @NonNull ExecutorOperation _UniqueCollection__union = new ExecutorOperation("union",
-			Types._UniqueCollection, 3, org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Types._UniqueCollection_T));
+		public static final @NonNull ExecutorOperation _UniqueCollection___sub_ = new ExecutorOperation("-", Parameters._UniqueCollection_1, Types._UniqueCollection,
+			0, org.eclipse.ocl.examples.library.collection.SetMinusOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _UniqueCollection__sortedBy = new ExecutorOperation("sortedBy", Parameters._Lambda_11, Types._UniqueCollection,
+			1, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _UniqueCollection__symmetricDifference = new ExecutorOperation("symmetricDifference", Parameters._UniqueCollection_1, Types._UniqueCollection,
+			2, org.eclipse.ocl.examples.library.collection.SetSymmetricDifferenceOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _UniqueCollection__union = new ExecutorOperation("union", Parameters._Collection_3, Types._UniqueCollection,
+			3, org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE);
 	
 		public static final @NonNull ExecutorTypeParameter __UnlimitedNatural__oclAsType_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _UnlimitedNatural__oclAsType = new ExecutorOperation("oclAsType",
-			Types._UnlimitedNatural, 0, org.eclipse.ocl.examples.library.numeric.UnlimitedNaturalOclAsTypeOperation.INSTANCE,
-				new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__UnlimitedNatural__oclAsType_TT));
+		public static final @NonNull ExecutorOperation _UnlimitedNatural__oclAsType = new ExecutorOperation("oclAsType", Parameters._Metaclass_10, Types._UnlimitedNatural,
+			0, org.eclipse.ocl.examples.library.numeric.UnlimitedNaturalOclAsTypeOperation.INSTANCE);
 	}
 
 	/**

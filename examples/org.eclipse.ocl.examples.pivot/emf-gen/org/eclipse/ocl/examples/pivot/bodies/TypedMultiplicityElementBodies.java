@@ -66,15 +66,15 @@ public class TypedMultiplicityElementBodies
 			final @NonNull LibraryProperty IP_TypedElement_type = P_TypedElement_type.getImplementation();
 			
 			
-			Value A_symbol_0 = IP_TypedElement_type.evaluate(evaluator, T_Type, bodySpecification, P_TypedElement_type);
+			Value A_symbol_ = IP_TypedElement_type.evaluate(evaluator, T_Type, bodySpecification, P_TypedElement_type);
 			
 			
-			Value A_symbol_1 = IP_TypedElement_type.evaluate(evaluator, T_Type, self, P_TypedElement_type);
+			Value A_symbol__1 = IP_TypedElement_type.evaluate(evaluator, T_Type, self, P_TypedElement_type);
 			
-			DomainType static_A_symbol_2 = valueFactory.typeOf(A_symbol_0);
-			LibraryBinaryOperation dynamic_A_symbol_2 = (LibraryBinaryOperation)static_A_symbol_2.lookupImplementation(standardLibrary, O_OclType_conformsTo);
-			Value A_symbol_2 = dynamic_A_symbol_2.evaluate(evaluator, T_Boolean, A_symbol_0, A_symbol_1);
-			return A_symbol_2;
+			DomainType static_A_symbol__2 = valueFactory.typeOf(A_symbol_);
+			LibraryBinaryOperation dynamic_A_symbol__2 = (LibraryBinaryOperation)static_A_symbol__2.lookupImplementation(standardLibrary, O_OclType_conformsTo);
+			Value A_symbol__2 = dynamic_A_symbol__2.evaluate(evaluator, T_Boolean, A_symbol_, A_symbol__1);
+			return A_symbol__2;
 		}
 	}
 
@@ -93,11 +93,11 @@ public class TypedMultiplicityElementBodies
 			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
 			final @NonNull StringValue S_name = valueFactory.stringValueOf("name");
 			
-			ObjectValue A_symbol_3 = PivotTables.Types._Parameter.createInstance(valueFactory);
+			ObjectValue A_symbol__3 = PivotTables.Types._Parameter.createInstance(valueFactory);
 			
-			P_NamedElement_name.setValue(A_symbol_3, S_name);
+			P_NamedElement_name.setValue(A_symbol__3, S_name);
 			
-			return A_symbol_3;
+			return A_symbol__3;
 		}
 	}
 

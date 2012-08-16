@@ -30,6 +30,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainFragment;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
+import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -57,9 +58,9 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		}
 	}
 
-	public static final class MapValues implements Function<Map<Iterable<? extends DomainType>, List<DomainOperation>>, Iterable<List<DomainOperation>>> {
+	public static final class MapValues implements Function<Map<DomainParameterTypes, List<DomainOperation>>, Iterable<List<DomainOperation>>> {
 
-		public Iterable<List<DomainOperation>> apply(Map<Iterable<? extends DomainType>, List<DomainOperation>> operations) {
+		public Iterable<List<DomainOperation>> apply(Map<DomainParameterTypes, List<DomainOperation>> operations) {
 			return operations.values();
 		}
 	}
@@ -108,13 +109,13 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		}
 	}
 
-	public  static final Predicate<DomainOperation> REJECT_STATIC_OPERATION = new RejectStaticOperation();
+	public static final Predicate<DomainOperation> REJECT_STATIC_OPERATION = new RejectStaticOperation();
 
-	public  static final Predicate<DomainProperty> REJECT_STATIC_PROPERTY = new RejectStaticProperty();
+	public static final Predicate<DomainProperty> REJECT_STATIC_PROPERTY = new RejectStaticProperty();
 
-	public  static final Predicate<DomainOperation> SELECT_STATIC_OPERATION = new SelectStaticOperation();
+	public static final Predicate<DomainOperation> SELECT_STATIC_OPERATION = new SelectStaticOperation();
 
-	public  static final Predicate<DomainProperty> SELECT_STATIC_PROPERTY = new SelectStaticProperty();
+	public static final Predicate<DomainProperty> SELECT_STATIC_PROPERTY = new SelectStaticProperty();
 
 	protected final @NonNull PackageServer packageServer;
 	protected final @NonNull PackageManager packageManager;
@@ -136,7 +137,7 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 	/**
 	 * Lazily created map from operation name to map of parameter types to the list of partial operations to be treated as merged.
 	 */
-	private @Nullable Map<String, Map<Iterable<? extends DomainType>, List<DomainOperation>>> name2operations = null;
+	private @Nullable Map<String, Map<DomainParameterTypes, List<DomainOperation>>> name2operations = null;
 
 	/**
 	 * Lazily created map from property name to the list of properties to be treated as merged. 
@@ -150,15 +151,15 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 	}
 
 	void addedMemberOperation(@NonNull DomainOperation pivotOperation) {
-		Map<String, Map<Iterable<? extends DomainType>, List<DomainOperation>>> name2operations2 = name2operations;
+		Map<String, Map<DomainParameterTypes, List<DomainOperation>>> name2operations2 = name2operations;
 		if (name2operations2 != null) {
 			String operationName = pivotOperation.getName();
-			Map<Iterable<? extends DomainType>, List<DomainOperation>> overloads = name2operations2.get(operationName);
+			Map<DomainParameterTypes, List<DomainOperation>> overloads = name2operations2.get(operationName);
 			if (overloads == null) {
-				overloads = new HashMap<Iterable<? extends DomainType>, List<DomainOperation>>();
+				overloads = new HashMap<DomainParameterTypes, List<DomainOperation>>();
 				name2operations2.put(operationName, overloads);
 			}
-			Iterable<? extends DomainType> parameterTypes = getParameterTypes(pivotOperation);
+			DomainParameterTypes parameterTypes = getParameterTypes(pivotOperation);
 			List<DomainOperation> partials = overloads.get(parameterTypes);
 			if (partials == null) {
 				partials = new ArrayList<DomainOperation>();
@@ -204,7 +205,7 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 			name2properties2.clear();
 			name2properties = null;
 		}
-		Map<String, Map<Iterable<? extends DomainType>, List<DomainOperation>>> name2operations2 = name2operations;
+		Map<String, Map<DomainParameterTypes, List<DomainOperation>>> name2operations2 = name2operations;
 		if (name2operations2 != null) {
 			name2operations2.clear();
 			name2operations = null;
@@ -245,13 +246,13 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 			return null;
 		}
 		else {
-			IndexableIterable<? extends DomainType> requiredParameters = requiredOperation.getParameterType();
+			IndexableDomainParameterTypes requiredParameters = requiredOperation.getParameterType();
 			MetaModelManager metaModelManager = packageManager.getMetaModelManager();
 			int requiredSize = requiredParameters.size();
 			for (List<DomainOperation> overload : overloads) {
 				if (overload.size() > 0) {
 					DomainOperation operation = overload.get(0);
-					IndexableIterable<? extends DomainType> actualParameters = operation.getParameterType();
+					IndexableDomainParameterTypes actualParameters = operation.getParameterType();
 					if (requiredSize == actualParameters.size()) {
 						boolean gotIt = true;
 						for (int i = 0; i < requiredSize; i++) {
@@ -275,11 +276,11 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 	} */
 
 	public @NonNull Iterable<? extends DomainOperation> getAllOperations(@Nullable Boolean selectStatic) {
-		Map<String, Map<Iterable<? extends DomainType>, List<DomainOperation>>> name2operations2 = name2operations;
+		Map<String, Map<DomainParameterTypes, List<DomainOperation>>> name2operations2 = name2operations;
 		if (name2operations2 == null) {
 			name2operations2 = initMemberOperations();
 		}
-		Iterable<Map<Iterable<? extends DomainType>, List<DomainOperation>>> itMapListOps = name2operations2.values();
+		Iterable<Map<DomainParameterTypes, List<DomainOperation>>> itMapListOps = name2operations2.values();
 		@SuppressWarnings("null")
 		@NonNull Iterable<Iterable<List<DomainOperation>>> itItListOps = Iterables.transform(itMapListOps, MAP_VALUES);
 		@SuppressWarnings("null")
@@ -298,16 +299,16 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 	
 
 	public @NonNull Iterable<? extends DomainOperation> getAllOperations(@Nullable Boolean selectStatic, @NonNull String name) {
-		Map<String, Map<Iterable<? extends DomainType>, List<DomainOperation>>> name2operations2 = name2operations;
+		Map<String, Map<DomainParameterTypes, List<DomainOperation>>> name2operations2 = name2operations;
 		if (name2operations2 == null) {
 			name2operations2 = initMemberOperations();
 		}
-		Map<Iterable<? extends DomainType>, List<DomainOperation>> overloads = name2operations2.get(name);
+		Map<DomainParameterTypes, List<DomainOperation>> overloads = name2operations2.get(name);
 		if ((overloads == null) || overloads.isEmpty()) {
 			return MetaModelManager.EMPTY_OPERATION_LIST;
 		}
 		@SuppressWarnings("null")
-		@NonNull Iterable<DomainOperation> transform = Iterables.transform(overloads.values(), bestOperation);
+		@NonNull Iterable<DomainOperation> transform = Iterables.concat(overloads.values()); //, bestOperation);
 		if (selectStatic == null) {
 			return transform;			
 		}
@@ -437,31 +438,31 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 	}
 
 	public @Nullable DomainOperation getMemberOperation(@NonNull DomainOperation pivotOperation) {
-		Map<String, Map<Iterable<? extends DomainType>, List<DomainOperation>>> name2operations2 = name2operations;
+		Map<String, Map<DomainParameterTypes, List<DomainOperation>>> name2operations2 = name2operations;
 		if (name2operations2 == null) {
 			name2operations2 = initMemberOperations();
 		}
 		String operationName = pivotOperation.getName();
-		Map<Iterable<? extends DomainType>, List<DomainOperation>> overloads = name2operations2.get(operationName);
+		Map<DomainParameterTypes, List<DomainOperation>> overloads = name2operations2.get(operationName);
 		if (overloads == null) {
 			return null;
 		}
-		Iterable<? extends DomainType> parameterTypes = getParameterTypes(pivotOperation);
+		DomainParameterTypes parameterTypes = getParameterTypes(pivotOperation);
 		List<DomainOperation> partials = overloads.get(parameterTypes);
 		return (partials == null) || partials.isEmpty() ? null : partials.get(0);
 	}
 
 	public @Nullable Iterable<DomainOperation> getMemberOperations(@NonNull DomainOperation pivotOperation) {
-		Map<String, Map<Iterable<? extends DomainType>, List<DomainOperation>>> name2operations2 = name2operations;
+		Map<String, Map<DomainParameterTypes, List<DomainOperation>>> name2operations2 = name2operations;
 		if (name2operations2 == null) {
 			name2operations2 = initMemberOperations();
 		}
 		String operationName = pivotOperation.getName();
-		Map<Iterable<? extends DomainType>, List<DomainOperation>> overloads = name2operations2.get(operationName);
+		Map<DomainParameterTypes, List<DomainOperation>> overloads = name2operations2.get(operationName);
 		if (overloads == null) {
 			return null;
 		}
-		Iterable<? extends DomainType> parameterTypes = getParameterTypes(pivotOperation);
+		DomainParameterTypes parameterTypes = getParameterTypes(pivotOperation);
 		return overloads.get(parameterTypes);
 	}
 
@@ -498,9 +499,9 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		return packageServer;
 	}
 	
-	private @Nullable Iterable<? extends DomainType> getParameterTypes(@NonNull DomainOperation operation) {
+	private @Nullable DomainParameterTypes getParameterTypes(@NonNull DomainOperation operation) {
 		if (operation instanceof Iteration) {
-			return operation.getParameterType();
+			return operation.getParameterTypes();
 /*			List<Parameter> requiredParameters = ((Iteration)operation).getOwnedIterator();
 			MetaModelManager metaModelManager = packageManager.getMetaModelManager();
 			int requiredSize = requiredParameters.size();
@@ -529,7 +530,7 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 			return null; */
 		}
 		else {
-			return operation.getParameterType();
+			return operation.getParameterTypes();
 		}
 	}
 
@@ -537,10 +538,10 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		return packageManager.getMetaModelManager();
 	}
 
-	private @NonNull Map<String, Map<Iterable<? extends DomainType>, List<DomainOperation>>> initMemberOperations() {
-		Map<String, Map<Iterable<? extends DomainType>, List<DomainOperation>>> name2operations2 = name2operations;
+	private @NonNull Map<String, Map<DomainParameterTypes, List<DomainOperation>>> initMemberOperations() {
+		Map<String, Map<DomainParameterTypes, List<DomainOperation>>> name2operations2 = name2operations;
 		if (name2operations2 == null) {
-			name2operations2 = name2operations = new HashMap<String, Map<Iterable<? extends DomainType>, List<DomainOperation>>>();
+			name2operations2 = name2operations = new HashMap<String, Map<DomainParameterTypes, List<DomainOperation>>>();
 			for (DomainInheritance superClass : getAllSuperClasses()) {
 				TypeServer superTypeServer = null;
 				if (superClass instanceof TypeServer) {
@@ -557,7 +558,7 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 					}
 				}
 			}
-			for (Map<Iterable<? extends DomainType>, List<DomainOperation>> overloads : name2operations2.values()) {
+			for (Map<DomainParameterTypes, List<DomainOperation>> overloads : name2operations2.values()) {
 				for (List<DomainOperation> operations : overloads.values()) {
 					if (operations != null) {
 						initMemberOperationsPostProcess(name, operations);
@@ -570,7 +571,7 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 
 	private void initMemberOperationsFrom(@NonNull DomainType type) {
 		for (DomainOperation pivotOperation : type.getLocalOperations()) {
-			if (pivotOperation != null) {
+			if ((pivotOperation != null) && (pivotOperation.getName() != null)) {		// name may be null for partially initialized Complete OCL document.
 				addedMemberOperation(pivotOperation);
 			}
 		}
@@ -665,12 +666,12 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 	}
 
 	void removedMemberOperation(@NonNull DomainOperation pivotOperation) {
-		Map<String, Map<Iterable<? extends DomainType>, List<DomainOperation>>> name2operations2 = name2operations;
+		Map<String, Map<DomainParameterTypes, List<DomainOperation>>> name2operations2 = name2operations;
 		if (name2operations2 != null) {
 			String operationName = pivotOperation.getName();
-			Map<Iterable<? extends DomainType>, List<DomainOperation>> overloads = name2operations2.get(operationName);
+			Map<DomainParameterTypes, List<DomainOperation>> overloads = name2operations2.get(operationName);
 			if (overloads != null) {
-				Iterable<? extends DomainType> parameterTypes = getParameterTypes(pivotOperation);
+				DomainParameterTypes parameterTypes = getParameterTypes(pivotOperation);
 				List<DomainOperation> partials = overloads.get(parameterTypes);
 				if (partials != null) {
 					partials.add(pivotOperation);

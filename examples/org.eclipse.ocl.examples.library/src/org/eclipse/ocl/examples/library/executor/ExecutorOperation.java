@@ -20,11 +20,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
+import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
-import org.eclipse.ocl.examples.domain.utilities.ArrayIterable;
-import org.eclipse.ocl.examples.domain.utilities.IndexableIterable;
 import org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation;
 
 public class ExecutorOperation implements DomainOperation
@@ -33,14 +32,24 @@ public class ExecutorOperation implements DomainOperation
 	protected final @NonNull DomainInheritance inheritance;
 	protected final int index;
 	protected final @NonNull LibraryFeature implementation;
-	protected final ExecutorTypeArgument[] parameterTypes;
+	protected final @NonNull DomainParameterTypes parameterTypes;
 	
-	public ExecutorOperation(@NonNull String name, @NonNull DomainInheritance inheritance, int index, @Nullable LibraryFeature implementation, ExecutorTypeArgument... parameterTypes) {
+	public ExecutorOperation(@NonNull String name, @NonNull DomainParameterTypes parameterTypes, @NonNull DomainInheritance inheritance, int index, @Nullable LibraryFeature implementation) {
 		this.name = name;
 		this.inheritance = inheritance;
 		this.index = index;
 		this.implementation = implementation != null ? implementation : OclAnyUnsupportedOperation.INSTANCE;		// FIXME
 		this.parameterTypes = parameterTypes;
+	}
+	
+	@Deprecated
+	public ExecutorOperation(@NonNull String name, @NonNull DomainInheritance inheritance, int index, @Nullable LibraryFeature implementation, ExecutorTypeArgument... parameterTypes) {
+		this.name = name;
+		this.inheritance = inheritance;
+		this.index = index;
+		this.implementation = implementation != null ? implementation : OclAnyUnsupportedOperation.INSTANCE;		// FIXME
+		@SuppressWarnings("null") @NonNull ExecutorTypeArgument[] parameterTypes2 = parameterTypes;
+		this.parameterTypes = new DomainParameterTypes(parameterTypes2);
 	}
 
 	public @NonNull LibraryFeature getImplementation() {
@@ -59,8 +68,8 @@ public class ExecutorOperation implements DomainOperation
 		return name;
 	}
 
-	public @NonNull IndexableIterable<DomainType> getParameterType() {
-		return new ArrayIterable<DomainType>(parameterTypes);
+	public @NonNull DomainParameterTypes getParameterTypes() {
+		return parameterTypes;
 	}
 
 	public @NonNull DomainType getType() {

@@ -18,7 +18,6 @@ package org.eclipse.ocl.examples.domain.elements;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.utilities.IndexableIterable;
 
 public interface DomainOperation extends DomainFeature
 {
@@ -35,7 +34,5 @@ public interface DomainOperation extends DomainFeature
 	/**
 	 * Return the ordered list of parameters of this operation.
 	 */
-	@NonNull IndexableIterable<? extends DomainType> getParameterType();
-
-//	List<? extends DomainTypedElement> getOwnedParameter();
+	@NonNull DomainParameterTypes getParameterTypes();
 }
