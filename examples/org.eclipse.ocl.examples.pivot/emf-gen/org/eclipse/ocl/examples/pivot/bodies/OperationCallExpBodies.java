@@ -63,11 +63,11 @@ public class OperationCallExpBodies
 			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
 			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
 			final @NonNull ExecutorType T_pivot__OCLExpression = PivotTables.Types._OCLExpression;
-			final @NonNull DomainCollectionType T_OrderedSet_pivot__OCLExpression_ = standardLibrary.getOrderedSetType(T_pivot__OCLExpression);
+			final @NonNull DomainCollectionType T_OrderedSet_pivot__OCLExpression_ = standardLibrary.getOrderedSetType(T_pivot__OCLExpression, null, null);
 			final @NonNull ExecutorProperty P_OperationCallExp_argument = PivotTables.Properties._OperationCallExp__argument;
 			final @NonNull LibraryProperty IP_OperationCallExp_argument = P_OperationCallExp_argument.getImplementation();
 			final @NonNull ExecutorType T_pivot__Parameter = PivotTables.Types._Parameter;
-			final @NonNull DomainCollectionType T_OrderedSet_pivot__Parameter_ = standardLibrary.getOrderedSetType(T_pivot__Parameter);
+			final @NonNull DomainCollectionType T_OrderedSet_pivot__Parameter_ = standardLibrary.getOrderedSetType(T_pivot__Parameter, null, null);
 			final @NonNull ExecutorProperty P_Operation_ownedParameter = PivotTables.Properties._Operation__ownedParameter;
 			final @NonNull LibraryProperty IP_Operation_ownedParameter = P_Operation_ownedParameter.getImplementation();
 			final @NonNull ExecutorType T_pivot__Operation = PivotTables.Types._Operation;

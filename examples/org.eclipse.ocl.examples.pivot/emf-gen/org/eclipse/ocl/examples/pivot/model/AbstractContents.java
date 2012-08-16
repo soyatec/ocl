@@ -14,17 +14,17 @@
  */
 package	org.eclipse.ocl.examples.pivot.model;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.AssociativityKind;
 import org.eclipse.ocl.examples.pivot.BagType;
 import org.eclipse.ocl.examples.pivot.Class;
-import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.DataType;
@@ -35,6 +35,7 @@ import org.eclipse.ocl.examples.pivot.InvalidType;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.Library;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OrderedSetType;
 import org.eclipse.ocl.examples.pivot.Package;
@@ -69,8 +70,8 @@ public class AbstractContents
 	protected @NonNull BagType createBagType(@NonNull String name, @Nullable String lower, @Nullable String upper) {
 		BagType pivotType = PivotFactory.eINSTANCE.createBagType();
 		pivotType.setName(name);
-		pivotType.setLower(lower != null ? new BigInteger(lower) : BigInteger.valueOf(0));
-		pivotType.setUpper(upper != null ? new BigInteger(upper) : BigInteger.valueOf(-1));
+		pivotType.setLower(lower != null ? DomainUtil.createNumberFromString(lower) : Integer.valueOf(0));
+		pivotType.setUpper(upper != null ? DomainUtil.createNumberFromString(upper) : Unlimited.INSTANCE);
 		return pivotType;
 	}
 
@@ -83,8 +84,8 @@ public class AbstractContents
 	protected @NonNull CollectionType createCollectionType(@NonNull String name, @Nullable String lower, @Nullable String upper) {
 		CollectionType pivotType = PivotFactory.eINSTANCE.createCollectionType();
 		pivotType.setName(name);
-		pivotType.setLower(lower != null ? new BigInteger(lower) : BigInteger.valueOf(0));
-		pivotType.setUpper(upper != null ? new BigInteger(upper) : BigInteger.valueOf(-1));
+		pivotType.setLower(lower != null ? DomainUtil.createNumberFromString(lower) : Integer.valueOf(0));
+		pivotType.setUpper(upper != null ? DomainUtil.createNumberFromString(upper) : Unlimited.INSTANCE);
 		return pivotType;
 	}
 
@@ -153,8 +154,8 @@ public class AbstractContents
 	protected @NonNull OrderedSetType createOrderedSetType(@NonNull String name, @Nullable String lower, @Nullable String upper) {
 		OrderedSetType pivotType = PivotFactory.eINSTANCE.createOrderedSetType();
 		pivotType.setName(name);
-		pivotType.setLower(lower != null ? new BigInteger(lower) : BigInteger.valueOf(0));
-		pivotType.setUpper(upper != null ? new BigInteger(upper) : BigInteger.valueOf(-1));
+		pivotType.setLower(lower != null ? DomainUtil.createNumberFromString(lower) : Integer.valueOf(0));
+		pivotType.setUpper(upper != null ? DomainUtil.createNumberFromString(upper) : Unlimited.INSTANCE);
 		return pivotType;
 	}
 
@@ -210,16 +211,16 @@ public class AbstractContents
 	protected @NonNull SequenceType createSequenceType(@NonNull String name, @Nullable String lower, @Nullable String upper) {
 		SequenceType pivotType = PivotFactory.eINSTANCE.createSequenceType();
 		pivotType.setName(name);
-		pivotType.setLower(lower != null ? new BigInteger(lower) : BigInteger.valueOf(0));
-		pivotType.setUpper(upper != null ? new BigInteger(upper) : BigInteger.valueOf(-1));
+		pivotType.setLower(lower != null ? DomainUtil.createNumberFromString(lower) : Integer.valueOf(0));
+		pivotType.setUpper(upper != null ? DomainUtil.createNumberFromString(upper) : Unlimited.INSTANCE);
 		return pivotType;
 	}
 
 	protected @NonNull SetType createSetType(@NonNull String name, @Nullable String lower, @Nullable String upper) {
 		SetType pivotType = PivotFactory.eINSTANCE.createSetType();
 		pivotType.setName(name);
-		pivotType.setLower(lower != null ? new BigInteger(lower) : BigInteger.valueOf(0));
-		pivotType.setUpper(upper != null ? new BigInteger(upper) : BigInteger.valueOf(-1));
+		pivotType.setLower(lower != null ? DomainUtil.createNumberFromString(lower) : Integer.valueOf(0));
+		pivotType.setUpper(upper != null ? DomainUtil.createNumberFromString(upper) : Unlimited.INSTANCE);
 		return pivotType;
 	}
 

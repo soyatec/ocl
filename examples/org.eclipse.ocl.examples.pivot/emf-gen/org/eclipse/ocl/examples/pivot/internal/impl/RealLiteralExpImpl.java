@@ -16,13 +16,14 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
-import java.math.BigDecimal;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.values.RealValue;
+import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
@@ -57,7 +58,7 @@ public class RealLiteralExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BigDecimal REAL_SYMBOL_EDEFAULT = null;
+	protected static final Number REAL_SYMBOL_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getRealSymbol() <em>Real Symbol</em>}' attribute.
@@ -67,7 +68,7 @@ public class RealLiteralExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected BigDecimal realSymbol = REAL_SYMBOL_EDEFAULT;
+	protected Number realSymbol = REAL_SYMBOL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -93,7 +94,7 @@ public class RealLiteralExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BigDecimal getRealSymbol() {
+	public Number getRealSymbol() {
 		return realSymbol;
 	}
 
@@ -102,8 +103,9 @@ public class RealLiteralExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRealSymbol(BigDecimal newRealSymbol) {
-		BigDecimal oldRealSymbol = realSymbol;
+	public void setRealSymbol(Number newRealSymbol)
+	{
+		Number oldRealSymbol = realSymbol;
 		realSymbol = newRealSymbol;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.REAL_LITERAL_EXP__REAL_SYMBOL, oldRealSymbol, realSymbol));
@@ -175,7 +177,7 @@ public class RealLiteralExpImpl
 				setType((Type)newValue);
 				return;
 			case PivotPackage.REAL_LITERAL_EXP__REAL_SYMBOL:
-				setRealSymbol((BigDecimal)newValue);
+				setRealSymbol((Number)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -260,5 +262,9 @@ public class RealLiteralExpImpl
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitRealLiteralExp(this);
+	}
+
+	public @NonNull RealValue getRealValue(@NonNull ValueFactory valueFactory) {
+		return realSymbol != null ? valueFactory.realValueOf(realSymbol) : valueFactory.getNull();
 	}
 } //RealLiteralExpImpl

@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot.utilities;
 
-import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
@@ -528,13 +527,8 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 	@Override
 	public Object visitUnlimitedNaturalLiteralExp(@NonNull UnlimitedNaturalLiteralExp object) {
 		appendExpPrefix(object);
-		BigInteger unlimitedNaturalSymbol = object.getUnlimitedNaturalSymbol();
-		if (unlimitedNaturalSymbol.signum() < 0) {
-			context.append(MONIKER_UNLIMITED_NATURAL_LITERAL_EXP);
-		}
-		else {
-			context.append(unlimitedNaturalSymbol.toString());
-		}
+		Number unlimitedNaturalSymbol = object.getUnlimitedNaturalSymbol();
+		context.append(unlimitedNaturalSymbol.toString());
 		return true;
 	}
 

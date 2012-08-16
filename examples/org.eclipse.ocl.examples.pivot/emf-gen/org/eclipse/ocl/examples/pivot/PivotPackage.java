@@ -17780,7 +17780,7 @@ public interface PivotPackage
 	 * The meta object id for the '<em>Integer</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see java.math.BigInteger
+	 * @see java.lang.Number
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getInteger()
 	 * @generated
 	 */
@@ -17810,7 +17810,7 @@ public interface PivotPackage
 	 * The meta object id for the '<em>Real</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see java.math.BigDecimal
+	 * @see java.lang.Number
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getReal()
 	 * @generated
 	 */
@@ -17840,7 +17840,7 @@ public interface PivotPackage
 	 * The meta object id for the '<em>Unlimited Natural</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see java.math.BigInteger
+	 * @see java.lang.Number
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getUnlimitedNatural()
 	 * @generated
 	 */
@@ -21522,12 +21522,12 @@ public interface PivotPackage
 	EDataType getInt();
 
 	/**
-	 * Returns the meta object for data type '{@link java.math.BigInteger <em>Integer</em>}'.
+	 * Returns the meta object for data type '{@link java.lang.Number <em>Integer</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Integer</em>'.
-	 * @see java.math.BigInteger
-	 * @model instanceClass="java.math.BigInteger"
+	 * @see java.lang.Number
+	 * @model instanceClass="java.lang.Number"
 	 * @generated
 	 */
 	EDataType getInteger();
@@ -21555,12 +21555,12 @@ public interface PivotPackage
 	EDataType getObject();
 
 	/**
-	 * Returns the meta object for data type '{@link java.math.BigDecimal <em>Real</em>}'.
+	 * Returns the meta object for data type '{@link java.lang.Number <em>Real</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Real</em>'.
-	 * @see java.math.BigDecimal
-	 * @model instanceClass="java.math.BigDecimal"
+	 * @see java.lang.Number
+	 * @model instanceClass="java.lang.Number"
 	 * @generated
 	 */
 	EDataType getReal();
@@ -21588,12 +21588,12 @@ public interface PivotPackage
 	EDataType getThrowable();
 
 	/**
-	 * Returns the meta object for data type '{@link java.math.BigInteger <em>Unlimited Natural</em>}'.
+	 * Returns the meta object for data type '{@link java.lang.Number <em>Unlimited Natural</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Unlimited Natural</em>'.
-	 * @see java.math.BigInteger
-	 * @model instanceClass="java.math.BigInteger"
+	 * @see java.lang.Number
+	 * @model instanceClass="java.lang.Number"
 	 * @generated
 	 */
 	EDataType getUnlimitedNatural();
@@ -24640,7 +24640,7 @@ public interface PivotPackage
 		 * The meta object literal for the '<em>Integer</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see java.math.BigInteger
+		 * @see java.lang.Number
 		 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getInteger()
 		 * @generated
 		 */
@@ -24670,7 +24670,7 @@ public interface PivotPackage
 		 * The meta object literal for the '<em>Real</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see java.math.BigDecimal
+		 * @see java.lang.Number
 		 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getReal()
 		 * @generated
 		 */
@@ -24700,7 +24700,7 @@ public interface PivotPackage
 		 * The meta object literal for the '<em>Unlimited Natural</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see java.math.BigInteger
+		 * @see java.lang.Number
 		 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getUnlimitedNatural()
 		 * @generated
 		 */

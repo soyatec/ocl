@@ -593,8 +593,8 @@ public class EvaluateOclAnyOperationsTest extends PivotSimpleTestSuite
      */
     public void test_oclType_Collection() {   	
      	assertQueryEquals(null, 1, "Set{1}->oclType().ownedOperation->select(name = 'flatten')->size()");
-    	assertQueryEquals(null, metaModelManager.getSetType(metaModelManager.getOclAnyType()), "Set{}->oclType()");
-    	assertQueryEquals(null, metaModelManager.getSetType(metaModelManager.getUnlimitedNaturalType()), "Set{1}->oclType()");
+    	assertQueryEquals(null, metaModelManager.getSetType(metaModelManager.getOclAnyType(), null, null), "Set{}->oclType()");
+    	assertQueryEquals(null, metaModelManager.getSetType(metaModelManager.getUnlimitedNaturalType(), null, null), "Set{1}->oclType()");
     	assertQueryResults(null, "Bag{'UnlimitedNatural'}", "Set{1}.oclType().name");
     	assertQueryEquals(null, "Set", "Set{1}->oclType().name");
     	assertSemanticErrorQuery("Set{1}.allInstances()", OCLMessages.UnresolvedOperation_ERROR_, "allInstances", "Set(UnlimitedNatural)");

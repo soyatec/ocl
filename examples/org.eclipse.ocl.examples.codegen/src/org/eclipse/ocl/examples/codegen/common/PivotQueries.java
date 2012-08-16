@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -70,8 +71,11 @@ public class PivotQueries
 		if (element instanceof IntegerLiteralExp) {
 			return element.toString();
 		}
-		if ((element instanceof UnlimitedNaturalLiteralExp) && ((UnlimitedNaturalLiteralExp)element).getUnlimitedNaturalSymbol().signum() >= 0) {
-			return element.toString();
+		if (element instanceof UnlimitedNaturalLiteralExp) {
+			Number unlimitedNaturalSymbol = ((UnlimitedNaturalLiteralExp)element).getUnlimitedNaturalSymbol();
+			if (!(unlimitedNaturalSymbol instanceof Unlimited)) {
+				return element.toString();
+			}
 		}
 		return null;
 	}

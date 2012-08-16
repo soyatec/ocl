@@ -18,8 +18,11 @@ package org.eclipse.ocl.examples.domain.values.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -67,9 +70,22 @@ public class NullValueImpl extends UndefinedCollectionValueImpl implements NullV
 		return valueFactory.getStandardLibrary().getOclVoidType();
 	}
 
+	public @Nullable Value getValue(@NonNull String partName) throws InvalidValueException {
+    	return toInvalidValue();
+	}
+
+	public @Nullable Value getValue(@NonNull DomainTypedElement part) throws InvalidValueException {
+    	return toInvalidValue();
+	}
+
 	@Override
 	public int hashCode() {
 		return 0x11111111;
+	}
+
+	public int intValue() throws InvalidValueException {
+    	toInvalidValue();		// throws rather than returns
+    	return 0;
 	}
 
 	@Override

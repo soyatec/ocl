@@ -106,7 +106,7 @@ public class IterateExpBodies
 			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
 			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
 			final @NonNull ExecutorType T_pivot__OCLExpression = PivotTables.Types._OCLExpression;
-			final @NonNull DomainCollectionType T_Set_pivot__OCLExpression_ = standardLibrary.getSetType(T_pivot__OCLExpression);
+			final @NonNull DomainCollectionType T_Set_pivot__OCLExpression_ = standardLibrary.getSetType(T_pivot__OCLExpression, null, null);
 			final @NonNull ExecutorOperation O_OclAny_oclAsSet = OCLstdlibTables.Operations._OclAny__oclAsSet;
 			final @NonNull ExecutorProperty P_Variable_initExpression = PivotTables.Properties._Variable__initExpression;
 			final @NonNull LibraryProperty IP_Variable_initExpression = P_Variable_initExpression.getImplementation();

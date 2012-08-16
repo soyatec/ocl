@@ -17,10 +17,10 @@
 package org.eclipse.ocl.examples.pivot.ecore;
 
 import java.lang.reflect.Method;
-import java.math.BigInteger;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
@@ -35,6 +35,9 @@ import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.util.EcoreSwitch;
 import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.DataType;
@@ -52,6 +55,8 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 {				
+	private static final Logger logger = Logger.getLogger(Ecore2PivotReferenceSwitch.class);
+
     /**
      * The key that identifies opposite role names in an annotation
      */
@@ -164,15 +169,29 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 					String upperValue = details.get(PROPERTY_OPPOSITE_ROLE_UPPER_KEY);
 					boolean isOrdered = orderedValue != null ? Boolean.valueOf(orderedValue) : false;
 					boolean isUnique = uniqueValue != null ? Boolean.valueOf(uniqueValue) : true;
-					long lower = lowerValue != null ? Long.parseLong(lowerValue) : 1;
-					long upper = upperValue != null ? Long.parseLong(upperValue) : 1;
-					if (upper != 1) {
-						oppositeProperty.setType(metaModelManager.getCollectionType(isOrdered, isUnique, localType, BigInteger.valueOf(lower), BigInteger.valueOf(upper)));
+					ValueFactory valueFactory = metaModelManager.getValueFactory();
+					IntegerValue one = valueFactory.getOne();
+					IntegerValue lower;
+					try {
+						lower = lowerValue != null ? valueFactory.integerValueOf(lowerValue) : one;
+					} catch (InvalidValueException e) {
+						logger.error("Invalid " + PROPERTY_OPPOSITE_ROLE_LOWER_KEY, e);
+						lower = one;
+					}
+					IntegerValue upper;
+					try {
+						upper = upperValue != null ? valueFactory.integerValueOf(upperValue) : one;
+					} catch (InvalidValueException e) {
+						logger.error("Invalid " + PROPERTY_OPPOSITE_ROLE_UPPER_KEY, e);
+						upper = one;
+					}
+					if (upper != one) {
+						oppositeProperty.setType(metaModelManager.getCollectionType(isOrdered, isUnique, localType, lower, upper));
 						oppositeProperty.setIsRequired(true);
 					}
 					else {
 						oppositeProperty.setType(localType);
-						oppositeProperty.setIsRequired(lower == 1);
+						oppositeProperty.setIsRequired(lower == one);
 					}
 					remoteType.getOwnedAttribute().add(oppositeProperty);
 					oppositeProperty.setOpposite(pivotElement);
@@ -213,13 +232,16 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 			EGenericType eType = eObject2.getEGenericType();
 			if (eType != null) {
 				Type pivotType = converter.getPivotType(eType);
-				long upper = eObject.getUpperBound();
+				int upper = eObject.getUpperBound();
 				if (upper != 1) {
-					long lower = eObject.getLowerBound();
+					int lower = eObject.getLowerBound();
 					boolean isOrdered = eObject.isOrdered();
 					boolean isUnique = eObject.isUnique();
 					if (pivotType != null) {
-						pivotType = metaModelManager.getCollectionType(isOrdered, isUnique, pivotType, BigInteger.valueOf(lower), BigInteger.valueOf(upper));
+						ValueFactory valueFactory = metaModelManager.getValueFactory();
+						IntegerValue lowerValue = valueFactory.integerValueOf(lower);
+						IntegerValue upperValue = upper != -1 ? valueFactory.integerValueOf(upper) : valueFactory.getUnlimited();
+						pivotType = metaModelManager.getCollectionType(isOrdered, isUnique, pivotType, lowerValue, upperValue);
 					}
 				}
 				pivotElement.setType(pivotType);

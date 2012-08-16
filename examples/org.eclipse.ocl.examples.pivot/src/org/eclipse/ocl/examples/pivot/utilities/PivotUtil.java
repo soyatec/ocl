@@ -100,8 +100,8 @@ public class PivotUtil extends DomainUtil
 		public static final PrecedenceComparator INSTANCE = new PrecedenceComparator();
 
 		public int compare(Precedence p1, Precedence p2) {
-			int o1 = p1 != null ? p1.getOrder().intValue() : -1;
-			int o2 = p2 != null ? p2.getOrder().intValue() : -1;
+			int o1 = p1 != null ? p1.getOrder() : -1;
+			int o2 = p2 != null ? p2.getOrder() : -1;
 			return o1 - o2; // NB least positive is highest precedence
 		}
 	}

@@ -233,7 +233,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	}
 
 	public @NonNull DomainCollectionType getBagType() {
-		return valueFactory.getStandardLibrary().getBagType(getElementType());
+		return valueFactory.getStandardLibrary().getBagType(getElementType(), null, null);
 	}
 
 	public @NonNull DomainCollectionType getCollectionType() {
@@ -253,15 +253,15 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	}
 
 	public @NonNull DomainCollectionType getOrderedSetType() {
-		return valueFactory.getStandardLibrary().getOrderedSetType(getElementType());
+		return valueFactory.getStandardLibrary().getOrderedSetType(getElementType(), null, null);
 	}
 
 	public @NonNull DomainCollectionType getSequenceType() {
-		return valueFactory.getStandardLibrary().getSequenceType(getElementType());
+		return valueFactory.getStandardLibrary().getSequenceType(getElementType(), null, null);
 	}
 
 	public @NonNull DomainCollectionType getSetType() {
-		return valueFactory.getStandardLibrary().getSetType(getElementType());
+		return valueFactory.getStandardLibrary().getSetType(getElementType(), null, null);
 	}
 
 	public @NonNull DomainCollectionType getType() {
@@ -303,16 +303,16 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	public @NonNull CollectionValue intersection(@NonNull CollectionValue c) throws InvalidValueException {
 		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 		if (this instanceof OrderedSetValue) {
-            return OrderedSetValueImpl.intersection(valueFactory, standardLibrary.getOrderedSetType(getElementType()), this, c);
+            return OrderedSetValueImpl.intersection(valueFactory, standardLibrary.getOrderedSetType(getElementType(), null, null), this, c);
         }
         else if (this instanceof SequenceValue && c instanceof UniqueCollectionValue) {
-            return OrderedSetValueImpl.intersection(valueFactory, standardLibrary.getOrderedSetType(getElementType()), this, c);
+            return OrderedSetValueImpl.intersection(valueFactory, standardLibrary.getOrderedSetType(getElementType(), null, null), this, c);
         }
         else if (this instanceof UniqueCollectionValue || c instanceof UniqueCollectionValue) {
-            return SetValueImpl.intersection(valueFactory, standardLibrary.getSetType(getElementType()), this, c);
+            return SetValueImpl.intersection(valueFactory, standardLibrary.getSetType(getElementType(), null, null), this, c);
         }
         else {
-            return BagValueImpl.intersection(valueFactory, standardLibrary.getBagType(getElementType()), this, c);
+            return BagValueImpl.intersection(valueFactory, standardLibrary.getBagType(getElementType(), null, null), this, c);
         }
 	}
 

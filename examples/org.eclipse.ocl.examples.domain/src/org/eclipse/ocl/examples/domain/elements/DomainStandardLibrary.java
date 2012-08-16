@@ -16,13 +16,16 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
-import java.math.BigInteger;
 import java.util.Enumeration;
 import java.util.List;
 
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.xml.type.AnyType;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * A representation of the OCL Standard Library, which is the set of singleton
@@ -48,7 +51,9 @@ public interface DomainStandardLibrary
 	/**
 	 * Return the instance of the Bag metatype whose elements are of elementType.
 	 */
+	@Deprecated
 	@NonNull DomainCollectionType getBagType(@NonNull DomainType elementType);
+	@NonNull DomainCollectionType getBagType(@NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper);
 	
     /**
      * Obtains the instance of the {@link PrimitiveType} metatype, named
@@ -69,7 +74,7 @@ public interface DomainStandardLibrary
 	/**
 	 * Return the specialized collection type for the containerType for elementType.
 	 */
-	@NonNull DomainCollectionType getCollectionType(@NonNull DomainCollectionType containerType, @NonNull DomainType elementType, BigInteger lower, BigInteger upper);
+	@NonNull DomainCollectionType getCollectionType(@NonNull DomainCollectionType containerType, @NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper);
 
 	/**
 	 * Return the enumeration for a given enumerator.
@@ -200,7 +205,9 @@ public interface DomainStandardLibrary
 	/**
 	 * Return the instance of the OrderedSet metatype whose elements are of elementType.
 	 */
+	@Deprecated
 	@NonNull DomainCollectionType getOrderedSetType(@NonNull DomainType elementType);
+	@NonNull DomainCollectionType getOrderedSetType(@NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper);
 	
     /**
      * Obtains the instance of the {@link PrimitiveType} metatype, named
@@ -221,7 +228,9 @@ public interface DomainStandardLibrary
 	/**
 	 * Return the instance of the Sequence metatype whose elements are of elementType.
 	 */
+	@Deprecated
 	@NonNull DomainCollectionType getSequenceType(@NonNull DomainType elementType);
+	@NonNull DomainCollectionType getSequenceType(@NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper);
 	
     /**
      * Obtains the generic instance of the {@link SetType} metatype, named
@@ -234,7 +243,9 @@ public interface DomainStandardLibrary
 	/**
 	 * Return the instance of the Set metatype whose elements are of elementType.
 	 */
+	@Deprecated
 	@NonNull DomainCollectionType getSetType(@NonNull DomainType elementType);
+	@NonNull DomainCollectionType getSetType(@NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper);
 	
     /**
      * Obtains the instance of the {@link PrimitiveType} metatype, named
@@ -275,6 +286,8 @@ public interface DomainStandardLibrary
      *     {@link PrimitiveType})
      */
 	@NonNull DomainType getUnlimitedNaturalType();
+
+	@NonNull ValueFactory getValueFactory();
 	
 	boolean isEqualToCollectionType(@NonNull DomainCollectionType firstCollectionType, @NonNull DomainCollectionType secondCollectionType);
 

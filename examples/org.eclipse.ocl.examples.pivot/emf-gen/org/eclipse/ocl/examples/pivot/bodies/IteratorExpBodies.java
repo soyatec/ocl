@@ -140,7 +140,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
 			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
 			final @NonNull ExecutorType T_pivot__Variable = PivotTables.Types._Variable;
-			final @NonNull DomainCollectionType T_OrderedSet_pivot__Variable_ = standardLibrary.getOrderedSetType(T_pivot__Variable);
+			final @NonNull DomainCollectionType T_OrderedSet_pivot__Variable_ = standardLibrary.getOrderedSetType(T_pivot__Variable, null, null);
 			final @NonNull ExecutorProperty P_LoopExp_iterator = PivotTables.Properties._LoopExp__iterator;
 			final @NonNull LibraryProperty IP_LoopExp_iterator = P_LoopExp_iterator.getImplementation();
 			final @NonNull IntegerValue I_1 = valueFactory.integerValueOf(1);
@@ -383,7 +383,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
 			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
 			final @NonNull ExecutorType T_pivot__Variable = PivotTables.Types._Variable;
-			final @NonNull DomainCollectionType T_OrderedSet_pivot__Variable_ = standardLibrary.getOrderedSetType(T_pivot__Variable);
+			final @NonNull DomainCollectionType T_OrderedSet_pivot__Variable_ = standardLibrary.getOrderedSetType(T_pivot__Variable, null, null);
 			final @NonNull ExecutorProperty P_LoopExp_iterator = PivotTables.Properties._LoopExp__iterator;
 			final @NonNull LibraryProperty IP_LoopExp_iterator = P_LoopExp_iterator.getImplementation();
 			final @NonNull IntegerValue I_1 = valueFactory.integerValueOf(1);
@@ -771,7 +771,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
 			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
 			final @NonNull ExecutorType T_pivot__Variable = PivotTables.Types._Variable;
-			final @NonNull DomainCollectionType T_OrderedSet_pivot__Variable_ = standardLibrary.getOrderedSetType(T_pivot__Variable);
+			final @NonNull DomainCollectionType T_OrderedSet_pivot__Variable_ = standardLibrary.getOrderedSetType(T_pivot__Variable, null, null);
 			final @NonNull ExecutorProperty P_LoopExp_iterator = PivotTables.Properties._LoopExp__iterator;
 			final @NonNull LibraryProperty IP_LoopExp_iterator = P_LoopExp_iterator.getImplementation();
 			final @NonNull IntegerValue I_1 = valueFactory.integerValueOf(1);
@@ -836,7 +836,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
 			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
 			final @NonNull ExecutorType T_pivot__Variable = PivotTables.Types._Variable;
-			final @NonNull DomainCollectionType T_OrderedSet_pivot__Variable_ = standardLibrary.getOrderedSetType(T_pivot__Variable);
+			final @NonNull DomainCollectionType T_OrderedSet_pivot__Variable_ = standardLibrary.getOrderedSetType(T_pivot__Variable, null, null);
 			final @NonNull ExecutorProperty P_LoopExp_iterator = PivotTables.Properties._LoopExp__iterator;
 			final @NonNull LibraryProperty IP_LoopExp_iterator = P_LoopExp_iterator.getImplementation();
 			final @NonNull IntegerValue I_1 = valueFactory.integerValueOf(1);
@@ -1395,7 +1395,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
 			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
 			final @NonNull ExecutorType T_pivot__Variable = PivotTables.Types._Variable;
-			final @NonNull DomainCollectionType T_OrderedSet_pivot__Variable_ = standardLibrary.getOrderedSetType(T_pivot__Variable);
+			final @NonNull DomainCollectionType T_OrderedSet_pivot__Variable_ = standardLibrary.getOrderedSetType(T_pivot__Variable, null, null);
 			final @NonNull ExecutorProperty P_LoopExp_iterator = PivotTables.Properties._LoopExp__iterator;
 			final @NonNull LibraryProperty IP_LoopExp_iterator = P_LoopExp_iterator.getImplementation();
 			final @NonNull IntegerValue I_1 = valueFactory.integerValueOf(1);
@@ -1512,7 +1512,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			final @NonNull ExecutorOperation O_Collection_forAll = OCLstdlibTables.Operations._Collection__1_forAll;
 			final @NonNull ExecutorType T_pivot__Variable = PivotTables.Types._Variable;
-			final @NonNull DomainCollectionType T_OrderedSet_pivot__Variable_ = standardLibrary.getOrderedSetType(T_pivot__Variable);
+			final @NonNull DomainCollectionType T_OrderedSet_pivot__Variable_ = standardLibrary.getOrderedSetType(T_pivot__Variable, null, null);
 			final @NonNull ExecutorProperty P_LoopExp_iterator = PivotTables.Properties._LoopExp__iterator;
 			final @NonNull LibraryProperty IP_LoopExp_iterator = P_LoopExp_iterator.getImplementation();
 			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
@@ -1658,7 +1658,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
 			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
 			final @NonNull ExecutorType T_pivot__Variable = PivotTables.Types._Variable;
-			final @NonNull DomainCollectionType T_OrderedSet_pivot__Variable_ = standardLibrary.getOrderedSetType(T_pivot__Variable);
+			final @NonNull DomainCollectionType T_OrderedSet_pivot__Variable_ = standardLibrary.getOrderedSetType(T_pivot__Variable, null, null);
 			final @NonNull ExecutorProperty P_LoopExp_iterator = PivotTables.Properties._LoopExp__iterator;
 			final @NonNull LibraryProperty IP_LoopExp_iterator = P_LoopExp_iterator.getImplementation();
 			final @NonNull IntegerValue I_1 = valueFactory.integerValueOf(1);
@@ -1784,7 +1784,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
 			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
 			final @NonNull ExecutorType T_pivot__Variable = PivotTables.Types._Variable;
-			final @NonNull DomainCollectionType T_OrderedSet_pivot__Variable_ = standardLibrary.getOrderedSetType(T_pivot__Variable);
+			final @NonNull DomainCollectionType T_OrderedSet_pivot__Variable_ = standardLibrary.getOrderedSetType(T_pivot__Variable, null, null);
 			final @NonNull ExecutorProperty P_LoopExp_iterator = PivotTables.Properties._LoopExp__iterator;
 			final @NonNull LibraryProperty IP_LoopExp_iterator = P_LoopExp_iterator.getImplementation();
 			final @NonNull IntegerValue I_1 = valueFactory.integerValueOf(1);
@@ -2130,7 +2130,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
 			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
 			final @NonNull ExecutorType T_pivot__Variable = PivotTables.Types._Variable;
-			final @NonNull DomainCollectionType T_OrderedSet_pivot__Variable_ = standardLibrary.getOrderedSetType(T_pivot__Variable);
+			final @NonNull DomainCollectionType T_OrderedSet_pivot__Variable_ = standardLibrary.getOrderedSetType(T_pivot__Variable, null, null);
 			final @NonNull ExecutorProperty P_LoopExp_iterator = PivotTables.Properties._LoopExp__iterator;
 			final @NonNull LibraryProperty IP_LoopExp_iterator = P_LoopExp_iterator.getImplementation();
 			final @NonNull IntegerValue I_1 = valueFactory.integerValueOf(1);

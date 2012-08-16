@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import java.math.BigInteger;
 
 /**
  * <!-- begin-user-doc -->
@@ -81,13 +80,13 @@ public interface EnumerationLiteral
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(BigInteger)
+	 * @see #setValue(Number)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getEnumerationLiteral_Value()
 	 * @model default="0" dataType="org.eclipse.ocl.examples.pivot.Integer"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!EnumerationLiteral!value'"
 	 * @generated
 	 */
-	BigInteger getValue();
+	Number getValue();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.EnumerationLiteral#getValue <em>Value</em>}' attribute.
@@ -97,6 +96,6 @@ public interface EnumerationLiteral
 	 * @see #getValue()
 	 * @generated
 	 */
-	void setValue(BigInteger value);
+	void setValue(Number value);
 
 } // EnumerationLiteral

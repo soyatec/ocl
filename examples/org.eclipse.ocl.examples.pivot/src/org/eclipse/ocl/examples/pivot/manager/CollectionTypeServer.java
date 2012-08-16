@@ -17,17 +17,20 @@
 package org.eclipse.ocl.examples.pivot.manager;
 
 import java.lang.ref.WeakReference;
-import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
@@ -43,6 +46,8 @@ import org.eclipse.ocl.examples.pivot.Type;
  */
 public class CollectionTypeServer extends ExtensibleTypeServer
 {
+	private static final Logger logger = Logger.getLogger(CollectionTypeServer.class);
+
 	public static class TemplateArguments implements Iterable<Object>
 	{
 		protected class Iterator implements java.util.Iterator<Object>
@@ -68,17 +73,11 @@ public class CollectionTypeServer extends ExtensibleTypeServer
 		}
 		
 		private final int hashCode;
-		private final Type elementType;
-		private final BigInteger lower;
-		private final BigInteger upper;
+		private final @NonNull Type elementType;
+		private final @NonNull IntegerValue lower;
+		private final @NonNull IntegerValue upper;
 
-		public TemplateArguments(Type elementType, BigInteger lower, BigInteger upper) {
-			if (lower == null) {
-				lower = BigInteger.valueOf(0);
-			}
-			if (upper == null) {
-				upper = BigInteger.valueOf(-1);
-			}
+		public TemplateArguments(@NonNull Type elementType, @NonNull IntegerValue lower, @NonNull IntegerValue upper) {
 			this.elementType = elementType;
 			this.lower = lower;
 			this.upper = upper;
@@ -109,15 +108,15 @@ public class CollectionTypeServer extends ExtensibleTypeServer
 			return true;
 		}
 
-		public Type getElementType() {
+		public @NonNull Type getElementType() {
 			return elementType;
 		}
 
-		public BigInteger getLower() {
+		public @NonNull IntegerValue getLower() {
 			return lower;
 		}
 
-		public BigInteger getUpper() {
+		public @NonNull IntegerValue getUpper() {
 			return upper;
 		}
 
@@ -126,7 +125,7 @@ public class CollectionTypeServer extends ExtensibleTypeServer
 			return hashCode;
 		}
 
-		public Iterator iterator() {
+		public @NonNull Iterator iterator() {
 			return new Iterator();
 		}		
 
@@ -190,8 +189,16 @@ public class CollectionTypeServer extends ExtensibleTypeServer
 		packageManager.resolveSuperClasses(specializedType, unspecializedType, allBindings);
 		CollectionType specializedCollectionType = (CollectionType)specializedType;
 		specializedCollectionType.setElementType(templateArguments.getElementType());
-		specializedCollectionType.setLower(templateArguments.getLower());
-		specializedCollectionType.setUpper(templateArguments.getUpper());
+		try {
+			specializedCollectionType.setLowerValue(templateArguments.getLower());
+		} catch (InvalidValueException e) {
+			logger.error("Out of range lower bound", e);
+		}
+		try {
+			specializedCollectionType.setUpperValue(templateArguments.getUpper());
+		} catch (InvalidValueException e) {
+			logger.error("Out of range upper bound", e);
+		}
 		specializedType.setUnspecializedElement(unspecializedType);
 		MetaModelManager metaModelManager = packageManager.getMetaModelManager();
 		Orphanage orphanage = Orphanage.getOrphanage(metaModelManager.getPivotResourceSet());
@@ -225,8 +232,15 @@ public class CollectionTypeServer extends ExtensibleTypeServer
 		return type;
 	}
 
-	public synchronized @NonNull Type getSpecializedType(@NonNull Type elementType, BigInteger lower, BigInteger upper) {
+	public synchronized @NonNull Type getSpecializedType(@NonNull Type elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
 		assert getPivotType() instanceof CollectionType;
+		ValueFactory valueFactory = packageManager.getMetaModelManager().getValueFactory();
+		if (lower == null) {
+			lower = valueFactory.getZero();
+		}
+		if (upper == null) {
+			upper = valueFactory.getUnlimited();
+		}
 		TemplateArguments templateArguments = new TemplateArguments(elementType, lower, upper);
 		Map<TemplateArguments, WeakReference<Type>> specializations2 = specializations;
 		if (specializations2 == null) {

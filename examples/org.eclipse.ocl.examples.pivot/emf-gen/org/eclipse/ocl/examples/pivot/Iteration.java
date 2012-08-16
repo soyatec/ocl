@@ -48,7 +48,7 @@ public interface Iteration extends Operation
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Iterator</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getIteration_OwnedIterator()
-	 * @model containment="true" ordered="false"
+	 * @model containment="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Iteration!ownedIterator'"
 	 * @generated
 	 */
@@ -75,7 +75,7 @@ public interface Iteration extends Operation
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Accumulator</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getIteration_OwnedAccumulator()
-	 * @model containment="true" ordered="false"
+	 * @model containment="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Iteration!ownedAccumulator'"
 	 * @generated
 	 */

@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
-import java.math.BigInteger;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -39,6 +38,7 @@ import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
+import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 
@@ -68,7 +68,7 @@ public class EnumerationLiteralImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BigInteger VALUE_EDEFAULT = new BigInteger("0"); //$NON-NLS-1$
+	protected static final Number VALUE_EDEFAULT = (Number)PivotFactory.eINSTANCE.createFromString(PivotPackage.eINSTANCE.getInteger(), "0"); //$NON-NLS-1$
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -77,7 +77,7 @@ public class EnumerationLiteralImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected BigInteger value = VALUE_EDEFAULT;
+	protected Number value = VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -146,7 +146,7 @@ public class EnumerationLiteralImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BigInteger getValue()
+	public Number getValue()
 	{
 		return value;
 	}
@@ -156,9 +156,9 @@ public class EnumerationLiteralImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(BigInteger newValue)
+	public void setValue(Number newValue)
 	{
-		BigInteger oldValue = value;
+		Number oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.ENUMERATION_LITERAL__VALUE, oldValue, value));
@@ -290,7 +290,7 @@ public class EnumerationLiteralImpl
 				setEnumeration((Enumeration)newValue);
 				return;
 			case PivotPackage.ENUMERATION_LITERAL__VALUE:
-				setValue((BigInteger)newValue);
+				setValue((Number)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -338,7 +338,6 @@ public class EnumerationLiteralImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("null")
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID)

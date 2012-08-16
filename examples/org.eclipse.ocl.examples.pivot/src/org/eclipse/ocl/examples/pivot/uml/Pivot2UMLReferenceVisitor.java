@@ -16,11 +16,14 @@
  */
 package org.eclipse.ocl.examples.pivot.uml;
 
-import java.math.BigInteger;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.Class;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.DataType;
@@ -40,6 +43,8 @@ import org.eclipse.uml2.uml.MultiplicityElement;
 public class Pivot2UMLReferenceVisitor
 	extends AbstractExtendingVisitor<EObject, Pivot2UML>
 {
+	private static final Logger logger = Logger.getLogger(Pivot2UMLReferenceVisitor.class);
+
 //	protected final Pivot2EcoreTypeRefVisitor typeRefVisitor;
 	
 	public Pivot2UMLReferenceVisitor(@NonNull Pivot2UML context) {
@@ -213,10 +218,19 @@ public class Pivot2UMLReferenceVisitor
 				MultiplicityElement umlMultiplicityElement = (MultiplicityElement)umlTypedElement;
 				umlMultiplicityElement.setIsOrdered(collectionType.isOrdered());
 				umlMultiplicityElement.setIsUnique(collectionType.isUnique());
-				BigInteger lower = collectionType.getLower();
-				BigInteger upper = collectionType.getUpper();
-				umlMultiplicityElement.setLower(lower != null ? lower.intValue() : 0);
-				umlMultiplicityElement.setUpper(upper != null ? upper.intValue() : -1);
+				ValueFactory valueFactory = context.getMetaModelManager().getValueFactory();
+				IntegerValue lower = collectionType.getLowerValue(valueFactory);
+				IntegerValue upper = collectionType.getUpperValue(valueFactory);
+				try {
+					umlMultiplicityElement.setLower(lower.intValue());
+				} catch (InvalidValueException e) {
+					logger.error("Out of range lower bound", e);
+				}
+				try {
+					umlMultiplicityElement.setUpper(upper.isUnlimited() ? -1 : upper.intValue());
+				} catch (InvalidValueException e) {
+					logger.error("Out of range upper bound", e);
+				}
 			}
 			return null;
 		}

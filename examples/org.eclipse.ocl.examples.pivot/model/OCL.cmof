@@ -203,8 +203,8 @@
     </ownedMember>
     <ownedMember xmi:type="cmof:Package" xmi:id="_rMVQYI9nEd-UToJjGuajxg" name="OCL_Library">
       <ownedMember xmi:type="cmof:Class" xmi:id="_oWAYwAbiEeC3-uphdlDm-Q" name="Iteration" superClass="_l0ihkAbiEeC3-uphdlDm-Q">
-        <ownedAttribute xmi:type="cmof:Property" xmi:id="_QH8c0AbjEeC3-uphdlDm-Q" name="ownedIterator" type="_2vcHMI9nEd-UToJjGuajxg" lower="0" upper="*" isComposite="true"/>
-        <ownedAttribute xmi:type="cmof:Property" xmi:id="_-o2IsAbiEeC3-uphdlDm-Q" name="ownedAccumulator" type="_2vcHMI9nEd-UToJjGuajxg" lower="0" upper="*" isComposite="true"/>
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_QH8c0AbjEeC3-uphdlDm-Q" name="ownedIterator" type="_2vcHMI9nEd-UToJjGuajxg" isOrdered="true" lower="0" upper="*" isComposite="true"/>
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_-o2IsAbiEeC3-uphdlDm-Q" name="ownedAccumulator" type="_2vcHMI9nEd-UToJjGuajxg" isOrdered="true" lower="0" upper="*" isComposite="true"/>
       </ownedMember>
       <ownedMember xmi:type="cmof:Class" xmi:id="_Moz7QBGeEeCsy5gumoi3HA" name="Library" superClass="_PSf6UBGeEeCsy5gumoi3HA"/>
       <ownedMember xmi:type="cmof:Class" xmi:id="_PSf6UBGeEeCsy5gumoi3HA" name="Package"/>
@@ -233,7 +233,7 @@
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_K91OkOLZEeGCOa0Md3lQkQ" name="lower" default="0">
           <type xmi:type="cmof:PrimitiveType" href="Infrastructure.cmof#Core-PrimitiveTypes-Integer"/>
         </ownedAttribute>
-        <ownedAttribute xmi:type="cmof:Property" xmi:id="_Q9AiwOLZEeGCOa0Md3lQkQ" name="upper" default="-1">
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_Q9AiwOLZEeGCOa0Md3lQkQ" name="upper" default="*">
           <type xmi:type="cmof:PrimitiveType" href="Infrastructure.cmof#Core-PrimitiveTypes-UnlimitedNatural"/>
         </ownedAttribute>
         <superClass xmi:type="cmof:Class" href="Infrastructure.cmof#Core-Basic-DataType"/>

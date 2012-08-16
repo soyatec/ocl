@@ -16,9 +16,12 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import java.math.BigInteger;
 import java.util.Map;
+
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * <!-- begin-user-doc -->
@@ -48,13 +51,13 @@ public interface IntegerLiteralExp
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Integer Symbol</em>' attribute.
-	 * @see #setIntegerSymbol(BigInteger)
+	 * @see #setIntegerSymbol(Number)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getIntegerLiteralExp_IntegerSymbol()
 	 * @model dataType="org.eclipse.ocl.examples.pivot.Integer" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!IntegerLiteralExp!integerSymbol'"
 	 * @generated
 	 */
-	BigInteger getIntegerSymbol();
+	Number getIntegerSymbol();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.IntegerLiteralExp#getIntegerSymbol <em>Integer Symbol</em>}' attribute.
@@ -64,7 +67,7 @@ public interface IntegerLiteralExp
 	 * @see #getIntegerSymbol()
 	 * @generated
 	 */
-	void setIntegerSymbol(BigInteger value);
+	void setIntegerSymbol(Number value);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -77,4 +80,5 @@ public interface IntegerLiteralExp
 	 */
 	boolean validateTypeIsInteger(DiagnosticChain diagnostics, Map<Object, Object> context);
 
+	@NonNull IntegerValue getIntegerValue(@NonNull ValueFactory valueFactory);
 } // IntegerLiteralExp

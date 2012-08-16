@@ -253,9 +253,9 @@ public class EvaluateModelOperationsTest extends PivotTestSuite
         Type aType = (Type) metaModelManager.getType(aClass);
         Type bType = (Type) metaModelManager.getType(bClass);
         Type cType = (Type) metaModelManager.getType(cClass);
-		CollectionType orderedSet_B_type = metaModelManager.getOrderedSetType(bType);
-		CollectionType sequence_C_type = metaModelManager.getSequenceType(cType);
-		CollectionType bag_C_type = metaModelManager.getBagType(cType);
+		CollectionType orderedSet_B_type = metaModelManager.getOrderedSetType(bType, null, null);
+		CollectionType sequence_C_type = metaModelManager.getSequenceType(cType, null, null);
+		CollectionType bag_C_type = metaModelManager.getBagType(cType, null, null);
         //
 		Value b1_value = valueFactory.valueOf(b1);
 		Value b2_value = valueFactory.valueOf(b2);

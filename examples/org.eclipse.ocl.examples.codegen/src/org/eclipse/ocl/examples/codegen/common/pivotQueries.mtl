@@ -15,7 +15,7 @@
  * $Id$
  **/]
 [comment encoding = UTF-8 /]
-[module org::eclipse::ocl::examples::codegen::common::pivotQueries('http://www.eclipse.org/ocl/3.1.0/Pivot')/]
+[module org::eclipse::ocl::examples::codegen::common::pivotQueries('http://www.eclipse.org/ocl/3.1.0/Pivot','http://www.eclipse.org/ocl/3.1.0/OCL4Acceleo')/]
 
 [import org::eclipse::ocl::examples::codegen::common::nameQueries/]
 
@@ -34,7 +34,7 @@ elem->closure(c : Type | c.getSuperTypes())->including(elem)->asSet() /]
 [query public getBehavioralType(elem : Type) : Type =
 invoke('org.eclipse.ocl.examples.codegen.common.PivotQueries', 'getBehavioralType(org.eclipse.ocl.examples.pivot.Type)', Sequence{elem}) /]
 
-[query public getDepth(elem : Type) : Integer = 
+[query public getDepth(elem : Type) : OCLInteger = 
 invoke('org.eclipse.ocl.examples.codegen.common.PivotQueries', 'getDepth(org.eclipse.ocl.examples.pivot.Type)', Sequence{elem}) /]
 
 [query public getLiteralName(elem : Package) : String = 

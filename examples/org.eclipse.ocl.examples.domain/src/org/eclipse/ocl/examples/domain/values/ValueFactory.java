@@ -130,11 +130,13 @@ public interface ValueFactory
     @NonNull IntegerValue integerValueOf(int value);
     @NonNull IntegerValue integerValueOf(long value);
     @NonNull IntegerValue integerValueOf(@NonNull BigInteger value);
+    @NonNull IntegerValue integerValueOf(@NonNull Number aNumber);
     @NonNull IntegerValue integerValueOf(@NonNull String aValue) throws InvalidValueException;
 	
     @NonNull RealValue realValueOf(double value);
     @NonNull RealValue realValueOf(@NonNull BigDecimal value);
     @NonNull RealValue realValueOf(@NonNull IntegerValue integerValue);	
+    @NonNull RealValue realValueOf(@NonNull Number aNumber);
     @NonNull RealValue realValueOf(@NonNull String aValue) throws InvalidValueException;
 	
     @NonNull StringValue stringValueOf(@NonNull String value) ;

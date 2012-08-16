@@ -16,13 +16,14 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
-import java.math.BigInteger;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
@@ -57,7 +58,7 @@ public class UnlimitedNaturalLiteralExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BigInteger UNLIMITED_NATURAL_SYMBOL_EDEFAULT = null;
+	protected static final Number UNLIMITED_NATURAL_SYMBOL_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getUnlimitedNaturalSymbol() <em>Unlimited Natural Symbol</em>}' attribute.
@@ -67,7 +68,7 @@ public class UnlimitedNaturalLiteralExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected BigInteger unlimitedNaturalSymbol = UNLIMITED_NATURAL_SYMBOL_EDEFAULT;
+	protected Number unlimitedNaturalSymbol = UNLIMITED_NATURAL_SYMBOL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -93,7 +94,7 @@ public class UnlimitedNaturalLiteralExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BigInteger getUnlimitedNaturalSymbol() {
+	public Number getUnlimitedNaturalSymbol() {
 		return unlimitedNaturalSymbol;
 	}
 
@@ -102,8 +103,9 @@ public class UnlimitedNaturalLiteralExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setUnlimitedNaturalSymbol(BigInteger newUnlimitedNaturalSymbol) {
-		BigInteger oldUnlimitedNaturalSymbol = unlimitedNaturalSymbol;
+	public void setUnlimitedNaturalSymbol(Number newUnlimitedNaturalSymbol)
+	{
+		Number oldUnlimitedNaturalSymbol = unlimitedNaturalSymbol;
 		unlimitedNaturalSymbol = newUnlimitedNaturalSymbol;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.UNLIMITED_NATURAL_LITERAL_EXP__UNLIMITED_NATURAL_SYMBOL, oldUnlimitedNaturalSymbol, unlimitedNaturalSymbol));
@@ -175,7 +177,7 @@ public class UnlimitedNaturalLiteralExpImpl
 				setType((Type)newValue);
 				return;
 			case PivotPackage.UNLIMITED_NATURAL_LITERAL_EXP__UNLIMITED_NATURAL_SYMBOL:
-				setUnlimitedNaturalSymbol((BigInteger)newValue);
+				setUnlimitedNaturalSymbol((Number)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -260,5 +262,15 @@ public class UnlimitedNaturalLiteralExpImpl
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitUnlimitedNaturalLiteralExp(this);
+	}
+
+	public @NonNull IntegerValue getUnlimitedNaturalValue(@NonNull ValueFactory valueFactory) {
+		IntegerValue integerValue = unlimitedNaturalSymbol != null ? valueFactory.integerValueOf(unlimitedNaturalSymbol) : valueFactory.getNull();
+		if (integerValue.signum() < 0) {
+			if (integerValue == valueFactory.integerValueOf(-1)) {
+				integerValue = valueFactory.getUnlimited();
+			}
+		}
+		return integerValue;
 	}
 } //UnlimitedNaturalLiteralExpImpl

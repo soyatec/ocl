@@ -16,14 +16,16 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
-import java.math.BigInteger;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 public interface DomainCollectionType extends DomainType
 {
 	/*@NonNull*/ DomainCollectionType getContainerType();		
 	/*@NonNull*/ DomainType getElementType();
-	/*@NonNull*/ BigInteger getLower();		
-	/*@NonNull*/ BigInteger getUpper();
+	@NonNull IntegerValue getLowerValue(@NonNull ValueFactory valueFactory);		
+	@NonNull IntegerValue getUpperValue(@NonNull ValueFactory valueFactory);
 	boolean isOrdered();
 	boolean isUnique();
 }

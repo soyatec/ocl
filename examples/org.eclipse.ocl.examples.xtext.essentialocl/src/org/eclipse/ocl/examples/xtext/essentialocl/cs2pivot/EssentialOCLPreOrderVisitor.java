@@ -16,11 +16,12 @@
  */
 package org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -91,14 +92,20 @@ public class EssentialOCLPreOrderVisitor extends AbstractEssentialOCLPreOrderVis
 			if (csElementType != null) {
 				Type elementType = PivotUtil.getPivot(Type.class, csElementType);
 				if (elementType != null) {
-					BigInteger lower = null;
-					BigInteger upper = null;
+					IntegerValue lowerValue;
+					IntegerValue upperValue;
 					MultiplicityCS csMultiplicity = csElement.getMultiplicity();
 					if (csMultiplicity != null) {
-						lower = BigInteger.valueOf(csMultiplicity.getLower());
-						upper = BigInteger.valueOf(csMultiplicity.getUpper());
+						ValueFactory valueFactory = metaModelManager.getValueFactory();
+						lowerValue = valueFactory.integerValueOf(csMultiplicity.getLower());
+						int upper = csMultiplicity.getUpper();
+						upperValue = upper != -1 ? valueFactory.integerValueOf(upper) : valueFactory.getUnlimited();
 					}
-					type = metaModelManager.getCollectionType(name, elementType, lower, upper);
+					else {
+						lowerValue = null;
+						upperValue = null;
+					}
+					type = metaModelManager.getCollectionType(name, elementType, lowerValue, upperValue);
 				}
 			}
 			if (type == null) {

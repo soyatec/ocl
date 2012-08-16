@@ -16,10 +16,10 @@
  */
 package org.eclipse.ocl.examples.pivot.ecore;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -35,6 +35,9 @@ import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Class;
 import org.eclipse.ocl.examples.pivot.CollectionType;
@@ -56,6 +59,8 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotObjectImpl;
 public class Pivot2EcoreReferenceVisitor
 	extends AbstractExtendingVisitor<EObject, Pivot2Ecore>
 {
+	private static final Logger logger = Logger.getLogger(Pivot2EcoreReferenceVisitor.class);
+
 	protected final @NonNull Pivot2EcoreTypeRefVisitor typeRefVisitor;
 	
 	public Pivot2EcoreReferenceVisitor(@NonNull Pivot2Ecore context) {
@@ -273,10 +278,19 @@ public class Pivot2EcoreReferenceVisitor
 			}
 			eTypedElement.setOrdered(collectionType.isOrdered());
 			eTypedElement.setUnique(collectionType.isUnique());
-			BigInteger lower = collectionType.getLower();
-			BigInteger upper = collectionType.getUpper();
-			eTypedElement.setLowerBound(lower != null ? lower.intValue() : 0);
-			eTypedElement.setUpperBound(upper != null ? upper.intValue() : -1);
+			ValueFactory valueFactory = context.getMetaModelManager().getValueFactory();
+			IntegerValue lower = collectionType.getLowerValue(valueFactory);
+			IntegerValue upper = collectionType.getUpperValue(valueFactory);
+			try {
+				eTypedElement.setLowerBound(lower.intValue());
+			} catch (InvalidValueException e) {
+				logger.error("Illegal lower bound", e);
+			}
+			try {
+				eTypedElement.setUpperBound(upper.isUnlimited() ? -1 : upper.intValue());
+			} catch (InvalidValueException e) {
+				logger.error("Illegal upper bound", e);
+			}
 			return null;
 		}
 		else {

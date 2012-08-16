@@ -16,8 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot.util;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -36,7 +34,6 @@ import org.eclipse.ocl.examples.pivot.BagType;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.CallOperationAction;
-import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
 import org.eclipse.ocl.examples.pivot.CollectionKind;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
@@ -73,6 +70,7 @@ import org.eclipse.ocl.examples.pivot.LiteralExp;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.MessageExp;
 import org.eclipse.ocl.examples.pivot.MessageType;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.NavigationCallExp;
@@ -860,19 +858,19 @@ public class PivotValidator
 			case PivotPackage.INT:
 				return validateInt((Integer)value, diagnostics, context);
 			case PivotPackage.INTEGER:
-				return validateInteger((BigInteger)value, diagnostics, context);
+				return validateInteger((Number)value, diagnostics, context);
 			case PivotPackage.LIBRARY_FEATURE:
 				return validateLibraryFeature((LibraryFeature)value, diagnostics, context);
 			case PivotPackage.OBJECT:
 				return validateObject(value, diagnostics, context);
 			case PivotPackage.REAL:
-				return validateReal((BigDecimal)value, diagnostics, context);
+				return validateReal((Number)value, diagnostics, context);
 			case PivotPackage.STRING:
 				return validateString((String)value, diagnostics, context);
 			case PivotPackage.THROWABLE:
 				return validateThrowable((Throwable)value, diagnostics, context);
 			case PivotPackage.UNLIMITED_NATURAL:
-				return validateUnlimitedNatural((BigInteger)value, diagnostics, context);
+				return validateUnlimitedNatural((Number)value, diagnostics, context);
 			default:
 				return true;
 		}
@@ -3635,8 +3633,8 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateInt(int int_, DiagnosticChain diagnostics,
-			Map<Object, Object> context) {
+	public boolean validateInt(int int_, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
 		return true;
 	}
 
@@ -3645,8 +3643,8 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateInteger(BigInteger integer,
-			DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateInteger(Number integer, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
 		return true;
 	}
 
@@ -3675,8 +3673,8 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateReal(BigDecimal real, DiagnosticChain diagnostics,
-			Map<Object, Object> context) {
+	public boolean validateReal(Number real, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
 		return true;
 	}
 
@@ -3705,8 +3703,8 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateUnlimitedNatural(BigInteger unlimitedNatural,
-			DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateUnlimitedNatural(Number unlimitedNatural, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
 		return true;
 	}
 

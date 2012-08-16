@@ -20,8 +20,6 @@
 
 package org.eclipse.ocl.examples.pivot.evaluation;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,10 +27,10 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
+import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -422,11 +420,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 */
 	@Override
     public Value visitIntegerLiteralExp(@NonNull IntegerLiteralExp integerLiteralExp) {
-		BigInteger value = integerLiteralExp.getIntegerSymbol();
-		if (value == null) {
-			return evaluationEnvironment.throwInvalidEvaluation("Invalid Integer Value", integerLiteralExp);
-		}
-		return valueFactory.integerValueOf(value);
+		return integerLiteralExp.getIntegerValue(valueFactory);
 	}
 
 	@Override
@@ -764,11 +758,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 */
 	@Override
     public Value visitRealLiteralExp(@NonNull RealLiteralExp realLiteralExp) {
-		BigDecimal value = realLiteralExp.getRealSymbol();
-		if (value == null) {
-			return evaluationEnvironment.throwInvalidEvaluation("Invalid Real Value", realLiteralExp);
-		}
-		return valueFactory.realValueOf(value);
+		return realLiteralExp.getRealValue(valueFactory);
 	}
 	
 	@Override
@@ -829,14 +819,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
      */
     @Override
     public Value visitUnlimitedNaturalLiteralExp(@NonNull UnlimitedNaturalLiteralExp unlimitedNaturalLiteralExp) {
-		BigInteger value = unlimitedNaturalLiteralExp.getUnlimitedNaturalSymbol();
-		if (value == null) {
-			return evaluationEnvironment.throwInvalidEvaluation("Invalid Unlimited Natural Value", unlimitedNaturalLiteralExp);
-		}
-		if (value.signum() < 0) {
-			return valueFactory.getUnlimited();
-		}
-		return valueFactory.integerValueOf(value);
+		return unlimitedNaturalLiteralExp.getUnlimitedNaturalValue(valueFactory);
 	}
 	
 	/**

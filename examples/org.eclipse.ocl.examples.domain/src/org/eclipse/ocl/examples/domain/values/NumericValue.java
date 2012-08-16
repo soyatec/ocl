@@ -52,5 +52,5 @@ public interface NumericValue extends Value, Comparable<NumericValue>
 	/**
 	 * @generated NOT
 	 */
-	int signum() throws InvalidValueException;
+	int signum();
 }

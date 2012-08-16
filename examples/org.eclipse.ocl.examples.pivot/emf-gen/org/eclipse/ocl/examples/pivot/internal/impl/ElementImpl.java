@@ -180,7 +180,7 @@ public abstract class ElementImpl
 			final @NonNull Value self = valueFactory.valueOf(this);
 			final @NonNull DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 			final @NonNull ExecutorType T_OclElement = OCLstdlibTables.Types._OclElement;
-			final @NonNull DomainCollectionType T_Set_OclElement_ = standardLibrary.getSetType(T_OclElement);
+			final @NonNull DomainCollectionType T_Set_OclElement_ = standardLibrary.getSetType(T_OclElement, null, null);
 			
 			final @NonNull DomainType returnType = T_Set_OclElement_;
 			final @NonNull Value result = ElementBodies._allOwnedElements_body_.INSTANCE.evaluate(evaluator, returnType, self);

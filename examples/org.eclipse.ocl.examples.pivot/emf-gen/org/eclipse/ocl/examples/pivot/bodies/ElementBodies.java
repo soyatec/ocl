@@ -62,7 +62,7 @@ public class ElementBodies
 			final @NonNull ExecutorOperation O_Boolean_not = OCLstdlibTables.Operations._Boolean__not;
 			final @NonNull ExecutorOperation O_Collection_includes = OCLstdlibTables.Operations._Collection__includes;
 			final @NonNull ExecutorType T_pivot__Element = PivotTables.Types._Element;
-			final @NonNull DomainCollectionType T_Set_pivot__Element_ = standardLibrary.getSetType(T_pivot__Element);
+			final @NonNull DomainCollectionType T_Set_pivot__Element_ = standardLibrary.getSetType(T_pivot__Element, null, null);
 			final @NonNull ExecutorOperation O_Element_allOwnedElements = PivotTables.Operations._Element__allOwnedElements;
 			
 			
@@ -94,7 +94,7 @@ public class ElementBodies
 			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
 			final @NonNull DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 			final @NonNull ExecutorType T_OclElement = OCLstdlibTables.Types._OclElement;
-			final @NonNull DomainCollectionType T_Set_OclElement_ = standardLibrary.getSetType(T_OclElement);
+			final @NonNull DomainCollectionType T_Set_OclElement_ = standardLibrary.getSetType(T_OclElement, null, null);
 			final @NonNull ExecutorOperation O_OclElement_oclContents = OCLstdlibTables.Operations._OclElement__oclContents;
 			
 			
@@ -123,7 +123,6 @@ public class ElementBodies
 			return Null;
 		}
 	}
-
 
 
 

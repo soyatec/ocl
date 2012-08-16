@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
-import java.math.BigInteger;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -29,13 +28,18 @@ import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.Unlimited;
+import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
@@ -83,7 +87,7 @@ public class CollectionTypeImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BigInteger LOWER_EDEFAULT = new BigInteger("0"); //$NON-NLS-1$
+	protected static final Number LOWER_EDEFAULT = (Number)PivotFactory.eINSTANCE.createFromString(PivotPackage.eINSTANCE.getInteger(), "0"); //$NON-NLS-1$
 	/**
 	 * The cached value of the '{@link #getLower() <em>Lower</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -92,7 +96,7 @@ public class CollectionTypeImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected BigInteger lower = LOWER_EDEFAULT;
+	protected Number lower = LOWER_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getUpper() <em>Upper</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -101,7 +105,7 @@ public class CollectionTypeImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BigInteger UPPER_EDEFAULT = new BigInteger("-1"); //$NON-NLS-1$
+	protected static final Number UPPER_EDEFAULT = (Number)PivotFactory.eINSTANCE.createFromString(PivotPackage.eINSTANCE.getUnlimitedNatural(), "*"); //$NON-NLS-1$
 	/**
 	 * The cached value of the '{@link #getUpper() <em>Upper</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -110,7 +114,7 @@ public class CollectionTypeImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected BigInteger upper = UPPER_EDEFAULT;
+	protected Number upper = UPPER_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -176,7 +180,7 @@ public class CollectionTypeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BigInteger getLower()
+	public Number getLower()
 	{
 		return lower;
 	}
@@ -186,9 +190,9 @@ public class CollectionTypeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLower(BigInteger newLower)
+	public void setLower(Number newLower)
 	{
-		BigInteger oldLower = lower;
+		Number oldLower = lower;
 		lower = newLower;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.COLLECTION_TYPE__LOWER, oldLower, lower));
@@ -199,7 +203,7 @@ public class CollectionTypeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BigInteger getUpper()
+	public Number getUpper()
 	{
 		return upper;
 	}
@@ -209,9 +213,9 @@ public class CollectionTypeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setUpper(BigInteger newUpper)
+	public void setUpper(Number newUpper)
 	{
-		BigInteger oldUpper = upper;
+		Number oldUpper = upper;
 		upper = newUpper;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.COLLECTION_TYPE__UPPER, oldUpper, upper));
@@ -361,10 +365,10 @@ public class CollectionTypeImpl
 				setElementType((Type)newValue);
 				return;
 			case PivotPackage.COLLECTION_TYPE__LOWER:
-				setLower((BigInteger)newValue);
+				setLower((Number)newValue);
 				return;
 			case PivotPackage.COLLECTION_TYPE__UPPER:
-				setUpper((BigInteger)newValue);
+				setUpper((Number)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -457,7 +461,6 @@ public class CollectionTypeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("null")
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
@@ -557,18 +560,18 @@ public class CollectionTypeImpl
 			else {
 				if (commonInheritance.isOrdered()) {
 					if (commonInheritance.isUnique()) {
-						return standardLibrary.getOrderedSetType(commonElementType);
+						return standardLibrary.getOrderedSetType(commonElementType, null, null);
 					}
 					else {
-						return standardLibrary.getSequenceType(commonElementType);
+						return standardLibrary.getSequenceType(commonElementType, null, null);
 					}
 				}
 				else {
 					if (commonInheritance.isUnique()) {
-						return standardLibrary.getSetType(commonElementType);
+						return standardLibrary.getSetType(commonElementType, null, null);
 					}
 					else {
-						return standardLibrary.getBagType(commonElementType);
+						return standardLibrary.getBagType(commonElementType, null, null);
 					}
 				}
 			}
@@ -592,5 +595,21 @@ public class CollectionTypeImpl
 			return false;
 		}
 		return standardLibrary.isEqualToCollectionType(this, (DomainCollectionType)type);
+	}
+
+	public @NonNull IntegerValue getLowerValue(@NonNull ValueFactory valueFactory) {
+		return lower != null ? valueFactory.integerValueOf(lower) : valueFactory.getNull();
+	}
+
+	public @NonNull IntegerValue getUpperValue(@NonNull ValueFactory valueFactory) {
+		return upper != null ? valueFactory.integerValueOf(upper) : valueFactory.getNull();
+	}
+
+	public void setLowerValue(@NonNull IntegerValue lower) throws InvalidValueException {
+		setLower(lower.intValue());
+	}
+
+	public void setUpperValue(@NonNull IntegerValue upper) throws InvalidValueException {
+		setUpper(upper.isUnlimited() ? Unlimited.INSTANCE : upper.intValue());
 	}
 } //CollectionTypeImpl

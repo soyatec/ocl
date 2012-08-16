@@ -19,8 +19,9 @@ package org.eclipse.ocl.examples.domain.values;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 /**
  * Interface of a tuple instance value.  OCL expressions resulting in tuples
@@ -35,23 +36,25 @@ public interface TupleValue extends Value {
      * @return its type
 	 * @generated NOT
      */
-	@NonNull DomainTupleType getType();
+	@NonNull DomainType getType();
 	
     /**
      * Queries the value of the specified tuple part.
      * 
      * @param partName the name of the part
      * @return the corresponding value
+     * @throws InvalidValueException 
 	 * @generated NOT
      */
-	@Nullable Value getValue(@NonNull String partName);
+	@Nullable Value getValue(@NonNull String partName) throws InvalidValueException;
     
     /**
      * Queries the value of the specified tuple part.
      * 
      * @param part the tuple part (as an attribute)
      * @return the corresponding value
+     * @throws InvalidValueException 
 	 * @generated NOT
      */
-	@Nullable Value getValue(@NonNull DomainTypedElement part);
+	@Nullable Value getValue(@NonNull DomainTypedElement part) throws InvalidValueException;
 }

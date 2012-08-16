@@ -12,7 +12,7 @@
  *
  * </copyright>
  *
- * $Id: AbstractUndefinedValue.java,v 1.6 2011/05/07 16:41:20 ewillink Exp $
+ * $Id: UndefinedValueImpl.java,v 1.6 2011/05/07 16:41:20 ewillink Exp $
  */
 package org.eclipse.ocl.examples.domain.values.impl;
 
@@ -76,7 +76,7 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 	}
 
 	public int compareTo(NumericValue o) {
-		throw new UnsupportedOperationException("AbstractUndefinedValue.compareTo");
+		throw new UnsupportedOperationException("UndefinedValueImpl.compareTo");
 	}
 
 	public @NonNull NullValue div(@NonNull IntegerValue right) throws InvalidValueException {

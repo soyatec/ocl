@@ -105,7 +105,7 @@ public class PropertyBodies
 			final @NonNull LibraryProperty IP_Constraint_specification = P_Constraint_specification.getImplementation();
 			final @NonNull ExecutorType T_pivot__Constraint = PivotTables.Types._Constraint;
 			final @NonNull ExecutorOperation O_Collection_any = OCLstdlibTables.Operations._Collection__any;
-			final @NonNull DomainCollectionType T_OrderedSet_pivot__Constraint_ = standardLibrary.getOrderedSetType(T_pivot__Constraint);
+			final @NonNull DomainCollectionType T_OrderedSet_pivot__Constraint_ = standardLibrary.getOrderedSetType(T_pivot__Constraint, null, null);
 			final @NonNull ExecutorProperty P_NamedElement_ownedRule = PivotTables.Properties._NamedElement__ownedRule;
 			final @NonNull LibraryProperty IP_NamedElement_ownedRule = P_NamedElement_ownedRule.getImplementation();
 			final @NonNull ExecutorOperation O_String__eq_ = OCLstdlibTables.Operations._String___eq_;
@@ -334,7 +334,7 @@ public class PropertyBodies
 			final @NonNull Value T_Metaclass_Type_ = valueFactory.createTypeValue(OCLstdlibTables.Types._Type);
 			final @NonNull ExecutorOperation O_Collection_includes = OCLstdlibTables.Operations._Collection__includes;
 			final @NonNull ExecutorType T_pivot__Property = PivotTables.Types._Property;
-			final @NonNull DomainCollectionType T_OrderedSet_pivot__Property_ = standardLibrary.getOrderedSetType(T_pivot__Property);
+			final @NonNull DomainCollectionType T_OrderedSet_pivot__Property_ = standardLibrary.getOrderedSetType(T_pivot__Property, null, null);
 			final @NonNull ExecutorProperty P_Type_ownedAttribute = PivotTables.Properties._Type__ownedAttribute;
 			final @NonNull LibraryProperty IP_Type_ownedAttribute = P_Type_ownedAttribute.getImplementation();
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;

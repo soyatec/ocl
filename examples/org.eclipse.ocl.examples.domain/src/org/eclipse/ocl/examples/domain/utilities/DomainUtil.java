@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.domain.utilities;
 
+import java.math.BigInteger;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -28,6 +29,7 @@ import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.osgi.util.NLS;
 
 public class DomainUtil
@@ -38,9 +40,35 @@ public class DomainUtil
 	private static final AdapterFactory defaultAdapterFactory =
 			new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
+	private static final String maxIntValue = Integer.toString(Integer.MAX_VALUE);
+	private static final int maxIntSize = maxIntValue.length();	
+	private static final String maxLongValue = Long.toString(Long.MAX_VALUE);
+	private static final int maxLongSize = maxLongValue.length();	
+
+
 	public static @NonNull String bind(String messageTemplate, Object... bindings) {
 		@SuppressWarnings("null") @NonNull String result = NLS.bind(messageTemplate, bindings);
 		return result;
+	}
+
+	public static @NonNull Number createNumberFromString(@NonNull String aValue) throws NumberFormatException {
+		if ("*".equals(aValue)) {
+			return Unlimited.INSTANCE;
+		}
+		int len = aValue.length();
+		if ((len < maxIntSize) || ((len == maxIntSize) && (maxIntValue.compareTo(aValue) >= 0))) {
+			Integer result = Integer.valueOf(aValue);
+			assert result != null;
+			return result;
+		}
+		else if ((len < maxLongSize) || ((len == maxLongSize) && (maxLongValue.compareTo(aValue) >= 0))) {
+			Long result = Long.valueOf(aValue);
+			assert result != null;
+			return result;
+		}
+		else {
+			return new BigInteger(aValue);
+		}
 	}
 	
 	public static String debugFullName(Object object) {

@@ -46,6 +46,11 @@ public interface IntegerValue extends NumericValue
 	/**
 	 * @generated NOT
 	 */
+	int intValue() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	@NonNull IntegerValue max(@NonNull IntegerValue right) throws InvalidValueException;
 
 	/**

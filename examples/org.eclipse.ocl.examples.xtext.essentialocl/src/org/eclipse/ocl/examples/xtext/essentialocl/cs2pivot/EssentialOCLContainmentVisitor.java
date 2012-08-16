@@ -23,6 +23,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
+import org.eclipse.ocl.examples.domain.values.Unlimited;
+import org.eclipse.ocl.examples.domain.values.impl.ValueFactoryImpl;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
@@ -250,24 +252,64 @@ public class EssentialOCLContainmentVisitor extends AbstractEssentialOCLContainm
 	@Override
 	public Continuation<?> visitNumberLiteralExpCS(@NonNull NumberLiteralExpCS csElement) {
 		Number number = csElement.getName();
-		if (number instanceof BigDecimal) {
+		if ((number instanceof BigDecimal) || (number instanceof Double) || (number instanceof Float)) {
 			RealLiteralExp pivotElement = context.refreshModelElement(RealLiteralExp.class, PivotPackage.Literals.REAL_LITERAL_EXP, csElement);
 			if (pivotElement != null) {
-				pivotElement.setRealSymbol((BigDecimal) number);
+				pivotElement.setRealSymbol(number);
 			}
 		}
 		else {
-			BigInteger bigInteger = (BigInteger) number;
-			if (bigInteger.signum() < 0) {
+			boolean isNegative;
+			if (number instanceof BigInteger) {
+				BigInteger bigInteger = (BigInteger) number;
+				isNegative = bigInteger.signum() < 0;
+				if (isNegative) {
+					if (bigInteger.compareTo(ValueFactoryImpl.INTEGER_MIN_VALUE) >= 0) {
+						number = Integer.valueOf(bigInteger.intValue());
+					}
+					else if (bigInteger.compareTo(ValueFactoryImpl.LONG_MIN_VALUE) >= 0) {
+						number = Long.valueOf(bigInteger.longValue());
+					}
+				}
+				else {
+					if (bigInteger.compareTo(ValueFactoryImpl.INTEGER_MAX_VALUE) <= 0) {
+						number = Integer.valueOf(bigInteger.intValue());
+					}
+					else if (bigInteger.compareTo(ValueFactoryImpl.LONG_MAX_VALUE) <= 0) {
+						number = Long.valueOf(bigInteger.longValue());
+					}
+				}
+			}
+			else {
+				long longValue = number.longValue();
+				isNegative = longValue < 0;
+				if (isNegative) {
+					if (longValue >= Integer.MIN_VALUE) {
+						number = Integer.valueOf((int)longValue);
+					}
+					else {
+						number = Long.valueOf(longValue);
+					}
+				}
+				else {
+					if (longValue <= Integer.MAX_VALUE) {
+						number = Integer.valueOf((int)longValue);
+					}
+					else {
+						number = Long.valueOf(longValue);
+					}
+				}
+			}				
+			if (isNegative) {
 				IntegerLiteralExp pivotElement = context.refreshModelElement(IntegerLiteralExp.class, PivotPackage.Literals.INTEGER_LITERAL_EXP, csElement);
 				if (pivotElement != null) {
-					pivotElement.setIntegerSymbol(bigInteger);
+					pivotElement.setIntegerSymbol(number);
 				}
 			}
 			else {
 				UnlimitedNaturalLiteralExp pivotElement = context.refreshModelElement(UnlimitedNaturalLiteralExp.class, PivotPackage.Literals.UNLIMITED_NATURAL_LITERAL_EXP, csElement);
 				if (pivotElement != null) {
-					pivotElement.setUnlimitedNaturalSymbol(bigInteger);
+					pivotElement.setUnlimitedNaturalSymbol(number);
 				}
 			}
 		}
@@ -350,7 +392,7 @@ public class EssentialOCLContainmentVisitor extends AbstractEssentialOCLContainm
 		UnlimitedNaturalLiteralExp pivotElement = context.refreshModelElement(UnlimitedNaturalLiteralExp.class, PivotPackage.Literals.UNLIMITED_NATURAL_LITERAL_EXP, csElement);
 		if (pivotElement != null) {
 			pivotElement.setName("*");
-			pivotElement.setUnlimitedNaturalSymbol(BigInteger.valueOf(-1));
+			pivotElement.setUnlimitedNaturalSymbol(Unlimited.INSTANCE);
 		}
 		return null;
 	}

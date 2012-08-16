@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
@@ -344,7 +345,8 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 			if (type instanceof CollectionType) {
 				CollectionType collectionType = (CollectionType)type;
 				lower = collectionType.getLower().intValue();
-				upper = collectionType.getUpper().intValue();
+				Number upper2 = collectionType.getUpper();
+				upper = upper2 instanceof Unlimited ? -1 : upper2.intValue();
 				List<String> qualifiers = csElement.getQualifier();
 				refreshQualifiers(qualifiers, "ordered", "!ordered", collectionType.isOrdered() ? Boolean.TRUE : null);
 				refreshQualifiers(qualifiers, "unique", "!unique", collectionType.isUnique() ? null : Boolean.FALSE);

@@ -16,8 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import java.math.BigInteger;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Value Specification</b></em>'.
@@ -58,7 +56,7 @@ public interface ValueSpecification
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ValueSpecification!integerValue()'"
 	 * @generated
 	 */
-	BigInteger integerValue();
+	Number integerValue();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -94,7 +92,7 @@ public interface ValueSpecification
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ValueSpecification!unlimitedValue()'"
 	 * @generated
 	 */
-	BigInteger unlimitedValue();
+	Number unlimitedValue();
 
 	/**
 	 * <!-- begin-user-doc -->

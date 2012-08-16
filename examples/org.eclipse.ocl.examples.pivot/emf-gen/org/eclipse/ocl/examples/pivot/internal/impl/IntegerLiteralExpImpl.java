@@ -17,7 +17,6 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.lang.reflect.InvocationTargetException;
-import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Map;
 
@@ -35,6 +34,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
@@ -78,7 +78,7 @@ public class IntegerLiteralExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BigInteger INTEGER_SYMBOL_EDEFAULT = null;
+	protected static final Number INTEGER_SYMBOL_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getIntegerSymbol() <em>Integer Symbol</em>}' attribute.
@@ -88,7 +88,7 @@ public class IntegerLiteralExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected BigInteger integerSymbol = INTEGER_SYMBOL_EDEFAULT;
+	protected Number integerSymbol = INTEGER_SYMBOL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -114,7 +114,7 @@ public class IntegerLiteralExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BigInteger getIntegerSymbol() {
+	public Number getIntegerSymbol() {
 		return integerSymbol;
 	}
 
@@ -123,8 +123,9 @@ public class IntegerLiteralExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIntegerSymbol(BigInteger newIntegerSymbol) {
-		BigInteger oldIntegerSymbol = integerSymbol;
+	public void setIntegerSymbol(Number newIntegerSymbol)
+	{
+		Number oldIntegerSymbol = integerSymbol;
 		integerSymbol = newIntegerSymbol;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL, oldIntegerSymbol, integerSymbol));
@@ -231,7 +232,7 @@ public class IntegerLiteralExpImpl
 				setType((Type)newValue);
 				return;
 			case PivotPackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
-				setIntegerSymbol((BigInteger)newValue);
+				setIntegerSymbol((Number)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -339,5 +340,9 @@ public class IntegerLiteralExpImpl
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitIntegerLiteralExp(this);
+	}
+
+	public @NonNull IntegerValue getIntegerValue(@NonNull ValueFactory valueFactory) {
+		return integerSymbol != null ? valueFactory.integerValueOf(integerSymbol) : valueFactory.getNull();
 	}
 } //IntegerLiteralExpImpl

@@ -69,7 +69,7 @@ public interface RealValue extends NumericValue
 	/**
 	 * @generated NOT
 	 */
-	int signum() throws InvalidValueException;
+	int signum();
 
 	/**
 	 * @generated NOT

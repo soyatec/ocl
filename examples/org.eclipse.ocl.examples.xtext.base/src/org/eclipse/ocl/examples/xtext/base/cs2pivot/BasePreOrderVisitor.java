@@ -16,13 +16,14 @@
  */
 package org.eclipse.ocl.examples.xtext.base.cs2pivot;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.DataType;
@@ -32,6 +33,7 @@ import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.TupleTypeManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS;
@@ -290,8 +292,8 @@ public class BasePreOrderVisitor extends AbstractExtendingBaseCSVisitor<Continua
 		}
 
 		protected void installPivotTypeWithMultiplicity(@NonNull Type pivotType) {
-			long lower = 1;;
-			long upper = 1;
+			int lower = 1;;
+			int upper = 1;
 			MultiplicityCS multiplicity = csElement.getMultiplicity();
 			if (multiplicity != null) {
 				lower = multiplicity.getLower();
@@ -311,7 +313,11 @@ public class BasePreOrderVisitor extends AbstractExtendingBaseCSVisitor<Continua
 					isOrdered = ElementUtil.isOrdered((TypedElementCS) eContainer);
 					isUnique = ElementUtil.isUnique((TypedElementCS) eContainer);
 				}
-				CollectionType pivotCollectionType = context.getMetaModelManager().getCollectionType(isOrdered, isUnique, pivotType, BigInteger.valueOf(lower), BigInteger.valueOf(upper));
+				MetaModelManager metaModelManager = context.getMetaModelManager();
+				ValueFactory valueFactory = metaModelManager.getValueFactory();
+				IntegerValue lowerValue = valueFactory.integerValueOf(lower);
+				IntegerValue upperValue = upper != -1 ? valueFactory.integerValueOf(upper) : valueFactory.getUnlimited();
+				CollectionType pivotCollectionType = metaModelManager.getCollectionType(isOrdered, isUnique, pivotType, lowerValue, upperValue);
 				context.installPivotReference(csElement, pivotCollectionType, BaseCSTPackage.Literals.PIVOTABLE_ELEMENT_CS__PIVOT);
 //				if (pivotElement instanceof TypedMultiplicityElement) {
 //					((TypedMultiplicityElement)pivotElement).setIsRequired(true);

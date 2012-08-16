@@ -17,7 +17,6 @@
 package org.eclipse.ocl.examples.pivot.manager;
 
 import java.lang.ref.WeakReference;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +27,6 @@ import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
@@ -58,23 +56,6 @@ public class TemplateableTypeServer extends ExtensibleTypeServer
 				hash = 111 * hash + parameter.hashCode();
 				add(parameter);
 			}
-			hashCode = hash;
-		}
-
-		public TemplateArguments(ParameterableElement parameter, BigInteger lower, BigInteger upper) {
-			parametersSize = 1;
-			int hash = parameter.hashCode();
-			add(parameter);
-			if (lower == null) {
-				lower = BigInteger.valueOf(0);
-			}
-			hash = 111 * hash + lower.hashCode();
-			add(lower);
-			if (upper == null) {
-				upper = BigInteger.valueOf(-1);
-			}
-			hash = 111 * hash + upper.hashCode();
-			add(upper);
 			hashCode = hash;
 		}
 		
@@ -226,11 +207,6 @@ public class TemplateableTypeServer extends ExtensibleTypeServer
 
 	public synchronized @NonNull Type getSpecializedType(@NonNull List<? extends ParameterableElement> templateArguments) {
 		return getSpecializedType(new TemplateArguments(templateArguments));
-	}
-
-	public synchronized @NonNull Type getSpecializedType(@NonNull ParameterableElement templateArgument, BigInteger lower, BigInteger upper) {
-		assert getPivotType() instanceof CollectionType;
-		return getSpecializedType(new TemplateArguments(templateArgument, lower, upper));
 	}
 
 	public synchronized @NonNull Type getSpecializedType(@NonNull TemplateArguments templateArguments) {

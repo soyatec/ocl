@@ -452,7 +452,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 			}
 			else {
 				Precedence currentPrecedence = context.getCurrentPrecedence();
-				boolean lowerPrecedence = (currentPrecedence  != null) && precedence.getOrder().compareTo(currentPrecedence.getOrder()) > 0;
+				boolean lowerPrecedence = (currentPrecedence  != null) && (precedence.getOrder() > currentPrecedence.getOrder());
 				if (lowerPrecedence) {
 					context.push("(", null);
 				}
@@ -569,12 +569,12 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 
 	@Override
 	public Object visitUnlimitedNaturalLiteralExp(@NonNull UnlimitedNaturalLiteralExp object) {
-		BigInteger symbol = object.getUnlimitedNaturalSymbol();
-		if (symbol.signum() < 0) {
+		Number symbol = object.getUnlimitedNaturalSymbol();
+		if (((symbol instanceof BigInteger) && symbol.equals(BigInteger.valueOf(-1))) || (symbol.longValue() == -1)){
 			context.append("*");
 		}
 		else {
-			context.append(symbol);
+			context.append(symbol.toString());
 		}
 		return null;
 	}

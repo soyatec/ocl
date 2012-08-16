@@ -17,7 +17,6 @@
 package org.eclipse.ocl.examples.library.executor;
 
 import java.lang.ref.WeakReference;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,8 +25,8 @@ import java.util.WeakHashMap;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
+import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
@@ -36,6 +35,9 @@ import org.eclipse.ocl.examples.domain.types.AbstractCollectionType;
 import org.eclipse.ocl.examples.domain.types.AbstractStandardLibrary;
 import org.eclipse.ocl.examples.domain.types.AbstractTupleType;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.library.ecore.EcoreValueFactory;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 
 public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
@@ -59,6 +61,11 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 
 	protected abstract @NonNull DomainMetaclass createMetaclass(@NonNull DomainType classType);
 
+	@Override
+	protected @NonNull ValueFactory createValueFactory() {
+		return new EcoreValueFactory(this);
+	}
+
 	public @NonNull DomainType getMetaclassType() {
 		return OCLstdlibTables.Types._Metaclass;
 	}
@@ -67,8 +74,8 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 		return OCLstdlibTables.Types._Bag;
 	}
 
-	public @NonNull DomainCollectionType getBagType(@NonNull DomainType elementType) {
-		return getCollectionType(getBagType(), elementType, null, null);
+	public @NonNull DomainCollectionType getBagType(@NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
+		return getCollectionType(getBagType(), elementType, lower, upper);
 	}
 
 	public @NonNull DomainType getBooleanType() {
@@ -79,7 +86,7 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 		return OCLstdlibTables.Types._Collection;
 	}
 
-	public synchronized @NonNull DomainCollectionType getCollectionType(@NonNull DomainType genericType, @NonNull DomainType elementType, @Nullable BigInteger lower, @Nullable BigInteger upper) {
+	public synchronized @NonNull DomainCollectionType getCollectionType(@NonNull DomainType genericType, @NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
 		AbstractCollectionType specializedType = null;
 		Map<DomainType, WeakReference<AbstractCollectionType>> map = specializations.get(genericType);
 		if (map == null) {
@@ -153,8 +160,8 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 		return OCLstdlibTables.Types._OrderedSet;
 	}
 
-	public @NonNull DomainCollectionType getOrderedSetType(@NonNull DomainType elementType) {
-		return getCollectionType(getOrderedSetType(), elementType, null, null);
+	public @NonNull DomainCollectionType getOrderedSetType(@NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
+		return getCollectionType(getOrderedSetType(), elementType, lower, upper);
 	}
 
 	public @NonNull DomainType getRealType() {
@@ -165,16 +172,16 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 		return OCLstdlibTables.Types._Sequence;
 	}
 
-	public @NonNull DomainCollectionType getSequenceType(@NonNull DomainType elementType) {
-		return getCollectionType(getSequenceType(), elementType, null, null);
+	public @NonNull DomainCollectionType getSequenceType(@NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
+		return getCollectionType(getSequenceType(), elementType, lower, upper);
 	}
 
 	public @NonNull DomainType getSetType() {
 		return OCLstdlibTables.Types._Set;
 	}
 
-	public @NonNull DomainCollectionType getSetType(@NonNull DomainType elementType) {
-		return getCollectionType(getSetType(), elementType, null, null);
+	public @NonNull DomainCollectionType getSetType(@NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
+		return getCollectionType(getSetType(), elementType, lower, upper);
 	}
 
 	public @NonNull DomainType getStringType() {

@@ -40,7 +40,7 @@ public class AnyIteration extends AbstractIteration
 	public @NonNull SequenceValue.Accumulator createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
-		return valueFactory.createSequenceAccumulatorValue(standardLibrary.getSequenceType(accumulatorType));
+		return valueFactory.createSequenceAccumulatorValue(standardLibrary.getSequenceType(accumulatorType, null, null));
 	}
 	
 	@Override

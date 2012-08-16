@@ -17,7 +17,6 @@
 package org.eclipse.ocl.examples.domain.types;
 
 import java.lang.ref.WeakReference;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +25,7 @@ import java.util.WeakHashMap;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
@@ -36,6 +36,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 {
@@ -45,6 +47,11 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 	 * unused when using the full pivot environment.
 	 */
 	private Map<String, Map<DomainType, WeakReference<DomainTypedElement>>> tupleParts = null;		// Lazily created
+
+	/**
+	 * The value creation capabilities.
+	 */
+	private ValueFactory valueFactory = null;			// Lazily created
 		
 /*	protected AbstractStandardLibrary() {
 		System.out.println(Thread.currentThread().getName() + " Create " + debugSimpleName(this));		
@@ -74,20 +81,16 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 				return false;
 			}
 		}
-		BigInteger firstLower = firstCollectionType.getLower();
-		BigInteger secondLower = secondCollectionType.getLower();
+		ValueFactory valueFactory = getValueFactory();
+		IntegerValue firstLower = firstCollectionType.getLowerValue(valueFactory);
+		IntegerValue secondLower = secondCollectionType.getLowerValue(valueFactory);
 		if (firstLower.compareTo(secondLower) > 0) {
 			return false;
 		}
-		BigInteger firstUpper = firstCollectionType.getUpper();
-		if (firstUpper.signum() >= 0) {
-			BigInteger secondUpper = secondCollectionType.getUpper();
-			if (secondUpper.signum() < 0) {
-				return false;
-			}
-			if (firstLower.compareTo(secondLower) < 0) {
-				return false;
-			}
+		IntegerValue firstUpper = firstCollectionType.getUpperValue(valueFactory);
+		IntegerValue secondUpper = secondCollectionType.getUpperValue(valueFactory);
+		if (firstUpper.compareTo(secondUpper) < 0) {
+			return false;
 		}
 		return true;
 	}
@@ -104,28 +107,38 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		DomainInheritance secondInheritance = secondTupleType.getInheritance(this);
 		return firstInheritance.isSuperInheritanceOf(this, secondInheritance);
 	}
+	
+	protected abstract @NonNull ValueFactory createValueFactory();
 
 	public void dispose() {
 		tupleParts = null;	
+		if (valueFactory != null) {
+			valueFactory.dispose();
+			valueFactory = null;
+		}
+	}
+
+	public @NonNull DomainCollectionType getBagType(@NonNull DomainType elementType) {
+		return getBagType(elementType, null, null);
 	}
 	
-	public @NonNull DomainCollectionType getCollectionType(@NonNull DomainCollectionType containerType, @NonNull DomainType elementType, BigInteger lower, BigInteger upper) {
+	public @NonNull DomainCollectionType getCollectionType(@NonNull DomainCollectionType containerType, @NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
 		boolean isOrdered = containerType.isOrdered();
 		boolean isUnique = containerType.isUnique();
 		if (isOrdered) {
 			if (isUnique) {
-				return getOrderedSetType(elementType);
+				return getOrderedSetType(elementType, lower, upper);
 			}
 			else {
-				return getSequenceType(elementType);
+				return getSequenceType(elementType, lower, upper);
 			}
 		}
 		else {
 			if (isUnique) {
-				return getSetType(elementType);
+				return getSetType(elementType, lower, upper);
 			}
 			else {
-				return getBagType(elementType);
+				return getBagType(elementType, lower, upper);
 			}
 		}
 	}
@@ -136,6 +149,18 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 
 	public DomainType getMetaType(@NonNull DomainType instanceType) {
 		throw new UnsupportedOperationException();
+	}
+
+	public @NonNull DomainCollectionType getOrderedSetType(@NonNull DomainType elementType) {
+		return getOrderedSetType(elementType, null, null);
+	}
+
+	public @NonNull DomainCollectionType getSequenceType(@NonNull DomainType elementType) {
+		return getSequenceType(elementType, null, null);
+	}
+
+	public @NonNull DomainCollectionType getSetType(@NonNull DomainType elementType) {
+		return getSetType(elementType, null, null);
 	}
 
 	public synchronized @NonNull DomainTypedElement getTuplePart(@NonNull String name, @NonNull DomainType type) {
@@ -168,6 +193,14 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 			return getType(DomainUtil.nonNullEMF(((EObject)element).eClass()));
 		}
 		throw new UnsupportedOperationException();
+	}
+
+	public @NonNull ValueFactory getValueFactory() {
+		ValueFactory valueFactory2 = valueFactory;
+		if (valueFactory2 == null) {
+			valueFactory2 = valueFactory = createValueFactory();
+		}
+		return valueFactory2;
 	}
 	
 	public boolean isEqualToCollectionType(@NonNull DomainCollectionType firstCollectionType, @NonNull DomainCollectionType secondCollectionType) {

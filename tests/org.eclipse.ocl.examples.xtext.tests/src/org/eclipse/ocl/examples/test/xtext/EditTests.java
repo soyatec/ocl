@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.ocl.common.OCLConstants;
 import org.eclipse.ocl.common.internal.options.CommonOptions;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.SequenceType;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -482,16 +483,18 @@ public class EditTests extends XtextTestCase
 			"}\n" +
 			"}\n";
 		URI outputURI = getProjectFileURI("test.oclstdlib");
-		ModelContext modelContext = new ModelContext(ocl.getMetaModelManager(), outputURI);
+		MetaModelManager metaModelManager = ocl.getMetaModelManager();
+		ModelContext modelContext = new ModelContext(metaModelManager, outputURI);
 		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) modelContext.createBaseResource(testDocument);
 		Resource pivotResource = cs2pivot(ocl, xtextResource, null);
 		assertResourceErrors("Loading input", xtextResource);
 		assertNoResourceErrors("Loading input", pivotResource);
 		//
-		Type myType = ocl.getMetaModelManager().getPrimaryType("http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib", "MyType");
-		SequenceType sequenceType = ocl.getMetaModelManager().getSequenceType();
-		CollectionTypeServer.TemplateArguments templateArguments = new CollectionTypeServer.TemplateArguments(myType, null, null);
-		CollectionTypeServer sequenceTypeServer = (CollectionTypeServer) ocl.getMetaModelManager().getTypeServer(sequenceType);
+		Type myType = metaModelManager.getPrimaryType("http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib", "MyType");
+		SequenceType sequenceType = metaModelManager.getSequenceType();
+		ValueFactory valueFactory = metaModelManager.getValueFactory();
+		CollectionTypeServer.TemplateArguments templateArguments = new CollectionTypeServer.TemplateArguments(myType, valueFactory.getZero(), valueFactory.getUnlimited());
+		CollectionTypeServer sequenceTypeServer = (CollectionTypeServer) metaModelManager.getTypeServer(sequenceType);
 		WeakReference<Type> sequenceMyType = new WeakReference<Type>(sequenceTypeServer.findSpecializedType(templateArguments));
 		assertNull(sequenceMyType.get()); 
 		//

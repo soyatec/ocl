@@ -19,8 +19,10 @@ package org.eclipse.ocl.examples.domain.values.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -259,6 +261,19 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 
 	public @NonNull DomainType getType() {
 		return valueFactory.getStandardLibrary().getOclInvalidType();
+	}
+
+	public @Nullable Value getValue(@NonNull String partName) throws InvalidValueException {
+    	return toInvalidValue();
+	}
+
+	public @Nullable Value getValue(@NonNull DomainTypedElement part) throws InvalidValueException {
+    	return toInvalidValue();
+	}
+
+	public int intValue() throws InvalidValueException {
+    	toInvalidValue();		// throws rather than returns
+    	return 0;
 	}
 
 	@Override

@@ -15,7 +15,7 @@
  * $Id$
  **/]
 [comment encoding = UTF-8 /]
-[module org::eclipse::ocl::examples::codegen::common::genPackageQueries('http://www.eclipse.org/ocl/3.1.0/Pivot','http://www.eclipse.org/emf/2002/GenModel')/]
+[module org::eclipse::ocl::examples::codegen::common::genPackageQueries('http://www.eclipse.org/ocl/3.1.0/Pivot','http://www.eclipse.org/emf/2002/GenModel','http://www.eclipse.org/ocl/3.1.0/OCL4Acceleo')/]
 
 [import org::eclipse::ocl::examples::codegen::common::emitQueries/]
 [import org::eclipse::ocl::examples::codegen::common::nameQueries/]
@@ -107,12 +107,12 @@ invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getQualifie
 [query public getQualifyingPackage(genPackage : GenPackage, type : Type) : String = 
 invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getQualifyingPackage(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Type)', Sequence{genPackage, type}) /]
 
-[query public emitManagerArity(genPackage : GenPackage, arity : Integer) : String = 
+[query public emitManagerArity(genPackage : GenPackage, arity : OCLInteger) : String = 
 if arity = 1 then 'ExecutorSingleIterationManager'
 else if arity = 2 then 'ExecutorDoubleIterationManager'
 else 'ExecutorMultipleIterationManager' endif endif/]
 
-[query public emitOperationArity(genPackage : GenPackage, arity : Integer) : String = 
+[query public emitOperationArity(genPackage : GenPackage, arity : OCLInteger) : String = 
 if arity = 0 then 'UnaryOperation'
 else if arity = 1 then 'BinaryOperation'
 else if arity = 2 then 'TernaryOperation'

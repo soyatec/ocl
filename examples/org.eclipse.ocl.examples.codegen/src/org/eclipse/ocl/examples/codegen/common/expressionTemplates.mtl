@@ -15,7 +15,7 @@
  * $Id$
  **/]
 [comment encoding = UTF-8 /]
-[module org::eclipse::ocl::examples::codegen::common::expressionTemplates('http://www.eclipse.org/ocl/3.1.0/Pivot','http://www.eclipse.org/emf/2002/GenModel')/]
+[module org::eclipse::ocl::examples::codegen::common::expressionTemplates('http://www.eclipse.org/ocl/3.1.0/Pivot','http://www.eclipse.org/emf/2002/GenModel','http://www.eclipse.org/ocl/3.1.0/OCL4Acceleo')/]
 
 [import org::eclipse::ocl::examples::codegen::common::constantTemplates/]
 [import org::eclipse::ocl::examples::codegen::common::elementQueries/]
@@ -86,7 +86,7 @@ else {
 }[/let][/template]
 
 [template public emitExpression(ast : IterateExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
-[let arity : Integer = ast.iterator->size()]
+[let arity : OCLInteger = ast.iterator->size()]
 [let leftVarName : String = ast.source.symbolName(expInOcl)]
 [let accVarName : String = ast.result.symbolName(expInOcl)]
 [let astName : String = ast.symbolName(expInOcl)]
@@ -118,7 +118,7 @@ else {
 <%Value%> [astName/] = dynamic_[astName/].evaluateIteration(manager_[astName/]);[/let][/let][/let][/let][/let][/let][/let][/template]
 
 [template public emitExpression(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
-[let arity : Integer = ast.iterator->size()]
+[let arity : OCLInteger = ast.iterator->size()]
 [let leftVarName : String = ast.source.symbolName(expInOcl)]
 [let astName : String = ast.symbolName(expInOcl)]
 [let operationTypeName : String = 'org.eclipse.ocl.examples.domain.library.Abstract' + genPackage.emitOperationArity(arity)]
@@ -134,9 +134,9 @@ else {
 /*
 [ast._'body'.prettyPrint().trim()/]
 */
-	public @NonNull <%Value%> evaluate(@NonNull <%org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator%> evaluator, @NonNull <%org.eclipse.ocl.examples.domain.elements.DomainType%> returnType, @NonNull <%Value%> sourceValue[for (i : Integer | Sequence{1..arity})]
+	public @NonNull <%Value%> evaluate(@NonNull <%org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator%> evaluator, @NonNull <%org.eclipse.ocl.examples.domain.elements.DomainType%> returnType, @NonNull <%Value%> sourceValue[for (i : OCLInteger | Sequence{1..arity})]
 , @NonNull <%Value%> iterator[i/][/for]) throws <%org.eclipse.ocl.examples.domain.evaluation.InvalidValueException%> {
-[for (i : Integer | Sequence{1..arity})]
+[for (i : OCLInteger | Sequence{1..arity})]
 		final @NonNull <%Value%> [ast.iterator->at(i).symbolName(expInOcl)/] = iterator[i/];	// iterator: [ast.iterator->at(i).name/]
 [/for]  
 		[ast._'body'.emitExpression(importer, genPackage, expInOcl)/]
@@ -197,11 +197,11 @@ try {
 [ast.generateCall(importer, genPackage, expInOcl)/][/template]
 
 [template public generateCall(ast : OperationCallExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
-[let arity : Integer = ast.referredOperation.ownedParameter->size()]
+[let arity : OCLInteger = ast.referredOperation.ownedParameter->size()]
 [let astName : String = ast.symbolName(expInOcl)]
 [let operationTypeName : String = 'org.eclipse.ocl.examples.domain.library.Library' + genPackage.emitOperationArity(arity)]
 <%org.eclipse.ocl.examples.domain.elements.DomainType%> static_[astName/] = [genPackage.generateTypeOf(expInOcl, ast.source)/][if arity > 0]
-[for (index : Integer | Sequence{1..arity})]
+[for (index : OCLInteger | Sequence{1..arity})]
 [if ast.referredOperation.ownedParameter->at(index).type.oclIsKindOf(SelfType)]
 , [ast.argument->at(index).symbolName(expInOcl)/][/if][/for][/if]);
 <%[operationTypeName/]%> dynamic_[astName/] = (<%[operationTypeName/]%>)static_[astName/].lookupImplementation(standardLibrary, [ast.referredOperation.symbolName(expInOcl)/]);

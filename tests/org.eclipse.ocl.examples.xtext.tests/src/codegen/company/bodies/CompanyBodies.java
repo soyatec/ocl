@@ -96,7 +96,7 @@ public class CompanyBodies
 			final ExecutorType T_Company_ecore__company__CompanySizeKind = CodegencompanyTables.Types._CompanySizeKind;
 			final DomainTypedElement L_size_Company_ecore__company__CompanySizeKind = standardLibrary.getTuplePart("size", T_Company_ecore__company__CompanySizeKind);
 			final ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
-			final DomainCollectionType T_Sequence_Integer_ = standardLibrary.getSequenceType(T_Integer);
+			final DomainCollectionType T_Sequence_Integer_ = standardLibrary.getSequenceType(T_Integer, null, null);
 			final DomainTypedElement L_range_Sequence_Integer_ = standardLibrary.getTuplePart("range", T_Sequence_Integer_);
 			final DomainTupleType U_Tuple_range_Sequence_size_CompanySizeKind_ = standardLibrary.getTupleType(L_range_Sequence_Integer_, L_size_Company_ecore__company__CompanySizeKind);
 			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
@@ -104,14 +104,14 @@ public class CompanyBodies
 			final ExecutorOperation O_Collection_includes = OCLstdlibTables.Operations._Collection__includes;
 			final ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
 			final ExecutorType T_Company_ecore__company__Employee = CodegencompanyTables.Types._Employee;
-			final DomainCollectionType T_OrderedSet_Company_ecore__company__Employee_ = standardLibrary.getOrderedSetType(T_Company_ecore__company__Employee);
+			final DomainCollectionType T_OrderedSet_Company_ecore__company__Employee_ = standardLibrary.getOrderedSetType(T_Company_ecore__company__Employee, null, null);
 			final ExecutorProperty P_Company_employees = CodegencompanyTables.Properties._Company__employees;
 			final LibraryProperty IP_Company_employees = P_Company_employees.getImplementation();
 			final ExecutorType T_UnlimitedNatural = OCLstdlibTables.Types._UnlimitedNatural;
-			final DomainCollectionType T_Sequence_UnlimitedNatural_ = standardLibrary.getSequenceType(T_UnlimitedNatural);
+			final DomainCollectionType T_Sequence_UnlimitedNatural_ = standardLibrary.getSequenceType(T_UnlimitedNatural, null, null);
 			final DomainTypedElement L_range_Sequence_UnlimitedNatural_ = standardLibrary.getTuplePart("range", T_Sequence_UnlimitedNatural_);
 			final DomainTupleType U_Tuple_range_Sequence_size_CompanySizeKind_1 = standardLibrary.getTupleType(L_range_Sequence_UnlimitedNatural_, L_size_Company_ecore__company__CompanySizeKind);
-			final DomainCollectionType T_Set_Tuple_range_Sequence_size_CompanySizeKind__ = standardLibrary.getSetType(U_Tuple_range_Sequence_size_CompanySizeKind_1);
+			final DomainCollectionType T_Set_Tuple_range_Sequence_size_CompanySizeKind__ = standardLibrary.getSetType(U_Tuple_range_Sequence_size_CompanySizeKind_1, null, null);
 			final IntegerValue I_0 = valueFactory.integerValueOf(0);
 			final IntegerValue I_49 = valueFactory.integerValueOf(49);
 			final IntegerRange rA_symbol_43 = valueFactory.createRange(I_0.asIntegerValue(), I_49.asIntegerValue());

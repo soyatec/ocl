@@ -66,7 +66,7 @@ public class NavigationOperatorCSAttribution extends AbstractAttribution
 					else {										// object.oclAsSet()->collection-operation
 						MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 						if (type != null) {
-							Type setType = metaModelManager.getSetType(type);
+							Type setType = metaModelManager.getSetType(type, null, null);
 							environmentView.addElementsOfScope(setType, scopeView);
 						}
 					}

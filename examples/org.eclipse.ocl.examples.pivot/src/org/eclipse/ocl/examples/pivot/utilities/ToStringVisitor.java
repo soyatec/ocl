@@ -19,7 +19,6 @@
 
 package org.eclipse.ocl.examples.pivot.utilities;
 
-import java.math.BigInteger;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -31,10 +30,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
-import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralPart;
@@ -57,6 +56,7 @@ import org.eclipse.ocl.examples.pivot.IteratorExp;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.MessageExp;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
@@ -469,10 +469,10 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 		appendName(object);
 		appendTemplateBindings(object.getTemplateBinding());
 		appendTemplateSignature(object.getOwnedTemplateSignature());
-		BigInteger lower = object.getLower();
-		BigInteger upper = object.getUpper();
-		long lowerValue = lower != null ? lower.longValue() : 0l;
-		long upperValue = upper != null ? upper.longValue() : -1l;
+		Number lower = object.getLower();
+		Number upper = object.getUpper();
+		long lowerValue = lower != null ? lower.longValue() : 0l;		// FIXME Handle BigInteger
+		long upperValue = (upper != null) && !(upper instanceof Unlimited) ? upper.longValue() : -1l;
 		if ((lowerValue != 0) || (upperValue != -1)) {
 			DomainUtil.formatMultiplicity(result, lowerValue, upperValue);
 		}
@@ -1098,13 +1098,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 	 */
 	@Override
 	public String visitUnlimitedNaturalLiteralExp(@NonNull UnlimitedNaturalLiteralExp unl) {
-		BigInteger symbol = unl.getUnlimitedNaturalSymbol();
-		if (symbol.signum() < 0) {
-			append("*");
-		}
-		else {
-			append(symbol);
-		}
+		append(unl.getUnlimitedNaturalSymbol());
 		return null;
 	}
 

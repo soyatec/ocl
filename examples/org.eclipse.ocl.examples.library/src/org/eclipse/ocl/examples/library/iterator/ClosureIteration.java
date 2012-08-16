@@ -67,7 +67,7 @@ public class ClosureIteration extends AbstractIteration
 				}
 				else {
 					ValueFactory valueFactory = iterationManager.getValueFactory();
-					collectionValue = valueFactory.createSequenceValue(valueFactory.getStandardLibrary().getSequenceType(bodyVal.getType()), bodyVal);
+					collectionValue = valueFactory.createSequenceValue(valueFactory.getStandardLibrary().getSequenceType(bodyVal.getType(), null, null), bodyVal);
 				}
 				evaluateIteration(iterationManager.createNestedIterationManager(collectionValue));
 			} catch (InvalidValueException e) {

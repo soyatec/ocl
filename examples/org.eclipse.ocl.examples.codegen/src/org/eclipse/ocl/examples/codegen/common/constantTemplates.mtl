@@ -47,7 +47,7 @@
 [template protected emitConstants(ast : BagType, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitStandardLibrary()/]
 [ast.elementType.emitConstants(genPackage, expInOcl)/]
-final @NonNull <%DomainCollectionType%> [ast.symbolName(expInOcl)/] = standardLibrary.getBagType([ast.elementType.symbolName(expInOcl)/]);
+final @NonNull <%DomainCollectionType%> [ast.symbolName(expInOcl)/] = standardLibrary.getBagType([ast.elementType.symbolName(expInOcl)/], null, null);
 [/template]
 
 [template protected emitConstants(ast : BooleanLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
@@ -142,7 +142,7 @@ final @NonNull <%ExecutorOperation%> [ast.referredOperation.symbolName(expInOcl)
 [template protected emitConstants(ast : OrderedSetType, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitStandardLibrary()/]
 [ast.elementType.emitConstants(genPackage, expInOcl)/]
-final @NonNull <%DomainCollectionType%> [ast.symbolName(expInOcl)/] = standardLibrary.getOrderedSetType([ast.elementType.symbolName(expInOcl)/]);
+final @NonNull <%DomainCollectionType%> [ast.symbolName(expInOcl)/] = standardLibrary.getOrderedSetType([ast.elementType.symbolName(expInOcl)/], null, null);
 [/template]
 
 [template protected emitConstants(ast : PropertyCallExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
@@ -164,13 +164,13 @@ final @NonNull <%RealValue%> [ast.symbolName(expInOcl)/] = valueFactory.realValu
 [template protected emitConstants(ast : SequenceType, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitStandardLibrary()/]
 [ast.elementType.emitConstants(genPackage, expInOcl)/]
-final @NonNull <%DomainCollectionType%> [ast.symbolName(expInOcl)/] = standardLibrary.getSequenceType([ast.elementType.symbolName(expInOcl)/]);
+final @NonNull <%DomainCollectionType%> [ast.symbolName(expInOcl)/] = standardLibrary.getSequenceType([ast.elementType.symbolName(expInOcl)/], null, null);
 [/template]
 
 [template protected emitConstants(ast : SetType, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitStandardLibrary()/]
 [ast.elementType.emitConstants(genPackage, expInOcl)/]
-final @NonNull <%DomainCollectionType%> [ast.symbolName(expInOcl)/] = standardLibrary.getSetType([ast.elementType.symbolName(expInOcl)/]);
+final @NonNull <%DomainCollectionType%> [ast.symbolName(expInOcl)/] = standardLibrary.getSetType([ast.elementType.symbolName(expInOcl)/], null, null);
 [/template]
 
 [template protected emitConstants(ast : StringLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]

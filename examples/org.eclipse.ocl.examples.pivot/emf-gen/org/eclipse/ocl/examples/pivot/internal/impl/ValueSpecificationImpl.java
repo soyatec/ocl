@@ -17,7 +17,6 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.lang.reflect.InvocationTargetException;
-import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Map;
 
@@ -277,7 +276,7 @@ public abstract class ValueSpecificationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BigInteger integerValue() {
+	public Number integerValue() {
 		throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ValueSpecification!integerValue()
 	}
 
@@ -304,7 +303,7 @@ public abstract class ValueSpecificationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BigInteger unlimitedValue() {
+	public Number unlimitedValue() {
 		throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ValueSpecification!unlimitedValue()
 	}
 

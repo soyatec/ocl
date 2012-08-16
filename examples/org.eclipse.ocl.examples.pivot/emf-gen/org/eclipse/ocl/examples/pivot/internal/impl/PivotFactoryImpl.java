@@ -17,7 +17,6 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -26,6 +25,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.AppliedStereotype;
@@ -35,7 +36,6 @@ import org.eclipse.ocl.examples.pivot.AssociativityKind;
 import org.eclipse.ocl.examples.pivot.BagType;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CallOperationAction;
-import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
 import org.eclipse.ocl.examples.pivot.CollectionKind;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
@@ -66,6 +66,7 @@ import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.MessageExp;
 import org.eclipse.ocl.examples.pivot.MessageType;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -1190,39 +1191,47 @@ public class PivotFactoryImpl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public Integer createIntFromString(EDataType eDataType, String initialValue) {
-		return (Integer)super.createFromString(eDataType, initialValue);
+	public Integer createIntFromString(EDataType eDataType, String initialValue)
+	{
+		return Integer.valueOf(initialValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public String convertIntToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
+	public String convertIntToString(EDataType eDataType, Object instanceValue)
+	{
+		return instanceValue.toString();
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public BigInteger createIntegerFromString(EDataType eDataType,
-			String initialValue) {
-		return (BigInteger)super.createFromString(eDataType, initialValue);
+	public Number createIntegerFromString(EDataType eDataType, String aValue) {
+		try {
+			assert aValue != null;
+			return DomainUtil.createNumberFromString(aValue);
+		}
+		catch (NumberFormatException e) {
+//			return throwInvalidValueException(e, EvaluatorMessages.InvalidInteger, aValue);
+		}
+		return (Number)super.createFromString(eDataType, aValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String convertIntegerToString(EDataType eDataType,
 			Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
+		return instanceValue.toString();
 	}
 
 	/**
@@ -1268,20 +1277,28 @@ public class PivotFactoryImpl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public BigDecimal createRealFromString(EDataType eDataType,
-			String initialValue) {
-		return (BigDecimal)super.createFromString(eDataType, initialValue);
+	public Number createRealFromString(EDataType eDataType, String aValue) {
+		if ("*".equals(aValue)) {
+			return Unlimited.INSTANCE;
+		}
+		try {
+			return new BigDecimal(aValue);
+		}
+		catch (NumberFormatException e) {
+//			return throwInvalidValueException(e, EvaluatorMessages.InvalidInteger, aValue);
+		}
+		return (Number)super.createFromString(eDataType, aValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String convertRealToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
+		return instanceValue.toString();
 	}
 
 	/**
@@ -1327,21 +1344,27 @@ public class PivotFactoryImpl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public BigInteger createUnlimitedNaturalFromString(EDataType eDataType,
-			String initialValue) {
-		return (BigInteger)super.createFromString(eDataType, initialValue);
+	public Number createUnlimitedNaturalFromString(EDataType eDataType, String aValue) {
+		try {
+			assert aValue != null;
+			return DomainUtil.createNumberFromString(aValue);
+		}
+		catch (NumberFormatException e) {
+//			return throwInvalidValueException(e, EvaluatorMessages.InvalidInteger, aValue);
+		}
+		return (Number)super.createFromString(eDataType, aValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String convertUnlimitedNaturalToString(EDataType eDataType,
 			Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
+		return instanceValue.toString();
 	}
 
 	/**

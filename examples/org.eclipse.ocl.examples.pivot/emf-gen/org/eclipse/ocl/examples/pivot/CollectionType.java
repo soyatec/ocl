@@ -16,7 +16,10 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import java.math.BigInteger;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 
 /**
@@ -78,13 +81,13 @@ public interface CollectionType
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Lower</em>' attribute.
-	 * @see #setLower(BigInteger)
+	 * @see #setLower(Number)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionType_Lower()
 	 * @model default="0" dataType="org.eclipse.ocl.examples.pivot.Integer" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!CollectionType!lower'"
 	 * @generated
 	 */
-	BigInteger getLower();
+	Number getLower();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.CollectionType#getLower <em>Lower</em>}' attribute.
@@ -94,11 +97,11 @@ public interface CollectionType
 	 * @see #getLower()
 	 * @generated
 	 */
-	void setLower(BigInteger value);
+	void setLower(Number value);
 
 	/**
 	 * Returns the value of the '<em><b>Upper</b></em>' attribute.
-	 * The default value is <code>"-1"</code>.
+	 * The default value is <code>"*"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Upper</em>' attribute isn't clear,
@@ -106,13 +109,13 @@ public interface CollectionType
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Upper</em>' attribute.
-	 * @see #setUpper(BigInteger)
+	 * @see #setUpper(Number)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionType_Upper()
-	 * @model default="-1" dataType="org.eclipse.ocl.examples.pivot.UnlimitedNatural" required="true"
+	 * @model default="*" dataType="org.eclipse.ocl.examples.pivot.UnlimitedNatural" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!CollectionType!upper'"
 	 * @generated
 	 */
-	BigInteger getUpper();
+	Number getUpper();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.CollectionType#getUpper <em>Upper</em>}' attribute.
@@ -122,6 +125,11 @@ public interface CollectionType
 	 * @see #getUpper()
 	 * @generated
 	 */
-	void setUpper(BigInteger value);
+	void setUpper(Number value);
 
+	@NonNull IntegerValue getLowerValue(@NonNull ValueFactory valueFactory);
+	@NonNull IntegerValue getUpperValue(@NonNull ValueFactory valueFactory);
+
+	void setLowerValue(@NonNull IntegerValue lower) throws InvalidValueException;
+	void setUpperValue(@NonNull IntegerValue upper) throws InvalidValueException;
 } // CollectionType

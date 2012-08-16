@@ -16,7 +16,9 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import java.math.BigDecimal;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.RealValue;
 
 /**
  * <!-- begin-user-doc -->
@@ -46,13 +48,13 @@ public interface RealLiteralExp
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Real Symbol</em>' attribute.
-	 * @see #setRealSymbol(BigDecimal)
+	 * @see #setRealSymbol(Number)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getRealLiteralExp_RealSymbol()
 	 * @model dataType="org.eclipse.ocl.examples.pivot.Real" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!RealLiteralExp!realSymbol'"
 	 * @generated
 	 */
-	BigDecimal getRealSymbol();
+	Number getRealSymbol();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.RealLiteralExp#getRealSymbol <em>Real Symbol</em>}' attribute.
@@ -62,6 +64,8 @@ public interface RealLiteralExp
 	 * @see #getRealSymbol()
 	 * @generated
 	 */
-	void setRealSymbol(BigDecimal value);
+	void setRealSymbol(Number value);
+
+	@NonNull RealValue getRealValue(@NonNull ValueFactory valueFactory);
 
 } // RealLiteralExp

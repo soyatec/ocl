@@ -199,8 +199,8 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 			String operatorName = csOperator.getName();
 			assert operatorName != null;
 			Precedence unaryPrecedence = metaModelManager.getPrefixPrecedence(operatorName);
-			int parentOrder = parentPrecedence != null ? parentPrecedence.getOrder().intValue() : -1;
-			int unaryOrder = unaryPrecedence != null ? unaryPrecedence.getOrder().intValue() : -1;
+			int parentOrder = parentPrecedence != null ? parentPrecedence.getOrder() : -1;
+			int unaryOrder = unaryPrecedence != null ? unaryPrecedence.getOrder() : -1;
 			if (unaryOrder < parentOrder) {
 				break;
 			}

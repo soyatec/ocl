@@ -65,12 +65,12 @@ public class MessageExpBodies
 			final @NonNull ExecutorOperation O_Integer__add_ = OCLstdlibTables.Operations._Integer___add_;
 			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
 			final @NonNull ExecutorType T_pivot__CallOperationAction = PivotTables.Types._CallOperationAction;
-			final @NonNull DomainCollectionType T_Set_pivot__CallOperationAction_ = standardLibrary.getSetType(T_pivot__CallOperationAction);
+			final @NonNull DomainCollectionType T_Set_pivot__CallOperationAction_ = standardLibrary.getSetType(T_pivot__CallOperationAction, null, null);
 			final @NonNull ExecutorOperation O_OclAny_oclAsSet = OCLstdlibTables.Operations._OclAny__oclAsSet;
 			final @NonNull ExecutorProperty P_MessageExp_calledOperation = PivotTables.Properties._MessageExp__calledOperation;
 			final @NonNull LibraryProperty IP_MessageExp_calledOperation = P_MessageExp_calledOperation.getImplementation();
 			final @NonNull ExecutorType T_pivot__SendSignalAction = PivotTables.Types._SendSignalAction;
-			final @NonNull DomainCollectionType T_Set_pivot__SendSignalAction_ = standardLibrary.getSetType(T_pivot__SendSignalAction);
+			final @NonNull DomainCollectionType T_Set_pivot__SendSignalAction_ = standardLibrary.getSetType(T_pivot__SendSignalAction, null, null);
 			final @NonNull ExecutorProperty P_MessageExp_sentSignal = PivotTables.Properties._MessageExp__sentSignal;
 			final @NonNull LibraryProperty IP_MessageExp_sentSignal = P_MessageExp_sentSignal.getImplementation();
 			final @NonNull IntegerValue I_1 = valueFactory.integerValueOf(1);

@@ -67,6 +67,7 @@ import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.StringValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
+import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -110,7 +111,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
     		}
     	}
     	DomainType elementType = getElementType(collection);
-    	return createBagValue(standardLibrary.getBagType(elementType), collection);
+    	return createBagValue(standardLibrary.getBagType(elementType, null, null), collection);
     }
 
     public @NonNull BagValue createBagOf(@NonNull Iterable<?> objects) {
@@ -121,7 +122,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
     		}
     	}
     	DomainType elementType = getElementType(collection);
-    	return createBagValue(standardLibrary.getBagType(elementType), collection);
+    	return createBagValue(standardLibrary.getBagType(elementType, null, null), collection);
     }
 	
 	public @NonNull BagValue createBagValue(@NonNull DomainCollectionType type, Value... values) {
@@ -138,7 +139,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
 
 	public @NonNull BagValue createBagValue(Value... values) {
 		DomainType elementType = getElementType(values);
-		DomainCollectionType collectionType = standardLibrary.getBagType(elementType);
+		DomainCollectionType collectionType = standardLibrary.getBagType(elementType, null, null);
 		return new BagValueImpl(this, collectionType, values);
 	}
 
@@ -170,7 +171,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
 			}
 		}
 		else {
-			return new SetValueImpl.Accumulator(this, standardLibrary.getSetType(type));		// WIP used by "any"
+			return new SetValueImpl.Accumulator(this, standardLibrary.getSetType(type, null, null));		// WIP used by "any"
 		}
 	}	
 	
@@ -193,18 +194,18 @@ public abstract class ValueFactoryImpl implements ValueFactory
 	public @NonNull CollectionValue createCollectionValue(boolean isOrdered, boolean isUnique, @NonNull DomainType elementType, Value... values) {
 		if (isOrdered) {
 			if (isUnique) {
-				return createOrderedSetValue(standardLibrary.getOrderedSetType(elementType), values);
+				return createOrderedSetValue(standardLibrary.getOrderedSetType(elementType, null, null), values);
 			}
 			else {
-				return createSequenceValue(standardLibrary.getSequenceType(elementType), values);
+				return createSequenceValue(standardLibrary.getSequenceType(elementType, null, null), values);
 			}
 		}
 		else {
 			if (isUnique) {
-				return createSetValue(standardLibrary.getSetType(elementType), values);
+				return createSetValue(standardLibrary.getSetType(elementType, null, null), values);
 			}
 			else {
-				return createBagValue(standardLibrary.getBagType(elementType), values);
+				return createBagValue(standardLibrary.getBagType(elementType, null, null), values);
 			}
 		}
 	}
@@ -220,18 +221,18 @@ public abstract class ValueFactoryImpl implements ValueFactory
 	public @NonNull CollectionValue createCollectionValue(boolean isOrdered, boolean isUnique, @NonNull DomainType elementType, @NonNull Collection<Value> values) {
 		if (isOrdered) {
 			if (isUnique) {
-				return createOrderedSetValue(standardLibrary.getOrderedSetType(elementType), values);
+				return createOrderedSetValue(standardLibrary.getOrderedSetType(elementType, null, null), values);
 			}
 			else {
-				return createSequenceValue(standardLibrary.getSequenceType(elementType), values);
+				return createSequenceValue(standardLibrary.getSequenceType(elementType, null, null), values);
 			}
 		}
 		else {
 			if (isUnique) {
-				return createSetValue(standardLibrary.getSetType(elementType), values);
+				return createSetValue(standardLibrary.getSetType(elementType, null, null), values);
 			}
 			else {
-				return createBagValue(standardLibrary.getBagType(elementType), values);
+				return createBagValue(standardLibrary.getBagType(elementType, null, null), values);
 			}
 		}
 	}
@@ -301,7 +302,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
     		}
     	}
     	DomainType elementType = getElementType(collection);
-    	return createOrderedSetValue(standardLibrary.getOrderedSetType(elementType), collection);
+    	return createOrderedSetValue(standardLibrary.getOrderedSetType(elementType, null, null), collection);
     }
 
     public @NonNull OrderedSetValue createOrderedSetOf(Object... objects) {
@@ -312,7 +313,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
     		}
     	}
     	DomainType elementType = getElementType(collection);
-    	return createOrderedSetValue(standardLibrary.getOrderedSetType(elementType), collection);
+    	return createOrderedSetValue(standardLibrary.getOrderedSetType(elementType, null, null), collection);
     }
 
 	public @NonNull OrderedSetValue createOrderedSetRange(@NonNull DomainCollectionType type, @NonNull IntegerRange range) {
@@ -333,7 +334,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
 
 	public @NonNull OrderedSetValue createOrderedSetValue(Value... values) {
 		DomainType elementType = getElementType(values);
-		DomainCollectionType collectionType = standardLibrary.getOrderedSetType(elementType);
+		DomainCollectionType collectionType = standardLibrary.getOrderedSetType(elementType, null, null);
 		return new SparseOrderedSetValueImpl(this, collectionType, values);
 	}
 
@@ -345,7 +346,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
     		}
     	}
     	DomainType elementType = getElementType(collection);
-    	return createSequenceValue(standardLibrary.getSequenceType(elementType), collection);
+    	return createSequenceValue(standardLibrary.getSequenceType(elementType, null, null), collection);
     }
 
     public @NonNull SequenceValue createSequenceOf(@NonNull Iterable<?> objects) {
@@ -356,7 +357,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
     		}
     	}
     	DomainType elementType = getElementType(collection);
-    	return createSequenceValue(standardLibrary.getSequenceType(elementType), collection);
+    	return createSequenceValue(standardLibrary.getSequenceType(elementType, null, null), collection);
     }
 
 	public @NonNull IntegerRange createRange(@NonNull IntegerValue firstInteger, @NonNull IntegerValue lastInteger) throws InvalidValueException {
@@ -389,7 +390,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
 
 	public @NonNull SequenceValue createSequenceValue(Value... values) {
 		DomainType elementType = getElementType(values);
-		DomainCollectionType collectionType = standardLibrary.getSequenceType(elementType);
+		DomainCollectionType collectionType = standardLibrary.getSequenceType(elementType, null, null);
 		return new SparseSequenceValueImpl(this, collectionType, values);
 	}
 
@@ -401,7 +402,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
     		}
     	}
     	DomainType elementType = getElementType(collection);
-    	return createSetValue(standardLibrary.getSetType(elementType), collection);
+    	return createSetValue(standardLibrary.getSetType(elementType, null, null), collection);
     }
 
     public @NonNull SetValue createSetOf(@NonNull Iterable<?> objects) {
@@ -412,7 +413,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
     		}
     	}
     	DomainType elementType = getElementType(collection);
-    	return createSetValue(standardLibrary.getSetType(elementType), collection);
+    	return createSetValue(standardLibrary.getSetType(elementType, null, null), collection);
     }
 
 	public @NonNull SetValue createSetValue(@NonNull DomainCollectionType type, Value... values) {
@@ -429,7 +430,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
 
 	public @NonNull SetValue createSetValue(Value... values) {
 		DomainType elementType = getElementType(values);
-		DomainCollectionType collectionType = standardLibrary.getSetType(elementType);
+		DomainCollectionType collectionType = standardLibrary.getSetType(elementType, null, null);
 		return new SetValueImpl(this, collectionType, values);
 	}
 
@@ -574,6 +575,18 @@ public abstract class ValueFactoryImpl implements ValueFactory
 		}
 		return new BigIntegerValueImpl(this, value);
 	}
+    
+	public @NonNull IntegerValue integerValueOf(@NonNull Number aNumber) {
+		if (aNumber instanceof BigInteger) {
+			return new BigIntegerValueImpl(this, (BigInteger)aNumber);
+		}
+		else if (aNumber instanceof Unlimited) {
+			return getUnlimited();
+		}
+		else {
+			return integerValueOf(aNumber.longValue());
+		}
+	}
 	
 	/**
 	 * Creates a BigInteger representation for aValue.
@@ -613,6 +626,21 @@ public abstract class ValueFactoryImpl implements ValueFactory
 			return realValueOf(integerValue.bigDecimalValue());
 		} catch (InvalidValueException e) {
 			return createInvalidValue(EvaluatorMessages.InvalidInteger, e, null, integerValue);
+		}
+	}
+    
+	public @NonNull RealValue realValueOf(@NonNull Number aNumber) {
+		if (aNumber instanceof BigDecimal) {
+			return new RealValueImpl(this, (BigDecimal)aNumber);
+		}
+		else if (aNumber instanceof BigInteger) {
+			return new RealValueImpl(this, new BigDecimal((BigInteger)aNumber));
+		}
+		else if (aNumber instanceof Unlimited) {
+			return new RealValueImpl(this, Double.POSITIVE_INFINITY);
+		}
+		else {
+			return new RealValueImpl(this, aNumber.doubleValue());
 		}
 	}
 	

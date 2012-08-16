@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot.uml;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -24,6 +23,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -165,12 +166,15 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 				Type pivotType = converter.resolveType(umlType);
 				if ((umlType instanceof MultiplicityElement) && (pivotType != null)) {
 					MultiplicityElement umlMultiplicity = (MultiplicityElement)umlType;
-					long upper = umlMultiplicity.getUpper();
+					int upper = umlMultiplicity.getUpper();
 					if (upper != 1) {
-						long lower = umlMultiplicity.getLower();
+						int lower = umlMultiplicity.getLower();
 						boolean isOrdered = umlMultiplicity.isOrdered();
 						boolean isUnique = umlMultiplicity.isUnique();
-						pivotType = metaModelManager.getCollectionType(isOrdered, isUnique, pivotType, BigInteger.valueOf(lower), BigInteger.valueOf(upper));
+						ValueFactory valueFactory = metaModelManager.getValueFactory();
+						IntegerValue lowerValue = valueFactory.integerValueOf(lower);
+						IntegerValue upperValue = upper != -1 ? valueFactory.getUnlimited() : valueFactory.integerValueOf(upper);
+						pivotType = metaModelManager.getCollectionType(isOrdered, isUnique, pivotType, lowerValue, upperValue);
 					}
 				}
 				pivotElement.setType(pivotType);

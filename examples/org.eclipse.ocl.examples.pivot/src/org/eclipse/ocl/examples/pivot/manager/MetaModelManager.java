@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot.manager;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -61,9 +60,9 @@ import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.AnyType;
-import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -75,6 +74,7 @@ import org.eclipse.ocl.examples.pivot.InvalidType;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.Library;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
@@ -495,11 +495,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	 * The known implementation load capabilities.
 	 */
 	private ImplementationManager implementationManager = null;			// Lazily created
-
-	/**
-	 * The value creation capabilities.
-	 */
-	private ValueFactory valueFactory = null;			// Lazily created
 		
 	private Orphanage orphanage = null;
 
@@ -799,20 +794,16 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		if ((firstElementType == null) || (secondElementType == null)) {
 			return false;
 		}
-		BigInteger firstLower = firstType.getLower();
-		BigInteger secondLower = secondType.getLower();
+		ValueFactory valueFactory = getValueFactory();
+		IntegerValue firstLower = firstType.getLowerValue(valueFactory);
+		IntegerValue secondLower = secondType.getLowerValue(valueFactory);
 		if (firstLower.compareTo(secondLower) > 0) {
 			return false;
 		}
-		BigInteger firstUpper = firstType.getUpper();
-		if (firstUpper.signum() >= 0) {
-			BigInteger secondUpper = secondType.getUpper();
-			if (secondUpper.signum() < 0) {
-				return false;
-			}
-			if (firstLower.compareTo(secondLower) < 0) {
-				return false;
-			}
+		IntegerValue firstUpper = firstType.getUpperValue(valueFactory);
+		IntegerValue secondUpper = secondType.getUpperValue(valueFactory);
+		if (firstUpper.compareTo(secondUpper) < 0) {
+			return false;
 		}
 		if (bindings != null) {
 //			if (firstElementType != null) {
@@ -1054,6 +1045,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return unspecifiedType;
 	}
 
+	@Override
 	protected @NonNull ValueFactory createValueFactory() {
 		return new PivotValueFactory(this);
 	}
@@ -1108,10 +1100,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		if (implementationManager != null) {
 			implementationManager.dispose();
 			implementationManager = null;
-		}
-		if (valueFactory != null) {
-			valueFactory.dispose();
-			valueFactory = null;
 		}
 		orphanage = null;
 		pivotMetaModel = null;
@@ -1244,15 +1232,11 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		}
 	}
 
-	public @NonNull CollectionType getBagType(@NonNull DomainType elementType) {
-		return getBagType(getType(elementType));
+	public @NonNull CollectionType getBagType(@NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
+		return getBagType(getType(elementType), lower, upper);
 	}
 
-	public @NonNull CollectionType getBagType(@NonNull Type elementType) {
-		return getBagType(elementType, null, null);
-	}
-
-	public @NonNull CollectionType getBagType(@NonNull Type elementType, @Nullable BigInteger lower, @Nullable BigInteger upper) {
+	public @NonNull CollectionType getBagType(@NonNull Type elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
 		return getCollectionType(getBagType(), elementType, lower, upper);
 	}
 
@@ -1276,22 +1260,22 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 	
 	@Override
-	public @NonNull CollectionType getCollectionType(@NonNull DomainCollectionType containerType, @NonNull DomainType elementType, @Nullable BigInteger lower, @Nullable BigInteger upper) {
+	public @NonNull CollectionType getCollectionType(@NonNull DomainCollectionType containerType, @NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
 		return getCollectionType((CollectionType)getType(containerType), getType(elementType), lower, upper);
 	}
 
-	public @NonNull CollectionType getCollectionType(boolean isOrdered, boolean isUnique, @NonNull Type elementType, @Nullable BigInteger lower, @Nullable BigInteger upper) {
+	public @NonNull CollectionType getCollectionType(boolean isOrdered, boolean isUnique, @NonNull Type elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
 		return getCollectionType(getCollectionType(isOrdered, isUnique), elementType, lower, upper);
 	}
 
-	public @Nullable Type getCollectionType(@NonNull String collectionTypeName, @NonNull Type elementType, @Nullable BigInteger lower, @Nullable BigInteger upper) {
+	public @Nullable Type getCollectionType(@NonNull String collectionTypeName, @NonNull Type elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
 		if (elementType.eIsProxy()) {
 			return getOclInvalidType();
 		}
 		return getCollectionType((CollectionType)getRequiredLibraryType(collectionTypeName), elementType, lower, upper);
 	}
 
-	public @NonNull <T extends CollectionType> T getCollectionType(@NonNull T containerType, @NonNull Type elementType, @Nullable BigInteger lower, @Nullable BigInteger upper) {
+	public @NonNull <T extends CollectionType> T getCollectionType(@NonNull T containerType, @NonNull Type elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
 		assert containerType == PivotUtil.getUnspecializedTemplateableElement(containerType);
 		TemplateSignature templateSignature = containerType.getOwnedTemplateSignature();
 		if (templateSignature == null) {
@@ -1620,15 +1604,11 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return pivotType != null ? getInheritance(pivotType) : null;
 	}
 
-	public @NonNull CollectionType getOrderedSetType(@NonNull DomainType elementType) {
-		return getOrderedSetType(getType(elementType));
+	public @NonNull CollectionType getOrderedSetType(@NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
+		return getOrderedSetType(getType(elementType), lower, upper);
 	}
 
-	public @NonNull CollectionType getOrderedSetType(@NonNull Type elementType) {
-		return getOrderedSetType(elementType, null, null);
-	}
-
-	public @NonNull CollectionType getOrderedSetType(@NonNull Type elementType, @Nullable BigInteger lower, @Nullable BigInteger upper) {
+	public @NonNull CollectionType getOrderedSetType(@NonNull Type elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
 		return getCollectionType(getOrderedSetType(), elementType, lower, upper);
 	}
 
@@ -1901,27 +1881,19 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return URI.createURI(EcoreUtil.generateUUID() + ".essentialocl");
 	}
 
-	public @NonNull CollectionType getSequenceType(@NonNull DomainType elementType) {
-		return getSequenceType(getType(elementType));
+	public @NonNull CollectionType getSequenceType(@NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
+		return getSequenceType(getType(elementType), lower, upper);
 	}
 
-	public @NonNull CollectionType getSequenceType(@NonNull Type elementType) {
-		return getSequenceType(elementType, null, null);
-	}
-
-	public @NonNull CollectionType getSequenceType(@NonNull Type elementType, @Nullable BigInteger lower, @Nullable BigInteger upper) {
+	public @NonNull CollectionType getSequenceType(@NonNull Type elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
 		return getCollectionType(getSequenceType(), elementType, lower, upper);
 	}
 
-	public @NonNull CollectionType getSetType(@NonNull DomainType elementType) {
-		return getSetType(getType(elementType));
+	public @NonNull CollectionType getSetType(@NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
+		return getSetType(getType(elementType), lower, upper);
 	}
 
-	public @NonNull CollectionType getSetType(@NonNull Type elementType) {
-		return getSetType(elementType, null, null);
-	}
-
-	public @NonNull CollectionType getSetType(@NonNull Type elementType, @Nullable BigInteger lower, @Nullable BigInteger upper) {
+	public @NonNull CollectionType getSetType(@NonNull Type elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
 		return getCollectionType(getSetType(), elementType, lower, upper);
 	}
 
@@ -2143,14 +2115,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			getPivotMetaModel();
 		}
 		return packageManager.getTypeServer(pivotType);
-	}
-
-	public @NonNull ValueFactory getValueFactory() {
-		ValueFactory valueFactory2 = valueFactory;
-		if (valueFactory2 == null) {
-			valueFactory2 = valueFactory = createValueFactory();
-		}
-		return valueFactory2;
 	}
 
 //	public void installAs(@NonNull String nsURI, @NonNull EcoreExecutorPackage tablesPackage) {

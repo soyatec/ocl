@@ -25,6 +25,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="TypeValue" abstract="true" eSuperTypes="#//ElementValue"/>
   <eClassifiers xsi:type="ecore:EClass" name="UniqueCollectionValue" abstract="true"
       interface="true" eSuperTypes="#//CollectionValue"/>
-  <eClassifiers xsi:type="ecore:EClass" name="UnlimitedValue" eSuperTypes="#//NumericValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnlimitedValue" eSuperTypes="#//IntegerValue"/>
   <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true"/>
 </ecore:EPackage>

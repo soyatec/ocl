@@ -138,7 +138,7 @@ public class EmployeeBodies
 			final ExecutorOperation O_Boolean_implies = OCLstdlibTables.Operations._Boolean__implies;
 			final ExecutorOperation O_Collection_notEmpty = OCLstdlibTables.Operations._Collection__notEmpty;
 			final ExecutorType T_String = OCLstdlibTables.Types._String;
-			final DomainCollectionType T_Set_String_ = standardLibrary.getSetType(T_String);
+			final DomainCollectionType T_Set_String_ = standardLibrary.getSetType(T_String, null, null);
 			final ExecutorOperation O_OclAny_oclAsSet = OCLstdlibTables.Operations._OclAny__oclAsSet;
 			final ExecutorProperty P_Employee_name = CodegencompanyTables.Properties._Employee__name;
 			final LibraryProperty IP_Employee_name = P_Employee_name.getImplementation();
@@ -208,7 +208,7 @@ public class EmployeeBodies
 			final ExecutorOperation O_Real__gt_ = OCLstdlibTables.Operations._Real___gt_;
 			final ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
 			final ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
-			final DomainCollectionType T_OrderedSet_Company_ecore__company__Employee_ = standardLibrary.getOrderedSetType(T_Company_ecore__company__Employee);
+			final DomainCollectionType T_OrderedSet_Company_ecore__company__Employee_ = standardLibrary.getOrderedSetType(T_Company_ecore__company__Employee, null, null);
 			final ExecutorProperty P_Employee_directReports = CodegencompanyTables.Properties._Employee__directReports;
 			final LibraryProperty IP_Employee_directReports = P_Employee_directReports.getImplementation();
 			final IntegerValue I_0 = valueFactory.integerValueOf(0);
@@ -295,7 +295,7 @@ public class EmployeeBodies
 			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			final ExecutorOperation O_Collection_includes = OCLstdlibTables.Operations._Collection__includes;
 			final ExecutorType T_Company_ecore__company__Employee = CodegencompanyTables.Types._Employee;
-			final DomainCollectionType T_OrderedSet_Company_ecore__company__Employee_ = standardLibrary.getOrderedSetType(T_Company_ecore__company__Employee);
+			final DomainCollectionType T_OrderedSet_Company_ecore__company__Employee_ = standardLibrary.getOrderedSetType(T_Company_ecore__company__Employee, null, null);
 			final ExecutorProperty P_Employee_reportingChain = CodegencompanyTables.Properties._Employee__reportingChain;
 			final LibraryProperty IP_Employee_reportingChain = P_Employee_reportingChain.getImplementation();
 			final ExecutorProperty P_Employee_manager = CodegencompanyTables.Properties._Employee__manager;
@@ -329,7 +329,7 @@ public class EmployeeBodies
 			final ValueFactory valueFactory = evaluator.getValueFactory();
 			final DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 			final ExecutorType T_Company_ecore__company__Employee = CodegencompanyTables.Types._Employee;
-			final DomainCollectionType T_Set_Company_ecore__company__Employee_ = standardLibrary.getSetType(T_Company_ecore__company__Employee);
+			final DomainCollectionType T_Set_Company_ecore__company__Employee_ = standardLibrary.getSetType(T_Company_ecore__company__Employee, null, null);
 			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			final ExecutorOperation O_Set_select = OCLstdlibTables.Operations._Set__select;
 			final ExecutorOperation O_OclElement_allInstances = OCLstdlibTables.Operations._OclElement__allInstances;
@@ -381,7 +381,7 @@ public class EmployeeBodies
 			final ValueFactory valueFactory = evaluator.getValueFactory();
 			final DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 			final ExecutorType T_Company_ecore__company__Employee = CodegencompanyTables.Types._Employee;
-			final DomainCollectionType T_OrderedSet_Company_ecore__company__Employee_ = standardLibrary.getOrderedSetType(T_Company_ecore__company__Employee);
+			final DomainCollectionType T_OrderedSet_Company_ecore__company__Employee_ = standardLibrary.getOrderedSetType(T_Company_ecore__company__Employee, null, null);
 			final ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			final ExecutorOperation O_OrderedSet_select = OCLstdlibTables.Operations._OrderedSet__select;
 			final ExecutorProperty P_Company_employees = CodegencompanyTables.Properties._Company__employees;
@@ -479,7 +479,7 @@ public class EmployeeBodies
 			final ExecutorType T_Company_ecore__company__Employee = CodegencompanyTables.Types._Employee;
 			final ExecutorProperty P_Employee_manager = CodegencompanyTables.Properties._Employee__manager;
 			final LibraryProperty IP_Employee_manager = P_Employee_manager.getImplementation();
-			final DomainCollectionType T_OrderedSet_Company_ecore__company__Employee_ = standardLibrary.getOrderedSetType(T_Company_ecore__company__Employee);
+			final DomainCollectionType T_OrderedSet_Company_ecore__company__Employee_ = standardLibrary.getOrderedSetType(T_Company_ecore__company__Employee, null, null);
 			final Value A_symbol_35 = valueFactory.createOrderedSetValue(T_OrderedSet_Company_ecore__company__Employee_);
 			final ExecutorOperation O_OrderedSet_prepend = OCLstdlibTables.Operations._OrderedSet__prepend;
 			final ExecutorProperty P_Employee_reportingChain = CodegencompanyTables.Properties._Employee__reportingChain;

@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot.manager;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -108,9 +107,8 @@ public class PrecedenceManager
 		}
 		for (int i = 0; i < orderedPrecedences.size(); i++) {
 			String name = orderedPrecedences.get(i);
-			BigInteger order = BigInteger.valueOf(i);
 			for (Precedence precedence : nameToPrecedencesMap.get(name)) {
-				precedence.setOrder(order);
+				precedence.setOrder(i);
 			}
 		}
 		return errors;

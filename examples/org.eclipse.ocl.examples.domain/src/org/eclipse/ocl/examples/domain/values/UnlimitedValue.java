@@ -32,6 +32,13 @@
  */
 package org.eclipse.ocl.examples.domain.values;
 
-public interface UnlimitedValue extends NumericValue
-{	
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+
+public interface UnlimitedValue extends IntegerValue, RealValue
+{
+	/**
+	 * @generated NOT
+	 */
+	@NonNull UnlimitedValue negate() throws InvalidValueException;
 }

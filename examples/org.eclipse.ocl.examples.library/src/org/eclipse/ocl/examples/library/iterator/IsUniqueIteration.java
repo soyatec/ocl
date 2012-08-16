@@ -38,7 +38,7 @@ public class IsUniqueIteration extends AbstractIteration
 	public @NonNull CollectionValue.Accumulator createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
-		return valueFactory.createCollectionAccumulatorValue(standardLibrary.getSetType(accumulatorType));
+		return valueFactory.createCollectionAccumulatorValue(standardLibrary.getSetType(accumulatorType, null, null));
 	}
 	
 	@Override

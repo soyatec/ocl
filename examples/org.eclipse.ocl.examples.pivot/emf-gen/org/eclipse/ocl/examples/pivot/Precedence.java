@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import java.math.BigInteger;
 
 /**
  * <!-- begin-user-doc -->
@@ -71,6 +70,7 @@ public interface Precedence
 
 	/**
 	 * Returns the value of the '<em><b>Order</b></em>' attribute.
+	 * The default value is <code>"0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Order</em>' attribute isn't clear,
@@ -78,13 +78,13 @@ public interface Precedence
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Order</em>' attribute.
-	 * @see #setOrder(BigInteger)
+	 * @see #setOrder(int)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getPrecedence_Order()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.Integer" required="true" transient="true" volatile="true" derived="true"
+	 * @model default="0" dataType="org.eclipse.ocl.examples.pivot.Int" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Precedence!order'"
 	 * @generated
 	 */
-	BigInteger getOrder();
+	int getOrder();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.Precedence#getOrder <em>Order</em>}' attribute.
@@ -94,6 +94,6 @@ public interface Precedence
 	 * @see #getOrder()
 	 * @generated
 	 */
-	void setOrder(BigInteger value);
+	void setOrder(int value);
 
 } // Precedence

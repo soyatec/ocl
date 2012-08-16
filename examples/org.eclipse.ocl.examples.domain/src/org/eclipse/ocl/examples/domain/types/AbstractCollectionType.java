@@ -16,28 +16,27 @@
  */
 package org.eclipse.ocl.examples.domain.types;
 
-import java.math.BigInteger;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 public class AbstractCollectionType extends AbstractSpecializedType implements DomainCollectionType
 {
 	protected final @NonNull DomainType elementType;
-	protected final @NonNull BigInteger lower;
-	protected final @NonNull BigInteger upper;
+	protected final @NonNull IntegerValue lower;
+	protected final @NonNull IntegerValue upper;
 	
 	public AbstractCollectionType(@NonNull DomainStandardLibrary standardLibrary, @NonNull String name,
-			@NonNull DomainType containerType, @NonNull DomainType elementType, @Nullable BigInteger lower, @Nullable BigInteger upper) {
+			@NonNull DomainType containerType, @NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
 		super(standardLibrary, name, containerType);
 		this.elementType = elementType;
-		@SuppressWarnings("null") @NonNull BigInteger lower2 = lower != null ? lower : BigInteger.valueOf(0);
-		@SuppressWarnings("null") @NonNull BigInteger upper2 = upper != null ? upper : BigInteger.valueOf(-1);
-		this.lower = lower2;
-		this.upper = upper2;
+		ValueFactory valueFactory = standardLibrary.getValueFactory();
+		this.lower = lower != null ? lower : valueFactory.getZero();
+		this.upper = upper != null ? upper : valueFactory.getUnlimited();
 	}
 
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
@@ -68,18 +67,18 @@ public class AbstractCollectionType extends AbstractSpecializedType implements D
 		else {
 			if (commonContainerClass.isOrdered()) {
 				if (commonContainerClass.isUnique()) {
-					return standardLibrary.getOrderedSetType(commonElementClass);
+					return standardLibrary.getOrderedSetType(commonElementClass, null, null);
 				}
 				else {
-					return standardLibrary.getSequenceType(commonElementClass);
+					return standardLibrary.getSequenceType(commonElementClass, null, null);
 				}
 			}
 			else {
 				if (commonContainerClass.isUnique()) {
-					return standardLibrary.getSetType(commonElementClass);
+					return standardLibrary.getSetType(commonElementClass, null, null);
 				}
 				else {
-					return standardLibrary.getBagType(commonElementClass);
+					return standardLibrary.getBagType(commonElementClass, null, null);
 				}
 			}
 		}
@@ -94,32 +93,13 @@ public class AbstractCollectionType extends AbstractSpecializedType implements D
 		return elementType;
 	}
 
-	public @NonNull BigInteger getLower() {
+	public @NonNull IntegerValue getLowerValue(@NonNull ValueFactory valueFactory) {
 		return lower;
 	}
 
-	public @NonNull BigInteger getUpper() {
+	public @NonNull IntegerValue getUpperValue(@NonNull ValueFactory valueFactory) {
 		return upper;
 	}
-
-/*	public DomainType getMetaType(DomainStandardLibrary standardLibrary) {
-		if (containerType.isOrdered()) {
-			if (containerType.isUnique()) {
-				return standardLibrary.getOrderedSetType(elementType);
-			}
-			else {
-				return standardLibrary.getSequenceType(elementType);
-			}
-		}
-		else {
-			if (containerType.isUnique()) {
-				return standardLibrary.getSetType(elementType);
-			}
-			else {
-				return standardLibrary.getBagType(elementType);
-			}
-		}
-	} */
 
 	public boolean isEqualTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		if (this == type) {

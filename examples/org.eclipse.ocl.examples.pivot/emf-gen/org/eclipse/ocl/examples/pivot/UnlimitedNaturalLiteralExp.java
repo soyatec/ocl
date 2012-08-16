@@ -16,7 +16,9 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import java.math.BigInteger;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * <!-- begin-user-doc -->
@@ -46,13 +48,13 @@ public interface UnlimitedNaturalLiteralExp
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Unlimited Natural Symbol</em>' attribute.
-	 * @see #setUnlimitedNaturalSymbol(BigInteger)
+	 * @see #setUnlimitedNaturalSymbol(Number)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getUnlimitedNaturalLiteralExp_UnlimitedNaturalSymbol()
 	 * @model dataType="org.eclipse.ocl.examples.pivot.UnlimitedNatural" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!UnlimitedNaturalLiteralExp!unlimitedNaturalSymbol'"
 	 * @generated
 	 */
-	BigInteger getUnlimitedNaturalSymbol();
+	Number getUnlimitedNaturalSymbol();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp#getUnlimitedNaturalSymbol <em>Unlimited Natural Symbol</em>}' attribute.
@@ -62,6 +64,8 @@ public interface UnlimitedNaturalLiteralExp
 	 * @see #getUnlimitedNaturalSymbol()
 	 * @generated
 	 */
-	void setUnlimitedNaturalSymbol(BigInteger value);
+	void setUnlimitedNaturalSymbol(Number value);
+	
+	@NonNull IntegerValue getUnlimitedNaturalValue(@NonNull ValueFactory valueFactory);
 
 } // UnlimitedNaturalLiteralExp

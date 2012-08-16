@@ -1093,19 +1093,19 @@ public abstract class PivotTestSuite extends PivotTestCase
     }
 
     protected Value getEmptyBagValue() {
-		return valueFactory.createBagValue(metaModelManager.getBagType(metaModelManager.getOclVoidType()));
+		return valueFactory.createBagValue(metaModelManager.getBagType(metaModelManager.getOclVoidType(), null, null));
 	}
 
 	protected Value getEmptyOrderedSetValue() {
-		return valueFactory.createOrderedSetValue(metaModelManager.getOrderedSetType(metaModelManager.getOclVoidType()));
+		return valueFactory.createOrderedSetValue(metaModelManager.getOrderedSetType(metaModelManager.getOclVoidType(), null, null));
 	}
 
 	protected Value getEmptySequenceValue() {
-		return valueFactory.createSequenceValue(metaModelManager.getSequenceType(metaModelManager.getOclVoidType()));
+		return valueFactory.createSequenceValue(metaModelManager.getSequenceType(metaModelManager.getOclVoidType(), null, null));
 	}
 
 	protected Value getEmptySetValue() {
-		return valueFactory.createSetValue(metaModelManager.getSetType(metaModelManager.getOclVoidType()));
+		return valueFactory.createSetValue(metaModelManager.getSetType(metaModelManager.getOclVoidType(), null, null));
 	}
 
 	public Metaclass getMetaclass(Type type) {

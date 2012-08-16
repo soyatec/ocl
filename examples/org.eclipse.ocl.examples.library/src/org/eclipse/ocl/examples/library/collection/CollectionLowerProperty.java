@@ -23,7 +23,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -39,6 +38,6 @@ public class CollectionLowerProperty extends AbstractProperty
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		CollectionValue sourceCollectionValue = sourceValue.asCollectionValue();
 		DomainCollectionType sourceType = sourceCollectionValue.getCollectionType();
-		return valueFactory.integerValueOf(DomainUtil.nonNullModel(sourceType.getLower()));
+		return sourceType.getLowerValue(valueFactory);
 	}
 }

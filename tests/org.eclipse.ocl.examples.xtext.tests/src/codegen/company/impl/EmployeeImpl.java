@@ -237,7 +237,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 			final Value self = valueFactory.valueOf(this);
 			final DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 			final ExecutorType T_Company_ecore__company__Employee = CodegencompanyTables.Types._Employee;
-			final DomainCollectionType T_OrderedSet_Company_ecore__company__Employee_ = standardLibrary.getOrderedSetType(T_Company_ecore__company__Employee);
+			final DomainCollectionType T_OrderedSet_Company_ecore__company__Employee_ = standardLibrary.getOrderedSetType(T_Company_ecore__company__Employee, null, null);
 			
 			final DomainType returnType = T_OrderedSet_Company_ecore__company__Employee_;
 			final Value result = EmployeeBodies._directReports_derivation_.INSTANCE.evaluate(evaluator, returnType, self, CodegencompanyTables.Properties._Employee__directReports);
@@ -265,7 +265,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 			final Value self = valueFactory.valueOf(this);
 			final DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 			final ExecutorType T_Company_ecore__company__Employee = CodegencompanyTables.Types._Employee;
-			final DomainCollectionType T_Set_Company_ecore__company__Employee_ = standardLibrary.getSetType(T_Company_ecore__company__Employee);
+			final DomainCollectionType T_Set_Company_ecore__company__Employee_ = standardLibrary.getSetType(T_Company_ecore__company__Employee, null, null);
 			
 			final DomainType returnType = T_Set_Company_ecore__company__Employee_;
 			final Value result = EmployeeBodies._allReports_derivation_.INSTANCE.evaluate(evaluator, returnType, self, CodegencompanyTables.Properties._Employee__allReports);
@@ -296,7 +296,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 			final Value self = valueFactory.valueOf(this);
 			final DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 			final ExecutorType T_Company_ecore__company__Employee = CodegencompanyTables.Types._Employee;
-			final DomainCollectionType T_OrderedSet_Company_ecore__company__Employee_ = standardLibrary.getOrderedSetType(T_Company_ecore__company__Employee);
+			final DomainCollectionType T_OrderedSet_Company_ecore__company__Employee_ = standardLibrary.getOrderedSetType(T_Company_ecore__company__Employee, null, null);
 			
 			final DomainType returnType = T_OrderedSet_Company_ecore__company__Employee_;
 			final Value result = EmployeeBodies._reportingChain_derivation_.INSTANCE.evaluate(evaluator, returnType, self, CodegencompanyTables.Properties._Employee__reportingChain);
