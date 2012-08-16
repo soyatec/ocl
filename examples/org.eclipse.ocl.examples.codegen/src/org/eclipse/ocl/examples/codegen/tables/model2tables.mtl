@@ -184,15 +184,13 @@ public static class Operations {[for (cls : Class | pPackage.ownedType->filter(C
 [/template]
 
 [template public declareOperation(pPackage : Package, genPackage : GenPackage, op : Operation, opIndex : OCLInteger)]
-[if (op.ownedTemplateSignature->notEmpty())]
-[for (parameter : TypeTemplateParameter | op.ownedTemplateSignature.parameter->filter(TypeTemplateParameter))]
-[let parameteredElement : Type = parameter.parameteredElement.oclAsType(Type)]
+[let parameteredElements : Sequence(Type) = if op.ownedTemplateSignature->notEmpty() then op.ownedTemplateSignature.parameter->filter(TypeTemplateParameter).parameteredElement.oclAsType(Type) else Sequence{} endif]
+[for (parameteredElement : Type | parameteredElements)]
 public static final @NonNull <%ExecutorTypeParameter%> _[op.getLiteralName()/]_[parameteredElement.name/] = new <%ExecutorTypeParameter%>(LIBRARY, "[parameteredElement.name/]");
-[/let]
 [/for]
-[/if]
 public static final @NonNull <%ExecutorOperation%> [op.getLiteralName()/] = new <%ExecutorOperation%>("[op.name/]", Parameters.[op.ownedParameter.type->getParameterListName()/], [op.owningType.getLiteralName()/],
-	[opIndex-1/], [genPackage.getImplementationName(op)/]);
+	[opIndex-1/], [if (op.ownedTemplateSignature->isEmpty())]<%DomainTypeParameters%>.EMPTY_LIST[else]
+new <%DomainTypeParameters%>([for (parameteredElement : Type | parameteredElements) separator(', ')]_[op.getLiteralName()/]_[parameteredElement.name/][/for])[/if], [genPackage.getImplementationName(op)/]);[/let]
 [/template]
 
 [template public declareParameterLists(pPackage : Package, genPackage : GenPackage)]

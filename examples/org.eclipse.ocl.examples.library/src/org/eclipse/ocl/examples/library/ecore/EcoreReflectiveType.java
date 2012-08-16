@@ -21,10 +21,12 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
+import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
@@ -35,10 +37,12 @@ import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 public class EcoreReflectiveType extends ReflectiveType
 {
 	protected final @NonNull EClassifier eClassifier;
+	protected final @NonNull DomainTypeParameters typeParameters;
 	
-	public EcoreReflectiveType(@NonNull EcoreExecutorPackage evaluationPackage, int flags, @NonNull EClassifier eClassifier) {
+	public EcoreReflectiveType(@NonNull EcoreExecutorPackage evaluationPackage, int flags, @NonNull EClassifier eClassifier, @NonNull DomainNamedElement... typeParameters) {
 		super(DomainUtil.nonNullEMF(eClassifier.getName()), evaluationPackage, flags);
-		this.eClassifier = eClassifier;		
+		this.eClassifier = eClassifier;
+		this.typeParameters = new DomainTypeParameters(typeParameters);
 	}
 
 	@Override
@@ -83,5 +87,9 @@ public class EcoreReflectiveType extends ReflectiveType
 
 	public @NonNull DomainStandardLibrary getStandardLibrary() {
 		return OCLstdlibTables.LIBRARY;
+	}
+
+	public @NonNull DomainTypeParameters getTypeParameters() {
+		return typeParameters;
 	}
 }

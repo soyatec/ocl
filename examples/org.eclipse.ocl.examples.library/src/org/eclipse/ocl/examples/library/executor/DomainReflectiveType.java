@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
@@ -85,5 +86,9 @@ public class DomainReflectiveType extends ReflectiveType
 
 	public @NonNull DomainStandardLibrary getStandardLibrary() {
 		return standardLibrary;
+	}
+
+	public @NonNull DomainTypeParameters getTypeParameters() {
+		return domainType.getTypeParameters();
 	}
 }

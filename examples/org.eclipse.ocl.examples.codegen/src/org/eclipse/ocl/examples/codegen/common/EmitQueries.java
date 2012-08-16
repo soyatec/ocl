@@ -36,6 +36,7 @@ public class EmitQueries
 		org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary.class,
 		org.eclipse.ocl.examples.domain.elements.DomainTupleType.class,
 		org.eclipse.ocl.examples.domain.elements.DomainType.class,
+		org.eclipse.ocl.examples.domain.elements.DomainTypeParameters.class,
 		org.eclipse.ocl.examples.domain.elements.DomainTypedElement.class,
 		org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator.class,
 		org.eclipse.ocl.examples.domain.evaluation.InvalidValueException.class,

@@ -34,6 +34,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ReflectiveType;
@@ -536,6 +537,10 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 
 	public final @NonNull DomainStandardLibrary getStandardLibrary() {
 		return packageManager.getMetaModelManager();
+	}
+
+	public @NonNull DomainTypeParameters getTypeParameters() {
+		return DomainTypeParameters.EMPTY_LIST;
 	}
 
 	private @NonNull Map<String, Map<DomainParameterTypes, List<DomainOperation>>> initMemberOperations() {

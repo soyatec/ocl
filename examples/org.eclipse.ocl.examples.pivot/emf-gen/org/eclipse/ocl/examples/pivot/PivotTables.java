@@ -22,6 +22,7 @@ package org.eclipse.ocl.examples.pivot;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
+import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumeration;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumerationLiteral;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorPackage;
@@ -1413,205 +1414,205 @@ public class PivotTables
 	 */
 	public static class Operations {
 		public static final @NonNull ExecutorOperation _Boolean___lt__gt_ = new ExecutorOperation("<>", Parameters._OclSelf, Types._Boolean,
-			0, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
+			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Boolean___eq_ = new ExecutorOperation("=", Parameters._OclSelf, Types._Boolean,
-			1, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
+			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Boolean__and = new ExecutorOperation("and", Parameters._Boolean, Types._Boolean,
-			2, org.eclipse.ocl.examples.library.logical.BooleanAndOperation.INSTANCE);
+			2, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.logical.BooleanAndOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Boolean__implies = new ExecutorOperation("implies", Parameters._Boolean, Types._Boolean,
-			3, org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation.INSTANCE);
+			3, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Boolean__not = new ExecutorOperation("not", Parameters._, Types._Boolean,
-			4, org.eclipse.ocl.examples.library.logical.BooleanNotOperation.INSTANCE);
+			4, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.logical.BooleanNotOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Boolean__or = new ExecutorOperation("or", Parameters._Boolean, Types._Boolean,
-			5, org.eclipse.ocl.examples.library.logical.BooleanOrOperation.INSTANCE);
+			5, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.logical.BooleanOrOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Boolean__xor = new ExecutorOperation("xor", Parameters._Boolean, Types._Boolean,
-			6, org.eclipse.ocl.examples.library.logical.BooleanXorOperation.INSTANCE);
+			6, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.logical.BooleanXorOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Boolean__allInstances = new ExecutorOperation("allInstances", Parameters._, Types._Boolean,
-			7, org.eclipse.ocl.examples.library.logical.BooleanAllInstancesOperation.INSTANCE);
+			7, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.logical.BooleanAllInstancesOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Boolean__toString = new ExecutorOperation("toString", Parameters._, Types._Boolean,
-			8, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
+			8, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
 	
 		public static final @NonNull ExecutorOperation _Element__allOwnedElements = new ExecutorOperation("allOwnedElements", Parameters._, Types._Element,
-			0, org.eclipse.ocl.examples.pivot.bodies.ElementBodies._allOwnedElements_body_.INSTANCE);
+			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.pivot.bodies.ElementBodies._allOwnedElements_body_.INSTANCE);
 		public static final @NonNull ExecutorOperation _Element__getValue = new ExecutorOperation("getValue", Parameters._Type_String, Types._Element,
-			1, org.eclipse.ocl.examples.pivot.bodies.ElementBodies._getValue_body_.INSTANCE);
+			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.pivot.bodies.ElementBodies._getValue_body_.INSTANCE);
 	
 		public static final @NonNull ExecutorOperation _Enumeration__allInstances = new ExecutorOperation("allInstances", Parameters._, Types._Enumeration,
-			0, org.eclipse.ocl.examples.library.enumeration.EnumerationAllInstancesOperation.INSTANCE);
+			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.enumeration.EnumerationAllInstancesOperation.INSTANCE);
 	
 		public static final @NonNull ExecutorOperation _Integer___mul_ = new ExecutorOperation("*", Parameters._OclSelf, Types._Integer,
-			0, org.eclipse.ocl.examples.library.numeric.NumericTimesOperation.INSTANCE);
+			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericTimesOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Integer___add_ = new ExecutorOperation("+", Parameters._OclSelf, Types._Integer,
-			1, org.eclipse.ocl.examples.library.integer.IntegerPlusOperation.INSTANCE);
+			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.integer.IntegerPlusOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Integer__0__sub_ = new ExecutorOperation("-", Parameters._, Types._Integer,
-			2, org.eclipse.ocl.examples.library.numeric.NumericNegateOperation.INSTANCE);
+			2, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericNegateOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Integer__1__sub_ = new ExecutorOperation("-", Parameters._OclSelf, Types._Integer,
-			3, org.eclipse.ocl.examples.library.integer.IntegerMinusOperation.INSTANCE);
+			3, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.integer.IntegerMinusOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Integer___div_ = new ExecutorOperation("/", Parameters._OclSelf, Types._Integer,
-			4, org.eclipse.ocl.examples.library.numeric.NumericDivideOperation.INSTANCE);
+			4, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericDivideOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Integer__abs = new ExecutorOperation("abs", Parameters._, Types._Integer,
-			5, org.eclipse.ocl.examples.library.numeric.NumericAbsOperation.INSTANCE);
+			5, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericAbsOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Integer__compareTo = new ExecutorOperation("compareTo", Parameters._OclSelf, Types._Integer,
-			6, org.eclipse.ocl.examples.library.integer.IntegerCompareToOperation.INSTANCE);
+			6, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.integer.IntegerCompareToOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Integer__div = new ExecutorOperation("div", Parameters._Integer, Types._Integer,
-			7, org.eclipse.ocl.examples.library.numeric.NumericDivOperation.INSTANCE);
+			7, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericDivOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Integer__max = new ExecutorOperation("max", Parameters._OclSelf, Types._Integer,
-			8, org.eclipse.ocl.examples.library.numeric.NumericMaxOperation.INSTANCE);
+			8, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericMaxOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Integer__min = new ExecutorOperation("min", Parameters._OclSelf, Types._Integer,
-			9, org.eclipse.ocl.examples.library.numeric.NumericMinOperation.INSTANCE);
+			9, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericMinOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Integer__mod = new ExecutorOperation("mod", Parameters._Integer, Types._Integer,
-			10, org.eclipse.ocl.examples.library.numeric.NumericModOperation.INSTANCE);
+			10, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericModOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Integer__toString = new ExecutorOperation("toString", Parameters._, Types._Integer,
-			11, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
+			11, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
 	
 		public static final @NonNull ExecutorOperation _ParameterableElement__isCompatibleWith = new ExecutorOperation("isCompatibleWith", Parameters._ParameterableElement, Types._ParameterableElement,
-			0, org.eclipse.ocl.examples.pivot.bodies.ParameterableElementBodies._isCompatibleWith_body_.INSTANCE);
+			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.pivot.bodies.ParameterableElementBodies._isCompatibleWith_body_.INSTANCE);
 		public static final @NonNull ExecutorOperation _ParameterableElement__isTemplateParameter = new ExecutorOperation("isTemplateParameter", Parameters._, Types._ParameterableElement,
-			1, null);
+			1, DomainTypeParameters.EMPTY_LIST, null);
 	
 		public static final @NonNull ExecutorOperation _Property__isAttribute = new ExecutorOperation("isAttribute", Parameters._Property, Types._Property,
-			0, org.eclipse.ocl.examples.pivot.bodies.PropertyBodies._isAttribute_body_.INSTANCE);
+			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.pivot.bodies.PropertyBodies._isAttribute_body_.INSTANCE);
 	
 		public static final @NonNull ExecutorOperation _Real___mul_ = new ExecutorOperation("*", Parameters._OclSelf, Types._Real,
-			0, org.eclipse.ocl.examples.library.numeric.NumericTimesOperation.INSTANCE);
+			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericTimesOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Real___add_ = new ExecutorOperation("+", Parameters._OclSelf, Types._Real,
-			1, org.eclipse.ocl.examples.library.real.RealPlusOperation.INSTANCE);
+			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.real.RealPlusOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Real__0__sub_ = new ExecutorOperation("-", Parameters._, Types._Real,
-			2, org.eclipse.ocl.examples.library.numeric.NumericNegateOperation.INSTANCE);
+			2, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericNegateOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Real__1__sub_ = new ExecutorOperation("-", Parameters._OclSelf, Types._Real,
-			3, org.eclipse.ocl.examples.library.real.RealMinusOperation.INSTANCE);
+			3, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.real.RealMinusOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Real___div_ = new ExecutorOperation("/", Parameters._OclSelf, Types._Real,
-			4, org.eclipse.ocl.examples.library.numeric.NumericDivideOperation.INSTANCE);
+			4, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericDivideOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Real___lt_ = new ExecutorOperation("<", Parameters._OclSelf, Types._Real,
-			5, org.eclipse.ocl.examples.library.numeric.NumericLessThanOperation.INSTANCE);
+			5, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericLessThanOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Real___lt__eq_ = new ExecutorOperation("<=", Parameters._OclSelf, Types._Real,
-			6, org.eclipse.ocl.examples.library.numeric.NumericLessThanEqualOperation.INSTANCE);
+			6, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericLessThanEqualOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Real___lt__gt_ = new ExecutorOperation("<>", Parameters._OclSelf, Types._Real,
-			7, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
+			7, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Real___eq_ = new ExecutorOperation("=", Parameters._OclSelf, Types._Real,
-			8, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
+			8, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Real___gt_ = new ExecutorOperation(">", Parameters._OclSelf, Types._Real,
-			9, org.eclipse.ocl.examples.library.numeric.NumericGreaterThanOperation.INSTANCE);
+			9, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericGreaterThanOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Real___gt__eq_ = new ExecutorOperation(">=", Parameters._OclSelf, Types._Real,
-			10, org.eclipse.ocl.examples.library.numeric.NumericGreaterThanEqualOperation.INSTANCE);
+			10, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericGreaterThanEqualOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Real__abs = new ExecutorOperation("abs", Parameters._, Types._Real,
-			11, org.eclipse.ocl.examples.library.numeric.NumericAbsOperation.INSTANCE);
+			11, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericAbsOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Real__compareTo = new ExecutorOperation("compareTo", Parameters._OclSelf, Types._Real,
-			12, org.eclipse.ocl.examples.library.real.RealCompareToOperation.INSTANCE);
+			12, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.real.RealCompareToOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Real__floor = new ExecutorOperation("floor", Parameters._, Types._Real,
-			13, org.eclipse.ocl.examples.library.numeric.NumericFloorOperation.INSTANCE);
+			13, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericFloorOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Real__max = new ExecutorOperation("max", Parameters._OclSelf, Types._Real,
-			14, org.eclipse.ocl.examples.library.numeric.NumericMaxOperation.INSTANCE);
+			14, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericMaxOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Real__min = new ExecutorOperation("min", Parameters._OclSelf, Types._Real,
-			15, org.eclipse.ocl.examples.library.numeric.NumericMinOperation.INSTANCE);
+			15, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericMinOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Real__round = new ExecutorOperation("round", Parameters._, Types._Real,
-			16, org.eclipse.ocl.examples.library.numeric.NumericRoundOperation.INSTANCE);
+			16, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericRoundOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Real__toString = new ExecutorOperation("toString", Parameters._, Types._Real,
-			17, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
+			17, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
 	
 		public static final @NonNull ExecutorOperation _SelfType__resolveSelfType = new ExecutorOperation("resolveSelfType", Parameters._Type, Types._SelfType,
-			0, org.eclipse.ocl.examples.pivot.bodies.SelfTypeBodies._resolveSelfType_body_.INSTANCE);
+			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.pivot.bodies.SelfTypeBodies._resolveSelfType_body_.INSTANCE);
 	
 		public static final @NonNull ExecutorOperation _String___add_ = new ExecutorOperation("+", Parameters._String, Types._String,
-			0, org.eclipse.ocl.examples.library.string.StringConcatOperation.INSTANCE);
+			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringConcatOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String___lt_ = new ExecutorOperation("<", Parameters._OclSelf, Types._String,
-			1, org.eclipse.ocl.examples.library.string.StringLessThanOperation.INSTANCE);
+			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringLessThanOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String___lt__eq_ = new ExecutorOperation("<=", Parameters._OclSelf, Types._String,
-			2, org.eclipse.ocl.examples.library.string.StringLessThanEqualOperation.INSTANCE);
+			2, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringLessThanEqualOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String___lt__gt_ = new ExecutorOperation("<>", Parameters._OclSelf, Types._String,
-			3, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
+			3, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String___eq_ = new ExecutorOperation("=", Parameters._OclSelf, Types._String,
-			4, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
+			4, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String___gt_ = new ExecutorOperation(">", Parameters._OclSelf, Types._String,
-			5, org.eclipse.ocl.examples.library.string.StringGreaterThanOperation.INSTANCE);
+			5, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringGreaterThanOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String___gt__eq_ = new ExecutorOperation(">=", Parameters._OclSelf, Types._String,
-			6, org.eclipse.ocl.examples.library.string.StringGreaterThanEqualOperation.INSTANCE);
+			6, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringGreaterThanEqualOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__at = new ExecutorOperation("at", Parameters._Integer, Types._String,
-			7, org.eclipse.ocl.examples.library.string.StringAtOperation.INSTANCE);
+			7, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringAtOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__characters = new ExecutorOperation("characters", Parameters._, Types._String,
-			8, org.eclipse.ocl.examples.library.string.StringCharactersOperation.INSTANCE);
+			8, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringCharactersOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__compareTo = new ExecutorOperation("compareTo", Parameters._OclSelf, Types._String,
-			9, org.eclipse.ocl.examples.library.string.StringCompareToOperation.INSTANCE);
+			9, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringCompareToOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__concat = new ExecutorOperation("concat", Parameters._String, Types._String,
-			10, org.eclipse.ocl.examples.library.string.StringConcatOperation.INSTANCE);
+			10, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringConcatOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__endsWith = new ExecutorOperation("endsWith", Parameters._String, Types._String,
-			11, org.eclipse.ocl.examples.library.string.StringEndsWithOperation.INSTANCE);
+			11, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringEndsWithOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__equalsIgnoreCase = new ExecutorOperation("equalsIgnoreCase", Parameters._String, Types._String,
-			12, org.eclipse.ocl.examples.library.string.StringEqualsIgnoreCaseOperation.INSTANCE);
+			12, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringEqualsIgnoreCaseOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__indexOf = new ExecutorOperation("indexOf", Parameters._String, Types._String,
-			13, org.eclipse.ocl.examples.library.string.StringIndexOfOperation.INSTANCE);
+			13, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringIndexOfOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__lastIndexOf = new ExecutorOperation("lastIndexOf", Parameters._String, Types._String,
-			14, org.eclipse.ocl.examples.library.string.StringLastIndexOfOperation.INSTANCE);
+			14, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringLastIndexOfOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__matches = new ExecutorOperation("matches", Parameters._String, Types._String,
-			15, org.eclipse.ocl.examples.library.string.StringMatchesOperation.INSTANCE);
+			15, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringMatchesOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__replaceAll = new ExecutorOperation("replaceAll", Parameters._String_String, Types._String,
-			16, org.eclipse.ocl.examples.library.string.StringReplaceAllOperation.INSTANCE);
+			16, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringReplaceAllOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__replaceFirst = new ExecutorOperation("replaceFirst", Parameters._String_String, Types._String,
-			17, org.eclipse.ocl.examples.library.string.StringReplaceFirstOperation.INSTANCE);
+			17, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringReplaceFirstOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__size = new ExecutorOperation("size", Parameters._, Types._String,
-			18, org.eclipse.ocl.examples.library.string.StringSizeOperation.INSTANCE);
+			18, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringSizeOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__startsWith = new ExecutorOperation("startsWith", Parameters._String, Types._String,
-			19, org.eclipse.ocl.examples.library.string.StringStartsWithOperation.INSTANCE);
+			19, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringStartsWithOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__substituteAll = new ExecutorOperation("substituteAll", Parameters._String_String, Types._String,
-			20, org.eclipse.ocl.examples.library.string.StringSubstituteAllOperation.INSTANCE);
+			20, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringSubstituteAllOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__substituteFirst = new ExecutorOperation("substituteFirst", Parameters._String_String, Types._String,
-			21, org.eclipse.ocl.examples.library.string.StringSubstituteFirstOperation.INSTANCE);
+			21, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringSubstituteFirstOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__substring = new ExecutorOperation("substring", Parameters._Integer_Integer, Types._String,
-			22, org.eclipse.ocl.examples.library.string.StringSubstringOperation.INSTANCE);
+			22, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringSubstringOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__toBoolean = new ExecutorOperation("toBoolean", Parameters._, Types._String,
-			23, org.eclipse.ocl.examples.library.string.StringToBooleanOperation.INSTANCE);
+			23, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringToBooleanOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__toInteger = new ExecutorOperation("toInteger", Parameters._, Types._String,
-			24, org.eclipse.ocl.examples.library.string.StringToIntegerOperation.INSTANCE);
+			24, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringToIntegerOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__toLower = new ExecutorOperation("toLower", Parameters._, Types._String,
-			25, org.eclipse.ocl.examples.library.string.StringToLowerCaseOperation.INSTANCE);
+			25, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringToLowerCaseOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__toLowerCase = new ExecutorOperation("toLowerCase", Parameters._, Types._String,
-			26, org.eclipse.ocl.examples.library.string.StringToLowerCaseOperation.INSTANCE);
+			26, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringToLowerCaseOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__toReal = new ExecutorOperation("toReal", Parameters._, Types._String,
-			27, org.eclipse.ocl.examples.library.string.StringToRealOperation.INSTANCE);
+			27, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringToRealOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__toString = new ExecutorOperation("toString", Parameters._, Types._String,
-			28, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
+			28, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__toUpper = new ExecutorOperation("toUpper", Parameters._, Types._String,
-			29, org.eclipse.ocl.examples.library.string.StringToUpperCaseOperation.INSTANCE);
+			29, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringToUpperCaseOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__toUpperCase = new ExecutorOperation("toUpperCase", Parameters._, Types._String,
-			30, org.eclipse.ocl.examples.library.string.StringToUpperCaseOperation.INSTANCE);
+			30, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringToUpperCaseOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__0_tokenize = new ExecutorOperation("tokenize", Parameters._, Types._String,
-			31, org.eclipse.ocl.examples.library.string.StringTokenizeOperation.INSTANCE);
+			31, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringTokenizeOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__1_tokenize = new ExecutorOperation("tokenize", Parameters._String, Types._String,
-			32, org.eclipse.ocl.examples.library.string.StringTokenizeOperation.INSTANCE);
+			32, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringTokenizeOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__2_tokenize = new ExecutorOperation("tokenize", Parameters._String_Boolean, Types._String,
-			33, org.eclipse.ocl.examples.library.string.StringTokenizeOperation.INSTANCE);
+			33, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringTokenizeOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _String__trim = new ExecutorOperation("trim", Parameters._, Types._String,
-			34, org.eclipse.ocl.examples.library.string.StringTrimOperation.INSTANCE);
+			34, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringTrimOperation.INSTANCE);
 	
 		public static final @NonNull ExecutorOperation _TemplateableElement__isTemplate = new ExecutorOperation("isTemplate", Parameters._, Types._TemplateableElement,
-			0, null);
+			0, DomainTypeParameters.EMPTY_LIST, null);
 		public static final @NonNull ExecutorOperation _TemplateableElement__parameterableElements = new ExecutorOperation("parameterableElements", Parameters._, Types._TemplateableElement,
-			1, null);
+			1, DomainTypeParameters.EMPTY_LIST, null);
 	
 		public static final @NonNull ExecutorOperation _Type__resolveSelfType = new ExecutorOperation("resolveSelfType", Parameters._Type, Types._Type,
-			0, org.eclipse.ocl.examples.pivot.bodies.TypeBodies._resolveSelfType_body_.INSTANCE);
+			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.pivot.bodies.TypeBodies._resolveSelfType_body_.INSTANCE);
 	
 		public static final @NonNull ExecutorOperation _TypedMultiplicityElement__CompatibleBody = new ExecutorOperation("CompatibleBody", Parameters._ValueSpecification, Types._TypedMultiplicityElement,
-			0, org.eclipse.ocl.examples.pivot.bodies.TypedMultiplicityElementBodies._CompatibleBody_body_.INSTANCE);
+			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.pivot.bodies.TypedMultiplicityElementBodies._CompatibleBody_body_.INSTANCE);
 		public static final @NonNull ExecutorOperation _TypedMultiplicityElement__makeParameter = new ExecutorOperation("makeParameter", Parameters._, Types._TypedMultiplicityElement,
-			1, org.eclipse.ocl.examples.pivot.bodies.TypedMultiplicityElementBodies._makeParameter_body_.INSTANCE);
+			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.pivot.bodies.TypedMultiplicityElementBodies._makeParameter_body_.INSTANCE);
 	
 		public static final @NonNull ExecutorTypeParameter __UnlimitedNatural__oclAsType_TT = new ExecutorTypeParameter(LIBRARY, "TT");
 		public static final @NonNull ExecutorOperation _UnlimitedNatural__oclAsType = new ExecutorOperation("oclAsType", Parameters._Metaclass, Types._UnlimitedNatural,
-			0, org.eclipse.ocl.examples.library.numeric.UnlimitedNaturalOclAsTypeOperation.INSTANCE);
+			0, new DomainTypeParameters(__UnlimitedNatural__oclAsType_TT), org.eclipse.ocl.examples.library.numeric.UnlimitedNaturalOclAsTypeOperation.INSTANCE);
 	
 		public static final @NonNull ExecutorOperation _ValueSpecification__booleanValue = new ExecutorOperation("booleanValue", Parameters._, Types._ValueSpecification,
-			0, null);
+			0, DomainTypeParameters.EMPTY_LIST, null);
 		public static final @NonNull ExecutorOperation _ValueSpecification__integerValue = new ExecutorOperation("integerValue", Parameters._, Types._ValueSpecification,
-			1, null);
+			1, DomainTypeParameters.EMPTY_LIST, null);
 		public static final @NonNull ExecutorOperation _ValueSpecification__isComputable = new ExecutorOperation("isComputable", Parameters._, Types._ValueSpecification,
-			2, null);
+			2, DomainTypeParameters.EMPTY_LIST, null);
 		public static final @NonNull ExecutorOperation _ValueSpecification__isNull = new ExecutorOperation("isNull", Parameters._, Types._ValueSpecification,
-			3, null);
+			3, DomainTypeParameters.EMPTY_LIST, null);
 		public static final @NonNull ExecutorOperation _ValueSpecification__stringValue = new ExecutorOperation("stringValue", Parameters._, Types._ValueSpecification,
-			4, null);
+			4, DomainTypeParameters.EMPTY_LIST, null);
 		public static final @NonNull ExecutorOperation _ValueSpecification__unlimitedValue = new ExecutorOperation("unlimitedValue", Parameters._, Types._ValueSpecification,
-			5, null);
+			5, DomainTypeParameters.EMPTY_LIST, null);
 	}
 
 	/**

@@ -37,7 +37,7 @@ public class EcoreExecutorType extends ExecutorType
 	 * Construct an executable type descriptor in the absence of a known EClassifier. A subsequent
 	 * call of {@link #init(EClassifier)} may define an EClassifier.
 	 */
-	public EcoreExecutorType(@NonNull String name, @NonNull ExecutorPackage evaluationPackage, int flags, ExecutorTypeParameter... typeParameters) {
+	public EcoreExecutorType(@NonNull String name, @NonNull ExecutorPackage evaluationPackage, int flags, @NonNull ExecutorTypeParameter... typeParameters) {
 		super(name, evaluationPackage, flags, typeParameters);
 		this.eClassifier = null;		
 	}
@@ -45,7 +45,7 @@ public class EcoreExecutorType extends ExecutorType
 	/**
 	 * Construct an executable type descriptor for a known EClassifier.
 	 */
-	public EcoreExecutorType(/*@NonNull*/ EClassifier eClassifier, @NonNull EcoreExecutorPackage evaluationPackage, int flags, ExecutorTypeParameter... typeParameters) {
+	public EcoreExecutorType(/*@NonNull*/ EClassifier eClassifier, @NonNull EcoreExecutorPackage evaluationPackage, int flags, @NonNull ExecutorTypeParameter... typeParameters) {
 		super(DomainUtil.nonNullModel(eClassifier.getName()), evaluationPackage, flags, typeParameters);
 		this.eClassifier = eClassifier;		
 	}

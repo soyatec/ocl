@@ -14,112 +14,101 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.utilities.IndexableIterable;
+
 
 /**
- * DomainParameterTypesIterable provides a hashable indexable list of operation
- * parameters suitable for use whebn indexing operation overloads.
+ * DomainTypeParameters provides a hashable list of type
+ * parameters suitable for use when indexing specializations.
  */
-public class DomainTypeParameters implements IndexableIterable<DomainNamedElement>
+public class DomainTypeParameters
 {
-public static final @NonNull DomainTypeParameters EMPTY_LIST = new DomainTypeParameters();
-
-	//	private final @NonNull String name;
-	private final @NonNull DomainNamedElement[] typeParameters;
-	private Integer hashCode = null;
+	public static final @NonNull DomainTypeParameters EMPTY_LIST = new DomainTypeParameters();
 	
-	public @NonNull Iterator<DomainNamedElement> iterator()
-	{
-		return new Iterator<DomainNamedElement>()
-		{
-			private int curr = 0;
-			
-			public boolean hasNext() {
-				return curr < size();
-			}
+	private final @NonNull DomainElement[] typeParameters;
+	private final int hashCode;
 
-			public DomainNamedElement next() {
-				if (curr < size()) {
-					return get(curr++);
+	public DomainTypeParameters(@NonNull DomainElement... typeParameters) {
+		this.typeParameters = typeParameters;
+		int hash = 0;
+		for (int i = 0; i < typeParameters.length; i++) {
+			hash = 111 * hash + typeParameters[i].hashCode();
+		}
+		hashCode = hash;
+	}
+	
+	public DomainTypeParameters(List<? extends DomainElement> parameters) {
+		typeParameters = new DomainElement[parameters.size()];
+		int hash = 0;
+		for (int i = 0; i < typeParameters.length; i++) {
+			DomainElement parameter = parameters.get(i);
+			hash = 111 * hash + parameter.hashCode();
+			typeParameters[i] = parameter;
+		}
+		hashCode = hash;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof DomainTypeParameters)) {
+			return false;
+		}
+		DomainTypeParameters that = (DomainTypeParameters)o;
+		if (this.hashCode != that.hashCode){
+			return false;
+		}
+		int iMax = typeParameters.length;
+		if (iMax != that.typeParameters.length) {
+			return false;
+		}
+		for (int i = 0; i < iMax; i++) {
+			Object thisParameter = this.typeParameters[i];
+			Object thatParameter = that.typeParameters[i];
+			if (thisParameter != null) {
+				if (thatParameter != null) {
+					if (!thisParameter.equals(thatParameter)) {
+						return false;
+					}
 				}
 				else {
-					return null;
+					return false;
+				}				
+			}
+			else {
+				if (thatParameter != null) {
+					return false;
 				}
-			}
-
-			public void remove() {
-				throw new UnsupportedOperationException(); 		// Unimplemented optional operation
-			}
-		};
-	}
-
-	public DomainTypeParameters(DomainNamedElement... typeParameters) {
-		this.typeParameters = typeParameters;
-	}
-
-	public DomainTypeParameters(List<? extends DomainNamedElement> typeParameters) {
-		this.typeParameters = typeParameters.toArray(new DomainNamedElement[typeParameters.size()]);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof DomainTypeParameters)) {
-			return false;
-		}
-		DomainTypeParameters that = (DomainTypeParameters)obj;
-		if (hashCode() != that.hashCode()) {
-			return false;
-		}
-//		if (!name.equals(that.name)) {
-//			return false;
-//		}
-		DomainNamedElement[] thoseParameters = that.typeParameters;
-		if (typeParameters.length != thoseParameters.length) {
-			return false;
-		}
-		for (int i = 0; i < typeParameters.length; i++) {
-			if (!typeParameters[i].equals(thoseParameters[i])) {
-				return false;
+				else {
+				}				
 			}
 		}
 		return true;
 	}
 
-	public @NonNull DomainNamedElement get(int index) {
-		return DomainUtil.nonNullEMF(typeParameters[index]);
-	}
+	public DomainElement get(int i) {
+		return typeParameters[i];
+	}		
 
 	@Override
 	public int hashCode() {
-		if (hashCode == null) {
-			int hash = 0; //name.hashCode();
-			for (DomainNamedElement typeParameter : typeParameters) {
-				hash = 111*hash + typeParameter.hashCode();
-			}
-			hashCode = Integer.valueOf(hash);
-		}
 		return hashCode;
 	}
 
-	public int size() {
+	public int parametersSize() {
 		return typeParameters.length;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder s = new StringBuilder();
-//		s.append(name);
 		s.append('(');
 		for (int i = 0; i < typeParameters.length; i++) {
 			if (i > 0) {
 				s.append(',');
 			}
-			s.append(typeParameters[i].toString());
+			s.append(String.valueOf(typeParameters[i]));
 		}
 		s.append(')');
 		return s.toString();

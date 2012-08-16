@@ -41,6 +41,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
@@ -1169,6 +1170,10 @@ public class TypeImpl
 
 	public @NonNull String getMetaTypeName() {
 		return eClass().getName();
+	}
+
+	public @NonNull DomainTypeParameters getTypeParameters() {
+		return TemplateSignatureImpl.getTypeParameters(getOwnedTemplateSignature());
 	}
 
 	public boolean isEqualTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {

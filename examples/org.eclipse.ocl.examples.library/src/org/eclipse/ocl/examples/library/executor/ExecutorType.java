@@ -22,6 +22,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.types.AbstractInheritance;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
@@ -41,8 +42,11 @@ public class ExecutorType extends AbstractInheritance implements DomainType, Exe
 	 */
 	private int[] indexes = null;
 	
-	public ExecutorType(@NonNull String name, @NonNull ExecutorPackage evaluationPackage, int flags, ExecutorTypeParameter... typeParameters) {
+	private final @NonNull DomainTypeParameters typeParameters;
+	
+	public ExecutorType(@NonNull String name, @NonNull ExecutorPackage evaluationPackage, int flags, @NonNull ExecutorTypeParameter... typeParameters) {
 		super(name, evaluationPackage, flags);
+		this.typeParameters = new DomainTypeParameters(typeParameters);
 	}
 	
 	public @NonNull FragmentIterable getAllSuperFragments() {
@@ -95,6 +99,10 @@ public class ExecutorType extends AbstractInheritance implements DomainType, Exe
 
 	public @NonNull DomainType getType() {
 		return this;
+	}
+
+	public @NonNull DomainTypeParameters getTypeParameters() {
+		return typeParameters;
 	}
 
 	public void initFragments(@NonNull ExecutorFragment[] fragments, int[] depthCounts) {

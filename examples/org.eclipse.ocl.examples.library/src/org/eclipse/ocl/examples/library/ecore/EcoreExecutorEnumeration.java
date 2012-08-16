@@ -24,7 +24,6 @@ import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.ArrayIterable;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
-import org.eclipse.ocl.examples.library.executor.ExecutorTypeParameter;
 import org.eclipse.osgi.util.NLS;
 
 public class EcoreExecutorEnumeration extends EcoreExecutorType implements DomainEnumeration
@@ -34,8 +33,8 @@ public class EcoreExecutorEnumeration extends EcoreExecutorType implements Domai
 	/**
 	 * Construct an executable type descriptor for a known EClassifier.
 	 */
-	public EcoreExecutorEnumeration(/*@NonNull*/ EEnum eEnum, @NonNull EcoreExecutorPackage evaluationPackage, int flags, ExecutorTypeParameter... typeParameters) {
-		super(eEnum, evaluationPackage, flags, typeParameters);
+	public EcoreExecutorEnumeration(/*@NonNull*/ EEnum eEnum, @NonNull EcoreExecutorPackage evaluationPackage, int flags) {
+		super(eEnum, evaluationPackage, flags);
 	}
 
 	@Override

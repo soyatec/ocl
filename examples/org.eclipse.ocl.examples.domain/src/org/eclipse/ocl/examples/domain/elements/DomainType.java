@@ -75,6 +75,11 @@ public interface DomainType extends DomainNamespace
 	 * Return the package containing this type.
 	 */
 	/* @NonNull*/ DomainPackage getPackage();
+
+	/**
+	 * Return the ordered list of type parameters of this type.
+	 */
+	@NonNull DomainTypeParameters getTypeParameters();
 	
 	/**
 	 * Return true if this is the same type as thatType within standardLibrary.

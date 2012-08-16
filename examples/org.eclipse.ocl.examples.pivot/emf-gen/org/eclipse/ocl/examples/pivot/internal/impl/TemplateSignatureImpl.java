@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -28,6 +29,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
+import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -376,5 +380,18 @@ public class TemplateSignatureImpl
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitTemplateSignature(this);
+	}
+	
+	public static @NonNull DomainTypeParameters getTypeParameters(@Nullable TemplateSignature templateSignature) {
+		if (templateSignature == null) {
+			return DomainTypeParameters.EMPTY_LIST;
+		}
+		List<TemplateParameter> templateParameters = templateSignature.getParameter();
+		int iMax = templateParameters.size();
+		DomainNamedElement[] typeParameters = new DomainNamedElement[iMax];
+		for (int i = 0; i < iMax; i++) {
+			typeParameters[i] = (DomainNamedElement) templateParameters.get(i);
+		}
+		return new DomainTypeParameters(typeParameters);
 	}
 } //TemplateSignatureImpl

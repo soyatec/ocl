@@ -35,4 +35,9 @@ public interface DomainOperation extends DomainFeature
 	 * Return the ordered list of parameters of this operation.
 	 */
 	@NonNull DomainParameterTypes getParameterTypes();
+
+	/**
+	 * Return the ordered list of type parameters of this operation.
+	 */
+	@NonNull DomainTypeParameters getTypeParameters();
 }
