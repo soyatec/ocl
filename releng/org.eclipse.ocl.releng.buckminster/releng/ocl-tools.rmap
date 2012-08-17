@@ -5,7 +5,7 @@
   <rm:property key="build.type" mutable="false" value="I"/>
   <rm:property key="ocl.core.last.p2.repository.location" value="https://hudson.eclipse.org/hudson/job/buckminster-mdt-ocl-core-kepler-master/lastSuccessfulBuild/artifact/MDT-OCL.p2.repository"/>
   <rm:locator pattern="^org\.eclipse\.acceleo.*" searchPathRef="acceleo"/>
-  <rm:locator pattern="^org\.eclipse\.emf\.compare.*" searchPathRef="emfcompare"/>
+  <!--rm:locator pattern="^org\.eclipse\.emf\.compare.*" searchPathRef="emfcompare"/-->
   <rm:locator pattern="^org\.eclipse\.emf\.mwe.*" searchPathRef="mwe"/>
   <rm:locator pattern="^org\.eclipse\.xpand.*" searchPathRef="xpand"/>
   <rm:locator pattern="^org\.eclipse\.xtend.*" searchPathRef="xpand"/>
@@ -144,7 +144,7 @@
       </rm:uri>
     </rm:provider>
   </rm:searchPath>
-  <rm:searchPath name="emfcompare">
+  <!--rm:searchPath name="emfcompare">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(build.type=N)(resolve.target.platform=true))" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
@@ -173,7 +173,7 @@
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
-  </rm:searchPath>
+  </rm:searchPath-->
   <rm:searchPath name="acceleo">
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=I)(build.type=N)))" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
