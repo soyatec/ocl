@@ -114,6 +114,7 @@ public interface Visitor<R>
 	@Nullable R visitPrecedence(@NonNull org.eclipse.ocl.examples.pivot.Precedence object);
 	@Nullable R visitPrimitiveLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.PrimitiveLiteralExp object);
 	@Nullable R visitPrimitiveType(@NonNull org.eclipse.ocl.examples.pivot.PrimitiveType object);
+	@Nullable R visitProfile(@NonNull org.eclipse.ocl.examples.pivot.Profile object);
 	@Nullable R visitProperty(@NonNull org.eclipse.ocl.examples.pivot.Property object);
 	@Nullable R visitPropertyCallExp(@NonNull org.eclipse.ocl.examples.pivot.PropertyCallExp object);
 	@Nullable R visitRealLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.RealLiteralExp object);
@@ -125,6 +126,7 @@ public interface Visitor<R>
 	@Nullable R visitSignal(@NonNull org.eclipse.ocl.examples.pivot.Signal object);
 	@Nullable R visitState(@NonNull org.eclipse.ocl.examples.pivot.State object);
 	@Nullable R visitStateExp(@NonNull org.eclipse.ocl.examples.pivot.StateExp object);
+	@Nullable R visitStereotype(@NonNull org.eclipse.ocl.examples.pivot.Stereotype object);
 	@Nullable R visitStereotypedProperty(@NonNull org.eclipse.ocl.examples.pivot.StereotypedProperty object);
 	@Nullable R visitStringLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.StringLiteralExp object);
 	@Nullable R visitTemplateBinding(@NonNull org.eclipse.ocl.examples.pivot.TemplateBinding object);

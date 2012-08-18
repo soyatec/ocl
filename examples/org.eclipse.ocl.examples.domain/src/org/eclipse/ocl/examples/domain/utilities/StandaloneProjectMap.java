@@ -46,12 +46,15 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.w3c.dom.Document;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -827,7 +830,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	 * Return any StandaloneProjectMap already installed as an adapter on a <tt>resourceSet</tt>.
 	 * Returns null if there is no such adapter. 
 	 */
-	public static StandaloneProjectMap findAdapter(ResourceSet resourceSet) {
+	public static @Nullable StandaloneProjectMap findAdapter(@NonNull ResourceSet resourceSet) {
 		return (StandaloneProjectMap) EcoreUtil.getAdapter(resourceSet.eAdapters(), StandaloneProjectMap.class);
 	}
 
@@ -835,7 +838,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	 * Return the StandaloneProjectMap already installed as an adapter on a <tt>resourceSet</tt>
 	 * if one exists, else creates, installs, initializes and returns a new StandaloneProjectMap.  
 	 */
-	public static StandaloneProjectMap getAdapter(ResourceSet resourceSet) {
+	public static @NonNull StandaloneProjectMap getAdapter(@NonNull ResourceSet resourceSet) {
 		StandaloneProjectMap adapter = findAdapter(resourceSet);
 		if (adapter == null) {
 			adapter = new StandaloneProjectMap();
@@ -848,35 +851,42 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	/**
 	 * Return the EPackage.Registry for a resourceSet or the Global {@link EPackage.Registry.INSTANCE} if resourceSet is null.
 	 */
-	public static EPackage.Registry getPackageRegistry(ResourceSet resourceSet) {
-		return resourceSet != null ? resourceSet.getPackageRegistry() : EPackage.Registry.INSTANCE;
+	public static @NonNull EPackage.Registry getPackageRegistry(@Nullable ResourceSet resourceSet) {
+		if (resourceSet == null) {
+			@SuppressWarnings("null") @NonNull Registry globalRegistry = EPackage.Registry.INSTANCE;
+			return globalRegistry;
+		}
+		else {
+			@SuppressWarnings("null") @NonNull Registry packageRegistry = resourceSet.getPackageRegistry();
+			return packageRegistry;
+		}
 	}
 
 	/**
 	 * Return the Resource.Factory.Registry for a resourceSet or the Global {@link Resource.Factory.Registry.INSTANCE} if resourceSet is null.
 	 */
-	public static Resource.Factory.Registry getResourceFactoryRegistry(ResourceSet resourceSet) {
+	public static Resource.Factory.Registry getResourceFactoryRegistry(@Nullable ResourceSet resourceSet) {
 		return resourceSet != null ? resourceSet.getResourceFactoryRegistry() : Resource.Factory.Registry.INSTANCE;
 	}
 
 	/**
 	 * Return the URIConverter for a resourceSet or the Global {@link URIConverter.INSTANCE} if resourceSet is null.
 	 */
-	public static URIConverter getURIConverter(ResourceSet resourceSet) {
+	public static URIConverter getURIConverter(@Nullable ResourceSet resourceSet) {
 		return resourceSet != null ? resourceSet.getURIConverter() : URIConverter.INSTANCE;
 	}
 
 	/**
 	 * Return the URI Map for a resourceSet or the Global {@link URIConverter.URI_MAP} if resourceSet is null.
 	 */
-	public static Map<URI, URI> getURIMap(ResourceSet resourceSet) {
+	public static Map<URI, URI> getURIMap(@Nullable ResourceSet resourceSet) {
 		return resourceSet != null ? resourceSet.getURIConverter().getURIMap() : URIConverter.URI_MAP;
 	}
 
 	/**
 	 * Activate any ResourceSetImpl.uriResourceMap so that repeated lookups use a hash rather than linear search.
 	 */
-	public static void initializeURIResourceMap(ResourceSet resourceSet) {
+	public static void initializeURIResourceMap(@Nullable ResourceSet resourceSet) {
 		if (resourceSet instanceof ResourceSetImpl) {
 			ResourceSetImpl resourceSetImpl = (ResourceSetImpl) resourceSet;
 			Map<URI, Resource> uriResourceMap = resourceSetImpl.getURIResourceMap();

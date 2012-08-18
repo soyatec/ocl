@@ -321,6 +321,10 @@ public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
 		return delegate.visitPrimitiveType(object);
 	}
 
+	public @Nullable R visitProfile(@NonNull org.eclipse.ocl.examples.pivot.Profile object) {
+		return delegate.visitProfile(object);
+	}
+
 	public @Nullable R visitProperty(@NonNull org.eclipse.ocl.examples.pivot.Property object) {
 		return delegate.visitProperty(object);
 	}
@@ -363,6 +367,10 @@ public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
 
 	public @Nullable R visitStateExp(@NonNull org.eclipse.ocl.examples.pivot.StateExp object) {
 		return delegate.visitStateExp(object);
+	}
+
+	public @Nullable R visitStereotype(@NonNull org.eclipse.ocl.examples.pivot.Stereotype object) {
+		return delegate.visitStereotype(object);
 	}
 
 	public @Nullable R visitStereotypedProperty(@NonNull org.eclipse.ocl.examples.pivot.StereotypedProperty object) {

@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
- Copyright (c) 2007,2008 M.Garcia and others.
- All rights reserved. This program and the accompanying materials
- are made available under the terms of the Eclipse Public License v1.0
- which accompanies this distribution, and is available at
- http://www.eclipse.org/legal/epl-v10.html
-
- Contributors:
-     J.Warmer, A.Kleppe - original example in 'The Object Constraint Language Second Edition'
-     M.Garcia - realisation of the example for use within Eclipse 
--->
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="RandL"
-    nsURI="http://de.tuhh.sts.octopus/octopus2emfatic/2006/RandL" nsPrefix="RandL">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="RandL" nsURI="http://de.tuhh.sts.octopus/octopus2emfatic/2006/RandL"
+    nsPrefix="RandL">
   <eClassifiers xsi:type="ecore:EEnum" name="RandLColor">
     <eLiterals name="silver"/>
     <eLiterals name="gold" value="1"/>

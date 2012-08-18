@@ -304,6 +304,10 @@ public abstract class AbstractExtendingVisitor<R, C>
 		return visitDataType(object);
 	}
 
+	public @Nullable R visitProfile(@NonNull org.eclipse.ocl.examples.pivot.Profile object) {
+		return visitPackage(object);
+	}
+
 	public @Nullable R visitProperty(@NonNull org.eclipse.ocl.examples.pivot.Property object) {
 		return visitFeature(object);
 	}
@@ -346,6 +350,10 @@ public abstract class AbstractExtendingVisitor<R, C>
 
 	public @Nullable R visitStateExp(@NonNull org.eclipse.ocl.examples.pivot.StateExp object) {
 		return visitOCLExpression(object);
+	}
+
+	public @Nullable R visitStereotype(@NonNull org.eclipse.ocl.examples.pivot.Stereotype object) {
+		return visitClass(object);
 	}
 
 	public @Nullable R visitStereotypedProperty(@NonNull org.eclipse.ocl.examples.pivot.StereotypedProperty object) {

@@ -94,6 +94,7 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.PrimitiveLiteralExp;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
+import org.eclipse.ocl.examples.pivot.Profile;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
@@ -105,6 +106,7 @@ import org.eclipse.ocl.examples.pivot.SetType;
 import org.eclipse.ocl.examples.pivot.Signal;
 import org.eclipse.ocl.examples.pivot.State;
 import org.eclipse.ocl.examples.pivot.StateExp;
+import org.eclipse.ocl.examples.pivot.Stereotype;
 import org.eclipse.ocl.examples.pivot.StereotypedProperty;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
@@ -466,6 +468,13 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass profileEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass propertyCallExpEClass = null;
 
 	/**
@@ -516,6 +525,13 @@ public class PivotPackageImpl
 	 * @generated
 	 */
 	private EClass stateExpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass stereotypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2582,6 +2598,16 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getProfile()
+	{
+		return profileEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPropertyCallExp() {
 		return propertyCallExpEClass;
 	}
@@ -2706,6 +2732,16 @@ public class PivotPackageImpl
 	 */
 	public EReference getStateExp_ReferredState() {
 		return (EReference)stateExpEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getStereotype()
+	{
+		return stereotypeEClass;
 	}
 
 	/**
@@ -3604,9 +3640,19 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getProperty_OwningType()
+	public EReference getProperty_ReferredProperty()
 	{
 		return (EReference)propertyEClass.getEStructuralFeatures().get(16);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getProperty_OwningType()
+	{
+		return (EReference)propertyEClass.getEStructuralFeatures().get(17);
 	}
 
 	/**
@@ -4713,6 +4759,8 @@ public class PivotPackageImpl
 
 		primitiveTypeEClass = createEClass(PRIMITIVE_TYPE);
 
+		profileEClass = createEClass(PROFILE);
+
 		propertyEClass = createEClass(PROPERTY);
 		createEAttribute(propertyEClass, PROPERTY__IS_READ_ONLY);
 		createEAttribute(propertyEClass, PROPERTY__DEFAULT);
@@ -4730,6 +4778,7 @@ public class PivotPackageImpl
 		createEAttribute(propertyEClass, PROPERTY__IS_VOLATILE);
 		createEReference(propertyEClass, PROPERTY__REDEFINED_PROPERTY);
 		createEReference(propertyEClass, PROPERTY__SUBSETTED_PROPERTY);
+		createEReference(propertyEClass, PROPERTY__REFERRED_PROPERTY);
 		createEReference(propertyEClass, PROPERTY__OWNING_TYPE);
 		createEOperation(propertyEClass, PROPERTY___IS_ATTRIBUTE__PROPERTY);
 		createEOperation(propertyEClass, PROPERTY___VALIDATE_COMPATIBLE_INITIALISER__DIAGNOSTICCHAIN_MAP);
@@ -4760,6 +4809,8 @@ public class PivotPackageImpl
 
 		stateExpEClass = createEClass(STATE_EXP);
 		createEReference(stateExpEClass, STATE_EXP__REFERRED_STATE);
+
+		stereotypeEClass = createEClass(STEREOTYPE);
 
 		stereotypedPropertyEClass = createEClass(STEREOTYPED_PROPERTY);
 		createEReference(stereotypedPropertyEClass, STEREOTYPED_PROPERTY__REFERRED_PROPERTY);
@@ -4984,6 +5035,7 @@ public class PivotPackageImpl
 		precedenceEClass.getESuperTypes().add(this.getNamedElement());
 		primitiveLiteralExpEClass.getESuperTypes().add(this.getLiteralExp());
 		primitiveTypeEClass.getESuperTypes().add(this.getDataType());
+		profileEClass.getESuperTypes().add(this.getPackage());
 		propertyEClass.getESuperTypes().add(this.getFeature());
 		propertyEClass.getESuperTypes().add(this.getParameterableElement());
 		propertyCallExpEClass.getESuperTypes().add(this.getNavigationCallExp());
@@ -4996,6 +5048,7 @@ public class PivotPackageImpl
 		signalEClass.getESuperTypes().add(this.getNamedElement());
 		stateEClass.getESuperTypes().add(this.getNamedElement());
 		stateExpEClass.getESuperTypes().add(this.getOCLExpression());
+		stereotypeEClass.getESuperTypes().add(this.getClass_());
 		stereotypedPropertyEClass.getESuperTypes().add(this.getElement());
 		stringLiteralExpEClass.getESuperTypes().add(this.getPrimitiveLiteralExp());
 		templateBindingEClass.getESuperTypes().add(this.getElement());
@@ -5761,6 +5814,8 @@ public class PivotPackageImpl
 
 		initEClass(primitiveTypeEClass, PrimitiveType.class, "PrimitiveType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
+		initEClass(profileEClass, Profile.class, "Profile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
 		initEClass(propertyEClass, Property.class, "Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(getProperty_IsReadOnly(), this.getBoolean(), "isReadOnly", "false", 1, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 		initEAttribute(getProperty_Default(), this.getString(), "default", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
@@ -5778,6 +5833,7 @@ public class PivotPackageImpl
 		initEAttribute(getProperty_IsVolatile(), this.getBoolean(), "isVolatile", "false", 1, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 		initEReference(getProperty_RedefinedProperty(), this.getProperty(), null, "redefinedProperty", null, 0, -1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 		initEReference(getProperty_SubsettedProperty(), this.getProperty(), null, "subsettedProperty", null, 0, -1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEReference(getProperty_ReferredProperty(), this.getProperty(), null, "referredProperty", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEReference(getProperty_OwningType(), this.getType(), this.getType_OwnedAttribute(), "owningType", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		op = initEOperation(getProperty__IsAttribute__Property(), this.getBoolean(), "isAttribute", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
@@ -5820,6 +5876,8 @@ public class PivotPackageImpl
 
 		initEClass(stateExpEClass, StateExp.class, "StateExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getStateExp_ReferredState(), this.getState(), null, "referredState", null, 0, 1, StateExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(stereotypeEClass, Stereotype.class, "Stereotype", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
 		initEClass(stereotypedPropertyEClass, StereotypedProperty.class, "StereotypedProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getStereotypedProperty_ReferredProperty(), this.getProperty(), null, "referredProperty", null, 1, 1, StereotypedProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
@@ -5988,7 +6046,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																																																																																																																																																																																																																													
+		   });																																																																																																																																																																																																																																																																																														
 	}
 
 	/**
@@ -6029,7 +6087,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																				
+		   });																																																																																					
 		addAnnotation
 		  (typeEClass, 
 		   source, 
@@ -6062,7 +6120,7 @@ public class PivotPackageImpl
 		   new URI[] 
 		   {
 			 URI.createURI(eNS_URI).appendFragment("//ParameterableElement/templateParameter") //$NON-NLS-1$
-		   });																																												
+		   });																																													
 		addAnnotation
 		  (getTemplateParameter_OwnedParameteredElement(), 
 		   source, 

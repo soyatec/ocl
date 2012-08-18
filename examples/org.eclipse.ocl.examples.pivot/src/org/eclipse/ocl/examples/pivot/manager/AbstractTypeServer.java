@@ -38,6 +38,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ReflectiveType;
+import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.executor.PivotReflectiveFragment;
@@ -149,6 +150,11 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		super(DomainUtil.nonNullModel(domainType.getName()), packageServer, computeFlags(domainType));
 		this.packageServer = packageServer;
 		this.packageManager = packageServer.getPackageManager();
+	}
+
+	private void addedAppliedStereotype(AppliedStereotype appliedStereotype) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	void addedMemberOperation(@NonNull DomainOperation pivotOperation) {

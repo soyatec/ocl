@@ -159,7 +159,9 @@
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_sckpoLoxEeGoaKB2Aghcrw" name="referredType" type="_wP0RwLoxEeGoaKB2Aghcrw"/>
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_2iXlMLpCEeGoaKB2Aghcrw" name="stereotypedProperty" type="_OzIP0LpCEeGoaKB2Aghcrw" lower="0" upper="*" isComposite="true"/>
       </ownedMember>
-      <ownedMember xmi:type="cmof:Class" xmi:id="_U4nnYLpCEeGoaKB2Aghcrw" name="Property"/>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_U4nnYLpCEeGoaKB2Aghcrw" name="Property">
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_Wm8Y8Oh6EeGIcun9Rtccjg" name="referredProperty" type="_U4nnYLpCEeGoaKB2Aghcrw" lower="0"/>
+      </ownedMember>
       <ownedMember xmi:type="cmof:Class" xmi:id="_OzIP0LpCEeGoaKB2Aghcrw" name="StereotypedProperty" superClass="_eVCuQLoxEeGoaKB2Aghcrw">
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_OzIP0rpCEeGoaKB2Aghcrw" name="referredProperty" type="_U4nnYLpCEeGoaKB2Aghcrw"/>
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_rRaOULpCEeGoaKB2Aghcrw" name="default" type="_p5yUELpCEeGoaKB2Aghcrw" lower="0"/>

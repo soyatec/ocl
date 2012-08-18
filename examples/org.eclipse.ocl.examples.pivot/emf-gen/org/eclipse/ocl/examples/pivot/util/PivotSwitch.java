@@ -82,6 +82,7 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.PrimitiveLiteralExp;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
+import org.eclipse.ocl.examples.pivot.Profile;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
@@ -93,6 +94,7 @@ import org.eclipse.ocl.examples.pivot.SetType;
 import org.eclipse.ocl.examples.pivot.Signal;
 import org.eclipse.ocl.examples.pivot.State;
 import org.eclipse.ocl.examples.pivot.StateExp;
+import org.eclipse.ocl.examples.pivot.Stereotype;
 import org.eclipse.ocl.examples.pivot.StereotypedProperty;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
@@ -1043,6 +1045,20 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case PivotPackage.PROFILE:
+			{
+				Profile profile = (Profile)theEObject;
+				T result = caseProfile(profile);
+				if (result == null) result = casePackage(profile);
+				if (result == null) result = caseNamespace(profile);
+				if (result == null) result = caseTemplateableElement(profile);
+				if (result == null) result = caseNamedElement(profile);
+				if (result == null) result = caseElement(profile);
+				if (result == null) result = caseNameable(profile);
+				if (result == null) result = caseVisitable(profile);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case PivotPackage.PROPERTY:
 			{
 				Property property = (Property)theEObject;
@@ -1197,6 +1213,22 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElement(stateExp);
 				if (result == null) result = caseNameable(stateExp);
 				if (result == null) result = caseVisitable(stateExp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PivotPackage.STEREOTYPE:
+			{
+				Stereotype stereotype = (Stereotype)theEObject;
+				T result = caseStereotype(stereotype);
+				if (result == null) result = caseClass(stereotype);
+				if (result == null) result = caseType(stereotype);
+				if (result == null) result = caseNamespace(stereotype);
+				if (result == null) result = caseNamedElement(stereotype);
+				if (result == null) result = caseTemplateableElement(stereotype);
+				if (result == null) result = caseParameterableElement(stereotype);
+				if (result == null) result = caseElement(stereotype);
+				if (result == null) result = caseNameable(stereotype);
+				if (result == null) result = caseVisitable(stereotype);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -2187,6 +2219,22 @@ public class PivotSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Profile</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Profile</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseProfile(Profile object)
+	{
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Property Call Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -2305,6 +2353,22 @@ public class PivotSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseStateExp(StateExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Stereotype</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Stereotype</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStereotype(Stereotype object)
+	{
 		return null;
 	}
 

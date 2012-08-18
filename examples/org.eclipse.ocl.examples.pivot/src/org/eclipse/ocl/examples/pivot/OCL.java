@@ -46,6 +46,7 @@ import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
 import org.eclipse.ocl.examples.pivot.helper.OCLHelperImpl;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.util.PivotPlugin;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
@@ -378,10 +379,9 @@ public class OCL {
 	}
 
 	/**
-	 * Return the Pivot resource counterpart of an ecoreResource, specifying the uri of the resulting Ecore resource
-	 * and options for the Pivot2Ecore converter.
+	 * Return the Pivot resource counterpart of an ecoreResource.
 	 */
-	public @NonNull PivotResource ecore2pivot(@NonNull Resource ecoreResource) {
+	public @NonNull PivotResource ecore2pivot(@NonNull Resource ecoreResource) throws ParserException {
 		MetaModelManager metaModelManager = getMetaModelManager();
 		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager);
 		Root pivotRoot = ecore2Pivot.getPivotRoot();
@@ -750,6 +750,18 @@ public class OCL {
 	 */
 	public void setParseTracingEnabled(boolean b) {
 		traceParsing = b;
+	}
+
+	/**
+	 * Return the Pivot resource counterpart of a umlResource.
+	 * @throws ParserException 
+	 */
+	public @NonNull PivotResource uml2pivot(@NonNull Resource umlResource) throws ParserException {
+		MetaModelManager metaModelManager = getMetaModelManager();
+		UML2Pivot uml2Pivot = UML2Pivot.getAdapter(umlResource, metaModelManager);
+		Root pivotRoot = uml2Pivot.getPivotRoot();
+		PivotResource pivotResource = (PivotResource) pivotRoot.eResource();
+		return DomainUtil.nonNullModel(pivotResource);
 	}
 
 	/**

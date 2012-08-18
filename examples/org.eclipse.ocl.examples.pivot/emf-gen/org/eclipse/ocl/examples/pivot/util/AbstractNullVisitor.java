@@ -300,6 +300,10 @@ public abstract class AbstractNullVisitor<R, C>
 		return null;
 	}
 
+	public @Nullable R visitProfile(@NonNull org.eclipse.ocl.examples.pivot.Profile object) {
+		return null;
+	}
+
 	public @Nullable R visitProperty(@NonNull org.eclipse.ocl.examples.pivot.Property object) {
 		return null;
 	}
@@ -341,6 +345,10 @@ public abstract class AbstractNullVisitor<R, C>
 	}
 
 	public @Nullable R visitStateExp(@NonNull org.eclipse.ocl.examples.pivot.StateExp object) {
+		return null;
+	}
+
+	public @Nullable R visitStereotype(@NonNull org.eclipse.ocl.examples.pivot.Stereotype object) {
 		return null;
 	}
 

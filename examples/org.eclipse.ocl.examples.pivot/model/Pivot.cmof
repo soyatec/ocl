@@ -19,6 +19,9 @@
     <packageMerge xmi:type="cmof:PackageMerge" xmi:id="_mHdz4YgKEd-aGOJuUCcZBA" receivingPackage="_0">
       <mergedPackage xmi:type="cmof:Package" href="Infrastructure.cmof#Core-PrimitiveTypes"/>
     </packageMerge>
+    <packageMerge xmi:type="cmof:PackageMerge" xmi:id="__Np4sOkFEeGPiYoGg5fAqg" receivingPackage="_0">
+      <mergedPackage xmi:type="cmof:Package" href="SubSuperstructure.cmof#_iQY4IOkFEeGPiYoGg5fAqg"/>
+    </packageMerge>
     <packageMerge xmi:type="cmof:PackageMerge" xmi:id="_ClmaQMf6Ed-sJIf4tYBt-g" receivingPackage="_0">
       <mergedPackage xmi:type="cmof:Package" href="SubSuperstructure.cmof#_0lPd4Mf5Ed-sJIf4tYBt-g"/>
     </packageMerge>

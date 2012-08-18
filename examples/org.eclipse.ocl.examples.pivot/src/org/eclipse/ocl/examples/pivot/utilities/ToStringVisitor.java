@@ -32,6 +32,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.pivot.AnyType;
+import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
@@ -328,6 +329,13 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 		return null;
 	}
 
+	@Override
+	public @Nullable
+	String visitAppliedStereotype(@NonNull AppliedStereotype object) {
+		appendType(object.getReferredType());
+		return null;
+	}
+
 	/**
 	 * Callback for an AssociationClassCallExp visit.
 	 * 
@@ -384,21 +392,6 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 			appendTemplateBindings(cls.getTemplateBinding());
 			appendTemplateSignature(cls.getOwnedTemplateSignature());
 		}
-		return null;
-	}
-
-	@Override
-	public String visitMetaclass(@NonNull Metaclass object) {
-		appendName(object);
-		if (object.getTemplateBinding().size() > 0) {
-			appendTemplateBindings(object.getTemplateBinding());
-		}
-		else if (object.getInstanceType() != null) {
-			append("<");
-			appendQualifiedName(object.getInstanceType());
-			append(">");
-		}
-		appendTemplateSignature(object.getOwnedTemplateSignature());
 		return null;
 	}
     
@@ -804,6 +797,21 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
             prefix = ", "; //$NON-NLS-1$
 		}
 		append(")");
+		return null;
+	}
+
+	@Override
+	public String visitMetaclass(@NonNull Metaclass object) {
+		appendName(object);
+		if (object.getTemplateBinding().size() > 0) {
+			appendTemplateBindings(object.getTemplateBinding());
+		}
+		else if (object.getInstanceType() != null) {
+			append("<");
+			appendQualifiedName(object.getInstanceType());
+			append(">");
+		}
+		appendTemplateSignature(object.getOwnedTemplateSignature());
 		return null;
 	}
 

@@ -560,6 +560,15 @@ public interface PivotFactory
 	PrimitiveType createPrimitiveType();
 
 	/**
+	 * Returns a new object of class '<em>Profile</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Profile</em>'.
+	 * @generated
+	 */
+	Profile createProfile();
+
+	/**
 	 * Returns a new object of class '<em>Property Call Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -630,6 +639,15 @@ public interface PivotFactory
 	 * @generated
 	 */
 	StateExp createStateExp();
+
+	/**
+	 * Returns a new object of class '<em>Stereotype</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Stereotype</em>'.
+	 * @generated
+	 */
+	Stereotype createStereotype();
 
 	/**
 	 * Returns a new object of class '<em>Stereotyped Property</em>'.

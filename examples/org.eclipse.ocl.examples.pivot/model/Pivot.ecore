@@ -1352,6 +1352,7 @@
       <details key="documentation" value="A primitive type is a data type implemented by the underlying infrastructure and made available for modeling."/>
     </eAnnotations>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Profile" eSuperTypes="#//Package"/>
   <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//Feature #//ParameterableElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A property is a typed element that represents an attribute of a class.&#xD;&#xA;Property specializes ParameterableElement to specify that a property can be exposed as a formal template parameter, and provided as an actual parameter in a binding of a template."/>
@@ -1428,6 +1429,7 @@
         upperBound="-1" eType="#//Property"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subsettedProperty" ordered="false"
         upperBound="-1" eType="#//Property"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" eType="#//Property"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningType" eType="#//Type"
         eOpposite="#//Type/ownedAttribute"/>
   </eClassifiers>
@@ -1462,6 +1464,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="StateExp" eSuperTypes="#//OCLExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredState" eType="#//State"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Stereotype" eSuperTypes="#//Class"/>
   <eClassifiers xsi:type="ecore:EClass" name="StereotypedProperty" eSuperTypes="#//Element">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" lowerBound="1"
         eType="#//Property"/>

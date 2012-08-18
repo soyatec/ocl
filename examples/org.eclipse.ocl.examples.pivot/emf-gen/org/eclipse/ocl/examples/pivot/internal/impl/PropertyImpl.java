@@ -95,6 +95,7 @@ import org.eclipse.osgi.util.NLS;
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isVolatile <em>Is Volatile</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getRedefinedProperty <em>Redefined Property</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getSubsettedProperty <em>Subsetted Property</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getOwningType <em>Owning Type</em>}</li>
  * </ul>
  * </p>
@@ -364,6 +365,16 @@ public class PropertyImpl
 	 * @ordered
 	 */
 	protected EList<Property> subsettedProperty;
+
+	/**
+	 * The cached value of the '{@link #getReferredProperty() <em>Referred Property</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferredProperty()
+	 * @generated
+	 * @ordered
+	 */
+	protected Property referredProperty;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -886,6 +897,49 @@ public class PropertyImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Property getReferredProperty()
+	{
+		if (referredProperty != null && ((EObject)referredProperty).eIsProxy())
+		{
+			InternalEObject oldReferredProperty = (InternalEObject)referredProperty;
+			referredProperty = (Property)eResolveProxy(oldReferredProperty);
+			if (referredProperty != oldReferredProperty)
+			{
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PivotPackage.PROPERTY__REFERRED_PROPERTY, oldReferredProperty, referredProperty));
+			}
+		}
+		return referredProperty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Property basicGetReferredProperty()
+	{
+		return referredProperty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReferredProperty(Property newReferredProperty)
+	{
+		Property oldReferredProperty = referredProperty;
+		referredProperty = newReferredProperty;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.PROPERTY__REFERRED_PROPERTY, oldReferredProperty, referredProperty));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Type getOwningType()
 	{
 		if (eContainerFeatureID() != PivotPackage.PROPERTY__OWNING_TYPE) return null;
@@ -1221,6 +1275,9 @@ public class PropertyImpl
 				return getRedefinedProperty();
 			case PivotPackage.PROPERTY__SUBSETTED_PROPERTY:
 				return getSubsettedProperty();
+			case PivotPackage.PROPERTY__REFERRED_PROPERTY:
+				if (resolve) return getReferredProperty();
+				return basicGetReferredProperty();
 			case PivotPackage.PROPERTY__OWNING_TYPE:
 				return getOwningType();
 		}
@@ -1325,6 +1382,9 @@ public class PropertyImpl
 				getSubsettedProperty().clear();
 				getSubsettedProperty().addAll((Collection<? extends Property>)newValue);
 				return;
+			case PivotPackage.PROPERTY__REFERRED_PROPERTY:
+				setReferredProperty((Property)newValue);
+				return;
 			case PivotPackage.PROPERTY__OWNING_TYPE:
 				setOwningType((Type)newValue);
 				return;
@@ -1422,6 +1482,9 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__SUBSETTED_PROPERTY:
 				getSubsettedProperty().clear();
 				return;
+			case PivotPackage.PROPERTY__REFERRED_PROPERTY:
+				setReferredProperty((Property)null);
+				return;
 			case PivotPackage.PROPERTY__OWNING_TYPE:
 				setOwningType((Type)null);
 				return;
@@ -1494,6 +1557,8 @@ public class PropertyImpl
 				return redefinedProperty != null && !redefinedProperty.isEmpty();
 			case PivotPackage.PROPERTY__SUBSETTED_PROPERTY:
 				return subsettedProperty != null && !subsettedProperty.isEmpty();
+			case PivotPackage.PROPERTY__REFERRED_PROPERTY:
+				return referredProperty != null;
 			case PivotPackage.PROPERTY__OWNING_TYPE:
 				return getOwningType() != null;
 		}

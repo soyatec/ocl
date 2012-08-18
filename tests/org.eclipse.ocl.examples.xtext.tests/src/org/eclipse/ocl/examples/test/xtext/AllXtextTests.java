@@ -39,6 +39,7 @@ import org.eclipse.ocl.examples.pivot.tests.EvaluateStringOperationsTest;
 import org.eclipse.ocl.examples.pivot.tests.InheritanceTests;
 import org.eclipse.ocl.examples.pivot.tests.IteratorsTest;
 import org.eclipse.ocl.examples.pivot.tests.PrettyPrinterTest;
+import org.eclipse.ocl.examples.pivot.tests.StereotypesTest;
 import org.eclipse.ocl.examples.test.ecore.ProjectMapTest;
 
 /**
@@ -82,6 +83,7 @@ public class AllXtextTests
 		result.addTestSuite(ProjectMapTest.class);
 		result.addTestSuite(SerializeTests.class);
 		result.addTestSuite(RoundTripTests.class);
+		result.addTestSuite(StereotypesTest.class);
 		result.addTestSuite(EditTests.class);
 		result.addTestSuite(InheritanceTests.class);
 		result.addTestSuite(MarkupTests.class);

@@ -78,6 +78,7 @@ import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
+import org.eclipse.ocl.examples.pivot.Profile;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
@@ -89,6 +90,7 @@ import org.eclipse.ocl.examples.pivot.SetType;
 import org.eclipse.ocl.examples.pivot.Signal;
 import org.eclipse.ocl.examples.pivot.State;
 import org.eclipse.ocl.examples.pivot.StateExp;
+import org.eclipse.ocl.examples.pivot.Stereotype;
 import org.eclipse.ocl.examples.pivot.StereotypedProperty;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
@@ -209,6 +211,7 @@ public class PivotFactoryImpl
 			case PivotPackage.PARAMETER: return (EObject)createParameter();
 			case PivotPackage.PRECEDENCE: return (EObject)createPrecedence();
 			case PivotPackage.PRIMITIVE_TYPE: return (EObject)createPrimitiveType();
+			case PivotPackage.PROFILE: return (EObject)createProfile();
 			case PivotPackage.PROPERTY: return (EObject)createProperty();
 			case PivotPackage.PROPERTY_CALL_EXP: return (EObject)createPropertyCallExp();
 			case PivotPackage.REAL_LITERAL_EXP: return (EObject)createRealLiteralExp();
@@ -220,6 +223,7 @@ public class PivotFactoryImpl
 			case PivotPackage.SIGNAL: return (EObject)createSignal();
 			case PivotPackage.STATE: return (EObject)createState();
 			case PivotPackage.STATE_EXP: return (EObject)createStateExp();
+			case PivotPackage.STEREOTYPE: return (EObject)createStereotype();
 			case PivotPackage.STEREOTYPED_PROPERTY: return (EObject)createStereotypedProperty();
 			case PivotPackage.STRING_LITERAL_EXP: return (EObject)createStringLiteralExp();
 			case PivotPackage.TEMPLATE_BINDING: return (EObject)createTemplateBinding();
@@ -914,6 +918,17 @@ public class PivotFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Profile createProfile()
+	{
+		ProfileImpl profile = new ProfileImpl();
+		return profile;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public PropertyCallExp createPropertyCallExp() {
 		PropertyCallExpImpl propertyCallExp = new PropertyCallExpImpl();
 		return propertyCallExp;
@@ -989,6 +1004,17 @@ public class PivotFactoryImpl
 	public StateExp createStateExp() {
 		StateExpImpl stateExp = new StateExpImpl();
 		return stateExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Stereotype createStereotype()
+	{
+		StereotypeImpl stereotype = new StereotypeImpl();
+		return stereotype;
 	}
 
 	/**

@@ -89,6 +89,7 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.PrimitiveLiteralExp;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
+import org.eclipse.ocl.examples.pivot.Profile;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
@@ -100,6 +101,7 @@ import org.eclipse.ocl.examples.pivot.SetType;
 import org.eclipse.ocl.examples.pivot.Signal;
 import org.eclipse.ocl.examples.pivot.State;
 import org.eclipse.ocl.examples.pivot.StateExp;
+import org.eclipse.ocl.examples.pivot.Stereotype;
 import org.eclipse.ocl.examples.pivot.StereotypedProperty;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
@@ -775,6 +777,8 @@ public class PivotValidator
 				return validatePrimitiveLiteralExp((PrimitiveLiteralExp)value, diagnostics, context);
 			case PivotPackage.PRIMITIVE_TYPE:
 				return validatePrimitiveType((PrimitiveType)value, diagnostics, context);
+			case PivotPackage.PROFILE:
+				return validateProfile((Profile)value, diagnostics, context);
 			case PivotPackage.PROPERTY:
 				return validateProperty((Property)value, diagnostics, context);
 			case PivotPackage.PROPERTY_CALL_EXP:
@@ -797,6 +801,8 @@ public class PivotValidator
 				return validateState((State)value, diagnostics, context);
 			case PivotPackage.STATE_EXP:
 				return validateStateExp((StateExp)value, diagnostics, context);
+			case PivotPackage.STEREOTYPE:
+				return validateStereotype((Stereotype)value, diagnostics, context);
 			case PivotPackage.STEREOTYPED_PROPERTY:
 				return validateStereotypedProperty((StereotypedProperty)value, diagnostics, context);
 			case PivotPackage.STRING_LITERAL_EXP:
@@ -3179,6 +3185,26 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean validateProfile(Profile profile, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		if (!validate_NoCircularContainment((EObject)profile, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)profile, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)profile, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)profile, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)profile, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)profile, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)profile, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)profile, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)profile, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(profile, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean validatePropertyCallExp(PropertyCallExp propertyCallExp,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!validate_NoCircularContainment((EObject)propertyCallExp, diagnostics, context)) return false;
@@ -3351,6 +3377,26 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)stateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)stateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(stateExp, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateStereotype(Stereotype stereotype, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		if (!validate_NoCircularContainment((EObject)stereotype, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)stereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)stereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)stereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)stereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)stereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)stereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)stereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)stereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(stereotype, diagnostics, context);
 		return result;
 	}
 

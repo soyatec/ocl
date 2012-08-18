@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EModelElement;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -60,9 +61,10 @@ import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.Profile;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
-import org.eclipse.ocl.examples.pivot.StereotypedProperty;
+import org.eclipse.ocl.examples.pivot.Stereotype;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.ecore.AbstractEcore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -205,25 +207,42 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 	 * @param resourceSet to be initialized or null for global initialization
 	 * @return a failure reason, null if successful
 	 */
-	public static String initialize(ResourceSet resourceSet) {
+	public static String initialize(@NonNull ResourceSet resourceSet) {
 		UMLResourcesUtil.init(resourceSet);
 		final String resourcesPluginId = "org.eclipse.uml2.uml.resources"; //$NON-NLS-1$
 		String resourcesLocation = null;
-		StandaloneProjectMap projectMap = StandaloneProjectMap.findAdapter(resourceSet);
-		if (projectMap != null) {
-			URI locationURI = projectMap.getLocation(resourcesPluginId);
-			if (locationURI != null) {
-				resourcesLocation = locationURI.toString();
-				while (resourcesLocation.endsWith("/")) {
-					resourcesLocation = resourcesLocation.substring(0, resourcesLocation.length()-1);
-				}
+		StandaloneProjectMap projectMap = StandaloneProjectMap.getAdapter(resourceSet);
+		URI locationURI = projectMap.getLocation(resourcesPluginId);
+		if (locationURI != null) {
+			resourcesLocation = locationURI.toString();
+			while (resourcesLocation.endsWith("/")) {
+				resourcesLocation = resourcesLocation.substring(0, resourcesLocation.length()-1);
 			}
 		}
-		if (resourcesLocation == null)
+		if (resourcesLocation == null) {
 			return "'" + resourcesPluginId + "' not found on class-path"; //$NON-NLS-1$
-		Map<URI, URI> uriMap = resourceSet != null
-			? resourceSet.getURIConverter().getURIMap()
-			: URIConverter.URI_MAP;		
+		}
+		Map<URI, URI> uriMap = resourceSet.getURIConverter().getURIMap();		
+		uriMap.put(URI.createURI(UMLResource.PROFILES_PATHMAP), URI.createURI(resourcesLocation + "/profiles/")); //$NON-NLS-1$
+		uriMap.put(URI.createURI(UMLResource.METAMODELS_PATHMAP), URI.createURI(resourcesLocation + "/metamodels/")); //$NON-NLS-1$
+		uriMap.put(URI.createURI(UMLResource.LIBRARIES_PATHMAP), URI.createURI(resourcesLocation + "/libraries/")); //$NON-NLS-1$
+		return null;
+	}
+	public static String initialize(@NonNull StandaloneProjectMap projectMap) {
+		UMLResourcesUtil.init(null);
+		final String resourcesPluginId = "org.eclipse.uml2.uml.resources"; //$NON-NLS-1$
+		String resourcesLocation = null;
+		URI locationURI = projectMap.getLocation(resourcesPluginId);
+		if (locationURI != null) {
+			resourcesLocation = locationURI.toString();
+			while (resourcesLocation.endsWith("/")) {
+				resourcesLocation = resourcesLocation.substring(0, resourcesLocation.length()-1);
+			}
+		}
+		if (resourcesLocation == null) {
+			return "'" + resourcesPluginId + "' not found on class-path"; //$NON-NLS-1$
+		}
+		Map<URI, URI> uriMap = URIConverter.URI_MAP;		
 		uriMap.put(URI.createURI(UMLResource.PROFILES_PATHMAP), URI.createURI(resourcesLocation + "/profiles/")); //$NON-NLS-1$
 		uriMap.put(URI.createURI(UMLResource.METAMODELS_PATHMAP), URI.createURI(resourcesLocation + "/metamodels/")); //$NON-NLS-1$
 		uriMap.put(URI.createURI(UMLResource.LIBRARIES_PATHMAP), URI.createURI(resourcesLocation + "/libraries/")); //$NON-NLS-1$
@@ -368,6 +387,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		private List<Resource> importedResources = null;
 
 		private @NonNull Set<org.eclipse.uml2.uml.Property> umlProperties = new HashSet<org.eclipse.uml2.uml.Property>();
+		private @NonNull Map<Type, List<Property>> stereotypeProperties = new HashMap<Type, List<Property>>();
 		private @NonNull List<EObject> eAppliedStereotypes = new ArrayList<EObject>();
 
 		protected Outer(@NonNull Resource umlResource, @NonNull MetaModelManager metaModelManager) {
@@ -375,9 +395,15 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		}
 		
 		@Override
-		public void addCreated(@NonNull EObject umlElement, @NonNull Element pivotElement) {
+		public void addCreated(@NonNull EObject eObject, @NonNull Element pivotElement) {
+//			if ((eObject instanceof ENamedElement) && "EnglishClass".equals(((ENamedElement)eObject).getName())) {
+//				System.out.println("Define " + DomainUtil.debugSimpleName(eObject) + " => " + DomainUtil.debugSimpleName(pivotElement));
+//			}
+//			else if ((eObject instanceof org.eclipse.uml2.uml.NamedElement) && "EnglishClass".equals(((org.eclipse.uml2.uml.NamedElement)eObject).getName())) {
+//				System.out.println("Define " + DomainUtil.debugSimpleName(eObject) + " => " + DomainUtil.debugSimpleName(pivotElement));
+//			}
 			@SuppressWarnings("unused")
-			Element oldElement = createMap.put(umlElement, pivotElement);
+			Element oldElement = createMap.put(eObject, pivotElement);
 //			if ((oldElement != null) && (oldElement != pivotElement)) {
 //				System.out.println("Reassigned : " + umlElement);
 //			}
@@ -441,6 +467,9 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		public void addStereotypeApplication(@NonNull EObject eAppliedStereotype) {
 			eAppliedStereotypes.add(eAppliedStereotype);
 			EClass eClass = eAppliedStereotype.eClass();
+//			if ("EnglishClass".equals(eClass.getName())) {
+//				System.out.println("Add apply " + DomainUtil.debugSimpleName(eClass));
+//			}
 			EPackage ePackage = eClass.getEPackage();
 //			System.out.println("Stereotype nsURI " + ePackage.getName() + " = " + ePackage.getNsURI());
 //			System.out.println("  name " + eClass.getName());
@@ -592,6 +621,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 								Resource pivotResource = metaModelManager.createResource(pivotURI, PivotPackage.eCONTENT_TYPE);
 								importedAdapter.installDeclarations(pivotResource);
 								adapter = importedAdapter;
+								metaModelManager.installResource(pivotResource);
 							}
 	//					adapter.getPivotRoot();
 						}
@@ -667,46 +697,82 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 					}
 //					System.out.println("*****************Missing opposite type");
 				}
-			}			
-			for (Type pivotType : typeProperties.keySet()) {
+			}
+			Set<Type> allPropertiedTypes = new HashSet<Type>(typeProperties.keySet());
+			allPropertiedTypes.addAll(stereotypeProperties.keySet());
+			for (Type pivotType : allPropertiedTypes) {
 				List<org.eclipse.uml2.uml.Property> umlProperties = typeProperties.get(pivotType);
-				List<Property> pivotProperties = new ArrayList<Property>(umlProperties.size());
-				for (org.eclipse.uml2.uml.Property umlProperty : umlProperties) {
-					if (umlProperty != null) {
-						Property pivotProperty = getCreated(Property.class, umlProperty);
-						if (pivotProperty != null) {
-							pivotProperties.add(pivotProperty);
+				List<Property> pivotProperties = stereotypeProperties.get(pivotType);
+				if (pivotProperties == null) {
+					pivotProperties = new ArrayList<Property>(umlProperties.size());
+				}
+				else {
+					pivotProperties = new ArrayList<Property>(pivotProperties);
+				}
+				if (umlProperties != null) {
+					for (org.eclipse.uml2.uml.Property umlProperty : umlProperties) {
+						if (umlProperty != null) {
+							Property pivotProperty = getCreated(Property.class, umlProperty);
+							if (pivotProperty != null) {
+								pivotProperties.add(pivotProperty);
+							}
 						}
 					}
 				}
+				Collections.sort(pivotProperties, new Comparator<Property>()
+				{
+					public int compare(Property o1, Property o2) {
+						return o1.getName().compareTo(o2.getName());
+					}
+				});
 				refreshList(DomainUtil.nonNullEMF(pivotType.getOwnedAttribute()), pivotProperties);
 			}
 		}
 
 		protected void installStereotypes() {
+			Stereotype pivotStereotype = null;
 			Map<Element,List<EObject>> element2eAppliedStereotypes = new HashMap<Element,List<EObject>>();
 			for (EObject eAppliedStereotype : eAppliedStereotypes) {
 				try {
 					EClass eClass = eAppliedStereotype.eClass();
-					for (EStructuralFeature eStructuralFeature : eClass.getEStructuralFeatures()) {
-						String featureName = eStructuralFeature.getName();
-						if ((featureName != null) && featureName.startsWith("base_") && (eStructuralFeature instanceof EReference) && eAppliedStereotype.eIsSet(eStructuralFeature)) {
-							EReference eReference = (EReference) eStructuralFeature;
-							Object eStereotyped = eAppliedStereotype.eGet(eReference);
-							if (eStereotyped instanceof EObject) {
-								Element pivotElement = getCreated(Element.class, (EObject)eStereotyped);
-								if (pivotElement != null) {	
-									List<EObject> eAppliedStereotypes = element2eAppliedStereotypes.get(pivotElement);
-									if (eAppliedStereotypes == null) {
-										eAppliedStereotypes = new ArrayList<EObject>();
-										element2eAppliedStereotypes.put(pivotElement, eAppliedStereotypes);
-									}
-									eAppliedStereotypes.add(eAppliedStereotype);
-								}
-								else {		// FIXME Template Parameters
-									logger.error("Unsupported apply stereotype : " + eAppliedStereotype);
-								}
+					EPackage ePackage = eClass.getEPackage();
+					String nsURI = ePackage.getNsURI();
+//					if ("EnglishClass".equals(eClass.getName())) {
+//						System.out.println("Apply " + DomainUtil.debugSimpleName(eClass));
+//					}
+					List<org.eclipse.uml2.uml.Element> stereotypedElements = getStereotypedElements(eClass, eAppliedStereotype);
+					org.eclipse.uml2.uml.Package stereotypedPackage = null;
+					for (org.eclipse.uml2.uml.Element stereotypedElement : stereotypedElements) {
+						if (stereotypedElement instanceof org.eclipse.uml2.uml.Type) {
+							stereotypedPackage = ((org.eclipse.uml2.uml.Type)stereotypedElement).getPackage();
+						}
+					}
+					Profile pivotProfile = null;
+					if (stereotypedPackage != null) {
+						for (org.eclipse.uml2.uml.ProfileApplication profileApplication : stereotypedPackage.getProfileApplications()) {
+							org.eclipse.uml2.uml.Profile appliedProfile = profileApplication.getAppliedProfile();
+							if (nsURI.equals(appliedProfile.getURI())) {
+								pivotProfile = getCreated(Profile.class, appliedProfile);
+								break;
 							}
+						}
+					}
+					if (pivotProfile != null) {
+						pivotStereotype = (Stereotype) PivotUtil.getNamedElement(pivotProfile.getOwnedType(), eClass.getName());
+					}
+					for (org.eclipse.uml2.uml.Element stereotypedElement : stereotypedElements) {
+						assert stereotypedElement != null;
+						Element pivotElement = getCreated(Element.class, stereotypedElement);
+						if (pivotElement != null) {	
+							List<EObject> eAppliedStereotypes = element2eAppliedStereotypes.get(pivotElement);
+							if (eAppliedStereotypes == null) {
+								eAppliedStereotypes = new ArrayList<EObject>();
+								element2eAppliedStereotypes.put(pivotElement, eAppliedStereotypes);
+							}
+							eAppliedStereotypes.add(eAppliedStereotype);
+						}
+						else {		// FIXME Template Parameters
+							logger.error("Unsupported apply stereotype : " + eAppliedStereotype);
 						}
 					}
 				}
@@ -721,11 +787,14 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 				List<AppliedStereotype> newAppliedStereotypes = new ArrayList<AppliedStereotype>(eAppliedStereotypes.size());
 				for (EObject eAppliedStereotype : eAppliedStereotypes) {
 					EClass eClass = eAppliedStereotype.eClass();
-					List<EStructuralFeature> eStructuralFeatures = eClass.getEStructuralFeatures();
-					Type pivotStereotype = getCreated(Type.class, eClass);
-					if (pivotStereotype == null) {
-						pivotStereotype = metaModelManager.getPivotOfEcore(Type.class, eClass);
-					}
+					@SuppressWarnings("null") @NonNull List<EStructuralFeature> eStructuralFeatures = eClass.getEStructuralFeatures();
+//					Type pivotStereotype = getCreated(Type.class, eClass);
+//					if (eClass.getName().equals("EnglishClass")) {
+//						System.out.println("Reference " + DomainUtil.debugSimpleName(eClass) + " => " + DomainUtil.debugSimpleName(pivotStereotype));
+//					}
+//					if (pivotStereotype == null) {
+//						pivotStereotype = metaModelManager.getPivotOfEcore(Type.class, eClass);
+//					}
 					AppliedStereotype newAppliedStereotype = null;
 					for (AppliedStereotype oldAppliedStereotype : oldAppliedStereotypes) {
 						if (oldAppliedStereotype.getReferredType() == pivotStereotype) {
@@ -736,39 +805,96 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 						newAppliedStereotype = PivotFactory.eINSTANCE.createAppliedStereotype();
 						newAppliedStereotype.setReferredType(pivotStereotype);
 					}
-					List<StereotypedProperty> oldProperties = newAppliedStereotype.getStereotypedProperty();
-					List<StereotypedProperty> newProperties = new ArrayList<StereotypedProperty>(eAppliedStereotypes.size());
 					if (pivotStereotype != null) {
-						for (Property referenceProperty : pivotStereotype.getOwnedAttribute()) {
-							StereotypedProperty newProperty = null;
-							for (StereotypedProperty oldProperty : oldProperties) {
-								if (referenceProperty == oldProperty.getReferredProperty()) {
-									newProperty = oldProperty;
-								}
-							}
-							if (newProperty == null) {
-								newProperty = PivotFactory.eINSTANCE.createStereotypedProperty();
-								newProperty.setReferredProperty(referenceProperty);
-							}
-							String defaultValue = referenceProperty.getDefault();
-							String name = referenceProperty.getName();
-							if (name != null) {
-								for (int i = 0; i < eStructuralFeatures.size(); i++) {
-									EStructuralFeature eFeature = eStructuralFeatures.get(i);
-									if (name.equals(eFeature.getName())) {
-										defaultValue = eFeature.getDefaultValueLiteral();			// FIXME ValueSpecifications
-									}
-								}
-							}
-							newProperty.setDefault(defaultValue);
-							newProperties.add(newProperty);
+						if (stereotypedElement instanceof Type) {
+							installTypeStereotype((Type)stereotypedElement, pivotStereotype, eStructuralFeatures);
 						}
 					}
-					refreshList(DomainUtil.nonNullEMF(newAppliedStereotype.getStereotypedProperty()), newProperties);
 					newAppliedStereotypes.add(newAppliedStereotype);
 				}
 //				System.out.println("Applying stereotypes to " + stereotypedElement);
 				refreshList(DomainUtil.nonNullEMF(stereotypedElement.getAppliedStereotype()), newAppliedStereotypes);
+			}
+		}
+
+/*		protected List<EReference> getBaseFeatures(EClass eClass, EObject eAppliedStereotype) {
+			List<EReference> baseFeatures = new ArrayList<EReference>();
+			for (EStructuralFeature eStructuralFeature : eClass.getEStructuralFeatures()) {
+				String featureName = eStructuralFeature.getName();
+				if ((featureName != null) && featureName.startsWith("base_")
+				  && (eStructuralFeature instanceof EReference)
+				  && eAppliedStereotype.eIsSet(eStructuralFeature)) {
+					baseFeatures.add((EReference) eStructuralFeature);
+				}
+			}
+			return baseFeatures;
+		} */
+
+		protected @NonNull List<org.eclipse.uml2.uml.Element> getStereotypedElements(EClass eClass, EObject eAppliedStereotype) {
+			List<org.eclipse.uml2.uml.Element> stereotypedElements = new ArrayList<org.eclipse.uml2.uml.Element>();
+			for (EStructuralFeature eStructuralFeature : eClass.getEStructuralFeatures()) {
+				String featureName = eStructuralFeature.getName();
+				if ((featureName != null) && featureName.startsWith("base_")
+				  && (eStructuralFeature instanceof EReference)
+				  && eAppliedStereotype.eIsSet(eStructuralFeature)) {
+					Object stereotypedElement = eAppliedStereotype.eGet(eStructuralFeature);
+					if (stereotypedElement instanceof org.eclipse.uml2.uml.Element) {
+						stereotypedElements.add((org.eclipse.uml2.uml.Element) stereotypedElement);
+					}
+				}
+			}
+			return stereotypedElements;
+		}
+
+		protected void installTypeStereotype(@NonNull Type pivotType, @NonNull Type pivotStereotype, List<EStructuralFeature> eStructuralFeatures) {
+			List<Property> stereotypePropertyList = stereotypeProperties.get(pivotType);
+			if (stereotypePropertyList == null) {
+				stereotypePropertyList = new ArrayList<Property>();
+				stereotypeProperties.put(pivotType, stereotypePropertyList);
+			}
+			Property staticProperty = null;
+			String staticPropertyName = "base_" + pivotStereotype.getName();
+			for (Property oldProperty : pivotType.getOwnedAttribute()) {
+				if (staticPropertyName.equals(oldProperty.getName())) {
+					staticProperty = oldProperty;
+				}
+			}
+			if (staticProperty == null) {
+				staticProperty = PivotFactory.eINSTANCE.createProperty();
+				staticProperty.setName(staticPropertyName);
+			}
+			staticProperty.setType(pivotStereotype);
+//			staticProperty.setImplicit(true);
+			staticProperty.setIsRequired(false);
+			staticProperty.setIsStatic(true);
+			stereotypePropertyList.add(staticProperty);
+			for (Property referenceProperty : pivotStereotype.getOwnedAttribute()) {
+				Property dynamicProperty = null;
+				for (Property oldProperty : pivotType.getOwnedAttribute()) {
+					if (referenceProperty == oldProperty.getReferredProperty()) {
+						dynamicProperty = oldProperty;
+					}
+				}
+				if (dynamicProperty == null) {
+					dynamicProperty = PivotFactory.eINSTANCE.createProperty();
+					dynamicProperty.setReferredProperty(referenceProperty);
+				}
+				dynamicProperty.setName(referenceProperty.getName());
+//				dynamicProperty.setImplicit(true);
+				dynamicProperty.setIsRequired(referenceProperty.isRequired());
+				dynamicProperty.setIsStatic(false);
+				String defaultValue = referenceProperty.getDefault();
+				String name = referenceProperty.getName();
+				if (name != null) {
+					for (int i = 0; i < eStructuralFeatures.size(); i++) {
+						EStructuralFeature eFeature = eStructuralFeatures.get(i);
+						if (name.equals(eFeature.getName())) {
+							defaultValue = eFeature.getDefaultValueLiteral();			// FIXME ValueSpecifications
+						}
+					}
+				}
+				dynamicProperty.setDefault(defaultValue);
+				stereotypePropertyList.add(dynamicProperty);
 			}
 		}
 

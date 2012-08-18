@@ -51,6 +51,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#isVolatile <em>Is Volatile</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getRedefinedProperty <em>Redefined Property</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getSubsettedProperty <em>Subsetted Property</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getOwningType <em>Owning Type</em>}</li>
  * </ul>
  * </p>
@@ -441,6 +442,32 @@ public interface Property
 	 * @generated
 	 */
 	EList<Property> getSubsettedProperty();
+
+	/**
+	 * Returns the value of the '<em><b>Referred Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Referred Property</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Referred Property</em>' reference.
+	 * @see #setReferredProperty(Property)
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getProperty_ReferredProperty()
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Property!referredProperty'"
+	 * @generated
+	 */
+	Property getReferredProperty();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.Property#getReferredProperty <em>Referred Property</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Referred Property</em>' reference.
+	 * @see #getReferredProperty()
+	 * @generated
+	 */
+	void setReferredProperty(Property value);
 
 	/**
 	 * Returns the value of the '<em><b>Owning Type</b></em>' container reference.

@@ -40,6 +40,15 @@ public class ExplicitNavigationProperty extends AbstractProperty
 
 	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
+		if (property.isStatic()) {
+			DomainType type = property.getType(); 
+			if (type != null) {
+				return valueFactory.createTypeValue(type);
+			}
+			else {
+				return valueFactory.getNull();
+			}
+		}
 		EObject eObject = sourceValue.asNavigableObject(); 
 		EClass eClass = eObject.eClass();
 		EStructuralFeature eFeature = eClass.getEStructuralFeature(property.getName());
