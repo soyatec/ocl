@@ -18,9 +18,17 @@ package org.eclipse.ocl.examples.xtext.essentialocl.ui.contentassist;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.ocl.examples.pivot.Iteration;
+import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
-import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
+import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InfixExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigationOperatorCS;
@@ -30,18 +38,50 @@ import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */
 public class EssentialOCLProposalProvider extends AbstractEssentialOCLProposalProvider
 {
+	private static final int BOOST_EXPLICIT_PROPERTY = 20;
+	private static final int BOOST_PARAMETER = 20;
+	private static final int BOOST_VARIABLE = 20;
+	private static final int BOOST_IMPLICIT_PROPERTY = 15;
+	private static final int BOOST_OPERATION = 10;
+	private static final int BOOST_ITERATION = 5;
+	private static final int BOOST_TYPE = 0;
+	private static final int BOOST_PACKAGE = -5;
+	
+	public class ClassSensitiveProposalCreator extends DefaultProposalCreator
+	{
+		public ClassSensitiveProposalCreator(ContentAssistContext contentAssistContext, String ruleName, IQualifiedNameConverter qualifiedNameConverter) {
+			super(contentAssistContext, ruleName, qualifiedNameConverter);
+		}
+
+		@Override
+		public ICompletionProposal apply(IEObjectDescription candidate) {
+			ICompletionProposal proposal = super.apply(candidate);
+			EObject eObject = candidate.getEObjectOrProxy();
+			if ((proposal instanceof ConfigurableCompletionProposal) && !eObject.eIsProxy()) {
+				ConfigurableCompletionProposal configurableCompletionProposal = (ConfigurableCompletionProposal)proposal;
+				int priority = configurableCompletionProposal.getPriority() + getPriorityBoost(eObject);
+				configurableCompletionProposal.setPriority(priority);
+			}
+			return proposal;
+		}
+		
+	}
+	
 	protected static Image collectionTypeImage = null;
 	private static Image primitiveTypeImage = null;
 
@@ -77,11 +117,11 @@ public class EssentialOCLProposalProvider extends AbstractEssentialOCLProposalPr
 		proposeKeywordAlternatives(ruleCall, context, acceptor, getPrimitiveTypeImage());
 	}
 
-/*	@Override
+	@Override
 	public void createProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		System.out.println("createProposals: ");
+		System.out.println("createProposals: " + context.getPrefix());
 		super.createProposals(context, acceptor);
-	} */
+	}
 
 	protected EObject getPathScope(EObject model, ContentAssistContext context) {
 		int offset = context.getOffset();
@@ -107,11 +147,48 @@ public class EssentialOCLProposalProvider extends AbstractEssentialOCLProposalPr
 		return primitiveTypeImage;
 	}
 
-/*	@Override
+	/**
+	 * Return a priority boost to prioritize eObject with respect to alternative proposals.
+	 * <br>
+	 * The return value should be small to avoid disrupting the default 100 spacing with double and three-quartering for prefix matches.
+	 */
+	protected int getPriorityBoost(@Nullable EObject eObject) {
+		if (eObject instanceof Property) {
+			return ((Property)eObject).isImplicit() ? BOOST_IMPLICIT_PROPERTY : BOOST_EXPLICIT_PROPERTY;
+		}
+		else if (eObject instanceof Iteration) {
+			return BOOST_ITERATION;
+		}
+		else if (eObject instanceof Operation) {
+			return BOOST_OPERATION;
+		}
+		else if (eObject instanceof Type) {
+			return BOOST_TYPE;
+		}
+		else if (eObject instanceof Parameter) {
+			return BOOST_PARAMETER;
+		}
+		else if (eObject instanceof Variable) {
+			return BOOST_VARIABLE;
+		}
+		else if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
+			return BOOST_PACKAGE;
+		}
+		else {
+			return 0;
+		}
+	}
+
+	@Override
+	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(String ruleName, ContentAssistContext contentAssistContext) {
+		return new ClassSensitiveProposalCreator(contentAssistContext, ruleName, getQualifiedNameConverter());
+	}
+
+	@Override
 	protected void invokeMethod(String methodName, ICompletionProposalAcceptor acceptor, Object... params) {
 		System.out.println("  invokeMethod: " + methodName);
 		super.invokeMethod(methodName, acceptor, params);
-	} */
+	}
 
 	@Override
 	protected void lookupCrossReference(CrossReference crossReference,
@@ -128,9 +205,6 @@ public class EssentialOCLProposalProvider extends AbstractEssentialOCLProposalPr
 				}
 			}
 		}
-//		else if (currentModel instanceof SimpleNamedElementRefCS) {
-//			currentModel = getPathScope(currentModel, contentAssistContext);
-//		}
 		else if (currentModel instanceof PathNameCS) {
 			currentModel = getPathScope(currentModel, contentAssistContext);
 		}
@@ -142,14 +216,14 @@ public class EssentialOCLProposalProvider extends AbstractEssentialOCLProposalPr
 				getProposalFactory(ruleName, contentAssistContext));
 	}
 
-/*	@Override
+	@Override
 	protected void lookupCrossReference(EObject model, EReference reference,
 			ICompletionProposalAcceptor acceptor,
 			Predicate<IEObjectDescription> filter,
 			Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
 		System.out.println("    lookupCrossReference: " + reference.getEContainingClass().getName() + "::" + reference.getName());
 		super.lookupCrossReference(model, reference, acceptor, filter, proposalFactory);
-	} */
+	}
 
 	protected void proposeKeywordAlternatives(RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor, Image image) {
 		AbstractElement alternatives = ruleCall.getRule().getAlternatives();
