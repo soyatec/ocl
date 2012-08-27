@@ -93,10 +93,17 @@
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
-    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=M)(build.type=R)))" readerType="p2" source="false" mutable="false">
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(build.type=R)(resolve.target.platform=true))" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}/modeling/emf/emf/updates/2.9">
+        <bc:propertyRef key="eclipse.download"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(build.type=M)(resolve.target.platform=true))" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:uri format="{0}/modeling/emf/emf/updates/2.9.x">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
@@ -116,10 +123,17 @@
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
-    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=M)(build.type=R)))" readerType="p2" source="false" mutable="false">
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(build.type=R)(resolve.target.platform=true))" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}/modeling/mdt/uml2/updates/4.1">
+        <bc:propertyRef key="eclipse.download"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(build.type=M)(resolve.target.platform=true))" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:uri format="{0}/modeling/mdt/uml2/updates/4.1.x">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
