@@ -228,30 +228,30 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * resolved by bindings.
 	 * @throws IOException 
 	 */
-     protected void assertBadQuery(Class<?> exception, int severity,
-    		 String expression, String messageTemplate, Object... bindings) {
+    protected void assertBadQuery(Class<?> exception, int severity,
+   		 String expression, String messageTemplate, Object... bindings) {
 		BaseCSResource csResource = null;
 		try {
-    		PivotEnvironment environment = (PivotEnvironment) helper.getEnvironment();
-    		MetaModelManager metaModelManager = environment.getMetaModelManager();
-    		Type contextClassifier = environment.getContextClassifier();
-    		ParserContext classContext = new ClassContext(metaModelManager, null, contextClassifier);
-    		csResource = (BaseCSResource) classContext.createBaseResource(expression);
+   		PivotEnvironment environment = (PivotEnvironment) helper.getEnvironment();
+   		MetaModelManager metaModelManager = environment.getMetaModelManager();
+   		Type contextClassifier = environment.getContextClassifier();
+   		ParserContext classContext = new ClassContext(metaModelManager, null, contextClassifier);
+   		csResource = (BaseCSResource) classContext.createBaseResource(expression);
 			PivotUtil.checkResourceErrors(NLS.bind(OCLMessages.ErrorsInResource, expression), csResource);
 			CS2PivotResourceAdapter cs2pivot = CS2PivotResourceAdapter.getAdapter(csResource, metaModelManager);
 			Resource pivotResource = cs2pivot.getPivotResource(csResource);
 			assertNoValidationErrors("Validating", pivotResource);
 			
-            fail("Should not have parsed \"" + expression + "\"");
-        } catch (ParserException e) {
-        	assertEquals("Exception for \"" + expression + "\"", exception, e.getClass());
-        	Resource.Diagnostic diagnostic = getDiagnostic(csResource);
+           fail("Should not have parsed \"" + expression + "\"");
+       } catch (ParserException e) {
+       	assertEquals("Exception for \"" + expression + "\"", exception, e.getClass());
+       	Resource.Diagnostic diagnostic = getDiagnostic(csResource);
 //			assertNoException(diagnostic, ClassCastException.class);
-//        	assertNoException(diagnostic, NullPointerException.class);
-//        	assertEquals("Severity for \"" + expression + "\"", severity, diagnostic.getSeverity());
-        	String expectedMessage = NLS.bind(messageTemplate, bindings);
-        	assertEquals("Message for \"" + expression + "\"", expectedMessage, diagnostic.getMessage());
-        } catch (IOException e) {
+//       	assertNoException(diagnostic, NullPointerException.class);
+//       	assertEquals("Severity for \"" + expression + "\"", severity, diagnostic.getSeverity());
+       	String expectedMessage = NLS.bind(messageTemplate, bindings);
+       	assertEquals("Message for \"" + expression + "\"", expectedMessage, diagnostic.getMessage());
+       } catch (IOException e) {
 			fail(e.getMessage());
 		} finally {
 			if (csResource != null) {
@@ -259,11 +259,36 @@ public abstract class PivotTestSuite extends PivotTestCase
 			}
 		}	   
 	}
-     
-    protected void assertSemanticErrorQuery(String expression,
-    		 String messageTemplate, Object... bindings) {
-    	 assertBadQuery(SemanticException.class, Diagnostic.ERROR,
-    		 expression, messageTemplate, bindings);	   
+    protected void assertBadQuery2(Class<?> exception, int severity, Object context, String expression, String messageTemplate, Object... bindings) {
+		BaseCSResource csResource = null;
+		try {
+			setHelperContext(helper, context);
+			PivotEnvironment environment = (PivotEnvironment) helper.getEnvironment();
+			MetaModelManager metaModelManager = environment.getMetaModelManager();
+			Type contextClassifier = environment.getContextClassifier();
+			ParserContext classContext = new ClassContext(metaModelManager, null, contextClassifier);
+			csResource = (BaseCSResource) classContext.createBaseResource(expression);
+			PivotUtil.checkResourceErrors(NLS.bind(OCLMessages.ErrorsInResource, expression), csResource);
+			CS2PivotResourceAdapter cs2pivot = CS2PivotResourceAdapter.getAdapter(csResource, metaModelManager);
+			Resource pivotResource = cs2pivot.getPivotResource(csResource);
+			assertNoValidationErrors("Validating", pivotResource);
+			
+			fail("Should not have parsed \"" + expression + "\"");
+		} catch (ParserException e) {
+			assertEquals("Exception for \"" + expression + "\"", exception, e.getClass());
+			Resource.Diagnostic diagnostic = getDiagnostic(csResource);
+//			assertNoException(diagnostic, ClassCastException.class);
+//       	assertNoException(diagnostic, NullPointerException.class);
+//       	assertEquals("Severity for \"" + expression + "\"", severity, diagnostic.getSeverity());
+			String expectedMessage = NLS.bind(messageTemplate, bindings);
+			assertEquals("Message for \"" + expression + "\"", expectedMessage, diagnostic.getMessage());
+		} catch (IOException e) {
+			fail(e.getMessage());
+		} finally {
+			if (csResource != null) {
+				AbstractMetaModelManagerResourceAdapter.disposeAll(csResource);
+			}
+		}	   
 	}
 	
 	/**
@@ -678,6 +703,14 @@ public abstract class PivotTestSuite extends PivotTestCase
 			return null;
 		}
 	}
+    
+    
+	protected void assertSemanticErrorQuery(String expression, String messageTemplate, Object... bindings) {
+		assertBadQuery(SemanticException.class, Diagnostic.ERROR, expression, messageTemplate, bindings);	   
+	}
+	protected void assertSemanticErrorQuery2(Object context, String expression, String messageTemplate, Object... bindings) {
+		assertBadQuery2(SemanticException.class, Diagnostic.ERROR, context, expression, messageTemplate, bindings);	   
+	}
 	 
 	/**
 	 * Assert that an expression cannot be used as a query, because an exception is thrown
@@ -1021,18 +1054,8 @@ public abstract class PivotTestSuite extends PivotTestCase
 		return result;
 	}
 
-	protected Value evaluate(OCLHelper aHelper, Object context,
-            String expression) throws ParserException {
-		if (context instanceof EObject) {
-			EClass eClass = ((EObject)context).eClass();
-			Type pivotType = metaModelManager.getPivotType(eClass.getName());
-			if (pivotType == null) {
-				Resource resource = eClass.eResource();
-				Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(resource, metaModelManager);
-				pivotType = ecore2Pivot.getCreated(Type.class, eClass);
-			}
-			aHelper.setContext(pivotType);
-		}
+	protected Value evaluate(OCLHelper aHelper, Object context, String expression) throws ParserException {
+		setHelperContext(aHelper, context);
 		ExpressionInOCL query = aHelper.createQuery(expression);
 //        @SuppressWarnings("unused")
 //		String s = query.toString();
@@ -1277,6 +1300,23 @@ public abstract class PivotTestSuite extends PivotTestCase
         resourceSet.getResources().add(resource);					// FIXME UML needs this
         resourceSet.getPackageRegistry().put(nsUri, pkg);			//  whereas Ecore needs this
         return pkg;
+	}
+
+	protected void setHelperContext(OCLHelper aHelper, Object context) throws ParserException {
+		if (context instanceof Type) {
+		   	Metaclass metaclass = metaModelManager.getMetaclass((Type)context);
+			aHelper.setContext(metaclass);
+		}
+		else if (context instanceof Element) {
+			EClass eClass = ((Element)context).eClass();
+			Type pivotType = metaModelManager.getPivotType(eClass.getName());
+			aHelper.setContext(pivotType);
+		}
+		else if (context instanceof EObject) {
+			EClass eClass = ((EObject)context).eClass();
+			Type pivotType = metaModelManager.getPivotOf(Type.class, eClass);
+			aHelper.setContext(pivotType);
+		}
 	}
 	
 	@Override

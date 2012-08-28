@@ -101,13 +101,25 @@ public class PivotInstaller
 					hasDelegates = true;
 				}
 			}
-			for (Operation anOperation : metaModelManager.getMemberOperations(pivotType, null)) {
+			for (Operation anOperation : metaModelManager.getMemberOperations(pivotType, false)) {
 				EOperation eOperation = (EOperation)anOperation.getETarget();
 				if (eOperation != null) {
 					Pivot2Ecore.installDelegate(metaModelManager, eOperation);
 				}
 			}
-			for (Property aProperty : metaModelManager.getMemberProperties(pivotType, null)) {
+			for (Operation anOperation : metaModelManager.getMemberOperations(pivotType, true)) {
+				EOperation eOperation = (EOperation)anOperation.getETarget();
+				if (eOperation != null) {
+					Pivot2Ecore.installDelegate(metaModelManager, eOperation);
+				}
+			}
+			for (Property aProperty : metaModelManager.getMemberProperties(pivotType, false)) {
+				EStructuralFeature eFeature = (EStructuralFeature)aProperty.getETarget();
+				if (eFeature != null) {
+					Pivot2Ecore.installDelegate(metaModelManager, eFeature);
+				}
+			}
+			for (Property aProperty : metaModelManager.getMemberProperties(pivotType, true)) {
 				EStructuralFeature eFeature = (EStructuralFeature)aProperty.getETarget();
 				if (eFeature != null) {
 					Pivot2Ecore.installDelegate(metaModelManager, eFeature);

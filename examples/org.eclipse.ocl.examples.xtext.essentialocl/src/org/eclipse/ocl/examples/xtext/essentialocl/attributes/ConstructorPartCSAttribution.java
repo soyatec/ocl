@@ -39,7 +39,7 @@ public class ConstructorPartCSAttribution extends AbstractAttribution
 			if (pivot != null) {
 				Type type = pivot.getType();
 				if (type != null) {
-					environmentView.addAllProperties(type, Boolean.FALSE);
+					environmentView.addAllProperties(type, false);
 				}
 			}
 			return null;

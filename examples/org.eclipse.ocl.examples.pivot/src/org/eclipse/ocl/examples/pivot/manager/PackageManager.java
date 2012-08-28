@@ -421,8 +421,8 @@ public class PackageManager implements PackageServerParent
 				else if ((superTypeServer instanceof MetaclassServer) && (superTemplateArgumentList.size() == 1)) {
 					ParameterableElement templateArgument = superTemplateArgumentList.get(0);
 					if (templateArgument instanceof Type) {
-						Type specializedSuperType = ((MetaclassServer)superTypeServer).getSpecializedType((Type)templateArgument);
-						specializedClass.getSuperClass().add(specializedSuperType);
+						Type superMetaclass = ((MetaclassServer)superTypeServer).getMetaclass((Type)templateArgument);
+						specializedClass.getSuperClass().add(superMetaclass);
 					}
 				}
 				else if (superTypeServer instanceof TemplateableTypeServer) {

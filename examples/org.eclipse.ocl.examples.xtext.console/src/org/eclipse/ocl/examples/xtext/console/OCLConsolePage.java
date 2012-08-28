@@ -25,7 +25,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
@@ -56,14 +55,17 @@ import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
-import org.eclipse.ocl.examples.pivot.context.EClassContext;
+import org.eclipse.ocl.examples.pivot.context.EObjectContext;
+import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitorImpl;
 import org.eclipse.ocl.examples.pivot.evaluation.PivotEvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
+import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
+import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironment;
@@ -87,9 +89,9 @@ import org.eclipse.swt.custom.VerifyKeyListener;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.VerifyEvent;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.FontMetrics;
 import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -161,6 +163,12 @@ public class OCLConsolePage extends Page
 		}
 	}
 
+    public static enum ColorChoices
+    {
+    	DEFAULT,
+    	ERROR
+    }
+    
     protected static class ExceptionValue extends InvalidValueImpl
 	{
 		private final String message;
@@ -228,34 +236,36 @@ public class OCLConsolePage extends Page
 			ExpressionInOCL expressionInOCL;
 			try {
 				PivotUtil.checkResourceErrors("", resource); //$NON-NLS-1$
-				expressionInOCL = eClassContext.getExpression(resource);
+				expressionInOCL = parserContext.getExpression(resource);
 			} catch (ParserException e) {
 				value = new ExceptionValue(valueFactory, ConsoleMessages.Result_ParsingFailure, e);
 				return;
 			}
-//			monitor.worked(2);
-			monitor.subTask(ConsoleMessages.Progress_Extent);
-			PivotEnvironmentFactory envFactory = new PivotEnvironmentFactory(null, metaModelManager);
-			PivotEnvironment environment = envFactory.createEnvironment();
-			PivotEvaluationEnvironment evaluationEnvironment = envFactory.createEvaluationEnvironment();
-			Value contextValue = valueFactory.valueOf(contextObject);
-			evaluationEnvironment.add(expressionInOCL.getContextVariable(), contextValue);
-//			if (modelManager == null) {
-				// let the evaluation environment create one
-				@NonNull DomainModelManager modelManager2 = modelManager = evaluationEnvironment.createModelManager(contextObject);
-//			}
-			monitor.worked(2);
-			monitor.subTask(ConsoleMessages.Progress_Evaluating);
-			try {
-//				metaModelManager.setMonitor(monitor);
-				EvaluationVisitor evaluationVisitor = new CancelableEvaluationVisitor(monitor, environment, evaluationEnvironment, modelManager2);
-		        value = evaluationVisitor.visitExpressionInOCL(expressionInOCL);
-			} catch (EvaluationHaltedException e) {
-				value = new ExceptionValue(valueFactory, ConsoleMessages.Result_EvaluationTerminated, null);
-			} catch (InvalidEvaluationException e) {
-				value = new ExceptionValue(valueFactory, ConsoleMessages.Result_EvaluationFailure, e);
-			} finally {
-//				metaModelManager.setMonitor(null);
+			if (expressionInOCL != null) {
+	//			monitor.worked(2);
+				monitor.subTask(ConsoleMessages.Progress_Extent);
+				PivotEnvironmentFactory envFactory = new PivotEnvironmentFactory(null, metaModelManager);
+				PivotEnvironment environment = envFactory.createEnvironment();
+				PivotEvaluationEnvironment evaluationEnvironment = envFactory.createEvaluationEnvironment();
+				Value contextValue = valueFactory.valueOf(contextObject);
+				evaluationEnvironment.add(expressionInOCL.getContextVariable(), contextValue);
+	//			if (modelManager == null) {
+					// let the evaluation environment create one
+					@NonNull DomainModelManager modelManager2 = modelManager = evaluationEnvironment.createModelManager(contextObject);
+	//			}
+				monitor.worked(2);
+				monitor.subTask(ConsoleMessages.Progress_Evaluating);
+				try {
+	//				metaModelManager.setMonitor(monitor);
+					EvaluationVisitor evaluationVisitor = new CancelableEvaluationVisitor(monitor, environment, evaluationEnvironment, modelManager2);
+			        value = evaluationVisitor.visitExpressionInOCL(expressionInOCL);
+				} catch (EvaluationHaltedException e) {
+					value = new ExceptionValue(valueFactory, ConsoleMessages.Result_EvaluationTerminated, null);
+				} catch (InvalidEvaluationException e) {
+					value = new ExceptionValue(valueFactory, ConsoleMessages.Result_EvaluationFailure, e);
+				} finally {
+	//				metaModelManager.setMonitor(null);
+				}
 			}
 			monitor.worked(4);
 		}
@@ -340,7 +350,6 @@ public class OCLConsolePage extends Page
     
 	private final OCLConsole console;
 	private Composite page;
-	private ModelingLevel modelingLevel = ModelingLevel.M2;
 
 	private ITextViewer output;
 	private ColorManager colorManager;
@@ -352,7 +361,7 @@ public class OCLConsolePage extends Page
 	private ISelectionService selectionService;
 	private ISelectionListener selectionListener;
 	private EObject contextObject;
-	private EClassContext eClassContext;
+	private ParserContext parserContext;
 	
 //	private final CancelableMetaModelManager metaModelManager;
 	private  MetaModelManager nullMetaModelManager = null;
@@ -404,10 +413,11 @@ public class OCLConsolePage extends Page
 	 * Initializes me.
 	 * @param oclConsole 
 	 */
-	OCLConsolePage(OCLConsole console) {
+	protected OCLConsolePage(OCLConsole console) {
 		super();
 //		this.metaModelManager = new CancelableMetaModelManager();
 		this.console = console;
+		StandardLibraryContribution.REGISTRY.put(MetaModelManager.DEFAULT_OCL_STDLIB_URI, new OCLstdlib.Cloner());
 	}
 
 	/**
@@ -450,7 +460,7 @@ public class OCLConsolePage extends Page
 	 * @param color the color to print the text with
 	 * @param bold whether to print the text bold
 	 */
-	private void append(String text, Color color, boolean bold) {
+	protected void append(String text, RGB rgb, boolean bold) {
 		
 		IDocument doc = getDocument();
 		try {
@@ -468,7 +478,7 @@ public class OCLConsolePage extends Page
 			StyleRange style = new StyleRange();
 			style.start = offset;
 			style.length = length;
-			style.foreground = color;
+			style.foreground = colorManager.getColor(rgb);
 			
 			if (bold) {
 				style.fontStyle = SWT.BOLD;
@@ -685,7 +695,7 @@ public class OCLConsolePage extends Page
 	 * @param message the error message to print
 	 */
 	private void error(String message) {
-		append(message, colorManager.getColor(ColorManager.OUTPUT_ERROR), false);
+		append(message, ColorManager.OUTPUT_ERROR, false);
 		scrollText();
 	}
 	
@@ -698,7 +708,7 @@ public class OCLConsolePage extends Page
 	 * @return <code>true</code> on successful evaluation; <code>false</code>
 	 *    if the expression failed to parse or evaluate
 	 */
-	boolean evaluate(final String expression) {        
+	protected boolean evaluate(final String expression) {        
 //		if (contextObject == null) {
 //			error(OCLInterpreterMessages.console_noContext);
 //			return false;
@@ -717,65 +727,51 @@ public class OCLConsolePage extends Page
 //	        ConstraintKind kind = modelingLevel.setContext(helper, context, oclFactory);
 				
 			IDocument doc = getDocument();
-			Color defaultColor = colorManager.getColor(ColorManager.DEFAULT);
-            Color resultsColor = colorManager.getColor(ColorManager.OUTPUT_RESULTS);
-            Color errorColor = colorManager.getColor(ColorManager.OUTPUT_ERROR);
 				
             if (doc.getLength() > 0) {
 				// separate previous output by a blank line
-				append("", defaultColor, false); //$NON-NLS-1$
+				append("", ColorManager.DEFAULT, false); //$NON-NLS-1$
 			}
 			
-			append(ConsoleMessages.Heading_Evaluating, defaultColor, true);
-			append(expression, defaultColor, false);
-			append(ConsoleMessages.Heading_Results, defaultColor, true);
+			append(ConsoleMessages.Heading_Evaluating, ColorManager.DEFAULT, true);
+			append(expression, ColorManager.DEFAULT, false);
+			append(ConsoleMessages.Heading_Results, ColorManager.DEFAULT, true);
             
-            switch (modelingLevel) {
-                case M2:
-        			final BaseDocument editorDocument = getEditorDocument();
-        			Value value = null;
-        			try {
-        				value = editorDocument.readOnly(new IUnitOfWork<Value, XtextResource>() {
- 
-						public Value exec(XtextResource state) throws Exception {
-							assert state != null;
-							IProgressService progressService = PlatformUI.getWorkbench().getProgressService();
-							EvaluationRunnable runnable = new EvaluationRunnable((BaseResource) state, expression);
-							progressService.busyCursorWhile(runnable);
-			       			return runnable.getValue();
-						}});
-           			}
-        			catch (Exception e) {
-        				append(e.getMessage(), errorColor, false);
-        			}
-        			if (value instanceof ExceptionValue) {
-        				append(((ExceptionValue)value).getMessage(), errorColor, true);
-        				append(String.valueOf(value), errorColor, false);
-        			}
-        			else if (value != null) {
-        				CollectionValue collectionValue = value.isCollectionValue();
-						if (collectionValue != null) {
-							for (Value elementValue : collectionValue) {
-	        					append(String.valueOf(elementValue), resultsColor, false);
-	        				}
-						}
-	        			else {
-	        				append(String.valueOf(value), resultsColor, false);
-	        			}
-        			}
-        			else {
-        				append(String.valueOf(value), errorColor, false);
-        			}
-                	scrollText();
-                    break;
-                case M1:
-//                    helper.createConstraint(kind, expression);
-                    
-                    // just report a successful parse
-                	append(ConsoleMessages.Result_Parsed, resultsColor, false);
-                	scrollText();
-                    break;
-            }
+        	final BaseDocument editorDocument = getEditorDocument();
+        	Value value = null;
+        	try {
+        		value = editorDocument.readOnly(new IUnitOfWork<Value, XtextResource>() {
+
+				public Value exec(XtextResource state) throws Exception {
+					assert state != null;
+					IProgressService progressService = PlatformUI.getWorkbench().getProgressService();
+					EvaluationRunnable runnable = new EvaluationRunnable((BaseResource) state, expression);
+					progressService.busyCursorWhile(runnable);
+					return runnable.getValue();
+				}});
+           	}
+        	catch (Exception e) {
+        		append(e.getMessage(), ColorManager.OUTPUT_ERROR, false);
+        	}
+        	if (value instanceof ExceptionValue) {
+        		append(((ExceptionValue)value).getMessage(), ColorManager.OUTPUT_ERROR, true);
+        		append(String.valueOf(value), ColorManager.OUTPUT_ERROR, false);
+        	}
+        	else if (value != null) {
+        		CollectionValue collectionValue = value.isCollectionValue();
+				if (collectionValue != null) {
+					for (Value elementValue : collectionValue) {
+						append(String.valueOf(elementValue), ColorManager.OUTPUT_RESULTS, false);
+	        		}
+				}
+	        	else {
+	        		append(String.valueOf(value), ColorManager.OUTPUT_RESULTS, false);
+	        	}
+        	}
+        	else {
+        		append(String.valueOf(value), ColorManager.OUTPUT_ERROR, false);
+        	}
+            scrollText();
             
 			// store the successfully parsed expression
 			lastOCLExpression = expression;
@@ -929,22 +925,18 @@ public class OCLConsolePage extends Page
 		editorDocument.modify(new IUnitOfWork<Object, XtextResource>()
 		{
 			public Value exec(XtextResource resource) throws Exception {
-				EClassifier contextClassifier = null;
 				Object selectedObject = selected;
 			    if (selectedObject instanceof IOutlineNode) {
 		    	    if (selectedObject instanceof EObjectNode) {
 		                EObjectNode selectedObjectNode = (EObjectNode) selectedObject;
 		                URI eObjectURI = selectedObjectNode.getEObjectURI();
 		        		contextObject = null; // FIXME metaModelManager.loadResource(eObjectURI, null, null);
-		        		contextClassifier = selectedObjectNode.getEClass();
 		    	    }
 		    	    else if (selectedObject instanceof EStructuralFeatureNode) {
 		            	contextObject = null;
-		    	    	contextClassifier = ((EStructuralFeatureNode) selectedObject).getEStructuralFeature().getEContainingClass();
 		    	    }
 		    	    else {
 		            	contextObject = null;
-		    	    	contextClassifier = null;
 		    	    }
 			    }
 			    else {
@@ -953,14 +945,13 @@ public class OCLConsolePage extends Page
 		            }
 		            if (selectedObject instanceof EObject) {
 		            	contextObject = (EObject) selectedObject;
-		            	contextClassifier = contextObject.eClass();
 		            }
 		            else {
 		            	contextObject = null;
-		            	contextClassifier = null;
 		            }
 			    }
 			    MetaModelManager metaModelManager = getMetaModelManager(contextObject);
+		        parserContext = contextObject != null ? new EObjectContext(metaModelManager, null, contextObject) : null;
 			    EssentialOCLCSResource csResource = (EssentialOCLCSResource) resource;
 			    if (csResource != null) {
 					if (contextObject != null) {
@@ -970,10 +961,9 @@ public class OCLConsolePage extends Page
 					if (resourceSet != null) {
 						MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
 					}
-			        editorDocument.setContext(csResource, contextClassifier, null);
+			        csResource.setParserContext(parserContext);
 			    }
-		        console.setSelection(contextClassifier, contextObject);
-		        eClassContext = contextClassifier != null ? new EClassContext(metaModelManager, null, contextClassifier) : null;
+		        console.setSelection(contextObject);
 		        return null;
 			}
 		});

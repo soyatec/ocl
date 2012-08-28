@@ -52,7 +52,6 @@ public interface Visitor<R>
 	
 	@Nullable R visitAnnotation(@NonNull org.eclipse.ocl.examples.pivot.Annotation object);
 	@Nullable R visitAnyType(@NonNull org.eclipse.ocl.examples.pivot.AnyType object);
-	@Nullable R visitAppliedStereotype(@NonNull org.eclipse.ocl.examples.pivot.AppliedStereotype object);
 	@Nullable R visitAssociationClass(@NonNull org.eclipse.ocl.examples.pivot.AssociationClass object);
 	@Nullable R visitAssociationClassCallExp(@NonNull org.eclipse.ocl.examples.pivot.AssociationClassCallExp object);
 	@Nullable R visitBagType(@NonNull org.eclipse.ocl.examples.pivot.BagType object);
@@ -75,6 +74,7 @@ public interface Visitor<R>
 	@Nullable R visitDynamicProperty(@NonNull org.eclipse.ocl.examples.pivot.DynamicProperty object);
 	@Nullable R visitDynamicType(@NonNull org.eclipse.ocl.examples.pivot.DynamicType object);
 	@Nullable R visitElement(@NonNull org.eclipse.ocl.examples.pivot.Element object);
+	@Nullable R visitElementExtension(@NonNull org.eclipse.ocl.examples.pivot.ElementExtension object);
 	@Nullable R visitEnumLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.EnumLiteralExp object);
 	@Nullable R visitEnumeration(@NonNull org.eclipse.ocl.examples.pivot.Enumeration object);
 	@Nullable R visitEnumerationLiteral(@NonNull org.eclipse.ocl.examples.pivot.EnumerationLiteral object);
@@ -127,7 +127,6 @@ public interface Visitor<R>
 	@Nullable R visitState(@NonNull org.eclipse.ocl.examples.pivot.State object);
 	@Nullable R visitStateExp(@NonNull org.eclipse.ocl.examples.pivot.StateExp object);
 	@Nullable R visitStereotype(@NonNull org.eclipse.ocl.examples.pivot.Stereotype object);
-	@Nullable R visitStereotypedProperty(@NonNull org.eclipse.ocl.examples.pivot.StereotypedProperty object);
 	@Nullable R visitStringLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.StringLiteralExp object);
 	@Nullable R visitTemplateBinding(@NonNull org.eclipse.ocl.examples.pivot.TemplateBinding object);
 	@Nullable R visitTemplateParameter(@NonNull org.eclipse.ocl.examples.pivot.TemplateParameter object);

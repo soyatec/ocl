@@ -42,6 +42,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.impl.DynamicEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIException;
@@ -71,6 +72,10 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 			MetaModelManager.addFactory(this);
 		}
 
+		public boolean canHandle(@NonNull EObject eObject) {
+			return (eObject instanceof EClassifier) || (eObject instanceof DynamicEObjectImpl);
+		}
+
 		public boolean canHandle(@NonNull Resource resource) {
 			return isEcore(resource);
 		}
@@ -85,6 +90,10 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 				}
 			}
 			return null;
+		}
+
+		public <T extends NamedElement> T getPivotOf(@NonNull MetaModelManager metaModelManager, @NonNull Class<T> pivotClass, @NonNull EObject eObject) {
+			return metaModelManager.getPivotOfEcore(pivotClass, eObject);
 		}
 
 		public @Nullable Element importFromResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource ecoreResource, @Nullable URI uri) {

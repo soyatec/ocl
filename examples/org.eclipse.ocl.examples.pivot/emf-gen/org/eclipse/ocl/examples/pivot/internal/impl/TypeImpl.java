@@ -52,9 +52,9 @@ import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.Annotation;
-import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -672,6 +672,8 @@ public class TypeImpl
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
+			case PivotPackage.TYPE__EXTENSION:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
 			case PivotPackage.TYPE__OWNED_RULE:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRule()).basicAdd(otherEnd, msgs);
 			case PivotPackage.TYPE__TEMPLATE_BINDING:
@@ -712,8 +714,8 @@ public class TypeImpl
 		{
 			case PivotPackage.TYPE__OWNED_COMMENT:
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
-			case PivotPackage.TYPE__APPLIED_STEREOTYPE:
-				return ((InternalEList<?>)getAppliedStereotype()).basicRemove(otherEnd, msgs);
+			case PivotPackage.TYPE__EXTENSION:
+				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TYPE__OWNED_RULE:
 				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TYPE__OWNED_ANNOTATION:
@@ -765,8 +767,8 @@ public class TypeImpl
 		{
 			case PivotPackage.TYPE__OWNED_COMMENT:
 				return getOwnedComment();
-			case PivotPackage.TYPE__APPLIED_STEREOTYPE:
-				return getAppliedStereotype();
+			case PivotPackage.TYPE__EXTENSION:
+				return getExtension();
 			case PivotPackage.TYPE__NAME:
 				return getName();
 			case PivotPackage.TYPE__OWNED_RULE:
@@ -814,9 +816,9 @@ public class TypeImpl
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
-			case PivotPackage.TYPE__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
-				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
+			case PivotPackage.TYPE__EXTENSION:
+				getExtension().clear();
+				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
 			case PivotPackage.TYPE__NAME:
 				setName((String)newValue);
@@ -882,8 +884,8 @@ public class TypeImpl
 			case PivotPackage.TYPE__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
-			case PivotPackage.TYPE__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
+			case PivotPackage.TYPE__EXTENSION:
+				getExtension().clear();
 				return;
 			case PivotPackage.TYPE__NAME:
 				setName(NAME_EDEFAULT);
@@ -942,8 +944,8 @@ public class TypeImpl
 		{
 			case PivotPackage.TYPE__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
-			case PivotPackage.TYPE__APPLIED_STEREOTYPE:
-				return appliedStereotype != null && !appliedStereotype.isEmpty();
+			case PivotPackage.TYPE__EXTENSION:
+				return extension != null && !extension.isEmpty();
 			case PivotPackage.TYPE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.TYPE__OWNED_RULE:

@@ -37,8 +37,8 @@ public class ClassAttribution extends AbstractAttribution
 		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 		if (targetClass.getOwningTemplateParameter() != null) {
 			Type type = metaModelManager.getOclAnyType(); // WIP use lowerbound
-			environmentView.addAllOperations(type, Boolean.FALSE);
-			environmentView.addAllProperties(type, Boolean.FALSE);
+			environmentView.addAllOperations(type, false);
+			environmentView.addAllProperties(type, false);
 			return null;
 		}
 		if (targetClass.getTemplateBinding().size() == 0) {
@@ -53,32 +53,12 @@ public class ClassAttribution extends AbstractAttribution
 		if (target instanceof Metaclass) {
 			Type instanceType = ((Metaclass)target).getInstanceType();
 			if ((instanceType != null) && (instanceType.getOwningTemplateParameter() == null)) {		// Maybe null
-//				environmentView.addNamedElements(instanceType, metaModelManager.getLocalOperations(instanceType, Boolean.TRUE));
-//				environmentView.addNamedElements(instanceType, metaModelManager.getLocalProperties(instanceType, Boolean.TRUE));
-				environmentView.addAllOperations(instanceType, Boolean.TRUE);
-				environmentView.addAllProperties(instanceType, null /*Boolean.TRUE*/);		// FIXME
+				environmentView.addAllOperations(instanceType, true);
+				environmentView.addAllProperties(instanceType, true);
 			}
 		}
-		environmentView.addAllOperations(targetClass, Boolean.FALSE);
-		environmentView.addAllProperties(targetClass, null);
-//		environmentView.addNamedElements(targetClass, metaModelManager.getLocalOperations(targetClass, Boolean.FALSE));
-//		environmentView.addNamedElements(targetClass, metaModelManager.getLocalProperties(targetClass, Boolean.FALSE));
-//		if (!environmentView.hasFinalResult()) {
-/*			if (target instanceof Metaclass) {
-				Set<Type> alreadyVisitedMetaTypes = new HashSet<Type>();
-				Type instanceType = ((Metaclass)target).getInstanceType();
-				if ((instanceType != null) && (instanceType.getOwningTemplateParameter() == null)) {		// Maybe null
-					environmentView.addAllContents(instanceType, scopeView, instanceType, Boolean.TRUE, alreadyVisitedMetaTypes);
-				}
-			}	// FIXME don't shorten non-static search after static match
-			Set<Type> alreadyVisitedTypes = new HashSet<Type>();
-//			org.eclipse.ocl.examples.pivot.Class unspecializedTarget = PivotUtil.getUnspecializedTemplateableElement(target);	// FIXME
-			for (Type superClass : metaModelManager.getSuperClasses(targetClass)) {
-				if (superClass != null) {
-					environmentView.addAllContents(targetClass, scopeView, superClass, Boolean.FALSE, alreadyVisitedTypes);
-				}
-			}
-//		} */
+		environmentView.addAllOperations(targetClass, false);
+		environmentView.addAllProperties(targetClass, false);
 		return scopeView.getParent();
 	}
 }

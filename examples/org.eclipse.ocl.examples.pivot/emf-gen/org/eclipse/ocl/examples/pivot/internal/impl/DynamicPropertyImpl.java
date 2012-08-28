@@ -17,17 +17,14 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
-
-import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.DynamicProperty;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -177,8 +174,8 @@ public class DynamicPropertyImpl extends ElementImpl implements DynamicProperty
 		{
 			case PivotPackage.DYNAMIC_PROPERTY__OWNED_COMMENT:
 				return getOwnedComment();
-			case PivotPackage.DYNAMIC_PROPERTY__APPLIED_STEREOTYPE:
-				return getAppliedStereotype();
+			case PivotPackage.DYNAMIC_PROPERTY__EXTENSION:
+				return getExtension();
 			case PivotPackage.DYNAMIC_PROPERTY__REFERRED_PROPERTY:
 				if (resolve) return getReferredProperty();
 				return basicGetReferredProperty();
@@ -203,9 +200,9 @@ public class DynamicPropertyImpl extends ElementImpl implements DynamicProperty
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
-			case PivotPackage.DYNAMIC_PROPERTY__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
-				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
+			case PivotPackage.DYNAMIC_PROPERTY__EXTENSION:
+				getExtension().clear();
+				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
 			case PivotPackage.DYNAMIC_PROPERTY__REFERRED_PROPERTY:
 				setReferredProperty((Property)newValue);
@@ -230,8 +227,8 @@ public class DynamicPropertyImpl extends ElementImpl implements DynamicProperty
 			case PivotPackage.DYNAMIC_PROPERTY__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
-			case PivotPackage.DYNAMIC_PROPERTY__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
+			case PivotPackage.DYNAMIC_PROPERTY__EXTENSION:
+				getExtension().clear();
 				return;
 			case PivotPackage.DYNAMIC_PROPERTY__REFERRED_PROPERTY:
 				setReferredProperty((Property)null);
@@ -255,8 +252,8 @@ public class DynamicPropertyImpl extends ElementImpl implements DynamicProperty
 		{
 			case PivotPackage.DYNAMIC_PROPERTY__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
-			case PivotPackage.DYNAMIC_PROPERTY__APPLIED_STEREOTYPE:
-				return appliedStereotype != null && !appliedStereotype.isEmpty();
+			case PivotPackage.DYNAMIC_PROPERTY__EXTENSION:
+				return extension != null && !extension.isEmpty();
 			case PivotPackage.DYNAMIC_PROPERTY__REFERRED_PROPERTY:
 				return referredProperty != null;
 			case PivotPackage.DYNAMIC_PROPERTY__DEFAULT:

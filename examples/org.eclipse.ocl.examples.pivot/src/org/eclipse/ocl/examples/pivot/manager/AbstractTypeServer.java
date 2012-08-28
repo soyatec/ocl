@@ -25,6 +25,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainFragment;
@@ -38,10 +41,13 @@ import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ReflectiveType;
-import org.eclipse.ocl.examples.pivot.AppliedStereotype;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.Iteration;
+import org.eclipse.ocl.examples.pivot.PivotFactory;
+import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.executor.PivotReflectiveFragment;
+import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 import com.google.common.base.Function;
@@ -150,11 +156,6 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		super(DomainUtil.nonNullModel(domainType.getName()), packageServer, computeFlags(domainType));
 		this.packageServer = packageServer;
 		this.packageManager = packageServer.getPackageManager();
-	}
-
-	private void addedAppliedStereotype(AppliedStereotype appliedStereotype) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	void addedMemberOperation(@NonNull DomainOperation pivotOperation) {
@@ -282,7 +283,7 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		}
 	} */
 
-	public @NonNull Iterable<? extends DomainOperation> getAllOperations(@Nullable Boolean selectStatic) {
+	public @NonNull Iterable<? extends DomainOperation> getAllOperations(boolean selectStatic) {
 		Map<String, Map<DomainParameterTypes, List<DomainOperation>>> name2operations2 = name2operations;
 		if (name2operations2 == null) {
 			name2operations2 = initMemberOperations();
@@ -294,18 +295,13 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		@NonNull Iterable<List<DomainOperation>> itListOps = Iterables.concat(itItListOps);
 		@SuppressWarnings("null")
 		@NonNull Iterable<DomainOperation> itOps = Iterables.concat(itListOps);
-		if (selectStatic == null) {
-			return itOps;			
-		}
-		else {
-			@SuppressWarnings("null")
-			@NonNull Iterable<DomainOperation> subItOps = Iterables.filter(itOps, selectStatic ? SELECT_STATIC_OPERATION : REJECT_STATIC_OPERATION);
-			return subItOps;
-		}
+		@SuppressWarnings("null")
+		@NonNull Iterable<DomainOperation> subItOps = Iterables.filter(itOps, selectStatic ? SELECT_STATIC_OPERATION : REJECT_STATIC_OPERATION);
+		return subItOps;
 	}
 	
 
-	public @NonNull Iterable<? extends DomainOperation> getAllOperations(@Nullable Boolean selectStatic, @NonNull String name) {
+	public @NonNull Iterable<? extends DomainOperation> getAllOperations(boolean selectStatic, @NonNull String name) {
 		Map<String, Map<DomainParameterTypes, List<DomainOperation>>> name2operations2 = name2operations;
 		if (name2operations2 == null) {
 			name2operations2 = initMemberOperations();
@@ -316,17 +312,12 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		}
 		@SuppressWarnings("null")
 		@NonNull Iterable<DomainOperation> transform = Iterables.concat(overloads.values()); //, bestOperation);
-		if (selectStatic == null) {
-			return transform;			
-		}
-		else {
-			@SuppressWarnings("null")
-			@NonNull Iterable<DomainOperation> subItOps = Iterables.filter(transform, selectStatic ? SELECT_STATIC_OPERATION : REJECT_STATIC_OPERATION);
-			return subItOps;
-		}
+		@SuppressWarnings("null")
+		@NonNull Iterable<DomainOperation> subItOps = Iterables.filter(transform, selectStatic ? SELECT_STATIC_OPERATION : REJECT_STATIC_OPERATION);
+		return subItOps;
 	}
 
-	public @NonNull Iterable<? extends DomainProperty> getAllProperties(@Nullable Boolean selectStatic) {
+	public @NonNull Iterable<? extends DomainProperty> getAllProperties(boolean selectStatic) {
 		Map<String, List<DomainProperty>> name2properties2 = name2properties;
 		if (name2properties2 == null) {
 			name2properties2 = initMemberProperties();
@@ -338,17 +329,12 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 					return properties.get(0);
 				}
 			});
-		if (selectStatic == null) {
-			return transform;			
-		}
-		else {
-			@SuppressWarnings("null")
-			@NonNull Iterable<DomainProperty> subItOps = Iterables.filter(transform, selectStatic ? SELECT_STATIC_PROPERTY : REJECT_STATIC_PROPERTY);
-			return subItOps;
-		}
+		@SuppressWarnings("null")
+		@NonNull Iterable<DomainProperty> subItOps = Iterables.filter(transform, selectStatic ? SELECT_STATIC_PROPERTY : REJECT_STATIC_PROPERTY);
+		return subItOps;
 	}
 
-	public @NonNull Iterable<? extends DomainProperty> getAllProperties(@Nullable Boolean selectStatic, @NonNull String name) {
+	public @NonNull Iterable<? extends DomainProperty> getAllProperties(boolean selectStatic, @NonNull String name) {
 		Map<String, List<DomainProperty>> name2properties2 = name2properties;
 		if (name2properties2 == null) {
 			name2properties2 = initMemberProperties();
@@ -359,14 +345,9 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		}
 		@SuppressWarnings("null")
 		@NonNull List<DomainProperty> singletonList = Collections.singletonList(partials.get(0));
-		if (selectStatic == null) {
-			return singletonList;			
-		}
-		else {
-			@SuppressWarnings("null")
-			@NonNull Iterable<DomainProperty> subItOps = Iterables.filter(singletonList, selectStatic ? SELECT_STATIC_PROPERTY : REJECT_STATIC_PROPERTY);
-			return subItOps;
-		}
+		@SuppressWarnings("null")
+		@NonNull Iterable<DomainProperty> subItOps = Iterables.filter(singletonList, selectStatic ? SELECT_STATIC_PROPERTY : REJECT_STATIC_PROPERTY);
+		return subItOps;
 	}
 
 	public @NonNull Iterable<? extends DomainInheritance> getAllSuperClasses() {
@@ -563,7 +544,16 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 				}
 				if (superTypeServer != null) {
 					for (DomainType superType : superTypeServer.getPartialTypes()) {
-						if (superType != null) {
+						assert superType != null;
+						if (superType instanceof Type) {
+							Type unspecializedType = PivotUtil.getUnspecializedTemplateableElement((Type) superType);
+							TypeServer unspecializedTypeServer = packageManager.getTypeServer(unspecializedType);
+							for (DomainType unspecializedPartialType : unspecializedTypeServer.getPartialTypes()) {
+								assert unspecializedPartialType != null;
+								initMemberOperationsFrom(unspecializedPartialType);
+							}
+						}
+						else {							
 							initMemberOperationsFrom(superType);
 						}
 					}
@@ -592,16 +582,16 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		// TODO Auto-generated method stub // FIXME Prune occlusions		
 	}
 
-	private @NonNull Map<String, List<DomainProperty>> initMemberProperties() {
+	protected @NonNull Map<String, List<DomainProperty>> initMemberProperties() {
 //		System.out.println("initMemberProperties " + toString());
 		Map<String, List<DomainProperty>> name2properties2 = name2properties;
 		if (name2properties2 == null) {
 			name2properties2 = name2properties = new HashMap<String, List<DomainProperty>>();
-			for (DomainType selfType : getPartialTypes()) {
-				if (selfType != null) {
-					initMemberPropertiesFrom(selfType);
-				}
-			}
+//			for (DomainType selfType : getPartialTypes()) {
+//				if (selfType != null) {
+//					initMemberPropertiesFrom(selfType);
+//				}
+//			}
 			for (DomainInheritance superClass : getAllSuperClasses()) {
 				TypeServer superTypeServer = null;
 				if (superClass instanceof TypeServer) {
@@ -612,7 +602,16 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 				}
 				if (superTypeServer != null) {
 					for (DomainType superType : superTypeServer.getPartialTypes()) {
-						if (superType != null) {
+						assert superType != null;
+						if (superType instanceof Type) {
+							Type unspecializedType = PivotUtil.getUnspecializedTemplateableElement((Type) superType);
+							TypeServer unspecializedTypeServer = packageManager.getTypeServer(unspecializedType);
+							for (DomainType unspecializedPartialType : unspecializedTypeServer.getPartialTypes()) {
+								assert unspecializedPartialType != null;
+								initMemberPropertiesFrom(unspecializedPartialType);
+							}
+						}
+						else {							
 							initMemberPropertiesFrom(superType);
 						}
 					}
@@ -627,9 +626,15 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		return name2properties2;
 	}
 
-	private void initMemberPropertiesFrom(@NonNull DomainType type) {
+	protected void initMemberPropertiesFrom(@NonNull DomainType type) {
 		if (type instanceof Type) {
 			type = PivotUtil.getUnspecializedTemplateableElement((Type) type);
+		}
+		if (type instanceof Type) {
+			for (ElementExtension extension : ((Type)type).getExtension()) {
+				assert extension != null;
+				initStereotypePropertiesFrom((Type)type, extension);
+			}
 		}
 		for (DomainProperty pivotProperty : type.getLocalProperties()) {
 			if (pivotProperty != null) {
@@ -640,6 +645,90 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 
 	protected void initMemberPropertiesPostProcess(@NonNull String name, @NonNull List<DomainProperty> properties) {
 		// TODO Auto-generated method stub // FIXME Prune occlusions		
+	}
+
+	protected void initStereotypePropertiesFrom(@NonNull Type baseType, @NonNull ElementExtension extensionType) {
+		MetaModelManager metaModelManager = packageManager.getMetaModelManager();
+		Map<String, List<DomainProperty>> name2properties2 = name2properties;
+		assert name2properties2 != null;
+		Type stereotype = extensionType.getStereotype();
+		List<Property> newExtensionProperties = new ArrayList<Property>();
+		List<Property> oldExtensionProperties = extensionType.getOwnedAttribute();
+
+		String extensionPropertyName = UML2Pivot.STEREOTYPE_EXTENSION_PREFIX + stereotype.getName();
+		Property extensionProperty = null;
+		List<DomainProperty> partialProperties = name2properties2.get(extensionPropertyName);
+		if (partialProperties == null) {
+			partialProperties = new ArrayList<DomainProperty>();
+			name2properties2.put(extensionPropertyName, partialProperties);
+		}
+		for (DomainProperty partialProperty : partialProperties) {
+			if (partialProperty instanceof Property) {
+				extensionProperty = (Property)partialProperty;
+				break;
+			}
+		}
+		if (extensionProperty == null) {
+			extensionProperty = PivotFactory.eINSTANCE.createProperty();
+			extensionProperty.setName(extensionPropertyName);
+		}
+		extensionProperty.setType(metaModelManager.getMetaclass(extensionType));
+		extensionProperty.setIsRequired(false);
+		extensionProperty.setIsStatic(true);
+		baseType.getOwnedAttribute().add(extensionProperty);
+
+		String basePropertyName = UML2Pivot.STEREOTYPE_BASE_PREFIX + baseType.eClass().getName();
+		Property baseProperty = null;
+		for (Property partialProperty : extensionType.getOwnedAttribute()) {
+			if (partialProperty != null) {
+				baseProperty = partialProperty;
+				break;
+			}
+		}
+		if (baseProperty == null) {
+			baseProperty = PivotFactory.eINSTANCE.createProperty();
+			baseProperty.setName(basePropertyName);
+		}
+		baseProperty.setType(metaModelManager.getMetaclass(baseType));
+		baseProperty.setIsRequired(false);
+		baseProperty.setIsStatic(true);
+		newExtensionProperties.add(baseProperty);
+		
+		baseProperty.setOpposite(extensionProperty);
+		extensionProperty.setOpposite(baseProperty);
+		
+		EObject umlStereotypeApplication = extensionType.getETarget();
+		EClass eClass = umlStereotypeApplication.eClass();
+		for (EStructuralFeature eStructuralFeature : eClass.getEAllStructuralFeatures()) {
+			String featureName = eStructuralFeature.getName();
+			if ((featureName != null) && !featureName.startsWith(UML2Pivot.STEREOTYPE_BASE_PREFIX)
+//			  && (eStructuralFeature instanceof EReference)
+			  && umlStereotypeApplication.eIsSet(eStructuralFeature)) {						// Unset for an applicable stereotype that has not been applied
+				Object umlStereotypedElement = umlStereotypeApplication.eGet(eStructuralFeature);
+//				System.out.println("Element " + featureName + " => " + String.valueOf(umlStereotypedElement));
+				Property referenceProperty = null;
+				for (DomainProperty aProperty : metaModelManager.getAllProperties(stereotype, false, featureName)) {
+					if (aProperty instanceof Property) {
+						referenceProperty = (Property) aProperty;
+						break;
+					}
+				}
+				Property property = PivotUtil.getNamedElement(oldExtensionProperties, featureName);
+				if (property == null) {
+					property = PivotFactory.eINSTANCE.createProperty();
+					property.setName(featureName);
+				}
+				property.setReferredProperty(referenceProperty);
+				if (referenceProperty != null) {
+					property.setDefault(String.valueOf(umlStereotypedElement));
+					property.setIsRequired(referenceProperty.isRequired());
+					property.setIsStatic(referenceProperty.isStatic());
+					property.setType(referenceProperty.getType());
+				}
+				newExtensionProperties.add(property);
+			}
+		}
+		PivotUtil.refreshList(oldExtensionProperties, newExtensionProperties);
 	}
 
 	protected @NonNull Map<String, DomainInheritance> initSuperClasses() {

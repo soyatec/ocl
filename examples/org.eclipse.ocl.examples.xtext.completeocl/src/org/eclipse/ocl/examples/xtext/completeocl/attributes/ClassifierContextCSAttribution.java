@@ -37,8 +37,8 @@ public class ClassifierContextCSAttribution extends AbstractAttribution
 		if (containmentFeature == CompleteOCLCSTPackage.Literals.CONTEXT_DECL_CS__RULES) {
 			Type type = targetElement.getClassifier();
 			if (type != null) {
-				environmentView.addAllOperations(type, Boolean.FALSE);
-				environmentView.addAllProperties(type, Boolean.FALSE);
+				environmentView.addAllOperations(type, false);
+				environmentView.addAllProperties(type, false);
 			}
 		}
 		return scopeView.getParent();

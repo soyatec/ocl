@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.context.EInvocationContext;
+import org.eclipse.ocl.examples.pivot.context.EObjectContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -180,10 +181,18 @@ public class BaseDocument extends XtextDocument implements ConsoleContext
         this.parameters = ecoreParameters;
     }
 
+	@Deprecated
 	public @Nullable Object setContext(@NonNull EssentialOCLCSResource resource, @Nullable EClassifier ecoreContext, @Nullable Map<String, EClassifier> ecoreParameters) {
 		CS2PivotResourceAdapter csAdapter = CS2PivotResourceAdapter.getAdapter(resource, null);
 		MetaModelManager metaModelManager = csAdapter.getMetaModelManager();
 		resource.setParserContext(new EInvocationContext(metaModelManager, resource.getURI(), ecoreContext, ecoreParameters));
+		return null;
+	}
+
+	public @Nullable Object setContext(@NonNull EssentialOCLCSResource resource, @Nullable EObject eObject) {
+		CS2PivotResourceAdapter csAdapter = CS2PivotResourceAdapter.getAdapter(resource, null);
+		MetaModelManager metaModelManager = csAdapter.getMetaModelManager();
+		resource.setParserContext(new EObjectContext(metaModelManager, resource.getURI(), eObject));
 		return null;
 	}
 }

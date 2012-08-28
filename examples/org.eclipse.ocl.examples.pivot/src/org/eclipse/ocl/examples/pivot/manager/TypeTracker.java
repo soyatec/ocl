@@ -58,7 +58,7 @@ class TypeTracker implements Adapter.Internal
 		}
 	}
 
-	void dispose() {
+	public void dispose() {
 		typeServer.disposedTypeTracker(this);
 		if (type instanceof Notifier) {
 			((Notifier)type).eAdapters().remove(this);

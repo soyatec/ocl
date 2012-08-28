@@ -249,7 +249,7 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 		super.resolveLazyCrossReferences(mon);
 	}
 
-	public void setParserContext(@NonNull ParserContext parserContext) {
+	public void setParserContext(@Nullable ParserContext parserContext) {
 		this.parserContext = parserContext;
 	}
 

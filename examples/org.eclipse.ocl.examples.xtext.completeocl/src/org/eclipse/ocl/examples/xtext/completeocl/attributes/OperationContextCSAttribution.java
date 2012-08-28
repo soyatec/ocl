@@ -70,8 +70,8 @@ public class OperationContextCSAttribution extends AbstractAttribution
 					if (element instanceof Type) {
 						Type type = (Type) element;
 //						MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-						environmentView.addAllOperations(type, Boolean.FALSE);
-						environmentView.addAllProperties(type, Boolean.FALSE);
+						environmentView.addAllOperations(type, false);
+						environmentView.addAllProperties(type, false);
 //						if (!environmentView.hasFinalResult()) {
 //							Set<Type> alreadyVisitedTypes = new HashSet<Type>();
 		//					org.eclipse.ocl.examples.pivot.Class unspecializedTarget = PivotUtil.getUnspecializedTemplateableElement(target);	// FIXME

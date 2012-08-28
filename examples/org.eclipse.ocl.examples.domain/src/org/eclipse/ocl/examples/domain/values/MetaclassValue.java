@@ -17,12 +17,12 @@
 package org.eclipse.ocl.examples.domain.values;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 
 public interface MetaclassValue extends TypeValue
 {
 	/**
 	 * @generated NOT
 	 */
-	@NonNull DomainType getInstanceType();
+	@NonNull DomainMetaclass getInstanceType();
 }

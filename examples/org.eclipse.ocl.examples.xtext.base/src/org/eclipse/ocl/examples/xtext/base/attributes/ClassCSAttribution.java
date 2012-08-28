@@ -52,29 +52,16 @@ public class ClassCSAttribution extends AbstractAttribution
 				//				environmentView.addElements(PivotPackage.Literals.TYPE, PivotUtil.getTypeTemplateParameterables(pivot));
 			}
 			else {
-//				MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 				if (pivot instanceof Metaclass) {
 					Type instanceType = ((Metaclass)pivot).getInstanceType();
 					if (instanceType != null) {
-						environmentView.addAllOperations(instanceType, Boolean.TRUE);
-						environmentView.addAllProperties(instanceType, Boolean.TRUE);
+						environmentView.addAllOperations(instanceType, true);
+						environmentView.addAllProperties(instanceType, true);
 					}
 				}
-				environmentView.addAllOperations(pivot, Boolean.FALSE);
-				environmentView.addAllProperties(pivot, Boolean.FALSE);
+				environmentView.addAllOperations(pivot, false);
+				environmentView.addAllProperties(pivot, false);
 				environmentView.addAllTypeTemplateParameterables(pivot);
-//				if (!environmentView.hasFinalResult()) {
-//					if (environmentView.getRequiredType() != BaseCSTPackage.Literals.TYPE_CS) { // Avoid creating bindings for nested type parameters
-//				environmentView.addInheritedContents(pivot, scopeView);
-//				if ((environmentView.getSize() == 0) && (environmentView.getRequiredType() != BaseCSTPackage.Literals.TYPE_CS)) { // Avoid creating bindings for nested type parameters
-//					for (org.eclipse.ocl.examples.pivot.Class superClass : pivot.getSuperClass()) {
-//						ScopeView nestedScopeView = scopeView;
-//	//					if (csType instanceof BoundClassifierCS) {
-//	//						nestedScopeView = new BaseScopeView(scopeView, ((BoundClassifierCS)csType).getBindings());
-//	//					}
-//						environmentView.addElementsOfScope(superClass, nestedScopeView);
-//					}
-//				}
 			}
 		}
 		return scopeView.getParent();

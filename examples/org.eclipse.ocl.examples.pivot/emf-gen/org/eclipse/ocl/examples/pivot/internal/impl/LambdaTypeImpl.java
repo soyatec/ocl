@@ -30,9 +30,9 @@ import org.eclipse.ocl.examples.domain.elements.DomainLambdaType;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.pivot.Annotation;
-import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -224,8 +224,8 @@ public class LambdaTypeImpl extends DataTypeImpl implements LambdaType
 		{
 			case PivotPackage.LAMBDA_TYPE__OWNED_COMMENT:
 				return getOwnedComment();
-			case PivotPackage.LAMBDA_TYPE__APPLIED_STEREOTYPE:
-				return getAppliedStereotype();
+			case PivotPackage.LAMBDA_TYPE__EXTENSION:
+				return getExtension();
 			case PivotPackage.LAMBDA_TYPE__NAME:
 				return getName();
 			case PivotPackage.LAMBDA_TYPE__OWNED_RULE:
@@ -291,9 +291,9 @@ public class LambdaTypeImpl extends DataTypeImpl implements LambdaType
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
-			case PivotPackage.LAMBDA_TYPE__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
-				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
+			case PivotPackage.LAMBDA_TYPE__EXTENSION:
+				getExtension().clear();
+				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
 			case PivotPackage.LAMBDA_TYPE__NAME:
 				setName((String)newValue);
@@ -382,8 +382,8 @@ public class LambdaTypeImpl extends DataTypeImpl implements LambdaType
 			case PivotPackage.LAMBDA_TYPE__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
-			case PivotPackage.LAMBDA_TYPE__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
+			case PivotPackage.LAMBDA_TYPE__EXTENSION:
+				getExtension().clear();
 				return;
 			case PivotPackage.LAMBDA_TYPE__NAME:
 				setName(NAME_EDEFAULT);
@@ -464,8 +464,8 @@ public class LambdaTypeImpl extends DataTypeImpl implements LambdaType
 		{
 			case PivotPackage.LAMBDA_TYPE__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
-			case PivotPackage.LAMBDA_TYPE__APPLIED_STEREOTYPE:
-				return appliedStereotype != null && !appliedStereotype.isEmpty();
+			case PivotPackage.LAMBDA_TYPE__EXTENSION:
+				return extension != null && !extension.isEmpty();
 			case PivotPackage.LAMBDA_TYPE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.LAMBDA_TYPE__OWNED_RULE:

@@ -28,8 +28,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
@@ -419,11 +419,14 @@ public class TemplateParameterImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
+			case PivotPackage.TEMPLATE_PARAMETER__EXTENSION:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
 			case PivotPackage.TEMPLATE_PARAMETER__SIGNATURE:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -452,8 +455,8 @@ public class TemplateParameterImpl
 		{
 			case PivotPackage.TEMPLATE_PARAMETER__OWNED_COMMENT:
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
-			case PivotPackage.TEMPLATE_PARAMETER__APPLIED_STEREOTYPE:
-				return ((InternalEList<?>)getAppliedStereotype()).basicRemove(otherEnd, msgs);
+			case PivotPackage.TEMPLATE_PARAMETER__EXTENSION:
+				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TEMPLATE_PARAMETER__SIGNATURE:
 				return basicSetSignature(null, msgs);
 			case PivotPackage.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
@@ -493,8 +496,8 @@ public class TemplateParameterImpl
 		{
 			case PivotPackage.TEMPLATE_PARAMETER__OWNED_COMMENT:
 				return getOwnedComment();
-			case PivotPackage.TEMPLATE_PARAMETER__APPLIED_STEREOTYPE:
-				return getAppliedStereotype();
+			case PivotPackage.TEMPLATE_PARAMETER__EXTENSION:
+				return getExtension();
 			case PivotPackage.TEMPLATE_PARAMETER__SIGNATURE:
 				return getSignature();
 			case PivotPackage.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
@@ -525,9 +528,9 @@ public class TemplateParameterImpl
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
-			case PivotPackage.TEMPLATE_PARAMETER__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
-				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
+			case PivotPackage.TEMPLATE_PARAMETER__EXTENSION:
+				getExtension().clear();
+				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
 			case PivotPackage.TEMPLATE_PARAMETER__SIGNATURE:
 				setSignature((TemplateSignature)newValue);
@@ -560,8 +563,8 @@ public class TemplateParameterImpl
 			case PivotPackage.TEMPLATE_PARAMETER__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
-			case PivotPackage.TEMPLATE_PARAMETER__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
+			case PivotPackage.TEMPLATE_PARAMETER__EXTENSION:
+				getExtension().clear();
 				return;
 			case PivotPackage.TEMPLATE_PARAMETER__SIGNATURE:
 				setSignature((TemplateSignature)null);
@@ -593,8 +596,8 @@ public class TemplateParameterImpl
 		{
 			case PivotPackage.TEMPLATE_PARAMETER__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
-			case PivotPackage.TEMPLATE_PARAMETER__APPLIED_STEREOTYPE:
-				return appliedStereotype != null && !appliedStereotype.isEmpty();
+			case PivotPackage.TEMPLATE_PARAMETER__EXTENSION:
+				return extension != null && !extension.isEmpty();
 			case PivotPackage.TEMPLATE_PARAMETER__SIGNATURE:
 				return getSignature() != null;
 			case PivotPackage.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:

@@ -163,7 +163,7 @@ public class OCLstdlibTests extends XtextTestCase
 		Resource pivotResource = doLoadFromString("string.oclstdlib", testFile);
 		MetaModelManager metaModelManager = MetaModelManager.getAdapter(pivotResource.getResourceSet());
 		AnyType oclAnyType = metaModelManager.getOclAnyType();
-		Iterable<? extends DomainOperation> ownedOperations = metaModelManager.getAllOperations(oclAnyType, null);
+		Iterable<? extends DomainOperation> ownedOperations = metaModelManager.getAllOperations(oclAnyType, false);
 		assertEquals(2, Iterables.size(ownedOperations));		// one from OclAny::=
 		metaModelManager.dispose();
 	}

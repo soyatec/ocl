@@ -18,27 +18,16 @@
 
 package org.eclipse.ocl.examples.pivot.tests;
 
-import java.util.Iterator;
-
-import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
-import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
-import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.OCL;
-import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
-import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.PackageServer;
+import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.PivotResource;
@@ -51,9 +40,14 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 public class StereotypesTest extends PivotTestSuite
 {
 	PivotResource pivotResource;
-    Type helloClass;
-    Type worldClass;
     Type englishClass;
+    Type frenchClass;
+    Type germanClass;
+    Type plainClass;
+    Type englishClassInEnglish;
+    Type inEnglishStereotype;
+    Type inFrenchStereotype;
+    Type inGermanStereotype;
 	
     @Override
     protected void setUp() throws Exception {
@@ -63,73 +57,39 @@ public class StereotypesTest extends PivotTestSuite
 		OCL.initialize(resourceSet);
 		String problem = UML2Pivot.initialize(resourceSet);
 		assertNull(problem);
-		URI testModelURI = getTestModelURI("model/HelloWorld.uml");
+		URI testModelURI = getTestModelURI("model/InternationalizedClasses.uml");
         Resource umlResource = resourceSet.getResource(testModelURI, true);
         pivotResource = ocl.uml2pivot(umlResource);
         Root root = (Root) pivotResource.getContents().get(0);
         org.eclipse.ocl.examples.pivot.Package modelPackage = PivotUtil.getNamedElement(root.getNestedPackage(), "Model");
-        helloClass = PivotUtil.getNamedElement(modelPackage.getOwnedType(), "Hello");
-        worldClass = PivotUtil.getNamedElement(modelPackage.getOwnedType(), "World");
-        PackageServer englishProfile = metaModelManager.getPackageManager().getPackageByURI("http://www.eclipse.org/ocl/examples/EnglishProfile");
-        englishClass = englishProfile.getMemberType("EnglishClass");
+        englishClass = PivotUtil.getNamedElement(modelPackage.getOwnedType(), "EnglishClass");
+        frenchClass = PivotUtil.getNamedElement(modelPackage.getOwnedType(), "FrenchClass");
+        germanClass = PivotUtil.getNamedElement(modelPackage.getOwnedType(), "GermanClass");
+        plainClass = PivotUtil.getNamedElement(modelPackage.getOwnedType(), "PlainClass");
+        PackageServer profile = metaModelManager.getPackageManager().getPackageByURI("http://www.eclipse.org/ocl/examples/Internationalized");
+        inEnglishStereotype = profile.getMemberType("InEnglish");
+        inFrenchStereotype = profile.getMemberType("InFrench");
+        inGermanStereotype = profile.getMemberType("InGerman");
+        englishClassInEnglish = PivotUtil.getNamedElement(englishClass.getExtension(), "EnglishClass$InEnglish");
     }
 
     /**
      * Tests the generic iterate() iterator.
      */
     public void test_stereotypeNavigation() {
-    	assertQueryEquals2(helloClass, englishClass, "self.base_EnglishClass");
-    }
-    
-	protected Object assertQueryEquals2(Object context, Object expected, String expression) {
-		try {
-			Value expectedValue = expected instanceof Value ? (Value)expected : valueFactory.valueOf(expected);
-//			typeManager.addLockedElement(expectedValue.getType());
-			Value value = evaluate2(helper, context, expression);
-//			String expectedAsString = String.valueOf(expected);
-//			String valueAsString = String.valueOf(value);
-			assertEquals(expression, expectedValue, value);
-			// FIXME Following is probably redundant
-			if (expectedValue instanceof OrderedSetValue) {
-				assertTrue(expression, value instanceof OrderedSetValue);
-				Iterator<?> es = ((OrderedSetValue)expectedValue).iterator();
-				Iterator<?> vs = ((OrderedSetValue)value).iterator();
-				while (es.hasNext()) {
-					Object e = es.next();
-					Object v = vs.next();
-					assertEquals(expression, e, v);
-				}
-			}
-			return value;
-		} catch (Exception e) {
-			failOn(expression, e);
-			return null;
-		}
-	}
-
-	protected Value evaluate2(OCLHelper aHelper, Object context,
-            String expression) throws ParserException {
-		if (context instanceof Type) {
-		   	Metaclass metaclass = metaModelManager.getMetaclass((Type)context);
-			aHelper.setContext(metaclass);
-		}
-		else if (context instanceof EObject) {
-			EClass eClass = ((EObject)context).eClass();
-			Type pivotType = metaModelManager.getPivotType(eClass.getName());
-			if (pivotType == null) {
-				Resource resource = eClass.eResource();
-				Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(resource, metaModelManager);
-				pivotType = ecore2Pivot.getCreated(Type.class, eClass);
-			}
-			aHelper.setContext(pivotType);
-		}
-		ExpressionInOCL query = aHelper.createQuery(expression);
-//        @SuppressWarnings("unused")
-//		String s = query.toString();
-        try {
-        	return ocl.evaluate(context, query);
-        } finally {
-			metaModelManager.getPivotResourceSet().getResources().remove(query.eResource());
-		}
+//
+    	assertQueryEquals(englishClass, "EnglishClass", "self.name");
+    	assertQueryEquals(englishClass, metaModelManager.getMetaclass(englishClassInEnglish), "self.extension_InEnglish");
+    	assertQueryEquals(englishClassInEnglish, metaModelManager.getMetaclass(englishClass), "self.base_Class");
+    	assertQueryEquals(englishClass, "EnglishClass$InEnglish", "self.extension_InEnglish.instanceType.name");
+    	assertSemanticErrorQuery2(englishClass, "self.extension_InGerman", OCLMessages.UnresolvedProperty_ERROR_, "extension_InGerman", "Metaclass(Model::EnglishClass)");
+//    	assertSemanticErrorQuery2(englishClass, "self.extension_InEnglish.extension_InEnglish", "extension_InEnglish", "Metaclass(Model::EnglishClass$InEnglish)");
+    	assertQueryEquals(englishClass, metaModelManager.getMetaclass(englishClass), "self.extension_InEnglish.base_Class");
+    	assertQueryEquals(englishClassInEnglish, metaModelManager.getMetaclass(englishClassInEnglish), "self.base_Class.extension_InEnglish");
+    	assertQueryTrue(englishClass, "extension_InEnglish.base_Class = oclType()");
+    	assertQueryTrue(englishClassInEnglish,  "base_Class.extension_InEnglish = oclType()");
+    	assertSemanticErrorQuery2(frenchClass, "self.text", OCLMessages.UnresolvedProperty_ERROR_, "text", "Metaclass(Model::FrenchClass)");
+    	assertQueryEquals(frenchClass, "Merci", "extension_InFrench.instanceType.ownedAttribute->any(name='text').default");
+    	assertQueryTrue(frenchClass, "extension_InFrench.instanceType.ownedAttribute->any(name='text').default = 'Merci'");
     }
 }

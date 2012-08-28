@@ -73,10 +73,6 @@ public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
 		return delegate.visitAnyType(object);
 	}
 
-	public @Nullable R visitAppliedStereotype(@NonNull org.eclipse.ocl.examples.pivot.AppliedStereotype object) {
-		return delegate.visitAppliedStereotype(object);
-	}
-
 	public @Nullable R visitAssociationClass(@NonNull org.eclipse.ocl.examples.pivot.AssociationClass object) {
 		return delegate.visitAssociationClass(object);
 	}
@@ -163,6 +159,10 @@ public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
 
 	public @Nullable R visitElement(@NonNull org.eclipse.ocl.examples.pivot.Element object) {
 		return delegate.visitElement(object);
+	}
+
+	public @Nullable R visitElementExtension(@NonNull org.eclipse.ocl.examples.pivot.ElementExtension object) {
+		return delegate.visitElementExtension(object);
 	}
 
 	public @Nullable R visitEnumLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.EnumLiteralExp object) {
@@ -371,10 +371,6 @@ public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
 
 	public @Nullable R visitStereotype(@NonNull org.eclipse.ocl.examples.pivot.Stereotype object) {
 		return delegate.visitStereotype(object);
-	}
-
-	public @Nullable R visitStereotypedProperty(@NonNull org.eclipse.ocl.examples.pivot.StereotypedProperty object) {
-		return delegate.visitStereotypedProperty(object);
 	}
 
 	public @Nullable R visitStringLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.StringLiteralExp object) {

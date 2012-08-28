@@ -32,7 +32,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.pivot.AnyType;
-import org.eclipse.ocl.examples.pivot.AppliedStereotype;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
@@ -329,13 +329,6 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 		return null;
 	}
 
-	@Override
-	public @Nullable
-	String visitAppliedStereotype(@NonNull AppliedStereotype object) {
-		appendType(object.getReferredType());
-		return null;
-	}
-
 	/**
 	 * Callback for an AssociationClassCallExp visit.
 	 * 
@@ -546,6 +539,12 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 			append(" = ");
 			safeVisit(initExpression);
 		}
+		return null;
+	}
+
+	@Override
+	public String visitElementExtension(@NonNull ElementExtension as) {
+		appendQualifiedName(as.getPackage(), "::", as);
 		return null;
 	}
 

@@ -954,6 +954,12 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryResults(null, "Bag{null, null}", "Bag{3, 4, null, null}->intersection(Bag{null, 2, null})");
 	}
 
+	public void testCollectionIntersectionReturnType() {
+		assertQueryResults(null, "Set{'c'}", "Set{'a'}->intersection(Set{'b'})->including('c')");
+		assertQueryResults(null, "Set{'c'}", "let domainVars: Set(String) = Set{'a'}, whenVars: Set(String) = Set{'b'}, tev: String = 'c' in domainVars->intersection(whenVars)->including(tev)");
+		assertQueryTrue(null, "let domainTopVars: Set(String) = Set{'c'}, domainVars: Set(String) = Set{'a'}, whenVars: Set(String) = Set{'b'}, tev: String = 'c' in domainTopVars = domainVars->intersection(whenVars)->including(tev)");
+	}
+
 	public void testCollectionIsEmpty() {
 		assertQueryTrue(null, "Sequence{}->isEmpty()");
 		assertQueryTrue(null, "Bag{}->isEmpty()");
@@ -1017,9 +1023,9 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 	}
 
 	public void testCollectionElementType() {
-		assertQueryEquals(null, metaModelManager.getOclAnyType(), "Sequence{1, 2.0, '3'}->elementType");
-		assertQueryEquals(null, metaModelManager.getUnlimitedNaturalType(), "Sequence{1, 2, 3}->elementType");
-		assertQueryEquals(null, metaModelManager.getUnlimitedNaturalType(), "Sequence{1, 2, 3}->oclAsType(Collection(Real))->elementType");
+		assertQueryEquals(null, metaModelManager.getOclAnyType(), "Sequence{1, 2.0, '3'}->oclType().elementType");
+		assertQueryEquals(null, metaModelManager.getUnlimitedNaturalType(), "Sequence{1, 2, 3}->oclType().elementType");
+		assertQueryEquals(null, metaModelManager.getUnlimitedNaturalType(), "Sequence{1, 2, 3}->oclAsType(Collection(Real))->oclType().elementType");
 // FIXME fails because common type is Set(T) and then because T is not type-servable and has no OclAny inheritance
 //		assertQueryEquals(null, metaModelManager.getSetType(), "Sequence{Set{1}, Set{2.0}, Set{'3'}}->elementType");
 // FIXME fails because common type is inadequate for implicit collect
@@ -1027,9 +1033,9 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 	}
 
 	public void testCollectionLower() {
-		assertQueryEquals(null, 0, "Sequence{1, 2.0, '3'}->lower");
-		assertQueryEquals(null, 0, "Sequence{1, 2.0, 3}->oclAsType(Collection(Real))->lower");
-		assertQueryEquals(null, 0, "Set{1, 2.0, 3}->oclAsType(Collection(Real)[2..4])->lower"); // no change to dynamic bound
+		assertQueryEquals(null, 0, "Sequence{1, 2.0, '3'}->oclType().lower");
+		assertQueryEquals(null, 0, "Sequence{1, 2.0, 3}->oclAsType(Collection(Real))->oclType().lower");
+		assertQueryEquals(null, 0, "Set{1, 2.0, 3}->oclAsType(Collection(Real)[2..4])->oclType().lower"); // no change to dynamic bound
 	}
 
 	public void testCollectionMax() {
@@ -1625,9 +1631,9 @@ public void testCollectionNotEqualOrderedXUnordered() {
 		assertQueryResults(null, "Sequence{'a', null, 'b', null}", "Sequence{'a', null}->union(Sequence{'b', null})");
 	}
 
-	public void testCollectionIntersectionReturnType() {
-		assertQueryResults(null, "Set{'c'}", "Set{'a'}->intersection(Set{'b'})->including('c')");
-		assertQueryResults(null, "Set{'c'}", "let domainVars: Set(String) = Set{'a'}, whenVars: Set(String) = Set{'b'}, tev: String = 'c' in domainVars->intersection(whenVars)->including(tev)");
-		assertQueryTrue(null, "let domainTopVars: Set(String) = Set{'c'}, domainVars: Set(String) = Set{'a'}, whenVars: Set(String) = Set{'b'}, tev: String = 'c' in domainTopVars = domainVars->intersection(whenVars)->including(tev)");
+	public void testCollectionUpper() {
+		assertQueryEquals(null, valueFactory.getUnlimited(), "Sequence{1, 2.0, '3'}->oclType().upper");
+		assertQueryEquals(null, valueFactory.getUnlimited(), "Sequence{1, 2.0, 3}->oclAsType(Collection(Real))->oclType().upper");
+		assertQueryEquals(null, valueFactory.getUnlimited(), "Set{1, 2.0, 3}->oclAsType(Collection(Real)[2..4])->oclType().upper"); // no change to dynamic bound
 	}
 }

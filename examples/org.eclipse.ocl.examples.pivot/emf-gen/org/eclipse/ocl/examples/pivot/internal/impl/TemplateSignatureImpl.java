@@ -32,8 +32,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
-import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
@@ -222,6 +222,8 @@ public class TemplateSignatureImpl
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
+			case PivotPackage.TEMPLATE_SIGNATURE__EXTENSION:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_PARAMETER:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedParameter()).basicAdd(otherEnd, msgs);
 			case PivotPackage.TEMPLATE_SIGNATURE__TEMPLATE:
@@ -244,8 +246,8 @@ public class TemplateSignatureImpl
 		{
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
-			case PivotPackage.TEMPLATE_SIGNATURE__APPLIED_STEREOTYPE:
-				return ((InternalEList<?>)getAppliedStereotype()).basicRemove(otherEnd, msgs);
+			case PivotPackage.TEMPLATE_SIGNATURE__EXTENSION:
+				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_PARAMETER:
 				return ((InternalEList<?>)getOwnedParameter()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TEMPLATE_SIGNATURE__TEMPLATE:
@@ -281,8 +283,8 @@ public class TemplateSignatureImpl
 		{
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
 				return getOwnedComment();
-			case PivotPackage.TEMPLATE_SIGNATURE__APPLIED_STEREOTYPE:
-				return getAppliedStereotype();
+			case PivotPackage.TEMPLATE_SIGNATURE__EXTENSION:
+				return getExtension();
 			case PivotPackage.TEMPLATE_SIGNATURE__PARAMETER:
 				return getParameter();
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_PARAMETER:
@@ -307,9 +309,9 @@ public class TemplateSignatureImpl
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
-			case PivotPackage.TEMPLATE_SIGNATURE__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
-				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
+			case PivotPackage.TEMPLATE_SIGNATURE__EXTENSION:
+				getExtension().clear();
+				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
 			case PivotPackage.TEMPLATE_SIGNATURE__PARAMETER:
 				getParameter().clear();
@@ -338,8 +340,8 @@ public class TemplateSignatureImpl
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
-			case PivotPackage.TEMPLATE_SIGNATURE__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
+			case PivotPackage.TEMPLATE_SIGNATURE__EXTENSION:
+				getExtension().clear();
 				return;
 			case PivotPackage.TEMPLATE_SIGNATURE__PARAMETER:
 				getParameter().clear();
@@ -365,8 +367,8 @@ public class TemplateSignatureImpl
 		{
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
-			case PivotPackage.TEMPLATE_SIGNATURE__APPLIED_STEREOTYPE:
-				return appliedStereotype != null && !appliedStereotype.isEmpty();
+			case PivotPackage.TEMPLATE_SIGNATURE__EXTENSION:
+				return extension != null && !extension.isEmpty();
 			case PivotPackage.TEMPLATE_SIGNATURE__PARAMETER:
 				return parameter != null && !parameter.isEmpty();
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_PARAMETER:

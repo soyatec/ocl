@@ -17,9 +17,9 @@
 package org.eclipse.ocl.examples.pivot;
 
 import java.util.Map;
+
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotObject;
@@ -38,7 +38,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Element#getOwnedComment <em>Owned Comment</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Element#getAppliedStereotype <em>Applied Stereotype</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Element#getExtension <em>Extension</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,31 +77,33 @@ public interface Element
 	Comment createOwnedComment();
 	
 	/**
-	 * Returns the value of the '<em><b>Applied Stereotype</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.AppliedStereotype}.
+	 * Returns the value of the '<em><b>Extension</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.ElementExtension}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.ocl.examples.pivot.ElementExtension#getBase <em>Base</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Applied Stereotype</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Extension</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Applied Stereotype</em>' containment reference list.
-	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getElement_AppliedStereotype()
-	 * @model containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Element!appliedStereotype'"
+	 * @return the value of the '<em>Extension</em>' containment reference list.
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getElement_Extension()
+	 * @see org.eclipse.ocl.examples.pivot.ElementExtension#getBase
+	 * @model opposite="base" containment="true" ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Element!extension'"
 	 * @generated
 	 */
-	EList<AppliedStereotype> getAppliedStereotype();
+	EList<ElementExtension> getExtension();
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.AppliedStereotype} and appends it to the '<em><b>Applied Stereotype</b></em>' containment reference list.
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.ElementExtension} and appends it to the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.AppliedStereotype}.
-	 * @see #getAppliedStereotype()
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.ElementExtension}.
+	 * @see #getExtension()
 	 * @generated
 	 */
-	AppliedStereotype createAppliedStereotype();
+	ElementExtension createExtension();
 
 	/**
 	 * <!-- begin-user-doc -->

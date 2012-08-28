@@ -119,7 +119,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	{
 		protected final Boolean selectStatic;	// null for static/non-static, true for static, false for non-static
 		
-		public CompleteTypeOperationsIterable(@NonNull Iterable<Type> types, @Nullable Boolean selectStatic) {
+		public CompleteTypeOperationsIterable(@NonNull Iterable<Type> types, boolean selectStatic) {
 			super(types);
 			this.selectStatic = selectStatic;
 		}
@@ -144,7 +144,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	{
 		protected final Boolean selectStatic;	// null for static/non-static, true for static, false for non-static
 		
-		public CompleteClassPropertiesIterable(@NonNull Iterable<Type> types, @Nullable Boolean selectStatic) {
+		public CompleteClassPropertiesIterable(@NonNull Iterable<Type> types, boolean selectStatic) {
 			super(types);
 			this.selectStatic = selectStatic;
 		}
@@ -344,7 +344,13 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	public static interface Factory	// FIXME Support this via an extension point
 	{
 		/**
-		 * Return true if this factory can handle creatio of a Pivot resource from the
+		 * Return true if this factory can handle creation of a Pivot type from the
+		 * available object.
+		 */
+		boolean canHandle(@NonNull EObject eObject);
+
+		/**
+		 * Return true if this factory can handle creation of a Pivot resource from the
 		 * available resource.
 		 */
 		boolean canHandle(@NonNull Resource resource);
@@ -360,6 +366,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		 * Return the URI of an eObject if it can be treated as a Package.
 		 */
 		@Nullable URI getPackageURI(@NonNull EObject eObject);
+
+		<T extends NamedElement> T getPivotOf(@NonNull MetaModelManager metaModelManager, @NonNull Class<T> pivotClass, @NonNull EObject eObject) throws ParserException;
 		
 		/**
 		 * Return the root element in the Pivot resource resulting from import of the available
@@ -1151,12 +1159,12 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return knownConstraints;
 	}
 	
-	public @NonNull Iterable<? extends DomainOperation> getAllOperations(@NonNull DomainType type, @Nullable Boolean selectStatic) {
+	public @NonNull Iterable<? extends DomainOperation> getAllOperations(@NonNull DomainType type, boolean selectStatic) {
 		TypeServer typeServer = packageManager.getTypeServer(type);
 		return typeServer.getAllOperations(selectStatic);
 	}
 	
-	public @NonNull Iterable<? extends DomainOperation> getAllOperations(@NonNull DomainType type, @Nullable Boolean selectStatic, @NonNull String name) {
+	public @NonNull Iterable<? extends DomainOperation> getAllOperations(@NonNull DomainType type, boolean selectStatic, @NonNull String name) {
 		TypeServer typeServer = packageManager.getTypeServer(type);
 		return typeServer.getAllOperations(selectStatic, name);
 	}
@@ -1184,12 +1192,12 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return packageManager.getAllPackages();
 	}
 	
-	public @NonNull Iterable<? extends DomainProperty> getAllProperties(@NonNull DomainType type, @Nullable Boolean selectStatic) {
+	public @NonNull Iterable<? extends DomainProperty> getAllProperties(@NonNull DomainType type, boolean selectStatic) {
 		TypeServer typeServer = packageManager.getTypeServer(type);
 		return typeServer.getAllProperties(selectStatic);
 	}
 	
-	public @NonNull Iterable<? extends DomainProperty> getAllProperties(@NonNull DomainType type, @Nullable Boolean selectStatic, @NonNull String name) {
+	public @NonNull Iterable<? extends DomainProperty> getAllProperties(@NonNull DomainType type, boolean selectStatic, @NonNull String name) {
 		TypeServer typeServer = packageManager.getTypeServer(type);
 		return typeServer.getAllProperties(selectStatic, name);
 	}
@@ -1542,7 +1550,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return lockingAnnotation;
 	}
 
-	public @NonNull Iterable<Operation> getMemberOperations(@NonNull Type type, @Nullable Boolean selectStatic) {
+	public @NonNull Iterable<Operation> getMemberOperations(@NonNull Type type, boolean selectStatic) {
 		if (type.getOwningTemplateParameter() != null) {
 			return EMPTY_OPERATION_LIST;
 		}
@@ -1560,7 +1568,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return this;
 	}
 
-	public @NonNull Iterable<Property> getMemberProperties(@NonNull Type type, @Nullable Boolean selectStatic) {
+	public @NonNull Iterable<Property> getMemberProperties(@NonNull Type type, boolean selectStatic) {
 		if (type.getOwningTemplateParameter() != null) {
 			return EMPTY_PROPERTY_LIST;
 		}
@@ -1571,7 +1579,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 
 	public @NonNull Metaclass getMetaclass(@NonNull DomainType instanceType) {
-		return getMetaclass(getType(instanceType));
+		Type type = getType(instanceType);
+		return getMetaclass((Type)type);
 	}
 
 	public @NonNull Metaclass getMetaclass(@NonNull Type instanceType) {
@@ -1586,8 +1595,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			return metaclassType;	
 		}
 		MetaclassServer typeServer = (MetaclassServer) getTypeServer(metaclassType);
-		Metaclass specializedType = typeServer.getSpecializedType((Type) instanceType);
-		return specializedType;
+		Metaclass metaclass = typeServer.getMetaclass((Type) instanceType);
+		return metaclass;
 	}
 
 	@Override
@@ -1656,6 +1665,17 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			}
 		}
 		return pivotMetaModel;
+	}
+
+	public @Nullable <T extends NamedElement> T getPivotOf(@NonNull Class<T> pivotClass, @Nullable EObject eObject) throws ParserException {
+		if (eObject != null) {
+			for (Factory factory : factoryMap) {
+				if (factory.canHandle(eObject)) {
+					return factory.getPivotOf(this, pivotClass, eObject);
+				}
+			}
+		}
+		return null;
 	}
 
 	public @Nullable <T extends NamedElement> T getPivotOfEcore(@NonNull Class<T> pivotClass, @Nullable EObject eObject) {
@@ -2523,7 +2543,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	/**
 	 * Return all matching operations.
 	 */
-	protected void resolveAllOperations(@NonNull Set<Operation> allOperations, @NonNull Type forType, @Nullable Boolean selectStatic, @NonNull String operationName, @NonNull List<Parameter> parameters) {
+	protected void resolveAllOperations(@NonNull Set<Operation> allOperations, @NonNull Type forType, boolean selectStatic, @NonNull String operationName, @NonNull List<Parameter> parameters) {
 		int iMax = parameters.size();
 		for (DomainOperation candidateOperation : getAllOperations(forType, selectStatic, operationName)) {
 			if (candidateOperation instanceof Operation) {

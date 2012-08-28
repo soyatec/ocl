@@ -5,18 +5,17 @@ Bundle-SymbolicName: org.eclipse.ocl.examples.xtext.tests;singleton:=true
 Bundle-Version: 3.3.0.qualifier
 Bundle-Localization: plugin
 Bundle-Activator: org.eclipse.ocl.examples.xtext.tests.Activator
-Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
+Require-Bundle: org.junit;visibility:=reexport,
+ org.apache.log4j;bundle-version="[1.2.15,2.0.0)",
+ org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.ui;bundle-version="[3.5.0,4.0.0)",
- org.junit;visibility:=reexport,
+ org.eclipse.uml2.uml.resources;bundle-version="[4.0.0,5.0.0)",
  org.eclipse.ocl.ecore;bundle-version="[3.2.0,4.0.0)",
+ org.eclipse.ocl.examples.codegen;bundle-version="[1.0.0,2.0.0)",
  org.eclipse.emf.examples.library,
  org.eclipse.ocl.examples.xtext.completeocl.ui,
+ org.eclipse.ocl.examples.xtext.console,
  org.eclipse.ocl.examples.xtext.oclstdlib.ui,
- org.eclipse.uml2.uml;bundle-version="[4.0.0,5.0.0)",
- org.eclipse.uml2.uml.resources;bundle-version="[4.0.0,5.0.0)",
- org.eclipse.uml2.uml.profile.l2;bundle-version="[1.0.0,2.0.0)",
- org.eclipse.ocl.examples.codegen;bundle-version="[1.0.0,2.0.0)",
- org.apache.log4j;bundle-version="[1.2.15,2.0.0)",
  UML-2.5;resolution:=optional
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

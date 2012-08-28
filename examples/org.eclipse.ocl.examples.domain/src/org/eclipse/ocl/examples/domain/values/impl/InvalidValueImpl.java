@@ -33,6 +33,7 @@ import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.ElementValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.MetaclassValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
@@ -159,6 +160,14 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 			throw exception;
 		}
 		return super.asIntegerValue();
+	}
+
+	@Override
+	public @NonNull MetaclassValue asMetaclassValue() throws InvalidValueException {
+		if (exception != null) {
+			throw exception;
+		}
+		return super.asMetaclassValue();
 	}
 
 	@Override

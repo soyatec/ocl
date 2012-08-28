@@ -126,7 +126,7 @@ public class EnvironmentView
 		}
 	}
 
-	public void addAllOperations(@NonNull Type type, @Nullable Boolean selectStatic) {
+	public void addAllOperations(@NonNull Type type, boolean selectStatic) {
 		if (accepts(PivotPackage.Literals.ITERATION)		// If ITERATION is acceptable then so too is OPERATION
 				&& (requiredType != PivotPackage.Literals.NAMESPACE)) {			// Don't really want operations when looking for NAMESPACE
 			assert metaModelManager.isTypeServeable(type);
@@ -135,19 +135,15 @@ public class EnvironmentView
 			String name2 = name;
 			if (name2 != null) {
 				for (DomainOperation operation : typeServer.getAllOperations(selectStatic, name2)) {
-					if (selectStatic != null) {
-						if (operation.isStatic() == selectStatic.booleanValue()) {
-							addElement(name2, operation);
-						}
+					if ((operation != null) && (operation.isStatic() == selectStatic)) {
+						addElement(name2, operation);
 					}
 				}
 			}
 			else {
 				for (DomainOperation operation : typeServer.getAllOperations(selectStatic)) {
-					if (selectStatic != null) {
-						if (operation.isStatic() == selectStatic.booleanValue()) {
-							addNamedElement(operation);
-						}
+					if ((operation != null) && (operation.isStatic() == selectStatic)) {
+						addNamedElement(operation);
 					}
 				}
 			}
@@ -234,7 +230,7 @@ public class EnvironmentView
 		}
 	}
 	
-	public void addAllProperties(@NonNull Type type, @Nullable Boolean selectStatic) {
+	public void addAllProperties(@NonNull Type type, boolean selectStatic) {
 		if (accepts(PivotPackage.Literals.PROPERTY)
 			&& (requiredType != PivotPackage.Literals.NAMESPACE)) {			// Don't really want properties when looking for NAMESPACE
 			assert metaModelManager.isTypeServeable(type);

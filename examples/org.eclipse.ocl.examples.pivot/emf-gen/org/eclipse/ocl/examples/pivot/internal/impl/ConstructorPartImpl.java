@@ -24,9 +24,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -204,8 +204,8 @@ public class ConstructorPartImpl extends ElementImpl implements ConstructorPart
 		{
 			case PivotPackage.CONSTRUCTOR_PART__OWNED_COMMENT:
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
-			case PivotPackage.CONSTRUCTOR_PART__APPLIED_STEREOTYPE:
-				return ((InternalEList<?>)getAppliedStereotype()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CONSTRUCTOR_PART__EXTENSION:
+				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CONSTRUCTOR_PART__INIT_EXPRESSION:
 				return basicSetInitExpression(null, msgs);
 		}
@@ -224,8 +224,8 @@ public class ConstructorPartImpl extends ElementImpl implements ConstructorPart
 		{
 			case PivotPackage.CONSTRUCTOR_PART__OWNED_COMMENT:
 				return getOwnedComment();
-			case PivotPackage.CONSTRUCTOR_PART__APPLIED_STEREOTYPE:
-				return getAppliedStereotype();
+			case PivotPackage.CONSTRUCTOR_PART__EXTENSION:
+				return getExtension();
 			case PivotPackage.CONSTRUCTOR_PART__REFERRED_PROPERTY:
 				if (resolve) return getReferredProperty();
 				return basicGetReferredProperty();
@@ -250,9 +250,9 @@ public class ConstructorPartImpl extends ElementImpl implements ConstructorPart
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
-			case PivotPackage.CONSTRUCTOR_PART__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
-				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
+			case PivotPackage.CONSTRUCTOR_PART__EXTENSION:
+				getExtension().clear();
+				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
 			case PivotPackage.CONSTRUCTOR_PART__REFERRED_PROPERTY:
 				setReferredProperty((Property)newValue);
@@ -277,8 +277,8 @@ public class ConstructorPartImpl extends ElementImpl implements ConstructorPart
 			case PivotPackage.CONSTRUCTOR_PART__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
-			case PivotPackage.CONSTRUCTOR_PART__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
+			case PivotPackage.CONSTRUCTOR_PART__EXTENSION:
+				getExtension().clear();
 				return;
 			case PivotPackage.CONSTRUCTOR_PART__REFERRED_PROPERTY:
 				setReferredProperty((Property)null);
@@ -302,8 +302,8 @@ public class ConstructorPartImpl extends ElementImpl implements ConstructorPart
 		{
 			case PivotPackage.CONSTRUCTOR_PART__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
-			case PivotPackage.CONSTRUCTOR_PART__APPLIED_STEREOTYPE:
-				return appliedStereotype != null && !appliedStereotype.isEmpty();
+			case PivotPackage.CONSTRUCTOR_PART__EXTENSION:
+				return extension != null && !extension.isEmpty();
 			case PivotPackage.CONSTRUCTOR_PART__REFERRED_PROPERTY:
 				return referredProperty != null;
 			case PivotPackage.CONSTRUCTOR_PART__INIT_EXPRESSION:

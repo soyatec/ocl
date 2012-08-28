@@ -32,6 +32,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.library.executor.ReflectivePackage;
 import org.eclipse.ocl.examples.pivot.AnyType;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.InvalidType;
@@ -357,10 +358,13 @@ public abstract class PackageServer extends ReflectivePackage implements Package
 			else if (pivotType instanceof Metaclass) {
 				typeServer = new MetaclassServer(this, (Metaclass)pivotType);
 			}
+			else if (pivotType instanceof ElementExtension) {
+				typeServer = new ExtensionTypeServer(this, (ElementExtension)pivotType);
+			}
 			else {
 				typeServer = new TemplateableTypeServer(this, pivotType);
 			}
-			if ((pivotType instanceof Type) && ((Type)pivotType).getUnspecializedElement() == null) {
+			if ((pivotType instanceof Type) && (((Type)pivotType).getUnspecializedElement() == null)) {
 				typeServers2.put(name, typeServer);
 			}
 		}

@@ -41,6 +41,11 @@ public class MetaclassValueImpl extends TypeValueImpl implements MetaclassValue
 	public MetaclassValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainMetaclass object) {
 		super(valueFactory, object);
 	}
+
+	@Override
+	public @NonNull MetaclassValue asMetaclassValue() {
+		return this;
+	}
 	
 	@Override
 	public boolean equals(Object that) {
@@ -55,5 +60,15 @@ public class MetaclassValueImpl extends TypeValueImpl implements MetaclassValue
 //		DomainInheritance thisInheritance = object.getInstanceType().getInheritance(standardLibrary); 
 //		DomainInheritance thatInheritance = ((MetaclassValue)that).getInstanceType().getInheritance(standardLibrary); 
 //		return thisInheritance == thatInheritance;
+	}
+
+	@Override
+	public @NonNull DomainMetaclass getInstanceType() {
+		return getObject();
+	}
+
+	@Override
+	public @NonNull DomainMetaclass getObject() {
+		return (DomainMetaclass) object;
 	}
 }

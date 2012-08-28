@@ -25,9 +25,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Annotation;
-import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.MessageType;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -188,8 +188,8 @@ public class MessageTypeImpl
 		{
 			case PivotPackage.MESSAGE_TYPE__OWNED_COMMENT:
 				return getOwnedComment();
-			case PivotPackage.MESSAGE_TYPE__APPLIED_STEREOTYPE:
-				return getAppliedStereotype();
+			case PivotPackage.MESSAGE_TYPE__EXTENSION:
+				return getExtension();
 			case PivotPackage.MESSAGE_TYPE__NAME:
 				return getName();
 			case PivotPackage.MESSAGE_TYPE__OWNED_RULE:
@@ -243,9 +243,9 @@ public class MessageTypeImpl
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
-			case PivotPackage.MESSAGE_TYPE__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
-				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
+			case PivotPackage.MESSAGE_TYPE__EXTENSION:
+				getExtension().clear();
+				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
 			case PivotPackage.MESSAGE_TYPE__NAME:
 				setName((String)newValue);
@@ -317,8 +317,8 @@ public class MessageTypeImpl
 			case PivotPackage.MESSAGE_TYPE__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
-			case PivotPackage.MESSAGE_TYPE__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
+			case PivotPackage.MESSAGE_TYPE__EXTENSION:
+				getExtension().clear();
 				return;
 			case PivotPackage.MESSAGE_TYPE__NAME:
 				setName(NAME_EDEFAULT);
@@ -383,8 +383,8 @@ public class MessageTypeImpl
 		{
 			case PivotPackage.MESSAGE_TYPE__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
-			case PivotPackage.MESSAGE_TYPE__APPLIED_STEREOTYPE:
-				return appliedStereotype != null && !appliedStereotype.isEmpty();
+			case PivotPackage.MESSAGE_TYPE__EXTENSION:
+				return extension != null && !extension.isEmpty();
 			case PivotPackage.MESSAGE_TYPE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.MESSAGE_TYPE__OWNED_RULE:

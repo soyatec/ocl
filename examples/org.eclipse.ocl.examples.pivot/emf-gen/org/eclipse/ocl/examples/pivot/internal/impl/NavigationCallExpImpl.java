@@ -27,9 +27,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Annotation;
-import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.NavigationCallExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -159,8 +159,8 @@ public abstract class NavigationCallExpImpl
 		{
 			case PivotPackage.NAVIGATION_CALL_EXP__OWNED_COMMENT:
 				return getOwnedComment();
-			case PivotPackage.NAVIGATION_CALL_EXP__APPLIED_STEREOTYPE:
-				return getAppliedStereotype();
+			case PivotPackage.NAVIGATION_CALL_EXP__EXTENSION:
+				return getExtension();
 			case PivotPackage.NAVIGATION_CALL_EXP__NAME:
 				return getName();
 			case PivotPackage.NAVIGATION_CALL_EXP__OWNED_RULE:
@@ -201,9 +201,9 @@ public abstract class NavigationCallExpImpl
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
-			case PivotPackage.NAVIGATION_CALL_EXP__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
-				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
+			case PivotPackage.NAVIGATION_CALL_EXP__EXTENSION:
+				getExtension().clear();
+				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__NAME:
 				setName((String)newValue);
@@ -254,8 +254,8 @@ public abstract class NavigationCallExpImpl
 			case PivotPackage.NAVIGATION_CALL_EXP__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
-			case PivotPackage.NAVIGATION_CALL_EXP__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
+			case PivotPackage.NAVIGATION_CALL_EXP__EXTENSION:
+				getExtension().clear();
 				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__NAME:
 				setName(NAME_EDEFAULT);
@@ -302,8 +302,8 @@ public abstract class NavigationCallExpImpl
 		{
 			case PivotPackage.NAVIGATION_CALL_EXP__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
-			case PivotPackage.NAVIGATION_CALL_EXP__APPLIED_STEREOTYPE:
-				return appliedStereotype != null && !appliedStereotype.isEmpty();
+			case PivotPackage.NAVIGATION_CALL_EXP__EXTENSION:
+				return extension != null && !extension.isEmpty();
 			case PivotPackage.NAVIGATION_CALL_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.NAVIGATION_CALL_EXP__OWNED_RULE:

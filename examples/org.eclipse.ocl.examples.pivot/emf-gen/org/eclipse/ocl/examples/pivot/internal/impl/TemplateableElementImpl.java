@@ -29,8 +29,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
@@ -241,6 +241,8 @@ public abstract class TemplateableElementImpl
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
+			case PivotPackage.TEMPLATEABLE_ELEMENT__EXTENSION:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
 			case PivotPackage.TEMPLATEABLE_ELEMENT__TEMPLATE_BINDING:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTemplateBinding()).basicAdd(otherEnd, msgs);
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_TEMPLATE_SIGNATURE:
@@ -263,8 +265,8 @@ public abstract class TemplateableElementImpl
 		{
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_COMMENT:
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
-			case PivotPackage.TEMPLATEABLE_ELEMENT__APPLIED_STEREOTYPE:
-				return ((InternalEList<?>)getAppliedStereotype()).basicRemove(otherEnd, msgs);
+			case PivotPackage.TEMPLATEABLE_ELEMENT__EXTENSION:
+				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TEMPLATEABLE_ELEMENT__TEMPLATE_BINDING:
 				return ((InternalEList<?>)getTemplateBinding()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_TEMPLATE_SIGNATURE:
@@ -284,8 +286,8 @@ public abstract class TemplateableElementImpl
 		{
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_COMMENT:
 				return getOwnedComment();
-			case PivotPackage.TEMPLATEABLE_ELEMENT__APPLIED_STEREOTYPE:
-				return getAppliedStereotype();
+			case PivotPackage.TEMPLATEABLE_ELEMENT__EXTENSION:
+				return getExtension();
 			case PivotPackage.TEMPLATEABLE_ELEMENT__TEMPLATE_BINDING:
 				return getTemplateBinding();
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_TEMPLATE_SIGNATURE:
@@ -310,9 +312,9 @@ public abstract class TemplateableElementImpl
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
-			case PivotPackage.TEMPLATEABLE_ELEMENT__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
-				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
+			case PivotPackage.TEMPLATEABLE_ELEMENT__EXTENSION:
+				getExtension().clear();
+				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
 			case PivotPackage.TEMPLATEABLE_ELEMENT__TEMPLATE_BINDING:
 				getTemplateBinding().clear();
@@ -340,8 +342,8 @@ public abstract class TemplateableElementImpl
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
-			case PivotPackage.TEMPLATEABLE_ELEMENT__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
+			case PivotPackage.TEMPLATEABLE_ELEMENT__EXTENSION:
+				getExtension().clear();
 				return;
 			case PivotPackage.TEMPLATEABLE_ELEMENT__TEMPLATE_BINDING:
 				getTemplateBinding().clear();
@@ -367,8 +369,8 @@ public abstract class TemplateableElementImpl
 		{
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
-			case PivotPackage.TEMPLATEABLE_ELEMENT__APPLIED_STEREOTYPE:
-				return appliedStereotype != null && !appliedStereotype.isEmpty();
+			case PivotPackage.TEMPLATEABLE_ELEMENT__EXTENSION:
+				return extension != null && !extension.isEmpty();
 			case PivotPackage.TEMPLATEABLE_ELEMENT__TEMPLATE_BINDING:
 				return templateBinding != null && !templateBinding.isEmpty();
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_TEMPLATE_SIGNATURE:

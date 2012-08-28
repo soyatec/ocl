@@ -97,6 +97,11 @@ public interface Value
 	/**
 	 * @generated NOT
 	 */
+	@NonNull MetaclassValue asMetaclassValue() throws InvalidValueException;
+
+	/**
+	 * @generated NOT
+	 */
 	@NonNull EObject asNavigableObject() throws InvalidValueException;
 
 	/**

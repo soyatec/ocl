@@ -26,9 +26,9 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Annotation;
-import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.TupleLiteralExp;
 import org.eclipse.ocl.examples.pivot.TupleLiteralPart;
@@ -117,8 +117,8 @@ public class TupleLiteralExpImpl
 		{
 			case PivotPackage.TUPLE_LITERAL_EXP__OWNED_COMMENT:
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
-			case PivotPackage.TUPLE_LITERAL_EXP__APPLIED_STEREOTYPE:
-				return ((InternalEList<?>)getAppliedStereotype()).basicRemove(otherEnd, msgs);
+			case PivotPackage.TUPLE_LITERAL_EXP__EXTENSION:
+				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TUPLE_LITERAL_EXP__OWNED_RULE:
 				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TUPLE_LITERAL_EXP__OWNED_ANNOTATION:
@@ -140,8 +140,8 @@ public class TupleLiteralExpImpl
 		{
 			case PivotPackage.TUPLE_LITERAL_EXP__OWNED_COMMENT:
 				return getOwnedComment();
-			case PivotPackage.TUPLE_LITERAL_EXP__APPLIED_STEREOTYPE:
-				return getAppliedStereotype();
+			case PivotPackage.TUPLE_LITERAL_EXP__EXTENSION:
+				return getExtension();
 			case PivotPackage.TUPLE_LITERAL_EXP__NAME:
 				return getName();
 			case PivotPackage.TUPLE_LITERAL_EXP__OWNED_RULE:
@@ -173,9 +173,9 @@ public class TupleLiteralExpImpl
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
-			case PivotPackage.TUPLE_LITERAL_EXP__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
-				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
+			case PivotPackage.TUPLE_LITERAL_EXP__EXTENSION:
+				getExtension().clear();
+				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
 			case PivotPackage.TUPLE_LITERAL_EXP__NAME:
 				setName((String)newValue);
@@ -214,8 +214,8 @@ public class TupleLiteralExpImpl
 			case PivotPackage.TUPLE_LITERAL_EXP__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
-			case PivotPackage.TUPLE_LITERAL_EXP__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
+			case PivotPackage.TUPLE_LITERAL_EXP__EXTENSION:
+				getExtension().clear();
 				return;
 			case PivotPackage.TUPLE_LITERAL_EXP__NAME:
 				setName(NAME_EDEFAULT);
@@ -250,8 +250,8 @@ public class TupleLiteralExpImpl
 		{
 			case PivotPackage.TUPLE_LITERAL_EXP__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
-			case PivotPackage.TUPLE_LITERAL_EXP__APPLIED_STEREOTYPE:
-				return appliedStereotype != null && !appliedStereotype.isEmpty();
+			case PivotPackage.TUPLE_LITERAL_EXP__EXTENSION:
+				return extension != null && !extension.isEmpty();
 			case PivotPackage.TUPLE_LITERAL_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.TUPLE_LITERAL_EXP__OWNED_RULE:

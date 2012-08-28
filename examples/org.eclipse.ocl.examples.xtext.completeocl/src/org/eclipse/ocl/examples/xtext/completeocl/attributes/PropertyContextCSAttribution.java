@@ -40,8 +40,8 @@ public class PropertyContextCSAttribution extends AbstractAttribution
 			if (property != null) {
 				Type type = property.getOwningType();
 				if (type != null) {
-					environmentView.addAllOperations(type, Boolean.FALSE);
-					environmentView.addAllProperties(type, Boolean.FALSE);
+					environmentView.addAllOperations(type, false);
+					environmentView.addAllProperties(type, false);
 				}
 			}
 		}

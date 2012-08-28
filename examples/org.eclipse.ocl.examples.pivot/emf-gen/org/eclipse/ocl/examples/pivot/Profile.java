@@ -14,7 +14,6 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->

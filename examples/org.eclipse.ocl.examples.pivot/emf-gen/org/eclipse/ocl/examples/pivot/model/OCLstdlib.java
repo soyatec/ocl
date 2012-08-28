@@ -73,14 +73,21 @@ public class OCLstdlib extends XMIResourceImpl
 	 *  This static definition auto-generated from /org.eclipse.ocl.examples.library/model/OCL-2.4.oclstdlib
 	 *  is used as the default when no overriding copy is registered. 
 	 */
-	@SuppressWarnings("null")
 	public static @NonNull OCLstdlib getDefault() {
-		if (INSTANCE == null) {
+		OCLstdlib oclstdlib = INSTANCE;
+		if (oclstdlib == null) {
 			Contents contents = new Contents();
 			Root libraryModel = contents.create("ocl", "ocl", "http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib");
-			INSTANCE = new OCLstdlib(STDLIB_URI, libraryModel);
+			oclstdlib = INSTANCE = new OCLstdlib(STDLIB_URI, libraryModel);
 		}
-		return INSTANCE;
+		return oclstdlib;
+	}
+
+	/**
+	 * Return true if the default OCL standard Library has been created. 
+	 */
+	public static boolean hasDefault() {
+		return INSTANCE != null;
 	}
 
 	/**

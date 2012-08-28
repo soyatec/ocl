@@ -617,7 +617,7 @@ public class EvaluateOclAnyOperationsTest extends PivotSimpleTestSuite
     	assertQueryEquals(null, collectionKindType, "CollectionKind");
     	assertQueryEquals(null, "CollectionKind", "CollectionKind.name");
     	assertQueryEquals(null, getMetaclass(collectionKindType), "CollectionKind.oclType()");
-    	assertQueryEquals(null, 5, "CollectionKind.ownedLiteral->size()");
+    	assertQueryEquals(null, 5, "CollectionKind.allLiterals->size()");
     	assertSemanticErrorQuery("CollectionKind.oclType().ownedLiteral", OCLMessages.UnresolvedProperty_ERROR_, "ownedLiteral", "Metaclass(Metaclass(CollectionKind))");
     	assertQueryResults(null, "Set{CollectionKind::Bag,CollectionKind::Collection,CollectionKind::_'OrderedSet',CollectionKind::_'Sequence',CollectionKind::_'Set'}", "CollectionKind.allInstances()");
     	assertQueryResults(null, "Set{CollectionKind::Bag,CollectionKind::Collection,CollectionKind::OrderedSet,CollectionKind::Sequence,CollectionKind::Set}", "CollectionKind::Set.oclType().allInstances()");
@@ -628,8 +628,6 @@ public class EvaluateOclAnyOperationsTest extends PivotSimpleTestSuite
      * Tests the oclType() operator for Numerics.
      */
     public void test_oclType_Numeric() {
-    	assertSemanticErrorQuery("3.oclType().allInstances()", OCLMessages.UnresolvedOperation_ERROR_, "allInstances", "Metaclass(UnlimitedNatural)");
-//
     	PrimitiveType integerType = metaModelManager.getIntegerType();
     	assertQueryEquals(null, metaModelManager.getUnlimitedNaturalType(), "3.oclType()");
     	assertQueryEquals(null, metaModelManager.getRealType(), "3.0.oclType()");

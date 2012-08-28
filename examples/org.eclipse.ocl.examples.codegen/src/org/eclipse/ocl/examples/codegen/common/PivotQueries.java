@@ -231,7 +231,10 @@ public class PivotQueries
 		ResourceSet resourceSet = type.eResource().getResourceSet();
 		MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
 		LinkedHashSet<Operation> operations = new LinkedHashSet<Operation>();
-		for (Operation operation : metaModelManager.getMemberOperations(type, null)) {
+		for (Operation operation : metaModelManager.getMemberOperations(type, false)) {
+			operations.add(operation);
+		}
+		for (Operation operation : metaModelManager.getMemberOperations(type, true)) {
 			operations.add(operation);
 		}
 //		if (type.getName().equals("MultiplicityElement")) {
@@ -244,7 +247,10 @@ public class PivotQueries
 		ResourceSet resourceSet = type.eResource().getResourceSet();
 		MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
 		LinkedHashSet<Property> properties = new LinkedHashSet<Property>();
-		for (Property property : metaModelManager.getMemberProperties(type, null)) {
+		for (Property property : metaModelManager.getMemberProperties(type, false)) {
+			properties.add(property);
+		}
+		for (Property property : metaModelManager.getMemberProperties(type, true)) {
 			properties.add(property);
 		}
 		return properties;

@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -25,9 +26,9 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Annotation;
-import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Precedence;
@@ -121,8 +122,8 @@ public class LibraryImpl extends PackageImpl implements Library
 		{
 			case PivotPackage.LIBRARY__OWNED_COMMENT:
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
-			case PivotPackage.LIBRARY__APPLIED_STEREOTYPE:
-				return ((InternalEList<?>)getAppliedStereotype()).basicRemove(otherEnd, msgs);
+			case PivotPackage.LIBRARY__EXTENSION:
+				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
 			case PivotPackage.LIBRARY__OWNED_RULE:
 				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.LIBRARY__OWNED_ANNOTATION:
@@ -155,8 +156,8 @@ public class LibraryImpl extends PackageImpl implements Library
 		{
 			case PivotPackage.LIBRARY__OWNED_COMMENT:
 				return getOwnedComment();
-			case PivotPackage.LIBRARY__APPLIED_STEREOTYPE:
-				return getAppliedStereotype();
+			case PivotPackage.LIBRARY__EXTENSION:
+				return getExtension();
 			case PivotPackage.LIBRARY__NAME:
 				return getName();
 			case PivotPackage.LIBRARY__OWNED_RULE:
@@ -204,9 +205,9 @@ public class LibraryImpl extends PackageImpl implements Library
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
-			case PivotPackage.LIBRARY__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
-				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
+			case PivotPackage.LIBRARY__EXTENSION:
+				getExtension().clear();
+				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
 			case PivotPackage.LIBRARY__NAME:
 				setName((String)newValue);
@@ -274,8 +275,8 @@ public class LibraryImpl extends PackageImpl implements Library
 			case PivotPackage.LIBRARY__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
-			case PivotPackage.LIBRARY__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
+			case PivotPackage.LIBRARY__EXTENSION:
+				getExtension().clear();
 				return;
 			case PivotPackage.LIBRARY__NAME:
 				setName(NAME_EDEFAULT);
@@ -335,8 +336,8 @@ public class LibraryImpl extends PackageImpl implements Library
 		{
 			case PivotPackage.LIBRARY__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
-			case PivotPackage.LIBRARY__APPLIED_STEREOTYPE:
-				return appliedStereotype != null && !appliedStereotype.isEmpty();
+			case PivotPackage.LIBRARY__EXTENSION:
+				return extension != null && !extension.isEmpty();
 			case PivotPackage.LIBRARY__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.LIBRARY__OWNED_RULE:

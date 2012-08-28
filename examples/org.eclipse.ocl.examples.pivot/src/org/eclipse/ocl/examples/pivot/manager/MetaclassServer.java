@@ -33,8 +33,13 @@ import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.Type;
 
 /**
- * An MetaclassServer supports one or more merged types as the source for operations, properties or superclasses
+ * A MetaclassServer supports one or more merged types as the source for operations, properties or superclasses
  * and additionally supports their specializations.
+ * <br>
+ * The main MetaclassServer for the OCl Standard Library metaclass type supports noprmal usage.
+ * <br>
+ * Additional Package-specific MetaclassServers support the additional base_XXX, extension_YYY property accesses
+ * associated with the application of profile to types within the package.
  */
 public class MetaclassServer extends ExtensibleTypeServer
 {
@@ -46,14 +51,14 @@ public class MetaclassServer extends ExtensibleTypeServer
 	// FIXME tests fail if keys are weak since GC is too aggressive across tests
 	// The actual types are weak keys so that parameterizations using stale types are garbage collected. 
 	//
-	private @Nullable /*WeakHash*/Map<Type, WeakReference<Metaclass>> specializations = null;
+	private @Nullable /*WeakHash*/Map<Type, WeakReference<Metaclass>> metaclasses = null;
 
-	protected MetaclassServer(@NonNull PackageServer packageServer, @NonNull Metaclass domainType) {
+	public MetaclassServer(@NonNull PackageServer packageServer, @NonNull Metaclass domainType) {
 		super(packageServer, domainType);
 // -- too soon		assert domainType == packageManager.getMetaModelManager().getMetaclassType();
 	}
 	
-	protected @NonNull Metaclass createSpecialization(@NonNull Type type) {
+	protected @NonNull Metaclass createMetaclass(@NonNull Type type) {
 		MetaModelManager metaModelManager = packageManager.getMetaModelManager();
 		Metaclass metaclassType = metaModelManager.getMetaclassType();
 		Metaclass metaclass = PivotFactory.eINSTANCE.createMetaclass();		
@@ -112,33 +117,33 @@ public class MetaclassServer extends ExtensibleTypeServer
 		return metaclass;
 	} */
 
-	public synchronized @NonNull Metaclass getSpecializedType(@NonNull Type type) {
+	public synchronized @NonNull Metaclass getMetaclass(@NonNull Type type) {
 		assert getPivotType() instanceof Metaclass;
 		TemplateSignature templateSignature = getPivotType().getOwnedTemplateSignature();
 		List<TemplateParameter> templateParameters = templateSignature.getParameter();
 		if (templateParameters.size() != 1) {
-			throw new IllegalArgumentException("Incompatible template argument count");
+			throw new IllegalArgumentException("Incompatible metaclass template argument count");
 		}
-		Map<Type, WeakReference<Metaclass>> specializations2 = specializations;
-		if (specializations2 == null) {
+		Map<Type, WeakReference<Metaclass>> metaclasses2 = metaclasses;
+		if (metaclasses2 == null) {
 			synchronized(this) {
-				specializations2 = specializations;
-				if (specializations2 == null) {
-					specializations2 = specializations = new /*Weak*/HashMap<Type, WeakReference<Metaclass>>();
+				metaclasses2 = metaclasses;
+				if (metaclasses2 == null) {
+					metaclasses2 = metaclasses = new /*Weak*/HashMap<Type, WeakReference<Metaclass>>();
 				}
 			}
 		}
-		synchronized (specializations2) {
-			Metaclass specializedType = null;
-			WeakReference<Metaclass> weakReference = specializations2.get(type);
+		synchronized (metaclasses2) {
+			Metaclass metaclass = null;
+			WeakReference<Metaclass> weakReference = metaclasses2.get(type);
 			if (weakReference != null) {
-				specializedType = weakReference.get();
+				metaclass = weakReference.get();
 			}
-			if (specializedType == null) {
-				specializedType = createSpecialization(type);
-				specializations2.put(type, new WeakReference<Metaclass>(specializedType));
+			if (metaclass == null) {
+				metaclass = createMetaclass(type);
+				metaclasses2.put(type, new WeakReference<Metaclass>(metaclass));
 			}
-			return specializedType;
+			return metaclass;
 		}
 	}
 }

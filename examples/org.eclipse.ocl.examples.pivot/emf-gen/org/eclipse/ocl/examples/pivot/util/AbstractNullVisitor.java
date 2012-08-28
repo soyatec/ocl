@@ -52,10 +52,6 @@ public abstract class AbstractNullVisitor<R, C>
 		return null;
 	}
 
-	public @Nullable R visitAppliedStereotype(@NonNull org.eclipse.ocl.examples.pivot.AppliedStereotype object) {
-		return null;
-	}
-
 	public @Nullable R visitAssociationClass(@NonNull org.eclipse.ocl.examples.pivot.AssociationClass object) {
 		return null;
 	}
@@ -141,6 +137,10 @@ public abstract class AbstractNullVisitor<R, C>
 	}
 
 	public @Nullable R visitElement(@NonNull org.eclipse.ocl.examples.pivot.Element object) {
+		return null;
+	}
+
+	public @Nullable R visitElementExtension(@NonNull org.eclipse.ocl.examples.pivot.ElementExtension object) {
 		return null;
 	}
 
@@ -349,10 +349,6 @@ public abstract class AbstractNullVisitor<R, C>
 	}
 
 	public @Nullable R visitStereotype(@NonNull org.eclipse.ocl.examples.pivot.Stereotype object) {
-		return null;
-	}
-
-	public @Nullable R visitStereotypedProperty(@NonNull org.eclipse.ocl.examples.pivot.StereotypedProperty object) {
 		return null;
 	}
 

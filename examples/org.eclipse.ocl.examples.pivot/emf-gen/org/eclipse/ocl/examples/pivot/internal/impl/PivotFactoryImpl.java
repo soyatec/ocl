@@ -29,7 +29,6 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AnyType;
-import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.AssociationClass;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.AssociativityKind;
@@ -50,6 +49,7 @@ import org.eclipse.ocl.examples.pivot.Detail;
 import org.eclipse.ocl.examples.pivot.DynamicElement;
 import org.eclipse.ocl.examples.pivot.DynamicProperty;
 import org.eclipse.ocl.examples.pivot.DynamicType;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
 import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
@@ -91,7 +91,6 @@ import org.eclipse.ocl.examples.pivot.Signal;
 import org.eclipse.ocl.examples.pivot.State;
 import org.eclipse.ocl.examples.pivot.StateExp;
 import org.eclipse.ocl.examples.pivot.Stereotype;
-import org.eclipse.ocl.examples.pivot.StereotypedProperty;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
@@ -164,7 +163,6 @@ public class PivotFactoryImpl
 		{
 			case PivotPackage.ANNOTATION: return (EObject)createAnnotation();
 			case PivotPackage.ANY_TYPE: return (EObject)createAnyType();
-			case PivotPackage.APPLIED_STEREOTYPE: return (EObject)createAppliedStereotype();
 			case PivotPackage.ASSOCIATION_CLASS: return (EObject)createAssociationClass();
 			case PivotPackage.ASSOCIATION_CLASS_CALL_EXP: return (EObject)createAssociationClassCallExp();
 			case PivotPackage.BAG_TYPE: return (EObject)createBagType();
@@ -184,6 +182,7 @@ public class PivotFactoryImpl
 			case PivotPackage.DYNAMIC_ELEMENT: return (EObject)createDynamicElement();
 			case PivotPackage.DYNAMIC_PROPERTY: return (EObject)createDynamicProperty();
 			case PivotPackage.DYNAMIC_TYPE: return (EObject)createDynamicType();
+			case PivotPackage.ELEMENT_EXTENSION: return (EObject)createElementExtension();
 			case PivotPackage.ENUM_LITERAL_EXP: return (EObject)createEnumLiteralExp();
 			case PivotPackage.ENUMERATION: return (EObject)createEnumeration();
 			case PivotPackage.ENUMERATION_LITERAL: return (EObject)createEnumerationLiteral();
@@ -224,7 +223,6 @@ public class PivotFactoryImpl
 			case PivotPackage.STATE: return (EObject)createState();
 			case PivotPackage.STATE_EXP: return (EObject)createStateExp();
 			case PivotPackage.STEREOTYPE: return (EObject)createStereotype();
-			case PivotPackage.STEREOTYPED_PROPERTY: return (EObject)createStereotypedProperty();
 			case PivotPackage.STRING_LITERAL_EXP: return (EObject)createStringLiteralExp();
 			case PivotPackage.TEMPLATE_BINDING: return (EObject)createTemplateBinding();
 			case PivotPackage.TEMPLATE_PARAMETER: return (EObject)createTemplateParameter();
@@ -561,9 +559,10 @@ public class PivotFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AnyType createAnyType() {
-		AnyTypeImpl anyType = new AnyTypeImpl();
-		return anyType;
+	public ElementExtension createElementExtension()
+	{
+		ElementExtensionImpl elementExtension = new ElementExtensionImpl();
+		return elementExtension;
 	}
 
 	/**
@@ -571,10 +570,9 @@ public class PivotFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AppliedStereotype createAppliedStereotype()
-	{
-		AppliedStereotypeImpl appliedStereotype = new AppliedStereotypeImpl();
-		return appliedStereotype;
+	public AnyType createAnyType() {
+		AnyTypeImpl anyType = new AnyTypeImpl();
+		return anyType;
 	}
 
 	/**
@@ -1015,17 +1013,6 @@ public class PivotFactoryImpl
 	{
 		StereotypeImpl stereotype = new StereotypeImpl();
 		return stereotype;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public StereotypedProperty createStereotypedProperty()
-	{
-		StereotypedPropertyImpl stereotypedProperty = new StereotypedPropertyImpl();
-		return stereotypedProperty;
 	}
 
 	/**

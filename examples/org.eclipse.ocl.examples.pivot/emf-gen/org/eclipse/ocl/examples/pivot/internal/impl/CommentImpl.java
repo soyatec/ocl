@@ -24,9 +24,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 
@@ -143,8 +143,8 @@ public class CommentImpl
 		{
 			case PivotPackage.COMMENT__OWNED_COMMENT:
 				return getOwnedComment();
-			case PivotPackage.COMMENT__APPLIED_STEREOTYPE:
-				return getAppliedStereotype();
+			case PivotPackage.COMMENT__EXTENSION:
+				return getExtension();
 			case PivotPackage.COMMENT__BODY:
 				return getBody();
 			case PivotPackage.COMMENT__ANNOTATED_ELEMENT:
@@ -167,9 +167,9 @@ public class CommentImpl
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
-			case PivotPackage.COMMENT__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
-				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
+			case PivotPackage.COMMENT__EXTENSION:
+				getExtension().clear();
+				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
 			case PivotPackage.COMMENT__BODY:
 				setBody((String)newValue);
@@ -194,8 +194,8 @@ public class CommentImpl
 			case PivotPackage.COMMENT__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
-			case PivotPackage.COMMENT__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
+			case PivotPackage.COMMENT__EXTENSION:
+				getExtension().clear();
 				return;
 			case PivotPackage.COMMENT__BODY:
 				setBody(BODY_EDEFAULT);
@@ -218,8 +218,8 @@ public class CommentImpl
 		{
 			case PivotPackage.COMMENT__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
-			case PivotPackage.COMMENT__APPLIED_STEREOTYPE:
-				return appliedStereotype != null && !appliedStereotype.isEmpty();
+			case PivotPackage.COMMENT__EXTENSION:
+				return extension != null && !extension.isEmpty();
 			case PivotPackage.COMMENT__BODY:
 				return BODY_EDEFAULT == null ? body != null : !BODY_EDEFAULT.equals(body);
 			case PivotPackage.COMMENT__ANNOTATED_ELEMENT:

@@ -18,7 +18,6 @@
 
 package org.eclipse.ocl.examples.xtext.console;
 
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -38,17 +37,36 @@ public class OCLConsole
 	extends AbstractConsole {
 
 	private static OCLConsole instance;
-	private OCLConsolePage page;
+//	private OCLConsolePage page;
 	
 	/**
 	 * Initializes me.
 	 */
-	private OCLConsole() {
+	protected OCLConsole() {
 		super(
 			ConsoleMessages.Console_Title,
 			ImageDescriptor.createFromURL(
 				XtextConsolePlugin.getInstance().getBundle().getEntry(
 					"/icons/ocl.gif"))); //$NON-NLS-1$
+	}
+	
+	/**
+	 * Closes me and clears the singleton instance reference, so that it will
+	 * be reinitialized when another console is requested.
+	 */
+	public void close() {
+		try {
+			ConsolePlugin.getDefault().getConsoleManager().removeConsoles(
+				new IConsole[] {this});
+			dispose();
+		} finally {
+			instance = null;
+		}
+	}
+	
+	public IPageBookViewPage createPage(IConsoleView view) {
+		OCLConsolePage page = new OCLConsolePage(this);
+		return page;
 	}
 
 	/**
@@ -65,33 +83,14 @@ public class OCLConsole
 		
 		return instance;
 	}
-	
-	public IPageBookViewPage createPage(IConsoleView view) {
-		page = new OCLConsolePage(this);
-		return page;
-	}
-	
-	public void setTargetMetamodel(TargetMetamodel metamodel) {
-//	    page.setTargetMetamodel(metamodel);
-	}
-	
-	/**
-	 * Closes me and clears the singleton instance reference, so that it will
-	 * be reinitialized when another console is requested.
-	 */
-	public void close() {
-		try {
-			ConsolePlugin.getDefault().getConsoleManager().removeConsoles(
-				new IConsole[] {this});
-			dispose();
-		} finally {
-			instance = null;
-		}
-	}
 
-	public void setSelection(EClassifier contextClassifier, EObject contextObject) {
-		String typeName = contextClassifier != null ? contextClassifier.getName() : "null"; //$NON-NLS-1$
-		String objectName = contextObject != null ? DomainUtil.getLabel(contextObject) : "null"; //$NON-NLS-1$
+	public void setSelection(EObject contextObject) {
+		String typeName = "null"; //$NON-NLS-1$;
+		String objectName = "null"; //$NON-NLS-1$
+		if (contextObject != null) {
+			objectName = DomainUtil.getLabel(contextObject);
+			typeName = contextObject.eClass().getName();				
+		}
 		setName(NLS.bind(ConsoleMessages.Console_TitleWithContext, objectName, typeName));		
 	}
 }

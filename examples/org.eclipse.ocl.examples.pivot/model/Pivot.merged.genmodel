@@ -136,7 +136,7 @@
       </genFeatures>
       <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
           createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//Element/appliedStereotype"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//Element/extension"/>
       </genFeatures>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass">
@@ -150,14 +150,13 @@
       </genFeatures>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass">
-      <ecoreClass href="Pivot.ecore#//AppliedStereotype"/>
+      <ecoreClass href="Pivot.ecore#//ElementExtension"/>
       <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
           propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//AppliedStereotype/referredType"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//ElementExtension/stereotype"/>
       </genFeatures>
-      <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
-          createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//AppliedStereotype/stereotypedProperty"/>
+      <genFeatures xsi:type="genmodel:GenFeature" property="None" notify="false" createChild="false">
+        <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//ElementExtension/base"/>
       </genFeatures>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass" image="false">
@@ -465,16 +464,6 @@
       <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
           propertySortChoices="true">
         <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//AssociationClass/unownedAttribute"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses xsi:type="genmodel:GenClass">
-      <ecoreClass href="Pivot.ecore#//StereotypedProperty"/>
-      <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
-          propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//StereotypedProperty/referredProperty"/>
-      </genFeatures>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="Pivot.ecore#//StereotypedProperty/default"/>
       </genFeatures>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass" image="false">

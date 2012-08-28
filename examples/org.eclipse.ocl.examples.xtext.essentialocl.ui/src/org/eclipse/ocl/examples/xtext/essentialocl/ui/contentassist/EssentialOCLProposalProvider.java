@@ -117,11 +117,11 @@ public class EssentialOCLProposalProvider extends AbstractEssentialOCLProposalPr
 		proposeKeywordAlternatives(ruleCall, context, acceptor, getPrimitiveTypeImage());
 	}
 
-	@Override
+/*	@Override
 	public void createProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("createProposals: " + context.getPrefix());
 		super.createProposals(context, acceptor);
-	}
+	} */
 
 	protected EObject getPathScope(EObject model, ContentAssistContext context) {
 		int offset = context.getOffset();
@@ -184,11 +184,11 @@ public class EssentialOCLProposalProvider extends AbstractEssentialOCLProposalPr
 		return new ClassSensitiveProposalCreator(contentAssistContext, ruleName, getQualifiedNameConverter());
 	}
 
-	@Override
+/*	@Override
 	protected void invokeMethod(String methodName, ICompletionProposalAcceptor acceptor, Object... params) {
 		System.out.println("  invokeMethod: " + methodName);
 		super.invokeMethod(methodName, acceptor, params);
-	}
+	} */
 
 	@Override
 	protected void lookupCrossReference(CrossReference crossReference,
@@ -221,7 +221,7 @@ public class EssentialOCLProposalProvider extends AbstractEssentialOCLProposalPr
 			ICompletionProposalAcceptor acceptor,
 			Predicate<IEObjectDescription> filter,
 			Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
-		System.out.println("    lookupCrossReference: " + reference.getEContainingClass().getName() + "::" + reference.getName());
+//		System.out.println("    lookupCrossReference: " + reference.getEContainingClass().getName() + "::" + reference.getName());
 		super.lookupCrossReference(model, reference, acceptor, filter, proposalFactory);
 	}
 

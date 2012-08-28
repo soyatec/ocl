@@ -25,9 +25,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Annotation;
-import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.SendSignalAction;
 import org.eclipse.ocl.examples.pivot.Signal;
@@ -130,8 +130,8 @@ public class SendSignalActionImpl
 		{
 			case PivotPackage.SEND_SIGNAL_ACTION__OWNED_COMMENT:
 				return getOwnedComment();
-			case PivotPackage.SEND_SIGNAL_ACTION__APPLIED_STEREOTYPE:
-				return getAppliedStereotype();
+			case PivotPackage.SEND_SIGNAL_ACTION__EXTENSION:
+				return getExtension();
 			case PivotPackage.SEND_SIGNAL_ACTION__NAME:
 				return getName();
 			case PivotPackage.SEND_SIGNAL_ACTION__OWNED_RULE:
@@ -161,9 +161,9 @@ public class SendSignalActionImpl
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
-			case PivotPackage.SEND_SIGNAL_ACTION__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
-				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
+			case PivotPackage.SEND_SIGNAL_ACTION__EXTENSION:
+				getExtension().clear();
+				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
 			case PivotPackage.SEND_SIGNAL_ACTION__NAME:
 				setName((String)newValue);
@@ -198,8 +198,8 @@ public class SendSignalActionImpl
 			case PivotPackage.SEND_SIGNAL_ACTION__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
-			case PivotPackage.SEND_SIGNAL_ACTION__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
+			case PivotPackage.SEND_SIGNAL_ACTION__EXTENSION:
+				getExtension().clear();
 				return;
 			case PivotPackage.SEND_SIGNAL_ACTION__NAME:
 				setName(NAME_EDEFAULT);
@@ -231,8 +231,8 @@ public class SendSignalActionImpl
 		{
 			case PivotPackage.SEND_SIGNAL_ACTION__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
-			case PivotPackage.SEND_SIGNAL_ACTION__APPLIED_STEREOTYPE:
-				return appliedStereotype != null && !appliedStereotype.isEmpty();
+			case PivotPackage.SEND_SIGNAL_ACTION__EXTENSION:
+				return extension != null && !extension.isEmpty();
 			case PivotPackage.SEND_SIGNAL_ACTION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.SEND_SIGNAL_ACTION__OWNED_RULE:

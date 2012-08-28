@@ -41,8 +41,8 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
-import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
@@ -263,11 +263,14 @@ public abstract class ParameterableElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
+			case PivotPackage.PARAMETERABLE_ELEMENT__EXTENSION:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNING_TEMPLATE_PARAMETER:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -292,8 +295,8 @@ public abstract class ParameterableElementImpl
 		{
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_COMMENT:
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
-			case PivotPackage.PARAMETERABLE_ELEMENT__APPLIED_STEREOTYPE:
-				return ((InternalEList<?>)getAppliedStereotype()).basicRemove(otherEnd, msgs);
+			case PivotPackage.PARAMETERABLE_ELEMENT__EXTENSION:
+				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNING_TEMPLATE_PARAMETER:
 				return basicSetOwningTemplateParameter(null, msgs);
 			case PivotPackage.PARAMETERABLE_ELEMENT__TEMPLATE_PARAMETER:
@@ -329,8 +332,8 @@ public abstract class ParameterableElementImpl
 		{
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_COMMENT:
 				return getOwnedComment();
-			case PivotPackage.PARAMETERABLE_ELEMENT__APPLIED_STEREOTYPE:
-				return getAppliedStereotype();
+			case PivotPackage.PARAMETERABLE_ELEMENT__EXTENSION:
+				return getExtension();
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter();
 			case PivotPackage.PARAMETERABLE_ELEMENT__TEMPLATE_PARAMETER:
@@ -354,9 +357,9 @@ public abstract class ParameterableElementImpl
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
-			case PivotPackage.PARAMETERABLE_ELEMENT__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
-				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
+			case PivotPackage.PARAMETERABLE_ELEMENT__EXTENSION:
+				getExtension().clear();
+				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNING_TEMPLATE_PARAMETER:
 				setOwningTemplateParameter((TemplateParameter)newValue);
@@ -380,8 +383,8 @@ public abstract class ParameterableElementImpl
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
-			case PivotPackage.PARAMETERABLE_ELEMENT__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
+			case PivotPackage.PARAMETERABLE_ELEMENT__EXTENSION:
+				getExtension().clear();
 				return;
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNING_TEMPLATE_PARAMETER:
 				setOwningTemplateParameter((TemplateParameter)null);
@@ -404,8 +407,8 @@ public abstract class ParameterableElementImpl
 		{
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
-			case PivotPackage.PARAMETERABLE_ELEMENT__APPLIED_STEREOTYPE:
-				return appliedStereotype != null && !appliedStereotype.isEmpty();
+			case PivotPackage.PARAMETERABLE_ELEMENT__EXTENSION:
+				return extension != null && !extension.isEmpty();
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter() != null;
 			case PivotPackage.PARAMETERABLE_ELEMENT__TEMPLATE_PARAMETER:

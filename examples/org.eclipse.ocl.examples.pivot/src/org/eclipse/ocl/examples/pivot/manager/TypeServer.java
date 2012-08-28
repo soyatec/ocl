@@ -33,10 +33,10 @@ public interface TypeServer extends DomainInheritance
 	void dispose();
 	@NonNull Iterable<? extends DomainInheritance> getAllSuperClasses();
 	@NonNull Iterable<? extends DomainInheritance> getAllSuperClasses(@NonNull String className);
-	@NonNull Iterable<? extends DomainOperation> getAllOperations(@Nullable Boolean selectStatic);
-	@NonNull Iterable<? extends DomainOperation> getAllOperations(@Nullable Boolean selectStatic, @NonNull String name);
-	@NonNull Iterable<? extends DomainProperty> getAllProperties(@Nullable Boolean selectStatic);
-	@NonNull Iterable<? extends DomainProperty> getAllProperties(@Nullable Boolean selectStatic, @NonNull String name);
+	@NonNull Iterable<? extends DomainOperation> getAllOperations(boolean selectStatic);
+	@NonNull Iterable<? extends DomainOperation> getAllOperations(boolean selectStatic, @NonNull String name);
+	@NonNull Iterable<? extends DomainProperty> getAllProperties(boolean selectStatic);
+	@NonNull Iterable<? extends DomainProperty> getAllProperties(boolean selectStatic, @NonNull String name);
 	@Nullable DomainOperation getMemberOperation(@NonNull DomainOperation pivotOperation);
 	@Nullable Iterable<? extends DomainOperation> getMemberOperations(@NonNull DomainOperation pivotOperation);
 	@Nullable Iterable<? extends DomainProperty> getMemberProperties(@NonNull DomainProperty pivotProperty);

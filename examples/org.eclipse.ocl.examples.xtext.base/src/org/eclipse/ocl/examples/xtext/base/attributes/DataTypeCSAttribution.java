@@ -35,8 +35,8 @@ public class DataTypeCSAttribution extends AbstractAttribution
 		DataType pivot = PivotUtil.getPivot(DataType.class, targetElement);
 		if (pivot != null) {
 			environmentView.addElements(PivotUtil.getTemplateParameters(pivot));
-			environmentView.addAllProperties(pivot, null);
-			environmentView.addAllOperations(pivot, null);
+			environmentView.addAllProperties(pivot, false);
+			environmentView.addAllOperations(pivot, false);
 		}
 		return scopeView.getParent();
 	}

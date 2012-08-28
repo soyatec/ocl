@@ -39,8 +39,8 @@ public class VoidTypeAttribution extends ClassAttribution
 			for (PackageServer packageServer : Lists.newArrayList(metaModelManager.getAllPackages())) {		// Avoid CME risk
 				for (TypeServer typeServer : packageServer.getMemberTypes()) {
 					Type primaryType = typeServer.getPivotType();
-					environmentView.addAllOperations(primaryType, Boolean.FALSE);
-					environmentView.addAllProperties(primaryType, Boolean.FALSE);
+					environmentView.addAllOperations(primaryType, false);
+					environmentView.addAllProperties(primaryType, false);
 				}
 			}
 		}

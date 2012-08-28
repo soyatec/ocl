@@ -32,6 +32,7 @@ import org.eclipse.ocl.examples.domain.values.CollectionTypeValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.ElementValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.MetaclassValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
@@ -130,6 +131,10 @@ public abstract class ValueImpl implements Value
 
 	public @NonNull IntegerValue asIntegerValue() throws InvalidValueException {
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Integer", getType());
+	}
+
+	public @NonNull MetaclassValue asMetaclassValue() throws InvalidValueException {
+		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Metaclass", getType());
 	}
 
 	public @NonNull EObject asNavigableObject() throws InvalidValueException {

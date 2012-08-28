@@ -95,10 +95,6 @@ public abstract class ExtensibleTypeServer extends AbstractTypeServer
 		return representativeType2;
 	}
 
-	public @NonNull List<TypeTracker> getTypeTrackers() {
-		return trackers;
-	}
-
 	public @NonNull TypeTracker getTypeTracker(@NonNull DomainType pivotType) {
 		for (TypeTracker typeTracker : trackers) {
 			if (typeTracker.getTarget() == pivotType) {
@@ -106,7 +102,6 @@ public abstract class ExtensibleTypeServer extends AbstractTypeServer
 			}
 		}
 		TypeTracker typeTracker = new TypeTracker(this, pivotType);
-		packageManager.addTypeTracker(pivotType, typeTracker);
 //		if (name2operations != null) {
 //			initMemberOperations(pivotType);
 //		}	
@@ -116,7 +111,12 @@ public abstract class ExtensibleTypeServer extends AbstractTypeServer
 		trackers.add(typeTracker);
 //		representativeType = null;		// Force recomputation
 		uninstall();
+		packageManager.addTypeTracker(pivotType, typeTracker);
 		return typeTracker;
+	}
+
+	public @NonNull List<TypeTracker> getTypeTrackers() {
+		return trackers;
 	}
 
 	@Override

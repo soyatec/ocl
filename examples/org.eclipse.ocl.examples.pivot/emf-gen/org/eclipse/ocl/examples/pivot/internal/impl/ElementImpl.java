@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -45,9 +46,9 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
-import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -66,7 +67,7 @@ import org.eclipse.osgi.util.NLS;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ElementImpl#getOwnedComment <em>Owned Comment</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ElementImpl#getAppliedStereotype <em>Applied Stereotype</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ElementImpl#getExtension <em>Extension</em>}</li>
  * </ul>
  * </p>
  *
@@ -86,14 +87,14 @@ public abstract class ElementImpl
 	 */
 	protected EList<Comment> ownedComment;
 	/**
-	 * The cached value of the '{@link #getAppliedStereotype() <em>Applied Stereotype</em>}' containment reference list.
+	 * The cached value of the '{@link #getExtension() <em>Extension</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAppliedStereotype()
+	 * @see #getExtension()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AppliedStereotype> appliedStereotype;
+	protected EList<ElementExtension> extension;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -143,13 +144,13 @@ public abstract class ElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AppliedStereotype> getAppliedStereotype()
+	public EList<ElementExtension> getExtension()
 	{
-		if (appliedStereotype == null)
+		if (extension == null)
 		{
-			appliedStereotype = new EObjectContainmentEList<AppliedStereotype>(AppliedStereotype.class, this, PivotPackage.ELEMENT__APPLIED_STEREOTYPE);
+			extension = new EObjectContainmentWithInverseEList<ElementExtension>(ElementExtension.class, this, PivotPackage.ELEMENT__EXTENSION, PivotPackage.ELEMENT_EXTENSION__BASE);
 		}
-		return appliedStereotype;
+		return extension;
 	}
 
 	/**
@@ -157,11 +158,11 @@ public abstract class ElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AppliedStereotype createAppliedStereotype()
+	public ElementExtension createExtension()
 	{
-		AppliedStereotype newAppliedStereotype = (AppliedStereotype) create(PivotPackage.Literals.APPLIED_STEREOTYPE);
-		getAppliedStereotype().add(newAppliedStereotype);
-		return newAppliedStereotype;
+		ElementExtension newExtension = (ElementExtension) create(PivotPackage.Literals.ELEMENT_EXTENSION);
+		getExtension().add(newExtension);
+		return newExtension;
 	}
 
 	/**
@@ -258,6 +259,23 @@ public abstract class ElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	{
+		switch (featureID)
+		{
+			case PivotPackage.ELEMENT__EXTENSION:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
+		}
+		return eDynamicInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
@@ -265,8 +283,8 @@ public abstract class ElementImpl
 		{
 			case PivotPackage.ELEMENT__OWNED_COMMENT:
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
-			case PivotPackage.ELEMENT__APPLIED_STEREOTYPE:
-				return ((InternalEList<?>)getAppliedStereotype()).basicRemove(otherEnd, msgs);
+			case PivotPackage.ELEMENT__EXTENSION:
+				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
 		}
 		return eDynamicInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -282,8 +300,8 @@ public abstract class ElementImpl
 		{
 			case PivotPackage.ELEMENT__OWNED_COMMENT:
 				return getOwnedComment();
-			case PivotPackage.ELEMENT__APPLIED_STEREOTYPE:
-				return getAppliedStereotype();
+			case PivotPackage.ELEMENT__EXTENSION:
+				return getExtension();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -302,9 +320,9 @@ public abstract class ElementImpl
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
-			case PivotPackage.ELEMENT__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
-				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
+			case PivotPackage.ELEMENT__EXTENSION:
+				getExtension().clear();
+				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -322,8 +340,8 @@ public abstract class ElementImpl
 			case PivotPackage.ELEMENT__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
-			case PivotPackage.ELEMENT__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
+			case PivotPackage.ELEMENT__EXTENSION:
+				getExtension().clear();
 				return;
 		}
 		eDynamicUnset(featureID);
@@ -340,8 +358,8 @@ public abstract class ElementImpl
 		{
 			case PivotPackage.ELEMENT__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
-			case PivotPackage.ELEMENT__APPLIED_STEREOTYPE:
-				return appliedStereotype != null && !appliedStereotype.isEmpty();
+			case PivotPackage.ELEMENT__EXTENSION:
+				return extension != null && !extension.isEmpty();
 		}
 		return eDynamicIsSet(featureID);
 	}

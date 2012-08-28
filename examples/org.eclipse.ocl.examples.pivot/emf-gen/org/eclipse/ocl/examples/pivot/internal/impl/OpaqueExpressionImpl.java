@@ -28,9 +28,9 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Annotation;
-import org.eclipse.ocl.examples.pivot.AppliedStereotype;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -213,8 +213,8 @@ public class OpaqueExpressionImpl
 		{
 			case PivotPackage.OPAQUE_EXPRESSION__OWNED_COMMENT:
 				return getOwnedComment();
-			case PivotPackage.OPAQUE_EXPRESSION__APPLIED_STEREOTYPE:
-				return getAppliedStereotype();
+			case PivotPackage.OPAQUE_EXPRESSION__EXTENSION:
+				return getExtension();
 			case PivotPackage.OPAQUE_EXPRESSION__NAME:
 				return getName();
 			case PivotPackage.OPAQUE_EXPRESSION__OWNED_RULE:
@@ -258,9 +258,9 @@ public class OpaqueExpressionImpl
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
-			case PivotPackage.OPAQUE_EXPRESSION__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
-				getAppliedStereotype().addAll((Collection<? extends AppliedStereotype>)newValue);
+			case PivotPackage.OPAQUE_EXPRESSION__EXTENSION:
+				getExtension().clear();
+				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
 			case PivotPackage.OPAQUE_EXPRESSION__NAME:
 				setName((String)newValue);
@@ -316,8 +316,8 @@ public class OpaqueExpressionImpl
 			case PivotPackage.OPAQUE_EXPRESSION__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
-			case PivotPackage.OPAQUE_EXPRESSION__APPLIED_STEREOTYPE:
-				getAppliedStereotype().clear();
+			case PivotPackage.OPAQUE_EXPRESSION__EXTENSION:
+				getExtension().clear();
 				return;
 			case PivotPackage.OPAQUE_EXPRESSION__NAME:
 				setName(NAME_EDEFAULT);
@@ -367,8 +367,8 @@ public class OpaqueExpressionImpl
 		{
 			case PivotPackage.OPAQUE_EXPRESSION__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
-			case PivotPackage.OPAQUE_EXPRESSION__APPLIED_STEREOTYPE:
-				return appliedStereotype != null && !appliedStereotype.isEmpty();
+			case PivotPackage.OPAQUE_EXPRESSION__EXTENSION:
+				return extension != null && !extension.isEmpty();
 			case PivotPackage.OPAQUE_EXPRESSION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.OPAQUE_EXPRESSION__OWNED_RULE:
