@@ -20,9 +20,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CS;
 import org.eclipse.ocl.examples.xtext.completeocl.cs2pivot.CompleteOCLCS2Pivot;
@@ -35,12 +33,6 @@ public class CompleteOCLCSResource extends EssentialOCLCSResource
 	public @NonNull CS2Pivot createCS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
 			@NonNull MetaModelManager metaModelManager) {
 		return new CompleteOCLCS2Pivot(cs2pivotResourceMap, metaModelManager);
-	}
-
-	@Override
-	public @NonNull MetaModelManager createMetaModelManager() {
-		StandardLibraryContribution.REGISTRY.put(MetaModelManager.DEFAULT_OCL_STDLIB_URI, new OCLstdlib.Cloner());
-		return super.createMetaModelManager();
 	}
 
 	@Override

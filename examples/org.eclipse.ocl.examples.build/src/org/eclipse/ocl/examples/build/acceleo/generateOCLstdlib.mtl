@@ -136,22 +136,6 @@ public class [javaClass/] extends XMIResourceImpl
 	}
 	
 	/**
-	 * The Cloner clones the Standard Library instance whenever this non-default library
-	 * is loaded from the registry of Standard Libraries populated by the standard_library 
-	 * extension point.
-	 */
-	public static class Cloner implements StandardLibraryContribution
-	{
-		public StandardLibraryContribution getContribution() {
-			return this;
-		}
-
-		public @NonNull Resource getResource() {
-			return OCLstdlib.create("[uri/]", "[lib.name/]", "[lib.nsPrefix/]", "[lib.nsURI/]");
-		}
-	}
-	
-	/**
 	 *	Construct a copy of the OCL Standard Library with specified resource URI,
 	 *  and package name, prefix and namespace URI.
 	 */

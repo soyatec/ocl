@@ -66,7 +66,6 @@ import org.eclipse.ocl.examples.pivot.Stereotype;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.ecore.AbstractEcore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.utilities.AliasAdapter;
 import org.eclipse.ocl.examples.pivot.utilities.PivotObjectImpl;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -560,9 +559,6 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 //					}
 					installImports();
 					if (umlStereotypeApplications.size() > 0) {
-						if (OCLstdlib.hasDefault() && (metaModelManager.getLibraryResource() == OCLstdlib.getDefault())) {
-							throw new IllegalStateException("Stereotypes can only be applied to a copied OCL Standard Library");
-						}
 						installStereotypes();
 					}
 					installProperties();

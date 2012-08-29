@@ -33,7 +33,6 @@ public class ModelRegistryPlugin extends Plugin
 	/**
 	 * The constructor
 	 */
-	@SuppressWarnings("unused")
 	public ModelRegistryPlugin() {
 		new EclipseModelRegistryEnvironment();
 	}
