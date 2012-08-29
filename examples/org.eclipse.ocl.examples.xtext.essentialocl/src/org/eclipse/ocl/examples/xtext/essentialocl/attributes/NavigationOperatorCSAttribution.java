@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.scoping.BaseScopeView;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InvocationExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigationOperatorCS;
 
 public class NavigationOperatorCSAttribution extends AbstractAttribution
@@ -84,6 +85,9 @@ public class NavigationOperatorCSAttribution extends AbstractAttribution
 						environmentView.addElementsOfScope(type, scopeView);		// FIXME Only if iteration
 					}
 					
+				}
+				if (!(child instanceof InvocationExpCS)) {		// FIXME Get BaseScopeView to correctly distinguish op-name from op-arg
+					return null;			// Explicit navigation must be resolved in source
 				}
 			}
 			return scopeView.getParent();

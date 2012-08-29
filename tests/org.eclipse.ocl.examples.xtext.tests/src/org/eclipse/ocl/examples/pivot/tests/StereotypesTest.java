@@ -79,7 +79,7 @@ public class StereotypesTest extends PivotTestSuite
     	assertQueryEquals(englishClassInEnglish, metaModelManager.getMetaclass(englishClass), "self.base_Class");
     	assertQueryEquals(englishClass, "EnglishClass$InEnglish", "self.extension_InEnglish.instanceType.name");
     	assertSemanticErrorQuery2(englishClass, "self.extension_InGerman", OCLMessages.UnresolvedProperty_ERROR_, "extension_InGerman", "Metaclass(Model::EnglishClass)");
-//    	assertSemanticErrorQuery2(englishClass, "self.extension_InEnglish.extension_InEnglish", "extension_InEnglish", "Metaclass(Model::EnglishClass$InEnglish)");
+    	assertSemanticErrorQuery2(englishClass, "self.extension_InEnglish.extension_InEnglish", OCLMessages.UnresolvedProperty_ERROR_, "extension_InEnglish", "Metaclass(Model::EnglishClass$InEnglish)");
     	assertQueryEquals(englishClass, metaModelManager.getMetaclass(englishClass), "self.extension_InEnglish.base_Class");
     	assertQueryEquals(englishClassInEnglish, metaModelManager.getMetaclass(englishClassInEnglish), "self.base_Class.extension_InEnglish");
     	assertQueryTrue(englishClass, "extension_InEnglish.base_Class = oclType()");
