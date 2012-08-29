@@ -965,6 +965,11 @@ public class OCLConsolePage extends Page
 			}
 		});
 	}
+
+	protected void reset() {
+		IDocument doc = getDocument();
+		doc.set("");
+	}
 	
 	/**
 	 * Ensures that the last text printed to the output viewer is shown.

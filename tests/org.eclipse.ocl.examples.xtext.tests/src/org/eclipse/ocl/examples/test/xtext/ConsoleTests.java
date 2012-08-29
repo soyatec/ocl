@@ -16,15 +16,22 @@
  */
 package org.eclipse.ocl.examples.test.xtext;
 
+import java.math.BigInteger;
+import java.util.List;
+
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
 import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 import org.eclipse.ocl.examples.pivot.tests.PivotTestSuite;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
@@ -98,7 +105,7 @@ public class ConsoleTests extends PivotTestSuite
 			if (rgbTag != null) {
 				s.append("<" + rgbTag + ">");
 			}
-			s.append(text);
+			s.append(text + "\n");
 			if (rgbTag != null) {
 				s.append("</" + rgbTag + ">");
 			}
@@ -121,7 +128,9 @@ public class ConsoleTests extends PivotTestSuite
 			super.refreshSelection(selected);
 		}
 
+		@Override
 		public void reset() {
+			super.reset();
 			s = new StringBuilder();
 		}
 	}
@@ -135,7 +144,7 @@ public class ConsoleTests extends PivotTestSuite
 		consolePage.evaluate(testExpression);
 		flushEvents();
 		String string = consolePage.get();
-		assertEquals("<b>Evaluating:</b>" + testExpression + "<b>Results:</b>" + expectedResult, string);
+		assertEquals("<b>Evaluating:\n</b>" + testExpression + "\n<b>Results:\n</b>" + expectedResult, string);
 	}
 
 	public static void flushEvents() {
@@ -209,7 +218,75 @@ public class ConsoleTests extends PivotTestSuite
 	} */
 
 	public void testConsole_UML() throws Exception {
-		assertConsoleResult(consolePage, englishClass, "self.name", "'EnglishClass'");
-		assertConsoleResult(consolePage, englishClass, "self.extension_InEnglish.instanceType.name", "'EnglishClass$InEnglish'");
+		assertConsoleResult(consolePage, englishClass, "self.name", "'EnglishClass'\n");
+		assertConsoleResult(consolePage, englishClass, "self.extension_InEnglish.instanceType.name", "'EnglishClass$InEnglish'\n");
+	}
+
+	public void testConsole_OCLinEcoreTutorial() throws Exception {
+		OCL.initialize(resourceSet);
+		OCLDelegateDomain.initialize(resourceSet, OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);			
+		URI testModelURI = getTestModelURI("/model/OCLinEcoreTutorialForPivot.xmi");
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new EcoreResourceFactoryImpl());
+		Resource xmiResource = resourceSet.getResource(testModelURI, true);
+		EObject xmiLibrary = xmiResource.getContents().get(0);
+		EClass ecoreLibrary = xmiLibrary.eClass();
+		EStructuralFeature ecoreBooks = ecoreLibrary.getEStructuralFeature("books");
+		EStructuralFeature ecoreLoans = ecoreLibrary.getEStructuralFeature("loans");
+		EClass ecoreBook = (EClass) ecoreBooks.getEType();
+		EClass ecoreLoan = (EClass) ecoreLoans.getEType();
+		EStructuralFeature bookName = ecoreBook.getEStructuralFeature("name");
+		EStructuralFeature loanBook = ecoreLoan.getEStructuralFeature("book");
+		EStructuralFeature bookCopies = ecoreBook.getEStructuralFeature("copies");
+		@SuppressWarnings("unchecked")
+		List<EObject> xmiBooks = (List<EObject>) xmiLibrary.eGet(ecoreBooks);
+		EObject b1Book = null;
+		EObject b2Book = null;
+		for (EObject xmiBook : xmiBooks) {
+			if (xmiBook.eGet(bookName).equals("b1")) {
+				b1Book = xmiBook;
+			}
+			else if (xmiBook.eGet(bookName).equals("b2")) {
+				b2Book = xmiBook;
+			}
+		}
+		if (b2Book == null) {
+			fail();
+			return;
+		}
+		@SuppressWarnings("unchecked")
+		EObject aLoan = ((List<EObject>) xmiLibrary.eGet(ecoreLoans)).get(0);
+		//
+		assertConsoleResult(consolePage, xmiLibrary, "books->sortedBy(name)", "Book b1\nBook b2\n");
+		assertConsoleResult(consolePage, xmiLibrary, "isAvailable()", "<b><error>Parsing failure\n</error></b><error>\n1: Unresolved Operation 'unknown-type::isAvailable()'\n</error>");
+		assertConsoleResult(consolePage, b2Book, "isAvailable()", "false\n");
+		assertConsoleResult(consolePage, b1Book, "isAvailable()", "true\n");
+		aLoan.eSet(loanBook, b1Book);
+		assertConsoleResult(consolePage, b2Book, "isAvailable()", "false\n");
+		assertConsoleResult(consolePage, b1Book, "isAvailable()", "false\n");
+		b2Book.eSet(bookCopies, BigInteger.valueOf(3));
+		assertConsoleResult(consolePage, b2Book, "isAvailable()", "true\n");
+		assertConsoleResult(consolePage, b1Book, "isAvailable()", "false\n");
+		//
+		assertConsoleResult(consolePage, ecoreBook, "name", "'Book'\n");
+		assertConsoleResult(consolePage, ecoreBook, "copies", "<b><error>Parsing failure\n</error></b><error>\n1: Unresolved Property 'unknown-type::copies'\n</error>");
+		assertConsoleResult(consolePage, ecoreBook, "oclType().ownedAttribute->sortedBy(name)",
+			"ecore::EClass.EClass\n" + 
+			"ecore::EClass.EReference\n" + 
+			"ecore::EClass.abstract\n" + 
+			"ecore::EClass.eAllAttributes\n" + 
+			"ecore::EClass.eAllContainments\n" + 
+			"ecore::EClass.eAllGenericSuperTypes\n" + 
+			"ecore::EClass.eAllOperations\n" + 
+			"ecore::EClass.eAllReferences\n" + 
+			"ecore::EClass.eAllStructuralFeatures\n" + 
+			"ecore::EClass.eAllSuperTypes\n" + 
+			"ecore::EClass.eAttributes\n" + 
+			"ecore::EClass.eGenericSuperTypes\n" + 
+			"ecore::EClass.eIDAttribute\n" + 
+			"ecore::EClass.eOperations\n" + 
+			"ecore::EClass.eReferences\n" + 
+			"ecore::EClass.eStructuralFeatures\n" + 
+			"ecore::EClass.eSuperTypes\n" + 
+			"ecore::EClass.interface\n");
 	}
 }

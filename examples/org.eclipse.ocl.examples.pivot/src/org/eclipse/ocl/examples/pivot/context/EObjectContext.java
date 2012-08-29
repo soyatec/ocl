@@ -20,7 +20,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -42,15 +41,20 @@ public class EObjectContext extends AbstractParserContext
 	public @Nullable Type getClassContext() {
 		if (classContext == null) {
 			try {
-				NamedElement element;
-				if (eObject instanceof NamedElement) {
-					element = (NamedElement)eObject;
+				if (eObject instanceof Type) {
+					classContext = metaModelManager.getMetaclass((Type)eObject);
 				}
-				else {
-					element = metaModelManager.getPivotOf(NamedElement.class, eObject);
-				}
-				if (element instanceof Type) {
-					classContext = metaModelManager.getMetaclass((Type)element);
+//				else if (eObject instanceof NamedElement) {
+//					classContext = eObject;
+//				}
+//				else if (eObject instanceof EClassifier) {
+//					Type type = metaModelManager.getPivotOf(Type.class, eObject);
+//					if (type != null) {
+//						classContext = metaModelManager.getMetaclass(type);
+//					}
+//				}
+				else if (eObject != null) {
+					classContext = metaModelManager.getPivotOf(Type.class, eObject.eClass());
 				}
 			} catch (ParserException e) {
 				// TODO Auto-generated catch block
