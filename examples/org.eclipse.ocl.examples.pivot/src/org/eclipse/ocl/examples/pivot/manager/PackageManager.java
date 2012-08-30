@@ -276,6 +276,7 @@ public class PackageManager implements PackageServerParent
 		if (packageServer == null) {
 			PackageServerParent packageServerParent = getParentPackageServer(pivotPackage);
 			packageServer = packageServerParent.getMemberPackageServer(pivotPackage);
+			packageServer.addTrackedPackage(pivotPackage);
 		}
 		return packageServer;
 	}
