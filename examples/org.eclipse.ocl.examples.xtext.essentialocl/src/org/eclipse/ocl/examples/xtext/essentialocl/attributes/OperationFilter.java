@@ -72,6 +72,72 @@ public class OperationFilter extends AbstractOperationFilter
 		this.expressions = expressions;
 	}
 
+	@Override
+	public int compareMatches(@NonNull DomainElement match1, @Nullable Map<TemplateParameter, ParameterableElement> referenceBindings,
+			@NonNull DomainElement match2, @Nullable Map<TemplateParameter, ParameterableElement> candidateBindings) {
+		@NonNull Operation reference = (Operation) match1;
+		@NonNull Operation candidate = (Operation) match2;
+		Type referenceType = PivotUtil.getBehavioralType(PivotUtil.getOwningType(reference));
+		Type candidateType = PivotUtil.getBehavioralType(PivotUtil.getOwningType(candidate));
+		Type specializedReferenceType = metaModelManager.getSpecializedType(referenceType, referenceBindings);
+		Type specializedCandidateType = metaModelManager.getSpecializedType(candidateType, candidateBindings);
+		if ((reference instanceof Iteration) && (candidate instanceof Iteration)) {
+			int iteratorCountDelta = ((Iteration)candidate).getOwnedIterator().size() - ((Iteration)reference).getOwnedIterator().size();
+			if (iteratorCountDelta != 0) {
+				return iteratorCountDelta;
+			}
+			if (referenceType != candidateType) {
+				if (metaModelManager.conformsTo(specializedReferenceType, specializedCandidateType, null)) {
+					return 1;
+				}
+				else if (metaModelManager.conformsTo(specializedCandidateType, specializedReferenceType, null)) {
+					return -1;
+				}
+			}
+		}
+		int referenceConversions = 0;
+		int candidateConversions = 0;
+		if (sourceType != specializedReferenceType) {
+			referenceConversions++;
+		}
+		if (sourceType != specializedCandidateType) {
+			candidateConversions++;
+		}
+		List<Parameter> candidateParameters = candidate.getOwnedParameter();
+		List<Parameter> referenceParameters = reference.getOwnedParameter();
+		for (int i = 0; i < candidateParameters.size(); i++) {
+			NavigatingArgCS csArgument = csArguments.get(i);
+			OCLExpression pivotArgument = PivotUtil.getPivot(OCLExpression.class, csArgument);
+			if (pivotArgument == null) {
+				return 0;
+			}
+			Type argumentType = pivotArgument.getType();
+			Parameter referenceParameter = referenceParameters.get(i);
+			Parameter candidateParameter = candidateParameters.get(i);
+			if ((referenceParameter == null) || (candidateParameter == null)) {					// Doesn't happen (just a supurious NPE guard)
+				referenceConversions = Integer.MIN_VALUE;
+				candidateConversions = Integer.MIN_VALUE;
+			}
+			else {
+				referenceType = PivotUtil.getBehavioralType(referenceParameter);
+				candidateType = PivotUtil.getBehavioralType(candidateParameter);
+				specializedReferenceType = metaModelManager.getSpecializedType(referenceType, referenceBindings);
+				specializedCandidateType = metaModelManager.getSpecializedType(candidateType, candidateBindings);
+				if (argumentType != specializedReferenceType) {
+					referenceConversions++;
+				}
+				if (argumentType != specializedCandidateType) {
+					candidateConversions++;
+				}
+			}
+		}
+		if (candidateConversions != referenceConversions) {
+			return candidateConversions - referenceConversions;
+		}
+		int verdict = metaModelManager.compareOperationMatches(reference, referenceBindings, candidate, candidateBindings);
+		return verdict;
+	}
+
 	protected @Nullable OCLExpression getExpressionArgument(int index) {
 		int expIndex = 0;
 		for (NavigatingArgCS csNavigatingArg : csArguments) {

@@ -706,25 +706,20 @@ public class EnvironmentView
 					List<DomainElement> values = (List<DomainElement>) listOrValue;
 					for (int i = 0; i < values.size()-1;) {
 						boolean iRemoved = false;
-						@SuppressWarnings("null")
-						@NonNull DomainElement iValue = values.get(i);
+						@SuppressWarnings("null") @NonNull DomainElement iValue = values.get(i);
 						Map<TemplateParameter, ParameterableElement> iBindings = templateBindings != null ? templateBindings.get(iValue) : null;
 						for (int j = i + 1; j < values.size();) {
-							@SuppressWarnings("null")
-							@NonNull DomainElement iValue2 = iValue;
-							@SuppressWarnings("null")
-							@NonNull DomainElement jValue = values.get(j);
-							int verdict = filterImplicits(iValue2, jValue);
+							assert iValue != null;
+							@SuppressWarnings("null") @NonNull DomainElement jValue = values.get(j);
+							int verdict = filterImplicits(iValue, jValue);
 							if (verdict == 0) {
-								verdict = filterRedefinitions(iValue2, jValue);
+								verdict = filterRedefinitions(iValue, jValue);
 								if ((verdict == 0) && (resolvers != null)) {
 									Map<TemplateParameter, ParameterableElement> jBindings = templateBindings != null ? templateBindings.get(jValue) : null;
 									for (ScopeFilter filter : resolvers) {
-										@SuppressWarnings("null")
-										@NonNull DomainElement iValue22 = iValue2;
-										@SuppressWarnings("null")
-										@NonNull DomainElement jValue2 = jValue;
-										verdict = filter.compareMatches(iValue22, iBindings, jValue2, jBindings);
+										assert iValue != null;
+										assert jValue != null;
+										verdict = filter.compareMatches(iValue, iBindings, jValue, jBindings);
 										if (verdict != 0) {
 											break;
 										}

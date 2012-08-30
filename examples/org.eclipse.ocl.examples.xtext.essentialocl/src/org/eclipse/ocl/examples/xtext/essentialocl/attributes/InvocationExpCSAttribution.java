@@ -154,9 +154,7 @@ public class InvocationExpCSAttribution extends AbstractAttribution
 					type = source.getType();
 				}
 			}
-			EClassifier requiredType = environmentView.getRequiredType();
-			EClass operationType = PivotPackage.Literals.OPERATION;
-			if ((scopeTarget != null) && (requiredType instanceof EClass) && operationType.isSuperTypeOf((EClass)requiredType)) {
+			if ((scopeTarget != null) && isRequiredType(environmentView)) {
 				ScopeFilter filter = createInvocationFilter(environmentView.getMetaModelManager(), targetElement, type);
 				try {
 					environmentView.addFilter(filter);
@@ -203,5 +201,12 @@ public class InvocationExpCSAttribution extends AbstractAttribution
 			return operation instanceof Iteration;		// mixed overload are not allowed
 		}
 		return false;
+	}
+
+	protected boolean isRequiredType(EnvironmentView environmentView) {
+		EClassifier requiredType = environmentView.getRequiredType();
+		EClass operationType = PivotPackage.Literals.OPERATION;
+		boolean isRequiredType = (requiredType instanceof EClass) && operationType.isSuperTypeOf((EClass)requiredType);
+		return isRequiredType;
 	}
 }
