@@ -103,7 +103,10 @@ public class EnvironmentView
 
 	public boolean accepts(/*@NonNull*/ EClass eClass) {
 		assert eClass != null;
-		return PivotUtil.conformsTo(requiredType, eClass);
+		// If eClass conformsTo requiredType every candidate will be type-compatible
+		// If requiredType conformsTo eClass some candidates may be type-compatible
+		// else no candidates can be type-compatible
+		return PivotUtil.conformsTo(requiredType, eClass) || ((requiredType != null) && PivotUtil.conformsTo(eClass, requiredType));
 	}
 
 	public void addAllEnumerationLiterals(org.eclipse.ocl.examples.pivot.Enumeration pivot) {
