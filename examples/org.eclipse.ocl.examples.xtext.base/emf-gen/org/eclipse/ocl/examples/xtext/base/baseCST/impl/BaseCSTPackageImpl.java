@@ -60,6 +60,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementWithURICS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PivotableElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PrimitiveTypeRefCS;
@@ -294,6 +295,13 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 	 * @generated
 	 */
 	private EClass pathElementCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass pathElementWithURICSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -896,9 +904,9 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getImportCS_Uri()
+	public EReference getImportCS_PathName()
 	{
-		return (EAttribute)importCSEClass.getEStructuralFeatures().get(0);
+		return (EReference)importCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1285,6 +1293,26 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 	public EReference getPathElementCS_ElementType()
 	{
 		return (EReference)pathElementCSEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPathElementWithURICS()
+	{
+		return pathElementWithURICSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPathElementWithURICS_Uri()
+	{
+		return (EAttribute)pathElementWithURICSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1935,7 +1963,7 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 		featureCSEClass = createEClass(FEATURE_CS);
 
 		importCSEClass = createEClass(IMPORT_CS);
-		createEAttribute(importCSEClass, IMPORT_CS__URI);
+		createEReference(importCSEClass, IMPORT_CS__PATH_NAME);
 		createEReference(importCSEClass, IMPORT_CS__NAMESPACE);
 		createEAttribute(importCSEClass, IMPORT_CS__ALL);
 
@@ -1989,6 +2017,9 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 		createEReference(pathElementCSEClass, PATH_ELEMENT_CS__PATH_NAME);
 		createEReference(pathElementCSEClass, PATH_ELEMENT_CS__ELEMENT);
 		createEReference(pathElementCSEClass, PATH_ELEMENT_CS__ELEMENT_TYPE);
+
+		pathElementWithURICSEClass = createEClass(PATH_ELEMENT_WITH_URICS);
+		createEAttribute(pathElementWithURICSEClass, PATH_ELEMENT_WITH_URICS__URI);
 
 		pathNameCSEClass = createEClass(PATH_NAME_CS);
 		createEReference(pathNameCSEClass, PATH_NAME_CS__PATH);
@@ -2148,6 +2179,7 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 		parameterCSEClass.getESuperTypes().add(this.getTypedElementCS());
 		pathElementCSEClass.getESuperTypes().add(this.getElementCS());
 		pathElementCSEClass.getESuperTypes().add(thePivotPackage.getPivotable());
+		pathElementWithURICSEClass.getESuperTypes().add(this.getPathElementCS());
 		pathNameCSEClass.getESuperTypes().add(this.getElementCS());
 		pathNameCSEClass.getESuperTypes().add(thePivotPackage.getPivotable());
 		pivotableElementCSEClass.getESuperTypes().add(this.getElementCS());
@@ -2231,8 +2263,8 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 		initEClass(featureCSEClass, FeatureCS.class, "FeatureCS", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
 		initEClass(importCSEClass, ImportCS.class, "ImportCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getImportCS_Uri(), ecorePackage.getEString(), "uri", null, 0, 1, ImportCS.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEReference(getImportCS_Namespace(), thePivotPackage.getNamespace(), null, "namespace", null, 0, 1, ImportCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getImportCS_PathName(), this.getPathNameCS(), null, "pathName", null, 0, 1, ImportCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getImportCS_Namespace(), thePivotPackage.getNamespace(), null, "namespace", null, 0, 1, ImportCS.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEAttribute(getImportCS_All(), ecorePackage.getEBoolean(), "all", "false", 0, 1, ImportCS.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
 		initEClass(lambdaTypeCSEClass, LambdaTypeCS.class, "LambdaTypeCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -2292,6 +2324,9 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 		initEReference(getPathElementCS_PathName(), this.getPathNameCS(), this.getPathNameCS_Path(), "pathName", null, 1, 1, PathElementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEReference(getPathElementCS_Element(), thePivotPackage.getElement(), null, "element", null, 1, 1, PathElementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEReference(getPathElementCS_ElementType(), ecorePackage.getEClassifier(), null, "elementType", null, 0, 1, PathElementCS.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(pathElementWithURICSEClass, PathElementWithURICS.class, "PathElementWithURICS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(getPathElementWithURICS_Uri(), ecorePackage.getEString(), "uri", null, 0, 1, PathElementWithURICS.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(pathNameCSEClass, PathNameCS.class, "PathNameCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getPathNameCS_Path(), this.getPathElementCS(), this.getPathElementCS_PathName(), "path", null, 1, -1, PathNameCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$

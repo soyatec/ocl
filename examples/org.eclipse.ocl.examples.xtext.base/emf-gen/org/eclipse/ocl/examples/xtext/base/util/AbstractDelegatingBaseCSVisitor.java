@@ -169,6 +169,10 @@ public abstract class AbstractDelegatingBaseCSVisitor<R, C, D extends BaseCSVisi
 		return delegate.visitPathElementCS(object);
 	}
 
+	public @Nullable R visitPathElementWithURICS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.PathElementWithURICS object) {
+		return delegate.visitPathElementWithURICS(object);
+	}
+
 	public @Nullable R visitPathNameCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS object) {
 		return delegate.visitPathNameCS(object);
 	}

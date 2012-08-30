@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
+import org.eclipse.ocl.examples.xtext.base.baseCST.*;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AttributeCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTFactory;
@@ -129,6 +130,7 @@ public class BaseCSTFactoryImpl extends EFactoryImpl implements BaseCSTFactory {
 			case BaseCSTPackage.PACKAGE_CS: return createPackageCS();
 			case BaseCSTPackage.PARAMETER_CS: return createParameterCS();
 			case BaseCSTPackage.PATH_ELEMENT_CS: return createPathElementCS();
+			case BaseCSTPackage.PATH_ELEMENT_WITH_URICS: return createPathElementWithURICS();
 			case BaseCSTPackage.PATH_NAME_CS: return createPathNameCS();
 			case BaseCSTPackage.PRIMITIVE_TYPE_REF_CS: return createPrimitiveTypeRefCS();
 			case BaseCSTPackage.REFERENCE_CS: return createReferenceCS();
@@ -396,6 +398,17 @@ public class BaseCSTFactoryImpl extends EFactoryImpl implements BaseCSTFactory {
 	{
 		PathElementCSImpl pathElementCS = new PathElementCSImpl();
 		return pathElementCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PathElementWithURICS createPathElementWithURICS()
+	{
+		PathElementWithURICSImpl pathElementWithURICS = new PathElementWithURICSImpl();
+		return pathElementWithURICS;
 	}
 
 	/**

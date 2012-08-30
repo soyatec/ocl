@@ -21,6 +21,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementWithURICS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PrimitiveTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ReferenceCS;
@@ -204,10 +205,24 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 					sequence_NextPathElementCS(context, (PathElementCS) semanticObject); 
 					return; 
 				}
+				else if(context == grammarAccess.getURIFirstPathElementCSRule()) {
+					sequence_URIFirstPathElementCS(context, (PathElementCS) semanticObject); 
+					return; 
+				}
+				else break;
+			case BaseCSTPackage.PATH_ELEMENT_WITH_URICS:
+				if(context == grammarAccess.getURIFirstPathElementCSRule()) {
+					sequence_URIFirstPathElementCS(context, (PathElementWithURICS) semanticObject); 
+					return; 
+				}
 				else break;
 			case BaseCSTPackage.PATH_NAME_CS:
 				if(context == grammarAccess.getPathNameCSRule()) {
 					sequence_PathNameCS(context, (PathNameCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getURIPathNameCSRule()) {
+					sequence_URIPathNameCS(context, (PathNameCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -785,7 +800,7 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 	
 	/**
 	 * Constraint:
-	 *     (name=UnrestrictedName? namespace=[Namespace|URI] all?='::'?)
+	 *     (name=UnrestrictedName? pathName=URIPathNameCS all?='::'?)
 	 */
 	protected void sequence_ImportCS(EObject context, ImportCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

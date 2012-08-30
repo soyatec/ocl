@@ -56,6 +56,7 @@ public class CompleteOCLParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEssentialOCLInfixOperatorAccess().getAlternatives(), "rule__EssentialOCLInfixOperator__Alternatives");
 					put(grammarAccess.getEssentialOCLNavigationOperatorAccess().getAlternatives(), "rule__EssentialOCLNavigationOperator__Alternatives");
 					put(grammarAccess.getEssentialOCLUnreservedNameAccess().getAlternatives(), "rule__EssentialOCLUnreservedName__Alternatives");
+					put(grammarAccess.getURIFirstPathElementCSAccess().getAlternatives(), "rule__URIFirstPathElementCS__Alternatives");
 					put(grammarAccess.getCollectionTypeIdentifierAccess().getAlternatives(), "rule__CollectionTypeIdentifier__Alternatives");
 					put(grammarAccess.getMultiplicityCSAccess().getAlternatives_1(), "rule__MultiplicityCS__Alternatives_1");
 					put(grammarAccess.getMultiplicityStringCSAccess().getStringBoundsAlternatives_0(), "rule__MultiplicityStringCS__StringBoundsAlternatives_0");
@@ -103,6 +104,9 @@ public class CompleteOCLParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNavigatingArgExpCSAccess().getGroup_0(), "rule__NavigatingArgExpCS__Group_0__0");
 					put(grammarAccess.getPathNameCSAccess().getGroup(), "rule__PathNameCS__Group__0");
 					put(grammarAccess.getPathNameCSAccess().getGroup_1(), "rule__PathNameCS__Group_1__0");
+					put(grammarAccess.getURIPathNameCSAccess().getGroup(), "rule__URIPathNameCS__Group__0");
+					put(grammarAccess.getURIPathNameCSAccess().getGroup_1(), "rule__URIPathNameCS__Group_1__0");
+					put(grammarAccess.getURIFirstPathElementCSAccess().getGroup_1(), "rule__URIFirstPathElementCS__Group_1__0");
 					put(grammarAccess.getCollectionTypeCSAccess().getGroup(), "rule__CollectionTypeCS__Group__0");
 					put(grammarAccess.getCollectionTypeCSAccess().getGroup_1(), "rule__CollectionTypeCS__Group_1__0");
 					put(grammarAccess.getMultiplicityBoundsCSAccess().getGroup(), "rule__MultiplicityBoundsCS__Group__0");
@@ -193,7 +197,7 @@ public class CompleteOCLParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDerCSAccess().getStereotypeAssignment_0(), "rule__DerCS__StereotypeAssignment_0");
 					put(grammarAccess.getDerCSAccess().getSpecificationAssignment_2(), "rule__DerCS__SpecificationAssignment_2");
 					put(grammarAccess.getImportCSAccess().getNameAssignment_1_0(), "rule__ImportCS__NameAssignment_1_0");
-					put(grammarAccess.getImportCSAccess().getNamespaceAssignment_2(), "rule__ImportCS__NamespaceAssignment_2");
+					put(grammarAccess.getImportCSAccess().getPathNameAssignment_2(), "rule__ImportCS__PathNameAssignment_2");
 					put(grammarAccess.getImportCSAccess().getAllAssignment_3_0(), "rule__ImportCS__AllAssignment_3_0");
 					put(grammarAccess.getIncludeCSAccess().getNamespaceAssignment_1(), "rule__IncludeCS__NamespaceAssignment_1");
 					put(grammarAccess.getInitCSAccess().getStereotypeAssignment_0(), "rule__InitCS__StereotypeAssignment_0");
@@ -233,6 +237,10 @@ public class CompleteOCLParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPathNameCSAccess().getPathAssignment_1_1(), "rule__PathNameCS__PathAssignment_1_1");
 					put(grammarAccess.getFirstPathElementCSAccess().getElementAssignment(), "rule__FirstPathElementCS__ElementAssignment");
 					put(grammarAccess.getNextPathElementCSAccess().getElementAssignment(), "rule__NextPathElementCS__ElementAssignment");
+					put(grammarAccess.getURIPathNameCSAccess().getPathAssignment_0(), "rule__URIPathNameCS__PathAssignment_0");
+					put(grammarAccess.getURIPathNameCSAccess().getPathAssignment_1_1(), "rule__URIPathNameCS__PathAssignment_1_1");
+					put(grammarAccess.getURIFirstPathElementCSAccess().getElementAssignment_0(), "rule__URIFirstPathElementCS__ElementAssignment_0");
+					put(grammarAccess.getURIFirstPathElementCSAccess().getElementAssignment_1_1(), "rule__URIFirstPathElementCS__ElementAssignment_1_1");
 					put(grammarAccess.getPrimitiveTypeCSAccess().getNameAssignment(), "rule__PrimitiveTypeCS__NameAssignment");
 					put(grammarAccess.getCollectionTypeCSAccess().getNameAssignment_0(), "rule__CollectionTypeCS__NameAssignment_0");
 					put(grammarAccess.getCollectionTypeCSAccess().getOwnedTypeAssignment_1_1(), "rule__CollectionTypeCS__OwnedTypeAssignment_1_1");

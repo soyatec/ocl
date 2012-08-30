@@ -7,6 +7,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.MultiplicityBoundsCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.MultiplicityStringCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementWithURICS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PrimitiveTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TuplePartCS;
@@ -82,10 +83,24 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 					sequence_NextPathElementCS(context, (PathElementCS) semanticObject); 
 					return; 
 				}
+				else if(context == grammarAccess.getURIFirstPathElementCSRule()) {
+					sequence_URIFirstPathElementCS(context, (PathElementCS) semanticObject); 
+					return; 
+				}
+				else break;
+			case BaseCSTPackage.PATH_ELEMENT_WITH_URICS:
+				if(context == grammarAccess.getURIFirstPathElementCSRule()) {
+					sequence_URIFirstPathElementCS(context, (PathElementWithURICS) semanticObject); 
+					return; 
+				}
 				else break;
 			case BaseCSTPackage.PATH_NAME_CS:
 				if(context == grammarAccess.getPathNameCSRule()) {
 					sequence_PathNameCS(context, (PathNameCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getURIPathNameCSRule()) {
+					sequence_URIPathNameCS(context, (PathNameCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -800,6 +815,33 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 	 *     pathName=PathNameCS
 	 */
 	protected void sequence_TypeNameExpCS(EObject context, TypeNameExpCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     element=[NamedElement|UnrestrictedName]
+	 */
+	protected void sequence_URIFirstPathElementCS(EObject context, PathElementCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     element=[Namespace|URI]
+	 */
+	protected void sequence_URIFirstPathElementCS(EObject context, PathElementWithURICS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (path+=URIFirstPathElementCS path+=NextPathElementCS*)
+	 */
+	protected void sequence_URIPathNameCS(EObject context, PathNameCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

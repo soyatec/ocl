@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementWithURICS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.AliasAnalysis;
@@ -64,6 +65,13 @@ public class EssentialOCLCrossReferenceSerializer extends CrossReferenceSerializ
 			CrossReference crossref, EObject target, IScope scope, Acceptor errors) {
 		String ruleName = linkingHelper.getRuleNameFrom(crossref);
 		if ("URI".equals(ruleName)) {
+			if (semanticObject instanceof PathElementWithURICS) {
+				PathElementWithURICS pathElementWithURICS = (PathElementWithURICS)semanticObject;
+				String uri = pathElementWithURICS.getUri();
+				if (uri != null) {
+					return valueConverter.toString(uri, ruleName);
+				}
+			}
 			Iterable<IEObjectDescription> elements = scope.getElements(target);
 			for (IEObjectDescription desc : elements) {
 				URI uri = URI.createURI(desc.getName().toString());

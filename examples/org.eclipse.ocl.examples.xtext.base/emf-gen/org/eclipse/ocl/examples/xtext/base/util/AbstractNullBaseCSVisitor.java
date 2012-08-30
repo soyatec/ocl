@@ -148,6 +148,10 @@ public abstract class AbstractNullBaseCSVisitor<R, C>
 		return null;
 	}
 
+	public @Nullable R visitPathElementWithURICS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.PathElementWithURICS object) {
+		return null;
+	}
+
 	public @Nullable R visitPathNameCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS object) {
 		return null;
 	}

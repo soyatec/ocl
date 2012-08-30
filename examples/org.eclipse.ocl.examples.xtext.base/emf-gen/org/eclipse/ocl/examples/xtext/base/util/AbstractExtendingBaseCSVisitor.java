@@ -152,6 +152,10 @@ public abstract class AbstractExtendingBaseCSVisitor<R, C>
 		return visitElementCS(object);
 	}
 
+	public @Nullable R visitPathElementWithURICS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.PathElementWithURICS object) {
+		return visitPathElementCS(object);
+	}
+
 	public @Nullable R visitPathNameCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS object) {
 		return visitElementCS(object);
 	}

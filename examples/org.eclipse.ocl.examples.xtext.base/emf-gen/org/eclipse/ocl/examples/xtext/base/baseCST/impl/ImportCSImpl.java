@@ -18,14 +18,15 @@
 package org.eclipse.ocl.examples.xtext.base.baseCST.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 
 /**
@@ -35,7 +36,7 @@ import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.ImportCSImpl#getUri <em>Uri</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.ImportCSImpl#getPathName <em>Path Name</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.ImportCSImpl#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.ImportCSImpl#isAll <em>All</em>}</li>
  * </ul>
@@ -45,33 +46,14 @@ import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
  */
 public class ImportCSImpl extends NamedElementCSImpl implements ImportCS {
 	/**
-	 * The default value of the '{@link #getUri() <em>Uri</em>}' attribute.
+	 * The cached value of the '{@link #getPathName() <em>Path Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getUri()
+	 * @see #getPathName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String URI_EDEFAULT = null;
-	/**
-	 * The cached value of the '{@link #getUri() <em>Uri</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getUri()
-	 * @generated
-	 * @ordered
-	 */
-	protected String uri = URI_EDEFAULT;
-	/**
-	 * The cached value of the '{@link #getNamespace() <em>Namespace</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getNamespace()
-	 * @generated
-	 * @ordered
-	 */
-	protected Namespace namespace;
-
+	protected PathNameCS pathName;
 	/**
 	 * The default value of the '{@link #isAll() <em>All</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -115,9 +97,9 @@ public class ImportCSImpl extends NamedElementCSImpl implements ImportCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getUri()
+	public PathNameCS getPathName()
 	{
-		return uri;
+		return pathName;
 	}
 
 	/**
@@ -125,31 +107,16 @@ public class ImportCSImpl extends NamedElementCSImpl implements ImportCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setUri(String newUri)
+	public NotificationChain basicSetPathName(PathNameCS newPathName, NotificationChain msgs)
 	{
-		String oldUri = uri;
-		uri = newUri;
+		PathNameCS oldPathName = pathName;
+		pathName = newPathName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BaseCSTPackage.IMPORT_CS__URI, oldUri, uri));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Namespace getNamespace() {
-		if (namespace != null && ((EObject)namespace).eIsProxy())
 		{
-			InternalEObject oldNamespace = (InternalEObject)namespace;
-			namespace = (Namespace)eResolveProxy(oldNamespace);
-			if (namespace != oldNamespace)
-			{
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BaseCSTPackage.IMPORT_CS__NAMESPACE, oldNamespace, namespace));
-			}
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BaseCSTPackage.IMPORT_CS__PATH_NAME, oldPathName, newPathName);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
-		return namespace;
+		return msgs;
 	}
 
 	/**
@@ -157,21 +124,20 @@ public class ImportCSImpl extends NamedElementCSImpl implements ImportCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Namespace basicGetNamespace() {
-		return namespace;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setNamespace(Namespace newNamespace)
+	public void setPathName(PathNameCS newPathName)
 	{
-		Namespace oldNamespace = namespace;
-		namespace = newNamespace;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BaseCSTPackage.IMPORT_CS__NAMESPACE, oldNamespace, namespace));
+		if (newPathName != pathName)
+		{
+			NotificationChain msgs = null;
+			if (pathName != null)
+				msgs = ((InternalEObject)pathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BaseCSTPackage.IMPORT_CS__PATH_NAME, null, msgs);
+			if (newPathName != null)
+				msgs = ((InternalEObject)newPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BaseCSTPackage.IMPORT_CS__PATH_NAME, null, msgs);
+			msgs = basicSetPathName(newPathName, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BaseCSTPackage.IMPORT_CS__PATH_NAME, newPathName, newPathName));
 	}
 
 	/**
@@ -203,14 +169,29 @@ public class ImportCSImpl extends NamedElementCSImpl implements ImportCS {
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	{
+		switch (featureID)
+		{
+			case BaseCSTPackage.IMPORT_CS__PATH_NAME:
+				return basicSetPathName(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case BaseCSTPackage.IMPORT_CS__URI:
-				return getUri();
+			case BaseCSTPackage.IMPORT_CS__PATH_NAME:
+				return getPathName();
 			case BaseCSTPackage.IMPORT_CS__NAMESPACE:
-				if (resolve) return getNamespace();
-				return basicGetNamespace();
+				return getNamespace();
 			case BaseCSTPackage.IMPORT_CS__ALL:
 				return isAll();
 		}
@@ -226,11 +207,8 @@ public class ImportCSImpl extends NamedElementCSImpl implements ImportCS {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case BaseCSTPackage.IMPORT_CS__URI:
-				setUri((String)newValue);
-				return;
-			case BaseCSTPackage.IMPORT_CS__NAMESPACE:
-				setNamespace((Namespace)newValue);
+			case BaseCSTPackage.IMPORT_CS__PATH_NAME:
+				setPathName((PathNameCS)newValue);
 				return;
 			case BaseCSTPackage.IMPORT_CS__ALL:
 				setAll((Boolean)newValue);
@@ -248,11 +226,8 @@ public class ImportCSImpl extends NamedElementCSImpl implements ImportCS {
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case BaseCSTPackage.IMPORT_CS__URI:
-				setUri(URI_EDEFAULT);
-				return;
-			case BaseCSTPackage.IMPORT_CS__NAMESPACE:
-				setNamespace((Namespace)null);
+			case BaseCSTPackage.IMPORT_CS__PATH_NAME:
+				setPathName((PathNameCS)null);
 				return;
 			case BaseCSTPackage.IMPORT_CS__ALL:
 				setAll(ALL_EDEFAULT);
@@ -270,10 +245,10 @@ public class ImportCSImpl extends NamedElementCSImpl implements ImportCS {
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case BaseCSTPackage.IMPORT_CS__URI:
-				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
+			case BaseCSTPackage.IMPORT_CS__PATH_NAME:
+				return pathName != null;
 			case BaseCSTPackage.IMPORT_CS__NAMESPACE:
-				return namespace != null;
+				return getNamespace() != null;
 			case BaseCSTPackage.IMPORT_CS__ALL:
 				return all != ALL_EDEFAULT;
 		}
@@ -293,5 +268,17 @@ public class ImportCSImpl extends NamedElementCSImpl implements ImportCS {
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return visitor.visitImportCS(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Namespace getNamespace() {
+		if (pathName == null) {
+			return null;
+		}
+		return (Namespace) pathName.getElement();
 	}
 } //ImportCSImpl

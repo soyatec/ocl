@@ -515,6 +515,88 @@ public class EssentialOCLGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getElementNamedElementUnreservedNameParserRuleCall_0_1() { return cElementNamedElementUnreservedNameParserRuleCall_0_1; }
 	}
 
+	public class URIPathNameCSElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "URIPathNameCS");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cPathAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cPathURIFirstPathElementCSParserRuleCall_0_0 = (RuleCall)cPathAssignment_0.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cColonColonKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cPathAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cPathNextPathElementCSParserRuleCall_1_1_0 = (RuleCall)cPathAssignment_1_1.eContents().get(0);
+		
+		//URIPathNameCS returns base::PathNameCS:
+		//
+		//	path+=URIFirstPathElementCS ("::" path+=NextPathElementCS)*;
+		public ParserRule getRule() { return rule; }
+
+		//path+=URIFirstPathElementCS ("::" path+=NextPathElementCS)*
+		public Group getGroup() { return cGroup; }
+
+		//path+=URIFirstPathElementCS
+		public Assignment getPathAssignment_0() { return cPathAssignment_0; }
+
+		//URIFirstPathElementCS
+		public RuleCall getPathURIFirstPathElementCSParserRuleCall_0_0() { return cPathURIFirstPathElementCSParserRuleCall_0_0; }
+
+		//("::" path+=NextPathElementCS)*
+		public Group getGroup_1() { return cGroup_1; }
+
+		//"::"
+		public Keyword getColonColonKeyword_1_0() { return cColonColonKeyword_1_0; }
+
+		//path+=NextPathElementCS
+		public Assignment getPathAssignment_1_1() { return cPathAssignment_1_1; }
+
+		//NextPathElementCS
+		public RuleCall getPathNextPathElementCSParserRuleCall_1_1_0() { return cPathNextPathElementCSParserRuleCall_1_1_0; }
+	}
+
+	public class URIFirstPathElementCSElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "URIFirstPathElementCS");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Assignment cElementAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
+		private final CrossReference cElementNamedElementCrossReference_0_0 = (CrossReference)cElementAssignment_0.eContents().get(0);
+		private final RuleCall cElementNamedElementUnrestrictedNameParserRuleCall_0_0_1 = (RuleCall)cElementNamedElementCrossReference_0_0.eContents().get(1);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Action cPathElementWithURICSAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Assignment cElementAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final CrossReference cElementNamespaceCrossReference_1_1_0 = (CrossReference)cElementAssignment_1_1.eContents().get(0);
+		private final RuleCall cElementNamespaceURIParserRuleCall_1_1_0_1 = (RuleCall)cElementNamespaceCrossReference_1_1_0.eContents().get(1);
+		
+		//URIFirstPathElementCS returns base::PathElementCS:
+		//
+		//	element=[pivot::NamedElement|UnrestrictedName] | {base::PathElementWithURICS} element=[pivot::Namespace|URI];
+		public ParserRule getRule() { return rule; }
+
+		//element=[pivot::NamedElement|UnrestrictedName] | {base::PathElementWithURICS} element=[pivot::Namespace|URI]
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//element=[pivot::NamedElement|UnrestrictedName]
+		public Assignment getElementAssignment_0() { return cElementAssignment_0; }
+
+		//[pivot::NamedElement|UnrestrictedName]
+		public CrossReference getElementNamedElementCrossReference_0_0() { return cElementNamedElementCrossReference_0_0; }
+
+		//UnrestrictedName
+		public RuleCall getElementNamedElementUnrestrictedNameParserRuleCall_0_0_1() { return cElementNamedElementUnrestrictedNameParserRuleCall_0_0_1; }
+
+		//{base::PathElementWithURICS} element=[pivot::Namespace|URI]
+		public Group getGroup_1() { return cGroup_1; }
+
+		//{base::PathElementWithURICS}
+		public Action getPathElementWithURICSAction_1_0() { return cPathElementWithURICSAction_1_0; }
+
+		//element=[pivot::Namespace|URI]
+		public Assignment getElementAssignment_1_1() { return cElementAssignment_1_1; }
+
+		//[pivot::Namespace|URI]
+		public CrossReference getElementNamespaceCrossReference_1_1_0() { return cElementNamespaceCrossReference_1_1_0; }
+
+		//URI
+		public RuleCall getElementNamespaceURIParserRuleCall_1_1_0_1() { return cElementNamespaceURIParserRuleCall_1_1_0_1; }
+	}
+
 	public class PrimitiveTypeIdentifierElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PrimitiveTypeIdentifier");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -2479,6 +2561,8 @@ public class EssentialOCLGrammarAccess extends AbstractGrammarElementFinder {
 	private PathNameCSElements pPathNameCS;
 	private FirstPathElementCSElements pFirstPathElementCS;
 	private NextPathElementCSElements pNextPathElementCS;
+	private URIPathNameCSElements pURIPathNameCS;
+	private URIFirstPathElementCSElements pURIFirstPathElementCS;
 	private PrimitiveTypeIdentifierElements pPrimitiveTypeIdentifier;
 	private PrimitiveTypeCSElements pPrimitiveTypeCS;
 	private CollectionTypeIdentifierElements pCollectionTypeIdentifier;
@@ -2899,6 +2983,28 @@ public class EssentialOCLGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getNextPathElementCSRule() {
 		return getNextPathElementCSAccess().getRule();
+	}
+
+	//URIPathNameCS returns base::PathNameCS:
+	//
+	//	path+=URIFirstPathElementCS ("::" path+=NextPathElementCS)*;
+	public URIPathNameCSElements getURIPathNameCSAccess() {
+		return (pURIPathNameCS != null) ? pURIPathNameCS : (pURIPathNameCS = new URIPathNameCSElements());
+	}
+	
+	public ParserRule getURIPathNameCSRule() {
+		return getURIPathNameCSAccess().getRule();
+	}
+
+	//URIFirstPathElementCS returns base::PathElementCS:
+	//
+	//	element=[pivot::NamedElement|UnrestrictedName] | {base::PathElementWithURICS} element=[pivot::Namespace|URI];
+	public URIFirstPathElementCSElements getURIFirstPathElementCSAccess() {
+		return (pURIFirstPathElementCS != null) ? pURIFirstPathElementCS : (pURIFirstPathElementCS = new URIFirstPathElementCSElements());
+	}
+	
+	public ParserRule getURIFirstPathElementCSRule() {
+		return getURIFirstPathElementCSAccess().getRule();
 	}
 
 	////---------------------------------------------------------------------

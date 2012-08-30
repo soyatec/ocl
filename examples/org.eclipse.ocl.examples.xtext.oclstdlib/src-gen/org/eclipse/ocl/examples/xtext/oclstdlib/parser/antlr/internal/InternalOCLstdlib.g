@@ -4611,6 +4611,75 @@ ruleNextPathElementCS returns [EObject current=null]
 
 
 
+
+
+// Entry rule entryRuleURIFirstPathElementCS
+entryRuleURIFirstPathElementCS returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getURIFirstPathElementCSRule()); }
+	 iv_ruleURIFirstPathElementCS=ruleURIFirstPathElementCS 
+	 { $current=$iv_ruleURIFirstPathElementCS.current; } 
+	 EOF 
+;
+
+// Rule URIFirstPathElementCS
+ruleURIFirstPathElementCS returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+(
+		{ 
+		  /* */ 
+		}
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getURIFirstPathElementCSRule());
+	        }
+        }
+		{ 
+	        newCompositeNode(grammarAccess.getURIFirstPathElementCSAccess().getElementNamedElementCrossReference_0_0()); 
+	    }
+		ruleUnrestrictedName		{ 
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |((
+	{ 
+	  /* */ 
+	}
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getURIFirstPathElementCSAccess().getPathElementWithURICSAction_1_0(),
+            $current);
+    }
+)(
+(
+		{ 
+		  /* */ 
+		}
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getURIFirstPathElementCSRule());
+	        }
+        }
+		{ 
+	        newCompositeNode(grammarAccess.getURIFirstPathElementCSAccess().getElementNamespaceCrossReference_1_1_0()); 
+	    }
+		ruleURI		{ 
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)))
+;
+
+
+
+
+
 // Entry rule entryRulePrimitiveTypeIdentifier
 entryRulePrimitiveTypeIdentifier returns [String current=null] 
 	:

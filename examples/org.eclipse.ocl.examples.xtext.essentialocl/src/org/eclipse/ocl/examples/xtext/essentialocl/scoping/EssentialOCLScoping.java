@@ -32,8 +32,10 @@ import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.pivot.scoping.EmptyAttribution;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.attributes.ImportCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
@@ -117,6 +119,9 @@ public class EssentialOCLScoping
 			else if (csContext instanceof ExpCS) {
 				navigationArgument = (ExpCS)csContext;
 				messageTemplate = OCLMessages.UnresolvedProperty_ERROR_;
+			}
+			else if (csContext instanceof ImportCS) {
+				return ImportCSAttribution.INSTANCE.getMessage(csContext, linkText);			// FIXME return a messageTemplate
 			}
 			else if (csContext instanceof ModelElementRefCS) {
 				messageTemplate = "Unresolved ModelElement ''{0}''";

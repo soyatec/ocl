@@ -81,7 +81,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getVisitableCS()
 	 * @generated
 	 */
-	int VISITABLE_CS = 50;
+	int VISITABLE_CS = 51;
 
 	/**
 	 * The number of structural features of the '<em>Visitable CS</em>' class.
@@ -128,7 +128,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getPivotableElementCS()
 	 * @generated
 	 */
-	int PIVOTABLE_ELEMENT_CS = 30;
+	int PIVOTABLE_ELEMENT_CS = 31;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -351,7 +351,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getTypedElementCS()
 	 * @generated
 	 */
-	int TYPED_ELEMENT_CS = 47;
+	int TYPED_ELEMENT_CS = 48;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.FeatureCS <em>Feature CS</em>}' class.
@@ -371,7 +371,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getStructuralFeatureCS()
 	 * @generated
 	 */
-	int STRUCTURAL_FEATURE_CS = 36;
+	int STRUCTURAL_FEATURE_CS = 37;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.AttributeCSImpl <em>Attribute CS</em>}' class.
@@ -451,7 +451,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getPrimitiveTypeRefCS()
 	 * @generated
 	 */
-	int PRIMITIVE_TYPE_REF_CS = 31;
+	int PRIMITIVE_TYPE_REF_CS = 32;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.ReferenceCSImpl <em>Reference CS</em>}' class.
@@ -461,7 +461,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getReferenceCS()
 	 * @generated
 	 */
-	int REFERENCE_CS = 32;
+	int REFERENCE_CS = 33;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.TypeCS <em>Type CS</em>}' class.
@@ -471,7 +471,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getTypeCS()
 	 * @generated
 	 */
-	int TYPE_CS = 44;
+	int TYPE_CS = 45;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.TypeParameterCSImpl <em>Type Parameter CS</em>}' class.
@@ -481,7 +481,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getTypeParameterCS()
 	 * @generated
 	 */
-	int TYPE_PARAMETER_CS = 45;
+	int TYPE_PARAMETER_CS = 46;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.TypedTypeRefCSImpl <em>Typed Type Ref CS</em>}' class.
@@ -491,7 +491,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getTypedTypeRefCS()
 	 * @generated
 	 */
-	int TYPED_TYPE_REF_CS = 49;
+	int TYPED_TYPE_REF_CS = 50;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.WildcardTypeRefCSImpl <em>Wildcard Type Ref CS</em>}' class.
@@ -501,7 +501,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getWildcardTypeRefCS()
 	 * @generated
 	 */
-	int WILDCARD_TYPE_REF_CS = 51;
+	int WILDCARD_TYPE_REF_CS = 52;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.TypeRefCSImpl <em>Type Ref CS</em>}' class.
@@ -511,7 +511,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getTypeRefCS()
 	 * @generated
 	 */
-	int TYPE_REF_CS = 46;
+	int TYPE_REF_CS = 47;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.TypedRefCSImpl <em>Typed Ref CS</em>}' class.
@@ -521,7 +521,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getTypedRefCS()
 	 * @generated
 	 */
-	int TYPED_REF_CS = 48;
+	int TYPED_REF_CS = 49;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.CollectionTypeRefCSImpl <em>Collection Type Ref CS</em>}' class.
@@ -551,7 +551,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getTemplateBindingCS()
 	 * @generated
 	 */
-	int TEMPLATE_BINDING_CS = 37;
+	int TEMPLATE_BINDING_CS = 38;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.TemplateParameterCSImpl <em>Template Parameter CS</em>}' class.
@@ -561,7 +561,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getTemplateParameterCS()
 	 * @generated
 	 */
-	int TEMPLATE_PARAMETER_CS = 38;
+	int TEMPLATE_PARAMETER_CS = 39;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.TemplateParameterSubstitutionCSImpl <em>Template Parameter Substitution CS</em>}' class.
@@ -571,7 +571,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getTemplateParameterSubstitutionCS()
 	 * @generated
 	 */
-	int TEMPLATE_PARAMETER_SUBSTITUTION_CS = 39;
+	int TEMPLATE_PARAMETER_SUBSTITUTION_CS = 40;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.TemplateSignatureCSImpl <em>Template Signature CS</em>}' class.
@@ -581,7 +581,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getTemplateSignatureCS()
 	 * @generated
 	 */
-	int TEMPLATE_SIGNATURE_CS = 40;
+	int TEMPLATE_SIGNATURE_CS = 41;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.TemplateableElementCS <em>Templateable Element CS</em>}' class.
@@ -591,7 +591,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getTemplateableElementCS()
 	 * @generated
 	 */
-	int TEMPLATEABLE_ELEMENT_CS = 41;
+	int TEMPLATEABLE_ELEMENT_CS = 42;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.ConstraintCSImpl <em>Constraint CS</em>}' class.
@@ -2393,13 +2393,13 @@ public interface BaseCSTPackage extends EPackage {
 	int IMPORT_CS__NAME = NAMESPACE_CS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * The feature id for the '<em><b>Path Name</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPORT_CS__URI = NAMESPACE_CS_FEATURE_COUNT + 0;
+	int IMPORT_CS__PATH_NAME = NAMESPACE_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Namespace</b></em>' reference.
@@ -3135,6 +3135,70 @@ public interface BaseCSTPackage extends EPackage {
 	int PATH_ELEMENT_CS_FEATURE_COUNT = ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.PathElementWithURICSImpl <em>Path Element With URICS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.PathElementWithURICSImpl
+	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getPathElementWithURICS()
+	 * @generated
+	 */
+	int PATH_ELEMENT_WITH_URICS = 29;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATH_ELEMENT_WITH_URICS__LOGICAL_PARENT = PATH_ELEMENT_CS__LOGICAL_PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Path Name</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATH_ELEMENT_WITH_URICS__PATH_NAME = PATH_ELEMENT_CS__PATH_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATH_ELEMENT_WITH_URICS__ELEMENT = PATH_ELEMENT_CS__ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Element Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATH_ELEMENT_WITH_URICS__ELEMENT_TYPE = PATH_ELEMENT_CS__ELEMENT_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATH_ELEMENT_WITH_URICS__URI = PATH_ELEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Path Element With URICS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATH_ELEMENT_WITH_URICS_FEATURE_COUNT = PATH_ELEMENT_CS_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.PathNameCSImpl <em>Path Name CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3142,7 +3206,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getPathNameCS()
 	 * @generated
 	 */
-	int PATH_NAME_CS = 29;
+	int PATH_NAME_CS = 30;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -3386,7 +3450,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getRootCS()
 	 * @generated
 	 */
-	int ROOT_CS = 33;
+	int ROOT_CS = 34;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -3468,7 +3532,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getRootPackageCS()
 	 * @generated
 	 */
-	int ROOT_PACKAGE_CS = 34;
+	int ROOT_PACKAGE_CS = 35;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -3595,7 +3659,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getSpecificationCS()
 	 * @generated
 	 */
-	int SPECIFICATION_CS = 35;
+	int SPECIFICATION_CS = 36;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -3956,7 +4020,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getTuplePartCS()
 	 * @generated
 	 */
-	int TUPLE_PART_CS = 42;
+	int TUPLE_PART_CS = 43;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -4065,7 +4129,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getTupleTypeCS()
 	 * @generated
 	 */
-	int TUPLE_TYPE_CS = 43;
+	int TUPLE_TYPE_CS = 44;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -4319,7 +4383,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getIteratorKind()
 	 * @generated
 	 */
-	int ITERATOR_KIND = 52;
+	int ITERATOR_KIND = 53;
 
 
 	/**
@@ -4330,7 +4394,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getScopeFilter()
 	 * @generated
 	 */
-	int SCOPE_FILTER = 53;
+	int SCOPE_FILTER = 54;
 
 
 	/**
@@ -4714,15 +4778,15 @@ public interface BaseCSTPackage extends EPackage {
 	EClass getImportCS();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS#getUri <em>Uri</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS#getPathName <em>Path Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Uri</em>'.
-	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS#getUri()
+	 * @return the meta object for the containment reference '<em>Path Name</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS#getPathName()
 	 * @see #getImportCS()
 	 * @generated
 	 */
-	EAttribute getImportCS_Uri();
+	EReference getImportCS_PathName();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS#getNamespace <em>Namespace</em>}'.
@@ -5150,6 +5214,27 @@ public interface BaseCSTPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPathElementCS_ElementType();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.base.baseCST.PathElementWithURICS <em>Path Element With URICS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Path Element With URICS</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.PathElementWithURICS
+	 * @generated
+	 */
+	EClass getPathElementWithURICS();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.xtext.base.baseCST.PathElementWithURICS#getUri <em>Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Uri</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.PathElementWithURICS#getUri()
+	 * @see #getPathElementWithURICS()
+	 * @generated
+	 */
+	EAttribute getPathElementWithURICS_Uri();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS <em>Path Name CS</em>}'.
@@ -6131,12 +6216,12 @@ public interface BaseCSTPackage extends EPackage {
 		EClass IMPORT_CS = eINSTANCE.getImportCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Path Name</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute IMPORT_CS__URI = eINSTANCE.getImportCS_Uri();
+		EReference IMPORT_CS__PATH_NAME = eINSTANCE.getImportCS_PathName();
 
 		/**
 		 * The meta object literal for the '<em><b>Namespace</b></em>' reference feature.
@@ -6483,6 +6568,24 @@ public interface BaseCSTPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PATH_ELEMENT_CS__ELEMENT_TYPE = eINSTANCE.getPathElementCS_ElementType();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.PathElementWithURICSImpl <em>Path Element With URICS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.PathElementWithURICSImpl
+		 * @see org.eclipse.ocl.examples.xtext.base.baseCST.impl.BaseCSTPackageImpl#getPathElementWithURICS()
+		 * @generated
+		 */
+		EClass PATH_ELEMENT_WITH_URICS = eINSTANCE.getPathElementWithURICS();
+
+		/**
+		 * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PATH_ELEMENT_WITH_URICS__URI = eINSTANCE.getPathElementWithURICS_Uri();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.PathNameCSImpl <em>Path Name CS</em>}' class.

@@ -185,7 +185,8 @@ public class BaseCS2MonikerVisitor extends AbstractExtendingBaseCSVisitor<Boolea
 	public Boolean visitImportCS(@NonNull ImportCS object) {
 		context.appendNameCS(object);
 		context.append(" : '");
-		context.append(object.getUri());
+//		context.append(object.getUri());
+		context.appendElement(object.getNamespace());
 		context.append("'");
 		return true;
 	}

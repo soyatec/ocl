@@ -3224,6 +3224,28 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 		return getNextPathElementCSAccess().getRule();
 	}
 
+	//URIPathNameCS returns base::PathNameCS:
+	//
+	//	path+=URIFirstPathElementCS ("::" path+=NextPathElementCS)*;
+	public EssentialOCLGrammarAccess.URIPathNameCSElements getURIPathNameCSAccess() {
+		return gaEssentialOCL.getURIPathNameCSAccess();
+	}
+	
+	public ParserRule getURIPathNameCSRule() {
+		return getURIPathNameCSAccess().getRule();
+	}
+
+	//URIFirstPathElementCS returns base::PathElementCS:
+	//
+	//	element=[pivot::NamedElement|UnrestrictedName] | {base::PathElementWithURICS} element=[pivot::Namespace|URI];
+	public EssentialOCLGrammarAccess.URIFirstPathElementCSElements getURIFirstPathElementCSAccess() {
+		return gaEssentialOCL.getURIFirstPathElementCSAccess();
+	}
+	
+	public ParserRule getURIFirstPathElementCSRule() {
+		return getURIFirstPathElementCSAccess().getRule();
+	}
+
 	////---------------------------------------------------------------------
 	// //  Types
 	//

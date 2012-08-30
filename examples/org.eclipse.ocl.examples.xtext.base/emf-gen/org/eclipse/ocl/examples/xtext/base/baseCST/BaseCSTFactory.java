@@ -217,6 +217,15 @@ public interface BaseCSTFactory extends EFactory {
 	PathElementCS createPathElementCS();
 
 	/**
+	 * Returns a new object of class '<em>Path Element With URICS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Path Element With URICS</em>'.
+	 * @generated
+	 */
+	PathElementWithURICS createPathElementWithURICS();
+
+	/**
 	 * Returns a new object of class '<em>Path Name CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -466,6 +466,7 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 
 	@Override
 	public Continuation<?> visitImportCS(@NonNull ImportCS csElement) {
+		super.visitImportCS(csElement);
 		Namespace namespace = csElement.getNamespace();													// Resolve the proxy to perform the import.
 		if ((namespace != null) && !namespace.eIsProxy()) {
 			context.installPivotUsage(csElement, namespace);

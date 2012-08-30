@@ -536,6 +536,17 @@ public class BaseCSTSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case BaseCSTPackage.PATH_ELEMENT_WITH_URICS:
+			{
+				PathElementWithURICS pathElementWithURICS = (PathElementWithURICS)theEObject;
+				T result = casePathElementWithURICS(pathElementWithURICS);
+				if (result == null) result = casePathElementCS(pathElementWithURICS);
+				if (result == null) result = caseElementCS(pathElementWithURICS);
+				if (result == null) result = casePivotable(pathElementWithURICS);
+				if (result == null) result = caseVisitableCS(pathElementWithURICS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case BaseCSTPackage.PATH_NAME_CS:
 			{
 				PathNameCS pathNameCS = (PathNameCS)theEObject;
@@ -1276,6 +1287,22 @@ public class BaseCSTSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePathElementCS(PathElementCS object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Path Element With URICS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Path Element With URICS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePathElementWithURICS(PathElementWithURICS object)
 	{
 		return null;
 	}

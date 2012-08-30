@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
+import org.eclipse.ocl.examples.xtext.base.baseCST.*;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AttributeCS;
@@ -215,6 +216,8 @@ public class BaseCSTValidator extends EObjectValidator
 				return validateParameterCS((ParameterCS)value, diagnostics, context);
 			case BaseCSTPackage.PATH_ELEMENT_CS:
 				return validatePathElementCS((PathElementCS)value, diagnostics, context);
+			case BaseCSTPackage.PATH_ELEMENT_WITH_URICS:
+				return validatePathElementWithURICS((PathElementWithURICS)value, diagnostics, context);
 			case BaseCSTPackage.PATH_NAME_CS:
 				return validatePathNameCS((PathNameCS)value, diagnostics, context);
 			case BaseCSTPackage.PIVOTABLE_ELEMENT_CS:
@@ -558,6 +561,16 @@ public class BaseCSTValidator extends EObjectValidator
 	public boolean validatePathElementCS(PathElementCS pathElementCS, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
 		return validate_EveryDefaultConstraint(pathElementCS, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePathElementWithURICS(PathElementWithURICS pathElementWithURICS, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		return validate_EveryDefaultConstraint(pathElementWithURICS, diagnostics, context);
 	}
 
 	/**

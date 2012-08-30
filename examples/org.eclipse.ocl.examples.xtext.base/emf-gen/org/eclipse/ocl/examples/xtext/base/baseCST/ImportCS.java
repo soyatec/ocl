@@ -28,7 +28,7 @@ import org.eclipse.ocl.examples.pivot.Namespace;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS#getUri <em>Uri</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS#getPathName <em>Path Name</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS#isAll <em>All</em>}</li>
  * </ul>
@@ -40,30 +40,30 @@ import org.eclipse.ocl.examples.pivot.Namespace;
  */
 public interface ImportCS extends NamespaceCS {
 	/**
-	 * Returns the value of the '<em><b>Uri</b></em>' attribute.
+	 * Returns the value of the '<em><b>Path Name</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Uri</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Path Name</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Uri</em>' attribute.
-	 * @see #setUri(String)
-	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage#getImportCS_Uri()
-	 * @model transient="true"
+	 * @return the value of the '<em>Path Name</em>' containment reference.
+	 * @see #setPathName(PathNameCS)
+	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage#getImportCS_PathName()
+	 * @model containment="true"
 	 * @generated
 	 */
-	String getUri();
+	PathNameCS getPathName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS#getUri <em>Uri</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS#getPathName <em>Path Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Uri</em>' attribute.
-	 * @see #getUri()
+	 * @param value the new value of the '<em>Path Name</em>' containment reference.
+	 * @see #getPathName()
 	 * @generated
 	 */
-	void setUri(String value);
+	void setPathName(PathNameCS value);
 
 	/**
 	 * Returns the value of the '<em><b>Namespace</b></em>' reference.
@@ -74,22 +74,11 @@ public interface ImportCS extends NamespaceCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Namespace</em>' reference.
-	 * @see #setNamespace(Namespace)
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage#getImportCS_Namespace()
-	 * @model
+	 * @model resolveProxies="false" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	Namespace getNamespace();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS#getNamespace <em>Namespace</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Namespace</em>' reference.
-	 * @see #getNamespace()
-	 * @generated
-	 */
-	void setNamespace(Namespace value);
 
 	/**
 	 * Returns the value of the '<em><b>All</b></em>' attribute.

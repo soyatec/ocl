@@ -279,6 +279,11 @@ public class BaseCSTAdapterFactory extends AdapterFactoryImpl {
 				return createPathElementCSAdapter();
 			}
 			@Override
+			public Adapter casePathElementWithURICS(PathElementWithURICS object)
+			{
+				return createPathElementWithURICSAdapter();
+			}
+			@Override
 			public Adapter casePathNameCS(PathNameCS object)
 			{
 				return createPathNameCSAdapter();
@@ -839,6 +844,21 @@ public class BaseCSTAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPathElementCSAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.baseCST.PathElementWithURICS <em>Path Element With URICS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.PathElementWithURICS
+	 * @generated
+	 */
+	public Adapter createPathElementWithURICSAdapter()
 	{
 		return null;
 	}

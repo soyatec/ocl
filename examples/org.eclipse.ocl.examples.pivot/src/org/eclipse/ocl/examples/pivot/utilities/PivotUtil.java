@@ -668,6 +668,15 @@ public class PivotUtil extends DomainUtil
 		return null;
 	}
 	
+	public static Root getContainingRoot(EObject element) {
+		for (EObject eObject = element; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof Root) {
+				return (Root)eObject;
+			}
+		}
+		return null;
+	}
+	
 	public static Type getContainingType(EObject element) {
 		for (EObject eObject = element; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Type) {

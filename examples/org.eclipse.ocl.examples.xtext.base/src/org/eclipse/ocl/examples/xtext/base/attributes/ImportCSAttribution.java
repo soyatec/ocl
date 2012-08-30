@@ -23,22 +23,16 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
-import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
-import org.eclipse.ocl.examples.pivot.utilities.PivotObjectImpl;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
@@ -60,73 +54,23 @@ public class ImportCSAttribution extends AbstractAttribution implements Unresolv
 		private Throwable throwable = null;
 	
 		public ScopeView computeLookup(ImportCS targetElement, EnvironmentView environmentView, ScopeView scopeView) {
-			EReference targetReference = scopeView.getTargetReference();
-			if (targetReference == BaseCSTPackage.Literals.IMPORT_CS__NAMESPACE) {
+			String name = environmentView.getName();
+			if (name != null) {				// Looking for a specific name
 				importModel(targetElement, environmentView);
 				Element importedElement2 = importedElement;
 				if (importedElement2 != null) {
 					Resource importedResource = importedElement2.eResource();
 					List<Resource.Diagnostic> errors = importedResource.getErrors();
 					if (errors.size() == 0) {
-						if (importedElement2 instanceof Root) {
-							Root root = (Root)importedElement2;
-							String externalURI = root.getExternalURI();
-							if (externalURI != null) {
-								String name = environmentView.getName();
-								if (name != null) {
-									URI envURI = URI.createURI(name);
-									URI extURI = URI.createURI(externalURI);
-									URI resolvedURI = envURI.resolve(extURI);
-									if (resolvedURI.equals(extURI)) {
-										environmentView.addElement(name, root);
-									}
-								}
-							}
-						}
-						else {
-							if (importedElement2 instanceof DomainNamedElement) {
-								String name = ((DomainNamedElement)importedElement2).getName();
-								if (name != null) {
-									environmentView.addElement(name, importedElement2);
-								}
-							}
-							if (importedElement2 instanceof DomainPackage) {
-								String nsURI = ((DomainPackage)importedElement2).getNsURI();
-								if (nsURI != null) {
-									environmentView.addElement(nsURI, importedElement2);
-									String suffixedName = nsURI + "#/";
-									if (suffixedName.equals(environmentView.getName())) {					// FIXME deprecated compatibility
-										environmentView.addElement(suffixedName, importedElement2);
-									}
-								}
-							}
-							if (importedElement2 instanceof PivotObjectImpl) {
-								EObject originalElement = ((PivotObjectImpl)importedElement2).getTarget();
-								if (originalElement != null) {
-									EObject eContainer = EcoreUtil.getRootContainer(importedElement2);
-									if (eContainer instanceof Root) {
-										String name = ((Root)eContainer).getName();
-										if (name != null) {
-											String uriFragment = originalElement.eResource().getURIFragment(originalElement);
-											environmentView.addElement(name + '#' + uriFragment, importedElement2);
-										}
-									}
-								}
-							}
-						}
+						environmentView.addElement(name, importedElement2);		// The name we imported must be a good name for the element
 					}
 				}
 				return null;
+				
 			}
-			else {
-				EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
-				if (containmentFeature == null) {
-					environmentView.addElementsOfScope(importedElement, scopeView);
-				}
-				else {
-					environmentView.addElementsOfScope(importedElement, scopeView);
-				}
-				return scopeView.getParent();
+			else {							// looking for all possible names
+				// FIXME Do an external model search
+				return null;
 			}
 		}
 	

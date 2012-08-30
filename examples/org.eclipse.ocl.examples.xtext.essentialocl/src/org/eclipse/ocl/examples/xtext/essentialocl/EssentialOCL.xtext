@@ -141,6 +141,12 @@ FirstPathElementCS returns base::PathElementCS:
 NextPathElementCS returns base::PathElementCS:
 	element=[pivot::NamedElement|UnreservedName];
 
+URIPathNameCS returns base::PathNameCS:
+	path+=URIFirstPathElementCS ('::' path+=NextPathElementCS)*;
+
+URIFirstPathElementCS returns base::PathElementCS:
+	element=[pivot::NamedElement|UnrestrictedName] | {base::PathElementWithURICS} element=[pivot::Namespace|URI];
+
 //---------------------------------------------------------------------
 //  Types
 //---------------------------------------------------------------------

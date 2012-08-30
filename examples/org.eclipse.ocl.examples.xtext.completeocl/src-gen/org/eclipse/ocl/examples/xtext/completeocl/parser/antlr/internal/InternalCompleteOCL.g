@@ -1082,17 +1082,17 @@ ruleImportCS returns [EObject current=null]
 )?(
 (
 		{ 
-		  /* */ 
-		}
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getImportCSRule());
-	        }
-        }
-		{ 
-	        newCompositeNode(grammarAccess.getImportCSAccess().getNamespaceNamespaceCrossReference_2_0()); 
+	        newCompositeNode(grammarAccess.getImportCSAccess().getPathNameURIPathNameCSParserRuleCall_2_0()); 
 	    }
-		ruleURI		{ 
+		lv_pathName_3_0=ruleURIPathNameCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getImportCSRule());
+	        }
+       		set(
+       			$current, 
+       			"pathName",
+        		lv_pathName_3_0, 
+        		"URIPathNameCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2788,6 +2788,134 @@ ruleNextPathElementCS returns [EObject current=null]
 
 )
 )
+;
+
+
+
+
+
+// Entry rule entryRuleURIPathNameCS
+entryRuleURIPathNameCS returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getURIPathNameCSRule()); }
+	 iv_ruleURIPathNameCS=ruleURIPathNameCS 
+	 { $current=$iv_ruleURIPathNameCS.current; } 
+	 EOF 
+;
+
+// Rule URIPathNameCS
+ruleURIPathNameCS returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getURIPathNameCSAccess().getPathURIFirstPathElementCSParserRuleCall_0_0()); 
+	    }
+		lv_path_0_0=ruleURIFirstPathElementCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getURIPathNameCSRule());
+	        }
+       		add(
+       			$current, 
+       			"path",
+        		lv_path_0_0, 
+        		"URIFirstPathElementCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_1='::' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getURIPathNameCSAccess().getColonColonKeyword_1_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getURIPathNameCSAccess().getPathNextPathElementCSParserRuleCall_1_1_0()); 
+	    }
+		lv_path_2_0=ruleNextPathElementCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getURIPathNameCSRule());
+	        }
+       		add(
+       			$current, 
+       			"path",
+        		lv_path_2_0, 
+        		"NextPathElementCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*)
+;
+
+
+
+
+
+// Entry rule entryRuleURIFirstPathElementCS
+entryRuleURIFirstPathElementCS returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getURIFirstPathElementCSRule()); }
+	 iv_ruleURIFirstPathElementCS=ruleURIFirstPathElementCS 
+	 { $current=$iv_ruleURIFirstPathElementCS.current; } 
+	 EOF 
+;
+
+// Rule URIFirstPathElementCS
+ruleURIFirstPathElementCS returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+(
+		{ 
+		  /* */ 
+		}
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getURIFirstPathElementCSRule());
+	        }
+        }
+		{ 
+	        newCompositeNode(grammarAccess.getURIFirstPathElementCSAccess().getElementNamedElementCrossReference_0_0()); 
+	    }
+		ruleUnrestrictedName		{ 
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |((
+	{ 
+	  /* */ 
+	}
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getURIFirstPathElementCSAccess().getPathElementWithURICSAction_1_0(),
+            $current);
+    }
+)(
+(
+		{ 
+		  /* */ 
+		}
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getURIFirstPathElementCSRule());
+	        }
+        }
+		{ 
+	        newCompositeNode(grammarAccess.getURIFirstPathElementCSAccess().getElementNamespaceCrossReference_1_1_0()); 
+	    }
+		ruleURI		{ 
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)))
 ;
 
 
@@ -5960,7 +6088,7 @@ ruleSelfExpCS returns [EObject current=null]
 
 
 
-RULE_UNQUOTED_STRING : '\u00C2\u00A3$%^\u00C2\u00A3$%^';
+RULE_UNQUOTED_STRING : '\u00A3$%^\u00A3$%^';
 
 fragment RULE_ESCAPED_CHARACTER : '\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\');
 

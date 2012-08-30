@@ -14,6 +14,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.MultiplicityStringCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementWithURICS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PrimitiveTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateBindingCS;
@@ -167,6 +168,16 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 					sequence_NextPathElementCS(context, (PathElementCS) semanticObject); 
 					return; 
 				}
+				else if(context == grammarAccess.getURIFirstPathElementCSRule()) {
+					sequence_URIFirstPathElementCS(context, (PathElementCS) semanticObject); 
+					return; 
+				}
+				else break;
+			case BaseCSTPackage.PATH_ELEMENT_WITH_URICS:
+				if(context == grammarAccess.getURIFirstPathElementCSRule()) {
+					sequence_URIFirstPathElementCS(context, (PathElementWithURICS) semanticObject); 
+					return; 
+				}
 				else break;
 			case BaseCSTPackage.PATH_NAME_CS:
 				if(context == grammarAccess.getLibPathNameCSRule()) {
@@ -175,6 +186,10 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 				}
 				else if(context == grammarAccess.getPathNameCSRule()) {
 					sequence_PathNameCS(context, (PathNameCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getURIPathNameCSRule()) {
+					sequence_URIPathNameCS(context, (PathNameCS) semanticObject); 
 					return; 
 				}
 				else break;

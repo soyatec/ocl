@@ -78,9 +78,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="FeatureCS" abstract="true" interface="true"
       eSuperTypes="#//TypedElementCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="ImportCS" eSuperTypes="#//NamespaceCS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        transient="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Namespace"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pathName" eType="#//PathNameCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Namespace"
+        changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="all" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         transient="true" defaultValueLiteral="false"/>
   </eClassifiers>
@@ -160,6 +161,10 @@
         eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Element"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="elementType" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClassifier"
         transient="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PathElementWithURICS" eSuperTypes="#//PathElementCS">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        transient="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PathNameCS" eSuperTypes="#//ElementCS ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Pivotable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="path" lowerBound="1" upperBound="-1"

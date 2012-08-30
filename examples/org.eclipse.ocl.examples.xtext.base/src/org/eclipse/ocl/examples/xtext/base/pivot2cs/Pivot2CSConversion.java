@@ -66,6 +66,8 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.MultiplicityBoundsCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.MultiplicityStringCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementWithURICS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.RootCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.StructuralFeatureCS;
@@ -127,12 +129,26 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 				AliasAnalysis aliasAnalysis = AliasAnalysis.getAdapter(csResource, metaModelManager);
 				String alias = aliasAnalysis.getAlias(pivotPackage);
 				importCS.setName(alias);
-				importCS.setNamespace(pivotPackage);
-				importCS.setPivot(pivotPackage);
+				PathNameCS csPathName = importCS.getPathName();
+				List<PathElementCS> csPath;
+				if (csPathName == null) {
+					@SuppressWarnings("null") @NonNull PathNameCS csPathName2 = BaseCSTFactory.eINSTANCE.createPathNameCS();
+					csPathName = csPathName2;
+					importCS.setPathName(csPathName);
+					csPath = csPathName.getPath();
+				}
+				else {
+					csPath = csPathName.getPath();
+					csPath.clear();		// FIXME re-use
+				}
+				PathElementWithURICS csSimpleRef = BaseCSTFactory.eINSTANCE.createPathElementWithURICS();
+				csPath.add(csSimpleRef);
+				csSimpleRef.setElement(pivotPackage);
 				EObject eObject = pivotPackage.getETarget();
 				URI fullURI = EcoreUtil.getURI(eObject != null ? eObject : pivotPackage);
 				URI deresolvedURI = fullURI.deresolve(csURI, true, true, false);
-				importCS.setUri(deresolvedURI.toString());
+				csSimpleRef.setUri(deresolvedURI.toString());
+				importCS.setPivot(pivotPackage);
 				imports.add(importCS);
 			}
 		}

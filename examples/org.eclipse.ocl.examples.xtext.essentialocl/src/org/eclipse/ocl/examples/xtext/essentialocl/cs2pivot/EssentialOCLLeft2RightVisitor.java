@@ -926,9 +926,10 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 				ExpCS csArgument = csOperator.getArgument();
 				if (csArgument != null) {
 					OCLExpression argument = context.visitLeft2Right(OCLExpression.class, csArgument);
-					context.refreshList(expression.getArgument(), Collections.singletonList(argument));
+					List<? extends OCLExpression> newElements = argument != null ? Collections.singletonList(argument) : Collections.<OCLExpression>emptyList();
+					context.refreshList(expression.getArgument(), newElements);
 					Type sourceType = source.getType();
-					Type argumentType = argument.getType();
+					Type argumentType = argument != null ? argument.getType() : null;
 					if ((sourceType != null) && (argumentType != null)) {
 						resolveOperationCall(expression, csOperator, new BinaryOperationFilter(metaModelManager, sourceType, argumentType));
 					}
@@ -1122,8 +1123,8 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 				expression.setThenExpression(thenExpression);
 				OCLExpression elseExpression = context.visitLeft2Right(OCLExpression.class, csElse);
 				expression.setElseExpression(elseExpression);
-				Type thenType = thenExpression.getType();
-				Type elseType = elseExpression.getType();
+				Type thenType = thenExpression != null ? thenExpression.getType() : null;
+				Type elseType = elseExpression != null ? elseExpression.getType() : null;
 				Type commonType = (thenType != null) && (elseType != null) ? metaModelManager.getCommonType(thenType, elseType, null) : null;
 				context.setType(expression, commonType);
 			}
