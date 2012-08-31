@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -80,6 +81,7 @@ import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.UnspecifiedType;
+import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
@@ -1140,6 +1142,36 @@ public class PivotUtil extends DomainUtil
 			if (!newElement.eIsProxy() && !oldElements.contains(newElement)) {
 				oldElements.add(newElement);
 			}
+		}
+	}
+
+	/**
+	 * Configure resource to support parsing in the context of an eObject. Throws a ParserException
+	 * if a pivot element cannot be identified for eObject.eClass(). Return false if a pivot element
+	 * can be identified, but it is not one that supports constraint parsing.
+	 *
+	 * @throws ParserException if eObject cannot be converted to a Pivot element
+	 */
+	public static boolean setParserContext(@NonNull BaseResource resource, @NonNull EObject eObject, Object... todoParameters) throws ParserException {
+		ResourceSet resourceSet = resource.getResourceSet();
+		MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
+		Element pivotElement;
+		if (eObject instanceof Element) {
+			pivotElement = (Element) eObject;
+		}
+		else {
+			pivotElement = metaModelManager.getPivotOf(Element.class, eObject);
+		}
+		if (pivotElement == null) {
+			return false;
+		}
+		ParserContext parserContext = metaModelManager.getParserContext(pivotElement, todoParameters);
+		if (parserContext == null) {
+			return false;
+		}
+		else {
+			resource.setParserContext(parserContext);
+			return true;
 		}
 	}
 

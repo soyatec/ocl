@@ -17,8 +17,8 @@
 package org.eclipse.ocl.examples.pivot;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.RealValue;
+import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * <!-- begin-user-doc -->

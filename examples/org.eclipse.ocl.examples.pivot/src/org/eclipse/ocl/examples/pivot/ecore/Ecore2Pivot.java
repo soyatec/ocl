@@ -92,7 +92,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 			return null;
 		}
 
-		public <T extends NamedElement> T getPivotOf(@NonNull MetaModelManager metaModelManager, @NonNull Class<T> pivotClass, @NonNull EObject eObject) {
+		public <T extends Element> T getPivotOf(@NonNull MetaModelManager metaModelManager, @NonNull Class<T> pivotClass, @NonNull EObject eObject) {
 			return metaModelManager.getPivotOfEcore(pivotClass, eObject);
 		}
 

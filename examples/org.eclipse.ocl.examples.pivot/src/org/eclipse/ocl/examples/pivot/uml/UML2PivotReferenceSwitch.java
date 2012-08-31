@@ -34,7 +34,6 @@ import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.uml2.uml.Generalization;
-import org.eclipse.uml2.uml.Interface;
 import org.eclipse.uml2.uml.MultiplicityElement;
 import org.eclipse.uml2.uml.ParameterDirectionKind;
 import org.eclipse.uml2.uml.util.UMLSwitch;
@@ -58,10 +57,10 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 
 	@Override
 	public org.eclipse.ocl.examples.pivot.Class caseClass(org.eclipse.uml2.uml.Class umlClass) {
-		@SuppressWarnings("null") @NonNull org.eclipse.uml2.uml.Class umlClass2 = umlClass;
-		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.getCreated(org.eclipse.ocl.examples.pivot.Class.class, umlClass2);
+		assert umlClass != null;
+		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.getCreated(org.eclipse.ocl.examples.pivot.Class.class, umlClass);
 		if (pivotElement != null) {
-			doSwitchAll(Type.class, pivotElement.getSuperClass(), umlClass2.getSuperClasses());
+			doSwitchAll(Type.class, pivotElement.getSuperClass(), umlClass.getSuperClasses());
 			if (pivotElement.getSuperClass().isEmpty()) {
 				org.eclipse.ocl.examples.pivot.Class oclElementType = metaModelManager.getOclElementType();
 				pivotElement.getSuperClass().add(oclElementType);
@@ -72,20 +71,20 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 
 	@Override
 	public Constraint caseConstraint(org.eclipse.uml2.uml.Constraint umlConstraint) {
-		@SuppressWarnings("null") @NonNull org.eclipse.uml2.uml.Constraint umlConstraint2 = umlConstraint;
-		Constraint pivotElement = converter.getCreated(Constraint.class, umlConstraint2);
+		assert umlConstraint != null;
+		Constraint pivotElement = converter.getCreated(Constraint.class, umlConstraint);
 		if (pivotElement != null) {
-			doSwitchAll(Element.class, pivotElement.getConstrainedElement(), umlConstraint2.getConstrainedElements());
+			doSwitchAll(Element.class, pivotElement.getConstrainedElement(), umlConstraint.getConstrainedElements());
 		}
 		return null;
 	}
 
 	@Override
 	public org.eclipse.ocl.examples.pivot.Class caseInterface(org.eclipse.uml2.uml.Interface umlInterface) {
-		@SuppressWarnings("null") @NonNull Interface umlInterface2 = umlInterface;
-		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.getCreated(org.eclipse.ocl.examples.pivot.Class.class, umlInterface2);
+		assert umlInterface != null;
+		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.getCreated(org.eclipse.ocl.examples.pivot.Class.class, umlInterface);
 		if (pivotElement != null) {
-			List<Generalization> umlGeneralizations = umlInterface2.getGeneralizations();
+			List<Generalization> umlGeneralizations = umlInterface.getGeneralizations();
 			List<Type> newSuperTypes = new ArrayList<Type>(Math.max(1, umlGeneralizations.size()));
 			for (org.eclipse.uml2.uml.Generalization umlGeneralization : umlGeneralizations) {
 				org.eclipse.uml2.uml.Classifier umlGeneral = umlGeneralization.getGeneral();
@@ -107,12 +106,12 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 
 	@Override
 	public Operation caseOperation(org.eclipse.uml2.uml.Operation umlOperation) {
-		@SuppressWarnings("null") @NonNull org.eclipse.uml2.uml.Operation umlOperation2 = umlOperation;
-		Operation pivotElement = converter.getCreated(Operation.class, umlOperation2);
+		assert umlOperation != null;
+		Operation pivotElement = converter.getCreated(Operation.class, umlOperation);
 		if (pivotElement != null) {
-			doSwitchAll(Type.class, pivotElement.getRaisedException(), umlOperation2.getRaisedExceptions());
-			doSwitchAll(Operation.class, pivotElement.getRedefinedOperation(), umlOperation2.getRedefinedOperations());
-			for (org.eclipse.uml2.uml.Parameter umlParameter : umlOperation2.getOwnedParameters()) {
+			doSwitchAll(Type.class, pivotElement.getRaisedException(), umlOperation.getRaisedExceptions());
+			doSwitchAll(Operation.class, pivotElement.getRedefinedOperation(), umlOperation.getRedefinedOperations());
+			for (org.eclipse.uml2.uml.Parameter umlParameter : umlOperation.getOwnedParameters()) {
 				ParameterDirectionKind direction = umlParameter.getDirection();
 				if (direction == ParameterDirectionKind.RETURN_LITERAL) {
 					org.eclipse.uml2.uml.Type umlType = umlParameter.getType();
@@ -132,25 +131,25 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 
 	@Override
 	public org.eclipse.ocl.examples.pivot.Package casePackage(org.eclipse.uml2.uml.Package umlPackage) {
-		@SuppressWarnings("null") @NonNull org.eclipse.uml2.uml.Package umlPackage2 = umlPackage;
-		org.eclipse.ocl.examples.pivot.Package pivotElement = converter.getCreated(org.eclipse.ocl.examples.pivot.Package.class, umlPackage2);
+		assert umlPackage != null;
+		org.eclipse.ocl.examples.pivot.Package pivotElement = converter.getCreated(org.eclipse.ocl.examples.pivot.Package.class, umlPackage);
 		if (pivotElement != null) {
-			doSwitchAll(org.eclipse.ocl.examples.pivot.Package.class, pivotElement.getImportedPackage(), umlPackage2.getImportedPackages());
+			doSwitchAll(org.eclipse.ocl.examples.pivot.Package.class, pivotElement.getImportedPackage(), umlPackage.getImportedPackages());
 		}
 		return null;
 	}
 
 	@Override
 	public Property caseProperty(org.eclipse.uml2.uml.Property umlProperty) {
-		@SuppressWarnings("null") @NonNull org.eclipse.uml2.uml.Property umlProperty2 = umlProperty;
-		Property pivotElement = converter.getCreated(Property.class, umlProperty2);
+		assert umlProperty != null;
+		Property pivotElement = converter.getCreated(Property.class, umlProperty);
 		if (pivotElement != null) {
-			org.eclipse.uml2.uml.Type umlType = umlProperty2.getType();
+			org.eclipse.uml2.uml.Type umlType = umlProperty.getType();
 			if (umlType != null) {
 				Type pivotType = converter.resolveType(umlType);
 				pivotElement.setType(pivotType);
 			}
-			doSwitchAll(Property.class, pivotElement.getRedefinedProperty(), umlProperty2.getRedefinedProperties());
+			doSwitchAll(Property.class, pivotElement.getRedefinedProperty(), umlProperty.getRedefinedProperties());
 	//		doSwitchAll(Property.class, pivotElement.getSubsettedProperty(), umlProperty.getSubsettedProperties());
 		}
 		return null;
@@ -158,10 +157,10 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 
 	@Override
 	public EObject caseTypedElement(org.eclipse.uml2.uml.TypedElement umlTypedElement) {
-		@SuppressWarnings("null") @NonNull org.eclipse.uml2.uml.TypedElement umlTypedElement2 = umlTypedElement;
-		TypedElement pivotElement = converter.getCreated(TypedElement.class, umlTypedElement2);
+		assert umlTypedElement != null;
+		TypedElement pivotElement = converter.getCreated(TypedElement.class, umlTypedElement);
 		if (pivotElement != null) {
-			org.eclipse.uml2.uml.Type umlType = umlTypedElement2.getType();
+			org.eclipse.uml2.uml.Type umlType = umlTypedElement.getType();
 			if (umlType != null) {
 				Type pivotType = converter.resolveType(umlType);
 				if ((umlType instanceof MultiplicityElement) && (pivotType != null)) {

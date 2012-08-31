@@ -50,8 +50,6 @@ import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.context.ClassContext;
 import org.eclipse.ocl.examples.pivot.context.DiagnosticContext;
-import org.eclipse.ocl.examples.pivot.context.OperationContext;
-import org.eclipse.ocl.examples.pivot.context.PropertyContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
@@ -166,15 +164,16 @@ public class PivotQueries
 			MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
 			ClassContext parserContext = null;
 			if (metaModelManager != null) {
-				if (contextElement instanceof Property) {
-					parserContext = new PropertyContext(metaModelManager, null, (Property) contextElement);
-				}
-				else if (contextElement instanceof Operation) {
-					parserContext = new OperationContext(metaModelManager, null, (Operation) contextElement, null);
-				}
-				else if (contextElement instanceof org.eclipse.ocl.examples.pivot.Class) {
-					parserContext = new ClassContext(metaModelManager, null, (org.eclipse.ocl.examples.pivot.Class) contextElement);
-				}
+				parserContext = (ClassContext)metaModelManager.getParserContext(contextElement);
+//				if (contextElement instanceof Property) {
+//					parserContext = new PropertyContext(metaModelManager, null, (Property) contextElement);
+//				}
+//				else if (contextElement instanceof Operation) {
+//					parserContext = new OperationContext(metaModelManager, null, (Operation) contextElement, null);
+//				}
+//				else if (contextElement instanceof org.eclipse.ocl.examples.pivot.Class) {
+//					parserContext = new ClassContext(metaModelManager, null, (org.eclipse.ocl.examples.pivot.Class) contextElement);
+//				}
 			}
 			if (parserContext == null) {
 				logger.error("Unknown context type");

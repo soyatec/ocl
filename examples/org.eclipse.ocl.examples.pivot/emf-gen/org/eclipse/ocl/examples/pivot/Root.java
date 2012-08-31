@@ -15,7 +15,6 @@
 package org.eclipse.ocl.examples.pivot;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 
 /**

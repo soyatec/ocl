@@ -19,18 +19,16 @@ package org.eclipse.ocl.examples.pivot.uml;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
-import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.common.OCLCommon;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -45,7 +43,6 @@ import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
-import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
@@ -57,9 +54,7 @@ import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
-import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
-import org.eclipse.ocl.examples.pivot.delegate.SettingBehavior;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2PivotDeclarationSwitch;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.TypeServer;
@@ -229,52 +224,6 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	public Operation caseOperation(org.eclipse.uml2.uml.Operation umlOperation) {
 		assert umlOperation != null;
 		Operation pivotElement = converter.refreshNamedElement(Operation.class, PivotPackage.Literals.OPERATION, umlOperation);
-		List<EAnnotation> excludedAnnotations =  null;
-		EAnnotation oclAnnotation = OCLCommon.getDelegateAnnotation(umlOperation);
-		if (oclAnnotation != null) {
-			excludedAnnotations = new ArrayList<EAnnotation>();
-			excludedAnnotations.add(oclAnnotation);
-			List<Constraint> constraints = pivotElement.getOwnedRule();
-			for (Map.Entry<String,String> entry : oclAnnotation.getDetails().entrySet()) {
-				Constraint constraint = PivotFactory.eINSTANCE.createConstraint();
-				String key = entry.getKey();
-				if (key.equals("body")) {
-					constraint.setStereotype(UMLReflection.BODY);
-				}
-				else if (key.startsWith("body_")) {
-					constraint.setStereotype(UMLReflection.BODY);
-					constraint.setName(key.substring(5));
-				}
-				else if (key.equals("pre")) {
-					constraint.setStereotype(UMLReflection.PRECONDITION);
-				}
-				else if (key.startsWith("pre_")) {
-					constraint.setStereotype(UMLReflection.PRECONDITION);
-					constraint.setName(key.substring(4));
-				}
-				else if (key.equals("post")) {
-					constraint.setStereotype(UMLReflection.POSTCONDITION);
-				}
-				else if (key.startsWith("post_")) {
-					constraint.setStereotype(UMLReflection.POSTCONDITION);
-					constraint.setName(key.substring(5));
-				}
-				else
-				{
-					converter.error("Unsupported operation constraint " + key);
-					constraint = null;
-				}
-				if (constraint != null) {
-					String value = entry.getValue();
-					OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOCL
-					specification.getBody().add(value);
-					specification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
-					constraint.setSpecification(specification);
-//						constraint.setExprString(entry.getValue());
-					constraints.add(constraint);
-				}
-			}				
-		}
 //		converter.copyTypedElement(pivotElement, umlOperation, excludedAnnotations);
 		copyNamedElement(pivotElement, umlOperation);
 		copyConstraints(pivotElement, umlOperation);
@@ -418,48 +367,6 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	}
 
 	protected void copyClassifier(@NonNull org.eclipse.ocl.examples.pivot.Class pivotElement, @NonNull org.eclipse.uml2.uml.Classifier umlClassifier) {
-		List<EAnnotation> excludedAnnotations =  null;
-		EMap<String, String> oclAnnotationDetails = null;
-		EAnnotation oclAnnotation = OCLCommon.getDelegateAnnotation(umlClassifier);
-		if (oclAnnotation != null) {
-			excludedAnnotations = new ArrayList<EAnnotation>();
-			excludedAnnotations.add(oclAnnotation);
-			List<Constraint> constraints = pivotElement.getOwnedRule();
-			oclAnnotationDetails = oclAnnotation.getDetails();
-			for (Map.Entry<String,String> entry : oclAnnotationDetails.entrySet()) {
-				Constraint constraint = PivotFactory.eINSTANCE.createConstraint();
-				constraint.setStereotype(UMLReflection.INVARIANT);
-				constraint.setName(entry.getKey());
-				String value = entry.getValue();
-				OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOCL
-				specification.getBody().add(value);
-				specification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
-				constraint.setSpecification(specification);
-				constraints.add(constraint);
-			}				
-		}
-		EAnnotation ecoreAnnotation = umlClassifier.getEAnnotation(EcorePackage.eNS_URI);
-		if (ecoreAnnotation != null) {
-			if (excludedAnnotations == null) {
-				excludedAnnotations = new ArrayList<EAnnotation>();
-			}
-			excludedAnnotations.add(ecoreAnnotation);
-			String constraintNameList = ecoreAnnotation.getDetails().get("constraints");
-			if (constraintNameList != null) {
-				List<Constraint> constraints = pivotElement.getOwnedRule();
-				String[] constraintNames = constraintNameList.split(" ");
-				for (String constraintName : constraintNames) {
-					if ((oclAnnotationDetails == null) || (oclAnnotationDetails.get(constraintName) == null)) {
-						Constraint constraint = PivotFactory.eINSTANCE.createConstraint();
-						constraint.setStereotype(UMLReflection.INVARIANT);
-						constraint.setName(constraintName);
-						OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();
-						constraint.setSpecification(specification);
-						constraints.add(constraint);
-					}
-				}
-			}
-		}
 		copyNamedElement(pivotElement, umlClassifier);
 		copyConstraints(pivotElement, umlClassifier);
 //		if (umlClassifier.eIsSet(EcorePackage.Literals.ECLASSIFIER__INSTANCE_CLASS_NAME)) {
@@ -475,8 +382,25 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		doSwitchAll(pivotElement.getOwnedComment(), umlElement.getOwnedComments(), null);
 	}
 
-	protected void copyConstraints(@NonNull Namespace pivotElement, @NonNull org.eclipse.uml2.uml.Namespace umlElement) {
-		doSwitchAll(pivotElement.getOwnedRule(), umlElement.getOwnedRules(), null);
+	protected void copyConstraints(@NonNull Namespace pivotElement, @NonNull org.eclipse.uml2.uml.Namespace umlNamespace) {
+		List<org.eclipse.uml2.uml.Constraint> ownedRules = umlNamespace.getOwnedRules();
+		if (ownedRules.size() <= 0) {						// FIXME Workaround for Bug 388493
+			ownedRules = null;
+			for (org.eclipse.uml2.uml.Element umlElement : umlNamespace.getOwnedElements()) {
+				if (umlElement instanceof org.eclipse.uml2.uml.Constraint) {
+					if (ownedRules == null) {
+						ownedRules = new ArrayList<org.eclipse.uml2.uml.Constraint>();
+					}
+					ownedRules.add((org.eclipse.uml2.uml.Constraint)umlElement);
+				}
+			}
+		}
+		if (ownedRules != null) {
+			doSwitchAll(pivotElement.getOwnedRule(), ownedRules, null);
+		}
+		else {
+			pivotElement.getOwnedRule().clear();
+		}
 	}
 
 	protected void copyDataTypeOrEnum(@NonNull DataType pivotElement, @NonNull org.eclipse.uml2.uml.DataType umlDataType) {
@@ -540,36 +464,6 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	}
 
 	protected void copyProperty(@NonNull Property pivotElement, @NonNull org.eclipse.uml2.uml.Property umlProperty, List<EAnnotation> excludedAnnotations) {
-		EAnnotation oclAnnotation = OCLCommon.getDelegateAnnotation(umlProperty);
-		if (oclAnnotation != null) {
-			excludedAnnotations = new ArrayList<EAnnotation>();
-			excludedAnnotations.add(oclAnnotation);
-			List<Constraint> constraints = pivotElement.getOwnedRule();
-			for (Map.Entry<String,String> entry : oclAnnotation.getDetails().entrySet()) {
-				Constraint constraint = PivotFactory.eINSTANCE.createConstraint();
-				String key = entry.getKey();
-				if (key.equals(SettingBehavior.DERIVATION_CONSTRAINT_KEY)) {
-					constraint.setStereotype(UMLReflection.DERIVATION);
-				}
-				else if (key.equals(SettingBehavior.INITIAL_CONSTRAINT_KEY)) {
-					constraint.setStereotype(UMLReflection.INITIAL);
-				}
-				else
-				{
-					converter.error("Unsupported feature constraint " + key);
-					constraint = null;
-				}
-				if (constraint != null) {
-					String value = entry.getValue();
-					OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOCL
-					specification.getBody().add(value);
-					specification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
-					constraint.setSpecification(specification);
-//						constraint.setExprString(entry.getValue());
-					constraints.add(constraint);
-				}
-			}				
-		}
 		copyTypedMultiplicityElement(pivotElement, umlProperty, excludedAnnotations);
 //		converter.copyMultiplicityElement(pivotElement, umlProperty);
 		pivotElement.setIsReadOnly(umlProperty.isReadOnly());			
@@ -604,6 +498,10 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		org.eclipse.uml2.uml.Type umlType = umlTypedElement.getType();
 		if (umlType != null) {
 			converter.queueReference(umlTypedElement);
+			Resource umlResource = umlType.eResource();
+			if (umlResource != null) {
+				converter.addImportedResource(umlResource);
+			}
 		}
 	}
 
@@ -651,6 +549,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	public <T extends Element, V extends EObject> void doSwitchAll(/*@NonNull*/ Collection<T> pivotObjects, /*@NonNull*/ List<V> eObjects, @Nullable UML2Pivot.Predicate<V> predicate) {
 		assert pivotObjects != null;
 		assert eObjects != null;
+		eObjects.size();
 		for (V eObject : eObjects) {
 			if ((eObject != null) && ((predicate == null) || predicate.filter(eObject))) {
 				@SuppressWarnings("unchecked")

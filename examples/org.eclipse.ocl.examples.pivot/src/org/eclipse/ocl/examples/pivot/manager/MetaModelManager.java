@@ -87,6 +87,7 @@ import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SelfType;
+import org.eclipse.ocl.examples.pivot.Stereotype;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
@@ -96,6 +97,10 @@ import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.UnspecifiedType;
 import org.eclipse.ocl.examples.pivot.VoidType;
+import org.eclipse.ocl.examples.pivot.context.ClassContext;
+import org.eclipse.ocl.examples.pivot.context.OperationContext;
+import org.eclipse.ocl.examples.pivot.context.ParserContext;
+import org.eclipse.ocl.examples.pivot.context.PropertyContext;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.library.UnimplementedOperation;
@@ -367,7 +372,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		 */
 		@Nullable URI getPackageURI(@NonNull EObject eObject);
 
-		<T extends NamedElement> T getPivotOf(@NonNull MetaModelManager metaModelManager, @NonNull Class<T> pivotClass, @NonNull EObject eObject) throws ParserException;
+		<T extends Element> T getPivotOf(@NonNull MetaModelManager metaModelManager, @NonNull Class<T> pivotClass, @NonNull EObject eObject) throws ParserException;
 		
 		/**
 		 * Return the root element in the Pivot resource resulting from import of the available
@@ -1640,6 +1645,37 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return packageManager.getPackageServer(pivotPackage);
 	}
 
+	/**
+	 * Return a parserContext suitable for parsing OCL expressions in the context of a pivot element.
+	 * 
+	 * @throws ParserException if eObject cannot be converted to a Pivot element
+	 */
+	public @Nullable ParserContext getParserContext(@NonNull Element element, Object... todoParameters) {
+		Element pivotElement = (Element) element;
+		if (pivotElement instanceof Constraint) {
+			List<Element> constrainedElements = ((Constraint) pivotElement).getConstrainedElement();
+			pivotElement = constrainedElements.size() > 0 ? constrainedElements.get(0) : null;
+		}
+		if (pivotElement instanceof Property) {
+			return new PropertyContext(this, null, (Property) pivotElement);
+		}
+		else if (pivotElement instanceof Operation) {
+			return new OperationContext(this, null, (Operation) pivotElement, null);
+		}
+		else if (pivotElement instanceof Stereotype) {
+			Stereotype pivotStereotype = (Stereotype) pivotElement;
+			return new ClassContext(this, null, pivotStereotype);
+		}
+		else if (pivotElement instanceof org.eclipse.ocl.examples.pivot.Class) {
+			org.eclipse.ocl.examples.pivot.Class pivotClass = (org.eclipse.ocl.examples.pivot.Class) pivotElement;
+//			Metaclass metaClass = getMetaclass(pivotClass);
+			return new ClassContext(this, null, pivotClass);
+		}
+		else {
+			return null;
+		}
+	}
+
 	public @NonNull Iterable<? extends DomainPackage> getPartialPackages(@NonNull DomainPackage pkg, boolean loadPivotMetaModelFirst) {
 		if (!libraryLoadInProgress && loadPivotMetaModelFirst && (pivotMetaModel == null)) {
 			getPivotMetaModel();
@@ -1667,7 +1703,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return pivotMetaModel;
 	}
 
-	public @Nullable <T extends NamedElement> T getPivotOf(@NonNull Class<T> pivotClass, @Nullable EObject eObject) throws ParserException {
+	public @Nullable <T extends Element> T getPivotOf(@NonNull Class<T> pivotClass, @Nullable EObject eObject) throws ParserException {
 		if (eObject != null) {
 			for (Factory factory : factoryMap) {
 				if (factory.canHandle(eObject)) {
@@ -1678,7 +1714,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return null;
 	}
 
-	public @Nullable <T extends NamedElement> T getPivotOfEcore(@NonNull Class<T> pivotClass, @Nullable EObject eObject) {
+	public @Nullable <T extends Element> T getPivotOfEcore(@NonNull Class<T> pivotClass, @Nullable EObject eObject) {
 		if (eObject == null) {
 			return null;
 		}

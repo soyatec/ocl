@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot;
 
 
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Parameter</b></em>'.

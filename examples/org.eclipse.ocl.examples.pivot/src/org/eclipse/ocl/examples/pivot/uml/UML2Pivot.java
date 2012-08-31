@@ -87,7 +87,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		}
 
 		public boolean canHandle(@NonNull EObject eObject) {
-			return eObject instanceof org.eclipse.uml2.uml.Type;
+			return eObject instanceof org.eclipse.uml2.uml.Element;
 		}
 
 		public boolean canHandle(@NonNull Resource resource) {
@@ -108,7 +108,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 			return null;
 		}
 
-		public <T extends NamedElement> T getPivotOf(@NonNull MetaModelManager metaModelManager,
+		public <T extends Element> T getPivotOf(@NonNull MetaModelManager metaModelManager,
 				@NonNull Class<T> pivotClass, @NonNull EObject eObject) throws ParserException {
 			Resource metaModel = eObject.eResource();
 			if (metaModel == null) {
@@ -298,8 +298,8 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		}
 
 		@Override
-		public void addImportedPackages(@NonNull List<? extends org.eclipse.uml2.uml.Package> importedPackages) {
-			root.addImportedPackages(importedPackages);
+		public void addImportedResource(@NonNull Resource importedResource) {
+			root.addImportedResource(importedResource);
 		}
 		
 		@Override
@@ -439,15 +439,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		}
 
 		@Override
-		public void addImportedPackages(@NonNull List<? extends org.eclipse.uml2.uml.Package> importedPackages) {
-			for (org.eclipse.uml2.uml.Package importedPackage : importedPackages) {
-				EObject rootContainer = EcoreUtil.getRootContainer(importedPackage);
-				Resource importedResource = DomainUtil.nonNullEMF(rootContainer.eResource());
-				addImportedResource(importedResource);
-			}
-		}
-
-		protected void addImportedResource(@NonNull Resource importedResource) {
+		public void addImportedResource(@NonNull Resource importedResource) {
 			if (importedResource != umlResource) {
 				if (importedResources == null) {
 					importedResources = new ArrayList<Resource>();
@@ -949,7 +941,15 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 	
 	public abstract void addCreated(@NonNull EObject umlElement, @NonNull Element pivotElement);
 
-	public abstract void addImportedPackages(@NonNull List<? extends org.eclipse.uml2.uml.Package> importedPackages);
+	public void addImportedPackages(@NonNull List<? extends org.eclipse.uml2.uml.Package> importedPackages) {
+		for (org.eclipse.uml2.uml.Package importedPackage : importedPackages) {
+			EObject rootContainer = EcoreUtil.getRootContainer(importedPackage);
+			Resource importedResource = DomainUtil.nonNullEMF(rootContainer.eResource());
+			addImportedResource(importedResource);
+		}
+	}
+
+	public abstract void addImportedResource(@NonNull Resource importedResource);
 
 	public abstract void addProperties(@NonNull List<org.eclipse.uml2.uml.Property> properties, @Nullable Predicate<org.eclipse.uml2.uml.Property> predicate);
 

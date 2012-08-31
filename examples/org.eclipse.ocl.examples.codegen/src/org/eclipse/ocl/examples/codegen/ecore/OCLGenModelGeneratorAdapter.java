@@ -186,7 +186,13 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 	  		File projectFolder = getProjectFolder(genModel);
         List<String> arguments = new ArrayList<String>();
 		Model2bodies generator = new Model2bodies(genModel, projectFolder, arguments);
-        generator.generate(monitor);
+        try {
+        	genModel.setLineDelimiter("\n");
+        	generator.generate(monitor);
+        }
+        finally {
+        	genModel.setLineDelimiter(null);
+        }
 //	       folder.refreshLocal(IResource.DEPTH_INFINITE, BasicMonitor.toIProgressMonitor(CodeGenUtil.createMonitor(monitor, 1)));
 	}
 
@@ -194,7 +200,13 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 		File projectFolder = getProjectFolder(genModel);
         List<String> arguments = new ArrayList<String>();
         Model2tables generator = new Model2tables(genModel, projectFolder, arguments);
-        generator.generate(monitor);
+        try {
+        	genModel.setLineDelimiter("\n");
+        	generator.generate(monitor);
+        }
+        finally {
+        	genModel.setLineDelimiter(null);
+        }
 //	       folder.refreshLocal(IResource.DEPTH_INFINITE, BasicMonitor.toIProgressMonitor(CodeGenUtil.createMonitor(monitor, 1)));
 	}
 

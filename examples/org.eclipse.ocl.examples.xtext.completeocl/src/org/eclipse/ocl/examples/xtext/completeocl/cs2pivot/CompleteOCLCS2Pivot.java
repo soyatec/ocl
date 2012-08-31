@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
@@ -57,7 +56,7 @@ public class CompleteOCLCS2Pivot extends EssentialOCLCS2Pivot
 			return null;
 		}
 
-		public <T extends NamedElement> T getPivotOf(@NonNull MetaModelManager metaModelManager,
+		public <T extends Element> T getPivotOf(@NonNull MetaModelManager metaModelManager,
 				@NonNull Class<T> pivotClass, @NonNull EObject eObject)throws ParserException {
 			throw new UnsupportedOperationException();
 		}
