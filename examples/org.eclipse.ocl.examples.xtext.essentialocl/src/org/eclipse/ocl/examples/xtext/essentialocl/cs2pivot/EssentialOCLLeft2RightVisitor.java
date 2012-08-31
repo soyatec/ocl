@@ -626,6 +626,17 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 					}
 				}
 			}
+			else if (operation.isStatic()) {
+				OperationCallExp operationCallExp = context.refreshModelElement(OperationCallExp.class, PivotPackage.Literals.OPERATION_CALL_EXP, csNamedExp);
+				if (operationCallExp != null) {
+					context.setReferredOperation(operationCallExp, operation);
+					context.setType(operationCallExp, operation.getType());
+					context.installPivotUsage(csNavigatingExp, operationCallExp);
+					innerExpression = operationCallExp;
+					outerExpression = operationCallExp;
+					resolveOperationArguments(csNavigatingExp, null, operation, operationCallExp);
+				}
+			}
 			return outerExpression;
 		}
 		else {
@@ -665,7 +676,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 	 * Complete the installation of each operation argument in its operation call.
 	 */
 	protected void resolveOperationArguments(@NonNull InvocationExpCS csNavigatingExp,
-			@NonNull OCLExpression source, @NonNull Operation operation, @NonNull OperationCallExp expression) {
+			@Nullable OCLExpression source, @NonNull Operation operation, @NonNull OperationCallExp expression) {
 		List<OCLExpression> pivotArguments = new ArrayList<OCLExpression>();
 		List<NavigatingArgCS> csArguments = csNavigatingExp.getArgument();
 		List<Parameter> ownedParameters = operation.getOwnedParameter();

@@ -44,7 +44,7 @@ public class RootPackageCSAttribution extends AbstractRootCSAttribution
 		if (environmentView.accepts(PivotPackage.Literals.NAMESPACE)) {
 			for (ImportCS anImport : targetElement.getOwnedImport()) {
 				Namespace namespace = anImport.getNamespace();
-				if (!namespace.eIsProxy()) {
+				if ((namespace != null) && !namespace.eIsProxy()) {
 					String importName = anImport.getName();
 					if (importName == null) {
 						if (namespace instanceof org.eclipse.ocl.examples.pivot.Package) {
