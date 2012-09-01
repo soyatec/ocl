@@ -347,6 +347,22 @@ public abstract class GenericEvaluationStringOperationTest<E extends EObject, PK
 		assertResultFalse("''.oclIsUndefined()");
 	}
 
+	public void testStringPlus() {
+		assertResult("concatenationTest", "'concatenation' + 'Test'");
+		assertResult("concatenation\n", "'concatenation' + '\\n'");
+		// invalid
+		assertResultInvalid("let s : String = invalid in 'concatenation' + s");
+		assertResultInvalid("let s : String = invalid in s + 'concatenation'");
+		// null
+		assertResultInvalid("let s : String = null in 'concatenation' + s");
+		assertResultInvalid("let s : String = null in s + 'concatenation'");
+		// EString
+		assertResult("ab", "let s1 : String = 'a', s2 : String = 'b' in s1 + s2");
+		assertResult("ab", "let s1 : EString = 'a', s2 : String = 'b' in s1 + s2");
+		assertResult("ab", "let s1 : String = 'a', s2 : EString = 'b' in s1 + s2");
+		assertResult("ab", "let s1 : EString = 'a', s2 : EString = 'b' in s1 + s2");
+	}
+
 	public void testStringReplaceAll() {
 		assertResult("rePlaceAll oPeration", "'replaceAll operation'.replaceAll('p', 'P')");
 		assertResult("ReplaceAllOperation", "'Repla ce All Operation'.replaceAll('(\\\\w+)\\\\s*', '$1')");
