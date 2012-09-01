@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -50,6 +51,7 @@ import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.VoidType;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.ocl.examples.pivot.utilities.AbstractConversion;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -264,9 +266,43 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		return csElement;
 	}
 
-	public void refreshPathName(@NonNull PathNameCS csPathName, @NonNull Element element, EObject scope) {
+	/**
+	 * Assign a sequence of one or more path elements to csPathName that identify element with respect
+	 * to scope.
+	 * <br>
+	 * For example A::B::C::D::E with respect to A::B::C::X::Y is D::E.
+	 * <br>
+	 * Validation is performed to check that the shortened name resolves to the same
+	 * element.
+	 * <br>
+	 * For example if there is also an A::B::C::X::D::E, the scope is shortened to A::B so
+	 * that the result is C::D::E.
+	 */
+	public void refreshPathName(@NonNull PathNameCS csPathName, @NonNull Element element, Namespace scope) {
+		Namespace safeScope = scope;
 		Element primaryElement = metaModelManager.getPrimaryElement(element);
-		ElementUtil.setPathName(csPathName, primaryElement, scope);
+		if ((safeScope != null) && (primaryElement instanceof Type)) {
+			String name = ((Type)primaryElement).getName();
+			for (EObject eObject = safeScope; eObject != null; eObject = eObject.eContainer()) {
+				if (eObject instanceof Namespace) {
+					safeScope = (Namespace) eObject;
+				}
+				if (eObject instanceof DomainPackage) {
+					PackageServer packageServer = metaModelManager.getPackageServer((DomainPackage)eObject);
+					Type memberType = packageServer.getMemberType(name);
+					if (memberType == primaryElement) {
+						if (eObject != scope) {
+							eObject = eObject.eContainer();
+							if (eObject instanceof Namespace) {
+								safeScope = (Namespace) eObject;
+							}
+						}
+						break;
+					}
+				}
+			}
+		}
+		ElementUtil.setPathName(csPathName, primaryElement, safeScope);
 	}
 
 	public void refreshQualifiers(List<String> qualifiers, String string, boolean polarity) {
@@ -409,10 +445,6 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 				}
 			}
 		}
-		// FIXME Obsolete
-		List<String> qualifiers = csElement.getQualifier();
-//		refreshQualifiers(qualifiers, "ordered", "!ordered", object.isOrdered() ? Boolean.TRUE : null);
-//		refreshQualifiers(qualifiers, "unique", "!unique", object.isUnique() ? null : Boolean.FALSE);
 		return csElement;
 	}
 

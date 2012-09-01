@@ -360,35 +360,39 @@ public class ElementUtil
 		return false;
 	}
 
-	public static void setPathName(@NonNull PathNameCS csPathName, @NonNull Element element, EObject scope) {
+	/**
+	 * Assign a sequence of one or more path elements to csPathName that identify element with respect
+	 * to scope.
+	 * <br>
+	 * For example A::B::C::D::E with respect to A::B::C::X::Y is D::E.
+	 * <br>
+	 * No validation is performed to check that the shortened name resolves to the same
+	 * element.
+	 * <br>
+	 * For example if there is also an A::B::C::X::D::E, the caller must shorten the scope
+	 * reference to A::B to avoid the ambiguity.
+	 */
+	public static void setPathName(@NonNull PathNameCS csPathName, @NonNull Element element, Namespace scope) {
 		List<PathElementCS> csPath = csPathName.getPath();
 		csPath.clear();		// FIXME re-use
-		NamedElement namedElement = isPathable(element);
-		if (namedElement != null) {
-			while (true) {
-				PathElementCS csSimpleRef = BaseCSTFactory.eINSTANCE.createPathElementCS();
-				csPath.add(0, csSimpleRef);
-				csSimpleRef.setElement(namedElement);
-				EObject eContainer = namedElement.eContainer();
-				for (EObject aScope = scope; aScope != null; aScope = aScope.eContainer()) {
-					if (aScope == eContainer) {
-						eContainer = null;
-						break;
-					}
-				}
-				if (!(eContainer instanceof NamedElement)) {
-					break;
-				}
-				if (eContainer instanceof Root) {
-					break;				// Skip root package
-				}
-				namedElement = (NamedElement) eContainer;
-			}
+		PathElementCS csSimpleRef = BaseCSTFactory.eINSTANCE.createPathElementCS();
+		csPath.add(csSimpleRef);
+		csSimpleRef.setElement(element);
+		if (isPathable(element) == null) {
+			return;
 		}
-		else {
-			PathElementCS csSimpleRef = BaseCSTFactory.eINSTANCE.createPathElementCS();
-			csPath.add(csSimpleRef);
-			csSimpleRef.setElement(element);
+		for (EObject eContainer = element.eContainer(); eContainer instanceof Element; eContainer = eContainer.eContainer()) {
+			if (eContainer instanceof Root) {
+				return;				// Skip root package
+			}
+			for (EObject aScope = scope; aScope != null; aScope = aScope.eContainer()) {
+				if (aScope == eContainer) { 		// If element ancestor is scope or an ancestor
+					return;							// no need for further qualification
+				}
+			}
+			csSimpleRef = BaseCSTFactory.eINSTANCE.createPathElementCS();
+			csPath.add(0, csSimpleRef);
+			csSimpleRef.setElement((Element) eContainer);
 		}
 	}
 }

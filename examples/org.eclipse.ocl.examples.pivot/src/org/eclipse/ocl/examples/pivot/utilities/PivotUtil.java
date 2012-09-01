@@ -660,6 +660,15 @@ public class PivotUtil extends DomainUtil
 	public static String getConstraintTypeName(Constraint constraint) {
 		return ((NamedElement) constraint.eContainer()).getName();
 	}
+
+	public static Namespace getContainingNamespace(EObject element) {
+		for (EObject eObject = element; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof Namespace) {
+				return (Namespace)eObject;
+			}
+		}
+		return null;
+	}
 	
 	public static org.eclipse.ocl.examples.pivot.Package getContainingPackage(EObject element) {
 		for (EObject eObject = element; eObject != null; eObject = eObject.eContainer()) {

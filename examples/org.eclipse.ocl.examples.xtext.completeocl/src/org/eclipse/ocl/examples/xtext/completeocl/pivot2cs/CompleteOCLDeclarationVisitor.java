@@ -96,7 +96,7 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 		}
 	}
 
-	protected void refreshPathNamedElement(@NonNull PathNameDeclCS csDecl, @NonNull NamedElement namedElement, EObject scope) {
+	protected void refreshPathNamedElement(@NonNull PathNameDeclCS csDecl, @NonNull NamedElement namedElement, Namespace scope) {
 		PathNameCS csPathName = csDecl.getPathName();
 		if (csPathName == null) {
 			csPathName = BaseCSTFactory.eINSTANCE.createPathNameCS();
@@ -187,7 +187,7 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 		PackageDeclarationCS csPackage = context.refreshElement(PackageDeclarationCS.class, CompleteOCLCSTPackage.Literals.PACKAGE_DECLARATION_CS, object);
 		if (csPackage != null) {
 //		context.refreshList(csPackage.getOwnedType(), context.visitDeclarations(ClassifierCS.class, object.getOwnedType(), null));
-			refreshPathNamedElement(csPackage, object, EcoreUtil.getRootContainer(object));
+			refreshPathNamedElement(csPackage, object, PivotUtil.getContainingNamespace(object));
 			context.importPackage(object);
 			List<ContextDeclCS> contexts = new ArrayList<ContextDeclCS>();
 			for (Type type : object.getOwnedType()) {
