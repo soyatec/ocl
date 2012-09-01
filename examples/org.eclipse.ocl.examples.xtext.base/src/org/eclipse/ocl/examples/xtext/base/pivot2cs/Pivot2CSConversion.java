@@ -278,7 +278,7 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 	 * For example if there is also an A::B::C::X::D::E, the scope is shortened to A::B so
 	 * that the result is C::D::E.
 	 */
-	public void refreshPathName(@NonNull PathNameCS csPathName, @NonNull Element element, Namespace scope) {
+	public void refreshPathName(@NonNull PathNameCS csPathName, @NonNull Element element, @Nullable Namespace scope) {
 		Namespace safeScope = scope;
 		Element primaryElement = metaModelManager.getPrimaryElement(element);
 		if ((safeScope != null) && (primaryElement instanceof Type)) {
@@ -291,11 +291,11 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 					PackageServer packageServer = metaModelManager.getPackageServer((DomainPackage)eObject);
 					Type memberType = packageServer.getMemberType(name);
 					if (memberType == primaryElement) {
-						if (eObject != scope) {
-							eObject = eObject.eContainer();
-							if (eObject instanceof Namespace) {
-								safeScope = (Namespace) eObject;
-							}
+						if ((eObject != scope) && (eObject != PivotUtil.getContainingPackage(scope))) {
+							eObject = eObject.eContainer(); // If eObject is needed in path, optional scope is its container
+						}
+						if (eObject instanceof Namespace) {
+							safeScope = (Namespace) eObject;
 						}
 						break;
 					}
