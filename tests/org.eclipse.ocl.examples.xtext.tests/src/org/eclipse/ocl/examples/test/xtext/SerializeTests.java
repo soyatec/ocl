@@ -217,6 +217,25 @@ public class SerializeTests extends XtextTestCase
 		doSerialize("Bug376488", "Bug376488", null, true, false);
 	}
 
+	public void testSerialize_Bug388282() throws Exception {
+		String testFile = 
+			"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+			"<ecore:EPackage xmi:version=\"2.0\" xmlns:xmi=\"http://www.omg.org/XMI\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+			"    xmlns:ecore=\"http://www.eclipse.org/emf/2002/Ecore\" name=\"rootPackage\" nsURI=\"http://www.example.com/rootPackage/1.0\"\n" +
+			"    nsPrefix=\"rootPackage\">\n" +
+			"  <eClassifiers xsi:type=\"ecore:EClass\" name=\"Element\" abstract=\"true\">\n" +
+			"    <eStructuralFeatures xsi:type=\"ecore:EAttribute\" name=\"name\" lowerBound=\"1\" eType=\"ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString\"\n" +
+			"        defaultValueLiteral=\"\"/>\n" +
+			"  </eClassifiers>\n" +
+			"  <eSubpackages name=\"subPackage\" nsURI=\"http://www.example.com/subPackage/1.0\" nsPrefix=\"subPackage\">\n" +
+			"    <eClassifiers xsi:type=\"ecore:EClass\" name=\"Element\" abstract=\"true\" eSuperTypes=\"#//Element\"/>\n" +
+			"  </eSubpackages>\n" +
+			"</ecore:EPackage>\n" +
+			"\n";
+		createOCLinEcoreFile("Bug388282.ecore", testFile);		// FIXME rename as createTextFile
+		doSerialize("Bug388282");
+	}
+
 	public void testSerialize_Company() throws Exception {
 //		Logger logger = Logger.getLogger(AbstractParseTreeConstructor.class);
 //		logger.setLevel(Level.TRACE);
