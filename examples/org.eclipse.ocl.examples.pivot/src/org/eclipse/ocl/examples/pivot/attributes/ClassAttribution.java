@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
@@ -50,15 +51,27 @@ public class ClassAttribution extends AbstractAttribution
 				}
 			}
 		}
+		environmentView.addAllOperations(targetClass, false);
+		environmentView.addAllProperties(targetClass, false);
 		if (target instanceof Metaclass) {
 			Type instanceType = ((Metaclass)target).getInstanceType();
 			if ((instanceType != null) && (instanceType.getOwningTemplateParameter() == null)) {		// Maybe null
 				environmentView.addAllOperations(instanceType, true);
 				environmentView.addAllProperties(instanceType, true);
+				if (!environmentView.hasFinalResult()) {
+					EObject eTarget = instanceType.getETarget();
+					if (eTarget != null) {
+						try {
+							Element element = environmentView.getMetaModelManager().getPivotOf(Element.class, eTarget.eClass());
+							environmentView.addElementsOfScope(element, scopeView);
+						} catch (ParserException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
 			}
 		}
-		environmentView.addAllOperations(targetClass, false);
-		environmentView.addAllProperties(targetClass, false);
 		return scopeView.getParent();
 	}
 }
