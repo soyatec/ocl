@@ -631,7 +631,8 @@ public abstract class AbstractOCLAnalyzer<PK, C, O, P, EL, PM, S, COA, SSA, CT, 
 			C resultType = null;
 
 			int opcode = 0;
-			if (TypeUtil.isStandardLibraryFeature(env, ownerType, oper)) {
+			C oclOwnerType = uml.getOCLType(ownerType);
+			if (TypeUtil.isStandardLibraryFeature(env, oclOwnerType, oper)) {
 				// the operations defined intrinsically by the standard library
 				// are the only ones that may have opcodes
 				opcode = OCLStandardLibraryUtil.getOperationCode(resolvedName);
