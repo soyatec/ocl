@@ -116,12 +116,6 @@ public class EssentialOCLProposalProvider extends AbstractEssentialOCLProposalPr
 		proposeKeywordAlternatives(ruleCall, context, acceptor, getPrimitiveTypeImage());
 	}
 
-	@Override
-	public void createProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		System.out.println("createProposals: " + context.getPrefix());
-		super.createProposals(context, acceptor);
-	}
-
 	protected EObject getPathScope(EObject model, ContentAssistContext context) {
 		int offset = context.getOffset();
 		INode currentNode = context.getCurrentNode();
@@ -182,12 +176,6 @@ public class EssentialOCLProposalProvider extends AbstractEssentialOCLProposalPr
 	}
 
 	@Override
-	protected void invokeMethod(String methodName, ICompletionProposalAcceptor acceptor, Object... params) {
-		System.out.println("  invokeMethod: " + methodName);
-		super.invokeMethod(methodName, acceptor, params);
-	}
-
-	@Override
 	protected void lookupCrossReference(CrossReference crossReference,
 			EReference reference, ContentAssistContext contentAssistContext,
 			ICompletionProposalAcceptor acceptor,
@@ -211,15 +199,6 @@ public class EssentialOCLProposalProvider extends AbstractEssentialOCLProposalPr
 		}
 		lookupCrossReference(currentModel, reference, acceptor, filter,
 				getProposalFactory(ruleName, contentAssistContext));
-	}
-
-	@Override
-	protected void lookupCrossReference(EObject model, EReference reference,
-			ICompletionProposalAcceptor acceptor,
-			Predicate<IEObjectDescription> filter,
-			Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
-		System.out.println("    lookupCrossReference: " + reference.getEContainingClass().getName() + "::" + reference.getName());
-		super.lookupCrossReference(model, reference, acceptor, filter, proposalFactory);
 	}
 
 	protected void proposeKeywordAlternatives(RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor, Image image) {
