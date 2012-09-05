@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Profile="http:///schemas/Profile/_-W4-0PETEeGbmcl4mtVQXA/0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/Profile/_-W4-0PETEeGbmcl4mtVQXA/0 Internationalized.profile.uml#_-dIwwfETEeGbmcl4mtVQXA">
-  <uml:Model xmi:id="_iHBam_EUEeGbmcl4mtVQXA" name="Model">
+  <uml:Model xmi:id="_iHBam_EUEeGbmcl4mtVQXA" name="Model" URI="http://www.eclipse.org/ocl/examples/International">
     <packageImport xmi:id="_iHBanPEUEeGbmcl4mtVQXA">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
     </packageImport>

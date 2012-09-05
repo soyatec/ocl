@@ -24,7 +24,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -66,34 +65,21 @@ public class LibraryCSAttribution extends AbstractAttribution implements Unresol
 		private Throwable throwable = null;
 	
 		public ScopeView computeLookup(LibraryCS targetElement, EnvironmentView environmentView, ScopeView scopeView) {
-			EReference targetReference = scopeView.getTargetReference();
-			if (targetReference == BaseCSTPackage.Literals.LIBRARY_CS__PACKAGE) {
-				importLibrary(targetElement, environmentView);
-				Element importedElement2 = importedElement;
-				if (importedElement2 != null) {
-					Resource importedResource = importedElement2.eResource();
-					List<Resource.Diagnostic> errors = importedResource.getErrors();
-					if (errors.size() == 0) {
-						if (importedElement2 instanceof DomainNamedElement) {
-							String name = ((DomainNamedElement)importedElement2).getName();
-							if (name != null) {
-								environmentView.addElement(name, importedElement2);
-							}
+			importLibrary(targetElement, environmentView);
+			Element importedElement2 = importedElement;
+			if (importedElement2 != null) {
+				Resource importedResource = importedElement2.eResource();
+				List<Resource.Diagnostic> errors = importedResource.getErrors();
+				if (errors.size() == 0) {
+					if (importedElement2 instanceof DomainNamedElement) {
+						String name = ((DomainNamedElement)importedElement2).getName();
+						if (name != null) {
+							environmentView.addElement(name, importedElement2);
 						}
 					}
 				}
-				return null;
 			}
-			else {
-				EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
-				if (containmentFeature == null) {
-					environmentView.addElementsOfScope(importedElement, scopeView);
-				}
-				else {
-					environmentView.addElementsOfScope(importedElement, scopeView);
-				}
-				return scopeView.getParent();
-			}
+			return null;
 		}
 	
 		public String getMessage() {

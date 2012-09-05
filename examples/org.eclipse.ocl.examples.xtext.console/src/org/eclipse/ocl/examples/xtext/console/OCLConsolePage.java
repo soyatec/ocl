@@ -362,7 +362,8 @@ public class OCLConsolePage extends Page
 	private ParserContext parserContext;
 	
 //	private final CancelableMetaModelManager metaModelManager;
-	private  MetaModelManager nullMetaModelManager = null;
+	private MetaModelManager nullMetaModelManager = null;
+	@SuppressWarnings("unused")
 	private DomainModelManager modelManager = null;
 	
 //	private Map<TargetMetamodel, IAction> metamodelActions =
@@ -926,7 +927,8 @@ public class OCLConsolePage extends Page
 			    if (selectedObject instanceof IOutlineNode) {
 		    	    if (selectedObject instanceof EObjectNode) {
 		                EObjectNode selectedObjectNode = (EObjectNode) selectedObject;
-		                URI eObjectURI = selectedObjectNode.getEObjectURI();
+		                @SuppressWarnings("unused")
+						URI eObjectURI = selectedObjectNode.getEObjectURI();
 		        		contextObject = null; // FIXME metaModelManager.loadResource(eObjectURI, null, null);
 		    	    }
 		    	    else if (selectedObject instanceof EStructuralFeatureNode) {
@@ -968,7 +970,7 @@ public class OCLConsolePage extends Page
 
 	protected void reset() {
 		IDocument doc = getDocument();
-		doc.set("");
+		doc.set(""); //$NON-NLS-1$
 	}
 	
 	/**

@@ -32,6 +32,7 @@ import org.eclipse.ocl.examples.pivot.attributes.OperationCallExpAttribution;
 import org.eclipse.ocl.examples.pivot.attributes.PackageAttribution;
 import org.eclipse.ocl.examples.pivot.attributes.RootAttribution;
 import org.eclipse.ocl.examples.pivot.attributes.UnspecifiedTypeAttribution;
+import org.eclipse.ocl.examples.pivot.attributes.VariableAttribution;
 import org.eclipse.ocl.examples.pivot.attributes.VoidTypeAttribution;
 
 public class PivotScoping
@@ -55,6 +56,7 @@ public class PivotScoping
 		registry.put(PivotPackage.Literals.PACKAGE, PackageAttribution.INSTANCE);
 		registry.put(PivotPackage.Literals.ROOT, RootAttribution.INSTANCE);
 		registry.put(PivotPackage.Literals.UNSPECIFIED_TYPE, UnspecifiedTypeAttribution.INSTANCE);
+		registry.put(PivotPackage.Literals.VARIABLE, VariableAttribution.INSTANCE);
 		registry.put(PivotPackage.Literals.VOID_TYPE, VoidTypeAttribution.INSTANCE);
 	}
 }

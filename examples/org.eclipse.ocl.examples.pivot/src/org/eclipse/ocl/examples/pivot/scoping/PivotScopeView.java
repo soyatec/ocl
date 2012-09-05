@@ -17,7 +17,6 @@
 package org.eclipse.ocl.examples.pivot.scoping;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -39,14 +38,14 @@ public class PivotScopeView implements ScopeView
     public static final @NonNull ScopeView NULLSCOPEVIEW = new ScopeView()
     {
 		public @NonNull Attribution getAttribution() {
-			return EmptyAttribution.INSTANCE;
+			return NullAttribution.INSTANCE;
 		}
 
-		public EObject getChild() {
+		public @Nullable Element getChild() {
 			return null;
 		}
 
-		public EStructuralFeature getContainmentFeature() {
+		public @Nullable EStructuralFeature getContainmentFeature() {
 			return null;
 		}
 
@@ -54,42 +53,56 @@ public class PivotScopeView implements ScopeView
 			return NULLSCOPEVIEW;
 		}
 
-		public EObject getTarget() {
+		public @NonNull ScopeView getRoot() {
+			return NULLSCOPEVIEW;
+		}
+
+		public Element getTarget() {
 			return null;
 		}
 
-		public EReference getTargetReference() {
-			return null;
+		public boolean isQualified() {
+			return false;
 		}
     };
 	
 	protected final @NonNull MetaModelManager metaModelManager;
-	protected final @NonNull Attribution attribution;					// Attributes helper for the target CST node
-	protected final Element target;								// The target CST node
-	protected final EObject child;								// Child targeted by containmentFeature, null for child-independent
-	protected final EStructuralFeature containmentFeature;		// Selecting child-specific candidates, null for child-independent
-	protected final EReference targetReference;					// Selecting permissible candidate types
-	private ScopeView parent = null;
+	protected final @NonNull Element target;							// AST node in which a lookup is to be performed
+	protected final @Nullable Element child;							// AST node from which a lookup is to be performed
+	protected final boolean isQualified;								// True of the lookup has an explicit namespace qualification
+	private ScopeView parent = null;									// Lazily computed scope view for target's parent
+	private Attribution attribution = null;								// Lazily computed attributes helper for the target CST node
 	
-	public PivotScopeView(@NonNull MetaModelManager metaModelManager, @NonNull Element target, @Nullable Attribution attribution, EObject child, EStructuralFeature containmentFeature, EReference targetReference) {
+	protected PivotScopeView(@NonNull MetaModelManager metaModelManager, @NonNull Element target, @Nullable Element child, boolean isQualified) {
 		this.metaModelManager = metaModelManager;
-		this.attribution = attribution != null ? attribution : EmptyAttribution.INSTANCE;
 		this.target = target;
 		this.child = child;
-		this.containmentFeature = containmentFeature;
-		this.targetReference = targetReference;
-	}
-	
-	public @NonNull Attribution getAttribution() {
-		return attribution;
+		this.isQualified = isQualified;
 	}
 
-	public EObject getChild() {
+	public @Nullable ScopeView computeLookup(@NonNull EnvironmentView environmentView, @NonNull EObject aTarget) {
+		assert aTarget instanceof Element;
+		if (attribution == null) {
+			attribution = PivotUtil.getAttribution(target);
+		}
+		return attribution.computeLookup(aTarget, environmentView, this);
+	}
+
+	public @NonNull Attribution getAttribution() {
+		Attribution attribution2 = attribution;
+		if (attribution2 == null) {
+			attribution = attribution2 = PivotUtil.getAttribution(target);
+		}
+		return attribution2;
+	}
+
+	public @Nullable Element getChild() {
 		return child;
 	}
 
-	public EStructuralFeature getContainmentFeature() {
-		return containmentFeature;
+	public @Nullable EStructuralFeature getContainmentFeature() {
+//		assert ((child == null) && (containmentFeature == null)) || ((child != null) && (child.eContainmentFeature() ==  containmentFeature));
+		return (child != null) ? child.eContainmentFeature() : null;
 	}
 
 	public @NonNull MetaModelManager getMetaModelManager() {
@@ -99,43 +112,43 @@ public class PivotScopeView implements ScopeView
 	public @NonNull ScopeView getParent() {
 		ScopeView parent2 = parent;
 		if (parent2 == null) {
-			Element aParent = null;
-			Attribution parentScope = null;
-			if (target instanceof Element) {
-				EObject pParent = target.eContainer();
-				if (pParent instanceof Element) {
-					parentScope = PivotUtil.getAttribution(pParent);
-					aParent = (Element) pParent;
-				}
-			}
-			if (parentScope == null) {
-				parent2 = parent = NULLSCOPEVIEW;
-			}
-			else if (aParent != null) {
-				EStructuralFeature eContainingFeature = target.eContainingFeature();
-				parent2 = parent = new PivotScopeView(getMetaModelManager(), aParent, parentScope, target, eContainingFeature, targetReference);
+			EObject pParent = target.eContainer();
+			if (pParent instanceof Element) {
+				parent2 = new PivotScopeView(metaModelManager, (Element)pParent, target, isQualified);
 			}
 			else {
-				parent2 = parent = NULLSCOPEVIEW;
+				parent2 = NULLSCOPEVIEW;
 			}
+			parent = parent2;
 		}
 		return parent2;
 	}
 
-	public final Element getTarget() {
+	public @NonNull ScopeView getRoot() {
+		ScopeView parent = getParent();
+		if (parent == NULLSCOPEVIEW) {
+			return this;
+		}
+		else {
+			return parent.getRoot();
+		}
+	}
+
+	public final @NonNull Element getTarget() {
 		return target;
 	}
 
-	public EReference getTargetReference() {
-		return targetReference;
+	public boolean isQualified() {
+		return isQualified;
 	}
 
 	@Override
 	public String toString() {
-		EObject target = getTarget();
+		Element target = getTarget();
 		StringBuilder s = new StringBuilder();
 		s.append("["); //$NON-NLS-1$
 		s.append(target.eClass().getName());
+		EStructuralFeature containmentFeature = getContainmentFeature();
 		if (containmentFeature != null) {
 			s.append("::"); //$NON-NLS-1$
 			s.append(containmentFeature.getName());

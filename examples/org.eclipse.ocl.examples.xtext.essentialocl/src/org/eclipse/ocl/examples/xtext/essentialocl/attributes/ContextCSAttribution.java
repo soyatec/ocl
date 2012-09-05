@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.context.ParserContext;
@@ -56,9 +55,8 @@ public class ContextCSAttribution extends AbstractRootCSAttribution
 				environmentView.addNamedElement(contextVariable);
 				if (!environmentView.hasFinalResult()) {
 					Type type = contextVariable.getType();
-					environmentView.addElementsOfScope(type, scopeView);
 					if (type != null) {
-						environmentView.addElementsOfScope(type.getPackage(), scopeView);
+						environmentView.addAllElements(type, scopeView);
 					}
 				}
 			}
@@ -70,7 +68,7 @@ public class ContextCSAttribution extends AbstractRootCSAttribution
 				if (parserContext != null) {
 					Type contextType = parserContext.getClassContext();
 					if (contextType != null) {
-						environmentView.computeLookups(contextType, null, null, PivotPackage.Literals.NAMED_ELEMENT__OWNED_RULE);
+						environmentView.computeLookups(contextType, null);
 					}
 				}
 			}

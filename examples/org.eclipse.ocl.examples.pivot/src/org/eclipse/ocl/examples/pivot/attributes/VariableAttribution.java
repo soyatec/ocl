@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010,2011 E.D.Willink and others.
+ * Copyright (c) 2012 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,8 +11,6 @@
  *     E.D.Willink - initial API and implementation
  *
  * </copyright>
- *
- * $Id: LetExpAttribution.java,v 1.2 2011/01/24 21:00:31 ewillink Exp $
  */
 package org.eclipse.ocl.examples.pivot.attributes;
 
@@ -24,17 +22,18 @@ import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 
-public class LetExpAttribution extends AbstractAttribution
+public class VariableAttribution extends AbstractAttribution
 {
-	public static final LetExpAttribution INSTANCE = new LetExpAttribution();
+	public static final VariableAttribution INSTANCE = new VariableAttribution();
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
-		LetExp targetExpression = (LetExp)target;
-		Variable variable = targetExpression.getVariable();
-		if (variable != null) {
-			environmentView.addNamedElement(variable);
+		Variable targetElement = (Variable)target;
+		if (targetElement.eContainer() instanceof LetExp) {
+			return scopeView.getParent().getParent();		// Leapfrog to bypass the Variable contribution of the LetExpAttribution
 		}
-		return scopeView.getParent();
+		else {
+			return scopeView.getParent();
+		}
 	}
 }

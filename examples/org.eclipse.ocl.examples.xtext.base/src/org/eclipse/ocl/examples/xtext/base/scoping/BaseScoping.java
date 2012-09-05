@@ -33,7 +33,6 @@ import org.eclipse.ocl.examples.xtext.base.attributes.LibraryCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.OperationCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.PackageCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.PathElementCSAttribution;
-import org.eclipse.ocl.examples.xtext.base.attributes.PathNameCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.PivotCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.ReferenceCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.RootPackageCSAttribution;
@@ -62,7 +61,6 @@ public class BaseScoping
 		registry.put(BaseCSTPackage.Literals.OPERATION_CS, OperationCSAttribution.INSTANCE);
 		registry.put(BaseCSTPackage.Literals.PACKAGE_CS, PackageCSAttribution.INSTANCE);
 		registry.put(BaseCSTPackage.Literals.PATH_ELEMENT_CS, PathElementCSAttribution.INSTANCE);
-		registry.put(BaseCSTPackage.Literals.PATH_NAME_CS, PathNameCSAttribution.INSTANCE);
 		registry.put(BaseCSTPackage.Literals.REFERENCE_CS, ReferenceCSAttribution.INSTANCE);
 		registry.put(BaseCSTPackage.Literals.ROOT_PACKAGE_CS, RootPackageCSAttribution.INSTANCE);
 		registry.put(BaseCSTPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION_CS, TemplateParameterSubstitutionCSAttribution.INSTANCE);

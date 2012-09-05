@@ -34,7 +34,7 @@ public class PivotCSAttribution extends AbstractAttribution
 		PivotableElementCS targetElement = (PivotableElementCS)target;
 		Element pivot = PivotUtil.getPivot(Element.class, targetElement);
 		if (pivot != null) {
-			environmentView.computeLookups(pivot, scopeView.getChild(), null, scopeView.getTargetReference());
+			environmentView.computeLookups(pivot, null); //PivotUtil.getPivot(Element.class, scopeView.getChild());	
 		}
 		return null;
 	}

@@ -74,9 +74,9 @@ public class BaseDocument extends XtextDocument implements ConsoleContext
 						ElementCS csElement = (ElementCS) resource.getContents().get(0);
 						if (csElement != null) {
 							Attribution attribution = PivotUtil.getAttribution(csElement);
-							if (attribution != null) {
+//							if (attribution != null) {
 								return ElementUtil.getDocumentAttribution(csElement);
-							}
+//							}
 						}
 					}
 					return null;

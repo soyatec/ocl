@@ -88,6 +88,25 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 			return null;
 		}
 	}
+
+	public static class ListCompletion<CST extends ModelElementCS, P extends NamedElement> extends MultipleContinuation<CST>
+	{
+		protected final @NonNull Class<P> pivotClass;
+		protected final List<P> pivotElements;
+
+		protected ListCompletion(@NonNull CS2PivotConversion context, NamedElement pivotParent, EStructuralFeature pivotFeature,
+				@NonNull List<? extends CST> csElements, Dependency[] dependencies, @NonNull Class<P> pivotClass, List<P> pivotElements) {
+			super(context, pivotParent, pivotFeature, csElements, dependencies);
+			this.pivotClass = pivotClass;
+			this.pivotElements = pivotElements;
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			context.refreshPivotList(pivotClass, pivotElements, csElement);
+			return null;
+		}
+	}
 	
 	protected final @NonNull MetaModelManager metaModelManager;
 	
@@ -111,14 +130,8 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 			return null;
 		}
 		else {
-			return new MultipleContinuation<CST>(context, pivotParent, pivotFeature, csElements, new PivotDependencies(csElements)) 
-			{
-				@Override
-				public BasicContinuation<?> execute() {
-					context.refreshPivotList(pivotClass, pivotElements, csElement);
-					return null;
-				}			
-			};
+			return new ListCompletion<CST, P>(context, pivotParent, pivotFeature, csElements,
+				new Dependency[]{new PivotDependencies(csElements)}, pivotClass, pivotElements);
 		}
 	}
 

@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010,2011 E.D.Willink and others.
+ * Copyright (c) 2012 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,8 +11,6 @@
  *     E.D.Willink - initial API and implementation
  *
  * </copyright>
- *
- * $Id: LetExpCSAttribution.java,v 1.5 2011/03/13 11:44:07 ewillink Exp $
  */
 package org.eclipse.ocl.examples.xtext.essentialocl.attributes;
 
@@ -25,17 +23,21 @@ import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.LetExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.VariableCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.LetVariableCS;
 
-public class LetExpCSAttribution extends AbstractAttribution
+public class LetVariableCSAttribution extends AbstractAttribution
 {
-	public static final LetExpCSAttribution INSTANCE = new LetExpCSAttribution();
+	public static final LetVariableCSAttribution INSTANCE = new LetVariableCSAttribution();
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		if (environmentView.accepts(PivotPackage.Literals.VARIABLE)) {
-			LetExpCS targetElement = (LetExpCS)target;
-			for (VariableCS csVariable : targetElement.getVariable()) {
+			LetVariableCS targetElement = (LetVariableCS)target;
+			LetExpCS letExpression = targetElement.getLetExpression();
+			for (LetVariableCS csVariable : letExpression.getVariable()) {
+				if (csVariable == targetElement) {
+					break;
+				}
 				Variable variable = PivotUtil.getPivot(Variable.class, csVariable);
 				if (variable != null) {		// Maybe null while resolving namespaces
 					environmentView.addNamedElement(variable);
@@ -45,6 +47,6 @@ public class LetExpCSAttribution extends AbstractAttribution
 				return null;							// Let variables occlude outer scopes
 			}
 		}
-		return scopeView.getParent();
+		return scopeView.getParent().getParent();		// Leapfrog to bypass all Variable contribution of LetExpCSAttribution
 	}
 }

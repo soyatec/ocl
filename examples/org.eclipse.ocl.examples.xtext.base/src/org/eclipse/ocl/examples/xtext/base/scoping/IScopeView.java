@@ -26,4 +26,6 @@ import org.eclipse.xtext.scoping.IScope;
 public interface IScopeView extends ScopeView, IScope
 {	
 	@NonNull IScopeView getParent();
+
+	@NonNull IScopeView getRoot();
 }

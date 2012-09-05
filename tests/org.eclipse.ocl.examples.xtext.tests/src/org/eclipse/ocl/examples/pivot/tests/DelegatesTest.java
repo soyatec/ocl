@@ -69,7 +69,6 @@ import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.ParserException;
-import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -537,7 +536,7 @@ public class DelegatesTest extends PivotTestSuite
 		//
 		delegate = factory.createQueryDelegate(companyClass, variables, badName);
 		executeWithException(delegate, acme, null, getErrorsInMessage("'" + badName + "'") +
-			DomainUtil.bind("1: " + OCLMessages.UnresolvedProperty_ERROR_, "'" + badName + "'", "'" + PivotConstants.UNKNOWN_TYPE_TEXT + "'"));
+			DomainUtil.bind("1: " + OCLMessages.UnresolvedProperty_ERROR_, "'" + badName + "'", "''"));
 		//
 		//	Definition of undeclared variable
 		//

@@ -82,6 +82,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
+import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
@@ -490,10 +491,11 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 						IteratorExp iteratorExp = context.refreshModelElement(IteratorExp.class, PivotPackage.Literals.ITERATOR_EXP, null);
 						if (iteratorExp != null) {
 							iteratorExp.setImplicit(true);
-							EnvironmentView environmentView = new EnvironmentView(metaModelManager, PivotPackage.Literals.LOOP_EXP__REFERRED_ITERATION, "collect");
+							@SuppressWarnings("null") @NonNull EReference eReference = PivotPackage.Literals.LOOP_EXP__REFERRED_ITERATION;
+							EnvironmentView environmentView = new EnvironmentView(metaModelManager, eReference, "collect");
 							environmentView.addFilter(new ImplicitCollectFilter(metaModelManager, (CollectionType) actualSourceType, elementType));
 							Type lowerBoundType = (Type) PivotUtil.getLowerBound(actualSourceType);
-							environmentView.computeLookups(lowerBoundType, null, null, null);
+							environmentView.computeLookups(lowerBoundType, null);
 							Iteration resolvedIteration = (Iteration)environmentView.getContent();
 							if (resolvedIteration != null) {
 								context.setReferredIteration(iteratorExp, resolvedIteration);
@@ -708,7 +710,8 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 	}
 
 	protected void resolveOperationCall(@NonNull OperationCallExp expression, @NonNull OperatorCS csOperator, @NonNull ScopeFilter filter) {
-		EnvironmentView environmentView = new EnvironmentView(metaModelManager, PivotPackage.Literals.OPERATION_CALL_EXP__REFERRED_OPERATION, expression.getName());
+		@SuppressWarnings("null") @NonNull EReference eReference = PivotPackage.Literals.OPERATION_CALL_EXP__REFERRED_OPERATION;
+		EnvironmentView environmentView = new EnvironmentView(metaModelManager, eReference, expression.getName());
 		environmentView.addFilter(filter);
 		Type sourceType = expression.getSource().getType();
 		if (sourceType instanceof LambdaType) {								// FIXME Modularize this
@@ -717,7 +720,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 		int size = 0;
 		if (sourceType != null) {
 			Type lowerBoundType = (Type) PivotUtil.getLowerBound(sourceType);
-			size = environmentView.computeLookups(lowerBoundType, null, null, null);
+			size = environmentView.computeLookups(lowerBoundType, null);
 		}
 		if (size == 1) {
 			Operation operation = (Operation)environmentView.getContent();
@@ -1404,10 +1407,12 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 	public Element visitSelfExpCS(@NonNull SelfExpCS csSelfExp) {	// FIXME Just use VariableExpCS
 		VariableExp expression = PivotUtil.getPivot(VariableExp.class, csSelfExp);
 		if (expression != null) {
-			EnvironmentView environmentView = new EnvironmentView(metaModelManager, PivotPackage.Literals.EXPRESSION_IN_OCL__CONTEXT_VARIABLE, Environment.SELF_VARIABLE_NAME);
 			ElementCS parent = csSelfExp.getLogicalParent();
 			if (parent != null) {
-				BaseScopeView.computeLookups(environmentView, parent, csSelfExp, csSelfExp.eContainingFeature(), null);
+				@SuppressWarnings("null") @NonNull EReference eReference = PivotPackage.Literals.EXPRESSION_IN_OCL__CONTEXT_VARIABLE;
+				EnvironmentView environmentView = new EnvironmentView(metaModelManager, eReference, Environment.SELF_VARIABLE_NAME);
+				ScopeView baseScopeView = BaseScopeView.getScopeView(metaModelManager, parent, eReference);
+				environmentView.computeLookups(baseScopeView);
 				VariableDeclaration variableDeclaration = (VariableDeclaration) environmentView.getContent();
 				expression.setReferredVariable(variableDeclaration);
 				context.setType(expression, variableDeclaration != null ? variableDeclaration.getType() : metaModelManager.getOclVoidType());

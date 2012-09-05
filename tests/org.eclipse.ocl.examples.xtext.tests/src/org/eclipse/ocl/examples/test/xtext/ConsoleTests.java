@@ -142,7 +142,7 @@ public class ConsoleTests extends PivotTestSuite
 		BaseDocument editorDocument = consolePage.getEditorDocument();
 		editorDocument.set(testExpression);
 		consolePage.evaluate(testExpression);
-		flushEvents();
+		flushEvents();			// FIXME on one occasion the previous result was returned
 		String string = consolePage.get();
 		assertEquals("<b>Evaluating:\n</b>" + testExpression + "\n<b>Results:\n</b>" + expectedResult, string);
 	}
@@ -257,7 +257,7 @@ public class ConsoleTests extends PivotTestSuite
 		EObject aLoan = ((List<EObject>) xmiLibrary.eGet(ecoreLoans)).get(0);
 		//
 		assertConsoleResult(consolePage, xmiLibrary, "books->sortedBy(name)", "Book b1\nBook b2\n");
-		assertConsoleResult(consolePage, xmiLibrary, "isAvailable()", "<b><error>Parsing failure\n</error></b><error>\n1: Unresolved Operation 'unknown-type::isAvailable()'\n</error>");
+		assertConsoleResult(consolePage, xmiLibrary, "isAvailable()", "<b><error>Parsing failure\n</error></b><error>\n1: Unresolved Operation '::isAvailable()'\n</error>");
 		assertConsoleResult(consolePage, b2Book, "isAvailable()", "false\n");
 		assertConsoleResult(consolePage, b1Book, "isAvailable()", "true\n");
 		aLoan.eSet(loanBook, b1Book);
@@ -268,7 +268,7 @@ public class ConsoleTests extends PivotTestSuite
 		assertConsoleResult(consolePage, b1Book, "isAvailable()", "false\n");
 		//
 		assertConsoleResult(consolePage, ecoreBook, "name", "'Book'\n");
-		assertConsoleResult(consolePage, ecoreBook, "copies", "<b><error>Parsing failure\n</error></b><error>\n1: Unresolved Property 'unknown-type::copies'\n</error>");
+		assertConsoleResult(consolePage, ecoreBook, "copies", "<b><error>Parsing failure\n</error></b><error>\n1: Unresolved Property '::copies'\n</error>");
 		assertConsoleResult(consolePage, ecoreBook, "oclType().ownedAttribute->sortedBy(name)",
 			"ecore::EClass.EClass\n" + 
 			"ecore::EClass.EReference\n" + 

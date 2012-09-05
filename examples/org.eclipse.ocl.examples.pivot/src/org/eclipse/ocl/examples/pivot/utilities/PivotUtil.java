@@ -86,6 +86,7 @@ import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
+import org.eclipse.ocl.examples.pivot.scoping.NullAttribution;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
 
 public class PivotUtil extends DomainUtil
@@ -585,24 +586,29 @@ public class PivotUtil extends DomainUtil
 		return bindings;
 	}
 
-	public static @Nullable Attribution getAttribution(@NonNull EObject eObject) {
+	public static @NonNull Attribution getAttribution(@NonNull EObject eObject) {
 		if (eObject.eIsProxy()) {			// Shouldn't happen, but certainly does during development
 			logger.warn("getAttribution for proxy " + eObject);
-			return null;
+			return NullAttribution.INSTANCE;
 		}
-		EClass eClass = eObject.eClass();
-		Attribution attribution = Attribution.REGISTRY.get(eClass);
-		if (attribution == null) {
-			for (EClass superClass = eClass; superClass.getESuperTypes().size() > 0; ) {
-				superClass = superClass.getESuperTypes().get(0);
-				attribution = Attribution.REGISTRY.get(superClass);
-				if (attribution != null) {
-					Attribution.REGISTRY.put(eClass, attribution);
-					break;
+		else {
+			EClass eClass = eObject.eClass();
+			Attribution attribution = Attribution.REGISTRY.get(eClass);
+			if (attribution == null) {
+				for (EClass superClass = eClass; superClass.getESuperTypes().size() > 0;) {
+					superClass = superClass.getESuperTypes().get(0);
+					attribution = Attribution.REGISTRY.get(superClass);
+					if (attribution != null) {
+						break;
+					}
 				}
+				if (attribution == null) {
+					attribution = NullAttribution.INSTANCE;
+				}
+				Attribution.REGISTRY.put(eClass, attribution);
 			}
+			return attribution;
 		}
-		return attribution;
 	}
 
 	public static @NonNull Type getBehavioralType(@NonNull Type type) {		// FIXME fold this into normal code

@@ -22,8 +22,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.common.utils.TracingOption;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.scoping.Attribution;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
@@ -67,12 +65,8 @@ public class BaseScopeProvider extends AbstractDeclarativeScopeProvider
 			return IScope.NULLSCOPE;
 		}
 		ElementCS csElement = (ElementCS) context;
-		Attribution attribution = PivotUtil.getAttribution(csElement);
-		if (attribution == null) {
-			return IScope.NULLSCOPE;
-		}
 		@SuppressWarnings("unused")
 		CS2PivotResourceAdapter resourceAdapter = CS2PivotResourceAdapter.getAdapter((BaseCSResource)csResource, null);
-		return new BaseScopeView(metaModelManager, csElement, attribution, null, reference, reference);
+		return BaseScopeView.getScopeView(metaModelManager, csElement, reference);
 	}
 }

@@ -29,7 +29,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -41,6 +40,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.Library;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
@@ -78,12 +78,12 @@ public class EnvironmentView
 {
 	private static final Logger logger = Logger.getLogger(EnvironmentView.class);
 
-	protected final MetaModelManager metaModelManager;
-	protected final EStructuralFeature reference;
+	protected final @NonNull MetaModelManager metaModelManager;
+	protected final @NonNull EStructuralFeature reference;
 	private EClassifier requiredType;
-	protected final String name;
+	protected final @Nullable String name;
 
-	private final Map<String, Object> contentsByName = new HashMap<String, Object>(); // Single
+	private final @NonNull Map<String, Object> contentsByName = new HashMap<String, Object>(); // Single
 																						// EObject
 																						// or
 																						// List<EObject>
@@ -94,10 +94,10 @@ public class EnvironmentView
 	private List<ScopeFilter> matchers = null;	// Prevailing filters for matching
 	private Set<ScopeFilter> resolvers = null;	// Successful filters for resolving
 
-	public EnvironmentView(@NonNull MetaModelManager metaModelManager, @Nullable EStructuralFeature reference, @Nullable String name) {
+	public EnvironmentView(@NonNull MetaModelManager metaModelManager, @NonNull EStructuralFeature reference, @Nullable String name) {
 		this.metaModelManager = metaModelManager;
 		this.reference = reference;
-		this.requiredType = reference != null ? reference.getEType() : null;
+		this.requiredType = reference.getEType();
 		this.name = name;
 	}
 
@@ -107,6 +107,33 @@ public class EnvironmentView
 		// If requiredType conformsTo eClass some candidates may be type-compatible
 		// else no candidates can be type-compatible
 		return PivotUtil.conformsTo(requiredType, eClass) || ((requiredType != null) && PivotUtil.conformsTo(eClass, requiredType));
+	}
+
+	public void addAllElements(@NonNull Type type, @NonNull ScopeView scopeView) {
+		Element element = PivotUtil.getLowerBound(type);
+		Attribution attribution = PivotUtil.getAttribution(element);
+		attribution.computeLookup(element, this, scopeView);
+		TemplateableElement type2 = type.getUnspecializedElement();
+		element = (type2 instanceof Type ? (Type)type2 : type).getPackage();
+		if (element != null) {
+			attribution = PivotUtil.getAttribution(element);
+			attribution.computeLookup(element, this, scopeView);
+		}
+		if (type instanceof Metaclass) {
+			Type instanceType = ((Metaclass)type).getInstanceType();
+			if (instanceType != null) {
+				element = PivotUtil.getLowerBound(instanceType);
+				attribution = PivotUtil.getAttribution(element);
+				attribution.computeLookup(element, this, scopeView);
+//				element = instanceType.getPackage();
+//				if (element != null) {
+//					attribution = PivotUtil.getAttribution(element);
+//					if (attribution != null) {
+//						attribution.computeLookup(element, this, scopeView);
+//					}
+//				}
+			}
+		}
 	}
 
 	public void addAllEnumerationLiterals(org.eclipse.ocl.examples.pivot.Enumeration pivot) {
@@ -445,9 +472,7 @@ public class EnvironmentView
 		if (element != null) {
 			element = PivotUtil.getLowerBound(element);
 			Attribution attribution = PivotUtil.getAttribution(element);
-			if (attribution != null) {
-				attribution.computeLookup(element, this, scopeView);
-			}
+			attribution.computeLookup(element, this, scopeView);
 		}
 	}
 
@@ -532,15 +557,9 @@ public class EnvironmentView
 		}
 	}
 
-	public int computeLookups(@NonNull Element target, EObject child, EStructuralFeature containmentFeature, EReference targetReference) {
-		Attribution attribution = PivotUtil.getAttribution(target);
-		if (attribution != null) {
-			ScopeView pivotScopeView = new PivotScopeView(getMetaModelManager(), target, attribution, child, containmentFeature, targetReference);
-			return computeLookups(pivotScopeView);
-		}
-		else {
-			return 0;
-		}
+	public int computeLookups(@NonNull Element target, @Nullable Element child) {
+		ScopeView pivotScopeView = new PivotScopeView(metaModelManager, target, child, false);
+		return computeLookups(pivotScopeView);
 	}
 	
 	public int computeLookups(@NonNull ScopeView scopeView) {
@@ -551,8 +570,8 @@ public class EnvironmentView
 				if (aTarget == null) {
 					break;					// The NULLSCOPEVIEW
 				}
-				Attribution aAttribution = aScope.getAttribution();
-				aScope = aAttribution.computeLookup(aTarget, this, aScope);
+				Attribution attribution = aScope.getAttribution();
+				aScope = attribution.computeLookup(aTarget, this, aScope);
 			}
 		}
 		catch (IllegalLibraryException e) {
@@ -562,6 +581,11 @@ public class EnvironmentView
 			logger.warn("Lookup of '" + name + "' failed", e);
 		}
 		return resolveDuplicates();
+	}
+
+	public void computeQualifiedLookups(@NonNull Element target) {
+		ScopeView parentScopeView = new PivotScopeView(metaModelManager, target, null, true);
+		addElementsOfScope(target, parentScopeView);
 	}
 
 	protected int filterImplicits(@NonNull DomainElement match1, @NonNull DomainElement match2) {
@@ -628,7 +652,7 @@ public class EnvironmentView
 		return name;
 	}
 
-	public EStructuralFeature getReference() {
+	public @NonNull EStructuralFeature getReference() {
 		return reference;
 	}
 
@@ -640,7 +664,6 @@ public class EnvironmentView
 		return contentsSize;
 	}
 
-	@SuppressWarnings("null")
 	public @NonNull MetaModelManager getMetaModelManager() {
 		return metaModelManager;
 	}
@@ -765,11 +788,9 @@ public class EnvironmentView
 	@Override
 	public String toString() {
 		StringBuilder s = new StringBuilder();
-		if (reference != null) {
-			s.append(reference.getName());
-			s.append(" : "); //$NON-NLS-1$
-//			s.append(reference.getEType().getName());
-		}
+		s.append(reference.getName());
+		s.append(" : "); //$NON-NLS-1$
+//		s.append(reference.getEType().getName());
 		if (requiredType != null) {
 			s.append(requiredType.getName());
 		}

@@ -352,6 +352,10 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 
 	@Override
 	public Continuation<?> visitImportCS(@NonNull ImportCS csElement) {
+		PathNameCS pathName = csElement.getPathName();
+		if (pathName != null) {
+			CS2Pivot.setElementType(pathName, PivotPackage.Literals.NAMESPACE, csElement, null);
+		}
 		if (csElement.isAll() && (csElement.getName() != null)) {
 			context.addDiagnostic(csElement, "An all-package import cannot have an associated alias name");
 		}

@@ -20,16 +20,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
-import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
-import org.eclipse.ocl.examples.xtext.base.scoping.BaseScopeView;
 
 public class TypedTypeRefCSAttribution extends AbstractAttribution
 {
@@ -39,24 +34,16 @@ public class TypedTypeRefCSAttribution extends AbstractAttribution
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		TypedTypeRefCS targetElement = (TypedTypeRefCS)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
-		if (containmentFeature == BaseCSTPackage.Literals.TYPED_TYPE_REF_CS__OWNED_TEMPLATE_BINDING) {
-			MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-			ElementCS parent = targetElement.getLogicalParent();
-			if (parent == null) {
-				return BaseScopeView.NULLSCOPEVIEW;
-			}
-			Attribution parentScope = PivotUtil.getAttribution(parent);
-			return new BaseScopeView(metaModelManager, parent, parentScope, target, target.eContainingFeature(), null);
+		if (containmentFeature == BaseCSTPackage.Literals.TYPED_TYPE_REF_CS__OWNED_TEMPLATE_BINDING) {		// FIXME move to TemplateBindingAttributionCS
 		}
 		else if (containmentFeature == BaseCSTPackage.Literals.TYPED_TYPE_REF_CS__PATH_NAME) {
-			return scopeView.getParent();
 		}
 		else {
 			Type type = targetElement.getType();
 			if ((type != null) && !type.eIsProxy()) {
 				environmentView.addElementsOfScope(type, scopeView);
 			}
-			return scopeView.getParent();
 		}
+		return scopeView.getParent();
 	}
 }

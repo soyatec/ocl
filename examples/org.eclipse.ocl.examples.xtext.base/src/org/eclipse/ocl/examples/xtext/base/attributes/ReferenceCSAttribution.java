@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
@@ -47,7 +46,7 @@ public class ReferenceCSAttribution extends AbstractAttribution
 					type = ((CollectionType)type).getElementType();
 				}
 				if (type instanceof Type) {
-					environmentView.computeLookups(type, null, PivotPackage.Literals.PROPERTY__OPPOSITE, scopeView.getTargetReference());
+					environmentView.computeLookups(type, null);
 				}
 			}
 			return null;

@@ -19,9 +19,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
-import org.eclipse.ocl.examples.pivot.scoping.EmptyAttribution;
-import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
+import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
@@ -36,9 +35,6 @@ public class DataTypeAttribution extends AbstractAttribution
 		Attribution attribution;
 		if (behavioralType != null) {
 			attribution = PivotUtil.getAttribution(behavioralType);
-			if (attribution == null) {
-				attribution = EmptyAttribution.INSTANCE;
-			}
 		}
 		else {
 			attribution = ClassAttribution.INSTANCE;

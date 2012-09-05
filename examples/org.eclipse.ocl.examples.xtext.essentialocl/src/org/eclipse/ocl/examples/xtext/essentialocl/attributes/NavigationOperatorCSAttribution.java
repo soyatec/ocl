@@ -28,8 +28,6 @@ import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
-import org.eclipse.ocl.examples.xtext.base.scoping.BaseScopeView;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InvocationExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigationOperatorCS;
@@ -74,7 +72,7 @@ public class NavigationOperatorCSAttribution extends AbstractAttribution
 				}
 				else {
 					if (type instanceof CollectionType) {		// collection->iteration-operation(iterator-feature)
-						if ((csArgument != null) && InvocationExpCSAttribution.isIteration(environmentView.getMetaModelManager(), csArgument, type)) {
+						if ((csArgument instanceof InvocationExpCS) && NavigatingArgCSAttribution.isIteration(environmentView.getMetaModelManager(), (InvocationExpCS) csArgument, type)) {
 							environmentView.addElementsOfScope(((CollectionType)type).getElementType(), scopeView);
 						}
 						else {
@@ -90,14 +88,7 @@ public class NavigationOperatorCSAttribution extends AbstractAttribution
 					return null;			// Explicit navigation must be resolved in source
 				}
 			}
-			return scopeView.getParent();
 		}
-		else {
-			ElementCS parent = targetElement.getLogicalParent();
-			if (parent != null) {
-				BaseScopeView.computeLookups(environmentView, parent, target, PivotPackage.Literals.CALL_EXP__SOURCE, null);
-			}
-			return null;
-		}
+		return scopeView.getParent();
 	}
 }

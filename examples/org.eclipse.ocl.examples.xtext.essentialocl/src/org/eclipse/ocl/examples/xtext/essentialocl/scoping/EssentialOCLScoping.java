@@ -27,7 +27,6 @@ import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
-import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.pivot.scoping.EmptyAttribution;
@@ -48,6 +47,8 @@ import org.eclipse.ocl.examples.xtext.essentialocl.attributes.ContextCSAttributi
 import org.eclipse.ocl.examples.xtext.essentialocl.attributes.ExpSpecificationCSAttribution;
 import org.eclipse.ocl.examples.xtext.essentialocl.attributes.InvocationExpCSAttribution;
 import org.eclipse.ocl.examples.xtext.essentialocl.attributes.LetExpCSAttribution;
+import org.eclipse.ocl.examples.xtext.essentialocl.attributes.LetVariableCSAttribution;
+import org.eclipse.ocl.examples.xtext.essentialocl.attributes.NavigatingArgCSAttribution;
 import org.eclipse.ocl.examples.xtext.essentialocl.attributes.NavigationOperatorCSAttribution;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLCSTPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
@@ -69,6 +70,8 @@ public class EssentialOCLScoping
 		registry.put(EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, ExpSpecificationCSAttribution.INSTANCE);
 		registry.put(EssentialOCLCSTPackage.Literals.INVOCATION_EXP_CS, InvocationExpCSAttribution.INSTANCE);
 		registry.put(EssentialOCLCSTPackage.Literals.LET_EXP_CS, LetExpCSAttribution.INSTANCE);
+		registry.put(EssentialOCLCSTPackage.Literals.LET_VARIABLE_CS, LetVariableCSAttribution.INSTANCE);
+		registry.put(EssentialOCLCSTPackage.Literals.NAVIGATING_ARG_CS, NavigatingArgCSAttribution.INSTANCE);
 		registry.put(EssentialOCLCSTPackage.Literals.NAVIGATION_OPERATOR_CS, NavigationOperatorCSAttribution.INSTANCE);
 		registry.put(EssentialOCLCSTPackage.Literals.TUPLE_LITERAL_EXP_CS, EmptyAttribution.INSTANCE);
 		CS2Pivot.addUnresolvedProxyMessageProvider(new PathElementCSUnresolvedProxyMessageProvider());			
@@ -132,24 +135,24 @@ public class EssentialOCLScoping
 			assert messageTemplate != null;
 			TypedElement source = null;
 			ExpCS csSource = navigationArgument;
-			while (csSource != null) {
-				OperatorCS csOperator = csSource.getParent();
-				if ((csOperator != null) && (csOperator.getSource() != csSource)) {
+			for (ExpCS aSource = csSource; aSource != null; ) {										// FIXME rewrite me
+				OperatorCS csOperator = aSource.getParent();
+				if ((csOperator != null) && (csOperator.getSource() != aSource)) {
 					csSource = csOperator.getSource();
 					break;
 				}
-				EObject eContainer = csSource.eContainer();
+				EObject eContainer = aSource.eContainer();
 				if (eContainer instanceof NavigatingArgCS) {
-					csSource = ((NavigatingArgCS)eContainer).getNavigatingExp();
+					aSource = ((NavigatingArgCS)eContainer).getNavigatingExp();
 				}
 				else if (eContainer instanceof InfixExpCS) {
-					csSource = (InfixExpCS)eContainer;
+					aSource = (InfixExpCS)eContainer;
 				}
 				else if (eContainer instanceof PrefixExpCS) {
-					csSource = (PrefixExpCS)eContainer;
+					aSource = (PrefixExpCS)eContainer;
 				}
 				else if (eContainer instanceof NestedExpCS) {
-					csSource = (NestedExpCS)eContainer;
+					aSource = (NestedExpCS)eContainer;
 				}
 				else if (eContainer instanceof SpecificationCS) {
 					ExpressionInOCL expression = PivotUtil.getPivot(ExpressionInOCL.class, (SpecificationCS)eContainer);
@@ -165,8 +168,9 @@ public class EssentialOCLScoping
 					source = PivotUtil.getPivot(OCLExpression.class, csSource);
 				}
 			}
-			String typeText = PivotConstants.UNKNOWN_TYPE_TEXT;
+			String typeText = "";
 			if (source != null) {
+				typeText = PivotConstants.UNKNOWN_TYPE_TEXT;
 				Type sourceType = source.getType();
 				if (sourceType != null) {
 					OperatorCS csParent = navigationArgument != null ? navigationArgument.getParent() : null;
@@ -196,33 +200,7 @@ public class EssentialOCLScoping
 						s.append(", ");
 					}
 					Type type = pivot.getType();
-					if (pivot instanceof TypedMultiplicityElement) {
-						TypedMultiplicityElement typedMultiplicityElement = (TypedMultiplicityElement)pivot;
-/*						if (typedMultiplicityElement.isOrdered()) {
-							if (typedMultiplicityElement.isUnique()) {
-								s.append("OrderedSet(");
-							}
-							else {
-								s.append("Sequence(");
-							}
-						}
-						else {
-							if (typedMultiplicityElement.isUnique()) {
-								s.append("Set(");
-							}
-							else {
-								s.append("Bag(");
-							}
-						} */
-						s.append(String.valueOf(type));
-//						s.append(")");
-//						BigInteger lower = typedMultiplicityElement.getLower();
-//						BigInteger upper = typedMultiplicityElement.getUpper();
-//						PivotUtil.appendMultiplicity(s, lower.intValue(), upper.intValue());
-					}
-					else {
-						s.append(String.valueOf(type));
-					}
+					s.append(String.valueOf(type));
 				}
 				else {
 					s.append(csArgument.toString());
