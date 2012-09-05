@@ -146,6 +146,7 @@ public class StereotypesTest extends PivotTestSuite
     @Override
 	protected void tearDown() throws Exception {
 		mm = null;
+        super.tearDown();
 	}
 
 	/**
