@@ -36,6 +36,7 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
+import org.eclipse.ocl.examples.pivot.utilities.PivotObjectImpl;
 import org.eclipse.ocl.examples.pivot.utilities.PivotResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.uml2.uml.util.UMLUtil;
@@ -155,18 +156,18 @@ public class StereotypesTest extends PivotTestSuite
     public void test_stereotypeNavigation() {
 //
     	assertQueryEquals(mm.englishClass, "EnglishClass", "self.name");
-    	assertQueryEquals(mm.englishClass, metaModelManager.getMetaclass(mm.englishClassInEnglish), "self.extension_InEnglish");
-    	assertQueryEquals(mm.englishClassInEnglish, metaModelManager.getMetaclass(mm.englishClass), "self.base_Class");
-    	assertQueryEquals(mm.englishClass, "EnglishClass$InEnglish", "self.extension_InEnglish.instanceType.name");
-    	assertSemanticErrorQuery2(mm.englishClass, "self.extension_InGerman", OCLMessages.UnresolvedProperty_ERROR_, "extension_InGerman", "Metaclass(Model::EnglishClass)");
-    	assertSemanticErrorQuery2(mm.englishClass, "self.extension_InEnglish.extension_InEnglish", OCLMessages.UnresolvedProperty_ERROR_, "extension_InEnglish", "Metaclass(Model::EnglishClass$InEnglish)");
-    	assertQueryEquals(mm.englishClass, metaModelManager.getMetaclass(mm.englishClass), "self.extension_InEnglish.base_Class");
-    	assertQueryEquals(mm.englishClassInEnglish, metaModelManager.getMetaclass(mm.englishClassInEnglish), "self.base_Class.extension_InEnglish");
-    	assertQueryTrue(mm.englishClass, "extension_InEnglish.base_Class = oclType()");
-    	assertQueryTrue(mm.englishClassInEnglish,  "base_Class.extension_InEnglish = oclType()");
-    	assertSemanticErrorQuery2(mm.frenchClass, "self.text", OCLMessages.UnresolvedProperty_ERROR_, "text", "Metaclass(Model::FrenchClass)");
-    	assertQueryEquals(mm.frenchClass, "Merci", "extension_InFrench.instanceType.ownedAttribute->any(name='text').default");
-    	assertQueryTrue(mm.frenchClass, "extension_InFrench.instanceType.ownedAttribute->any(name='text').default = 'Merci'");
+    	assertQueryEquals(metaModelManager.getMetaclass(mm.englishClass), metaModelManager.getMetaclass(mm.englishClassInEnglish), "self.extension_InEnglish");
+    	assertQueryEquals(metaModelManager.getMetaclass(mm.englishClassInEnglish), metaModelManager.getMetaclass(mm.englishClass), "self.base_Class");
+    	assertQueryEquals(metaModelManager.getMetaclass(mm.englishClass), "EnglishClass$InEnglish", "self.extension_InEnglish.instanceType.name");
+    	assertSemanticErrorQuery2(metaModelManager.getMetaclass(mm.englishClass), "self.extension_InGerman", OCLMessages.UnresolvedProperty_ERROR_, "extension_InGerman", "Metaclass(Model::EnglishClass)");
+    	assertSemanticErrorQuery2(metaModelManager.getMetaclass(mm.englishClass), "self.extension_InEnglish.extension_InEnglish", OCLMessages.UnresolvedProperty_ERROR_, "extension_InEnglish", "Metaclass(Model::EnglishClass$InEnglish)");
+    	assertQueryEquals(metaModelManager.getMetaclass(mm.englishClass), metaModelManager.getMetaclass(mm.englishClass), "self.extension_InEnglish.base_Class");
+    	assertQueryEquals(metaModelManager.getMetaclass(mm.englishClassInEnglish), metaModelManager.getMetaclass(mm.englishClassInEnglish), "self.base_Class.extension_InEnglish");
+    	assertQueryTrue(metaModelManager.getMetaclass(mm.englishClass), "extension_InEnglish.base_Class = self");
+    	assertQueryTrue(metaModelManager.getMetaclass(mm.englishClassInEnglish),  "base_Class.extension_InEnglish = self");
+    	assertSemanticErrorQuery2(metaModelManager.getMetaclass(mm.frenchClass), "self.text", OCLMessages.UnresolvedProperty_ERROR_, "text", "Metaclass(Model::FrenchClass)");
+    	assertQueryEquals(metaModelManager.getMetaclass(mm.frenchClass), "Merci", "extension_InFrench.instanceType.ownedAttribute->any(name='text').default");
+    	assertQueryTrue(metaModelManager.getMetaclass(mm.frenchClass), "extension_InFrench.instanceType.ownedAttribute->any(name='text').default = 'Merci'");
     }
 
     /**
@@ -177,7 +178,7 @@ public class StereotypesTest extends PivotTestSuite
     	assertQueryEquals(m.englishObject, valueFactory.createSetOf(m.englishObject), "EnglishClass.allInstances()");
     	assertQueryEquals(m.englishObject, valueFactory.createSetOf(m.germanObject), "GermanClass.allInstances()");
 //M1
-    	assertSemanticErrorQuery2(mm.englishClass, "EnglishClass.allInstances()", OCLMessages.UnresolvedProperty_ERROR_, "EnglishClass", "");
+    	assertQueryEquals(mm.englishClass, valueFactory.createSetOf(), "Model::EnglishClass.allInstances()");
     	assertQueryEquals(mm.englishClass, valueFactory.createSetOf(mm.string, mm.plainClass, mm.englishClass, mm.languageClass, mm.frenchClass, mm.germanClass), "ocl::Class.allInstances()");
     	assertQueryEquals(mm.englishClass, valueFactory.createSetOf(mm.englishClassInEnglish, mm.frenchClassInEnglish, mm.germanClassInEnglish), "ocl::ElementExtension.allInstances()");
     	//
@@ -193,6 +194,6 @@ public class StereotypesTest extends PivotTestSuite
 //M0
     	assertSemanticErrorQuery2(m.englishObject, "self.getAppliedStereotypes()", OCLMessages.UnresolvedOperation_ERROR_, "getAppliedStereotypes", "Model::EnglishClass");
 //M1
-//    	assertQueryEquals(mm.englishClass, valueFactory.createSetOf(mm.inEnglishStereotype), "self.getAppliedStereotypes()");
+    	assertQueryEquals(((PivotObjectImpl)mm.englishClass).getETarget(), valueFactory.createSetOf(((PivotObjectImpl)mm.inEnglishStereotype).getETarget()), "self.getAppliedStereotypes()");
     }
 }

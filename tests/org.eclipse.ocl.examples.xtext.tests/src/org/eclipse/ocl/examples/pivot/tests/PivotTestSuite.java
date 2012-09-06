@@ -1304,10 +1304,11 @@ public abstract class PivotTestSuite extends PivotTestCase
 
 	protected void setHelperContext(OCLHelper aHelper, Object context) throws ParserException {
 		if (context instanceof Type) {
-		   	Metaclass metaclass = metaModelManager.getMetaclass((Type)context);
-			aHelper.setContext(metaclass);
+//		   	Metaclass metaclass = metaModelManager.getMetaclass((Type)context);
+//			aHelper.setContext(metaclass);
+			aHelper.setContext((Type)context);
 		}
-		else if (context instanceof Element) {
+		else if (context instanceof Element) {		// FIXME ?????!!
 			EClass eClass = ((Element)context).eClass();
 			Type pivotType = metaModelManager.getPivotType(eClass.getName());
 			aHelper.setContext(pivotType);

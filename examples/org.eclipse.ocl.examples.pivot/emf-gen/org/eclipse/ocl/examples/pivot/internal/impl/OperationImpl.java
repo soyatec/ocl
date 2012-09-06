@@ -29,6 +29,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -76,6 +77,7 @@ import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.bodies.OperationBodies;
 import org.eclipse.ocl.examples.pivot.bodies.ParameterableElementBodies;
 import org.eclipse.ocl.examples.pivot.library.ConstrainedOperation;
+import org.eclipse.ocl.examples.pivot.library.EInvokeOperation;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.osgi.util.NLS;
@@ -1258,14 +1260,21 @@ public class OperationImpl
 				if (UMLReflection.BODY.equals(stereotype)) {
 					ValueSpecification specification = rule.getSpecification();
 					if (specification instanceof ExpressionInOCL) {
-						bodyImplementation2 = bodyImplementation = new ConstrainedOperation((ExpressionInOCL) specification);
+						bodyImplementation2 = new ConstrainedOperation((ExpressionInOCL) specification);
 					}
 				}
 			}
 		}
 		if (bodyImplementation2 == null) {
-			bodyImplementation2 = bodyImplementation = UnsupportedOperation.INSTANCE;
+			EObject eTarget = getETarget();
+			if (eTarget instanceof EOperation) {
+				bodyImplementation2 = new EInvokeOperation((EOperation)eTarget);
+			}
+			else {
+				bodyImplementation2 = UnsupportedOperation.INSTANCE;
+			}
 		}
+		bodyImplementation = bodyImplementation2;
 		return bodyImplementation2;
 	}
 
