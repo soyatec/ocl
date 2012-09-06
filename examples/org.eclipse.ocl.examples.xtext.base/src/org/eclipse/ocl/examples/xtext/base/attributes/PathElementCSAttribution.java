@@ -25,7 +25,6 @@ import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 
@@ -47,25 +46,23 @@ public class PathElementCSAttribution extends AbstractAttribution
 		ScopeFilter scopeFilter = null;
 		try {
 			environmentView.setRequiredType(eClassifier);
-			ElementCS scopeTarget = csPathElement.getLogicalParent();
-			if (scopeTarget != null) {
-				PathNameCS csPathName = csPathElement.getPathName();
-				List<PathElementCS> path = csPathName.getPath();
-				int index = path.indexOf(csPathElement);
-				if (index >= path.size()-1) {			// Last element may have a scope filter
-					scopeFilter = csPathName.getScopeFilter();
-					if (scopeFilter != null) {
-						environmentView.addFilter(scopeFilter);
-					}
+			PathNameCS csPathName = csPathElement.getPathName();
+			List<PathElementCS> path = csPathName.getPath();
+			int index = path.indexOf(csPathElement);
+			if (index >= path.size()-1) {			// Last element may have a scope filter
+				scopeFilter = csPathName.getScopeFilter();
+				if (scopeFilter != null) {
+					environmentView.addFilter(scopeFilter);
 				}
-				if (index <= 0) {						// First path element is resolved in parent's parent scope
-					environmentView.computeLookups(scopeView.getParent().getParent());
-				}
-				else {									// Subsequent elements in previous scope
-					Element parent = path.get(index-1).getElement();
-					if ((parent != null) && !parent.eIsProxy()) {
-						environmentView.computeQualifiedLookups(parent);
-					}
+			}
+			if (index <= 0) {						// First path element is resolved in parent's parent scope
+				environmentView.computeLookups(scopeView.getParent().getParent());
+			}
+			else {									// Subsequent elements in previous scope
+				Element parent = path.get(index-1).getElement();
+				if ((parent != null) && !parent.eIsProxy()) {
+//					environmentView.computeLookups(parent, null);
+					environmentView.computeQualifiedLookups(parent);
 				}
 			}
 			return null;

@@ -190,7 +190,9 @@ public class StereotypesTest extends PivotTestSuite
      * Tests getAppliedStereotypes.
      */
     public void test_MDT_UML2_operations_382978() {
-//
-//    	assertQueryEquals(mm.englishClass, "EnglishClass", "self.getAppliedStereotypes()");
+//M0
+    	assertSemanticErrorQuery2(m.englishObject, "self.getAppliedStereotypes()", OCLMessages.UnresolvedOperation_ERROR_, "getAppliedStereotypes", "Model::EnglishClass");
+//M1
+//    	assertQueryEquals(mm.englishClass, valueFactory.createSetOf(mm.inEnglishStereotype), "self.getAppliedStereotypes()");
     }
 }

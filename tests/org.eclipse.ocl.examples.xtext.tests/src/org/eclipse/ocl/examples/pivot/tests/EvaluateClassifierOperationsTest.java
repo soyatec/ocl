@@ -78,7 +78,7 @@ public class EvaluateClassifierOperationsTest extends PivotSimpleTestSuite
 		assertQueryInvalid(pkg2, "null.oclContainer()");
 		assertQueryResults(root, "null", "oclContainer()");
 		assertQueryEquals(pkg2, pkg1, "oclContainer()");
-		assertQueryInvalid(null, "1.oclContainer()", NLS.bind(EvaluatorMessages.TypedValueRequired, "Object", "UnlimitedNatural"), null);
+		assertSemanticErrorQuery("1.oclContainer()", OCLMessages.UnresolvedOperation_ERROR_, "oclContainer", "UnlimitedNatural");
 	}
 	
 	/**
@@ -90,6 +90,6 @@ public class EvaluateClassifierOperationsTest extends PivotSimpleTestSuite
 		assertQueryEquals(pkg1, valueFactory.createSetOf(bob, pkg2, pkg3), "oclContents()");
 		assertQueryEquals(pkg2, valueFactory.createSetOf(jim), "oclContents()");
 		assertQueryEquals(george, valueFactory.createSetOf(), "oclContents()");
-		assertQueryInvalid(null, "1.oclContents()", NLS.bind(EvaluatorMessages.TypedValueRequired, "Object", "UnlimitedNatural"), null);
+		assertSemanticErrorQuery("1.oclContents()", OCLMessages.UnresolvedOperation_ERROR_, "oclContents", "UnlimitedNatural");
 	}
 }
