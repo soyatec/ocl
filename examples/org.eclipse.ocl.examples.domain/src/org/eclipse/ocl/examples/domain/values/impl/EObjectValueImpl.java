@@ -27,27 +27,44 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class EObjectValueImpl extends ObjectValueImpl
 {
+	protected final @NonNull EObject object;
 	protected DomainType type = null;			// Lazily computed
 	
 	public EObjectValueImpl(@NonNull ValueFactory valueFactory, @NonNull EObject object) {
-		super(valueFactory, object);
+		super(valueFactory);
+		this.object = object;
+	}
+
+	@Override
+	public @NonNull EObject asNavigableObject() {
+		return object;
+	}
+
+	@Override
+	public Object asObject() {
+		return object;
 	}
 
 	@Override
 	public @NonNull EObject getObject() {
-		return (EObject) object;
+		return object;
 	}
 
 	public @NonNull DomainType getType() {
 		DomainType type2 = type;
 		if (type2 == null) {
-			type2 = type = valueFactory.getStandardLibrary().getType(DomainUtil.nonNullEMF(getObject().eClass()));
+			type2 = type = valueFactory.getStandardLibrary().getType(DomainUtil.nonNullEMF(object.eClass()));
 		}
 		return type2;
 	}
 
 	@Override
+	public int hashCode() {
+		return object.hashCode();
+	}
+
+	@Override
 	public String toString() {
-		return DomainUtil.getLabel(getObject());
+		return DomainUtil.getLabel(object);
 	}
 }

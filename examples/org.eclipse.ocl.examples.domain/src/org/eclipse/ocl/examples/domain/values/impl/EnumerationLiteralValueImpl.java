@@ -41,25 +41,32 @@ public class EnumerationLiteralValueImpl extends ObjectValueImpl implements Enum
 		return ValuesPackage.Literals.ENUMERATION_LITERAL_VALUE;
 	}
 
+	protected final @NonNull DomainEnumerationLiteral object;
 	protected DomainEnumeration type = null;			// Lazily computed
 
 	public EnumerationLiteralValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainEnumerationLiteral object) {
-		super(valueFactory, object);
+		super(valueFactory);
+		this.object = object;
 	}
 
 	@Override
 	public Object asEcoreObject() {
-		return getObject().asEcoreObject(valueFactory.getStandardLibrary());
+		return object.asEcoreObject(valueFactory.getStandardLibrary());
 	}
 
 	@Override
 	public DomainEnumerationLiteral asElement() {
-		return getObject();
+		return object;
 	}
 
 	@Override
 	public @NonNull EnumerationLiteralValue asElementValue() {
 		return this;
+	}
+
+	@Override
+	public Object asObject() {
+		return object;
 	}
 
 	@Override
@@ -85,11 +92,11 @@ public class EnumerationLiteralValueImpl extends ObjectValueImpl implements Enum
 	}
 
 	public DomainEnumerationLiteral getElement() {
-		return getObject();
+		return object;
 	}
 
 	public @NonNull String getName() throws InvalidValueException {
-		String name = getObject().getName();
+		String name = object.getName();
 		if (name == null) {
 			return valueFactory.throwInvalidValueException("null-named EnumerationLiteral");
 		}
@@ -98,19 +105,19 @@ public class EnumerationLiteralValueImpl extends ObjectValueImpl implements Enum
 
 	@Override
 	public @NonNull DomainEnumerationLiteral getObject() {
-		return (DomainEnumerationLiteral) object;
+		return object;
 	}
 
 	public @NonNull DomainEnumeration getType() {
 		DomainEnumeration type2 = type;
 		if (type2 == null) {
-			type2 = type = DomainUtil.nonNullState(getObject().getEnumeration());
+			type2 = type = DomainUtil.nonNullState(object.getEnumeration());
 		}
 		return type2;
 	}
 
 	@Override
 	public int hashCode() {
-		return getObject().hashCode();
+		return object.hashCode();
 	}
 }

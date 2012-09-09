@@ -37,16 +37,13 @@ public abstract class ObjectValueImpl extends ValueImpl implements ObjectValue
 	protected EClass eStaticClass() {
 		return ValuesPackage.Literals.OBJECT_VALUE;
 	}
-
-	protected final @NonNull Object object;
 	
-	protected ObjectValueImpl(@NonNull ValueFactory valueFactory, @NonNull Object object) {
+	protected ObjectValueImpl(@NonNull ValueFactory valueFactory) {
 		super(valueFactory);
-		this.object = object;
 	}
 
 	public Object asObject() {
-		return object;
+		return getObject();
 	}
 
 	@Override
@@ -63,20 +60,18 @@ public abstract class ObjectValueImpl extends ValueImpl implements ObjectValue
 		if (!(obj instanceof ObjectValue)) {
 			return false;
 		}
-		return object.equals(((ObjectValue)obj).getObject());
+		return getObject().equals(((ObjectValue)obj).getObject());
 	}
 
-	public @NonNull Object getObject() {
-		return object;
-	}
+	public abstract @NonNull Object getObject();
 
 	@Override
 	public int hashCode() {
-		return object.hashCode();
+		return getObject().hashCode();
 	}
 
 	@Override
 	public String toString() {
-		return String.valueOf(object);
+		return String.valueOf(getObject());
 	}
 }

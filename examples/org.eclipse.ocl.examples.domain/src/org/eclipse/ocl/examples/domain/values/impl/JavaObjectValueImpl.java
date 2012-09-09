@@ -26,10 +26,22 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class JavaObjectValueImpl extends ObjectValueImpl
 {
+	protected final @NonNull Object object;
 	protected DomainType type = null;
 	
 	public JavaObjectValueImpl(@NonNull ValueFactory valueFactory, @NonNull Object object) {
-		super(valueFactory, object);
+		super(valueFactory);
+		this.object = object;
+	}
+
+	@Override
+	public Object asObject() {
+		return object;
+	}
+
+	@Override
+	public @NonNull Object getObject() {
+		return object;
 	}
 
 	public @NonNull DomainType getType() {
@@ -44,5 +56,10 @@ public class JavaObjectValueImpl extends ObjectValueImpl
 			}
 		}
 		return type2;
+	}
+
+	@Override
+	public int hashCode() {
+		return object.hashCode();
 	}
 }

@@ -44,17 +44,18 @@ public abstract class TypeValueImpl extends ObjectValueImpl implements TypeValue
 		return ValuesPackage.Literals.TYPE_VALUE;
 	}
 
-
+	protected final @NonNull DomainType object;
 	private DomainMetaclass metaclass;
 
 	public TypeValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainType object) {
-		super(valueFactory, object);
+		super(valueFactory);
+		this.object = object;
 		this.metaclass = null;
 	}
 
 	@Override
 	public DomainType asElement() {
-		return getObject();
+		return object;
 	}
 
 	@Override
@@ -64,13 +65,17 @@ public abstract class TypeValueImpl extends ObjectValueImpl implements TypeValue
 
 	@Override
 	public @NonNull EObject asNavigableObject() throws InvalidValueException {
-		DomainType navigableObject = getObject();
-		if (navigableObject instanceof EObject) {
-			return (EObject) navigableObject;
+		if (object instanceof EObject) {
+			return (EObject) object;
 		} else {
 			return (EObject) valueFactory.throwInvalidValueException(
 				EvaluatorMessages.TypedValueRequired, "Object", getType());
 		}
+	}
+
+	@Override
+	public Object asObject() {
+		return object;
 	}
 
 	@Override
@@ -87,7 +92,7 @@ public abstract class TypeValueImpl extends ObjectValueImpl implements TypeValue
 			return false;
 		}
 		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
-		DomainInheritance thisInheritance = getObject().getInheritance(standardLibrary);
+		DomainInheritance thisInheritance = object.getInheritance(standardLibrary);
 		try {
 			DomainType thatInstanceType = ((TypeValue) that).getInstanceType();
 			DomainInheritance thatInheritance = thatInstanceType.getInheritance(standardLibrary);
@@ -98,23 +103,28 @@ public abstract class TypeValueImpl extends ObjectValueImpl implements TypeValue
 	}
 
 	public @NonNull DomainType getElement() {
-		return getObject();
+		return object;
 	}
 
 	public @NonNull DomainType getInstanceType() {
-		return getObject();
+		return object;
 	}
 
 	@Override
 	public @NonNull DomainType getObject() {
-		return (DomainType) object;
+		return object;
 	}
 
 	public @NonNull DomainMetaclass getType() {
 		DomainMetaclass metaclass2 = metaclass;
 		if (metaclass2 == null) {
-			metaclass2 = metaclass = valueFactory.getStandardLibrary().getMetaclass(getObject());
+			metaclass2 = metaclass = valueFactory.getStandardLibrary().getMetaclass(object);
 		}
 		return metaclass2;
+	}
+
+	@Override
+	public int hashCode() {
+		return object.hashCode();
 	}
 }

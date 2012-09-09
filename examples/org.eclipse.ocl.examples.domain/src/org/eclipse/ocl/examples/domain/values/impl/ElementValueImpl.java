@@ -39,15 +39,17 @@ public class ElementValueImpl extends ObjectValueImpl implements ElementValue
 		return ValuesPackage.Literals.ELEMENT_VALUE;
 	}
 
+	protected final @NonNull DomainElement object;
 	protected DomainType type = null;
 	
 	public ElementValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainElement object) {
-		super(valueFactory, object);
+		super(valueFactory);
+		this.object = object;
 	}
 
 	@Override
 	public @NonNull DomainElement asElement() {
-		return getObject();
+		return object;
 	}
 
 	@Override
@@ -55,20 +57,30 @@ public class ElementValueImpl extends ObjectValueImpl implements ElementValue
 		return this;
 	}
 
+	@Override
+	public Object asObject() {
+		return object;
+	}
+
 	public @NonNull DomainElement getElement() {
-		return getObject();
+		return object;
 	}
 
 	@Override
 	public @NonNull DomainElement getObject() {
-		return (DomainElement) object;
+		return object;
 	}
 
 	public @NonNull DomainType getType() {
 		DomainType type2 = type;
 		if (type2 == null) {
-			type2 = type = valueFactory.getStandardLibrary().getType(getObject());
+			type2 = type = valueFactory.getStandardLibrary().getType(object);
 		}
 		return type2;
+	}
+
+	@Override
+	public int hashCode() {
+		return object.hashCode();
 	}
 }
