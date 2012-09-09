@@ -45,7 +45,6 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
-import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 
 /**
  * An AliasAnalysis is dynamically created to support the serialization
@@ -66,7 +65,7 @@ public class AliasAnalysis extends AdapterImpl
 	}
 
 	public static @NonNull AliasAnalysis getAdapter(@NonNull Resource resource) {
-		MetaModelManager metaModelManager = ElementUtil.findMetaModelManager(resource);
+		MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(resource);
 		if (metaModelManager == null) {
 			throw new IllegalStateException("No MetaModelManager");
 		}

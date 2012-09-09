@@ -83,8 +83,10 @@ import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.UnspecifiedType;
 import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
+import org.eclipse.ocl.examples.pivot.manager.AbstractMetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.pivot.scoping.NullAttribution;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
@@ -395,6 +397,45 @@ public class PivotUtil extends DomainUtil
 			}
 		}
 		return true;
+	}
+	
+	public static @Nullable MetaModelManager findMetaModelManager(@NonNull EObject eObject) {
+		EObject eRoot = EcoreUtil.getRootContainer(eObject);
+		if (eRoot != null) {
+			Resource resource = eRoot.eResource();
+			if (resource != null) {
+//				if (eObject instanceof ElementCS) {
+					AbstractMetaModelManagerResourceAdapter<?> adapter = AbstractMetaModelManagerResourceAdapter.findAdapter(resource);
+					if (adapter != null) {
+						return adapter.getMetaModelManager();
+					}
+//				}
+				return findMetaModelManager(resource);
+			}
+		}
+		return null;
+	}
+
+	public static @Nullable MetaModelManager findMetaModelManager(@NonNull Resource resource) {
+		for (Adapter adapter : resource.eAdapters()) {
+			if (adapter instanceof AbstractMetaModelManagerResourceAdapter) {
+				return ((AbstractMetaModelManagerResourceAdapter<?>)adapter).getMetaModelManager();
+			}
+		}
+		ResourceSet resourceSet = resource.getResourceSet();
+		return resourceSet != null ? findMetaModelManager(resourceSet) : null;
+	}
+
+	public static MetaModelManager findMetaModelManager(@NonNull ResourceSet resourceSet) {
+		MetaModelManager metaModelManager = MetaModelManager.findAdapter(resourceSet);
+		if (metaModelManager != null) {
+			return metaModelManager;
+		}
+		MetaModelManagerResourceSetAdapter adapter = MetaModelManagerResourceSetAdapter.findAdapter(resourceSet);
+		if (adapter != null) {
+			return adapter.getMetaModelManager();
+		}
+		return null;
 	}
 
 	public static Type findTypeOf(@NonNull MetaModelManager metaModelManager, @NonNull EClassifier eClass) {
@@ -781,6 +822,13 @@ public class PivotUtil extends DomainUtil
 		return null;
 	}
 
+	public static MetaModelManager getMetaModelManager(@NonNull Resource resource) {
+		MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.getAdapter(resource, null);
+		MetaModelManager metaModelManager = adapter.getMetaModelManager();
+		assert metaModelManager != null;
+		return metaModelManager;
+	}
+
 	public static @Nullable Namespace getNamespace(@Nullable EObject element) {
 		for (EObject eObject = element; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Root) {
@@ -805,101 +853,6 @@ public class PivotUtil extends DomainUtil
 		URI pivotURI = DomainUtil.nonNullEMF(URI.createHierarchicalURI(oldSegments[0], uri.authority(), uri.device(), newSegments,
 				uri.query(), uri.fragment()));
 		return pivotURI;
-	}
-
-	public static @Nullable <T extends Element> T getPivot(@NonNull Class<T> pivotClass, @Nullable Pivotable pivotableElement) {
-		if (pivotableElement == null) {
-			return null;
-		}
-		Element pivotElement = pivotableElement.getPivot();
-		if (pivotElement == null) {
-			return null;
-		}
-		if (!pivotClass.isAssignableFrom(pivotElement.getClass())) {
-			throw new ClassCastException(pivotElement.getClass().getName() + " is not assignable to " + pivotClass.getName());
-		}
-		@SuppressWarnings("unchecked")
-		T castElement = (T) pivotElement;
-		return castElement;
-	}
-
-	public static @NonNull URI getPivotURI(@NonNull URI uri) {
-		String oldScheme = uri.scheme();
-		if (oldScheme == null) {
-			oldScheme = "null";
-		}
-		String[] oldSegments = uri.segments();
-		String[] newSegments = new String[oldSegments.length + 1];
-		newSegments[0] = oldScheme;
-		System.arraycopy(oldSegments, 0, newSegments, 1, oldSegments.length);
-		@SuppressWarnings("null")
-		@NonNull URI pivotURI = URI.createHierarchicalURI(SCHEME_PIVOT, uri.authority(), uri.device(), newSegments,
-				uri.query(), uri.fragment());
-		return pivotURI;
-	}
-
-	public static Feature getReferredFeature(CallExp callExp) {
-		Feature feature = null;
-		if (callExp instanceof LoopExp) {
-			feature = ((LoopExp)callExp).getReferredIteration();
-		}
-		else if (callExp instanceof OperationCallExp) {
-			feature = ((OperationCallExp)callExp).getReferredOperation();
-		}
-		else if (callExp instanceof PropertyCallExp) {
-			feature = ((PropertyCallExp)callExp).getReferredProperty();
-		}
-		return feature;
-	}
-
-	public static Operation getReferredOperation(CallExp callExp) {
-		Operation operation = null;
-		if (callExp instanceof LoopExp) {
-			operation = ((LoopExp)callExp).getReferredIteration();
-		}
-		else if (callExp instanceof OperationCallExp) {
-			operation = ((OperationCallExp)callExp).getReferredOperation();
-		}
-		return operation;
-	}
-
-	public static List<TemplateParameter> getTemplateParameters(TemplateableElement templateableElement) {
-		if (templateableElement != null) {
-			TemplateSignature ownedTemplateSignature = templateableElement.getOwnedTemplateSignature();
-			if (ownedTemplateSignature != null) {
-				return ownedTemplateSignature.getParameter();
-			}
-		}
-		return Collections.emptyList();
-	}
-
-	public static List<ParameterableElement> getTemplateParameterables(TemplateableElement templateableElement) {
-		if (templateableElement == null) {
-			return Collections.emptyList();
-		}
-		TemplateSignature ownedTemplateSignature = templateableElement.getOwnedTemplateSignature();
-		if (ownedTemplateSignature == null) {
-			return Collections.emptyList();
-		}
-		List<TemplateParameter> templateParameters = ownedTemplateSignature.getParameter();
-		if (templateParameters.size() == 0) {
-			return Collections.emptyList();
-		}
-		if (templateParameters.size() == 1) {
-			return Collections.singletonList(templateParameters.get(0).getParameteredElement());
-		}
-		List<ParameterableElement> results = new ArrayList<ParameterableElement>(templateParameters.size());
-		for (TemplateParameter templateParameter : templateParameters) {
-			results.add(templateParameter.getParameteredElement());
-		}
-		return results;
-	}
-
-	public static MetaModelManager getMetaModelManager(@NonNull Resource resource) {
-		MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.getAdapter(resource, null);
-		MetaModelManager metaModelManager = adapter.getMetaModelManager();
-		assert metaModelManager != null;
-		return metaModelManager;
 	}
 
 	/**
@@ -1008,6 +961,94 @@ public class PivotUtil extends DomainUtil
 			s.append(".");
 			s.append(index);
 		}
+	}
+
+	public static @Nullable <T extends Element> T getPivot(@NonNull Class<T> pivotClass, @Nullable Pivotable pivotableElement) {
+		if (pivotableElement == null) {
+			return null;
+		}
+		Element pivotElement = pivotableElement.getPivot();
+		if (pivotElement == null) {
+			return null;
+		}
+		if (!pivotClass.isAssignableFrom(pivotElement.getClass())) {
+			throw new ClassCastException(pivotElement.getClass().getName() + " is not assignable to " + pivotClass.getName());
+		}
+		@SuppressWarnings("unchecked")
+		T castElement = (T) pivotElement;
+		return castElement;
+	}
+
+	public static @NonNull URI getPivotURI(@NonNull URI uri) {
+		String oldScheme = uri.scheme();
+		if (oldScheme == null) {
+			oldScheme = "null";
+		}
+		String[] oldSegments = uri.segments();
+		String[] newSegments = new String[oldSegments.length + 1];
+		newSegments[0] = oldScheme;
+		System.arraycopy(oldSegments, 0, newSegments, 1, oldSegments.length);
+		@SuppressWarnings("null")
+		@NonNull URI pivotURI = URI.createHierarchicalURI(SCHEME_PIVOT, uri.authority(), uri.device(), newSegments,
+				uri.query(), uri.fragment());
+		return pivotURI;
+	}
+
+	public static Feature getReferredFeature(CallExp callExp) {
+		Feature feature = null;
+		if (callExp instanceof LoopExp) {
+			feature = ((LoopExp)callExp).getReferredIteration();
+		}
+		else if (callExp instanceof OperationCallExp) {
+			feature = ((OperationCallExp)callExp).getReferredOperation();
+		}
+		else if (callExp instanceof PropertyCallExp) {
+			feature = ((PropertyCallExp)callExp).getReferredProperty();
+		}
+		return feature;
+	}
+
+	public static Operation getReferredOperation(CallExp callExp) {
+		Operation operation = null;
+		if (callExp instanceof LoopExp) {
+			operation = ((LoopExp)callExp).getReferredIteration();
+		}
+		else if (callExp instanceof OperationCallExp) {
+			operation = ((OperationCallExp)callExp).getReferredOperation();
+		}
+		return operation;
+	}
+
+	public static List<TemplateParameter> getTemplateParameters(TemplateableElement templateableElement) {
+		if (templateableElement != null) {
+			TemplateSignature ownedTemplateSignature = templateableElement.getOwnedTemplateSignature();
+			if (ownedTemplateSignature != null) {
+				return ownedTemplateSignature.getParameter();
+			}
+		}
+		return Collections.emptyList();
+	}
+
+	public static List<ParameterableElement> getTemplateParameterables(TemplateableElement templateableElement) {
+		if (templateableElement == null) {
+			return Collections.emptyList();
+		}
+		TemplateSignature ownedTemplateSignature = templateableElement.getOwnedTemplateSignature();
+		if (ownedTemplateSignature == null) {
+			return Collections.emptyList();
+		}
+		List<TemplateParameter> templateParameters = ownedTemplateSignature.getParameter();
+		if (templateParameters.size() == 0) {
+			return Collections.emptyList();
+		}
+		if (templateParameters.size() == 1) {
+			return Collections.singletonList(templateParameters.get(0).getParameteredElement());
+		}
+		List<ParameterableElement> results = new ArrayList<ParameterableElement>(templateParameters.size());
+		for (TemplateParameter templateParameter : templateParameters) {
+			results.add(templateParameter.getParameteredElement());
+		}
+		return results;
 	}
 
 	public static @NonNull List<Type> getTypeTemplateParameterables(@NonNull TemplateableElement templateableElement) {

@@ -70,7 +70,6 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironment;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
-import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.console.actions.CloseAction;
 import org.eclipse.ocl.examples.xtext.console.actions.LoadExpressionAction;
 import org.eclipse.ocl.examples.xtext.console.actions.SaveExpressionAction;
@@ -865,7 +864,7 @@ public class OCLConsolePage extends Page
 	}
 
 	public @NonNull MetaModelManager getMetaModelManager(@Nullable EObject contextObject) {
-		MetaModelManager metaModelManager = contextObject != null ? ElementUtil.findMetaModelManager(contextObject) : null;
+		MetaModelManager metaModelManager = contextObject != null ? PivotUtil.findMetaModelManager(contextObject) : null;
 		if (metaModelManager != null) {
 			return metaModelManager;
 		}

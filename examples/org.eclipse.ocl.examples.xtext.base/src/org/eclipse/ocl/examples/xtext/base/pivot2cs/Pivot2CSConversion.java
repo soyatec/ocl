@@ -113,7 +113,7 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 
 	protected void createImports(@NonNull Resource csResource, @NonNull Set<org.eclipse.ocl.examples.pivot.Package> importedPackages) {
 		AliasAnalysis.dispose(csResource);			// Force reanalysis
-		MetaModelManager metaModelManager = ElementUtil.findMetaModelManager(csResource);
+		MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(csResource);
 		if (metaModelManager == null) {
 			throw new IllegalStateException("No MetaModelManager");
 		}

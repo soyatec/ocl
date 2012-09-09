@@ -64,7 +64,7 @@ public class CS2PivotResourceAdapter extends AbstractMetaModelManagerResourceAda
 		CS2PivotResourceAdapter adapter = findAdapter(csResource);
 		if (adapter == null) {
 			if (metaModelManager == null) {
-				metaModelManager = ElementUtil.findMetaModelManager(csResource);					
+				metaModelManager = PivotUtil.findMetaModelManager(csResource);					
 				if (metaModelManager == null) {
 					metaModelManager = csResource.createMetaModelManager();
 					ResourceSet csResourceSet = csResource.getResourceSet();

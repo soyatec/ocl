@@ -72,43 +72,19 @@ import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 
 public class ElementUtil
 {
+	@Deprecated
 	public static @Nullable MetaModelManager findMetaModelManager(@NonNull EObject eObject) {
-		EObject eRoot = EcoreUtil.getRootContainer(eObject);
-		if (eRoot != null) {
-			Resource resource = eRoot.eResource();
-			if (resource != null) {
-				if (eObject instanceof ElementCS) {
-					AbstractMetaModelManagerResourceAdapter<?> adapter = AbstractMetaModelManagerResourceAdapter.findAdapter(resource);
-					if (adapter != null) {
-						return adapter.getMetaModelManager();
-					}
-				}
-				return findMetaModelManager(resource);
-			}
-		}
-		return null;
+		return PivotUtil.findMetaModelManager(eObject);
 	}
 
+	@Deprecated
 	public static @Nullable MetaModelManager findMetaModelManager(@NonNull Resource resource) {
-		for (Adapter adapter : resource.eAdapters()) {
-			if (adapter instanceof AbstractMetaModelManagerResourceAdapter) {
-				return ((AbstractMetaModelManagerResourceAdapter<?>)adapter).getMetaModelManager();
-			}
-		}
-		ResourceSet resourceSet = resource.getResourceSet();
-		return resourceSet != null ? findMetaModelManager(resourceSet) : null;
+		return PivotUtil.findMetaModelManager(resource);
 	}
 
+	@Deprecated
 	public static MetaModelManager findMetaModelManager(@NonNull ResourceSet resourceSet) {
-		MetaModelManager metaModelManager = MetaModelManager.findAdapter(resourceSet);
-		if (metaModelManager != null) {
-			return metaModelManager;
-		}
-		MetaModelManagerResourceSetAdapter adapter = MetaModelManagerResourceSetAdapter.findAdapter(resourceSet);
-		if (adapter != null) {
-			return adapter.getMetaModelManager();
-		}
-		return null;
+		return PivotUtil.findMetaModelManager(resourceSet);
 	}
 
 	public static @Nullable String getCollectionTypeName(@NonNull TypedElementCS csTypedElement) {

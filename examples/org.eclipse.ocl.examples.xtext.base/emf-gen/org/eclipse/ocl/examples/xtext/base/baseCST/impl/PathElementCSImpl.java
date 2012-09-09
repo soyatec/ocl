@@ -26,11 +26,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
-import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -348,7 +348,7 @@ public class PathElementCSImpl extends ElementCSImpl implements PathElementCS
 		Element element = getElementGen();
 		if ((element == null) || ((EObject)element).eIsProxy())
 		{
-			MetaModelManager metaModelManager = ElementUtil.findMetaModelManager(this);
+			MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(this);
 			if (metaModelManager != null) {
 				if (isType()) {
 					element = metaModelManager.getOclInvalidType();

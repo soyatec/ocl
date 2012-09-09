@@ -32,6 +32,7 @@ import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.utilities.IllegalLibraryException;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.LibraryDiagnostic;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CS;
@@ -150,7 +151,7 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 		if (ElementUtil.hasSyntaxError(errors)) {
 			return;
 		}
-		MetaModelManager metaModelManager = ElementUtil.findMetaModelManager(this);
+		MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(this);
 		if (metaModelManager != null) {
 //			if (metaModelManager.getLibraryResource() != org.eclipse.ocl.examples.library.oclstdlib.OCLstdlib.INSTANCE) {
 //				metaModelManager.resetLibrary();		// FIXME is this needed; if so test it

@@ -48,7 +48,6 @@ import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.ocl.examples.pivot.utilities.HTMLBuffer;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
-import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.markup.Markup;
 import org.eclipse.ocl.examples.xtext.markup.MarkupUtils;
 import org.eclipse.xtext.nodemodel.INode;
