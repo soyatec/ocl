@@ -38,7 +38,7 @@ public class StringAtOperation extends AbstractBinaryOperation
 		if ((0 < index) && (index <= size)) {
 			char c = leftString.charAt(index-1);
 			@SuppressWarnings("null") @NonNull String result = String.valueOf(c);
-			return evaluator.getValueFactory().stringValueOf(result);
+			return result;
 		}
 		else {
 			return evaluator.getValueFactory().throwInvalidValueException(EvaluatorMessages.IndexOutOfRange, index, size);

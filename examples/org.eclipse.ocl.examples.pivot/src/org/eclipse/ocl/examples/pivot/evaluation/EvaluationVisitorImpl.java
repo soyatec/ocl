@@ -782,7 +782,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		if (value == null) {
 			return evaluationEnvironment.throwInvalidEvaluation("Invalid String Value", stringLiteralExp);
 		}
-		return valueFactory.stringValueOf(value);
+		return value;
 	}
 
 	/**

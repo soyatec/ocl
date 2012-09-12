@@ -134,8 +134,6 @@ public interface ValueFactory
     @NonNull RealValue realValueOf(@NonNull Number aNumber);
     @NonNull RealValue realValueOf(@NonNull String aValue);
 	
-    @NonNull StringValue stringValueOf(@NonNull String value) ;
-	
 	@NonNull <T> T throwInvalidValueException(/*@NonNull*/ String message, Object... bindings) throws InvalidValueException;
 //	@NonNull <T> T throwInvalidValueException(@NonNull Throwable e) throws InvalidValueException;
 

@@ -14,8 +14,6 @@
  */
 package org.eclipse.ocl.examples.domain.values.util;
 
-import java.util.Set;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -33,7 +31,6 @@ import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
-import org.eclipse.ocl.examples.domain.values.StringValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
@@ -99,13 +96,11 @@ public abstract class ValuesUtil
 		}
 	}
 
-	public static @NonNull Object asEcoreObject(@Nullable Object value) throws InvalidValueException {
+	public static Object asEcoreObject(@Nullable Object value) throws InvalidValueException {
 		if (value instanceof Value) {
-			assert !(((Value)value).asEcoreObject() instanceof Set);
 			return ((Value)value).asEcoreObject();
 		}
 		else if (value != null) {
-			assert !(value instanceof Set);
 			return value;			
 		}
 		else {
@@ -189,7 +184,10 @@ public abstract class ValuesUtil
 	}
 
 	public static @NonNull String asString(@NonNull Object value) throws InvalidValueException {
-		if (value instanceof Value) {
+		if (value instanceof String) {
+			return (String)value;
+		}
+		else if (value instanceof Value) {
 			return ((Value)value).asString();
 		}
 		else {
@@ -275,15 +273,6 @@ public abstract class ValuesUtil
 		return (value instanceof NullValue) && !(value instanceof InvalidValue);
 	}
 
-	public static @Nullable StringValue isStringValue(@Nullable Object value) {
-		if ((value instanceof StringValue) && !(value instanceof NullValue)) {
-			return (StringValue)value;
-		}
-		else {
-			return null;
-		}
-	}
-
 	public static boolean isTrue(@Nullable Object value) {
 		return (value instanceof BooleanValue) && ((BooleanValue)value).isTrue();
 	}
@@ -304,6 +293,22 @@ public abstract class ValuesUtil
 	public static void toString(@Nullable Object value, @NonNull StringBuilder s, int sizeLimit) {
 		if (value instanceof Value) {
 			((Value)value).toString(s, sizeLimit);
+		}
+		else if (value instanceof String) {
+			String string = (String)value;
+			s.append("'");
+			int length = string.length();
+			int available = sizeLimit - (length + 1);
+			if (length <= available) {
+				s.append(value);
+			}
+			else {
+				if (available > 0) {
+					s.append(string.substring(0, available));
+				}
+				s.append("...");
+			}
+			s.append("'");
 		}
 		else if (value != null) {
 			s.append(value.toString());		// FIXME limit

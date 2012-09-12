@@ -36,7 +36,6 @@ import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
-import org.eclipse.ocl.examples.domain.values.StringValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -70,7 +69,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
-	public @NonNull Object asEcoreObject() throws InvalidValueException {
+	public Object asEcoreObject() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
 		}
@@ -195,14 +194,6 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 			throw exception;
 		}
 		return super.asString();
-	}
-
-	@Override
-	public @NonNull StringValue asStringValue() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.asStringValue();
 	}
 
 	@Override

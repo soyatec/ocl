@@ -4,10 +4,26 @@ package org.eclipse.ocl.examples.domain.values.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
-
-import org.eclipse.ocl.examples.domain.values.*;
+import org.eclipse.ocl.examples.domain.values.BagValue;
+import org.eclipse.ocl.examples.domain.values.BooleanValue;
+import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.NullValue;
+import org.eclipse.ocl.examples.domain.values.NumericValue;
+import org.eclipse.ocl.examples.domain.values.ObjectValue;
+import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
+import org.eclipse.ocl.examples.domain.values.RealValue;
+import org.eclipse.ocl.examples.domain.values.SequenceValue;
+import org.eclipse.ocl.examples.domain.values.SetValue;
+import org.eclipse.ocl.examples.domain.values.TupleValue;
+import org.eclipse.ocl.examples.domain.values.TypeValue;
+import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
+import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
+import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -112,7 +128,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseOrderedSetValue(invalidValue);
 				if (result == null) result = caseRealValue(invalidValue);
 				if (result == null) result = caseSetValue(invalidValue);
-				if (result == null) result = caseStringValue(invalidValue);
 				if (result == null) result = caseTupleValue(invalidValue);
 				if (result == null) result = caseUnlimitedValue(invalidValue);
 				if (result == null) result = caseIntegerValue(invalidValue);
@@ -133,7 +148,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseOrderedSetValue(nullValue);
 				if (result == null) result = caseRealValue(nullValue);
 				if (result == null) result = caseSetValue(nullValue);
-				if (result == null) result = caseStringValue(nullValue);
 				if (result == null) result = caseTupleValue(nullValue);
 				if (result == null) result = caseUnlimitedValue(nullValue);
 				if (result == null) result = caseIntegerValue(nullValue);
@@ -193,13 +207,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseUniqueCollectionValue(setValue);
 				if (result == null) result = caseCollectionValue(setValue);
 				if (result == null) result = caseValue(setValue);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ValuesPackage.STRING_VALUE: {
-				StringValue stringValue = (StringValue)theEObject;
-				T result = caseStringValue(stringValue);
-				if (result == null) result = caseValue(stringValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -436,21 +443,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSetValue(SetValue object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>String Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>String Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStringValue(StringValue object) {
 		return null;
 	}
 

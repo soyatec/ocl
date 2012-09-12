@@ -126,11 +126,6 @@ public interface Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull StringValue asStringValue() throws InvalidValueException;
-
-	/**
-	 * @generated NOT
-	 */
 	@NonNull TupleValue asTupleValue() throws InvalidValueException;
 
 	/**
@@ -173,47 +168,12 @@ public interface Value
 	/**
 	 * @generated NOT
 	 */
-//	@Nullable CollectionValue isCollectionValue();
-
-	/**
-	 * @generated NOT
-	 */
-//	@Nullable IntegerValue isIntegerValue();
-
-	/**
-	 * @generated NOT
-	 */
 	boolean isInvalid();
 
 	/**
 	 * @generated NOT
 	 */
-//	boolean isNull();
-
-	/**
-	 * @generated NOT
-	 */
-//	@Nullable RealValue isRealValue();
-
-	/**
-	 * @generated NOT
-	 */
-//	@Nullable StringValue isStringValue();
-
-	/**
-	 * @generated NOT
-	 */
 	boolean isUndefined();
-
-	/**
-	 * @generated NOT
-	 */
-//	boolean isUnlimitedNatural();
-
-	/**
-	 * @generated NOT
-	 */
-//	@NonNull String oclToString();
 
 	/**
 	 * @generated NOT

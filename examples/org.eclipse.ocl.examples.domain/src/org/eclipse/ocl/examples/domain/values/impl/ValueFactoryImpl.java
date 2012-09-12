@@ -64,7 +64,6 @@ import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
-import org.eclipse.ocl.examples.domain.values.StringValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
@@ -630,10 +629,6 @@ public abstract class ValueFactoryImpl implements ValueFactory
 			return createInvalidValue(new InvalidValueException(NLS.bind(EvaluatorMessages.InvalidReal, aValue), e));
 		}
 	}
-	
-	public @NonNull StringValue stringValueOf(@NonNull String value) {
-		return new StringValueImpl(this, value);
-	}
 
 	public @NonNull <T> T throwInvalidValueException(/*@NonNull*/ String message, Object... bindings) throws InvalidValueException {
 		String boundMessage = NLS.bind(message, bindings);
@@ -649,6 +644,9 @@ public abstract class ValueFactoryImpl implements ValueFactory
 	public @NonNull DomainType typeOf(@NonNull Object value) {
 		if (value instanceof Value) {
 			return ((Value)value).getType();
+		}
+		else if (value instanceof String) {
+			return standardLibrary.getStringType();
 		}
 		else if (value instanceof DomainType) {
 			return standardLibrary.getMetaclass((DomainType) value);
@@ -713,7 +711,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
 			}			
 		}
 		else if (object instanceof String) {
-			return stringValueOf((String) object);
+			return object;
 		}
 		else if (object instanceof Character) {
 			return integerValueOf(((Character) object).charValue());

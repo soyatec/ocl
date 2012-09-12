@@ -39,7 +39,7 @@ public class StringSubstituteFirstOperation extends AbstractTernaryOperation
 			return valueFactory.throwInvalidValueException(EvaluatorMessages.MissingSubstring, oldSubstring, sourceString);
 		}
 		else {
-			return valueFactory.stringValueOf(sourceString.substring(0, index) + newSubstring + sourceString.substring(index + oldSubstring.length(), sourceString.length()));
+			return sourceString.substring(0, index) + newSubstring + sourceString.substring(index + oldSubstring.length(), sourceString.length());
 		}
 	}
 }

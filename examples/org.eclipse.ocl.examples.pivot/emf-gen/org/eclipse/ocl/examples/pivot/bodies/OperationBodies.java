@@ -34,7 +34,6 @@ import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.StringValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorProperty;
@@ -89,7 +88,7 @@ public class OperationBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_Constraint_stereotype = PivotTables.Properties._Constraint__stereotype;
 			final @NonNull LibraryProperty IP_Constraint_stereotype = P_Constraint_stereotype.getImplementation();
-			final @NonNull StringValue S_body = valueFactory.stringValueOf("body");
+			final @NonNull Object S_body = "body";
 			
 			
 			Object A_symbol_ = IP_NamedElement_ownedRule.evaluate(evaluator, T_OrderedSet_pivot__Constraint_, self, P_NamedElement_ownedRule);

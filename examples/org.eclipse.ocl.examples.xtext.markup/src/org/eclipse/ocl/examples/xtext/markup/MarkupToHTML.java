@@ -25,9 +25,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.values.StringValue;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
@@ -200,15 +197,7 @@ public class MarkupToHTML extends MarkupSwitch<HTMLBuffer>
 			OCL ocl = getOCL();
 			ExpressionInOCL query = createQuery(oclString);
 			Object value = ocl.evaluate(context, query);
-			StringValue stringValue = ValuesUtil.isStringValue(value);
-			if (stringValue != null) {
-				try {
-					s.append(stringValue.stringValue());
-				} catch (InvalidValueException e) { /* Never happens since iStringValue() excludes NullValue/InvalidValue */}
-			}
-			else {
-				s.append(String.valueOf(value));
-			}
+			s.append(String.valueOf(value));
 		} catch (ParserException e) {
 			throw new InvalidMarkupException(e);
 		}

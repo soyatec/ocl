@@ -34,6 +34,6 @@ public class StringToUpperCaseOperation extends AbstractUnaryOperation
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		String sourceString = asString(sourceVal);
 		@SuppressWarnings("null") @NonNull String result = sourceString.toUpperCase();
-		return valueFactory.stringValueOf(result);
+		return result;
 	}
 }

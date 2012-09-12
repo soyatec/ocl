@@ -35,7 +35,6 @@ import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
-import org.eclipse.ocl.examples.domain.values.StringValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -156,10 +155,6 @@ public abstract class ValueImpl implements Value
 		return NULL_STRING;			// Unreachable code
 	}
 
-	public @NonNull StringValue asStringValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "String", getType());
-	}
-
 	public @NonNull TupleValue asTupleValue() throws InvalidValueException {
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Tuple", getType());
 	}
@@ -184,46 +179,13 @@ public abstract class ValueImpl implements Value
 		return valueFactory;
 	}
 
-//	public CollectionValue isCollectionValue() {
-//		return null;
-//	}
-
-//	public IntegerValue isIntegerValue() {
-//		return null;
-//	}
-
 	public boolean isInvalid() {
 		return false;
 	}
 
-//	public boolean isNull() {
-//		return false;
-//	}
-
-//	public RealValue isRealValue() {
-//		return null;
-//	}
-
-//	public StringValue isStringValue() {
-//		return null;
-//	}
-
 	public boolean isUndefined() {
 		return false;
 	}
-
-//	public boolean isUnlimited() {
-//		return false;
-//	}
-	
-//	public boolean isUnlimitedNatural() {
-//		return false;
-//	}
-
-//	public @NonNull String oclToString() {
-//		@SuppressWarnings("null") @NonNull String result = toString();
-//		return result;
-//	}
 
 	public void toString(@NonNull StringBuilder s, int sizeLimit) {
 		s.append(toString());

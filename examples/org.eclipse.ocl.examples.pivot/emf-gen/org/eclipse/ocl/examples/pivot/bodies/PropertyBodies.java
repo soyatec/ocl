@@ -34,7 +34,6 @@ import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.StringValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
@@ -112,8 +111,8 @@ public class PropertyBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_Constraint_stereotype = PivotTables.Properties._Constraint__stereotype;
 			final @NonNull LibraryProperty IP_Constraint_stereotype = P_Constraint_stereotype.getImplementation();
-			final @NonNull StringValue S_initial = valueFactory.stringValueOf("initial");
-			final @NonNull StringValue S_derivati___ = valueFactory.stringValueOf("derivation");
+			final @NonNull Object S_initial = "initial";
+			final @NonNull Object S_derivati___ = "derivation";
 			
 			Object leftA_symbol_;
 			try {

@@ -85,6 +85,7 @@ final @NonNull <%BooleanValue%> [ast.symbolName(expInOcl)/] = valueFactory.get[i
 [/template]
 
 [template public emitConstants(ast : ConstructorExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
+[emitValueFactory()/]
 [/template]
 
 [template public emitConstants(ast : ConstructorPart, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
@@ -174,8 +175,7 @@ final @NonNull <%DomainCollectionType%> [ast.symbolName(expInOcl)/] = standardLi
 [/template]
 
 [template protected emitConstants(ast : StringLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
-[emitValueFactory()/]
-final @NonNull <%StringValue%> [ast.symbolName(expInOcl)/] = valueFactory.stringValueOf("[ast.javaString()/]");
+final @NonNull Object [ast.symbolName(expInOcl)/] = "[ast.javaString()/]";
 [/template]
 
 [template protected emitConstants(ast : TupleLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]

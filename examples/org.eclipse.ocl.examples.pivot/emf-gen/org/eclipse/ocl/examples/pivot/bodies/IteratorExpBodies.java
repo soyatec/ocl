@@ -35,7 +35,6 @@ import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.StringValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
@@ -71,7 +70,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_any = valueFactory.stringValueOf("any");
+			final @NonNull Object S_any = "any";
 			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
@@ -79,7 +78,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_pivot__OCLExpression = PivotTables.Types._OCLExpression;
 			final @NonNull ExecutorProperty P_LoopExp_body = PivotTables.Properties._LoopExp__body;
 			final @NonNull LibraryProperty IP_LoopExp_body = P_LoopExp_body.getImplementation();
-			final @NonNull StringValue S_Boolean = valueFactory.stringValueOf("Boolean");
+			final @NonNull Object S_Boolean = "Boolean";
 			
 			Object leftA_symbol_;
 			try {
@@ -135,7 +134,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_any = valueFactory.stringValueOf("any");
+			final @NonNull Object S_any = "any";
 			final @NonNull ExecutorOperation O_Real__eq_ = OCLstdlibTables.Operations._Real___eq_;
 			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
 			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
@@ -200,7 +199,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_any = valueFactory.stringValueOf("any");
+			final @NonNull Object S_any = "any";
 			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
@@ -297,7 +296,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_closure = valueFactory.stringValueOf("closure");
+			final @NonNull Object S_closure = "closure";
 			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_CollectionType_elementType = PivotTables.Properties._CollectionType__elementType;
@@ -378,7 +377,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_closure = valueFactory.stringValueOf("closure");
+			final @NonNull Object S_closure = "closure";
 			final @NonNull ExecutorOperation O_Real__eq_ = OCLstdlibTables.Operations._Real___eq_;
 			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
 			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
@@ -448,7 +447,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_closure = valueFactory.stringValueOf("closure");
+			final @NonNull Object S_closure = "closure";
 			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_CollectionType_elementType = PivotTables.Properties._CollectionType__elementType;
@@ -566,7 +565,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_closure = valueFactory.stringValueOf("closure");
+			final @NonNull Object S_closure = "closure";
 			final @NonNull ExecutorOperation O_Boolean_or = OCLstdlibTables.Operations._Boolean__or;
 			final @NonNull ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
@@ -685,7 +684,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_collect = valueFactory.stringValueOf("collect");
+			final @NonNull Object S_collect = "collect";
 			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_CollectionType_elementType = PivotTables.Properties._CollectionType__elementType;
@@ -766,7 +765,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_collect = valueFactory.stringValueOf("collect");
+			final @NonNull Object S_collect = "collect";
 			final @NonNull ExecutorOperation O_Real__eq_ = OCLstdlibTables.Operations._Real___eq_;
 			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
 			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
@@ -831,7 +830,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_collectN___ = valueFactory.stringValueOf("collectNested");
+			final @NonNull Object S_collectN___ = "collectNested";
 			final @NonNull ExecutorOperation O_Real__eq_ = OCLstdlibTables.Operations._Real___eq_;
 			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
 			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
@@ -896,7 +895,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_collectN___ = valueFactory.stringValueOf("collectNested");
+			final @NonNull Object S_collectN___ = "collectNested";
 			final @NonNull ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
@@ -955,7 +954,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_collectN___ = valueFactory.stringValueOf("collectNested");
+			final @NonNull Object S_collectN___ = "collectNested";
 			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
@@ -1027,7 +1026,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_collect = valueFactory.stringValueOf("collect");
+			final @NonNull Object S_collect = "collect";
 			final @NonNull ExecutorOperation O_Boolean_or = OCLstdlibTables.Operations._Boolean__or;
 			final @NonNull ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
@@ -1144,7 +1143,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_exists = valueFactory.stringValueOf("exists");
+			final @NonNull Object S_exists = "exists";
 			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
@@ -1208,7 +1207,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_exists = valueFactory.stringValueOf("exists");
+			final @NonNull Object S_exists = "exists";
 			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
@@ -1267,7 +1266,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_forAll = valueFactory.stringValueOf("forAll");
+			final @NonNull Object S_forAll = "forAll";
 			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
@@ -1331,7 +1330,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_forAll = valueFactory.stringValueOf("forAll");
+			final @NonNull Object S_forAll = "forAll";
 			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
@@ -1390,7 +1389,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_isUnique = valueFactory.stringValueOf("isUnique");
+			final @NonNull Object S_isUnique = "isUnique";
 			final @NonNull ExecutorOperation O_Real__eq_ = OCLstdlibTables.Operations._Real___eq_;
 			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
 			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
@@ -1455,7 +1454,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_isUnique = valueFactory.stringValueOf("isUnique");
+			final @NonNull Object S_isUnique = "isUnique";
 			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
@@ -1589,7 +1588,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_one = valueFactory.stringValueOf("one");
+			final @NonNull Object S_one = "one";
 			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
@@ -1653,7 +1652,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_one = valueFactory.stringValueOf("one");
+			final @NonNull Object S_one = "one";
 			final @NonNull ExecutorOperation O_Real__eq_ = OCLstdlibTables.Operations._Real___eq_;
 			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
 			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
@@ -1718,7 +1717,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_one = valueFactory.stringValueOf("one");
+			final @NonNull Object S_one = "one";
 			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
@@ -1778,8 +1777,8 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_reject = valueFactory.stringValueOf("reject");
-			final @NonNull StringValue S_select = valueFactory.stringValueOf("select");
+			final @NonNull Object S_reject = "reject";
+			final @NonNull Object S_select = "select";
 			final @NonNull ExecutorOperation O_Real__eq_ = OCLstdlibTables.Operations._Real___eq_;
 			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
 			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
@@ -1868,8 +1867,8 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_reject = valueFactory.stringValueOf("reject");
-			final @NonNull StringValue S_select = valueFactory.stringValueOf("select");
+			final @NonNull Object S_reject = "reject";
+			final @NonNull Object S_select = "select";
 			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
@@ -1952,8 +1951,8 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_reject = valueFactory.stringValueOf("reject");
-			final @NonNull StringValue S_select = valueFactory.stringValueOf("select");
+			final @NonNull Object S_reject = "reject";
+			final @NonNull Object S_select = "select";
 			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
@@ -2044,7 +2043,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_sortedBy = valueFactory.stringValueOf("sortedBy");
+			final @NonNull Object S_sortedBy = "sortedBy";
 			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_CollectionType_elementType = PivotTables.Properties._CollectionType__elementType;
@@ -2125,7 +2124,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_sortedBy = valueFactory.stringValueOf("sortedBy");
+			final @NonNull Object S_sortedBy = "sortedBy";
 			final @NonNull ExecutorOperation O_Real__eq_ = OCLstdlibTables.Operations._Real___eq_;
 			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
 			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
@@ -2196,7 +2195,7 @@ public class IteratorExpBodies
 			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull StringValue S_sortedBy = valueFactory.stringValueOf("sortedBy");
+			final @NonNull Object S_sortedBy = "sortedBy";
 			final @NonNull ExecutorOperation O_Boolean_or = OCLstdlibTables.Operations._Boolean__or;
 			final @NonNull ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;

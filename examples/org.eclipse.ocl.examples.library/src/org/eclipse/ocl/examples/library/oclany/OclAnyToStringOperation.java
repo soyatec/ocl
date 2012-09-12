@@ -32,6 +32,6 @@ public class OclAnyToStringOperation extends AbstractUnaryOperation
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal) {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		String string = oclToString(sourceVal);
-		return valueFactory.stringValueOf(string);
+		return string;
 	}
 }

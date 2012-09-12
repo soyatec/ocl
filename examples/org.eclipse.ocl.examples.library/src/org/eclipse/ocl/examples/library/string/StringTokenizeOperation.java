@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractPolyOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.StringValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -79,10 +78,10 @@ public class StringTokenizeOperation extends AbstractPolyOperation
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		String sourceString = asString(sourceValue);
 		StringTokenizer tokenizer = new StringTokenizer(sourceString, delims, returnDelims);
-		List<StringValue> results = new ArrayList<StringValue>();
+		List<Object> results = new ArrayList<Object>();
 		while (tokenizer.hasMoreTokens()) {
 			@SuppressWarnings("null") @NonNull String nextToken = tokenizer.nextToken();
-			results.add(valueFactory.stringValueOf(nextToken));
+			results.add(nextToken);
 		}
 		return valueFactory.createSequenceValue(returnType, results);
 	}

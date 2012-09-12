@@ -120,10 +120,6 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 				return createSetValueAdapter();
 			}
 			@Override
-			public Adapter caseStringValue(StringValue object) {
-				return createStringValueAdapter();
-			}
-			@Override
 			public Adapter caseTupleValue(TupleValue object) {
 				return createTupleValueAdapter();
 			}

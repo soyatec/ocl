@@ -57,7 +57,7 @@ public class ImportTests extends XtextTestCase
 				@NonNull Object sourceValue, Object... argumentValues)
 				throws InvalidEvaluationException, InvalidValueException {
 			String string = sourceValue == null?  Value.INVALID_NAME : ValuesUtil.oclToString(sourceValue);
-			return evaluator.getValueFactory().stringValueOf(string);
+			return string;
 		}
 	}
 	

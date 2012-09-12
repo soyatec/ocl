@@ -34,6 +34,6 @@ public class StringSubstituteAllOperation extends AbstractTernaryOperation
 		String oldSubstring = asString(firstArgumentValue);
 		String newSubstring = asString(secondArgumentValue);
 		@SuppressWarnings("null") @NonNull String result = sourceString.replace(oldSubstring, newSubstring);
-		return valueFactory.stringValueOf(result);
+		return result;
 	}
 }

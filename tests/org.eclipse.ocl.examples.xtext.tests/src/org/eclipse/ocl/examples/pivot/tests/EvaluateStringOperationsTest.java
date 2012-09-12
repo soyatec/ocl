@@ -510,8 +510,8 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 	}
 
 	public void testStringToString() {
-		assertQueryEquals(null, "'4.0'", "'4.0'.toString()");
-		assertQueryEquals(null, "'4.0\t4'", "('4.0' + '\t' + '4').toString()");
+		assertQueryEquals(null, "4.0", "'4.0'.toString()");
+		assertQueryEquals(null, "4.0\t4", "('4.0' + '\t' + '4').toString()");
 	}
 
 	public void testStringToUpperCase() {

@@ -34,6 +34,6 @@ public class StringReplaceFirstOperation extends AbstractTernaryOperation
 		String regex = asString(firstArgumentValue);
 		String replacement = asString(secondArgumentValue);
 		@SuppressWarnings("null") @NonNull String result = sourceString.replaceFirst(regex, replacement);
-		return valueFactory.stringValueOf(result);
+		return result;
 	}
 }

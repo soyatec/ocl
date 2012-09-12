@@ -34,6 +34,6 @@ public class StringToLowerCaseOperation extends AbstractUnaryOperation
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		String sourceString = asString(sourceVal);
 		@SuppressWarnings("null") @NonNull String result = sourceString.toLowerCase();
-		return valueFactory.stringValueOf(result);
+		return result;
 	}
 }

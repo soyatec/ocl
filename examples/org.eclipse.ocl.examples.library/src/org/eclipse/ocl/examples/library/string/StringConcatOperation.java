@@ -35,6 +35,6 @@ public class StringConcatOperation extends AbstractBinaryOperation
 		String leftString = asString(left);
 		String rightString = asString(right);
 		@SuppressWarnings("null") @NonNull String result = leftString.concat(rightString);
-		return valueFactory.stringValueOf(result);
+		return result;
 	}
 }

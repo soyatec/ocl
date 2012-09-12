@@ -64,7 +64,6 @@ public class EmitQueries
 		org.eclipse.ocl.examples.domain.values.RealValue.class,
 		org.eclipse.ocl.examples.domain.values.SequenceValue.class,
 		org.eclipse.ocl.examples.domain.values.SetValue.class,
-		org.eclipse.ocl.examples.domain.values.StringValue.class,
 		org.eclipse.ocl.examples.domain.values.TupleValue.class,
 		org.eclipse.ocl.examples.domain.values.UnlimitedValue.class,
 		org.eclipse.ocl.examples.domain.values.ValueFactory.class,

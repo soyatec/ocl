@@ -41,7 +41,7 @@ public class StringSubstringOperation extends AbstractTernaryOperation
 		int upper = endInteger.intValue();
 		if ((0 < lower) && (lower <= upper) && (upper <= size)) {
 			@SuppressWarnings("null") @NonNull String result = sourceString.substring(lower-1, upper);
-			return valueFactory.stringValueOf(result);
+			return result;
 		}
 		else {
 			return valueFactory.throwInvalidValueException(EvaluatorMessages.IndexesOutOfRange, lower, upper, size);

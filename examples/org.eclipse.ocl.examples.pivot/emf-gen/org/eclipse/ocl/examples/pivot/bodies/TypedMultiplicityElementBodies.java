@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
-import org.eclipse.ocl.examples.domain.values.StringValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorProperty;
@@ -88,9 +87,9 @@ public class TypedMultiplicityElementBodies
 		Parameter{name = 'name'}
 		*/
 		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Object self) throws InvalidValueException {
-			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull StringValue S_name = valueFactory.stringValueOf("name");
+			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
+			final @NonNull Object S_name = "name";
 			
 			ObjectValue A_symbol__3 = PivotTables.Types._Parameter.createInstance(valueFactory);
 			

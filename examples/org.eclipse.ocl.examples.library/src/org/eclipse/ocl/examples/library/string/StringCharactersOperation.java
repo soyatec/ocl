@@ -25,7 +25,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.StringValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -38,10 +37,10 @@ public class StringCharactersOperation extends AbstractUnaryOperation
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		String sourceString = asString(sourceVal);
-		List<StringValue> results = new ArrayList<StringValue>(sourceString.length());
+		List<Object> results = new ArrayList<Object>(sourceString.length());
 		for (int i = 0; i < sourceString.length(); i++) {
 			@SuppressWarnings("null") @NonNull String s = sourceString.substring(i, i+1);
-			results.add(valueFactory.stringValueOf(s));
+			results.add(s);
 		}
 		return valueFactory.createSequenceValue((DomainCollectionType)returnType, results);
 	}

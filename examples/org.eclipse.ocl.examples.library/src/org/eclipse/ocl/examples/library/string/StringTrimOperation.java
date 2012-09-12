@@ -34,6 +34,6 @@ public class StringTrimOperation extends AbstractUnaryOperation
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		String sourceString = asString(sourceVal);
 		@SuppressWarnings("null") @NonNull String result = sourceString.trim();
-		return valueFactory.stringValueOf(result);
+		return result;
 	}
 }
