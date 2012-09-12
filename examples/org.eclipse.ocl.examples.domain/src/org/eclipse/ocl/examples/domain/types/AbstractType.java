@@ -96,6 +96,10 @@ public abstract class AbstractType implements DomainType	// FIXME rename as perh
 		return false;
 	}
 
+	public boolean isInvalid() {
+		return false;
+	}
+
 	public boolean isOrdered() {
 		return false;
 	}

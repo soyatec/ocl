@@ -19,17 +19,20 @@ package org.eclipse.ocl.examples.library.executor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
+import org.eclipse.ocl.examples.domain.typeids.Typeid;
 
 public abstract class ExecutorPackage implements DomainPackage
 {
 	protected final @NonNull String name;
 	protected final @Nullable String nsPrefix;
 	protected final @Nullable String nsURI;
+	protected final @NonNull Typeid typeid;
 
-	protected ExecutorPackage(@NonNull String name, @Nullable String nsPrefix, @Nullable String nsURI) {
+	protected ExecutorPackage(@NonNull String name, @Nullable String nsPrefix, @Nullable String nsURI, @NonNull Typeid typeid) {
 		this.name = name;
 		this.nsPrefix = nsPrefix;
 		this.nsURI = nsURI;
+		this.typeid = typeid;
 	}
 
 	public final @NonNull String getName() {
@@ -42,6 +45,10 @@ public abstract class ExecutorPackage implements DomainPackage
 
 	public final @Nullable String getNsURI() {
 		return nsURI;
+	}
+
+	public @NonNull Typeid getTypeid() {
+		return typeid;
 	}
 
 	@Override

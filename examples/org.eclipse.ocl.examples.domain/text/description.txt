@@ -13,21 +13,13 @@ Package values <http://ww.eclipse.org/OCL/Values>
 
   Class CollectionValue -> Value
 
-  Class CollectionTypeValue -> TypeValue
-
-  Class ElementValue -> ObjectValue
-
-  Class EnumerationLiteralValue -> ElementValue
-
-  Class EnumerationTypeValue -> TypeValue
+  Class EnumerationLiteralValue -> Value
 
   Class IntegerValue -> NumericValue
 
   Class InvalidValue -> NullValue
 
-  Class MetaclassValue -> TypeValue
-
-  Class NullValue -> BooleanValue, IntegerValue, ObjectValue, OrderedSetValue, RealValue, SetValue, StringValue, TypeValue, UnlimitedValue
+  Class NullValue -> BooleanValue, IntegerValue, ObjectValue, OrderedSetValue, RealValue, SetValue, StringValue, TupleValue, UnlimitedValue
 
   Class NumericValue -> Value
 
@@ -41,16 +33,14 @@ Package values <http://ww.eclipse.org/OCL/Values>
 
   Class SetValue -> BagValue, UniqueCollectionValue
 
-  Class SimpleTypeValue -> TypeValue
-
   Class StringValue -> Value
 
   Class TupleValue -> Value
 
-  Class TypeValue -> ElementValue
+  Class TypeValue -> Value
 
   Class UniqueCollectionValue -> CollectionValue
 
-  Class UnlimitedValue -> NumericValue
+  Class UnlimitedValue -> IntegerValue
 
   Class Value

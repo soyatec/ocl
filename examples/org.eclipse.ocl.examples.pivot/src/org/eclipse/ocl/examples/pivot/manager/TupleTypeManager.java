@@ -52,7 +52,7 @@ public class TupleTypeManager
 			setType(type);
 		}
 
-		public int compareTo(TuplePart o) {
+		public int compareTo(TuplePart o) {			// FIXME Type
 			String n1 = getName();
 			String n2 = o.getName();
 			if (n1 == n2) {

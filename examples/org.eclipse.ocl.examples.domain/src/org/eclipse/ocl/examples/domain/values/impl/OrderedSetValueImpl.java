@@ -30,12 +30,12 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSet;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
@@ -57,14 +57,14 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
     public static @NonNull OrderedSetValue intersection(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull CollectionValue left, @NonNull CollectionValue right) throws InvalidValueException
     {
     	assert !left.isUndefined() && !right.isUndefined();
-		Collection<Value> leftElements = left.asCollection();
-        Collection<Value> rightElements = right.asCollection();
+		Collection<? extends Object> leftElements = left.asCollection();
+        Collection<? extends Object> rightElements = right.asCollection();
         int leftSize = leftElements.size();
         int rightSize = rightElements.size();
     	if ((leftSize == 0) || (rightSize == 0)) {
             return valueFactory.createOrderedSetValue(type);
         }    	
-        OrderedSet<Value> results = new OrderedSetImpl<Value>(leftElements);
+        OrderedSet<Object> results = new OrderedSetImpl<Object>(leftElements);
         // loop over the left collection and add only elements
         // that are in the right collection
         results.retainAll(rightElements);
@@ -73,8 +73,8 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
 
     public static @NonNull OrderedSetValue union(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull CollectionValue left, @NonNull CollectionValue right) throws InvalidValueException {
     	assert !left.isUndefined() && !right.isUndefined();
-		Collection<Value> leftElements = left.asCollection();
-        Collection<Value> rightElements = right.asCollection();
+		Collection<? extends Object> leftElements = left.asCollection();
+        Collection<? extends Object> rightElements = right.asCollection();
     	if (leftElements.isEmpty()) {
             return right.asOrderedSetValue();
         }
@@ -82,12 +82,12 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
             return left.asOrderedSetValue();
         }    	
     	else {
-			OrderedSet<Value> result = new OrderedSetImpl<Value>(leftElements);
+			OrderedSet<Object> result = new OrderedSetImpl<Object>(leftElements);
 			result.addAll(rightElements);
     		return valueFactory.createOrderedSetValue(type, result);
         } 
     }
-	public OrderedSetValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Collection<Value> elements) {
+	public OrderedSetValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Collection<? extends Object> elements) {
 		super(valueFactory, type, elements);
 	}
 
@@ -106,14 +106,14 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
         return this;
 	}
 	
-    public @NonNull Value at(int index) throws InvalidValueException {
+    public @NonNull Object at(int index) throws InvalidValueException {
         index = index - 1;        
         if (index < 0 || index >= elements.size()) {
 			valueFactory.throwInvalidValueException(EvaluatorMessages.IndexOutOfRange, index + 1, size());
 		}        
         int curr = 0;
-        for (Iterator<Value> it = iterator(); it.hasNext();) {
-        	Value object = it.next();
+        for (Iterator<? extends Object> it = iterator(); it.hasNext();) {
+        	Object object = it.next();
             if (curr++ == index) {
                 if (object != null) {
                 	return object;
@@ -129,11 +129,11 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
 		if (!(obj instanceof OrderedSetValue) || (obj instanceof NullValue)) {
 			return false;
 		}
-		Iterator<Value> theseElements = iterator();
-		Iterator<Value> thoseElements = ((OrderedSetValue)obj).iterator();
+		Iterator<? extends Object> theseElements = iterator();
+		Iterator<? extends Object> thoseElements = ((OrderedSetValue)obj).iterator();
 		while (theseElements.hasNext() && thoseElements.hasNext()) {
-			Value thisValue = theseElements.next();
-			Value thatValue = thoseElements.next();
+			Object thisValue = theseElements.next();
+			Object thatValue = thoseElements.next();
 			if (!thisValue.equals(thatValue)) {
 				return false;
 			}
@@ -141,9 +141,9 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
 		return !theseElements.hasNext() && !thoseElements.hasNext();
 	}
 
-	public @NonNull OrderedSetValue excluding(@NonNull Value value) {
-		OrderedSet<Value> result = new OrderedSetImpl<Value>();
-		for (Value element : elements) {
+	public @NonNull OrderedSetValue excluding(@NonNull Object value) {
+		OrderedSet<Object> result = new OrderedSetImpl<Object>();
+		for (Object element : elements) {
 			if (!element.equals(value)) {
 				result.add(element);
 			}
@@ -160,9 +160,9 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
 	    return "OrderedSet";
 	}
 
-    public @NonNull IntegerValue indexOf(@NonNull Value object) throws InvalidValueException {
+    public @NonNull IntegerValue indexOf(@NonNull Object object) throws InvalidValueException {
         int index = 1;        
-        for (Value next : elements) {
+        for (Object next : elements) {
             if (object.equals(next)) {
                 return valueFactory.integerValueOf(index);
             }
@@ -171,8 +171,8 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.MissingValue, "indexOf");
     }
 
-    public @NonNull OrderedSetValue insertAt(int index, @NonNull Value object) throws InvalidValueException {
-		if (object.isInvalid()) {
+    public @NonNull OrderedSetValue insertAt(int index, @NonNull Object object) throws InvalidValueException {
+		if (object instanceof InvalidValue) {
 			valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidSource, "insertAt");
 		}
         index = index - 1;
@@ -182,13 +182,13 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
         	valueFactory.throwInvalidValueException(EvaluatorMessages.IndexOutOfRange, index + 1, size());
         }
         
-        OrderedSet<Value> result = new OrderedSetImpl<Value>();
+        OrderedSet<Object> result = new OrderedSetImpl<Object>();
         int curr = 0;
-        for (Iterator<Value> it = iterator(); it.hasNext();) {
+        for (Iterator<? extends Object> it = iterator(); it.hasNext();) {
             if (curr == index) {
                 result.add(object);
             }
-            Value next = it.next();
+            Object next = it.next();
             if (!next.equals(object)) {
 				result.add(next);
 	            curr++;
@@ -203,19 +203,19 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
     }
 
     public @NonNull OrderedSetValue minus(@NonNull UniqueCollectionValue set) throws InvalidValueException {
-    	OrderedSet<Value> result = new OrderedSetImpl<Value>(elements);
+    	OrderedSet<Object> result = new OrderedSetImpl<Object>(elements);
         result.removeAll(set.asCollection());
         return valueFactory.createOrderedSetValue(getCollectionType(), result);
     }
 
 	public @NonNull OrderedSetValue reverse() {
-		List<Value> elements = asList();
+		List<? extends Object> elements = asList();
 		Collections.reverse(elements);
         return valueFactory.createOrderedSetValue(getCollectionType(), elements);
     }
     
-    public @NonNull OrderedSetValue sort(@NonNull Comparator<Value> comparator) {
-    	List<Value> values = new ArrayList<Value>(elements);
+    public @NonNull OrderedSetValue sort(@NonNull Comparator<Object> comparator) {
+    	List<Object> values = new ArrayList<Object>(elements);
     	Collections.sort(values, comparator);
     	return valueFactory.createOrderedSetValue(getCollectionType(), values);
     }
@@ -236,10 +236,10 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
 					+ (upper + 1));
         }
         
-        OrderedSet<Value> result = new OrderedSetImpl<Value>();
+        OrderedSet<Object> result = new OrderedSetImpl<Object>();
         int curr = 0;
-        for (Iterator<Value> it = elements.iterator(); it.hasNext();) {
-        	Value object = it.next();
+        for (Iterator<? extends Object> it = elements.iterator(); it.hasNext();) {
+        	Object object = it.next();
             if (curr >= lower && curr <= upper) {
                 result.add(object);
             }
@@ -253,8 +253,8 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
 	}
 
     public @NonNull OrderedSetValue symmetricDifference(@NonNull UniqueCollectionValue set) {       
-    	OrderedSet<Value> result = new OrderedSetImpl<Value>(elements);       
-        for (Value e : set) {
+    	OrderedSet<Object> result = new OrderedSetImpl<Object>(elements);       
+        for (Object e : set.iterable()) {
             if (result.contains(e)) {
                 result.remove(e);
             } else {

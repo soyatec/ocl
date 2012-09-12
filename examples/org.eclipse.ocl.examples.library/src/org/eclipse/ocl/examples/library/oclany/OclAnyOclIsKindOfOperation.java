@@ -21,8 +21,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -30,13 +28,12 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class OclAnyOclIsKindOfOperation extends AbstractBinaryOperation
 {
-	public static final OclAnyOclIsKindOfOperation INSTANCE = new OclAnyOclIsKindOfOperation();
+	public static final @NonNull OclAnyOclIsKindOfOperation INSTANCE = new OclAnyOclIsKindOfOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal, @NonNull Value argVal) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal, @NonNull Object argVal) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		DomainType sourceType = sourceVal.getType();
-		TypeValue argTypeValue = argVal.asTypeValue();
-		DomainType argType = argTypeValue.getInstanceType();
+		DomainType sourceType = valueFactory.typeOf(sourceVal);
+		DomainType argType = asType(argVal);
 		return valueFactory.booleanValueOf(sourceType.conformsTo(valueFactory.getStandardLibrary(), argType));
 	}
 }

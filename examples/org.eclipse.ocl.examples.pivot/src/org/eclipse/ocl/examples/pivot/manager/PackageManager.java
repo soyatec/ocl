@@ -97,6 +97,17 @@ public class PackageManager implements PackageServerParent
 		}
 	}
 
+	/**
+	 * The OCL Standard Library is normally registered under it's own nsURI and the OCL Pivot MetaModel is changed to share
+	 * the same URI. This routine allows the original OCL Pivot MetaModel nsURI to reference the merged packes too.
+	 */
+	public void addPackageNsURISynonym(String newUri, String oldURI) {
+		PackageServer packageServer = uri2package.get(oldURI);
+		if (packageServer != null) {
+			uri2package.put(newUri, packageServer);
+		}
+	}
+
 	void addPackageServer(@NonNull PackageServer packageServer) {
 		String nsURI = packageServer.getNsURI();
 		uri2package.put(nsURI, packageServer);
@@ -237,10 +248,10 @@ public class PackageManager implements PackageServerParent
 			String nsPrefix = pivotPackage.getNsPrefix();
 			String nsURI = pivotPackage.getNsURI();
 			if (PivotConstants.ORPHANAGE_URI.equals(nsURI)) {
-				packageServer = new OrphanPackageServer(this, name, nsPrefix, nsURI);
+				packageServer = new OrphanPackageServer(this, name, nsPrefix, nsURI, pivotPackage.getTypeid());
 			}
 			else {
-				packageServer = new RootPackageServer(this, name, nsPrefix, nsURI);
+				packageServer = new RootPackageServer(this, name, nsPrefix, nsURI, pivotPackage.getTypeid());
 			}
 			packageServers.put(name, packageServer);
 			if (nsURI != null) {
@@ -290,7 +301,7 @@ public class PackageManager implements PackageServerParent
 		if (packageTracker == null) {
 			String nsPrefix = pivotPackage.getNsPrefix();
 			String nsURI = pivotPackage.getNsURI();
-			PackageServer packageServer = new RootPackageServer(this, name, nsPrefix, nsURI);
+			PackageServer packageServer = new RootPackageServer(this, name, nsPrefix, nsURI, pivotPackage.getTypeid());
 			packageTracker = packageServer.getPackageTracker(pivotPackage);
 		}
 		return packageTracker;

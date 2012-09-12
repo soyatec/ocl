@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.domain.elements;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.typeids.Typeid;
 
 public interface DomainOperation extends DomainFeature
 {
@@ -40,4 +41,6 @@ public interface DomainOperation extends DomainFeature
 	 * Return the ordered list of type parameters of this operation.
 	 */
 	@NonNull DomainTypeParameters getTypeParameters();
+
+	@NonNull Typeid getTypeid();
 }

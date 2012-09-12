@@ -88,10 +88,6 @@ public class BooleanValueImpl extends ValueImpl implements BooleanValue
 		return result;
 	}
 
-	public @NonNull Value asValidValue() {
-		return this;
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof BooleanValue) {
@@ -112,12 +108,10 @@ public class BooleanValueImpl extends ValueImpl implements BooleanValue
 		return value ? 0x72277227 : 0x27722772;
 	}
 
-	@Override
 	public boolean isFalse() {
 		return !value;
 	}
 
-	@Override
 	public boolean isTrue() {
 		return value;
 	}

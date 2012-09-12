@@ -22,18 +22,17 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * OrderedCollectionAtOperation realises the OrderedCollection::at() library operation.
  */
 public class OrderedCollectionAtOperation extends AbstractBinaryOperation
 {
-	public static final OrderedCollectionAtOperation INSTANCE = new OrderedCollectionAtOperation();
+	public static final @NonNull OrderedCollectionAtOperation INSTANCE = new OrderedCollectionAtOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
-		SequenceValue leftOrderedCollectionValue = left.asSequenceValue();
-		Integer atValue = right.asInteger();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
+		SequenceValue leftOrderedCollectionValue = asSequenceValue(left);
+		Integer atValue = asInteger(right);
 		return leftOrderedCollectionValue.at(atValue.intValue());
 	}
 }

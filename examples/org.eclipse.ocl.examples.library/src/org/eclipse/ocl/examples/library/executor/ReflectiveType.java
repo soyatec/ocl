@@ -27,6 +27,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainFragment;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.typeids.Typeid;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
 import org.eclipse.ocl.examples.domain.types.AbstractInheritance;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -163,6 +164,10 @@ public abstract class ReflectiveType extends AbstractInheritance
 
 	public @NonNull DomainType getType() {
 		return this;
+	}
+
+	public @NonNull Typeid getTypeid() {
+		throw new UnsupportedOperationException();					// FIXME
 	}
 
 	protected void initialize() {

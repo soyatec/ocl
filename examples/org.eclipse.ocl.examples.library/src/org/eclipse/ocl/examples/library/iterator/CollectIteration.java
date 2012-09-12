@@ -25,7 +25,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * CollectIteration realizes the Collection::collect() library iteration.
@@ -39,16 +38,16 @@ public class CollectIteration extends AbstractIteration
 	}
 
 	@Override
-    protected @Nullable Value updateAccumulator(@NonNull DomainIterationManager iterationManager) {
+    protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
 		CollectionValue.Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
-		Value bodyVal = iterationManager.evaluateBody();		
-		if (bodyVal.isNull()) {
+		Object bodyVal = iterationManager.evaluateBody();		
+		if (isNull(bodyVal)) {
 			accumulatorValue.add(bodyVal);
 		}
 		else if (bodyVal instanceof CollectionValue) {
 			CollectionValue bodyColl = (CollectionValue) bodyVal;
 			try {
-				for (Value value : bodyColl.flatten()) {
+				for (Object value : bodyColl.flatten().iterable()) {
 					if (value != null) {
 						accumulatorValue.add(value);
 					}

@@ -16,9 +16,10 @@
  */
 package org.eclipse.ocl.examples.domain.library;
 
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  */
-public abstract class AbstractFeature implements LibraryFeature
+public abstract class AbstractFeature extends ValuesUtil implements LibraryFeature
 {
 }

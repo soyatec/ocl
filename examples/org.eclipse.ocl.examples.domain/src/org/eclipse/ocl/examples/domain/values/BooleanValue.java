@@ -24,4 +24,14 @@ public interface BooleanValue extends Value
 	interface Accumulator extends BooleanValue {
 		void setValue(boolean value);	
 	}
+
+	/**
+	 * @generated NOT
+	 */
+	boolean isFalse();
+
+	/**
+	 * @generated NOT
+	 */
+	boolean isTrue();
 }

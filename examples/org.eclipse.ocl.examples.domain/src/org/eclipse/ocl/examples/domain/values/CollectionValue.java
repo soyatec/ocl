@@ -30,34 +30,34 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 
-public interface CollectionValue extends Value, Iterable<Value>
+public interface CollectionValue extends Value
 {
 	/**
 	 * @generated NOT
 	 */
 	interface Accumulator extends CollectionValue {
-		boolean add(@NonNull Value value);	
+		boolean add(@NonNull Object value);	
 	}
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Collection<Value> asCollection() throws InvalidValueException;	
+	@NonNull Collection<? extends Object> asCollection() throws InvalidValueException;	
 
 	/**
 	 * @generated NOT
 	 */
-	//@NonNull List<Value> asList() throws InvalidValueException;
+	//@NonNull List<Object> asList() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue count(@NonNull Value value) throws InvalidValueException;
+	@NonNull IntegerValue count(@NonNull Object value) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull BooleanValue excludes(@NonNull Value value) throws InvalidValueException;	
+	@NonNull BooleanValue excludes(@NonNull Object value) throws InvalidValueException;	
 
 	/**
 	 * @generated NOT
@@ -67,7 +67,7 @@ public interface CollectionValue extends Value, Iterable<Value>
 	/**
 	 * @generated NOT
 	 */
-	@NonNull CollectionValue excluding(@NonNull Value value) throws InvalidValueException;
+	@NonNull CollectionValue excluding(@NonNull Object value) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
@@ -77,7 +77,7 @@ public interface CollectionValue extends Value, Iterable<Value>
 	/**
 	 * @generated NOT
 	 */
-	boolean flatten(@NonNull Collection<Value> flattenedElements) throws InvalidValueException;
+	boolean flatten(@NonNull Collection<Object> flattenedElements) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
@@ -92,7 +92,7 @@ public interface CollectionValue extends Value, Iterable<Value>
 	/**
 	 * @generated NOT
 	 */
-	@NonNull BooleanValue includes(@NonNull Value value) throws InvalidValueException;	
+	@NonNull BooleanValue includes(@NonNull Object value) throws InvalidValueException;	
 
 	/**
 	 * @generated NOT
@@ -102,7 +102,7 @@ public interface CollectionValue extends Value, Iterable<Value>
 	/**
 	 * @generated NOT
 	 */
-	@NonNull CollectionValue including(@NonNull Value value) throws InvalidValueException;
+	@NonNull CollectionValue including(@NonNull Object value) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
@@ -122,12 +122,17 @@ public interface CollectionValue extends Value, Iterable<Value>
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Iterator<Value> iterator();
+	@NonNull Iterable<? extends Object> iterable();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Value maxMin(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation binaryOperation) throws InvalidValueException;
+	@NonNull Iterator<? extends Object> iterator();
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull Object maxMin(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation binaryOperation) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
@@ -157,12 +162,12 @@ public interface CollectionValue extends Value, Iterable<Value>
 	/**
 	 * @generated NOT
 	 */
-	@NonNull SequenceValue sort(@NonNull Comparator<Value> comparator) throws InvalidValueException;
+	@NonNull SequenceValue sort(@NonNull Comparator<Object> comparator) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Value sum(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation binaryOperation, @NonNull Value zero) throws InvalidValueException;
+	@NonNull Object sum(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation binaryOperation, @NonNull Object zero) throws InvalidValueException;
 
 	/**
 	 * @generated NOT

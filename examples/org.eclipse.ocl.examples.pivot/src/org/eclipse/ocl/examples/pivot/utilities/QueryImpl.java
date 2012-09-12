@@ -28,8 +28,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.EvaluationHaltedException;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
@@ -91,7 +91,7 @@ public class QueryImpl implements Query, ProblemAware
 			throw error;
 		}
 		
-		Value result;
+		Object result;
 		
 		if (obj == null) {
 			result = evaluate();
@@ -99,7 +99,7 @@ public class QueryImpl implements Query, ProblemAware
 			result = evaluate(obj);
 		}
 		
-		return result.isTrue();
+		return ValuesUtil.isTrue(result);
 	}
 	
 	public boolean check(List<?> objList) {
@@ -136,7 +136,7 @@ public class QueryImpl implements Query, ProblemAware
 		batchEvalProblems = null;
 	}
 
-	public Value evaluate() throws DomainException {
+	public Object evaluate() throws DomainException {
 		evalProblems = null;
 		
 		// lazily create the evaluation environment, if not already done by
@@ -147,7 +147,7 @@ public class QueryImpl implements Query, ProblemAware
 			nonNullEnvironment.getFactory().createEvaluationVisitor(
 					nonNullEnvironment, getEvaluationEnvironment(), getModelManager());
 		
-		Value result;
+		Object result;
 		
 		try {
 			result = expression.accept(ev);
@@ -160,7 +160,7 @@ public class QueryImpl implements Query, ProblemAware
 		return result;
 	}
 
-	public Value evaluate(Object obj) throws DomainException {
+	public Object evaluate(Object obj) throws DomainException {
 		evalProblems = null;
 		
 		if (obj == null) {
@@ -190,7 +190,7 @@ public class QueryImpl implements Query, ProblemAware
 				nonNullEnvironment.getFactory().createEvaluationVisitor(
 					nonNullEnvironment, myEnv, getModelManager());
 		
-		Value result;
+		Object result;
 		
 		try {
 			result = expression.accept(ev);

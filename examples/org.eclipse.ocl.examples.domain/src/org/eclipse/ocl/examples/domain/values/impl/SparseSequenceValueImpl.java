@@ -25,6 +25,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -34,9 +35,17 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class SparseSequenceValueImpl extends SequenceValueImpl
 {
-	private static @NonNull List<Value> createValue(@NonNull Iterable<? extends Value> elements) {
-		List<Value> result = new ArrayList<Value>();
-		for (Value element : elements) {
+	private static @NonNull List<Object> createValue(Object... elements) {
+		List<Object> result = new ArrayList<Object>();
+		for (Object element : elements) {
+			result.add(element);
+		}
+		return result;
+	}
+
+	private static @NonNull List<Object> createValue(@NonNull Iterable<? extends Object> elements) {
+		List<Object> result = new ArrayList<Object>();
+		for (Object element : elements) {
 			result.add(element);
 		}
 		return result;
@@ -44,8 +53,8 @@ public class SparseSequenceValueImpl extends SequenceValueImpl
 
 	public static @NonNull SequenceValue union(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull CollectionValue left, @NonNull CollectionValue right) throws InvalidValueException {
     	assert !left.isUndefined() && !right.isUndefined();
-		Collection<Value> leftElements = left.asCollection();
-        Collection<Value> rightElements = right.asCollection();
+		Collection<? extends Object> leftElements = left.asCollection();
+        Collection<? extends Object> rightElements = right.asCollection();
     	if (leftElements.isEmpty()) {
             return right.asSequenceValue();
         }
@@ -53,7 +62,7 @@ public class SparseSequenceValueImpl extends SequenceValueImpl
             return left.asSequenceValue();
         }    	
     	else {
-    		List<Value> result = new ArrayList<Value>(leftElements);
+    		List<Object> result = new ArrayList<Object>(leftElements);
 			result.addAll(rightElements);
     		return new SparseSequenceValueImpl(valueFactory, type, result);
         } 
@@ -69,34 +78,30 @@ public class SparseSequenceValueImpl extends SequenceValueImpl
 			super(valueFactory, type, elements);
 		}
 
-		public boolean add(@NonNull Value value) {
-			return elements.add(value);			
+		@SuppressWarnings("unchecked")
+		public boolean add(@NonNull Object value) {
+			return ((Collection<Object>)elements).add(value);			
 		}		
 
 	    @Override
-		public @NonNull SequenceValue append(@NonNull Value object) throws InvalidValueException {
-			if (object.isInvalid()) {
+		public @NonNull SequenceValue append(@NonNull Object object) throws InvalidValueException {
+			if (object instanceof InvalidValue) {
 	        	valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidSource, "append");
 			}
-			elements.add(object);
+			add(object);
 	        return this;
 	    }
 	}
     
-	public SparseSequenceValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, Value... elements) {
-		super(valueFactory, type, new ArrayList<Value>());
-		if (elements != null) {
-			for (Value element : elements) {
-				this.elements.add(element);
-			}
-		}
-	}
-
-	public SparseSequenceValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Iterable<? extends Value> elements) {
+	public SparseSequenceValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, Object... elements) {
 		super(valueFactory, type, createValue(elements));
 	}
 
-	public SparseSequenceValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull List<Value> elements) {
+	public SparseSequenceValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Iterable<? extends Object> elements) {
+		super(valueFactory, type, createValue(elements));
+	}
+
+	public SparseSequenceValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull List<Object> elements) {
 		super(valueFactory, type, elements);
 	}
 

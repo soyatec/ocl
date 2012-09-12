@@ -29,7 +29,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractPolyOperation;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -47,13 +46,14 @@ public class EInvokeOperation extends AbstractPolyOperation
 		}
 	}
 
-	public @Nullable Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Value sourceValue,
-			Value... argumentValues) throws InvalidEvaluationException, InvalidValueException {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Object sourceValue,
+			Object... argumentValues) throws InvalidEvaluationException, InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		EObject eObject = sourceValue.asNavigableObject();
+		EObject eObject = asNavigableObject(sourceValue);
 		BasicEList<Object> arguments = new BasicEList<Object>();
-		for (Value argumentValue : argumentValues) {
-			arguments.add(argumentValue.asObject());
+		for (Object argumentValue : argumentValues) {
+			assert argumentValue != null;
+			arguments.add(asObject(argumentValue));
 		}
 		try {
 			Object eResult = eObject.eInvoke(eOperation, arguments);
@@ -65,10 +65,10 @@ public class EInvokeOperation extends AbstractPolyOperation
 		}
 	}
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue)
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue)
 			throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		EObject eObject = sourceValue.asNavigableObject();
+		EObject eObject = asNavigableObject(sourceValue);
 		BasicEList<Object> arguments = new BasicEList<Object>();
 		try {
 			Object eResult = eObject.eInvoke(eOperation, arguments);
@@ -78,12 +78,12 @@ public class EInvokeOperation extends AbstractPolyOperation
 		}
 	}
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue,
-			@NonNull Value argumentValue) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue,
+			@NonNull Object argumentValue) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		EObject eObject = sourceValue.asNavigableObject();
+		EObject eObject = asNavigableObject(sourceValue);
 		BasicEList<Object> arguments = new BasicEList<Object>();
-		arguments.add(argumentValue.asObject());
+		arguments.add(asObject(argumentValue));
 		try {
 			Object eResult = eObject.eInvoke(eOperation, arguments);
 			return getResultValue(valueFactory, returnType, eResult);
@@ -92,13 +92,13 @@ public class EInvokeOperation extends AbstractPolyOperation
 		}
 	}
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue,
-			@NonNull Value firstArgumentValue, @NonNull Value secondArgumentValue) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue,
+			@NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		EObject eObject = sourceValue.asNavigableObject();
+		EObject eObject = asNavigableObject(sourceValue);
 		BasicEList<Object> arguments = new BasicEList<Object>();
-		arguments.add(firstArgumentValue.asObject());
-		arguments.add(secondArgumentValue.asObject());
+		arguments.add(asObject(firstArgumentValue));
+		arguments.add(asObject(secondArgumentValue));
 		try {
 			Object eResult = eObject.eInvoke(eOperation, arguments);
 			return getResultValue(valueFactory, returnType, eResult);
@@ -107,7 +107,7 @@ public class EInvokeOperation extends AbstractPolyOperation
 		}
 	}
 
-	protected @NonNull Value getResultValue(@NonNull ValueFactory valueFactory, @NonNull DomainType returnType, Object eResult) throws InvalidValueException {
+	protected @NonNull Object getResultValue(@NonNull ValueFactory valueFactory, @NonNull DomainType returnType, Object eResult) throws InvalidValueException {
 		if (returnType instanceof DomainCollectionType) {
 			if (eResult instanceof Iterable<?>) {
 				Iterable<?> eResults = (Iterable<?>) eResult;

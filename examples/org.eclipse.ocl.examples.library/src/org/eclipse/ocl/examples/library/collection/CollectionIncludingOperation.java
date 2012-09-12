@@ -22,18 +22,17 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * CollectionIncludingOperation realises the Collection::including() library operation.
  */
 public class CollectionIncludingOperation extends AbstractBinaryOperation
 {
-	public static final CollectionIncludingOperation INSTANCE = new CollectionIncludingOperation();
+	public static final @NonNull CollectionIncludingOperation INSTANCE = new CollectionIncludingOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
-		CollectionValue leftCollectionValue = left.asCollectionValue();
-		Value rightValue = right.asValidValue();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
+		CollectionValue leftCollectionValue = asCollectionValue(left);
+		Object rightValue = asValidValue(right);
 		return leftCollectionValue.including(rightValue);
 	}
 }

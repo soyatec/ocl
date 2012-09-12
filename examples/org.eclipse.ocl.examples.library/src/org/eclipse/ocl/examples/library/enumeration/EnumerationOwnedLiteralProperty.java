@@ -27,8 +27,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.impl.OrderedSetImpl;
 
@@ -39,12 +37,10 @@ public class EnumerationOwnedLiteralProperty extends AbstractProperty
 {
 	public static final @NonNull EnumerationOwnedLiteralProperty INSTANCE = new EnumerationOwnedLiteralProperty();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-//		TypeValue sourceTypeValue = sourceValue.asEnumerationValue();
-		TypeValue sourceTypeValue = sourceValue.asTypeValue();
-		DomainType sourceType = sourceTypeValue.getInstanceType();
-		Set<Value> results = new OrderedSetImpl<Value>();
+		DomainType sourceType = asType(sourceValue);
+		Set<Object> results = new OrderedSetImpl<Object>();
 		for (DomainElement instance : ((DomainEnumeration)sourceType).getEnumerationLiterals()) {
 			if (instance != null) {
 				results.add(valueFactory.valueOf(instance));

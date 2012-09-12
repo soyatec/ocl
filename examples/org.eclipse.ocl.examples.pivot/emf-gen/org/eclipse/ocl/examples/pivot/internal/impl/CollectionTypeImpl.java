@@ -29,6 +29,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.typeids.Typeid;
+import org.eclipse.ocl.examples.domain.typeids.TypeidManager;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
@@ -599,6 +601,19 @@ public class CollectionTypeImpl
 
 	public @NonNull IntegerValue getLowerValue(@NonNull ValueFactory valueFactory) {
 		return lower != null ? valueFactory.integerValueOf(lower) : valueFactory.getNull();
+	}
+	
+	@Override
+	public @NonNull Typeid computeTypeid() {
+		String name2 = getName();
+		assert name2 != null;
+		TemplateableElement unspecializedElement2 = getUnspecializedElement();
+		if (unspecializedElement2 != null) {
+			return ((Type)unspecializedElement2).getTypeid().getCollectedTypeid(getElementType().getTypeid());
+		}
+		else {
+			return TypeidManager.INSTANCE.getUnscopedTypeid(name2);
+		}
 	}
 
 	public @NonNull IntegerValue getUpperValue(@NonNull ValueFactory valueFactory) {

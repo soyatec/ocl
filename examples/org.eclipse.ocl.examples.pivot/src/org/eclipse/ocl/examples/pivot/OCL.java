@@ -36,9 +36,10 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.EvaluationHaltedException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
@@ -226,8 +227,8 @@ public class OCL {
 			throw new IllegalArgumentException("constraint is not boolean"); //$NON-NLS-1$
 		}
 		try {
-			Value result = evaluate(context, specification);
-			return result.isTrue();
+			Object result = evaluate(context, specification);
+			return ValuesUtil.isTrue(result);
 		} catch (InvalidEvaluationException e) {
 			return false;
 		}
@@ -406,7 +407,7 @@ public class OCL {
 	 * @see #isInvalid(Object)
 	 * @see #check(Object, Object)
 	 */
-	public Value evaluate(@Nullable Object context, @NonNull ExpressionInOCL expression) {
+	public Object evaluate(@Nullable Object context, @NonNull ExpressionInOCL expression) {
 		evaluationProblems = null;
 		
 		// can determine a more appropriate context from the context
@@ -414,7 +415,7 @@ public class OCL {
 //		context = HelperUtil.getConstraintContext(rootEnvironment, context, expression);
 		EvaluationEnvironment localEvalEnv = getEvaluationEnvironment();
 		ValueFactory valueFactory = localEvalEnv.getValueFactory();
-		Value value = valueFactory.valueOf(context);
+		Object value = valueFactory.valueOf(context);
 		localEvalEnv.add(expression.getContextVariable(), value);
 //		if ((value != null) && !value.isUndefined()) {
 //			expression.getContextVariable().setValue(value);
@@ -428,7 +429,7 @@ public class OCL {
 		EvaluationVisitor ev = environmentFactory
 			.createEvaluationVisitor(getEnvironment(), localEvalEnv, extents);
 
-		Value result;
+		Object result;
 
 		try {
 			result = expression.accept(ev);
@@ -441,10 +442,15 @@ public class OCL {
 		if (result == null) {
 			return localEvalEnv.throwInvalidEvaluation("Java-Null value");
 		}
-		if (result.isInvalid()) {
-			return localEvalEnv.throwInvalidEvaluation("Invalid Value");
+		try {
+			return ValuesUtil.asValidValue(result);
+		} catch (InvalidValueException e) {
+			return localEvalEnv.throwInvalidEvaluation(e);
 		}
-		return result;
+//		if (ValuesUtil.isInvalid(result)) {
+//			return localEvalEnv.throwInvalidEvaluation("Invalid Value");
+//		}
+//		return result;
 	}
 
 	/**

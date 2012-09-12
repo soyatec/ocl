@@ -18,11 +18,10 @@ package org.eclipse.ocl.examples.domain.evaluation;
 
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 public interface DomainEvaluationEnvironment
 {
-	void add(DomainTypedElement variable, Value value);
+	void add(DomainTypedElement variable, Object value);
 	DomainTypedElement createVariable(String name, DomainType type);
-	void replace(DomainTypedElement variable, Value value);
+	void replace(DomainTypedElement variable, Object value);
 }

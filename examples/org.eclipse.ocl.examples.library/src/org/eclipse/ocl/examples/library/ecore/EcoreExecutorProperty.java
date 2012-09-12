@@ -20,7 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
-import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorProperty;
 
 public class EcoreExecutorProperty extends ExecutorProperty
@@ -32,9 +32,9 @@ public class EcoreExecutorProperty extends ExecutorProperty
 	}
 
 	@Override
-	public void setValue(@NonNull ObjectValue objectValue, @NonNull Value propertyValue) throws InvalidValueException {
+	public void setValue(@NonNull ObjectValue objectValue, @NonNull Object propertyValue) throws InvalidValueException {
 		EObject eObject = objectValue.asNavigableObject();
-		Object eValue = propertyValue.asEcoreObject();
+		Object eValue = ValuesUtil.asEcoreObject(propertyValue);
 		eObject.eSet(eFeature, eValue);
 	}
 }

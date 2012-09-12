@@ -31,7 +31,6 @@ import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.StringValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorProperty;
@@ -56,7 +55,7 @@ public class TypedMultiplicityElementBodies
 		/*
 		bodySpecification.type.conformsTo(self.type)
 		*/
-		public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Value self, final @NonNull Value bodySpecification) throws InvalidValueException {
+		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Object self, final @NonNull Object bodySpecification) throws InvalidValueException {
 			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
 			final @NonNull DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
@@ -66,14 +65,14 @@ public class TypedMultiplicityElementBodies
 			final @NonNull LibraryProperty IP_TypedElement_type = P_TypedElement_type.getImplementation();
 			
 			
-			Value A_symbol_ = IP_TypedElement_type.evaluate(evaluator, T_Type, bodySpecification, P_TypedElement_type);
+			Object A_symbol_ = IP_TypedElement_type.evaluate(evaluator, T_Type, bodySpecification, P_TypedElement_type);
 			
 			
-			Value A_symbol__1 = IP_TypedElement_type.evaluate(evaluator, T_Type, self, P_TypedElement_type);
+			Object A_symbol__1 = IP_TypedElement_type.evaluate(evaluator, T_Type, self, P_TypedElement_type);
 			
 			DomainType static_A_symbol__2 = valueFactory.typeOf(A_symbol_);
 			LibraryBinaryOperation dynamic_A_symbol__2 = (LibraryBinaryOperation)static_A_symbol__2.lookupImplementation(standardLibrary, O_OclType_conformsTo);
-			Value A_symbol__2 = dynamic_A_symbol__2.evaluate(evaluator, T_Boolean, A_symbol_, A_symbol__1);
+			Object A_symbol__2 = dynamic_A_symbol__2.evaluate(evaluator, T_Boolean, A_symbol_, A_symbol__1);
 			return A_symbol__2;
 		}
 	}
@@ -88,7 +87,7 @@ public class TypedMultiplicityElementBodies
 		/*
 		Parameter{name = 'name'}
 		*/
-		public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Value self) throws InvalidValueException {
+		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Object self) throws InvalidValueException {
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
 			final @NonNull StringValue S_name = valueFactory.stringValueOf("name");

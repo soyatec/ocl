@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010,2011 E.D.Willink and others.
+ * Copyright (c) 2010,2012 E.D.Willink and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,8 +11,6 @@
  *   E.D.Willink - Initial API and implementation
  *
  * </copyright>
- *
- * $Id: TypeValueImpl.java,v 1.5 2011/04/25 09:49:14 ewillink Exp $
  */
 package org.eclipse.ocl.examples.domain.values.impl;
 
@@ -20,8 +18,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
-import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -32,8 +28,8 @@ import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 /**
  * @generated NOT
  */
-public abstract class TypeValueImpl extends ObjectValueImpl implements TypeValue
-{
+public class TypeValueImpl extends ValueImpl implements TypeValue {
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -58,10 +54,10 @@ public abstract class TypeValueImpl extends ObjectValueImpl implements TypeValue
 		return object;
 	}
 
-	@Override
-	public @NonNull TypeValue asElementValue() {
-		return this;
-	}
+//	@Override
+//	public @NonNull TypeValue asElementValue() {
+//		return this;
+//	}
 
 	@Override
 	public @NonNull EObject asNavigableObject() throws InvalidValueException {
@@ -73,15 +69,14 @@ public abstract class TypeValueImpl extends ObjectValueImpl implements TypeValue
 		}
 	}
 
-	@Override
-	public Object asObject() {
+	public @NonNull Object asObject() {
 		return object;
 	}
 
-	@Override
-	public @NonNull TypeValueImpl asTypeValue() {
-		return this;
-	}
+//	@Override
+//	public @NonNull TypeValueImpl asTypeValue() {
+//		return this;
+//	}
 
 	@Override
 	public boolean equals(Object that) {
@@ -91,15 +86,16 @@ public abstract class TypeValueImpl extends ObjectValueImpl implements TypeValue
 		if (!(that instanceof TypeValue)) {
 			return false;
 		}
-		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
-		DomainInheritance thisInheritance = object.getInheritance(standardLibrary);
-		try {
-			DomainType thatInstanceType = ((TypeValue) that).getInstanceType();
-			DomainInheritance thatInheritance = thatInstanceType.getInheritance(standardLibrary);
-			return thisInheritance == thatInheritance;
-		} catch (InvalidValueException e) {
-			return false;
-		}
+		return getInstanceType().getTypeid() == ((TypeValue)that).getInstanceType().getTypeid();
+//		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
+//		DomainInheritance thisInheritance = object.getInheritance(standardLibrary);
+//		try {
+//			DomainType thatInstanceType = ((TypeValue) that).getInstanceType();
+//			DomainInheritance thatInheritance = thatInstanceType.getInheritance(standardLibrary);
+//			return thisInheritance == thatInheritance;
+//		} catch (InvalidValueException e) {
+//			return false;
+//		}
 	}
 
 	public @NonNull DomainType getElement() {
@@ -110,7 +106,7 @@ public abstract class TypeValueImpl extends ObjectValueImpl implements TypeValue
 		return object;
 	}
 
-	@Override
+//	@Override
 	public @NonNull DomainType getObject() {
 		return object;
 	}
@@ -126,5 +122,10 @@ public abstract class TypeValueImpl extends ObjectValueImpl implements TypeValue
 	@Override
 	public int hashCode() {
 		return object.hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return String.valueOf(getObject());
 	}
 }

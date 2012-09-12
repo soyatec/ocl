@@ -28,11 +28,13 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.pivot.Adaptable;
 import org.eclipse.ocl.examples.pivot.BasicEnvironment;
 import org.eclipse.ocl.examples.pivot.Class;
+import org.eclipse.ocl.examples.pivot.Customizable;
 import org.eclipse.ocl.examples.pivot.Environment;
+import org.eclipse.ocl.examples.pivot.OCLUtil;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -67,7 +69,7 @@ public interface EvaluationEnvironment extends DomainEvaluationEnvironment, Basi
      *            the name whose value is to be returned
      * @return the value associated with the name
      */
-	Value getValueOf(@NonNull VariableDeclaration referredVariable);
+	Object getValueOf(@NonNull VariableDeclaration referredVariable);
 
     /**
      * Replaces the current value of the supplied variable declaration with the supplied value.
@@ -77,7 +79,7 @@ public interface EvaluationEnvironment extends DomainEvaluationEnvironment, Basi
      * @param value
      *            the new value
      */
-    void replace(DomainTypedElement referredVariable, Value value);
+    void replace(DomainTypedElement referredVariable, Object value);
 
     /**
      * Adds the supplied variable declaration and value binding to the environment.  The variable declaration
@@ -90,7 +92,7 @@ public interface EvaluationEnvironment extends DomainEvaluationEnvironment, Basi
      *            
      * @see #replace(String, Object)
      */
-    void add(DomainTypedElement referredVariable, Value value);
+    void add(DomainTypedElement referredVariable, Object value);
  
     /**
      * Removes the supplied variable declaration and binding from the environment (if it exists)
@@ -103,7 +105,7 @@ public interface EvaluationEnvironment extends DomainEvaluationEnvironment, Basi
      * @deprecated let expiry of a nested evaluation environment remove automatically
      */
     @Deprecated
-    Value remove(DomainTypedElement referredVariable);
+    Object remove(DomainTypedElement referredVariable);
 
     /**
      * Clears the environment of variables.
@@ -177,7 +179,7 @@ public interface EvaluationEnvironment extends DomainEvaluationEnvironment, Basi
      *     associated with the source element, or is not supported by this
      *     environment
      */
-    Value navigateAssociationClass(Type associationClass, Property navigationSource, Object source)
+    Object navigateAssociationClass(Type associationClass, Property navigationSource, Object source)
     	throws IllegalArgumentException;
 	
 	/**

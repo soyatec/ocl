@@ -22,7 +22,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.library.numeric.NumericMaxOperation;
 
 /**
@@ -30,10 +29,10 @@ import org.eclipse.ocl.examples.library.numeric.NumericMaxOperation;
  */
 public class CollectionMaxOperation extends AbstractUnaryOperation
 {
-	public static final CollectionMaxOperation INSTANCE = new CollectionMaxOperation();
+	public static final @NonNull CollectionMaxOperation INSTANCE = new CollectionMaxOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal) throws InvalidValueException {
-		CollectionValue collectionValue = sourceVal.asCollectionValue();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal) throws InvalidValueException {
+		CollectionValue collectionValue = asCollectionValue(sourceVal);
 		// FIXME Bug 301351 Look for user-defined max
 		return collectionValue.maxMin(evaluator, returnType, NumericMaxOperation.INSTANCE);
 	}

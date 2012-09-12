@@ -36,6 +36,7 @@ import org.eclipse.ocl.examples.pivot.library.ConstrainedOperation;
 import org.eclipse.ocl.examples.pivot.library.ConstrainedProperty;
 import org.eclipse.ocl.examples.pivot.library.ExplicitNavigationProperty;
 import org.eclipse.ocl.examples.pivot.library.ImplicitNonCompositionProperty;
+import org.eclipse.ocl.examples.pivot.library.StaticProperty;
 import org.eclipse.ocl.examples.pivot.library.TuplePartProperty;
 import org.eclipse.ocl.examples.pivot.library.UnimplementedOperation;
 
@@ -144,8 +145,11 @@ public class ImplementationManager
 		else if (property.getOwningType() instanceof TupleType) {
 			return TuplePartProperty.INSTANCE;
 		}
+		else if (property.isStatic()) {
+			return StaticProperty.INSTANCE;
+		}
 		else {
-			return ExplicitNavigationProperty.INSTANCE;
+			return new ExplicitNavigationProperty();
 		}
 	}
 	

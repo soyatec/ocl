@@ -38,20 +38,21 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.ObjectValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.examples.domain.values.ObjectValue;
+import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AssociationClass;
 import org.eclipse.ocl.examples.pivot.Comment;
@@ -67,8 +68,8 @@ import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.bodies.ParameterableElementBodies;
 import org.eclipse.ocl.examples.pivot.bodies.PropertyBodies;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.osgi.util.NLS;
+import org.eclipse.ocl.examples.pivot.util.Visitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -1022,12 +1023,12 @@ public class PropertyImpl
 		try {
 			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
 			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull Object self = valueFactory.valueOf(this);
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
 			final @NonNull DomainType returnType = T_Boolean;
-			final @NonNull Value result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(p));
-			return (Boolean) result.asEcoreObject();
+			final @NonNull Object result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(p));
+			return (Boolean) ValuesUtil.asEcoreObject(result);
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.ParameterableElementBodies", e);
 		}
@@ -1051,12 +1052,12 @@ public class PropertyImpl
 		try {
 			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
 			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull Object self = valueFactory.valueOf(this);
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
 			final @NonNull DomainType returnType = T_Boolean;
-			final @NonNull Value result = PropertyBodies._isAttribute_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(p));
-			return (Boolean) result.asEcoreObject();
+			final @NonNull Object result = PropertyBodies._isAttribute_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(p));
+			return (Boolean) ValuesUtil.asEcoreObject(result);
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.PropertyBodies", e);
 		}
@@ -1102,13 +1103,13 @@ public class PropertyImpl
 		try {
 			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
 			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull Object self = valueFactory.valueOf(this);
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
 			final @NonNull DomainType returnType = T_Boolean;
-			final @NonNull Value result = PropertyBodies._invariant_CompatibleInitialiser.INSTANCE.evaluate(evaluator, returnType, self);
-			final boolean resultIsNull = result.isNull();
-			if (!resultIsNull && result.asBoolean()) {	// true => true, false/null => dropthrough, invalid => exception
+			final @NonNull Object result = PropertyBodies._invariant_CompatibleInitialiser.INSTANCE.evaluate(evaluator, returnType, self);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
 			}
 			if (diagnostics != null) {
@@ -1682,12 +1683,18 @@ public class PropertyImpl
 		}
 	}
 
-	public void setValue(@NonNull ObjectValue objectValue, @NonNull Value propertyValue) throws InvalidValueException {
+	public void setValue(@NonNull ObjectValue objectValue, @NonNull Object propertyValue) throws InvalidValueException {
 		EObject eTarget = getETarget();
 		if (eTarget instanceof EStructuralFeature) {
 			EStructuralFeature eFeature = (EStructuralFeature) eTarget;
 			EObject eObject = objectValue.asNavigableObject();
-			Object eValue = propertyValue.getValueFactory().getEcoreValueOf(propertyValue);
+			Object eValue;
+			if (propertyValue instanceof Value) {
+				eValue = ((Value)propertyValue).getValueFactory().getEcoreValueOf((Value)propertyValue);
+			}
+			else {
+				eValue = propertyValue;
+			}
 			eObject.eSet(eFeature, eValue);
 			return;
 		}

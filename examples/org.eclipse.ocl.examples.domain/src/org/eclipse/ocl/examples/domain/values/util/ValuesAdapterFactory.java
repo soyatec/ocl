@@ -80,20 +80,8 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 				return createCollectionValueAdapter();
 			}
 			@Override
-			public Adapter caseCollectionTypeValue(CollectionTypeValue object) {
-				return createCollectionTypeValueAdapter();
-			}
-			@Override
-			public Adapter caseElementValue(ElementValue object) {
-				return createElementValueAdapter();
-			}
-			@Override
 			public Adapter caseEnumerationLiteralValue(EnumerationLiteralValue object) {
 				return createEnumerationLiteralValueAdapter();
-			}
-			@Override
-			public Adapter caseEnumerationTypeValue(EnumerationTypeValue object) {
-				return createEnumerationTypeValueAdapter();
 			}
 			@Override
 			public Adapter caseIntegerValue(IntegerValue object) {
@@ -102,10 +90,6 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseInvalidValue(InvalidValue object) {
 				return createInvalidValueAdapter();
-			}
-			@Override
-			public Adapter caseMetaclassValue(MetaclassValue object) {
-				return createMetaclassValueAdapter();
 			}
 			@Override
 			public Adapter caseNullValue(NullValue object) {
@@ -134,10 +118,6 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseSetValue(SetValue object) {
 				return createSetValueAdapter();
-			}
-			@Override
-			public Adapter caseSimpleTypeValue(SimpleTypeValue object) {
-				return createSimpleTypeValueAdapter();
 			}
 			@Override
 			public Adapter caseStringValue(StringValue object) {
@@ -226,34 +206,6 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.values.CollectionTypeValue <em>Collection Type Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.domain.values.CollectionTypeValue
-	 * @generated
-	 */
-	public Adapter createCollectionTypeValueAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.values.ElementValue <em>Element Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.domain.values.ElementValue
-	 * @generated
-	 */
-	public Adapter createElementValueAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue <em>Enumeration Literal Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -264,20 +216,6 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEnumerationLiteralValueAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.values.EnumerationTypeValue <em>Enumeration Type Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.domain.values.EnumerationTypeValue
-	 * @generated
-	 */
-	public Adapter createEnumerationTypeValueAdapter() {
 		return null;
 	}
 
@@ -306,20 +244,6 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createInvalidValueAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.values.MetaclassValue <em>Metaclass Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.domain.values.MetaclassValue
-	 * @generated
-	 */
-	public Adapter createMetaclassValueAdapter() {
 		return null;
 	}
 
@@ -418,20 +342,6 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSetValueAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.values.SimpleTypeValue <em>Simple Type Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.domain.values.SimpleTypeValue
-	 * @generated
-	 */
-	public Adapter createSimpleTypeValueAdapter() {
 		return null;
 	}
 

@@ -21,7 +21,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.StringValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
@@ -61,10 +60,6 @@ public class StringValueImpl extends ValueImpl implements StringValue
 		return this;
 	}
 
-	public @NonNull Value asValidValue() {
-		return this;
-	}
-
 	public int compareTo(StringValue o) {
 		try {
 			return value.compareTo(o.stringValue());
@@ -92,10 +87,10 @@ public class StringValueImpl extends ValueImpl implements StringValue
 		return value.hashCode();
 	}
 
-	@Override
-	public StringValue isStringValue() {
-		return this;
-	}
+//	@Override
+//	public StringValue isStringValue() {
+//		return this;
+//	}
 
 	public @NonNull String stringValue() {
 		return value;

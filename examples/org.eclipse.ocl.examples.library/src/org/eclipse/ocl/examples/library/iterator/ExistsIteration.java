@@ -24,7 +24,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.BooleanValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * ExistsIteration realises the Collection::exists() library iteration.
@@ -38,17 +37,17 @@ public class ExistsIteration extends AbstractIteration
 	}
 
 	@Override
-	protected @NonNull Value resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
+	protected @NonNull Object resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
 		return iterationManager.getValueFactory().getFalse();
 	}
 	
 	@Override
-    protected @Nullable Value updateAccumulator(@NonNull DomainIterationManager iterationManager) {
-		Value bodyVal = iterationManager.evaluateBody();
-		if (bodyVal.isUndefined()) {
+    protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
+		Object bodyVal = iterationManager.evaluateBody();
+		if (isUndefined(bodyVal)) {
 			return iterationManager.throwInvalidEvaluation(EvaluatorMessages.UndefinedBody, "exists"); 	// Null body is invalid //$NON-NLS-1$
 		}
-		else if (bodyVal.isFalse()) {
+		else if (isFalse(bodyVal)) {
 			return null;							// Carry on for nothing found
 		}
 		else {

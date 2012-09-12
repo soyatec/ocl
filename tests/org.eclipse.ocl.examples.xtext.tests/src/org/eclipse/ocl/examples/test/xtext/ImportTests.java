@@ -35,6 +35,7 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.impl.BagImpl;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
@@ -52,10 +53,10 @@ public class ImportTests extends XtextTestCase
 	{
 		public static final SpacedOut INSTANCE = new SpacedOut();
 
-		public Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp,
-				@NonNull Value sourceValue, Value... argumentValues)
+		public Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp,
+				@NonNull Object sourceValue, Object... argumentValues)
 				throws InvalidEvaluationException, InvalidValueException {
-			String string = sourceValue == null?  Value.INVALID_NAME : sourceValue.oclToString();
+			String string = sourceValue == null?  Value.INVALID_NAME : ValuesUtil.oclToString(sourceValue);
 			return evaluator.getValueFactory().stringValueOf(string);
 		}
 	}

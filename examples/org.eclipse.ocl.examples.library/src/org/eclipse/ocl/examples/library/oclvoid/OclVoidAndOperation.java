@@ -22,21 +22,20 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.BooleanValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * OclVoidAndOperation realises the OclVoid::and() library operation.
  */
 public class OclVoidAndOperation extends AbstractBinaryOperation
 {
-	public static final OclVoidAndOperation INSTANCE = new OclVoidAndOperation();
+	public static final @NonNull OclVoidAndOperation INSTANCE = new OclVoidAndOperation();
 
-	public @NonNull BooleanValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
-		if (right.isFalse()) {
-			return right.asBooleanValue();			// Simple type cast
+	public @NonNull BooleanValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
+		if (isFalse(right)) {
+			return asBooleanValue(right);			// Simple type cast
 		}
 		else {
-			return left.asBooleanValue();			// Guaranteed exception
+			return asBooleanValue(left);			// Guaranteed exception
 		}
 	}
 }

@@ -20,7 +20,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -28,13 +27,13 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class StringSubstituteFirstOperation extends AbstractTernaryOperation
 {
-	public static final StringSubstituteFirstOperation INSTANCE = new StringSubstituteFirstOperation();
+	public static final @NonNull StringSubstituteFirstOperation INSTANCE = new StringSubstituteFirstOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull Value firstArgumentValue, @NonNull Value secondArgumentValue) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		String sourceString = sourceValue.asString();
-		String oldSubstring = firstArgumentValue.asString();
-		String newSubstring = secondArgumentValue.asString();
+		String sourceString = asString(sourceValue);
+		String oldSubstring = asString(firstArgumentValue);
+		String newSubstring = asString(secondArgumentValue);
 		int index = sourceString.indexOf(oldSubstring);
 		if (index < 0) {
 			return valueFactory.throwInvalidValueException(EvaluatorMessages.MissingSubstring, oldSubstring, sourceString);

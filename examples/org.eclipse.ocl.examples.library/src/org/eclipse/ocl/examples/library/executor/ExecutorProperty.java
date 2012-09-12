@@ -25,7 +25,6 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 public class ExecutorProperty implements DomainProperty
 {
@@ -59,6 +58,10 @@ public class ExecutorProperty implements DomainProperty
 		return DomainUtil.nonNullState(opposite);
 	}
 
+	public DomainType getOwningType() {
+		throw new UnsupportedOperationException();			// FIXME
+	}
+
 	public @NonNull DomainType getType() {
 		return executorType;
 	}
@@ -71,7 +74,7 @@ public class ExecutorProperty implements DomainProperty
 		return false;								// WIP FIXME
 	}
 
-	public void setValue(@NonNull ObjectValue objectValue, @NonNull Value propertyValue) throws InvalidValueException {
+	public void setValue(@NonNull ObjectValue objectValue, @NonNull Object propertyValue) throws InvalidValueException {
 		throw new UnsupportedOperationException();
 	}
 	

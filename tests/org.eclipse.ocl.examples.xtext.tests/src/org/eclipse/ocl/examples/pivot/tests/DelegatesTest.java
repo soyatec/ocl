@@ -1252,7 +1252,7 @@ public class DelegatesTest extends PivotTestSuite
 	}
 
 	protected DomainType getType(EObject eObject) {
-		return valueFactory.valueOf(eObject).getType();
+		return valueFactory.typeOf(eObject);
 	}
 
 	public void getWithException(EObject eObject, String featureName, String expectedMessage) {

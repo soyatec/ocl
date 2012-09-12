@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.typeids.Typeid;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -69,5 +70,10 @@ public class AnyTypeImpl
 		else {
 			return false;
 		}
+	}
+
+	@Override
+	public @NonNull Typeid computeTypeid() {
+		return Typeid.OCL_ANY;
 	}
 } //AnyTypeImpl

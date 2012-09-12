@@ -25,7 +25,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -406,7 +405,7 @@ public class PivotEvaluationEnvironment extends AbstractEvaluationEnvironment {
 		return variable;
 	}	
 
-    public Value navigateAssociationClass(Type associationClass,
+    public Object navigateAssociationClass(Type associationClass,
     		Property navigationSource, Object source)
     		throws IllegalArgumentException {
     	throw new UnsupportedOperationException(getClass().getName() + ".navigateAssociationClass");

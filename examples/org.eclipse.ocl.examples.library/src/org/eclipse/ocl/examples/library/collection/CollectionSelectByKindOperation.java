@@ -20,20 +20,17 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * CollectionSelectByKindOperation realises the Collection::selectByType() library operation.
  */
 public class CollectionSelectByKindOperation extends AbstractBinaryOperation
 {
-	public static final CollectionSelectByKindOperation INSTANCE = new CollectionSelectByKindOperation();
+	public static final @NonNull CollectionSelectByKindOperation INSTANCE = new CollectionSelectByKindOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal, @NonNull Value argVal) throws InvalidValueException {
-		CollectionValue collectionValue = sourceVal.asCollectionValue();
-		TypeValue typeVal = argVal.asTypeValue();
-		DomainType typeValue = typeVal.getInstanceType();
-		return collectionValue.selectByKind(typeValue);
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal, @NonNull Object argVal) throws InvalidValueException {
+		CollectionValue collectionValue = asCollectionValue(sourceVal);
+		DomainType type = asType(argVal);
+		return collectionValue.selectByKind(type);
 	}
 }

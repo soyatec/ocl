@@ -22,17 +22,16 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * OrderedCollectionLastOperation realises the OrderedCollection::last() library operation.
  */
 public class OrderedCollectionLastOperation extends AbstractUnaryOperation
 {
-	public static final OrderedCollectionLastOperation INSTANCE = new OrderedCollectionLastOperation();
+	public static final @NonNull OrderedCollectionLastOperation INSTANCE = new OrderedCollectionLastOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value argument) throws InvalidValueException {
-		SequenceValue orderedCollectionValue = argument.asSequenceValue();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object argument) throws InvalidValueException {
+		SequenceValue orderedCollectionValue = asSequenceValue(argument);
 		return orderedCollectionValue.last();
 	}
 }

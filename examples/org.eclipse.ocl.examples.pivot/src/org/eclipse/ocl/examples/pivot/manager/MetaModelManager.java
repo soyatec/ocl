@@ -57,6 +57,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.types.InvalidTypeImpl;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
@@ -2163,7 +2164,10 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		Resource eResource = DomainUtil.nonNullState(eClassifier.eResource());
 		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(eResource, this);
 		Type pivotType = ecore2Pivot.getCreated(Type.class, eClassifier);
-		return DomainUtil.nonNullState(pivotType);
+		if (pivotType == null) {
+			return new InvalidTypeImpl(this, "No object creatyed by Ecore2Pivot");
+		}
+		return getPrimaryType(pivotType);
 	}
 	
 	public @NonNull TypeServer getTypeServer(@NonNull DomainType pivotType) {
@@ -2446,6 +2450,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		@NonNull Resource pivotResource = oclMetaModel.eResource();
 //		pivotResourceSet.getResources().add(pivotResource);
 		installResource(pivotResource);
+		packageManager.addPackageNsURISynonym(OCLMetaModel.PIVOT_URI, nsURI);
 	}
 
 	public @Nullable Element loadResource(@NonNull URI uri, String alias, ResourceSet resourceSet) throws ParserException {

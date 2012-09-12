@@ -27,7 +27,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.StringValue;
-import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
@@ -199,8 +199,8 @@ public class MarkupToHTML extends MarkupSwitch<HTMLBuffer>
 		try {
 			OCL ocl = getOCL();
 			ExpressionInOCL query = createQuery(oclString);
-			Value value = ocl.evaluate(context, query);
-			StringValue stringValue = value.isStringValue();
+			Object value = ocl.evaluate(context, query);
+			StringValue stringValue = ValuesUtil.isStringValue(value);
 			if (stringValue != null) {
 				try {
 					s.append(stringValue.stringValue());

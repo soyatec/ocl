@@ -47,6 +47,7 @@ import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * @generated NOT
@@ -64,10 +65,10 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	}
 
 	protected final @NonNull DomainCollectionType type;
-	protected final @NonNull Collection<Value> elements;
+	protected final @NonNull Collection<? extends Object> elements;		// For datatypes each element is a Value, for objects each element is an Object
 	private DomainType actualType = null;			// Lazily computed
 	
-	protected CollectionValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Collection<Value> elements) {
+	protected CollectionValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Collection<? extends Object> elements) {
 		super(valueFactory);
 		this.type = type;
 		this.elements = elements;
@@ -89,7 +90,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
         return valueFactory.createBagValue(getBagType(), elements);
     }
 
-	public @NonNull Collection<Value> asCollection() {
+	public @NonNull Collection<? extends Object> asCollection() {
 		return elements;
 	}
 
@@ -99,16 +100,16 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	}
 
 	@Override
-	public Object asEcoreObject() {
+	public @NonNull Object asEcoreObject() throws InvalidValueException {
 		List<Object> ecoreResult = new BasicEList<Object>(intSize());
-		for (Value elementValue : this) {
-			ecoreResult.add(elementValue.asEcoreObject());
+		for (Object elementValue : elements) {
+			ecoreResult.add(ValuesUtil.asEcoreObject(elementValue));
 		}
 		return ecoreResult;
 	}
 
-	public @NonNull List<Value> asList() {
-		return new ArrayList<Value>(elements);
+	public @NonNull List<? extends Object> asList() {
+		return new ArrayList<Object>(elements);
 	}
 
 	public @NonNull Object asObject() {
@@ -130,10 +131,6 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
         return valueFactory.createSetValue(getSetType(), elements);
     }
 
-	public @NonNull Value asValidValue() {
-		return this;
-	}
-
     /**
      * Implementation of the OCL
      * <tt>Collection::count(object : T) : Integer</tt>
@@ -144,14 +141,14 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
      * @return the number of occurrences of the object in the collection
      * @throws InvalidValueException 
      */
-    public @NonNull IntegerValue count(@NonNull Value value) throws InvalidValueException {
+    public @NonNull IntegerValue count(@NonNull Object value) throws InvalidValueException {
         long count = 0;
-        for (Value next : elements) {
+        for (Object next : elements) {
             if (next.equals(value)) {
                 count++;
             }
-        }        
-        return valueFactory.integerValueOf(count);
+        } 
+	    return valueFactory.integerValueOf(count);
     }
 
     /**
@@ -163,8 +160,13 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
      * @param object an object
      * @return whether the collection does not include the object
      */
-    public @NonNull BooleanValue excludes(@NonNull Value value) {
-    	return valueFactory.booleanValueOf(!elements.contains(value));
+    public @NonNull BooleanValue excludes(@NonNull Object value) {
+        for (Object next : elements) {
+            if (next.equals(value)) {
+            	return valueFactory.getFalse();
+            }
+        } 
+        return valueFactory.getTrue();
     }
 
 	/**
@@ -178,11 +180,13 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
      *     elements of the other
      */
     public @NonNull BooleanValue excludesAll(@NonNull CollectionValue c) {
-        for (Value next : c) {
-            if (elements.contains(next)) {
-                return valueFactory.getFalse();
-            }
-        }
+        for (Object e1 : elements) {
+	        for (Object e2 : c.iterable()) {
+	            if (e1.equals(e2)) {
+	            	return valueFactory.getFalse();
+	            }
+	        } 
+        } 
         return valueFactory.getTrue();
     }
 
@@ -190,10 +194,10 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
      * Returns true if any element flattened.
      * @throws InvalidValueException 
      */
-	public boolean flatten(@NonNull Collection<Value> flattenedElements) throws InvalidValueException {
+	public boolean flatten(@NonNull Collection<Object> flattenedElements) throws InvalidValueException {
 		boolean flattened = false;
-		for (Value element : elements) {
-			CollectionValue collectionElement = element.isCollectionValue();
+		for (Object element : elements) {
+			CollectionValue collectionElement = ValuesUtil.isCollectionValue(element);
 			if (collectionElement != null) {
 				flattened = true;
 				collectionElement.flatten(flattenedElements);
@@ -206,13 +210,20 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	}
 
 	@Override
-	public @NonNull DomainType getActualType() {
+	public @NonNull DomainType getActualType() throws InvalidValueException {
 		DomainType actualType2 = actualType;
 		if (actualType2 == null) {
 			DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 			DomainType elementType = null;
-			for (Value value : elements) {
-				DomainType valueType = value.getActualType();
+			for (Object value : elements) {
+				assert value != null;
+				DomainType valueType;
+				if (value instanceof Value) {
+					valueType = ((Value)value).getActualType();
+				}
+				else {
+					valueType = valueFactory.typeOf(value);
+				}
 				if (elementType == null) {
 					elementType = valueType;
 				}
@@ -244,11 +255,11 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		return DomainUtil.nonNullModel(getCollectionType().getElementType());
 	}
 
-	protected @NonNull Collection<Value> getElements() {
+	protected @NonNull Collection<? extends Object> getElements() {
 		return elements;
 	}
 
-	public @NonNull Collection<Value> getObject() {
+	public @NonNull Collection<? extends Object> getObject() {
 		return elements;
 	}
 
@@ -273,7 +284,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		return elements.hashCode();
 	}
 
-    public @NonNull BooleanValue includes(@NonNull Value value) {
+    public @NonNull BooleanValue includes(@NonNull Object value) {
 		return valueFactory.booleanValueOf(elements.contains(value));
     }
 
@@ -288,11 +299,18 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
      *     of the other
      */
     public @NonNull BooleanValue includesAll(@NonNull CollectionValue c) {
-    	for (Value next : c) {
-    		if (!elements.contains(next)) {
-    			return valueFactory.getFalse();
-    		}
-    	}   	
+        for (Object e1 : c.iterable()) {
+        	boolean gotIt = false;
+	        for (Object e2 : elements) {
+	            if (e1.equals(e2)) {
+	            	gotIt = true;
+	            	break;
+	            }
+	        } 
+        	if (!gotIt) {
+        		return valueFactory.getFalse();
+        	}
+        } 
         return valueFactory.getTrue();
     }
 
@@ -316,29 +334,33 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
         }
 	}
 
-	@Override
-	public @NonNull CollectionValue isCollectionValue() {
-		return this;
-	}
+//	@Override
+//	public @NonNull CollectionValue isCollectionValue() {
+//		return this;
+//	}
 
 	public @NonNull BooleanValue isEmpty() {
 		return valueFactory.booleanValueOf(intSize() == 0);
 	}
 
-	public @NonNull Iterator<Value> iterator() {
-		@SuppressWarnings("null") @NonNull Iterator<Value> result = elements.iterator();
+	public @NonNull Iterable<? extends Object> iterable() {
+		return elements;
+	}
+
+	public @NonNull Iterator<? extends Object> iterator() {
+		@SuppressWarnings("null") @NonNull Iterator<? extends Object> result = elements.iterator();
 		return result;
 	}
 
-	public @NonNull Value maxMin(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation binaryOperation) throws InvalidValueException {
-		Value result = null;
-        for (Value element : elements) {
+	public @NonNull Object maxMin(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation binaryOperation) throws InvalidValueException {
+		Object result = null;
+        for (Object element : elements) {
         	if (result == null) {
         		result = element;
         	}
         	else if (element != null) {
         		result = binaryOperation.evaluate(evaluator, returnType, result, element);
-        		if (result.isUndefined()) {
+        		if (ValuesUtil.isUndefined(result)) {
                 	valueFactory.throwInvalidValueException(EvaluatorMessages.UndefinedResult, "max/min");
         		}
         	}
@@ -356,14 +378,12 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
     public @NonNull Set<TupleValue> product(@NonNull CollectionValue c, @NonNull DomainTupleType tupleType) {   	
 		ValueFactory nonNullValueFactory = valueFactory;
     	Set<TupleValue> result = new HashSet<TupleValue>();		
-        for (Value next1 : this) {
+        for (Object next1 : iterable()) {
         	if (next1 != null) {
-        		@NonNull Value next1a = next1;
-        		for (Value next2 : c) {
-            		@SuppressWarnings("null")
-					@NonNull Value next1b = next1a;
+         		for (Object next2 : c.iterable()) {
     				if (next2 != null) {
-    					result.add(new TupleValueImpl(nonNullValueFactory, tupleType, next1b, next2));
+    					assert next1 != null;
+    					result.add(new TupleValueImpl(nonNullValueFactory, tupleType, next1, next2));
     				}
         		}
         	}
@@ -374,13 +394,14 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	public @NonNull CollectionValue selectByKind(@NonNull DomainType requiredElementType) throws InvalidValueException {
     	DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 		boolean changedContents = false;
-		Collection<Value> newElements = new ArrayList<Value>();
-        for (Value element : elements) {
-			if (element.isNull()) {
+		Collection<Object> newElements = new ArrayList<Object>();
+        for (Object element : elements) {
+        	assert element != null;
+			if (ValuesUtil.isNull(element)) {
         		changedContents = true;
 			}
 			else {
-				DomainType elementType = element.getType();
+				DomainType elementType = valueFactory.typeOf(element);
 				if (elementType.conformsTo(standardLibrary, requiredElementType)) {
 	        		newElements.add(element);
 	        	}
@@ -401,9 +422,10 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	public @NonNull CollectionValue selectByType(@NonNull DomainType requiredElementType) throws InvalidValueException {
     	DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 		boolean changedContents = false;
-		Collection<Value> newElements = new ArrayList<Value>();
-        for (Value element : elements) {
-			DomainType elementType = element.getType();
+		Collection<Object> newElements = new ArrayList<Object>();
+        for (Object element : elements) {
+        	assert element != null;
+			DomainType elementType = valueFactory.typeOf(element);
 			if (elementType.isEqualTo(standardLibrary, requiredElementType)) {
         		newElements.add(element);
         	}
@@ -424,9 +446,9 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		return valueFactory.integerValueOf(intSize());
 	}
 
-	public @NonNull Value sum(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation binaryOperation, @NonNull Value zero) throws InvalidValueException {
-		Value result = zero;
-        for (Value element : elements) {
+	public @NonNull Object sum(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation binaryOperation, @NonNull Object zero) throws InvalidValueException {
+		Object result = zero;
+        for (Object element : elements) {
         	if (element != null) {
         		result = binaryOperation.evaluate(evaluator, returnType, result, element);
         	}
@@ -445,12 +467,12 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	public void toString(@NonNull StringBuilder s, int lengthLimit) {
 		s.append("{");
 		boolean isFirst = true;
-		for (Value element : this) {
+		for (Object element : this.iterable()) {
 			if (!isFirst) {
 				s.append(",");
 			}
 			if (s.length() < lengthLimit) {
-				element.toString(s, lengthLimit-1);
+				ValuesUtil.toString(element, s, lengthLimit-1);
 			}
 			else {
 				s.append("...");

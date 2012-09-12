@@ -21,16 +21,15 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * CollectionAsSequenceOperation realises the Collection::asSequence() library operation.
  */
 public class CollectionAsSequenceOperation extends AbstractUnaryOperation
 {
-	public static final CollectionAsSequenceOperation INSTANCE = new CollectionAsSequenceOperation();
+	public static final @NonNull CollectionAsSequenceOperation INSTANCE = new CollectionAsSequenceOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value argument) throws InvalidValueException {
-		return argument.asSequenceValue();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object argument) throws InvalidValueException {
+		return asSequenceValue(argument);
 	}
 }

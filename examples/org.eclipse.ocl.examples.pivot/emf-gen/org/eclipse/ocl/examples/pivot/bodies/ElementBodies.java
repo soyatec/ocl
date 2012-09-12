@@ -31,7 +31,6 @@ import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
@@ -55,7 +54,7 @@ public class ElementBodies
 		/*
 		not allOwnedElements()->includes(self)
 		*/
-		public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Value self) throws InvalidValueException {
+		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Object self) throws InvalidValueException {
 			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
 			final @NonNull DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
@@ -68,14 +67,14 @@ public class ElementBodies
 			
 			DomainType static_A_symbol_ = valueFactory.typeOf(self);
 			LibraryUnaryOperation dynamic_A_symbol_ = (LibraryUnaryOperation)static_A_symbol_.lookupImplementation(standardLibrary, O_Element_allOwnedElements);
-			Value A_symbol_ = dynamic_A_symbol_.evaluate(evaluator, T_Set_pivot__Element_, self);
+			Object A_symbol_ = dynamic_A_symbol_.evaluate(evaluator, T_Set_pivot__Element_, self);
 			
 			DomainType static_A_symbol__1 = valueFactory.typeOf(A_symbol_);
 			LibraryBinaryOperation dynamic_A_symbol__1 = (LibraryBinaryOperation)static_A_symbol__1.lookupImplementation(standardLibrary, O_Collection_includes);
-			Value A_symbol__1 = dynamic_A_symbol__1.evaluate(evaluator, T_Boolean, A_symbol_, self);
+			Object A_symbol__1 = dynamic_A_symbol__1.evaluate(evaluator, T_Boolean, A_symbol_, self);
 			DomainType static_A_symbol__2 = valueFactory.typeOf(A_symbol__1);
 			LibraryUnaryOperation dynamic_A_symbol__2 = (LibraryUnaryOperation)static_A_symbol__2.lookupImplementation(standardLibrary, O_Boolean_not);
-			Value A_symbol__2 = dynamic_A_symbol__2.evaluate(evaluator, T_Boolean, A_symbol__1);
+			Object A_symbol__2 = dynamic_A_symbol__2.evaluate(evaluator, T_Boolean, A_symbol__1);
 			return A_symbol__2;
 		}
 	}
@@ -90,7 +89,7 @@ public class ElementBodies
 		/*
 		oclContents()
 		*/
-		public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Value self) throws InvalidValueException {
+		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Object self) throws InvalidValueException {
 			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
 			final @NonNull DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 			final @NonNull ExecutorType T_OclElement = OCLstdlibTables.Types._OclElement;
@@ -100,7 +99,7 @@ public class ElementBodies
 			
 			DomainType static_A_symbol__3 = valueFactory.typeOf(self);
 			LibraryUnaryOperation dynamic_A_symbol__3 = (LibraryUnaryOperation)static_A_symbol__3.lookupImplementation(standardLibrary, O_OclElement_oclContents);
-			Value A_symbol__3 = dynamic_A_symbol__3.evaluate(evaluator, T_Set_OclElement_, self);
+			Object A_symbol__3 = dynamic_A_symbol__3.evaluate(evaluator, T_Set_OclElement_, self);
 			return A_symbol__3;
 		}
 	}
@@ -115,7 +114,7 @@ public class ElementBodies
 		/*
 		null
 		*/
-		public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Value self, final @NonNull Value stereotype, final @NonNull Value propertyName) throws InvalidValueException {
+		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Object self, final @NonNull Object stereotype, final @NonNull Object propertyName) throws InvalidValueException {
 			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
 			final @NonNull NullValue Null = valueFactory.getNull();
 			
@@ -123,7 +122,6 @@ public class ElementBodies
 			return Null;
 		}
 	}
-
 
 
 

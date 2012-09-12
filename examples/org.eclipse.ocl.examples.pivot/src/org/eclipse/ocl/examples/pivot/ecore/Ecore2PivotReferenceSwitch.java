@@ -35,7 +35,6 @@ import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.util.EcoreSwitch;
 import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.LibraryConstants;
@@ -171,18 +170,14 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 					boolean isUnique = uniqueValue != null ? Boolean.valueOf(uniqueValue) : true;
 					ValueFactory valueFactory = metaModelManager.getValueFactory();
 					IntegerValue one = valueFactory.getOne();
-					IntegerValue lower;
-					try {
-						lower = lowerValue != null ? valueFactory.integerValueOf(lowerValue) : one;
-					} catch (InvalidValueException e) {
-						logger.error("Invalid " + PROPERTY_OPPOSITE_ROLE_LOWER_KEY, e);
+					IntegerValue lower = lowerValue != null ? valueFactory.integerValueOf(lowerValue) : one;
+					if (lower.isInvalid()) {
+						logger.error("Invalid " + PROPERTY_OPPOSITE_ROLE_LOWER_KEY + " " + lower);
 						lower = one;
 					}
-					IntegerValue upper;
-					try {
-						upper = upperValue != null ? valueFactory.integerValueOf(upperValue) : one;
-					} catch (InvalidValueException e) {
-						logger.error("Invalid " + PROPERTY_OPPOSITE_ROLE_UPPER_KEY, e);
+					IntegerValue upper = upperValue != null ? valueFactory.integerValueOf(upperValue) : one;
+					if (upper.isInvalid()) {
+						logger.error("Invalid " + PROPERTY_OPPOSITE_ROLE_UPPER_KEY + " " + upper);
 						upper = one;
 					}
 					if (upper != one) {

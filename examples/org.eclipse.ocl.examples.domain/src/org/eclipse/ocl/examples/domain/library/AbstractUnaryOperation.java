@@ -22,7 +22,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * AbstractBinaryOperation dispatches a unary library operation to
@@ -31,10 +30,10 @@ import org.eclipse.ocl.examples.domain.values.Value;
  */
 public abstract class AbstractUnaryOperation extends AbstractOperation implements LibraryUnaryOperation
 {
-	public @Nullable Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Value sourceValue, Value... argumentValues) throws InvalidValueException {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Object sourceValue, Object... argumentValues) throws InvalidValueException {
 		return evaluate(evaluator, DomainUtil.nonNullPivot(callExp.getType()), sourceValue);
 	}
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Value sourceValue) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Object sourceValue) throws InvalidValueException {
 		return evaluate(evaluator, DomainUtil.nonNullPivot(callExp.getType()), sourceValue);
 	}
 }

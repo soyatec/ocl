@@ -28,7 +28,7 @@ import org.eclipse.ocl.examples.domain.values.RealValue;
 @Deprecated
 public class NumericPlusOperation extends AbstractNumericBinaryOperation
 {
-	public static final NumericPlusOperation INSTANCE = new NumericPlusOperation();
+	public static final @NonNull NumericPlusOperation INSTANCE = new NumericPlusOperation();
 
 	@Override
 	protected @NonNull IntegerValue evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) throws InvalidValueException {

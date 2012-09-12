@@ -28,6 +28,7 @@ import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * @generated NOT
@@ -38,7 +39,7 @@ public class RangeOrderedSetValueImpl extends OrderedSetValueImpl
 		super(valueFactory, type, range);
 	}
 
-	public @NonNull OrderedSetValue append(@NonNull Value value) throws InvalidValueException {
+	public @NonNull OrderedSetValue append(@NonNull Object value) throws InvalidValueException {
 		IntegerRange theElements = getElements();
 		IntegerValue nextValue = theElements.getLast().add(valueFactory.getOne());
 		if (value.equals(nextValue)) {
@@ -46,16 +47,16 @@ public class RangeOrderedSetValueImpl extends OrderedSetValueImpl
 			return new RangeOrderedSetValueImpl(valueFactory, getCollectionType(), range);
 		}
 		else {
-			List<Value> elements = createElements();
+			List<Object> elements = createElements();
 			elements.add(value);
 			return valueFactory.createOrderedSetValue(getCollectionType(), elements);
 		}
 	}
 
 	@Override
-	public @NonNull IntegerValue count(@NonNull Value value) throws InvalidValueException {
-		IntegerValue integerValue = value.isIntegerValue();
-		if ((integerValue != null) && !integerValue.isUndefined()) {
+	public @NonNull IntegerValue count(@NonNull Object value) throws InvalidValueException {
+		IntegerValue integerValue = ValuesUtil.isIntegerValue(value);
+		if (integerValue != null) {
 			if (elements.contains(integerValue)) {
 				return valueFactory.getOne();
 			}
@@ -63,9 +64,9 @@ public class RangeOrderedSetValueImpl extends OrderedSetValueImpl
 		return valueFactory.getZero();
 	}
 
-	protected List<Value> createElements() {
-		List<Value> elements = new ArrayList<Value>(intSize());
-		for (Value value : this) {
+	protected List<Object> createElements() {
+		List<Object> elements = new ArrayList<Object>(intSize());
+		for (Object value : iterable()) {
 			elements.add(value);
 		}
 		return elements;
@@ -107,7 +108,7 @@ public class RangeOrderedSetValueImpl extends OrderedSetValueImpl
 //		return type;
 //	}
 
-	public @NonNull OrderedSetValue including(@NonNull Value value) throws InvalidValueException {
+	public @NonNull OrderedSetValue including(@NonNull Object value) throws InvalidValueException {
 		return append(value);
 	}
 
@@ -115,7 +116,7 @@ public class RangeOrderedSetValueImpl extends OrderedSetValueImpl
 		return getElements().getLast();
 	}
 
-	public @NonNull OrderedSetValue prepend(@NonNull Value value) throws InvalidValueException {
+	public @NonNull OrderedSetValue prepend(@NonNull Object value) throws InvalidValueException {
 		IntegerRange theElements = getElements();
 		IntegerValue previousValue = theElements.getFirst().subtract(valueFactory.getOne());
 		if (value.equals(previousValue)) {
@@ -123,7 +124,7 @@ public class RangeOrderedSetValueImpl extends OrderedSetValueImpl
 			return new RangeOrderedSetValueImpl(valueFactory, getCollectionType(), range);
 		}
 		else {
-			List<Value> elements = createElements();
+			List<Object> elements = createElements();
 			elements.add(0, value);
 			return valueFactory.createOrderedSetValue(getCollectionType(), elements);
 		}

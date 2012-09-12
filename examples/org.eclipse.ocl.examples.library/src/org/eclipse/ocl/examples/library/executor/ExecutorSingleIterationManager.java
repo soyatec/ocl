@@ -28,19 +28,18 @@ import org.eclipse.ocl.examples.domain.library.AbstractIterationManager;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.osgi.util.NLS;
 
 public class ExecutorSingleIterationManager extends AbstractIterationManager
 {	
 	protected final @NonNull DomainType returnType;
 	protected final @NonNull LibraryBinaryOperation body;
-	private @NonNull Value accumulatorValue;
-	protected final @NonNull Iterator<Value> iteratorValue;
-	private Value currentValue;
+	private @NonNull Object accumulatorValue;
+	protected final @NonNull Iterator<? extends Object> iteratorValue;
+	private Object currentValue;
 	
 	public ExecutorSingleIterationManager(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation body,
-			@NonNull CollectionValue collectionValue, @NonNull Value accumulatorValue) {
+			@NonNull CollectionValue collectionValue, @NonNull Object accumulatorValue) {
 		super(evaluator);
 		this.returnType = returnType;
 		this.body = body;
@@ -55,19 +54,19 @@ public class ExecutorSingleIterationManager extends AbstractIterationManager
 	}
 
 	@Override
-	public @NonNull Value get() {
-		Value currentValue2 = currentValue;
+	public @NonNull Object get() {
+		Object currentValue2 = currentValue;
 		if (currentValue2 == null) {
 			throw new IllegalStateException("cannot get() after iteration complete"); //$NON-NLS-1$
 		}
 		return currentValue2;
 	}
 
-	public @NonNull Value getAccumulatorValue() {
+	public @NonNull Object getAccumulatorValue() {
 		return accumulatorValue;
 	}
 
-	public @NonNull Value evaluateBody() {
+	public @NonNull Object evaluateBody() {
 		try {
 			return body.evaluate(evaluator, returnType, accumulatorValue, get());
 		} catch (InvalidValueException e) {
@@ -84,8 +83,8 @@ public class ExecutorSingleIterationManager extends AbstractIterationManager
 		throw new InvalidEvaluationException(null, boundMessage, null, null, null);
 	}
 
-	public @Nullable Value updateBody() throws InvalidValueException {
-		@NonNull Value newValue = body.evaluate(evaluator, returnType, accumulatorValue, get());
+	public @Nullable Object updateBody() throws InvalidValueException {
+		@NonNull Object newValue = body.evaluate(evaluator, returnType, accumulatorValue, get());
 		this.accumulatorValue = newValue;
 		return null;					// carry on
 	}

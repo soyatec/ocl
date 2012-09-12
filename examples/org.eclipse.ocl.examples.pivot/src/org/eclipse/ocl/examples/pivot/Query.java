@@ -21,9 +21,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
-import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 
 /**
@@ -60,7 +59,7 @@ public interface Query {
 	 * @see #evaluate(List)
 	 * @see #resultType()
 	 */
-	public Value evaluate(Object obj) throws InvalidEvaluationException;
+	public Object evaluate(Object obj) throws InvalidEvaluationException;
 	
 	/**
 	 * Evaluates the query. This method is used when there is no 'self' context

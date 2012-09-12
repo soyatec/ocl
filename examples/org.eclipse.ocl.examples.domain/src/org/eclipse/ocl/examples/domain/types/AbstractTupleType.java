@@ -25,14 +25,18 @@ import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.typeids.Typeid;
+import org.eclipse.ocl.examples.domain.typeids.TypeidManager;
 
 public class AbstractTupleType extends AbstractType implements DomainTupleType
 {
 	private @NonNull List<? extends DomainTypedElement> parts;
+	protected final @NonNull Typeid typeid;
 	
 	public AbstractTupleType(@NonNull DomainStandardLibrary standardLibrary, @NonNull List<? extends DomainTypedElement> parts) {
 		super(standardLibrary, "Tuple");
 		this.parts = parts;
+		this.typeid = TypeidManager.INSTANCE.getOrderedTupleTypeid("Tuple", parts);
 	}
 
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
@@ -55,6 +59,10 @@ public class AbstractTupleType extends AbstractType implements DomainTupleType
 
 	public @NonNull List<? extends DomainTypedElement> getOwnedAttribute() {
 		return parts;
+	}
+
+	public @NonNull Typeid getTypeid() {
+		return typeid;
 	}
 
 	public boolean isEqualTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {

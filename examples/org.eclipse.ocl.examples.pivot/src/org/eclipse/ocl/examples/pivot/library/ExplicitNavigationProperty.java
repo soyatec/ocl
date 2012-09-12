@@ -25,7 +25,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -36,34 +35,28 @@ import org.eclipse.ocl.examples.pivot.Type;
  */
 public class ExplicitNavigationProperty extends AbstractProperty
 {
-	public static final @NonNull ExplicitNavigationProperty INSTANCE = new ExplicitNavigationProperty();
-
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
+	private EStructuralFeature eFeature = null;
+	
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		if (property.isStatic()) {
-			DomainType type = property.getType(); 
-			if (type != null) {
-				return valueFactory.createTypeValue(type);
-			}
-			else {
-				return valueFactory.getNull();
-			}
+		EObject eObject = asNavigableObject(sourceValue); 
+		EStructuralFeature eFeature2 = eFeature;
+		if (eFeature2 == null) {
+			EClass eClass = eObject.eClass();
+			eFeature = eFeature2 = eClass.getEStructuralFeature(property.getName());
 		}
-		EObject eObject = sourceValue.asNavigableObject(); 
-		EClass eClass = eObject.eClass();
-		EStructuralFeature eFeature = eClass.getEStructuralFeature(property.getName());
 		// A specialized property such as CollectionType.elementType is returned from the specialized type
 		// An unspecialized property such as CollectionType.ownedOperation is returned from the unspecialized type
-		if ((eObject instanceof Type) && !eObject.eIsSet(eFeature)) {
+		if ((eObject instanceof Type) && !eObject.eIsSet(eFeature2)) {
 			TemplateableElement rawType = ((Type)eObject).getUnspecializedElement();
 			if (rawType != null) {
 				eObject = rawType;
 			}
 		}
-		if (eFeature != null) {
-			Object eValue = eObject.eGet(eFeature);
+		if (eFeature2 != null) {
+			Object eValue = eObject.eGet(eFeature2);
 			if (eValue != null) {
-				return valueFactory.valueOf(eValue, eFeature);
+				return valueFactory.valueOf(eValue, eFeature2);
 			}
 			
 		}

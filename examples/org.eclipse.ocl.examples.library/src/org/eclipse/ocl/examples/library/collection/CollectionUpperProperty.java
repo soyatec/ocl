@@ -23,8 +23,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
-import org.eclipse.ocl.examples.domain.values.CollectionTypeValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -32,12 +30,11 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class CollectionUpperProperty extends AbstractProperty
 {
-	public static final CollectionUpperProperty INSTANCE = new CollectionUpperProperty();
+	public static final @NonNull CollectionUpperProperty INSTANCE = new CollectionUpperProperty();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		CollectionTypeValue sourceTypeValue = sourceValue.asCollectionTypeValue();
-		DomainCollectionType sourceType = sourceTypeValue.getInstanceType();
+		DomainCollectionType sourceType = asCollectionType(sourceValue);
 		return sourceType.getUpperValue(valueFactory);
 	}
 }

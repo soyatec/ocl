@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010,2011 E.D.Willink and others.
+ * Copyright (c) 2011 E.D.Willink and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,16 +12,11 @@
  *
  * </copyright>
  *
- * $Id: TypeValue.java,v 1.4 2011/04/25 09:49:15 ewillink Exp $
+ * $Id: Bag.java,v 1.2 2011/01/24 20:47:51 ewillink Exp $
  */
-package org.eclipse.ocl.examples.domain.values;
+package org.eclipse.ocl.examples.domain.elements;
 
-import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 
-public interface EnumerationTypeValue extends TypeValue
+public interface DomainInvalidType extends DomainType
 {
-	/**
-	 * @generated NOT
-	 */
-	DomainEnumeration getEnumeration();
 }

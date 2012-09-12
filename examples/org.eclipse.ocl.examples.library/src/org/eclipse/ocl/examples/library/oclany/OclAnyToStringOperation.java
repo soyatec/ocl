@@ -20,7 +20,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -28,11 +27,11 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class OclAnyToStringOperation extends AbstractUnaryOperation
 {
-	public static final OclAnyToStringOperation INSTANCE = new OclAnyToStringOperation();
+	public static final @NonNull OclAnyToStringOperation INSTANCE = new OclAnyToStringOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal) {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal) {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		String string = sourceVal.oclToString();
+		String string = oclToString(sourceVal);
 		return valueFactory.stringValueOf(string);
 	}
 }

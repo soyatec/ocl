@@ -22,18 +22,17 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * CollectionExcludesAllOperation realises the Collection::excludesAll() library operation.
  */
 public class CollectionExcludesAllOperation extends AbstractBinaryOperation
 {
-	public static final CollectionExcludesAllOperation INSTANCE = new CollectionExcludesAllOperation();
+	public static final @NonNull CollectionExcludesAllOperation INSTANCE = new CollectionExcludesAllOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
-		CollectionValue leftCollectionValue = left.asCollectionValue();
-		CollectionValue rightCollectionValue = right.asCollectionValue();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
+		CollectionValue leftCollectionValue = asCollectionValue(left);
+		CollectionValue rightCollectionValue = asCollectionValue(right);
 		return leftCollectionValue.excludesAll(rightCollectionValue);
 	}
 }

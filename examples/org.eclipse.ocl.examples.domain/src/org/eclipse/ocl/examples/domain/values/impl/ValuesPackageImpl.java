@@ -4,17 +4,11 @@ package org.eclipse.ocl.examples.domain.values.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.BooleanValue;
-import org.eclipse.ocl.examples.domain.values.MetaclassValue;
-import org.eclipse.ocl.examples.domain.values.CollectionTypeValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.ElementValue;
 import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
-import org.eclipse.ocl.examples.domain.values.EnumerationTypeValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
@@ -24,7 +18,6 @@ import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
-import org.eclipse.ocl.examples.domain.values.SimpleTypeValue;
 import org.eclipse.ocl.examples.domain.values.StringValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
@@ -67,28 +60,7 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass collectionTypeValueEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass elementValueEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass enumerationLiteralValueEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass enumerationTypeValueEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -103,13 +75,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 	 * @generated
 	 */
 	private EClass invalidValueEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass metaclassValueEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -159,13 +124,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 	 * @generated
 	 */
 	private EClass setValueEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass simpleTypeValueEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -302,35 +260,8 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getCollectionTypeValue() {
-		return collectionTypeValueEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getElementValue() {
-		return elementValueEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getEnumerationLiteralValue() {
 		return enumerationLiteralValueEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEnumerationTypeValue() {
-		return enumerationTypeValueEClass;
 	}
 
 	/**
@@ -349,15 +280,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 	 */
 	public EClass getInvalidValue() {
 		return invalidValueEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getMetaclassValue() {
-		return metaclassValueEClass;
 	}
 
 	/**
@@ -421,15 +343,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 	 */
 	public EClass getSetValue() {
 		return setValueEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getSimpleTypeValue() {
-		return simpleTypeValueEClass;
 	}
 
 	/**
@@ -520,19 +433,11 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 
 		collectionValueEClass = createEClass(COLLECTION_VALUE);
 
-		collectionTypeValueEClass = createEClass(COLLECTION_TYPE_VALUE);
-
-		elementValueEClass = createEClass(ELEMENT_VALUE);
-
 		enumerationLiteralValueEClass = createEClass(ENUMERATION_LITERAL_VALUE);
-
-		enumerationTypeValueEClass = createEClass(ENUMERATION_TYPE_VALUE);
 
 		integerValueEClass = createEClass(INTEGER_VALUE);
 
 		invalidValueEClass = createEClass(INVALID_VALUE);
-
-		metaclassValueEClass = createEClass(METACLASS_VALUE);
 
 		nullValueEClass = createEClass(NULL_VALUE);
 
@@ -547,8 +452,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 		sequenceValueEClass = createEClass(SEQUENCE_VALUE);
 
 		setValueEClass = createEClass(SET_VALUE);
-
-		simpleTypeValueEClass = createEClass(SIMPLE_TYPE_VALUE);
 
 		stringValueEClass = createEClass(STRING_VALUE);
 
@@ -594,13 +497,9 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 		bagValueEClass.getESuperTypes().add(this.getCollectionValue());
 		booleanValueEClass.getESuperTypes().add(this.getValue());
 		collectionValueEClass.getESuperTypes().add(this.getValue());
-		collectionTypeValueEClass.getESuperTypes().add(this.getTypeValue());
-		elementValueEClass.getESuperTypes().add(this.getObjectValue());
-		enumerationLiteralValueEClass.getESuperTypes().add(this.getElementValue());
-		enumerationTypeValueEClass.getESuperTypes().add(this.getTypeValue());
+		enumerationLiteralValueEClass.getESuperTypes().add(this.getValue());
 		integerValueEClass.getESuperTypes().add(this.getNumericValue());
 		invalidValueEClass.getESuperTypes().add(this.getNullValue());
-		metaclassValueEClass.getESuperTypes().add(this.getTypeValue());
 		nullValueEClass.getESuperTypes().add(this.getBooleanValue());
 		nullValueEClass.getESuperTypes().add(this.getIntegerValue());
 		nullValueEClass.getESuperTypes().add(this.getObjectValue());
@@ -608,7 +507,7 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 		nullValueEClass.getESuperTypes().add(this.getRealValue());
 		nullValueEClass.getESuperTypes().add(this.getSetValue());
 		nullValueEClass.getESuperTypes().add(this.getStringValue());
-		nullValueEClass.getESuperTypes().add(this.getTypeValue());
+		nullValueEClass.getESuperTypes().add(this.getTupleValue());
 		nullValueEClass.getESuperTypes().add(this.getUnlimitedValue());
 		numericValueEClass.getESuperTypes().add(this.getValue());
 		objectValueEClass.getESuperTypes().add(this.getValue());
@@ -618,12 +517,11 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 		sequenceValueEClass.getESuperTypes().add(this.getCollectionValue());
 		setValueEClass.getESuperTypes().add(this.getBagValue());
 		setValueEClass.getESuperTypes().add(this.getUniqueCollectionValue());
-		simpleTypeValueEClass.getESuperTypes().add(this.getTypeValue());
 		stringValueEClass.getESuperTypes().add(this.getValue());
 		tupleValueEClass.getESuperTypes().add(this.getValue());
-		typeValueEClass.getESuperTypes().add(this.getElementValue());
+		typeValueEClass.getESuperTypes().add(this.getValue());
 		uniqueCollectionValueEClass.getESuperTypes().add(this.getCollectionValue());
-		unlimitedValueEClass.getESuperTypes().add(this.getNumericValue());
+		unlimitedValueEClass.getESuperTypes().add(this.getIntegerValue());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(bagValueEClass, BagValue.class, "BagValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -632,19 +530,11 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 
 		initEClass(collectionValueEClass, CollectionValue.class, "CollectionValue", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(collectionTypeValueEClass, CollectionTypeValue.class, "CollectionTypeValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(elementValueEClass, ElementValue.class, "ElementValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(enumerationLiteralValueEClass, EnumerationLiteralValue.class, "EnumerationLiteralValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(enumerationTypeValueEClass, EnumerationTypeValue.class, "EnumerationTypeValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(integerValueEClass, IntegerValue.class, "IntegerValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(invalidValueEClass, InvalidValue.class, "InvalidValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(metaclassValueEClass, MetaclassValue.class, "MetaclassValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(nullValueEClass, NullValue.class, "NullValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -660,13 +550,11 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 
 		initEClass(setValueEClass, SetValue.class, "SetValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(simpleTypeValueEClass, SimpleTypeValue.class, "SimpleTypeValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(stringValueEClass, StringValue.class, "StringValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(tupleValueEClass, TupleValue.class, "TupleValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(typeValueEClass, TypeValue.class, "TypeValue", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(typeValueEClass, TypeValue.class, "TypeValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(uniqueCollectionValueEClass, UniqueCollectionValue.class, "UniqueCollectionValue", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

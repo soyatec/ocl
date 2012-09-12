@@ -35,7 +35,7 @@ public class JavaObjectValueImpl extends ObjectValueImpl
 	}
 
 	@Override
-	public Object asObject() {
+	public @NonNull Object asObject() {
 		return object;
 	}
 

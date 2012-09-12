@@ -24,7 +24,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.BooleanValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -40,17 +39,17 @@ public class OneIteration extends AbstractIteration
 	}
 
 	@Override
-    protected @Nullable Value updateAccumulator(@NonNull DomainIterationManager iterationManager) {
-		Value bodyVal = iterationManager.evaluateBody();		
-		if (bodyVal.isUndefined()) {
+    protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
+		Object bodyVal = iterationManager.evaluateBody();		
+		if (isUndefined(bodyVal)) {
 			return iterationManager.throwInvalidEvaluation(EvaluatorMessages.UndefinedBody, "one"); 	// Null body is invalid //$NON-NLS-1$
 		}
-		else if (bodyVal.isFalse()) {
+		else if (isFalse(bodyVal)) {
 			return null;									// Carry on for nothing found
 		}
 		else {
-			Value accumulatorValue = iterationManager.getAccumulatorValue();
-			if (accumulatorValue.isTrue()) {
+			Object accumulatorValue = iterationManager.getAccumulatorValue();
+			if (isTrue(accumulatorValue)) {
 				return iterationManager.getValueFactory().getFalse();				// Abort after second find
 			}
 			else {

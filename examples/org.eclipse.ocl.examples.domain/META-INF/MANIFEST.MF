@@ -13,10 +13,12 @@ Export-Package: org.eclipse.ocl.examples.domain.elements,
  org.eclipse.ocl.examples.domain.evaluation,
  org.eclipse.ocl.examples.domain.library,
  org.eclipse.ocl.examples.domain.messages,
+ org.eclipse.ocl.examples.domain.typeids,
  org.eclipse.ocl.examples.domain.types,
  org.eclipse.ocl.examples.domain.utilities,
  org.eclipse.ocl.examples.domain.validation,
  org.eclipse.ocl.examples.domain.values,
- org.eclipse.ocl.examples.domain.values.impl
+ org.eclipse.ocl.examples.domain.values.impl,
+ org.eclipse.ocl.examples.domain.values.util
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin

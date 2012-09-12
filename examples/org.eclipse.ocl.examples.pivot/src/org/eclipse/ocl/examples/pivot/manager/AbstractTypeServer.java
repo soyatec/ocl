@@ -38,6 +38,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
+import org.eclipse.ocl.examples.domain.typeids.Typeid;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ReflectiveType;
@@ -152,10 +153,14 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 	 */
 	private @Nullable Map<String, List<DomainProperty>> name2properties = null;
 	
+	protected final @NonNull Typeid typeid;
+	
+
 	protected AbstractTypeServer(@NonNull PackageServer packageServer, @NonNull DomainType domainType) {
 		super(DomainUtil.nonNullModel(domainType.getName()), packageServer, computeFlags(domainType));
 		this.packageServer = packageServer;
 		this.packageManager = packageServer.getPackageManager();
+		this.typeid = domainType.getTypeid();
 	}
 
 	void addedMemberOperation(@NonNull DomainOperation pivotOperation) {
@@ -528,6 +533,10 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 
 	public @NonNull DomainTypeParameters getTypeParameters() {
 		return DomainTypeParameters.EMPTY_LIST;
+	}
+	
+	public final @NonNull Typeid getTypeid() {
+		return typeid;
 	}
 
 	private @NonNull Map<String, Map<DomainParameterTypes, List<DomainOperation>>> initMemberOperations() {

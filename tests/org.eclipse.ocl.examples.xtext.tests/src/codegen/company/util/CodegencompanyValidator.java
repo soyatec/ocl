@@ -6,6 +6,7 @@
  */
 package codegen.company.util;
 
+import codegen.company.*;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;

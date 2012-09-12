@@ -21,16 +21,15 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * CollectionAsSetOperation realises the Collection::asSet() library operation.
  */
 public class CollectionAsSetOperation extends AbstractUnaryOperation
 {
-	public static final CollectionAsSetOperation INSTANCE = new CollectionAsSetOperation();
+	public static final @NonNull CollectionAsSetOperation INSTANCE = new CollectionAsSetOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value argument) throws InvalidValueException {
-		return argument.asSetValue();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object argument) throws InvalidValueException {
+		return asSetValue(argument);
 	}
 }

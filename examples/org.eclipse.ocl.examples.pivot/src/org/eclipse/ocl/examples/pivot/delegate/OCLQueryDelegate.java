@@ -28,9 +28,10 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
@@ -107,8 +108,8 @@ public class OCLQueryDelegate implements QueryDelegate
 			OCL ocl = delegateDomain.getOCL();
 			MetaModelManager metaModelManager = ocl.getMetaModelManager();
 			ValueFactory valueFactory = metaModelManager.getValueFactory();
-			Value targetValue = valueFactory.valueOf(target);
-			DomainType targetType = targetValue.getType();
+			Object targetValue = valueFactory.valueOf(target);
+			DomainType targetType = valueFactory.typeOf(targetValue);
 			DomainType requiredType = nonNullSpecification.getContextVariable().getType();
 			if ((requiredType == null) || !targetType.conformsTo(metaModelManager, requiredType)) {
 				String message = DomainUtil.bind(OCLMessages.WrongContextClassifier_ERROR_, targetType, requiredType);
@@ -130,8 +131,8 @@ public class OCLQueryDelegate implements QueryDelegate
 					String message = DomainUtil.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, PivotUtil.getBody(nonNullSpecification));
 					throw new OCLDelegateException(message);
 				}
-				Value value = valueFactory.valueOf(object);
-				targetType = value.getType();
+				Object value = valueFactory.valueOf(object);
+				targetType = valueFactory.typeOf(value);
 				requiredType = DomainUtil.nonNullModel(parameterVariable.getType());
 				if (!targetType.conformsTo(metaModelManager, requiredType)) {
 					String message = DomainUtil.bind(OCLMessages.MismatchedArgumentType_ERROR_, name, targetType, requiredType);
@@ -139,7 +140,7 @@ public class OCLQueryDelegate implements QueryDelegate
 				}
 				env.add(parameterVariable, value);
 			}
-			Value result = query.evaluate(target);
+			Object result = query.evaluate(target);
 //			if (result.isInvalid()) {
 //				String message = DomainUtil.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, getOperationName());
 //				throw new OCLDelegateException(message);
@@ -149,7 +150,11 @@ public class OCLQueryDelegate implements QueryDelegate
 	//			throw new OCLDelegateException(message);
 	//		}
 	//		return converter.convert(ocl, result);
-			return result.asEcoreObject();
+			return ValuesUtil.asEcoreObject(result);
+		}
+		catch (InvalidValueException e) {
+			String message = DomainUtil.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, PivotUtil.getBody(specification));
+			throw new InvocationTargetException(new OCLDelegateException(message));
 		}
 		catch (DomainException e) {
 			String message = DomainUtil.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, PivotUtil.getBody(specification));

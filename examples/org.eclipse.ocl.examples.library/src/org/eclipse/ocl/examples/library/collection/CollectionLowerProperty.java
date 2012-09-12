@@ -23,8 +23,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
-import org.eclipse.ocl.examples.domain.values.CollectionTypeValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -32,12 +30,11 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class CollectionLowerProperty extends AbstractProperty
 {
-	public static final CollectionLowerProperty INSTANCE = new CollectionLowerProperty();
+	public static final @NonNull CollectionLowerProperty INSTANCE = new CollectionLowerProperty();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		CollectionTypeValue sourceCollectionTypeValue = sourceValue.asCollectionTypeValue();
-		DomainCollectionType sourceType = sourceCollectionTypeValue.getInstanceType();
+		DomainCollectionType sourceType = asCollectionType(sourceValue);
 		return sourceType.getLowerValue(valueFactory);
 	}
 }

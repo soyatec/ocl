@@ -28,6 +28,7 @@ import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * @generated NOT
@@ -39,7 +40,7 @@ public class RangeSequenceValueImpl extends SequenceValueImpl
 	}
 
 	@Override
-	public @NonNull SequenceValue append(@NonNull Value value) throws InvalidValueException {
+	public @NonNull SequenceValue append(@NonNull Object value) throws InvalidValueException {
 		IntegerRange theElements = getElements();
 		IntegerValue nextValue = theElements.getLast().add(valueFactory.getOne());
 		if (value.equals(nextValue)) {
@@ -47,16 +48,16 @@ public class RangeSequenceValueImpl extends SequenceValueImpl
 			return new RangeSequenceValueImpl(valueFactory, getCollectionType(), range);
 		}
 		else {
-			List<Value> elements = createElements();
+			List<Object> elements = createElements();
 			elements.add(value);
 			return valueFactory.createSequenceValue(getCollectionType(), elements);
 		}
 	}
 
 	@Override
-	public @NonNull IntegerValue count(@NonNull Value value) throws InvalidValueException {
-		IntegerValue integerValue = value.isIntegerValue();
-		if ((integerValue != null) && !integerValue.isUndefined()) {
+	public @NonNull IntegerValue count(@NonNull Object value) throws InvalidValueException {
+		IntegerValue integerValue = ValuesUtil.isIntegerValue(value);
+		if (integerValue != null) {
 			if (elements.contains(integerValue)) {
 				return valueFactory.getOne();
 			}
@@ -64,9 +65,9 @@ public class RangeSequenceValueImpl extends SequenceValueImpl
 		return valueFactory.getZero();
 	}
 
-	protected @NonNull List<Value> createElements() {
-		List<Value> elements = new ArrayList<Value>(intSize());
-		for (Value value : this) {
+	protected @NonNull List<Object> createElements() {
+		List<Object> elements = new ArrayList<Object>(intSize());
+		for (Object value : iterable()) {
 			elements.add(value);
 		}
 		return elements;
@@ -99,7 +100,7 @@ public class RangeSequenceValueImpl extends SequenceValueImpl
 	}
 
 	@Override
-	public @NonNull SequenceValue including(@NonNull Value value) throws InvalidValueException {
+	public @NonNull SequenceValue including(@NonNull Object value) throws InvalidValueException {
 		return append(value);
 	}
 
@@ -109,7 +110,7 @@ public class RangeSequenceValueImpl extends SequenceValueImpl
 	}
 
 	@Override
-	public @NonNull SequenceValue prepend(@NonNull Value value) throws InvalidValueException {
+	public @NonNull SequenceValue prepend(@NonNull Object value) throws InvalidValueException {
 		IntegerRange theElements = getElements();
 		IntegerValue previousValue = theElements.getFirst().subtract(valueFactory.getOne());
 		if (value.equals(previousValue)) {
@@ -117,7 +118,7 @@ public class RangeSequenceValueImpl extends SequenceValueImpl
 			return new RangeSequenceValueImpl(valueFactory, getCollectionType(), range);
 		}
 		else {
-			List<Value> elements = createElements();
+			List<Object> elements = createElements();
 			elements.add(0, value);
 			return valueFactory.createSequenceValue(getCollectionType(), elements);
 		}

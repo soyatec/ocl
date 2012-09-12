@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorProperty;
@@ -53,7 +52,7 @@ public class IfExpBodies
 		/*
 		self.condition.type = Boolean
 		*/
-		public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Value self) throws InvalidValueException {
+		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Object self) throws InvalidValueException {
 			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
 			final @NonNull DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
@@ -64,16 +63,16 @@ public class IfExpBodies
 			final @NonNull ExecutorType T_pivot__OCLExpression = PivotTables.Types._OCLExpression;
 			final @NonNull ExecutorProperty P_IfExp_condition = PivotTables.Properties._IfExp__condition;
 			final @NonNull LibraryProperty IP_IfExp_condition = P_IfExp_condition.getImplementation();
-			final @NonNull Value T_Metaclass_Boolean_ = valueFactory.createTypeValue(OCLstdlibTables.Types._Boolean);
+			final @NonNull Object T_Metaclass_Boolean_ = valueFactory.createTypeValue(OCLstdlibTables.Types._Boolean);
 			
 			
-			Value A_symbol_ = IP_IfExp_condition.evaluate(evaluator, T_pivot__OCLExpression, self, P_IfExp_condition);
+			Object A_symbol_ = IP_IfExp_condition.evaluate(evaluator, T_pivot__OCLExpression, self, P_IfExp_condition);
 			
-			Value A_symbol__1 = IP_TypedElement_type.evaluate(evaluator, T_Type, A_symbol_, P_TypedElement_type);
+			Object A_symbol__1 = IP_TypedElement_type.evaluate(evaluator, T_Type, A_symbol_, P_TypedElement_type);
 			
 			DomainType static_A_symbol__2 = valueFactory.typeOf(A_symbol__1, T_Metaclass_Boolean_);
 			LibraryBinaryOperation dynamic_A_symbol__2 = (LibraryBinaryOperation)static_A_symbol__2.lookupImplementation(standardLibrary, O_OclAny__eq_);
-			Value A_symbol__2 = dynamic_A_symbol__2.evaluate(evaluator, T_Boolean, A_symbol__1, T_Metaclass_Boolean_);
+			Object A_symbol__2 = dynamic_A_symbol__2.evaluate(evaluator, T_Boolean, A_symbol__1, T_Metaclass_Boolean_);
 			return A_symbol__2;
 		}
 	}

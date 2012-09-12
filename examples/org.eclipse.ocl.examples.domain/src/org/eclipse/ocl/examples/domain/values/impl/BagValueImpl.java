@@ -33,9 +33,9 @@ import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
@@ -54,9 +54,17 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 		return ValuesPackage.Literals.BAG_VALUE;
 	}
 
-	private static @NonNull Bag<Value> createValue(@NonNull Iterable<? extends Value> elements) {
-		Bag<Value> result = new BagImpl<Value>();
-		for (Value element : elements) {
+	private static @NonNull Bag<Object> createValue(Object... elements) {
+		Bag<Object> result = new BagImpl<Object>();
+		for (Object element : elements) {
+			result.add(element);
+		}
+		return result;
+	}
+
+	private static @NonNull Bag<Object> createValue(@NonNull Iterable<? extends Object> elements) {
+		Bag<Object> result = new BagImpl<Object>();
+		for (Object element : elements) {
 			result.add(element);
 		}
 		return result;
@@ -65,18 +73,18 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 	public static @NonNull BagValue intersection(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull CollectionValue left, @NonNull CollectionValue right) throws InvalidValueException
     {
     	assert !left.isUndefined() && !right.isUndefined();
-		Collection<Value> leftElements = left.asCollection();
-        Collection<Value> rightElements = right.asCollection();
+		Collection<? extends Object> leftElements = left.asCollection();
+        Collection<? extends Object> rightElements = right.asCollection();
         int leftSize = leftElements.size();
         int rightSize = rightElements.size();
     	if ((leftSize == 0) || (rightSize == 0)) {
             return new BagValueImpl(valueFactory, type);
         }    	
-        Bag<Value> results = new BagImpl<Value>();
+        Bag<Object> results = new BagImpl<Object>();
         // loop over the smaller collection and add only elements
         // that are in the larger collection
-        Set<Value> minElements = new HashSet<Value>(leftSize < rightSize ? leftElements : rightElements);
-        for (Value e : minElements) {
+        Set<Object> minElements = new HashSet<Object>(leftSize < rightSize ? leftElements : rightElements);
+        for (Object e : minElements) {
         	if (e != null) {
         		IntegerValue leftCount = left.count(e);
             	IntegerValue rightCount = right.count(e);
@@ -90,8 +98,8 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 
     public static @NonNull BagValue union(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull CollectionValue left, @NonNull CollectionValue right) throws InvalidValueException {
     	assert !left.isUndefined() && !right.isUndefined();
-		Collection<Value> leftElements = left.asCollection();
-        Collection<Value> rightElements = right.asCollection();
+		Collection<? extends Object> leftElements = left.asCollection();
+        Collection<? extends Object> rightElements = right.asCollection();
     	if (leftElements.isEmpty()) {
             return right.asBagValue();
         }
@@ -99,7 +107,7 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
             return left.asBagValue();
         }    	
     	else {
-			Bag<Value> result = new BagImpl<Value>(leftElements);
+			Bag<Object> result = new BagImpl<Object>(leftElements);
 			result.addAll(rightElements);
     		return new BagValueImpl(valueFactory, type, result);
         } 
@@ -111,21 +119,17 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 			super(valueFactory, type);
 		}
 
-		public boolean add(@NonNull Value value) {
-			return elements.add(value);			
+		@SuppressWarnings("unchecked")
+		public boolean add(@NonNull Object value) {
+			return ((Collection<Object>)elements).add(value);			
 		}		
 	}
 	
-	public BagValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, Value... elements) {
-		super(valueFactory, type, new BagImpl<Value>());
-		if (elements != null) {
-			for (Value element : elements) {
-				this.elements.add(element);
-			}
-		}
+	public BagValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, Object... elements) {
+		super(valueFactory, type, createValue(elements));
 	}
 
-	public BagValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Iterable<? extends Value> elements) {
+	public BagValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Iterable<? extends Object> elements) {
 		super(valueFactory, type, createValue(elements));
 	}
 
@@ -133,7 +137,7 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 //		this(c.asCollection());
 //	}
 
-	public BagValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Bag<Value> elements) {
+	public BagValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Bag<? extends Object> elements) {
 		super(valueFactory, type, elements);
 	}
 
@@ -150,9 +154,9 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 		return elements.equals(((BagValueImpl)obj).elements);
 	}
 
-	public @NonNull BagValue excluding(@NonNull Value value) {
-		Bag<Value> result = new BagImpl<Value>();
-		for (Value element : elements) {
+	public @NonNull BagValue excluding(@NonNull Object value) {
+		Bag<Object> result = new BagImpl<Object>();
+		for (Object element : elements) {
 			if (!element.equals(value)) {
 				result.add(element);
 			}
@@ -166,7 +170,7 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 	}
 
     public @NonNull BagValue flatten() throws InvalidValueException {
-    	Bag<Value> flattened = new BagImpl<Value>();
+    	Bag<Object> flattened = new BagImpl<Object>();
     	if (flatten(flattened)) {
     		return new BagValueImpl(valueFactory, getCollectionType(), flattened);
     	}
@@ -176,25 +180,25 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
     }
     
 	@Override
-	protected @NonNull Bag<Value> getElements() {
-		return (Bag<Value>) elements;
+	protected @NonNull Bag<? extends Object> getElements() {
+		return (Bag<? extends Object>) elements;
 	}
 
 	public @NonNull String getKind() {
 	    return "Bag";
 	}
 
-	public @NonNull BagValue including(@NonNull Value value) throws InvalidValueException {
-		if (value.isInvalid()) {
+	public @NonNull BagValue including(@NonNull Object value) throws InvalidValueException {
+		if (value instanceof InvalidValue) {
 			valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidSource, "including");
 		}
-		Bag<Value> result = new BagImpl<Value>(elements);
+		Bag<Object> result = new BagImpl<Object>(elements);
 		result.add(value);
 		return new BagValueImpl(valueFactory, getCollectionType(), result);
 	}
 	   
-    public @NonNull SequenceValue sort(@NonNull Comparator<Value> comparator) {
-    	List<Value> values = new ArrayList<Value>(elements);
+    public @NonNull SequenceValue sort(@NonNull Comparator<Object> comparator) {
+    	List<Object> values = new ArrayList<Object>(elements);
     	Collections.sort(values, comparator);
     	return new SparseSequenceValueImpl(valueFactory, getSequenceType(), values);
     }

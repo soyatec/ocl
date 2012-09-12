@@ -22,17 +22,16 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * CollectionCountOperation realises the Collection::count() library operation.
  */
 public class CollectionCountOperation extends AbstractBinaryOperation
 {
-	public static final CollectionCountOperation INSTANCE = new CollectionCountOperation();
+	public static final @NonNull CollectionCountOperation INSTANCE = new CollectionCountOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
-		CollectionValue leftCollectionValue = left.asCollectionValue();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
+		CollectionValue leftCollectionValue = asCollectionValue(left);
 		return leftCollectionValue.count(right);
 	}
 }

@@ -22,17 +22,16 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * OrderedCollectionReverseOperation realises the OrderedCollection::reverse() library operation.
  */
 public class OrderedCollectionReverseOperation extends AbstractUnaryOperation
 {
-	public static final OrderedCollectionReverseOperation INSTANCE = new OrderedCollectionReverseOperation();
+	public static final @NonNull OrderedCollectionReverseOperation INSTANCE = new OrderedCollectionReverseOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value argument) throws InvalidValueException {
-		SequenceValue orderedCollectionValue = argument.asSequenceValue();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object argument) throws InvalidValueException {
+		SequenceValue orderedCollectionValue = asSequenceValue(argument);
 		return orderedCollectionValue.reverse();
 	}
 }

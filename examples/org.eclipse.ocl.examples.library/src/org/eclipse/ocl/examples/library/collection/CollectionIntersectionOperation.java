@@ -22,18 +22,17 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * CollectionIntersectionOperation realises the Collection::intersection() library operation.
  */
 public class CollectionIntersectionOperation extends AbstractBinaryOperation
 {
-	public static final CollectionIntersectionOperation INSTANCE = new CollectionIntersectionOperation();
+	public static final @NonNull CollectionIntersectionOperation INSTANCE = new CollectionIntersectionOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
-		CollectionValue leftCollectionValue = left.asCollectionValue();
-		CollectionValue rightCollectionValue = right.asCollectionValue();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
+		CollectionValue leftCollectionValue = asCollectionValue(left);
+		CollectionValue rightCollectionValue = asCollectionValue(right);
 		return leftCollectionValue.intersection(rightCollectionValue);
 	}
 }

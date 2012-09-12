@@ -20,6 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.typeids.Typeid;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
@@ -34,7 +35,7 @@ public class DomainReflectivePackage extends ReflectivePackage
 	protected final @NonNull DomainPackage domainPackage;
 
 	public DomainReflectivePackage(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainPackage domainPackage) {
-		super(DomainUtil.nonNullPivot(domainPackage.getName()), domainPackage.getNsPrefix(), domainPackage.getNsURI());
+		super(DomainUtil.nonNullPivot(domainPackage.getName()), domainPackage.getNsPrefix(), domainPackage.getNsURI(), domainPackage.getTypeid());
 		this.standardLibrary = standardLibrary;
 		this.domainPackage = domainPackage;
 	}
@@ -60,5 +61,10 @@ public class DomainReflectivePackage extends ReflectivePackage
 	@Override
 	protected @NonNull DomainStandardLibrary getStandardLibrary() {
 		return standardLibrary;
+	}
+
+	@Override
+	public @NonNull Typeid getTypeid() {
+		return domainPackage.getTypeid();
 	}
 }

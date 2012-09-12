@@ -27,16 +27,16 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.Enumerator;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
-import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
@@ -47,12 +47,12 @@ import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.types.InvalidTypeImpl;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.ElementValue;
 import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -104,7 +104,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
 	}
 
     public @NonNull BagValue createBagOf(Object... objects) {
-    	Bag<Value> collection = new BagImpl<Value>();
+    	Bag<Object> collection = new BagImpl<Object>();
 		for (Object object : objects) {
 		   	if (object != null) {
  				collection.add(valueOf(object));
@@ -115,7 +115,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
     }
 
     public @NonNull BagValue createBagOf(@NonNull Iterable<?> objects) {
-    	Bag<Value> collection = new BagImpl<Value>();
+    	Bag<Object> collection = new BagImpl<Object>();
 		for (Object object : objects) {
 		   	if (object != null) {
  				collection.add(valueOf(object));
@@ -125,19 +125,19 @@ public abstract class ValueFactoryImpl implements ValueFactory
     	return createBagValue(standardLibrary.getBagType(elementType, null, null), collection);
     }
 	
-	public @NonNull BagValue createBagValue(@NonNull DomainCollectionType type, Value... values) {
+	public @NonNull BagValue createBagValue(@NonNull DomainCollectionType type, Object... values) {
 		return new BagValueImpl(this, type, values);
 	}
 
-	public @NonNull BagValue createBagValue(@NonNull DomainCollectionType type, @NonNull Bag<Value> values) {
+	public @NonNull BagValue createBagValue(@NonNull DomainCollectionType type, @NonNull Bag<? extends Object> values) {
 		return new BagValueImpl(this, type, values);
 	}
 
-	public @NonNull BagValue createBagValue(@NonNull DomainCollectionType type, @NonNull Iterable<? extends Value> values) {
+	public @NonNull BagValue createBagValue(@NonNull DomainCollectionType type, @NonNull Iterable<? extends Object> values) {
 		return new BagValueImpl(this, type, values);
 	}
 
-	public @NonNull BagValue createBagValue(Value... values) {
+	public @NonNull BagValue createBagValue(Object... values) {
 		DomainType elementType = getElementType(values);
 		DomainCollectionType collectionType = standardLibrary.getBagType(elementType, null, null);
 		return new BagValueImpl(this, collectionType, values);
@@ -183,15 +183,15 @@ public abstract class ValueFactoryImpl implements ValueFactory
 	 * @param values the required collection contents
 	 * @return the new collection
 	 */
-	public @NonNull CollectionValue createCollectionValue(boolean isOrdered, boolean isUnique, Value... values) {
+	public @NonNull CollectionValue createCollectionValue(boolean isOrdered, boolean isUnique, Object... values) {
 		return createCollectionValue(isOrdered, isUnique, getElementType(values), values);
 	}
 
-	public @NonNull CollectionValue createCollectionValue(boolean isOrdered, boolean isUnique, @NonNull Collection<Value> values) {
+	public @NonNull CollectionValue createCollectionValue(boolean isOrdered, boolean isUnique, @NonNull Collection<? extends Object> values) {
 		return createCollectionValue(isOrdered, isUnique, getElementType(values), values);
 	}
 
-	public @NonNull CollectionValue createCollectionValue(boolean isOrdered, boolean isUnique, @NonNull DomainType elementType, Value... values) {
+	public @NonNull CollectionValue createCollectionValue(boolean isOrdered, boolean isUnique, @NonNull DomainType elementType, Object... values) {
 		if (isOrdered) {
 			if (isUnique) {
 				return createOrderedSetValue(standardLibrary.getOrderedSetType(elementType, null, null), values);
@@ -218,7 +218,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
 	 * @param values the required collection contents
 	 * @return the new collection
 	 */
-	public @NonNull CollectionValue createCollectionValue(boolean isOrdered, boolean isUnique, @NonNull DomainType elementType, @NonNull Collection<Value> values) {
+	public @NonNull CollectionValue createCollectionValue(boolean isOrdered, boolean isUnique, @NonNull DomainType elementType, @NonNull Collection<? extends Object> values) {
 		if (isOrdered) {
 			if (isUnique) {
 				return createOrderedSetValue(standardLibrary.getOrderedSetType(elementType, null, null), values);
@@ -235,31 +235,6 @@ public abstract class ValueFactoryImpl implements ValueFactory
 				return createBagValue(standardLibrary.getBagType(elementType, null, null), values);
 			}
 		}
-	}
-
-	public @NonNull ObjectValue createEObjectValue(@NonNull EObject eObject) {
-		if (eObject instanceof DomainElement) {
-			if (eObject instanceof DomainType) {
-				return createTypeValue((DomainType) eObject);
-			}
-			else if (eObject instanceof DomainEnumerationLiteral) {
-				return createEnumerationLiteralValue((DomainEnumerationLiteral) eObject);
-			}
-			else {
-				ElementValue elementValue = createElementValue((DomainElement) eObject);
-				if (elementValue != null) {
-					return elementValue;
-				}
-			}
-		}
-		else if (eObject instanceof EEnumLiteral) {
-			return createEnumerationLiteralValue((EEnumLiteral) eObject);
-		}
-		return new EObjectValueImpl(this, eObject);
-	}
-
-	public @Nullable ElementValue createElementValue(@NonNull DomainElement element) {
-		return new ElementValueImpl(this, element);
 	}
 
 	public @NonNull EnumerationLiteralValue createEnumerationLiteralValue(@NonNull DomainEnumerationLiteral element) {
@@ -295,7 +270,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
 	}
 
     public @NonNull OrderedSetValue createOrderedSetOf(@NonNull Iterable<?> objects) {
-    	OrderedSet<Value> collection = new OrderedSetImpl<Value>();
+    	OrderedSet<Object> collection = new OrderedSetImpl<Object>();
 		for (Object object : objects) {
 		   	if (object != null) {
  				collection.add(valueOf(object));
@@ -306,7 +281,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
     }
 
     public @NonNull OrderedSetValue createOrderedSetOf(Object... objects) {
-    	OrderedSet<Value> collection = new OrderedSetImpl<Value>();
+    	OrderedSet<Object> collection = new OrderedSetImpl<Object>();
 		for (Object object : objects) {
 		   	if (object != null) {
  				collection.add(valueOf(object));
@@ -320,26 +295,26 @@ public abstract class ValueFactoryImpl implements ValueFactory
 		return new RangeOrderedSetValueImpl(this, type, range);
 	}
 
-	public @NonNull OrderedSetValue createOrderedSetValue(@NonNull DomainCollectionType type, Value... values) {
+	public @NonNull OrderedSetValue createOrderedSetValue(@NonNull DomainCollectionType type, Object... values) {
 		return new SparseOrderedSetValueImpl(this, type, values);
 	}
 
-	public @NonNull OrderedSetValue createOrderedSetValue(@NonNull DomainCollectionType type, @NonNull OrderedSet<Value> values) {
+	public @NonNull OrderedSetValue createOrderedSetValue(@NonNull DomainCollectionType type, @NonNull OrderedSet<? extends Object> values) {
 		return new SparseOrderedSetValueImpl(this, type, values);
 	}
 
-	public @NonNull OrderedSetValue createOrderedSetValue(@NonNull DomainCollectionType type, @NonNull Iterable<? extends Value> values) {
+	public @NonNull OrderedSetValue createOrderedSetValue(@NonNull DomainCollectionType type, @NonNull Iterable<? extends Object> values) {
 		return new SparseOrderedSetValueImpl(this, type, values);
 	}
 
-	public @NonNull OrderedSetValue createOrderedSetValue(Value... values) {
+	public @NonNull OrderedSetValue createOrderedSetValue(Object... values) {
 		DomainType elementType = getElementType(values);
 		DomainCollectionType collectionType = standardLibrary.getOrderedSetType(elementType, null, null);
 		return new SparseOrderedSetValueImpl(this, collectionType, values);
 	}
 
     public @NonNull SequenceValue createSequenceOf(Object... objects) {
-    	List<Value> collection = new ArrayList<Value>();
+    	List<Object> collection = new ArrayList<Object>();
 		for (Object object : objects) {
 		   	if (object != null) {
  				collection.add(valueOf(object));
@@ -350,7 +325,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
     }
 
     public @NonNull SequenceValue createSequenceOf(@NonNull Iterable<?> objects) {
-    	List<Value> collection = new ArrayList<Value>();
+    	List<Object> collection = new ArrayList<Object>();
 		for (Object object : objects) {
 		   	if (object != null) {
 		   		collection.add(valueOf(object));
@@ -376,26 +351,26 @@ public abstract class ValueFactoryImpl implements ValueFactory
 		return new RangeSequenceValueImpl(this, type, range);
 	}
 
-	public @NonNull SequenceValue createSequenceValue(@NonNull DomainCollectionType type, Value... values) {
+	public @NonNull SequenceValue createSequenceValue(@NonNull DomainCollectionType type, Object... values) {
 		return new SparseSequenceValueImpl(this, type, values);
 	}
 
-	public @NonNull SequenceValue createSequenceValue(@NonNull DomainCollectionType type, @NonNull List<Value> values) {
+	public @NonNull SequenceValue createSequenceValue(@NonNull DomainCollectionType type, @NonNull List<? extends Object> values) {
 		return new SparseSequenceValueImpl(this, type, values);
 	}
 
-	public @NonNull SequenceValue createSequenceValue(@NonNull DomainCollectionType type, @NonNull Iterable<? extends Value> values) {
+	public @NonNull SequenceValue createSequenceValue(@NonNull DomainCollectionType type, @NonNull Iterable<? extends Object> values) {
 		return new SparseSequenceValueImpl(this, type, values);
 	}
 
-	public @NonNull SequenceValue createSequenceValue(Value... values) {
+	public @NonNull SequenceValue createSequenceValue(Object... values) {
 		DomainType elementType = getElementType(values);
 		DomainCollectionType collectionType = standardLibrary.getSequenceType(elementType, null, null);
 		return new SparseSequenceValueImpl(this, collectionType, values);
 	}
 
     public @NonNull SetValue createSetOf(Object... objects) {
-    	Set<Value> collection = new HashSet<Value>();
+    	Set<Object> collection = new HashSet<Object>();
 		for (Object object : objects) {
 		   	if (object != null) {
  				collection.add(valueOf(object));
@@ -406,7 +381,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
     }
 
     public @NonNull SetValue createSetOf(@NonNull Iterable<?> objects) {
-    	Set<Value> collection = new HashSet<Value>();
+    	Set<Object> collection = new HashSet<Object>();
 		for (Object object : objects) {
 		   	if (object != null) {
  				collection.add(valueOf(object));
@@ -416,30 +391,30 @@ public abstract class ValueFactoryImpl implements ValueFactory
     	return createSetValue(standardLibrary.getSetType(elementType, null, null), collection);
     }
 
-	public @NonNull SetValue createSetValue(@NonNull DomainCollectionType type, Value... values) {
+	public @NonNull SetValue createSetValue(@NonNull DomainCollectionType type, Object... values) {
 		return new SetValueImpl(this, type, values);
 	}
 
-	public @NonNull SetValue createSetValue(@NonNull DomainCollectionType type, @NonNull Set<Value> values) {
+	public @NonNull SetValue createSetValue(@NonNull DomainCollectionType type, @NonNull Set<? extends Object> values) {
 		return new SetValueImpl(this, type, values);
 	}
 
-	public @NonNull SetValue createSetValue(@NonNull DomainCollectionType type, @NonNull Iterable<? extends Value> values) {
+	public @NonNull SetValue createSetValue(@NonNull DomainCollectionType type, @NonNull Iterable<? extends Object> values) {
 		return new SetValueImpl(this, type, values);
 	}
 
-	public @NonNull SetValue createSetValue(Value... values) {
+	public @NonNull SetValue createSetValue(Object... values) {
 		DomainType elementType = getElementType(values);
 		DomainCollectionType collectionType = standardLibrary.getSetType(elementType, null, null);
 		return new SetValueImpl(this, collectionType, values);
 	}
 
-	public @NonNull TupleValue createTupleValue(@NonNull DomainTupleType type, @NonNull Map<? extends DomainTypedElement, Value> values) {
+	public @NonNull TupleValue createTupleValue(@NonNull DomainTupleType type, @NonNull Map<? extends DomainTypedElement, Object> values) {
 		return new TupleValueImpl(this, type, values);
 	}
 
 	public @NonNull TypeValue createTypeValue(@NonNull DomainType type) {
-		if (type instanceof DomainMetaclass) {
+/*		if (type instanceof DomainMetaclass) {
 			return new MetaclassValueImpl(this, (DomainMetaclass)type);
 		}
 		else if (type instanceof DomainCollectionType) {
@@ -450,7 +425,8 @@ public abstract class ValueFactoryImpl implements ValueFactory
 		}
 		else {
 			return new SimpleTypeValueImpl(this, type);
-		}
+		} */
+		return new TypeValueImpl(this, type);
 	}
 
 	public void dispose() {
@@ -462,23 +438,25 @@ public abstract class ValueFactoryImpl implements ValueFactory
 		unlimitedValue = null; 
 		zeroValue = null;
 	}
+
+	public final @NonNull Object getEcoreValueOf(@NonNull Value value) throws InvalidValueException {
+		return value.asEcoreObject();
+	}
 	
-    public @NonNull DomainType getElementType(Value... values) {
+    public @NonNull DomainType getElementType(Object... values) {
     	DomainType elementType = standardLibrary.getOclVoidType();
-    	for (Value value : values) {
-    		elementType = elementType.getCommonType(standardLibrary, value.getType());
+    	for (Object value : values) {
+    		assert value != null;
+    		elementType = elementType.getCommonType(standardLibrary, typeOf(value));
     	}
      	return elementType;
     }
 
-	public final Object getEcoreValueOf(@NonNull Value value) {
-		return value.asEcoreObject();
-	}
-
-    public @NonNull DomainType getElementType(@NonNull Iterable<Value> values) {
+    public @NonNull DomainType getElementType(@NonNull Iterable<? extends Object> values) {
     	DomainType elementType = standardLibrary.getOclVoidType();
-    	for (Value value : values) {
-    		elementType = elementType.getCommonType(standardLibrary, value.getType());
+    	for (Object value : values) {
+    		assert value != null;
+    		elementType = elementType.getCommonType(standardLibrary, typeOf(value));
     	}
      	return elementType;
     }
@@ -593,7 +571,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
 	 * @param aValue the string representation of a (non-negative) integer number
 	 * @return the numeric representation
 	 */
-	public @NonNull IntegerValue integerValueOf(@NonNull String aValue) throws InvalidValueException {
+	public @NonNull IntegerValue integerValueOf(@NonNull String aValue) {
 		try {
 			int len = aValue.length();
 			if ((len < maxLongSize) || ((len == maxLongSize) && (maxLongValue.compareTo(aValue) >= 0))) {
@@ -605,7 +583,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
 			}
 		}
 		catch (NumberFormatException e) {
-			return throwInvalidValueException(e, EvaluatorMessages.InvalidInteger, aValue);
+			return createInvalidValue(new InvalidValueException(NLS.bind(EvaluatorMessages.InvalidInteger, aValue), e));
 		}
 	}
 
@@ -644,12 +622,12 @@ public abstract class ValueFactoryImpl implements ValueFactory
 		}
 	}
 	
-	public @NonNull RealValue realValueOf(@NonNull String aValue) throws InvalidValueException {
+	public @NonNull RealValue realValueOf(@NonNull String aValue) {
 		try {
 			return new RealValueImpl(this, new BigDecimal(aValue.trim()));
 		}
 		catch (NumberFormatException e) {
-			return throwInvalidValueException(e, EvaluatorMessages.InvalidReal, aValue);
+			return createInvalidValue(new InvalidValueException(NLS.bind(EvaluatorMessages.InvalidReal, aValue), e));
 		}
 	}
 	
@@ -668,25 +646,54 @@ public abstract class ValueFactoryImpl implements ValueFactory
 		throw new InvalidValueException(boundMessage, e);
 	}
 
-	public @NonNull DomainType typeOf(@NonNull Value value, Value... values) {
-		DomainType type = value.getType();
-//		if (values != null) {
-			for (Value anotherValue : values) {
-				type = type.getCommonType(standardLibrary, anotherValue.getType());
-			}		
+	public @NonNull DomainType typeOf(@NonNull Object value) {
+		if (value instanceof Value) {
+			return ((Value)value).getType();
+		}
+		else if (value instanceof DomainType) {
+			return standardLibrary.getMetaclass((DomainType) value);
+		}
+		else if (value instanceof EObject){
+			EClass eClass = ((EObject)value).eClass();
+			assert eClass != null;
+			return standardLibrary.getType(eClass);
+		}
+		else {
+			return new InvalidTypeImpl(standardLibrary, DomainUtil.bind("Unsupported Object", value));
+		}
+//		else if (value instanceof DomainElement){
+//			return standardLibrary.getType((DomainElement)value);
 //		}
+	}
+
+	public @NonNull DomainType typeOf(@NonNull Object value, Object... values) {
+		DomainType type = typeOf(value);
+		for (Object anotherValue : values) {
+			assert anotherValue != null;
+			DomainType anotherType = typeOf(anotherValue);
+			type = type.getCommonType(standardLibrary, anotherType);
+		}		
 		return type;
 	}
 
-	public @NonNull Value valueOf(@Nullable Object object) {
+	public @NonNull Object valueOf(@Nullable Object object) {
 		if (object == null) {
 			return getNull();
 		}
 		else if (object instanceof Value) {
-			return (Value) object;
+			return object;
+		}
+		else if (object instanceof DomainType) {
+			return createTypeValue((DomainType) object);
+		}
+		else if (object instanceof DomainEnumerationLiteral) {
+			return createEnumerationLiteralValue((DomainEnumerationLiteral) object);
+		}
+		else if (object instanceof EEnumLiteral) {
+			return createEnumerationLiteralValue((EEnumLiteral) object);
 		}
 		else if (object instanceof EObject) {
-			return createEObjectValue((EObject) object);
+			return object;
 		}
 //		else if (object instanceof Enumerator) {
 //			return createEnumerationLiteralValue((Enumerator) object, null);
@@ -737,9 +744,9 @@ public abstract class ValueFactoryImpl implements ValueFactory
 		return createObjectValue(object);
 	}
 
-	public @NonNull Value valueOf(@NonNull Object eValue, @Nullable EClassifier eClassifier) {
+	public @NonNull Object valueOf(@NonNull Object eValue, @Nullable EClassifier eClassifier) {
 		if (eValue instanceof Value) {
-			return (Value) eValue;		
+			return eValue;		
 		}
 		else if (eClassifier instanceof EEnum) {
 			return createEnumerationLiteralValue((Enumerator)eValue, (EEnum)eClassifier);		
@@ -752,21 +759,31 @@ public abstract class ValueFactoryImpl implements ValueFactory
 		}
 	}
 
-	public @NonNull Value valueOf(@NonNull Object eValue, @NonNull ETypedElement eFeature) {
+	public @NonNull Object valueOf(@NonNull Object eValue, @NonNull ETypedElement eFeature) {
 		EClassifier eClassifier = eFeature.getEType();
 		if (eFeature.isMany()) {
 			Collection<?> eValues = (Collection<?>) eValue;
-			ArrayList<Value> values = new ArrayList<Value>(eValues.size());
-			for (Object eVal : eValues) {
-				if (eVal != null) {
-					values.add(valueOf(eVal, eClassifier));
+			if (eClassifier instanceof EDataType) {
+				ArrayList<Object> values = new ArrayList<Object>(eValues.size());
+				for (Object eVal : eValues) {
+					if (eVal != null) {
+						values.add(valueOf(eVal, eClassifier));
+					}
 				}
+				eValues = values;
 			}
 			boolean isOrdered = eFeature.isOrdered();
 			boolean isUnique = eFeature.isUnique();
-			return createCollectionValue(isOrdered, isUnique, values);
+			return createCollectionValue(isOrdered, isUnique, eValues);
 		}
-		return valueOf(eValue, eClassifier);
+		else {
+			if (eClassifier instanceof EClassifier) {
+				return valueOf(eValue, eClassifier);
+			}
+			else {
+				return eValue;
+			}
+		}
 	}
 }
  

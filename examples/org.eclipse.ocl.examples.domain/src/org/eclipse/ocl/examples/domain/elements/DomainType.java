@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.domain.elements;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.typeids.Typeid;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -41,7 +42,7 @@ public interface DomainType extends DomainNamespace
 	 * Return a new instance of this data type from valueFactory.
 	 * @param value string initial value
 	 */
-	@NonNull Value createInstance(@NonNull ValueFactory valueFactory, @NonNull String value);
+	@NonNull Object createInstance(@NonNull ValueFactory valueFactory, @NonNull String value);
 	
 	/**
 	 * Return the most derived type com mon to this type and thatType within standardLibrary.
@@ -80,12 +81,23 @@ public interface DomainType extends DomainNamespace
 	 * Return the ordered list of type parameters of this type.
 	 */
 	@NonNull DomainTypeParameters getTypeParameters();
+
+	/**
+	 * Return a unique StandardLibrary-independent identifier for this type.
+	 * @return
+	 */
+	@NonNull Typeid getTypeid();
 	
 	/**
 	 * Return true if this is the same type as thatType within standardLibrary.
 	 */
 	boolean isEqualTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType thatType);
 	boolean isEqualToUnspecializedType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type);
+	
+	/**
+	 * Return true if this is an invalid type (with an associated error message).
+	 */
+	boolean isInvalid();
 	
 	/**
 	 * Return true if this type is a Collection type and has ordered elements.

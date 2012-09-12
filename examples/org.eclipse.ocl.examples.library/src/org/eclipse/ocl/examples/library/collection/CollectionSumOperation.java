@@ -23,7 +23,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.integer.IntegerPlusOperation;
 import org.eclipse.ocl.examples.library.real.RealPlusOperation;
@@ -33,11 +32,11 @@ import org.eclipse.ocl.examples.library.real.RealPlusOperation;
  */
 public class CollectionSumOperation extends AbstractUnaryOperation
 {
-	public static final CollectionSumOperation INSTANCE = new CollectionSumOperation();
+	public static final @NonNull CollectionSumOperation INSTANCE = new CollectionSumOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		CollectionValue collectionValue = sourceVal.asCollectionValue();
+		CollectionValue collectionValue = asCollectionValue(sourceVal);
 		// FIXME Bug 301351 Look for user-defined zero
 //			resultType.getZero();
 		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();

@@ -28,19 +28,15 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.BooleanValue;
-import org.eclipse.ocl.examples.domain.values.CollectionTypeValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.ElementValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
-import org.eclipse.ocl.examples.domain.values.MetaclassValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.StringValue;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -74,12 +70,11 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
-	public Object asEcoreObject() {
+	public @NonNull Object asEcoreObject() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
 		}
-//		throw new RuntimeException();
-		return null;
+		return super.asEcoreObject();
 	}
 
 	@Override
@@ -107,14 +102,6 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
-	public @NonNull CollectionTypeValue asCollectionTypeValue() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.asCollectionTypeValue();
-	}
-
-	@Override
 	public @NonNull CollectionValue asCollectionValue() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
@@ -139,14 +126,6 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
-	public @NonNull ElementValue asElementValue() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.asElementValue();
-	}
-
-	@Override
 	public @NonNull Integer asInteger() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
@@ -160,14 +139,6 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 			throw exception;
 		}
 		return super.asIntegerValue();
-	}
-
-	@Override
-	public @NonNull MetaclassValue asMetaclassValue() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.asMetaclassValue();
 	}
 
 	@Override
@@ -235,14 +206,6 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
-	public @NonNull TypeValue asTypeValue() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.asTypeValue();
-	}
-
-	@Override
 	public @NonNull UniqueCollectionValue asUniqueCollectionValue() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;
@@ -250,6 +213,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 		return super.asUniqueCollectionValue();
 	}
 
+	@Override
 	public @NonNull Value asValidValue() throws InvalidValueException {
 		if (exception != null) {
 			throw exception;

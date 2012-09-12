@@ -26,9 +26,10 @@ import org.eclipse.emf.ecore.util.BasicInvocationDelegate;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -79,12 +80,16 @@ public class OCLInvocationDelegate extends BasicInvocationDelegate
 				// bind arguments to parameter names
 				for (int i = 0; i < parms.size(); i++) {
 					Object object = arguments.get(i);
-					Value value = valueFactory.valueOf(object);
+					Object value = valueFactory.valueOf(object);
 					env.add(parms.get(i), value);
 				}
 			}
-			Value result = query.evaluate(target);
-			return result.asEcoreObject();
+			Object result = query.evaluate(target);
+			return ValuesUtil.asEcoreObject(result);
+		}
+		catch (InvalidValueException e) {
+			String message = NLS.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, operation);
+			throw new InvocationTargetException(new OCLDelegateException(message));
 		}
 		catch (DomainException e) {
 			String message = NLS.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, operation);

@@ -22,7 +22,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.BooleanValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -30,20 +29,20 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class BooleanAndOperation extends AbstractBinaryOperation
 {
-	public static final BooleanAndOperation INSTANCE = new BooleanAndOperation();
+	public static final @NonNull BooleanAndOperation INSTANCE = new BooleanAndOperation();
 
 	@Override
 	public boolean argumentsMayBeInvalid() {
 		return true;
 	}
 
-	public @NonNull BooleanValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
+	public @NonNull BooleanValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		if (left.isFalse() || right.isFalse()) {
+		if (isFalse(left) || isFalse(right)) {
 			return valueFactory.getFalse();
 		}
 		else {
-			return valueFactory.booleanValueOf(left.asBoolean() && right.asBoolean());
+			return valueFactory.booleanValueOf(asBoolean(left) && asBoolean(right));
 		}
 	}
 }

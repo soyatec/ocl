@@ -19,7 +19,6 @@ package org.eclipse.ocl.examples.domain.values;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
@@ -56,11 +55,6 @@ public interface Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull CollectionTypeValue asCollectionTypeValue() throws InvalidValueException;
-
-	/**
-	 * @generated NOT
-	 */
 	@NonNull CollectionValue asCollectionValue() throws InvalidValueException;
 
 	/**
@@ -72,17 +66,12 @@ public interface Value
 	 * Return the Ecore representation of this value.
 	 * @generated NOT
 	 */
-	Object asEcoreObject();
+	Object asEcoreObject() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
 	DomainElement asElement(); 
-
-	/**
-	 * @generated NOT
-	 */
-	@NonNull ElementValue asElementValue() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
@@ -97,17 +86,12 @@ public interface Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull MetaclassValue asMetaclassValue() throws InvalidValueException;
-
-	/**
-	 * @generated NOT
-	 */
 	@NonNull EObject asNavigableObject() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	@Nullable Object asObject();
+	@NonNull Object asObject() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
@@ -152,11 +136,6 @@ public interface Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull TypeValue asTypeValue() throws InvalidValueException;
-
-	/**
-	 * @generated NOT
-	 */
 	@NonNull UniqueCollectionValue asUniqueCollectionValue() throws InvalidValueException;
 
 	/**
@@ -173,9 +152,10 @@ public interface Value
 	 * Return the type of this value determined from its content. In the case of collections
 	 * this may differ from the constructed type. The actual type is used for validating
 	 * oclAsType conversions.
+	 * @throws InvalidValueException 
 	 * @generated NOT
 	 */
-	@NonNull DomainType getActualType();
+	@NonNull DomainType getActualType() throws InvalidValueException;
 
 	/**
 	 * 
@@ -193,17 +173,12 @@ public interface Value
 	/**
 	 * @generated NOT
 	 */
-	@Nullable CollectionValue isCollectionValue();
+//	@Nullable CollectionValue isCollectionValue();
 
 	/**
 	 * @generated NOT
 	 */
-	boolean isFalse();
-
-	/**
-	 * @generated NOT
-	 */
-	@Nullable IntegerValue isIntegerValue();
+//	@Nullable IntegerValue isIntegerValue();
 
 	/**
 	 * @generated NOT
@@ -213,22 +188,17 @@ public interface Value
 	/**
 	 * @generated NOT
 	 */
-	boolean isNull();
+//	boolean isNull();
 
 	/**
 	 * @generated NOT
 	 */
-	@Nullable RealValue isRealValue();
+//	@Nullable RealValue isRealValue();
 
 	/**
 	 * @generated NOT
 	 */
-	@Nullable StringValue isStringValue();
-
-	/**
-	 * @generated NOT
-	 */
-	boolean isTrue();
+//	@Nullable StringValue isStringValue();
 
 	/**
 	 * @generated NOT
@@ -238,17 +208,12 @@ public interface Value
 	/**
 	 * @generated NOT
 	 */
-	boolean isUnlimited();
+//	boolean isUnlimitedNatural();
 
 	/**
 	 * @generated NOT
 	 */
-	boolean isUnlimitedNatural();
-
-	/**
-	 * @generated NOT
-	 */
-	@NonNull String oclToString();
+//	@NonNull String oclToString();
 
 	/**
 	 * @generated NOT

@@ -25,7 +25,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -41,13 +40,13 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * generic type parameters of this class. 
  * </p>
  */
-public interface EvaluationVisitor extends Visitor<Value>, DomainEvaluator
+public interface EvaluationVisitor extends Visitor<Object>, DomainEvaluator
 {
 	@NonNull EvaluationVisitor createNestedEvaluator();
 
-	@NonNull Value evaluate(@NonNull DomainExpression body);
+	@NonNull Object evaluate(@NonNull DomainExpression body);
 
-	@NonNull Value evaluate(@NonNull ExpressionInOCL expressionInOCL);
+	@NonNull Object evaluate(@NonNull ExpressionInOCL expressionInOCL);
 	
 	/**
      * Obtains the environment that provides the metamodel semantics for the

@@ -22,7 +22,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -30,9 +29,9 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class BooleanAllInstancesOperation extends AbstractUnaryOperation
 {
-	public static final BooleanAllInstancesOperation INSTANCE = new BooleanAllInstancesOperation();
+	public static final @NonNull BooleanAllInstancesOperation INSTANCE = new BooleanAllInstancesOperation();
 	
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		// Boolean has two instances: false, true
 		return valueFactory.createSetValue((DomainCollectionType)returnType, valueFactory.getFalse(), valueFactory.getTrue());

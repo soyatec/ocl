@@ -27,7 +27,6 @@ import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -44,7 +43,7 @@ public class AnyIteration extends AbstractIteration
 	}
 	
 	@Override
-	protected @NonNull Value resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
+	protected @NonNull Object resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
 		try {
 			SequenceValue.Accumulator accumulatorValue = (SequenceValue.Accumulator)iterationManager.getAccumulatorValue();
 			if (accumulatorValue.intSize() > 0) {
@@ -59,12 +58,12 @@ public class AnyIteration extends AbstractIteration
 	}
 	
 	@Override
-    protected @Nullable Value updateAccumulator(@NonNull DomainIterationManager iterationManager) {
-		Value bodyVal = iterationManager.evaluateBody();		
-		if (bodyVal.isUndefined()) {
+    protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
+		Object bodyVal = iterationManager.evaluateBody();		
+		if (isUndefined(bodyVal)) {
 			return iterationManager.throwInvalidEvaluation(EvaluatorMessages.UndefinedBody, "any"); 	// Null body is invalid //$NON-NLS-1$
 		}
-		else if (bodyVal.isFalse()) {
+		else if (isFalse(bodyVal)) {
 			return null;									// Carry on for nothing found
 		}
 		else {
@@ -73,7 +72,7 @@ public class AnyIteration extends AbstractIteration
 				return iterationManager.getValueFactory().getFalse();				// Abort after second find
 			}
 			else {
-				Value value = iterationManager.get();		
+				Object value = iterationManager.get();		
 				accumulatorValue.add(value);
 				return null;									// Carry on after first find
 			}

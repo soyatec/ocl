@@ -19,13 +19,12 @@ package org.eclipse.ocl.examples.domain.evaluation;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 public interface DomainEvaluator
 {
 	@NonNull DomainEvaluator createNestedEvaluator();
-	@NonNull Value evaluate(@NonNull DomainExpression body);
+	@NonNull Object evaluate(@NonNull DomainExpression body);
 	@NonNull DomainEvaluationEnvironment getEvaluationEnvironment();
 	/**
 	 * Return the manager of all model instances for use by allInstances() and hidden opposite support.

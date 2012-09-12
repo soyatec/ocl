@@ -25,7 +25,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * SelectIteration realizes the Collection::select() library iteration.
@@ -39,13 +38,13 @@ public class SelectIteration extends AbstractIteration
 	}
 	
 	@Override
-    protected @Nullable Value updateAccumulator(@NonNull DomainIterationManager iterationManager) {
-		Value bodyVal = iterationManager.evaluateBody();		
-		if (bodyVal.isUndefined()) {
+    protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
+		Object bodyVal = iterationManager.evaluateBody();		
+		if (isUndefined(bodyVal)) {
 			return iterationManager.throwInvalidEvaluation(EvaluatorMessages.UndefinedBody, "select"); 	// Null body is invalid //$NON-NLS-1$
 		}
-		else if (bodyVal.isTrue()) {
-			Value value = iterationManager.get();		
+		else if (isTrue(bodyVal)) {
+			Object value = iterationManager.get();		
 			((CollectionValue.Accumulator)iterationManager.getAccumulatorValue()).add(value);
 		}
 		return null;

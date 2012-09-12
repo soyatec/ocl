@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.pivot.manager;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
+import org.eclipse.ocl.examples.domain.typeids.Typeid;
 
 /**
  * A RootPackageServer adapts the primary root Package to coordinate the coherent behavior of a primary and one or more
@@ -26,8 +27,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainPackage;
  */
 public class RootPackageServer extends PackageServer
 {	
-	public RootPackageServer(@NonNull PackageManager packageManager, @NonNull String name, @Nullable String nsPrefix, @Nullable String nsURI) {
-		super(packageManager, name, nsPrefix, nsURI);
+	public RootPackageServer(@NonNull PackageManager packageManager, @NonNull String name, @Nullable String nsPrefix, @Nullable String nsURI, @NonNull Typeid typeid) {
+		super(packageManager, name, nsPrefix, nsURI, typeid);
 	}
 
 	@Override

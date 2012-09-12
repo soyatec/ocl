@@ -34,8 +34,8 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
@@ -94,7 +94,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 		EvaluationEnvironment evaluationEnvironment = environmentFactory.createEvaluationEnvironment();
 		MetaModelManager metaModelManager = evaluationEnvironment.getMetaModelManager();
 		ValueFactory valueFactory = metaModelManager.getValueFactory();
-		Value value = valueFactory.valueOf(object);
+		Object value = valueFactory.valueOf(object);
 		evaluationEnvironment.add(query.getContextVariable(), value);
 		return evaluationEnvironment;
 	}
@@ -105,9 +105,9 @@ public class OCLValidationDelegate implements ValidationDelegate
 			return null;
 		}
 		try {
-			Value result = messageExpression.accept(evaluationVisitor);
+			Object result = messageExpression.accept(evaluationVisitor);
 			if (result != null) {
-				return result.asString();
+				return ValuesUtil.asString(result);
 			}
 			String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
 			String message = DomainUtil.bind(OCLMessages.ValidationMessageIsNotString_ERROR_, PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
@@ -237,13 +237,13 @@ public class OCLValidationDelegate implements ValidationDelegate
 			throw new OCLDelegateException(message);
 		}
 		try {
-			Value result = query.accept(evaluationVisitor);
-			if ((result == null) || result.isNull()) {
+			Object result = query.accept(evaluationVisitor);
+			if ((result == null) || ValuesUtil.isNull(result)) {
 				String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
 				String message = DomainUtil.bind(OCLMessages.ValidationResultIsNull_ERROR_, PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
 				throw new OCLDelegateException(message);
 			}
-			return result.asBoolean();
+			return ValuesUtil.asBoolean(result);
 		} catch (InvalidValueException e) {
 			String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
 			String message = DomainUtil.bind(OCLMessages.ValidationResultIsNotBoolean_ERROR_, PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
@@ -263,17 +263,17 @@ public class OCLValidationDelegate implements ValidationDelegate
 			String message = DomainUtil.bind(OCLMessages.ValidationConstraintIsNotBoolean_ERROR_, PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
 			throw new OCLDelegateException(message);
 		}
-		Value result;
+		Object result;
 		try {
 			result = query.accept(evaluationVisitor);
-			if ((result == null) || result.isNull()) {
+			if ((result == null) || ValuesUtil.isNull(result)) {
 				if (diagnostics == null) {
 					String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
 					String message = DomainUtil.bind(OCLMessages.ValidationResultIsNull_ERROR_, PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
 					throw new OCLDelegateException(message);
 				}
 			}
-			else if (result.asBoolean()) {
+			else if (ValuesUtil.asBoolean(result)) {
 				return true;
 			}
 		} catch (InvalidValueException e) {
@@ -292,7 +292,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 				message = DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_,
 					PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
 			}
-			int severity = (result == null) || result.isNull() ? Diagnostic.ERROR : Diagnostic.WARNING;
+			int severity = (result == null) || ValuesUtil.isNull(result) ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    diagnostics.add(new BasicDiagnostic(severity, source, code, message, new Object [] { value }));
 		}
 		return false;

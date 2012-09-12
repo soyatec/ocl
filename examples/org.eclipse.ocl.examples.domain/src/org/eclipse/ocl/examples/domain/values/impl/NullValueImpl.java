@@ -57,10 +57,6 @@ public class NullValueImpl extends UndefinedCollectionValueImpl implements NullV
 		return null;
 	}
 
-	public @NonNull Value asValidValue() {
-		return this;
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		return obj instanceof NullValue;
@@ -88,10 +84,10 @@ public class NullValueImpl extends UndefinedCollectionValueImpl implements NullV
     	return 0;
 	}
 
-	@Override
-	public boolean isNull() {
-		return true;
-	}
+//	@Override
+//	public boolean isNull() {
+//		return true;
+//	}
 
 	@Override
 	public String toString() {

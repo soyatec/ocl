@@ -21,7 +21,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  */
@@ -35,7 +34,7 @@ public interface LibraryIteration extends LibraryFeature
 	 * @return the accumulator
 	 * @throws InvalidValueException 
 	 */
-	@NonNull Value createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) throws InvalidValueException;
+	@NonNull Object createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) throws InvalidValueException;
 	
 	/**
 	 * Evaluate the iteration under the supervision of an iterationManager.
@@ -45,5 +44,5 @@ public interface LibraryIteration extends LibraryFeature
 	 * 
 	 * @throws InvalidValueException if a body evaluates to invalid
 	 */
-	@NonNull Value evaluateIteration(@NonNull DomainIterationManager iterationManager) throws InvalidValueException;
+	@NonNull Object evaluateIteration(@NonNull DomainIterationManager iterationManager) throws InvalidValueException;
 }

@@ -22,18 +22,17 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * OrderedCollectionAppendOperation realises the OrderedCollection::append() library operation.
  */
 public class OrderedCollectionAppendOperation extends AbstractBinaryOperation
 {
-	public static final OrderedCollectionAppendOperation INSTANCE = new OrderedCollectionAppendOperation();
+	public static final @NonNull OrderedCollectionAppendOperation INSTANCE = new OrderedCollectionAppendOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
-		SequenceValue leftOrderedCollectionValue = left.asSequenceValue();
-		Value rightValue = right.asValidValue();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
+		SequenceValue leftOrderedCollectionValue = asSequenceValue(left);
+		Object rightValue = asValidValue(right);
 		return leftOrderedCollectionValue.append(rightValue);
 	}
 }

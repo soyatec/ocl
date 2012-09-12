@@ -62,6 +62,7 @@ import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -383,10 +384,10 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * Assert that the result of evaluating an expression as a query is not undefined.
 	 * @return the evaluation result
 	 */
-	protected Value assertQueryDefined(Object context, String expression) {
+	protected Object assertQueryDefined(Object context, String expression) {
 		try {
-			Value value = evaluate(helper, context, expression);
-			assertFalse(expression + " expected defined: ", value.isUndefined());
+			Object value = evaluate(helper, context, expression);
+			assertFalse(expression + " expected defined: ", ValuesUtil.isUndefined(value));
 			return value;
 		} catch (Exception e) {
 			failOn(expression, e);
@@ -400,9 +401,9 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 */
 	protected Object assertQueryEquals(Object context, Object expected, String expression) {
 		try {
-			Value expectedValue = expected instanceof Value ? (Value)expected : valueFactory.valueOf(expected);
+			Object expectedValue = expected instanceof Value ? expected : valueFactory.valueOf(expected);
 //			typeManager.addLockedElement(expectedValue.getType());
-			Value value = evaluate(helper, context, expression);
+			Object value = evaluate(helper, context, expression);
 //			String expectedAsString = String.valueOf(expected);
 //			String valueAsString = String.valueOf(value);
 			assertEquals(expression, expectedValue, value);
@@ -445,8 +446,8 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 */
 	protected Object assertQueryEquals(Object context, Number expected, String expression, double tolerance) {
 		try {
-			Value expectedValue = valueFactory.valueOf(expected);
-			Value value = evaluate(helper, context, expression);
+			Object expectedValue = valueFactory.valueOf(expected);
+			Object value = evaluate(helper, context, expression);
 			BigDecimal expectedVal = ((RealValue)expectedValue).bigDecimalValue();
 			BigDecimal val = ((RealValue)value).bigDecimalValue();
 			double delta = val.subtract(expectedVal).doubleValue();
@@ -479,7 +480,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 */
 	protected Object assertQueryFalse(Object context, String expression) {
 		try {
-			Value value = evaluate(helper, context, expression);
+			Object value = evaluate(helper, context, expression);
 			assertEquals(expression, valueFactory.getFalse(), value);
 			return value;
 		} catch (Exception e) {
@@ -494,7 +495,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 */
 	protected Value assertQueryInvalid(Object context, String expression) {
 		try {
-			Value value = evaluate(helper, context, expression);
+			Object value = evaluate(helper, context, expression);
 			fail(expression + " expected: invalid but was: " + value);
 		} catch (DomainException e) {
 //			assertEquals("Invalid Value Reason", reason, e.getMessage());
@@ -508,7 +509,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	protected Object assertQueryInvalid(Object context, String expression,
 			String reason, Class<?> exceptionClass) {
 		try {
-			Value value = evaluate(helper, context, expression);
+			Object value = evaluate(helper, context, expression);
 			fail(expression + " expected: invalid but was: " + value);
 //           fail("Expected invalid for \"" + expression + "\"");
 		} catch (DomainException e) {
@@ -572,8 +573,8 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 */
 	protected Object assertQueryNull(Object context, String expression) {
 		try {
-			Value value = evaluate(helper, context, expression);
-			if (!value.isNull()) {
+			Object value = evaluate(helper, context, expression);
+			if (!ValuesUtil.isNull(value)) {
 				assertEquals(expression, valueFactory.getNull(), value);
 			}
 			return value;
@@ -621,7 +622,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 */
 	protected Object assertResultContainsAll(Object context, CollectionValue expectedResult, String expression) {
 		try {
-			Value result = evaluate(helper, context, expression);
+			Object result = evaluate(helper, context, expression);
 			assertTrue(expectedResult.getClass().isInstance(result));
 			assertSame(expectedResult.intSize(), ((CollectionValue) result).intSize());
 			BooleanValue actualResult = ((CollectionValue) result).includesAll(expectedResult);
@@ -647,7 +648,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 */
 	protected Object assertResultContainsAll(Object context, String expectedResultExpression, String expression) {
 		try {
-			Value expectedResultQuery = evaluate(helper, null, expectedResultExpression);
+			Object expectedResultQuery = evaluate(helper, null, expectedResultExpression);
 			assertTrue(expectedResultQuery instanceof CollectionValue);
 			Object result = assertResultContainsAll(context, (CollectionValue) expectedResultQuery, expression);
 			return result;
@@ -678,7 +679,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 */
 	protected Object assertQueryTrue(Object context, String expression) {
 		try {
-			Value value = evaluate(helper, context, expression);
+			Object value = evaluate(helper, context, expression);
 			assertEquals(expression, valueFactory.getTrue(), value);
 			return value;
 		} catch (Exception e) {
@@ -693,8 +694,8 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 */
 	protected Object assertQueryUnlimited(Object context, String expression) {
 		try {
-			Value value = evaluate(helper, context, expression);
-			if (!value.isUnlimited()) {
+			Object value = evaluate(helper, context, expression);
+			if (!ValuesUtil.isUnlimited(value)) {
 				assertEquals(expression, valueFactory.getUnlimited(), value);
 			}
 			return value;
@@ -834,7 +835,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	/**
 	 * Return an isOrdered,isUnique collection containing args.
 	 */
-	protected CollectionValue createCollection(boolean isOrdered, boolean isUnique, Type type, Value... args) {
+	protected CollectionValue createCollection(boolean isOrdered, boolean isUnique, Type type, Object... args) {
 		return valueFactory.createCollectionValue(isOrdered, isUnique, type, args);
 	}
 
@@ -1054,7 +1055,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		return result;
 	}
 
-	protected Value evaluate(OCLHelper aHelper, Object context, String expression) throws ParserException {
+	protected Object evaluate(OCLHelper aHelper, Object context, String expression) throws ParserException {
 		setHelperContext(aHelper, context);
 		ExpressionInOCL query = aHelper.createQuery(expression);
 //        @SuppressWarnings("unused")

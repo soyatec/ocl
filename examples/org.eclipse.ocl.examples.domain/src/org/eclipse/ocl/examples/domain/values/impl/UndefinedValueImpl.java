@@ -59,8 +59,8 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 //		return null;
 //	}
 
-	public Object asObject() {
-		return null;
+	public @NonNull Object asObject() throws InvalidValueException {
+		return toInvalidValue();
 	}
 
 	public @NonNull BooleanValue asTrue() {
@@ -111,9 +111,25 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		return null;
 	}
 
+	public boolean isFalse() {
+		return false;
+	}
+
+	public boolean isTrue() {
+		return false;
+	}
+
 	@Override
 	public boolean isUndefined() {
 		return true;
+	}
+
+	public boolean isUnlimited() {
+		return false;
+	}
+	
+	public boolean isUnlimitedNatural() {
+		return false;
 	}
 
 	public @NonNull NullValue max(@NonNull IntegerValue right) throws InvalidValueException {

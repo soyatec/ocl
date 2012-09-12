@@ -56,7 +56,7 @@ import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
-import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
@@ -66,6 +66,7 @@ import org.eclipse.ocl.examples.pivot.CollectionRange;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
+import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -136,8 +137,8 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		return new EvaluationVisitorImpl(environment, nestedEvalEnv, getModelManager());
 	}
 
-	public @NonNull Value evaluate(@NonNull DomainExpression body) {
-		Value value = ((OCLExpression) body).accept(this);
+	public @NonNull Object evaluate(@NonNull DomainExpression body) {
+		Object value = ((OCLExpression) body).accept(this);
 		if (value == null) {
 			return throwInvalidEvaluation("null evaluation result");
 		}
@@ -146,8 +147,8 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		}
 	}
 
-	public @NonNull Value evaluate(@NonNull ExpressionInOCL expressionInOCL) {
-		Value value = expressionInOCL.accept(this);
+	public @NonNull Object evaluate(@NonNull ExpressionInOCL expressionInOCL) {
+		Object value = expressionInOCL.accept(this);
 		if (value == null) {
 			return throwInvalidEvaluation("null evaluation result");
 		}
@@ -166,7 +167,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	}
 
 	@Override
-	public Value safeVisit(@Nullable Visitable v) {
+	public Object safeVisit(@Nullable Visitable v) {
 		if (v == null) {
 			return evaluationEnvironment.throwInvalidEvaluation("null expression");
 		}
@@ -188,10 +189,10 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 * on that object.
 	 */
 	@Override
-    public Value visitAssociationClassCallExp(@NonNull AssociationClassCallExp ae) {
-		Value context = ae.getSource().accept(getUndecoratedVisitor());
+    public Object visitAssociationClassCallExp(@NonNull AssociationClassCallExp ae) {
+		Object context = ae.getSource().accept(getUndecoratedVisitor());
 		
-		if ((context == null) || context.isUndefined()) {
+		if ((context == null) || ValuesUtil.isUndefined(context)) {
 			return evaluationEnvironment.throwInvalidEvaluation("Undefined context for AssociationClassCall", ae);
 		}
 		
@@ -214,7 +215,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	}
 
 	@Override
-	public Value visitCollectionItem(@NonNull CollectionItem item) {
+	public Object visitCollectionItem(@NonNull CollectionItem item) {
 		throw new UnsupportedOperationException("evaluation of CollectionItem"); //$NON-NLS-1$
 	}
 
@@ -222,7 +223,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 * Callback for a CollectionLiteralExp visit.
 	 */
 	@Override
-    public Value visitCollectionLiteralExp(@NonNull CollectionLiteralExp cl) {
+    public Object visitCollectionLiteralExp(@NonNull CollectionLiteralExp cl) {
 		// construct the appropriate collection from the parts
 		// based on the collection kind.
 		List<CollectionLiteralPart> parts = cl.getPart();
@@ -236,24 +237,24 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 			OCLExpression last = collRange.getLast();
 
 			// evaluate first value
-			Value firstVal = first.accept(getUndecoratedVisitor());
+			Object firstVal = first.accept(getUndecoratedVisitor());
 			if (firstVal == null) {
 				return evaluationEnvironment.throwInvalidEvaluation("Invalid first element", cl, first);
 			}
 			// evaluate last value
-			Value lastVal = last.accept(getUndecoratedVisitor());
+			Object lastVal = last.accept(getUndecoratedVisitor());
 			if (lastVal == null) {
 				return evaluationEnvironment.throwInvalidEvaluation("Invalid last element", cl, last);
 			}
 			IntegerValue firstInteger;
 			try {
-				firstInteger = firstVal.asIntegerValue();
+				firstInteger = ValuesUtil.asIntegerValue(firstVal);
 			} catch (InvalidValueException e) {
 				return evaluationEnvironment.throwInvalidEvaluation(e, cl, firstVal, "Non integer first element");
 			}
 			IntegerValue lastInteger;
 			try {
-				lastInteger = lastVal.asIntegerValue();
+				lastInteger = ValuesUtil.asIntegerValue(lastVal);
 			} catch (InvalidValueException e) {
 				return evaluationEnvironment.throwInvalidEvaluation(e, cl, lastVal, "Non integer last element");
 			}
@@ -271,14 +272,14 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 			}
 		} else
 		{
-			List<Value> results = new ArrayList<Value>();
+			List<Object> results = new ArrayList<Object>();
 			// not a sequence or not a simple range
 			for (CollectionLiteralPart part : parts) {
 				if (part instanceof CollectionItem) {
 					// CollectionItem part
 					CollectionItem item = (CollectionItem) part;
 					OCLExpression itemExp = item.getItem();
-					Value itemVal = itemExp.accept(getUndecoratedVisitor());
+					Object itemVal = itemExp.accept(getUndecoratedVisitor());
 					if (itemVal != null) {
 						// add it to the result set
 						results.add(itemVal);
@@ -290,23 +291,23 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 					OCLExpression last = range.getLast();
 
 					// evaluate first value
-					Value firstVal = first.accept(getUndecoratedVisitor());
+					Object firstVal = first.accept(getUndecoratedVisitor());
 					if (firstVal == null) {
 						return evaluationEnvironment.throwInvalidEvaluation("Invalid first element", cl, first);
 					}
-					Value lastVal = last.accept(getUndecoratedVisitor());
+					Object lastVal = last.accept(getUndecoratedVisitor());
 					if (lastVal == null) {
 						return evaluationEnvironment.throwInvalidEvaluation("Invalid last element", cl, last);
 					}
 					IntegerValue firstInteger;
 					try {
-						firstInteger = firstVal.asIntegerValue();
+						firstInteger = ValuesUtil.asIntegerValue(firstVal);
 					} catch (InvalidValueException e) {
 						return evaluationEnvironment.throwInvalidEvaluation(e, cl, firstVal, "Non integer first element");
 					}
 					IntegerValue lastInteger;
 					try {
-						lastInteger = lastVal.asIntegerValue();
+						lastInteger = ValuesUtil.asIntegerValue(lastVal);
 					} catch (InvalidValueException e) {
 						return evaluationEnvironment.throwInvalidEvaluation(e, cl, lastVal, "Non integer last element");
 					}
@@ -339,12 +340,12 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	} // end of Set, OrderedSet, Bag Literals
 
 	@Override
-	public Value visitCollectionRange(@NonNull CollectionRange range) {
+	public Object visitCollectionRange(@NonNull CollectionRange range) {
 		throw new UnsupportedOperationException("evaluation of CollectionRange"); //$NON-NLS-1$
 	}
 
     @Override
-	public Value visitConstructorExp(@NonNull ConstructorExp ce) {
+	public Object visitConstructorExp(@NonNull ConstructorExp ce) {
 		DomainType type = ce.getType();
 		String value = ce.getValue();
 		if (value == null) {
@@ -352,7 +353,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 			for (ConstructorPart part : ce.getPart()) {
 				OCLExpression initExpression = part.getInitExpression();
 				if (initExpression != null) {
-					Value propertyValue = getUndecoratedVisitor().evaluate(initExpression);
+					Object propertyValue = getUndecoratedVisitor().evaluate(initExpression);
 					try {
 						part.getReferredProperty().setValue(objectValue, propertyValue);
 					} catch (InvalidValueException e) {
@@ -376,12 +377,14 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 * @return the enumeration literal as an Integer
 	 */
 	@Override
-    public Value visitEnumLiteralExp(@NonNull EnumLiteralExp el) {
-		return valueFactory.createEnumerationLiteralValue(DomainUtil.nonNullModel(el.getReferredEnumLiteral()));
+    public Object visitEnumLiteralExp(@NonNull EnumLiteralExp el) {
+		EnumerationLiteral enumLiteral = el.getReferredEnumLiteral();
+		assert enumLiteral != null;
+		return valueFactory.createEnumerationLiteralValue(enumLiteral);
 	}
 
 	@Override
-	public Value visitExpressionInOCL(@NonNull ExpressionInOCL expression) {
+	public Object visitExpressionInOCL(@NonNull ExpressionInOCL expression) {
 		return safeVisit(expression.getBodyExpression());
 	}
 
@@ -389,18 +392,18 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 * Callback for an IfExp visit.
 	 */
 	@Override
-    public Value visitIfExp(@NonNull IfExp ifExp) {
+    public Object visitIfExp(@NonNull IfExp ifExp) {
 		OCLExpression condition = ifExp.getCondition();
 //		if (condition == null) {
 //			return null;
 //		}
 		BooleanValue evaluatedCondition;
 		try {
-			Value acceptedValue = condition.accept(getUndecoratedVisitor());
+			Object acceptedValue = condition.accept(getUndecoratedVisitor());
 			if (acceptedValue == null) {
 				return evaluationEnvironment.throwInvalidEvaluation("null condition");
 			}
-			evaluatedCondition = acceptedValue.asBooleanValue();
+			evaluatedCondition = ValuesUtil.asBooleanValue(acceptedValue);
 		} catch (InvalidValueException e) {
 			return evaluationEnvironment.throwInvalidEvaluation(e);
 		}
@@ -419,12 +422,12 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 * @return the value of the integer literal as a java.lang.Integer.
 	 */
 	@Override
-    public Value visitIntegerLiteralExp(@NonNull IntegerLiteralExp integerLiteralExp) {
+    public Object visitIntegerLiteralExp(@NonNull IntegerLiteralExp integerLiteralExp) {
 		return integerLiteralExp.getIntegerValue(valueFactory);
 	}
 
 	@Override
-    public Value visitInvalidLiteralExp(@NonNull InvalidLiteralExp invalidLiteralExp) {
+    public Object visitInvalidLiteralExp(@NonNull InvalidLiteralExp invalidLiteralExp) {
 		return evaluationEnvironment.throwInvalidEvaluation("Invalid Literal");
 	}
 
@@ -432,17 +435,17 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 * Callback for an IterateExp visit.
 	 */
 	@Override
-    public Value visitIterateExp(@NonNull IterateExp iterateExp) {
+    public Object visitIterateExp(@NonNull IterateExp iterateExp) {
 		Iteration staticIteration = DomainUtil.nonNullModel(iterateExp.getReferredIteration());
 		EvaluationVisitor undecoratedVisitor = getUndecoratedVisitor();
 		CollectionValue sourceValue;
 		try {
 			OCLExpression source = iterateExp.getSource();
-			Value acceptedValue = source.accept(undecoratedVisitor);
+			Object acceptedValue = source.accept(undecoratedVisitor);
 			if (acceptedValue == null) {
 				return evaluationEnvironment.throwInvalidEvaluation("null iterate source");
 			}
-			sourceValue = acceptedValue.asCollectionValue();
+			sourceValue = ValuesUtil.asCollectionValue(acceptedValue);
 		} catch (InvalidValueException e) {
 			return evaluationEnvironment.throwInvalidEvaluation(e);
 		}
@@ -464,11 +467,11 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 				return evaluationEnvironment.throwInvalidEvaluation(e, iterateExp, null, "Failed to load implementation for '" + dynamicIteration + "'");
 			}
 		} */
-		Value result = null;
+		Object result = null;
 		try {
 			Variable accumulator = iterateExp.getResult();
-			Value initValue = accumulator.getInitExpression().accept(undecoratedVisitor);
-			if ((initValue == null) || initValue.isUndefined()) {
+			Object initValue = accumulator.getInitExpression().accept(undecoratedVisitor);
+			if ((initValue == null) || ValuesUtil.isUndefined(initValue)) {
 				return evaluationEnvironment.throwInvalidEvaluation(null, iterateExp, initValue, EvaluatorMessages.UndefinedInitialiser);
 			}
 			DomainIterationManager iterationManager;
@@ -504,17 +507,17 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 * Callback for an IteratorExp visit.
 	 */
 	@Override
-    public Value visitIteratorExp(@NonNull IteratorExp iteratorExp) {
+    public Object visitIteratorExp(@NonNull IteratorExp iteratorExp) {
 		Iteration staticIteration = DomainUtil.nonNullModel(iteratorExp.getReferredIteration());
 		EvaluationVisitor undecoratedVisitor = getUndecoratedVisitor();
 		CollectionValue sourceValue;
 		try {
 			OCLExpression source = iteratorExp.getSource();
-			Value sourceVal = source.accept(undecoratedVisitor);
+			Object sourceVal = source.accept(undecoratedVisitor);
 			if (sourceVal == null) {
 				return evaluationEnvironment.throwInvalidEvaluation("null iterator source");
 			}
-			sourceValue = sourceVal.asCollectionValue();
+			sourceValue = ValuesUtil.asCollectionValue(sourceVal);
 		} catch (InvalidValueException e) {
 			return evaluationEnvironment.throwInvalidEvaluation(e);
 		}
@@ -536,13 +539,13 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 				return evaluationEnvironment.throwInvalidEvaluation(e, iteratorExp, null, "Failed to load implementation for '" + dynamicIteration + "'");
 			}
 		} */
-		Value result = null;
+		Object result = null;
 		try {
 			DomainIterationManager iterationManager;
 			OCLExpression body = iteratorExp.getBody();
 			Type iterationType = PivotUtil.getBehavioralType(DomainUtil.nonNullModel(iteratorExp.getType()));
 			Type bodyType = PivotUtil.getBehavioralType(DomainUtil.nonNullModel(body.getType()));
-			Value accumulatorValue = implementation.createAccumulatorValue(undecoratedVisitor, iterationType, bodyType);
+			Object accumulatorValue = implementation.createAccumulatorValue(undecoratedVisitor, iterationType, bodyType);
 			List<Variable> iterators = iteratorExp.getIterator();
 			int iSize = iterators.size();
 			if (iSize == 1) {
@@ -573,10 +576,10 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 * Callback for LetExp visit.
 	 */
 	@Override
-    public Value visitLetExp(@NonNull LetExp letExp) {
+    public Object visitLetExp(@NonNull LetExp letExp) {
 		OCLExpression expression = letExp.getIn();		// Never null when valid
 		Variable variable = letExp.getVariable();		// Never null when valid
-		Value value;
+		Object value;
 		try {
 			value = variable.accept(this);
 		}
@@ -589,7 +592,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	}
 	
 	@Override
-    public Value visitMessageExp(@NonNull MessageExp m) {
+    public Object visitMessageExp(@NonNull MessageExp m) {
 		throw new UnsupportedOperationException("evaluation of MessageExp"); //$NON-NLS-1$
 /*        T targetResult = safeVisit(messageExp.getTarget());        
         List<T> argumentResults;
@@ -606,7 +609,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 */	}
 
 	@Override
-    public Value visitNullLiteralExp(@NonNull NullLiteralExp nullLiteralExp) {
+    public Object visitNullLiteralExp(@NonNull NullLiteralExp nullLiteralExp) {
 		return valueFactory.getNull();
 	}
 
@@ -614,14 +617,14 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 * Callback for an OperationCallExp visit.
 	 */
 	@Override
-    public Value visitOperationCallExp(@NonNull OperationCallExp operationCallExp) {
+    public Object visitOperationCallExp(@NonNull OperationCallExp operationCallExp) {
 		EvaluationVisitor undecoratedVisitor = getUndecoratedVisitor();
 		DomainEvaluator evaluator = undecoratedVisitor.getEvaluator();
 		Operation staticOperation = operationCallExp.getReferredOperation();
 		//
 		//	Resolve source value
 		//
- 		Value sourceValue;
+ 		Object sourceValue;
 		OCLExpression source = operationCallExp.getSource();
 		try {
 			sourceValue = source.accept(undecoratedVisitor);
@@ -635,14 +638,14 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		//
 		//	Resolve source dispatch type
 		//
- 		DomainType dynamicSourceType = sourceValue.getType();
+ 		DomainType dynamicSourceType = valueFactory.typeOf(sourceValue);
 		List<OCLExpression> arguments = operationCallExp.getArgument();
-		Value onlyArgument = null;
+		Object onlyArgument = null;
 		List<Parameter> ownedParameters = staticOperation.getOwnedParameter();
 		if ((ownedParameters.size() == 1) && (ownedParameters.get(0).getType() instanceof SelfType)) {
 			onlyArgument =  arguments.get(0).accept(undecoratedVisitor);
 			if (onlyArgument != null) {
-				DomainType argType = onlyArgument.getType();
+				DomainType argType = valueFactory.typeOf(onlyArgument);
 				dynamicSourceType = dynamicSourceType.getCommonType(metaModelManager, argType);
 			}
 	 	}
@@ -657,7 +660,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		//	Dispatch implementation avoiding variable argument list where possible
 		//
 		try {
-			Value result = null;
+			Object result = null;
 			int iSize = arguments.size();
 			switch (iSize) {
 				case 0: {
@@ -685,13 +688,13 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 				case 2: {
 					OCLExpression argument0 = arguments.get(0);
 					OCLExpression argument1 = arguments.get(1);
-					Value firstArgument = argument0 != null ? undecoratedVisitor.evaluate(argument0) : valueFactory.getInvalid();
-					Value secondArgument = argument1 != null ? undecoratedVisitor.evaluate(argument1) : valueFactory.getInvalid();
+					Object firstArgument = argument0 != null ? undecoratedVisitor.evaluate(argument0) : valueFactory.getInvalid();
+					Object secondArgument = argument1 != null ? undecoratedVisitor.evaluate(argument1) : valueFactory.getInvalid();
 					result = ((LibraryTernaryOperation)implementation).evaluate(evaluator, operationCallExp, sourceValue, firstArgument, secondArgument);
 					break;
 				}
 				default: {
-					Value[] values = new Value[iSize];
+					Object[] values = new Object[iSize];
 					for (int i = 0; i < iSize; i++) {
 						OCLExpression argumentI = arguments.get(i);
 						values[i] = argumentI != null ? undecoratedVisitor.evaluate(argumentI) : valueFactory.getInvalid();
@@ -719,26 +722,29 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 * Callback for a PropertyCallExp visit.
 	 */
 	@Override
-    public Value visitPropertyCallExp(@NonNull PropertyCallExp propertyCallExp) {
-		Property property = DomainUtil.nonNullModel(propertyCallExp.getReferredProperty());
+    public Object visitPropertyCallExp(@NonNull PropertyCallExp propertyCallExp) {
+		OCLExpression source = propertyCallExp.getSource();
+		Property referredProperty = propertyCallExp.getReferredProperty();
+		Type propertyType = propertyCallExp.getType();
+		assert source != null;
+		assert referredProperty != null;
+		assert propertyType != null;
 		LibraryProperty implementation;
 		try {
-			implementation = (LibraryProperty) metaModelManager.getImplementation(property);
+			implementation = (LibraryProperty) metaModelManager.getImplementation(referredProperty);
 		} catch (Exception e) {
-			String implementationClass = property.getImplementationClass();
+			String implementationClass = referredProperty.getImplementationClass();
 			if (implementationClass != null) {
 				return evaluationEnvironment.throwInvalidEvaluation(e, propertyCallExp, null, EvaluatorMessages.ImplementationClassLoadFailure, implementationClass);
 			}
 			else {
-				return evaluationEnvironment.throwInvalidEvaluation(e, propertyCallExp, null, "Failed to load implementation for '" + property + "'");
+				return evaluationEnvironment.throwInvalidEvaluation(e, propertyCallExp, null, "Failed to load implementation for '" + referredProperty + "'");
 			}
 		}
-		OCLExpression source = DomainUtil.nonNullModel(propertyCallExp.getSource());
 		EvaluationVisitor evaluationVisitor = getUndecoratedVisitor();
-		Value sourceValue = evaluationVisitor.evaluate(source);
-		Value resultValue = null;
+		Object sourceValue = evaluationVisitor.evaluate(source);
 		try {
-			resultValue = implementation.evaluate(this, DomainUtil.nonNullModel(propertyCallExp.getType()), sourceValue, DomainUtil.nonNullModel(propertyCallExp.getReferredProperty()));
+			return implementation.evaluate(this, propertyType, sourceValue, referredProperty);
 		}
 		catch (DomainException e) {
 			throw e;
@@ -746,9 +752,8 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		catch (Exception e) {
 			// This is a backstop. Library operations should catch their own exceptions
 			//  and produce a better reason as a result.
-			return evaluationEnvironment.throwInvalidEvaluation(e, propertyCallExp, sourceValue, "Failed to evaluate '" + property + "'");
+			return evaluationEnvironment.throwInvalidEvaluation(e, propertyCallExp, sourceValue, "Failed to evaluate '" + referredProperty + "'");
 		}
-		return resultValue;
 	}
 	
 	/**
@@ -757,13 +762,13 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 * @return the value of the real literal as a java.lang.Double.
 	 */
 	@Override
-    public Value visitRealLiteralExp(@NonNull RealLiteralExp realLiteralExp) {
+    public Object visitRealLiteralExp(@NonNull RealLiteralExp realLiteralExp) {
 		return realLiteralExp.getRealValue(valueFactory);
 	}
 	
 	@Override
-    public Value visitStateExp(@NonNull StateExp s) {
-		return valueFactory.createElementValue(DomainUtil.nonNullModel(s.getReferredState()));
+    public Object visitStateExp(@NonNull StateExp s) {
+		return s.getReferredState();
 	}
 
 	/**
@@ -772,7 +777,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 * @return the value of the string literal as a java.lang.String.
 	 */
 	@Override
-    public Value visitStringLiteralExp(@NonNull StringLiteralExp stringLiteralExp) {
+    public Object visitStringLiteralExp(@NonNull StringLiteralExp stringLiteralExp) {
 		String value = stringLiteralExp.getStringSymbol();
 		if (value == null) {
 			return evaluationEnvironment.throwInvalidEvaluation("Invalid String Value", stringLiteralExp);
@@ -788,9 +793,9 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 * @return String
 	 */
 	@Override
-    public Value visitTupleLiteralExp(@NonNull TupleLiteralExp tl) {
+    public Object visitTupleLiteralExp(@NonNull TupleLiteralExp tl) {
 		DomainType type = DomainUtil.nonNullModel(tl.getType());
-		Map<TypedElement, Value> propertyValues = new HashMap<TypedElement, Value>();		
+		Map<TypedElement, Object> propertyValues = new HashMap<TypedElement, Object>();		
 		for (TupleLiteralPart part : tl.getPart()) {
 			// Set the tuple field with the value of the init expression
 			propertyValues.put(part, part.accept(getUndecoratedVisitor()));
@@ -800,7 +805,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	}
 	
 	@Override
-    public Value visitTupleLiteralPart(@NonNull TupleLiteralPart tp) {
+    public Object visitTupleLiteralPart(@NonNull TupleLiteralPart tp) {
 		return tp.getInitExpression().accept(getUndecoratedVisitor());
 	}
 
@@ -808,8 +813,11 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 * Callback for a TypeExp visit.
 	 */
 	@Override
-    public Value visitTypeExp(@NonNull TypeExp t) {
-		return valueFactory.createTypeValue(DomainUtil.nonNullModel(((DomainMetaclass)t.getType()).getInstanceType()));
+    public Object visitTypeExp(@NonNull TypeExp t) {
+		DomainMetaclass domainMetaclass = (DomainMetaclass)t.getType();
+		DomainType instanceType = domainMetaclass.getInstanceType();
+		assert instanceType != null;
+		return valueFactory.createTypeValue(instanceType);
 	}
     
     /**
@@ -818,7 +826,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
      * @return the value of the natural literal as a java.lang.Integer.
      */
     @Override
-    public Value visitUnlimitedNaturalLiteralExp(@NonNull UnlimitedNaturalLiteralExp unlimitedNaturalLiteralExp) {
+    public Object visitUnlimitedNaturalLiteralExp(@NonNull UnlimitedNaturalLiteralExp unlimitedNaturalLiteralExp) {
 		return unlimitedNaturalLiteralExp.getUnlimitedNaturalValue(valueFactory);
 	}
 	
@@ -826,7 +834,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 * Callback for an UnspecifiedValueExp visit.
 	 */
 	@Override
-    public Value visitUnspecifiedValueExp(@NonNull UnspecifiedValueExp uv) {
+    public Object visitUnspecifiedValueExp(@NonNull UnspecifiedValueExp uv) {
 		// TODO: return a "random instance of the type of the expression"
 		throw new UnsupportedOperationException("evaluation of UnspecifiedValueExp"); //$NON-NLS-1$
 	}
@@ -835,7 +843,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 * Callback for a Variable visit.
 	 */
 	@Override
-    public Value visitVariable(@NonNull Variable variable) {
+    public Object visitVariable(@NonNull Variable variable) {
 		// return the initial (only) value
 		OCLExpression initExp = variable.getInitExpression();
 		if (initExp == null) {
@@ -854,7 +862,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 * @return the value of the variable
 	 */
 	@Override
-    public Value visitVariableExp(@NonNull VariableExp variableExp) {
+    public Object visitVariableExp(@NonNull VariableExp variableExp) {
 		VariableDeclaration variableDeclaration = variableExp.getReferredVariable();
 		if (variableDeclaration instanceof Variable) {
 			Parameter representedParameter = ((Variable)variableDeclaration).getRepresentedParameter();
@@ -865,11 +873,11 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		if (variableDeclaration == null) {
 			return evaluationEnvironment.throwInvalidEvaluation("Undefined variable", variableExp);
 		}
-		Value value = evaluationEnvironment.getValueOf(variableDeclaration);
+		Object value = evaluationEnvironment.getValueOf(variableDeclaration);
 		if (value == null) {
 			return evaluationEnvironment.throwInvalidEvaluation("Undefined variable '" + variableDeclaration.getName() + "'", variableExp);
 		}
-		else if (value.isInvalid()) {
+		else if (ValuesUtil.isInvalid(value)) {
 			Exception e = ((InvalidValue)value).getException();
 			return evaluationEnvironment.throwInvalidEvaluation(e, variableExp, null, "Invalid variable '" + variableDeclaration.getName() +"'");
 		}
@@ -878,7 +886,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		}
 	}
 
-	public Value visiting(@NonNull Visitable visitable) {
+	public Object visiting(@NonNull Visitable visitable) {
 		throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for EvaluationVisitor");
 	}
 }

@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010,2011 E.D.Willink and others.
+ * Copyright (c) 2010,2012 E.D.Willink and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,8 +11,6 @@
  *   E.D.Willink - Initial API and implementation
  *
  * </copyright>
- *
- * $Id: TypeValue.java,v 1.4 2011/04/25 09:49:15 ewillink Exp $
  */
 package org.eclipse.ocl.examples.domain.values;
 
@@ -20,15 +18,16 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
+
 /**
  * A TypeValue is a value object whose value is a type, such as Boolean. The type of
  * a type value is a classifier such as Classifier&lt;Boolean&gt;. 
  */
-public interface TypeValue extends ElementValue
-{
-	/**
-	 * @throws InvalidValueException 
-	 * @generated NOT
-	 */
-	@NonNull DomainType getInstanceType() throws InvalidValueException;
-}
+public interface TypeValue extends Value
+	{
+		/**
+		 * @throws InvalidValueException 
+		 * @generated NOT
+		 */
+		@NonNull DomainType getInstanceType();// throws InvalidValueException;
+	}

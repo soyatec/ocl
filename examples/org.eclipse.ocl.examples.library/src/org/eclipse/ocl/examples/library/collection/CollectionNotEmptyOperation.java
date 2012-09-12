@@ -22,17 +22,16 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * CollectionNotEmptyOperation realises the Collection::notEmpty() library operation.
  */
 public class CollectionNotEmptyOperation extends AbstractUnaryOperation
 {
-	public static final CollectionNotEmptyOperation INSTANCE = new CollectionNotEmptyOperation();
+	public static final @NonNull CollectionNotEmptyOperation INSTANCE = new CollectionNotEmptyOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value argument) throws InvalidValueException {
-		CollectionValue collectionValue = argument.asCollectionValue();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object argument) throws InvalidValueException {
+		CollectionValue collectionValue = asCollectionValue(argument);
 		return collectionValue.notEmpty();
 	}
 }

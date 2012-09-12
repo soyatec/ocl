@@ -21,7 +21,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -29,7 +28,7 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class NumericGreaterThanOperation extends AbstractNumericBinaryOperation
 {
-	public static final NumericGreaterThanOperation INSTANCE = new NumericGreaterThanOperation();
+	public static final @NonNull NumericGreaterThanOperation INSTANCE = new NumericGreaterThanOperation();
 
 	@Override
 	protected @NonNull BooleanValue evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) {
@@ -44,8 +43,8 @@ public class NumericGreaterThanOperation extends AbstractNumericBinaryOperation
 	}
 
 	@Override
-	protected @NonNull BooleanValue evaluateUnlimited(@NonNull DomainEvaluator evaluator, @NonNull Value left, @NonNull Value right) {
+	protected @NonNull BooleanValue evaluateUnlimited(@NonNull DomainEvaluator evaluator, @NonNull Object left, @NonNull Object right) {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		return valueFactory.booleanValueOf(left.isUnlimited() && !right.isUnlimited());
+		return valueFactory.booleanValueOf(isUnlimited(left) && !isUnlimited(right));
 	}
 }

@@ -29,7 +29,7 @@ import org.eclipse.ocl.examples.domain.values.Value;
 @Deprecated
 public class NumericMinusOperation extends AbstractNumericBinaryOperation
 {
-	public static final NumericMinusOperation INSTANCE = new NumericMinusOperation();
+	public static final @NonNull NumericMinusOperation INSTANCE = new NumericMinusOperation();
 
 	@Override
 	protected @NonNull Value evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) throws InvalidValueException {

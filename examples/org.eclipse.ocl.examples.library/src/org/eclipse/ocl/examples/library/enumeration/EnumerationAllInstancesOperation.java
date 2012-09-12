@@ -20,16 +20,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
-import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
+import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
+import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -37,17 +35,16 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class EnumerationAllInstancesOperation extends AbstractUnaryOperation
 {
-	public static final EnumerationAllInstancesOperation INSTANCE = new EnumerationAllInstancesOperation();
+	public static final @NonNull EnumerationAllInstancesOperation INSTANCE = new EnumerationAllInstancesOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		TypeValue sourceTypeValue = sourceVal.asTypeValue();
-		DomainType sourceType = sourceTypeValue.getInstanceType();
-		Set<Value> results = new HashSet<Value>();
+		DomainType sourceType = asType(sourceVal);
+		Set<Object> results = new HashSet<Object>();
 		DomainEnumeration domainEnumeration = sourceType instanceof DomainEnumeration ? (DomainEnumeration)sourceType : (DomainEnumeration)((DomainMetaclass)sourceType).getInstanceType();
-		for (DomainElement instance : domainEnumeration.getEnumerationLiterals()) {
+		for (DomainEnumerationLiteral instance : domainEnumeration.getEnumerationLiterals()) {
 			if (instance != null) {
-				results.add(valueFactory.valueOf(instance));
+				results.add(valueFactory.createEnumerationLiteralValue(instance));
 			}
 		}
 		return valueFactory.createSetValue((DomainCollectionType)returnType, results);

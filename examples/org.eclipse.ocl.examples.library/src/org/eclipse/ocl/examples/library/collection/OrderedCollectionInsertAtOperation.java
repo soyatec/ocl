@@ -22,19 +22,18 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * OrderedCollectionInsertAtOperation realises the OrderedCollection::insertAt() library operation.
  */
 public class OrderedCollectionInsertAtOperation extends AbstractTernaryOperation
 {
-	public static final OrderedCollectionInsertAtOperation INSTANCE = new OrderedCollectionInsertAtOperation();
+	public static final @NonNull OrderedCollectionInsertAtOperation INSTANCE = new OrderedCollectionInsertAtOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull Value firstArgumentValue, @NonNull Value secondArgumentValue) throws InvalidValueException {
-		SequenceValue selfValue = sourceValue.asSequenceValue();
-		Integer indexValue = firstArgumentValue.asInteger();
-		Value insertValue = secondArgumentValue.asValidValue();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) throws InvalidValueException {
+		SequenceValue selfValue = asSequenceValue(sourceValue);
+		Integer indexValue = asInteger(firstArgumentValue);
+		Object insertValue = asValidValue(secondArgumentValue);
 		return selfValue.insertAt(indexValue, insertValue);
 	}
 }

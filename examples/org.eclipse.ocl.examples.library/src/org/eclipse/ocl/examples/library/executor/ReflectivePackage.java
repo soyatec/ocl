@@ -25,6 +25,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.typeids.Typeid;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
@@ -34,8 +35,8 @@ public abstract class ReflectivePackage extends ExecutorPackage
 {
 	protected @Nullable Map<DomainType, DomainInheritance> types = null;
 
-	public ReflectivePackage(@NonNull String name, @Nullable String nsPrefix, @Nullable String nsURI) {
-		super(name, nsPrefix, nsURI);
+	public ReflectivePackage(@NonNull String name, @Nullable String nsPrefix, @Nullable String nsURI, @NonNull Typeid typeid) {
+		super(name, nsPrefix, nsURI, typeid);
 	}
 	
 	protected @NonNull Map<DomainType, DomainInheritance> computeClasses() {

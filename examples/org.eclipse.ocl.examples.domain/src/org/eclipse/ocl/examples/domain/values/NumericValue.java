@@ -42,6 +42,11 @@ public interface NumericValue extends Value, Comparable<NumericValue>
 	/**
 	 * @generated NOT
 	 */
+	boolean isUnlimited();
+
+	/**
+	 * @generated NOT
+	 */
 	@NonNull NumericValue negate() throws InvalidValueException;
 
 	/**

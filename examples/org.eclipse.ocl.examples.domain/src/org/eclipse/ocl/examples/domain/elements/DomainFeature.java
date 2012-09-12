@@ -22,9 +22,14 @@ import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 public interface DomainFeature extends DomainTypedElement
 {
 	/**
-	 * Return the implementation of this operation.
+	 * Return the implementation of this feature.
 	 */
 	@Nullable LibraryFeature getImplementation();
+
+	/**
+	 * Return the owner this feature.
+	 */
+	/*@NonNull*/ DomainType getOwningType();
 
 	/**
 	 * Return true if this is a static operation.

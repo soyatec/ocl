@@ -4,14 +4,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="BagValue" eSuperTypes="#//CollectionValue"/>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanValue" eSuperTypes="#//Value"/>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionValue" abstract="true" eSuperTypes="#//Value"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CollectionTypeValue" eSuperTypes="#//TypeValue"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ElementValue" eSuperTypes="#//ObjectValue"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteralValue" eSuperTypes="#//ElementValue"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EnumerationTypeValue" eSuperTypes="#//TypeValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteralValue" eSuperTypes="#//Value"/>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerValue" eSuperTypes="#//NumericValue"/>
   <eClassifiers xsi:type="ecore:EClass" name="InvalidValue" eSuperTypes="#//NullValue"/>
-  <eClassifiers xsi:type="ecore:EClass" name="MetaclassValue" eSuperTypes="#//TypeValue"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NullValue" eSuperTypes="#//BooleanValue #//IntegerValue #//ObjectValue #//OrderedSetValue #//RealValue #//SetValue #//StringValue #//TypeValue #//UnlimitedValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NullValue" eSuperTypes="#//BooleanValue #//IntegerValue #//ObjectValue #//OrderedSetValue #//RealValue #//SetValue #//StringValue #//TupleValue #//UnlimitedValue"/>
   <eClassifiers xsi:type="ecore:EClass" name="NumericValue" abstract="true" interface="true"
       eSuperTypes="#//Value"/>
   <eClassifiers xsi:type="ecore:EClass" name="ObjectValue" abstract="true" eSuperTypes="#//Value"/>
@@ -19,10 +15,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="RealValue" eSuperTypes="#//NumericValue"/>
   <eClassifiers xsi:type="ecore:EClass" name="SequenceValue" eSuperTypes="#//CollectionValue"/>
   <eClassifiers xsi:type="ecore:EClass" name="SetValue" eSuperTypes="#//BagValue #//UniqueCollectionValue"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SimpleTypeValue" eSuperTypes="#//TypeValue"/>
   <eClassifiers xsi:type="ecore:EClass" name="StringValue" eSuperTypes="#//Value"/>
   <eClassifiers xsi:type="ecore:EClass" name="TupleValue" eSuperTypes="#//Value"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TypeValue" abstract="true" eSuperTypes="#//ElementValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeValue" eSuperTypes="#//Value"/>
   <eClassifiers xsi:type="ecore:EClass" name="UniqueCollectionValue" abstract="true"
       interface="true" eSuperTypes="#//CollectionValue"/>
   <eClassifiers xsi:type="ecore:EClass" name="UnlimitedValue" eSuperTypes="#//IntegerValue"/>

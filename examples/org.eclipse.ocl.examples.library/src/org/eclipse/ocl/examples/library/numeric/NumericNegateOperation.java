@@ -27,7 +27,7 @@ import org.eclipse.ocl.examples.domain.values.Value;
  */
 public class NumericNegateOperation extends AbstractNumericUnaryOperation
 {
-	public static final NumericNegateOperation INSTANCE = new NumericNegateOperation();
+	public static final @NonNull NumericNegateOperation INSTANCE = new NumericNegateOperation();
 
 	@Override
 	protected @NonNull Value evaluateInteger(@NonNull IntegerValue left) throws InvalidValueException {

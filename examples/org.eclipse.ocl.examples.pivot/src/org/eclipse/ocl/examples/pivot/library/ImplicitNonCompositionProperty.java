@@ -31,7 +31,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -42,12 +41,12 @@ public class ImplicitNonCompositionProperty extends AbstractProperty
 {
 	public static final @NonNull ImplicitNonCompositionProperty INSTANCE = new ImplicitNonCompositionProperty();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull DomainProperty thisProperty) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull DomainProperty thisProperty) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		DomainModelManager modelManager = evaluator.getModelManager();
 		DomainProperty thatProperty = thisProperty.getOpposite();
 		DomainType thatType = DomainUtil.nonNullModel(thisProperty.getType());		
-		List<Value> results = new ArrayList<Value>();
+		List<Object> results = new ArrayList<Object>();
 		for (EObject eObject : modelManager.get(thatType)) {	// FIXME Use a cache
 			EClass eClass = eObject.eClass();
 			EStructuralFeature eFeature = eClass.getEStructuralFeature(thatProperty.getName());

@@ -29,7 +29,6 @@ import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.osgi.util.NLS;
 
@@ -38,12 +37,12 @@ import org.eclipse.osgi.util.NLS;
  */
 public class CollectionProductOperation extends AbstractBinaryOperation
 {
-	public static final CollectionProductOperation INSTANCE = new CollectionProductOperation();
+	public static final @NonNull CollectionProductOperation INSTANCE = new CollectionProductOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal, @NonNull Value argVal) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal, @NonNull Object argVal) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		CollectionValue sourceValue = sourceVal.asCollectionValue();
-		CollectionValue argumentValue = argVal.asCollectionValue();
+		CollectionValue sourceValue = asCollectionValue(sourceVal);
+		CollectionValue argumentValue = asCollectionValue(argVal);
 		DomainCollectionType collType = (DomainCollectionType)returnType;
 		DomainTupleType tupleType = (DomainTupleType) DomainUtil.nonNullModel(collType.getElementType());
 		Set<TupleValue> product = sourceValue.product(argumentValue, tupleType);

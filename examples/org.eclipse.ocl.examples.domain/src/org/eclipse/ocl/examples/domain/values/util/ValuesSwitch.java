@@ -88,40 +88,10 @@ public class ValuesSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ValuesPackage.COLLECTION_TYPE_VALUE: {
-				CollectionTypeValue collectionTypeValue = (CollectionTypeValue)theEObject;
-				T result = caseCollectionTypeValue(collectionTypeValue);
-				if (result == null) result = caseTypeValue(collectionTypeValue);
-				if (result == null) result = caseElementValue(collectionTypeValue);
-				if (result == null) result = caseObjectValue(collectionTypeValue);
-				if (result == null) result = caseValue(collectionTypeValue);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ValuesPackage.ELEMENT_VALUE: {
-				ElementValue elementValue = (ElementValue)theEObject;
-				T result = caseElementValue(elementValue);
-				if (result == null) result = caseObjectValue(elementValue);
-				if (result == null) result = caseValue(elementValue);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case ValuesPackage.ENUMERATION_LITERAL_VALUE: {
 				EnumerationLiteralValue enumerationLiteralValue = (EnumerationLiteralValue)theEObject;
 				T result = caseEnumerationLiteralValue(enumerationLiteralValue);
-				if (result == null) result = caseElementValue(enumerationLiteralValue);
-				if (result == null) result = caseObjectValue(enumerationLiteralValue);
 				if (result == null) result = caseValue(enumerationLiteralValue);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ValuesPackage.ENUMERATION_TYPE_VALUE: {
-				EnumerationTypeValue enumerationTypeValue = (EnumerationTypeValue)theEObject;
-				T result = caseEnumerationTypeValue(enumerationTypeValue);
-				if (result == null) result = caseTypeValue(enumerationTypeValue);
-				if (result == null) result = caseElementValue(enumerationTypeValue);
-				if (result == null) result = caseObjectValue(enumerationTypeValue);
-				if (result == null) result = caseValue(enumerationTypeValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -138,31 +108,20 @@ public class ValuesSwitch<T> extends Switch<T> {
 				T result = caseInvalidValue(invalidValue);
 				if (result == null) result = caseNullValue(invalidValue);
 				if (result == null) result = caseBooleanValue(invalidValue);
-				if (result == null) result = caseIntegerValue(invalidValue);
+				if (result == null) result = caseObjectValue(invalidValue);
 				if (result == null) result = caseOrderedSetValue(invalidValue);
 				if (result == null) result = caseRealValue(invalidValue);
 				if (result == null) result = caseSetValue(invalidValue);
 				if (result == null) result = caseStringValue(invalidValue);
-				if (result == null) result = caseTypeValue(invalidValue);
+				if (result == null) result = caseTupleValue(invalidValue);
 				if (result == null) result = caseUnlimitedValue(invalidValue);
+				if (result == null) result = caseIntegerValue(invalidValue);
 				if (result == null) result = caseNumericValue(invalidValue);
 				if (result == null) result = caseSequenceValue(invalidValue);
 				if (result == null) result = caseUniqueCollectionValue(invalidValue);
 				if (result == null) result = caseBagValue(invalidValue);
-				if (result == null) result = caseElementValue(invalidValue);
-				if (result == null) result = caseObjectValue(invalidValue);
 				if (result == null) result = caseCollectionValue(invalidValue);
 				if (result == null) result = caseValue(invalidValue);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ValuesPackage.METACLASS_VALUE: {
-				MetaclassValue metaclassValue = (MetaclassValue)theEObject;
-				T result = caseMetaclassValue(metaclassValue);
-				if (result == null) result = caseTypeValue(metaclassValue);
-				if (result == null) result = caseElementValue(metaclassValue);
-				if (result == null) result = caseObjectValue(metaclassValue);
-				if (result == null) result = caseValue(metaclassValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -170,19 +129,18 @@ public class ValuesSwitch<T> extends Switch<T> {
 				NullValue nullValue = (NullValue)theEObject;
 				T result = caseNullValue(nullValue);
 				if (result == null) result = caseBooleanValue(nullValue);
-				if (result == null) result = caseIntegerValue(nullValue);
+				if (result == null) result = caseObjectValue(nullValue);
 				if (result == null) result = caseOrderedSetValue(nullValue);
 				if (result == null) result = caseRealValue(nullValue);
 				if (result == null) result = caseSetValue(nullValue);
 				if (result == null) result = caseStringValue(nullValue);
-				if (result == null) result = caseTypeValue(nullValue);
+				if (result == null) result = caseTupleValue(nullValue);
 				if (result == null) result = caseUnlimitedValue(nullValue);
+				if (result == null) result = caseIntegerValue(nullValue);
 				if (result == null) result = caseNumericValue(nullValue);
 				if (result == null) result = caseSequenceValue(nullValue);
 				if (result == null) result = caseUniqueCollectionValue(nullValue);
 				if (result == null) result = caseBagValue(nullValue);
-				if (result == null) result = caseElementValue(nullValue);
-				if (result == null) result = caseObjectValue(nullValue);
 				if (result == null) result = caseCollectionValue(nullValue);
 				if (result == null) result = caseValue(nullValue);
 				if (result == null) result = defaultCase(theEObject);
@@ -238,16 +196,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ValuesPackage.SIMPLE_TYPE_VALUE: {
-				SimpleTypeValue simpleTypeValue = (SimpleTypeValue)theEObject;
-				T result = caseSimpleTypeValue(simpleTypeValue);
-				if (result == null) result = caseTypeValue(simpleTypeValue);
-				if (result == null) result = caseElementValue(simpleTypeValue);
-				if (result == null) result = caseObjectValue(simpleTypeValue);
-				if (result == null) result = caseValue(simpleTypeValue);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case ValuesPackage.STRING_VALUE: {
 				StringValue stringValue = (StringValue)theEObject;
 				T result = caseStringValue(stringValue);
@@ -265,8 +213,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 			case ValuesPackage.TYPE_VALUE: {
 				TypeValue typeValue = (TypeValue)theEObject;
 				T result = caseTypeValue(typeValue);
-				if (result == null) result = caseElementValue(typeValue);
-				if (result == null) result = caseObjectValue(typeValue);
 				if (result == null) result = caseValue(typeValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -282,6 +228,7 @@ public class ValuesSwitch<T> extends Switch<T> {
 			case ValuesPackage.UNLIMITED_VALUE: {
 				UnlimitedValue unlimitedValue = (UnlimitedValue)theEObject;
 				T result = caseUnlimitedValue(unlimitedValue);
+				if (result == null) result = caseIntegerValue(unlimitedValue);
 				if (result == null) result = caseNumericValue(unlimitedValue);
 				if (result == null) result = caseValue(unlimitedValue);
 				if (result == null) result = defaultCase(theEObject);
@@ -343,36 +290,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Collection Type Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Collection Type Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCollectionTypeValue(CollectionTypeValue object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Element Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Element Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseElementValue(ElementValue object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Enumeration Literal Value</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -384,21 +301,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseEnumerationLiteralValue(EnumerationLiteralValue object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Enumeration Type Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Enumeration Type Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEnumerationTypeValue(EnumerationTypeValue object) {
 		return null;
 	}
 
@@ -429,21 +331,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseInvalidValue(InvalidValue object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Metaclass Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Metaclass Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseMetaclassValue(MetaclassValue object) {
 		return null;
 	}
 
@@ -549,21 +436,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSetValue(SetValue object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Simple Type Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Simple Type Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSimpleTypeValue(SimpleTypeValue object) {
 		return null;
 	}
 

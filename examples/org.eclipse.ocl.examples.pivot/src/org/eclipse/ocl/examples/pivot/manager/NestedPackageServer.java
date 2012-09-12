@@ -22,6 +22,8 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
+import org.eclipse.ocl.examples.domain.typeids.Typeid;
+import org.eclipse.ocl.examples.domain.typeids.TypeidManager;
 
 /**
  * A RootPackageServer adapts the primary nested Package to coordinate the coherent behavior of a primary and one or more
@@ -34,8 +36,8 @@ public class NestedPackageServer extends PackageServer
 	
 	private final @NonNull PackageServer parentPackageServer;
 	
-	public NestedPackageServer(@NonNull PackageServer parentPackageServer, @NonNull String name, @Nullable String nsPrefix, @Nullable String nsURI) {
-		super(parentPackageServer.getPackageManager(), name, nsPrefix, nsURI);
+	public NestedPackageServer(@NonNull PackageServer parentPackageServer, @NonNull String name, @Nullable String nsPrefix, @Nullable String nsURI, @NonNull Typeid typeid) {
+		super(parentPackageServer.getPackageManager(), name, nsPrefix, nsURI, typeid);
 		this.parentPackageServer = parentPackageServer;
 	}
 

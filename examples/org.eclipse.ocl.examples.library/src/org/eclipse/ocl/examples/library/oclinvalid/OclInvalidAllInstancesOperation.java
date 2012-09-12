@@ -22,7 +22,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -30,9 +29,9 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class OclInvalidAllInstancesOperation extends AbstractUnaryOperation
 {
-	public static final OclInvalidAllInstancesOperation INSTANCE = new OclInvalidAllInstancesOperation();
+	public static final @NonNull OclInvalidAllInstancesOperation INSTANCE = new OclInvalidAllInstancesOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		// OclInvalid has a single instance: invalid that cannot be returned in a collection
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidLiteral);

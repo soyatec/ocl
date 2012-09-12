@@ -28,11 +28,8 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.BooleanValue;
-import org.eclipse.ocl.examples.domain.values.CollectionTypeValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.ElementValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.MetaclassValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
@@ -40,7 +37,6 @@ import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.StringValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -99,10 +95,6 @@ public abstract class ValueImpl implements Value
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Boolean", getType());
 	}
 
-	public @NonNull CollectionTypeValue asCollectionTypeValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "CollectionType", getType());
-	}
-
 	public @NonNull CollectionValue asCollectionValue() throws InvalidValueException {
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Collection", getType());
 	}
@@ -112,16 +104,12 @@ public abstract class ValueImpl implements Value
 		return NULL_DOUBLE;			// Unreachable code
 	}
 
-	public Object asEcoreObject() {
+	public Object asEcoreObject() throws InvalidValueException {
 		return asObject();
 	}
 
 	public DomainElement asElement() {
 		return null;
-	}
-
-	public @NonNull ElementValue asElementValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Element", getType());
 	}
 
 	public @NonNull Integer asInteger() throws InvalidValueException {
@@ -131,10 +119,6 @@ public abstract class ValueImpl implements Value
 
 	public @NonNull IntegerValue asIntegerValue() throws InvalidValueException {
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Integer", getType());
-	}
-
-	public @NonNull MetaclassValue asMetaclassValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Metaclass", getType());
 	}
 
 	public @NonNull EObject asNavigableObject() throws InvalidValueException {
@@ -180,10 +164,6 @@ public abstract class ValueImpl implements Value
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Tuple", getType());
 	}
 
-	public @NonNull TypeValue asTypeValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Type", getType());
-	}
-
 	public @NonNull UniqueCollectionValue asUniqueCollectionValue() throws InvalidValueException {
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Unique Collection", getType());
 	}
@@ -192,7 +172,11 @@ public abstract class ValueImpl implements Value
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "UnlimitedNatural", getType());
 	}
 
-	public @NonNull DomainType getActualType() {
+	public @NonNull Value asValidValue() throws InvalidValueException {
+		return this;
+	}
+
+	public @NonNull DomainType getActualType() throws InvalidValueException {
 		return getType();
 	}
 	
@@ -200,54 +184,46 @@ public abstract class ValueImpl implements Value
 		return valueFactory;
 	}
 
-	public CollectionValue isCollectionValue() {
-		return null;
-	}
+//	public CollectionValue isCollectionValue() {
+//		return null;
+//	}
 
-	public boolean isFalse() {
-		return false;
-	}
-
-	public IntegerValue isIntegerValue() {
-		return null;
-	}
+//	public IntegerValue isIntegerValue() {
+//		return null;
+//	}
 
 	public boolean isInvalid() {
 		return false;
 	}
 
-	public boolean isNull() {
-		return false;
-	}
+//	public boolean isNull() {
+//		return false;
+//	}
 
-	public RealValue isRealValue() {
-		return null;
-	}
+//	public RealValue isRealValue() {
+//		return null;
+//	}
 
-	public StringValue isStringValue() {
-		return null;
-	}
-
-	public boolean isTrue() {
-		return false;
-	}
+//	public StringValue isStringValue() {
+//		return null;
+//	}
 
 	public boolean isUndefined() {
 		return false;
 	}
 
-	public boolean isUnlimited() {
-		return false;
-	}
+//	public boolean isUnlimited() {
+//		return false;
+//	}
 	
-	public boolean isUnlimitedNatural() {
-		return false;
-	}
+//	public boolean isUnlimitedNatural() {
+//		return false;
+//	}
 
-	public @NonNull String oclToString() {
-		@SuppressWarnings("null") @NonNull String result = toString();
-		return result;
-	}
+//	public @NonNull String oclToString() {
+//		@SuppressWarnings("null") @NonNull String result = toString();
+//		return result;
+//	}
 
 	public void toString(@NonNull StringBuilder s, int sizeLimit) {
 		s.append(toString());

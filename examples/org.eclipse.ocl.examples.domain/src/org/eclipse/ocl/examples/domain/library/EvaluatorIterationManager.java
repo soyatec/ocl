@@ -27,7 +27,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.osgi.util.NLS;
 
 public abstract class EvaluatorIterationManager extends AbstractIterationManager
@@ -37,8 +36,8 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 		private final DomainEvaluationEnvironment evaluationEnvironment;
 		private final CollectionValue collectionValue;
 		private final DomainTypedElement variable;
-		private Iterator<Value> javaIter;
-		private Value value = null;
+		private Iterator<? extends Object> javaIter;
+		private Object value = null;
 
 		public ValueIterator(@NonNull DomainEvaluator evaluator, @NonNull CollectionValue collectionValue, @NonNull DomainTypedElement variable) {
 			this.evaluationEnvironment = evaluator.getEvaluationEnvironment();
@@ -47,7 +46,7 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 			reset();
 		}
 		
-		public @Nullable Value get() {
+		public @Nullable Object get() {
 			return value;
 		}
 
@@ -55,7 +54,7 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 			return value != null;
 		}
 		
-		public @Nullable Value next() {
+		public @Nullable Object next() {
 			if (!javaIter.hasNext()) {
 				value = null;
 			}
@@ -67,7 +66,7 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 			return value;
 		}
 
-		public Value reset() {
+		public Object reset() {
 			javaIter = collectionValue.iterator();
 			return next();
 		}
@@ -97,10 +96,10 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 	protected final @NonNull CollectionValue collectionValue;
 	protected final @NonNull DomainExpression body;
 	protected final DomainTypedElement accumulatorVariable;
-	private @NonNull Value accumulatorValue;
+	private @NonNull Object accumulatorValue;
 
 	public EvaluatorIterationManager(@NonNull DomainEvaluator evaluator, @NonNull DomainExpression body, @NonNull CollectionValue collectionValue,
-			@Nullable DomainTypedElement accumulatorVariable, @NonNull Value accumulatorValue) {
+			@Nullable DomainTypedElement accumulatorVariable, @NonNull Object accumulatorValue) {
 		super(evaluator);
 		this.collectionValue = collectionValue;
 		this.body = body;
@@ -119,11 +118,11 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 		this.accumulatorVariable = iterationManager.accumulatorVariable;
 	}
 	
-	public @NonNull Value getAccumulatorValue() {
+	public @NonNull Object getAccumulatorValue() {
 		return accumulatorValue;
 	}
 
-	public @NonNull Value evaluateBody() {
+	public @NonNull Object evaluateBody() {
 		return evaluator.evaluate(body);
 	}
 	
@@ -146,8 +145,8 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 		return body.toString();
 	}
 
-	public @Nullable Value updateBody() {
-		Value bodyVal = evaluateBody();		
+	public @Nullable Object updateBody() {
+		Object bodyVal = evaluateBody();		
 		this.accumulatorValue = bodyVal;
 		if (accumulatorVariable != null) {
 			getEvaluationEnvironment().replace(accumulatorVariable, accumulatorValue);

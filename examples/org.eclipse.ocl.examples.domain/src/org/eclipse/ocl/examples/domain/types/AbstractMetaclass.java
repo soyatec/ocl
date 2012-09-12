@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.typeids.Typeid;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 public class AbstractMetaclass extends AbstractSpecializedType implements DomainMetaclass
@@ -29,10 +30,12 @@ public class AbstractMetaclass extends AbstractSpecializedType implements Domain
 	protected DomainType metaType = null;
 	private DomainType normalizedInstanceType = null;
 	private int hashCode;
+	protected final @NonNull Typeid typeid;
 	
 	public AbstractMetaclass(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType containerType, @NonNull DomainType instanceType) {
 		super(standardLibrary, DomainUtil.nonNullModel(containerType.getName()), containerType);
 		this.instanceType = instanceType;
+		this.typeid = containerType.getTypeid().getCollectedTypeid(instanceType.getTypeid());
 	}
 
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
@@ -91,6 +94,10 @@ public class AbstractMetaclass extends AbstractSpecializedType implements Domain
 			hashCode = normalizedInstanceType2.hashCode();
 		}
 		return normalizedInstanceType2;
+	}
+
+	public @NonNull Typeid getTypeid() {
+		return typeid;
 	}
 
 	@Override

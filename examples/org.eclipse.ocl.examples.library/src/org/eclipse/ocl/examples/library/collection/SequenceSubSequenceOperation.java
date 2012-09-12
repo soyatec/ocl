@@ -22,19 +22,18 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * SequenceSubSequenceOperation realises the OrderedSet::subSequence() library operation.
  */
 public class SequenceSubSequenceOperation extends AbstractTernaryOperation
 {
-	public static final SequenceSubSequenceOperation INSTANCE = new SequenceSubSequenceOperation();
+	public static final @NonNull SequenceSubSequenceOperation INSTANCE = new SequenceSubSequenceOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull Value firstArgumentValue, @NonNull Value secondArgumentValue) throws InvalidValueException {
-		SequenceValue selfValue = sourceValue.asSequenceValue();
-		Integer fromValue = firstArgumentValue.asInteger();
-		Integer toValue = secondArgumentValue.asInteger();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) throws InvalidValueException {
+		SequenceValue selfValue = asSequenceValue(sourceValue);
+		Integer fromValue = asInteger(firstArgumentValue);
+		Integer toValue = asInteger(secondArgumentValue);
 		return selfValue.subSequence(fromValue, toValue);
 	}
 }

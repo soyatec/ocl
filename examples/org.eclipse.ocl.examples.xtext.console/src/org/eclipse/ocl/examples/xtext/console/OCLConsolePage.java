@@ -50,6 +50,7 @@ import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
@@ -203,14 +204,14 @@ public class OCLConsolePage extends Page
 	{
 		private final @NonNull BaseResource resource;
 		private final @NonNull String expression;
-		private Value value = null;
+		private Object value = null;
 		
 		public EvaluationRunnable(@NonNull BaseResource resource, @NonNull String expression) {
 			this.resource = resource;
 			this.expression = expression;
 		}
 
-		public Value getValue() {
+		public Object getValue() {
 			return value;
 		}
 
@@ -244,7 +245,7 @@ public class OCLConsolePage extends Page
 				PivotEnvironmentFactory envFactory = new PivotEnvironmentFactory(null, metaModelManager);
 				PivotEnvironment environment = envFactory.createEnvironment();
 				PivotEvaluationEnvironment evaluationEnvironment = envFactory.createEvaluationEnvironment();
-				Value contextValue = valueFactory.valueOf(contextObject);
+				Object contextValue = valueFactory.valueOf(contextObject);
 				evaluationEnvironment.add(expressionInOCL.getContextVariable(), contextValue);
 	//			if (modelManager == null) {
 					// let the evaluation environment create one
@@ -735,11 +736,11 @@ public class OCLConsolePage extends Page
 			append(ConsoleMessages.Heading_Results, ColorManager.DEFAULT, true);
             
         	final BaseDocument editorDocument = getEditorDocument();
-        	Value value = null;
+        	Object value = null;
         	try {
-        		value = editorDocument.readOnly(new IUnitOfWork<Value, XtextResource>() {
+        		value = editorDocument.readOnly(new IUnitOfWork<Object, XtextResource>() {
 
-				public Value exec(XtextResource state) throws Exception {
+				public Object exec(XtextResource state) throws Exception {
 					assert state != null;
 					IProgressService progressService = PlatformUI.getWorkbench().getProgressService();
 					EvaluationRunnable runnable = new EvaluationRunnable((BaseResource) state, expression);
@@ -755,9 +756,9 @@ public class OCLConsolePage extends Page
         		append(String.valueOf(value), ColorManager.OUTPUT_ERROR, false);
         	}
         	else if (value != null) {
-        		CollectionValue collectionValue = value.isCollectionValue();
+        		CollectionValue collectionValue = ValuesUtil.isCollectionValue(value);
 				if (collectionValue != null) {
-					for (Value elementValue : collectionValue) {
+					for (Object elementValue : collectionValue.iterable()) {
 						append(String.valueOf(elementValue), ColorManager.OUTPUT_RESULTS, false);
 	        		}
 				}

@@ -25,6 +25,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.typeids.Typeid;
 import org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation;
 
 public class ExecutorOperation implements DomainOperation
@@ -82,6 +83,10 @@ public class ExecutorOperation implements DomainOperation
 		return name;
 	}
 
+	public @NonNull DomainType getOwningType() {
+		throw new UnsupportedOperationException();			// FIXME
+	}
+
 	public @NonNull DomainParameterTypes getParameterTypes() {
 		return parameterTypes;
 	}
@@ -93,6 +98,10 @@ public class ExecutorOperation implements DomainOperation
 
 	public @NonNull DomainTypeParameters getTypeParameters() {
 		return typeParameters;
+	}
+
+	public @NonNull Typeid getTypeid() {
+		throw new UnsupportedOperationException();			// FIXME
 	}
 
 	public boolean isStatic() {

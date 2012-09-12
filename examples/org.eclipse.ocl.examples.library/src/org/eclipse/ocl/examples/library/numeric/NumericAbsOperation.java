@@ -27,7 +27,7 @@ import org.eclipse.ocl.examples.domain.values.Value;
  */
 public class NumericAbsOperation extends AbstractNumericUnaryOperation
 {
-	public static final NumericAbsOperation INSTANCE = new NumericAbsOperation();
+	public static final @NonNull NumericAbsOperation INSTANCE = new NumericAbsOperation();
 
 	@Override
 	protected @NonNull Value evaluateInteger(@NonNull IntegerValue left) throws InvalidValueException {

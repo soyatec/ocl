@@ -89,10 +89,6 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 		return this;
 	}
 
-	public @NonNull Value asValidValue() {
-		return this;
-	}
-
 	public @NonNull BigDecimal bigDecimalValue() throws InvalidValueException {
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "bigDecimalValue", "UnlimitedValue");
 	}
@@ -141,12 +137,10 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "intValue", "UnlimitedValue");
 	}
 
-	@Override
 	public boolean isUnlimited() {
 		return true;
 	}
 
-	@Override
 	public boolean isUnlimitedNatural() {
 		return true;
 	}

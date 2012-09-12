@@ -20,9 +20,10 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.typeids.Typeid;
+import org.eclipse.ocl.examples.domain.typeids.TypeidManager;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.executor.ExecutorFragment;
 import org.eclipse.ocl.examples.library.executor.ExecutorPackage;
@@ -32,6 +33,7 @@ import org.eclipse.ocl.examples.library.executor.ExecutorTypeParameter;
 public class EcoreExecutorType extends ExecutorType
 {
 	protected @Nullable EClassifier eClassifier;
+	private @Nullable Typeid typeid = null;
 	
 	/**
 	 * Construct an executable type descriptor in the absence of a known EClassifier. A subsequent
@@ -62,7 +64,7 @@ public class EcoreExecutorType extends ExecutorType
 	}
 
 	@Override
-	public @NonNull Value createInstance(@NonNull ValueFactory valueFactory, @NonNull String value) {
+	public @NonNull Object createInstance(@NonNull ValueFactory valueFactory, @NonNull String value) {
 		EClassifier eClassifier2 = eClassifier;
 		if (eClassifier2 instanceof EDataType) {
 			EDataType eDataType = (EDataType) eClassifier2;
@@ -81,6 +83,28 @@ public class EcoreExecutorType extends ExecutorType
 		return DomainUtil.nonNullModel(DomainUtil.nonNullState(eClassifier).getName());
 	}
 	
+	@Override
+	public @NonNull Typeid getTypeid() {
+		Typeid typeid2 = typeid;
+		if (typeid2 == null) {
+			EClassifier eClassifier2 = eClassifier;
+			if (eClassifier2 != null) {
+				typeid2 = TypeidManager.INSTANCE.getTypeTypeid(eClassifier2);
+			}
+			else {
+				if ("Metaclass".equals(name)) {
+					typeid2 = TypeidManager.INSTANCE.getUnscopedTypeid(name);
+				}
+				else {
+					Typeid packageTypeid = TypeidManager.INSTANCE.getPackageTypeid(evaluationPackage);
+					typeid2 = packageTypeid.getNestedTypeid(name);
+				}
+			}
+			typeid = typeid2;
+		}
+		return typeid2;
+	}
+
 	/**
 	 * Define the EClassifier associated with an executable type. This initialization may
 	 * be performed once to allow an Ecore-aware package of type descriptors to re-use and

@@ -27,7 +27,7 @@ import org.eclipse.ocl.examples.domain.values.Value;
  */
 public class NumericFloorOperation extends AbstractNumericUnaryOperation
 {
-	public static final NumericFloorOperation INSTANCE = new NumericFloorOperation();
+	public static final @NonNull NumericFloorOperation INSTANCE = new NumericFloorOperation();
 
 	@Override
 	protected @NonNull Value evaluateInteger(@NonNull IntegerValue left) {

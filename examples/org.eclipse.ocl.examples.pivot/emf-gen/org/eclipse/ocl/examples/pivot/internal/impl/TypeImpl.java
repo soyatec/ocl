@@ -18,8 +18,8 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
-import java.util.Map;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -41,13 +41,15 @@ import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.typeids.Typeid;
+import org.eclipse.ocl.examples.domain.typeids.TypeidManager;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
@@ -485,12 +487,12 @@ public class TypeImpl
 		try {
 			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
 			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull Object self = valueFactory.valueOf(this);
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
 			final @NonNull DomainType returnType = T_Boolean;
-			final @NonNull Value result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(p));
-			return (Boolean) result.asEcoreObject();
+			final @NonNull Object result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(p));
+			return (Boolean) ValuesUtil.asEcoreObject(result);
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.ParameterableElementBodies", e);
 		}
@@ -510,12 +512,12 @@ public class TypeImpl
 		try {
 			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
 			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull Object self = valueFactory.valueOf(this);
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			
 			final @NonNull DomainType returnType = T_Type;
-			final @NonNull Value result = TypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(selfType));
-			return (Type) result.asEcoreObject();
+			final @NonNull Object result = TypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(selfType));
+			return (Type) ValuesUtil.asEcoreObject(result);
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.TypeBodies", e);
 		}
@@ -1126,7 +1128,7 @@ public class TypeImpl
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull Value createInstance(@NonNull ValueFactory valueFactory, @NonNull String value) {
+	public @NonNull Object createInstance(@NonNull ValueFactory valueFactory, @NonNull String value) {
 		EObject eTarget = getETarget();
 		if (eTarget instanceof EDataType) {
 			EDataType eDataType = (EDataType) eTarget;
@@ -1178,6 +1180,44 @@ public class TypeImpl
 		return TemplateSignatureImpl.getTypeParameters(getOwnedTemplateSignature());
 	}
 
+	private Typeid typeid = null;
+	
+	public final @NonNull Typeid getTypeid() {
+		Typeid typeid2 = typeid;
+		if (typeid2 == null) {
+			synchronized (this) {
+				typeid2 = typeid;
+				if (typeid2 == null) {
+					typeid = typeid2 = computeTypeid();
+				}
+			}
+		}
+		return typeid2;
+	}
+	
+	public @NonNull Typeid computeTypeid() {
+		TemplateParameter owningTemplateParameter = getOwningTemplateParameter();
+		if (owningTemplateParameter != null) {
+			TemplateableElement template = owningTemplateParameter.getSignature().getTemplate();
+			Typeid parentTypeid;
+			if (template instanceof Type) {
+				parentTypeid = ((Type)template).getTypeid();			
+			}
+			else if (template instanceof Operation) {
+				parentTypeid = ((Operation)template).getTypeid();			
+			}
+			else {
+				parentTypeid = Typeid.OCL_INVALID;			
+			}
+			String name2 = getName();
+			assert name2 != null;
+			return parentTypeid.getParameterTypeid(name2);
+		}
+		else {
+			return TypeidManager.INSTANCE.getTypeTypeid(this);
+		}
+	}
+
 	public boolean isEqualTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		if (this == type) {
 			return true;
@@ -1191,6 +1231,10 @@ public class TypeImpl
 		if (this == type) {
 			return true;
 		}
+		return false;
+	}
+
+	public boolean isInvalid() {
 		return false;
 	}
 

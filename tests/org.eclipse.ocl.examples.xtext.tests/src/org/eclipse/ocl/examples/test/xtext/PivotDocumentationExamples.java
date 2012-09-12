@@ -39,7 +39,6 @@ import org.eclipse.emf.examples.extlibrary.BookCategory;
 import org.eclipse.emf.examples.extlibrary.EXTLibraryFactory;
 import org.eclipse.emf.examples.extlibrary.EXTLibraryPackage;
 import org.eclipse.emf.examples.extlibrary.Library;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
@@ -233,8 +232,7 @@ public class PivotDocumentationExamples extends XtextTestCase
 		ExpressionInOCL query = helper.createQuery(
 		    "getBooks('Bleak House')->asSequence()->first()");
 
-		Value bookValue = ocl.evaluate(library, query);
-		Book book = (Book) bookValue.asObject();
+		Book book = (Book) ocl.evaluate(library, query);
 		debugPrintf("Got book: %s%n\n", book);
 
 		// use the unique_title constraint to validate the book

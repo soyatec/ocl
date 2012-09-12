@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
@@ -102,10 +101,6 @@ public class RealValueImpl extends ValueImpl implements RealValue
 
 	@Override
 	public @NonNull RealValue asRealValue() {
-		return this;
-	}
-
-	public @NonNull Value asValidValue() {
 		return this;
 	}
 
@@ -189,9 +184,13 @@ public class RealValueImpl extends ValueImpl implements RealValue
 		}
 	}
 
-	@Override
-	public RealValue isRealValue() {
-		return this;
+//	@Override
+//	public RealValue isRealValue() {
+//		return this;
+//	}
+
+	public boolean isUnlimited() {
+		return false;
 	}
 
 	public @NonNull RealValue max(@NonNull RealValue rightValue) {

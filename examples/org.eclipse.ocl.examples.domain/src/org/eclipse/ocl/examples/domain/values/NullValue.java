@@ -20,8 +20,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 public interface NullValue
-	extends BooleanValue, RealValue, StringValue, UnlimitedValue,
-		OrderedSetValue, SetValue, TupleValue, TypeValue
+	extends BooleanValue, ObjectValue, RealValue, StringValue, UnlimitedValue,
+		OrderedSetValue, SetValue, TupleValue
 {
 	/**
 	 * @generated NOT

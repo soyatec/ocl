@@ -22,18 +22,17 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * StringAtOperation realises the String::at() library operation.
  */
 public class StringAtOperation extends AbstractBinaryOperation
 {
-	public static final StringAtOperation INSTANCE = new StringAtOperation();
+	public static final @NonNull StringAtOperation INSTANCE = new StringAtOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
-		String leftString = left.asString();
-		Integer rightInteger = right.asInteger();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
+		String leftString = asString(left);
+		Integer rightInteger = asInteger(right);
 		int size = leftString.length();
 		int index = rightInteger.intValue();
 		if ((0 < index) && (index <= size)) {

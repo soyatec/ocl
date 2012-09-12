@@ -51,6 +51,11 @@ public interface IntegerValue extends NumericValue
 	/**
 	 * @generated NOT
 	 */
+	boolean isUnlimitedNatural();
+
+	/**
+	 * @generated NOT
+	 */
 	@NonNull IntegerValue max(@NonNull IntegerValue right) throws InvalidValueException;
 
 	/**

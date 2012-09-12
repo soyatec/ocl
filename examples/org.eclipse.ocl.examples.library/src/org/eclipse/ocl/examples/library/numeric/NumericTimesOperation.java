@@ -28,7 +28,7 @@ import org.eclipse.ocl.examples.domain.values.Value;
  */
 public class NumericTimesOperation extends AbstractNumericBinaryOperation
 {
-	public static final NumericTimesOperation INSTANCE = new NumericTimesOperation();
+	public static final @NonNull NumericTimesOperation INSTANCE = new NumericTimesOperation();
 
 	@Override
 	protected @NonNull Value evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) throws InvalidValueException {

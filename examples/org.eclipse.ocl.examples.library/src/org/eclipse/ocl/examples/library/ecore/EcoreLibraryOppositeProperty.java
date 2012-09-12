@@ -23,7 +23,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /** 
  * An EcoreLibraryOppositeProperty provides the LibraryProperty to implement a
@@ -37,7 +36,7 @@ public class EcoreLibraryOppositeProperty extends AbstractProperty
 		this.eFeature = eFeature;
 	}
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
 		throw new UnsupportedOperationException();		// WIP
 	}
 }

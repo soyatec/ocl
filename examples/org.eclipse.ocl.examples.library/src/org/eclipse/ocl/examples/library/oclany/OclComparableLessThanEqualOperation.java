@@ -16,12 +16,14 @@
  */
 package org.eclipse.ocl.examples.library.oclany;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  * GreaterThanEqualOperation realises the <=() library operation.
  */
 public class OclComparableLessThanEqualOperation extends OclComparableComparisonOperation
 {
-	public static final OclComparableLessThanEqualOperation INSTANCE = new OclComparableLessThanEqualOperation();
+	public static final @NonNull OclComparableLessThanEqualOperation INSTANCE = new OclComparableLessThanEqualOperation();
 
 	@Override
 	protected boolean getResultValue(Integer comparison) {

@@ -29,7 +29,7 @@ import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 /**
  * @generated NOT
  */
-public class EnumerationLiteralValueImpl extends ObjectValueImpl implements EnumerationLiteralValue
+public class EnumerationLiteralValueImpl extends ValueImpl implements EnumerationLiteralValue
 {
 	/**
 	 * <!-- begin-user-doc -->
@@ -49,8 +49,9 @@ public class EnumerationLiteralValueImpl extends ObjectValueImpl implements Enum
 		this.object = object;
 	}
 
+	@SuppressWarnings("null")
 	@Override
-	public Object asEcoreObject() {
+	public @NonNull Object asEcoreObject() {
 		return object.asEcoreObject(valueFactory.getStandardLibrary());
 	}
 
@@ -59,13 +60,7 @@ public class EnumerationLiteralValueImpl extends ObjectValueImpl implements Enum
 		return object;
 	}
 
-	@Override
-	public @NonNull EnumerationLiteralValue asElementValue() {
-		return this;
-	}
-
-	@Override
-	public Object asObject() {
+	public @NonNull Object asObject() {
 		return object;
 	}
 
@@ -103,7 +98,6 @@ public class EnumerationLiteralValueImpl extends ObjectValueImpl implements Enum
 		return name;
 	}
 
-	@Override
 	public @NonNull DomainEnumerationLiteral getObject() {
 		return object;
 	}

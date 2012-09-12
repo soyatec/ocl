@@ -21,6 +21,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.typeids.Typeid;
+import org.eclipse.ocl.examples.domain.typeids.TypeidManager;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
@@ -29,6 +31,7 @@ public class AbstractCollectionType extends AbstractSpecializedType implements D
 	protected final @NonNull DomainType elementType;
 	protected final @NonNull IntegerValue lower;
 	protected final @NonNull IntegerValue upper;
+	protected final @NonNull Typeid typeid;
 	
 	public AbstractCollectionType(@NonNull DomainStandardLibrary standardLibrary, @NonNull String name,
 			@NonNull DomainType containerType, @NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
@@ -37,6 +40,7 @@ public class AbstractCollectionType extends AbstractSpecializedType implements D
 		ValueFactory valueFactory = standardLibrary.getValueFactory();
 		this.lower = lower != null ? lower : valueFactory.getZero();
 		this.upper = upper != null ? upper : valueFactory.getUnlimited();
+		this.typeid = TypeidManager.INSTANCE.getCollectedTypeid(name, elementType.getTypeid());
 	}
 
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
@@ -95,6 +99,10 @@ public class AbstractCollectionType extends AbstractSpecializedType implements D
 
 	public @NonNull IntegerValue getLowerValue(@NonNull ValueFactory valueFactory) {
 		return lower;
+	}
+
+	public @NonNull Typeid getTypeid() {
+		return typeid;
 	}
 
 	public @NonNull IntegerValue getUpperValue(@NonNull ValueFactory valueFactory) {

@@ -28,7 +28,7 @@ import org.eclipse.ocl.examples.domain.values.Value;
  */
 public class NumericDivideOperation extends AbstractNumericBinaryOperation
 {
-	public static final NumericDivideOperation INSTANCE = new NumericDivideOperation();
+	public static final @NonNull NumericDivideOperation INSTANCE = new NumericDivideOperation();
 
 	@Override
 	protected @NonNull Value evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) throws InvalidValueException {

@@ -21,7 +21,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
-public interface EnumerationLiteralValue extends ElementValue
+public interface EnumerationLiteralValue extends Value
 {
 	/**
 	 * @generated NOT

@@ -22,8 +22,9 @@ import org.eclipse.emf.ecore.util.BasicSettingDelegate;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -66,8 +67,12 @@ public class OCLSettingDelegate extends BasicSettingDelegate.Stateless
 				SettingBehavior.INSTANCE.validate(property2);
 			}
 			Query query = ocl.createQuery(specification2);
-			Value result = query.evaluate(owner);
-			return result.asEcoreObject();
+			Object result = query.evaluate(owner);
+			return ValuesUtil.asEcoreObject(result);
+		}
+		catch (InvalidValueException e) {
+			String message = NLS.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, property);
+			throw new OCLDelegateException(message, e);
 		}
 		catch (DomainException e) {
 			String message = NLS.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, property);

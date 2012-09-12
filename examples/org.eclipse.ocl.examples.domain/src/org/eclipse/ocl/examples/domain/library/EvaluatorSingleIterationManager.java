@@ -23,7 +23,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 public class EvaluatorSingleIterationManager
 		extends EvaluatorIterationManager {
@@ -36,7 +35,7 @@ public class EvaluatorSingleIterationManager
 
 	public EvaluatorSingleIterationManager(@NonNull DomainEvaluator invokingEvaluator,
 			@NonNull DomainExpression body, @NonNull CollectionValue collectionValue,
-			@Nullable DomainTypedElement accumulator, @NonNull Value accumulatorValue,
+			@Nullable DomainTypedElement accumulator, @NonNull Object accumulatorValue,
 			@NonNull DomainTypedElement referredIterator) {
 		super(invokingEvaluator.createNestedEvaluator(), body, collectionValue, accumulator, accumulatorValue);
 		this.depth = 0;
@@ -62,8 +61,8 @@ public class EvaluatorSingleIterationManager
 	}
 
 	@Override
-	public @NonNull Value get() {
-		Value currentValue = iterator.get();
+	public @NonNull Object get() {
+		Object currentValue = iterator.get();
 		if (currentValue == null) {
 			throw new IllegalStateException("cannot get() after iteration complete"); //$NON-NLS-1$
 		}

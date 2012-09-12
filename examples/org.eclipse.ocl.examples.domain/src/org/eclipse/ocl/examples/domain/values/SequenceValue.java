@@ -29,37 +29,37 @@ public interface SequenceValue extends CollectionValue
 	/**
 	 * @generated NOT
 	 */
-	@NonNull SequenceValue append(@NonNull Value object) throws InvalidValueException;
+	@NonNull SequenceValue append(@NonNull Object object) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Value at(int index) throws InvalidValueException;
+	@NonNull Object at(int index) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Value first() throws InvalidValueException;
+	@NonNull Object first() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull SequenceValue insertAt(int index, @NonNull Value object) throws InvalidValueException;
+	@NonNull SequenceValue insertAt(int index, @NonNull Object object) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue indexOf(@NonNull Value object) throws InvalidValueException;
+	@NonNull IntegerValue indexOf(@NonNull Object object) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Value last() throws InvalidValueException;
+	@NonNull Object last() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
 	 */
-    @NonNull SequenceValue prepend(@NonNull Value object) throws InvalidValueException;
+    @NonNull SequenceValue prepend(@NonNull Object object) throws InvalidValueException;
 
 	/**
 	 * @generated NOT

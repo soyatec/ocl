@@ -31,11 +31,11 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
@@ -59,9 +59,17 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 		return ValuesPackage.Literals.SET_VALUE;
 	}
 
-	private static @NonNull Set<Value> createValue(@NonNull Iterable<? extends Value> elements) {
-		Set<Value> result = new HashSet<Value>();
-		for (Value element : elements) {
+	private static @NonNull Set<Object> createValue(Object... elements) {
+		Set<Object> result = new HashSet<Object>();
+		for (Object element : elements) {
+			result.add(element);
+		}
+		return result;
+	}
+
+	private static @NonNull Set<Object> createValue(@NonNull Iterable<? extends Object> elements) {
+		Set<Object> result = new HashSet<Object>();
+		for (Object element : elements) {
 			result.add(element);
 		}
 		return result;
@@ -70,22 +78,22 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
     public static @NonNull SetValue intersection(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull CollectionValue left, @NonNull CollectionValue right) throws InvalidValueException
     {
     	assert !left.isUndefined() && !right.isUndefined();
-		Collection<Value> leftElements = left.asCollection();
-        Collection<Value> rightElements = right.asCollection();
+		Collection<? extends Object> leftElements = left.asCollection();
+        Collection<? extends Object> rightElements = right.asCollection();
         int leftSize = leftElements.size();
         int rightSize = rightElements.size();
     	if ((leftSize == 0) || (rightSize == 0)) {
             return valueFactory.createSetValue(type);
         }    	
-        Set<Value> results;
+        Set<Object> results;
         // loop over the smaller collection and add only elements
         // that are in the larger collection
         if (leftSize <= rightSize) {
-            results = new HashSet<Value>(leftElements);
+            results = new HashSet<Object>(leftElements);
         	results.retainAll(rightElements);
         }
         else {
-            results = new HashSet<Value>(rightElements);
+            results = new HashSet<Object>(rightElements);
         	results.retainAll(leftElements);
         }
     	return results.size() > 0 ? valueFactory.createSetValue(type, results) : valueFactory.createSetValue(type);
@@ -93,8 +101,8 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 
 	public static @NonNull SetValue union(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull CollectionValue left, @NonNull CollectionValue right) throws InvalidValueException {
     	assert !left.isUndefined() && !right.isUndefined();
-		Collection<Value> leftElements = left.asCollection();
-        Collection<Value> rightElements = right.asCollection();
+		Collection<? extends Object> leftElements = left.asCollection();
+        Collection<? extends Object> rightElements = right.asCollection();
     	if (leftElements.isEmpty()) {
             return right.asSetValue();
         }
@@ -102,7 +110,7 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
             return left.asSetValue();
         }    	
     	else {
-			Set<Value> result = new HashSet<Value>(leftElements);
+			Set<Object> result = new HashSet<Object>(leftElements);
 			result.addAll(rightElements);
     		return new SetValueImpl(valueFactory, type, result);
         } 
@@ -114,21 +122,17 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 			super(valueFactory, type);
 		}
 
-		public boolean add(@NonNull Value value) {
-			return elements.add(value);			
+		@SuppressWarnings("unchecked")
+		public boolean add(@NonNull Object value) {
+			return ((Collection<Object>)elements).add(value);			
 		}		
 	}
 	
-	public SetValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, Value... elements) {
-		super(valueFactory, type, new HashSet<Value>());
-		if (elements != null) {
-			for (Value element : elements) {
-				this.elements.add(element);			// FIXME equals
-			}
-		}
+	public SetValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, Object... elements) {
+		super(valueFactory, type, createValue(elements));
 	}
 
-	public SetValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Iterable<? extends Value> elements) {
+	public SetValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Iterable<? extends Object> elements) {
 		super(valueFactory, type, createValue(elements));
 	}
 
@@ -136,7 +140,7 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 //		this(c.asCollection());
 //	}
 
-	public SetValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Set<Value> elements) {
+	public SetValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Set<? extends Object> elements) {
 		super(valueFactory, type, elements);
 	}
 
@@ -163,9 +167,9 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 		return elements.equals(((SetValueImpl)obj).elements);
 	}
 
-	public @NonNull SetValue excluding(@NonNull Value value) {
-		Set<Value> result = new HashSet<Value>();
-		for (Value element : elements) {
+	public @NonNull SetValue excluding(@NonNull Object value) {
+		Set<Object> result = new HashSet<Object>();
+		for (Object element : elements) {
 			if (!element.equals(value)) {
 				result.add(element);
 			}
@@ -179,7 +183,7 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 	}
 
     public @NonNull SetValue flatten() throws InvalidValueException {
-    	Set<Value> flattened = new HashSet<Value>();
+    	Set<Object> flattened = new HashSet<Object>();
     	if (flatten(flattened)) {
     		return new SetValueImpl(valueFactory, getCollectionType(), flattened);
     	}
@@ -189,38 +193,38 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
     }
 	
 	@Override
-	protected @NonNull Set<Value> getElements() {
-		return (Set<Value>) elements;
+	protected @NonNull Set<? extends Object> getElements() {
+		return (Set<? extends Object>) elements;
 	}
 
 	public @NonNull String getKind() {
 	    return "Set";
 	}
 
-	public @NonNull SetValue including(@NonNull Value value) throws InvalidValueException {
-		if (value.isInvalid()) {
+	public @NonNull SetValue including(@NonNull Object value) throws InvalidValueException {
+		if (value instanceof InvalidValue) {
 			valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidSource, "including");
 		}
-		Set<Value> result = new HashSet<Value>(elements);
+		Set<Object> result = new HashSet<Object>(elements);
 		result.add(value);
 		return new SetValueImpl(valueFactory, getCollectionType(), result);
 	}
 
     public @NonNull SetValue minus(@NonNull UniqueCollectionValue set) throws InvalidValueException {
-    	Set<Value> result = new HashSet<Value>(elements);
+    	Set<Object> result = new HashSet<Object>(elements);
         result.removeAll(set.asCollection());
         return new SetValueImpl(valueFactory, getCollectionType(), result);
     }
     
-    public @NonNull OrderedSetValue sort(@NonNull Comparator<Value> comparator) {
-    	List<Value> values = new ArrayList<Value>(elements);
+    public @NonNull OrderedSetValue sort(@NonNull Comparator<Object> comparator) {
+    	List<Object> values = new ArrayList<Object>(elements);
     	Collections.sort(values, comparator);
     	return valueFactory.createOrderedSetValue(getOrderedSetType(), values);
     }
 
     public @NonNull SetValue symmetricDifference(@NonNull UniqueCollectionValue set) {       
-    	Set<Value> result = new HashSet<Value>(elements);       
-        for (Value e : set) {
+    	Set<Object> result = new HashSet<Object>(elements);       
+        for (Object e : set.iterable()) {
             if (result.contains(e)) {
                 result.remove(e);
             } else {

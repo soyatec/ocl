@@ -32,20 +32,20 @@ import org.eclipse.ocl.examples.domain.values.Value;
  */
 public abstract class AbstractNumericBinaryOperation extends AbstractBinaryOperation
 {
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
-		if (left.isUnlimited() || right.isUnlimited()) {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
+		if (isUnlimited(left) || isUnlimited(right)) {
 			return evaluateUnlimited(evaluator, left, right);
 		}
-		IntegerValue leftInteger = left.isIntegerValue();
-		IntegerValue rightInteger = right.isIntegerValue();
+		IntegerValue leftInteger = isIntegerValue(left);
+		IntegerValue rightInteger = isIntegerValue(right);
 		if ((leftInteger != null) && (rightInteger != null)) {
 			return evaluateInteger(evaluator, leftInteger, rightInteger);
 		}
-		RealValue leftReal = left.asRealValue();
-		RealValue rightReal = right.asRealValue();
+		RealValue leftReal = asRealValue(left);
+		RealValue rightReal = asRealValue(right);
 		return evaluateReal(evaluator, leftReal, rightReal);
 	}
-	
+
 	/**
 	 * Evaluate an operation for which both left and right are Integer.
 	 * @param left argument
@@ -73,7 +73,7 @@ public abstract class AbstractNumericBinaryOperation extends AbstractBinaryOpera
 	 * @param right argument
 	 * @return result
 	 */
-	protected @NonNull Value evaluateUnlimited(@NonNull DomainEvaluator evaluator, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
+	protected @NonNull Object evaluateUnlimited(@NonNull DomainEvaluator evaluator, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
 		return evaluator.getValueFactory().throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Unlimited"); //$NON-NLS-1$
 	}
 }

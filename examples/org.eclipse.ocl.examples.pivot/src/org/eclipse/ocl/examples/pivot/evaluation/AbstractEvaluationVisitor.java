@@ -28,8 +28,8 @@ import org.eclipse.ocl.examples.domain.evaluation.EvaluationHaltedException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -55,7 +55,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitable;
  * @author Christian W. Damus (cdamus)
  */
 public abstract class AbstractEvaluationVisitor
-	extends AbstractExtendingVisitor<Value, Object> implements EvaluationVisitor {
+	extends AbstractExtendingVisitor<Object, Object> implements EvaluationVisitor {
 
     // stereotypes associated with boolean-valued constraints
 	private static Set<String> BOOLEAN_CONSTRAINTS;
@@ -223,7 +223,7 @@ public abstract class AbstractEvaluationVisitor
 	 * {@link #visitExpression(OCLExpression)}.
 	 */
 	@Override
-    public Value visitConstraint(@NonNull Constraint constraint) {
+    public Object visitConstraint(@NonNull Constraint constraint) {
 		ValueSpecification specification = constraint.getSpecification();
 		if (!(specification instanceof ExpressionInOCL)) {
 			return null;
@@ -239,12 +239,12 @@ public abstract class AbstractEvaluationVisitor
 			throw new IllegalArgumentException("constraint is not boolean"); //$NON-NLS-1$
 		}
 		
-		Value result = body.accept(getUndecoratedVisitor());
+		Object result = body.accept(getUndecoratedVisitor());
 		try {
 			if (result == null) {
 				return evaluationEnvironment.throwInvalidEvaluation("null constraint result");
 			}
-			return result.asBooleanValue();
+			return ValuesUtil.asBooleanValue(result);
 		} catch (InvalidValueException e) {
 			return evaluationEnvironment.throwInvalidEvaluation(e);
 		}

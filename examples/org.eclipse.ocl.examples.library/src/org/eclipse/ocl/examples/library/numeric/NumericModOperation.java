@@ -27,7 +27,7 @@ import org.eclipse.ocl.examples.domain.values.Value;
  */
 public class NumericModOperation extends AbstractNumericBinaryOperation
 {
-	public static final NumericModOperation INSTANCE = new NumericModOperation();
+	public static final @NonNull NumericModOperation INSTANCE = new NumericModOperation();
 
 	@Override
 	protected @NonNull Value evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) throws InvalidValueException {

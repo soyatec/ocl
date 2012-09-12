@@ -24,15 +24,14 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 public class TuplePartProperty extends AbstractProperty
 {
 	public static final @NonNull LibraryFeature INSTANCE = new TuplePartProperty();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
-		TupleValue tupleValue = sourceValue.asTupleValue();
-		Value resultValue = tupleValue.getValue(property);
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
+		TupleValue tupleValue = asTupleValue(sourceValue);
+		Object resultValue = tupleValue.getValue(property);
 		if (resultValue != null) {
 			return resultValue;		// null is a static type error so no need to diagnose dynamically
 		}

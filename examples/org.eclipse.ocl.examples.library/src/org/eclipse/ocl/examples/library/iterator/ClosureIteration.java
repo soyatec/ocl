@@ -25,7 +25,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -43,20 +42,20 @@ public class ClosureIteration extends AbstractIteration
 	 * Recursively evaluates the iterator body expression.
 	 */
     @Override
-	protected @Nullable Value updateAccumulator(@NonNull DomainIterationManager iterationManager) {
+	protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
 		if (!iterationManager.isOuterIteration()) {
 			// If there is the parent is the iterator
-			Value value = iterationManager.get();
+			Object value = iterationManager.get();
 			CollectionValue.Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
 			if (!accumulatorValue.add(value)) {
 				return accumulatorValue;
 			}
 		}
-		Value bodyVal = iterationManager.evaluateBody();		
-		if (bodyVal.isInvalid()) {
+		Object bodyVal = iterationManager.evaluateBody();		
+		if (isInvalid(bodyVal)) {
 			return bodyVal;									// Invalid body is invalid
 		}
-		else if (bodyVal.isUndefined()) {
+		else if (isUndefined(bodyVal)) {
 			return iterationManager.getAccumulatorValue();		// Null body is termination
 		}
 		else {
@@ -67,7 +66,9 @@ public class ClosureIteration extends AbstractIteration
 				}
 				else {
 					ValueFactory valueFactory = iterationManager.getValueFactory();
-					collectionValue = valueFactory.createSequenceValue(valueFactory.getStandardLibrary().getSequenceType(bodyVal.getType(), null, null), bodyVal);
+					DomainType elementType = valueFactory.typeOf(bodyVal);
+					DomainCollectionType sequenceType = valueFactory.getStandardLibrary().getSequenceType(elementType, null, null);
+					collectionValue = valueFactory.createSequenceValue(sequenceType, bodyVal);
 				}
 				evaluateIteration(iterationManager.createNestedIterationManager(collectionValue));
 			} catch (InvalidValueException e) {

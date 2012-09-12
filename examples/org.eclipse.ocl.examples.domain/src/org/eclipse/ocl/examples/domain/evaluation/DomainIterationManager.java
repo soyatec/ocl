@@ -20,7 +20,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -53,19 +52,19 @@ public interface DomainIterationManager
 	 * This is used by non-iterate iteration that intervene between the body evaluation
 	 * and accumulator update.
 	 */
-	@NonNull Value evaluateBody();
+	@NonNull Object evaluateBody();
 	
 	/**
 	 * Get the current state of the iterator.
 	 * <br>
 	 * This is only supported for single iterator iterations.
 	 */
-	@NonNull Value get();
+	@NonNull Object get();
 
 	/**
 	 * Get the current state of the accumulator.
 	 */
-	@NonNull Value getAccumulatorValue();
+	@NonNull Object getAccumulatorValue();
 
 	/**
 	 * Get the factory for values.
@@ -98,5 +97,5 @@ public interface DomainIterationManager
 	 * Returns null for the iteration to continue, non-null to terminate.
 	 * @throws InvalidValueException 
 	 */
-	@Nullable Value updateBody() throws InvalidValueException;
+	@Nullable Object updateBody() throws InvalidValueException;
 }

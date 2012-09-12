@@ -46,7 +46,7 @@ public interface TupleValue extends Value {
      * @throws InvalidValueException 
 	 * @generated NOT
      */
-	@Nullable Value getValue(@NonNull String partName) throws InvalidValueException;
+	@Nullable Object getValue(@NonNull String partName) throws InvalidValueException;
     
     /**
      * Queries the value of the specified tuple part.
@@ -56,5 +56,5 @@ public interface TupleValue extends Value {
      * @throws InvalidValueException 
 	 * @generated NOT
      */
-	@Nullable Value getValue(@NonNull DomainTypedElement part) throws InvalidValueException;
+	@Nullable Object getValue(@NonNull DomainTypedElement part) throws InvalidValueException;
 }

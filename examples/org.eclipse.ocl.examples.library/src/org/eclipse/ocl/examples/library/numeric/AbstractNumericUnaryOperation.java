@@ -32,15 +32,15 @@ import org.eclipse.ocl.examples.domain.values.Value;
  */
 public abstract class AbstractNumericUnaryOperation extends AbstractUnaryOperation
 {
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal) throws InvalidValueException {
-		if (sourceVal.isUnlimited()) {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal) throws InvalidValueException {
+		if (isUnlimited(sourceVal)) {
 			return evaluator.getValueFactory().throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Unlimited"); //$NON-NLS-1$
 		}
-		IntegerValue integerValue = sourceVal.isIntegerValue(); 
+		IntegerValue integerValue = isIntegerValue(sourceVal); 
 		if (integerValue != null) {
 			return evaluateInteger(integerValue);			
 		}
-		RealValue realValue = sourceVal.asRealValue(); 
+		RealValue realValue = asRealValue(sourceVal); 
 		return evaluateReal(realValue);
 	}
 

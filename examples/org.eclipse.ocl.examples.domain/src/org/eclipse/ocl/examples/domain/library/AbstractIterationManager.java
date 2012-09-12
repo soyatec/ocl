@@ -22,7 +22,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 public abstract class AbstractIterationManager implements DomainIterationManager
@@ -37,7 +36,7 @@ public abstract class AbstractIterationManager implements DomainIterationManager
 		throw new UnsupportedOperationException();	// Only required for single iterator managers
 	}
 
-	public @NonNull Value get() {
+	public @NonNull Object get() {
 		throw new UnsupportedOperationException();	// Only required for single iterator managers
 	}
 

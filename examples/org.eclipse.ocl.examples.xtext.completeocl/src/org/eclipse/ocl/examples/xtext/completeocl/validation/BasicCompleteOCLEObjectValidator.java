@@ -41,8 +41,8 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
@@ -102,7 +102,7 @@ public class BasicCompleteOCLEObjectValidator extends EObjectValidator
 							ExpressionInOCL query = (ExpressionInOCL)specification;
 							EvaluationEnvironment evaluationEnvironment = environmentFactory.createEvaluationEnvironment();
 							ValueFactory valueFactory = metaModelManager.getValueFactory();
-							Value value = valueFactory.valueOf(object);
+							Object value = valueFactory.valueOf(object);
 							evaluationEnvironment.add(query.getContextVariable(), value);
 							DomainModelManager extents = evaluationEnvironment.createModelManager(object);
 							EvaluationVisitor evaluationVisitor = environmentFactory.createEvaluationVisitor(rootEnvironment, evaluationEnvironment, extents);
@@ -114,10 +114,10 @@ public class BasicCompleteOCLEObjectValidator extends EObjectValidator
 									PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel);
 							}
 							try {
-								Value expressionResult = query.accept(evaluationVisitor);
+								Object expressionResult = query.accept(evaluationVisitor);
 								boolean isOk = false;
-								if ((expressionResult != null) && !expressionResult.isNull()) {
-									isOk = expressionResult.asBoolean();
+								if ((expressionResult != null) && !ValuesUtil.isNull(expressionResult)) {
+									isOk = ValuesUtil.asBoolean(expressionResult);
 									severity = Diagnostic.WARNING;
 								}
 								if (!isOk) {
@@ -125,9 +125,9 @@ public class BasicCompleteOCLEObjectValidator extends EObjectValidator
 									OCLExpression messageExpression = query.getMessageExpression();
 									if (messageExpression != null) {
 										try {
-											Value messageResult = messageExpression.accept(evaluationVisitor);
-											if ((messageResult != null) && !messageResult.isNull()) {
-												message = messageResult.asString();
+											Object messageResult = messageExpression.accept(evaluationVisitor);
+											if ((messageResult != null) && !ValuesUtil.isNull(messageResult)) {
+												message = ValuesUtil.asString(messageResult);
 											}
 										} catch (InvalidValueException e) {
 											message = DomainUtil.bind(OCLMessages.ValidationMessageIsNotString_ERROR_,

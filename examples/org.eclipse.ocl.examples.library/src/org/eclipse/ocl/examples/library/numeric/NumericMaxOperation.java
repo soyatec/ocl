@@ -41,9 +41,9 @@ public class NumericMaxOperation extends AbstractNumericBinaryOperation
 	}
 
 	@Override
-	protected @NonNull Value evaluateUnlimited(@NonNull DomainEvaluator evaluator, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
-		Value leftValue = left.asUnlimitedNaturalValue();
-		Value rightValue = right.asUnlimitedNaturalValue();
-		return left.isUnlimited() ? leftValue : rightValue;
+	protected @NonNull Object evaluateUnlimited(@NonNull DomainEvaluator evaluator, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
+		Value leftValue = asUnlimitedNaturalValue(left);
+		Value rightValue = asUnlimitedNaturalValue(right);
+		return isUnlimited(left) ? leftValue : rightValue;
 	}
 }

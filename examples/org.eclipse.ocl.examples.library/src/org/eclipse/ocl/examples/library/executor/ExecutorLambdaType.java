@@ -20,13 +20,19 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.typeids.Typeid;
+import org.eclipse.ocl.examples.domain.typeids.TypeidManager;
 import org.eclipse.ocl.examples.domain.types.AbstractType;
 
 public class ExecutorLambdaType extends AbstractType implements ExecutorTypeArgument
 {
-	public ExecutorLambdaType(@NonNull DomainStandardLibrary standardLibrary, @NonNull String name, ExecutorTypeArgument... typeArguments) {
+	protected final @NonNull Typeid typeid;
+
+	public ExecutorLambdaType(@NonNull DomainStandardLibrary standardLibrary, @NonNull String name, @NonNull ExecutorTypeArgument... typeArguments) {
 		super(standardLibrary, name);
+		typeid = TypeidManager.INSTANCE.getLambdaTypeid(name, new DomainTypeParameters(typeArguments));
 	}
 
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
@@ -48,5 +54,9 @@ public class ExecutorLambdaType extends AbstractType implements ExecutorTypeArgu
 	@Override
 	public @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		throw new UnsupportedOperationException();			// WIP fixme
+	}
+
+	public @NonNull Typeid getTypeid() {
+		return typeid;
 	}
 }

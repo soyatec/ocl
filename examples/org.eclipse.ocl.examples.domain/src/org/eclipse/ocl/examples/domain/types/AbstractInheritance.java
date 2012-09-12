@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.IndexableIterable;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 public abstract class AbstractInheritance implements DomainInheritance
@@ -128,7 +127,7 @@ public abstract class AbstractInheritance implements DomainInheritance
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull Value createInstance(@NonNull ValueFactory valueFactory, @NonNull String value) {
+	public @NonNull Object createInstance(@NonNull ValueFactory valueFactory, @NonNull String value) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -218,6 +217,10 @@ public abstract class AbstractInheritance implements DomainInheritance
 
 	public boolean isEqualToUnspecializedType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		return this == type;
+	}
+
+	public boolean isInvalid() {
+		return false;
 	}
 
 	public boolean isOrdered() {

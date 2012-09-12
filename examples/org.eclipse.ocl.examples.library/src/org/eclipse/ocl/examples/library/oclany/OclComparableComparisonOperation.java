@@ -25,8 +25,8 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.LibraryConstants;
 
 /**
@@ -34,11 +34,11 @@ import org.eclipse.ocl.examples.library.LibraryConstants;
  */
 public abstract class OclComparableComparisonOperation extends AbstractBinaryOperation
 {
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
-		DomainInheritance leftType = left.getType().getInheritance(standardLibrary);
-		DomainInheritance rightType = right.getType().getInheritance(standardLibrary);
+		DomainInheritance leftType = valueFactory.typeOf(left).getInheritance(standardLibrary);
+		DomainInheritance rightType = valueFactory.typeOf(right).getInheritance(standardLibrary);
 		DomainInheritance commonType = leftType.getCommonInheritance(rightType);
 		DomainInheritance comparableType = standardLibrary.getOclComparableType().getInheritance(standardLibrary);
 		DomainInheritance selfType = standardLibrary.getOclSelfType().getInheritance(standardLibrary);
@@ -53,8 +53,8 @@ public abstract class OclComparableComparisonOperation extends AbstractBinaryOpe
 			throw new InvalidValueException(e);
 		}
 		if (implementation != null) {
-			Value comparison = implementation.evaluate(evaluator, standardLibrary.getIntegerType(), left, right);
-			intComparison = comparison.asInteger();
+			Object comparison = implementation.evaluate(evaluator, standardLibrary.getIntegerType(), left, right);
+			intComparison = ValuesUtil.asInteger(comparison);
 			return valueFactory.booleanValueOf(getResultValue(intComparison));
 		}
 		else {

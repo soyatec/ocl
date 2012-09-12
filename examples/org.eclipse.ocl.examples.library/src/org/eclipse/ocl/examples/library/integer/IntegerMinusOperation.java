@@ -22,18 +22,17 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * IntegerMinusOperation realizes the Integer::-() library operation.
  */
 public class IntegerMinusOperation extends AbstractBinaryOperation
 {
-	public static final IntegerMinusOperation INSTANCE = new IntegerMinusOperation();
+	public static final @NonNull IntegerMinusOperation INSTANCE = new IntegerMinusOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
-		IntegerValue leftValue = left.asIntegerValue();
-		IntegerValue rightValue = right.asIntegerValue();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
+		IntegerValue leftValue = asIntegerValue(left);
+		IntegerValue rightValue = asIntegerValue(right);
 		return leftValue.subtract(rightValue);
 	}
 }

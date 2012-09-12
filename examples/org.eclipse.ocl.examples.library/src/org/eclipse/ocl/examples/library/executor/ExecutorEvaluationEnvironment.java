@@ -22,13 +22,12 @@ import java.util.Map;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluationEnvironment;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 public class ExecutorEvaluationEnvironment implements DomainEvaluationEnvironment
 {
-	private Map<DomainTypedElement, Value> variables = new HashMap<DomainTypedElement, Value>();
+	private Map<DomainTypedElement, Object> variables = new HashMap<DomainTypedElement, Object>();
 	
-	public void add(DomainTypedElement variable, Value value) {
+	public void add(DomainTypedElement variable, Object value) {
 		variables.put(variable, value);
 	}
 
@@ -36,7 +35,7 @@ public class ExecutorEvaluationEnvironment implements DomainEvaluationEnvironmen
 		return new ExecutorTypedElement(name, type);
 	}	
 
-	public void replace(DomainTypedElement variable, Value value) {
+	public void replace(DomainTypedElement variable, Object value) {
 		variables.put(variable, value);
 	}
 }

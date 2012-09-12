@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.domain.values.impl;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
@@ -62,15 +63,15 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 		super(valueFactory);
 	}
 
-	public @NonNull SequenceValue append(@NonNull Value object) throws InvalidValueException {
+	public @NonNull SequenceValue append(@NonNull Object object) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public @NonNull Collection<Value> asCollection() throws InvalidValueException {
+	public @NonNull Collection<Object> asCollection() throws InvalidValueException {
 		throw new InvalidValueException("Collection value required");
 	}
 
-	public @NonNull List<Value> asList() throws InvalidValueException {
+	public @NonNull List<Object> asList() throws InvalidValueException {
 		throw new InvalidValueException("List value required");
 	}
 
@@ -78,7 +79,7 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 		return toInvalidValue();
 	}
 
-    public @NonNull IntegerValue count(@NonNull Value value) throws InvalidValueException {
+    public @NonNull IntegerValue count(@NonNull Object value) throws InvalidValueException {
         return toInvalidValue();
     }
 
@@ -91,7 +92,7 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 //		return elements.hashCode();
 //	}
 
-    public @NonNull BooleanValue excludes(@NonNull Value value) throws InvalidValueException {
+    public @NonNull BooleanValue excludes(@NonNull Object value) throws InvalidValueException {
     	return toInvalidValue();
     }
 
@@ -100,7 +101,7 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
     	return toInvalidValue();
     }
 
-	public @NonNull CollectionValue excluding(@NonNull Value value) throws InvalidValueException {
+	public @NonNull CollectionValue excluding(@NonNull Object value) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
@@ -112,7 +113,7 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
     	return toInvalidValue();
     }
 
-	public boolean flatten(@NonNull Collection<Value> flattenedElements) {
+	public boolean flatten(@NonNull Collection<Object> flattenedElements) {
 		return false;
 	}
 
@@ -124,7 +125,7 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 	    return "Collection";		// FIXME UOE ??
 	}
 
-    public @NonNull BooleanValue includes(@NonNull Value value) throws InvalidValueException {
+    public @NonNull BooleanValue includes(@NonNull Object value) throws InvalidValueException {
     	return toInvalidValue();
     }
 
@@ -132,15 +133,15 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
     	return toInvalidValue();
    }
 
-	public @NonNull CollectionValue including(@NonNull Value value) throws InvalidValueException {
+	public @NonNull CollectionValue including(@NonNull Object value) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public @NonNull IntegerValue indexOf(@NonNull Value object) throws InvalidValueException {
+	public @NonNull IntegerValue indexOf(@NonNull Object object) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
-	public @NonNull SequenceValue insertAt(int index, @NonNull Value object) throws InvalidValueException {
+	public @NonNull SequenceValue insertAt(int index, @NonNull Object object) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
@@ -154,6 +155,11 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 
 	public @NonNull BooleanValue isEmpty() throws InvalidValueException {
     	return toInvalidValue();
+	}
+
+	@SuppressWarnings("null")
+	public @NonNull Iterable<? extends Object> iterable() {
+		return Collections.<Object>emptyList();
 	}
 
 	public @NonNull Iterator iterator() {
@@ -176,7 +182,7 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
     	return toInvalidValue();
 	}
 
-	public @NonNull SequenceValue prepend(@NonNull Value object) throws InvalidValueException {
+	public @NonNull SequenceValue prepend(@NonNull Object object) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
@@ -200,7 +206,7 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
     	return toInvalidValue();
 	}
 
-    public @NonNull SequenceValue sort(@NonNull Comparator<Value> comparator) throws InvalidValueException {
+    public @NonNull SequenceValue sort(@NonNull Comparator<Object> comparator) throws InvalidValueException {
 		return toInvalidValue();
 	}
 
@@ -212,7 +218,7 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 		return toInvalidValue();
 	}
 
-	public @NonNull Value sum(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation binaryOperation, @NonNull Value zero) throws InvalidValueException {
+	public @NonNull Object sum(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation binaryOperation, @NonNull Object zero) throws InvalidValueException {
     	return toInvalidValue();
 	}
 

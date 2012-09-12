@@ -27,7 +27,7 @@ import org.eclipse.ocl.examples.domain.values.Value;
  */
 public class NumericRoundOperation extends AbstractNumericUnaryOperation
 {
-	public static final NumericRoundOperation INSTANCE = new NumericRoundOperation();
+	public static final @NonNull NumericRoundOperation INSTANCE = new NumericRoundOperation();
 
 	@Override
 	protected @NonNull Value evaluateInteger(@NonNull IntegerValue left) {

@@ -26,7 +26,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.AbstractBasicEnvironment;
 import org.eclipse.ocl.examples.pivot.Adaptable;
 import org.eclipse.ocl.examples.pivot.Customizable;
@@ -59,7 +58,7 @@ public abstract class AbstractEvaluationEnvironment extends AbstractBasicEnviron
 	
     protected final @NonNull MetaModelManager metaModelManager;
 
-    private final @NonNull Map<DomainTypedElement, Value> variableValues = new HashMap<DomainTypedElement, Value>();
+    private final @NonNull Map<DomainTypedElement, Object> variableValues = new HashMap<DomainTypedElement, Object>();
     
     protected AbstractEvaluationEnvironment(@NonNull MetaModelManager metaModelManager) {
     	super(null);
@@ -82,11 +81,11 @@ public abstract class AbstractEvaluationEnvironment extends AbstractBasicEnviron
      *            the name whose value is to be returned
      * @return the value associated with the name
      */
-	public Value getValueOf(@NonNull VariableDeclaration referredVariable) {
+	public Object getValueOf(@NonNull VariableDeclaration referredVariable) {
     	if (referredVariable instanceof Variable) {
     		assert ((Variable)referredVariable).getRepresentedParameter() == null;
     	}
-    	Value object = variableValues.get(referredVariable);
+    	Object object = variableValues.get(referredVariable);
         if (object == null) {
             EvaluationEnvironment parent2 = parent;
 			if ((parent2 != null) && !variableValues.containsKey(referredVariable)) {
@@ -104,7 +103,7 @@ public abstract class AbstractEvaluationEnvironment extends AbstractBasicEnviron
      * @param value
      *            the new value
      */
-    public void replace(DomainTypedElement referredVariable, Value value) {
+    public void replace(DomainTypedElement referredVariable, Object value) {
     	if (referredVariable instanceof Variable) {
     		assert ((Variable)referredVariable).getRepresentedParameter() == null;
     	}
@@ -119,12 +118,12 @@ public abstract class AbstractEvaluationEnvironment extends AbstractBasicEnviron
      * @param value
      *            the associated binding
      */
-    public void add(DomainTypedElement referredVariable, Value value) {
+    public void add(DomainTypedElement referredVariable, Object value) {
     	if (referredVariable instanceof Variable) {
     		assert ((Variable)referredVariable).getRepresentedParameter() == null;
     	}
         if (variableValues.containsKey(referredVariable)) {
-        	Value oldValue = variableValues.get(referredVariable);
+        	Object oldValue = variableValues.get(referredVariable);
         	if ((oldValue != value) && ((oldValue == null) || !oldValue.equals(value))) {
 	            String message = NLS.bind(
 	            		OCLMessages.BindingExist_ERROR_,
@@ -145,7 +144,7 @@ public abstract class AbstractEvaluationEnvironment extends AbstractBasicEnviron
      * @return the value associated with the removed name
      */
     @Deprecated
-    public Value remove(DomainTypedElement referredVariable) {
+    public Object remove(DomainTypedElement referredVariable) {
     	if (referredVariable instanceof Variable) {
     		assert ((Variable)referredVariable).getRepresentedParameter() == null;
     	}

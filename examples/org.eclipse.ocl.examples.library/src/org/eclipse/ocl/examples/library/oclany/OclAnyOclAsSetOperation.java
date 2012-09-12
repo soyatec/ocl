@@ -23,7 +23,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -31,14 +30,14 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class OclAnyOclAsSetOperation extends AbstractUnaryOperation
 {
-	public static final OclAnyOclAsSetOperation INSTANCE = new OclAnyOclAsSetOperation();
+	public static final @NonNull OclAnyOclAsSetOperation INSTANCE = new OclAnyOclAsSetOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		if (sourceVal.isInvalid()) {
+		if (isInvalid(sourceVal)) {
 			return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidSource, "oclAsSet"); //$NON-NLS-1$
 		}
-		if (sourceVal.isNull()) {
+		if (isNull(sourceVal)) {
 			return valueFactory.createSetValue((DomainCollectionType)returnType);
 		}
 		else {

@@ -38,7 +38,7 @@ import org.eclipse.ocl.common.internal.options.CommonOptions;
 import org.eclipse.ocl.ecore.EcoreEnvironment;
 import org.eclipse.ocl.examples.common.utils.EcoreUtils;
 import org.eclipse.ocl.examples.domain.validation.DomainSubstitutionLabelProvider;
-import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -211,8 +211,8 @@ public class OCLinEcoreTutorialExamples extends PivotTestCase
 			helper.setContext(bookType);
 			ExpressionInOCL query = helper.createQuery("isAvailable()");
 			org.eclipse.ocl.examples.pivot.Query queryEval = ocl.createQuery(query);
-			Value b2Available = queryEval.evaluate(b2Book);
-		    assertFalse(b2Available.asBoolean());
+			Object b2Available = queryEval.evaluate(b2Book);
+		    assertFalse(ValuesUtil.asBoolean(b2Available));
 		    
 			Map<Object, Object> validationContext = DomainSubstitutionLabelProvider.createDefaultContext(Diagnostician.INSTANCE);
 		    Diagnostic diagnostics = Diagnostician.INSTANCE.validate(xmiLibrary, validationContext);
@@ -220,14 +220,14 @@ public class OCLinEcoreTutorialExamples extends PivotTestCase
 		    
 		    b2Book.eSet(bookCopies, BigInteger.valueOf(4));
 			b2Available = queryEval.evaluate(b2Book);
-		    assertTrue(b2Available.asBoolean());
+		    assertTrue(ValuesUtil.asBoolean(b2Available));
 		    
 		    diagnostics = Diagnostician.INSTANCE.validate(xmiLibrary, validationContext);
 		    assertEquals(2, diagnostics.getChildren().size());
 		    
 		    b2Book.eSet(bookCopies, BigInteger.valueOf(3));
 			b2Available = queryEval.evaluate(b2Book);
-		    assertFalse(b2Available.asBoolean());
+		    assertFalse(ValuesUtil.asBoolean(b2Available));
 		    
 		    List<?> b2loans = (List<?>)b2Book.eGet(bookLoans);
 		    assertEquals(3, b2loans.size());

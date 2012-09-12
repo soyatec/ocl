@@ -22,7 +22,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -30,13 +29,13 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class StringSubstringOperation extends AbstractTernaryOperation
 {
-	public static final StringSubstringOperation INSTANCE = new StringSubstringOperation();
+	public static final @NonNull StringSubstringOperation INSTANCE = new StringSubstringOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceValue, @NonNull Value firstArgumentValue, @NonNull Value secondArgumentValue) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		String sourceString = sourceValue.asString();
-		Integer startInteger = firstArgumentValue.asInteger();
-		Integer endInteger = secondArgumentValue.asInteger();
+		String sourceString = asString(sourceValue);
+		Integer startInteger = asInteger(firstArgumentValue);
+		Integer endInteger = asInteger(secondArgumentValue);
 		int size = sourceString.length();
 		int lower = startInteger.intValue();
 		int upper = endInteger.intValue();

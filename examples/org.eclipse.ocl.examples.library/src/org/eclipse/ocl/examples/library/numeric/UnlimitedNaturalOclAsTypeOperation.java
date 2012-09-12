@@ -22,8 +22,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclAsTypeOperation;
 
@@ -32,17 +30,16 @@ import org.eclipse.ocl.examples.library.oclany.OclAnyOclAsTypeOperation;
  */
 public class UnlimitedNaturalOclAsTypeOperation extends OclAnyOclAsTypeOperation
 {
-	public static final UnlimitedNaturalOclAsTypeOperation INSTANCE = new UnlimitedNaturalOclAsTypeOperation();
+	public static final @NonNull UnlimitedNaturalOclAsTypeOperation INSTANCE = new UnlimitedNaturalOclAsTypeOperation();
 
 	@Override
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal, @NonNull Value argVal) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal, @NonNull Object argVal) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		DomainType sourceType = sourceVal.getType();
+		DomainType sourceType = valueFactory.typeOf(sourceVal);
 		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
-		TypeValue typeVal = argVal.asTypeValue();
-		DomainType argType = typeVal.getInstanceType();
+		DomainType argType = asType(argVal);
 		if (sourceType.conformsTo(standardLibrary, argType)) {
-			if (sourceVal.isUnlimited() && ((argType == standardLibrary.getRealType()) || (argType == standardLibrary.getIntegerType()))) {
+			if (isUnlimited(sourceVal) && ((argType == standardLibrary.getRealType()) || (argType == standardLibrary.getIntegerType()))) {
 				return valueFactory.throwInvalidValueException(EvaluatorMessages.NonFiniteIntegerValue);
 			}
 			return sourceVal;

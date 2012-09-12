@@ -24,7 +24,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 public class JavaCompareToOperation extends AbstractBinaryOperation
@@ -35,10 +34,10 @@ public class JavaCompareToOperation extends AbstractBinaryOperation
 		this.method = method;
 	}
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value leftValue, @NonNull Value rightValue) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object leftValue, @NonNull Object rightValue) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		Object leftObject = leftValue.asObject();
-		Object rightObject = rightValue.asObject();
+		Object leftObject = asObject(leftValue);
+		Object rightObject = asObject(rightValue);
 		try {
 			Object result = method.invoke(leftObject, rightObject);
 			if (!(result instanceof Integer)) {

@@ -21,7 +21,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -29,12 +28,12 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class StringEndsWithOperation extends AbstractBinaryOperation
 {
-	public static final StringEndsWithOperation INSTANCE = new StringEndsWithOperation();
+	public static final @NonNull StringEndsWithOperation INSTANCE = new StringEndsWithOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		String leftString = left.asString();
-		String rightString = right.asString();
+		String leftString = asString(left);
+		String rightString = asString(right);
 		return valueFactory.booleanValueOf(leftString.endsWith(rightString));
 	}
 }

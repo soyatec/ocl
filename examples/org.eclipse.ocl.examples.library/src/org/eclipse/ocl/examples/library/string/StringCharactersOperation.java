@@ -26,19 +26,18 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.StringValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
- * OrderedSetSubOrderedSetOperation realises the OrderedSet::subOrderedSet() library operation.
+ * StringCharactersOperation realises the String::characters() library operation.
  */
 public class StringCharactersOperation extends AbstractUnaryOperation
 {
-	public static final StringCharactersOperation INSTANCE = new StringCharactersOperation();
+	public static final @NonNull StringCharactersOperation INSTANCE = new StringCharactersOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		String sourceString = sourceVal.asString();
+		String sourceString = asString(sourceVal);
 		List<StringValue> results = new ArrayList<StringValue>(sourceString.length());
 		for (int i = 0; i < sourceString.length(); i++) {
 			@SuppressWarnings("null") @NonNull String s = sourceString.substring(i, i+1);

@@ -22,7 +22,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -30,12 +29,12 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class IntegerCompareToOperation extends AbstractBinaryOperation
 {
-	public static final IntegerCompareToOperation INSTANCE = new IntegerCompareToOperation();
+	public static final @NonNull IntegerCompareToOperation INSTANCE = new IntegerCompareToOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		IntegerValue leftInteger = left.asIntegerValue();
-		IntegerValue rightInteger = right.asIntegerValue();
+		IntegerValue leftInteger = asIntegerValue(left);
+		IntegerValue rightInteger = asIntegerValue(right);
 		return valueFactory.integerValueOf(leftInteger.compareTo(rightInteger));
 	}
 }

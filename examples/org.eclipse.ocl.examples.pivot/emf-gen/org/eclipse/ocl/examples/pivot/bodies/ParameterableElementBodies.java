@@ -29,7 +29,6 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
@@ -53,7 +52,7 @@ public class ParameterableElementBodies
 		/*
 		p.oclIsKindOf(self.oclType())
 		*/
-		public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Value self, final @NonNull Value p) throws InvalidValueException {
+		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Object self, final @NonNull Object p) throws InvalidValueException {
 			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
 			final @NonNull DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
@@ -66,10 +65,10 @@ public class ParameterableElementBodies
 			
 			DomainType static_A_symbol_ = valueFactory.typeOf(self);
 			LibraryUnaryOperation dynamic_A_symbol_ = (LibraryUnaryOperation)static_A_symbol_.lookupImplementation(standardLibrary, O_OclAny_oclType);
-			Value A_symbol_ = dynamic_A_symbol_.evaluate(evaluator, T_Metaclass_pivot__ParameterableElement_, self);
+			Object A_symbol_ = dynamic_A_symbol_.evaluate(evaluator, T_Metaclass_pivot__ParameterableElement_, self);
 			DomainType static_A_symbol__1 = valueFactory.typeOf(p);
 			LibraryBinaryOperation dynamic_A_symbol__1 = (LibraryBinaryOperation)static_A_symbol__1.lookupImplementation(standardLibrary, O_OclAny_oclIsKindOf);
-			Value A_symbol__1 = dynamic_A_symbol__1.evaluate(evaluator, T_Boolean, p, A_symbol_);
+			Object A_symbol__1 = dynamic_A_symbol__1.evaluate(evaluator, T_Boolean, p, A_symbol_);
 			return A_symbol__1;
 		}
 	}

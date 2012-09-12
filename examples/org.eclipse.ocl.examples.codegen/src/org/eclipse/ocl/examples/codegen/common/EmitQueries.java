@@ -29,6 +29,7 @@ public class EmitQueries
 	 * in a Java form to reduce the impact of refactoring on Acceleo templates.
 	 */
 	private static final Class<?>[] knownClasses = {
+		java.util.Iterator.class,
 		org.eclipse.ocl.examples.domain.elements.DomainMetaclass.class,
 		org.eclipse.ocl.examples.domain.elements.DomainCollectionType.class,
 		org.eclipse.ocl.examples.domain.elements.DomainParameterTypes.class,
@@ -39,6 +40,7 @@ public class EmitQueries
 		org.eclipse.ocl.examples.domain.elements.DomainTypeParameters.class,
 		org.eclipse.ocl.examples.domain.elements.DomainTypedElement.class,
 		org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator.class,
+		org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException.class,
 		org.eclipse.ocl.examples.domain.evaluation.InvalidValueException.class,
 		org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation.class,
 		org.eclipse.ocl.examples.domain.library.AbstractProperty.class,
@@ -53,7 +55,6 @@ public class EmitQueries
 		org.eclipse.ocl.examples.domain.values.BagValue.class,
 		org.eclipse.ocl.examples.domain.values.BooleanValue.class,
 		org.eclipse.ocl.examples.domain.values.CollectionValue.class,
-		org.eclipse.ocl.examples.domain.values.ElementValue.class,
 		org.eclipse.ocl.examples.domain.values.IntegerRange.class,
 		org.eclipse.ocl.examples.domain.values.IntegerValue.class,
 		org.eclipse.ocl.examples.domain.values.InvalidValue.class,
@@ -66,8 +67,8 @@ public class EmitQueries
 		org.eclipse.ocl.examples.domain.values.StringValue.class,
 		org.eclipse.ocl.examples.domain.values.TupleValue.class,
 		org.eclipse.ocl.examples.domain.values.UnlimitedValue.class,
-		org.eclipse.ocl.examples.domain.values.Value.class,
 		org.eclipse.ocl.examples.domain.values.ValueFactory.class,
+		org.eclipse.ocl.examples.domain.values.util.ValuesUtil.class,
 		org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumeration.class,
 		org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumerationLiteral.class,
 		org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager.class,
@@ -82,7 +83,10 @@ public class EmitQueries
 		org.eclipse.ocl.examples.library.executor.ExecutorSpecializedType.class,
 		org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary.class,
 		org.eclipse.ocl.examples.library.executor.ExecutorType.class,
-		org.eclipse.ocl.examples.library.executor.ExecutorTypeParameter.class
+		org.eclipse.ocl.examples.library.executor.ExecutorTypeParameter.class,
+		org.eclipse.jdt.annotation.NonNull.class,
+		org.eclipse.jdt.annotation.Nullable.class,
+		org.eclipse.osgi.util.NLS.class
 	};
 
 	protected Map<String, String> computeKnown2ExternalMap(String knownImports) {

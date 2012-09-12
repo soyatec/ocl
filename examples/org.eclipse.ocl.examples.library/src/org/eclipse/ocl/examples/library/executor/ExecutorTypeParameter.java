@@ -21,6 +21,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.typeids.Typeid;
 import org.eclipse.ocl.examples.domain.types.AbstractType;
 
 public class ExecutorTypeParameter extends AbstractType implements ExecutorTypeArgument
@@ -33,6 +34,15 @@ public class ExecutorTypeParameter extends AbstractType implements ExecutorTypeA
 		throw new UnsupportedOperationException();			// WIP fixme
 	}
 
+	@Override
+	public @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
+		throw new UnsupportedOperationException();			// WIP fixme
+	}
+
+	public @NonNull Typeid getTypeid() {
+		throw new UnsupportedOperationException();					// FIXME
+	}
+
 	public boolean isEqualTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		throw new UnsupportedOperationException();			// WIP fixme
 	}
@@ -42,11 +52,6 @@ public class ExecutorTypeParameter extends AbstractType implements ExecutorTypeA
 	}
 
 	public DomainOperation lookupOperation(DomainStandardLibrary standardLibrary, @NonNull String operationName, DomainType... argumentTypes) {
-		throw new UnsupportedOperationException();			// WIP fixme
-	}
-
-	@Override
-	public @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		throw new UnsupportedOperationException();			// WIP fixme
 	}
 }

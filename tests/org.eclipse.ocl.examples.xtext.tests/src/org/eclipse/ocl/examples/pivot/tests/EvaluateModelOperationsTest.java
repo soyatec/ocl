@@ -257,10 +257,10 @@ public class EvaluateModelOperationsTest extends PivotTestSuite
 		CollectionType sequence_C_type = metaModelManager.getSequenceType(cType, null, null);
 		CollectionType bag_C_type = metaModelManager.getBagType(cType, null, null);
         //
-		Value b1_value = valueFactory.valueOf(b1);
-		Value b2_value = valueFactory.valueOf(b2);
-		Value c1_value = valueFactory.valueOf(c1);
-		Value c2_value = valueFactory.valueOf(c2);
+		Object b1_value = valueFactory.valueOf(b1);
+		Object b2_value = valueFactory.valueOf(b2);
+		Object c1_value = valueFactory.valueOf(c1);
+		Object c2_value = valueFactory.valueOf(c2);
 		Value orderedSet_b1_b2 = valueFactory.createOrderedSetValue(orderedSet_B_type, b1_value, b2_value);
 		Value sequence_c1_c2 = valueFactory.createSequenceValue(sequence_C_type, c1_value, c2_value);
 		Value bag_c1_c2 = valueFactory.createBagValue(bag_C_type, c1_value, c2_value);

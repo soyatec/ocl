@@ -25,7 +25,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -42,14 +41,14 @@ public class IsUniqueIteration extends AbstractIteration
 	}
 	
 	@Override
-	protected @NonNull Value resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
+	protected @NonNull Object resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
 		return iterationManager.getValueFactory().getTrue();
 	}
 	
 	@Override
-    protected @Nullable Value updateAccumulator(@NonNull DomainIterationManager iterationManager) {
+    protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
 		CollectionValue.Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
-		Value bodyVal = iterationManager.evaluateBody();		
+		Object bodyVal = iterationManager.evaluateBody();		
 		try {
 			if (accumulatorValue.includes(bodyVal).isTrue()) {
 				return iterationManager.getValueFactory().getFalse();		// Abort after second find

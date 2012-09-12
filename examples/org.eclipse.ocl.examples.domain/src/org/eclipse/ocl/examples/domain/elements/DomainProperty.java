@@ -20,7 +20,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 public interface DomainProperty extends DomainFeature
 {
@@ -34,5 +33,5 @@ public interface DomainProperty extends DomainFeature
 	 */
 	/*@NonNull*/ DomainProperty getOpposite();
 	
-	void setValue(@NonNull ObjectValue objectValue, @NonNull Value propertyValue) throws InvalidValueException;
+	void setValue(@NonNull ObjectValue objectValue, @NonNull Object propertyValue) throws InvalidValueException;
 }

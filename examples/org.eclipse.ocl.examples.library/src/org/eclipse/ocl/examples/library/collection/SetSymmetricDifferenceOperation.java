@@ -22,18 +22,17 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * SetSymmetricDifferenceOperation realises the Set::symmetricDifference() library operation.
  */
 public class SetSymmetricDifferenceOperation extends AbstractBinaryOperation
 {
-	public static final SetSymmetricDifferenceOperation INSTANCE = new SetSymmetricDifferenceOperation();
+	public static final @NonNull SetSymmetricDifferenceOperation INSTANCE = new SetSymmetricDifferenceOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value left, @NonNull Value right) throws InvalidValueException {
-		UniqueCollectionValue leftValue = left.asUniqueCollectionValue();
-		UniqueCollectionValue rightValue = right.asUniqueCollectionValue();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
+		UniqueCollectionValue leftValue = asUniqueCollectionValue(left);
+		UniqueCollectionValue rightValue = asUniqueCollectionValue(right);
 		return leftValue.symmetricDifference(rightValue);
 	}
 }

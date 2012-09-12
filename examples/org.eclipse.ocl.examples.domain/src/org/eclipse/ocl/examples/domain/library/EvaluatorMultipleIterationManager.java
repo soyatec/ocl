@@ -22,7 +22,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 public class EvaluatorMultipleIterationManager extends EvaluatorIterationManager
 {
@@ -30,7 +29,7 @@ public class EvaluatorMultipleIterationManager extends EvaluatorIterationManager
 	protected boolean hasCurrent;
 	
 	public EvaluatorMultipleIterationManager(@NonNull DomainEvaluator invokingEvaluator, @NonNull DomainExpression body, @NonNull CollectionValue collectionValue,
-			@Nullable DomainTypedElement accumulator, @NonNull Value accumulatorValue, DomainTypedElement... referredIterators) {
+			@Nullable DomainTypedElement accumulator, @NonNull Object accumulatorValue, DomainTypedElement... referredIterators) {
 		super(invokingEvaluator.createNestedEvaluator(), body, collectionValue, accumulator, accumulatorValue);
 		int iMax = referredIterators.length;
 		ValueIterator[] iterators = new ValueIterator[iMax];
@@ -68,8 +67,8 @@ public class EvaluatorMultipleIterationManager extends EvaluatorIterationManager
 		return false;
 	}
 
-	public @NonNull Value get(int i) {
-		Value currentValue = iterators[i].get();
+	public @NonNull Object get(int i) {
+		Object currentValue = iterators[i].get();
 		if (currentValue == null) {
 			throw new IllegalStateException("cannot get() after iteration complete"); //$NON-NLS-1$
 		}

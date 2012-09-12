@@ -17,8 +17,8 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
 
+import java.util.Map;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.WrappedException;
@@ -28,8 +28,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
@@ -87,12 +87,12 @@ public class SelfTypeImpl extends ClassImpl implements SelfType
 		try {
 			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
 			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull Value self = valueFactory.valueOf(this);
+			final @NonNull Object self = valueFactory.valueOf(this);
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			
 			final @NonNull DomainType returnType = T_Type;
-			final @NonNull Value result = SelfTypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(selfType));
-			return (Type) result.asEcoreObject();
+			final @NonNull Object result = SelfTypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(selfType));
+			return (Type) ValuesUtil.asEcoreObject(result);
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.SelfTypeBodies", e);
 		}

@@ -21,16 +21,15 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * CollectionAsBagOperation realises the Collection::asBag() library operation.
  */
 public class CollectionAsBagOperation extends AbstractUnaryOperation
 {
-	public static final CollectionAsBagOperation INSTANCE = new CollectionAsBagOperation();
+	public static final @NonNull CollectionAsBagOperation INSTANCE = new CollectionAsBagOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value argument) throws InvalidValueException {
-		return argument.asBagValue();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object argument) throws InvalidValueException {
+		return asBagValue(argument);
 	}
 }

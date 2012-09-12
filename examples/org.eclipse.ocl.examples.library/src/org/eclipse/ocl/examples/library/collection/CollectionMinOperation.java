@@ -22,7 +22,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.library.numeric.NumericMinOperation;
 
 /**
@@ -30,10 +29,10 @@ import org.eclipse.ocl.examples.library.numeric.NumericMinOperation;
  */
 public class CollectionMinOperation extends AbstractUnaryOperation
 {
-	public static final CollectionMinOperation INSTANCE = new CollectionMinOperation();
+	public static final @NonNull CollectionMinOperation INSTANCE = new CollectionMinOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal) throws InvalidValueException {
-		CollectionValue collectionValue = sourceVal.asCollectionValue();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal) throws InvalidValueException {
+		CollectionValue collectionValue = asCollectionValue(sourceVal);
 		// FIXME Bug 301351 Look for user-defined min
 		return collectionValue.maxMin(evaluator, returnType, NumericMinOperation.INSTANCE);
 	}

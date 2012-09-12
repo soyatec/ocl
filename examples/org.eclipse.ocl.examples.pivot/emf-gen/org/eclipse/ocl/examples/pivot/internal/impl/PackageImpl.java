@@ -18,8 +18,8 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
-import java.util.Map;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -33,6 +33,8 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.typeids.Typeid;
+import org.eclipse.ocl.examples.domain.typeids.TypeidManager;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -873,5 +875,22 @@ public class PackageImpl
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitPackage(this);
+	}
+
+	private Typeid typeid = null;
+	
+	public @NonNull Typeid getTypeid() {
+		Typeid typeid2 = typeid;
+		if (typeid2 == null) {
+			synchronized (this) {
+				typeid2 = typeid;
+				if (typeid2 == null) {
+					synchronized (this) {
+ 						typeid = typeid2 = TypeidManager.INSTANCE.getPackageTypeid(this);
+					}
+				}
+			}
+		}
+		return typeid2;
 	}
 } //PackageImpl

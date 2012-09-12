@@ -65,16 +65,20 @@ public abstract class IntegerValueImpl extends ValueImpl implements IntegerValue
 		}
 	}
 
-	public @NonNull Value asValidValue() {
-		return this;
-	}
-
 	public @NonNull DomainType getType() {
 		return isUnlimitedNatural() ? valueFactory.getStandardLibrary().getUnlimitedNaturalType() : valueFactory.getStandardLibrary().getIntegerType();
 	}
 
-	@Override
-	public @NonNull IntegerValue isIntegerValue() {
-		return this;
+//	@Override
+//	public @NonNull IntegerValue isIntegerValue() {
+//		return this;
+//	}
+
+	public boolean isUnlimited() {
+		return false;
+	}
+	
+	public boolean isUnlimitedNatural() {
+		return false;
 	}
 }

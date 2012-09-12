@@ -26,8 +26,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -35,14 +33,14 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public class ClassifierAllInstancesOperation extends AbstractUnaryOperation
 {
-	public static final ClassifierAllInstancesOperation INSTANCE = new ClassifierAllInstancesOperation();
+	public static final @NonNull ClassifierAllInstancesOperation INSTANCE = new ClassifierAllInstancesOperation();
 
-	public @NonNull Value evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Value sourceVal) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
-		TypeValue typeVal = sourceVal.asTypeValue();
+		DomainType type = asType(sourceVal);
 		DomainModelManager modelManager = evaluator.getModelManager();
-		Set<Value> results = new HashSet<Value>();
-		Set<?> instances = modelManager.get(typeVal.getInstanceType());
+		Set<Object> results = new HashSet<Object>();
+		Set<?> instances = modelManager.get(type);
 		for (Object instance : instances) {
 			if (instance != null){
 				results.add(valueFactory.valueOf(instance));	// FIXME Move to model manager
