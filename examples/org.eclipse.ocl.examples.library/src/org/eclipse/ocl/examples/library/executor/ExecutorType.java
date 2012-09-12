@@ -24,7 +24,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.typeids.Typeid;
-import org.eclipse.ocl.examples.domain.typeids.TypeidManager;
 import org.eclipse.ocl.examples.domain.types.AbstractInheritance;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;

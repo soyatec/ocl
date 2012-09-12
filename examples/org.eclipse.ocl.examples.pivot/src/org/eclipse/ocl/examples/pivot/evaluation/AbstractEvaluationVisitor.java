@@ -244,7 +244,7 @@ public abstract class AbstractEvaluationVisitor
 			if (result == null) {
 				return evaluationEnvironment.throwInvalidEvaluation("null constraint result");
 			}
-			return ValuesUtil.asBooleanValue(result);
+			return ValuesUtil.asBoolean(result);
 		} catch (InvalidValueException e) {
 			return evaluationEnvironment.throwInvalidEvaluation(e);
 		}

@@ -23,7 +23,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
 
 /**
  * ExistsIteration realises the Collection::exists() library iteration.
@@ -32,13 +31,8 @@ public class ExistsIteration extends AbstractIteration
 {
 	public static final @NonNull ExistsIteration INSTANCE = new ExistsIteration();
 
-	public @NonNull BooleanValue.Accumulator createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) {
-		return evaluator.getValueFactory().createBooleanAccumulatorValue();
-	}
-
-	@Override
-	protected @NonNull Object resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
-		return iterationManager.getValueFactory().getFalse();
+	public @NonNull Object createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) {
+		return Boolean.FALSE;
 	}
 	
 	@Override
@@ -51,7 +45,7 @@ public class ExistsIteration extends AbstractIteration
 			return null;							// Carry on for nothing found
 		}
 		else {
-			return iterationManager.getValueFactory().getTrue();		// Abort after a find
+			return Boolean.TRUE;		// Abort after a find
 		}
 	}
 }

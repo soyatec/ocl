@@ -21,7 +21,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * StringGreaterThanOperation realises the String::>() library operation.
@@ -31,9 +30,8 @@ public class StringGreaterThanOperation extends AbstractBinaryOperation
 	public static final @NonNull StringGreaterThanOperation INSTANCE = new StringGreaterThanOperation();
 
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
 		String leftString = asString(left);
 		String rightString = asString(right);
-		return valueFactory.booleanValueOf(leftString.compareTo(rightString) > 0);
+		return leftString.compareTo(rightString) > 0;
 	}
 }

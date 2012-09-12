@@ -21,7 +21,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * StringToLowerCaseOperation realises the String::toLowerCase() library operation.
@@ -31,7 +30,6 @@ public class StringToLowerCaseOperation extends AbstractUnaryOperation
 	public static final @NonNull StringToLowerCaseOperation INSTANCE = new StringToLowerCaseOperation();
 
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
 		String sourceString = asString(sourceVal);
 		@SuppressWarnings("null") @NonNull String result = sourceString.toLowerCase();
 		return result;

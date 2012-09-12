@@ -21,7 +21,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * StringConcatOperation realises the String::concat() library operation.
@@ -31,7 +30,6 @@ public class StringConcatOperation extends AbstractBinaryOperation
 	public static final @NonNull StringConcatOperation INSTANCE = new StringConcatOperation();
 
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
 		String leftString = asString(left);
 		String rightString = asString(right);
 		@SuppressWarnings("null") @NonNull String result = leftString.concat(rightString);

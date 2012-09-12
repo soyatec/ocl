@@ -19,7 +19,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * StringReplaceFirstOperation realises the String::replaceFirst() library operation.
@@ -29,7 +28,6 @@ public class StringReplaceFirstOperation extends AbstractTernaryOperation
 	public static final @NonNull StringReplaceFirstOperation INSTANCE = new StringReplaceFirstOperation();
 
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
 		String sourceString = asString(sourceValue);
 		String regex = asString(firstArgumentValue);
 		String replacement = asString(secondArgumentValue);

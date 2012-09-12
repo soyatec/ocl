@@ -21,7 +21,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
 
 /**
  * OclVoidImpliesOperation realises the OclVoid::implies() library operation.
@@ -30,12 +29,12 @@ public class OclVoidImpliesOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull OclVoidImpliesOperation INSTANCE = new OclVoidImpliesOperation();
 
-	public @NonNull BooleanValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
 		if (isTrue(right)) {
-			return asBooleanValue(right);			// Simple type cast
+			return asBoolean(right);		// Simple type cast
 		}
 		else {
-			return asBooleanValue(left);			// Guaranteed exception
+			return asBoolean(left);			// Guaranteed exception
 		}
 	}
 }

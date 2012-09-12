@@ -23,7 +23,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.typeids.Typeid;
-import org.eclipse.ocl.examples.domain.typeids.TypeidManager;
 
 /**
  * A RootPackageServer adapts the primary nested Package to coordinate the coherent behavior of a primary and one or more

@@ -23,19 +23,36 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * OneIteration realizes the Collection::one() library iteration.
  */
 public class OneIteration extends AbstractIteration
 {
+	public static class MutableBoolean 
+	{
+		private boolean value = false;
+		
+		public boolean isSet() {
+			return value;
+		}
+		
+		public void set() {
+			this.value = true;
+		}
+	}
+
 	public static final @NonNull OneIteration INSTANCE = new OneIteration();
 
-	public @NonNull BooleanValue.Accumulator createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) {
-		ValueFactory valueFactory = evaluator.getValueFactory();
-		return valueFactory.createBooleanAccumulatorValue();
+	public @NonNull MutableBoolean createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) {
+		return new MutableBoolean();
+	}
+
+	@Override
+	protected @NonNull
+	Object resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
+		MutableBoolean accumulatorValue = (MutableBoolean) iterationManager.getAccumulatorValue();
+		return accumulatorValue.isSet();
 	}
 
 	@Override
@@ -48,12 +65,12 @@ public class OneIteration extends AbstractIteration
 			return null;									// Carry on for nothing found
 		}
 		else {
-			Object accumulatorValue = iterationManager.getAccumulatorValue();
-			if (isTrue(accumulatorValue)) {
-				return iterationManager.getValueFactory().getFalse();				// Abort after second find
+			MutableBoolean accumulatorValue = (MutableBoolean) iterationManager.getAccumulatorValue();
+			if (accumulatorValue.isSet()) {
+				return Boolean.FALSE;				// Abort after second find
 			}
 			else {
-				((BooleanValue.Accumulator)accumulatorValue).setValue(true);
+				accumulatorValue.set();
 				return null;									// Carry on after first find
 			}
 		}

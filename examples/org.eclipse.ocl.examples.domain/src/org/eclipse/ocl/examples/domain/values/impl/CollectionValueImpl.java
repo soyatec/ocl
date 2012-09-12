@@ -36,7 +36,6 @@ import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.BagValue;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
@@ -160,13 +159,13 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
      * @param object an object
      * @return whether the collection does not include the object
      */
-    public @NonNull BooleanValue excludes(@NonNull Object value) {
+    public @NonNull Object excludes(@NonNull Object value) {
         for (Object next : elements) {
             if (next.equals(value)) {
-            	return valueFactory.getFalse();
+            	return Boolean.FALSE;
             }
         } 
-        return valueFactory.getTrue();
+        return Boolean.TRUE;
     }
 
 	/**
@@ -179,15 +178,15 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
      * @return whether the source collection does not contain any of the
      *     elements of the other
      */
-    public @NonNull BooleanValue excludesAll(@NonNull CollectionValue c) {
+    public @NonNull Object excludesAll(@NonNull CollectionValue c) {
         for (Object e1 : elements) {
 	        for (Object e2 : c.iterable()) {
 	            if (e1.equals(e2)) {
-	            	return valueFactory.getFalse();
+	            	return Boolean.FALSE;
 	            }
 	        } 
         } 
-        return valueFactory.getTrue();
+        return Boolean.TRUE;
     }
 
     /**
@@ -284,8 +283,8 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		return elements.hashCode();
 	}
 
-    public @NonNull BooleanValue includes(@NonNull Object value) {
-		return valueFactory.booleanValueOf(elements.contains(value));
+    public @NonNull Object includes(@NonNull Object value) {
+		return elements.contains(value);
     }
 
     /**
@@ -298,7 +297,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
      * @return whether the source collection includes all of the elements
      *     of the other
      */
-    public @NonNull BooleanValue includesAll(@NonNull CollectionValue c) {
+    public @NonNull Object includesAll(@NonNull CollectionValue c) {
         for (Object e1 : c.iterable()) {
         	boolean gotIt = false;
 	        for (Object e2 : elements) {
@@ -308,10 +307,10 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	            }
 	        } 
         	if (!gotIt) {
-        		return valueFactory.getFalse();
+        		return Boolean.FALSE;
         	}
         } 
-        return valueFactory.getTrue();
+        return Boolean.TRUE;
     }
 
 	public int intSize() {
@@ -339,8 +338,8 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 //		return this;
 //	}
 
-	public @NonNull BooleanValue isEmpty() {
-		return valueFactory.booleanValueOf(intSize() == 0);
+	public @NonNull Object isEmpty() {
+		return intSize() == 0;
 	}
 
 	public @NonNull Iterable<? extends Object> iterable() {
@@ -371,8 +370,8 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		return result;
     }
 
-	public @NonNull BooleanValue notEmpty() {
-		return valueFactory.booleanValueOf(intSize() != 0);
+	public @NonNull Object notEmpty() {
+		return intSize() != 0;
 	}
 
     public @NonNull Set<TupleValue> product(@NonNull CollectionValue c, @NonNull DomainTupleType tupleType) {   	

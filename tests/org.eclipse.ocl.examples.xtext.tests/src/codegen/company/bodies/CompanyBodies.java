@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -59,7 +58,7 @@ public class CompanyBodies
 		*/
 		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Object self) throws InvalidValueException {
 			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull BooleanValue True = valueFactory.getTrue();
+			final @NonNull Object True = Boolean.TRUE;
 			
 			
 			return True;

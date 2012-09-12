@@ -57,12 +57,12 @@ public interface CollectionValue extends Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull BooleanValue excludes(@NonNull Object value) throws InvalidValueException;	
+	@NonNull Object excludes(@NonNull Object value) throws InvalidValueException;	
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull BooleanValue excludesAll(@NonNull CollectionValue c) throws InvalidValueException;
+	@NonNull Object excludesAll(@NonNull CollectionValue c) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
@@ -92,12 +92,12 @@ public interface CollectionValue extends Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull BooleanValue includes(@NonNull Object value) throws InvalidValueException;	
+	@NonNull Object includes(@NonNull Object value) throws InvalidValueException;	
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull BooleanValue includesAll(@NonNull CollectionValue c) throws InvalidValueException;
+	@NonNull Object includesAll(@NonNull CollectionValue c) throws InvalidValueException;
 
 	/**
 	 * @generated NOT
@@ -117,7 +117,7 @@ public interface CollectionValue extends Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull BooleanValue isEmpty() throws InvalidValueException;
+	@NonNull Object isEmpty() throws InvalidValueException;
 
 	/**
 	 * @generated NOT
@@ -137,7 +137,7 @@ public interface CollectionValue extends Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull BooleanValue notEmpty() throws InvalidValueException;
+	@NonNull Object notEmpty() throws InvalidValueException;
 
 	/**
 	 * @generated NOT

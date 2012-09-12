@@ -60,7 +60,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getValue()
 	 * @generated
 	 */
-	int VALUE = 18;
+	int VALUE = 16;
 
 	/**
 	 * The number of structural features of the '<em>Value</em>' class.
@@ -79,7 +79,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getCollectionValue()
 	 * @generated
 	 */
-	int COLLECTION_VALUE = 2;
+	int COLLECTION_VALUE = 1;
 
 	/**
 	 * The number of structural features of the '<em>Collection Value</em>' class.
@@ -110,25 +110,6 @@ public interface ValuesPackage extends EPackage {
 	int BAG_VALUE_FEATURE_COUNT = COLLECTION_VALUE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.BooleanValueImpl <em>Boolean Value</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.domain.values.impl.BooleanValueImpl
-	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getBooleanValue()
-	 * @generated
-	 */
-	int BOOLEAN_VALUE = 1;
-
-	/**
-	 * The number of structural features of the '<em>Boolean Value</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.ObjectValueImpl <em>Object Value</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -136,7 +117,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getObjectValue()
 	 * @generated
 	 */
-	int OBJECT_VALUE = 8;
+	int OBJECT_VALUE = 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.EnumerationLiteralValueImpl <em>Enumeration Literal Value</em>}' class.
@@ -146,7 +127,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getEnumerationLiteralValue()
 	 * @generated
 	 */
-	int ENUMERATION_LITERAL_VALUE = 3;
+	int ENUMERATION_LITERAL_VALUE = 2;
 
 	/**
 	 * The number of structural features of the '<em>Enumeration Literal Value</em>' class.
@@ -165,7 +146,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getNumericValue()
 	 * @generated
 	 */
-	int NUMERIC_VALUE = 7;
+	int NUMERIC_VALUE = 6;
 
 	/**
 	 * The number of structural features of the '<em>Numeric Value</em>' class.
@@ -184,7 +165,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getIntegerValue()
 	 * @generated
 	 */
-	int INTEGER_VALUE = 4;
+	int INTEGER_VALUE = 3;
 
 	/**
 	 * The number of structural features of the '<em>Integer Value</em>' class.
@@ -203,7 +184,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getNullValue()
 	 * @generated
 	 */
-	int NULL_VALUE = 6;
+	int NULL_VALUE = 5;
 
 	/**
 	 * The number of structural features of the '<em>Null Value</em>' class.
@@ -212,7 +193,7 @@ public interface ValuesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NULL_VALUE_FEATURE_COUNT = BOOLEAN_VALUE_FEATURE_COUNT + 0;
+	int NULL_VALUE_FEATURE_COUNT = INTEGER_VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl <em>Invalid Value</em>}' class.
@@ -222,7 +203,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getInvalidValue()
 	 * @generated
 	 */
-	int INVALID_VALUE = 5;
+	int INVALID_VALUE = 4;
 
 	/**
 	 * The number of structural features of the '<em>Invalid Value</em>' class.
@@ -250,7 +231,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getSequenceValue()
 	 * @generated
 	 */
-	int SEQUENCE_VALUE = 11;
+	int SEQUENCE_VALUE = 10;
 
 	/**
 	 * The number of structural features of the '<em>Sequence Value</em>' class.
@@ -269,7 +250,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getOrderedSetValue()
 	 * @generated
 	 */
-	int ORDERED_SET_VALUE = 9;
+	int ORDERED_SET_VALUE = 8;
 
 	/**
 	 * The number of structural features of the '<em>Ordered Set Value</em>' class.
@@ -288,7 +269,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getRealValue()
 	 * @generated
 	 */
-	int REAL_VALUE = 10;
+	int REAL_VALUE = 9;
 
 	/**
 	 * The number of structural features of the '<em>Real Value</em>' class.
@@ -307,7 +288,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getSetValue()
 	 * @generated
 	 */
-	int SET_VALUE = 12;
+	int SET_VALUE = 11;
 
 	/**
 	 * The number of structural features of the '<em>Set Value</em>' class.
@@ -319,25 +300,6 @@ public interface ValuesPackage extends EPackage {
 	int SET_VALUE_FEATURE_COUNT = BAG_VALUE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.StringValueImpl <em>String Value</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.domain.values.impl.StringValueImpl
-	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getStringValue()
-	 * @generated
-	 */
-	int STRING_VALUE = 13;
-
-	/**
-	 * The number of structural features of the '<em>String Value</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.TupleValueImpl <em>Tuple Value</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -345,7 +307,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getTupleValue()
 	 * @generated
 	 */
-	int TUPLE_VALUE = 14;
+	int TUPLE_VALUE = 12;
 
 	/**
 	 * The number of structural features of the '<em>Tuple Value</em>' class.
@@ -364,7 +326,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getTypeValue()
 	 * @generated
 	 */
-	int TYPE_VALUE = 15;
+	int TYPE_VALUE = 13;
 
 	/**
 	 * The number of structural features of the '<em>Type Value</em>' class.
@@ -383,7 +345,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getUniqueCollectionValue()
 	 * @generated
 	 */
-	int UNIQUE_COLLECTION_VALUE = 16;
+	int UNIQUE_COLLECTION_VALUE = 14;
 
 	/**
 	 * The number of structural features of the '<em>Unique Collection Value</em>' class.
@@ -402,7 +364,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getUnlimitedValue()
 	 * @generated
 	 */
-	int UNLIMITED_VALUE = 17;
+	int UNLIMITED_VALUE = 15;
 
 	/**
 	 * The number of structural features of the '<em>Unlimited Value</em>' class.
@@ -423,16 +385,6 @@ public interface ValuesPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getBagValue();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.domain.values.BooleanValue <em>Boolean Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Boolean Value</em>'.
-	 * @see org.eclipse.ocl.examples.domain.values.BooleanValue
-	 * @generated
-	 */
-	EClass getBooleanValue();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.domain.values.CollectionValue <em>Collection Value</em>}'.
@@ -545,16 +497,6 @@ public interface ValuesPackage extends EPackage {
 	EClass getSetValue();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.domain.values.StringValue <em>String Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>String Value</em>'.
-	 * @see org.eclipse.ocl.examples.domain.values.StringValue
-	 * @generated
-	 */
-	EClass getStringValue();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.domain.values.TupleValue <em>Tuple Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -635,16 +577,6 @@ public interface ValuesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass BAG_VALUE = eINSTANCE.getBagValue();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.domain.values.impl.BooleanValueImpl <em>Boolean Value</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.domain.values.impl.BooleanValueImpl
-		 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getBooleanValue()
-		 * @generated
-		 */
-		EClass BOOLEAN_VALUE = eINSTANCE.getBooleanValue();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.domain.values.impl.CollectionValueImpl <em>Collection Value</em>}' class.
@@ -755,16 +687,6 @@ public interface ValuesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SET_VALUE = eINSTANCE.getSetValue();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.domain.values.impl.StringValueImpl <em>String Value</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.domain.values.impl.StringValueImpl
-		 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getStringValue()
-		 * @generated
-		 */
-		EClass STRING_VALUE = eINSTANCE.getStringValue();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.domain.values.impl.TupleValueImpl <em>Tuple Value</em>}' class.

@@ -53,7 +53,6 @@ public class EmitQueries
 		org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation.class,
 		org.eclipse.ocl.examples.domain.messages.EvaluatorMessages.class,
 		org.eclipse.ocl.examples.domain.values.BagValue.class,
-		org.eclipse.ocl.examples.domain.values.BooleanValue.class,
 		org.eclipse.ocl.examples.domain.values.CollectionValue.class,
 		org.eclipse.ocl.examples.domain.values.IntegerRange.class,
 		org.eclipse.ocl.examples.domain.values.IntegerValue.class,

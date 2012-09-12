@@ -27,7 +27,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.BagValue;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
@@ -85,14 +84,10 @@ public abstract class ValueImpl implements Value
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Bag", getType());
 	}
 
-	public boolean asBoolean() throws InvalidValueException {
-		valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Boolean", getType());
-		return false;
-	}
-
-	public @NonNull BooleanValue asBooleanValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Boolean", getType());
-	}
+//	public boolean asBoolean() throws InvalidValueException {
+//		valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Boolean", getType());
+//		return false;
+//	}
 
 	public @NonNull CollectionValue asCollectionValue() throws InvalidValueException {
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Collection", getType());
@@ -150,10 +145,10 @@ public abstract class ValueImpl implements Value
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Set", getType());
 	}
 
-	public @NonNull String asString() throws InvalidValueException {
-		valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "String", getType());
-		return NULL_STRING;			// Unreachable code
-	}
+//	public @NonNull String asString() throws InvalidValueException {
+//		valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "String", getType());
+//		return NULL_STRING;			// Unreachable code
+//	}
 
 	public @NonNull TupleValue asTupleValue() throws InvalidValueException {
 		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Tuple", getType());

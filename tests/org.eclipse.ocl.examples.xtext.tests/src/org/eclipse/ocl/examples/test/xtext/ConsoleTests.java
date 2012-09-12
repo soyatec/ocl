@@ -218,8 +218,8 @@ public class ConsoleTests extends PivotTestSuite
 	} */
 
 	public void testConsole_UML() throws Exception {
-		assertConsoleResult(consolePage, englishClass, "self.name", "'EnglishClass'\n");
-		assertConsoleResult(consolePage, englishClass, "self.extension_InEnglish.instanceType.name", "'EnglishClass$InEnglish'\n");
+		assertConsoleResult(consolePage, englishClass, "self.name", "EnglishClass\n");
+		assertConsoleResult(consolePage, englishClass, "self.extension_InEnglish.instanceType.name", "EnglishClass$InEnglish\n");
 	}
 
 	public void testConsole_OCLinEcoreTutorial() throws Exception {

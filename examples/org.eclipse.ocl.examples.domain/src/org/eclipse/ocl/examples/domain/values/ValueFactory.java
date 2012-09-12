@@ -42,8 +42,6 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 public interface ValueFactory
 {
-	@NonNull BooleanValue booleanValueOf(boolean value);
-		
 	@NonNull BagValue createBagOf(Object... objects);
 	@NonNull BagValue createBagOf(@NonNull Iterable<?> objects);
 	@NonNull BagValue createBagValue(Object... values);
@@ -51,7 +49,7 @@ public interface ValueFactory
 	@NonNull BagValue createBagValue(@NonNull DomainCollectionType type, @NonNull Bag<? extends Object> values);
 	@NonNull BagValue createBagValue(@NonNull DomainCollectionType type, @NonNull Iterable<? extends Object> values);
 
-	@NonNull BooleanValue.Accumulator createBooleanAccumulatorValue();
+//	@NonNull BooleanValue.Accumulator createBooleanAccumulatorValue();
 	@NonNull CollectionValue.Accumulator createCollectionAccumulatorValue(@NonNull DomainCollectionType type);
     
 	/**
@@ -113,12 +111,10 @@ public interface ValueFactory
 	@NonNull DomainType getElementType(Object... values);
 	@NonNull DomainType getElementType(@NonNull Iterable<? extends Object> values);
 
-    @NonNull BooleanValue getFalse();
     @NonNull InvalidValue getInvalid();
     @NonNull NullValue getNull();
     @NonNull IntegerValue getOne();
     @NonNull DomainStandardLibrary getStandardLibrary();
-    @NonNull BooleanValue getTrue();
     @NonNull UnlimitedValue getUnlimited();
     @NonNull IntegerValue getZero();
 	

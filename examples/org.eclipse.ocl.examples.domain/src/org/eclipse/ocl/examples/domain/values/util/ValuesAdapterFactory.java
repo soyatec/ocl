@@ -72,10 +72,6 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 				return createBagValueAdapter();
 			}
 			@Override
-			public Adapter caseBooleanValue(BooleanValue object) {
-				return createBooleanValueAdapter();
-			}
-			@Override
 			public Adapter caseCollectionValue(CollectionValue object) {
 				return createCollectionValueAdapter();
 			}
@@ -170,20 +166,6 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBagValueAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.values.BooleanValue <em>Boolean Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.domain.values.BooleanValue
-	 * @generated
-	 */
-	public Adapter createBooleanValueAdapter() {
 		return null;
 	}
 
@@ -338,20 +320,6 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSetValueAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.values.StringValue <em>String Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.domain.values.StringValue
-	 * @generated
-	 */
-	public Adapter createStringValueAdapter() {
 		return null;
 	}
 

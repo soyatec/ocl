@@ -6,7 +6,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.examples.domain.values.BagValue;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -39,13 +38,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 	 * @generated
 	 */
 	private EClass bagValueEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass booleanValueEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -123,13 +115,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 	 * @generated
 	 */
 	private EClass setValueEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass stringValueEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -241,15 +226,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getBooleanValue() {
-		return booleanValueEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getCollectionValue() {
 		return collectionValueEClass;
 	}
@@ -349,15 +325,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getStringValue() {
-		return stringValueEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getTupleValue() {
 		return tupleValueEClass;
 	}
@@ -428,8 +395,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 		// Create classes and their features
 		bagValueEClass = createEClass(BAG_VALUE);
 
-		booleanValueEClass = createEClass(BOOLEAN_VALUE);
-
 		collectionValueEClass = createEClass(COLLECTION_VALUE);
 
 		enumerationLiteralValueEClass = createEClass(ENUMERATION_LITERAL_VALUE);
@@ -451,8 +416,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 		sequenceValueEClass = createEClass(SEQUENCE_VALUE);
 
 		setValueEClass = createEClass(SET_VALUE);
-
-		stringValueEClass = createEClass(STRING_VALUE);
 
 		tupleValueEClass = createEClass(TUPLE_VALUE);
 
@@ -494,18 +457,15 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 
 		// Add supertypes to classes
 		bagValueEClass.getESuperTypes().add(this.getCollectionValue());
-		booleanValueEClass.getESuperTypes().add(this.getValue());
 		collectionValueEClass.getESuperTypes().add(this.getValue());
 		enumerationLiteralValueEClass.getESuperTypes().add(this.getValue());
 		integerValueEClass.getESuperTypes().add(this.getNumericValue());
 		invalidValueEClass.getESuperTypes().add(this.getNullValue());
-		nullValueEClass.getESuperTypes().add(this.getBooleanValue());
 		nullValueEClass.getESuperTypes().add(this.getIntegerValue());
 		nullValueEClass.getESuperTypes().add(this.getObjectValue());
 		nullValueEClass.getESuperTypes().add(this.getOrderedSetValue());
 		nullValueEClass.getESuperTypes().add(this.getRealValue());
 		nullValueEClass.getESuperTypes().add(this.getSetValue());
-		nullValueEClass.getESuperTypes().add(this.getStringValue());
 		nullValueEClass.getESuperTypes().add(this.getTupleValue());
 		nullValueEClass.getESuperTypes().add(this.getUnlimitedValue());
 		numericValueEClass.getESuperTypes().add(this.getValue());
@@ -516,7 +476,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 		sequenceValueEClass.getESuperTypes().add(this.getCollectionValue());
 		setValueEClass.getESuperTypes().add(this.getBagValue());
 		setValueEClass.getESuperTypes().add(this.getUniqueCollectionValue());
-		stringValueEClass.getESuperTypes().add(this.getValue());
 		tupleValueEClass.getESuperTypes().add(this.getValue());
 		typeValueEClass.getESuperTypes().add(this.getValue());
 		uniqueCollectionValueEClass.getESuperTypes().add(this.getCollectionValue());
@@ -524,8 +483,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(bagValueEClass, BagValue.class, "BagValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(booleanValueEClass, BooleanValue.class, "BooleanValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(collectionValueEClass, CollectionValue.class, "CollectionValue", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

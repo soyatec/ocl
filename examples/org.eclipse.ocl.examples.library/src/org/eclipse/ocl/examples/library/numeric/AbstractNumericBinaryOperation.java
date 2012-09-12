@@ -24,7 +24,6 @@ import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * AbstractNumericBinaryOperation dispatches a binary library operation to
@@ -53,7 +52,7 @@ public abstract class AbstractNumericBinaryOperation extends AbstractBinaryOpera
 	 * @return result
 	 * @throws InvalidValueException 
 	 */
-	protected abstract @NonNull Value evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) throws InvalidValueException;
+	protected abstract @NonNull Object evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) throws InvalidValueException;
 
 	/**
 	 * Evaluate an operation for which both left and right are Real.
@@ -62,7 +61,7 @@ public abstract class AbstractNumericBinaryOperation extends AbstractBinaryOpera
 	 * @return result
 	 * @throws InvalidValueException 
 	 */
-	protected @NonNull Value evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) throws InvalidValueException {
+	protected @NonNull Object evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) throws InvalidValueException {
 		return evaluator.getValueFactory().throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Real"); //$NON-NLS-1$
 	}
 	

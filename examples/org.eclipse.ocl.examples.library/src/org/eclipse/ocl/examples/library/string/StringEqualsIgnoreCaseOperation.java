@@ -21,7 +21,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * OrderedSetSubOrderedSetOperation realises the OrderedSet::subOrderedSet() library operation.
@@ -31,9 +30,8 @@ public class StringEqualsIgnoreCaseOperation extends AbstractBinaryOperation
 	public static final @NonNull StringEqualsIgnoreCaseOperation INSTANCE = new StringEqualsIgnoreCaseOperation();
 
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
 		String leftString = asString(left);
 		String rightString = asString(right);
-		return valueFactory.booleanValueOf(leftString.equalsIgnoreCase(rightString));
+		return leftString.equalsIgnoreCase(rightString);
 	}
 }

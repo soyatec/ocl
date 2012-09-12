@@ -18,10 +18,8 @@ package org.eclipse.ocl.examples.library.numeric;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * GreaterThanEqualOperation realises the >=() library operation.
@@ -31,20 +29,17 @@ public class NumericGreaterThanEqualOperation extends AbstractNumericBinaryOpera
 	public static final @NonNull NumericGreaterThanEqualOperation INSTANCE = new NumericGreaterThanEqualOperation();
 
 	@Override
-	protected @NonNull BooleanValue evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) {
-		ValueFactory valueFactory = evaluator.getValueFactory();
-		return valueFactory.booleanValueOf(left.compareTo(right) >= 0);
+	protected @NonNull Object evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) {
+		return left.compareTo(right) >= 0;
 	}
 
 	@Override
-	protected @NonNull BooleanValue evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) {
-		ValueFactory valueFactory = evaluator.getValueFactory();
-		return valueFactory.booleanValueOf(left.compareTo(right) >= 0);
+	protected @NonNull Object evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) {
+		return left.compareTo(right) >= 0;
 	}
 
 	@Override
-	protected @NonNull BooleanValue evaluateUnlimited(@NonNull DomainEvaluator evaluator, @NonNull Object left, @NonNull Object right) {
-		ValueFactory valueFactory = evaluator.getValueFactory();
-		return valueFactory.booleanValueOf(isUnlimited(left));
+	protected @NonNull Object evaluateUnlimited(@NonNull DomainEvaluator evaluator, @NonNull Object left, @NonNull Object right) {
+		return isUnlimited(left);
 	}
 }

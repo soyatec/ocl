@@ -69,7 +69,7 @@ public class AnyIteration extends AbstractIteration
 		else {
 			CollectionValue.Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
 			if (accumulatorValue.intSize() > 0) {
-				return iterationManager.getValueFactory().getFalse();				// Abort after second find
+				return Boolean.FALSE;				// Abort after second find
 			}
 			else {
 				Object value = iterationManager.get();		

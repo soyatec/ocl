@@ -20,10 +20,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.typeids.Typeid;
-import org.eclipse.ocl.examples.domain.typeids.TypeidManager;
 import org.eclipse.ocl.examples.domain.types.AbstractType;
 
 public class ExecutorSpecializedType extends AbstractType implements ExecutorTypeArgument

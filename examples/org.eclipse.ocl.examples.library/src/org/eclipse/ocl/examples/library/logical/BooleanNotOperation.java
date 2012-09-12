@@ -21,8 +21,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * NotOperation realises the not() library operation.
@@ -31,8 +29,7 @@ public class BooleanNotOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull BooleanNotOperation INSTANCE = new BooleanNotOperation();
 
-	public @NonNull BooleanValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object argument) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
-		return valueFactory.booleanValueOf(!asBoolean(argument));
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object argument) throws InvalidValueException {
+		return !asBoolean(argument);
 	}
 }

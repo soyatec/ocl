@@ -27,7 +27,6 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.BagValue;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
@@ -82,22 +81,6 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 			throw exception;
 		}
 		return super.asBagValue();
-	}
-
-	@Override
-	public boolean asBoolean() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.asBoolean();
-	}
-
-	@Override
-	public @NonNull BooleanValue asBooleanValue() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.asBooleanValue();
 	}
 
 	@Override
@@ -186,14 +169,6 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 			throw exception;
 		}
 		return super.asSetValue();
-	}
-
-	@Override
-	public @NonNull String asString() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.asString();
 	}
 
 	@Override

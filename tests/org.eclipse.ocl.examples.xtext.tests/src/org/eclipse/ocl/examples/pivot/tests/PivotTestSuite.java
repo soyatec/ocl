@@ -56,14 +56,12 @@ import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
-import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -72,6 +70,7 @@ import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -481,7 +480,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	protected Object assertQueryFalse(Object context, String expression) {
 		try {
 			Object value = evaluate(helper, context, expression);
-			assertEquals(expression, valueFactory.getFalse(), value);
+			assertEquals(expression, Boolean.FALSE, value);
 			return value;
 		} catch (Exception e) {
 			failOn(expression, e);
@@ -625,8 +624,8 @@ public abstract class PivotTestSuite extends PivotTestCase
 			Object result = evaluate(helper, context, expression);
 			assertTrue(expectedResult.getClass().isInstance(result));
 			assertSame(expectedResult.intSize(), ((CollectionValue) result).intSize());
-			BooleanValue actualResult = ((CollectionValue) result).includesAll(expectedResult);
-			assertTrue("Expected " + result + " to contain " + expectedResult, actualResult.isTrue());
+			Object actualResult = ((CollectionValue) result).includesAll(expectedResult);
+			assertTrue("Expected " + result + " to contain " + expectedResult, ValuesUtil.isTrue(actualResult));
 			return result;
 		} catch (Exception e) {
 			failOn(expression, e);
@@ -680,7 +679,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	protected Object assertQueryTrue(Object context, String expression) {
 		try {
 			Object value = evaluate(helper, context, expression);
-			assertEquals(expression, valueFactory.getTrue(), value);
+			assertEquals(expression, Boolean.TRUE, value);
 			return value;
 		} catch (Exception e) {
 			failOn(expression, e);

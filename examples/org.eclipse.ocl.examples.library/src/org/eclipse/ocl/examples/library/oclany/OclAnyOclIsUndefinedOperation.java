@@ -20,8 +20,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * OclAnyOclIsUndefinedOperation realises the OclAny::oclIsUndefined() library operation.
@@ -30,8 +28,7 @@ public class OclAnyOclIsUndefinedOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull OclAnyOclIsUndefinedOperation INSTANCE = new OclAnyOclIsUndefinedOperation();
 
-	public @NonNull BooleanValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object argument) {
-		ValueFactory valueFactory = evaluator.getValueFactory();
-		return valueFactory.booleanValueOf(isUndefined(argument));
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object argument) {
+		return isUndefined(argument);
 	}
 }

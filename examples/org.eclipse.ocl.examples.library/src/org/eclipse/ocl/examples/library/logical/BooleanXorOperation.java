@@ -21,8 +21,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * BooleanXorOperation realises the Boolean::xor() library operation.
@@ -31,8 +29,7 @@ public class BooleanXorOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull BooleanXorOperation INSTANCE = new BooleanXorOperation();
 
-	public @NonNull BooleanValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
-		return valueFactory.booleanValueOf(asBoolean(left) ^ asBoolean(right));
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
+		return asBoolean(left) ^ asBoolean(right);
 	}
 }

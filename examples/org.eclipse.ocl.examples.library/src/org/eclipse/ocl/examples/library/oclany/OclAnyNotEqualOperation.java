@@ -20,8 +20,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 
 /**
@@ -34,8 +32,7 @@ public class OclAnyNotEqualOperation extends OclAnyEqualOperation
 	public static final @NonNull OclAnyNotEqualOperation INSTANCE = new OclAnyNotEqualOperation();
 
 	@Override
-	public @NonNull BooleanValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
-		return valueFactory.booleanValueOf(!super.evaluate(evaluator, returnType, left, right).asBoolean());
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
+		return !asBoolean(super.evaluate(evaluator, returnType, left, right));
 	}
 }

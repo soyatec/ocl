@@ -23,7 +23,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.NumericValue;
@@ -51,20 +50,8 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		return toInvalidValue();
 	}
 
-	public @NonNull BooleanValue asFalse() {
-		return this;
-	}
-
-//	public Double asDouble() {
-//		return null;
-//	}
-
 	public @NonNull Object asObject() throws InvalidValueException {
 		return toInvalidValue();
-	}
-
-	public @NonNull BooleanValue asTrue() {
-		return this;
 	}
 
 	public @NonNull BigDecimal bigDecimalValue() throws InvalidValueException {

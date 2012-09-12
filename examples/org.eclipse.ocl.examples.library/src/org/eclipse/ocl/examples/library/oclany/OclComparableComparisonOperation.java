@@ -55,7 +55,7 @@ public abstract class OclComparableComparisonOperation extends AbstractBinaryOpe
 		if (implementation != null) {
 			Object comparison = implementation.evaluate(evaluator, standardLibrary.getIntegerType(), left, right);
 			intComparison = ValuesUtil.asInteger(comparison);
-			return valueFactory.booleanValueOf(getResultValue(intComparison));
+			return getResultValue(intComparison);
 		}
 		else {
 			return valueFactory.throwInvalidValueException("Unsupported compareTo for ''{0}''", left.getClass().getName()); //$NON-NLS-1$

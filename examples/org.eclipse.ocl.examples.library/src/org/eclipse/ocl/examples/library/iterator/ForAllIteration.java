@@ -23,7 +23,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
 
 /**
  * ForAllIteration realizes the Collection::forAll() library iteration.
@@ -32,13 +31,8 @@ public class ForAllIteration extends AbstractIteration
 {
 	public static final @NonNull ForAllIteration INSTANCE = new ForAllIteration();
 
-	public @NonNull BooleanValue.Accumulator createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) {
-		return evaluator.getValueFactory().createBooleanAccumulatorValue();
-	}
-	
-	@Override
-	protected @NonNull Object resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
-		return iterationManager.getValueFactory().getTrue();
+	public @NonNull Object createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) {
+		return Boolean.TRUE;
 	}
 
 	@Override
@@ -51,7 +45,7 @@ public class ForAllIteration extends AbstractIteration
 			return null;							// Carry on for nothing found
 		}
 		else {
-			return iterationManager.getValueFactory().getFalse();			// Abort after a fail
+			return Boolean.FALSE;			// Abort after a fail
 		}
 	}
 }

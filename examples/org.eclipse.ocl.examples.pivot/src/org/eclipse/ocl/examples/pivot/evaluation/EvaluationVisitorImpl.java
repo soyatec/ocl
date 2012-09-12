@@ -50,7 +50,6 @@ import org.eclipse.ocl.examples.domain.library.LibraryTernaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -209,9 +208,9 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 * @return the value of the boolean literal as a java.lang.Boolean.
 	 */
 	@Override
-    public BooleanValue visitBooleanLiteralExp(@NonNull BooleanLiteralExp booleanLiteralExp) {
+    public Object visitBooleanLiteralExp(@NonNull BooleanLiteralExp booleanLiteralExp) {
     	boolean value = booleanLiteralExp.isBooleanSymbol();
-		return valueFactory.booleanValueOf(value);
+		return value;
 	}
 
 	@Override
@@ -397,18 +396,18 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 //		if (condition == null) {
 //			return null;
 //		}
-		BooleanValue evaluatedCondition;
+		Object evaluatedCondition;
 		try {
 			Object acceptedValue = condition.accept(getUndecoratedVisitor());
 			if (acceptedValue == null) {
 				return evaluationEnvironment.throwInvalidEvaluation("null condition");
 			}
-			evaluatedCondition = ValuesUtil.asBooleanValue(acceptedValue);
+			evaluatedCondition = ValuesUtil.asBoolean(acceptedValue);
 		} catch (InvalidValueException e) {
 			return evaluationEnvironment.throwInvalidEvaluation(e);
 		}
 		OCLExpression expression = null;
-		if (evaluatedCondition.isTrue()) {
+		if (ValuesUtil.isTrue(evaluatedCondition)) {
 			expression = ifExp.getThenExpression();
 		} else {
 			expression = ifExp.getElseExpression();

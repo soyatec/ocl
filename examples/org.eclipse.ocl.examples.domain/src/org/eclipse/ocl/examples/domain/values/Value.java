@@ -45,16 +45,6 @@ public interface Value
 	/**
 	 * @generated NOT
 	 */
-	boolean asBoolean() throws InvalidValueException;
-
-	/**
-	 * @generated NOT
-	 */
-	@NonNull BooleanValue asBooleanValue() throws InvalidValueException;
-
-	/**
-	 * @generated NOT
-	 */
 	@NonNull CollectionValue asCollectionValue() throws InvalidValueException;
 
 	/**
@@ -117,11 +107,6 @@ public interface Value
 	 * @generated NOT
 	 */
 	@NonNull SetValue asSetValue() throws InvalidValueException;
-
-	/**
-	 * @generated NOT
-	 */
-	@NonNull String asString() throws InvalidValueException;
 
 	/**
 	 * @generated NOT

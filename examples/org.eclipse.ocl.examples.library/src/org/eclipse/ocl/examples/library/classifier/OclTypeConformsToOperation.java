@@ -36,6 +36,6 @@ public class OclTypeConformsToOperation extends AbstractBinaryOperation
 		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 		DomainType thisType = asType(sourceVal);
 		DomainType thatType = asType(argVal);
-		return valueFactory.booleanValueOf(thisType.conformsTo(standardLibrary, thatType));
+		return thisType.conformsTo(standardLibrary, thatType);
 	}
 }

@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
@@ -92,12 +91,12 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 //		return elements.hashCode();
 //	}
 
-    public @NonNull BooleanValue excludes(@NonNull Object value) throws InvalidValueException {
+    public @NonNull Object excludes(@NonNull Object value) throws InvalidValueException {
     	return toInvalidValue();
     }
 
 
-    public @NonNull BooleanValue excludesAll(@NonNull CollectionValue c) throws InvalidValueException {
+    public @NonNull Object excludesAll(@NonNull CollectionValue c) throws InvalidValueException {
     	return toInvalidValue();
     }
 
@@ -125,11 +124,11 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 	    return "Collection";		// FIXME UOE ??
 	}
 
-    public @NonNull BooleanValue includes(@NonNull Object value) throws InvalidValueException {
+    public @NonNull Object includes(@NonNull Object value) throws InvalidValueException {
     	return toInvalidValue();
     }
 
-    public @NonNull BooleanValue includesAll(@NonNull CollectionValue c) throws InvalidValueException {
+    public @NonNull Object includesAll(@NonNull CollectionValue c) throws InvalidValueException {
     	return toInvalidValue();
    }
 
@@ -153,7 +152,7 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 		return toInvalidValue();
 	}
 
-	public @NonNull BooleanValue isEmpty() throws InvalidValueException {
+	public @NonNull Object isEmpty() throws InvalidValueException {
     	return toInvalidValue();
 	}
 
@@ -178,7 +177,7 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 		return toInvalidValue();
 	}
 
-	public @NonNull BooleanValue notEmpty() throws InvalidValueException {
+	public @NonNull Object notEmpty() throws InvalidValueException {
     	return toInvalidValue();
 	}
 

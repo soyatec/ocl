@@ -34,6 +34,6 @@ public class BooleanAllInstancesOperation extends AbstractUnaryOperation
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal) throws InvalidValueException {
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		// Boolean has two instances: false, true
-		return valueFactory.createSetValue((DomainCollectionType)returnType, valueFactory.getFalse(), valueFactory.getTrue());
+		return valueFactory.createSetValue((DomainCollectionType)returnType, Boolean.FALSE, Boolean.TRUE);
 	}
 }

@@ -51,8 +51,7 @@ final @NonNull <%DomainCollectionType%> [ast.symbolName(expInOcl)/] = standardLi
 [/template]
 
 [template protected emitConstants(ast : BooleanLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
-[emitValueFactory()/]
-final @NonNull <%BooleanValue%> [ast.symbolName(expInOcl)/] = valueFactory.get[if (ast.booleanSymbol)]True[else]False[/if]();
+final @NonNull Object [ast.symbolName(expInOcl)/] = [if (ast.booleanSymbol)]true[else]false[/if];
 [/template]
 
 [template protected emitConstants(ast : CollectionLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL) ? ((ast.part->size() = 1) and (ast.part->filter(CollectionRange)->size() = 1))]

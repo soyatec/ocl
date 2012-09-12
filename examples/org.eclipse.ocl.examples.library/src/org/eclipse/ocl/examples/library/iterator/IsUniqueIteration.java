@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * IsUniqueIteration realizes the Collection::isUnique() library iteration.
@@ -42,7 +43,7 @@ public class IsUniqueIteration extends AbstractIteration
 	
 	@Override
 	protected @NonNull Object resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
-		return iterationManager.getValueFactory().getTrue();
+		return Boolean.TRUE;
 	}
 	
 	@Override
@@ -50,8 +51,8 @@ public class IsUniqueIteration extends AbstractIteration
 		CollectionValue.Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
 		Object bodyVal = iterationManager.evaluateBody();		
 		try {
-			if (accumulatorValue.includes(bodyVal).isTrue()) {
-				return iterationManager.getValueFactory().getFalse();		// Abort after second find
+			if (ValuesUtil.isTrue(accumulatorValue.includes(bodyVal))) {
+				return Boolean.FALSE;		// Abort after second find
 			}
 			else {
 				accumulatorValue.add(bodyVal);

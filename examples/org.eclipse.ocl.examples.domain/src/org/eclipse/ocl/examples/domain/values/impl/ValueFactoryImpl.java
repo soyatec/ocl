@@ -51,7 +51,6 @@ import org.eclipse.ocl.examples.domain.types.InvalidTypeImpl;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.BagValue;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
@@ -84,11 +83,9 @@ public abstract class ValueFactoryImpl implements ValueFactory
 	private static final String maxLongValue = Long.toString(Long.MAX_VALUE);
 	private static final int maxLongSize = maxLongValue.length();	
 
-	private BooleanValue falseValue; 
 	private InvalidValue invalidValue; 
 	private NullValue nullValue; 
 	private IntegerValue oneValue;
-	private BooleanValue trueValue; 
 	private UnlimitedValue unlimitedValue; 
 	private IntegerValue zeroValue;
 
@@ -96,10 +93,6 @@ public abstract class ValueFactoryImpl implements ValueFactory
 
 	public ValueFactoryImpl(@NonNull DomainStandardLibrary standardLibrary) {
 		this.standardLibrary = standardLibrary;
-	}
-
-	public @NonNull BooleanValue booleanValueOf(boolean value) {
-		return value ? getTrue() : getFalse();
 	}
 
     public @NonNull BagValue createBagOf(Object... objects) {
@@ -140,10 +133,6 @@ public abstract class ValueFactoryImpl implements ValueFactory
 		DomainType elementType = getElementType(values);
 		DomainCollectionType collectionType = standardLibrary.getBagType(elementType, null, null);
 		return new BagValueImpl(this, collectionType, values);
-	}
-
-	public @NonNull BooleanValue.Accumulator createBooleanAccumulatorValue() {
-		return new BooleanValueImpl.Accumulator(this, false);
 	}
 
 	public @NonNull CollectionValue.Accumulator createCollectionAccumulatorValue(@NonNull DomainCollectionType type) {
@@ -429,16 +418,14 @@ public abstract class ValueFactoryImpl implements ValueFactory
 	}
 
 	public void dispose() {
-		falseValue = null; 
 		invalidValue = null; 
 		nullValue = null; 
 		oneValue = null;
-		trueValue = null; 
 		unlimitedValue = null; 
 		zeroValue = null;
 	}
 
-	public final @NonNull Object getEcoreValueOf(@NonNull Value value) throws InvalidValueException {
+	public final Object getEcoreValueOf(@NonNull Value value) throws InvalidValueException {
 		return value.asEcoreObject();
 	}
 	
@@ -459,14 +446,6 @@ public abstract class ValueFactoryImpl implements ValueFactory
     	}
      	return elementType;
     }
-
-	public @NonNull BooleanValue getFalse() {
-		BooleanValue falseValue2 = falseValue;
-		if (falseValue2 == null) {
-			falseValue2 = falseValue = new BooleanValueImpl(this, false); 
-		}
-		return falseValue2;
-	}
 
 	public @NonNull InvalidValue getInvalid() {
 		InvalidValue invalidValue2 = invalidValue;
@@ -494,14 +473,6 @@ public abstract class ValueFactoryImpl implements ValueFactory
 	
 	public final @NonNull DomainStandardLibrary getStandardLibrary() {
 		return standardLibrary;
-	}
-
-	public @NonNull BooleanValue getTrue() {
-		BooleanValue trueValue2 = trueValue;
-		if (trueValue2 == null) {
-			trueValue2 = trueValue = new BooleanValueImpl(this, true); 
-		}
-		return trueValue2;
 	}
 
 	public @NonNull UnlimitedValue getUnlimited() {
@@ -645,6 +616,9 @@ public abstract class ValueFactoryImpl implements ValueFactory
 		if (value instanceof Value) {
 			return ((Value)value).getType();
 		}
+		else if (value instanceof Boolean) {
+			return standardLibrary.getBooleanType();
+		}
 		else if (value instanceof String) {
 			return standardLibrary.getStringType();
 		}
@@ -717,7 +691,7 @@ public abstract class ValueFactoryImpl implements ValueFactory
 			return integerValueOf(((Character) object).charValue());
 		}			
 		else if (object instanceof Boolean) {
-			return booleanValueOf((Boolean) object);
+			return object;
 		}
 		else if (object.getClass().isArray()) {
 			try {

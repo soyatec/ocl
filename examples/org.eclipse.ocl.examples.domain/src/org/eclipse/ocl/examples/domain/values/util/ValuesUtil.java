@@ -22,7 +22,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.BagValue;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
@@ -47,25 +46,16 @@ public abstract class ValuesUtil
 			return ((Value)value).asBagValue();
 		}
 		else {
-			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "Bag", "Object"));
+			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "Bag", getTypeName(value)));
 		}
 	}
 
-	public static boolean asBoolean(@NonNull Object value) throws InvalidValueException {
-		if (value instanceof Value) {
-			return ((Value)value).asBoolean();
+	public static @NonNull Boolean asBoolean(@NonNull Object value) throws InvalidValueException {
+		if (value instanceof Boolean) {
+			return (Boolean)value;
 		}
 		else {
-			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "Boolean", "Object"));
-		}
-	}
-
-	public static @NonNull BooleanValue asBooleanValue(@NonNull Object value) throws InvalidValueException {
-		if (value instanceof Value) {
-			return ((Value)value).asBooleanValue();
-		}
-		else {
-			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "Boolean", "Object"));
+			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "Boolean", getTypeName(value)));
 		}
 	}
 
@@ -79,11 +69,11 @@ public abstract class ValuesUtil
 				return (DomainCollectionType)instanceType;
 			}
 			else {
-				throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "CollectionType", "Object"));
+				throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "CollectionType", getTypeName(value)));
 			}
 		}
 		else {
-			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "CollectionType", "Object"));
+			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "CollectionType", getTypeName(value)));
 		}
 	}
 
@@ -92,7 +82,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asCollectionValue();
 		}
 		else {
-			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "Collection", "Object"));
+			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "Collection", getTypeName(value)));
 		}
 	}
 
@@ -104,7 +94,7 @@ public abstract class ValuesUtil
 			return value;			
 		}
 		else {
-			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "EcoreObject", "Object"));
+			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "EcoreObject", getTypeName(value)));
 		}
 	}
 
@@ -113,7 +103,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asInteger();
 		}
 		else {
-			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "Integer", "Object"));
+			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "Integer", getTypeName(value)));
 		}
 	}
 
@@ -122,7 +112,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asIntegerValue();
 		}
 		else {
-			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "Integer", "Object"));
+			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "Integer", getTypeName(value)));
 		}
 	}
 
@@ -134,7 +124,7 @@ public abstract class ValuesUtil
 			return (EObject)value;
 		}
 		else {
-			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "NavigableObject", "Object"));
+			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "NavigableObject", getTypeName(value)));
 		}
 	}
 
@@ -152,7 +142,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asOrderedSetValue();
 		}
 		else {
-			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "OrderedSet", "Object"));
+			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "OrderedSet", getTypeName(value)));
 		}
 	}
 
@@ -161,7 +151,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asRealValue();
 		}
 		else {
-			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "Real", "Object"));
+			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "Real", getTypeName(value)));
 		}
 	}
 
@@ -170,7 +160,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asSequenceValue();
 		}
 		else {
-			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "Sequence", "Object"));
+			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "Sequence", getTypeName(value)));
 		}
 	}
 
@@ -179,7 +169,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asSetValue();
 		}
 		else {
-			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "Set", "Object"));
+			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "Set", getTypeName(value)));
 		}
 	}
 
@@ -187,11 +177,11 @@ public abstract class ValuesUtil
 		if (value instanceof String) {
 			return (String)value;
 		}
-		else if (value instanceof Value) {
-			return ((Value)value).asString();
-		}
+//		else if (value instanceof Value) {
+//			return ((Value)value).asString();
+//		}
 		else {
-			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "String", "Object"));
+			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "String", getTypeName(value)));
 		}
 	}
 
@@ -200,7 +190,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asTupleValue();
 		}
 		else {
-			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "Tuple", "Object"));
+			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "Tuple", getTypeName(value)));
 		}
 	}
 
@@ -212,7 +202,7 @@ public abstract class ValuesUtil
 			return ((TypeValue)value).getInstanceType();
 		}
 		else {
-			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "Type", "Object"));
+			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "Type", getTypeName(value)));
 		}
 	}
 
@@ -221,7 +211,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asUniqueCollectionValue();
 		}
 		else {
-			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "UniqueCollection", "Object"));
+			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "UniqueCollection", getTypeName(value)));
 		}
 	}
 
@@ -230,7 +220,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asUnlimitedNaturalValue();
 		}
 		else {
-			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "UnlimitedNatural", "Object"));
+			throw new InvalidValueException(NLS.bind(EvaluatorMessages.TypedValueRequired, "UnlimitedNatural", getTypeName(value)));
 		}
 	}
 
@@ -252,8 +242,21 @@ public abstract class ValuesUtil
 		}
 	}
 
+	public static String getTypeName(@Nullable Object value) {
+		if (value instanceof Boolean) {
+			return "Boolean";
+		}
+		else if (value instanceof String) {
+			return "String";
+		}
+		else if (value instanceof Value) {
+			return ((Value) value).getType().getName();
+		}
+		return "Object";
+	}
+
 	public static boolean isFalse(@Nullable Object value) {
-		return (value instanceof BooleanValue) && ((BooleanValue)value).isFalse();
+		return value == Boolean.FALSE;
 	}
 	
 	public static IntegerValue isIntegerValue(@Nullable Object value) {
@@ -274,7 +277,7 @@ public abstract class ValuesUtil
 	}
 
 	public static boolean isTrue(@Nullable Object value) {
-		return (value instanceof BooleanValue) && ((BooleanValue)value).isTrue();
+		return value == Boolean.TRUE;
 	}
 
 	public static boolean isUndefined(@Nullable Object value) {

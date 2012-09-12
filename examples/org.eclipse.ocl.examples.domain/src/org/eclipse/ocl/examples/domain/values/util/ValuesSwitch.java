@@ -6,7 +6,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.ocl.examples.domain.values.BagValue;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -90,13 +89,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ValuesPackage.BOOLEAN_VALUE: {
-				BooleanValue booleanValue = (BooleanValue)theEObject;
-				T result = caseBooleanValue(booleanValue);
-				if (result == null) result = caseValue(booleanValue);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case ValuesPackage.COLLECTION_VALUE: {
 				CollectionValue collectionValue = (CollectionValue)theEObject;
 				T result = caseCollectionValue(collectionValue);
@@ -123,7 +115,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 				InvalidValue invalidValue = (InvalidValue)theEObject;
 				T result = caseInvalidValue(invalidValue);
 				if (result == null) result = caseNullValue(invalidValue);
-				if (result == null) result = caseBooleanValue(invalidValue);
 				if (result == null) result = caseObjectValue(invalidValue);
 				if (result == null) result = caseOrderedSetValue(invalidValue);
 				if (result == null) result = caseRealValue(invalidValue);
@@ -143,7 +134,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 			case ValuesPackage.NULL_VALUE: {
 				NullValue nullValue = (NullValue)theEObject;
 				T result = caseNullValue(nullValue);
-				if (result == null) result = caseBooleanValue(nullValue);
 				if (result == null) result = caseObjectValue(nullValue);
 				if (result == null) result = caseOrderedSetValue(nullValue);
 				if (result == null) result = caseRealValue(nullValue);
@@ -263,21 +253,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBagValue(BagValue object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Boolean Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Boolean Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBooleanValue(BooleanValue object) {
 		return null;
 	}
 

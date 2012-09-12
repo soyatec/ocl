@@ -34,6 +34,6 @@ public class OclAnyOclIsKindOfOperation extends AbstractBinaryOperation
 		ValueFactory valueFactory = evaluator.getValueFactory();
 		DomainType sourceType = valueFactory.typeOf(sourceVal);
 		DomainType argType = asType(argVal);
-		return valueFactory.booleanValueOf(sourceType.conformsTo(valueFactory.getStandardLibrary(), argType));
+		return sourceType.conformsTo(valueFactory.getStandardLibrary(), argType);
 	}
 }

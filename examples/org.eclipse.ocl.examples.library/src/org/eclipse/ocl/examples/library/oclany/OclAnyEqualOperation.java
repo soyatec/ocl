@@ -22,7 +22,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
@@ -34,7 +33,7 @@ public class OclAnyEqualOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull OclAnyEqualOperation INSTANCE = new OclAnyEqualOperation();
 
-	public @NonNull BooleanValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
 		//
 		//	A.2.2 is clear. 11.3.1 is vague.
 		//
@@ -45,6 +44,6 @@ public class OclAnyEqualOperation extends AbstractBinaryOperation
 		if (isInvalid(right)) {
 			valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidArgument, "="); //$NON-NLS-1$
 		}
-		return valueFactory.booleanValueOf(left.equals(right));
+		return left.equals(right);
 	}
 }

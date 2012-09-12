@@ -18,10 +18,8 @@ package org.eclipse.ocl.examples.library.numeric;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * LessThanEqualOperation realises the <=() library operation.
@@ -31,20 +29,17 @@ public class NumericLessThanEqualOperation extends AbstractNumericBinaryOperatio
 	public static final @NonNull NumericLessThanEqualOperation INSTANCE = new NumericLessThanEqualOperation();
 
 	@Override
-	protected @NonNull BooleanValue evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) {
-		ValueFactory valueFactory = evaluator.getValueFactory();
-		return valueFactory.booleanValueOf(left.compareTo(right) <= 0);
+	protected @NonNull Object evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) {
+		return left.compareTo(right) <= 0;
 	}
 
 	@Override
-	protected @NonNull BooleanValue evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) {
-		ValueFactory valueFactory = evaluator.getValueFactory();
-		return valueFactory.booleanValueOf(left.compareTo(right) <= 0);
+	protected @NonNull Object evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) {
+		return left.compareTo(right) <= 0;
 	}
 
 	@Override
-	protected @NonNull BooleanValue evaluateUnlimited(@NonNull DomainEvaluator evaluator, @NonNull Object left, @NonNull Object right) {
-		ValueFactory valueFactory = evaluator.getValueFactory();
-		return valueFactory.booleanValueOf(isUnlimited(right));
+	protected @NonNull Object evaluateUnlimited(@NonNull DomainEvaluator evaluator, @NonNull Object left, @NonNull Object right) {
+		return isUnlimited(right);
 	}
 }

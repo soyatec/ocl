@@ -31,7 +31,6 @@ import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.ValueFactory;
@@ -208,8 +207,7 @@ public class OperationBodies
 		true
 		*/
 		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Object self) throws InvalidValueException {
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull BooleanValue True = valueFactory.getTrue();
+			final @NonNull Object True = true;
 			
 			
 			return True;

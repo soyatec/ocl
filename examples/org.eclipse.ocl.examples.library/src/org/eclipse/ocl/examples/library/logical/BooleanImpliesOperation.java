@@ -21,8 +21,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
-import org.eclipse.ocl.examples.domain.values.BooleanValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * ImpliesOperation realises the implies() library operation.
@@ -36,16 +34,15 @@ public class BooleanImpliesOperation extends AbstractBinaryOperation
 		return true;
 	}
 
-	public @NonNull BooleanValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
 		if (isFalse(left)) {
-			return valueFactory.getTrue();
+			return Boolean.TRUE;
 		}
 		else if (isTrue(right)) {
-			return valueFactory.getTrue();
+			return Boolean.TRUE;
 		}
 		else {
-			return valueFactory.booleanValueOf(!asBoolean(left) || asBoolean(right));
+			return !asBoolean(left) || asBoolean(right);
 		}
 	}
 }
