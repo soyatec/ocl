@@ -91,6 +91,12 @@ EnumerationLiteral, State, CallOperationAction, SendSignalAction, Constraint>
 				new UMLEnvironmentFactory().createEnvironment());
 			ResourceSet resourceSet = new ResourceSetImpl();
 		    OCL.initialize(resourceSet);
+		    // FIXME BUG 389765 workaround BUG 389542
+			(resourceSet == null
+					? Resource.Factory.Registry.INSTANCE
+					: resourceSet.getResourceFactoryRegistry())
+					.getExtensionToFactoryMap().put(UMLResource.FILE_EXTENSION,
+						UMLResource.Factory.INSTANCE);
 			// Make sure that the UML metamodel and primitive types
 			//   libraries are loaded
 			umlMetamodel = (Package) resourceSet.getResource(
