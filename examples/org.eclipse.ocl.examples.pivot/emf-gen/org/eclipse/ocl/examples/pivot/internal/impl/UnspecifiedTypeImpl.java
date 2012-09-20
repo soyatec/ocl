@@ -26,6 +26,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -455,6 +457,13 @@ public class UnspecifiedTypeImpl extends ClassImpl implements UnspecifiedType
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitUnspecifiedType(this);
+	}
+	
+	@Override
+	public @NonNull TypeId computeId() {
+		String name2 = getName();
+		assert name2 != null;
+		return IdManager.INSTANCE.getUnspecifiedTypeId(this);
 	}
 
 	@Override

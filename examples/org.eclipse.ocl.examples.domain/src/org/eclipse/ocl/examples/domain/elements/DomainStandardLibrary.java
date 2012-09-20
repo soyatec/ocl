@@ -17,15 +17,23 @@
 package org.eclipse.ocl.examples.domain.elements;
 
 import java.util.Enumeration;
-import java.util.List;
 
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.xml.type.AnyType;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
+import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
+import org.eclipse.ocl.examples.domain.values.SequenceValue;
+import org.eclipse.ocl.examples.domain.values.SetValue;
 
 /**
  * A representation of the OCL Standard Library, which is the set of singleton
@@ -34,11 +42,29 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
  */
 public interface DomainStandardLibrary
 {
+	@Nullable Object asEcoreObject(@NonNull Object aValue);
+
 	boolean conformsToCollectionType(@NonNull DomainCollectionType firstCollectionType, @NonNull DomainCollectionType secondCollectionType);
 
 	boolean conformsToLambdaType(@NonNull DomainLambdaType firstLambdaType, @NonNull DomainLambdaType secondLambdaType);
 
 	boolean conformsToTupleType(@NonNull DomainTupleType firstTupleType, @NonNull DomainTupleType secondTupleType);
+
+	@NonNull BagValue createBagValueOf(@NonNull CollectedTypeId typeId, @NonNull Object... objects);
+
+	@NonNull BagValue createBagValueOf(@NonNull CollectedTypeId typeId, @NonNull Iterable<? extends Object> objects);
+
+	@NonNull OrderedSetValue createOrderedSetValueOf(@NonNull CollectedTypeId typeId, @NonNull Object... objects);
+
+	@NonNull OrderedSetValue createOrderedSetValueOf(@NonNull CollectedTypeId typeId, @NonNull Iterable<? extends Object> objects);
+	
+	@NonNull SequenceValue createSequenceValueOf(@NonNull CollectedTypeId typeId, @NonNull Object... objects);
+
+	@NonNull SequenceValue createSequenceValueOf(@NonNull CollectedTypeId typeId, @NonNull Iterable<? extends Object> objects);
+	
+	@NonNull SetValue createSetValueOf(@NonNull CollectedTypeId typeId, @NonNull Object... objects);
+
+	@NonNull SetValue createSetValueOf(@NonNull CollectedTypeId typeId, @NonNull Iterable<? extends Object> objects);
 	
     /**
      * Obtains the generic instance of the {@link BagType} metatype, named
@@ -51,8 +77,6 @@ public interface DomainStandardLibrary
 	/**
 	 * Return the instance of the Bag metatype whose elements are of elementType.
 	 */
-	@Deprecated
-	@NonNull DomainCollectionType getBagType(@NonNull DomainType elementType);
 	@NonNull DomainCollectionType getBagType(@NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper);
 	
     /**
@@ -70,11 +94,19 @@ public interface DomainStandardLibrary
      * @return the <tt>Collection(T)</tt> type (an instance of {@link CollectionType})
      */
 	@NonNull DomainType getCollectionType();
+
+	@NonNull DomainType getCollectionType(@NonNull CollectionTypeId typeId);
+	@NonNull DomainType getCollectionType(@NonNull CollectedTypeId typeId);
 	
 	/**
 	 * Return the specialized collection type for the containerType for elementType.
 	 */
-	@NonNull DomainCollectionType getCollectionType(@NonNull DomainCollectionType containerType, @NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper);
+	@NonNull DomainCollectionType getCollectionType(@NonNull DomainType containerType, @NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper);
+
+	/**
+	 * Return the type of value by examining its actual constituent parts. For collections, this may be different to the getStaticType return.
+	 */
+//	@NonNull DomainType getDynamicTypeOf(@NonNull IdResolver idResolver, @NonNull Object value);
 
 	/**
 	 * Return the enumeration for a given enumerator.
@@ -88,6 +120,8 @@ public interface DomainStandardLibrary
      * @return the <tt>Enumeration</tt> type (an instance of {@link Enumeration})
      */
 	@NonNull DomainType getEnumerationType();
+
+	@NonNull IdResolver getIdResolver();
 
 	/**
 	 * Return the Inheritance dispatch table for a given type.
@@ -119,8 +153,14 @@ public interface DomainStandardLibrary
      * Returns the meta-type of a given type.
      */
 	DomainType getMetaType(@NonNull DomainType type);
+
+	DomainPackage getNestedPackage(@NonNull DomainPackage parentPackage, @NonNull String name);
 	
-    /**
+    DomainType getNestedType(@NonNull DomainPackage parentPackage, @NonNull String name);
+
+	DomainPackage getNsURIPackage(@NonNull String nsURI);
+
+	/**
      * Obtains the single instance of the {@link AnyType} metatype, named
      * <tt>OclAny</tt>.
      * 
@@ -194,7 +234,9 @@ public interface DomainStandardLibrary
      */
 	@NonNull DomainType getOclVoidType();
 	
-    /**
+    DomainElement getOperationTemplateParameter(@NonNull DomainOperation anOperation, int index);
+
+	/**
      * Obtains the generic instance of the {@link OrderedSetType} metatype, named
      * <tt>OrderedSet(T)</tt>.
      * 
@@ -205,17 +247,19 @@ public interface DomainStandardLibrary
 	/**
 	 * Return the instance of the OrderedSet metatype whose elements are of elementType.
 	 */
-	@Deprecated
-	@NonNull DomainCollectionType getOrderedSetType(@NonNull DomainType elementType);
 	@NonNull DomainCollectionType getOrderedSetType(@NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper);
 	
-    /**
+    DomainType getPrimitiveType(@NonNull PrimitiveTypeId id);
+
+	/**
      * Obtains the instance of the {@link PrimitiveType} metatype, named
      * <tt>Real</tt>.
      * 
      * @return the <tt>Real</tt> type (an instance of {@link PrimitiveType})
      */
 	@NonNull DomainType getRealType();
+
+	DomainPackage getRootPackage(@NonNull String name);
 	
     /**
      * Obtains the generic instance of the {@link SequenceType} metatype, named
@@ -228,8 +272,6 @@ public interface DomainStandardLibrary
 	/**
 	 * Return the instance of the Sequence metatype whose elements are of elementType.
 	 */
-	@Deprecated
-	@NonNull DomainCollectionType getSequenceType(@NonNull DomainType elementType);
 	@NonNull DomainCollectionType getSequenceType(@NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper);
 	
     /**
@@ -243,9 +285,14 @@ public interface DomainStandardLibrary
 	/**
 	 * Return the instance of the Set metatype whose elements are of elementType.
 	 */
-	@Deprecated
-	@NonNull DomainCollectionType getSetType(@NonNull DomainType elementType);
 	@NonNull DomainCollectionType getSetType(@NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper);
+
+	/**
+	 * Return the type of value using compile-time definitions of collections.
+	 */
+//	@NonNull DomainType getStaticTypeOf(@NonNull IdResolver idResolver, @NonNull Object value);
+//	@NonNull DomainType getStaticTypeOf(@NonNull IdResolver idResolver, @NonNull Object value, @NonNull Object... values);
+//	@NonNull DomainType getStaticTypeOf(@NonNull IdResolver idResolver, @NonNull Object value, @NonNull Iterable<?> values);
 	
     /**
      * Obtains the instance of the {@link PrimitiveType} metatype, named
@@ -264,13 +311,18 @@ public interface DomainStandardLibrary
 	 * Obtains the instance of the {@link TupleType} metatype for the given list of parts,
 	 * which must be alphabetical order by name.
 	 */
-	@NonNull DomainTupleType getTupleType(@NonNull List<? extends DomainTypedElement> parts);
+//	@NonNull DomainTupleType getTupleType(@NonNull List<? extends DomainTypedElement> parts);
 	@NonNull DomainTupleType getTupleType(DomainTypedElement... parts);
+
+	@NonNull DomainTupleType getTupleType(@NonNull TupleTypeId typeId);
 
 	@NonNull DomainType getType(@NonNull DomainElement element);
 	@NonNull DomainType getType(@NonNull EClassifier eClassifier);
+	@NonNull DomainType getType(@NonNull TypeId typeId);
 	
-    /**
+    DomainElement getTypeTemplateParameter(@NonNull DomainType aType, int index);
+
+	/**
      * Obtains the generic instance of the {@link UniqueCollection} metatype, named
      * <tt>Set(T)</tt>.
      * 
@@ -286,8 +338,6 @@ public interface DomainStandardLibrary
      *     {@link PrimitiveType})
      */
 	@NonNull DomainType getUnlimitedNaturalType();
-
-	@NonNull ValueFactory getValueFactory();
 	
 	boolean isEqualToCollectionType(@NonNull DomainCollectionType firstCollectionType, @NonNull DomainCollectionType secondCollectionType);
 

@@ -21,7 +21,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
@@ -31,15 +30,15 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
  */
 public abstract class AbstractTernaryOperation extends AbstractOperation implements LibraryTernaryOperation
 {
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Object sourceValue, Object... argumentValues) throws InvalidValueException {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Object sourceValue, Object... argumentValues) {
 		DomainType returnType = DomainUtil.nonNullPivot(callExp.getType());
 		Object argumentValue0 = DomainUtil.nonNullState(argumentValues[0]);
 		Object argumentValue1 = DomainUtil.nonNullState(argumentValues[1]);
-		return evaluate(evaluator, returnType, sourceValue, argumentValue0, argumentValue1);
+		return evaluate(evaluator, returnType.getTypeId(), sourceValue, argumentValue0, argumentValue1);
 	}
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Object sourceValue, @NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Object sourceValue, @NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) {
 		DomainType returnType = DomainUtil.nonNullPivot(callExp.getType());
-		return evaluate(evaluator, returnType, sourceValue, firstArgumentValue, secondArgumentValue);
+		return evaluate(evaluator, returnType.getTypeId(), sourceValue, firstArgumentValue, secondArgumentValue);
 	}
 }

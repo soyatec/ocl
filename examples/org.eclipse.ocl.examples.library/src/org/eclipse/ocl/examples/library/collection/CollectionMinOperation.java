@@ -17,11 +17,12 @@
 package org.eclipse.ocl.examples.library.collection;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.numeric.NumericMinOperation;
 
 /**
@@ -31,9 +32,24 @@ public class CollectionMinOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull CollectionMinOperation INSTANCE = new CollectionMinOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal) {
 		CollectionValue collectionValue = asCollectionValue(sourceVal);
 		// FIXME Bug 301351 Look for user-defined min
-		return collectionValue.maxMin(evaluator, returnType, NumericMinOperation.INSTANCE);
+		Object result = null;
+        for (Object element : collectionValue.iterable()) {
+        	if (result == null) {
+        		result = element;
+        	}
+        	else if (element != null) {
+        		result = NumericMinOperation.INSTANCE.evaluate(evaluator, returnTypeId, result, element);
+        		if (ValuesUtil.isUndefined(result)) {
+                	return createInvalidValue(EvaluatorMessages.UndefinedResult, "min"); //$NON-NLS-1$
+        		}
+        	}
+        }
+		if (result == null) {
+        	return createInvalidValue(EvaluatorMessages.EmptyCollection, collectionValue.getKind(), "min"); //$NON-NLS-1$
+		}
+		return result;
 	}
 }

@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.OrderedSetType;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -57,6 +58,16 @@ public class OrderedSetTypeImpl
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitOrderedSetType(this);
+	}
+
+	@Override
+	public @NonNull TypeId computeId() {
+		if (getUnspecializedElement() == null) {
+			return TypeId.ORDERED_SET.getCollectedTypeId();
+		}
+		else {
+			return TypeId.ORDERED_SET.getCollectedTypeId(getElementType().getTypeId());
+		}
 	}
 
 	@Override

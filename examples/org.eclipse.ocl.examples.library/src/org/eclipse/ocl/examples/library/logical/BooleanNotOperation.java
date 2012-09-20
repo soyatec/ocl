@@ -17,10 +17,11 @@
 package org.eclipse.ocl.examples.library.logical;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
 
 /**
  * NotOperation realises the not() library operation.
@@ -29,7 +30,18 @@ public class BooleanNotOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull BooleanNotOperation INSTANCE = new BooleanNotOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object argument) throws InvalidValueException {
-		return !asBoolean(argument);
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object argument) {
+		if (argument == Boolean.FALSE) {
+			return TRUE_VALUE;
+		}
+		else if (argument == Boolean.TRUE) {
+			return FALSE_VALUE;
+		}
+		else if (argument instanceof InvalidValue) {
+			return argument;
+		}
+		else {
+			return createInvalidValue(EvaluatorMessages.TypedValueRequired, TypeId.BOOLEAN_NAME, getTypeName(argument));
+		}
 	}
 }

@@ -21,12 +21,11 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * ClassifierOclContentsOperation realises the Classifier::oclContents() library operation.
@@ -35,15 +34,14 @@ public class ClassifierOclContentsOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull ClassifierOclContentsOperation INSTANCE = new ClassifierOclContentsOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue) {
 		EObject object = asNavigableObject(sourceValue);
     	Set<Object> collection = new HashSet<Object>();
 		for (Object eContent : object.eContents()) {
 			if (eContent != null) {
-				collection.add(valueFactory.valueOf(eContent));
+				collection.add(ValuesUtil.valueOf(eContent));
 			}
     	}
-    	return valueFactory.createSetValue((DomainCollectionType)returnType, collection);
+    	return createSetValue((CollectedTypeId)returnTypeId, collection);
 	}
 }

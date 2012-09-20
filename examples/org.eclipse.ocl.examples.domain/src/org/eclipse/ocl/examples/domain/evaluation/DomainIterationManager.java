@@ -18,9 +18,8 @@ package org.eclipse.ocl.examples.domain.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * DomainIterationManager defines the supervisor for an iteration. It provides a body, one or more
@@ -66,10 +65,9 @@ public interface DomainIterationManager
 	 */
 	@NonNull Object getAccumulatorValue();
 
-	/**
-	 * Get the factory for values.
-	 */
-	@NonNull ValueFactory getValueFactory();
+	@NonNull DomainEvaluator getEvaluator();
+
+	@NonNull DomainStandardLibrary getStandardLibrary();
 	
 	/**
 	 * Return true if the iterators have a step to be evaluated. 
@@ -83,10 +81,6 @@ public interface DomainIterationManager
 	 */
 	boolean isOuterIteration();
 
-	NullValue throwInvalidEvaluation(String message, Object... bindings) throws InvalidEvaluationException;
-
-	NullValue throwInvalidEvaluation(InvalidValueException e);
-
 	/**
 	 * Evaluate the iteration body for the current iterators and update the accumulator
 	 * accordingly.
@@ -97,5 +91,5 @@ public interface DomainIterationManager
 	 * Returns null for the iteration to continue, non-null to terminate.
 	 * @throws InvalidValueException 
 	 */
-	@Nullable Object updateBody() throws InvalidValueException;
+	@Nullable Object updateBody();
 }

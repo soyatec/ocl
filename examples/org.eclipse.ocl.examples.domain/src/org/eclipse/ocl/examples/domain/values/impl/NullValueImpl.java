@@ -20,12 +20,13 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
 /**
@@ -43,14 +44,12 @@ public class NullValueImpl extends UndefinedCollectionValueImpl implements NullV
 		return ValuesPackage.Literals.NULL_VALUE;
 	}
 
-	public NullValueImpl(@NonNull ValueFactory valueFactory) {
-		super(valueFactory);
-	}
+	public NullValueImpl() {}
 
-	@Override
+/*	@Override
 	public Object asEcoreObject() {
 		return null;
-	}
+	} */
 
 	@Override
 	public DomainElement asElement() {
@@ -62,15 +61,19 @@ public class NullValueImpl extends UndefinedCollectionValueImpl implements NullV
 		return obj instanceof NullValue;
 	}
 
-	public @NonNull DomainType getType() {
-		return valueFactory.getStandardLibrary().getOclVoidType();
+	public @NonNull CollectedTypeId getCollectedTypeId() {
+		return TypeId.OCL_VOID;
 	}
 
-	public @Nullable Value getValue(@NonNull String partName) throws InvalidValueException {
+	public @NonNull DomainType getType(@NonNull DomainStandardLibrary standardLibrary) {
+		return standardLibrary.getOclVoidType();
+	}
+
+	public @Nullable Value getValue(@NonNull String partName) {
     	return toInvalidValue();
 	}
 
-	public @Nullable Value getValue(@NonNull DomainTypedElement part) throws InvalidValueException {
+	public @Nullable Value getValue(@NonNull DomainTypedElement part) {
     	return toInvalidValue();
 	}
 
@@ -79,7 +82,7 @@ public class NullValueImpl extends UndefinedCollectionValueImpl implements NullV
 		return 0x11111111;
 	}
 
-	public int intValue() throws InvalidValueException {
+	public int intValue() {
     	toInvalidValue();		// throws rather than returns
     	return 0;
 	}

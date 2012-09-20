@@ -1,0 +1,383 @@
+package org.eclipse.ocl.examples.domain.types;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainElement;
+import org.eclipse.ocl.examples.domain.elements.DomainOperation;
+import org.eclipse.ocl.examples.domain.elements.DomainPackage;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
+import org.eclipse.ocl.examples.domain.ids.IdVisitor;
+import org.eclipse.ocl.examples.domain.ids.LambdaTypeId;
+import org.eclipse.ocl.examples.domain.ids.NestedPackageId;
+import org.eclipse.ocl.examples.domain.ids.NestedTypeId;
+import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
+import org.eclipse.ocl.examples.domain.ids.OclInvalidTypeId;
+import org.eclipse.ocl.examples.domain.ids.OclVoidTypeId;
+import org.eclipse.ocl.examples.domain.ids.OperationId;
+import org.eclipse.ocl.examples.domain.ids.OperationTemplateParameterId;
+import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
+import org.eclipse.ocl.examples.domain.ids.RootPackageId;
+import org.eclipse.ocl.examples.domain.ids.SpecializedTypeId;
+import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeTemplateParameterId;
+import org.eclipse.ocl.examples.domain.ids.UnspecifiedId;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.NullValue;
+import org.eclipse.ocl.examples.domain.values.Value;
+
+public class IdResolver implements IdVisitor<DomainElement>
+{
+	protected final @NonNull DomainStandardLibrary standardLibrary;
+	private final @NonNull Map<Object, DomainType> key2type = new HashMap<Object, DomainType>();
+	
+	public IdResolver(@NonNull DomainStandardLibrary standardLibrary) {
+		this.standardLibrary = standardLibrary;
+	}
+	
+	public @NonNull DomainType getDynamicTypeOf(@NonNull Object value) {
+		if (value instanceof NullValue) {
+			return standardLibrary.getType(((Value)value).getTypeId());
+		}
+		else if (value instanceof CollectionValue) {
+			CollectionValue collectionValue = (CollectionValue) value;
+			DomainType elementType = getDynamicTypeOf(collectionValue.iterable());
+			CollectedTypeId collectedId = collectionValue.getCollectedTypeId();
+			CollectionTypeId collectionId = collectedId.getCollectionTypeId();
+			TypeId elementTypeId = elementType.getTypeId();
+			collectedId = collectionId.getCollectedTypeId(elementTypeId);
+			return standardLibrary.getCollectionType(collectedId);
+		}
+		else {
+			return getStaticTypeOf(value);
+		}
+	}
+	
+	public @NonNull DomainType getDynamicTypeOf(@NonNull Object... values) {
+		DomainType elementType = null;
+		for (Object value : values) {
+			assert value != null;
+			DomainType valueType = getDynamicTypeOf(value);
+			if (elementType == null) {
+				elementType = valueType;
+			}
+			else {
+				elementType = elementType.getCommonType(standardLibrary, valueType);
+			}
+		}
+		if (elementType == null) {
+			elementType = standardLibrary.getOclInvalidType();
+		}
+		return elementType;
+	}
+	
+	public @NonNull DomainType getDynamicTypeOf(@NonNull Iterable<?> values) {
+		DomainType elementType = null;
+		for (Object value : values) {
+			assert value != null;
+			DomainType valueType = getDynamicTypeOf(value);
+			if (elementType == null) {
+				elementType = valueType;
+			}
+			else {
+				elementType = elementType.getCommonType(standardLibrary, valueType);
+			}
+		}
+		if (elementType == null) {
+			elementType = standardLibrary.getOclInvalidType();
+		}
+		return elementType;
+	}
+
+	public @NonNull DomainType getStaticTypeOf(@NonNull Object value) {
+		/*if (value instanceof DomainType) {
+			DomainType type = (DomainType) id2element.get(value);
+			if (type == null) {
+				type = standardLibrary.getMetaclass((DomainType) value);
+				assert type != null;
+				id2element.put(value, type);
+			}
+			return type;
+		}
+		else*/ if (value instanceof EObject) {
+			EClass eClass = ((EObject)value).eClass();
+			assert eClass != null;
+			DomainType type = (DomainType) key2type.get(eClass);
+			if (type == null) {
+				type = standardLibrary.getType(eClass);
+				assert type != null;
+				key2type.put(eClass, type);
+			}
+			return type;
+		}
+		else if (value instanceof Value) {
+			TypeId typeId = ((Value)value).getTypeId();			
+			DomainType type = (DomainType) key2type.get(typeId);
+			if (type == null) {
+				type = (DomainType) typeId.accept(this);
+				assert type != null;
+				key2type.put(typeId, type);
+			}
+			return type;
+		}
+		else {
+			Class<?> jClass = value.getClass();
+			assert jClass != null;
+			DomainType type = (DomainType) key2type.get(jClass);
+			if (type != null) {
+				return type;
+			}
+			if (value instanceof Boolean) {
+				type = standardLibrary.getBooleanType();
+			}
+			else if (value instanceof String) {
+				type = standardLibrary.getStringType();
+			}
+			if (type != null) {
+				key2type.put(jClass, type);
+				return type;
+			}
+		}
+		return new DomainInvalidTypeImpl(standardLibrary, DomainUtil.bind("Unsupported Object", value));
+	}
+
+	public @NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Object... values) {
+		Object bestTypeId = getTypeKeyOf(value);
+		DomainType bestType = key2type.get(bestTypeId);
+		assert bestType != null;
+		Collection<Object> assessedTypeKeys = null;
+		int count = 0;
+		for (Object anotherValue : values) {
+			assert anotherValue != null;
+			Object anotherTypeId = getTypeKeyOf(anotherValue);
+			if ((assessedTypeKeys == null) ? (anotherTypeId != bestTypeId) : !assessedTypeKeys.contains(anotherTypeId)) {
+				DomainType anotherType = key2type.get(anotherTypeId);
+				assert anotherType != null;
+				DomainType commonType = bestType.getCommonType(standardLibrary, anotherType);
+				if (commonType != bestType) {
+					if (assessedTypeKeys == null) {
+						assessedTypeKeys = new ArrayList<Object>();
+						assessedTypeKeys.add(bestTypeId);
+					}
+					else if (count++ == 4) {
+						assessedTypeKeys = new HashSet<Object>(assessedTypeKeys);
+					}
+					assessedTypeKeys.add(anotherTypeId);
+				}
+			}
+		}		
+		return bestType;
+	}
+
+	public @NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Iterable<?> values) {
+		Object bestTypeKey = getTypeKeyOf(value);
+		DomainType bestType = key2type.get(bestTypeKey);
+		assert bestType != null;
+		Collection<Object> assessedTypeKeys = null;
+		int count = 0;
+		for (Object anotherValue : values) {
+			assert anotherValue != null;
+			Object anotherTypeKey = getTypeKeyOf(anotherValue);
+			if ((assessedTypeKeys == null) ? (anotherTypeKey != bestTypeKey) : !assessedTypeKeys.contains(anotherTypeKey)) {
+				DomainType anotherType = key2type.get(anotherTypeKey);
+				assert anotherType != null;
+				DomainType commonType = bestType.getCommonType(standardLibrary, anotherType);
+				if (commonType != bestType) {
+					if (assessedTypeKeys == null) {
+						assessedTypeKeys = new ArrayList<Object>();
+						assessedTypeKeys.add(bestTypeKey);
+					}
+					else if (count++ == 4) {
+						assessedTypeKeys = new HashSet<Object>(assessedTypeKeys);
+					}
+					assessedTypeKeys.add(anotherTypeKey);
+				}
+			}
+		}		
+		return bestType;
+	}
+
+	private @NonNull Object getTypeKeyOf(@NonNull Object value) {
+		/*if (value instanceof DomainType) {
+			DomainType type = (DomainType) id2element.get(value);
+			if (type == null) {
+				type = standardLibrary.getMetaclass((DomainType) value);
+				assert type != null;
+				id2element.put(value, type);
+			}
+			return value;
+		}
+		else*/ if (value instanceof EObject) {
+			EClass typeKey = ((EObject)value).eClass();
+			assert typeKey != null;
+			DomainType type = (DomainType) key2type.get(typeKey);
+			if (type == null) {
+				type = standardLibrary.getType(typeKey);
+				assert type != null;
+				key2type.put(typeKey, type);
+			}
+			return typeKey;
+		}
+		else if (value instanceof Value) {
+			TypeId typeKey = ((Value)value).getTypeId();			
+			DomainType type = (DomainType) key2type.get(typeKey);
+			if (type == null) {
+				type = (DomainType) typeKey.accept(this);
+				assert type != null;
+				key2type.put(typeKey, type);
+			}
+			return typeKey;
+		}
+		else {
+			Class<?> typeKey = value.getClass();
+			assert typeKey != null;
+			DomainType type = (DomainType) key2type.get(typeKey);
+			if (type != null) {
+				return typeKey;
+			}
+			if (value instanceof Boolean) {
+				type = standardLibrary.getBooleanType();
+			}
+			else if (value instanceof String) {
+				type = standardLibrary.getStringType();
+			}
+			if (type != null) {
+				key2type.put(typeKey, type);
+				return typeKey;
+			}
+		}
+		throw new UnsupportedOperationException();
+	}
+	
+	public @NonNull DomainType visitCollectedId(@NonNull CollectedTypeId id) {
+		DomainType elementType = (DomainType) id.getElementTypeId().accept(this);
+		if (elementType == null) {
+			throw new UnsupportedOperationException();
+		}
+		CollectionTypeId collectionTypeId = id.getCollectionTypeId();
+		if (collectionTypeId == TypeId.METACLASS) {
+			return standardLibrary.getMetaclass(elementType);
+		}
+		else {
+			DomainType collectionType = standardLibrary.getCollectionType(collectionTypeId);
+			return standardLibrary.getCollectionType(collectionType, elementType, null, null);
+		}
+	}
+
+	public @NonNull DomainType visitCollectionId(@NonNull CollectionTypeId id) {
+		return standardLibrary.getCollectionType(id);
+	}
+
+	public @Nullable DomainType visitEnumerationLiteralId(@NonNull EnumerationLiteralId id) {
+		throw new UnsupportedOperationException();
+	}
+
+	public @NonNull DomainType visitInvalidId(@NonNull OclInvalidTypeId id) {
+		return standardLibrary.getOclInvalidType();
+	}
+
+	public @NonNull DomainType visitLambdaId(@NonNull LambdaTypeId id) {
+		throw new UnsupportedOperationException();
+	}
+
+	public @NonNull DomainPackage visitNestedPackageId(@NonNull NestedPackageId packageId) {
+		DomainPackage parentPackage = (DomainPackage) packageId.getParent().accept(this);
+		assert parentPackage != null;
+		DomainPackage nestedPackage = standardLibrary.getNestedPackage(parentPackage, packageId.getName());
+		if (nestedPackage == null) {
+			throw new UnsupportedOperationException();
+		}
+		return nestedPackage;
+	}
+
+	public @NonNull DomainType visitNestedTypeId(@NonNull NestedTypeId id) {
+		DomainPackage parentPackage = (DomainPackage) id.getParent().accept(this);
+		assert parentPackage != null;
+		DomainType nestedType = standardLibrary.getNestedType(parentPackage, id.getName());
+		if (nestedType == null) {
+			throw new UnsupportedOperationException();
+		}
+		return nestedType;
+	}
+
+	public @NonNull DomainPackage visitNsURIPackageId(@NonNull NsURIPackageId id) {
+		DomainPackage nsURIPackage = standardLibrary.getNsURIPackage(id.getNsURI());
+		if (nsURIPackage == null) {
+			throw new UnsupportedOperationException();
+		}
+		return nsURIPackage;
+	}
+
+	public @NonNull DomainType visitNullId(@NonNull OclVoidTypeId id) {
+		return standardLibrary.getOclVoidType();
+	}
+
+	public @NonNull DomainOperation visitOperationId(@NonNull OperationId id) {
+		throw new UnsupportedOperationException();
+	}
+
+	public @NonNull DomainElement visitOperationTemplateParameterId(@NonNull OperationTemplateParameterId id) {
+		DomainOperation anOperation = (DomainOperation) id.getParent().accept(this);
+		if (anOperation == null) {
+			throw new UnsupportedOperationException();
+		}
+		DomainElement operationTemplateParameter = standardLibrary.getOperationTemplateParameter(anOperation, id.getIndex());
+		if (operationTemplateParameter == null) {
+			throw new UnsupportedOperationException();
+		}
+		return operationTemplateParameter;
+	}
+
+	public @NonNull DomainType visitPrimitiveTypeId(@NonNull PrimitiveTypeId id) {
+		DomainType primitiveType = standardLibrary.getPrimitiveType(id);
+		if (primitiveType == null) {
+			throw new UnsupportedOperationException();
+		}
+		return primitiveType;
+	}
+
+	public @NonNull DomainPackage visitRootPackageId(@NonNull RootPackageId id) {
+		DomainPackage rootPackage = standardLibrary.getRootPackage(id.getName());
+		if (rootPackage == null) {
+			throw new UnsupportedOperationException();
+		}
+		return rootPackage;
+	}
+
+	public @NonNull DomainType visitTupleId(@NonNull TupleTypeId id) {
+		return standardLibrary.getTupleType(id);
+	}
+
+	public @NonNull DomainType visitSpecializedTypeId(@NonNull SpecializedTypeId id) {
+		throw new UnsupportedOperationException();
+	}
+
+	public @NonNull DomainElement visitTypeTemplateParameterId(@NonNull TypeTemplateParameterId id) {
+		DomainType aType = (DomainType) id.getParent().accept(this);
+		if (aType == null) {
+			throw new UnsupportedOperationException();
+		}
+		DomainElement typeTemplateParameter = standardLibrary.getTypeTemplateParameter(aType, id.getIndex());
+		if (typeTemplateParameter == null) {
+			throw new UnsupportedOperationException();
+		}
+		return typeTemplateParameter;
+	}
+
+	public @NonNull DomainType visitUnspecifiedId(@NonNull UnspecifiedId id) {
+		throw new UnsupportedOperationException();
+	}
+}

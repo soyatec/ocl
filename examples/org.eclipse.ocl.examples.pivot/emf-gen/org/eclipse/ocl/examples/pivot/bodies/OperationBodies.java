@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
@@ -33,7 +34,6 @@ import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorProperty;
 import org.eclipse.ocl.examples.library.executor.ExecutorSingleIterationManager;
@@ -64,16 +64,15 @@ public class OperationBodies
 	    bodySpecification.oclIsKindOf(ExpressionInOCL) implies
 	    CompatibleBody(bodySpecification)
 		*/
-		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Object self) throws InvalidValueException {
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
+		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
+			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			final @NonNull ExecutorOperation O_Boolean_implies = OCLstdlibTables.Operations._Boolean__implies;
 			final @NonNull ExecutorOperation O_OclAny__lt__gt_ = OCLstdlibTables.Operations._OclAny___lt__gt_;
-			final @NonNull NullValue Null = valueFactory.getNull();
+			final @NonNull NullValue Null = NULL_VALUE;
 			final @NonNull ExecutorOperation O_Boolean_and = OCLstdlibTables.Operations._Boolean__and;
 			final @NonNull ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
-			final @NonNull Object T_Metaclass_pivot__ExpressionInOCL_ = valueFactory.createTypeValue(PivotTables.Types._ExpressionInOCL);
+			final @NonNull Object T_Metaclass_pivot__ExpressionInOCL_ = createTypeValue(PivotTables.Types._ExpressionInOCL);
 			final @NonNull ExecutorOperation O_TypedMultiplicityElement_CompatibleBody = PivotTables.Operations._TypedMultiplicityElement__CompatibleBody;
 			final @NonNull ExecutorType T_pivot__ValueSpecification = PivotTables.Types._ValueSpecification;
 			final @NonNull ExecutorProperty P_Constraint_specification = PivotTables.Properties._Constraint__specification;
@@ -90,7 +89,7 @@ public class OperationBodies
 			final @NonNull Object S_body = "body";
 			
 			
-			Object A_symbol_ = IP_NamedElement_ownedRule.evaluate(evaluator, T_OrderedSet_pivot__Constraint_, self, P_NamedElement_ownedRule);
+			Object A_symbol_ = IP_NamedElement_ownedRule.evaluate(evaluator, T_OrderedSet_pivot__Constraint_.getTypeId(), self, P_NamedElement_ownedRule);
 			
 			
 			/** 
@@ -101,38 +100,38 @@ public class OperationBodies
 			/*
 			stereotype = 'body'
 			*/
-				public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull Object iterator1) throws InvalidValueException {
+				public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull Object iterator1) throws InvalidValueException {
 					final @NonNull Object V_1_ = iterator1;	// iterator: 1_
 					
-					Object A_symbol__2 = IP_Constraint_stereotype.evaluate(evaluator, T_String, V_1_, P_Constraint_stereotype);
+					Object A_symbol__2 = IP_Constraint_stereotype.evaluate(evaluator, T_String.getTypeId(), V_1_, P_Constraint_stereotype);
 					
-					DomainType static_A_symbol__3 = valueFactory.typeOf(A_symbol__2, S_body);
+					DomainType static_A_symbol__3 = evaluator.getStaticTypeOf(A_symbol__2, S_body);
 					LibraryBinaryOperation dynamic_A_symbol__3 = (LibraryBinaryOperation)static_A_symbol__3.lookupImplementation(standardLibrary, O_String__eq_);
-					Object A_symbol__3 = dynamic_A_symbol__3.evaluate(evaluator, T_Boolean, A_symbol__2, S_body);
+					Object A_symbol__3 = dynamic_A_symbol__3.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__2, S_body);
 					return A_symbol__3;
 				}
 			};
-			DomainType static_A_symbol__1 = valueFactory.typeOf(A_symbol_);
+			DomainType static_A_symbol__1 = evaluator.getStaticTypeOf(A_symbol_);
 			LibraryIteration dynamic_A_symbol__1 = (LibraryIteration)static_A_symbol__1.lookupImplementation(standardLibrary, O_Collection_any);
-			Object acc_A_symbol__1 = dynamic_A_symbol__1.createAccumulatorValue(evaluator, T_pivot__Constraint, T_Boolean);
-			ExecutorSingleIterationManager manager_A_symbol__1 = new ExecutorSingleIterationManager(evaluator, T_pivot__Constraint, body_A_symbol__1, (CollectionValue)A_symbol_, acc_A_symbol__1);
+			Object acc_A_symbol__1 = dynamic_A_symbol__1.createAccumulatorValue(evaluator, T_pivot__Constraint.getTypeId(), T_Boolean);
+			ExecutorSingleIterationManager manager_A_symbol__1 = new ExecutorSingleIterationManager(evaluator, T_pivot__Constraint.getTypeId(), body_A_symbol__1, (CollectionValue)A_symbol_, acc_A_symbol__1);
 			Object A_symbol__1 = dynamic_A_symbol__1.evaluateIteration(manager_A_symbol__1);
 			final @NonNull Object V_bodyConstraint = A_symbol__1;
 			Object leftA_symbol__4;
 			try {
 				
-				DomainType static_A_symbol__5 = valueFactory.typeOf(V_bodyConstraint, Null);
+				DomainType static_A_symbol__5 = evaluator.getStaticTypeOf(V_bodyConstraint, Null);
 				LibraryBinaryOperation dynamic_A_symbol__5 = (LibraryBinaryOperation)static_A_symbol__5.lookupImplementation(standardLibrary, O_OclAny__lt__gt_);
-				Object A_symbol__5 = dynamic_A_symbol__5.evaluate(evaluator, T_Boolean, V_bodyConstraint, Null);
+				Object A_symbol__5 = dynamic_A_symbol__5.evaluate(evaluator, T_Boolean.getTypeId(), V_bodyConstraint, Null);
 				leftA_symbol__4 = A_symbol__5;
 			} catch (InvalidValueException e) {
-				leftA_symbol__4 = valueFactory.createInvalidValue(e);
+				leftA_symbol__4 = createInvalidValue(e);
 			}
 			Object A_symbol__5 = leftA_symbol__4;
 			Object rightA_symbol__4;
 			try {
 				
-				Object A_symbol__6 = IP_Constraint_specification.evaluate(evaluator, T_pivot__ValueSpecification, V_bodyConstraint, P_Constraint_specification);
+				Object A_symbol__6 = IP_Constraint_specification.evaluate(evaluator, T_pivot__ValueSpecification.getTypeId(), V_bodyConstraint, P_Constraint_specification);
 				
 				final @NonNull Object V_bodySpecification = A_symbol__6;
 				Object leftA_symbol__7;
@@ -140,57 +139,57 @@ public class OperationBodies
 					Object leftA_symbol__8;
 					try {
 						
-						DomainType static_A_symbol__9 = valueFactory.typeOf(V_bodySpecification, Null);
+						DomainType static_A_symbol__9 = evaluator.getStaticTypeOf(V_bodySpecification, Null);
 						LibraryBinaryOperation dynamic_A_symbol__9 = (LibraryBinaryOperation)static_A_symbol__9.lookupImplementation(standardLibrary, O_OclAny__lt__gt_);
-						Object A_symbol__9 = dynamic_A_symbol__9.evaluate(evaluator, T_Boolean, V_bodySpecification, Null);
+						Object A_symbol__9 = dynamic_A_symbol__9.evaluate(evaluator, T_Boolean.getTypeId(), V_bodySpecification, Null);
 						leftA_symbol__8 = A_symbol__9;
 					} catch (InvalidValueException e) {
-						leftA_symbol__8 = valueFactory.createInvalidValue(e);
+						leftA_symbol__8 = createInvalidValue(e);
 					}
 					Object A_symbol__9 = leftA_symbol__8;
 					Object rightA_symbol__8;
 					try {
 						
-						DomainType static_A_symbol__10 = valueFactory.typeOf(V_bodySpecification);
+						DomainType static_A_symbol__10 = evaluator.getStaticTypeOf(V_bodySpecification);
 						LibraryBinaryOperation dynamic_A_symbol__10 = (LibraryBinaryOperation)static_A_symbol__10.lookupImplementation(standardLibrary, O_OclAny_oclIsKindOf);
-						Object A_symbol__10 = dynamic_A_symbol__10.evaluate(evaluator, T_Boolean, V_bodySpecification, T_Metaclass_pivot__ExpressionInOCL_);
+						Object A_symbol__10 = dynamic_A_symbol__10.evaluate(evaluator, T_Boolean.getTypeId(), V_bodySpecification, T_Metaclass_pivot__ExpressionInOCL_);
 						rightA_symbol__8 = A_symbol__10;
 					} catch (InvalidValueException e) {
-						rightA_symbol__8 = valueFactory.createInvalidValue(e);
+						rightA_symbol__8 = createInvalidValue(e);
 					}
 					Object A_symbol__10 = rightA_symbol__8;
-					DomainType static_A_symbol__8 = valueFactory.typeOf(A_symbol__9);
+					DomainType static_A_symbol__8 = evaluator.getStaticTypeOf(A_symbol__9);
 					LibraryBinaryOperation dynamic_A_symbol__8 = (LibraryBinaryOperation)static_A_symbol__8.lookupImplementation(standardLibrary, O_Boolean_and);
-					Object A_symbol__8 = dynamic_A_symbol__8.evaluate(evaluator, T_Boolean, A_symbol__9, A_symbol__10);
+					Object A_symbol__8 = dynamic_A_symbol__8.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__9, A_symbol__10);
 					leftA_symbol__7 = A_symbol__8;
 				} catch (InvalidValueException e) {
-					leftA_symbol__7 = valueFactory.createInvalidValue(e);
+					leftA_symbol__7 = createInvalidValue(e);
 				}
 				Object A_symbol__8 = leftA_symbol__7;
 				Object rightA_symbol__7;
 				try {
 					
 					
-					DomainType static_A_symbol__11 = valueFactory.typeOf(self);
+					DomainType static_A_symbol__11 = evaluator.getStaticTypeOf(self);
 					LibraryBinaryOperation dynamic_A_symbol__11 = (LibraryBinaryOperation)static_A_symbol__11.lookupImplementation(standardLibrary, O_TypedMultiplicityElement_CompatibleBody);
-					Object A_symbol__11 = dynamic_A_symbol__11.evaluate(evaluator, T_Boolean, self, V_bodySpecification);
+					Object A_symbol__11 = dynamic_A_symbol__11.evaluate(evaluator, T_Boolean.getTypeId(), self, V_bodySpecification);
 					rightA_symbol__7 = A_symbol__11;
 				} catch (InvalidValueException e) {
-					rightA_symbol__7 = valueFactory.createInvalidValue(e);
+					rightA_symbol__7 = createInvalidValue(e);
 				}
 				Object A_symbol__11 = rightA_symbol__7;
-				DomainType static_A_symbol__7 = valueFactory.typeOf(A_symbol__8);
+				DomainType static_A_symbol__7 = evaluator.getStaticTypeOf(A_symbol__8);
 				LibraryBinaryOperation dynamic_A_symbol__7 = (LibraryBinaryOperation)static_A_symbol__7.lookupImplementation(standardLibrary, O_Boolean_implies);
-				Object A_symbol__7 = dynamic_A_symbol__7.evaluate(evaluator, T_Boolean, A_symbol__8, A_symbol__11);
+				Object A_symbol__7 = dynamic_A_symbol__7.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__8, A_symbol__11);
 				final @NonNull Object A_symbol__12 = A_symbol__7;
 				rightA_symbol__4 = A_symbol__12;
 			} catch (InvalidValueException e) {
-				rightA_symbol__4 = valueFactory.createInvalidValue(e);
+				rightA_symbol__4 = createInvalidValue(e);
 			}
 			Object A_symbol__12 = rightA_symbol__4;
-			DomainType static_A_symbol__4 = valueFactory.typeOf(A_symbol__5);
+			DomainType static_A_symbol__4 = evaluator.getStaticTypeOf(A_symbol__5);
 			LibraryBinaryOperation dynamic_A_symbol__4 = (LibraryBinaryOperation)static_A_symbol__4.lookupImplementation(standardLibrary, O_Boolean_implies);
-			Object A_symbol__4 = dynamic_A_symbol__4.evaluate(evaluator, T_Boolean, A_symbol__5, A_symbol__12);
+			Object A_symbol__4 = dynamic_A_symbol__4.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__5, A_symbol__12);
 			final @NonNull Object A_symbol__13 = A_symbol__4;
 			return A_symbol__13;
 		}
@@ -206,7 +205,7 @@ public class OperationBodies
 		/*
 		true
 		*/
-		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Object self) throws InvalidValueException {
+		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
 			final @NonNull Object True = true;
 			
 			

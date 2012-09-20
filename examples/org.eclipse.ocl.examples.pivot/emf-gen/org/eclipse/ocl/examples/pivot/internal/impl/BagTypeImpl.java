@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.BagType;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -57,5 +58,15 @@ public class BagTypeImpl
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitBagType(this);
+	}
+
+	@Override
+	public @NonNull TypeId computeId() {
+		if (getUnspecializedElement() == null) {
+			return TypeId.BAG.getCollectedTypeId();
+		}
+		else {
+			return TypeId.BAG.getCollectedTypeId(getElementType().getTypeId());
+		}
 	}
 } //BagTypeImpl

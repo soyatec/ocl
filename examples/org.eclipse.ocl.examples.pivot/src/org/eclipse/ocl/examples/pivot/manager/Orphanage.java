@@ -126,8 +126,19 @@ public class Orphanage extends PackageImpl
 
 		@Override
 		public ListIterator<T> basicListIterator() {
-			throw new UnsupportedOperationException();
-//			return new ArrayList<T>(weakList.keySet()).listIterator();
+			return Collections.<T>emptyList().listIterator();
+//			throw new UnsupportedOperationException();
+/*			List<Entry<T, Integer>> weakList2 = weakList;
+			if (weakList2 != null) {
+				List<T> list = new ArrayList<T>(weakList2.size());
+				for (Entry<T, Integer> entry : weakList2) {
+					list.add(entry.getKey());
+				}
+				return list.listIterator();
+			}
+			else {
+				return Collections.<T>emptyList().listIterator();
+			} */
 		}
 
 		public boolean basicContains(Object object) {

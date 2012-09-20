@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EClass;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Root</b></em>'.
+ * @extends org.eclipse.ocl.examples.domain.elements.DomainRoot
  * <!-- end-user-doc -->
  *
  * <p>
@@ -34,7 +35,7 @@ import org.eclipse.emf.ecore.EClass;
  * @model
  * @generated
  */
-public interface Root extends Namespace
+public interface Root extends Namespace, org.eclipse.ocl.examples.domain.elements.DomainRoot
 {
 
 	/**

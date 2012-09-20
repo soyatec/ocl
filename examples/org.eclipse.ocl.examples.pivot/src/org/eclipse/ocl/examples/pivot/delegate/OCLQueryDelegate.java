@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
@@ -43,6 +42,7 @@ import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.osgi.util.NLS;
 
 /**
  * An implementation of a query delegate for OCL expressions.
@@ -107,9 +107,8 @@ public class OCLQueryDelegate implements QueryDelegate
 			@NonNull ExpressionInOCL nonNullSpecification = specification;
 			OCL ocl = delegateDomain.getOCL();
 			MetaModelManager metaModelManager = ocl.getMetaModelManager();
-			ValueFactory valueFactory = metaModelManager.getValueFactory();
-			Object targetValue = valueFactory.valueOf(target);
-			DomainType targetType = valueFactory.typeOf(targetValue);
+			Object targetValue = ValuesUtil.valueOf(target);
+			DomainType targetType = metaModelManager.getStaticTypeOf(targetValue);
 			DomainType requiredType = nonNullSpecification.getContextVariable().getType();
 			if ((requiredType == null) || !targetType.conformsTo(metaModelManager, requiredType)) {
 				String message = DomainUtil.bind(OCLMessages.WrongContextClassifier_ERROR_, targetType, requiredType);
@@ -131,8 +130,8 @@ public class OCLQueryDelegate implements QueryDelegate
 					String message = DomainUtil.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, PivotUtil.getBody(nonNullSpecification));
 					throw new OCLDelegateException(message);
 				}
-				Object value = valueFactory.valueOf(object);
-				targetType = valueFactory.typeOf(value);
+				Object value = ValuesUtil.valueOf(object);
+				targetType = metaModelManager.getStaticTypeOf(value);
 				requiredType = DomainUtil.nonNullModel(parameterVariable.getType());
 				if (!targetType.conformsTo(metaModelManager, requiredType)) {
 					String message = DomainUtil.bind(OCLMessages.MismatchedArgumentType_ERROR_, name, targetType, requiredType);
@@ -150,7 +149,11 @@ public class OCLQueryDelegate implements QueryDelegate
 	//			throw new OCLDelegateException(message);
 	//		}
 	//		return converter.convert(ocl, result);
-			return ValuesUtil.asEcoreObject(result);
+			if (result == null) {
+				String message = NLS.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, PivotUtil.getBody(specification));
+				throw new InvocationTargetException(new OCLDelegateException(message));
+			}
+			return metaModelManager.asEcoreObject(result);
 		}
 		catch (InvalidValueException e) {
 			String message = DomainUtil.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, PivotUtil.getBody(specification));

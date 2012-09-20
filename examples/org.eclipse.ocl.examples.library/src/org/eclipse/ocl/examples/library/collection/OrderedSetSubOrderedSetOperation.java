@@ -17,9 +17,8 @@
 package org.eclipse.ocl.examples.library.collection;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 
@@ -30,7 +29,7 @@ public class OrderedSetSubOrderedSetOperation extends AbstractTernaryOperation
 {
 	public static final @NonNull OrderedSetSubOrderedSetOperation INSTANCE = new OrderedSetSubOrderedSetOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) {
 		OrderedSetValue selfValue = asOrderedSetValue(sourceValue);
 		Integer fromValue = asInteger(firstArgumentValue);
 		Integer toValue = asInteger(secondArgumentValue);

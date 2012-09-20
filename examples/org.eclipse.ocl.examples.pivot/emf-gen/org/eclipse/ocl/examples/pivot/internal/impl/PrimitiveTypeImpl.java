@@ -18,6 +18,8 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -57,5 +59,12 @@ public class PrimitiveTypeImpl
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitPrimitiveType(this);
+	}
+	
+	@Override
+	public @NonNull TypeId computeId() {
+		String name2 = getName();
+		assert name2 != null;
+		return IdManager.INSTANCE.getPrimitiveTypeId(name2);
 	}
 } //PrimitiveTypeImpl

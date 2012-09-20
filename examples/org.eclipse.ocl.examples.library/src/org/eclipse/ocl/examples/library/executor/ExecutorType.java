@@ -23,7 +23,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
-import org.eclipse.ocl.examples.domain.typeids.Typeid;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.AbstractInheritance;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
@@ -102,7 +102,7 @@ public class ExecutorType extends AbstractInheritance implements DomainType, Exe
 		return this;
 	}
 
-	public @NonNull Typeid getTypeid() {
+	public @NonNull TypeId getTypeId() {
 		throw new UnsupportedOperationException();					// FIXME
 	}
 

@@ -21,18 +21,18 @@ import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
-import org.eclipse.ocl.examples.domain.typeids.Typeid;
-import org.eclipse.ocl.examples.domain.typeids.TypeidManager;
 import org.eclipse.ocl.examples.domain.types.AbstractType;
 
 public class ExecutorLambdaType extends AbstractType implements ExecutorTypeArgument
 {
-	protected final @NonNull Typeid typeid;
+	protected final @NonNull TypeId typeId;
 
 	public ExecutorLambdaType(@NonNull DomainStandardLibrary standardLibrary, @NonNull String name, @NonNull ExecutorTypeArgument... typeArguments) {
 		super(standardLibrary, name);
-		typeid = TypeidManager.INSTANCE.getLambdaTypeid(name, new DomainTypeParameters(typeArguments));
+		typeId = IdManager.INSTANCE.getLambdaTypeId(name, new DomainTypeParameters(typeArguments));
 	}
 
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
@@ -56,7 +56,7 @@ public class ExecutorLambdaType extends AbstractType implements ExecutorTypeArgu
 		throw new UnsupportedOperationException();			// WIP fixme
 	}
 
-	public @NonNull Typeid getTypeid() {
-		return typeid;
+	public @NonNull TypeId getTypeId() {
+		return typeId;
 	}
 }

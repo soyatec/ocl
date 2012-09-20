@@ -17,7 +17,6 @@
 package org.eclipse.ocl.examples.library.numeric;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -30,12 +29,12 @@ public class NumericAbsOperation extends AbstractNumericUnaryOperation
 	public static final @NonNull NumericAbsOperation INSTANCE = new NumericAbsOperation();
 
 	@Override
-	protected @NonNull Value evaluateInteger(@NonNull IntegerValue left) throws InvalidValueException {
+	protected @NonNull Value evaluateInteger(@NonNull IntegerValue left) {
 		return left.abs();
 	}
 	
 	@Override
-	protected @NonNull Value evaluateReal(@NonNull RealValue left) throws InvalidValueException {
+	protected @NonNull Value evaluateReal(@NonNull RealValue left) {
 		return left.abs();
 	}
 }

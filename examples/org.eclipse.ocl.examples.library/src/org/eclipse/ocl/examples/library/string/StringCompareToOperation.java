@@ -17,11 +17,10 @@
 package org.eclipse.ocl.examples.library.string;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * StringCompareToOperation realises the String::compareTo() library operation.
@@ -30,10 +29,9 @@ public class StringCompareToOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull StringCompareToOperation INSTANCE = new StringCompareToOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object left, @NonNull Object right) {
 		String leftString = asString(left);
 		String rightString = asString(right);
-		return valueFactory.integerValueOf(leftString.compareTo(rightString));
+		return ValuesUtil.integerValueOf(leftString.compareTo(rightString));
 	}
 }

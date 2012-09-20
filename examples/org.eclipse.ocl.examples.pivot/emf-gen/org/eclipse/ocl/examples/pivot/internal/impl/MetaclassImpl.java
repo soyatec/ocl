@@ -27,6 +27,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
@@ -392,6 +393,16 @@ public class MetaclassImpl extends ClassImpl implements Metaclass
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitMetaclass(this);
+	}
+
+	@Override
+	public @NonNull TypeId computeId() {
+		if (getUnspecializedElement() == null) {
+			return TypeId.METACLASS.getCollectedTypeId();
+		}
+		else {
+			return TypeId.METACLASS.getCollectedTypeId(getInstanceType().getTypeId());
+		}
 	}
 
 	@Override

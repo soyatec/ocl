@@ -17,12 +17,11 @@
 package org.eclipse.ocl.examples.library.real;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.RealValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * RealCompareToOperation realises the Real::compareTo() library operation.
@@ -31,10 +30,9 @@ public class RealCompareToOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull RealCompareToOperation INSTANCE = new RealCompareToOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object left, @NonNull Object right) {
 		RealValue leftReal = asRealValue(left);
 		RealValue rightReal = asRealValue(right);
-		return valueFactory.integerValueOf(leftReal.compareTo(rightReal));
+		return ValuesUtil.integerValueOf(leftReal.compareTo(rightReal));
 	}
 }

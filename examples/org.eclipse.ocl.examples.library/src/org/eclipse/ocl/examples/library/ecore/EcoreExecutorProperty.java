@@ -17,10 +17,9 @@ package org.eclipse.ocl.examples.library.ecore;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorProperty;
 
 public class EcoreExecutorProperty extends ExecutorProperty
@@ -32,9 +31,14 @@ public class EcoreExecutorProperty extends ExecutorProperty
 	}
 
 	@Override
-	public void setValue(@NonNull ObjectValue objectValue, @NonNull Object propertyValue) throws InvalidValueException {
+	public void setValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull ObjectValue objectValue, @NonNull Object propertyValue) {
 		EObject eObject = objectValue.asNavigableObject();
-		Object eValue = ValuesUtil.asEcoreObject(propertyValue);
+		Object eValue;
+//		try {
+			eValue = standardLibrary.asEcoreObject(propertyValue);
+//		} catch (Exception e) {
+//			throw new InvalidValueException(ValuesUtil.createInvalidValue(e, "Failed to set property"));
+//		}
 		eObject.eSet(eFeature, eValue);
 	}
 }

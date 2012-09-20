@@ -14,10 +14,14 @@
  */
 package org.eclipse.ocl.examples.library.collection;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 
@@ -28,9 +32,27 @@ public class CollectionSelectByTypeOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull CollectionSelectByTypeOperation INSTANCE = new CollectionSelectByTypeOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal, @NonNull Object argVal) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal, @NonNull Object argVal) {
 		CollectionValue collectionValue = asCollectionValue(sourceVal);
-		DomainType type = asType(argVal);
-		return collectionValue.selectByType(type);
+		DomainType requiredElementType = asType(argVal);
+    	DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
+		boolean changedContents = false;
+		Collection<Object> newElements = new ArrayList<Object>();
+        for (Object element : collectionValue.iterable()) {
+        	assert element != null;
+			DomainType elementType = evaluator.getStaticTypeOf(element);
+			if (elementType.isEqualTo(standardLibrary, requiredElementType)) {
+        		newElements.add(element);
+        	}
+        	else {
+        		changedContents = true;
+        	}
+        }
+        if (changedContents) {
+        	return createCollectionValue(collectionValue.isOrdered(), collectionValue.isUnique(), collectionValue.getTypeId(), newElements);
+        }
+        else {
+        	return collectionValue;
+        }
 	}
 }

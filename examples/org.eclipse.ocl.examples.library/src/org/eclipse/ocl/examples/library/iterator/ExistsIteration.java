@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 
@@ -31,21 +32,21 @@ public class ExistsIteration extends AbstractIteration
 {
 	public static final @NonNull ExistsIteration INSTANCE = new ExistsIteration();
 
-	public @NonNull Object createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) {
-		return Boolean.FALSE;
+	public @NonNull Object createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull TypeId accumulatorTypeId, @NonNull DomainType bodyType) {
+		return false;
 	}
 	
 	@Override
     protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
 		Object bodyVal = iterationManager.evaluateBody();
 		if (isUndefined(bodyVal)) {
-			return iterationManager.throwInvalidEvaluation(EvaluatorMessages.UndefinedBody, "exists"); 	// Null body is invalid //$NON-NLS-1$
+			return createInvalidValue(EvaluatorMessages.UndefinedBody, "exists"); 	// Null body is invalid //$NON-NLS-1$
 		}
 		else if (isFalse(bodyVal)) {
 			return null;							// Carry on for nothing found
 		}
 		else {
-			return Boolean.TRUE;		// Abort after a find
+			return true;		// Abort after a find
 		}
 	}
 }

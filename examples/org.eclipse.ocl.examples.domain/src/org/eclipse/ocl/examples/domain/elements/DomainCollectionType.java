@@ -17,15 +17,16 @@
 package org.eclipse.ocl.examples.domain.elements;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 public interface DomainCollectionType extends DomainType
 {
-	/*@NonNull*/ DomainCollectionType getContainerType();		
+	/*@NonNull*/ DomainType getContainerType();		
 	/*@NonNull*/ DomainType getElementType();
-	@NonNull IntegerValue getLowerValue(@NonNull ValueFactory valueFactory);		
-	@NonNull IntegerValue getUpperValue(@NonNull ValueFactory valueFactory);
+	@NonNull IntegerValue getLowerValue();		
+	@NonNull CollectedTypeId getTypeId();
+	@NonNull IntegerValue getUpperValue();
 	boolean isOrdered();
 	boolean isUnique();
 }

@@ -85,9 +85,9 @@ public class EvaluateClassifierOperationsTest extends PivotSimpleTestSuite
 	public void test_oclContents() {
 		assertQueryInvalid(pkg2, "invalid.oclContents()");
 		assertQueryInvalid(pkg2, "null.oclContents()");
-		assertQueryEquals(pkg1, valueFactory.createSetOf(bob, pkg2, pkg3), "oclContents()");
-		assertQueryEquals(pkg2, valueFactory.createSetOf(jim), "oclContents()");
-		assertQueryEquals(george, valueFactory.createSetOf(), "oclContents()");
+		assertQueryEquals(pkg1, metaModelManager.createSetValueOf(null, bob, pkg2, pkg3), "oclContents()");
+		assertQueryEquals(pkg2, metaModelManager.createSetValueOf(null, jim), "oclContents()");
+		assertQueryEquals(george, metaModelManager.createSetValueOf(null), "oclContents()");
 		assertSemanticErrorQuery("1.oclContents()", OCLMessages.UnresolvedOperation_ERROR_, "oclContents", "UnlimitedNatural");
 	}
 }

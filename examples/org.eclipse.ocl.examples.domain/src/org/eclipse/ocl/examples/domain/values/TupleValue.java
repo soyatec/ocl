@@ -19,7 +19,6 @@ package org.eclipse.ocl.examples.domain.values;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
@@ -36,7 +35,7 @@ public interface TupleValue extends Value {
      * @return its type
 	 * @generated NOT
      */
-	@NonNull DomainType getType();
+//	@NonNull DomainType getType();
 	
     /**
      * Queries the value of the specified tuple part.
@@ -46,7 +45,7 @@ public interface TupleValue extends Value {
      * @throws InvalidValueException 
 	 * @generated NOT
      */
-	@Nullable Object getValue(@NonNull String partName) throws InvalidValueException;
+	@Nullable Object getValue(@NonNull String partName);
     
     /**
      * Queries the value of the specified tuple part.
@@ -56,5 +55,5 @@ public interface TupleValue extends Value {
      * @throws InvalidValueException 
 	 * @generated NOT
      */
-	@Nullable Object getValue(@NonNull DomainTypedElement part) throws InvalidValueException;
+	@Nullable Object getValue(@NonNull DomainTypedElement part);
 }

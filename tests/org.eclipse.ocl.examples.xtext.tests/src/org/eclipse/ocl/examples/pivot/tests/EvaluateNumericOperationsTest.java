@@ -23,6 +23,7 @@ import java.math.BigInteger;
 import org.eclipse.ocl.examples.domain.values.impl.BigIntegerValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.IntIntegerValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.LongIntegerValueImpl;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 
 /**
@@ -41,23 +42,23 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
     }
 
 	public void testIntValue() {
-		assert valueFactory.integerValueOf(Integer.MAX_VALUE) instanceof IntIntegerValueImpl;
-		assert valueFactory.integerValueOf((long)Integer.MAX_VALUE) instanceof IntIntegerValueImpl;
-		assert valueFactory.integerValueOf(BigInteger.valueOf(Integer.MAX_VALUE)) instanceof IntIntegerValueImpl;
-		assert valueFactory.integerValueOf(BigInteger.valueOf(Integer.MAX_VALUE + 1L)) instanceof LongIntegerValueImpl;
+		assert ValuesUtil.integerValueOf(Integer.MAX_VALUE) instanceof IntIntegerValueImpl;
+		assert ValuesUtil.integerValueOf((long)Integer.MAX_VALUE) instanceof IntIntegerValueImpl;
+		assert ValuesUtil.integerValueOf(BigInteger.valueOf(Integer.MAX_VALUE)) instanceof IntIntegerValueImpl;
+		assert ValuesUtil.integerValueOf(BigInteger.valueOf(Integer.MAX_VALUE + 1L)) instanceof LongIntegerValueImpl;
 
-		assert valueFactory.integerValueOf(Long.MAX_VALUE) instanceof LongIntegerValueImpl;
-		assert valueFactory.integerValueOf(BigInteger.valueOf(Long.MAX_VALUE)) instanceof LongIntegerValueImpl;
-		assert valueFactory.integerValueOf(BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE)) instanceof BigIntegerValueImpl;
+		assert ValuesUtil.integerValueOf(Long.MAX_VALUE) instanceof LongIntegerValueImpl;
+		assert ValuesUtil.integerValueOf(BigInteger.valueOf(Long.MAX_VALUE)) instanceof LongIntegerValueImpl;
+		assert ValuesUtil.integerValueOf(BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE)) instanceof BigIntegerValueImpl;
 
-		assert valueFactory.integerValueOf(Integer.MIN_VALUE) instanceof IntIntegerValueImpl;
-		assert valueFactory.integerValueOf((long)Integer.MIN_VALUE) instanceof IntIntegerValueImpl;
-		assert valueFactory.integerValueOf(BigInteger.valueOf(Integer.MIN_VALUE)) instanceof IntIntegerValueImpl;
-		assert valueFactory.integerValueOf(BigInteger.valueOf(Integer.MIN_VALUE - 1L)) instanceof LongIntegerValueImpl;
+		assert ValuesUtil.integerValueOf(Integer.MIN_VALUE) instanceof IntIntegerValueImpl;
+		assert ValuesUtil.integerValueOf((long)Integer.MIN_VALUE) instanceof IntIntegerValueImpl;
+		assert ValuesUtil.integerValueOf(BigInteger.valueOf(Integer.MIN_VALUE)) instanceof IntIntegerValueImpl;
+		assert ValuesUtil.integerValueOf(BigInteger.valueOf(Integer.MIN_VALUE - 1L)) instanceof LongIntegerValueImpl;
 
-		assert valueFactory.integerValueOf(Long.MIN_VALUE) instanceof LongIntegerValueImpl;
-		assert valueFactory.integerValueOf(BigInteger.valueOf(Long.MIN_VALUE)) instanceof LongIntegerValueImpl;
-		assert valueFactory.integerValueOf(BigInteger.valueOf(Long.MIN_VALUE).subtract(BigInteger.ONE)) instanceof BigIntegerValueImpl;
+		assert ValuesUtil.integerValueOf(Long.MIN_VALUE) instanceof LongIntegerValueImpl;
+		assert ValuesUtil.integerValueOf(BigInteger.valueOf(Long.MIN_VALUE)) instanceof LongIntegerValueImpl;
+		assert ValuesUtil.integerValueOf(BigInteger.valueOf(Long.MIN_VALUE).subtract(BigInteger.ONE)) instanceof BigIntegerValueImpl;
     }
 
     public void testIntPlus() {

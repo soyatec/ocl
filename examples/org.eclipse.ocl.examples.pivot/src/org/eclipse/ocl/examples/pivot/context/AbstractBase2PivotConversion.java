@@ -171,7 +171,7 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 		List<Variable> newVariables = new ArrayList<Variable>();
 		for (Parameter parameter : parameters) {
 		    String name = parameter.getName();
-			Variable param = PivotUtil.getNamedElement(oldVariables, name);
+			Variable param = DomainUtil.getNamedElement(oldVariables, name);
 		    if (param != null) {
 		    	oldVariables.remove(param);
 		    }
@@ -191,7 +191,7 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 		List<Variable> newVariables = new ArrayList<Variable>();
 		for (String name : parameters.keySet()) {
 		    Type type = parameters.get(name);
-			Variable param = PivotUtil.getNamedElement(oldVariables, name);
+			Variable param = DomainUtil.getNamedElement(oldVariables, name);
 		    if (param != null) {
 		    	oldVariables.remove(param);
 		    }

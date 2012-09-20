@@ -17,9 +17,8 @@
 package org.eclipse.ocl.examples.library.oclvoid;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 
 /**
@@ -29,7 +28,7 @@ public class OclVoidOrOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull OclVoidOrOperation INSTANCE = new OclVoidOrOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object left, @NonNull Object right) {
 		if (isTrue(right)) {
 			return asBoolean(right);		// Simple type cast
 		}

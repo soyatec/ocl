@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.pivot.CollectionType;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Type;
 
 /**
@@ -251,19 +251,14 @@ public class EvaluateModelOperationsTest extends PivotTestSuite
         eAdd(a, "bs", b2);
 
         Type aType = (Type) metaModelManager.getType(aClass);
-        Type bType = (Type) metaModelManager.getType(bClass);
-        Type cType = (Type) metaModelManager.getType(cClass);
-		CollectionType orderedSet_B_type = metaModelManager.getOrderedSetType(bType, null, null);
-		CollectionType sequence_C_type = metaModelManager.getSequenceType(cType, null, null);
-		CollectionType bag_C_type = metaModelManager.getBagType(cType, null, null);
         //
-		Object b1_value = valueFactory.valueOf(b1);
-		Object b2_value = valueFactory.valueOf(b2);
-		Object c1_value = valueFactory.valueOf(c1);
-		Object c2_value = valueFactory.valueOf(c2);
-		Value orderedSet_b1_b2 = valueFactory.createOrderedSetValue(orderedSet_B_type, b1_value, b2_value);
-		Value sequence_c1_c2 = valueFactory.createSequenceValue(sequence_C_type, c1_value, c2_value);
-		Value bag_c1_c2 = valueFactory.createBagValue(bag_C_type, c1_value, c2_value);
+		Object b1_value = ValuesUtil.valueOf(b1);
+		Object b2_value = ValuesUtil.valueOf(b2);
+		Object c1_value = ValuesUtil.valueOf(c1);
+		Object c2_value = ValuesUtil.valueOf(c2);
+		Value orderedSet_b1_b2 = metaModelManager.createOrderedSetValueOf(null, b1_value, b2_value);
+		Value sequence_c1_c2 = metaModelManager.createSequenceValueOf(null, c1_value, c2_value);
+		Value bag_c1_c2 = metaModelManager.createBagValueOf(null, c1_value, c2_value);
 		//
 		helper.setContext(aType);
 		//

@@ -16,9 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * <!-- begin-user-doc -->
@@ -65,7 +62,4 @@ public interface UnlimitedNaturalLiteralExp
 	 * @generated
 	 */
 	void setUnlimitedNaturalSymbol(Number value);
-	
-	@NonNull IntegerValue getUnlimitedNaturalValue(@NonNull ValueFactory valueFactory);
-
 } // UnlimitedNaturalLiteralExp

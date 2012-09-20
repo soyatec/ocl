@@ -17,12 +17,10 @@
 package org.eclipse.ocl.examples.library.oclvoid;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * OclVoidAllInstancesOperation realises the OclVoid::allInstances() library operation.
@@ -31,9 +29,8 @@ public class OclVoidAllInstancesOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull OclVoidAllInstancesOperation INSTANCE = new OclVoidAllInstancesOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal) {
 		// OclVoid has a single instance: null
-		return valueFactory.createSetValue((DomainCollectionType)returnType, (Object) valueFactory.getNull());
+		return createSetValue((CollectedTypeId)returnTypeId, (Object) NULL_VALUE);
 	}
 }

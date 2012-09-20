@@ -29,5 +29,5 @@ public interface TypeValue extends Value
 		 * @throws InvalidValueException 
 		 * @generated NOT
 		 */
-		@NonNull DomainType getInstanceType();// throws InvalidValueException;
+		@NonNull DomainType getInstanceType();//;
 	}

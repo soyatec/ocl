@@ -16,27 +16,21 @@
  */
 package org.eclipse.ocl.examples.domain.types;
 
-import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
+import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
-import org.eclipse.ocl.examples.domain.typeids.Typeid;
-import org.eclipse.ocl.examples.domain.typeids.TypeidManager;
 
 public class AbstractTupleType extends AbstractType implements DomainTupleType
 {
-	private @NonNull List<? extends DomainTypedElement> parts;
-	protected final @NonNull Typeid typeid;
-	
-	public AbstractTupleType(@NonNull DomainStandardLibrary standardLibrary, @NonNull List<? extends DomainTypedElement> parts) {
+	protected final @NonNull TupleTypeId typeId;
+
+	public AbstractTupleType(@NonNull DomainStandardLibrary standardLibrary, @NonNull TupleTypeId typeId) {
 		super(standardLibrary, "Tuple");
-		this.parts = parts;
-		this.typeid = TypeidManager.INSTANCE.getOrderedTupleTypeid("Tuple", parts);
+		this.typeId = typeId;
 	}
 
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
@@ -57,12 +51,12 @@ public class AbstractTupleType extends AbstractType implements DomainTupleType
 		return this;
 	}
 
-	public @NonNull List<? extends DomainTypedElement> getOwnedAttribute() {
-		return parts;
+	public @NonNull TupleTypeId getTupleTypeId() {
+		return typeId;
 	}
 
-	public @NonNull Typeid getTypeid() {
-		return typeid;
+	public @NonNull TupleTypeId getTypeId() {
+		return typeId;
 	}
 
 	public boolean isEqualTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
@@ -78,9 +72,4 @@ public class AbstractTupleType extends AbstractType implements DomainTupleType
 	public @NonNull LibraryFeature lookupImplementation(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainOperation staticOperation) {
 		return standardLibrary.getOclTupleType().lookupImplementation(standardLibrary, staticOperation);
 	}
-
-//	@Override
-//	public DomainOperation lookupLocalOperation(DomainStandardLibrary standardLibrary, String operationName, DomainType... argumentTypes) {
-//		return standardLibrary.getOclTupleType().lookupLocalOperation(standardLibrary, operationName, argumentTypes);
-//	}
 }

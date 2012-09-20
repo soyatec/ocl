@@ -17,7 +17,6 @@
 package org.eclipse.ocl.examples.domain.values;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 public interface SequenceValue extends CollectionValue
 {
@@ -29,45 +28,45 @@ public interface SequenceValue extends CollectionValue
 	/**
 	 * @generated NOT
 	 */
-	@NonNull SequenceValue append(@NonNull Object object) throws InvalidValueException;
+	@NonNull SequenceValue append(@NonNull Object object);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Object at(int index) throws InvalidValueException;
+	@NonNull Object at(int index);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Object first() throws InvalidValueException;
+	@NonNull Object first();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull SequenceValue insertAt(int index, @NonNull Object object) throws InvalidValueException;
+	@NonNull SequenceValue insertAt(int index, @NonNull Object object);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue indexOf(@NonNull Object object) throws InvalidValueException;
+	@NonNull IntegerValue indexOf(@NonNull Object object);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Object last() throws InvalidValueException;
+	@NonNull Object last();
 
 	/**
 	 * @generated NOT
 	 */
-    @NonNull SequenceValue prepend(@NonNull Object object) throws InvalidValueException;
+    @NonNull SequenceValue prepend(@NonNull Object object);
 
 	/**
 	 * @generated NOT
 	 */
-    @NonNull SequenceValue reverse() throws InvalidValueException;
+    @NonNull SequenceValue reverse();
 
 	/**
 	 * @generated NOT
 	 */
-    @NonNull SequenceValue subSequence(int lower, int upper) throws InvalidValueException;
+    @NonNull SequenceValue subSequence(int lower, int upper);
 }

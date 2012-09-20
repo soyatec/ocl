@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.typeids.Typeid;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.InvalidType;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.VoidType;
@@ -64,6 +64,11 @@ public class VoidTypeImpl
 	}
 
 	@Override
+	public @NonNull TypeId computeId() {
+		return TypeId.OCL_VOID;
+	}
+
+	@Override
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		if (type instanceof InvalidType) {
 			return false;
@@ -71,10 +76,5 @@ public class VoidTypeImpl
 		else {
 			return true;
 		}
-	}
-
-	@Override
-	public @NonNull Typeid computeTypeid() {
-		return Typeid.OCL_NULL;
 	}
 } //VoidTypeImpl

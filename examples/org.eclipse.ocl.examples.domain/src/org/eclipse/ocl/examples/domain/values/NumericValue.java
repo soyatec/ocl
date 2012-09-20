@@ -20,24 +20,23 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 public interface NumericValue extends Value, Comparable<NumericValue>
 {
 	/**
 	 * @generated NOT
 	 */
-	@NonNull NumericValue abs() throws InvalidValueException;
+	@NonNull NumericValue abs();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull BigDecimal bigDecimalValue() throws InvalidValueException;
+	@NonNull BigDecimal bigDecimalValue();
 	
 	/**
 	 * @generated NOT
 	 */
-	@NonNull BigInteger bigIntegerValue() throws InvalidValueException;
+	@NonNull BigInteger bigIntegerValue();
 
 	/**
 	 * @generated NOT
@@ -47,12 +46,12 @@ public interface NumericValue extends Value, Comparable<NumericValue>
 	/**
 	 * @generated NOT
 	 */
-	@NonNull NumericValue negate() throws InvalidValueException;
+	@NonNull NumericValue negate();
 
 	/**
 	 * @generated NOT
 	 */
-	double doubleValue() throws InvalidValueException;
+	double doubleValue();
 
 	/**
 	 * @generated NOT

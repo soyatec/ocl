@@ -17,17 +17,25 @@
 package org.eclipse.ocl.examples.library.executor;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
-import org.eclipse.ocl.examples.domain.typeids.Typeid;
 import org.eclipse.ocl.examples.domain.types.AbstractType;
 
 public class ExecutorTypeParameter extends AbstractType implements ExecutorTypeArgument
 {
+	private @Nullable TypeId typeid = null;
+
 	public ExecutorTypeParameter(@NonNull DomainStandardLibrary standardLibrary, @NonNull String name) {
 		super(standardLibrary, name);
+	}
+
+	public ExecutorTypeParameter(@NonNull TypeId typeid, @NonNull DomainStandardLibrary standardLibrary, @NonNull String name) {
+		super(standardLibrary, name);
+		this.typeid = typeid;
 	}
 
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
@@ -39,7 +47,10 @@ public class ExecutorTypeParameter extends AbstractType implements ExecutorTypeA
 		throw new UnsupportedOperationException();			// WIP fixme
 	}
 
-	public @NonNull Typeid getTypeid() {
+	public @NonNull TypeId getTypeId() {
+		if (typeid != null) {
+			return typeid;
+		}
 		throw new UnsupportedOperationException();					// FIXME
 	}
 

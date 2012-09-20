@@ -21,6 +21,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 
@@ -100,9 +101,9 @@ public class EvaluateNameVisibilityTest extends PivotFruitTestSuite
 		Type pivotTree = metaModelManager.getPivotOfEcore(Type.class, tree);
 		//
 		assertQueryEquals(redApple, color_red, "let aFruit : fruit::Fruit = self in aFruit.color");
-		assertQueryEquals(aTree, valueFactory.createOrderedSetOf(redApple), "let aTree : fruit::Tree = self in aTree.fruits");
-		assertQueryEquals(aTree, valueFactory.createOrderedSetOf(redApple), "self.fruits");
-		assertQueryEquals(aTree, valueFactory.createOrderedSetOf(redApple), "fruits");
+		assertQueryEquals(aTree, ValuesUtil.createOrderedSetValue(null, redApple), "let aTree : fruit::Tree = self in aTree.fruits");
+		assertQueryEquals(aTree, ValuesUtil.createOrderedSetValue(null, redApple), "self.fruits");
+		assertQueryEquals(aTree, ValuesUtil.createOrderedSetValue(null, redApple), "fruits");
 		assertQueryEquals(redApple, aTree, "self.oclContainer()");
 		assertQueryEquals(redApple, aTree, "self.Tree");
 		//
@@ -113,7 +114,7 @@ public class EvaluateNameVisibilityTest extends PivotFruitTestSuite
 		//	type/property ambiguity is resolved to type.
 		//
 		assertQueryInvalid(redApple, "self.oclAsType(Tree)");
-//		assertQueryEquals(aTree, valueFactory.createOrderedSetOf(redApple), "self.oclAsType(Tree).fruits");
+//		assertQueryEquals(aTree, ValuesUtil.createOrderedSetValue(null, redApple), "self.oclAsType(Tree).fruits");
 	}
 	
 	/**
@@ -135,8 +136,8 @@ public class EvaluateNameVisibilityTest extends PivotFruitTestSuite
 //		
 		assertQueryEquals(redApple, redApple, "self.oclAsType(Apple)");//
 		assertQueryEquals(redApple, redApple, "self.oclAsType(fruit::Apple)");
-		assertQueryEquals(redApple, valueFactory.createSetOf(redApple), "self->oclAsType(Set(Fruit))");
-		assertQueryEquals(redApple, valueFactory.createSetOf(redApple), "self->oclAsType(Set(fruit::Apple))");
+		assertQueryEquals(redApple, metaModelManager.createSetValueOf(null, redApple), "self->oclAsType(Set(Fruit))");
+		assertQueryEquals(redApple, metaModelManager.createSetValueOf(null, redApple), "self->oclAsType(Set(fruit::Apple))");
 		assertSemanticErrorQuery("self->oclAsType(Set(fruit::apple::BadApple))", OCLMessages.UnresolvedType_ERROR_, "BadApple");
 		assertSemanticErrorQuery("self->oclAsType(Set(fruit::apple::BadApple))", OCLMessages.UnresolvedType_ERROR_, "BadApple");
 		assertSemanticErrorQuery("self->oclAsType(Set(fruit::badapple::BadApple))", OCLMessages.UnresolvedNamespace_ERROR_, "badapple");
@@ -144,15 +145,15 @@ public class EvaluateNameVisibilityTest extends PivotFruitTestSuite
 		assertQueryInvalid(redApple, "self->oclAsType(Set(fruit::apple::EatingApple))");
 		assertQueryInvalid(redApple, "self->oclAsType(Set(fruit::Tree))");		
 		//
-		assertQueryEquals(redApple, valueFactory.createSetOf(appleTree), "Tree.allInstances()");
-		assertQueryEquals(redApple, valueFactory.createSetOf(appleTree), "fruit::Tree.allInstances()");
+		assertQueryEquals(redApple, metaModelManager.createSetValueOf(null, appleTree), "Tree.allInstances()");
+		assertQueryEquals(redApple, metaModelManager.createSetValueOf(null, appleTree), "fruit::Tree.allInstances()");
 		assertQueryEquals(null, getEmptySetValue(), "fruit::Tree.allInstances()");
 //
 		metaModelManager.addGlobalNamespace("zz", fruitPackage);
-		assertQueryEquals(redApple, valueFactory.createSetOf(appleTree), "zz::Tree.allInstances()");
+		assertQueryEquals(redApple, metaModelManager.createSetValueOf(null, appleTree), "zz::Tree.allInstances()");
 //
-		assertQueryEquals(redApple, valueFactory.createBagOf(redApple), "Fruit.allInstances().oclAsType(Apple)");		
-		assertQueryEquals(redApple, valueFactory.createSetOf(redApple), "Fruit.allInstances()->oclAsType(Set(Apple))");		
+		assertQueryEquals(redApple, metaModelManager.createBagValueOf(null, redApple), "Fruit.allInstances().oclAsType(Apple)");		
+		assertQueryEquals(redApple, metaModelManager.createSetValueOf(null, redApple), "Fruit.allInstances()->oclAsType(Set(Apple))");		
 	}
 	
 	/**

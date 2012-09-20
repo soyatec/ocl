@@ -20,9 +20,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * The static instance of ExplicitNavigationProperty supports evaluation of
@@ -32,14 +31,13 @@ public class StaticProperty extends AbstractProperty
 {
 	public static final @NonNull StaticProperty INSTANCE = new StaticProperty();
 	
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull DomainProperty property) {
 		DomainType type = property.getType(); 
 		if (type != null) {
-			return valueFactory.createTypeValue(type);
+			return createTypeValue(type);
 		}
 		else {
-			return valueFactory.getNull();
+			return NULL_VALUE;
 		}
 	}
 }

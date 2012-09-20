@@ -22,8 +22,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -262,15 +260,5 @@ public class UnlimitedNaturalLiteralExpImpl
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitUnlimitedNaturalLiteralExp(this);
-	}
-
-	public @NonNull IntegerValue getUnlimitedNaturalValue(@NonNull ValueFactory valueFactory) {
-		IntegerValue integerValue = unlimitedNaturalSymbol != null ? valueFactory.integerValueOf(unlimitedNaturalSymbol) : valueFactory.getNull();
-		if (integerValue.signum() < 0) {
-			if (integerValue == valueFactory.integerValueOf(-1)) {
-				integerValue = valueFactory.getUnlimited();
-			}
-		}
-		return integerValue;
 	}
 } //UnlimitedNaturalLiteralExpImpl

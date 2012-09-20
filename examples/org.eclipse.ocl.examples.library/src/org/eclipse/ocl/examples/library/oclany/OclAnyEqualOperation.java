@@ -17,12 +17,10 @@
 package org.eclipse.ocl.examples.library.oclany;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
-import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
 
 /**
  * OclAnyEqualOperation realises the OCLAny::=() library operation and
@@ -33,17 +31,18 @@ public class OclAnyEqualOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull OclAnyEqualOperation INSTANCE = new OclAnyEqualOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object left, @NonNull Object right) {
 		//
 		//	A.2.2 is clear. 11.3.1 is vague.
 		//
-		ValueFactory valueFactory = evaluator.getValueFactory();
-		if (isInvalid(left)) {
-			valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidSource, "="); //$NON-NLS-1$
+		if (left instanceof InvalidValue) {
+			return left;
+//			return createInvalidValue(EvaluatorMessages.InvalidSource, "="); //$NON-NLS-1$
 		}
-		if (isInvalid(right)) {
-			valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidArgument, "="); //$NON-NLS-1$
+		if (right instanceof InvalidValue) {
+			return right;
+//			return createInvalidValue(EvaluatorMessages.InvalidArgument, "="); //$NON-NLS-1$
 		}
-		return left.equals(right);
+		return left.equals(right) != false;			// FIXME redundant test to suppress warning
 	}
 }

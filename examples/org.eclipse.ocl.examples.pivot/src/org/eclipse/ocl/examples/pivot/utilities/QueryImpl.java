@@ -28,7 +28,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.EvaluationHaltedException;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -177,8 +176,7 @@ public class QueryImpl implements Query, ProblemAware
 		// lazily create the evaluation environment, if not already done by
 		//    the client.  Initialize it with the "self" context variable
 		EvaluationEnvironment myEnv = getEvaluationEnvironment();
-		ValueFactory valueFactory = myEnv.getValueFactory();
-		myEnv.add(specification.getContextVariable(), valueFactory.valueOf(obj));
+		myEnv.add(specification.getContextVariable(), ValuesUtil.valueOf(obj));
 //		Variable resultVariable = specification.getResultVariable();
 //		if (resultVariable != null) {
 //			myEnv.add(resultVariable, null);

@@ -44,19 +44,19 @@ import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.OperationId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.typeids.Typeid;
-import org.eclipse.ocl.examples.domain.typeids.TypeidManager;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
-import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -78,11 +78,11 @@ import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.bodies.OperationBodies;
 import org.eclipse.ocl.examples.pivot.bodies.ParameterableElementBodies;
-import org.eclipse.ocl.examples.pivot.util.PivotValidator;
-import org.eclipse.osgi.util.NLS;
 import org.eclipse.ocl.examples.pivot.library.ConstrainedOperation;
 import org.eclipse.ocl.examples.pivot.library.EInvokeOperation;
+import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.osgi.util.NLS;
 
 /**
  * <!-- begin-user-doc -->
@@ -620,14 +620,11 @@ public class OperationImpl
 		p.oclIsKindOf(self.oclType())
 		*/
 		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull Object self = valueFactory.valueOf(this);
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
-			
-			final @NonNull DomainType returnType = T_Boolean;
-			final @NonNull Object result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(p));
-			return (Boolean) ValuesUtil.asEcoreObject(result);
+			final @NonNull TypeId returnTypeId = T_Boolean.getTypeId();
+			final @NonNull Object result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, returnTypeId, this, ValuesUtil.valueOf(p));
+			return evaluator.asEcoreObject((Boolean)null, result);
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.ParameterableElementBodies", e);
 		}
@@ -651,13 +648,11 @@ public class OperationImpl
 		    CompatibleBody(bodySpecification)
 		*/
 		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull Object self = valueFactory.valueOf(this);
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
 			final @NonNull DomainType returnType = T_Boolean;
-			final @NonNull Object result = OperationBodies._invariant_CompatibleReturn.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull Object result = OperationBodies._invariant_CompatibleReturn.INSTANCE.evaluate(evaluator, returnType.getTypeId(), this);
 			final boolean resultIsNull = ValuesUtil.isNull(result);
 			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -686,13 +681,11 @@ public class OperationImpl
 		true
 		*/
 		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull Object self = valueFactory.valueOf(this);
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
 			final @NonNull DomainType returnType = T_Boolean;
-			final @NonNull Object result = OperationBodies._invariant_LoadableImplementation.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull Object result = OperationBodies._invariant_LoadableImplementation.INSTANCE.evaluate(evaluator, returnType.getTypeId(), this);
 			final boolean resultIsNull = ValuesUtil.isNull(result);
 			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -1308,19 +1301,19 @@ public class OperationImpl
 		return TemplateSignatureImpl.getTypeParameters(getOwnedTemplateSignature());
 	}
 
-	private Typeid typeid = null;
+	private OperationId operationId = null;
 	
-	public final @NonNull Typeid getTypeid() {
-		Typeid typeid2 = typeid;
-		if (typeid2 == null) {
+	public final @NonNull OperationId getOperationId() {
+		OperationId operationId2 = operationId;
+		if (operationId2 == null) {
 			synchronized (this) {
-				typeid2 = typeid;
-				if (typeid2 == null) {
-					typeid = typeid2 = TypeidManager.INSTANCE.getOperationTypeid(this);
+				operationId2 = operationId;
+				if (operationId2 == null) {
+					operationId = operationId2 = IdManager.INSTANCE.getOperationId(this);
 ;
 				}
 			}
 		}
-		return typeid2;
+		return operationId2;
 	}
 } //OperationImpl

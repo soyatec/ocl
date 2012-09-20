@@ -21,6 +21,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
@@ -32,7 +33,6 @@ import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorProperty;
 import org.eclipse.ocl.examples.library.executor.ExecutorSingleIterationManager;
@@ -56,9 +56,8 @@ public class CompanyBodies
 		/*
 		true
 		*/
-		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Object self) throws InvalidValueException {
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull Object True = Boolean.TRUE;
+		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
+			final @NonNull Object True = true;
 			
 			
 			return True;
@@ -87,9 +86,8 @@ public class CompanyBodies
 	in
 	  table->any(range->includes(employees->size())).size
 		*/
-		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Object self, @NonNull DomainProperty property) throws InvalidValueException {
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
+		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self, @NonNull DomainProperty property) throws InvalidValueException {
+			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 			final @NonNull ExecutorType T_company__CompanySizeKind = CodegencompanyTables.Types._CompanySizeKind;
 			final @NonNull DomainTypedElement L_size_company__CompanySizeKind = standardLibrary.getTuplePart("size", T_company__CompanySizeKind);
 			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
@@ -109,41 +107,41 @@ public class CompanyBodies
 			final @NonNull DomainTypedElement L_range_Sequence_UnlimitedNatural_ = standardLibrary.getTuplePart("range", T_Sequence_UnlimitedNatural_);
 			final @NonNull DomainTupleType U_Tuple_range_Sequence_size_CompanySizeKind_1 = standardLibrary.getTupleType(L_range_Sequence_UnlimitedNatural_, L_size_company__CompanySizeKind);
 			final @NonNull DomainCollectionType T_Set_Tuple_range_Sequence_size_CompanySizeKind__ = standardLibrary.getSetType(U_Tuple_range_Sequence_size_CompanySizeKind_1, null, null);
-			final @NonNull IntegerValue I_0 = valueFactory.integerValueOf(0);
-			final @NonNull IntegerValue I_49 = valueFactory.integerValueOf(49);
-			final @NonNull IntegerRange rA_symbol_ = valueFactory.createRange(I_0.asIntegerValue(), I_49.asIntegerValue());
-			final @NonNull Object A_symbol_ = valueFactory.createSequenceRange(T_Sequence_UnlimitedNatural_, rA_symbol_);
-			final @NonNull Object A_symbol__1 = valueFactory.createEnumerationLiteralValue(CodegencompanyTables.EnumerationLiterals._CompanySizeKind__small);
-			final @NonNull IntegerValue I_50 = valueFactory.integerValueOf(50);
-			final @NonNull IntegerValue I_999 = valueFactory.integerValueOf(999);
-			final @NonNull IntegerRange rA_symbol__2 = valueFactory.createRange(I_50.asIntegerValue(), I_999.asIntegerValue());
-			final @NonNull Object A_symbol__2 = valueFactory.createSequenceRange(T_Sequence_UnlimitedNatural_, rA_symbol__2);
-			final @NonNull Object A_symbol__3 = valueFactory.createEnumerationLiteralValue(CodegencompanyTables.EnumerationLiterals._CompanySizeKind__medium);
-			final @NonNull IntegerValue I_1000 = valueFactory.integerValueOf(1000);
-			final @NonNull IntegerValue I_1000000 = valueFactory.integerValueOf(1000000);
-			final @NonNull IntegerRange rA_symbol__4 = valueFactory.createRange(I_1000.asIntegerValue(), I_1000000.asIntegerValue());
-			final @NonNull Object A_symbol__4 = valueFactory.createSequenceRange(T_Sequence_UnlimitedNatural_, rA_symbol__4);
-			final @NonNull Object A_symbol__5 = valueFactory.createEnumerationLiteralValue(CodegencompanyTables.EnumerationLiterals._CompanySizeKind__large);
+			final @NonNull IntegerValue I_0 = integerValueOf(0);
+			final @NonNull IntegerValue I_49 = integerValueOf(49);
+			final @NonNull IntegerRange rA_symbol_ = createRange(I_0.asIntegerValue(), I_49.asIntegerValue());
+			final @NonNull Object A_symbol_ = createSequenceRange(T_Sequence_UnlimitedNatural_.getTypeId(), rA_symbol_);
+			final @NonNull Object A_symbol__1 = createEnumerationLiteralValue(CodegencompanyTables.EnumerationLiterals._CompanySizeKind__small);
+			final @NonNull IntegerValue I_50 = integerValueOf(50);
+			final @NonNull IntegerValue I_999 = integerValueOf(999);
+			final @NonNull IntegerRange rA_symbol__2 = createRange(I_50.asIntegerValue(), I_999.asIntegerValue());
+			final @NonNull Object A_symbol__2 = createSequenceRange(T_Sequence_UnlimitedNatural_.getTypeId(), rA_symbol__2);
+			final @NonNull Object A_symbol__3 = createEnumerationLiteralValue(CodegencompanyTables.EnumerationLiterals._CompanySizeKind__medium);
+			final @NonNull IntegerValue I_1000 = integerValueOf(1000);
+			final @NonNull IntegerValue I_1000000 = integerValueOf(1000000);
+			final @NonNull IntegerRange rA_symbol__4 = createRange(I_1000.asIntegerValue(), I_1000000.asIntegerValue());
+			final @NonNull Object A_symbol__4 = createSequenceRange(T_Sequence_UnlimitedNatural_.getTypeId(), rA_symbol__4);
+			final @NonNull Object A_symbol__5 = createEnumerationLiteralValue(CodegencompanyTables.EnumerationLiterals._CompanySizeKind__large);
 			
 			
 			final @NonNull Map<DomainTypedElement, Object> mA_symbol__6 = new HashMap<DomainTypedElement, Object>();
 			mA_symbol__6.put(L_range_Sequence_UnlimitedNatural_, A_symbol_);
 			mA_symbol__6.put(L_size_company__CompanySizeKind, A_symbol__1);
-			TupleValue A_symbol__6 = valueFactory.createTupleValue(U_Tuple_range_Sequence_size_CompanySizeKind_1, mA_symbol__6);
+			TupleValue A_symbol__6 = createTupleValue(U_Tuple_range_Sequence_size_CompanySizeKind_1.getTupleTypeId(), mA_symbol__6);
 			
 			
 			final @NonNull Map<DomainTypedElement, Object> mA_symbol__7 = new HashMap<DomainTypedElement, Object>();
 			mA_symbol__7.put(L_range_Sequence_UnlimitedNatural_, A_symbol__2);
 			mA_symbol__7.put(L_size_company__CompanySizeKind, A_symbol__3);
-			TupleValue A_symbol__7 = valueFactory.createTupleValue(U_Tuple_range_Sequence_size_CompanySizeKind_1, mA_symbol__7);
+			TupleValue A_symbol__7 = createTupleValue(U_Tuple_range_Sequence_size_CompanySizeKind_1.getTupleTypeId(), mA_symbol__7);
 			
 			
 			final @NonNull Map<DomainTypedElement, Object> mA_symbol__8 = new HashMap<DomainTypedElement, Object>();
 			mA_symbol__8.put(L_range_Sequence_UnlimitedNatural_, A_symbol__4);
 			mA_symbol__8.put(L_size_company__CompanySizeKind, A_symbol__5);
-			TupleValue A_symbol__8 = valueFactory.createTupleValue(U_Tuple_range_Sequence_size_CompanySizeKind_1, mA_symbol__8);
+			TupleValue A_symbol__8 = createTupleValue(U_Tuple_range_Sequence_size_CompanySizeKind_1.getTupleTypeId(), mA_symbol__8);
 			
-			final @NonNull Object A_symbol__9 = valueFactory.createSetValue(T_Set_Tuple_range_Sequence_size_CompanySizeKind__, A_symbol__6, A_symbol__7, A_symbol__8);
+			final @NonNull Object A_symbol__9 = createSetValue(T_Set_Tuple_range_Sequence_size_CompanySizeKind__.getTypeId(), A_symbol__6, A_symbol__7, A_symbol__8);
 			final @NonNull Object V_table = A_symbol__9;
 			
 			
@@ -155,27 +153,27 @@ public class CompanyBodies
 			/*
 			range->includes(employees->size())
 			*/
-				public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull Object iterator1) throws InvalidValueException {
+				public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull Object iterator1) throws InvalidValueException {
 					final @NonNull Object V_1_ = iterator1;	// iterator: 1_
 					
 					Object A_symbol__11 = ((TupleValue)V_1_).getValue(L_range_Sequence_Integer_);
 					
 					
-					Object A_symbol__12 = IP_Company_employees.evaluate(evaluator, T_OrderedSet_company__Employee_, self, P_Company_employees);
+					Object A_symbol__12 = IP_Company_employees.evaluate(evaluator, T_OrderedSet_company__Employee_.getTypeId(), self, P_Company_employees);
 					
-					DomainType static_A_symbol__13 = valueFactory.typeOf(A_symbol__12);
+					DomainType static_A_symbol__13 = evaluator.getStaticTypeOf(A_symbol__12);
 					LibraryUnaryOperation dynamic_A_symbol__13 = (LibraryUnaryOperation)static_A_symbol__13.lookupImplementation(standardLibrary, O_Collection_size);
-					Object A_symbol__13 = dynamic_A_symbol__13.evaluate(evaluator, T_Integer, A_symbol__12);
-					DomainType static_A_symbol__14 = valueFactory.typeOf(A_symbol__11);
+					Object A_symbol__13 = dynamic_A_symbol__13.evaluate(evaluator, T_Integer.getTypeId(), A_symbol__12);
+					DomainType static_A_symbol__14 = evaluator.getStaticTypeOf(A_symbol__11);
 					LibraryBinaryOperation dynamic_A_symbol__14 = (LibraryBinaryOperation)static_A_symbol__14.lookupImplementation(standardLibrary, O_Collection_includes);
-					Object A_symbol__14 = dynamic_A_symbol__14.evaluate(evaluator, T_Boolean, A_symbol__11, A_symbol__13);
+					Object A_symbol__14 = dynamic_A_symbol__14.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__11, A_symbol__13);
 					return A_symbol__14;
 				}
 			};
-			DomainType static_A_symbol__10 = valueFactory.typeOf(V_table);
+			DomainType static_A_symbol__10 = evaluator.getStaticTypeOf(V_table);
 			LibraryIteration dynamic_A_symbol__10 = (LibraryIteration)static_A_symbol__10.lookupImplementation(standardLibrary, O_Collection_any);
-			Object acc_A_symbol__10 = dynamic_A_symbol__10.createAccumulatorValue(evaluator, U_Tuple_range_Sequence_size_CompanySizeKind_, T_Boolean);
-			ExecutorSingleIterationManager manager_A_symbol__10 = new ExecutorSingleIterationManager(evaluator, U_Tuple_range_Sequence_size_CompanySizeKind_, body_A_symbol__10, (CollectionValue)V_table, acc_A_symbol__10);
+			Object acc_A_symbol__10 = dynamic_A_symbol__10.createAccumulatorValue(evaluator, U_Tuple_range_Sequence_size_CompanySizeKind_.getTypeId(), T_Boolean);
+			ExecutorSingleIterationManager manager_A_symbol__10 = new ExecutorSingleIterationManager(evaluator, U_Tuple_range_Sequence_size_CompanySizeKind_.getTypeId(), body_A_symbol__10, (CollectionValue)V_table, acc_A_symbol__10);
 			Object A_symbol__10 = dynamic_A_symbol__10.evaluateIteration(manager_A_symbol__10);
 			Object A_symbol__15 = ((TupleValue)A_symbol__10).getValue(L_size_company__CompanySizeKind);
 			

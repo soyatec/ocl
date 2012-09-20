@@ -17,13 +17,12 @@
 package org.eclipse.ocl.examples.library.oclany;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * OclAnyOclAsTypeOperation realises the OclAny::oclAsType() library operation.
@@ -32,21 +31,15 @@ public class OclAnyOclAsTypeOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull OclAnyOclAsTypeOperation INSTANCE = new OclAnyOclAsTypeOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal, @NonNull Object argVal) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
-		DomainType sourceType;
-		if (sourceVal instanceof Value) {
-			sourceType = ((Value)sourceVal).getActualType();
-		}
-		else {
-			sourceType = valueFactory.typeOf(sourceVal);
-		}
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal, @NonNull Object argVal) {
+		DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
+		DomainType sourceType = evaluator.getDynamicTypeOf(sourceVal);
 		DomainType argType = asType(argVal);
-		if (sourceType.conformsTo(valueFactory.getStandardLibrary(), argType)) {
+		if (sourceType.conformsTo(standardLibrary, argType)) {
 			return sourceVal;
 		}
 		else {
-			return valueFactory.throwInvalidValueException(EvaluatorMessages.IncompatibleArgumentType, argType);
+			return createInvalidValue(EvaluatorMessages.IncompatibleArgumentType, argType);
 		}
 	}
 }

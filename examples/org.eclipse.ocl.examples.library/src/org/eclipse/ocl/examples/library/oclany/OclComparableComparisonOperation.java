@@ -20,12 +20,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.LibraryConstants;
 
@@ -34,11 +32,10 @@ import org.eclipse.ocl.examples.library.LibraryConstants;
  */
 public abstract class OclComparableComparisonOperation extends AbstractBinaryOperation
 {
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
-		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
-		DomainInheritance leftType = valueFactory.typeOf(left).getInheritance(standardLibrary);
-		DomainInheritance rightType = valueFactory.typeOf(right).getInheritance(standardLibrary);
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object left, @NonNull Object right) {
+		DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
+		DomainInheritance leftType = evaluator.getStaticTypeOf(left).getInheritance(standardLibrary);
+		DomainInheritance rightType = evaluator.getStaticTypeOf(right).getInheritance(standardLibrary);
 		DomainInheritance commonType = leftType.getCommonInheritance(rightType);
 		DomainInheritance comparableType = standardLibrary.getOclComparableType().getInheritance(standardLibrary);
 		DomainInheritance selfType = standardLibrary.getOclSelfType().getInheritance(standardLibrary);
@@ -50,15 +47,15 @@ public abstract class OclComparableComparisonOperation extends AbstractBinaryOpe
 				implementation = (LibraryBinaryOperation) commonType.lookupImplementation(standardLibrary, staticOperation);
 			}
 		} catch (Exception e) {
-			throw new InvalidValueException(e);
+			return createInvalidValue(e);
 		}
 		if (implementation != null) {
-			Object comparison = implementation.evaluate(evaluator, standardLibrary.getIntegerType(), left, right);
+			Object comparison = implementation.evaluate(evaluator, TypeId.INTEGER, left, right);
 			intComparison = ValuesUtil.asInteger(comparison);
-			return getResultValue(intComparison);
+			return getResultValue(intComparison) != false;			// FIXME redundant test to suppress warning
 		}
 		else {
-			return valueFactory.throwInvalidValueException("Unsupported compareTo for ''{0}''", left.getClass().getName()); //$NON-NLS-1$
+			return createInvalidValue("Unsupported compareTo for ''{0}''", left.getClass().getName()); //$NON-NLS-1$
 		}
 	}
 

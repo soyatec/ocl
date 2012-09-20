@@ -30,7 +30,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.executor.ReflectiveType;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 
@@ -51,13 +51,13 @@ public class EcoreReflectiveType extends ReflectiveType
 	}
 
 	@Override
-	public @NonNull ObjectValue createInstance(@NonNull ValueFactory valueFactory) {
+	public @NonNull ObjectValue createInstance(@NonNull DomainStandardLibrary standardLibrary) {
 		if (eClassifier instanceof EClass) {
 			EClass eClass = (EClass)eClassifier;
 			EObject element = eClass.getEPackage().getEFactoryInstance().create(eClass);
-			return valueFactory.createObjectValue(DomainUtil.nonNullEMF(element));
+			return ValuesUtil.createObjectValue(DomainUtil.nonNullEMF(element));
 		}
-		return super.createInstance(valueFactory);
+		return super.createInstance(standardLibrary);
 	}
 
 	public final @NonNull EClassifier getEClassifier() {

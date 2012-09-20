@@ -24,7 +24,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
-import org.eclipse.ocl.examples.domain.values.impl.ValueFactoryImpl;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
@@ -268,18 +268,18 @@ public class EssentialOCLContainmentVisitor extends AbstractEssentialOCLContainm
 				BigInteger bigInteger = (BigInteger) number;
 				isNegative = bigInteger.signum() < 0;
 				if (isNegative) {
-					if (bigInteger.compareTo(ValueFactoryImpl.INTEGER_MIN_VALUE) >= 0) {
+					if (bigInteger.compareTo(ValuesUtil.INTEGER_MIN_VALUE) >= 0) {
 						number = Integer.valueOf(bigInteger.intValue());
 					}
-					else if (bigInteger.compareTo(ValueFactoryImpl.LONG_MIN_VALUE) >= 0) {
+					else if (bigInteger.compareTo(ValuesUtil.LONG_MIN_VALUE) >= 0) {
 						number = Long.valueOf(bigInteger.longValue());
 					}
 				}
 				else {
-					if (bigInteger.compareTo(ValueFactoryImpl.INTEGER_MAX_VALUE) <= 0) {
+					if (bigInteger.compareTo(ValuesUtil.INTEGER_MAX_VALUE) <= 0) {
 						number = Integer.valueOf(bigInteger.intValue());
 					}
-					else if (bigInteger.compareTo(ValueFactoryImpl.LONG_MAX_VALUE) <= 0) {
+					else if (bigInteger.compareTo(ValuesUtil.LONG_MAX_VALUE) <= 0) {
 						number = Long.valueOf(bigInteger.longValue());
 					}
 				}

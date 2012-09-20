@@ -24,5 +24,5 @@ public abstract class AbstractOperation extends AbstractFeature implements Libra
 		return false;
 	}
 
-//	public abstract Value evaluate(Evaluator evaluator, DomainCallExp callExp, Value sourceValue, Value... argumentValues) throws InvalidValueException;
+//	public abstract Value evaluate(Evaluator evaluator, DomainCallExp callExp, Value sourceValue, Value... argumentValues);
 }

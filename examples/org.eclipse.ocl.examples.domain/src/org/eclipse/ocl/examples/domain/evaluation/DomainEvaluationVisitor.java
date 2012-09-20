@@ -18,8 +18,6 @@ package org.eclipse.ocl.examples.domain.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
-
 
 public interface DomainEvaluationVisitor
 {
@@ -41,6 +39,4 @@ public interface DomainEvaluationVisitor
 	@NonNull DomainModelManager getModelManager();
 
 	@NonNull DomainStandardLibrary getStandardLibrary();
-
-	@NonNull ValueFactory getValueFactory();
 }

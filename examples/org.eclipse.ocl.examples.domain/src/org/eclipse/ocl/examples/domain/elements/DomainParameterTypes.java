@@ -22,6 +22,8 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public class DomainParameterTypes
 {
+	public static final @NonNull DomainParameterTypes EMPTY_LIST = new DomainParameterTypes();
+	
 	private final @NonNull DomainType[] parameterTypes;
 	private final int hashCode;
 	

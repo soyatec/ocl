@@ -37,11 +37,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Environment;
@@ -101,8 +99,7 @@ public class BasicCompleteOCLEObjectValidator extends EObjectValidator
 						if (specification instanceof ExpressionInOCL) {			// Ignore OpaqueExpression -- probably from EAnnotations
 							ExpressionInOCL query = (ExpressionInOCL)specification;
 							EvaluationEnvironment evaluationEnvironment = environmentFactory.createEvaluationEnvironment();
-							ValueFactory valueFactory = metaModelManager.getValueFactory();
-							Object value = valueFactory.valueOf(object);
+							Object value = ValuesUtil.valueOf(object);
 							evaluationEnvironment.add(query.getContextVariable(), value);
 							DomainModelManager extents = evaluationEnvironment.createModelManager(object);
 							EvaluationVisitor evaluationVisitor = environmentFactory.createEvaluationVisitor(rootEnvironment, evaluationEnvironment, extents);
@@ -149,10 +146,10 @@ public class BasicCompleteOCLEObjectValidator extends EObjectValidator
 								String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
 								message = DomainUtil.bind(OCLMessages.ValidationResultIsNotBoolean_ERROR_,
 									PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel);
-							} catch (InvalidEvaluationException e) {
-								String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
-								message = DomainUtil.bind(OCLMessages.ValidationResultIsInvalid_ERROR_,
-									PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel);
+//							} catch (InvalidEvaluationException e) {
+//								String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
+//								message = DomainUtil.bind(OCLMessages.ValidationResultIsInvalid_ERROR_,
+//									PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel);
 							} catch (Throwable e) {
 								String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
 								message = DomainUtil.bind(OCLMessages.ValidationConstraintException_ERROR_,

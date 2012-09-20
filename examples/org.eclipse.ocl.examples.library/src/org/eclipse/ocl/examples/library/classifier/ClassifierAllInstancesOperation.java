@@ -20,13 +20,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * ClassifierAllInstancesOperation realises the Classifier::allInstances() library operation.
@@ -35,17 +35,16 @@ public class ClassifierAllInstancesOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull ClassifierAllInstancesOperation INSTANCE = new ClassifierAllInstancesOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal) {
 		DomainType type = asType(sourceVal);
 		DomainModelManager modelManager = evaluator.getModelManager();
 		Set<Object> results = new HashSet<Object>();
 		Set<?> instances = modelManager.get(type);
 		for (Object instance : instances) {
 			if (instance != null){
-				results.add(valueFactory.valueOf(instance));	// FIXME Move to model manager
+				results.add(ValuesUtil.valueOf(instance));	// FIXME Move to model manager
 			}
 		}
-		return valueFactory.createSetValue((DomainCollectionType)returnType, results);
+		return createSetValue((CollectedTypeId)returnTypeId, results);
 	}
 }

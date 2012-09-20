@@ -21,14 +21,15 @@ package org.eclipse.ocl.examples.pivot.evaluation;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
-import org.eclipse.ocl.examples.domain.evaluation.EvaluationHaltedException;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Environment;
@@ -64,7 +65,6 @@ public abstract class AbstractEvaluationVisitor
 	protected final @NonNull Environment environment;
 	protected final @NonNull MetaModelManager metaModelManager;	
 	protected final @NonNull DomainModelManager modelManager;
-	protected final @NonNull ValueFactory valueFactory;;
 
     private EvaluationVisitor undecoratedVisitor;
 
@@ -94,9 +94,26 @@ public abstract class AbstractEvaluationVisitor
         this.environment = env;
         this.metaModelManager = env.getMetaModelManager();
         this.modelManager = modelManager;
-		this.valueFactory = evalEnv.getValueFactory();
         this.undecoratedVisitor = this;  // assume I have no decorator
     }
+
+	@SuppressWarnings("unchecked")
+	public <T> T asEcoreObject(@Nullable T example, @NonNull Object value) {
+		return (T) metaModelManager.asEcoreObject(value);
+	}
+
+	public @NonNull InvalidValue createInvalidValue(@NonNull String message) {
+		return new InvalidValueImpl(message, evaluationEnvironment, null, null);
+	}
+
+	public @NonNull NullValue createInvalidValue(@NonNull String message, @Nullable Exception exception,
+			@Nullable Object context, @Nullable DomainExpression expression) {
+		return new InvalidValueImpl(message, exception, evaluationEnvironment, context, expression);
+	}
+
+	public @NonNull DomainType getDynamicTypeOf(@NonNull Object value) {
+		return metaModelManager.getDynamicTypeOf(value);
+	}
 
     // implements the interface method
 	public @NonNull Environment getEnvironment() {
@@ -120,7 +137,19 @@ public abstract class AbstractEvaluationVisitor
 	public @NonNull DomainStandardLibrary getStandardLibrary() {
 		return metaModelManager;
 	}
-  
+
+	public @NonNull DomainType getStaticTypeOf(@NonNull Object value) {
+		return metaModelManager.getStaticTypeOf(value);
+	}
+
+	public @NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Object... values) {
+		return metaModelManager.getStaticTypeOf(value, values);
+	}
+ 
+	public @NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Iterable<?> values) {
+		return metaModelManager.getStaticTypeOf(value, values);
+	}
+ 
     /**
      * Obtains the visitor on which I perform nested
      * {@link Visitable#accept(org.eclipse.ocl.utilities.Visitor)} calls.  This
@@ -134,13 +163,6 @@ public abstract class AbstractEvaluationVisitor
 	protected @NonNull EvaluationVisitor getUndecoratedVisitor() {
         return undecoratedVisitor;
     }
-
-	public @NonNull ValueFactory getValueFactory() {
-		if (isCanceled) {
-			throw new EvaluationHaltedException("Canceled");
-		}
-		return valueFactory;
-	}
     
     /**
      * Obtains the visitor on which I perform nested
@@ -192,20 +214,6 @@ public abstract class AbstractEvaluationVisitor
     void setVisitor(EvaluationVisitor visitor) {
 		setUndecoratedVisitor(visitor);
     }
-
-	public @NonNull NullValue throwInvalidEvaluation(String message) throws InvalidEvaluationException {
-		return evaluationEnvironment.throwInvalidEvaluation(message);
-	}
-
-
-	public @NonNull NullValue throwInvalidEvaluation(InvalidValueException e) throws InvalidEvaluationException {
-		return evaluationEnvironment.throwInvalidEvaluation(e);
-	}
-
-
-	public @NonNull NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object value, String message, Object... bindings) {
-		return evaluationEnvironment.throwInvalidEvaluation(e, expression, value, message, bindings);
-	}
 	
 	@Override
     public String toString() {
@@ -241,12 +249,12 @@ public abstract class AbstractEvaluationVisitor
 		
 		Object result = body.accept(getUndecoratedVisitor());
 		try {
-			if (result == null) {
-				return evaluationEnvironment.throwInvalidEvaluation("null constraint result");
-			}
+//			if (result == null) {
+//				return evaluationEnvironment.throwInvalidEvaluation("null constraint result");
+//			}
 			return ValuesUtil.asBoolean(result);
 		} catch (InvalidValueException e) {
-			return evaluationEnvironment.throwInvalidEvaluation(e);
+			return e.getValue();
 		}
 	}
 } //EvaluationVisitorImpl

@@ -19,15 +19,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.examples.library.executor.ExecutableStandardLibrary;
@@ -74,10 +71,10 @@ public class PivotExecutorStandardLibrary extends ExecutableStandardLibrary impl
 		return metaclass;
 	}
 	
-	@Override
-	public @NonNull DomainEvaluator createEvaluator(@NonNull EObject contextObject, @Nullable Map<Object, Object> contextMap) {
-		return new PivotEcoreExecutorManager(contextObject, contextMap, this, getMetaModelManager());
-	}
+//	@Override
+//	public @NonNull DomainEvaluator createEvaluator(@NonNull EObject contextObject, @Nullable Map<Object, Object> contextMap) {
+//		return new PivotEcoreExecutorManager(contextObject, contextMap, this, getMetaModelManager());
+//	}
 
 	protected @NonNull Package createPackage(@NonNull DomainPackage domainPackage) {
 		org.eclipse.ocl.examples.pivot.Package pivotPackage = PivotFactory.eINSTANCE.createPackage();

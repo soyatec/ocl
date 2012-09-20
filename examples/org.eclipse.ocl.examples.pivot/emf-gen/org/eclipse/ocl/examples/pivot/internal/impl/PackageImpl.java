@@ -18,8 +18,8 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
-
 import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -33,8 +33,8 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.typeids.Typeid;
-import org.eclipse.ocl.examples.domain.typeids.TypeidManager;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -877,20 +877,20 @@ public class PackageImpl
 		return visitor.visitPackage(this);
 	}
 
-	private Typeid typeid = null;
+	private PackageId packageId = null;
 	
-	public @NonNull Typeid getTypeid() {
-		Typeid typeid2 = typeid;
-		if (typeid2 == null) {
+	public @NonNull PackageId getPackageId() {
+		PackageId packageId2 = packageId;
+		if (packageId2 == null) {
 			synchronized (this) {
-				typeid2 = typeid;
-				if (typeid2 == null) {
+				packageId2 = packageId;
+				if (packageId2 == null) {
 					synchronized (this) {
- 						typeid = typeid2 = TypeidManager.INSTANCE.getPackageTypeid(this);
+						packageId = packageId2 = IdManager.INSTANCE.getPackageId(this);
 					}
 				}
 			}
 		}
-		return typeid2;
+		return packageId2;
 	}
 } //PackageImpl

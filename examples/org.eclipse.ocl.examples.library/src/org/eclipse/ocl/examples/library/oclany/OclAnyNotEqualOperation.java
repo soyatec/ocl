@@ -17,9 +17,10 @@
 package org.eclipse.ocl.examples.library.oclany;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
 
 
 /**
@@ -32,7 +33,19 @@ public class OclAnyNotEqualOperation extends OclAnyEqualOperation
 	public static final @NonNull OclAnyNotEqualOperation INSTANCE = new OclAnyNotEqualOperation();
 
 	@Override
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
-		return !asBoolean(super.evaluate(evaluator, returnType, left, right));
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object left, @NonNull Object right) {
+		Object equals = super.evaluate(evaluator, returnTypeId, left, right);
+		if (equals == Boolean.FALSE) {
+			return TRUE_VALUE;
+		}
+		else if (equals == Boolean.TRUE) {
+			return FALSE_VALUE;
+		}
+		else if (equals instanceof InvalidValue) {
+			return equals;
+		}
+		else {
+			return createInvalidValue(EvaluatorMessages.TypedValueRequired, TypeId.BOOLEAN_NAME, getTypeName(right));
+		}
 	}
 }

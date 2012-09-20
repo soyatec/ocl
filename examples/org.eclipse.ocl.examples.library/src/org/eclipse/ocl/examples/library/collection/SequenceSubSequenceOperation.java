@@ -17,9 +17,8 @@
 package org.eclipse.ocl.examples.library.collection;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 
@@ -30,7 +29,7 @@ public class SequenceSubSequenceOperation extends AbstractTernaryOperation
 {
 	public static final @NonNull SequenceSubSequenceOperation INSTANCE = new SequenceSubSequenceOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) {
 		SequenceValue selfValue = asSequenceValue(sourceValue);
 		Integer fromValue = asInteger(firstArgumentValue);
 		Integer toValue = asInteger(secondArgumentValue);

@@ -18,7 +18,7 @@ package org.eclipse.ocl.examples.domain.elements;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.typeids.Typeid;
+import org.eclipse.ocl.examples.domain.ids.OperationId;
 
 public interface DomainOperation extends DomainFeature
 {
@@ -42,5 +42,5 @@ public interface DomainOperation extends DomainFeature
 	 */
 	@NonNull DomainTypeParameters getTypeParameters();
 
-	@NonNull Typeid getTypeid();
+	@NonNull OperationId getOperationId();
 }

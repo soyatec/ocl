@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 
@@ -44,7 +45,7 @@ public class OneIteration extends AbstractIteration
 
 	public static final @NonNull OneIteration INSTANCE = new OneIteration();
 
-	public @NonNull MutableBoolean createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) {
+	public @NonNull MutableBoolean createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull TypeId accumulatorTypeId, @NonNull DomainType bodyType) {
 		return new MutableBoolean();
 	}
 
@@ -52,14 +53,14 @@ public class OneIteration extends AbstractIteration
 	protected @NonNull
 	Object resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
 		MutableBoolean accumulatorValue = (MutableBoolean) iterationManager.getAccumulatorValue();
-		return accumulatorValue.isSet();
+		return accumulatorValue.isSet() != false;			// FIXME redundant test to suppress warning
 	}
 
 	@Override
     protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
 		Object bodyVal = iterationManager.evaluateBody();		
 		if (isUndefined(bodyVal)) {
-			return iterationManager.throwInvalidEvaluation(EvaluatorMessages.UndefinedBody, "one"); 	// Null body is invalid //$NON-NLS-1$
+			return createInvalidValue(EvaluatorMessages.UndefinedBody, "one"); 	// Null body is invalid //$NON-NLS-1$
 		}
 		else if (isFalse(bodyVal)) {
 			return null;									// Carry on for nothing found

@@ -19,12 +19,11 @@ package org.eclipse.ocl.examples.pivot.library;
 import java.lang.reflect.Method;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 public class JavaCompareToOperation extends AbstractBinaryOperation
 {
@@ -34,18 +33,17 @@ public class JavaCompareToOperation extends AbstractBinaryOperation
 		this.method = method;
 	}
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object leftValue, @NonNull Object rightValue) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object leftValue, @NonNull Object rightValue) {
 		Object leftObject = asObject(leftValue);
 		Object rightObject = asObject(rightValue);
 		try {
 			Object result = method.invoke(leftObject, rightObject);
 			if (!(result instanceof Integer)) {
-				return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedResultRequired, "Integer");
+				return createInvalidValue(EvaluatorMessages.TypedResultRequired, TypeId.INTEGER_NAME);
 			}
-			return valueFactory.integerValueOf((Integer) result);
+			return ValuesUtil.integerValueOf((Integer) result);
 		} catch (Exception e) {
-			throw new InvalidValueException(e);
+			return createInvalidValue(e, EvaluatorMessages.TypedResultRequired, TypeId.INTEGER_NAME);
 		}
 	}
 }

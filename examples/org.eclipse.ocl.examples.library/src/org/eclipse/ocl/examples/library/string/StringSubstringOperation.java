@@ -17,12 +17,11 @@
 package org.eclipse.ocl.examples.library.string;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
  * StringSubstringOperation realises the String::substring() library operation.
@@ -31,8 +30,7 @@ public class StringSubstringOperation extends AbstractTernaryOperation
 {
 	public static final @NonNull StringSubstringOperation INSTANCE = new StringSubstringOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) {
 		String sourceString = asString(sourceValue);
 		Integer startInteger = asInteger(firstArgumentValue);
 		Integer endInteger = asInteger(secondArgumentValue);
@@ -44,7 +42,7 @@ public class StringSubstringOperation extends AbstractTernaryOperation
 			return result;
 		}
 		else {
-			return valueFactory.throwInvalidValueException(EvaluatorMessages.IndexesOutOfRange, lower, upper, size);
+			return createInvalidValue(DomainUtil.bind(EvaluatorMessages.IndexesOutOfRange, lower, upper, size));
 		}
 	}
 }

@@ -18,14 +18,13 @@ package org.eclipse.ocl.examples.library.iterator;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * ClosureIteration realizes the Collection::closure() library iteration.
@@ -34,8 +33,8 @@ public class ClosureIteration extends AbstractIteration
 {
 	public static final @NonNull ClosureIteration INSTANCE = new ClosureIteration();
 
-	public @NonNull CollectionValue.Accumulator createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) {
-		return evaluator.getValueFactory().createCollectionAccumulatorValue((DomainCollectionType) accumulatorType);
+	public @NonNull CollectionValue.Accumulator createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull TypeId accumulatorTypeId, @NonNull DomainType bodyType) {
+		return createCollectionAccumulatorValue((CollectedTypeId) accumulatorTypeId);
 	}
 
 	/**
@@ -59,21 +58,20 @@ public class ClosureIteration extends AbstractIteration
 			return iterationManager.getAccumulatorValue();		// Null body is termination
 		}
 		else {
-			try {
+//			try {
 				CollectionValue collectionValue;
 				if (bodyVal instanceof CollectionValue) {
 					collectionValue = (CollectionValue) bodyVal;
 				}
 				else {
-					ValueFactory valueFactory = iterationManager.getValueFactory();
-					DomainType elementType = valueFactory.typeOf(bodyVal);
-					DomainCollectionType sequenceType = valueFactory.getStandardLibrary().getSequenceType(elementType, null, null);
-					collectionValue = valueFactory.createSequenceValue(sequenceType, bodyVal);
+					DomainType elementType = iterationManager.getEvaluator().getStaticTypeOf(bodyVal);
+					CollectedTypeId sequenceId = TypeId.SEQUENCE.getCollectedTypeId(elementType.getTypeId());
+					collectionValue = createSequenceValue(sequenceId, bodyVal);
 				}
 				evaluateIteration(iterationManager.createNestedIterationManager(collectionValue));
-			} catch (InvalidValueException e) {
-				iterationManager.throwInvalidEvaluation(e);
-			}
+//			} catch (InvalidValueException e) {
+//				iterationManager.throwInvalidEvaluation(e);
+//			}
 			return null;
 		}
 	}

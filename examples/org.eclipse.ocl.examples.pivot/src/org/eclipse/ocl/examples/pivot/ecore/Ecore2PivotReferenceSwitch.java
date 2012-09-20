@@ -36,7 +36,7 @@ import org.eclipse.emf.ecore.util.EcoreSwitch;
 import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.DataType;
@@ -168,14 +168,13 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 					String upperValue = details.get(PROPERTY_OPPOSITE_ROLE_UPPER_KEY);
 					boolean isOrdered = orderedValue != null ? Boolean.valueOf(orderedValue) : false;
 					boolean isUnique = uniqueValue != null ? Boolean.valueOf(uniqueValue) : true;
-					ValueFactory valueFactory = metaModelManager.getValueFactory();
-					IntegerValue one = valueFactory.getOne();
-					IntegerValue lower = lowerValue != null ? valueFactory.integerValueOf(lowerValue) : one;
+					IntegerValue one = ValuesUtil.ONE_VALUE;
+					IntegerValue lower = lowerValue != null ? ValuesUtil.integerValueOf(lowerValue) : one;
 					if (lower.isInvalid()) {
 						logger.error("Invalid " + PROPERTY_OPPOSITE_ROLE_LOWER_KEY + " " + lower);
 						lower = one;
 					}
-					IntegerValue upper = upperValue != null ? valueFactory.integerValueOf(upperValue) : one;
+					IntegerValue upper = upperValue != null ? ValuesUtil.integerValueOf(upperValue) : one;
 					if (upper.isInvalid()) {
 						logger.error("Invalid " + PROPERTY_OPPOSITE_ROLE_UPPER_KEY + " " + upper);
 						upper = one;
@@ -233,9 +232,8 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 					boolean isOrdered = eObject.isOrdered();
 					boolean isUnique = eObject.isUnique();
 					if (pivotType != null) {
-						ValueFactory valueFactory = metaModelManager.getValueFactory();
-						IntegerValue lowerValue = valueFactory.integerValueOf(lower);
-						IntegerValue upperValue = upper != -1 ? valueFactory.integerValueOf(upper) : valueFactory.getUnlimited();
+						IntegerValue lowerValue = ValuesUtil.integerValueOf(lower);
+						IntegerValue upperValue = upper != -1 ? ValuesUtil.integerValueOf(upper) : ValuesUtil.UNLIMITED_VALUE;
 						pivotType = metaModelManager.getCollectionType(isOrdered, isUnique, pivotType, lowerValue, upperValue);
 					}
 				}

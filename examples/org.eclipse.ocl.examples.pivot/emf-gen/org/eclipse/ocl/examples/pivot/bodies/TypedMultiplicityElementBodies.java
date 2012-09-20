@@ -25,12 +25,12 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorProperty;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
@@ -54,9 +54,8 @@ public class TypedMultiplicityElementBodies
 		/*
 		bodySpecification.type.conformsTo(self.type)
 		*/
-		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Object self, final @NonNull Object bodySpecification) throws InvalidValueException {
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
+		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self, final @NonNull Object bodySpecification) throws InvalidValueException {
+			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			final @NonNull ExecutorOperation O_OclType_conformsTo = OCLstdlibTables.Operations._OclType__conformsTo;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
@@ -64,14 +63,14 @@ public class TypedMultiplicityElementBodies
 			final @NonNull LibraryProperty IP_TypedElement_type = P_TypedElement_type.getImplementation();
 			
 			
-			Object A_symbol_ = IP_TypedElement_type.evaluate(evaluator, T_Type, bodySpecification, P_TypedElement_type);
+			Object A_symbol_ = IP_TypedElement_type.evaluate(evaluator, T_Type.getTypeId(), bodySpecification, P_TypedElement_type);
 			
 			
-			Object A_symbol__1 = IP_TypedElement_type.evaluate(evaluator, T_Type, self, P_TypedElement_type);
+			Object A_symbol__1 = IP_TypedElement_type.evaluate(evaluator, T_Type.getTypeId(), self, P_TypedElement_type);
 			
-			DomainType static_A_symbol__2 = valueFactory.typeOf(A_symbol_);
+			DomainType static_A_symbol__2 = evaluator.getStaticTypeOf(A_symbol_);
 			LibraryBinaryOperation dynamic_A_symbol__2 = (LibraryBinaryOperation)static_A_symbol__2.lookupImplementation(standardLibrary, O_OclType_conformsTo);
-			Object A_symbol__2 = dynamic_A_symbol__2.evaluate(evaluator, T_Boolean, A_symbol_, A_symbol__1);
+			Object A_symbol__2 = dynamic_A_symbol__2.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol_, A_symbol__1);
 			return A_symbol__2;
 		}
 	}
@@ -86,14 +85,14 @@ public class TypedMultiplicityElementBodies
 		/*
 		Parameter{name = 'name'}
 		*/
-		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Object self) throws InvalidValueException {
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
+		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
+			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 			final @NonNull Object S_name = "name";
 			
-			ObjectValue A_symbol__3 = PivotTables.Types._Parameter.createInstance(valueFactory);
+			ObjectValue A_symbol__3 = PivotTables.Types._Parameter.createInstance(standardLibrary);
 			
-			P_NamedElement_name.setValue(A_symbol__3, S_name);
+			P_NamedElement_name.setValue(standardLibrary, A_symbol__3, S_name);
 			
 			return A_symbol__3;
 		}

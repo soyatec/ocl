@@ -38,7 +38,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
-import org.eclipse.ocl.examples.domain.typeids.Typeid;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ReflectiveType;
@@ -153,14 +153,15 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 	 */
 	private @Nullable Map<String, List<DomainProperty>> name2properties = null;
 	
-	protected final @NonNull Typeid typeid;
+	protected final @NonNull DomainType domainType;
+	protected @Nullable TypeId typeId = null;
 	
 
 	protected AbstractTypeServer(@NonNull PackageServer packageServer, @NonNull DomainType domainType) {
 		super(DomainUtil.nonNullModel(domainType.getName()), packageServer, computeFlags(domainType));
 		this.packageServer = packageServer;
 		this.packageManager = packageServer.getPackageManager();
-		this.typeid = domainType.getTypeid();
+		this.domainType = domainType;
 	}
 
 	void addedMemberOperation(@NonNull DomainOperation pivotOperation) {
@@ -536,8 +537,12 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 	}
 	
 	@Override
-	public final @NonNull Typeid getTypeid() {
-		return typeid;
+	public final @NonNull TypeId getTypeId() {
+		TypeId typeId2 = typeId;
+		if (typeId2 == null) {
+			typeId = typeId2 = domainType.getTypeId();
+		}
+		return typeId2;
 	}
 
 	private @NonNull Map<String, Map<DomainParameterTypes, List<DomainOperation>>> initMemberOperations() {
@@ -723,7 +728,7 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 						break;
 					}
 				}
-				Property property = PivotUtil.getNamedElement(oldExtensionProperties, featureName);
+				Property property = DomainUtil.getNamedElement(oldExtensionProperties, featureName);
 				if (property == null) {
 					property = PivotFactory.eINSTANCE.createProperty();
 					property.setName(featureName);

@@ -16,12 +16,17 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 
@@ -47,6 +52,15 @@ public class TupleTypeImpl
 		super();
 	}
 
+	@Override
+	public @NonNull TypeId computeId() {
+		String name2 = getName();
+		EList<Property> ownedAttribute2 = getOwnedAttribute();
+		assert name2 != null;
+		assert ownedAttribute2 != null;
+		return IdManager.INSTANCE.getTupleTypeId(name2, ownedAttribute2);
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -66,5 +80,9 @@ public class TupleTypeImpl
 	public @NonNull DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary) {
 		DomainType tupleType = standardLibrary.getOclTupleType();
 		return tupleType.getInheritance(standardLibrary);
+	}
+
+	public @NonNull TupleTypeId getTupleTypeId() {
+		return (TupleTypeId) getTypeId();
 	}
 } //TupleTypeImpl

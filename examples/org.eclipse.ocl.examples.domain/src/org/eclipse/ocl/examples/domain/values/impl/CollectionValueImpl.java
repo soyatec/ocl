@@ -23,18 +23,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
+import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
-import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -43,10 +41,9 @@ import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
-import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
+//import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 
 /**
  * @generated NOT
@@ -63,16 +60,29 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		return ValuesPackage.Literals.COLLECTION_VALUE;
 	}
 
-	protected final @NonNull DomainCollectionType type;
-	protected final @NonNull Collection<? extends Object> elements;		// For datatypes each element is a Value, for objects each element is an Object
-	private DomainType actualType = null;			// Lazily computed
+	private final @NonNull CollectedTypeId typeId;
+	protected final @NonNull Collection<? extends Object> elements;		// Using Value instances where necessary to ensure correct equals semantics
 	
-	protected CollectionValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Collection<? extends Object> elements) {
-		super(valueFactory);
-		this.type = type;
-		this.elements = elements;
+	protected CollectionValueImpl(@NonNull CollectedTypeId typeId, @NonNull Collection<? extends Object> values) {
+		this.typeId = typeId;
+		this.elements = values;
+		assert checkElementsAreValues(values);
 	}
 	
+	private boolean checkElementsAreValues(Iterable<? extends Object> elements) {
+		for (Object element : elements) {
+			assert element != null;
+			assert !(element instanceof Number);
+			assert !(element instanceof DomainEnumerationLiteral);
+			assert !(element instanceof DomainType);
+			assert !(element instanceof EEnumLiteral);
+			if (element instanceof Collection<?>) {
+				assert checkElementsAreValues((Iterable<?>)element);
+			}
+		}
+		return true;
+	}
+
 	/**
 	 * Add a value to a working collection, returning true if the working
 	 * collection is changed by the addition.
@@ -86,7 +96,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 
     @Override
     public @NonNull BagValue asBagValue() {
-        return valueFactory.createBagValue(getBagType(), elements);
+        return createBagValue(getBagTypeId(), elements);
     }
 
 	public @NonNull Collection<? extends Object> asCollection() {
@@ -96,15 +106,6 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	@Override
 	public @NonNull CollectionValue asCollectionValue() {
 		return this;
-	}
-
-	@Override
-	public @NonNull Object asEcoreObject() throws InvalidValueException {
-		List<Object> ecoreResult = new BasicEList<Object>(intSize());
-		for (Object elementValue : elements) {
-			ecoreResult.add(ValuesUtil.asEcoreObject(elementValue));
-		}
-		return ecoreResult;
 	}
 
 	public @NonNull List<? extends Object> asList() {
@@ -117,17 +118,17 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 
     @Override
 	public @NonNull OrderedSetValue asOrderedSetValue() {
-        return valueFactory.createOrderedSetValue(getOrderedSetType(), elements);
+        return createOrderedSetValue(getOrderedSetTypeId(), elements);
     }
 
     @Override
     public @NonNull SequenceValue asSequenceValue() {
-        return valueFactory.createSequenceValue(getSequenceType(), elements);
+        return createSequenceValue(getSequenceTypeId(), elements);
     }
 
     @Override
     public @NonNull SetValue asSetValue() {
-        return valueFactory.createSetValue(getSetType(), elements);
+        return createSetValue(getSetTypeId(), elements);
     }
 
     /**
@@ -140,14 +141,14 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
      * @return the number of occurrences of the object in the collection
      * @throws InvalidValueException 
      */
-    public @NonNull IntegerValue count(@NonNull Object value) throws InvalidValueException {
+    public @NonNull IntegerValue count(@NonNull Object value) {
         long count = 0;
         for (Object next : elements) {
             if (next.equals(value)) {
                 count++;
             }
         } 
-	    return valueFactory.integerValueOf(count);
+	    return ValuesUtil.integerValueOf(count);
     }
 
     /**
@@ -162,10 +163,10 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
     public @NonNull Object excludes(@NonNull Object value) {
         for (Object next : elements) {
             if (next.equals(value)) {
-            	return Boolean.FALSE;
+            	return false;
             }
         } 
-        return Boolean.TRUE;
+        return true;
     }
 
 	/**
@@ -182,18 +183,18 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
         for (Object e1 : elements) {
 	        for (Object e2 : c.iterable()) {
 	            if (e1.equals(e2)) {
-	            	return Boolean.FALSE;
+	            	return false;
 	            }
 	        } 
         } 
-        return Boolean.TRUE;
+        return true;
     }
 
     /**
      * Returns true if any element flattened.
      * @throws InvalidValueException 
      */
-	public boolean flatten(@NonNull Collection<Object> flattenedElements) throws InvalidValueException {
+	public boolean flatten(@NonNull Collection<Object> flattenedElements) {
 		boolean flattened = false;
 		for (Object element : elements) {
 			CollectionValue collectionElement = ValuesUtil.isCollectionValue(element);
@@ -208,17 +209,16 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		return flattened;
 	}
 
-	@Override
-	public @NonNull DomainType getActualType() throws InvalidValueException {
+/*	@Override
+	public @NonNull DomainType getActualType(@NonNull DomainStandardLibrary standardLibrary) {
 		DomainType actualType2 = actualType;
 		if (actualType2 == null) {
-			DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 			DomainType elementType = null;
 			for (Object value : elements) {
 				assert value != null;
 				DomainType valueType;
 				if (value instanceof Value) {
-					valueType = ((Value)value).getActualType();
+					valueType = ((Value)value).getActualType(standardLibrary);
 				}
 				else {
 					valueType = valueFactory.typeOf(value);
@@ -240,18 +240,39 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 			}
 		}	
 		return actualType2;
+	} */
+
+	public @NonNull CollectedTypeId getBagTypeId() {
+		return TypeId.BAG.getCollectedTypeId(getElementTypeId());
 	}
 
-	public @NonNull DomainCollectionType getBagType() {
-		return valueFactory.getStandardLibrary().getBagType(getElementType(), null, null);
+//	public @NonNull CollectedTypeId getCollectionTypeId() {
+//		return TypeId.COLLECTION.getCollectedTypeId(getElementType().getTypeId());
+//	}
+
+	public @NonNull CollectedTypeId getCollectedTypeId() {
+		CollectedTypeId typeId2 = typeId;
+//		if (typeId2 == null) {
+//			typeId2 = getCollectionTypeId().getCollectedTypeId(getElementTypeId());
+//		}
+		return typeId2;
 	}
 
-	public @NonNull DomainCollectionType getCollectionType() {
-		return (DomainCollectionType) getType();
+	public @NonNull CollectionTypeId getCollectionTypeId() {
+		return TypeId.COLLECTION;
 	}
 
-	protected @NonNull DomainType getElementType() {
-		return DomainUtil.nonNullModel(getCollectionType().getElementType());
+	public @NonNull TypeId getElementTypeId() {
+//    	DomainType elementType = standardLibrary.getOclVoidType();
+//    	for (Object value : values) {
+//    		assert value != null;
+//    		elementType = elementType.getCommonType(standardLibrary, standardLibrary.typeOf(value));
+//    	}
+//		for (Value element : iterable()) {
+//			
+//		}
+		
+		return getCollectedTypeId().getElementTypeId();
 	}
 
 	protected @NonNull Collection<? extends Object> getElements() {
@@ -262,20 +283,20 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		return elements;
 	}
 
-	public @NonNull DomainCollectionType getOrderedSetType() {
-		return valueFactory.getStandardLibrary().getOrderedSetType(getElementType(), null, null);
+	public @NonNull CollectedTypeId getOrderedSetTypeId() {
+		return TypeId.ORDERED_SET.getCollectedTypeId(getElementTypeId());
 	}
 
-	public @NonNull DomainCollectionType getSequenceType() {
-		return valueFactory.getStandardLibrary().getSequenceType(getElementType(), null, null);
+	public @NonNull CollectedTypeId getSequenceTypeId() {
+		return TypeId.SEQUENCE.getCollectedTypeId(getElementTypeId());
 	}
 
-	public @NonNull DomainCollectionType getSetType() {
-		return valueFactory.getStandardLibrary().getSetType(getElementType(), null, null);
+	public @NonNull CollectedTypeId getSetTypeId() {
+		return TypeId.SET.getCollectedTypeId(getElementTypeId());
 	}
 
-	public @NonNull DomainCollectionType getType() {
-		return type;
+	public @NonNull CollectedTypeId getTypeId() {
+		return getCollectedTypeId();
 	}
 
 	@Override
@@ -284,7 +305,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	}
 
     public @NonNull Object includes(@NonNull Object value) {
-		return elements.contains(value);
+		return elements.contains(value) != false;			// FIXME redundant test to suppress warning
     }
 
     /**
@@ -307,29 +328,28 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	            }
 	        } 
         	if (!gotIt) {
-        		return Boolean.FALSE;
+        		return false;
         	}
         } 
-        return Boolean.TRUE;
+        return true;
     }
 
 	public int intSize() {
 		return elements.size();
 	}
 
-	public @NonNull CollectionValue intersection(@NonNull CollectionValue c) throws InvalidValueException {
-		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
+	public @NonNull CollectionValue intersection(@NonNull CollectionValue c) {
 		if (this instanceof OrderedSetValue) {
-            return OrderedSetValueImpl.intersection(valueFactory, standardLibrary.getOrderedSetType(getElementType(), null, null), this, c);
+            return OrderedSetValueImpl.intersection(getOrderedSetTypeId(), this, c);
         }
         else if (this instanceof SequenceValue && c instanceof UniqueCollectionValue) {
-            return OrderedSetValueImpl.intersection(valueFactory, standardLibrary.getOrderedSetType(getElementType(), null, null), this, c);
+            return OrderedSetValueImpl.intersection(getOrderedSetTypeId(), this, c);
         }
         else if (this instanceof UniqueCollectionValue || c instanceof UniqueCollectionValue) {
-            return SetValueImpl.intersection(valueFactory, standardLibrary.getSetType(getElementType(), null, null), this, c);
+            return SetValueImpl.intersection(getSetTypeId(), this, c);
         }
         else {
-            return BagValueImpl.intersection(valueFactory, standardLibrary.getBagType(getElementType(), null, null), this, c);
+            return BagValueImpl.intersection(getBagTypeId(), this, c);
         }
 	}
 
@@ -351,38 +371,18 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		return result;
 	}
 
-	public @NonNull Object maxMin(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation binaryOperation) throws InvalidValueException {
-		Object result = null;
-        for (Object element : elements) {
-        	if (result == null) {
-        		result = element;
-        	}
-        	else if (element != null) {
-        		result = binaryOperation.evaluate(evaluator, returnType, result, element);
-        		if (ValuesUtil.isUndefined(result)) {
-                	valueFactory.throwInvalidValueException(EvaluatorMessages.UndefinedResult, "max/min");
-        		}
-        	}
-        }
-		if (result == null) {
-        	return valueFactory.throwInvalidValueException(EvaluatorMessages.EmptyCollection, getKind(), "max/min");
-		}
-		return result;
-    }
-
 	public @NonNull Object notEmpty() {
 		return intSize() != 0;
 	}
 
-    public @NonNull Set<TupleValue> product(@NonNull CollectionValue c, @NonNull DomainTupleType tupleType) {   	
-		ValueFactory nonNullValueFactory = valueFactory;
+    public @NonNull Set<TupleValue> product(@NonNull CollectionValue c, @NonNull TupleTypeId tupleTypeId) {   	
     	Set<TupleValue> result = new HashSet<TupleValue>();		
         for (Object next1 : iterable()) {
         	if (next1 != null) {
          		for (Object next2 : c.iterable()) {
     				if (next2 != null) {
     					assert next1 != null;
-    					result.add(new TupleValueImpl(nonNullValueFactory, tupleType, next1, next2));
+    					result.add(new TupleValueImpl(tupleTypeId, next1, next2));
     				}
         		}
         	}
@@ -390,70 +390,9 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
         return result;
     }
 
-	public @NonNull CollectionValue selectByKind(@NonNull DomainType requiredElementType) throws InvalidValueException {
-    	DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
-		boolean changedContents = false;
-		Collection<Object> newElements = new ArrayList<Object>();
-        for (Object element : elements) {
-        	assert element != null;
-			if (ValuesUtil.isNull(element)) {
-        		changedContents = true;
-			}
-			else {
-				DomainType elementType = valueFactory.typeOf(element);
-				if (elementType.conformsTo(standardLibrary, requiredElementType)) {
-	        		newElements.add(element);
-	        	}
-	        	else {
-	        		changedContents = true;
-	        	}
-			}
-        }
-        if (changedContents) {
-        	DomainCollectionType collectionType = getType();
-        	return valueFactory.createCollectionValue(collectionType.isOrdered(), collectionType.isUnique(), newElements);
-        }
-        else {
-        	return this;
-        }
-	}
-
-	public @NonNull CollectionValue selectByType(@NonNull DomainType requiredElementType) throws InvalidValueException {
-    	DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
-		boolean changedContents = false;
-		Collection<Object> newElements = new ArrayList<Object>();
-        for (Object element : elements) {
-        	assert element != null;
-			DomainType elementType = valueFactory.typeOf(element);
-			if (elementType.isEqualTo(standardLibrary, requiredElementType)) {
-        		newElements.add(element);
-        	}
-        	else {
-        		changedContents = true;
-        	}
-        }
-        if (changedContents) {
-        	DomainCollectionType collectionType = getType();
-        	return valueFactory.createCollectionValue(collectionType.isOrdered(), collectionType.isUnique(), newElements);
-        }
-        else {
-        	return this;
-        }
-	}
-
 	public @NonNull IntegerValue size() {
-		return valueFactory.integerValueOf(intSize());
+		return ValuesUtil.integerValueOf(intSize());
 	}
-
-	public @NonNull Object sum(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation binaryOperation, @NonNull Object zero) throws InvalidValueException {
-		Object result = zero;
-        for (Object element : elements) {
-        	if (element != null) {
-        		result = binaryOperation.evaluate(evaluator, returnType, result, element);
-        	}
-        }
-        return result;
-    }
 
 	@Override
 	public String toString() {
@@ -482,21 +421,21 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		s.append("}");		
 	}
 
-    public @NonNull CollectionValue union(@NonNull CollectionValue c) throws InvalidValueException {
+    public @NonNull CollectionValue union(@NonNull CollectionValue c) {
     	if (this instanceof SetValue && c instanceof SetValue) {
-            return SetValueImpl.union(valueFactory, getSetType(), this, c);
+            return SetValueImpl.union(getSetTypeId(), this, c);
         }
         else if (this instanceof BagValue || c instanceof BagValue) {
-            return BagValueImpl.union(valueFactory, getBagType(), this, c);
+            return BagValueImpl.union(getBagTypeId(), this, c);
         }
         else if (this instanceof OrderedSetValue && c instanceof OrderedSetValue) {
-            return OrderedSetValueImpl.union(valueFactory, getOrderedSetType(), this, c);
+            return OrderedSetValueImpl.union(getOrderedSetTypeId(), this, c);
         }
         else if (this instanceof SequenceValue || c instanceof SequenceValue) {
-            return SparseSequenceValueImpl.union(valueFactory, getSequenceType(), this, c);
+            return SparseSequenceValueImpl.union(getSequenceTypeId(), this, c);
         }
         else {
-            return SetValueImpl.union(valueFactory, getSetType(), this, c);
+            return SetValueImpl.union(getSetTypeId(), this, c);
         }
     }
 }

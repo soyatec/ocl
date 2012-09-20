@@ -18,7 +18,6 @@ package org.eclipse.ocl.examples.domain.elements;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 
 public interface DomainProperty extends DomainFeature
@@ -33,5 +32,5 @@ public interface DomainProperty extends DomainFeature
 	 */
 	/*@NonNull*/ DomainProperty getOpposite();
 	
-	void setValue(@NonNull ObjectValue objectValue, @NonNull Object propertyValue) throws InvalidValueException;
+	void setValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull ObjectValue objectValue, @NonNull Object propertyValue);
 }

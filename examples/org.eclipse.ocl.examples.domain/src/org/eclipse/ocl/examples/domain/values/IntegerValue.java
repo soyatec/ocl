@@ -17,7 +17,6 @@
 package org.eclipse.ocl.examples.domain.values;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 public interface IntegerValue extends NumericValue
 {	
@@ -31,22 +30,22 @@ public interface IntegerValue extends NumericValue
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue add(@NonNull IntegerValue right) throws InvalidValueException;
+	@NonNull IntegerValue add(@NonNull IntegerValue right);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue div(@NonNull IntegerValue right) throws InvalidValueException;
+	@NonNull IntegerValue div(@NonNull IntegerValue right);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull RealValue divide(@NonNull IntegerValue right) throws InvalidValueException;
+	@NonNull RealValue divide(@NonNull IntegerValue right);
 
 	/**
 	 * @generated NOT
 	 */
-	int intValue() throws InvalidValueException;
+	int intValue();
 
 	/**
 	 * @generated NOT
@@ -56,30 +55,30 @@ public interface IntegerValue extends NumericValue
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue max(@NonNull IntegerValue right) throws InvalidValueException;
+	@NonNull IntegerValue max(@NonNull IntegerValue right);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue min(@NonNull IntegerValue right) throws InvalidValueException;
+	@NonNull IntegerValue min(@NonNull IntegerValue right);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue mod(@NonNull IntegerValue right) throws InvalidValueException;
+	@NonNull IntegerValue mod(@NonNull IntegerValue right);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue multiply(@NonNull IntegerValue right) throws InvalidValueException;
+	@NonNull IntegerValue multiply(@NonNull IntegerValue right);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue negate() throws InvalidValueException;
+	@NonNull IntegerValue negate();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue subtract(@NonNull IntegerValue right) throws InvalidValueException;
+	@NonNull IntegerValue subtract(@NonNull IntegerValue right);
 }

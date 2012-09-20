@@ -16,10 +16,10 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 
 public class ExecutorEnumerationLiteral implements DomainEnumerationLiteral
 {
@@ -33,9 +33,9 @@ public class ExecutorEnumerationLiteral implements DomainEnumerationLiteral
 		this.ordinal = ordinal;
 	}
 
-	public Object asEcoreObject(@NonNull DomainStandardLibrary standardLibrary) {
-//		throw new UnsupportedOperationException();
-		return this;
+	public EEnumLiteral asEcoreObject() {
+		throw new UnsupportedOperationException();
+//		return this;
 	}
 
 	public @NonNull DomainEnumeration getEnumeration() {
@@ -49,5 +49,10 @@ public class ExecutorEnumerationLiteral implements DomainEnumerationLiteral
 	@Override
 	public String toString() {
 		return String.valueOf(enumeration) + "::" + String.valueOf(name); //$NON-NLS-1$
+	}
+
+	public EEnumLiteral getEEnumLiteral() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

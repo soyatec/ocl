@@ -18,14 +18,12 @@ package org.eclipse.ocl.examples.library.iterator;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
-import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.impl.SetValueImpl;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
@@ -35,31 +33,28 @@ public class IsUniqueIteration extends AbstractIteration
 {
 	public static final @NonNull IsUniqueIteration INSTANCE = new IsUniqueIteration();
 
-	public @NonNull CollectionValue.Accumulator createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) {
-		ValueFactory valueFactory = evaluator.getValueFactory();
-		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
-		return valueFactory.createCollectionAccumulatorValue(standardLibrary.getSetType(accumulatorType, null, null));
+	public @NonNull SetValueImpl.Accumulator createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull TypeId accumulatorTypeId, @NonNull DomainType bodyType) {
+		return new SetValueImpl.Accumulator(TypeId.SET.getCollectedTypeId(accumulatorTypeId));
 	}
 	
 	@Override
 	protected @NonNull Object resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
-		return Boolean.TRUE;
+		return true;
 	}
 	
 	@Override
     protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
-		CollectionValue.Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
+		SetValueImpl.Accumulator accumulatorValue = (SetValueImpl.Accumulator)iterationManager.getAccumulatorValue();
 		Object bodyVal = iterationManager.evaluateBody();		
-		try {
-			if (ValuesUtil.isTrue(accumulatorValue.includes(bodyVal))) {
-				return Boolean.FALSE;		// Abort after second find
-			}
-			else {
-				accumulatorValue.add(bodyVal);
-				return null;						// Carry on after first find
-			}
-		} catch (InvalidValueException e) {
-			return iterationManager.throwInvalidEvaluation(e);
+		if (isInvalid(bodyVal)) {
+			return bodyVal; 	// Invalid body is invalid
+		}
+		else if (ValuesUtil.isTrue(accumulatorValue.includes(bodyVal))) {
+			return false;						// Abort after second find
+		}
+		else {
+			accumulatorValue.add(bodyVal);
+			return null;						// Carry on after first find
 		}
 	}
 }

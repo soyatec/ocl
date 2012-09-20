@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 
@@ -31,21 +32,21 @@ public class ForAllIteration extends AbstractIteration
 {
 	public static final @NonNull ForAllIteration INSTANCE = new ForAllIteration();
 
-	public @NonNull Object createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) {
-		return Boolean.TRUE;
+	public @NonNull Object createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull TypeId accumulatorTypeId, @NonNull DomainType bodyType) {
+		return true;
 	}
 
 	@Override
     protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
 		Object bodyVal = iterationManager.evaluateBody();		
 		if (isUndefined(bodyVal)) {
-			return iterationManager.throwInvalidEvaluation(EvaluatorMessages.UndefinedBody, "forAll"); 	// Null body is invalid //$NON-NLS-1$
+			return createInvalidValue(EvaluatorMessages.UndefinedBody, "forAll"); 	// Null body is invalid //$NON-NLS-1$
 		}
 		else if (isTrue(bodyVal)) {
 			return null;							// Carry on for nothing found
 		}
 		else {
-			return Boolean.FALSE;			// Abort after a fail
+			return false;			// Abort after a fail
 		}
 	}
 }

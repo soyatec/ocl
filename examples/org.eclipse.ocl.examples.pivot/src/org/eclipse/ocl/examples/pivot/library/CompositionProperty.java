@@ -21,11 +21,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
 
@@ -37,8 +35,7 @@ public class CompositionProperty extends AbstractProperty
 {
 	public static final @NonNull CompositionProperty INSTANCE = new CompositionProperty();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull DomainProperty property) {
 		EObject eObject = asNavigableObject(sourceValue); 
 		Object eValue;
 		EClass eClass = eObject.eClass();
@@ -58,11 +55,11 @@ public class CompositionProperty extends AbstractProperty
 			eValue = eObject.eContainer();		// FIXME this only works for single container type
 		}
 		if (eValue == null) {
-			return valueFactory.getNull();
+			return NULL_VALUE;
 		}
 		else {
 	//		EReference eContainmentFeature = eObject.eContainmentFeature();
-			return valueFactory.valueOf(eValue /*, eContainmentFeature.getEContainingClass()*/);
+			return valueOf(eValue /*, eContainmentFeature.getEContainingClass()*/);
 		}
 		// ??? Type conformance check
 	}

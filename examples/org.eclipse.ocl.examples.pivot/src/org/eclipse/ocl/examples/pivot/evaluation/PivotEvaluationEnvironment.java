@@ -25,7 +25,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -436,8 +435,4 @@ public class PivotEvaluationEnvironment extends AbstractEvaluationEnvironment {
 //    protected Object getInvalidResult() {
 //    	throw new UnsupportedOperationException(getClass().getName() + ".getInvalidResult");
 //    }
-
-	public @NonNull ValueFactory getValueFactory() {
-		return metaModelManager.getValueFactory();
-	}
 }

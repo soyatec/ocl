@@ -18,12 +18,12 @@ package org.eclipse.ocl.examples.domain.values.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
 /**
@@ -40,10 +40,6 @@ public abstract class IntegerValueImpl extends ValueImpl implements IntegerValue
 	protected EClass eStaticClass() {
 		return ValuesPackage.Literals.INTEGER_VALUE;
 	}
-
-	public IntegerValueImpl(@NonNull ValueFactory valueFactory) {
-		super(valueFactory);
-	}
 	
 	@Override
 	public @NonNull IntegerValue asIntegerValue() {
@@ -52,11 +48,11 @@ public abstract class IntegerValueImpl extends ValueImpl implements IntegerValue
 
 	@Override
 	public @NonNull RealValue asRealValue() {
-		return valueFactory.realValueOf(this);
+		return realValueOf(this);
 	}
 
 	@Override
-	public @NonNull Value asUnlimitedNaturalValue() throws InvalidValueException {
+	public @NonNull Value asUnlimitedNaturalValue() {
 		if (isUnlimitedNatural()) {
 			return this;
 		}
@@ -65,14 +61,13 @@ public abstract class IntegerValueImpl extends ValueImpl implements IntegerValue
 		}
 	}
 
-	public @NonNull DomainType getType() {
-		return isUnlimitedNatural() ? valueFactory.getStandardLibrary().getUnlimitedNaturalType() : valueFactory.getStandardLibrary().getIntegerType();
+	public @NonNull DomainType getType(@NonNull DomainStandardLibrary standardLibrary) {
+		return isUnlimitedNatural() ? standardLibrary.getUnlimitedNaturalType() : standardLibrary.getIntegerType();
 	}
 
-//	@Override
-//	public @NonNull IntegerValue isIntegerValue() {
-//		return this;
-//	}
+	public @NonNull TypeId getTypeId() {
+		return isUnlimitedNatural() ? TypeId.UNLIMITED_NATURAL : TypeId.INTEGER;
+	}
 
 	public boolean isUnlimited() {
 		return false;

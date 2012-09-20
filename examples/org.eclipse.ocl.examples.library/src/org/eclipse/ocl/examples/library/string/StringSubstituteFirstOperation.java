@@ -15,12 +15,10 @@
 package org.eclipse.ocl.examples.library.string;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * StringSubstituteFirstOperation realises the String::substituteFirst() library operation.
@@ -29,14 +27,13 @@ public class StringSubstituteFirstOperation extends AbstractTernaryOperation
 {
 	public static final @NonNull StringSubstituteFirstOperation INSTANCE = new StringSubstituteFirstOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) {
 		String sourceString = asString(sourceValue);
 		String oldSubstring = asString(firstArgumentValue);
 		String newSubstring = asString(secondArgumentValue);
 		int index = sourceString.indexOf(oldSubstring);
 		if (index < 0) {
-			return valueFactory.throwInvalidValueException(EvaluatorMessages.MissingSubstring, oldSubstring, sourceString);
+			return createInvalidValue(EvaluatorMessages.MissingSubstring, oldSubstring, sourceString);
 		}
 		else {
 			return sourceString.substring(0, index) + newSubstring + sourceString.substring(index + oldSubstring.length(), sourceString.length());

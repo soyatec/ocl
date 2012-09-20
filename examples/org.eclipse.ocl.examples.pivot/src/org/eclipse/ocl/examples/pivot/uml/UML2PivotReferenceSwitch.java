@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -170,9 +170,8 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 						int lower = umlMultiplicity.getLower();
 						boolean isOrdered = umlMultiplicity.isOrdered();
 						boolean isUnique = umlMultiplicity.isUnique();
-						ValueFactory valueFactory = metaModelManager.getValueFactory();
-						IntegerValue lowerValue = valueFactory.integerValueOf(lower);
-						IntegerValue upperValue = upper != -1 ? valueFactory.getUnlimited() : valueFactory.integerValueOf(upper);
+						IntegerValue lowerValue = ValuesUtil.integerValueOf(lower);
+						IntegerValue upperValue = upper != -1 ? ValuesUtil.UNLIMITED_VALUE : ValuesUtil.integerValueOf(upper);
 						pivotType = metaModelManager.getCollectionType(isOrdered, isUnique, pivotType, lowerValue, upperValue);
 					}
 				}

@@ -1,0 +1,81 @@
+/**
+ * <copyright>
+ *
+ * Copyright (c) 2012 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial API and implementation
+ *
+ * </copyright>
+ */
+package org.eclipse.ocl.examples.domain.ids.impl;
+
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainOperation;
+import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
+import org.eclipse.ocl.examples.domain.ids.OperationId;
+
+public abstract class UnscopedId extends AbstractTypeId
+{
+	protected final @NonNull String name;
+	protected final int hashCode;
+	
+	/**
+	 * Map from the operation hashCode to the lambda typeIds with the same hash. 
+	 */
+	private @NonNull WeakHashMapOfListOfWeakReference<Integer, DomainTypeParameters, OperationIdImpl> memberOperations =
+		new WeakHashMapOfListOfWeakReference<Integer, DomainTypeParameters, OperationIdImpl>()
+		{
+			@Override
+			protected @NonNull OperationIdImpl newTypeId(@NonNull Integer hashCode, @NonNull DomainTypeParameters typeParameters, @NonNull String name) {
+				return new OperationIdImpl(UnscopedId.this, name, typeParameters, hashCode);
+			}		
+		};
+
+	/**
+	 * Map from a type parameter name to the corresponding TypeParameterId. 
+	 *
+	private @NonNull WeakHashMapOfWeakReference<String, TypeTemplateParameterId> typeParameters = new WeakHashMapOfWeakReference<String, TypeTemplateParameterId>()
+		{
+			@Override
+			protected @NonNull TypeTemplateParameterId newTypeId(@NonNull String name) {
+				return new TypeParameterIdImpl(UnscopedId.this, name);
+			}
+		}; */
+
+	UnscopedId(@NonNull String name) {
+		this.name = name;
+		this.hashCode = name.hashCode();
+	}
+
+	public @NonNull String getDisplayName() {
+		return name;
+	}
+
+	public @NonNull String getName() {
+		return name;
+	}
+
+	@Override
+	public @NonNull OperationId getOperationId(@NonNull DomainOperation anOperation) {
+		String name = anOperation.getName();
+		assert name != null;
+		DomainTypeParameters typeParameters = anOperation.getTypeParameters();
+		int hashCode = 47 * hashCode() + 37 * name.hashCode() + typeParameters.hashCode();
+		return memberOperations.getTypeId(hashCode, typeParameters, name);
+	}
+
+//    @Override
+//	public @NonNull TypeTemplateParameterId getTypeParameterId(final @NonNull String name) {
+//    	return typeParameters.getElementId(name);
+//    }
+
+	@Override
+	public final int hashCode() {
+		return hashCode;
+	}
+}

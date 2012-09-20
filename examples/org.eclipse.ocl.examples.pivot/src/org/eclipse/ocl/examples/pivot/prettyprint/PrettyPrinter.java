@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Iteration;
@@ -64,7 +65,7 @@ public class PrettyPrinter
 	@SuppressWarnings("null")
 	public static @NonNull List<String> reservedNameList = Arrays.asList("and", "else", "endif", "false", "if", "implies", "in", "invalid", "let", "not", "null", "or", "self", "then", "true", "xor");
 	@SuppressWarnings("null")
-	public static @NonNull List<String> restrictedNameList = Arrays.asList("Bag", "Boolean", "Collection", "Integer", "OclAny", "OclInvalid", "OclVoid", "OrderedSet", "Real", "Sequence", "Set", "String", "Tuple", "UnlimitedNatural");
+	public static @NonNull List<String> restrictedNameList = Arrays.asList("Bag", TypeId.BOOLEAN_NAME, "Collection", TypeId.INTEGER_NAME, "OclAny", "OclInvalid", "OclVoid", "OrderedSet", TypeId.REAL_NAME, "Sequence", "Set", TypeId.STRING_NAME, "Tuple", TypeId.UNLIMITED_NATURAL_NAME);
 
 	public static interface Factory
 	{

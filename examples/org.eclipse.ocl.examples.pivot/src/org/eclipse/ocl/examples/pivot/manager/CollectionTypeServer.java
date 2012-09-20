@@ -30,7 +30,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
@@ -234,12 +234,11 @@ public class CollectionTypeServer extends ExtensibleTypeServer
 
 	public synchronized @NonNull Type getSpecializedType(@NonNull Type elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
 		assert getPivotType() instanceof CollectionType;
-		ValueFactory valueFactory = packageManager.getMetaModelManager().getValueFactory();
 		if (lower == null) {
-			lower = valueFactory.getZero();
+			lower = ValuesUtil.ZERO_VALUE;
 		}
 		if (upper == null) {
-			upper = valueFactory.getUnlimited();
+			upper = ValuesUtil.UNLIMITED_VALUE;
 		}
 		TemplateArguments templateArguments = new TemplateArguments(elementType, lower, upper);
 		Map<TemplateArguments, WeakReference<Type>> specializations2 = specializations;

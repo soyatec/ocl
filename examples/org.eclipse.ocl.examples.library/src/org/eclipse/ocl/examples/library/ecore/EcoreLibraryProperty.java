@@ -20,11 +20,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /** 
  * An EcoreLibraryProperty provides the LibraryProperty to implement a
@@ -39,11 +38,10 @@ public class EcoreLibraryProperty extends AbstractProperty
 		this.eFeature = eFeature;
 	}
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull DomainProperty property) {
 		EObject eObject = asNavigableObject(sourceValue);
 		Object eValue = eObject.eGet(eFeature);
-		return eValue != null ? valueFactory.valueOf(eValue, eFeature) : valueFactory.getNull();
+		return eValue != null ? ValuesUtil.valueOf(eValue, eFeature, returnTypeId) : NULL_VALUE;
 	}
 	
 	public @NonNull EStructuralFeature getEFeature() {

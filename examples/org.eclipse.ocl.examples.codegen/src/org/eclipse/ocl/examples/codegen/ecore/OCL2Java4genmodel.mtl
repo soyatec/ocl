@@ -69,10 +69,10 @@
 [let constants : String = expInOcl.gatherSpecificationConstants(genPackage, pType)]
 [let arity : OCLInteger = expInOcl.parameterVariable->size()]
 try {
-	final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, null, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
+	final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
 	[expInOcl.emitConstants(constants)/]
 	final @NonNull <%DomainType%> returnType = [expInOcl.type.symbolName(expInOcl)/];
-	final @NonNull Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, returnType, self);
+	final @NonNull Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, returnType.getTypeId(), this);
 	final boolean resultIsNull = <%ValuesUtil%>.isNull(result);
 	if (!resultIsNull && <%ValuesUtil%>.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 		return true;
@@ -80,7 +80,7 @@ try {
 	if (diagnostics != null) {
 		int severity = resultIsNull ? <%org.eclipse.emf.common.util.Diagnostic%>.ERROR : <%org.eclipse.emf.common.util.Diagnostic%>.WARNING;
 [if (expInOcl.messageExpression->notEmpty())]
-		final Object messageValue = <%[className/]%>.[constraintName/].Message.INSTANCE.evaluate(evaluator, returnType, self);
+		final Object messageValue = <%[className/]%>.[constraintName/].Message.INSTANCE.evaluate(evaluator, returnType.getTypeId(), this);
 		String message;
 		if (messageValue != null) {
 			message = messageValue.asString();
@@ -133,17 +133,10 @@ return false; // FIXME errors in OCL definition of [pRule.prettyPrintName()/]
 [expInOcl.prettyPrint().trim()/]
 */
 try {
-	final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, [if (pRule.isCallable)]context[else]null[/if], <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
-	[expInOcl.emitConstants(constants)/]
-	final @NonNull <%DomainType%> returnType = [expInOcl.type.symbolName(expInOcl)/];
-	final @NonNull Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, returnType, self[for (pParameter : Parameter | pOperation.ownedParameter)], valueFactory.valueOf([pParameter.name/])[/for]);
-[if (ecoreReturnType.index('<') > 0)]
-	@SuppressWarnings("unchecked")
-	[ecoreReturnType/] ecoreResult = ([ecoreReturnType/]) <%ValuesUtil%>.asEcoreObject(result);
-	return ecoreResult;
-[else]
-	return ([ecoreReturnType/]) <%ValuesUtil%>.asEcoreObject(result);
-[/if]
+	final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
+	[expInOcl.emitConstants(constants)/]final @NonNull <%TypeId%> returnTypeId = [expInOcl.type.symbolName(expInOcl)/].getTypeId();
+	final @NonNull Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, returnTypeId, this[for (pParameter : Parameter | pOperation.ownedParameter)], <%ValuesUtil%>.valueOf([pParameter.name/])[/for]);
+	return evaluator.asEcoreObject(([ecoreReturnType/])null, result);
 } catch (<%InvalidValueException%> e) {
 	throw new <%org.eclipse.emf.common.util.WrappedException%>("Failed to evaluate [className/]", e);
 }[/let][else]
@@ -177,17 +170,10 @@ return null; // FIXME errors in OCL definition of [pOperation.prettyPrintName()/
 [expInOcl.prettyPrint().trim()/]
 */
 try {
-	final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, null, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
-	[expInOcl.emitConstants(constants)/]
-	final @NonNull <%DomainType%> returnType = [expInOcl.type.symbolName(expInOcl)/];
-	final @NonNull Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, returnType, self, [pProperty.emitQualifiedLiteralName(genPackage)/]);
-[if (ecoreReturnType.index('<') > 0)]
-	@SuppressWarnings("unchecked")
-	[ecoreReturnType/] ecoreResult = ([ecoreReturnType/]) <%ValuesUtil%>.asEcoreObject(result);
-	return ecoreResult;
-[else]
-	return ([ecoreReturnType/]) <%ValuesUtil%>.asEcoreObject(result);
-[/if]
+	final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
+	[expInOcl.emitConstants(constants)/]final @NonNull <%TypeId%> returnTypeId = [expInOcl.type.symbolName(expInOcl)/].getTypeId();
+	final @NonNull Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, returnTypeId, this, [pProperty.emitQualifiedLiteralName(genPackage)/]);
+	return evaluator.asEcoreObject(([ecoreReturnType/])null, result);
 } catch (<%InvalidValueException%> e) {
 	throw new <%org.eclipse.emf.common.util.WrappedException%>("Failed to evaluate [className/]", e);
 }[/let][else]
@@ -202,10 +188,7 @@ return null; // FIXME errors in OCL definition of [pProperty.prettyPrintName()/]
 [/if]
 [/if][/let][/let][/let][/let][/template]
 
-
 [template public gatherSpecificationConstants(expInOcl : ExpressionInOCL, genPackage : GenPackage, pType : Type)]
-final @NonNull <%ValueFactory%> valueFactory = evaluator.getValueFactory();
-final @NonNull Object [defineSymbolName(expInOcl.contextVariable, 'self')/] = valueFactory.valueOf(this);
 [expInOcl.type.gatherConstants(genPackage, expInOcl)/]
 [/template]
 

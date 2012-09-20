@@ -17,9 +17,8 @@
 package org.eclipse.ocl.examples.library.collection;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 
@@ -30,7 +29,7 @@ public class OrderedCollectionIndexOfOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull OrderedCollectionIndexOfOperation INSTANCE = new OrderedCollectionIndexOfOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object left, @NonNull Object right) {
 		SequenceValue leftOrderedCollectionValue = asSequenceValue(left);
 		return leftOrderedCollectionValue.indexOf(right);
 	}

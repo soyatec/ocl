@@ -18,8 +18,8 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
-
 import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicDiagnostic;
@@ -37,7 +37,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
@@ -57,8 +56,8 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.bodies.IterateExpBodies;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
-import org.eclipse.osgi.util.NLS;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.osgi.util.NLS;
 
 /**
  * <!-- begin-user-doc -->
@@ -177,13 +176,11 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		type = result.type
 		*/
 		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull Object self = valueFactory.valueOf(this);
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
 			final @NonNull DomainType returnType = T_Boolean;
-			final @NonNull Object result = IterateExpBodies._invariant_TypeIsResultType.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull Object result = IterateExpBodies._invariant_TypeIsResultType.INSTANCE.evaluate(evaluator, returnType.getTypeId(), this);
 			final boolean resultIsNull = ValuesUtil.isNull(result);
 			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -212,13 +209,11 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		body.type.conformsTo(result.type)
 		*/
 		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull Object self = valueFactory.valueOf(this);
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
 			final @NonNull DomainType returnType = T_Boolean;
-			final @NonNull Object result = IterateExpBodies._invariant_BodyTypeConformsToResultType.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull Object result = IterateExpBodies._invariant_BodyTypeConformsToResultType.INSTANCE.evaluate(evaluator, returnType.getTypeId(), this);
 			final boolean resultIsNull = ValuesUtil.isNull(result);
 			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -247,13 +242,11 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		self.result.initExpression->size() = 1
 		*/
 		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull Object self = valueFactory.valueOf(this);
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
 			final @NonNull DomainType returnType = T_Boolean;
-			final @NonNull Object result = IterateExpBodies._invariant_OneInitializer.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull Object result = IterateExpBodies._invariant_OneInitializer.INSTANCE.evaluate(evaluator, returnType.getTypeId(), this);
 			final boolean resultIsNull = ValuesUtil.isNull(result);
 			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;

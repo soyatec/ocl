@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.BuiltInTypeId;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -275,6 +276,10 @@ public class PivotQueries
 			return false;
 		}
 		return parameters.get(0).getType() instanceof SelfType;
+	}
+	
+	public static @NonNull Boolean isBuiltInType(@NonNull Type type) {
+		return type.getTypeId() instanceof BuiltInTypeId;
 	}
 	
 	public static @NonNull String prettyPrint(@NonNull Element element) {

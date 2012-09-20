@@ -56,13 +56,14 @@ import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
+import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
-import org.eclipse.ocl.examples.domain.types.InvalidTypeImpl;
+import org.eclipse.ocl.examples.domain.types.DomainInvalidTypeImpl;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Comment;
@@ -96,6 +97,7 @@ import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.UnspecifiedType;
 import org.eclipse.ocl.examples.pivot.VoidType;
 import org.eclipse.ocl.examples.pivot.context.ClassContext;
@@ -114,7 +116,6 @@ import org.eclipse.ocl.examples.pivot.utilities.IllegalLibraryException;
 import org.eclipse.ocl.examples.pivot.utilities.PivotResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotResourceFactoryImpl;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.pivot.values.PivotValueFactory;
 import org.eclipse.osgi.util.NLS;
 
 import com.google.common.collect.Iterables;
@@ -808,14 +809,13 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		if ((firstElementType == null) || (secondElementType == null)) {
 			return false;
 		}
-		ValueFactory valueFactory = getValueFactory();
-		IntegerValue firstLower = firstType.getLowerValue(valueFactory);
-		IntegerValue secondLower = secondType.getLowerValue(valueFactory);
+		IntegerValue firstLower = firstType.getLowerValue();
+		IntegerValue secondLower = secondType.getLowerValue();
 		if (firstLower.compareTo(secondLower) > 0) {
 			return false;
 		}
-		IntegerValue firstUpper = firstType.getUpperValue(valueFactory);
-		IntegerValue secondUpper = secondType.getUpperValue(valueFactory);
+		IntegerValue firstUpper = firstType.getUpperValue();
+		IntegerValue secondUpper = secondType.getUpperValue();
 		if (firstUpper.compareTo(secondUpper) < 0) {
 			return false;
 		}
@@ -843,7 +843,10 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 				}
 //			}
 		}
-		if (firstElementType instanceof UnspecifiedType) {
+		if (firstElementType == secondElementType) {
+			return true;
+		}
+		else if (firstElementType instanceof UnspecifiedType) {
 			Type lowerBound = ((UnspecifiedType)firstElementType).getLowerBound();
 			if ((lowerBound != null) && conformsTo(secondElementType, lowerBound, bindings)) {
 				((UnspecifiedType)firstElementType).setLowerBound(secondElementType);
@@ -965,7 +968,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			return false;
 		}
 		for (Property actualProperty : actualProperties) {
-			Property requiredProperty = PivotUtil.getNamedElement(requiredProperties, actualProperty.getName());
+			Property requiredProperty = DomainUtil.getNamedElement(requiredProperties, actualProperty.getName());
 			if (requiredProperty == null) {
 				return false;
 			}
@@ -1057,11 +1060,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		unspecifiedType.setUpperBound(getOclVoidType());
 		addOrphanClass(unspecifiedType);
 		return unspecifiedType;
-	}
-
-	@Override
-	protected @NonNull ValueFactory createValueFactory() {
-		return new PivotValueFactory(this);
 	}
 
 	@Override
@@ -1274,7 +1272,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 	
 	@Override
-	public @NonNull CollectionType getCollectionType(@NonNull DomainCollectionType containerType, @NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
+	public @NonNull CollectionType getCollectionType(@NonNull DomainType containerType, @NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
 		return getCollectionType((CollectionType)getType(containerType), getType(elementType), lower, upper);
 	}
 
@@ -1353,6 +1351,10 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 
 	public @NonNull String getDefaultStandardLibraryURI() {
 		return defaultStandardLibraryURI;
+	}
+
+	public @NonNull DomainType getDynamicTypeOf(@NonNull Object value) {
+		return getIdResolver().getDynamicTypeOf(value);
 	}
 
 	public ResourceSet getExternalResourceSet() {
@@ -1608,15 +1610,46 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	@Override
 	public DomainType getMetaType(@NonNull DomainType instanceType) {
 		if (instanceType instanceof PrimitiveType) {
-			return getPivotType("PrimitiveType");
+			return getPivotType(TypeId.PRIMITIVE_TYPE_NAME);
 		}
 //		throw new UnsupportedOperationException();
 		return getMetaclass(instanceType);
 	}
 
+	@Override
+	public DomainPackage getNestedPackage(@NonNull DomainPackage packageServer, @NonNull String name) {
+		return ((PackageServer)packageServer).getMemberPackage(name);
+	}
+
+	@Override
+	public DomainType getNestedType(@NonNull DomainPackage packageServer, @NonNull String name) {
+		return ((PackageServer)packageServer).getMemberType(name);
+	}
+
+	@Override
+	public DomainPackage getNsURIPackage(@NonNull String nsURI) {
+		return packageManager.getPackageByURI(nsURI);
+	}
+
 	public @Nullable DomainType getOclType(@NonNull String typeName) {
 		Type pivotType = getPivotType(typeName);
 		return pivotType != null ? getInheritance(pivotType) : null;
+	}
+
+	@Override
+	public @Nullable DomainElement getOperationTemplateParameter(@NonNull DomainOperation anOperation, int index) {
+		if (anOperation instanceof Operation) {
+			anOperation = PivotUtil.getUnspecializedTemplateableElement((Operation)anOperation);
+		}
+		TypeTemplateParameter templateParameter = (TypeTemplateParameter) anOperation.getTypeParameters().get(index);
+		if (templateParameter == null) {
+			throw new UnsupportedOperationException();
+		}
+		ParameterableElement parameteredElement = templateParameter.getParameteredElement();
+		if (!(parameteredElement instanceof DomainType)) {
+			throw new UnsupportedOperationException();
+		}
+		return (DomainType) parameteredElement;
 	}
 
 	public @NonNull CollectionType getOrderedSetType(@NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
@@ -1745,7 +1778,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 				return null;
 			}
 		}
-		return (Type) PivotUtil.getNamedElement(pivotMetaModel.getOwnedType(), className);		// FIXME bad cast
+		return (Type) DomainUtil.getNamedElement(pivotMetaModel.getOwnedType(), className);		// FIXME bad cast
 	}	
 
 	@SuppressWarnings("null")
@@ -2068,6 +2101,17 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 //		return specializedType;
 //	}
 	
+	public @NonNull DomainType getStaticTypeOf(@NonNull Object value) {
+		return getIdResolver().getStaticTypeOf(value);
+	}
+
+	public @NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Object... values) {
+		return getIdResolver().getStaticTypeOf(value, values);
+	}
+ 
+	public @NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Iterable<?> values) {
+		return getIdResolver().getStaticTypeOf(value, values);
+	}
 	
 	public Iterable<Type> getSuperClasses(Type pivotType) {
 		if ((pivotType == null) || (pivotType.getOwningTemplateParameter() != null)) {
@@ -2133,6 +2177,11 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return tupleManager.getTupleType(tupleType, bindings);
 	}
 
+	public @NonNull TupleType getTupleType(@NonNull TupleTypeId typeId) {
+		TupleTypeManager tupleManager = getTupleManager();
+		return tupleManager.getTupleType(typeId);
+	}
+
 	@Override
 	public @NonNull DomainType getType(@NonNull DomainElement element) {
 		if (element instanceof EObject) {
@@ -2165,7 +2214,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(eResource, this);
 		Type pivotType = ecore2Pivot.getCreated(Type.class, eClassifier);
 		if (pivotType == null) {
-			return new InvalidTypeImpl(this, "No object creatyed by Ecore2Pivot");
+			return new DomainInvalidTypeImpl(this, "No object created by Ecore2Pivot");
 		}
 		return getPrimaryType(pivotType);
 	}
@@ -2175,6 +2224,23 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			getPivotMetaModel();
 		}
 		return packageManager.getTypeServer(pivotType);
+	}
+
+	@Override
+	public @Nullable
+	DomainType getTypeTemplateParameter(@NonNull DomainType aType, int index) {
+		if (aType instanceof Type) {
+			aType = PivotUtil.getUnspecializedTemplateableElement((Type)aType);
+		}
+		TypeTemplateParameter templateParameter = (TypeTemplateParameter) aType.getTypeParameters().get(index);
+		if (templateParameter == null) {
+			throw new UnsupportedOperationException();
+		}
+		ParameterableElement parameteredElement = templateParameter.getParameteredElement();
+		if (!(parameteredElement instanceof DomainType)) {
+			throw new UnsupportedOperationException();
+		}
+		return (DomainType) parameteredElement;
 	}
 
 //	public void installAs(@NonNull String nsURI, @NonNull EcoreExecutorPackage tablesPackage) {
@@ -2437,7 +2503,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	 */
 	protected void loadPivotMetaModel(@NonNull org.eclipse.ocl.examples.pivot.Package pivotLibrary) {
 		for (DomainPackage libPackage : getPartialPackages(pivotLibrary, false)) {
-			if (PivotUtil.getNamedElement(libPackage.getOwnedType(), PivotPackage.Literals.ELEMENT.getName()) != null) {
+			if (DomainUtil.getNamedElement(libPackage.getOwnedType(), PivotPackage.Literals.ELEMENT.getName()) != null) {
 				setPivotMetaModel(libPackage);	// Custom meta-model
 				return;
 			}

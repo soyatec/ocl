@@ -20,10 +20,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.integer.IntegerPlusOperation;
 import org.eclipse.ocl.examples.library.real.RealPlusOperation;
 
@@ -34,17 +35,27 @@ public class CollectionSumOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull CollectionSumOperation INSTANCE = new CollectionSumOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal) {
 		CollectionValue collectionValue = asCollectionValue(sourceVal);
 		// FIXME Bug 301351 Look for user-defined zero
 //			resultType.getZero();
-		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
+		DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
+		DomainType returnType = standardLibrary.getType(returnTypeId);
+		LibraryBinaryOperation binaryOperation;
+		Object result;
 		if (returnType.conformsTo(standardLibrary, standardLibrary.getIntegerType())) {
-			return collectionValue.sum(evaluator, returnType, IntegerPlusOperation.INSTANCE, valueFactory.integerValueOf(0));
+			result = ValuesUtil.integerValueOf(0);
+			binaryOperation = IntegerPlusOperation.INSTANCE;
 		}
 		else {
-			return collectionValue.sum(evaluator, returnType, RealPlusOperation.INSTANCE, valueFactory.realValueOf(0.0));
+			result = ValuesUtil.realValueOf(0.0);
+			binaryOperation = RealPlusOperation.INSTANCE;
 		}
+        for (Object element : collectionValue.iterable()) {
+        	if (element != null) {
+        		result = binaryOperation.evaluate(evaluator, returnTypeId, result, element);
+        	}
+        }
+        return result;
 	}
 }

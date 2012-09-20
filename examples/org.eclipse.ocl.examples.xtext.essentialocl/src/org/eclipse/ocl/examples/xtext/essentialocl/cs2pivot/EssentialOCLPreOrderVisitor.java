@@ -21,7 +21,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -96,10 +96,9 @@ public class EssentialOCLPreOrderVisitor extends AbstractEssentialOCLPreOrderVis
 					IntegerValue upperValue;
 					MultiplicityCS csMultiplicity = csElement.getMultiplicity();
 					if (csMultiplicity != null) {
-						ValueFactory valueFactory = metaModelManager.getValueFactory();
-						lowerValue = valueFactory.integerValueOf(csMultiplicity.getLower());
+						lowerValue = ValuesUtil.integerValueOf(csMultiplicity.getLower());
 						int upper = csMultiplicity.getUpper();
-						upperValue = upper != -1 ? valueFactory.integerValueOf(upper) : valueFactory.getUnlimited();
+						upperValue = upper != -1 ? ValuesUtil.integerValueOf(upper) : ValuesUtil.UNLIMITED_VALUE;
 					}
 					else {
 						lowerValue = null;

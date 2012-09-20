@@ -265,7 +265,6 @@ public class DelegatesTest extends PivotTestSuite
 			delegateDomain = adapter.loadDelegateDomain(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
 		}
 		metaModelManager = ((OCLDelegateDomain)delegateDomain).getOCL().getMetaModelManager();
-		valueFactory = metaModelManager.getValueFactory();
 	}
 
 	protected void initModel(String testModelName) {
@@ -1252,7 +1251,7 @@ public class DelegatesTest extends PivotTestSuite
 	}
 
 	protected DomainType getType(EObject eObject) {
-		return valueFactory.typeOf(eObject);
+		return metaModelManager.getStaticTypeOf(eObject);
 	}
 
 	public void getWithException(EObject eObject, String featureName, String expectedMessage) {

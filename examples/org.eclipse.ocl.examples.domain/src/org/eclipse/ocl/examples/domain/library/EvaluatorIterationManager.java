@@ -24,10 +24,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluationEnvironment;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.osgi.util.NLS;
 
 public abstract class EvaluatorIterationManager extends AbstractIterationManager
 {
@@ -132,11 +129,6 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 
 	public @NonNull DomainEvaluationEnvironment getEvaluationEnvironment() {
 		return evaluator.getEvaluationEnvironment();
-	}
-
-	public @NonNull NullValue throwInvalidEvaluation(String message, Object... bindings) throws InvalidEvaluationException {
-		String boundMessage = NLS.bind(message, bindings);
-		throw new InvalidEvaluationException(getEvaluationEnvironment(), boundMessage, null, null, null);
 	}
 
 	@Override

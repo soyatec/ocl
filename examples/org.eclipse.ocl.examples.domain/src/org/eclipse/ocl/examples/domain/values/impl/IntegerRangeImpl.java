@@ -25,12 +25,12 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * @generated NOT
  */
-class IntegerRangeImpl extends AbstractList<Value> implements IntegerRange
+public class IntegerRangeImpl extends AbstractList<Value> implements IntegerRange
 {
 	// local iterator class that provides
 	// hasNext() and next() methods appropriate
@@ -59,7 +59,7 @@ class IntegerRangeImpl extends AbstractList<Value> implements IntegerRange
 			}
 			else if (curr.compareTo(last) < 0) {
 				try {
-					curr = curr.add(getValueFactory().getOne());
+					curr = curr.add(ValuesUtil.ONE_VALUE);
 				} catch (InvalidValueException e) {
 					throw new NoSuchElementException();
 				}
@@ -85,16 +85,16 @@ class IntegerRangeImpl extends AbstractList<Value> implements IntegerRange
 	protected final @NonNull IntegerValue fullSize;		// zero if empty
 	protected final Integer size;						// null if fullSize not an Integer
 	
-	public IntegerRangeImpl(@NonNull IntegerValue first, @NonNull IntegerValue last) throws InvalidValueException {
+	public IntegerRangeImpl(@NonNull IntegerValue first, @NonNull IntegerValue last) {
 		IntegerValue sizeMinusOne = last.subtract(first);
 		this.first = first;
 		this.last = last;
 		if (sizeMinusOne.signum() < 0) {
-			this.fullSize = getValueFactory().getZero();
+			this.fullSize = ValuesUtil.ZERO_VALUE;
 			this.size = 0;
 		}
 		else {
-			this.fullSize = sizeMinusOne.add(getValueFactory().getOne());
+			this.fullSize = sizeMinusOne.add(ValuesUtil.ONE_VALUE);
 			this.size = fullSize.asInteger();
 		}
 	}
@@ -115,7 +115,7 @@ class IntegerRangeImpl extends AbstractList<Value> implements IntegerRange
 //			getValueFactory().throwInvalidValueException("Out of range index {0} for range 0..{1}", index, size);
 		}
 		try {
-			return first.add(getValueFactory().integerValueOf(index));
+			return first.add(ValuesUtil.integerValueOf(index));
 		} catch (InvalidValueException e) {
 			throw new NoSuchElementException();
 		}
@@ -133,9 +133,9 @@ class IntegerRangeImpl extends AbstractList<Value> implements IntegerRange
 		return fullSize;
 	}
 
-	public @NonNull ValueFactory getValueFactory() {
-		return first.getValueFactory();
-	}
+//	public @NonNull ValueFactory getValueFactory() {
+//		return first.getValueFactory();
+//	}
 
     @Override
 	public @NonNull Iterator<Value> iterator() {

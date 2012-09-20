@@ -18,8 +18,8 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
-
 import java.util.Map;
+
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -40,8 +40,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
@@ -56,8 +56,8 @@ import org.eclipse.ocl.examples.pivot.bodies.ElementBodies;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.ocl.examples.pivot.utilities.PivotObjectImpl;
-import org.eclipse.osgi.util.NLS;
 import org.eclipse.ocl.examples.pivot.utilities.ToStringVisitor;
+import org.eclipse.osgi.util.NLS;
 
 /**
  * <!-- begin-user-doc -->
@@ -176,18 +176,13 @@ public abstract class ElementImpl
 		oclContents()
 		*/
 		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull Object self = valueFactory.valueOf(this);
-			final @NonNull DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 			final @NonNull ExecutorType T_OclElement = OCLstdlibTables.Types._OclElement;
 			final @NonNull DomainCollectionType T_Set_OclElement_ = standardLibrary.getSetType(T_OclElement, null, null);
-			
-			final @NonNull DomainType returnType = T_Set_OclElement_;
-			final @NonNull Object result = ElementBodies._allOwnedElements_body_.INSTANCE.evaluate(evaluator, returnType, self);
-			@SuppressWarnings("unchecked")
-			EList<Element> ecoreResult = (EList<Element>) ValuesUtil.asEcoreObject(result);
-			return ecoreResult;
+			final @NonNull TypeId returnTypeId = T_Set_OclElement_.getTypeId();
+			final @NonNull Object result = ElementBodies._allOwnedElements_body_.INSTANCE.evaluate(evaluator, returnTypeId, this);
+			return evaluator.asEcoreObject((EList<Element>)null, result);
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.ElementBodies", e);
 		}
@@ -205,14 +200,11 @@ public abstract class ElementImpl
 		null
 		*/
 		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull Object self = valueFactory.valueOf(this);
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 			final @NonNull ExecutorType T_OclVoid = OCLstdlibTables.Types._OclVoid;
-			
-			final @NonNull DomainType returnType = T_OclVoid;
-			final @NonNull Object result = ElementBodies._getValue_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(stereotype), valueFactory.valueOf(propertyName));
-			return (Element) ValuesUtil.asEcoreObject(result);
+			final @NonNull TypeId returnTypeId = T_OclVoid.getTypeId();
+			final @NonNull Object result = ElementBodies._getValue_body_.INSTANCE.evaluate(evaluator, returnTypeId, this, ValuesUtil.valueOf(stereotype), ValuesUtil.valueOf(propertyName));
+			return evaluator.asEcoreObject((Element)null, result);
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.ElementBodies", e);
 		}
@@ -230,13 +222,11 @@ public abstract class ElementImpl
 		not allOwnedElements()->includes(self)
 		*/
 		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull Object self = valueFactory.valueOf(this);
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
 			final @NonNull DomainType returnType = T_Boolean;
-			final @NonNull Object result = ElementBodies._invariant_not_own_self.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull Object result = ElementBodies._invariant_not_own_self.INSTANCE.evaluate(evaluator, returnType.getTypeId(), this);
 			final boolean resultIsNull = ValuesUtil.isNull(result);
 			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;

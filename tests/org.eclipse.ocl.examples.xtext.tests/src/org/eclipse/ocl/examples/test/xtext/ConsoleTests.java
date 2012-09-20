@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Root;
@@ -36,7 +37,6 @@ import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 import org.eclipse.ocl.examples.pivot.tests.PivotTestSuite;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.PivotResource;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.console.ColorManager;
 import org.eclipse.ocl.examples.xtext.console.OCLConsole;
 import org.eclipse.ocl.examples.xtext.console.OCLConsolePage;
@@ -198,16 +198,16 @@ public class ConsoleTests extends PivotTestSuite
         Resource umlResource = resourceSet.getResource(testModelURI, true);
         pivotResource = ocl.uml2pivot(umlResource);
         Root root = (Root) pivotResource.getContents().get(0);
-        org.eclipse.ocl.examples.pivot.Package modelPackage = PivotUtil.getNamedElement(root.getNestedPackage(), "Model");
-        englishClass = PivotUtil.getNamedElement(modelPackage.getOwnedType(), "EnglishClass");
-        frenchClass = PivotUtil.getNamedElement(modelPackage.getOwnedType(), "FrenchClass");
-        germanClass = PivotUtil.getNamedElement(modelPackage.getOwnedType(), "GermanClass");
-        plainClass = PivotUtil.getNamedElement(modelPackage.getOwnedType(), "PlainClass");
+        org.eclipse.ocl.examples.pivot.Package modelPackage = DomainUtil.getNamedElement(root.getNestedPackage(), "Model");
+        englishClass = DomainUtil.getNamedElement(modelPackage.getOwnedType(), "EnglishClass");
+        frenchClass = DomainUtil.getNamedElement(modelPackage.getOwnedType(), "FrenchClass");
+        germanClass = DomainUtil.getNamedElement(modelPackage.getOwnedType(), "GermanClass");
+        plainClass = DomainUtil.getNamedElement(modelPackage.getOwnedType(), "PlainClass");
         PackageServer profile = metaModelManager.getPackageManager().getPackageByURI("http://www.eclipse.org/ocl/examples/Internationalized");
         inEnglishStereotype = profile.getMemberType("InEnglish");
         inFrenchStereotype = profile.getMemberType("InFrench");
         inGermanStereotype = profile.getMemberType("InGerman");
-        englishClassInEnglish = PivotUtil.getNamedElement(englishClass.getExtension(), "EnglishClass$InEnglish");
+        englishClassInEnglish = DomainUtil.getNamedElement(englishClass.getExtension(), "EnglishClass$InEnglish");
     }
 
 /*	public void testConsole_Ecore() throws Exception {

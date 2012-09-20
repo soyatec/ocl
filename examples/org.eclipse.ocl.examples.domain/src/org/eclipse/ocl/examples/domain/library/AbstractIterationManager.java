@@ -17,12 +17,10 @@
 package org.eclipse.ocl.examples.domain.library;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 public abstract class AbstractIterationManager implements DomainIterationManager
 {
@@ -39,16 +37,16 @@ public abstract class AbstractIterationManager implements DomainIterationManager
 	public @NonNull Object get() {
 		throw new UnsupportedOperationException();	// Only required for single iterator managers
 	}
+	
+	public @NonNull DomainEvaluator getEvaluator() {
+		return evaluator;
+	}
 
-	public @NonNull ValueFactory getValueFactory() {
-		return evaluator.getValueFactory();
+	public @NonNull DomainStandardLibrary getStandardLibrary() {
+		return evaluator.getStandardLibrary();
 	}
 
 	public boolean isOuterIteration() {
 		throw new UnsupportedOperationException();	// Only required for single iterator managers
-	}
-
-	public @NonNull NullValue throwInvalidEvaluation(InvalidValueException e) {
-		return evaluator.throwInvalidEvaluation(e);
 	}
 }

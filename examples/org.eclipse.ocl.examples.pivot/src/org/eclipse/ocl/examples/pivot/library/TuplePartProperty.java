@@ -18,25 +18,25 @@ package org.eclipse.ocl.examples.pivot.library;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 
 public class TuplePartProperty extends AbstractProperty
 {
 	public static final @NonNull LibraryFeature INSTANCE = new TuplePartProperty();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull DomainProperty property) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull DomainProperty property) {
 		TupleValue tupleValue = asTupleValue(sourceValue);
 		Object resultValue = tupleValue.getValue(property);
 		if (resultValue != null) {
 			return resultValue;		// null is a static type error so no need to diagnose dynamically
 		}
 		else {
-			return evaluator.getValueFactory().throwInvalidValueException("part '" + property + "' is not a part of '" + sourceValue);
+			return createInvalidValue(DomainUtil.bind("part '" + property + "' is not a part of '" + sourceValue));
 		}
 	}
 }

@@ -17,7 +17,7 @@
 package org.eclipse.ocl.examples.domain.elements;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.typeids.Typeid;
+import org.eclipse.ocl.examples.domain.ids.PackageId;
 
 public interface DomainPackage extends DomainNamespace
 {
@@ -26,5 +26,5 @@ public interface DomainPackage extends DomainNamespace
 	/*@Nullable*/ String getNsPrefix();
 	/*@Nullable*/ String getNsURI();
 	/*@NonNull*/ Iterable<? extends DomainType> getOwnedType();
-	@NonNull Typeid getTypeid();
+	@NonNull PackageId getPackageId();
 }

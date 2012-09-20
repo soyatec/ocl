@@ -17,9 +17,7 @@
 package org.eclipse.ocl.examples.pivot;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 
 /**
@@ -127,9 +125,9 @@ public interface CollectionType
 	 */
 	void setUpper(Number value);
 
-	@NonNull IntegerValue getLowerValue(@NonNull ValueFactory valueFactory);
-	@NonNull IntegerValue getUpperValue(@NonNull ValueFactory valueFactory);
+	@NonNull IntegerValue getLowerValue();
+	@NonNull IntegerValue getUpperValue();
 
-	void setLowerValue(@NonNull IntegerValue lower) throws InvalidValueException;
-	void setUpperValue(@NonNull IntegerValue upper) throws InvalidValueException;
+	void setLowerValue(@NonNull IntegerValue lower);
+	void setUpperValue(@NonNull IntegerValue upper);
 } // CollectionType

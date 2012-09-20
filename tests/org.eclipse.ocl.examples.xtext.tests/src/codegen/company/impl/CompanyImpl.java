@@ -43,9 +43,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
@@ -185,14 +184,11 @@ public class CompanyImpl extends EObjectImpl implements Company {
 		  table->any(range->includes(employees->size())).size
 		*/
 		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, CodegencompanyTables.LIBRARY);
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull Object self = valueFactory.valueOf(this);
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
 			final @NonNull ExecutorType T_company__CompanySizeKind = CodegencompanyTables.Types._CompanySizeKind;
-			
-			final @NonNull DomainType returnType = T_company__CompanySizeKind;
-			final @NonNull Object result = CompanyBodies._size_derivation_.INSTANCE.evaluate(evaluator, returnType, self, CodegencompanyTables.Properties._Company__size);
-			return (CompanySizeKind) ValuesUtil.asEcoreObject(result);
+			final @NonNull TypeId returnTypeId = T_company__CompanySizeKind.getTypeId();
+			final @NonNull Object result = CompanyBodies._size_derivation_.INSTANCE.evaluate(evaluator, returnTypeId, this, CodegencompanyTables.Properties._Company__size);
+			return evaluator.asEcoreObject((CompanySizeKind)null, result);
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate codegen.company.bodies.CompanyBodies", e);
 		}
@@ -209,13 +205,11 @@ public class CompanyImpl extends EObjectImpl implements Company {
 		true
 		*/
 		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, CodegencompanyTables.LIBRARY);
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull Object self = valueFactory.valueOf(this);
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
 			final @NonNull DomainType returnType = T_Boolean;
-			final @NonNull Object result = CompanyBodies._invariant_dummyInvariant.INSTANCE.evaluate(evaluator, returnType, self);
+			final @NonNull Object result = CompanyBodies._invariant_dummyInvariant.INSTANCE.evaluate(evaluator, returnType.getTypeId(), this);
 			final boolean resultIsNull = ValuesUtil.isNull(result);
 			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;

@@ -17,63 +17,34 @@
 package org.eclipse.ocl.examples.library.executor;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluationEnvironment;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.EvaluationHaltedException;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
-import org.eclipse.osgi.util.NLS;
 
 public abstract class ExecutorManager implements DomainEvaluator
 {	
-	protected final @NonNull ValueFactory valueFactory;
-//	protected final DomainEvaluationEnvironment evaluationEnvironment;
+	protected final @NonNull DomainStandardLibrary standardLibrary;
 
     /**
      * Set true by {@link #setCanceled} to terminate execution at next call to {@link #getValuefactory()}.
      */
 	private boolean isCanceled = false;
+
 	
-	public ExecutorManager(@NonNull ValueFactory valueFactory) {
-		this.valueFactory = valueFactory;
-//		this.evaluationEnvironment = new ExecutorEvaluationEnvironment();
+	public ExecutorManager(@NonNull DomainStandardLibrary standardLibrary) {
+		this.standardLibrary = standardLibrary;
 	}
 
-	public Value evaluateIteration(DomainType returnType, CollectionValue sourceVal, DomainTypedElement accumulator,
-			DomainExpression body, DomainTypedElement[] iterators) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	public @NonNull ValueFactory getValueFactory() {
-		if (isCanceled) {
-			throw new EvaluationHaltedException("Canceled"); //$NON-NLS-1$
-		}
-		return valueFactory;
-	}
-
-	public boolean isCanceled() {
-		return isCanceled;
-	}
-
-	public void setCanceled(boolean isCanceled) {
-		this.isCanceled = isCanceled;
-	}
-	
-	public DomainType typeOf(Value value, Value... values) {
-		DomainType type = value.getType();
-		for (Value anotherValue : values) {
-			DomainType anotherType = anotherValue.getType();
-			type = type.getCommonType(valueFactory.getStandardLibrary(), anotherType);
-		}
-		return type;
+	@SuppressWarnings("unchecked")
+	public <T> T asEcoreObject(@Nullable T example, @NonNull Object value) {
+		return (T) standardLibrary.asEcoreObject(value);
 	}
 
 	public @NonNull Value evaluate(@NonNull DomainExpression body) {
@@ -85,16 +56,71 @@ public abstract class ExecutorManager implements DomainEvaluator
 //		}
 	}
 
+	public Value evaluateIteration(DomainType returnType, CollectionValue sourceVal, DomainTypedElement accumulator,
+			DomainExpression body, DomainTypedElement[] iterators) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	public @NonNull DomainType getDynamicTypeOf(@NonNull Object value) {
+		return getIdResolver().getDynamicTypeOf(value);
+	}
+
 	public @NonNull DomainEvaluationEnvironment getEvaluationEnvironment() {
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull NullValue throwInvalidEvaluation(InvalidValueException e) throws InvalidEvaluationException {
-		throw new InvalidEvaluationException(null, e);
+	public @NonNull IdResolver getIdResolver() {
+		return standardLibrary.getIdResolver();
 	}
 
-	public @NonNull NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object context,
-			String message, Object... bindings) throws InvalidEvaluationException {
-		throw new InvalidEvaluationException(null, NLS.bind(message, bindings), e, expression, context);
+	public @NonNull DomainStandardLibrary getStandardLibrary() {
+		return standardLibrary;
 	}
+
+	public @NonNull DomainType getStaticTypeOf(@NonNull Object value) {
+		return getIdResolver().getStaticTypeOf(value);
+	}
+
+	public @NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Object... values) {
+		return getIdResolver().getStaticTypeOf(value, values);
+	}
+
+	public @NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Iterable<?> values) {
+		return getIdResolver().getStaticTypeOf(value, values);
+	}
+
+//	public @NonNull ValueFactory getValueFactory() {
+//		if (isCanceled) {
+//			throw new EvaluationHaltedException("Canceled"); //$NON-NLS-1$
+//		}
+//		return valueFactory;
+//	}
+
+	public boolean isCanceled() {
+		return isCanceled;
+	}
+
+	public void setCanceled(boolean isCanceled) {
+		this.isCanceled = isCanceled;
+	}
+	
+/*	public DomainType typeOf(Value value, Value... values) {
+		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
+		DomainType type = value.getType(standardLibrary);
+		for (Value anotherValue : values) {
+			DomainType anotherType = anotherValue.getType(standardLibrary);
+			type = type.getCommonType(standardLibrary, anotherType);
+		}
+		return type;
+	} */
+
+//	public @NonNull NullValue throwInvalidEvaluation(InvalidValueException e) {
+//		throw new InvalidEvaluationException(null, e);
+//	}
+
+//	public @NonNull NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object context,
+//			String message, Object... bindings) {
+//		throw new InvalidEvaluationException(null, NLS.bind(message, bindings), e, expression, context);
+//	}
 }

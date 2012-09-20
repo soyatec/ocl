@@ -20,7 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.typeids.Typeid;
+import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
@@ -35,7 +35,7 @@ public class DomainReflectivePackage extends ReflectivePackage
 	protected final @NonNull DomainPackage domainPackage;
 
 	public DomainReflectivePackage(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainPackage domainPackage) {
-		super(DomainUtil.nonNullPivot(domainPackage.getName()), domainPackage.getNsPrefix(), domainPackage.getNsURI(), domainPackage.getTypeid());
+		super(DomainUtil.nonNullPivot(domainPackage.getName()), domainPackage.getNsPrefix(), domainPackage.getNsURI(), domainPackage.getPackageId());
 		this.standardLibrary = standardLibrary;
 		this.domainPackage = domainPackage;
 	}
@@ -57,14 +57,14 @@ public class DomainReflectivePackage extends ReflectivePackage
 	public DomainPackage getNestingPackage() {
 		return domainPackage.getNestingPackage();			// FIXME Is this recursive??
 	}
+
+	@Override
+	public @NonNull PackageId getPackageId() {
+		return domainPackage.getPackageId();
+	}
 	
 	@Override
 	protected @NonNull DomainStandardLibrary getStandardLibrary() {
 		return standardLibrary;
-	}
-
-	@Override
-	public @NonNull Typeid getTypeid() {
-		return domainPackage.getTypeid();
 	}
 }

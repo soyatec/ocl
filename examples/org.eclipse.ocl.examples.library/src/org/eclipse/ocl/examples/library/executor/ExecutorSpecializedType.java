@@ -20,17 +20,17 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
-import org.eclipse.ocl.examples.domain.typeids.Typeid;
 import org.eclipse.ocl.examples.domain.types.AbstractType;
 
 public class ExecutorSpecializedType extends AbstractType implements ExecutorTypeArgument
 {
-//	protected final @NonNull Typeid typeid;
+//	protected final @NonNull TypeId typeId;
 
 	public ExecutorSpecializedType(@NonNull DomainStandardLibrary standardLibrary, @NonNull String name, ExecutorTypeArgument... typeArguments) {
 		super(standardLibrary, name);
-//		typeid = TypeidManager.INSTANCE.getSpecializedTypeid(new DomainTypeParameters(typeArguments));
+//		typeId = TypeIdManager.INSTANCE.getSpecializedTypeId(new DomainTypeParameters(typeArguments));
 	}
 
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
@@ -54,11 +54,11 @@ public class ExecutorSpecializedType extends AbstractType implements ExecutorTyp
 		throw new UnsupportedOperationException();			// WIP fixme
 	}
 
-//	public @NonNull Typeid getTypeid() {
-//		return typeid;
+//	public @NonNull TypeId getTypeId() {
+//		return typeId;
 //	}
 
-	public @NonNull Typeid getTypeid() {
+	public @NonNull TypeId getTypeId() {
 		throw new UnsupportedOperationException();					// FIXME
 	}
 }

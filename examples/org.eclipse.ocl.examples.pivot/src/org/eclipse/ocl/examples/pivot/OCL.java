@@ -35,10 +35,9 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.EvaluationHaltedException;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
@@ -226,12 +225,12 @@ public class OCL {
 		if (specification.getBodyExpression().getType() != stdlib.getBooleanType()) {
 			throw new IllegalArgumentException("constraint is not boolean"); //$NON-NLS-1$
 		}
-		try {
+//		try {
 			Object result = evaluate(context, specification);
 			return ValuesUtil.isTrue(result);
-		} catch (InvalidEvaluationException e) {
-			return false;
-		}
+//		} catch (InvalidEvaluationException e) {
+//			return false;
+//		}
 	}
     
 	/**
@@ -414,8 +413,7 @@ public class OCL {
 		// variable of the expression, to account for stereotype constraints
 //		context = HelperUtil.getConstraintContext(rootEnvironment, context, expression);
 		EvaluationEnvironment localEvalEnv = getEvaluationEnvironment();
-		ValueFactory valueFactory = localEvalEnv.getValueFactory();
-		Object value = valueFactory.valueOf(context);
+		Object value = ValuesUtil.valueOf(context);
 		localEvalEnv.add(expression.getContextVariable(), value);
 //		if ((value != null) && !value.isUndefined()) {
 //			expression.getContextVariable().setValue(value);
@@ -439,18 +437,15 @@ public class OCL {
 		} finally {
 			localEvalEnv.remove(expression.getContextVariable());
 		}
-		if (result == null) {
-			return localEvalEnv.throwInvalidEvaluation("Java-Null value");
+		if (result instanceof InvalidValue) {
+			return (InvalidValue)result;
 		}
-		try {
-			return ValuesUtil.asValidValue(result);
-		} catch (InvalidValueException e) {
-			return localEvalEnv.throwInvalidEvaluation(e);
+		else if (result != null) {
+			return result;
 		}
-//		if (ValuesUtil.isInvalid(result)) {
-//			return localEvalEnv.throwInvalidEvaluation("Invalid Value");
-//		}
-//		return result;
+		else {
+			throw new InvalidValueException("Java-Null evaluation result");
+		}
 	}
 
 	/**
@@ -582,10 +577,6 @@ public class OCL {
 		    }
 		}
 		return expressionInOCL;
-	}
-
-	public ValueFactory getValueFactory() {
-		return getMetaModelManager().getValueFactory();
 	}
 
 	/**

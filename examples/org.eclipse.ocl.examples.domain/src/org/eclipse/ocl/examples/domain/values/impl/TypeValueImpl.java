@@ -17,12 +17,11 @@ package org.eclipse.ocl.examples.domain.values.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
 /**
@@ -41,12 +40,10 @@ public class TypeValueImpl extends ValueImpl implements TypeValue {
 	}
 
 	protected final @NonNull DomainType object;
-	private DomainMetaclass metaclass;
+	private TypeId typeId = null;
 
-	public TypeValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainType object) {
-		super(valueFactory);
+	public TypeValueImpl(@NonNull DomainType object) {
 		this.object = object;
-		this.metaclass = null;
 	}
 
 	@Override
@@ -54,29 +51,18 @@ public class TypeValueImpl extends ValueImpl implements TypeValue {
 		return object;
 	}
 
-//	@Override
-//	public @NonNull TypeValue asElementValue() {
-//		return this;
-//	}
-
 	@Override
-	public @NonNull EObject asNavigableObject() throws InvalidValueException {
+	public @NonNull EObject asNavigableObject() {
 		if (object instanceof EObject) {
 			return (EObject) object;
 		} else {
-			return (EObject) valueFactory.throwInvalidValueException(
-				EvaluatorMessages.TypedValueRequired, "Object", getType());
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Object", getTypeName());
 		}
 	}
 
 	public @NonNull Object asObject() {
 		return object;
 	}
-
-//	@Override
-//	public @NonNull TypeValueImpl asTypeValue() {
-//		return this;
-//	}
 
 	@Override
 	public boolean equals(Object that) {
@@ -86,16 +72,7 @@ public class TypeValueImpl extends ValueImpl implements TypeValue {
 		if (!(that instanceof TypeValue)) {
 			return false;
 		}
-		return getInstanceType().getTypeid() == ((TypeValue)that).getInstanceType().getTypeid();
-//		DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
-//		DomainInheritance thisInheritance = object.getInheritance(standardLibrary);
-//		try {
-//			DomainType thatInstanceType = ((TypeValue) that).getInstanceType();
-//			DomainInheritance thatInheritance = thatInstanceType.getInheritance(standardLibrary);
-//			return thisInheritance == thatInheritance;
-//		} catch (InvalidValueException e) {
-//			return false;
-//		}
+		return getTypeId() == ((TypeValue)that).getTypeId();
 	}
 
 	public @NonNull DomainType getElement() {
@@ -106,17 +83,20 @@ public class TypeValueImpl extends ValueImpl implements TypeValue {
 		return object;
 	}
 
-//	@Override
 	public @NonNull DomainType getObject() {
 		return object;
 	}
 
-	public @NonNull DomainMetaclass getType() {
-		DomainMetaclass metaclass2 = metaclass;
-		if (metaclass2 == null) {
-			metaclass2 = metaclass = valueFactory.getStandardLibrary().getMetaclass(object);
+//	public @NonNull DomainMetaclass getType(@NonNull DomainStandardLibrary standardLibrary) {
+//		return standardLibrary.getMetaclass(object);
+//	}
+
+	public @NonNull TypeId getTypeId() {
+		TypeId typeId2 = typeId;
+		if (typeId2 == null) {
+			typeId = typeId2 = TypeId.METACLASS.getCollectedTypeId(object.getTypeId());
 		}
-		return metaclass2;
+		return typeId2;
 	}
 
 	@Override
@@ -126,6 +106,6 @@ public class TypeValueImpl extends ValueImpl implements TypeValue {
 
 	@Override
 	public String toString() {
-		return String.valueOf(getObject());
+		return String.valueOf(object);
 	}
 }

@@ -21,11 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.pivot.AbstractBasicEnvironment;
 import org.eclipse.ocl.examples.pivot.Adaptable;
 import org.eclipse.ocl.examples.pivot.Customizable;
@@ -283,24 +279,24 @@ public abstract class AbstractEvaluationEnvironment extends AbstractBasicEnviron
 		return null;
 	} */
 
-	public @NonNull NullValue throwInvalidEvaluation(InvalidValueException e) throws InvalidEvaluationException {
-		throw new InvalidEvaluationException(this, e);
-	}
+//	public @NonNull NullValue throwInvalidEvaluation(InvalidValueException e) {
+//		throw new InvalidEvaluationException(this, e);
+//	}
 
-	public @NonNull NullValue throwInvalidEvaluation(String message) throws InvalidEvaluationException {
-		throw new InvalidEvaluationException(this, message, null, null, null);
-	}
+//	public @NonNull NullValue throwInvalidEvaluation(String message) {
+//		throw new InvalidEvaluationException(this, message, null, null, null);
+//	}
 
-	public @NonNull NullValue throwInvalidEvaluation(String message, DomainExpression expression) throws InvalidEvaluationException {
-		throw new InvalidEvaluationException(this, message, null, expression, null);
-	}
+//	public @NonNull NullValue throwInvalidEvaluation(String message, DomainExpression expression) {
+//		throw new InvalidEvaluationException(this, message, null, expression, null);
+//	}
 
-	public @NonNull NullValue throwInvalidEvaluation(String message, DomainExpression expression, Object context) throws InvalidEvaluationException {
-		throw new InvalidEvaluationException(this, message, null, expression, context);
-	}
+//	public @NonNull NullValue throwInvalidEvaluation(String message, DomainExpression expression, Object context) {
+//		throw new InvalidEvaluationException(this, message, null, expression, context);
+//	}
 
-	public @NonNull NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object context, String message, Object... bindings) throws InvalidEvaluationException {
-		String boundMessage = NLS.bind(message, bindings);
-		throw new InvalidEvaluationException(this, boundMessage, e, expression, context);
-	}
+//	public @NonNull NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object context, String message, Object... bindings) {
+//		String boundMessage = NLS.bind(message, bindings);
+//		throw new InvalidEvaluationException(this, boundMessage, e, expression, context);
+//	}
 }

@@ -17,54 +17,53 @@
 package org.eclipse.ocl.examples.domain.values;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 public interface RealValue extends NumericValue
 {
 	/**
 	 * @generated NOT
 	 */
-	@NonNull RealValue abs() throws InvalidValueException;
+	@NonNull RealValue abs();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull RealValue add(@NonNull RealValue right) throws InvalidValueException;
+	@NonNull RealValue add(@NonNull RealValue right);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull RealValue divide(@NonNull RealValue right) throws InvalidValueException;
+	@NonNull RealValue divide(@NonNull RealValue right);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue floor() throws InvalidValueException;
+	@NonNull IntegerValue floor();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull RealValue max(@NonNull RealValue right) throws InvalidValueException;
+	@NonNull RealValue max(@NonNull RealValue right);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull RealValue min(@NonNull RealValue right) throws InvalidValueException;
+	@NonNull RealValue min(@NonNull RealValue right);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull RealValue multiply(@NonNull RealValue right) throws InvalidValueException;
+	@NonNull RealValue multiply(@NonNull RealValue right);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull RealValue negate() throws InvalidValueException;	
+	@NonNull RealValue negate();	
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue round() throws InvalidValueException;
+	@NonNull IntegerValue round();
 
 	/**
 	 * @generated NOT
@@ -74,5 +73,5 @@ public interface RealValue extends NumericValue
 	/**
 	 * @generated NOT
 	 */
-	@NonNull RealValue subtract(@NonNull RealValue right) throws InvalidValueException;
+	@NonNull RealValue subtract(@NonNull RealValue right);
 }

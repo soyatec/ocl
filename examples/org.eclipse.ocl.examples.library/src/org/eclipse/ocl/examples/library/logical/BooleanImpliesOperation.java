@@ -17,10 +17,11 @@
 package org.eclipse.ocl.examples.library.logical;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
 
 /**
  * ImpliesOperation realises the implies() library operation.
@@ -34,15 +35,24 @@ public class BooleanImpliesOperation extends AbstractBinaryOperation
 		return true;
 	}
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
-		if (isFalse(left)) {
-			return Boolean.TRUE;
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object left, @NonNull Object right) {
+		if ((left == Boolean.FALSE) || (right == Boolean.TRUE)) {
+			return TRUE_VALUE;
 		}
-		else if (isTrue(right)) {
-			return Boolean.TRUE;
+		else if ((left == Boolean.TRUE) && (right == Boolean.FALSE)) {
+			return FALSE_VALUE;
+		}
+		else if (left instanceof InvalidValue) {
+			return left;
+		}
+		else if (right instanceof InvalidValue) {
+			return right;
+		}
+		else if (!(left instanceof Boolean)) {
+			return createInvalidValue(EvaluatorMessages.TypedValueRequired, TypeId.BOOLEAN_NAME, getTypeName(left));
 		}
 		else {
-			return !asBoolean(left) || asBoolean(right);
+			return createInvalidValue(EvaluatorMessages.TypedValueRequired, TypeId.BOOLEAN_NAME, getTypeName(right));
 		}
 	}
 }

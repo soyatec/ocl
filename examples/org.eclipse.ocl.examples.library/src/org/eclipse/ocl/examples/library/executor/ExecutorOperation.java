@@ -24,8 +24,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
+import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
-import org.eclipse.ocl.examples.domain.typeids.Typeid;
 import org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation;
 
 public class ExecutorOperation implements DomainOperation
@@ -46,7 +46,7 @@ public class ExecutorOperation implements DomainOperation
 		this.typeParameters = typeParameters;
 	}
 	
-	@Deprecated
+/*	@Deprecated
 	public ExecutorOperation(@NonNull String name, @NonNull DomainParameterTypes parameterTypes, @NonNull DomainInheritance inheritance, int index, @Nullable LibraryFeature implementation) {
 		this.name = name;
 		this.inheritance = inheritance;
@@ -65,7 +65,7 @@ public class ExecutorOperation implements DomainOperation
 		@SuppressWarnings("null") @NonNull ExecutorTypeArgument[] parameterTypes2 = parameterTypes;
 		this.parameterTypes = new DomainParameterTypes(parameterTypes2);
 		this.typeParameters = DomainTypeParameters.EMPTY_LIST;			// FIXME
-	}
+	} */
 
 	public @NonNull LibraryFeature getImplementation() {
 		return implementation;
@@ -83,6 +83,10 @@ public class ExecutorOperation implements DomainOperation
 		return name;
 	}
 
+	public @NonNull OperationId getOperationId() {
+		throw new UnsupportedOperationException();			// FIXME
+	}
+
 	public @NonNull DomainType getOwningType() {
 		throw new UnsupportedOperationException();			// FIXME
 	}
@@ -98,10 +102,6 @@ public class ExecutorOperation implements DomainOperation
 
 	public @NonNull DomainTypeParameters getTypeParameters() {
 		return typeParameters;
-	}
-
-	public @NonNull Typeid getTypeid() {
-		throw new UnsupportedOperationException();			// FIXME
 	}
 
 	public boolean isStatic() {

@@ -17,17 +17,16 @@
 package org.eclipse.ocl.examples.domain.values;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
 public interface UniqueCollectionValue extends CollectionValue
 {
 	/**
 	 * @generated NOT
 	 */
-	@NonNull UniqueCollectionValue minus(@NonNull UniqueCollectionValue set) throws InvalidValueException;
+	@NonNull UniqueCollectionValue minus(@NonNull UniqueCollectionValue set);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull UniqueCollectionValue symmetricDifference(@NonNull UniqueCollectionValue set) throws InvalidValueException;       
+	@NonNull UniqueCollectionValue symmetricDifference(@NonNull UniqueCollectionValue set);       
 }

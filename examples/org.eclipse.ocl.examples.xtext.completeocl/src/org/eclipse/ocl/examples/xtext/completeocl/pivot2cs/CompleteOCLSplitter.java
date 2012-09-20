@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.utils.ClassUtils;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.NamedElement;
@@ -42,7 +43,6 @@ import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.PivotSwitch;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
  * 
@@ -135,7 +135,7 @@ public class CompleteOCLSplitter
 			else {
 				separateSiblings = ((org.eclipse.ocl.examples.pivot.Package)separateParent).getNestedPackage();
 			}
-			org.eclipse.ocl.examples.pivot.Package separateObject = PivotUtil.getNamedElement(separateSiblings, name);
+			org.eclipse.ocl.examples.pivot.Package separateObject = DomainUtil.getNamedElement(separateSiblings, name);
 			if (separateObject == null) {
 				separateObject = (org.eclipse.ocl.examples.pivot.Package) object.eClass().getEPackage().getEFactoryInstance().create(object.eClass());
 				separateObject.setName(name);
@@ -191,7 +191,7 @@ public class CompleteOCLSplitter
 
 		protected <T extends NamedElement> T cloneNamedElement(List<T> separateSiblings, T object) {
 			String name = object.getName();
-			T separateObject = PivotUtil.getNamedElement(separateSiblings, name);
+			T separateObject = DomainUtil.getNamedElement(separateSiblings, name);
 			if (separateObject == null) {
 				@SuppressWarnings("unchecked")
 				T castObject = (T) object.eClass().getEPackage().getEFactoryInstance().create(object.eClass());

@@ -16,10 +16,15 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
-import java.util.List;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 
 
 public interface DomainTupleType extends DomainType
 {
-	List<? extends DomainTypedElement> getOwnedAttribute();
+	/**
+	 * Return a unique StandardLibrary-independent identifier for this type.
+	 * @return
+	 */
+	@NonNull TupleTypeId getTupleTypeId();
 }

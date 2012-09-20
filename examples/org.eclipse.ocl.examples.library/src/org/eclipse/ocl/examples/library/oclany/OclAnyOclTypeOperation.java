@@ -19,9 +19,8 @@ package org.eclipse.ocl.examples.library.oclany;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * OclAnyOclTypeOperation realises the OclAny::oclType() library operation.
@@ -30,9 +29,8 @@ public class OclAnyOclTypeOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull OclAnyOclTypeOperation INSTANCE = new OclAnyOclTypeOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
-		DomainType sourceType = valueFactory.typeOf(sourceVal);
-		return valueFactory.createTypeValue(sourceType);
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal) {
+		DomainType sourceType = evaluator.getStaticTypeOf(sourceVal);
+		return createTypeValue(sourceType);
 	}
 }

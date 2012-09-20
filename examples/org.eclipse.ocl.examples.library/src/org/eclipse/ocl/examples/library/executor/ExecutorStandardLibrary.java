@@ -21,19 +21,16 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
+import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.types.AbstractMetaclass;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 
@@ -66,15 +63,14 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 
 	@Override
 	protected @NonNull DomainMetaclass createMetaclass(@NonNull DomainType classType) {
-		DomainType anyMetaclass = getMetaclassType();
-		DomainMetaclass metaclass = new AbstractMetaclass(this, anyMetaclass, classType);
+		DomainMetaclass metaclass = new AbstractMetaclass(this, classType);
 		return metaclass;
 	}
 	
-	@Override
-	public @NonNull DomainEvaluator createEvaluator(@NonNull EObject contextObject, @Nullable Map<Object, Object> contextMap) {
-		return new EcoreExecutorManager(contextObject, contextMap, this);
-	}
+//	@Override
+//	public @NonNull DomainEvaluator createEvaluator(@NonNull EObject contextObject, @Nullable Map<Object, Object> contextMap) {
+//		return new EcoreExecutorManager(contextObject, this);
+//	}
 
 /*	@Override
 	public DomainEnumeration getEnumeration(Enumerator enumerator) {
@@ -142,6 +138,15 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 			}
 			return domainExecutorPackage.getInheritance(type);
 		}
+	}
+
+	@Override
+	public DomainPackage getNsURIPackage(@NonNull String nsURI) {
+		WeakReference<EcoreExecutorPackage> weakReference = ePackageMap.get(nsURI);
+		if (weakReference == null) {
+			return null;
+		}
+		return weakReference.get();
 	}
 
 	public synchronized @Nullable EcoreExecutorPackage getPackage(@NonNull EPackage ePackage) {

@@ -28,13 +28,12 @@ import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.typeids.Typeid;
-import org.eclipse.ocl.examples.domain.typeids.TypeidManager;
+import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Comment;
@@ -531,6 +530,16 @@ public class CollectionTypeImpl
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitCollectionType(this);
 	}
+
+	@Override
+	public @NonNull TypeId computeId() {
+		if (getUnspecializedElement() == null) {
+			return TypeId.COLLECTION.getCollectedTypeId();
+		}
+		else {
+			return TypeId.COLLECTION.getCollectedTypeId(getElementType().getTypeId());
+		}
+	}
 	
 	@Override
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
@@ -587,6 +596,11 @@ public class CollectionTypeImpl
 		TemplateableElement unspecializedElement2 = unspecializedElement;
 		return unspecializedElement2 != null ? (CollectionType)unspecializedElement2 : this;
 	}
+	
+	@Override
+	public @NonNull CollectedTypeId getTypeId() {
+		return (CollectedTypeId) super.getTypeId();
+	}
 
 	@Override
 	public boolean isEqualTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
@@ -599,32 +613,19 @@ public class CollectionTypeImpl
 		return standardLibrary.isEqualToCollectionType(this, (DomainCollectionType)type);
 	}
 
-	public @NonNull IntegerValue getLowerValue(@NonNull ValueFactory valueFactory) {
-		return lower != null ? valueFactory.integerValueOf(lower) : valueFactory.getNull();
-	}
-	
-	@Override
-	public @NonNull Typeid computeTypeid() {
-		String name2 = getName();
-		assert name2 != null;
-		TemplateableElement unspecializedElement2 = getUnspecializedElement();
-		if (unspecializedElement2 != null) {
-			return ((Type)unspecializedElement2).getTypeid().getCollectedTypeid(getElementType().getTypeid());
-		}
-		else {
-			return TypeidManager.INSTANCE.getUnscopedTypeid(name2);
-		}
+	public @NonNull IntegerValue getLowerValue() {
+		return lower != null ? ValuesUtil.integerValueOf(lower) : ValuesUtil.NULL_VALUE;
 	}
 
-	public @NonNull IntegerValue getUpperValue(@NonNull ValueFactory valueFactory) {
-		return upper != null ? valueFactory.integerValueOf(upper) : valueFactory.getNull();
+	public @NonNull IntegerValue getUpperValue() {
+		return upper != null ? ValuesUtil.integerValueOf(upper) : ValuesUtil.NULL_VALUE;
 	}
 
-	public void setLowerValue(@NonNull IntegerValue lower) throws InvalidValueException {
+	public void setLowerValue(@NonNull IntegerValue lower) {
 		setLower(lower.intValue());
 	}
 
-	public void setUpperValue(@NonNull IntegerValue upper) throws InvalidValueException {
+	public void setUpperValue(@NonNull IntegerValue upper) {
 		setUpper(upper.isUnlimited() ? Unlimited.INSTANCE : upper.intValue());
 	}
 } //CollectionTypeImpl

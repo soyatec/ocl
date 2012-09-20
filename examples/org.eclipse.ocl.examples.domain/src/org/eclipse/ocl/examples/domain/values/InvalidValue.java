@@ -16,10 +16,18 @@
  */
 package org.eclipse.ocl.examples.domain.values;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 public interface InvalidValue extends NullValue
 {	
 	/**
 	 * @generated NOT
 	 */
-	Exception getException();
+	@Nullable Exception getException();
+	
+	/**
+	 * @generated NOT
+	 */
+	@NonNull String getMessage();
 }

@@ -23,8 +23,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -37,13 +37,13 @@ import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * @generated NOT
  */
-public abstract class ValueImpl implements Value
+public abstract class ValueImpl extends ValuesUtil implements Value
 {
     static class EmptyIterator implements Iterator<Value>
     {
@@ -57,13 +57,6 @@ public abstract class ValueImpl implements Value
             throw new IllegalStateException();
         }
     }
-    
-    @SuppressWarnings("null")
-	protected static @NonNull Double NULL_DOUBLE = Double.valueOf(0);
-    @SuppressWarnings("null")
-	protected static @NonNull Integer NULL_INTEGER = Integer.valueOf(0);
-    @SuppressWarnings("null")
-	protected static @NonNull String NULL_STRING = String.valueOf("");    
 
     /**
 	 * <!-- begin-user-doc -->
@@ -74,104 +67,80 @@ public abstract class ValueImpl implements Value
 		return ValuesPackage.Literals.VALUE;
 	}
 
-	protected final @NonNull ValueFactory valueFactory;
+	protected ValueImpl() {}
 
-	protected ValueImpl(@NonNull ValueFactory valueFactory) {
-		this.valueFactory = valueFactory;
+	public @NonNull BagValue asBagValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Bag", getTypeName());
 	}
 
-	public @NonNull BagValue asBagValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Bag", getType());
+	public @NonNull CollectionValue asCollectionValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Collection", getTypeName());
 	}
 
-//	public boolean asBoolean() throws InvalidValueException {
-//		valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Boolean", getType());
-//		return false;
-//	}
-
-	public @NonNull CollectionValue asCollectionValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Collection", getType());
-	}
-
-	public @NonNull Double asDouble() throws InvalidValueException {
-		valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Double", getType());
-		return NULL_DOUBLE;			// Unreachable code
-	}
-
-	public Object asEcoreObject() throws InvalidValueException {
-		return asObject();
+	public @NonNull Double asDouble() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Double", getTypeName());
 	}
 
 	public DomainElement asElement() {
 		return null;
 	}
 
-	public @NonNull Integer asInteger() throws InvalidValueException {
-		valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Integer", getType());
-		return NULL_INTEGER;			// Unreachable code
+	public @NonNull Integer asInteger() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.INTEGER_NAME, getTypeName());
 	}
 
-	public @NonNull IntegerValue asIntegerValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Integer", getType());
+	public @NonNull IntegerValue asIntegerValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.INTEGER_NAME, getTypeName());
 	}
 
-	public @NonNull EObject asNavigableObject() throws InvalidValueException {
+	public @NonNull EObject asNavigableObject() {
 		Object object = asObject();
 		if (object instanceof EObject) {
 			return (EObject) object;
 		}
 		else {
-			return (EObject) valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Object", getType());
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Object", getTypeName());
 		}
 	}
 
-	public @NonNull ObjectValue asObjectValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Object", getType());
+	public @NonNull ObjectValue asObjectValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Object", getTypeName());
 	}
 
-	public @NonNull OrderedSetValue asOrderedSetValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "OrderedSet", getType());
+	public @NonNull OrderedSetValue asOrderedSetValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "OrderedSet", getTypeName());
 	}
 
-	public @NonNull RealValue asRealValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Real", getType());
+	public @NonNull RealValue asRealValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.REAL_NAME, getTypeName());
 	}
 
-	public @NonNull SequenceValue asSequenceValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Sequence", getType());
+	public @NonNull SequenceValue asSequenceValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Sequence", getTypeName());
 	}
 
-	public @NonNull SetValue asSetValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Set", getType());
+	public @NonNull SetValue asSetValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Set", getTypeName());
 	}
 
-//	public @NonNull String asString() throws InvalidValueException {
-//		valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "String", getType());
-//		return NULL_STRING;			// Unreachable code
+	public @NonNull TupleValue asTupleValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Tuple", getTypeName());
+	}
+
+	public @NonNull UniqueCollectionValue asUniqueCollectionValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Unique Collection", getTypeName());
+	}
+
+	public @NonNull Value asUnlimitedNaturalValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.UNLIMITED_NATURAL_NAME, getTypeName());
+	}
+
+//	public @NonNull DomainType getActualType(@NonNull DomainStandardLibrary standardLibrary) {
+//		return getType(standardLibrary);
 //	}
 
-	public @NonNull TupleValue asTupleValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Tuple", getType());
-	}
-
-	public @NonNull UniqueCollectionValue asUniqueCollectionValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Unique Collection", getType());
-	}
-
-	public @NonNull Value asUnlimitedNaturalValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "UnlimitedNatural", getType());
-	}
-
-	public @NonNull Value asValidValue() throws InvalidValueException {
-		return this;
-	}
-
-	public @NonNull DomainType getActualType() throws InvalidValueException {
-		return getType();
-	}
-	
-	public final @NonNull ValueFactory getValueFactory() {
-		return valueFactory;
+	public @NonNull String getTypeName() {
+		return getTypeId().getDisplayName();
 	}
 
 	public boolean isInvalid() {

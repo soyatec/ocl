@@ -18,11 +18,9 @@ package org.eclipse.ocl.examples.library.classifier;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * ClassifierOclContainerOperation realises the Classifier::oclContainer() library operation.
@@ -31,15 +29,14 @@ public class ClassifierOclContainerOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull ClassifierOclContainerOperation INSTANCE = new ClassifierOclContainerOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal) {
 		EObject object = asNavigableObject(sourceVal);
 		EObject eContainer = object.eContainer();
 		if (eContainer != null) {
-			return valueFactory.valueOf(eContainer);
+			return eContainer;
 		}
 		else {
-			return valueFactory.getNull();
+			return NULL_VALUE;
 		}
 	}
 }

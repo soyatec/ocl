@@ -136,14 +136,14 @@ public static class Types {[for (cls : Class | pPackage.ownedType->filter(Class)
 [if (cls.ownedTemplateSignature->notEmpty())]
 [for (parameter : TypeTemplateParameter | cls.ownedTemplateSignature.parameter->filter(TypeTemplateParameter))]
 [let parameteredElement : Type = parameter.parameteredElement.oclAsType(Type)]
-private static final @NonNull <%ExecutorTypeParameter%> _[cls.name/]_[parameteredElement.name/] = new <%ExecutorTypeParameter%>(LIBRARY, "[parameteredElement.name/]");
+private static final @NonNull <%ExecutorTypeParameter%> _[cls.name/]_[parameteredElement.name/] = new <%ExecutorTypeParameter%>([if (cls.isBuiltInType())]<%TypeId%>.[cls.upperName()/]_T, [/if]LIBRARY, "[parameteredElement.name/]");
 [/let]
 [/for]
 [/if]
 public static final @NonNull <%[typeName/]%> _[cls.name/] = [if (genPackage.hasAnotherType(cls))]
 [genPackage.getAnotherType(cls).emitQualifiedLiteralName(genPackage)/][else]
 [if (not genPackage.hasEcore(cls))]
-new <%[typeName/]%>("[cls.name/]"[else]
+new <%[typeName/]%>([if (cls.isBuiltInType())]<%TypeId%>.[cls.upperName()/][else]"[cls.name/]"[/if][else]
 new <%[typeName/]%>([genPackage.prefix + 'Package.Literals.' + cls.upperName()/][/if], PACKAGE, [pPackage.getTypeFlags(cls)/][if (cls.ownedTemplateSignature->notEmpty())]
 [for (parameter : TypeTemplateParameter | cls.ownedTemplateSignature.parameter->filter(TypeTemplateParameter))]
 [let parameteredElement : Type = parameter.parameteredElement.oclAsType(Type)]

@@ -18,8 +18,8 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
-
 import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -41,14 +41,14 @@ import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.OperationId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
-import org.eclipse.ocl.examples.domain.typeids.Typeid;
-import org.eclipse.ocl.examples.domain.typeids.TypeidManager;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
@@ -485,14 +485,11 @@ public class TypeImpl
 		p.oclIsKindOf(self.oclType())
 		*/
 		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull Object self = valueFactory.valueOf(this);
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
-			
-			final @NonNull DomainType returnType = T_Boolean;
-			final @NonNull Object result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(p));
-			return (Boolean) ValuesUtil.asEcoreObject(result);
+			final @NonNull TypeId returnTypeId = T_Boolean.getTypeId();
+			final @NonNull Object result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, returnTypeId, this, ValuesUtil.valueOf(p));
+			return evaluator.asEcoreObject((Boolean)null, result);
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.ParameterableElementBodies", e);
 		}
@@ -510,14 +507,11 @@ public class TypeImpl
 		self
 		*/
 		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull Object self = valueFactory.valueOf(this);
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
-			
-			final @NonNull DomainType returnType = T_Type;
-			final @NonNull Object result = TypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(selfType));
-			return (Type) ValuesUtil.asEcoreObject(result);
+			final @NonNull TypeId returnTypeId = T_Type.getTypeId();
+			final @NonNull Object result = TypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, returnTypeId, this, ValuesUtil.valueOf(selfType));
+			return evaluator.asEcoreObject((Type)null, result);
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.TypeBodies", e);
 		}
@@ -1118,22 +1112,22 @@ public class TypeImpl
 		return thisInheritance.isSubInheritanceOf(thatInheritance);
 	}
 
-	public @NonNull ObjectValue createInstance(@NonNull ValueFactory valueFactory) {
+	public @NonNull ObjectValue createInstance(@NonNull DomainStandardLibrary standardLibrary) {
 		EObject eTarget = getETarget();
 		if (eTarget instanceof EClass) {
 			EClass eClass = (EClass) eTarget;
 			EObject element = eClass.getEPackage().getEFactoryInstance().create(eClass);
-			return valueFactory.createObjectValue(element);
+			return ValuesUtil.createObjectValue(element);
 		}
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull Object createInstance(@NonNull ValueFactory valueFactory, @NonNull String value) {
+	public @NonNull Object createInstance(@NonNull DomainStandardLibrary standardLibrary, @NonNull String value) {
 		EObject eTarget = getETarget();
 		if (eTarget instanceof EDataType) {
 			EDataType eDataType = (EDataType) eTarget;
 			Object element = eDataType.getEPackage().getEFactoryInstance().createFromString(eDataType, value);
-			return valueFactory.valueOf(element);
+			return ValuesUtil.valueOf(element);
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -1180,41 +1174,41 @@ public class TypeImpl
 		return TemplateSignatureImpl.getTypeParameters(getOwnedTemplateSignature());
 	}
 
-	private Typeid typeid = null;
+	private TypeId typeId = null;
 	
-	public final @NonNull Typeid getTypeid() {
-		Typeid typeid2 = typeid;
-		if (typeid2 == null) {
+	public @NonNull TypeId getTypeId() {
+		TypeId typeId2 = typeId;
+		if (typeId2 == null) {
 			synchronized (this) {
-				typeid2 = typeid;
-				if (typeid2 == null) {
-					typeid = typeid2 = computeTypeid();
+				typeId2 = typeId;
+				if (typeId2 == null) {
+					typeId = typeId2 = computeId();
 				}
 			}
 		}
-		return typeid2;
+		return typeId2;
 	}
 	
-	public @NonNull Typeid computeTypeid() {
+	public @NonNull TypeId computeId() {
 		TemplateParameter owningTemplateParameter = getOwningTemplateParameter();
 		if (owningTemplateParameter != null) {
-			TemplateableElement template = owningTemplateParameter.getSignature().getTemplate();
-			Typeid parentTypeid;
+			TemplateSignature signature = owningTemplateParameter.getSignature();
+			TemplateableElement template = signature.getTemplate();
+			int index = signature.getParameter().indexOf(owningTemplateParameter);
 			if (template instanceof Type) {
-				parentTypeid = ((Type)template).getTypeid();			
+				TypeId parentTypeId = ((Type)template).getTypeId();			
+				return parentTypeId.getTemplateParameterId(index);
 			}
 			else if (template instanceof Operation) {
-				parentTypeid = ((Operation)template).getTypeid();			
+				OperationId parentOperationId = ((Operation)template).getOperationId();			
+				return parentOperationId.getTemplateParameterId(index);			// FIXME bad cast
 			}
 			else {
-				parentTypeid = Typeid.OCL_INVALID;			
+				return TypeId.OCL_INVALID;			
 			}
-			String name2 = getName();
-			assert name2 != null;
-			return parentTypeid.getParameterTypeid(name2);
 		}
 		else {
-			return TypeidManager.INSTANCE.getTypeTypeid(this);
+			return IdManager.INSTANCE.getTypeId(this);
 		}
 	}
 

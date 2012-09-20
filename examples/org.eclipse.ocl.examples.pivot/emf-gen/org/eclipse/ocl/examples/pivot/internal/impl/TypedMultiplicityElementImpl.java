@@ -18,8 +18,8 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
-
 import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
@@ -27,10 +27,9 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
@@ -138,14 +137,11 @@ public abstract class TypedMultiplicityElementImpl
 		bodySpecification.type.conformsTo(self.type)
 		*/
 		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull Object self = valueFactory.valueOf(this);
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
-			
-			final @NonNull DomainType returnType = T_Boolean;
-			final @NonNull Object result = TypedMultiplicityElementBodies._CompatibleBody_body_.INSTANCE.evaluate(evaluator, returnType, self, valueFactory.valueOf(bodySpecification));
-			return (Boolean) ValuesUtil.asEcoreObject(result);
+			final @NonNull TypeId returnTypeId = T_Boolean.getTypeId();
+			final @NonNull Object result = TypedMultiplicityElementBodies._CompatibleBody_body_.INSTANCE.evaluate(evaluator, returnTypeId, this, ValuesUtil.valueOf(bodySpecification));
+			return evaluator.asEcoreObject((Boolean)null, result);
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.TypedMultiplicityElementBodies", e);
 		}
@@ -163,14 +159,11 @@ public abstract class TypedMultiplicityElementImpl
 		Parameter{name = 'name'}
 		*/
 		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, null, PivotTables.LIBRARY);
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull Object self = valueFactory.valueOf(this);
+			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 			final @NonNull ExecutorType T_pivot__Parameter = PivotTables.Types._Parameter;
-			
-			final @NonNull DomainType returnType = T_pivot__Parameter;
-			final @NonNull Object result = TypedMultiplicityElementBodies._makeParameter_body_.INSTANCE.evaluate(evaluator, returnType, self);
-			return (Parameter) ValuesUtil.asEcoreObject(result);
+			final @NonNull TypeId returnTypeId = T_pivot__Parameter.getTypeId();
+			final @NonNull Object result = TypedMultiplicityElementBodies._makeParameter_body_.INSTANCE.evaluate(evaluator, returnTypeId, this);
+			return evaluator.asEcoreObject((Parameter)null, result);
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.TypedMultiplicityElementBodies", e);
 		}

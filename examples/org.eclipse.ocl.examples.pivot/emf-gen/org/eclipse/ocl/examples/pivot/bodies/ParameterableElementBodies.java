@@ -26,10 +26,10 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
@@ -52,9 +52,8 @@ public class ParameterableElementBodies
 		/*
 		p.oclIsKindOf(self.oclType())
 		*/
-		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, final @NonNull Object self, final @NonNull Object p) throws InvalidValueException {
-			final @NonNull ValueFactory valueFactory = evaluator.getValueFactory();
-			final @NonNull DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
+		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self, final @NonNull Object p) throws InvalidValueException {
+			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			final @NonNull ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
 			final @NonNull ExecutorType T_pivot__ParameterableElement = PivotTables.Types._ParameterableElement;
@@ -63,12 +62,12 @@ public class ParameterableElementBodies
 			
 			
 			
-			DomainType static_A_symbol_ = valueFactory.typeOf(self);
+			DomainType static_A_symbol_ = evaluator.getStaticTypeOf(self);
 			LibraryUnaryOperation dynamic_A_symbol_ = (LibraryUnaryOperation)static_A_symbol_.lookupImplementation(standardLibrary, O_OclAny_oclType);
-			Object A_symbol_ = dynamic_A_symbol_.evaluate(evaluator, T_Metaclass_pivot__ParameterableElement_, self);
-			DomainType static_A_symbol__1 = valueFactory.typeOf(p);
+			Object A_symbol_ = dynamic_A_symbol_.evaluate(evaluator, T_Metaclass_pivot__ParameterableElement_.getTypeId(), self);
+			DomainType static_A_symbol__1 = evaluator.getStaticTypeOf(p);
 			LibraryBinaryOperation dynamic_A_symbol__1 = (LibraryBinaryOperation)static_A_symbol__1.lookupImplementation(standardLibrary, O_OclAny_oclIsKindOf);
-			Object A_symbol__1 = dynamic_A_symbol__1.evaluate(evaluator, T_Boolean, p, A_symbol_);
+			Object A_symbol__1 = dynamic_A_symbol__1.evaluate(evaluator, T_Boolean.getTypeId(), p, A_symbol_);
 			return A_symbol__1;
 		}
 	}

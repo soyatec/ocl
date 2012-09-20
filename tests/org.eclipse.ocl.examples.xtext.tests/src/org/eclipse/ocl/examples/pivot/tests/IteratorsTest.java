@@ -30,14 +30,14 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
@@ -98,7 +98,7 @@ public class IteratorsTest extends PivotTestSuite
      * Tests the generic iterate() iterator.
      */
     public void test_iterate_143996() {
-    	SetValue expected = valueFactory.createSetOf("pkg2", "bob", "pkg3");
+    	SetValue expected = metaModelManager.createSetValueOf(null, "pkg2", "bob", "pkg3");
 
         // complete form
         assertQueryEquals(pkg1, expected, "nestedPackage->iterate(p; s : Set(String) = Set{} | s->including(p.name))");
@@ -116,7 +116,7 @@ public class IteratorsTest extends PivotTestSuite
      * Tests the select() iterator.
      */
 	public void test_select() {
-		CollectionValue expected = valueFactory.createSetOf(pkg2, pkg3);
+		CollectionValue expected = metaModelManager.createSetValueOf(null, pkg2, pkg3);
 
         // complete form
         assertQueryEquals(pkg1, expected, "nestedPackage->select(p : ocl::Package | p.name <> 'bob')");
@@ -127,7 +127,7 @@ public class IteratorsTest extends PivotTestSuite
         // shortest form
         assertQueryEquals(pkg1, expected, "nestedPackage->select(name <> 'bob')");
 
-        Value expected2 = valueFactory.createSetOf(bob, pkg2, pkg3);
+        Value expected2 = metaModelManager.createSetValueOf(null, bob, pkg2, pkg3);
         assertQueryEquals(pkg1, expected2, "nestedPackage->select(true)");
     }
 
@@ -135,7 +135,7 @@ public class IteratorsTest extends PivotTestSuite
      * Tests the reject() iterator.
      */
     public void test_reject() {
-		CollectionValue expected = valueFactory.createSetOf(pkg2, pkg3);
+		CollectionValue expected = metaModelManager.createSetValueOf(null, pkg2, pkg3);
 
         // complete form
         assertQueryEquals(pkg1, expected, "nestedPackage->reject(p : ocl::Package | p.name = 'bob')");
@@ -146,7 +146,7 @@ public class IteratorsTest extends PivotTestSuite
         // shortest form
         assertQueryEquals(pkg1, expected, "nestedPackage->reject(name = 'bob')");
 
-        expected = valueFactory.createSetValue(expected.getCollectionType());
+        expected = metaModelManager.createSetValueOf(null);
         assertQueryEquals(pkg1, expected, "nestedPackage->reject(true)");
     }
 
@@ -243,7 +243,7 @@ public class IteratorsTest extends PivotTestSuite
      */
     public void test_collect() {
 //    	Abstract2Moniker.TRACE_MONIKERS.setState(true);
-        CollectionValue expected1 = valueFactory.createBagOf("pkg2", "bob", "pkg3");
+        CollectionValue expected1 = metaModelManager.createBagValueOf(null, "pkg2", "bob", "pkg3");
 
         // complete form
         assertQueryEquals(pkg1, expected1, "nestedPackage->collect(p : ocl::Package | p.name)");
@@ -258,7 +258,7 @@ public class IteratorsTest extends PivotTestSuite
         assertQueryEquals(pkg1, expected1, "nestedPackage.name");
 
         // flattening of nested collections
-        CollectionValue expected2 = valueFactory.createBagOf(jim, pkg4, pkg5);
+        CollectionValue expected2 = metaModelManager.createBagValueOf(null, jim, pkg4, pkg5);
         // nestedPackage is Set<Package>
         // nestedPackage->collectNested(nestedPackage) is Bag<Set<Package>>
         // nestedPackage->collectNested(nestedPackage)->flatten() is Bag<Package>
@@ -292,7 +292,7 @@ public class IteratorsTest extends PivotTestSuite
      */
     public void test_collect_flattens_217461() {
         String self = "foo";
-        SequenceValue expected = valueFactory.createSequenceOf("THIS AND", "THAT", "THE OTHER");
+        SequenceValue expected = ValuesUtil.createSequenceValue(null, "THIS AND", "THAT", "THE OTHER");
 
         assertQueryEquals(self, expected, "Sequence{Sequence{'this and', 'that'}, Sequence{'the other'}}->collect(s : Sequence(String) | s.toUpperCase())");
     }
@@ -311,7 +311,7 @@ public class IteratorsTest extends PivotTestSuite
      * Tests the collectNested() iterator.
      */
     public void test_collectNested() {
-        CollectionValue expected1 = valueFactory.createBagOf("pkg2", "bob", "pkg3");
+        CollectionValue expected1 = metaModelManager.createBagValueOf(null, "pkg2", "bob", "pkg3");
 
         // complete form
         assertQueryEquals(pkg1, expected1, "nestedPackage->collectNested(p : ocl::Package | p.name)");
@@ -326,7 +326,7 @@ public class IteratorsTest extends PivotTestSuite
 		Set<org.eclipse.ocl.examples.pivot.Package> e1 = Collections.singleton(jim);
         Set<?> e2 = Collections.EMPTY_SET;
         HashSet<Object> e3 = new HashSet<Object>(Arrays.asList(new Object[] {pkg4, pkg5}));
-		CollectionValue expected2 = valueFactory.createBagOf(e1, e2, e3);
+		CollectionValue expected2 = metaModelManager.createBagValueOf(null, e1, e2, e3);
 
         assertQueryEquals(pkg1, expected2, "nestedPackage->collectNested(nestedPackage)");
     }
@@ -335,7 +335,7 @@ public class IteratorsTest extends PivotTestSuite
      * Tests the sortedBy() iterator.
      */
     public void test_sortedBy() {
-        OrderedSetValue expectedSet = valueFactory.createOrderedSetOf(bob, pkg2, pkg3);
+        OrderedSetValue expectedSet = ValuesUtil.createOrderedSetValue(null, bob, pkg2, pkg3);
 
         // complete form
         assertQueryEquals(pkg1, expectedSet, "nestedPackage->sortedBy(p : ocl::Package | p.name)");
@@ -346,7 +346,7 @@ public class IteratorsTest extends PivotTestSuite
         // shortest form
         assertQueryEquals(pkg1, expectedSet, "nestedPackage->sortedBy(name)");
 
-        SequenceValue expected = valueFactory.createSequenceOf("a", "b", "c", "d", "e");
+        SequenceValue expected = ValuesUtil.createSequenceValue(null, "a", "b", "c", "d", "e");
         assertQueryEquals(pkg1, expected, "Bag{'d', 'b', 'e', 'a', 'c'}->sortedBy(e | e)");
         assertQueryResults(null, "Sequence{'x', 'aa', 'zzz', 'zzz', 'zzz', 'yyyy', 'yyyy'}", "Bag{'x', 'yyyy', 'zzz', 'aa', 'zzz', 'yyyy', 'zzz'}->sortedBy(size())");
     }
@@ -363,27 +363,27 @@ public class IteratorsTest extends PivotTestSuite
     // pkg1::pkg3::pkg5
     // pkg1::pkg3::pkg5::george
     public void test_closure() {
-    	CollectionValue expected1 = valueFactory.createSetOf(pkg1, pkg3, pkg5); // closure does not include self (george)
+    	CollectionValue expected1 = metaModelManager.createSetValueOf(null, pkg1, pkg3, pkg5); // closure does not include self (george)
         assertQueryEquals(george, expected1, "self.oclAsType(Package)->closure(nestingPackage)");
 
-        CollectionValue expected2 = valueFactory.createSetOf(pkg2, jim, bob, pkg3, pkg4, pkg5, george);
-//        CollectionValue expected2a = valueFactory.createOrderedSetOf(pkg2, jim, bob, pkg3, pkg4, pkg5, george);
+        CollectionValue expected2 = metaModelManager.createSetValueOf(null, pkg2, jim, bob, pkg3, pkg4, pkg5, george);
+//        CollectionValue expected2a = metaModelManager.createOrderedSetValue(null, pkg2, jim, bob, pkg3, pkg4, pkg5, george);
         assertQueryEquals(pkg1, expected2, "self.oclAsType(Package)->closure(nestedPackage)");
 // FIXME not a valid test for UML's unordered nested packages
 //        assertQueryEquals(pkg1, expected2a, "self->asSequence()->closure(nestedPackage)");
         assertQueryEquals(pkg1, expected2, "self.oclAsType(Package)->closure(nestedPackage->asSequence())");
-	    SetValue expected3 = valueFactory.createSetOf(pkg2, jim, bob, pkg3, pkg4, pkg5, george);
+	    SetValue expected3 = metaModelManager.createSetValueOf(null, pkg2, jim, bob, pkg3, pkg4, pkg5, george);
         assertQueryEquals(pkg1, expected3, "self.oclAsType(Package)->asBag()->closure(nestedPackage)");
         assertQueryEquals(pkg1, expected3, "self.oclAsType(Package)->closure(nestedPackage->asBag())");
 
         // empty closure
-        DomainCollectionType collectionType = expected1.getCollectionType();
-        @SuppressWarnings("unused") DomainType elementType = collectionType.getElementType();
-		assertQueryEquals(pkg1, valueFactory.createSetValue(collectionType), "self.oclAsType(Package)->closure(nestingPackage)");
+        CollectedTypeId collectedId = expected1.getCollectedTypeId();
+//        @SuppressWarnings("unused") DomainType elementType = collectionType.getElementType();
+		assertQueryEquals(pkg1, metaModelManager.createSetValueOf(collectedId), "self.oclAsType(Package)->closure(nestingPackage)");
 //WIP        assertQueryNotEquals(pkg1, getEmptySetValue(), "self->closure(nestingPackage)");
         // empty closure
         assertQueryEquals(pkg1, getEmptyOrderedSetValue(), "self.oclAsType(Package)->asSequence()->closure(nestingPackage)");
-//WIP 		assertQueryNotEquals(pkg1, valueFactory.createOrderedSetValue(metaModelManager.getOrderedSetType(elementType)), "self->asSequence()->closure(nestingPackage)");
+//WIP 		assertQueryNotEquals(pkg1, metaModelManager.createOrderedSetValue(metaModelManager.getOrderedSetType(elementType)), "self->asSequence()->closure(nestingPackage)");
     }
 
     /**
@@ -393,7 +393,7 @@ public class IteratorsTest extends PivotTestSuite
         Type packageMetaclass = metaModelManager.getPivotType("Package");
         Property nestedPackage = getAttribute(packageMetaclass, "nestedPackage", packageMetaclass);
         Property nestingPackage = getAttribute(packageMetaclass, "nestingPackage", packageMetaclass);
-        SetValue expected = valueFactory.createSetOf(nestedPackage, nestingPackage); // cyclic closure *does* include self
+        SetValue expected = metaModelManager.createSetValueOf(null, nestedPackage, nestingPackage); // cyclic closure *does* include self
         assertQueryEquals(nestingPackage, expected, "self->closure(opposite)");
         assertQueryEquals(nestedPackage, expected, "self->closure(opposite)");
     }
@@ -567,7 +567,7 @@ public class IteratorsTest extends PivotTestSuite
 
         // in the case of a null value, null is allowed in a collection, so
         // it does not result in invalid
-        BagValue expected = valueFactory.createBagOf(getNull(), getNull(), getNull());
+        BagValue expected = metaModelManager.createBagValueOf(null, getNull(), getNull(), getNull());
         assertQueryEquals(EcorePackage.eINSTANCE, expected,
             "let b:Boolean = null in Bag{1, 2, 3}->collect(null)");
     }
@@ -585,7 +585,7 @@ public class IteratorsTest extends PivotTestSuite
     	Set<BigInteger> e1 = Collections.singleton(BigInteger.valueOf(1));
     	Object e2 = getNull();
     	Set<BigInteger> e3 = Collections.singleton(BigInteger.valueOf(3));
-        BagValue expected = valueFactory.createBagOf(e1, e2, e3);
+        BagValue expected = metaModelManager.createBagValueOf(null, e1, e2, e3);
         assertQueryEquals(EcorePackage.eINSTANCE, expected,
             "let b:Boolean = null in Bag{1, 2, 3}->collectNested(e | if e = 2 then null else Set{e} endif)");
     }

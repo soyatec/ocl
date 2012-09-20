@@ -37,8 +37,10 @@ import java.math.BigInteger;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NumericValue;
@@ -46,7 +48,6 @@ import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
 /**
@@ -64,20 +65,18 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 		return ValuesPackage.Literals.UNLIMITED_VALUE;
 	}
 
-	public UnlimitedValueImpl(@NonNull ValueFactory valueFactory) {
-		super(valueFactory);
-	}
+	public UnlimitedValueImpl() {}
 
 	public @NonNull UnlimitedValueImpl abs() {
 		return this;
 	}
 
-	public @NonNull IntegerValue add(@NonNull IntegerValue right) throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "add", "UnlimitedValue");
+	public @NonNull IntegerValue add(@NonNull IntegerValue right) {
+		return createInvalidValue(EvaluatorMessages.InvalidOperation, "add", "UnlimitedValue");
 	}
 
-	public @NonNull RealValue add(@NonNull RealValue right) throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "add", "UnlimitedValue");
+	public @NonNull RealValue add(@NonNull RealValue right) {
+		return createInvalidValue(EvaluatorMessages.InvalidOperation, "add", "UnlimitedValue");
 	}
 
 	public @NonNull Object asObject() {
@@ -89,12 +88,12 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 		return this;
 	}
 
-	public @NonNull BigDecimal bigDecimalValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "bigDecimalValue", "UnlimitedValue");
+	public @NonNull BigDecimal bigDecimalValue() {
+		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "bigDecimalValue", "UnlimitedValue");
 	}
 
-	public @NonNull BigInteger bigIntegerValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "bigIntegerValue", "UnlimitedValue");
+	public @NonNull BigInteger bigIntegerValue() {
+		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "bigIntegerValue", "UnlimitedValue");
 	}
 
 	public int compareTo(NumericValue o) {
@@ -109,32 +108,36 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 		}
 	}
 
-	public @NonNull IntegerValue div(@NonNull IntegerValue right) throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "div", "UnlimitedValue");
+	public @NonNull IntegerValue div(@NonNull IntegerValue right) {
+		return createInvalidValue(EvaluatorMessages.InvalidOperation, "div", "UnlimitedValue");
 	}
 
-	public @NonNull RealValue divide(@NonNull IntegerValue right) throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "divide", "UnlimitedValue");
+	public @NonNull RealValue divide(@NonNull IntegerValue right) {
+		return createInvalidValue(EvaluatorMessages.InvalidOperation, "divide", "UnlimitedValue");
 	}
 
-	public @NonNull RealValue divide(@NonNull RealValue right) throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "divide", "UnlimitedValue");
+	public @NonNull RealValue divide(@NonNull RealValue right) {
+		return createInvalidValue(EvaluatorMessages.InvalidOperation, "divide", "UnlimitedValue");
 	}
 
 	public double doubleValue() {
 		throw new UnsupportedOperationException(getClass().getName()+ ".doubleValue");
 	}
 
-	public @NonNull IntegerValue floor() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "floor", "UnlimitedValue");
+	public @NonNull IntegerValue floor() {
+		return createInvalidValue(EvaluatorMessages.InvalidOperation, "floor", "UnlimitedValue");
 	}
 
-	public @NonNull DomainType getType() {
-		return valueFactory.getStandardLibrary().getUnlimitedNaturalType();
+	public @NonNull DomainType getType(@NonNull DomainStandardLibrary standardLibrary) {
+		return standardLibrary.getUnlimitedNaturalType();
 	}
 
-	public int intValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "intValue", "UnlimitedValue");
+	public @NonNull TypeId getTypeId() {
+		return TypeId.UNLIMITED_NATURAL;
+	}
+
+	public int intValue() {
+		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "intValue", "UnlimitedValue");
 	}
 
 	public boolean isUnlimited() {
@@ -145,52 +148,52 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 		return true;
 	}
 
-	public @NonNull IntegerValue max(@NonNull IntegerValue right) throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "max", "UnlimitedValue");
+	public @NonNull IntegerValue max(@NonNull IntegerValue right) {
+		return createInvalidValue(EvaluatorMessages.InvalidOperation, "max", "UnlimitedValue");
 	}
 
-	public @NonNull RealValue max(@NonNull RealValue right) throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "max", "UnlimitedValue");
+	public @NonNull RealValue max(@NonNull RealValue right) {
+		return createInvalidValue(EvaluatorMessages.InvalidOperation, "max", "UnlimitedValue");
 	}
 
-	public @NonNull IntegerValue min(@NonNull IntegerValue right) throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "min", "UnlimitedValue");
+	public @NonNull IntegerValue min(@NonNull IntegerValue right) {
+		return createInvalidValue(EvaluatorMessages.InvalidOperation, "min", "UnlimitedValue");
 	}
 
-	public @NonNull RealValue min(@NonNull RealValue right) throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "min", "UnlimitedValue");
+	public @NonNull RealValue min(@NonNull RealValue right) {
+		return createInvalidValue(EvaluatorMessages.InvalidOperation, "min", "UnlimitedValue");
 	}
 
-	public @NonNull IntegerValue mod(@NonNull IntegerValue right) throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "mod", "UnlimitedValue");
+	public @NonNull IntegerValue mod(@NonNull IntegerValue right) {
+		return createInvalidValue(EvaluatorMessages.InvalidOperation, "mod", "UnlimitedValue");
 	}
 
-	public @NonNull IntegerValue multiply(@NonNull IntegerValue right) throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "multiply", "UnlimitedValue");
+	public @NonNull IntegerValue multiply(@NonNull IntegerValue right) {
+		return createInvalidValue(EvaluatorMessages.InvalidOperation, "multiply", "UnlimitedValue");
 	}
 
-	public @NonNull RealValue multiply(@NonNull RealValue right) throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "multiply", "UnlimitedValue");
+	public @NonNull RealValue multiply(@NonNull RealValue right) {
+		return createInvalidValue(EvaluatorMessages.InvalidOperation, "multiply", "UnlimitedValue");
 	}
 
-	public @NonNull UnlimitedValue negate() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "negate", "UnlimitedValue");
+	public @NonNull UnlimitedValue negate() {
+		return createInvalidValue(EvaluatorMessages.InvalidOperation, "negate", "UnlimitedValue");
 	}
 
-	public @NonNull IntegerValue round() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "round", "UnlimitedValue");
+	public @NonNull IntegerValue round() {
+		return createInvalidValue(EvaluatorMessages.InvalidOperation, "round", "UnlimitedValue");
 	}
 
 	public int signum() {
 		return 1;
 	}
 
-	public @NonNull IntegerValue subtract(@NonNull IntegerValue right) throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "subtract", "UnlimitedValue");
+	public @NonNull IntegerValue subtract(@NonNull IntegerValue right) {
+		return createInvalidValue(EvaluatorMessages.InvalidOperation, "subtract", "UnlimitedValue");
 	}
 
-	public @NonNull RealValue subtract(@NonNull RealValue right) throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidOperation, "subtract", "UnlimitedValue");
+	public @NonNull RealValue subtract(@NonNull RealValue right) {
+		return createInvalidValue(EvaluatorMessages.InvalidOperation, "subtract", "UnlimitedValue");
 	}
 
 	@Override

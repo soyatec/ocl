@@ -93,6 +93,9 @@ if elem.unspecializedElement->notEmpty() then elem.unspecializedElement.oclAsTyp
 [query public isBinarySelf(callExp : OperationCallExp) : Boolean = 
 invoke('org.eclipse.ocl.examples.codegen.common.PivotQueries', 'isBinarySelf(org.eclipse.ocl.examples.pivot.OperationCallExp)', Sequence{callExp}) /]
 
+[query public isBuiltInType(type : Type) : Boolean = 
+invoke('org.eclipse.ocl.examples.codegen.common.PivotQueries', 'isBuiltInType(org.eclipse.ocl.examples.pivot.Type)', Sequence{type}) /]
+
 [query public prettyPrint(expr : OCLExpression) : String = 
 invoke('org.eclipse.ocl.examples.codegen.common.PivotQueries', 'prettyPrint(org.eclipse.ocl.examples.pivot.Element)', Sequence{expr}) /]
 

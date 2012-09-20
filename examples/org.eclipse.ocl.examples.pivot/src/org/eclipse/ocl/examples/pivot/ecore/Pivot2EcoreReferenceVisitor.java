@@ -37,7 +37,6 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Class;
 import org.eclipse.ocl.examples.pivot.CollectionType;
@@ -278,9 +277,8 @@ public class Pivot2EcoreReferenceVisitor
 			}
 			eTypedElement.setOrdered(collectionType.isOrdered());
 			eTypedElement.setUnique(collectionType.isUnique());
-			ValueFactory valueFactory = context.getMetaModelManager().getValueFactory();
-			IntegerValue lower = collectionType.getLowerValue(valueFactory);
-			IntegerValue upper = collectionType.getUpperValue(valueFactory);
+			IntegerValue lower = collectionType.getLowerValue();
+			IntegerValue upper = collectionType.getUpperValue();
 			try {
 				eTypedElement.setLowerBound(lower.intValue());
 			} catch (InvalidValueException e) {

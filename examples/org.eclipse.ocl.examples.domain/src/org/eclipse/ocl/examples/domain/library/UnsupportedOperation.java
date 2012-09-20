@@ -18,17 +18,18 @@ package org.eclipse.ocl.examples.domain.library;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 /**
  * OclIsUndefinedOperation realises the oclIsUndefined() library operation.
  */
-public class UnsupportedOperation extends AbstractOperation implements LibraryUnaryOperation, LibraryBinaryOperation, LibraryTernaryOperation
+public class UnsupportedOperation extends AbstractPolyOperation
 {
 	public static final @NonNull UnsupportedOperation INSTANCE = new UnsupportedOperation();
 
+	@Override
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Object sourceValue)
 			throws InvalidValueException {
 		throw new UnsupportedOperationException();
@@ -39,27 +40,29 @@ public class UnsupportedOperation extends AbstractOperation implements LibraryUn
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Object sourceValue,
-			@NonNull Object argumentValue) throws InvalidValueException {
+			@NonNull Object argumentValue) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Object sourceValue,
-			@NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) throws InvalidValueException {
+			@NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) {
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue) {
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue,
-			@NonNull Object argumentValue) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue,
+			@NonNull Object argumentValue) {
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue,
-			@NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue,
+			@NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) {
 		throw new UnsupportedOperationException();
 	}
 }

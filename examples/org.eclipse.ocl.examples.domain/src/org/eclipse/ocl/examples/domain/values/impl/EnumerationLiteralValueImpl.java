@@ -16,102 +16,44 @@
  */
 package org.eclipse.ocl.examples.domain.values.impl;
 
-import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.common.util.Enumerator;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
-import org.eclipse.ocl.examples.domain.values.ValuesPackage;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
 
 /**
  * @generated NOT
  */
-public class EnumerationLiteralValueImpl extends ValueImpl implements EnumerationLiteralValue
+public class EnumerationLiteralValueImpl extends AbstractEnumerationLiteralValueImpl
 {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return ValuesPackage.Literals.ENUMERATION_LITERAL_VALUE;
+	protected final @NonNull DomainEnumerationLiteral enumerationLiteral;
+
+	public EnumerationLiteralValueImpl(@NonNull DomainEnumerationLiteral enumerationLiteral) {
+		super(IdManager.INSTANCE.getEnumerationLiteralId(enumerationLiteral));
+		this.enumerationLiteral = enumerationLiteral;
 	}
 
-	protected final @NonNull DomainEnumerationLiteral object;
-	protected DomainEnumeration type = null;			// Lazily computed
-
-	public EnumerationLiteralValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainEnumerationLiteral object) {
-		super(valueFactory);
-		this.object = object;
+	public Enumerator asEcoreObject() {
+		EEnumLiteral eEnumLiteral = enumerationLiteral.asEcoreObject();
+		return eEnumLiteral != null ? eEnumLiteral.getInstance() : null;
 	}
-
-	@SuppressWarnings("null")
-	@Override
-	public @NonNull Object asEcoreObject() {
-		return object.asEcoreObject(valueFactory.getStandardLibrary());
-	}
-
-	@Override
-	public DomainEnumerationLiteral asElement() {
-		return object;
-	}
+	
+//	@Override
+//	public DomainEnumerationLiteral asElement() {
+//		return enumerationLiteral;
+//	}
 
 	public @NonNull Object asObject() {
-		return object;
+		return enumerationLiteral;
 	}
+
+//	public DomainEnumerationLiteral getElement() {
+//		return enumerationLiteral;
+//	}
 
 	@Override
-	public boolean equals(Object that) {
-		if (this == that) {
-			return true;
-		}
-		if (!(that instanceof EnumerationLiteralValue)) {
-			return false;
-		}
-		DomainEnumeration thisEnumeration = getType();
-		DomainEnumeration thatEnumeration = ((EnumerationLiteralValue)that).getType();
-		if (!(thisEnumeration.equals(thatEnumeration))) {
-			return false;
-		}
-		try {
-			String thisName = getName();
-			String thatName = ((EnumerationLiteralValue)that).getName();
-			return thisName.equals(thatName);
-		} catch (InvalidValueException e) {
-			return false;
-		}
-	}
-
-	public DomainEnumerationLiteral getElement() {
-		return object;
-	}
-
-	public @NonNull String getName() throws InvalidValueException {
-		String name = object.getName();
-		if (name == null) {
-			return valueFactory.throwInvalidValueException("null-named EnumerationLiteral");
-		}
-		return name;
-	}
-
-	public @NonNull DomainEnumerationLiteral getObject() {
-		return object;
-	}
-
-	public @NonNull DomainEnumeration getType() {
-		DomainEnumeration type2 = type;
-		if (type2 == null) {
-			type2 = type = DomainUtil.nonNullState(object.getEnumeration());
-		}
-		return type2;
-	}
-
-	@Override
-	public int hashCode() {
-		return object.hashCode();
+	public String toString() {
+		return String.valueOf(enumerationLiteral);
 	}
 }

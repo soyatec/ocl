@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.Class;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.DataType;
@@ -218,9 +217,8 @@ public class Pivot2UMLReferenceVisitor
 				MultiplicityElement umlMultiplicityElement = (MultiplicityElement)umlTypedElement;
 				umlMultiplicityElement.setIsOrdered(collectionType.isOrdered());
 				umlMultiplicityElement.setIsUnique(collectionType.isUnique());
-				ValueFactory valueFactory = context.getMetaModelManager().getValueFactory();
-				IntegerValue lower = collectionType.getLowerValue(valueFactory);
-				IntegerValue upper = collectionType.getUpperValue(valueFactory);
+				IntegerValue lower = collectionType.getLowerValue();
+				IntegerValue upper = collectionType.getUpperValue();
 				try {
 					umlMultiplicityElement.setLower(lower.intValue());
 				} catch (InvalidValueException e) {

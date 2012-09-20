@@ -17,11 +17,10 @@
 package org.eclipse.ocl.examples.domain.elements;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
-import org.eclipse.ocl.examples.domain.typeids.Typeid;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 public interface DomainType extends DomainNamespace
 {
@@ -36,13 +35,13 @@ public interface DomainType extends DomainNamespace
 	 * OCL functionality is permitted to use the ObjectValue until initialisation has completed.
 	 * @param value 
 	 */
-	@NonNull ObjectValue createInstance(@NonNull ValueFactory valueFactory);
+	@NonNull ObjectValue createInstance(@NonNull DomainStandardLibrary standardLibrary);
 
 	/**
 	 * Return a new instance of this data type from valueFactory.
 	 * @param value string initial value
 	 */
-	@NonNull Object createInstance(@NonNull ValueFactory valueFactory, @NonNull String value);
+	@NonNull Object createInstance(@NonNull DomainStandardLibrary standardLibrary, @NonNull String value);
 	
 	/**
 	 * Return the most derived type com mon to this type and thatType within standardLibrary.
@@ -86,7 +85,7 @@ public interface DomainType extends DomainNamespace
 	 * Return a unique StandardLibrary-independent identifier for this type.
 	 * @return
 	 */
-	@NonNull Typeid getTypeid();
+	@NonNull TypeId getTypeId();
 	
 	/**
 	 * Return true if this is the same type as thatType within standardLibrary.

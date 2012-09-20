@@ -21,26 +21,25 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.typeids.Typeid;
-import org.eclipse.ocl.examples.domain.typeids.TypeidManager;
+import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 public class AbstractCollectionType extends AbstractSpecializedType implements DomainCollectionType
 {
 	protected final @NonNull DomainType elementType;
 	protected final @NonNull IntegerValue lower;
 	protected final @NonNull IntegerValue upper;
-	protected final @NonNull Typeid typeid;
+	protected final @NonNull CollectedTypeId typeId;
 	
 	public AbstractCollectionType(@NonNull DomainStandardLibrary standardLibrary, @NonNull String name,
 			@NonNull DomainType containerType, @NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
 		super(standardLibrary, name, containerType);
 		this.elementType = elementType;
-		ValueFactory valueFactory = standardLibrary.getValueFactory();
-		this.lower = lower != null ? lower : valueFactory.getZero();
-		this.upper = upper != null ? upper : valueFactory.getUnlimited();
-		this.typeid = TypeidManager.INSTANCE.getCollectedTypeid(name, elementType.getTypeid());
+		this.lower = lower != null ? lower : ValuesUtil.ZERO_VALUE;
+		this.upper = upper != null ? upper : ValuesUtil.UNLIMITED_VALUE;
+		this.typeId = IdManager.INSTANCE.getCollectedTypeId(name, elementType.getTypeId());
 	}
 
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
@@ -89,23 +88,28 @@ public class AbstractCollectionType extends AbstractSpecializedType implements D
 	}
 
 	@Override
-	public DomainCollectionType getContainerType() {
-		return (DomainCollectionType)containerType;
+	public DomainType getContainerType() {
+		return containerType;
 	}
 
 	public @NonNull DomainType getElementType() {
 		return elementType;
 	}
 
-	public @NonNull IntegerValue getLowerValue(@NonNull ValueFactory valueFactory) {
+	public @NonNull IntegerValue getLowerValue() {
 		return lower;
 	}
 
-	public @NonNull Typeid getTypeid() {
-		return typeid;
+//	@Override
+//	public @NonNull String getMetaTypeName() {
+//		return getTypeId().getCollectionTypeId().getMetaTypeName();
+//	}
+
+	public @NonNull CollectedTypeId getTypeId() {
+		return typeId;
 	}
 
-	public @NonNull IntegerValue getUpperValue(@NonNull ValueFactory valueFactory) {
+	public @NonNull IntegerValue getUpperValue() {
 		return upper;
 	}
 

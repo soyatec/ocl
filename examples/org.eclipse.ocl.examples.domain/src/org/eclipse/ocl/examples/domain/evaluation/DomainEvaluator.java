@@ -17,26 +17,30 @@
 package org.eclipse.ocl.examples.domain.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
-import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 
 public interface DomainEvaluator
 {
+	<T> T asEcoreObject(@Nullable T example, @NonNull Object value);
+
 	@NonNull DomainEvaluator createNestedEvaluator();
 	@NonNull Object evaluate(@NonNull DomainExpression body);
+	@NonNull DomainType getDynamicTypeOf(@NonNull Object value);
 	@NonNull DomainEvaluationEnvironment getEvaluationEnvironment();
+
 	/**
 	 * Return the manager of all model instances for use by allInstances() and hidden opposite support.
 	 */
 	@NonNull DomainModelManager getModelManager();
 
-	/**
-	 * Return the factory for values and indirectly for types.
-	 * 
-	 * @throws EvaluationHaltedException if evaluation has been canceled.
-	 */
-	@NonNull ValueFactory getValueFactory() throws EvaluationHaltedException;
+	@NonNull DomainStandardLibrary getStandardLibrary();
+
+	@NonNull DomainType getStaticTypeOf(@NonNull Object value);
+	@NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Object... values);
+	@NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Iterable<?> values);
 	
 	/**
 	 * Return true if the evaluation has been canceled.
@@ -49,8 +53,4 @@ public interface DomainEvaluator
 	 * is next invoked. 
 	 */
 	void setCanceled(boolean isCanceled);
-
-	@NonNull NullValue throwInvalidEvaluation(InvalidValueException e) throws InvalidEvaluationException;
-
-	@NonNull NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object context, String message, Object... bindings) throws InvalidEvaluationException;
 }

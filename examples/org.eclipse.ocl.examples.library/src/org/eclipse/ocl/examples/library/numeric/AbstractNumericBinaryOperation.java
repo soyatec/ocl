@@ -17,9 +17,9 @@
 package org.eclipse.ocl.examples.library.numeric;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -31,7 +31,7 @@ import org.eclipse.ocl.examples.domain.values.RealValue;
  */
 public abstract class AbstractNumericBinaryOperation extends AbstractBinaryOperation
 {
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object left, @NonNull Object right) {
 		if (isUnlimited(left) || isUnlimited(right)) {
 			return evaluateUnlimited(evaluator, left, right);
 		}
@@ -52,7 +52,7 @@ public abstract class AbstractNumericBinaryOperation extends AbstractBinaryOpera
 	 * @return result
 	 * @throws InvalidValueException 
 	 */
-	protected abstract @NonNull Object evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) throws InvalidValueException;
+	protected abstract @NonNull Object evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right);
 
 	/**
 	 * Evaluate an operation for which both left and right are Real.
@@ -61,8 +61,8 @@ public abstract class AbstractNumericBinaryOperation extends AbstractBinaryOpera
 	 * @return result
 	 * @throws InvalidValueException 
 	 */
-	protected @NonNull Object evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) throws InvalidValueException {
-		return evaluator.getValueFactory().throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Real"); //$NON-NLS-1$
+	protected @NonNull Object evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) {
+		return createInvalidValue(EvaluatorMessages.TypedValueRequired, TypeId.REAL_NAME);
 	}
 	
 	/**
@@ -72,7 +72,7 @@ public abstract class AbstractNumericBinaryOperation extends AbstractBinaryOpera
 	 * @param right argument
 	 * @return result
 	 */
-	protected @NonNull Object evaluateUnlimited(@NonNull DomainEvaluator evaluator, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
-		return evaluator.getValueFactory().throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "Unlimited"); //$NON-NLS-1$
+	protected @NonNull Object evaluateUnlimited(@NonNull DomainEvaluator evaluator, @NonNull Object left, @NonNull Object right) {
+		return createInvalidValue(EvaluatorMessages.TypedValueRequired, "Unlimited"); //$NON-NLS-1$
 	}
 }

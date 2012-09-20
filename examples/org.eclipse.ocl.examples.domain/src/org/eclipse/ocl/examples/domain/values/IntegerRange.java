@@ -30,6 +30,6 @@ public interface IntegerRange extends List<Value>
 	@NonNull IntegerValue getFirst();
 	@NonNull IntegerValue getLast();
 	@NonNull IntegerValue getSize();	
-	@NonNull ValueFactory getValueFactory();
+//	@NonNull ValueFactory getValueFactory();
 	@NonNull Iterator<Value> iterator();
 }

@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.DataType;
@@ -314,9 +314,8 @@ public class BasePreOrderVisitor extends AbstractExtendingBaseCSVisitor<Continua
 					isUnique = ElementUtil.isUnique((TypedElementCS) eContainer);
 				}
 				MetaModelManager metaModelManager = context.getMetaModelManager();
-				ValueFactory valueFactory = metaModelManager.getValueFactory();
-				IntegerValue lowerValue = valueFactory.integerValueOf(lower);
-				IntegerValue upperValue = upper != -1 ? valueFactory.integerValueOf(upper) : valueFactory.getUnlimited();
+				IntegerValue lowerValue = ValuesUtil.integerValueOf(lower);
+				IntegerValue upperValue = upper != -1 ? ValuesUtil.integerValueOf(upper) : ValuesUtil.UNLIMITED_VALUE;
 				CollectionType pivotCollectionType = metaModelManager.getCollectionType(isOrdered, isUnique, pivotType, lowerValue, upperValue);
 				context.installPivotReference(csElement, pivotCollectionType, BaseCSTPackage.Literals.PIVOTABLE_ELEMENT_CS__PIVOT);
 //				if (pivotElement instanceof TypedMultiplicityElement) {

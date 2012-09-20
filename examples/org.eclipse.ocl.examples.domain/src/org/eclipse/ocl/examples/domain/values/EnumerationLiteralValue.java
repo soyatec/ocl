@@ -16,26 +16,24 @@
  */
 package org.eclipse.ocl.examples.domain.values;
 
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
-import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 
 public interface EnumerationLiteralValue extends Value
 {
+	Enumerator asEcoreObject();
 	/**
 	 * @generated NOT
 	 */
-	DomainEnumerationLiteral getElement();
+//	DomainEnumerationLiteral getElement();
+
+	@NonNull EnumerationLiteralId getEnumerationLiteralId();
 
 	/**
 	 * @throws InvalidValueException 
 	 * @generated NOT
 	 */
-	@NonNull String getName() throws InvalidValueException;
-
-	/**
-	 * @generated NOT
-	 */
-	@NonNull DomainEnumeration getType();
+	@NonNull String getName();
 }

@@ -19,20 +19,25 @@ package org.eclipse.ocl.examples.library.executor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
-import org.eclipse.ocl.examples.domain.typeids.Typeid;
+import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.ids.PackageId;
 
 public abstract class ExecutorPackage implements DomainPackage
 {
 	protected final @NonNull String name;
 	protected final @Nullable String nsPrefix;
 	protected final @Nullable String nsURI;
-	protected final @NonNull Typeid typeid;
+	protected final @NonNull PackageId packageId;
 
-	protected ExecutorPackage(@NonNull String name, @Nullable String nsPrefix, @Nullable String nsURI, @NonNull Typeid typeid) {
+	protected ExecutorPackage(@NonNull String name, @Nullable String nsPrefix, @Nullable String nsURI, @NonNull PackageId packageId) {
 		this.name = name;
 		this.nsPrefix = nsPrefix;
 		this.nsURI = nsURI;
-		this.typeid = typeid;
+		this.packageId = packageId;
+	}
+
+	public @NonNull ElementId getElementId() {
+		return packageId;
 	}
 
 	public final @NonNull String getName() {
@@ -47,8 +52,8 @@ public abstract class ExecutorPackage implements DomainPackage
 		return nsURI;
 	}
 
-	public @NonNull Typeid getTypeid() {
-		return typeid;
+	public @NonNull PackageId getPackageId() {
+		return packageId;
 	}
 
 	@Override

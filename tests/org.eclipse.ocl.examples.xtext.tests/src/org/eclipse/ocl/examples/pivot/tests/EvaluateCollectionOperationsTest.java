@@ -17,6 +17,7 @@
 
 package org.eclipse.ocl.examples.pivot.tests;
 
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 
 
@@ -1632,8 +1633,8 @@ public void testCollectionNotEqualOrderedXUnordered() {
 	}
 
 	public void testCollectionUpper() {
-		assertQueryEquals(null, valueFactory.getUnlimited(), "Sequence{1, 2.0, '3'}->oclType().upper");
-		assertQueryEquals(null, valueFactory.getUnlimited(), "Sequence{1, 2.0, 3}->oclAsType(Collection(Real))->oclType().upper");
-		assertQueryEquals(null, valueFactory.getUnlimited(), "Set{1, 2.0, 3}->oclAsType(Collection(Real)[2..4])->oclType().upper"); // no change to dynamic bound
+		assertQueryEquals(null, ValuesUtil.UNLIMITED_VALUE, "Sequence{1, 2.0, '3'}->oclType().upper");
+		assertQueryEquals(null, ValuesUtil.UNLIMITED_VALUE, "Sequence{1, 2.0, 3}->oclAsType(Collection(Real))->oclType().upper");
+		assertQueryEquals(null, ValuesUtil.UNLIMITED_VALUE, "Set{1, 2.0, 3}->oclAsType(Collection(Real)[2..4])->oclType().upper"); // no change to dynamic bound
 	}
 }

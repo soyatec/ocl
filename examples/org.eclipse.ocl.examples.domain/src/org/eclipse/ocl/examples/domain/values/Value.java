@@ -20,14 +20,29 @@ package org.eclipse.ocl.examples.domain.values;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 /**
+ * A value support wrapping/boxing a value whose Java implementation does not comply with OCL semantics, primarily
+ * that equal values return true from Object.equals(Object) but also for variant metamodel elements.
+ * <p>
+ * A boxed value is not needed for Boolean and String that are well-behaved.
+ * <p>
+ * A boxed value is needed for Integer and Double, since in OCL 4 is equal to 4.0 and since multiple implementation
+ * classes exist to support growth between unlimited numeric ranges.
+ * <p>
+ * A boxed value is needed for EnumerationLiterals since distinct Pivot, Ecore, UML variants may exist.
+ * <p>
+ * A boxed value is needed for types since distinct Pivot, Ecore, UML variants may exist.
+ * <p>
+ * A boxed value is useful/needed for collections to provide OCL polymorphism.
+ * <p>
+ * A boxed value is not needed for the large number of ordinary EObjects not in the above list. 
+ * <p>
  * asXXX returns a non-null XXX if self is convertible to an XXX and is not NullValue/InvalidValue
  * throws an InvalidValueException for a NullValue/InvalidValue. A Value object may be converted
  * if the conversion to XXX is exact and type conformant.
- * 
+ * <p>
  * isXXX returns an XXX-related value if self is an XXX and is not a NullValue/InvalidValue, returns null otherwise.
  */
 public interface Value
@@ -40,23 +55,23 @@ public interface Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull BagValue asBagValue() throws InvalidValueException;
+	@NonNull BagValue asBagValue();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull CollectionValue asCollectionValue() throws InvalidValueException;
+	@NonNull CollectionValue asCollectionValue();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Double asDouble() throws InvalidValueException;
+	@NonNull Double asDouble();
 	
 	/**
 	 * Return the Ecore representation of this value.
 	 * @generated NOT
 	 */
-	Object asEcoreObject() throws InvalidValueException;
+//	Object asEcoreObject();
 
 	/**
 	 * @generated NOT
@@ -66,67 +81,62 @@ public interface Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Integer asInteger() throws InvalidValueException;
+	@NonNull Integer asInteger();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue asIntegerValue() throws InvalidValueException;
+	@NonNull IntegerValue asIntegerValue();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull EObject asNavigableObject() throws InvalidValueException;
+	@NonNull EObject asNavigableObject();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Object asObject() throws InvalidValueException;
+	@NonNull Object asObject();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull ObjectValue asObjectValue() throws InvalidValueException;
+	@NonNull ObjectValue asObjectValue();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull OrderedSetValue asOrderedSetValue() throws InvalidValueException;
+	@NonNull OrderedSetValue asOrderedSetValue();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull RealValue asRealValue() throws InvalidValueException;
+	@NonNull RealValue asRealValue();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull SequenceValue asSequenceValue() throws InvalidValueException;
+	@NonNull SequenceValue asSequenceValue();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull SetValue asSetValue() throws InvalidValueException;
+	@NonNull SetValue asSetValue();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull TupleValue asTupleValue() throws InvalidValueException;
+	@NonNull TupleValue asTupleValue();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull UniqueCollectionValue asUniqueCollectionValue() throws InvalidValueException;
+	@NonNull UniqueCollectionValue asUniqueCollectionValue();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Value asUnlimitedNaturalValue() throws InvalidValueException;
-
-	/**
-	 * @generated NOT
-	 */
-	@NonNull Value asValidValue() throws InvalidValueException;
+	@NonNull Value asUnlimitedNaturalValue();
 	
 	/**
 	 * Return the type of this value determined from its content. In the case of collections
@@ -135,7 +145,7 @@ public interface Value
 	 * @throws InvalidValueException 
 	 * @generated NOT
 	 */
-	@NonNull DomainType getActualType() throws InvalidValueException;
+//	@NonNull DomainType getActualType(@NonNull DomainStandardLibrary standardLibrary);
 
 	/**
 	 * 
@@ -143,12 +153,8 @@ public interface Value
 	 * this may differ from the actual type.
 	 * @generated NOT
 	 */
-	@NonNull DomainType getType();
-
-	/**
-	 * @generated NOT
-	 */
-	@NonNull ValueFactory getValueFactory();	
+//	@NonNull DomainType getType(@NonNull DomainStandardLibrary standardLibrary);
+	@NonNull TypeId getTypeId();
 
 	/**
 	 * @generated NOT

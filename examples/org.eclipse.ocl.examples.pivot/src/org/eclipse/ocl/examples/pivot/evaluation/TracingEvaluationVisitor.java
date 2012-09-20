@@ -18,12 +18,10 @@
 package org.eclipse.ocl.examples.pivot.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
@@ -72,6 +70,10 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
         super(decorated);
     }
 
+	public <T> T asEcoreObject(@Nullable T example, @NonNull Object value) {
+		return getDelegate().asEcoreObject(example, value);
+	}
+
 	@Override
 	public @NonNull EvaluationVisitor createNestedEvaluator() {
 		return new TracingEvaluationVisitor(super.createNestedEvaluator());
@@ -83,6 +85,10 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
 
 	public @NonNull Object evaluate(@NonNull ExpressionInOCL expressionInOCL) {
 		return getDelegate().evaluate(expressionInOCL);
+	}
+
+	public @NonNull DomainType getDynamicTypeOf(@NonNull Object value) {
+		return getDelegate().getDynamicTypeOf(value);
 	}
 	
 	public @NonNull EvaluationVisitor getEvaluator() {
@@ -97,8 +103,16 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
 		return getDelegate().getStandardLibrary();
 	}
 
-	public @NonNull ValueFactory getValueFactory() {
-		return getDelegate().getValueFactory();
+	public @NonNull DomainType getStaticTypeOf(@NonNull Object value) {
+		return getDelegate().getStaticTypeOf(value);
+	}
+
+	public @NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Object... values) {
+		return getDelegate().getStaticTypeOf(value, values);
+	}
+
+	public @NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Iterable<?> values) {
+		return getDelegate().getStaticTypeOf(value, values);
 	}
 
 	public boolean isCanceled() {
@@ -108,18 +122,14 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
 	public void setCanceled(boolean isCanceled) {
 		getDelegate().setCanceled(isCanceled);
 	}
-	
-	public @NonNull NullValue throwInvalidEvaluation(InvalidValueException e) throws InvalidEvaluationException {
-	       return getDelegate().throwInvalidEvaluation(e);
-	}
 
-	public @NonNull NullValue throwInvalidEvaluation(String message) throws InvalidEvaluationException {
-        return getDelegate().throwInvalidEvaluation(message);
-	}
+//	public @NonNull NullValue throwInvalidEvaluation(String message) {
+//        return getDelegate().throwInvalidEvaluation(message);
+//	}
 
-	public @NonNull NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object value, String message, Object... bindings) {
-	       return getDelegate().throwInvalidEvaluation(e, expression, value, message, bindings);
-	}
+//	public @NonNull NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object value, String message, Object... bindings) {
+//	       return getDelegate().throwInvalidEvaluation(e, expression, value, message, bindings);
+//	}
     
     private Object trace(Object expression, Object value) {
         try {

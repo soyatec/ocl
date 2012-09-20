@@ -17,6 +17,8 @@
 package org.eclipse.ocl.examples.pivot.executor;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
+import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -27,7 +29,7 @@ public class PivotExecutorOperation extends ExecutorOperation
 	protected final @NonNull Operation pivotOperation;
 	
 	public PivotExecutorOperation(@NonNull TypeServer inheritance, int operationIndex, @NonNull Operation pivotOperation) {
-		super(DomainUtil.nonNullModel(pivotOperation.getName()), inheritance, operationIndex, pivotOperation.getImplementation());
+		super(DomainUtil.nonNullModel(pivotOperation.getName()), DomainParameterTypes.EMPTY_LIST, inheritance, operationIndex, DomainTypeParameters.EMPTY_LIST, pivotOperation.getImplementation());
 		this.pivotOperation = pivotOperation;		
 	}
 	

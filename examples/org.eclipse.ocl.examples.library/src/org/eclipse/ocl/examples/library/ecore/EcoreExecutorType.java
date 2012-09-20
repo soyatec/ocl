@@ -20,11 +20,14 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.typeids.Typeid;
-import org.eclipse.ocl.examples.domain.typeids.TypeidManager;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
+import org.eclipse.ocl.examples.domain.ids.BuiltInTypeId;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.PackageId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorFragment;
 import org.eclipse.ocl.examples.library.executor.ExecutorPackage;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
@@ -33,7 +36,7 @@ import org.eclipse.ocl.examples.library.executor.ExecutorTypeParameter;
 public class EcoreExecutorType extends ExecutorType
 {
 	protected @Nullable EClassifier eClassifier;
-	private @Nullable Typeid typeid = null;
+	private @Nullable TypeId typeId = null;
 	
 	/**
 	 * Construct an executable type descriptor in the absence of a known EClassifier. A subsequent
@@ -45,6 +48,16 @@ public class EcoreExecutorType extends ExecutorType
 	}
 	
 	/**
+	 * Construct an executable type descriptor in the absence of a known EClassifier. A subsequent
+	 * call of {@link #init(EClassifier)} may define an EClassifier.
+	 */
+	public EcoreExecutorType(@NonNull BuiltInTypeId typeId, @NonNull ExecutorPackage evaluationPackage, int flags, @NonNull ExecutorTypeParameter... typeParameters) {
+		super(typeId.getName(), evaluationPackage, flags, typeParameters);
+		this.eClassifier = null;		
+		this.typeId = typeId;		
+	}
+	
+	/**
 	 * Construct an executable type descriptor for a known EClassifier.
 	 */
 	public EcoreExecutorType(/*@NonNull*/ EClassifier eClassifier, @NonNull EcoreExecutorPackage evaluationPackage, int flags, @NonNull ExecutorTypeParameter... typeParameters) {
@@ -53,25 +66,25 @@ public class EcoreExecutorType extends ExecutorType
 	}
 
 	@Override
-	public @NonNull ObjectValue createInstance(@NonNull ValueFactory valueFactory) {
+	public @NonNull ObjectValue createInstance(@NonNull DomainStandardLibrary standardLibrary) {
 		EClassifier eClassifier2 = eClassifier;
 		if (eClassifier2 instanceof EClass) {
 			EClass eClass = (EClass)eClassifier2;
 			EObject element = eClass.getEPackage().getEFactoryInstance().create(eClass);
-			return valueFactory.createObjectValue(DomainUtil.nonNullEMF(element));
+			return ValuesUtil.createObjectValue(DomainUtil.nonNullEMF(element));
 		}
-		return super.createInstance(valueFactory);
+		return super.createInstance(standardLibrary);
 	}
 
 	@Override
-	public @NonNull Object createInstance(@NonNull ValueFactory valueFactory, @NonNull String value) {
+	public @NonNull Object createInstance(@NonNull DomainStandardLibrary standardLibrary, @NonNull String value) {
 		EClassifier eClassifier2 = eClassifier;
 		if (eClassifier2 instanceof EDataType) {
 			EDataType eDataType = (EDataType) eClassifier2;
 			Object element = eDataType.getEPackage().getEFactoryInstance().createFromString(eDataType, value);
-			return valueFactory.valueOf(DomainUtil.nonNullEMF(element));
+			return ValuesUtil.valueOf(DomainUtil.nonNullEMF(element));
 		}
-		return super.createInstance(valueFactory);
+		return super.createInstance(standardLibrary);
 	}
 
 	public final EClassifier getEClassifier() {
@@ -80,29 +93,34 @@ public class EcoreExecutorType extends ExecutorType
 
 	@Override
 	public @NonNull String getMetaTypeName() {
-		return DomainUtil.nonNullModel(DomainUtil.nonNullState(eClassifier).getName());
+		if (eClassifier != null) {					// FIXME Enforce @NonNull
+			return DomainUtil.nonNullModel(DomainUtil.nonNullState(eClassifier).getName());
+		}
+		else {
+			return getTypeId().getMetaTypeName();
+		}
 	}
 	
 	@Override
-	public @NonNull Typeid getTypeid() {
-		Typeid typeid2 = typeid;
-		if (typeid2 == null) {
+	public @NonNull TypeId getTypeId() {
+		TypeId typeId2 = typeId;
+		if (typeId2 == null) {
 			EClassifier eClassifier2 = eClassifier;
 			if (eClassifier2 != null) {
-				typeid2 = TypeidManager.INSTANCE.getTypeTypeid(eClassifier2);
+				typeId2 = IdManager.INSTANCE.getTypeId(eClassifier2);
 			}
 			else {
-				if ("Metaclass".equals(name)) {
-					typeid2 = TypeidManager.INSTANCE.getUnscopedTypeid(name);
+				if ("Metaclass".equals(name)) { //$NON-NLS-1$
+					typeId2 = TypeId.METACLASS;
 				}
 				else {
-					Typeid packageTypeid = TypeidManager.INSTANCE.getPackageTypeid(evaluationPackage);
-					typeid2 = packageTypeid.getNestedTypeid(name);
+					PackageId packageTypeId = IdManager.INSTANCE.getPackageId(evaluationPackage);
+					typeId2 = packageTypeId.getNestedTypeId(name);
 				}
 			}
-			typeid = typeid2;
+			typeId = typeId2;
 		}
-		return typeid2;
+		return typeId2;
 	}
 
 	/**

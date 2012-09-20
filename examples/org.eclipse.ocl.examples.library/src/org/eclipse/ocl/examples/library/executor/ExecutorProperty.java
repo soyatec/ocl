@@ -21,7 +21,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
@@ -74,7 +73,7 @@ public class ExecutorProperty implements DomainProperty
 		return false;								// WIP FIXME
 	}
 
-	public void setValue(@NonNull ObjectValue objectValue, @NonNull Object propertyValue) throws InvalidValueException {
+	public void setValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull ObjectValue objectValue, @NonNull Object propertyValue) {
 		throw new UnsupportedOperationException();
 	}
 	

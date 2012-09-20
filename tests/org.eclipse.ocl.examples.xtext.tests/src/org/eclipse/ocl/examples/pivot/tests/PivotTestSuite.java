@@ -55,12 +55,13 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.evaluation.DomainException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -180,7 +181,6 @@ public abstract class PivotTestSuite extends PivotTestCase
 	}
 
 	protected MetaModelManager metaModelManager;
-	protected ValueFactory valueFactory;
 	protected OCL ocl;
 	protected Environment environment;
 	protected OCLHelper helper;
@@ -400,7 +400,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 */
 	protected Object assertQueryEquals(Object context, Object expected, String expression) {
 		try {
-			Object expectedValue = expected instanceof Value ? expected : valueFactory.valueOf(expected);
+			Object expectedValue = expected instanceof Value ? expected : metaModelManager.valueOf(expected);
 //			typeManager.addLockedElement(expectedValue.getType());
 			Object value = evaluate(helper, context, expression);
 //			String expectedAsString = String.valueOf(expected);
@@ -445,7 +445,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 */
 	protected Object assertQueryEquals(Object context, Number expected, String expression, double tolerance) {
 		try {
-			Object expectedValue = valueFactory.valueOf(expected);
+			Object expectedValue = ValuesUtil.valueOf(expected);
 			Object value = evaluate(helper, context, expression);
 			BigDecimal expectedVal = ((RealValue)expectedValue).bigDecimalValue();
 			BigDecimal val = ((RealValue)value).bigDecimalValue();
@@ -495,8 +495,10 @@ public abstract class PivotTestSuite extends PivotTestCase
 	protected Value assertQueryInvalid(Object context, String expression) {
 		try {
 			Object value = evaluate(helper, context, expression);
-			fail(expression + " expected: invalid but was: " + value);
-		} catch (DomainException e) {
+			if (!ValuesUtil.isInvalid(value)) {
+				fail(expression + " expected: invalid but was: " + value);
+			}
+//		} catch (DomainException e) {
 //			assertEquals("Invalid Value Reason", reason, e.getMessage());
 //			assertEquals("Invalid Value Throwable", exceptionClass, e.getCause().getClass());
 		} catch (Exception e) {
@@ -509,12 +511,17 @@ public abstract class PivotTestSuite extends PivotTestCase
 			String reason, Class<?> exceptionClass) {
 		try {
 			Object value = evaluate(helper, context, expression);
-			fail(expression + " expected: invalid but was: " + value);
+			if (!ValuesUtil.isInvalid(value)) {
+				fail(expression + " expected: invalid but was: " + value);
+			}
+			InvalidValue invalidValue = (InvalidValue)value;
 //           fail("Expected invalid for \"" + expression + "\"");
-		} catch (DomainException e) {
-			Throwable ex = e;
-			Throwable cause = e.getCause();
-			String message = e.getMessage();
+//		} catch (DomainException e) {
+//			Throwable ex = e;
+//			Throwable cause = e.getCause();
+			Exception cause = invalidValue.getException();
+			Throwable ex = cause;
+			String message = invalidValue.getMessage();
 			if (cause != null) {
 				ex = cause;
 				if (!(cause instanceof NumberFormatException)) {
@@ -574,7 +581,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		try {
 			Object value = evaluate(helper, context, expression);
 			if (!ValuesUtil.isNull(value)) {
-				assertEquals(expression, valueFactory.getNull(), value);
+				assertEquals(expression, ValuesUtil.NULL_VALUE, value);
 			}
 			return value;
 		} catch (Exception e) {
@@ -695,7 +702,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		try {
 			Object value = evaluate(helper, context, expression);
 			if (!ValuesUtil.isUnlimited(value)) {
-				assertEquals(expression, valueFactory.getUnlimited(), value);
+				assertEquals(expression, ValuesUtil.UNLIMITED_VALUE, value);
 			}
 			return value;
 		} catch (Exception e) {
@@ -834,8 +841,8 @@ public abstract class PivotTestSuite extends PivotTestCase
 	/**
 	 * Return an isOrdered,isUnique collection containing args.
 	 */
-	protected CollectionValue createCollection(boolean isOrdered, boolean isUnique, Type type, Object... args) {
-		return valueFactory.createCollectionValue(isOrdered, isUnique, type, args);
+	protected CollectionValue createCollection(boolean isOrdered, boolean isUnique, TypeId typeId, Object... args) {
+		return ValuesUtil.createCollectionValue(isOrdered, isUnique, typeId, args);
 	}
 
 	public Comment createComment() {
@@ -1097,7 +1104,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * @return The first {@link org.eclipse.uml2.uml.Property} with the specified '<em><b>Name</b></em>', and '<em><b>Type</b></em>', or <code>null</code>.
 	 */
 	protected Property getAttribute(Type classifier, String name, Type type) {
-		Property feature = PivotUtil.getNamedElement(classifier.getOwnedAttribute(), name);
+		Property feature = DomainUtil.getNamedElement(classifier.getOwnedAttribute(), name);
 		if (feature == null)
 			return null;
 		// check type
@@ -1116,19 +1123,19 @@ public abstract class PivotTestSuite extends PivotTestCase
     }
 
     protected Value getEmptyBagValue() {
-		return valueFactory.createBagValue(metaModelManager.getBagType(metaModelManager.getOclVoidType(), null, null));
+		return ValuesUtil.createBagValue(TypeId.BAG.getCollectedTypeId(TypeId.OCL_VOID));
 	}
 
 	protected Value getEmptyOrderedSetValue() {
-		return valueFactory.createOrderedSetValue(metaModelManager.getOrderedSetType(metaModelManager.getOclVoidType(), null, null));
+		return ValuesUtil.createOrderedSetValue(TypeId.ORDERED_SET.getCollectedTypeId(TypeId.OCL_VOID));
 	}
 
 	protected Value getEmptySequenceValue() {
-		return valueFactory.createSequenceValue(metaModelManager.getSequenceType(metaModelManager.getOclVoidType(), null, null));
+		return ValuesUtil.createSequenceValue(TypeId.SEQUENCE.getCollectedTypeId(TypeId.OCL_VOID));
 	}
 
 	protected Value getEmptySetValue() {
-		return valueFactory.createSetValue(metaModelManager.getSetType(metaModelManager.getOclVoidType(), null, null));
+		return metaModelManager.createSetValueOf(TypeId.SET.getCollectedTypeId(TypeId.OCL_VOID));
 	}
 
 	public Metaclass getMetaclass(Type type) {
@@ -1142,7 +1149,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	}
 	
 	protected Object getNull() {
-		return valueFactory.getNull();
+		return ValuesUtil.NULL_VALUE;
 	}
 	
 	protected DomainStandardLibrary getOCLStandardLibrary() {
@@ -1326,7 +1333,6 @@ public abstract class PivotTestSuite extends PivotTestCase
  		OCLstdlib.install();
  		doEssentialOCLSetup();
 		metaModelManager = new MetaModelManager();
-		valueFactory = metaModelManager.getValueFactory();
 		if ((resourceSet != null) && DISPOSE_RESOURCE_SET) {
         	disposeResourceSet();
         }

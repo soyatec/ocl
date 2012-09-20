@@ -23,15 +23,14 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * The static instance of ImplicitNonCompositionProperty supports evaluation of
@@ -41,8 +40,7 @@ public class ImplicitNonCompositionProperty extends AbstractProperty
 {
 	public static final @NonNull ImplicitNonCompositionProperty INSTANCE = new ImplicitNonCompositionProperty();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceValue, @NonNull DomainProperty thisProperty) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull DomainProperty thisProperty) {
 		DomainModelManager modelManager = evaluator.getModelManager();
 		DomainProperty thatProperty = thisProperty.getOpposite();
 		DomainType thatType = DomainUtil.nonNullModel(thisProperty.getType());		
@@ -52,9 +50,9 @@ public class ImplicitNonCompositionProperty extends AbstractProperty
 			EStructuralFeature eFeature = eClass.getEStructuralFeature(thatProperty.getName());
 			Object eGet = eObject.eGet(eFeature);
 			if (eGet == sourceValue) {
-				results.add(valueFactory.valueOf(eObject));
+				results.add(valueOf(eObject));
 			}
 		}
-		return valueFactory.createBagValue((DomainCollectionType)returnType, results);
+		return createBagValue((CollectedTypeId)returnTypeId, results);
 	}
 }

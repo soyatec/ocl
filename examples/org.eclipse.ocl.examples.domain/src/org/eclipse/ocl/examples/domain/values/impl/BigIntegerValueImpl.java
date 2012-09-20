@@ -24,7 +24,6 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * @generated NOT
@@ -34,24 +33,23 @@ public class BigIntegerValueImpl extends IntegerValueImpl
 	private final @NonNull BigInteger value;
 	
 	@SuppressWarnings("null")
-	public BigIntegerValueImpl(@NonNull ValueFactory valueFactory, long value) {
-		this(valueFactory, BigInteger.valueOf(value));
+	public BigIntegerValueImpl(long value) {
+		this(BigInteger.valueOf(value));
 	}
 
-	public BigIntegerValueImpl(@NonNull ValueFactory valueFactory, @NonNull BigInteger value) {
-		super(valueFactory);
+	public BigIntegerValueImpl(@NonNull BigInteger value) {
 		this.value = value;
 		assert value != null;
 	}
 
 	public @NonNull IntegerValue abs() {
 		@SuppressWarnings("null") @NonNull BigInteger result = value.abs();
-		return valueFactory.integerValueOf(result);
+		return integerValueOf(result);
 	}
 
-	public @NonNull IntegerValue add(@NonNull IntegerValue right) throws InvalidValueException {
+	public @NonNull IntegerValue add(@NonNull IntegerValue right) {
 		@SuppressWarnings("null") @NonNull BigInteger result = value.add(right.bigIntegerValue());
-		return valueFactory.integerValueOf(result);
+		return integerValueOf(result);
 	}
 
 	@Override
@@ -61,7 +59,7 @@ public class BigIntegerValueImpl extends IntegerValueImpl
 	}
 	
 	@Override
-	public @NonNull Integer asInteger() throws InvalidValueException {
+	public @NonNull Integer asInteger() {
 		@SuppressWarnings("null") @NonNull Integer result = Integer.valueOf(intValue());
 		return result;
 	}
@@ -91,18 +89,18 @@ public class BigIntegerValueImpl extends IntegerValueImpl
 		}
 	}
 
-	public @NonNull IntegerValue div(@NonNull IntegerValue right) throws InvalidValueException {
+	public @NonNull IntegerValue div(@NonNull IntegerValue right) {
 		if (right.bigIntegerValue().signum() == 0) {
-			return valueFactory.throwInvalidValueException("div zero");
+			return createInvalidValue("div zero");
 		}
 		@SuppressWarnings("null") @NonNull BigInteger result = value.divide(right.bigIntegerValue());
-		return valueFactory.integerValueOf(result);
+		return integerValueOf(result);
 	}
 
-	public @NonNull RealValue divide(@NonNull IntegerValue right) throws InvalidValueException {
+	public @NonNull RealValue divide(@NonNull IntegerValue right) {
 		BigDecimal bigLeft = bigDecimalValue();
 		BigDecimal bigRight = right.bigDecimalValue();
-		return RealValueImpl.divideBigDecimal(valueFactory, bigLeft, bigRight);
+		return RealValueImpl.divideBigDecimal(bigLeft, bigRight);
 	}
 
 	public double doubleValue() {
@@ -130,7 +128,7 @@ public class BigIntegerValueImpl extends IntegerValueImpl
 		return value.hashCode();
 	}
 	
-	public int intValue() throws InvalidValueException {
+	public int intValue() {
 		int intValue = value.intValue();
 		if (!BigInteger.valueOf(intValue).equals(value)) {
 			throw new InvalidValueException("intValue() overflow");
@@ -143,39 +141,39 @@ public class BigIntegerValueImpl extends IntegerValueImpl
 		return signum() >= 0;
 	}
 
-	public @NonNull IntegerValue max(@NonNull IntegerValue right) throws InvalidValueException {
+	public @NonNull IntegerValue max(@NonNull IntegerValue right) {
 		return value.compareTo(right.bigIntegerValue()) >= 0 ? this : right;
 	}
 
-	public @NonNull IntegerValue min(@NonNull IntegerValue right) throws InvalidValueException {
+	public @NonNull IntegerValue min(@NonNull IntegerValue right) {
 		return value.compareTo(right.bigIntegerValue()) <= 0 ? this : right;
 	}
 
-	public @NonNull IntegerValue mod(@NonNull IntegerValue right) throws InvalidValueException {
+	public @NonNull IntegerValue mod(@NonNull IntegerValue right) {
 		if (right.bigIntegerValue().signum() == 0) {
-			return valueFactory.throwInvalidValueException("mod zero");
+			return createInvalidValue("mod zero");
 		}
 		@SuppressWarnings("null") @NonNull BigInteger result = value.remainder(right.bigIntegerValue());
-		return valueFactory.integerValueOf(result);
+		return integerValueOf(result);
 	}
 
-	public @NonNull IntegerValue multiply(@NonNull IntegerValue right) throws InvalidValueException {
+	public @NonNull IntegerValue multiply(@NonNull IntegerValue right) {
 		@SuppressWarnings("null") @NonNull BigInteger result = value.multiply(right.bigIntegerValue());
-		return valueFactory.integerValueOf(result);
+		return integerValueOf(result);
 	}
 
 	public @NonNull IntegerValue negate() {
 		@SuppressWarnings("null") @NonNull BigInteger result = value.negate();
-		return valueFactory.integerValueOf(result);
+		return integerValueOf(result);
 	}
 
 	public int signum() {
 		return value.signum();
 	}
 
-	public @NonNull IntegerValue subtract(@NonNull IntegerValue right) throws InvalidValueException {
+	public @NonNull IntegerValue subtract(@NonNull IntegerValue right) {
 		@SuppressWarnings("null") @NonNull BigInteger result = value.subtract(right.bigIntegerValue());
-		return valueFactory.integerValueOf(result);
+		return integerValueOf(result);
 	}
 
 	@Override

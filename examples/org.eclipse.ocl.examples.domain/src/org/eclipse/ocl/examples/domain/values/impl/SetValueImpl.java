@@ -26,8 +26,9 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -36,8 +37,8 @@ import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 //
 //	Note that it is not necessary to adjust set uniqueness for OCL value equivalence
@@ -49,6 +50,9 @@ import org.eclipse.ocl.examples.domain.values.ValuesPackage;
  */
 public class SetValueImpl extends CollectionValueImpl implements SetValue
 {
+	@SuppressWarnings("null")
+	public static final @NonNull Set<Object> EMPTY_SET = Collections.emptySet();
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -58,24 +62,24 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 	protected EClass eStaticClass() {
 		return ValuesPackage.Literals.SET_VALUE;
 	}
-
-	private static @NonNull Set<Object> createValue(Object... elements) {
+    
+	private static @NonNull Set<Object> createValues(Object... values) {
 		Set<Object> result = new HashSet<Object>();
-		for (Object element : elements) {
-			result.add(element);
+		for (Object value : values) {
+			result.add(ValuesUtil.valueOf(value));
+		}
+		return result;
+	}
+    
+	private static @NonNull Set<Object> createValues(@NonNull Iterable<? extends Object> values) {
+		Set<Object> result = new HashSet<Object>();
+		for (Object value : values) {
+			result.add(ValuesUtil.valueOf(value));
 		}
 		return result;
 	}
 
-	private static @NonNull Set<Object> createValue(@NonNull Iterable<? extends Object> elements) {
-		Set<Object> result = new HashSet<Object>();
-		for (Object element : elements) {
-			result.add(element);
-		}
-		return result;
-	}
-
-    public static @NonNull SetValue intersection(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull CollectionValue left, @NonNull CollectionValue right) throws InvalidValueException
+    public static @NonNull SetValue intersection(@NonNull CollectedTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right)
     {
     	assert !left.isUndefined() && !right.isUndefined();
 		Collection<? extends Object> leftElements = left.asCollection();
@@ -83,7 +87,7 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
         int leftSize = leftElements.size();
         int rightSize = rightElements.size();
     	if ((leftSize == 0) || (rightSize == 0)) {
-            return valueFactory.createSetValue(type);
+			return createSetValue(typeId, EMPTY_SET);
         }    	
         Set<Object> results;
         // loop over the smaller collection and add only elements
@@ -96,10 +100,10 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
             results = new HashSet<Object>(rightElements);
         	results.retainAll(leftElements);
         }
-    	return results.size() > 0 ? valueFactory.createSetValue(type, results) : valueFactory.createSetValue(type);
+    	return results.size() > 0 ? createSetValue(typeId, results) : createSetValue(typeId, EMPTY_SET);
     }
 
-	public static @NonNull SetValue union(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull CollectionValue left, @NonNull CollectionValue right) throws InvalidValueException {
+	public static @NonNull SetValue union(@NonNull CollectedTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right) {
     	assert !left.isUndefined() && !right.isUndefined();
 		Collection<? extends Object> leftElements = left.asCollection();
         Collection<? extends Object> rightElements = right.asCollection();
@@ -112,14 +116,14 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
     	else {
 			Set<Object> result = new HashSet<Object>(leftElements);
 			result.addAll(rightElements);
-    		return new SetValueImpl(valueFactory, type, result);
+    		return new SetValueImpl(typeId, result);
         } 
     }   
 	
 	public static class Accumulator extends SetValueImpl implements CollectionValue.Accumulator
 	{
-		public Accumulator(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type) {
-			super(valueFactory, type);
+		public Accumulator(@NonNull CollectedTypeId typeId) {
+			super(typeId, new HashSet<Object>());
 		}
 
 		@SuppressWarnings("unchecked")
@@ -128,20 +132,16 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 		}		
 	}
 	
-	public SetValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, Object... elements) {
-		super(valueFactory, type, createValue(elements));
+	public SetValueImpl(@NonNull CollectedTypeId typeId, Object... values) {
+		super(typeId, createValues(values));
 	}
 
-	public SetValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Iterable<? extends Object> elements) {
-		super(valueFactory, type, createValue(elements));
+	public SetValueImpl(@NonNull CollectedTypeId typeId, @NonNull Iterable<? extends Object> values) {
+		super(typeId, createValues(values));
 	}
 
-//	public SetValue(CollectionValue c) {
-//		this(c.asCollection());
-//	}
-
-	public SetValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull Set<? extends Object> elements) {
-		super(valueFactory, type, elements);
+	public SetValueImpl(@NonNull CollectedTypeId typeId, @NonNull Set<? extends Object> values) {
+		super(typeId, values);
 	}
 
     @Override
@@ -175,22 +175,27 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 			}
 		}
 		if (result.size() < elements.size()) {
-			return new SetValueImpl(valueFactory, getCollectionType(), result);
+			return new SetValueImpl(getTypeId(), result);
 		}
 		else {
 			return this;
 		}
 	}
 
-    public @NonNull SetValue flatten() throws InvalidValueException {
+    public @NonNull SetValue flatten() {
     	Set<Object> flattened = new HashSet<Object>();
     	if (flatten(flattened)) {
-    		return new SetValueImpl(valueFactory, getCollectionType(), flattened);
+    		return new SetValueImpl(getTypeId(), flattened);
     	}
     	else {
     		return this;
     	}
     }
+
+    @Override
+	public @NonNull CollectionTypeId getCollectionTypeId() {
+		return TypeId.SET;
+	}
 	
 	@Override
 	protected @NonNull Set<? extends Object> getElements() {
@@ -201,25 +206,33 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 	    return "Set";
 	}
 
-	public @NonNull SetValue including(@NonNull Object value) throws InvalidValueException {
+	public @NonNull SetValue including(@NonNull Object value) {
 		if (value instanceof InvalidValue) {
-			valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidSource, "including");
+			return createInvalidValue(EvaluatorMessages.InvalidSource, "including");
 		}
 		Set<Object> result = new HashSet<Object>(elements);
 		result.add(value);
-		return new SetValueImpl(valueFactory, getCollectionType(), result);
+		return new SetValueImpl(getTypeId(), result);
 	}
 
-    public @NonNull SetValue minus(@NonNull UniqueCollectionValue set) throws InvalidValueException {
+	public boolean isOrdered() {
+		return false;
+	}
+
+	public boolean isUnique() {
+		return true;
+	}
+
+    public @NonNull SetValue minus(@NonNull UniqueCollectionValue set) {
     	Set<Object> result = new HashSet<Object>(elements);
         result.removeAll(set.asCollection());
-        return new SetValueImpl(valueFactory, getCollectionType(), result);
+        return new SetValueImpl(getTypeId(), result);
     }
     
     public @NonNull OrderedSetValue sort(@NonNull Comparator<Object> comparator) {
     	List<Object> values = new ArrayList<Object>(elements);
     	Collections.sort(values, comparator);
-    	return valueFactory.createOrderedSetValue(getOrderedSetType(), values);
+    	return createOrderedSetValue(getOrderedSetTypeId(), values);
     }
 
     public @NonNull SetValue symmetricDifference(@NonNull UniqueCollectionValue set) {       
@@ -231,11 +244,11 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
                 result.add(e);
             }
         }        
-        return new SetValueImpl(valueFactory, getCollectionType(), result);
+        return new SetValueImpl(getTypeId(), result);
     }
     
 	public SequenceValue toSequenceValue() {
-		return valueFactory.createOrderedSetValue(getOrderedSetType(), elements);
+		return createOrderedSetValue(getOrderedSetTypeId(), elements);
 	}
 
 	@Override

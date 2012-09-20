@@ -248,10 +248,10 @@ public class PackageManager implements PackageServerParent
 			String nsPrefix = pivotPackage.getNsPrefix();
 			String nsURI = pivotPackage.getNsURI();
 			if (PivotConstants.ORPHANAGE_URI.equals(nsURI)) {
-				packageServer = new OrphanPackageServer(this, name, nsPrefix, nsURI, pivotPackage.getTypeid());
+				packageServer = new OrphanPackageServer(this, name, nsPrefix, nsURI, pivotPackage.getPackageId());
 			}
 			else {
-				packageServer = new RootPackageServer(this, name, nsPrefix, nsURI, pivotPackage.getTypeid());
+				packageServer = new RootPackageServer(this, name, nsPrefix, nsURI, pivotPackage.getPackageId());
 			}
 			packageServers.put(name, packageServer);
 			if (nsURI != null) {
@@ -301,7 +301,7 @@ public class PackageManager implements PackageServerParent
 		if (packageTracker == null) {
 			String nsPrefix = pivotPackage.getNsPrefix();
 			String nsURI = pivotPackage.getNsURI();
-			PackageServer packageServer = new RootPackageServer(this, name, nsPrefix, nsURI, pivotPackage.getTypeid());
+			PackageServer packageServer = new RootPackageServer(this, name, nsPrefix, nsURI, pivotPackage.getPackageId());
 			packageTracker = packageServer.getPackageTracker(pivotPackage);
 		}
 		return packageTracker;

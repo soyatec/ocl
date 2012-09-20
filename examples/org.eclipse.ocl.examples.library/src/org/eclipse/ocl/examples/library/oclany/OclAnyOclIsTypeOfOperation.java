@@ -19,9 +19,8 @@ package org.eclipse.ocl.examples.library.oclany;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * OclAnyOclIsTypeOfOperation realises the OclAny::oclIsTypeOf() library operation.
@@ -30,10 +29,9 @@ public class OclAnyOclIsTypeOfOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull OclAnyOclIsTypeOfOperation INSTANCE = new OclAnyOclIsTypeOfOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object sourceVal, @NonNull Object argVal) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
-		DomainType sourceType = valueFactory.typeOf(sourceVal);
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal, @NonNull Object argVal) {
+		DomainType sourceType = evaluator.getStaticTypeOf(sourceVal);
 		DomainType argType = asType(argVal);
-		return sourceType.isEqualTo(valueFactory.getStandardLibrary(), argType);
+		return sourceType.isEqualTo(evaluator.getStandardLibrary(), argType) != false;			// FIXME redundant test to suppress warning
 	}
 }

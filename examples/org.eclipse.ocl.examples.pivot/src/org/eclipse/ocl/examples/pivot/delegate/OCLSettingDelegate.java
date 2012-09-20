@@ -24,7 +24,6 @@ import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -68,7 +67,11 @@ public class OCLSettingDelegate extends BasicSettingDelegate.Stateless
 			}
 			Query query = ocl.createQuery(specification2);
 			Object result = query.evaluate(owner);
-			return ValuesUtil.asEcoreObject(result);
+			if (result == null) {
+				String message = NLS.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, property);
+				throw new OCLDelegateException(message);
+			}
+			return metaModelManager.asEcoreObject(result);
 		}
 		catch (InvalidValueException e) {
 			String message = NLS.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, property);

@@ -21,17 +21,13 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
-import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -380,10 +376,18 @@ public class EnumerationLiteralImpl
 		return visitor.visitEnumerationLiteral(this);
 	}
 
-	public Object asEcoreObject(@NonNull DomainStandardLibrary standardLibrary) {
-		DomainType normalizedType = getEnumeration().getNormalizedType(standardLibrary);
-		DomainEnumeration normalizedEnumeration = (DomainEnumeration) normalizedType;
-		DomainEnumerationLiteral enumerationLiteral = normalizedEnumeration.getEnumerationLiteral(DomainUtil.nonNullModel(getName()));
-		return DomainUtil.nonNullPivot(enumerationLiteral).asEcoreObject(standardLibrary);
+	public EEnumLiteral asEcoreObject() {
+		return (EEnumLiteral) getETarget();
+//		DomainType normalizedType = getEnumeration().getNormalizedType(standardLibrary);
+//		DomainEnumeration normalizedEnumeration = (DomainEnumeration) normalizedType;
+//		DomainEnumeration normalizedEnumeration = getEnumeration();
+//		DomainEnumerationLiteral enumerationLiteral = normalizedEnumeration.getEnumerationLiteral(DomainUtil.nonNullModel(getName()));
+//		try {
+//			return standardLibrary.asEcoreObject(DomainUtil.nonNullPivot(enumerationLiteral));
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			return null;
+//		}
 	}
 } //EnumerationLiteralImpl

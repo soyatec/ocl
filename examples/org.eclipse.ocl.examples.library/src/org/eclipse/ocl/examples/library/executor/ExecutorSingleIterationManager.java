@@ -22,26 +22,29 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractIterationManager;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.osgi.util.NLS;
 
 public class ExecutorSingleIterationManager extends AbstractIterationManager
 {	
-	protected final @NonNull DomainType returnType;
+	protected final @NonNull TypeId returnTypeId;
 	protected final @NonNull LibraryBinaryOperation body;
 	private @NonNull Object accumulatorValue;
 	protected final @NonNull Iterator<? extends Object> iteratorValue;
 	private Object currentValue;
 	
+	@Deprecated
 	public ExecutorSingleIterationManager(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation body,
 			@NonNull CollectionValue collectionValue, @NonNull Object accumulatorValue) {
+		this(evaluator, returnType.getTypeId(), body, collectionValue, accumulatorValue);
+	}
+	
+	public ExecutorSingleIterationManager(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull LibraryBinaryOperation body,
+			@NonNull CollectionValue collectionValue, @NonNull Object accumulatorValue) {
 		super(evaluator);
-		this.returnType = returnType;
+		this.returnTypeId = returnTypeId;
 		this.body = body;
 		this.accumulatorValue = accumulatorValue;
 		this.iteratorValue = collectionValue.iterator();
@@ -67,24 +70,24 @@ public class ExecutorSingleIterationManager extends AbstractIterationManager
 	}
 
 	public @NonNull Object evaluateBody() {
-		try {
-			return body.evaluate(evaluator, returnType, accumulatorValue, get());
-		} catch (InvalidValueException e) {
-			return throwInvalidEvaluation(e);
-		}
+//		try {
+			return body.evaluate(evaluator, returnTypeId, accumulatorValue, get());
+//		} catch (InvalidValueException e) {
+//			return throwInvalidEvaluation(e);
+//		}
 	}
 	
 	public boolean hasCurrent() {
 		return currentValue != null;
 	}
 
-	public NullValue throwInvalidEvaluation(String message, Object... bindings) throws InvalidEvaluationException {
-		String boundMessage = NLS.bind(message, bindings);
-		throw new InvalidEvaluationException(null, boundMessage, null, null, null);
-	}
+//	public NullValue throwInvalidEvaluation(String message, Object... bindings) {
+//		String boundMessage = NLS.bind(message, bindings);
+//		throw new InvalidEvaluationException(null, boundMessage, null, null, null);
+//	}
 
-	public @Nullable Object updateBody() throws InvalidValueException {
-		@NonNull Object newValue = body.evaluate(evaluator, returnType, accumulatorValue, get());
+	public @Nullable Object updateBody() {
+		@NonNull Object newValue = body.evaluate(evaluator, returnTypeId, accumulatorValue, get());
 		this.accumulatorValue = newValue;
 		return null;					// carry on
 	}

@@ -17,11 +17,10 @@
 package org.eclipse.ocl.examples.library.string;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * StringIndexOfOperation realises the String::indexOf() library operation.
@@ -30,23 +29,22 @@ public class StringIndexOfOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull StringIndexOfOperation INSTANCE = new StringIndexOfOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object left, @NonNull Object right) {
 		String leftString = asString(left);
 		String rightString = asString(right);
 		/*if (leftString.length() <= 0) {
-			return valueFactory.integerValueOf(0);
+			return ValuesUtil.integerValueOf(0);
 		}
 		else*/ if (rightString.length() <= 0) {
-			return valueFactory.integerValueOf(1);
+			return ValuesUtil.integerValueOf(1);
 		}
 		else {
 			int index = leftString.indexOf(rightString);
 			if (index >= 0) {
-				return valueFactory.integerValueOf(index+1);
+				return ValuesUtil.integerValueOf(index+1);
 			}
 			else {
-				return valueFactory.integerValueOf(0);
+				return ValuesUtil.integerValueOf(0);
 			}
 		}
 	}

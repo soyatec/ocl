@@ -21,14 +21,9 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluationEnvironment;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.Adaptable;
 import org.eclipse.ocl.examples.pivot.BasicEnvironment;
 import org.eclipse.ocl.examples.pivot.Class;
@@ -246,17 +241,13 @@ public interface EvaluationEnvironment extends DomainEvaluationEnvironment, Basi
 
     @NonNull MetaModelManager getMetaModelManager();
 
-	@NonNull ValueFactory getValueFactory();
+//	@NonNull NullValue throwInvalidEvaluation(InvalidValueException e);
 
-//	NullValue throwInvalidEvaluation(Object value, OCLExpression expression, String message, Object object) throws InvalidEvaluationException;
+//	@NonNull NullValue throwInvalidEvaluation(String message);
 
-	@NonNull NullValue throwInvalidEvaluation(InvalidValueException e) throws InvalidEvaluationException;
+//	@NonNull NullValue throwInvalidEvaluation(String message, DomainExpression expression);
 
-	@NonNull NullValue throwInvalidEvaluation(String message) throws InvalidEvaluationException;
+//	@NonNull NullValue throwInvalidEvaluation(String message, DomainExpression expression, Object context);
 
-	@NonNull NullValue throwInvalidEvaluation(String message, DomainExpression expression) throws InvalidEvaluationException;
-
-	@NonNull NullValue throwInvalidEvaluation(String message, DomainExpression expression, Object context) throws InvalidEvaluationException;
-
-	@NonNull NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object context, String message, Object... bindings) throws InvalidEvaluationException;
+//	@NonNull NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object context, String message, Object... bindings);
 }

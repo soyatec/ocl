@@ -22,13 +22,14 @@ import java.math.RoundingMode;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
 /**
@@ -48,16 +49,16 @@ public class RealValueImpl extends ValueImpl implements RealValue
 
 	private static final int MINIMUM_SCALE = Double.SIZE/2;		// Gives nearly twice the precision of Double
 
-	protected static @NonNull RealValue divideBigDecimal(@NonNull ValueFactory valueFactory, @NonNull BigDecimal left, @NonNull BigDecimal right) throws InvalidValueException {
+	protected static @NonNull RealValue divideBigDecimal(@NonNull BigDecimal left, @NonNull BigDecimal right) {
 		try {
 			if (right.signum() == 0) {
-				return valueFactory.throwInvalidValueException("divide by zero");
+				return createInvalidValue("divide by zero");
 			}
 			int scale = Math.max(left.scale() - right.scale(), MINIMUM_SCALE);
 			@SuppressWarnings("null") @NonNull BigDecimal result = left.divide(right, scale, RoundingMode.HALF_EVEN);
-			return valueFactory.realValueOf(result);
+			return realValueOf(result);
 		} catch (ArithmeticException e) {
-			throw new InvalidValueException(e);
+			return createInvalidValue(e);
 		}
 	}
 
@@ -65,27 +66,26 @@ public class RealValueImpl extends ValueImpl implements RealValue
 	private Object integerValue = null;	// Lazily computed exact IntegerValue or Exception
 	
 	@SuppressWarnings("null")
-	public RealValueImpl(@NonNull ValueFactory valueFactory, double value) {
-		this(valueFactory, BigDecimal.valueOf(value));
+	public RealValueImpl(double value) {
+		this(BigDecimal.valueOf(value));
 	}
 
-	public RealValueImpl(@NonNull ValueFactory valueFactory, @NonNull BigDecimal value) {
-		super(valueFactory);
+	public RealValueImpl(@NonNull BigDecimal value) {
 		this.value = value;
 		assert value != null;
 	}
 
 	public @NonNull RealValue abs() {
 		@SuppressWarnings("null") @NonNull BigDecimal result = value.abs();
-		return valueFactory.realValueOf(result);
+		return realValueOf(result);
 	}
 
 	public @NonNull RealValue add(@NonNull RealValue rightValue) {
 		try {
 			@SuppressWarnings("null") @NonNull BigDecimal result = value.add(rightValue.bigDecimalValue());
-			return valueFactory.realValueOf(result);
+			return realValueOf(result);
 		} catch (InvalidValueException e) {
-			return valueFactory.createInvalidValue(EvaluatorMessages.InvalidReal, e, null, rightValue);
+			return createInvalidValue(EvaluatorMessages.InvalidReal, e, null, rightValue);
 		}
 	}
 
@@ -108,10 +108,10 @@ public class RealValueImpl extends ValueImpl implements RealValue
 		return value;
 	}
 
-	public @NonNull BigInteger bigIntegerValue() throws InvalidValueException {
+	public @NonNull BigInteger bigIntegerValue() {
 		Object intValue = getIntegerValue();
-		if (integerValue instanceof Exception) {
-			throw new InvalidValueException((Exception)intValue);			
+		if (intValue instanceof Exception) {
+			throw new InvalidValueException(createInvalidValue((Exception)intValue));			
 		}
 		else {
 			return ((IntegerValue) intValue).bigIntegerValue();
@@ -127,8 +127,8 @@ public class RealValueImpl extends ValueImpl implements RealValue
 		}
 	}
 
-	public @NonNull RealValue divide(@NonNull RealValue right) throws InvalidValueException {
-		return divideBigDecimal(valueFactory, value, right.bigDecimalValue());
+	public @NonNull RealValue divide(@NonNull RealValue right) {
+		return divideBigDecimal(value, right.bigDecimalValue());
 	}
 
 	public double doubleValue() {
@@ -153,14 +153,14 @@ public class RealValueImpl extends ValueImpl implements RealValue
 
 	public @NonNull IntegerValue floor() {
 		@SuppressWarnings("null") @NonNull BigInteger result = value.setScale(0, RoundingMode.FLOOR).toBigInteger();
-		return valueFactory.integerValueOf(result);
+		return integerValueOf(result);
 	}
 
 	protected Object getIntegerValue() {
 		if (integerValue == null) {
 			try {
 				@SuppressWarnings("null") @NonNull BigInteger intValue = value.toBigIntegerExact();
-				integerValue = valueFactory.integerValueOf(intValue);
+				integerValue = integerValueOf(intValue);
 			}
 			catch (ArithmeticException e) {
 				integerValue = e;			
@@ -169,8 +169,12 @@ public class RealValueImpl extends ValueImpl implements RealValue
 		return integerValue;
 	}
 
-	public @NonNull DomainType getType() {
-		return valueFactory.getStandardLibrary().getRealType();
+	public @NonNull DomainType getType(@NonNull DomainStandardLibrary standardLibrary) {
+		return standardLibrary.getRealType();
+	}
+
+	public @NonNull TypeId getTypeId() {
+		return TypeId.REAL;
 	}
 
 	@Override
@@ -184,11 +188,6 @@ public class RealValueImpl extends ValueImpl implements RealValue
 		}
 	}
 
-//	@Override
-//	public RealValue isRealValue() {
-//		return this;
-//	}
-
 	public boolean isUnlimited() {
 		return false;
 	}
@@ -196,33 +195,33 @@ public class RealValueImpl extends ValueImpl implements RealValue
 	public @NonNull RealValue max(@NonNull RealValue rightValue) {
 		try {
 			@SuppressWarnings("null") @NonNull BigDecimal result = value.max(rightValue.bigDecimalValue());
-			return valueFactory.realValueOf(result);
+			return realValueOf(result);
 		} catch (InvalidValueException e) {
-			return valueFactory.createInvalidValue(EvaluatorMessages.InvalidReal, e, null, rightValue);
+			return createInvalidValue(EvaluatorMessages.InvalidReal, e, null, rightValue);
 		}
 	}
 
 	public @NonNull RealValue min(@NonNull RealValue rightValue) {
 		try {
 			@SuppressWarnings("null") @NonNull BigDecimal result = value.min(rightValue.bigDecimalValue());
-			return valueFactory.realValueOf(result);
+			return realValueOf(result);
 		} catch (InvalidValueException e) {
-			return valueFactory.createInvalidValue(EvaluatorMessages.InvalidReal, e, null, rightValue);
+			return createInvalidValue(EvaluatorMessages.InvalidReal, e, null, rightValue);
 		}
 	}
 
 	public @NonNull RealValue multiply(@NonNull RealValue rightValue) {
 		try {
 			@SuppressWarnings("null") @NonNull BigDecimal result = value.multiply(rightValue.bigDecimalValue());
-			return valueFactory.realValueOf(result);
+			return realValueOf(result);
 		} catch (InvalidValueException e) {
-			return valueFactory.createInvalidValue(EvaluatorMessages.InvalidReal, e, null, rightValue);
+			return createInvalidValue(EvaluatorMessages.InvalidReal, e, null, rightValue);
 		}
 	}
 
 	public @NonNull RealValue negate() {
 		@SuppressWarnings("null") @NonNull BigDecimal result = value.negate();
-		return valueFactory.realValueOf(result);
+		return realValueOf(result);
 	}
 	
 	public @NonNull IntegerValue round() {
@@ -234,7 +233,7 @@ public class RealValueImpl extends ValueImpl implements RealValue
 			rounded = value.negate().setScale(0, RoundingMode.HALF_DOWN).negate();
 		}
 		@SuppressWarnings("null") @NonNull BigInteger result = rounded.toBigInteger();
-		return valueFactory.integerValueOf(result);
+		return integerValueOf(result);
 	}
 
 	public int signum() {
@@ -244,9 +243,9 @@ public class RealValueImpl extends ValueImpl implements RealValue
 	public @NonNull RealValue subtract(@NonNull RealValue rightValue) {
 		try {
 			@SuppressWarnings("null") @NonNull BigDecimal result = value.subtract(rightValue.bigDecimalValue());
-			return valueFactory.realValueOf(result);
+			return realValueOf(result);
 		} catch (InvalidValueException e) {
-			return valueFactory.createInvalidValue(EvaluatorMessages.InvalidReal, e, null, rightValue);
+			return createInvalidValue(EvaluatorMessages.InvalidReal, e, null, rightValue);
 		}
 	}
 

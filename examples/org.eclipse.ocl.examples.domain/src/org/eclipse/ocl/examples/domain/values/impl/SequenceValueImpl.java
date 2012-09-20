@@ -24,16 +24,17 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * @generated NOT
@@ -50,8 +51,8 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 		return ValuesPackage.Literals.SEQUENCE_VALUE;
 	}
 
-	public SequenceValueImpl(@NonNull ValueFactory valueFactory, @NonNull DomainCollectionType type, @NonNull List<? extends Object> elements) {
-		super(valueFactory, type, elements);
+	public SequenceValueImpl(@NonNull CollectedTypeId typeId, @NonNull List<? extends Object> values) {
+		super(typeId, values);
 	}
 	
 	@Override
@@ -64,19 +65,19 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
         return this;
     }
 
-    public @NonNull SequenceValue append(@NonNull Object object) throws InvalidValueException {
+    public @NonNull SequenceValue append(@NonNull Object object) {
 		if (object instanceof InvalidValue) {
-        	valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidSource, "append");
+			return createInvalidValue(EvaluatorMessages.InvalidSource, "append");
 		}
     	List<Object> result = new ArrayList<Object>(elements);
         result.add(object);
-        return valueFactory.createSequenceValue(getCollectionType(), result);
+        return createSequenceValue(getTypeId(), result);
     }
 
-    public @NonNull Object at(int index) throws InvalidValueException {
+    public @NonNull Object at(int index) {
         index = index - 1;        
         if (index < 0 || elements.size() <= index) {
-        	valueFactory.throwInvalidValueException(EvaluatorMessages.IndexOutOfRange, index + 1, size());
+        	return createInvalidValue(EvaluatorMessages.IndexOutOfRange, index + 1, size());
 		}        
         return DomainUtil.nonNullState(getElements().get(index));
     }
@@ -106,29 +107,34 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 			}
 		}
 		if (result.size() < elements.size()) {
-			return valueFactory.createSequenceValue(getCollectionType(), result);
+			return createSequenceValue(getTypeId(), result);
 		}
 		else {
 			return this;
 		}
 	}
 
-    public @NonNull Object first() throws InvalidValueException {
+    public @NonNull Object first() {
         if (elements.size() <= 0) {
-        	valueFactory.throwInvalidValueException(EvaluatorMessages.EmptyCollection, "Sequence", "first");
+        	return createInvalidValue(EvaluatorMessages.EmptyCollection, "Sequence", "first");
         }
         return DomainUtil.nonNullState(getElements().get(0));
     }
 
-    public @NonNull SequenceValue flatten() throws InvalidValueException {
+    public @NonNull SequenceValue flatten() {
     	List<Object> flattened = new ArrayList<Object>();
     	if (flatten(flattened)) {
-    		return valueFactory.createSequenceValue(getCollectionType(), flattened);
+    		return createSequenceValue(getTypeId(), flattened);
     	}
     	else {
     		return this;
     	}
     }
+
+    @Override
+	public @NonNull CollectionTypeId getCollectionTypeId() {
+		return TypeId.SEQUENCE;
+	}
     
 	@Override
 	protected @NonNull List<? extends Object> getElements() {
@@ -139,64 +145,72 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 	    return "Sequence";
 	}
 	   
-	public @NonNull SequenceValue including(@NonNull Object value) throws InvalidValueException {
+	public @NonNull SequenceValue including(@NonNull Object value) {
 		if (value instanceof InvalidValue) {
-			valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidSource, "including");
+			return createInvalidValue(EvaluatorMessages.InvalidSource, "including");
 		}
 		List<Object> result = new ArrayList<Object>(elements);
 		result.add(value);
-		return valueFactory.createSequenceValue(getCollectionType(), result);
+		return createSequenceValue(getTypeId(), result);
 	}
 
-    public @NonNull IntegerValue indexOf(@NonNull Object object) throws InvalidValueException {
+    public @NonNull IntegerValue indexOf(@NonNull Object object) {
         int index = getElements().indexOf(object);
         if (index < 0) {
-			valueFactory.throwInvalidValueException(EvaluatorMessages.MissingValue, "indexOf");
+        	return createInvalidValue(EvaluatorMessages.MissingValue, "indexOf");
         }
-    	return valueFactory.integerValueOf(index+1);
+    	return ValuesUtil.integerValueOf(index+1);
     }
 
-    public @NonNull SequenceValue insertAt(int index, @NonNull Object object) throws InvalidValueException {
+    public @NonNull SequenceValue insertAt(int index, @NonNull Object object) {
 		if (object instanceof InvalidValue) {
-			valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidSource, "insertAt");
+			return createInvalidValue(EvaluatorMessages.InvalidSource, "insertAt");
 		}
         index = index - 1;        
         if (index < 0 || index > elements.size()) {
-        	valueFactory.throwInvalidValueException(EvaluatorMessages.IndexOutOfRange, index + 1, size());
+        	return createInvalidValue(EvaluatorMessages.IndexOutOfRange, index + 1, size());
         }        
 		List<Object> result = new ArrayList<Object>(elements);
 		result.add(index, object);
-		return valueFactory.createSequenceValue(getCollectionType(), result);
+		return createSequenceValue(getTypeId(), result);
     }
-    
-    public @NonNull Object last() throws InvalidValueException {
+
+	public boolean isOrdered() {
+		return true;
+	}
+
+	public boolean isUnique() {
+		return false;
+	}
+   
+    public @NonNull Object last() {
         int size = elements.size();
 		if (size <= 0) {
-        	valueFactory.throwInvalidValueException(EvaluatorMessages.EmptyCollection, "Sequence", "last");
+			return createInvalidValue(EvaluatorMessages.EmptyCollection, "Sequence", "last");
         }
         return DomainUtil.nonNullState(getElements().get(size-1));
     }
     
-    public @NonNull SequenceValue prepend(@NonNull Object object) throws InvalidValueException {
+    public @NonNull SequenceValue prepend(@NonNull Object object) {
 		if (object instanceof InvalidValue) {
-			valueFactory.throwInvalidValueException(EvaluatorMessages.InvalidSource, "prepend");
+			return createInvalidValue(EvaluatorMessages.InvalidSource, "prepend");
 		}
     	List<Object> result = new ArrayList<Object>();
         result.add(object);
         result.addAll(elements);
-        return valueFactory.createSequenceValue(getCollectionType(), result);
+        return createSequenceValue(getTypeId(), result);
     }
 
-	public @NonNull SequenceValue reverse() throws InvalidValueException {
+	public @NonNull SequenceValue reverse() {
 		List<Object> elements = new ArrayList<Object>(this.elements);
 		Collections.reverse(elements);
-        return valueFactory.createSequenceValue(getCollectionType(), elements);
+        return createSequenceValue(getTypeId(), elements);
     }
 	   
     public @NonNull SequenceValue sort(@NonNull Comparator<Object> comparator) {
     	List<Object> values = new ArrayList<Object>(elements);
     	Collections.sort(values, comparator);
-    	return valueFactory.createSequenceValue(getCollectionType(), values);
+    	return createSequenceValue(getTypeId(), values);
     }
 	
     /**
@@ -236,7 +250,7 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
             }
             curr++;
         }
-        return valueFactory.createSequenceValue(getCollectionType(), result);
+        return createSequenceValue(getTypeId(), result);
     }
 
 	public @NonNull SequenceValue toSequenceValue() {

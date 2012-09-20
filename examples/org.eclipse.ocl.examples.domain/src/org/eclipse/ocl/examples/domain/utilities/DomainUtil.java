@@ -28,6 +28,8 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.common.utils.ClassUtils;
+import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.osgi.util.NLS;
@@ -158,6 +160,15 @@ public class DomainUtil
 			return String.valueOf(object);
 		}
 	}
+
+	public static <T extends DomainNamedElement> T getNamedElement(Iterable<T> elements, String name) {
+		if (elements == null)
+			return null;
+		for (T element : elements)
+			if (ClassUtils.equals(name, element.getName()))
+				return element;
+		return null;				
+	}
 	
 	/**
 	 * Return aT, checking the assertion that this call would not be necessary if EMF had comprehensive @NonNull annotations.
@@ -201,5 +212,5 @@ public class DomainUtil
 	 * @deprecated
 	 */
 	@Deprecated
-	public static void suppressThrowWarnings()  throws InvalidValueException {}
+	public static void suppressThrowWarnings()  {}
 }

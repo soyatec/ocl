@@ -29,12 +29,12 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.common.utils.EcoreUtils;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.AssociationClass;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.uml2.uml.Association;
 
 /**
@@ -128,7 +128,7 @@ public abstract class PivotFruitTestSuite extends PivotTestSuite
 		fruitEPackage = (EPackage)ecoreResource.getContents().get(0);
 		fruitEFactory = fruitEPackage.getEFactoryInstance();
 		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager);
-		fruitPackage = PivotUtil.getNamedElement(ecore2Pivot.getPivotRoot().getNestedPackage(), "fruit");
+		fruitPackage = DomainUtil.getNamedElement(ecore2Pivot.getPivotRoot().getNestedPackage(), "fruit");
 		
 		fruit = (EClass) getEClassifier(fruitEPackage, "Fruit");
 		fruit_ripen = getEOperation(fruit, "ripen", null, null);

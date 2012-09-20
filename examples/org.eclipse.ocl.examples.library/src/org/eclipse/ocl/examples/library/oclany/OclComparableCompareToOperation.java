@@ -17,11 +17,10 @@
 package org.eclipse.ocl.examples.library.oclany;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * OclComparableCompareToOperation realizes the abstract compareTo library operation using intrinsic Java functionality.
@@ -30,15 +29,14 @@ public class OclComparableCompareToOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull OclComparableCompareToOperation INSTANCE = new OclComparableCompareToOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull Object left, @NonNull Object right) throws InvalidValueException {
-		ValueFactory valueFactory = evaluator.getValueFactory();
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object left, @NonNull Object right) {
 		Object leftObject = asObject(left);
 		Object rightObject = asObject(right);
 		if (!(leftObject instanceof Comparable<?>)) {
-			return valueFactory.throwInvalidValueException("Unsupported compareTo for ''{0}''", left.getClass().getName()); //$NON-NLS-1$
+			return createInvalidValue("Unsupported compareTo for ''{0}''", left.getClass().getName()); //$NON-NLS-1$
 		}
 		@SuppressWarnings("unchecked")
 		int intComparison = ((Comparable<Object>)leftObject).compareTo(rightObject);
-		return valueFactory.integerValueOf(intComparison);
+		return ValuesUtil.integerValueOf(intComparison);
 	}
 }

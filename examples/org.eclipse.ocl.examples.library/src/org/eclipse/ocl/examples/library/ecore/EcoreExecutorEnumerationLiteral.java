@@ -17,7 +17,6 @@ package org.eclipse.ocl.examples.library.ecore;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorEnumerationLiteral;
 
@@ -31,7 +30,7 @@ public class EcoreExecutorEnumerationLiteral extends ExecutorEnumerationLiteral
 	}
 
 	@Override
-	public Object asEcoreObject(@NonNull DomainStandardLibrary standardLibrary) {
-		return eEnumLiteral.getInstance();
+	public EEnumLiteral asEcoreObject() {
+		return eEnumLiteral/*.getInstance()*/;
 	}
 }

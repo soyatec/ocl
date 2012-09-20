@@ -28,8 +28,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.library.AbstractOperation;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Bag;
@@ -54,8 +52,7 @@ public class ImportTests extends XtextTestCase
 		public static final SpacedOut INSTANCE = new SpacedOut();
 
 		public Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp,
-				@NonNull Object sourceValue, Object... argumentValues)
-				throws InvalidEvaluationException, InvalidValueException {
+				@NonNull Object sourceValue, Object... argumentValues) {
 			String string = sourceValue == null?  Value.INVALID_NAME : ValuesUtil.oclToString(sourceValue);
 			return string;
 		}

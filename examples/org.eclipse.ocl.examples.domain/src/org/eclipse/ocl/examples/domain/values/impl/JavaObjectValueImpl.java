@@ -17,9 +17,7 @@
 package org.eclipse.ocl.examples.domain.values.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 /**
  * @generated NOT
@@ -27,10 +25,10 @@ import org.eclipse.ocl.examples.domain.values.ValueFactory;
 public class JavaObjectValueImpl extends ObjectValueImpl
 {
 	protected final @NonNull Object object;
-	protected DomainType type = null;
+//	protected DomainType type = null;
+	protected TypeId typeId = null;
 	
-	public JavaObjectValueImpl(@NonNull ValueFactory valueFactory, @NonNull Object object) {
-		super(valueFactory);
+	public JavaObjectValueImpl(@NonNull Object object) {
 		this.object = object;
 	}
 
@@ -44,10 +42,9 @@ public class JavaObjectValueImpl extends ObjectValueImpl
 		return object;
 	}
 
-	public @NonNull DomainType getType() {
+/*	public @NonNull DomainType getType(@NonNull DomainStandardLibrary standardLibrary) {
 		DomainType type2 = type;
 		if (type2 == null) {										// WIP A better type
-			DomainStandardLibrary standardLibrary = valueFactory.getStandardLibrary();
 			if (object instanceof Comparable) {
 				type2 = type = standardLibrary.getOclComparableType();
 			}
@@ -56,6 +53,20 @@ public class JavaObjectValueImpl extends ObjectValueImpl
 			}
 		}
 		return type2;
+	} */
+
+	public @NonNull TypeId getTypeId() {
+//		return getType(valueFactory.getStandardLibrary()).getTypeId();
+		TypeId typeId2 = typeId;
+		if (typeId2 == null) {
+			if (object instanceof Comparable) {
+				typeId = typeId2 = TypeId.OCL_COMPARABLE;
+			}
+			else {
+				typeId = typeId2 = TypeId.METACLASS;
+			}
+		}
+		return typeId2;
 	}
 
 	@Override

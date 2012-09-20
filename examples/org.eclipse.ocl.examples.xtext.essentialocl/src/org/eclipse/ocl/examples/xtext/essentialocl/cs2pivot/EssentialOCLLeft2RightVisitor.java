@@ -184,13 +184,13 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 
 	protected @Nullable Operation getBadOperation() {
 		InvalidType invalidType = metaModelManager.getOclInvalidType();
-		Operation badOperation = PivotUtil.getNamedElement(invalidType.getOwnedOperation(), "oclBadOperation");
+		Operation badOperation = DomainUtil.getNamedElement(invalidType.getOwnedOperation(), "oclBadOperation");
 		return badOperation;
 	}
 
 	protected @Nullable Property getBadProperty() {
 		InvalidType invalidType = metaModelManager.getOclInvalidType();
-		Property badProperty = PivotUtil.getNamedElement(invalidType.getOwnedAttribute(), "oclBadProperty");
+		Property badProperty = DomainUtil.getNamedElement(invalidType.getOwnedAttribute(), "oclBadProperty");
 		return badProperty;
 	}
 

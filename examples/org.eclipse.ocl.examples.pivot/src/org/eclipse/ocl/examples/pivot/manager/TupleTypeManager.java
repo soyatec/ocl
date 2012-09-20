@@ -26,6 +26,8 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
@@ -76,16 +78,28 @@ public class TupleTypeManager
 	protected final @NonNull MetaModelManager metaModelManager;
 	
 	/**
-	 * Map from the sum of the part name hashes to the tuple types with the same hash. 
+	 * Map from the tuple typeId to the tuple type. 
 	 */
-	private Map<Integer, List<TupleType>> hash2tuple = null;
+	private @Nullable Map<TupleTypeId, TupleType> tupleid2tuple = null;
 	
 	protected TupleTypeManager(@NonNull MetaModelManager metaModelManager) {
 		this.metaModelManager = metaModelManager;
 	}
 
 	public void dispose() {
-		hash2tuple = null;
+		tupleid2tuple = null;
+	}
+
+	public @NonNull TupleType getTupleType(@NonNull TupleTypeId typeId) {
+		Map<TupleTypeId, TupleType> tupleid2tuple2 = tupleid2tuple;
+		if (tupleid2tuple2 == null) {
+			throw new UnsupportedOperationException();
+		}
+		TupleType tupleType = tupleid2tuple2.get(typeId);
+		if (tupleType == null) {
+			throw new UnsupportedOperationException();
+		}
+		return tupleType;
 	}
 
     public @Nullable Type getCommonType(@NonNull TupleType leftType, @NonNull TupleType rightType, @Nullable Map<TemplateParameter, ParameterableElement> bindings) {
@@ -98,7 +112,7 @@ public class TupleTypeManager
 		boolean isRight = true;
 		List<TypedElement> commonProperties = new ArrayList<TypedElement>(leftProperties.size());
 		for (Property leftProperty : leftProperties) {
-			Property rightProperty = PivotUtil.getNamedElement(rightProperties, leftProperty.getName());
+			Property rightProperty = DomainUtil.getNamedElement(rightProperties, leftProperty.getName());
 			Type leftPropertyType = DomainUtil.nonNullModel(leftProperty.getType());
 			Type rightPropertyType = DomainUtil.nonNullModel(rightProperty.getType());
 			TypedElement commonProperty = null;
@@ -135,51 +149,35 @@ public class TupleTypeManager
 	 * Return the named tuple type with the defined alphabetically ordered parts.
 	 */
     protected @NonNull TupleType getOrderedTupleType(@NonNull String name, @NonNull List<TuplePart> orderedParts) {
-		if (hash2tuple == null) {
-			hash2tuple = new HashMap<Integer, List<TupleType>>();
-		}
-		int hash = name.hashCode();
-		for (TypedElement part : orderedParts) {
-			hash = 101 * hash + part.getName().hashCode();
-		}
-		List<TupleType> tupleList = hash2tuple.get(hash);
-		if (tupleList == null) {
-			tupleList = new ArrayList<TupleType>();
-			hash2tuple.put(hash, tupleList);
-		}
-		int iMax = orderedParts.size();
-		for (TupleType candidateTupleType : tupleList) {
-			List<Property> candidateParts = candidateTupleType.getOwnedAttribute();
-			if (candidateParts.size() == iMax) {
-				int i = 0;
-				for (TuplePart orderedPart : orderedParts) {
-					Property candidatePart = candidateParts.get(i);
-					if (orderedPart.getType() != candidatePart.getType()) {
-						break;
-					}
-					if (!orderedPart.getName().equals(candidatePart.getName())) {
-						break;
-					}
-					i++;
-				}
-				if (i >= iMax) {
-					return candidateTupleType;
+		TupleTypeId tupleTypeId = IdManager.INSTANCE.getTupleTypeId(name, orderedParts);
+		Map<TupleTypeId, TupleType> tupleid2tuple2 = tupleid2tuple;
+		if (tupleid2tuple2 == null) {
+			synchronized (this) {
+				tupleid2tuple2 = tupleid2tuple;
+				if (tupleid2tuple2 == null) {
+					tupleid2tuple = tupleid2tuple2 = new HashMap<TupleTypeId, TupleType>();
 				}
 			}
 		}
-		TupleType tupleType = PivotFactory.eINSTANCE.createTupleType();
-		tupleType.setName(name);
-		List<Property> tupleParts = tupleType.getOwnedAttribute();
-		for (TuplePart part : orderedParts) {
-			Property tuplePart = PivotFactory.eINSTANCE.createProperty();
-			tuplePart.setName(part.getName());
-			tuplePart.setType(part.getType());
-			tupleParts.add(tuplePart);
+		TupleType oldTupleType = tupleid2tuple2.get(tupleTypeId);
+		if (oldTupleType != null) {
+			return oldTupleType;
 		}
-		tupleType.getSuperClass().add(metaModelManager.getOclTupleType());
-		tupleList.add(tupleType);
-		metaModelManager.addOrphanClass(tupleType);
-		return tupleType;
+		synchronized (tupleid2tuple2) {
+			TupleType newTupleType = PivotFactory.eINSTANCE.createTupleType();
+			newTupleType.setName(name);
+			List<Property> tupleParts = newTupleType.getOwnedAttribute();
+			for (TuplePart part : orderedParts) {
+				Property tuplePart = PivotFactory.eINSTANCE.createProperty();
+				tuplePart.setName(part.getName());
+				tuplePart.setType(part.getType());
+				tupleParts.add(tuplePart);
+			}
+			newTupleType.getSuperClass().add(metaModelManager.getOclTupleType());
+			tupleid2tuple2.put(tupleTypeId, newTupleType);
+			metaModelManager.addOrphanClass(newTupleType);
+			return newTupleType;
+		}
 	}
 	
 	public @NonNull TupleType getTupleType(@NonNull String typeName, @NonNull Collection<? extends DomainTypedElement> parts,

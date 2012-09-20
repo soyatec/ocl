@@ -45,11 +45,9 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.EvaluationHaltedException;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Environment;
@@ -148,16 +146,8 @@ public class OCLConsolePage extends Page
 
 		@Override
 		protected @NonNull EvaluationVisitor getUndecoratedVisitor() {
-			getValueFactory();
+//			getValueFactory();
 			return super.getUndecoratedVisitor();
-		}
-
-		@Override
-		public @NonNull ValueFactory getValueFactory() {
-			if (monitor.isCanceled()) {
-				setCanceled(true);
-			}
-			return super.getValueFactory();
 		}
 	}
 
@@ -166,39 +156,6 @@ public class OCLConsolePage extends Page
     	DEFAULT,
     	ERROR
     }
-    
-    protected static class ExceptionValue extends InvalidValueImpl
-	{
-		private final String message;
-    	private final Exception exception;
-    	
-		protected ExceptionValue(@NonNull ValueFactory valueFactory, String message, Exception exception) {
-			super(valueFactory);
-			this.message = message;
-			this.exception = exception;
-		}
-		
-		public Exception getException() {
-			return exception;
-		}
-    	
-		public String getMessage() {
-			return message;
-		}
-
-		@Override
-		public String toString() {
-			StringBuilder s = new StringBuilder();
-			for (Throwable t = exception; t != null; t = t.getCause()) {
-//				s.append(" : "); //$NON-NLS-1$
-				s.append(t.getMessage());
-				if (t.getCause() != null) {
-					s.append("\n"); //$NON-NLS-1$
-				}
-			}
-			return s.toString();
-		}
-	}
 	
 	private class EvaluationRunnable implements IRunnableWithProgress
 	{
@@ -221,7 +178,6 @@ public class OCLConsolePage extends Page
 			monitor.worked(1);
 //			CS2PivotResourceAdapter csAdapter = CS2PivotResourceAdapter.getAdapter((BaseCSResource)resource, metaModelManager);
 		    MetaModelManager metaModelManager = getMetaModelManager(contextObject);
-			ValueFactory valueFactory = metaModelManager.getValueFactory();
 //			monitor.subTask(ConsoleMessages.Progress_CST);
 //			try {
 //				csAdapter.refreshPivotMappings();
@@ -236,7 +192,7 @@ public class OCLConsolePage extends Page
 				PivotUtil.checkResourceErrors("", resource); //$NON-NLS-1$
 				expressionInOCL = parserContext.getExpression(resource);
 			} catch (ParserException e) {
-				value = new ExceptionValue(valueFactory, ConsoleMessages.Result_ParsingFailure, e);
+				value = ValuesUtil.createInvalidValue(e, ConsoleMessages.Result_ParsingFailure);
 				return;
 			}
 			if (expressionInOCL != null) {
@@ -245,7 +201,7 @@ public class OCLConsolePage extends Page
 				PivotEnvironmentFactory envFactory = new PivotEnvironmentFactory(null, metaModelManager);
 				PivotEnvironment environment = envFactory.createEnvironment();
 				PivotEvaluationEnvironment evaluationEnvironment = envFactory.createEvaluationEnvironment();
-				Object contextValue = valueFactory.valueOf(contextObject);
+				Object contextValue = ValuesUtil.valueOf(contextObject);
 				evaluationEnvironment.add(expressionInOCL.getContextVariable(), contextValue);
 	//			if (modelManager == null) {
 					// let the evaluation environment create one
@@ -258,9 +214,9 @@ public class OCLConsolePage extends Page
 					EvaluationVisitor evaluationVisitor = new CancelableEvaluationVisitor(monitor, environment, evaluationEnvironment, modelManager2);
 			        value = evaluationVisitor.visitExpressionInOCL(expressionInOCL);
 				} catch (EvaluationHaltedException e) {
-					value = new ExceptionValue(valueFactory, ConsoleMessages.Result_EvaluationTerminated, null);
-				} catch (InvalidEvaluationException e) {
-					value = new ExceptionValue(valueFactory, ConsoleMessages.Result_EvaluationFailure, e);
+					value = ValuesUtil.createInvalidValue(ConsoleMessages.Result_EvaluationTerminated);
+				} catch (Exception e) {
+					value = ValuesUtil.createInvalidValue(e, ConsoleMessages.Result_EvaluationFailure);
 				} finally {
 	//				metaModelManager.setMonitor(null);
 				}
@@ -751,8 +707,8 @@ public class OCLConsolePage extends Page
         	catch (Exception e) {
         		append(e.getMessage(), ColorManager.OUTPUT_ERROR, false);
         	}
-        	if (value instanceof ExceptionValue) {
-        		append(((ExceptionValue)value).getMessage(), ColorManager.OUTPUT_ERROR, true);
+        	if (value instanceof InvalidValue) {
+        		append(((InvalidValue)value).getMessage(), ColorManager.OUTPUT_ERROR, true);
         		append(String.valueOf(value), ColorManager.OUTPUT_ERROR, false);
         	}
         	else if (value != null) {

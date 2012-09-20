@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.osgi.util.NLS;
 
 /**
@@ -45,7 +44,7 @@ public class ValidationBehavior extends AbstractDelegatedBehavior<EClassifier, E
 		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(ecoreMetaModel, metaModelManager);
 		Type type = ecore2Pivot.getCreated(Type.class, eClassifier);
 		if (type != null) {
-			Constraint constraint = PivotUtil.getNamedElement(metaModelManager.getAllConstraints(type), constraintName);
+			Constraint constraint = DomainUtil.getNamedElement(metaModelManager.getAllConstraints(type), constraintName);
 			if (constraint != null) {
 				return constraint;
 			}

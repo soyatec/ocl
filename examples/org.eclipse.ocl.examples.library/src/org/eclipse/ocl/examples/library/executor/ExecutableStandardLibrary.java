@@ -17,27 +17,21 @@
 package org.eclipse.ocl.examples.library.executor;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.types.AbstractCollectionType;
 import org.eclipse.ocl.examples.domain.types.AbstractStandardLibrary;
 import org.eclipse.ocl.examples.domain.types.AbstractTupleType;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
-import org.eclipse.ocl.examples.library.ecore.EcoreValueFactory;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 
 public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
@@ -55,16 +49,11 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 	/**
 	 * Shared cache of the lazily created lazily deleted tuples. 
 	 */
-	private @NonNull Map<String, List<WeakReference<DomainTupleType>>> tupleTypeMap = new WeakHashMap<String, List<WeakReference<DomainTupleType>>>();
+	private @NonNull Map<TupleTypeId, WeakReference<DomainTupleType>> tupleTypeMap = new WeakHashMap<TupleTypeId, WeakReference<DomainTupleType>>();
 	
-	public abstract @NonNull DomainEvaluator createEvaluator(@NonNull EObject contextObject, @Nullable Map<Object, Object> contextMap);
+//	public abstract @NonNull DomainEvaluator createEvaluator(@NonNull EObject contextObject, @Nullable Map<Object, Object> contextMap);
 
 	protected abstract @NonNull DomainMetaclass createMetaclass(@NonNull DomainType classType);
-
-	@Override
-	protected @NonNull ValueFactory createValueFactory() {
-		return new EcoreValueFactory(this);
-	}
 
 	public @NonNull DomainType getMetaclassType() {
 		return OCLstdlibTables.Types._Metaclass;
@@ -86,6 +75,7 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 		return OCLstdlibTables.Types._Collection;
 	}
 
+	@Override
 	public synchronized @NonNull DomainCollectionType getCollectionType(@NonNull DomainType genericType, @NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
 		AbstractCollectionType specializedType = null;
 		Map<DomainType, WeakReference<AbstractCollectionType>> map = specializations.get(genericType);
@@ -188,7 +178,7 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 		return OCLstdlibTables.Types._String;
 	}
 
-	public @NonNull DomainTupleType getTupleType(@NonNull List<? extends DomainTypedElement> parts) {
+/*	public @NonNull DomainTupleType getTupleType(@NonNull List<? extends DomainTypedElement> parts) {
 		StringBuilder s = new StringBuilder();
 		for (DomainTypedElement part : parts) {
 			s.append(part.getName());
@@ -226,6 +216,19 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 			tupleTypes.add(new WeakReference<DomainTupleType>(tupleType));
 			return tupleType;
 		}
+	} */
+
+	public @NonNull DomainTupleType getTupleType(@NonNull TupleTypeId typeId) {
+		WeakReference<DomainTupleType> ref = tupleTypeMap.get(typeId);
+		if (ref != null) {
+			DomainTupleType domainTupleType = ref.get();
+			if (domainTupleType != null) {
+				return domainTupleType;
+			}
+		}
+		DomainTupleType domainTupleType = new AbstractTupleType(this, typeId);
+		tupleTypeMap.put(typeId, new WeakReference<DomainTupleType>(domainTupleType));
+		return domainTupleType;
 	}
 
 	public @NonNull DomainType getUniqueCollectionType() {

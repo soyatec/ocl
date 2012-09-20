@@ -21,11 +21,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
+import org.eclipse.ocl.examples.domain.elements.DomainExpression;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
+import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluationEnvironment;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -37,7 +40,6 @@ import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
 /**
@@ -55,162 +57,155 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 		return ValuesPackage.Literals.INVALID_VALUE;
 	}
 
-	protected final InvalidEvaluationException exception;
+	protected final @NonNull String message;
+	protected final @Nullable InvalidValue nestedValue;
+	protected final @Nullable Exception exception;
+	protected final @Nullable DomainEvaluationEnvironment evaluationEnvironment;
+	protected final @Nullable Object context;
+	protected final @Nullable DomainExpression expression; 
 
-	public InvalidValueImpl(@NonNull ValueFactory valueFactory) {
-		super(valueFactory);
-		this.exception = null;
+	public InvalidValueImpl() {
+		this("invalid", null);
 	}
 
-	public InvalidValueImpl(@NonNull ValueFactory valueFactory, @NonNull InvalidEvaluationException exception) {
-		super(valueFactory);
+	public InvalidValueImpl(@NonNull String message) {
+		this(message, null);
+	}
+
+	public InvalidValueImpl(@NonNull String message, @Nullable Exception exception) {
+		this.message = message;
 		this.exception = exception;
+		this.nestedValue = null;
+		this.evaluationEnvironment = null;
+		this.context = null;
+		this.expression = null;
+	}
+
+	public InvalidValueImpl(@NonNull String message,
+			@NonNull DomainEvaluationEnvironment evaluationEnvironment, @Nullable Object context, @Nullable DomainExpression expression) {
+		this.message = message;
+		this.exception = null;
+		this.nestedValue = null;
+		this.evaluationEnvironment = evaluationEnvironment;
+		this.context = context;
+		this.expression = expression;
+	}
+
+	public InvalidValueImpl(@NonNull String message, @Nullable Exception exception,
+			@Nullable DomainEvaluationEnvironment evaluationEnvironment, @Nullable Object context, @Nullable DomainExpression expression) {
+		this.message = message;
+		this.exception = exception;
+		this.nestedValue = null;
+		this.evaluationEnvironment = evaluationEnvironment;
+		this.context = context;
+		this.expression = expression;
+	}
+
+	public InvalidValueImpl(@NonNull String message, @Nullable InvalidValue nestedValue,
+			@Nullable DomainEvaluationEnvironment evaluationEnvironment, @Nullable Object context, @Nullable DomainExpression expression) {
+		this.message = message;
+		this.exception = null;
+		this.nestedValue = nestedValue;
+		this.evaluationEnvironment = evaluationEnvironment;
+		this.context = context;
+		this.expression = expression;
 	}
 
 	@Override
-	public Object asEcoreObject() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.asEcoreObject();
+	public @NonNull BagValue asBagValue() {
+		throw new InvalidValueException(this);
 	}
 
 	@Override
-	public @NonNull BagValue asBagValue() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.asBagValue();
+	public @NonNull CollectionValue asCollectionValue() {
+		throw new InvalidValueException(this);
 	}
 
 	@Override
-	public @NonNull CollectionValue asCollectionValue() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.asCollectionValue();
-	}
-
-	@Override
-	public @NonNull Double asDouble() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.asDouble();
+	public @NonNull Double asDouble() {
+		throw new InvalidValueException(this);
 	}
 
 	@Override
 	public DomainElement asElement() {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.asElement();
+		throw new InvalidValueException(this);
 	}
 
 	@Override
-	public @NonNull Integer asInteger() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.asInteger();
+	public @NonNull Integer asInteger() {
+		throw new InvalidValueException(this);
 	}
 
 	@Override
-	public @NonNull IntegerValue asIntegerValue() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.asIntegerValue();
+	public @NonNull IntegerValue asIntegerValue() {
+		throw new InvalidValueException(this);
 	}
 
 	@Override
-	public @NonNull EObject asNavigableObject() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.asNavigableObject();
+	public @NonNull EObject asNavigableObject() {
+		throw new InvalidValueException(this);
 	}
 
 	@Override
-	public @NonNull ObjectValue asObjectValue() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.asObjectValue();
+	public @NonNull ObjectValue asObjectValue() {
+		throw new InvalidValueException(this);
 	}
 
 	@Override
-	public @NonNull OrderedSetValue asOrderedSetValue() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.asOrderedSetValue();
+	public @NonNull OrderedSetValue asOrderedSetValue() {
+		throw new InvalidValueException(this);
 	}
 
 	@Override
-	public @NonNull RealValue asRealValue() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.asRealValue();
+	public @NonNull RealValue asRealValue() {
+		throw new InvalidValueException(this);
 	}
 
 	@Override
-	public @NonNull SequenceValue asSequenceValue() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.asSequenceValue();
+	public @NonNull SequenceValue asSequenceValue() {
+		throw new InvalidValueException(this);
 	}
 
 	@Override
-	public @NonNull SetValue asSetValue() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.asSetValue();
+	public @NonNull SetValue asSetValue() {
+		throw new InvalidValueException(this);
 	}
 
 	@Override
-	public @NonNull UniqueCollectionValue asUniqueCollectionValue() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		return super.asUniqueCollectionValue();
-	}
-
-	@Override
-	public @NonNull Value asValidValue() throws InvalidValueException {
-		if (exception != null) {
-			throw exception;
-		}
-		else {
-			return valueFactory.throwInvalidValueException(EvaluatorMessages.TypedValueRequired, "valid", getType());
-		}
+	public @NonNull UniqueCollectionValue asUniqueCollectionValue() {
+		throw new InvalidValueException(this);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		return obj instanceof InvalidValue;
 	}
+
+	public @NonNull CollectedTypeId getCollectedTypeId() {
+		return TypeId.OCL_INVALID;
+	}
 	
-	public Exception getException() {
+	public @Nullable Exception getException() {
 		return exception;
 	}
-
-	public @NonNull DomainType getType() {
-		return valueFactory.getStandardLibrary().getOclInvalidType();
+	
+	public @NonNull String getMessage() {
+		return message;
 	}
 
-	public @Nullable Value getValue(@NonNull String partName) throws InvalidValueException {
+	public @NonNull DomainType getType(@NonNull DomainStandardLibrary standardLibrary) {
+		return standardLibrary.getOclInvalidType();
+	}
+
+	public @Nullable Value getValue(@NonNull String partName) {
     	return toInvalidValue();
 	}
 
-	public @Nullable Value getValue(@NonNull DomainTypedElement part) throws InvalidValueException {
+	public @Nullable Value getValue(@NonNull DomainTypedElement part) {
     	return toInvalidValue();
 	}
 
-	public int intValue() throws InvalidValueException {
+	public int intValue() {
     	toInvalidValue();		// throws rather than returns
     	return 0;
 	}

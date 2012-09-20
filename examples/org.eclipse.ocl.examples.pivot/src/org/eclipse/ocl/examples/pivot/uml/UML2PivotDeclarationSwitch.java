@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -265,19 +266,19 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		assert umlPrimitiveType != null;
 		PrimitiveType primaryElement = null;
 		String name = umlPrimitiveType.getName();
-		if ("Boolean".equals(name)) {
+		if (TypeId.BOOLEAN_NAME.equals(name)) {
 			primaryElement = metaModelManager.getBooleanType();
 		}
-		else if ("Integer".equals(name)) {
+		else if (TypeId.INTEGER_NAME.equals(name)) {
 			primaryElement = metaModelManager.getIntegerType();
 		}
-		else if ("Real".equals(name)) {
+		else if (TypeId.REAL_NAME.equals(name)) {
 			primaryElement = metaModelManager.getRealType();
 		}
-		else if ("String".equals(name)) {
+		else if (TypeId.STRING_NAME.equals(name)) {
 			primaryElement = metaModelManager.getStringType();
 		}
-		else if ("UnlimitedNatural".equals(name)) {
+		else if (TypeId.UNLIMITED_NATURAL_NAME.equals(name)) {
 			primaryElement = metaModelManager.getUnlimitedNaturalType();
 		}
 //		if (pivotElement != null) {

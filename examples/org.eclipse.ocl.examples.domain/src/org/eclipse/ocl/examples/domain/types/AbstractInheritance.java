@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.IndexableIterable;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 public abstract class AbstractInheritance implements DomainInheritance
 {
@@ -123,11 +122,11 @@ public abstract class AbstractInheritance implements DomainInheritance
 		return thatInheritance.isSuperInheritanceOf(standardLibrary, this);
 	}
 
-	public @NonNull ObjectValue createInstance(@NonNull ValueFactory valueFactory) {
+	public @NonNull ObjectValue createInstance(@NonNull DomainStandardLibrary standardLibrary) {
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull Object createInstance(@NonNull ValueFactory valueFactory, @NonNull String value) {
+	public @NonNull Object createInstance(@NonNull DomainStandardLibrary standardLibrary, @NonNull String value) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -169,6 +168,9 @@ public abstract class AbstractInheritance implements DomainInheritance
 	}
 	
 	public @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
+		if (this == type) {
+			return this;
+		}
 		DomainInheritance firstInheritance = this;
 		DomainInheritance secondInheritance = type.getInheritance(standardLibrary);
 		DomainInheritance commonInheritance = firstInheritance.getCommonInheritance(secondInheritance);

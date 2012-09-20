@@ -22,6 +22,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.AbstractStandardLibrary;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.BagType;
@@ -123,7 +124,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	public @NonNull PrimitiveType getBooleanType() {
 		PrimitiveType booleanType2 = booleanType;
 		if (booleanType2 == null) {
-			booleanType2 = booleanType = resolveRequiredSimpleType(PrimitiveType.class, "Boolean");		
+			booleanType2 = booleanType = resolveRequiredSimpleType(PrimitiveType.class, TypeId.BOOLEAN_NAME);		
 		}
 		return booleanType2;
 	}
@@ -131,7 +132,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	public @NonNull org.eclipse.ocl.examples.pivot.Class getClassType() {
 		org.eclipse.ocl.examples.pivot.Class classType2 = classType;
 		if (classType2 == null) {
-			classType2 = classType = resolveRequiredSimpleType(org.eclipse.ocl.examples.pivot.Class.class, "Class");		
+			classType2 = classType = resolveRequiredSimpleType(org.eclipse.ocl.examples.pivot.Class.class, TypeId.CLASS_NAME);		
 		}
 		return classType2;
 	}
@@ -147,7 +148,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	public @NonNull org.eclipse.ocl.examples.pivot.Class getEnumerationType() {
 		org.eclipse.ocl.examples.pivot.Class enumerationType2 = enumerationType;
 		if (enumerationType2 == null) {
-			enumerationType2 = enumerationType = resolveRequiredSimpleType(org.eclipse.ocl.examples.pivot.Class.class, "Enumeration");		
+			enumerationType2 = enumerationType = resolveRequiredSimpleType(org.eclipse.ocl.examples.pivot.Class.class, TypeId.ENUMERATION_NAME);		
 		}
 		return enumerationType2;
 	}
@@ -155,7 +156,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	public @NonNull PrimitiveType getIntegerType() {
 		PrimitiveType integerType2 = integerType;
 		if (integerType2 == null) {
-			integerType2 = integerType = resolveRequiredSimpleType(PrimitiveType.class, "Integer");		
+			integerType2 = integerType = resolveRequiredSimpleType(PrimitiveType.class, TypeId.INTEGER_NAME);		
 		}
 		return integerType2;
 	}
@@ -263,7 +264,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	public @NonNull PrimitiveType getRealType() {
 		PrimitiveType realType2 = realType;
 		if (realType2 == null) {
-			realType2 = realType = resolveRequiredSimpleType(PrimitiveType.class, "Real");		
+			realType2 = realType = resolveRequiredSimpleType(PrimitiveType.class, TypeId.REAL_NAME);		
 		}
 		return realType2;
 	}
@@ -302,7 +303,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	public @NonNull PrimitiveType getStringType() {
 		PrimitiveType stringType2 = stringType;
 		if (stringType2 == null) {
-			stringType2 = stringType = resolveRequiredSimpleType(PrimitiveType.class, "String");		
+			stringType2 = stringType = resolveRequiredSimpleType(PrimitiveType.class, TypeId.STRING_NAME);		
 		}
 		return stringType2;
 	}
@@ -318,7 +319,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	public @NonNull PrimitiveType getUnlimitedNaturalType() {
 		PrimitiveType unlimitedNaturalType2 = unlimitedNaturalType;
 		if (unlimitedNaturalType2 == null) {
-			unlimitedNaturalType2 = unlimitedNaturalType = resolveRequiredSimpleType(PrimitiveType.class, "UnlimitedNatural");		
+			unlimitedNaturalType2 = unlimitedNaturalType = resolveRequiredSimpleType(PrimitiveType.class, TypeId.UNLIMITED_NATURAL_NAME);		
 		}
 		return unlimitedNaturalType2;
 	}

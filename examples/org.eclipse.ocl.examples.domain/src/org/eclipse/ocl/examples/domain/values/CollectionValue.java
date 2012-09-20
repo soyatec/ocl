@@ -23,12 +23,8 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
-import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
+import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 
 public interface CollectionValue extends Value
 {
@@ -42,47 +38,42 @@ public interface CollectionValue extends Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Collection<? extends Object> asCollection() throws InvalidValueException;	
+	@NonNull Collection<? extends Object> asCollection();	
 
 	/**
 	 * @generated NOT
 	 */
-	//@NonNull List<Object> asList() throws InvalidValueException;
+	@NonNull IntegerValue count(@NonNull Object value);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue count(@NonNull Object value) throws InvalidValueException;
+	@NonNull Object excludes(@NonNull Object value);	
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Object excludes(@NonNull Object value) throws InvalidValueException;	
+	@NonNull Object excludesAll(@NonNull CollectionValue c);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Object excludesAll(@NonNull CollectionValue c) throws InvalidValueException;
+	@NonNull CollectionValue excluding(@NonNull Object value);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull CollectionValue excluding(@NonNull Object value) throws InvalidValueException;
+	@NonNull CollectionValue flatten();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull CollectionValue flatten() throws InvalidValueException;
+	boolean flatten(@NonNull Collection<Object> flattenedElements);
 
 	/**
 	 * @generated NOT
 	 */
-	boolean flatten(@NonNull Collection<Object> flattenedElements) throws InvalidValueException;
-
-	/**
-	 * @generated NOT
-	 */
-	@NonNull DomainCollectionType getCollectionType();
+	@NonNull CollectedTypeId getCollectedTypeId();
 
 	/**
 	 * @generated NOT
@@ -92,17 +83,17 @@ public interface CollectionValue extends Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Object includes(@NonNull Object value) throws InvalidValueException;	
+	@NonNull Object includes(@NonNull Object value);	
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Object includesAll(@NonNull CollectionValue c) throws InvalidValueException;
+	@NonNull Object includesAll(@NonNull CollectionValue c);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull CollectionValue including(@NonNull Object value) throws InvalidValueException;
+	@NonNull CollectionValue including(@NonNull Object value);
 
 	/**
 	 * @generated NOT
@@ -112,12 +103,16 @@ public interface CollectionValue extends Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull CollectionValue intersection(@NonNull CollectionValue c) throws InvalidValueException;
+	@NonNull CollectionValue intersection(@NonNull CollectionValue c);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Object isEmpty() throws InvalidValueException;
+	@NonNull Object isEmpty();
+
+	boolean isOrdered();
+
+	boolean isUnique();
 
 	/**
 	 * @generated NOT
@@ -132,50 +127,30 @@ public interface CollectionValue extends Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Object maxMin(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation binaryOperation) throws InvalidValueException;
+	@NonNull Object notEmpty();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Object notEmpty() throws InvalidValueException;
+	@Nullable Set<TupleValue> product(@NonNull CollectionValue c, @NonNull TupleTypeId tupleTypeId);   	
 
 	/**
 	 * @generated NOT
 	 */
-	@Nullable Set<TupleValue> product(@NonNull CollectionValue c, @NonNull DomainTupleType tupleType) throws InvalidValueException;   	
+	@NonNull IntegerValue size();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull CollectionValue selectByKind(@NonNull DomainType typeValue) throws InvalidValueException;
+	@NonNull SequenceValue sort(@NonNull Comparator<Object> comparator);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull CollectionValue selectByType(@NonNull DomainType typeValue) throws InvalidValueException;
+	@Nullable SequenceValue toSequenceValue();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue size() throws InvalidValueException;
-
-	/**
-	 * @generated NOT
-	 */
-	@NonNull SequenceValue sort(@NonNull Comparator<Object> comparator) throws InvalidValueException;
-
-	/**
-	 * @generated NOT
-	 */
-	@NonNull Object sum(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation binaryOperation, @NonNull Object zero) throws InvalidValueException;
-
-	/**
-	 * @generated NOT
-	 */
-	@Nullable SequenceValue toSequenceValue() throws InvalidValueException;
-
-	/**
-	 * @generated NOT
-	 */
-	@NonNull CollectionValue union(@NonNull CollectionValue c) throws InvalidValueException;
+	@NonNull CollectionValue union(@NonNull CollectionValue c);
 }

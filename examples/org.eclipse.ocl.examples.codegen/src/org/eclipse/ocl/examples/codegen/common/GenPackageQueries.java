@@ -38,6 +38,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -52,7 +54,6 @@ import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.manager.TypeServer;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.uml2.codegen.ecore.genmodel.util.UML2GenModelUtil;
 
 public class GenPackageQueries
@@ -451,7 +452,7 @@ public class GenPackageQueries
 			Map<Type,Type> typeMap = new HashMap<Type,Type>();
 			ArrayList<Type> libraryTypes = new ArrayList<Type>(library.getOwnedType());
 			for (Type secondaryType : libraryTypes) {
-				Type primaryType = PivotUtil.getNamedElement(primaryTypes, secondaryType.getName());
+				Type primaryType = DomainUtil.getNamedElement(primaryTypes, secondaryType.getName());
 				if (primaryType != null) {
 					typeMap.put(secondaryType, primaryType);
 				}
@@ -480,8 +481,8 @@ public class GenPackageQueries
 		for (Type primaryType : primaryTypes) {
 			if (primaryType instanceof Type) {
 				List<Type> primarySuperClasses = primaryType.getSuperClass();
-				Type classType = PivotUtil.getNamedElement(primarySuperClasses, "Class");
-				Type metaclass = PivotUtil.getNamedElement(primarySuperClasses, "Classifier");
+				Type classType = DomainUtil.getNamedElement(primarySuperClasses, TypeId.CLASS_NAME);
+				Type metaclass = DomainUtil.getNamedElement(primarySuperClasses, "Classifier");
 				if ((classType != null) && (metaclass != null)) {
 					primarySuperClasses.remove(classType);		// WIP FIXME fix at source
 				}

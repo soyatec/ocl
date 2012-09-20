@@ -837,13 +837,39 @@
       </expression>
       <type xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
     </ownedModuleElement>
+    <ownedModuleElement xsi:type="mtl:Query" name="isBuiltInType" visibility="Public">
+      <parameter name="type">
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
+      </parameter>
+      <expression xsi:type="ocl.ecore:OperationCallExp" referredOperation="/1/OclAny_Class/invoke">
+        <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+        <source xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/72">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
+        </source>
+        <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="org.eclipse.ocl.examples.codegen.common.PivotQueries">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        </argument>
+        <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="isBuiltInType(org.eclipse.ocl.examples.pivot.Type)">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        </argument>
+        <argument xsi:type="ocl.ecore:CollectionLiteralExp" eType="/3/Sequence(Type)" kind="Sequence">
+          <part xsi:type="ocl.ecore:CollectionItem">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
+            <item xsi:type="ocl.ecore:VariableExp" name="type" referredVariable="/0/isBuiltInType/type">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
+            </item>
+          </part>
+        </argument>
+      </expression>
+      <type xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+    </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Query" name="prettyPrint" visibility="Public">
       <parameter name="expr">
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
       </parameter>
       <expression xsi:type="ocl.ecore:OperationCallExp" referredOperation="/1/OclAny_Class/invoke">
         <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
-        <source xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/72">
+        <source xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/75">
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
         </source>
         <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="org.eclipse.ocl.examples.codegen.common.PivotQueries">
@@ -869,7 +895,7 @@
       </parameter>
       <expression xsi:type="ocl.ecore:OperationCallExp" referredOperation="/1/OclAny_Class/invoke">
         <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
-        <source xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/75">
+        <source xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/78">
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ValueSpecification"/>
         </source>
         <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="org.eclipse.ocl.examples.codegen.common.PivotQueries">
@@ -895,7 +921,7 @@
       </parameter>
       <expression xsi:type="ocl.ecore:OperationCallExp" referredOperation="/1/OclAny_Class/invoke">
         <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
-        <source xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/78">
+        <source xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/81">
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//NamedElement"/>
         </source>
         <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="org.eclipse.ocl.examples.codegen.common.PivotQueries">
@@ -1150,6 +1176,16 @@
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
         <eParameters name="callExp">
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="isBuiltInType">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/isBuiltInType"/>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+        <eParameters name="type">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
         </eParameters>
       </eOperations>
       <eOperations name="prettyPrint">
@@ -1567,6 +1603,15 @@
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
@@ -2969,124 +3014,164 @@
       <details key="end" value="4580"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.274" references="/0/prettyPrint">
+    <eAnnotations source="positions.274" references="/0/isBuiltInType">
       <details key="start" value="4587"/>
-      <details key="end" value="4783"/>
+      <details key="end" value="4776"/>
       <details key="line" value="96"/>
     </eAnnotations>
-    <eAnnotations source="positions.275" references="/0/prettyPrint/expr">
-      <details key="start" value="4613"/>
-      <details key="end" value="4633"/>
+    <eAnnotations source="positions.275" references="/0/isBuiltInType/type">
+      <details key="start" value="4615"/>
+      <details key="end" value="4626"/>
       <details key="line" value="96"/>
     </eAnnotations>
-    <eAnnotations source="positions.276" references="/0/prettyPrint/@expression">
-      <details key="start" value="4647"/>
-      <details key="end" value="4780"/>
+    <eAnnotations source="positions.276" references="/0/isBuiltInType/@expression">
+      <details key="start" value="4641"/>
+      <details key="end" value="4773"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.277" references="/0/prettyPrint/@expression/self">
+    <eAnnotations source="positions.277" references="/0/isBuiltInType/@expression/self">
       <details key="start" value="-1"/>
       <details key="end" value="-1"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.278" references="/0/prettyPrint/@expression/@argument.0">
-      <details key="start" value="4654"/>
-      <details key="end" value="4708"/>
+    <eAnnotations source="positions.278" references="/0/isBuiltInType/@expression/@argument.0">
+      <details key="start" value="4648"/>
+      <details key="end" value="4702"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.279" references="/0/prettyPrint/@expression/@argument.1">
-      <details key="start" value="4710"/>
-      <details key="end" value="4763"/>
+    <eAnnotations source="positions.279" references="/0/isBuiltInType/@expression/@argument.1">
+      <details key="start" value="4704"/>
+      <details key="end" value="4756"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.280" references="/0/prettyPrint/@expression/@argument.2">
-      <details key="start" value="4765"/>
-      <details key="end" value="4779"/>
+    <eAnnotations source="positions.280" references="/0/isBuiltInType/@expression/@argument.2">
+      <details key="start" value="4758"/>
+      <details key="end" value="4772"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.281" references="/0/prettyPrint/@expression/@argument.2/@part.0/expr">
-      <details key="start" value="4774"/>
-      <details key="end" value="4778"/>
+    <eAnnotations source="positions.281" references="/0/isBuiltInType/@expression/@argument.2/@part.0/type">
+      <details key="start" value="4767"/>
+      <details key="end" value="4771"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.282" references="/0/prettyPrint.1">
-      <details key="start" value="4785"/>
-      <details key="end" value="4994"/>
+    <eAnnotations source="positions.282" references="/0/prettyPrint">
+      <details key="start" value="4778"/>
+      <details key="end" value="4974"/>
       <details key="line" value="99"/>
     </eAnnotations>
-    <eAnnotations source="positions.283" references="/0/prettyPrint.1/expInOcl">
-      <details key="start" value="4811"/>
-      <details key="end" value="4840"/>
+    <eAnnotations source="positions.283" references="/0/prettyPrint/expr">
+      <details key="start" value="4804"/>
+      <details key="end" value="4824"/>
       <details key="line" value="99"/>
     </eAnnotations>
-    <eAnnotations source="positions.284" references="/0/prettyPrint.1/@expression">
-      <details key="start" value="4854"/>
-      <details key="end" value="4991"/>
+    <eAnnotations source="positions.284" references="/0/prettyPrint/@expression">
+      <details key="start" value="4838"/>
+      <details key="end" value="4971"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.285" references="/0/prettyPrint.1/@expression/self">
+    <eAnnotations source="positions.285" references="/0/prettyPrint/@expression/self">
       <details key="start" value="-1"/>
       <details key="end" value="-1"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.286" references="/0/prettyPrint.1/@expression/@argument.0">
-      <details key="start" value="4861"/>
-      <details key="end" value="4915"/>
+    <eAnnotations source="positions.286" references="/0/prettyPrint/@expression/@argument.0">
+      <details key="start" value="4845"/>
+      <details key="end" value="4899"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.287" references="/0/prettyPrint.1/@expression/@argument.1">
-      <details key="start" value="4917"/>
+    <eAnnotations source="positions.287" references="/0/prettyPrint/@expression/@argument.1">
+      <details key="start" value="4901"/>
+      <details key="end" value="4954"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.288" references="/0/prettyPrint/@expression/@argument.2">
+      <details key="start" value="4956"/>
       <details key="end" value="4970"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.288" references="/0/prettyPrint.1/@expression/@argument.2">
-      <details key="start" value="4972"/>
-      <details key="end" value="4990"/>
+    <eAnnotations source="positions.289" references="/0/prettyPrint/@expression/@argument.2/@part.0/expr">
+      <details key="start" value="4965"/>
+      <details key="end" value="4969"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.289" references="/0/prettyPrint.1/@expression/@argument.2/@part.0/expInOcl">
-      <details key="start" value="4981"/>
-      <details key="end" value="4989"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.290" references="/0/prettyPrintName">
-      <details key="start" value="4996"/>
-      <details key="end" value="5215"/>
+    <eAnnotations source="positions.290" references="/0/prettyPrint.1">
+      <details key="start" value="4976"/>
+      <details key="end" value="5185"/>
       <details key="line" value="102"/>
     </eAnnotations>
-    <eAnnotations source="positions.291" references="/0/prettyPrintName/namedElement">
-      <details key="start" value="5026"/>
-      <details key="end" value="5053"/>
+    <eAnnotations source="positions.291" references="/0/prettyPrint.1/expInOcl">
+      <details key="start" value="5002"/>
+      <details key="end" value="5031"/>
       <details key="line" value="102"/>
     </eAnnotations>
-    <eAnnotations source="positions.292" references="/0/prettyPrintName/@expression">
-      <details key="start" value="5067"/>
-      <details key="end" value="5212"/>
+    <eAnnotations source="positions.292" references="/0/prettyPrint.1/@expression">
+      <details key="start" value="5045"/>
+      <details key="end" value="5182"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.293" references="/0/prettyPrintName/@expression/self">
+    <eAnnotations source="positions.293" references="/0/prettyPrint.1/@expression/self">
       <details key="start" value="-1"/>
       <details key="end" value="-1"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.294" references="/0/prettyPrintName/@expression/@argument.0">
-      <details key="start" value="5074"/>
-      <details key="end" value="5128"/>
+    <eAnnotations source="positions.294" references="/0/prettyPrint.1/@expression/@argument.0">
+      <details key="start" value="5052"/>
+      <details key="end" value="5106"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.295" references="/0/prettyPrintName/@expression/@argument.1">
-      <details key="start" value="5130"/>
-      <details key="end" value="5187"/>
+    <eAnnotations source="positions.295" references="/0/prettyPrint.1/@expression/@argument.1">
+      <details key="start" value="5108"/>
+      <details key="end" value="5161"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.296" references="/0/prettyPrintName/@expression/@argument.2">
-      <details key="start" value="5189"/>
-      <details key="end" value="5211"/>
+    <eAnnotations source="positions.296" references="/0/prettyPrint.1/@expression/@argument.2">
+      <details key="start" value="5163"/>
+      <details key="end" value="5181"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.297" references="/0/prettyPrintName/@expression/@argument.2/@part.0/namedElement">
-      <details key="start" value="5198"/>
-      <details key="end" value="5210"/>
+    <eAnnotations source="positions.297" references="/0/prettyPrint.1/@expression/@argument.2/@part.0/expInOcl">
+      <details key="start" value="5172"/>
+      <details key="end" value="5180"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.298" references="/0/prettyPrintName">
+      <details key="start" value="5187"/>
+      <details key="end" value="5406"/>
+      <details key="line" value="105"/>
+    </eAnnotations>
+    <eAnnotations source="positions.299" references="/0/prettyPrintName/namedElement">
+      <details key="start" value="5217"/>
+      <details key="end" value="5244"/>
+      <details key="line" value="105"/>
+    </eAnnotations>
+    <eAnnotations source="positions.300" references="/0/prettyPrintName/@expression">
+      <details key="start" value="5258"/>
+      <details key="end" value="5403"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.301" references="/0/prettyPrintName/@expression/self">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.302" references="/0/prettyPrintName/@expression/@argument.0">
+      <details key="start" value="5265"/>
+      <details key="end" value="5319"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.303" references="/0/prettyPrintName/@expression/@argument.1">
+      <details key="start" value="5321"/>
+      <details key="end" value="5378"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.304" references="/0/prettyPrintName/@expression/@argument.2">
+      <details key="start" value="5380"/>
+      <details key="end" value="5402"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.305" references="/0/prettyPrintName/@expression/@argument.2/@part.0/namedElement">
+      <details key="start" value="5389"/>
+      <details key="end" value="5401"/>
       <details key="line" value="0"/>
     </eAnnotations>
   </ecore:EAnnotation>

@@ -40,6 +40,6 @@ public class NumericGreaterThanEqualOperation extends AbstractNumericBinaryOpera
 
 	@Override
 	protected @NonNull Object evaluateUnlimited(@NonNull DomainEvaluator evaluator, @NonNull Object left, @NonNull Object right) {
-		return isUnlimited(left);
+		return isUnlimited(left) != false;			// FIXME redundant test to suppress warning
 	}
 }

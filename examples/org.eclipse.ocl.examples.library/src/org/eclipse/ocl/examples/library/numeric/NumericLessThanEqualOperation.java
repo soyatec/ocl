@@ -40,6 +40,6 @@ public class NumericLessThanEqualOperation extends AbstractNumericBinaryOperatio
 
 	@Override
 	protected @NonNull Object evaluateUnlimited(@NonNull DomainEvaluator evaluator, @NonNull Object left, @NonNull Object right) {
-		return isUnlimited(right);
+		return isUnlimited(right) != false;			// FIXME redundant test to suppress warning
 	}
 }

@@ -79,12 +79,12 @@ public class [className/]
 [if (expInOcl.contextVariable->notEmpty())]
 [if (false and pConstraint.stereotype = 'body')]
 	public static @NonNull [pOperation.type.name/] [pOperation.name/]([pType.name/] self[for (parameter : Parameter | pOperation.ownedParameter)], [parameter.type.name/] [parameter.name/][/for]) {
-		final @NonNull <%ExecutorManager%> evaluator = new <%EcoreExecutorManager%>(this, null, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
-		final @NonNull <%ValueFactory%> valueFactory = evaluator.getValueFactory();
+		final @NonNull <%ExecutorManager%> evaluator = new <%EcoreExecutorManager%>(this, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
+		final @NonNull <%DomainStandardLibrary%> standardLibrary = evaluator.getStandardLibrary();
 		@NonNull Library[genPackage.emitOperationArity(pOperation.ownedParameter->size())/] codeGen = [pType.name + '_' + pOperation.name + '_' + pConstraint.stereotype + '_' + pConstraint.name/].INSTANCE;
 		try {
-			final @NonNull Object result = codeGen.evaluate(evaluator, null, valueFactory.valueOf(self)[for (parameter : Parameter | pOperation.ownedParameter)], valueFactory.valueOf([parameter.name/])[/for]);
-			return ([pOperation.type.name/]) <%ValuesUtil%>.asEcoreObject(result);
+			final @NonNull Object result = codeGen.evaluate(evaluator, null, valueOf(self)[for (parameter : Parameter | pOperation.ownedParameter)], valueOf([parameter.name/])[/for]);
+			return ([pOperation.type.name/]) standardLibrary.asEcoreObject(result);
 		} catch (<%InvalidValueException%> e) {
 			throw new WrappedException(e);
 		}
@@ -123,7 +123,7 @@ public static class [className/] extends <%Abstract[genPackage.emitOperationArit
 	/*
 	[expInOcl.prettyPrint().trim()/]
 	*/
-	public @NonNull Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%DomainType%> returnType, final @NonNull Object [defineSymbolName(expInOcl.contextVariable, 'self')/][if expInOcl.parameterVariable->notEmpty()]
+	public @NonNull Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, final @NonNull Object [defineSymbolName(expInOcl.contextVariable, 'self')/][if expInOcl.parameterVariable->notEmpty()]
 [for (parameter : Variable | expInOcl.parameterVariable)]
 , final @NonNull Object [defineSymbolName(parameter, parameter.name)/][/for][/if]) throws <%InvalidValueException%> {
 		[expInOcl.emitConstants(constants)/]
@@ -135,7 +135,7 @@ public static class [className/] extends <%Abstract[genPackage.emitOperationArit
 	{
 		public static @NonNull [className/] INSTANCE = new [className/]();
 	
-		public @NonNull Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%DomainType%> returnType, final @NonNull Object [defineSymbolName(expInOcl.contextVariable, 'self')/][if expInOcl.parameterVariable->notEmpty()]
+		public @NonNull Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, final @NonNull Object [defineSymbolName(expInOcl.contextVariable, 'self')/][if expInOcl.parameterVariable->notEmpty()]
 	[for (parameter : Variable | expInOcl.parameterVariable)]
 	, @NonNull Object [defineSymbolName(parameter, parameter.name)/][/for][/if]) throws <%InvalidValueException%> {
 			[expInOcl.messageExpression.emitExpression(pType, genPackage, expInOcl)/]
@@ -162,7 +162,7 @@ public static class [className/] extends <%Abstract[genPackage.emitOperationArit
 	/*
 	[expInOcl.prettyPrint().trim()/]
 	*/
-	public @NonNull Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%DomainType%> returnType, final @NonNull Object [defineSymbolName(expInOcl.contextVariable, 'self')/][if expInOcl.parameterVariable->notEmpty()]
+	public @NonNull Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, final @NonNull Object [defineSymbolName(expInOcl.contextVariable, 'self')/][if expInOcl.parameterVariable->notEmpty()]
 [for (parameter : Variable | expInOcl.parameterVariable)]
 , final @NonNull Object [defineSymbolName(parameter, parameter.name)/][/for][/if]) throws <%InvalidValueException%> {
 		[expInOcl.emitConstants(constants)/]
@@ -189,7 +189,7 @@ public static class [className/] extends <%AbstractProperty%>
 	/*
 	[expInOcl.prettyPrint().trim()/]
 	*/
-	public @NonNull Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%DomainType%> returnType, final @NonNull Object [defineSymbolName(expInOcl.contextVariable, 'self')/], @NonNull <%DomainProperty%> property) throws <%InvalidValueException%> {
+	public @NonNull Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, final @NonNull Object [defineSymbolName(expInOcl.contextVariable, 'self')/], @NonNull <%DomainProperty%> property) throws <%InvalidValueException%> {
 		[expInOcl.emitConstants(constants)/]
 		[expInOcl.bodyExpression.emitExpression(pType, genPackage, expInOcl)/]
 		return [expInOcl.bodyExpression.symbolName(expInOcl)/];

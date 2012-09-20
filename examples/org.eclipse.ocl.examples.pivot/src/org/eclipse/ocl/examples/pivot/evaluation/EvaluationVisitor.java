@@ -22,10 +22,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidEvaluationException;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
@@ -76,8 +72,6 @@ public interface EvaluationVisitor extends Visitor<Object>, DomainEvaluator
 	@NonNull MetaModelManager getMetaModelManager();
 
 	@NonNull DomainStandardLibrary getStandardLibrary();
-
-	@NonNull ValueFactory getValueFactory();
     
     /**
      * Configures the specified decorated visitor to correctly handle the
@@ -91,9 +85,9 @@ public interface EvaluationVisitor extends Visitor<Object>, DomainEvaluator
      */
 	void setUndecoratedVisitor(EvaluationVisitor evaluationVisitor);
 
-	@NonNull NullValue throwInvalidEvaluation(InvalidValueException e) throws InvalidEvaluationException;
+//	@NonNull NullValue throwInvalidEvaluation(InvalidValueException e);
 
-	@NonNull NullValue throwInvalidEvaluation(String message) throws InvalidEvaluationException;
+//	@NonNull NullValue throwInvalidEvaluation(String message);
 
-	@NonNull NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object value, String message, Object... bindings) throws InvalidEvaluationException;
+//	@NonNull NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object value, String message, Object... bindings);
 }

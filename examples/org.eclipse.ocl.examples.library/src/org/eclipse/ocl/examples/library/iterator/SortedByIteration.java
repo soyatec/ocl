@@ -32,6 +32,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
@@ -41,7 +43,6 @@ import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.impl.ValueImpl;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.LibraryConstants;
-import org.eclipse.osgi.util.NLS;
 
 /**
  * SelectIteration realizes the Collection::sortedBy() library iteration.
@@ -50,19 +51,18 @@ public class SortedByIteration extends AbstractIteration
 {
 	protected static class SortingValue extends ValueImpl implements Comparator<Object>
 	{
-		protected final @NonNull DomainType type;
+		protected final @NonNull CollectedTypeId typeId;
 		private final @NonNull DomainEvaluator evaluator;
-		private final @NonNull DomainType iteratorType;
+		private final boolean isUnique;
 		private final @NonNull LibraryBinaryOperation implementation;
 		private final @NonNull Map<Object, Object> content = new HashMap<Object, Object>();	// User object to sortedBy value
 		private Map<Object, Integer> repeatCounts = null;						// Repeat counts for non-unique content
 
-		public SortingValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation implementation) {
-			super(evaluator.getValueFactory());
-			this.type = returnType;
+		public SortingValue(@NonNull DomainEvaluator evaluator, @NonNull CollectedTypeId returnTypeId, @NonNull LibraryBinaryOperation implementation) {
+			this.typeId = returnTypeId;
 			this.evaluator = evaluator;
-			this.iteratorType = valueFactory.getStandardLibrary().getIntegerType();
 			this.implementation = implementation;
+			isUnique = (typeId.getCollectionTypeId() == TypeId.SET) || (typeId.getCollectionTypeId() == TypeId.ORDERED_SET);
 		}
 
 		public @NonNull Object asObject() {
@@ -84,21 +84,20 @@ public class SortedByIteration extends AbstractIteration
 			else if (v2 == null) {
 				return 1;
 			}
-			try {
-				IntegerValue comparison = ValuesUtil.asIntegerValue(implementation.evaluate(evaluator, iteratorType, v1, v2));
+//			try {
+				IntegerValue comparison = ValuesUtil.asIntegerValue(implementation.evaluate(evaluator, TypeId.INTEGER, v1, v2));
 				return comparison.signum();
-			} catch (InvalidValueException e) {
-				evaluator.throwInvalidEvaluation(e);
-			}
-			return 0;
+//			} catch (InvalidValueException e) {
+//				evaluator.throwInvalidEvaluation(e);
+//			}
+//			return 0;
 		}
 
 		public @NonNull Value createSortedValue() {
 			List<Object> result = new ArrayList<Object>(content.keySet());
 			Collections.sort(result, this);
-			boolean isUnique = type.isUnique();
 			if (isUnique || (repeatCounts == null)) {
-				return valueFactory.createCollectionValue(true, isUnique, type, result);
+				return createCollectionValue(true, isUnique, typeId, result);
 			}
 			else {
 				List<Object> nonUniqueResult = new ArrayList<Object>();
@@ -111,17 +110,21 @@ public class SortedByIteration extends AbstractIteration
 						}
 					}
 				}
-				return valueFactory.createCollectionValue(true, false, type, nonUniqueResult);
+				return createCollectionValue(true, false, typeId, nonUniqueResult);
 			}
 		}
 
-		public @NonNull DomainType getType() {
-			return type;
+//		public @NonNull DomainType getType(@NonNull DomainStandardLibrary standardLibrary) {
+//			return type;
+//		}
+
+		public @NonNull TypeId getTypeId() {
+			return typeId;
 		}
 
 		public void put(@NonNull Object iterVal, @NonNull Object comparable) {
 			if (content.put(iterVal, comparable) != null) {
-				if (!type.isUnique()) {
+				if (!isUnique) {
 					if (repeatCounts == null) {
 						repeatCounts = new HashMap<Object, Integer>();
 					}
@@ -145,20 +148,20 @@ public class SortedByIteration extends AbstractIteration
 
 	public static final @NonNull SortedByIteration INSTANCE = new SortedByIteration();
 
-	public @NonNull SortedByIteration.SortingValue createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull DomainType accumulatorType, @NonNull DomainType bodyType) throws InvalidValueException {
-		DomainStandardLibrary standardLibrary = evaluator.getValueFactory().getStandardLibrary();
+	public @NonNull SortedByIteration.SortingValue createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull TypeId accumulatorTypeId, @NonNull DomainType bodyType) {
+		DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 		DomainInheritance comparableType = standardLibrary.getOclComparableType().getInheritance(standardLibrary);
 		DomainInheritance selfType = standardLibrary.getOclSelfType().getInheritance(standardLibrary);
 		DomainOperation staticOperation = comparableType.lookupLocalOperation(standardLibrary, LibraryConstants.COMPARE_TO, selfType);
 		try {
 			if (staticOperation != null) {
 				LibraryFeature implementation = bodyType.lookupImplementation(standardLibrary, staticOperation);
-				return new SortingValue(evaluator, accumulatorType, (LibraryBinaryOperation) implementation);
+				return new SortingValue(evaluator, (CollectedTypeId)accumulatorTypeId, (LibraryBinaryOperation) implementation);
 			}
 		} catch (Exception e) {
-			throw new InvalidValueException(e);
+			throw new InvalidValueException(createInvalidValue(e));
 		}
-		throw new InvalidValueException(NLS.bind(EvaluatorMessages.UndefinedOperation, String.valueOf(comparableType) + "::" + LibraryConstants.COMPARE_TO)); //$NON-NLS-1$
+		throw new InvalidValueException(createInvalidValue(EvaluatorMessages.UndefinedOperation, String.valueOf(comparableType) + "::" + LibraryConstants.COMPARE_TO)); //$NON-NLS-1$
 	}
 	
 	@Override
@@ -171,7 +174,7 @@ public class SortedByIteration extends AbstractIteration
     protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
 		Object bodyVal = iterationManager.evaluateBody();		
 		if (isUndefined(bodyVal)) {
-			return iterationManager.throwInvalidEvaluation(EvaluatorMessages.UndefinedBody, "sortedBy"); 	// Null body is invalid //$NON-NLS-1$
+			return createInvalidValue(EvaluatorMessages.UndefinedBody, "sortedBy"); 	// Null body is invalid //$NON-NLS-1$
 		}
 		Object iterValue = iterationManager.get();		
 		SortingValue accumulatorValue = (SortingValue) iterationManager.getAccumulatorValue();

@@ -40,7 +40,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.common.utils.ClassUtils;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
@@ -758,13 +757,9 @@ public class PivotUtil extends DomainUtil
 		return depth;
 	}
 
+	@Deprecated
 	public static <T extends DomainNamedElement> T getNamedElement(Iterable<T> elements, String name) {
-		if (elements == null)
-			return null;
-		for (T element : elements)
-			if (ClassUtils.equals(name, element.getName()))
-				return element;
-		return null;				
+		return DomainUtil.getNamedElement(elements, name);
 	}
 
 	public static @NonNull Type getOwningType(@NonNull Feature feature) {
@@ -1082,7 +1077,7 @@ public class PivotUtil extends DomainUtil
 		return results;
 	}
 
-	public static @NonNull <T extends Type> T getUnspecializedTemplateableElement(@NonNull T templateableElement) {
+	public static @NonNull <T extends TemplateableElement> T getUnspecializedTemplateableElement(@NonNull T templateableElement) {
 //		if (templateableElement == null) {
 //			return null;
 //		}

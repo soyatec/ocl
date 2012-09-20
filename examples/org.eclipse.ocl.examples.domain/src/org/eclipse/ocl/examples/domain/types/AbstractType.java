@@ -26,7 +26,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 public abstract class AbstractType implements DomainType	// FIXME rename as perhaps DerivativeType
 {
@@ -39,18 +38,19 @@ public abstract class AbstractType implements DomainType	// FIXME rename as perh
 		this.name = name;
 	}
 
-	public @NonNull ObjectValue createInstance(@NonNull ValueFactory valueFactory) {
+	public @NonNull ObjectValue createInstance(@NonNull DomainStandardLibrary standardLibrary) {
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull Value createInstance(@NonNull ValueFactory valueFactory, @NonNull String value) {
+	public @NonNull Value createInstance(@NonNull DomainStandardLibrary standardLibrary, @NonNull String value) {
 		throw new UnsupportedOperationException();
 	}
 
 	public abstract @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type);
 
 	public @NonNull DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary) {
-		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
+		return standardLibrary.getInheritance(this);
+//		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
 	}
 
 	public @NonNull Iterable<? extends DomainOperation> getLocalOperations() {
@@ -65,8 +65,13 @@ public abstract class AbstractType implements DomainType	// FIXME rename as perh
 		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
 	}
 
+//	public @NonNull String getMetaTypeName() {
+//		TypeId typeId = getTypeId();
+//		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
+//	}
+
 	public @NonNull String getMetaTypeName() {
-		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
+		return getTypeId().getMetaTypeName();
 	}
 	
 	public final String getName() {

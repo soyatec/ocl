@@ -30,11 +30,11 @@ import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.typeids.Typeid;
+import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.library.executor.ReflectivePackage;
 import org.eclipse.ocl.examples.pivot.AnyType;
-import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.CollectionType;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.InvalidType;
 import org.eclipse.ocl.examples.pivot.LambdaType;
@@ -74,8 +74,8 @@ public abstract class PackageServer extends ReflectivePackage implements Package
 	 */
 	private @Nullable org.eclipse.ocl.examples.pivot.Package representativePackage = null;
 	
-	protected PackageServer(@NonNull PackageManager packageManager, @NonNull String name, @Nullable String nsPrefix, @Nullable String nsURI, @NonNull Typeid typeid) {
-		super(name, nsPrefix, nsURI, typeid);
+	protected PackageServer(@NonNull PackageManager packageManager, @NonNull String name, @Nullable String nsPrefix, @Nullable String nsURI, @NonNull PackageId packageId) {
+		super(name, nsPrefix, nsURI, packageId);
 		this.packageManager = packageManager;
 	}
 	
@@ -229,7 +229,7 @@ public abstract class PackageServer extends ReflectivePackage implements Package
 		if (packageServer == null) {
 			String nsPrefix = pivotPackage.getNsPrefix();
 			String nsURI = pivotPackage.getNsURI();
-			packageServer = new NestedPackageServer(this, name, nsPrefix, nsURI, pivotPackage.getTypeid());
+			packageServer = new NestedPackageServer(this, name, nsPrefix, nsURI, pivotPackage.getPackageId());
 			packageServers2.put(name, packageServer);
 			if (nsURI != null) {
 				packageManager.addPackageServer(packageServer);

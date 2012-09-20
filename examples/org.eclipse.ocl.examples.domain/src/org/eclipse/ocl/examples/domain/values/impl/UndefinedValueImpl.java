@@ -27,54 +27,51 @@ import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
-import org.eclipse.ocl.examples.domain.values.ValueFactory;
 
 /**
  * @generated NOT
  */
 public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 {	
-	protected UndefinedValueImpl(@NonNull ValueFactory valueFactory) {
-		super(valueFactory);
-	}
+	protected UndefinedValueImpl() {}
 
-	public @NonNull NullValue abs() throws InvalidValueException {
+	public @NonNull NullValue abs() {
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue add(@NonNull IntegerValue right) throws InvalidValueException {
+	public @NonNull NullValue add(@NonNull IntegerValue right) {
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue add(@NonNull RealValue right) throws InvalidValueException {
+	public @NonNull NullValue add(@NonNull RealValue right) {
 		return toInvalidValue();
 	}
 
-	public @NonNull Object asObject() throws InvalidValueException {
+	public @NonNull Object asObject() {
 		return toInvalidValue();
 	}
 
-	public @NonNull BigDecimal bigDecimalValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException("undefined value has no BigDecimal value");
+	public @NonNull BigDecimal bigDecimalValue() {
+		throw new InvalidValueException("undefined value has no BigDecimal value");
 	}
 
-	public @NonNull BigInteger bigIntegerValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException("undefined value has no BigInteger value");
+	public @NonNull BigInteger bigIntegerValue() {
+		throw new InvalidValueException("undefined value has no BigInteger value");
 	}
 
 	public int compareTo(NumericValue o) {
 		throw new UnsupportedOperationException("UndefinedValueImpl.compareTo");
 	}
 
-	public @NonNull NullValue div(@NonNull IntegerValue right) throws InvalidValueException {
+	public @NonNull NullValue div(@NonNull IntegerValue right) {
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue divide(@NonNull IntegerValue right) throws InvalidValueException {
+	public @NonNull NullValue divide(@NonNull IntegerValue right) {
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue divide(@NonNull RealValue right) throws InvalidValueException {
+	public @NonNull NullValue divide(@NonNull RealValue right) {
 		return toInvalidValue();
 	}
 
@@ -82,7 +79,7 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		throw new UnsupportedOperationException("InvalidValue.compareTo");
 	}
 
-	public @NonNull NullValue floor() throws InvalidValueException {
+	public @NonNull NullValue floor() {
 		return toInvalidValue();
 	}
 
@@ -90,8 +87,8 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		return null;
 	}
 
-	public @NonNull DomainType getInstanceType() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException("undefined value has no instance type");
+	public @NonNull DomainType getInstanceType() {
+		throw new InvalidValueException("undefined value has no instance type");
 	}
 
 	public Object getObject() {
@@ -119,39 +116,40 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		return false;
 	}
 
-	public @NonNull NullValue max(@NonNull IntegerValue right) throws InvalidValueException {
+	public @NonNull NullValue max(@NonNull IntegerValue right) {
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue max(@NonNull RealValue right) throws InvalidValueException {
+	public @NonNull NullValue max(@NonNull RealValue right) {
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue min(@NonNull IntegerValue right) throws InvalidValueException {
+	public @NonNull NullValue min(@NonNull IntegerValue right) {
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue min(@NonNull RealValue right) throws InvalidValueException {
+	public @NonNull NullValue min(@NonNull RealValue right) {
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue mod(@NonNull IntegerValue right) throws InvalidValueException {
+	public @NonNull NullValue mod(@NonNull IntegerValue right) {
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue multiply(@NonNull IntegerValue right) throws InvalidValueException {
+	public @NonNull NullValue multiply(@NonNull IntegerValue right) {
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue multiply(@NonNull RealValue right) throws InvalidValueException {
+	public @NonNull NullValue multiply(@NonNull RealValue right) {
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue negate() throws InvalidValueException {
+	public @NonNull NullValue negate() {
 		return toInvalidValue();
 	}
+	
 
-	public @NonNull NullValue round() throws InvalidValueException {
+	public @NonNull NullValue round() {
 		return toInvalidValue();
 	}
 
@@ -159,19 +157,19 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		throw new UnsupportedOperationException("InvalidValue.compareTo");
 	}
 
-	public @NonNull String stringValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException("undefined value has no String value");
+	public @NonNull String stringValue() {
+		throw new InvalidValueException("undefined value has no String value");
 	}
 
-	public @NonNull NullValue subtract(@NonNull IntegerValue right) throws InvalidValueException {
+	public @NonNull NullValue subtract(@NonNull IntegerValue right) {
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue subtract(@NonNull RealValue right) throws InvalidValueException {
+	public @NonNull NullValue subtract(@NonNull RealValue right) {
 		return toInvalidValue();
 	}
 
-	protected @NonNull NullValue toInvalidValue() throws InvalidValueException {
-		return valueFactory.throwInvalidValueException(EvaluatorMessages.ConvertibleValueRequired, "Invalid");
+	protected @NonNull NullValue toInvalidValue() {
+		throw new InvalidValueException(EvaluatorMessages.ConvertibleValueRequired, "Invalid");
 	}
 }
