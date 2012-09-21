@@ -72,6 +72,11 @@ public class PackageManager implements PackageServerParent
 	 */
 	private final @NonNull Map<DomainType, TypeTracker> type2tracker = new WeakHashMap<DomainType, TypeTracker>();
 	
+	/**
+	 * Lazily computed, eagerly invalidated analysis of final classes and operations.
+	 */
+	private @Nullable FinalAnalysis finalAnalysis = null;
+	
 	protected PackageManager(@NonNull MetaModelManager metaModelManager) {
 		this.metaModelManager = metaModelManager;
 	}
@@ -232,6 +237,14 @@ public class PackageManager implements PackageServerParent
 	@SuppressWarnings("null")
 	public @NonNull Iterable<PackageServer> getAllPackagesWithUris() {
 		return uri2package.values();
+	}
+	
+	public @NonNull FinalAnalysis getFinalAnalysis() {
+		FinalAnalysis finalAnalysis2 = finalAnalysis;
+		if (finalAnalysis2 == null) {
+			finalAnalysis = finalAnalysis2 = new FinalAnalysis(this);
+		}
+		return finalAnalysis2;
 	}
 
 	public @Nullable RootPackageServer getMemberPackage(@NonNull String memberPackageName) {
