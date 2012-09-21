@@ -54,7 +54,6 @@ public class IfExpBodies
 		*/
 		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
@@ -71,7 +70,7 @@ public class IfExpBodies
 			
 			DomainType static_A_symbol__2 = evaluator.getStaticTypeOf(A_symbol__1, T_Metaclass_Boolean_);
 			LibraryBinaryOperation dynamic_A_symbol__2 = (LibraryBinaryOperation)static_A_symbol__2.lookupImplementation(standardLibrary, O_OclAny__eq_);
-			Object A_symbol__2 = dynamic_A_symbol__2.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__1, T_Metaclass_Boolean_);
+			Object A_symbol__2 = dynamic_A_symbol__2.evaluate(evaluator, TypeId.BOOLEAN, A_symbol__1, T_Metaclass_Boolean_);
 			return A_symbol__2;
 		}
 	}

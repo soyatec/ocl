@@ -1022,10 +1022,9 @@ public class PropertyImpl
 		*/
 		try {
 			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
-			final @NonNull TypeId returnTypeId = T_Boolean.getTypeId();
-			final @NonNull Object result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, returnTypeId, this, ValuesUtil.valueOf(p));
-			return evaluator.asEcoreObject((Boolean)null, result);
+			
+			final @NonNull Object result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, this, ValuesUtil.valueOf(p));
+			return (Boolean)result;
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.ParameterableElementBodies", e);
 		}
@@ -1048,10 +1047,9 @@ public class PropertyImpl
 		*/
 		try {
 			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
-			final @NonNull TypeId returnTypeId = T_Boolean.getTypeId();
-			final @NonNull Object result = PropertyBodies._isAttribute_body_.INSTANCE.evaluate(evaluator, returnTypeId, this, ValuesUtil.valueOf(p));
-			return evaluator.asEcoreObject((Boolean)null, result);
+			
+			final @NonNull Object result = PropertyBodies._isAttribute_body_.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, this, ValuesUtil.valueOf(p));
+			return (Boolean)result;
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.PropertyBodies", e);
 		}
@@ -1096,10 +1094,8 @@ public class PropertyImpl
 		*/
 		try {
 			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final @NonNull DomainType returnType = T_Boolean;
-			final @NonNull Object result = PropertyBodies._invariant_CompatibleInitialiser.INSTANCE.evaluate(evaluator, returnType.getTypeId(), this);
+			final @NonNull Object result = PropertyBodies._invariant_CompatibleInitialiser.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, this);
 			final boolean resultIsNull = ValuesUtil.isNull(result);
 			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -1682,13 +1678,7 @@ public class PropertyImpl
 			EObject eObject = objectValue.asNavigableObject();
 			Object eValue;
 			if (propertyValue instanceof Value) {
-				try {
-					eValue = standardLibrary.asEcoreObject((Value)propertyValue);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();			// FIXME
-					eValue = null;
-				}
+				eValue = ((Value)propertyValue).asEcoreObject();
 			}
 			else {
 				eValue = propertyValue;

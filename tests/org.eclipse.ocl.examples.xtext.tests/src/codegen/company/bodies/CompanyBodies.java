@@ -172,7 +172,7 @@ public class CompanyBodies
 			};
 			DomainType static_A_symbol__10 = evaluator.getStaticTypeOf(V_table);
 			LibraryIteration dynamic_A_symbol__10 = (LibraryIteration)static_A_symbol__10.lookupImplementation(standardLibrary, O_Collection_any);
-			Object acc_A_symbol__10 = dynamic_A_symbol__10.createAccumulatorValue(evaluator, U_Tuple_range_Sequence_size_CompanySizeKind_.getTypeId(), T_Boolean);
+			Object acc_A_symbol__10 = dynamic_A_symbol__10.createAccumulatorValue(evaluator, U_Tuple_range_Sequence_size_CompanySizeKind_.getTypeId(), T_Boolean.getTypeId());
 			ExecutorSingleIterationManager manager_A_symbol__10 = new ExecutorSingleIterationManager(evaluator, U_Tuple_range_Sequence_size_CompanySizeKind_.getTypeId(), body_A_symbol__10, (CollectionValue)V_table, acc_A_symbol__10);
 			Object A_symbol__10 = dynamic_A_symbol__10.evaluateIteration(manager_A_symbol__10);
 			Object A_symbol__15 = ((TupleValue)A_symbol__10).getValue(L_size_company__CompanySizeKind);

@@ -56,7 +56,6 @@ public class ElementBodies
 		*/
 		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			final @NonNull ExecutorOperation O_Boolean_not = OCLstdlibTables.Operations._Boolean__not;
 			final @NonNull ExecutorOperation O_Collection_includes = OCLstdlibTables.Operations._Collection__includes;
 			final @NonNull ExecutorType T_pivot__Element = PivotTables.Types._Element;
@@ -70,10 +69,10 @@ public class ElementBodies
 			
 			DomainType static_A_symbol__1 = evaluator.getStaticTypeOf(A_symbol_);
 			LibraryBinaryOperation dynamic_A_symbol__1 = (LibraryBinaryOperation)static_A_symbol__1.lookupImplementation(standardLibrary, O_Collection_includes);
-			Object A_symbol__1 = dynamic_A_symbol__1.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol_, self);
+			Object A_symbol__1 = dynamic_A_symbol__1.evaluate(evaluator, TypeId.BOOLEAN, A_symbol_, self);
 			DomainType static_A_symbol__2 = evaluator.getStaticTypeOf(A_symbol__1);
 			LibraryUnaryOperation dynamic_A_symbol__2 = (LibraryUnaryOperation)static_A_symbol__2.lookupImplementation(standardLibrary, O_Boolean_not);
-			Object A_symbol__2 = dynamic_A_symbol__2.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__1);
+			Object A_symbol__2 = dynamic_A_symbol__2.evaluate(evaluator, TypeId.BOOLEAN, A_symbol__1);
 			return A_symbol__2;
 		}
 	}
@@ -119,7 +118,6 @@ public class ElementBodies
 			return Null;
 		}
 	}
-
 
 
 }

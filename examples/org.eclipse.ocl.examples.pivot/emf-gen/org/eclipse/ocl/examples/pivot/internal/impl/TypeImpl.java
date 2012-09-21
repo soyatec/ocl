@@ -49,6 +49,7 @@ import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
+import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
@@ -486,10 +487,9 @@ public class TypeImpl
 		*/
 		try {
 			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
-			final @NonNull TypeId returnTypeId = T_Boolean.getTypeId();
-			final @NonNull Object result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, returnTypeId, this, ValuesUtil.valueOf(p));
-			return evaluator.asEcoreObject((Boolean)null, result);
+			
+			final @NonNull Object result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, this, ValuesUtil.valueOf(p));
+			return (Boolean)result;
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.ParameterableElementBodies", e);
 		}
@@ -509,9 +509,9 @@ public class TypeImpl
 		try {
 			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
-			final @NonNull TypeId returnTypeId = T_Type.getTypeId();
-			final @NonNull Object result = TypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, returnTypeId, this, ValuesUtil.valueOf(selfType));
-			return evaluator.asEcoreObject((Type)null, result);
+			
+			final @NonNull Object result = TypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, T_Type.getTypeId(), this, ValuesUtil.valueOf(selfType));
+			return (Type)result;
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.TypeBodies", e);
 		}

@@ -46,6 +46,7 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 
+import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
@@ -188,7 +189,7 @@ public class CompanyImpl extends EObjectImpl implements Company {
 			final @NonNull ExecutorType T_company__CompanySizeKind = CodegencompanyTables.Types._CompanySizeKind;
 			final @NonNull TypeId returnTypeId = T_company__CompanySizeKind.getTypeId();
 			final @NonNull Object result = CompanyBodies._size_derivation_.INSTANCE.evaluate(evaluator, returnTypeId, this, CodegencompanyTables.Properties._Company__size);
-			return evaluator.asEcoreObject((CompanySizeKind)null, result);
+			return (CompanySizeKind)(result instanceof Value ? ((Value)result).asEcoreObject() : result);
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate codegen.company.bodies.CompanyBodies", e);
 		}

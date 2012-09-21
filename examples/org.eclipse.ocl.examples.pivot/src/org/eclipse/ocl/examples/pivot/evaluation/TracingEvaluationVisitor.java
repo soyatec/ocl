@@ -70,10 +70,6 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
         super(decorated);
     }
 
-	public <T> T asEcoreObject(@Nullable T example, @NonNull Object value) {
-		return getDelegate().asEcoreObject(example, value);
-	}
-
 	@Override
 	public @NonNull EvaluationVisitor createNestedEvaluator() {
 		return new TracingEvaluationVisitor(super.createNestedEvaluator());

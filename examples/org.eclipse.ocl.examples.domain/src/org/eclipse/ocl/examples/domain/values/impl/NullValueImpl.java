@@ -46,10 +46,10 @@ public class NullValueImpl extends UndefinedCollectionValueImpl implements NullV
 
 	public NullValueImpl() {}
 
-/*	@Override
+	@Override
 	public Object asEcoreObject() {
 		return null;
-	} */
+	}
 
 	@Override
 	public DomainElement asElement() {

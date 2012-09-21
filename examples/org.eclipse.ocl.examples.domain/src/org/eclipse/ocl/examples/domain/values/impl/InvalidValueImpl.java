@@ -16,6 +16,9 @@
  */
 package org.eclipse.ocl.examples.domain.values.impl;
 
+import java.util.List;
+
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -31,8 +34,10 @@ import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
@@ -123,6 +128,10 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 
 	@Override
 	public @NonNull Double asDouble() {
+		throw new InvalidValueException(this);
+	}
+	
+	public @Nullable Object asEcoreObject() {
 		throw new InvalidValueException(this);
 	}
 

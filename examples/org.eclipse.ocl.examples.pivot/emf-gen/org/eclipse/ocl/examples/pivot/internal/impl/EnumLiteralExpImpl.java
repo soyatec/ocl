@@ -35,6 +35,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
@@ -152,10 +153,8 @@ public class EnumLiteralExpImpl
 		*/
 		try {
 			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final @NonNull DomainType returnType = T_Boolean;
-			final @NonNull Object result = EnumLiteralExpBodies._invariant_TypeIsEnumerationType.INSTANCE.evaluate(evaluator, returnType.getTypeId(), this);
+			final @NonNull Object result = EnumLiteralExpBodies._invariant_TypeIsEnumerationType.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, this);
 			final boolean resultIsNull = ValuesUtil.isNull(result);
 			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;

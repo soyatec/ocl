@@ -65,6 +65,7 @@ public class EmitQueries
 		org.eclipse.ocl.examples.domain.values.SetValue.class,
 		org.eclipse.ocl.examples.domain.values.TupleValue.class,
 		org.eclipse.ocl.examples.domain.values.UnlimitedValue.class,
+		org.eclipse.ocl.examples.domain.values.Value.class,
 		org.eclipse.ocl.examples.domain.values.util.ValuesUtil.class,
 		org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumeration.class,
 		org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumerationLiteral.class,

@@ -21,9 +21,11 @@
 [import org::eclipse::ocl::examples::codegen::common::emitQueries/]
 [import org::eclipse::ocl::examples::codegen::common::genPackageQueries/]
 [import org::eclipse::ocl::examples::codegen::common::nameQueries/]
+[import org::eclipse::ocl::examples::codegen::common::pivotQueries/]
 [import org::eclipse::ocl::examples::codegen::common::qualifiedLiteralTemplates/]
 [import org::eclipse::ocl::examples::codegen::common::stringQueries/]
 [import org::eclipse::ocl::examples::codegen::common::symbolTemplates/]
+[import org::eclipse::ocl::examples::codegen::common::typeIdTemplates/]
 
 [template public emitConstants(expInOcl : ExpressionInOCL, genPackage : GenPackage)]
 [let constants : String = expInOcl.bodyExpression.emitConstants(genPackage, expInOcl)]
@@ -141,6 +143,9 @@ final @NonNull <%ExecutorOperation%> [ast.referredOperation.symbolName(expInOcl)
 final @NonNull <%DomainCollectionType%> [ast.symbolName(expInOcl)/] = standardLibrary.getOrderedSetType([ast.elementType.symbolName(expInOcl)/], null, null);
 [/template]
 
+[template protected emitConstants(type : PrimitiveType, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
+[/template]
+
 [template protected emitConstants(ast : PropertyCallExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitStandardLibrary()/]
 [ast.type.emitConstants(genPackage, expInOcl)/]
@@ -195,7 +200,10 @@ final @NonNull <%DomainTypedElement%> [part.symbolName(expInOcl)/] = standardLib
 final @NonNull <%DomainTupleType%> [ast.symbolName(expInOcl)/] = standardLibrary.getTupleType([for (part : Property | ast.ownedAttribute) separator(', ')][part.symbolName(expInOcl)/][/for]);
 [/template]
 
-[template protected emitConstants(type : Type, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
+[template protected emitConstants(type : Type, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(type.isBuiltInType())]
+[/template]
+
+[template protected emitConstants(type : Type, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(not type.isBuiltInType())]
 final @NonNull <%ExecutorType%> [type.symbolName(expInOcl)/] = [type.emitQualifiedLiteralName(genPackage)/];
 [/template]
 
@@ -222,13 +230,13 @@ l[ast.eContainer().oclAsType(Element).symbolName(expInOcl)/].add([ast.item.symbo
 
 [template public emitLiteral(ast : CollectionLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL) ? (ast.part->filter(CollectionRange)->size() = 0)]
 [let astName : String = ast.symbolName(expInOcl)]
-final @NonNull Object [astName/] = create[ast.kind.toString()/]Value([ast.type.symbolName(expInOcl)/].getTypeId()[for (part : CollectionItem | ast.part->filter(CollectionItem))], [part.item.symbolName(expInOcl)/][/for]);[/let][/template]
+final @NonNull Object [astName/] = create[ast.kind.toString()/]Value([ast.type.typeId(expInOcl)/][for (part : CollectionItem | ast.part->filter(CollectionItem))], [part.item.symbolName(expInOcl)/][/for]);[/let][/template]
 
 [template public emitLiteral(ast : CollectionLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL) ? ((ast.part->size() = 1) and (ast.part->filter(CollectionRange)->size() = 1))]
 [let astName : String = ast.symbolName(expInOcl)]
 [let range : CollectionRange = ast.part->at(1).oclAsType(CollectionRange)]
 final @NonNull <%IntegerRange%> r[astName/] = createRange([range.first.symbolName(expInOcl)/].asIntegerValue(), [range.last.symbolName(expInOcl)/].asIntegerValue());
-final @NonNull Object [astName/] = create[ast.kind.toString()/]Range([ast.type.symbolName(expInOcl)/].getTypeId(), r[astName/]);[/let][/let][/template]
+final @NonNull Object [astName/] = create[ast.kind.toString()/]Range([ast.type.typeId(expInOcl)/], r[astName/]);[/let][/let][/template]
 
 [template public emitLiteral(ast : CollectionLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [let astName : String = ast.symbolName(expInOcl)]
@@ -236,7 +244,7 @@ final @NonNull <%java.util.List%><Object> l[astName/] = new <%java.util.ArrayLis
 [for (part : CollectionLiteralPart | ast.part)]
 [part.emitLiteral(genPackage, expInOcl)/]
 [/for]
-final @NonNull Object [astName/] = standardLibrary.create[ast.kind.toString()/]ValueOf([ast.type.symbolName(expInOcl)/].getTypeId(), l[astName/]);
+final @NonNull Object [astName/] = standardLibrary.create[ast.kind.toString()/]ValueOf([ast.type.typeId(expInOcl)/], l[astName/]);
 [/let][/template]
 
 [template public emitLiteral(ast : CollectionLiteralPart, genPackage : GenPackage, expInOcl : ExpressionInOCL)][/template]

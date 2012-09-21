@@ -54,7 +54,6 @@ public class ParameterableElementBodies
 		*/
 		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self, final @NonNull Object p) throws InvalidValueException {
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			final @NonNull ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
 			final @NonNull ExecutorType T_pivot__ParameterableElement = PivotTables.Types._ParameterableElement;
 			final @NonNull DomainMetaclass T_Metaclass_pivot__ParameterableElement_ = standardLibrary.getMetaclass(T_pivot__ParameterableElement);
@@ -67,7 +66,7 @@ public class ParameterableElementBodies
 			Object A_symbol_ = dynamic_A_symbol_.evaluate(evaluator, T_Metaclass_pivot__ParameterableElement_.getTypeId(), self);
 			DomainType static_A_symbol__1 = evaluator.getStaticTypeOf(p);
 			LibraryBinaryOperation dynamic_A_symbol__1 = (LibraryBinaryOperation)static_A_symbol__1.lookupImplementation(standardLibrary, O_OclAny_oclIsKindOf);
-			Object A_symbol__1 = dynamic_A_symbol__1.evaluate(evaluator, T_Boolean.getTypeId(), p, A_symbol_);
+			Object A_symbol__1 = dynamic_A_symbol__1.evaluate(evaluator, TypeId.BOOLEAN, p, A_symbol_);
 			return A_symbol__1;
 		}
 	}

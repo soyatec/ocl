@@ -16,12 +16,20 @@
  */
 package org.eclipse.ocl.examples.domain.values.impl;
 
+import java.util.List;
+
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.NullValue;
+import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
 /**
@@ -39,7 +47,7 @@ public abstract class AbstractEnumerationLiteralValueImpl extends ValueImpl impl
 	public AbstractEnumerationLiteralValueImpl(@NonNull EnumerationLiteralId enumerationLiteralId) {
 		this.enumerationLiteralId = enumerationLiteralId;
 	}
-
+	
 	@Override
 	public boolean equals(Object that) {
 		if (this == that) {

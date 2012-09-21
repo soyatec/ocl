@@ -60,7 +60,6 @@ public class LoopExpBodies
 		*/
 		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			final @NonNull ExecutorOperation O_Collection_forAll = OCLstdlibTables.Operations._Collection__1_forAll;
 			final @NonNull ExecutorType T_pivot__Variable = PivotTables.Types._Variable;
 			final @NonNull DomainCollectionType T_OrderedSet_pivot__Variable_ = standardLibrary.getOrderedSetType(T_pivot__Variable, null, null);
@@ -95,14 +94,14 @@ public class LoopExpBodies
 					Object A_symbol__3 = dynamic_A_symbol__3.evaluate(evaluator, T_Set_pivot__OCLExpression_.getTypeId(), A_symbol__2);
 					DomainType static_A_symbol__4 = evaluator.getStaticTypeOf(A_symbol__3);
 					LibraryUnaryOperation dynamic_A_symbol__4 = (LibraryUnaryOperation)static_A_symbol__4.lookupImplementation(standardLibrary, O_Collection_isEmpty);
-					Object A_symbol__4 = dynamic_A_symbol__4.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__3);
+					Object A_symbol__4 = dynamic_A_symbol__4.evaluate(evaluator, TypeId.BOOLEAN, A_symbol__3);
 					return A_symbol__4;
 				}
 			};
 			DomainType static_A_symbol__1 = evaluator.getStaticTypeOf(A_symbol_);
 			LibraryIteration dynamic_A_symbol__1 = (LibraryIteration)static_A_symbol__1.lookupImplementation(standardLibrary, O_Collection_forAll);
-			Object acc_A_symbol__1 = dynamic_A_symbol__1.createAccumulatorValue(evaluator, T_Boolean.getTypeId(), T_Boolean);
-			ExecutorSingleIterationManager manager_A_symbol__1 = new ExecutorSingleIterationManager(evaluator, T_Boolean.getTypeId(), body_A_symbol__1, (CollectionValue)A_symbol_, acc_A_symbol__1);
+			Object acc_A_symbol__1 = dynamic_A_symbol__1.createAccumulatorValue(evaluator, TypeId.BOOLEAN, TypeId.BOOLEAN);
+			ExecutorSingleIterationManager manager_A_symbol__1 = new ExecutorSingleIterationManager(evaluator, TypeId.BOOLEAN, body_A_symbol__1, (CollectionValue)A_symbol_, acc_A_symbol__1);
 			Object A_symbol__1 = dynamic_A_symbol__1.evaluateIteration(manager_A_symbol__1);
 			return A_symbol__1;
 		}
@@ -120,7 +119,6 @@ public class LoopExpBodies
 		*/
 		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			final @NonNull ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
@@ -137,7 +135,7 @@ public class LoopExpBodies
 			
 			DomainType static_A_symbol__7 = evaluator.getStaticTypeOf(A_symbol__6);
 			LibraryBinaryOperation dynamic_A_symbol__7 = (LibraryBinaryOperation)static_A_symbol__7.lookupImplementation(standardLibrary, O_OclAny_oclIsKindOf);
-			Object A_symbol__7 = dynamic_A_symbol__7.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__6, T_Metaclass_pivot__CollectionType_);
+			Object A_symbol__7 = dynamic_A_symbol__7.evaluate(evaluator, TypeId.BOOLEAN, A_symbol__6, T_Metaclass_pivot__CollectionType_);
 			return A_symbol__7;
 		}
 	}

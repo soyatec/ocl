@@ -26,6 +26,7 @@
 [import org::eclipse::ocl::examples::codegen::common::pivotQueries/]
 [import org::eclipse::ocl::examples::codegen::common::qualifiedLiteralTemplates/]
 [import org::eclipse::ocl::examples::codegen::common::symbolTemplates/]
+[import org::eclipse::ocl::examples::codegen::common::typeIdTemplates/]
 
 [template public generateModel(genModel : GenModel)]
 [comment @main /]
@@ -71,8 +72,7 @@
 try {
 	final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
 	[expInOcl.emitConstants(constants)/]
-	final @NonNull <%DomainType%> returnType = [expInOcl.type.symbolName(expInOcl)/];
-	final @NonNull Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, returnType.getTypeId(), this);
+	final @NonNull Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this);
 	final boolean resultIsNull = <%ValuesUtil%>.isNull(result);
 	if (!resultIsNull && <%ValuesUtil%>.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 		return true;
@@ -80,7 +80,7 @@ try {
 	if (diagnostics != null) {
 		int severity = resultIsNull ? <%org.eclipse.emf.common.util.Diagnostic%>.ERROR : <%org.eclipse.emf.common.util.Diagnostic%>.WARNING;
 [if (expInOcl.messageExpression->notEmpty())]
-		final Object messageValue = <%[className/]%>.[constraintName/].Message.INSTANCE.evaluate(evaluator, returnType.getTypeId(), this);
+		final Object messageValue = <%[className/]%>.[constraintName/].Message.INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this);
 		String message;
 		if (messageValue != null) {
 			message = messageValue.asString();
@@ -134,9 +134,9 @@ return false; // FIXME errors in OCL definition of [pRule.prettyPrintName()/]
 */
 try {
 	final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
-	[expInOcl.emitConstants(constants)/]final @NonNull <%TypeId%> returnTypeId = [expInOcl.type.symbolName(expInOcl)/].getTypeId();
-	final @NonNull Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, returnTypeId, this[for (pParameter : Parameter | pOperation.ownedParameter)], <%ValuesUtil%>.valueOf([pParameter.name/])[/for]);
-	return evaluator.asEcoreObject(([ecoreReturnType/])null, result);
+	[expInOcl.emitConstants(constants)/]
+	final @NonNull Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this[for (pParameter : Parameter | pOperation.ownedParameter)], <%ValuesUtil%>.valueOf([pParameter.name/])[/for]);
+	return ([ecoreReturnType/])[if (pOperation.type.isBoxed())]((<%Value%>)result).asEcoreObject()[else]result[/if];
 } catch (<%InvalidValueException%> e) {
 	throw new <%org.eclipse.emf.common.util.WrappedException%>("Failed to evaluate [className/]", e);
 }[/let][else]
@@ -171,9 +171,9 @@ return null; // FIXME errors in OCL definition of [pOperation.prettyPrintName()/
 */
 try {
 	final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
-	[expInOcl.emitConstants(constants)/]final @NonNull <%TypeId%> returnTypeId = [expInOcl.type.symbolName(expInOcl)/].getTypeId();
-	final @NonNull Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, returnTypeId, this, [pProperty.emitQualifiedLiteralName(genPackage)/]);
-	return evaluator.asEcoreObject(([ecoreReturnType/])null, result);
+	[expInOcl.emitConstants(constants)/]
+	final @NonNull Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this, [pProperty.emitQualifiedLiteralName(genPackage)/]);
+	return ([ecoreReturnType/])[if (pProperty.type.isBoxed())]((<%Value%>)result).asEcoreObject()[else]result[/if];
 } catch (<%InvalidValueException%> e) {
 	throw new <%org.eclipse.emf.common.util.WrappedException%>("Failed to evaluate [className/]", e);
 }[/let][else]

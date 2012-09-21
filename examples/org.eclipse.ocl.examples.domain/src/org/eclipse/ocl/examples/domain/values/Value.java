@@ -69,9 +69,16 @@ public interface Value
 	
 	/**
 	 * Return the Ecore representation of this value.
+	 * <p>
+	 * An thrown exception for an invalid OCL value.
+	 * <p>
+	 * Java-null for a null OCL value
+	 * <p>
+	 * Objects for other things
+	 * 
 	 * @generated NOT
 	 */
-//	Object asEcoreObject();
+	Object asEcoreObject();
 
 	/**
 	 * @generated NOT

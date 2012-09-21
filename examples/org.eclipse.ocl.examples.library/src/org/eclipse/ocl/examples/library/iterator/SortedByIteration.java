@@ -148,13 +148,14 @@ public class SortedByIteration extends AbstractIteration
 
 	public static final @NonNull SortedByIteration INSTANCE = new SortedByIteration();
 
-	public @NonNull SortedByIteration.SortingValue createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull TypeId accumulatorTypeId, @NonNull DomainType bodyType) {
+	public @NonNull SortedByIteration.SortingValue createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull TypeId accumulatorTypeId, @NonNull TypeId bodyTypeId) {
 		DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 		DomainInheritance comparableType = standardLibrary.getOclComparableType().getInheritance(standardLibrary);
 		DomainInheritance selfType = standardLibrary.getOclSelfType().getInheritance(standardLibrary);
 		DomainOperation staticOperation = comparableType.lookupLocalOperation(standardLibrary, LibraryConstants.COMPARE_TO, selfType);
 		try {
 			if (staticOperation != null) {
+				DomainType bodyType = standardLibrary.getType(bodyTypeId);
 				LibraryFeature implementation = bodyType.lookupImplementation(standardLibrary, staticOperation);
 				return new SortingValue(evaluator, (CollectedTypeId)accumulatorTypeId, (LibraryBinaryOperation) implementation);
 			}

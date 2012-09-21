@@ -54,7 +54,6 @@ public class EnumLiteralExpBodies
 		*/
 		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
@@ -76,7 +75,7 @@ public class EnumLiteralExpBodies
 			
 			DomainType static_A_symbol__3 = evaluator.getStaticTypeOf(A_symbol_, A_symbol__2);
 			LibraryBinaryOperation dynamic_A_symbol__3 = (LibraryBinaryOperation)static_A_symbol__3.lookupImplementation(standardLibrary, O_OclAny__eq_);
-			Object A_symbol__3 = dynamic_A_symbol__3.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol_, A_symbol__2);
+			Object A_symbol__3 = dynamic_A_symbol__3.evaluate(evaluator, TypeId.BOOLEAN, A_symbol_, A_symbol__2);
 			return A_symbol__3;
 		}
 	}

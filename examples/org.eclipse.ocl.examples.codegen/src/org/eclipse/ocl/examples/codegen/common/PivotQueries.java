@@ -29,6 +29,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.BuiltInTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -42,6 +44,7 @@ import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
+import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
 import org.eclipse.ocl.examples.pivot.SelfType;
@@ -276,6 +279,26 @@ public class PivotQueries
 			return false;
 		}
 		return parameters.get(0).getType() instanceof SelfType;
+	}
+	
+	public static @NonNull Boolean isBoxed(@NonNull Type type) {
+		TypeId typeId = type.getTypeId();
+		if (typeId == TypeId.BOOLEAN) {
+			return false;
+		}
+		if (typeId == TypeId.STRING) {
+			return false;
+		}
+		if (type instanceof PrimitiveType) {
+			return true;
+		}
+		if (typeId instanceof CollectedTypeId) {
+			return true;
+		}
+		if (type instanceof org.eclipse.ocl.examples.pivot.Enumeration) {
+			return true;
+		}
+		return false;
 	}
 	
 	public static @NonNull Boolean isBuiltInType(@NonNull Type type) {

@@ -349,7 +349,7 @@ public class EmployeeBodies
 			};
 			DomainType static_A_symbol__25 = evaluator.getStaticTypeOf(A_symbol__24);
 			LibraryIteration dynamic_A_symbol__25 = (LibraryIteration)static_A_symbol__25.lookupImplementation(standardLibrary, O_Set_select);
-			Object acc_A_symbol__25 = dynamic_A_symbol__25.createAccumulatorValue(evaluator, T_Set_company__Employee_.getTypeId(), T_Boolean);
+			Object acc_A_symbol__25 = dynamic_A_symbol__25.createAccumulatorValue(evaluator, T_Set_company__Employee_.getTypeId(), T_Boolean.getTypeId());
 			ExecutorSingleIterationManager manager_A_symbol__25 = new ExecutorSingleIterationManager(evaluator, T_Set_company__Employee_.getTypeId(), body_A_symbol__25, (CollectionValue)A_symbol__24, acc_A_symbol__25);
 			Object A_symbol__25 = dynamic_A_symbol__25.evaluateIteration(manager_A_symbol__25);
 			return A_symbol__25;
@@ -409,7 +409,7 @@ public class EmployeeBodies
 			};
 			DomainType static_A_symbol__28 = evaluator.getStaticTypeOf(A_symbol__27);
 			LibraryIteration dynamic_A_symbol__28 = (LibraryIteration)static_A_symbol__28.lookupImplementation(standardLibrary, O_OrderedSet_select);
-			Object acc_A_symbol__28 = dynamic_A_symbol__28.createAccumulatorValue(evaluator, T_OrderedSet_company__Employee_.getTypeId(), T_Boolean);
+			Object acc_A_symbol__28 = dynamic_A_symbol__28.createAccumulatorValue(evaluator, T_OrderedSet_company__Employee_.getTypeId(), T_Boolean.getTypeId());
 			ExecutorSingleIterationManager manager_A_symbol__28 = new ExecutorSingleIterationManager(evaluator, T_OrderedSet_company__Employee_.getTypeId(), body_A_symbol__28, (CollectionValue)A_symbol__27, acc_A_symbol__28);
 			Object A_symbol__28 = dynamic_A_symbol__28.evaluateIteration(manager_A_symbol__28);
 			return A_symbol__28;

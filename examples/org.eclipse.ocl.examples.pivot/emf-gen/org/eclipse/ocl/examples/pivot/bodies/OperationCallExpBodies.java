@@ -56,9 +56,7 @@ public class OperationCallExpBodies
 		*/
 		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			final @NonNull ExecutorOperation O_Real__eq_ = OCLstdlibTables.Operations._Real___eq_;
-			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
 			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
 			final @NonNull ExecutorType T_pivot__OCLExpression = PivotTables.Types._OCLExpression;
 			final @NonNull DomainCollectionType T_OrderedSet_pivot__OCLExpression_ = standardLibrary.getOrderedSetType(T_pivot__OCLExpression, null, null);
@@ -77,7 +75,7 @@ public class OperationCallExpBodies
 			
 			DomainType static_A_symbol__1 = evaluator.getStaticTypeOf(A_symbol_);
 			LibraryUnaryOperation dynamic_A_symbol__1 = (LibraryUnaryOperation)static_A_symbol__1.lookupImplementation(standardLibrary, O_Collection_size);
-			Object A_symbol__1 = dynamic_A_symbol__1.evaluate(evaluator, T_Integer.getTypeId(), A_symbol_);
+			Object A_symbol__1 = dynamic_A_symbol__1.evaluate(evaluator, TypeId.INTEGER, A_symbol_);
 			
 			Object A_symbol__2 = IP_OperationCallExp_referredOperation.evaluate(evaluator, T_pivot__Operation.getTypeId(), self, P_OperationCallExp_referredOperation);
 			
@@ -85,10 +83,10 @@ public class OperationCallExpBodies
 			
 			DomainType static_A_symbol__4 = evaluator.getStaticTypeOf(A_symbol__3);
 			LibraryUnaryOperation dynamic_A_symbol__4 = (LibraryUnaryOperation)static_A_symbol__4.lookupImplementation(standardLibrary, O_Collection_size);
-			Object A_symbol__4 = dynamic_A_symbol__4.evaluate(evaluator, T_Integer.getTypeId(), A_symbol__3);
+			Object A_symbol__4 = dynamic_A_symbol__4.evaluate(evaluator, TypeId.INTEGER, A_symbol__3);
 			DomainType static_A_symbol__5 = evaluator.getStaticTypeOf(A_symbol__1, A_symbol__4);
 			LibraryBinaryOperation dynamic_A_symbol__5 = (LibraryBinaryOperation)static_A_symbol__5.lookupImplementation(standardLibrary, O_Real__eq_);
-			Object A_symbol__5 = dynamic_A_symbol__5.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__1, A_symbol__4);
+			Object A_symbol__5 = dynamic_A_symbol__5.evaluate(evaluator, TypeId.BOOLEAN, A_symbol__1, A_symbol__4);
 			return A_symbol__5;
 		}
 	}

@@ -90,7 +90,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 	 * @throws Exception 
 	 * @generated NOT
 	 */
-	public @Nullable Object asEcoreObject(@NonNull Object aValue) {
+	public final @Nullable Object asEcoreObject(@NonNull Object aValue) {
 		if (aValue instanceof Value) {
 			if (aValue instanceof InvalidValue) {
 				((InvalidValue)aValue).asInteger();			// Propagate any internal exception or throw default
@@ -129,9 +129,6 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 			else {
 				return ((Value)aValue).asObject();
 			}
-		}
-		else if (aValue instanceof Number) {
-			return aValue;
 		}
 		else {
 			return aValue;

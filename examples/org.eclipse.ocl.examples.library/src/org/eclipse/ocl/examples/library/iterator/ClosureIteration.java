@@ -33,7 +33,7 @@ public class ClosureIteration extends AbstractIteration
 {
 	public static final @NonNull ClosureIteration INSTANCE = new ClosureIteration();
 
-	public @NonNull CollectionValue.Accumulator createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull TypeId accumulatorTypeId, @NonNull DomainType bodyType) {
+	public @NonNull CollectionValue.Accumulator createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull TypeId accumulatorTypeId, @NonNull TypeId bodyTypeId) {
 		return createCollectionAccumulatorValue((CollectedTypeId) accumulatorTypeId);
 	}
 

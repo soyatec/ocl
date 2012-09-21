@@ -42,7 +42,7 @@ import org.eclipse.ocl.examples.domain.values.SetValue;
  */
 public interface DomainStandardLibrary
 {
-	@Nullable Object asEcoreObject(@NonNull Object aValue);
+//	@Nullable Object asEcoreObject(@NonNull Object aValue);
 
 	boolean conformsToCollectionType(@NonNull DomainCollectionType firstCollectionType, @NonNull DomainCollectionType secondCollectionType);
 

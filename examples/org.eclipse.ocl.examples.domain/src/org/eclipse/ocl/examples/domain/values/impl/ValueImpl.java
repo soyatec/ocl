@@ -17,18 +17,24 @@
 package org.eclipse.ocl.examples.domain.values.impl;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
@@ -79,6 +85,10 @@ public abstract class ValueImpl extends ValuesUtil implements Value
 
 	public @NonNull Double asDouble() {
 		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Double", getTypeName());
+	}
+	
+	public @Nullable Object asEcoreObject() {
+		return asObject();
 	}
 
 	public DomainElement asElement() {

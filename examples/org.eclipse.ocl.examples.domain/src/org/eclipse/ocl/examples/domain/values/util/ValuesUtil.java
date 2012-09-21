@@ -163,19 +163,15 @@ public abstract class ValuesUtil
 		}
 	}
 
-/*	@Deprecated
-	public static Object asEcoreObject(@Nullable Object value) {
+	@Deprecated
+	public static Object asEcoreObject(@NonNull Object value) {
 		if (value instanceof Value) {	
-			throw new UnsupportedOperationException();
-//			return ((Value)value).asObject();
-		}
-		else if (value != null) {
-			return value;			
+			return ((Value)value).asEcoreObject();
 		}
 		else {
-			throw new InvalidValueException(createInvalidValue(EvaluatorMessages.TypedValueRequired, "EcoreObject", getTypeName(value)));
+			return value;			
 		}
-	} */
+	}
 
 	public static @NonNull Integer asInteger(@Nullable Object value) {
 		if (value instanceof Value) {

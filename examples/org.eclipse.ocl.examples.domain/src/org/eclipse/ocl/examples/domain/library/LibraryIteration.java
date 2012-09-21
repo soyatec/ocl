@@ -35,7 +35,7 @@ public interface LibraryIteration extends LibraryFeature
 	 * @return the accumulator
 	 * @throws InvalidValueException 
 	 */
-	@NonNull Object createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull TypeId accumulatorTypeId, @NonNull DomainType bodyType);
+	@NonNull Object createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull TypeId accumulatorTypeId, @NonNull TypeId bodyTypeId);
 	
 	/**
 	 * Evaluate the iteration under the supervision of an iterationManager.

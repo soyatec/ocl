@@ -528,7 +528,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 			OCLExpression body = iteratorExp.getBody();
 			Type iterationType = PivotUtil.getBehavioralType(DomainUtil.nonNullModel(iteratorExp.getType()));
 			Type bodyType = PivotUtil.getBehavioralType(DomainUtil.nonNullModel(body.getType()));
-			Object accumulatorValue = implementation.createAccumulatorValue(undecoratedVisitor, iterationType.getTypeId(), bodyType);
+			Object accumulatorValue = implementation.createAccumulatorValue(undecoratedVisitor, iterationType.getTypeId(), bodyType.getTypeId());
 			List<Variable> iterators = iteratorExp.getIterator();
 			int iSize = iterators.size();
 			if (iSize == 1) {

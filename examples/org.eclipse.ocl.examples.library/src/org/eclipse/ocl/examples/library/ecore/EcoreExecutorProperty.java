@@ -20,6 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
+import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.library.executor.ExecutorProperty;
 
 public class EcoreExecutorProperty extends ExecutorProperty
@@ -34,11 +35,12 @@ public class EcoreExecutorProperty extends ExecutorProperty
 	public void setValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull ObjectValue objectValue, @NonNull Object propertyValue) {
 		EObject eObject = objectValue.asNavigableObject();
 		Object eValue;
-//		try {
-			eValue = standardLibrary.asEcoreObject(propertyValue);
-//		} catch (Exception e) {
-//			throw new InvalidValueException(ValuesUtil.createInvalidValue(e, "Failed to set property"));
-//		}
+		if (propertyValue instanceof Value) {
+			eValue = ((Value)propertyValue).asEcoreObject();
+		}
+		else {
+			eValue = propertyValue;
+		}
 		eObject.eSet(eFeature, eValue);
 	}
 }

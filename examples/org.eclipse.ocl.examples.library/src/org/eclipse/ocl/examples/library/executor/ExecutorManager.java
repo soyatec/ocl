@@ -42,11 +42,6 @@ public abstract class ExecutorManager implements DomainEvaluator
 		this.standardLibrary = standardLibrary;
 	}
 
-	@SuppressWarnings("unchecked")
-	public <T> T asEcoreObject(@Nullable T example, @NonNull Object value) {
-		return (T) standardLibrary.asEcoreObject(value);
-	}
-
 	public @NonNull Value evaluate(@NonNull DomainExpression body) {
 		throw new UnsupportedOperationException();
 //		try {

@@ -53,6 +53,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
@@ -621,10 +622,9 @@ public class OperationImpl
 		*/
 		try {
 			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
-			final @NonNull TypeId returnTypeId = T_Boolean.getTypeId();
-			final @NonNull Object result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, returnTypeId, this, ValuesUtil.valueOf(p));
-			return evaluator.asEcoreObject((Boolean)null, result);
+			
+			final @NonNull Object result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, this, ValuesUtil.valueOf(p));
+			return (Boolean)result;
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.ParameterableElementBodies", e);
 		}
@@ -649,10 +649,8 @@ public class OperationImpl
 		*/
 		try {
 			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final @NonNull DomainType returnType = T_Boolean;
-			final @NonNull Object result = OperationBodies._invariant_CompatibleReturn.INSTANCE.evaluate(evaluator, returnType.getTypeId(), this);
+			final @NonNull Object result = OperationBodies._invariant_CompatibleReturn.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, this);
 			final boolean resultIsNull = ValuesUtil.isNull(result);
 			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
@@ -682,10 +680,8 @@ public class OperationImpl
 		*/
 		try {
 			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			
-			final @NonNull DomainType returnType = T_Boolean;
-			final @NonNull Object result = OperationBodies._invariant_LoadableImplementation.INSTANCE.evaluate(evaluator, returnType.getTypeId(), this);
+			final @NonNull Object result = OperationBodies._invariant_LoadableImplementation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, this);
 			final boolean resultIsNull = ValuesUtil.isNull(result);
 			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;

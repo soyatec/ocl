@@ -24,8 +24,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 
 public interface DomainEvaluator
 {
-	<T> T asEcoreObject(@Nullable T example, @NonNull Object value);
-
 	@NonNull DomainEvaluator createNestedEvaluator();
 	@NonNull Object evaluate(@NonNull DomainExpression body);
 	@NonNull DomainType getDynamicTypeOf(@NonNull Object value);

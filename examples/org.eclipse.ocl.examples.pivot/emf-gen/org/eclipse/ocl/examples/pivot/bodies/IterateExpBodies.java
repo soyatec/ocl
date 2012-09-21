@@ -57,7 +57,6 @@ public class IterateExpBodies
 		*/
 		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			final @NonNull ExecutorOperation O_OclType_conformsTo = OCLstdlibTables.Operations._OclType__conformsTo;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
@@ -81,7 +80,7 @@ public class IterateExpBodies
 			
 			DomainType static_A_symbol__4 = evaluator.getStaticTypeOf(A_symbol__1);
 			LibraryBinaryOperation dynamic_A_symbol__4 = (LibraryBinaryOperation)static_A_symbol__4.lookupImplementation(standardLibrary, O_OclType_conformsTo);
-			Object A_symbol__4 = dynamic_A_symbol__4.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__1, A_symbol__3);
+			Object A_symbol__4 = dynamic_A_symbol__4.evaluate(evaluator, TypeId.BOOLEAN, A_symbol__1, A_symbol__3);
 			return A_symbol__4;
 		}
 	}
@@ -98,9 +97,7 @@ public class IterateExpBodies
 		*/
 		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			final @NonNull ExecutorOperation O_Real__eq_ = OCLstdlibTables.Operations._Real___eq_;
-			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
 			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
 			final @NonNull ExecutorType T_pivot__OCLExpression = PivotTables.Types._OCLExpression;
 			final @NonNull DomainCollectionType T_Set_pivot__OCLExpression_ = standardLibrary.getSetType(T_pivot__OCLExpression, null, null);
@@ -122,10 +119,10 @@ public class IterateExpBodies
 			Object A_symbol__7 = dynamic_A_symbol__7.evaluate(evaluator, T_Set_pivot__OCLExpression_.getTypeId(), A_symbol__6);
 			DomainType static_A_symbol__8 = evaluator.getStaticTypeOf(A_symbol__7);
 			LibraryUnaryOperation dynamic_A_symbol__8 = (LibraryUnaryOperation)static_A_symbol__8.lookupImplementation(standardLibrary, O_Collection_size);
-			Object A_symbol__8 = dynamic_A_symbol__8.evaluate(evaluator, T_Integer.getTypeId(), A_symbol__7);
+			Object A_symbol__8 = dynamic_A_symbol__8.evaluate(evaluator, TypeId.INTEGER, A_symbol__7);
 			DomainType static_A_symbol__9 = evaluator.getStaticTypeOf(A_symbol__8, I_1);
 			LibraryBinaryOperation dynamic_A_symbol__9 = (LibraryBinaryOperation)static_A_symbol__9.lookupImplementation(standardLibrary, O_Real__eq_);
-			Object A_symbol__9 = dynamic_A_symbol__9.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__8, I_1);
+			Object A_symbol__9 = dynamic_A_symbol__9.evaluate(evaluator, TypeId.BOOLEAN, A_symbol__8, I_1);
 			return A_symbol__9;
 		}
 	}
@@ -142,7 +139,6 @@ public class IterateExpBodies
 		*/
 		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
 			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
 			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
 			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
@@ -161,7 +157,7 @@ public class IterateExpBodies
 			
 			DomainType static_A_symbol__13 = evaluator.getStaticTypeOf(A_symbol__10, A_symbol__12);
 			LibraryBinaryOperation dynamic_A_symbol__13 = (LibraryBinaryOperation)static_A_symbol__13.lookupImplementation(standardLibrary, O_OclAny__eq_);
-			Object A_symbol__13 = dynamic_A_symbol__13.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__10, A_symbol__12);
+			Object A_symbol__13 = dynamic_A_symbol__13.evaluate(evaluator, TypeId.BOOLEAN, A_symbol__10, A_symbol__12);
 			return A_symbol__13;
 		}
 	}
