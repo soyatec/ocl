@@ -38,8 +38,8 @@ public class CollectIteration extends AbstractIteration
 
 	@Override
     protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
-		CollectionValue.Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
 		Object bodyVal = iterationManager.evaluateBody();		
+		CollectionValue.Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
 		if (isNull(bodyVal)) {
 			accumulatorValue.add(bodyVal);
 		}

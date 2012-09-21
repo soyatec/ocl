@@ -22,6 +22,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
+import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.impl.SetValueImpl;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
@@ -43,7 +44,7 @@ public class IsUniqueIteration extends AbstractIteration
 	
 	@Override
     protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
-		SetValueImpl.Accumulator accumulatorValue = (SetValueImpl.Accumulator)iterationManager.getAccumulatorValue();
+		CollectionValue.Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
 		Object bodyVal = iterationManager.evaluateBody();		
 		if (isInvalid(bodyVal)) {
 			return bodyVal; 	// Invalid body is invalid

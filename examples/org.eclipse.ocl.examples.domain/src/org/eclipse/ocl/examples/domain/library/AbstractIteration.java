@@ -38,13 +38,16 @@ public abstract class AbstractIteration extends AbstractFeature implements Libra
 	 * the call-backs to customize the default iteration.
 	 */
 	public @NonNull Object evaluateIteration(@NonNull DomainIterationManager iterationManager) {
-		for ( ; iterationManager.hasCurrent(); iterationManager.advanceIterators()) {
+		while (true) {
+			if (!iterationManager.hasCurrent()) {
+				return resolveTerminalValue(iterationManager);			
+			}
 			Object resultVal = updateAccumulator(iterationManager);
 			if (resultVal != null) {
 				return resultVal;
 			}
+			iterationManager.advanceIterators();
 		}
-		return resolveTerminalValue(iterationManager);			
 	}
 
 	/**
