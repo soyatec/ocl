@@ -11,9 +11,12 @@
 package org.eclipse.ocl.examples.eventmanager.framework;
 
 import java.lang.ref.WeakReference;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.ocl.examples.eventmanager.EventManager;
@@ -28,6 +31,7 @@ import org.eclipse.ocl.examples.eventmanager.EventManager;
  */
 public class EventAdapter extends EContentAdapter {
     private final WeakReference<EventManager> eventManager;
+    private final Map<Notifier, Integer> alreadyRegisteredOn;
 
     /**
      * Constructs a new Adapter with the given {@link EventManager} as instance to notify
@@ -35,6 +39,7 @@ public class EventAdapter extends EContentAdapter {
      */
     public EventAdapter(EventManager eventManager) {
         this.eventManager = new WeakReference<EventManager>(eventManager);
+        this.alreadyRegisteredOn = new WeakHashMap<Notifier, Integer>();
     }
     
     /**
@@ -46,6 +51,22 @@ public class EventAdapter extends EContentAdapter {
     protected void addAdapter(Notifier notifier) {
         if (!notifier.eAdapters().contains(this)) {
             notifier.eAdapters().add(this);
+            alreadyRegisteredOn.put(notifier, 1);
+        } else {
+            alreadyRegisteredOn.put(notifier, alreadyRegisteredOn.get(notifier)+1);
+        }
+    }
+    
+    @Override
+    protected void removeAdapter(Notifier notifier) {
+        Integer count = alreadyRegisteredOn.get(notifier);
+        if (count != null) {
+            if (count > 1) {
+                alreadyRegisteredOn.put(notifier, count-1);
+            } else {
+                alreadyRegisteredOn.remove(notifier);
+                super.removeAdapter(notifier);
+            }
         }
     }
 
@@ -53,7 +74,7 @@ public class EventAdapter extends EContentAdapter {
     public void notifyChanged(Notification notification) {
         super.notifyChanged(notification);
         EventManager m = this.eventManager.get();
-        if(m!=null) {
+        if (m!=null) {
             m.handleEMFEvent(notification);
         }
     }

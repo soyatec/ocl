@@ -17,6 +17,7 @@ import java.util.Iterator;
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
@@ -29,7 +30,14 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.DynamicEObjectImpl;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.ocl.examples.eventmanager.EventFilter;
+import org.eclipse.ocl.examples.eventmanager.EventManager;
 import org.eclipse.ocl.examples.eventmanager.EventManagerFactory;
+import org.eclipse.ocl.examples.eventmanager.framework.EventAdapter;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,6 +45,7 @@ import org.junit.Test;
 
 public class RecursiveContaimentNotificationCreatorTest extends TestCase {
 
+    @Override
     @Before
     public void setUp() {
         try {
@@ -46,6 +55,7 @@ public class RecursiveContaimentNotificationCreatorTest extends TestCase {
 		}
     }
 
+    @Override
     @After
     public void tearDown(){
         try {
@@ -164,6 +174,68 @@ public class RecursiveContaimentNotificationCreatorTest extends TestCase {
         assertTrue("Expect Add and Add", 
         		(n1.getEventType() == Notification.ADD && n2.getEventType() == Notification.ADD) 
         		);
+    }
+    
+    
+    /**
+     * This test assures that the {@link EventAdapter} correctly maintains adapters on elements within a resourceSet,
+     * even if these elements are moved to a new containment / removed from an existing containment.
+     */
+    public void testContainmentAdapter(){
+        
+        class Adapter extends AdapterImpl{
+            public int count = 0;
+            
+            @Override
+            public void notifyChanged(Notification msg) {
+                this.count++;
+            }
+        }
+        
+        ResourceSet set = new ResourceSetImpl();
+        Resource r = new ResourceImpl();
+        set.getResources().add(r);
+        
+        // Setup class: int attribute and a containment reference.
+        EClass cls = EcoreFactory.eINSTANCE.createEClass();
+        EAttribute attr = EcoreFactory.eINSTANCE.createEAttribute();
+        attr.setEType(EcorePackage.eINSTANCE.getEInt());
+        cls.getEStructuralFeatures().add(attr);
+        EReference containmentRef = EcoreFactory.eINSTANCE.createEReference();
+        containmentRef.setContainment(true);
+        containmentRef.setEType(cls);
+        cls.getEStructuralFeatures().add(containmentRef);
+        EPackage pkg = EcoreFactory.eINSTANCE.createEPackage();
+        pkg.getEClassifiers().add(cls);
+        
+        // Setup fixture
+        EObject anObject = new DynamicEObjectImpl(cls);
+        EObject anotherObject = new DynamicEObjectImpl(cls);
+        r.getContents().add(anObject);
+        r.getContents().add(anotherObject);
+
+        // Setup event manager. Subscribe to changes of the int attribute defined above.
+        EventManager m = EventManagerFactory.eINSTANCE.createEventManagerFor(set);
+        EventFilter filter = EventManagerFactory.eINSTANCE.createStructuralFeatureFilter(attr);
+        Adapter adapter = new Adapter();
+        m.subscribe(filter, adapter);
+
+        // In the following: Run modifications with and without set containment reference
+        anObject.eSet(containmentRef, anotherObject);
+        
+        adapter.count = 0;
+        anObject.eSet(attr, 10);
+        anotherObject.eSet(attr, 10);
+        assertEquals("Expected to see both object modifications", 2, adapter.count);
+        
+        anObject.eUnset(containmentRef);
+        assertTrue(r.getContents().contains(anObject));
+        assertTrue(r.getContents().contains(anotherObject));
+
+        adapter.count = 0;
+        anObject.eSet(attr, 20);
+        anotherObject.eSet(attr, 20);
+        assertEquals("Still expected to see both object modifications", 2, adapter.count);
     }
 
 }
