@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
-import org.eclipse.ocl.examples.xtext.base.baseCST.*;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AttributeCS;
@@ -57,6 +56,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementWithURICS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PivotableElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PrimitiveTypeRefCS;
@@ -80,6 +80,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.WildcardTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
+import org.eclipse.ocl.examples.xtext.base.utilities.PivotResourceValidator;
 
 /**
  * <!-- begin-user-doc -->
@@ -156,6 +157,9 @@ public class BaseCSTValidator extends EObjectValidator
 	@Override
 	protected boolean validate(int classifierID, Object value, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
+		if (context.get(PivotResourceValidator.HAS_SYNTAX_ERRORS) == Boolean.TRUE) {
+			return true;
+		}
 		switch (classifierID)
 		{
 			case BaseCSTPackage.ANNOTATION_CS:

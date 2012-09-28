@@ -23,15 +23,26 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EObjectValidator;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.validation.AbstractInjectableValidator;
+import org.eclipse.xtext.validation.CancelableDiagnostician;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ResourceValidatorImpl;
+import org.eclipse.xtext.validation.impl.ConcreteSyntaxEValidator;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.inject.Inject;
 
 /**
  * PivotResourceValidator extends CS Resource validation to the referenced Pivot resources and attempts
@@ -67,6 +78,7 @@ public class PivotResourceValidator extends ResourceValidatorImpl
 	}
 
 	private static final Logger log = Logger.getLogger(PivotResourceValidator.class);
+	public static final String HAS_SYNTAX_ERRORS = "has_syntax_errors";
 
 	protected ValidationDiagnostic createDefaultDiagnostic(Diagnostician diagnostician, EObject pivotObject) {
 //		Object objectLabel = diagnostician.getObjectLabel(pivotObject);
@@ -136,30 +148,111 @@ public class PivotResourceValidator extends ResourceValidatorImpl
 		}
 	}
 
+	@Inject
+	private Diagnostician diagnostician;
+
+	// FIXME BUG 389675 Remove duplication with respect to inherited method
 	@Override
-	public List<Issue> validate(Resource resource, CheckMode mode, CancelIndicator monitor) {
+	public List<Issue> validate(Resource resource, final CheckMode mode, CancelIndicator mon) {
 //		System.out.println(Thread.currentThread().getName() + " validate start " + PivotUtil.debugSimpleName(resource));
 //		System.out.println(new Date() + " Validate " + mode + " : " + csResource.getURI() + " on " + Thread.currentThread().getName());
-		List<Issue> issues = super.validate(resource, mode, monitor);
-		if (!monitor.isCanceled() && (resource instanceof BaseCSResource)) {
+		final CancelIndicator monitor = mon == null ? CancelIndicator.NullImpl : mon;
+		resolveProxies(resource, monitor);
+		if (monitor.isCanceled())
+			return null;
+
+		final List<Issue> result = Lists.newArrayListWithExpectedSize(resource.getErrors().size()
+				+ resource.getWarnings().size());
+		try {
+			IAcceptor<Issue> acceptor = createAcceptor(result);
+			// Syntactical and linking errors
+			// Collect EMF Resource Diagnostics
+			if (mode.shouldCheck(CheckType.FAST)) {
+				for (int i = 0; i < resource.getErrors().size(); i++) {
+					if (monitor.isCanceled())
+						return null;
+					issueFromXtextResourceDiagnostic(resource.getErrors().get(i), Severity.ERROR, acceptor);
+				}
+
+				for (int i = 0; i < resource.getWarnings().size(); i++) {
+					if (monitor.isCanceled())
+						return null;
+					issueFromXtextResourceDiagnostic(resource.getWarnings().get(i), Severity.WARNING, acceptor);
+				}
+			}
+
+			if (monitor.isCanceled())
+				return null;
+			boolean syntaxDiagFail = !result.isEmpty();
+			logCheckStatus(resource, syntaxDiagFail, "Syntax");
+
+			// Validation errors
+			// Collect validator Diagnostics
+			for (EObject ele : resource.getContents()) {
+				try {
+					if (monitor.isCanceled())
+						return null;
+					Map<Object, Object> options = Maps.newHashMap();
+					options.put(CheckMode.KEY, mode);
+					options.put(CancelableDiagnostician.CANCEL_INDICATOR, monitor);
+					// disable concrete syntax validation, since a semantic model that has been parsed 
+					// from the concrete syntax always complies with it - otherwise there are parse errors.
+					options.put(ConcreteSyntaxEValidator.DISABLE_CONCRETE_SYNTAX_EVALIDATOR, Boolean.TRUE);
+					// see EObjectValidator.getRootEValidator(Map<Object, Object>)
+					options.put(EValidator.class, diagnostician);
+					if (resource instanceof XtextResource) {
+						options.put(AbstractInjectableValidator.CURRENT_LANGUAGE_NAME, ((XtextResource) resource).getLanguageName());						
+						if (resource instanceof BaseCSResource) {
+							BaseCSResource csResource = (BaseCSResource)resource;
+							@SuppressWarnings("null") @NonNull List<Resource.Diagnostic> errors = csResource.getErrors();
+							if (ElementUtil.hasSyntaxError(errors)) {
+								options.put(PivotResourceValidator.HAS_SYNTAX_ERRORS, Boolean.TRUE);						
+							}
+						}
+					}
+					Diagnostic diagnostic = diagnostician.validate(ele, options);
+					if (!diagnostic.getChildren().isEmpty()) {
+						for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
+							issueFromEValidatorDiagnostic(childDiagnostic, acceptor);
+						}
+					} else {
+						issueFromEValidatorDiagnostic(diagnostic, acceptor);
+					}
+				} catch (RuntimeException e) {
+					log.error(e.getMessage(), e);
+				}
+			}
+		} catch (RuntimeException e) {
+			log.error(e.getMessage(), e);
+		}
+		if (monitor.isCanceled())
+			return null;
+		if (resource instanceof BaseCSResource) {
 			BaseCSResource csResource = (BaseCSResource)resource;
 			CS2PivotResourceAdapter cs2pivotAdapter = CS2PivotResourceAdapter.findAdapter(csResource);
 			if (cs2pivotAdapter != null) {
 				Resource pivotResource = cs2pivotAdapter.getPivotResource(csResource);
 				if (pivotResource != null) {
-					IAcceptor<Issue> acceptor = createAcceptor(issues);
+					IAcceptor<Issue> acceptor = createAcceptor(result);
 					if (mode.shouldCheck(CheckType.EXPENSIVE)) {
 						performValidation(acceptor, pivotResource, monitor);
 					}
 					else {
 						reuseValidation(acceptor, pivotResource, monitor);
 					}
-					if (monitor.isCanceled())
-						return null;
 				}
 			}
 		}
 //		System.out.println(Thread.currentThread().getName() + " validate end " + PivotUtil.debugSimpleName(resource));
-		return issues;
+		return result;
 	}
+
+
+	private void logCheckStatus(final Resource resource, boolean parserDiagFail, String string) {
+		if (log.isDebugEnabled()) {
+			log.debug(string + " check " + (parserDiagFail ? "FAIL" : "OK") + "! Resource: " + resource.getURI());
+		}
+	}
+
+
 }
