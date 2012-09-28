@@ -577,6 +577,10 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		return "/org.eclipse.ocl.edit/icons/full/obj16/LoopExp.gif";
 	}
 
+	protected String text(LoopExp ele) {
+		return text(ele.getReferredIteration());
+	}
+
 	protected String image(MessageExp ele) {
 		return "/org.eclipse.ocl.edit/icons/full/obj16/MessageExp.gif";
 	}
@@ -630,6 +634,10 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 
 	protected String image(OperationCallExp ele) {
 		return "/org.eclipse.ocl.edit/icons/full/obj16/OperationCallExp.gif";
+	}
+
+	protected String text(OperationCallExp ele) {
+		return text(ele.getReferredOperation());
 	}
 
 	protected String image(OrderedSetType ele) {
@@ -700,6 +708,10 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 
 	protected String image(PropertyCallExp ele) {
 		return "/org.eclipse.ocl.edit/icons/full/obj16/PropertyCallExp.gif";
+	}
+
+	protected String text(PropertyCallExp ele) {
+		return text(ele.getReferredProperty());
 	}
 
 	protected String image(RealLiteralExp ele) {

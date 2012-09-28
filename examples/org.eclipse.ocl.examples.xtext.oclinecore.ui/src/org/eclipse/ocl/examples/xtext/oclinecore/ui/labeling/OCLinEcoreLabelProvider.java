@@ -26,10 +26,24 @@ import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
+import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.AttributeCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ClassCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.DataTypeCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.DetailCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.EnumerationCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.EnumerationLiteralCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ReferenceCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.TypeParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypeRefCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.ui.labeling.EssentialOCLLabelProvider;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
 import com.google.inject.Inject;
 
@@ -59,19 +73,16 @@ public class OCLinEcoreLabelProvider extends EssentialOCLLabelProvider {
 		return s.toString();
 	} */
 
-	@Override
-	protected String image(Annotation ele) {
+	protected String image(AnnotationCS ele) {
 		return "/org.eclipse.emf.ecore.edit/icons/full/obj16/EAnnotation.gif";
 	}
 
-	@Override
-	protected String image(org.eclipse.ocl.examples.pivot.Class ele) {
-		if (ele.getOwningTemplateParameter() != null) {
-			return "/org.eclipse.emf.ecore.edit/icons/full/obj16/ETypeParameter.gif";
-		}
-		else {
-			return "/org.eclipse.emf.ecore.edit/icons/full/obj16/EClass.gif";
-		}
+	protected String image(AttributeCS ele) {
+		return "/org.eclipse.emf.ecore.edit/icons/full/obj16/EAttribute.gif";
+	}
+
+	protected String image(ClassCS ele) {
+		return "/org.eclipse.emf.ecore.edit/icons/full/obj16/EClass.gif";
 	}
 
 	protected String image(OCLinEcoreConstraintCS ele) {
@@ -106,50 +117,40 @@ public class OCLinEcoreLabelProvider extends EssentialOCLLabelProvider {
 		return s.toString();
 	}
 
-	protected String image(DataType ele) {
+	protected String image(DataTypeCS ele) {
 		return "/org.eclipse.emf.ecore.edit/icons/full/obj16/EDataType.gif";
 	}
 
-//	protected String image(DetailCS ele) {
-//		return "/org.eclipse.emf.ecore.edit/icons/full/obj16/EStringToStringMapEntry.gif";
-//	}
+	protected String image(DetailCS ele) {
+		return "/org.eclipse.emf.ecore.edit/icons/full/obj16/EStringToStringMapEntry.gif";
+	}
 
 //	public String text(DocumentationCS ele) {
 //		return "documentation";
 //	}
 
-	protected String image(org.eclipse.ocl.examples.pivot.Enumeration ele) {
+	protected String image(EnumerationCS ele) {
 		return "/org.eclipse.emf.ecore.edit/icons/full/obj16/EEnum.gif";
 	}
 
-	@Override
-	protected String image(EnumerationLiteral ele) {
+	protected String image(EnumerationLiteralCS ele) {
 		return "/org.eclipse.emf.ecore.edit/icons/full/obj16/EEnumLiteral.gif";
 	}
 
-	@Override
-	protected String image(Operation ele) {
+	protected String image(OperationCS ele) {
 		return "/org.eclipse.emf.ecore.edit/icons/full/obj16/EOperation.gif";
 	}
 
-	@Override
-	protected String image(org.eclipse.ocl.examples.pivot.Package ele) {
+	protected String image(PackageCS ele) {
 		return "/org.eclipse.emf.ecore.edit/icons/full/obj16/EPackage.gif";
 	}
 
-	@Override
-	protected String image(Parameter ele) {
+	protected String image(ParameterCS ele) {
 		return "/org.eclipse.emf.ecore.edit/icons/full/obj16/EParameter.gif";
 	}
 
-	@Override
-	protected String image(Property ele) {
-		if (ele.getType() instanceof DataType) {
-			return "/org.eclipse.emf.ecore.edit/icons/full/obj16/EAttribute.gif";
-		}
-		else {
-			return "/org.eclipse.emf.ecore.edit/icons/full/obj16/EReference.gif";
-		}
+	protected String image(ReferenceCS ele) {
+		return "/org.eclipse.emf.ecore.edit/icons/full/obj16/EReference.gif";
 	}
 
 //	protected String image(ReferenceCSRef ele) {
@@ -160,12 +161,16 @@ public class OCLinEcoreLabelProvider extends EssentialOCLLabelProvider {
 		return "OCL in Ecore document";
 	}
 
-	@Override
-	protected String image(TemplateParameter ele) {
+	protected String image(TypeParameterCS ele) {
 		return "/org.eclipse.emf.ecore.edit/icons/full/obj16/ETypeParameter.gif";
 	}
 
 	protected String image(TypeRefCS ele) {
 		return "/org.eclipse.emf.ecore.edit/icons/full/obj16/EGenericType.gif";
+	}
+
+	public String text(TypeRefCS ele) {
+		ICompositeNode node = NodeModelUtils.getNode(ele);
+		return NodeModelUtils.getTokenText(node);
 	}
 }
