@@ -22,11 +22,9 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.OclVoidTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
 /**
@@ -61,7 +59,7 @@ public class NullValueImpl extends UndefinedCollectionValueImpl implements NullV
 		return obj instanceof NullValue;
 	}
 
-	public @NonNull CollectedTypeId getCollectedTypeId() {
+	public @NonNull OclVoidTypeId getCollectionTypeId() {
 		return TypeId.OCL_VOID;
 	}
 
@@ -69,12 +67,8 @@ public class NullValueImpl extends UndefinedCollectionValueImpl implements NullV
 		return standardLibrary.getOclVoidType();
 	}
 
-	public @Nullable Value getValue(@NonNull String partName) {
-    	return toInvalidValue();
-	}
-
-	public @Nullable Value getValue(@NonNull DomainTypedElement part) {
-    	return toInvalidValue();
+	public @NonNull OclVoidTypeId getTypeId() {
+		return TypeId.OCL_VOID;
 	}
 
 	@Override

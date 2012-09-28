@@ -8,12 +8,12 @@
     <imports href="nameQueries.emtl#/0"/>
     <imports href="pivotQueries.emtl#/0"/>
     <imports href="symbolTemplates.emtl#/0"/>
-    <ownedModuleElement xsi:type="mtl:Template" name="typeId" visibility="Public">
+    <ownedModuleElement xsi:type="mtl:Template" name="zztypeId" visibility="Public">
       <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&lt;%TypeId%>."/>
       <body xsi:type="mtl:QueryInvocation">
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         <definition href="nameQueries.emtl#/0/upperName"/>
-        <argument xsi:type="ocl.ecore:VariableExp" name="type" referredVariable="/0/typeId/type">
+        <argument xsi:type="ocl.ecore:VariableExp" name="type" referredVariable="/0/zztypeId/type">
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
         </argument>
       </body>
@@ -29,7 +29,7 @@
       <guard xsi:type="mtl:QueryInvocation">
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
         <definition href="pivotQueries.emtl#/0/isBuiltInType"/>
-        <argument xsi:type="ocl.ecore:VariableExp" name="type" referredVariable="/0/typeId/type">
+        <argument xsi:type="ocl.ecore:VariableExp" name="type" referredVariable="/0/zztypeId/type">
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
         </argument>
       </guard>
@@ -38,31 +38,19 @@
       <body xsi:type="mtl:TemplateInvocation">
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         <definition href="symbolTemplates.emtl#/0/symbolName.11"/>
-        <argument xsi:type="ocl.ecore:VariableExp" name="type" referredVariable="/0/typeId.1/type">
+        <argument xsi:type="ocl.ecore:VariableExp" name="type" referredVariable="/0/typeId/type">
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
         </argument>
-        <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/typeId.1/expInOcl">
+        <argument xsi:type="ocl.ecore:VariableExp" name="expInOcl" referredVariable="/0/typeId/expInOcl">
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </argument>
       </body>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".getTypeId()"/>
       <parameter name="type">
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
       </parameter>
       <parameter name="expInOcl">
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
       </parameter>
-      <guard xsi:type="ocl.ecore:OperationCallExp">
-        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-        <source xsi:type="mtl:QueryInvocation">
-          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
-          <definition href="pivotQueries.emtl#/0/isBuiltInType"/>
-          <argument xsi:type="ocl.ecore:VariableExp" name="type" referredVariable="/0/typeId.1/type">
-            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
-          </argument>
-        </source>
-        <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean_Class/not"/>
-      </guard>
     </ownedModuleElement>
   </mtl:Module>
   <ecore:EPackage name="additions">
@@ -85,6 +73,19 @@
       <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
         <references href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       </eAnnotations>
+      <eOperations name="zztypeId">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/zztypeId"/>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="type">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
+        </eParameters>
+        <eParameters name="expInOcl">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
+        </eParameters>
+      </eOperations>
       <eOperations name="typeId">
         <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
           <contents xsi:type="ocl.ecore:Constraint"/>
@@ -309,9 +310,6 @@
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
-    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
-  </ocl.ecore:Variable>
-  <ocl.ecore:Variable name="self">
     <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
@@ -324,100 +322,80 @@
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </ocl.ecore:Variable>
   <ecore:EAnnotation source="positions">
-    <eAnnotations source="positions.0" references="/0/typeId">
+    <eAnnotations source="positions.0" references="/0/zztypeId">
       <details key="start" value="986"/>
-      <details key="end" value="1117"/>
+      <details key="end" value="1119"/>
       <details key="line" value="29"/>
     </eAnnotations>
-    <eAnnotations source="positions.1" references="/0/typeId/@body.0">
-      <details key="start" value="1076"/>
-      <details key="end" value="1087"/>
+    <eAnnotations source="positions.1" references="/0/zztypeId/@body.0">
+      <details key="start" value="1078"/>
+      <details key="end" value="1089"/>
       <details key="line" value="30"/>
     </eAnnotations>
-    <eAnnotations source="positions.2" references="/0/typeId/@body.1">
-      <details key="start" value="1088"/>
-      <details key="end" value="1104"/>
+    <eAnnotations source="positions.2" references="/0/zztypeId/@body.1">
+      <details key="start" value="1090"/>
+      <details key="end" value="1106"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.3" references="/0/typeId/@body.1/type">
-      <details key="start" value="1088"/>
-      <details key="end" value="1092"/>
+    <eAnnotations source="positions.3" references="/0/zztypeId/@body.1/type">
+      <details key="start" value="1090"/>
+      <details key="end" value="1094"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4" references="/0/typeId/@documentation">
+    <eAnnotations source="positions.4" references="/0/zztypeId/@documentation">
       <details key="start" value="847"/>
       <details key="end" value="984"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5" references="/0/typeId/type">
-      <details key="start" value="1010"/>
-      <details key="end" value="1021"/>
+    <eAnnotations source="positions.5" references="/0/zztypeId/type">
+      <details key="start" value="1012"/>
+      <details key="end" value="1023"/>
       <details key="line" value="29"/>
     </eAnnotations>
-    <eAnnotations source="positions.6" references="/0/typeId/expInOcl">
-      <details key="start" value="1023"/>
-      <details key="end" value="1049"/>
+    <eAnnotations source="positions.6" references="/0/zztypeId/expInOcl">
+      <details key="start" value="1025"/>
+      <details key="end" value="1051"/>
       <details key="line" value="29"/>
     </eAnnotations>
-    <eAnnotations source="positions.7" references="/0/typeId/@guard">
-      <details key="start" value="1053"/>
-      <details key="end" value="1073"/>
+    <eAnnotations source="positions.7" references="/0/zztypeId/@guard">
+      <details key="start" value="1055"/>
+      <details key="end" value="1075"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.8" references="/0/typeId/@guard/type">
-      <details key="start" value="1053"/>
-      <details key="end" value="1057"/>
+    <eAnnotations source="positions.8" references="/0/zztypeId/@guard/type">
+      <details key="start" value="1055"/>
+      <details key="end" value="1059"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.9" references="/0/typeId.1">
-      <details key="start" value="1119"/>
-      <details key="end" value="1264"/>
+    <eAnnotations source="positions.9" references="/0/typeId">
+      <details key="start" value="1121"/>
+      <details key="end" value="1226"/>
       <details key="line" value="32"/>
     </eAnnotations>
-    <eAnnotations source="positions.10" references="/0/typeId.1/@body.0">
-      <details key="start" value="1214"/>
-      <details key="end" value="1239"/>
+    <eAnnotations source="positions.10" references="/0/typeId/@body.0">
+      <details key="start" value="1188"/>
+      <details key="end" value="1213"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.11" references="/0/typeId.1/@body.0/type">
-      <details key="start" value="1214"/>
-      <details key="end" value="1218"/>
+    <eAnnotations source="positions.11" references="/0/typeId/@body.0/type">
+      <details key="start" value="1188"/>
+      <details key="end" value="1192"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.12" references="/0/typeId.1/@body.0/expInOcl">
-      <details key="start" value="1230"/>
-      <details key="end" value="1238"/>
+    <eAnnotations source="positions.12" references="/0/typeId/@body.0/expInOcl">
+      <details key="start" value="1204"/>
+      <details key="end" value="1212"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.13" references="/0/typeId.1/@body.1">
-      <details key="start" value="1241"/>
-      <details key="end" value="1253"/>
-      <details key="line" value="33"/>
-    </eAnnotations>
-    <eAnnotations source="positions.14" references="/0/typeId.1/type">
-      <details key="start" value="1143"/>
-      <details key="end" value="1154"/>
+    <eAnnotations source="positions.13" references="/0/typeId/type">
+      <details key="start" value="1145"/>
+      <details key="end" value="1156"/>
       <details key="line" value="32"/>
     </eAnnotations>
-    <eAnnotations source="positions.15" references="/0/typeId.1/expInOcl">
-      <details key="start" value="1156"/>
-      <details key="end" value="1182"/>
+    <eAnnotations source="positions.14" references="/0/typeId/expInOcl">
+      <details key="start" value="1158"/>
+      <details key="end" value="1184"/>
       <details key="line" value="32"/>
-    </eAnnotations>
-    <eAnnotations source="positions.16" references="/0/typeId.1/@guard">
-      <details key="start" value="1186"/>
-      <details key="end" value="1210"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.17" references="/0/typeId.1/@guard/@source">
-      <details key="start" value="1190"/>
-      <details key="end" value="1210"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.18" references="/0/typeId.1/@guard/@source/type">
-      <details key="start" value="1190"/>
-      <details key="end" value="1194"/>
-      <details key="line" value="0"/>
     </eAnnotations>
   </ecore:EAnnotation>
 </xmi:XMI>

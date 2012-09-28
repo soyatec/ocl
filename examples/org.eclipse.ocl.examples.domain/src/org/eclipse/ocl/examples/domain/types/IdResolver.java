@@ -15,7 +15,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
@@ -26,13 +26,14 @@ import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
 import org.eclipse.ocl.examples.domain.ids.OclInvalidTypeId;
 import org.eclipse.ocl.examples.domain.ids.OclVoidTypeId;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
-import org.eclipse.ocl.examples.domain.ids.OperationTemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.RootPackageId;
-import org.eclipse.ocl.examples.domain.ids.SpecializedTypeId;
+import org.eclipse.ocl.examples.domain.ids.TemplateBinding;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
+import org.eclipse.ocl.examples.domain.ids.TemplateableTypeId;
+import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.ids.TypeTemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.UnspecifiedId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -47,19 +48,71 @@ public class IdResolver implements IdVisitor<DomainElement>
 	public IdResolver(@NonNull DomainStandardLibrary standardLibrary) {
 		this.standardLibrary = standardLibrary;
 	}
+
+	public @NonNull DomainType getCollectionType(@NonNull CollectionTypeId typeId) {
+		CollectionTypeId generalizedId = typeId.getGeneralizedId();
+		if (typeId == generalizedId) {
+			if (generalizedId == TypeId.BAG) {
+				return standardLibrary.getBagType();
+			}
+			else if (generalizedId == TypeId.COLLECTION) {
+				return standardLibrary.getCollectionType();
+			}
+			else if (generalizedId == TypeId.ORDERED_SET) {
+				return standardLibrary.getOrderedSetType();
+			}
+			else if (generalizedId == TypeId.SEQUENCE) {
+				return standardLibrary.getSequenceType();
+			}
+			else if (generalizedId == TypeId.SET) {
+				return standardLibrary.getSetType();
+			}
+			else if (generalizedId == TypeId.METACLASS) {
+				return standardLibrary.getMetaclassType();
+			}
+			else {
+				throw new UnsupportedOperationException();
+			}
+		}
+		else {
+			TypeId elementTypeId = typeId.getElementTypeId();
+			DomainType elementType = getType(elementTypeId, null);
+			if (generalizedId == TypeId.BAG) {
+				return standardLibrary.getBagType(elementType, null, null);
+			}
+			else if (generalizedId == TypeId.COLLECTION) {
+				return standardLibrary.getCollectionType(standardLibrary.getCollectionType(), elementType, null, null);
+			}
+			else if (generalizedId == TypeId.ORDERED_SET) {
+				return standardLibrary.getOrderedSetType(elementType, null, null);
+			}
+			else if (generalizedId == TypeId.SEQUENCE) {
+				return standardLibrary.getSequenceType(elementType, null, null);
+			}
+			else if (generalizedId == TypeId.SET) {
+				return standardLibrary.getSetType(elementType, null, null);
+			}
+			else if (generalizedId == TypeId.METACLASS) {
+				return standardLibrary.getMetaclass(elementType);
+			}
+			else {
+				throw new UnsupportedOperationException();
+			}
+		}
+	}
 	
 	public @NonNull DomainType getDynamicTypeOf(@NonNull Object value) {
 		if (value instanceof NullValue) {
-			return standardLibrary.getType(((Value)value).getTypeId());
+			return getType(((Value)value).getTypeId(), null);
 		}
 		else if (value instanceof CollectionValue) {
 			CollectionValue collectionValue = (CollectionValue) value;
 			DomainType elementType = getDynamicTypeOf(collectionValue.iterable());
-			CollectedTypeId collectedId = collectionValue.getCollectedTypeId();
-			CollectionTypeId collectionId = collectedId.getCollectionTypeId();
+			CollectionTypeId collectedId = collectionValue.getTypeId();
+			CollectionTypeId collectionId = collectedId.getGeneralizedId();
 			TypeId elementTypeId = elementType.getTypeId();
-			collectedId = collectionId.getCollectedTypeId(elementTypeId);
-			return standardLibrary.getCollectionType(collectedId);
+			collectedId = collectionId.getSpecializedId(elementTypeId);
+			return getCollectionType(collectedId);
 		}
 		else {
 			return getStaticTypeOf(value);
@@ -210,6 +263,12 @@ public class IdResolver implements IdVisitor<DomainElement>
 		return bestType;
 	}
 
+	public @NonNull DomainType getType(@NonNull TypeId typeId, @Nullable DomainElement context) {
+		DomainElement type = typeId.accept(this);
+		assert type != null;
+		return (DomainType)type;
+	}
+
 	private @NonNull Object getTypeKeyOf(@NonNull Object value) {
 		/*if (value instanceof DomainType) {
 			DomainType type = (DomainType) id2element.get(value);
@@ -262,23 +321,23 @@ public class IdResolver implements IdVisitor<DomainElement>
 		throw new UnsupportedOperationException();
 	}
 	
-	public @NonNull DomainType visitCollectedId(@NonNull CollectedTypeId id) {
+	public @NonNull DomainType visitCollectedId(@NonNull CollectionTypeId id) {
 		DomainType elementType = (DomainType) id.getElementTypeId().accept(this);
 		if (elementType == null) {
 			throw new UnsupportedOperationException();
 		}
-		CollectionTypeId collectionTypeId = id.getCollectionTypeId();
+		CollectionTypeId collectionTypeId = id.getGeneralizedId();
 		if (collectionTypeId == TypeId.METACLASS) {
 			return standardLibrary.getMetaclass(elementType);
 		}
 		else {
-			DomainType collectionType = standardLibrary.getCollectionType(collectionTypeId);
+			DomainType collectionType = getCollectionType(collectionTypeId);
 			return standardLibrary.getCollectionType(collectionType, elementType, null, null);
 		}
 	}
 
 	public @NonNull DomainType visitCollectionId(@NonNull CollectionTypeId id) {
-		return standardLibrary.getCollectionType(id);
+		return getCollectionType(id);
 	}
 
 	public @Nullable DomainType visitEnumerationLiteralId(@NonNull EnumerationLiteralId id) {
@@ -289,7 +348,7 @@ public class IdResolver implements IdVisitor<DomainElement>
 		return standardLibrary.getOclInvalidType();
 	}
 
-	public @NonNull DomainType visitLambdaId(@NonNull LambdaTypeId id) {
+	public @NonNull DomainType visitLambdaTypeId(@NonNull LambdaTypeId id) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -329,17 +388,17 @@ public class IdResolver implements IdVisitor<DomainElement>
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull DomainElement visitOperationTemplateParameterId(@NonNull OperationTemplateParameterId id) {
-		DomainOperation anOperation = (DomainOperation) id.getParent().accept(this);
-		if (anOperation == null) {
-			throw new UnsupportedOperationException();
-		}
-		DomainElement operationTemplateParameter = standardLibrary.getOperationTemplateParameter(anOperation, id.getIndex());
-		if (operationTemplateParameter == null) {
-			throw new UnsupportedOperationException();
-		}
-		return operationTemplateParameter;
-	}
+//	public @NonNull DomainElement visitOperationTemplateParameterId(@NonNull OperationTemplateParameterId id) {
+//		DomainOperation anOperation = (DomainOperation) id.getParent().accept(this);
+//		if (anOperation == null) {
+//			throw new UnsupportedOperationException();
+//		}
+//		DomainElement operationTemplateParameter = standardLibrary.getOperationTemplateParameter(anOperation, id.getIndex());
+//		if (operationTemplateParameter == null) {
+//			throw new UnsupportedOperationException();
+//		}
+//		return operationTemplateParameter;
+//	}
 
 	public @NonNull DomainType visitPrimitiveTypeId(@NonNull PrimitiveTypeId id) {
 		DomainType primitiveType = standardLibrary.getPrimitiveType(id);
@@ -357,27 +416,36 @@ public class IdResolver implements IdVisitor<DomainElement>
 		return rootPackage;
 	}
 
-	public @NonNull DomainType visitTupleId(@NonNull TupleTypeId id) {
-		return standardLibrary.getTupleType(id);
+	public @NonNull DomainElement visitTemplateBinding(@NonNull TemplateBinding id) {
+		return id.getTemplateParameter();
 	}
 
-	public @NonNull DomainType visitSpecializedTypeId(@NonNull SpecializedTypeId id) {
+	public @NonNull DomainElement visitTemplateParameterId(@NonNull TemplateParameterId id) {
+		return standardLibrary.getTemplateParameter(id, null);
+//		DomainType aType = (DomainType) id.getParent().accept(this);
+//		if (aType == null) {
+//			throw new UnsupportedOperationException();
+//		}
+//		DomainElement typeTemplateParameter = standardLibrary.getTypeTemplateParameter(aType, id.getIndex());
+//		if (typeTemplateParameter == null) {
+//			throw new UnsupportedOperationException();
+//		}
+//		return typeTemplateParameter;
+	}
+
+	public @NonNull DomainType visitTemplateableTypeId(@NonNull TemplateableTypeId id) {
+		return getType(id, null);
+	}
+
+	public @NonNull DomainTypedElement visitTuplePartId(@NonNull TuplePartId id) {
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull DomainElement visitTypeTemplateParameterId(@NonNull TypeTemplateParameterId id) {
-		DomainType aType = (DomainType) id.getParent().accept(this);
-		if (aType == null) {
-			throw new UnsupportedOperationException();
-		}
-		DomainElement typeTemplateParameter = standardLibrary.getTypeTemplateParameter(aType, id.getIndex());
-		if (typeTemplateParameter == null) {
-			throw new UnsupportedOperationException();
-		}
-		return typeTemplateParameter;
+	public @NonNull DomainType visitTupleTypeId(@NonNull TupleTypeId id) {
+		return standardLibrary.getTupleType(this, id);
 	}
 
 	public @NonNull DomainType visitUnspecifiedId(@NonNull UnspecifiedId id) {
-		throw new UnsupportedOperationException();
+		return (DomainType) id.getSpecifier();
 	}
 }

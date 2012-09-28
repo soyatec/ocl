@@ -27,4 +27,5 @@ public interface DomainTupleType extends DomainType
 	 * @return
 	 */
 	@NonNull TupleTypeId getTupleTypeId();
+	@NonNull TupleTypeId getTypeId();
 }

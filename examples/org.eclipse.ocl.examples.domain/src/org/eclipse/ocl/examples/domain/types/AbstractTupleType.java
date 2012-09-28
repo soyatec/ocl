@@ -72,4 +72,9 @@ public class AbstractTupleType extends AbstractType implements DomainTupleType
 	public @NonNull LibraryFeature lookupImplementation(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainOperation staticOperation) {
 		return standardLibrary.getOclTupleType().lookupImplementation(standardLibrary, staticOperation);
 	}
+
+	@Override
+	public String toString() {
+		return typeId.toString();
+	}
 }

@@ -27,7 +27,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -53,6 +53,6 @@ public class ImplicitNonCompositionProperty extends AbstractProperty
 				results.add(valueOf(eObject));
 			}
 		}
-		return createBagValue((CollectedTypeId)returnTypeId, results);
+		return createBagValue((CollectionTypeId)returnTypeId, results);
 	}
 }

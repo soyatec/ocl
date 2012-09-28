@@ -17,19 +17,20 @@
 
 package org.eclipse.ocl.examples.pivot.tests;
 
-import java.util.Collections;
-
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.TuplePartId;
+import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.AnyType;
-import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.InvalidType;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.VoidType;
-import org.eclipse.ocl.examples.pivot.manager.TupleTypeManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 
 /**
@@ -693,8 +694,9 @@ public class EvaluateOclAnyOperationsTest extends PivotSimpleTestSuite
      * Tests the oclType() operator for Tuples.
      */
     public void test_oclType_Tuple() {
-    	TupleTypeManager.TuplePart part = new TupleTypeManager.TuplePart("a", metaModelManager.getIntegerType());
-    	TupleType tupleType = metaModelManager.getTupleType("Tuple", Collections.singletonList(part), null);
+    	TuplePartId partId = IdManager.INSTANCE.createTuplePartId("a", TypeId.INTEGER);
+    	TupleTypeId tupleId = IdManager.INSTANCE.getTupleTypeId("Tuple", partId);
+    	TupleType tupleType = metaModelManager.getTupleType(metaModelManager.getIdResolver(), tupleId);
 //    	Metaclass tupleMetaclass = getMetaclass(tupleType);
 		assertQueryEquals(null, tupleType, "Tuple{a:Integer=3}.oclType()");
     	assertQueryEquals(null, tupleType, "Tuple(a:Integer)");

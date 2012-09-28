@@ -35,7 +35,7 @@ public class AbstractMetaclass extends AbstractSpecializedType implements Domain
 	public AbstractMetaclass(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType instanceType) {
 		super(standardLibrary, DomainUtil.nonNullModel(standardLibrary.getMetaclassType().getName()), standardLibrary.getMetaclassType());
 		this.instanceType = instanceType;
-		this.typeId = TypeId.METACLASS.getCollectedTypeId(instanceType.getTypeId());
+		this.typeId = TypeId.METACLASS.getSpecializedId(instanceType.getTypeId());
 	}
 
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {

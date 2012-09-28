@@ -18,29 +18,40 @@ package org.eclipse.ocl.examples.domain.ids;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
+import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
+import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
-import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
-import org.eclipse.ocl.examples.domain.ids.impl.CollectionTypeIdImpl;
-import org.eclipse.ocl.examples.domain.ids.impl.LambdaTypeIdImpl;
+import org.eclipse.ocl.examples.domain.elements.DomainTypeTemplateParameter;
+import org.eclipse.ocl.examples.domain.ids.impl.GeneralizedCollectionTypeIdImpl;
+import org.eclipse.ocl.examples.domain.ids.impl.GeneralizedLambdaTypeIdImpl;
+import org.eclipse.ocl.examples.domain.ids.impl.GeneralizedTupleTypeIdImpl;
 import org.eclipse.ocl.examples.domain.ids.impl.NsURIPackageIdImpl;
 import org.eclipse.ocl.examples.domain.ids.impl.PrimitiveTypeIdImpl;
 import org.eclipse.ocl.examples.domain.ids.impl.RootPackageIdImpl;
-import org.eclipse.ocl.examples.domain.ids.impl.TupleTypeIdImpl;
+import org.eclipse.ocl.examples.domain.ids.impl.TemplateBindingImpl;
+import org.eclipse.ocl.examples.domain.ids.impl.TemplateParameterIdImpl;
+import org.eclipse.ocl.examples.domain.ids.impl.TuplePartIdImpl;
+import org.eclipse.ocl.examples.domain.ids.impl.TypeTemplateParameterIdImpl;
 import org.eclipse.ocl.examples.domain.ids.impl.UnspecifiedIdImpl;
-import org.eclipse.ocl.examples.domain.ids.impl.WeakHashMapOfListOfWeakReference;
+import org.eclipse.ocl.examples.domain.ids.impl.WeakHashMapOfListOfWeakReference3;
 import org.eclipse.ocl.examples.domain.ids.impl.WeakHashMapOfWeakReference;
 
 /**
@@ -52,15 +63,6 @@ public class IdManager
 {
 	public static @NonNull IdManager INSTANCE = new IdManager();
 
-	private static final class NameComparator implements Comparator<DomainTypedElement>
-	{
-		public int compare(DomainTypedElement o1, DomainTypedElement o2) {
-			return o1.getName().compareTo(o2.getName());
-		}
-	}
-	
-	public static @NonNull NameComparator NAME_COMPARATOR = new NameComparator();
-
 	/**
 	 * Map from a Collection type name to the corresponding CollectionTypeId. 
 	 */
@@ -69,7 +71,8 @@ public class IdManager
 		{
 			@Override
 			protected @NonNull CollectionTypeId newTypeId(@NonNull String name) {
-				return new CollectionTypeIdImpl(name);
+				TypeTemplateParameterIdImpl elementTypeId = createTypeTemplateParameterId(null);
+				return new GeneralizedCollectionTypeIdImpl(new TemplateParameterId[]{elementTypeId}, name, elementTypeId);
 			}
 		};
 
@@ -88,14 +91,19 @@ public class IdManager
 	/**
 	 * Map from the Lambda hashCode to the lambda typeIds with the same hash. 
 	 */
-	private @NonNull WeakHashMapOfListOfWeakReference<Integer, DomainTypeParameters, LambdaTypeIdImpl> lambdaTypes =
-		new WeakHashMapOfListOfWeakReference<Integer, DomainTypeParameters, LambdaTypeIdImpl>()
+	private @Nullable WeakHashMapOfListOfWeakReference3<Integer, String, DomainParameterTypes, GeneralizedLambdaTypeIdImpl> lambdaTypes = null;
+
+	/**
+	 * Map from the Tuple hashCode to the tuple typeIds with the same hash. 
+	 *
+	private WeakHashMapOfListOfWeakReference4<Integer, String, Integer, Integer, OperationTemplateParameterIdImpl> operationTemplateParameters = 
+		new WeakHashMapOfListOfWeakReference4<Integer, String, Integer, Integer, OperationTemplateParameterIdImpl>()
 		{
 			@Override
-			protected @NonNull LambdaTypeIdImpl newTypeId(@NonNull Integer hashCode, @NonNull DomainTypeParameters typeParameters, @NonNull String name) {
-				return new LambdaTypeIdImpl(name, typeParameters, hashCode);
+			protected @NonNull OperationTemplateParameterIdImpl newTypeId(@NonNull Integer hashCode, @NonNull String operationName, @NonNull Integer parameterCount, @NonNull Integer templateParameterIndex) {
+				return new OperationTemplateParameterIdImpl(hashCode, operationName, parameterCount, templateParameterIndex);
 			}		
-		};
+		}; */
 
 	/**
 	 * Map from a name to the corresponding URI-less unnested RootPackageTypeId. 
@@ -108,18 +116,21 @@ public class IdManager
 				return new RootPackageIdImpl(name);
 			}
 		};
+		
+	/**
+	 * List of template parameters; 0 index at least index ... up to most nested
+	 *
+	private @NonNull List<TemplateParameterId> templateParameters = new ArrayList<TemplateParameterId>();
+	{
+		templateParameters.add(new TemplateParameterIdImpl(0));
+		templateParameters.add(new TemplateParameterIdImpl(1));
+	} */
+		
 
 	/**
 	 * Map from the Tuple hashCode to the tuple typeIds with the same hash. 
 	 */
-	private @NonNull WeakHashMapOfListOfWeakReference<Integer, List<? extends DomainTypedElement>, TupleTypeIdImpl> tupleTypes =
-		new WeakHashMapOfListOfWeakReference<Integer, List<? extends DomainTypedElement>, TupleTypeIdImpl>()
-		{
-			@Override
-			protected @NonNull TupleTypeIdImpl newTypeId(@NonNull Integer hashCode, @NonNull List<? extends DomainTypedElement> parts, @NonNull String name) {
-				return new TupleTypeIdImpl(name, parts, hashCode);
-			}		
-		};
+	private @Nullable WeakHashMapOfListOfWeakReference3<Integer, String, TuplePartId[], GeneralizedTupleTypeIdImpl> tupleTypes = null;
 
 	/**
 	 * Map from a Primitive type name to the corresponding PrimitiveTypeId. 
@@ -135,12 +146,60 @@ public class IdManager
 	
 	private IdManager() {}
 
-	/**
-	 * Return the typeId for the elementTypeId specialization of collectionTypeName.
-	 */
-	public @NonNull CollectedTypeId getCollectedTypeId(@NonNull String collectionTypeName, @NonNull TypeId elementTypeId) {
-		CollectionTypeId newTypeId = getCollectionTypeId(collectionTypeName);
-		return newTypeId.getCollectedTypeId(elementTypeId);
+	public @NonNull TemplateBinding createTemplateBinding(@NonNull DomainTemplateParameter owningTemplateParameter) {
+		return new TemplateBindingImpl(owningTemplateParameter);
+	}
+
+	public @NonNull TemplateParameterIdImpl createTemplateParameterId(@Nullable DomainTemplateParameter origin) {
+		return new TemplateParameterIdImpl(origin);
+	}
+	
+	public @NonNull TemplateParameterId[] createTemplateParameterIds(@NonNull TemplateParameterId[] oldTemplateParameters) {
+		int templateParameterCount = oldTemplateParameters.length;
+		TemplateParameterId[] newTemplateParameters = new TemplateParameterId[templateParameterCount];
+		for (int i = 0; i < templateParameterCount; i++) {
+			TemplateParameterId oldTemplateParameter = oldTemplateParameters[i];
+			if (oldTemplateParameter instanceof TypeTemplateParameterId) {
+				newTemplateParameters[i] = createTypeTemplateParameterId(null);
+			}
+			else {
+				newTemplateParameters[i] = createTemplateParameterId(null);
+			}
+		}
+		return newTemplateParameters;
+	}
+	
+	public @NonNull TemplateParameterId[] createTemplateParameterIds(@NonNull List<ETypeParameter> oldTemplateParameters) {
+		int templateParameterCount = oldTemplateParameters.size();
+		TemplateParameterId[] newTemplateParameters = new TemplateParameterId[templateParameterCount];
+		for (int i = 0; i < templateParameterCount; i++) {
+			ETypeParameter oldTemplateParameter = oldTemplateParameters.get(i);
+			newTemplateParameters[i] = createTypeTemplateParameterId(null);
+		}
+		return newTemplateParameters;
+	}
+	
+	public @NonNull TemplateParameterId[] createTemplateParameterIds(@NonNull DomainTypeParameters typeParameters) {
+		int templateParameterCount = typeParameters.parametersSize();
+		TemplateParameterId[] newTemplateParameters = new TemplateParameterId[templateParameterCount];
+		for (int i = 0; i < templateParameterCount; i++) {
+			DomainElement templateParameter = typeParameters.get(i);
+			if (templateParameter instanceof DomainTypeTemplateParameter) {
+				newTemplateParameters[i] = createTypeTemplateParameterId(null);
+			}
+			else {
+				newTemplateParameters[i] = createTemplateParameterId(null);
+			}
+		}
+		return newTemplateParameters;
+	}
+
+	public @NonNull TuplePartId createTuplePartId(@NonNull String name, @NonNull TypeId typeId) {
+	   	return new TuplePartIdImpl(name, typeId);
+	}
+
+	public @NonNull TypeTemplateParameterIdImpl createTypeTemplateParameterId(@Nullable DomainTypeTemplateParameter origin) {
+		return new TypeTemplateParameterIdImpl(origin);
 	}
 
 	/**
@@ -162,8 +221,23 @@ public class IdManager
 	/**
 	 * Return the named lambda typeId with the defined type parameters.
 	 */
-    public @NonNull TypeId getLambdaTypeId(@NonNull String name, @NonNull DomainTypeParameters typeParameters) {
-    	return lambdaTypes.getTypeId(79 * name.hashCode() + typeParameters.hashCode(), typeParameters, name);
+    public @NonNull TypeId getLambdaTypeId(final @NonNull TemplateParameterId[] templateParameters, @NonNull String name, @NonNull DomainParameterTypes parameterTypes) {
+		WeakHashMapOfListOfWeakReference3<Integer, String, DomainParameterTypes, GeneralizedLambdaTypeIdImpl> lambdaTypes2 = lambdaTypes;
+		if (lambdaTypes2 == null) {
+    		synchronized (this) {
+    			lambdaTypes2 = lambdaTypes;
+    	    	if (lambdaTypes2 == null) {
+    	    		lambdaTypes = lambdaTypes2 = new WeakHashMapOfListOfWeakReference3<Integer, String, DomainParameterTypes, GeneralizedLambdaTypeIdImpl>()
+    				{
+    	    			@Override
+    	    			protected @NonNull GeneralizedLambdaTypeIdImpl newTypeId(@NonNull Integer hashCode, @NonNull String name, @NonNull DomainParameterTypes parameterTypes) {
+    	    				return new GeneralizedLambdaTypeIdImpl(hashCode, templateParameters, name, parameterTypes);
+    	    			}		
+					};
+	    	   }
+    		}
+    	}
+    	return lambdaTypes2.getTypeId(79 * name.hashCode() + parameterTypes.hashCode(), name, parameterTypes);
 	}
 
 	/**
@@ -199,18 +273,43 @@ public class IdManager
 		assert name != null;
 		DomainType parentType = anOperation.getOwningType();
 		assert parentType != null;
-		return parentType.getTypeId().getOperationId(anOperation);
+		DomainTypeParameters typeParameters = anOperation.getTypeParameters();
+		TemplateParameterId[] templateParameters = IdManager.INSTANCE.createTemplateParameterIds(typeParameters);
+		return parentType.getTypeId().getOperationId(templateParameters, name, anOperation.getParameterTypes());
 	}
+
+    /**
+     * Return the anOperation template parameter Id for the templateParameterIndex'th template parameter of an operationName with parameterCount.
+     *
+	public @NonNull OperationTemplateParameterId getOperationTemplateParameterId(@NonNull String operationName, final int parameterCount, final int templateParameterIndex) {
+		int hash = 67 * parameterCount + 11 * templateParameterIndex + operationName.hashCode();
+	   	return operationTemplateParameters.getTypeId(hash, operationName, parameterCount, templateParameterIndex);
+	} */
 
 	/**
 	 * Return the named tuple typeId with the defined parts (which are alphabetically ordered by part name).
 	 */
-    public @NonNull TupleTypeId getOrderedTupleTypeId(@NonNull String name, @NonNull List<? extends DomainTypedElement> parts) {
+    public @NonNull TupleTypeId getOrderedTupleTypeId(final @NonNull TemplateParameterId[] templateParameters, @NonNull String name, @NonNull TuplePartId[] parts) {
+		WeakHashMapOfListOfWeakReference3<Integer, String, TuplePartId[], GeneralizedTupleTypeIdImpl> tupleTypes2 = tupleTypes;
+		if (tupleTypes2 == null) {
+    		synchronized (this) {
+    			tupleTypes2 = tupleTypes;
+    	    	if (tupleTypes2 == null) {
+    	    		tupleTypes = tupleTypes2 = new WeakHashMapOfListOfWeakReference3<Integer, String, TuplePartId[], GeneralizedTupleTypeIdImpl>()
+    				{
+    	    			@Override
+    	    			protected @NonNull GeneralizedTupleTypeIdImpl newTypeId(@NonNull Integer hashCode, @NonNull String name, @NonNull TuplePartId[] parts) {
+    	    				return new GeneralizedTupleTypeIdImpl(hashCode, templateParameters, name, parts);
+    	    			}		
+					};
+	    	   }
+    		}
+    	}
 		int hash = name.hashCode();
-		for (DomainTypedElement part : parts) {
-			hash = 101 * hash + 57 * part.getName().hashCode() + part.getType().getTypeId().hashCode();
+		for (TuplePartId part : parts) {
+			hash = 101 * hash + part.hashCode();
 		}
-	   	return tupleTypes.getTypeId(hash, parts, name);
+		return tupleTypes2.getTypeId(hash, name, parts);
 	}
 
     /**
@@ -281,13 +380,62 @@ public class IdManager
 		}
     }
 
+/*	public @NonNull TemplateParameterId getTemplateParameterId(int index) {
+		if (index >= templateParameters.size()) {
+			synchronized (templateParameters) {
+				while (index >= templateParameters.size()) {
+					templateParameters.add(new TemplateParameterIdImpl(templateParameters.size()));
+				}
+			}
+		}
+		TemplateParameterId templateParameterId = templateParameters.get(index);
+		assert templateParameterId != null;
+		return templateParameterId;
+    } */
+
 	/**
 	 * Return the named tuple typeId with the defined parts (which need not be alphabetically ordered).
 	 */
-	public @NonNull TupleTypeId getTupleTypeId(@NonNull String name, @NonNull Collection<? extends DomainTypedElement> parts) {
-		List<DomainTypedElement> orderedParts = new ArrayList<DomainTypedElement>(parts);
-		Collections.sort(orderedParts, NAME_COMPARATOR);
-		return getOrderedTupleTypeId(name, orderedParts);
+	public @NonNull TupleTypeId getTupleTypeId(@NonNull String name, @NonNull Collection<? extends TuplePartId> parts) {
+		TuplePartId[] orderedParts = new TuplePartId[parts.size()];
+		int i = 0;
+		Map<DomainTemplateParameter, List<TemplateBinding>> bindings = new LinkedHashMap<DomainTemplateParameter, List<TemplateBinding>>();
+		for (TuplePartId part : parts) {
+			orderedParts[i++] = part;
+			part.resolveTemplateBindings(bindings);
+		}
+		Arrays.sort(orderedParts);
+		int bindingsSize = bindings.size();
+		if (bindingsSize > 0) {
+			List<ElementId> specializers = new ArrayList<ElementId>();
+			TemplateParameterId[] templateParameters = new TemplateParameterId[bindingsSize];
+			i = 0;
+			for (Map.Entry<DomainTemplateParameter, List<TemplateBinding>> entry : bindings.entrySet()) {
+				TypeTemplateParameterIdImpl templateParameterId = createTypeTemplateParameterId(null);
+				templateParameters[i++] = templateParameterId;
+				for (TemplateBinding templateBinding : entry.getValue()) {
+					assert templateParameterId != null;
+					templateBinding.install(templateParameterId);
+				}
+				specializers.add(createTemplateBinding(entry.getKey()));
+			}
+			TupleTypeId generalizedTupleTypeId = getOrderedTupleTypeId(templateParameters, name, orderedParts);
+			TemplateBindings templateBindings = new TemplateBindings(specializers);
+			TupleTypeId specializedTupleTypeId = (TupleTypeId) generalizedTupleTypeId.specialize(templateBindings);
+			return specializedTupleTypeId;
+			}
+		else {
+			return getOrderedTupleTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, name, orderedParts);
+		}
+	}
+	public @NonNull TupleTypeId getTupleTypeId(@NonNull String name, @NonNull TuplePartId... parts) {
+		TuplePartId[] orderedParts = new TuplePartId[parts.length];
+		int i = 0;
+		for (TuplePartId part : parts) {
+			orderedParts[i++] = part;
+		}
+		Arrays.sort(orderedParts);
+		return getOrderedTupleTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, name, orderedParts);
 	}
 
     /**
@@ -298,7 +446,9 @@ public class IdManager
 		assert name != null;
 		DomainPackage parentPackage = aType.getPackage();
 		if (parentPackage != null) {
-			return parentPackage.getPackageId().getNestedTypeId(name);
+			DomainTypeParameters typeParameters = aType.getTypeParameters();
+			TemplateParameterId[] templateParameters = IdManager.INSTANCE.createTemplateParameterIds(typeParameters);
+			return parentPackage.getPackageId().getNestedTypeId(templateParameters, name);
 		}
 		else {
 			return new UnspecifiedIdImpl(aType);		// FIXME This occurs for underspecified/wildcard types
@@ -313,7 +463,9 @@ public class IdManager
 		assert name != null;
 		EPackage parentPackage = eClassifier.getEPackage();
 		assert parentPackage != null;
-		return getPackageId(parentPackage).getNestedTypeId(name);
+		List<ETypeParameter> typeParameters = eClassifier.getETypeParameters();
+		TemplateParameterId[] templateParameters = IdManager.INSTANCE.createTemplateParameterIds(typeParameters);
+		return getPackageId(parentPackage).getNestedTypeId(templateParameters, name);
 	}
 
     /**

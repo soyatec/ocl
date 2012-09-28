@@ -37,6 +37,10 @@ public class UnspecifiedIdImpl extends AbstractTypeId implements UnspecifiedId
 		return type.getName();
 	}
 
+	public @NonNull Object getSpecifier() {
+		return type;
+	}
+
 	@Override
 	public int hashCode() {
 		return type.hashCode();

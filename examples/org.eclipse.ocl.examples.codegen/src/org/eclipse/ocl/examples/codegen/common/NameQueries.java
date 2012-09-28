@@ -97,8 +97,21 @@ public class NameQueries
 		}
 	}
 	
+	/**
+	 * The next count suffix for each prefix.
+	 */
 	private static Map<String, Integer> counters = new HashMap<String, Integer>();
+
+	/**
+	 * The symbol assigned to each AST object.
+	 */
 	private static Map<Object, String> definedSymbols = new HashMap<Object, String>();
+
+	/**
+	 * SEt of flags that can be defined and tested for non-reuse
+	 */
+	private static Set<String> definedFlags = new HashSet<String>();
+	
 	private static Map<Element, NameAllocation<Constraint>> uniqueConstraints = new HashMap<Element, NameAllocation<Constraint>>();
 	private static Map<Element, NameAllocation<Operation>> uniqueOperations = new HashMap<Element, NameAllocation<Operation>>();
 	private static Map<Element, NameAllocation<Property>> uniqueProperties = new HashMap<Element, NameAllocation<Property>>();
@@ -130,6 +143,11 @@ public class NameQueries
 				s.append('_');
 			}
 		}
+	}
+
+	public static String defineFlag(Object disambiguator, String flag) {
+		definedFlags.add(flag);
+		return flag;
 	}
 
 	public static String defineSymbolName(Object elem, String symbol) {
@@ -449,6 +467,10 @@ public class NameQueries
 		return allocation.get(variable);
 	}
 
+	public static Boolean isDefinedFlag(Object disambiguator, String flag) {
+		return definedFlags.contains(flag);
+	}
+
 	public static String rawEncodeName(String name) {
 		StringBuilder s = new StringBuilder();
 //		boolean prevCharIsLower = true;
@@ -500,9 +522,15 @@ public class NameQueries
 		return s.toString();
 	}
 
+	public static String resetFlags(Object elem) {
+		definedFlags.clear();
+		return "";
+	}
+
 	public static String resetSymbolNames(Object elem) {
 		counters.clear();
 		definedSymbols.clear();
+		definedFlags.clear();
 		return "";
 	}
 }

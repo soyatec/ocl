@@ -25,9 +25,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
@@ -74,10 +72,6 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 		return toInvalidValue();
 	}
 
-	public @Nullable CollectedTypeId basicGetTypeId() {
-		return getCollectedTypeId();
-	}
-
     public @NonNull IntegerValue count(@NonNull Object value) {
         return toInvalidValue();
     }
@@ -117,10 +111,6 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 	
 	public String getKind() {
 	    return "Collection";		// FIXME UOE ??
-	}
-
-	public @NonNull TypeId getTypeId() {
-		return getCollectedTypeId();
 	}
 
     public @NonNull Object includes(@NonNull Object value) {

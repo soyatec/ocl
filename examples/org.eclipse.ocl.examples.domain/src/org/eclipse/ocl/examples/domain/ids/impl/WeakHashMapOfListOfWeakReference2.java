@@ -21,9 +21,14 @@ import java.util.WeakHashMap;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-public abstract class WeakHashMapOfListOfWeakReference<K1, K2, V extends MatchableId<K2>> extends WeakHashMap<K1,List<WeakReference<V>>> 
+public abstract class WeakHashMapOfListOfWeakReference2<K1, K2, V extends WeakHashMapOfListOfWeakReference2.MatchableId<K2>> extends WeakHashMap<K1,List<WeakReference<V>>> 
 {
-	public synchronized @NonNull V getTypeId(@NonNull K1 key1, @NonNull K2 key2, @NonNull String name) {
+	public interface MatchableId<K2>
+	{
+		boolean matches(@NonNull K2 value);
+	}
+	
+	public synchronized @NonNull V getTypeId(@NonNull K1 key1, @NonNull K2 key2) {
 		List<WeakReference<V>> typeIds = get(key1);
 		if (typeIds == null) {
 			typeIds = new ArrayList<WeakReference<V>>();
@@ -32,15 +37,15 @@ public abstract class WeakHashMapOfListOfWeakReference<K1, K2, V extends Matchab
 		for (WeakReference<V> ref : typeIds) {
 			V oldTypeId = ref.get();
 			if (oldTypeId != null) {
-				if (oldTypeId.matches(name, key2)) {
+				if (oldTypeId.matches(key2)) {
 					return oldTypeId;
 				}
 			}
 		}
-		V newTypeId = newTypeId(key1, key2, name);
+		V newTypeId = newTypeId(key1, key2);
 		typeIds.add(new WeakReference<V>(newTypeId));
 		return newTypeId;
 	}
 
-	protected abstract @NonNull V newTypeId(@NonNull K1 key1, @NonNull K2 key2, @NonNull String name);
+	protected abstract @NonNull V newTypeId(@NonNull K1 key1, @NonNull K2 key2);
 }

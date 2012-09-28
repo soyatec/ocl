@@ -21,9 +21,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
+import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.ids.BuiltInTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
@@ -115,7 +117,9 @@ public class EcoreExecutorType extends ExecutorType
 				}
 				else {
 					PackageId packageTypeId = IdManager.INSTANCE.getPackageId(evaluationPackage);
-					typeId2 = packageTypeId.getNestedTypeId(name);
+					DomainTypeParameters typeParameters = getTypeParameters();
+					TemplateParameterId[] templateParameters = IdManager.INSTANCE.createTemplateParameterIds(typeParameters);
+					typeId2 = packageTypeId.getNestedTypeId(templateParameters, name);
 				}
 			}
 			typeId = typeId2;

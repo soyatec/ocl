@@ -14,42 +14,54 @@
  */
 package org.eclipse.ocl.examples.domain.ids.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.ids.IdVisitor;
+import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
+import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
+import org.eclipse.ocl.examples.domain.elements.DomainTypeTemplateParameter;
+import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
+import org.eclipse.ocl.examples.domain.ids.OperationId;
+import org.eclipse.ocl.examples.domain.ids.TemplateBinding;
+import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeTemplateParameterId;
 
-public class TypeTemplateParameterIdImpl extends AbstractTypeId implements TypeTemplateParameterId
+public class TypeTemplateParameterIdImpl extends TemplateParameterIdImpl implements TypeTemplateParameterId
 {
-	protected final @NonNull TypeId parent;
-	protected final int index;
-	protected final int hashCode;
-
-	TypeTemplateParameterIdImpl(@NonNull TypeId parent, int index) {
-		this.parent = parent;
-		this.index = index;
-		this.hashCode = 67 * parent.hashCode() + index;
+	public TypeTemplateParameterIdImpl(@Nullable DomainTypeTemplateParameter origin) {
+		super(origin);
 	}
 
-	public @Nullable <R> R accept(@NonNull IdVisitor<R> visitor) {
-		return visitor.visitTypeTemplateParameterId(this);
+	public @NonNull EnumerationLiteralId getEnumerationLiteralId(@NonNull String name) {
+    	throw new UnsupportedOperationException();
+    }
+
+	public @NonNull String getMetaTypeName() {
+    	throw new UnsupportedOperationException();
 	}
 
-	public @NonNull String getDisplayName() {
-		return parent + "::" + index;
+    public @NonNull OperationId getOperationId(@NonNull TemplateParameterId[] templateParameters, @NonNull String name, @NonNull DomainParameterTypes parameterTypes) {
+    	throw new UnsupportedOperationException();
+    }
+	
+    public @NonNull TemplateParameterId getTemplateParameterId(int index) {
+    	throw new UnsupportedOperationException();
+    }
+	
+    public @NonNull TemplateParameterId[] getTemplateParameters() {
+    	throw new UnsupportedOperationException();
+    }
+
+	public void resolveTemplateBindings(@NonNull Map<DomainTemplateParameter, List<TemplateBinding>> bindings) {
+//    	throw new UnsupportedOperationException();
 	}
 
-	public int getIndex() {
-		return index;
-	}
-
-	public @NonNull TypeId getParent() {
-		return parent;
-	}
-
-	@Override
-	public final int hashCode() {
-		return hashCode;
+    @Override
+	public @NonNull TypeId specialize(@NonNull TemplateBindings templateBindings) {
+    	return (TypeId) super.specialize(templateBindings);
 	}
 }

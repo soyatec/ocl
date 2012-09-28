@@ -398,10 +398,10 @@ public class MetaclassImpl extends ClassImpl implements Metaclass
 	@Override
 	public @NonNull TypeId computeId() {
 		if (getUnspecializedElement() == null) {
-			return TypeId.METACLASS.getCollectedTypeId();
+			return TypeId.METACLASS;
 		}
 		else {
-			return TypeId.METACLASS.getCollectedTypeId(getInstanceType().getTypeId());
+			return TypeId.METACLASS.getSpecializedId(getInstanceType().getTypeId());
 		}
 	}
 

@@ -20,7 +20,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
@@ -38,7 +38,7 @@ public class CollectionProductOperation extends AbstractBinaryOperation
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal, @NonNull Object argVal) {
 		CollectionValue sourceValue = asCollectionValue(sourceVal);
 		CollectionValue argumentValue = asCollectionValue(argVal);
-		CollectedTypeId collTypeId = (CollectedTypeId)returnTypeId;
+		CollectionTypeId collTypeId = (CollectionTypeId)returnTypeId;
 		TupleTypeId tupleTypeId = (TupleTypeId) collTypeId.getElementTypeId();
 		Set<TupleValue> product = sourceValue.product(argumentValue, tupleTypeId);
         if (product != null) {

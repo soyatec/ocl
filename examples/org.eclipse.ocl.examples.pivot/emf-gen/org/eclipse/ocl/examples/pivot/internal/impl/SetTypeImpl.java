@@ -63,10 +63,10 @@ public class SetTypeImpl
 	@Override
 	public @NonNull TypeId computeId() {
 		if (getUnspecializedElement() == null) {
-			return TypeId.SET.getCollectedTypeId();
+			return TypeId.SET;
 		}
 		else {
-			return TypeId.SET.getCollectedTypeId(getElementType().getTypeId());
+			return TypeId.SET.getSpecializedId(getElementType().getTypeId());
 		}
 	}
 

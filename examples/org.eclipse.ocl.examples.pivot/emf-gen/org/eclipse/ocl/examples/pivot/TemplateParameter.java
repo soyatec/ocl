@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EClass;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Template Parameter</b></em>'.
+ * @extends org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
@@ -43,7 +44,7 @@ import org.eclipse.emf.ecore.EClass;
  * @generated
  */
 public interface TemplateParameter
-		extends Element {
+		extends Element, org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter {
 
 	/**
 	 * Returns the value of the '<em><b>Signature</b></em>' container reference.

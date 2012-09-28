@@ -20,13 +20,16 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
+import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * @generated NOT
@@ -93,6 +96,14 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 
 	public Object getObject() {
 		return null;
+	}
+
+	public @NonNull Value getValue(@NonNull TuplePartId partId) {
+    	return toInvalidValue();
+	}
+
+	public @NonNull Object getValue(int index) {
+    	return toInvalidValue();
 	}
 
 	public boolean isFalse() {

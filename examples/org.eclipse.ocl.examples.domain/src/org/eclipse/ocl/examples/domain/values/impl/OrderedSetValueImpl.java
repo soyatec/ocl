@@ -25,7 +25,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -55,7 +54,7 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
 		return ValuesPackage.Literals.ORDERED_SET_VALUE;
 	}
 
-    public static @NonNull OrderedSetValue intersection(@NonNull CollectedTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right)
+    public static @NonNull OrderedSetValue intersection(@NonNull CollectionTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right)
     {
     	assert !left.isUndefined() && !right.isUndefined();
 		Collection<? extends Object> leftElements = left.asCollection();
@@ -72,7 +71,7 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
      	return results.size() > 0 ? createOrderedSetValue(typeId, results) : createOrderedSetValue(typeId);
     }
 
-    public static @NonNull OrderedSetValue union(@NonNull CollectedTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right) {
+    public static @NonNull OrderedSetValue union(@NonNull CollectionTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right) {
     	assert !left.isUndefined() && !right.isUndefined();
 		Collection<? extends Object> leftElements = left.asCollection();
         Collection<? extends Object> rightElements = right.asCollection();
@@ -88,7 +87,7 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
     		return createOrderedSetValue(typeId, result);
         } 
     }
-	public OrderedSetValueImpl(@NonNull CollectedTypeId typeId, @NonNull Collection<? extends Object> elements) {
+	public OrderedSetValueImpl(@NonNull CollectionTypeId typeId, @NonNull Collection<? extends Object> elements) {
 		super(typeId, elements);
 	}
 
@@ -157,10 +156,10 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
 		}
 	}
 
-    @Override
-	public @NonNull CollectionTypeId getCollectionTypeId() {
-		return TypeId.ORDERED_SET;
-	}
+//    @Override
+//	public @NonNull CollectionTypeId getCollectionTypeId() {
+//		return TypeId.ORDERED_SET;
+//	}
 
 	public @NonNull String getKind() {
 	    return "OrderedSet";

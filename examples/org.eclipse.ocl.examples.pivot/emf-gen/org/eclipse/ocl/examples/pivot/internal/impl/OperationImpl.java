@@ -1306,7 +1306,6 @@ public class OperationImpl
 				operationId2 = operationId;
 				if (operationId2 == null) {
 					operationId = operationId2 = IdManager.INSTANCE.getOperationId(this);
-;
 				}
 			}
 		}

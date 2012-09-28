@@ -99,7 +99,7 @@ public abstract class AbstractEvaluationEnvironment extends AbstractBasicEnviron
      * @param value
      *            the new value
      */
-    public void replace(DomainTypedElement referredVariable, Object value) {
+    public void replace(@NonNull DomainTypedElement referredVariable, Object value) {
     	if (referredVariable instanceof Variable) {
     		assert ((Variable)referredVariable).getRepresentedParameter() == null;
     	}
@@ -114,7 +114,7 @@ public abstract class AbstractEvaluationEnvironment extends AbstractBasicEnviron
      * @param value
      *            the associated binding
      */
-    public void add(DomainTypedElement referredVariable, Object value) {
+    public void add(@NonNull DomainTypedElement referredVariable, Object value) {
     	if (referredVariable instanceof Variable) {
     		assert ((Variable)referredVariable).getRepresentedParameter() == null;
     	}
@@ -140,7 +140,7 @@ public abstract class AbstractEvaluationEnvironment extends AbstractBasicEnviron
      * @return the value associated with the removed name
      */
     @Deprecated
-    public Object remove(DomainTypedElement referredVariable) {
+    public Object remove(@NonNull DomainTypedElement referredVariable) {
     	if (referredVariable instanceof Variable) {
     		assert ((Variable)referredVariable).getRepresentedParameter() == null;
     	}

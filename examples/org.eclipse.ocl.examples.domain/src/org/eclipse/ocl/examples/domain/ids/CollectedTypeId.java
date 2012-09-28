@@ -14,13 +14,11 @@
  */
 package org.eclipse.ocl.examples.domain.ids;
 
-import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * A CollectedTypeId provides a unique identifier for a specialized collection type such as Set(String).
  */
-public interface CollectedTypeId extends TypeId
+@Deprecated
+public interface CollectedTypeId extends TypeId, TemplateableId
 {
-	@NonNull CollectionTypeId getCollectionTypeId();
-	@NonNull TypeId getElementTypeId();
 }

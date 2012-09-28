@@ -26,7 +26,6 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -72,7 +71,7 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 		return result;
 	}
 
-	public static @NonNull BagValue intersection(@NonNull CollectedTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right)
+	public static @NonNull BagValue intersection(@NonNull CollectionTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right)
     {
     	assert !left.isUndefined() && !right.isUndefined();
 		Collection<? extends Object> leftElements = left.asCollection();
@@ -98,7 +97,7 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
     	return results.size() > 0 ? new BagValueImpl(typeId, results) : new BagValueImpl(typeId, EMPTY_BAG);
     }
 
-    public static @NonNull BagValue union(@NonNull CollectedTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right) {
+    public static @NonNull BagValue union(@NonNull CollectionTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right) {
     	assert !left.isUndefined() && !right.isUndefined();
 		Collection<? extends Object> leftElements = left.asCollection();
         Collection<? extends Object> rightElements = right.asCollection();
@@ -117,7 +116,7 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 	
 	public static class Accumulator extends BagValueImpl implements CollectionValue.Accumulator
 	{
-		public Accumulator(@NonNull CollectedTypeId typeId) {
+		public Accumulator(@NonNull CollectionTypeId typeId) {
 			super(typeId, new BagImpl<Object>());
 		}
 
@@ -127,15 +126,15 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 		}		
 	}
 	
-	public BagValueImpl(@NonNull CollectedTypeId typeId, Object... values) {
+	public BagValueImpl(@NonNull CollectionTypeId typeId, Object... values) {
 		super(typeId, createValues(values));
 	}
 
-	public BagValueImpl(@NonNull CollectedTypeId typeId, @NonNull Iterable<? extends Object> values) {
+	public BagValueImpl(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> values) {
 		super(typeId, createValues(values));
 	}
 
-	public BagValueImpl(@NonNull CollectedTypeId typeId, @NonNull Bag<? extends Object> values) {
+	public BagValueImpl(@NonNull CollectionTypeId typeId, @NonNull Bag<? extends Object> values) {
 		super(typeId, values);
 	}
 
@@ -177,10 +176,10 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
     	}
     }
 
-    @Override
-	public @NonNull CollectionTypeId getCollectionTypeId() {
-		return TypeId.BAG;
-	}
+//    @Override
+//	public @NonNull CollectionTypeId getCollectionTypeId() {
+//		return TypeId.BAG;
+//	}
     
 	@Override
 	protected @NonNull Bag<? extends Object> getElements() {

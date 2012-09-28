@@ -95,7 +95,6 @@ import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.VoidType;
-import org.eclipse.ocl.examples.pivot.manager.TupleTypeManager.TuplePart;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.util.Nameable;
 import org.eclipse.ocl.examples.pivot.utilities.Pivot2Moniker;
@@ -760,7 +759,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		return s.toString();
 	}
 
-	protected String image(TuplePart ele) {
+/*	protected String image(TuplePart ele) {
 		return "/org.eclipse.uml2.uml.edit/icons/full/obj16/Property.gif";
 	}
 
@@ -771,7 +770,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		appendType(s, ele.getType());
 //		appendMultiplicity(s, ele);
 		return s.toString();
-	}
+	} */
 
 	protected String image(TupleType ele) {
 		return "/org.eclipse.ocl.edit/icons/full/obj16/TupleType.gif";

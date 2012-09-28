@@ -26,8 +26,8 @@
  * The symbolName template provides a semi-readable name for use by any AST node that is unique within a given ExpressionInOCL.
  **/]
 
-[template public typeId(type : Type, expInOcl : ExpressionInOCL) ?(type.isBuiltInType())]
+[template public zztypeId(type : Type, expInOcl : ExpressionInOCL) ?(type.isBuiltInType())]
 <%TypeId%>.[type.upperName()/][/template]
 
-[template public typeId(type : Type, expInOcl : ExpressionInOCL) ?(not type.isBuiltInType())]
-[type.symbolName(expInOcl)/].getTypeId()[/template]
+[template public typeId(type : Type, expInOcl : ExpressionInOCL)]
+[type.symbolName(expInOcl)/][/template]

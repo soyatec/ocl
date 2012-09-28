@@ -16,25 +16,32 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 public class ExecutorTypedElement implements DomainTypedElement
 {
-	private String name;
-	private DomainType type;
+	private @NonNull String name;
+	private @NonNull DomainType type;
 
-	public ExecutorTypedElement(String name, DomainType type) {
+	public ExecutorTypedElement(@NonNull String name, @NonNull DomainType type) {
 		this.name = name;
 		this.type = type;
 	}
 
-	public String getName() {
+	public @NonNull String getName() {
 		return name;
 	}
 
-	public DomainType getType() {
+	public @NonNull DomainType getType() {
 		return type;
+	}
+
+	public @NonNull TypeId getTypeId() {
+		DomainType type2 = getType();
+		return type2.getTypeId();
 	}
 
 	@Override

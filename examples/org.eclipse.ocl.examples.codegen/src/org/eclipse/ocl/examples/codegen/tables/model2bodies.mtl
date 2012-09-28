@@ -113,12 +113,13 @@ public class [className/]
 [let arity : OCLInteger = expInOcl.parameterVariable->size()]
 /** 
  * Implementation of the [pType.name/] '[pConstraint.name/]' invariant.
- */
+ */[expInOcl.resetFlags()/]
 public static class [className/] extends <%Abstract[genPackage.emitOperationArity(arity)/]%>
 {
 	public static @NonNull [className/] INSTANCE = new [className/]();
 [if (expInOcl.contextVariable->notEmpty())]
 [let constants : String = expInOcl.bodyExpression.gatherConstants(genPackage, expInOcl)]
+	[expInOcl.emitStatics(constants)/]
 
 	/*
 	[expInOcl.prettyPrint().trim()/]
@@ -126,7 +127,7 @@ public static class [className/] extends <%Abstract[genPackage.emitOperationArit
 	public @NonNull Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, final @NonNull Object [defineSymbolName(expInOcl.contextVariable, 'self')/][if expInOcl.parameterVariable->notEmpty()]
 [for (parameter : Variable | expInOcl.parameterVariable)]
 , final @NonNull Object [defineSymbolName(parameter, parameter.name)/][/for][/if]) throws <%InvalidValueException%> {
-		[expInOcl.emitConstants(constants)/]
+		[expInOcl.emitNonStatics(constants)/]
 		[expInOcl.bodyExpression.emitExpression(pType, genPackage, expInOcl)/]
 		return [expInOcl.bodyExpression.symbolName(expInOcl)/];
 	}
@@ -152,20 +153,21 @@ public static class [className/] extends <%Abstract[genPackage.emitOperationArit
 [let className : String = '_' + pOperation.name + '_' + pConstraint.stereotype + '_' + pConstraint.name]
 /** 
  * Implementation of the [pType.name/]::[pOperation.name/] '[pConstraint.name/]' <[pConstraint.stereotype/]>.
- */
+ */[expInOcl.resetFlags()/]
 public static class [className/] extends <%Abstract[genPackage.emitOperationArity(arity)/]%>
 {
 	public static @NonNull [className/] INSTANCE = new [className/]();
-
 [if (expInOcl.contextVariable->notEmpty())]
 [let constants : String = expInOcl.bodyExpression.gatherConstants(genPackage, expInOcl)]
+	[expInOcl.emitStatics(constants)/]
+
 	/*
 	[expInOcl.prettyPrint().trim()/]
 	*/
 	public @NonNull Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, final @NonNull Object [defineSymbolName(expInOcl.contextVariable, 'self')/][if expInOcl.parameterVariable->notEmpty()]
 [for (parameter : Variable | expInOcl.parameterVariable)]
 , final @NonNull Object [defineSymbolName(parameter, parameter.name)/][/for][/if]) throws <%InvalidValueException%> {
-		[expInOcl.emitConstants(constants)/]
+		[expInOcl.emitNonStatics(constants)/]
 		[expInOcl.bodyExpression.emitExpression(pType, genPackage, expInOcl)/]
 		return [expInOcl.bodyExpression.symbolName(expInOcl)/];
 	}
@@ -179,18 +181,19 @@ public static class [className/] extends <%Abstract[genPackage.emitOperationArit
 [let className : String = '_' + pProperty.name + '_' + pConstraint.stereotype + '_' + pConstraint.name]
 /** 
  * Implementation of the [pType.name/]::[pProperty.name/] '[pConstraint.name/]' <[pConstraint.stereotype/]>.
- */
+ */[expInOcl.resetFlags()/]
 public static class [className/] extends <%AbstractProperty%>
 {
 	public static @NonNull [className/] INSTANCE = new [className/]();
 
 [if (expInOcl.contextVariable->notEmpty())]
 [let constants : String = expInOcl.bodyExpression.gatherConstants(genPackage, expInOcl)]
+	[expInOcl.emitStatics(constants)/]
 	/*
 	[expInOcl.prettyPrint().trim()/]
 	*/
 	public @NonNull Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, final @NonNull Object [defineSymbolName(expInOcl.contextVariable, 'self')/], @NonNull <%DomainProperty%> property) throws <%InvalidValueException%> {
-		[expInOcl.emitConstants(constants)/]
+		[expInOcl.emitNonStatics(constants)/]
 		[expInOcl.bodyExpression.emitExpression(pType, genPackage, expInOcl)/]
 		return [expInOcl.bodyExpression.symbolName(expInOcl)/];
 	}[/let]

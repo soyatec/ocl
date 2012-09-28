@@ -63,6 +63,10 @@ public class DomainParameterTypes
 		return parameterType;
 	}
 
+	public @NonNull DomainType[] get() {
+		return parameterTypes;
+	}
+
 	@Override
 	public int hashCode() {
 		return hashCode;

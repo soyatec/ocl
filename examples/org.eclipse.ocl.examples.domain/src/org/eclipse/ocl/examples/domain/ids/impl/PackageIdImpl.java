@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 public abstract class PackageIdImpl extends AbstractElementId implements PackageId
@@ -31,7 +32,7 @@ public abstract class PackageIdImpl extends AbstractElementId implements Package
 	/**
 	 * Map from a nested type name to the corresponding NestedTypeId. 
 	 */
-	private @Nullable WeakHashMapOfWeakReference<String, NestedTypeIdImpl> nestedTypes = null;
+	private @Nullable WeakHashMapOfWeakReference<String, GeneralizedNestedTypeIdImpl> nestedTypes = null;
 	
 	
 	PackageIdImpl(int hashCode) {
@@ -61,17 +62,17 @@ public abstract class PackageIdImpl extends AbstractElementId implements Package
 		return nestedPackages2.getElementId(name);
     }
 
-	public @NonNull TypeId getNestedTypeId(@NonNull String name) {
-    	WeakHashMapOfWeakReference<String, NestedTypeIdImpl> nestedTypes2 = nestedTypes;
+	public @NonNull TypeId getNestedTypeId(final @NonNull TemplateParameterId[] templateParameters, @NonNull String name) {
+    	WeakHashMapOfWeakReference<String, GeneralizedNestedTypeIdImpl> nestedTypes2 = nestedTypes;
 		if (nestedTypes2 == null) {
     		synchronized (this) {
     			nestedTypes2 = nestedTypes;
     	    	if (nestedTypes2 == null) {
-    	    		nestedTypes = nestedTypes2 = new WeakHashMapOfWeakReference<String, NestedTypeIdImpl>()
+    	    		nestedTypes = nestedTypes2 = new WeakHashMapOfWeakReference<String, GeneralizedNestedTypeIdImpl>()
     				{
 						@Override
-						protected @NonNull NestedTypeIdImpl newTypeId(@NonNull String name) {
-							return new NestedTypeIdImpl(PackageIdImpl.this, name);
+						protected @NonNull GeneralizedNestedTypeIdImpl newTypeId(@NonNull String name) {
+							return new GeneralizedNestedTypeIdImpl(PackageIdImpl.this, templateParameters, name);
 						}
 					};
     	    	}

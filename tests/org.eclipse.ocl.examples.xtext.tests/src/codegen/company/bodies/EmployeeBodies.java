@@ -11,29 +11,41 @@ package codegen.company.bodies;
 
 import org.eclipse.jdt.annotation.NonNull;
 import codegen.company.CodegencompanyTables;
-import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
+import codegen.company.Employee;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryIteration;
-import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
+import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
+import org.eclipse.ocl.examples.library.collection.CollectionIncludesOperation;
+import org.eclipse.ocl.examples.library.collection.CollectionNotEmptyOperation;
+import org.eclipse.ocl.examples.library.collection.CollectionSizeOperation;
+import org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
-import org.eclipse.ocl.examples.library.executor.ExecutorProperty;
 import org.eclipse.ocl.examples.library.executor.ExecutorSingleIterationManager;
-import org.eclipse.ocl.examples.library.executor.ExecutorType;
+import org.eclipse.ocl.examples.library.logical.BooleanAndOperation;
+import org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation;
+import org.eclipse.ocl.examples.library.logical.BooleanNotOperation;
+import org.eclipse.ocl.examples.library.numeric.NumericGreaterThanOperation;
+import org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation;
+import org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation;
+import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.examples.library.string.StringSizeOperation;
 
 /**
  * EmployeeBodies provides the Java implementation bodies of OCL-defined Employee operations and properties.
@@ -54,15 +66,11 @@ public class EmployeeBodies
 		*/
 		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 			final @NonNull ExecutorOperation O_Boolean_and = OCLstdlibTables.Operations._Boolean__and;
 			final @NonNull ExecutorOperation O_Boolean_not = OCLstdlibTables.Operations._Boolean__not;
 			final @NonNull ExecutorOperation O_OclAny_oclIsUndefined = OCLstdlibTables.Operations._OclAny__oclIsUndefined;
-			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
-			final @NonNull ExecutorProperty P_Employee_name = CodegencompanyTables.Properties._Employee__name;
-			final @NonNull LibraryProperty IP_Employee_name = P_Employee_name.getImplementation();
-			final @NonNull ExecutorProperty P_Employee_hasNameAsAttribute = CodegencompanyTables.Properties._Employee__hasNameAsAttribute;
-			final @NonNull LibraryProperty IP_Employee_hasNameAsAttribute = P_Employee_hasNameAsAttribute.getImplementation();
+			final @NonNull PrimitiveTypeId T_String = TypeId.STRING;
 			final @NonNull ExecutorOperation O_Employee_hasNameAsOperation = CodegencompanyTables.Operations._Employee__hasNameAsOperation;
 			
 			Object leftA_symbol_;
@@ -70,14 +78,13 @@ public class EmployeeBodies
 				Object leftA_symbol__1;
 				try {
 					
-					Object A_symbol__2 = IP_Employee_name.evaluate(evaluator, T_String.getTypeId(), self, P_Employee_name);
+					Employee unboxed_self = (Employee)self;
+					java.lang.String unboxed_A_symbol__2 = unboxed_self.getName();
+					Object A_symbol__2 = unboxed_A_symbol__2 != null ? unboxed_A_symbol__2 : NULL_VALUE;
 					
-					DomainType static_A_symbol__3 = evaluator.getStaticTypeOf(A_symbol__2);
-					LibraryUnaryOperation dynamic_A_symbol__3 = (LibraryUnaryOperation)static_A_symbol__3.lookupImplementation(standardLibrary, O_OclAny_oclIsUndefined);
-					Object A_symbol__3 = dynamic_A_symbol__3.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__2);
-					DomainType static_A_symbol__4 = evaluator.getStaticTypeOf(A_symbol__3);
-					LibraryUnaryOperation dynamic_A_symbol__4 = (LibraryUnaryOperation)static_A_symbol__4.lookupImplementation(standardLibrary, O_Boolean_not);
-					Object A_symbol__4 = dynamic_A_symbol__4.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__3);
+					
+					Object A_symbol__3 = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__2);
+					Object A_symbol__4 = BooleanNotOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__3);
 					leftA_symbol__1 = A_symbol__4;
 				} catch (InvalidValueException e) {
 					leftA_symbol__1 = createInvalidValue(e);
@@ -86,16 +93,17 @@ public class EmployeeBodies
 				Object rightA_symbol__1;
 				try {
 					
-					Object A_symbol__5 = IP_Employee_hasNameAsAttribute.evaluate(evaluator, T_Boolean.getTypeId(), self, P_Employee_hasNameAsAttribute);
+					Employee unboxed_self = (Employee)self;
+					java.lang.Boolean unboxed_A_symbol__5 = unboxed_self.isHasNameAsAttribute();
+					Object A_symbol__5 = unboxed_A_symbol__5 != null ? unboxed_A_symbol__5 : NULL_VALUE;
+					
 					
 					rightA_symbol__1 = A_symbol__5;
 				} catch (InvalidValueException e) {
 					rightA_symbol__1 = createInvalidValue(e);
 				}
 				Object A_symbol__5 = rightA_symbol__1;
-				DomainType static_A_symbol__1 = evaluator.getStaticTypeOf(A_symbol__4);
-				LibraryBinaryOperation dynamic_A_symbol__1 = (LibraryBinaryOperation)static_A_symbol__1.lookupImplementation(standardLibrary, O_Boolean_and);
-				Object A_symbol__1 = dynamic_A_symbol__1.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__4, A_symbol__5);
+				Object A_symbol__1 = BooleanAndOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__4, A_symbol__5);
 				leftA_symbol_ = A_symbol__1;
 			} catch (InvalidValueException e) {
 				leftA_symbol_ = createInvalidValue(e);
@@ -104,17 +112,13 @@ public class EmployeeBodies
 			Object rightA_symbol_;
 			try {
 				
-				DomainType static_A_symbol__6 = evaluator.getStaticTypeOf(self);
-				LibraryUnaryOperation dynamic_A_symbol__6 = (LibraryUnaryOperation)static_A_symbol__6.lookupImplementation(standardLibrary, O_Employee_hasNameAsOperation);
-				Object A_symbol__6 = dynamic_A_symbol__6.evaluate(evaluator, T_Boolean.getTypeId(), self);
+				Object A_symbol__6 = _hasNameAsOperation_body_.INSTANCE.evaluate(evaluator, T_Boolean, self);
 				rightA_symbol_ = A_symbol__6;
 			} catch (InvalidValueException e) {
 				rightA_symbol_ = createInvalidValue(e);
 			}
 			Object A_symbol__6 = rightA_symbol_;
-			DomainType static_A_symbol_ = evaluator.getStaticTypeOf(A_symbol__1);
-			LibraryBinaryOperation dynamic_A_symbol_ = (LibraryBinaryOperation)static_A_symbol_.lookupImplementation(standardLibrary, O_Boolean_and);
-			Object A_symbol_ = dynamic_A_symbol_.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__1, A_symbol__6);
+			Object A_symbol_ = BooleanAndOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__1, A_symbol__6);
 			return A_symbol_;
 		}
 	}
@@ -131,30 +135,27 @@ public class EmployeeBodies
 		*/
 		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 			final @NonNull ExecutorOperation O_Boolean_implies = OCLstdlibTables.Operations._Boolean__implies;
 			final @NonNull ExecutorOperation O_Collection_notEmpty = OCLstdlibTables.Operations._Collection__notEmpty;
-			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
-			final @NonNull DomainCollectionType T_Set_String_ = standardLibrary.getSetType(T_String, null, null);
+			final @NonNull PrimitiveTypeId T_String = TypeId.STRING;
+			final @NonNull CollectionTypeId T_Set_String_ = TypeId.SET.getSpecializedId(T_String);
 			final @NonNull ExecutorOperation O_OclAny_oclAsSet = OCLstdlibTables.Operations._OclAny__oclAsSet;
-			final @NonNull ExecutorProperty P_Employee_name = CodegencompanyTables.Properties._Employee__name;
-			final @NonNull LibraryProperty IP_Employee_name = P_Employee_name.getImplementation();
 			final @NonNull ExecutorOperation O_Real__gt_ = OCLstdlibTables.Operations._Real___gt_;
-			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
+			final @NonNull PrimitiveTypeId T_Integer = TypeId.INTEGER;
 			final @NonNull ExecutorOperation O_String_size = OCLstdlibTables.Operations._String__size;
 			final @NonNull IntegerValue I_0 = integerValueOf(0);
 			
 			Object leftA_symbol__7;
 			try {
 				
-				Object A_symbol__8 = IP_Employee_name.evaluate(evaluator, T_String.getTypeId(), self, P_Employee_name);
+				Employee unboxed_self = (Employee)self;
+				java.lang.String unboxed_A_symbol__8 = unboxed_self.getName();
+				Object A_symbol__8 = unboxed_A_symbol__8 != null ? unboxed_A_symbol__8 : NULL_VALUE;
 				
-				DomainType static_A_symbol__9 = evaluator.getStaticTypeOf(A_symbol__8);
-				LibraryUnaryOperation dynamic_A_symbol__9 = (LibraryUnaryOperation)static_A_symbol__9.lookupImplementation(standardLibrary, O_OclAny_oclAsSet);
-				Object A_symbol__9 = dynamic_A_symbol__9.evaluate(evaluator, T_Set_String_.getTypeId(), A_symbol__8);
-				DomainType static_A_symbol__10 = evaluator.getStaticTypeOf(A_symbol__9);
-				LibraryUnaryOperation dynamic_A_symbol__10 = (LibraryUnaryOperation)static_A_symbol__10.lookupImplementation(standardLibrary, O_Collection_notEmpty);
-				Object A_symbol__10 = dynamic_A_symbol__10.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__9);
+				
+				Object A_symbol__9 = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, T_Set_String_, A_symbol__8);
+				Object A_symbol__10 = CollectionNotEmptyOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__9);
 				leftA_symbol__7 = A_symbol__10;
 			} catch (InvalidValueException e) {
 				leftA_symbol__7 = createInvalidValue(e);
@@ -163,22 +164,19 @@ public class EmployeeBodies
 			Object rightA_symbol__7;
 			try {
 				
-				Object A_symbol__11 = IP_Employee_name.evaluate(evaluator, T_String.getTypeId(), self, P_Employee_name);
+				Employee unboxed_self = (Employee)self;
+				java.lang.String unboxed_A_symbol__11 = unboxed_self.getName();
+				Object A_symbol__11 = unboxed_A_symbol__11 != null ? unboxed_A_symbol__11 : NULL_VALUE;
 				
-				DomainType static_A_symbol__12 = evaluator.getStaticTypeOf(A_symbol__11);
-				LibraryUnaryOperation dynamic_A_symbol__12 = (LibraryUnaryOperation)static_A_symbol__12.lookupImplementation(standardLibrary, O_String_size);
-				Object A_symbol__12 = dynamic_A_symbol__12.evaluate(evaluator, T_Integer.getTypeId(), A_symbol__11);
-				DomainType static_A_symbol__13 = evaluator.getStaticTypeOf(A_symbol__12, I_0);
-				LibraryBinaryOperation dynamic_A_symbol__13 = (LibraryBinaryOperation)static_A_symbol__13.lookupImplementation(standardLibrary, O_Real__gt_);
-				Object A_symbol__13 = dynamic_A_symbol__13.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__12, I_0);
+				
+				Object A_symbol__12 = StringSizeOperation.INSTANCE.evaluate(evaluator, T_Integer, A_symbol__11);
+				Object A_symbol__13 = NumericGreaterThanOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__12, I_0);
 				rightA_symbol__7 = A_symbol__13;
 			} catch (InvalidValueException e) {
 				rightA_symbol__7 = createInvalidValue(e);
 			}
 			Object A_symbol__13 = rightA_symbol__7;
-			DomainType static_A_symbol__7 = evaluator.getStaticTypeOf(A_symbol__10);
-			LibraryBinaryOperation dynamic_A_symbol__7 = (LibraryBinaryOperation)static_A_symbol__7.lookupImplementation(standardLibrary, O_Boolean_implies);
-			Object A_symbol__7 = dynamic_A_symbol__7.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__10, A_symbol__13);
+			Object A_symbol__7 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__10, A_symbol__13);
 			return A_symbol__7;
 		}
 	}
@@ -195,28 +193,25 @@ public class EmployeeBodies
 		*/
 		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 			final @NonNull ExecutorOperation O_Boolean_implies = OCLstdlibTables.Operations._Boolean__implies;
 			final @NonNull ExecutorOperation O_OclAny_oclIsUndefined = OCLstdlibTables.Operations._OclAny__oclIsUndefined;
-			final @NonNull ExecutorType T_company__Employee = CodegencompanyTables.Types._Employee;
-			final @NonNull ExecutorProperty P_Employee_manager = CodegencompanyTables.Properties._Employee__manager;
-			final @NonNull LibraryProperty IP_Employee_manager = P_Employee_manager.getImplementation();
+			final @NonNull TypeId T_company__Employee = CodegencompanyTables.Types._Employee.getTypeId();
 			final @NonNull ExecutorOperation O_Real__gt_ = OCLstdlibTables.Operations._Real___gt_;
-			final @NonNull ExecutorType T_Integer = OCLstdlibTables.Types._Integer;
+			final @NonNull PrimitiveTypeId T_Integer = TypeId.INTEGER;
 			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
-			final @NonNull DomainCollectionType T_OrderedSet_company__Employee_ = standardLibrary.getOrderedSetType(T_company__Employee, null, null);
-			final @NonNull ExecutorProperty P_Employee_directReports = CodegencompanyTables.Properties._Employee__directReports;
-			final @NonNull LibraryProperty IP_Employee_directReports = P_Employee_directReports.getImplementation();
+			final @NonNull CollectionTypeId T_OrderedSet_company__Employee_ = TypeId.ORDERED_SET.getSpecializedId(T_company__Employee);
 			final @NonNull IntegerValue I_0 = integerValueOf(0);
 			
 			Object leftA_symbol__14;
 			try {
 				
-				Object A_symbol__15 = IP_Employee_manager.evaluate(evaluator, T_company__Employee.getTypeId(), self, P_Employee_manager);
+				Employee unboxed_self = (Employee)self;
+				codegen.company.Employee unboxed_A_symbol__15 = unboxed_self.getManager();
+				Object A_symbol__15 = unboxed_A_symbol__15 != null ? unboxed_A_symbol__15 : NULL_VALUE;
 				
-				DomainType static_A_symbol__16 = evaluator.getStaticTypeOf(A_symbol__15);
-				LibraryUnaryOperation dynamic_A_symbol__16 = (LibraryUnaryOperation)static_A_symbol__16.lookupImplementation(standardLibrary, O_OclAny_oclIsUndefined);
-				Object A_symbol__16 = dynamic_A_symbol__16.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__15);
+				
+				Object A_symbol__16 = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__15);
 				leftA_symbol__14 = A_symbol__16;
 			} catch (InvalidValueException e) {
 				leftA_symbol__14 = createInvalidValue(e);
@@ -225,22 +220,19 @@ public class EmployeeBodies
 			Object rightA_symbol__14;
 			try {
 				
-				Object A_symbol__17 = IP_Employee_directReports.evaluate(evaluator, T_OrderedSet_company__Employee_.getTypeId(), self, P_Employee_directReports);
+				Employee unboxed_self = (Employee)self;
+				org.eclipse.emf.common.util.EList<codegen.company.Employee> unboxed_A_symbol__17 = unboxed_self.getDirectReports();
+				Value A_symbol__17 = standardLibrary.createOrderedSetValueOf(T_OrderedSet_company__Employee_, unboxed_A_symbol__17);
 				
-				DomainType static_A_symbol__18 = evaluator.getStaticTypeOf(A_symbol__17);
-				LibraryUnaryOperation dynamic_A_symbol__18 = (LibraryUnaryOperation)static_A_symbol__18.lookupImplementation(standardLibrary, O_Collection_size);
-				Object A_symbol__18 = dynamic_A_symbol__18.evaluate(evaluator, T_Integer.getTypeId(), A_symbol__17);
-				DomainType static_A_symbol__19 = evaluator.getStaticTypeOf(A_symbol__18, I_0);
-				LibraryBinaryOperation dynamic_A_symbol__19 = (LibraryBinaryOperation)static_A_symbol__19.lookupImplementation(standardLibrary, O_Real__gt_);
-				Object A_symbol__19 = dynamic_A_symbol__19.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__18, I_0);
+				
+				Object A_symbol__18 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, T_Integer, A_symbol__17);
+				Object A_symbol__19 = NumericGreaterThanOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__18, I_0);
 				rightA_symbol__14 = A_symbol__19;
 			} catch (InvalidValueException e) {
 				rightA_symbol__14 = createInvalidValue(e);
 			}
 			Object A_symbol__19 = rightA_symbol__14;
-			DomainType static_A_symbol__14 = evaluator.getStaticTypeOf(A_symbol__16);
-			LibraryBinaryOperation dynamic_A_symbol__14 = (LibraryBinaryOperation)static_A_symbol__14.lookupImplementation(standardLibrary, O_Boolean_implies);
-			Object A_symbol__14 = dynamic_A_symbol__14.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__16, A_symbol__19);
+			Object A_symbol__14 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__16, A_symbol__19);
 			return A_symbol__14;
 		}
 	}
@@ -257,19 +249,18 @@ public class EmployeeBodies
 		*/
 		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 			final @NonNull ExecutorOperation O_String__lt__gt_ = OCLstdlibTables.Operations._String___lt__gt_;
-			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
-			final @NonNull ExecutorProperty P_Employee_name = CodegencompanyTables.Properties._Employee__name;
-			final @NonNull LibraryProperty IP_Employee_name = P_Employee_name.getImplementation();
+			final @NonNull PrimitiveTypeId T_String = TypeId.STRING;
 			final @NonNull NullValue Null = NULL_VALUE;
 			
 			
-			Object A_symbol__20 = IP_Employee_name.evaluate(evaluator, T_String.getTypeId(), self, P_Employee_name);
+			Employee unboxed_self = (Employee)self;
+			java.lang.String unboxed_A_symbol__20 = unboxed_self.getName();
+			Object A_symbol__20 = unboxed_A_symbol__20 != null ? unboxed_A_symbol__20 : NULL_VALUE;
 			
-			DomainType static_A_symbol__21 = evaluator.getStaticTypeOf(A_symbol__20, Null);
-			LibraryBinaryOperation dynamic_A_symbol__21 = (LibraryBinaryOperation)static_A_symbol__21.lookupImplementation(standardLibrary, O_String__lt__gt_);
-			Object A_symbol__21 = dynamic_A_symbol__21.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__20, Null);
+			
+			Object A_symbol__21 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__20, Null);
 			return A_symbol__21;
 		}
 	}
@@ -286,20 +277,19 @@ public class EmployeeBodies
 		*/
 		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self, final @NonNull Object manager) throws InvalidValueException {
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 			final @NonNull ExecutorOperation O_Collection_includes = OCLstdlibTables.Operations._Collection__includes;
-			final @NonNull ExecutorType T_company__Employee = CodegencompanyTables.Types._Employee;
-			final @NonNull DomainCollectionType T_OrderedSet_company__Employee_ = standardLibrary.getOrderedSetType(T_company__Employee, null, null);
-			final @NonNull ExecutorProperty P_Employee_reportingChain = CodegencompanyTables.Properties._Employee__reportingChain;
-			final @NonNull LibraryProperty IP_Employee_reportingChain = P_Employee_reportingChain.getImplementation();
+			final @NonNull TypeId T_company__Employee = CodegencompanyTables.Types._Employee.getTypeId();
+			final @NonNull CollectionTypeId T_OrderedSet_company__Employee_ = TypeId.ORDERED_SET.getSpecializedId(T_company__Employee);
 			
 			
-			Object A_symbol__22 = IP_Employee_reportingChain.evaluate(evaluator, T_OrderedSet_company__Employee_.getTypeId(), self, P_Employee_reportingChain);
+			Employee unboxed_self = (Employee)self;
+			org.eclipse.emf.common.util.EList<codegen.company.Employee> unboxed_A_symbol__22 = unboxed_self.getReportingChain();
+			Value A_symbol__22 = standardLibrary.createOrderedSetValueOf(T_OrderedSet_company__Employee_, unboxed_A_symbol__22);
 			
 			
-			DomainType static_A_symbol__23 = evaluator.getStaticTypeOf(A_symbol__22);
-			LibraryBinaryOperation dynamic_A_symbol__23 = (LibraryBinaryOperation)static_A_symbol__23.lookupImplementation(standardLibrary, O_Collection_includes);
-			Object A_symbol__23 = dynamic_A_symbol__23.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__22, manager);
+			
+			Object A_symbol__23 = CollectionIncludesOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__22, manager);
 			return A_symbol__23;
 		}
 	}
@@ -317,9 +307,9 @@ public class EmployeeBodies
 		*/
 		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self, @NonNull DomainProperty property) throws InvalidValueException {
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorType T_company__Employee = CodegencompanyTables.Types._Employee;
-			final @NonNull DomainCollectionType T_Set_company__Employee_ = standardLibrary.getSetType(T_company__Employee, null, null);
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull TypeId T_company__Employee = CodegencompanyTables.Types._Employee.getTypeId();
+			final @NonNull CollectionTypeId T_Set_company__Employee_ = TypeId.SET.getSpecializedId(T_company__Employee);
+			final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 			final @NonNull ExecutorOperation O_Set_select = OCLstdlibTables.Operations._Set__select;
 			final @NonNull ExecutorOperation O_OclElement_allInstances = OCLstdlibTables.Operations._OclElement__allInstances;
 			final @NonNull Object T_Metaclass_company__Employee_ = createTypeValue(CodegencompanyTables.Types._Employee);
@@ -327,7 +317,7 @@ public class EmployeeBodies
 			
 			DomainType static_A_symbol__24 = evaluator.getStaticTypeOf(T_Metaclass_company__Employee_);
 			LibraryUnaryOperation dynamic_A_symbol__24 = (LibraryUnaryOperation)static_A_symbol__24.lookupImplementation(standardLibrary, O_OclElement_allInstances);
-			Object A_symbol__24 = dynamic_A_symbol__24.evaluate(evaluator, T_Set_company__Employee_.getTypeId(), T_Metaclass_company__Employee_);
+			Object A_symbol__24 = dynamic_A_symbol__24.evaluate(evaluator, T_Set_company__Employee_, T_Metaclass_company__Employee_);
 			
 			/** 
 			 * Implementation of the iterator body.
@@ -337,20 +327,18 @@ public class EmployeeBodies
 			/*
 			reportsTo(self)
 			*/
-				public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull Object iterator1) throws InvalidValueException {
+			public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull Object iterator1) throws InvalidValueException {
 					final @NonNull Object V_1_ = iterator1;	// iterator: 1_
 					
 					
-					DomainType static_A_symbol__26 = evaluator.getStaticTypeOf(V_1_);
-					LibraryBinaryOperation dynamic_A_symbol__26 = (LibraryBinaryOperation)static_A_symbol__26.lookupImplementation(standardLibrary, O_Employee_reportsTo);
-					Object A_symbol__26 = dynamic_A_symbol__26.evaluate(evaluator, T_Boolean.getTypeId(), V_1_, self);
+					Object A_symbol__26 = _reportsTo_body_.INSTANCE.evaluate(evaluator, T_Boolean, V_1_, self);
 					return A_symbol__26;
 				}
 			};
 			DomainType static_A_symbol__25 = evaluator.getStaticTypeOf(A_symbol__24);
 			LibraryIteration dynamic_A_symbol__25 = (LibraryIteration)static_A_symbol__25.lookupImplementation(standardLibrary, O_Set_select);
-			Object acc_A_symbol__25 = dynamic_A_symbol__25.createAccumulatorValue(evaluator, T_Set_company__Employee_.getTypeId(), T_Boolean.getTypeId());
-			ExecutorSingleIterationManager manager_A_symbol__25 = new ExecutorSingleIterationManager(evaluator, T_Set_company__Employee_.getTypeId(), body_A_symbol__25, (CollectionValue)A_symbol__24, acc_A_symbol__25);
+			Object acc_A_symbol__25 = dynamic_A_symbol__25.createAccumulatorValue(evaluator, T_Set_company__Employee_, T_Boolean);
+			ExecutorSingleIterationManager manager_A_symbol__25 = new ExecutorSingleIterationManager(evaluator, T_Set_company__Employee_, body_A_symbol__25, (CollectionValue)A_symbol__24, acc_A_symbol__25);
 			Object A_symbol__25 = dynamic_A_symbol__25.evaluateIteration(manager_A_symbol__25);
 			return A_symbol__25;
 		}}
@@ -368,23 +356,22 @@ public class EmployeeBodies
 		*/
 		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self, @NonNull DomainProperty property) throws InvalidValueException {
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorType T_company__Employee = CodegencompanyTables.Types._Employee;
-			final @NonNull DomainCollectionType T_OrderedSet_company__Employee_ = standardLibrary.getOrderedSetType(T_company__Employee, null, null);
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull TypeId T_company__Employee = CodegencompanyTables.Types._Employee.getTypeId();
+			final @NonNull CollectionTypeId T_OrderedSet_company__Employee_ = TypeId.ORDERED_SET.getSpecializedId(T_company__Employee);
+			final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 			final @NonNull ExecutorOperation O_OrderedSet_select = OCLstdlibTables.Operations._OrderedSet__select;
-			final @NonNull ExecutorProperty P_Company_employees = CodegencompanyTables.Properties._Company__employees;
-			final @NonNull LibraryProperty IP_Company_employees = P_Company_employees.getImplementation();
-			final @NonNull ExecutorType T_company__Company = CodegencompanyTables.Types._Company;
-			final @NonNull ExecutorProperty P_Employee_company = CodegencompanyTables.Properties._Employee__company;
-			final @NonNull LibraryProperty IP_Employee_company = P_Employee_company.getImplementation();
+			final @NonNull TypeId T_company__Company = CodegencompanyTables.Types._Company.getTypeId();
 			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
-			final @NonNull ExecutorProperty P_Employee_manager = CodegencompanyTables.Properties._Employee__manager;
-			final @NonNull LibraryProperty IP_Employee_manager = P_Employee_manager.getImplementation();
 			
 			
-			Object A_symbol__29 = IP_Employee_company.evaluate(evaluator, T_company__Company.getTypeId(), self, P_Employee_company);
+			Employee unboxed_self = (Employee)self;
+			codegen.company.Company unboxed_A_symbol__29 = unboxed_self.getCompany();
+			Object A_symbol__29 = unboxed_A_symbol__29 != null ? unboxed_A_symbol__29 : NULL_VALUE;
 			
-			Object A_symbol__27 = IP_Company_employees.evaluate(evaluator, T_OrderedSet_company__Employee_.getTypeId(), A_symbol__29, P_Company_employees);
+			
+			org.eclipse.emf.common.util.EList<codegen.company.Employee> unboxed_A_symbol__27 = unboxed_A_symbol__29.getEmployees();
+			Value A_symbol__27 = standardLibrary.createOrderedSetValueOf(T_OrderedSet_company__Employee_, unboxed_A_symbol__27);
+			
 			
 			
 			/** 
@@ -395,22 +382,25 @@ public class EmployeeBodies
 			/*
 			manager = self
 			*/
-				public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull Object iterator1) throws InvalidValueException {
+			public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull Object iterator1) throws InvalidValueException {
 					final @NonNull Object V_1_ = iterator1;	// iterator: 1_
 					
-					Object A_symbol__30 = IP_Employee_manager.evaluate(evaluator, T_company__Employee.getTypeId(), V_1_, P_Employee_manager);
+					Employee unboxed_V_1_ = (Employee)V_1_;
+					codegen.company.Employee unboxed_A_symbol__30 = unboxed_V_1_.getManager();
+					Object A_symbol__30 = unboxed_A_symbol__30 != null ? unboxed_A_symbol__30 : NULL_VALUE;
+					
 					
 					
 					DomainType static_A_symbol__31 = evaluator.getStaticTypeOf(A_symbol__30, self);
 					LibraryBinaryOperation dynamic_A_symbol__31 = (LibraryBinaryOperation)static_A_symbol__31.lookupImplementation(standardLibrary, O_OclAny__eq_);
-					Object A_symbol__31 = dynamic_A_symbol__31.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__30, self);
+					Object A_symbol__31 = dynamic_A_symbol__31.evaluate(evaluator, T_Boolean, A_symbol__30, self);
 					return A_symbol__31;
 				}
 			};
 			DomainType static_A_symbol__28 = evaluator.getStaticTypeOf(A_symbol__27);
 			LibraryIteration dynamic_A_symbol__28 = (LibraryIteration)static_A_symbol__28.lookupImplementation(standardLibrary, O_OrderedSet_select);
-			Object acc_A_symbol__28 = dynamic_A_symbol__28.createAccumulatorValue(evaluator, T_OrderedSet_company__Employee_.getTypeId(), T_Boolean.getTypeId());
-			ExecutorSingleIterationManager manager_A_symbol__28 = new ExecutorSingleIterationManager(evaluator, T_OrderedSet_company__Employee_.getTypeId(), body_A_symbol__28, (CollectionValue)A_symbol__27, acc_A_symbol__28);
+			Object acc_A_symbol__28 = dynamic_A_symbol__28.createAccumulatorValue(evaluator, T_OrderedSet_company__Employee_, T_Boolean);
+			ExecutorSingleIterationManager manager_A_symbol__28 = new ExecutorSingleIterationManager(evaluator, T_OrderedSet_company__Employee_, body_A_symbol__28, (CollectionValue)A_symbol__27, acc_A_symbol__28);
 			Object A_symbol__28 = dynamic_A_symbol__28.evaluateIteration(manager_A_symbol__28);
 			return A_symbol__28;
 		}}
@@ -427,19 +417,18 @@ public class EmployeeBodies
 		*/
 		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self, @NonNull DomainProperty property) throws InvalidValueException {
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 			final @NonNull ExecutorOperation O_String__lt__gt_ = OCLstdlibTables.Operations._String___lt__gt_;
-			final @NonNull ExecutorType T_String = OCLstdlibTables.Types._String;
-			final @NonNull ExecutorProperty P_Employee_name = CodegencompanyTables.Properties._Employee__name;
-			final @NonNull LibraryProperty IP_Employee_name = P_Employee_name.getImplementation();
+			final @NonNull PrimitiveTypeId T_String = TypeId.STRING;
 			final @NonNull NullValue Null = NULL_VALUE;
 			
 			
-			Object A_symbol__32 = IP_Employee_name.evaluate(evaluator, T_String.getTypeId(), self, P_Employee_name);
+			Employee unboxed_self = (Employee)self;
+			java.lang.String unboxed_A_symbol__32 = unboxed_self.getName();
+			Object A_symbol__32 = unboxed_A_symbol__32 != null ? unboxed_A_symbol__32 : NULL_VALUE;
 			
-			DomainType static_A_symbol__33 = evaluator.getStaticTypeOf(A_symbol__32, Null);
-			LibraryBinaryOperation dynamic_A_symbol__33 = (LibraryBinaryOperation)static_A_symbol__33.lookupImplementation(standardLibrary, O_String__lt__gt_);
-			Object A_symbol__33 = dynamic_A_symbol__33.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__32, Null);
+			
+			Object A_symbol__33 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__32, Null);
 			return A_symbol__33;
 		}}
 
@@ -460,39 +449,40 @@ public class EmployeeBodies
 		*/
 		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self, @NonNull DomainProperty property) throws InvalidValueException {
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 			final @NonNull ExecutorOperation O_OclAny_oclIsUndefined = OCLstdlibTables.Operations._OclAny__oclIsUndefined;
-			final @NonNull ExecutorType T_company__Employee = CodegencompanyTables.Types._Employee;
-			final @NonNull ExecutorProperty P_Employee_manager = CodegencompanyTables.Properties._Employee__manager;
-			final @NonNull LibraryProperty IP_Employee_manager = P_Employee_manager.getImplementation();
-			final @NonNull DomainCollectionType T_OrderedSet_company__Employee_ = standardLibrary.getOrderedSetType(T_company__Employee, null, null);
-			final @NonNull Object A_symbol__34 = createOrderedSetValue(T_OrderedSet_company__Employee_.getTypeId());
+			final @NonNull TypeId T_company__Employee = CodegencompanyTables.Types._Employee.getTypeId();
+			final @NonNull CollectionTypeId T_OrderedSet_company__Employee_ = TypeId.ORDERED_SET.getSpecializedId(T_company__Employee);
+			final @NonNull Object A_symbol__34 = createOrderedSetValue(T_OrderedSet_company__Employee_);
 			final @NonNull ExecutorOperation O_OrderedSet_prepend = OCLstdlibTables.Operations._OrderedSet__prepend;
-			final @NonNull ExecutorProperty P_Employee_reportingChain = CodegencompanyTables.Properties._Employee__reportingChain;
-			final @NonNull LibraryProperty IP_Employee_reportingChain = P_Employee_reportingChain.getImplementation();
 			
 				
-				Object A_symbol__35 = IP_Employee_manager.evaluate(evaluator, T_company__Employee.getTypeId(), self, P_Employee_manager);
+				Employee unboxed_self = (Employee)self;
+				codegen.company.Employee unboxed_A_symbol__35 = unboxed_self.getManager();
+				Object A_symbol__35 = unboxed_A_symbol__35 != null ? unboxed_A_symbol__35 : NULL_VALUE;
 				
-				DomainType static_A_symbol__36 = evaluator.getStaticTypeOf(A_symbol__35);
-				LibraryUnaryOperation dynamic_A_symbol__36 = (LibraryUnaryOperation)static_A_symbol__36.lookupImplementation(standardLibrary, O_OclAny_oclIsUndefined);
-				Object A_symbol__36 = dynamic_A_symbol__36.evaluate(evaluator, T_Boolean.getTypeId(), A_symbol__35);
+				
+				Object A_symbol__36 = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__35);
 			Object A_symbol__37;
 			if (A_symbol__36 == ValuesUtil.TRUE_VALUE) {
 				A_symbol__37 = A_symbol__34;
 			}
 			else if (A_symbol__36 == ValuesUtil.FALSE_VALUE) {
 				
-				Object A_symbol__38 = IP_Employee_manager.evaluate(evaluator, T_company__Employee.getTypeId(), self, P_Employee_manager);
+				codegen.company.Employee unboxed_A_symbol__38 = unboxed_self.getManager();
+				Object A_symbol__38 = unboxed_A_symbol__38 != null ? unboxed_A_symbol__38 : NULL_VALUE;
 				
-				Object A_symbol__39 = IP_Employee_reportingChain.evaluate(evaluator, T_OrderedSet_company__Employee_.getTypeId(), A_symbol__38, P_Employee_reportingChain);
+				
+				org.eclipse.emf.common.util.EList<codegen.company.Employee> unboxed_A_symbol__39 = unboxed_A_symbol__38.getReportingChain();
+				Value A_symbol__39 = standardLibrary.createOrderedSetValueOf(T_OrderedSet_company__Employee_, unboxed_A_symbol__39);
 				
 				
-				Object A_symbol__40 = IP_Employee_manager.evaluate(evaluator, T_company__Employee.getTypeId(), self, P_Employee_manager);
 				
-				DomainType static_A_symbol__41 = evaluator.getStaticTypeOf(A_symbol__39);
-				LibraryBinaryOperation dynamic_A_symbol__41 = (LibraryBinaryOperation)static_A_symbol__41.lookupImplementation(standardLibrary, O_OrderedSet_prepend);
-				Object A_symbol__41 = dynamic_A_symbol__41.evaluate(evaluator, T_OrderedSet_company__Employee_.getTypeId(), A_symbol__39, A_symbol__40);
+				codegen.company.Employee unboxed_A_symbol__40 = unboxed_self.getManager();
+				Object A_symbol__40 = unboxed_A_symbol__40 != null ? unboxed_A_symbol__40 : NULL_VALUE;
+				
+				
+				Object A_symbol__41 = OrderedCollectionPrependOperation.INSTANCE.evaluate(evaluator, T_OrderedSet_company__Employee_, A_symbol__39, A_symbol__40);
 				A_symbol__37 = A_symbol__41;
 			}
 			else {

@@ -18,6 +18,6 @@ package org.eclipse.ocl.examples.domain.ids;
 /**
  * OclVoidTypeId provides a unique identifier for the null type; OclVoid.
  */
-public interface OclVoidTypeId extends CollectedTypeId, CollectionTypeId, TupleTypeId, TypeTemplateParameterId
+public interface OclVoidTypeId extends CollectionTypeId, TupleTypeId, TemplateParameterId
 {
 }

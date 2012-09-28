@@ -51,9 +51,11 @@ import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
+import org.eclipse.ocl.examples.pivot.manager.FinalAnalysis;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.manager.TypeServer;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.uml2.codegen.ecore.genmodel.util.UML2GenModelUtil;
 
 public class GenPackageQueries
@@ -72,6 +74,36 @@ public class GenPackageQueries
 		return genPackage.getEcorePackage().getName();	// Workaround for Acceleo URI resolution bug
 	}
 	
+	public String getEscapedInterfaceName(@NonNull GenPackage genPackage, @NonNull Type type) {
+		GenClass genClass = getGenClass(genPackage, type);
+		if (genClass != null) {
+			return "<%" + genClass.getQualifiedInterfaceName() + "%>";
+		}
+		return "";
+	}
+	
+	public String getEscapedLiteralsName(@NonNull GenPackage genPackage, @NonNull Type type) {
+		GenClassifier genClassifier = getGenClassifier(genPackage, type);
+		if (genClassifier != null) {
+			return "<%" + genClassifier.getGenPackage().getQualifiedPackageInterfaceName() + "%>.Literals." + CodeGenUtil.upperName(genClassifier.getName());
+		}
+		return "";
+	}
+	
+	public String getEscapedPropertyType(@NonNull GenPackage genPackage, @NonNull Property property) {
+		Type owningType = property.getOwningType();
+		if (owningType != null) {
+			GenClass genClass = getGenClass(genPackage, owningType);
+			if (genClass != null) {
+				GenFeature genFeature = getGenFeature(genPackage, genClass, property);
+				if (genFeature != null) {
+					return genFeature.getQualifiedObjectType(genClass);
+				}
+			}
+		}
+		return "";
+	}
+	
 	public @NonNull String getFeatureTypeCast(@NonNull GenPackage genPackage, @NonNull Feature typedElement) {
 		return "(" + typedElement.getClass().getSimpleName() + ")";
 	}
@@ -82,6 +114,17 @@ public class GenPackageQueries
 			String clsName = genClass.getEcoreClass().getName();
 			if (name.equals(clsName)) {
 				return genClass;
+			}
+		}
+		return null;
+	}
+	
+	public @Nullable GenClassifier getGenClassifier(@NonNull GenPackage genPackage, @NonNull Type type) {
+		String name = type.getName();
+		for (GenClassifier genClassifier : genPackage.getGenClassifiers()) {
+			String clsName = genClassifier.getEcoreClassifier().getName();
+			if (name.equals(clsName)) {
+				return genClassifier;
 			}
 		}
 		return null;
@@ -298,6 +341,20 @@ public class GenPackageQueries
 		return pivotPackage;
 	}
 	
+	public String getPropertyGetter(@NonNull GenPackage genPackage, @NonNull Property property) {
+		Type owningType = property.getOwningType();
+		if (owningType != null) {
+			GenClass genClass = getGenClass(genPackage, owningType);
+			if (genClass != null) {
+				GenFeature genFeature = getGenFeature(genPackage, genClass, property);
+				if (genFeature != null) {
+					return genFeature.getGetAccessor();
+				}
+			}
+		}
+		return "";
+	}
+	
 	public String getPropertyType(@NonNull GenPackage genPackage, @NonNull Property property) {
 		Type owningType = property.getOwningType();
 		if (owningType != null) {
@@ -312,6 +369,14 @@ public class GenPackageQueries
 		return "";
 	}
 	
+	public String getQualifiedPackageName(@NonNull GenPackage genPackage) {
+		return genPackage.getQualifiedPackageName();
+	}
+	
+	public String getQualifiedValidatorClassName(@NonNull GenPackage genPackage) {
+		return genPackage.getQualifiedValidatorClassName();
+	}
+	
 	public String getQualifyingPackage(@NonNull GenPackage genPackage, @NonNull Type type) {
 		org.eclipse.ocl.examples.pivot.Package owningPackage = type.getPackage();
 		if (owningPackage != null) {
@@ -321,14 +386,6 @@ public class GenPackageQueries
 			}
 		}
 		return "";
-	}
-	
-	public String getQualifiedPackageName(@NonNull GenPackage genPackage) {
-		return genPackage.getQualifiedPackageName();
-	}
-	
-	public String getQualifiedValidatorClassName(@NonNull GenPackage genPackage) {
-		return genPackage.getQualifiedValidatorClassName();
 	}
 
 	public String getSharedLibrary(@NonNull GenPackage genPackage) {
@@ -435,6 +492,15 @@ public class GenPackageQueries
 			}
 		}
 		return gotThisPackage && gotThatPackage;
+	}
+	
+	public Boolean isFinal(@NonNull GenPackage genPackage, @NonNull Operation anOperation) {
+		MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(genPackage);
+		if (metaModelManager == null) {
+			return false;
+		}
+		FinalAnalysis finalAnalysis = metaModelManager.getPackageManager().getFinalAnalysis();
+		return finalAnalysis.isFinal(anOperation);
 	}
 
 	private @NonNull GenPackage loadGenPackage(@NonNull ResourceSet resourceSet, @NonNull URI genModelURI) {

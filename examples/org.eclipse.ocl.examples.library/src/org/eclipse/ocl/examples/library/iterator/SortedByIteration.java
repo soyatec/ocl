@@ -32,7 +32,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
@@ -51,18 +51,19 @@ public class SortedByIteration extends AbstractIteration
 {
 	protected static class SortingValue extends ValueImpl implements Comparator<Object>
 	{
-		protected final @NonNull CollectedTypeId typeId;
+		protected final @NonNull CollectionTypeId typeId;
 		private final @NonNull DomainEvaluator evaluator;
 		private final boolean isUnique;
 		private final @NonNull LibraryBinaryOperation implementation;
 		private final @NonNull Map<Object, Object> content = new HashMap<Object, Object>();	// User object to sortedBy value
 		private Map<Object, Integer> repeatCounts = null;						// Repeat counts for non-unique content
 
-		public SortingValue(@NonNull DomainEvaluator evaluator, @NonNull CollectedTypeId returnTypeId, @NonNull LibraryBinaryOperation implementation) {
+		public SortingValue(@NonNull DomainEvaluator evaluator, @NonNull CollectionTypeId returnTypeId, @NonNull LibraryBinaryOperation implementation) {
 			this.typeId = returnTypeId;
 			this.evaluator = evaluator;
 			this.implementation = implementation;
-			isUnique = (typeId.getCollectionTypeId() == TypeId.SET) || (typeId.getCollectionTypeId() == TypeId.ORDERED_SET);
+			CollectionTypeId generalizedId = typeId.getGeneralizedId();
+			isUnique = (generalizedId == TypeId.SET) || (generalizedId == TypeId.ORDERED_SET);
 		}
 
 		public @NonNull Object asObject() {
@@ -155,9 +156,9 @@ public class SortedByIteration extends AbstractIteration
 		DomainOperation staticOperation = comparableType.lookupLocalOperation(standardLibrary, LibraryConstants.COMPARE_TO, selfType);
 		try {
 			if (staticOperation != null) {
-				DomainType bodyType = standardLibrary.getType(bodyTypeId);
+				DomainType bodyType = evaluator.getIdResolver().getType(bodyTypeId, null);
 				LibraryFeature implementation = bodyType.lookupImplementation(standardLibrary, staticOperation);
-				return new SortingValue(evaluator, (CollectedTypeId)accumulatorTypeId, (LibraryBinaryOperation) implementation);
+				return new SortingValue(evaluator, (CollectionTypeId)accumulatorTypeId, (LibraryBinaryOperation) implementation);
 			}
 		} catch (Exception e) {
 			throw new InvalidValueException(createInvalidValue(e));

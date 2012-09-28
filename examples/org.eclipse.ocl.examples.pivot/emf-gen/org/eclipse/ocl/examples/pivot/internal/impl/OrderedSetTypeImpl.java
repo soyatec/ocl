@@ -63,10 +63,10 @@ public class OrderedSetTypeImpl
 	@Override
 	public @NonNull TypeId computeId() {
 		if (getUnspecializedElement() == null) {
-			return TypeId.ORDERED_SET.getCollectedTypeId();
+			return TypeId.ORDERED_SET;
 		}
 		else {
-			return TypeId.ORDERED_SET.getCollectedTypeId(getElementType().getTypeId());
+			return TypeId.ORDERED_SET.getSpecializedId(getElementType().getTypeId());
 		}
 	}
 

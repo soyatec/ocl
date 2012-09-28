@@ -33,21 +33,21 @@ import org.eclipse.jdt.annotation.Nullable;
  */
 public interface IdVisitor<R>
 {	
-	@Nullable R visitCollectedId(@NonNull CollectedTypeId id);
 	@Nullable R visitCollectionId(@NonNull CollectionTypeId id);
 	@Nullable R visitEnumerationLiteralId(@NonNull EnumerationLiteralId id);
 	@Nullable R visitInvalidId(@NonNull OclInvalidTypeId id);
-	@Nullable R visitLambdaId(@NonNull LambdaTypeId id);
+	@Nullable R visitLambdaTypeId(@NonNull LambdaTypeId id);
 	@Nullable R visitNestedPackageId(@NonNull NestedPackageId id);
 	@Nullable R visitNestedTypeId(@NonNull NestedTypeId id);
 	@Nullable R visitNsURIPackageId(@NonNull NsURIPackageId id);
 	@Nullable R visitNullId(@NonNull OclVoidTypeId id);
 	@Nullable R visitOperationId(@NonNull OperationId id);
-	@Nullable R visitOperationTemplateParameterId(@NonNull OperationTemplateParameterId id);
 	@Nullable R visitPrimitiveTypeId(@NonNull PrimitiveTypeId id);
 	@Nullable R visitRootPackageId(@NonNull RootPackageId id);
-	@Nullable R visitSpecializedTypeId(@NonNull SpecializedTypeId id);
-	@Nullable R visitTupleId(@NonNull TupleTypeId id);
-	@Nullable R visitTypeTemplateParameterId(@NonNull TypeTemplateParameterId id);
+	@Nullable R visitTemplateBinding(@NonNull TemplateBinding templateBinding);
+	@Nullable R visitTemplateParameterId(@NonNull TemplateParameterId id);
+	@Nullable R visitTemplateableTypeId(@NonNull TemplateableTypeId id);
+	@Nullable R visitTuplePartId(@NonNull TuplePartId id);
+	@Nullable R visitTupleTypeId(@NonNull TupleTypeId id);
 	@Nullable R visitUnspecifiedId(@NonNull UnspecifiedId id);
 }

@@ -397,7 +397,7 @@ public class PivotEvaluationEnvironment extends AbstractEvaluationEnvironment {
 //    	throw new UnsupportedOperationException(getClass().getName() + ".navigateProperty");
 //    }
 
-	public DomainTypedElement createVariable(String name, DomainType type) {
+	public @NonNull DomainTypedElement createVariable(@NonNull String name, @NonNull DomainType type) {
 		Variable variable = PivotFactory.eINSTANCE.createVariable();
 		variable.setName(name);
 		variable.setType((Type) type);

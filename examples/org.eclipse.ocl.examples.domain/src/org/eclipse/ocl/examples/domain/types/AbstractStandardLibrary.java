@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.domain.types;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -46,6 +47,8 @@ import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
+import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Bag;
@@ -184,7 +187,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		return firstInheritance.isSuperInheritanceOf(this, secondInheritance);
 	}
 	
-	public @NonNull BagValue createBagValueOf(@NonNull CollectedTypeId typeId, @NonNull Object... objects) {
+	public @NonNull BagValue createBagValueOf(@NonNull CollectionTypeId typeId, @NonNull Object... objects) {
 		Bag<Object> values = new BagImpl<Object>();
 		for (Object object : objects) {
 			values.add(valueOf(object));
@@ -192,7 +195,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		return ValuesUtil.createBagValue(typeId, values);
 	}
 
-	public @NonNull BagValue createBagValueOf(@NonNull CollectedTypeId typeId, @NonNull Iterable<? extends Object> objects) {
+	public @NonNull BagValue createBagValueOf(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> objects) {
 		Bag<Object> values = new BagImpl<Object>();
 		for (Object object : objects) {
 			values.add(valueOf(object));
@@ -200,7 +203,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		return ValuesUtil.createBagValue(typeId, values);
 	}
 
-	public @NonNull OrderedSetValue createOrderedSetValueOf(@NonNull CollectedTypeId typeId, @NonNull Object... objects) {
+	public @NonNull OrderedSetValue createOrderedSetValueOf(@NonNull CollectionTypeId typeId, @NonNull Object... objects) {
 		OrderedSet<Object> values = new OrderedSetImpl<Object>();
 		for (Object object : objects) {
 			values.add(valueOf(object));
@@ -208,7 +211,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		return ValuesUtil.createOrderedSetValue(typeId, values);
 	}
 
-	public @NonNull OrderedSetValue createOrderedSetValueOf(@NonNull CollectedTypeId typeId, @NonNull Iterable<? extends Object> objects) {
+	public @NonNull OrderedSetValue createOrderedSetValueOf(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> objects) {
 		OrderedSet<Object> values = new OrderedSetImpl<Object>();
 		for (Object object : objects) {
 			values.add(valueOf(object));
@@ -216,7 +219,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		return ValuesUtil.createOrderedSetValue(typeId, values);
 	}
 
-	public @NonNull SequenceValue createSequenceValueOf(@NonNull CollectedTypeId typeId, @NonNull Object... objects) {
+	public @NonNull SequenceValue createSequenceValueOf(@NonNull CollectionTypeId typeId, @NonNull Object... objects) {
 		List<Object> values = new ArrayList<Object>();
 		for (Object object : objects) {
 			values.add(valueOf(object));
@@ -224,7 +227,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		return ValuesUtil.createSequenceValue(typeId, values);
 	}
 
-	public @NonNull SequenceValue createSequenceValueOf(@NonNull CollectedTypeId typeId, @NonNull Iterable<? extends Object> objects) {
+	public @NonNull SequenceValue createSequenceValueOf(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> objects) {
 		List<Object> values = new ArrayList<Object>();
 		for (Object object : objects) {
 			values.add(valueOf(object));
@@ -232,7 +235,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		return ValuesUtil.createSequenceValue(typeId, values);
 	}
 
-	public @NonNull SetValue createSetValueOf(@NonNull CollectedTypeId typeId, @NonNull Object... objects) {
+	public @NonNull SetValue createSetValueOf(@NonNull CollectionTypeId typeId, @NonNull Object... objects) {
 		Set<Object> values = new HashSet<Object>();
 		for (Object object : objects) {
 			values.add(valueOf(object));
@@ -240,7 +243,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		return ValuesUtil.createSetValue(typeId, values);
 	}
 
-	public @NonNull SetValue createSetValueOf(@NonNull CollectedTypeId typeId, @NonNull Iterable<? extends Object> objects) {
+	public @NonNull SetValue createSetValueOf(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> objects) {
 		Set<Object> values = new HashSet<Object>();
 		for (Object object : objects) {
 			values.add(valueOf(object));
@@ -281,31 +284,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		}
 	}
 
-	public @NonNull DomainType getCollectionType(@NonNull CollectionTypeId typeId) {
-		if (typeId == TypeId.BAG) {
-			return getBagType();
-		}
-		else if (typeId == TypeId.COLLECTION) {
-			return getCollectionType();
-		}
-		else if (typeId == TypeId.ORDERED_SET) {
-			return getOrderedSetType();
-		}
-		else if (typeId == TypeId.SEQUENCE) {
-			return getSequenceType();
-		}
-		else if (typeId == TypeId.SET) {
-			return getSetType();
-		}
-		else if (typeId == TypeId.METACLASS) {
-			return getMetaclassType();
-		}
-		else {
-			throw new UnsupportedOperationException();
-		}
-	}
-
-	public @NonNull DomainType getCollectionType(@NonNull CollectedTypeId typeId) {
+/*	public @NonNull DomainType getCollectionType(@NonNull CollectionTypeId typeId) {
 		@NonNull CollectionTypeId collectionId = typeId.getCollectionTypeId();
 		DomainType elementType = (DomainType) typeId.getElementTypeId().accept(idResolver);
 		assert elementType != null;
@@ -330,7 +309,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		else {
 			throw new UnsupportedOperationException();
 		}
-	}
+	} */
 	
 /*	public final @NonNull DomainType getDynamicTypeOf(@NonNull IdResolver idResolver, @NonNull Object value) {
 		if (value instanceof NullValue) {
@@ -514,6 +493,10 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		return type;
 	} */
 
+	public synchronized @NonNull DomainTypedElement getTuplePart(@NonNull String name, @NonNull TypeId typeId) {
+		return getTuplePart(name, getIdResolver().getType(typeId, null));
+	}
+	@Deprecated
 	public synchronized @NonNull DomainTypedElement getTuplePart(@NonNull String name, @NonNull DomainType type) {
 		if (tupleParts == null) {
 			tupleParts = new WeakHashMap<String, Map<DomainType, WeakReference<DomainTypedElement>>>();
@@ -532,11 +515,11 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 	}
 	
 	public @NonNull DomainTupleType getTupleType(DomainTypedElement ... parts) {
-		List<DomainTypedElement> partsList = new ArrayList<DomainTypedElement>(parts.length);
+		List<TuplePartId> partsList = new ArrayList<TuplePartId>(parts.length);
 		for (DomainTypedElement part : parts) {
-			partsList.add(part);
+			partsList.add(IdManager.INSTANCE.createTuplePartId(part.getName(), part.getTypeId()));
 		}
-		return getTupleType(IdManager.INSTANCE.getTupleTypeId("Tuple", partsList));
+		return getTupleType(getIdResolver(), IdManager.INSTANCE.getTupleTypeId("Tuple", partsList));
 	}
 
 	public @NonNull DomainType getType(@NonNull DomainElement element) {
@@ -544,12 +527,6 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 			return getType(DomainUtil.nonNullEMF(((EObject)element).eClass()));
 		}
 		throw new UnsupportedOperationException();
-	}
-
-	public @NonNull DomainType getType(@NonNull TypeId typeId) {
-		DomainElement type = typeId.accept(idResolver);
-		assert type != null;
-		return (DomainType)type;
 	}
 
 	public @Nullable DomainType getTypeTemplateParameter(@NonNull DomainType aType, int index) {
@@ -621,7 +598,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 			try {
 				Object[] objects = (Object[])object;
 				TypeId elementTypeId = getIdResolver().getDynamicTypeOf(objects).getTypeId();
-				CollectedTypeId collectedTypeId = TypeId.SEQUENCE.getCollectedTypeId(elementTypeId);
+				CollectionTypeId collectedTypeId = TypeId.SEQUENCE.getSpecializedId(elementTypeId);
 				return ValuesUtil.createSequenceValue(collectedTypeId, (Object[])object);
 			} 
 			catch (IllegalArgumentException e) {}
@@ -629,7 +606,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		else if (object instanceof Iterable<?>) {
 			Iterable<?> objects = (Iterable<?>)object;
 			TypeId elementTypeId = getIdResolver().getDynamicTypeOf(objects).getTypeId();
-			CollectedTypeId collectedTypeId = TypeId.SEQUENCE.getCollectedTypeId(elementTypeId);
+			CollectionTypeId collectedTypeId = TypeId.SEQUENCE.getSpecializedId(elementTypeId);
 			if ((object instanceof LinkedHashSet) || (object instanceof OrderedSet)) {
 				return ValuesUtil.createOrderedSetValue(collectedTypeId, objects);
 			}

@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.EList;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Type Template Parameter</b></em>'.
+ * @extends org.eclipse.ocl.examples.domain.elements.DomainTypeTemplateParameter
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
@@ -40,7 +41,7 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface TypeTemplateParameter
-		extends TemplateParameter {
+		extends TemplateParameter, org.eclipse.ocl.examples.domain.elements.DomainTypeTemplateParameter {
 
 	/**
 	 * Returns the value of the '<em><b>Allow Substitutable</b></em>' attribute.

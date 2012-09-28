@@ -14,9 +14,12 @@
  */
 package org.eclipse.ocl.examples.domain.ids;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  * A UnspecifiedTypeId provides a unique identifier for an unspecified type such as a wildcard or under-specified type.
  */
 public interface UnspecifiedId extends TypeId
 {
+	@NonNull Object getSpecifier();
 }

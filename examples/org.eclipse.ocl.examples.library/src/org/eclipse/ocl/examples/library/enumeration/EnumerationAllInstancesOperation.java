@@ -25,7 +25,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 
@@ -45,6 +45,6 @@ public class EnumerationAllInstancesOperation extends AbstractUnaryOperation
 				results.add(createEnumerationLiteralValue(instance));
 			}
 		}
-		return createSetValue((CollectedTypeId)returnTypeId, results);
+		return createSetValue((CollectionTypeId)returnTypeId, results);
 	}
 }

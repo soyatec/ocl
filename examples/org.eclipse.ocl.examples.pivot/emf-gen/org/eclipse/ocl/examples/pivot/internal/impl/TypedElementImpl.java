@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -250,5 +251,10 @@ public abstract class TypedElementImpl
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitTypedElement(this);
+	}
+
+	public @NonNull TypeId getTypeId() {
+		Type type2 = getType();
+		return type2 != null ? type2.getTypeId() : TypeId.OCL_INVALID;
 	}
 } //TypedElementImpl

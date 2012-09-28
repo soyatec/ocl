@@ -16,6 +16,7 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
+import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
 
@@ -26,15 +27,15 @@ public abstract class UnscopedId extends AbstractTypeId
 	
 	/**
 	 * Map from the operation hashCode to the lambda typeIds with the same hash. 
-	 */
-	private @NonNull WeakHashMapOfListOfWeakReference<Integer, DomainTypeParameters, OperationIdImpl> memberOperations =
-		new WeakHashMapOfListOfWeakReference<Integer, DomainTypeParameters, OperationIdImpl>()
+	 *
+	private @NonNull WeakHashMapOfListOfWeakReference<Integer, DomainParameterTypes, OperationIdImpl> memberOperations =
+		new WeakHashMapOfListOfWeakReference<Integer, DomainParameterTypes, OperationIdImpl>()
 		{
 			@Override
-			protected @NonNull OperationIdImpl newTypeId(@NonNull Integer hashCode, @NonNull DomainTypeParameters typeParameters, @NonNull String name) {
-				return new OperationIdImpl(UnscopedId.this, name, typeParameters, hashCode);
+			protected @NonNull OperationIdImpl newTypeId(@NonNull Integer hashCode, @NonNull DomainParameterTypes parameterTypes, @NonNull String name) {
+				return new OperationIdImpl(UnscopedId.this, name, parameterTypes, hashCode);
 			}		
-		};
+		}; */
 
 	/**
 	 * Map from a type parameter name to the corresponding TypeParameterId. 
@@ -60,14 +61,14 @@ public abstract class UnscopedId extends AbstractTypeId
 		return name;
 	}
 
-	@Override
+/*	@Override
 	public @NonNull OperationId getOperationId(@NonNull DomainOperation anOperation) {
 		String name = anOperation.getName();
 		assert name != null;
 		DomainTypeParameters typeParameters = anOperation.getTypeParameters();
 		int hashCode = 47 * hashCode() + 37 * name.hashCode() + typeParameters.hashCode();
-		return memberOperations.getTypeId(hashCode, typeParameters, name);
-	}
+		return memberOperations.getTypeId(hashCode, anOperation.getParameterTypes(), name);
+	} */
 
 //    @Override
 //	public @NonNull TypeTemplateParameterId getTypeParameterId(final @NonNull String name) {

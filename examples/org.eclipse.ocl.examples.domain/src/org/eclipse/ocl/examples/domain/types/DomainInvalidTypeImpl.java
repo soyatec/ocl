@@ -22,10 +22,6 @@ public class DomainInvalidTypeImpl extends AbstractType implements DomainInvalid
 		return false;
 	}
 
-	public @NonNull TypeId getCollectedTypeId() {
-		return TypeId.OCL_INVALID;
-	}
-
 	@Override
 	public @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		return this;

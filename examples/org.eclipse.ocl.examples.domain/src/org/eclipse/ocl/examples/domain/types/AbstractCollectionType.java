@@ -21,7 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -31,7 +31,7 @@ public class AbstractCollectionType extends AbstractSpecializedType implements D
 	protected final @NonNull DomainType elementType;
 	protected final @NonNull IntegerValue lower;
 	protected final @NonNull IntegerValue upper;
-	protected final @NonNull CollectedTypeId typeId;
+	protected final @NonNull CollectionTypeId typeId;
 	
 	public AbstractCollectionType(@NonNull DomainStandardLibrary standardLibrary, @NonNull String name,
 			@NonNull DomainType containerType, @NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
@@ -39,7 +39,7 @@ public class AbstractCollectionType extends AbstractSpecializedType implements D
 		this.elementType = elementType;
 		this.lower = lower != null ? lower : ValuesUtil.ZERO_VALUE;
 		this.upper = upper != null ? upper : ValuesUtil.UNLIMITED_VALUE;
-		this.typeId = IdManager.INSTANCE.getCollectedTypeId(name, elementType.getTypeId());
+		this.typeId = IdManager.INSTANCE.getCollectionTypeId(name).getSpecializedId(elementType.getTypeId());
 	}
 
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
@@ -105,7 +105,7 @@ public class AbstractCollectionType extends AbstractSpecializedType implements D
 //		return getTypeId().getCollectionTypeId().getMetaTypeName();
 //	}
 
-	public @NonNull CollectedTypeId getTypeId() {
+	public @NonNull CollectionTypeId getTypeId() {
 		return typeId;
 	}
 

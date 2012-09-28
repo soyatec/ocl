@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 
 public interface DomainEvaluator
 {
@@ -28,6 +29,7 @@ public interface DomainEvaluator
 	@NonNull Object evaluate(@NonNull DomainExpression body);
 	@NonNull DomainType getDynamicTypeOf(@NonNull Object value);
 	@NonNull DomainEvaluationEnvironment getEvaluationEnvironment();
+	@NonNull IdResolver getIdResolver();
 
 	/**
 	 * Return the manager of all model instances for use by allInstances() and hidden opposite support.

@@ -27,6 +27,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
@@ -123,6 +124,10 @@ public abstract class AbstractEvaluationVisitor
     // implements the interface method
 	public @NonNull EvaluationEnvironment getEvaluationEnvironment() {
 		return evaluationEnvironment;
+	}
+
+	public @NonNull IdResolver getIdResolver() {
+		return metaModelManager.getIdResolver();
 	}
 
 	public @NonNull MetaModelManager getMetaModelManager() {

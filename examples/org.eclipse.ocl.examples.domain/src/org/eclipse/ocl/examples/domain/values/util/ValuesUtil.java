@@ -35,13 +35,12 @@ import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluationEnvironment;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -320,20 +319,20 @@ public abstract class ValuesUtil
 		}
 	}
 
-	public static @NonNull BagValue createBagValue(@NonNull CollectedTypeId typeId, @NonNull Bag<? extends Object> values) {
+	public static @NonNull BagValue createBagValue(@NonNull CollectionTypeId typeId, @NonNull Bag<? extends Object> values) {
 		return new BagValueImpl(typeId, values);
 	}
 	
-	public static @NonNull BagValue createBagValue(@NonNull CollectedTypeId typeId, Object... values) {
+	public static @NonNull BagValue createBagValue(@NonNull CollectionTypeId typeId, @NonNull Object... values) {
 		return new BagValueImpl(typeId, values);
 	}
 	
-	public static @NonNull BagValue createBagValue(@NonNull CollectedTypeId typeId, @NonNull Iterable<? extends Object> values) {
+	public static @NonNull BagValue createBagValue(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> values) {
 		return new BagValueImpl(typeId, values);
 	}
 
-	public static @NonNull CollectionValue.Accumulator createCollectionAccumulatorValue(@NonNull CollectedTypeId collectedId) {
-		CollectionTypeId collectionId = collectedId.getCollectionTypeId();
+	public static @NonNull CollectionValue.Accumulator createCollectionAccumulatorValue(@NonNull CollectionTypeId collectedId) {
+		CollectionTypeId collectionId = collectedId.getGeneralizedId();
 		if (collectionId == TypeId.BAG) {
 			return new BagValueImpl.Accumulator(collectedId);
 		}
@@ -364,21 +363,21 @@ public abstract class ValuesUtil
 //		return createCollectionValue(isOrdered, isUnique, getElementType(values), values);
 //	}
 
-	public static @NonNull CollectionValue createCollectionValue(boolean isOrdered, boolean isUnique, @NonNull TypeId elementTypeId, Object... values) {
+	public static @NonNull CollectionValue createCollectionValue(boolean isOrdered, boolean isUnique, @NonNull TypeId elementTypeId, @NonNull Object... values) {
 		if (isOrdered) {
 			if (isUnique) {
-				return createOrderedSetValue(TypeId.ORDERED_SET.getCollectedTypeId(elementTypeId), values);
+				return createOrderedSetValue(TypeId.ORDERED_SET.getSpecializedId(elementTypeId), values);
 			}
 			else {
-				return createSequenceValue(TypeId.SEQUENCE.getCollectedTypeId(elementTypeId), values);
+				return createSequenceValue(TypeId.SEQUENCE.getSpecializedId(elementTypeId), values);
 			}
 		}
 		else {
 			if (isUnique) {
-				return createSetValue(TypeId.SET.getCollectedTypeId(elementTypeId), values);
+				return createSetValue(TypeId.SET.getSpecializedId(elementTypeId), values);
 			}
 			else {
-				return createBagValue(TypeId.BAG.getCollectedTypeId(elementTypeId), values);
+				return createBagValue(TypeId.BAG.getSpecializedId(elementTypeId), values);
 			}
 		}
 	}
@@ -394,24 +393,24 @@ public abstract class ValuesUtil
 	public static @NonNull CollectionValue createCollectionValue(boolean isOrdered, boolean isUnique, @NonNull TypeId elementTypeId, @NonNull Collection<? extends Object> values) {
 		if (isOrdered) {
 			if (isUnique) {
-				return createOrderedSetValue(TypeId.ORDERED_SET.getCollectedTypeId(elementTypeId), values);
+				return createOrderedSetValue(TypeId.ORDERED_SET.getSpecializedId(elementTypeId), values);
 			}
 			else {
-				return createSequenceValue(TypeId.SEQUENCE.getCollectedTypeId(elementTypeId), values);
+				return createSequenceValue(TypeId.SEQUENCE.getSpecializedId(elementTypeId), values);
 			}
 		}
 		else {
 			if (isUnique) {
-				return createSetValue(TypeId.SET.getCollectedTypeId(elementTypeId), values);
+				return createSetValue(TypeId.SET.getSpecializedId(elementTypeId), values);
 			}
 			else {
-				return createBagValue(TypeId.BAG.getCollectedTypeId(elementTypeId), values);
+				return createBagValue(TypeId.BAG.getSpecializedId(elementTypeId), values);
 			}
 		}
 	}
 
-	public static @NonNull CollectionValue createCollectionValue(@NonNull CollectedTypeId collectedId, @NonNull Iterable<?> values) {
-		CollectionTypeId collectionId = collectedId.getCollectionTypeId();
+	public static @NonNull CollectionValue createCollectionValue(@NonNull CollectionTypeId collectedId, @NonNull Iterable<?> values) {
+		CollectionTypeId collectionId = collectedId.getGeneralizedId();
 		if (collectionId == TypeId.BAG) {
 			return createBagValue(collectedId, values);
 		}
@@ -430,6 +429,10 @@ public abstract class ValuesUtil
 		return new EnumerationLiteralValueImpl(element);
 	}
 
+//	public static @NonNull EnumerationLiteralValue createEnumerationLiteralValue(@NonNull DomainEnumerationLiteral element, @NonNull EEnum eEnum) {
+//		return new EnumerationLiteralValueImpl(element);
+//	}
+
 	public static @NonNull EnumerationLiteralValue createEnumerationLiteralValue(@NonNull EEnumLiteral eEnumLiteral) {
 		EEnum eEnum = eEnumLiteral.getEEnum();
 		assert eEnum != null;
@@ -438,6 +441,16 @@ public abstract class ValuesUtil
 		assert name != null;
 		EnumerationLiteralId enumerationLiteralId = enumId.getEnumerationLiteralId(name);
 		return new EEnumLiteralValueImpl(enumerationLiteralId, eEnumLiteral);
+	}
+
+	public static @NonNull EnumerationLiteralValue createEnumerationLiteralValue(@NonNull Enumerator enumerator, @NonNull EEnum eEnum) {
+//		EEnum eEnum = eEnumLiteral.getEEnum();
+		assert eEnum != null;
+		TypeId enumId = IdManager.INSTANCE.getTypeId(eEnum);
+		String name = enumerator.getName();
+		assert name != null;
+		EnumerationLiteralId enumerationLiteralId = enumId.getEnumerationLiteralId(name);
+		return new EEnumLiteralValueImpl(enumerationLiteralId, eEnum.getEEnumLiteral(name));
 	}
 
 	public static @NonNull InvalidValue createInvalidValue(@NonNull Exception exception) {
@@ -471,19 +484,19 @@ public abstract class ValuesUtil
 		return new JavaObjectValueImpl(object);
 	}
 
-	public static @NonNull OrderedSetValue createOrderedSetRange(@NonNull CollectedTypeId typeId, @NonNull IntegerRange range) {
+	public static @NonNull OrderedSetValue createOrderedSetRange(@NonNull CollectionTypeId typeId, @NonNull IntegerRange range) {
 		return new RangeOrderedSetValueImpl(typeId, range);
 	}
 
-	public static @NonNull OrderedSetValue createOrderedSetValue(@NonNull CollectedTypeId typeId, Object... values) {
+	public static @NonNull OrderedSetValue createOrderedSetValue(@NonNull CollectionTypeId typeId, @NonNull Object... values) {
 		return new SparseOrderedSetValueImpl(typeId, values);
 	}
 
-	public static @NonNull OrderedSetValue createOrderedSetValue(@NonNull CollectedTypeId typeId, @NonNull OrderedSet<? extends Object> values) {
+	public static @NonNull OrderedSetValue createOrderedSetValue(@NonNull CollectionTypeId typeId, @NonNull OrderedSet<? extends Object> values) {
 		return new SparseOrderedSetValueImpl(typeId, values);
 	}
 
-	public static @NonNull OrderedSetValue createOrderedSetValue(@NonNull CollectedTypeId typeId, @NonNull Iterable<? extends Object> values) {
+	public static @NonNull OrderedSetValue createOrderedSetValue(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> values) {
 		return new SparseOrderedSetValueImpl(typeId, values);
 	}
 
@@ -491,35 +504,39 @@ public abstract class ValuesUtil
 		return new IntegerRangeImpl(firstInteger, lastInteger);
 	}
 
-	public static @NonNull SequenceValue createSequenceRange(@NonNull CollectedTypeId typeId, @NonNull IntegerRange range) {
+	public static @NonNull SequenceValue createSequenceRange(@NonNull CollectionTypeId typeId, @NonNull IntegerRange range) {
 		return new RangeSequenceValueImpl(typeId, range);
 	}
 
-	public static @NonNull SequenceValue createSequenceValue(@NonNull CollectedTypeId typeId, Object... values) {
+	public static @NonNull SequenceValue createSequenceValue(@NonNull CollectionTypeId typeId, @NonNull Object... values) {
 		return new SparseSequenceValueImpl(typeId, values);
 	}
 
-	public static @NonNull SequenceValue createSequenceValue(@NonNull CollectedTypeId typeId, @NonNull List<? extends Object> values) {
+	public static @NonNull SequenceValue createSequenceValue(@NonNull CollectionTypeId typeId, @NonNull List<? extends Object> values) {
 		return new SparseSequenceValueImpl(typeId, values);
 	}
 
-	public static @NonNull SequenceValue createSequenceValue(@NonNull CollectedTypeId typeId, @NonNull Iterable<? extends Object> values) {
+	public static @NonNull SequenceValue createSequenceValue(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> values) {
 		return new SparseSequenceValueImpl(typeId, values);
 	}
 
-	public static @NonNull SetValue createSetValue(@NonNull CollectedTypeId typeId, @NonNull Set<? extends Object> values) {
+	public static @NonNull SetValue createSetValue(@NonNull CollectionTypeId typeId, @NonNull Set<? extends Object> values) {
 		return new SetValueImpl(typeId, values);
 	}
 
-	public static @NonNull SetValue createSetValue(@NonNull CollectedTypeId typeId, Object... values) {
+	public static @NonNull SetValue createSetValue(@NonNull CollectionTypeId typeId, @NonNull Object... values) {
 		return new SetValueImpl(typeId, values);
 	}
 
-	public static @NonNull SetValue createSetValue(@NonNull CollectedTypeId typeId, @NonNull Iterable<? extends Object> values) {
+	public static @NonNull SetValue createSetValue(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> values) {
 		return new SetValueImpl(typeId, values);
 	}
 
-	public static @NonNull TupleValue createTupleValue(@NonNull TupleTypeId typeId, @NonNull Map<? extends DomainTypedElement, Object> values) {
+	public static @NonNull TupleValue createTupleValue(@NonNull TupleTypeId typeId, @NonNull Map<? extends TuplePartId, Object> values) {
+		return new TupleValueImpl(typeId, values);
+	}
+
+	public static @NonNull TupleValue createTupleValue(@NonNull TupleTypeId typeId, @NonNull Object... values) {
 		return new TupleValueImpl(typeId, values);
 	}
 
@@ -847,7 +864,7 @@ public abstract class ValuesUtil
 
 	public static @NonNull Object valueOf(@NonNull Object eValue, @NonNull ETypedElement eFeature, @Nullable TypeId typeId) {
 		EClassifier eClassifier = eFeature.getEType();
-		if (typeId instanceof CollectedTypeId) {
+		if (typeId instanceof CollectionTypeId) {
 			Collection<?> eValues = (Collection<?>) eValue;
 			if (eClassifier instanceof EDataType) {
 				ArrayList<Object> values = new ArrayList<Object>(eValues.size());
@@ -858,7 +875,7 @@ public abstract class ValuesUtil
 				}
 				eValues = values;
 			}
-			return ValuesUtil.createCollectionValue((CollectedTypeId)typeId, eValues);
+			return ValuesUtil.createCollectionValue((CollectionTypeId)typeId, eValues);
 		}
 		else {
 			if (eClassifier instanceof EClassifier) {

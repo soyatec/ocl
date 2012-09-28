@@ -30,7 +30,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
@@ -166,6 +166,17 @@ public class IteratorsTest extends PivotTestSuite
         // negative
         assertQueryNotSame(pkg1, bob, "nestedPackage->any(name = 'pkg2')");
 
+//        assertQueryInvalid(null, "Sequence{}->any(s | s = false)");
+        assertQueryNull(null, "Sequence{}->any(s | s = false)");
+        assertQueryFalse(null, "Sequence{false}->any(s | s = false)");
+        assertQueryFalse(null, "Sequence{false, false}->any(s | s = false)");
+
+//        assertQueryInvalid(null, "Sequence{}->any(s | s = null)");
+        assertQueryNull(null, "Sequence{}->any(s | s = null)");
+        assertQueryNull(null, "Sequence{null}->any(s | s = null)");
+        assertQueryNull(null, "Sequence{null, null}->any(s | s = null)");
+        
+        
         assertQueryDefined(pkg1, "nestedPackage->any(true)");
         assertQueryNull(pkg1, "nestedPackage->any(false)");
     }
@@ -377,7 +388,7 @@ public class IteratorsTest extends PivotTestSuite
         assertQueryEquals(pkg1, expected3, "self.oclAsType(Package)->closure(nestedPackage->asBag())");
 
         // empty closure
-        CollectedTypeId collectedId = expected1.getCollectedTypeId();
+        CollectionTypeId collectedId = expected1.getTypeId();
 //        @SuppressWarnings("unused") DomainType elementType = collectionType.getElementType();
 		assertQueryEquals(pkg1, metaModelManager.createSetValueOf(collectedId), "self.oclAsType(Package)->closure(nestingPackage)");
 //WIP        assertQueryNotEquals(pkg1, getEmptySetValue(), "self->closure(nestingPackage)");

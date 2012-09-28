@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.library.executor;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluationEnvironment;
@@ -27,15 +28,15 @@ public class ExecutorEvaluationEnvironment implements DomainEvaluationEnvironmen
 {
 	private Map<DomainTypedElement, Object> variables = new HashMap<DomainTypedElement, Object>();
 	
-	public void add(DomainTypedElement variable, Object value) {
+	public void add(@NonNull DomainTypedElement variable, Object value) {
 		variables.put(variable, value);
 	}
 
-	public DomainTypedElement createVariable(String name, DomainType type) {
+	public @NonNull DomainTypedElement createVariable(@NonNull String name, @NonNull DomainType type) {
 		return new ExecutorTypedElement(name, type);
 	}	
 
-	public void replace(DomainTypedElement variable, Object value) {
+	public void replace(@NonNull DomainTypedElement variable, Object value) {
 		variables.put(variable, value);
 	}
 }

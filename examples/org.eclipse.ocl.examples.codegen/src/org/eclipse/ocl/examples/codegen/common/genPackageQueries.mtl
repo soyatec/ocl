@@ -35,6 +35,15 @@ invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getCopyrigh
 [query public getEcorePackageName(genPackage : GenPackage) : String = 
 invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getEcorePackageName(org.eclipse.emf.codegen.ecore.genmodel.GenPackage)', Sequence{genPackage}) /]
 
+[query public getEscapedInterfaceName(type : Type, genPackage : GenPackage) : String = 
+invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getEscapedInterfaceName(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Type)', Sequence{genPackage, type}) /]
+
+[query public getEscapedLiteralsName(type : Type, genPackage : GenPackage) : String = 
+invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getEscapedLiteralsName(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Type)', Sequence{genPackage, type}) /]
+
+[query public getEscapedPropertyType(genPackage : GenPackage, elem : Property) : String = 
+invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getEscapedPropertyType(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Property)', Sequence{genPackage, elem}) /]
+
 [query private getGenPackage(ast : Package, genPackage : GenPackage) : GenPackage = 
 invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getGenPackage(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Package)', Sequence{genPackage, ast}) /]
 
@@ -74,6 +83,9 @@ invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getOperatio
 
 [query public getPivotPackage(genPackage : GenPackage) : Package =
 invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getPivotPackage(org.eclipse.emf.codegen.ecore.genmodel.GenPackage)', Sequence{genPackage}) /]
+
+[query public getPropertyGetter(genPackage : GenPackage, elem : Property) : String = 
+invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getPropertyGetter(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Property)', Sequence{genPackage, elem}) /]
 
 [query public getPropertyType(genPackage : GenPackage, elem : Property) : String = 
 invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getPropertyType(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Property)', Sequence{genPackage, elem}) /]
@@ -141,6 +153,9 @@ invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'hasEcore(or
 
 [query public hasSharedLibrary(genPackage : GenPackage) : Boolean = 
 invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'hasSharedLibrary(org.eclipse.emf.codegen.ecore.genmodel.GenPackage)', Sequence{genPackage}) /]
+
+[query public isFinal(genPackage : GenPackage, operation : Operation) : Boolean = 
+invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'isFinal(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Operation)', Sequence{genPackage, operation}) /]
 
 [query public isProperty(genPackage : GenPackage, property : Property) : Boolean =
 genPackage.hasEcore(property) or ((property.opposite <> null) and genPackage.hasEcore(property.opposite))/]

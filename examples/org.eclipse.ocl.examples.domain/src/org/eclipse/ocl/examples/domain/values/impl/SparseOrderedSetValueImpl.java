@@ -19,7 +19,7 @@ package org.eclipse.ocl.examples.domain.values.impl;
 import java.util.Collection;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
@@ -49,7 +49,7 @@ public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
 
 	public static class Accumulator extends SparseOrderedSetValueImpl implements CollectionValue.Accumulator
 	{
-		public Accumulator(@NonNull CollectedTypeId typeId) {
+		public Accumulator(@NonNull CollectionTypeId typeId) {
 			super(typeId, new OrderedSetImpl<Object>());
 		}
 
@@ -59,15 +59,15 @@ public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
 		}		
 	}
     
-	public SparseOrderedSetValueImpl(@NonNull CollectedTypeId typeId, Object... values) {
+	public SparseOrderedSetValueImpl(@NonNull CollectionTypeId typeId, Object... values) {
 		super(typeId, createValues(values));
 	}
 
-	public SparseOrderedSetValueImpl(@NonNull CollectedTypeId typeId, @NonNull Iterable<? extends Object> values) {
+	public SparseOrderedSetValueImpl(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> values) {
 		super(typeId, createValues(values));
 	}
 
-	public SparseOrderedSetValueImpl(@NonNull CollectedTypeId typeId, @NonNull OrderedSet<? extends Object> values) {
+	public SparseOrderedSetValueImpl(@NonNull CollectionTypeId typeId, @NonNull OrderedSet<? extends Object> values) {
 		super(typeId, values);
 	}
 

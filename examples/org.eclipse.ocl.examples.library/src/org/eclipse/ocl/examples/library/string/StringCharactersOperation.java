@@ -21,7 +21,7 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 
@@ -39,6 +39,6 @@ public class StringCharactersOperation extends AbstractUnaryOperation
 			@SuppressWarnings("null") @NonNull String s = sourceString.substring(i, i+1);
 			results.add(s);
 		}
-		return createSequenceValue((CollectedTypeId)returnTypeId, results);
+		return createSequenceValue((CollectionTypeId)returnTypeId, results);
 	}
 }

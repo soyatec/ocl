@@ -16,9 +16,12 @@
  */
 package org.eclipse.ocl.examples.domain.ids;
 
+import java.util.List;
+import java.util.Map;
+
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainOperation;
-import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
+import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
+import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
 import org.eclipse.ocl.examples.domain.ids.impl.OclInvalidTypeIdImpl;
 import org.eclipse.ocl.examples.domain.ids.impl.OclVoidTypeIdImpl;
 
@@ -29,7 +32,6 @@ import org.eclipse.ocl.examples.domain.ids.impl.OclVoidTypeIdImpl;
  * For instance 'Boolean' is a well-understood conceptual, but it may have many 'actual' as a result of Complete OCL
  * definitions merging additional features in to the 'actual' type.
  * 
- * @see CollectedTypeId
  * @see CollectionTypeId
  * @see LambdaTypeId
  * @see OclInvalidTypeId
@@ -72,15 +74,16 @@ public interface TypeId extends ElementId
 	public static final @NonNull CollectionTypeId SET = IdManager.INSTANCE.getCollectionTypeId("Set");
 	public static final @NonNull CollectionTypeId UNIQUE_COLLECTION = IdManager.INSTANCE.getCollectionTypeId("UniqueCollection");
 
-	public static final @NonNull TypeTemplateParameterId BAG_T = BAG.getElementTypeId();
-	public static final @NonNull TypeTemplateParameterId COLLECTION_T = COLLECTION.getElementTypeId();
-	public static final @NonNull TypeTemplateParameterId METACLASS_T = METACLASS.getElementTypeId();
-	public static final @NonNull TypeTemplateParameterId ORDERED_SET_T = ORDERED_SET.getElementTypeId();
-	public static final @NonNull TypeTemplateParameterId SEQUENCE_T = SEQUENCE.getElementTypeId();
-	public static final @NonNull TypeTemplateParameterId SET_T = SET.getElementTypeId();
-	public static final @NonNull TypeTemplateParameterId UNIQUE_COLLECTION_T = UNIQUE_COLLECTION.getElementTypeId();
+	public static final @NonNull TypeTemplateParameterId BAG_T = (TypeTemplateParameterId) BAG.getTemplateParameterId(0);
+	public static final @NonNull TypeTemplateParameterId COLLECTION_T = (TypeTemplateParameterId) COLLECTION.getTemplateParameterId(0);
+	public static final @NonNull TypeTemplateParameterId METACLASS_T = (TypeTemplateParameterId) METACLASS.getTemplateParameterId(0);
+	public static final @NonNull TypeTemplateParameterId ORDERED_SET_T = (TypeTemplateParameterId) ORDERED_SET.getTemplateParameterId(0);
+	public static final @NonNull TypeTemplateParameterId SEQUENCE_T = (TypeTemplateParameterId) SEQUENCE.getTemplateParameterId(0);
+	public static final @NonNull TypeTemplateParameterId SET_T = (TypeTemplateParameterId) SET.getTemplateParameterId(0);
+	public static final @NonNull TypeTemplateParameterId UNIQUE_COLLECTION_T = (TypeTemplateParameterId) UNIQUE_COLLECTION.getTemplateParameterId(0);
 
 	public static final @NonNull String[] NULL_STRING_ARRAY = new String[0];
+	public static final @NonNull TuplePartId[] NULL_TUPLE_PART_ID_ARRAY = new TuplePartId[0];	
 	public static final @NonNull TypeId[] NULL_TYPE_ID_ARRAY = new TypeId[0];	
 	
 	/**
@@ -97,19 +100,24 @@ public interface TypeId extends ElementId
 	 * <p>
 	 * Throws UnsupportedException for typeIds such as Primitive Types that may not have operations.
      */
-	@NonNull OperationId getOperationId(@NonNull DomainOperation anOperation);
+	@NonNull OperationId getOperationId(@NonNull TemplateParameterId[] templateParameters, @NonNull String name, @NonNull DomainParameterTypes parameterTypes);
 
 	/**
 	 * Return the typeId for this typeId specialized by typeParameters.
 	 * <p>
 	 * Throws UnsupportedException for typeIds such as Primitive Types that may not be specialized.
 	 */
-	@NonNull TypeId getSpecializedTypeId(@NonNull DomainTypeParameters typeParameters);
+//	@NonNull TypeId getSpecializedTypeId(@NonNull DomainTypeParameters typeParameters);
 
 	/**
 	 * Return the typeId for the named type parameter of this typeId.
 	 * <p>
 	 * Throws UnsupportedException for typeIds such as Primitive Types that may not have type parameters.
 	 */
-	@NonNull TypeTemplateParameterId getTemplateParameterId(int index);
+	@NonNull TemplateParameterId getTemplateParameterId(int index);
+	@NonNull TemplateParameterId[] getTemplateParameters();
+
+	void resolveTemplateBindings(@NonNull Map<DomainTemplateParameter, List<TemplateBinding>> bindings);
+
+	@NonNull TypeId specialize(@NonNull TemplateBindings templateBindings);
 }

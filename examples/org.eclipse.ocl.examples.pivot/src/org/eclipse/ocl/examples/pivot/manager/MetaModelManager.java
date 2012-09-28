@@ -56,10 +56,12 @@ import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.types.DomainInvalidTypeImpl;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
@@ -2155,6 +2157,14 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return pivotResourceSet;
 	}
 
+	public @NonNull DomainElement getTemplateParameter(@NonNull TemplateParameterId id, DomainElement context) {
+		DomainElement origin = id.getOrigin();
+		if (origin instanceof TemplateParameter) {
+			return ((TemplateParameter)origin).getParameteredElement();
+		}
+		throw new UnsupportedOperationException();
+	}
+
 	public TupleTypeManager getTupleManager() {
 		if (tupleManager == null) {
 			tupleManager = createTupleManager();
@@ -2177,9 +2187,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return tupleManager.getTupleType(tupleType, bindings);
 	}
 
-	public @NonNull TupleType getTupleType(@NonNull TupleTypeId typeId) {
+	public @NonNull TupleType getTupleType(@NonNull IdResolver idResolver, @NonNull TupleTypeId typeId) {
 		TupleTypeManager tupleManager = getTupleManager();
-		return tupleManager.getTupleType(typeId);
+		return tupleManager.getTupleType(idResolver, typeId);
 	}
 
 	@Override

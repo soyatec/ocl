@@ -38,7 +38,8 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainException;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.library.EvaluatorMultipleIterationManager;
 import org.eclipse.ocl.examples.domain.library.EvaluatorSingleIterationManager;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
@@ -49,6 +50,7 @@ import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.library.LibraryTernaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
@@ -93,7 +95,6 @@ import org.eclipse.ocl.examples.pivot.TupleLiteralPart;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeExp;
-import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
 import org.eclipse.ocl.examples.pivot.UnspecifiedValueExp;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -261,7 +262,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 //			}
 			// construct a lazy integer list for the range
 //			try {
-				CollectedTypeId typeId = type.getTypeId();
+				CollectionTypeId typeId = type.getTypeId();
 				IntegerRange range = ValuesUtil.createRange(firstInteger, lastInteger);
 				if (type.isUnique()) {
 					return ValuesUtil.createOrderedSetRange(typeId, range);
@@ -431,7 +432,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		OCLExpression source = iterateExp.getSource();
 		Object acceptedValue = source.accept(undecoratedVisitor);
 		CollectionValue sourceValue = ValuesUtil.asCollectionValue(acceptedValue);
-		DomainType dynamicSourceType = metaModelManager.getType(sourceValue.getCollectedTypeId());
+		DomainType dynamicSourceType = metaModelManager.getIdResolver().getType(sourceValue.getTypeId(), null);
 		LibraryIteration implementation = (LibraryIteration) dynamicSourceType.lookupImplementation(metaModelManager, staticIteration);
 /*		Operation dynamicIteration = metaModelManager.getDynamicOperation((org.eclipse.ocl.examples.pivot.Type) dynamicSourceType, staticIteration);
  		if (dynamicIteration == null) {
@@ -504,7 +505,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 //		} catch (InvalidValueException e) {
 //			return evaluationEnvironment.throwInvalidEvaluation(e);
 //		}
-		DomainType dynamicSourceType = metaModelManager.getType(sourceValue.getCollectedTypeId());
+		DomainType dynamicSourceType = metaModelManager.getIdResolver().getType(sourceValue.getTypeId(), null);
 		LibraryIteration implementation = (LibraryIteration) dynamicSourceType.lookupImplementation(metaModelManager, staticIteration);
 /*		Operation dynamicIteration = metaModelManager.getDynamicOperation((org.eclipse.ocl.examples.pivot.Type) dynamicSourceType, staticIteration);
  		if (dynamicIteration == null) {
@@ -794,10 +795,10 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	@Override
     public Object visitTupleLiteralExp(@NonNull TupleLiteralExp tl) {
 		DomainType type = DomainUtil.nonNullModel(tl.getType());
-		Map<TypedElement, Object> propertyValues = new HashMap<TypedElement, Object>();		
+		Map<TuplePartId, Object> propertyValues = new HashMap<TuplePartId, Object>();		
 		for (TupleLiteralPart part : tl.getPart()) {
 			// Set the tuple field with the value of the init expression
-			propertyValues.put(part, part.accept(getUndecoratedVisitor()));
+			propertyValues.put(part.getPartId(), part.accept(getUndecoratedVisitor()));
 		}
 //		TupleType tupleType = metaModelManager.getTupleType(type.getName(), propertyValues.keySet());
 		return ValuesUtil.createTupleValue(((TupleType) type).getTupleTypeId(), propertyValues);

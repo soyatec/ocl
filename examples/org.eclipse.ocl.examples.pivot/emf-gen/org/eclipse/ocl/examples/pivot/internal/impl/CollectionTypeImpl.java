@@ -29,6 +29,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -534,10 +535,10 @@ public class CollectionTypeImpl
 	@Override
 	public @NonNull TypeId computeId() {
 		if (getUnspecializedElement() == null) {
-			return TypeId.COLLECTION.getCollectedTypeId();
+			return TypeId.COLLECTION;
 		}
 		else {
-			return TypeId.COLLECTION.getCollectedTypeId(getElementType().getTypeId());
+			return TypeId.COLLECTION.getSpecializedId(getElementType().getTypeId());
 		}
 	}
 	
@@ -598,8 +599,8 @@ public class CollectionTypeImpl
 	}
 	
 	@Override
-	public @NonNull CollectedTypeId getTypeId() {
-		return (CollectedTypeId) super.getTypeId();
+	public @NonNull CollectionTypeId getTypeId() {
+		return (CollectionTypeId) super.getTypeId();
 	}
 
 	@Override

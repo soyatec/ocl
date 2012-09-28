@@ -16,9 +16,6 @@
  */
 package org.eclipse.ocl.examples.domain.values.impl;
 
-import java.util.List;
-
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -27,17 +24,14 @@ import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluationEnvironment;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.OclInvalidTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
-import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
@@ -131,6 +125,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 		throw new InvalidValueException(this);
 	}
 	
+	@Override
 	public @Nullable Object asEcoreObject() {
 		throw new InvalidValueException(this);
 	}
@@ -190,7 +185,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 		return obj instanceof InvalidValue;
 	}
 
-	public @NonNull CollectedTypeId getCollectedTypeId() {
+	public @NonNull OclInvalidTypeId getCollectionTypeId() {
 		return TypeId.OCL_INVALID;
 	}
 	
@@ -206,12 +201,8 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 		return standardLibrary.getOclInvalidType();
 	}
 
-	public @Nullable Value getValue(@NonNull String partName) {
-    	return toInvalidValue();
-	}
-
-	public @Nullable Value getValue(@NonNull DomainTypedElement part) {
-    	return toInvalidValue();
+	public @NonNull OclInvalidTypeId getTypeId() {
+		return TypeId.OCL_INVALID;
 	}
 
 	public int intValue() {

@@ -18,7 +18,7 @@ package org.eclipse.ocl.examples.library.logical;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 
@@ -31,6 +31,6 @@ public class BooleanAllInstancesOperation extends AbstractUnaryOperation
 	
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal) {
 		// Boolean has two instances: false, true
-		return createSetValue((CollectedTypeId)returnTypeId, Boolean.FALSE, Boolean.TRUE);
+		return createSetValue((CollectionTypeId)returnTypeId, Boolean.FALSE, Boolean.TRUE);
 	}
 }

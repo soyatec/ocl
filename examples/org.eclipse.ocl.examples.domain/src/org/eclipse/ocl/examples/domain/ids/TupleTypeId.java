@@ -19,9 +19,9 @@ import org.eclipse.jdt.annotation.NonNull;
 /**
  * A TupleTypeid provides a unique hierarchical identifier a Tuple such as Tuple{first:String,second:Integer}.
  */
-public interface TupleTypeId extends TypeId
+public interface TupleTypeId extends TypeId, TemplateableId
 {
 	@NonNull String getName();
-	@NonNull String[] getPartNames();
-	@NonNull TypeId[] getPartTypeIds();
+	TuplePartId getPartId(@NonNull String name);
+	@NonNull TuplePartId[] getPartIds();
 }

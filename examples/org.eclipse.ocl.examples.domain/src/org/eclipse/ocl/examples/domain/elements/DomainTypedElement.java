@@ -16,7 +16,12 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+
+
 public interface DomainTypedElement extends DomainNamedElement
 {
 	DomainType getType();
+	@NonNull TypeId getTypeId();
 }

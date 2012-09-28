@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
@@ -33,7 +33,7 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
  */
 public class RangeOrderedSetValueImpl extends OrderedSetValueImpl
 {
-	public RangeOrderedSetValueImpl(@NonNull CollectedTypeId typeId, @NonNull IntegerRange range) {
+	public RangeOrderedSetValueImpl(@NonNull CollectionTypeId typeId, @NonNull IntegerRange range) {
 		super(typeId, range);
 	}
 

@@ -15,8 +15,10 @@
  * $Id$
  */
 package org.eclipse.ocl.examples.domain.types;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 public class AbstractTuplePart implements DomainTypedElement
 {
@@ -34,6 +36,11 @@ public class AbstractTuplePart implements DomainTypedElement
 
 	public DomainType getType() {
 		return type;
+	}
+
+	public @NonNull TypeId getTypeId() {
+		DomainType type2 = getType();
+		return type2 != null ? type2.getTypeId() : TypeId.OCL_INVALID;
 	}
 
 	@Override

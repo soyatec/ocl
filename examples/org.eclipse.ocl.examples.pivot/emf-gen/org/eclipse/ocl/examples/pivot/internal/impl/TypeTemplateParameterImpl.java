@@ -27,6 +27,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.TypeTemplateParameterId;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
@@ -379,5 +381,21 @@ public class TypeTemplateParameterImpl
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitTypeTemplateParameter(this);
+	}
+
+	private TypeTemplateParameterId elementId;
+	
+	@Override
+	public @NonNull TypeTemplateParameterId getElementId() {
+		TypeTemplateParameterId elementId2 = elementId;
+		if (elementId2 == null) {
+			synchronized (this) {
+				elementId2 = elementId;
+				if (elementId2 == null) {
+					elementId = elementId2 = IdManager.INSTANCE.createTypeTemplateParameterId(this);
+				}
+			}
+		}
+		return elementId2;
 	}
 } //TypeTemplateParameterImpl

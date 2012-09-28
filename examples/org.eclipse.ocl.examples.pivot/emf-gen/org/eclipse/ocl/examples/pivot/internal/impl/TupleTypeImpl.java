@@ -16,13 +16,18 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -52,15 +57,6 @@ public class TupleTypeImpl
 		super();
 	}
 
-	@Override
-	public @NonNull TypeId computeId() {
-		String name2 = getName();
-		EList<Property> ownedAttribute2 = getOwnedAttribute();
-		assert name2 != null;
-		assert ownedAttribute2 != null;
-		return IdManager.INSTANCE.getTupleTypeId(name2, ownedAttribute2);
-	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -69,6 +65,34 @@ public class TupleTypeImpl
 	@Override
 	protected EClass eStaticClass() {
 		return PivotPackage.Literals.TUPLE_TYPE;
+	}
+	
+	private TupleTypeId tupleTypeId;
+	
+	public TupleTypeImpl(@NonNull TupleTypeId tupleTypeId, List<? extends Property> tupleParts) {
+		this.tupleTypeId = tupleTypeId;;
+		setName(tupleTypeId.getName());
+		getOwnedAttribute().addAll(tupleParts);
+	}
+
+	@Override
+	public @NonNull TypeId computeId() {
+		TupleTypeId tupleTypeId2 = tupleTypeId;
+		if (tupleTypeId2 == null) {
+			String name2 = getName();
+			EList<Property> ownedAttribute2 = getOwnedAttribute();
+			assert name2 != null;
+			assert ownedAttribute2 != null;
+			List<TuplePartId> partIds = new ArrayList<TuplePartId>(ownedAttribute2.size());
+			for (DomainTypedElement ownedAttribute : ownedAttribute2) {
+				String partName = ownedAttribute.getName();
+				assert partName != null;
+				TypeId partTypeId = ownedAttribute.getTypeId();
+				partIds.add(IdManager.INSTANCE.createTuplePartId(partName, partTypeId));
+			}
+			tupleTypeId = tupleTypeId2 = IdManager.INSTANCE.getTupleTypeId(name2, partIds);
+		}
+		return tupleTypeId2;
 	}
 
 	@Override
@@ -84,5 +108,10 @@ public class TupleTypeImpl
 
 	public @NonNull TupleTypeId getTupleTypeId() {
 		return (TupleTypeId) getTypeId();
+	}
+
+	@Override
+	public @NonNull TupleTypeId getTypeId() {
+		return (TupleTypeId) super.getTypeId();
 	}
 } //TupleTypeImpl

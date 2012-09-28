@@ -23,7 +23,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -45,6 +45,6 @@ public class ClassifierAllInstancesOperation extends AbstractUnaryOperation
 				results.add(ValuesUtil.valueOf(instance));	// FIXME Move to model manager
 			}
 		}
-		return createSetValue((CollectedTypeId)returnTypeId, results);
+		return createSetValue((CollectionTypeId)returnTypeId, results);
 	}
 }

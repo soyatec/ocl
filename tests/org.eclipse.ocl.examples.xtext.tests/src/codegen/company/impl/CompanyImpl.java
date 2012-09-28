@@ -43,6 +43,9 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
+import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 
@@ -186,10 +189,10 @@ public class CompanyImpl extends EObjectImpl implements Company {
 		*/
 		try {
 			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
-			final @NonNull ExecutorType T_company__CompanySizeKind = CodegencompanyTables.Types._CompanySizeKind;
-			final @NonNull TypeId returnTypeId = T_company__CompanySizeKind.getTypeId();
-			final @NonNull Object result = CompanyBodies._size_derivation_.INSTANCE.evaluate(evaluator, returnTypeId, this, CodegencompanyTables.Properties._Company__size);
-			return (CompanySizeKind)(result instanceof Value ? ((Value)result).asEcoreObject() : result);
+			final @NonNull TypeId T_company__CompanySizeKind = CodegencompanyTables.Types._CompanySizeKind.getTypeId();
+			
+			final @NonNull Object result = CompanyBodies._size_derivation_.INSTANCE.evaluate(evaluator, T_company__CompanySizeKind, this, CodegencompanyTables.Properties._Company__size);
+			return (CompanySizeKind)((Value)result).asEcoreObject();
 		} catch (InvalidValueException e) {
 			throw new WrappedException("Failed to evaluate codegen.company.bodies.CompanyBodies", e);
 		}
@@ -207,10 +210,9 @@ public class CompanyImpl extends EObjectImpl implements Company {
 		*/
 		try {
 			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
-			final @NonNull ExecutorType T_Boolean = OCLstdlibTables.Types._Boolean;
+			final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 			
-			final @NonNull DomainType returnType = T_Boolean;
-			final @NonNull Object result = CompanyBodies._invariant_dummyInvariant.INSTANCE.evaluate(evaluator, returnType.getTypeId(), this);
+			final @NonNull Object result = CompanyBodies._invariant_dummyInvariant.INSTANCE.evaluate(evaluator, T_Boolean, this);
 			final boolean resultIsNull = ValuesUtil.isNull(result);
 			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;

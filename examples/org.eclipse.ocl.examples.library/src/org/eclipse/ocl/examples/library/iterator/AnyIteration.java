@@ -31,34 +31,14 @@ public class AnyIteration extends AbstractIteration
 {
 	public static final @NonNull AnyIteration INSTANCE = new AnyIteration();
 
-	public static class MutableObject 
-	{
-		private Object value = null;
-		
-		public Object get() {
-			return value;
-		}
-		
-		public void set(Object value) {
-			this.value = value;
-		}
-	}
-
-
 	public @NonNull Object createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull TypeId accumulatorTypeId, @NonNull TypeId bodyTypeId) {
-		return new MutableObject();
+		return NULL_VALUE;
 	}
 	
 	@Override
 	protected @NonNull Object resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
-		MutableObject accumulatorValue = (MutableObject)iterationManager.getAccumulatorValue();
-		Object object = accumulatorValue.get();
-		if (object != null) {
-			return object;		// Normal something found result.
-		}
-		else {
-			return NULL_VALUE;
-		}
+		return NULL_VALUE;
+//		return createInvalidValue("No matching content for 'any'");
 	}
 	
 	@Override
@@ -71,16 +51,8 @@ public class AnyIteration extends AbstractIteration
 			return null;									// Carry on for nothing found
 		}
 		else {
-			MutableObject accumulatorValue = (MutableObject)iterationManager.getAccumulatorValue();
-			Object object = accumulatorValue.get();
-			if (object != null) {
-				return Boolean.FALSE;				// Abort after second find
-			}
-			else {
-				Object value = iterationManager.get();		
-				accumulatorValue.set(value);
-				return null;									// Carry on after first find
-			}
+			Object value = iterationManager.get();		
+			return value;									// Carry on after first find
 		}
 	}
 }

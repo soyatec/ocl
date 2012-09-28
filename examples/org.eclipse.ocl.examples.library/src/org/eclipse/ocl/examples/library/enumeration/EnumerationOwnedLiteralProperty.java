@@ -24,7 +24,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
 import org.eclipse.ocl.examples.domain.values.impl.OrderedSetImpl;
@@ -44,6 +44,6 @@ public class EnumerationOwnedLiteralProperty extends AbstractProperty
 				results.add(valueOf(instance));
 			}
 		}
-		return createOrderedSetValue((CollectedTypeId)returnTypeId, results);
+		return createOrderedSetValue((CollectionTypeId)returnTypeId, results);
 	}
 }

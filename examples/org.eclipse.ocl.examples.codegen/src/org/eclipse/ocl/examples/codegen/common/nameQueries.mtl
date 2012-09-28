@@ -17,6 +17,9 @@
 [comment encoding = UTF-8 /]
 [module org::eclipse::ocl::examples::codegen::common::nameQueries('http://www.eclipse.org/ocl/3.1.0/Pivot','http://www.eclipse.org/emf/2002/Ecore')/]
 
+[query public defineFlag(elem : OclAny, flag : String) : String = 
+invoke('org.eclipse.ocl.examples.codegen.common.NameQueries', 'defineFlag(java.lang.Object, java.lang.String)', Sequence{elem, flag}) /]
+
 [query public defineSymbolName(elem : OclAny, symbol : String) : String = 
 invoke('org.eclipse.ocl.examples.codegen.common.NameQueries', 'defineSymbolName(java.lang.Object, java.lang.String)', Sequence{elem, symbol}) /]
 
@@ -52,6 +55,12 @@ invoke('org.eclipse.ocl.examples.codegen.common.NameQueries', 'getUniqueText(org
 
 [query public getUniqueText(_context : Element, variable : Variable) : String = 
 invoke('org.eclipse.ocl.examples.codegen.common.NameQueries', 'getUniqueText(org.eclipse.ocl.examples.pivot.Element, org.eclipse.ocl.examples.pivot.Variable)', Sequence{_context, variable}) /]
+
+[query public isDefinedFlag(elem : OclAny, flag : String) : Boolean = 
+invoke('org.eclipse.ocl.examples.codegen.common.NameQueries', 'isDefinedFlag(java.lang.Object, java.lang.String)', Sequence{elem, flag}) /]
+
+[query public resetFlags(elem : OclAny) : String = 
+invoke('org.eclipse.ocl.examples.codegen.common.NameQueries', 'resetFlags(java.lang.Object)', Sequence{elem}) /]
 
 [query public resetSymbolNames(elem : OclAny) : String = 
 invoke('org.eclipse.ocl.examples.codegen.common.NameQueries', 'resetSymbolNames(java.lang.Object)', Sequence{elem}) /]

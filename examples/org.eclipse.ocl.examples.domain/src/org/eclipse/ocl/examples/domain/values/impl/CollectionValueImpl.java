@@ -31,16 +31,12 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
-import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
@@ -66,10 +62,10 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		return ValuesPackage.Literals.COLLECTION_VALUE;
 	}
 
-	private final @NonNull CollectedTypeId typeId;
+	private final @NonNull CollectionTypeId typeId;
 	protected final @NonNull Collection<? extends Object> elements;		// Using Value instances where necessary to ensure correct equals semantics
 	
-	protected CollectionValueImpl(@NonNull CollectedTypeId typeId, @NonNull Collection<? extends Object> values) {
+	protected CollectionValueImpl(@NonNull CollectionTypeId typeId, @NonNull Collection<? extends Object> values) {
 		this.typeId = typeId;
 		this.elements = values;
 		assert checkElementsAreValues(values);
@@ -261,25 +257,25 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		return actualType2;
 	} */
 
-	public @NonNull CollectedTypeId getBagTypeId() {
-		return TypeId.BAG.getCollectedTypeId(getElementTypeId());
+	public @NonNull CollectionTypeId getBagTypeId() {
+		return TypeId.BAG.getSpecializedId(getElementTypeId());
 	}
 
-//	public @NonNull CollectedTypeId getCollectionTypeId() {
+//	public @NonNull CollectionTypeId getCollectionTypeId() {
 //		return TypeId.COLLECTION.getCollectedTypeId(getElementType().getTypeId());
 //	}
 
-	public @NonNull CollectedTypeId getCollectedTypeId() {
-		CollectedTypeId typeId2 = typeId;
+//	public @NonNull CollectionTypeId getCollectionTypeId() {
+//		CollectionTypeId typeId2 = typeId;
 //		if (typeId2 == null) {
 //			typeId2 = getCollectionTypeId().getCollectedTypeId(getElementTypeId());
 //		}
-		return typeId2;
-	}
+//		return typeId2;
+//	}
 
-	public @NonNull CollectionTypeId getCollectionTypeId() {
-		return TypeId.COLLECTION;
-	}
+//	public @NonNull CollectionTypeId getCollectionTypeId() {
+//		return TypeId.COLLECTION;
+//	}
 
 	public @NonNull TypeId getElementTypeId() {
 //    	DomainType elementType = standardLibrary.getOclVoidType();
@@ -291,7 +287,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 //			
 //		}
 		
-		return getCollectedTypeId().getElementTypeId();
+		return getTypeId().getElementTypeId();
 	}
 
 	protected @NonNull Collection<? extends Object> getElements() {
@@ -302,20 +298,20 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		return elements;
 	}
 
-	public @NonNull CollectedTypeId getOrderedSetTypeId() {
-		return TypeId.ORDERED_SET.getCollectedTypeId(getElementTypeId());
+	public @NonNull CollectionTypeId getOrderedSetTypeId() {
+		return TypeId.ORDERED_SET.getSpecializedId(getElementTypeId());
 	}
 
-	public @NonNull CollectedTypeId getSequenceTypeId() {
-		return TypeId.SEQUENCE.getCollectedTypeId(getElementTypeId());
+	public @NonNull CollectionTypeId getSequenceTypeId() {
+		return TypeId.SEQUENCE.getSpecializedId(getElementTypeId());
 	}
 
-	public @NonNull CollectedTypeId getSetTypeId() {
-		return TypeId.SET.getCollectedTypeId(getElementTypeId());
+	public @NonNull CollectionTypeId getSetTypeId() {
+		return TypeId.SET.getSpecializedId(getElementTypeId());
 	}
 
-	public @NonNull CollectedTypeId getTypeId() {
-		return getCollectedTypeId();
+	public @NonNull CollectionTypeId getTypeId() {
+		return typeId;
 	}
 
 	@Override

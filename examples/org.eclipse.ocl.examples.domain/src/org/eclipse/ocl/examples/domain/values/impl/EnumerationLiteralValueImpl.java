@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.domain.values.impl;
 
 import org.eclipse.emf.common.util.Enumerator;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
@@ -28,14 +29,23 @@ import org.eclipse.ocl.examples.domain.ids.IdManager;
 public class EnumerationLiteralValueImpl extends AbstractEnumerationLiteralValueImpl
 {
 	protected final @NonNull DomainEnumerationLiteral enumerationLiteral;
+//	private EEnumLiteral eEnumLiteral;
 
 	public EnumerationLiteralValueImpl(@NonNull DomainEnumerationLiteral enumerationLiteral) {
 		super(IdManager.INSTANCE.getEnumerationLiteralId(enumerationLiteral));
 		this.enumerationLiteral = enumerationLiteral;
 	}
 
+//	public EnumerationLiteralValueImpl(@NonNull DomainEnumerationLiteral enumerationLiteral, @NonNull EEnum eEnum) {
+//		super(IdManager.INSTANCE.getEnumerationLiteralId(enumerationLiteral));
+//		this.enumerationLiteral = enumerationLiteral;
+//		this.eEnumLiteral = eEnum.getEEnumLiteral(enumerationLiteral.getName());
+//	}
+
 	public Enumerator asEcoreObject() {
+//		if (eEnumLiteral == null) {
 		EEnumLiteral eEnumLiteral = enumerationLiteral.asEcoreObject();
+//		}
 		return eEnumLiteral != null ? eEnumLiteral.getInstance() : null;
 	}
 	

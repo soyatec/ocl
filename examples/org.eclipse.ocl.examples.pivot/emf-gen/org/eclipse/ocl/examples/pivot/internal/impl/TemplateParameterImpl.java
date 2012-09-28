@@ -28,6 +28,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
@@ -615,5 +618,20 @@ public class TemplateParameterImpl
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitTemplateParameter(this);
+	}
+
+	private TemplateParameterId elementId;
+	
+	public @NonNull TemplateParameterId getElementId() {
+		TemplateParameterId elementId2 = elementId;
+		if (elementId2 == null) {
+			synchronized (this) {
+				elementId2 = elementId;
+				if (elementId2 == null) {
+					elementId = elementId2 = IdManager.INSTANCE.createTemplateParameterId(this);
+				}
+			}
+		}
+		return elementId2;
 	}
 } //TemplateParameterImpl

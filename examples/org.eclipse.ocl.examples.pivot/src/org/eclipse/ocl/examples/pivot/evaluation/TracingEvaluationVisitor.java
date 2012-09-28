@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
@@ -89,6 +90,10 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
 	
 	public @NonNull EvaluationVisitor getEvaluator() {
 		return getDelegate().getEvaluator();
+	}
+
+	public @NonNull IdResolver getIdResolver() {
+		return getDelegate().getIdResolver();
 	}
 
 	public @NonNull MetaModelManager getMetaModelManager() {

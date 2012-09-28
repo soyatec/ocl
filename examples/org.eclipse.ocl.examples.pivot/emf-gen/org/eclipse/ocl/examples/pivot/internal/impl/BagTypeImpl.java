@@ -63,10 +63,10 @@ public class BagTypeImpl
 	@Override
 	public @NonNull TypeId computeId() {
 		if (getUnspecializedElement() == null) {
-			return TypeId.BAG.getCollectedTypeId();
+			return TypeId.BAG;
 		}
 		else {
-			return TypeId.BAG.getCollectedTypeId(getElementType().getTypeId());
+			return TypeId.BAG.getSpecializedId(getElementType().getTypeId());
 		}
 	}
 } //BagTypeImpl

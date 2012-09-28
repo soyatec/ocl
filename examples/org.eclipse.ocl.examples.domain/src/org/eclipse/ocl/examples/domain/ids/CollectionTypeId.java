@@ -19,10 +19,11 @@ import org.eclipse.jdt.annotation.NonNull;
 /**
  * A CollectionTypeId provides a unique identifier for an unspecialized collection type such as Set(T).
  */
-public interface CollectionTypeId extends BuiltInTypeId, CollectedTypeId
+public interface CollectionTypeId extends BuiltInTypeId, TemplateableId
 {
-	@NonNull CollectionTypeId getCollectedTypeId();
-	@NonNull CollectedTypeId getCollectedTypeId(@NonNull TypeId elementTypeId);
-	@NonNull TypeTemplateParameterId getElementTypeId();
+	@NonNull TypeId getElementTypeId();
+	@NonNull CollectionTypeId getGeneralizedId();
 	@NonNull String getMetaTypeName();
+	@NonNull CollectionTypeId getSpecializedId(@NonNull TemplateBindings templateBindings);
+	@NonNull CollectionTypeId getSpecializedId(@NonNull ElementId... templateBindings);
 }

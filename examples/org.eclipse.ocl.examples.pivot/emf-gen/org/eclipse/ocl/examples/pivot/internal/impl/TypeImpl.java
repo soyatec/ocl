@@ -57,6 +57,7 @@ import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
@@ -1192,20 +1193,33 @@ public class TypeImpl
 	public @NonNull TypeId computeId() {
 		TemplateParameter owningTemplateParameter = getOwningTemplateParameter();
 		if (owningTemplateParameter != null) {
-			TemplateSignature signature = owningTemplateParameter.getSignature();
-			TemplateableElement template = signature.getTemplate();
-			int index = signature.getParameter().indexOf(owningTemplateParameter);
-			if (template instanceof Type) {
-				TypeId parentTypeId = ((Type)template).getTypeId();			
-				return parentTypeId.getTemplateParameterId(index);
+			return (TypeId) owningTemplateParameter.getElementId();
+//			TemplateSignature signature = owningTemplateParameter.getSignature();
+//			TemplateableElement template = signature.getTemplate();
+//			int firstTemplate = signature.getParameter().indexOf(owningTemplateParameter);
+/*			if (!(template instanceof DataType)){
+				for (EObject eObject = template.eContainer(); eObject != null; eObject = eObject.eContainer()) {
+					if (eObject instanceof TemplateableElement) {
+						firstTemplate += ((TemplateableElement)eObject).getOwnedTemplateSignature().getParameter().size();
+					}
+					if (eObject instanceof DataType) {
+						break;
+					}
+				}
+			} */
+//			return IdManager.INSTANCE.createTemplateBinding(owningTemplateParameter);
+			
+/*			if (template instanceof Operation) {
+				OperationId operationId = ((Operation)template).getOperationId();
+				return (TypeId) operationId.getTemplateParameterId(firstTemplate);
 			}
-			else if (template instanceof Operation) {
-				OperationId parentOperationId = ((Operation)template).getOperationId();			
-				return parentOperationId.getTemplateParameterId(index);			// FIXME bad cast
+			else if (template instanceof Type) {
+				TypeId typeId = ((Type)template).getTypeId();
+				return (TypeId) typeId.getTemplateParameterId(firstTemplate);
 			}
-			else {
-				return TypeId.OCL_INVALID;			
-			}
+//			return owningTemplateParameter.getTypeId();
+//			return IdManager.INSTANCE.getTypeId(firstTemplate);
+	    	throw new UnsupportedOperationException(); */
 		}
 		else {
 			return IdManager.INSTANCE.getTypeId(this);

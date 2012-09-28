@@ -16,12 +16,16 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.OclVoidTypeId;
+import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
+import org.eclipse.ocl.examples.domain.ids.TemplateableId;
+import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.ids.TypeTemplateParameterId;
 
 public class OclVoidTypeIdImpl extends UnscopedId implements OclVoidTypeId
 {
@@ -37,15 +41,16 @@ public class OclVoidTypeIdImpl extends UnscopedId implements OclVoidTypeId
 		return this;
 	}
 
-	public @NonNull CollectedTypeId getCollectedTypeId(@NonNull TypeId elementTypeId) {
-		return this;
-	}
-
+	@Deprecated
 	public @NonNull CollectionTypeId getCollectionTypeId() {
+		return getGeneralizedId();
+	}
+
+	public @NonNull TypeId getElementTypeId() {
 		return this;
 	}
 
-	public @NonNull TypeTemplateParameterId getElementTypeId() {
+	public @NonNull OclVoidTypeIdImpl getGeneralizedId() {
 		return this;
 	}
 
@@ -58,15 +63,40 @@ public class OclVoidTypeIdImpl extends UnscopedId implements OclVoidTypeId
 		return "VoidType";
 	}
 
+	public @Nullable DomainElement getOrigin() {
+		return null;
+	}
+
 	public @NonNull TypeId getParent() {
 		return this;									// FIXME Is this safe?
 	}
 
-	public @NonNull String[] getPartNames() {
-		return NULL_STRING_ARRAY;
+	public TuplePartId getPartId(@NonNull String name) {
+		return null;
 	}
 
-	public @NonNull TypeId[] getPartTypeIds() {
-		return NULL_TYPE_ID_ARRAY;
+	public @NonNull TuplePartId[] getPartIds() {
+		return NULL_TUPLE_PART_ID_ARRAY;
+	}
+
+	public @NonNull OclVoidTypeIdImpl getSpecializedId(@NonNull TemplateBindings templateBindings) {
+		return this;
+	}
+
+	public @NonNull CollectionTypeId getSpecializedId(@NonNull ElementId... templateBindings) {
+		return this;
+	}
+
+//	@SuppressWarnings("null")
+//	public @NonNull TemplateParameterId getTemplateParameterId(int index) {
+//		return TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY[index];
+//	}
+
+//	public @NonNull TemplateParameterId[] getTemplateParameters() {
+//		return TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY;
+//	}
+
+	public void install(@NonNull TemplateableId templateableId, int index) {
+    	throw new UnsupportedOperationException();
 	}
 }

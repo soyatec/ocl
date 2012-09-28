@@ -16,12 +16,13 @@
  */
 package org.eclipse.ocl.examples.domain.evaluation;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 
 public interface DomainEvaluationEnvironment
 {
-	void add(DomainTypedElement variable, Object value);
-	DomainTypedElement createVariable(String name, DomainType type);
-	void replace(DomainTypedElement variable, Object value);
+	void add(@NonNull DomainTypedElement variable, Object value);
+	@NonNull DomainTypedElement createVariable(@NonNull String name, @NonNull DomainType type);
+	void replace(@NonNull DomainTypedElement variable, Object value);
 }

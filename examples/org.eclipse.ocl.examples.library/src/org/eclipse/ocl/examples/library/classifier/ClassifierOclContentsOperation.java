@@ -22,7 +22,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -42,6 +42,6 @@ public class ClassifierOclContentsOperation extends AbstractUnaryOperation
 				collection.add(ValuesUtil.valueOf(eContent));
 			}
     	}
-    	return createSetValue((CollectedTypeId)returnTypeId, collection);
+    	return createSetValue((CollectionTypeId)returnTypeId, collection);
 	}
 }

@@ -21,6 +21,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
@@ -63,6 +64,11 @@ public class ExecutorProperty implements DomainProperty
 
 	public @NonNull DomainType getType() {
 		return executorType;
+	}
+
+	public @NonNull TypeId getTypeId() {
+		DomainType type2 = getType();
+		return type2.getTypeId();
 	}
 
 	void initOpposite(@NonNull ExecutorProperty opposite) {

@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 
 /**
  * <!-- begin-user-doc -->
@@ -75,4 +76,5 @@ public interface TupleLiteralPart
 	 */
 	OCLExpression createInitExpression(EClass eClass);
 
+	TuplePartId getPartId();
 } // TupleLiteralPart

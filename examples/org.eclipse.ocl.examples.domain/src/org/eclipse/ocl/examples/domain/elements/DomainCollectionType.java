@@ -17,7 +17,7 @@
 package org.eclipse.ocl.examples.domain.elements;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 
 public interface DomainCollectionType extends DomainType
@@ -25,7 +25,7 @@ public interface DomainCollectionType extends DomainType
 	/*@NonNull*/ DomainType getContainerType();		
 	/*@NonNull*/ DomainType getElementType();
 	@NonNull IntegerValue getLowerValue();		
-	@NonNull CollectedTypeId getTypeId();
+	@NonNull CollectionTypeId getTypeId();
 	@NonNull IntegerValue getUpperValue();
 	boolean isOrdered();
 	boolean isUnique();

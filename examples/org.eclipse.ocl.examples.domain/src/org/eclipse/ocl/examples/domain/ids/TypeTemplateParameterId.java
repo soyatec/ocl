@@ -14,13 +14,11 @@
  */
 package org.eclipse.ocl.examples.domain.ids;
 
-import org.eclipse.jdt.annotation.NonNull;
+
 
 /**
- * A TypeTemplateParameterId provides a unique identifier for a type parameter such as Set.T.
+ * A TypeTemplateParameterId provides a unique identifier for a type template parameter such as Set<T> or product<T>(...).
  */
-public interface TypeTemplateParameterId extends TypeId
+public interface TypeTemplateParameterId extends TemplateParameterId, TypeId
 {
-	int getIndex();
-	@NonNull TypeId getParent();
 }

@@ -24,7 +24,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -51,7 +50,7 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 		return ValuesPackage.Literals.SEQUENCE_VALUE;
 	}
 
-	public SequenceValueImpl(@NonNull CollectedTypeId typeId, @NonNull List<? extends Object> values) {
+	public SequenceValueImpl(@NonNull CollectionTypeId typeId, @NonNull List<? extends Object> values) {
 		super(typeId, values);
 	}
 	
@@ -131,10 +130,10 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
     	}
     }
 
-    @Override
-	public @NonNull CollectionTypeId getCollectionTypeId() {
-		return TypeId.SEQUENCE;
-	}
+//    @Override
+//	public @NonNull CollectionTypeId getCollectionTypeId() {
+//		return TypeId.SEQUENCE;
+//	}
     
 	@Override
 	protected @NonNull List<? extends Object> getElements() {

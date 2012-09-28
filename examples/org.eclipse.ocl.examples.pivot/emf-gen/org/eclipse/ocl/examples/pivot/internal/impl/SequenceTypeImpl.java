@@ -63,10 +63,10 @@ public class SequenceTypeImpl
 	@Override
 	public @NonNull TypeId computeId() {
 		if (getUnspecializedElement() == null) {
-			return TypeId.SEQUENCE.getCollectedTypeId();
+			return TypeId.SEQUENCE;
 		}
 		else {
-			return TypeId.SEQUENCE.getCollectedTypeId(getElementType().getTypeId());
+			return TypeId.SEQUENCE.getSpecializedId(getElementType().getTypeId());
 		}
 	}
 

@@ -19,8 +19,12 @@ package org.eclipse.ocl.examples.xtext.base.cs2pivot;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.TuplePartId;
+import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -31,10 +35,10 @@ import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.manager.TupleTypeManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
@@ -257,29 +261,51 @@ public class BasePreOrderVisitor extends AbstractExtendingBaseCSVisitor<Continua
 			}
 			for (TuplePartCS csTuplePart : csElement.getOwnedParts()) {
 				TypedRefCS ownedType = csTuplePart.getOwnedType();
-				if (ownedType.getPivot() == null) {
+				Element pivot = ownedType.getPivot();
+				if (pivot == null) {
 					return false;
 				}
+/*				if (pivot instanceof TemplateableElement) {
+					TemplateParameter templateParameter = ((ParameterableElement)pivot).getOwningTemplateParameter();
+					TemplateSignature signature = templateParameter.getSignature();
+					TemplateableElement template = signature.getTemplate();
+					if (template instanceof Operation) {
+						for (Parameter parameter : ((Operation)template).getOwnedParameter()) {
+							Type type = parameter.getType();
+							if (type == null) {
+								return false;
+							}
+						}
+					}
+				} */
 			}
 			return true;
 		}
 
 		@Override
 		public BasicContinuation<?> execute() {
-			List<TupleTypeManager.TuplePart> tupleParts = new ArrayList<TupleTypeManager.TuplePart>();
+			List<TuplePartId> tuplePartIds = new ArrayList<TuplePartId>();
 			for (TuplePartCS csTuplePart : csElement.getOwnedParts()) {
 				String name = csTuplePart.getName();
 				Type partType = PivotUtil.getPivot(Type.class, csTuplePart.getOwnedType());
 				if ((name != null) && (partType != null)) {
-					TupleTypeManager.TuplePart tuplePart = new TupleTypeManager.TuplePart(name, partType);
-					tupleParts.add(tuplePart);
-					context.installPivotUsage(csTuplePart, tuplePart);
+					TuplePartId tuplePart = IdManager.INSTANCE.createTuplePartId(name, partType.getTypeId());
+					tuplePartIds.add(tuplePart);
 				}
 			}
 			String name = csElement.getName();
 			if (name != null) {
-				TupleType tupleType = context.getMetaModelManager().getTupleType(name, tupleParts, null);
+				TupleTypeId tupleTypeId = IdManager.INSTANCE.getTupleTypeId(name, tuplePartIds);
+				TupleType tupleType = context.getMetaModelManager().getTupleType(context.getMetaModelManager().getIdResolver(), tupleTypeId);
 				installPivotTypeWithMultiplicity(tupleType);
+				EList<Property> tupleParts = tupleType.getOwnedAttribute();
+				for (TuplePartCS csTuplePart : csElement.getOwnedParts()) {
+					String partName = csTuplePart.getName();
+					Property tuplePart = DomainUtil.getNamedElement(tupleParts, partName);
+					if (tuplePart != null) {
+						context.installPivotUsage(csTuplePart, tuplePart);
+					}
+				}
 			}
 			return null;
 		}

@@ -74,7 +74,7 @@ public interface EvaluationEnvironment extends DomainEvaluationEnvironment, Basi
      * @param value
      *            the new value
      */
-    void replace(DomainTypedElement referredVariable, Object value);
+    void replace(@NonNull DomainTypedElement referredVariable, Object value);
 
     /**
      * Adds the supplied variable declaration and value binding to the environment.  The variable declaration
@@ -87,7 +87,7 @@ public interface EvaluationEnvironment extends DomainEvaluationEnvironment, Basi
      *            
      * @see #replace(String, Object)
      */
-    void add(DomainTypedElement referredVariable, Object value);
+    void add(@NonNull DomainTypedElement referredVariable, Object value);
  
     /**
      * Removes the supplied variable declaration and binding from the environment (if it exists)
@@ -100,7 +100,7 @@ public interface EvaluationEnvironment extends DomainEvaluationEnvironment, Basi
      * @deprecated let expiry of a nested evaluation environment remove automatically
      */
     @Deprecated
-    Object remove(DomainTypedElement referredVariable);
+    Object remove(@NonNull DomainTypedElement referredVariable);
 
     /**
      * Clears the environment of variables.

@@ -18,10 +18,11 @@ package org.eclipse.ocl.examples.library.executor;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
+import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.types.AbstractType;
@@ -32,7 +33,7 @@ public class ExecutorLambdaType extends AbstractType implements ExecutorTypeArgu
 
 	public ExecutorLambdaType(@NonNull DomainStandardLibrary standardLibrary, @NonNull String name, @NonNull ExecutorTypeArgument... typeArguments) {
 		super(standardLibrary, name);
-		typeId = IdManager.INSTANCE.getLambdaTypeId(name, new DomainTypeParameters(typeArguments));
+		typeId = IdManager.INSTANCE.getLambdaTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, name, new DomainParameterTypes(typeArguments));
 	}
 
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {

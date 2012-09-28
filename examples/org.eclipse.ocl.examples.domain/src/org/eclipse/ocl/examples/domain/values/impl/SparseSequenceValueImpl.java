@@ -21,7 +21,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
@@ -48,7 +48,7 @@ public class SparseSequenceValueImpl extends SequenceValueImpl
 		return result;
 	}
 
-	public static @NonNull SequenceValue union(@NonNull CollectedTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right) {
+	public static @NonNull SequenceValue union(@NonNull CollectionTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right) {
     	assert !left.isUndefined() && !right.isUndefined();
 		Collection<? extends Object> leftElements = left.asCollection();
         Collection<? extends Object> rightElements = right.asCollection();
@@ -67,11 +67,11 @@ public class SparseSequenceValueImpl extends SequenceValueImpl
 	
 	public static class Accumulator extends SparseSequenceValueImpl implements SequenceValue.Accumulator
 	{
-		public Accumulator(@NonNull CollectedTypeId typeId) {
+		public Accumulator(@NonNull CollectionTypeId typeId) {
 			super(typeId, new ArrayList<Object>());
 		}
 
-		public Accumulator(@NonNull CollectedTypeId typeId, @NonNull List<? extends Object> values) {
+		public Accumulator(@NonNull CollectionTypeId typeId, @NonNull List<? extends Object> values) {
 			super(typeId, values);
 		}
 
@@ -90,15 +90,15 @@ public class SparseSequenceValueImpl extends SequenceValueImpl
 	    }
 	}
     
-	public SparseSequenceValueImpl(@NonNull CollectedTypeId typeId, Object... values) {
+	public SparseSequenceValueImpl(@NonNull CollectionTypeId typeId, Object... values) {
 		super(typeId, createValues(values));
 	}
 
-	public SparseSequenceValueImpl(@NonNull CollectedTypeId typeId, @NonNull Iterable<? extends Object> values) {
+	public SparseSequenceValueImpl(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> values) {
 		super(typeId, createValues(values));
 	}
 
-	public SparseSequenceValueImpl(@NonNull CollectedTypeId typeId, @NonNull List<? extends Object> values) {
+	public SparseSequenceValueImpl(@NonNull CollectionTypeId typeId, @NonNull List<? extends Object> values) {
 		super(typeId, values);
 	}
 

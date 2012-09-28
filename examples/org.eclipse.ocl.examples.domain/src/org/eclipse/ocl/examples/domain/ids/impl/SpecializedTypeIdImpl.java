@@ -16,27 +16,31 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
-import org.eclipse.ocl.examples.domain.ids.SpecializedTypeId;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
+import org.eclipse.ocl.examples.domain.ids.TemplateableTypeId;
 
-public class SpecializedTypeIdImpl extends NestableId implements SpecializedTypeId
+public class SpecializedTypeIdImpl extends AbstractSpecializedIdImpl<TemplateableTypeId> implements TemplateableTypeId
 {
-	protected final @NonNull TypeId parent;
-	protected final @NonNull DomainTypeParameters typeParameters;
-
-	public SpecializedTypeIdImpl(@NonNull TypeId parent, @NonNull DomainTypeParameters typeParameters) {
-		super(97 * parent.hashCode() + typeParameters.hashCode());
-		this.parent = parent;
-		this.typeParameters = typeParameters;
+	public SpecializedTypeIdImpl(@NonNull TemplateableTypeId generalizedId, @NonNull TemplateBindings templateBindings) {
+		super(generalizedId, templateBindings);
 	}
 
 	public @Nullable <R> R accept(@NonNull IdVisitor<R> visitor) {
-		return visitor.visitSpecializedTypeId(this);
+		return visitor.visitTemplateableTypeId(this);
 	}
 
-	public @NonNull String getDisplayName() {
-		return parent + "::" + typeParameters;
+	@Override
+	protected @NonNull TemplateableTypeId createSpecializedId(@NonNull TemplateBindings templateBindings) {
+		return new SpecializedTypeIdImpl(this, templateBindings);
+	}
+
+//	public @NonNull String getDisplayName() {
+//		return parent + "::" + typeParameters;
+//	}
+
+    public @NonNull TemplateableTypeId specialize(@NonNull TemplateBindings templateBindings) {
+    	return createSpecializedId(templateBindings);
 	}
 }

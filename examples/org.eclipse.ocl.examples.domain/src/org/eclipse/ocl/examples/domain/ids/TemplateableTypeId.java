@@ -17,10 +17,10 @@ package org.eclipse.ocl.examples.domain.ids;
 import org.eclipse.jdt.annotation.NonNull;
 
 /**
- * An OperationTemplateParameterId provides a unique hierarchical identifier for an operation template parameter Collection.product(T)(...).
+ * A NestedTypeId provides a unique hierarchical identifier for a type which is nested by unique name in a parent package.
  */
-public interface OperationTemplateParameterId extends TypeId
+public interface TemplateableTypeId extends TypeId, TemplateableId
 {
-	int getIndex();
-	@NonNull OperationId getParent();
+//	@NonNull String getName();
+//	@NonNull PackageId getParent();
 }

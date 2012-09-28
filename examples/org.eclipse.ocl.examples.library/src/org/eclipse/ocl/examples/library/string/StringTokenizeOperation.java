@@ -23,7 +23,7 @@ import java.util.StringTokenizer;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractPolyOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -38,18 +38,18 @@ public class StringTokenizeOperation extends AbstractPolyOperation
 	private static final @NonNull String DELIMS = " \t\n\r\f"; //$NON-NLS-1$
 
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue) {
-		return evaluate(evaluator, (CollectedTypeId)returnTypeId, sourceValue, DELIMS, false);
+		return evaluate(evaluator, (CollectionTypeId)returnTypeId, sourceValue, DELIMS, false);
 	}
 
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull Object argumentValue) {
 		boolean returnDelims = asBoolean(argumentValue);
-		return evaluate(evaluator, (CollectedTypeId)returnTypeId, sourceValue, DELIMS, returnDelims);
+		return evaluate(evaluator, (CollectionTypeId)returnTypeId, sourceValue, DELIMS, returnDelims);
 	}
 
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) {
 		String delims = asString(firstArgumentValue);
 		boolean returnDelims = asBoolean(secondArgumentValue);
-		return evaluate(evaluator, (CollectedTypeId)returnTypeId, sourceValue, delims, returnDelims);
+		return evaluate(evaluator, (CollectionTypeId)returnTypeId, sourceValue, delims, returnDelims);
 	}
 
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Object sourceValue, Object... argumentValues) {
@@ -68,10 +68,10 @@ public class StringTokenizeOperation extends AbstractPolyOperation
 			assert argumentValue0 != null;
 			delims = asString(argumentValue0);
 		}
-		return evaluate(evaluator, (CollectedTypeId)DomainUtil.nonNullPivot(callExp.getType()).getTypeId(), sourceValue, delims, returnDelims);
+		return evaluate(evaluator, (CollectionTypeId)DomainUtil.nonNullPivot(callExp.getType()).getTypeId(), sourceValue, delims, returnDelims);
 	}
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull CollectedTypeId returnTypeId, @NonNull Object sourceValue, @NonNull String delims, boolean returnDelims) {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull CollectionTypeId returnTypeId, @NonNull Object sourceValue, @NonNull String delims, boolean returnDelims) {
 		String sourceString = asString(sourceValue);
 		StringTokenizer tokenizer = new StringTokenizer(sourceString, delims, returnDelims);
 		List<Object> results = new ArrayList<Object>();

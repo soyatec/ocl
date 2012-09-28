@@ -79,7 +79,7 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 		return result;
 	}
 
-    public static @NonNull SetValue intersection(@NonNull CollectedTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right)
+    public static @NonNull SetValue intersection(@NonNull CollectionTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right)
     {
     	assert !left.isUndefined() && !right.isUndefined();
 		Collection<? extends Object> leftElements = left.asCollection();
@@ -103,7 +103,7 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
     	return results.size() > 0 ? createSetValue(typeId, results) : createSetValue(typeId, EMPTY_SET);
     }
 
-	public static @NonNull SetValue union(@NonNull CollectedTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right) {
+	public static @NonNull SetValue union(@NonNull CollectionTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right) {
     	assert !left.isUndefined() && !right.isUndefined();
 		Collection<? extends Object> leftElements = left.asCollection();
         Collection<? extends Object> rightElements = right.asCollection();
@@ -122,7 +122,7 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 	
 	public static class Accumulator extends SetValueImpl implements CollectionValue.Accumulator
 	{
-		public Accumulator(@NonNull CollectedTypeId typeId) {
+		public Accumulator(@NonNull CollectionTypeId typeId) {
 			super(typeId, new HashSet<Object>());
 		}
 
@@ -132,15 +132,15 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 		}		
 	}
 	
-	public SetValueImpl(@NonNull CollectedTypeId typeId, Object... values) {
+	public SetValueImpl(@NonNull CollectionTypeId typeId, Object... values) {
 		super(typeId, createValues(values));
 	}
 
-	public SetValueImpl(@NonNull CollectedTypeId typeId, @NonNull Iterable<? extends Object> values) {
+	public SetValueImpl(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> values) {
 		super(typeId, createValues(values));
 	}
 
-	public SetValueImpl(@NonNull CollectedTypeId typeId, @NonNull Set<? extends Object> values) {
+	public SetValueImpl(@NonNull CollectionTypeId typeId, @NonNull Set<? extends Object> values) {
 		super(typeId, values);
 	}
 
@@ -192,10 +192,10 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
     	}
     }
 
-    @Override
-	public @NonNull CollectionTypeId getCollectionTypeId() {
-		return TypeId.SET;
-	}
+//    @Override
+//	public @NonNull CollectionTypeId getCollectionTypeId() {
+//		return TypeId.SET;
+//	}
 	
 	@Override
 	protected @NonNull Set<? extends Object> getElements() {

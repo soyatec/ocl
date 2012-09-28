@@ -18,24 +18,28 @@ package org.eclipse.ocl.examples.pivot.manager;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainElement;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
-import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.TypedElement;
+import org.eclipse.ocl.examples.pivot.internal.impl.TuplePartImpl;
+import org.eclipse.ocl.examples.pivot.internal.impl.TupleTypeImpl;
 import org.eclipse.ocl.examples.pivot.internal.impl.TypedElementImpl;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
@@ -47,26 +51,34 @@ public class TupleTypeManager
 	/**
 	 * TuplePart provides a convenient descriptor for a tuple part complying with the full EMF model protocols.
 	 */
-	public static class TuplePart extends TypedElementImpl implements Comparable<TuplePart>
+	public static class TuplePart extends TypedElementImpl // implements Comparable<TuplePart>
 	{
-		public TuplePart(@NonNull String name, @NonNull Type type) {
-			setName(name);
-			setType(type);
+		protected final @NonNull TuplePartId partId;
+		
+		public TuplePart(@NonNull TuplePartId partId) {
+			this.partId = partId;
+			setName(partId.getName());
 		}
 
-		public int compareTo(TuplePart o) {			// FIXME Type
-			String n1 = getName();
+		
+//		public TuplePart(@NonNull String name, @NonNull Type type) {
+//			setName(name);
+//			setType(type);
+//			this.partId = IdManager.INSTANCE.getTuplePartId(name, type.getTypeId());
+//		}
+
+/*		public int compareTo(TupleTypeId.Part o) {			// FIXME Type
+			String n1 = name;
 			String n2 = o.getName();
 			if (n1 == n2) {
 				return 0;
 			}
-			if (n1 == null) {
-				return -1;
-			}
-			if (n2 == null) {
-				return +1;
-			}				
 			return n1.compareTo(n2);
+		} */
+
+
+		public @NonNull TypeId getTypeId() {
+			return partId.getTypeId();
 		}
 
 		@Override
@@ -90,14 +102,34 @@ public class TupleTypeManager
 		tupleid2tuple = null;
 	}
 
-	public @NonNull TupleType getTupleType(@NonNull TupleTypeId typeId) {
+	public @NonNull TupleType getTupleType(@NonNull IdResolver idResolver, @NonNull TupleTypeId tupleTypeId) {
 		Map<TupleTypeId, TupleType> tupleid2tuple2 = tupleid2tuple;
 		if (tupleid2tuple2 == null) {
-			throw new UnsupportedOperationException();
+			synchronized (this) {
+				tupleid2tuple2 = tupleid2tuple;
+				if (tupleid2tuple2 == null) {
+					tupleid2tuple2 = tupleid2tuple = new HashMap<TupleTypeId, TupleType>();
+				}
+			}
 		}
-		TupleType tupleType = tupleid2tuple2.get(typeId);
+		TupleType tupleType = tupleid2tuple2.get(tupleTypeId);
 		if (tupleType == null) {
-			throw new UnsupportedOperationException();
+			synchronized (tupleid2tuple2) {
+				tupleType = tupleid2tuple2.get(tupleTypeId);
+				if (tupleType == null) {
+					TuplePartId[] partIds = tupleTypeId.getPartIds();
+					List<TuplePartImpl> ownedAttributes = new ArrayList<TuplePartImpl>(partIds.length);
+					for (TuplePartId partId : partIds) {
+						DomainType partType = idResolver.getType(partId.getTypeId(), null);
+						Type partType2 = metaModelManager.getType(partType);
+						ownedAttributes.add(new TuplePartImpl(partId, partType2));
+					}		
+					tupleType = new TupleTypeImpl(tupleTypeId, ownedAttributes);
+					tupleType.getSuperClass().add(metaModelManager.getOclTupleType());
+					tupleid2tuple2.put(tupleTypeId, tupleType);
+					metaModelManager.addOrphanClass(tupleType);
+				}
+			}
 		}
 		return tupleType;
 	}
@@ -108,47 +140,53 @@ public class TupleTypeManager
 		if (leftProperties.size() != rightProperties.size()) {
 			return null;
 		}
-		boolean isLeft = true;
-		boolean isRight = true;
-		List<TypedElement> commonProperties = new ArrayList<TypedElement>(leftProperties.size());
+//		boolean isLeft = true;
+//		boolean isRight = true;
+//		List<TypedElement> commonProperties = new ArrayList<TypedElement>(leftProperties.size());
+		List<TuplePartId> commonPartIds = new ArrayList<TuplePartId>(leftProperties.size());
 		for (Property leftProperty : leftProperties) {
 			Property rightProperty = DomainUtil.getNamedElement(rightProperties, leftProperty.getName());
 			Type leftPropertyType = DomainUtil.nonNullModel(leftProperty.getType());
 			Type rightPropertyType = DomainUtil.nonNullModel(rightProperty.getType());
-			TypedElement commonProperty = null;
+//			TypedElement commonProperty = null;
 			Type commonType = metaModelManager.getCommonType(leftPropertyType, rightPropertyType, bindings);
-			if (commonType != leftPropertyType) {
-				isLeft = false;
-			}
-			else {
-				commonProperty = leftProperty;
-			}
-			if (commonType != rightPropertyType) {
-				isRight = false;
-			}
-			else {
-				commonProperty = rightProperty;
-			}
-			if (commonProperty == null) {
-				commonProperty = new TuplePart(DomainUtil.nonNullModel(leftProperty.getName()), commonType);
-			}
-			commonProperties.add(commonProperty);
+			TuplePartId commonPartId = IdManager.INSTANCE.createTuplePartId(leftProperty.getName(), commonType.getTypeId());
+			commonPartIds.add(commonPartId);
+//			if (commonType != leftPropertyType) {
+//				isLeft = false;
+//			}
+//			else {
+//				commonProperty = leftProperty;
+//			}
+//			if (commonType != rightPropertyType) {
+//				isRight = false;
+//			}
+//			else {
+//				commonProperty = rightProperty;
+//			}
+//			if (commonProperty == null) {
+//				TuplePartId commonPartId = IdManager.INSTANCE.getTuplePartId(leftProperty.getName(), commonType.getTypeId());
+//				commonProperty = new TuplePart(commonPartId);
+//			}
+//			commonProperties.add(commonProperty);
 		}
-		if (isLeft) {
-			return leftType;
-		}
-		else if (isRight) {
-			return rightType;
-		}
-		else {
-			return getTupleType(DomainUtil.nonNullModel(leftType.getName()), commonProperties, bindings);
-		}
+//		if (isLeft) {
+//			return leftType;
+//		}
+//		else if (isRight) {
+//			return rightType;
+//		}
+//		else {
+//			return getTupleType(DomainUtil.nonNullModel(leftType.getName()), commonProperties, bindings);
+//		}
+		TupleTypeId commonTupleTypeId = IdManager.INSTANCE.getTupleTypeId("Tuple", commonPartIds);
+		return getTupleType(metaModelManager.getIdResolver(), commonTupleTypeId);
 	}
 
 	/**
 	 * Return the named tuple type with the defined alphabetically ordered parts.
 	 */
-    protected @NonNull TupleType getOrderedTupleType(@NonNull String name, @NonNull List<TuplePart> orderedParts) {
+/*    protected @NonNull TupleType getOrderedTupleType(@NonNull String name, @NonNull List<TuplePart> orderedParts) {
 		TupleTypeId tupleTypeId = IdManager.INSTANCE.getTupleTypeId(name, orderedParts);
 		Map<TupleTypeId, TupleType> tupleid2tuple2 = tupleid2tuple;
 		if (tupleid2tuple2 == null) {
@@ -178,18 +216,19 @@ public class TupleTypeManager
 			metaModelManager.addOrphanClass(newTupleType);
 			return newTupleType;
 		}
-	}
+	} */
 	
 	public @NonNull TupleType getTupleType(@NonNull String typeName, @NonNull Collection<? extends DomainTypedElement> parts,
 			@Nullable Map<TemplateParameter, ParameterableElement> bindings) {
-		List<TuplePart> orderedParts = new ArrayList<TuplePart>(parts.size());
+		List<TuplePartId> partIds = new ArrayList<TuplePartId>(parts.size());
 		for (DomainTypedElement part : parts) {
 			Type type = metaModelManager.getType(DomainUtil.nonNullModel(part.getType()));
 			Type specializedType = metaModelManager.getSpecializedType(type, bindings);
-			orderedParts.add(new TuplePart(DomainUtil.nonNullModel(part.getName()), specializedType));
+			TuplePartId tuplePartId = IdManager.INSTANCE.createTuplePartId(DomainUtil.nonNullModel(part.getName()), specializedType.getTypeId());
+			partIds.add(tuplePartId);
 		}
-		Collections.sort(orderedParts);
-		return getOrderedTupleType(typeName, orderedParts);
+		TupleTypeId tupleTypeId = IdManager.INSTANCE.getTupleTypeId(typeName, partIds);
+		return getTupleType(metaModelManager.getIdResolver(), tupleTypeId);
 	}
 
 	public @NonNull TupleType getTupleType(@NonNull TupleType type, @Nullable Map<TemplateParameter, ParameterableElement> usageBindings) {	// FIXME Remove duplication, unify type/multiplicity
@@ -208,16 +247,20 @@ public class TupleTypeManager
 			}
 		}
 		if (resolutions != null) {
-			List<TypedElement> parts = new ArrayList<TypedElement>();
+			List<TuplePartId> partIds = new ArrayList<TuplePartId>(specializedTupleType.getOwnedAttribute().size());
 			for (Property property : specializedTupleType.getOwnedAttribute()) {
-				TypedElement part = property;
+				TuplePartId tuplePartId;
 				Type resolvedPropertyType = resolutions.get(property.getName());
 				if (resolvedPropertyType != null) {
-					part = new TuplePart(DomainUtil.nonNullModel(property.getName()), resolvedPropertyType);
+					tuplePartId = IdManager.INSTANCE.createTuplePartId(DomainUtil.nonNullModel(property.getName()), resolvedPropertyType.getTypeId());
 				}
-				parts.add(part);
+				else {
+					tuplePartId = IdManager.INSTANCE.createTuplePartId(DomainUtil.nonNullModel(property.getName()), property.getTypeId());
+				}
+				partIds.add(tuplePartId);
 			}
-			specializedTupleType = getTupleType(DomainUtil.nonNullModel(type.getName()), parts, usageBindings);
+			TupleTypeId tupleTypeId = IdManager.INSTANCE.getTupleTypeId(DomainUtil.nonNullModel(type.getName()), partIds);
+			specializedTupleType = getTupleType(metaModelManager.getIdResolver(), tupleTypeId);
 		}
 		return specializedTupleType;
 	}

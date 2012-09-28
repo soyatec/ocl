@@ -23,7 +23,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 
 public interface CollectionValue extends Value
@@ -73,12 +73,12 @@ public interface CollectionValue extends Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull CollectedTypeId getCollectedTypeId();
+	String getKind();
 
 	/**
 	 * @generated NOT
 	 */
-	String getKind();
+	@NonNull CollectionTypeId getTypeId();
 
 	/**
 	 * @generated NOT

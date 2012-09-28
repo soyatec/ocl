@@ -26,6 +26,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
@@ -50,21 +51,21 @@ public interface DomainStandardLibrary
 
 	boolean conformsToTupleType(@NonNull DomainTupleType firstTupleType, @NonNull DomainTupleType secondTupleType);
 
-	@NonNull BagValue createBagValueOf(@NonNull CollectedTypeId typeId, @NonNull Object... objects);
+	@NonNull BagValue createBagValueOf(@NonNull CollectionTypeId typeId, @NonNull Object... objects);
 
-	@NonNull BagValue createBagValueOf(@NonNull CollectedTypeId typeId, @NonNull Iterable<? extends Object> objects);
+	@NonNull BagValue createBagValueOf(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> objects);
 
-	@NonNull OrderedSetValue createOrderedSetValueOf(@NonNull CollectedTypeId typeId, @NonNull Object... objects);
+	@NonNull OrderedSetValue createOrderedSetValueOf(@NonNull CollectionTypeId typeId, @NonNull Object... objects);
 
-	@NonNull OrderedSetValue createOrderedSetValueOf(@NonNull CollectedTypeId typeId, @NonNull Iterable<? extends Object> objects);
+	@NonNull OrderedSetValue createOrderedSetValueOf(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> objects);
 	
-	@NonNull SequenceValue createSequenceValueOf(@NonNull CollectedTypeId typeId, @NonNull Object... objects);
+	@NonNull SequenceValue createSequenceValueOf(@NonNull CollectionTypeId typeId, @NonNull Object... objects);
 
-	@NonNull SequenceValue createSequenceValueOf(@NonNull CollectedTypeId typeId, @NonNull Iterable<? extends Object> objects);
+	@NonNull SequenceValue createSequenceValueOf(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> objects);
 	
-	@NonNull SetValue createSetValueOf(@NonNull CollectedTypeId typeId, @NonNull Object... objects);
+	@NonNull SetValue createSetValueOf(@NonNull CollectionTypeId typeId, @NonNull Object... objects);
 
-	@NonNull SetValue createSetValueOf(@NonNull CollectedTypeId typeId, @NonNull Iterable<? extends Object> objects);
+	@NonNull SetValue createSetValueOf(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> objects);
 	
     /**
      * Obtains the generic instance of the {@link BagType} metatype, named
@@ -94,9 +95,6 @@ public interface DomainStandardLibrary
      * @return the <tt>Collection(T)</tt> type (an instance of {@link CollectionType})
      */
 	@NonNull DomainType getCollectionType();
-
-	@NonNull DomainType getCollectionType(@NonNull CollectionTypeId typeId);
-	@NonNull DomainType getCollectionType(@NonNull CollectedTypeId typeId);
 	
 	/**
 	 * Return the specialized collection type for the containerType for elementType.
@@ -302,10 +300,14 @@ public interface DomainStandardLibrary
      */
 	@NonNull DomainType getStringType();
 
+	@NonNull DomainElement getTemplateParameter(@NonNull TemplateParameterId id, DomainElement context);
+
 	/**
 	 * Obtains the instance of the tuple part description for a name and a type.
 	 */
+	@Deprecated
 	@NonNull DomainTypedElement getTuplePart(@NonNull String name, @NonNull DomainType type);
+	@NonNull DomainTypedElement getTuplePart(@NonNull String name, @NonNull TypeId typeId);
 
 	/**
 	 * Obtains the instance of the {@link TupleType} metatype for the given list of parts,
@@ -314,11 +316,11 @@ public interface DomainStandardLibrary
 //	@NonNull DomainTupleType getTupleType(@NonNull List<? extends DomainTypedElement> parts);
 	@NonNull DomainTupleType getTupleType(DomainTypedElement... parts);
 
-	@NonNull DomainTupleType getTupleType(@NonNull TupleTypeId typeId);
+	@NonNull DomainTupleType getTupleType(@NonNull IdResolver idResolver, @NonNull TupleTypeId typeId);
 
 	@NonNull DomainType getType(@NonNull DomainElement element);
 	@NonNull DomainType getType(@NonNull EClassifier eClassifier);
-	@NonNull DomainType getType(@NonNull TypeId typeId);
+//	@NonNull DomainType getType(@NonNull TypeId typeId, @Nullable DomainElement context);
 	
     DomainElement getTypeTemplateParameter(@NonNull DomainType aType, int index);
 

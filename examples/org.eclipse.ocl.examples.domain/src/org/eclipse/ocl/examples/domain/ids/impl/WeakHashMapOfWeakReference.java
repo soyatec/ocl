@@ -15,7 +15,9 @@
 package org.eclipse.ocl.examples.domain.ids.impl;
 
 import java.lang.ref.WeakReference;
+import java.util.Iterator;
 import java.util.WeakHashMap;
+import java.util.Map.Entry;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
@@ -45,4 +47,38 @@ public abstract class WeakHashMapOfWeakReference<K,V extends ElementId> extends 
 	}
 	
 	protected abstract @NonNull V newTypeId(@NonNull K key);
+
+	@Override public String toString() {
+		StringBuffer buf = new StringBuffer();
+		buf.append("{");
+		Iterator<java.util.Map.Entry<K, WeakReference<V>>> i = entrySet().iterator();
+		boolean hasNext = i.hasNext();
+		while (hasNext) {
+			java.util.Map.Entry<K, WeakReference<V>> e = i.next();
+			WeakReference<V> ref = e.getValue();
+			if (ref != null) {
+				V value = ref.get();
+				if (value != null) {
+					K key = e.getKey();
+					if (key == this)
+						buf.append("(this Map)");
+					else
+						buf.append(key);
+					buf.append("=");
+					if (value == this)
+						buf.append("(this Map)");
+					else
+						buf.append(value);
+					hasNext = i.hasNext();
+					if (hasNext)
+						buf.append(", ");
+				}
+			}
+		}
+
+		buf.append("}");
+		return buf.toString();
+	}
+	
+	
 }

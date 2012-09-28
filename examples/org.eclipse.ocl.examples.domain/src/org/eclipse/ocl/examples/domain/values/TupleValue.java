@@ -21,6 +21,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TuplePartId;
+import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 /**
  * Interface of a tuple instance value.  OCL expressions resulting in tuples
@@ -36,6 +39,7 @@ public interface TupleValue extends Value {
 	 * @generated NOT
      */
 //	@NonNull DomainType getType();
+	@NonNull TupleTypeId getTypeId();
 	
     /**
      * Queries the value of the specified tuple part.
@@ -45,7 +49,7 @@ public interface TupleValue extends Value {
      * @throws InvalidValueException 
 	 * @generated NOT
      */
-	@Nullable Object getValue(@NonNull String partName);
+//	@Nullable Object getValue(@NonNull String partName);
     
     /**
      * Queries the value of the specified tuple part.
@@ -55,5 +59,11 @@ public interface TupleValue extends Value {
      * @throws InvalidValueException 
 	 * @generated NOT
      */
-	@Nullable Object getValue(@NonNull DomainTypedElement part);
+	@NonNull Object getValue(@NonNull TuplePartId partId);
+    
+    /**
+     * Queries the value of the specified tuple part at 0-based index corresponding to the position of the
+     * required part-name in the alphabetically sorted list of all part-names.
+     */
+	@NonNull Object getValue(int index);
 }

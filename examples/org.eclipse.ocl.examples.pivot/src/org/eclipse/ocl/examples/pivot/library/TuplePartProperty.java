@@ -19,6 +19,8 @@ package org.eclipse.ocl.examples.pivot.library;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
@@ -31,7 +33,8 @@ public class TuplePartProperty extends AbstractProperty
 
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull DomainProperty property) {
 		TupleValue tupleValue = asTupleValue(sourceValue);
-		Object resultValue = tupleValue.getValue(property);
+		TuplePartId tuplePartId = tupleValue.getTypeId().getPartId(property.getName());	// FIXME pre-compute
+		Object resultValue = tupleValue.getValue(tuplePartId);
 		if (resultValue != null) {
 			return resultValue;		// null is a static type error so no need to diagnose dynamically
 		}

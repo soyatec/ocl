@@ -29,8 +29,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.BuiltInTypeId;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -47,6 +48,7 @@ import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SelfType;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -102,11 +104,26 @@ public class PivotQueries
 
 	protected static @NonNull PrettyPrintOptions.Global createOptions(@NonNull Visitable element) {
 		Namespace scope = null;
-		if (element instanceof ExpressionInOCL) {
-			scope = PivotUtil.getNamespace(((ExpressionInOCL)element).getContextVariable().getType());
-		}
-		else if (element instanceof EObject) {
-			scope = PivotUtil.getNamespace((EObject)element);
+		if (element instanceof EObject) {
+			for (EObject eObject = (EObject) element; eObject != null; ) {
+				if (eObject instanceof Root) {
+					break;
+				}
+				if (eObject instanceof Type) {
+					scope = (Namespace) eObject;
+					break;
+				}
+				if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
+					scope = (Namespace) eObject;
+					break;
+				}
+				if (eObject instanceof ExpressionInOCL) {
+					eObject = ((ExpressionInOCL)eObject).getContextVariable().getType();
+				}
+				else {
+					eObject = eObject.eContainer();
+				}
+			}
 		}
 		PrettyPrintOptions.Global createOptions = PrettyPrinter.createOptions(scope);
 		createOptions.setLinelength(80);
@@ -292,7 +309,7 @@ public class PivotQueries
 		if (type instanceof PrimitiveType) {
 			return true;
 		}
-		if (typeId instanceof CollectedTypeId) {
+		if (typeId instanceof CollectionTypeId) {
 			return true;
 		}
 		if (type instanceof org.eclipse.ocl.examples.pivot.Enumeration) {
@@ -302,6 +319,7 @@ public class PivotQueries
 	}
 	
 	public static @NonNull Boolean isBuiltInType(@NonNull Type type) {
+		System.out.println(DomainUtil.debugSimpleName(type) + " + " + DomainUtil.debugSimpleName(type.getTypeId()) + " + " + type.getTypeId());
 		return type.getTypeId() instanceof BuiltInTypeId;
 	}
 	

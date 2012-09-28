@@ -94,7 +94,7 @@ public class TypeValueImpl extends ValueImpl implements TypeValue {
 	public @NonNull TypeId getTypeId() {
 		TypeId typeId2 = typeId;
 		if (typeId2 == null) {
-			typeId = typeId2 = TypeId.METACLASS.getCollectedTypeId(object.getTypeId());
+			typeId = typeId2 = TypeId.METACLASS.getSpecializedId(object.getTypeId());
 		}
 		return typeId2;
 	}

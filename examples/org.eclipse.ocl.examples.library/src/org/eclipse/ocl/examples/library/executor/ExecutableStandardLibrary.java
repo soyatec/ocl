@@ -23,13 +23,16 @@ import java.util.WeakHashMap;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
+import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.types.AbstractCollectionType;
 import org.eclipse.ocl.examples.domain.types.AbstractStandardLibrary;
 import org.eclipse.ocl.examples.domain.types.AbstractTupleType;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
@@ -218,7 +221,11 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 		}
 	} */
 
-	public @NonNull DomainTupleType getTupleType(@NonNull TupleTypeId typeId) {
+	public @NonNull DomainElement getTemplateParameter(@NonNull TemplateParameterId id, DomainElement context) {
+		throw new UnsupportedOperationException();
+	}
+
+	public @NonNull DomainTupleType getTupleType(@NonNull IdResolver idResolver, @NonNull TupleTypeId typeId) {
 		WeakReference<DomainTupleType> ref = tupleTypeMap.get(typeId);
 		if (ref != null) {
 			DomainTupleType domainTupleType = ref.get();

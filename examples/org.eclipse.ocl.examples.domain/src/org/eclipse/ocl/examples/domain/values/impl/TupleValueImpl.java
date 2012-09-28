@@ -22,9 +22,9 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -47,9 +47,8 @@ public class TupleValueImpl extends ValueImpl implements TupleValue
 		return ValuesPackage.Literals.TUPLE_VALUE;
 	}
 
-//	protected final @NonNull ValueFactory valueFactory;
-	protected final @NonNull TupleTypeId typeId;
-    private final @NonNull Map<String, Object> parts = new java.util.HashMap<String, Object>();
+	protected final @NonNull TupleTypeId tupleTypeId;
+    private final @NonNull Object[] partValues;
     private Integer hashCode = null;
 
     /**
@@ -58,29 +57,35 @@ public class TupleValueImpl extends ValueImpl implements TupleValue
      * @param type my type
      * @param values my parts
      */
-    public TupleValueImpl(@NonNull TupleTypeId typeId, @NonNull Map<? extends DomainTypedElement, Object> values) {
-		this.typeId = typeId;
-        for (Map.Entry<? extends DomainTypedElement, Object> entry : values.entrySet()) {
-            parts.put(entry.getKey().getName(), entry.getValue());
+    public TupleValueImpl(@NonNull TupleTypeId tupleTypeId, @NonNull Map<? extends TuplePartId, Object> values) {
+		this.tupleTypeId = tupleTypeId;
+	    partValues = new Object[tupleTypeId.getPartIds().length];
+        for (Map.Entry<? extends TuplePartId, Object> entry : values.entrySet()) {
+        	partValues[entry.getKey().getIndex()] = entry.getValue();
         }
     }
     
     /**
-     * Convenience constructor to initialize me with a pair of part values as
+     * Convenience constructor to initialize me with a list of values as
      * required by the Collection::product() operation.
      * 
-     * @param type my type
-     * @param firstValue my first value
-     * @param secondValue my second value
+     * @param tupleTypeId my type
+     * @param value my values which are aligned to the tupleTypeId.getParts()
      */
-    public TupleValueImpl(@NonNull TupleTypeId typeId, @NonNull Object firstValue, @NonNull Object secondValue) {
-		this.typeId = typeId;
-        parts.put("first", firstValue);			// FIXME define "first" elsewhere
-        parts.put("second", secondValue);
+    public TupleValueImpl(@NonNull TupleTypeId tupleTypeId, @NonNull Object... values) {
+		this.tupleTypeId = tupleTypeId;
+		TuplePartId[] partIds = tupleTypeId.getPartIds();
+		if (partIds.length != values.length) {
+			throw new InvalidValueException("Mismatching tuple values");
+		}
+	    partValues = new Object[partIds.length];
+		for (int i = 0; i < values.length; i++) {
+			partValues[i] = values[i];
+		}
     }
 
 	public @NonNull Object asObject() {
-		return parts;
+		return partValues;
 	}
 
     @Override
@@ -98,34 +103,40 @@ public class TupleValueImpl extends ValueImpl implements TupleValue
     		return false;
     	}
     	TupleValueImpl that = (TupleValueImpl)o;
-    	if (this.typeId != that.typeId) {
+    	if (this.tupleTypeId != that.tupleTypeId) {
     		return false;
     	}
-    	return this.parts.equals(that.parts);
+		for (int i = 0; i < partValues.length; i++) {
+			if (!partValues[i].equals(that.partValues[i])) {
+				return false;
+			}
+		}
+    	return true;
     }
 
 	public @NonNull TupleTypeId getTypeId() {
-		return typeId;
+		return tupleTypeId;
 	}
 
     // implements the inherited specification
-    public @Nullable Object getValue(@NonNull String partName) {
-        return parts.get(partName);
+    public @NonNull Object getValue(@NonNull TuplePartId partId) {
+        return getValue(partId.getIndex());
     }
 
     // implements the inherited specification
-    public @Nullable Object getValue(@NonNull DomainTypedElement part) {
-        String name = part.getName();
-		return name != null ? getValue(name) : null;
+    public @NonNull Object getValue(int index) {
+        return partValues[index];
     }
 
     // overrides the inherited implementation
     @Override
     public int hashCode() {
     	if (hashCode == null) {
-            int typeHashCode = typeId.hashCode();
-    		int partsHashCode = parts.hashCode();
-    		hashCode = 37 * typeHashCode + 17 * partsHashCode;
+            int hash = tupleTypeId.hashCode();
+    		for (Object partValue : partValues) {
+    			hash = 37* hash + partValue.hashCode();
+    		}
+    		hashCode = hash;
     	}
 		return hashCode;
     }
@@ -134,18 +145,15 @@ public class TupleValueImpl extends ValueImpl implements TupleValue
     public String toString() {
         StringBuilder result = new StringBuilder();
         result.append("Tuple{"); //$NON-NLS-1$       
-        String[] partNames = typeId.getPartNames();
-        TypeId[] partTypeIds = typeId.getPartTypeIds();
-		for (int i = 0; i < partNames.length; i++) {
-            String partName = partNames[i];
+        TuplePartId[] partIds = tupleTypeId.getPartIds();
+		for (int i = 0; i < partIds.length; i++) {
+			TuplePartId partId = partIds[i];
             if (i != 0) {
                 result.append(", "); //$NON-NLS-1$
             }
-			result.append(partName);
-            result.append(" : ");
-            result.append(partTypeIds[i]);
-            result.append(" = "); //$NON-NLS-1$
-            ValuesUtil.toString(parts.get(partName), result, 40);
+			result.append(partId.getDisplayName());
+            result.append(" = "); //$NON-NLS-1$a	
+            ValuesUtil.toString(partValues[i], result, 40);
         }       
         result.append("}"); //$NON-NLS-1$
         return result.toString();

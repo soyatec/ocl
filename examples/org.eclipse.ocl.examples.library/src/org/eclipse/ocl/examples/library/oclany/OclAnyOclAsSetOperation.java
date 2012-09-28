@@ -18,7 +18,7 @@ package org.eclipse.ocl.examples.library.oclany;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -35,10 +35,10 @@ public class OclAnyOclAsSetOperation extends AbstractUnaryOperation
 			return createInvalidValue(EvaluatorMessages.InvalidSource, "oclAsSet"); //$NON-NLS-1$
 		}
 		if (isNull(sourceVal)) {
-			return createSetValue((CollectedTypeId)returnTypeId);
+			return createSetValue((CollectionTypeId)returnTypeId);
 		}
 		else {
-			return createSetValue((CollectedTypeId)returnTypeId, sourceVal);
+			return createSetValue((CollectionTypeId)returnTypeId, sourceVal);
 		}
 	}
 }
