@@ -148,9 +148,6 @@ public class PivotResourceValidator extends ResourceValidatorImpl
 		}
 	}
 
-	@Inject
-	private Diagnostician diagnostician;
-
 	// FIXME BUG 389675 Remove duplication with respect to inherited method
 	@Override
 	public List<Issue> validate(Resource resource, final CheckMode mode, CancelIndicator mon) {
@@ -199,7 +196,7 @@ public class PivotResourceValidator extends ResourceValidatorImpl
 					// from the concrete syntax always complies with it - otherwise there are parse errors.
 					options.put(ConcreteSyntaxEValidator.DISABLE_CONCRETE_SYNTAX_EVALIDATOR, Boolean.TRUE);
 					// see EObjectValidator.getRootEValidator(Map<Object, Object>)
-					options.put(EValidator.class, diagnostician);
+					options.put(EValidator.class, getDiagnostician());
 					if (resource instanceof XtextResource) {
 						options.put(AbstractInjectableValidator.CURRENT_LANGUAGE_NAME, ((XtextResource) resource).getLanguageName());						
 						if (resource instanceof BaseCSResource) {
@@ -210,7 +207,7 @@ public class PivotResourceValidator extends ResourceValidatorImpl
 							}
 						}
 					}
-					Diagnostic diagnostic = diagnostician.validate(ele, options);
+					Diagnostic diagnostic = getDiagnostician().validate(ele, options);
 					if (!diagnostic.getChildren().isEmpty()) {
 						for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
 							issueFromEValidatorDiagnostic(childDiagnostic, acceptor);
