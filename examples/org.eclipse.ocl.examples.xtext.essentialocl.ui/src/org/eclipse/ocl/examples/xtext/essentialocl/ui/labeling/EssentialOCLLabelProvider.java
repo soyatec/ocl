@@ -23,7 +23,11 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TuplePartCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TupleTypeCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.CollectionTypeCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InvocationExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NameExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigatingArgCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.OperatorCS;
 
 import com.google.inject.Inject;
 
@@ -89,5 +93,25 @@ public class EssentialOCLLabelProvider extends BaseLabelProvider
 	}
 	return s.toString();
 	} */
+
+	protected String text(ExpCS ele) {
+		return "<<" + ele.eClass().getName() + ">>";
+	}
+
+	protected String text(InvocationExpCS ele) {
+		return "<<" + ele.eClass().getName() + ">> " + String.valueOf(ele.getNamedElement().getName());
+	}
+
+	protected String text(NameExpCS ele) {
+		return "<<" + ele.eClass().getName() + ">> " + String.valueOf(ele.getPathName().toString());
+	}
+
+	protected String text(NavigatingArgCS ele) {
+		return "<<" + ele.eClass().getName() + ">> " + String.valueOf(ele.getName());
+	}
+
+	protected String text(OperatorCS ele) {
+		return "<<" + ele.eClass().getName() + ">> " + String.valueOf(ele.getName());
+	}
 
 }

@@ -485,7 +485,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InvalidLiteralExp" eSuperTypes="#//LiteralExp"/>
   <eClassifiers xsi:type="ecore:EClass" name="InvalidType" eSuperTypes="#//Class"/>
-  <eClassifiers xsi:type="ecore:EClass" name="IterateExp" eSuperTypes="#//LoopExp">
+  <eClassifiers xsi:type="ecore:EClass" name="IterateExp" eSuperTypes="#//LoopExp #//ReferringElement">
     <eOperations name="TypeIsResultType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type of the iterate is the type of the result variable."/>
@@ -540,7 +540,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAccumulator" upperBound="-1"
         eType="#//Parameter" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IteratorExp" eSuperTypes="#//LoopExp">
+  <eClassifiers xsi:type="ecore:EClass" name="IteratorExp" eSuperTypes="#//LoopExp #//ReferringElement">
     <eOperations name="ClosureBodyTypeIsConformanttoIteratorType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
         <details key="body" value="true"/>
@@ -1228,7 +1228,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OperationCallExp" eSuperTypes="#//FeatureCallExp">
+  <eClassifiers xsi:type="ecore:EClass" name="OperationCallExp" eSuperTypes="#//FeatureCallExp #//ReferringElement">
     <eOperations name="ArgumentCount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="There must be exactly as many arguments as the referred operation has parameters."/>
@@ -1433,12 +1433,15 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningType" eType="#//Type"
         eOpposite="#//Type/ownedAttribute"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PropertyCallExp" eSuperTypes="#//NavigationCallExp">
+  <eClassifiers xsi:type="ecore:EClass" name="PropertyCallExp" eSuperTypes="#//NavigationCallExp #//ReferringElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" eType="#//Property"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RealLiteralExp" eSuperTypes="#//NumericLiteralExp">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="realSymbol" lowerBound="1"
         eType="#//Real"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferringElement" abstract="true" interface="true">
+    <eOperations name="referredElement" lowerBound="1" eType="#//Element"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Root" eSuperTypes="#//Namespace">
     <eStructuralFeatures xsi:type="ecore:EReference" name="nestedPackage" ordered="false"
@@ -1664,7 +1667,7 @@
         eType="#//Type"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceClassName" eType="#//String"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TypeExp" eSuperTypes="#//OCLExpression">
+  <eClassifiers xsi:type="ecore:EClass" name="TypeExp" eSuperTypes="#//OCLExpression #//ReferringElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredType" eType="#//Type"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeTemplateParameter" eSuperTypes="#//TemplateParameter">
@@ -1775,7 +1778,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableDeclaration" abstract="true"
       eSuperTypes="#//TypedElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableExp" eSuperTypes="#//OCLExpression">
+  <eClassifiers xsi:type="ecore:EClass" name="VariableExp" eSuperTypes="#//OCLExpression #//ReferringElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredVariable" eType="#//VariableDeclaration"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="implicit" eType="#//Boolean"
         defaultValueLiteral="false"/>

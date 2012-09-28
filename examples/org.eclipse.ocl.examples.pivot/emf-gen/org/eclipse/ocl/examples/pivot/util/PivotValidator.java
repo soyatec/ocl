@@ -93,6 +93,7 @@ import org.eclipse.ocl.examples.pivot.Profile;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
+import org.eclipse.ocl.examples.pivot.ReferringElement;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SelfType;
 import org.eclipse.ocl.examples.pivot.SendSignalAction;
@@ -784,6 +785,8 @@ public class PivotValidator
 				return validatePropertyCallExp((PropertyCallExp)value, diagnostics, context);
 			case PivotPackage.REAL_LITERAL_EXP:
 				return validateRealLiteralExp((RealLiteralExp)value, diagnostics, context);
+			case PivotPackage.REFERRING_ELEMENT:
+				return validateReferringElement((ReferringElement)value, diagnostics, context);
 			case PivotPackage.ROOT:
 				return validateRoot((Root)value, diagnostics, context);
 			case PivotPackage.SELF_TYPE:
@@ -3235,6 +3238,16 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)realLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(realLiteralExp, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateReferringElement(ReferringElement referringElement, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		return validate_EveryDefaultConstraint((EObject)referringElement, diagnostics, context);
 	}
 
 	/**

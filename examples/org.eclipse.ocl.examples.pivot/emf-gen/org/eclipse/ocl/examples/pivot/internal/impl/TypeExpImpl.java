@@ -16,9 +16,13 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -27,8 +31,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.ReferringElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeExp;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -258,9 +264,61 @@ public class TypeExpImpl
 		return eDynamicIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass)
+	{
+		if (baseClass == ReferringElement.class)
+		{
+			switch (baseOperationID)
+			{
+				case PivotPackage.REFERRING_ELEMENT___REFERRED_ELEMENT: return PivotPackage.TYPE_EXP___REFERRED_ELEMENT;
+				default: return -1;
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException
+	{
+		switch (operationID)
+		{
+			case PivotPackage.TYPE_EXP___ALL_OWNED_ELEMENTS:
+				return allOwnedElements();
+			case PivotPackage.TYPE_EXP___GET_VALUE__TYPE_STRING:
+				return getValue((Type)arguments.get(0), (String)arguments.get(1));
+			case PivotPackage.TYPE_EXP___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP:
+				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case PivotPackage.TYPE_EXP___REFERRED_ELEMENT:
+				return getReferredElement();
+		}
+		return eDynamicInvoke(operationID, arguments);
+	}
+
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitTypeExp(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Element getReferredElement()
+	{
+		return getReferredType();
 	}
 
 } //TypeExpImpl

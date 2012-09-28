@@ -102,6 +102,7 @@ import org.eclipse.ocl.examples.pivot.utilities.Pivot2Moniker;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PivotableElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypeRefCS;
 import org.eclipse.swt.graphics.Image;
@@ -189,6 +190,10 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		else {
 			s.append("<null>");
 		}	
+	}
+
+	protected void appendPathName(StringBuilder s, PathNameCS pathName) {
+		s.append(pathName.toString());
 	}
 
 	protected void appendString(@NonNull StringBuilder s, String string, int countLimit) {
@@ -517,7 +522,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		StringBuilder s = new StringBuilder();
 		appendOptionalName(s, ele);
 		s.append(" : ");
-//		appendString(s, ele.getUri());
+		appendPathName(s, ele.getPathName());
 		return s.toString();
 	}
 
@@ -649,6 +654,12 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		s.append(" : ");
 		appendType(s, ele.getType());
 //		appendMultiplicity(s, ele);
+		return s.toString();
+	}
+
+	protected String text(PathNameCS ele) {
+		StringBuilder s = new StringBuilder();
+		appendPathName(s, ele);
 		return s.toString();
 	}
 	

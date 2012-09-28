@@ -302,7 +302,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getVariable()
 	 * @generated
 	 */
-	int VARIABLE = 99;
+	int VARIABLE = 100;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.IfExpImpl <em>If Exp</em>}' class.
@@ -392,7 +392,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getSendSignalAction()
 	 * @generated
 	 */
-	int SEND_SIGNAL_ACTION = 73;
+	int SEND_SIGNAL_ACTION = 74;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.SignalImpl <em>Signal</em>}' class.
@@ -402,7 +402,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getSignal()
 	 * @generated
 	 */
-	int SIGNAL = 76;
+	int SIGNAL = 77;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.MessageTypeImpl <em>Message Type</em>}' class.
@@ -492,7 +492,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getSequenceType()
 	 * @generated
 	 */
-	int SEQUENCE_TYPE = 74;
+	int SEQUENCE_TYPE = 75;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.SetTypeImpl <em>Set Type</em>}' class.
@@ -502,7 +502,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getSetType()
 	 * @generated
 	 */
-	int SET_TYPE = 75;
+	int SET_TYPE = 76;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl <em>State</em>}' class.
@@ -512,7 +512,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getState()
 	 * @generated
 	 */
-	int STATE = 77;
+	int STATE = 78;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.StateExpImpl <em>State Exp</em>}' class.
@@ -522,7 +522,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getStateExp()
 	 * @generated
 	 */
-	int STATE_EXP = 78;
+	int STATE_EXP = 79;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.StringLiteralExpImpl <em>String Literal Exp</em>}' class.
@@ -532,7 +532,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getStringLiteralExp()
 	 * @generated
 	 */
-	int STRING_LITERAL_EXP = 80;
+	int STRING_LITERAL_EXP = 81;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateParameterTypeImpl <em>Template Parameter Type</em>}' class.
@@ -542,7 +542,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTemplateParameterType()
 	 * @generated
 	 */
-	int TEMPLATE_PARAMETER_TYPE = 84;
+	int TEMPLATE_PARAMETER_TYPE = 85;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TupleLiteralExpImpl <em>Tuple Literal Exp</em>}' class.
@@ -552,7 +552,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTupleLiteralExp()
 	 * @generated
 	 */
-	int TUPLE_LITERAL_EXP = 87;
+	int TUPLE_LITERAL_EXP = 88;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TupleLiteralPartImpl <em>Tuple Literal Part</em>}' class.
@@ -562,7 +562,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTupleLiteralPart()
 	 * @generated
 	 */
-	int TUPLE_LITERAL_PART = 88;
+	int TUPLE_LITERAL_PART = 89;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TupleTypeImpl <em>Tuple Type</em>}' class.
@@ -572,7 +572,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTupleType()
 	 * @generated
 	 */
-	int TUPLE_TYPE = 89;
+	int TUPLE_TYPE = 90;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TypeExpImpl <em>Type Exp</em>}' class.
@@ -582,7 +582,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTypeExp()
 	 * @generated
 	 */
-	int TYPE_EXP = 91;
+	int TYPE_EXP = 92;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.UnlimitedNaturalLiteralExpImpl <em>Unlimited Natural Literal Exp</em>}' class.
@@ -592,7 +592,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getUnlimitedNaturalLiteralExp()
 	 * @generated
 	 */
-	int UNLIMITED_NATURAL_LITERAL_EXP = 95;
+	int UNLIMITED_NATURAL_LITERAL_EXP = 96;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.UnspecifiedValueExpImpl <em>Unspecified Value Exp</em>}' class.
@@ -602,7 +602,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getUnspecifiedValueExp()
 	 * @generated
 	 */
-	int UNSPECIFIED_VALUE_EXP = 97;
+	int UNSPECIFIED_VALUE_EXP = 98;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.VariableExpImpl <em>Variable Exp</em>}' class.
@@ -612,7 +612,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getVariableExp()
 	 * @generated
 	 */
-	int VARIABLE_EXP = 101;
+	int VARIABLE_EXP = 102;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.VoidTypeImpl <em>Void Type</em>}' class.
@@ -622,7 +622,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getVoidType()
 	 * @generated
 	 */
-	int VOID_TYPE = 104;
+	int VOID_TYPE = 105;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.util.Pivotable <em>Pivotable</em>}' class.
@@ -642,7 +642,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getVisitable()
 	 * @generated
 	 */
-	int VISITABLE = 102;
+	int VISITABLE = 103;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.ElementImpl <em>Element</em>}' class.
@@ -682,7 +682,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getType()
 	 * @generated
 	 */
-	int TYPE = 90;
+	int TYPE = 91;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl <em>Class</em>}' class.
@@ -702,7 +702,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTemplateableElement()
 	 * @generated
 	 */
-	int TEMPLATEABLE_ELEMENT = 86;
+	int TEMPLATEABLE_ELEMENT = 87;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateBindingImpl <em>Template Binding</em>}' class.
@@ -712,7 +712,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTemplateBinding()
 	 * @generated
 	 */
-	int TEMPLATE_BINDING = 81;
+	int TEMPLATE_BINDING = 82;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateSignatureImpl <em>Template Signature</em>}' class.
@@ -722,7 +722,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTemplateSignature()
 	 * @generated
 	 */
-	int TEMPLATE_SIGNATURE = 85;
+	int TEMPLATE_SIGNATURE = 86;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateParameterImpl <em>Template Parameter</em>}' class.
@@ -732,7 +732,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTemplateParameter()
 	 * @generated
 	 */
-	int TEMPLATE_PARAMETER = 82;
+	int TEMPLATE_PARAMETER = 83;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.ParameterableElementImpl <em>Parameterable Element</em>}' class.
@@ -752,7 +752,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTemplateParameterSubstitution()
 	 * @generated
 	 */
-	int TEMPLATE_PARAMETER_SUBSTITUTION = 83;
+	int TEMPLATE_PARAMETER_SUBSTITUTION = 84;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.PackageImpl <em>Package</em>}' class.
@@ -792,7 +792,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTypeTemplateParameter()
 	 * @generated
 	 */
-	int TYPE_TEMPLATE_PARAMETER = 92;
+	int TYPE_TEMPLATE_PARAMETER = 93;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TypedMultiplicityElementImpl <em>Typed Multiplicity Element</em>}' class.
@@ -802,7 +802,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTypedMultiplicityElement()
 	 * @generated
 	 */
-	int TYPED_MULTIPLICITY_ELEMENT = 94;
+	int TYPED_MULTIPLICITY_ELEMENT = 95;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl <em>Property</em>}' class.
@@ -822,7 +822,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getTypedElement()
 	 * @generated
 	 */
-	int TYPED_ELEMENT = 93;
+	int TYPED_ELEMENT = 94;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.AssociationClassImpl <em>Association Class</em>}' class.
@@ -862,7 +862,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getVariableDeclaration()
 	 * @generated
 	 */
-	int VARIABLE_DECLARATION = 100;
+	int VARIABLE_DECLARATION = 101;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationTemplateParameterImpl <em>Operation Template Parameter</em>}' class.
@@ -902,7 +902,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getValueSpecification()
 	 * @generated
 	 */
-	int VALUE_SPECIFICATION = 98;
+	int VALUE_SPECIFICATION = 99;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.util.Nameable <em>Nameable</em>}' class.
@@ -8824,13 +8824,22 @@ public interface PivotPackage
 	int ITERATE_EXP___VALIDATE_NO_INITIALIZERS__DIAGNOSTICCHAIN_MAP = LOOP_EXP___VALIDATE_NO_INITIALIZERS__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Referred Element</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATE_EXP___REFERRED_ELEMENT = LOOP_EXP_OPERATION_COUNT + 0;
+
+	/**
 	 * The operation id for the '<em>Validate Type Is Result Type</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATE_EXP___VALIDATE_TYPE_IS_RESULT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 0;
+	int ITERATE_EXP___VALIDATE_TYPE_IS_RESULT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Validate Body Type Conforms To Result Type</em>' operation.
@@ -8839,7 +8848,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATE_EXP___VALIDATE_BODY_TYPE_CONFORMS_TO_RESULT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 1;
+	int ITERATE_EXP___VALIDATE_BODY_TYPE_CONFORMS_TO_RESULT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>Validate One Initializer</em>' operation.
@@ -8848,7 +8857,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATE_EXP___VALIDATE_ONE_INITIALIZER__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 2;
+	int ITERATE_EXP___VALIDATE_ONE_INITIALIZER__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Iterate Exp</em>' class.
@@ -8857,7 +8866,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATE_EXP_OPERATION_COUNT = LOOP_EXP_OPERATION_COUNT + 3;
+	int ITERATE_EXP_OPERATION_COUNT = LOOP_EXP_OPERATION_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -9652,13 +9661,22 @@ public interface PivotPackage
 	int ITERATOR_EXP___VALIDATE_NO_INITIALIZERS__DIAGNOSTICCHAIN_MAP = LOOP_EXP___VALIDATE_NO_INITIALIZERS__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Referred Element</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___REFERRED_ELEMENT = LOOP_EXP_OPERATION_COUNT + 0;
+
+	/**
 	 * The operation id for the '<em>Validate Closure Body Type Is Conformantto Iterator Type</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_CLOSURE_BODY_TYPE_IS_CONFORMANTTO_ITERATOR_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 0;
+	int ITERATOR_EXP___VALIDATE_CLOSURE_BODY_TYPE_IS_CONFORMANTTO_ITERATOR_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Validate Sorted By Iterator Type Is Comparable</em>' operation.
@@ -9667,7 +9685,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_SORTED_BY_ITERATOR_TYPE_IS_COMPARABLE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 1;
+	int ITERATOR_EXP___VALIDATE_SORTED_BY_ITERATOR_TYPE_IS_COMPARABLE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>Validate Any Has One Iterator</em>' operation.
@@ -9676,7 +9694,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_ANY_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 2;
+	int ITERATOR_EXP___VALIDATE_ANY_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Validate Any Type Is Source Element Type</em>' operation.
@@ -9685,7 +9703,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_ANY_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 3;
+	int ITERATOR_EXP___VALIDATE_ANY_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>Validate Any Body Type Is Boolean</em>' operation.
@@ -9694,7 +9712,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_ANY_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 4;
+	int ITERATOR_EXP___VALIDATE_ANY_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>Validate Closure Has One Iterator</em>' operation.
@@ -9703,7 +9721,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_CLOSURE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 5;
+	int ITERATOR_EXP___VALIDATE_CLOSURE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 6;
 
 	/**
 	 * The operation id for the '<em>Validate Closure Type Is Unique Collection</em>' operation.
@@ -9712,7 +9730,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_CLOSURE_TYPE_IS_UNIQUE_COLLECTION__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 6;
+	int ITERATOR_EXP___VALIDATE_CLOSURE_TYPE_IS_UNIQUE_COLLECTION__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 7;
 
 	/**
 	 * The operation id for the '<em>Validate Closure Source Element Type Is Body Element Type</em>' operation.
@@ -9721,7 +9739,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_CLOSURE_SOURCE_ELEMENT_TYPE_IS_BODY_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 7;
+	int ITERATOR_EXP___VALIDATE_CLOSURE_SOURCE_ELEMENT_TYPE_IS_BODY_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 8;
 
 	/**
 	 * The operation id for the '<em>Validate Closure Element Type Is Source Element Type</em>' operation.
@@ -9730,7 +9748,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_CLOSURE_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 8;
+	int ITERATOR_EXP___VALIDATE_CLOSURE_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 9;
 
 	/**
 	 * The operation id for the '<em>Validate Collect Has One Iterator</em>' operation.
@@ -9739,7 +9757,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_COLLECT_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 9;
+	int ITERATOR_EXP___VALIDATE_COLLECT_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 10;
 
 	/**
 	 * The operation id for the '<em>Validate Collect Type Is Unordered</em>' operation.
@@ -9748,7 +9766,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_COLLECT_TYPE_IS_UNORDERED__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 10;
+	int ITERATOR_EXP___VALIDATE_COLLECT_TYPE_IS_UNORDERED__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 11;
 
 	/**
 	 * The operation id for the '<em>Validate Collect Element Type Is Source Element Type</em>' operation.
@@ -9757,7 +9775,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_COLLECT_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 11;
+	int ITERATOR_EXP___VALIDATE_COLLECT_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 12;
 
 	/**
 	 * The operation id for the '<em>Validate Collect Nested Has One Iterator</em>' operation.
@@ -9766,7 +9784,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_COLLECT_NESTED_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 12;
+	int ITERATOR_EXP___VALIDATE_COLLECT_NESTED_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 13;
 
 	/**
 	 * The operation id for the '<em>Validate Collect Nested Type Is Bag</em>' operation.
@@ -9775,7 +9793,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_COLLECT_NESTED_TYPE_IS_BAG__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 13;
+	int ITERATOR_EXP___VALIDATE_COLLECT_NESTED_TYPE_IS_BAG__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 14;
 
 	/**
 	 * The operation id for the '<em>Validate Collect Nested Type Is Body Type</em>' operation.
@@ -9784,7 +9802,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_COLLECT_NESTED_TYPE_IS_BODY_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 14;
+	int ITERATOR_EXP___VALIDATE_COLLECT_NESTED_TYPE_IS_BODY_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 15;
 
 	/**
 	 * The operation id for the '<em>Validate Exists Type Is Boolean</em>' operation.
@@ -9793,7 +9811,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_EXISTS_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 15;
+	int ITERATOR_EXP___VALIDATE_EXISTS_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 16;
 
 	/**
 	 * The operation id for the '<em>Validate Exists Body Type Is Boolean</em>' operation.
@@ -9802,7 +9820,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_EXISTS_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 16;
+	int ITERATOR_EXP___VALIDATE_EXISTS_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 17;
 
 	/**
 	 * The operation id for the '<em>Validate For All Type Is Boolean</em>' operation.
@@ -9811,7 +9829,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_FOR_ALL_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 17;
+	int ITERATOR_EXP___VALIDATE_FOR_ALL_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 18;
 
 	/**
 	 * The operation id for the '<em>Validate For All Body Type Is Boolean</em>' operation.
@@ -9820,7 +9838,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_FOR_ALL_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 18;
+	int ITERATOR_EXP___VALIDATE_FOR_ALL_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 19;
 
 	/**
 	 * The operation id for the '<em>Validate Is Unique Has One Iterator</em>' operation.
@@ -9829,7 +9847,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_IS_UNIQUE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 19;
+	int ITERATOR_EXP___VALIDATE_IS_UNIQUE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 20;
 
 	/**
 	 * The operation id for the '<em>Validate Is Unique Type Is Boolean</em>' operation.
@@ -9838,7 +9856,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_IS_UNIQUE_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 20;
+	int ITERATOR_EXP___VALIDATE_IS_UNIQUE_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 21;
 
 	/**
 	 * The operation id for the '<em>Validate One Has One Iterator</em>' operation.
@@ -9847,7 +9865,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_ONE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 21;
+	int ITERATOR_EXP___VALIDATE_ONE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 22;
 
 	/**
 	 * The operation id for the '<em>Validate One Type Is Boolean</em>' operation.
@@ -9856,7 +9874,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_ONE_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 22;
+	int ITERATOR_EXP___VALIDATE_ONE_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 23;
 
 	/**
 	 * The operation id for the '<em>Validate One Body Type Is Boolean</em>' operation.
@@ -9865,7 +9883,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_ONE_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 23;
+	int ITERATOR_EXP___VALIDATE_ONE_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 24;
 
 	/**
 	 * The operation id for the '<em>Validate Reject Or Select Has One Iterator</em>' operation.
@@ -9874,7 +9892,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 24;
+	int ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 25;
 
 	/**
 	 * The operation id for the '<em>Validate Reject Or Select Type Is Source Type</em>' operation.
@@ -9883,7 +9901,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_TYPE_IS_SOURCE_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 25;
+	int ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_TYPE_IS_SOURCE_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 26;
 
 	/**
 	 * The operation id for the '<em>Validate Reject Or Select Type Is Boolean</em>' operation.
@@ -9892,7 +9910,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 26;
+	int ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 27;
 
 	/**
 	 * The operation id for the '<em>Validate Sorted By Has One Iterator</em>' operation.
@@ -9901,7 +9919,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_SORTED_BY_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 27;
+	int ITERATOR_EXP___VALIDATE_SORTED_BY_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 28;
 
 	/**
 	 * The operation id for the '<em>Validate Sorted By Is Ordered If Source Is Ordered</em>' operation.
@@ -9910,7 +9928,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_SORTED_BY_IS_ORDERED_IF_SOURCE_IS_ORDERED__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 28;
+	int ITERATOR_EXP___VALIDATE_SORTED_BY_IS_ORDERED_IF_SOURCE_IS_ORDERED__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 29;
 
 	/**
 	 * The operation id for the '<em>Validate Sorted By Element Type Is Source Element Type</em>' operation.
@@ -9919,7 +9937,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_SORTED_BY_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 29;
+	int ITERATOR_EXP___VALIDATE_SORTED_BY_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 30;
 
 	/**
 	 * The operation id for the '<em>Validate Iterator Type Is Source Element Type</em>' operation.
@@ -9928,7 +9946,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_ITERATOR_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 30;
+	int ITERATOR_EXP___VALIDATE_ITERATOR_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 31;
 
 	/**
 	 * The number of operations of the '<em>Iterator Exp</em>' class.
@@ -9937,7 +9955,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP_OPERATION_COUNT = LOOP_EXP_OPERATION_COUNT + 31;
+	int ITERATOR_EXP_OPERATION_COUNT = LOOP_EXP_OPERATION_COUNT + 32;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -11839,13 +11857,22 @@ public interface PivotPackage
 	int OPERATION_CALL_EXP___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = FEATURE_CALL_EXP___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Referred Element</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CALL_EXP___REFERRED_ELEMENT = FEATURE_CALL_EXP_OPERATION_COUNT + 0;
+
+	/**
 	 * The operation id for the '<em>Validate Argument Count</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_CALL_EXP___VALIDATE_ARGUMENT_COUNT__DIAGNOSTICCHAIN_MAP = FEATURE_CALL_EXP_OPERATION_COUNT + 0;
+	int OPERATION_CALL_EXP___VALIDATE_ARGUMENT_COUNT__DIAGNOSTICCHAIN_MAP = FEATURE_CALL_EXP_OPERATION_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Operation Call Exp</em>' class.
@@ -11854,7 +11881,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_CALL_EXP_OPERATION_COUNT = FEATURE_CALL_EXP_OPERATION_COUNT + 1;
+	int OPERATION_CALL_EXP_OPERATION_COUNT = FEATURE_CALL_EXP_OPERATION_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -13847,13 +13874,22 @@ public interface PivotPackage
 	int PROPERTY_CALL_EXP___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = NAVIGATION_CALL_EXP___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Referred Element</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_CALL_EXP___REFERRED_ELEMENT = NAVIGATION_CALL_EXP_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Property Call Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_CALL_EXP_OPERATION_COUNT = NAVIGATION_CALL_EXP_OPERATION_COUNT + 0;
+	int PROPERTY_CALL_EXP_OPERATION_COUNT = NAVIGATION_CALL_EXP_OPERATION_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -13973,6 +14009,43 @@ public interface PivotPackage
 	int REAL_LITERAL_EXP_OPERATION_COUNT = NUMERIC_LITERAL_EXP_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.ReferringElement <em>Referring Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.ocl.examples.pivot.ReferringElement
+	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getReferringElement()
+	 * @generated
+	 */
+	int REFERRING_ELEMENT = 71;
+
+	/**
+	 * The number of structural features of the '<em>Referring Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERRING_ELEMENT_FEATURE_COUNT = 0;
+
+	/**
+	 * The operation id for the '<em>Referred Element</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERRING_ELEMENT___REFERRED_ELEMENT = 0;
+
+	/**
+	 * The number of operations of the '<em>Referring Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERRING_ELEMENT_OPERATION_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.RootImpl <em>Root</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13980,7 +14053,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getRoot()
 	 * @generated
 	 */
-	int ROOT = 71;
+	int ROOT = 72;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -14107,7 +14180,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getSelfType()
 	 * @generated
 	 */
-	int SELF_TYPE = 72;
+	int SELF_TYPE = 73;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -15395,7 +15468,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getStereotype()
 	 * @generated
 	 */
-	int STEREOTYPE = 79;
+	int STEREOTYPE = 80;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -17117,13 +17190,22 @@ public interface PivotPackage
 	int TYPE_EXP___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = OCL_EXPRESSION___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Referred Element</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_EXP___REFERRED_ELEMENT = OCL_EXPRESSION_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Type Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_EXP_OPERATION_COUNT = OCL_EXPRESSION_OPERATION_COUNT + 0;
+	int TYPE_EXP_OPERATION_COUNT = OCL_EXPRESSION_OPERATION_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -17376,7 +17458,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getUnspecifiedType()
 	 * @generated
 	 */
-	int UNSPECIFIED_TYPE = 96;
+	int UNSPECIFIED_TYPE = 97;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -18009,13 +18091,22 @@ public interface PivotPackage
 	int VARIABLE_EXP___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = OCL_EXPRESSION___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Referred Element</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_EXP___REFERRED_ELEMENT = OCL_EXPRESSION_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Variable Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_EXP_OPERATION_COUNT = OCL_EXPRESSION_OPERATION_COUNT + 0;
+	int VARIABLE_EXP_OPERATION_COUNT = OCL_EXPRESSION_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.util.Visitor <em>Visitor</em>}' class.
@@ -18025,7 +18116,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getVisitor()
 	 * @generated
 	 */
-	int VISITOR = 103;
+	int VISITOR = 104;
 
 	/**
 	 * The number of structural features of the '<em>Visitor</em>' class.
@@ -18305,7 +18396,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getAssociativityKind()
 	 * @generated
 	 */
-	int ASSOCIATIVITY_KIND = 105;
+	int ASSOCIATIVITY_KIND = 106;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.CollectionKind <em>Collection Kind</em>}' enum.
@@ -18315,7 +18406,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getCollectionKind()
 	 * @generated
 	 */
-	int COLLECTION_KIND = 106;
+	int COLLECTION_KIND = 107;
 
 	/**
 	 * The meta object id for the '<em>Boolean</em>' data type.
@@ -18324,7 +18415,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getBoolean()
 	 * @generated
 	 */
-	int BOOLEAN = 107;
+	int BOOLEAN = 108;
 
 	/**
 	 * The meta object id for the '<em>Int</em>' data type.
@@ -18333,7 +18424,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getInt()
 	 * @generated
 	 */
-	int INT = 108;
+	int INT = 109;
 
 	/**
 	 * The meta object id for the '<em>Integer</em>' data type.
@@ -18343,7 +18434,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getInteger()
 	 * @generated
 	 */
-	int INTEGER = 109;
+	int INTEGER = 110;
 
 	/**
 	 * The meta object id for the '<em>Library Feature</em>' data type.
@@ -18353,7 +18444,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getLibraryFeature()
 	 * @generated
 	 */
-	int LIBRARY_FEATURE = 110;
+	int LIBRARY_FEATURE = 111;
 
 	/**
 	 * The meta object id for the '<em>Object</em>' data type.
@@ -18363,7 +18454,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getObject()
 	 * @generated
 	 */
-	int OBJECT = 111;
+	int OBJECT = 112;
 
 	/**
 	 * The meta object id for the '<em>Real</em>' data type.
@@ -18373,7 +18464,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getReal()
 	 * @generated
 	 */
-	int REAL = 112;
+	int REAL = 113;
 
 	/**
 	 * The meta object id for the '<em>String</em>' data type.
@@ -18383,7 +18474,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getString()
 	 * @generated
 	 */
-	int STRING = 113;
+	int STRING = 114;
 
 	/**
 	 * The meta object id for the '<em>Throwable</em>' data type.
@@ -18393,7 +18484,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getThrowable()
 	 * @generated
 	 */
-	int THROWABLE = 114;
+	int THROWABLE = 115;
 
 	/**
 	 * The meta object id for the '<em>Unlimited Natural</em>' data type.
@@ -18403,7 +18494,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getUnlimitedNatural()
 	 * @generated
 	 */
-	int UNLIMITED_NATURAL = 115;
+	int UNLIMITED_NATURAL = 116;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.Annotation <em>Annotation</em>}'.
@@ -20184,6 +20275,26 @@ public interface PivotPackage
 	 * @generated
 	 */
 	EAttribute getRealLiteralExp_RealSymbol();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.ReferringElement <em>Referring Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Referring Element</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.ReferringElement
+	 * @generated
+	 */
+	EClass getReferringElement();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.ReferringElement#getReferredElement() <em>Referred Element</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Referred Element</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.ReferringElement#getReferredElement()
+	 * @generated
+	 */
+	EOperation getReferringElement__ReferredElement();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.Root <em>Root</em>}'.
@@ -23645,6 +23756,24 @@ public interface PivotPackage
 		 * @generated
 		 */
 		EAttribute REAL_LITERAL_EXP__REAL_SYMBOL = eINSTANCE.getRealLiteralExp_RealSymbol();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.ReferringElement <em>Referring Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.ocl.examples.pivot.ReferringElement
+		 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getReferringElement()
+		 * @generated
+		 */
+		EClass REFERRING_ELEMENT = eINSTANCE.getReferringElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred Element</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REFERRING_ELEMENT___REFERRED_ELEMENT = eINSTANCE.getReferringElement__ReferredElement();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.RootImpl <em>Root</em>}' class.

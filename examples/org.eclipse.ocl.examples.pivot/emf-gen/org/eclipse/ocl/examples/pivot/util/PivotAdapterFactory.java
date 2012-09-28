@@ -87,6 +87,7 @@ import org.eclipse.ocl.examples.pivot.Profile;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
+import org.eclipse.ocl.examples.pivot.ReferringElement;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SelfType;
 import org.eclipse.ocl.examples.pivot.SendSignalAction;
@@ -535,6 +536,11 @@ public class PivotAdapterFactory
 			public Adapter caseRealLiteralExp(RealLiteralExp object)
 			{
 				return createRealLiteralExpAdapter();
+			}
+			@Override
+			public Adapter caseReferringElement(ReferringElement object)
+			{
+				return createReferringElementAdapter();
 			}
 			@Override
 			public Adapter caseRoot(Root object)
@@ -1420,6 +1426,21 @@ public class PivotAdapterFactory
 	 * @generated
 	 */
 	public Adapter createRealLiteralExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.ReferringElement <em>Referring Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.ReferringElement
+	 * @generated
+	 */
+	public Adapter createReferringElementAdapter()
+	{
 		return null;
 	}
 

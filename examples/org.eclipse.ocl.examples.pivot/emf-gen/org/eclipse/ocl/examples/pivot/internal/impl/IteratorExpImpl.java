@@ -46,11 +46,13 @@ import org.eclipse.ocl.examples.library.iterator.ClosureIteration;
 import org.eclipse.ocl.examples.library.iterator.SortedByIteration;
 import org.eclipse.ocl.examples.library.oclany.OclComparableCompareToOperation;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.IteratorExp;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
+import org.eclipse.ocl.examples.pivot.ReferringElement;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -1233,6 +1235,25 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * @generated
 	 */
 	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass)
+	{
+		if (baseClass == ReferringElement.class)
+		{
+			switch (baseOperationID)
+			{
+				case PivotPackage.REFERRING_ELEMENT___REFERRED_ELEMENT: return PivotPackage.ITERATOR_EXP___REFERRED_ELEMENT;
+				default: return -1;
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException
 	{
@@ -1248,6 +1269,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 				return validateSourceIsCollection((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.ITERATOR_EXP___VALIDATE_NO_INITIALIZERS__DIAGNOSTICCHAIN_MAP:
 				return validateNoInitializers((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case PivotPackage.ITERATOR_EXP___REFERRED_ELEMENT:
+				return getReferredElement();
 			case PivotPackage.ITERATOR_EXP___VALIDATE_CLOSURE_BODY_TYPE_IS_CONFORMANTTO_ITERATOR_TYPE__DIAGNOSTICCHAIN_MAP:
 				return validateClosureBodyTypeIsConformanttoIteratorType((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.ITERATOR_EXP___VALIDATE_SORTED_BY_ITERATOR_TYPE_IS_COMPARABLE__DIAGNOSTICCHAIN_MAP:
@@ -1317,6 +1340,16 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitIteratorExp(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Element getReferredElement()
+	{
+		return getReferredIteration();
 	}
 
 } //IteratorExpImpl
