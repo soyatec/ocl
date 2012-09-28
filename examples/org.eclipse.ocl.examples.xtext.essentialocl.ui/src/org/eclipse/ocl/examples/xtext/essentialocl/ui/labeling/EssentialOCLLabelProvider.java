@@ -18,16 +18,23 @@ package org.eclipse.ocl.examples.xtext.essentialocl.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.NavigationCallExp;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TuplePartCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TupleTypeCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.BooleanLiteralExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.CollectionTypeCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InfixExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InvocationExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NameExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigatingArgCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NestedExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NumberLiteralExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.OperatorCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.SelfExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.StringLiteralExpCS;
 
 import com.google.inject.Inject;
 
@@ -94,24 +101,52 @@ public class EssentialOCLLabelProvider extends BaseLabelProvider
 	return s.toString();
 	} */
 
+	protected String text(BooleanLiteralExpCS ele) {
+		return String.valueOf(ele.getName());
+	}
+
 	protected String text(ExpCS ele) {
 		return "<<" + ele.eClass().getName() + ">>";
 	}
 
 	protected String text(InvocationExpCS ele) {
-		return "<<" + ele.eClass().getName() + ">> " + String.valueOf(ele.getNamedElement().getName());
+		return String.valueOf(ele.getNamedElement().getName());
 	}
 
 	protected String text(NameExpCS ele) {
-		return "<<" + ele.eClass().getName() + ">> " + String.valueOf(ele.getPathName().toString());
+		return String.valueOf(ele.getPathName().toString());
 	}
 
 	protected String text(NavigatingArgCS ele) {
-		return "<<" + ele.eClass().getName() + ">> " + String.valueOf(ele.getName());
+		return "<" + String.valueOf(ele.getRole()).toLowerCase() + ">";
+	}
+
+	protected String text(NestedExpCS ele) {
+		return "(   )";
+	}
+
+	protected String text(NumberLiteralExpCS ele) {
+		return String.valueOf(ele.getName());
 	}
 
 	protected String text(OperatorCS ele) {
-		return "<<" + ele.eClass().getName() + ">> " + String.valueOf(ele.getName());
+		return String.valueOf(ele.getName());
+	}
+
+	protected String text(SelfExpCS ele) {
+		return "self";
+	}
+
+	protected String text(StringLiteralExpCS ele) {
+		return String.valueOf(ele.getName());
+	}
+
+	protected String image(OperatorCS ele) {
+		return "/org.eclipse.ocl.edit/icons/full/obj16/OperationCallExp.gif";
+	}
+
+	protected String image(SelfExpCS ele) {
+		return "/org.eclipse.ocl.edit/icons/full/obj16/VariableExp.gif";
 	}
 
 }

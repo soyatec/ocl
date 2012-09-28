@@ -118,7 +118,7 @@ public class EssentialOCLOutlineTreeProvider extends DefaultOutlineTreeProvider
 //		createChildren(parentNode, templateSignature);
 //	}
 
-	protected void _createChildren(IOutlineNode parentNode, InfixExpCS csInfixExp) {
+	protected void _createNode(IOutlineNode parentNode, InfixExpCS csInfixExp) {
 		List<BinaryOperatorCS> csOperators = csInfixExp.getOwnedOperator();
 		if (csOperators.size() > 0) {
 			ExpCS csExp = csOperators.get(0);
