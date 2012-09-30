@@ -1,7 +1,23 @@
+/**
+ * <copyright>
+ *
+ * Copyright (c) 2012 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial API and implementation
+ *
+ * </copyright>
+ */
 package org.eclipse.ocl.examples.xtext.markup.ui.hover;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -9,7 +25,9 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
+import org.eclipse.xtext.ui.editor.hover.AbstractEObjectHover;
+import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
+import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider.IInformationControlCreatorProvider;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.TextRegion;
@@ -17,11 +35,40 @@ import org.eclipse.xtext.util.Tuples;
 
 import com.google.inject.Inject;
 
-public class MarkupHover extends DispatchingEObjectTextHover
+//Reimplements DispatchingEObjectTextHover to suppress 'standard' Ecore' support
+public class MarkupHover extends AbstractEObjectHover
 {
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
+	
+	@Inject
+	IEObjectHoverProvider hoverProvider;
 
+	private IInformationControlCreatorProvider lastCreatorProvider;
+
+	@Override
+	public IInformationControlCreator getHoverControlCreator() {
+		return this.lastCreatorProvider==null?null:lastCreatorProvider.getHoverControlCreator();
+	}
+
+	@Override
+	public Object getHoverInfo(EObject first, ITextViewer textViewer, IRegion hoverRegion) {
+//		IEObjectHoverProvider hoverProvider = serviceProvider.findService(first, IEObjectHoverProvider.class);
+//		if (hoverProvider==null)
+//			return null;
+		IInformationControlCreatorProvider creatorProvider = hoverProvider.getHoverInfo(first, textViewer, hoverRegion);
+		if (creatorProvider==null)
+			return null;
+		this.lastCreatorProvider = creatorProvider;
+		return lastCreatorProvider.getInfo();
+	}
+
+	@Override
+	@Deprecated
+	public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
+		final Object hoverInfo2 = getHoverInfo2(textViewer, hoverRegion);
+		return hoverInfo2!=null ? hoverInfo2.toString() : null;
+	}
 	
 	@Override
 	protected Pair<EObject, IRegion> getXtextElementAt(XtextResource resource, int offset) {
