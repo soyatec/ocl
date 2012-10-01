@@ -16,6 +16,7 @@ package org.eclipse.ocl.examples.library.string;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -33,7 +34,7 @@ public class StringSubstituteFirstOperation extends AbstractTernaryOperation
 		String newSubstring = asString(secondArgumentValue);
 		int index = sourceString.indexOf(oldSubstring);
 		if (index < 0) {
-			return createInvalidValue(EvaluatorMessages.MissingSubstring, oldSubstring, sourceString);
+			throw new InvalidValueException(EvaluatorMessages.MissingSubstring, oldSubstring, sourceString);
 		}
 		else {
 			return sourceString.substring(0, index) + newSubstring + sourceString.substring(index + oldSubstring.length(), sourceString.length());

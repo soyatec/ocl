@@ -45,6 +45,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.EvaluationHaltedException;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -192,7 +193,7 @@ public class OCLConsolePage extends Page
 				PivotUtil.checkResourceErrors("", resource); //$NON-NLS-1$
 				expressionInOCL = parserContext.getExpression(resource);
 			} catch (ParserException e) {
-				value = ValuesUtil.createInvalidValue(e, ConsoleMessages.Result_ParsingFailure);
+				value = ValuesUtil.createInvalidValue(new InvalidValueException(e, ConsoleMessages.Result_ParsingFailure));
 				return;
 			}
 			if (expressionInOCL != null) {
@@ -214,9 +215,9 @@ public class OCLConsolePage extends Page
 					EvaluationVisitor evaluationVisitor = new CancelableEvaluationVisitor(monitor, environment, evaluationEnvironment, modelManager2);
 			        value = evaluationVisitor.visitExpressionInOCL(expressionInOCL);
 				} catch (EvaluationHaltedException e) {
-					value = ValuesUtil.createInvalidValue(ConsoleMessages.Result_EvaluationTerminated);
+					value = ValuesUtil.createInvalidValue(new InvalidValueException(ConsoleMessages.Result_EvaluationTerminated));
 				} catch (Exception e) {
-					value = ValuesUtil.createInvalidValue(e, ConsoleMessages.Result_EvaluationFailure);
+					value = ValuesUtil.createInvalidValue(new InvalidValueException(e, ConsoleMessages.Result_EvaluationFailure));
 				} finally {
 	//				metaModelManager.setMonitor(null);
 				}

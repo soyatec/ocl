@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.library.collection;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -42,13 +43,13 @@ public class CollectionMaxOperation extends AbstractUnaryOperation
         	}
         	else if (element != null) {
         		result = NumericMaxOperation.INSTANCE.evaluate(evaluator, returnTypeId, result, element);
-        		if (ValuesUtil.isUndefined(result)) {
-                	return createInvalidValue(EvaluatorMessages.UndefinedResult, "max"); //$NON-NLS-1$
+        		if (ValuesUtil.isNull(result)) {
+                	throw new InvalidValueException(EvaluatorMessages.UndefinedResult, "max"); //$NON-NLS-1$
         		}
         	}
         }
 		if (result == null) {
-        	return createInvalidValue(EvaluatorMessages.EmptyCollection, collectionValue.getKind(), "max"); //$NON-NLS-1$
+        	throw new InvalidValueException(EvaluatorMessages.EmptyCollection, collectionValue.getKind(), "max"); //$NON-NLS-1$
 		}
 		return result;
     }

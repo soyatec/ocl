@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.library.numeric;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -33,7 +34,7 @@ public abstract class AbstractNumericUnaryOperation extends AbstractUnaryOperati
 {
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal) {
 		if (isUnlimited(sourceVal)) {
-			return createInvalidValue(EvaluatorMessages.TypedValueRequired, "Unlimited"); //$NON-NLS-1$
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Unlimited"); //$NON-NLS-1$
 		}
 		IntegerValue integerValue = isIntegerValue(sourceVal); 
 		if (integerValue != null) {

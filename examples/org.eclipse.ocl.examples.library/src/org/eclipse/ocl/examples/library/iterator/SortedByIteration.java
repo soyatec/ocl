@@ -154,16 +154,12 @@ public class SortedByIteration extends AbstractIteration
 		DomainInheritance comparableType = standardLibrary.getOclComparableType().getInheritance(standardLibrary);
 		DomainInheritance selfType = standardLibrary.getOclSelfType().getInheritance(standardLibrary);
 		DomainOperation staticOperation = comparableType.lookupLocalOperation(standardLibrary, LibraryConstants.COMPARE_TO, selfType);
-		try {
-			if (staticOperation != null) {
-				DomainType bodyType = evaluator.getIdResolver().getType(bodyTypeId, null);
-				LibraryFeature implementation = bodyType.lookupImplementation(standardLibrary, staticOperation);
-				return new SortingValue(evaluator, (CollectionTypeId)accumulatorTypeId, (LibraryBinaryOperation) implementation);
-			}
-		} catch (Exception e) {
-			throw new InvalidValueException(createInvalidValue(e));
+		if (staticOperation != null) {
+			DomainType bodyType = evaluator.getIdResolver().getType(bodyTypeId, null);
+			LibraryFeature implementation = bodyType.lookupImplementation(standardLibrary, staticOperation);
+			return new SortingValue(evaluator, (CollectionTypeId)accumulatorTypeId, (LibraryBinaryOperation) implementation);
 		}
-		throw new InvalidValueException(createInvalidValue(EvaluatorMessages.UndefinedOperation, String.valueOf(comparableType) + "::" + LibraryConstants.COMPARE_TO)); //$NON-NLS-1$
+		throw new InvalidValueException(EvaluatorMessages.UndefinedOperation, String.valueOf(comparableType) + "::" + LibraryConstants.COMPARE_TO); //$NON-NLS-1$
 	}
 	
 	@Override
@@ -175,8 +171,8 @@ public class SortedByIteration extends AbstractIteration
 	@Override
     protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
 		Object bodyVal = iterationManager.evaluateBody();		
-		if (isUndefined(bodyVal)) {
-			return createInvalidValue(EvaluatorMessages.UndefinedBody, "sortedBy"); 	// Null body is invalid //$NON-NLS-1$
+		if (isNull(bodyVal)) {
+			throw new InvalidValueException(EvaluatorMessages.UndefinedBody, "sortedBy"); 	// Null body is invalid //$NON-NLS-1$
 		}
 		Object iterValue = iterationManager.get();		
 		SortingValue accumulatorValue = (SortingValue) iterationManager.getAccumulatorValue();

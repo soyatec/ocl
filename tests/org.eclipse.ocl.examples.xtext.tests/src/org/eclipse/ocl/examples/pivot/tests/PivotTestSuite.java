@@ -55,6 +55,7 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -386,7 +387,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	protected Object assertQueryDefined(Object context, String expression) {
 		try {
 			Object value = evaluate(helper, context, expression);
-			assertFalse(expression + " expected defined: ", ValuesUtil.isUndefined(value));
+			assertFalse(expression + " expected defined: ", ValuesUtil.isNull(value));
 			return value;
 		} catch (Exception e) {
 			failOn(expression, e);
@@ -495,10 +496,10 @@ public abstract class PivotTestSuite extends PivotTestCase
 	protected Value assertQueryInvalid(Object context, String expression) {
 		try {
 			Object value = evaluate(helper, context, expression);
-			if (!ValuesUtil.isInvalid(value)) {
+//			if (!ValuesUtil.isInvalid(value)) {
 				fail(expression + " expected: invalid but was: " + value);
-			}
-//		} catch (DomainException e) {
+//			}
+		} catch (InvalidValueException e) {
 //			assertEquals("Invalid Value Reason", reason, e.getMessage());
 //			assertEquals("Invalid Value Throwable", exceptionClass, e.getCause().getClass());
 		} catch (Exception e) {
@@ -511,17 +512,17 @@ public abstract class PivotTestSuite extends PivotTestCase
 			String reason, Class<?> exceptionClass) {
 		try {
 			Object value = evaluate(helper, context, expression);
-			if (!ValuesUtil.isInvalid(value)) {
+//			if (!ValuesUtil.isInvalid(value)) {
 				fail(expression + " expected: invalid but was: " + value);
-			}
-			InvalidValue invalidValue = (InvalidValue)value;
+//			}
+//			InvalidValue invalidValue = (InvalidValue)value;
 //           fail("Expected invalid for \"" + expression + "\"");
-//		} catch (DomainException e) {
-//			Throwable ex = e;
-//			Throwable cause = e.getCause();
-			Exception cause = invalidValue.getException();
-			Throwable ex = cause;
-			String message = invalidValue.getMessage();
+		} catch (InvalidValueException e) {
+			Throwable ex = e;
+			Throwable cause = e.getCause();
+//			Exception cause = invalidValue.getException();
+//			Throwable ex = cause;
+			String message = e.getMessage();
 			if (cause != null) {
 				ex = cause;
 				if (!(cause instanceof NumberFormatException)) {

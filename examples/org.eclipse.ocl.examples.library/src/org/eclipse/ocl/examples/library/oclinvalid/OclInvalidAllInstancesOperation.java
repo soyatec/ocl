@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.library.oclinvalid;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -31,6 +32,6 @@ public class OclInvalidAllInstancesOperation extends AbstractUnaryOperation
 
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal) {
 		// OclInvalid has a single instance: invalid that cannot be returned in a collection
-		return createInvalidValue(EvaluatorMessages.InvalidLiteral);
+		throw new InvalidValueException(EvaluatorMessages.InvalidLiteral);
 	}
 }

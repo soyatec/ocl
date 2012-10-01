@@ -19,11 +19,7 @@ package org.eclipse.ocl.examples.domain.evaluation;
 
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 
-/**
- * An InvalidEvaluationException is thrown when an Invalid Value arises during
- * an evaluation. It passes the prevailing EvaluationEnvironment to the handler
- * to support diagnosis of the failing context..
- */
+@Deprecated
 public class InvalidEvaluationException extends DomainException
 {
 	private static final long serialVersionUID = 1L;

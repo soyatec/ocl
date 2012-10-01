@@ -20,6 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclAsTypeOperation;
@@ -38,12 +39,12 @@ public class UnlimitedNaturalOclAsTypeOperation extends OclAnyOclAsTypeOperation
 		DomainType argType = asType(argVal);
 		if (sourceType.conformsTo(standardLibrary, argType)) {
 			if (isUnlimited(sourceVal) && ((argType == standardLibrary.getRealType()) || (argType == standardLibrary.getIntegerType()))) {
-				return createInvalidValue(EvaluatorMessages.NonFiniteIntegerValue);
+				throw new InvalidValueException(EvaluatorMessages.NonFiniteIntegerValue);
 			}
 			return sourceVal;
 		}
 		else {
-			return createInvalidValue(EvaluatorMessages.IncompatibleArgumentType, argType);
+			throw new InvalidValueException(EvaluatorMessages.IncompatibleArgumentType, argType);
 		}
 	}
 }

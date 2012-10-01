@@ -785,7 +785,8 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryEquals(null, "3.0", "3.0.toString()");
 		assertQueryEquals(null, "4.0", "(1.0+3.0).toString()");
 		assertQueryEquals(null, "null", "null.toString()");
-		assertQueryEquals(null, "invalid", "invalid.toString()");
+//		assertQueryEquals(null, "invalid", "invalid.toString()");
+		assertQueryInvalid(null, "invalid.toString()");
 		assertQueryEquals(null, "*", "*.toString()");
 	}
 

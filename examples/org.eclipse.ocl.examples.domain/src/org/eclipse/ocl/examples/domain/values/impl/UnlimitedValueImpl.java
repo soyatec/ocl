@@ -72,11 +72,11 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 	}
 
 	public @NonNull IntegerValue add(@NonNull IntegerValue right) {
-		return createInvalidValue(EvaluatorMessages.InvalidOperation, "add", "UnlimitedValue");
+		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "add", "UnlimitedValue");
 	}
 
 	public @NonNull RealValue add(@NonNull RealValue right) {
-		return createInvalidValue(EvaluatorMessages.InvalidOperation, "add", "UnlimitedValue");
+		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "add", "UnlimitedValue");
 	}
 
 	public @NonNull Object asObject() {
@@ -109,15 +109,15 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 	}
 
 	public @NonNull IntegerValue div(@NonNull IntegerValue right) {
-		return createInvalidValue(EvaluatorMessages.InvalidOperation, "div", "UnlimitedValue");
+		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "div", "UnlimitedValue");
 	}
 
 	public @NonNull RealValue divide(@NonNull IntegerValue right) {
-		return createInvalidValue(EvaluatorMessages.InvalidOperation, "divide", "UnlimitedValue");
+		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "divide", "UnlimitedValue");
 	}
 
 	public @NonNull RealValue divide(@NonNull RealValue right) {
-		return createInvalidValue(EvaluatorMessages.InvalidOperation, "divide", "UnlimitedValue");
+		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "divide", "UnlimitedValue");
 	}
 
 	public double doubleValue() {
@@ -125,7 +125,7 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 	}
 
 	public @NonNull IntegerValue floor() {
-		return createInvalidValue(EvaluatorMessages.InvalidOperation, "floor", "UnlimitedValue");
+		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "floor", "UnlimitedValue");
 	}
 
 	public @NonNull DomainType getType(@NonNull DomainStandardLibrary standardLibrary) {
@@ -149,39 +149,39 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 	}
 
 	public @NonNull IntegerValue max(@NonNull IntegerValue right) {
-		return createInvalidValue(EvaluatorMessages.InvalidOperation, "max", "UnlimitedValue");
+		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "max", "UnlimitedValue");
 	}
 
 	public @NonNull RealValue max(@NonNull RealValue right) {
-		return createInvalidValue(EvaluatorMessages.InvalidOperation, "max", "UnlimitedValue");
+		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "max", "UnlimitedValue");
 	}
 
 	public @NonNull IntegerValue min(@NonNull IntegerValue right) {
-		return createInvalidValue(EvaluatorMessages.InvalidOperation, "min", "UnlimitedValue");
+		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "min", "UnlimitedValue");
 	}
 
 	public @NonNull RealValue min(@NonNull RealValue right) {
-		return createInvalidValue(EvaluatorMessages.InvalidOperation, "min", "UnlimitedValue");
+		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "min", "UnlimitedValue");
 	}
 
 	public @NonNull IntegerValue mod(@NonNull IntegerValue right) {
-		return createInvalidValue(EvaluatorMessages.InvalidOperation, "mod", "UnlimitedValue");
+		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "mod", "UnlimitedValue");
 	}
 
 	public @NonNull IntegerValue multiply(@NonNull IntegerValue right) {
-		return createInvalidValue(EvaluatorMessages.InvalidOperation, "multiply", "UnlimitedValue");
+		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "multiply", "UnlimitedValue");
 	}
 
 	public @NonNull RealValue multiply(@NonNull RealValue right) {
-		return createInvalidValue(EvaluatorMessages.InvalidOperation, "multiply", "UnlimitedValue");
+		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "multiply", "UnlimitedValue");
 	}
 
 	public @NonNull UnlimitedValue negate() {
-		return createInvalidValue(EvaluatorMessages.InvalidOperation, "negate", "UnlimitedValue");
+		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "negate", "UnlimitedValue");
 	}
 
 	public @NonNull IntegerValue round() {
-		return createInvalidValue(EvaluatorMessages.InvalidOperation, "round", "UnlimitedValue");
+		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "round", "UnlimitedValue");
 	}
 
 	public int signum() {
@@ -189,11 +189,11 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 	}
 
 	public @NonNull IntegerValue subtract(@NonNull IntegerValue right) {
-		return createInvalidValue(EvaluatorMessages.InvalidOperation, "subtract", "UnlimitedValue");
+		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "subtract", "UnlimitedValue");
 	}
 
 	public @NonNull RealValue subtract(@NonNull RealValue right) {
-		return createInvalidValue(EvaluatorMessages.InvalidOperation, "subtract", "UnlimitedValue");
+		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "subtract", "UnlimitedValue");
 	}
 
 	@Override

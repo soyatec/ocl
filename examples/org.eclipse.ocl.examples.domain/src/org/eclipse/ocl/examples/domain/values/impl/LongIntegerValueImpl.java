@@ -54,26 +54,22 @@ public class LongIntegerValueImpl extends IntegerValueImpl
 	}
 
 	public @NonNull IntegerValue add(@NonNull IntegerValue right) {
-		try {
-			if (right instanceof LongIntegerValueImpl) {
-				long thatValue = ((LongIntegerValueImpl)right).longValue();
-				long sum = value + thatValue;
-				if (value >= 0) {
-					if ((thatValue >= 0) && (sum >= 0)) {
-						return integerValueOf(sum);
-					}
-				}
-				else {
-					if ((thatValue <= 0) && (sum <= 0)) {
-						return integerValueOf(sum);
-					}
+		if (right instanceof LongIntegerValueImpl) {
+			long thatValue = ((LongIntegerValueImpl)right).longValue();
+			long sum = value + thatValue;
+			if (value >= 0) {
+				if ((thatValue >= 0) && (sum >= 0)) {
+					return integerValueOf(sum);
 				}
 			}
-			@SuppressWarnings("null") @NonNull BigInteger result = bigIntegerValue().add(right.bigIntegerValue());
-			return integerValueOf(result);
-		} catch (InvalidValueException e) {
-			return createInvalidValue(e);
+			else {
+				if ((thatValue <= 0) && (sum <= 0)) {
+					return integerValueOf(sum);
+				}
+			}
 		}
+		@SuppressWarnings("null") @NonNull BigInteger result = bigIntegerValue().add(right.bigIntegerValue());
+		return integerValueOf(result);
 	}
 
 	@Override
@@ -130,7 +126,7 @@ public class LongIntegerValueImpl extends IntegerValueImpl
 
 	public @NonNull IntegerValue div(@NonNull IntegerValue right) {
 		if (right.bigIntegerValue().signum() == 0) {
-			return createInvalidValue("div zero");
+			throw new InvalidValueException("div zero");
 		}
 		@SuppressWarnings("null") @NonNull BigInteger result = bigIntegerValue().divide(right.bigIntegerValue());
 		return integerValueOf(result);
@@ -222,7 +218,7 @@ public class LongIntegerValueImpl extends IntegerValueImpl
 
 	public @NonNull IntegerValue mod(@NonNull IntegerValue right) {
 		if (right.bigIntegerValue().signum() == 0) {
-			return createInvalidValue("mod zero");
+			throw new InvalidValueException("mod zero");
 		}
 		@SuppressWarnings("null") @NonNull BigInteger result = bigIntegerValue().remainder(right.bigIntegerValue());
 		return integerValueOf(result);

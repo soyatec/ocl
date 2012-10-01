@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.domain.values.impl;
 import java.util.Collection;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -73,7 +74,7 @@ public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
 
     public @NonNull OrderedSetValue append(@NonNull Object object) {
 		if (object instanceof InvalidValue) {
-        	return createInvalidValue(EvaluatorMessages.InvalidSource, "append");
+        	throw new InvalidValueException(EvaluatorMessages.InvalidSource, "append");
 		}
     	OrderedSet<Object> result = new OrderedSetImpl<Object>(elements);
         result.remove(object);  // appended object must be last
@@ -94,11 +95,11 @@ public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
 
     public @NonNull Object first() {
         if (elements.size() <= 0) {
-        	return createInvalidValue(EvaluatorMessages.EmptyCollection, "OrderedSet", "first");
+        	throw new InvalidValueException(EvaluatorMessages.EmptyCollection, "OrderedSet", "first");
         }
         Object result = elements.iterator().next();
         if (result == null) {
-        	return createInvalidValue("Null collection element");
+        	throw new InvalidValueException("Null collection element");
         }
 		return result;
     }
@@ -120,7 +121,7 @@ public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
 
 	public @NonNull OrderedSetValue including(@NonNull Object value) {
 		if (value instanceof InvalidValue) {
-			return createInvalidValue(EvaluatorMessages.InvalidSource, "including");
+			throw new InvalidValueException(EvaluatorMessages.InvalidSource, "including");
 		}
 		OrderedSet<Object> result = new OrderedSetImpl<Object>(elements);
 		result.add(value);
@@ -129,21 +130,21 @@ public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
 
     public @NonNull Object last() {
         if (elements.size() <= 0) {
-        	return createInvalidValue(EvaluatorMessages.EmptyCollection, "OrderedSet", "last");
+        	throw new InvalidValueException(EvaluatorMessages.EmptyCollection, "OrderedSet", "last");
         }
         Object result = null;
         for (Object next : elements) {
             result = next;
         }
         if (result == null) {
-        	return createInvalidValue("Null collection element");
+        	throw new InvalidValueException("Null collection element");
         }
         return result;
     }
 
     public @NonNull OrderedSetValue prepend(@NonNull Object object) {
 		if (object instanceof InvalidValue) {
-			return createInvalidValue(EvaluatorMessages.InvalidSource, "prepend");
+			throw new InvalidValueException(EvaluatorMessages.InvalidSource, "prepend");
 		}
     	OrderedSet<Object> result = new OrderedSetImpl<Object>();
         result.add(object);

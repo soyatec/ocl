@@ -33,9 +33,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
-import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluationEnvironment;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
@@ -44,7 +42,6 @@ import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -106,7 +103,7 @@ public abstract class ValuesUtil
 
 	@SuppressWarnings("null")
 	public static final @NonNull Boolean FALSE_VALUE = Boolean.FALSE;
-	public static final @NonNull InvalidValue INVALID_VALUE = new InvalidValueImpl(); 
+	public static final @NonNull InvalidValue INVALID_VALUE = new InvalidValueImpl(new Exception("invalid")); 
 	public static final @NonNull NullValue NULL_VALUE = new NullValueImpl(); 
 	public static final @NonNull IntegerValue ONE_VALUE = integerValueOf(1);
 	@SuppressWarnings("null")
@@ -119,7 +116,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asBagValue();
 		}
 		else {
-			return createInvalidValue(EvaluatorMessages.TypedValueRequired, "Bag", getTypeName(value));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Bag", getTypeName(value));
 		}
 	}
 
@@ -127,11 +124,8 @@ public abstract class ValuesUtil
 		if (value instanceof Boolean) {
 			return (Boolean)value;
 		}
-		else if (value instanceof InvalidValue) {
-			throw new InvalidValueException((InvalidValue)value);
-		}
 		else {
-			throw new InvalidValueException(createInvalidValue(EvaluatorMessages.TypedValueRequired, TypeId.BOOLEAN_NAME, getTypeName(value)));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.BOOLEAN_NAME, getTypeName(value));
 		}
 	}
 
@@ -145,11 +139,11 @@ public abstract class ValuesUtil
 				return (DomainCollectionType)instanceType;
 			}
 			else {
-				throw new InvalidValueException(createInvalidValue(EvaluatorMessages.TypedValueRequired, TypeId.COLLECTION_TYPE_NAME, getTypeName(value)));
+				throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.COLLECTION_TYPE_NAME, getTypeName(value));
 			}
 		}
 		else {
-			throw new InvalidValueException(createInvalidValue(EvaluatorMessages.TypedValueRequired, TypeId.COLLECTION_TYPE_NAME, getTypeName(value)));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.COLLECTION_TYPE_NAME, getTypeName(value));
 		}
 	}
 
@@ -158,7 +152,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asCollectionValue();
 		}
 		else {
-			throw new InvalidValueException(createInvalidValue(EvaluatorMessages.TypedValueRequired, "Collection", getTypeName(value)));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Collection", getTypeName(value));
 		}
 	}
 
@@ -177,7 +171,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asInteger();
 		}
 		else {
-			throw new InvalidValueException(createInvalidValue(EvaluatorMessages.TypedValueRequired, TypeId.INTEGER_NAME, getTypeName(value)));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.INTEGER_NAME, getTypeName(value));
 		}
 	}
 
@@ -186,7 +180,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asIntegerValue();
 		}
 		else {
-			throw new InvalidValueException(createInvalidValue(EvaluatorMessages.TypedValueRequired, TypeId.INTEGER_NAME, getTypeName(value)));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.INTEGER_NAME, getTypeName(value));
 		}
 	}
 
@@ -198,7 +192,7 @@ public abstract class ValuesUtil
 			return (EObject)value;
 		}
 		else {
-			throw new InvalidValueException(createInvalidValue(EvaluatorMessages.TypedValueRequired, "NavigableObject", getTypeName(value)));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "NavigableObject", getTypeName(value));
 		}
 	}
 
@@ -216,7 +210,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asOrderedSetValue();
 		}
 		else {
-			throw new InvalidValueException(createInvalidValue(EvaluatorMessages.TypedValueRequired, "OrderedSet", getTypeName(value)));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "OrderedSet", getTypeName(value));
 		}
 	}
 
@@ -225,7 +219,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asRealValue();
 		}
 		else {
-			throw new InvalidValueException(createInvalidValue(EvaluatorMessages.TypedValueRequired, TypeId.REAL_NAME, getTypeName(value)));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.REAL_NAME, getTypeName(value));
 		}
 	}
 
@@ -234,7 +228,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asSequenceValue();
 		}
 		else {
-			throw new InvalidValueException(createInvalidValue(EvaluatorMessages.TypedValueRequired, "Sequence", getTypeName(value)));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Sequence", getTypeName(value));
 		}
 	}
 
@@ -243,7 +237,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asSetValue();
 		}
 		else {
-			throw new InvalidValueException(createInvalidValue(EvaluatorMessages.TypedValueRequired, "Set", getTypeName(value)));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Set", getTypeName(value));
 		}
 	}
 
@@ -255,7 +249,7 @@ public abstract class ValuesUtil
 //			return ((Value)value).asString();
 //		}
 		else {
-			throw new InvalidValueException(createInvalidValue(EvaluatorMessages.TypedValueRequired, TypeId.STRING_NAME, getTypeName(value)));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.STRING_NAME, getTypeName(value));
 		}
 	}
 
@@ -264,7 +258,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asTupleValue();
 		}
 		else {
-			throw new InvalidValueException(createInvalidValue(EvaluatorMessages.TypedValueRequired, "Tuple", getTypeName(value)));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Tuple", getTypeName(value));
 		}
 	}
 
@@ -276,7 +270,7 @@ public abstract class ValuesUtil
 			return ((TypeValue)value).getInstanceType();
 		}
 		else {
-			throw new InvalidValueException(createInvalidValue(EvaluatorMessages.TypedValueRequired, "Type", getTypeName(value)));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Type", getTypeName(value));
 		}
 	}
 
@@ -285,7 +279,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asUniqueCollectionValue();
 		}
 		else {
-			throw new InvalidValueException(createInvalidValue(EvaluatorMessages.TypedValueRequired, "UniqueCollection", getTypeName(value)));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "UniqueCollection", getTypeName(value));
 		}
 	}
 
@@ -294,19 +288,17 @@ public abstract class ValuesUtil
 			return ((Value)value).asUnlimitedNaturalValue();
 		}
 		else {
-			throw new InvalidValueException(createInvalidValue(EvaluatorMessages.TypedValueRequired, TypeId.UNLIMITED_NATURAL_NAME, getTypeName(value)));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.UNLIMITED_NATURAL_NAME, getTypeName(value));
 		}
 	}
 
 	public static @NonNull Object asValidValue(@Nullable Object value) {
-		if (value instanceof InvalidValue) {
-			throw new InvalidValueException((InvalidValue)value);
-		}
-		else if (value != null) {
+		assert !(value instanceof InvalidValue);
+		if (value != null) {
 			return value;
 		}
 		else {
-			throw new InvalidValueException(createInvalidValue(EvaluatorMessages.TypedValueRequired, "OclAny", getTypeName(value)));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "OclAny", getTypeName(value));
 		}
 	}
 
@@ -315,7 +307,7 @@ public abstract class ValuesUtil
 			return value;
 		}
 		else {
-			throw new InvalidValueException(createInvalidValue(EvaluatorMessages.TypedValueRequired, "OclAny", getTypeName(value)));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "OclAny", getTypeName(value));
 		}
 	}
 
@@ -453,15 +445,17 @@ public abstract class ValuesUtil
 		return new EEnumLiteralValueImpl(enumerationLiteralId, eEnum.getEEnumLiteral(name));
 	}
 
+	@Deprecated
 	public static @NonNull InvalidValue createInvalidValue(@NonNull Exception exception) {
-		return new InvalidValueImpl("invalid", exception);
+		return new InvalidValueImpl(exception);
 	}
 
+	@Deprecated
 	public static @NonNull InvalidValue createInvalidValue(/*@NonNull*/ String messageTemplate, Object... bindings) {
-		return new InvalidValueImpl(DomainUtil.bind(messageTemplate, bindings), null);
+		return new InvalidValueImpl(new InvalidValueException(messageTemplate, bindings));
 	}
 
-	public static @NonNull InvalidValue createInvalidValue(Exception e, /*@NonNull*/ String messageTemplate, Object... bindings) {
+/*	public static @NonNull InvalidValue createInvalidValue(Exception e, / *@NonNull* / String messageTemplate, Object... bindings) {
 		return new InvalidValueImpl(DomainUtil.bind(messageTemplate, bindings), e);
 	}
 
@@ -478,7 +472,7 @@ public abstract class ValuesUtil
 	public static @NonNull InvalidValue createInvalidValue(@NonNull String message, @Nullable InvalidValue nestedValue,
 			@Nullable DomainEvaluationEnvironment evaluationEnvironment, @Nullable Object context, @Nullable DomainExpression expression) {
 		return new InvalidValueImpl(message, nestedValue, evaluationEnvironment, context, expression);
-	}
+	} */
 
 	public static @NonNull ObjectValue createObjectValue(@NonNull Object object) {
 		return new JavaObjectValueImpl(object);
@@ -631,7 +625,7 @@ public abstract class ValuesUtil
 			}
 		}
 		catch (NumberFormatException e) {
-			return createInvalidValue(e, EvaluatorMessages.InvalidInteger, aValue);
+			throw new InvalidValueException(e, EvaluatorMessages.InvalidInteger, aValue);
 		}
 	}
 
@@ -657,20 +651,12 @@ public abstract class ValuesUtil
 		}
 	}
 
-	public static boolean isInvalid(@Nullable Object value) {
-		return value instanceof InvalidValue;
-	}
-
 	public static boolean isNull(@Nullable Object value) {
 		return (value instanceof NullValue) && !(value instanceof InvalidValue);
 	}
 
 	public static boolean isTrue(@Nullable Object value) {
 		return value == Boolean.TRUE;
-	}
-
-	public static boolean isUndefined(@Nullable Object value) {
-		return value instanceof NullValue;
 	}
 
 	public static boolean isUnlimited(@Nullable Object value) {
@@ -698,7 +684,7 @@ public abstract class ValuesUtil
 		try {
 			return realValueOf(integerValue.bigDecimalValue());
 		} catch (InvalidValueException e) {
-			return createInvalidValue(EvaluatorMessages.InvalidInteger, e, null, integerValue);
+			throw new InvalidValueException(e, EvaluatorMessages.InvalidInteger, integerValue);
 		}
 	}
     
@@ -722,7 +708,7 @@ public abstract class ValuesUtil
 			return new RealValueImpl(new BigDecimal(aValue.trim()));
 		}
 		catch (NumberFormatException e) {
-			return createInvalidValue(e, EvaluatorMessages.InvalidReal, aValue);
+			throw new InvalidValueException(e, EvaluatorMessages.InvalidReal, aValue);
 		}
 	}
 

@@ -20,9 +20,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
 
 /**
  * OclAnyOclAsTypeOperation realises the OclAny::oclAsType() library operation.
@@ -32,6 +34,9 @@ public class OclAnyOclAsTypeOperation extends AbstractBinaryOperation
 	public static final @NonNull OclAnyOclAsTypeOperation INSTANCE = new OclAnyOclAsTypeOperation();
 
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal, @NonNull Object argVal) {
+		if (sourceVal instanceof InvalidValue) {
+			throw ((InvalidValue)sourceVal).getException();
+		}
 		DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 		DomainType sourceType = evaluator.getDynamicTypeOf(sourceVal);
 		DomainType argType = asType(argVal);
@@ -39,7 +44,7 @@ public class OclAnyOclAsTypeOperation extends AbstractBinaryOperation
 			return sourceVal;
 		}
 		else {
-			return createInvalidValue(EvaluatorMessages.IncompatibleArgumentType, argType);
+			throw new InvalidValueException(EvaluatorMessages.IncompatibleArgumentType, argType);
 		}
 	}
 }

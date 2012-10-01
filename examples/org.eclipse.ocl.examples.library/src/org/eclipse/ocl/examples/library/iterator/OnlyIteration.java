@@ -20,6 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -57,15 +58,15 @@ public class OnlyIteration extends AbstractIteration
 			return object;		// Normal something found result.
 		}
 		else {
-			return createInvalidValue("No matching content for 'only'");
+			throw new InvalidValueException("No matching content for 'only'"); //$NON-NLS-1$
 		}
 	}
 	
 	@Override
     protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
 		Object bodyVal = iterationManager.evaluateBody();		
-		if (isUndefined(bodyVal)) {
-			return createInvalidValue(EvaluatorMessages.UndefinedBody, "only"); 	// Null body is invalid //$NON-NLS-1$
+		if (isNull(bodyVal)) {
+			throw new InvalidValueException(EvaluatorMessages.UndefinedBody, "only"); 	// Null body is invalid //$NON-NLS-1$
 		}
 		else if (isFalse(bodyVal)) {
 			return null;									// Carry on for nothing found
@@ -74,7 +75,7 @@ public class OnlyIteration extends AbstractIteration
 			MutableObject accumulatorValue = (MutableObject)iterationManager.getAccumulatorValue();
 			Object object = accumulatorValue.get();
 			if (object != null) {
-				return createInvalidValue("Multiple matching content for 'only'");
+				throw new InvalidValueException("Multiple matching content for 'only'"); //$NON-NLS-1$
 			}
 			else {
 				Object value = iterationManager.get();		

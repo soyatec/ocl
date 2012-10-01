@@ -20,6 +20,7 @@ import java.lang.reflect.Method;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -39,11 +40,11 @@ public class JavaCompareToOperation extends AbstractBinaryOperation
 		try {
 			Object result = method.invoke(leftObject, rightObject);
 			if (!(result instanceof Integer)) {
-				return createInvalidValue(EvaluatorMessages.TypedResultRequired, TypeId.INTEGER_NAME);
+				throw new InvalidValueException(EvaluatorMessages.TypedResultRequired, TypeId.INTEGER_NAME);
 			}
 			return ValuesUtil.integerValueOf((Integer) result);
 		} catch (Exception e) {
-			return createInvalidValue(e, EvaluatorMessages.TypedResultRequired, TypeId.INTEGER_NAME);
+			throw new InvalidValueException(e, EvaluatorMessages.TypedResultRequired, TypeId.INTEGER_NAME);
 		}
 	}
 }

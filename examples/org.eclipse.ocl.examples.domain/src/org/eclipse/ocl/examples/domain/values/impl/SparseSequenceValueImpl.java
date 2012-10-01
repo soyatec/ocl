@@ -22,7 +22,6 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
-import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
@@ -81,11 +80,9 @@ public class SparseSequenceValueImpl extends SequenceValueImpl
 		}		
 
 	    @Override
-		public @NonNull SequenceValue append(@NonNull Object object) {
-			if (object instanceof InvalidValue) {
-	        	return createInvalidValue(EvaluatorMessages.InvalidSource, "append");
-			}
-			add(object);
+		public @NonNull SequenceValue append(@NonNull Object value) {
+			assert !(value instanceof InvalidValue);
+			add(value);
 	        return this;
 	    }
 	}

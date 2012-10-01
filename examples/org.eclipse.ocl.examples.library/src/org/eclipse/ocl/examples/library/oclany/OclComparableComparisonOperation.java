@@ -21,6 +21,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
@@ -47,7 +48,7 @@ public abstract class OclComparableComparisonOperation extends AbstractBinaryOpe
 				implementation = (LibraryBinaryOperation) commonType.lookupImplementation(standardLibrary, staticOperation);
 			}
 		} catch (Exception e) {
-			return createInvalidValue(e);
+			throw new InvalidValueException(e, "No 'compareTo' implementation"); //$NON-NLS-1$
 		}
 		if (implementation != null) {
 			Object comparison = implementation.evaluate(evaluator, TypeId.INTEGER, left, right);
@@ -55,7 +56,7 @@ public abstract class OclComparableComparisonOperation extends AbstractBinaryOpe
 			return getResultValue(intComparison) != false;			// FIXME redundant test to suppress warning
 		}
 		else {
-			return createInvalidValue("Unsupported compareTo for ''{0}''", left.getClass().getName()); //$NON-NLS-1$
+			throw new InvalidValueException("Unsupported compareTo for ''{0}''", left.getClass().getName()); //$NON-NLS-1$
 		}
 	}
 

@@ -25,8 +25,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -109,7 +109,7 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
     public @NonNull Object at(int index) {
         index = index - 1;        
         if (index < 0 || index >= elements.size()) {
-        	return createInvalidValue(EvaluatorMessages.IndexOutOfRange, index + 1, size());
+        	throw new InvalidValueException(EvaluatorMessages.IndexOutOfRange, index + 1, size());
 		}        
         int curr = 0;
         for (Iterator<? extends Object> it = iterator(); it.hasNext();) {
@@ -121,7 +121,7 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
                 break;
             }
         }
-        return createInvalidValue("Null collection content");
+        throw new InvalidValueException("Null collection content");
     }
 
 	@Override
@@ -173,18 +173,18 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
             }
             index++;
         }        
-        return createInvalidValue(EvaluatorMessages.MissingValue, "indexOf");
+        throw new InvalidValueException(EvaluatorMessages.MissingValue, "indexOf");
     }
 
     public @NonNull OrderedSetValue insertAt(int index, @NonNull Object object) {
 		if (object instanceof InvalidValue) {
-			return createInvalidValue(EvaluatorMessages.InvalidSource, "insertAt");
+			throw new InvalidValueException(EvaluatorMessages.InvalidSource, "insertAt");
 		}
         index = index - 1;
         boolean isContained = elements.contains(object);
         int effectiveSize = elements.size() - (isContained ? 1 : 0);
         if ((index < 0) || (effectiveSize < index)) {
-        	return createInvalidValue(EvaluatorMessages.IndexOutOfRange, index + 1, size());
+        	throw new InvalidValueException(EvaluatorMessages.IndexOutOfRange, index + 1, size());
         }
         
         OrderedSet<Object> result = new OrderedSetImpl<Object>();

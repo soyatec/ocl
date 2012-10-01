@@ -25,6 +25,7 @@ import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
 
 /**
  * ClosureIteration realizes the Collection::closure() library iteration.
@@ -51,10 +52,8 @@ public class ClosureIteration extends AbstractIteration
 			}
 		}
 		Object bodyVal = iterationManager.evaluateBody();		
-		if (isInvalid(bodyVal)) {
-			return bodyVal;									// Invalid body is invalid
-		}
-		else if (isUndefined(bodyVal)) {
+		assert !(bodyVal instanceof InvalidValue);
+		if (isNull(bodyVal)) {
 			return iterationManager.getAccumulatorValue();		// Null body is termination
 		}
 		else {

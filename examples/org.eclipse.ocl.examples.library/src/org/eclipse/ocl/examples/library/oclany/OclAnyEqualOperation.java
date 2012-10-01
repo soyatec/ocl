@@ -36,11 +36,11 @@ public class OclAnyEqualOperation extends AbstractBinaryOperation
 		//	A.2.2 is clear. 11.3.1 is vague.
 		//
 		if (left instanceof InvalidValue) {
-			return left;
+			throw ((InvalidValue)left).getException();
 //			return createInvalidValue(EvaluatorMessages.InvalidSource, "="); //$NON-NLS-1$
 		}
 		if (right instanceof InvalidValue) {
-			return right;
+			throw ((InvalidValue)right).getException();
 //			return createInvalidValue(EvaluatorMessages.InvalidArgument, "="); //$NON-NLS-1$
 		}
 		return left.equals(right) != false;			// FIXME redundant test to suppress warning

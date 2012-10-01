@@ -20,6 +20,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -45,7 +46,7 @@ public class CollectionProductOperation extends AbstractBinaryOperation
         	return createSetValue(collTypeId, product);
         }
         else {
-        	return createInvalidValue(EvaluatorMessages.MissingResult, "product"); //$NON-NLS-1$
+        	throw new InvalidValueException(EvaluatorMessages.MissingResult, "product"); //$NON-NLS-1$
         }
 	}
 }

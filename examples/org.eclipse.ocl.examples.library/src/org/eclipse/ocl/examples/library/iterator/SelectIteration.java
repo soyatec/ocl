@@ -20,11 +20,13 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
 
 /**
  * SelectIteration realizes the Collection::select() library iteration.
@@ -40,11 +42,9 @@ public class SelectIteration extends AbstractIteration
 	@Override
     protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
 		Object bodyVal = iterationManager.evaluateBody();		
-		if (isInvalid(bodyVal)) {
-			return bodyVal;
-		}
-		else if (isUndefined(bodyVal)) {
-			return createInvalidValue(EvaluatorMessages.UndefinedBody, "select"); 	// Null body is invalid //$NON-NLS-1$
+		assert !(bodyVal instanceof InvalidValue);
+		if (isNull(bodyVal)) {
+			throw new InvalidValueException(EvaluatorMessages.UndefinedBody, "select"); 	// Null body is invalid //$NON-NLS-1$
 		}
 		else if (isTrue(bodyVal)) {
 			Object value = iterationManager.get();		

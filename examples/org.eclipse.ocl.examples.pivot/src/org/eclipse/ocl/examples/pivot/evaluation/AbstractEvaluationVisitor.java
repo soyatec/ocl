@@ -22,15 +22,10 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
-import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Environment;
@@ -103,14 +98,14 @@ public abstract class AbstractEvaluationVisitor
 		return (T) metaModelManager.asEcoreObject(value);
 	}
 
-	public @NonNull InvalidValue createInvalidValue(@NonNull String message) {
-		return new InvalidValueImpl(message, evaluationEnvironment, null, null);
-	}
+//	public @NonNull InvalidValue createInvalidValue(@NonNull String message) {
+//		return new InvalidValueImpl(message, evaluationEnvironment, null, null);
+//	}
 
-	public @NonNull NullValue createInvalidValue(@NonNull String message, @Nullable Exception exception,
-			@Nullable Object context, @Nullable DomainExpression expression) {
-		return new InvalidValueImpl(message, exception, evaluationEnvironment, context, expression);
-	}
+//	public @NonNull NullValue createInvalidValue(@NonNull String message, @Nullable Exception exception,
+//			@Nullable Object context, @Nullable DomainExpression expression) {
+//		return new InvalidValueImpl(message, exception, evaluationEnvironment, context, expression);
+//	}
 
 	public @NonNull DomainType getDynamicTypeOf(@NonNull Object value) {
 		return metaModelManager.getDynamicTypeOf(value);
@@ -253,13 +248,13 @@ public abstract class AbstractEvaluationVisitor
 		}
 		
 		Object result = body.accept(getUndecoratedVisitor());
-		try {
+//		try {
 //			if (result == null) {
 //				return evaluationEnvironment.throwInvalidEvaluation("null constraint result");
 //			}
 			return ValuesUtil.asBoolean(result);
-		} catch (InvalidValueException e) {
-			return e.getValue();
-		}
+//		} catch (InvalidValueException e) {
+//			return e.getValue();
+//		}
 	}
 } //EvaluationVisitorImpl

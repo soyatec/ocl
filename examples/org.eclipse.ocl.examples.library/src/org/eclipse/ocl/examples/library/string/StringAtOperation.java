@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.library.string;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -40,7 +41,7 @@ public class StringAtOperation extends AbstractBinaryOperation
 			return result;
 		}
 		else {
-			return createInvalidValue(EvaluatorMessages.IndexOutOfRange, index, size);
+			throw new InvalidValueException(EvaluatorMessages.IndexOutOfRange, index, size);
 		}
 	}
 }

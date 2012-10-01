@@ -69,46 +69,42 @@
 */
 [let constants : String = expInOcl.gatherSpecificationConstants(genPackage, pType)]
 [let arity : OCLInteger = expInOcl.parameterVariable->size()]
-try {
-	final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
-	[expInOcl.emitConstants(constants)/]
-	final @NonNull Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this);
-	final boolean resultIsNull = <%ValuesUtil%>.isNull(result);
-	if (!resultIsNull && <%ValuesUtil%>.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-		return true;
-	}
-	if (diagnostics != null) {
-		int severity = resultIsNull ? <%org.eclipse.emf.common.util.Diagnostic%>.ERROR : <%org.eclipse.emf.common.util.Diagnostic%>.WARNING;
+final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
+[expInOcl.emitConstants(constants)/]
+final @NonNull Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this);
+final boolean resultIsNull = <%ValuesUtil%>.isNull(result);
+if (!resultIsNull && <%ValuesUtil%>.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+	return true;
+}
+if (diagnostics != null) {
+	int severity = resultIsNull ? <%org.eclipse.emf.common.util.Diagnostic%>.ERROR : <%org.eclipse.emf.common.util.Diagnostic%>.WARNING;
 [if (expInOcl.messageExpression->notEmpty())]
-		final Object messageValue = <%[className/]%>.[constraintName/].Message.INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this);
-		String message;
-		if (messageValue != null) {
-			message = messageValue.asString();
+	final Object messageValue = <%[className/]%>.[constraintName/].Message.INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this);
+	String message;
+	if (messageValue != null) {
+		message = messageValue.asString();
+	}
+	else {
+		Object objectLabel;
+		if (this instanceof <%org.eclipse.emf.ecore.EDataType%>) {
+			objectLabel = <%org.eclipse.emf.ecore.util.EObjectValidator%>.getValueLabel((<%org.eclipse.emf.ecore.EDataType%>) this, result, context);
+		}
+		else if (result instanceof <%org.eclipse.emf.ecore.EObject%>) {
+			objectLabel = <%org.eclipse.emf.ecore.util.EObjectValidator%>.getObjectLabel((<%org.eclipse.emf.ecore.EObject%>) result, context);
 		}
 		else {
-			Object objectLabel;
-			if (this instanceof <%org.eclipse.emf.ecore.EDataType%>) {
-				objectLabel = <%org.eclipse.emf.ecore.util.EObjectValidator%>.getValueLabel((<%org.eclipse.emf.ecore.EDataType%>) this, result, context);
-			}
-			else if (result instanceof <%org.eclipse.emf.ecore.EObject%>) {
-				objectLabel = <%org.eclipse.emf.ecore.util.EObjectValidator%>.getObjectLabel((<%org.eclipse.emf.ecore.EObject%>) result, context);
-			}
-			else {
-				objectLabel = String.valueOf(result);
-			}
-			message = <%org.eclipse.osgi.util.NLS%>.bind(<%EvaluatorMessages%>.ValidationConstraintIsNotSatisfied_ERROR_, new Object['[]'/]{"[pType.name/]", "[genPackage.getOperationID(pType, pRule, false)/]", objectLabel});
+			objectLabel = String.valueOf(result);
 		}
-	    diagnostics.add(new <%org.eclipse.emf.common.util.BasicDiagnostic%>(severity, <%[genPackage.getQualifiedValidatorClassName()/]%>.DIAGNOSTIC_SOURCE, <%[genPackage.getQualifiedValidatorClassName()/]%>.[genPackage.getOperationID(pType, pRule, true)/], message, new Object ['[]'/] { result }));
-[else]
-		String message = <%org.eclipse.osgi.util.NLS%>.bind(<%EvaluatorMessages%>.ValidationConstraintIsNotSatisfied_ERROR_, new Object['[]'/]{"[pType.name/]", "[pRule.getRuleName()/]", <%org.eclipse.emf.ecore.util.EObjectValidator%>.getObjectLabel(this, context)});
-	    diagnostics.add(new <%org.eclipse.emf.common.util.BasicDiagnostic%>(severity, <%[genPackage.getQualifiedValidatorClassName()/]%>.DIAGNOSTIC_SOURCE, <%[genPackage.getQualifiedValidatorClassName()/]%>.[genPackage.getOperationID(pType, pRule, true)/], message, new Object ['[]'/] { this }));
-[/if]
+		message = <%org.eclipse.osgi.util.NLS%>.bind(<%EvaluatorMessages%>.ValidationConstraintIsNotSatisfied_ERROR_, new Object['[]'/]{"[pType.name/]", "[genPackage.getOperationID(pType, pRule, false)/]", objectLabel});
 	}
-	return false;
-} catch (<%InvalidValueException%> e) {
-	String message = <%org.eclipse.osgi.util.NLS%>.bind(<%EvaluatorMessages%>.ValidationEvaluationFailed_ERROR_, new Object['[]'/]{"[pType.name/]", "[pRule.getRuleName()/]", <%org.eclipse.emf.ecore.util.EObjectValidator%>.getObjectLabel(this, context)});
-	throw new <%org.eclipse.emf.common.util.WrappedException%>(message, e);
-}[/let][/let][else]
+    diagnostics.add(new <%org.eclipse.emf.common.util.BasicDiagnostic%>(severity, <%[genPackage.getQualifiedValidatorClassName()/]%>.DIAGNOSTIC_SOURCE, <%[genPackage.getQualifiedValidatorClassName()/]%>.[genPackage.getOperationID(pType, pRule, true)/], message, new Object ['[]'/] { result }));
+[else]
+	String message = <%org.eclipse.osgi.util.NLS%>.bind(<%EvaluatorMessages%>.ValidationConstraintIsNotSatisfied_ERROR_, new Object['[]'/]{"[pType.name/]", "[pRule.getRuleName()/]", <%org.eclipse.emf.ecore.util.EObjectValidator%>.getObjectLabel(this, context)});
+    diagnostics.add(new <%org.eclipse.emf.common.util.BasicDiagnostic%>(severity, <%[genPackage.getQualifiedValidatorClassName()/]%>.DIAGNOSTIC_SOURCE, <%[genPackage.getQualifiedValidatorClassName()/]%>.[genPackage.getOperationID(pType, pRule, true)/], message, new Object ['[]'/] { this }));
+[/if]
+}
+return false;
+[/let][/let][else]
 /*
 [pRule.specification.prettyPrint().trim()/]
 */
@@ -132,14 +128,11 @@ return false; // FIXME errors in OCL definition of [pRule.prettyPrintName()/]
 /*
 [expInOcl.prettyPrint().trim()/]
 */
-try {
-	final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
-	[expInOcl.emitConstants(constants)/]
-	final @NonNull Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this[for (pParameter : Parameter | pOperation.ownedParameter)], <%ValuesUtil%>.valueOf([pParameter.name/])[/for]);
-	return ([ecoreReturnType/])[if (pOperation.type.isBoxed())]((<%Value%>)result).asEcoreObject()[else]result[/if];
-} catch (<%InvalidValueException%> e) {
-	throw new <%org.eclipse.emf.common.util.WrappedException%>("Failed to evaluate [className/]", e);
-}[/let][else]
+final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
+[expInOcl.emitConstants(constants)/]
+final @NonNull Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this[for (pParameter : Parameter | pOperation.ownedParameter)], <%ValuesUtil%>.valueOf([pParameter.name/])[/for]);
+return ([ecoreReturnType/])[if (pOperation.type.isBoxed())]((<%Value%>)result).asEcoreObject()[else]result[/if];
+[/let][else]
 /*
 [pRule.specification.prettyPrint().trim()/]
 */
@@ -169,14 +162,11 @@ return null; // FIXME errors in OCL definition of [pOperation.prettyPrintName()/
 /*
 [expInOcl.prettyPrint().trim()/]
 */
-try {
-	final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
-	[expInOcl.emitConstants(constants)/]
-	final @NonNull Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this, [pProperty.emitQualifiedLiteralName(genPackage)/]);
-	return ([ecoreReturnType/])[if (pProperty.type.isBoxed())]((<%Value%>)result).asEcoreObject()[else]result[/if];
-} catch (<%InvalidValueException%> e) {
-	throw new <%org.eclipse.emf.common.util.WrappedException%>("Failed to evaluate [className/]", e);
-}[/let][else]
+final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
+[expInOcl.emitConstants(constants)/]
+final @NonNull Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this, [pProperty.emitQualifiedLiteralName(genPackage)/]);
+return ([ecoreReturnType/])[if (pProperty.type.isBoxed())]((<%Value%>)result).asEcoreObject()[else]result[/if];
+[/let][else]
 /*
 [pRule.specification.prettyPrint().trim()/]
 */

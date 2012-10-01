@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.library.logical;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -38,10 +39,10 @@ public class BooleanNotOperation extends AbstractUnaryOperation
 			return FALSE_VALUE;
 		}
 		else if (argument instanceof InvalidValue) {
-			return argument;
+			throw ((InvalidValue)argument).getException();
 		}
 		else {
-			return createInvalidValue(EvaluatorMessages.TypedValueRequired, TypeId.BOOLEAN_NAME, getTypeName(argument));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.BOOLEAN_NAME, getTypeName(argument));
 		}
 	}
 }

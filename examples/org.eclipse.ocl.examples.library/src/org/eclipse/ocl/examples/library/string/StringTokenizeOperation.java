@@ -23,6 +23,7 @@ import java.util.StringTokenizer;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractPolyOperation;
@@ -58,7 +59,7 @@ public class StringTokenizeOperation extends AbstractPolyOperation
 		if (argumentValues.length > 0) {
 			if (argumentValues.length > 1) {
 				if (argumentValues.length > 2) {
-					return createInvalidValue(EvaluatorMessages.InvalidArgument, argumentValues[2]);
+					throw new InvalidValueException(EvaluatorMessages.InvalidArgument, argumentValues[2]);
 				}
 				Object argumentValue1 = argumentValues[1];
 				assert argumentValue1 != null;

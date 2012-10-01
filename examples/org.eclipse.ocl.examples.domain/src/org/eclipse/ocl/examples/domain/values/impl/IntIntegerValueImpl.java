@@ -53,32 +53,28 @@ public class IntIntegerValueImpl extends IntegerValueImpl
 	}
 
 	public @NonNull IntegerValue add(@NonNull IntegerValue right) {
-		try {
-			if (right instanceof IntIntegerValueImpl) {
-				int thatValue = ((IntIntegerValueImpl)right).intValue();
-				int sum = value + thatValue;
-				if (value >= 0) {
-					if ((thatValue >= 0) && (sum >= 0)) {
-						return integerValueOf(sum);
-					}
+		if (right instanceof IntIntegerValueImpl) {
+			int thatValue = ((IntIntegerValueImpl)right).intValue();
+			int sum = value + thatValue;
+			if (value >= 0) {
+				if ((thatValue >= 0) && (sum >= 0)) {
+					return integerValueOf(sum);
 				}
-				else {
-					if ((thatValue <= 0) && (sum <= 0)) {
-						return integerValueOf(sum);
-					}
-				}
-				return integerValueOf((long)value + (long)thatValue);
-			}
-			else if (right instanceof LongIntegerValueImpl) {
-				long thatValue = ((LongIntegerValueImpl)right).longValue();
-				return integerValueOf(value + thatValue);
 			}
 			else {
-				@SuppressWarnings("null") @NonNull BigInteger result = bigIntegerValue().add(right.bigIntegerValue());
-				return integerValueOf(result);
+				if ((thatValue <= 0) && (sum <= 0)) {
+					return integerValueOf(sum);
+				}
 			}
-		} catch (InvalidValueException e) {
-			return createInvalidValue(e);
+			return integerValueOf((long)value + (long)thatValue);
+		}
+		else if (right instanceof LongIntegerValueImpl) {
+			long thatValue = ((LongIntegerValueImpl)right).longValue();
+			return integerValueOf(value + thatValue);
+		}
+		else {
+			@SuppressWarnings("null") @NonNull BigInteger result = bigIntegerValue().add(right.bigIntegerValue());
+			return integerValueOf(result);
 		}
 	}
 
@@ -136,7 +132,7 @@ public class IntIntegerValueImpl extends IntegerValueImpl
 
 	public @NonNull IntegerValue div(@NonNull IntegerValue right) {
 		if (right.bigIntegerValue().signum() == 0) {
-			return createInvalidValue("div zero");
+			throw new InvalidValueException("div zero");
 		}
 		@SuppressWarnings("null") @NonNull BigInteger result = bigIntegerValue().divide(right.bigIntegerValue());
 		return integerValueOf(result);
@@ -220,7 +216,7 @@ public class IntIntegerValueImpl extends IntegerValueImpl
 
 	public @NonNull IntegerValue mod(@NonNull IntegerValue right) {
 		if (right.bigIntegerValue().signum() == 0) {
-			return createInvalidValue("mod zero");
+			throw new InvalidValueException("mod zero");
 		}
 		if (right instanceof IntIntegerValueImpl) {
 			int thatValue = ((IntIntegerValueImpl)right).intValue();

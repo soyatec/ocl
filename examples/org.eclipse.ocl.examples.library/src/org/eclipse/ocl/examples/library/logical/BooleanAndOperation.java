@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.library.logical;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -43,16 +44,16 @@ public class BooleanAndOperation extends AbstractBinaryOperation
 			return TRUE_VALUE;
 		}
 		else if (left instanceof InvalidValue) {
-			return left;
+			throw ((InvalidValue)left).getException();
 		}
 		else if (right instanceof InvalidValue) {
-			return right;
+			throw ((InvalidValue)right).getException();
 		}
 		else if (!(left instanceof Boolean)) {
-			return createInvalidValue(EvaluatorMessages.TypedValueRequired, TypeId.BOOLEAN_NAME, getTypeName(left));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.BOOLEAN_NAME, getTypeName(left));
 		}
 		else {
-			return createInvalidValue(EvaluatorMessages.TypedValueRequired, TypeId.BOOLEAN_NAME, getTypeName(right));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.BOOLEAN_NAME, getTypeName(right));
 		}
 	}
 }

@@ -225,12 +225,12 @@ public class OCL {
 		if (specification.getBodyExpression().getType() != stdlib.getBooleanType()) {
 			throw new IllegalArgumentException("constraint is not boolean"); //$NON-NLS-1$
 		}
-//		try {
+		try {
 			Object result = evaluate(context, specification);
 			return ValuesUtil.isTrue(result);
-//		} catch (InvalidEvaluationException e) {
-//			return false;
-//		}
+		} catch (InvalidValueException e) {
+			return false;
+		}
 	}
     
 	/**

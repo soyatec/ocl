@@ -62,7 +62,7 @@ public abstract class AbstractNumericBinaryOperation extends AbstractBinaryOpera
 	 * @throws InvalidValueException 
 	 */
 	protected @NonNull Object evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) {
-		return createInvalidValue(EvaluatorMessages.TypedValueRequired, TypeId.REAL_NAME);
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.REAL_NAME);
 	}
 	
 	/**
@@ -73,6 +73,6 @@ public abstract class AbstractNumericBinaryOperation extends AbstractBinaryOpera
 	 * @return result
 	 */
 	protected @NonNull Object evaluateUnlimited(@NonNull DomainEvaluator evaluator, @NonNull Object left, @NonNull Object right) {
-		return createInvalidValue(EvaluatorMessages.TypedValueRequired, "Unlimited"); //$NON-NLS-1$
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Unlimited"); //$NON-NLS-1$
 	}
 }

@@ -157,7 +157,7 @@ public class CompanyBodies
 				} catch (Exception e) {
 					A_symbol__10_bodyVal = createInvalidValue(e);
 				}
-				if (ValuesUtil.isUndefined(A_symbol__10_bodyVal)) {
+				if (ValuesUtil.isNull(A_symbol__10_bodyVal)) {
 					A_symbol__10 = createInvalidValue(EvaluatorMessages.UndefinedBody, "any");
 					break;
 				}

@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.library.oclany;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
@@ -42,10 +43,10 @@ public class OclAnyNotEqualOperation extends OclAnyEqualOperation
 			return FALSE_VALUE;
 		}
 		else if (equals instanceof InvalidValue) {
-			return equals;
+			throw ((InvalidValue)equals).getException();
 		}
 		else {
-			return createInvalidValue(EvaluatorMessages.TypedValueRequired, TypeId.BOOLEAN_NAME, getTypeName(right));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.BOOLEAN_NAME, getTypeName(right));
 		}
 	}
 }

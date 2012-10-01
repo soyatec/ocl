@@ -91,7 +91,7 @@ public class BigIntegerValueImpl extends IntegerValueImpl
 
 	public @NonNull IntegerValue div(@NonNull IntegerValue right) {
 		if (right.bigIntegerValue().signum() == 0) {
-			return createInvalidValue("div zero");
+			throw new InvalidValueException("div zero");
 		}
 		@SuppressWarnings("null") @NonNull BigInteger result = value.divide(right.bigIntegerValue());
 		return integerValueOf(result);
@@ -151,7 +151,7 @@ public class BigIntegerValueImpl extends IntegerValueImpl
 
 	public @NonNull IntegerValue mod(@NonNull IntegerValue right) {
 		if (right.bigIntegerValue().signum() == 0) {
-			return createInvalidValue("mod zero");
+			throw new InvalidValueException("mod zero");
 		}
 		@SuppressWarnings("null") @NonNull BigInteger result = value.remainder(right.bigIntegerValue());
 		return integerValueOf(result);

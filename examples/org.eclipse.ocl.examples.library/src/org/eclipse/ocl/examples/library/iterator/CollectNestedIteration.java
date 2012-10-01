@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
 
 /**
  * CollectNestedIteration realizes the Collection::collectNested() library iteration.
@@ -39,9 +40,7 @@ public class CollectNestedIteration extends AbstractIteration
 	@Override
     protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
 		Object bodyVal = iterationManager.evaluateBody();		
-		if (isInvalid(bodyVal)) {
-			return bodyVal; 	// Invalid body is invalid
-		}
+		assert !(bodyVal instanceof InvalidValue);
 		CollectionValue.Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
 		accumulatorValue.add(bodyVal);
 		return null;								// Carry on

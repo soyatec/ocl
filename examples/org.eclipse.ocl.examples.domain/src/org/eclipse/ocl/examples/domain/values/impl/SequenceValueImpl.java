@@ -24,8 +24,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -66,7 +66,7 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 
     public @NonNull SequenceValue append(@NonNull Object object) {
 		if (object instanceof InvalidValue) {
-			return createInvalidValue(EvaluatorMessages.InvalidSource, "append");
+			throw new InvalidValueException(EvaluatorMessages.InvalidSource, "append");
 		}
     	List<Object> result = new ArrayList<Object>(elements);
         result.add(object);
@@ -76,7 +76,7 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
     public @NonNull Object at(int index) {
         index = index - 1;        
         if (index < 0 || elements.size() <= index) {
-        	return createInvalidValue(EvaluatorMessages.IndexOutOfRange, index + 1, size());
+        	throw new InvalidValueException(EvaluatorMessages.IndexOutOfRange, index + 1, size());
 		}        
         return DomainUtil.nonNullState(getElements().get(index));
     }
@@ -115,7 +115,7 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 
     public @NonNull Object first() {
         if (elements.size() <= 0) {
-        	return createInvalidValue(EvaluatorMessages.EmptyCollection, "Sequence", "first");
+        	throw new InvalidValueException(EvaluatorMessages.EmptyCollection, "Sequence", "first");
         }
         return DomainUtil.nonNullState(getElements().get(0));
     }
@@ -146,7 +146,7 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 	   
 	public @NonNull SequenceValue including(@NonNull Object value) {
 		if (value instanceof InvalidValue) {
-			return createInvalidValue(EvaluatorMessages.InvalidSource, "including");
+			throw new InvalidValueException(EvaluatorMessages.InvalidSource, "including");
 		}
 		List<Object> result = new ArrayList<Object>(elements);
 		result.add(value);
@@ -156,18 +156,18 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
     public @NonNull IntegerValue indexOf(@NonNull Object object) {
         int index = getElements().indexOf(object);
         if (index < 0) {
-        	return createInvalidValue(EvaluatorMessages.MissingValue, "indexOf");
+        	throw new InvalidValueException(EvaluatorMessages.MissingValue, "indexOf");
         }
     	return ValuesUtil.integerValueOf(index+1);
     }
 
     public @NonNull SequenceValue insertAt(int index, @NonNull Object object) {
 		if (object instanceof InvalidValue) {
-			return createInvalidValue(EvaluatorMessages.InvalidSource, "insertAt");
+			throw new InvalidValueException(EvaluatorMessages.InvalidSource, "insertAt");
 		}
         index = index - 1;        
         if (index < 0 || index > elements.size()) {
-        	return createInvalidValue(EvaluatorMessages.IndexOutOfRange, index + 1, size());
+        	throw new InvalidValueException(EvaluatorMessages.IndexOutOfRange, index + 1, size());
         }        
 		List<Object> result = new ArrayList<Object>(elements);
 		result.add(index, object);
@@ -185,14 +185,14 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
     public @NonNull Object last() {
         int size = elements.size();
 		if (size <= 0) {
-			return createInvalidValue(EvaluatorMessages.EmptyCollection, "Sequence", "last");
+			throw new InvalidValueException(EvaluatorMessages.EmptyCollection, "Sequence", "last");
         }
         return DomainUtil.nonNullState(getElements().get(size-1));
     }
     
     public @NonNull SequenceValue prepend(@NonNull Object object) {
 		if (object instanceof InvalidValue) {
-			return createInvalidValue(EvaluatorMessages.InvalidSource, "prepend");
+			throw new InvalidValueException(EvaluatorMessages.InvalidSource, "prepend");
 		}
     	List<Object> result = new ArrayList<Object>();
         result.add(object);

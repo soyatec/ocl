@@ -20,6 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
 
 /**
  * OclAnyOclIsInvalidOperation realises the OclAny::oclIsInvalid() library operation.
@@ -29,6 +30,6 @@ public class OclAnyOclIsInvalidOperation extends AbstractUnaryOperation
 	public static final @NonNull OclAnyOclIsInvalidOperation INSTANCE = new OclAnyOclIsInvalidOperation();
 
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object argument) {
-		return isInvalid(argument) != false;			// FIXME redundant test to suppress warning
+		return argument instanceof InvalidValue;
 	}
 }

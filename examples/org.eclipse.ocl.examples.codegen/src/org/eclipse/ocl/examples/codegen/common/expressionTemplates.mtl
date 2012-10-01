@@ -213,10 +213,18 @@ Object acc_[astName/] = dynamic_[astName/].createAccumulatorValue(evaluator, [as
 Object [astName/] = dynamic_[astName/].evaluateIteration(manager_[astName/]);[/let][/let][/let][/let][/let][/let][/template]
 
 [template public emitExpression(ast : LetExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
-[if (not ast.variable.initExpression.isConstant())]
-[ast.variable.initExpression.emitExpression(importer, genPackage, expInOcl)/]
-[/if]
+[if (ast.variable.initExpression.isConstant())]
 final @NonNull Object [ast.variable.symbolName(expInOcl)/] = [ast.variable.initExpression.symbolName(expInOcl)/];
+[else]
+@NonNull Object [ast.variable.symbolName(expInOcl)/];
+try {
+	[ast.variable.initExpression.emitExpression(importer, genPackage, expInOcl)/]
+	[ast.variable.symbolName(expInOcl)/] = [ast.variable.initExpression.symbolName(expInOcl)/];
+}
+catch (<%InvalidValueException%> e) {
+	[ast.variable.symbolName(expInOcl)/] = ValuesUtil.createInvalidValue(e);
+}
+[/if]
 [if (not ast._in.isConstant())]
 [ast._in.emitExpression(importer, genPackage, expInOcl)/]
 [/if]

@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.library.oclany;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -33,7 +34,7 @@ public class OclComparableCompareToOperation extends AbstractBinaryOperation
 		Object leftObject = asObject(left);
 		Object rightObject = asObject(right);
 		if (!(leftObject instanceof Comparable<?>)) {
-			return createInvalidValue("Unsupported compareTo for ''{0}''", left.getClass().getName()); //$NON-NLS-1$
+			throw new InvalidValueException("Unsupported compareTo for ''{0}''", left.getClass().getName()); //$NON-NLS-1$
 		}
 		@SuppressWarnings("unchecked")
 		int intComparison = ((Comparable<Object>)leftObject).compareTo(rightObject);

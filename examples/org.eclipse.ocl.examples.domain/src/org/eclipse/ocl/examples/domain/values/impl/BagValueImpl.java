@@ -27,8 +27,6 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -191,9 +189,7 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 	}
 
 	public @NonNull BagValue including(@NonNull Object value) {
-		if (value instanceof InvalidValue) {
-			return createInvalidValue(EvaluatorMessages.InvalidSource, "including");
-		}
+		assert !(value instanceof InvalidValue);
 		Bag<Object> result = new BagImpl<Object>(elements);
 		result.add(value);
 		return new BagValueImpl(getTypeId(), result);

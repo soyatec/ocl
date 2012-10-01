@@ -26,10 +26,7 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
@@ -207,9 +204,7 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 	}
 
 	public @NonNull SetValue including(@NonNull Object value) {
-		if (value instanceof InvalidValue) {
-			return createInvalidValue(EvaluatorMessages.InvalidSource, "including");
-		}
+		assert !(value instanceof InvalidValue);
 		Set<Object> result = new HashSet<Object>(elements);
 		result.add(value);
 		return new SetValueImpl(getTypeId(), result);
