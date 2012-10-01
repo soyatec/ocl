@@ -101,8 +101,8 @@
       </rm:uri>
     </rm:provider>
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(build.type=M)(resolve.target.platform=true))" readerType="p2" source="false" mutable="false">
-      <rm:property key="buckminster.mutable" value="false"/>
       <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}/modeling/emf/emf/updates/2.9.x">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
@@ -131,8 +131,8 @@
       </rm:uri>
     </rm:provider>
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(build.type=M)(resolve.target.platform=true))" readerType="p2" source="false" mutable="false">
-      <rm:property key="buckminster.mutable" value="false"/>
       <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}/modeling/mdt/uml2/updates/4.1.x">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
@@ -165,7 +165,7 @@
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(resolve.target.platform=true)" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/tools/orbit/downloads/drops/S20120726065500/repository/">
+      <rm:uri format="{0}/tools/orbit/downloads/drops/S20120917013952/repository/">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
