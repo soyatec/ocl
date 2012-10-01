@@ -820,6 +820,12 @@
         <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//Iteration/ownedAccumulator"/>
       </genFeatures>
     </genClasses>
+    <genClasses xsi:type="genmodel:GenClass" image="false">
+      <ecoreClass href="Pivot.ecore#//ReferringElement"/>
+      <genOperations xsi:type="genmodel:GenOperation">
+        <ecoreOperation href="Pivot.ecore#//ReferringElement/getReferredElement"/>
+      </genOperations>
+    </genClasses>
     <genClasses xsi:type="genmodel:GenClass">
       <ecoreClass href="Pivot.ecore#//IteratorExp"/>
     </genClasses>

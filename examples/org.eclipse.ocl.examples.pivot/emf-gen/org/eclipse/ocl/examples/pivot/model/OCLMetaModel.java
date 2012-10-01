@@ -1863,7 +1863,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Operation op_ParameterableElement_isCompatibleWith = createOperation("isCompatibleWith", _Boolean, null, null);
 		protected final @NonNull Operation op_ParameterableElement_isTemplateParameter = createOperation("isTemplateParameter", _Boolean, null, null);
 		protected final @NonNull Operation op_Property_isAttribute = createOperation("isAttribute", _Boolean, null, null);
-		protected final @NonNull Operation op_ReferringElement_referredElement = createOperation("referredElement", _Element, null, null);
+		protected final @NonNull Operation op_ReferringElement_getReferredElement = createOperation("getReferredElement", _Element, null, null);
 		protected final @NonNull Operation op_SelfType_resolveSelfType = createOperation("resolveSelfType", _Type, null, null);
 		protected final @NonNull Operation op_TemplateableElement_isTemplate = createOperation("isTemplate", _Boolean, null, null);
 		protected final @NonNull Operation op_TemplateableElement_parameterableElements = createOperation("parameterableElements", _Set_ParameterableElement, null, null);
@@ -1899,7 +1899,7 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("p", _Property));
 			ownedOperations = _ReferringElement.getOwnedOperation();
-			ownedOperations.add(operation = op_ReferringElement_referredElement);
+			ownedOperations.add(operation = op_ReferringElement_getReferredElement);
 			ownedOperations = _SelfType.getOwnedOperation();
 			ownedOperations.add(operation = op_SelfType_resolveSelfType);
 			ownedParameters = operation.getOwnedParameter();
@@ -2424,10 +2424,10 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties.add(property = pr_Iteration_ownedAccumulator);
 			property.setIsComposite(true);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Parameter_Iteration);
 			ownedProperties.add(property = pr_Iteration_ownedIterator);
 			property.setIsComposite(true);
 			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Parameter_Iteration);
 			ownedProperties = _LambdaType.getOwnedAttribute();
 			ownedProperties.add(property = pr_LambdaType_contextType);
 			property.setIsResolveProxies(true);
@@ -2532,7 +2532,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties.add(property = pr_OCLExpression_MessageExp);
 			property.setImplicit(true);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_MessageExp_target);
 			ownedProperties.add(property = pr_OCLExpression_NavigationCallExp);
 			property.setImplicit(true);
 			property.setIsResolveProxies(true);

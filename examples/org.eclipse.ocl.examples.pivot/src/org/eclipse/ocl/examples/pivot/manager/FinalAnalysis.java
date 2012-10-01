@@ -70,9 +70,9 @@ public class FinalAnalysis
 				operation2overrides.put(domainOperation, overrides);
 			}
 		}
-		StringBuilder s = new StringBuilder();
-		print(s);
-		System.out.println(s);
+//		StringBuilder s = new StringBuilder();
+//		print(s);
+//		System.out.println(s);
 	}
 	
 	public boolean isFinal(DomainInheritance domainInheritance) {
