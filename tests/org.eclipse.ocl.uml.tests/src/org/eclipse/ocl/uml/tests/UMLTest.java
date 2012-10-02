@@ -26,6 +26,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.uml2.uml.Classifier;
@@ -467,7 +468,7 @@ public class UMLTest
         super.setUp();
 
         instanceResource = resourceSet.createResource(URI
-            .createFileURI("/tmp/instances.uml"));
+            .createFileURI("/tmp/instances.uml"), ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 
         instancePackage = umlf.createPackage();
         instancePackage.setName("instances");

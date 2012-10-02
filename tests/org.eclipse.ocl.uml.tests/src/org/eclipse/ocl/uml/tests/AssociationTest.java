@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
@@ -1014,7 +1015,7 @@ public class AssociationTest
 		super.setUp();
 		
 		instanceResource = resourceSet.createResource(
-				URI.createFileURI("/tmp/instances.uml"));
+				URI.createFileURI("/tmp/instances.uml"), ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		
 		instancePackage = umlf.createPackage();
 		instancePackage.setName("instances");

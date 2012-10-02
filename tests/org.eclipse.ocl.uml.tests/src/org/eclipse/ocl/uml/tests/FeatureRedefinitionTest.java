@@ -19,6 +19,7 @@
 package org.eclipse.ocl.uml.tests;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.ocl.uml.OperationCallExp;
 import org.eclipse.ocl.uml.PropertyCallExp;
@@ -147,7 +148,7 @@ public class FeatureRedefinitionTest
 		Package p = f.createPackage();
 		p.setName("TestPackage");
 		
-		resourceSet.createResource(URI.createURI("http:///test.uml")).getContents()
+		resourceSet.createResource(URI.createURI("http:///test.uml"), ContentHandler.UNSPECIFIED_CONTENT_TYPE).getContents()
 			.add(p);
 		
 		/* test model:

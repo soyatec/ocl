@@ -25,6 +25,7 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.OCLInput;
@@ -1000,7 +1001,7 @@ public class DefExpressionTest
 		super.setUp();
 		
 		instanceResource = resourceSet.createResource(
-				URI.createFileURI("/tmp/instances.uml"));
+				URI.createFileURI("/tmp/instances.uml"), ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		
 		instancePackage = umlf.createPackage();
 		instancePackage.setName("instances");
