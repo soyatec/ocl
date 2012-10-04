@@ -86,6 +86,7 @@ import org.eclipse.ocl.examples.pivot.Profile;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
+import org.eclipse.ocl.examples.pivot.ReferringElement;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SelfType;
 import org.eclipse.ocl.examples.pivot.SendSignalAction;
@@ -652,6 +653,7 @@ public class PivotSwitch<T> extends Switch<T> {
 				IterateExp iterateExp = (IterateExp)theEObject;
 				T result = caseIterateExp(iterateExp);
 				if (result == null) result = caseLoopExp(iterateExp);
+				if (result == null) result = caseReferringElement(iterateExp);
 				if (result == null) result = caseCallExp(iterateExp);
 				if (result == null) result = caseOCLExpression(iterateExp);
 				if (result == null) result = caseTypedElement(iterateExp);
@@ -685,6 +687,7 @@ public class PivotSwitch<T> extends Switch<T> {
 				IteratorExp iteratorExp = (IteratorExp)theEObject;
 				T result = caseIteratorExp(iteratorExp);
 				if (result == null) result = caseLoopExp(iteratorExp);
+				if (result == null) result = caseReferringElement(iteratorExp);
 				if (result == null) result = caseCallExp(iteratorExp);
 				if (result == null) result = caseOCLExpression(iteratorExp);
 				if (result == null) result = caseTypedElement(iteratorExp);
@@ -923,6 +926,7 @@ public class PivotSwitch<T> extends Switch<T> {
 				OperationCallExp operationCallExp = (OperationCallExp)theEObject;
 				T result = caseOperationCallExp(operationCallExp);
 				if (result == null) result = caseFeatureCallExp(operationCallExp);
+				if (result == null) result = caseReferringElement(operationCallExp);
 				if (result == null) result = caseCallExp(operationCallExp);
 				if (result == null) result = caseOCLExpression(operationCallExp);
 				if (result == null) result = caseTypedElement(operationCallExp);
@@ -1083,6 +1087,7 @@ public class PivotSwitch<T> extends Switch<T> {
 				PropertyCallExp propertyCallExp = (PropertyCallExp)theEObject;
 				T result = casePropertyCallExp(propertyCallExp);
 				if (result == null) result = caseNavigationCallExp(propertyCallExp);
+				if (result == null) result = caseReferringElement(propertyCallExp);
 				if (result == null) result = caseFeatureCallExp(propertyCallExp);
 				if (result == null) result = caseCallExp(propertyCallExp);
 				if (result == null) result = caseOCLExpression(propertyCallExp);
@@ -1107,6 +1112,13 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElement(realLiteralExp);
 				if (result == null) result = caseNameable(realLiteralExp);
 				if (result == null) result = caseVisitable(realLiteralExp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PivotPackage.REFERRING_ELEMENT:
+			{
+				ReferringElement referringElement = (ReferringElement)theEObject;
+				T result = caseReferringElement(referringElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1372,6 +1384,7 @@ public class PivotSwitch<T> extends Switch<T> {
 				TypeExp typeExp = (TypeExp)theEObject;
 				T result = caseTypeExp(typeExp);
 				if (result == null) result = caseOCLExpression(typeExp);
+				if (result == null) result = caseReferringElement(typeExp);
 				if (result == null) result = caseTypedElement(typeExp);
 				if (result == null) result = caseNamedElement(typeExp);
 				if (result == null) result = caseElement(typeExp);
@@ -1501,6 +1514,7 @@ public class PivotSwitch<T> extends Switch<T> {
 				VariableExp variableExp = (VariableExp)theEObject;
 				T result = caseVariableExp(variableExp);
 				if (result == null) result = caseOCLExpression(variableExp);
+				if (result == null) result = caseReferringElement(variableExp);
 				if (result == null) result = caseTypedElement(variableExp);
 				if (result == null) result = caseNamedElement(variableExp);
 				if (result == null) result = caseElement(variableExp);
@@ -2272,6 +2286,22 @@ public class PivotSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRealLiteralExp(RealLiteralExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Referring Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Referring Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReferringElement(ReferringElement object)
+	{
 		return null;
 	}
 

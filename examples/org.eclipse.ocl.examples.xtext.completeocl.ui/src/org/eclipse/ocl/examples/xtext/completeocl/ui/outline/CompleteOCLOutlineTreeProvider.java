@@ -16,12 +16,19 @@
  */
 package org.eclipse.ocl.examples.xtext.completeocl.ui.outline;
 
+import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.ui.outline.EssentialOCLOutlineTreeProvider;
+import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 
 /**
  * customization of the default outline structure
  * 
  */
-public class CompleteOCLOutlineTreeProvider extends EssentialOCLOutlineTreeProvider {
-	
+public class CompleteOCLOutlineTreeProvider extends EssentialOCLOutlineTreeProvider
+{
+//	protected void createNode(IOutlineNode parentNode, PackageDeclarationCS ele) {
+//		for (EObject childElement : ele.getContexts())
+//			createNode(parentNode, childElement);
+//	}	
+	protected void _createNode(IOutlineNode parentNode, PathNameCS ele) {}	
 }

@@ -25,6 +25,7 @@ import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
@@ -86,8 +87,13 @@ public class CompleteOCLLabelProvider extends EssentialOCLLabelProvider
 		return classifier.getName();
 	}
 
+	protected String image(CompleteOCLDocumentCS ele) {
+		return "/org.eclipse.ocl.examples.xtext.completeocl.ui/icons/OCLModelFile.gif";
+	}
+
 	protected String text(CompleteOCLDocumentCS ele) {
-		return "Complete OCL document";
+		Root root = PivotUtil.getPivot(Root.class, ele);
+		return root != null ? String.valueOf(root.getName()) : "null";
 	}
 
 	protected String image(DefCS ele) {

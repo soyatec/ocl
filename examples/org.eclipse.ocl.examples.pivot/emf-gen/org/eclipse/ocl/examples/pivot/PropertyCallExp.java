@@ -34,7 +34,7 @@ package org.eclipse.ocl.examples.pivot;
  * @generated
  */
 public interface PropertyCallExp
-		extends NavigationCallExp {
+		extends NavigationCallExp, ReferringElement {
 
 	/**
 	 * Returns the value of the '<em><b>Referred Property</b></em>' reference.

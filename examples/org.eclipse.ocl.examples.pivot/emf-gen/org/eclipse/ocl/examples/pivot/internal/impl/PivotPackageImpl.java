@@ -98,6 +98,7 @@ import org.eclipse.ocl.examples.pivot.Profile;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
+import org.eclipse.ocl.examples.pivot.ReferringElement;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SelfType;
 import org.eclipse.ocl.examples.pivot.SendSignalAction;
@@ -489,6 +490,13 @@ public class PivotPackageImpl
 	 * @generated
 	 */
 	private EClass realLiteralExpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass referringElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2666,6 +2674,26 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getReferringElement()
+	{
+		return referringElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getReferringElement__ReferredElement()
+	{
+		return referringElementEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRoot()
 	{
 		return rootEClass;
@@ -4751,6 +4779,9 @@ public class PivotPackageImpl
 		realLiteralExpEClass = createEClass(REAL_LITERAL_EXP);
 		createEAttribute(realLiteralExpEClass, REAL_LITERAL_EXP__REAL_SYMBOL);
 
+		referringElementEClass = createEClass(REFERRING_ELEMENT);
+		createEOperation(referringElementEClass, REFERRING_ELEMENT___REFERRED_ELEMENT);
+
 		rootEClass = createEClass(ROOT);
 		createEReference(rootEClass, ROOT__NESTED_PACKAGE);
 		createEAttribute(rootEClass, ROOT__EXTERNAL_URI);
@@ -4959,8 +4990,10 @@ public class PivotPackageImpl
 		invalidLiteralExpEClass.getESuperTypes().add(this.getLiteralExp());
 		invalidTypeEClass.getESuperTypes().add(this.getClass_());
 		iterateExpEClass.getESuperTypes().add(this.getLoopExp());
+		iterateExpEClass.getESuperTypes().add(this.getReferringElement());
 		iterationEClass.getESuperTypes().add(this.getOperation());
 		iteratorExpEClass.getESuperTypes().add(this.getLoopExp());
+		iteratorExpEClass.getESuperTypes().add(this.getReferringElement());
 		lambdaTypeEClass.getESuperTypes().add(this.getDataType());
 		letExpEClass.getESuperTypes().add(this.getOCLExpression());
 		libraryEClass.getESuperTypes().add(this.getPackage());
@@ -4982,6 +5015,7 @@ public class PivotPackageImpl
 		operationEClass.getESuperTypes().add(this.getTemplateableElement());
 		operationEClass.getESuperTypes().add(this.getParameterableElement());
 		operationCallExpEClass.getESuperTypes().add(this.getFeatureCallExp());
+		operationCallExpEClass.getESuperTypes().add(this.getReferringElement());
 		operationTemplateParameterEClass.getESuperTypes().add(this.getTemplateParameter());
 		orderedSetTypeEClass.getESuperTypes().add(this.getCollectionType());
 		packageEClass.getESuperTypes().add(this.getNamespace());
@@ -4997,6 +5031,7 @@ public class PivotPackageImpl
 		propertyEClass.getESuperTypes().add(this.getFeature());
 		propertyEClass.getESuperTypes().add(this.getParameterableElement());
 		propertyCallExpEClass.getESuperTypes().add(this.getNavigationCallExp());
+		propertyCallExpEClass.getESuperTypes().add(this.getReferringElement());
 		realLiteralExpEClass.getESuperTypes().add(this.getNumericLiteralExp());
 		rootEClass.getESuperTypes().add(this.getNamespace());
 		selfTypeEClass.getESuperTypes().add(this.getClass_());
@@ -5021,6 +5056,7 @@ public class PivotPackageImpl
 		typeEClass.getESuperTypes().add(this.getTemplateableElement());
 		typeEClass.getESuperTypes().add(this.getParameterableElement());
 		typeExpEClass.getESuperTypes().add(this.getOCLExpression());
+		typeExpEClass.getESuperTypes().add(this.getReferringElement());
 		typeTemplateParameterEClass.getESuperTypes().add(this.getTemplateParameter());
 		typedElementEClass.getESuperTypes().add(this.getNamedElement());
 		typedMultiplicityElementEClass.getESuperTypes().add(this.getTypedElement());
@@ -5032,6 +5068,7 @@ public class PivotPackageImpl
 		variableEClass.getESuperTypes().add(this.getVariableDeclaration());
 		variableDeclarationEClass.getESuperTypes().add(this.getTypedElement());
 		variableExpEClass.getESuperTypes().add(this.getOCLExpression());
+		variableExpEClass.getESuperTypes().add(this.getReferringElement());
 		voidTypeEClass.getESuperTypes().add(this.getClass_());
 
 		// Initialize classes, features, and operations; add parameters
@@ -5811,6 +5848,10 @@ public class PivotPackageImpl
 		initEClass(realLiteralExpEClass, RealLiteralExp.class, "RealLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(getRealLiteralExp_RealSymbol(), this.getReal(), "realSymbol", null, 1, 1, RealLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
+		initEClass(referringElementEClass, ReferringElement.class, "ReferringElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+		initEOperation(getReferringElement__ReferredElement(), this.getElement(), "referredElement", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
 		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getRoot_NestedPackage(), this.getPackage(), null, "nestedPackage", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 		initEAttribute(getRoot_ExternalURI(), this.getString(), "externalURI", null, 0, 1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
@@ -5999,7 +6040,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																																																																																																																																																																																																																												
+		   });																																																																																																																																																																																																																																																																																													
 	}
 
 	/**
@@ -6040,7 +6081,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																			
+		   });																																																																																				
 		addAnnotation
 		  (typeEClass, 
 		   source, 
@@ -6073,7 +6114,7 @@ public class PivotPackageImpl
 		   new URI[] 
 		   {
 			 URI.createURI(eNS_URI).appendFragment("//ParameterableElement/templateParameter") //$NON-NLS-1$
-		   });																																											
+		   });																																												
 		addAnnotation
 		  (getTemplateParameter_OwnedParameteredElement(), 
 		   source, 

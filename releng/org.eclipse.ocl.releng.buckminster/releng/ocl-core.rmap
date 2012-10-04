@@ -13,6 +13,7 @@
   <rm:locator pattern="^org\.eclipse\.uml2.*" searchPathRef="uml"/>
   <rm:locator pattern="^org\.eclipse\.test$" searchPathRef="eclipse-tests-source-code"/>
   <rm:locator pattern="^org\.eclipse\.ant\.optional\.junit$" searchPathRef="eclipse-tests-source-code"/>
+  <rm:locator pattern="^org\.eclipse\.jdt\.annotation.*" searchPathRef="jdtannot"/>
   <rm:locator searchPathRef="eclipse-platform" failOnError="false"/>
   <rm:locator searchPathRef="orbit"/>
   <rm:searchPath name="ocl-source-code">
@@ -101,8 +102,8 @@
       </rm:uri>
     </rm:provider>
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(build.type=M)(resolve.target.platform=true))" readerType="p2" source="false" mutable="false">
-      <rm:property key="buckminster.mutable" value="false"/>
       <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}/modeling/emf/emf/updates/2.9.x">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
@@ -131,8 +132,8 @@
       </rm:uri>
     </rm:provider>
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(build.type=M)(resolve.target.platform=true))" readerType="p2" source="false" mutable="false">
-      <rm:property key="buckminster.mutable" value="false"/>
       <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}/modeling/mdt/uml2/updates/4.1.x">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
@@ -165,7 +166,16 @@
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(resolve.target.platform=true)" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/tools/orbit/downloads/drops/S20120726065500/repository/">
+      <rm:uri format="{0}/tools/orbit/downloads/drops/S20120917013952/repository/">
+        <bc:propertyRef key="eclipse.download"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="jdtannot">
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature" resolutionFilter="(resolve.target.platform=true)" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="http://www.eclipse.org/jdt/core/beta-null-annotations-for-fields">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>

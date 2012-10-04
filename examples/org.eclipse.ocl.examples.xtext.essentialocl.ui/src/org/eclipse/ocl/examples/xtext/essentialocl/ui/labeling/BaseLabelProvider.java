@@ -102,6 +102,7 @@ import org.eclipse.ocl.examples.pivot.utilities.Pivot2Moniker;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PivotableElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypeRefCS;
 import org.eclipse.swt.graphics.Image;
@@ -189,6 +190,10 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		else {
 			s.append("<null>");
 		}	
+	}
+
+	protected void appendPathName(StringBuilder s, PathNameCS pathName) {
+		s.append(pathName.toString());
 	}
 
 	protected void appendString(@NonNull StringBuilder s, String string, int countLimit) {
@@ -517,7 +522,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		StringBuilder s = new StringBuilder();
 		appendOptionalName(s, ele);
 		s.append(" : ");
-//		appendString(s, ele.getUri());
+		appendPathName(s, ele.getPathName());
 		return s.toString();
 	}
 
@@ -570,6 +575,10 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 
 	protected String image(LoopExp ele) {
 		return "/org.eclipse.ocl.edit/icons/full/obj16/LoopExp.gif";
+	}
+
+	protected String text(LoopExp ele) {
+		return text(ele.getReferredIteration());
 	}
 
 	protected String image(MessageExp ele) {
@@ -627,6 +636,10 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		return "/org.eclipse.ocl.edit/icons/full/obj16/OperationCallExp.gif";
 	}
 
+	protected String text(OperationCallExp ele) {
+		return text(ele.getReferredOperation());
+	}
+
 	protected String image(OrderedSetType ele) {
 		return "/org.eclipse.ocl.edit/icons/full/obj16/OrderedSetType.gif";
 	}
@@ -649,6 +662,12 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		s.append(" : ");
 		appendType(s, ele.getType());
 //		appendMultiplicity(s, ele);
+		return s.toString();
+	}
+
+	protected String text(PathNameCS ele) {
+		StringBuilder s = new StringBuilder();
+		appendPathName(s, ele);
 		return s.toString();
 	}
 	
@@ -689,6 +708,10 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 
 	protected String image(PropertyCallExp ele) {
 		return "/org.eclipse.ocl.edit/icons/full/obj16/PropertyCallExp.gif";
+	}
+
+	protected String text(PropertyCallExp ele) {
+		return text(ele.getReferredProperty());
 	}
 
 	protected String image(RealLiteralExp ele) {

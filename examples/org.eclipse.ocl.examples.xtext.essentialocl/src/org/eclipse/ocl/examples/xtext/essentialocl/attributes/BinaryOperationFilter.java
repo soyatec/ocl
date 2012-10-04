@@ -56,10 +56,13 @@ public class BinaryOperationFilter extends AbstractOperationFilter
 			if (candidateType instanceof SelfType) {
 				candidateType = candidateOperation.getOwningType();
 			}
-			if ((candidateType == null) || !metaModelManager.conformsTo(argumentType, candidateType, null)) {
+			if (candidateType == null) {
 				return false;
 			}
 			Map<TemplateParameter, ParameterableElement> bindings = getOperationBindings(candidateOperation);
+			if (!metaModelManager.conformsTo(argumentType, candidateType, bindings)) {
+				return false;
+			}
 			if (bindings != null) {
 				installBindings(environmentView, eObject, bindings);
 			}

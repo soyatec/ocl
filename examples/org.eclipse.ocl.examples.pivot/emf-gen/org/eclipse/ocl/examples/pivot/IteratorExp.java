@@ -31,7 +31,7 @@ import org.eclipse.emf.common.util.DiagnosticChain;
  * @model
  * @generated
  */
-public interface IteratorExp extends LoopExp
+public interface IteratorExp extends LoopExp, ReferringElement
 {
 
 	/**

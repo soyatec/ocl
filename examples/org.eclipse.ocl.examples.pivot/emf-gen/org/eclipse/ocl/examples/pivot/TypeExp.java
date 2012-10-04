@@ -34,7 +34,7 @@ package org.eclipse.ocl.examples.pivot;
  * @generated
  */
 public interface TypeExp
-		extends OCLExpression {
+		extends OCLExpression, ReferringElement {
 
 	/**
 	 * Returns the value of the '<em><b>Referred Type</b></em>' reference.

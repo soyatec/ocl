@@ -23,5 +23,6 @@ import org.eclipse.ocl.examples.xtext.essentialocl.ui.outline.EssentialOCLOutlin
  * 
  */
 public class OCLinEcoreOutlineTreeProvider extends EssentialOCLOutlineTreeProvider {
+
 	
 }

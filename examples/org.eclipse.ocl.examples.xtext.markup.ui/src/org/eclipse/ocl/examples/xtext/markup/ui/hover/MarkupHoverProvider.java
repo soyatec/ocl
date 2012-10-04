@@ -29,10 +29,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.jface.text.IInformationControlCreator;
+import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.examples.pivot.ReferringElement;
+import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
@@ -48,7 +53,11 @@ import org.eclipse.ocl.examples.xtext.markup.Markup;
 import org.eclipse.ocl.examples.xtext.markup.MarkupUtils;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider.IInformationControlCreatorProvider;
 import org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider;
+import org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControlInput;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 
 public class MarkupHoverProvider extends DefaultEObjectHoverProvider
 {
@@ -58,9 +67,27 @@ public class MarkupHoverProvider extends DefaultEObjectHoverProvider
 		if (resource == null) {
 			return null;
 		}
-		MetaModelManager metaModelManager = ElementUtil.findMetaModelManager(resource);
-		if (metaModelManager == null) {
-			return null;
+//		MetaModelManager metaModelManager = ElementUtil.findMetaModelManager(resource);
+//		if (metaModelManager == null) {
+//			return null;
+//		}
+		if (o instanceof Pivotable) {
+			EObject o1 = ((Pivotable)o).getPivot();
+			if (o1 != null) {
+				o = o1;
+			}
+			if (o instanceof ReferringElement) {
+				EObject o2 = ((ReferringElement)o).getReferredElement();
+				if (o2 != null) {
+					o = o2;
+				}
+			}
+			if (o instanceof TemplateableElement) {
+				EObject o3 = ((TemplateableElement)o).getUnspecializedElement();
+				if (o3 != null) {
+					o = o3;
+				}
+			}
 		}
 		String documentation = super.getDocumentation(o);
 		if (documentation == null) {
@@ -112,6 +139,10 @@ public class MarkupHoverProvider extends DefaultEObjectHoverProvider
 			return null;
 		}
 		try {
+			MetaModelManager metaModelManager = ElementUtil.findMetaModelManager(resource);
+			if (metaModelManager == null) {
+				return null;
+			}
 			return MarkupUtils.toHTML(metaModelManager, o, markup);
 		} catch (Exception e) {
 			StringWriter s = new StringWriter();
@@ -241,5 +272,30 @@ public class MarkupHoverProvider extends DefaultEObjectHoverProvider
 			return true;
 		}
 		return super.hasHover(o);
+	}
+
+	@Override
+	public IInformationControlCreator getHoverControlCreator() {
+		// TODO Auto-generated method stub
+		return super.getHoverControlCreator();
+	}
+
+	public IInformationControlCreatorProvider getHoverInfo(final EObject object, final ITextViewer viewer, final IRegion region) {
+		return new IInformationControlCreatorProvider() {
+
+			public IInformationControlCreator getHoverControlCreator() {
+				return MarkupHoverProvider.this.getHoverControlCreator();
+			}
+
+			public Object getInfo() {
+//				return getHoverInfo(object, region, null);
+				return getHoverInfo(object, viewer, region, null);
+			}};
+	}
+
+	protected XtextBrowserInformationControlInput getHoverInfo(EObject element,
+			ITextViewer viewer, IRegion hoverRegion, XtextBrowserInformationControlInput previous) {
+		IXtextDocument xtextDocument = XtextDocumentUtil.get(viewer);
+		return super.getHoverInfo(element, hoverRegion, previous);
 	}
 }

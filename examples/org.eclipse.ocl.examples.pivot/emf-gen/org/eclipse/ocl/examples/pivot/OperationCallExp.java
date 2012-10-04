@@ -40,7 +40,7 @@ import org.eclipse.emf.ecore.EClass;
  * @generated
  */
 public interface OperationCallExp
-		extends FeatureCallExp {
+		extends FeatureCallExp, ReferringElement {
 
 	/**
 	 * Returns the value of the '<em><b>Argument</b></em>' containment reference list.

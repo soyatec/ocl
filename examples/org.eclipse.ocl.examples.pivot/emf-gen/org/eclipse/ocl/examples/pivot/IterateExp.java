@@ -37,7 +37,7 @@ import org.eclipse.emf.common.util.DiagnosticChain;
  * @model
  * @generated
  */
-public interface IterateExp extends LoopExp
+public interface IterateExp extends LoopExp, ReferringElement
 {
 	/**
 	 * Returns the value of the '<em><b>Result</b></em>' containment reference.
