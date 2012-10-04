@@ -19,12 +19,12 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 
 /**
- * Observes a {@link ReferenceQueue reference queue} and removes {@link Adapter}
- * s from it. It weakly references an {@link EventManagerTableBased}. When a
+ * Observes a {@link ReferenceQueue reference queue} and removes {@link Adapter}s
+ * from it. It weakly references an {@link EventManagerTableBased}. When a
  * reference to an adapter was added to the queue and henceforth removed by this
  * thread, this means that the adapter is no longer strongly referenced. A
  * {@link EventManagerTableBased#deregister(Reference)} is issued to clean up
- * after the adapeter.
+ * after the adapter.
  * <p>
  * 
  * When the {@link EventManagerTableBased event manager} becomes eligible for
