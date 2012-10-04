@@ -65,9 +65,10 @@
 	</target>
 
 
-	<!-- Tuning up the p2 repository (statistics, mirrorsURL,..) -->
+	<!-- Tuning up the p2 repository (statistics, mirrorsURL,..) 
+	     also moves the p2.index file to the repository-->
 	<target name="-tuneup.p2.repository">
-		<echo>Tuning up p2 repository for the build ${build.id}</echo>
+		<echo>Tuning up p2 repository for the build ${build.id}...</echo>
 		<property name="repository.root" value="${sp:repository}" />
 		<condition property="qualifier" value="${build.alias}" else="${build.id}">
 			<and>
@@ -90,7 +91,11 @@
 		<condition property="repository.type" value="releases">
 			<matches string="${build.id}" pattern="^R" />
 		</condition>
+		<echo>-> Setting the statistics and mirrorsURL </echo>
 		<ant antfile="p2RepoTuning/p2RepoTuning.ant" target="tuneup.p2.repository" inheritall="true" />
+		<echo>-> Copying the p2.index file</echo>		
+		<copy file="p2.index" todir="${sp:repository}"></copy>
+		<echo>Tuning up p2 repository finished</echo>
 	</target>
 
 	<target name="-locate.launcher.jar" unless="launcher.jar">

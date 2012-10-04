@@ -90,7 +90,11 @@
 		<condition property="repository.type" value="releases">
 			<matches string="${build.id}" pattern="^R" />
 		</condition>
+		<echo>   Setting the statistics and mirrorsURL </echo>
 		<ant antfile="p2RepoTuning/p2RepoTuning.ant" target="tuneup.p2.repository" inheritall="true" />
+		<echo>   Copying the p2.index file</echo>
+		<copyfile dest="${repository.root}" src="p2.index"/>
+		<echo>Tuning up p2 repository finished</echo>
 	</target>
 
 	<target name="-locate.launcher.jar" unless="launcher.jar">
