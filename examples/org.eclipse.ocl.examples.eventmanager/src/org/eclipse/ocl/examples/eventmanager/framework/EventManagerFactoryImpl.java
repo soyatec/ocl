@@ -70,17 +70,16 @@ public class EventManagerFactoryImpl implements EventManagerFactory {
     }
 
     public EventManager getEventManagerFor(ResourceSet set) {
-        EventManager cached = setToManager.get(set)==null?null:setToManager.get(set);
-        if(cached!=null){
+        EventManager cached = setToManager.get(set) == null ? null : setToManager.get(set);
+        if (cached != null) {
             return cached;
         }
-		if (set != null) {
-			EventManager eventManager = new org.eclipse.ocl.examples.eventmanager.framework.EventManagerTableBased(
-					set);
-			setToManager.put(set, eventManager);
-			return eventManager;
-		} else {
-			return null;
+        if (set != null) {
+            EventManager eventManager = new org.eclipse.ocl.examples.eventmanager.framework.EventManagerTableBased(set);
+            setToManager.put(set, eventManager);
+            return eventManager;
+        } else {
+            return null;
         }
     }
 
@@ -234,62 +233,64 @@ public class EventManagerFactoryImpl implements EventManagerFactory {
      * @param add is it a add or remove {@link Notification}
      * @param result the ouput set
      */
-    private void addNotification(EObject value, boolean add, Set<Notification> result) {
-        for (EStructuralFeature ref : value.eClass().getEAllStructuralFeatures()) {
+    private void addNotification(EObject value, boolean add,
+            Set<Notification> result) {
+        for (EStructuralFeature ref : value.eClass()
+                .getEAllStructuralFeatures()) {
             // init new Notification
-            Notification notification=null;
-			try {
-				Object valueOfRef = value.eGet(ref, /* resolve */false);
-				if (valueOfRef == null
-						|| (valueOfRef instanceof EObject && ((EObject) valueOfRef)
-								.eIsProxy())) {
-					// no value or proxy pointing to other resource so nothing
-					// to do here
-					continue;
-				}
-				if (ref.isMany()) {
-					// can cast value to list
-					EList<?> values = (EList<?>) valueOfRef;
-					switch (values.size()) {
-					case 0:
-						// no content
-						break;
-					case 1:
-						// create single add notification
-						notification = new EventManagerGeneratedNotification(
-								add ? Notification.ADD : Notification.REMOVE,
-								add ? null : values.get(0), !add ? null
-										: values.get(0), value, ref);
-						break;
-					default:
-						// create many add notification
-						notification = new EventManagerGeneratedNotification(
-								add ? Notification.ADD_MANY
-										: Notification.REMOVE_MANY, add ? null
-										: values, !add ? null : values, value,
-								ref);
-						break;
-					}
-				} else {
-					// simple set notification
-					notification = new EventManagerGeneratedNotification(
-							Notification.SET, add ? null : valueOfRef,
-							!add ? null : valueOfRef, value, ref);
+            Notification notification = null;
+            try {
+                Object valueOfRef = value.eGet(ref, /* resolve */false);
+                if (valueOfRef == null || (valueOfRef instanceof EObject && ((EObject) valueOfRef).eIsProxy())) {
+                    // no value or proxy pointing to other resource so nothing to do here
+                    continue;
+                }
+                if (ref.isMany()) {
+                    // can cast value to list
+                    EList<?> values = (EList<?>) valueOfRef;
+                    switch (values.size()) {
+                    case 0:
+                        // no content
+                        break;
+                    case 1:
+                        // create single add notification
+                        notification = new EventManagerGeneratedNotification(
+                                add ? Notification.ADD : Notification.REMOVE,
+                                add ? null : values.get(0), !add ? null
+                                        : values.get(0), value, ref);
+                        break;
+                    default:
+                        // create many add notification
+                        notification = new EventManagerGeneratedNotification(
+                                add ? Notification.ADD_MANY
+                                        : Notification.REMOVE_MANY, add ? null
+                                        : values, !add ? null : values, value,
+                                ref);
+                        break;
+                    }
+                } else {
+                    // simple set notification
+                    notification = new EventManagerGeneratedNotification(
+                            Notification.SET, add ? null : valueOfRef,
+                            !add ? null : valueOfRef, value, ref);
 
-				}
-			} catch (Exception e) {
-            	// the computation of an OCL-defined feature went wrong; don't create a notification
-				// for such features
+                }
+            } catch (Exception e) {
+                // the computation of an OCL-defined feature went wrong; don't
+                // create a notification for such features
             }
-            if(notification!=null ){
+            if (notification != null) {
                 // recursive call for new notification
-                if(ref instanceof EReference && ((EReference)ref).isContainment()){
+                if (ref instanceof EReference && ((EReference) ref).isContainment()) {
                     handleValues(notification, result);
                 }
                 result.add(notification);
             }
-            
         }
+    }
+    
+    public void dispose() {
+        setToManager.size(); // triggers the expunging of stale entries
     }
     
     /**
@@ -298,7 +299,6 @@ public class EventManagerFactoryImpl implements EventManagerFactory {
      *
      */
     static private class EventManagerGeneratedNotification extends NotificationImpl {
-
         private Object feature;
         private Notifier notifier;
 
@@ -320,7 +320,6 @@ public class EventManagerFactoryImpl implements EventManagerFactory {
             this.feature = feature;
             this.notifier = noti;
         }
-
     }
 
 } // EventManagerFactoryImpl

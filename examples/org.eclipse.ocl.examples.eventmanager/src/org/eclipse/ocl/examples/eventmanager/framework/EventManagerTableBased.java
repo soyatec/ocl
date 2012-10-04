@@ -76,16 +76,16 @@ public class EventManagerTableBased implements EventManager {
 
     private final WeakHashMap<ResourceSet, Object> resourceSets;
 
-	/**
-	 * Registered with all {@link WeakReference}s created for {@link Adapter}s
-	 * during {@link #register(Adapter, AbstractEventFilter, ListenerTypeEnum)
-	 * registration}. If any of these adapters is no longer strongly referenced
-	 * and hence eligible for garbage collection, it may not have been properly
-	 * {@link #deregister(Adapter) deregistered} from this event manager. This
-	 * would cause structures in the {@link #registrationManager} to remain in
-	 * place although no longer needed. This, in turn, would leak memory over
-	 * time.
-	 */
+    /**
+     * Registered with all {@link WeakReference}s created for {@link Adapter}s
+     * during {@link #register(Adapter, AbstractEventFilter, ListenerTypeEnum)
+     * registration}. If any of these adapters is no longer strongly referenced
+     * and hence eligible for garbage collection, it may not have been properly
+     * {@link #deregister(Adapter) deregistered} from this event manager. This
+     * would cause structures in the {@link #registrationManager} to remain in
+     * place although no longer needed. This, in turn, would leak memory over
+     * time.
+     */
     private final ReferenceQueue<Adapter> adaptersNoLongerStronglyReferenced = new ReferenceQueue<Adapter>();
 
     /**
@@ -94,7 +94,7 @@ public class EventManagerTableBased implements EventManager {
      * keep a weak reference to this event manager, hence not disabling the event manager's garbage
      * collection.
      */
-	private CleanupThread adapterCleanupThread = new CleanupThread(adaptersNoLongerStronglyReferenced, this);
+    private CleanupThread adapterCleanupThread;
 
     public EventManagerTableBased(ResourceSet set) {
         this();
@@ -104,6 +104,7 @@ public class EventManagerTableBased implements EventManager {
     public EventManagerTableBased() {
         resourceSets = new WeakHashMap<ResourceSet, Object>();
         registrationManager = new RegistrationManagerTableBased();
+        adapterCleanupThread = new CleanupThread(adaptersNoLongerStronglyReferenced, this);
         adapterCleanupThread.start();
     }
     
