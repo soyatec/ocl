@@ -91,7 +91,6 @@ import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SelfType;
-import org.eclipse.ocl.examples.pivot.Stereotype;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
@@ -1698,16 +1697,21 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		else if (pivotElement instanceof Operation) {
 			return new OperationContext(this, null, (Operation) pivotElement, null);
 		}
-		else if (pivotElement instanceof Stereotype) {
-			Stereotype pivotStereotype = (Stereotype) pivotElement;
-			return new ClassContext(this, null, pivotStereotype);
-		}
-		else if (pivotElement instanceof org.eclipse.ocl.examples.pivot.Class) {
-			org.eclipse.ocl.examples.pivot.Class pivotClass = (org.eclipse.ocl.examples.pivot.Class) pivotElement;
-//			Metaclass metaClass = getMetaclass(pivotClass);
-			return new ClassContext(this, null, pivotClass);
-		}
-		else {
+//		else if (pivotElement instanceof Stereotype) {
+//			Stereotype pivotStereotype = (Stereotype) pivotElement;
+//			return new ClassContext(this, null, pivotStereotype);
+//		}
+//		else if (pivotElement instanceof org.eclipse.ocl.examples.pivot.Class) {
+//			org.eclipse.ocl.examples.pivot.Class pivotClass = (org.eclipse.ocl.examples.pivot.Class) pivotElement;
+////			Metaclass metaClass = getMetaclass(pivotClass);
+//			return new ClassContext(this, null, pivotClass);
+//		}
+		else {		// Class, Stereotype, State
+			for (EObject eObject = pivotElement; eObject != null; eObject = eObject.eContainer()) {
+				if (eObject instanceof Type) {
+					return new ClassContext(this, null, (Type)eObject);
+				}
+			}
 			return null;
 		}
 	}
