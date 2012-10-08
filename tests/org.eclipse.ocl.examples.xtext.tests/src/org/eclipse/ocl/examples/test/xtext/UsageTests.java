@@ -149,6 +149,7 @@ public class UsageTests extends XtextTestCase
 	public void testBug370824() throws Exception {
 		String testProjectName;
 		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+			suppressGitPrefixPopUp();
 			testProjectName = "Bug370824";
 	        IWorkspace workspace = ResourcesPlugin.getWorkspace();
 	        IProject project = workspace.getRoot().getProject(testProjectName);

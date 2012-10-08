@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
+import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
@@ -42,6 +43,7 @@ import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -86,6 +88,8 @@ import org.eclipse.ocl.examples.domain.values.impl.UnlimitedValueImpl;
  */
 public abstract class ValuesUtil
 {	
+	public static final @NonNull String NULL_STRING = "null";
+
 	private static final int NEGATIVE_INTEGERS = 256;
 	private static final int POSITIVE_INTEGERS = 1025;
 	private static final @NonNull IntegerValue[] INTEGER_VALUES = new IntegerValue[NEGATIVE_INTEGERS + POSITIVE_INTEGERS];
@@ -442,7 +446,9 @@ public abstract class ValuesUtil
 		String name = enumerator.getName();
 		assert name != null;
 		EnumerationLiteralId enumerationLiteralId = enumId.getEnumerationLiteralId(name);
-		return new EEnumLiteralValueImpl(enumerationLiteralId, eEnum.getEEnumLiteral(name));
+		EEnumLiteral eEnumLiteral = eEnum.getEEnumLiteral(name);
+		assert eEnumLiteral != null;
+		return new EEnumLiteralValueImpl(enumerationLiteralId, eEnumLiteral);
 	}
 
 	@Deprecated
@@ -710,6 +716,42 @@ public abstract class ValuesUtil
 		catch (NumberFormatException e) {
 			throw new InvalidValueException(e, EvaluatorMessages.InvalidReal, aValue);
 		}
+	}
+
+	public static @NonNull String stringValueOf(@Nullable Object aValue) {
+		String stringValue = null;
+		if (aValue == null) {
+			stringValue = NULL_STRING;
+		}
+//		else if (aValue instanceof Value) {
+//			return ((Value)aValue).toString();
+//		}
+		else if (aValue instanceof String) {
+			stringValue = "'" + ((String)aValue).toString() + "'";
+		}
+//		else if (aValue instanceof DomainType) {
+//			return String.valueOf(aValue);
+//		}
+//		else if (aValue instanceof DomainEnumerationLiteral) {
+//			return String.valueOf(aValue);
+//		}
+//		else if (aValue instanceof EEnumLiteral) {
+//			return String.valueOf(aValue);
+//		}
+		else if ((aValue instanceof EObject) &&
+			!((aValue instanceof DomainElement) || (aValue instanceof EEnumLiteral))) {
+			stringValue = DomainUtil.getLabel((EObject) aValue);
+		}
+		else if (aValue.getClass().isArray()) {
+			throw new UnsupportedOperationException();			// Must invoke DomainStandardLibrary.valueOf() for aggregates
+		}
+		else if (aValue instanceof Iterable<?>) {
+			throw new UnsupportedOperationException();			// Must invoke DomainStandardLibrary.valueOf() for aggregates
+		}
+		else {
+			stringValue = String.valueOf(aValue);
+		}
+		return stringValue != null ? stringValue : "<<null>>"; 
 	}
 
 	public static void toString(@Nullable Object value, @NonNull StringBuilder s, int sizeLimit) {

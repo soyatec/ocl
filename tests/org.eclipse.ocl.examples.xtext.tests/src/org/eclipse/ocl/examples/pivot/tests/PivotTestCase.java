@@ -19,6 +19,8 @@ package org.eclipse.ocl.examples.pivot.tests;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -27,6 +29,7 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
@@ -45,6 +48,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil.UnresolvedProxyCrossReferencer;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.validation.DomainSubstitutionLabelProvider;
@@ -67,11 +71,13 @@ import org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcoreStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
 import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.oclstdlib.ui.OCLstdlibUiModule;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.uml2.uml.profile.l2.L2Package;
 import org.eclipse.uml2.uml.resource.UML302UMLResource;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.osgi.framework.Bundle;
 
 /**
  * Tests for OclAny operations.
@@ -394,6 +400,29 @@ public class PivotTestCase extends TestCase
 			assertNoValidationErrors("Pivot2Ecore invalid", ecoreResource);
 		}
 		return ecoreResource;
+	}
+
+	private static Bundle egitUiBundle = null;
+	
+	public static void suppressGitPrefixPopUp() {				// Workaround BUG 390479
+        if (egitUiBundle == null) {
+            egitUiBundle = Platform.getBundle("org.eclipse.egit.ui");
+            if (egitUiBundle != null) {
+				try {
+					Class<?> activatorClass = egitUiBundle.loadClass("org.eclipse.egit.ui.Activator");
+					Class<?> preferencesClass = egitUiBundle.loadClass("org.eclipse.egit.ui.UIPreferences");
+					Field field = preferencesClass.getField("SHOW_GIT_PREFIX_WARNING");
+					String name = (String)field.get(null);
+					Method getDefaultMethod = activatorClass.getMethod("getDefault");
+					AbstractUIPlugin activator = (AbstractUIPlugin) getDefaultMethod.invoke(null);
+					IPreferenceStore store = activator.getPreferenceStore();
+					store.setValue(name, false);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+        }
 	}
 
 	public static void unloadResourceSet(ResourceSet resourceSet) {

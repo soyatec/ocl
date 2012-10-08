@@ -214,6 +214,8 @@ public class OCLConsolePage extends Page
 	//				metaModelManager.setMonitor(monitor);
 					EvaluationVisitor evaluationVisitor = new CancelableEvaluationVisitor(monitor, environment, evaluationEnvironment, modelManager2);
 			        value = evaluationVisitor.visitExpressionInOCL(expressionInOCL);
+				} catch (InvalidValueException e) {
+					value = ValuesUtil.createInvalidValue(e);
 				} catch (EvaluationHaltedException e) {
 					value = ValuesUtil.createInvalidValue(new InvalidValueException(ConsoleMessages.Result_EvaluationTerminated));
 				} catch (Exception e) {
@@ -709,22 +711,26 @@ public class OCLConsolePage extends Page
         		append(e.getMessage(), ColorManager.OUTPUT_ERROR, false);
         	}
         	if (value instanceof InvalidValue) {
-        		append(((InvalidValue)value).getMessage(), ColorManager.OUTPUT_ERROR, true);
-        		append(String.valueOf(value), ColorManager.OUTPUT_ERROR, false);
+        		InvalidValueException exception = ((InvalidValue)value).getException();
+        		append(exception.getMessage(), ColorManager.OUTPUT_ERROR, true);
+        		Throwable cause = exception.getCause();
+        		if (cause != exception) {
+        			append(cause.getMessage(), ColorManager.OUTPUT_ERROR, false);
+        		}
         	}
         	else if (value != null) {
         		CollectionValue collectionValue = ValuesUtil.isCollectionValue(value);
 				if (collectionValue != null) {
 					for (Object elementValue : collectionValue.iterable()) {
-						append(String.valueOf(elementValue), ColorManager.OUTPUT_RESULTS, false);
+						append(ValuesUtil.stringValueOf(elementValue), ColorManager.OUTPUT_RESULTS, false);
 	        		}
 				}
 	        	else {
-	        		append(String.valueOf(value), ColorManager.OUTPUT_RESULTS, false);
+	        		append(ValuesUtil.stringValueOf(value), ColorManager.OUTPUT_RESULTS, false);
 	        	}
         	}
         	else {
-        		append(String.valueOf(value), ColorManager.OUTPUT_ERROR, false);
+        		append(ValuesUtil.stringValueOf(value), ColorManager.OUTPUT_ERROR, false);
         	}
             scrollText();
             

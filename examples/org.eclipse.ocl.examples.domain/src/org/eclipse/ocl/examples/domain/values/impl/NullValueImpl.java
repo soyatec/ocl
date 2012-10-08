@@ -18,7 +18,6 @@ package org.eclipse.ocl.examples.domain.values.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -26,12 +25,14 @@ import org.eclipse.ocl.examples.domain.ids.OclVoidTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * @generated NOT
  */
 public class NullValueImpl extends UndefinedCollectionValueImpl implements NullValue
 {
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -88,6 +89,6 @@ public class NullValueImpl extends UndefinedCollectionValueImpl implements NullV
 
 	@Override
 	public String toString() {
-		return "null";
+		return ValuesUtil.NULL_STRING;
 	}
 }
