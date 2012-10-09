@@ -16,7 +16,6 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.NestedTypeId;
@@ -39,9 +38,6 @@ public class GeneralizedNestedTypeIdImpl extends GeneralizedTypeIdImpl<Templatea
 	GeneralizedNestedTypeIdImpl(@NonNull PackageId parent, @NonNull TemplateParameterId[] templateParameters, @NonNull String name) {
 		super(97 * parent.hashCode() + name.hashCode(), templateParameters, name);
 		this.parent = parent;
-		if (name.equals("OclElement")) {
-			System.out.println("got it");
-		}
 	}
 
 	public @Nullable <R> R accept(@NonNull IdVisitor<R> visitor) {
