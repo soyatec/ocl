@@ -817,7 +817,7 @@ public class PivotUtil extends DomainUtil
 		return null;
 	}
 
-	public static MetaModelManager getMetaModelManager(@NonNull Resource resource) {
+	public static @NonNull MetaModelManager getMetaModelManager(@NonNull Resource resource) {
 		MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.getAdapter(resource, null);
 		MetaModelManager metaModelManager = adapter.getMetaModelManager();
 		assert metaModelManager != null;

@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
+import static org.eclipse.ocl.examples.pivot.PivotPackage.CLASS;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -28,109 +30,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
-import org.eclipse.ocl.examples.pivot.Annotation;
-import org.eclipse.ocl.examples.pivot.AnyType;
-import org.eclipse.ocl.examples.pivot.AssociationClass;
-import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
-import org.eclipse.ocl.examples.pivot.AssociativityKind;
-import org.eclipse.ocl.examples.pivot.BagType;
-import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
-import org.eclipse.ocl.examples.pivot.CallExp;
-import org.eclipse.ocl.examples.pivot.CallOperationAction;
-import org.eclipse.ocl.examples.pivot.CollectionItem;
-import org.eclipse.ocl.examples.pivot.CollectionKind;
-import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
-import org.eclipse.ocl.examples.pivot.CollectionLiteralPart;
-import org.eclipse.ocl.examples.pivot.CollectionRange;
-import org.eclipse.ocl.examples.pivot.CollectionType;
-import org.eclipse.ocl.examples.pivot.Comment;
-import org.eclipse.ocl.examples.pivot.Constraint;
-import org.eclipse.ocl.examples.pivot.ConstructorExp;
-import org.eclipse.ocl.examples.pivot.ConstructorPart;
-import org.eclipse.ocl.examples.pivot.DataType;
-import org.eclipse.ocl.examples.pivot.Detail;
-import org.eclipse.ocl.examples.pivot.DynamicElement;
-import org.eclipse.ocl.examples.pivot.DynamicProperty;
-import org.eclipse.ocl.examples.pivot.DynamicType;
-import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.ElementExtension;
-import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
-import org.eclipse.ocl.examples.pivot.Enumeration;
-import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
-import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.Feature;
-import org.eclipse.ocl.examples.pivot.FeatureCallExp;
-import org.eclipse.ocl.examples.pivot.IfExp;
-import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
-import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
-import org.eclipse.ocl.examples.pivot.InvalidType;
-import org.eclipse.ocl.examples.pivot.IterateExp;
-import org.eclipse.ocl.examples.pivot.Iteration;
-import org.eclipse.ocl.examples.pivot.IteratorExp;
-import org.eclipse.ocl.examples.pivot.LambdaType;
-import org.eclipse.ocl.examples.pivot.LetExp;
-import org.eclipse.ocl.examples.pivot.Library;
-import org.eclipse.ocl.examples.pivot.LiteralExp;
-import org.eclipse.ocl.examples.pivot.LoopExp;
-import org.eclipse.ocl.examples.pivot.MessageExp;
-import org.eclipse.ocl.examples.pivot.MessageType;
-import org.eclipse.ocl.examples.pivot.Metaclass;
-import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.ocl.examples.pivot.Namespace;
-import org.eclipse.ocl.examples.pivot.NavigationCallExp;
-import org.eclipse.ocl.examples.pivot.NullLiteralExp;
-import org.eclipse.ocl.examples.pivot.NumericLiteralExp;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.OpaqueExpression;
-import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.OperationCallExp;
-import org.eclipse.ocl.examples.pivot.OperationTemplateParameter;
-import org.eclipse.ocl.examples.pivot.OrderedSetType;
-import org.eclipse.ocl.examples.pivot.PackageableElement;
-import org.eclipse.ocl.examples.pivot.Parameter;
-import org.eclipse.ocl.examples.pivot.ParameterableElement;
-import org.eclipse.ocl.examples.pivot.PivotFactory;
-import org.eclipse.ocl.examples.pivot.PivotPackage;
-import org.eclipse.ocl.examples.pivot.Precedence;
-import org.eclipse.ocl.examples.pivot.PrimitiveLiteralExp;
-import org.eclipse.ocl.examples.pivot.PrimitiveType;
-import org.eclipse.ocl.examples.pivot.Profile;
-import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.PropertyCallExp;
-import org.eclipse.ocl.examples.pivot.RealLiteralExp;
-import org.eclipse.ocl.examples.pivot.ReferringElement;
-import org.eclipse.ocl.examples.pivot.Root;
-import org.eclipse.ocl.examples.pivot.SelfType;
-import org.eclipse.ocl.examples.pivot.SendSignalAction;
-import org.eclipse.ocl.examples.pivot.SequenceType;
-import org.eclipse.ocl.examples.pivot.SetType;
-import org.eclipse.ocl.examples.pivot.Signal;
-import org.eclipse.ocl.examples.pivot.State;
-import org.eclipse.ocl.examples.pivot.StateExp;
-import org.eclipse.ocl.examples.pivot.Stereotype;
-import org.eclipse.ocl.examples.pivot.StringLiteralExp;
-import org.eclipse.ocl.examples.pivot.TemplateBinding;
-import org.eclipse.ocl.examples.pivot.TemplateParameter;
-import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
-import org.eclipse.ocl.examples.pivot.TemplateParameterType;
-import org.eclipse.ocl.examples.pivot.TemplateSignature;
-import org.eclipse.ocl.examples.pivot.TemplateableElement;
-import org.eclipse.ocl.examples.pivot.TupleLiteralExp;
-import org.eclipse.ocl.examples.pivot.TupleLiteralPart;
-import org.eclipse.ocl.examples.pivot.TupleType;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.TypeExp;
-import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
-import org.eclipse.ocl.examples.pivot.TypedElement;
-import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
-import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
-import org.eclipse.ocl.examples.pivot.UnspecifiedType;
-import org.eclipse.ocl.examples.pivot.UnspecifiedValueExp;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.VariableDeclaration;
-import org.eclipse.ocl.examples.pivot.VariableExp;
-import org.eclipse.ocl.examples.pivot.VoidType;
+import org.eclipse.ocl.examples.pivot.*;
 import org.eclipse.ocl.examples.pivot.util.MorePivotable;
 import org.eclipse.ocl.examples.pivot.util.Nameable;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
@@ -2684,7 +2584,7 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getReferringElement__ReferredElement()
+	public EOperation getReferringElement__GetReferredElement()
 	{
 		return referringElementEClass.getEOperations().get(0);
 	}
@@ -4780,7 +4680,7 @@ public class PivotPackageImpl
 		createEAttribute(realLiteralExpEClass, REAL_LITERAL_EXP__REAL_SYMBOL);
 
 		referringElementEClass = createEClass(REFERRING_ELEMENT);
-		createEOperation(referringElementEClass, REFERRING_ELEMENT___REFERRED_ELEMENT);
+		createEOperation(referringElementEClass, REFERRING_ELEMENT___GET_REFERRED_ELEMENT);
 
 		rootEClass = createEClass(ROOT);
 		createEReference(rootEClass, ROOT__NESTED_PACKAGE);
@@ -5850,7 +5750,7 @@ public class PivotPackageImpl
 
 		initEClass(referringElementEClass, ReferringElement.class, "ReferringElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-		initEOperation(getReferringElement__ReferredElement(), this.getElement(), "referredElement", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		initEOperation(getReferringElement__GetReferredElement(), this.getElement(), "getReferredElement", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getRoot_NestedPackage(), this.getPackage(), null, "nestedPackage", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$

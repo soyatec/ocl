@@ -46,11 +46,11 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 		OCLstdlibTables.PACKAGE.getClass();
 		for (EcoreExecutorPackage execPackage : execPackages) {
 			assert execPackage != null;
-			addPackage(execPackage);
+			addPackage(execPackage, null);
 		}
 	}
 
-	public synchronized void addPackage(@NonNull EcoreExecutorPackage execPackage) {
+	public synchronized void addPackage(@NonNull EcoreExecutorPackage execPackage, @Nullable EcoreExecutorPackage extendedPackage) {
 		@SuppressWarnings("unused")
 		WeakReference<EcoreExecutorPackage> oldExecPackage = ePackageMap.put(execPackage.getNsURI(), new WeakReference<EcoreExecutorPackage>(execPackage));
 //		if ((oldExecPackage != null) && (oldExecPackage != execPackage)) {

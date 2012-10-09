@@ -21,18 +21,14 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
-import org.eclipse.ocl.examples.library.executor.ExecutorType;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -85,15 +81,12 @@ public class SelfTypeImpl extends ClassImpl implements SelfType
 		/*
 		selfType
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
-			
-			final @NonNull Object result = SelfTypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, T_Type.getTypeId(), this, ValuesUtil.valueOf(selfType));
-			return (Type)result;
-		} catch (InvalidValueException e) {
-			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.SelfTypeBodies", e);
-		}
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull TypeId T_Type = OCLstdlibTables.Types._Type.getTypeId();
+		
+		final @NonNull Object result = SelfTypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, T_Type, this, ValuesUtil.valueOf(selfType));
+		return (Type)result;
+		
 		
 	}
 

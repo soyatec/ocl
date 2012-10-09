@@ -26,22 +26,18 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
-import org.eclipse.ocl.examples.library.executor.ExecutorType;
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -238,24 +234,21 @@ public class LetExpImpl
 		/*
 		type = _'in'.type
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-			
-			final @NonNull Object result = LetExpBodies._invariant_TypeIsInType.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, this);
-			final boolean resultIsNull = ValuesUtil.isNull(result);
-			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-				return true;
-			}
-			if (diagnostics != null) {
-				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"LetExp", "TypeIsInType", EObjectValidator.getObjectLabel(this, context)});
-			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.LET_EXP__TYPE_IS_IN_TYPE, message, new Object [] { this }));
-			}
-			return false;
-		} catch (InvalidValueException e) {
-			String message = NLS.bind(EvaluatorMessages.ValidationEvaluationFailed_ERROR_, new Object[]{"LetExp", "TypeIsInType", EObjectValidator.getObjectLabel(this, context)});
-			throw new WrappedException(message, e);
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		
+		final @NonNull Object result = LetExpBodies._invariant_TypeIsInType.INSTANCE.evaluate(evaluator, T_Boolean, this);
+		final boolean resultIsNull = ValuesUtil.isNull(result);
+		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+			return true;
 		}
+		if (diagnostics != null) {
+			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"LetExp", "TypeIsInType", EObjectValidator.getObjectLabel(this, context)});
+		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.LET_EXP__TYPE_IS_IN_TYPE, message, new Object [] { this }));
+		}
+		return false;
+		
 		
 	}
 

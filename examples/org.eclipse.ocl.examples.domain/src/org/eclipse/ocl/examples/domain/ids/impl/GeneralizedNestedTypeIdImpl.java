@@ -39,6 +39,9 @@ public class GeneralizedNestedTypeIdImpl extends GeneralizedTypeIdImpl<Templatea
 	GeneralizedNestedTypeIdImpl(@NonNull PackageId parent, @NonNull TemplateParameterId[] templateParameters, @NonNull String name) {
 		super(97 * parent.hashCode() + name.hashCode(), templateParameters, name);
 		this.parent = parent;
+		if (name.equals("OclElement")) {
+			System.out.println("got it");
+		}
 	}
 
 	public @Nullable <R> R accept(@NonNull IdVisitor<R> visitor) {

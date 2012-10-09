@@ -26,7 +26,6 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -41,9 +40,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -51,8 +49,6 @@ import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
-import org.eclipse.ocl.examples.library.executor.ExecutorType;
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AssociationClass;
 import org.eclipse.ocl.examples.pivot.Comment;
@@ -1020,14 +1016,12 @@ public class PropertyImpl
 		/*
 		p.oclIsKindOf(self.oclType())
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-			
-			final @NonNull Object result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, this, ValuesUtil.valueOf(p));
-			return (Boolean)result;
-		} catch (InvalidValueException e) {
-			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.ParameterableElementBodies", e);
-		}
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		
+		final @NonNull Object result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, ValuesUtil.valueOf(p));
+		return (Boolean)result;
+		
 		
 	}
 
@@ -1045,14 +1039,12 @@ public class PropertyImpl
 		  container.oclAsType(Type)
 		  .ownedAttribute->includes(self)
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-			
-			final @NonNull Object result = PropertyBodies._isAttribute_body_.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, this, ValuesUtil.valueOf(p));
-			return (Boolean)result;
-		} catch (InvalidValueException e) {
-			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.PropertyBodies", e);
-		}
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		
+		final @NonNull Object result = PropertyBodies._isAttribute_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, ValuesUtil.valueOf(p));
+		return (Boolean)result;
+		
 		
 	}
 
@@ -1092,24 +1084,21 @@ public class PropertyImpl
 		          initialiser.oclIsKindOf(ExpressionInOCL) implies
 		          CompatibleBody(initialiser)
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-			
-			final @NonNull Object result = PropertyBodies._invariant_CompatibleInitialiser.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, this);
-			final boolean resultIsNull = ValuesUtil.isNull(result);
-			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-				return true;
-			}
-			if (diagnostics != null) {
-				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Property", "CompatibleInitialiser", EObjectValidator.getObjectLabel(this, context)});
-			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.PROPERTY__COMPATIBLE_INITIALISER, message, new Object [] { this }));
-			}
-			return false;
-		} catch (InvalidValueException e) {
-			String message = NLS.bind(EvaluatorMessages.ValidationEvaluationFailed_ERROR_, new Object[]{"Property", "CompatibleInitialiser", EObjectValidator.getObjectLabel(this, context)});
-			throw new WrappedException(message, e);
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		
+		final @NonNull Object result = PropertyBodies._invariant_CompatibleInitialiser.INSTANCE.evaluate(evaluator, T_Boolean, this);
+		final boolean resultIsNull = ValuesUtil.isNull(result);
+		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+			return true;
 		}
+		if (diagnostics != null) {
+			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Property", "CompatibleInitialiser", EObjectValidator.getObjectLabel(this, context)});
+		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.PROPERTY__COMPATIBLE_INITIALISER, message, new Object [] { this }));
+		}
+		return false;
+		
 		
 	}
 

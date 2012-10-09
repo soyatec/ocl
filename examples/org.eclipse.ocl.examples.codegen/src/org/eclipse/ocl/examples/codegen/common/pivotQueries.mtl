@@ -87,6 +87,9 @@ elem->closure(c : Type | c.getSuperTypes()).ownedOperation->collect(op : Operati
 [query public getSuperTypes(elem : Type) : Set(Class) = 
 elem.superClass->collect(c : Type | c.getUnspecializedClass())->asSet()/]
 
+[query public getTypes(elem : Package) : Set(Type) = 
+invoke('org.eclipse.ocl.examples.codegen.common.PivotQueries', 'getTypes(org.eclipse.ocl.examples.pivot.Package)', Sequence{elem}) /]
+
 [query public getUnspecializedClass(elem : Type) : Class = 
 if elem.unspecializedElement->notEmpty() then elem.unspecializedElement.oclAsType(Type) else elem endif /]
 

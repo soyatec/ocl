@@ -8824,13 +8824,13 @@ public interface PivotPackage
 	int ITERATE_EXP___VALIDATE_NO_INITIALIZERS__DIAGNOSTICCHAIN_MAP = LOOP_EXP___VALIDATE_NO_INITIALIZERS__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Referred Element</em>' operation.
+	 * The operation id for the '<em>Get Referred Element</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATE_EXP___REFERRED_ELEMENT = LOOP_EXP_OPERATION_COUNT + 0;
+	int ITERATE_EXP___GET_REFERRED_ELEMENT = LOOP_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Validate Type Is Result Type</em>' operation.
@@ -9661,13 +9661,13 @@ public interface PivotPackage
 	int ITERATOR_EXP___VALIDATE_NO_INITIALIZERS__DIAGNOSTICCHAIN_MAP = LOOP_EXP___VALIDATE_NO_INITIALIZERS__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Referred Element</em>' operation.
+	 * The operation id for the '<em>Get Referred Element</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___REFERRED_ELEMENT = LOOP_EXP_OPERATION_COUNT + 0;
+	int ITERATOR_EXP___GET_REFERRED_ELEMENT = LOOP_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Validate Closure Body Type Is Conformantto Iterator Type</em>' operation.
@@ -11857,13 +11857,13 @@ public interface PivotPackage
 	int OPERATION_CALL_EXP___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = FEATURE_CALL_EXP___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Referred Element</em>' operation.
+	 * The operation id for the '<em>Get Referred Element</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_CALL_EXP___REFERRED_ELEMENT = FEATURE_CALL_EXP_OPERATION_COUNT + 0;
+	int OPERATION_CALL_EXP___GET_REFERRED_ELEMENT = FEATURE_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Validate Argument Count</em>' operation.
@@ -13874,13 +13874,13 @@ public interface PivotPackage
 	int PROPERTY_CALL_EXP___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = NAVIGATION_CALL_EXP___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Referred Element</em>' operation.
+	 * The operation id for the '<em>Get Referred Element</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_CALL_EXP___REFERRED_ELEMENT = NAVIGATION_CALL_EXP_OPERATION_COUNT + 0;
+	int PROPERTY_CALL_EXP___GET_REFERRED_ELEMENT = NAVIGATION_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Property Call Exp</em>' class.
@@ -14028,13 +14028,13 @@ public interface PivotPackage
 	int REFERRING_ELEMENT_FEATURE_COUNT = 0;
 
 	/**
-	 * The operation id for the '<em>Referred Element</em>' operation.
+	 * The operation id for the '<em>Get Referred Element</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REFERRING_ELEMENT___REFERRED_ELEMENT = 0;
+	int REFERRING_ELEMENT___GET_REFERRED_ELEMENT = 0;
 
 	/**
 	 * The number of operations of the '<em>Referring Element</em>' class.
@@ -17190,13 +17190,13 @@ public interface PivotPackage
 	int TYPE_EXP___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = OCL_EXPRESSION___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Referred Element</em>' operation.
+	 * The operation id for the '<em>Get Referred Element</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_EXP___REFERRED_ELEMENT = OCL_EXPRESSION_OPERATION_COUNT + 0;
+	int TYPE_EXP___GET_REFERRED_ELEMENT = OCL_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Type Exp</em>' class.
@@ -18091,13 +18091,13 @@ public interface PivotPackage
 	int VARIABLE_EXP___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = OCL_EXPRESSION___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Referred Element</em>' operation.
+	 * The operation id for the '<em>Get Referred Element</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_EXP___REFERRED_ELEMENT = OCL_EXPRESSION_OPERATION_COUNT + 0;
+	int VARIABLE_EXP___GET_REFERRED_ELEMENT = OCL_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Variable Exp</em>' class.
@@ -20287,14 +20287,14 @@ public interface PivotPackage
 	EClass getReferringElement();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.ReferringElement#getReferredElement() <em>Referred Element</em>}' operation.
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.ReferringElement#getReferredElement() <em>Get Referred Element</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Referred Element</em>' operation.
+	 * @return the meta object for the '<em>Get Referred Element</em>' operation.
 	 * @see org.eclipse.ocl.examples.pivot.ReferringElement#getReferredElement()
 	 * @generated
 	 */
-	EOperation getReferringElement__ReferredElement();
+	EOperation getReferringElement__GetReferredElement();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.Root <em>Root</em>}'.
@@ -23768,12 +23768,12 @@ public interface PivotPackage
 		EClass REFERRING_ELEMENT = eINSTANCE.getReferringElement();
 
 		/**
-		 * The meta object literal for the '<em><b>Referred Element</b></em>' operation.
+		 * The meta object literal for the '<em><b>Get Referred Element</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation REFERRING_ELEMENT___REFERRED_ELEMENT = eINSTANCE.getReferringElement__ReferredElement();
+		EOperation REFERRING_ELEMENT___GET_REFERRED_ELEMENT = eINSTANCE.getReferringElement__GetReferredElement();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.RootImpl <em>Root</em>}' class.

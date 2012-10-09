@@ -26,22 +26,18 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
-import org.eclipse.ocl.examples.library.executor.ExecutorType;
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -176,24 +172,21 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		/*
 		type = result.type
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-			
-			final @NonNull Object result = IterateExpBodies._invariant_TypeIsResultType.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, this);
-			final boolean resultIsNull = ValuesUtil.isNull(result);
-			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-				return true;
-			}
-			if (diagnostics != null) {
-				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IterateExp", "TypeIsResultType", EObjectValidator.getObjectLabel(this, context)});
-			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATE_EXP__TYPE_IS_RESULT_TYPE, message, new Object [] { this }));
-			}
-			return false;
-		} catch (InvalidValueException e) {
-			String message = NLS.bind(EvaluatorMessages.ValidationEvaluationFailed_ERROR_, new Object[]{"IterateExp", "TypeIsResultType", EObjectValidator.getObjectLabel(this, context)});
-			throw new WrappedException(message, e);
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		
+		final @NonNull Object result = IterateExpBodies._invariant_TypeIsResultType.INSTANCE.evaluate(evaluator, T_Boolean, this);
+		final boolean resultIsNull = ValuesUtil.isNull(result);
+		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+			return true;
 		}
+		if (diagnostics != null) {
+			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IterateExp", "TypeIsResultType", EObjectValidator.getObjectLabel(this, context)});
+		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATE_EXP__TYPE_IS_RESULT_TYPE, message, new Object [] { this }));
+		}
+		return false;
+		
 		
 	}
 
@@ -207,24 +200,21 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		/*
 		body.type.conformsTo(result.type)
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-			
-			final @NonNull Object result = IterateExpBodies._invariant_BodyTypeConformsToResultType.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, this);
-			final boolean resultIsNull = ValuesUtil.isNull(result);
-			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-				return true;
-			}
-			if (diagnostics != null) {
-				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IterateExp", "BodyTypeConformsToResultType", EObjectValidator.getObjectLabel(this, context)});
-			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATE_EXP__BODY_TYPE_CONFORMS_TO_RESULT_TYPE, message, new Object [] { this }));
-			}
-			return false;
-		} catch (InvalidValueException e) {
-			String message = NLS.bind(EvaluatorMessages.ValidationEvaluationFailed_ERROR_, new Object[]{"IterateExp", "BodyTypeConformsToResultType", EObjectValidator.getObjectLabel(this, context)});
-			throw new WrappedException(message, e);
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		
+		final @NonNull Object result = IterateExpBodies._invariant_BodyTypeConformsToResultType.INSTANCE.evaluate(evaluator, T_Boolean, this);
+		final boolean resultIsNull = ValuesUtil.isNull(result);
+		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+			return true;
 		}
+		if (diagnostics != null) {
+			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IterateExp", "BodyTypeConformsToResultType", EObjectValidator.getObjectLabel(this, context)});
+		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATE_EXP__BODY_TYPE_CONFORMS_TO_RESULT_TYPE, message, new Object [] { this }));
+		}
+		return false;
+		
 		
 	}
 
@@ -238,24 +228,21 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		/*
 		self.result.initExpression->size() = 1
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-			
-			final @NonNull Object result = IterateExpBodies._invariant_OneInitializer.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, this);
-			final boolean resultIsNull = ValuesUtil.isNull(result);
-			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-				return true;
-			}
-			if (diagnostics != null) {
-				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IterateExp", "OneInitializer", EObjectValidator.getObjectLabel(this, context)});
-			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATE_EXP__ONE_INITIALIZER, message, new Object [] { this }));
-			}
-			return false;
-		} catch (InvalidValueException e) {
-			String message = NLS.bind(EvaluatorMessages.ValidationEvaluationFailed_ERROR_, new Object[]{"IterateExp", "OneInitializer", EObjectValidator.getObjectLabel(this, context)});
-			throw new WrappedException(message, e);
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		
+		final @NonNull Object result = IterateExpBodies._invariant_OneInitializer.INSTANCE.evaluate(evaluator, T_Boolean, this);
+		final boolean resultIsNull = ValuesUtil.isNull(result);
+		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+			return true;
 		}
+		if (diagnostics != null) {
+			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IterateExp", "OneInitializer", EObjectValidator.getObjectLabel(this, context)});
+		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATE_EXP__ONE_INITIALIZER, message, new Object [] { this }));
+		}
+		return false;
+		
 		
 	}
 
@@ -495,7 +482,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		{
 			switch (baseOperationID)
 			{
-				case PivotPackage.REFERRING_ELEMENT___REFERRED_ELEMENT: return PivotPackage.ITERATE_EXP___REFERRED_ELEMENT;
+				case PivotPackage.REFERRING_ELEMENT___GET_REFERRED_ELEMENT: return PivotPackage.ITERATE_EXP___GET_REFERRED_ELEMENT;
 				default: return -1;
 			}
 		}
@@ -523,7 +510,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 				return validateSourceIsCollection((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.ITERATE_EXP___VALIDATE_NO_INITIALIZERS__DIAGNOSTICCHAIN_MAP:
 				return validateNoInitializers((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case PivotPackage.ITERATE_EXP___REFERRED_ELEMENT:
+			case PivotPackage.ITERATE_EXP___GET_REFERRED_ELEMENT:
 				return getReferredElement();
 			case PivotPackage.ITERATE_EXP___VALIDATE_TYPE_IS_RESULT_TYPE__DIAGNOSTICCHAIN_MAP:
 				return validateTypeIsResultType((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));

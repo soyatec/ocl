@@ -18,8 +18,8 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
-
 import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
@@ -331,7 +331,7 @@ public class PropertyCallExpImpl
 		{
 			switch (baseOperationID)
 			{
-				case PivotPackage.REFERRING_ELEMENT___REFERRED_ELEMENT: return PivotPackage.PROPERTY_CALL_EXP___REFERRED_ELEMENT;
+				case PivotPackage.REFERRING_ELEMENT___GET_REFERRED_ELEMENT: return PivotPackage.PROPERTY_CALL_EXP___GET_REFERRED_ELEMENT;
 				default: return -1;
 			}
 		}
@@ -355,7 +355,7 @@ public class PropertyCallExpImpl
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
 			case PivotPackage.PROPERTY_CALL_EXP___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP:
 				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case PivotPackage.PROPERTY_CALL_EXP___REFERRED_ELEMENT:
+			case PivotPackage.PROPERTY_CALL_EXP___GET_REFERRED_ELEMENT:
 				return getReferredElement();
 		}
 		return eDynamicInvoke(operationID, arguments);

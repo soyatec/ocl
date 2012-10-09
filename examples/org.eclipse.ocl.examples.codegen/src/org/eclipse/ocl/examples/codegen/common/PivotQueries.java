@@ -17,9 +17,11 @@
 package org.eclipse.ocl.examples.codegen.common;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
@@ -28,6 +30,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.BuiltInTypeId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -44,6 +47,7 @@ import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParserException;
+import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -57,6 +61,8 @@ import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.context.ClassContext;
 import org.eclipse.ocl.examples.pivot.context.DiagnosticContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.manager.PackageServer;
+import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
@@ -284,6 +290,33 @@ public class PivotQueries
 		String qualifiedSignature = PrettyPrinter.printType(anOperation, (Namespace)owningType);	// FIXME cast
 		int index = qualifiedSignature.indexOf("::");
 		return index > 0 ? qualifiedSignature.substring(index+2) : qualifiedSignature;	// FIXME with PrettyPrintOptions
+	}
+	
+	public @NonNull Set<? extends Type> getTypes(@NonNull org.eclipse.ocl.examples.pivot.Package pPackage) {
+		Resource eResource = pPackage.eResource();
+		assert eResource != null;
+		MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(eResource);
+		assert metaModelManager != null;
+		Set<Type> types = new HashSet<Type>();
+		PackageServer packageServer = metaModelManager.getPackageServer(pPackage);
+		for (TypeServer typeServer : packageServer.getMemberTypes()) {
+			if (!PivotConstants.ORPHANAGE_NAME.equals(typeServer.getName())) {
+				Type type = null;
+				for (DomainType partialType : typeServer.getPartialTypes()) {
+					if (partialType.getPackage() == pPackage) {
+						type = (Type) partialType;
+						break;
+					}
+				}
+				if (type == null) {
+					type = typeServer.getPivotType();
+				}
+				if (type != null) {
+					types.add(type);
+				}
+			}
+		}
+		return types;
 	}
 	
 	public static @NonNull Boolean isBinarySelf(@NonNull OperationCallExp callExp) {

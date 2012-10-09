@@ -19,6 +19,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.text.Element;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.EList;
@@ -29,6 +31,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -77,7 +80,7 @@ public class EcoreExecutorManager extends ExecutorManager
 					return (EcoreIdResolver) adapter;
 				}
 			}
-			List<EObject> roots;
+			List<EObject> roots = null;
 			if (resource != null) {
 				ResourceSet resourceSet = resource.getResourceSet();
 				if (resourceSet != null) {
@@ -90,7 +93,14 @@ public class EcoreExecutorManager extends ExecutorManager
 					roots = resource.getContents();
 				}
 			}
-			else {
+			DomainPackage root = standardLibrary.getOclAnyType().getPackage();
+			if (root instanceof EObject) {
+				if (roots == null) {
+					roots = new ArrayList<EObject>();
+				}
+				roots.add((EObject) root);
+			}
+			if (roots == null) {
 				roots = Collections.singletonList(rootContainer);
 			}
 			assert roots != null;

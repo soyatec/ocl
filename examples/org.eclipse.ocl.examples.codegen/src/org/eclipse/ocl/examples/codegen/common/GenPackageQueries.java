@@ -59,7 +59,8 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.uml2.codegen.ecore.genmodel.util.UML2GenModelUtil;
 
 public class GenPackageQueries
-{		
+{
+	@Deprecated // Obsolete
 	public @NonNull Type getAnotherType(@NonNull GenPackage genPackage, @NonNull Type type) {
 		MetaModelManager metaModelManager = getMetaModelManager(genPackage);
 		Type primaryType = metaModelManager.getPrimaryType(type);
@@ -409,9 +410,10 @@ public class GenPackageQueries
 	 * Return  true if type has another definition counterpart. The Standard Library
 	 * providers a base definition for the pivot model.
 	 */
+	@Deprecated // Obsolete
 	public @NonNull Boolean hasAnotherType(@NonNull GenPackage genPackage, @NonNull Type type) {
-		MetaModelManager metaModelManager = getMetaModelManager(genPackage);
-/*		TypeServer typeServer = metaModelManager.getTypeServer(type);
+/*		MetaModelManager metaModelManager = getMetaModelManager(genPackage);
+/ *		TypeServer typeServer = metaModelManager.getTypeServer(type);
 		for (Type trackedType : typeServer.getTrackedTypes()) {
 			if (trackedType != type) {
 				GenPackage otherGenPackage = getGenPackage(genPackage, type.getPackage());
@@ -420,13 +422,14 @@ public class GenPackageQueries
 				}
 			}
 		}
-		return false; */
+		return false; * /
 		Type primaryType = metaModelManager.getPrimaryType(type);
 //		GenClass genClass = getNamedElement1(genPackage.getGenClasses(), type.getName());
 //		if (genClass == null) {
 			return primaryType != type;
 //		}
-//		return true;
+//		return true; */
+		return false;
 	}
 	
 	/**

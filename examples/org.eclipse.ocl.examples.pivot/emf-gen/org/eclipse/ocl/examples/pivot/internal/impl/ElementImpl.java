@@ -25,7 +25,6 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -35,17 +34,15 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
-import org.eclipse.ocl.examples.library.executor.ExecutorType;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -176,17 +173,14 @@ public abstract class ElementImpl
 		/*
 		oclContents()
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorType T_OclElement = OCLstdlibTables.Types._OclElement;
-			final @NonNull DomainCollectionType T_Set_OclElement_ = standardLibrary.getSetType(T_OclElement, null, null);
-			
-			final @NonNull Object result = ElementBodies._allOwnedElements_body_.INSTANCE.evaluate(evaluator, T_Set_OclElement_.getTypeId(), this);
-			return (EList<Element>)((Value)result).asEcoreObject();
-		} catch (InvalidValueException e) {
-			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.ElementBodies", e);
-		}
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
+		final @NonNull TypeId T_OclElement = OCLstdlibTables.Types._OclElement.getTypeId();
+		final @NonNull CollectionTypeId T_Set_OclElement_ = TypeId.SET.getSpecializedId(T_OclElement);
+		
+		final @NonNull Object result = ElementBodies._allOwnedElements_body_.INSTANCE.evaluate(evaluator, T_Set_OclElement_, this);
+		return (EList<Element>)((Value)result).asEcoreObject();
+		
 		
 	}
 
@@ -200,14 +194,12 @@ public abstract class ElementImpl
 		/*
 		null
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-			
-			final @NonNull Object result = ElementBodies._getValue_body_.INSTANCE.evaluate(evaluator, TypeId.OCL_VOID, this, ValuesUtil.valueOf(stereotype), ValuesUtil.valueOf(propertyName));
-			return (Element)result;
-		} catch (InvalidValueException e) {
-			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.ElementBodies", e);
-		}
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull TypeId T_OclVoid = OCLstdlibTables.Types._OclVoid.getTypeId();
+		
+		final @NonNull Object result = ElementBodies._getValue_body_.INSTANCE.evaluate(evaluator, T_OclVoid, this, ValuesUtil.valueOf(stereotype), ValuesUtil.valueOf(propertyName));
+		return (Element)result;
+		
 		
 	}
 
@@ -221,24 +213,21 @@ public abstract class ElementImpl
 		/*
 		not allOwnedElements()->includes(self)
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-			
-			final @NonNull Object result = ElementBodies._invariant_not_own_self.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, this);
-			final boolean resultIsNull = ValuesUtil.isNull(result);
-			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-				return true;
-			}
-			if (diagnostics != null) {
-				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Element", "not_own_self", EObjectValidator.getObjectLabel(this, context)});
-			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ELEMENT__NOT_OWN_SELF, message, new Object [] { this }));
-			}
-			return false;
-		} catch (InvalidValueException e) {
-			String message = NLS.bind(EvaluatorMessages.ValidationEvaluationFailed_ERROR_, new Object[]{"Element", "not_own_self", EObjectValidator.getObjectLabel(this, context)});
-			throw new WrappedException(message, e);
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		
+		final @NonNull Object result = ElementBodies._invariant_not_own_self.INSTANCE.evaluate(evaluator, T_Boolean, this);
+		final boolean resultIsNull = ValuesUtil.isNull(result);
+		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+			return true;
 		}
+		if (diagnostics != null) {
+			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Element", "not_own_self", EObjectValidator.getObjectLabel(this, context)});
+		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ELEMENT__NOT_OWN_SELF, message, new Object [] { this }));
+		}
+		return false;
+		
 		
 	}
 

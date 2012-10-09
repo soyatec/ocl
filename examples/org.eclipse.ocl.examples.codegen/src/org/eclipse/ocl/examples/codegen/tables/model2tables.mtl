@@ -104,15 +104,16 @@ public class [tablesClassName/]
 [/template]
 
 [template public declareTypes(pPackage : Package, genPackage : GenPackage)]
+[let allTypes : Set(Type) = pPackage.getTypes()]
 /**
  *	The type descriptors for each type.
  */
-public static class Types {[for (cls : Class | pPackage.ownedType->filter(Class)->sortedBy(name)) before('\n')]
+public static class Types {[for (cls : Class | allTypes->filter(Class)->sortedBy(name)) before('\n')]
     [pPackage.declareType(genPackage, cls)/]
 [/for]
 
 	private static final @NonNull <%EcoreExecutorType%>['[]'/] types = {
-[for (type : Type | pPackage.ownedType->sortedBy(name)) separator(',\n') after('\n')]
+[for (type : Type | allTypes->sortedBy(name)) separator(',\n') after('\n')]
 	    _[type.name/][/for]
 	};
 
@@ -124,11 +125,12 @@ public static class Types {[for (cls : Class | pPackage.ownedType->filter(Class)
 		TypeFragments.init();
 		FragmentOperations.init();
 		FragmentProperties.init();
-[if (pPackage.ownedType->filter(Enumeration)->notEmpty())]
+[if (allTypes->filter(Enumeration)->notEmpty())]
 		EnumerationLiterals.init();
 [/if]
 	}
 }
+[/let]
 [/template]
 
 [template public declareType(pPackage : Package, genPackage : GenPackage, cls : Class)]
@@ -155,7 +157,7 @@ new <%[typeName/]%>([genPackage.prefix + 'Package.Literals.' + cls.upperName()/]
 /**
  *	The fragment descriptors for the local elements of each type and its supertypes.
  */
-public static class Fragments {[for (cls : Class | pPackage.ownedType->filter(Class)->sortedBy(name)) before('\n')]
+public static class Fragments {[for (cls : Class | pPackage.getTypes()->filter(Class)->sortedBy(name)) before('\n')]
 	[pPackage.declareFragment(genPackage, cls)/]
 [/for]}
 [/template]
@@ -285,7 +287,7 @@ public static final @NonNull <%ExecutorOperation%> [rule.getLiteralName()/] = ne
 [/template]
 
 [template public declareTypeFragments(pPackage : Package, genPackage : GenPackage)]
-[let types : OrderedSet(Type) = pPackage.ownedType->select(c : Type | c.getBehavioralType()->isEmpty() and not genPackage.hasAnotherType(c))->sortedBy(name)]
+[let types : OrderedSet(Type) = pPackage.getTypes()->sortedBy(name)]
 /**
  *	The fragments for all base types in depth order: OclAny first, OclSelf last.
  */

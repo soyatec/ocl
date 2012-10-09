@@ -87,13 +87,24 @@ public class EcoreExecutorPackage extends ExecutorPackage
 		this.standardLibrary = standardLibrary;
 		this.types = types;
 		if (standardLibrary != null) {
-			standardLibrary.addPackage(this);
+			standardLibrary.addPackage(this, null);
+		}
+	}
+	
+	public void init(EcoreExecutorPackage execPackage, ExecutorType[] types) {
+		ExecutorStandardLibrary standardLibrary = execPackage.standardLibrary;
+		assert this.standardLibrary == null;
+		assert this.types == null;
+		this.standardLibrary = standardLibrary;
+		this.types = types;
+		if (standardLibrary != null) {
+			standardLibrary.addPackage(this, execPackage);
 		}
 	}
 	
 	@Deprecated
 	public void init(ExecutorType[] types) {
-		init(null, types);
+		init((ExecutorStandardLibrary)null, types);
 	}
 	
 //	public ExecutorType lookupType(int classIndex) {

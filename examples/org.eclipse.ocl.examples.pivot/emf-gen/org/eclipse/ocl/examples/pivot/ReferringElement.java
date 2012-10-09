@@ -32,8 +32,8 @@ public interface ReferringElement extends PivotObject
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ReferringElement!referredElement()'"
+	 * @model kind="operation" required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ReferringElement!getReferredElement()'"
 	 * @generated
 	 */
 	Element getReferredElement();

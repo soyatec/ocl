@@ -23,18 +23,14 @@ import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
-import org.eclipse.ocl.examples.library.executor.ExecutorType;
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -137,14 +133,12 @@ public abstract class TypedMultiplicityElementImpl
 		/*
 		bodySpecification.type.conformsTo(self.type)
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-			
-			final @NonNull Object result = TypedMultiplicityElementBodies._CompatibleBody_body_.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, this, ValuesUtil.valueOf(bodySpecification));
-			return (Boolean)result;
-		} catch (InvalidValueException e) {
-			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.TypedMultiplicityElementBodies", e);
-		}
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		
+		final @NonNull Object result = TypedMultiplicityElementBodies._CompatibleBody_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, ValuesUtil.valueOf(bodySpecification));
+		return (Boolean)result;
+		
 		
 	}
 
@@ -158,15 +152,12 @@ public abstract class TypedMultiplicityElementImpl
 		/*
 		Parameter{name = 'name'}
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-			final @NonNull ExecutorType T_pivot__Parameter = PivotTables.Types._Parameter;
-			
-			final @NonNull Object result = TypedMultiplicityElementBodies._makeParameter_body_.INSTANCE.evaluate(evaluator, T_pivot__Parameter.getTypeId(), this);
-			return (Parameter)result;
-		} catch (InvalidValueException e) {
-			throw new WrappedException("Failed to evaluate org.eclipse.ocl.examples.pivot.bodies.TypedMultiplicityElementBodies", e);
-		}
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull TypeId T_pivot__Parameter = PivotTables.Types._Parameter.getTypeId();
+		
+		final @NonNull Object result = TypedMultiplicityElementBodies._makeParameter_body_.INSTANCE.evaluate(evaluator, T_pivot__Parameter, this);
+		return (Parameter)result;
+		
 		
 	}
 
