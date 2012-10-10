@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.oclvoid;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -29,8 +30,8 @@ public class OclVoidAllInstancesOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull OclVoidAllInstancesOperation INSTANCE = new OclVoidAllInstancesOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		// OclVoid has a single instance: null
-		return createSetValue((CollectionTypeId)returnTypeId, (Object) NULL_VALUE);
+		return createSetValue((CollectionTypeId)returnTypeId, (Object) null);
 	}
 }

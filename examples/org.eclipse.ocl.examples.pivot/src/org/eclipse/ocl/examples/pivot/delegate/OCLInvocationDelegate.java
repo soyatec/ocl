@@ -83,10 +83,10 @@ public class OCLInvocationDelegate extends BasicInvocationDelegate
 				}
 			}
 			Object result = query.evaluate(target);
-			if (result == null) {
-				String message = NLS.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, operation);
-				throw new InvocationTargetException(new OCLDelegateException(message));
-			}
+//			if (result == null) {
+//				String message = NLS.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, operation);
+//				throw new InvocationTargetException(new OCLDelegateException(message));
+//			}
 			return metaModelManager.asEcoreObject(result);
 		}
 		catch (InvalidValueException e) {

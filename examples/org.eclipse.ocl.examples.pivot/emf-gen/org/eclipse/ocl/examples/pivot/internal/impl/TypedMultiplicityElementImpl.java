@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -136,8 +137,12 @@ public abstract class TypedMultiplicityElementImpl
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		
-		final @NonNull Object result = TypedMultiplicityElementBodies._CompatibleBody_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, ValuesUtil.valueOf(bodySpecification));
-		return (Boolean)result;
+		final Object result = TypedMultiplicityElementBodies._CompatibleBody_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, ValuesUtil.valueOf(bodySpecification));
+		final java.lang.Boolean ecoreResult = (java.lang.Boolean)result;
+		if (ecoreResult != null) {
+			return ecoreResult;
+		}
+		throw new InvalidValueException("null result from TypedMultiplicityElementBodies._CompatibleBody_body_");
 		
 		
 	}
@@ -155,8 +160,9 @@ public abstract class TypedMultiplicityElementImpl
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull TypeId T_pivot__Parameter = PivotTables.Types._Parameter.getTypeId();
 		
-		final @NonNull Object result = TypedMultiplicityElementBodies._makeParameter_body_.INSTANCE.evaluate(evaluator, T_pivot__Parameter, this);
-		return (Parameter)result;
+		final Object result = TypedMultiplicityElementBodies._makeParameter_body_.INSTANCE.evaluate(evaluator, T_pivot__Parameter, this);
+		final org.eclipse.ocl.examples.pivot.Parameter ecoreResult = (org.eclipse.ocl.examples.pivot.Parameter)result;
+		return ecoreResult;
 		
 		
 	}

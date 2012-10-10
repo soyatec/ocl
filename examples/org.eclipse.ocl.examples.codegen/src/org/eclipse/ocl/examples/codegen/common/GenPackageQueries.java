@@ -301,6 +301,20 @@ public class GenPackageQueries
 		return "<<unknown-OperationId>>";
 	}
 	
+	public String getOperationResultType(@NonNull GenPackage genPackage, @NonNull Operation operation) {
+		Type owningType = operation.getOwningType();
+		if (owningType != null) {
+			GenClass genClass = getGenClass(genPackage, owningType);
+			if (genClass != null) {
+				GenOperation genOperation = getGenOperation(genPackage, genClass, operation);
+				if (genOperation != null) {
+					return genOperation.getQualifiedObjectType(genClass);
+				}
+			}
+		}
+		return "";
+	}
+	
 	public String getOperationReturnType(@NonNull GenPackage genPackage, @NonNull Operation operation) {
 		Type owningType = operation.getOwningType();
 		if (owningType != null) {
@@ -308,7 +322,7 @@ public class GenPackageQueries
 			if (genClass != null) {
 				GenOperation genOperation = getGenOperation(genPackage, genClass, operation);
 				if (genOperation != null) {
-					return genOperation.getObjectType(genClass);
+					return genOperation.getType(genClass);
 				}
 			}
 		}
@@ -356,14 +370,28 @@ public class GenPackageQueries
 		return "";
 	}
 	
-	public String getPropertyType(@NonNull GenPackage genPackage, @NonNull Property property) {
+	public String getPropertyResultType(@NonNull GenPackage genPackage, @NonNull Property property) {
 		Type owningType = property.getOwningType();
 		if (owningType != null) {
 			GenClass genClass = getGenClass(genPackage, owningType);
 			if (genClass != null) {
 				GenFeature genFeature = getGenFeature(genPackage, genClass, property);
 				if (genFeature != null) {
-					return genFeature.getObjectType(genClass);
+					return genFeature.getQualifiedObjectType(genClass);
+				}
+			}
+		}
+		return "";
+	}
+	
+	public String getPropertyReturnType(@NonNull GenPackage genPackage, @NonNull Property property) {
+		Type owningType = property.getOwningType();
+		if (owningType != null) {
+			GenClass genClass = getGenClass(genPackage, owningType);
+			if (genClass != null) {
+				GenFeature genFeature = getGenFeature(genPackage, genClass, property);
+				if (genFeature != null) {
+					return genFeature.getType(genClass);
 				}
 			}
 		}

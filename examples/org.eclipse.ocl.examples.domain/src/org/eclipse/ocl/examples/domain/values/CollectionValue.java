@@ -32,7 +32,7 @@ public interface CollectionValue extends Value
 	 * @generated NOT
 	 */
 	interface Accumulator extends CollectionValue {
-		boolean add(@NonNull Object value);	
+		boolean add(@Nullable Object value);	
 	}
 
 	/**
@@ -43,12 +43,12 @@ public interface CollectionValue extends Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue count(@NonNull Object value);
+	@NonNull IntegerValue count(@Nullable Object value);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Object excludes(@NonNull Object value);	
+	@NonNull Object excludes(@Nullable Object value);	
 
 	/**
 	 * @generated NOT
@@ -58,7 +58,7 @@ public interface CollectionValue extends Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull CollectionValue excluding(@NonNull Object value);
+	@NonNull CollectionValue excluding(@Nullable Object value);
 
 	/**
 	 * @generated NOT
@@ -83,7 +83,7 @@ public interface CollectionValue extends Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Object includes(@NonNull Object value);	
+	@NonNull Object includes(@Nullable Object value);	
 
 	/**
 	 * @generated NOT
@@ -93,7 +93,7 @@ public interface CollectionValue extends Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull CollectionValue including(@NonNull Object value);
+	@NonNull CollectionValue including(@Nullable Object value);
 
 	/**
 	 * @generated NOT

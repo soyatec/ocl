@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.string;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
@@ -28,8 +29,8 @@ public class StringToBooleanOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull StringToBooleanOperation INSTANCE = new StringToBooleanOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		String sourceString = asString(sourceVal);
-		return "true".equals(sourceString) != false;			// FIXME redundant test to suppress warning //$NON-NLS-1$
+		return "true".equals(sourceString); //$NON-NLS-1$
 	}
 }

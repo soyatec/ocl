@@ -107,7 +107,7 @@ public abstract class AbstractEvaluationVisitor
 //		return new InvalidValueImpl(message, exception, evaluationEnvironment, context, expression);
 //	}
 
-	public @NonNull DomainType getDynamicTypeOf(@NonNull Object value) {
+	public @NonNull DomainType getDynamicTypeOf(@Nullable Object value) {
 		return metaModelManager.getDynamicTypeOf(value);
 	}
 
@@ -138,15 +138,15 @@ public abstract class AbstractEvaluationVisitor
 		return metaModelManager;
 	}
 
-	public @NonNull DomainType getStaticTypeOf(@NonNull Object value) {
+	public @NonNull DomainType getStaticTypeOf(@Nullable Object value) {
 		return metaModelManager.getStaticTypeOf(value);
 	}
 
-	public @NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Object... values) {
+	public @NonNull DomainType getStaticTypeOf(@Nullable Object value, @NonNull Object... values) {
 		return metaModelManager.getStaticTypeOf(value, values);
 	}
  
-	public @NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Iterable<?> values) {
+	public @NonNull DomainType getStaticTypeOf(@Nullable Object value, @NonNull Iterable<?> values) {
 		return metaModelManager.getStaticTypeOf(value, values);
 	}
  

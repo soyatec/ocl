@@ -21,23 +21,24 @@
 package org.eclipse.ocl.examples.pivot.bodies;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
+import org.eclipse.jdt.annotation.Nullable;
+import java.util.Iterator;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryIteration;
-import org.eclipse.ocl.examples.domain.library.LibraryProperty;
+import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
-import org.eclipse.ocl.examples.library.executor.ExecutorProperty;
-import org.eclipse.ocl.examples.library.executor.ExecutorSingleIterationManager;
-import org.eclipse.ocl.examples.library.executor.ExecutorType;
+import org.eclipse.ocl.examples.library.logical.BooleanOrOperation;
+import org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 
 /**
@@ -53,60 +54,68 @@ public class ConstraintBodies
 	public static class _invariant_UniqueName extends AbstractUnaryOperation
 	{
 		public static @NonNull _invariant_UniqueName INSTANCE = new _invariant_UniqueName();
+		static final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		static final @NonNull ExecutorOperation O_Collection_forAll = OCLstdlibTables.Operations._Collection__1_forAll;
+		static final @NonNull TypeId T_pivot__Constraint = PivotTables.Types._Constraint.getTypeId();
+		static final @NonNull CollectionTypeId T_OrderedSet_pivot__Constraint_ = TypeId.ORDERED_SET.getSpecializedId(T_pivot__Constraint);
+		static final @NonNull ExecutorOperation O_OrderedSet_excluding = OCLstdlibTables.Operations._OrderedSet__excluding;
+		static final @NonNull TypeId T_pivot__NamedElement = PivotTables.Types._NamedElement.getTypeId();
+		static final @NonNull ExecutorOperation O_Boolean_or = OCLstdlibTables.Operations._Boolean__or;
+		static final @NonNull ExecutorOperation O_String__lt__gt_ = OCLstdlibTables.Operations._String___lt__gt_;
+		static final @NonNull PrimitiveTypeId T_String = TypeId.STRING;
+		
 	
 		/*
 		context.ownedRule->excluding(self)
 	->forAll(name <> self.name or stereotype <> self.stereotype)
 		*/
-		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+			assert self != null;
+			final @NonNull Constraint unboxed_self = (Constraint)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorOperation O_Collection_forAll = OCLstdlibTables.Operations._Collection__1_forAll;
-			final @NonNull ExecutorType T_pivot__Constraint = PivotTables.Types._Constraint;
-			final @NonNull DomainCollectionType T_OrderedSet_pivot__Constraint_ = standardLibrary.getOrderedSetType(T_pivot__Constraint, null, null);
-			final @NonNull ExecutorOperation O_OrderedSet_excluding = OCLstdlibTables.Operations._OrderedSet__excluding;
-			final @NonNull ExecutorProperty P_NamedElement_ownedRule = PivotTables.Properties._NamedElement__ownedRule;
-			final @NonNull LibraryProperty IP_NamedElement_ownedRule = P_NamedElement_ownedRule.getImplementation();
-			final @NonNull ExecutorType T_pivot__NamedElement = PivotTables.Types._NamedElement;
-			final @NonNull ExecutorProperty P_Constraint_context = PivotTables.Properties._Constraint__context;
-			final @NonNull LibraryProperty IP_Constraint_context = P_Constraint_context.getImplementation();
-			final @NonNull ExecutorOperation O_Boolean_or = OCLstdlibTables.Operations._Boolean__or;
-			final @NonNull ExecutorOperation O_String__lt__gt_ = OCLstdlibTables.Operations._String___lt__gt_;
-			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
-			final @NonNull LibraryProperty IP_NamedElement_name = P_NamedElement_name.getImplementation();
-			final @NonNull ExecutorProperty P_Constraint_stereotype = PivotTables.Properties._Constraint__stereotype;
-			final @NonNull LibraryProperty IP_Constraint_stereotype = P_Constraint_stereotype.getImplementation();
 			
 			
-			Object A_symbol__2 = IP_Constraint_context.evaluate(evaluator, T_pivot__NamedElement.getTypeId(), self, P_Constraint_context);
+			org.eclipse.ocl.examples.pivot.NamedElement unboxed_A_symbol__2 = unboxed_self != null ? unboxed_self.getContext() : null;
+			Object A_symbol__2 = valueOf(unboxed_A_symbol__2); // NamedElement
 			
-			Object A_symbol__3 = IP_NamedElement_ownedRule.evaluate(evaluator, T_OrderedSet_pivot__Constraint_.getTypeId(), A_symbol__2, P_NamedElement_ownedRule);
+			
+			org.eclipse.emf.common.util.EList<org.eclipse.ocl.examples.pivot.Constraint> unboxed_A_symbol__3 = unboxed_A_symbol__2 != null ? unboxed_A_symbol__2.getOwnedRule() : null;
+			assert unboxed_A_symbol__3 != null;
+			final @NonNull Value A_symbol__3 = standardLibrary.createOrderedSetValueOf(T_OrderedSet_pivot__Constraint_, unboxed_A_symbol__3);
 			
 			
-			DomainType static_A_symbol_ = evaluator.getStaticTypeOf(A_symbol__3);
-			LibraryBinaryOperation dynamic_A_symbol_ = (LibraryBinaryOperation)static_A_symbol_.lookupImplementation(standardLibrary, O_OrderedSet_excluding);
-			Object A_symbol_ = dynamic_A_symbol_.evaluate(evaluator, T_OrderedSet_pivot__Constraint_.getTypeId(), A_symbol__3, self);
 			
-			/** 
-			 * Implementation of the iterator body.
-			 */
-			AbstractBinaryOperation body_A_symbol__1 = new AbstractBinaryOperation()
-			{
-			/*
-			name <> self.name or stereotype <> self.stereotype
-			*/
-				public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull Object iterator1) throws InvalidValueException {
-					final @NonNull Object V_1_ = iterator1;	// iterator: 1_
+			Object A_symbol_ = CollectionExcludingOperation.INSTANCE.evaluate(evaluator, T_OrderedSet_pivot__Constraint_, A_symbol__3, self);
+			
+			assert A_symbol_ != null;
+			final @NonNull Iterator<?> A_symbol__1_iteratorVal = ((CollectionValue)A_symbol_).iterator();
+			Object V_1_ = null;	// iterator: 1_
+			Object A_symbol__1;
+			while (true) {
+				if (!A_symbol__1_iteratorVal.hasNext()) {
+					A_symbol__1 = TRUE_VALUE;
+					break;
+				}
+				Object A_symbol__1_bodyVal;
+				try {
+					/*
+						name <> self.name or stereotype <> self.stereotype
+					*/
+					V_1_ = A_symbol__1_iteratorVal.next();
 					Object leftA_symbol__4;
 					try {
 						
-						Object A_symbol__5 = IP_NamedElement_name.evaluate(evaluator, TypeId.STRING, V_1_, P_NamedElement_name);
+						Constraint unboxed_V_1_ = (Constraint)V_1_;	// Constraint
+						java.lang.String unboxed_A_symbol__5 = unboxed_V_1_ != null ? unboxed_V_1_.getName() : null;
+						Object A_symbol__5 = unboxed_A_symbol__5; // String
 						
 						
-						Object A_symbol__6 = IP_NamedElement_name.evaluate(evaluator, TypeId.STRING, self, P_NamedElement_name);
 						
-						DomainType static_A_symbol__7 = evaluator.getStaticTypeOf(A_symbol__5, A_symbol__6);
-						LibraryBinaryOperation dynamic_A_symbol__7 = (LibraryBinaryOperation)static_A_symbol__7.lookupImplementation(standardLibrary, O_String__lt__gt_);
-						Object A_symbol__7 = dynamic_A_symbol__7.evaluate(evaluator, TypeId.BOOLEAN, A_symbol__5, A_symbol__6);
+						java.lang.String unboxed_A_symbol__6 = unboxed_self != null ? unboxed_self.getName() : null;
+						Object A_symbol__6 = unboxed_A_symbol__6; // String
+						
+						
+						Object A_symbol__7 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__5, A_symbol__6);
 						leftA_symbol__4 = A_symbol__7;
 					} catch (InvalidValueException e) {
 						leftA_symbol__4 = createInvalidValue(e);
@@ -115,30 +124,38 @@ public class ConstraintBodies
 					Object rightA_symbol__4;
 					try {
 						
-						Object A_symbol__8 = IP_Constraint_stereotype.evaluate(evaluator, TypeId.STRING, V_1_, P_Constraint_stereotype);
+						Constraint unboxed_V_1_ = (Constraint)V_1_;	// Constraint
+						java.lang.String unboxed_A_symbol__8 = unboxed_V_1_ != null ? unboxed_V_1_.getStereotype() : null;
+						Object A_symbol__8 = unboxed_A_symbol__8; // String
 						
 						
-						Object A_symbol__9 = IP_Constraint_stereotype.evaluate(evaluator, TypeId.STRING, self, P_Constraint_stereotype);
 						
-						DomainType static_A_symbol__10 = evaluator.getStaticTypeOf(A_symbol__8, A_symbol__9);
-						LibraryBinaryOperation dynamic_A_symbol__10 = (LibraryBinaryOperation)static_A_symbol__10.lookupImplementation(standardLibrary, O_String__lt__gt_);
-						Object A_symbol__10 = dynamic_A_symbol__10.evaluate(evaluator, TypeId.BOOLEAN, A_symbol__8, A_symbol__9);
+						java.lang.String unboxed_A_symbol__9 = unboxed_self != null ? unboxed_self.getStereotype() : null;
+						Object A_symbol__9 = unboxed_A_symbol__9; // String
+						
+						
+						Object A_symbol__10 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__8, A_symbol__9);
 						rightA_symbol__4 = A_symbol__10;
 					} catch (InvalidValueException e) {
 						rightA_symbol__4 = createInvalidValue(e);
 					}
 					Object A_symbol__10 = rightA_symbol__4;
-					DomainType static_A_symbol__4 = evaluator.getStaticTypeOf(A_symbol__7);
-					LibraryBinaryOperation dynamic_A_symbol__4 = (LibraryBinaryOperation)static_A_symbol__4.lookupImplementation(standardLibrary, O_Boolean_or);
-					Object A_symbol__4 = dynamic_A_symbol__4.evaluate(evaluator, TypeId.BOOLEAN, A_symbol__7, A_symbol__10);
-					return A_symbol__4;
+					Object A_symbol__4 = BooleanOrOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__7, A_symbol__10);
+					A_symbol__1_bodyVal = A_symbol__4;
+				} catch (Exception e) {
+					A_symbol__1_bodyVal = createInvalidValue(e);
 				}
-			};
-			DomainType static_A_symbol__1 = evaluator.getStaticTypeOf(A_symbol_);
-			LibraryIteration dynamic_A_symbol__1 = (LibraryIteration)static_A_symbol__1.lookupImplementation(standardLibrary, O_Collection_forAll);
-			Object acc_A_symbol__1 = dynamic_A_symbol__1.createAccumulatorValue(evaluator, TypeId.BOOLEAN, TypeId.BOOLEAN);
-			ExecutorSingleIterationManager manager_A_symbol__1 = new ExecutorSingleIterationManager(evaluator, TypeId.BOOLEAN, body_A_symbol__1, (CollectionValue)A_symbol_, acc_A_symbol__1);
-			Object A_symbol__1 = dynamic_A_symbol__1.evaluateIteration(manager_A_symbol__1);
+				if (A_symbol__1_bodyVal == null) {
+					A_symbol__1 = createInvalidValue(EvaluatorMessages.UndefinedBody, "forAll");
+					break;
+				}
+				else if (A_symbol__1_bodyVal != TRUE_VALUE) {
+					A_symbol__1 = FALSE_VALUE;			// Abort after a fail
+					break;
+				}
+				
+			}
+			
 			return A_symbol__1;
 		}
 	}

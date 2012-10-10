@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.oclany;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -30,10 +31,10 @@ public class OclAnyOclIsKindOfOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull OclAnyOclIsKindOfOperation INSTANCE = new OclAnyOclIsKindOfOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal, @NonNull Object argVal) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object argVal) {
 		DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 		DomainType sourceType = evaluator.getStaticTypeOf(sourceVal);
 		DomainType argType = asType(argVal);
-		return sourceType.conformsTo(standardLibrary, argType) != false;			// FIXME redundant test to suppress warning
+		return sourceType.conformsTo(standardLibrary, argType);
 	}
 }

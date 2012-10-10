@@ -84,8 +84,9 @@ public class SelfTypeImpl extends ClassImpl implements SelfType
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull TypeId T_Type = OCLstdlibTables.Types._Type.getTypeId();
 		
-		final @NonNull Object result = SelfTypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, T_Type, this, ValuesUtil.valueOf(selfType));
-		return (Type)result;
+		final Object result = SelfTypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, T_Type, this, ValuesUtil.valueOf(selfType));
+		final org.eclipse.ocl.examples.pivot.Type ecoreResult = (org.eclipse.ocl.examples.pivot.Type)result;
+		return ecoreResult;
 		
 		
 	}

@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.logical;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -31,7 +32,7 @@ public class BooleanNotOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull BooleanNotOperation INSTANCE = new BooleanNotOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object argument) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
 		if (argument == Boolean.FALSE) {
 			return TRUE_VALUE;
 		}

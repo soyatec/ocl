@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.pivot.AbstractBasicEnvironment;
 import org.eclipse.ocl.examples.pivot.Adaptable;
@@ -77,7 +78,7 @@ public abstract class AbstractEvaluationEnvironment extends AbstractBasicEnviron
      *            the name whose value is to be returned
      * @return the value associated with the name
      */
-	public Object getValueOf(@NonNull VariableDeclaration referredVariable) {
+	public @Nullable Object getValueOf(@NonNull VariableDeclaration referredVariable) {
     	if (referredVariable instanceof Variable) {
     		assert ((Variable)referredVariable).getRepresentedParameter() == null;
     	}
@@ -99,7 +100,7 @@ public abstract class AbstractEvaluationEnvironment extends AbstractBasicEnviron
      * @param value
      *            the new value
      */
-    public void replace(@NonNull DomainTypedElement referredVariable, Object value) {
+    public void replace(@NonNull DomainTypedElement referredVariable, @Nullable Object value) {
     	if (referredVariable instanceof Variable) {
     		assert ((Variable)referredVariable).getRepresentedParameter() == null;
     	}
@@ -114,7 +115,7 @@ public abstract class AbstractEvaluationEnvironment extends AbstractBasicEnviron
      * @param value
      *            the associated binding
      */
-    public void add(@NonNull DomainTypedElement referredVariable, Object value) {
+    public void add(@NonNull DomainTypedElement referredVariable, @Nullable Object value) {
     	if (referredVariable instanceof Variable) {
     		assert ((Variable)referredVariable).getRepresentedParameter() == null;
     	}

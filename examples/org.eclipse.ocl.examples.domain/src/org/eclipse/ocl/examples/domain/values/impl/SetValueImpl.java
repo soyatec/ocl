@@ -26,7 +26,9 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
@@ -124,7 +126,7 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 		}
 
 		@SuppressWarnings("unchecked")
-		public boolean add(@NonNull Object value) {
+		public boolean add(@Nullable Object value) {
 			return ((Collection<Object>)elements).add(value);			
 		}		
 	}
@@ -164,11 +166,20 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 		return elements.equals(((SetValueImpl)obj).elements);
 	}
 
-	public @NonNull SetValue excluding(@NonNull Object value) {
+	public @NonNull SetValue excluding(@Nullable Object value) {
 		Set<Object> result = new HashSet<Object>();
-		for (Object element : elements) {
-			if (!element.equals(value)) {
-				result.add(element);
+		if (value == null) {
+			for (Object element : elements) {
+				if (element != null) {
+					result.add(element);
+				}
+			}
+		}
+		else {
+			for (Object element : elements) {
+				if (!value.equals(element)) {
+					result.add(element);
+				}
 			}
 		}
 		if (result.size() < elements.size()) {
@@ -200,10 +211,10 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 	}
 
 	public @NonNull String getKind() {
-	    return "Set";
+	    return TypeId.SET_NAME;
 	}
 
-	public @NonNull SetValue including(@NonNull Object value) {
+	public @NonNull SetValue including(@Nullable Object value) {
 		assert !(value instanceof InvalidValue);
 		Set<Object> result = new HashSet<Object>(elements);
 		result.add(value);
@@ -248,7 +259,7 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 
 	@Override
 	public void toString(@NonNull StringBuilder s, int lengthLimit) {
-		s.append("Set");
+		s.append(TypeId.SET_NAME);
 		super.toString(s, lengthLimit);
 	}
 }

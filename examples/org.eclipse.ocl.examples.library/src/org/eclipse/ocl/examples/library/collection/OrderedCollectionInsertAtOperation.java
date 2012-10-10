@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.collection;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
@@ -29,10 +30,9 @@ public class OrderedCollectionInsertAtOperation extends AbstractTernaryOperation
 {
 	public static final @NonNull OrderedCollectionInsertAtOperation INSTANCE = new OrderedCollectionInsertAtOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		SequenceValue selfValue = asSequenceValue(sourceValue);
 		Integer indexValue = asInteger(firstArgumentValue);
-		Object insertValue = asValidValue(secondArgumentValue);
-		return selfValue.insertAt(indexValue, insertValue);
+		return selfValue.insertAt(indexValue, secondArgumentValue);
 	}
 }

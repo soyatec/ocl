@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -38,10 +39,10 @@ public class RangeSequenceValueImpl extends SequenceValueImpl
 	}
 
 	@Override
-	public @NonNull SequenceValue append(@NonNull Object value) {
+	public @NonNull SequenceValue append(@Nullable Object value) {
 		IntegerRange theElements = getElements();
 		IntegerValue nextValue = theElements.getLast().add(ONE_VALUE);
-		if (value.equals(nextValue)) {
+		if (nextValue.equals(value)) {
 			IntegerRange range = createRange(theElements.getFirst(), nextValue);
 			return new RangeSequenceValueImpl(getTypeId(), range);
 		}
@@ -53,7 +54,7 @@ public class RangeSequenceValueImpl extends SequenceValueImpl
 	}
 
 	@Override
-	public @NonNull IntegerValue count(@NonNull Object value) {
+	public @NonNull IntegerValue count(@Nullable Object value) {
 		IntegerValue integerValue = ValuesUtil.isIntegerValue(value);
 		if (integerValue != null) {
 			if (elements.contains(integerValue)) {
@@ -83,7 +84,7 @@ public class RangeSequenceValueImpl extends SequenceValueImpl
 	}
 
 	@Override
-	public @NonNull Value first() {
+	public @Nullable Value first() {
 		return getElements().getFirst();
 	}
 
@@ -98,20 +99,20 @@ public class RangeSequenceValueImpl extends SequenceValueImpl
 	}
 
 	@Override
-	public @NonNull SequenceValue including(@NonNull Object value) {
+	public @NonNull SequenceValue including(@Nullable Object value) {
 		return append(value);
 	}
 
 	@Override
-	public @NonNull Value last() {
+	public @Nullable Value last() {
 		return getElements().getLast();
 	}
 
 	@Override
-	public @NonNull SequenceValue prepend(@NonNull Object value) {
+	public @NonNull SequenceValue prepend(@Nullable Object value) {
 		IntegerRange theElements = getElements();
 		IntegerValue previousValue = theElements.getFirst().subtract(ONE_VALUE);
-		if (value.equals(previousValue)) {
+		if (previousValue.equals(value)) {
 			IntegerRange range = createRange(previousValue, theElements.getLast());
 			return new RangeSequenceValueImpl(getTypeId(), range);
 		}

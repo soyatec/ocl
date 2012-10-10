@@ -17,7 +17,7 @@
 package org.eclipse.ocl.examples.domain.library;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
@@ -45,5 +45,5 @@ public interface LibraryIteration extends LibraryFeature
 	 * 
 	 * @throws InvalidValueException if a body evaluates to invalid
 	 */
-	@NonNull Object evaluateIteration(@NonNull DomainIterationManager iterationManager);
+	@Nullable Object evaluateIteration(@NonNull DomainIterationManager iterationManager);
 }

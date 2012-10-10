@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.numeric;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -31,7 +32,7 @@ import org.eclipse.ocl.examples.domain.values.RealValue;
  */
 public abstract class AbstractNumericBinaryOperation extends AbstractBinaryOperation
 {
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object left, @NonNull Object right) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		if (isUnlimited(left) || isUnlimited(right)) {
 			return evaluateUnlimited(evaluator, left, right);
 		}
@@ -52,7 +53,7 @@ public abstract class AbstractNumericBinaryOperation extends AbstractBinaryOpera
 	 * @return result
 	 * @throws InvalidValueException 
 	 */
-	protected abstract @NonNull Object evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right);
+	protected abstract @Nullable Object evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right);
 
 	/**
 	 * Evaluate an operation for which both left and right are Real.
@@ -61,7 +62,7 @@ public abstract class AbstractNumericBinaryOperation extends AbstractBinaryOpera
 	 * @return result
 	 * @throws InvalidValueException 
 	 */
-	protected @NonNull Object evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) {
+	protected @Nullable Object evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) {
 		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.REAL_NAME);
 	}
 	
@@ -72,7 +73,7 @@ public abstract class AbstractNumericBinaryOperation extends AbstractBinaryOpera
 	 * @param right argument
 	 * @return result
 	 */
-	protected @NonNull Object evaluateUnlimited(@NonNull DomainEvaluator evaluator, @NonNull Object left, @NonNull Object right) {
+	protected @Nullable Object evaluateUnlimited(@NonNull DomainEvaluator evaluator, @Nullable Object left, @Nullable Object right) {
 		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Unlimited"); //$NON-NLS-1$
 	}
 }

@@ -172,7 +172,7 @@ public class BooleanLiteralExpImpl
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		
-		final @NonNull Object result = BooleanLiteralExpBodies._invariant_TypeIsBoolean.INSTANCE.evaluate(evaluator, T_Boolean, this);
+		final Object result = BooleanLiteralExpBodies._invariant_TypeIsBoolean.INSTANCE.evaluate(evaluator, T_Boolean, this);
 		final boolean resultIsNull = ValuesUtil.isNull(result);
 		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 			return true;

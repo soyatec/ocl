@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.logical;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -36,7 +37,7 @@ public class BooleanAndOperation extends AbstractBinaryOperation
 		return true;
 	}
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object left, @NonNull Object right) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		if ((left == Boolean.FALSE) || (right == Boolean.FALSE)) {
 			return FALSE_VALUE;
 		}

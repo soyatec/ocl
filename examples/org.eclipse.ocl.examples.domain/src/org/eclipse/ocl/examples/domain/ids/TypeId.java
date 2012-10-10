@@ -42,37 +42,49 @@ import org.eclipse.ocl.examples.domain.ids.impl.OclVoidTypeIdImpl;
  */
 public interface TypeId extends ElementId
 {
+	public static final @NonNull String BAG_NAME = "Bag";
+	public static final @NonNull String BOOLEAN_NAME = "Boolean";
 	public static final @NonNull String CLASS_NAME = "Class";
+	public static final @NonNull String COLLECTION_NAME = "Collection";
 	public static final @NonNull String COLLECTION_TYPE_NAME = "CollectionType";
 	public static final @NonNull String ENUMERATION_NAME = "Enumeration";
 	public static final @NonNull String INTEGER_NAME = "Integer";
 	public static final @NonNull String LAMBDA_TYPE_NAME = "LambdaType";
+	public static final @NonNull String METACLASS_NAME = "Metaclass";
+	public static final @NonNull String OCL_ANY_NAME = "OclAny";
+	public static final @NonNull String OCL_COMPARABLE_NAME = "OclComparable";
+	public static final @NonNull String OCL_INVALID_NAME = "OclInvalid";
+	public static final @NonNull String OCL_SUMMABLE_NAME = "OclSummable";
+	public static final @NonNull String OCL_VOID_NAME = "OclVoid";
 	public static final @NonNull String OPERATION_NAME = "Operation";
+	public static final @NonNull String ORDERED_SET_NAME = "OrderedSet";
 	public static final @NonNull String PRIMITIVE_TYPE_NAME = "PrimitiveType";
 	public static final @NonNull String REAL_NAME = "Real";
+	public static final @NonNull String SEQUENCE_NAME = "Sequence";
+	public static final @NonNull String SET_NAME = "Set";
 	public static final @NonNull String STRING_NAME = "String";
 	public static final @NonNull String TUPLE_TYPE_NAME = "TupleType";
+	public static final @NonNull String UNIQUE_COLLECTION_NAME = "UniqueCollection";
 	public static final @NonNull String UNLIMITED_NATURAL_NAME = "UnlimitedNatural";
-	public static final @NonNull String BOOLEAN_NAME = "Boolean";
 	
 	public static final @NonNull PrimitiveTypeId BOOLEAN = IdManager.INSTANCE.getPrimitiveTypeId(BOOLEAN_NAME);
 	public static final @NonNull PrimitiveTypeId INTEGER = IdManager.INSTANCE.getPrimitiveTypeId(INTEGER_NAME);
-	public static final @NonNull PrimitiveTypeId OCL_ANY = IdManager.INSTANCE.getPrimitiveTypeId("OclAny");
-	public static final @NonNull PrimitiveTypeId OCL_COMPARABLE = IdManager.INSTANCE.getPrimitiveTypeId("OclComparable");
-	public static final @NonNull OclInvalidTypeId OCL_INVALID = new OclInvalidTypeIdImpl("OclInvalid");
-	public static final @NonNull PrimitiveTypeId OCL_SUMMABLE = IdManager.INSTANCE.getPrimitiveTypeId("OclSummable");
-	public static final @NonNull OclVoidTypeId OCL_VOID = new OclVoidTypeIdImpl("OclVoid");
+	public static final @NonNull PrimitiveTypeId OCL_ANY = IdManager.INSTANCE.getPrimitiveTypeId(OCL_ANY_NAME);
+	public static final @NonNull PrimitiveTypeId OCL_COMPARABLE = IdManager.INSTANCE.getPrimitiveTypeId(OCL_COMPARABLE_NAME);
+	public static final @NonNull OclInvalidTypeId OCL_INVALID = new OclInvalidTypeIdImpl(OCL_INVALID_NAME);
+	public static final @NonNull PrimitiveTypeId OCL_SUMMABLE = IdManager.INSTANCE.getPrimitiveTypeId(OCL_SUMMABLE_NAME);
+	public static final @NonNull OclVoidTypeId OCL_VOID = new OclVoidTypeIdImpl(OCL_VOID_NAME);
 	public static final @NonNull PrimitiveTypeId REAL = IdManager.INSTANCE.getPrimitiveTypeId(REAL_NAME);
 	public static final @NonNull PrimitiveTypeId STRING = IdManager.INSTANCE.getPrimitiveTypeId(STRING_NAME);
 	public static final @NonNull PrimitiveTypeId UNLIMITED_NATURAL = IdManager.INSTANCE.getPrimitiveTypeId(UNLIMITED_NATURAL_NAME);
 
-	public static final @NonNull CollectionTypeId BAG = IdManager.INSTANCE.getCollectionTypeId("Bag");
-	public static final @NonNull CollectionTypeId COLLECTION = IdManager.INSTANCE.getCollectionTypeId("Collection");
-	public static final @NonNull CollectionTypeId METACLASS = IdManager.INSTANCE.getCollectionTypeId("Metaclass");
-	public static final @NonNull CollectionTypeId ORDERED_SET = IdManager.INSTANCE.getCollectionTypeId("OrderedSet");
-	public static final @NonNull CollectionTypeId SEQUENCE = IdManager.INSTANCE.getCollectionTypeId("Sequence");
-	public static final @NonNull CollectionTypeId SET = IdManager.INSTANCE.getCollectionTypeId("Set");
-	public static final @NonNull CollectionTypeId UNIQUE_COLLECTION = IdManager.INSTANCE.getCollectionTypeId("UniqueCollection");
+	public static final @NonNull CollectionTypeId BAG = IdManager.INSTANCE.getCollectionTypeId(BAG_NAME);
+	public static final @NonNull CollectionTypeId COLLECTION = IdManager.INSTANCE.getCollectionTypeId(COLLECTION_NAME);
+	public static final @NonNull CollectionTypeId METACLASS = IdManager.INSTANCE.getCollectionTypeId(METACLASS_NAME);
+	public static final @NonNull CollectionTypeId ORDERED_SET = IdManager.INSTANCE.getCollectionTypeId(ORDERED_SET_NAME);
+	public static final @NonNull CollectionTypeId SEQUENCE = IdManager.INSTANCE.getCollectionTypeId(SEQUENCE_NAME);
+	public static final @NonNull CollectionTypeId SET = IdManager.INSTANCE.getCollectionTypeId(SET_NAME);
+	public static final @NonNull CollectionTypeId UNIQUE_COLLECTION = IdManager.INSTANCE.getCollectionTypeId(UNIQUE_COLLECTION_NAME);
 
 	public static final @NonNull TypeTemplateParameterId BAG_T = (TypeTemplateParameterId) BAG.getTemplateParameterId(0);
 	public static final @NonNull TypeTemplateParameterId COLLECTION_T = (TypeTemplateParameterId) COLLECTION.getTemplateParameterId(0);

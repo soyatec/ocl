@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.oclany;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
@@ -31,7 +32,7 @@ public class OclAnyEqualOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull OclAnyEqualOperation INSTANCE = new OclAnyEqualOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object left, @NonNull Object right) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		//
 		//	A.2.2 is clear. 11.3.1 is vague.
 		//
@@ -43,6 +44,11 @@ public class OclAnyEqualOperation extends AbstractBinaryOperation
 			throw ((InvalidValue)right).getException();
 //			return createInvalidValue(EvaluatorMessages.InvalidArgument, "="); //$NON-NLS-1$
 		}
-		return left.equals(right) != false;			// FIXME redundant test to suppress warning
+		if (left == null) {
+			return right == null;
+		}
+		else {
+			return left.equals(right);
+		}
 	}
 }

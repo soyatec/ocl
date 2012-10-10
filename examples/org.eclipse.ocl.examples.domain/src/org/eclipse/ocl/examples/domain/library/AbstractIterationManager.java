@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.domain.library;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
@@ -34,7 +35,7 @@ public abstract class AbstractIterationManager implements DomainIterationManager
 		throw new UnsupportedOperationException();	// Only required for single iterator managers
 	}
 
-	public @NonNull Object get() {
+	public @Nullable Object get() {
 		throw new UnsupportedOperationException();	// Only required for single iterator managers
 	}
 	

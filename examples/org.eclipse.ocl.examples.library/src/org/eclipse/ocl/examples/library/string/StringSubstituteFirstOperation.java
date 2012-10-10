@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.library.string;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -28,7 +29,7 @@ public class StringSubstituteFirstOperation extends AbstractTernaryOperation
 {
 	public static final @NonNull StringSubstituteFirstOperation INSTANCE = new StringSubstituteFirstOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		String sourceString = asString(sourceValue);
 		String oldSubstring = asString(firstArgumentValue);
 		String newSubstring = asString(secondArgumentValue);

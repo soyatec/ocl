@@ -58,8 +58,15 @@ public class OrderedSetImpl<E> extends LinkedHashSet<E> implements OrderedSet<E>
 		while (thisIterator.hasNext()) {
 			Object thisElement = thisIterator.next();
 			Object thatElement = thatIterator.next();
-			if (!thisElement.equals(thatElement)) {
-				return false;
+			if (thisElement == null) {
+				if (thatElement != null) {
+					return false;
+				}
+			}
+			else {
+				if (!thisElement.equals(thatElement)) {
+					return false;
+				}
 			}
 		}
         return true;

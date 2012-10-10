@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -33,15 +34,14 @@ public class CollectionSelectByKindOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull CollectionSelectByKindOperation INSTANCE = new CollectionSelectByKindOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal, @NonNull Object argVal) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object argVal) {
 		CollectionValue collectionValue = asCollectionValue(sourceVal);
 		DomainType requiredElementType = asType(argVal);
     	DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 		boolean changedContents = false;
 		Collection<Object> newElements = new ArrayList<Object>();
         for (Object element : collectionValue.iterable()) {
-        	assert element != null;
-			if (ValuesUtil.isNull(element)) {
+			if (element == null) {
         		changedContents = true;
 			}
 			else {

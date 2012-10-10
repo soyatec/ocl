@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.collection;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -33,7 +34,7 @@ public class CollectionMaxOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull CollectionMaxOperation INSTANCE = new CollectionMaxOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		CollectionValue collectionValue = asCollectionValue(sourceVal);
 		// FIXME Bug 301351 Look for user-defined max
 		Object result = null;

@@ -126,7 +126,7 @@ public abstract class AbstractInheritance implements DomainInheritance
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull Object createInstance(@NonNull DomainStandardLibrary standardLibrary, @NonNull String value) {
+	public @Nullable Object createInstance(@NonNull DomainStandardLibrary standardLibrary, @NonNull String value) {
 		throw new UnsupportedOperationException();
 	}
 

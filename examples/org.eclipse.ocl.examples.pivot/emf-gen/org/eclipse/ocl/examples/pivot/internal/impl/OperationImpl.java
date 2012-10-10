@@ -45,6 +45,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
@@ -619,8 +620,12 @@ public class OperationImpl
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		
-		final @NonNull Object result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, ValuesUtil.valueOf(p));
-		return (Boolean)result;
+		final Object result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, ValuesUtil.valueOf(p));
+		final java.lang.Boolean ecoreResult = (java.lang.Boolean)result;
+		if (ecoreResult != null) {
+			return ecoreResult;
+		}
+		throw new InvalidValueException("null result from ParameterableElementBodies._isCompatibleWith_body_");
 		
 		
 	}
@@ -644,7 +649,7 @@ public class OperationImpl
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		
-		final @NonNull Object result = OperationBodies._invariant_CompatibleReturn.INSTANCE.evaluate(evaluator, T_Boolean, this);
+		final Object result = OperationBodies._invariant_CompatibleReturn.INSTANCE.evaluate(evaluator, T_Boolean, this);
 		final boolean resultIsNull = ValuesUtil.isNull(result);
 		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 			return true;
@@ -672,7 +677,7 @@ public class OperationImpl
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		
-		final @NonNull Object result = OperationBodies._invariant_LoadableImplementation.INSTANCE.evaluate(evaluator, T_Boolean, this);
+		final Object result = OperationBodies._invariant_LoadableImplementation.INSTANCE.evaluate(evaluator, T_Boolean, this);
 		final boolean resultIsNull = ValuesUtil.isNull(result);
 		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 			return true;

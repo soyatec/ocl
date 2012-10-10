@@ -32,5 +32,5 @@ public interface DomainProperty extends DomainFeature
 	 */
 	/*@NonNull*/ DomainProperty getOpposite();
 	
-	void setValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull ObjectValue objectValue, @NonNull Object propertyValue);
+	void setValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull ObjectValue objectValue, @Nullable Object propertyValue);
 }

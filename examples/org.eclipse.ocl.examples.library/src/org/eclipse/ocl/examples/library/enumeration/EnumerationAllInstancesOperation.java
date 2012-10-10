@@ -20,6 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
@@ -36,7 +37,7 @@ public class EnumerationAllInstancesOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull EnumerationAllInstancesOperation INSTANCE = new EnumerationAllInstancesOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		DomainType sourceType = asType(sourceVal);
 		Set<Object> results = new HashSet<Object>();
 		DomainEnumeration domainEnumeration = sourceType instanceof DomainEnumeration ? (DomainEnumeration)sourceType : (DomainEnumeration)((DomainMetaclass)sourceType).getInstanceType();

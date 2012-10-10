@@ -21,7 +21,6 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
@@ -107,8 +106,17 @@ public class TupleValueImpl extends ValueImpl implements TupleValue
     		return false;
     	}
 		for (int i = 0; i < partValues.length; i++) {
-			if (!partValues[i].equals(that.partValues[i])) {
-				return false;
+			Object thisPart = partValues[i];
+			Object thatPart = that.partValues[i];
+			if (thisPart == null) {
+				if (thatPart != null) {
+					return false;
+				}
+			}
+			else {
+				if (!thisPart.equals(thatPart)) {
+					return false;
+				}
 			}
 		}
     	return true;
@@ -134,7 +142,7 @@ public class TupleValueImpl extends ValueImpl implements TupleValue
     	if (hashCode == null) {
             int hash = tupleTypeId.hashCode();
     		for (Object partValue : partValues) {
-    			hash = 37* hash + partValue.hashCode();
+    			hash = 37* hash + (partValue != null ? partValue.hashCode() : 0);
     		}
     		hashCode = hash;
     	}

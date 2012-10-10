@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.numeric;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
@@ -29,17 +30,17 @@ public class NumericLessThanOperation extends AbstractNumericBinaryOperation
 	public static final @NonNull NumericLessThanOperation INSTANCE = new NumericLessThanOperation();
 
 	@Override
-	protected @NonNull Object evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) {
+	protected @Nullable Object evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) {
 		return left.compareTo(right) < 0;
 	}
 
 	@Override
-	protected @NonNull Object evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) {
+	protected @Nullable Object evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) {
 		return left.compareTo(right) < 0;
 	}
 
 	@Override
-	protected @NonNull Object evaluateUnlimited(@NonNull DomainEvaluator evaluator, @NonNull Object left, @NonNull Object right) {
+	protected @Nullable Object evaluateUnlimited(@NonNull DomainEvaluator evaluator, @Nullable Object left, @Nullable Object right) {
 		return !isUnlimited(left) && isUnlimited(right);
 	}
 }

@@ -57,7 +57,7 @@ public abstract class ExecutorManager implements DomainEvaluator
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull DomainType getDynamicTypeOf(@NonNull Object value) {
+	public @NonNull DomainType getDynamicTypeOf(@Nullable Object value) {
 		return getIdResolver().getDynamicTypeOf(value);
 	}
 
@@ -73,15 +73,15 @@ public abstract class ExecutorManager implements DomainEvaluator
 		return standardLibrary;
 	}
 
-	public @NonNull DomainType getStaticTypeOf(@NonNull Object value) {
+	public @NonNull DomainType getStaticTypeOf(@Nullable Object value) {
 		return getIdResolver().getStaticTypeOf(value);
 	}
 
-	public @NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Object... values) {
+	public @NonNull DomainType getStaticTypeOf(@Nullable Object value, @NonNull Object... values) {
 		return getIdResolver().getStaticTypeOf(value, values);
 	}
 
-	public @NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Iterable<?> values) {
+	public @NonNull DomainType getStaticTypeOf(@Nullable Object value, @NonNull Iterable<?> values) {
 		return getIdResolver().getStaticTypeOf(value, values);
 	}
 

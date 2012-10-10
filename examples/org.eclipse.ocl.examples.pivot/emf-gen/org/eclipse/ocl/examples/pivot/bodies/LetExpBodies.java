@@ -21,18 +21,18 @@
 package org.eclipse.ocl.examples.pivot.bodies;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
-import org.eclipse.ocl.examples.library.executor.ExecutorProperty;
-import org.eclipse.ocl.examples.library.executor.ExecutorType;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 
 /**
@@ -48,31 +48,37 @@ public class LetExpBodies
 	public static class _invariant_TypeIsInType extends AbstractUnaryOperation
 	{
 		public static @NonNull _invariant_TypeIsInType INSTANCE = new _invariant_TypeIsInType();
+		static final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		static final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
+		static final @NonNull TypeId T_Type = OCLstdlibTables.Types._Type.getTypeId();
+		static final @NonNull TypeId T_pivot__OCLExpression = PivotTables.Types._OCLExpression.getTypeId();
+		
 	
 		/*
 		type = _'in'.type
 		*/
-		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+			assert self != null;
+			final @NonNull LetExp unboxed_self = (LetExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
-			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
-			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
-			final @NonNull LibraryProperty IP_TypedElement_type = P_TypedElement_type.getImplementation();
-			final @NonNull ExecutorType T_pivot__OCLExpression = PivotTables.Types._OCLExpression;
-			final @NonNull ExecutorProperty P_LetExp_in = PivotTables.Properties._LetExp__in;
-			final @NonNull LibraryProperty IP_LetExp_in = P_LetExp_in.getImplementation();
 			
 			
-			Object A_symbol_ = IP_TypedElement_type.evaluate(evaluator, T_Type.getTypeId(), self, P_TypedElement_type);
+			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol_ = unboxed_self != null ? unboxed_self.getType() : null;
+			Object A_symbol_ = createTypeValue(unboxed_A_symbol_);
 			
 			
-			Object A_symbol__1 = IP_LetExp_in.evaluate(evaluator, T_pivot__OCLExpression.getTypeId(), self, P_LetExp_in);
 			
-			Object A_symbol__2 = IP_TypedElement_type.evaluate(evaluator, T_Type.getTypeId(), A_symbol__1, P_TypedElement_type);
+			org.eclipse.ocl.examples.pivot.OCLExpression unboxed_A_symbol__1 = unboxed_self != null ? unboxed_self.getIn() : null;
+			Object A_symbol__1 = valueOf(unboxed_A_symbol__1); // OCLExpression
+			
+			
+			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__2 = unboxed_A_symbol__1 != null ? unboxed_A_symbol__1.getType() : null;
+			Object A_symbol__2 = createTypeValue(unboxed_A_symbol__2);
+			
 			
 			DomainType static_A_symbol__3 = evaluator.getStaticTypeOf(A_symbol_, A_symbol__2);
 			LibraryBinaryOperation dynamic_A_symbol__3 = (LibraryBinaryOperation)static_A_symbol__3.lookupImplementation(standardLibrary, O_OclAny__eq_);
-			Object A_symbol__3 = dynamic_A_symbol__3.evaluate(evaluator, TypeId.BOOLEAN, A_symbol_, A_symbol__2);
+			Object A_symbol__3 = dynamic_A_symbol__3.evaluate(evaluator, T_Boolean, A_symbol_, A_symbol__2);
 			return A_symbol__3;
 		}
 	}

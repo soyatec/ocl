@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.domain.elements;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
@@ -41,7 +42,7 @@ public interface DomainType extends DomainNamespace
 	 * Return a new instance of this data type from valueFactory.
 	 * @param value string initial value
 	 */
-	@NonNull Object createInstance(@NonNull DomainStandardLibrary standardLibrary, @NonNull String value);
+	@Nullable Object createInstance(@NonNull DomainStandardLibrary standardLibrary, @NonNull String value);
 	
 	/**
 	 * Return the most derived type com mon to this type and thatType within standardLibrary.

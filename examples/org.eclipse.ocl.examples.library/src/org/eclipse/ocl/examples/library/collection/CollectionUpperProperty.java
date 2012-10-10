@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.collection;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -30,7 +31,7 @@ public class CollectionUpperProperty extends AbstractProperty
 {
 	public static final @NonNull CollectionUpperProperty INSTANCE = new CollectionUpperProperty();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull DomainProperty property) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @NonNull DomainProperty property) {
 		DomainCollectionType sourceType = asCollectionType(sourceValue);
 		return sourceType.getUpperValue();
 	}

@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.oclany;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
@@ -28,8 +29,7 @@ public class OclAnyToStringOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull OclAnyToStringOperation INSTANCE = new OclAnyToStringOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal) {
-		String string = oclToString(sourceVal);
-		return string;
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+		return sourceVal != null ? oclToString(sourceVal) : NULL_STRING;
 	}
 }

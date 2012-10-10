@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluationEnvironment;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -59,14 +60,14 @@ public class EObjectOperation extends AbstractPolyOperation
 	}
 
 	@Override
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Object sourceValue) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue) {
 		if (expressionInOCL == null) {		
 			resolveExpressionInOCL(evaluator, callExp, sourceValue);
 		}
 		return evaluate(evaluator, DomainUtil.nonNullPivot(callExp.getType()).getTypeId(), sourceValue);
 	}
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 		DomainEvaluator nestedEvaluator = evaluator.createNestedEvaluator();
 		DomainEvaluationEnvironment nestedEvaluationEnvironment = nestedEvaluator.getEvaluationEnvironment();
 		nestedEvaluationEnvironment.add(expressionInOCL.getContextVariable(), sourceValue);
@@ -74,14 +75,14 @@ public class EObjectOperation extends AbstractPolyOperation
 	}
 
 	@Override
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Object sourceValue, @NonNull Object argumentValue) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, @Nullable Object argumentValue) {
 		if (expressionInOCL == null) {		
 			resolveExpressionInOCL(evaluator, callExp, sourceValue);
 		}
 		return evaluate(evaluator, DomainUtil.nonNullPivot(callExp.getType()).getTypeId(), sourceValue, argumentValue);
 	}
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull Object argumentValue) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object argumentValue) {
 		DomainEvaluator nestedEvaluator = evaluator.createNestedEvaluator();
 		DomainEvaluationEnvironment nestedEvaluationEnvironment = nestedEvaluator.getEvaluationEnvironment();
 		nestedEvaluationEnvironment.add(expressionInOCL.getContextVariable(), sourceValue);
@@ -91,14 +92,14 @@ public class EObjectOperation extends AbstractPolyOperation
 	}
 
 	@Override
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Object sourceValue, @NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		if (expressionInOCL == null) {		
 			resolveExpressionInOCL(evaluator, callExp, sourceValue);
 		}
 		return evaluate(evaluator, DomainUtil.nonNullPivot(callExp.getType()).getTypeId(), sourceValue, firstArgumentValue, secondArgumentValue);
 	}
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		DomainEvaluator nestedEvaluator = evaluator.createNestedEvaluator();
 		DomainEvaluationEnvironment nestedEvaluationEnvironment = nestedEvaluator.getEvaluationEnvironment();
 		nestedEvaluationEnvironment.add(expressionInOCL.getContextVariable(), sourceValue);
@@ -108,7 +109,7 @@ public class EObjectOperation extends AbstractPolyOperation
 		return nestedEvaluator.evaluate(DomainUtil.nonNullPivot(expressionInOCL.getBodyExpression()));
 	}
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Object sourceValue, Object... argumentValues) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, Object... argumentValues) {
 		if (expressionInOCL == null) {		
 			resolveExpressionInOCL(evaluator, callExp, sourceValue);
 		}
@@ -123,7 +124,7 @@ public class EObjectOperation extends AbstractPolyOperation
 		return nestedEvaluator.evaluate(DomainUtil.nonNullPivot(expressionInOCL.getBodyExpression()));
 	}
 
-	protected void resolveExpressionInOCL(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Object sourceValue) {
+	protected void resolveExpressionInOCL(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue) {
 		if (specification instanceof ExpressionInOCL) {
 			expressionInOCL = (ExpressionInOCL) specification;
 		}

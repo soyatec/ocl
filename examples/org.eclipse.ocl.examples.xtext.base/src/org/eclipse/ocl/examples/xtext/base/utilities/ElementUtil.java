@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Feature;
@@ -123,10 +124,10 @@ public class ElementUtil
 
 	public static @NonNull String getCollectionName(boolean ordered, boolean unique) {
 		if (ordered) {
-			return unique ? "OrderedSet" : "Sequence"; //$NON-NLS-1$ //$NON-NLS-2$
+			return unique ? TypeId.ORDERED_SET_NAME : TypeId.SEQUENCE_NAME;
 		}
 		else {
-			return unique ? "Set" : "Bag"; //$NON-NLS-1$ //$NON-NLS-2$
+			return unique ? TypeId.SET_NAME : TypeId.BAG_NAME;
 		}
 	}
 	

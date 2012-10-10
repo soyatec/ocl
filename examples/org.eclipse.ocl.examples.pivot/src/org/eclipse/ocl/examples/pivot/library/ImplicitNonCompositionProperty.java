@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -40,7 +41,7 @@ public class ImplicitNonCompositionProperty extends AbstractProperty
 {
 	public static final @NonNull ImplicitNonCompositionProperty INSTANCE = new ImplicitNonCompositionProperty();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull DomainProperty thisProperty) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @NonNull DomainProperty thisProperty) {
 		DomainModelManager modelManager = evaluator.getModelManager();
 		DomainProperty thatProperty = thisProperty.getOpposite();
 		DomainType thatType = DomainUtil.nonNullModel(thisProperty.getType());		

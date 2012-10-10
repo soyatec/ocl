@@ -34,7 +34,7 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 		private final CollectionValue collectionValue;
 		private final DomainTypedElement variable;
 		private Iterator<? extends Object> javaIter;
-		private Object value = null;
+		private Object value;		// 'null' is a valid value so 'this' is used as end of iteration
 
 		public ValueIterator(@NonNull DomainEvaluator evaluator, @NonNull CollectionValue collectionValue, @NonNull DomainTypedElement variable) {
 			this.evaluationEnvironment = evaluator.getEvaluationEnvironment();
@@ -48,12 +48,12 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 		}
 
 		public boolean hasCurrent() {
-			return value != null;
+			return value != this;
 		}
 		
 		public @Nullable Object next() {
 			if (!javaIter.hasNext()) {
-				value = null;
+				value = this;
 			}
 			else {
 				value = javaIter.next();
@@ -70,7 +70,7 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 
 		@Override
 		public String toString() {
-			return String.valueOf(variable) + " = " + String.valueOf(value);
+			return String.valueOf(variable) + " = " + (value != this ? String.valueOf(value) : "<<END>>");
 		}
 	}
 
@@ -93,10 +93,10 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 	protected final @NonNull CollectionValue collectionValue;
 	protected final @NonNull DomainExpression body;
 	protected final DomainTypedElement accumulatorVariable;
-	private @NonNull Object accumulatorValue;
+	private @Nullable Object accumulatorValue;
 
 	public EvaluatorIterationManager(@NonNull DomainEvaluator evaluator, @NonNull DomainExpression body, @NonNull CollectionValue collectionValue,
-			@Nullable DomainTypedElement accumulatorVariable, @NonNull Object accumulatorValue) {
+			@Nullable DomainTypedElement accumulatorVariable, @Nullable Object accumulatorValue) {
 		super(evaluator);
 		this.collectionValue = collectionValue;
 		this.body = body;
@@ -115,11 +115,11 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 		this.accumulatorVariable = iterationManager.accumulatorVariable;
 	}
 	
-	public @NonNull Object getAccumulatorValue() {
+	public @Nullable Object getAccumulatorValue() {
 		return accumulatorValue;
 	}
 
-	public @NonNull Object evaluateBody() {
+	public @Nullable Object evaluateBody() {
 		return evaluator.evaluate(body);
 	}
 	

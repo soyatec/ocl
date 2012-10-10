@@ -21,18 +21,19 @@
 package org.eclipse.ocl.examples.pivot.bodies;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
-import org.eclipse.ocl.examples.library.executor.ExecutorType;
+import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
+import org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 
 /**
@@ -48,25 +49,25 @@ public class ParameterableElementBodies
 	public static class _isCompatibleWith_body_ extends AbstractBinaryOperation
 	{
 		public static @NonNull _isCompatibleWith_body_ INSTANCE = new _isCompatibleWith_body_();
+		static final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		static final @NonNull ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
+		static final @NonNull TypeId T_pivot__ParameterableElement = PivotTables.Types._ParameterableElement.getTypeId();
+		static final @NonNull CollectionTypeId T_Metaclass_pivot__ParameterableElement_ = TypeId.METACLASS.getSpecializedId(T_pivot__ParameterableElement);
+		static final @NonNull ExecutorOperation O_OclAny_oclType = OCLstdlibTables.Operations._OclAny__oclType;
+		
 	
 		/*
 		p.oclIsKindOf(self.oclType())
 		*/
-		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self, final @NonNull Object p) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self, final @Nullable Object p) throws InvalidValueException {
+			assert self != null;
+			final @NonNull ParameterableElement unboxed_self = (ParameterableElement)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
-			final @NonNull ExecutorType T_pivot__ParameterableElement = PivotTables.Types._ParameterableElement;
-			final @NonNull DomainMetaclass T_Metaclass_pivot__ParameterableElement_ = standardLibrary.getMetaclass(T_pivot__ParameterableElement);
-			final @NonNull ExecutorOperation O_OclAny_oclType = OCLstdlibTables.Operations._OclAny__oclType;
 			
 			
 			
-			DomainType static_A_symbol_ = evaluator.getStaticTypeOf(self);
-			LibraryUnaryOperation dynamic_A_symbol_ = (LibraryUnaryOperation)static_A_symbol_.lookupImplementation(standardLibrary, O_OclAny_oclType);
-			Object A_symbol_ = dynamic_A_symbol_.evaluate(evaluator, T_Metaclass_pivot__ParameterableElement_.getTypeId(), self);
-			DomainType static_A_symbol__1 = evaluator.getStaticTypeOf(p);
-			LibraryBinaryOperation dynamic_A_symbol__1 = (LibraryBinaryOperation)static_A_symbol__1.lookupImplementation(standardLibrary, O_OclAny_oclIsKindOf);
-			Object A_symbol__1 = dynamic_A_symbol__1.evaluate(evaluator, TypeId.BOOLEAN, p, A_symbol_);
+			Object A_symbol_ = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, T_Metaclass_pivot__ParameterableElement_, self);
+			Object A_symbol__1 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, T_Boolean, p, A_symbol_);
 			return A_symbol__1;
 		}
 	}

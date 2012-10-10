@@ -149,10 +149,10 @@ public class OCLQueryDelegate implements QueryDelegate
 	//			throw new OCLDelegateException(message);
 	//		}
 	//		return converter.convert(ocl, result);
-			if (result == null) {
-				String message = NLS.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, PivotUtil.getBody(specification));
-				throw new InvocationTargetException(new OCLDelegateException(message));
-			}
+//			if (result == null) {
+//				String message = NLS.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, PivotUtil.getBody(specification));
+//				throw new InvocationTargetException(new OCLDelegateException(message));
+//			}
 			return metaModelManager.asEcoreObject(result);
 		}
 		catch (InvalidValueException e) {

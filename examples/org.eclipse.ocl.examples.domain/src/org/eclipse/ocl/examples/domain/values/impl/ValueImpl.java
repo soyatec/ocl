@@ -17,10 +17,8 @@
 package org.eclipse.ocl.examples.domain.values.impl;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -31,10 +29,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
-import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
@@ -76,11 +71,11 @@ public abstract class ValueImpl extends ValuesUtil implements Value
 	protected ValueImpl() {}
 
 	public @NonNull BagValue asBagValue() {
-		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Bag", getTypeName());
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.BAG_NAME, getTypeName());
 	}
 
 	public @NonNull CollectionValue asCollectionValue() {
-		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Collection", getTypeName());
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.COLLECTION_NAME, getTypeName());
 	}
 
 	public @NonNull Double asDouble() {
@@ -118,7 +113,7 @@ public abstract class ValueImpl extends ValuesUtil implements Value
 	}
 
 	public @NonNull OrderedSetValue asOrderedSetValue() {
-		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "OrderedSet", getTypeName());
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.ORDERED_SET_NAME, getTypeName());
 	}
 
 	public @NonNull RealValue asRealValue() {
@@ -126,11 +121,11 @@ public abstract class ValueImpl extends ValuesUtil implements Value
 	}
 
 	public @NonNull SequenceValue asSequenceValue() {
-		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Sequence", getTypeName());
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.SEQUENCE_NAME, getTypeName());
 	}
 
 	public @NonNull SetValue asSetValue() {
-		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Set", getTypeName());
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.SET_NAME, getTypeName());
 	}
 
 	public @NonNull TupleValue asTupleValue() {

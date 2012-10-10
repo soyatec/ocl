@@ -43,11 +43,9 @@
 [for (pType : Type | pPackage.ownedType)]
 [pType.generateType(genPackage)/]
 [for (pOperation : Operation | pType.ownedOperation)]
-[pType.generateOperation(genPackage, pOperation)/]
-[/for]
+[pType.generateOperation(genPackage, pOperation)/][/for]
 [for (pProperty : Property | pType.ownedAttribute)]
-[pType.generateProperty(genPackage, pProperty)/]
-[/for]
+[pType.generateProperty(genPackage, pProperty)/][/for]
 [/for]
 [/let]
 [/let]
@@ -71,7 +69,7 @@
 [let arity : OCLInteger = expInOcl.parameterVariable->size()]
 final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
 [expInOcl.emitConstants(constants)/]
-final @NonNull Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this);
+final Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this);
 final boolean resultIsNull = <%ValuesUtil%>.isNull(result);
 if (!resultIsNull && <%ValuesUtil%>.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 	return true;
@@ -122,6 +120,7 @@ return false; // FIXME errors in OCL definition of [pRule.prettyPrintName()/]
 [let className : String = pType.getQualifiedBodiesClassName(genPackage)]
 [let constraintName : String = '_' + pOperation.name + '_' + pRule.getRuleStereotype() + '_' + pRule.getRuleName()]
 [let expInOcl : ExpressionInOCL = pRule.specification.getExpressionInOCL(pOperation)]
+[let ecoreResultType : String = genPackage.getOperationResultType(pOperation)]
 [let ecoreReturnType : String = genPackage.getOperationReturnType(pOperation)]
 [if (expInOcl.contextVariable->notEmpty())]
 [let constants : String = expInOcl.gatherSpecificationConstants(genPackage, pType)]
@@ -130,9 +129,16 @@ return false; // FIXME errors in OCL definition of [pRule.prettyPrintName()/]
 */
 final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
 [expInOcl.emitConstants(constants)/]
-final @NonNull Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this[for (pParameter : Parameter | pOperation.ownedParameter)], <%ValuesUtil%>.valueOf([pParameter.name/])[/for]);
-return ([ecoreReturnType/])[if (pOperation.type.isBoxed())]((<%Value%>)result).asEcoreObject()[else]result[/if];
-[/let][else]
+final Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this[for (pParameter : Parameter | pOperation.ownedParameter)], <%ValuesUtil%>.valueOf([pParameter.name/])[/for]);
+final [ecoreResultType/] ecoreResult = ([ecoreResultType/])[if (pOperation.type.isBoxed())](result != null ? ((<%Value%>)result).asEcoreObject() : null)[else]result[/if];
+[if (ecoreResultType = ecoreReturnType)]
+return ecoreResult;
+[else]
+if (ecoreResult != null) {
+	return ecoreResult;
+}
+throw new <%InvalidValueException%>("null result from <%[className/]%>.[constraintName/]");
+[/if][/let][else]
 /*
 [pRule.specification.prettyPrint().trim()/]
 */
@@ -142,7 +148,7 @@ return false; // FIXME errors in OCL definition of [pOperation.prettyPrintName()
 [else]
 return null; // FIXME errors in OCL definition of [pOperation.prettyPrintName()/]
 [/if]
-[/if][/let][/let][/let][/let][/template]
+[/if][/let][/let][/let][/let][/let][/template]
 
 [template public generateProperty(pType : Type, genPackage : GenPackage, pProperty : Property)]
 [let derivationRules : OrderedSet(Constraint) = pProperty.ownedRule->select(stereotype = 'derivation')]
@@ -156,7 +162,8 @@ return null; // FIXME errors in OCL definition of [pOperation.prettyPrintName()/
 [let className : String = pType.getQualifiedBodiesClassName(genPackage)]
 [let constraintName : String = '_' + pProperty.name + '_' + pRule.getRuleStereotype() + '_' + pRule.getRuleName()]
 [let expInOcl : ExpressionInOCL = pRule.specification.getExpressionInOCL(pProperty)]
-[let ecoreReturnType : String = genPackage.getPropertyType(pProperty)]
+[let ecoreResultType : String = genPackage.getPropertyResultType(pProperty)]
+[let ecoreReturnType : String = genPackage.getPropertyReturnType(pProperty)]
 [if (expInOcl.contextVariable->notEmpty())]
 [let constants : String = expInOcl.gatherSpecificationConstants(genPackage, pType)]
 /*
@@ -164,9 +171,16 @@ return null; // FIXME errors in OCL definition of [pOperation.prettyPrintName()/
 */
 final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
 [expInOcl.emitConstants(constants)/]
-final @NonNull Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this, [pProperty.emitQualifiedLiteralName(genPackage)/]);
-return ([ecoreReturnType/])[if (pProperty.type.isBoxed())]((<%Value%>)result).asEcoreObject()[else]result[/if];
-[/let][else]
+final Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this, [pProperty.emitQualifiedLiteralName(genPackage)/]);
+final [ecoreResultType/] ecoreResult = ([ecoreResultType/])[if (pProperty.type.isBoxed())](result != null ? ((<%Value%>)result).asEcoreObject() : null)[else]result[/if];
+[if (ecoreResultType = ecoreReturnType)]
+return ecoreResult;
+[else]
+if (ecoreResult != null) {
+	return ecoreResult;
+}
+throw new <%InvalidValueException%>("null result from <%[className/]%>.[constraintName/]");
+[/if][/let][else]
 /*
 [pRule.specification.prettyPrint().trim()/]
 */
@@ -175,8 +189,7 @@ return ([ecoreReturnType/])[if (pProperty.type.isBoxed())]((<%Value%>)result).as
 return false; // FIXME errors in OCL definition of [pProperty.prettyPrintName()/]
 [else]
 return null; // FIXME errors in OCL definition of [pProperty.prettyPrintName()/]
-[/if]
-[/if][/let][/let][/let][/let][/template]
+[/if][/if][/let][/let][/let][/let][/let][/template]
 
 [template public gatherSpecificationConstants(expInOcl : ExpressionInOCL, genPackage : GenPackage, pType : Type)]
 [expInOcl.type.gatherConstants(genPackage, expInOcl)/]

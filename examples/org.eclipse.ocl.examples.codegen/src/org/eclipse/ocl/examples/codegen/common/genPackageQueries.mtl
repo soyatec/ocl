@@ -78,6 +78,9 @@ invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getInterfac
 [query public getOperationID(genPackage : GenPackage, type : Type, rule : Constraint, diagnosticCode : Boolean) : String =
 invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getOperationID(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Type, org.eclipse.ocl.examples.pivot.Constraint, java.lang.Boolean)', Sequence{genPackage, type, rule, diagnosticCode}) /]
 
+[query public getOperationResultType(genPackage : GenPackage, elem : Operation) : String = 
+invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getOperationResultType(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Operation)', Sequence{genPackage, elem}) /]
+
 [query public getOperationReturnType(genPackage : GenPackage, elem : Operation) : String = 
 invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getOperationReturnType(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Operation)', Sequence{genPackage, elem}) /]
 
@@ -87,9 +90,11 @@ invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getPivotPac
 [query public getPropertyGetter(genPackage : GenPackage, elem : Property) : String = 
 invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getPropertyGetter(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Property)', Sequence{genPackage, elem}) /]
 
-[query public getPropertyType(genPackage : GenPackage, elem : Property) : String = 
-invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getPropertyType(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Property)', Sequence{genPackage, elem}) /]
+[query public getPropertyResultType(genPackage : GenPackage, elem : Property) : String = 
+invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getPropertyResultType(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Property)', Sequence{genPackage, elem}) /]
 
+[query public getPropertyReturnType(genPackage : GenPackage, elem : Property) : String = 
+invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getPropertyReturnType(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Property)', Sequence{genPackage, elem}) /]
 
 [query public getQualifiedBodiesPackageName(genPackage : GenPackage) : String =
 genPackage.getQualifiedPackageName() + '.' + genPackage.getBodiesPackageName() /]

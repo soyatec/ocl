@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
@@ -75,12 +76,12 @@ public class SparseSequenceValueImpl extends SequenceValueImpl
 		}
 
 		@SuppressWarnings("unchecked")
-		public boolean add(@NonNull Object value) {
+		public boolean add(@Nullable Object value) {
 			return ((Collection<Object>)elements).add(value);			
 		}		
 
 	    @Override
-		public @NonNull SequenceValue append(@NonNull Object value) {
+		public @NonNull SequenceValue append(@Nullable Object value) {
 			assert !(value instanceof InvalidValue);
 			add(value);
 	        return this;

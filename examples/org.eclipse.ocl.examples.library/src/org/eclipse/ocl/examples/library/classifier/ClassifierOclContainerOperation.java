@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.library.classifier;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
@@ -29,14 +30,8 @@ public class ClassifierOclContainerOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull ClassifierOclContainerOperation INSTANCE = new ClassifierOclContainerOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		EObject object = asNavigableObject(sourceVal);
-		EObject eContainer = object.eContainer();
-		if (eContainer != null) {
-			return eContainer;
-		}
-		else {
-			return NULL_VALUE;
-		}
+		return object.eContainer();
 	}
 }

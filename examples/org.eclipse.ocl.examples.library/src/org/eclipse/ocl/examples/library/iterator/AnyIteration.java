@@ -33,12 +33,12 @@ public class AnyIteration extends AbstractIteration
 	public static final @NonNull AnyIteration INSTANCE = new AnyIteration();
 
 	public @NonNull Object createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull TypeId accumulatorTypeId, @NonNull TypeId bodyTypeId) {
-		return NULL_VALUE;
+		return INSTANCE;		// Not used
 	}
 	
 	@Override
-	protected @NonNull Object resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
-		return NULL_VALUE;
+	protected @Nullable Object resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
+		return null;
 //		return createInvalidValue("No matching content for 'any'");
 	}
 	

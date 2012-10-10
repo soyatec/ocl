@@ -29,7 +29,7 @@ public class EvaluatorMultipleIterationManager extends EvaluatorIterationManager
 	protected boolean hasCurrent;
 	
 	public EvaluatorMultipleIterationManager(@NonNull DomainEvaluator invokingEvaluator, @NonNull DomainExpression body, @NonNull CollectionValue collectionValue,
-			@Nullable DomainTypedElement accumulator, @NonNull Object accumulatorValue, DomainTypedElement... referredIterators) {
+			@Nullable DomainTypedElement accumulator, @Nullable Object accumulatorValue, DomainTypedElement... referredIterators) {
 		super(invokingEvaluator.createNestedEvaluator(), body, collectionValue, accumulator, accumulatorValue);
 		int iMax = referredIterators.length;
 		ValueIterator[] iterators = new ValueIterator[iMax];

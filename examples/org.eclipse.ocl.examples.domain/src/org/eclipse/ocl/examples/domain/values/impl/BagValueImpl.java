@@ -26,7 +26,9 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -84,12 +86,10 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
         // that are in the larger collection
         Set<Object> minElements = new HashSet<Object>(leftSize < rightSize ? leftElements : rightElements);
         for (Object e : minElements) {
-        	if (e != null) {
-        		IntegerValue leftCount = left.count(e);
-            	IntegerValue rightCount = right.count(e);
-            	for (int i = Math.min(leftCount.asInteger(), rightCount.asInteger()); i > 0; i--) {
-            		results.add(e);
-            	}
+    		IntegerValue leftCount = left.count(e);
+        	IntegerValue rightCount = right.count(e);
+        	for (int i = Math.min(leftCount.asInteger(), rightCount.asInteger()); i > 0; i--) {
+        		results.add(e);
         	}
         }
     	return results.size() > 0 ? new BagValueImpl(typeId, results) : new BagValueImpl(typeId, EMPTY_BAG);
@@ -119,7 +119,7 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 		}
 
 		@SuppressWarnings("unchecked")
-		public boolean add(@NonNull Object value) {
+		public boolean add(@Nullable Object value) {
 			return ((Collection<Object>)elements).add(value);			
 		}		
 	}
@@ -149,11 +149,20 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 		return elements.equals(((BagValueImpl)obj).elements);
 	}
 
-	public @NonNull BagValue excluding(@NonNull Object value) {
+	public @NonNull BagValue excluding(@Nullable Object value) {
 		Bag<Object> result = new BagImpl<Object>();
-		for (Object element : elements) {
-			if (!element.equals(value)) {
-				result.add(element);
+		if (value == null) {
+			for (Object element : elements) {
+				if (element != null) {
+					result.add(element);
+				}
+			}
+		}
+		else {
+			for (Object element : elements) {
+				if (!value.equals(element)) {
+					result.add(element);
+				}
 			}
 		}
 		if (result.size() < elements.size()) {
@@ -185,10 +194,10 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 	}
 
 	public @NonNull String getKind() {
-	    return "Bag";
+	    return TypeId.BAG_NAME;
 	}
 
-	public @NonNull BagValue including(@NonNull Object value) {
+	public @NonNull BagValue including(@Nullable Object value) {
 		assert !(value instanceof InvalidValue);
 		Bag<Object> result = new BagImpl<Object>(elements);
 		result.add(value);
@@ -215,7 +224,7 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 
 	@Override
 	public void toString(@NonNull StringBuilder s, int lengthLimit) {
-		s.append("Bag");
+		s.append(TypeId.BAG_NAME);
 		super.toString(s, lengthLimit);
 	}
 }

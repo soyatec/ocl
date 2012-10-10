@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.domain.values;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 public interface SequenceValue extends CollectionValue
 {
@@ -28,37 +29,37 @@ public interface SequenceValue extends CollectionValue
 	/**
 	 * @generated NOT
 	 */
-	@NonNull SequenceValue append(@NonNull Object object);
+	@NonNull SequenceValue append(@Nullable Object object);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Object at(int index);
+	@Nullable Object at(int index);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Object first();
+	@Nullable Object first();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull SequenceValue insertAt(int index, @NonNull Object object);
+	@NonNull SequenceValue insertAt(int index, @Nullable Object object);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue indexOf(@NonNull Object object);
+	@NonNull IntegerValue indexOf(@Nullable Object object);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Object last();
+	@Nullable Object last();
 
 	/**
 	 * @generated NOT
 	 */
-    @NonNull SequenceValue prepend(@NonNull Object object);
+    @NonNull SequenceValue prepend(@Nullable Object object);
 
 	/**
 	 * @generated NOT

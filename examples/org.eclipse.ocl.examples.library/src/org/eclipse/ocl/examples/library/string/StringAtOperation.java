@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.string;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -30,7 +31,7 @@ public class StringAtOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull StringAtOperation INSTANCE = new StringAtOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object left, @NonNull Object right) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		String leftString = asString(left);
 		Integer rightInteger = asInteger(right);
 		int size = leftString.length();

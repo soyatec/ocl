@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.collection;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
@@ -29,9 +30,8 @@ public class CollectionIncludingOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull CollectionIncludingOperation INSTANCE = new CollectionIncludingOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object left, @NonNull Object right) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		CollectionValue leftCollectionValue = asCollectionValue(left);
-		Object rightValue = asValidValue(right);
-		return leftCollectionValue.including(rightValue);
+		return leftCollectionValue.including(right);
 	}
 }

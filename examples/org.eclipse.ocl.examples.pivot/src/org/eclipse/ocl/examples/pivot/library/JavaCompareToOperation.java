@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.pivot.library;
 import java.lang.reflect.Method;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -34,7 +35,7 @@ public class JavaCompareToOperation extends AbstractBinaryOperation
 		this.method = method;
 	}
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object leftValue, @NonNull Object rightValue) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object leftValue, @Nullable Object rightValue) {
 		Object leftObject = asObject(leftValue);
 		Object rightObject = asObject(rightValue);
 		try {

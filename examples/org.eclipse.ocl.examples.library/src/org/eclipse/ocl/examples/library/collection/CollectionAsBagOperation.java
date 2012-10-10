@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.collection;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
@@ -28,7 +29,7 @@ public class CollectionAsBagOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull CollectionAsBagOperation INSTANCE = new CollectionAsBagOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object argument) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
 		return asBagValue(argument);
 	}
 }

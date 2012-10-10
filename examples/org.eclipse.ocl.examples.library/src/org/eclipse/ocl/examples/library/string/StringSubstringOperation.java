@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.string;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -31,7 +32,7 @@ public class StringSubstringOperation extends AbstractTernaryOperation
 {
 	public static final @NonNull StringSubstringOperation INSTANCE = new StringSubstringOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		String sourceString = asString(sourceValue);
 		Integer startInteger = asInteger(firstArgumentValue);
 		Integer endInteger = asInteger(secondArgumentValue);
@@ -39,8 +40,7 @@ public class StringSubstringOperation extends AbstractTernaryOperation
 		int lower = startInteger.intValue();
 		int upper = endInteger.intValue();
 		if ((0 < lower) && (lower <= upper) && (upper <= size)) {
-			@SuppressWarnings("null") @NonNull String result = sourceString.substring(lower-1, upper);
-			return result;
+			return sourceString.substring(lower-1, upper);
 		}
 		else {
 			throw new InvalidValueException(DomainUtil.bind(EvaluatorMessages.IndexesOutOfRange, lower, upper, size));

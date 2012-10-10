@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.string;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
@@ -28,9 +29,9 @@ public class StringEqualsIgnoreCaseOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull StringEqualsIgnoreCaseOperation INSTANCE = new StringEqualsIgnoreCaseOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object left, @NonNull Object right) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		String leftString = asString(left);
 		String rightString = asString(right);
-		return leftString.equalsIgnoreCase(rightString) != false;			// FIXME redundant test to suppress warning
+		return leftString.equalsIgnoreCase(rightString);
 	}
 }

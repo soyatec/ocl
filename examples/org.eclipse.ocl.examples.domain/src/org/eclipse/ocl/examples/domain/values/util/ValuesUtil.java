@@ -73,7 +73,6 @@ import org.eclipse.ocl.examples.domain.values.impl.IntegerRangeImpl;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.JavaObjectValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.LongIntegerValueImpl;
-import org.eclipse.ocl.examples.domain.values.impl.NullValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.RangeOrderedSetValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.RangeSequenceValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.RealValueImpl;
@@ -108,7 +107,6 @@ public abstract class ValuesUtil
 	@SuppressWarnings("null")
 	public static final @NonNull Boolean FALSE_VALUE = Boolean.FALSE;
 	public static final @NonNull InvalidValue INVALID_VALUE = new InvalidValueImpl(new Exception("invalid")); 
-	public static final @NonNull NullValue NULL_VALUE = new NullValueImpl(); 
 	public static final @NonNull IntegerValue ONE_VALUE = integerValueOf(1);
 	@SuppressWarnings("null")
 	public static final @NonNull Boolean TRUE_VALUE = Boolean.TRUE;
@@ -120,7 +118,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asBagValue();
 		}
 		else {
-			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Bag", getTypeName(value));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.BAG_NAME, getTypeName(value));
 		}
 	}
 
@@ -156,7 +154,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asCollectionValue();
 		}
 		else {
-			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Collection", getTypeName(value));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.COLLECTION_NAME, getTypeName(value));
 		}
 	}
 
@@ -214,7 +212,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asOrderedSetValue();
 		}
 		else {
-			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "OrderedSet", getTypeName(value));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.ORDERED_SET_NAME, getTypeName(value));
 		}
 	}
 
@@ -232,7 +230,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asSequenceValue();
 		}
 		else {
-			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Sequence", getTypeName(value));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.SEQUENCE_NAME, getTypeName(value));
 		}
 	}
 
@@ -241,7 +239,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asSetValue();
 		}
 		else {
-			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Set", getTypeName(value));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.SET_NAME, getTypeName(value));
 		}
 	}
 
@@ -283,7 +281,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asUniqueCollectionValue();
 		}
 		else {
-			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "UniqueCollection", getTypeName(value));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.UNIQUE_COLLECTION_NAME, getTypeName(value));
 		}
 	}
 
@@ -296,22 +294,22 @@ public abstract class ValuesUtil
 		}
 	}
 
-	public static @NonNull Object asValidValue(@Nullable Object value) {
+/*	public static @NonNull Object asValidValue(@Nullable Object value) {
 		assert !(value instanceof InvalidValue);
 		if (value != null) {
 			return value;
 		}
 		else {
-			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "OclAny", getTypeName(value));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.OCL_ANY_NAME, getTypeName(value));
 		}
-	}
+	} */
 
 	public static Object asValue(Object value) {
 		if (value != null) {
 			return value;
 		}
 		else {
-			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "OclAny", getTypeName(value));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.OCL_ANY_NAME, getTypeName(value));
 		}
 	}
 
@@ -540,7 +538,10 @@ public abstract class ValuesUtil
 		return new TupleValueImpl(typeId, values);
 	}
 
-	public static @NonNull TypeValue createTypeValue(@NonNull DomainType type) {
+	public static @NonNull TypeValue createTypeValue(@Nullable DomainType type) {
+		if (type == null) {
+			throw new InvalidValueException("null type");
+		}
 		return new TypeValueImpl(type);
 	}
 
@@ -553,6 +554,9 @@ public abstract class ValuesUtil
 		}
 		else if (value instanceof Value) {
 			return ((Value) value).getTypeId().getDisplayName();
+		}
+		else if (value == null) {
+			return TypeId.OCL_VOID_NAME;
 		}
 		return "Object";
 	}
@@ -658,7 +662,7 @@ public abstract class ValuesUtil
 	}
 
 	public static boolean isNull(@Nullable Object value) {
-		return (value instanceof NullValue) && !(value instanceof InvalidValue);
+		return (value == null) || ((value instanceof NullValue) && !(value instanceof InvalidValue));
 	}
 
 	public static boolean isTrue(@Nullable Object value) {
@@ -777,6 +781,9 @@ public abstract class ValuesUtil
 		else if (value != null) {
 			s.append(value.toString());		// FIXME limit
 		}
+		else {
+			s.append(NULL_STRING);		// FIXME limit
+		}
 	}
 
 /*	public static @NonNull TypeId typeIdOf(@NonNull Object value) {
@@ -815,9 +822,9 @@ public abstract class ValuesUtil
 		return type;
 	} */
 
-	public static @NonNull Object valueOf(@Nullable Object object) {
+	public static @Nullable Object valueOf(@Nullable Object object) {
 		if (object == null) {
-			return ValuesUtil.NULL_VALUE;
+			return null; //ValuesUtil.NULL_VALUE;
 		}
 		else if (object instanceof Value) {
 			return object;
@@ -869,7 +876,7 @@ public abstract class ValuesUtil
 		return createObjectValue(object);
 	}
 
-	public static @NonNull Object valueOf(@NonNull Object eValue, @Nullable EClassifier eClassifier) {
+	public static @Nullable Object valueOf(@NonNull Object eValue, @Nullable EClassifier eClassifier) {
 		if (eValue instanceof Value) {
 			return eValue;		
 		}
@@ -890,7 +897,7 @@ public abstract class ValuesUtil
 		}
 	}
 
-	public static @NonNull Object valueOf(@NonNull Object eValue, @NonNull ETypedElement eFeature, @Nullable TypeId typeId) {
+	public static @Nullable Object valueOf(@NonNull Object eValue, @NonNull ETypedElement eFeature, @Nullable TypeId typeId) {
 		EClassifier eClassifier = eFeature.getEType();
 		if (typeId instanceof CollectionTypeId) {
 			Collection<?> eValues = (Collection<?>) eValue;

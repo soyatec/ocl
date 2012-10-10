@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -37,10 +38,10 @@ public class RangeOrderedSetValueImpl extends OrderedSetValueImpl
 		super(typeId, range);
 	}
 
-	public @NonNull OrderedSetValue append(@NonNull Object value) {
+	public @NonNull OrderedSetValue append(@Nullable Object value) {
 		IntegerRange theElements = getElements();
 		IntegerValue nextValue = theElements.getLast().add(ONE_VALUE);
-		if (value.equals(nextValue)) {
+		if (nextValue.equals(value)) {
 			IntegerRange range = createRange(theElements.getFirst(), nextValue);
 			return new RangeOrderedSetValueImpl(getTypeId(), range);
 		}
@@ -52,7 +53,7 @@ public class RangeOrderedSetValueImpl extends OrderedSetValueImpl
 	}
 
 	@Override
-	public @NonNull IntegerValue count(@NonNull Object value) {
+	public @NonNull IntegerValue count(@Nullable Object value) {
 		IntegerValue integerValue = ValuesUtil.isIntegerValue(value);
 		if (integerValue != null) {
 			if (elements.contains(integerValue)) {
@@ -81,7 +82,7 @@ public class RangeOrderedSetValueImpl extends OrderedSetValueImpl
 		}
 	}
 
-	public @NonNull Value first() {
+	public @Nullable Value first() {
 		return getElements().getFirst();
 	}
 
@@ -106,18 +107,18 @@ public class RangeOrderedSetValueImpl extends OrderedSetValueImpl
 //		return type;
 //	}
 
-	public @NonNull OrderedSetValue including(@NonNull Object value) {
+	public @NonNull OrderedSetValue including(@Nullable Object value) {
 		return append(value);
 	}
 
-	public @NonNull Value last() {
+	public @Nullable Value last() {
 		return getElements().getLast();
 	}
 
-	public @NonNull OrderedSetValue prepend(@NonNull Object value) {
+	public @NonNull OrderedSetValue prepend(@Nullable Object value) {
 		IntegerRange theElements = getElements();
 		IntegerValue previousValue = theElements.getFirst().subtract(ONE_VALUE);
-		if (value.equals(previousValue)) {
+		if (previousValue.equals(value)) {
 			IntegerRange range = createRange(previousValue, theElements.getLast());
 			return new RangeOrderedSetValueImpl(getTypeId(), range);
 		}

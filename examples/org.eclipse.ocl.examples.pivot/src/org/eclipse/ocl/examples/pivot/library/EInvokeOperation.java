@@ -44,7 +44,7 @@ public class EInvokeOperation extends AbstractPolyOperation
 		}
 	}
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @NonNull Object sourceValue,
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue,
 			Object... argumentValues) {
 		EObject eObject = asNavigableObject(sourceValue);
 		BasicEList<Object> arguments = new BasicEList<Object>();
@@ -62,7 +62,7 @@ public class EInvokeOperation extends AbstractPolyOperation
 		}
 	}
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 		EObject eObject = asNavigableObject(sourceValue);
 		BasicEList<Object> arguments = new BasicEList<Object>();
 		try {
@@ -73,8 +73,8 @@ public class EInvokeOperation extends AbstractPolyOperation
 		}
 	}
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue,
-			@NonNull Object argumentValue) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue,
+			@Nullable Object argumentValue) {
 		EObject eObject = asNavigableObject(sourceValue);
 		BasicEList<Object> arguments = new BasicEList<Object>();
 		arguments.add(asObject(argumentValue));
@@ -86,8 +86,8 @@ public class EInvokeOperation extends AbstractPolyOperation
 		}
 	}
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue,
-			@NonNull Object firstArgumentValue, @NonNull Object secondArgumentValue) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue,
+			@Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		EObject eObject = asNavigableObject(sourceValue);
 		BasicEList<Object> arguments = new BasicEList<Object>();
 		arguments.add(asObject(firstArgumentValue));
@@ -100,7 +100,7 @@ public class EInvokeOperation extends AbstractPolyOperation
 		}
 	}
 
-	protected @NonNull Object getResultValue(@NonNull TypeId returnTypeId, Object eResult) {
+	protected @Nullable Object getResultValue(@NonNull TypeId returnTypeId, @Nullable Object eResult) {
 		if (returnTypeId instanceof CollectionTypeId) {
 			if (eResult instanceof Iterable<?>) {
 				return createCollectionValue((CollectionTypeId)returnTypeId, (Iterable<?>)eResult);
@@ -113,7 +113,7 @@ public class EInvokeOperation extends AbstractPolyOperation
 			return valueOf(eResult, eType);
 		}
 		else {
-			return NULL_VALUE;
+			return null;
 		}
 	}
 }

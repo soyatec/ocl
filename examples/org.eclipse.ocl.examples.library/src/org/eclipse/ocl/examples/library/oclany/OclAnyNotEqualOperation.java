@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.oclany;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -34,7 +35,7 @@ public class OclAnyNotEqualOperation extends OclAnyEqualOperation
 	public static final @NonNull OclAnyNotEqualOperation INSTANCE = new OclAnyNotEqualOperation();
 
 	@Override
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object left, @NonNull Object right) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		Object equals = super.evaluate(evaluator, returnTypeId, left, right);
 		if (equals == Boolean.FALSE) {
 			return TRUE_VALUE;

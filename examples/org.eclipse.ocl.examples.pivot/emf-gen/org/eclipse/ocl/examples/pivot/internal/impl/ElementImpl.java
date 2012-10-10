@@ -178,8 +178,9 @@ public abstract class ElementImpl
 		final @NonNull TypeId T_OclElement = OCLstdlibTables.Types._OclElement.getTypeId();
 		final @NonNull CollectionTypeId T_Set_OclElement_ = TypeId.SET.getSpecializedId(T_OclElement);
 		
-		final @NonNull Object result = ElementBodies._allOwnedElements_body_.INSTANCE.evaluate(evaluator, T_Set_OclElement_, this);
-		return (EList<Element>)((Value)result).asEcoreObject();
+		final Object result = ElementBodies._allOwnedElements_body_.INSTANCE.evaluate(evaluator, T_Set_OclElement_, this);
+		final org.eclipse.emf.common.util.EList<org.eclipse.ocl.examples.pivot.Element> ecoreResult = (org.eclipse.emf.common.util.EList<org.eclipse.ocl.examples.pivot.Element>)(result != null ? ((Value)result).asEcoreObject() : null);
+		return ecoreResult;
 		
 		
 	}
@@ -197,8 +198,9 @@ public abstract class ElementImpl
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull TypeId T_OclVoid = OCLstdlibTables.Types._OclVoid.getTypeId();
 		
-		final @NonNull Object result = ElementBodies._getValue_body_.INSTANCE.evaluate(evaluator, T_OclVoid, this, ValuesUtil.valueOf(stereotype), ValuesUtil.valueOf(propertyName));
-		return (Element)result;
+		final Object result = ElementBodies._getValue_body_.INSTANCE.evaluate(evaluator, T_OclVoid, this, ValuesUtil.valueOf(stereotype), ValuesUtil.valueOf(propertyName));
+		final org.eclipse.ocl.examples.pivot.Element ecoreResult = (org.eclipse.ocl.examples.pivot.Element)result;
+		return ecoreResult;
 		
 		
 	}
@@ -216,7 +218,7 @@ public abstract class ElementImpl
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		
-		final @NonNull Object result = ElementBodies._invariant_not_own_self.INSTANCE.evaluate(evaluator, T_Boolean, this);
+		final Object result = ElementBodies._invariant_not_own_self.INSTANCE.evaluate(evaluator, T_Boolean, this);
 		final boolean resultIsNull = ValuesUtil.isNull(result);
 		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 			return true;

@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.numeric;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -29,7 +30,7 @@ public class NumericModOperation extends AbstractNumericBinaryOperation
 	public static final @NonNull NumericModOperation INSTANCE = new NumericModOperation();
 
 	@Override
-	protected @NonNull Value evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) {
+	protected @Nullable Value evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) {
 		return left.mod(right);
 	}
 }

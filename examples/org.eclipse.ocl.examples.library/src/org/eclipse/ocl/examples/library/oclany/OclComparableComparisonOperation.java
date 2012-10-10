@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.oclany;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
@@ -33,7 +34,7 @@ import org.eclipse.ocl.examples.library.LibraryConstants;
  */
 public abstract class OclComparableComparisonOperation extends AbstractBinaryOperation
 {
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object left, @NonNull Object right) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 		DomainInheritance leftType = evaluator.getStaticTypeOf(left).getInheritance(standardLibrary);
 		DomainInheritance rightType = evaluator.getStaticTypeOf(right).getInheritance(standardLibrary);
@@ -56,7 +57,7 @@ public abstract class OclComparableComparisonOperation extends AbstractBinaryOpe
 			return getResultValue(intComparison) != false;			// FIXME redundant test to suppress warning
 		}
 		else {
-			throw new InvalidValueException("Unsupported compareTo for ''{0}''", left.getClass().getName()); //$NON-NLS-1$
+			throw new InvalidValueException("Unsupported compareTo for ''{0}''", left != null ? left.getClass().getName() : NULL_STRING); //$NON-NLS-1$
 		}
 	}
 

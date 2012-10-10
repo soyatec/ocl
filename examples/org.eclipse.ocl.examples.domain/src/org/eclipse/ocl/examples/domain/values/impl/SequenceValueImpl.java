@@ -24,10 +24,11 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
@@ -64,7 +65,7 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
         return this;
     }
 
-    public @NonNull SequenceValue append(@NonNull Object object) {
+    public @NonNull SequenceValue append(@Nullable Object object) {
 		if (object instanceof InvalidValue) {
 			throw new InvalidValueException(EvaluatorMessages.InvalidSource, "append");
 		}
@@ -73,12 +74,12 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
         return createSequenceValue(getTypeId(), result);
     }
 
-    public @NonNull Object at(int index) {
+    public @Nullable Object at(int index) {
         index = index - 1;        
         if (index < 0 || elements.size() <= index) {
         	throw new InvalidValueException(EvaluatorMessages.IndexOutOfRange, index + 1, size());
 		}        
-        return DomainUtil.nonNullState(getElements().get(index));
+        return getElements().get(index);
     }
 
 	@Override
@@ -98,11 +99,20 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 		return !theseElements.hasNext() && !thoseElements.hasNext();
 	}
 
-	public @NonNull SequenceValue excluding(@NonNull Object value) {
+	public @NonNull SequenceValue excluding(@Nullable Object value) {
 		List<Object> result = new ArrayList<Object>();
-		for (Object element : elements) {
-			if (!element.equals(value)) {
-				result.add(element);
+		if (value == null) {
+			for (Object element : elements) {
+				if (element != null) {
+					result.add(element);
+				}
+			}
+		}
+		else {
+			for (Object element : elements) {
+				if (!value.equals(element)) {
+					result.add(element);
+				}
 			}
 		}
 		if (result.size() < elements.size()) {
@@ -113,11 +123,11 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 		}
 	}
 
-    public @NonNull Object first() {
+    public @Nullable Object first() {
         if (elements.size() <= 0) {
-        	throw new InvalidValueException(EvaluatorMessages.EmptyCollection, "Sequence", "first");
+        	throw new InvalidValueException(EvaluatorMessages.EmptyCollection, TypeId.SEQUENCE_NAME, "first");
         }
-        return DomainUtil.nonNullState(getElements().get(0));
+        return getElements().get(0);
     }
 
     public @NonNull SequenceValue flatten() {
@@ -141,10 +151,10 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 	}
 	
 	public @NonNull String getKind() {
-	    return "Sequence";
+	    return TypeId.SEQUENCE_NAME;
 	}
 	   
-	public @NonNull SequenceValue including(@NonNull Object value) {
+	public @NonNull SequenceValue including(@Nullable Object value) {
 		if (value instanceof InvalidValue) {
 			throw new InvalidValueException(EvaluatorMessages.InvalidSource, "including");
 		}
@@ -153,7 +163,7 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 		return createSequenceValue(getTypeId(), result);
 	}
 
-    public @NonNull IntegerValue indexOf(@NonNull Object object) {
+    public @NonNull IntegerValue indexOf(@Nullable Object object) {
         int index = getElements().indexOf(object);
         if (index < 0) {
         	throw new InvalidValueException(EvaluatorMessages.MissingValue, "indexOf");
@@ -161,7 +171,7 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
     	return ValuesUtil.integerValueOf(index+1);
     }
 
-    public @NonNull SequenceValue insertAt(int index, @NonNull Object object) {
+    public @NonNull SequenceValue insertAt(int index, @Nullable Object object) {
 		if (object instanceof InvalidValue) {
 			throw new InvalidValueException(EvaluatorMessages.InvalidSource, "insertAt");
 		}
@@ -182,15 +192,15 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 		return false;
 	}
    
-    public @NonNull Object last() {
+    public @Nullable Object last() {
         int size = elements.size();
 		if (size <= 0) {
-			throw new InvalidValueException(EvaluatorMessages.EmptyCollection, "Sequence", "last");
+			throw new InvalidValueException(EvaluatorMessages.EmptyCollection, TypeId.SEQUENCE_NAME, "last");
         }
-        return DomainUtil.nonNullState(getElements().get(size-1));
+        return getElements().get(size-1);
     }
     
-    public @NonNull SequenceValue prepend(@NonNull Object object) {
+    public @NonNull SequenceValue prepend(@Nullable Object object) {
 		if (object instanceof InvalidValue) {
 			throw new InvalidValueException(EvaluatorMessages.InvalidSource, "prepend");
 		}
@@ -258,7 +268,7 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 
 	@Override
 	public void toString(@NonNull StringBuilder s, int lengthLimit) {
-		s.append("Sequence");
+		s.append(TypeId.SEQUENCE_NAME);
 		super.toString(s, lengthLimit);
 	}
 }

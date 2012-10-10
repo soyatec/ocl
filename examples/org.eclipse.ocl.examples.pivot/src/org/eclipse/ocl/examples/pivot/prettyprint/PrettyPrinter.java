@@ -65,7 +65,7 @@ public class PrettyPrinter
 	@SuppressWarnings("null")
 	public static @NonNull List<String> reservedNameList = Arrays.asList("and", "else", "endif", "false", "if", "implies", "in", "invalid", "let", "not", "null", "or", "self", "then", "true", "xor");
 	@SuppressWarnings("null")
-	public static @NonNull List<String> restrictedNameList = Arrays.asList("Bag", TypeId.BOOLEAN_NAME, "Collection", TypeId.INTEGER_NAME, "OclAny", "OclInvalid", "OclVoid", "OrderedSet", TypeId.REAL_NAME, "Sequence", "Set", TypeId.STRING_NAME, "Tuple", TypeId.UNLIMITED_NATURAL_NAME);
+	public static @NonNull List<String> restrictedNameList = Arrays.asList(TypeId.BAG_NAME, TypeId.BOOLEAN_NAME, "Collection", TypeId.INTEGER_NAME, TypeId.OCL_ANY_NAME, TypeId.OCL_INVALID_NAME, TypeId.OCL_VOID_NAME, TypeId.ORDERED_SET_NAME, TypeId.REAL_NAME, TypeId.SEQUENCE_NAME, TypeId.SET_NAME, TypeId.STRING_NAME, "Tuple", TypeId.UNLIMITED_NATURAL_NAME);
 
 	public static interface Factory
 	{
@@ -620,18 +620,18 @@ public class PrettyPrinter
 //		if (upper != 1) {
 //			if (object.isOrdered()) {
 //				if (object.isUnique()) {
-//					append("OrderedSet");
+//					append(TypeId.ORDERED_SET_NAME);
 //				}
 //				else {
-//					append("Sequence");
+//					append(TypeId.SEQUENCE_NAME);
 //				}
 //			}
 //			else {
 //				if (object.isUnique()) {
-//					append("Set");
+//					append(TypeId.SET_NAME);
 //				}
 //				else {
-//					append("Bag");
+//					append(TypeId.BAG_NAME);
 //				}
 //			}
 //			append("(");

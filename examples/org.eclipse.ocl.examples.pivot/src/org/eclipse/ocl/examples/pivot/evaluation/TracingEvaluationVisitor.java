@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
@@ -76,15 +77,15 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
 		return new TracingEvaluationVisitor(super.createNestedEvaluator());
 	}
 
-	public @NonNull Object evaluate(@NonNull DomainExpression body) {
+	public @Nullable Object evaluate(@NonNull DomainExpression body) {
 		return getDelegate().evaluate(body);
 	}
 
-	public @NonNull Object evaluate(@NonNull ExpressionInOCL expressionInOCL) {
+	public @Nullable Object evaluate(@NonNull ExpressionInOCL expressionInOCL) {
 		return getDelegate().evaluate(expressionInOCL);
 	}
 
-	public @NonNull DomainType getDynamicTypeOf(@NonNull Object value) {
+	public @NonNull DomainType getDynamicTypeOf(@Nullable Object value) {
 		return getDelegate().getDynamicTypeOf(value);
 	}
 	
@@ -104,15 +105,15 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
 		return getDelegate().getStandardLibrary();
 	}
 
-	public @NonNull DomainType getStaticTypeOf(@NonNull Object value) {
+	public @NonNull DomainType getStaticTypeOf(@Nullable Object value) {
 		return getDelegate().getStaticTypeOf(value);
 	}
 
-	public @NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Object... values) {
+	public @NonNull DomainType getStaticTypeOf(@Nullable Object value, @NonNull Object... values) {
 		return getDelegate().getStaticTypeOf(value, values);
 	}
 
-	public @NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Iterable<?> values) {
+	public @NonNull DomainType getStaticTypeOf(@Nullable Object value, @NonNull Iterable<?> values) {
 		return getDelegate().getStaticTypeOf(value, values);
 	}
 
@@ -136,7 +137,7 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
         try {
             PivotPlugin.trace("Evaluate: " + expression); //$NON-NLS-1$
             PivotPlugin.trace("Result  : " + //$NON-NLS-1$
-                (value != null ? "OclInvalid" : String.valueOf(value))); //$NON-NLS-1$
+                (value != null ? TypeId.OCL_INVALID_NAME : String.valueOf(value))); //$NON-NLS-1$
         } catch (Exception e) {
             // tracing must not interfere with evaluation
         }

@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.pivot.AnyType;
@@ -250,7 +251,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 			if (parm.getType() != null) {
 				appendName(parm.getType());
 			} else {
-				append("OclVoid"); //$NON-NLS-1$
+				append(TypeId.OCL_VOID_NAME); //$NON-NLS-1$
 			}
 		}
 
@@ -845,7 +846,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 //			boolean isOrdered = parameter.isOrdered();
 //			boolean isUnique = parameter.isUnique();
 //			if (isMany) {
-//				append(isOrdered ? isUnique ? "OrderedSet" : "Sequence" : isUnique ? "Set" : "Bag");
+//				append(isOrdered ? isUnique ? TypeId.ORDERED_SET_NAME : TypeId.SEQUENCE_NAME : isUnique ? TypeId.SET_NAME : TypeId.BAG_NAME);
 //				append("(");
 //			}
 			appendQualifiedName(type);

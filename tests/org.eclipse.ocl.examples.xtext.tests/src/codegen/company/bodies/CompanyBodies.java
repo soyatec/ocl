@@ -133,7 +133,7 @@ public class CompanyBodies
 			Object A_symbol__10;
 			while (true) {
 				if (!A_symbol__10_iteratorVal.hasNext()) {
-					A_symbol__10 = NULL_VALUE;
+					A_symbol__10 = null;
 					
 					break;
 				}

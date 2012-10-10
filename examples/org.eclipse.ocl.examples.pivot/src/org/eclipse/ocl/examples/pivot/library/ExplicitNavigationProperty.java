@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -35,7 +36,7 @@ public class ExplicitNavigationProperty extends AbstractProperty
 {
 	private EStructuralFeature eFeature = null;
 	
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull DomainProperty property) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @NonNull DomainProperty property) {
 		EObject eObject = asNavigableObject(sourceValue); 
 		EStructuralFeature eFeature2 = eFeature;
 		if (eFeature2 == null) {
@@ -57,6 +58,6 @@ public class ExplicitNavigationProperty extends AbstractProperty
 			}
 			
 		}
-		return NULL_VALUE;
+		return null;
 	}
 }

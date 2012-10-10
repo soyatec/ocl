@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.numeric;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
@@ -30,17 +31,17 @@ public class NumericMinOperation extends AbstractNumericBinaryOperation
 	public static final @NonNull NumericMinOperation INSTANCE = new NumericMinOperation();
 
 	@Override
-	protected @NonNull Value evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) {
+	protected @Nullable Value evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) {
 		return left.min(right);
 	}
 
 	@Override
-	protected @NonNull Value evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) {
+	protected @Nullable Value evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) {
 		return left.min(right);
 	}
 
 	@Override
-	protected @NonNull Object evaluateUnlimited(@NonNull DomainEvaluator evaluator, @NonNull Object left, @NonNull Object right) {
+	protected @Nullable Object evaluateUnlimited(@NonNull DomainEvaluator evaluator, @Nullable Object left, @Nullable Object right) {
 		Value leftValue = asUnlimitedNaturalValue(left);
 		Value rightValue = asUnlimitedNaturalValue(right);
 		return isUnlimited(right) ? leftValue : rightValue;

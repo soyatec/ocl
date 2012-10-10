@@ -580,9 +580,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	protected Object assertQueryNull(Object context, String expression) {
 		try {
 			Object value = evaluate(helper, context, expression);
-			if (!ValuesUtil.isNull(value)) {
-				assertEquals(expression, ValuesUtil.NULL_VALUE, value);
-			}
+			assertNull(expression, value);
 			return value;
 		} catch (Exception e) {
 			failOn(expression, e);
@@ -1149,7 +1147,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	}
 	
 	protected Object getNull() {
-		return ValuesUtil.NULL_VALUE;
+		return null;
 	}
 	
 	protected DomainStandardLibrary getOCLStandardLibrary() {

@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.library.enumeration;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
@@ -36,7 +37,7 @@ public class EnumerationOwnedLiteralProperty extends AbstractProperty
 {
 	public static final @NonNull EnumerationOwnedLiteralProperty INSTANCE = new EnumerationOwnedLiteralProperty();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull DomainProperty property) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @NonNull DomainProperty property) {
 		DomainType sourceType = asType(sourceValue);
 		Set<Object> results = new OrderedSetImpl<Object>();
 		for (DomainElement instance : ((DomainEnumeration)sourceType).getEnumerationLiterals()) {

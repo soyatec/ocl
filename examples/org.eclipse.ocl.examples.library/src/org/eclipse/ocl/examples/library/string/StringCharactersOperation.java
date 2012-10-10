@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -32,7 +33,7 @@ public class StringCharactersOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull StringCharactersOperation INSTANCE = new StringCharactersOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		String sourceString = asString(sourceVal);
 		List<Object> results = new ArrayList<Object>(sourceString.length());
 		for (int i = 0; i < sourceString.length(); i++) {

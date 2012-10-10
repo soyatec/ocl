@@ -43,12 +43,12 @@ public class EObjectProperty extends AbstractProperty
 		this.specification = specification;
 	}
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull DomainProperty property) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @NonNull DomainProperty property) {
 		Object object = asObject(sourceValue);
 		if (!(object instanceof EObject)) {
 			return createInvalidValue("non-EObject");
 		}
 		Object eValue = ((EObject)object).eGet(eFeature);
-		return eValue != null ? valueOf(eValue, eFeature, returnTypeId) : NULL_VALUE;
+		return eValue != null ? valueOf(eValue, eFeature, returnTypeId) : null;
 	}
 }

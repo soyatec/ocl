@@ -21,10 +21,12 @@
 package org.eclipse.ocl.examples.pivot.bodies;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.pivot.Type;
 
 /**
  * TypeBodies provides the Java implementation bodies of OCL-defined Type operations and properties.
@@ -39,11 +41,14 @@ public class TypeBodies
 	public static class _resolveSelfType_body_ extends AbstractBinaryOperation
 	{
 		public static @NonNull _resolveSelfType_body_ INSTANCE = new _resolveSelfType_body_();
+		
 	
 		/*
 		self
 		*/
-		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self, final @NonNull Object selfType) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self, final @Nullable Object selfType) throws InvalidValueException {
+			assert self != null;
+			final @NonNull Type unboxed_self = (Type)self;
 			
 			
 			return self;

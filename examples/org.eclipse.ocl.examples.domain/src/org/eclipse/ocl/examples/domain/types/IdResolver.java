@@ -37,7 +37,6 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.ids.UnspecifiedId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 
 public class IdResolver implements IdVisitor<DomainElement>
@@ -101,11 +100,8 @@ public class IdResolver implements IdVisitor<DomainElement>
 		}
 	}
 	
-	public @NonNull DomainType getDynamicTypeOf(@NonNull Object value) {
-		if (value instanceof NullValue) {
-			return getType(((Value)value).getTypeId(), null);
-		}
-		else if (value instanceof CollectionValue) {
+	public @NonNull DomainType getDynamicTypeOf(@Nullable Object value) {
+		if (value instanceof CollectionValue) {
 			CollectionValue collectionValue = (CollectionValue) value;
 			DomainType elementType = getDynamicTypeOf(collectionValue.iterable());
 			CollectionTypeId collectedId = collectionValue.getTypeId();
@@ -155,7 +151,7 @@ public class IdResolver implements IdVisitor<DomainElement>
 		return elementType;
 	}
 
-	public @NonNull DomainType getStaticTypeOf(@NonNull Object value) {
+	public @NonNull DomainType getStaticTypeOf(@Nullable Object value) {
 		/*if (value instanceof DomainType) {
 			DomainType type = (DomainType) id2element.get(value);
 			if (type == null) {
@@ -186,6 +182,9 @@ public class IdResolver implements IdVisitor<DomainElement>
 			}
 			return type;
 		}
+		else if (value == null) {
+			return standardLibrary.getOclVoidType();
+		}
 		else {
 			Class<?> jClass = value.getClass();
 			assert jClass != null;
@@ -207,14 +206,13 @@ public class IdResolver implements IdVisitor<DomainElement>
 		return new DomainInvalidTypeImpl(standardLibrary, DomainUtil.bind("Unsupported Object", value));
 	}
 
-	public @NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Object... values) {
+	public @NonNull DomainType getStaticTypeOf(@Nullable Object value, Object... values) {
 		Object bestTypeId = getTypeKeyOf(value);
 		DomainType bestType = key2type.get(bestTypeId);
 		assert bestType != null;
 		Collection<Object> assessedTypeKeys = null;
 		int count = 0;
 		for (Object anotherValue : values) {
-			assert anotherValue != null;
 			Object anotherTypeId = getTypeKeyOf(anotherValue);
 			if ((assessedTypeKeys == null) ? (anotherTypeId != bestTypeId) : !assessedTypeKeys.contains(anotherTypeId)) {
 				DomainType anotherType = key2type.get(anotherTypeId);
@@ -235,7 +233,7 @@ public class IdResolver implements IdVisitor<DomainElement>
 		return bestType;
 	}
 
-	public @NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Iterable<?> values) {
+	public @NonNull DomainType getStaticTypeOf(@Nullable Object value, @NonNull Iterable<?> values) {
 		Object bestTypeKey = getTypeKeyOf(value);
 		DomainType bestType = key2type.get(bestTypeKey);
 		assert bestType != null;
@@ -269,7 +267,7 @@ public class IdResolver implements IdVisitor<DomainElement>
 		return (DomainType)type;
 	}
 
-	private @NonNull Object getTypeKeyOf(@NonNull Object value) {
+	private @NonNull Object getTypeKeyOf(@Nullable Object value) {
 		/*if (value instanceof DomainType) {
 			DomainType type = (DomainType) id2element.get(value);
 			if (type == null) {
@@ -298,6 +296,11 @@ public class IdResolver implements IdVisitor<DomainElement>
 				assert type != null;
 				key2type.put(typeKey, type);
 			}
+			return typeKey;
+		}
+		else if (value == null) {
+			TypeId typeKey = TypeId.OCL_VOID;			
+			key2type.put(typeKey, standardLibrary.getOclVoidType());
 			return typeKey;
 		}
 		else {

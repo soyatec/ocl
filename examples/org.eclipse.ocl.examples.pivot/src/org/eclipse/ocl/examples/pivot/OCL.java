@@ -440,12 +440,12 @@ public class OCL {
 		if (result instanceof InvalidValue) {
 			return (InvalidValue)result;
 		}
-		else if (result != null) {
+		else { //if (result != null) {
 			return result;
 		}
-		else {
-			throw new InvalidValueException("Java-Null evaluation result");
-		}
+//		else {
+//			throw new InvalidValueException("Java-Null evaluation result");
+//		}
 	}
 
 	/**

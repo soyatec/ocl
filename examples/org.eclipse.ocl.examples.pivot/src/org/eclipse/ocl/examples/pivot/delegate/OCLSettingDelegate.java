@@ -67,10 +67,10 @@ public class OCLSettingDelegate extends BasicSettingDelegate.Stateless
 			}
 			Query query = ocl.createQuery(specification2);
 			Object result = query.evaluate(owner);
-			if (result == null) {
-				String message = NLS.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, property);
-				throw new OCLDelegateException(message);
-			}
+//			if (result == null) {
+//				String message = NLS.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, property);
+//				throw new OCLDelegateException(message);
+//			}
 			return metaModelManager.asEcoreObject(result);
 		}
 		catch (InvalidValueException e) {

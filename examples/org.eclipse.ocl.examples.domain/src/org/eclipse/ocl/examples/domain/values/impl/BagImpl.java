@@ -144,31 +144,30 @@ public class BagImpl<E> extends AbstractCollection<E> implements Bag<E> {
 
 			private Iterator<E> it;
 			private int offset;
+			private int maxOffset;
 			private E curr;
 			
 			public MyIterator() {
 				it = coll.keySet().iterator();
 				offset = 0;
-				curr = null;
+				maxOffset = 0;
 			}
 
 			public boolean hasNext() {
-				if (it.hasNext())
-					return true;
-				MutableInteger count = coll.get(curr);
-				return curr != null && offset < count.i - 1;
+				return (offset < maxOffset) || it.hasNext();
 			}
 
 			public E next() {
-				if (!hasNext())
-					throw new NoSuchElementException();
-				MutableInteger count = coll.get(curr);
-				if (count != null && offset < count.i - 1) {
+				if (offset < maxOffset) {
 					offset++;
 					return curr;
 				}
+				if (!it.hasNext())
+					throw new NoSuchElementException();
 				curr = it.next();
+				MutableInteger count = coll.get(curr);
 				offset = 0;
+				maxOffset = count.i - 1;
 				return curr;
 			}
 

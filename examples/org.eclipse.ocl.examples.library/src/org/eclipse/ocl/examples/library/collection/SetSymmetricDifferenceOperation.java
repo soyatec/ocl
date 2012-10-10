@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.collection;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
@@ -29,7 +30,7 @@ public class SetSymmetricDifferenceOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull SetSymmetricDifferenceOperation INSTANCE = new SetSymmetricDifferenceOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object left, @NonNull Object right) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		UniqueCollectionValue leftValue = asUniqueCollectionValue(left);
 		UniqueCollectionValue rightValue = asUniqueCollectionValue(right);
 		return leftValue.symmetricDifference(rightValue);

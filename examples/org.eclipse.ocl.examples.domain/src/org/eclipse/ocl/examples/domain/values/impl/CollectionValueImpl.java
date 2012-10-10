@@ -37,6 +37,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
@@ -73,7 +74,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	
 	private boolean checkElementsAreValues(Iterable<? extends Object> elements) {
 		for (Object element : elements) {
-			assert element != null;
+			assert !(element instanceof NullValue);
 			assert !(element instanceof Number);
 			assert !(element instanceof DomainEnumerationLiteral);
 			assert !(element instanceof DomainType);
@@ -156,13 +157,22 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
      * @return the number of occurrences of the object in the collection
      * @throws InvalidValueException 
      */
-    public @NonNull IntegerValue count(@NonNull Object value) {
+    public @NonNull IntegerValue count(@Nullable Object value) {
         long count = 0;
-        for (Object next : elements) {
-            if (next.equals(value)) {
-                count++;
-            }
-        } 
+        if (value == null) {
+	        for (Object next : elements) {
+	            if (next == null) {
+	                count++;
+	            }
+	        } 
+        }
+        else {
+	        for (Object next : elements) {
+	            if (value.equals(next)) {
+	                count++;
+	            }
+	        } 
+        }
 	    return ValuesUtil.integerValueOf(count);
     }
 
@@ -175,12 +185,21 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
      * @param object an object
      * @return whether the collection does not include the object
      */
-    public @NonNull Object excludes(@NonNull Object value) {
-        for (Object next : elements) {
-            if (next.equals(value)) {
-            	return false;
-            }
-        } 
+    public @NonNull Object excludes(@Nullable Object value) {
+        if (value == null) {
+	        for (Object next : elements) {
+	            if (next == null) {
+	            	return false;
+	            }
+	        } 
+        }
+        else {
+	        for (Object next : elements) {
+	            if (value.equals(next)) {
+	            	return false;
+	            }
+	        } 
+        }
         return true;
     }
 
@@ -196,11 +215,20 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
      */
     public @NonNull Object excludesAll(@NonNull CollectionValue c) {
         for (Object e1 : elements) {
-	        for (Object e2 : c.iterable()) {
-	            if (e1.equals(e2)) {
-	            	return false;
+            if (e1 == null) {
+            	for (Object e2 : c.iterable()) {
+		            if (e2 == null) {
+		            	return false;
+		            }
 	            }
 	        } 
+	        else {
+            	for (Object e2 : c.iterable()) {
+		            if (e1.equals(e2)) {
+		            	return false;
+		            }
+            	}
+	        }
         } 
         return true;
     }
@@ -319,7 +347,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		return elements.hashCode();
 	}
 
-    public @NonNull Object includes(@NonNull Object value) {
+    public @NonNull Object includes(@Nullable Object value) {
 		return elements.contains(value) != false;			// FIXME redundant test to suppress warning
     }
 
@@ -336,12 +364,22 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
     public @NonNull Object includesAll(@NonNull CollectionValue c) {
         for (Object e1 : c.iterable()) {
         	boolean gotIt = false;
-	        for (Object e2 : elements) {
-	            if (e1.equals(e2)) {
-	            	gotIt = true;
-	            	break;
-	            }
-	        } 
+        	if (e1 == null) {
+		        for (Object e2 : elements) {
+		            if (e2 == null) {
+		            	gotIt = true;
+		            	break;
+		            }
+		        }
+        	}
+        	else {
+		        for (Object e2 : elements) {
+		            if (e1.equals(e2)) {
+		            	gotIt = true;
+		            	break;
+		            }
+		        }
+        	}
         	if (!gotIt) {
         		return false;
         	}
@@ -393,13 +431,8 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
     public @NonNull Set<TupleValue> product(@NonNull CollectionValue c, @NonNull TupleTypeId tupleTypeId) {   	
     	Set<TupleValue> result = new HashSet<TupleValue>();		
         for (Object next1 : iterable()) {
-        	if (next1 != null) {
-         		for (Object next2 : c.iterable()) {
-    				if (next2 != null) {
-    					assert next1 != null;
-    					result.add(new TupleValueImpl(tupleTypeId, next1, next2));
-    				}
-        		}
+         	for (Object next2 : c.iterable()) {
+    			result.add(new TupleValueImpl(tupleTypeId, next1, next2));
         	}
         }
         return result;

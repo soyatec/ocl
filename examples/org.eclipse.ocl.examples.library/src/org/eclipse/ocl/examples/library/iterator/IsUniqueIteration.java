@@ -46,6 +46,7 @@ public class IsUniqueIteration extends AbstractIteration
 	@Override
     protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
 		CollectionValue.Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
+		assert accumulatorValue != null;
 		Object bodyVal = iterationManager.evaluateBody();		
 		assert !(bodyVal instanceof InvalidValue);
 		if (ValuesUtil.isTrue(accumulatorValue.includes(bodyVal))) {

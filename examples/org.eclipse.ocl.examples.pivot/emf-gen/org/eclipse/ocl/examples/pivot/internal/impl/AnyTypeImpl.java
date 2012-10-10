@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -74,6 +75,11 @@ public class AnyTypeImpl
 
 	@Override
 	public @NonNull TypeId computeId() {
-		return TypeId.OCL_ANY;
+		if (TypeId.OCL_ANY_NAME.equals(name)) {
+			return TypeId.OCL_ANY;
+		}
+		else {
+			return IdManager.INSTANCE.getPrimitiveTypeId(name);		// e.g. the orphan $$ type
+		}
 	}
 } //AnyTypeImpl

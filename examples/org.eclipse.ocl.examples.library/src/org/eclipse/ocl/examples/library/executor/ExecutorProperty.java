@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.executor;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
@@ -79,7 +80,7 @@ public class ExecutorProperty implements DomainProperty
 		return false;								// WIP FIXME
 	}
 
-	public void setValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull ObjectValue objectValue, @NonNull Object propertyValue) {
+	public void setValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull ObjectValue objectValue, @Nullable Object propertyValue) {
 		throw new UnsupportedOperationException();
 	}
 	

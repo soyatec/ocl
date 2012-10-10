@@ -123,7 +123,7 @@ public class SortedByIteration extends AbstractIteration
 			return typeId;
 		}
 
-		public void put(@NonNull Object iterVal, @NonNull Object comparable) {
+		public void put(@Nullable Object iterVal, @Nullable Object comparable) {
 			if (content.put(iterVal, comparable) != null) {
 				if (!isUnique) {
 					if (repeatCounts == null) {
@@ -165,6 +165,7 @@ public class SortedByIteration extends AbstractIteration
 	@Override
 	protected @NonNull Object resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
 		SortingValue accumulatorValue = (SortingValue) iterationManager.getAccumulatorValue();
+		assert accumulatorValue != null;
 		return accumulatorValue.createSortedValue();
 	}
 
@@ -176,6 +177,7 @@ public class SortedByIteration extends AbstractIteration
 		}
 		Object iterValue = iterationManager.get();		
 		SortingValue accumulatorValue = (SortingValue) iterationManager.getAccumulatorValue();
+		assert accumulatorValue != null;
 		accumulatorValue.put(iterValue, bodyVal);
 		return null;										// Carry on
 	}

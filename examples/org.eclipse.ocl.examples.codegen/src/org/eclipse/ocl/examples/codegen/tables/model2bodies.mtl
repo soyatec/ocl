@@ -52,6 +52,7 @@
 package [genPackage.getQualifiedBodiesPackageName()/];
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 [prefixImports(knownImports(), genPackage.generateTypeClass(pPackage, pType))/]
 [/file]
 [/let]
@@ -79,10 +80,12 @@ public class [className/]
 [if (expInOcl.contextVariable->notEmpty())]
 [if (false and pConstraint.stereotype = 'body')]
 	public static @NonNull [pOperation.type.name/] [pOperation.name/]([pType.name/] self[for (parameter : Parameter | pOperation.ownedParameter)], [parameter.type.name/] [parameter.name/][/for]) {
+		assert self != null;
+		final @NonNull [pType.getEscapedInterfaceName(genPackage)/] [expInOcl.defineFlag('unboxed_self')/] = ([pType.getEscapedInterfaceName(genPackage)/])self;
 		final @NonNull <%ExecutorManager%> evaluator = new <%EcoreExecutorManager%>(this, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
 		final @NonNull <%DomainStandardLibrary%> standardLibrary = evaluator.getStandardLibrary();
 		@NonNull Library[genPackage.emitOperationArity(pOperation.ownedParameter->size())/] codeGen = [pType.name + '_' + pOperation.name + '_' + pConstraint.stereotype + '_' + pConstraint.name/].INSTANCE;
-		final @NonNull Object result = codeGen.evaluate(evaluator, null, valueOf(self)[for (parameter : Parameter | pOperation.ownedParameter)], valueOf([parameter.name/])[/for]);
+		final Object result = codeGen.evaluate(evaluator, null, valueOf(self)[for (parameter : Parameter | pOperation.ownedParameter)], valueOf([parameter.name/])[/for]);
 		return ([pOperation.type.name/])[if (pOperation.type.isBoxed())]((<%Value%>)result).asEcoreObject()[else]result[/if];
 	}
 
@@ -120,9 +123,11 @@ public static class [className/] extends <%Abstract[genPackage.emitOperationArit
 	/*
 	[expInOcl.prettyPrint().trim()/]
 	*/
-	public @NonNull Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, final @NonNull Object [defineSymbolName(expInOcl.contextVariable, 'self')/][if expInOcl.parameterVariable->notEmpty()]
+	public @Nullable Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, final @Nullable Object [defineSymbolName(expInOcl.contextVariable, 'self')/][if expInOcl.parameterVariable->notEmpty()]
 [for (parameter : Variable | expInOcl.parameterVariable)]
-, final @NonNull Object [defineSymbolName(parameter, parameter.name)/][/for][/if]) throws <%InvalidValueException%> {
+, final @Nullable Object [defineSymbolName(parameter, parameter.name)/][/for][/if]) throws <%InvalidValueException%> {
+		assert self != null;
+		final @NonNull [pType.getEscapedInterfaceName(genPackage)/] [expInOcl.defineFlag('unboxed_self')/] = ([pType.getEscapedInterfaceName(genPackage)/])self;
 		[expInOcl.emitNonStatics(constants)/]
 		[expInOcl.bodyExpression.emitExpression(pType, genPackage, expInOcl)/]
 		return [expInOcl.bodyExpression.symbolName(expInOcl)/];
@@ -132,9 +137,11 @@ public static class [className/] extends <%Abstract[genPackage.emitOperationArit
 	{
 		public static @NonNull [className/] INSTANCE = new [className/]();
 	
-		public @NonNull Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, final @NonNull Object [defineSymbolName(expInOcl.contextVariable, 'self')/][if expInOcl.parameterVariable->notEmpty()]
+		public @Nullable Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, final @Nullable Object [defineSymbolName(expInOcl.contextVariable, 'self')/][if expInOcl.parameterVariable->notEmpty()]
 	[for (parameter : Variable | expInOcl.parameterVariable)]
-	, @NonNull Object [defineSymbolName(parameter, parameter.name)/][/for][/if]) throws <%InvalidValueException%> {
+	, @Nullable Object [defineSymbolName(parameter, parameter.name)/][/for][/if]) throws <%InvalidValueException%> {
+			assert self != null;
+			final @NonNull [pType.getEscapedInterfaceName(genPackage)/] [expInOcl.defineFlag('unboxed_self')/] = ([pType.getEscapedInterfaceName(genPackage)/])self;
 			[expInOcl.messageExpression.emitExpression(pType, genPackage, expInOcl)/]
 			return [expInOcl.messageExpression.symbolName(expInOcl)/];
 		}
@@ -160,9 +167,11 @@ public static class [className/] extends <%Abstract[genPackage.emitOperationArit
 	/*
 	[expInOcl.prettyPrint().trim()/]
 	*/
-	public @NonNull Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, final @NonNull Object [defineSymbolName(expInOcl.contextVariable, 'self')/][if expInOcl.parameterVariable->notEmpty()]
+	public @Nullable Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, final @Nullable Object [defineSymbolName(expInOcl.contextVariable, 'self')/][if expInOcl.parameterVariable->notEmpty()]
 [for (parameter : Variable | expInOcl.parameterVariable)]
-, final @NonNull Object [defineSymbolName(parameter, parameter.name)/][/for][/if]) throws <%InvalidValueException%> {
+, final @Nullable Object [defineSymbolName(parameter, parameter.name)/][/for][/if]) throws <%InvalidValueException%> {
+		assert self != null;
+		final @NonNull [pType.getEscapedInterfaceName(genPackage)/] [expInOcl.defineFlag('unboxed_self')/] = ([pType.getEscapedInterfaceName(genPackage)/])self;
 		[expInOcl.emitNonStatics(constants)/]
 		[expInOcl.bodyExpression.emitExpression(pType, genPackage, expInOcl)/]
 		return [expInOcl.bodyExpression.symbolName(expInOcl)/];
@@ -188,7 +197,9 @@ public static class [className/] extends <%AbstractProperty%>
 	/*
 	[expInOcl.prettyPrint().trim()/]
 	*/
-	public @NonNull Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, final @NonNull Object [defineSymbolName(expInOcl.contextVariable, 'self')/], @NonNull <%DomainProperty%> property) throws <%InvalidValueException%> {
+	public @Nullable Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, final @Nullable Object [defineSymbolName(expInOcl.contextVariable, 'self')/], @NonNull <%DomainProperty%> property) throws <%InvalidValueException%> {
+		assert self != null;
+		final @NonNull [pType.getEscapedInterfaceName(genPackage)/] [expInOcl.defineFlag('unboxed_self')/] = ([pType.getEscapedInterfaceName(genPackage)/])self;
 		[expInOcl.emitNonStatics(constants)/]
 		[expInOcl.bodyExpression.emitExpression(pType, genPackage, expInOcl)/]
 		return [expInOcl.bodyExpression.symbolName(expInOcl)/];

@@ -79,7 +79,7 @@ public class EcoreExecutorType extends ExecutorType
 	}
 
 	@Override
-	public @NonNull Object createInstance(@NonNull DomainStandardLibrary standardLibrary, @NonNull String value) {
+	public @Nullable Object createInstance(@NonNull DomainStandardLibrary standardLibrary, @NonNull String value) {
 		EClassifier eClassifier2 = eClassifier;
 		if (eClassifier2 instanceof EDataType) {
 			EDataType eDataType = (EDataType) eClassifier2;
@@ -112,7 +112,7 @@ public class EcoreExecutorType extends ExecutorType
 				typeId2 = IdManager.INSTANCE.getTypeId(eClassifier2);
 			}
 			else {
-				if ("Metaclass".equals(name)) { //$NON-NLS-1$
+				if (TypeId.METACLASS_NAME.equals(name)) { //$NON-NLS-1$
 					typeId2 = TypeId.METACLASS;
 				}
 				else {

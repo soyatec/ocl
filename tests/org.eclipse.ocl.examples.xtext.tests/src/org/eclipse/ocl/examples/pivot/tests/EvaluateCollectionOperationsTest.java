@@ -59,6 +59,10 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		// null collection element
 		assertQueryResults(null, "Sequence{'a', 'b', null}", "Sequence{'a', 'b'}->append(null)");
 		assertQueryResults(null, "OrderedSet{'a', 'b', null}", "OrderedSet{'a', 'b'}->append(null)");
+		assertQueryResults(null, "Sequence{'a', null, 'b', null}", "Sequence{'a', null, 'b'}->append(null)");
+		assertQueryResults(null, "OrderedSet{'a', 'b', null}", "OrderedSet{'a', null, 'b'}->append(null)");
+		assertQueryResults(null, "Sequence{'1..2', null}", "Sequence{'1..2'}->append(null)");
+		assertQueryResults(null, "OrderedSet{'1..2', null}", "OrderedSet{'1..2'}->append(null)");
 	}
 
 	public void testCollectionAsBag() {
@@ -802,6 +806,12 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryResults(null, "Bag{null, 'b', 'a'}", "Bag{'a', 'b'}->including(null)");
 		assertQueryResults(null, "Set{'a', null, 'b'}", "Set{'a', 'b'}->including(null)");
 		assertQueryResults(null, "OrderedSet{'a', 'b', null}", "OrderedSet{'a', 'b'}->including(null)");
+		assertQueryResults(null, "Sequence{'a', null, 'b', null}", "Sequence{'a', null, 'b'}->including(null)");
+		assertQueryResults(null, "Bag{null, 'b', null, 'a'}", "Bag{'a', null, 'b'}->including(null)");
+		assertQueryResults(null, "Set{'a', null, 'b'}", "Set{'a', null, 'b'}->including(null)");
+		assertQueryResults(null, "OrderedSet{'a', null, 'b'}", "OrderedSet{'a', null, 'b'}->including(null)");
+		assertQueryResults(null, "Sequence{'1..4', null}", "Sequence{'1..4'}->including(null)");
+		assertQueryResults(null, "OrderedSet{'1..4', null}", "OrderedSet{'1..4'}->including(null)");
 	}
 
 	public void testCollectionIndexOf() {
@@ -843,7 +853,11 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let o : OrderedSet(String) = null in o->insertAt(1, 'a')");
 		// null collection element
 		assertQueryResults(null, "Sequence{null, 'a'}", "Sequence{'a'}->insertAt(1, null)");
+		assertQueryResults(null, "Sequence{null, null}", "Sequence{null}->insertAt(1, null)");
+//		assertQueryResults(null, "Sequence{'a', null}", "Sequence{null}->insertAt(1, 'a')");
 		assertQueryResults(null, "OrderedSet{'a', null}", "OrderedSet{'a'}->insertAt(2, null)");
+		assertQueryResults(null, "OrderedSet{null}", "OrderedSet{null}->insertAt(1, null)");
+//		assertQueryResults(null, "OrderedSet{null, 'a'}", "OrderedSet{null}->insertAt(2, 'a')");
 		// out of bounds
 		assertQueryInvalid(null, "Sequence{'a'}->insertAt(0, 'b')");
 		assertQueryInvalid(null, "OrderedSet{'a'}->insertAt(0, 'b')");

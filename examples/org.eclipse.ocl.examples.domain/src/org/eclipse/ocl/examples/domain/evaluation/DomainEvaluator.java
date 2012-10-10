@@ -26,8 +26,8 @@ import org.eclipse.ocl.examples.domain.types.IdResolver;
 public interface DomainEvaluator
 {
 	@NonNull DomainEvaluator createNestedEvaluator();
-	@NonNull Object evaluate(@NonNull DomainExpression body);
-	@NonNull DomainType getDynamicTypeOf(@NonNull Object value);
+	@Nullable Object evaluate(@NonNull DomainExpression body);
+	@NonNull DomainType getDynamicTypeOf(@Nullable Object value);
 	@NonNull DomainEvaluationEnvironment getEvaluationEnvironment();
 	@NonNull IdResolver getIdResolver();
 
@@ -38,9 +38,9 @@ public interface DomainEvaluator
 
 	@NonNull DomainStandardLibrary getStandardLibrary();
 
-	@NonNull DomainType getStaticTypeOf(@NonNull Object value);
-	@NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Object... values);
-	@NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Iterable<?> values);
+	@NonNull DomainType getStaticTypeOf(@Nullable Object value);
+	@NonNull DomainType getStaticTypeOf(@Nullable Object value, @NonNull Object... values);
+	@NonNull DomainType getStaticTypeOf(@Nullable Object value, @NonNull Iterable<?> values);
 	
 	/**
 	 * Return true if the evaluation has been canceled.

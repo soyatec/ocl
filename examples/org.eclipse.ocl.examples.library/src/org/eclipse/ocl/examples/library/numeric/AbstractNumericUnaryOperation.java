@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.numeric;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -32,7 +33,7 @@ import org.eclipse.ocl.examples.domain.values.Value;
  */
 public abstract class AbstractNumericUnaryOperation extends AbstractUnaryOperation
 {
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		if (isUnlimited(sourceVal)) {
 			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Unlimited"); //$NON-NLS-1$
 		}
@@ -44,7 +45,7 @@ public abstract class AbstractNumericUnaryOperation extends AbstractUnaryOperati
 		return evaluateReal(realValue);
 	}
 
-	protected abstract @NonNull Value evaluateReal(@NonNull RealValue left);
+	protected abstract @Nullable Value evaluateReal(@NonNull RealValue left);
 	
-	protected abstract @NonNull Value evaluateInteger(@NonNull IntegerValue left);
+	protected abstract @Nullable Value evaluateInteger(@NonNull IntegerValue left);
 }

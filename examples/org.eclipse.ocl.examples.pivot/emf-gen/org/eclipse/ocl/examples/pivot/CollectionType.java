@@ -125,9 +125,6 @@ public interface CollectionType
 	 */
 	void setUpper(Number value);
 
-	@NonNull IntegerValue getLowerValue();
-	@NonNull IntegerValue getUpperValue();
-
 	void setLowerValue(@NonNull IntegerValue lower);
 	void setUpperValue(@NonNull IntegerValue upper);
 } // CollectionType

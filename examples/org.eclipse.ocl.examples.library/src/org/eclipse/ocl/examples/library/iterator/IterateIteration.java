@@ -35,7 +35,7 @@ public class IterateIteration extends AbstractIteration
 	}
 	
 	@Override
-	public @NonNull Object evaluateIteration(@NonNull DomainIterationManager iterationManager) {
+	public @Nullable Object evaluateIteration(@NonNull DomainIterationManager iterationManager) {
 		for ( ; iterationManager.hasCurrent(); iterationManager.advanceIterators()) {
 			Object resultVal = iterationManager.updateBody();
 			if (resultVal != null) {

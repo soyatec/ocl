@@ -115,7 +115,7 @@ public class EcoreExecutorManager extends ExecutorManager
 	}
 
 	@Override
-	public @NonNull DomainType getDynamicTypeOf(@NonNull Object value) {
+	public @NonNull DomainType getDynamicTypeOf(@Nullable Object value) {
 		IdResolver idResolver2 = idResolver;
 		if (idResolver2 == null) {
 			idResolver = idResolver2 = createIdResolver();
@@ -150,7 +150,7 @@ public class EcoreExecutorManager extends ExecutorManager
 	}
 
 	@Override
-	public @NonNull DomainType getStaticTypeOf(@NonNull Object value) {
+	public @NonNull DomainType getStaticTypeOf(@Nullable Object value) {
 		IdResolver idResolver2 = idResolver;
 		if (idResolver2 == null) {
 			idResolver = idResolver2 = createIdResolver();
@@ -159,7 +159,7 @@ public class EcoreExecutorManager extends ExecutorManager
 	}
 
 	@Override
-	public @NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Object... values) {
+	public @NonNull DomainType getStaticTypeOf(@Nullable Object value, @NonNull Object... values) {
 		IdResolver idResolver2 = idResolver;
 		if (idResolver2 == null) {
 			idResolver = idResolver2 = createIdResolver();
@@ -168,7 +168,7 @@ public class EcoreExecutorManager extends ExecutorManager
 	}
 
 	@Override
-	public @NonNull DomainType getStaticTypeOf(@NonNull Object value, @NonNull Iterable<?> values) {
+	public @NonNull DomainType getStaticTypeOf(@Nullable Object value, @NonNull Iterable<?> values) {
 		IdResolver idResolver2 = idResolver;
 		if (idResolver2 == null) {
 			idResolver = idResolver2 = createIdResolver();

@@ -31,18 +31,18 @@ public class ExecutorSingleIterationManager extends AbstractIterationManager
 {	
 	protected final @NonNull TypeId returnTypeId;
 	protected final @NonNull LibraryBinaryOperation body;
-	private @NonNull Object accumulatorValue;
+	private @Nullable Object accumulatorValue;
 	protected final @NonNull Iterator<? extends Object> iteratorValue;
-	private Object currentValue;
+	private Object currentValue;		// 'null' is a valid value so 'iteratorValue' is used as end of iteration
 	
 	@Deprecated
 	public ExecutorSingleIterationManager(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation body,
-			@NonNull CollectionValue collectionValue, @NonNull Object accumulatorValue) {
+			@NonNull CollectionValue collectionValue, @Nullable Object accumulatorValue) {
 		this(evaluator, returnType.getTypeId(), body, collectionValue, accumulatorValue);
 	}
 	
 	public ExecutorSingleIterationManager(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull LibraryBinaryOperation body,
-			@NonNull CollectionValue collectionValue, @NonNull Object accumulatorValue) {
+			@NonNull CollectionValue collectionValue, @Nullable Object accumulatorValue) {
 		super(evaluator);
 		this.returnTypeId = returnTypeId;
 		this.body = body;
@@ -52,24 +52,20 @@ public class ExecutorSingleIterationManager extends AbstractIterationManager
 	}
 	
 	public boolean advanceIterators() {
-		currentValue = iteratorValue.hasNext() ? iteratorValue.next() : null;
-		return currentValue != null;
+		currentValue = iteratorValue.hasNext() ? iteratorValue.next() : iteratorValue;
+		return currentValue != iteratorValue;
 	}
 
 	@Override
-	public @NonNull Object get() {
-		Object currentValue2 = currentValue;
-		if (currentValue2 == null) {
-			throw new IllegalStateException("cannot get() after iteration complete"); //$NON-NLS-1$
-		}
-		return currentValue2;
+	public @Nullable Object get() {
+		return currentValue;
 	}
 
-	public @NonNull Object getAccumulatorValue() {
+	public @Nullable Object getAccumulatorValue() {
 		return accumulatorValue;
 	}
 
-	public @NonNull Object evaluateBody() {
+	public @Nullable Object evaluateBody() {
 //		try {
 			return body.evaluate(evaluator, returnTypeId, accumulatorValue, get());
 //		} catch (InvalidValueException e) {
@@ -78,7 +74,7 @@ public class ExecutorSingleIterationManager extends AbstractIterationManager
 	}
 	
 	public boolean hasCurrent() {
-		return currentValue != null;
+		return currentValue != iteratorValue;
 	}
 
 //	public NullValue throwInvalidEvaluation(String message, Object... bindings) {
@@ -87,7 +83,7 @@ public class ExecutorSingleIterationManager extends AbstractIterationManager
 //	}
 
 	public @Nullable Object updateBody() {
-		@NonNull Object newValue = body.evaluate(evaluator, returnTypeId, accumulatorValue, get());
+		Object newValue = body.evaluate(evaluator, returnTypeId, accumulatorValue, get());
 		this.accumulatorValue = newValue;
 		return null;					// carry on
 	}

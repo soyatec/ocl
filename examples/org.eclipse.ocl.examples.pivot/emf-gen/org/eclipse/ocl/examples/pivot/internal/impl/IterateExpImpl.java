@@ -175,7 +175,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		
-		final @NonNull Object result = IterateExpBodies._invariant_TypeIsResultType.INSTANCE.evaluate(evaluator, T_Boolean, this);
+		final Object result = IterateExpBodies._invariant_TypeIsResultType.INSTANCE.evaluate(evaluator, T_Boolean, this);
 		final boolean resultIsNull = ValuesUtil.isNull(result);
 		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 			return true;
@@ -203,7 +203,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		
-		final @NonNull Object result = IterateExpBodies._invariant_BodyTypeConformsToResultType.INSTANCE.evaluate(evaluator, T_Boolean, this);
+		final Object result = IterateExpBodies._invariant_BodyTypeConformsToResultType.INSTANCE.evaluate(evaluator, T_Boolean, this);
 		final boolean resultIsNull = ValuesUtil.isNull(result);
 		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 			return true;
@@ -231,7 +231,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		
-		final @NonNull Object result = IterateExpBodies._invariant_OneInitializer.INSTANCE.evaluate(evaluator, T_Boolean, this);
+		final Object result = IterateExpBodies._invariant_OneInitializer.INSTANCE.evaluate(evaluator, T_Boolean, this);
 		final boolean resultIsNull = ValuesUtil.isNull(result);
 		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 			return true;

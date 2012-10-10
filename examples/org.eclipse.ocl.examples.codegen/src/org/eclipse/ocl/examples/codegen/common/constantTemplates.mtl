@@ -140,7 +140,7 @@ static final @NonNull <%CollectionTypeId%> [ast.symbolName(expInOcl)/] = <%TypeI
 [/template]
 
 [template protected emitConstants(ast : NullLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
-static final @NonNull <%NullValue%> [ast.symbolName(expInOcl)/] = NULL_VALUE;
+static final Object [ast.symbolName(expInOcl)/] = null;
 [/template]
 
 [template protected emitConstants(ast : OperationCallExp, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(genPackage.isFinal(ast.referredOperation))]

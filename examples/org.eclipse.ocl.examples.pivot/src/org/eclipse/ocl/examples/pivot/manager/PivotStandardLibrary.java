@@ -116,7 +116,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	public @NonNull BagType getBagType() {
 		BagType bagType2 = bagType;
 		if (bagType2 == null) {
-			bagType2 = bagType = resolveRequiredTemplateableType(BagType.class, "Bag", 1);
+			bagType2 = bagType = resolveRequiredTemplateableType(BagType.class, TypeId.BAG_NAME, 1);
 		}
 		return bagType2;
 	}
@@ -140,7 +140,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	public @NonNull CollectionType getCollectionType() {
 		CollectionType collectionType2 = collectionType;
 		if (collectionType2 == null) {
-			collectionType2 = collectionType = resolveRequiredTemplateableType(CollectionType.class, "Collection", 1);
+			collectionType2 = collectionType = resolveRequiredTemplateableType(CollectionType.class, TypeId.COLLECTION_NAME, 1);
 		}
 		return collectionType2;
 	}
@@ -172,7 +172,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	public @NonNull Metaclass getMetaclassType() {
 		Metaclass metaclassType2 = metaclassType;
 		if (metaclassType2 == null) {
-			metaclassType2 = metaclassType = resolveRequiredTemplateableType(Metaclass.class, "Metaclass", 1);		
+			metaclassType2 = metaclassType = resolveRequiredTemplateableType(Metaclass.class, TypeId.METACLASS_NAME, 1);		
 		}
 		return metaclassType2;
 	}
@@ -180,7 +180,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	public @NonNull AnyType getOclAnyType() {
 		AnyType oclAnyType2 = oclAnyType;
 		if (oclAnyType2 == null) {
-			oclAnyType2 = oclAnyType = resolveRequiredSimpleType(AnyType.class, "OclAny");		
+			oclAnyType2 = oclAnyType = resolveRequiredSimpleType(AnyType.class, TypeId.OCL_ANY_NAME);		
 		}
 		return oclAnyType2;
 	}
@@ -188,7 +188,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	public @NonNull org.eclipse.ocl.examples.pivot.Class getOclComparableType() {
 		org.eclipse.ocl.examples.pivot.Class oclComparableType2 = oclComparableType;
 		if (oclComparableType2 == null) {
-			oclComparableType2 = oclComparableType = resolveRequiredSimpleType(org.eclipse.ocl.examples.pivot.Class.class, "OclComparable");		
+			oclComparableType2 = oclComparableType = resolveRequiredSimpleType(org.eclipse.ocl.examples.pivot.Class.class, TypeId.OCL_COMPARABLE_NAME);		
 		}
 		return oclComparableType2;
 	}
@@ -204,7 +204,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	public @NonNull InvalidType getOclInvalidType() {
 		InvalidType oclInvalidType2 = oclInvalidType;
 		if (oclInvalidType2 == null) {
-			oclInvalidType2 = oclInvalidType = resolveRequiredSimpleType(InvalidType.class, "OclInvalid");		
+			oclInvalidType2 = oclInvalidType = resolveRequiredSimpleType(InvalidType.class, TypeId.OCL_INVALID_NAME);		
 		}
 		return oclInvalidType2;
 	}
@@ -232,7 +232,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	public @NonNull org.eclipse.ocl.examples.pivot.Class getOclSummableType() {
 		org.eclipse.ocl.examples.pivot.Class oclSummableType2 = oclSummableType;
 		if (oclSummableType2 == null) {
-			oclSummableType2 = oclSummableType = resolveRequiredSimpleType(org.eclipse.ocl.examples.pivot.Class.class, "OclSummable");		
+			oclSummableType2 = oclSummableType = resolveRequiredSimpleType(org.eclipse.ocl.examples.pivot.Class.class, TypeId.OCL_SUMMABLE_NAME);		
 		}
 		return oclSummableType2;
 	}
@@ -248,7 +248,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	public @NonNull VoidType getOclVoidType() {
 		VoidType oclVoidType2 = oclVoidType;
 		if (oclVoidType2 == null) {
-			oclVoidType2 = oclVoidType = resolveRequiredSimpleType(VoidType.class, "OclVoid");		
+			oclVoidType2 = oclVoidType = resolveRequiredSimpleType(VoidType.class, TypeId.OCL_VOID_NAME);		
 		}
 		return oclVoidType2;
 	}
@@ -256,7 +256,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	public @NonNull OrderedSetType getOrderedSetType() {
 		OrderedSetType orderedSetType2 = orderedSetType;
 		if (orderedSetType2 == null) {
-			orderedSetType2 = orderedSetType = resolveRequiredTemplateableType(OrderedSetType.class, "OrderedSet", 1);
+			orderedSetType2 = orderedSetType = resolveRequiredTemplateableType(OrderedSetType.class, TypeId.ORDERED_SET_NAME, 1);
 		}
 		return orderedSetType2;
 	}
@@ -287,7 +287,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	public @NonNull SequenceType getSequenceType() {
 		SequenceType sequenceType2 = sequenceType;
 		if (sequenceType2 == null) {
-			sequenceType2 = sequenceType = resolveRequiredTemplateableType(SequenceType.class, "Sequence", 1);
+			sequenceType2 = sequenceType = resolveRequiredTemplateableType(SequenceType.class, TypeId.SEQUENCE_NAME, 1);
 		}
 		return sequenceType2;
 	}
@@ -295,7 +295,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	public @NonNull SetType getSetType() {
 		SetType setType2 = setType;
 		if (setType2 == null) {
-			setType2 = setType = resolveRequiredTemplateableType(SetType.class, "Set", 1);
+			setType2 = setType = resolveRequiredTemplateableType(SetType.class, TypeId.SET_NAME, 1);
 		}
 		return setType2;
 	}
@@ -311,7 +311,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	public @NonNull CollectionType getUniqueCollectionType() {
 		CollectionType uniqueCollectionType2 = uniqueCollectionType;
 		if (uniqueCollectionType2 == null) {
-			uniqueCollectionType2 = uniqueCollectionType = resolveRequiredTemplateableType(CollectionType.class, "UniqueCollection", 1);
+			uniqueCollectionType2 = uniqueCollectionType = resolveRequiredTemplateableType(CollectionType.class, TypeId.UNIQUE_COLLECTION_NAME, 1);
 		}
 		return uniqueCollectionType2;
 	}

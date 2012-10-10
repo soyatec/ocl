@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.library.collection;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
@@ -36,7 +37,7 @@ public class CollectionProductOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull CollectionProductOperation INSTANCE = new CollectionProductOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal, @NonNull Object argVal) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object argVal) {
 		CollectionValue sourceValue = asCollectionValue(sourceVal);
 		CollectionValue argumentValue = asCollectionValue(argVal);
 		CollectionTypeId collTypeId = (CollectionTypeId)returnTypeId;

@@ -21,21 +21,22 @@
 package org.eclipse.ocl.examples.pivot.bodies;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
+import org.eclipse.ocl.examples.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorProperty;
-import org.eclipse.ocl.examples.library.executor.ExecutorType;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.PivotTables;
+import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
+import org.eclipse.ocl.examples.pivot.ValueSpecification;
 
 /**
  * TypedMultiplicityElementBodies provides the Java implementation bodies of OCL-defined TypedMultiplicityElement operations and properties.
@@ -50,26 +51,31 @@ public class TypedMultiplicityElementBodies
 	public static class _CompatibleBody_body_ extends AbstractBinaryOperation
 	{
 		public static @NonNull _CompatibleBody_body_ INSTANCE = new _CompatibleBody_body_();
+		static final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		static final @NonNull ExecutorOperation O_OclType_conformsTo = OCLstdlibTables.Operations._OclType__conformsTo;
+		static final @NonNull TypeId T_Type = OCLstdlibTables.Types._Type.getTypeId();
+		
 	
 		/*
 		bodySpecification.type.conformsTo(self.type)
 		*/
-		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self, final @NonNull Object bodySpecification) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self, final @Nullable Object bodySpecification) throws InvalidValueException {
+			assert self != null;
+			final @NonNull TypedMultiplicityElement unboxed_self = (TypedMultiplicityElement)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorOperation O_OclType_conformsTo = OCLstdlibTables.Operations._OclType__conformsTo;
-			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
-			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
-			final @NonNull LibraryProperty IP_TypedElement_type = P_TypedElement_type.getImplementation();
 			
 			
-			Object A_symbol_ = IP_TypedElement_type.evaluate(evaluator, T_Type.getTypeId(), bodySpecification, P_TypedElement_type);
+			ValueSpecification unboxed_bodySpecification = (ValueSpecification)bodySpecification;	// ValueSpecification
+			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol_ = unboxed_bodySpecification != null ? unboxed_bodySpecification.getType() : null;
+			Object A_symbol_ = createTypeValue(unboxed_A_symbol_);
 			
 			
-			Object A_symbol__1 = IP_TypedElement_type.evaluate(evaluator, T_Type.getTypeId(), self, P_TypedElement_type);
 			
-			DomainType static_A_symbol__2 = evaluator.getStaticTypeOf(A_symbol_);
-			LibraryBinaryOperation dynamic_A_symbol__2 = (LibraryBinaryOperation)static_A_symbol__2.lookupImplementation(standardLibrary, O_OclType_conformsTo);
-			Object A_symbol__2 = dynamic_A_symbol__2.evaluate(evaluator, TypeId.BOOLEAN, A_symbol_, A_symbol__1);
+			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__1 = unboxed_self != null ? unboxed_self.getType() : null;
+			Object A_symbol__1 = createTypeValue(unboxed_A_symbol__1);
+			
+			
+			Object A_symbol__2 = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol_, A_symbol__1);
 			return A_symbol__2;
 		}
 	}
@@ -80,14 +86,17 @@ public class TypedMultiplicityElementBodies
 	public static class _makeParameter_body_ extends AbstractUnaryOperation
 	{
 		public static @NonNull _makeParameter_body_ INSTANCE = new _makeParameter_body_();
+		static final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
+		static final @NonNull Object S_name = "name";
+		
 	
 		/*
 		Parameter{name = 'name'}
 		*/
-		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+			assert self != null;
+			final @NonNull TypedMultiplicityElement unboxed_self = (TypedMultiplicityElement)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
-			final @NonNull Object S_name = "name";
 			
 			ObjectValue A_symbol__3 = PivotTables.Types._Parameter.createInstance(standardLibrary);
 			

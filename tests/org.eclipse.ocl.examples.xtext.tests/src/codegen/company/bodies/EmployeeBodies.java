@@ -80,7 +80,7 @@ public class EmployeeBodies
 					
 					Employee unboxed_self = (Employee)self;
 					java.lang.String unboxed_A_symbol__2 = unboxed_self.getName();
-					Object A_symbol__2 = unboxed_A_symbol__2 != null ? unboxed_A_symbol__2 : NULL_VALUE;
+					Object A_symbol__2 = unboxed_A_symbol__2 != null ? unboxed_A_symbol__2 : null;
 					
 					
 					Object A_symbol__3 = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__2);
@@ -95,7 +95,7 @@ public class EmployeeBodies
 					
 					Employee unboxed_self = (Employee)self;
 					java.lang.Boolean unboxed_A_symbol__5 = unboxed_self.isHasNameAsAttribute();
-					Object A_symbol__5 = unboxed_A_symbol__5 != null ? unboxed_A_symbol__5 : NULL_VALUE;
+					Object A_symbol__5 = unboxed_A_symbol__5 != null ? unboxed_A_symbol__5 : null;
 					
 					
 					rightA_symbol__1 = A_symbol__5;
@@ -151,7 +151,7 @@ public class EmployeeBodies
 				
 				Employee unboxed_self = (Employee)self;
 				java.lang.String unboxed_A_symbol__8 = unboxed_self.getName();
-				Object A_symbol__8 = unboxed_A_symbol__8 != null ? unboxed_A_symbol__8 : NULL_VALUE;
+				Object A_symbol__8 = unboxed_A_symbol__8 != null ? unboxed_A_symbol__8 : null;
 				
 				
 				Object A_symbol__9 = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, T_Set_String_, A_symbol__8);
@@ -166,7 +166,7 @@ public class EmployeeBodies
 				
 				Employee unboxed_self = (Employee)self;
 				java.lang.String unboxed_A_symbol__11 = unboxed_self.getName();
-				Object A_symbol__11 = unboxed_A_symbol__11 != null ? unboxed_A_symbol__11 : NULL_VALUE;
+				Object A_symbol__11 = unboxed_A_symbol__11 != null ? unboxed_A_symbol__11 : null;
 				
 				
 				Object A_symbol__12 = StringSizeOperation.INSTANCE.evaluate(evaluator, T_Integer, A_symbol__11);
@@ -208,7 +208,7 @@ public class EmployeeBodies
 				
 				Employee unboxed_self = (Employee)self;
 				codegen.company.Employee unboxed_A_symbol__15 = unboxed_self.getManager();
-				Object A_symbol__15 = unboxed_A_symbol__15 != null ? unboxed_A_symbol__15 : NULL_VALUE;
+				Object A_symbol__15 = unboxed_A_symbol__15 != null ? unboxed_A_symbol__15 : null;
 				
 				
 				Object A_symbol__16 = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__15);
@@ -252,12 +252,12 @@ public class EmployeeBodies
 			final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 			final @NonNull ExecutorOperation O_String__lt__gt_ = OCLstdlibTables.Operations._String___lt__gt_;
 			final @NonNull PrimitiveTypeId T_String = TypeId.STRING;
-			final @NonNull NullValue Null = NULL_VALUE;
+			final @NonNull NullValue Null = null;
 			
 			
 			Employee unboxed_self = (Employee)self;
 			java.lang.String unboxed_A_symbol__20 = unboxed_self.getName();
-			Object A_symbol__20 = unboxed_A_symbol__20 != null ? unboxed_A_symbol__20 : NULL_VALUE;
+			Object A_symbol__20 = unboxed_A_symbol__20 != null ? unboxed_A_symbol__20 : null;
 			
 			
 			Object A_symbol__21 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__20, Null);
@@ -366,7 +366,7 @@ public class EmployeeBodies
 			
 			Employee unboxed_self = (Employee)self;
 			codegen.company.Company unboxed_A_symbol__29 = unboxed_self.getCompany();
-			Object A_symbol__29 = unboxed_A_symbol__29 != null ? unboxed_A_symbol__29 : NULL_VALUE;
+			Object A_symbol__29 = unboxed_A_symbol__29 != null ? unboxed_A_symbol__29 : null;
 			
 			
 			org.eclipse.emf.common.util.EList<codegen.company.Employee> unboxed_A_symbol__27 = unboxed_A_symbol__29.getEmployees();
@@ -387,7 +387,7 @@ public class EmployeeBodies
 					
 					Employee unboxed_V_1_ = (Employee)V_1_;
 					codegen.company.Employee unboxed_A_symbol__30 = unboxed_V_1_.getManager();
-					Object A_symbol__30 = unboxed_A_symbol__30 != null ? unboxed_A_symbol__30 : NULL_VALUE;
+					Object A_symbol__30 = unboxed_A_symbol__30 != null ? unboxed_A_symbol__30 : null;
 					
 					
 					
@@ -420,12 +420,12 @@ public class EmployeeBodies
 			final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 			final @NonNull ExecutorOperation O_String__lt__gt_ = OCLstdlibTables.Operations._String___lt__gt_;
 			final @NonNull PrimitiveTypeId T_String = TypeId.STRING;
-			final @NonNull NullValue Null = NULL_VALUE;
+			final @NonNull NullValue Null = null;
 			
 			
 			Employee unboxed_self = (Employee)self;
 			java.lang.String unboxed_A_symbol__32 = unboxed_self.getName();
-			Object A_symbol__32 = unboxed_A_symbol__32 != null ? unboxed_A_symbol__32 : NULL_VALUE;
+			Object A_symbol__32 = unboxed_A_symbol__32 != null ? unboxed_A_symbol__32 : null;
 			
 			
 			Object A_symbol__33 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__32, Null);
@@ -459,7 +459,7 @@ public class EmployeeBodies
 				
 				Employee unboxed_self = (Employee)self;
 				codegen.company.Employee unboxed_A_symbol__35 = unboxed_self.getManager();
-				Object A_symbol__35 = unboxed_A_symbol__35 != null ? unboxed_A_symbol__35 : NULL_VALUE;
+				Object A_symbol__35 = unboxed_A_symbol__35 != null ? unboxed_A_symbol__35 : null;
 				
 				
 				Object A_symbol__36 = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__35);
@@ -470,7 +470,7 @@ public class EmployeeBodies
 			else if (A_symbol__36 == ValuesUtil.FALSE_VALUE) {
 				
 				codegen.company.Employee unboxed_A_symbol__38 = unboxed_self.getManager();
-				Object A_symbol__38 = unboxed_A_symbol__38 != null ? unboxed_A_symbol__38 : NULL_VALUE;
+				Object A_symbol__38 = unboxed_A_symbol__38 != null ? unboxed_A_symbol__38 : null;
 				
 				
 				org.eclipse.emf.common.util.EList<codegen.company.Employee> unboxed_A_symbol__39 = unboxed_A_symbol__38.getReportingChain();
@@ -479,7 +479,7 @@ public class EmployeeBodies
 				
 				
 				codegen.company.Employee unboxed_A_symbol__40 = unboxed_self.getManager();
-				Object A_symbol__40 = unboxed_A_symbol__40 != null ? unboxed_A_symbol__40 : NULL_VALUE;
+				Object A_symbol__40 = unboxed_A_symbol__40 != null ? unboxed_A_symbol__40 : null;
 				
 				
 				Object A_symbol__41 = OrderedCollectionPrependOperation.INSTANCE.evaluate(evaluator, T_OrderedSet_company__Employee_, A_symbol__39, A_symbol__40);

@@ -25,8 +25,10 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -106,7 +108,7 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
         return this;
 	}
 	
-    public @NonNull Object at(int index) {
+    public @Nullable Object at(int index) {
         index = index - 1;        
         if (index < 0 || index >= elements.size()) {
         	throw new InvalidValueException(EvaluatorMessages.IndexOutOfRange, index + 1, size());
@@ -115,10 +117,7 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
         for (Iterator<? extends Object> it = iterator(); it.hasNext();) {
         	Object object = it.next();
             if (curr++ == index) {
-                if (object != null) {
-                	return object;
-                }
-                break;
+                return object;
             }
         }
         throw new InvalidValueException("Null collection content");
@@ -141,13 +140,22 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
 		return !theseElements.hasNext() && !thoseElements.hasNext();
 	}
 
-	public @NonNull OrderedSetValue excluding(@NonNull Object value) {
+	public @NonNull OrderedSetValue excluding(@Nullable Object value) {
 		OrderedSet<Object> result = new OrderedSetImpl<Object>();
-		for (Object element : elements) {
-			if (!element.equals(value)) {
-				result.add(element);
-			}
-		}
+        if (value == null) {
+    		for (Object element : elements) {
+    			if (element != null) {
+    				result.add(element);
+    			}
+    		}
+        }
+        else {
+    		for (Object element : elements) {
+    			if (!value.equals(element)) {
+    				result.add(element);
+    			}
+    		}
+        }
 		if (result.size() < elements.size()) {
 			return new SparseOrderedSetValueImpl(getTypeId(), result);
 		}
@@ -162,21 +170,31 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
 //	}
 
 	public @NonNull String getKind() {
-	    return "OrderedSet";
+	    return TypeId.ORDERED_SET_NAME;
 	}
 
-    public @NonNull IntegerValue indexOf(@NonNull Object object) {
+    public @NonNull IntegerValue indexOf(@Nullable Object object) {
         int index = 1;        
-        for (Object next : elements) {
-            if (object.equals(next)) {
-                return ValuesUtil.integerValueOf(index);
-            }
-            index++;
-        }        
+        if (object == null) {
+            for (Object next : elements) {
+                if (next == null) {
+                    return ValuesUtil.integerValueOf(index);
+                }
+                index++;
+            }        
+        }
+        else {
+            for (Object next : elements) {
+                if (object.equals(next)) {
+                    return ValuesUtil.integerValueOf(index);
+                }
+                index++;
+            }        
+        }
         throw new InvalidValueException(EvaluatorMessages.MissingValue, "indexOf");
     }
 
-    public @NonNull OrderedSetValue insertAt(int index, @NonNull Object object) {
+    public @NonNull OrderedSetValue insertAt(int index, @Nullable Object object) {
 		if (object instanceof InvalidValue) {
 			throw new InvalidValueException(EvaluatorMessages.InvalidSource, "insertAt");
 		}
@@ -189,16 +207,30 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
         
         OrderedSet<Object> result = new OrderedSetImpl<Object>();
         int curr = 0;
-        for (Iterator<? extends Object> it = iterator(); it.hasNext();) {
-            if (curr == index) {
-                result.add(object);
-            }
-            Object next = it.next();
-            if (!next.equals(object)) {
-				result.add(next);
-	            curr++;
-            }
-        }
+        if (object == null) {
+			for (Iterator<? extends Object> it = iterator(); it.hasNext();) {
+				if (curr == index) {
+					result.add(object);
+				}
+				Object next = it.next();
+				if (next != null) {
+					result.add(next);
+					curr++;
+				}
+			}
+		}
+        else {
+			for (Iterator<? extends Object> it = iterator(); it.hasNext();) {
+				if (curr == index) {
+					result.add(object);
+				}
+				Object next = it.next();
+				if (!object.equals(next)) {
+					result.add(next);
+					curr++;
+				}
+			}
+		}
         
         if (index == effectiveSize) {
         	// the loop finished before we could add the object

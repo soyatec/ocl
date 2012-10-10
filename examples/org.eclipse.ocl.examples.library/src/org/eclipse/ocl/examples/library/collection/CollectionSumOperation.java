@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.collection;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -35,7 +36,7 @@ public class CollectionSumOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull CollectionSumOperation INSTANCE = new CollectionSumOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceVal) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		CollectionValue collectionValue = asCollectionValue(sourceVal);
 		// FIXME Bug 301351 Look for user-defined zero
 //			resultType.getZero();
@@ -52,9 +53,7 @@ public class CollectionSumOperation extends AbstractUnaryOperation
 			binaryOperation = RealPlusOperation.INSTANCE;
 		}
         for (Object element : collectionValue.iterable()) {
-        	if (element != null) {
-        		result = binaryOperation.evaluate(evaluator, returnTypeId, result, element);
-        	}
+        	result = binaryOperation.evaluate(evaluator, returnTypeId, result, element);
         }
         return result;
 	}

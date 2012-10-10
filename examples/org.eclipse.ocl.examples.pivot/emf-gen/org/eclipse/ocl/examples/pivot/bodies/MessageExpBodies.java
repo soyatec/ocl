@@ -21,21 +21,24 @@
 package org.eclipse.ocl.examples.pivot.bodies;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryProperty;
-import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.library.collection.CollectionSizeOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
-import org.eclipse.ocl.examples.library.executor.ExecutorProperty;
-import org.eclipse.ocl.examples.library.executor.ExecutorType;
+import org.eclipse.ocl.examples.library.integer.IntegerPlusOperation;
+import org.eclipse.ocl.examples.library.logical.BooleanNotOperation;
+import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
+import org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation;
+import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.examples.pivot.MessageExp;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 
 /**
@@ -51,50 +54,43 @@ public class MessageExpBodies
 	public static class _invariant_OneCallOrOneSend extends AbstractUnaryOperation
 	{
 		public static @NonNull _invariant_OneCallOrOneSend INSTANCE = new _invariant_OneCallOrOneSend();
+		static final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		static final @NonNull ExecutorOperation O_Real__eq_ = OCLstdlibTables.Operations._Real___eq_;
+		static final @NonNull PrimitiveTypeId T_Integer = TypeId.INTEGER;
+		static final @NonNull ExecutorOperation O_Integer__add_ = OCLstdlibTables.Operations._Integer___add_;
+		static final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
+		static final @NonNull TypeId T_pivot__CallOperationAction = PivotTables.Types._CallOperationAction.getTypeId();
+		static final @NonNull CollectionTypeId T_Set_pivot__CallOperationAction_ = TypeId.SET.getSpecializedId(T_pivot__CallOperationAction);
+		static final @NonNull ExecutorOperation O_OclAny_oclAsSet = OCLstdlibTables.Operations._OclAny__oclAsSet;
+		static final @NonNull TypeId T_pivot__SendSignalAction = PivotTables.Types._SendSignalAction.getTypeId();
+		static final @NonNull CollectionTypeId T_Set_pivot__SendSignalAction_ = TypeId.SET.getSpecializedId(T_pivot__SendSignalAction);
+		static final @NonNull IntegerValue I_1 = integerValueOf(1);
+		
 	
 		/*
 		calledOperation->size() + sentSignal->size() = 1
 		*/
-		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+			assert self != null;
+			final @NonNull MessageExp unboxed_self = (MessageExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorOperation O_Real__eq_ = OCLstdlibTables.Operations._Real___eq_;
-			final @NonNull ExecutorOperation O_Integer__add_ = OCLstdlibTables.Operations._Integer___add_;
-			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
-			final @NonNull ExecutorType T_pivot__CallOperationAction = PivotTables.Types._CallOperationAction;
-			final @NonNull DomainCollectionType T_Set_pivot__CallOperationAction_ = standardLibrary.getSetType(T_pivot__CallOperationAction, null, null);
-			final @NonNull ExecutorOperation O_OclAny_oclAsSet = OCLstdlibTables.Operations._OclAny__oclAsSet;
-			final @NonNull ExecutorProperty P_MessageExp_calledOperation = PivotTables.Properties._MessageExp__calledOperation;
-			final @NonNull LibraryProperty IP_MessageExp_calledOperation = P_MessageExp_calledOperation.getImplementation();
-			final @NonNull ExecutorType T_pivot__SendSignalAction = PivotTables.Types._SendSignalAction;
-			final @NonNull DomainCollectionType T_Set_pivot__SendSignalAction_ = standardLibrary.getSetType(T_pivot__SendSignalAction, null, null);
-			final @NonNull ExecutorProperty P_MessageExp_sentSignal = PivotTables.Properties._MessageExp__sentSignal;
-			final @NonNull LibraryProperty IP_MessageExp_sentSignal = P_MessageExp_sentSignal.getImplementation();
-			final @NonNull IntegerValue I_1 = integerValueOf(1);
 			
 			
-			Object A_symbol_ = IP_MessageExp_calledOperation.evaluate(evaluator, T_pivot__CallOperationAction.getTypeId(), self, P_MessageExp_calledOperation);
+			org.eclipse.ocl.examples.pivot.CallOperationAction unboxed_A_symbol_ = unboxed_self != null ? unboxed_self.getCalledOperation() : null;
+			Object A_symbol_ = valueOf(unboxed_A_symbol_); // CallOperationAction
 			
-			DomainType static_A_symbol__1 = evaluator.getStaticTypeOf(A_symbol_);
-			LibraryUnaryOperation dynamic_A_symbol__1 = (LibraryUnaryOperation)static_A_symbol__1.lookupImplementation(standardLibrary, O_OclAny_oclAsSet);
-			Object A_symbol__1 = dynamic_A_symbol__1.evaluate(evaluator, T_Set_pivot__CallOperationAction_.getTypeId(), A_symbol_);
-			DomainType static_A_symbol__2 = evaluator.getStaticTypeOf(A_symbol__1);
-			LibraryUnaryOperation dynamic_A_symbol__2 = (LibraryUnaryOperation)static_A_symbol__2.lookupImplementation(standardLibrary, O_Collection_size);
-			Object A_symbol__2 = dynamic_A_symbol__2.evaluate(evaluator, TypeId.INTEGER, A_symbol__1);
 			
-			Object A_symbol__3 = IP_MessageExp_sentSignal.evaluate(evaluator, T_pivot__SendSignalAction.getTypeId(), self, P_MessageExp_sentSignal);
+			Object A_symbol__1 = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, T_Set_pivot__CallOperationAction_, A_symbol_);
+			Object A_symbol__2 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, T_Integer, A_symbol__1);
 			
-			DomainType static_A_symbol__4 = evaluator.getStaticTypeOf(A_symbol__3);
-			LibraryUnaryOperation dynamic_A_symbol__4 = (LibraryUnaryOperation)static_A_symbol__4.lookupImplementation(standardLibrary, O_OclAny_oclAsSet);
-			Object A_symbol__4 = dynamic_A_symbol__4.evaluate(evaluator, T_Set_pivot__SendSignalAction_.getTypeId(), A_symbol__3);
-			DomainType static_A_symbol__5 = evaluator.getStaticTypeOf(A_symbol__4);
-			LibraryUnaryOperation dynamic_A_symbol__5 = (LibraryUnaryOperation)static_A_symbol__5.lookupImplementation(standardLibrary, O_Collection_size);
-			Object A_symbol__5 = dynamic_A_symbol__5.evaluate(evaluator, TypeId.INTEGER, A_symbol__4);
-			DomainType static_A_symbol__6 = evaluator.getStaticTypeOf(A_symbol__2, A_symbol__5);
-			LibraryBinaryOperation dynamic_A_symbol__6 = (LibraryBinaryOperation)static_A_symbol__6.lookupImplementation(standardLibrary, O_Integer__add_);
-			Object A_symbol__6 = dynamic_A_symbol__6.evaluate(evaluator, TypeId.INTEGER, A_symbol__2, A_symbol__5);
-			DomainType static_A_symbol__7 = evaluator.getStaticTypeOf(A_symbol__6, I_1);
-			LibraryBinaryOperation dynamic_A_symbol__7 = (LibraryBinaryOperation)static_A_symbol__7.lookupImplementation(standardLibrary, O_Real__eq_);
-			Object A_symbol__7 = dynamic_A_symbol__7.evaluate(evaluator, TypeId.BOOLEAN, A_symbol__6, I_1);
+			org.eclipse.ocl.examples.pivot.SendSignalAction unboxed_A_symbol__3 = unboxed_self != null ? unboxed_self.getSentSignal() : null;
+			Object A_symbol__3 = valueOf(unboxed_A_symbol__3); // SendSignalAction
+			
+			
+			Object A_symbol__4 = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, T_Set_pivot__SendSignalAction_, A_symbol__3);
+			Object A_symbol__5 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, T_Integer, A_symbol__4);
+			Object A_symbol__6 = IntegerPlusOperation.INSTANCE.evaluate(evaluator, T_Integer, A_symbol__2, A_symbol__5);
+			Object A_symbol__7 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__6, I_1);
 			return A_symbol__7;
 		}
 	}
@@ -105,33 +101,33 @@ public class MessageExpBodies
 	public static class _invariant_TargetIsNotACollection extends AbstractUnaryOperation
 	{
 		public static @NonNull _invariant_TargetIsNotACollection INSTANCE = new _invariant_TargetIsNotACollection();
+		static final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		static final @NonNull ExecutorOperation O_Boolean_not = OCLstdlibTables.Operations._Boolean__not;
+		static final @NonNull ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
+		static final @NonNull TypeId T_Type = OCLstdlibTables.Types._Type.getTypeId();
+		static final @NonNull TypeId T_pivot__OCLExpression = PivotTables.Types._OCLExpression.getTypeId();
+		static final @NonNull Object T_Metaclass_pivot__CollectionType_ = createTypeValue(PivotTables.Types._CollectionType);
+		
 	
 		/*
 		not target.type.oclIsKindOf(CollectionType)
 		*/
-		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+			assert self != null;
+			final @NonNull MessageExp unboxed_self = (MessageExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull ExecutorOperation O_Boolean_not = OCLstdlibTables.Operations._Boolean__not;
-			final @NonNull ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
-			final @NonNull ExecutorType T_Type = OCLstdlibTables.Types._Type;
-			final @NonNull ExecutorProperty P_TypedElement_type = PivotTables.Properties._TypedElement__type;
-			final @NonNull LibraryProperty IP_TypedElement_type = P_TypedElement_type.getImplementation();
-			final @NonNull ExecutorType T_pivot__OCLExpression = PivotTables.Types._OCLExpression;
-			final @NonNull ExecutorProperty P_MessageExp_target = PivotTables.Properties._MessageExp__target;
-			final @NonNull LibraryProperty IP_MessageExp_target = P_MessageExp_target.getImplementation();
-			final @NonNull Object T_Metaclass_pivot__CollectionType_ = createTypeValue(PivotTables.Types._CollectionType);
 			
 			
-			Object A_symbol__8 = IP_MessageExp_target.evaluate(evaluator, T_pivot__OCLExpression.getTypeId(), self, P_MessageExp_target);
+			org.eclipse.ocl.examples.pivot.OCLExpression unboxed_A_symbol__8 = unboxed_self != null ? unboxed_self.getTarget() : null;
+			Object A_symbol__8 = valueOf(unboxed_A_symbol__8); // OCLExpression
 			
-			Object A_symbol__9 = IP_TypedElement_type.evaluate(evaluator, T_Type.getTypeId(), A_symbol__8, P_TypedElement_type);
 			
-			DomainType static_A_symbol__10 = evaluator.getStaticTypeOf(A_symbol__9);
-			LibraryBinaryOperation dynamic_A_symbol__10 = (LibraryBinaryOperation)static_A_symbol__10.lookupImplementation(standardLibrary, O_OclAny_oclIsKindOf);
-			Object A_symbol__10 = dynamic_A_symbol__10.evaluate(evaluator, TypeId.BOOLEAN, A_symbol__9, T_Metaclass_pivot__CollectionType_);
-			DomainType static_A_symbol__11 = evaluator.getStaticTypeOf(A_symbol__10);
-			LibraryUnaryOperation dynamic_A_symbol__11 = (LibraryUnaryOperation)static_A_symbol__11.lookupImplementation(standardLibrary, O_Boolean_not);
-			Object A_symbol__11 = dynamic_A_symbol__11.evaluate(evaluator, TypeId.BOOLEAN, A_symbol__10);
+			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__9 = unboxed_A_symbol__8 != null ? unboxed_A_symbol__8.getType() : null;
+			Object A_symbol__9 = createTypeValue(unboxed_A_symbol__9);
+			
+			
+			Object A_symbol__10 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__9, T_Metaclass_pivot__CollectionType_);
+			Object A_symbol__11 = BooleanNotOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__10);
 			return A_symbol__11;
 		}
 	}

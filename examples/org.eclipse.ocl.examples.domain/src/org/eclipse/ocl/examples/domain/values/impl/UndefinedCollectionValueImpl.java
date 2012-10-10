@@ -26,6 +26,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
@@ -56,7 +57,7 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 
 	protected UndefinedCollectionValueImpl() {}
 
-	public @NonNull SequenceValue append(@NonNull Object object) {
+	public @NonNull SequenceValue append(@Nullable Object object) {
 		return toInvalidValue();
 	}
 
@@ -68,11 +69,11 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 		throw new InvalidValueException("List value required");
 	}
 
-	public @NonNull Value at(int index) {
+	public @Nullable Value at(int index) {
 		return toInvalidValue();
 	}
 
-    public @NonNull IntegerValue count(@NonNull Object value) {
+    public @NonNull IntegerValue count(@Nullable Object value) {
         return toInvalidValue();
     }
 
@@ -80,7 +81,7 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 		return toInvalidValue();
 	}
 
-    public @NonNull Object excludes(@NonNull Object value) {
+    public @NonNull Object excludes(@Nullable Object value) {
     	return toInvalidValue();
     }
 
@@ -89,11 +90,11 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
     	return toInvalidValue();
     }
 
-	public @NonNull CollectionValue excluding(@NonNull Object value) {
+	public @NonNull CollectionValue excluding(@Nullable Object value) {
 		return toInvalidValue();
 	}
 
-    public @NonNull Value first() {
+    public @Nullable Value first() {
 		return toInvalidValue();
 	}
 
@@ -110,10 +111,10 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 //	}
 	
 	public String getKind() {
-	    return "Collection";		// FIXME UOE ??
+	    return TypeId.COLLECTION_NAME;		// FIXME UOE ??
 	}
 
-    public @NonNull Object includes(@NonNull Object value) {
+    public @NonNull Object includes(@Nullable Object value) {
     	return toInvalidValue();
     }
 
@@ -121,15 +122,15 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
     	return toInvalidValue();
    }
 
-	public @NonNull CollectionValue including(@NonNull Object value) {
+	public @NonNull CollectionValue including(@Nullable Object value) {
 		return toInvalidValue();
 	}
 
-	public @NonNull IntegerValue indexOf(@NonNull Object object) {
+	public @NonNull IntegerValue indexOf(@Nullable Object object) {
 		return toInvalidValue();
 	}
 
-	public @NonNull SequenceValue insertAt(int index, @NonNull Object object) {
+	public @NonNull SequenceValue insertAt(int index, @Nullable Object object) {
 		return toInvalidValue();
 	}
 
@@ -162,7 +163,7 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 		return new Iterator();
 	}
 	
-	public @NonNull Value last() {
+	public @Nullable Value last() {
 		return toInvalidValue();
 	}
 
@@ -174,7 +175,7 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
     	return toInvalidValue();
 	}
 
-	public @NonNull SequenceValue prepend(@NonNull Object object) {
+	public @NonNull SequenceValue prepend(@Nullable Object object) {
 		return toInvalidValue();
 	}
 

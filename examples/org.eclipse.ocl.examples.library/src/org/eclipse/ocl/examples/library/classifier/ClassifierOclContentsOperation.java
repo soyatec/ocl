@@ -21,6 +21,7 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -34,7 +35,7 @@ public class ClassifierOclContentsOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull ClassifierOclContentsOperation INSTANCE = new ClassifierOclContentsOperation();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 		EObject object = asNavigableObject(sourceValue);
     	Set<Object> collection = new HashSet<Object>();
 		for (Object eContent : object.eContents()) {

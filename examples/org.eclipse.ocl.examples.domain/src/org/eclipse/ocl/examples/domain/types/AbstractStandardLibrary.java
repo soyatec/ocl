@@ -18,7 +18,6 @@ package org.eclipse.ocl.examples.domain.types;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -28,7 +27,6 @@ import java.util.WeakHashMap;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.Enumerator;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -43,11 +41,9 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
-import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -57,7 +53,6 @@ import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
-import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSet;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
@@ -93,14 +88,14 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 	 * @throws Exception 
 	 * @generated NOT
 	 */
-	public final @Nullable Object asEcoreObject(@NonNull Object aValue) {
+	public final @Nullable Object asEcoreObject(@Nullable Object aValue) {
 		if (aValue instanceof Value) {
 			if (aValue instanceof InvalidValue) {
 				((InvalidValue)aValue).asInteger();			// Propagate any internal exception or throw default
 				return null;								// Dead code - always throws above
 			}
-			else if (aValue instanceof NullValue) {
-				return null;
+			else if (aValue instanceof InvalidValue) {
+				throw ((InvalidValue)aValue).getException();
 			}
 			else if (aValue instanceof CollectionValue) {
 				CollectionValue collectionValue = (CollectionValue)aValue;
@@ -594,7 +589,10 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 	}
 
 	public Object valueOf(Object object) {
-		if (object.getClass().isArray()) {
+		if (object == null) {
+			return object;
+		}
+		else if (object.getClass().isArray()) {
 			try {
 				Object[] objects = (Object[])object;
 				TypeId elementTypeId = getIdResolver().getDynamicTypeOf(objects).getTypeId();

@@ -54,6 +54,7 @@ import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
@@ -135,19 +136,19 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		return new EvaluationVisitorImpl(environment, nestedEvalEnv, getModelManager());
 	}
 
-	public @NonNull Object evaluate(@NonNull DomainExpression body) {
+	public @Nullable Object evaluate(@NonNull DomainExpression body) {
 		Object value = ((OCLExpression) body).accept(this);
-		if (value == null) {
-			throw new InvalidValueException("null evaluation result");
-		}
-		else {
+//		if (value == null) {
+//			throw new InvalidValueException("null evaluation result");
+//		}
+//		else {
 			assert !(value instanceof Number);			// Make sure Integer/Real are boxed
-			assert !(value instanceof InvalidValue);	// Make sure invalid is an exception
+			assert !(value instanceof NullValue);		// Make sure invalid is an exception, null is null
 			return value;
-		}
+//		}
 	}
 
-	public @NonNull Object evaluate(@NonNull ExpressionInOCL expressionInOCL) {
+	public @Nullable Object evaluate(@NonNull ExpressionInOCL expressionInOCL) {
 		Object value = expressionInOCL.accept(this);
 		if (value == null) {
 			throw new InvalidValueException("null evaluation result");
@@ -176,7 +177,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		try {
 			Object result = v.accept(this);
 			assert !(result instanceof Number);			// Make sure Integer/Real are boxed
-			assert !(result instanceof InvalidValue);	// Make sure invalid is an exception
+			assert !(result instanceof NullValue);		// Make sure invalid is an exception, null is null
 			return result;
 		} catch (InvalidValueException e) {
 			throw e;
@@ -200,7 +201,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 //		if ((context == null) || ValuesUtil.isUndefined(context)) {
 //			return evaluationEnvironment.throwInvalidEvaluation("Undefined context for AssociationClassCall", ae);
 //		}
-		context = ValuesUtil.asValidValue(context);
+//		context = ValuesUtil.asValidValue(context);
 		// evaluate attribute on source value
 		return evaluationEnvironment.navigateAssociationClass(
 			ae.getReferredAssociationClass(),
@@ -286,8 +287,8 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 					CollectionItem item = (CollectionItem) part;
 					OCLExpression itemExp = item.getItem();
 					Object itemVal = itemExp.accept(getUndecoratedVisitor());
-					Object itemValue = ValuesUtil.asValidValue(itemVal);
-					results.add(itemValue);
+//					Object itemValue = ValuesUtil.asValidValue(itemVal);
+					results.add(itemVal);
 				} else {
 					// Collection range
 					CollectionRange range = (CollectionRange) part;
@@ -417,7 +418,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	@Override
     public Object visitIntegerLiteralExp(@NonNull IntegerLiteralExp integerLiteralExp) {
 		Number integerSymbol = integerLiteralExp.getIntegerSymbol();
-		return integerSymbol != null ? ValuesUtil.integerValueOf(integerSymbol) : ValuesUtil.NULL_VALUE;
+		return integerSymbol != null ? ValuesUtil.integerValueOf(integerSymbol) : null;
 	}
 
 	@Override
@@ -460,7 +461,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 //			if ((initValue == null) || ValuesUtil.isUndefined(initValue)) {
 //				return evaluationEnvironment.throwInvalidEvaluation(null, iterateExp, initValue, EvaluatorMessages.UndefinedInitialiser);
 //			}
-			initValue = ValuesUtil.asValidValue(initValue);
+//			initValue = ValuesUtil.asValidValue(initValue);
 			DomainIterationManager iterationManager;
 			VariableDeclaration accumulatorVariable = accumulator.getRepresentedParameter();
 			OCLExpression body = DomainUtil.nonNullModel(iterateExp.getBody());
@@ -598,7 +599,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 
 	@Override
     public Object visitNullLiteralExp(@NonNull NullLiteralExp nullLiteralExp) {
-		return ValuesUtil.NULL_VALUE;
+		return null;
 	}
 
 	/**
@@ -628,9 +629,9 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		else {
 			sourceValue = source.accept(undecoratedVisitor);
 		}
-		if (sourceValue == null) {
-			throw new InvalidValueException("null operation source");
-		}
+//		if (sourceValue == null) {
+//			throw new InvalidValueException("null operation source");
+//		}
 		//
 		//	Resolve source dispatch type
 		//
@@ -720,8 +721,11 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 					break;
 				}
 			}
-			if (result == null) {
-				throw new InvalidValueException("Java-Null result from '" + staticOperation + "'", null, sourceValue, operationCallExp);
+//			if (result == null) {
+//				throw new InvalidValueException("Java-Null result from '" + staticOperation + "'", null, sourceValue, operationCallExp);
+//			}
+			if (result instanceof NullValue) {
+				throw new InvalidValueException("NullValue result from '" + staticOperation + "'", null, sourceValue, operationCallExp);
 			}
 			return result;
 //		} catch (InvalidValueException e) {
@@ -783,7 +787,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	@Override
     public Object visitRealLiteralExp(@NonNull RealLiteralExp realLiteralExp) {
 		Number realSymbol = realLiteralExp.getRealSymbol();
-		return realSymbol != null ? ValuesUtil.realValueOf(realSymbol) : ValuesUtil.NULL_VALUE;
+		return realSymbol != null ? ValuesUtil.realValueOf(realSymbol) : null;
 	}
 	
 	@Override
@@ -848,7 +852,10 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
     @Override
     public Object visitUnlimitedNaturalLiteralExp(@NonNull UnlimitedNaturalLiteralExp unlimitedNaturalLiteralExp) {
 		Number unlimitedNaturalSymbol = unlimitedNaturalLiteralExp.getUnlimitedNaturalSymbol();
-		IntegerValue integerValue = unlimitedNaturalSymbol != null ? ValuesUtil.integerValueOf(unlimitedNaturalSymbol) : ValuesUtil.NULL_VALUE;
+		if (unlimitedNaturalSymbol == null) {
+			return null;
+		}
+		IntegerValue integerValue = ValuesUtil.integerValueOf(unlimitedNaturalSymbol);
 		if (integerValue.signum() < 0) {
 			if (integerValue == ValuesUtil.integerValueOf(-1)) {
 				integerValue = ValuesUtil.UNLIMITED_VALUE;
@@ -901,10 +908,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 			throw new InvalidValueException("Undefined variable", null, null, variableExp);
 		}
 		Object value = evaluationEnvironment.getValueOf(variableDeclaration);
-		if (value == null) {
-			throw new InvalidValueException("Undefined variable '" + variableDeclaration.getName() + "'", null, null, variableExp);
-		}
-		else if (value instanceof InvalidValue) {
+		if (value instanceof InvalidValue) {
 			Exception e = ((InvalidValue)value).getException();
 			throw new InvalidValueException(e, "Invalid variable '" + variableDeclaration.getName() +"'", e, null, variableExp);
 		}

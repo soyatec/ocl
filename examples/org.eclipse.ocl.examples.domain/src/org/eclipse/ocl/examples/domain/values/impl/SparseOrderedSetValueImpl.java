@@ -19,8 +19,10 @@ package org.eclipse.ocl.examples.domain.values.impl;
 import java.util.Collection;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
@@ -55,7 +57,7 @@ public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
 		}
 
 		@SuppressWarnings("unchecked")
-		public boolean add(@NonNull Object value) {
+		public boolean add(@Nullable Object value) {
 			return ((Collection<Object>)elements).add(value);			
 		}		
 	}
@@ -72,7 +74,7 @@ public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
 		super(typeId, values);
 	}
 
-    public @NonNull OrderedSetValue append(@NonNull Object object) {
+    public @NonNull OrderedSetValue append(@Nullable Object object) {
 		if (object instanceof InvalidValue) {
         	throw new InvalidValueException(EvaluatorMessages.InvalidSource, "append");
 		}
@@ -93,15 +95,11 @@ public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
 		}
 	}
 
-    public @NonNull Object first() {
+    public @Nullable Object first() {
         if (elements.size() <= 0) {
-        	throw new InvalidValueException(EvaluatorMessages.EmptyCollection, "OrderedSet", "first");
+        	throw new InvalidValueException(EvaluatorMessages.EmptyCollection, TypeId.ORDERED_SET_NAME, "first");
         }
-        Object result = elements.iterator().next();
-        if (result == null) {
-        	throw new InvalidValueException("Null collection element");
-        }
-		return result;
+        return elements.iterator().next();
     }
 
     public @NonNull OrderedSetValue flatten() {
@@ -119,7 +117,7 @@ public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
 		return (OrderedSet<? extends Object>) elements;
 	}
 
-	public @NonNull OrderedSetValue including(@NonNull Object value) {
+	public @NonNull OrderedSetValue including(@Nullable Object value) {
 		if (value instanceof InvalidValue) {
 			throw new InvalidValueException(EvaluatorMessages.InvalidSource, "including");
 		}
@@ -128,21 +126,18 @@ public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
 		return new SparseOrderedSetValueImpl(getTypeId(), result);
 	}
 
-    public @NonNull Object last() {
+    public @Nullable Object last() {
         if (elements.size() <= 0) {
-        	throw new InvalidValueException(EvaluatorMessages.EmptyCollection, "OrderedSet", "last");
+        	throw new InvalidValueException(EvaluatorMessages.EmptyCollection, TypeId.ORDERED_SET_NAME, "last");
         }
         Object result = null;
         for (Object next : elements) {
             result = next;
         }
-        if (result == null) {
-        	throw new InvalidValueException("Null collection element");
-        }
         return result;
     }
 
-    public @NonNull OrderedSetValue prepend(@NonNull Object object) {
+    public @NonNull OrderedSetValue prepend(@Nullable Object object) {
 		if (object instanceof InvalidValue) {
 			throw new InvalidValueException(EvaluatorMessages.InvalidSource, "prepend");
 		}
@@ -154,7 +149,7 @@ public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
 
 	@Override
 	public void toString(@NonNull StringBuilder s, int lengthLimit) {
-		s.append("OrderedSet");
+		s.append(TypeId.ORDERED_SET_NAME);
 		super.toString(s, lengthLimit);
 	}
 }

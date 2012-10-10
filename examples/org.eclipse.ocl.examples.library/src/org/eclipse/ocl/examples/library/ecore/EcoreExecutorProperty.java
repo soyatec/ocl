@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.library.ecore;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
@@ -32,7 +33,7 @@ public class EcoreExecutorProperty extends ExecutorProperty
 	}
 
 	@Override
-	public void setValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull ObjectValue objectValue, @NonNull Object propertyValue) {
+	public void setValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull ObjectValue objectValue, @Nullable Object propertyValue) {
 		EObject eObject = objectValue.asNavigableObject();
 		Object eValue;
 		if (propertyValue instanceof Value) {

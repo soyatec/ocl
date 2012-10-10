@@ -24,11 +24,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -534,7 +536,15 @@ public class CollectionTypeImpl
 	@Override
 	public @NonNull TypeId computeId() {
 		if (getUnspecializedElement() == null) {
-			return TypeId.COLLECTION;
+			if (TypeId.COLLECTION_NAME.equals(name)) {
+				return TypeId.COLLECTION;
+			}
+			else if (TypeId.UNIQUE_COLLECTION_NAME.equals(name)) {
+				return TypeId.UNIQUE_COLLECTION;
+			}
+			else {
+				return IdManager.INSTANCE.getCollectionTypeId(name);		// e.g. UniqueCollection
+			}
 		}
 		else {
 			return TypeId.COLLECTION.getSpecializedId(getElementType().getTypeId());
@@ -614,11 +624,13 @@ public class CollectionTypeImpl
 	}
 
 	public @NonNull IntegerValue getLowerValue() {
-		return lower != null ? ValuesUtil.integerValueOf(lower) : ValuesUtil.NULL_VALUE;
+		assert lower != null;
+		return ValuesUtil.integerValueOf(lower);
 	}
 
 	public @NonNull IntegerValue getUpperValue() {
-		return upper != null ? ValuesUtil.integerValueOf(upper) : ValuesUtil.NULL_VALUE;
+		assert upper != null;
+		return ValuesUtil.integerValueOf(upper);
 	}
 
 	public void setLowerValue(@NonNull IntegerValue lower) {

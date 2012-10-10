@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
@@ -42,6 +43,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -484,8 +486,12 @@ public class TypeImpl
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		
-		final @NonNull Object result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, ValuesUtil.valueOf(p));
-		return (Boolean)result;
+		final Object result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, ValuesUtil.valueOf(p));
+		final java.lang.Boolean ecoreResult = (java.lang.Boolean)result;
+		if (ecoreResult != null) {
+			return ecoreResult;
+		}
+		throw new InvalidValueException("null result from ParameterableElementBodies._isCompatibleWith_body_");
 		
 		
 	}
@@ -503,8 +509,9 @@ public class TypeImpl
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull TypeId T_Type = OCLstdlibTables.Types._Type.getTypeId();
 		
-		final @NonNull Object result = TypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, T_Type, this, ValuesUtil.valueOf(selfType));
-		return (Type)result;
+		final Object result = TypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, T_Type, this, ValuesUtil.valueOf(selfType));
+		final org.eclipse.ocl.examples.pivot.Type ecoreResult = (org.eclipse.ocl.examples.pivot.Type)result;
+		return ecoreResult;
 		
 		
 	}
@@ -1113,7 +1120,7 @@ public class TypeImpl
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull Object createInstance(@NonNull DomainStandardLibrary standardLibrary, @NonNull String value) {
+	public @Nullable Object createInstance(@NonNull DomainStandardLibrary standardLibrary, @NonNull String value) {
 		EObject eTarget = getETarget();
 		if (eTarget instanceof EDataType) {
 			EDataType eDataType = (EDataType) eTarget;
@@ -1215,6 +1222,24 @@ public class TypeImpl
 			return IdManager.INSTANCE.getTypeId(this);
 		}
 	}
+
+/*	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof Type)) {
+			return false;
+		}
+		TypeId thisTypeId = getTypeId();
+		TypeId thatTypeId = ((Type)obj).getTypeId();
+		return thisTypeId == thatTypeId;
+	} */
+
+/*	@Override
+	public int hashCode() {
+		return getTypeId().hashCode();
+	} */
 
 	public boolean isEqualTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		if (this == type) {

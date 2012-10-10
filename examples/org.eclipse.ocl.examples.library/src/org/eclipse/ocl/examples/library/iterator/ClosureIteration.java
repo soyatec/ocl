@@ -47,6 +47,7 @@ public class ClosureIteration extends AbstractIteration
 			// If there is the parent is the iterator
 			Object value = iterationManager.get();
 			CollectionValue.Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
+			assert accumulatorValue != null;
 			if (!accumulatorValue.add(value)) {
 				return accumulatorValue;
 			}

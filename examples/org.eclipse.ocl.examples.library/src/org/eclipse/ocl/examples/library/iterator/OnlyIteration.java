@@ -53,6 +53,7 @@ public class OnlyIteration extends AbstractIteration
 	@Override
 	protected @NonNull Object resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
 		MutableObject accumulatorValue = (MutableObject)iterationManager.getAccumulatorValue();
+		assert accumulatorValue != null;
 		Object object = accumulatorValue.get();
 		if (object != null) {
 			return object;		// Normal something found result.
@@ -73,6 +74,7 @@ public class OnlyIteration extends AbstractIteration
 		}
 		else {
 			MutableObject accumulatorValue = (MutableObject)iterationManager.getAccumulatorValue();
+			assert accumulatorValue != null;
 			Object object = accumulatorValue.get();
 			if (object != null) {
 				throw new InvalidValueException("Multiple matching content for 'only'"); //$NON-NLS-1$

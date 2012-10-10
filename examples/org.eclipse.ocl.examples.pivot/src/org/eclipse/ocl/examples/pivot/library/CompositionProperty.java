@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -35,7 +36,7 @@ public class CompositionProperty extends AbstractProperty
 {
 	public static final @NonNull CompositionProperty INSTANCE = new CompositionProperty();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull Object sourceValue, @NonNull DomainProperty property) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @NonNull DomainProperty property) {
 		EObject eObject = asNavigableObject(sourceValue); 
 		Object eValue;
 		EClass eClass = eObject.eClass();
@@ -55,7 +56,7 @@ public class CompositionProperty extends AbstractProperty
 			eValue = eObject.eContainer();		// FIXME this only works for single container type
 		}
 		if (eValue == null) {
-			return NULL_VALUE;
+			return null;
 		}
 		else {
 	//		EReference eContainmentFeature = eObject.eContainmentFeature();

@@ -31,7 +31,7 @@ public class ExecutorDoubleIterationManager extends AbstractIterationManager
 {	
 	protected final @NonNull TypeId returnTypeId;
 	protected final @NonNull LibraryTernaryOperation body;
-	private @NonNull Object accumulatorValue;
+	private @Nullable Object accumulatorValue;
 	protected final @NonNull CollectionValue collectionValue;
 	private @NonNull Iterator<? extends Object> iteratorValue1;
 	private final @NonNull Iterator<? extends Object> iteratorValue2;
@@ -39,7 +39,7 @@ public class ExecutorDoubleIterationManager extends AbstractIterationManager
 	private Object currentValue2;
 	
 	public ExecutorDoubleIterationManager(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull LibraryTernaryOperation body,
-			@NonNull CollectionValue collectionValue, @NonNull Object accumulatorValue) {
+			@NonNull CollectionValue collectionValue, @Nullable Object accumulatorValue) {
 		super(evaluator);
 		this.returnTypeId = returnTypeId;
 		this.body = body;
@@ -67,7 +67,7 @@ public class ExecutorDoubleIterationManager extends AbstractIterationManager
 		return currentValue1 != null;
 	}
 
-	public @NonNull Object evaluateBody() {
+	public @Nullable Object evaluateBody() {
 //		try {
 			return internalEvaluate();
 //		} catch (InvalidValueException e) {
@@ -75,7 +75,7 @@ public class ExecutorDoubleIterationManager extends AbstractIterationManager
 //		}
 	}
 
-	public @NonNull Object getAccumulatorValue() {
+	public @Nullable Object getAccumulatorValue() {
 		return accumulatorValue;
 	}
 	
@@ -83,7 +83,7 @@ public class ExecutorDoubleIterationManager extends AbstractIterationManager
 		return currentValue1 != null;
 	}
 
-	private @NonNull Object internalEvaluate() {
+	private @Nullable Object internalEvaluate() {
 		return body.evaluate(evaluator, returnTypeId, accumulatorValue,
 			DomainUtil.nonNullState(currentValue1), DomainUtil.nonNullState(currentValue2));
 	}

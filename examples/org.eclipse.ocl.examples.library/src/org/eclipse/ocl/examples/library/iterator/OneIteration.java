@@ -53,6 +53,7 @@ public class OneIteration extends AbstractIteration
 	protected @NonNull
 	Object resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
 		MutableBoolean accumulatorValue = (MutableBoolean) iterationManager.getAccumulatorValue();
+		assert accumulatorValue != null;
 		return accumulatorValue.isSet() != false;			// FIXME redundant test to suppress warning
 	}
 
@@ -67,6 +68,7 @@ public class OneIteration extends AbstractIteration
 		}
 		else {
 			MutableBoolean accumulatorValue = (MutableBoolean) iterationManager.getAccumulatorValue();
+			assert accumulatorValue != null;
 			if (accumulatorValue.isSet()) {
 				return Boolean.FALSE;				// Abort after second find
 			}

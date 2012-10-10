@@ -51,19 +51,19 @@ public interface DomainIterationManager
 	 * This is used by non-iterate iteration that intervene between the body evaluation
 	 * and accumulator update.
 	 */
-	@NonNull Object evaluateBody();
+	@Nullable Object evaluateBody();
 	
 	/**
 	 * Get the current state of the iterator.
 	 * <br>
 	 * This is only supported for single iterator iterations.
 	 */
-	@NonNull Object get();
+	@Nullable Object get();
 
 	/**
 	 * Get the current state of the accumulator.
 	 */
-	@NonNull Object getAccumulatorValue();
+	@Nullable Object getAccumulatorValue();
 
 	@NonNull DomainEvaluator getEvaluator();
 

@@ -35,7 +35,7 @@ public class EvaluatorSingleIterationManager
 
 	public EvaluatorSingleIterationManager(@NonNull DomainEvaluator invokingEvaluator,
 			@NonNull DomainExpression body, @NonNull CollectionValue collectionValue,
-			@Nullable DomainTypedElement accumulator, @NonNull Object accumulatorValue,
+			@Nullable DomainTypedElement accumulator, @Nullable Object accumulatorValue,
 			@NonNull DomainTypedElement referredIterator) {
 		super(invokingEvaluator.createNestedEvaluator(), body, collectionValue, accumulator, accumulatorValue);
 		this.depth = 0;
@@ -61,12 +61,8 @@ public class EvaluatorSingleIterationManager
 	}
 
 	@Override
-	public @NonNull Object get() {
-		Object currentValue = iterator.get();
-		if (currentValue == null) {
-			throw new IllegalStateException("cannot get() after iteration complete"); //$NON-NLS-1$
-		}
-		return currentValue;
+	public @Nullable Object get() {
+		return iterator.get();
 	}
 
 	public boolean hasCurrent() {
