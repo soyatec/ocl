@@ -146,7 +146,7 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 //	}
     
 	@Override
-	protected @NonNull List<? extends Object> getElements() {
+	public @NonNull List<? extends Object> getElements() {
 		return (List<? extends Object>) elements;
 	}
 	

@@ -46,9 +46,11 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.EvaluationHaltedException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Environment;
@@ -193,7 +195,7 @@ public class OCLConsolePage extends Page
 				PivotUtil.checkResourceErrors("", resource); //$NON-NLS-1$
 				expressionInOCL = parserContext.getExpression(resource);
 			} catch (ParserException e) {
-				value = ValuesUtil.createInvalidValue(new InvalidValueException(e, ConsoleMessages.Result_ParsingFailure));
+				value = new InvalidValueImpl(new InvalidValueException(e, ConsoleMessages.Result_ParsingFailure));
 				return;
 			}
 			if (expressionInOCL != null) {
@@ -203,7 +205,7 @@ public class OCLConsolePage extends Page
 				PivotEnvironment environment = envFactory.createEnvironment();
 				PivotEvaluationEnvironment evaluationEnvironment = envFactory.createEvaluationEnvironment();
 				Object contextValue = ValuesUtil.valueOf(contextObject);
-				evaluationEnvironment.add(expressionInOCL.getContextVariable(), contextValue);
+				evaluationEnvironment.add(DomainUtil.nonNullModel(expressionInOCL.getContextVariable()), contextValue);
 	//			if (modelManager == null) {
 					// let the evaluation environment create one
 					@NonNull DomainModelManager modelManager2 = modelManager = evaluationEnvironment.createModelManager(contextObject);
@@ -215,11 +217,11 @@ public class OCLConsolePage extends Page
 					EvaluationVisitor evaluationVisitor = new CancelableEvaluationVisitor(monitor, environment, evaluationEnvironment, modelManager2);
 			        value = evaluationVisitor.visitExpressionInOCL(expressionInOCL);
 				} catch (InvalidValueException e) {
-					value = ValuesUtil.createInvalidValue(e);
+					value = new InvalidValueImpl(e);
 				} catch (EvaluationHaltedException e) {
-					value = ValuesUtil.createInvalidValue(new InvalidValueException(ConsoleMessages.Result_EvaluationTerminated));
+					value = new InvalidValueImpl(new InvalidValueException(ConsoleMessages.Result_EvaluationTerminated));
 				} catch (Exception e) {
-					value = ValuesUtil.createInvalidValue(new InvalidValueException(e, ConsoleMessages.Result_EvaluationFailure));
+					value = new InvalidValueImpl(new InvalidValueException(e, ConsoleMessages.Result_EvaluationFailure));
 				} finally {
 	//				metaModelManager.setMonitor(null);
 				}

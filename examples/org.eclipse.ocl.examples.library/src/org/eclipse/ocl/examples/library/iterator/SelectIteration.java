@@ -40,7 +40,7 @@ public class SelectIteration extends AbstractIteration
 	}
 	
 	@Override
-    protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
+    protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) throws Exception {
 		Object bodyVal = iterationManager.evaluateBody();		
 		assert !(bodyVal instanceof InvalidValue);
 		if (isNull(bodyVal)) {

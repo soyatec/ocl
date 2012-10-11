@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
@@ -127,12 +128,12 @@ public class TupleValueImpl extends ValueImpl implements TupleValue
 	}
 
     // implements the inherited specification
-    public @NonNull Object getValue(@NonNull TuplePartId partId) {
+    public @Nullable Object getValue(@NonNull TuplePartId partId) {
         return getValue(partId.getIndex());
     }
 
     // implements the inherited specification
-    public @NonNull Object getValue(int index) {
+    public @Nullable Object getValue(int index) {
         return partValues[index];
     }
 

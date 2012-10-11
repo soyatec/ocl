@@ -542,7 +542,9 @@ public class CollectionTypeImpl
 				return TypeId.UNIQUE_COLLECTION;
 			}
 			else {
-				return IdManager.INSTANCE.getCollectionTypeId(name);		// e.g. UniqueCollection
+				String name2 = name;
+				assert name2 != null;
+				return IdManager.INSTANCE.getCollectionTypeId(name2);		// e.g. UniqueCollection
 			}
 		}
 		else {
@@ -623,13 +625,15 @@ public class CollectionTypeImpl
 	}
 
 	public @NonNull IntegerValue getLowerValue() {
-		assert lower != null;
-		return ValuesUtil.integerValueOf(lower);
+		Number lower2 = lower;
+		assert lower2 != null;
+		return ValuesUtil.integerValueOf(lower2);
 	}
 
 	public @NonNull IntegerValue getUpperValue() {
-		assert upper != null;
-		return ValuesUtil.integerValueOf(upper);
+		Number upper2 = upper;
+		assert upper2 != null;
+		return ValuesUtil.integerValueOf(upper2);
 	}
 
 	public void setLowerValue(@NonNull IntegerValue lower) {

@@ -40,7 +40,7 @@ import org.eclipse.ocl.examples.pivot.PivotTables;
 /**
  * OperationCallExpBodies provides the Java implementation bodies of OCL-defined OperationCallExp operations and properties.
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({"nls", "null", "unused"})
 public class OperationCallExpBodies
 {
 
@@ -70,20 +70,23 @@ public class OperationCallExpBodies
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 			
 			
-			org.eclipse.emf.common.util.EList<org.eclipse.ocl.examples.pivot.OCLExpression> unboxed_A_symbol_ = unboxed_self != null ? unboxed_self.getArgument() : null;
+			if (self == null) { throw new InvalidValueException("Null property source"); }
+			org.eclipse.emf.common.util.EList<org.eclipse.ocl.examples.pivot.OCLExpression> unboxed_A_symbol_ = unboxed_self.getArgument();
 			assert unboxed_A_symbol_ != null;
-			final @NonNull Value A_symbol_ = standardLibrary.createOrderedSetValueOf(T_OrderedSet_pivot__OCLExpression_, unboxed_A_symbol_);
+			final @NonNull Value A_symbol_ = createOrderedSetValue(T_OrderedSet_pivot__OCLExpression_, unboxed_A_symbol_);
 			
 			
 			Object A_symbol__1 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, T_Integer, A_symbol_);
 			
-			org.eclipse.ocl.examples.pivot.Operation unboxed_A_symbol__2 = unboxed_self != null ? unboxed_self.getReferredOperation() : null;
+			if (self == null) { throw new InvalidValueException("Null property source"); }
+			org.eclipse.ocl.examples.pivot.Operation unboxed_A_symbol__2 = unboxed_self.getReferredOperation();
 			Object A_symbol__2 = valueOf(unboxed_A_symbol__2); // Operation
 			
 			
-			org.eclipse.emf.common.util.EList<org.eclipse.ocl.examples.pivot.Parameter> unboxed_A_symbol__3 = unboxed_A_symbol__2 != null ? unboxed_A_symbol__2.getOwnedParameter() : null;
+			if (A_symbol__2 == null) { throw new InvalidValueException("Null property source"); }
+			org.eclipse.emf.common.util.EList<org.eclipse.ocl.examples.pivot.Parameter> unboxed_A_symbol__3 = unboxed_A_symbol__2.getOwnedParameter();
 			assert unboxed_A_symbol__3 != null;
-			final @NonNull Value A_symbol__3 = standardLibrary.createOrderedSetValueOf(T_OrderedSet_pivot__Parameter_, unboxed_A_symbol__3);
+			final @NonNull Value A_symbol__3 = createOrderedSetValue(T_OrderedSet_pivot__Parameter_, unboxed_A_symbol__3);
 			
 			
 			Object A_symbol__4 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, T_Integer, A_symbol__3);

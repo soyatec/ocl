@@ -65,7 +65,7 @@ import org.eclipse.jdt.annotation.Nullable;
 /**
  * [className/] provides the Java implementation bodies of OCL-defined [pType.name/] operations and properties.
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({"nls", "null", "unused"})
 public class [className/]
 {
 [for (pConstraint : Constraint | pType.ownedRule->sortedBy(name)) before ('\n') separator ('\n')]
@@ -125,7 +125,7 @@ public static class [className/] extends <%Abstract[genPackage.emitOperationArit
 	*/
 	public @Nullable Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, final @Nullable Object [defineSymbolName(expInOcl.contextVariable, 'self')/][if expInOcl.parameterVariable->notEmpty()]
 [for (parameter : Variable | expInOcl.parameterVariable)]
-, final @Nullable Object [defineSymbolName(parameter, parameter.name)/][/for][/if]) throws <%InvalidValueException%> {
+, final @Nullable Object [defineSymbolName(parameter, parameter.name)/][/for][/if]) throws Exception {
 		assert self != null;
 		final @NonNull [pType.getEscapedInterfaceName(genPackage)/] [expInOcl.defineFlag('unboxed_self')/] = ([pType.getEscapedInterfaceName(genPackage)/])self;
 		[expInOcl.emitNonStatics(constants)/]
@@ -139,7 +139,7 @@ public static class [className/] extends <%Abstract[genPackage.emitOperationArit
 	
 		public @Nullable Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, final @Nullable Object [defineSymbolName(expInOcl.contextVariable, 'self')/][if expInOcl.parameterVariable->notEmpty()]
 	[for (parameter : Variable | expInOcl.parameterVariable)]
-	, @Nullable Object [defineSymbolName(parameter, parameter.name)/][/for][/if]) throws <%InvalidValueException%> {
+	, @Nullable Object [defineSymbolName(parameter, parameter.name)/][/for][/if]) throws Exception {
 			assert self != null;
 			final @NonNull [pType.getEscapedInterfaceName(genPackage)/] [expInOcl.defineFlag('unboxed_self')/] = ([pType.getEscapedInterfaceName(genPackage)/])self;
 			[expInOcl.messageExpression.emitExpression(pType, genPackage, expInOcl)/]
@@ -169,7 +169,7 @@ public static class [className/] extends <%Abstract[genPackage.emitOperationArit
 	*/
 	public @Nullable Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, final @Nullable Object [defineSymbolName(expInOcl.contextVariable, 'self')/][if expInOcl.parameterVariable->notEmpty()]
 [for (parameter : Variable | expInOcl.parameterVariable)]
-, final @Nullable Object [defineSymbolName(parameter, parameter.name)/][/for][/if]) throws <%InvalidValueException%> {
+, final @Nullable Object [defineSymbolName(parameter, parameter.name)/][/for][/if]) throws Exception {
 		assert self != null;
 		final @NonNull [pType.getEscapedInterfaceName(genPackage)/] [expInOcl.defineFlag('unboxed_self')/] = ([pType.getEscapedInterfaceName(genPackage)/])self;
 		[expInOcl.emitNonStatics(constants)/]
@@ -197,7 +197,7 @@ public static class [className/] extends <%AbstractProperty%>
 	/*
 	[expInOcl.prettyPrint().trim()/]
 	*/
-	public @Nullable Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, final @Nullable Object [defineSymbolName(expInOcl.contextVariable, 'self')/], @NonNull <%DomainProperty%> property) throws <%InvalidValueException%> {
+	public @Nullable Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, final @Nullable Object [defineSymbolName(expInOcl.contextVariable, 'self')/], @NonNull <%DomainProperty%> property) throws Exception {
 		assert self != null;
 		final @NonNull [pType.getEscapedInterfaceName(genPackage)/] [expInOcl.defineFlag('unboxed_self')/] = ([pType.getEscapedInterfaceName(genPackage)/])self;
 		[expInOcl.emitNonStatics(constants)/]

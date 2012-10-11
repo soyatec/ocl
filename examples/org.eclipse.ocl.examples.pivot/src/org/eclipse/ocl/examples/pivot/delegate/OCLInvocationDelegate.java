@@ -79,7 +79,7 @@ public class OCLInvocationDelegate extends BasicInvocationDelegate
 				for (int i = 0; i < parms.size(); i++) {
 					Object object = arguments.get(i);
 					Object value = ValuesUtil.valueOf(object);
-					env.add(parms.get(i), value);
+					env.add(DomainUtil.nonNullModel(parms.get(i)), value);
 				}
 			}
 			Object result = query.evaluate(target);

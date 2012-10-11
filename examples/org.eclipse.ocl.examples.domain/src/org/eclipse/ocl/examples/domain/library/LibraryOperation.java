@@ -42,10 +42,11 @@ public interface LibraryOperation extends LibraryFeature
 	 * @param sourceVal the source operand for the operation
 	 * @param operationCall the operation and additional arguments
 	 * @return the evaluated value
+	 * @throws Exception 
 	 * @throws InvalidValueException 
 	 */
 //	Value evaluate(Evaluator evaluator, Value sourceVal, OperationCallExp operationCall)
 //		throws InvalidEvaluationException, InvalidValueException;
-	@Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, Object... argumentValues);
+	@Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, Object... argumentValues) throws Exception;
 
 }

@@ -48,15 +48,12 @@ import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.ocl.examples.pivot.utilities.HTMLBuffer;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
-import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.markup.Markup;
 import org.eclipse.ocl.examples.xtext.markup.MarkupUtils;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControlInput;
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 
 public class MarkupHoverProvider extends DefaultEObjectHoverProvider
 {
@@ -138,7 +135,7 @@ public class MarkupHoverProvider extends DefaultEObjectHoverProvider
 			return null;
 		}
 		try {
-			MetaModelManager metaModelManager = ElementUtil.findMetaModelManager(resource);
+			MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(resource);
 			if (metaModelManager == null) {
 				return null;
 			}
@@ -294,7 +291,7 @@ public class MarkupHoverProvider extends DefaultEObjectHoverProvider
 
 	protected XtextBrowserInformationControlInput getHoverInfo(EObject element,
 			ITextViewer viewer, IRegion hoverRegion, XtextBrowserInformationControlInput previous) {
-		IXtextDocument xtextDocument = XtextDocumentUtil.get(viewer);
+//		IXtextDocument xtextDocument = XtextDocumentUtil.get(viewer);
 		return super.getHoverInfo(element, hoverRegion, previous);
 	}
 }

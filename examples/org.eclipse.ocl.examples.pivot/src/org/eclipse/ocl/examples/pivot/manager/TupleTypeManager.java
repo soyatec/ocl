@@ -50,7 +50,7 @@ public class TupleTypeManager
 	/**
 	 * TuplePart provides a convenient descriptor for a tuple part complying with the full EMF model protocols.
 	 */
-	public static class TuplePart extends TypedElementImpl // implements Comparable<TuplePart>
+	public static class TuplePart extends TypedElementImpl
 	{
 		protected final @NonNull TuplePartId partId;
 		
@@ -59,23 +59,7 @@ public class TupleTypeManager
 			setName(partId.getName());
 		}
 
-		
-//		public TuplePart(@NonNull String name, @NonNull Type type) {
-//			setName(name);
-//			setType(type);
-//			this.partId = IdManager.INSTANCE.getTuplePartId(name, type.getTypeId());
-//		}
-
-/*		public int compareTo(TupleTypeId.Part o) {			// FIXME Type
-			String n1 = name;
-			String n2 = o.getName();
-			if (n1 == n2) {
-				return 0;
-			}
-			return n1.compareTo(n2);
-		} */
-
-
+		@Override
 		public @NonNull TypeId getTypeId() {
 			return partId.getTypeId();
 		}
@@ -144,12 +128,14 @@ public class TupleTypeManager
 //		List<TypedElement> commonProperties = new ArrayList<TypedElement>(leftProperties.size());
 		List<TuplePartId> commonPartIds = new ArrayList<TuplePartId>(leftProperties.size());
 		for (Property leftProperty : leftProperties) {
-			Property rightProperty = DomainUtil.getNamedElement(rightProperties, leftProperty.getName());
+			String name = leftProperty.getName();
+			assert name != null;
+			Property rightProperty = DomainUtil.getNamedElement(rightProperties, name);
 			Type leftPropertyType = DomainUtil.nonNullModel(leftProperty.getType());
 			Type rightPropertyType = DomainUtil.nonNullModel(rightProperty.getType());
 //			TypedElement commonProperty = null;
 			Type commonType = metaModelManager.getCommonType(leftPropertyType, rightPropertyType, bindings);
-			TuplePartId commonPartId = IdManager.INSTANCE.createTuplePartId(leftProperty.getName(), commonType.getTypeId());
+			TuplePartId commonPartId = IdManager.INSTANCE.createTuplePartId(name, commonType.getTypeId());
 			commonPartIds.add(commonPartId);
 //			if (commonType != leftPropertyType) {
 //				isLeft = false;

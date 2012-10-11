@@ -17,7 +17,6 @@
 
 package org.eclipse.ocl.examples.domain.evaluation;
 
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
@@ -93,7 +92,7 @@ public class InvalidValueException extends DomainException
 		this(ValuesUtil.createInvalidValue(message));
 	} */
 
-	public InvalidValueException(@Nullable Exception exception, @NonNull String message) {
+	public InvalidValueException(@Nullable Exception exception, /*@NonNull*/ String message) {
 		super(message, exception);
 	}
 

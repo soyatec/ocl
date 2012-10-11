@@ -27,6 +27,7 @@ import org.eclipse.ocl.examples.domain.ids.TemplateBinding;
 import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 
 public class TemplateBindingImpl extends AbstractTypeId implements TemplateBinding
@@ -43,16 +44,13 @@ public class TemplateBindingImpl extends AbstractTypeId implements TemplateBindi
 	}
 
 	public @NonNull String getDisplayName() {
-		if (templateParameter != null) {
-			return String.valueOf(templateParameter);
-		}
-		else {
-			return String.valueOf(templateParameterId);
-		}
+		String string = String.valueOf(templateParameter != null ? templateParameter : templateParameterId);
+		assert string != null;
+		return string;
 	}
 
 	public @NonNull DomainTemplateParameter getTemplateParameter() {
-		return templateParameter;
+		return DomainUtil.nonNullState(templateParameter);
 	}
 
 	@Override
@@ -88,13 +86,15 @@ public class TemplateBindingImpl extends AbstractTypeId implements TemplateBindi
 		}
 	}
 	   
-    public @NonNull TypeId specialize(@NonNull TemplateBindings templateBindings) {
+    @Override
+	public @NonNull TypeId specialize(@NonNull TemplateBindings templateBindings) {
     	int index = templateParameterId.getIndex();
 		ElementId templateBinding = templateBindings.get(index);
 		if (templateBinding instanceof TemplateBinding) {
 			return new TemplateBindingImpl(((TemplateBinding)templateBinding).getTemplateParameter());
 		}
 		else {
+			assert templateBinding != null;
 			return (TypeId) templateBinding;
 		}
 	}

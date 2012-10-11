@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -143,7 +144,12 @@ public class ImplementationManager
 			return ImplicitNonCompositionProperty.INSTANCE;
 		}
 		else if (property.getOwningType() instanceof TupleType) {
-			return TuplePartProperty.INSTANCE;
+			TupleType tupleType = (TupleType)property.getOwningType();
+			String name = property.getName();
+			assert name != null;
+			TuplePartId tuplePartId = tupleType.getTypeId().getPartId(name);
+			assert tuplePartId != null;
+			return new TuplePartProperty(tuplePartId);
 		}
 		else if (property.isStatic()) {
 			return StaticProperty.INSTANCE;

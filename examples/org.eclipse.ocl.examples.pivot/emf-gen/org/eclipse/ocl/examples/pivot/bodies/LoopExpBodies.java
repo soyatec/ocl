@@ -45,7 +45,7 @@ import org.eclipse.ocl.examples.pivot.Variable;
 /**
  * LoopExpBodies provides the Java implementation bodies of OCL-defined LoopExp operations and properties.
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({"nls", "null", "unused"})
 public class LoopExpBodies
 {
 
@@ -74,51 +74,48 @@ public class LoopExpBodies
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 			
 			
-			org.eclipse.emf.common.util.EList<org.eclipse.ocl.examples.pivot.Variable> unboxed_A_symbol_ = unboxed_self != null ? unboxed_self.getIterator() : null;
-			assert unboxed_A_symbol_ != null;
-			final @NonNull Value A_symbol_ = standardLibrary.createOrderedSetValueOf(T_OrderedSet_pivot__Variable_, unboxed_A_symbol_);
+			if (self == null) { throw new InvalidValueException("Null property source"); }
+			org.eclipse.emf.common.util.EList<org.eclipse.ocl.examples.pivot.Variable> unboxed_A_symbol__1 = unboxed_self.getIterator();
+			assert unboxed_A_symbol__1 != null;
+			final @NonNull Value A_symbol__1 = createOrderedSetValue(T_OrderedSet_pivot__Variable_, unboxed_A_symbol__1);
 			
 			
 			
-			assert A_symbol_ != null;
-			final @NonNull Iterator<?> A_symbol__1_iteratorVal = ((CollectionValue)A_symbol_).iterator();
+			assert A_symbol__1 != null;
+			final @NonNull Iterator<?> A_symbol__iteratorVal = ((CollectionValue)A_symbol__1).iterator();
 			Object V_1_ = null;	// iterator: 1_
-			Object A_symbol__1;
+			Object A_symbol_;
 			while (true) {
-				if (!A_symbol__1_iteratorVal.hasNext()) {
-					A_symbol__1 = TRUE_VALUE;
+				if (!A_symbol__iteratorVal.hasNext()) {
+					A_symbol_ = TRUE_VALUE;
 					break;
 				}
-				Object A_symbol__1_bodyVal;
-				try {
-					/*
-						initExpression->isEmpty()
-					*/
-					V_1_ = A_symbol__1_iteratorVal.next();
-					
-					Variable unboxed_V_1_ = (Variable)V_1_;	// Variable
-					org.eclipse.ocl.examples.pivot.OCLExpression unboxed_A_symbol__2 = unboxed_V_1_ != null ? unboxed_V_1_.getInitExpression() : null;
-					Object A_symbol__2 = valueOf(unboxed_A_symbol__2); // OCLExpression
-					
-					
-					Object A_symbol__3 = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, T_Set_pivot__OCLExpression_, A_symbol__2);
-					Object A_symbol__4 = CollectionIsEmptyOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__3);
-					A_symbol__1_bodyVal = A_symbol__4;
-				} catch (Exception e) {
-					A_symbol__1_bodyVal = createInvalidValue(e);
-				}
-				if (A_symbol__1_bodyVal == null) {
-					A_symbol__1 = createInvalidValue(EvaluatorMessages.UndefinedBody, "forAll");
-					break;
-				}
-				else if (A_symbol__1_bodyVal != TRUE_VALUE) {
-					A_symbol__1 = FALSE_VALUE;			// Abort after a fail
-					break;
-				}
+				/*
+					initExpression->isEmpty()
+				*/
+				V_1_ = A_symbol__iteratorVal.next();
 				
+				if (V_1_ == null) { throw new InvalidValueException("Null property source"); }
+				Variable unboxed_V_1_ = (Variable)V_1_;	// Variable
+				org.eclipse.ocl.examples.pivot.OCLExpression unboxed_A_symbol__2 = unboxed_V_1_.getInitExpression();
+				Object A_symbol__2 = valueOf(unboxed_A_symbol__2); // OCLExpression
+				
+				
+				Object A_symbol__3 = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, T_Set_pivot__OCLExpression_, A_symbol__2);
+				Object A_symbol__4 = CollectionIsEmptyOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__3);
+				Object A_symbol__bodyVal = A_symbol__4;
+				if (A_symbol__bodyVal != TRUE_VALUE) {
+					if (A_symbol__bodyVal == null) {
+						throw new InvalidValueException(EvaluatorMessages.UndefinedBody, "forAll");
+					}
+					else {
+						A_symbol_ = FALSE_VALUE;			// Abort after a fail
+						break;
+					}
+				}
 			}
 			
-			return A_symbol__1;
+			return A_symbol_;
 		}
 	}
 
@@ -144,11 +141,13 @@ public class LoopExpBodies
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 			
 			
-			org.eclipse.ocl.examples.pivot.OCLExpression unboxed_A_symbol__5 = unboxed_self != null ? unboxed_self.getSource() : null;
+			if (self == null) { throw new InvalidValueException("Null property source"); }
+			org.eclipse.ocl.examples.pivot.OCLExpression unboxed_A_symbol__5 = unboxed_self.getSource();
 			Object A_symbol__5 = valueOf(unboxed_A_symbol__5); // OCLExpression
 			
 			
-			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__6 = unboxed_A_symbol__5 != null ? unboxed_A_symbol__5.getType() : null;
+			if (A_symbol__5 == null) { throw new InvalidValueException("Null property source"); }
+			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__6 = unboxed_A_symbol__5.getType();
 			Object A_symbol__6 = createTypeValue(unboxed_A_symbol__6);
 			
 			

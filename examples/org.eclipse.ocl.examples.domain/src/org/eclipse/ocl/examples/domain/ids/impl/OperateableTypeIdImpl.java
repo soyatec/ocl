@@ -61,10 +61,7 @@ public abstract class OperateableTypeIdImpl extends AbstractTypeId
 		return memberOperations2.getTypeId(hashCode, name, anOperation.getParameterTypes());
 	}
 
-	protected TemplateParameterId[] computeTemplateParameters(DomainType[] domainTypes) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	protected abstract @NonNull TemplateParameterId[] computeTemplateParameters(DomainType[] domainTypes);
 
 	@Override
 	public final int hashCode() {

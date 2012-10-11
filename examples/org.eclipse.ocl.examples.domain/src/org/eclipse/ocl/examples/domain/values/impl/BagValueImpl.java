@@ -146,6 +146,25 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 		if (!(obj instanceof BagValueImpl) || (obj instanceof SetValue)) {
 			return false;
 		}
+
+/*		@Override
+		public boolean equals(Object obj) {
+			if (!(obj instanceof SetValue)) {
+				return false;
+			}
+			int thisSize = elements.size();
+			Collection<? extends Object> thoseElements = ((SetValue)obj).getElements();
+			int thatSize = thoseElements.size();
+			if (thisSize != thatSize) {
+				return false;
+			}
+			if (thoseElements instanceof Set<?>) {
+				return thoseElements.containsAll(elements);
+			}
+			else {
+				return elements.containsAll(thoseElements);
+			}
+		} */
 		return elements.equals(((BagValueImpl)obj).elements);
 	}
 
@@ -189,7 +208,7 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 //	}
     
 	@Override
-	protected @NonNull Bag<? extends Object> getElements() {
+	public @NonNull Bag<? extends Object> getElements() {
 		return (Bag<? extends Object>) elements;
 	}
 

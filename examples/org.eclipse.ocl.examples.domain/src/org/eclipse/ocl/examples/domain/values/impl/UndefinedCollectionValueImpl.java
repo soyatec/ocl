@@ -109,6 +109,10 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 //	public @NonNull DomainCollectionType getCollectionType(@NonNull DomainStandardLibrary standardLibrary) {
 //		return (DomainCollectionType) getType(standardLibrary);
 //	}
+    
+	public @NonNull List<? extends Object> getElements() {
+		throw new InvalidValueException("bad getElements()");
+	}
 	
 	public String getKind() {
 	    return TypeId.COLLECTION_NAME;		// FIXME UOE ??

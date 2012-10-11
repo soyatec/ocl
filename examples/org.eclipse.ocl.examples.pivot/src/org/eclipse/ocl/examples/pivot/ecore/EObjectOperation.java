@@ -70,7 +70,7 @@ public class EObjectOperation extends AbstractPolyOperation
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 		DomainEvaluator nestedEvaluator = evaluator.createNestedEvaluator();
 		DomainEvaluationEnvironment nestedEvaluationEnvironment = nestedEvaluator.getEvaluationEnvironment();
-		nestedEvaluationEnvironment.add(expressionInOCL.getContextVariable(), sourceValue);
+		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(expressionInOCL.getContextVariable()), sourceValue);
 		return nestedEvaluator.evaluate(DomainUtil.nonNullPivot(expressionInOCL.getBodyExpression()));
 	}
 
@@ -85,9 +85,9 @@ public class EObjectOperation extends AbstractPolyOperation
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object argumentValue) {
 		DomainEvaluator nestedEvaluator = evaluator.createNestedEvaluator();
 		DomainEvaluationEnvironment nestedEvaluationEnvironment = nestedEvaluator.getEvaluationEnvironment();
-		nestedEvaluationEnvironment.add(expressionInOCL.getContextVariable(), sourceValue);
+		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(expressionInOCL.getContextVariable()), sourceValue);
 		List<Variable> parameterVariables = expressionInOCL.getParameterVariable();
-		nestedEvaluationEnvironment.add(parameterVariables.get(0).getRepresentedParameter(), argumentValue);
+		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameterVariables.get(0).getRepresentedParameter()), argumentValue);
 		return nestedEvaluator.evaluate(DomainUtil.nonNullPivot(expressionInOCL.getBodyExpression()));
 	}
 
@@ -102,10 +102,10 @@ public class EObjectOperation extends AbstractPolyOperation
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		DomainEvaluator nestedEvaluator = evaluator.createNestedEvaluator();
 		DomainEvaluationEnvironment nestedEvaluationEnvironment = nestedEvaluator.getEvaluationEnvironment();
-		nestedEvaluationEnvironment.add(expressionInOCL.getContextVariable(), sourceValue);
+		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(expressionInOCL.getContextVariable()), sourceValue);
 		List<Variable> parameterVariables = expressionInOCL.getParameterVariable();
-		nestedEvaluationEnvironment.add(parameterVariables.get(0).getRepresentedParameter(), firstArgumentValue);
-		nestedEvaluationEnvironment.add(parameterVariables.get(1).getRepresentedParameter(), secondArgumentValue);
+		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameterVariables.get(0).getRepresentedParameter()), firstArgumentValue);
+		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameterVariables.get(1).getRepresentedParameter()), secondArgumentValue);
 		return nestedEvaluator.evaluate(DomainUtil.nonNullPivot(expressionInOCL.getBodyExpression()));
 	}
 
@@ -115,11 +115,11 @@ public class EObjectOperation extends AbstractPolyOperation
 		}
 		DomainEvaluator nestedEvaluator = evaluator.createNestedEvaluator();
 		DomainEvaluationEnvironment nestedEvaluationEnvironment = nestedEvaluator.getEvaluationEnvironment();
-		nestedEvaluationEnvironment.add(expressionInOCL.getContextVariable(), sourceValue);
+		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(expressionInOCL.getContextVariable()), sourceValue);
 		List<Variable> parameterVariables = expressionInOCL.getParameterVariable();
 		int iMax = Math.min(parameterVariables.size(), argumentValues.length);
 		for (int i = 0; i < iMax; i++) {
-			nestedEvaluationEnvironment.add(parameterVariables.get(i).getRepresentedParameter(), argumentValues[i]);
+			nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameterVariables.get(i).getRepresentedParameter()), argumentValues[i]);
 		}
 		return nestedEvaluator.evaluate(DomainUtil.nonNullPivot(expressionInOCL.getBodyExpression()));
 	}

@@ -22,8 +22,10 @@ package org.eclipse.ocl.examples.pivot.evaluation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -56,6 +58,7 @@ import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
@@ -279,8 +282,9 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 //			}
 		} else
 		{
-			List<Object> results = new ArrayList<Object>();
-			// not a sequence or not a simple range
+			List<Object> orderedResults = new ArrayList<Object>();
+			Set<Object> uniqueResults = type.isUnique() ? new HashSet<Object>() : null;
+					// not a sequence or not a simple range
 			for (CollectionLiteralPart part : parts) {
 				if (part instanceof CollectionItem) {
 					// CollectionItem part
@@ -288,7 +292,9 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 					OCLExpression itemExp = item.getItem();
 					Object itemVal = itemExp.accept(getUndecoratedVisitor());
 //					Object itemValue = ValuesUtil.asValidValue(itemVal);
-					results.add(itemVal);
+					if ((uniqueResults == null) || uniqueResults.add(itemVal)) {
+						orderedResults.add(itemVal);
+					}
 				} else {
 					// Collection range
 					CollectionRange range = (CollectionRange) part;
@@ -332,7 +338,10 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 					// add values between first and last inclusive
 					int increment = lastInt.compareTo(firstInt);
 					for (int i = firstInt; true; i = i + increment) {
-                        results.add(ValuesUtil.integerValueOf(i));
+                        IntegerValue integerValue = ValuesUtil.integerValueOf(i);
+    					if ((uniqueResults == null) || uniqueResults.add(integerValue)) {
+    						orderedResults.add(integerValue);
+    					}
                         if (i == lastInt) {
                         	break;
                         }
@@ -340,7 +349,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 				} // end of collection range
 
 			} // end of parts iterator
-			return ValuesUtil.createCollectionValue(type.isOrdered(), type.isUnique(), DomainUtil.nonNullModel(type.getElementType()).getTypeId(), results);
+			return ValuesUtil.createCollectionValue(type.isOrdered(), type.isUnique(), DomainUtil.nonNullModel(type.getElementType()).getTypeId(), orderedResults);
 		} // end of not-simple range case
 	} // end of Set, OrderedSet, Bag Literals
 
@@ -567,12 +576,13 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
     public Object visitLetExp(@NonNull LetExp letExp) {
 		OCLExpression expression = letExp.getIn();		// Never null when valid
 		Variable variable = letExp.getVariable();		// Never null when valid
+		assert variable != null;
 		Object value;
 		try {
 			value = variable.accept(this);
 		}
 		catch (InvalidValueException e) {
-			value = ValuesUtil.createInvalidValue(e);
+			value = new InvalidValueImpl(e);
 		}
 //		value = ValuesUtil.asValue(value);
     	EvaluationVisitor nestedVisitor = getUndecoratedVisitor().createNestedEvaluator();		
@@ -623,7 +633,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 				sourceValue = source.accept(undecoratedVisitor);
 			}
 			catch (InvalidValueException e) {
-				sourceValue = ValuesUtil.createInvalidValue(e);	// FIXME ?? propagate part of environment
+				sourceValue = new InvalidValueImpl(e);	// FIXME ?? propagate part of environment
 			}
 		}
 		else {
@@ -672,7 +682,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 							try {
 								onlyArgument = argument0 != null ? undecoratedVisitor.evaluate(argument0) : ValuesUtil.INVALID_VALUE;
 							} catch (InvalidValueException e) {
-								onlyArgument = ValuesUtil.createInvalidValue(e);
+								onlyArgument = new InvalidValueImpl(e);
 							}
 						}
 						else {

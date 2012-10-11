@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClassifier;
@@ -54,7 +53,6 @@ import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
-import org.eclipse.ocl.examples.domain.values.OrderedSet;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
@@ -459,35 +457,6 @@ public abstract class ValuesUtil
 		return new EEnumLiteralValueImpl(enumerationLiteralId, eEnumLiteral);
 	}
 
-	@Deprecated
-	public static @NonNull InvalidValue createInvalidValue(@NonNull Exception exception) {
-		return new InvalidValueImpl(exception);
-	}
-
-	@Deprecated
-	public static @NonNull InvalidValue createInvalidValue(/*@NonNull*/ String messageTemplate, Object... bindings) {
-		return new InvalidValueImpl(new InvalidValueException(messageTemplate, bindings));
-	}
-
-/*	public static @NonNull InvalidValue createInvalidValue(Exception e, / *@NonNull* / String messageTemplate, Object... bindings) {
-		return new InvalidValueImpl(DomainUtil.bind(messageTemplate, bindings), e);
-	}
-
-	public static @NonNull InvalidValue createInvalidValue(@NonNull String message,
-			@NonNull DomainEvaluationEnvironment evaluationEnvironment, @Nullable Object context, @Nullable DomainExpression expression) {
-		return new InvalidValueImpl(message, evaluationEnvironment, context, expression);
-	}
-
-	public static @NonNull InvalidValue createInvalidValue(@NonNull String message, @Nullable Exception exception,
-			@Nullable DomainEvaluationEnvironment evaluationEnvironment, @Nullable Object context, @Nullable DomainExpression expression) {
-		return new InvalidValueImpl(message, exception, evaluationEnvironment, context, expression);
-	}
-
-	public static @NonNull InvalidValue createInvalidValue(@NonNull String message, @Nullable InvalidValue nestedValue,
-			@Nullable DomainEvaluationEnvironment evaluationEnvironment, @Nullable Object context, @Nullable DomainExpression expression) {
-		return new InvalidValueImpl(message, nestedValue, evaluationEnvironment, context, expression);
-	} */
-
 	public static @NonNull ObjectValue createObjectValue(@NonNull Object object) {
 		return new JavaObjectValueImpl(object);
 	}
@@ -500,7 +469,7 @@ public abstract class ValuesUtil
 		return new SparseOrderedSetValueImpl(typeId, values);
 	}
 
-	public static @NonNull OrderedSetValue createOrderedSetValue(@NonNull CollectionTypeId typeId, @NonNull OrderedSet<? extends Object> values) {
+	public static @NonNull OrderedSetValue createOrderedSetValue(@NonNull CollectionTypeId typeId, @NonNull Collection<? extends Object> values) {
 		return new SparseOrderedSetValueImpl(typeId, values);
 	}
 
@@ -528,7 +497,7 @@ public abstract class ValuesUtil
 		return new SparseSequenceValueImpl(typeId, values);
 	}
 
-	public static @NonNull SetValue createSetValue(@NonNull CollectionTypeId typeId, @NonNull Set<? extends Object> values) {
+	public static @NonNull SetValue createSetValue(@NonNull CollectionTypeId typeId, @NonNull Collection<? extends Object> values) {
 		return new SetValueImpl(typeId, values);
 	}
 

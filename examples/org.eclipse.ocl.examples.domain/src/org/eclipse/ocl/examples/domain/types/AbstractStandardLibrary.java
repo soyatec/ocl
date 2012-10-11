@@ -512,7 +512,9 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 	public @NonNull DomainTupleType getTupleType(DomainTypedElement ... parts) {
 		List<TuplePartId> partsList = new ArrayList<TuplePartId>(parts.length);
 		for (DomainTypedElement part : parts) {
-			partsList.add(IdManager.INSTANCE.createTuplePartId(part.getName(), part.getTypeId()));
+			String partName = part.getName();
+			assert partName != null;
+			partsList.add(IdManager.INSTANCE.createTuplePartId(partName, part.getTypeId()));
 		}
 		return getTupleType(getIdResolver(), IdManager.INSTANCE.getTupleTypeId("Tuple", partsList));
 	}

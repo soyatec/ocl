@@ -58,7 +58,8 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	 * Optimized iterator over an Array for use in OCL contents where the array is known to be stable
 	 * and any call to next() is guarded by hasNext().
 	 */
-	private static class ArrayIterator<T> implements Iterator<T> {
+	private static class ArrayIterator<T> implements Iterator<T>
+	{
 		protected final @NonNull T[] elements;
 		protected final int size;
 		private int index;
@@ -95,7 +96,8 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	 * Optimized iterator over a List for use in OCL contents where the list is known to be stable
 	 * and any call to next() is guarded by hasNext().
 	 */
-	private static class ListIterator<T> implements Iterator<T> {
+	private static class ListIterator<T> implements Iterator<T>
+	{
 		protected final @NonNull List<T> elements;
 		protected final int size;
 		private int index;
@@ -129,6 +131,38 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	}
 	
 	/**
+	 * Optimized iterator over a List for use in OCL contents where the list is known to be stable
+	 * and any call to next() is guarded by hasNext().
+	 */
+	private static class NullIterator implements Iterator<Object>
+	{
+		/**
+		 * Returns new array iterator over the given object array
+		 */
+		public NullIterator() {}
+
+		/**
+		 * Returns true if this iterator contains more elements.
+		 */
+		public boolean hasNext() {
+			return false;
+		}
+
+		/**
+		 * Returns the next element of this iterator.
+		 */
+		public Object next() {
+			throw new NoSuchElementException();
+		}
+
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
+	}
+	
+	public static @NonNull NullIterator EMPTY_ITERATOR = new NullIterator();
+	
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -138,13 +172,22 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		return ValuesPackage.Literals.COLLECTION_VALUE;
 	}
 
-	private final @NonNull CollectionTypeId typeId;
+	protected final @NonNull CollectionTypeId typeId;
 	protected final @NonNull Collection<? extends Object> elements;		// Using Value instances where necessary to ensure correct equals semantics
+	private int hashCode = 0;
 	
 	protected CollectionValueImpl(@NonNull CollectionTypeId typeId, @NonNull Collection<? extends Object> values) {
 		this.typeId = typeId;
 		this.elements = values;
 		assert checkElementsAreValues(values);
+	}
+	
+	protected boolean checkElementsAreUnique(Iterable<? extends Object> elements) {
+		Set<Object> knownElements = new HashSet<Object>();
+		for (Object element : elements) {
+			assert knownElements.add(element);
+		}
+		return true;
 	}
 	
 	private boolean checkElementsAreValues(Iterable<? extends Object> elements) {
@@ -154,9 +197,11 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 			assert !(element instanceof DomainEnumerationLiteral);
 			assert !(element instanceof DomainType);
 			assert !(element instanceof EEnumLiteral);
-			if (element instanceof Collection<?>) {
-				assert checkElementsAreValues((Iterable<?>)element);
-			}
+			assert !(element instanceof Iterable<?>);
+//			if (element instanceof Collection<?>) {
+//				assert isNormalized((Iterable<?>)element);
+//				assert checkElementsAreValues((Iterable<?>)element);
+//			}
 		}
 		return true;
 	}
@@ -393,7 +438,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		return getTypeId().getElementTypeId();
 	}
 
-	protected @NonNull Collection<? extends Object> getElements() {
+	public @NonNull Collection<? extends Object> getElements() {
 		return elements;
 	}
 
@@ -418,11 +463,40 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	}
 
 	@Override
-	public int hashCode() {
-		return elements.hashCode();
+	public final int hashCode() {		// Need hash to be independent of the Set/List/OrderedSet/Bag actually in use as elements
+		if (hashCode == 0) {
+			synchronized (this) {
+				if (hashCode == 0) {
+					long hash = isUnique() ? 0x5555555555555555L : 0x7777777777777777L;
+					if (isOrdered()) {
+						for (Object element : elements) {
+							hash *= 5;
+							if (element != null) {
+								hash += element.hashCode();
+							}
+						}
+					}
+					else {
+						for (Object element : elements) {
+							if (element != null) {
+								hash += element.hashCode();
+							}
+						}
+					}
+					hashCode = (int) hash;
+					if (hashCode == 0) {
+						hashCode = (int) (hash >> 32);
+						if (hashCode == 0) {
+							hashCode = 0x98765432;
+						}
+					}
+				}
+			}
+		}
+		return hashCode;
 	}
 
-    public @NonNull Object includes(@Nullable Object value) {
+	public @NonNull Object includes(@Nullable Object value) {
 		return elements.contains(value) != false;			// FIXME redundant test to suppress warning
     }
 
@@ -496,10 +570,15 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 
 	public @NonNull Iterator<? extends Object> iterator() {
 		if (elements instanceof BasicEList) {
-			return new ArrayIterator<Object>(((BasicEList<Object>)elements).data(), elements.size());
+			@SuppressWarnings("unchecked")
+			BasicEList<Object> castElements = (BasicEList<Object>)elements;
+			Object[] data = castElements.data();
+			return data != null ? new ArrayIterator<Object>(data, elements.size()) : EMPTY_ITERATOR;
 		}
-		if (elements instanceof List) {
-			return new ListIterator<Object>((List<Object>)elements);
+		if (elements instanceof List<?>) {
+			@SuppressWarnings("unchecked")
+			List<Object> castElements = (List<Object>)elements;
+			return new ListIterator<Object>(castElements);
 		}
 		@SuppressWarnings("null") @NonNull Iterator<? extends Object> result = elements.iterator();
 		return result;

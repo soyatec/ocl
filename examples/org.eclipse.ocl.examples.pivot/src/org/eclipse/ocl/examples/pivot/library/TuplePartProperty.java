@@ -20,26 +20,29 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
-import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 
 public class TuplePartProperty extends AbstractProperty
 {
-	public static final @NonNull LibraryFeature INSTANCE = new TuplePartProperty();
+//	public static final @NonNull LibraryFeature INSTANCE = new TuplePartProperty();
+	
+	protected final @NonNull TuplePartId tuplePartId;
+
+	public TuplePartProperty(@NonNull TuplePartId tuplePartId) {
+		this.tuplePartId = tuplePartId;
+	}
 
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @NonNull DomainProperty property) {
 		TupleValue tupleValue = asTupleValue(sourceValue);
-		TuplePartId tuplePartId = tupleValue.getTypeId().getPartId(property.getName());	// FIXME pre-compute
 		Object resultValue = tupleValue.getValue(tuplePartId);
 		if (resultValue != null) {
 			return resultValue;		// null is a static type error so no need to diagnose dynamically
 		}
-		else {
-			return createInvalidValue(DomainUtil.bind("part '" + property + "' is not a part of '" + sourceValue));
-		}
+		throw new InvalidValueException(DomainUtil.bind("part '" + property + "' is not a part of '" + sourceValue));
 	}
 }

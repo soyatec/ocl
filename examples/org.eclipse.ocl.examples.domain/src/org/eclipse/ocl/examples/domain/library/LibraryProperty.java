@@ -27,6 +27,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 public interface LibraryProperty extends LibraryFeature
 {
 	/**
+	 * @throws Exception 
 	 */
-	@Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @NonNull DomainProperty property);
+	@Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @NonNull DomainProperty property) throws Exception;
 }

@@ -73,6 +73,11 @@ public interface CollectionValue extends Value
 	/**
 	 * @generated NOT
 	 */
+	@NonNull Collection<? extends Object> getElements();
+
+	/**
+	 * @generated NOT
+	 */
 	String getKind();
 
 	/**

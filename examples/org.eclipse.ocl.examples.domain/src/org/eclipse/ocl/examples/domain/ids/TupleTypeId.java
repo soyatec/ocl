@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.domain.ids;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * A TupleTypeid provides a unique hierarchical identifier a Tuple such as Tuple{first:String,second:Integer}.
@@ -22,6 +23,6 @@ import org.eclipse.jdt.annotation.NonNull;
 public interface TupleTypeId extends TypeId, TemplateableId
 {
 	@NonNull String getName();
-	TuplePartId getPartId(@NonNull String name);
+	@Nullable TuplePartId getPartId(@NonNull String name);
 	@NonNull TuplePartId[] getPartIds();
 }

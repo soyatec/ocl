@@ -34,8 +34,9 @@ public interface LibraryBinaryOperation extends LibraryOperation
 	 * @param left left argument
 	 * @param right argument
 	 * @return the evaluated value
+	 * @throws Exception 
 	 * @throws InvalidValueException 
 	 */
-	@Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object argumentValue);
-	@Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, @Nullable Object argumentValue);
+	@Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object argumentValue) throws Exception;
+	@Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, @Nullable Object argumentValue) throws Exception;
 }

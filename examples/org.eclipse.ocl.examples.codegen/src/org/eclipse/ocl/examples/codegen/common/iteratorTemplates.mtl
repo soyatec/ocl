@@ -30,7 +30,7 @@
 [query public isReject(ast : IteratorExp) : Boolean = (ast.referredIteration.name = 'reject') and (ast.iterator->size() = 1)/]
 [query public isSelect(ast : IteratorExp) : Boolean = (ast.referredIteration.name = 'select') and (ast.iterator->size() = 1)/]
 
-[query public isInlineable(ast : IteratorExp) : Boolean = ast.isAny() or ast.isForAll1()/]
+[query public isInlineable(ast : IteratorExp) : Boolean = ast.isAny() or ast.isCollect() or ast.isCollectNested() or ast.isExists1() or ast.isForAll1() or ast.isIsUnique() or ast.isOne() or ast.isReject() or ast.isSelect()/]
 
 [comment --- any ---------------------------------------------------------------------------------------------------------------/]
 
@@ -44,21 +44,21 @@
 
 [template public emitIterator_updateAccumulator(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(ast.isAny())]
 [let astName : String = ast.symbolName(expInOcl)]
-if ([astName/]_bodyVal == null) {
-	[astName/] = createInvalidValue(<%EvaluatorMessages%>.UndefinedBody, "any");
-	break;
-}
-else if ([astName/]_bodyVal != FALSE_VALUE) {			// Carry on till something found
-	[astName/] = [ast.iterator->at(1).symbolName(expInOcl)/];
-	break;
-}
-[/let][/template]
+if ([astName/]_bodyVal != FALSE_VALUE) {
+	if ([astName/]_bodyVal == null) {
+		throw new <%InvalidValueException%>(<%EvaluatorMessages%>.UndefinedBody, "any");
+	}
+	else {			// Carry on till something found
+		[astName/] = [ast.iterator->at(1).symbolName(expInOcl)/];
+		break;
+	}
+}[/let][/template]
 
 [comment --- collect ---------------------------------------------------------------------------------------------------------------/]
 
 [template public emitIterator_createAccumulatorValue(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(ast.isCollect())]
 [let astName : String = ast.symbolName(expInOcl)]
-<%CollectionValue%> acc_[astName/] = createCollectionAccumulatorValue((<%DomainCollectionType%>) [ast.type.typeId(expInOcl)/]);
+<%CollectionValue%>.Accumulator acc_[astName/] = createCollectionAccumulatorValue([ast.type.typeId(expInOcl)/]);
 [/let][/template]
 
 [template public emitIterator_resolveTerminalValue(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(ast.isCollect())]
@@ -68,31 +68,21 @@ else if ([astName/]_bodyVal != FALSE_VALUE) {			// Carry on till something found
 
 [template public emitIterator_updateAccumulator(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(ast.isCollect())]
 [let astName : String = ast.symbolName(expInOcl)]
-if ([astName/]_bodyVal.isInvalid()) {
-	[astName/] = createInvalidValue(<%EvaluatorMessages%>.UndefinedBody, "collect");
-	break;
-}
-else if ([astName/]_bodyVal.isNull()) {
-	acc_[astName/].add([astName/]_bodyVal);
-}
-else if ([astName/]_bodyVal instanceof CollectionValue) {
+if ([astName/]_bodyVal instanceof CollectionValue) {
 	<%CollectionValue%> bodyColl = (CollectionValue) [astName/]_bodyVal;
 	for (Object value : bodyColl.flatten()) {
-		if (value != null) {
-			acc_[astName/].add(value);
-		}
+		acc_[astName/].add(value);
 	}
 }
 else {
 	acc_[astName/].add([astName/]_bodyVal);
-}
-[/let][/template]
+}[/let][/template]
 
 [comment --- collectNested ---------------------------------------------------------------------------------------------------------------/]
 
 [template public emitIterator_createAccumulatorValue(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(ast.isCollectNested())]
 [let astName : String = ast.symbolName(expInOcl)]
-<%CollectionValue%> acc_[astName/] = createCollectionAccumulatorValue((<%DomainCollectionType%>) [ast.type.typeId(expInOcl)/]);
+<%CollectionValue%>.Accumulator acc_[astName/] = createCollectionAccumulatorValue([ast.type.typeId(expInOcl)/]);
 [/let][/template]
 
 [template public emitIterator_resolveTerminalValue(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(ast.isCollectNested())]
@@ -102,12 +92,7 @@ else {
 
 [template public emitIterator_updateAccumulator(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(ast.isCollectNested())]
 [let astName : String = ast.symbolName(expInOcl)]
-if ([astName/]_bodyVal.isInvalid()) {
-	[astName/] = createInvalidValue(<%EvaluatorMessages%>.UndefinedBody, "collectNested");
-	break;
-}
-acc_[astName/].add([astName/]_bodyVal);
-[/let][/template]
+acc_[astName/].add([astName/]_bodyVal);[/let][/template]
 
 [comment --- exists ---------------------------------------------------------------------------------------------------------------/]
 
@@ -121,15 +106,15 @@ acc_[astName/].add([astName/]_bodyVal);
 
 [template public emitIterator_updateAccumulator(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(ast.isExists1())]
 [let astName : String = ast.symbolName(expInOcl)]
-if ([astName/]_bodyVal == null) {
-	[astName/] = createInvalidValue(<%EvaluatorMessages%>.UndefinedBody, "exists");
-	break;
-}
-else if ([astName/]_bodyVal != FALSE_VALUE) {
-	[astName/] = TRUE_VALUE;			// Abort after a find
-	break;
-}
-[/let][/template]
+if ([astName/]_bodyVal != FALSE_VALUE) {
+	if ([astName/]_bodyVal == null) {
+		throw new <%InvalidValueException%>(<%EvaluatorMessages%>.UndefinedBody, "exists");
+	}
+	else {
+		[astName/] = TRUE_VALUE;			// Abort after a find
+		break;
+	}
+}[/let][/template]
 
 [comment --- forAll ---------------------------------------------------------------------------------------------------------------/]
 
@@ -142,21 +127,21 @@ else if ([astName/]_bodyVal != FALSE_VALUE) {
 
 [template public emitIterator_updateAccumulator(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(ast.isForAll1())]
 [let astName : String = ast.symbolName(expInOcl)]
-if ([astName/]_bodyVal == null) {
-	[astName/] = createInvalidValue(<%EvaluatorMessages%>.UndefinedBody, "forAll");
-	break;
-}
-else if ([astName/]_bodyVal != TRUE_VALUE) {
-	[astName/] = FALSE_VALUE;			// Abort after a fail
-	break;
-}
-[/let][/template]
+if ([astName/]_bodyVal != TRUE_VALUE) {
+	if ([astName/]_bodyVal == null) {
+		throw new <%InvalidValueException%>(<%EvaluatorMessages%>.UndefinedBody, "forAll");
+	}
+	else {
+		[astName/] = FALSE_VALUE;			// Abort after a fail
+		break;
+	}
+}[/let][/template]
 
 [comment --- isUnique ---------------------------------------------------------------------------------------------------------------/]
 
 [template public emitIterator_createAccumulatorValue(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(ast.isIsUnique())]
 [let astName : String = ast.symbolName(expInOcl)]
-<%CollectionValue%> acc_[astName/] = createCollectionAccumulatorValue(standardLibrary.getSetType([ast.type.typeId(expInOcl)/], null, null));
+<%CollectionValue%>.Accumulator acc_[astName/] = createCollectionAccumulatorValue(<%TypeId%>.SET.getSpecializedId([ast.type.typeId(expInOcl)/]));
 [/let][/template]
 
 [template public emitIterator_resolveTerminalValue(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(ast.isIsUnique())]
@@ -166,18 +151,16 @@ else if ([astName/]_bodyVal != TRUE_VALUE) {
 
 [template public emitIterator_updateAccumulator(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(ast.isIsUnique())]
 [let astName : String = ast.symbolName(expInOcl)]
-if ([astName/]_bodyVal == null) {
-	[astName/] = createInvalidValue(<%EvaluatorMessages%>.UndefinedBody, "isUnique");
-	break;
-}
-else if (acc_[astName/].includes([astName/]_bodyVal) == TRUE_VALUE) {
+if (acc_[astName/].includes([astName/]_bodyVal) == TRUE_VALUE) {
 	[astName/] = FALSE_VALUE;		// Abort after second find
 	break;
 }
+else if ([astName/]_bodyVal == null) {
+	throw new <%InvalidValueException%>(<%EvaluatorMessages%>.UndefinedBody, "isUnique");
+}
 else {
 	acc_[astName/].add([astName/]_bodyVal);
-}
-[/let][/template]
+}[/let][/template]
 
 [comment --- one ---------------------------------------------------------------------------------------------------------------/]
 
@@ -193,26 +176,24 @@ boolean acc_[astName/] = false;
 
 [template public emitIterator_updateAccumulator(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(ast.isOne())]
 [let astName : String = ast.symbolName(expInOcl)]
-if ([astName/]_bodyVal == null) {
-	[astName/] = createInvalidValue(<%EvaluatorMessages%>.UndefinedBody, "one");
-	break;
-}
-else if ([astName/]_bodyVal != FALSE_VALUE) {
-	if (acc_[astName/]) {
+if ([astName/]_bodyVal != FALSE_VALUE) {
+	if ([astName/]_bodyVal == null) {
+		throw new <%InvalidValueException%>(<%EvaluatorMessages%>.UndefinedBody, "one");
+	}
+	else if (acc_[astName/]) {
 		[astName/] = FALSE_VALUE;				// Abort after second find
 		break;
 	}
 	else {
 		acc_[astName/] = true;								// Carry on after first find
 	}
-}
-[/let][/template]
+}[/let][/template]
 
 [comment --- reject ---------------------------------------------------------------------------------------------------------------/]
 
 [template public emitIterator_createAccumulatorValue(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(ast.isReject())]
 [let astName : String = ast.symbolName(expInOcl)]
-<%CollectionValue%> acc_[astName/] = createCollectionAccumulatorValue((<%DomainCollectionType%>) [ast.type.typeId(expInOcl)/]);
+<%CollectionValue%>.Accumulator acc_[astName/] = createCollectionAccumulatorValue([ast.type.typeId(expInOcl)/]);
 [/let][/template]
 
 [template public emitIterator_resolveTerminalValue(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(ast.isReject())]
@@ -222,20 +203,18 @@ else if ([astName/]_bodyVal != FALSE_VALUE) {
 
 [template public emitIterator_updateAccumulator(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(ast.isReject())]
 [let astName : String = ast.symbolName(expInOcl)]
-if ([astName/]_bodyVal == null) {
-	[astName/] = createInvalidValue(<%EvaluatorMessages%>.UndefinedBody, "reject");
-	break;
+if ([astName/]_bodyVal == FALSE_VALUE) {
+	acc_[astName/].add([ast.iterator->at(1).symbolName(expInOcl)/]);
 }
-else if ([astName/]_bodyVal == FALSE_VALUE) {
-	acc_[astName/].add([astName/]_currentVal);
-}
-[/let][/template]
+else if ([astName/]_bodyVal == null) {
+	throw new <%InvalidValueException%>(<%EvaluatorMessages%>.UndefinedBody, "reject");
+}[/let][/template]
 
 [comment --- select ---------------------------------------------------------------------------------------------------------------/]
 
 [template public emitIterator_createAccumulatorValue(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(ast.isSelect())]
 [let astName : String = ast.symbolName(expInOcl)]
-<%CollectionValue%> acc_[astName/] = createCollectionAccumulatorValue((<%DomainCollectionType%>) [ast.type.typeId(expInOcl)/]);
+<%CollectionValue%>.Accumulator acc_[astName/] = createCollectionAccumulatorValue([ast.type.typeId(expInOcl)/]);
 [/let][/template]
 
 [template public emitIterator_resolveTerminalValue(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(ast.isSelect())]
@@ -245,11 +224,9 @@ else if ([astName/]_bodyVal == FALSE_VALUE) {
 
 [template public emitIterator_updateAccumulator(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(ast.isSelect())]
 [let astName : String = ast.symbolName(expInOcl)]
-if ([astName/]_bodyVal == null) {
-	[astName/] = createInvalidValue(<%EvaluatorMessages%>.UndefinedBody, "select");
-	break;
+if ([astName/]_bodyVal == TRUE_VALUE) {
+	acc_[astName/].add([ast.iterator->at(1).symbolName(expInOcl)/]);
 }
-else if ([astName/]_bodyVal == TRUE_VALUE) {
-	acc_[astName/].add([astName/]_currentVal);
-}
-[/let][/template]
+else if ([astName/]_bodyVal == null) {
+	throw new <%InvalidValueException%>(<%EvaluatorMessages%>.UndefinedBody, "select");
+}[/let][/template]

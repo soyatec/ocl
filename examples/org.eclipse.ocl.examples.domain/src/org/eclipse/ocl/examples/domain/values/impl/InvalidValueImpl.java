@@ -146,7 +146,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 		return exception instanceof InvalidValueException ? (InvalidValueException)exception : new InvalidValueException(exception);
 	}
 	
-	public @NonNull String getMessage() {
+	public @Nullable String getMessage() {
 		return exception.getMessage();
 	}
 

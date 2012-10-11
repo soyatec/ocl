@@ -30,14 +30,14 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
  */
 public abstract class AbstractTernaryOperation extends AbstractOperation implements LibraryTernaryOperation
 {
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, Object... argumentValues) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, Object... argumentValues) throws Exception {
 		DomainType returnType = DomainUtil.nonNullPivot(callExp.getType());
 		Object argumentValue0 = DomainUtil.nonNullState(argumentValues[0]);
 		Object argumentValue1 = DomainUtil.nonNullState(argumentValues[1]);
 		return evaluate(evaluator, returnType.getTypeId(), sourceValue, argumentValue0, argumentValue1);
 	}
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) throws Exception {
 		DomainType returnType = DomainUtil.nonNullPivot(callExp.getType());
 		return evaluate(evaluator, returnType.getTypeId(), sourceValue, firstArgumentValue, secondArgumentValue);
 	}

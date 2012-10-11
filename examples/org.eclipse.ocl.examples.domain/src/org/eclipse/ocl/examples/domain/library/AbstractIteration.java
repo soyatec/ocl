@@ -36,8 +36,9 @@ public abstract class AbstractIteration extends AbstractFeature implements Libra
 	 * <p>
 	 * Derived classes may override this method to change the iteration algorithm or override
 	 * the call-backs to customize the default iteration.
+	 * @throws Exception 
 	 */
-	public @Nullable Object evaluateIteration(@NonNull DomainIterationManager iterationManager) {
+	public @Nullable Object evaluateIteration(@NonNull DomainIterationManager iterationManager) throws Exception {
 		while (true) {
 			if (!iterationManager.hasCurrent()) {
 				return resolveTerminalValue(iterationManager);			
@@ -70,6 +71,7 @@ public abstract class AbstractIteration extends AbstractFeature implements Libra
 	 * 
 	 * @param iterationManager the iteration context
 	 * @return non-null premature result of iteration, or null if complete
+	 * @throws Exception 
 	 */
-	protected abstract @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager);
+	protected abstract @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) throws Exception;
 }

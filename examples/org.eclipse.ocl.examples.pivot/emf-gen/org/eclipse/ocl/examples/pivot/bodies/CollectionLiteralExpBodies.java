@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
@@ -42,7 +43,7 @@ import org.eclipse.ocl.examples.pivot.PivotTables;
 /**
  * CollectionLiteralExpBodies provides the Java implementation bodies of OCL-defined CollectionLiteralExp operations and properties.
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({"nls", "null", "unused"})
 public class CollectionLiteralExpBodies
 {
 
@@ -73,7 +74,8 @@ public class CollectionLiteralExpBodies
 			Object leftA_symbol__1;
 			try {
 				
-				org.eclipse.ocl.examples.pivot.CollectionKind unboxed_A_symbol__2 = unboxed_self != null ? unboxed_self.getKind() : null;
+				if (self == null) { throw new InvalidValueException("Null property source"); }
+				org.eclipse.ocl.examples.pivot.CollectionKind unboxed_A_symbol__2 = unboxed_self.getKind();
 				Value A_symbol__2 = createEnumerationLiteralValue(unboxed_A_symbol__2, PivotPackage.Literals.COLLECTION_KIND);
 				
 				
@@ -82,21 +84,22 @@ public class CollectionLiteralExpBodies
 				LibraryBinaryOperation dynamic_A_symbol__3 = (LibraryBinaryOperation)static_A_symbol__3.lookupImplementation(standardLibrary, O_OclAny__eq_);
 				Object A_symbol__3 = dynamic_A_symbol__3.evaluate(evaluator, T_Boolean, A_symbol__2, A_symbol_);
 				leftA_symbol__1 = A_symbol__3;
-			} catch (InvalidValueException e) {
-				leftA_symbol__1 = createInvalidValue(e);
+			} catch (Exception e) {
+				leftA_symbol__1 = new InvalidValueImpl(e);
 			}
 			Object A_symbol__3 = leftA_symbol__1;
 			Object rightA_symbol__1;
 			try {
 				
-				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__4 = unboxed_self != null ? unboxed_self.getType() : null;
+				if (self == null) { throw new InvalidValueException("Null property source"); }
+				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__4 = unboxed_self.getType();
 				Object A_symbol__4 = createTypeValue(unboxed_A_symbol__4);
 				
 				
 				Object A_symbol__5 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__4, T_Metaclass_pivot__BagType_);
 				rightA_symbol__1 = A_symbol__5;
-			} catch (InvalidValueException e) {
-				rightA_symbol__1 = createInvalidValue(e);
+			} catch (Exception e) {
+				rightA_symbol__1 = new InvalidValueImpl(e);
 			}
 			Object A_symbol__5 = rightA_symbol__1;
 			Object A_symbol__1 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__3, A_symbol__5);
@@ -119,13 +122,14 @@ public class CollectionLiteralExpBodies
 		/*
 		kind <> CollectionKind::Collection
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull CollectionLiteralExp unboxed_self = (CollectionLiteralExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 			
 			
-			org.eclipse.ocl.examples.pivot.CollectionKind unboxed_A_symbol__7 = unboxed_self != null ? unboxed_self.getKind() : null;
+			if (self == null) { throw new InvalidValueException("Null property source"); }
+			org.eclipse.ocl.examples.pivot.CollectionKind unboxed_A_symbol__7 = unboxed_self.getKind();
 			Value A_symbol__7 = createEnumerationLiteralValue(unboxed_A_symbol__7, PivotPackage.Literals.COLLECTION_KIND);
 			
 			
@@ -165,7 +169,8 @@ public class CollectionLiteralExpBodies
 			Object leftA_symbol__10;
 			try {
 				
-				org.eclipse.ocl.examples.pivot.CollectionKind unboxed_A_symbol__11 = unboxed_self != null ? unboxed_self.getKind() : null;
+				if (self == null) { throw new InvalidValueException("Null property source"); }
+				org.eclipse.ocl.examples.pivot.CollectionKind unboxed_A_symbol__11 = unboxed_self.getKind();
 				Value A_symbol__11 = createEnumerationLiteralValue(unboxed_A_symbol__11, PivotPackage.Literals.COLLECTION_KIND);
 				
 				
@@ -174,21 +179,22 @@ public class CollectionLiteralExpBodies
 				LibraryBinaryOperation dynamic_A_symbol__12 = (LibraryBinaryOperation)static_A_symbol__12.lookupImplementation(standardLibrary, O_OclAny__eq_);
 				Object A_symbol__12 = dynamic_A_symbol__12.evaluate(evaluator, T_Boolean, A_symbol__11, A_symbol__9);
 				leftA_symbol__10 = A_symbol__12;
-			} catch (InvalidValueException e) {
-				leftA_symbol__10 = createInvalidValue(e);
+			} catch (Exception e) {
+				leftA_symbol__10 = new InvalidValueImpl(e);
 			}
 			Object A_symbol__12 = leftA_symbol__10;
 			Object rightA_symbol__10;
 			try {
 				
-				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__13 = unboxed_self != null ? unboxed_self.getType() : null;
+				if (self == null) { throw new InvalidValueException("Null property source"); }
+				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__13 = unboxed_self.getType();
 				Object A_symbol__13 = createTypeValue(unboxed_A_symbol__13);
 				
 				
 				Object A_symbol__14 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__13, T_Metaclass_pivot__OrderedSetType_);
 				rightA_symbol__10 = A_symbol__14;
-			} catch (InvalidValueException e) {
-				rightA_symbol__10 = createInvalidValue(e);
+			} catch (Exception e) {
+				rightA_symbol__10 = new InvalidValueImpl(e);
 			}
 			Object A_symbol__14 = rightA_symbol__10;
 			Object A_symbol__10 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__12, A_symbol__14);
@@ -224,7 +230,8 @@ public class CollectionLiteralExpBodies
 			Object leftA_symbol__16;
 			try {
 				
-				org.eclipse.ocl.examples.pivot.CollectionKind unboxed_A_symbol__17 = unboxed_self != null ? unboxed_self.getKind() : null;
+				if (self == null) { throw new InvalidValueException("Null property source"); }
+				org.eclipse.ocl.examples.pivot.CollectionKind unboxed_A_symbol__17 = unboxed_self.getKind();
 				Value A_symbol__17 = createEnumerationLiteralValue(unboxed_A_symbol__17, PivotPackage.Literals.COLLECTION_KIND);
 				
 				
@@ -233,21 +240,22 @@ public class CollectionLiteralExpBodies
 				LibraryBinaryOperation dynamic_A_symbol__18 = (LibraryBinaryOperation)static_A_symbol__18.lookupImplementation(standardLibrary, O_OclAny__eq_);
 				Object A_symbol__18 = dynamic_A_symbol__18.evaluate(evaluator, T_Boolean, A_symbol__17, A_symbol__15);
 				leftA_symbol__16 = A_symbol__18;
-			} catch (InvalidValueException e) {
-				leftA_symbol__16 = createInvalidValue(e);
+			} catch (Exception e) {
+				leftA_symbol__16 = new InvalidValueImpl(e);
 			}
 			Object A_symbol__18 = leftA_symbol__16;
 			Object rightA_symbol__16;
 			try {
 				
-				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__19 = unboxed_self != null ? unboxed_self.getType() : null;
+				if (self == null) { throw new InvalidValueException("Null property source"); }
+				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__19 = unboxed_self.getType();
 				Object A_symbol__19 = createTypeValue(unboxed_A_symbol__19);
 				
 				
 				Object A_symbol__20 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__19, T_Metaclass_pivot__SequenceType_);
 				rightA_symbol__16 = A_symbol__20;
-			} catch (InvalidValueException e) {
-				rightA_symbol__16 = createInvalidValue(e);
+			} catch (Exception e) {
+				rightA_symbol__16 = new InvalidValueImpl(e);
 			}
 			Object A_symbol__20 = rightA_symbol__16;
 			Object A_symbol__16 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__18, A_symbol__20);
@@ -282,7 +290,8 @@ public class CollectionLiteralExpBodies
 			Object leftA_symbol__22;
 			try {
 				
-				org.eclipse.ocl.examples.pivot.CollectionKind unboxed_A_symbol__23 = unboxed_self != null ? unboxed_self.getKind() : null;
+				if (self == null) { throw new InvalidValueException("Null property source"); }
+				org.eclipse.ocl.examples.pivot.CollectionKind unboxed_A_symbol__23 = unboxed_self.getKind();
 				Value A_symbol__23 = createEnumerationLiteralValue(unboxed_A_symbol__23, PivotPackage.Literals.COLLECTION_KIND);
 				
 				
@@ -291,21 +300,22 @@ public class CollectionLiteralExpBodies
 				LibraryBinaryOperation dynamic_A_symbol__24 = (LibraryBinaryOperation)static_A_symbol__24.lookupImplementation(standardLibrary, O_OclAny__eq_);
 				Object A_symbol__24 = dynamic_A_symbol__24.evaluate(evaluator, T_Boolean, A_symbol__23, A_symbol__21);
 				leftA_symbol__22 = A_symbol__24;
-			} catch (InvalidValueException e) {
-				leftA_symbol__22 = createInvalidValue(e);
+			} catch (Exception e) {
+				leftA_symbol__22 = new InvalidValueImpl(e);
 			}
 			Object A_symbol__24 = leftA_symbol__22;
 			Object rightA_symbol__22;
 			try {
 				
-				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__25 = unboxed_self != null ? unboxed_self.getType() : null;
+				if (self == null) { throw new InvalidValueException("Null property source"); }
+				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__25 = unboxed_self.getType();
 				Object A_symbol__25 = createTypeValue(unboxed_A_symbol__25);
 				
 				
 				Object A_symbol__26 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__25, T_Metaclass_pivot__SetType_);
 				rightA_symbol__22 = A_symbol__26;
-			} catch (InvalidValueException e) {
-				rightA_symbol__22 = createInvalidValue(e);
+			} catch (Exception e) {
+				rightA_symbol__22 = new InvalidValueImpl(e);
 			}
 			Object A_symbol__26 = rightA_symbol__22;
 			Object A_symbol__22 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__24, A_symbol__26);

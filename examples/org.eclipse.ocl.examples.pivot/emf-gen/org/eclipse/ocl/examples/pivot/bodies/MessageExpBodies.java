@@ -44,7 +44,7 @@ import org.eclipse.ocl.examples.pivot.PivotTables;
 /**
  * MessageExpBodies provides the Java implementation bodies of OCL-defined MessageExp operations and properties.
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({"nls", "null", "unused"})
 public class MessageExpBodies
 {
 
@@ -76,14 +76,16 @@ public class MessageExpBodies
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 			
 			
-			org.eclipse.ocl.examples.pivot.CallOperationAction unboxed_A_symbol_ = unboxed_self != null ? unboxed_self.getCalledOperation() : null;
+			if (self == null) { throw new InvalidValueException("Null property source"); }
+			org.eclipse.ocl.examples.pivot.CallOperationAction unboxed_A_symbol_ = unboxed_self.getCalledOperation();
 			Object A_symbol_ = valueOf(unboxed_A_symbol_); // CallOperationAction
 			
 			
 			Object A_symbol__1 = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, T_Set_pivot__CallOperationAction_, A_symbol_);
 			Object A_symbol__2 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, T_Integer, A_symbol__1);
 			
-			org.eclipse.ocl.examples.pivot.SendSignalAction unboxed_A_symbol__3 = unboxed_self != null ? unboxed_self.getSentSignal() : null;
+			if (self == null) { throw new InvalidValueException("Null property source"); }
+			org.eclipse.ocl.examples.pivot.SendSignalAction unboxed_A_symbol__3 = unboxed_self.getSentSignal();
 			Object A_symbol__3 = valueOf(unboxed_A_symbol__3); // SendSignalAction
 			
 			
@@ -118,11 +120,13 @@ public class MessageExpBodies
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 			
 			
-			org.eclipse.ocl.examples.pivot.OCLExpression unboxed_A_symbol__8 = unboxed_self != null ? unboxed_self.getTarget() : null;
+			if (self == null) { throw new InvalidValueException("Null property source"); }
+			org.eclipse.ocl.examples.pivot.OCLExpression unboxed_A_symbol__8 = unboxed_self.getTarget();
 			Object A_symbol__8 = valueOf(unboxed_A_symbol__8); // OCLExpression
 			
 			
-			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__9 = unboxed_A_symbol__8 != null ? unboxed_A_symbol__8.getType() : null;
+			if (A_symbol__8 == null) { throw new InvalidValueException("Null property source"); }
+			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__9 = unboxed_A_symbol__8.getType();
 			Object A_symbol__9 = createTypeValue(unboxed_A_symbol__9);
 			
 			

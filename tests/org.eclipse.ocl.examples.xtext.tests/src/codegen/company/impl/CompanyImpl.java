@@ -1,5 +1,3 @@
-/**
- */
 package codegen.company.impl;
 
 import java.lang.reflect.InvocationTargetException;
@@ -21,6 +19,7 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -52,7 +51,8 @@ import codegen.company.util.CodegencompanyValidator;
  *
  * @generated
  */
-public class CompanyImpl extends EObjectImpl implements Company {
+public class CompanyImpl extends EObjectImpl implements Company
+{
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -98,7 +98,8 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected CompanyImpl() {
+	protected CompanyImpl()
+	{
 		super();
 	}
 
@@ -108,7 +109,8 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * @generated
 	 */
 	@Override
-	protected EClass eStaticClass() {
+	protected EClass eStaticClass()
+	{
 		return CodegencompanyPackage.Literals.COMPANY;
 	}
 
@@ -117,7 +119,8 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
@@ -126,7 +129,8 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setName(String newName) {
+	public void setName(String newName)
+	{
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
@@ -138,7 +142,8 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Employee> getEmployees() {
+	public EList<Employee> getEmployees()
+	{
 		if (employees == null) {
 			employees = new EObjectContainmentWithInverseEList<Employee>(Employee.class, this, CodegencompanyPackage.COMPANY__EMPLOYEES, CodegencompanyPackage.EMPLOYEE__COMPANY);
 		}
@@ -150,7 +155,8 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CompanySizeKind getSize() {
+	public CompanySizeKind getSize()
+	{
 		/*
 		let
 		  table : Set(Tuple(range : Sequence(Integer), size : CompanySizeKind)) = Set{
@@ -166,12 +172,15 @@ public class CompanyImpl extends EObjectImpl implements Company {
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
 		final @NonNull TypeId T_company__CompanySizeKind = CodegencompanyTables.Types._CompanySizeKind.getTypeId();
-		
-		final Object result = CompanyBodies._size_derivation_.INSTANCE.evaluate(evaluator, T_company__CompanySizeKind, this, CodegencompanyTables.Properties._Company__size);
-		final codegen.company.CompanySizeKind ecoreResult = (codegen.company.CompanySizeKind)(result != null ? ((Value)result).asEcoreObject() : null);
-		return ecoreResult;
-		
-		
+		try {
+			final Object result = CompanyBodies._size_derivation_.INSTANCE.evaluate(evaluator, T_company__CompanySizeKind, this, CodegencompanyTables.Properties._Company__size);
+			final codegen.company.CompanySizeKind ecoreResult = (codegen.company.CompanySizeKind)(result != null ? ((Value)result).asEcoreObject() : null);
+			return ecoreResult;
+		} catch (InvalidValueException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
+		}
 	}
 
 	/**
@@ -179,25 +188,30 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean dummyInvariant(DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean dummyInvariant(DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
 		/*
 		true
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = CompanyBodies._invariant_dummyInvariant.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Company", "dummyInvariant", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, CodegencompanyValidator.DIAGNOSTIC_SOURCE, CodegencompanyValidator.COMPANY__DUMMY_INVARIANT, message, new Object [] { this }));
+		try {
+			final Object result = CompanyBodies._invariant_dummyInvariant.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Company", "dummyInvariant", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, CodegencompanyValidator.DIAGNOSTIC_SOURCE, CodegencompanyValidator.COMPANY__DUMMY_INVARIANT, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
 		
 	}
 
@@ -208,7 +222,8 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	{
 		switch (featureID) {
 			case CodegencompanyPackage.COMPANY__EMPLOYEES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getEmployees()).basicAdd(otherEnd, msgs);
@@ -222,7 +237,8 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	{
 		switch (featureID) {
 			case CodegencompanyPackage.COMPANY__EMPLOYEES:
 				return ((InternalEList<?>)getEmployees()).basicRemove(otherEnd, msgs);
@@ -236,7 +252,8 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * @generated
 	 */
 	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	public Object eGet(int featureID, boolean resolve, boolean coreType)
+	{
 		switch (featureID) {
 			case CodegencompanyPackage.COMPANY__NAME:
 				return getName();
@@ -255,7 +272,8 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void eSet(int featureID, Object newValue) {
+	public void eSet(int featureID, Object newValue)
+	{
 		switch (featureID) {
 			case CodegencompanyPackage.COMPANY__NAME:
 				setName((String)newValue);
@@ -274,7 +292,8 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * @generated
 	 */
 	@Override
-	public void eUnset(int featureID) {
+	public void eUnset(int featureID)
+	{
 		switch (featureID) {
 			case CodegencompanyPackage.COMPANY__NAME:
 				setName(NAME_EDEFAULT);
@@ -292,7 +311,8 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(int featureID) {
+	public boolean eIsSet(int featureID)
+	{
 		switch (featureID) {
 			case CodegencompanyPackage.COMPANY__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
@@ -311,7 +331,8 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException
+	{
 		switch (operationID) {
 			case CodegencompanyPackage.COMPANY___DUMMY_INVARIANT__DIAGNOSTICCHAIN_MAP:
 				return dummyInvariant((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
@@ -325,7 +346,8 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * @generated
 	 */
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());

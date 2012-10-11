@@ -70,7 +70,7 @@ public class GeneralizedTupleTypeIdImpl extends AbstractGeneralizedIdImpl<TupleT
 		return TUPLE_TYPE_NAME;
 	}
 
-	public TuplePartId getPartId(@NonNull String name) {
+	public @Nullable TuplePartId getPartId(@NonNull String name) {
 		for (TuplePartId partId : partIds) {
 			if (name.equals(partId.getName())) {
 				return partId;

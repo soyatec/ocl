@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
@@ -46,7 +47,7 @@ public class EObjectProperty extends AbstractProperty
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @NonNull DomainProperty property) {
 		Object object = asObject(sourceValue);
 		if (!(object instanceof EObject)) {
-			return createInvalidValue("non-EObject");
+			throw new InvalidValueException("non-EObject");
 		}
 		Object eValue = ((EObject)object).eGet(eFeature);
 		return eValue != null ? valueOf(eValue, eFeature, returnTypeId) : null;

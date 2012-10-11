@@ -41,6 +41,7 @@ public class EnumerationLiteralValueImpl extends AbstractEnumerationLiteralValue
 //		this.eEnumLiteral = eEnum.getEEnumLiteral(enumerationLiteral.getName());
 //	}
 
+	@Override
 	public Enumerator asEcoreObject() {
 //		if (eEnumLiteral == null) {
 		EEnumLiteral eEnumLiteral = enumerationLiteral.asEcoreObject();

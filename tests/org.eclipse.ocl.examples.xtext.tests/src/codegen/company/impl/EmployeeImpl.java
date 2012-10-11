@@ -229,12 +229,15 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 		final @NonNull TypeId T_company__Employee = CodegencompanyTables.Types._Employee.getTypeId();
 		final @NonNull CollectionTypeId T_OrderedSet_company__Employee_ = TypeId.ORDERED_SET.getSpecializedId(T_company__Employee);
-		
-		final Object result = EmployeeBodies._directReports_derivation_.INSTANCE.evaluate(evaluator, T_OrderedSet_company__Employee_, this, CodegencompanyTables.Properties._Employee__directReports);
-		final org.eclipse.emf.common.util.EList<codegen.company.Employee> ecoreResult = (org.eclipse.emf.common.util.EList<codegen.company.Employee>)(result != null ? ((Value)result).asEcoreObject() : null);
-		return ecoreResult;
-		
-		
+		try {
+			final Object result = EmployeeBodies._directReports_derivation_.INSTANCE.evaluate(evaluator, T_OrderedSet_company__Employee_, this, CodegencompanyTables.Properties._Employee__directReports);
+			final org.eclipse.emf.common.util.EList<codegen.company.Employee> ecoreResult = (org.eclipse.emf.common.util.EList<codegen.company.Employee>)(result != null ? ((Value)result).asEcoreObject() : null);
+			return ecoreResult;
+		} catch (InvalidValueException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
+		}
 	}
 
 	/**
@@ -250,12 +253,15 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 		final @NonNull TypeId T_company__Employee = CodegencompanyTables.Types._Employee.getTypeId();
 		final @NonNull CollectionTypeId T_Set_company__Employee_ = TypeId.SET.getSpecializedId(T_company__Employee);
-		
-		final Object result = EmployeeBodies._allReports_derivation_.INSTANCE.evaluate(evaluator, T_Set_company__Employee_, this, CodegencompanyTables.Properties._Employee__allReports);
-		final org.eclipse.emf.common.util.EList<codegen.company.Employee> ecoreResult = (org.eclipse.emf.common.util.EList<codegen.company.Employee>)(result != null ? ((Value)result).asEcoreObject() : null);
-		return ecoreResult;
-		
-		
+		try {
+			final Object result = EmployeeBodies._allReports_derivation_.INSTANCE.evaluate(evaluator, T_Set_company__Employee_, this, CodegencompanyTables.Properties._Employee__allReports);
+			final org.eclipse.emf.common.util.EList<codegen.company.Employee> ecoreResult = (org.eclipse.emf.common.util.EList<codegen.company.Employee>)(result != null ? ((Value)result).asEcoreObject() : null);
+			return ecoreResult;
+		} catch (InvalidValueException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
+		}
 	}
 
 	/**
@@ -274,12 +280,15 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 		final @NonNull TypeId T_company__Employee = CodegencompanyTables.Types._Employee.getTypeId();
 		final @NonNull CollectionTypeId T_OrderedSet_company__Employee_ = TypeId.ORDERED_SET.getSpecializedId(T_company__Employee);
-		
-		final Object result = EmployeeBodies._reportingChain_derivation_.INSTANCE.evaluate(evaluator, T_OrderedSet_company__Employee_, this, CodegencompanyTables.Properties._Employee__reportingChain);
-		final org.eclipse.emf.common.util.EList<codegen.company.Employee> ecoreResult = (org.eclipse.emf.common.util.EList<codegen.company.Employee>)(result != null ? ((Value)result).asEcoreObject() : null);
-		return ecoreResult;
-		
-		
+		try {
+			final Object result = EmployeeBodies._reportingChain_derivation_.INSTANCE.evaluate(evaluator, T_OrderedSet_company__Employee_, this, CodegencompanyTables.Properties._Employee__reportingChain);
+			final org.eclipse.emf.common.util.EList<codegen.company.Employee> ecoreResult = (org.eclipse.emf.common.util.EList<codegen.company.Employee>)(result != null ? ((Value)result).asEcoreObject() : null);
+			return ecoreResult;
+		} catch (InvalidValueException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
+		}
 	}
 
 	/**
@@ -293,15 +302,18 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = EmployeeBodies._hasNameAsAttribute_derivation_.INSTANCE.evaluate(evaluator, T_Boolean, this, CodegencompanyTables.Properties._Employee__hasNameAsAttribute);
-		final java.lang.Boolean ecoreResult = (java.lang.Boolean)result;
-		if (ecoreResult != null) {
-			return ecoreResult;
+		try {
+			final Object result = EmployeeBodies._hasNameAsAttribute_derivation_.INSTANCE.evaluate(evaluator, T_Boolean, this, CodegencompanyTables.Properties._Employee__hasNameAsAttribute);
+			final java.lang.Boolean ecoreResult = (java.lang.Boolean)result;
+			if (ecoreResult != null) {
+				return ecoreResult;
+			}
+			throw new InvalidValueException("null result from EmployeeBodies._hasNameAsAttribute_derivation_");
+		} catch (InvalidValueException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
-		throw new InvalidValueException("null result from EmployeeBodies._hasNameAsAttribute_derivation_");
-		
-		
 	}
 
 	/**
@@ -315,15 +327,18 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = EmployeeBodies._reportsTo_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, ValuesUtil.valueOf(manager));
-		final java.lang.Boolean ecoreResult = (java.lang.Boolean)result;
-		if (ecoreResult != null) {
-			return ecoreResult;
+		try {
+			final Object result = EmployeeBodies._reportsTo_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, ValuesUtil.valueOf(manager));
+			final java.lang.Boolean ecoreResult = (java.lang.Boolean)result;
+			if (ecoreResult != null) {
+				return ecoreResult;
+			}
+			throw new InvalidValueException("null result from EmployeeBodies._reportsTo_body_");
+		} catch (InvalidValueException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
-		throw new InvalidValueException("null result from EmployeeBodies._reportsTo_body_");
-		
-		
 	}
 
 	/**
@@ -337,19 +352,23 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = EmployeeBodies._invariant_noManagerImpliesDirectReports.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Employee", "noManagerImpliesDirectReports", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, CodegencompanyValidator.DIAGNOSTIC_SOURCE, CodegencompanyValidator.EMPLOYEE__NO_MANAGER_IMPLIES_DIRECT_REPORTS, message, new Object [] { this }));
+		try {
+			final Object result = EmployeeBodies._invariant_noManagerImpliesDirectReports.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Employee", "noManagerImpliesDirectReports", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, CodegencompanyValidator.DIAGNOSTIC_SOURCE, CodegencompanyValidator.EMPLOYEE__NO_MANAGER_IMPLIES_DIRECT_REPORTS, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
 		
 	}
 
@@ -364,15 +383,18 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = EmployeeBodies._hasNameAsOperation_body_.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final java.lang.Boolean ecoreResult = (java.lang.Boolean)result;
-		if (ecoreResult != null) {
-			return ecoreResult;
+		try {
+			final Object result = EmployeeBodies._hasNameAsOperation_body_.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final java.lang.Boolean ecoreResult = (java.lang.Boolean)result;
+			if (ecoreResult != null) {
+				return ecoreResult;
+			}
+			throw new InvalidValueException("null result from EmployeeBodies._hasNameAsOperation_body_");
+		} catch (InvalidValueException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
-		throw new InvalidValueException("null result from EmployeeBodies._hasNameAsOperation_body_");
-		
-		
 	}
 
 	/**
@@ -386,19 +408,23 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = EmployeeBodies._invariant_mustHaveName.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Employee", "mustHaveName", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, CodegencompanyValidator.DIAGNOSTIC_SOURCE, CodegencompanyValidator.EMPLOYEE__NULLMUST_HAVE_NAME, message, new Object [] { this }));
+		try {
+			final Object result = EmployeeBodies._invariant_mustHaveName.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Employee", "mustHaveName", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, CodegencompanyValidator.DIAGNOSTIC_SOURCE, CodegencompanyValidator.EMPLOYEE__NULLMUST_HAVE_NAME, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
 		
 	}
 
@@ -413,19 +439,23 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = EmployeeBodies._invariant_mustHaveNonEmptyName.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Employee", "mustHaveNonEmptyName", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, CodegencompanyValidator.DIAGNOSTIC_SOURCE, CodegencompanyValidator.EMPLOYEE__NULLMUST_HAVE_NON_EMPTY_NAME, message, new Object [] { this }));
+		try {
+			final Object result = EmployeeBodies._invariant_mustHaveNonEmptyName.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Employee", "mustHaveNonEmptyName", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, CodegencompanyValidator.DIAGNOSTIC_SOURCE, CodegencompanyValidator.EMPLOYEE__NULLMUST_HAVE_NON_EMPTY_NAME, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
 		
 	}
 

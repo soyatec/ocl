@@ -29,13 +29,13 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
  */
 public abstract class AbstractBinaryOperation extends AbstractOperation implements LibraryBinaryOperation
 {
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, Object... argumentValues) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, Object... argumentValues) throws Exception {
 		DomainType returnType = DomainUtil.nonNullPivot(callExp.getType());
 		Object argumentValue0 = DomainUtil.nonNullState(argumentValues[0]);
 		return evaluate(evaluator, returnType.getTypeId(), sourceValue, argumentValue0);
 	}
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, @Nullable Object argumentValue) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, @Nullable Object argumentValue) throws Exception {
 		DomainType returnType = DomainUtil.nonNullPivot(callExp.getType());
 		return evaluate(evaluator, returnType.getTypeId(), sourceValue, argumentValue);
 	}

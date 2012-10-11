@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.pivot.library;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 
@@ -31,11 +32,6 @@ public class UnimplementedOperation extends AbstractUnaryOperation //implements 
 	public static final @NonNull UnimplementedOperation INSTANCE = new UnimplementedOperation();
 
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
-		return createInvalidValue("No implementation");
+		throw new InvalidValueException("No implementation");
 	}
-
-//	public Object evaluate(DomainEvaluator evaluator, DomainType returnType, Object sourceValue, Object argumentValue) {
-//		ValueFactory valueFactory = evaluator.getValueFactory();
-//		return valueFactory.throwInvalidValueException("No implementation");
-//	}
 }

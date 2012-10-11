@@ -414,7 +414,10 @@ public class OCL {
 //		context = HelperUtil.getConstraintContext(rootEnvironment, context, expression);
 		EvaluationEnvironment localEvalEnv = getEvaluationEnvironment();
 		Object value = ValuesUtil.valueOf(context);
-		localEvalEnv.add(expression.getContextVariable(), value);
+		Variable contextVariable = expression.getContextVariable();
+		if (contextVariable != null) {
+			localEvalEnv.add(contextVariable, value);
+		}
 //		if ((value != null) && !value.isUndefined()) {
 //			expression.getContextVariable().setValue(value);
 //		}
@@ -435,7 +438,9 @@ public class OCL {
 			evaluationProblems = e.getDiagnostic();
 			throw e;
 		} finally {
-			localEvalEnv.remove(expression.getContextVariable());
+			if (contextVariable != null) {
+				localEvalEnv.remove(contextVariable);
+			}
 		}
 		if (result instanceof InvalidValue) {
 			return (InvalidValue)result;

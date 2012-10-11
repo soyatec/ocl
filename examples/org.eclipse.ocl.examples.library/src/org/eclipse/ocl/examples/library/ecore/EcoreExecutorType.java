@@ -112,7 +112,7 @@ public class EcoreExecutorType extends ExecutorType
 				typeId2 = IdManager.INSTANCE.getTypeId(eClassifier2);
 			}
 			else {
-				if (TypeId.METACLASS_NAME.equals(name)) { //$NON-NLS-1$
+				if (TypeId.METACLASS_NAME.equals(name)) {
 					typeId2 = TypeId.METACLASS;
 				}
 				else {

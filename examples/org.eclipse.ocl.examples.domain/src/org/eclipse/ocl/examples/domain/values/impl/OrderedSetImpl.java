@@ -43,9 +43,8 @@ public class OrderedSetImpl<E> extends LinkedHashSet<E> implements OrderedSet<E>
 
 	@Override
 	public boolean equals(Object o) {
-		throw new UnsupportedOperationException();		// equals should be in OrderedSetValueImpl
 		// This is probably a bug fix on LinkedHashSet that should consider ordering for equals
-/*		if (o == this) {
+		if (o == this) {
 		    return true;
 		}
 		if (!(o instanceof OrderedSet)) {
@@ -70,6 +69,6 @@ public class OrderedSetImpl<E> extends LinkedHashSet<E> implements OrderedSet<E>
 				}
 			}
 		}
-        return true; */
+        return true;
     }
 }

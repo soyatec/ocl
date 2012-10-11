@@ -100,7 +100,7 @@ public class BasicCompleteOCLEObjectValidator extends EObjectValidator
 							ExpressionInOCL query = (ExpressionInOCL)specification;
 							EvaluationEnvironment evaluationEnvironment = environmentFactory.createEvaluationEnvironment();
 							Object value = ValuesUtil.valueOf(object);
-							evaluationEnvironment.add(query.getContextVariable(), value);
+							evaluationEnvironment.add(DomainUtil.nonNullState(query.getContextVariable()), value);
 							DomainModelManager extents = evaluationEnvironment.createModelManager(object);
 							EvaluationVisitor evaluationVisitor = environmentFactory.createEvaluationVisitor(rootEnvironment, evaluationEnvironment, extents);
 							int severity = Diagnostic.ERROR;

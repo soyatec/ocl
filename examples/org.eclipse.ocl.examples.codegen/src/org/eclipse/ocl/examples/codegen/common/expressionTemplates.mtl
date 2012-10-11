@@ -35,16 +35,16 @@
 <%Value%> [ast.symbolName(expInOcl)/] = createEnumerationLiteralValue(unboxed_[ast.symbolName(expInOcl)/], [type.getEscapedLiteralsName(genPackage)/]);
 [elseif (type.oclIsKindOf(OrderedSetType))]
 assert unboxed_[ast.symbolName(expInOcl)/] != null;
-final @NonNull <%Value%> [ast.symbolName(expInOcl)/] = standardLibrary.createOrderedSetValueOf([ast.type.typeId(expInOcl)/], unboxed_[ast.symbolName(expInOcl)/]);
+final @NonNull <%Value%> [ast.symbolName(expInOcl)/] = [if (ast.type.oclAsType(OrderedSetType).elementType.isBoxable())]standardLibrary.createOrderedSetValueOf[else]createOrderedSetValue[/if]([ast.type.typeId(expInOcl)/], unboxed_[ast.symbolName(expInOcl)/]);
 [elseif (type.oclIsKindOf(SetType))]
 assert unboxed_[ast.symbolName(expInOcl)/] != null;
-final @NonNull <%Value%> [ast.symbolName(expInOcl)/] = standardLibrary.createSetValueOf([ast.type.typeId(expInOcl)/], unboxed_[ast.symbolName(expInOcl)/]);
+final @NonNull <%Value%> [ast.symbolName(expInOcl)/] = [if (ast.type.oclAsType(SetType).elementType.isBoxable())]standardLibrary.createSetValueOf[else]createSetValue[/if]([ast.type.typeId(expInOcl)/], unboxed_[ast.symbolName(expInOcl)/]);
 [elseif (type.oclIsKindOf(SequenceType))]
 assert unboxed_[ast.symbolName(expInOcl)/] != null;
-final @NonNull <%Value%> [ast.symbolName(expInOcl)/] = standardLibrary.createSequenceValueOf([ast.type.typeId(expInOcl)/], unboxed_[ast.symbolName(expInOcl)/]);
+final @NonNull <%Value%> [ast.symbolName(expInOcl)/] = [if (ast.type.oclAsType(SequenceType).elementType.isBoxable())]standardLibrary.createSequenceValueOf[else]createSequenceValue[/if]([ast.type.typeId(expInOcl)/], unboxed_[ast.symbolName(expInOcl)/]);
 [elseif (type.oclIsKindOf(BagType))]
 assert unboxed_[ast.symbolName(expInOcl)/] != null;
-final @NonNull <%Value%> [ast.symbolName(expInOcl)/] = standardLibrary.createBagValueOf([ast.type.typeId(expInOcl)/], unboxed_[ast.symbolName(expInOcl)/]);
+final @NonNull <%Value%> [ast.symbolName(expInOcl)/] = [if (ast.type.oclAsType(BagType).elementType.isBoxable())]standardLibrary.createBagValueOf[else]createBagValue[/if]([ast.type.typeId(expInOcl)/], unboxed_[ast.symbolName(expInOcl)/]);
 [elseif (type.oclIsKindOf(LambdaType))]
 <%Value%> [ast.symbolName(expInOcl)/] = valueOf(unboxed_[ast.symbolName(expInOcl)/]);
 [elseif (type.oclIsKindOf(TupleType))]
@@ -77,7 +77,7 @@ Object [ast.symbolName(expInOcl)/] = valueOf(unboxed_[ast.symbolName(expInOcl)/]
 [for (part : CollectionLiteralPart | ast.part->reject(isConstantCollectionLiteralPart()))]
 [part.emitExpression(importer, genPackage, expInOcl)/]
 [/for]
-[ast.emitLiteral(genPackage, expInOcl)/]
+[ast.emitLiteral(genPackage, expInOcl, false)/]
 [/template]
 
 [template public emitExpression(ast : CollectionRange, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
@@ -119,7 +119,7 @@ else if ([ast.condition.symbolName(expInOcl)/] == <%ValuesUtil%>.FALSE_VALUE) {
 	[astName/] = [ast.elseExpression.symbolName(expInOcl)/];
 }
 else {
-	[astName/] = createInvalidValue("non-Boolean if condition");
+	throw new <%InvalidValueException%>("non-Boolean if condition");
 }[/let][/template]
 
 [template public emitExpression(ast : IterateExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
@@ -144,7 +144,7 @@ else {
 /*
 [ast._'body'.prettyPrint().trim()/]
 */
-	public @Nullable Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, @Nullable Object [ast.result.symbolName(expInOcl)/][for (i : Variable | ast.iterator)], @Nullable Object [i.symbolName(expInOcl)/][/for]) {
+	public @Nullable Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, @Nullable Object [ast.result.symbolName(expInOcl)/][for (i : Variable | ast.iterator)], @Nullable Object [i.symbolName(expInOcl)/][/for]) throws Exception {
 		[ast._'body'.emitExpression(importer, genPackage, expInOcl)/]
 		return [ast._'body'.symbolName(expInOcl)/];
 	}
@@ -155,10 +155,7 @@ else {
 Object [astName/] = dynamic_[astName/].evaluateIteration(manager_[astName/]);[/let][/let][/let][/let][/let][/let][/let][/template]
 
 [template public emitExpression(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(ast.isInlineable())]
-[let leftVarName : String = ast.source.symbolName(expInOcl)]
 [let astName : String = ast.symbolName(expInOcl)]
-[let iterationTypeName : String = 'org.eclipse.ocl.examples.domain.library.LibraryIteration']
-[let managerTypeName : String = 'org.eclipse.ocl.examples.library.executor.' + genPackage.emitManagerArity(1)]
 [ast.source.emitExpression(importer, genPackage, expInOcl)/]
 [ast.emitIterator_createAccumulatorValue(importer, genPackage, expInOcl)/]
 assert [ast.source.symbolName(expInOcl)/] != null;
@@ -170,20 +167,15 @@ while (true) {
 		[ast.emitIterator_resolveTerminalValue(importer, genPackage, expInOcl)/]
 		break;
 	}
-	Object [astName/]_bodyVal;
-	try {
-		/*
-			[ast._'body'.emitPrettyPrintHeader()/]
-		*/
-		[ast.iterator->at(1).symbolName(expInOcl)/] = [astName/]_iteratorVal.next();
-		[ast._'body'.emitExpression(importer, genPackage, expInOcl)/]
-		[astName/]_bodyVal = [ast._'body'.symbolName(expInOcl)/];
-	} catch (Exception e) {
-		[astName/]_bodyVal = createInvalidValue(e);
-	}
+	/*
+		[ast._'body'.emitPrettyPrintHeader()/]
+	*/
+	[ast.iterator->at(1).symbolName(expInOcl)/] = [astName/]_iteratorVal.next();
+	[ast._'body'.emitExpression(importer, genPackage, expInOcl)/]
+	Object [astName/]_bodyVal = [ast._'body'.symbolName(expInOcl)/];
 	[ast.emitIterator_updateAccumulator(importer, genPackage, expInOcl)/]
 }
-[/let][/let][/let][/let][/template]
+[/let][/template]
 
 [template public emitExpression(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(not ast.isInlineable())]
 [let arity : OCLInteger = ast.iterator->size()]
@@ -203,7 +195,7 @@ while (true) {
 [ast._'body'.prettyPrint().trim()/]
 */
 public @Nullable Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, @Nullable Object sourceValue[for (i : OCLInteger | Sequence{1..arity})]
-, @Nullable Object iterator[i/][/for]) throws <%org.eclipse.ocl.examples.domain.evaluation.InvalidValueException%> {
+, @Nullable Object iterator[i/][/for]) throws Exception {
 [for (i : OCLInteger | Sequence{1..arity})]
 		final Object [ast.iterator->at(i).symbolName(expInOcl)/] = iterator[i/];	// iterator: [ast.iterator->at(i).name/]
 [/for]  
@@ -226,8 +218,8 @@ try {
 	[ast.variable.initExpression.emitExpression(importer, genPackage, expInOcl)/]
 	[ast.variable.symbolName(expInOcl)/] = [ast.variable.initExpression.symbolName(expInOcl)/];
 }
-catch (<%InvalidValueException%> e) {
-	[ast.variable.symbolName(expInOcl)/] = <%ValuesUtil%>.createInvalidValue(e);
+catch (Exception e) {
+	[ast.variable.symbolName(expInOcl)/] = new <%InvalidValueImpl%>(e);
 }
 [/if]
 [if (not ast._in.isConstant())]
@@ -244,8 +236,8 @@ Object left[astName/];
 try {
 	[ast.source.emitExpression(importer, genPackage, expInOcl)/]
 	left[astName/] = [ast.source.symbolName(expInOcl)/];
-} [ast.resetFlags()/]catch (<%InvalidValueException%> e) {
-	left[astName/] = createInvalidValue(e);
+} [ast.resetFlags()/]catch (Exception e) {
+	left[astName/] = new <%InvalidValueImpl%>(e);
 }
 Object [ast.source.symbolName(expInOcl)/] = left[astName/];
 [/if]
@@ -255,8 +247,8 @@ Object right[astName/];
 try {
 	[right.emitExpression(importer, genPackage, expInOcl)/]
 	right[astName/] = [right.symbolName(expInOcl)/];
-} [ast.resetFlags()/]catch (<%InvalidValueException%> e) {
-	right[astName/] = createInvalidValue(e);
+} [ast.resetFlags()/]catch (Exception e) {
+	right[astName/] = new <%InvalidValueImpl%>(e);
 }
 Object [right.symbolName(expInOcl)/] = right[astName/];
 [/if]
@@ -277,8 +269,8 @@ Object [right.symbolName(expInOcl)/] = right[astName/];
 [let astName : String = ast.symbolName(expInOcl)]
 [let operationTypeName : String = 'org.eclipse.ocl.examples.domain.library.Library' + genPackage.emitOperationArity(arity)]
 [let generatedClassName : String = '_' + ast.referredOperation.name + '_' + 'body' + '_' + '']
-[let className : String = if ast.referredOperation.implementationClass <> null then '<%' + ast.referredOperation.implementationClass + '%>' else genPackage.getImplementationName(ast.referredOperation) endif]
-Object [astName/] = [className/].INSTANCE.evaluate(evaluator, [ast.type.typeId(expInOcl)/], [ast.source.symbolName(expInOcl)/][for (argument : OCLExpression | ast.argument) before (', ') separator (', ')][argument.symbolName(expInOcl)/][/for]);[/let][/let][/let][/let][/let][/template]
+[let className : String = if ast.referredOperation.implementationClass <> null then '<%' + ast.referredOperation.implementationClass + '%>.INSTANCE' else genPackage.getImplementationName(ast.referredOperation) endif]
+Object [astName/] = [className/].evaluate(evaluator, [ast.type.typeId(expInOcl)/], [ast.source.symbolName(expInOcl)/][for (argument : OCLExpression | ast.argument) before (', ') separator (', ')][argument.symbolName(expInOcl)/][/for]);[/let][/let][/let][/let][/let][/template]
 
 [template public generateCall(ast : OperationCallExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(not genPackage.isFinal(ast.referredOperation))]
 [let arity : OCLInteger = ast.referredOperation.ownedParameter->size()]
@@ -301,7 +293,8 @@ Object [astName/] = dynamic_[astName/].evaluate(evaluator, [ast.type.typeId(expI
 [let tuplePartIndex : OCLInteger = tupleType.ownedAttribute.name->sortedBy(n|n)->indexOf(tuplePartName)]
 Object [ast.symbolName(expInOcl)/] = ((<%TupleValue%>)[ast.source.symbolName(expInOcl)/]).getValue([tuplePartIndex - 1/]);[/let][/let][/let]
 [else]
-[ast.source.emitUnbox(ast, genPackage, expInOcl)/][genPackage.getEscapedPropertyType(ast.referredProperty)/] [ast.defineFlag('unboxed_' + ast.symbolName(expInOcl))/] = unboxed_[ast.source.symbolName(expInOcl)/] != null ? unboxed_[ast.source.symbolName(expInOcl)/].[genPackage.getPropertyGetter(ast.referredProperty)/]() : null;
+if ([ast.source.symbolName(expInOcl)/] == null) { throw new <%InvalidValueException%>("Null property source"); }
+[ast.source.emitUnbox(ast, genPackage, expInOcl)/][genPackage.getEscapedPropertyType(ast.referredProperty)/] [ast.defineFlag('unboxed_' + ast.symbolName(expInOcl))/] = unboxed_[ast.source.symbolName(expInOcl)/].[genPackage.getPropertyGetter(ast.referredProperty)/]();
 [ast.emitBox(importer, genPackage, expInOcl)/]
 [/if][/template]
 
@@ -309,7 +302,7 @@ Object [ast.symbolName(expInOcl)/] = ((<%TupleValue%>)[ast.source.symbolName(exp
 [for (part : TupleLiteralPart | ast.part->reject(initExpression.isConstant()))]
 [part.initExpression.emitExpression(importer, genPackage, expInOcl)/]
 [/for]
-[ast.emitLiteral(genPackage, expInOcl)/][/template]
+[ast.emitLiteral(genPackage, expInOcl, false)/][/template]
 
 [template public emitExpression(ast : TypeExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)][/template]
 
@@ -363,3 +356,9 @@ evaluator.getStaticTypeOf([ast.symbolName(expInOcl)/][/template]
 
 [template public generateTypeOf(genPackage : GenPackage, expInOcl : ExpressionInOCL, ast : VariableExp)]
 evaluator.getStaticTypeOf([ast.referredVariable.symbolName(expInOcl)/][/template]
+
+[query public isBoxable(type : Type) : Boolean =
+type.oclIsKindOf(pivot::Enumeration) or type.oclIsKindOf(CollectionType) or type.oclIsKindOf(LambdaType) or type.oclIsKindOf(TupleType)
+or (type.oclIsKindOf(PrimitiveType) and ((type.name = 'UnlimitedNatural') or (type.name = 'Integer') or (type.name = 'Real')))
+or (type.name = 'Type') or (type.name = 'CollectionType')/]
+

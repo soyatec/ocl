@@ -40,13 +40,20 @@ public abstract class GeneralizedTypeIdImpl<T extends TemplateableId> extends Ab
 		super(hashCode, templateParameters, name);
 	}
 
-	protected TemplateParameterId[] computeTemplateParameters(DomainType[] domainTypes) {
+	protected @NonNull TemplateParameterId[] computeTemplateParameters(DomainType[] domainTypes) {
 		List<TemplateParameterId> templateParameters = new ArrayList<TemplateParameterId>();
 		for (DomainType domainType : domainTypes) {
 			computeTemplateParameters(templateParameters, domainType);
 		}
 		int size = templateParameters.size();
-		return size > 0 ? templateParameters.toArray(new TemplateParameterId[size]) : TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY;
+		if (size > 0) {
+			TemplateParameterId[] array = templateParameters.toArray(new TemplateParameterId[size]);
+			assert array != null;
+			return array;
+		}
+		else {
+			return TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY;
+		}
 	}
 
 	private void computeTemplateParameters(List<TemplateParameterId> templateParameters, DomainType domainType) {

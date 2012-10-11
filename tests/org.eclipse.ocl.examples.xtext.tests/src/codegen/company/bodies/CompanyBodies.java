@@ -31,7 +31,7 @@ import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
 import org.eclipse.ocl.examples.library.collection.CollectionIncludesOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionSizeOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
@@ -40,7 +40,7 @@ import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 /**
  * CompanyBodies provides the Java implementation bodies of OCL-defined Company operations and properties.
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({"nls", "null", "unused"})
 public class CompanyBodies
 {
 
@@ -56,7 +56,7 @@ public class CompanyBodies
 		/*
 		true
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull Company unboxed_self = (Company)self;
 			
@@ -117,7 +117,7 @@ public class CompanyBodies
 	in
 	  table->any(range->includes(employees->size())).size
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self, @NonNull DomainProperty property) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self, @NonNull DomainProperty property) throws Exception {
 			assert self != null;
 			final @NonNull Company unboxed_self = (Company)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -136,8 +136,8 @@ public class CompanyBodies
 				final @NonNull Object A_symbol__9 = createSetValue(T_Set_Tuple_range_Sequence_size_CompanySizeKind__, A_symbol__6, A_symbol__7, A_symbol__8);
 				V_table = A_symbol__9;
 			}
-			catch (InvalidValueException e) {
-				V_table = ValuesUtil.createInvalidValue(e);
+			catch (Exception e) {
+				V_table = new InvalidValueImpl(e);
 			}
 			
 			
@@ -151,35 +151,31 @@ public class CompanyBodies
 					
 					break;
 				}
-				Object A_symbol__10_bodyVal;
-				try {
-					/*
-						range->includes(employees->size())
-					*/
-					V_1_ = A_symbol__10_iteratorVal.next();
-					
-					Object A_symbol__11 = ((TupleValue)V_1_).getValue(0);
-					
-					org.eclipse.emf.common.util.EList<codegen.company.Employee> unboxed_A_symbol__12 = unboxed_self != null ? unboxed_self.getEmployees() : null;
-					assert unboxed_A_symbol__12 != null;
-					final @NonNull Value A_symbol__12 = standardLibrary.createOrderedSetValueOf(T_OrderedSet_company__Employee_, unboxed_A_symbol__12);
-					
-					
-					Object A_symbol__13 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, T_Integer, A_symbol__12);
-					Object A_symbol__14 = CollectionIncludesOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__11, A_symbol__13);
-					A_symbol__10_bodyVal = A_symbol__14;
-				} catch (Exception e) {
-					A_symbol__10_bodyVal = createInvalidValue(e);
-				}
-				if (A_symbol__10_bodyVal == null) {
-					A_symbol__10 = createInvalidValue(EvaluatorMessages.UndefinedBody, "any");
-					break;
-				}
-				else if (A_symbol__10_bodyVal != FALSE_VALUE) {			// Carry on till something found
-					A_symbol__10 = V_1_;
-					break;
-				}
+				/*
+					range->includes(employees->size())
+				*/
+				V_1_ = A_symbol__10_iteratorVal.next();
 				
+				Object A_symbol__11 = ((TupleValue)V_1_).getValue(0);
+				
+				if (self == null) { throw new InvalidValueException("Null property source"); }
+				org.eclipse.emf.common.util.EList<codegen.company.Employee> unboxed_A_symbol__12 = unboxed_self.getEmployees();
+				assert unboxed_A_symbol__12 != null;
+				final @NonNull Value A_symbol__12 = createOrderedSetValue(T_OrderedSet_company__Employee_, unboxed_A_symbol__12);
+				
+				
+				Object A_symbol__13 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, T_Integer, A_symbol__12);
+				Object A_symbol__14 = CollectionIncludesOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__11, A_symbol__13);
+				Object A_symbol__10_bodyVal = A_symbol__14;
+				if (A_symbol__10_bodyVal != FALSE_VALUE) {
+					if (A_symbol__10_bodyVal == null) {
+						throw new InvalidValueException(EvaluatorMessages.UndefinedBody, "any");
+					}
+					else {			// Carry on till something found
+						A_symbol__10 = V_1_;
+						break;
+					}
+				}
 			}
 			
 			Object A_symbol__15 = ((TupleValue)A_symbol__10).getValue(1);

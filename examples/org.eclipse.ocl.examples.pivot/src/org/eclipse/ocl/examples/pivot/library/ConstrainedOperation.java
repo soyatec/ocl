@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractPolyOperation;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
@@ -47,14 +48,14 @@ public class ConstrainedOperation extends AbstractPolyOperation
 		EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
 		EvaluationVisitor nestedVisitor = evaluationVisitor.createNestedEvaluator();
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();
-		nestedEvaluationEnvironment.add(expressionInOCL.getContextVariable(), sourceValue);
+		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(expressionInOCL.getContextVariable()), sourceValue);
 		List<Variable> parameters = expressionInOCL.getParameterVariable();
 		if (!parameters.isEmpty()) {
 			List<OCLExpression> arguments = ((OperationCallExp)callExp).getArgument();
 			for (int i = 0; i < parameters.size(); i++) {
 				OCLExpression argument = arguments.get(i);
 				Object value = argument.accept(evaluationVisitor);
-				nestedEvaluationEnvironment.add(parameters.get(i).getRepresentedParameter(), value);
+				nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameters.get(i).getRepresentedParameter()), value);
 			}
 		}
 		return nestedVisitor.evaluate(expressionInOCL);
@@ -64,7 +65,7 @@ public class ConstrainedOperation extends AbstractPolyOperation
 		EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
 		EvaluationVisitor nestedVisitor = evaluationVisitor.createNestedEvaluator();
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();
-		nestedEvaluationEnvironment.add(expressionInOCL.getContextVariable(), sourceValue);
+		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(expressionInOCL.getContextVariable()), sourceValue);
 		return nestedVisitor.evaluate(expressionInOCL);
 	}
 
@@ -72,9 +73,9 @@ public class ConstrainedOperation extends AbstractPolyOperation
 		EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
 		EvaluationVisitor nestedVisitor = evaluationVisitor.createNestedEvaluator();
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();
-		nestedEvaluationEnvironment.add(expressionInOCL.getContextVariable(), sourceValue);
+		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(expressionInOCL.getContextVariable()), sourceValue);
 		List<Variable> parameters = expressionInOCL.getParameterVariable();
-		nestedEvaluationEnvironment.add(parameters.get(0).getRepresentedParameter(), argumentValue);
+		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameters.get(0).getRepresentedParameter()), argumentValue);
 		return nestedVisitor.evaluate(expressionInOCL);
 	}
 
@@ -82,10 +83,10 @@ public class ConstrainedOperation extends AbstractPolyOperation
 		EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
 		EvaluationVisitor nestedVisitor = evaluationVisitor.createNestedEvaluator();
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();
-		nestedEvaluationEnvironment.add(expressionInOCL.getContextVariable(), sourceValue);
+		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(expressionInOCL.getContextVariable()), sourceValue);
 		List<Variable> parameters = expressionInOCL.getParameterVariable();
-		nestedEvaluationEnvironment.add(parameters.get(0).getRepresentedParameter(), firstArgumentValue);
-		nestedEvaluationEnvironment.add(parameters.get(1).getRepresentedParameter(), secondArgumentValue);
+		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameters.get(0).getRepresentedParameter()), firstArgumentValue);
+		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameters.get(1).getRepresentedParameter()), secondArgumentValue);
 		return nestedVisitor.evaluate(expressionInOCL);
 	}
 }

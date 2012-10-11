@@ -41,7 +41,7 @@ import org.eclipse.ocl.examples.pivot.ValueSpecification;
 /**
  * TypedMultiplicityElementBodies provides the Java implementation bodies of OCL-defined TypedMultiplicityElement operations and properties.
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({"nls", "null", "unused"})
 public class TypedMultiplicityElementBodies
 {
 
@@ -65,13 +65,15 @@ public class TypedMultiplicityElementBodies
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 			
 			
+			if (bodySpecification == null) { throw new InvalidValueException("Null property source"); }
 			ValueSpecification unboxed_bodySpecification = (ValueSpecification)bodySpecification;	// ValueSpecification
-			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol_ = unboxed_bodySpecification != null ? unboxed_bodySpecification.getType() : null;
+			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol_ = unboxed_bodySpecification.getType();
 			Object A_symbol_ = createTypeValue(unboxed_A_symbol_);
 			
 			
 			
-			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__1 = unboxed_self != null ? unboxed_self.getType() : null;
+			if (self == null) { throw new InvalidValueException("Null property source"); }
+			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__1 = unboxed_self.getType();
 			Object A_symbol__1 = createTypeValue(unboxed_A_symbol__1);
 			
 			

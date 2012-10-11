@@ -70,8 +70,8 @@ public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
 		super(typeId, createValues(values));
 	}
 
-	public SparseOrderedSetValueImpl(@NonNull CollectionTypeId typeId, @NonNull OrderedSet<? extends Object> values) {
-		super(typeId, values);
+	public SparseOrderedSetValueImpl(@NonNull CollectionTypeId typeId, @NonNull Collection<? extends Object> elements) {
+		super(typeId, elements);
 	}
 
     public @NonNull OrderedSetValue append(@Nullable Object object) {
@@ -101,10 +101,10 @@ public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
     	}
     }
     
-	@Override
-	protected @NonNull OrderedSet<? extends Object> getElements() {
-		return (OrderedSet<? extends Object>) elements;
-	}
+//	@Override
+//	protected @NonNull OrderedSet<? extends Object> getElements() {
+//		return (OrderedSet<? extends Object>) elements;
+//	}
 
 	public @NonNull OrderedSetValue including(@Nullable Object value) {
 		if (value instanceof InvalidValue) {

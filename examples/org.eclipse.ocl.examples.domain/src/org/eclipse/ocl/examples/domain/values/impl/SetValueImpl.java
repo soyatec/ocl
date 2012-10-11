@@ -133,14 +133,17 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 	
 	public SetValueImpl(@NonNull CollectionTypeId typeId, Object... values) {
 		super(typeId, createValues(values));
+		assert checkElementsAreUnique(elements);
 	}
 
 	public SetValueImpl(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> values) {
 		super(typeId, createValues(values));
+		assert checkElementsAreUnique(elements);
 	}
 
-	public SetValueImpl(@NonNull CollectionTypeId typeId, @NonNull Set<? extends Object> values) {
+	public SetValueImpl(@NonNull CollectionTypeId typeId, @NonNull Collection<? extends Object> values) {
 		super(typeId, values);
+		assert checkElementsAreUnique(elements);
 	}
 
     @Override
@@ -160,10 +163,21 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof SetValueImpl)) {
+		if (!(obj instanceof SetValue)) {
 			return false;
 		}
-		return elements.equals(((SetValueImpl)obj).elements);
+		int thisSize = elements.size();
+		Collection<? extends Object> thoseElements = ((SetValue)obj).getElements();
+		int thatSize = thoseElements.size();
+		if (thisSize != thatSize) {
+			return false;
+		}
+		if (thoseElements instanceof Set<?>) {
+			return thoseElements.containsAll(elements);
+		}
+		else {
+			return elements.containsAll(thoseElements);
+		}
 	}
 
 	public @NonNull SetValue excluding(@Nullable Object value) {
@@ -205,10 +219,10 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 //		return TypeId.SET;
 //	}
 	
-	@Override
-	protected @NonNull Set<? extends Object> getElements() {
-		return (Set<? extends Object>) elements;
-	}
+//	@Override
+//	protected @NonNull Set<? extends Object> getElements() {
+//		return (Set<? extends Object>) elements;
+//	}
 
 	public @NonNull String getKind() {
 	    return TypeId.SET_NAME;

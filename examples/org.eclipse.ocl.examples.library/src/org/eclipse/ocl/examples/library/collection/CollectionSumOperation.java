@@ -36,7 +36,7 @@ public class CollectionSumOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull CollectionSumOperation INSTANCE = new CollectionSumOperation();
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) throws Exception {
 		CollectionValue collectionValue = asCollectionValue(sourceVal);
 		// FIXME Bug 301351 Look for user-defined zero
 //			resultType.getZero();

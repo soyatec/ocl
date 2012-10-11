@@ -89,8 +89,10 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
     		return createOrderedSetValue(typeId, result);
         } 
     }
+
 	public OrderedSetValueImpl(@NonNull CollectionTypeId typeId, @NonNull Collection<? extends Object> elements) {
 		super(typeId, elements);
+		assert checkElementsAreUnique(this.elements);
 	}
 
 	@Override

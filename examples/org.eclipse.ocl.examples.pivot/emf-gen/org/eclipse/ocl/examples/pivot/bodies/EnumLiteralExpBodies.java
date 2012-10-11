@@ -37,7 +37,7 @@ import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
 /**
  * EnumLiteralExpBodies provides the Java implementation bodies of OCL-defined EnumLiteralExp operations and properties.
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({"nls", "null", "unused"})
 public class EnumLiteralExpBodies
 {
 
@@ -57,22 +57,25 @@ public class EnumLiteralExpBodies
 		/*
 		self.type = referredEnumLiteral.enumeration
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull EnumLiteralExp unboxed_self = (EnumLiteralExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 			
 			
-			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol_ = unboxed_self != null ? unboxed_self.getType() : null;
+			if (self == null) { throw new InvalidValueException("Null property source"); }
+			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol_ = unboxed_self.getType();
 			Object A_symbol_ = createTypeValue(unboxed_A_symbol_);
 			
 			
 			
-			org.eclipse.ocl.examples.pivot.EnumerationLiteral unboxed_A_symbol__1 = unboxed_self != null ? unboxed_self.getReferredEnumLiteral() : null;
+			if (self == null) { throw new InvalidValueException("Null property source"); }
+			org.eclipse.ocl.examples.pivot.EnumerationLiteral unboxed_A_symbol__1 = unboxed_self.getReferredEnumLiteral();
 			Object A_symbol__1 = valueOf(unboxed_A_symbol__1); // EnumerationLiteral
 			
 			
-			org.eclipse.ocl.examples.pivot.Enumeration unboxed_A_symbol__2 = unboxed_A_symbol__1 != null ? unboxed_A_symbol__1.getEnumeration() : null;
+			if (A_symbol__1 == null) { throw new InvalidValueException("Null property source"); }
+			org.eclipse.ocl.examples.pivot.Enumeration unboxed_A_symbol__2 = unboxed_A_symbol__1.getEnumeration();
 			Object A_symbol__2 = valueOf(unboxed_A_symbol__2); // Enumeration
 			
 			

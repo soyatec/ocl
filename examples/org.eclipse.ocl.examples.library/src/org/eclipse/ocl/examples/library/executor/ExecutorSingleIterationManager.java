@@ -65,7 +65,7 @@ public class ExecutorSingleIterationManager extends AbstractIterationManager
 		return accumulatorValue;
 	}
 
-	public @Nullable Object evaluateBody() {
+	public @Nullable Object evaluateBody() throws Exception {
 //		try {
 			return body.evaluate(evaluator, returnTypeId, accumulatorValue, get());
 //		} catch (InvalidValueException e) {
@@ -82,7 +82,7 @@ public class ExecutorSingleIterationManager extends AbstractIterationManager
 //		throw new InvalidEvaluationException(null, boundMessage, null, null, null);
 //	}
 
-	public @Nullable Object updateBody() {
+	public @Nullable Object updateBody() throws Exception {
 		Object newValue = body.evaluate(evaluator, returnTypeId, accumulatorValue, get());
 		this.accumulatorValue = newValue;
 		return null;					// carry on

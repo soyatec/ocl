@@ -31,8 +31,8 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 	protected static class ValueIterator
 	{
 		private final DomainEvaluationEnvironment evaluationEnvironment;
-		private final CollectionValue collectionValue;
-		private final DomainTypedElement variable;
+		private final @NonNull CollectionValue collectionValue;
+		private final @NonNull DomainTypedElement variable;
 		private Iterator<? extends Object> javaIter;
 		private Object value;		// 'null' is a valid value so 'this' is used as end of iteration
 
@@ -140,8 +140,9 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 	public @Nullable Object updateBody() {
 		Object bodyVal = evaluateBody();		
 		this.accumulatorValue = bodyVal;
-		if (accumulatorVariable != null) {
-			getEvaluationEnvironment().replace(accumulatorVariable, accumulatorValue);
+		DomainTypedElement accumulatorVariable2 = accumulatorVariable;
+		if (accumulatorVariable2 != null) {
+			getEvaluationEnvironment().replace(accumulatorVariable2, accumulatorValue);
 		}
 		return null;					// carry on
 	}

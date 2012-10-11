@@ -33,6 +33,7 @@ public class EEnumLiteralValueImpl extends AbstractEnumerationLiteralValueImpl
 		this.eEnumLiteral = eEnumLiteral;
 	}
 
+	@Override
 	public Enumerator asEcoreObject() {
 		return eEnumLiteral.getInstance();
 	}

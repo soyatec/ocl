@@ -31,7 +31,7 @@ import org.eclipse.ocl.examples.pivot.Type;
 /**
  * TypeBodies provides the Java implementation bodies of OCL-defined Type operations and properties.
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({"nls", "null", "unused"})
 public class TypeBodies
 {
 

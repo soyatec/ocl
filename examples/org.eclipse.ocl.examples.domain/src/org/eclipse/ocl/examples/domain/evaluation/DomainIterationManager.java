@@ -50,8 +50,9 @@ public interface DomainIterationManager
 	 * <br>
 	 * This is used by non-iterate iteration that intervene between the body evaluation
 	 * and accumulator update.
+	 * @throws Exception 
 	 */
-	@Nullable Object evaluateBody();
+	@Nullable Object evaluateBody() throws Exception;
 	
 	/**
 	 * Get the current state of the iterator.
@@ -89,7 +90,8 @@ public interface DomainIterationManager
 	 * be assigned to a completely independent value.
 	 * 
 	 * Returns null for the iteration to continue, non-null to terminate.
+	 * @throws Exception 
 	 * @throws InvalidValueException 
 	 */
-	@Nullable Object updateBody();
+	@Nullable Object updateBody() throws Exception;
 }

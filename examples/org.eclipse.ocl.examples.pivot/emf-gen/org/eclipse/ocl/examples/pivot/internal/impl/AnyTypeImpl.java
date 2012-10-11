@@ -79,7 +79,9 @@ public class AnyTypeImpl
 			return TypeId.OCL_ANY;
 		}
 		else {
-			return IdManager.INSTANCE.getPrimitiveTypeId(name);		// e.g. the orphan $$ type
+			String name2 = name;
+			assert name2 != null;
+			return IdManager.INSTANCE.getPrimitiveTypeId(name2);		// e.g. the orphan $$ type
 		}
 	}
 } //AnyTypeImpl

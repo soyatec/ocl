@@ -85,13 +85,14 @@ public class SortedByIteration extends AbstractIteration
 			else if (v2 == null) {
 				return 1;
 			}
-//			try {
+			try {
 				IntegerValue comparison = ValuesUtil.asIntegerValue(implementation.evaluate(evaluator, TypeId.INTEGER, v1, v2));
 				return comparison.signum();
-//			} catch (InvalidValueException e) {
-//				evaluator.throwInvalidEvaluation(e);
-//			}
-//			return 0;
+			} catch (InvalidValueException e) {
+				throw e;
+			} catch (Exception e) {
+				throw new InvalidValueException(e);
+			}
 		}
 
 		public @NonNull Value createSortedValue() {
@@ -170,7 +171,7 @@ public class SortedByIteration extends AbstractIteration
 	}
 
 	@Override
-    protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
+    protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) throws Exception {
 		Object bodyVal = iterationManager.evaluateBody();		
 		if (isNull(bodyVal)) {
 			throw new InvalidValueException(EvaluatorMessages.UndefinedBody, "sortedBy"); 	// Null body is invalid //$NON-NLS-1$

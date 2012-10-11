@@ -54,8 +54,7 @@
 [template public generateType(pType : Type, genPackage : GenPackage)]
 [for (pRule : Constraint | pType.ownedRule->select(stereotype = 'invariant'))]
 [file (pType.getFragmentURI() + '==' + pRule.getRuleName(), false, 'UTF-8')]
-[expandKnownImports(knownImports(), pRule.generateTypeRule(pType, genPackage))/]
-[/file][/for][/template]
+[expandKnownImports(knownImports(), pRule.generateTypeRule(pType, genPackage))/][/file][/for][/template]
 
 [template public generateTypeRule(pRule : Constraint, pType : Type, genPackage : GenPackage)]
 [let className : String = pType.getQualifiedBodiesClassName(genPackage)]
@@ -68,41 +67,45 @@
 [let constants : String = expInOcl.gatherSpecificationConstants(genPackage, pType)]
 [let arity : OCLInteger = expInOcl.parameterVariable->size()]
 final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
-[expInOcl.emitConstants(constants)/]
-final Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this);
-final boolean resultIsNull = <%ValuesUtil%>.isNull(result);
-if (!resultIsNull && <%ValuesUtil%>.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-	return true;
-}
-if (diagnostics != null) {
-	int severity = resultIsNull ? <%org.eclipse.emf.common.util.Diagnostic%>.ERROR : <%org.eclipse.emf.common.util.Diagnostic%>.WARNING;
-[if (expInOcl.messageExpression->notEmpty())]
-	final Object messageValue = <%[className/]%>.[constraintName/].Message.INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this);
-	String message;
-	if (messageValue != null) {
-		message = messageValue.asString();
+[expInOcl.emitConstants(constants)/]try {
+	final Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this);
+	final boolean resultIsNull = <%ValuesUtil%>.isNull(result);
+	if (!resultIsNull && <%ValuesUtil%>.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+		return true;
 	}
-	else {
-		Object objectLabel;
-		if (this instanceof <%org.eclipse.emf.ecore.EDataType%>) {
-			objectLabel = <%org.eclipse.emf.ecore.util.EObjectValidator%>.getValueLabel((<%org.eclipse.emf.ecore.EDataType%>) this, result, context);
-		}
-		else if (result instanceof <%org.eclipse.emf.ecore.EObject%>) {
-			objectLabel = <%org.eclipse.emf.ecore.util.EObjectValidator%>.getObjectLabel((<%org.eclipse.emf.ecore.EObject%>) result, context);
+	if (diagnostics != null) {
+		int severity = resultIsNull ? <%org.eclipse.emf.common.util.Diagnostic%>.ERROR : <%org.eclipse.emf.common.util.Diagnostic%>.WARNING;
+	[if (expInOcl.messageExpression->notEmpty())]
+		final Object messageValue = <%[className/]%>.[constraintName/].Message.INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this);
+		String message;
+		if (messageValue != null) {
+			message = messageValue.asString();
 		}
 		else {
-			objectLabel = String.valueOf(result);
+			Object objectLabel;
+			if (this instanceof <%org.eclipse.emf.ecore.EDataType%>) {
+				objectLabel = <%org.eclipse.emf.ecore.util.EObjectValidator%>.getValueLabel((<%org.eclipse.emf.ecore.EDataType%>) this, result, context);
+			}
+			else if (result instanceof <%org.eclipse.emf.ecore.EObject%>) {
+				objectLabel = <%org.eclipse.emf.ecore.util.EObjectValidator%>.getObjectLabel((<%org.eclipse.emf.ecore.EObject%>) result, context);
+			}
+			else {
+				objectLabel = String.valueOf(result);
+			}
+			message = <%org.eclipse.osgi.util.NLS%>.bind(<%EvaluatorMessages%>.ValidationConstraintIsNotSatisfied_ERROR_, new Object['[]'/]{"[pType.name/]", "[genPackage.getOperationID(pType, pRule, false)/]", objectLabel});
 		}
-		message = <%org.eclipse.osgi.util.NLS%>.bind(<%EvaluatorMessages%>.ValidationConstraintIsNotSatisfied_ERROR_, new Object['[]'/]{"[pType.name/]", "[genPackage.getOperationID(pType, pRule, false)/]", objectLabel});
+	    diagnostics.add(new <%org.eclipse.emf.common.util.BasicDiagnostic%>(severity, <%[genPackage.getQualifiedValidatorClassName()/]%>.DIAGNOSTIC_SOURCE, <%[genPackage.getQualifiedValidatorClassName()/]%>.[genPackage.getOperationID(pType, pRule, true)/], message, new Object ['[]'/] { result }));
+	[else]
+		String message = <%org.eclipse.osgi.util.NLS%>.bind(<%EvaluatorMessages%>.ValidationConstraintIsNotSatisfied_ERROR_, new Object['[]'/]{"[pType.name/]", "[pRule.getRuleName()/]", <%org.eclipse.emf.ecore.util.EObjectValidator%>.getObjectLabel(this, context)});
+	    diagnostics.add(new <%org.eclipse.emf.common.util.BasicDiagnostic%>(severity, <%[genPackage.getQualifiedValidatorClassName()/]%>.DIAGNOSTIC_SOURCE, <%[genPackage.getQualifiedValidatorClassName()/]%>.[genPackage.getOperationID(pType, pRule, true)/], message, new Object ['[]'/] { this }));
+	[/if]
 	}
-    diagnostics.add(new <%org.eclipse.emf.common.util.BasicDiagnostic%>(severity, <%[genPackage.getQualifiedValidatorClassName()/]%>.DIAGNOSTIC_SOURCE, <%[genPackage.getQualifiedValidatorClassName()/]%>.[genPackage.getOperationID(pType, pRule, true)/], message, new Object ['[]'/] { result }));
-[else]
-	String message = <%org.eclipse.osgi.util.NLS%>.bind(<%EvaluatorMessages%>.ValidationConstraintIsNotSatisfied_ERROR_, new Object['[]'/]{"[pType.name/]", "[pRule.getRuleName()/]", <%org.eclipse.emf.ecore.util.EObjectValidator%>.getObjectLabel(this, context)});
-    diagnostics.add(new <%org.eclipse.emf.common.util.BasicDiagnostic%>(severity, <%[genPackage.getQualifiedValidatorClassName()/]%>.DIAGNOSTIC_SOURCE, <%[genPackage.getQualifiedValidatorClassName()/]%>.[genPackage.getOperationID(pType, pRule, true)/], message, new Object ['[]'/] { this }));
-[/if]
+} catch (<%InvalidValueException%> e) {
+		throw e;
+} catch (Exception e) {
+	throw new <%InvalidValueException%>(e);
 }
-return false;
-[/let][/let][else]
+return false;[/let][/let][else]
 /*
 [pRule.specification.prettyPrint().trim()/]
 */
@@ -113,8 +116,7 @@ return false; // FIXME errors in OCL definition of [pRule.prettyPrintName()/]
 [template public generateOperation(pType : Type, genPackage : GenPackage, pOperation : Operation)]
 [let pRule : Constraint = pOperation.ownedRule->any(stereotype = 'body')]
 [file (pOperation.getFragmentURI(), false, 'UTF-8')]
-[expandKnownImports(knownImports(), pRule.generateOperationRule(pType, genPackage, pOperation))/]
-[/file][/let][/template]
+[expandKnownImports(knownImports(), pRule.generateOperationRule(pType, genPackage, pOperation))/][/file][/let][/template]
 
 [template public generateOperationRule(pRule : Constraint, pType : Type, genPackage : GenPackage, pOperation : Operation)]
 [let className : String = pType.getQualifiedBodiesClassName(genPackage)]
@@ -128,35 +130,38 @@ return false; // FIXME errors in OCL definition of [pRule.prettyPrintName()/]
 [expInOcl.prettyPrint().trim()/]
 */
 final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
-[expInOcl.emitConstants(constants)/]
-final Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this[for (pParameter : Parameter | pOperation.ownedParameter)], <%ValuesUtil%>.valueOf([pParameter.name/])[/for]);
-final [ecoreResultType/] ecoreResult = ([ecoreResultType/])[if (pOperation.type.isBoxed())](result != null ? ((<%Value%>)result).asEcoreObject() : null)[else]result[/if];
-[if (ecoreResultType = ecoreReturnType)]
-return ecoreResult;
-[else]
-if (ecoreResult != null) {
+[expInOcl.emitConstants(constants)/]try {
+	final Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this[for (pParameter : Parameter | pOperation.ownedParameter)], <%ValuesUtil%>.valueOf([pParameter.name/])[/for]);
+	final [ecoreResultType/] ecoreResult = ([ecoreResultType/])[if (pOperation.type.isBoxed())](result != null ? ((<%Value%>)result).asEcoreObject() : null)[else]result[/if];
+	[if (ecoreResultType = ecoreReturnType)]
 	return ecoreResult;
-}
-throw new <%InvalidValueException%>("null result from <%[className/]%>.[constraintName/]");
-[/if][/let][else]
-/*
-[pRule.specification.prettyPrint().trim()/]
-*/
-/*[expInOcl.messageExpression.prettyPrint().trim()/] */
-[if (ecoreReturnType = 'Boolean')]
-return false; // FIXME errors in OCL definition of [pOperation.prettyPrintName()/]
-[else]
-return null; // FIXME errors in OCL definition of [pOperation.prettyPrintName()/]
-[/if]
-[/if][/let][/let][/let][/let][/let][/template]
+	[else]
+	if (ecoreResult != null) {
+		return ecoreResult;
+	}
+	throw new <%InvalidValueException%>("null result from <%[className/]%>.[constraintName/]");
+	[/if]
+} catch (InvalidValueException e) {
+	throw e;
+} catch (Exception e) {
+	throw new InvalidValueException(e);
+}[/let][else]
+	/*
+	[pRule.specification.prettyPrint().trim()/]
+	*/
+	/*[expInOcl.messageExpression.prettyPrint().trim()/] */
+	[if (ecoreReturnType = 'Boolean')]
+	return false; // FIXME errors in OCL definition of [pOperation.prettyPrintName()/]
+	[else]
+	return null; // FIXME errors in OCL definition of [pOperation.prettyPrintName()/]
+[/if][/if][/let][/let][/let][/let][/let][/template]
 
 [template public generateProperty(pType : Type, genPackage : GenPackage, pProperty : Property)]
 [let derivationRules : OrderedSet(Constraint) = pProperty.ownedRule->select(stereotype = 'derivation')]
 [let initialRules : OrderedSet(Constraint) = pProperty.ownedRule->select(stereotype = 'initial')]
 [let pRule : Constraint = if derivationRules->notEmpty() then derivationRules->any(true) else initialRules->any(true) endif]
 [file (pProperty.getFragmentURI(), false, 'UTF-8')]
-[expandKnownImports(knownImports(), pRule.generatePropertyRule(pType, genPackage, pProperty))/]
-[/file][/let][/let][/let][/template]
+[expandKnownImports(knownImports(), pRule.generatePropertyRule(pType, genPackage, pProperty))/][/file][/let][/let][/let][/template]
 
 [template public generatePropertyRule(pRule : Constraint, pType : Type, genPackage : GenPackage, pProperty : Property)]
 [let className : String = pType.getQualifiedBodiesClassName(genPackage)]
@@ -170,25 +175,29 @@ return null; // FIXME errors in OCL definition of [pOperation.prettyPrintName()/
 [expInOcl.prettyPrint().trim()/]
 */
 final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
-[expInOcl.emitConstants(constants)/]
-final Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this, [pProperty.emitQualifiedLiteralName(genPackage)/]);
-final [ecoreResultType/] ecoreResult = ([ecoreResultType/])[if (pProperty.type.isBoxed())](result != null ? ((<%Value%>)result).asEcoreObject() : null)[else]result[/if];
-[if (ecoreResultType = ecoreReturnType)]
-return ecoreResult;
-[else]
-if (ecoreResult != null) {
+[expInOcl.emitConstants(constants)/]try {
+	final Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this, [pProperty.emitQualifiedLiteralName(genPackage)/]);
+	final [ecoreResultType/] ecoreResult = ([ecoreResultType/])[if (pProperty.type.isBoxed())](result != null ? ((<%Value%>)result).asEcoreObject() : null)[else]result[/if];
+	[if (ecoreResultType = ecoreReturnType)]
 	return ecoreResult;
-}
-throw new <%InvalidValueException%>("null result from <%[className/]%>.[constraintName/]");
-[/if][/let][else]
-/*
-[pRule.specification.prettyPrint().trim()/]
-*/
-/* [expInOcl.messageExpression.prettyPrint().trim()/] */
-[if (ecoreReturnType = 'Boolean')]
-return false; // FIXME errors in OCL definition of [pProperty.prettyPrintName()/]
-[else]
-return null; // FIXME errors in OCL definition of [pProperty.prettyPrintName()/]
+	[else]
+	if (ecoreResult != null) {
+		return ecoreResult;
+	}
+	throw new <%InvalidValueException%>("null result from <%[className/]%>.[constraintName/]");
+[/if]} catch (InvalidValueException e) {
+	throw e;
+} catch (Exception e) {
+	throw new InvalidValueException(e);
+}[/let][else]
+	/*
+	[pRule.specification.prettyPrint().trim()/]
+	*/
+	/* [expInOcl.messageExpression.prettyPrint().trim()/] */
+	[if (ecoreReturnType = 'Boolean')]
+	return false; // FIXME errors in OCL definition of [pProperty.prettyPrintName()/]
+	[else]
+	return null; // FIXME errors in OCL definition of [pProperty.prettyPrintName()/]
 [/if][/if][/let][/let][/let][/let][/let][/template]
 
 [template public gatherSpecificationConstants(expInOcl : ExpressionInOCL, genPackage : GenPackage, pType : Type)]

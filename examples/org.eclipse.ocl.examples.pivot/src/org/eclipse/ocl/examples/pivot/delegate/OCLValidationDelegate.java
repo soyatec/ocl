@@ -91,7 +91,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 			EnvironmentFactory environmentFactory) {
 		EvaluationEnvironment evaluationEnvironment = environmentFactory.createEvaluationEnvironment();
 		Object value = ValuesUtil.valueOf(object);
-		evaluationEnvironment.add(query.getContextVariable(), value);
+		evaluationEnvironment.add(DomainUtil.nonNullState(query.getContextVariable()), value);
 		return evaluationEnvironment;
 	}
 

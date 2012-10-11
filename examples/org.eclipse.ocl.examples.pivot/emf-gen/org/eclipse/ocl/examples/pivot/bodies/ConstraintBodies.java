@@ -33,6 +33,7 @@ import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
 import org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.logical.BooleanOrOperation;
@@ -44,7 +45,7 @@ import org.eclipse.ocl.examples.pivot.PivotTables;
 /**
  * ConstraintBodies provides the Java implementation bodies of OCL-defined Constraint operations and properties.
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({"nls", "null", "unused"})
 public class ConstraintBodies
 {
 
@@ -75,88 +76,89 @@ public class ConstraintBodies
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 			
 			
-			org.eclipse.ocl.examples.pivot.NamedElement unboxed_A_symbol__2 = unboxed_self != null ? unboxed_self.getContext() : null;
-			Object A_symbol__2 = valueOf(unboxed_A_symbol__2); // NamedElement
+			if (self == null) { throw new InvalidValueException("Null property source"); }
+			org.eclipse.ocl.examples.pivot.NamedElement unboxed_A_symbol__1 = unboxed_self.getContext();
+			Object A_symbol__1 = valueOf(unboxed_A_symbol__1); // NamedElement
 			
 			
-			org.eclipse.emf.common.util.EList<org.eclipse.ocl.examples.pivot.Constraint> unboxed_A_symbol__3 = unboxed_A_symbol__2 != null ? unboxed_A_symbol__2.getOwnedRule() : null;
-			assert unboxed_A_symbol__3 != null;
-			final @NonNull Value A_symbol__3 = standardLibrary.createOrderedSetValueOf(T_OrderedSet_pivot__Constraint_, unboxed_A_symbol__3);
+			if (A_symbol__1 == null) { throw new InvalidValueException("Null property source"); }
+			org.eclipse.emf.common.util.EList<org.eclipse.ocl.examples.pivot.Constraint> unboxed_A_symbol__2 = unboxed_A_symbol__1.getOwnedRule();
+			assert unboxed_A_symbol__2 != null;
+			final @NonNull Value A_symbol__2 = createOrderedSetValue(T_OrderedSet_pivot__Constraint_, unboxed_A_symbol__2);
 			
 			
 			
-			Object A_symbol_ = CollectionExcludingOperation.INSTANCE.evaluate(evaluator, T_OrderedSet_pivot__Constraint_, A_symbol__3, self);
+			Object A_symbol__3 = CollectionExcludingOperation.INSTANCE.evaluate(evaluator, T_OrderedSet_pivot__Constraint_, A_symbol__2, self);
 			
-			assert A_symbol_ != null;
-			final @NonNull Iterator<?> A_symbol__1_iteratorVal = ((CollectionValue)A_symbol_).iterator();
+			assert A_symbol__3 != null;
+			final @NonNull Iterator<?> A_symbol__iteratorVal = ((CollectionValue)A_symbol__3).iterator();
 			Object V_1_ = null;	// iterator: 1_
-			Object A_symbol__1;
+			Object A_symbol_;
 			while (true) {
-				if (!A_symbol__1_iteratorVal.hasNext()) {
-					A_symbol__1 = TRUE_VALUE;
+				if (!A_symbol__iteratorVal.hasNext()) {
+					A_symbol_ = TRUE_VALUE;
 					break;
 				}
-				Object A_symbol__1_bodyVal;
+				/*
+					name <> self.name or stereotype <> self.stereotype
+				*/
+				V_1_ = A_symbol__iteratorVal.next();
+				Object leftA_symbol__4;
 				try {
-					/*
-						name <> self.name or stereotype <> self.stereotype
-					*/
-					V_1_ = A_symbol__1_iteratorVal.next();
-					Object leftA_symbol__4;
-					try {
-						
-						Constraint unboxed_V_1_ = (Constraint)V_1_;	// Constraint
-						java.lang.String unboxed_A_symbol__5 = unboxed_V_1_ != null ? unboxed_V_1_.getName() : null;
-						Object A_symbol__5 = unboxed_A_symbol__5; // String
-						
-						
-						
-						java.lang.String unboxed_A_symbol__6 = unboxed_self != null ? unboxed_self.getName() : null;
-						Object A_symbol__6 = unboxed_A_symbol__6; // String
-						
-						
-						Object A_symbol__7 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__5, A_symbol__6);
-						leftA_symbol__4 = A_symbol__7;
-					} catch (InvalidValueException e) {
-						leftA_symbol__4 = createInvalidValue(e);
-					}
-					Object A_symbol__7 = leftA_symbol__4;
-					Object rightA_symbol__4;
-					try {
-						
-						Constraint unboxed_V_1_ = (Constraint)V_1_;	// Constraint
-						java.lang.String unboxed_A_symbol__8 = unboxed_V_1_ != null ? unboxed_V_1_.getStereotype() : null;
-						Object A_symbol__8 = unboxed_A_symbol__8; // String
-						
-						
-						
-						java.lang.String unboxed_A_symbol__9 = unboxed_self != null ? unboxed_self.getStereotype() : null;
-						Object A_symbol__9 = unboxed_A_symbol__9; // String
-						
-						
-						Object A_symbol__10 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__8, A_symbol__9);
-						rightA_symbol__4 = A_symbol__10;
-					} catch (InvalidValueException e) {
-						rightA_symbol__4 = createInvalidValue(e);
-					}
-					Object A_symbol__10 = rightA_symbol__4;
-					Object A_symbol__4 = BooleanOrOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__7, A_symbol__10);
-					A_symbol__1_bodyVal = A_symbol__4;
+					
+					if (V_1_ == null) { throw new InvalidValueException("Null property source"); }
+					Constraint unboxed_V_1_ = (Constraint)V_1_;	// Constraint
+					java.lang.String unboxed_A_symbol__5 = unboxed_V_1_.getName();
+					Object A_symbol__5 = unboxed_A_symbol__5; // String
+					
+					
+					
+					if (self == null) { throw new InvalidValueException("Null property source"); }
+					java.lang.String unboxed_A_symbol__6 = unboxed_self.getName();
+					Object A_symbol__6 = unboxed_A_symbol__6; // String
+					
+					
+					Object A_symbol__7 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__5, A_symbol__6);
+					leftA_symbol__4 = A_symbol__7;
 				} catch (Exception e) {
-					A_symbol__1_bodyVal = createInvalidValue(e);
+					leftA_symbol__4 = new InvalidValueImpl(e);
 				}
-				if (A_symbol__1_bodyVal == null) {
-					A_symbol__1 = createInvalidValue(EvaluatorMessages.UndefinedBody, "forAll");
-					break;
+				Object A_symbol__7 = leftA_symbol__4;
+				Object rightA_symbol__4;
+				try {
+					
+					if (V_1_ == null) { throw new InvalidValueException("Null property source"); }
+					Constraint unboxed_V_1_ = (Constraint)V_1_;	// Constraint
+					java.lang.String unboxed_A_symbol__8 = unboxed_V_1_.getStereotype();
+					Object A_symbol__8 = unboxed_A_symbol__8; // String
+					
+					
+					
+					if (self == null) { throw new InvalidValueException("Null property source"); }
+					java.lang.String unboxed_A_symbol__9 = unboxed_self.getStereotype();
+					Object A_symbol__9 = unboxed_A_symbol__9; // String
+					
+					
+					Object A_symbol__10 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__8, A_symbol__9);
+					rightA_symbol__4 = A_symbol__10;
+				} catch (Exception e) {
+					rightA_symbol__4 = new InvalidValueImpl(e);
 				}
-				else if (A_symbol__1_bodyVal != TRUE_VALUE) {
-					A_symbol__1 = FALSE_VALUE;			// Abort after a fail
-					break;
+				Object A_symbol__10 = rightA_symbol__4;
+				Object A_symbol__4 = BooleanOrOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__7, A_symbol__10);
+				Object A_symbol__bodyVal = A_symbol__4;
+				if (A_symbol__bodyVal != TRUE_VALUE) {
+					if (A_symbol__bodyVal == null) {
+						throw new InvalidValueException(EvaluatorMessages.UndefinedBody, "forAll");
+					}
+					else {
+						A_symbol_ = FALSE_VALUE;			// Abort after a fail
+						break;
+					}
 				}
-				
 			}
 			
-			return A_symbol__1;
+			return A_symbol_;
 		}
 	}
 

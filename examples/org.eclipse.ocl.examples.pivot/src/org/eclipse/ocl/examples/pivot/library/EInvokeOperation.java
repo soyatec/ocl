@@ -14,8 +14,6 @@
  */
 package org.eclipse.ocl.examples.pivot.library;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -25,6 +23,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractPolyOperation;
@@ -45,68 +44,68 @@ public class EInvokeOperation extends AbstractPolyOperation
 	}
 
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue,
-			Object... argumentValues) {
+			Object... argumentValues) throws Exception {
 		EObject eObject = asNavigableObject(sourceValue);
 		BasicEList<Object> arguments = new BasicEList<Object>();
 		for (Object argumentValue : argumentValues) {
 			assert argumentValue != null;
 			arguments.add(asObject(argumentValue));
 		}
-		try {
+//		try {
 			Object eResult = eObject.eInvoke(eOperation, arguments);
 			DomainType returnType = callExp.getType();
 			assert returnType != null;
 			return getResultValue(returnType.getTypeId(), eResult);
-		} catch (InvocationTargetException e) {
-			return createInvalidValue(e);
-		}
+//		} catch (InvocationTargetException e) {
+//			return createInvalidValue(e);
+//		}
 	}
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) throws Exception {
 		EObject eObject = asNavigableObject(sourceValue);
 		BasicEList<Object> arguments = new BasicEList<Object>();
-		try {
+//		try {
 			Object eResult = eObject.eInvoke(eOperation, arguments);
 			return getResultValue(returnTypeId, eResult);
-		} catch (InvocationTargetException e) {
-			return createInvalidValue(e);
-		}
+//		} catch (InvocationTargetException e) {
+//			return createInvalidValue(e);
+//		}
 	}
 
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue,
-			@Nullable Object argumentValue) {
+			@Nullable Object argumentValue) throws Exception {
 		EObject eObject = asNavigableObject(sourceValue);
 		BasicEList<Object> arguments = new BasicEList<Object>();
 		arguments.add(asObject(argumentValue));
-		try {
+//		try {
 			Object eResult = eObject.eInvoke(eOperation, arguments);
 			return getResultValue(returnTypeId, eResult);
-		} catch (InvocationTargetException e) {
-			return createInvalidValue(e);
-		}
+//		} catch (InvocationTargetException e) {
+//			return createInvalidValue(e);
+//		}
 	}
 
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue,
-			@Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
+			@Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) throws Exception {
 		EObject eObject = asNavigableObject(sourceValue);
 		BasicEList<Object> arguments = new BasicEList<Object>();
 		arguments.add(asObject(firstArgumentValue));
 		arguments.add(asObject(secondArgumentValue));
-		try {
+//		try {
 			Object eResult = eObject.eInvoke(eOperation, arguments);
 			return getResultValue(returnTypeId, eResult);
-		} catch (InvocationTargetException e) {
-			return createInvalidValue(e);
-		}
+//		} catch (InvocationTargetException e) {
+//			return createInvalidValue(e);
+//		}
 	}
 
-	protected @Nullable Object getResultValue(@NonNull TypeId returnTypeId, @Nullable Object eResult) {
+	protected @Nullable Object getResultValue(@NonNull TypeId returnTypeId, @Nullable Object eResult) throws Exception {
 		if (returnTypeId instanceof CollectionTypeId) {
 			if (eResult instanceof Iterable<?>) {
 				return createCollectionValue((CollectionTypeId)returnTypeId, (Iterable<?>)eResult);
 			}
 			else {
-				return createInvalidValue("Non-iterable result");
+				throw new InvalidValueException("Non-iterable result");
 			}
 		} else if (eResult != null) {
 			@SuppressWarnings("null") @NonNull EClassifier eType = eOperation.getEType();

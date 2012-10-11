@@ -37,7 +37,7 @@ import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 /**
  * BooleanLiteralExpBodies provides the Java implementation bodies of OCL-defined BooleanLiteralExp operations and properties.
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({"nls", "null", "unused"})
 public class BooleanLiteralExpBodies
 {
 
@@ -56,13 +56,14 @@ public class BooleanLiteralExpBodies
 		/*
 		self.type = Boolean
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull BooleanLiteralExp unboxed_self = (BooleanLiteralExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 			
 			
-			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol_ = unboxed_self != null ? unboxed_self.getType() : null;
+			if (self == null) { throw new InvalidValueException("Null property source"); }
+			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol_ = unboxed_self.getType();
 			Object A_symbol_ = createTypeValue(unboxed_A_symbol_);
 			
 			

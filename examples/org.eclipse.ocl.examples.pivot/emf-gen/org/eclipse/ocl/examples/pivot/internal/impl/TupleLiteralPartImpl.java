@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.pivot.Annotation;
@@ -312,7 +313,7 @@ public class TupleLiteralPartImpl
 
 	private TuplePartId partId = null;
 	
-	public @NonNull TuplePartId getPartId() {
+	public @Nullable TuplePartId getPartId() {
 		TupleTypeId tupleTypeId = (TupleTypeId) ((TupleLiteralExp)eContainer()).getTypeId();
 		TuplePartId partId2 = partId;
 		if (partId2 == null) {

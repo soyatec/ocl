@@ -2164,7 +2164,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	public @NonNull DomainElement getTemplateParameter(@NonNull TemplateParameterId id, DomainElement context) {
 		DomainElement origin = id.getOrigin();
 		if (origin instanceof TemplateParameter) {
-			return ((TemplateParameter)origin).getParameteredElement();
+			return DomainUtil.nonNullModel(((TemplateParameter)origin).getParameteredElement());
 		}
 		throw new UnsupportedOperationException();
 	}

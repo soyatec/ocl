@@ -71,6 +71,7 @@ public class EmitQueries
 		org.eclipse.ocl.examples.domain.values.TypeValue.class,
 		org.eclipse.ocl.examples.domain.values.UnlimitedValue.class,
 		org.eclipse.ocl.examples.domain.values.Value.class,
+		org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl.class,
 		org.eclipse.ocl.examples.domain.values.util.ValuesUtil.class,
 		org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumeration.class,
 		org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumerationLiteral.class,

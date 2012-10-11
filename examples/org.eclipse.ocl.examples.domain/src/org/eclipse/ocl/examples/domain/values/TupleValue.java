@@ -18,6 +18,7 @@
 package org.eclipse.ocl.examples.domain.values;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
@@ -56,11 +57,11 @@ public interface TupleValue extends Value {
      * @throws InvalidValueException 
 	 * @generated NOT
      */
-	@NonNull Object getValue(@NonNull TuplePartId partId);
+	@Nullable Object getValue(@NonNull TuplePartId partId);
     
     /**
      * Queries the value of the specified tuple part at 0-based index corresponding to the position of the
      * required part-name in the alphabetically sorted list of all part-names.
      */
-	@NonNull Object getValue(int index);
+	@Nullable Object getValue(int index);
 }

@@ -38,7 +38,7 @@ import org.eclipse.ocl.examples.pivot.PivotTables;
 /**
  * IfExpBodies provides the Java implementation bodies of OCL-defined IfExp operations and properties.
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({"nls", "null", "unused"})
 public class IfExpBodies
 {
 
@@ -58,17 +58,19 @@ public class IfExpBodies
 		/*
 		self.condition.type = Boolean
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IfExp unboxed_self = (IfExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 			
 			
-			org.eclipse.ocl.examples.pivot.OCLExpression unboxed_A_symbol_ = unboxed_self != null ? unboxed_self.getCondition() : null;
+			if (self == null) { throw new InvalidValueException("Null property source"); }
+			org.eclipse.ocl.examples.pivot.OCLExpression unboxed_A_symbol_ = unboxed_self.getCondition();
 			Object A_symbol_ = valueOf(unboxed_A_symbol_); // OCLExpression
 			
 			
-			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__1 = unboxed_A_symbol_ != null ? unboxed_A_symbol_.getType() : null;
+			if (A_symbol_ == null) { throw new InvalidValueException("Null property source"); }
+			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__1 = unboxed_A_symbol_.getType();
 			Object A_symbol__1 = createTypeValue(unboxed_A_symbol__1);
 			
 			

@@ -41,7 +41,7 @@ import org.eclipse.ocl.examples.pivot.PivotTables;
 /**
  * ElementBodies provides the Java implementation bodies of OCL-defined Element operations and properties.
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({"nls", "null", "unused"})
 public class ElementBodies
 {
 
@@ -68,7 +68,7 @@ public class ElementBodies
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 			
 			
-			Object A_symbol_ = org.eclipse.ocl.examples.pivot.bodies.ElementBodies._allOwnedElements_body_.INSTANCE.INSTANCE.evaluate(evaluator, T_Set_pivot__Element_, self);
+			Object A_symbol_ = org.eclipse.ocl.examples.pivot.bodies.ElementBodies._allOwnedElements_body_.INSTANCE.evaluate(evaluator, T_Set_pivot__Element_, self);
 			
 			Object A_symbol__1 = CollectionIncludesOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol_, self);
 			Object A_symbol__2 = BooleanNotOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__1);

@@ -38,9 +38,9 @@ public class OclAnyOclAsTypeOperation extends AbstractBinaryOperation
 		if (sourceVal instanceof InvalidValue) {
 			throw ((InvalidValue)sourceVal).getException();
 		}
-		DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-		DomainType sourceType = evaluator.getDynamicTypeOf(sourceVal);
 		DomainType argType = asType(argVal);
+		DomainType sourceType = evaluator.getDynamicTypeOf(sourceVal);
+		DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 		if (sourceType.conformsTo(standardLibrary, argType)) {
 			return sourceVal;
 		}
