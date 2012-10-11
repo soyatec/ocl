@@ -19,8 +19,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.text.Element;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.EList;

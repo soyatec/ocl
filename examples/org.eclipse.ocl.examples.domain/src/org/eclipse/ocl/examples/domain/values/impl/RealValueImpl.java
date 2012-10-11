@@ -22,6 +22,7 @@ import java.math.RoundingMode;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
@@ -186,6 +187,10 @@ public class RealValueImpl extends ValueImpl implements RealValue
 		else {
 			return value.hashCode();
 		}
+	}
+	
+	public @Nullable IntegerValue isIntegerValue() {
+		return null;
 	}
 
 	public boolean isUnlimited() {

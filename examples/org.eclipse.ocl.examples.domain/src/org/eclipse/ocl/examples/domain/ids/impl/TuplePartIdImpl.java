@@ -20,7 +20,6 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
-import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.TemplateBinding;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;

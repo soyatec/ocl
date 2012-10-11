@@ -37,6 +37,7 @@ import java.math.BigInteger;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
@@ -138,6 +139,10 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 
 	public int intValue() {
 		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "intValue", "UnlimitedValue");
+	}
+	
+	public @Nullable IntegerValue isIntegerValue() {
+		return null;
 	}
 
 	public boolean isUnlimited() {

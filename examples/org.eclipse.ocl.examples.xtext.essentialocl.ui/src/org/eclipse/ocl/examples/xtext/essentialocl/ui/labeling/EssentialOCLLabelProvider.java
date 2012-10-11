@@ -18,9 +18,6 @@ package org.eclipse.ocl.examples.xtext.essentialocl.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.LoopExp;
-import org.eclipse.ocl.examples.pivot.NavigationCallExp;
-import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TuplePartCS;
@@ -28,7 +25,6 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.TupleTypeCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.BooleanLiteralExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.CollectionTypeCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InfixExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InvalidLiteralExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InvocationExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NameExpCS;

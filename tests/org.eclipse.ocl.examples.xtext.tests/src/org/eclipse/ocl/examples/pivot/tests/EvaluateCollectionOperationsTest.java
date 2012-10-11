@@ -300,6 +300,13 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryFalse(null, "OrderedSet{1..2} = OrderedSet{2,1}");
 		assertQueryTrue(null, "OrderedSet{1..2} = OrderedSet{1,2,1}");
 		assertQueryFalse(null, "Sequence{1..2} = OrderedSet{1,2}");
+		// null collection element
+
+		assertQueryTrue(null, "Bag{null} = Bag{null}");
+		assertQueryTrue(null, "OrderedSet{null} = OrderedSet{null}");
+		assertQueryTrue(null, "Sequence{null} = Sequence{null}");
+		assertQueryTrue(null, "Set{null} = Set{null}");
+		assertQueryTrue(null, "Set{Set{null}} = Set{Set{null}}");
 	}
 
 	public void testCollectionEqualOrderedXOrdered() {

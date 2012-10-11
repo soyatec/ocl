@@ -2,63 +2,40 @@
  */
 package codegen.company.impl;
 
-import codegen.company.CodegencompanyPackage;
-import codegen.company.CodegencompanyTables;
-import codegen.company.Company;
-import codegen.company.Employee;
-
-import codegen.company.bodies.EmployeeBodies;
-
-import codegen.company.util.CodegencompanyValidator;
-
 import java.lang.reflect.InvocationTargetException;
-
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.WrappedException;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-
 import org.eclipse.jdt.annotation.NonNull;
-
-import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
-
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
-import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
-
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
-
-import org.eclipse.ocl.examples.library.executor.ExecutorType;
-
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
-
 import org.eclipse.osgi.util.NLS;
+
+import codegen.company.CodegencompanyPackage;
+import codegen.company.CodegencompanyTables;
+import codegen.company.Company;
+import codegen.company.Employee;
+import codegen.company.bodies.EmployeeBodies;
+import codegen.company.util.CodegencompanyValidator;
 
 /**
  * <!-- begin-user-doc -->
@@ -248,17 +225,15 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		/*
 		company.employees->select(manager = self)
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
-			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull TypeId T_company__Employee = CodegencompanyTables.Types._Employee.getTypeId();
-			final @NonNull CollectionTypeId T_OrderedSet_company__Employee_ = TypeId.ORDERED_SET.getSpecializedId(T_company__Employee);
-			
-			final @NonNull Object result = EmployeeBodies._directReports_derivation_.INSTANCE.evaluate(evaluator, T_OrderedSet_company__Employee_, this, CodegencompanyTables.Properties._Employee__directReports);
-			return (EList<Employee>)((Value)result).asEcoreObject();
-		} catch (InvalidValueException e) {
-			throw new WrappedException("Failed to evaluate codegen.company.bodies.EmployeeBodies", e);
-		}
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
+		final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
+		final @NonNull TypeId T_company__Employee = CodegencompanyTables.Types._Employee.getTypeId();
+		final @NonNull CollectionTypeId T_OrderedSet_company__Employee_ = TypeId.ORDERED_SET.getSpecializedId(T_company__Employee);
+		
+		final Object result = EmployeeBodies._directReports_derivation_.INSTANCE.evaluate(evaluator, T_OrderedSet_company__Employee_, this, CodegencompanyTables.Properties._Employee__directReports);
+		final org.eclipse.emf.common.util.EList<codegen.company.Employee> ecoreResult = (org.eclipse.emf.common.util.EList<codegen.company.Employee>)(result != null ? ((Value)result).asEcoreObject() : null);
+		return ecoreResult;
+		
 		
 	}
 
@@ -271,17 +246,15 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		/*
 		Employee.allInstances()->select(reportsTo(self))
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
-			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull TypeId T_company__Employee = CodegencompanyTables.Types._Employee.getTypeId();
-			final @NonNull CollectionTypeId T_Set_company__Employee_ = TypeId.SET.getSpecializedId(T_company__Employee);
-			
-			final @NonNull Object result = EmployeeBodies._allReports_derivation_.INSTANCE.evaluate(evaluator, T_Set_company__Employee_, this, CodegencompanyTables.Properties._Employee__allReports);
-			return (EList<Employee>)((Value)result).asEcoreObject();
-		} catch (InvalidValueException e) {
-			throw new WrappedException("Failed to evaluate codegen.company.bodies.EmployeeBodies", e);
-		}
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
+		final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
+		final @NonNull TypeId T_company__Employee = CodegencompanyTables.Types._Employee.getTypeId();
+		final @NonNull CollectionTypeId T_Set_company__Employee_ = TypeId.SET.getSpecializedId(T_company__Employee);
+		
+		final Object result = EmployeeBodies._allReports_derivation_.INSTANCE.evaluate(evaluator, T_Set_company__Employee_, this, CodegencompanyTables.Properties._Employee__allReports);
+		final org.eclipse.emf.common.util.EList<codegen.company.Employee> ecoreResult = (org.eclipse.emf.common.util.EList<codegen.company.Employee>)(result != null ? ((Value)result).asEcoreObject() : null);
+		return ecoreResult;
+		
 		
 	}
 
@@ -297,17 +270,15 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		else manager.reportingChain->prepend(manager)
 		endif
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
-			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull TypeId T_company__Employee = CodegencompanyTables.Types._Employee.getTypeId();
-			final @NonNull CollectionTypeId T_OrderedSet_company__Employee_ = TypeId.ORDERED_SET.getSpecializedId(T_company__Employee);
-			
-			final @NonNull Object result = EmployeeBodies._reportingChain_derivation_.INSTANCE.evaluate(evaluator, T_OrderedSet_company__Employee_, this, CodegencompanyTables.Properties._Employee__reportingChain);
-			return (EList<Employee>)((Value)result).asEcoreObject();
-		} catch (InvalidValueException e) {
-			throw new WrappedException("Failed to evaluate codegen.company.bodies.EmployeeBodies", e);
-		}
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
+		final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
+		final @NonNull TypeId T_company__Employee = CodegencompanyTables.Types._Employee.getTypeId();
+		final @NonNull CollectionTypeId T_OrderedSet_company__Employee_ = TypeId.ORDERED_SET.getSpecializedId(T_company__Employee);
+		
+		final Object result = EmployeeBodies._reportingChain_derivation_.INSTANCE.evaluate(evaluator, T_OrderedSet_company__Employee_, this, CodegencompanyTables.Properties._Employee__reportingChain);
+		final org.eclipse.emf.common.util.EList<codegen.company.Employee> ecoreResult = (org.eclipse.emf.common.util.EList<codegen.company.Employee>)(result != null ? ((Value)result).asEcoreObject() : null);
+		return ecoreResult;
+		
 		
 	}
 
@@ -320,15 +291,16 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		/*
 		name <> null
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
-			final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-			
-			final @NonNull Object result = EmployeeBodies._hasNameAsAttribute_derivation_.INSTANCE.evaluate(evaluator, T_Boolean, this, CodegencompanyTables.Properties._Employee__hasNameAsAttribute);
-			return (Boolean)result;
-		} catch (InvalidValueException e) {
-			throw new WrappedException("Failed to evaluate codegen.company.bodies.EmployeeBodies", e);
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
+		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		
+		final Object result = EmployeeBodies._hasNameAsAttribute_derivation_.INSTANCE.evaluate(evaluator, T_Boolean, this, CodegencompanyTables.Properties._Employee__hasNameAsAttribute);
+		final java.lang.Boolean ecoreResult = (java.lang.Boolean)result;
+		if (ecoreResult != null) {
+			return ecoreResult;
 		}
+		throw new InvalidValueException("null result from EmployeeBodies._hasNameAsAttribute_derivation_");
+		
 		
 	}
 
@@ -341,15 +313,16 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		/*
 		self.reportingChain->includes(manager)
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
-			final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-			
-			final @NonNull Object result = EmployeeBodies._reportsTo_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, ValuesUtil.valueOf(manager));
-			return (Boolean)result;
-		} catch (InvalidValueException e) {
-			throw new WrappedException("Failed to evaluate codegen.company.bodies.EmployeeBodies", e);
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
+		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		
+		final Object result = EmployeeBodies._reportsTo_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, ValuesUtil.valueOf(manager));
+		final java.lang.Boolean ecoreResult = (java.lang.Boolean)result;
+		if (ecoreResult != null) {
+			return ecoreResult;
 		}
+		throw new InvalidValueException("null result from EmployeeBodies._reportsTo_body_");
+		
 		
 	}
 
@@ -362,25 +335,21 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		/*
 		manager.oclIsUndefined() implies directReports->size() > 0
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
-			final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-			
-			final @NonNull Object result = EmployeeBodies._invariant_noManagerImpliesDirectReports.INSTANCE.evaluate(evaluator, T_Boolean, this);
-			final boolean resultIsNull = ValuesUtil.isNull(result);
-			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-				return true;
-			}
-			if (diagnostics != null) {
-				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Employee", "noManagerImpliesDirectReports", EObjectValidator.getObjectLabel(this, context)});
-			    diagnostics.add(new BasicDiagnostic(severity, CodegencompanyValidator.DIAGNOSTIC_SOURCE, CodegencompanyValidator.EMPLOYEE__NO_MANAGER_IMPLIES_DIRECT_REPORTS, message, new Object [] { this }));
-			}
-			return false;
-		} catch (InvalidValueException e) {
-			String message = NLS.bind(EvaluatorMessages.ValidationEvaluationFailed_ERROR_, new Object[]{"Employee", "noManagerImpliesDirectReports", EObjectValidator.getObjectLabel(this, context)});
-			throw new WrappedException(message, e);
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
+		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		
+		final Object result = EmployeeBodies._invariant_noManagerImpliesDirectReports.INSTANCE.evaluate(evaluator, T_Boolean, this);
+		final boolean resultIsNull = ValuesUtil.isNull(result);
+		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+			return true;
 		}
+		if (diagnostics != null) {
+			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Employee", "noManagerImpliesDirectReports", EObjectValidator.getObjectLabel(this, context)});
+		    diagnostics.add(new BasicDiagnostic(severity, CodegencompanyValidator.DIAGNOSTIC_SOURCE, CodegencompanyValidator.EMPLOYEE__NO_MANAGER_IMPLIES_DIRECT_REPORTS, message, new Object [] { this }));
+		}
+		return false;
+		
 		
 	}
 
@@ -393,15 +362,16 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		/*
 		name <> null
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
-			final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-			
-			final @NonNull Object result = EmployeeBodies._hasNameAsOperation_body_.INSTANCE.evaluate(evaluator, T_Boolean, this);
-			return (Boolean)result;
-		} catch (InvalidValueException e) {
-			throw new WrappedException("Failed to evaluate codegen.company.bodies.EmployeeBodies", e);
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
+		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		
+		final Object result = EmployeeBodies._hasNameAsOperation_body_.INSTANCE.evaluate(evaluator, T_Boolean, this);
+		final java.lang.Boolean ecoreResult = (java.lang.Boolean)result;
+		if (ecoreResult != null) {
+			return ecoreResult;
 		}
+		throw new InvalidValueException("null result from EmployeeBodies._hasNameAsOperation_body_");
+		
 		
 	}
 
@@ -414,25 +384,21 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		/*
 		not name.oclIsUndefined() and hasNameAsAttribute and hasNameAsOperation()
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
-			final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-			
-			final @NonNull Object result = EmployeeBodies._invariant_mustHaveName.INSTANCE.evaluate(evaluator, T_Boolean, this);
-			final boolean resultIsNull = ValuesUtil.isNull(result);
-			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-				return true;
-			}
-			if (diagnostics != null) {
-				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Employee", "mustHaveName", EObjectValidator.getObjectLabel(this, context)});
-			    diagnostics.add(new BasicDiagnostic(severity, CodegencompanyValidator.DIAGNOSTIC_SOURCE, CodegencompanyValidator.EMPLOYEE__NULLMUST_HAVE_NAME, message, new Object [] { this }));
-			}
-			return false;
-		} catch (InvalidValueException e) {
-			String message = NLS.bind(EvaluatorMessages.ValidationEvaluationFailed_ERROR_, new Object[]{"Employee", "mustHaveName", EObjectValidator.getObjectLabel(this, context)});
-			throw new WrappedException(message, e);
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
+		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		
+		final Object result = EmployeeBodies._invariant_mustHaveName.INSTANCE.evaluate(evaluator, T_Boolean, this);
+		final boolean resultIsNull = ValuesUtil.isNull(result);
+		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+			return true;
 		}
+		if (diagnostics != null) {
+			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Employee", "mustHaveName", EObjectValidator.getObjectLabel(this, context)});
+		    diagnostics.add(new BasicDiagnostic(severity, CodegencompanyValidator.DIAGNOSTIC_SOURCE, CodegencompanyValidator.EMPLOYEE__NULLMUST_HAVE_NAME, message, new Object [] { this }));
+		}
+		return false;
+		
 		
 	}
 
@@ -445,25 +411,21 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		/*
 		name->notEmpty() implies name.size() > 0
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
-			final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-			
-			final @NonNull Object result = EmployeeBodies._invariant_mustHaveNonEmptyName.INSTANCE.evaluate(evaluator, T_Boolean, this);
-			final boolean resultIsNull = ValuesUtil.isNull(result);
-			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-				return true;
-			}
-			if (diagnostics != null) {
-				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Employee", "mustHaveNonEmptyName", EObjectValidator.getObjectLabel(this, context)});
-			    diagnostics.add(new BasicDiagnostic(severity, CodegencompanyValidator.DIAGNOSTIC_SOURCE, CodegencompanyValidator.EMPLOYEE__NULLMUST_HAVE_NON_EMPTY_NAME, message, new Object [] { this }));
-			}
-			return false;
-		} catch (InvalidValueException e) {
-			String message = NLS.bind(EvaluatorMessages.ValidationEvaluationFailed_ERROR_, new Object[]{"Employee", "mustHaveNonEmptyName", EObjectValidator.getObjectLabel(this, context)});
-			throw new WrappedException(message, e);
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
+		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		
+		final Object result = EmployeeBodies._invariant_mustHaveNonEmptyName.INSTANCE.evaluate(evaluator, T_Boolean, this);
+		final boolean resultIsNull = ValuesUtil.isNull(result);
+		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+			return true;
 		}
+		if (diagnostics != null) {
+			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Employee", "mustHaveNonEmptyName", EObjectValidator.getObjectLabel(this, context)});
+		    diagnostics.add(new BasicDiagnostic(severity, CodegencompanyValidator.DIAGNOSTIC_SOURCE, CodegencompanyValidator.EMPLOYEE__NULLMUST_HAVE_NON_EMPTY_NAME, message, new Object [] { this }));
+		}
+		return false;
+		
 		
 	}
 

@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 public interface NumericValue extends Value, Comparable<NumericValue>
 {
@@ -37,6 +38,11 @@ public interface NumericValue extends Value, Comparable<NumericValue>
 	 * @generated NOT
 	 */
 	@NonNull BigInteger bigIntegerValue();
+	
+	/**
+	 * @generated NOT
+	 */
+	@Nullable IntegerValue isIntegerValue();
 
 	/**
 	 * @generated NOT

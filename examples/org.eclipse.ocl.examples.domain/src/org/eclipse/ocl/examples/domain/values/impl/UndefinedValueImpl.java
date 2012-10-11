@@ -109,6 +109,10 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 	public boolean isFalse() {
 		return false;
 	}
+	
+	public @Nullable IntegerValue isIntegerValue() {
+		return null;
+	}
 
 	public boolean isTrue() {
 		return false;

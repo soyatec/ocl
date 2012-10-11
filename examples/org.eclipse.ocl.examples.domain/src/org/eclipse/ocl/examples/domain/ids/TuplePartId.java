@@ -19,7 +19,6 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
-import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 
 /**
  * A TuplePartId provides a unique identifier for a TuplePart such as first:String.

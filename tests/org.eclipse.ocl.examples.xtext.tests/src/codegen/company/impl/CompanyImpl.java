@@ -2,63 +2,40 @@
  */
 package codegen.company.impl;
 
-import codegen.company.CodegencompanyPackage;
-import codegen.company.CodegencompanyTables;
-import codegen.company.Company;
-import codegen.company.CompanySizeKind;
-import codegen.company.Employee;
-
-import codegen.company.bodies.CompanyBodies;
-
-import codegen.company.util.CodegencompanyValidator;
-
 import java.lang.reflect.InvocationTargetException;
-
 import java.util.Collection;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.WrappedException;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipse.jdt.annotation.NonNull;
-
-import org.eclipse.ocl.examples.domain.elements.DomainType;
-
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-
-import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
-import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
-
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
-
-import org.eclipse.ocl.examples.library.executor.ExecutorType;
-
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
-
 import org.eclipse.osgi.util.NLS;
+
+import codegen.company.CodegencompanyPackage;
+import codegen.company.CodegencompanyTables;
+import codegen.company.Company;
+import codegen.company.CompanySizeKind;
+import codegen.company.Employee;
+import codegen.company.bodies.CompanyBodies;
+import codegen.company.util.CodegencompanyValidator;
 
 /**
  * <!-- begin-user-doc -->
@@ -187,15 +164,13 @@ public class CompanyImpl extends EObjectImpl implements Company {
 		in
 		  table->any(range->includes(employees->size())).size
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
-			final @NonNull TypeId T_company__CompanySizeKind = CodegencompanyTables.Types._CompanySizeKind.getTypeId();
-			
-			final @NonNull Object result = CompanyBodies._size_derivation_.INSTANCE.evaluate(evaluator, T_company__CompanySizeKind, this, CodegencompanyTables.Properties._Company__size);
-			return (CompanySizeKind)((Value)result).asEcoreObject();
-		} catch (InvalidValueException e) {
-			throw new WrappedException("Failed to evaluate codegen.company.bodies.CompanyBodies", e);
-		}
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
+		final @NonNull TypeId T_company__CompanySizeKind = CodegencompanyTables.Types._CompanySizeKind.getTypeId();
+		
+		final Object result = CompanyBodies._size_derivation_.INSTANCE.evaluate(evaluator, T_company__CompanySizeKind, this, CodegencompanyTables.Properties._Company__size);
+		final codegen.company.CompanySizeKind ecoreResult = (codegen.company.CompanySizeKind)(result != null ? ((Value)result).asEcoreObject() : null);
+		return ecoreResult;
+		
 		
 	}
 
@@ -208,25 +183,21 @@ public class CompanyImpl extends EObjectImpl implements Company {
 		/*
 		true
 		*/
-		try {
-			final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
-			final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-			
-			final @NonNull Object result = CompanyBodies._invariant_dummyInvariant.INSTANCE.evaluate(evaluator, T_Boolean, this);
-			final boolean resultIsNull = ValuesUtil.isNull(result);
-			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-				return true;
-			}
-			if (diagnostics != null) {
-				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Company", "dummyInvariant", EObjectValidator.getObjectLabel(this, context)});
-			    diagnostics.add(new BasicDiagnostic(severity, CodegencompanyValidator.DIAGNOSTIC_SOURCE, CodegencompanyValidator.COMPANY__DUMMY_INVARIANT, message, new Object [] { this }));
-			}
-			return false;
-		} catch (InvalidValueException e) {
-			String message = NLS.bind(EvaluatorMessages.ValidationEvaluationFailed_ERROR_, new Object[]{"Company", "dummyInvariant", EObjectValidator.getObjectLabel(this, context)});
-			throw new WrappedException(message, e);
+		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
+		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		
+		final Object result = CompanyBodies._invariant_dummyInvariant.INSTANCE.evaluate(evaluator, T_Boolean, this);
+		final boolean resultIsNull = ValuesUtil.isNull(result);
+		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+			return true;
 		}
+		if (diagnostics != null) {
+			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Company", "dummyInvariant", EObjectValidator.getObjectLabel(this, context)});
+		    diagnostics.add(new BasicDiagnostic(severity, CodegencompanyValidator.DIAGNOSTIC_SOURCE, CodegencompanyValidator.COMPANY__DUMMY_INVARIANT, message, new Object [] { this }));
+		}
+		return false;
+		
 		
 	}
 

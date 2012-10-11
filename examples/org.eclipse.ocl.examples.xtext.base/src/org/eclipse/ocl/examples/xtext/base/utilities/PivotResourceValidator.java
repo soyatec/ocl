@@ -42,7 +42,6 @@ import org.eclipse.xtext.validation.impl.ConcreteSyntaxEValidator;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.inject.Inject;
 
 /**
  * PivotResourceValidator extends CS Resource validation to the referenced Pivot resources and attempts

@@ -10,6 +10,7 @@
 package codegen.company.bodies;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import codegen.company.CodegencompanyTables;
 import codegen.company.Company;
 import java.util.Iterator;
@@ -49,12 +50,15 @@ public class CompanyBodies
 	public static class _invariant_dummyInvariant extends AbstractUnaryOperation
 	{
 		public static @NonNull _invariant_dummyInvariant INSTANCE = new _invariant_dummyInvariant();
+		static final @NonNull Object True = true;
+		
 	
 		/*
 		true
 		*/
-		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self) throws InvalidValueException {
-			final @NonNull Object True = true;
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+			assert self != null;
+			final @NonNull Company unboxed_self = (Company)self;
 			
 			
 			return True;
@@ -70,6 +74,36 @@ public class CompanyBodies
 	{
 		public static @NonNull _size_derivation_ INSTANCE = new _size_derivation_();
 	
+		static final @NonNull TypeId T_company__CompanySizeKind = CodegencompanyTables.Types._CompanySizeKind.getTypeId();
+		static final @NonNull PrimitiveTypeId T_Integer = TypeId.INTEGER;
+		static final @NonNull CollectionTypeId T_Sequence_Integer_ = TypeId.SEQUENCE.getSpecializedId(T_Integer);
+		static final @NonNull TupleTypeId U_Tuple_range_Sequence_size_CompanySizeKind_ = IdManager.INSTANCE.getTupleTypeId("Tuple", IdManager.INSTANCE.createTuplePartId("range", T_Sequence_Integer_), IdManager.INSTANCE.createTuplePartId("size", T_company__CompanySizeKind));
+		static final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		static final @NonNull ExecutorOperation O_Collection_any = OCLstdlibTables.Operations._Collection__any;
+		static final @NonNull ExecutorOperation O_Collection_includes = OCLstdlibTables.Operations._Collection__includes;
+		static final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
+		static final @NonNull TypeId T_company__Employee = CodegencompanyTables.Types._Employee.getTypeId();
+		static final @NonNull CollectionTypeId T_OrderedSet_company__Employee_ = TypeId.ORDERED_SET.getSpecializedId(T_company__Employee);
+		static final @NonNull PrimitiveTypeId T_UnlimitedNatural = TypeId.UNLIMITED_NATURAL;
+		static final @NonNull CollectionTypeId T_Sequence_UnlimitedNatural_ = TypeId.SEQUENCE.getSpecializedId(T_UnlimitedNatural);
+		static final @NonNull TupleTypeId U_Tuple_range_Sequence_size_CompanySizeKind_1 = IdManager.INSTANCE.getTupleTypeId("Tuple", IdManager.INSTANCE.createTuplePartId("range", T_Sequence_UnlimitedNatural_), IdManager.INSTANCE.createTuplePartId("size", T_company__CompanySizeKind));
+		static final @NonNull CollectionTypeId T_Set_Tuple_range_Sequence_size_CompanySizeKind__ = TypeId.SET.getSpecializedId(U_Tuple_range_Sequence_size_CompanySizeKind_1);
+		static final @NonNull IntegerValue I_0 = integerValueOf(0);
+		static final @NonNull IntegerValue I_49 = integerValueOf(49);
+		static final @NonNull IntegerRange rA_symbol_ = createRange(I_0.asIntegerValue(), I_49.asIntegerValue());
+		static final @NonNull Object A_symbol_ = createSequenceRange(T_Sequence_UnlimitedNatural_, rA_symbol_);
+		static final @NonNull Object A_symbol__1 = createEnumerationLiteralValue(CodegencompanyTables.EnumerationLiterals._CompanySizeKind__small);
+		static final @NonNull IntegerValue I_50 = integerValueOf(50);
+		static final @NonNull IntegerValue I_999 = integerValueOf(999);
+		static final @NonNull IntegerRange rA_symbol__2 = createRange(I_50.asIntegerValue(), I_999.asIntegerValue());
+		static final @NonNull Object A_symbol__2 = createSequenceRange(T_Sequence_UnlimitedNatural_, rA_symbol__2);
+		static final @NonNull Object A_symbol__3 = createEnumerationLiteralValue(CodegencompanyTables.EnumerationLiterals._CompanySizeKind__medium);
+		static final @NonNull IntegerValue I_1000 = integerValueOf(1000);
+		static final @NonNull IntegerValue I_1000000 = integerValueOf(1000000);
+		static final @NonNull IntegerRange rA_symbol__4 = createRange(I_1000.asIntegerValue(), I_1000000.asIntegerValue());
+		static final @NonNull Object A_symbol__4 = createSequenceRange(T_Sequence_UnlimitedNatural_, rA_symbol__4);
+		static final @NonNull Object A_symbol__5 = createEnumerationLiteralValue(CodegencompanyTables.EnumerationLiterals._CompanySizeKind__large);
+		
 		/*
 		let
 	  table : Set(Tuple(range : Sequence(Integer), size : CompanySizeKind)) = Set{
@@ -83,53 +117,33 @@ public class CompanyBodies
 	in
 	  table->any(range->includes(employees->size())).size
 		*/
-		public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @NonNull Object self, @NonNull DomainProperty property) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self, @NonNull DomainProperty property) throws InvalidValueException {
+			assert self != null;
+			final @NonNull Company unboxed_self = (Company)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final @NonNull TypeId T_company__CompanySizeKind = CodegencompanyTables.Types._CompanySizeKind.getTypeId();
-			final @NonNull PrimitiveTypeId T_Integer = TypeId.INTEGER;
-			final @NonNull CollectionTypeId T_Sequence_Integer_ = TypeId.SEQUENCE.getSpecializedId(T_Integer);
-			final @NonNull TupleTypeId U_Tuple_range_Sequence_size_CompanySizeKind_ = IdManager.INSTANCE.getTupleTypeId("Tuple", IdManager.INSTANCE.createTuplePartId("range", T_Sequence_Integer_), IdManager.INSTANCE.createTuplePartId("size", T_company__CompanySizeKind));
-			final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-			final @NonNull ExecutorOperation O_Collection_any = OCLstdlibTables.Operations._Collection__any;
-			final @NonNull ExecutorOperation O_Collection_includes = OCLstdlibTables.Operations._Collection__includes;
-			final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
-			final @NonNull TypeId T_company__Employee = CodegencompanyTables.Types._Employee.getTypeId();
-			final @NonNull CollectionTypeId T_OrderedSet_company__Employee_ = TypeId.ORDERED_SET.getSpecializedId(T_company__Employee);
-			final @NonNull PrimitiveTypeId T_UnlimitedNatural = TypeId.UNLIMITED_NATURAL;
-			final @NonNull CollectionTypeId T_Sequence_UnlimitedNatural_ = TypeId.SEQUENCE.getSpecializedId(T_UnlimitedNatural);
-			final @NonNull TupleTypeId U_Tuple_range_Sequence_size_CompanySizeKind_1 = IdManager.INSTANCE.getTupleTypeId("Tuple", IdManager.INSTANCE.createTuplePartId("range", T_Sequence_UnlimitedNatural_), IdManager.INSTANCE.createTuplePartId("size", T_company__CompanySizeKind));
-			final @NonNull CollectionTypeId T_Set_Tuple_range_Sequence_size_CompanySizeKind__ = TypeId.SET.getSpecializedId(U_Tuple_range_Sequence_size_CompanySizeKind_1);
-			final @NonNull IntegerValue I_0 = integerValueOf(0);
-			final @NonNull IntegerValue I_49 = integerValueOf(49);
-			final @NonNull IntegerRange rA_symbol_ = createRange(I_0.asIntegerValue(), I_49.asIntegerValue());
-			final @NonNull Object A_symbol_ = createSequenceRange(T_Sequence_UnlimitedNatural_, rA_symbol_);
-			final @NonNull Object A_symbol__1 = createEnumerationLiteralValue(CodegencompanyTables.EnumerationLiterals._CompanySizeKind__small);
-			final @NonNull IntegerValue I_50 = integerValueOf(50);
-			final @NonNull IntegerValue I_999 = integerValueOf(999);
-			final @NonNull IntegerRange rA_symbol__2 = createRange(I_50.asIntegerValue(), I_999.asIntegerValue());
-			final @NonNull Object A_symbol__2 = createSequenceRange(T_Sequence_UnlimitedNatural_, rA_symbol__2);
-			final @NonNull Object A_symbol__3 = createEnumerationLiteralValue(CodegencompanyTables.EnumerationLiterals._CompanySizeKind__medium);
-			final @NonNull IntegerValue I_1000 = integerValueOf(1000);
-			final @NonNull IntegerValue I_1000000 = integerValueOf(1000000);
-			final @NonNull IntegerRange rA_symbol__4 = createRange(I_1000.asIntegerValue(), I_1000000.asIntegerValue());
-			final @NonNull Object A_symbol__4 = createSequenceRange(T_Sequence_UnlimitedNatural_, rA_symbol__4);
-			final @NonNull Object A_symbol__5 = createEnumerationLiteralValue(CodegencompanyTables.EnumerationLiterals._CompanySizeKind__large);
+			
+			Object V_table;
+			try {
+				
+				TupleValue A_symbol__6 = createTupleValue(U_Tuple_range_Sequence_size_CompanySizeKind_1, A_symbol_, A_symbol__1);
+				
+				
+				TupleValue A_symbol__7 = createTupleValue(U_Tuple_range_Sequence_size_CompanySizeKind_1, A_symbol__2, A_symbol__3);
+				
+				
+				TupleValue A_symbol__8 = createTupleValue(U_Tuple_range_Sequence_size_CompanySizeKind_1, A_symbol__4, A_symbol__5);
+				
+				final @NonNull Object A_symbol__9 = createSetValue(T_Set_Tuple_range_Sequence_size_CompanySizeKind__, A_symbol__6, A_symbol__7, A_symbol__8);
+				V_table = A_symbol__9;
+			}
+			catch (InvalidValueException e) {
+				V_table = ValuesUtil.createInvalidValue(e);
+			}
 			
 			
-			TupleValue A_symbol__6 = createTupleValue(U_Tuple_range_Sequence_size_CompanySizeKind_1, A_symbol_, A_symbol__1);
-			
-			
-			TupleValue A_symbol__7 = createTupleValue(U_Tuple_range_Sequence_size_CompanySizeKind_1, A_symbol__2, A_symbol__3);
-			
-			
-			TupleValue A_symbol__8 = createTupleValue(U_Tuple_range_Sequence_size_CompanySizeKind_1, A_symbol__4, A_symbol__5);
-			
-			final @NonNull Object A_symbol__9 = createSetValue(T_Set_Tuple_range_Sequence_size_CompanySizeKind__, A_symbol__6, A_symbol__7, A_symbol__8);
-			final @NonNull Object V_table = A_symbol__9;
-			
-			
+			assert V_table != null;
 			final @NonNull Iterator<?> A_symbol__10_iteratorVal = ((CollectionValue)V_table).iterator();
-			@NonNull Object V_1_ = null;	// iterator: 1_
+			Object V_1_ = null;	// iterator: 1_
 			Object A_symbol__10;
 			while (true) {
 				if (!A_symbol__10_iteratorVal.hasNext()) {
@@ -146,9 +160,9 @@ public class CompanyBodies
 					
 					Object A_symbol__11 = ((TupleValue)V_1_).getValue(0);
 					
-					Company unboxed_self = (Company)self;
-					org.eclipse.emf.common.util.EList<codegen.company.Employee> unboxed_A_symbol__12 = unboxed_self.getEmployees();
-					Value A_symbol__12 = standardLibrary.createOrderedSetValueOf(T_OrderedSet_company__Employee_, unboxed_A_symbol__12);
+					org.eclipse.emf.common.util.EList<codegen.company.Employee> unboxed_A_symbol__12 = unboxed_self != null ? unboxed_self.getEmployees() : null;
+					assert unboxed_A_symbol__12 != null;
+					final @NonNull Value A_symbol__12 = standardLibrary.createOrderedSetValueOf(T_OrderedSet_company__Employee_, unboxed_A_symbol__12);
 					
 					
 					Object A_symbol__13 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, T_Integer, A_symbol__12);
@@ -157,7 +171,7 @@ public class CompanyBodies
 				} catch (Exception e) {
 					A_symbol__10_bodyVal = createInvalidValue(e);
 				}
-				if (ValuesUtil.isNull(A_symbol__10_bodyVal)) {
+				if (A_symbol__10_bodyVal == null) {
 					A_symbol__10 = createInvalidValue(EvaluatorMessages.UndefinedBody, "any");
 					break;
 				}
@@ -169,7 +183,7 @@ public class CompanyBodies
 			}
 			
 			Object A_symbol__15 = ((TupleValue)A_symbol__10).getValue(1);
-			final @NonNull Object A_symbol__16 = A_symbol__15;
+			final Object A_symbol__16 = A_symbol__15;
 			return A_symbol__16;
 		}}
 }

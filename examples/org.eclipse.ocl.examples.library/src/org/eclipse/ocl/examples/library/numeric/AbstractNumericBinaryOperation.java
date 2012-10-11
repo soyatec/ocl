@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 
 /**
@@ -33,16 +34,26 @@ import org.eclipse.ocl.examples.domain.values.RealValue;
 public abstract class AbstractNumericBinaryOperation extends AbstractBinaryOperation
 {
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
-		if (isUnlimited(left) || isUnlimited(right)) {
+		if (!(left instanceof NumericValue)) {
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Numeric Value", getTypeName(left)); //$NON-NLS-1$
+		}
+		if (!(right instanceof NumericValue)) {
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Numeric Value", getTypeName(right)); //$NON-NLS-1$
+		}
+		NumericValue leftValue = (NumericValue)left;
+		NumericValue rightValue = (NumericValue)right;
+		if (leftValue.isUnlimited() || rightValue.isUnlimited()) {
 			return evaluateUnlimited(evaluator, left, right);
 		}
-		IntegerValue leftInteger = isIntegerValue(left);
-		IntegerValue rightInteger = isIntegerValue(right);
-		if ((leftInteger != null) && (rightInteger != null)) {
-			return evaluateInteger(evaluator, leftInteger, rightInteger);
+		IntegerValue leftInteger = leftValue.isIntegerValue();
+		if (leftInteger != null) {
+			IntegerValue rightInteger = rightValue.isIntegerValue();
+			if (rightInteger != null) {
+				return evaluateInteger(evaluator, leftInteger, rightInteger);
+			}
 		}
-		RealValue leftReal = asRealValue(left);
-		RealValue rightReal = asRealValue(right);
+		RealValue leftReal = leftValue.asRealValue();
+		RealValue rightReal = rightValue.asRealValue();
 		return evaluateReal(evaluator, leftReal, rightReal);
 	}
 

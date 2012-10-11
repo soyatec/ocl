@@ -17,7 +17,6 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;

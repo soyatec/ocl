@@ -128,13 +128,21 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
 		if (!(obj instanceof OrderedSetValue) || (obj instanceof NullValue)) {
 			return false;
 		}
+		// This is probably a bug fix on LinkedHashSet that should consider ordering for equals
 		Iterator<? extends Object> theseElements = iterator();
 		Iterator<? extends Object> thoseElements = ((OrderedSetValue)obj).iterator();
 		while (theseElements.hasNext() && thoseElements.hasNext()) {
-			Object thisValue = theseElements.next();
-			Object thatValue = thoseElements.next();
-			if (!thisValue.equals(thatValue)) {
-				return false;
+			Object thisElement = theseElements.next();
+			Object thatElement = thoseElements.next();
+			if (thisElement == null) {
+				if (thatElement != null) {
+					return false;
+				}
+			}
+			else {
+				if (!thisElement.equals(thatElement)) {
+					return false;
+				}
 			}
 		}
 		return !theseElements.hasNext() && !thoseElements.hasNext();

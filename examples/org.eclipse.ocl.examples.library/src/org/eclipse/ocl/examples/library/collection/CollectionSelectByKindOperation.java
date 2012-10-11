@@ -25,7 +25,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * CollectionSelectByKindOperation realises the Collection::selectByType() library operation.

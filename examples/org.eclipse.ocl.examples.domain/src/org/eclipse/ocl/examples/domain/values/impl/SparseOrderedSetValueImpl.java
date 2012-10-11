@@ -84,17 +84,6 @@ public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
         return new SparseOrderedSetValueImpl(getTypeId(), result);
     }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof SparseOrderedSetValueImpl) {
-			SparseOrderedSetValueImpl that = (SparseOrderedSetValueImpl)obj;
-			return this.elements.equals(that.elements);
-		}
-		else {
-			return super.equals(obj);
-		}
-	}
-
     public @Nullable Object first() {
         if (elements.size() <= 0) {
         	throw new InvalidValueException(EvaluatorMessages.EmptyCollection, TypeId.ORDERED_SET_NAME, "first");

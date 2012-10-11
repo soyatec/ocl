@@ -52,6 +52,7 @@ import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
+import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSet;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
@@ -195,6 +196,15 @@ public abstract class ValuesUtil
 		}
 		else {
 			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "NavigableObject", getTypeName(value));
+		}
+	}
+
+	public static @NonNull NumericValue asNumericValue(@Nullable Object value) {
+		if (value instanceof NumericValue) {
+			return (NumericValue)value;
+		}
+		else {
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Numeric Value", getTypeName(value));
 		}
 	}
 

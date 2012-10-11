@@ -24,7 +24,6 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.ids.IdManager;

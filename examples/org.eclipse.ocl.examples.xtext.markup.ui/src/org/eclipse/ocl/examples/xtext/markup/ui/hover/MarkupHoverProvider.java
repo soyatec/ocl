@@ -53,7 +53,6 @@ import org.eclipse.ocl.examples.xtext.markup.Markup;
 import org.eclipse.ocl.examples.xtext.markup.MarkupUtils;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider.IInformationControlCreatorProvider;
 import org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControlInput;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;

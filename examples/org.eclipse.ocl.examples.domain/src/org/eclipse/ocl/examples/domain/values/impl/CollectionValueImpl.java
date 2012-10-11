@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
@@ -53,6 +54,80 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
  */
 public abstract class CollectionValueImpl extends ValueImpl implements CollectionValue
 {
+	/**
+	 * Optimized iterator over an Array for use in OCL contents where the array is known to be stable
+	 * and any call to next() is guarded by hasNext().
+	 */
+	private static class ArrayIterator<T> implements Iterator<T> {
+		protected final @NonNull T[] elements;
+		protected final int size;
+		private int index;
+
+		/**
+		 * Returns new array iterator over the given object array
+		 */
+		public ArrayIterator(@NonNull T[] elements, int size) {
+			this.elements = elements;
+			index = 0;
+			this.size = size;
+		}
+
+		/**
+		 * Returns true if this iterator contains more elements.
+		 */
+		public boolean hasNext() {
+			return index < size;
+		}
+
+		/**
+		 * Returns the next element of this iterator.
+		 */
+		public T next() {
+			return elements[index++];
+		}
+
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
+	}
+	
+	/**
+	 * Optimized iterator over a List for use in OCL contents where the list is known to be stable
+	 * and any call to next() is guarded by hasNext().
+	 */
+	private static class ListIterator<T> implements Iterator<T> {
+		protected final @NonNull List<T> elements;
+		protected final int size;
+		private int index;
+
+		/**
+		 * Returns new array iterator over the given object array
+		 */
+		public ListIterator(@NonNull List<T> elements) {
+			this.elements = elements;
+			index = 0;
+			this.size = elements.size();
+		}
+
+		/**
+		 * Returns true if this iterator contains more elements.
+		 */
+		public boolean hasNext() {
+			return index < size;
+		}
+
+		/**
+		 * Returns the next element of this iterator.
+		 */
+		public T next() {
+			return elements.get(index++);
+		}
+
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -420,6 +495,12 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	}
 
 	public @NonNull Iterator<? extends Object> iterator() {
+		if (elements instanceof BasicEList) {
+			return new ArrayIterator<Object>(((BasicEList<Object>)elements).data(), elements.size());
+		}
+		if (elements instanceof List) {
+			return new ListIterator<Object>((List<Object>)elements);
+		}
 		@SuppressWarnings("null") @NonNull Iterator<? extends Object> result = elements.iterator();
 		return result;
 	}

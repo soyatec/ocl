@@ -21,7 +21,6 @@
 package org.eclipse.ocl.examples.pivot;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -39,7 +38,6 @@ import org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
 import org.eclipse.ocl.examples.library.executor.ExecutorTypeParameter;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
-import org.eclipse.ocl.examples.pivot.PivotTables;
 
 /**
  * PivotTables provides the dispatch tables for the pivot for use by the OCL dispatcher.

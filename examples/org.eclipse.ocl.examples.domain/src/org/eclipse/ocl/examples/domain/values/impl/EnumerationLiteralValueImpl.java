@@ -17,7 +17,6 @@
 package org.eclipse.ocl.examples.domain.values.impl;
 
 import org.eclipse.emf.common.util.Enumerator;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;

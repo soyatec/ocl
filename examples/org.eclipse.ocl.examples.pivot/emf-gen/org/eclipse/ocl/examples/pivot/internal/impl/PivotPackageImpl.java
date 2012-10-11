@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
-import static org.eclipse.ocl.examples.pivot.PivotPackage.CLASS;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
@@ -133,7 +132,6 @@ import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.VoidType;
-import org.eclipse.ocl.examples.pivot.*;
 import org.eclipse.ocl.examples.pivot.util.MorePivotable;
 import org.eclipse.ocl.examples.pivot.util.Nameable;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;

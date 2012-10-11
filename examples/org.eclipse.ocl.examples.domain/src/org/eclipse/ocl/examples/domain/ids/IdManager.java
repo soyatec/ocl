@@ -20,7 +20,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -173,7 +172,7 @@ public class IdManager
 		int templateParameterCount = oldTemplateParameters.size();
 		TemplateParameterId[] newTemplateParameters = new TemplateParameterId[templateParameterCount];
 		for (int i = 0; i < templateParameterCount; i++) {
-			ETypeParameter oldTemplateParameter = oldTemplateParameters.get(i);
+			@SuppressWarnings("unused") ETypeParameter oldTemplateParameter = oldTemplateParameters.get(i);
 			newTemplateParameters[i] = createTypeTemplateParameterId(null);
 		}
 		return newTemplateParameters;
@@ -417,7 +416,9 @@ public class IdManager
 					assert templateParameterId != null;
 					templateBinding.install(templateParameterId);
 				}
-				specializers.add(createTemplateBinding(entry.getKey()));
+				DomainTemplateParameter key = entry.getKey();
+				assert key != null;
+				specializers.add(createTemplateBinding(key));
 			}
 			TupleTypeId generalizedTupleTypeId = getOrderedTupleTypeId(templateParameters, name, orderedParts);
 			TemplateBindings templateBindings = new TemplateBindings(specializers);
@@ -464,6 +465,7 @@ public class IdManager
 		EPackage parentPackage = eClassifier.getEPackage();
 		assert parentPackage != null;
 		List<ETypeParameter> typeParameters = eClassifier.getETypeParameters();
+		assert typeParameters != null;
 		TemplateParameterId[] templateParameters = IdManager.INSTANCE.createTemplateParameterIds(typeParameters);
 		return getPackageId(parentPackage).getNestedTypeId(templateParameters, name);
 	}

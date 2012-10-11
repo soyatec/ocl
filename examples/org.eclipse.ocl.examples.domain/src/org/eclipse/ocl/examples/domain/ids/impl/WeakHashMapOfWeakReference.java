@@ -17,7 +17,6 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 import java.lang.ref.WeakReference;
 import java.util.Iterator;
 import java.util.WeakHashMap;
-import java.util.Map.Entry;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.ids.ElementId;

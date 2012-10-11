@@ -18,13 +18,6 @@ package org.eclipse.ocl.examples.xtext.oclinecore.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.Annotation;
-import org.eclipse.ocl.examples.pivot.DataType;
-import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
-import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.Parameter;
-import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AttributeCS;

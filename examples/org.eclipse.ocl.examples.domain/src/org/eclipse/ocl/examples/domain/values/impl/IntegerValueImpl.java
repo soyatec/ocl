@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.domain.values.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -67,6 +68,10 @@ public abstract class IntegerValueImpl extends ValueImpl implements IntegerValue
 
 	public @NonNull TypeId getTypeId() {
 		return isUnlimitedNatural() ? TypeId.UNLIMITED_NATURAL : TypeId.INTEGER;
+	}
+	
+	public @Nullable IntegerValue isIntegerValue() {
+		return this;
 	}
 
 	public boolean isUnlimited() {

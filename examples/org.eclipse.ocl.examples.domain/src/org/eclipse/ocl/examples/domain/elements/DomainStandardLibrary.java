@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.xml.type.AnyType;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.ids.CollectedTypeId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;

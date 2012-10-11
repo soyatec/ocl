@@ -42,7 +42,6 @@ import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.osgi.util.NLS;
 
 /**
  * An implementation of a query delegate for OCL expressions.

@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 
@@ -34,14 +35,18 @@ import org.eclipse.ocl.examples.domain.values.Value;
 public abstract class AbstractNumericUnaryOperation extends AbstractUnaryOperation
 {
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
-		if (isUnlimited(sourceVal)) {
+		if (!(sourceVal instanceof NumericValue)) {
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Numeric Value", getTypeName(sourceVal)); //$NON-NLS-1$
+		}
+		NumericValue sourceValue = (NumericValue)sourceVal;
+		if (sourceValue.isUnlimited()) {
 			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Unlimited"); //$NON-NLS-1$
 		}
-		IntegerValue integerValue = isIntegerValue(sourceVal); 
+		IntegerValue integerValue = sourceValue.isIntegerValue(); 
 		if (integerValue != null) {
 			return evaluateInteger(integerValue);			
 		}
-		RealValue realValue = asRealValue(sourceVal); 
+		RealValue realValue = sourceValue.asRealValue(); 
 		return evaluateReal(realValue);
 	}
 

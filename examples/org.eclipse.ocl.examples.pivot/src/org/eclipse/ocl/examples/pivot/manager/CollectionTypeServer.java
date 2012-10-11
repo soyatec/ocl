@@ -234,13 +234,15 @@ public class CollectionTypeServer extends ExtensibleTypeServer
 
 	public synchronized @NonNull Type getSpecializedType(@NonNull Type elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
 		assert getPivotType() instanceof CollectionType;
-		if (lower == null) {
-			lower = ValuesUtil.ZERO_VALUE;
+		IntegerValue lower2 = lower;
+		IntegerValue upper2 = upper;
+		if (lower2 == null) {
+			lower2 = ValuesUtil.ZERO_VALUE;
 		}
-		if (upper == null) {
-			upper = ValuesUtil.UNLIMITED_VALUE;
+		if (upper2 == null) {
+			upper2 = ValuesUtil.UNLIMITED_VALUE;
 		}
-		TemplateArguments templateArguments = new TemplateArguments(elementType, lower, upper);
+		TemplateArguments templateArguments = new TemplateArguments(elementType, lower2, upper2);
 		Map<TemplateArguments, WeakReference<Type>> specializations2 = specializations;
 		if (specializations2 == null) {
 			synchronized(this) {

@@ -15,10 +15,6 @@
 package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainOperation;
-import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
-import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
-import org.eclipse.ocl.examples.domain.ids.OperationId;
 
 public abstract class UnscopedId extends AbstractTypeId
 {

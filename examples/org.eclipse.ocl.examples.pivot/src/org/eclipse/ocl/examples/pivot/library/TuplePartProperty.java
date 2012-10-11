@@ -20,7 +20,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;

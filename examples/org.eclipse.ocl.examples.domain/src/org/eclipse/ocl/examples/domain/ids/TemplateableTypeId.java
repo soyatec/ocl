@@ -14,8 +14,6 @@
  */
 package org.eclipse.ocl.examples.domain.ids;
 
-import org.eclipse.jdt.annotation.NonNull;
-
 /**
  * A NestedTypeId provides a unique hierarchical identifier for a type which is nested by unique name in a parent package.
  */
