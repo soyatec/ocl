@@ -26,6 +26,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
@@ -83,12 +84,15 @@ public class SelfTypeImpl extends ClassImpl implements SelfType
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull TypeId T_Type = OCLstdlibTables.Types._Type.getTypeId();
-		
-		final Object result = SelfTypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, T_Type, this, ValuesUtil.valueOf(selfType));
-		final org.eclipse.ocl.examples.pivot.Type ecoreResult = (org.eclipse.ocl.examples.pivot.Type)result;
-		return ecoreResult;
-		
-		
+		try {
+			final Object result = SelfTypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, T_Type, this, ValuesUtil.valueOf(selfType));
+			final org.eclipse.ocl.examples.pivot.Type ecoreResult = (org.eclipse.ocl.examples.pivot.Type)result;
+			return ecoreResult;
+		} catch (InvalidValueException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
+		}
 	}
 
 	/**

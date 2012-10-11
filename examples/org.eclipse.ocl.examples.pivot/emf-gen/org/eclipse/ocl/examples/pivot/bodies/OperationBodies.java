@@ -85,7 +85,7 @@ public class OperationBodies
 	    bodySpecification.oclIsKindOf(ExpressionInOCL) implies
 	    CompatibleBody(bodySpecification)
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull Operation unboxed_self = (Operation)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -229,7 +229,7 @@ public class OperationBodies
 		/*
 		true
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull Operation unboxed_self = (Operation)self;
 			

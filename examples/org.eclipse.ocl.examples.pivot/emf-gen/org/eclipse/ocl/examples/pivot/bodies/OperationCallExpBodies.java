@@ -64,7 +64,7 @@ public class OperationCallExpBodies
 		/*
 		argument->size() = referredOperation.ownedParameter->size()
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull OperationCallExp unboxed_self = (OperationCallExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();

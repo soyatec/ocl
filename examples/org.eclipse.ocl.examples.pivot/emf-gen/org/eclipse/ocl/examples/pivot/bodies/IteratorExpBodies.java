@@ -79,7 +79,7 @@ public class IteratorExpBodies
 		/*
 		name = 'any' implies body.type = 'Boolean'
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -146,7 +146,7 @@ public class IteratorExpBodies
 		/*
 		name = 'any' implies iterator->size() = 1
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -208,7 +208,7 @@ public class IteratorExpBodies
 		/*
 		name = 'any' implies type = source.type.oclAsType(CollectionType).elementType
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -279,7 +279,7 @@ public class IteratorExpBodies
 		/*
 		true
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			
@@ -312,7 +312,7 @@ public class IteratorExpBodies
 	type.oclAsType(CollectionType).elementType =
 	source.type.oclAsType(CollectionType).elementType
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -401,7 +401,7 @@ public class IteratorExpBodies
 		/*
 		name = 'closure' implies iterator->size() = 1
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -469,7 +469,7 @@ public class IteratorExpBodies
 	else body.type
 	endif
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -603,7 +603,7 @@ public class IteratorExpBodies
 	else type.oclIsKindOf(SetType)
 	endif
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -721,7 +721,7 @@ public class IteratorExpBodies
 	type.oclAsType(CollectionType).elementType =
 	body.type.oclAsType(CollectionType).elementType
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -810,7 +810,7 @@ public class IteratorExpBodies
 		/*
 		name = 'collect' implies iterator->size() = 1
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -872,7 +872,7 @@ public class IteratorExpBodies
 		/*
 		name = 'collectNested' implies iterator->size() = 1
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -931,7 +931,7 @@ public class IteratorExpBodies
 		/*
 		name = 'collectNested' implies type.oclIsKindOf(BagType)
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -988,7 +988,7 @@ public class IteratorExpBodies
 		/*
 		name = 'collectNested' implies type = body.type
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -1068,7 +1068,7 @@ public class IteratorExpBodies
 	else type.oclIsKindOf(BagType)
 	endif
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -1182,7 +1182,7 @@ public class IteratorExpBodies
 		/*
 		name = 'exists' implies body.type = Boolean
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -1246,7 +1246,7 @@ public class IteratorExpBodies
 		/*
 		name = 'exists' implies type = Boolean
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -1306,7 +1306,7 @@ public class IteratorExpBodies
 		/*
 		name = 'forAll' implies body.type = Boolean
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -1370,7 +1370,7 @@ public class IteratorExpBodies
 		/*
 		name = 'forAll' implies type = Boolean
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -1432,7 +1432,7 @@ public class IteratorExpBodies
 		/*
 		name = 'isUnique' implies iterator->size() = 1
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -1491,7 +1491,7 @@ public class IteratorExpBodies
 		/*
 		name = 'isUnique' implies type = Boolean
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -1644,7 +1644,7 @@ public class IteratorExpBodies
 		/*
 		name = 'one' implies body.type = Boolean
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -1711,7 +1711,7 @@ public class IteratorExpBodies
 		/*
 		name = 'one' implies iterator->size() = 1
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -1770,7 +1770,7 @@ public class IteratorExpBodies
 		/*
 		name = 'one' implies type = Boolean
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -1834,7 +1834,7 @@ public class IteratorExpBodies
 		/*
 		name = 'reject' or name = 'select' implies iterator->size() = 1
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -1917,7 +1917,7 @@ public class IteratorExpBodies
 		/*
 		name = 'reject' or name = 'select' implies type = Boolean
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -2000,7 +2000,7 @@ public class IteratorExpBodies
 		/*
 		name = 'reject' or name = 'select' implies type = source.type
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -2097,7 +2097,7 @@ public class IteratorExpBodies
 	type.oclAsType(CollectionType).elementType =
 	body.type.oclAsType(CollectionType).elementType
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -2186,7 +2186,7 @@ public class IteratorExpBodies
 		/*
 		name = 'sortedBy' implies iterator->size() = 1
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -2255,7 +2255,7 @@ public class IteratorExpBodies
 	else type.oclIsKindOf(OrderedSetType)
 	endif
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -2361,7 +2361,7 @@ public class IteratorExpBodies
 		/*
 		true
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IteratorExp unboxed_self = (IteratorExp)self;
 			

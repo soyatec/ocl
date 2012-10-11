@@ -141,10 +141,10 @@ final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = ne
 	}
 	throw new <%InvalidValueException%>("null result from <%[className/]%>.[constraintName/]");
 	[/if]
-} catch (InvalidValueException e) {
+} catch (<%InvalidValueException%> e) {
 	throw e;
 } catch (Exception e) {
-	throw new InvalidValueException(e);
+	throw new <%InvalidValueException%>(e);
 }[/let][else]
 	/*
 	[pRule.specification.prettyPrint().trim()/]
@@ -185,10 +185,10 @@ final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = ne
 		return ecoreResult;
 	}
 	throw new <%InvalidValueException%>("null result from <%[className/]%>.[constraintName/]");
-[/if]} catch (InvalidValueException e) {
+[/if]} catch (<%InvalidValueException%> e) {
 	throw e;
 } catch (Exception e) {
-	throw new InvalidValueException(e);
+	throw new <%InvalidValueException%>(e);
 }[/let][else]
 	/*
 	[pRule.specification.prettyPrint().trim()/]

@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -207,25 +208,23 @@ public class CollectionLiteralExpImpl
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		Object result;
 		try {
-			result = CollectionLiteralExpBodies._invariant_CollectionKindIsConcrete.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final Object result = CollectionLiteralExpBodies._invariant_CollectionKindIsConcrete.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "CollectionKindIsConcrete", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__COLLECTION_KIND_IS_CONCRETE, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
 		} catch (Exception e) {
-			return false;
-		}
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "CollectionKindIsConcrete", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__COLLECTION_KIND_IS_CONCRETE, message, new Object [] { this }));
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -240,20 +239,23 @@ public class CollectionLiteralExpImpl
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = CollectionLiteralExpBodies._invariant_SetKindIsSet.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "SetKindIsSet", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__SET_KIND_IS_SET, message, new Object [] { this }));
+		try {
+			final Object result = CollectionLiteralExpBodies._invariant_SetKindIsSet.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "SetKindIsSet", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__SET_KIND_IS_SET, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -269,20 +271,23 @@ public class CollectionLiteralExpImpl
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = CollectionLiteralExpBodies._invariant_OrderedSetKindIsOrderedSet.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "OrderedSetKindIsOrderedSet", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__ORDERED_SET_KIND_IS_ORDERED_SET, message, new Object [] { this }));
+		try {
+			final Object result = CollectionLiteralExpBodies._invariant_OrderedSetKindIsOrderedSet.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "OrderedSetKindIsOrderedSet", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__ORDERED_SET_KIND_IS_ORDERED_SET, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -298,20 +303,23 @@ public class CollectionLiteralExpImpl
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = CollectionLiteralExpBodies._invariant_SequenceKindIsSequence.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "SequenceKindIsSequence", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__SEQUENCE_KIND_IS_SEQUENCE, message, new Object [] { this }));
+		try {
+			final Object result = CollectionLiteralExpBodies._invariant_SequenceKindIsSequence.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "SequenceKindIsSequence", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__SEQUENCE_KIND_IS_SEQUENCE, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -326,20 +334,23 @@ public class CollectionLiteralExpImpl
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = CollectionLiteralExpBodies._invariant_BagKindIsBag.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "BagKindIsBag", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__BAG_KIND_IS_BAG, message, new Object [] { this }));
+		try {
+			final Object result = CollectionLiteralExpBodies._invariant_BagKindIsBag.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "BagKindIsBag", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__BAG_KIND_IS_BAG, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**

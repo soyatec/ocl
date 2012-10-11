@@ -59,7 +59,7 @@ public class TypedMultiplicityElementBodies
 		/*
 		bodySpecification.type.conformsTo(self.type)
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self, final @Nullable Object bodySpecification) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self, final @Nullable Object bodySpecification) throws Exception {
 			assert self != null;
 			final @NonNull TypedMultiplicityElement unboxed_self = (TypedMultiplicityElement)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -95,7 +95,7 @@ public class TypedMultiplicityElementBodies
 		/*
 		Parameter{name = 'name'}
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull TypedMultiplicityElement unboxed_self = (TypedMultiplicityElement)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();

@@ -70,7 +70,7 @@ public class ConstraintBodies
 		context.ownedRule->excluding(self)
 	->forAll(name <> self.name or stereotype <> self.stereotype)
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull Constraint unboxed_self = (Constraint)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();

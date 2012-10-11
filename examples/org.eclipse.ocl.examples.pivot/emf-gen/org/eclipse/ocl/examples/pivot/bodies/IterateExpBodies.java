@@ -64,7 +64,7 @@ public class IterateExpBodies
 		/*
 		body.type.conformsTo(result.type)
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IterateExp unboxed_self = (IterateExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -116,7 +116,7 @@ public class IterateExpBodies
 		/*
 		self.result.initExpression->size() = 1
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull IterateExp unboxed_self = (IterateExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();

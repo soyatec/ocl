@@ -68,7 +68,7 @@ public class LoopExpBodies
 		/*
 		self.iterator->forAll(initExpression->isEmpty())
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull LoopExp unboxed_self = (LoopExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -135,7 +135,7 @@ public class LoopExpBodies
 		/*
 		source.type.oclIsKindOf(CollectionType)
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull LoopExp unboxed_self = (LoopExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();

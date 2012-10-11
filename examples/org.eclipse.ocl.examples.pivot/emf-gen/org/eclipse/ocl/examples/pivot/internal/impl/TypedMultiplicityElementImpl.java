@@ -136,15 +136,18 @@ public abstract class TypedMultiplicityElementImpl
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = TypedMultiplicityElementBodies._CompatibleBody_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, ValuesUtil.valueOf(bodySpecification));
-		final java.lang.Boolean ecoreResult = (java.lang.Boolean)result;
-		if (ecoreResult != null) {
-			return ecoreResult;
+		try {
+			final Object result = TypedMultiplicityElementBodies._CompatibleBody_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, ValuesUtil.valueOf(bodySpecification));
+			final java.lang.Boolean ecoreResult = (java.lang.Boolean)result;
+			if (ecoreResult != null) {
+				return ecoreResult;
+			}
+			throw new InvalidValueException("null result from TypedMultiplicityElementBodies._CompatibleBody_body_");
+		} catch (InvalidValueException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
-		throw new InvalidValueException("null result from TypedMultiplicityElementBodies._CompatibleBody_body_");
-		
-		
 	}
 
 	/**
@@ -159,12 +162,15 @@ public abstract class TypedMultiplicityElementImpl
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull TypeId T_pivot__Parameter = PivotTables.Types._Parameter.getTypeId();
-		
-		final Object result = TypedMultiplicityElementBodies._makeParameter_body_.INSTANCE.evaluate(evaluator, T_pivot__Parameter, this);
-		final org.eclipse.ocl.examples.pivot.Parameter ecoreResult = (org.eclipse.ocl.examples.pivot.Parameter)result;
-		return ecoreResult;
-		
-		
+		try {
+			final Object result = TypedMultiplicityElementBodies._makeParameter_body_.INSTANCE.evaluate(evaluator, T_pivot__Parameter, this);
+			final org.eclipse.ocl.examples.pivot.Parameter ecoreResult = (org.eclipse.ocl.examples.pivot.Parameter)result;
+			return ecoreResult;
+		} catch (InvalidValueException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
+		}
 	}
 
 	/**

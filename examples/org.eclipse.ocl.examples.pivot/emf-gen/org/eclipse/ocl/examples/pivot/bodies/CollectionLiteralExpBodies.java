@@ -66,7 +66,7 @@ public class CollectionLiteralExpBodies
 		/*
 		kind = CollectionKind::Bag implies type.oclIsKindOf(BagType)
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull CollectionLiteralExp unboxed_self = (CollectionLiteralExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -161,7 +161,7 @@ public class CollectionLiteralExpBodies
 		kind = CollectionKind::OrderedSet implies
 	type.oclIsKindOf(OrderedSetType)
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull CollectionLiteralExp unboxed_self = (CollectionLiteralExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -222,7 +222,7 @@ public class CollectionLiteralExpBodies
 		kind = CollectionKind::Sequence implies
 	type.oclIsKindOf(SequenceType)
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull CollectionLiteralExp unboxed_self = (CollectionLiteralExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -282,7 +282,7 @@ public class CollectionLiteralExpBodies
 		/*
 		kind = CollectionKind::Set implies type.oclIsKindOf(SetType)
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull CollectionLiteralExp unboxed_self = (CollectionLiteralExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();

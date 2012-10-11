@@ -150,27 +150,23 @@ public class EnumLiteralExpImpl
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		Object result;
 		try {
-			result = EnumLiteralExpBodies._invariant_TypeIsEnumerationType.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final Object result = EnumLiteralExpBodies._invariant_TypeIsEnumerationType.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"EnumLiteralExp", "TypeIsEnumerationType", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ENUM_LITERAL_EXP__TYPE_IS_ENUMERATION_TYPE, message, new Object [] { this }));
+			}
 		} catch (InvalidValueException e) {
-			throw e;
+				throw e;
 		} catch (Exception e) {
 			throw new InvalidValueException(e);
 		}
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"EnumLiteralExp", "TypeIsEnumerationType", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ENUM_LITERAL_EXP__TYPE_IS_ENUMERATION_TYPE, message, new Object [] { this }));
-		}
 		return false;
-		
-		
 	}
 
 	/**

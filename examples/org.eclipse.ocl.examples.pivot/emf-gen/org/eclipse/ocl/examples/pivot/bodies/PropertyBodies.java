@@ -113,7 +113,7 @@ public class PropertyBodies
 	          initialiser.oclIsKindOf(ExpressionInOCL) implies
 	          CompatibleBody(initialiser)
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull Property unboxed_self = (Property)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -390,7 +390,7 @@ public class PropertyBodies
 	  container.oclAsType(Type)
 	  .ownedAttribute->includes(self)
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self, final @Nullable Object p) throws InvalidValueException {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self, final @Nullable Object p) throws Exception {
 			assert self != null;
 			final @NonNull Property unboxed_self = (Property)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();

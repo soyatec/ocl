@@ -193,20 +193,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_AnyHasOneIterator.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "AnyHasOneIterator", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__ANY_HAS_ONE_ITERATOR, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_AnyHasOneIterator.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "AnyHasOneIterator", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__ANY_HAS_ONE_ITERATOR, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -221,20 +224,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_AnyTypeIsSourceElementType.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "AnyTypeIsSourceElementType", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__ANY_TYPE_IS_SOURCE_ELEMENT_TYPE, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_AnyTypeIsSourceElementType.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "AnyTypeIsSourceElementType", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__ANY_TYPE_IS_SOURCE_ELEMENT_TYPE, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -249,20 +255,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_AnyBodyTypeIsBoolean.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "AnyBodyTypeIsBoolean", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__ANY_BODY_TYPE_IS_BOOLEAN, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_AnyBodyTypeIsBoolean.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "AnyBodyTypeIsBoolean", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__ANY_BODY_TYPE_IS_BOOLEAN, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -277,20 +286,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_ClosureHasOneIterator.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "ClosureHasOneIterator", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__CLOSURE_HAS_ONE_ITERATOR, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_ClosureHasOneIterator.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "ClosureHasOneIterator", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__CLOSURE_HAS_ONE_ITERATOR, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -311,20 +323,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_ClosureTypeIsUniqueCollection.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "ClosureTypeIsUniqueCollection", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__CLOSURE_TYPE_IS_UNIQUE_COLLECTION, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_ClosureTypeIsUniqueCollection.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "ClosureTypeIsUniqueCollection", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__CLOSURE_TYPE_IS_UNIQUE_COLLECTION, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -344,20 +359,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_ClosureSourceElementTypeIsBodyElementType.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "ClosureSourceElementTypeIsBodyElementType", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__CLOSURE_SOURCE_ELEMENT_TYPE_IS_BODY_ELEMENT_TYPE, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_ClosureSourceElementTypeIsBodyElementType.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "ClosureSourceElementTypeIsBodyElementType", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__CLOSURE_SOURCE_ELEMENT_TYPE_IS_BODY_ELEMENT_TYPE, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -374,20 +392,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_ClosureElementTypeIsSourceElementType.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "ClosureElementTypeIsSourceElementType", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__CLOSURE_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_ClosureElementTypeIsSourceElementType.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "ClosureElementTypeIsSourceElementType", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__CLOSURE_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -402,20 +423,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_CollectHasOneIterator.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "CollectHasOneIterator", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__COLLECT_HAS_ONE_ITERATOR, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_CollectHasOneIterator.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "CollectHasOneIterator", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__COLLECT_HAS_ONE_ITERATOR, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -436,20 +460,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_CollectTypeIsUnordered.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "CollectTypeIsUnordered", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__COLLECT_TYPE_IS_UNORDERED, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_CollectTypeIsUnordered.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "CollectTypeIsUnordered", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__COLLECT_TYPE_IS_UNORDERED, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -466,20 +493,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_CollectElementTypeIsSourceElementType.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "CollectElementTypeIsSourceElementType", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__COLLECT_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_CollectElementTypeIsSourceElementType.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "CollectElementTypeIsSourceElementType", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__COLLECT_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -494,20 +524,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_CollectNestedHasOneIterator.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "CollectNestedHasOneIterator", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__COLLECT_NESTED_HAS_ONE_ITERATOR, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_CollectNestedHasOneIterator.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "CollectNestedHasOneIterator", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__COLLECT_NESTED_HAS_ONE_ITERATOR, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -522,20 +555,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_CollectNestedTypeIsBag.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "CollectNestedTypeIsBag", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__COLLECT_NESTED_TYPE_IS_BAG, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_CollectNestedTypeIsBag.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "CollectNestedTypeIsBag", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__COLLECT_NESTED_TYPE_IS_BAG, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -550,20 +586,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_CollectNestedTypeIsBodyType.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "CollectNestedTypeIsBodyType", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__COLLECT_NESTED_TYPE_IS_BODY_TYPE, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_CollectNestedTypeIsBodyType.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "CollectNestedTypeIsBodyType", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__COLLECT_NESTED_TYPE_IS_BODY_TYPE, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -578,20 +617,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_ExistsTypeIsBoolean.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "ExistsTypeIsBoolean", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__EXISTS_TYPE_IS_BOOLEAN, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_ExistsTypeIsBoolean.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "ExistsTypeIsBoolean", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__EXISTS_TYPE_IS_BOOLEAN, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -606,20 +648,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_ExistsBodyTypeIsBoolean.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "ExistsBodyTypeIsBoolean", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__EXISTS_BODY_TYPE_IS_BOOLEAN, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_ExistsBodyTypeIsBoolean.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "ExistsBodyTypeIsBoolean", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__EXISTS_BODY_TYPE_IS_BOOLEAN, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -634,20 +679,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_ForAllTypeIsBoolean.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "ForAllTypeIsBoolean", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__FOR_ALL_TYPE_IS_BOOLEAN, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_ForAllTypeIsBoolean.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "ForAllTypeIsBoolean", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__FOR_ALL_TYPE_IS_BOOLEAN, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -662,20 +710,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_ForAllBodyTypeIsBoolean.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "ForAllBodyTypeIsBoolean", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__FOR_ALL_BODY_TYPE_IS_BOOLEAN, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_ForAllBodyTypeIsBoolean.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "ForAllBodyTypeIsBoolean", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__FOR_ALL_BODY_TYPE_IS_BOOLEAN, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -690,20 +741,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_IsUniqueHasOneIterator.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "IsUniqueHasOneIterator", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__IS_UNIQUE_HAS_ONE_ITERATOR, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_IsUniqueHasOneIterator.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "IsUniqueHasOneIterator", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__IS_UNIQUE_HAS_ONE_ITERATOR, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -718,20 +772,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_IsUniqueTypeIsBoolean.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "IsUniqueTypeIsBoolean", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__IS_UNIQUE_TYPE_IS_BOOLEAN, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_IsUniqueTypeIsBoolean.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "IsUniqueTypeIsBoolean", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__IS_UNIQUE_TYPE_IS_BOOLEAN, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -746,20 +803,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_OneHasOneIterator.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "OneHasOneIterator", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__ONE_HAS_ONE_ITERATOR, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_OneHasOneIterator.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "OneHasOneIterator", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__ONE_HAS_ONE_ITERATOR, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -774,20 +834,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_OneTypeIsBoolean.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "OneTypeIsBoolean", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__ONE_TYPE_IS_BOOLEAN, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_OneTypeIsBoolean.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "OneTypeIsBoolean", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__ONE_TYPE_IS_BOOLEAN, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -802,20 +865,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_OneBodyTypeIsBoolean.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "OneBodyTypeIsBoolean", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__ONE_BODY_TYPE_IS_BOOLEAN, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_OneBodyTypeIsBoolean.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "OneBodyTypeIsBoolean", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__ONE_BODY_TYPE_IS_BOOLEAN, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -830,20 +896,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_RejectOrSelectHasOneIterator.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "RejectOrSelectHasOneIterator", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__REJECT_OR_SELECT_HAS_ONE_ITERATOR, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_RejectOrSelectHasOneIterator.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "RejectOrSelectHasOneIterator", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__REJECT_OR_SELECT_HAS_ONE_ITERATOR, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -858,20 +927,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_RejectOrSelectTypeIsSourceType.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "RejectOrSelectTypeIsSourceType", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__REJECT_OR_SELECT_TYPE_IS_SOURCE_TYPE, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_RejectOrSelectTypeIsSourceType.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "RejectOrSelectTypeIsSourceType", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__REJECT_OR_SELECT_TYPE_IS_SOURCE_TYPE, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -886,20 +958,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_RejectOrSelectTypeIsBoolean.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "RejectOrSelectTypeIsBoolean", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__REJECT_OR_SELECT_TYPE_IS_BOOLEAN, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_RejectOrSelectTypeIsBoolean.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "RejectOrSelectTypeIsBoolean", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__REJECT_OR_SELECT_TYPE_IS_BOOLEAN, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -914,20 +989,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_SortedByHasOneIterator.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "SortedByHasOneIterator", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__SORTED_BY_HAS_ONE_ITERATOR, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_SortedByHasOneIterator.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "SortedByHasOneIterator", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__SORTED_BY_HAS_ONE_ITERATOR, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -948,20 +1026,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_SortedByIsOrderedIfSourceIsOrdered.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "SortedByIsOrderedIfSourceIsOrdered", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__SORTED_BY_IS_ORDERED_IF_SOURCE_IS_ORDERED, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_SortedByIsOrderedIfSourceIsOrdered.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "SortedByIsOrderedIfSourceIsOrdered", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__SORTED_BY_IS_ORDERED_IF_SOURCE_IS_ORDERED, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -978,20 +1059,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = IteratorExpBodies._invariant_SortedByElementTypeIsSourceElementType.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "SortedByElementTypeIsSourceElementType", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__SORTED_BY_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE, message, new Object [] { this }));
+		try {
+			final Object result = IteratorExpBodies._invariant_SortedByElementTypeIsSourceElementType.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "SortedByElementTypeIsSourceElementType", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__SORTED_BY_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
@@ -1007,27 +1091,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		Object result;
 		try {
-			result = IteratorExpBodies._invariant_IteratorTypeIsSourceElementType.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final Object result = IteratorExpBodies._invariant_IteratorTypeIsSourceElementType.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "IteratorTypeIsSourceElementType", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__ITERATOR_TYPE_IS_SOURCE_ELEMENT_TYPE, message, new Object [] { this }));
+			}
 		} catch (InvalidValueException e) {
-			throw e;
+				throw e;
 		} catch (Exception e) {
 			throw new InvalidValueException(e);
 		}
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "IteratorTypeIsSourceElementType", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__ITERATOR_TYPE_IS_SOURCE_ELEMENT_TYPE, message, new Object [] { this }));
-		}
 		return false;
-		
-		
 	}
 
 	/**

@@ -1019,15 +1019,18 @@ public class PropertyImpl
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, ValuesUtil.valueOf(p));
-		final java.lang.Boolean ecoreResult = (java.lang.Boolean)result;
-		if (ecoreResult != null) {
-			return ecoreResult;
+		try {
+			final Object result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, ValuesUtil.valueOf(p));
+			final java.lang.Boolean ecoreResult = (java.lang.Boolean)result;
+			if (ecoreResult != null) {
+				return ecoreResult;
+			}
+			throw new InvalidValueException("null result from ParameterableElementBodies._isCompatibleWith_body_");
+		} catch (InvalidValueException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
-		throw new InvalidValueException("null result from ParameterableElementBodies._isCompatibleWith_body_");
-		
-		
 	}
 
 	/**
@@ -1046,15 +1049,18 @@ public class PropertyImpl
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = PropertyBodies._isAttribute_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, ValuesUtil.valueOf(p));
-		final java.lang.Boolean ecoreResult = (java.lang.Boolean)result;
-		if (ecoreResult != null) {
-			return ecoreResult;
+		try {
+			final Object result = PropertyBodies._isAttribute_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, ValuesUtil.valueOf(p));
+			final java.lang.Boolean ecoreResult = (java.lang.Boolean)result;
+			if (ecoreResult != null) {
+				return ecoreResult;
+			}
+			throw new InvalidValueException("null result from PropertyBodies._isAttribute_body_");
+		} catch (InvalidValueException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
-		throw new InvalidValueException("null result from PropertyBodies._isAttribute_body_");
-		
-		
 	}
 
 	/**
@@ -1095,20 +1101,23 @@ public class PropertyImpl
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = PropertyBodies._invariant_CompatibleInitialiser.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Property", "CompatibleInitialiser", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.PROPERTY__COMPATIBLE_INITIALISER, message, new Object [] { this }));
+		try {
+			final Object result = PropertyBodies._invariant_CompatibleInitialiser.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Property", "CompatibleInitialiser", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.PROPERTY__COMPATIBLE_INITIALISER, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**

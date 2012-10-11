@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -177,12 +178,15 @@ public abstract class ElementImpl
 		final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 		final @NonNull TypeId T_OclElement = OCLstdlibTables.Types._OclElement.getTypeId();
 		final @NonNull CollectionTypeId T_Set_OclElement_ = TypeId.SET.getSpecializedId(T_OclElement);
-		
-		final Object result = ElementBodies._allOwnedElements_body_.INSTANCE.evaluate(evaluator, T_Set_OclElement_, this);
-		final org.eclipse.emf.common.util.EList<org.eclipse.ocl.examples.pivot.Element> ecoreResult = (org.eclipse.emf.common.util.EList<org.eclipse.ocl.examples.pivot.Element>)(result != null ? ((Value)result).asEcoreObject() : null);
-		return ecoreResult;
-		
-		
+		try {
+			final Object result = ElementBodies._allOwnedElements_body_.INSTANCE.evaluate(evaluator, T_Set_OclElement_, this);
+			final org.eclipse.emf.common.util.EList<org.eclipse.ocl.examples.pivot.Element> ecoreResult = (org.eclipse.emf.common.util.EList<org.eclipse.ocl.examples.pivot.Element>)(result != null ? ((Value)result).asEcoreObject() : null);
+			return ecoreResult;
+		} catch (InvalidValueException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
+		}
 	}
 
 	/**
@@ -197,12 +201,15 @@ public abstract class ElementImpl
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull TypeId T_OclVoid = OCLstdlibTables.Types._OclVoid.getTypeId();
-		
-		final Object result = ElementBodies._getValue_body_.INSTANCE.evaluate(evaluator, T_OclVoid, this, ValuesUtil.valueOf(stereotype), ValuesUtil.valueOf(propertyName));
-		final org.eclipse.ocl.examples.pivot.Element ecoreResult = (org.eclipse.ocl.examples.pivot.Element)result;
-		return ecoreResult;
-		
-		
+		try {
+			final Object result = ElementBodies._getValue_body_.INSTANCE.evaluate(evaluator, T_OclVoid, this, ValuesUtil.valueOf(stereotype), ValuesUtil.valueOf(propertyName));
+			final org.eclipse.ocl.examples.pivot.Element ecoreResult = (org.eclipse.ocl.examples.pivot.Element)result;
+			return ecoreResult;
+		} catch (InvalidValueException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
+		}
 	}
 
 	/**
@@ -217,20 +224,23 @@ public abstract class ElementImpl
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		
-		final Object result = ElementBodies._invariant_not_own_self.INSTANCE.evaluate(evaluator, T_Boolean, this);
-		final boolean resultIsNull = ValuesUtil.isNull(result);
-		if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-			return true;
-		}
-		if (diagnostics != null) {
-			int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-			String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Element", "not_own_self", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ELEMENT__NOT_OWN_SELF, message, new Object [] { this }));
+		try {
+			final Object result = ElementBodies._invariant_not_own_self.INSTANCE.evaluate(evaluator, T_Boolean, this);
+			final boolean resultIsNull = ValuesUtil.isNull(result);
+			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
+				return true;
+			}
+			if (diagnostics != null) {
+				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
+				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Element", "not_own_self", EObjectValidator.getObjectLabel(this, context)});
+			    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ELEMENT__NOT_OWN_SELF, message, new Object [] { this }));
+			}
+		} catch (InvalidValueException e) {
+				throw e;
+		} catch (Exception e) {
+			throw new InvalidValueException(e);
 		}
 		return false;
-		
-		
 	}
 
 	/**
