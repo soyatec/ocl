@@ -21,12 +21,13 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.TemplateBinding;
 import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
-public class SpecializedCollectionTypeIdImpl extends AbstractSpecializedIdImpl<CollectionTypeId> implements CollectionTypeId
+public class SpecializedCollectionTypeIdImpl extends AbstractSpecializedIdImpl<CollectionTypeId> implements CollectionTypeId, ElementId.Internal
 {
 	private @Nullable TypeId elementTypeId;
 
@@ -58,7 +59,7 @@ public class SpecializedCollectionTypeIdImpl extends AbstractSpecializedIdImpl<C
 
 	@Override
 	public void resolveTemplateBindings(@NonNull Map<DomainTemplateParameter, List<TemplateBinding>> bindings) {
-    	getElementTypeId().resolveTemplateBindings(bindings);
+    	((ElementId.Internal)getElementTypeId()).resolveTemplateBindings(bindings);
 	}
 
     public @NonNull CollectionTypeId specialize(@NonNull TemplateBindings templateBindings) {

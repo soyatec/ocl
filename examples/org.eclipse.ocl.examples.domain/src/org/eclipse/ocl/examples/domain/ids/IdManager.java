@@ -401,7 +401,7 @@ public class IdManager
 		Map<DomainTemplateParameter, List<TemplateBinding>> bindings = new LinkedHashMap<DomainTemplateParameter, List<TemplateBinding>>();
 		for (TuplePartId part : parts) {
 			orderedParts[i++] = part;
-			part.resolveTemplateBindings(bindings);
+			((ElementId.Internal)part).resolveTemplateBindings(bindings);
 		}
 		Arrays.sort(orderedParts);
 		int bindingsSize = bindings.size();

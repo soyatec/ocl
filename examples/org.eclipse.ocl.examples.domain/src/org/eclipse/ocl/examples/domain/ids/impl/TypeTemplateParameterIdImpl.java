@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeTemplateParameter;
+import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.ids.TemplateBinding;
@@ -30,7 +31,7 @@ import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeTemplateParameterId;
 
-public class TypeTemplateParameterIdImpl extends TemplateParameterIdImpl implements TypeTemplateParameterId
+public class TypeTemplateParameterIdImpl extends TemplateParameterIdImpl implements TypeTemplateParameterId, ElementId.Internal
 {
 	public TypeTemplateParameterIdImpl(@Nullable DomainTypeTemplateParameter origin) {
 		super(origin);

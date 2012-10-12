@@ -18,8 +18,10 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClassifier;
@@ -33,16 +35,27 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
+import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
+import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
+import org.eclipse.ocl.examples.domain.ids.TemplateableId;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.messages.StatusCodes;
+import org.eclipse.ocl.examples.domain.types.AbstractInheritance;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
+import org.eclipse.ocl.examples.domain.validation.DomainSubstitutionLabelProvider;
 import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -63,8 +76,11 @@ import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
 import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.domain.values.ValuesPackage;
+import org.eclipse.ocl.examples.domain.values.impl.BagImpl;
 import org.eclipse.ocl.examples.domain.values.impl.BagValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.BigIntegerValueImpl;
+import org.eclipse.ocl.examples.domain.values.impl.CollectionValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.EEnumLiteralValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.EnumerationLiteralValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.IntIntegerValueImpl;
@@ -92,6 +108,10 @@ public abstract class ValuesUtil
 	private static final int POSITIVE_INTEGERS = 1025;
 	private static final @NonNull IntegerValue[] INTEGER_VALUES = new IntegerValue[NEGATIVE_INTEGERS + POSITIVE_INTEGERS];
 
+	public static @NonNull Bag<?> EMPTY_BAG = new BagImpl<Object>();	
+	@SuppressWarnings("null")
+	public static final @NonNull Set<Object> EMPTY_SET = Collections.emptySet();
+
 	@SuppressWarnings("null")
 	public static final @NonNull BigInteger INTEGER_MAX_VALUE = BigInteger.valueOf(Integer.MAX_VALUE);
 	@SuppressWarnings("null")
@@ -111,6 +131,8 @@ public abstract class ValuesUtil
 	public static final @NonNull Boolean TRUE_VALUE = Boolean.TRUE;
 	public static final @NonNull UnlimitedValue UNLIMITED_VALUE = new UnlimitedValueImpl(); 
 	public static final @NonNull IntegerValue ZERO_VALUE = integerValueOf(0);
+	
+	private static boolean allStaticsInitialized = false;
 
 	public static @NonNull BagValue asBagValue(@Nullable Object value) {
 		if (value instanceof Value) {
@@ -548,7 +570,11 @@ public abstract class ValuesUtil
 				if (integerValue != null) {
 					return integerValue;
 				}
-				else {
+				synchronized (INTEGER_VALUES) {
+					integerValue = INTEGER_VALUES[index];
+					if (integerValue != null) {
+						return integerValue;
+					}
 					return INTEGER_VALUES[index] = new IntIntegerValueImpl(value);
 				}
 			}			
@@ -563,6 +589,56 @@ public abstract class ValuesUtil
 		else {
 			return new LongIntegerValueImpl(value);
 		}
+	}
+	
+	/**
+	 * Initialize all static variables in this package to avoid thread contention between conflicting initializations.
+	 * <p>
+	 * Returns true if this invocation performed the initialization.
+	 */
+	public static boolean initAllStatics() {
+		if (!allStaticsInitialized) {
+			synchronized (ValuesUtil.class) {
+				if (!allStaticsInitialized) {
+					allStaticsInitialized = true;
+					// org.eclipse.ocl.examples.domain.elements
+					DomainParameterTypes.EMPTY_LIST.getClass();
+					DomainTypeParameters.EMPTY_LIST.getClass();
+					// org.eclipse.ocl.examples.domain.evaluation
+					DomainModelManager.NULL.getClass();
+					// org.eclipse.ocl.examples.domain.ids
+					IdManager.INSTANCE.getClass();
+					TemplateableId.NULL_TEMPLATEABLE_ID_ARRAY.getClass();
+					TemplateBindings.EMPTY_LIST.getClass();
+					TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY.getClass();
+					TypeId.INTEGER.getClass();
+					// org.eclipse.ocl.examples.domain.types
+					AbstractInheritance.initStatics();
+					// org.eclipse.ocl.examples.domain.library
+					UnsupportedOperation.INSTANCE.getClass();
+					// org.eclipse.ocl.examples.domain.messages
+					EvaluatorMessages.InvalidOperation.getClass();
+					new StatusCodes();
+					// org.eclipse.ocl.examples.domain.types
+					AbstractInheritance.initStatics();
+					// org.eclipse.ocl.examples.domain.utilities
+					DomainUtil.createNumberFromString("0");
+					StandaloneProjectMap.initStatics();
+					// org.eclipse.ocl.examples.domain.validation
+					DomainSubstitutionLabelProvider.INSTANCE.getClass();
+					// org.eclipse.ocl.examples.domain.values
+					ValuesPackage.eINSTANCE.getClass();
+					// org.eclipse.ocl.examples.domain.values.impl
+					CollectionValueImpl.initStatics();
+					RealValueImpl.initStatics();
+					// org.eclipse.ocl.examples.domain.values.util
+//					new ValuesAdapterFactory();
+//					new ValuesSwitch<Object>();
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	public static @NonNull IntegerValue integerValueOf(@NonNull BigInteger value) {

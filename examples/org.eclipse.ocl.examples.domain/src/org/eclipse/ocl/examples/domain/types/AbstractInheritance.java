@@ -104,6 +104,11 @@ public abstract class AbstractInheritance implements DomainInheritance
 	public static final int ORDERED = 1 << 0;
 	public static final int UNIQUE = 1 << 1;
 	
+	/**
+	 * A simple public static method that may be used to force class initialization.
+	 */
+	public static void initStatics() {}
+	
 	protected final @NonNull String name;
 	protected final @NonNull DomainPackage evaluationPackage;
 	protected final int flags;

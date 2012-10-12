@@ -46,6 +46,7 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.mwe.core.ConfigurationException;
 import org.eclipse.ocl.examples.codegen.ecore.OCLGeneratorAdapterFactory;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
@@ -266,6 +267,11 @@ public class UsageTests extends XtextTestCase
 		if (diagnostic.getSeverity() != Diagnostic.OK) {
 			fail(diagnostic.toString());
 		}
+	}
+	
+	public void testInitStatics() {
+		assertTrue(ValuesUtil.initAllStatics());
+		assertFalse(ValuesUtil.initAllStatics());
 	}
 
 /*	public void testType_Parameters() throws Exception {

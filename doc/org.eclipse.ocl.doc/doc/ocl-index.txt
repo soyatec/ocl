@@ -52,6 +52,7 @@
 6110-pivot-validators.textile
 6200-pivot-evaluator.textile
 6210-pivot-standalone.textile
+6210-pivot-threadsafety.textile
 
 6310-pivot-parsing-constraints.textile
 6315-pivot-evaluating-constraints.textile

@@ -42,7 +42,7 @@ import org.eclipse.ocl.examples.domain.values.Value;
 public class IdResolver implements IdVisitor<DomainElement>
 {
 	protected final @NonNull DomainStandardLibrary standardLibrary;
-	private final @NonNull Map<Object, DomainType> key2type = new HashMap<Object, DomainType>();
+	private final @NonNull Map<Object, DomainType> key2type = new HashMap<Object, DomainType>();	// Concurrent puts are duplicates
 	
 	public IdResolver(@NonNull DomainStandardLibrary standardLibrary) {
 		this.standardLibrary = standardLibrary;

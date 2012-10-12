@@ -16,8 +16,12 @@
  */
 package org.eclipse.ocl.examples.domain.ids;
 
+import java.util.List;
+import java.util.Map;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
 
 /**
  * An ElementId provides a unique hierarchical identifier for a metamodel element. The identifier is structured in that it comprises nested scopes but
@@ -45,4 +49,8 @@ public interface ElementId
 	 * Return a simple name for diagnostics.
 	 */
 	@NonNull String getDisplayName();
+	
+	public interface Internal {
+		void resolveTemplateBindings(@NonNull Map<DomainTemplateParameter, List<TemplateBinding>> bindings);
+	}
 }

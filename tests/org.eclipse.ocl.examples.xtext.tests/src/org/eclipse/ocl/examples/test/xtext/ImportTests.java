@@ -53,7 +53,7 @@ public class ImportTests extends XtextTestCase
 
 		public Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp,
 				@NonNull Object sourceValue, Object... argumentValues) {
-			String string = sourceValue == null?  Value.INVALID_NAME : ValuesUtil.oclToString(sourceValue);
+			String string = sourceValue == null? Value.INVALID_NAME : ValuesUtil.oclToString(sourceValue);
 			return string;
 		}
 	}

@@ -103,7 +103,7 @@ public class ProjectMap extends StandaloneProjectMap
 		return (ProjectMap) EcoreUtil.getAdapter(resourceSet.eAdapters(), ProjectMap.class);
 	}
 
-	public static ProjectMap getAdapter(ResourceSet resourceSet) {
+	public static synchronized ProjectMap getAdapter(ResourceSet resourceSet) {
 		ProjectMap adapter = findAdapter(resourceSet);
 		if (adapter == null) {
 			adapter = new ProjectMap();
@@ -128,14 +128,14 @@ public class ProjectMap extends StandaloneProjectMap
 	}
 	
 	@Override
-	public void initializeGenModelLocationMap(boolean force) {
+	public synchronized void initializeGenModelLocationMap(boolean force) {
 		if (force || (!initializedGenModelLocationMap && !EMFPlugin.IS_ECLIPSE_RUNNING)) {
 			super.initializeGenModelLocationMap(force);
 		}
 	}
 	
 	@Override
-	public void initializePackageRegistry(ResourceSet resourceSet) {
+	public synchronized void initializePackageRegistry(ResourceSet resourceSet) {
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			super.initializePackageRegistry(resourceSet);
 		}
@@ -165,14 +165,14 @@ public class ProjectMap extends StandaloneProjectMap
 	}
 	
 	@Override
-	public void initializePlatformResourceMap(boolean force) {
+	public synchronized void initializePlatformResourceMap(boolean force) {
 		if (force || (!initializedPlatformResourceMap && !EMFPlugin.IS_ECLIPSE_RUNNING)) {
 			super.initializePlatformResourceMap(force);
 		}
 	}
 
 	@Override
-	public void initializeURIMap(ResourceSet resourceSet) {
+	public synchronized void initializeURIMap(ResourceSet resourceSet) {
 		super.initializeURIMap(resourceSet);
 		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
 			Map<URI, URI> uriMap = getURIMap(resourceSet);

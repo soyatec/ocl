@@ -14,11 +14,7 @@
  */
 package org.eclipse.ocl.examples.domain.ids;
 
-import java.util.List;
-import java.util.Map;
-
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
 
 /**
  * A TuplePartId provides a unique identifier for a TuplePart such as first:String.
@@ -29,5 +25,4 @@ public interface TuplePartId extends ElementId, Comparable<TuplePartId>
 	@NonNull String getName();
 	@NonNull TypeId getTypeId();
 	void install(@NonNull TupleTypeId tupleTypeId, int index);
-	void resolveTemplateBindings(@NonNull Map<DomainTemplateParameter, List<TemplateBinding>> bindings);
 }

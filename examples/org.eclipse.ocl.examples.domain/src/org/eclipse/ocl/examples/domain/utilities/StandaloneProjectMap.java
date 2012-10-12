@@ -489,7 +489,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	 * extension point in a plugin.xml file and activating the GenModelEcorePackageHandler to process the ecorePackage
 	 * locations and invoking {@link addGenModel()} for each encounter.
 	 */
-	protected class PluginGenModelHandler extends DefaultHandler
+	protected static class PluginGenModelHandler extends DefaultHandler
 	{
 		public static final String pluginTag = "plugin";
 		public static final String extensionTag = "extension";
@@ -882,6 +882,14 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	public static Map<URI, URI> getURIMap(@Nullable ResourceSet resourceSet) {
 		return resourceSet != null ? resourceSet.getURIConverter().getURIMap() : URIConverter.URI_MAP;
 	}
+	
+	/**
+	 * A simple public static method that may be used to force class initialization.
+	 */
+	public static void initStatics() {
+		new GenModelEcorePackageHandler(null);
+		new PluginGenModelHandler(null);
+	}
 
 	/**
 	 * Activate any ResourceSetImpl.uriResourceMap so that repeated lookups use a hash rather than linear search.
@@ -966,7 +974,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	 * Any problems arising while creating the project map are gathered into the exception map
 	 * accessible using {@link #getExceptionMap()}. An overall problem may be attributed to the null file.
 	 */
-	protected Map<String, ? extends IProjectDescriptor> getProjectDescriptors() {
+	protected synchronized Map<String, ? extends IProjectDescriptor> getProjectDescriptors() {
 		if (project2descriptor == null) {
 			project2descriptor = new HashMap<String, IProjectDescriptor.Internal>();
 			SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -987,7 +995,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	 * Initialization is only necessary once and for a standalone environment. If <tt>force</tt> is true a
 	 * re-initialization or plugin initialization may be forced.
 	 */
-	public void initializeGenModelLocationMap(boolean force) {
+	public synchronized void initializeGenModelLocationMap(boolean force) {
 		if (force || !initializedGenModelLocationMap) {
 			initializedGenModelLocationMap = true;
 			getProjectDescriptors();
@@ -1002,7 +1010,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	 * platform:/plugin and platform:/resource synonyms, which are determined by examining the genPackages.ecorePackage
 	 * attribute in all genModels.
 	 */
-	public void initializePackageRegistry(ResourceSet resourceSet) {
+	public synchronized void initializePackageRegistry(ResourceSet resourceSet) {
 		EPackage.Registry packageRegistry = getPackageRegistry(resourceSet);
 		getProjectDescriptors();
 		for (IProjectDescriptor projectDescriptor : project2descriptor.values()) {
@@ -1023,7 +1031,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	 * Initialization is only necessary once and for a standalone environment. If <tt>force</tt> is true a
 	 * re-initialization or plugin initialization may be forced.
 	 */
-	public void initializePlatformResourceMap(boolean force) {
+	public synchronized void initializePlatformResourceMap(boolean force) {
 		if (force || !initializedPlatformResourceMap) {
 			initializedPlatformResourceMap = true;
 			getProjectDescriptors();
@@ -1057,7 +1065,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	 * Note that in a plugin environment, a single <tt>platform:/resource/</tt> to <tt>platform:/plugin/</tt>
 	 * mapping is sufficient since <tt>platform:/plugin/</tt> is directly resolveable by the Eclipse Platform.
 	 */
-	public void initializeURIMap(ResourceSet resourceSet) {
+	public synchronized void initializeURIMap(ResourceSet resourceSet) {
 		getProjectDescriptors();
 		Map<URI, URI> uriMap = getURIMap(resourceSet);
 		for (String project : project2descriptor.keySet()) {

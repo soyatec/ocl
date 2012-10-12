@@ -19,9 +19,9 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.TemplateBinding;
 import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
@@ -31,11 +31,6 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 public class GeneralizedCollectionTypeIdImpl extends GeneralizedTypeIdImpl<CollectionTypeId> implements CollectionTypeId
 {
 	protected final @NonNull TypeId elementTypeId;
-	
-	/**
-	 * Map from the operation hashCode to the operationIds with the same hash. 
-	 */
-	private @Nullable WeakHashMapOfListOfWeakReference3<Integer, String, DomainParameterTypes, GeneralizedOperationIdImpl> memberOperations = null;
 
 	public GeneralizedCollectionTypeIdImpl(@NonNull TemplateParameterId[] templateParameters, @NonNull String name, @NonNull TypeId elementTypeId) {
 		super(77 * name.hashCode() + elementTypeId.hashCode(), templateParameters, name);
@@ -74,7 +69,7 @@ public class GeneralizedCollectionTypeIdImpl extends GeneralizedTypeIdImpl<Colle
 
 	@Override
 	public void resolveTemplateBindings(@NonNull Map<DomainTemplateParameter, List<TemplateBinding>> bindings) {
-		elementTypeId.resolveTemplateBindings(bindings);
+		((ElementId.Internal)elementTypeId).resolveTemplateBindings(bindings);
 	}
 
     public @NonNull CollectionTypeId specialize(@NonNull TemplateBindings templateBindings) {

@@ -62,6 +62,11 @@ public class RealValueImpl extends ValueImpl implements RealValue
 			throw new InvalidValueException(e, "divideBigDecimal");
 		}
 	}
+	
+	/**
+	 * A simple public static method that may be used to force class initialization.
+	 */
+	public static void initStatics() {}
 
 	private final @NonNull BigDecimal value;
 	private Object integerValue = null;	// Lazily computed exact IntegerValue or Exception

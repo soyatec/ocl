@@ -27,10 +27,10 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 public class AbstractMetaclass extends AbstractSpecializedType implements DomainMetaclass
 {
 	protected final @NonNull DomainType instanceType;
-	protected DomainType metaType = null;
+	protected final @NonNull TypeId typeId;
+	private DomainType metaType = null;
 	private DomainType normalizedInstanceType = null;
 	private int hashCode;
-	protected final @NonNull TypeId typeId;
 	
 	public AbstractMetaclass(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType instanceType) {
 		super(standardLibrary, DomainUtil.nonNullModel(standardLibrary.getMetaclassType().getName()), standardLibrary.getMetaclassType());
@@ -81,8 +81,12 @@ public class AbstractMetaclass extends AbstractSpecializedType implements Domain
 	
 	protected @Nullable DomainType getMetaType() {
 		if (metaType == null) {
-			String metaTypeName = instanceType.getMetaTypeName();
-			metaType = standardLibrary.getOclType(metaTypeName);
+			synchronized (this) {
+				if (metaType == null) {
+					String metaTypeName = instanceType.getMetaTypeName();
+					metaType = standardLibrary.getOclType(metaTypeName);
+				}
+			}
 		}
 		return metaType;
 	}
@@ -90,8 +94,13 @@ public class AbstractMetaclass extends AbstractSpecializedType implements Domain
 	protected @NonNull DomainType getNormalizedInstanceType() {
 		DomainType normalizedInstanceType2 = normalizedInstanceType;
 		if (normalizedInstanceType2 == null) {
-			normalizedInstanceType2 = normalizedInstanceType = instanceType.getNormalizedType(standardLibrary);
-			hashCode = normalizedInstanceType2.hashCode();
+			synchronized (this) {
+				normalizedInstanceType2 = normalizedInstanceType;
+				if (normalizedInstanceType2 == null) {
+					normalizedInstanceType = normalizedInstanceType2 = instanceType.getNormalizedType(standardLibrary);
+					hashCode = normalizedInstanceType2.hashCode();
+				}
+			}
 		}
 		return normalizedInstanceType2;
 	}

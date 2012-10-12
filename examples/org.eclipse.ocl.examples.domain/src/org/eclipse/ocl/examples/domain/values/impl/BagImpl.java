@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.eclipse.ocl.examples.domain.values.Bag;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * Default implementation of the {@link Bag} interface.
@@ -32,11 +33,8 @@ import org.eclipse.ocl.examples.domain.values.Bag;
  * @author Christian W. Damus (cdamus)
  * @generated NOT
  */
-public class BagImpl<E> extends AbstractCollection<E> implements Bag<E> {
-
-	public static Bag<?> EMPTY_BAG = new BagImpl<Object>();
-	
-
+public class BagImpl<E> extends AbstractCollection<E> implements Bag<E>
+{
 	private Map<E, MutableInteger> coll;
 
 	private int size;
@@ -55,7 +53,7 @@ public class BagImpl<E> extends AbstractCollection<E> implements Bag<E> {
 
     @SuppressWarnings("unchecked")
 	public static <E> Bag<E> emptyBag() {
-		return (Bag<E>) EMPTY_BAG;
+		return (Bag<E>) ValuesUtil.EMPTY_BAG;
 	}
 	
 	/**

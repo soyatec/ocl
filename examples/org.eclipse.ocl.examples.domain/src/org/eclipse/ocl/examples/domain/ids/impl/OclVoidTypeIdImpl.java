@@ -26,7 +26,7 @@ import org.eclipse.ocl.examples.domain.ids.TemplateableId;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
-public class OclVoidTypeIdImpl extends UnscopedId implements OclVoidTypeId
+public class OclVoidTypeIdImpl extends UnscopedId implements OclVoidTypeId, ElementId.Internal
 {
 	public OclVoidTypeIdImpl(@NonNull String name) {
 		super(name);

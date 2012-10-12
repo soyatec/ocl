@@ -20,13 +20,14 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
+import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.TemplateBinding;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
-public class TuplePartIdImpl implements TuplePartId
+public class TuplePartIdImpl implements TuplePartId, ElementId.Internal
 {
 	protected final @NonNull String name;
 	protected final @NonNull TypeId typeId;
@@ -104,7 +105,7 @@ public class TuplePartIdImpl implements TuplePartId
 	}
 
 	public void resolveTemplateBindings(@NonNull Map<DomainTemplateParameter, List<TemplateBinding>> bindings) {
-		typeId.resolveTemplateBindings(bindings);
+		((ElementId.Internal)typeId).resolveTemplateBindings(bindings);
 	}
 
 	@Override

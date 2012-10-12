@@ -16,12 +16,8 @@
  */
 package org.eclipse.ocl.examples.domain.ids;
 
-import java.util.List;
-import java.util.Map;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
-import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
 import org.eclipse.ocl.examples.domain.ids.impl.OclInvalidTypeIdImpl;
 import org.eclipse.ocl.examples.domain.ids.impl.OclVoidTypeIdImpl;
 
@@ -37,7 +33,6 @@ import org.eclipse.ocl.examples.domain.ids.impl.OclVoidTypeIdImpl;
  * @see OclInvalidTypeId
  * @see OclVoidTypeId
  * @see PrimitiveTypeId
- * @see SpecializedTypeId
  * @see TupleTypeId
  */
 public interface TypeId extends ElementId
@@ -128,8 +123,6 @@ public interface TypeId extends ElementId
 	 */
 	@NonNull TemplateParameterId getTemplateParameterId(int index);
 	@NonNull TemplateParameterId[] getTemplateParameters();
-
-	void resolveTemplateBindings(@NonNull Map<DomainTemplateParameter, List<TemplateBinding>> bindings);
 
 	@NonNull TypeId specialize(@NonNull TemplateBindings templateBindings);
 }

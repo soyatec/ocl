@@ -21,6 +21,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
+import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.ids.TemplateBinding;
@@ -28,7 +29,7 @@ import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
-public abstract class AbstractTypeId extends AbstractElementId implements TypeId
+public abstract class AbstractTypeId extends AbstractElementId implements TypeId, ElementId.Internal
 {
 	public @NonNull EnumerationLiteralId getEnumerationLiteralId(@NonNull String name) {
     	throw new UnsupportedOperationException();

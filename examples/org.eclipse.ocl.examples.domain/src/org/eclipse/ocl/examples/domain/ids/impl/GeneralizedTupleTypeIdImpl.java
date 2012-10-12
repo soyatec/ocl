@@ -16,13 +16,14 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 
-public class GeneralizedTupleTypeIdImpl extends AbstractGeneralizedIdImpl<TupleTypeId> implements TupleTypeId, WeakHashMapOfListOfWeakReference3.MatchableId<String, TuplePartId[]>
+public class GeneralizedTupleTypeIdImpl extends AbstractGeneralizedIdImpl<TupleTypeId> implements TupleTypeId, ElementId.Internal, WeakHashMapOfListOfWeakReference3.MatchableId<String, TuplePartId[]>
 {
 	protected final @NonNull TuplePartId[] partIds;
 	

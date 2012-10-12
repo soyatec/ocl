@@ -37,14 +37,13 @@ import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * @generated NOT
  */
 public class BagValueImpl extends CollectionValueImpl implements BagValue
 {   
-	public static final @NonNull Bag<Object> EMPTY_BAG = new BagImpl<Object>();
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -79,7 +78,7 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
         int leftSize = leftElements.size();
         int rightSize = rightElements.size();
     	if ((leftSize == 0) || (rightSize == 0)) {
-            return new BagValueImpl(typeId, EMPTY_BAG);
+            return new BagValueImpl(typeId, ValuesUtil.EMPTY_BAG);
         }    	
         Bag<Object> results = new BagImpl<Object>();
         // loop over the smaller collection and add only elements
@@ -92,7 +91,7 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
         		results.add(e);
         	}
         }
-    	return results.size() > 0 ? new BagValueImpl(typeId, results) : new BagValueImpl(typeId, EMPTY_BAG);
+    	return results.size() > 0 ? new BagValueImpl(typeId, results) : new BagValueImpl(typeId, ValuesUtil.EMPTY_BAG);
     }
 
     public static @NonNull BagValue union(@NonNull CollectionTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right) {

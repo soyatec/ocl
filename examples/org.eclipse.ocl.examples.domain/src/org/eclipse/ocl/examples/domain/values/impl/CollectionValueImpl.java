@@ -163,6 +163,11 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	public static @NonNull NullIterator EMPTY_ITERATOR = new NullIterator();
 	
 	/**
+	 * A simple public static method that may be used to force class initialization.
+	 */
+	public static void initStatics() {}
+	
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

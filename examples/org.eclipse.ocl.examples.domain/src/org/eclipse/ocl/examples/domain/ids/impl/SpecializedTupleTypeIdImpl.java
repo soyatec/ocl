@@ -16,13 +16,14 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
-public class SpecializedTupleTypeIdImpl extends AbstractSpecializedIdImpl<TupleTypeId> implements TupleTypeId
+public class SpecializedTupleTypeIdImpl extends AbstractSpecializedIdImpl<TupleTypeId> implements TupleTypeId, ElementId.Internal
 {
 	protected final @NonNull TuplePartId[] partIds;
 
@@ -49,7 +50,7 @@ public class SpecializedTupleTypeIdImpl extends AbstractSpecializedIdImpl<TupleT
 		return new SpecializedTupleTypeIdImpl(this, templateBindings);
 	}
 
-	public TuplePartId getPartId(@NonNull String name) {
+	public @Nullable TuplePartId getPartId(@NonNull String name) {
 		for (TuplePartId partId : partIds) {
 			if (name.equals(partId.getName())) {
 				return partId;

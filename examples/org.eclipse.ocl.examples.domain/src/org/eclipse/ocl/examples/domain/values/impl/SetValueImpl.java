@@ -49,9 +49,6 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
  */
 public class SetValueImpl extends CollectionValueImpl implements SetValue
 {
-	@SuppressWarnings("null")
-	public static final @NonNull Set<Object> EMPTY_SET = Collections.emptySet();
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -86,7 +83,7 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
         int leftSize = leftElements.size();
         int rightSize = rightElements.size();
     	if ((leftSize == 0) || (rightSize == 0)) {
-			return createSetValue(typeId, EMPTY_SET);
+			return createSetValue(typeId, ValuesUtil.EMPTY_SET);
         }    	
         Set<Object> results;
         // loop over the smaller collection and add only elements
@@ -99,7 +96,7 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
             results = new HashSet<Object>(rightElements);
         	results.retainAll(leftElements);
         }
-    	return results.size() > 0 ? createSetValue(typeId, results) : createSetValue(typeId, EMPTY_SET);
+    	return results.size() > 0 ? createSetValue(typeId, results) : createSetValue(typeId, ValuesUtil.EMPTY_SET);
     }
 
 	public static @NonNull SetValue union(@NonNull CollectionTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right) {
