@@ -24,6 +24,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
@@ -39,7 +40,6 @@ import org.eclipse.ocl.examples.pivot.library.ExplicitNavigationProperty;
 import org.eclipse.ocl.examples.pivot.library.ImplicitNonCompositionProperty;
 import org.eclipse.ocl.examples.pivot.library.StaticProperty;
 import org.eclipse.ocl.examples.pivot.library.TuplePartProperty;
-import org.eclipse.ocl.examples.pivot.library.UnimplementedOperation;
 
 /**
  * ImplementationManager encapsulates the knowledge about known feature implementations.
@@ -83,7 +83,7 @@ public class ImplementationManager
 					return implementation;
 				}
 				else {
-					return UnimplementedOperation.INSTANCE;
+					return UnsupportedOperation.INSTANCE;
 				}
 			}
 		}
@@ -95,7 +95,7 @@ public class ImplementationManager
 				}
 			}
 		}
-		return UnimplementedOperation.INSTANCE;
+		return UnsupportedOperation.INSTANCE;
 	}
 
 	protected @NonNull LibraryFeature getPropertyImplementation(@NonNull Property property) throws ClassNotFoundException, SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
@@ -108,7 +108,7 @@ public class ImplementationManager
 					return implementation;
 				}
 				else {
-					return UnimplementedOperation.INSTANCE;
+					return UnsupportedOperation.INSTANCE;
 				}
 			}
 		}

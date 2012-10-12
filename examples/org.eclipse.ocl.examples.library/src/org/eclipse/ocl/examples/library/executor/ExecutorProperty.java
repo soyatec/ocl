@@ -80,7 +80,7 @@ public class ExecutorProperty implements DomainProperty
 		return false;								// WIP FIXME
 	}
 
-	public void setValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull ObjectValue objectValue, @Nullable Object propertyValue) {
+	public void initValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull ObjectValue objectValue, @Nullable Object propertyValue) {
 		throw new UnsupportedOperationException();
 	}
 	

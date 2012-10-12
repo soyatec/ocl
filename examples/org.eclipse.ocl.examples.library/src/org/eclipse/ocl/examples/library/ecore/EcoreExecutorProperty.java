@@ -33,7 +33,7 @@ public class EcoreExecutorProperty extends ExecutorProperty
 	}
 
 	@Override
-	public void setValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull ObjectValue objectValue, @Nullable Object propertyValue) {
+	public void initValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull ObjectValue objectValue, @Nullable Object propertyValue) {
 		EObject eObject = objectValue.asNavigableObject();
 		Object eValue;
 		if (propertyValue instanceof Value) {

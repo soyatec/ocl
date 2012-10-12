@@ -60,6 +60,7 @@ import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
 import org.eclipse.ocl.examples.domain.types.DomainInvalidTypeImpl;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -107,7 +108,6 @@ import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.context.PropertyContext;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
-import org.eclipse.ocl.examples.pivot.library.UnimplementedOperation;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.model.OCLMetaModel;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
@@ -1395,7 +1395,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			ImplementationManager implementationManager = getImplementationManager();
 			implementation = implementationManager.loadImplementation(feature);
 			if (implementation == null) {
-				implementation = UnimplementedOperation.INSTANCE;
+				implementation = UnsupportedOperation.INSTANCE;
 			}
 		}
 		return implementation;

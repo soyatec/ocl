@@ -48,12 +48,17 @@ public class EcoreExecutorPackage extends ExecutorPackage
 	public Iterable<? extends DomainPackage> getNestedPackage() {
 		List<EcoreExecutorPackage> packages2 = packages;
 		if (packages2 == null) {
-			packages2 = packages = new ArrayList<EcoreExecutorPackage>();
-			for (EPackage eSubPackage : ePackage.getESubpackages()) {
-				assert eSubPackage != null;
-				EcoreExecutorPackage subPackage = standardLibrary.getPackage(eSubPackage);
-				if (subPackage != null) {
-					packages2.add(subPackage);
+			synchronized (this) {
+				packages2 = packages;
+				if (packages2 == null) {
+					packages2 = packages = new ArrayList<EcoreExecutorPackage>();
+					for (EPackage eSubPackage : ePackage.getESubpackages()) {
+						assert eSubPackage != null;
+						EcoreExecutorPackage subPackage = standardLibrary.getPackage(eSubPackage);
+						if (subPackage != null) {
+							packages2.add(subPackage);
+						}
+					}
 				}
 			}
 		}

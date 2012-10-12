@@ -29,8 +29,6 @@ import org.eclipse.ocl.examples.domain.values.TupleValue;
 
 public class TuplePartProperty extends AbstractProperty
 {
-//	public static final @NonNull LibraryFeature INSTANCE = new TuplePartProperty();
-	
 	protected final @NonNull TuplePartId tuplePartId;
 
 	public TuplePartProperty(@NonNull TuplePartId tuplePartId) {

@@ -32,5 +32,11 @@ public interface DomainProperty extends DomainFeature
 	 */
 	/*@NonNull*/ DomainProperty getOpposite();
 	
-	void setValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull ObjectValue objectValue, @Nullable Object propertyValue);
+	/**
+	 * Initialize the value of this property within objectValue to propertyValue.
+	 * <p>
+	 * This method is not thread-safe and should only be invoked to complete construction of objectvalue before
+	 * making it visible to other threads.
+	 */
+	void initValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull ObjectValue objectValue, @Nullable Object propertyValue);
 }

@@ -47,90 +47,98 @@ public abstract class ReflectiveFragment extends AbstractFragment
 	}
 
 	public @NonNull LibraryFeature getImplementation(@NonNull DomainOperation baseOperation) {
-		if (operationMap != null) {
-			LibraryFeature libraryFeature = operationMap.get(baseOperation);
+		if (operationMap == null) {
+			synchronized (this) {
+				if (operationMap == null) {
+					operationMap = new HashMap<DomainOperation, LibraryFeature>();		// Optimize to reuse single super map if no local ops
+				}
+			}
+		}
+		LibraryFeature libraryFeature = operationMap.get(baseOperation);
+		if (libraryFeature != null) {
+			return libraryFeature;
+		}
+		synchronized (operationMap) {
+			libraryFeature = operationMap.get(baseOperation);
 			if (libraryFeature != null) {
 				return libraryFeature;
 			}
-		}
-		else {
-			operationMap = new HashMap<DomainOperation, LibraryFeature>();		// Optimize to reuse single super map if no local ops
-		}
-		DomainOperation localOperation = getOperationOverload(baseOperation);
-		LibraryFeature libraryFeature = localOperation.getImplementation();
-		if (derivedInheritance == baseInheritance) {
-			assert localOperation == baseOperation;
-		}
-		else if (libraryFeature == null) {
-			int depth = derivedInheritance.getDepth();
-			List<Integer> multiDepths = null;
-			Set<DomainInheritance> multiOverrides = null;
-			IndexableIterable<DomainFragment> superFragments = derivedInheritance.getSuperFragments(depth-1);
-			if (superFragments.size() > 1) {
-				// 
-				//	The depth of a single base is always one less than the derived depth. However some of the bases
-				//	of a multi-base type may be more than one away, but only at levels that are also multi-base. So
-				//	keep track of all inherited multiDepth levels for a mulrti-base type.
-				//
-				for (int i = depth-2; i > 0; --i) {
-					IndexableIterable<DomainFragment> superSuperFragments = derivedInheritance.getSuperFragments(i);
-					if (superSuperFragments.size() > 1) {
-						if (multiDepths == null) {
-							multiDepths = new ArrayList<Integer>();
-							multiOverrides = new HashSet<DomainInheritance>();
+			DomainOperation localOperation = getOperationOverload(baseOperation);
+			libraryFeature = localOperation.getImplementation();
+			if (derivedInheritance == baseInheritance) {
+				assert localOperation == baseOperation;
+			}
+			else if (libraryFeature == null) {
+				int depth = derivedInheritance.getDepth();
+				List<Integer> multiDepths = null;
+				Set<DomainInheritance> multiOverrides = null;
+				IndexableIterable<DomainFragment> superFragments = derivedInheritance.getSuperFragments(depth-1);
+				if (superFragments.size() > 1) {
+					// 
+					//	The depth of a single base is always one less than the derived depth. However some of the bases
+					//	of a multi-base type may be more than one away, but only at levels that are also multi-base. So
+					//	keep track of all inherited multiDepth levels for a mulrti-base type.
+					//
+					for (int i = depth-2; i > 0; --i) {
+						IndexableIterable<DomainFragment> superSuperFragments = derivedInheritance.getSuperFragments(i);
+						if (superSuperFragments.size() > 1) {
+							if (multiDepths == null) {
+								multiDepths = new ArrayList<Integer>();
+								multiOverrides = new HashSet<DomainInheritance>();
+							}
+							multiDepths.add(i);
 						}
-						multiDepths.add(i);
 					}
 				}
-			}
-			for (DomainFragment derivedSuperFragment : superFragments) {
-				DomainInheritance superInheritance = derivedSuperFragment.getBaseInheritance();
+				for (DomainFragment derivedSuperFragment : superFragments) {
+					DomainInheritance superInheritance = derivedSuperFragment.getBaseInheritance();
+					if (multiDepths != null) {
+						for (Integer multiDepth : multiDepths) {
+							for (DomainFragment superSuperFragment : superInheritance.getSuperFragments(multiDepth)) {
+								Set<DomainInheritance> nonNullMultiOverrides = multiOverrides;
+								nonNullMultiOverrides.add(superSuperFragment.getBaseInheritance());
+							}
+						}
+					}
+					DomainFragment superFragment = superInheritance.getFragment(baseInheritance);
+					if (superFragment != null) {
+						LibraryFeature superFeature = superFragment.getImplementation(baseOperation);
+						if (libraryFeature == null) {
+							libraryFeature = superFeature;
+						}
+						else {
+							assert libraryFeature == superFeature;
+						}
+					}
+				}
 				if (multiDepths != null) {
 					for (Integer multiDepth : multiDepths) {
-						for (DomainFragment superSuperFragment : superInheritance.getSuperFragments(multiDepth)) {
+						for (DomainFragment superSuperFragment : derivedInheritance.getSuperFragments(multiDepth)) {
+							DomainInheritance superSuperInheritance = superSuperFragment.getBaseInheritance();
 							Set<DomainInheritance> nonNullMultiOverrides = multiOverrides;
-							nonNullMultiOverrides.add(superSuperFragment.getBaseInheritance());
-						}
-					}
-				}
-				DomainFragment superFragment = superInheritance.getFragment(baseInheritance);
-				if (superFragment != null) {
-					LibraryFeature superFeature = superFragment.getImplementation(baseOperation);
-					if (libraryFeature == null) {
-						libraryFeature = superFeature;
-					}
-					else {
-						assert libraryFeature == superFeature;
-					}
-				}
-			}
-			if (multiDepths != null) {
-				for (Integer multiDepth : multiDepths) {
-					for (DomainFragment superSuperFragment : derivedInheritance.getSuperFragments(multiDepth)) {
-						DomainInheritance superSuperInheritance = superSuperFragment.getBaseInheritance();
-						Set<DomainInheritance> nonNullMultiOverrides = multiOverrides;
-						if (!nonNullMultiOverrides.contains(superSuperInheritance)) {
-							DomainFragment superFragment = superSuperInheritance.getFragment(baseInheritance);
-							if (superFragment != null) {
-								LibraryFeature superFeature = superFragment.getImplementation(baseOperation);
-								if (libraryFeature == null) {
-									libraryFeature = superFeature;
-								}
-								else {
-									assert libraryFeature == superFeature;
+							if (!nonNullMultiOverrides.contains(superSuperInheritance)) {
+								DomainFragment superFragment = superSuperInheritance.getFragment(baseInheritance);
+								if (superFragment != null) {
+									LibraryFeature superFeature = superFragment.getImplementation(baseOperation);
+									if (libraryFeature == null) {
+										libraryFeature = superFeature;
+									}
+									else {
+										assert libraryFeature == superFeature;
+									}
 								}
 							}
 						}
 					}
 				}
 			}
+			if (libraryFeature == null) {
+				libraryFeature = OclAnyUnsupportedOperation.INSTANCE;
+			}
+	//		assert libraryFeature != null; //-- can be null for OclComparable::compareTo
+			operationMap.put(baseOperation, libraryFeature);
+			return libraryFeature;
 		}
-		if (libraryFeature == null) {
-			libraryFeature = OclAnyUnsupportedOperation.INSTANCE;
-		}
-//		assert libraryFeature != null; //-- can be null for OclComparable::compareTo
-		operationMap.put(baseOperation, libraryFeature);
-		return libraryFeature;
 	}
 
 	protected abstract @NonNull DomainOperation getOperationOverload(@NonNull DomainOperation baseOperation);

@@ -102,7 +102,7 @@ public class TypedMultiplicityElementBodies
 			
 			ObjectValue A_symbol__3 = PivotTables.Types._Parameter.createInstance(standardLibrary);
 			
-			P_NamedElement_name.setValue(standardLibrary, A_symbol__3, S_name);
+			P_NamedElement_name.initValue(standardLibrary, A_symbol__3, S_name);
 			
 			return A_symbol__3;
 		}

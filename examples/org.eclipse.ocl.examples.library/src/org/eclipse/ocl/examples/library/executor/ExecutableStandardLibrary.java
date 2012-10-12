@@ -225,7 +225,7 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull DomainTupleType getTupleType(@NonNull IdResolver idResolver, @NonNull TupleTypeId typeId) {
+	public synchronized @NonNull DomainTupleType getTupleType(@NonNull IdResolver idResolver, @NonNull TupleTypeId typeId) {
 		WeakReference<DomainTupleType> ref = tupleTypeMap.get(typeId);
 		if (ref != null) {
 			DomainTupleType domainTupleType = ref.get();

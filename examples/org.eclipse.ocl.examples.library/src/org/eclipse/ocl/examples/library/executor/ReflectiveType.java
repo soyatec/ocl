@@ -170,7 +170,7 @@ public abstract class ReflectiveType extends AbstractInheritance
 		throw new UnsupportedOperationException();					// FIXME
 	}
 
-	protected void initialize() {
+	protected synchronized void initialize() {
 		List<ReflectiveType> uninstalledInheritances = new ArrayList<ReflectiveType>();
 		// Detect missing OclAny inheritance
 		// - any installed superclass must inherit from OclAny so ok.

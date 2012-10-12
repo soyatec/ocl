@@ -22,7 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 
 public interface StandardLibraryContribution extends RegisteredContribution<StandardLibraryContribution>
 {
-	static Registry<StandardLibraryContribution> REGISTRY = new AbstractRegistry<StandardLibraryContribution>();
+	static @NonNull Registry<StandardLibraryContribution> REGISTRY = new AbstractRegistry<StandardLibraryContribution>();
 
 	static class Descriptor extends AbstractDescriptor<StandardLibraryContribution> implements StandardLibraryContribution
 	{

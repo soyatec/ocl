@@ -107,22 +107,27 @@ public class EcoreExecutorType extends ExecutorType
 	public @NonNull TypeId getTypeId() {
 		TypeId typeId2 = typeId;
 		if (typeId2 == null) {
-			EClassifier eClassifier2 = eClassifier;
-			if (eClassifier2 != null) {
-				typeId2 = IdManager.INSTANCE.getTypeId(eClassifier2);
-			}
-			else {
-				if (TypeId.METACLASS_NAME.equals(name)) {
-					typeId2 = TypeId.METACLASS;
+			synchronized (this) {
+				typeId2 = typeId;
+				if (typeId2 == null) {
+					EClassifier eClassifier2 = eClassifier;
+					if (eClassifier2 != null) {
+						typeId2 = IdManager.INSTANCE.getTypeId(eClassifier2);
+					}
+					else {
+						if (TypeId.METACLASS_NAME.equals(name)) {
+							typeId2 = TypeId.METACLASS;
+						}
+						else {
+							PackageId packageTypeId = IdManager.INSTANCE.getPackageId(evaluationPackage);
+							DomainTypeParameters typeParameters = getTypeParameters();
+							TemplateParameterId[] templateParameters = IdManager.INSTANCE.createTemplateParameterIds(typeParameters);
+							typeId2 = packageTypeId.getNestedTypeId(templateParameters, name);
+						}
+					}
+					typeId = typeId2;
 				}
-				else {
-					PackageId packageTypeId = IdManager.INSTANCE.getPackageId(evaluationPackage);
-					DomainTypeParameters typeParameters = getTypeParameters();
-					TemplateParameterId[] templateParameters = IdManager.INSTANCE.createTemplateParameterIds(typeParameters);
-					typeId2 = packageTypeId.getNestedTypeId(templateParameters, name);
-				}
 			}
-			typeId = typeId2;
 		}
 		return typeId2;
 	}

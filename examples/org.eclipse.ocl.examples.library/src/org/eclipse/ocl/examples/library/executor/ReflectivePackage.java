@@ -39,7 +39,7 @@ public abstract class ReflectivePackage extends ExecutorPackage
 		super(name, nsPrefix, nsURI, packageId);
 	}
 	
-	protected @NonNull Map<DomainType, DomainInheritance> computeClasses() {
+	protected synchronized @NonNull Map<DomainType, DomainInheritance> computeClasses() {
 		Map<DomainType, DomainInheritance> types2 = types = new HashMap<DomainType, DomainInheritance>();
 		for (DomainType domainType : getDomainTypes()) {
 			if (domainType != null) {

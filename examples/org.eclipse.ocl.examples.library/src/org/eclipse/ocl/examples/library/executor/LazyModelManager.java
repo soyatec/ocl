@@ -59,7 +59,7 @@ import org.omg.CORBA.Environment;
 public abstract class LazyModelManager implements DomainModelManager {
 
 	private final Map<DomainType, Set<EObject>> modelManager = new HashMap<DomainType, Set<EObject>>();
-	private Collection<EObject> roots;
+	private final Collection<EObject> roots;
 	
 	/**
 	 * Initializes me with the context element of an OCL
@@ -86,13 +86,18 @@ public abstract class LazyModelManager implements DomainModelManager {
 		// TODO: Optimize by parsing ahead of time to find all EClasses that we will query
 		Set<EObject> result = modelManager.get(type);		
 		if (result == null) {
-			result = new HashSet<EObject>();
-			modelManager.put(type, result);			
-			for (Iterator<EObject> iter = EcoreUtil.getAllContents(roots); iter.hasNext();) {
-				EObject next = iter.next();				
-				if ((next != null) && isInstance(type, next)) {
-					result.add(next);
-				}
+			synchronized (modelManager) {
+				result = modelManager.get(type);		
+				if (result == null) {
+					result = new HashSet<EObject>();
+					modelManager.put(type, result);			
+					for (Iterator<EObject> iter = EcoreUtil.getAllContents(roots); iter.hasNext();) {
+						EObject next = iter.next();				
+						if ((next != null) && isInstance(type, next)) {
+							result.add(next);
+						}
+					}
+				}		
 			}
 		}		
 		// FIXME subclasses

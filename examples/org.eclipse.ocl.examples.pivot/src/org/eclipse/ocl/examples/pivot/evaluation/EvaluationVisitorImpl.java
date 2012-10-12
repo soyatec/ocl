@@ -369,7 +369,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 				if (initExpression != null) {
 					Object propertyValue = getUndecoratedVisitor().evaluate(initExpression);
 //					try {
-						part.getReferredProperty().setValue(metaModelManager, objectValue, propertyValue);
+						part.getReferredProperty().initValue(metaModelManager, objectValue, propertyValue);
 //					} catch (InvalidValueException e) {
 //						return evaluationEnvironment.throwInvalidEvaluation(e);
 //					}

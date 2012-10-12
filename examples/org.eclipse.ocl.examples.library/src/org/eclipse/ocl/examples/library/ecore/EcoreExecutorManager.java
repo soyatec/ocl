@@ -124,16 +124,21 @@ public class EcoreExecutorManager extends ExecutorManager
 	public @NonNull DomainModelManager getModelManager() {
 		LazyModelManager modelManager2 = modelManager;
 		if (modelManager2 == null) {
-			modelManager2 = modelManager = new LazyModelManager(contextObject)
-			{
-				@Override
-				protected boolean isInstance(@NonNull DomainType type, @NonNull EObject element) {
-					EClass eClass = DomainUtil.nonNullEMF(element.eClass());
-					DomainType elementType = standardLibrary.getType(eClass);
-					return elementType.conformsTo(standardLibrary, type);
+			synchronized (this) {
+				modelManager2 = modelManager;
+				if (modelManager2 == null) {
+					modelManager2 = modelManager = new LazyModelManager(contextObject)
+					{
+						@Override
+						protected boolean isInstance(@NonNull DomainType type, @NonNull EObject element) {
+							EClass eClass = DomainUtil.nonNullEMF(element.eClass());
+							DomainType elementType = standardLibrary.getType(eClass);
+							return elementType.conformsTo(standardLibrary, type);
+						}
+						
+					};
 				}
-				
-			};
+			}
 		}
 		return modelManager2;
 	}
