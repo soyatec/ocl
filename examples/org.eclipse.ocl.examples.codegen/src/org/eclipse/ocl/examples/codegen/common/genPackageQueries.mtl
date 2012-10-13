@@ -129,7 +129,7 @@ if arity = 1 then 'ExecutorSingleIterationManager'
 else if arity = 2 then 'ExecutorDoubleIterationManager'
 else 'ExecutorMultipleIterationManager' endif endif/]
 
-[query public emitOperationArity(genPackage : GenPackage, arity : OCLInteger) : String = 
+[query public emitOperationArity(dummy : OclAny, arity : OCLInteger) : String = 
 if arity = 0 then 'UnaryOperation'
 else if arity = 1 then 'BinaryOperation'
 else if arity = 2 then 'TernaryOperation'

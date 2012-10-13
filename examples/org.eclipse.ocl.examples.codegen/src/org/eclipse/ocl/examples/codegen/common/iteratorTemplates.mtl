@@ -70,7 +70,7 @@ if ([astName/]_bodyVal != FALSE_VALUE) {
 [let astName : String = ast.symbolName(expInOcl)]
 if ([astName/]_bodyVal instanceof CollectionValue) {
 	<%CollectionValue%> bodyColl = (CollectionValue) [astName/]_bodyVal;
-	for (Object value : bodyColl.flatten()) {
+	for (Object value : bodyColl.flatten().getElements()) {
 		acc_[astName/].add(value);
 	}
 }

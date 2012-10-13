@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/org.eclipse.ocl.examples.codegen/emf-src" modelPluginID="org.eclipse.ocl.examples.codegen"
+    modelName="OCL4Acceleo" importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0"
+    copyrightFields="false">
+  <foreignModel>OCL4Acceleo.ecore</foreignModel>
+  <genPackages prefix="OCL4Acceleo" basePackage="org.eclipse.ocl.examples.codegen"
+      disposableProviderFactory="true" ecorePackage="OCL4Acceleo.ecore#/">
+    <genDataTypes ecoreDataType="OCL4Acceleo.ecore#//OCLInteger"/>
+    <genDataTypes ecoreDataType="OCL4Acceleo.ecore#//OCLReal"/>
+    <genDataTypes ecoreDataType="OCL4Acceleo.ecore#//OCLString"/>
+    <genClasses image="false" ecoreClass="OCL4Acceleo.ecore#//CodeGenHelper"/>
+  </genPackages>
+</genmodel:GenModel>

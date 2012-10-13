@@ -8,4 +8,6 @@
       serializable="false"/>
   <eClassifiers xsi:type="ecore:EDataType" name="OCLString" instanceClassName="java.lang.String"
       serializable="false"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CodeGenHelper" instanceClassName="org.eclipse.ocl.examples.codegen.common.CodeGenHelper"
+      abstract="true" interface="true"/>
 </ecore:EPackage>

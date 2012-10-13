@@ -123,7 +123,7 @@ public class PivotQueries
 					scope = (Namespace) eObject;
 					break;
 				}
-				if (eObject instanceof ExpressionInOCL) {
+				if ((eObject instanceof ExpressionInOCL) && (((ExpressionInOCL)eObject).getContextVariable() != null)) {
 					eObject = ((ExpressionInOCL)eObject).getContextVariable().getType();
 				}
 				else {
