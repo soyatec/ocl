@@ -167,6 +167,9 @@ ClassifierCS returns base::ClassifierCS:
 	ClassCS | DataTypeCS | EnumerationCS 
 ;
 
+CollectionTypeCS returns essentialocl::CollectionTypeCS:
+	name=CollectionTypeIdentifier ('(' ownedType=TypeExpCS ')')?;
+
 DataTypeCS returns base::DataTypeCS:
 	'datatype' name=UnrestrictedName
 	(ownedTemplateSignature=TemplateSignatureCS)?
@@ -323,7 +326,7 @@ TypeRefCS returns base::TypeRefCS:
 ;
 
 TypedRefCS returns base::TypedRefCS:
-	PrimitiveTypeCS | TypedTypeRefCS
+	TypeLiteralCS | TypedTypeRefCS
 ;
 
 TypedMultiplicityRefCS returns base::TypedRefCS:

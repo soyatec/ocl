@@ -136,6 +136,8 @@ public class OCLinEcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getClassCSAccess().getGroup_5(), "rule__ClassCS__Group_5__0");
 					put(grammarAccess.getClassCSAccess().getGroup_6(), "rule__ClassCS__Group_6__0");
 					put(grammarAccess.getClassCSAccess().getGroup_7_0(), "rule__ClassCS__Group_7_0__0");
+					put(grammarAccess.getCollectionTypeCSAccess().getGroup(), "rule__CollectionTypeCS__Group__0");
+					put(grammarAccess.getCollectionTypeCSAccess().getGroup_1(), "rule__CollectionTypeCS__Group_1__0");
 					put(grammarAccess.getDataTypeCSAccess().getGroup(), "rule__DataTypeCS__Group__0");
 					put(grammarAccess.getDataTypeCSAccess().getGroup_3(), "rule__DataTypeCS__Group_3__0");
 					put(grammarAccess.getDataTypeCSAccess().getGroup_4(), "rule__DataTypeCS__Group_4__0");
@@ -211,8 +213,6 @@ public class OCLinEcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getURIPathNameCSAccess().getGroup(), "rule__URIPathNameCS__Group__0");
 					put(grammarAccess.getURIPathNameCSAccess().getGroup_1(), "rule__URIPathNameCS__Group_1__0");
 					put(grammarAccess.getURIFirstPathElementCSAccess().getGroup_1(), "rule__URIFirstPathElementCS__Group_1__0");
-					put(grammarAccess.getCollectionTypeCSAccess().getGroup(), "rule__CollectionTypeCS__Group__0");
-					put(grammarAccess.getCollectionTypeCSAccess().getGroup_1(), "rule__CollectionTypeCS__Group_1__0");
 					put(grammarAccess.getMultiplicityBoundsCSAccess().getGroup(), "rule__MultiplicityBoundsCS__Group__0");
 					put(grammarAccess.getMultiplicityBoundsCSAccess().getGroup_1(), "rule__MultiplicityBoundsCS__Group_1__0");
 					put(grammarAccess.getMultiplicityCSAccess().getGroup(), "rule__MultiplicityCS__Group__0");
@@ -337,6 +337,8 @@ public class OCLinEcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getClassCSAccess().getOwnedOperationAssignment_7_0_1_1(), "rule__ClassCS__OwnedOperationAssignment_7_0_1_1");
 					put(grammarAccess.getClassCSAccess().getOwnedPropertyAssignment_7_0_1_2(), "rule__ClassCS__OwnedPropertyAssignment_7_0_1_2");
 					put(grammarAccess.getClassCSAccess().getOwnedConstraintAssignment_7_0_1_3(), "rule__ClassCS__OwnedConstraintAssignment_7_0_1_3");
+					put(grammarAccess.getCollectionTypeCSAccess().getNameAssignment_0(), "rule__CollectionTypeCS__NameAssignment_0");
+					put(grammarAccess.getCollectionTypeCSAccess().getOwnedTypeAssignment_1_1(), "rule__CollectionTypeCS__OwnedTypeAssignment_1_1");
 					put(grammarAccess.getDataTypeCSAccess().getNameAssignment_1(), "rule__DataTypeCS__NameAssignment_1");
 					put(grammarAccess.getDataTypeCSAccess().getOwnedTemplateSignatureAssignment_2(), "rule__DataTypeCS__OwnedTemplateSignatureAssignment_2");
 					put(grammarAccess.getDataTypeCSAccess().getInstanceClassNameAssignment_3_1(), "rule__DataTypeCS__InstanceClassNameAssignment_3_1");
@@ -459,9 +461,6 @@ public class OCLinEcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getURIFirstPathElementCSAccess().getElementAssignment_0(), "rule__URIFirstPathElementCS__ElementAssignment_0");
 					put(grammarAccess.getURIFirstPathElementCSAccess().getElementAssignment_1_1(), "rule__URIFirstPathElementCS__ElementAssignment_1_1");
 					put(grammarAccess.getPrimitiveTypeCSAccess().getNameAssignment(), "rule__PrimitiveTypeCS__NameAssignment");
-					put(grammarAccess.getCollectionTypeCSAccess().getNameAssignment_0(), "rule__CollectionTypeCS__NameAssignment_0");
-					put(grammarAccess.getCollectionTypeCSAccess().getOwnedTypeAssignment_1_1(), "rule__CollectionTypeCS__OwnedTypeAssignment_1_1");
-					put(grammarAccess.getCollectionTypeCSAccess().getMultiplicityAssignment_1_3(), "rule__CollectionTypeCS__MultiplicityAssignment_1_3");
 					put(grammarAccess.getMultiplicityBoundsCSAccess().getLowerBoundAssignment_0(), "rule__MultiplicityBoundsCS__LowerBoundAssignment_0");
 					put(grammarAccess.getMultiplicityBoundsCSAccess().getUpperBoundAssignment_1_1(), "rule__MultiplicityBoundsCS__UpperBoundAssignment_1_1");
 					put(grammarAccess.getMultiplicityStringCSAccess().getStringBoundsAssignment(), "rule__MultiplicityStringCS__StringBoundsAssignment");

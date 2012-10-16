@@ -22,6 +22,7 @@ import org.eclipse.ocl.examples.xtext.oclinecore.services.OCLinEcoreGrammarAcces
 import org.eclipse.ocl.examples.xtext.oclinecore.services.OCLinEcoreGrammarAccess.AttributeCSElements;
 import org.eclipse.ocl.examples.xtext.oclinecore.services.OCLinEcoreGrammarAccess.BodyConstraintCSElements;
 import org.eclipse.ocl.examples.xtext.oclinecore.services.OCLinEcoreGrammarAccess.ClassCSElements;
+import org.eclipse.ocl.examples.xtext.oclinecore.services.OCLinEcoreGrammarAccess.CollectionTypeCSElements;
 import org.eclipse.ocl.examples.xtext.oclinecore.services.OCLinEcoreGrammarAccess.DataTypeCSElements;
 import org.eclipse.ocl.examples.xtext.oclinecore.services.OCLinEcoreGrammarAccess.DerivedConstraintCSElements;
 import org.eclipse.ocl.examples.xtext.oclinecore.services.OCLinEcoreGrammarAccess.DocumentationCSElements;
@@ -58,7 +59,12 @@ public class OCLinEcoreFormatter extends AbstractEssentialOCLFormatter {
 	    OCLinEcoreGrammarAccess f = getGrammarAccess();
 	    
 		configureCollectionLiteralExpCS(c, f.getCollectionLiteralExpCSAccess());
-		configureCollectionTypeCS(c, f.getCollectionTypeCSAccess());
+//		configureCollectionTypeCS(c, f.getCollectionTypeCSAccess());
+		{
+			CollectionTypeCSElements a = f.getCollectionTypeCSAccess();
+			c.setNoSpace().around(a.getLeftParenthesisKeyword_1_0());
+			c.setNoSpace().before(a.getRightParenthesisKeyword_1_2());
+		}
 		configureIfExpCS(c, f.getIfExpCSAccess());
 		configureLetExpCS(c, f.getLetExpCSAccess());
 		configureMultiplicityBoundsCS(c, f.getMultiplicityBoundsCSAccess());

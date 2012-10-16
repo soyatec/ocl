@@ -336,6 +336,30 @@ public class RoundTripTests extends XtextTestCase
 		metaModelManager.dispose();
 	} */
 
+	public void testAggregatesRoundTrip() throws IOException, InterruptedException {
+		String testFile = 
+				"package b : bb = 'bbb'\n" +
+				"{\n" +
+				"class B\n" +
+				"{\n" +
+				"property bag1 : B[*] {!unique};\n" +
+				"property bag2 : Bag(B);\n" +
+//				"property collection2 : Collection(B);\n" +		FIXME should be a validation warning
+				"property orderedset1 : B[*] {ordered};\n" +
+				"property orderedset2 : OrderedSet(B);\n" +
+				"property sequence1 : B[*] {ordered, !unique};\n" +
+				"property sequence2 : Sequence(B);\n" +
+				"property set1 : B[*];\n" +
+				"property set2 : Set(B);\n" +
+//				"property tuple : Tuple(b : B);\n" +
+				"}\n" +
+				"}\n";
+		createOCLinEcoreFile("Aggregates.oclinecore", testFile);
+		MetaModelManager metaModelManager = new MetaModelManager();
+		doRoundTripFromOCLinEcore(metaModelManager, "Aggregates");
+		metaModelManager.dispose();
+	}
+
 	public void testCompanyRoundTrip() throws IOException, InterruptedException {
 		doRoundTripFromEcore("Company", "Company.reference");
 	}
