@@ -605,10 +605,10 @@ if types->exists(name = 'Boolean') then types
 else types endif /]
 
 [query public javaName(element : NamedElement) : String = 
-invoke('org.eclipse.ocl.examples.codegen.common.NameQueries', 'rawEncodeName(java.lang.String)', Sequence{element.name}) /]
+invoke('org.eclipse.ocl.examples.codegen.common.NameQueries', 'rawEncodeName(java.lang.String, java.lang.Integer)', Sequence{element.name, 0}) /]
 
 [query public javaName(element : OclAny, string : String) : String = 
-invoke('org.eclipse.ocl.examples.codegen.common.NameQueries', 'rawEncodeName(java.lang.String)', Sequence{string}) /]
+invoke('org.eclipse.ocl.examples.codegen.common.NameQueries', 'rawEncodeName(java.lang.String, java.lang.Integer)', Sequence{string, 0}) /]
 
 [query public javaString(aComment : Comment) : String = 
 invoke('org.eclipse.xtext.util.Strings', 'convertToJavaString(java.lang.String)', Sequence{aComment._body}) /]

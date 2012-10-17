@@ -14,8 +14,12 @@
  */
 package org.eclipse.ocl.examples.codegen.common;
 
+import java.io.File;
+
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.library.LibraryOperation;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Type;
 
 public class CodeGenHelper
@@ -32,6 +36,11 @@ public class CodeGenHelper
 	 */
 	public static @NonNull String getEscapedName(@NonNull CodeGenHelper codeGenHelper, @NonNull Type type) {
 		return codeGenHelper.getEscapedName(type);
+	}
+	
+	public LibraryOperation loadClass(ExpressionInOCL query, File targetFolder,
+			String packageName, String className, boolean saveSource) throws Exception {
+		throw new UnsupportedOperationException();
 	}
 	
 	/**

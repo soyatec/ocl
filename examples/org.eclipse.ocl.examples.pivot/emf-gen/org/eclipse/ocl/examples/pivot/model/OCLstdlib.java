@@ -945,8 +945,8 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Operation op_Boolean_xor = createOperation("xor", _Boolean, "org.eclipse.ocl.examples.library.logical.BooleanXorOperation", org.eclipse.ocl.examples.library.logical.BooleanXorOperation.INSTANCE);
 		protected final @NonNull Operation op_Integer__mul_ = createOperation("*", _Integer, "org.eclipse.ocl.examples.library.numeric.NumericTimesOperation", org.eclipse.ocl.examples.library.numeric.NumericTimesOperation.INSTANCE);
 		protected final @NonNull Operation op_Integer__add_ = createOperation("+", _Integer, "org.eclipse.ocl.examples.library.integer.IntegerPlusOperation", org.eclipse.ocl.examples.library.integer.IntegerPlusOperation.INSTANCE);
-		protected final @NonNull Operation op_Integer__sub_ = createOperation("-", _Integer, "org.eclipse.ocl.examples.library.numeric.NumericNegateOperation", org.eclipse.ocl.examples.library.numeric.NumericNegateOperation.INSTANCE);
-		protected final @NonNull Operation op_Integer__sub__1 = createOperation("-", _Integer, "org.eclipse.ocl.examples.library.integer.IntegerMinusOperation", org.eclipse.ocl.examples.library.integer.IntegerMinusOperation.INSTANCE);
+		protected final @NonNull Operation op_Integer__neg_ = createOperation("-", _Integer, "org.eclipse.ocl.examples.library.numeric.NumericNegateOperation", org.eclipse.ocl.examples.library.numeric.NumericNegateOperation.INSTANCE);
+		protected final @NonNull Operation op_Integer__neg__1 = createOperation("-", _Integer, "org.eclipse.ocl.examples.library.integer.IntegerMinusOperation", org.eclipse.ocl.examples.library.integer.IntegerMinusOperation.INSTANCE);
 		protected final @NonNull Operation op_Integer__div_ = createOperation("/", _Real, "org.eclipse.ocl.examples.library.numeric.NumericDivideOperation", org.eclipse.ocl.examples.library.numeric.NumericDivideOperation.INSTANCE);
 		protected final @NonNull Operation op_Integer_abs = createOperation("abs", _Integer, "org.eclipse.ocl.examples.library.numeric.NumericAbsOperation", org.eclipse.ocl.examples.library.numeric.NumericAbsOperation.INSTANCE);
 		protected final @NonNull Operation op_Integer_compareTo = createOperation("compareTo", _Integer, "org.eclipse.ocl.examples.library.integer.IntegerCompareToOperation", org.eclipse.ocl.examples.library.integer.IntegerCompareToOperation.INSTANCE);
@@ -957,8 +957,8 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Operation op_Integer_toString = createOperation("toString", _String, "org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation", org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
 		protected final @NonNull Operation op_Real__mul_ = createOperation("*", _Real, "org.eclipse.ocl.examples.library.numeric.NumericTimesOperation", org.eclipse.ocl.examples.library.numeric.NumericTimesOperation.INSTANCE);
 		protected final @NonNull Operation op_Real__add_ = createOperation("+", _Real, "org.eclipse.ocl.examples.library.real.RealPlusOperation", org.eclipse.ocl.examples.library.real.RealPlusOperation.INSTANCE);
-		protected final @NonNull Operation op_Real__sub_ = createOperation("-", _Real, "org.eclipse.ocl.examples.library.numeric.NumericNegateOperation", org.eclipse.ocl.examples.library.numeric.NumericNegateOperation.INSTANCE);
-		protected final @NonNull Operation op_Real__sub__1 = createOperation("-", _Real, "org.eclipse.ocl.examples.library.real.RealMinusOperation", org.eclipse.ocl.examples.library.real.RealMinusOperation.INSTANCE);
+		protected final @NonNull Operation op_Real__neg_ = createOperation("-", _Real, "org.eclipse.ocl.examples.library.numeric.NumericNegateOperation", org.eclipse.ocl.examples.library.numeric.NumericNegateOperation.INSTANCE);
+		protected final @NonNull Operation op_Real__neg__1 = createOperation("-", _Real, "org.eclipse.ocl.examples.library.real.RealMinusOperation", org.eclipse.ocl.examples.library.real.RealMinusOperation.INSTANCE);
 		protected final @NonNull Operation op_Real__div_ = createOperation("/", _Real, "org.eclipse.ocl.examples.library.numeric.NumericDivideOperation", org.eclipse.ocl.examples.library.numeric.NumericDivideOperation.INSTANCE);
 		protected final @NonNull Operation op_Real__lt_ = createOperation("<", _Boolean, "org.eclipse.ocl.examples.library.numeric.NumericLessThanOperation", org.eclipse.ocl.examples.library.numeric.NumericLessThanOperation.INSTANCE);
 		protected final @NonNull Operation op_Real__lt__eq_ = createOperation("<=", _Boolean, "org.eclipse.ocl.examples.library.numeric.NumericLessThanEqualOperation", org.eclipse.ocl.examples.library.numeric.NumericLessThanEqualOperation.INSTANCE);
@@ -1085,7 +1085,7 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Operation op_OclVoid_implies = createOperation("implies", _Boolean, "org.eclipse.ocl.examples.library.oclvoid.OclVoidImpliesOperation", org.eclipse.ocl.examples.library.oclvoid.OclVoidImpliesOperation.INSTANCE);
 		protected final @NonNull Operation op_OclVoid_or = createOperation("or", _Boolean, "org.eclipse.ocl.examples.library.oclvoid.OclVoidOrOperation", org.eclipse.ocl.examples.library.oclvoid.OclVoidOrOperation.INSTANCE);
 		protected final @NonNull Operation op_OclVoid_toString = createOperation("toString", _String, "org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation", org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
-		protected final @NonNull Operation op_OrderedSet_OrderedSet_T__sub_ = createOperation("-", _OrderedSet_OrderedSet_T, "org.eclipse.ocl.examples.library.collection.SetMinusOperation", org.eclipse.ocl.examples.library.collection.SetMinusOperation.INSTANCE);
+		protected final @NonNull Operation op_OrderedSet_OrderedSet_T__neg_ = createOperation("-", _OrderedSet_OrderedSet_T, "org.eclipse.ocl.examples.library.collection.SetMinusOperation", org.eclipse.ocl.examples.library.collection.SetMinusOperation.INSTANCE);
 		protected final @NonNull Operation op_OrderedSet_OrderedSet_T__lt__gt_ = createOperation("<>", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation", org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
 		protected final @NonNull Operation op_OrderedSet_OrderedSet_T__eq_ = createOperation("=", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation", org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
 		protected final @NonNull Operation op_OrderedSet_OrderedSet_T_append = createOperation("append", _OrderedSet_OrderedSet_T, "org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendOperation", org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendOperation.INSTANCE);
@@ -1119,7 +1119,7 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Operation op_Sequence_Sequence_T_selectByType = createOperation("selectByType", _Sequence_Sequence_selectByType_TT, "org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation", org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
 		protected final @NonNull Operation op_Sequence_Sequence_T_subSequence = createOperation("subSequence", _Sequence_Sequence_T, "org.eclipse.ocl.examples.library.collection.SequenceSubSequenceOperation", org.eclipse.ocl.examples.library.collection.SequenceSubSequenceOperation.INSTANCE);
 		protected final @NonNull Operation op_Sequence_Sequence_T_union = createOperation("union", _Sequence_Sequence_T, "org.eclipse.ocl.examples.library.collection.CollectionUnionOperation", org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE);
-		protected final @NonNull Operation op_Set_Set_T__sub_ = createOperation("-", _Set_Set_T, "org.eclipse.ocl.examples.library.collection.SetMinusOperation", org.eclipse.ocl.examples.library.collection.SetMinusOperation.INSTANCE);
+		protected final @NonNull Operation op_Set_Set_T__neg_ = createOperation("-", _Set_Set_T, "org.eclipse.ocl.examples.library.collection.SetMinusOperation", org.eclipse.ocl.examples.library.collection.SetMinusOperation.INSTANCE);
 		protected final @NonNull Operation op_Set_Set_T__lt__gt_ = createOperation("<>", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation", org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
 		protected final @NonNull Operation op_Set_Set_T__eq_ = createOperation("=", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation", org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
 		protected final @NonNull Operation op_Set_Set_T_excluding = createOperation("excluding", _Set_Set_T, "org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation", org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE);
@@ -1129,7 +1129,7 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Operation op_Set_Set_T_selectByKind = createOperation("selectByKind", _Set_Set_selectByKind_TT, "org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation", org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
 		protected final @NonNull Operation op_Set_Set_T_selectByType = createOperation("selectByType", _Set_Set_selectByType_TT, "org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation", org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
 		protected final @NonNull Operation op_Set_Set_T_union = createOperation("union", _Set_Set_T, "org.eclipse.ocl.examples.library.collection.CollectionUnionOperation", org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE);
-		protected final @NonNull Operation op_UniqueCollection_UniqueCollection_T__sub_ = createOperation("-", _UniqueCollection_UniqueCollection_T, "org.eclipse.ocl.examples.library.collection.SetMinusOperation", org.eclipse.ocl.examples.library.collection.SetMinusOperation.INSTANCE);
+		protected final @NonNull Operation op_UniqueCollection_UniqueCollection_T__neg_ = createOperation("-", _UniqueCollection_UniqueCollection_T, "org.eclipse.ocl.examples.library.collection.SetMinusOperation", org.eclipse.ocl.examples.library.collection.SetMinusOperation.INSTANCE);
 		protected final @NonNull Operation op_UniqueCollection_UniqueCollection_T_symmetricDifference = createOperation("symmetricDifference", _Set_UniqueCollection_T, "org.eclipse.ocl.examples.library.collection.SetSymmetricDifferenceOperation", org.eclipse.ocl.examples.library.collection.SetSymmetricDifferenceOperation.INSTANCE);
 		protected final @NonNull Operation op_UniqueCollection_UniqueCollection_T_union = createOperation("union", _Set_UniqueCollection_T, "org.eclipse.ocl.examples.library.collection.CollectionUnionOperation", org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE);
 		
@@ -1168,8 +1168,8 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedOperations.add(operation = op_Integer__add_);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("i", _OclSelf));
-			ownedOperations.add(operation = op_Integer__sub_);
-			ownedOperations.add(operation = op_Integer__sub__1);
+			ownedOperations.add(operation = op_Integer__neg_);
+			ownedOperations.add(operation = op_Integer__neg__1);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("i", _OclSelf));
 			ownedOperations.add(operation = op_Integer__div_);
@@ -1199,8 +1199,8 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedOperations.add(operation = op_Real__add_);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("r", _OclSelf));
-			ownedOperations.add(operation = op_Real__sub_);
-			ownedOperations.add(operation = op_Real__sub__1);
+			ownedOperations.add(operation = op_Real__neg_);
+			ownedOperations.add(operation = op_Real__neg__1);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("r", _OclSelf));
 			ownedOperations.add(operation = op_Real__div_);
@@ -1510,7 +1510,7 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedParameters.add(parameter = createParameter("b", _Boolean));
 			ownedOperations.add(operation = op_OclVoid_toString);
 			ownedOperations = _OrderedSet_OrderedSet_T.getOwnedOperation();
-			ownedOperations.add(operation = op_OrderedSet_OrderedSet_T__sub_);
+			ownedOperations.add(operation = op_OrderedSet_OrderedSet_T__neg_);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("s", _UniqueCollection_OclAny));
 			ownedOperations.add(operation = op_OrderedSet_OrderedSet_T__lt__gt_);
@@ -1606,7 +1606,7 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("s", _Sequence_Sequence_T));
 			ownedOperations = _Set_Set_T.getOwnedOperation();
-			ownedOperations.add(operation = op_Set_Set_T__sub_);
+			ownedOperations.add(operation = op_Set_Set_T__neg_);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("s", _UniqueCollection_OclAny));
 			ownedOperations.add(operation = op_Set_Set_T__lt__gt_);
@@ -1635,7 +1635,7 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("s", _Collection_Set_T));
 			ownedOperations = _UniqueCollection_UniqueCollection_T.getOwnedOperation();
-			ownedOperations.add(operation = op_UniqueCollection_UniqueCollection_T__sub_);
+			ownedOperations.add(operation = op_UniqueCollection_UniqueCollection_T__neg_);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("s", _UniqueCollection_OclAny));
 			ownedOperations.add(operation = op_UniqueCollection_UniqueCollection_T_symmetricDifference);
@@ -2140,13 +2140,13 @@ public class OCLstdlib extends XMIResourceImpl
 			op_Boolean_xor.setPrecedence(prec_XOR);
 			op_Integer__mul_.setPrecedence(prec_MULTIPLICATIVE);
 			op_Integer__add_.setPrecedence(prec_ADDITIVE);
-			op_Integer__sub_.setPrecedence(prec_UNARY);
-			op_Integer__sub__1.setPrecedence(prec_ADDITIVE);
+			op_Integer__neg_.setPrecedence(prec_UNARY);
+			op_Integer__neg__1.setPrecedence(prec_ADDITIVE);
 			op_Integer__div_.setPrecedence(prec_MULTIPLICATIVE);
 			op_Real__mul_.setPrecedence(prec_MULTIPLICATIVE);
 			op_Real__add_.setPrecedence(prec_ADDITIVE);
-			op_Real__sub_.setPrecedence(prec_UNARY);
-			op_Real__sub__1.setPrecedence(prec_ADDITIVE);
+			op_Real__neg_.setPrecedence(prec_UNARY);
+			op_Real__neg__1.setPrecedence(prec_ADDITIVE);
 			op_Real__div_.setPrecedence(prec_MULTIPLICATIVE);
 			op_Real__lt_.setPrecedence(prec_RELATIONAL);
 			op_Real__lt__eq_.setPrecedence(prec_RELATIONAL);
@@ -2180,15 +2180,15 @@ public class OCLstdlib extends XMIResourceImpl
 			op_OclVoid_and.setPrecedence(prec_AND);
 			op_OclVoid_implies.setPrecedence(prec_IMPLIES);
 			op_OclVoid_or.setPrecedence(prec_OR);
-			op_OrderedSet_OrderedSet_T__sub_.setPrecedence(prec_ADDITIVE);
+			op_OrderedSet_OrderedSet_T__neg_.setPrecedence(prec_ADDITIVE);
 			op_OrderedSet_OrderedSet_T__lt__gt_.setPrecedence(prec_EQUALITY);
 			op_OrderedSet_OrderedSet_T__eq_.setPrecedence(prec_EQUALITY);
 			op_Sequence_Sequence_T__lt__gt_.setPrecedence(prec_EQUALITY);
 			op_Sequence_Sequence_T__eq_.setPrecedence(prec_EQUALITY);
-			op_Set_Set_T__sub_.setPrecedence(prec_ADDITIVE);
+			op_Set_Set_T__neg_.setPrecedence(prec_ADDITIVE);
 			op_Set_Set_T__lt__gt_.setPrecedence(prec_EQUALITY);
 			op_Set_Set_T__eq_.setPrecedence(prec_EQUALITY);
-			op_UniqueCollection_UniqueCollection_T__sub_.setPrecedence(prec_ADDITIVE);
+			op_UniqueCollection_UniqueCollection_T__neg_.setPrecedence(prec_ADDITIVE);
 		}
 		
 		protected void installComments() {
@@ -2203,8 +2203,8 @@ public class OCLstdlib extends XMIResourceImpl
 			installComment(op_Boolean_xor, "True if either oclText[self] or b is oclText[true], but not both.");
 			installComment(op_Integer__mul_, "The value of the multiplication of oclText[self] and i.");
 			installComment(op_Integer__add_, "The value of the addition of oclText[self] and i.");
-			installComment(op_Integer__sub_, "The negative value of oclText[self].");
-			installComment(op_Integer__sub__1, "The value of the subtraction of i from oclText[self].");
+			installComment(op_Integer__neg_, "The negative value of oclText[self].");
+			installComment(op_Integer__neg__1, "The value of the subtraction of i from oclText[self].");
 			installComment(op_Integer__div_, "The value of oclText[self] divided by i.\nEvaluates to oclText[invalid] if r is equal to zero.");
 			installComment(op_Integer_abs, "The absolute value of oclText[self].");
 			installComment(op_Integer_compareTo, "The comparison of oclText[self] with oclText[that]. -ve if less than, 0 if equal, +ve if greater than.");
@@ -2215,8 +2215,8 @@ public class OCLstdlib extends XMIResourceImpl
 			installComment(op_Integer_toString, "Converts oclText[self] to a string value.");
 			installComment(op_Real__mul_, "The value of the multiplication of oclText[self] and r.");
 			installComment(op_Real__add_, "The value of the addition of oclText[self] and r.");
-			installComment(op_Real__sub_, "The negative value of oclText[self].");
-			installComment(op_Real__sub__1, "The value of the subtraction of r from oclText[self].");
+			installComment(op_Real__neg_, "The negative value of oclText[self].");
+			installComment(op_Real__neg__1, "The value of the subtraction of r from oclText[self].");
 			installComment(op_Real__div_, "The value of oclText[self] divided by r. Evaluates to oclText[invalid] if r is equal to zero.");
 			installComment(op_Real__lt_, "True if oclText[self] is less than r.");
 			installComment(op_Real__lt__eq_, "True if oclText[self] is less than or equal to r.");
@@ -2362,7 +2362,7 @@ public class OCLstdlib extends XMIResourceImpl
 			installComment(op_OclVoid__eq_, "Redefines the OclAny operation, returning oclText[true] if object is oclText[null], oclText[invalid]\nif object is oclText[invalid], oclText[false] otherwise.");
 			installComment(op_OclVoid_allInstances, "Returns oclText[Set{null}].");
 			installComment(op_OclVoid_toString, "Returns oclText[null].");
-			installComment(op_OrderedSet_OrderedSet_T__sub_, "The elements of oclText[self], which are not in s.");
+			installComment(op_OrderedSet_OrderedSet_T__neg_, "The elements of oclText[self], which are not in s.");
 			installComment(op_OrderedSet_OrderedSet_T_append, "The set of elements, consisting of all elements of oclText[self], followed by object.");
 			installComment(op_OrderedSet_OrderedSet_T_excluding, "The ordered set  containing all elements of oclText[self] apart from object.\n\nThe order of the remaining elements is not changed.");
 			installComment(op_OrderedSet_OrderedSet_T_including, "The ordered set containing all elements of oclText[self] plus object added as the last element if not already present.");
@@ -2395,7 +2395,7 @@ public class OCLstdlib extends XMIResourceImpl
 			installComment(it_Sequence_Sequence_T_sortedBy, "Results in the Sequence containing all elements of the source collection.\nThe element for which body has the lowest value comes first, and so on.\nThe type of the body expression must have the < operation defined.\nThe < operation must return a Boolean value and must be transitive (i.e., if a < b and b < c then a < c).");
 			installComment(op_Sequence_Sequence_T_subSequence, "The sub-sequence of oclText[self] starting at number lower, up to and including element number upper.");
 			installComment(op_Sequence_Sequence_T_union, "The sequence consisting of all elements in oclText[self], followed by all elements in s.");
-			installComment(op_Set_Set_T__sub_, "The elements of oclText[self], which are not in s.");
+			installComment(op_Set_Set_T__neg_, "The elements of oclText[self], which are not in s.");
 			installComment(op_Set_Set_T__eq_, "Evaluates to oclText[true] if oclText[self] and s contain the same elements.");
 			installComment(op_Set_Set_T_excluding, "The set containing all elements of oclText[self] without object.");
 			installComment(op_Set_Set_T_flatten, "Redefines the Collection operation. If the element type is not a collection type, this results in the same set as oclText[self].\nIf the element type is a collection type, the result is the set containing all the elements of all the recursively flattened elements of oclText[self].");
@@ -2405,7 +2405,7 @@ public class OCLstdlib extends XMIResourceImpl
 			installComment(it_Set_Set_T_select, "The subset of set for which expr is oclText[true].");
 			installComment(it_Set_Set_T_sortedBy, "Results in the ordered set containing all elements of the source collection.\nThe element for which body has the lowest value comes first, and so on.\nThe type of the body expression must have the < operation defined.\nThe < operation must return a Boolean value and must be transitive (i.e., if a < b and b < c, then a < c).");
 			installComment(op_Set_Set_T_union, "The set consisting of all elements in oclText[self] and all elements in s.");
-			installComment(op_UniqueCollection_UniqueCollection_T__sub_, "The elements of oclText[self], which are not in s.");
+			installComment(op_UniqueCollection_UniqueCollection_T__neg_, "The elements of oclText[self], which are not in s.");
 			installComment(it_UniqueCollection_UniqueCollection_T_sortedBy, "Results in the ordered set containing all elements of the source collection.\nThe element for which body has the lowest value comes first, and so on.\nThe type of the body expression must have the < operation defined.\nThe < operation must return a Boolean value and must be transitive (i.e., if a < b and b < c, then a < c).");
 			installComment(op_UniqueCollection_UniqueCollection_T_symmetricDifference, "The set containing all the elements that are in oclText[self] or s, but not in both.");
 			installComment(op_UniqueCollection_UniqueCollection_T_union, "The set consisting of all elements in oclText[self] and all elements in s.");

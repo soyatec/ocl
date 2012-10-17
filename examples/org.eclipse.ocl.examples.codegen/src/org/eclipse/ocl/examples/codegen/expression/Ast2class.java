@@ -378,5 +378,12 @@ public class Ast2class extends AbstractAcceleoGenerator {
         
         // resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(UMLResource.FILE_EXTENSION, UMLResource.Factory.INSTANCE);
     }
-    
+
+	public void reinitialize(EObject element, File folder, List<? extends Object> arguments) throws IOException {
+		model = element;
+		targetFolder = folder;
+		generationArguments = arguments;
+
+		this.postInitialize();
+	}
 }

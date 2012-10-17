@@ -31,7 +31,7 @@
 A_[ast.getSymbolName()/][/template]
 
 [template public symbolName(ast : IntegerLiteralExp, expInOcl : ExpressionInOCL)]
-[ast.defineSymbolName('I_' + ast.asIntegerStringOrNull())/][/template]
+[ast.defineSymbolName('I_' + ast.asIntegerStringOrEmpty())/][/template]
 
 [template public symbolName(ast : InvalidLiteralExp, expInOcl : ExpressionInOCL)]
 [ast.defineSymbolName('Invalid')/][/template]
@@ -48,7 +48,7 @@ L_[expInOcl.getUniqueText(ast)/][else]
 P_[expInOcl.getUniqueText(ast)/][/if][/template]
 
 [template public symbolName(ast : RealLiteralExp, expInOcl : ExpressionInOCL)]
-R_[ast.asRealStringOrNull().replaceAll('\\.', '\\_').replaceAll('\\-', '\\_')/][/template]
+R_[ast.asRealStringOrNull().replaceAll('\\.', '\\_d\\_').replaceAll('\\+', '\\_p\\_').replaceAll('\\-', '\\_m\\_')/][/template]
 
 [template public symbolName(ast : StringLiteralExp, expInOcl : ExpressionInOCL)]
 S_[expInOcl.getUniqueText(ast.stringSymbol)/][/template]
@@ -74,9 +74,7 @@ V_[expInOcl.getUniqueText(ast)/][/if][/template]
 [ast.referredVariable.symbolName(expInOcl)/][/template]
 
 [template public symbolName(ast : UnlimitedNaturalLiteralExp, expInOcl : ExpressionInOCL)]
-[let value : String = ast.asIntegerStringOrNull()]
-[if (value = null)]
+[if (ast.asIntegerStringOrEmpty() = '')]
 [ast.defineSymbolName('Unlimited')/][else]
-[ast.defineSymbolName('I_' + value)/][/if]
-[/let]
+[ast.defineSymbolName('I_' + ast.asIntegerStringOrEmpty())/][/if]
 [/template]

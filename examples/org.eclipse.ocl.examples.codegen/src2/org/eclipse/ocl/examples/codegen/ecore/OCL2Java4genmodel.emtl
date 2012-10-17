@@ -2368,6 +2368,21 @@
         <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ValueSpecification"/>
       </eAnnotations>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteralExp_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IntegerLiteralExp"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="UnlimitedNaturalLiteralExp_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//UnlimitedNaturalLiteralExp"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RealLiteralExp_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//RealLiteralExp"/>
+      </eAnnotations>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="IfExp_Class">
       <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
         <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp"/>
@@ -2458,11 +2473,6 @@
         <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//BooleanLiteralExp"/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteralExp_Class">
-      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
-        <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IntegerLiteralExp"/>
-      </eAnnotations>
-    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="InvalidLiteralExp_Class">
       <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
         <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//InvalidLiteralExp"/>
@@ -2473,11 +2483,6 @@
         <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//NullLiteralExp"/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="RealLiteralExp_Class">
-      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
-        <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//RealLiteralExp"/>
-      </eAnnotations>
-    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="StringLiteralExp_Class">
       <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
         <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//StringLiteralExp"/>
@@ -2486,11 +2491,6 @@
     <eClassifiers xsi:type="ecore:EClass" name="Variable_Class">
       <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
         <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable"/>
-      </eAnnotations>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="UnlimitedNaturalLiteralExp_Class">
-      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
-        <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//UnlimitedNaturalLiteralExp"/>
       </eAnnotations>
     </eClassifiers>
   </ecore:EPackage>

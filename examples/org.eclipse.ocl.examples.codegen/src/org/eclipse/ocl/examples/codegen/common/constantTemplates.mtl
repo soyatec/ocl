@@ -113,7 +113,7 @@ static final @NonNull Object [ast.symbolName(expInOcl)/] = createEnumerationLite
 [/template]
 
 [template protected emitConstants(ast : IntegerLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
-static final @NonNull <%IntegerValue%> [ast.symbolName(expInOcl)/] = integerValueOf([ast.integerSymbol/]);
+static final @NonNull <%IntegerValue%> [ast.symbolName(expInOcl)/] = integerValueOf([ast.integerValueOfInitializer()/]);
 [/template]
 
 [template protected emitConstants(ast : InvalidLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
@@ -173,7 +173,7 @@ static final @NonNull <%PrimitiveTypeId%> [type.symbolName(expInOcl)/] = <%TypeI
 [/template]
 
 [template protected emitConstants(ast : RealLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
-static final @NonNull <%RealValue%> [ast.symbolName(expInOcl)/] = realValueOf([ast.realSymbol/]);
+static final @NonNull <%RealValue%> [ast.symbolName(expInOcl)/] = realValueOf([ast.realValueOfInitializer()/]);
 [/template]
 
 [template protected emitConstants(ast : SequenceType, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
@@ -219,10 +219,10 @@ static final @NonNull <%TypeId%> [type.symbolName(expInOcl)/] = [type.emitQualif
 static final @NonNull Object [type.symbolName(expInOcl)/] = createTypeValue([ast.referredType.emitQualifiedLiteralName(genPackage)/]);[/template]
 
 [template protected emitConstants(ast : UnlimitedNaturalLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
-[if (ast.asIntegerStringOrNull() = null)]
+[if (ast.asIntegerStringOrEmpty() = '')]
 static final @NonNull <%UnlimitedValue%> [ast.symbolName(expInOcl)/] = UNLIMITED_VALUE;
 [else]
-static final @NonNull <%IntegerValue%> [ast.symbolName(expInOcl)/] = integerValueOf([ast.unlimitedNaturalSymbol/]);
+static final @NonNull <%IntegerValue%> [ast.symbolName(expInOcl)/] = integerValueOf([ast.integerValueOfInitializer()/]);
 [/if]
 [/template]
 

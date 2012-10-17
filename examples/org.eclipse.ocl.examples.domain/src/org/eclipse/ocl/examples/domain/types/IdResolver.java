@@ -227,6 +227,8 @@ public class IdResolver implements IdVisitor<DomainElement>
 						assessedTypeKeys = new HashSet<Object>(assessedTypeKeys);
 					}
 					assessedTypeKeys.add(anotherTypeId);
+					bestType = commonType;
+					bestTypeId = anotherTypeId;
 				}
 			}
 		}		

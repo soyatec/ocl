@@ -24,6 +24,7 @@ import java.util.Set;
 
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -146,6 +147,7 @@ public class NameQueries
 	}
 
 	public static String defineFlag(Object disambiguator, String flag) {
+		System.out.println("defineFlag " + flag + " for " + disambiguator);
 		definedFlags.add(flag);
 		return flag;
 	}
@@ -156,12 +158,12 @@ public class NameQueries
 	}
 	
 	public static String encodeName(NamedElement element) {
-		String rawEncodeName = rawEncodeName(element.getName());
+		String rawEncodeName = rawEncodeName(element.getName(), element instanceof Operation ? ((Operation)element).getOwnedParameter().size() : 0);
 		if (element instanceof Operation) {
 			int sameNames = 0;
 			int myIndex = 0;
 			for (Operation operation : ((Operation)element).getOwningType().getOwnedOperation()) {
-				String rawName = rawEncodeName(operation.getName());
+				String rawName = rawEncodeName(operation.getName(), operation.getOwnedParameter().size());
 				if (rawName.equals(rawEncodeName)) {
 					if (operation == element) {
 						myIndex = sameNames;
@@ -251,6 +253,7 @@ public class NameQueries
 					StringBuilder s = new StringBuilder();
 					appendJavaCharacters(s, operation.getOwningType().getName());
 					s.append('_');
+					int arity = operation.getOwnedParameter().size();
 					String string = operation.getName();
 					for (int i = 0; i < string.length(); i++) {
 						char c = string.charAt(i);
@@ -264,7 +267,12 @@ public class NameQueries
 							s.append("_add_");
 						}
 						else if (c == '-') {
-							s.append("_sub_");
+							if (arity == 0) {
+								s.append("_neg_");
+							}
+							else {
+								s.append("_sub_");
+							}
 						}
 						else if (c == '/') {
 							s.append("_div_");
@@ -453,8 +461,9 @@ public class NameQueries
 					appendJavaCharacters(s, variable.getName());
 					if (isUsed(s.toString())) {
 						for (int i = 1; true; i++) {
-							if (!isUsed(s.toString() + '_' + Integer.toString(i))) {
-								s.append(i);
+							String suffix = '_' + Integer.toString(i);
+							if (!isUsed(s.toString() + suffix)) {
+								s.append(suffix);
 								break;
 							}
 						}
@@ -464,14 +473,18 @@ public class NameQueries
 			};
 			uniqueVariables.put(context, allocation);			
 		}
-		return allocation.get(variable);
+		String string = allocation.get(variable);
+//		System.out.println(string + " for " + variable);
+		return string;
 	}
 
 	public static Boolean isDefinedFlag(Object disambiguator, String flag) {
-		return definedFlags.contains(flag);
+		boolean isDefined = definedFlags.contains(flag);
+		System.out.println("isDefineFlag " + flag + " = " + isDefined + " for " + disambiguator);
+		return isDefined;
 	}
 
-	public static String rawEncodeName(String name) {
+	public static String rawEncodeName(String name, Integer arity) {
 		StringBuilder s = new StringBuilder();
 //		boolean prevCharIsLower = true;
 		for (int i = 0; i < name.length(); i++) {
@@ -502,7 +515,12 @@ public class NameQueries
 				s.append("_add_");
 			}
 			else if (ch == '-') {
-				s.append("_sub_");
+				if (arity == 0) {
+					s.append("_neg_");
+				}
+				else {
+					s.append("_sub_");
+				}
 			}
 			else if (ch == '*') {
 				s.append("_mul_");
@@ -523,7 +541,17 @@ public class NameQueries
 	}
 
 	public static String resetFlags(Object elem) {
-		definedFlags.clear();
+		System.out.println("resetFlags");
+		if (elem instanceof ExpressionInOCL) {
+			definedFlags.clear();
+		}
+		else {
+			boolean hasBoxedSelf = definedFlags.contains("unboxed_self");
+			definedFlags.clear();
+			if (hasBoxedSelf) {
+				definedFlags.add("unboxed_self");
+			}
+		}
 		return "";
 	}
 

@@ -135,6 +135,9 @@ else if arity = 1 then 'BinaryOperation'
 else if arity = 2 then 'TernaryOperation'
 else 'Operation' endif endif endif/]
 
+[query public emitOperationArity(dummy : OclAny, parameters : OrderedSet(Variable)) : String = 
+dummy.emitOperationArity(parameters->size())/]
+
 [query public getSharedLibrary(genPackage : GenPackage) : String = 
 invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getSharedLibrary(org.eclipse.emf.codegen.ecore.genmodel.GenPackage)', Sequence{genPackage}) /]
 

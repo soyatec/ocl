@@ -20,6 +20,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
+import org.eclipse.ocl.examples.pivot.RealLiteralExp;
+import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
+
 public class EmitQueries
 {
 	/**
@@ -140,6 +144,32 @@ public class EmitQueries
 		return s.toString();
 	}
 	
+	public String integerValueOfInitializer(IntegerLiteralExp literal) {
+		Number number = literal.getIntegerSymbol();
+		if (number instanceof Integer) {
+			return ((Integer)number).toString();
+		}
+		else if (number instanceof Long) {
+			return ((Long)number).toString() + "L";
+		}
+		else {
+			return "\"" + number.toString() + "\"";
+		}
+	}
+	
+	public String integerValueOfInitializer(UnlimitedNaturalLiteralExp literal) {
+		Number number = literal.getUnlimitedNaturalSymbol();
+		if (number instanceof Integer) {
+			return ((Integer)number).toString();
+		}
+		else if (number instanceof Long) {
+			return ((Long)number).toString() + "L";
+		}
+		else {
+			return "\"" + number.toString() + "\"";
+		}
+	}
+	
 	/**
 	 * Replace all embedded <%xxx%> embedded import paths by shorter names and
 	 * prefix the return with correspondinbg Java import declarations.
@@ -213,4 +243,11 @@ public class EmitQueries
 		}		
 		return s.toString();
 	}
-}
+	
+	public String realValueOfInitializer(RealLiteralExp literal) {
+		Number number = literal.getRealSymbol();
+		if (number instanceof Double) {
+			return number.toString() + "d";
+		}
+		return "\"" + number.toString() + "\"";
+	}}

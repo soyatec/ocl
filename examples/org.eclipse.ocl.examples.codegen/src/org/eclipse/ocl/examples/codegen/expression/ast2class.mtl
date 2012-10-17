@@ -54,7 +54,8 @@ import org.eclipse.jdt.annotation.Nullable;
  *
 	[expInOcl.prettyPrint().trim()/]
  */[expInOcl.resetFlags()/]
-public static class [className/] extends <%Abstract[expInOcl.emitOperationArity(arity)/]%>
+@SuppressWarnings("unused")
+public class [className/] extends <%Abstract[expInOcl.emitOperationArity(expInOcl.parameterVariable)/]%>
 {
 	public static @NonNull [className/] INSTANCE = new [className/]();
 [if (expInOcl.contextVariable->notEmpty())]
@@ -62,12 +63,12 @@ public static class [className/] extends <%Abstract[expInOcl.emitOperationArity(
 [let genPackage : GenPackage = codeGenHelper.getGenPackage(pType)]
 [let constants : String = ast.gatherConstants(genPackage, expInOcl)]
 	[expInOcl.emitStatics(constants)/]
-
+	@Override
 	public @Nullable Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, final @Nullable Object [defineSymbolName(expInOcl.contextVariable, 'self')/][if expInOcl.parameterVariable->notEmpty()]
 [for (parameter : Variable | expInOcl.parameterVariable)]
 , final @Nullable Object [defineSymbolName(parameter, parameter.name)/][/for][/if]) throws Exception {
-		assert self != null;
-		final @NonNull [codeGenHelper.getEscapedName(pType)/] [expInOcl.defineFlag('unboxed_self')/] = ([codeGenHelper.getEscapedName(pType)/])self;
+//		assert self != null;
+//		final @NonNull [codeGenHelper.getEscapedName(pType)/] [expInOcl.defineFlag('unboxed_self')/] = ([codeGenHelper.getEscapedName(pType)/])self;
 		[expInOcl.emitNonStatics(constants)/]
 		[ast.emitExpression(pType, genPackage, expInOcl)/]
 		return [ast.symbolName(expInOcl)/];

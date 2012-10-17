@@ -23,8 +23,17 @@ invoke('org.eclipse.ocl.examples.codegen.common.EmitQueries', 'debug(java.lang.O
 [query public expandKnownImports(dummy : OclAny, knownImports : String, classText : String) : String =
 invoke('org.eclipse.ocl.examples.codegen.common.EmitQueries', 'expandKnownImports(java.lang.String, java.lang.String)', Sequence{knownImports, classText}) /]
 
+[query public integerValueOfInitializer(literal : IntegerLiteralExp) : String =
+invoke('org.eclipse.ocl.examples.codegen.common.EmitQueries', 'integerValueOfInitializer(org.eclipse.ocl.examples.pivot.IntegerLiteralExp)', Sequence{literal}) /]
+
+[query public integerValueOfInitializer(literal : UnlimitedNaturalLiteralExp) : String =
+invoke('org.eclipse.ocl.examples.codegen.common.EmitQueries', 'integerValueOfInitializer(org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp)', Sequence{literal}) /]
+
 [query public knownImports(dummy : OclAny) : String =
 invoke('org.eclipse.ocl.examples.codegen.common.EmitQueries', 'knownImports()', Sequence{}) /]
 
 [query public prefixImports(dummy : OclAny, knownImports : String, classText : String) : String =
 invoke('org.eclipse.ocl.examples.codegen.common.EmitQueries', 'prefixImports(java.lang.String, java.lang.String)', Sequence{knownImports, classText}) /]
+
+[query public realValueOfInitializer(literal : RealLiteralExp) : String =
+invoke('org.eclipse.ocl.examples.codegen.common.EmitQueries', 'realValueOfInitializer(org.eclipse.ocl.examples.pivot.RealLiteralExp)', Sequence{literal}) /]

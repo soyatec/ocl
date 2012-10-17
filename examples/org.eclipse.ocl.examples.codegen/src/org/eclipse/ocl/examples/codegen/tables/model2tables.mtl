@@ -208,9 +208,6 @@ public static class Parameters {[for (types : Sequence(Type) | parameterTypes->s
 [/for]}[/let][/let][/let]
 [/template]
 
-[template public declareParameterTypes2(genPackage : GenPackage, types : Sequence(Type))]
-[for (type : Type | types) separator (', ')][type.declareParameterType(genPackage)/][/for][/template]
-
 [template public declareParameterTypes(genPackage : GenPackage, types : Sequence(Type))]
 [for (type : Type | types)],
 	[type.declareParameterType(genPackage)/][/for][/template]

@@ -77,7 +77,7 @@ public class PivotQueries
 	/**
 	 * Workaround Acceleo's lack of BigInteger support
 	 */
-	public static @Nullable String asIntegerStringOrNull(@NonNull Element element) {
+	public static @Nullable String asIntegerStringOrEmpty(@NonNull Element element) {
 		if (element instanceof IntegerLiteralExp) {
 			return element.toString();
 		}
@@ -87,7 +87,7 @@ public class PivotQueries
 				return element.toString();
 			}
 		}
-		return null;
+		return "";
 	}
 	
 	/**
