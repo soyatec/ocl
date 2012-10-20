@@ -102,7 +102,7 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 					Property prop = PivotFactory.eINSTANCE.createProperty();
 					prop.setName(part.getName());
 					prop.setType(resolveUnderspecifiedType(DomainUtil.nonNullModel(part.getType())));
-					resolvedProperties.add(part);
+					resolvedProperties.add(prop);
 				}
 				else {
 					resolvedProperties.add(part);
