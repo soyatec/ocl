@@ -34,10 +34,6 @@ public class CodeGenHelper
 	/**
 	 * Return the <%...%> escaped name for a type.
 	 */
-	public static @NonNull String getEscapedName(@NonNull CodeGenHelper codeGenHelper, @NonNull Type type) {
-		return codeGenHelper.getEscapedName(type);
-	}
-	
 	public LibraryOperation loadClass(ExpressionInOCL query, File targetFolder,
 			String packageName, String className, boolean saveSource) throws Exception {
 		throw new UnsupportedOperationException();
@@ -51,10 +47,6 @@ public class CodeGenHelper
 	}
 
 	protected @NonNull String getCopyright(@NonNull String indentation) {
-		throw new UnsupportedOperationException();
-	}
-	
-	protected @NonNull String getEscapedName(@NonNull Type type) {
 		throw new UnsupportedOperationException();
 	}
 	

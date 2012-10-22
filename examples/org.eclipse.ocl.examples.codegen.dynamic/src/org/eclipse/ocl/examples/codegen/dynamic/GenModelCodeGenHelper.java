@@ -30,9 +30,11 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClassifier;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
@@ -40,6 +42,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.common.CodeGenHelper;
 import org.eclipse.ocl.examples.codegen.expression.Ast2class;
 import org.eclipse.ocl.examples.domain.library.LibraryOperation;
+import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -68,6 +71,7 @@ public class GenModelCodeGenHelper extends CodeGenHelper
 	}
 
 	private static WeakReference<Ast2class> ast2classRef = null;
+	private static ProjectMap projectMap = null;
 
 	protected final @NonNull MetaModelManager metaModelManager;
 	private @NonNull Map<EPackage, GenPackage> ePackageMap = new HashMap<EPackage, GenPackage>();
@@ -75,7 +79,7 @@ public class GenModelCodeGenHelper extends CodeGenHelper
 	private @NonNull Map<EClassifier, GenClassifier> eClassifierMap = new HashMap<EClassifier, GenClassifier>();
 	private Ast2class ast2class = null;
 	
-	public GenModelCodeGenHelper(@NonNull GenModel genModel, @NonNull MetaModelManager metaModelManager) {
+	public GenModelCodeGenHelper(@NonNull GenModel genModel, @NonNull MetaModelManager metaModelManager) throws IOException {
 		this.metaModelManager = metaModelManager;
 		for (GenPackage genPackage : genModel.getGenPackages()) {
 			assert genPackage != null;
@@ -89,13 +93,8 @@ public class GenModelCodeGenHelper extends CodeGenHelper
 			ast2class = ast2classRef.get();
 		}
 		if (ast2class == null) {
-			try {
-				ast2class = new OCL2JavaTransformation();
-				ast2classRef = new WeakReference<Ast2class>(ast2class);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			ast2class = new OCL2JavaTransformation();
+			ast2classRef = new WeakReference<Ast2class>(ast2class);
 		}
 	}
 
@@ -123,18 +122,6 @@ public class GenModelCodeGenHelper extends CodeGenHelper
 		return "";
 	}
 	
-	protected @NonNull String getEscapedName(@NonNull Type type) {
-		GenPackage genPackage = getGenPackage(type);
-		GenClass genClass = getGenClass(genPackage, type);
-		if (genClass != null) {
-			return "<%" + genClass.getQualifiedInterfaceName() + "%>";
-		}
-		if (type == metaModelManager.getOclAnyType()) {
-			return "Object";
-		}
-		throw new UnsupportedOperationException();
-	}
-	
 	public @Nullable GenClass getGenClass(@NonNull GenPackage genPackage, @NonNull Type type) {
 		String name = type.getName();
 		for (GenClass genClass : genPackage.getGenClasses()) {
@@ -157,6 +144,30 @@ public class GenModelCodeGenHelper extends CodeGenHelper
 		}
 		if (OCLstdlibPackage.eNS_URI.equals(nsURI)) {		// FIXME regularize
 			genPackage = uriMap.get(PivotPackage.eNS_URI);
+			if (genPackage != null) {
+				return genPackage;
+			}
+		}
+		ResourceSet externalResourceSet = metaModelManager.getExternalResourceSet();
+		projectMap = ProjectMap.getAdapter(externalResourceSet);
+		if (projectMap == null) {
+			projectMap = new ProjectMap();
+			projectMap.initializeGenModelLocationMap(false);
+		}
+		URI uri = EcorePlugin.getEPackageNsURIToGenModelLocationMap().get(nsURI);
+		if (uri != null) {
+			Resource resource = externalResourceSet.getResource(uri, true);
+			for (EObject eObject : resource.getContents()) {
+				if (eObject instanceof GenModel) {
+					for (GenPackage genPackage2 : ((GenModel)eObject).getGenPackages()) {
+						assert genPackage2 != null;
+						install(genPackage2);
+					}
+				}
+			}
+		}
+		genPackage = uriMap.get(nsURI);
+		if (nsURI != null) {
 			if (genPackage != null) {
 				return genPackage;
 			}

@@ -45,21 +45,15 @@ public class OCL2JavaFileObject extends SimpleJavaFileObject
 		DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<JavaFileObject>();
 		CompilationTask compilerTask = compiler.getTask(null, stdFileManager,
 				diagnostics, compilationOptions, null, compilationUnits);
-		boolean status = compilerTask.call();
-
-		if (!status) {// If compilation error occurs
-			/* Iterate through each compilation problem and print it */
+		if (!compilerTask.call()) {
+			StringBuilder s = new StringBuilder();
+			s.append("Failed to compile " + qualifiedName);
 			for (Diagnostic<?> diagnostic : diagnostics.getDiagnostics()) {
-				System.out.format("Error on line %d in %s",
-						diagnostic.getLineNumber(), diagnostic);
+				s.append("\n" + diagnostic);
 			}
+			throw new IOException(s.toString());
 		}
-		try {
-			stdFileManager.close();// Close the file manager
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		stdFileManager.close();		// Close the file manager which re-opens automatically
 		Class<?> testClass = Class.forName(qualifiedName);
 		Field testField = testClass.getField("INSTANCE");
 		return (LibraryOperation) testField.get(null);

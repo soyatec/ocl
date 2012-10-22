@@ -521,11 +521,11 @@ public abstract class PivotTestSuite extends PivotTestCase
 //			if (!ValuesUtil.isInvalid(value)) {
 				fail(expression + " expected: invalid but was: " + value);
 //			}
-		} catch (InvalidValueException e) {
+//		} catch (InvalidValueException e) {
 //			assertEquals("Invalid Value Reason", reason, e.getMessage());
 //			assertEquals("Invalid Value Throwable", exceptionClass, e.getCause().getClass());
 		} catch (Exception e) {
-			failOn(expression, e);
+//			failOn(expression, e);
 		}
 		return null;
 	}
@@ -634,7 +634,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 */
 	protected Object assertQueryResults(Object context, String expectedResultExpression, String expression) {
 		try {
-			Object expectedResultQuery = evaluate(helper, context, expectedResultExpression);
+			Object expectedResultQuery = evaluateLocal(helper, context, expectedResultExpression);
 			Object result = assertQueryEquals(context, expectedResultQuery, expression);
 			return result;
 		} catch (Exception e) {
@@ -681,7 +681,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 */
 	protected Object assertResultContainsAll(Object context, String expectedResultExpression, String expression) {
 		try {
-			Object expectedResultQuery = evaluate(helper, null, expectedResultExpression);
+			Object expectedResultQuery = evaluateLocal(helper, null, expectedResultExpression);
 			assertTrue(expectedResultQuery instanceof CollectionValue);
 			Object result = assertResultContainsAll(context, (CollectionValue) expectedResultQuery, expression);
 			return result;
@@ -1091,20 +1091,24 @@ public abstract class PivotTestSuite extends PivotTestCase
 	protected Object evaluate(OCLHelper aHelper, Object context, String expression) throws Exception {
 		setHelperContext(aHelper, context);
 		ExpressionInOCL query = aHelper.createQuery(expression);
-//        @SuppressWarnings("unused")
-//		String s = query.toString();
         try {
-//        	return ocl.evaluate(context, query);
         	return evaluate(query, context);
-//        } catch (Exception e) {
-//			fail("Evaluation failed: " + e.getLocalizedMessage());
-//			return null;
+		} finally {
+			metaModelManager.getPivotResourceSet().getResources().remove(query.eResource());
+		}
+    }
+
+	protected Object evaluateLocal(OCLHelper aHelper, Object context, String expression) throws Exception {
+		setHelperContext(aHelper, context);
+		ExpressionInOCL query = aHelper.createQuery(expression);
+        try {
+    		return ocl.evaluate(context, query);
 		} finally {
 			metaModelManager.getPivotResourceSet().getResources().remove(query.eResource());
 		}
     }
 	
-	@Deprecated
+/*	@Deprecated
 	protected Object evaluate(ExpressionInOCL expr) {
 		try {
 			return evaluate(expr, null);
@@ -1112,7 +1116,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 			fail("Evaluation failed: " + e.getLocalizedMessage());
 			return null;
 		}
-	}
+	} */
     
 	protected Object evaluate(ExpressionInOCL expr, Object self) throws Exception {
 		Object result = null;
@@ -1160,7 +1164,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		return feature;
 	}
 
-	public CodeGenHelper getCodeGenHelper(@NonNull MetaModelManager metaModelManager) {
+	public CodeGenHelper getCodeGenHelper(@NonNull MetaModelManager metaModelManager) throws IOException {
 		URI genModelURI = URI.createPlatformResourceURI(
 				"/org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel",
 				true);
