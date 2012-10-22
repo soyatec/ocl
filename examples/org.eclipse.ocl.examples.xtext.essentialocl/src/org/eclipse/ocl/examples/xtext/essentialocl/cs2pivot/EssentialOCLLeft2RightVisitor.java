@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.Metaclass;
@@ -785,6 +786,16 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 		if (templateSignature != null) {
 			for (TemplateParameter templateParameter : templateSignature.getOwnedParameter()) {
 				templateBindings.put(templateParameter, null);
+			}
+		}
+		String implementationClass = operation.getImplementationClass();
+		if ((implementationClass != null) && implementationClass.equals(CollectionFlattenOperation.class.getName())) {	// FIXME Use Tree(T) to make this modellable
+			Type elementType = sourceType;
+			while (elementType instanceof CollectionType) {
+				elementType = ((CollectionType)elementType).getElementType();
+			}
+			if (elementType != null) {
+				templateBindings.put(operation.getOwnedTemplateSignature().getOwnedParameter().get(0), elementType);
 			}
 		}
 		@SuppressWarnings("unused")		// Should never happen; just for debugging
