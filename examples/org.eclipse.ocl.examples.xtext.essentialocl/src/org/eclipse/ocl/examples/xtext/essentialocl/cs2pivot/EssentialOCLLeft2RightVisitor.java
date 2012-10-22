@@ -889,7 +889,17 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 			PropertyCallExp innerExpression = context.refreshModelElement(PropertyCallExp.class, PivotPackage.Literals.PROPERTY_CALL_EXP, csNameExp);
 			if (innerExpression != null) {
 				innerExpression.setReferredProperty(property);
-				context.setBehavioralType(innerExpression, property);		// FIXME resolve template parameter		
+				Map<TemplateParameter, ParameterableElement> templateBindings = new HashMap<TemplateParameter, ParameterableElement>();
+				Type sourceType = source.getType();
+				if (sourceType != null) {
+					if (property.isStatic() && (sourceType instanceof Metaclass)) {
+						sourceType = ((Metaclass)sourceType).getInstanceType();
+					}
+					templateBindings.put(null, sourceType);		// Use the null key to pass OclSelf without creating an object
+				}
+				PivotUtil.getAllTemplateParameterSubstitutions(templateBindings, sourceType);
+				Type returnType = metaModelManager.getSpecializedType(PivotUtil.getBehavioralType(property), templateBindings);
+				context.setType(innerExpression, returnType);
 				outerExpression = resolveNavigationFeature(csNameExp, source, property, innerExpression);
 				if (outerExpression != innerExpression) {
 					resolveOperationReturnType(outerExpression);
