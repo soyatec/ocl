@@ -201,7 +201,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 
 	protected PivotTestSuite() {
 		this.useCodeGen = false;
-		System.out.println(getName());
+//		System.out.println(getName());
 	}
 
 	protected PivotTestSuite(boolean useCodeGen) {
@@ -561,8 +561,8 @@ public abstract class PivotTestSuite extends PivotTestCase
 				assertEquals("Invalid Value Throwable", exceptionClass, ex.getClass());
 			}
 		} catch (Exception e) {
-			if (exceptionClass != null) {
-				assertEquals("Invalid Value Throwable", exceptionClass, e.getClass());
+			if ((exceptionClass != null) && (exceptionClass != e.getClass())) {
+				assertEquals("Invalid Value Throwable", exceptionClass, e.getMessage());
 			}
 			if (reason != null) {
 				assertEquals("Invalid Value Reason", reason, e.getMessage());
@@ -1134,9 +1134,11 @@ public abstract class PivotTestSuite extends PivotTestCase
 				CodeGenHelper genModelHelper = getCodeGenHelper(metaModelManager);
 
 				File targetFolder = new File("src-gen");
-				String packageName = "test_package";			// FIXME need to create this
+				targetFolder.mkdir();
+				String packageName = getTestPackageName();			// FIXME need to create this
 				String className = "TestClass" + testCounter++;
-				
+				File dir = new File(targetFolder, packageName);
+				dir.mkdir();
 				LibraryOperation testInstance = genModelHelper.loadClass(expr, targetFolder, packageName, className, true);
 				DomainEvaluator evaluator = new EcoreExecutorManager(metaModelManager.getOclAnyType(), PivotTables.LIBRARY);
 				OperationCallExp callExp = PivotFactory.eINSTANCE.createOperationCallExp();
@@ -1223,6 +1225,10 @@ public abstract class PivotTestSuite extends PivotTestCase
 	
 	protected DomainStandardLibrary getOCLStandardLibrary() {
 		return ocl.getEnvironment().getOCLStandardLibrary();
+	}
+
+	protected String getTestPackageName() {
+		return "test_package";
 	}
 	
 	protected DomainType getUMLBoolean() {

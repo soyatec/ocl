@@ -44,6 +44,11 @@ public class EvaluateBooleanOperationsTest4 extends PivotTestSuite
 		super(useCodeGen);
 	}
 
+	@Override
+	protected String getTestPackageName() {
+		return "EvaluateBooleanOperations";
+	}
+
     @Override
     @Before public void setUp() throws Exception {
         super.setUp();

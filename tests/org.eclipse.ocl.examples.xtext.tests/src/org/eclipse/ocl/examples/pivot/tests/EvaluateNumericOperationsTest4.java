@@ -52,6 +52,11 @@ public class EvaluateNumericOperationsTest4 extends PivotTestSuite
 	public EvaluateNumericOperationsTest4(boolean useCodeGen) {
 		super(useCodeGen);
 	}
+
+	@Override
+	protected String getTestPackageName() {
+		return "EvaluateNumericOperations";
+	}
 	
     @Override
     @Before public void setUp() throws Exception {

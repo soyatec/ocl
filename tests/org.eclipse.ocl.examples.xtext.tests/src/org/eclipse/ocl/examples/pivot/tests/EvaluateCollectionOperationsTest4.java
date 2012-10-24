@@ -47,6 +47,11 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 		super(useCodeGen);
 	}
 
+	@Override
+	protected String getTestPackageName() {
+		return "EvaluateCollectionOperations";
+	}
+
     @Override
     @Before public void setUp() throws Exception {
         super.setUp();
@@ -286,6 +291,16 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 		assertQueryEquals(null, 2, "Bag{3, null, 4.0, null, 'test'}->count(null)");
 		assertQueryEquals(null, 1, "Set{3, null, 4.0, null, 'test'}->count(null)");
 		assertQueryEquals(null, 1, "OrderedSet{3, null, 4.0, null, 'test'}->count(null)");
+	}
+
+	@Test public void testCollectionElementType() {
+		assertQueryEquals(null, metaModelManager.getOclAnyType(), "Sequence{1, 2.0, '3'}->oclType().elementType");
+		assertQueryEquals(null, metaModelManager.getUnlimitedNaturalType(), "Sequence{1, 2, 3}->oclType().elementType");
+		assertQueryEquals(null, metaModelManager.getUnlimitedNaturalType(), "Sequence{1, 2, 3}->oclAsType(Collection(Real))->oclType().elementType");
+// FIXME fails because common type is Set(T) and then because T is not type-servable and has no OclAny inheritance
+//		assertQueryEquals(null, metaModelManager.getSetType(), "Sequence{Set{1}, Set{2.0}, Set{'3'}}->elementType");
+// FIXME fails because common type is inadequate for implicit collect
+//				assertQueryEquals(null, metaModelManager.getOclAnyType(), "Sequence{Set{1}, Set{2.0}, Set{'3'}}.elementType");
 	}
 
 	@Test public void testCollectionEqual() {		
@@ -1069,16 +1084,6 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 		assertQueryNull(null, "OrderedSet{null}->last()");
 	}
 
-	@Test public void testCollectionElementType() {
-		assertQueryEquals(null, metaModelManager.getOclAnyType(), "Sequence{1, 2.0, '3'}->oclType().elementType");
-		assertQueryEquals(null, metaModelManager.getUnlimitedNaturalType(), "Sequence{1, 2, 3}->oclType().elementType");
-		assertQueryEquals(null, metaModelManager.getUnlimitedNaturalType(), "Sequence{1, 2, 3}->oclAsType(Collection(Real))->oclType().elementType");
-// FIXME fails because common type is Set(T) and then because T is not type-servable and has no OclAny inheritance
-//		assertQueryEquals(null, metaModelManager.getSetType(), "Sequence{Set{1}, Set{2.0}, Set{'3'}}->elementType");
-// FIXME fails because common type is inadequate for implicit collect
-//				assertQueryEquals(null, metaModelManager.getOclAnyType(), "Sequence{Set{1}, Set{2.0}, Set{'3'}}.elementType");
-	}
-
 	@Test public void testCollectionLower() {
 		assertQueryEquals(null, 0, "Sequence{1, 2.0, '3'}->oclType().lower");
 		assertQueryEquals(null, 0, "Sequence{1, 2.0, 3}->oclAsType(Collection(Real))->oclType().lower");
@@ -1403,7 +1408,17 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 	}
 
 	@Test public void testCollectionReverse() {
-		// FIXME Test-not-implemented
+		assertQueryInvalid(null, "Bag{1,3,null,2}->reverse()");
+		assertQueryResults(null, "OrderedSet{}", "OrderedSet{}->reverse()");
+		assertQueryResults(null, "OrderedSet{null}", "OrderedSet{null}->reverse()");
+		assertQueryResults(null, "OrderedSet{2,1}", "OrderedSet{1,2}->reverse()");
+		assertQueryResults(null, "OrderedSet{'a','b'}", "OrderedSet{'b','a'}->reverse()");
+		assertQueryResults(null, "OrderedSet{}", "OrderedSet{}->reverse()");
+		assertQueryResults(null, "OrderedSet{21,20,19,18,17,16,13,24,23,22,15,14,12,11,10,9,null,8,7,6,5,4,3,2,1}", "OrderedSet{1..4,3..8,null,9..12,14..15,4,22..24,13..21}->reverse()");
+		assertQueryResults(null, "Sequence{2,null,3,1}", "Sequence{1,3,null,2}->reverse()");
+		assertQueryResults(null, "Sequence{21,20,19,18,17,16,15,14,13,24,23,22,4,15,14,12,11,10,9,null,8,7,6,5,4,3,4,3,2,1}", "Sequence{1..4,3..8,null,9..12,14..15,4,22..24,13..21}->reverse()");
+		assertQueryResults(null, "Sequence{Set{1..3},Sequence{1..3},OrderedSet{1,3},Bag{1,1,1}}", "Sequence{Bag{1,1,1},OrderedSet{1,3},Sequence{1..3},Set{1..3}}->reverse()");
+		assertQueryInvalid(null, "Set{}->reverse()");
 	}
 
 	@Test public void testCollectionSelectByKind() {

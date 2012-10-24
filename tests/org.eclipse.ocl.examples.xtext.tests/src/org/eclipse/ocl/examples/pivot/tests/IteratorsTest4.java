@@ -31,7 +31,11 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
@@ -83,6 +87,11 @@ public class IteratorsTest4 extends PivotTestSuite
 	org.eclipse.ocl.examples.pivot.Package jim;
 	org.eclipse.ocl.examples.pivot.Package bob;
 	org.eclipse.ocl.examples.pivot.Package george;
+
+	@Override
+	protected String getTestPackageName() {
+		return "Iterators";
+	}
 
     @Override
     @Before public void setUp() throws Exception {
@@ -650,11 +659,11 @@ public class IteratorsTest4 extends PivotTestSuite
      */
     @Test public void test_sortedBy_invalidBody_142518() {
         assertQueryInvalid(EcorePackage.eINSTANCE,
-            "let s : String = null in Bag{1, 2, 3}->sortedBy(s.size())");
+            "let s : String = null in Bag{1, 2, 3}->sortedBy(s.size())", DomainUtil.bind(EvaluatorMessages.TypedValueRequired, TypeId.STRING_NAME, ValuesUtil.getTypeName(null)), InvalidValueException.class);
 
         // same deal for null values
         assertQueryInvalid(EcorePackage.eINSTANCE,
-            "Bag{1, 2, 3}->sortedBy(null.oclAsType(Integer))");
+            "Bag{1, 2, 3}->sortedBy(null.oclAsType(Integer))", DomainUtil.bind(EvaluatorMessages.UndefinedBody, "sortedBy"), InvalidValueException.class);
 
     }
 
