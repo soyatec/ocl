@@ -155,9 +155,6 @@ if (acc_[astName/].includes([astName/]_bodyVal) == TRUE_VALUE) {
 	[astName/] = FALSE_VALUE;		// Abort after second find
 	break;
 }
-else if ([astName/]_bodyVal == null) {
-	throw new <%InvalidValueException%>(<%EvaluatorMessages%>.UndefinedBody, "isUnique");
-}
 else {
 	acc_[astName/].add([astName/]_bodyVal);
 }[/let][/template]

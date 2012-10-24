@@ -674,11 +674,11 @@ public class IteratorsTest4 extends PivotTestSuite
     @Test public void test_iterateWithNullSource_143996() {
         assertQueryInvalid(pkg1,
             "let e : Collection(ocl::Package) = null in e->iterate(" +
-                "p : ocl::Package; s : String = '' | s.concat(p.name))");
+                "p : ocl::Package; s : String = '' | s.concat(p.name))", DomainUtil.bind(EvaluatorMessages.TypedValueRequired, TypeId.COLLECTION_NAME, ValuesUtil.getTypeName(null)), InvalidValueException.class);
 
         assertQueryInvalid(pkg1,
             "let e : Collection(ocl::Package) = invalid in e->iterate(" +
-                "p : ocl::Package; s : String = '' | s.concat(p.name))");
+                "p : ocl::Package; s : String = '' | s.concat(p.name))", EvaluatorMessages.InvalidLiteral, InvalidValueException.class);
     }
 
     /**
@@ -688,11 +688,11 @@ public class IteratorsTest4 extends PivotTestSuite
     @Test public void test_existsWithNullSource_143996() {
     	assertQueryInvalid(pkg1,
             "let e : Collection(ocl::Package) = null in e->exists(" +
-                "p : ocl::Package | p.name = 'bob')");
+                "p : ocl::Package | p.name = 'bob')", DomainUtil.bind(EvaluatorMessages.TypedValueRequired, TypeId.COLLECTION_NAME, ValuesUtil.getTypeName(null)), InvalidValueException.class);
 
     	assertQueryInvalid(pkg1,
             "let e : Collection(ocl::Package) = invalid in e->exists(" +
-                "p : ocl::Package | p.name = 'bob')");
+                "p : ocl::Package | p.name = 'bob')", EvaluatorMessages.InvalidLiteral, InvalidValueException.class);
     }
 
     /**

@@ -432,7 +432,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 
 	@Override
     public Object visitInvalidLiteralExp(@NonNull InvalidLiteralExp invalidLiteralExp) {
-		throw new InvalidValueException("Invalid Literal", invalidLiteralExp);
+		throw new InvalidValueException(EvaluatorMessages.InvalidLiteral, invalidLiteralExp);
 	}
 
 	/**
