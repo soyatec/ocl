@@ -63,7 +63,7 @@ U_[expInOcl.getUniqueText(ast)/][/template]
 T_[expInOcl.getUniqueText(ast)/][/template]
 
 [template public symbolName(ast : TypeExp, expInOcl : ExpressionInOCL)]
-[ast.type.symbolName(expInOcl)/][/template]
+Te_[expInOcl.getUniqueText(ast.type)/][/template]
 
 [template public symbolName(ast : Variable, expInOcl : ExpressionInOCL)]
 [if ast.eContainer().oclIsKindOf(ExpressionInOCL)]

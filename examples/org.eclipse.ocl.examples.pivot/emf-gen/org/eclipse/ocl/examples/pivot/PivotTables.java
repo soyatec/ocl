@@ -28,6 +28,7 @@ import org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumeration;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumerationLiteral;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorType;
+import org.eclipse.ocl.examples.library.ecore.EcoreExecutorVoidType;
 import org.eclipse.ocl.examples.library.ecore.EcoreLibraryOppositeProperty;
 import org.eclipse.ocl.examples.library.ecore.EcoreLibraryProperty;
 import org.eclipse.ocl.examples.library.executor.ExecutorFragment;
@@ -138,7 +139,7 @@ public class PivotTables
 	    public static final @NonNull EcoreExecutorType _OclSummable = new EcoreExecutorType("OclSummable", PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _OclTuple = new EcoreExecutorType("OclTuple", PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _OclType = new EcoreExecutorType("OclType", PACKAGE, 0);
-	    public static final @NonNull EcoreExecutorType _OclVoid = new EcoreExecutorType(TypeId.OCL_VOID, PACKAGE, 0);
+	    public static final @NonNull EcoreExecutorType _OclVoid = new EcoreExecutorVoidType(TypeId.OCL_VOID, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _OpaqueExpression = new EcoreExecutorType(PivotPackage.Literals.OPAQUE_EXPRESSION, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _Operation = new EcoreExecutorType(PivotPackage.Literals.OPERATION, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _OperationCallExp = new EcoreExecutorType(PivotPackage.Literals.OPERATION_CALL_EXP, PACKAGE, 0);

@@ -56,6 +56,7 @@ public class EmitQueries
 	 */
 	private static final Class<?>[] knownClasses = {
 		java.util.Iterator.class,
+		org.eclipse.ocl.examples.domain.elements.DomainElement.class,
 		org.eclipse.ocl.examples.domain.elements.DomainMetaclass.class,
 		org.eclipse.ocl.examples.domain.elements.DomainCollectionType.class,
 		org.eclipse.ocl.examples.domain.elements.DomainParameterTypes.class,
@@ -104,6 +105,7 @@ public class EmitQueries
 		org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager.class,
 		org.eclipse.ocl.examples.library.ecore.EcoreExecutorPackage.class,
 		org.eclipse.ocl.examples.library.ecore.EcoreExecutorType.class,
+		org.eclipse.ocl.examples.library.ecore.EcoreExecutorVoidType.class,
 		org.eclipse.ocl.examples.library.executor.ExecutorDoubleIterationManager.class,
 		org.eclipse.ocl.examples.library.executor.ExecutorFragment.class,
 		org.eclipse.ocl.examples.library.executor.ExecutorLambdaType.class,
@@ -170,13 +172,13 @@ public class EmitQueries
 		}
 		else if (value instanceof RealValue) {
 			RealLiteralExp result = PivotFactory.eINSTANCE.createRealLiteralExp();
-			result.setRealSymbol(((RealValue)value).bigDecimalValue());	// FIXME use Number
+			result.setRealSymbol(((RealValue)value).asNumber());
 			result.setType(metaModelManager.getRealType());
 			return result;
 		}
 		else if (value instanceof IntegerValue) {
 			IntegerLiteralExp result = PivotFactory.eINSTANCE.createIntegerLiteralExp();
-			result.setIntegerSymbol(((IntegerValue)value).bigIntegerValue());	// FIXME use Number
+			result.setIntegerSymbol(((IntegerValue)value).asNumber());
 			result.setType(metaModelManager.getIntegerType());
 			return result;
 		}
@@ -242,8 +244,11 @@ public class EmitQueries
 		else if (number instanceof Long) {
 			 value = ValuesUtil.integerValueOf(number.longValue());
 		}
-		else {
+		else if (number instanceof BigInteger) {
 			 value = ValuesUtil.integerValueOf((BigInteger)number);
+		}
+		else {
+			 return "\"\"";
 		}
 		if (value instanceof IntIntegerValueImpl) {
 			return value.toString();

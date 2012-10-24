@@ -89,6 +89,11 @@ public class IntIntegerValueImpl extends IntegerValueImpl
 		@SuppressWarnings("null") @NonNull Integer result = Integer.valueOf(value);
 		return result;
 	}
+	
+	@SuppressWarnings("null")
+	public @NonNull Number asNumber() {
+		return Integer.valueOf(value);
+	}
 
 	public @NonNull Object asObject() {
 		@SuppressWarnings("null") @NonNull Integer result = Integer.valueOf(value);

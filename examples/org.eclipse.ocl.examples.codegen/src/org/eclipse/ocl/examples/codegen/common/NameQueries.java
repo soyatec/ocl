@@ -147,7 +147,7 @@ public class NameQueries
 	}
 
 	public static String defineFlag(Object disambiguator, String flag) {
-		System.out.println("defineFlag " + flag + " for " + disambiguator);
+//		System.out.println("defineFlag " + flag + " for " + disambiguator);
 		definedFlags.add(flag);
 		return flag;
 	}
@@ -480,7 +480,7 @@ public class NameQueries
 
 	public static Boolean isDefinedFlag(Object disambiguator, String flag) {
 		boolean isDefined = definedFlags.contains(flag);
-		System.out.println("isDefineFlag " + flag + " = " + isDefined + " for " + disambiguator);
+//		System.out.println("isDefineFlag " + flag + " = " + isDefined + " for " + disambiguator);
 		return isDefined;
 	}
 

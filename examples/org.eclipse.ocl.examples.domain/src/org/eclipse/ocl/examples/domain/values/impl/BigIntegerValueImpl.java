@@ -63,6 +63,10 @@ public class BigIntegerValueImpl extends IntegerValueImpl
 		@SuppressWarnings("null") @NonNull Integer result = Integer.valueOf(intValue());
 		return result;
 	}
+	
+	public @NonNull Number asNumber() {
+		return value;
+	}
 
 	public @NonNull Object asObject() {
 		return value;

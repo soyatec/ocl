@@ -100,6 +100,10 @@ public class RealValueImpl extends ValueImpl implements RealValue
 		@SuppressWarnings("null") @NonNull Double result = value.doubleValue();
 		return result;
 	}
+	
+	public @NonNull Number asNumber() {
+		return value;
+	}
 
 	public @NonNull Object asObject() {
 		return value;

@@ -83,6 +83,11 @@ public class LongIntegerValueImpl extends IntegerValueImpl
 		@SuppressWarnings("null") @NonNull Integer result = Integer.valueOf(intValue());
 		return result;
 	}
+	
+	@SuppressWarnings("null")
+	public @NonNull Number asNumber() {
+		return Long.valueOf(value);
+	}
 
 	public @NonNull Object asObject() {
 		@SuppressWarnings("null") @NonNull Long result = Long.valueOf(value);
