@@ -18,6 +18,8 @@ package org.eclipse.ocl.examples.build.utilities;
 
 import java.util.Set;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Namespace;
@@ -39,10 +41,10 @@ public class TextilePrettyPrinter
 	{
 		public Expr() {}
 
-		public String prettyPrint(Visitable element, Namespace scope) {
+		public String prettyPrint(@NonNull Visitable element, @Nullable Namespace scope) {
 			return prettyPrint((Element)element, scope);
 		}
-		public String prettyPrint(Element element, Namespace scope) {
+		public @NonNull String prettyPrint(@NonNull Element element, @Nullable Namespace scope) {
 			PrettyPrintOptions options = createOptions(scope);
 //			PrettyPrintExprVisitor visitor = new PrettyPrintExprVisitor(options);
 			PrettyPrinter printer = PrettyPrinter.createPrinter(element, options);
@@ -63,10 +65,10 @@ public class TextilePrettyPrinter
 	{
 		public Name() {}
 		
-		public String prettyPrint(Visitable element, Namespace scope) {
+		public @NonNull String prettyPrint(@NonNull Visitable element, @Nullable Namespace scope) {
 			return prettyPrint((Element)element, scope);
 		}
-		public String prettyPrint(Element element, Namespace scope) {
+		public @NonNull String prettyPrint(@NonNull Element element, @Nullable Namespace scope) {
 			PrettyPrintOptions options = createOptions(scope);
 			PrettyPrinter printer = PrettyPrinter.createNamePrinter(element, options);
 			try {
@@ -80,26 +82,36 @@ public class TextilePrettyPrinter
 				return printer.toString() + " ... " + e.getClass().getName() + " - " + e.getLocalizedMessage();
 			}
 		}
-		public Markup decode(Comment comment, Namespace scope) {
-			IParseResult parseResult = MarkupUtils.decode(comment.getBody());
+		public Markup decode(@NonNull Comment comment, @Nullable Namespace scope) {
+			String body = comment.getBody();
+			if (body == null) {
+				throw new NullPointerException("Missing Comment body");
+			}
+			IParseResult parseResult = MarkupUtils.decode(body);
+			if (parseResult == null) {
+				throw new NullPointerException("Missing ParseResult for \"" + body + "\"");
+			}
 			Markup markup = (Markup) parseResult.getRootASTElement();
 			for (INode parseError : parseResult.getSyntaxErrors()) {
 				System.out.println(parseError);
+			}
+			if (markup == null) {
+				throw new NullPointerException("Missing prsed content for \"" + body + "\"");
 			}
 			return markup;
 		}
 	}
 
-	public static PrettyPrintOptions.Global createOptions(Namespace scope) {
+	public static @NonNull PrettyPrintOptions.Global createOptions(@Nullable Namespace scope) {
 		PrettyPrintOptions.Global options = new PrettyPrintOptions.Global(scope)
 		{
 			@Override
-			public Set<String> getReservedNames() {
+			public @Nullable Set<String> getReservedNames() {
 				return null;
 			}
 
 			@Override
-			public Set<String> getRestrictedNames() {
+			public @Nullable Set<String> getRestrictedNames() {
 				return null;
 			}			
 		};

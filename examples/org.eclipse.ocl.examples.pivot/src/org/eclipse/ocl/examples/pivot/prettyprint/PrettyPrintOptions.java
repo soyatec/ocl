@@ -37,19 +37,19 @@ public abstract class PrettyPrintOptions
 	 */
 	public static class Global extends PrettyPrintOptions
 	{
-		private String indentStep = "  ";
+		private @NonNull String indentStep = "  ";
 		private int linelength = Integer.MAX_VALUE;
 		private final @NonNull Set<String> reservedNames = new HashSet<String>();
 		private final @NonNull Set<String> restrictedNames = new HashSet<String>();
 		private @NonNull Map<Namespace, String> namespace2alias = new HashMap<Namespace, String>();
-		private URI baseURI = null;
+		private @Nullable URI baseURI = null;
 		private @Nullable MetaModelManager metaModelManager = null;
 		
-		public Global(Namespace scope) {
+		public Global(@Nullable Namespace scope) {
 			super(scope);
 		}
 		
-		public void addAliases(@NonNull Namespace  namespace, @NonNull String alias) {
+		public void addAliases(@NonNull Namespace namespace, @NonNull String alias) {
 			namespace2alias.put(namespace, alias);
 		}
 		
@@ -74,7 +74,7 @@ public abstract class PrettyPrintOptions
 		}
 
 		@Override
-		public URI getBaseURI() {
+		public @Nullable URI getBaseURI() {
 			return baseURI;
 		}
 
@@ -84,7 +84,7 @@ public abstract class PrettyPrintOptions
 		}
 
 		@Override
-		public String getIndentStep() {
+		public @NonNull String getIndentStep() {
 			return indentStep;
 		}
 
@@ -117,12 +117,12 @@ public abstract class PrettyPrintOptions
 			this.namespace2alias = namespace2alias;
 		}
 
-		public void setBaseURI(URI baseURI) {
-			this.baseURI  = baseURI;
+		public void setBaseURI(@Nullable URI baseURI) {
+			this.baseURI = baseURI;
 		}
 
 		@Override
-		public void setIndentStep(String indentStep) {
+		public void setIndentStep(@NonNull String indentStep) {
 			this.indentStep = indentStep;
 		}
 
@@ -210,7 +210,7 @@ public abstract class PrettyPrintOptions
 	/**
 	 * Return a name to be used when referencing element as the first element in a qualified name.
 	 */
-	public String getAlias(@NonNull Namespace namespace) {
+	public @Nullable String getAlias(@NonNull Namespace namespace) {
 		return getGlobalOptions().getAlias(namespace);
 	}
 
@@ -218,13 +218,13 @@ public abstract class PrettyPrintOptions
 	 * Return a URI against which to deresolve the first element of qualified names that
 	 * reference external resources. Null leaves URIs in global form.
 	 */
-	public URI getBaseURI() {
+	public @Nullable URI getBaseURI() {
 		return getGlobalOptions().getBaseURI();
 	}
 
 	public abstract @NonNull Global getGlobalOptions();
 
-	public String getIndentStep() {
+	public @NonNull String getIndentStep() {
 		return getGlobalOptions().getIndentStep();
 	}
 
@@ -244,7 +244,7 @@ public abstract class PrettyPrintOptions
 		return scope;
 	}
 
-	public void setIndentStep(String indentStep) {
+	public void setIndentStep(@NonNull String indentStep) {
 		getGlobalOptions().setIndentStep(indentStep);
 	}
 	

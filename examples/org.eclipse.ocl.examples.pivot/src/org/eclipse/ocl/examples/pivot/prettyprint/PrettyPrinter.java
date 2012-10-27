@@ -82,15 +82,15 @@ public class PrettyPrinter
 	private static class Fragment
 	{
 		private final int depth;
-		private final String prefix;		// null for manditory continuation  of previous fragment
-		private final String text;
-		private final String suffix;
+		private final @Nullable String prefix;		// null for manditory continuation  of previous fragment
+		private final @NonNull String text;
+		private final @Nullable String suffix;
 		private @Nullable Fragment parent = null;
 		private List<Fragment> children = null;
 		private boolean lineWrap = true;
 		private boolean exdented = false;
 		
-		public Fragment(@Nullable Fragment parent, int depth, String prefix, String text, String suffix) {
+		public Fragment(@Nullable Fragment parent, int depth, @Nullable String prefix, @NonNull String text, @Nullable String suffix) {
 			this.parent = parent;
 			this.depth = depth;
 			this.prefix = prefix;
@@ -98,7 +98,7 @@ public class PrettyPrinter
 			this.suffix = suffix;
 		}
 		
-		public @NonNull Fragment addChild(String prefix, String text, String suffix) {
+		public @NonNull Fragment addChild(@Nullable String prefix, @NonNull String text, @Nullable String suffix) {
 //			assert (prefix.length() + text.length() + suffix.length()) > 0;
 			if (children == null) {
 				children = new ArrayList<Fragment>();
@@ -221,7 +221,7 @@ public class PrettyPrinter
 						s.append(prefix);
 					}
 				}
-				else if (prefix.length() > 0) {
+				else if ((prefix != null) && (prefix.length() > 0)) {
 					s.append(prefix);
 				}
 			}
@@ -322,7 +322,7 @@ public class PrettyPrinter
 	private @NonNull Mode mode;
 	private final AbstractVisitor<Object, PrettyPrinter> visitor;
 	private @Nullable Namespace scope;
-	private Precedence currentPrecedence = null;
+	private @Nullable Precedence currentPrecedence = null;
 
 	/**
 	 * Initializes me.
@@ -358,7 +358,7 @@ public class PrettyPrinter
 		}
 	}
 
-	public void appendElement(Element element) {
+	public void appendElement(@Nullable Element element) {
 		visitor.safeVisit(element);
 	}
 
@@ -520,7 +520,7 @@ public class PrettyPrinter
 		            else if (PivotPackage.eNAME.equals(name)) {
 		                i++;
 		            }
-		            else if ("ocl".equals(name)) {            // FIXME constant needed
+		            else if (PivotConstants.OCL_NAME.equals(name)) {
 		                i++;
 		            }
 		            else {
@@ -573,7 +573,6 @@ public class PrettyPrinter
 						Namespace savedScope = pushScope((Namespace) typeRef);
 						try {
 							appendElement(templateParameterSubstitution.getActual());
-							//					appendName((NamedElement) templateParameterSubstitution.getActual());	// FIXME cast, selective scope
 						}
 						finally {
 							popScope(savedScope);
@@ -650,7 +649,7 @@ public class PrettyPrinter
 //		}
 	}
 
-	public Precedence getCurrentPrecedence() {
+	public @Nullable Precedence getCurrentPrecedence() {
 		return currentPrecedence;
 	}
 
@@ -672,10 +671,12 @@ public class PrettyPrinter
 	 * 
 	 * If it is not necessary to start a new-line after text, emit suffix instead of the new-line.
 	 */
-	public void push(String text, String suffix) {
+	public void push(@NonNull String text, String suffix) {
 		append(text);
 //		if ((pendingPrefix.length() > 0) || (pendingText.length() > 0)) {
-			fragment = fragment.addChild(pendingPrefix, pendingText.toString(), suffix);
+			String string = pendingText.toString();
+			assert string != null;
+			fragment = fragment.addChild(pendingPrefix, string, suffix);
 			fragment.exdented = true;
 			pendingPrefix = "";
 			pendingText.setLength(0);
@@ -691,28 +692,32 @@ public class PrettyPrinter
 	 * 
 	 * If it is not necessary to start a new-line after text, emit suffix instead of the new-line.
 	 */
-	public void exdent(String prefix, String text, String suffix) {
+	public void exdent(@NonNull String prefix, @NonNull String text, @NonNull String suffix) {
 		Fragment fragmentParent = fragment.getParent();
 		assert (fragment != null) && (fragmentParent != null);
 		if (((pendingPrefix != null) && (pendingPrefix.length() > 0)) || (pendingText.length() > 0)) {
-			fragment.addChild(pendingPrefix, pendingText.toString(), "");
+			String string = pendingText.toString();
+			assert string != null;
+			fragment.addChild(pendingPrefix, string, "");
 			pendingPrefix = "";
 			pendingText.setLength(0);
 		}
 		if ((prefix.length() > 0) || (text.length() > 0)) {
-			fragment = fragmentParent.addChild(prefix, text.toString(), suffix);
+			String string = text.toString();
+			assert string != null;
+			fragment = fragmentParent.addChild(prefix, string, suffix);
 			fragment.exdented = true;
 		}
 	}
 
-	public String getName(NamedElement object, Set<String> keywords) {
+	public String getName(@Nullable NamedElement object, @Nullable Set<String> keywords) {
 		if (object == null) {
 			return NULL_PLACEHOLDER;
 		}
 		return getName(object.getName(), keywords);
 	}
 
-	public String getName(String name, Set<String> keywords) {
+	public String getName(@Nullable String name, @Nullable Set<String> keywords) {
 		if ((keywords == null) || (!keywords.contains(name)) && PivotUtil.isValidIdentifier(name)) {
 			return name;
 		}
@@ -732,10 +737,12 @@ public class PrettyPrinter
 	 * 
 	 * If it is not necessary to start a new-line after text, emit suffix instead of the new-line.
 	 */
-	public void next(String prefix, String text, String suffix) {
+	public void next(@Nullable String prefix, @NonNull String text, @NonNull String suffix) {
 		assert fragment != null;
 		if (((pendingPrefix != null) && (pendingPrefix.length() > 0)) || (pendingText.length() > 0)) {
-			fragment.addChild(pendingPrefix, pendingText.toString(), "");
+			String string = pendingText.toString();
+			assert string != null;
+			fragment.addChild(pendingPrefix, string, "");
 			pendingPrefix = "";
 			pendingText.setLength(0);
 		}
@@ -751,7 +758,9 @@ public class PrettyPrinter
 	public void pop() {
 		assert fragment != null;
 		if (((pendingPrefix != null) && (pendingPrefix.length() > 0)) || (pendingText.length() > 0)) {
-			fragment.addChild(pendingPrefix, pendingText.toString(), "");
+			String string = pendingText.toString();
+			assert string != null;
+			fragment.addChild(pendingPrefix, string, "");
 		}
 		pendingPrefix = "";
 		pendingText.setLength(0);
@@ -767,7 +776,7 @@ public class PrettyPrinter
 		scope = oldScope;
 	}
 
-	public void precedenceVisit(OCLExpression expression, Precedence newPrecedence) {
+	public void precedenceVisit(@Nullable OCLExpression expression, @Nullable Precedence newPrecedence) {
 		Precedence savedPrecedcence = currentPrecedence;
 		try {
 			currentPrecedence = newPrecedence;
@@ -795,7 +804,7 @@ public class PrettyPrinter
 	}
 
 	@Override
-	public String toString() {
+	public @NonNull String toString() {
 		if (fragment == null) {
 			return pendingPrefix + pendingText.toString();
 		}
@@ -805,7 +814,7 @@ public class PrettyPrinter
 		return s.toString() + newLine + pendingPrefix + pendingText.toString();
 	}
 	
-	public String toString(String indent, int lineLength) {
+	public @NonNull String toString(@NonNull String indent, int lineLength) {
 		if (fragment == null) {
 			return pendingPrefix + pendingText.toString();
 		}

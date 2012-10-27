@@ -465,7 +465,9 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 				}
 				else {			// Infix
 					context.precedenceVisit(source, precedence);
-					context.next(" ", context.getName(referredOperation, null), " ");
+					String name = context.getName(referredOperation, null);
+					assert name != null;
+					context.next(" ", name, " ");
 					context.precedenceVisit(arguments.get(0), precedence);
 				}
 				if (lowerPrecedence) {
