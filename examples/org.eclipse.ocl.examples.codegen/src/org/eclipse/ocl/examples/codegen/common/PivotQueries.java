@@ -191,18 +191,16 @@ public class PivotQueries
 			ResourceSet resourceSet = DomainUtil.nonNullState(resource.getResourceSet());
 			MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
 			ClassContext parserContext = null;
-			if (metaModelManager != null) {
-				parserContext = (ClassContext)metaModelManager.getParserContext(contextElement);
-//				if (contextElement instanceof Property) {
-//					parserContext = new PropertyContext(metaModelManager, null, (Property) contextElement);
-//				}
-//				else if (contextElement instanceof Operation) {
-//					parserContext = new OperationContext(metaModelManager, null, (Operation) contextElement, null);
-//				}
-//				else if (contextElement instanceof org.eclipse.ocl.examples.pivot.Class) {
-//					parserContext = new ClassContext(metaModelManager, null, (org.eclipse.ocl.examples.pivot.Class) contextElement);
-//				}
-			}
+			parserContext = (ClassContext)metaModelManager.getParserContext(contextElement);
+//			if (contextElement instanceof Property) {
+//				parserContext = new PropertyContext(metaModelManager, null, (Property) contextElement);
+//			}
+//			else if (contextElement instanceof Operation) {
+//				parserContext = new OperationContext(metaModelManager, null, (Operation) contextElement, null);
+//			}
+//			else if (contextElement instanceof org.eclipse.ocl.examples.pivot.Class) {
+//				parserContext = new ClassContext(metaModelManager, null, (org.eclipse.ocl.examples.pivot.Class) contextElement);
+//			}
 			if (parserContext == null) {
 				logger.error("Unknown context type");
 				return null;
@@ -223,15 +221,13 @@ public class PivotQueries
 				logger.error(message);
 				return createExpressionInOCLError(message);
 			}
-			if (expressionInOCL != null) {
-				String messageExpression = PivotUtil.getMessage(opaqueExpression);
-				if ((messageExpression != null) && (messageExpression.trim().length() > 0)) {
-					try {
-						parserContext = new DiagnosticContext(parserContext, null);
-						parserContext.parse(messageExpression);
-					} catch (ParserException e) {
-						logger.error("Failed to parse \"" + messageExpression + "\"", e);
-					}
+			String messageExpression = PivotUtil.getMessage(opaqueExpression);
+			if ((messageExpression != null) && (messageExpression.trim().length() > 0)) {
+				try {
+					parserContext = new DiagnosticContext(parserContext, null);
+					parserContext.parse(messageExpression);
+				} catch (ParserException e) {
+					logger.error("Failed to parse \"" + messageExpression + "\"", e);
 				}
 			}
 			return expressionInOCL;
@@ -312,9 +308,7 @@ public class PivotQueries
 				if (type == null) {
 					type = typeServer.getPivotType();
 				}
-				if (type != null) {
-					types.add(type);
-				}
+				types.add(type);
 			}
 		}
 		return types;

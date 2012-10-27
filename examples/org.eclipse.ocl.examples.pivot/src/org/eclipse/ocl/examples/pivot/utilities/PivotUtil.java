@@ -1088,7 +1088,7 @@ public class PivotUtil extends DomainUtil
 		}
 		@SuppressWarnings("unchecked")
 		T castUnspecializedElement = (T) unspecializedElement;
-		return (T) castUnspecializedElement;
+		return castUnspecializedElement;
 	}
 
 	public static boolean isLibraryType(@NonNull Type type) {

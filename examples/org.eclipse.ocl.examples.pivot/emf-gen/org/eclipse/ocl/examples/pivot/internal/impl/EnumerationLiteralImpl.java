@@ -52,6 +52,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *
  * @generated
  */
+@SuppressWarnings("cast")
 public class EnumerationLiteralImpl
 		extends NamedElementImpl
 		implements EnumerationLiteral {

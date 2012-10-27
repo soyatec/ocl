@@ -64,26 +64,8 @@ public final class OCLUtil {
 	 * @return an instance of the requested interface, or <code>null</code>
 	 *     if this environment does not adapt to it
 	 */
-	@SuppressWarnings("unchecked")
 	public static @Nullable <T> T getAdapter(@NonNull Environment env, @NonNull java.lang.Class<T> adapterType) {
-	    
-		T result;
-		
-		if (env instanceof Adaptable) {
-			result = ((Adaptable) env).getAdapter(adapterType);
-		} else if (adapterType.isInstance(env)) {
-			result = (T) env;
-		} else {
-			result = null;
-		}
-		
-//		if (result == null) {
-//			if (adapterType == BasicEnvironment.class) {
-//				result = (T) getBasicEnvironment(env);
-//			}
-//		}
-		
-		return result;
+	    return env.getAdapter(adapterType);
 	}
 	
 	/**
@@ -163,20 +145,8 @@ public final class OCLUtil {
 	 * @return an instance of the requested interface, or <code>null</code>
 	 *     if this evaluation environment does not adapt to it
 	 */
-	@SuppressWarnings("unchecked")
 	public static <T> T getAdapter(EvaluationEnvironment env, java.lang.Class<T> adapterType) {
-	    
-		T result;
-		
-		if (env instanceof Adaptable) {
-			result = ((Adaptable) env).getAdapter(adapterType);
-		} else if (adapterType.isInstance(env)) {
-			result = (T) env;
-		} else {
-			result = null;
-		}
-		
-		return result;
+	    return env.getAdapter(adapterType);
 	}
     
     /**

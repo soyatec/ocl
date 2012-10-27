@@ -61,6 +61,7 @@ import org.eclipse.ocl.examples.pivot.bodies.ParameterableElementBodies;
  *
  * @generated
  */
+@SuppressWarnings("cast")
 public abstract class ParameterableElementImpl
 		extends ElementImpl
 		implements ParameterableElement {

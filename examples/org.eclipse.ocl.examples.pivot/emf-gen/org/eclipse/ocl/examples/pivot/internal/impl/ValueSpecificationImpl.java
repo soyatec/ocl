@@ -65,6 +65,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *
  * @generated
  */
+@SuppressWarnings("cast")
 public abstract class ValueSpecificationImpl
 		extends TypedElementImpl
 		implements ValueSpecification {

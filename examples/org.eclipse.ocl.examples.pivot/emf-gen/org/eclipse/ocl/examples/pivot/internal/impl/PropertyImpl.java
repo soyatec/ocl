@@ -100,6 +100,7 @@ import org.eclipse.osgi.util.NLS;
  *
  * @generated
  */
+@SuppressWarnings("cast")
 public class PropertyImpl
 		extends FeatureImpl
 		implements Property {

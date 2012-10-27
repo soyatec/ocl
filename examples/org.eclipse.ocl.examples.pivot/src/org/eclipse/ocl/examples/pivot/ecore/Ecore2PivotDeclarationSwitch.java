@@ -601,7 +601,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 				 || (details.size() > 1)
 				 || ((details.size() == 1) && (!GenModelPackage.eNS_URI.equals(source) || !details.containsKey("documentation")))) {
 					Annotation pivotAnnotation = (Annotation) doSwitch(eAnnotation);
-					pivotAnnotations.add((Annotation) pivotAnnotation);
+					pivotAnnotations.add(pivotAnnotation);
 				}
 			}
 		}

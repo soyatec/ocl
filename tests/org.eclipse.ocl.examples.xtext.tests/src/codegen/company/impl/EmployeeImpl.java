@@ -56,6 +56,7 @@ import codegen.company.util.CodegencompanyValidator;
  *
  * @generated
  */
+@SuppressWarnings({"unchecked", "unused"})
 public class EmployeeImpl extends EObjectImpl implements Employee {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -604,7 +605,6 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * @generated
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
 			case CodegencompanyPackage.EMPLOYEE___REPORTS_TO__EMPLOYEE:

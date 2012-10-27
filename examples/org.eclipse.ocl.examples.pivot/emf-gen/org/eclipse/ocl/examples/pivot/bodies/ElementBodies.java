@@ -40,7 +40,7 @@ import org.eclipse.ocl.examples.pivot.PivotTables;
 /**
  * ElementBodies provides the Java implementation bodies of OCL-defined Element operations and properties.
  */
-@SuppressWarnings({"nls", "null", "unused"})
+@SuppressWarnings({"nls", "unused"})
 public class ElementBodies
 {
 

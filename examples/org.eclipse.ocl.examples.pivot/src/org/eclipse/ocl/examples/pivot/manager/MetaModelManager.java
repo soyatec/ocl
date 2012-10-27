@@ -643,8 +643,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			if (iteratorCountDelta != 0) {
 				return iteratorCountDelta;
 			}
-			Type referenceType = PivotUtil.getOwningType((Iteration)reference);
-			Type candidateType = PivotUtil.getOwningType((Iteration)candidate);
+			Type referenceType = PivotUtil.getOwningType(reference);
+			Type candidateType = PivotUtil.getOwningType(candidate);
 			Type specializedReferenceType = getSpecializedType(referenceType, referenceBindings);
 			Type specializedCandidateType = getSpecializedType(candidateType, candidateBindings);
 			if (referenceType != candidateType) {
@@ -1584,12 +1584,14 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		}
 	}
 
-	public @NonNull Metaclass getMetaclass(@NonNull DomainType instanceType) {
-		Type type = getType(instanceType);
-		return getMetaclass((Type)type);
-	}
-
-	public @NonNull Metaclass getMetaclass(@NonNull Type instanceType) {
+	public @NonNull Metaclass getMetaclass(@NonNull DomainType domainInstanceType) {
+		Type instanceType;
+		if (domainInstanceType instanceof Type) {
+			instanceType = (Type)domainInstanceType;
+		}
+		else {
+			instanceType = getType(domainInstanceType);
+		}
 		Metaclass metaclassType =  getMetaclassType();
 		if (instanceType == metaclassType) {
 			return metaclassType;
@@ -1601,7 +1603,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			return metaclassType;	
 		}
 		MetaclassServer typeServer = (MetaclassServer) getTypeServer(metaclassType);
-		Metaclass metaclass = typeServer.getMetaclass((Type) instanceType);
+		Metaclass metaclass = typeServer.getMetaclass(instanceType);
 		return metaclass;
 	}
 
@@ -1647,7 +1649,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		if (!(parameteredElement instanceof DomainType)) {
 			throw new UnsupportedOperationException();
 		}
-		return (DomainType) parameteredElement;
+		return parameteredElement;
 	}
 
 	public @NonNull CollectionType getOrderedSetType(@NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
@@ -1683,7 +1685,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	 * @throws ParserException if eObject cannot be converted to a Pivot element
 	 */
 	public @Nullable ParserContext getParserContext(@NonNull Element element, Object... todoParameters) {
-		Element pivotElement = (Element) element;
+		Element pivotElement = element;
 		if (pivotElement instanceof Constraint) {
 			List<Element> constrainedElements = ((Constraint) pivotElement).getConstrainedElement();
 			pivotElement = constrainedElements.size() > 0 ? constrainedElements.get(0) : null;
@@ -2032,7 +2034,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			if (templateArgument instanceof Type) {
 				templateArgument = getSpecializedType((Type)templateArgument, usageBindings);
 			}
-			return (Metaclass) getMetaclass((DomainType) templateArgument);
+			return getMetaclass((DomainType) templateArgument);
 		}
 		return type;
 	}
@@ -2204,7 +2206,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 
 	public @NonNull Type getType(@NonNull DomainType dType) {				// FIXME simplify eliminate
 		if (dType instanceof Type) {
-			return getPrimaryType((Type) dType);
+			return getPrimaryType(dType);
 		}
 		DomainPackage dPackage = dType.getPackage();
 		String nsURI = DomainUtil.nonNullState(dPackage.getNsURI());
@@ -2413,7 +2415,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		if (type instanceof TemplateableElement) {
 			for (TemplateBinding templateBinding : ((TemplateableElement)type).getTemplateBinding()) {
 				for (TemplateParameterSubstitution templateParameterSubstitution : templateBinding.getParameterSubstitution()) {
-					if (isUnderspecified((Type) templateParameterSubstitution.getActual())) {
+					if (isUnderspecified(templateParameterSubstitution.getActual())) {
 						return true;
 					}
 				}

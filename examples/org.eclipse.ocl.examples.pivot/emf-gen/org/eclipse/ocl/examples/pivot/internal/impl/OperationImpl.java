@@ -105,6 +105,7 @@ import org.eclipse.osgi.util.NLS;
  *
  * @generated
  */
+@SuppressWarnings("cast")
 public class OperationImpl
 		extends FeatureImpl
 		implements Operation {

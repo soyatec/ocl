@@ -57,6 +57,7 @@ import org.eclipse.uml2.common.util.SubsetSupersetEObjectResolvingEList;
  *
  * @generated
  */
+@SuppressWarnings("cast")
 public class TemplateSignatureImpl
 		extends ElementImpl
 		implements TemplateSignature {

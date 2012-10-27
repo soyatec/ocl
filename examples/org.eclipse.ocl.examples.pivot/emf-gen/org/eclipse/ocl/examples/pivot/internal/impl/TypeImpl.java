@@ -92,7 +92,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *
  * @generated
  */
-@SuppressWarnings("null")
+@SuppressWarnings({"null","cast"})
 public class TypeImpl
 		extends NamedElementImpl
 		implements Type {

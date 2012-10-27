@@ -55,6 +55,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *
  * @generated
  */
+@SuppressWarnings("cast")
 public class TemplateParameterImpl
 		extends ElementImpl
 		implements TemplateParameter {

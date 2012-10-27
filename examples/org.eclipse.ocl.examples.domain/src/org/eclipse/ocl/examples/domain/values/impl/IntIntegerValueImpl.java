@@ -224,7 +224,7 @@ public class IntIntegerValueImpl extends IntegerValueImpl
 		}
 		else if (right instanceof LongIntegerValueImpl) {
 			long thatValue = ((LongIntegerValueImpl)right).longValue();
-			return integerValueOf((long)value % thatValue);
+			return integerValueOf(value % thatValue);
 		}
 		else {
 			@SuppressWarnings("null") @NonNull BigInteger result = bigIntegerValue().remainder(right.bigIntegerValue());
@@ -235,7 +235,7 @@ public class IntIntegerValueImpl extends IntegerValueImpl
 	public @NonNull IntegerValue multiply(@NonNull IntegerValue right) {
 		if (right instanceof IntIntegerValueImpl) {
 			long thatValue = ((IntIntegerValueImpl)right).intValue();
-			return integerValueOf((long)value * thatValue);
+			return integerValueOf(value * thatValue);
 		}
 		else {
 			@SuppressWarnings("null") @NonNull BigInteger result = bigIntegerValue().multiply(right.bigIntegerValue());

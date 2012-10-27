@@ -125,8 +125,8 @@ public class OCLMetaModelCodeGenerator extends AbstractWorkflowComponent
 //			}
 			PivotSaver saver = new PivotSaver(pivotResource);
 			org.eclipse.ocl.examples.pivot.Package orphanage = saver.localizeSpecializations();
-			if ((orphanage != null) && (pivotRoot instanceof Root)) {
-				((Root)pivotRoot).getNestedPackage().add(orphanage);
+			if (orphanage != null) {
+				pivotRoot.getNestedPackage().add(orphanage);
 			}
 			GenerateOCLMetaModel acceleo = new GenerateOCLMetaModel(pivotPackage, outputFolder, arguments);
 			log.info("Generating to ' " + outputFolder + "'");

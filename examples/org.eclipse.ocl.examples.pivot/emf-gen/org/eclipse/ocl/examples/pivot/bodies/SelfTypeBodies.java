@@ -30,7 +30,7 @@ import org.eclipse.ocl.examples.pivot.SelfType;
 /**
  * SelfTypeBodies provides the Java implementation bodies of OCL-defined SelfType operations and properties.
  */
-@SuppressWarnings({"nls", "null", "unused"})
+@SuppressWarnings({"nls", "unused"})
 public class SelfTypeBodies
 {
 

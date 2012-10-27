@@ -220,7 +220,8 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
         List<String> arguments = new ArrayList<String>();
 		OCL2Java4genmodel generator = new OCL2Java4genmodel(genModel, folder, arguments)
 		{
-		    public IAcceleoGenerationStrategy getGenerationStrategy() {
+		    @Override
+			public IAcceleoGenerationStrategy getGenerationStrategy() {
 		        return new PreviewStrategy();
 		    }
 		};
@@ -431,26 +432,24 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 		if (body == null) {
 			body = "throw new UnsupportedOperationException();  // FIXME Unimplemented " + (pProperty != null ? Pivot2Moniker.toString(pProperty) : "");
 		}
-		if (body != null) {
-			EcoreUtil.setAnnotation(eFeature, GenModelPackage.eNS_URI, "get", body);
-//			EcoreUtil.setAnnotation(eFeature, GenModelPackage.eNS_URI, "body", body);
-			List<EAnnotation> eAnnotations = eFeature.getEAnnotations();
-			EAnnotation oclAnnotation = eFeature.getEAnnotation(OCLConstants.OCL_DELEGATE_URI);
-			if (oclAnnotation != null) {
-				eAnnotations.remove(oclAnnotation);
-			}
-			oclAnnotation = eFeature.getEAnnotation(OCLConstants.OCL_DELEGATE_URI_LPG);
-			if (oclAnnotation != null) {
-				eAnnotations.remove(oclAnnotation);
-			}
-			oclAnnotation = eFeature.getEAnnotation(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
-			if (oclAnnotation != null) {
-				eAnnotations.remove(oclAnnotation);
-			}
-			oclAnnotation = eFeature.getEAnnotation(UML2GenModelUtil.UML2_GEN_MODEL_PACKAGE_1_1_NS_URI);
-			if (oclAnnotation != null) {
-				eAnnotations.remove(oclAnnotation);
-			}
+		EcoreUtil.setAnnotation(eFeature, GenModelPackage.eNS_URI, "get", body);
+//		EcoreUtil.setAnnotation(eFeature, GenModelPackage.eNS_URI, "body", body);
+		List<EAnnotation> eAnnotations = eFeature.getEAnnotations();
+		EAnnotation oclAnnotation = eFeature.getEAnnotation(OCLConstants.OCL_DELEGATE_URI);
+		if (oclAnnotation != null) {
+			eAnnotations.remove(oclAnnotation);
+		}
+		oclAnnotation = eFeature.getEAnnotation(OCLConstants.OCL_DELEGATE_URI_LPG);
+		if (oclAnnotation != null) {
+			eAnnotations.remove(oclAnnotation);
+		}
+		oclAnnotation = eFeature.getEAnnotation(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
+		if (oclAnnotation != null) {
+			eAnnotations.remove(oclAnnotation);
+		}
+		oclAnnotation = eFeature.getEAnnotation(UML2GenModelUtil.UML2_GEN_MODEL_PACKAGE_1_1_NS_URI);
+		if (oclAnnotation != null) {
+			eAnnotations.remove(oclAnnotation);
 		}
 	}
 

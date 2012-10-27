@@ -50,6 +50,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *
  * @generated
  */
+@SuppressWarnings("cast")
 public class ParameterImpl
 		extends TypedMultiplicityElementImpl
 		implements Parameter {

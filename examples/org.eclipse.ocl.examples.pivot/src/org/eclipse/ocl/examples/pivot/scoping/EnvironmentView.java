@@ -383,7 +383,7 @@ public class EnvironmentView
 //		else if (element instanceof TypeServer) {
 //			element = ((TypeServer) element).getPrimaryType();		// FIXME lose casts
 //		}
-		else if ((element instanceof EObject) && (element instanceof DomainElement)) {
+		else if (element instanceof EObject) {
 			element = (DomainNamedElement) metaModelManager.getPrimaryElement((EObject) element);		// FIXME lose casts
 		}
 		if ((name != null) && (matchers != null)) {

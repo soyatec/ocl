@@ -968,12 +968,7 @@ public abstract class ValuesUtil
 			return ValuesUtil.createCollectionValue((CollectionTypeId)typeId, eValues);
 		}
 		else {
-			if (eClassifier instanceof EClassifier) {
-				return valueOf(eValue, eClassifier);
-			}
-			else {
-				return eValue;
-			}
+			return valueOf(eValue, eClassifier);
 		}
 	}
 }

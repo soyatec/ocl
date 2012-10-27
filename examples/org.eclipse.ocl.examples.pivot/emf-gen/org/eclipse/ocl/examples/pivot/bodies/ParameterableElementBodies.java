@@ -38,7 +38,7 @@ import org.eclipse.ocl.examples.pivot.PivotTables;
 /**
  * ParameterableElementBodies provides the Java implementation bodies of OCL-defined ParameterableElement operations and properties.
  */
-@SuppressWarnings({"nls", "null", "unused"})
+@SuppressWarnings({"nls", "unused"})
 public class ParameterableElementBodies
 {
 

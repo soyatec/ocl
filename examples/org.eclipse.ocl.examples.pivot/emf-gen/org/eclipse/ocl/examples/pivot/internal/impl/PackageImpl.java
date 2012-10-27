@@ -68,6 +68,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *
  * @generated
  */
+@SuppressWarnings("cast")
 public class PackageImpl
 		extends NamespaceImpl
 		implements org.eclipse.ocl.examples.pivot.Package {

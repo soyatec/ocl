@@ -279,6 +279,7 @@ public class MarkupHoverProvider extends DefaultEObjectHoverProvider
 		return super.getHoverControlCreator();
 	}
 
+	@Override
 	public IInformationControlCreatorProvider getHoverInfo(final EObject object, final ITextViewer viewer, final IRegion region) {
 		return new IInformationControlCreatorProvider() {
 

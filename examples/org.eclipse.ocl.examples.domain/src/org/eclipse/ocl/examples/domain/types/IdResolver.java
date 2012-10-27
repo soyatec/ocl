@@ -164,7 +164,7 @@ public class IdResolver implements IdVisitor<DomainElement>
 		else*/ if (value instanceof EObject) {
 			EClass eClass = ((EObject)value).eClass();
 			assert eClass != null;
-			DomainType type = (DomainType) key2type.get(eClass);
+			DomainType type = key2type.get(eClass);
 			if (type == null) {
 				type = standardLibrary.getType(eClass);
 				assert type != null;
@@ -174,7 +174,7 @@ public class IdResolver implements IdVisitor<DomainElement>
 		}
 		else if (value instanceof Value) {
 			TypeId typeId = ((Value)value).getTypeId();			
-			DomainType type = (DomainType) key2type.get(typeId);
+			DomainType type = key2type.get(typeId);
 			if (type == null) {
 				type = (DomainType) typeId.accept(this);
 				assert type != null;
@@ -188,7 +188,7 @@ public class IdResolver implements IdVisitor<DomainElement>
 		else {
 			Class<?> jClass = value.getClass();
 			assert jClass != null;
-			DomainType type = (DomainType) key2type.get(jClass);
+			DomainType type = key2type.get(jClass);
 			if (type != null) {
 				return type;
 			}
@@ -280,7 +280,7 @@ public class IdResolver implements IdVisitor<DomainElement>
 		else*/ if (value instanceof EObject) {
 			EClass typeKey = ((EObject)value).eClass();
 			assert typeKey != null;
-			DomainType type = (DomainType) key2type.get(typeKey);
+			DomainType type = key2type.get(typeKey);
 			if (type == null) {
 				type = standardLibrary.getType(typeKey);
 				assert type != null;
@@ -290,7 +290,7 @@ public class IdResolver implements IdVisitor<DomainElement>
 		}
 		else if (value instanceof Value) {
 			TypeId typeKey = ((Value)value).getTypeId();			
-			DomainType type = (DomainType) key2type.get(typeKey);
+			DomainType type = key2type.get(typeKey);
 			if (type == null) {
 				type = (DomainType) typeKey.accept(this);
 				assert type != null;
@@ -306,7 +306,7 @@ public class IdResolver implements IdVisitor<DomainElement>
 		else {
 			Class<?> typeKey = value.getClass();
 			assert typeKey != null;
-			DomainType type = (DomainType) key2type.get(typeKey);
+			DomainType type = key2type.get(typeKey);
 			if (type != null) {
 				return typeKey;
 			}

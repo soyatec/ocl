@@ -53,6 +53,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *
  * @generated
  */
+@SuppressWarnings("cast")
 public class TemplateParameterSubstitutionImpl
 		extends ElementImpl
 		implements TemplateParameterSubstitution {

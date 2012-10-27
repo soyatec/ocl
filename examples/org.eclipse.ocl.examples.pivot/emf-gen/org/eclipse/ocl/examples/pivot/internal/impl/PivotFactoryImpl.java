@@ -116,6 +116,7 @@ import org.eclipse.ocl.examples.pivot.VoidType;
  * <!-- end-user-doc -->
  * @generated
  */
+@SuppressWarnings("cast")
 public class PivotFactoryImpl
 		extends EFactoryImpl
 		implements PivotFactory {

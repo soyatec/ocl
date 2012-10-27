@@ -37,7 +37,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.EvaluationHaltedException;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
@@ -363,8 +362,7 @@ public class OCL {
 	public void dispose() {
 		// dispose of constraints by clearing their adapters
 		for (Constraint constraint : getConstraints()) {
-			EObject eObject = (EObject) constraint;
-
+			EObject eObject = constraint;
 			if (eObject.eResource() == null) {
 				ObjectUtil.dispose(constraint);
 			}
@@ -442,15 +440,7 @@ public class OCL {
 				localEvalEnv.remove(contextVariable);
 			}
 		}
-		if (result instanceof InvalidValue) {
-			return (InvalidValue)result;
-		}
-		else { //if (result != null) {
-			return result;
-		}
-//		else {
-//			throw new InvalidValueException("Java-Null evaluation result");
-//		}
+		return result;
 	}
 
 	/**

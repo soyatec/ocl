@@ -576,13 +576,11 @@ public class GenPackageQueries
 			}
 		}
 		for (Type primaryType : primaryTypes) {
-			if (primaryType instanceof Type) {
-				List<Type> primarySuperClasses = primaryType.getSuperClass();
-				Type classType = DomainUtil.getNamedElement(primarySuperClasses, TypeId.CLASS_NAME);
-				Type metaclass = DomainUtil.getNamedElement(primarySuperClasses, "Classifier");
-				if ((classType != null) && (metaclass != null)) {
-					primarySuperClasses.remove(classType);		// WIP FIXME fix at source
-				}
+			List<Type> primarySuperClasses = primaryType.getSuperClass();
+			Type classType = DomainUtil.getNamedElement(primarySuperClasses, TypeId.CLASS_NAME);
+			Type metaclass = DomainUtil.getNamedElement(primarySuperClasses, "Classifier");
+			if ((classType != null) && (metaclass != null)) {
+				primarySuperClasses.remove(classType);		// WIP FIXME fix at source
 			}
 		}
 	}  

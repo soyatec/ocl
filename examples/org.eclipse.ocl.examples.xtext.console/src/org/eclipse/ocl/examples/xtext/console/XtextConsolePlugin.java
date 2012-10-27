@@ -55,6 +55,7 @@ public class XtextConsolePlugin extends EssentialOCLActivator
 		plugin = this;
 	}
 	
+	@Override
 	protected Module getRuntimeModule(String grammar) {
 		if (EssentialOCLPlugin.LANGUAGE_ID.equals(grammar)) {
 		  return new XtextConsoleRuntimeModule();
@@ -63,6 +64,7 @@ public class XtextConsolePlugin extends EssentialOCLActivator
 		throw new IllegalArgumentException(grammar);
 	}
 	
+	@Override
 	protected Module getUiModule(String grammar) {
 		if (EssentialOCLPlugin.LANGUAGE_ID.equals(grammar)) {
 		  return new XtextConsoleUiModule(this);

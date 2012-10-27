@@ -54,6 +54,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *
  * @generated
  */
+@SuppressWarnings("cast")
 public class ElementExtensionImpl extends TypeImpl implements ElementExtension
 {
 	/**

@@ -455,7 +455,7 @@ public class PrettyPrinter
 				}
 	            MetaModelManager metaModelManager = options.getGlobalOptions().getMetaModelManager();
 	            if ((metaModelManager != null) && (parent instanceof Type)) {
-	            	parent = (Namespace) metaModelManager.getPrimaryType((Type) parent);
+	            	parent = metaModelManager.getPrimaryType((Type) parent);
 	            }
 				if (parent == scope) {
 					return;

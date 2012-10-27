@@ -134,6 +134,7 @@ import org.eclipse.ocl.examples.pivot.VoidType;
  * @see org.eclipse.ocl.examples.pivot.PivotPackage
  * @generated
  */
+@SuppressWarnings("cast")
 public class PivotValidator
 		extends EObjectValidator {
 
