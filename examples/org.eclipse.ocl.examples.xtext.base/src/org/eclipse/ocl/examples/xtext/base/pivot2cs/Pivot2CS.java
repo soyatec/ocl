@@ -63,7 +63,7 @@ public class Pivot2CS extends AbstractConversion
 		this.cs2pivotResourceMap = aConverter.cs2pivotResourceMap;
 	}
 
-	protected void addFactory(@NonNull Factory factory) {
+	protected synchronized void addFactory(@NonNull Factory factory) {
 		for (EClass eClass : factory.getEClasses()) {
 			factoryMap.put(eClass, factory);
 		}

@@ -116,7 +116,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 	
 	private static @NonNull Map<EPackage, Factory> factoryMap = new HashMap<EPackage, Factory>();
 	
-	public static void addFactory(@NonNull Factory factory) {
+	public static synchronized void addFactory(@NonNull Factory factory) {
 		factoryMap.put(factory.getEPackage(), factory);
 	}
 

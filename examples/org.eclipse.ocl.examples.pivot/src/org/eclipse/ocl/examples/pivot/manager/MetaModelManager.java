@@ -388,7 +388,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	
 	private static @NonNull Set<Factory> factoryMap = new HashSet<Factory>();
 	
-	public static void addFactory(@NonNull Factory factory) {
+	public static synchronized void addFactory(@NonNull Factory factory) {
 		factoryMap.add(factory);
 	}
 	

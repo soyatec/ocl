@@ -360,10 +360,10 @@ public class EnvironmentView
 	 *            the element
 	 * @return the number of elements added; 1 if added, 0 if not
 	 */
-	public void addElement(@NonNull String elementName, @NonNull DomainElement element) {
-//		if (element == null) {
-//			return;
-//		}		
+	public void addElement(/*@NonNull*/ String elementName, /*@NonNull*/ DomainElement element) {
+		if ((elementName == null) || (element == null)) {
+			return;
+		}		
 		if (element instanceof Type) {
 			PivotUtil.debugWellContainedness((Type)element);
 		}		
@@ -511,17 +511,17 @@ public class EnvironmentView
 		}
 	}
 
-	public void addNamedElement(@NonNull DomainNamedElement namedElement) {
-//		if (namedElement == null) {
-//			return;
-//		}
+	public void addNamedElement(/*@NonNull*/ DomainNamedElement namedElement) {
+		if (namedElement == null) {
+			return;
+		}
 		String elementName = namedElement.getName();
 		if (elementName != null) {
 			addElement(elementName, namedElement);
 		}
 	}
 
-	public void addNamedElements(@NonNull Iterable<? extends DomainNamedElement> namedElements) {
+	public void addNamedElements(/*@NonNull*/ Iterable<? extends DomainNamedElement> namedElements) {
 		for (DomainNamedElement namedElement : namedElements) {
 			if (namedElement != null) {
 				addNamedElement(namedElement);

@@ -74,7 +74,7 @@ public class PrettyPrinter
 	
 	private static @NonNull Map<EPackage, Factory> factoryMap = new HashMap<EPackage, Factory>();
 	
-	public static void addFactory(/*@NonNull*/ EPackage ePackage, @NonNull Factory factory) {
+	public static synchronized void addFactory(/*@NonNull*/ EPackage ePackage, @NonNull Factory factory) {
 		assert ePackage != null;
 		factoryMap.put(ePackage, factory);
 	}

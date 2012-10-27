@@ -54,7 +54,7 @@ public class CS2Moniker extends Abstract2Moniker
 		public abstract @NonNull BaseCSVisitor<?> create(@NonNull CS2Moniker moniker);
 	}
 
-	public static void addFactory(/*@NonNull*/ EPackage ePackage, @NonNull Factory factory) {
+	public static synchronized void addFactory(/*@NonNull*/ EPackage ePackage, @NonNull Factory factory) {
 		assert ePackage != null;
 		csFactoryMap.put(ePackage, factory);
 	}
