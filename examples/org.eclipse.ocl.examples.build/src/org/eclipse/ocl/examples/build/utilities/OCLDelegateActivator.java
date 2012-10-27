@@ -53,6 +53,7 @@ public class OCLDelegateActivator extends WorkflowComponentWithModelSlot
 {
 	private Logger log = Logger.getLogger(getClass());	
 
+	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues arg2) {
 		Resource resource = (Resource) ctx.get(getModelSlot());
 		log.info("Activating OCL Delegates in '" + resource.getURI() + "'");

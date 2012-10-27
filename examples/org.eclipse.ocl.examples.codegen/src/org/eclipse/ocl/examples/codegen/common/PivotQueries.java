@@ -34,6 +34,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.BuiltInTypeId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -135,8 +136,9 @@ public class PivotQueries
 		if (element instanceof EObject) {
 			Resource resource = EcoreUtil.getRootContainer((EObject)element).eResource();
 			if (resource != null) {
-				MetaModelManager metaModelManager = MetaModelManager.getAdapter(resource.getResourceSet());
-				if (metaModelManager != null) {
+				ResourceSet resourceSet = resource.getResourceSet();
+				if (resourceSet != null) {
+					MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
 					createOptions.setMetaModelManager(metaModelManager);
 				}
 			}
@@ -186,7 +188,7 @@ public class PivotQueries
 		}
 		else if (specification instanceof OpaqueExpression) {
 			Resource resource = contextElement.eResource();
-			ResourceSet resourceSet = resource.getResourceSet();
+			ResourceSet resourceSet = DomainUtil.nonNullState(resource.getResourceSet());
 			MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
 			ClassContext parserContext = null;
 			if (metaModelManager != null) {
@@ -236,7 +238,7 @@ public class PivotQueries
 		}
 		else {
 			Resource resource = contextElement.eResource();
-			ResourceSet resourceSet = resource.getResourceSet();
+			ResourceSet resourceSet = DomainUtil.nonNullState(resource.getResourceSet());
 			MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
 			ExpressionInOCL expressionInOCL = PivotFactory.eINSTANCE.createExpressionInOCL();
 			expressionInOCL.setBodyExpression(metaModelManager.createInvalidExpression());
@@ -253,7 +255,7 @@ public class PivotQueries
 	}
 	
 	public @NonNull LinkedHashSet<Operation> getOperations(@NonNull Type type) {
-		ResourceSet resourceSet = type.eResource().getResourceSet();
+		ResourceSet resourceSet = DomainUtil.nonNullState(type.eResource().getResourceSet());
 		MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
 		LinkedHashSet<Operation> operations = new LinkedHashSet<Operation>();
 		for (Operation operation : metaModelManager.getMemberOperations(type, false)) {
@@ -269,7 +271,7 @@ public class PivotQueries
 	}
 	
 	public @NonNull LinkedHashSet<Property> getProperties(@NonNull Type type) {
-		ResourceSet resourceSet = type.eResource().getResourceSet();
+		ResourceSet resourceSet = DomainUtil.nonNullState(type.eResource().getResourceSet());
 		MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
 		LinkedHashSet<Property> properties = new LinkedHashSet<Property>();
 		for (Property property : metaModelManager.getMemberProperties(type, false)) {

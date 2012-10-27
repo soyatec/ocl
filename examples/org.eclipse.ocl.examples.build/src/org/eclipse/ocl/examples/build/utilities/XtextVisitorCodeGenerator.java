@@ -77,6 +77,7 @@ public class XtextVisitorCodeGenerator extends AbstractWorkflowComponent
 		return resourceSet;
 	}
 
+	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues issues) {
 		URI fileURI = URI.createPlatformResourceURI(ecoreFile, true);
 		String rootPath = StandaloneSetup.getPlatformRootPath();

@@ -22,6 +22,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
@@ -38,7 +39,7 @@ public class MetaModelManagerResourceAdapter extends AbstractMetaModelManagerRes
 	} */
 	
 	public static @NonNull MetaModelManagerResourceAdapter getAdapter(@NonNull Resource resource, @Nullable MetaModelManager metaModelManager) {
-		List<Adapter> eAdapters = resource.eAdapters();
+		List<Adapter> eAdapters = DomainUtil.nonNullEMF(resource.eAdapters());
 		MetaModelManagerResourceAdapter adapter = PivotUtil.getAdapter(MetaModelManagerResourceAdapter.class, eAdapters);
 //		if ((adapter != null) && (metaModelManager != null) && (adapter.getMetaModelManager() != metaModelManager)) {
 //			eAdapters.remove(adapter);

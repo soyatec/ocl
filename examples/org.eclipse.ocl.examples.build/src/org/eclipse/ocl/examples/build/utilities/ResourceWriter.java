@@ -53,6 +53,7 @@ public class ResourceWriter extends WorkflowComponentWithModelSlot
 		return uri;
 	}
 
+	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues arg2) {
 		Resource inputResource = (Resource) ctx.get(getModelSlot());
 		try {

@@ -60,6 +60,7 @@ public class XMI2UMLResourceReader extends WorkflowComponentWithModelSlot
 		return nsURI;
 	}
 
+	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues arg2) {
 		URI fileURI = URI.createPlatformResourceURI(uri, true);
 		log.info("Reading '" + fileURI + "'");

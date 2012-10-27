@@ -33,6 +33,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
@@ -57,7 +58,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
 public class AliasAnalysis extends AdapterImpl
 {
 	public static void dispose(@NonNull Resource resource) {
-		List<Adapter> eAdapters = resource.eAdapters();
+		List<Adapter> eAdapters = DomainUtil.nonNullEMF(resource.eAdapters());
 		AliasAnalysis adapter = PivotUtil.getAdapter(AliasAnalysis.class, eAdapters);
 		if (adapter != null) {
 			adapter.dispose();

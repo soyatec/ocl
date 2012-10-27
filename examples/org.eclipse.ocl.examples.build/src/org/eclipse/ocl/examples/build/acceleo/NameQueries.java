@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -54,7 +55,7 @@ public class NameQueries
 		return results;
 	}
 	
-	public static String getMoniker(Element element) {
+	public static String getMoniker(@NonNull Element element) {
 		return Pivot2Moniker.toString(element);
 	}
 	

@@ -455,18 +455,15 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		disposeNotifier(resourceSet);
 	} */
 
-	public static MetaModelManager findAdapter(ResourceSet resourceSet) {
+	public static @Nullable MetaModelManager findAdapter(@Nullable ResourceSet resourceSet) {
 		if (resourceSet == null) {
 			return null;
 		}
 		return PivotUtil.getAdapter(MetaModelManager.class, resourceSet);
 	}
 
-	public static MetaModelManager getAdapter(ResourceSet resourceSet) {
-		if (resourceSet == null) {
-			return null;
-		}
-		List<Adapter> eAdapters = resourceSet.eAdapters();
+	public static @NonNull MetaModelManager getAdapter(@NonNull ResourceSet resourceSet) {
+		List<Adapter> eAdapters = DomainUtil.nonNullEMF(resourceSet.eAdapters());
 		MetaModelManager adapter = PivotUtil.getAdapter(MetaModelManager.class, eAdapters);
 		if (adapter == null) {
 			adapter = new MetaModelManager(resourceSet);
@@ -475,7 +472,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return adapter;
 	}
 
-	public static void initializePivotResourceSet(ResourceSet pivotResourceSet) {
+	public static void initializePivotResourceSet(@NonNull ResourceSet pivotResourceSet) {
 		StandaloneProjectMap.initializeURIResourceMap(pivotResourceSet);
 		Registry resourceFactoryRegistry = pivotResourceSet.getResourceFactoryRegistry();
 		Map<String, Object> contentTypeToFactoryMap = resourceFactoryRegistry.getContentTypeToFactoryMap();
@@ -518,7 +515,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 
 	private boolean libraryLoadInProgress = false;
 
-	protected final ResourceSet pivotResourceSet;
+	protected final @NonNull ResourceSet pivotResourceSet;
 	
 	/**
 	 * All Library packages imported into the current type managed domain. All libraries
@@ -1769,7 +1766,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return ecore2Pivot.getCreated(pivotClass, eObject);
 	}
 
-	@SuppressWarnings("null")
 	public @NonNull ResourceSet getPivotResourceSet() {
 		return pivotResourceSet;
 	}

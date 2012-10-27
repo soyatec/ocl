@@ -36,6 +36,7 @@ import org.eclipse.emf.importer.ModelImporter;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IPackageDescriptor;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
@@ -53,6 +54,7 @@ public class GenmodelReloader extends AbstractProjectComponent
 	protected String ecoreFile = null;					// Explicit file URI of the Ecore
 	protected boolean showProgress = false;				// Set true to show genmodel new tasks
 
+	@Override
 	public void checkConfiguration(Issues issues) {
 		super.checkConfiguration(issues);
 		if (genModel == null) {
@@ -75,11 +77,12 @@ public class GenmodelReloader extends AbstractProjectComponent
 //		return modelImporter;
 //	}
 
+	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues arg2) {
 		URI genModelURI = URI.createPlatformResourceURI(genModel, true);
 		log.info("Reloading '" + genModelURI + "'");
 		Monitor monitor = showProgress ? new LoggerMonitor(log) : new BasicMonitor();
-		IProjectDescriptor projectDescriptor = getProjectDescriptor();
+		IProjectDescriptor projectDescriptor = DomainUtil.nonNullState(getProjectDescriptor());
 		IPackageDescriptor packageDescriptor = projectDescriptor.getPackageDescriptor(URI.createURI(PivotPackage.eNS_URI));
 		packageDescriptor.setUseModel(true, null);
 		ModelImporter modelImporterInstance = new UMLImporter()

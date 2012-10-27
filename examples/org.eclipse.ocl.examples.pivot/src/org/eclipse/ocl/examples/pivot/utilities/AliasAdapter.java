@@ -25,6 +25,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
  * An AliasAdapter extends a Resource to provide a set of aliases for elements,
@@ -55,7 +56,7 @@ public class AliasAdapter extends AdapterImpl
 		if (resource == null) {
 			return null;
 		}
-		List<Adapter> eAdapters = resource.eAdapters();
+		List<Adapter> eAdapters = DomainUtil.nonNullEMF(resource.eAdapters());
 		AliasAdapter adapter = PivotUtil.getAdapter(AliasAdapter.class, eAdapters);
 		if (adapter == null) {
 			adapter = new AliasAdapter();

@@ -476,11 +476,12 @@ public class PivotUtil extends DomainUtil
 		return s.toString();
 	}
 
-	public static <T> T getAdapter(Class<T> adapterClass, Notifier notifier) {
-		return getAdapter(adapterClass, notifier.eAdapters());
+	public static <T> T getAdapter(@NonNull Class<T> adapterClass, @NonNull Notifier notifier) {
+		List<Adapter> eAdapters = DomainUtil.nonNullEMF(notifier.eAdapters());
+		return getAdapter(adapterClass, eAdapters);
 	}
 
-	public static <T> T getAdapter(Class<T> adapterClass, List<Adapter> eAdapters) {
+	public static <T> T getAdapter(@NonNull Class<T> adapterClass, @NonNull List<Adapter> eAdapters) {
 		Adapter adapter = EcoreUtil.getAdapter(eAdapters, adapterClass);
 		if (adapter == null) {
 			return null;
@@ -1204,7 +1205,7 @@ public class PivotUtil extends DomainUtil
 	 * @throws ParserException if eObject cannot be converted to a Pivot element
 	 */
 	public static boolean setParserContext(@NonNull BaseResource resource, @NonNull EObject eObject, Object... todoParameters) throws ParserException {
-		ResourceSet resourceSet = resource.getResourceSet();
+		ResourceSet resourceSet = DomainUtil.nonNullState(resource.getResourceSet());
 		MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
 		Element pivotElement;
 		if (eObject instanceof Element) {

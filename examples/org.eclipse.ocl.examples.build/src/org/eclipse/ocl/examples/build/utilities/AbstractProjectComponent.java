@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.WorkflowComponentWithModelSlot;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 
@@ -28,6 +30,7 @@ public abstract class AbstractProjectComponent extends WorkflowComponentWithMode
 	private ResourceSet resourceSet = null;	
 	private String projectName;
 
+	@Override
 	public void checkConfiguration(Issues issues) {
 		super.checkConfiguration(issues);
 		if (projectName == null) {
@@ -35,24 +38,25 @@ public abstract class AbstractProjectComponent extends WorkflowComponentWithMode
 		}
 	}
 
-	protected IProjectDescriptor getProjectDescriptor() {
+	protected @Nullable IProjectDescriptor getProjectDescriptor() {
 		ResourceSet resourceSet = getResourceSet();
 		StandaloneProjectMap projectMap = StandaloneProjectMap.getAdapter(resourceSet);
 		return projectMap.getProjectDescriptor(projectName);
 	}
 
-	public ResourceSet getResourceSet() {
-		if (resourceSet == null) {
-			resourceSet = new ResourceSetImpl();
+	public @NonNull ResourceSet getResourceSet() {
+		ResourceSet resourceSet2 = resourceSet;
+		if (resourceSet2 == null) {
+			resourceSet = resourceSet2 = new ResourceSetImpl();
 		}
-		return resourceSet;
+		return resourceSet2;
 	}
 
-	public void setProjectName(String projectName) {
+	public void setProjectName(@NonNull String projectName) {
 		this.projectName = projectName;
 	}
 	
-	public void setResourceSet(ResourceSet resourceSet) {
+	public void setResourceSet(@NonNull ResourceSet resourceSet) {
 		this.resourceSet = resourceSet;
 	}
 }

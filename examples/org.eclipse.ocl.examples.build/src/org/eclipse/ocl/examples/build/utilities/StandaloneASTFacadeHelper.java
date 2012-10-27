@@ -11,6 +11,7 @@ public final class StandaloneASTFacadeHelper extends ASTFacadeHelper { // Workar
 																		// Bug
 																		// 308069
 
+	@Override
 	public Map<?, ?> getJavaCoreOptions() {
 		if (javaCoreOptions == null) {
 			javaCoreOptions = getDefaultJavaCoreOptions();
@@ -18,6 +19,7 @@ public final class StandaloneASTFacadeHelper extends ASTFacadeHelper { // Workar
 		return javaCoreOptions;
 	}
 
+	@Override
 	protected void useCurrentOption(Map<Object, String> options, String option,
 			String defaultValue) {
 		String value = JavaCore.getOption(option);

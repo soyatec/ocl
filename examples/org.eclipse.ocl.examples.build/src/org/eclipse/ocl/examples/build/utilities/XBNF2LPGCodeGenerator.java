@@ -63,6 +63,7 @@ public class XBNF2LPGCodeGenerator extends AbstractWorkflowComponent
 		return resourceSet;
 	}
 
+	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues issues) {
 		URI fileURI = URI.createPlatformResourceURI(in, true);
 		File folder = new File(javaFolder + '/' + javaPackageName.replace('.', '/'));

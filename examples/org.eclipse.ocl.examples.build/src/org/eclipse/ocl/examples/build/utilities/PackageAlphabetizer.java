@@ -42,6 +42,7 @@ public class PackageAlphabetizer extends WorkflowComponentWithModelSlot
 {
 	private Logger log = Logger.getLogger(getClass());	
 
+	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues arg2) {
 		Resource resource = (Resource) ctx.get(getModelSlot());
 		log.info("Alphabeticizing '" + resource.getURI() + "'");

@@ -19,11 +19,13 @@ package org.eclipse.ocl.examples.build.utilities;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.WorkflowComponentWithModelSlot;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
@@ -38,6 +40,7 @@ public class CompleteOCLSeparator extends WorkflowComponentWithModelSlot
 {
 	private Logger log = Logger.getLogger(getClass());
 
+	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues arg2) {
 		Resource resource = (Resource) ctx.get(getModelSlot());
 		log.info("Splitting Complete OCL from '" + resource.getURI() + "'");
@@ -76,16 +79,20 @@ public class CompleteOCLSeparator extends WorkflowComponentWithModelSlot
 		return oclURI;
 	}
 
-	private Resource separateCompleteOCL(Resource resource) {
+	private Resource separateCompleteOCL(@NonNull Resource resource) {
 		CompleteOCLStandaloneSetup.doSetup();
 		URI uri = resource.getURI();
-		MetaModelManager metaModelManager = MetaModelManager.getAdapter(resource.getResourceSet());
+		ResourceSet resourceSet = resource.getResourceSet();
+		assert resourceSet != null;
+		MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
 		Resource oclResource = CompleteOCLSplitter.separate(metaModelManager, resource);
 		URI xtextURI = oclURI != null ? URI.createPlatformResourceURI(oclURI, true) : uri.trimFileExtension().appendFileExtension("ocl");
 		ResourceSetImpl csResourceSet = new ResourceSetImpl();
 		MetaModelManagerResourceSetAdapter.getAdapter(csResourceSet, metaModelManager);
 		BaseCSResource xtextResource = (BaseCSResource) csResourceSet.createResource(xtextURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
-		xtextResource.updateFrom(oclResource, metaModelManager);
+		if (oclResource != null) {
+			xtextResource.updateFrom(oclResource, metaModelManager);
+		}
 		return xtextResource;
 	}
 }

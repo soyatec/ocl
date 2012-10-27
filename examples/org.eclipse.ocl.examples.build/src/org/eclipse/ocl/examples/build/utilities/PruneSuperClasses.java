@@ -74,6 +74,7 @@ public class PruneSuperClasses extends WorkflowComponentWithModelSlot
 	private Logger log = Logger.getLogger(getClass());
 	private List<String> orderedNames = new ArrayList<String>();
 
+	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues arg2) {
 		Resource resource = (Resource) ctx.get(getModelSlot());
 		log.info("Pruning Super Classes in '" + resource.getURI() + "'");

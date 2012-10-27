@@ -28,6 +28,7 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.utils.ClassUtils;
 import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
@@ -173,7 +174,7 @@ public class DomainUtil
 	/**
 	 * Return aT, checking the assertion that this call would not be necessary if EMF had comprehensive @NonNull annotations.
 	 */
-	public static @NonNull <T> T nonNullEMF(T aT) {// FIXME remove once EMF guarantees non-null
+	public static @NonNull <T> T nonNullEMF(@Nullable T aT) {// FIXME remove once EMF guarantees non-null
 		assert aT != null;
 		return aT;
 	}
@@ -181,7 +182,7 @@ public class DomainUtil
 	/**
 	 * Return aT, checking the assertion that this call would not be necessary if the Ecore model was guaranteed to be valid.
 	 */
-	public static @NonNull <T> T nonNullModel(T aT) {
+	public static @NonNull <T> T nonNullModel(@Nullable T aT) {
 		assert aT != null;			// FIXME Change to InvalidModelException
 		return aT;
 	}
@@ -189,15 +190,21 @@ public class DomainUtil
 	/**
 	 * Return aT, checking the assertion that this call would not be necessary if the Pivot model was guaranteed to be valid.
 	 */
-	public static @NonNull <T> T nonNullPivot(T aT) {
+	public static @NonNull <T> T nonNullPivot(@Nullable T aT) {
 		assert aT != null;			// FIXME Change to InvalidModelException
 		return aT;
 	}
 
 	/**
+	 * Check for an in appropriate program state. This should not happen, but is not impossible. For instance
+	 * a Resource should be contained in a ResourceSet, but that doesn;t mean it always is.
+	 *<p>
+	 * If the inappropriate state really cannot happen, an assertion should be used instead to avoid non-debug
+	 * run-time cost.
+	 * <p>
 	 * Return aT, throwing an IllegalStateException if null.
 	 */
-	public static @NonNull <T> T nonNullState(T aT) {
+	public static @NonNull <T> T nonNullState(@Nullable T aT) {
 		if (aT == null) {
 			throw new IllegalStateException();
 		}

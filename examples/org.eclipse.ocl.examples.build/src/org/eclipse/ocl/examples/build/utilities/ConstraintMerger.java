@@ -29,7 +29,9 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Library;
@@ -59,6 +61,7 @@ public class ConstraintMerger extends AbstractProjectComponent
 		CompleteOCLStandaloneSetup.doSetup();
 	}
 
+	@Override
 	public void checkConfiguration(Issues issues) {
 		super.checkConfiguration(issues);
 		if (uri == null) {
@@ -70,13 +73,14 @@ public class ConstraintMerger extends AbstractProjectComponent
 		return uri;
 	}
 
+	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues arg2) {
-		IProjectDescriptor projectDescriptor = getProjectDescriptor();
+		IProjectDescriptor projectDescriptor = DomainUtil.nonNullState(getProjectDescriptor());
 		URI inputURI = projectDescriptor.getPlatformResourceURI(uri);
 		log.info("Merging '" + inputURI + "'");
 		Resource ecoreResource = (Resource) ctx.get(getModelSlot());
 		EPackage ecorePivotPackage = (EPackage) ecoreResource.getContents().get(0);
-		final String pivotNsURI = ecorePivotPackage.getNsURI();
+		final String pivotNsURI = DomainUtil.nonNullState(ecorePivotPackage.getNsURI());
 //		IPackageDescriptor packageDescriptor = projectDescriptor.getPackageDescriptor(URI.createURI(pivotNsURI));
 		ResourceSet resourceSet = new ResourceSetImpl();
 //		packageDescriptor.setUseModel(true, null);				// Hide packages installed by CompleteOCLStandaloneSetup
@@ -88,7 +92,7 @@ public class ConstraintMerger extends AbstractProjectComponent
 		StandardLibraryContribution.REGISTRY.put(pivotNsURI, new OCLstdlib.Loader()
 		{
 			@Override
-			public Resource getResource() {
+			public @NonNull Resource getResource() {
 				Resource resource = super.getResource();
 				Library library = (Library) resource.getContents().get(0);
 				library.setNsURI(pivotNsURI);
@@ -101,11 +105,11 @@ public class ConstraintMerger extends AbstractProjectComponent
 		Root pivotRoot = ecore2pivot.getPivotRoot();
 //		metaModelManager.setPivotMetaModel(pivotRoot.getNestedPackage().get(0));
 //		metaModelManager.setLibraryLoadInProgress(false);
-		Resource pivotResource = pivotRoot.eResource();
+		Resource pivotResource = DomainUtil.nonNullState(pivotRoot.eResource());
 //FIXME		diagnoseErrors(pivotResource);
 //		URI fileURI = URI.createPlatformResourceURI(uri, true);
 		try {
-			EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) metaModelManager.getExternalResourceSet().createResource(inputURI, null);
+			EssentialOCLCSResource xtextResource = DomainUtil.nonNullState((EssentialOCLCSResource) metaModelManager.getExternalResourceSet().createResource(inputURI, null));
 			MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
 			xtextResource.load(null);
 			ResourceUtils.checkResourceSet(resourceSet);
@@ -157,7 +161,7 @@ public class ConstraintMerger extends AbstractProjectComponent
 				}
 			}
 //			List<Resource> resources = resourceSet.getResources();
-			URI ecoreURI = ecoreResource.getURI();
+			URI ecoreURI = DomainUtil.nonNullState(ecoreResource.getURI());
 //			for (int i = resources.size() - 1; i >= 0; --i) {
 //				Resource resource = resources.get(i);
 //				if (ecoreURI.equals(resource.getURI())) {

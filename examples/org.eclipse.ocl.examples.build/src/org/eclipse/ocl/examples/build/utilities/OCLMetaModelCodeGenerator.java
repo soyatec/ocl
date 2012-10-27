@@ -30,6 +30,7 @@ import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.ocl.examples.build.acceleo.GenerateOCLMetaModel;
 import org.eclipse.ocl.examples.build.acceleo.NameQueries;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.ocl.examples.pivot.Package;
@@ -82,8 +83,9 @@ public class OCLMetaModelCodeGenerator extends AbstractWorkflowComponent
 		return resourceSet;
 	}
 
+	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues issues) {
-		ResourceSet resourceSet = getResourceSet();
+		ResourceSet resourceSet = DomainUtil.nonNullState(getResourceSet());
 		StandaloneProjectMap projectMap = StandaloneProjectMap.getAdapter(resourceSet);
 		IProjectDescriptor projectDescriptor = projectMap.getProjectDescriptor(projectName);
 		URI inputURI = projectDescriptor.getPlatformResourceURI(libraryFile);
@@ -95,9 +97,9 @@ public class OCLMetaModelCodeGenerator extends AbstractWorkflowComponent
 //			MetaModelManager metaModelManager = ElementUtil.findMetaModelManager(resourceSet);
 			NameQueries.metaModelManager = metaModelManager;
 //			metaModelManager.getPivotMetaModel();
-			Resource ecoreResource = resourceSet.getResource(inputURI, true);
+			Resource ecoreResource = DomainUtil.nonNullState(resourceSet.getResource(inputURI, true));
 			MetaModelManagerResourceAdapter.getAdapter(ecoreResource, metaModelManager);
-			String ecoreErrorsString = PivotUtil.formatResourceDiagnostics(ecoreResource.getErrors(), "Loading " + inputURI, "\n");
+			String ecoreErrorsString = PivotUtil.formatResourceDiagnostics(DomainUtil.nonNullEMF(ecoreResource.getErrors()), "Loading " + inputURI, "\n");
 			if (ecoreErrorsString != null) {
 				issues.addError(this, ecoreErrorsString, null, null, null);
 				return;
@@ -106,7 +108,7 @@ public class OCLMetaModelCodeGenerator extends AbstractWorkflowComponent
 			Root pivotRoot = ecore2Pivot.getPivotRoot();
 			Package pivotPackage = pivotRoot.getNestedPackage().get(0);
 			Resource pivotResource = pivotRoot.eResource();
-			String pivotErrorsString = PivotUtil.formatResourceDiagnostics(pivotResource.getErrors(), "Converting " + inputURI, "\n");
+			String pivotErrorsString = PivotUtil.formatResourceDiagnostics(DomainUtil.nonNullEMF(pivotResource.getErrors()), "Converting " + inputURI, "\n");
 			if (pivotErrorsString != null) {
 				issues.addError(this, pivotErrorsString, null, null, null);
 				return;

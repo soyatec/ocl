@@ -24,6 +24,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
@@ -37,7 +38,7 @@ public class MetaModelManagerResourceSetAdapter implements MetaModelManagedAdapt
 	}
 	
 	public static @NonNull MetaModelManagerResourceSetAdapter getAdapter(@NonNull ResourceSet resourceSet, @Nullable MetaModelManager metaModelManager) {
-		List<Adapter> eAdapters = resourceSet.eAdapters();
+		List<Adapter> eAdapters = DomainUtil.nonNullEMF(resourceSet.eAdapters());
 		MetaModelManagerResourceSetAdapter adapter = PivotUtil.getAdapter(MetaModelManagerResourceSetAdapter.class, eAdapters);
 		if (adapter == null) {
 			if (metaModelManager == null) {

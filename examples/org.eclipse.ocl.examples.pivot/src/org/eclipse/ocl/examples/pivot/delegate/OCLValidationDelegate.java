@@ -43,6 +43,7 @@ import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.context.ClassContext;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
@@ -91,7 +92,8 @@ public class OCLValidationDelegate implements ValidationDelegate
 			EnvironmentFactory environmentFactory) {
 		EvaluationEnvironment evaluationEnvironment = environmentFactory.createEvaluationEnvironment();
 		Object value = ValuesUtil.valueOf(object);
-		evaluationEnvironment.add(DomainUtil.nonNullState(query.getContextVariable()), value);
+		Variable contextVariable = DomainUtil.nonNullState(query.getContextVariable());
+		evaluationEnvironment.add(contextVariable, value);
 		return evaluationEnvironment;
 	}
 

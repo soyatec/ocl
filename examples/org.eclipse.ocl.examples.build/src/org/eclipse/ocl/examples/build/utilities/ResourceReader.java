@@ -47,6 +47,7 @@ public class ResourceReader extends WorkflowComponentWithModelSlot
 		return uri;
 	}
 
+	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues arg2) {
 		URI fileURI = URI.createPlatformResourceURI(uri, true);
 		log.info("Reading '" + fileURI + "'");

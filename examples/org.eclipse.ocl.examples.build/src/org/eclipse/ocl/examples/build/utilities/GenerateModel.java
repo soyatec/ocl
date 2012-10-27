@@ -68,6 +68,7 @@ public class GenerateModel extends AbstractWorkflowComponent {
 		return resourceSet;
 	}
 
+	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1,
 			Issues arg2) {
 		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor(GenModelPackage.eNS_URI, OCLGeneratorAdapterFactory.DESCRIPTOR);

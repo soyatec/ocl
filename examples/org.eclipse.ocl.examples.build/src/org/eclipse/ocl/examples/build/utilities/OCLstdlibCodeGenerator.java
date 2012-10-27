@@ -32,6 +32,7 @@ import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.ocl.examples.build.acceleo.GenerateOCLstdlib;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.utilities.PivotSaver;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -75,6 +76,7 @@ public class OCLstdlibCodeGenerator extends AbstractWorkflowComponent
 		return resourceSet;
 	}
 
+	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues issues) {
 //        CS2PivotConversion.CONTINUATION.setState(true);
 		URI fileURI = URI.createPlatformResourceURI(libraryFile, true);
@@ -84,7 +86,7 @@ public class OCLstdlibCodeGenerator extends AbstractWorkflowComponent
 		try {
 			ResourceSet resourceSet = getResourceSet();
 			BaseCSResource xtextResource = (BaseCSResource) resourceSet.getResource(fileURI, true);
-			String message = PivotUtil.formatResourceDiagnostics(xtextResource.getErrors(), "OCLstdlib parse failure", "\n");
+			String message = PivotUtil.formatResourceDiagnostics(DomainUtil.nonNullEMF(xtextResource.getErrors()), "OCLstdlib parse failure", "\n");
 			if (message != null) {
 				issues.addError(this, message, null, null, null);
 				return;

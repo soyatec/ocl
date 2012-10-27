@@ -42,6 +42,7 @@ public class UMLAssociationNormalizer extends WorkflowComponentWithModelSlot
 		return uri;
 	}
 
+	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues arg2) {
 		OCLstdlib.install();
 		Resource resource = (Resource) ctx.get(getModelSlot());

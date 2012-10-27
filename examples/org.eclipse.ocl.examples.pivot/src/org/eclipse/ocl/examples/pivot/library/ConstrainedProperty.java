@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 
@@ -43,7 +44,8 @@ public class ConstrainedProperty extends AbstractProperty
 		EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
 		EvaluationVisitor nestedVisitor = evaluationVisitor.createNestedEvaluator();
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();
-		nestedEvaluationEnvironment.add(DomainUtil.nonNullState(expressionInOCL.getContextVariable()), sourceValue);
+		Variable contextVariable = DomainUtil.nonNullState(expressionInOCL.getContextVariable());
+		nestedEvaluationEnvironment.add(contextVariable, sourceValue);
 		return nestedVisitor.evaluate(expressionInOCL);
 	}
 }
