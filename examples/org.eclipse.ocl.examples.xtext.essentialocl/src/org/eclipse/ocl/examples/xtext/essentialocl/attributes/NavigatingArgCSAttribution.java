@@ -20,7 +20,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.IterateExp;
 import org.eclipse.ocl.examples.pivot.LoopExp;
@@ -49,7 +48,7 @@ public class NavigatingArgCSAttribution extends AbstractAttribution
 		InvocationExpCS targetElement = (InvocationExpCS) fromArgument.getLogicalParent();
 		assert targetElement != null;
 		NavigationOperatorCS csNavigationOperator = NavigationUtil.getNavigationOperator(targetElement);
-		CallExp pivot = PivotUtil.getPivot(CallExp.class, targetElement);
+		OCLExpression pivot = PivotUtil.getPivot(OCLExpression.class, targetElement);	// NB QVTr's RelationCallExp is not a CallExp
 		if (pivot instanceof LoopExp) {				// FIXME This is null for nested iteration
 			if (role == NavigationRole.EXPRESSION) {
 				for (Variable iterator : ((LoopExp)pivot).getIterator()) {
