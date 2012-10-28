@@ -64,7 +64,7 @@ public class XtendCG extends PivotTestSuite
 	}
 
 	public void testXtendCG() {
-		assertQueryEquals(getMetaclass("String"), "t", "'test'.substring(1, 1)");
+		assertQueryEquals(null, "t", "'test'.substring(1, 1)");
 
 //		ExpressionInOCL2Class expressionInOCL2Class = new ExpressionInOCL2Class(null);
 //		String s = expressionInOCL2Class.generateClass(null, "p", "C");

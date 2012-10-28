@@ -1401,6 +1401,9 @@ public abstract class PivotTestSuite extends PivotTestCase
 			Type pivotType = metaModelManager.getPivotOf(Type.class, eClass);
 			aHelper.setContext(pivotType);
 		}
+		else {
+			aHelper.setContext(metaModelManager.getOclVoidType());
+		}
 	}
 	
 	@Override
