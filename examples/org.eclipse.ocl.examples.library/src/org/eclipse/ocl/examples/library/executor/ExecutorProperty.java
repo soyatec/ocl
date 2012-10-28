@@ -25,7 +25,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.ObjectValue;
 
 public class ExecutorProperty implements DomainProperty
 {
@@ -80,7 +79,7 @@ public class ExecutorProperty implements DomainProperty
 		return false;								// WIP FIXME
 	}
 
-	public void initValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull ObjectValue objectValue, @Nullable Object propertyValue) {
+	public void initValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull Object objectValue, @Nullable Object propertyValue) {
 		throw new UnsupportedOperationException();
 	}
 	

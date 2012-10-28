@@ -122,6 +122,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -131,6 +132,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -143,6 +145,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Employee getManager() {
 		if (manager != null && manager.eIsProxy()) {
 			InternalEObject oldManager = (InternalEObject)manager;
@@ -169,6 +172,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setManager(Employee newManager) {
 		Employee oldManager = manager;
 		manager = newManager;
@@ -181,6 +185,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Company getCompany() {
 		if (eContainerFeatureID() != CodegencompanyPackage.EMPLOYEE__COMPANY) return null;
 		return (Company)eContainer();
@@ -201,6 +206,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCompany(Company newCompany) {
 		if (newCompany != eInternalContainer() || (eContainerFeatureID() != CodegencompanyPackage.EMPLOYEE__COMPANY && newCompany != null)) {
 			if (EcoreUtil.isAncestor(this, newCompany))
@@ -222,6 +228,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Employee> getDirectReports() {
 		/*
 		company.employees->select(manager = self)
@@ -246,6 +253,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Employee> getAllReports() {
 		/*
 		Employee.allInstances()->select(reportsTo(self))
@@ -270,6 +278,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Employee> getReportingChain() {
 		/*
 		if manager.oclIsUndefined()
@@ -297,6 +306,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isHasNameAsAttribute() {
 		/*
 		name <> null
@@ -322,6 +332,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean reportsTo(Employee manager) {
 		/*
 		self.reportingChain->includes(manager)
@@ -347,6 +358,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean noManagerImpliesDirectReports(DiagnosticChain diagnostics, Map<Object, Object> context) {
 		/*
 		manager.oclIsUndefined() implies directReports->size() > 0
@@ -378,6 +390,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean hasNameAsOperation() {
 		/*
 		name <> null
@@ -403,6 +416,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean nullmustHaveName(DiagnosticChain diagnostics, Map<Object, Object> context) {
 		/*
 		not name.oclIsUndefined() and hasNameAsAttribute and hasNameAsOperation()
@@ -434,6 +448,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean nullmustHaveNonEmptyName(DiagnosticChain diagnostics, Map<Object, Object> context) {
 		/*
 		name->notEmpty() implies name.size() > 0

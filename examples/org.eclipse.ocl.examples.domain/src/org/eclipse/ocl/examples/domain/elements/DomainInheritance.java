@@ -31,6 +31,8 @@ import org.eclipse.ocl.examples.domain.utilities.IndexableIterable;
  */
 public interface DomainInheritance extends DomainType
 {
+	public static DomainInheritance[] EMPTY_ARRAY = new DomainInheritance[0];
+	
 	/**
 	 * Return a depth ordered, OclAny-first, OclSelf-last, Iterable of all the super-adapters including this one.
 	 */

@@ -30,11 +30,9 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClassifier;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
@@ -42,7 +40,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.common.CodeGenHelper;
 import org.eclipse.ocl.examples.codegen.expression.Ast2class;
 import org.eclipse.ocl.examples.domain.library.LibraryOperation;
-import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -50,7 +47,7 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
-public class GenModelCodeGenHelper extends CodeGenHelper
+public class GenModelCodeGenHelper implements CodeGenHelper
 {
 	private static final class OCL2JavaTransformation extends Ast2class {
 		public OCL2JavaTransformation() throws IOException {
@@ -71,7 +68,6 @@ public class GenModelCodeGenHelper extends CodeGenHelper
 	}
 
 	private static WeakReference<Ast2class> ast2classRef = null;
-	private static ProjectMap projectMap = null;
 
 	protected final @NonNull MetaModelManager metaModelManager;
 	private @NonNull Map<EPackage, GenPackage> ePackageMap = new HashMap<EPackage, GenPackage>();
@@ -118,7 +114,7 @@ public class GenModelCodeGenHelper extends CodeGenHelper
 		}
 	}
 
-	protected @NonNull String getCopyright(@NonNull String indentation) {
+	public @NonNull String getCopyright(@NonNull String indentation) {
 		return "";
 	}
 	
@@ -133,7 +129,7 @@ public class GenModelCodeGenHelper extends CodeGenHelper
 		return null;
 	}
 
-	protected @NonNull GenPackage getGenPackage(@NonNull Type type) {
+	public @NonNull GenPackage getGenPackage(@NonNull Type type) {
 		org.eclipse.ocl.examples.pivot.Package pPackage = type.getPackage();
 		String nsURI = pPackage.getNsURI();
 		GenPackage genPackage = uriMap.get(nsURI);
@@ -148,7 +144,12 @@ public class GenModelCodeGenHelper extends CodeGenHelper
 				return genPackage;
 			}
 		}
-		ResourceSet externalResourceSet = metaModelManager.getExternalResourceSet();
+		genPackage = metaModelManager.getGenPackage(nsURI);
+		if (genPackage != null) {
+			install(genPackage);
+			return genPackage;
+		}
+/*		ResourceSet externalResourceSet = metaModelManager.getExternalResourceSet();
 		projectMap = ProjectMap.getAdapter(externalResourceSet);
 		if (projectMap == null) {
 			projectMap = new ProjectMap();
@@ -171,7 +172,7 @@ public class GenModelCodeGenHelper extends CodeGenHelper
 			if (genPackage != null) {
 				return genPackage;
 			}
-		}
+		} */
 		throw new IllegalArgumentException("Unknown package '" + nsURI + "'");
 	}
 

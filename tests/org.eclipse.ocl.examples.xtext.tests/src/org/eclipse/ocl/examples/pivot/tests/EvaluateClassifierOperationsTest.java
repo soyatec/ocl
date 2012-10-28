@@ -25,7 +25,11 @@ import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 @SuppressWarnings("nls")
 public class EvaluateClassifierOperationsTest extends PivotSimpleTestSuite
 {
-    @Override
+	public EvaluateClassifierOperationsTest() {
+		super(false);
+	}
+
+	@Override
     protected void setUp() throws Exception {
         super.setUp();
         helper.setContext(metaModelManager.getMetaclassType());

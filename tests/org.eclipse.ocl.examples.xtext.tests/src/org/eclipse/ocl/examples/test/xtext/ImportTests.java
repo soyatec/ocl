@@ -51,6 +51,7 @@ public class ImportTests extends XtextTestCase
 	{
 		public static final SpacedOut INSTANCE = new SpacedOut();
 
+		@Override
 		public Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp,
 				@NonNull Object sourceValue, Object... argumentValues) {
 			String string = sourceValue == null? Value.INVALID_NAME : ValuesUtil.oclToString(sourceValue);

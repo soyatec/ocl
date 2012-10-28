@@ -29,14 +29,14 @@
 [import org::eclipse::ocl::examples::codegen::common::symbolTemplates/]
 [import org::eclipse::ocl::examples::codegen::common::typeIdTemplates/]
 
-[template public emitBox(ast : OCLExpression, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
+[template public emitBox(ast : pivot::OCLExpression, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [let type : Type = ast.type]
 [if (type.oclIsKindOf(pivot::Enumeration))]
 final <%Value%> [ast.symbolName(expInOcl)/] = createEnumerationLiteralValue(unboxed_[ast.symbolName(expInOcl)/], [type.getEscapedLiteralsName(genPackage)/]);
 [elseif (type.oclIsKindOf(OrderedSetType))]
 assert unboxed_[ast.symbolName(expInOcl)/] != null;
 final @NonNull <%Value%> [ast.symbolName(expInOcl)/] = [if (ast.type.oclAsType(OrderedSetType).elementType.isBoxable())]standardLibrary.createOrderedSetValueOf[else]createOrderedSetValue[/if]([ast.type.typeId(expInOcl)/], unboxed_[ast.symbolName(expInOcl)/]);
-[elseif (type.oclIsKindOf(SetType))]
+[elseif (type.oclIsKindOf(SetType))] 
 assert unboxed_[ast.symbolName(expInOcl)/] != null;
 final @NonNull <%Value%> [ast.symbolName(expInOcl)/] = [if (ast.type.oclAsType(SetType).elementType.isBoxable())]standardLibrary.createSetValueOf[else]createSetValue[/if]([ast.type.typeId(expInOcl)/], unboxed_[ast.symbolName(expInOcl)/]);
 [elseif (type.oclIsKindOf(SequenceType))]
@@ -89,7 +89,8 @@ final @NonNull Object [ast.symbolName(expInOcl)/] = standardLibrary.create[ast.k
 [/template]
 
 [template public emitExpression(ast : ConstructorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
-final <%ObjectValue%> [ast.symbolName(expInOcl)/] = [ast.type.emitQualifiedLiteralName(genPackage)/].createInstance(standardLibrary);
+final <%DomainType%> type_[ast.symbolName(expInOcl)/] = [ast.type.typeIdLiteral(genPackage, expInOcl)/];
+final <%Object%> [ast.symbolName(expInOcl)/] = type_[ast.symbolName(expInOcl)/].createInstance(standardLibrary[if (ast.value <> null)], "[ast.javaString()/]"[/if]);
 [for (part : ConstructorPart | ast.part)]
 [part.initExpression.emitExpression(importer, genPackage, expInOcl)/]
 [part.referredProperty.symbolName(expInOcl)/].initValue(standardLibrary, [ast.symbolName(expInOcl)/], [part.initExpression.symbolName(expInOcl)/]);
@@ -201,6 +202,7 @@ if ([ast.source.symbolName(expInOcl)/] instanceof <%InvalidValue%>) throw ((<%In
 /*
 [ast._'body'.prettyPrint().trim()/]
 */
+	@Override
     public @Nullable Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, @Nullable Object sourceValue[for (i : OCLInteger | Sequence{1..arity})], @Nullable Object iterator[i/][/for]) throws Exception {
 [for (i : OCLInteger | Sequence{1..arity})]
 		final Object [ast.iterator->at(i).symbolName(expInOcl)/] = iterator[i/];	// iterator: [ast.iterator->at(i).name/]
@@ -219,14 +221,15 @@ Object [astName/] = dynamic_[astName/].evaluateIteration(manager_[astName/]);[/l
 [if (ast.variable.initExpression.isConstant())]
 final @NonNull Object [ast.variable.symbolName(expInOcl)/] = [ast.variable.initExpression.symbolName(expInOcl)/];
 [else]
-Object [ast.variable.symbolName(expInOcl)/];
+Object let_[ast.variable.symbolName(expInOcl)/];
 try {
 	[ast.variable.initExpression.emitExpression(importer, genPackage, expInOcl)/]
-	[ast.variable.symbolName(expInOcl)/] = [ast.variable.initExpression.symbolName(expInOcl)/];
+	let_[ast.variable.symbolName(expInOcl)/] = [ast.variable.initExpression.symbolName(expInOcl)/];
 }
 catch (Exception e) {
-	[ast.variable.symbolName(expInOcl)/] = new <%InvalidValueImpl%>(e);
+	let_[ast.variable.symbolName(expInOcl)/] = new <%InvalidValueImpl%>(e);
 }
+final Object [ast.variable.symbolName(expInOcl)/] = let_[ast.variable.symbolName(expInOcl)/];
 [/if]
 [if (not ast._in.isConstant())]
 [ast._in.emitExpression(importer, genPackage, expInOcl)/]
@@ -235,46 +238,50 @@ final Object [ast.symbolName(expInOcl)/] = [ast._in.symbolName(expInOcl)/];[/tem
 
 [template public emitExpression(ast : LiteralExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)][/template]
 
-[template public emitExpression(ast : OperationCallExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ? ((ast.referredOperation.owningType.name = 'Boolean') and (ast.referredOperation.ownedParameter->size() = 1))]
+[template public emitExpression(ast : OperationCallExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ? (ast.referredOperation.usesInvalid())]
 [let astName : String = ast.symbolName(expInOcl)]
 [if (not ast.source.isConstant() and not ast.source.oclIsKindOf(VariableExp))]
-Object [ast.source.symbolName(expInOcl)/];
+Object a[ast.source.symbolName(expInOcl)/];
 try {
 	[ast.source.emitExpression(importer, genPackage, expInOcl)/]
+	a[ast.source.symbolName(expInOcl)/] = [ast.source.symbolName(expInOcl)/];
 } [ast.resetFlags()/]catch (Exception e) {
-	[ast.source.symbolName(expInOcl)/] = new <%InvalidValueImpl%>(e);
+	a[ast.source.symbolName(expInOcl)/] = new <%InvalidValueImpl%>(e);
 }
 [/if]
+[if (ast.argument->notEmpty())]
 [let right : OCLExpression = ast.argument->at(1)]
-[if (not right.isConstant() and not right.oclIsKindOf(VariableExp))]
-Object [right.symbolName(expInOcl)/];
+[if (not right.isConstant() and not right.oclIsKindOf(VariableExp ))]
+Object a[right.symbolName(expInOcl)/];
 try {
 	[right.emitExpression(importer, genPackage, expInOcl)/]
+	a[right.symbolName(expInOcl)/] = [right.symbolName(expInOcl)/];
 } [ast.resetFlags()/]catch (Exception e) {
-	[right.symbolName(expInOcl)/] = new <%InvalidValueImpl%>(e);
+	a[right.symbolName(expInOcl)/] = new <%InvalidValueImpl%>(e);
 }
 [/if]
 [/let]
-[ast.generateCall(importer, genPackage, expInOcl)/][/let][/template]
+[/if]
+[ast.generateCall(importer, genPackage, expInOcl, if (not ast.source.isConstant() and not ast.source.oclIsKindOf(VariableExp)) then 'a' else '' endif)/][/let][/template]
 
-[template public emitExpression(ast : OperationCallExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ? ((ast.referredOperation.owningType.name <> 'Boolean') or (ast.referredOperation.ownedParameter->size() <> 1))]
+[template public emitExpression(ast : OperationCallExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ? (not ast.referredOperation.usesInvalid())]
 [if (not ast.source.isConstant())]
 [ast.source.emitExpression(importer, genPackage, expInOcl)/]
 [/if]
 [for (argument : OCLExpression | ast.argument->reject(isConstant()))]
 [argument.emitExpression(importer, genPackage, expInOcl)/]
 [/for]
-[ast.generateCall(importer, genPackage, expInOcl)/][/template]
+[ast.generateCall(importer, genPackage, expInOcl, '')/][/template]
 
-[template public generateCall(ast : OperationCallExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(genPackage.isFinal(ast.referredOperation))]
+[template public generateCall(ast : OperationCallExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL, pfx : String) ?(genPackage.isFinal(ast.referredOperation))]
 [let arity : OCLInteger = ast.referredOperation.ownedParameter->size()]
 [let astName : String = ast.symbolName(expInOcl)]
 [let operationTypeName : String = 'org.eclipse.ocl.examples.domain.library.Library' + genPackage.emitOperationArity(arity)]
 [let generatedClassName : String = '_' + ast.referredOperation.name + '_' + 'body' + '_' + '']
 [let className : String = if ast.referredOperation.implementationClass <> null then '<%' + ast.referredOperation.implementationClass + '%>.INSTANCE' else genPackage.getImplementationName(ast.referredOperation) endif]
-Object [astName/] = [className/].evaluate(evaluator, [ast.type.typeId(expInOcl)/], [ast.source.symbolName(expInOcl)/][for (argument : OCLExpression | ast.argument) before (', ') separator (', ')][argument.symbolName(expInOcl)/][/for]);[/let][/let][/let][/let][/let][/template]
+Object [astName/] = [className/].evaluate(evaluator, [ast.type.typeId(expInOcl)/], [pfx/][ast.source.symbolName(expInOcl)/][for (argument : OCLExpression | ast.argument) before (', ') separator (', ')][pfx/][argument.symbolName(expInOcl)/][/for]);[/let][/let][/let][/let][/let][/template]
 
-[template public generateCall(ast : OperationCallExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(not genPackage.isFinal(ast.referredOperation))]
+[template public generateCall(ast : OperationCallExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL, pfx : String) ?(not genPackage.isFinal(ast.referredOperation))]
 [let arity : OCLInteger = ast.referredOperation.ownedParameter->size()]
 [let astName : String = ast.symbolName(expInOcl)]
 [let operationTypeName : String = 'org.eclipse.ocl.examples.domain.library.Library' + genPackage.emitOperationArity(arity)]
@@ -284,7 +291,7 @@ Object [astName/] = [className/].evaluate(evaluator, [ast.type.typeId(expInOcl)/
 [if ast.referredOperation.ownedParameter->at(index).type.oclIsKindOf(SelfType)]
 , [ast.argument->at(index).symbolName(expInOcl)/][/if][/for][/if]);
 <%[operationTypeName/]%> dynamic_[astName/] = (<%[operationTypeName/]%>)static_[astName/].lookupImplementation(standardLibrary, [ast.referredOperation.symbolName(expInOcl)/]);
-Object [astName/] = dynamic_[astName/].evaluate(evaluator, [ast.type.typeId(expInOcl)/], [ast.source.symbolName(expInOcl)/][for (argument : OCLExpression | ast.argument) before (', ') separator (', ')][argument.symbolName(expInOcl)/][/for]);[/let][/let][/let][/template]
+Object [astName/] = dynamic_[astName/].evaluate(evaluator, [ast.type.typeId(expInOcl)/], [pfx/][ast.source.symbolName(expInOcl)/][for (argument : OCLExpression | ast.argument) before (', ') separator (', ')][pfx/][argument.symbolName(expInOcl)/][/for]);[/let][/let][/let][/template]
 
 [template public emitExpression(ast : PropertyCallExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [if (not ast.source.isConstant())]
@@ -365,6 +372,10 @@ evaluator.getStaticTypeOf([ast.symbolName(expInOcl)/][/template]
 
 [template public generateTypeOf(genPackage : GenPackage, expInOcl : ExpressionInOCL, ast : VariableExp)]
 evaluator.getStaticTypeOf([ast.referredVariable.symbolName(expInOcl)/][/template]
+
+[query public usesInvalid(operation : Operation) : Boolean =
+((operation.owningType.name = 'Boolean') and (operation.ownedParameter->size() = 1))
+or ((operation.owningType.name = 'OclAny')  and (operation.ownedParameter->size() = 0))/]
 
 [query public isBoxable(type : Type) : Boolean =
 type.oclIsKindOf(pivot::Enumeration) or type.oclIsKindOf(CollectionType) or type.oclIsKindOf(LambdaType) or type.oclIsKindOf(TupleType)

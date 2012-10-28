@@ -124,6 +124,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 {
 	// set this variable true when testing for memory leaks
     private static boolean DISPOSE_RESOURCE_SET = false;
+//	protected static int testCounter = 0;
 	
     public static final class CheckedTestSuite extends TestSuite {
 
@@ -167,7 +168,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	protected static boolean noDebug = false;
 	protected static ResourceSet resourceSet;
 	private static ArrayList<Resource> standardResources;
-	private static int testCounter = 0;
+	protected static int testCounter = 0;
 
 	private static boolean initialized = false;
 	

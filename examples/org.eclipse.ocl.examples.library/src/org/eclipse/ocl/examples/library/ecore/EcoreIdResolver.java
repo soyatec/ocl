@@ -23,17 +23,20 @@ import java.util.Set;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.ExternalCrossReferencer;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainRoot;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
 import org.eclipse.ocl.examples.domain.ids.RootPackageId;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary;
 
 /**
  * EcoreIdResolver provides a package discovery capability so that package identifiers can be resolved.
@@ -51,7 +54,7 @@ class EcoreIdResolver extends IdResolver implements Adapter
 	private boolean directRootsProcessed = false;
 	private boolean crossReferencedRootsProcessed = false;
 	
-	EcoreIdResolver(@NonNull Collection<? extends EObject> roots, @NonNull DomainStandardLibrary standardLibrary) {
+	EcoreIdResolver(@NonNull Collection<? extends EObject> roots, @NonNull ExecutorStandardLibrary standardLibrary) {
 		super(standardLibrary);
 		this.directRoots = roots;
 	}
@@ -160,6 +163,18 @@ class EcoreIdResolver extends IdResolver implements Adapter
 			if (knownPackage != null) {
 				return knownPackage;
 			}
+		}
+		EPackage ePackage = id.getEPackage();
+		if (ePackage != null) {
+			EcoreReflectivePackage ecoreExecutorPackage = new EcoreReflectivePackage(ePackage, (ExecutorStandardLibrary) standardLibrary, id);
+			EList<EClassifier> eClassifiers = ePackage.getEClassifiers();
+//			EcoreReflectiveType[] types = new EcoreReflectiveType[eClassifiers.size()];
+//			for (int i = 0; i < types.length; i++) {
+//				types[i] = new EcoreReflectiveType(eClassifiers.get(i), ecoreExecutorPackage, 0);
+//			}
+//			ecoreExecutorPackage.init((ExecutorStandardLibrary) standardLibrary, types);
+			nsURI2package.put(nsURI, ecoreExecutorPackage);
+			return ecoreExecutorPackage;
 		}
 		throw new UnsupportedOperationException();
 	}

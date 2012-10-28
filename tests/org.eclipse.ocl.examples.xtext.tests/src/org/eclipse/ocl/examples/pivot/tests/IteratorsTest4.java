@@ -641,7 +641,7 @@ public class IteratorsTest4 extends PivotTestSuite
      */
     @Test public void test_closure_invalidBody_142518() {
         assertQueryInvalid(getUMLMetamodel(),
-            "let c : ocl::Type = invalid in ownedType->closure(c)");
+            "let c : ocl::Type = invalid in ownedType->closure(c)", EvaluatorMessages.InvalidLiteral, InvalidValueException.class);
 
         // in the case of a null value, null is allowed in a collection, so
         // it does not result in invalid

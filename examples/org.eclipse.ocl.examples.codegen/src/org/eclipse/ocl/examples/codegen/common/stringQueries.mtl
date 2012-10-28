@@ -20,5 +20,8 @@
 [query public javaString(aString : StringLiteralExp) : String = 
 invoke('org.eclipse.xtext.util.Strings', 'convertToJavaString(java.lang.String)', Sequence{aString.stringSymbol}) /]
 
+[query public javaString(aString : ConstructorExp) : String = 
+invoke('org.eclipse.xtext.util.Strings', 'convertToJavaString(java.lang.String)', Sequence{aString.value}) /]
+
 [query public javaString(aString : NamedElement) : String = 
 invoke('org.eclipse.xtext.util.Strings', 'convertToJavaString(java.lang.String)', Sequence{aString.name}) /]

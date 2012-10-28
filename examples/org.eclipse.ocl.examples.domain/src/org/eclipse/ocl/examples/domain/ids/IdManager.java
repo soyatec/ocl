@@ -83,7 +83,7 @@ public class IdManager
 		{
 			@Override
 			protected @NonNull NsURIPackageId newTypeId(@NonNull String nsURI) {
-				return new NsURIPackageIdImpl(nsURI);
+				return new NsURIPackageIdImpl(nsURI, null);
 			}
 		};
 	
@@ -242,11 +242,14 @@ public class IdManager
 	/**
 	 * Return the URIed package typeId.
 	 */
-    public @NonNull PackageId getNsURITypeId(@NonNull String nsURI) {
+    public @NonNull PackageId getNsURIPackageId(@NonNull String nsURI, @Nullable EPackage ePackage) {
 		WeakReference<NsURIPackageId> ref = nsURIs.get(nsURI);
 		if (ref != null) {
-			PackageId oldTypeId = ref.get();
+			NsURIPackageId oldTypeId = ref.get();
 			if (oldTypeId != null) {
+				if ((ePackage != null) && (oldTypeId.getEPackage() == null)) {
+					oldTypeId.setEPackage(ePackage);
+				}
 				return oldTypeId;
 			}
 		}
@@ -258,7 +261,7 @@ public class IdManager
 					return oldTypeId;
 				}
 			}
-			NsURIPackageId newTypeId = new NsURIPackageIdImpl(nsURI);
+			NsURIPackageId newTypeId = new NsURIPackageIdImpl(nsURI, ePackage);
 			nsURIs.put(nsURI, new WeakReference<NsURIPackageId>(newTypeId));
 			return newTypeId;
 		}
@@ -317,7 +320,7 @@ public class IdManager
 	public @NonNull PackageId getPackageId(@NonNull DomainPackage aPackage) {
 		String nsURI = aPackage.getNsURI();
 		if (nsURI != null) {
-			return getNsURITypeId(nsURI);
+			return getNsURIPackageId(nsURI, null);
 		}
 		String name = aPackage.getName();
 		assert name != null;
@@ -336,7 +339,7 @@ public class IdManager
 	public @NonNull PackageId getPackageId(@NonNull EPackage aPackage) {
 		String nsURI = aPackage.getNsURI();
 		if (nsURI != null) {
-			return getNsURITypeId(nsURI);
+			return getNsURIPackageId(nsURI, aPackage);
 		}
 		String name = aPackage.getName();
 		assert name != null;
@@ -344,7 +347,7 @@ public class IdManager
 		if (parentPackage != null) {
 			return getPackageId(parentPackage).getNestedPackageId(name);
 		}
-		return getNsURITypeId(name);
+		return getNsURIPackageId(name, null);
 	}
 
 	/**

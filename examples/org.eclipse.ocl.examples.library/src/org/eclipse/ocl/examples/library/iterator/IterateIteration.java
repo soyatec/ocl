@@ -33,20 +33,10 @@ public class IterateIteration extends AbstractIteration
 	public @NonNull Object createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull TypeId accumulatorTypeId, @NonNull TypeId bodyTypeId) {
 		throw new UnsupportedOperationException();		// Never used since values are assigned directly as the accumulator
 	}
-	
-	@Override
-	public @Nullable Object evaluateIteration(@NonNull DomainIterationManager iterationManager) throws Exception {
-		for ( ; iterationManager.hasCurrent(); iterationManager.advanceIterators()) {
-			Object resultVal = iterationManager.updateBody();
-			if (resultVal != null) {
-				return resultVal;
-			}
-		}
-		return resolveTerminalValue(iterationManager);			
-	}
 
 	@Override
-	protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
-		throw new UnsupportedOperationException();		// Never used since evaluateIteration overwritten
+	protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) throws Exception {
+		Object bodyValue = iterationManager.evaluateBody();
+		return iterationManager.updateAccumulator(bodyValue);
 	}
 }

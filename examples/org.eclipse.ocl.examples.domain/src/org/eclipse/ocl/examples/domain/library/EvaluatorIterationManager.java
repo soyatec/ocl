@@ -114,13 +114,13 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 		this.accumulatorValue = iterationManager.accumulatorValue;
 		this.accumulatorVariable = iterationManager.accumulatorVariable;
 	}
-	
-	public @Nullable Object getAccumulatorValue() {
-		return accumulatorValue;
-	}
 
 	public @Nullable Object evaluateBody() {
 		return evaluator.evaluate(body);
+	}
+	
+	public @Nullable Object getAccumulatorValue() {
+		return accumulatorValue;
 	}
 	
 	public @NonNull CollectionValue getCollectionValue() {
@@ -137,9 +137,8 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 		return body.toString();
 	}
 
-	public @Nullable Object updateBody() {
-		Object bodyVal = evaluateBody();		
-		this.accumulatorValue = bodyVal;
+	public @Nullable Object updateAccumulator(Object newValue) {
+		this.accumulatorValue = newValue;
 		DomainTypedElement accumulatorVariable2 = accumulatorVariable;
 		if (accumulatorVariable2 != null) {
 			getEvaluationEnvironment().replace(accumulatorVariable2, accumulatorValue);

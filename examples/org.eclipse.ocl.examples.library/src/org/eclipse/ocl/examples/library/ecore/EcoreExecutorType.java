@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorFragment;
 import org.eclipse.ocl.examples.library.executor.ExecutorPackage;
@@ -68,7 +67,7 @@ public class EcoreExecutorType extends ExecutorType
 	}
 
 	@Override
-	public @NonNull ObjectValue createInstance(@NonNull DomainStandardLibrary standardLibrary) {
+	public @NonNull Object createInstance(@NonNull DomainStandardLibrary standardLibrary) {
 		EClassifier eClassifier2 = eClassifier;
 		if (eClassifier2 instanceof EClass) {
 			EClass eClass = (EClass)eClassifier2;

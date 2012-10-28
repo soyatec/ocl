@@ -115,6 +115,7 @@ public class NameQueries
 	
 	private static Map<Element, NameAllocation<Constraint>> uniqueConstraints = new HashMap<Element, NameAllocation<Constraint>>();
 	private static Map<Element, NameAllocation<Operation>> uniqueOperations = new HashMap<Element, NameAllocation<Operation>>();
+	private static Map<Element, NameAllocation<org.eclipse.ocl.examples.pivot.Package>> uniquePackages = new HashMap<Element, NameAllocation<org.eclipse.ocl.examples.pivot.Package>>();
 	private static Map<Element, NameAllocation<Property>> uniqueProperties = new HashMap<Element, NameAllocation<Property>>();
 	private static Map<Element, NameAllocation<String>> uniqueStrings = new HashMap<Element, NameAllocation<String>>();
 	private static Map<Element, TuplePartAllocation> uniqueTupleParts = new HashMap<Element, TuplePartAllocation>();
@@ -304,6 +305,34 @@ public class NameQueries
 			uniqueOperations.put(context, allocation);			
 		}
 		return allocation.get(operation);
+	}
+	
+	/**
+	 * Return a valid Java identifier suffix encoding of a property name that is unique within the scope of element.
+	 */
+	public static String getUniqueText(Element context, org.eclipse.ocl.examples.pivot.Package pkg) {
+		NameAllocation<org.eclipse.ocl.examples.pivot.Package> allocation = uniquePackages.get(context);
+		if (allocation == null) {
+			allocation = new NameAllocation<org.eclipse.ocl.examples.pivot.Package>()
+			{
+				@Override
+				protected String computeUniqueText(org.eclipse.ocl.examples.pivot.Package pkg) {
+					StringBuilder s = new StringBuilder();
+					appendJavaCharacters(s, pkg.getName());
+					if (isUsed(s.toString())) {
+						for (int i = 1; true; i++) {
+							if (!isUsed(s.toString() + '_' + Integer.toString(i))) {
+								s.append(i);
+								break;
+							}
+						}
+					}
+					return s.toString();
+				}
+			};
+			uniquePackages.put(context, allocation);			
+		}
+		return allocation.get(pkg);
 	}
 	
 	/**

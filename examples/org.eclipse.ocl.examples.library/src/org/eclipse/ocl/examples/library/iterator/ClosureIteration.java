@@ -54,7 +54,7 @@ public class ClosureIteration extends AbstractIteration
 			}
 		}
 		Object bodyVal = iterationManager.evaluateBody();		
-		assert !(bodyVal instanceof InvalidValue);
+		if (bodyVal instanceof InvalidValue) { throw ((InvalidValue)bodyVal).getException(); }	// FIXME Analyze away
 		if (isNull(bodyVal)) {
 			return iterationManager.getAccumulatorValue();		// Null body is termination
 		}

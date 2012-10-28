@@ -62,6 +62,7 @@ public class OCLstdlibTests extends XtextTestCase
 	{
 		public static final Comparator<? super Element> INSTANCE = new MonikeredComparator();
 
+		@Override
 		public int compare(Element o1, Element o2) {
 			String m1 = Pivot2Moniker.toString(o1);
 			String m2 = Pivot2Moniker.toString(o2);

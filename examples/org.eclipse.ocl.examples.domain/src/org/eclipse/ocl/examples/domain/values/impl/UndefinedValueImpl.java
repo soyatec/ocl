@@ -50,6 +50,10 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		return toInvalidValue();
 	}
 
+	public @NonNull Number asNumber() {
+		throw new InvalidValueException("undefined value has no Number value");
+	}
+
 	public @NonNull Object asObject() {
 		return toInvalidValue();
 	}

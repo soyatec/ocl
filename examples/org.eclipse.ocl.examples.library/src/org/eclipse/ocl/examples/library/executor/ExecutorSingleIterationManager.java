@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractIterationManager;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
@@ -31,6 +32,7 @@ public class ExecutorSingleIterationManager extends AbstractIterationManager
 {	
 	protected final @NonNull TypeId returnTypeId;
 	protected final @NonNull LibraryBinaryOperation body;
+	protected final int depth;
 	private @Nullable Object accumulatorValue;
 	protected final @NonNull Iterator<? extends Object> iteratorValue;
 	private Object currentValue;		// 'null' is a valid value so 'iteratorValue' is used as end of iteration
@@ -46,14 +48,34 @@ public class ExecutorSingleIterationManager extends AbstractIterationManager
 		super(evaluator);
 		this.returnTypeId = returnTypeId;
 		this.body = body;
-		this.accumulatorValue = accumulatorValue;
+		this.depth = 0;
+		updateAccumulator(accumulatorValue);
 		this.iteratorValue = collectionValue.iterator();
+		advanceIterators();
+	}
+
+	protected ExecutorSingleIterationManager(@NonNull ExecutorSingleIterationManager iterationManager, @NonNull CollectionValue value) {
+		super(iterationManager.getEvaluator());
+		this.returnTypeId = iterationManager.returnTypeId;
+		this.body = iterationManager.body;
+		this.depth = iterationManager.depth + 1;
+		this.accumulatorValue = iterationManager.accumulatorValue;
+		this.iteratorValue = value.iterator();
 		advanceIterators();
 	}
 	
 	public boolean advanceIterators() {
 		currentValue = iteratorValue.hasNext() ? iteratorValue.next() : iteratorValue;
 		return currentValue != iteratorValue;
+	}
+
+	@Override
+	public @NonNull DomainIterationManager createNestedIterationManager(@NonNull CollectionValue value) {
+		return new ExecutorSingleIterationManager(this, value);
+	}
+
+	public @Nullable Object evaluateBody() throws Exception {
+		return body.evaluate(evaluator, returnTypeId, accumulatorValue, get());
 	}
 
 	@Override
@@ -64,26 +86,17 @@ public class ExecutorSingleIterationManager extends AbstractIterationManager
 	public @Nullable Object getAccumulatorValue() {
 		return accumulatorValue;
 	}
-
-	public @Nullable Object evaluateBody() throws Exception {
-//		try {
-			return body.evaluate(evaluator, returnTypeId, accumulatorValue, get());
-//		} catch (InvalidValueException e) {
-//			return throwInvalidEvaluation(e);
-//		}
-	}
 	
 	public boolean hasCurrent() {
 		return currentValue != iteratorValue;
 	}
 
-//	public NullValue throwInvalidEvaluation(String message, Object... bindings) {
-//		String boundMessage = NLS.bind(message, bindings);
-//		throw new InvalidEvaluationException(null, boundMessage, null, null, null);
-//	}
+	@Override
+	public boolean isOuterIteration() {
+		return depth == 0;
+	}
 
-	public @Nullable Object updateBody() throws Exception {
-		Object newValue = body.evaluate(evaluator, returnTypeId, accumulatorValue, get());
+	public @Nullable Object updateAccumulator(Object newValue) {
 		this.accumulatorValue = newValue;
 		return null;					// carry on
 	}

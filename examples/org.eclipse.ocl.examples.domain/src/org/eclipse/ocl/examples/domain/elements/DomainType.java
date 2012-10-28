@@ -36,7 +36,7 @@ public interface DomainType extends DomainNamespace
 	 * OCL functionality is permitted to use the ObjectValue until initialisation has completed.
 	 * @param value 
 	 */
-	@NonNull ObjectValue createInstance(@NonNull DomainStandardLibrary standardLibrary);
+	@NonNull Object createInstance(@NonNull DomainStandardLibrary standardLibrary);
 
 	/**
 	 * Return a new instance of this data type from valueFactory.

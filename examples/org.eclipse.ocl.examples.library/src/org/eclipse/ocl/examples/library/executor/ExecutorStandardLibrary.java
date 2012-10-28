@@ -39,7 +39,7 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 //	private Map<EPackage, EcoreExecutorPackage> ePackageMap = new HashMap<EPackage, EcoreExecutorPackage>();
 	private @NonNull Map<String, WeakReference<EcoreExecutorPackage>> ePackageMap = new WeakHashMap<String, WeakReference<EcoreExecutorPackage>>();
 	private Map<DomainPackage, WeakReference<DomainReflectivePackage>> domainPackageMap = null;
-	private @NonNull Map<EClassifier, WeakReference<ExecutorType>> typeMap = new WeakHashMap<EClassifier, WeakReference<ExecutorType>>();
+	private @NonNull Map<EClassifier, WeakReference<DomainInheritance>> typeMap = new WeakHashMap<EClassifier, WeakReference<DomainInheritance>>();
 //	private Map<Class<?>, DomainEnumeration> enumerationMap = null;
 	
 	public ExecutorStandardLibrary(EcoreExecutorPackage... execPackages) {
@@ -120,7 +120,7 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 			String nsURI = domainPackage.getNsURI();
 			EcoreExecutorPackage ecoreExecutorPackage = nsURI != null ? weakGet(ePackageMap, nsURI) : null;
 			if (ecoreExecutorPackage != null) {
-				ExecutorType executorType = ecoreExecutorPackage.getType(type.getName());
+				DomainInheritance executorType = ecoreExecutorPackage.getType(type.getName());
 				if (executorType != null) {
 					return executorType;
 				}
@@ -154,13 +154,13 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 		return nsURI != null ? weakGet(ePackageMap, nsURI) : null;
 	}
 
-	public synchronized ExecutorType getOclType(@NonNull String typeName) {
+	public synchronized DomainInheritance getOclType(@NonNull String typeName) {
 		for (WeakReference<EcoreExecutorPackage> dPackage : ePackageMap.values()) {
 // FIXME			if (OCLstdlibTables.PACKAGE.getNsURI().equals(dPackage.getNsURI())) {
 			if (dPackage != null) {
 				EcoreExecutorPackage packageRef = dPackage.get();
 				if (packageRef != null) {
-					ExecutorType type = packageRef.getType(typeName);
+					DomainInheritance type = packageRef.getType(typeName);
 					if (type != null) {
 						return type;
 					}
@@ -170,15 +170,15 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 		return null;
 	}
 
-	public synchronized @NonNull ExecutorType getType(@NonNull EClassifier eClassifier) {
-		ExecutorType type = weakGet(typeMap, eClassifier);
+	public synchronized @NonNull DomainInheritance getType(@NonNull EClassifier eClassifier) {
+		DomainInheritance type = weakGet(typeMap, eClassifier);
 		if (type == null) {
 			EPackage ePackage = eClassifier.getEPackage();
 			assert ePackage != null;
 			EcoreExecutorPackage execPackage = getPackage(ePackage);
 			if (execPackage != null) {
 				type = execPackage.getType(eClassifier.getName());
-				typeMap.put(eClassifier, new WeakReference<ExecutorType>(type));
+				typeMap.put(eClassifier, new WeakReference<DomainInheritance>(type));
 			}
 		}
 		return DomainUtil.nonNullState(type);

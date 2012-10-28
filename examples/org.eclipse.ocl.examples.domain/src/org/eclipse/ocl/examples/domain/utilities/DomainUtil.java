@@ -180,6 +180,9 @@ public class DomainUtil
 	}
 
 	/**
+	 * Check for an in appropriate model state which should have been detected by a model validation pass. Typical problems
+	 * that nonNullModel detects are null mandatory model elements.
+	 *<p>
 	 * Return aT, checking the assertion that this call would not be necessary if the Ecore model was guaranteed to be valid.
 	 */
 	public static @NonNull <T> T nonNullModel(@Nullable T aT) {

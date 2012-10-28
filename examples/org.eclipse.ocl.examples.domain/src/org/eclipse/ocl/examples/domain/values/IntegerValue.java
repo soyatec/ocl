@@ -31,11 +31,6 @@ public interface IntegerValue extends NumericValue
 	 * @generated NOT
 	 */
 	@NonNull IntegerValue add(@NonNull IntegerValue right);
-	
-	/**
-	 * @generated NOT
-	 */
-	@NonNull Number asNumber();
 
 	/**
 	 * @generated NOT

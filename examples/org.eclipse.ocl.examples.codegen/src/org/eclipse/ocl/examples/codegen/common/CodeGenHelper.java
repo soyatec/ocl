@@ -22,35 +22,21 @@ import org.eclipse.ocl.examples.domain.library.LibraryOperation;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Type;
 
-public class CodeGenHelper
+public interface CodeGenHelper
 {
 	/**
 	 * Return a copyright notice using indentation to indent intermediate lines.
 	 */
-	public static @NonNull String getCopyright(@NonNull CodeGenHelper codeGenHelper, @NonNull String indentation) {
-		return codeGenHelper.getCopyright(indentation);
-	}
+	@NonNull String getCopyright(@NonNull String indentation);
 	
 	/**
 	 * Return the <%...%> escaped name for a type.
 	 */
-	public LibraryOperation loadClass(ExpressionInOCL query, File targetFolder,
-			String packageName, String className, boolean saveSource) throws Exception {
-		throw new UnsupportedOperationException();
-	}
+	LibraryOperation loadClass(ExpressionInOCL query, File targetFolder,
+			String packageName, String className, boolean saveSource) throws Exception;
 	
 	/**
 	 * Return the GenPackage for a type.
 	 */
-	public static @NonNull GenPackage getGenPackage(@NonNull CodeGenHelper codeGenHelper, @NonNull Type type) {
-		return codeGenHelper.getGenPackage(type);
-	}
-
-	protected @NonNull String getCopyright(@NonNull String indentation) {
-		throw new UnsupportedOperationException();
-	}
-	
-	protected @NonNull GenPackage getGenPackage(@NonNull Type type) {
-		throw new UnsupportedOperationException();
-	}
+	@NonNull GenPackage getGenPackage(@NonNull Type type);
 }

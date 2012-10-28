@@ -72,6 +72,7 @@ public class EmployeeBodies
 		/*
 		not name.oclIsUndefined() and hasNameAsAttribute and hasNameAsOperation()
 		*/
+		@Override
 		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull Employee unboxed_self = (Employee)self;
@@ -148,6 +149,7 @@ public class EmployeeBodies
 		/*
 		name->notEmpty() implies name.size() > 0
 		*/
+		@Override
 		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull Employee unboxed_self = (Employee)self;
@@ -208,6 +210,7 @@ public class EmployeeBodies
 		/*
 		manager.oclIsUndefined() implies directReports->size() > 0
 		*/
+		@Override
 		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull Employee unboxed_self = (Employee)self;
@@ -263,6 +266,7 @@ public class EmployeeBodies
 		/*
 		name <> null
 		*/
+		@Override
 		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull Employee unboxed_self = (Employee)self;
@@ -294,6 +298,7 @@ public class EmployeeBodies
 		/*
 		self.reportingChain->includes(manager)
 		*/
+		@Override
 		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self, final @Nullable Object manager) throws Exception {
 			assert self != null;
 			final @NonNull Employee unboxed_self = (Employee)self;
@@ -331,6 +336,7 @@ public class EmployeeBodies
 		/*
 		Employee.allInstances()->select(reportsTo(self))
 		*/
+		@Override
 		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull Employee unboxed_self = (Employee)self;
@@ -388,6 +394,7 @@ public class EmployeeBodies
 		/*
 		company.employees->select(manager = self)
 		*/
+		@Override
 		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull Employee unboxed_self = (Employee)self;
@@ -459,6 +466,7 @@ public class EmployeeBodies
 		/*
 		name <> null
 		*/
+		@Override
 		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull Employee unboxed_self = (Employee)self;
@@ -496,6 +504,7 @@ public class EmployeeBodies
 	else manager.reportingChain->prepend(manager)
 	endif
 		*/
+		@Override
 		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull Employee unboxed_self = (Employee)self;

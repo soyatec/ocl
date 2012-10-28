@@ -42,6 +42,9 @@ X_[ast.getSymbolName()/][/template]
 [template public symbolName(ast : Operation, expInOcl : ExpressionInOCL)]
 O_[expInOcl.getUniqueText(ast)/][/template]
 
+[template public symbolName(ast : Package, expInOcl : ExpressionInOCL)]
+Pk_[expInOcl.getUniqueText(ast)/][/template]
+
 [template public symbolName(ast : Property, expInOcl : ExpressionInOCL)]
 [if ast.eContainer().oclIsKindOf(TupleType)]
 L_[expInOcl.getUniqueText(ast)/][else]

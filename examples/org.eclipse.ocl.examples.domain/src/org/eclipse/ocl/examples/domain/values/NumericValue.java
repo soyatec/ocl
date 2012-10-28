@@ -28,6 +28,11 @@ public interface NumericValue extends Value, Comparable<NumericValue>
 	 * @generated NOT
 	 */
 	@NonNull NumericValue abs();
+	
+	/**
+	 * @generated NOT
+	 */
+	@NonNull Number asNumber();
 
 	/**
 	 * @generated NOT

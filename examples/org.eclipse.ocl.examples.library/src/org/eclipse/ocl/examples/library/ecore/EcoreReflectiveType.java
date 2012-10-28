@@ -16,8 +16,13 @@
  */
 package org.eclipse.ocl.examples.library.ecore;
 
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
@@ -29,17 +34,18 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
+import org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.examples.library.executor.ReflectiveType;
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 
 public class EcoreReflectiveType extends ReflectiveType
 {
+	@SuppressWarnings("null")
+	public static final @NonNull List<DomainInheritance> EMPTY_INHERITANCES = Collections.emptyList();
 	protected final @NonNull EClassifier eClassifier;
 	protected final @NonNull DomainTypeParameters typeParameters;
 	
-	public EcoreReflectiveType(@NonNull EcoreExecutorPackage evaluationPackage, int flags, @NonNull EClassifier eClassifier, @NonNull DomainNamedElement... typeParameters) {
+	public EcoreReflectiveType(@NonNull EcoreReflectivePackage evaluationPackage, int flags, @NonNull EClassifier eClassifier, @NonNull DomainNamedElement... typeParameters) {
 		super(DomainUtil.nonNullEMF(eClassifier.getName()), evaluationPackage, flags);
 		this.eClassifier = eClassifier;
 		this.typeParameters = new DomainTypeParameters(typeParameters);
@@ -51,11 +57,21 @@ public class EcoreReflectiveType extends ReflectiveType
 	}
 
 	@Override
-	public @NonNull ObjectValue createInstance(@NonNull DomainStandardLibrary standardLibrary) {
+	public @NonNull Object createInstance(@NonNull DomainStandardLibrary standardLibrary) {
 		if (eClassifier instanceof EClass) {
 			EClass eClass = (EClass)eClassifier;
 			EObject element = eClass.getEPackage().getEFactoryInstance().create(eClass);
 			return ValuesUtil.createObjectValue(DomainUtil.nonNullEMF(element));
+		}
+		return super.createInstance(standardLibrary);
+	}
+
+	@Override
+	public @NonNull Object createInstance(@NonNull DomainStandardLibrary standardLibrary, @NonNull String value) {
+		if (eClassifier instanceof EDataType) {
+			EDataType eDataType = (EDataType)eClassifier;
+			Object element = eDataType.getEPackage().getEFactoryInstance().createFromString(eDataType, value);
+			return DomainUtil.nonNullEMF(element);
 		}
 		return super.createInstance(standardLibrary);
 	}
@@ -66,7 +82,33 @@ public class EcoreReflectiveType extends ReflectiveType
 
 	@Override
 	public @NonNull Iterable<? extends DomainInheritance> getInitialSuperInheritances() {
-		throw new UnsupportedOperationException();		// FIXME
+		if (eClassifier instanceof EClass) {
+			final Iterator<EClass> iterator = ((EClass)eClassifier).getESuperTypes().iterator();
+			return new Iterable<DomainInheritance>()
+			{
+				public Iterator<DomainInheritance> iterator() {
+					return new Iterator<DomainInheritance>()
+					{
+						public boolean hasNext() {
+							return iterator.hasNext();
+						}
+
+						public DomainInheritance next() {
+							EClass next = iterator.next();
+							assert next != null;
+							return getStandardLibrary().getType(next);
+						}
+
+						public void remove() {
+							throw new UnsupportedOperationException();
+						}					
+					};
+				}			
+			};
+		}
+		else {
+			return EMPTY_INHERITANCES;
+		}
 	}
 
 	public @NonNull Iterable<? extends DomainOperation> getLocalOperations() {
@@ -85,8 +127,8 @@ public class EcoreReflectiveType extends ReflectiveType
 		return DomainUtil.nonNullPivot(eClassifier.getName());
 	}
 
-	public @NonNull DomainStandardLibrary getStandardLibrary() {
-		return OCLstdlibTables.LIBRARY;
+	public @NonNull ExecutorStandardLibrary getStandardLibrary() {
+		return ((EcoreReflectivePackage)getPackage()).getStandardLibrary(); //OCLstdlibTables.LIBRARY;
 	}
 
 	public @NonNull DomainTypeParameters getTypeParameters() {

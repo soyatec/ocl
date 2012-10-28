@@ -57,7 +57,6 @@ import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
@@ -363,7 +362,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		DomainType type = ce.getType();
 		String value = ce.getValue();
 		if (value == null) {
-			ObjectValue objectValue = type.createInstance(metaModelManager);
+			Object objectValue = type.createInstance(metaModelManager);
 			for (ConstructorPart part : ce.getPart()) {
 				OCLExpression initExpression = part.getInitExpression();
 				if (initExpression != null) {

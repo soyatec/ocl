@@ -27,6 +27,10 @@ import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 @SuppressWarnings("nls")
 public class PrettyPrinterTest extends PivotSimpleTestSuite
 {
+	public PrettyPrinterTest() {
+		super(false);
+	}
+
     @Override
     protected void setUp() throws Exception {
         super.setUp();

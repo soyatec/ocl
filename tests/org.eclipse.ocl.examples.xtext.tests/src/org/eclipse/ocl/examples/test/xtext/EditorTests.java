@@ -154,6 +154,7 @@ public class EditorTests extends XtextTestCase
 		XtextDocument document = (XtextDocument) editor.getDocument();
 		document.modify(new IUnitOfWork<Object, XtextResource>()
 		{
+			@Override
 			public Object exec(XtextResource resource) throws Exception {
 				resource.setValidationDisabled(false);
 				PivotResourceValidator resourceValidator = new PivotResourceValidator();
@@ -165,6 +166,7 @@ public class EditorTests extends XtextTestCase
 		});
 		document.readOnly(new IUnitOfWork<Object, XtextResource>()
 		{
+			@Override
 			public Object exec(XtextResource resource) throws Exception {
 				assertNoResourceErrors("Loaded CS", resource);
 				CS2Pivot cs2Pivot = PivotUtil.getAdapter(CS2Pivot.class, resource);		// FIXME Wrong class
@@ -188,6 +190,7 @@ public class EditorTests extends XtextTestCase
 		final Set<EObject> pivotContent = new HashSet<EObject>();
 		document.readOnly(new IUnitOfWork<Object, XtextResource>()
 		{
+			@Override
 			public Object exec(XtextResource resource) throws Exception {
 //				assertNoResourceErrors("Loaded CS", resource);
 				CS2PivotResourceAdapter cs2Pivot = PivotUtil.getAdapter(CS2PivotResourceAdapter.class, resource);

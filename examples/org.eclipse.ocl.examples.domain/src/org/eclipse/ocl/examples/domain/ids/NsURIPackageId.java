@@ -14,12 +14,16 @@
  */
 package org.eclipse.ocl.examples.domain.ids;
 
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An NsURIPackageId provides a unique hierarchical identifier for a package which has an nsURI.
  */
 public interface NsURIPackageId extends PackageId
 {
+	@Nullable EPackage getEPackage();
 	@NonNull String getNsURI();
+	void setEPackage(@NonNull EPackage ePackage);
 }

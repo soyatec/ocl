@@ -29,11 +29,6 @@ public interface RealValue extends NumericValue
 	 * @generated NOT
 	 */
 	@NonNull RealValue add(@NonNull RealValue right);
-	
-	/**
-	 * @generated NOT
-	 */
-	@NonNull Number asNumber();
 
 	/**
 	 * @generated NOT

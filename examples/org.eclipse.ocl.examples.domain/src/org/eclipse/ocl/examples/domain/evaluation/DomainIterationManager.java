@@ -83,8 +83,7 @@ public interface DomainIterationManager
 	boolean isOuterIteration();
 
 	/**
-	 * Evaluate the iteration body for the current iterators and update the accumulator
-	 * accordingly.
+	 * Update the accumulator witrh the result of a body iteration.
 	 * <br>
 	 * This implements the body of an iterate iteration for which the accumulator value may
 	 * be assigned to a completely independent value.
@@ -93,5 +92,5 @@ public interface DomainIterationManager
 	 * @throws Exception 
 	 * @throws InvalidValueException 
 	 */
-	@Nullable Object updateBody() throws Exception;
+	@Nullable Object updateAccumulator(Object newValue) throws Exception;
 }

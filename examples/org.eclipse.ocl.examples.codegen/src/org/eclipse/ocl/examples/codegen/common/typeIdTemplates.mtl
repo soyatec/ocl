@@ -15,11 +15,13 @@
  * $Id$
  **/]
 [comment encoding = UTF-8 /]
-[module org::eclipse::ocl::examples::codegen::common::typeIdTemplates('http://www.eclipse.org/ocl/3.1.0/Pivot')/]
+[module org::eclipse::ocl::examples::codegen::common::typeIdTemplates('http://www.eclipse.org/ocl/3.1.0/Pivot','http://www.eclipse.org/emf/2002/GenModel')/]
 
 [import org::eclipse::ocl::examples::codegen::common::elementQueries/]
+[import org::eclipse::ocl::examples::codegen::common::genPackageQueries/]
 [import org::eclipse::ocl::examples::codegen::common::nameQueries/]
 [import org::eclipse::ocl::examples::codegen::common::pivotQueries/]
+[import org::eclipse::ocl::examples::codegen::common::qualifiedLiteralTemplates/]
 [import org::eclipse::ocl::examples::codegen::common::symbolTemplates/]
 
 [**
@@ -31,3 +33,9 @@
 
 [template public typeId(type : Type, expInOcl : ExpressionInOCL)]
 [type.symbolName(expInOcl)/][/template]
+
+[template public typeIdLiteral(type : Type, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
+[if (genPackage.hasTablesClass(type))]
+[type.emitQualifiedLiteralName(genPackage)/].getTypeId()[else]
+evaluator.getIdResolver().getType([type.symbolName(expInOcl)/], null)[/if]
+[/template]

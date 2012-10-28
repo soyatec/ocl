@@ -107,7 +107,8 @@ public class CompanyPackageImpl extends EPackageImpl implements CompanyPackage {
 		EValidator.Registry.INSTANCE.put
 			(theCompanyPackage, 
 			 new EValidator.Descriptor() {
-				 public EValidator getEValidator() {
+				 @Override
+				public EValidator getEValidator() {
 					 return CompanyValidator.INSTANCE;
 				 }
 			 });
@@ -126,6 +127,7 @@ public class CompanyPackageImpl extends EPackageImpl implements CompanyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCompany() {
 		return companyEClass;
 	}
@@ -135,6 +137,7 @@ public class CompanyPackageImpl extends EPackageImpl implements CompanyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCompany_Name() {
 		return (EAttribute)companyEClass.getEStructuralFeatures().get(0);
 	}
@@ -144,6 +147,7 @@ public class CompanyPackageImpl extends EPackageImpl implements CompanyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCompany_Employees() {
 		return (EReference)companyEClass.getEStructuralFeatures().get(1);
 	}
@@ -153,6 +157,7 @@ public class CompanyPackageImpl extends EPackageImpl implements CompanyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCompany_Size() {
 		return (EAttribute)companyEClass.getEStructuralFeatures().get(2);
 	}
@@ -162,6 +167,7 @@ public class CompanyPackageImpl extends EPackageImpl implements CompanyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getCompany__DummyInvariant__DiagnosticChain_Map() {
 		return companyEClass.getEOperations().get(0);
 	}
@@ -171,6 +177,7 @@ public class CompanyPackageImpl extends EPackageImpl implements CompanyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEmployee() {
 		return employeeEClass;
 	}
@@ -180,6 +187,7 @@ public class CompanyPackageImpl extends EPackageImpl implements CompanyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getEmployee_Name() {
 		return (EAttribute)employeeEClass.getEStructuralFeatures().get(0);
 	}
@@ -189,6 +197,7 @@ public class CompanyPackageImpl extends EPackageImpl implements CompanyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEmployee_Manager() {
 		return (EReference)employeeEClass.getEStructuralFeatures().get(1);
 	}
@@ -198,6 +207,7 @@ public class CompanyPackageImpl extends EPackageImpl implements CompanyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEmployee_Company() {
 		return (EReference)employeeEClass.getEStructuralFeatures().get(2);
 	}
@@ -207,6 +217,7 @@ public class CompanyPackageImpl extends EPackageImpl implements CompanyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEmployee_DirectReports() {
 		return (EReference)employeeEClass.getEStructuralFeatures().get(3);
 	}
@@ -216,6 +227,7 @@ public class CompanyPackageImpl extends EPackageImpl implements CompanyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEmployee_AllReports() {
 		return (EReference)employeeEClass.getEStructuralFeatures().get(4);
 	}
@@ -225,6 +237,7 @@ public class CompanyPackageImpl extends EPackageImpl implements CompanyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEmployee_ReportingChain() {
 		return (EReference)employeeEClass.getEStructuralFeatures().get(5);
 	}
@@ -234,6 +247,7 @@ public class CompanyPackageImpl extends EPackageImpl implements CompanyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getEmployee_HasNameAsAttribute() {
 		return (EAttribute)employeeEClass.getEStructuralFeatures().get(6);
 	}
@@ -243,6 +257,7 @@ public class CompanyPackageImpl extends EPackageImpl implements CompanyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getEmployee__ReportsTo__Employee() {
 		return employeeEClass.getEOperations().get(0);
 	}
@@ -252,6 +267,7 @@ public class CompanyPackageImpl extends EPackageImpl implements CompanyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getEmployee__NoManagerImpliesDirectReports__DiagnosticChain_Map() {
 		return employeeEClass.getEOperations().get(1);
 	}
@@ -261,6 +277,7 @@ public class CompanyPackageImpl extends EPackageImpl implements CompanyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getEmployee__HasNameAsOperation() {
 		return employeeEClass.getEOperations().get(2);
 	}
@@ -270,6 +287,7 @@ public class CompanyPackageImpl extends EPackageImpl implements CompanyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getCompanySizeKind() {
 		return companySizeKindEEnum;
 	}
@@ -279,6 +297,7 @@ public class CompanyPackageImpl extends EPackageImpl implements CompanyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CompanyFactory getCompanyFactory() {
 		return (CompanyFactory)getEFactoryInstance();
 	}

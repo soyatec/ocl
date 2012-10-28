@@ -32,6 +32,10 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 @SuppressWarnings("nls")
 public class InheritanceTests extends PivotSimpleTestSuite
 {
+	public InheritanceTests() {
+		super(false);
+	}
+
     @Override
     protected void setUp() throws Exception {
         super.setUp();

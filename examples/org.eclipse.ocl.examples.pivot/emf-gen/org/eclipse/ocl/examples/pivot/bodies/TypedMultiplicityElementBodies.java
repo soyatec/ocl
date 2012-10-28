@@ -100,7 +100,7 @@ public class TypedMultiplicityElementBodies
 			final @NonNull TypedMultiplicityElement unboxed_self = (TypedMultiplicityElement)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 			
-			ObjectValue A_symbol__3 = PivotTables.Types._Parameter.createInstance(standardLibrary);
+			Object A_symbol__3 = PivotTables.Types._Parameter.createInstance(standardLibrary);
 			
 			P_NamedElement_name.initValue(standardLibrary, A_symbol__3, S_name);
 			

@@ -84,6 +84,10 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 		return Unlimited.INSTANCE;
 	}
 
+	public @NonNull Number asNumber() {
+		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "asNumber", "UnlimitedValue");
+	}
+
 	@Override
 	public @NonNull Value asUnlimitedNaturalValue() {
 		return this;

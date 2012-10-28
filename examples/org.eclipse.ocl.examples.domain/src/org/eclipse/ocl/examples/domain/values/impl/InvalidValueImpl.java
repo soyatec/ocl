@@ -104,6 +104,11 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 	}
 
 	@Override
+	public @NonNull Number asNumber() {
+		throw new InvalidValueException(exception, "asNumberValue");
+	}
+
+	@Override
 	public @NonNull ObjectValue asObjectValue() {
 		throw new InvalidValueException(exception, "asObjectValue");
 	}

@@ -21,7 +21,6 @@ import java.util.List;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.xtext.util.Strings;
 
 public class ValueQueries
@@ -103,6 +102,7 @@ public class ValueQueries
 		outBuffer.append('"');
 		return outBuffer.toString();
 	} */
+	@SuppressWarnings("unchecked")
 	public static List<Object> elements(CollectionValue value) {
 		return (List<Object>) value.getElements();
 	}

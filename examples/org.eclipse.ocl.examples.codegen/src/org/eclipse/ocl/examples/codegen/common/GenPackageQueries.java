@@ -46,6 +46,7 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -76,9 +77,22 @@ public class GenPackageQueries
 	}
 	
 	public String getEscapedInterfaceName(@NonNull GenPackage genPackage, @NonNull Type type) {
-		GenClass genClass = getGenClass(genPackage, type);
-		if (genClass != null) {
-			return "<%" + genClass.getQualifiedInterfaceName() + "%>";
+		Package package1 = type.getPackage();
+		assert package1 != null;
+		GenPackage genPackage2 = getGenPackage(genPackage, package1);
+		if (genPackage2 != null) {
+			GenClass genClass = getGenClass(genPackage2, type);
+			if (genClass != null) {
+				return "<%" + genClass.getQualifiedInterfaceName() + "%>";
+			}
+		}
+		return "";
+	}
+	
+	public String getEscapedInterfacePackageName(@NonNull GenPackage genPackage, @NonNull org.eclipse.ocl.examples.pivot.Package package1) {
+		GenPackage genPackage2 = getGenPackage(genPackage, package1);
+		if (genPackage2 != null) {
+			return "<%" + genPackage2.getQualifiedPackageInterfaceName() + "%>";
 		}
 		return "";
 	}
@@ -196,6 +210,13 @@ public class GenPackageQueries
 				metaModelGenPackage = loadGenPackage(genModelResourceSet, PivotConstants.GEN_MODEL_URI);
 			}
 			return metaModelGenPackage;
+		}
+		String nsURI = pivotPackage.getNsURI();
+		if (nsURI != null) {
+			GenPackage genPackage2 = metaModelManager.getGenPackage(nsURI);
+			if (genPackage2 != null) {
+				return genPackage2;
+			}
 		}
 		return genPackage;	// FIXME
 	}
@@ -533,6 +554,28 @@ public class GenPackageQueries
 			}
 		}
 		return gotThisPackage && gotThatPackage;
+	}
+	
+	/**
+	 * Return true if type has a compiled Tables class.
+	 */
+	public @NonNull Boolean hasTablesClass(@NonNull GenPackage genPackage, @NonNull Type type) {
+		GenPackage genPackage2 = getGenPackage(genPackage, DomainUtil.nonNullState(type.getPackage()));
+		if (genPackage2 == null) {
+			return false;
+		}
+		try {
+			String factoryInterfaceName = genPackage2.getInterfacePackageName() + "." + genPackage2.getFactoryInterfaceName();
+			Class<?> factoryInterfaceClass = Class.forName(factoryInterfaceName);
+			if (factoryInterfaceClass == null) {
+				return true;		// FIXME maybe we're going to generate it
+			}
+			String tablesClassName = factoryInterfaceName.replace("Factory", "Tables");
+			Class<?> tablesClassClass = Class.forName(tablesClassName);
+			return tablesClassClass != null;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 	
 	public Boolean isFinal(@NonNull GenPackage genPackage, @NonNull Operation anOperation) {

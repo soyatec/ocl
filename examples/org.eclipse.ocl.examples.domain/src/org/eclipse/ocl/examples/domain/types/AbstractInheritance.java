@@ -29,7 +29,6 @@ import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.IndexableIterable;
-import org.eclipse.ocl.examples.domain.values.ObjectValue;
 
 public abstract class AbstractInheritance implements DomainInheritance
 {
@@ -127,7 +126,7 @@ public abstract class AbstractInheritance implements DomainInheritance
 		return thatInheritance.isSuperInheritanceOf(standardLibrary, this);
 	}
 
-	public @NonNull ObjectValue createInstance(@NonNull DomainStandardLibrary standardLibrary) {
+	public @NonNull Object createInstance(@NonNull DomainStandardLibrary standardLibrary) {
 		throw new UnsupportedOperationException();
 	}
 

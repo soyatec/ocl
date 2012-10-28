@@ -20,7 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.utilities.ArrayIterable;
@@ -73,12 +75,12 @@ public class EcoreExecutorPackage extends ExecutorPackage
 		return standardLibrary.getPackage(eSuperPackage);
 	}
 
-	public Iterable<ExecutorType> getOwnedType() {
-		return new ArrayIterable<ExecutorType>(types);
+	public Iterable<DomainInheritance> getOwnedType() {
+		return new ArrayIterable<DomainInheritance>(types);
 	}
 
-	public ExecutorType getType(String typeName) {
-		for (ExecutorType type: getOwnedType()) {
+	public DomainInheritance getType(String typeName) {
+		for (DomainInheritance type: getOwnedType()) {
 			if (type.getName().equals(typeName)) {
 				return type;
 			}
@@ -86,7 +88,7 @@ public class EcoreExecutorPackage extends ExecutorPackage
 		return null;
 	}
 	
-	public void init(ExecutorStandardLibrary standardLibrary, ExecutorType[] types) {
+	public void init(@Nullable ExecutorStandardLibrary standardLibrary, @NonNull ExecutorType[] types) {
 		assert this.standardLibrary == null;
 		assert this.types == null;
 		this.standardLibrary = standardLibrary;
@@ -96,7 +98,7 @@ public class EcoreExecutorPackage extends ExecutorPackage
 		}
 	}
 	
-	public void init(EcoreExecutorPackage execPackage, ExecutorType[] types) {
+/*	public void init2(EcoreExecutorPackage execPackage, ExecutorType[] types) {
 		ExecutorStandardLibrary standardLibrary = execPackage.standardLibrary;
 		assert this.standardLibrary == null;
 		assert this.types == null;
@@ -105,10 +107,10 @@ public class EcoreExecutorPackage extends ExecutorPackage
 		if (standardLibrary != null) {
 			standardLibrary.addPackage(this, execPackage);
 		}
-	}
+	} */
 	
 	@Deprecated
-	public void init(ExecutorType[] types) {
+	public void init(@NonNull ExecutorType[] types) {
 		init((ExecutorStandardLibrary)null, types);
 	}
 	

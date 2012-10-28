@@ -54,7 +54,8 @@ public class EmitQueries
 	 * The known classes that templates may use in unqualified form. The list is here
 	 * in a Java form to reduce the impact of refactoring on Acceleo templates.
 	 */
-	private static final Class<?>[] knownClasses = {
+	public static final @NonNull Class<?>[] knownClasses = {
+		java.lang.Object.class,
 		java.util.Iterator.class,
 		org.eclipse.ocl.examples.domain.elements.DomainElement.class,
 		org.eclipse.ocl.examples.domain.elements.DomainMetaclass.class,
@@ -70,7 +71,9 @@ public class EmitQueries
 		org.eclipse.ocl.examples.domain.evaluation.InvalidValueException.class,
 		org.eclipse.ocl.examples.domain.ids.CollectionTypeId.class,
 		org.eclipse.ocl.examples.domain.ids.IdManager.class,
+		org.eclipse.ocl.examples.domain.ids.PackageId.class,
 		org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId.class,
+		org.eclipse.ocl.examples.domain.ids.TemplateParameterId.class,
 		org.eclipse.ocl.examples.domain.ids.TuplePartId.class,
 		org.eclipse.ocl.examples.domain.ids.TupleTypeId.class,
 		org.eclipse.ocl.examples.domain.ids.TypeId.class,
@@ -89,7 +92,6 @@ public class EmitQueries
 		org.eclipse.ocl.examples.domain.values.IntegerRange.class,
 		org.eclipse.ocl.examples.domain.values.IntegerValue.class,
 		org.eclipse.ocl.examples.domain.values.InvalidValue.class,
-		org.eclipse.ocl.examples.domain.values.ObjectValue.class,
 		org.eclipse.ocl.examples.domain.values.OrderedSetValue.class,
 		org.eclipse.ocl.examples.domain.values.RealValue.class,
 		org.eclipse.ocl.examples.domain.values.SequenceValue.class,
@@ -121,7 +123,7 @@ public class EmitQueries
 		org.eclipse.osgi.util.NLS.class
 	};
 
-	protected Map<String, String> computeKnown2ExternalMap(String knownImports) {
+	public static Map<String, String> computeKnown2ExternalMap(String knownImports) {
 		Map<String, String> known2external = new HashMap<String, String>();
 		for (String knownClass : knownImports.split("\\n")) {
 			String trimmed = knownClass.trim();
@@ -208,9 +210,9 @@ public class EmitQueries
 	 * Replace all embedded <%xxx%> embedded import paths using unqualified names
 	 * for knownImports by fully qualified names so that the return value may be
 	 * correctly processed by the GenModel ImportManager.
-	 * prefix the return with correspondinbg Java import declarations.
+	 * prefix the return with corresponding Java import declarations.
 	 */
-	public String expandKnownImports(String knownImports, String markedUpDocument) {
+	public static String expandKnownImports(String knownImports, String markedUpDocument) {
 		Map<String, String> known2external = computeKnown2ExternalMap(knownImports);
 		String[] splits = markedUpDocument.split("(\\<%)|(%\\>)");	
 		StringBuilder s = new StringBuilder();

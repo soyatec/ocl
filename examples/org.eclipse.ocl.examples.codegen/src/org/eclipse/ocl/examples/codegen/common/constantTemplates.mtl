@@ -114,6 +114,7 @@ static final @NonNull <%CollectionTypeId%> [ast.symbolName(expInOcl)/] = <%TypeI
 
 [template public emitConstants(ast : ConstructorExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitStandardLibrary()/]
+[ast.type.emitConstants(genPackage, expInOcl)/]
 [/template]
 
 [template public emitConstants(ast : ConstructorPart, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
@@ -223,7 +224,8 @@ static final @NonNull <%TupleTypeId%> [ast.symbolName(expInOcl)/] = <%IdManager%
 [/template]
 
 [template protected emitConstants(type : Type, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
-static final @NonNull <%TypeId%> [type.symbolName(expInOcl)/] = [type.emitQualifiedLiteralName(genPackage)/].getTypeId();
+static final @NonNull <%PackageId%> [type._package.symbolName(expInOcl)/] = <%IdManager%>.INSTANCE.getPackageId([type._package.getEscapedInterfacePackageName(genPackage)/].eINSTANCE);
+static final @NonNull <%TypeId%> [type.symbolName(expInOcl)/] = [type._package.symbolName(expInOcl)/].getNestedTypeId(<%TemplateParameterId%>.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "[type.name/]");
 [/template]
 
 [template protected emitConstants(ast : TypeExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]

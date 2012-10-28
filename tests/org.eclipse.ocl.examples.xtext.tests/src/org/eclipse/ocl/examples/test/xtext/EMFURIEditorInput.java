@@ -54,6 +54,7 @@ public class EMFURIEditorInput implements IURIEditorInput
 		return emfURI;
 	}
 
+	@Override
 	public java.net.URI getURI() {
 		try {
 			return new java.net.URI(emfURI.toString());
@@ -69,6 +70,7 @@ public class EMFURIEditorInput implements IURIEditorInput
 	 * 
 	 * @see org.eclipse.ui.IEditorInput#exists()
 	 */
+	@Override
 	public boolean exists() {
 		if (emfURI.isFile()) {
 			return new File(emfURI.toFileString()).exists();
@@ -86,6 +88,7 @@ public class EMFURIEditorInput implements IURIEditorInput
 	 * 
 	 * @see org.eclipse.ui.IEditorInput#getName()
 	 */
+	@Override
 	public String getName() {
 		return URI.decode(emfURI.isHierarchical()
 			&& emfURI.lastSegment() != null
@@ -93,18 +96,22 @@ public class EMFURIEditorInput implements IURIEditorInput
 			: emfURI.toString());
 	}
 
+	@Override
 	public String getToolTipText() {
 		return emfURI.toString();
 	}
 
+	@Override
 	public ImageDescriptor getImageDescriptor() {
 		return null;
 	}
 
+	@Override
 	public IPersistableElement getPersistable() {
 		return null;
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public Object getAdapter(Class adapter) {
 		if (EMFPlugin.IS_RESOURCES_BUNDLE_AVAILABLE) {

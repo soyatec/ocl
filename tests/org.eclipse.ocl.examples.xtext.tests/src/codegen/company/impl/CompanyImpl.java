@@ -119,6 +119,7 @@ public class CompanyImpl extends EObjectImpl implements Company
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName()
 	{
 		return name;
@@ -129,6 +130,7 @@ public class CompanyImpl extends EObjectImpl implements Company
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName)
 	{
 		String oldName = name;
@@ -142,6 +144,7 @@ public class CompanyImpl extends EObjectImpl implements Company
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Employee> getEmployees()
 	{
 		if (employees == null) {
@@ -155,6 +158,7 @@ public class CompanyImpl extends EObjectImpl implements Company
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CompanySizeKind getSize()
 	{
 		/*
@@ -188,6 +192,7 @@ public class CompanyImpl extends EObjectImpl implements Company
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean dummyInvariant(DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
 		/*

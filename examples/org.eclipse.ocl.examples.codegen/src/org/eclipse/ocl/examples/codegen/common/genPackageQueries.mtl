@@ -38,6 +38,9 @@ invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getEcorePac
 [query public getEscapedInterfaceName(type : Type, genPackage : GenPackage) : String = 
 invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getEscapedInterfaceName(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Type)', Sequence{genPackage, type}) /]
 
+[query public getEscapedInterfacePackageName(ast : Package, genPackage : GenPackage) : String = 
+invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getEscapedInterfacePackageName(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Package)', Sequence{genPackage, ast}) /]
+
 [query public getEscapedLiteralsName(type : Type, genPackage : GenPackage) : String = 
 invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getEscapedLiteralsName(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Type)', Sequence{genPackage, type}) /]
 
@@ -161,6 +164,9 @@ invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'hasEcore(or
 
 [query public hasSharedLibrary(genPackage : GenPackage) : Boolean = 
 invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'hasSharedLibrary(org.eclipse.emf.codegen.ecore.genmodel.GenPackage)', Sequence{genPackage}) /]
+
+[query public hasTablesClass(genPackage : GenPackage, type : Type) : Boolean = 
+invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'hasTablesClass(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Type)', Sequence{genPackage, type}) /]
 
 [query public isFinal(genPackage : GenPackage, operation : Operation) : Boolean = 
 invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'isFinal(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Operation)', Sequence{genPackage, operation}) /]

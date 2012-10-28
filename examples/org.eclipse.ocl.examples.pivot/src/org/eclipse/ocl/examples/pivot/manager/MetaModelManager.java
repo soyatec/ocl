@@ -27,6 +27,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
@@ -36,6 +38,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Factory.Registry;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -1346,8 +1349,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			DomainInheritance rightInheritance = rightType.getInheritance(this);
 			DomainInheritance commonInheritance = leftInheritance.getCommonInheritance(rightInheritance);
 			Type commonCollectionType = getType(commonInheritance); 
-			Type leftElementType = ((CollectionType)leftType).getElementType();
-			Type rightElementType = ((CollectionType)rightType).getElementType();
+			Type leftElementType = DomainUtil.nonNullModel(((CollectionType)leftType).getElementType());
+			Type rightElementType = DomainUtil.nonNullModel(((CollectionType)rightType).getElementType());
 			Type commonElementType = getCommonType(leftElementType, rightElementType, templateParameterSubstitutions); 
 			return getCollectionType(commonCollectionType, commonElementType, null, null);
 		}
@@ -1384,6 +1387,24 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			}
 		}
 		return externalResourceSet2;
+	}
+
+	public @Nullable GenPackage getGenPackage(@NonNull String nsURI) {
+		ResourceSet externalResourceSet = getExternalResourceSet();
+		URI uri = EcorePlugin.getEPackageNsURIToGenModelLocationMap().get(nsURI);
+		if (uri != null) {
+			Resource resource = externalResourceSet.getResource(uri, true);
+			for (EObject eObject : resource.getContents()) {
+				if (eObject instanceof GenModel) {
+					for (GenPackage genPackage : ((GenModel)eObject).getGenPackages()) {
+						if (genPackage != null) {
+							return genPackage;
+						}
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	public @NonNull Set<Map.Entry<String, DomainNamespace>> getGlobalNamespaces() {

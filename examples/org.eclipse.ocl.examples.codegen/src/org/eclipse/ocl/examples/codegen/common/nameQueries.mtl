@@ -38,6 +38,9 @@ invoke('org.eclipse.ocl.examples.codegen.common.NameQueries', 'getUniqueText(org
 [query public getUniqueText(_context : Element, operation : Operation) : String = 
 invoke('org.eclipse.ocl.examples.codegen.common.NameQueries', 'getUniqueText(org.eclipse.ocl.examples.pivot.Element, org.eclipse.ocl.examples.pivot.Operation)', Sequence{_context, operation}) /]
 
+[query public getUniqueText(_context : Element, pkg : Package) : String = 
+invoke('org.eclipse.ocl.examples.codegen.common.NameQueries', 'getUniqueText(org.eclipse.ocl.examples.pivot.Element, org.eclipse.ocl.examples.pivot.Package)', Sequence{_context, pkg}) /]
+
 [query public getUniqueText(_context : Element, property : Property) : String = 
 invoke('org.eclipse.ocl.examples.codegen.common.NameQueries', 'getUniqueText(org.eclipse.ocl.examples.pivot.Element, org.eclipse.ocl.examples.pivot.Property)', Sequence{_context, property}) /]
 

@@ -14,6 +14,7 @@
  */
 package org.eclipse.ocl.examples.domain.ids.impl;
 
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
@@ -22,10 +23,12 @@ import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
 public class NsURIPackageIdImpl extends PackageIdImpl implements NsURIPackageId
 {
 	protected final @NonNull String nsURI;
+	private @Nullable EPackage ePackage;
 
-	public NsURIPackageIdImpl(@NonNull String nsURI) {
+	public NsURIPackageIdImpl(@NonNull String nsURI, @Nullable EPackage ePackage) {
 		super(nsURI.hashCode());
 		this.nsURI = nsURI;
+		this.ePackage = ePackage;
 	}
 
 	public @Nullable <R> R accept(@NonNull IdVisitor<R> visitor) {
@@ -36,7 +39,15 @@ public class NsURIPackageIdImpl extends PackageIdImpl implements NsURIPackageId
 		return nsURI;
 	}
 
+	public @Nullable EPackage getEPackage() {
+		return ePackage;
+	}
+
 	public @NonNull String getNsURI() {
 		return nsURI;
+	}
+
+	public void setEPackage(@NonNull EPackage ePackage) {
+		this.ePackage = ePackage;
 	}
 }

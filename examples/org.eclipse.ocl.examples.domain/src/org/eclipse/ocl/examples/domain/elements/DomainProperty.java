@@ -18,7 +18,6 @@ package org.eclipse.ocl.examples.domain.elements;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.values.ObjectValue;
 
 public interface DomainProperty extends DomainFeature
 {
@@ -38,5 +37,5 @@ public interface DomainProperty extends DomainFeature
 	 * This method is not thread-safe and should only be invoked to complete construction of objectvalue before
 	 * making it visible to other threads.
 	 */
-	void initValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull ObjectValue objectValue, @Nullable Object propertyValue);
+	void initValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull Object objectValue, @Nullable Object propertyValue);
 }

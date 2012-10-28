@@ -30,13 +30,13 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorManager;
+import org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.examples.library.executor.LazyModelManager;
 
 public class EcoreExecutorManager extends ExecutorManager
@@ -45,13 +45,13 @@ public class EcoreExecutorManager extends ExecutorManager
 	private LazyModelManager modelManager = null;
 	private IdResolver idResolver = null;
 	
-	public EcoreExecutorManager(@NonNull EObject contextObject, @NonNull DomainStandardLibrary standardLibrary) {
+	public EcoreExecutorManager(@NonNull EObject contextObject, @NonNull ExecutorStandardLibrary standardLibrary) {
 		super(standardLibrary);
 		this.contextObject = contextObject;
 	}
 
 	@Deprecated
-	public EcoreExecutorManager(@NonNull EObject contextObject, @Nullable Map<Object, Object> contextMap, @NonNull DomainStandardLibrary standardLibrary) {
+	public EcoreExecutorManager(@NonNull EObject contextObject, @Nullable Map<Object, Object> contextMap, @NonNull ExecutorStandardLibrary standardLibrary) {
 		this(contextObject, standardLibrary);
 	}
 
@@ -102,14 +102,14 @@ public class EcoreExecutorManager extends ExecutorManager
 				roots = Collections.singletonList(rootContainer);
 			}
 			assert roots != null;
-			EcoreIdResolver adapter = new EcoreIdResolver(roots, standardLibrary);
+			EcoreIdResolver adapter = new EcoreIdResolver(roots, (ExecutorStandardLibrary) standardLibrary);
 			eAdapters.add(adapter);
 			return adapter;
 		}
 	}
 
 	public @NonNull DomainEvaluator createNestedEvaluator() {
-		return new EcoreExecutorManager(contextObject, standardLibrary);
+		return new EcoreExecutorManager(contextObject, (ExecutorStandardLibrary) standardLibrary);
 	}
 
 	@Override

@@ -108,7 +108,7 @@ public class PivotQueries
 		return expressionInOCL;
 	}
 
-	protected static @NonNull PrettyPrintOptions.Global createOptions(@NonNull Visitable element) {
+	public static @NonNull PrettyPrintOptions.Global createOptions(@NonNull Visitable element) {
 		Namespace scope = null;
 		if (element instanceof EObject) {
 			for (EObject eObject = (EObject) element; eObject != null; ) {

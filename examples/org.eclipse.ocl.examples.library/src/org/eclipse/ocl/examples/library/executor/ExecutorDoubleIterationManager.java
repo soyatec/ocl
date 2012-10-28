@@ -68,11 +68,8 @@ public class ExecutorDoubleIterationManager extends AbstractIterationManager
 	}
 
 	public @Nullable Object evaluateBody() throws Exception {
-//		try {
-			return internalEvaluate();
-//		} catch (InvalidValueException e) {
-//			return throwInvalidEvaluation(e);
-//		}
+		return body.evaluate(evaluator, returnTypeId, accumulatorValue,
+			DomainUtil.nonNullState(currentValue1), DomainUtil.nonNullState(currentValue2));
 	}
 
 	public @Nullable Object getAccumulatorValue() {
@@ -83,18 +80,8 @@ public class ExecutorDoubleIterationManager extends AbstractIterationManager
 		return currentValue1 != null;
 	}
 
-	private @Nullable Object internalEvaluate() throws Exception {
-		return body.evaluate(evaluator, returnTypeId, accumulatorValue,
-			DomainUtil.nonNullState(currentValue1), DomainUtil.nonNullState(currentValue2));
-	}
-
-//	public NullValue throwInvalidEvaluation(String message, Object... bindings) {
-//		String boundMessage = NLS.bind(message, bindings);
-//		throw new InvalidEvaluationException(null, boundMessage, null, null, null);
-//	}
-
-	public @Nullable Object updateBody() throws Exception {
-		this.accumulatorValue = internalEvaluate();
+	public @Nullable Object updateAccumulator(Object newValue) {
+		this.accumulatorValue = newValue;
 		return null;					// carry on
 	}
 }

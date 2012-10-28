@@ -113,6 +113,7 @@ public class XtextTestCase extends PivotTestCase
 			eTypedElement.setUnique(true);
 		}
 		
+		@Override
 		public void denormalize() {
 			eTypedElement.setOrdered(wasOrdered);
 			eTypedElement.setUnique(wasUnique);
