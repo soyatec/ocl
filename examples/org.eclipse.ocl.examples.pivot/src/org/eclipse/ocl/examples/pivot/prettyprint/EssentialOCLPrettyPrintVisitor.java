@@ -16,10 +16,10 @@
  */
 package org.eclipse.ocl.examples.pivot.prettyprint;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CallExp;
@@ -574,7 +574,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	@Override
 	public Object visitUnlimitedNaturalLiteralExp(@NonNull UnlimitedNaturalLiteralExp object) {
 		Number symbol = object.getUnlimitedNaturalSymbol();
-		if (((symbol instanceof BigInteger) && symbol.equals(BigInteger.valueOf(-1))) || (symbol.longValue() == -1)){
+		if (symbol == Unlimited.INSTANCE){
 			context.append("*");
 		}
 		else {
