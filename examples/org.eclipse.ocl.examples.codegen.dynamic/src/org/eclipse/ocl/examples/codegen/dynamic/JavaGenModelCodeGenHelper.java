@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.common.CodeGenHelper;
-import org.eclipse.ocl.examples.codegen.expression.ExpressionInOCL2Class;
+import org.eclipse.ocl.examples.codegen.expression.OCL2JavaClass;
 import org.eclipse.ocl.examples.domain.library.LibraryOperation;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
@@ -39,7 +39,7 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
-public class XtendGenModelCodeGenHelper implements CodeGenHelper
+public class JavaGenModelCodeGenHelper implements CodeGenHelper
 {
 //	private static ProjectMap projectMap = null;
 
@@ -48,7 +48,7 @@ public class XtendGenModelCodeGenHelper implements CodeGenHelper
 	private @NonNull Map<String, GenPackage> uriMap = new HashMap<String, GenPackage>();
 	private @NonNull Map<EClassifier, GenClassifier> eClassifierMap = new HashMap<EClassifier, GenClassifier>();
 	
-	public XtendGenModelCodeGenHelper(@NonNull GenModel genModel, @NonNull MetaModelManager metaModelManager) throws IOException {
+	public JavaGenModelCodeGenHelper(@NonNull GenModel genModel, @NonNull MetaModelManager metaModelManager) throws IOException {
 		this.metaModelManager = metaModelManager;
 		for (GenPackage genPackage : genModel.getGenPackages()) {
 			assert genPackage != null;
@@ -146,7 +146,7 @@ public class XtendGenModelCodeGenHelper implements CodeGenHelper
 			String packageName, String className, boolean saveSource) throws Exception {
 		String qualifiedName = packageName + "." + className;
 
-		ExpressionInOCL2Class expressionInOCL2Class = new ExpressionInOCL2Class(metaModelManager, query);
+		OCL2JavaClass expressionInOCL2Class = new OCL2JavaClass(metaModelManager, query);
 		String javaCodeSource = expressionInOCL2Class.generateClass(this, packageName, className);
 //		System.out.println(javaCodeSource);
 /*		List<Object> arguments = new ArrayList<Object>();

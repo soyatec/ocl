@@ -18,9 +18,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Stack;
 
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.common.EmitQueries;
+import org.eclipse.ocl.examples.codegen.common.NameQueries;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.AbstractOperation;
 import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
@@ -29,13 +31,17 @@ import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryTernaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
+import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 public abstract class AbstractOCLCodeGenerator implements OCLCodeGenerator
 {
 	public static final @NonNull String BODIES_CLASS_SUFFIX = "Bodies";
-	public static final @NonNull String BODIES_PACKAGE_NAME = "bodies";
+	public static final @NonNull String BODIES_PACKAGE_NAME = ".bodies";
+	public static final @NonNull String TABLES_CLASS_SUFFIX = "Tables";
+	public static final @NonNull String TABLES_PACKAGE_NAME = "";
 	
 	protected final @NonNull MetaModelManager metaModelManager;
 	private @NonNull final ImportManager importManager = new ImportManager(EmitQueries.knownClasses);
@@ -106,12 +112,16 @@ public abstract class AbstractOCLCodeGenerator implements OCLCodeGenerator
 		return importManager.getAllImports();
 	}
 
-	public @NonNull String getBodiesClassSuffix() {
-		return BODIES_CLASS_SUFFIX;
-	}
-
-	public @NonNull String getBodiesPackageName() {
-		return BODIES_PACKAGE_NAME;
+	protected @Nullable GenPackage getGenPackage(@NonNull Type type) {
+		org.eclipse.ocl.examples.pivot.Package pPackage = type.getPackage();
+		if (pPackage == null) {
+			return null;
+		}
+		String nsURI = pPackage.getNsURI();
+		if (nsURI == null) {
+			return null;
+		}
+		return metaModelManager.getGenPackage(nsURI);
 	}
 
 	public @NonNull String getImportedName(@NonNull String className) {
@@ -136,6 +146,36 @@ public abstract class AbstractOCLCodeGenerator implements OCLCodeGenerator
 		}
 	}
 
+	public @Nullable String getQualifiedOperationImplementationName(@NonNull Operation anOperation, @NonNull String stereotype) {
+		Type type = anOperation.getOwningType();
+		if (type != null) {
+			GenPackage genPackage = getGenPackage(type);
+			if (genPackage != null) {
+				String qualifiedPackageName = genPackage.getQualifiedPackageName() + BODIES_PACKAGE_NAME;
+				String outerClassName = type.getName() + BODIES_CLASS_SUFFIX;
+				String qualifiedClassName = getImportedName(qualifiedPackageName) + "." + outerClassName;
+				String innerClassName = "_" + anOperation.getName() + "_" + stereotype + "_";
+				return qualifiedClassName + "." + innerClassName + ".INSTANCE";
+			}
+		}
+		return null;
+	}
+
+	public @Nullable String getQualifiedLiteralName(@NonNull Operation anOperation) {
+		Type type = anOperation.getOwningType();
+		if (type != null) {
+			GenPackage genPackage = getGenPackage(type);
+			if (genPackage != null) {
+				String qualifiedPackageName = genPackage.getQualifiedPackageName() + TABLES_PACKAGE_NAME;
+				String tablesClassName = genPackage.getPrefix() + TABLES_CLASS_SUFFIX;
+				String qualifiedClassName = getImportedName(qualifiedPackageName + "." + tablesClassName) + ".Operations";
+				String operationName = "_" + type.getName() + "__" + NameQueries.encodeName(anOperation);
+				return qualifiedClassName + "." + operationName;
+			}
+		}
+		return null;
+	}
+
 	@SuppressWarnings("null")
 	protected @NonNull String getString() {
 		return s.toString();
@@ -151,6 +191,7 @@ public abstract class AbstractOCLCodeGenerator implements OCLCodeGenerator
 	protected @NonNull String popStream() {
 		String str = getString();
 		s = streamStack.pop();
+		indentationStack.pop();
 		return str;
 	}
 
@@ -168,6 +209,7 @@ public abstract class AbstractOCLCodeGenerator implements OCLCodeGenerator
 	}
 
 	protected void pushStream() {
+		indentationStack.push("");
 		streamStack.push(s);
 		s = new StringBuilder();
 	}

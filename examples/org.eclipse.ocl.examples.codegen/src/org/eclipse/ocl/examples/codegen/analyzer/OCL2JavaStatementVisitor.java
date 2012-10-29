@@ -27,6 +27,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
+import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
@@ -43,6 +44,8 @@ import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.manager.FinalAnalysis;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
+import org.eclipse.ocl.examples.pivot.util.Visitable;
 
 /**
  * An OCL2JavaStatementVisitor appends one or more Java statements to an OCLCodeGenerator
@@ -50,15 +53,17 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
  * <p>
  * Derived visitors may support an extended AST.
  */
-public class OCL2JavaStatementVisitor extends OCL2JavaExpressionVisitor
+public class OCL2JavaStatementVisitor extends AbstractExtendingVisitor<String, OCLCodeGenerator>
 {
 	protected final @NonNull MetaModelManager metaModelManager;
+	protected final @NonNull NameManager nameManager;
 	protected final @NonNull OCL2JavaExpressionVisitor expressionVisitor;
 	protected /*@LazyNonNull*/ String invalidValueName = null;
 	
 	public OCL2JavaStatementVisitor(@NonNull OCLCodeGenerator codeGenerator) {
 		super(codeGenerator);
 		metaModelManager = codeGenerator.getMetaModelManager();
+		nameManager = codeGenerator.getNameManager();
 		expressionVisitor = context.getExpressionVisitor();
 	}
 
@@ -78,12 +83,13 @@ public class OCL2JavaStatementVisitor extends OCL2JavaExpressionVisitor
 	protected void emitCatchingStatement(@Nullable Variable aVariable, @NonNull OCLExpression anExpression) {
 		if (!isInlineable(anExpression)) {
 			String symbolName = getSymbolName(aVariable);
-			String generatedComputation = expressionVisitor.visit(anExpression);
+//			String generatedComputation = expressionVisitor.visit(anExpression);
 			if (mayBeException(anExpression)) {
 				context.append("Object " + symbolName + ";\n");
 				context.append("try {\n");
 				context.pushIndentation();
-				context.append(symbolName + " = " + generatedComputation + ";\n");
+//				context.append(symbolName + " = " + generatedComputation + ";\n");
+				anExpression.accept(this);
 				context.popIndentation();
 				context.append("}\n");
 				context.append("catch (Exception e) {\n");
@@ -93,7 +99,8 @@ public class OCL2JavaStatementVisitor extends OCL2JavaExpressionVisitor
 				context.append("}\n");
 			}
 			else {
-				context.append("final Object " + symbolName + " = " + generatedComputation + ";\n");
+//				context.append("final Object " + symbolName + " = " + generatedComputation + ";\n");
+				anExpression.accept(this);
 			}
 		}
 	}
@@ -104,15 +111,16 @@ public class OCL2JavaStatementVisitor extends OCL2JavaExpressionVisitor
 	 */
 	protected void emitThrowingStatement(@NonNull OCLExpression anExpression) {
 		CodeGenAnalysis analysis = context.getNode(anExpression);
-		if (!analysis.isConstant() && !analysis.isInlineable()) {
+		if (!analysis.isConstant() && !isInlineable(anExpression)) {
 			String symbolName;
 			if (anExpression instanceof VariableExp) {
 				symbolName = getSymbolName(((VariableExp)anExpression).getReferredVariable());
 			}
 			else {
+//				String generatedComputation = expressionVisitor.visit(anExpression);
+//				context.append("final Object " + symbolName + " = " + generatedComputation + ";\n");
+				anExpression.accept(this);
 				symbolName = getSymbolName(anExpression);
-				String generatedComputation = expressionVisitor.visit(anExpression);
-				context.append("final Object " + symbolName + " = " + generatedComputation + ";\n");
 			}
 			if (mayBeInvalidValue(anExpression)) {
 				String invalidValueName = getInvalidValueName();
@@ -122,39 +130,18 @@ public class OCL2JavaStatementVisitor extends OCL2JavaExpressionVisitor
 		}
 	}
 
-	private String emitTypeOf(OCLExpression source) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	protected @Nullable GenPackage getGenPackage(@NonNull Type type) {
-		org.eclipse.ocl.examples.pivot.Package pPackage = type.getPackage();
-		if (pPackage == null) {
-			return null;
-		}
-		String nsURI = pPackage.getNsURI();
-		if (nsURI == null) {
-			return null;
-		}
-		return metaModelManager.getGenPackage(nsURI);
-	}
-
 	protected String getImplementationName(@NonNull Operation anOperation) {
 		String implementationClass = anOperation.getImplementationClass();
 		if (implementationClass != null) {
 			return context.getImportedName(implementationClass) + ".INSTANCE";
 		}
 		List<Constraint> constraints = anOperation.getOwnedRule();
-		if (constraints.size() > 0) {
-			Type type = anOperation.getOwningType();
-			if (type != null) {
-				GenPackage genPackage = getGenPackage(type);
-				if (genPackage != null) {
-					String qualifiedPackageName = genPackage.getQualifiedPackageName() + "." + context.getBodiesPackageName();
-					String outerClassName = type.getName() + context.getBodiesClassSuffix();
-					String qualifiedClassName = context.getImportedName(qualifiedPackageName + "." + outerClassName);
-					String innerClassName = "_" + anOperation.getName() + "_" + constraints.get(0).getStereotype() + "_";
-					return qualifiedClassName + "." + innerClassName + ".INSTANCE";
+		if (constraints.size() > 0) {			
+			String stereotype = constraints.get(0).getStereotype();
+			if (stereotype != null) {
+				String implementationName = context.getQualifiedOperationImplementationName(anOperation, stereotype);
+				if (implementationName != null) {
+					return implementationName;
 				}
 			}
 		}	
@@ -312,14 +299,15 @@ public class OCL2JavaStatementVisitor extends OCL2JavaExpressionVisitor
 //		return "static final " + atNonNull() + " Object " + getSymbolName(element) + " = " + super.visitBooleanLiteralExp(element) + ";";
 //	}
 
-	@Override
-	public @Nullable String visitExpressionInOCL(@NonNull ExpressionInOCL element) {
-		return element.getBodyExpression().accept(this);
-	}
+//	@Override
+//	public @Nullable String visitExpressionInOCL(@NonNull ExpressionInOCL element) {
+//		return element.getBodyExpression().accept(this);
+//	}
 
 	@Override
 	public @Nullable String visitInvalidLiteralExp(@NonNull InvalidLiteralExp element) {
-		return "throwInvalidValueException()";
+		context.append("throwInvalidValueException();");
+		return null;
 	}
 
 	@Override
@@ -332,14 +320,34 @@ public class OCL2JavaStatementVisitor extends OCL2JavaExpressionVisitor
 				emitCatchingStatement(letVariable, initExpression);
 			}
 		}
-		OCLExpression inExpression = element.getIn();
-		inExpression.accept(this);
-		context.append("final Object " + getSymbolName(element, "let") + " = " + getReferredSymbolName(inExpression) + ";\n");	
+		OCLExpression inExpression = DomainUtil.nonNullModel(element.getIn());
+		if (!isInlineable(inExpression)) {
+			getSymbolName(inExpression, letVariable.getName());
+			inExpression.accept(this);
+		}
+		String resultName = getSymbolName(element, "let");
+		context.append("final Object " + resultName + " = " + getReferredSymbolName(inExpression) + ";\n");
+		CodeGenAnalysis analysis = context.getNode(inExpression);
+		if (analysis.getTransitiveInvalidSources().size() > 0) {
+			context.append("if (" + resultName + " instanceof " + getInvalidValueName() + ") throw ((" + getInvalidValueName() + ")" + resultName + ").getException();\n");	
+		}
 		return null;
 	}
 
 	@Override
-	public @Nullable String visitLiteralExp(@NonNull LiteralExp element) {
+	public @Nullable String visitOCLExpression(@NonNull OCLExpression element) {
+		String symbolName = getSymbolName(element);
+		context.append("final Object " + symbolName + " = " + getReferredSymbolName(element) + ";\n");	
+		CodeGenAnalysis analysis = context.getNode(element);
+		if (analysis.getTransitiveInvalidSources().size() > 0) {
+			context.append("if (" + symbolName + " instanceof " + getInvalidValueName() + ") throw ((" + getInvalidValueName() + ")" + symbolName + ").getException();\n");	
+		}
+		return null;
+	}
+
+	@Override
+	public @Nullable String visitOperation(@NonNull Operation element) {
+		context.append("private static final " + atNonNull() + " " + context.getImportedName(ExecutorOperation.class) + " " + getSymbolName(element) + " = " + context.getQualifiedLiteralName(element) + ";\n");	
 		return null;
 	}
 
@@ -374,11 +382,12 @@ public class OCL2JavaStatementVisitor extends OCL2JavaExpressionVisitor
 		//
 		//	Call the operation with the appropriate arguments.
 		//
+		String evaluatorName = context.getEvaluatorName();
 		String resultSymbolName = getSymbolName(element, referredOperation.getName());
 		String sourceSymbolName = source != null ? getReferredSymbolName(source) : "null";
 		if (isFinal(referredOperation)) {
 			String className = getImplementationName(referredOperation);
-			context.append("final Object " + resultSymbolName + " = " + className + ".evaluate(evaluator, " + getTypeDeclarator(element));
+			context.append("final Object " + resultSymbolName + " = " + className + ".evaluate(" + evaluatorName + ", " + getTypeDeclarator(element));
 			context.append(", " + sourceSymbolName);
 			for (OCLExpression argument : arguments) {
 				assert argument != null;
@@ -387,19 +396,20 @@ public class OCL2JavaStatementVisitor extends OCL2JavaExpressionVisitor
 			context.append(");\n");
 		}
 		else {
+			String standardLibraryName = context.getStandardLibraryName();
 			String operationTypeName = context.getImportedName(context.getOperationInterface(arguments));
-			String symbolName = getSymbolName(element, "OP_" + referredOperation.getName());
-			String staticImplementationName = "static" + symbolName;
-			String dynamicImplementationName = "dynamic" + symbolName;
-			context.append(context.getImportedName(DomainType.class) + " " + staticImplementationName + " = ");
-			emitTypeOf(source);
+			String operationName = context.getStaticSymbolName(referredOperation);
+			String staticImplementationName = nameManager.reserveName("static_" + referredOperation.getName(), null);
+			String dynamicImplementationName = nameManager.reserveName("dynamic_" + referredOperation.getName(), null);
+			context.append("final " + context.getImportedName(DomainType.class) + " " + staticImplementationName + " = ");
+			context.append(evaluatorName + ".getStaticTypeOf(" + sourceSymbolName);
 			for (OCLExpression argument : arguments) {
 				assert argument != null;
-				context.append(", " + getReferredSymbolName(argument));
+				context.append(", (Object)" + getReferredSymbolName(argument));
 			}
 			context.append(");\n");
-			context.append(operationTypeName + " " + dynamicImplementationName + " = (" + operationTypeName + ")" + staticImplementationName + ".lookupImplementation(standardLibrary, " + getSymbolName(referredOperation) + ");\n");
-			context.append("final Object " + resultSymbolName + " = " + dynamicImplementationName + ".evaluate(evaluator, " + getTypeDeclarator(element) + ", " + sourceSymbolName);
+			context.append("final " + operationTypeName + " " + dynamicImplementationName + " = (" + operationTypeName + ")" + staticImplementationName + ".lookupImplementation(" + standardLibraryName + ", " + operationName + ");\n");
+			context.append("final Object " + resultSymbolName + " = " + dynamicImplementationName + ".evaluate(" + evaluatorName + ", " + getTypeDeclarator(element) + ", " + sourceSymbolName);
 			for (OCLExpression argument : arguments) {
 				assert argument != null;
 				context.append(", " + getReferredSymbolName(argument));
@@ -407,5 +417,9 @@ public class OCL2JavaStatementVisitor extends OCL2JavaExpressionVisitor
 			context.append(");\n");
 		}
 		return null;
+	}
+	
+	public @NonNull String visiting(@NonNull Visitable visitable) {
+		throw new UnsupportedOperationException(visitable.getClass().getName());
 	}
 }

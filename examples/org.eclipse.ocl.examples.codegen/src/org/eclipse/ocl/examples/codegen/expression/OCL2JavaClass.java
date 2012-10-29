@@ -16,9 +16,11 @@ package org.eclipse.ocl.examples.codegen.expression;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.AbstractOCLCodeGenerator;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysisVisitor;
@@ -30,9 +32,11 @@ import org.eclipse.ocl.examples.codegen.analyzer.Id2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.codegen.common.CodeGenHelper;
 import org.eclipse.ocl.examples.codegen.common.PivotQueries;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -40,18 +44,23 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 
-public class ExpressionInOCL2Class extends AbstractOCLCodeGenerator
+public class OCL2JavaClass extends AbstractOCLCodeGenerator
 {
-	private final @NonNull ExpressionInOCL expInOcl;
-	private final @NonNull CodeGenAnalyzer cgAnalyzer = new CodeGenAnalyzer();
-	private final @NonNull OCL2JavaExpressionVisitor expressionVisitor;
-	private final @NonNull Id2JavaVisitor idVisitor;
-	private final @NonNull OCL2JavaStatementVisitor statementVisitor;
+	protected final @NonNull ExpressionInOCL expInOcl;
+	protected final @NonNull CodeGenAnalyzer cgAnalyzer = new CodeGenAnalyzer();
+	protected final @NonNull NameManager nameManager;
+	protected final @NonNull OCL2JavaExpressionVisitor expressionVisitor;
+	protected final @NonNull Id2JavaVisitor idVisitor;
+	protected final @NonNull OCL2JavaStatementVisitor statementVisitor;
+	private String evaluatorName = null;
+	private String standardLibraryName = null;
+	private @Nullable LinkedHashSet<TypedElement> staticObjects = null;
 
-	public ExpressionInOCL2Class(@NonNull MetaModelManager metaModelManager, @NonNull ExpressionInOCL expInOcl) {
+	public OCL2JavaClass(@NonNull MetaModelManager metaModelManager, @NonNull ExpressionInOCL expInOcl) {
 		super(metaModelManager);
 		this.expInOcl = expInOcl;
 		cgAnalyzer.initialize(new CodeGenAnalysisVisitor(cgAnalyzer), expInOcl);
+		nameManager = cgAnalyzer.getNameManager();
 		expressionVisitor = new OCL2JavaExpressionVisitor(this);
 		idVisitor = new Id2JavaVisitor(this);
 		statementVisitor = new OCL2JavaStatementVisitor(this);
@@ -118,41 +127,55 @@ public class ExpressionInOCL2Class extends AbstractOCLCodeGenerator
 	}
 
 	public void generateClassBody(@NonNull String className) {
-		getNameManager().reserveName("INSTANCE", null);
-		getNameManager().reserveName("evaluator", null);
-		getNameManager().reserveName("returnTypeId", null);
-		getNameManager().reserveName("self", null);
-		append("public static " + atNonNull() + " " + className + " INSTANCE = new " + className + "();\n");
-//		Type pType = expInOcl.getContextVariable().getType();
 		CodeGenAnalysis analysis = cgAnalyzer.getCurrentAnalysis();
-		generateStaticCodeGenAnalysis(analysis);
-//	[let genPackage : GenPackage = codeGenHelper.getGenPackage(pType)]
-//	[let constants : String = ast.gatherConstants(genPackage, expInOcl)]
-//	'''
-//	[let pType : Type = expInOcl.contextVariable.type]
-//	[let genPackage : GenPackage = codeGenHelper.getGenPackage(pType)]
-//	[let constants : String = ast.gatherConstants(genPackage, expInOcl)]
-//		[expInOcl.emitStatics(constants)/]
-//		@Override
+		//
+		//	Class statics
+		//
+		String instanceName = nameManager.reserveName("INSTANCE", null);
+		append("public static " + atNonNull() + " " + className + " " + instanceName + " = new " + className + "();\n");
+		generateStaticConstants(analysis);
+		String functionString = generateEvaluateFunction();
+		if (staticObjects != null) {
+			for (TypedElement staticObject : staticObjects) {
+				staticObject.accept(statementVisitor);
+			}
+		}
 		append("\n");
+		append(functionString);
+	}
+
+	public @NonNull String generateEvaluateFunction() {
+		pushStream();
+		CodeGenAnalysis analysis = cgAnalyzer.getCurrentAnalysis();
+		OCLExpression bodyExpression = DomainUtil.nonNullModel(expInOcl.getBodyExpression());
+		//
+		//	"evaluate" function declaration
+		//
+		String evaluatorName = getEvaluatorName();
+		String returnTypeIdName = nameManager.reserveName("returnTypeId", null);
+		String selfName = nameManager.reserveName("self", expInOcl.getContextVariable());
 		append("@Override\n");
 		append("public " + atNullable() + " Object evaluate");
 		append("(");
-		append(atNonNull() + " " + getImportedName("DomainEvaluator") + " evaluator");
-		append(", " + atNonNull() + " " + getImportedName("TypeId") + " returnTypeId");
-		append(", final " + atNullable() + " Object " + /*[defineSymbolName(expInOcl.contextVariable, 'self')/]*/"self");
+		append(atNonNull() + " " + getImportedName("DomainEvaluator") + " " + evaluatorName);
+		append(", " + atNonNull() + " " + getImportedName("TypeId") + " " + returnTypeIdName);
+		append(", final " + atNullable() + " Object " + selfName);
 		for (Variable parameter : expInOcl.getParameterVariable()) {
-			append(", final " + atNullable() + " Object " + /*[defineSymbolName(parameter, parameter.name)/]*/parameter.getName());
+			String name = DomainUtil.nonNullModel(parameter.getName());
+			append(", final " + atNullable() + " Object " + nameManager.reserveName(name, parameter));
 		}
 		append(") throws Exception {\n");
+		//
+		//	"evaluate" function body
+		//
+		String resultName = nameManager.getSymbolName(bodyExpression, "result");
 		pushIndentation();
-		generateLocalCodeGenAnalysis(analysis);
-//			[expInOcl.emitNonStatics(constants)/]
-//			[ast.emitExpression(pType, genPackage, expInOcl)/]
-		OCLExpression bodyExpression = DomainUtil.nonNullModel(expInOcl.getBodyExpression());
-		append("return " + getNameManager().getSymbolName(bodyExpression) + ";\n");
+			generateLocalConstants(analysis);
+			append(bodyExpression.accept(statementVisitor));
+			append("return " + resultName + ";\n");
 		popIndentation();
 		append("}\n");
+		return popStream();
 	}
 	
 	public void generateClassBodyBad(@NonNull String className) {
@@ -161,7 +184,7 @@ public class ExpressionInOCL2Class extends AbstractOCLCodeGenerator
 		append("*/\n");
 	}
 	
-	public void generateStaticCodeGenAnalysis(@NonNull CodeGenAnalysis analysis) {
+	public void generateStaticConstants(@NonNull CodeGenAnalysis analysis) {
 		List<CommonSubExpression> commonSubExpressions = analysis.getCommonSubExpressions();
 		if (commonSubExpressions != null) {
 			append("\n");
@@ -173,13 +196,12 @@ public class ExpressionInOCL2Class extends AbstractOCLCodeGenerator
 			
 	}
 	
-	public void generateLocalCodeGenAnalysis(@NonNull CodeGenAnalysis analysis) {
+	public void generateLocalConstants(@NonNull CodeGenAnalysis analysis) {
 		CommonSubExpression referredCommonSubExpression = analysis.getReferredCommonSubExpression();
 		if (referredCommonSubExpression != null) {
 			
 		}
 		else {
-			append(analysis.getExpression().accept(statementVisitor));
 /*			CodeGenAnalysis[] children = analysis.getChildren();
 			if (children != null) {
 				for (CodeGenAnalysis child : children) {
@@ -193,18 +215,21 @@ public class ExpressionInOCL2Class extends AbstractOCLCodeGenerator
 	public void generateCommonSubExpression(@NonNull CommonSubExpression commonSubExpression) {
 		CodeGenAnalysis analysis = commonSubExpression.getAnalysis();
 		Variable variable = commonSubExpression.getVariable();
+		String variableName = nameManager.getSymbolName(variable, variable.getName());
+		String initializer = analysis.getExpression().accept(expressionVisitor);
 		append("private ");
 		if (analysis.isStaticConstant()) {
 			append("static ");
 		}
-		append("final ");
-//		append(getTypeName(variable.getType()));
-		append("Object");
-		append(" ");
-		append(variable.getName());
-		append(" = ");
-		append(analysis.getExpression().accept(expressionVisitor));
-		append(";\n");
+		append("final " + atNonNull() + " Object " + variableName + " = " + initializer + ";\n");
+	}
+
+	public @NonNull String getEvaluatorName() {
+		String evaluatorName2 = evaluatorName;
+		if (evaluatorName2 == null) {
+			evaluatorName = evaluatorName2 = nameManager.reserveName("evaluator", null);
+		}
+		return evaluatorName2;
 	}
 	
 	public @NonNull OCL2JavaExpressionVisitor getExpressionVisitor() {
@@ -216,7 +241,7 @@ public class ExpressionInOCL2Class extends AbstractOCLCodeGenerator
 	}
 
 	public @NonNull NameManager getNameManager() {
-		return cgAnalyzer.getNameManager();
+		return nameManager;
 	}
 
 	public @NonNull CodeGenAnalysis getNode(@NonNull TypedElement element) {
@@ -225,6 +250,24 @@ public class ExpressionInOCL2Class extends AbstractOCLCodeGenerator
 			throw new IllegalArgumentException("No analysis of " + element.toString());
 		}
 		return node;
+	}
+
+	public @NonNull String getStandardLibraryName() {
+		String standardLibraryName2 = standardLibraryName;
+		if (standardLibraryName2 == null) {
+			standardLibraryName = standardLibraryName2 = nameManager.reserveName("standardLibrary", null);
+			append("final " + getImportedName(DomainStandardLibrary.class) + " " + standardLibraryName2 + " = evaluator.getStandardLibrary();\n"); 
+		}
+		return standardLibraryName2;
+	}
+
+	public @NonNull String getStaticSymbolName(@NonNull Operation anOperation) {
+		LinkedHashSet<TypedElement> staticObjects2 = staticObjects;
+		if (staticObjects2 == null) {
+			staticObjects = staticObjects2 = new LinkedHashSet<TypedElement>();
+		}
+		staticObjects2.add(anOperation);
+		return nameManager.getSymbolName(anOperation, "OP_" + anOperation.getName());
 	}
 
 	public @NonNull String getTypeName(@NonNull Type type) {

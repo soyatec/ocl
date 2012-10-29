@@ -19,6 +19,7 @@ import java.math.BigInteger;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.domain.values.impl.IntIntegerValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.LongIntegerValueImpl;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -91,10 +92,6 @@ public class OCL2JavaExpressionVisitor extends AbstractExtendingVisitor<String, 
 		assert string != null;
 		return string;
 	}
-	
-	public @NonNull String visiting(@NonNull Visitable visitable) {
-		throw new UnsupportedOperationException(visitable.getClass().getName());
-	}
 
 	@Override
 	public @Nullable String visitBooleanLiteralExp(@NonNull BooleanLiteralExp element) {
@@ -140,11 +137,11 @@ public class OCL2JavaExpressionVisitor extends AbstractExtendingVisitor<String, 
 	@Override
 	public @Nullable String visitUnlimitedNaturalLiteralExp(@NonNull UnlimitedNaturalLiteralExp element) {
 		Number unlimitedNaturalSymbol = element.getUnlimitedNaturalSymbol();
-		if (unlimitedNaturalSymbol != null) {
-			return "integerValueOf(" + integerValueOfInitializer(unlimitedNaturalSymbol) + ")";
+		if (unlimitedNaturalSymbol == Unlimited.INSTANCE) {
+			return "UNLIMITED_VALUE";
 		}
 		else {
-			return "UNLIMITED_VALUE";
+			return "integerValueOf(" + integerValueOfInitializer(unlimitedNaturalSymbol) + ")";
 		}
 	}
 
@@ -172,5 +169,9 @@ public class OCL2JavaExpressionVisitor extends AbstractExtendingVisitor<String, 
 			return nameManager.getSymbolName(element);
 		}
 		return referredVariable.accept(this);
+	}
+	
+	public @NonNull String visiting(@NonNull Visitable visitable) {
+		throw new UnsupportedOperationException(visitable.getClass().getName());
 	}
 }

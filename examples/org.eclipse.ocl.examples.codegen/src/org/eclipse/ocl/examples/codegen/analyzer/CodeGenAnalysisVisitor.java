@@ -48,6 +48,7 @@ import org.eclipse.ocl.examples.pivot.TupleLiteralPart;
 import org.eclipse.ocl.examples.pivot.TypeExp;
 import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
 import org.eclipse.ocl.examples.pivot.UnspecifiedValueExp;
+import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
@@ -358,8 +359,12 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 //		CodeGenAnalysis init = safeAccept(element.getVariable().getInitExpression());
 //		CodeGenAnalysis in = safeAccept(element.getIn());
-		thisAnalysis.setHashSource(element.getReferredVariable());
-		context.addNamedElement(element.getReferredVariable());
+		VariableDeclaration referredVariable = element.getReferredVariable();
+		if (referredVariable != null) {
+			thisAnalysis.setHashSource(referredVariable);
+			context.addNamedElement(referredVariable);
+			thisAnalysis.addDependency(referredVariable);
+		}
 //		if (init.isStaticConstant() && in.isStaticConstant()) {
 //			addStaticConstant();
 //		}

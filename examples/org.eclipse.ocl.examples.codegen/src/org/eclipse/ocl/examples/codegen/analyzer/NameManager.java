@@ -32,73 +32,110 @@ public class NameManager
 {
 	/**
 	 * Names that will not be allocated to temporary variables.
+	 * <p>
+	 * This Set is public and unsynchronized. Clients may change it in arbitrary ways at their own risk.
+	 * <p>
+	 * It is strongly recommended that clients do no more than add additional names.
 	 */
-	public static final Set<String> reservedNames = new HashSet<String>();
+	public static final Set<String> reservedJavaNames = new HashSet<String>();
 	{
-//		reservedNames.add("endif");
-//		reservedNames.add("in");
-//		reservedNames.add("invalid");
-//		reservedNames.add("let");
-//		reservedNames.add("unlimited");
-//		reservedNames.add("and");
-//		reservedNames.add("not");
-//		reservedNames.add("or");
-//		reservedNames.add("xor");
+		reservedJavaNames.add("Boolean");
+		reservedJavaNames.add("Character");
+		reservedJavaNames.add("Class");
+		reservedJavaNames.add("Double");
+		reservedJavaNames.add("Float");
+		reservedJavaNames.add("Integer");
+		reservedJavaNames.add("List");
+		reservedJavaNames.add("Long");
+		reservedJavaNames.add("Map");
+		reservedJavaNames.add("Package");
+		reservedJavaNames.add("String");
 		
-		reservedNames.add("Boolean");
-		reservedNames.add("Class");
-		reservedNames.add("Integer");
-		reservedNames.add("List");
-		reservedNames.add("Long");
-		reservedNames.add("Map");
-		reservedNames.add("Package");
-		reservedNames.add("String");
+		reservedJavaNames.add("boolean");
+		reservedJavaNames.add("byte");
+		reservedJavaNames.add("char");
+		reservedJavaNames.add("double");
+		reservedJavaNames.add("float");
+		reservedJavaNames.add("int");
+		reservedJavaNames.add("long");
+		reservedJavaNames.add("short");
+		reservedJavaNames.add("void");
 		
-		reservedNames.add("boolean");
-		reservedNames.add("byte");
-		reservedNames.add("char");
-		reservedNames.add("class");
-		reservedNames.add("enum");
-		reservedNames.add("int");
-		reservedNames.add("long");
-		reservedNames.add("package");
-		reservedNames.add("short");
-		reservedNames.add("void");
-		
-		reservedNames.add("break");
-		reservedNames.add("case");
-		reservedNames.add("catch");
-		reservedNames.add("do");
-		reservedNames.add("else");
-		reservedNames.add("finally");
-		reservedNames.add("for");
-		reservedNames.add("goto");
-		reservedNames.add("if");
-		reservedNames.add("new");
-		reservedNames.add("private");
-		reservedNames.add("protected");
-		reservedNames.add("public");
-		reservedNames.add("return");
-		reservedNames.add("switch");
-		reservedNames.add("throw");
-		reservedNames.add("throws");
-		reservedNames.add("try");
-		reservedNames.add("while");
+		reservedJavaNames.add("abstract");
+		reservedJavaNames.add("assert");
+		reservedJavaNames.add("break");
+		reservedJavaNames.add("case");
+		reservedJavaNames.add("catch");
+		reservedJavaNames.add("class");
+		reservedJavaNames.add("const");
+		reservedJavaNames.add("continue");
+		reservedJavaNames.add("default");
+		reservedJavaNames.add("do");
+		reservedJavaNames.add("else");
+		reservedJavaNames.add("enum");
+		reservedJavaNames.add("extends");
+		reservedJavaNames.add("final");
+		reservedJavaNames.add("finally");
+		reservedJavaNames.add("for");
+		reservedJavaNames.add("goto");
+		reservedJavaNames.add("if");
+		reservedJavaNames.add("implements");
+		reservedJavaNames.add("import");
+		reservedJavaNames.add("instanceof");
+		reservedJavaNames.add("interface");
+		reservedJavaNames.add("native");
+		reservedJavaNames.add("new");
+		reservedJavaNames.add("package");
+		reservedJavaNames.add("private");
+		reservedJavaNames.add("protected");
+		reservedJavaNames.add("public");
+		reservedJavaNames.add("return");
+		reservedJavaNames.add("static");
+		reservedJavaNames.add("strictfp");
+		reservedJavaNames.add("switch");
+		reservedJavaNames.add("synchronized");
+		reservedJavaNames.add("throw");
+		reservedJavaNames.add("throws");
+		reservedJavaNames.add("transient");
+		reservedJavaNames.add("try");
+		reservedJavaNames.add("volatile");
+		reservedJavaNames.add("while");
 
-		reservedNames.add("false");
-		reservedNames.add("null");
-		reservedNames.add("super");
-		reservedNames.add("this");
-		reservedNames.add("true");
+		reservedJavaNames.add("false");
+		reservedJavaNames.add("null");
+		reservedJavaNames.add("super");
+		reservedJavaNames.add("this");
+		reservedJavaNames.add("true");
+	}
+
+	protected static void appendJavaCharacters(StringBuilder s, String string) {
+		for (int i = 0; i < string.length(); i++) {
+			char c = string.charAt(i);
+			if (Character.isJavaIdentifierPart(c)) {
+				s.append(c);
+			}
+			else {
+				s.append('_');
+			}
+		}
+	}
+
+	protected static void appendJavaCharacters(StringBuilder s, String string, int iMax) {
+		for (int i = 0; i < Math.min(iMax, string.length()); i++) {
+			char c = string.charAt(i);
+			if (Character.isJavaIdentifierPart(c)) {
+				s.append(c);
+			}
+			else {
+				s.append('_');
+			}
+		}
 	}
 
 	private final Map<String, NamedElement> name2element = new HashMap<String, NamedElement>();		// User of each name, null if name ambiguous
 	private final Map<NamedElement, String> element2name = new HashMap<NamedElement, String>();		// Unambiguous name for each element, null if not determined
-	private Map<String, Integer> name2counter = null;			// Auto-generation counter for each name
-	
-	public NameManager() {
-}
-	
+	private Map<String, Integer> name2counter = null;												// Auto-generation counter for each colliding name
+
 	public void addNamedElement(@NonNull NamedElement namedElement) {
 		String name = namedElement.getName();
 		if (name != null) {
@@ -127,25 +164,38 @@ public class NameManager
 		return getUniqueName(element, nameHints);
 	}
 
-	public @NonNull String getUniqueName(@NonNull TypedElement element, @Nullable String... nameHints) {
-		String knownName = element2name.get(element);
-		if (knownName != null) {
-			return knownName;
+	public @NonNull String getUniqueName(@Nullable TypedElement element, @Nullable String... nameHints) {
+		if (element != null) {
+			String knownName = element2name.get(element);
+			if (knownName != null) {
+				return knownName;
+			}
 		}
 		String lastResort = null;
 		if (nameHints != null) {
 			for (String nameHint : nameHints) {
-				if ((nameHint != null) && !reservedNames.contains(nameHint)) {
-					Element oldElement = name2element.get(nameHint);
-					if (oldElement == element) {
-						return nameHint;
-					}
-					if (oldElement == null) {
-						install(nameHint, element);
-						return nameHint;
-					}
-					if (lastResort == null) {
-						lastResort = nameHint;
+				if (nameHint != null)  {
+					String validHint = getValidJavaIdentifier(nameHint);
+					if (!reservedJavaNames.contains(validHint)) {
+						if (element != null) {
+							Element oldElement = name2element.get(validHint);
+							if (oldElement == element) {
+								return validHint;
+							}
+							if (oldElement == null) {
+								install(validHint, element);
+								return validHint;
+							}
+						}
+						else {
+							if (!name2element.containsKey(validHint)) {
+								install(validHint, element);
+								return validHint;
+							}
+						}
+						if (lastResort == null) {
+							lastResort = validHint;
+						}
 					}
 				}
 			}
@@ -168,13 +218,53 @@ public class NameManager
 		}
 	}
 
-	private void install(@NonNull String name, @NonNull TypedElement element) {
+	private @NonNull String getValidJavaIdentifier(@NonNull String nameHint) {
+		StringBuilder s = new StringBuilder();
+		for (int i = 0; i < nameHint.length(); i++) {
+			char c = nameHint.charAt(i);
+			if (Character.isJavaIdentifierPart(c)) {
+				s.append(c);
+			}
+			else if (c == '=') {
+				s.append("_eq_");
+			}
+			else if (c == '+') {
+				s.append("_pl_");
+			}
+			else if (c == '-') {
+				s.append("_mi_");
+			}
+			else if (c == '/') {
+				s.append("_sl_");
+			}
+			else if (c == '*') {
+				s.append("_as_");
+			}
+			else if (c == '<') {
+				s.append("_lt_");
+			}
+			else if (c == '>') {
+				s.append("_gt_");
+			}
+			else {
+				s.append('_');
+			}
+		}
+		@SuppressWarnings("null") @NonNull String string = s.toString();
+		return string;
+	}
+	
+	private void install(@NonNull String name, @Nullable TypedElement element) {
 		name2element.put(name, element);
-		element2name.put(element, name);
+		if (element != null) {
+			element2name.put(element, name);
+		}
 	}
 
-	public void reserveName(@NonNull String name, @Nullable NamedElement namedElement) {
-		NamedElement oldElement = name2element.put(name, namedElement);
-		assert oldElement == null;
+	public @NonNull String reserveName(@NonNull String name, @Nullable TypedElement element) {
+		String validJavaIdentifier = getUniqueName(element, getValidJavaIdentifier(name));
+		NamedElement oldElement = name2element.put(validJavaIdentifier, element);
+		assert (oldElement == null) || (oldElement == element);
+		return validJavaIdentifier;
 	}
 }

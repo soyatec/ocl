@@ -3,3 +3,5 @@
 /Iterators
 /EvaluateBooleanOperations
 /EvaluateOclAnyOperations
+/EvaluateCollectionOperations
+/EvaluateNumericOperations

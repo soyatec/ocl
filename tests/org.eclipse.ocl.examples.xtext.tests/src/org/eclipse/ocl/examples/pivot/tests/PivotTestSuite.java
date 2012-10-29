@@ -56,7 +56,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.common.CodeGenHelper;
-import org.eclipse.ocl.examples.codegen.dynamic.GenModelCodeGenHelper;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaGenModelCodeGenHelper;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -1180,7 +1180,8 @@ public abstract class PivotTestSuite extends PivotTestCase
 			return null;
 		}
 		GenModel genModel = (GenModel) genModelResource.getContents().get(0);
-		return new GenModelCodeGenHelper(genModel, metaModelManager);
+		return new JavaGenModelCodeGenHelper(genModel, metaModelManager);
+//		return new GenModelCodeGenHelper(genModel, metaModelManager);
 	}
    
     /**

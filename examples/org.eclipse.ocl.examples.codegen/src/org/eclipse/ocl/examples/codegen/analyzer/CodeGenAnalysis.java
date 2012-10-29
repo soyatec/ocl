@@ -14,6 +14,8 @@
  */
 package org.eclipse.ocl.examples.codegen.analyzer;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,8 +23,10 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.Variable;
+import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.util.Nameable;
 
 /**
@@ -62,7 +66,9 @@ public class CodeGenAnalysis
 	private boolean childrenAreUnique = false;				// false when uniqueness needs enforcement for a SetLiteral
 	private Set<CodeGenAnalysis> invalidSources = null;		// AST nodes that may propagate invalid to this node
 	private Set<CodeGenAnalysis> nullSources = null;		// AST nodes that may propagate invalid to this node
-	private Set<Variable> dependencies = null;				// AST nodes that this depends on
+	private Set<VariableDeclaration> directDependencies = null;	// AST nodes that this depends on
+	private Set<VariableDeclaration> transitiveDependencies = null;	// AST nodes that this depends on
+	private Set<CodeGenAnalysis> transitiveInvalidSources = null;		// AST nodes that may propagate invalid to this node
 	private Object hashSource = null;						// Element that defines unique internal content
 	// Defined by setChildren
 	private CodeGenAnalysis[] children = null;				// Child node analyses in generation order
@@ -92,19 +98,21 @@ public class CodeGenAnalysis
 		commonSubExpressions.add(commonSubExpression);
 	}
 
-	public void addDependency(@NonNull Variable dependency) {
-		if (dependencies == null) {
-			dependencies = new HashSet<Variable>();
+	public void addDependency(@NonNull VariableDeclaration variableDeclaration) {
+		transitiveDependencies = null;
+		if (directDependencies == null) {
+			directDependencies = new HashSet<VariableDeclaration>();
 		}
-		dependencies.add(dependency);
+		directDependencies.add(variableDeclaration);
 	}
 
-	public void addDependencies(@Nullable Set<Variable> dependencies) {
+	public void addDependencies(@Nullable Set<? extends VariableDeclaration> dependencies) {
+		transitiveDependencies = null;
 		if ((dependencies != null) && (dependencies.size() > 0)) {
-			if (this.dependencies == null) {
-				this.dependencies = new HashSet<Variable>();
+			if (this.directDependencies == null) {
+				this.directDependencies = new HashSet<VariableDeclaration>();
 			}
-			this.dependencies.addAll(dependencies);
+			this.directDependencies.addAll(dependencies);
 		}
 	}
 
@@ -115,7 +123,7 @@ public class CodeGenAnalysis
 		invalidSources.add(invalidSource);
 	}
 
-	public void addInvalidSources(@Nullable Set<CodeGenAnalysis> invalidSources) {
+	public void addInvalidSources(@Nullable Set<? extends CodeGenAnalysis> invalidSources) {
 		if ((invalidSources != null) && (invalidSources.size() > 0)) {
 			if (this.invalidSources == null) {
 				this.invalidSources = new HashSet<CodeGenAnalysis>();
@@ -131,12 +139,32 @@ public class CodeGenAnalysis
 		nullSources.add(nullSource);
 	}
 
-	public void addNullSources(@Nullable Set<CodeGenAnalysis> nullSources) {
+	public void addNullSources(@Nullable Set<? extends CodeGenAnalysis> nullSources) {
 		if ((nullSources != null) && (nullSources.size() > 0)) {
 			if (this.nullSources == null) {
 				this.nullSources = new HashSet<CodeGenAnalysis>();
 			}
 			this.nullSources.addAll(nullSources);
+		}
+	}
+
+	private void gatherTransitiveDependencies(@NonNull Set<VariableDeclaration> knownDependencies, @NonNull Set<VariableDeclaration> newDependencies) {
+		for (VariableDeclaration newDependency : newDependencies) {
+			if (!knownDependencies.contains(newDependency)) {
+				knownDependencies.add(newDependency);
+				if (newDependency instanceof Variable) {
+					OCLExpression initExpression = ((Variable)newDependency).getInitExpression();
+					if (initExpression != null) {
+						CodeGenAnalysis analysis = analyzer.getNode(initExpression);
+						if (analysis != null) {
+							Set<VariableDeclaration> nestedDependencies = analysis.getDirectDependencies();
+							if (nestedDependencies != null) {
+								gatherTransitiveDependencies(knownDependencies, nestedDependencies);
+							}
+						}
+					}
+				}
+			}			
 		}
 	}
 
@@ -157,8 +185,8 @@ public class CodeGenAnalysis
 		return commonSubExpressions;
 	}
 
-	public @Nullable Set<Variable> getDependencies() {
-		return dependencies;
+	public @Nullable Set<VariableDeclaration> getDirectDependencies() {
+		return directDependencies;
 	}
 
 	public int getDepth() {
@@ -178,10 +206,10 @@ public class CodeGenAnalysis
 			return ((Nameable)hashSource).getName();
 		}
 		else if (hashSource instanceof Number) {
-			if (hashSource instanceof Integer) {
+			if ((hashSource instanceof BigInteger) || (hashSource instanceof Long) || (hashSource instanceof Integer) || (hashSource instanceof Short)) {
 				return "INT_" + hashSource.toString();
 			}
-			else if (hashSource instanceof Double) {
+			else if ((hashSource instanceof BigDecimal) || (hashSource instanceof Double) || (hashSource instanceof Float)) {
 				return "DBL_" + hashSource.toString().replaceAll("\\.", "\\_d\\_").replaceAll("\\+", "\\_p\\_").replaceAll("\\-", "\\_m\\_");
 			}
 			else {
@@ -222,6 +250,39 @@ public class CodeGenAnalysis
 
 	public int getStructuralHashCode() {
 		return structuralHashCode;
+	}
+
+	public @NonNull Set<VariableDeclaration> getTransitiveDependencies() {
+		Set<VariableDeclaration> transitiveDependencies2 = transitiveDependencies;
+		if (transitiveDependencies2 == null) {
+			transitiveDependencies = transitiveDependencies2 = new HashSet<VariableDeclaration>();
+			if (directDependencies != null) {
+				gatherTransitiveDependencies(transitiveDependencies2, directDependencies);
+			}
+		}
+		return transitiveDependencies2;
+	}
+
+	public @NonNull Set<CodeGenAnalysis> getTransitiveInvalidSources() {
+		Set<CodeGenAnalysis> transitiveInvalidSources2 = transitiveInvalidSources;
+		if (transitiveInvalidSources2 == null) {
+			transitiveInvalidSources = transitiveInvalidSources2 = new HashSet<CodeGenAnalysis>();
+			for (VariableDeclaration dependency : getTransitiveDependencies()) {
+				if (dependency instanceof Variable) {
+					OCLExpression initExpression = ((Variable)dependency).getInitExpression();
+					if (initExpression != null) {
+						CodeGenAnalysis analysis = analyzer.getNode(initExpression);
+						if (analysis != null) {
+							Set<CodeGenAnalysis> invalidSources = analysis.getInvalidSources();
+							if (invalidSources != null) {
+								transitiveInvalidSources2.addAll(invalidSources);
+							}
+						}
+					}
+				}
+			}
+		}
+		return transitiveInvalidSources2;
 	}
 
 	public boolean isConstant() {

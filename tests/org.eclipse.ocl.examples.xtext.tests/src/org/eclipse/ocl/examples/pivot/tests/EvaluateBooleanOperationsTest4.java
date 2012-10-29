@@ -61,6 +61,16 @@ public class EvaluateBooleanOperationsTest4 extends PivotTestSuite
 		super.tearDown();
 	}
 
+	@Test public void testBoolean() {
+		assertQueryFalse(null, "false");
+		assertQueryTrue(null, "true");
+		// invalid
+		assertQueryFalse(null, "let b : Boolean = false in b");
+		assertQueryTrue(null, "let b : Boolean = true in b");
+		assertQueryNull(null, "let b : Boolean = null in b");
+		assertQueryInvalid(null, "let b : Boolean = invalid in b");
+	}
+
 	@Test public void testBooleanAnd() {
 		assertQueryFalse(null, "false and false");
 		assertQueryFalse(null, "false and true");
@@ -168,6 +178,8 @@ public class EvaluateBooleanOperationsTest4 extends PivotTestSuite
 	}
 
 	@Test public void testBooleanXor() {
+		assertQueryInvalid(null, "let b : Boolean = invalid in false xor b");
+//
 		assertQueryFalse(null, "false xor false");
 		assertQueryTrue(null, "false xor true");
 		assertQueryTrue(null, "true xor false");

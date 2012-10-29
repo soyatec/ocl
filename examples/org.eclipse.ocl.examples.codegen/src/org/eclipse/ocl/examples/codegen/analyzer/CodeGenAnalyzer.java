@@ -154,7 +154,7 @@ public class CodeGenAnalyzer
 		finally {
 			if (theseChildren != null) {
 				for (CodeGenAnalysis child : theseChildren) {
-					thisAnalysis2.addDependencies(child.getDependencies());
+					thisAnalysis2.addDependencies(child.getDirectDependencies());
 				}
 			}
 			int structuralHashCode = thisAnalysis2.setChildren(theseChildren);

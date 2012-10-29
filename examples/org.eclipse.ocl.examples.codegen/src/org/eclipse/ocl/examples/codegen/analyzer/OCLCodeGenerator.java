@@ -19,6 +19,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
+import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
@@ -27,8 +28,9 @@ public interface OCLCodeGenerator
 	void append(@Nullable String string);
 	@NonNull String atNonNull();
 	@NonNull String atNullable();
-	@NonNull String getBodiesClassSuffix();
-	@NonNull String getBodiesPackageName();
+//	@NonNull String getBodiesClassSuffix();
+//	@NonNull String getBodiesPackageName();
+	@NonNull String getEvaluatorName();
 	@NonNull OCL2JavaExpressionVisitor getExpressionVisitor();
 	@NonNull IdVisitor<String> getIdVisitor();
 	@NonNull String getImportedName(@NonNull Class<?> className);
@@ -37,6 +39,10 @@ public interface OCLCodeGenerator
 	@NonNull NameManager getNameManager();
 	@NonNull CodeGenAnalysis getNode(@NonNull TypedElement element);
 	@NonNull Class<?> getOperationInterface(@NonNull List<? extends TypedElement> parameters);
+	@Nullable String getQualifiedOperationImplementationName(@NonNull Operation anOperation, @NonNull String stereotype);
+	@Nullable String getQualifiedLiteralName(@NonNull Operation anOperation);
+	@NonNull String getStandardLibraryName();
+	@NonNull String getStaticSymbolName(@NonNull Operation anOperation);
 	void popIndentation();
 	void pushIndentation();
 	void pushIndentation(@NonNull String moreIndentation);
