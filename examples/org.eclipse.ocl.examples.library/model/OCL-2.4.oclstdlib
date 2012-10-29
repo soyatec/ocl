@@ -665,6 +665,13 @@ type OclInvalid : InvalidType conformsTo OclVoid {
 	Returns oclText[invalid].
 	*/
 	operation "<>"(object2 : OclSelf) : Boolean precedence=EQUALITY => 'org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation';
+	operation and(b : Boolean) : Boolean precedence=AND => 'org.eclipse.ocl.examples.library.logical.BooleanAndOperation';
+	operation implies(b : Boolean) : Boolean precedence=IMPLIES => 'org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation';
+	operation or(b : Boolean) : Boolean precedence=OR => 'org.eclipse.ocl.examples.library.logical.BooleanAndOperation';
+	operation oclAsSet() : Set(OclSelf) => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation';
+	operation oclIsInvalid() : Boolean => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclIsInvalidOperation'
+;	operation oclIsUndefined() : Boolean => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation';
+	/**
 	operation oclBadOperation() : OclInvalid;
 	property oclBadProperty : OclInvalid;
 	/**

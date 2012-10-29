@@ -34,17 +34,23 @@ import org.eclipse.ocl.examples.domain.library.LibraryOperation;
 
 public class OCL2JavaFileObject extends SimpleJavaFileObject
 {
+	public static long base = System.currentTimeMillis();
+	
 	private static JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 	private static StandardJavaFileManager stdFileManager = compiler
 			.getStandardFileManager(null, Locale.getDefault(), null);
 	private static List<String> compilationOptions = Arrays.asList("-d", "bin", "-target", "1.5", "-g:{source,lines,vars}");
 	
 	public static LibraryOperation loadClass(String qualifiedName, String javaCodeSource) throws Exception {
+		System.out.printf("%6.3f start\n", 0.001 * (System.currentTimeMillis()-base));
 		List<? extends JavaFileObject> compilationUnits = Collections.singletonList(
 				new OCL2JavaFileObject(qualifiedName, javaCodeSource));
 		DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<JavaFileObject>();
+		
+		System.out.printf("%6.3f getTask\n", 0.001 * (System.currentTimeMillis()-base));
 		CompilationTask compilerTask = compiler.getTask(null, stdFileManager,
 				diagnostics, compilationOptions, null, compilationUnits);
+		System.out.printf("%6.3f call\n", 0.001 * (System.currentTimeMillis()-base));
 		if (!compilerTask.call()) {
 			StringBuilder s = new StringBuilder();
 			s.append("Failed to compile " + qualifiedName);
@@ -53,9 +59,12 @@ public class OCL2JavaFileObject extends SimpleJavaFileObject
 			}
 			throw new IOException(s.toString());
 		}
+		System.out.printf("%6.3f close\n", 0.001 * (System.currentTimeMillis()-base));
 		stdFileManager.close();		// Close the file manager which re-opens automatically
+		System.out.printf("%6.3f forName\n", 0.001 * (System.currentTimeMillis()-base));
 		Class<?> testClass = Class.forName(qualifiedName);
 		Field testField = testClass.getField("INSTANCE");
+		System.out.printf("%6.3f get\n", 0.001 * (System.currentTimeMillis()-base));
 		return (LibraryOperation) testField.get(null);
 	}
 	

@@ -225,7 +225,8 @@ public class CodeGenAnalyzer
 		for (List<List<CodeGenAnalysis>> hashedAnalyses : hash2nodes.values()) {
 			for (List<CodeGenAnalysis> hashedAnalysis : hashedAnalyses) {
 				int iSize = hashedAnalysis.size();
-				if ((iSize > 1) || hashedAnalysis.get(0).isLocalConstant() || hashedAnalysis.get(0).isStaticConstant()) {
+				CodeGenAnalysis analysis = hashedAnalysis.get(0);
+				if (!analysis.isInlineable() && ((iSize > 1) || analysis.isConstant())) {
 					candidates.add(hashedAnalysis);
 				}
 			}
@@ -283,7 +284,8 @@ public class CodeGenAnalyzer
 		Map<CodeGenAnalysis, CommonSubExpression> commonSubExpressions = new HashMap<CodeGenAnalysis, CommonSubExpression>();
 		for (List<CodeGenAnalysis> candidate : candidates) {
 			int iSize = candidate.size();
-			if ((iSize > 1) || candidate.get(0).isLocalConstant() || candidate.get(0).isStaticConstant()) {
+			CodeGenAnalysis candidate0 = candidate.get(0);
+			if (!candidate0.isInlineable() && ((iSize > 1) || candidate0.isConstant())) {
 				CommonSubExpression cse = new CommonSubExpression(this, candidate);
 				for (CodeGenAnalysis analysis : candidate) {
 					commonSubExpressions.put(analysis, cse);

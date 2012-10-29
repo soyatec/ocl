@@ -93,8 +93,20 @@ public class Id2JavaVisitor implements IdVisitor<String>
 	}
 
 	public @Nullable String visitPrimitiveTypeId(@NonNull PrimitiveTypeId id) {
-		if (id == TypeId.STRING) {
+		if (id == TypeId.BOOLEAN) {
+			return typeIdName + ".BOOLEAN";
+		}
+		else if (id == TypeId.INTEGER) {
+			return typeIdName + ".INTEGER";
+		}
+		else if (id == TypeId.REAL) {
+			return typeIdName + ".REAL";
+		}
+		else if (id == TypeId.STRING) {
 			return typeIdName + ".STRING";
+		}
+		else if (id == TypeId.UNLIMITED_NATURAL) {
+			return typeIdName + ".UNLIMITED_NATURAL";
 		}
 		return null;
 	}

@@ -38,7 +38,26 @@ public class CodeGenAnalysis
 	protected final int depth;								// Length of parent closure
 	protected final @NonNull TypedElement expression;		// Node to be code generated
 	// Optional analysis contributions
+	/**
+	 * An inlineable element is able to be inlined when accessed and so should not be factored out
+	 * into a common subexpression.
+	 * <p>
+	 * For instance true, false and null are simple constants that are more readable when used direcrtly.
+	 */
+	private boolean isInlineable = false;
+	
+	/**
+	 * A element that is a static constant is independent of the user's meta-model configuration.
+	 * Static constants may therefore be generated directly into the class avoiding initialization
+	 * overhead for each execution.
+	 */
 	private boolean isStaticConstant = false;				// Node is a meta-model-independent constant 
+	
+	/**
+	 * A element that is a local constant is dependent of the user's meta-model configuration.
+	 * Local constants must therefore be generated directly into the function pre-amble incurring
+	 * a shared overhead for each execution.
+	 */
 	private boolean isLocalConstant = false;				// Node is a meta-model-dependent constant
 	private boolean childrenAreUnique = false;				// false when uniqueness needs enforcement for a SetLiteral
 	private Set<CodeGenAnalysis> invalidSources = null;		// AST nodes that may propagate invalid to this node
@@ -205,6 +224,14 @@ public class CodeGenAnalysis
 		return structuralHashCode;
 	}
 
+	public boolean isConstant() {
+		return this.isLocalConstant || this.isStaticConstant;
+	}
+
+	public boolean isInlineable() {
+		return this.isInlineable;
+	}
+
 	public boolean isLocalConstant() {
 		return this.isLocalConstant;
 	}
@@ -274,6 +301,10 @@ public class CodeGenAnalysis
 
 	public void setLocalConstant() {
 		this.isLocalConstant = true;
+	}
+
+	public void setInlineable() {
+		this.isInlineable = true;
 	}
 
 	public void setStaticConstant() {

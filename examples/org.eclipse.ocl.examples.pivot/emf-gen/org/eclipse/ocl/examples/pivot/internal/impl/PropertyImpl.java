@@ -1682,7 +1682,7 @@ public class PropertyImpl
 		EObject eTarget = getETarget();
 		if (eTarget instanceof EStructuralFeature) {
 			EStructuralFeature eFeature = (EStructuralFeature) eTarget;
-			EObject eObject = (EObject) objectValue; //.asNavigableObject();
+			EObject eObject = ValuesUtil.asNavigableObject(objectValue);
 			Object eValue;
 			if (propertyValue instanceof Value) {
 				eValue = ((Value)propertyValue).asEcoreObject();

@@ -29,7 +29,7 @@ public interface OCLCodeGenerator
 	@NonNull String atNullable();
 	@NonNull String getBodiesClassSuffix();
 	@NonNull String getBodiesPackageName();
-	@NonNull EssentialOCL2ExpressionVisitor getExpressionVisitor();
+	@NonNull OCL2JavaExpressionVisitor getExpressionVisitor();
 	@NonNull IdVisitor<String> getIdVisitor();
 	@NonNull String getImportedName(@NonNull Class<?> className);
 	@NonNull String getImportedName(@NonNull String qualifiedClassName);

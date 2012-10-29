@@ -26,21 +26,29 @@ import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
+import org.eclipse.ocl.examples.pivot.Variable;
+import org.eclipse.ocl.examples.pivot.VariableDeclaration;
+import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.xtext.util.Strings;
 
 /**
- * A CodeGenAnalysisVisitor handles the Pivot AST visits on behalf of a CodeGenAnalyzer.
- * Derived visitors may support an extended AST.
+ * An OCL2JavaExpressionVisitor generates and returns a simple Java expression for a Pivot AST element.
+ * <p>
+ * The OCL2JavaStatementVisitor should be used for complex scenarios that require statements.
  */
-public class EssentialOCL2ExpressionVisitor extends AbstractExtendingVisitor<String, OCLCodeGenerator>
+public class OCL2JavaExpressionVisitor extends AbstractExtendingVisitor<String, OCLCodeGenerator>
 {
-	public EssentialOCL2ExpressionVisitor(@NonNull OCLCodeGenerator codeGenerator) {
+	protected final @NonNull NameManager nameManager;
+	
+	public OCL2JavaExpressionVisitor(@NonNull OCLCodeGenerator codeGenerator) {
 		super(codeGenerator);
+		nameManager = codeGenerator.getNameManager();
 	}
 	
 	protected @NonNull String integerValueOfInitializer(Number number) {
@@ -77,8 +85,14 @@ public class EssentialOCL2ExpressionVisitor extends AbstractExtendingVisitor<Str
 		return "\"" + number.toString() + "\"";
 	}
 	
-	@Nullable
-	public String visiting(@NonNull Visitable visitable) {
+	@Override
+	public @NonNull String visit(@NonNull org.eclipse.ocl.examples.pivot.util.Visitable v) {
+		String string = v.accept(this);
+		assert string != null;
+		return string;
+	}
+	
+	public @NonNull String visiting(@NonNull Visitable visitable) {
 		throw new UnsupportedOperationException(visitable.getClass().getName());
 	}
 
@@ -95,7 +109,7 @@ public class EssentialOCL2ExpressionVisitor extends AbstractExtendingVisitor<Str
 
 	@Override
 	public @Nullable String visitInvalidLiteralExp(@NonNull InvalidLiteralExp element) {
-		return "throwInvalidValueException()";
+		return "INVALID_VALUE";
 	}
 
 	@Override
@@ -132,5 +146,31 @@ public class EssentialOCL2ExpressionVisitor extends AbstractExtendingVisitor<Str
 		else {
 			return "UNLIMITED_VALUE";
 		}
+	}
+
+	@Override
+	public @Nullable String visitVariable(@NonNull Variable element) {
+		OCLExpression initExpression = element.getInitExpression();
+		if (initExpression != null) {
+			CodeGenAnalysis initAnalysis = context.getNode(initExpression);
+			if (initAnalysis.isInlineable()) {
+				return initExpression.accept(this);
+			}
+		}
+		return nameManager.getSymbolName(element);
+	}
+
+	@Override
+	public @Nullable String visitVariableDeclaration(@NonNull VariableDeclaration element) {
+		return nameManager.getSymbolName(element);
+	}
+
+	@Override
+	public @Nullable String visitVariableExp(@NonNull VariableExp element) {
+		VariableDeclaration referredVariable = element.getReferredVariable();
+		if (referredVariable == null) {
+			return nameManager.getSymbolName(element);
+		}
+		return referredVariable.accept(this);
 	}
 }

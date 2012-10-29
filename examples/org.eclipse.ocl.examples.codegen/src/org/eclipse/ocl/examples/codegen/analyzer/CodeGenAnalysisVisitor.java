@@ -80,6 +80,7 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 	public @Nullable CodeGenAnalysis visitBooleanLiteralExp(@NonNull BooleanLiteralExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 		thisAnalysis.setHashSource(Boolean.valueOf(element.isBooleanSymbol()));
+		thisAnalysis.setInlineable();
 		context.addStaticConstant();
 		return thisAnalysis;
 	}
@@ -115,8 +116,7 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 			if (first.isStaticConstant() && last.isStaticConstant()) {
 				context.addStaticConstant();
 			}
-			if ((first.isLocalConstant() || first.isStaticConstant())
-				&& (last.isLocalConstant() || last.isStaticConstant())) {
+			if (first.isConstant() && last.isConstant()) {
 				context.addLocalConstant();
 			}
 			thisAnalysis.addInvalidSources(first.getInvalidSources());
@@ -204,6 +204,7 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 	public @Nullable CodeGenAnalysis visitInvalidLiteralExp(@NonNull InvalidLiteralExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 		thisAnalysis.addInvalidSource(thisAnalysis);
+		thisAnalysis.setInlineable();
 		context.addStaticConstant();
 		return thisAnalysis;
 	}
@@ -232,8 +233,7 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 		if ((init != null) && (in != null)) {
 			if (init.isStaticConstant() && in.isStaticConstant()) {
 				context.addStaticConstant();
-			} else if ((init.isLocalConstant() || init.isStaticConstant())
-				&& (in.isLocalConstant() || in.isStaticConstant())) {
+			} else if (init.isConstant() && in.isConstant()) {
 				context.addLocalConstant();
 			}
 			thisAnalysis.addInvalidSources(in.getInvalidSources());
@@ -252,6 +252,7 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 	public @Nullable CodeGenAnalysis visitNullLiteralExp(@NonNull NullLiteralExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 		thisAnalysis.addNullSource(thisAnalysis);
+		thisAnalysis.setInlineable();
 		context.addStaticConstant();
 		return thisAnalysis;
 	}

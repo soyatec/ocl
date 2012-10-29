@@ -38,7 +38,7 @@ public class XtendCG extends PivotTestSuite
 		String className = "TestClass" + testCounter++;
 		File dir = new File(targetFolder, packageName);
 		dir.mkdir();
-		LibraryOperation testInstance = genModelHelper.loadClass(expr, targetFolder, packageName, className, true);
+		LibraryOperation testInstance = genModelHelper.loadClass(expr, targetFolder, packageName, className, false);
 		DomainEvaluator evaluator = new EcoreExecutorManager(metaModelManager.getOclAnyType(), PivotTables.LIBRARY);
 		OperationCallExp callExp = PivotFactory.eINSTANCE.createOperationCallExp();
 		callExp.setType(expr.getType());
@@ -64,10 +64,21 @@ public class XtendCG extends PivotTestSuite
 	}
 
 	public void testXtendCG() {
-		assertQueryEquals(null, "t", "'test'.substring(1, 1)");
-
-//		ExpressionInOCL2Class expressionInOCL2Class = new ExpressionInOCL2Class(null);
-//		String s = expressionInOCL2Class.generateClass(null, "p", "C");
-//		System.out.println(s);
+		assertQueryFalse(null, "false and false");
+		assertQueryFalse(null, "false and true");
+		assertQueryFalse(null, "true and false");
+		assertQueryTrue(null, "true and true");
+		// invalid
+		assertQueryFalse(null, "let b : Boolean = invalid in false and b");
+		assertQueryInvalid(null, "let b : Boolean = invalid in true and b");
+		assertQueryFalse(null, "let a : Boolean = invalid in a and false");
+		assertQueryInvalid(null, "let a : Boolean = invalid in a and true");
+		assertQueryInvalid(null, "let a : Boolean = invalid, b : Boolean = invalid in a and b");
+		// null
+		assertQueryFalse(null, "let b : Boolean = null in false and b");
+		assertQueryInvalid(null, "let b : Boolean = null in true and b");
+		assertQueryFalse(null, "let a : Boolean = null in a and false");
+		assertQueryInvalid(null, "let a : Boolean = null in a and true");
+		assertQueryInvalid(null, "let a : Boolean = null, b : Boolean = null in a and b");
 	}
 }

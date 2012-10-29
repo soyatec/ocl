@@ -1067,7 +1067,12 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Operation op_OclInvalid__lt__gt_ = createOperation("<>", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation", org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
 		protected final @NonNull Operation op_OclInvalid__eq_ = createOperation("=", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation", org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
 		protected final @NonNull Operation op_OclInvalid_allInstances = createOperation("allInstances", _Set_OclSelf, "org.eclipse.ocl.examples.library.oclinvalid.OclInvalidAllInstancesOperation", org.eclipse.ocl.examples.library.oclinvalid.OclInvalidAllInstancesOperation.INSTANCE);
-		protected final @NonNull Operation op_OclInvalid_oclBadOperation = createOperation("oclBadOperation", _OclInvalid, null, null);
+		protected final @NonNull Operation op_OclInvalid_and = createOperation("and", _Boolean, "org.eclipse.ocl.examples.library.logical.BooleanAndOperation", org.eclipse.ocl.examples.library.logical.BooleanAndOperation.INSTANCE);
+		protected final @NonNull Operation op_OclInvalid_implies = createOperation("implies", _Boolean, "org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation", org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation.INSTANCE);
+		protected final @NonNull Operation op_OclInvalid_oclAsSet = createOperation("oclAsSet", _Set_OclSelf, "org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation.INSTANCE);
+		protected final @NonNull Operation op_OclInvalid_oclIsInvalid = createOperation("oclIsInvalid", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyOclIsInvalidOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclIsInvalidOperation.INSTANCE);
+		protected final @NonNull Operation op_OclInvalid_oclIsUndefined = createOperation("oclIsUndefined", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation.INSTANCE);
+		protected final @NonNull Operation op_OclInvalid_or = createOperation("or", _Boolean, "org.eclipse.ocl.examples.library.logical.BooleanAndOperation", org.eclipse.ocl.examples.library.logical.BooleanAndOperation.INSTANCE);
 		protected final @NonNull Operation op_OclInvalid_toString = createOperation("toString", _String, "org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation", org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
 		protected final @NonNull Operation op_OclMessage_hasReturned = createOperation("hasReturned", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation", org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation.INSTANCE);
 		protected final @NonNull Operation op_OclMessage_isOperationCall = createOperation("isOperationCall", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation", org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation.INSTANCE);
@@ -1467,7 +1472,18 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedParameters.add(parameter = createParameter("object2", _OclSelf));
 			ownedOperations.add(operation = op_OclInvalid_allInstances);
 			operation.setIsStatic(true);
-			ownedOperations.add(operation = op_OclInvalid_oclBadOperation);
+			ownedOperations.add(operation = op_OclInvalid_and);
+			ownedParameters = operation.getOwnedParameter();
+			ownedParameters.add(parameter = createParameter("b", _Boolean));
+			ownedOperations.add(operation = op_OclInvalid_implies);
+			ownedParameters = operation.getOwnedParameter();
+			ownedParameters.add(parameter = createParameter("b", _Boolean));
+			ownedOperations.add(operation = op_OclInvalid_oclAsSet);
+			ownedOperations.add(operation = op_OclInvalid_oclIsInvalid);
+			ownedOperations.add(operation = op_OclInvalid_oclIsUndefined);
+			ownedOperations.add(operation = op_OclInvalid_or);
+			ownedParameters = operation.getOwnedParameter();
+			ownedParameters.add(parameter = createParameter("b", _Boolean));
 			ownedOperations.add(operation = op_OclInvalid_toString);
 			ownedOperations = _OclMessage.getOwnedOperation();
 			ownedOperations.add(operation = op_OclMessage_hasReturned);
@@ -1860,7 +1876,6 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Property pr_Collection_Collection_T_lower = createProperty("lower", _Integer);
 		protected final @NonNull Property pr_Collection_Collection_T_upper = createProperty("upper", _Integer);
 		protected final @NonNull Property pr_Enumeration_allLiterals = createProperty("allLiterals", _OrderedSet_EnumerationLiteral);
-		protected final @NonNull Property pr_OclInvalid_oclBadProperty = createProperty("oclBadProperty", _OclInvalid);
 		
 		protected void installProperties() {
 			List<Property> ownedProperties;
@@ -1887,9 +1902,6 @@ public class OCLstdlib extends XMIResourceImpl
 			property.setIsStatic(true);
 			property.setImplementationClass("org.eclipse.ocl.examples.library.enumeration.EnumerationOwnedLiteralProperty");
 			property.setImplementation(org.eclipse.ocl.examples.library.enumeration.EnumerationOwnedLiteralProperty.INSTANCE);
-			ownedProperties = _OclInvalid.getOwnedAttribute();
-			ownedProperties.add(property = pr_OclInvalid_oclBadProperty);
-			property.setIsResolveProxies(true);
 		}
 		protected final @NonNull TypeTemplateParameter tp_UnlimitedNatural_oclAsType = createTypeTemplateParameter(_UnlimitedNatural_oclAsType_TT);
 		protected final @NonNull TypeTemplateParameter tp_Bag_Bag_T_collectNested = createTypeTemplateParameter(_Bag_collectNested_V);
@@ -2173,6 +2185,9 @@ public class OCLstdlib extends XMIResourceImpl
 			op_OclComparable__gt__eq_.setPrecedence(prec_RELATIONAL);
 			op_OclInvalid__lt__gt_.setPrecedence(prec_EQUALITY);
 			op_OclInvalid__eq_.setPrecedence(prec_EQUALITY);
+			op_OclInvalid_and.setPrecedence(prec_AND);
+			op_OclInvalid_implies.setPrecedence(prec_IMPLIES);
+			op_OclInvalid_or.setPrecedence(prec_OR);
 			op_OclTuple__lt__gt_.setPrecedence(prec_EQUALITY);
 			op_OclTuple__eq_.setPrecedence(prec_EQUALITY);
 			op_OclVoid__lt__gt_.setPrecedence(prec_EQUALITY);
@@ -2344,7 +2359,7 @@ public class OCLstdlib extends XMIResourceImpl
 			installComment(op_OclInvalid__lt__gt_, "Returns oclText[invalid].");
 			installComment(op_OclInvalid__eq_, "Returns oclText[invalid].");
 			installComment(op_OclInvalid_allInstances, "Returns oclText[invalid].");
-			installComment(op_OclInvalid_toString, "Returns \'invalid\'.");
+			installComment(op_OclInvalid_toString, "operation oclBadOperation() : OclInvalid;\nproperty oclBadProperty : OclInvalid;\n/**\nReturns \'invalid\'.");
 			installComment(_OclLambda, "The type OclLambda is the implicit supertype of all Lambda types. The operations defined for OclLambda\ntherefore apply to all lambda expressions.");
 			installComment(_OclMessage, "OclMessage\nThis sub clause contains the definition of the standard type OclMessage.\nAs defined in this sub clause, each ocl message type is actually a template type with one parameter.\n\u2018T\u2019 denotes the parameter.\nA concrete ocl message type is created by substituting an operation or signal for the T.\n\nThe predefined type OclMessage is an instance of MessageType.\nEvery OclMessage is fully determined by either the operation, or signal given as parameter.\nNote that there is conceptually an undefined (infinite) number of these types,\nas each is determined by a different operation or signal.\nThese types are unnamed. Every type has as attributes the name of the operation or signal,\nand either all formal parameters of the operation, or all attributes of the signal.\nOclMessage is itself an instance of the metatype MessageType.\n\nOclMessage has a number of predefined operations, as shown in the OCL Standard Library.");
 			installComment(op_OclMessage_hasReturned, "True if type of template parameter is an operation call, and the called operation has returned a value.\nThis implies the fact that the message has been sent. False in all other cases.");

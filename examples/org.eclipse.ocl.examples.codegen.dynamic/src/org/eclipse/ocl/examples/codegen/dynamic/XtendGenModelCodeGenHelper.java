@@ -148,7 +148,7 @@ public class XtendGenModelCodeGenHelper implements CodeGenHelper
 
 		ExpressionInOCL2Class expressionInOCL2Class = new ExpressionInOCL2Class(metaModelManager, query);
 		String javaCodeSource = expressionInOCL2Class.generateClass(this, packageName, className);
-		System.out.println(javaCodeSource);
+//		System.out.println(javaCodeSource);
 /*		List<Object> arguments = new ArrayList<Object>();
 		arguments.add(this);
 		arguments.add(packageName);

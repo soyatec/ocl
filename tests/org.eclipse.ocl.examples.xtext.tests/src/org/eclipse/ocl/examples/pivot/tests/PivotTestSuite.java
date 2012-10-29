@@ -563,7 +563,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 			}
 		} catch (Exception e) {
 			if ((exceptionClass != null) && (exceptionClass != e.getClass())) {
-				assertEquals("Invalid Value Throwable", exceptionClass, e.getMessage());
+				assertEquals("Invalid Value Throwable", exceptionClass, e.getClass() + " : " + e.getMessage());
 			}
 			if (reason != null) {
 				assertEquals("Invalid Value Reason", reason, e.getMessage());

@@ -92,17 +92,14 @@ public class NameManager
 		reservedNames.add("true");
 	}
 
-	private Map<String, NamedElement> name2element = null;		// User of each name, null if name ambiguous
-	private Map<NamedElement, String> element2name = null;		// Unambiguous name for each element, null if not determined
+	private final Map<String, NamedElement> name2element = new HashMap<String, NamedElement>();		// User of each name, null if name ambiguous
+	private final Map<NamedElement, String> element2name = new HashMap<NamedElement, String>();		// Unambiguous name for each element, null if not determined
 	private Map<String, Integer> name2counter = null;			// Auto-generation counter for each name
 	
-	public NameManager() {}
+	public NameManager() {
+}
 	
 	public void addNamedElement(@NonNull NamedElement namedElement) {
-		if (name2element == null) {
-			name2element = new HashMap<String, NamedElement>();
-			element2name = new HashMap<NamedElement, String>();
-		}
 		String name = namedElement.getName();
 		if (name != null) {
 			NamedElement oldNamedElement = name2element.get(name);
@@ -131,10 +128,6 @@ public class NameManager
 	}
 
 	public @NonNull String getUniqueName(@NonNull TypedElement element, @Nullable String... nameHints) {
-		if (name2element == null) {
-			name2element = new HashMap<String, NamedElement>();
-			element2name = new HashMap<NamedElement, String>();
-		}
 		String knownName = element2name.get(element);
 		if (knownName != null) {
 			return knownName;

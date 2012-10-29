@@ -24,8 +24,8 @@ import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysisVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.CommonSubExpression;
-import org.eclipse.ocl.examples.codegen.analyzer.EssentialOCL2ExpressionVisitor;
-import org.eclipse.ocl.examples.codegen.analyzer.EssentialOCL2StatementVisitor;
+import org.eclipse.ocl.examples.codegen.analyzer.OCL2JavaExpressionVisitor;
+import org.eclipse.ocl.examples.codegen.analyzer.OCL2JavaStatementVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.Id2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.codegen.common.CodeGenHelper;
@@ -44,17 +44,17 @@ public class ExpressionInOCL2Class extends AbstractOCLCodeGenerator
 {
 	private final @NonNull ExpressionInOCL expInOcl;
 	private final @NonNull CodeGenAnalyzer cgAnalyzer = new CodeGenAnalyzer();
-	private final @NonNull EssentialOCL2ExpressionVisitor expressionVisitor;
+	private final @NonNull OCL2JavaExpressionVisitor expressionVisitor;
 	private final @NonNull Id2JavaVisitor idVisitor;
-	private final @NonNull EssentialOCL2StatementVisitor statementVisitor;
+	private final @NonNull OCL2JavaStatementVisitor statementVisitor;
 
 	public ExpressionInOCL2Class(@NonNull MetaModelManager metaModelManager, @NonNull ExpressionInOCL expInOcl) {
 		super(metaModelManager);
 		this.expInOcl = expInOcl;
 		cgAnalyzer.initialize(new CodeGenAnalysisVisitor(cgAnalyzer), expInOcl);
-		expressionVisitor = new EssentialOCL2ExpressionVisitor(this);
+		expressionVisitor = new OCL2JavaExpressionVisitor(this);
 		idVisitor = new Id2JavaVisitor(this);
-		statementVisitor = new EssentialOCL2StatementVisitor(this);
+		statementVisitor = new OCL2JavaStatementVisitor(this);
 		cgAnalyzer.optimize();
 	}
 	
@@ -207,7 +207,7 @@ public class ExpressionInOCL2Class extends AbstractOCLCodeGenerator
 		append(";\n");
 	}
 	
-	public @NonNull EssentialOCL2ExpressionVisitor getExpressionVisitor() {
+	public @NonNull OCL2JavaExpressionVisitor getExpressionVisitor() {
 		return expressionVisitor;
 	}
 

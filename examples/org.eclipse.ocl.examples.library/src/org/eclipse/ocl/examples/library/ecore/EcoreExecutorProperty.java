@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorProperty;
 
 public class EcoreExecutorProperty extends ExecutorProperty
@@ -33,7 +34,7 @@ public class EcoreExecutorProperty extends ExecutorProperty
 
 	@Override
 	public void initValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull Object objectValue, @Nullable Object propertyValue) {
-		EObject eObject = (EObject) objectValue; //.asNavigableObject();
+		EObject eObject = ValuesUtil.asNavigableObject(objectValue);
 		Object eValue;
 		if (propertyValue instanceof Value) {
 			eValue = ((Value)propertyValue).asEcoreObject();

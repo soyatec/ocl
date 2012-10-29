@@ -622,12 +622,13 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		Type staticOperationType = staticOperation.getOwningType();
 		boolean isBoolean = staticOperationType == metaModelManager.getBooleanType();
 		boolean isOclAny = staticOperationType == metaModelManager.getOclAnyType();
+		boolean isOclInvalid = staticOperationType == metaModelManager.getOclInvalidType();
 		//
 		//	Resolve source value
 		//
  		Object sourceValue;
 		OCLExpression source = operationCallExp.getSource();
-		if (isBoolean || isOclAny) {
+		if (isBoolean || isOclAny || isOclInvalid) {		// FIXME Use cached Operation-has-OclInvalid-overload attribute
 			try {
 				sourceValue = source.accept(undecoratedVisitor);
 			}
