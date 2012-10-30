@@ -44,10 +44,11 @@ public class CommonSubExpression
 		Variable variable2 = DomainUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
 		variable = variable2;
 		TypedElement element = null;
+		NameManager nameManager = analyzer.getNameManager();
 		List<String> nameHints = new ArrayList<String>();
 		for (CodeGenAnalysis analysis : analyses) {
 			element = analysis.getExpression();
-			String nameHint = analysis.getNameHint();
+			String nameHint = nameManager.getNameHint(element);
 			if ((nameHint != null) && !nameHints.contains(nameHint)) {
 				nameHints.add(nameHint);
 			}
@@ -56,7 +57,6 @@ public class CommonSubExpression
 		@SuppressWarnings("null") @NonNull String[] nameHintArray = nameHints.toArray(new String[nameHints.size()]);
 		String name = analyzer.getUniqueName(variable2, nameHintArray);
 		variable2.setName(name);
-		assert element != null;
 		variable2.setType(element.getType());
 		for (CodeGenAnalysis analysis : analyses) {
 			analysis.setReferredCommonSubExpression(this);

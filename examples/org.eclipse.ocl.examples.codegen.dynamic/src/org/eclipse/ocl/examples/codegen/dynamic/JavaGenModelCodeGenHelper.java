@@ -147,7 +147,7 @@ public class JavaGenModelCodeGenHelper implements CodeGenHelper
 		String qualifiedName = packageName + "." + className;
 
 		OCL2JavaClass expressionInOCL2Class = new OCL2JavaClass(metaModelManager, query);
-		String javaCodeSource = expressionInOCL2Class.generateClass(this, packageName, className);
+		String javaCodeSource = expressionInOCL2Class.generateClassFile(this, packageName, className);
 //		System.out.println(javaCodeSource);
 /*		List<Object> arguments = new ArrayList<Object>();
 		arguments.add(this);

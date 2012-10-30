@@ -16,11 +16,12 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.SpecializedId;
 import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TemplateableId;
 
-public abstract class AbstractSpecializedIdImpl<T extends TemplateableId> extends AbstractTemplateableIdImpl<T>
+public abstract class AbstractSpecializedIdImpl<T extends TemplateableId> extends AbstractTemplateableIdImpl<T> implements SpecializedId
 {
 	protected final @NonNull T generalizedId;
 	protected final @NonNull TemplateBindings templateBindings;
@@ -73,5 +74,9 @@ public abstract class AbstractSpecializedIdImpl<T extends TemplateableId> extend
 
 	public @NonNull String getName() {
 		return generalizedId.getName();
+	}
+
+	public @NonNull TemplateBindings getTemplateBindings() {
+		return templateBindings;
 	}
 }

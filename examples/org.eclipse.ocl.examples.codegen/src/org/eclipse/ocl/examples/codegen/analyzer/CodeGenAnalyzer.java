@@ -95,23 +95,27 @@ public class CodeGenAnalyzer
 		reservedNames.add("true");
 	}
 	
-	private CodeGenAnalysisVisitor visitor = null;
-//	private Element rootElement = null;
-	private Map<Element, CodeGenAnalysis> element2node = null;
-	private Map<Integer, List<List<CodeGenAnalysis>>> hash2nodes = null;
-	private List<CodeGenAnalysis> staticConstants = null;
-	private List<CodeGenAnalysis> localConstants = null;
-	// Naming
-	private NameManager nameManager = null;
+	protected final @NonNull NameManager nameManager;
+	protected final @NonNull CodeGenAnalysisVisitor visitor;
+	protected final @NonNull TypedElement rootElement;
+	protected final @NonNull Map<Element, CodeGenAnalysis> element2node = new HashMap<Element, CodeGenAnalysis>();
+	protected final @NonNull Map<Integer, List<List<CodeGenAnalysis>>> hash2nodes = new HashMap<Integer, List<List<CodeGenAnalysis>>>();
+//	protected final @NonNull List<CodeGenAnalysis> staticConstants = new ArrayList<CodeGenAnalysis>();
+//	protected final @NonNull List<CodeGenAnalysis> localConstants = new ArrayList<CodeGenAnalysis>();
 	// Current context during tree traversal
 	private List<CodeGenAnalysis> theseChildren = null;
-	private CodeGenAnalysis thisAnalysis = null;
+	private @NonNull CodeGenAnalysis thisAnalysis;
 	
-	public CodeGenAnalyzer() {}
+	public CodeGenAnalyzer(@NonNull NameManager nameManager, @NonNull TypedElement element) {
+		this.nameManager = nameManager;
+		this.visitor = new CodeGenAnalysisVisitor(this);
+		this.rootElement = element;
+		this.thisAnalysis = new CodeGenAnalysis(this, element);
+	}
 
 	protected void addLocalConstant() {
 		thisAnalysis.setLocalConstant();
-		localConstants.add(thisAnalysis);
+//		localConstants.add(thisAnalysis);
 	}
 	
 	public void addNamedElement(@Nullable NamedElement namedElement) {
@@ -122,7 +126,13 @@ public class CodeGenAnalyzer
 
 	protected void addStaticConstant() {
 		thisAnalysis.setStaticConstant();
-		staticConstants.add(thisAnalysis);
+//		staticConstants.add(thisAnalysis);
+	}
+
+	public void analyze() {
+		element2node.put(rootElement, thisAnalysis);
+		rootElement.accept(visitor);
+		thisAnalysis.setChildren(theseChildren);
 	}
 	
 	/**
@@ -226,7 +236,7 @@ public class CodeGenAnalyzer
 			for (List<CodeGenAnalysis> hashedAnalysis : hashedAnalyses) {
 				int iSize = hashedAnalysis.size();
 				CodeGenAnalysis analysis = hashedAnalysis.get(0);
-				if (!analysis.isInlineable() && ((iSize > 1) || analysis.isConstant())) {
+				if (!analysis.isInlineable() && ((iSize > 1) /*|| analysis.isConstant()*/)) {
 					candidates.add(hashedAnalysis);
 				}
 			}
@@ -285,7 +295,7 @@ public class CodeGenAnalyzer
 		for (List<CodeGenAnalysis> candidate : candidates) {
 			int iSize = candidate.size();
 			CodeGenAnalysis candidate0 = candidate.get(0);
-			if (!candidate0.isInlineable() && ((iSize > 1) || candidate0.isConstant())) {
+			if (!candidate0.isInlineable() && ((iSize > 1) /*|| candidate0.isConstant()*/)) {
 				CommonSubExpression cse = new CommonSubExpression(this, candidate);
 				for (CodeGenAnalysis analysis : candidate) {
 					commonSubExpressions.put(analysis, cse);
@@ -346,23 +356,8 @@ public class CodeGenAnalyzer
 		return element2node.get(element);
 	}
 
-	public @NonNull String getUniqueName(@NonNull TypedElement element, @NonNull String... nameHints) {
+	public @NonNull String getUniqueName(@NonNull NamedElement element, @NonNull String... nameHints) {
 		return nameManager.getUniqueName(element, nameHints);
-	}
-	
-	public void initialize(@NonNull CodeGenAnalysisVisitor visitor, @NonNull TypedElement element) {
-		this.visitor = visitor;
-//		this.rootElement = element;
-		this.element2node = new HashMap<Element, CodeGenAnalysis>();
-		this.hash2nodes = new HashMap<Integer, List<List<CodeGenAnalysis>>>();
-		this.staticConstants = new ArrayList<CodeGenAnalysis>();
-		this.localConstants = new ArrayList<CodeGenAnalysis>();
-		this.nameManager = new NameManager();
-		this.theseChildren = null;
-		this.thisAnalysis = new CodeGenAnalysis(this, element);
-		element2node.put(element, thisAnalysis);
-		element.accept(visitor);
-		thisAnalysis.setChildren(theseChildren);
 	}
 
 	public void optimize() {

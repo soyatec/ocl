@@ -44,7 +44,7 @@ public interface IdVisitor<R>
 	@Nullable R visitOperationId(@NonNull OperationId id);
 	@Nullable R visitPrimitiveTypeId(@NonNull PrimitiveTypeId id);
 	@Nullable R visitRootPackageId(@NonNull RootPackageId id);
-	@Nullable R visitTemplateBinding(@NonNull TemplateBinding templateBinding);
+	@Nullable R visitTemplateBinding(@NonNull TemplateBinding id);
 	@Nullable R visitTemplateParameterId(@NonNull TemplateParameterId id);
 	@Nullable R visitTemplateableTypeId(@NonNull TemplateableTypeId id);
 	@Nullable R visitTuplePartId(@NonNull TuplePartId id);

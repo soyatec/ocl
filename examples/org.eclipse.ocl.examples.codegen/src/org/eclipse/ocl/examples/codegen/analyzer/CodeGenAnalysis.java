@@ -14,8 +14,6 @@
  */
 package org.eclipse.ocl.examples.codegen.analyzer;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -27,7 +25,6 @@ import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
-import org.eclipse.ocl.examples.pivot.util.Nameable;
 
 /**
  * A CodeGenAnalysis maintains the analysis results for a single Pivot AST element
@@ -46,7 +43,7 @@ public class CodeGenAnalysis
 	 * An inlineable element is able to be inlined when accessed and so should not be factored out
 	 * into a common subexpression.
 	 * <p>
-	 * For instance true, false and null are simple constants that are more readable when used direcrtly.
+	 * For instance true, false and null are simple constants that are more readable when used directly.
 	 */
 	private boolean isInlineable = false;
 	
@@ -63,7 +60,7 @@ public class CodeGenAnalysis
 	 * a shared overhead for each execution.
 	 */
 	private boolean isLocalConstant = false;				// Node is a meta-model-dependent constant
-	private boolean childrenAreUnique = false;				// false when uniqueness needs enforcement for a SetLiteral
+//	private boolean childrenAreUnique = false;				// false when uniqueness needs enforcement for a SetLiteral
 	private Set<CodeGenAnalysis> invalidSources = null;		// AST nodes that may propagate invalid to this node
 	private Set<CodeGenAnalysis> nullSources = null;		// AST nodes that may propagate invalid to this node
 	private Set<VariableDeclaration> directDependencies = null;	// AST nodes that this depends on
@@ -199,41 +196,6 @@ public class CodeGenAnalysis
 
 	public @Nullable Set<CodeGenAnalysis> getInvalidSources() {
 		return invalidSources;
-	}
-
-	public @Nullable String getNameHint() {
-		if (hashSource instanceof Nameable) {
-			return ((Nameable)hashSource).getName();
-		}
-		else if (hashSource instanceof Number) {
-			if ((hashSource instanceof BigInteger) || (hashSource instanceof Long) || (hashSource instanceof Integer) || (hashSource instanceof Short)) {
-				return "INT_" + hashSource.toString();
-			}
-			else if ((hashSource instanceof BigDecimal) || (hashSource instanceof Double) || (hashSource instanceof Float)) {
-				return "DBL_" + hashSource.toString().replaceAll("\\.", "\\_d\\_").replaceAll("\\+", "\\_p\\_").replaceAll("\\-", "\\_m\\_");
-			}
-			else {
-				return null;
-			}
-		}
-		else if (hashSource instanceof String) {
-			StringBuilder s = new StringBuilder();
-			s.append("STR_");
-			String string = (String)hashSource;
-			for (int i = 0; i < string.length(); i++) {
-				char c = string.charAt(i);
-				if (Character.isJavaIdentifierPart(c)) {
-					s.append(c);
-				}
-				else {
-					s.append("_" +Integer.toString(c));
-				}
-			}
-			return s.toString();
-		}
-		else {
-			return null;
-		}
 	}
 
 	public @Nullable Set<CodeGenAnalysis> getNullSources() {
@@ -374,6 +336,14 @@ public class CodeGenAnalysis
 
 	@Override
 	public String toString() {
-		return expression.toString() + (isStaticConstant ? " <Static>" : "") + (isLocalConstant ? " <Local>" : "");
+		StringBuilder s = new StringBuilder();
+		s.append(expression.toString() + ' ');
+		char prefix = '{';
+		if (isStaticConstant) { s.append(prefix + "Static"); prefix = ','; }
+		if (isLocalConstant) { s.append(prefix + "Local"); prefix = ','; }
+		if (isInlineable) { s.append(prefix + "Inline"); prefix = ','; }
+		if (prefix == '{') { s.append(prefix); }
+		s.append('}');
+		return s.toString();
 	}
 }

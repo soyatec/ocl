@@ -18,6 +18,7 @@ import java.math.BigInteger;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.domain.values.impl.IntIntegerValueImpl;
@@ -30,6 +31,8 @@ import org.eclipse.ocl.examples.pivot.NullLiteralExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
+import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.TypeExp;
 import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
@@ -132,6 +135,13 @@ public class OCL2JavaExpressionVisitor extends AbstractExtendingVisitor<String, 
 	public @Nullable String visitStringLiteralExp(@NonNull StringLiteralExp element) {
 		String stringSymbol = element.getStringSymbol();
 		return "\"" + Strings.convertToJavaString(stringSymbol) + "\"";
+	}
+
+	@Override
+	public @Nullable String visitTypeExp(@NonNull TypeExp element) {
+		Type referredType = element.getReferredType();
+		TypeId typeId = referredType.getTypeId();
+		return typeId.accept(context.getIdVisitor());
 	}
 
 	@Override

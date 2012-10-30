@@ -20,6 +20,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
@@ -45,6 +46,7 @@ import org.eclipse.ocl.examples.pivot.StateExp;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.TupleLiteralExp;
 import org.eclipse.ocl.examples.pivot.TupleLiteralPart;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeExp;
 import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
 import org.eclipse.ocl.examples.pivot.UnspecifiedValueExp;
@@ -65,14 +67,9 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 		super(analyzer);
 	}
 
-	@Nullable
-	public CodeGenAnalysis visiting(@NonNull Visitable visitable) {
-		throw new UnsupportedOperationException(visitable.getClass().getSimpleName());
-	}
-
 	@Override
 	public @Nullable CodeGenAnalysis visitAssociationClassCallExp(@NonNull AssociationClassCallExp element) {
-		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
+//		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 		// TODO Auto-generated method stub
 		return super.visitAssociationClassCallExp(element);
 	}
@@ -128,7 +125,7 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 
 	@Override
 	public @Nullable CodeGenAnalysis visitConstructorExp(@NonNull ConstructorExp element) {
-		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
+//		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 //		context.addNamedElement(element.getReferredIteration());
 	// TODO Auto-generated method stub
 		return super.visitConstructorExp(element);
@@ -136,7 +133,7 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 
 	@Override
 	public @Nullable CodeGenAnalysis visitConstructorPart(@NonNull ConstructorPart element) {
-		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
+//		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 	//	context.addNamedElement(element.getName());
 		// TODO Auto-generated method stub
 		return super.visitConstructorPart(element);
@@ -212,7 +209,7 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 
 	@Override
 	public @Nullable CodeGenAnalysis visitIterateExp(@NonNull IterateExp element) {
-		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
+//		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 		context.addNamedElement(element.getReferredIteration());
 		// TODO Auto-generated method stub
 		return super.visitIterateExp(element);
@@ -220,7 +217,7 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 
 	@Override
 	public @Nullable CodeGenAnalysis visitIteratorExp(@NonNull IteratorExp element) {
-		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
+//		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 		context.addNamedElement(element.getReferredIteration());
 		// TODO Auto-generated method stub
 		return super.visitIteratorExp(element);
@@ -244,7 +241,7 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 
 	@Override
 	public @Nullable CodeGenAnalysis visitMessageExp(@NonNull MessageExp element) {
-		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
+//		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 		// TODO Auto-generated method stub
 		return super.visitMessageExp(element);
 	}
@@ -295,7 +292,7 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 
 	@Override
 	public @Nullable CodeGenAnalysis visitStateExp(@NonNull StateExp element) {
-		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
+//		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 		// TODO Auto-generated method stub
 		return super.visitStateExp(element);
 	}
@@ -335,21 +332,29 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 	@Override
 	public @Nullable CodeGenAnalysis visitTypeExp(@NonNull TypeExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-		// TODO Auto-generated method stub
-		return super.visitTypeExp(element);
+		Type referredType = element.getType();
+		if (referredType != null) {
+			thisAnalysis.setHashSource(referredType);
+//			context.addNamedElement(referredType);
+		}
+		context.addLocalConstant();
+		return thisAnalysis;
 	}
 
 	@Override
 	public @Nullable CodeGenAnalysis visitUnlimitedNaturalLiteralExp(@NonNull UnlimitedNaturalLiteralExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 		thisAnalysis.setHashSource(element.getUnlimitedNaturalSymbol());
+		if (element.getUnlimitedNaturalSymbol() == Unlimited.INSTANCE) {
+			thisAnalysis.setInlineable();
+		}
 		context.addStaticConstant();
 		return thisAnalysis;
 	}
 
 	@Override
 	public @Nullable CodeGenAnalysis visitUnspecifiedValueExp(@NonNull UnspecifiedValueExp element) {
-		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
+//		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 		// TODO Auto-generated method stub
 		return super.visitUnspecifiedValueExp(element);
 	}
@@ -373,5 +378,10 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 //		}
 //		thisAnalysis.addInvalidSources(in.getInvalidSources());
 		return thisAnalysis;
+	}
+
+	@Nullable
+	public CodeGenAnalysis visiting(@NonNull Visitable visitable) {
+		throw new UnsupportedOperationException(visitable.getClass().getSimpleName());
 	}
 }
