@@ -23,10 +23,14 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.NumericValue;
+import org.eclipse.ocl.examples.domain.values.RealValue;
+import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.pivot.BagType;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionType;
-import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.LiteralExp;
 import org.eclipse.ocl.examples.pivot.NamedElement;
@@ -38,7 +42,6 @@ import org.eclipse.ocl.examples.pivot.SetType;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeExp;
-import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.Nameable;
@@ -164,9 +167,9 @@ public class NameManager
 	}
 
 //	protected final @NonNull MetaModelManager metaModelManager;
-	private final @NonNull Map<String, Element> name2element = new HashMap<String, Element>();		// User of each name, null if name ambiguous
-	private final @NonNull Map<Element, String> element2name = new HashMap<Element, String>();		// Unambiguous name for each element, null if not determined
-	private Map<String, Integer> name2counter = null;										// Auto-generation counter for each colliding name
+	private final @NonNull Map<String, Object> name2object = new HashMap<String, Object>();		// User of each name, null if name ambiguous
+	private final @NonNull Map<Object, String> object2name = new HashMap<Object, String>();		// Unambiguous name for each object, null if not determined
+	private Map<String, Integer> name2counter = null;											// Auto-generation counter for each colliding name
 
 	public NameManager(@NonNull MetaModelManager metaModelManager) {
 //		this.metaModelManager = metaModelManager;
@@ -175,25 +178,25 @@ public class NameManager
 	public void addNamedElement(@NonNull NamedElement namedElement) {
 		String name = namedElement.getName();
 		if (name != null) {
-			Element oldNamedElement = name2element.get(name);
+			Object oldNamedElement = name2object.get(name);
 			if (oldNamedElement == null) {
-				if (name2element.containsKey(name)) {		// Existing ambiguity
+				if (name2object.containsKey(name)) {		// Existing ambiguity
 					name = null;
 				}
 				else {										// New name
-					name2element.put(name, namedElement);
+					name2object.put(name, namedElement);
 				}
-				name2element.put(name, namedElement);
+				name2object.put(name, namedElement);
 			}
 			else {
 				if (oldNamedElement != namedElement) {
-					name2element.put(name, null);			// New ambiguity
+					name2object.put(name, null);			// New ambiguity
 					name = null;
 				}
 				else {}										// Compatible redefinition
 			}
 		}
-		element2name.put(namedElement, name);
+		object2name.put(namedElement, name);
 	}
 
 	/**
@@ -203,11 +206,16 @@ public class NameManager
 	 */
 	public @Nullable String getNameHint(@NonNull Object anObject) {
 		if (anObject instanceof CollectionLiteralExp) {
-			return getTypeNameHint(((CollectionLiteralExp)anObject).getType());
+			Type type = ((CollectionLiteralExp)anObject).getType();
+			return type != null ? getTypeNameHint(type) : null;
 		}
 		else if (anObject instanceof IntegerLiteralExp) {
 			Number numberSymbol = ((IntegerLiteralExp)anObject).getIntegerSymbol();
 			return numberSymbol != null ? getNumericNameHint(numberSymbol) : null;
+		}
+		else if (anObject instanceof IntegerValue) {
+			Number numberSymbol = ((IntegerValue)anObject).asNumber();
+			return getNumericNameHint(numberSymbol);
 		}
 		else if (anObject instanceof Number) {
 			return getNumericNameHint((Number)anObject);
@@ -218,6 +226,10 @@ public class NameManager
 		else if (anObject instanceof RealLiteralExp) {
 			Number numberSymbol = ((RealLiteralExp)anObject).getRealSymbol();
 			return numberSymbol != null ? getNumericNameHint(numberSymbol) : null;
+		}
+		else if (anObject instanceof RealValue) {
+			Number numberSymbol = ((RealValue)anObject).asNumber();
+			return getNumericNameHint(numberSymbol);
 		}
 		else if (anObject instanceof String) {
 			return getStringNameHint((String)anObject);
@@ -232,6 +244,10 @@ public class NameManager
 		else if (anObject instanceof TypeExp) {
 			Type referredType = ((TypeExp)anObject).getType();
 			return referredType != null ? getTypeNameHint(referredType) : null;
+		}
+		else if (anObject instanceof TypeValue) {
+			DomainType referredType = ((TypeValue)anObject).getInstanceType();
+			return getTypeNameHint(referredType);
 		}
 		else if (anObject instanceof UnlimitedNaturalLiteralExp) {
 			Number numberSymbol = ((UnlimitedNaturalLiteralExp)anObject).getUnlimitedNaturalSymbol();
@@ -254,7 +270,7 @@ public class NameManager
 			return INTEGER_NAME_HINT_PREFIX + string;
 		}
 		else if ((aNumber instanceof BigDecimal) || (aNumber instanceof Double) || (aNumber instanceof Float)) {
-			return REAL_NAME_HINT_PREFIX + getValidJavaIdentifier(string);
+			return REAL_NAME_HINT_PREFIX + getValidJavaIdentifier(string, true);
 		}
 		else {
 			return null;
@@ -263,24 +279,24 @@ public class NameManager
 
 	public String getOperationNameHint(@NonNull Operation anOperation) {
 		@SuppressWarnings("null") @NonNull String string = anOperation.toString();
-		return OPERATION_NAME_HINT_PREFIX + getValidJavaIdentifier(string);
+		return OPERATION_NAME_HINT_PREFIX + getValidJavaIdentifier(string, true);
 	}
 
 	public String getStringNameHint(@NonNull String aString) {
 		@SuppressWarnings("null") @NonNull String string = aString.length() > 20 ? aString.substring(0, 20) : aString;
-		return STRING_NAME_HINT_PREFIX + getValidJavaIdentifier(string);
+		return STRING_NAME_HINT_PREFIX + getValidJavaIdentifier(string, true);
 	}
 
-	public @NonNull String getSymbolName(@NonNull Element element, @Nullable String... nameHints) {
+	public @NonNull String getSymbolName(@Nullable Object anObject, @Nullable String... nameHints) {
 		if ((nameHints != null) && (nameHints.length > 0)) {
-			return getUniqueName(element, nameHints);
+			return getUniqueName(anObject, nameHints);
 		}
 		else {
-			return getUniqueName(element, getNameHint(element));
+			return getUniqueName(anObject, anObject != null ? getNameHint(anObject) : null);
 		}
 	}
 
-	public String getTypeNameHint(@NonNull Type aType) {
+	public String getTypeNameHint(@NonNull DomainType aType) {
 		if (aType instanceof CollectionType) {
 			if (aType instanceof OrderedSetType) {
 				return ORDERED_SET_NAME_HINT_PREFIX;
@@ -299,12 +315,25 @@ public class NameManager
 			}
 		}
 		@SuppressWarnings("null") @NonNull String string = aType.toString();
-		return TYPE_NAME_HINT_PREFIX + getValidJavaIdentifier(string);
+		return TYPE_NAME_HINT_PREFIX + getValidJavaIdentifier(string, true);
 	}
 
-	protected @NonNull String getUniqueName(@Nullable Element element, @Nullable String... nameHints) {
-		if (element != null) {
-			String knownName = element2name.get(element);
+	/**
+	 * Return a unique name using some nameHints to suggest preferred names and allocate that name to anObject.
+	 * <p>
+	 * If anObject is non-null, any already allocated name is returned rather than allocating another name.
+	 * <p>
+	 * If anObject is null, the returned name is allocated to no object; not to the null value.
+	 * <p>
+	 * If nameHints is null a default name is generated.
+	 * <p>
+	 */
+	protected @NonNull String getUniqueName(@Nullable Object anObject, @Nullable String... nameHints) {
+		if (anObject instanceof NumericValue) {
+			anObject = ((NumericValue)anObject).asNumber();
+		}
+		if (anObject != null) {
+			String knownName = object2name.get(anObject);
 			if (knownName != null) {
 				return knownName;
 			}
@@ -313,21 +342,21 @@ public class NameManager
 		if (nameHints != null) {
 			for (String nameHint : nameHints) {
 				if (nameHint != null)  {
-					String validHint = getValidJavaIdentifier(nameHint);
+					String validHint = getValidJavaIdentifier(nameHint, false);
 					if (!reservedJavaNames.contains(validHint)) {
-						if (element != null) {
-							Element oldElement = name2element.get(validHint);
-							if (oldElement == element) {
+						if (anObject != null) {
+							Object oldElement = name2object.get(validHint);
+							if (oldElement == anObject) {
 								return validHint;
 							}
 							if (oldElement == null) {
-								install(validHint, element);
+								install(validHint, anObject);
 								return validHint;
 							}
 						}
 						else {
-							if (!name2element.containsKey(validHint)) {
-								install(validHint, element);
+							if (!name2object.containsKey(validHint)) {
+								install(validHint, anObject);
 								return validHint;
 							}
 						}
@@ -348,73 +377,96 @@ public class NameManager
 		int count = counter != null ? counter : 0;			
 		for ( ; true; count++) {
 			String attempt = lastResort + "_" + Integer.toString(count);
-			if (!name2element.containsKey(attempt)) {		// Assumes that reserved names do not end in _ count
-				install(attempt, element);
+			if (!name2object.containsKey(attempt)) {		// Assumes that reserved names do not end in _ count
+				install(attempt, anObject);
 				name2counter.put(lastResort, ++count);
 				return attempt;
 			}
 		}
 	}
 
-	private @NonNull String getValidJavaIdentifier(@NonNull String nameHint) {
+	/**
+	 * Return a valid Java identifier based on nameHint. hasPrefix may be true to indicate that the
+	 * caller will supply an additional valid prefix relieving this routine of the need to avoid
+	 * leading numeric characters.
+	 * <p>
+	 * This is not intended to be a reversible algorithm; just to provide something reasonably readable.
+	 */
+	private @NonNull String getValidJavaIdentifier(@NonNull String nameHint, boolean hasPrefix) {
 		StringBuilder s = new StringBuilder();
+		Character prefix = null;
 		for (int i = 0; i < nameHint.length(); i++) {
 			char c = nameHint.charAt(i);
-			if (Character.isJavaIdentifierPart(c)) {
+			if (((i == 0) && !hasPrefix) ? Character.isJavaIdentifierStart(c) : Character.isJavaIdentifierPart(c)) {
+				if (prefix != null) {
+					s.append(prefix);
+					prefix = null;
+				}
 				s.append(c);
 			}
-			else if (c == '*') {
-				s.append("_a");
-			}
-			else if (c == ':') {
-				s.append("_c");
-			}
-			else if (c == '.') {
-				s.append("_d");
-			}
-			else if (c == ')') {
-				s.append("_e");
-			}
-			else if (c == '>') {
-				s.append("_g");
-			}
-			else if (c == '<') {
-				s.append("_l");
-			}
-			else if (c == '-') {
-				s.append("_m");
-			}
-			else if (c == '(') {
-				s.append("_o");
-			}
-			else if (c == '+') {
-				s.append("_p");
-			}
-			else if (c == '=') {
-				s.append("_q");
-			}
-			else if (c == '/') {
-				s.append("_s");
-			}
 			else {
-				s.append('_' + Integer.toString(c));
+				if (c == '*') {
+					s.append("_a");
+				}
+				else if (c == ':') {
+					s.append("_c");
+				}
+				else if (c == '.') {
+					if (prefix != null) {
+						s.append(prefix);
+						prefix = null;
+					}
+				}
+				else if (c == ')') {
+					s.append("_e");
+				}
+				else if (c == '>') {
+					s.append("_g");
+				}
+				else if (c == '<') {
+					s.append("_l");
+				}
+				else if (c == '-') {
+					s.append("_m");
+				}
+				else if (c == '(') {
+					s.append("_o");
+				}
+				else if (c == '+') {
+					s.append("_p");
+				}
+				else if (c == '=') {
+					s.append("_q");
+				}
+				else if (c == '/') {
+					s.append("_s");
+				}
+				else {
+					s.append('_' + Integer.toString(c));
+				}
+				prefix = '_';
 			}
 		}
 		@SuppressWarnings("null") @NonNull String string = s.toString();
 		return string;
 	}
 	
-	private void install(@NonNull String name, @Nullable Element element) {
-		name2element.put(name, element);
-		if (element != null) {
-			element2name.put(element, name);
+	private void install(@NonNull String name, @Nullable Object anObject) {
+		assert !(anObject instanceof NumericValue);
+		name2object.put(name, anObject);
+		if (anObject != null) {
+			object2name.put(anObject, name);
 		}
 	}
 
-	public @NonNull String reserveName(@NonNull String name, @Nullable TypedElement element) {
-		String validJavaIdentifier = getUniqueName(element, getValidJavaIdentifier(name));
-		Element oldElement = name2element.put(validJavaIdentifier, element);
-		assert (oldElement == null) || (oldElement == element);
+	/**
+	 * Reserve name for use by anObject. If anObject is null, the reservation is for an unspecifuied object not for the null value.
+	 */
+	public @NonNull String reserveName(@NonNull String name, @Nullable Object anObject) {
+		assert !(anObject instanceof NumericValue);
+		String validJavaIdentifier = getUniqueName(anObject, getValidJavaIdentifier(name, true));
+		Object oldElement = name2object.put(validJavaIdentifier, anObject);
+		assert (oldElement == null) || (oldElement == anObject);
 		return validJavaIdentifier;
 	}
 }

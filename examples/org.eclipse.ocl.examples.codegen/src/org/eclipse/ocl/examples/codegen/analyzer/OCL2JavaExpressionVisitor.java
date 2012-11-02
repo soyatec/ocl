@@ -14,26 +14,18 @@
  */
 package org.eclipse.ocl.examples.codegen.analyzer;
 
-import java.math.BigInteger;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.Unlimited;
-import org.eclipse.ocl.examples.domain.values.impl.IntIntegerValueImpl;
-import org.eclipse.ocl.examples.domain.values.impl.LongIntegerValueImpl;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
-import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.RealLiteralExp;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeExp;
-import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
+import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
@@ -55,45 +47,22 @@ public class OCL2JavaExpressionVisitor extends AbstractExtendingVisitor<String, 
 		nameManager = codeGenerator.getNameManager();
 	}
 	
-	protected @NonNull String integerValueOfInitializer(Number number) {
-		IntegerValue value;
-		if (number instanceof Integer){
-			 value = ValuesUtil.integerValueOf(number.intValue());
-		}
-		else if (number instanceof Long) {
-			 value = ValuesUtil.integerValueOf(number.longValue());
-		}
-		else if (number instanceof BigInteger) {
-			 value = ValuesUtil.integerValueOf((BigInteger)number);
-		}
-		else {
-			 return "\"\"";
-		}
-		String string = value.toString();
-		assert string != null;
-		if (value instanceof IntIntegerValueImpl) {
+	@Override
+	public @NonNull String visit(@Nullable Visitable element) {
+		TypedElement element2 = (TypedElement)DomainUtil.nonNullModel(element);
+		CodeGenAnalysis analysis = context.getAnalysis(element2);			// FIXME cast
+		if (!analysis.isConstant()) {
+			String string = element2.accept(this);
+			assert string != null;
 			return string;
 		}
-		else if (value instanceof LongIntegerValueImpl) {
-			return string + "L";
+		else if (analysis.isInlineable()) {
+			String literalText = context.getConstantHelper().getInlineValue(analysis.getConstantValue());
+			return literalText;	
 		}
 		else {
-			return "\"" + string + "\"";
+			return "/*BAD*/";
 		}
-	}
-	
-	public @NonNull String realValueOfInitializer(Number number) {
-		if (number instanceof Double) {
-			return number.toString() + "d";
-		}
-		return "\"" + number.toString() + "\"";
-	}
-	
-	@Override
-	public @NonNull String visit(@NonNull org.eclipse.ocl.examples.pivot.util.Visitable v) {
-		String string = v.accept(this);
-		assert string != null;
-		return string;
 	}
 
 	@Override
@@ -101,11 +70,11 @@ public class OCL2JavaExpressionVisitor extends AbstractExtendingVisitor<String, 
 		return element.isBooleanSymbol() ? "Boolean.TRUE" : "Boolean.FALSE";
 	}
 
-	@Override
-	public @Nullable String visitIntegerLiteralExp(@NonNull IntegerLiteralExp element) {
-		Number integerSymbol = element.getIntegerSymbol();
-		return "integerValueOf(" + integerValueOfInitializer(integerSymbol) + ")";
-	}
+//	@Override
+//	public @Nullable String visitIntegerLiteralExp(@NonNull IntegerLiteralExp element) {
+//		Number integerSymbol = element.getIntegerSymbol();
+//		return context.getConstantHelper().getIntegerLiteral(integerSymbol);
+//	}
 
 	@Override
 	public @Nullable String visitInvalidLiteralExp(@NonNull InvalidLiteralExp element) {
@@ -125,11 +94,11 @@ public class OCL2JavaExpressionVisitor extends AbstractExtendingVisitor<String, 
 		return element.getName();
 	} */
 
-	@Override
+/*	@Override
 	public @Nullable String visitRealLiteralExp(@NonNull RealLiteralExp element) {
 		Number realSymbol = element.getRealSymbol();
-		return "realValueOf(" + realValueOfInitializer(realSymbol) + ")";
-	}
+		return context.getConstantHelper().getRealLiteral(realSymbol);
+	} */
 
 	@Override
 	public @Nullable String visitStringLiteralExp(@NonNull StringLiteralExp element) {
@@ -144,24 +113,24 @@ public class OCL2JavaExpressionVisitor extends AbstractExtendingVisitor<String, 
 		return typeId.accept(context.getIdVisitor());
 	}
 
-	@Override
-	public @Nullable String visitUnlimitedNaturalLiteralExp(@NonNull UnlimitedNaturalLiteralExp element) {
-		Number unlimitedNaturalSymbol = element.getUnlimitedNaturalSymbol();
-		if (unlimitedNaturalSymbol == Unlimited.INSTANCE) {
-			return "UNLIMITED_VALUE";
-		}
-		else {
-			return "integerValueOf(" + integerValueOfInitializer(unlimitedNaturalSymbol) + ")";
-		}
-	}
+//	@Override
+//	public @Nullable String visitUnlimitedNaturalLiteralExp(@NonNull UnlimitedNaturalLiteralExp element) {
+//		Number unlimitedNaturalSymbol = element.getUnlimitedNaturalSymbol();
+//		if (unlimitedNaturalSymbol == Unlimited.INSTANCE) {
+//			return "UNLIMITED_VALUE";
+//		}
+//		else {
+//			return context.getConstantHelper().getIntegerLiteral(unlimitedNaturalSymbol);
+//		}
+//	}
 
 	@Override
 	public @Nullable String visitVariable(@NonNull Variable element) {
 		OCLExpression initExpression = element.getInitExpression();
 		if (initExpression != null) {
-			CodeGenAnalysis initAnalysis = context.getNode(initExpression);
+			CodeGenAnalysis initAnalysis = context.getAnalysis(initExpression);
 			if (initAnalysis.isInlineable()) {
-				return initExpression.accept(this);
+				return visit(initExpression);
 			}
 		}
 		return nameManager.getSymbolName(element);
@@ -178,7 +147,7 @@ public class OCL2JavaExpressionVisitor extends AbstractExtendingVisitor<String, 
 		if (referredVariable == null) {
 			return nameManager.getSymbolName(element);
 		}
-		return referredVariable.accept(this);
+		return visit(referredVariable);
 	}
 	
 	public @NonNull String visiting(@NonNull Visitable visitable) {

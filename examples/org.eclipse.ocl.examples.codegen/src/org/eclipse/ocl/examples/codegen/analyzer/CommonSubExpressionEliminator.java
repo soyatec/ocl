@@ -40,19 +40,19 @@ public class CommonSubExpressionEliminator
 	/**
 	 * Map from analysis to its structural hash code.
 	 */
-	protected final @NonNull Map<CodeGenAnalysis, Integer> node2hash;
+//	protected final @NonNull Map<CodeGenAnalysis, Integer> node2hash;
 	
 	public CommonSubExpressionEliminator(@NonNull CodeGenAnalyzer analyzer, @NonNull CodeGenAnalysis rootAnalysis) {
 		this.analyzer = analyzer;
 		this.rootAnalysis = rootAnalysis;
 		this.hash2nodes = new HashMap<Integer, List<List<CodeGenAnalysis>>>();
-		this.node2hash = new HashMap<CodeGenAnalysis, Integer>();
+//		this.node2hash = new HashMap<CodeGenAnalysis, Integer>();
 	}
 	
 	/**
-	 * Populate the map from structural hash code to same-hashed analysis in the analysis tree rooted at rootAnalysis.
+	 * Populate the map from structural hash code to same-hashed analysis in the analysis tree rooted at thisAnalysis.
 	 * <p>
-	 * Returns the structural hash code of the rootAnalysis.
+	 * Returns the structural hash code of thisAnalysis.
 	 */
 	protected int buildHashedNodeMap(@NonNull CodeGenAnalysis thisAnalysis) {
 		int structuralHashCode = thisAnalysis.getExpression().getClass().hashCode();
@@ -87,7 +87,7 @@ public class CommonSubExpressionEliminator
 			hashedAnalyses.add(hashedAnalysis);
 			hashedAnalysis.add(thisAnalysis);
 		}
-		node2hash.put(thisAnalysis, structuralHashCode);
+		thisAnalysis.initStructuralHashCode(structuralHashCode);
 		return structuralHashCode;
 	}
 
@@ -104,7 +104,7 @@ public class CommonSubExpressionEliminator
 			for (List<CodeGenAnalysis> hashedAnalysis : hashedAnalyses) {
 				int iSize = hashedAnalysis.size();
 				CodeGenAnalysis analysis = hashedAnalysis.get(0);
-				if (!analysis.isInlineable() && ((iSize > 1) /*|| analysis.isConstant()*/)) {
+				if (!analysis.isConstant() && ((iSize > 1) /*|| analysis.isConstant()*/)) {
 					candidates.add(hashedAnalysis);
 				}
 			}
@@ -163,7 +163,7 @@ public class CommonSubExpressionEliminator
 		for (List<CodeGenAnalysis> candidate : candidates) {
 			int iSize = candidate.size();
 			CodeGenAnalysis candidate0 = candidate.get(0);
-			if (!candidate0.isInlineable() && ((iSize > 1) /*|| candidate0.isConstant()*/)) {
+			if (!candidate0.isConstant() && ((iSize > 1) /*|| candidate0.isConstant()*/)) {
 				CommonSubExpression cse = new CommonSubExpression(analyzer, candidate);
 				for (CodeGenAnalysis analysis : candidate) {
 					commonSubExpressions.put(analysis, cse);
@@ -200,7 +200,7 @@ public class CommonSubExpressionEliminator
 
 	protected void findCommonSubExpressionsPrune(@NonNull CodeGenAnalysis[] analyses) {
 		for (CodeGenAnalysis analysis : analyses) {
-			int structuralHashCode = node2hash.get(analysis);
+			int structuralHashCode = analysis.getStructuralHashCode();
 			List<List<CodeGenAnalysis>> equivalentAnalyses = hash2nodes.get(structuralHashCode);
 			if (equivalentAnalyses != null) {
 				for (List<CodeGenAnalysis> equivalentAnalysis : equivalentAnalyses) {

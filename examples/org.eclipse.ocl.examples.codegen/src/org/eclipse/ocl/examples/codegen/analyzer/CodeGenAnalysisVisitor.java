@@ -15,8 +15,6 @@
 package org.eclipse.ocl.examples.codegen.analyzer;
 
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -79,9 +77,8 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 	@Override
 	public @Nullable CodeGenAnalysis visitBooleanLiteralExp(@NonNull BooleanLiteralExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-		thisAnalysis.setHashSource(Boolean.valueOf(element.isBooleanSymbol()));
+		thisAnalysis.initHashSource(Boolean.valueOf(element.isBooleanSymbol()));
 		thisAnalysis.setInlineable();
-		context.addStaticConstant();
 		return thisAnalysis;
 	}
 
@@ -90,14 +87,7 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 		OCLExpression item = DomainUtil.nonNullModel(element.getItem());
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 		CodeGenAnalysis itemAnalysis = context.descend(item);
-//		if (item != null) {
-			if (itemAnalysis.isStaticConstant()) {
-				context.addStaticConstant();
-			} else if (itemAnalysis.isLocalConstant()) {
-				context.addLocalConstant();
-			}
-			thisAnalysis.addInvalidSources(itemAnalysis.getInvalidSources());
-//		}
+//		thisAnalysis.addInvalidSources(itemAnalysis.getInvalidSources());
 		return thisAnalysis;
 	}
 
@@ -115,16 +105,8 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 		CodeGenAnalysis firstAnalysis = context.descend(first);
 		CodeGenAnalysis lastAnalysis = context.descend(last);		// FIXME first..first optimization
-//		if ((first != null) && (last != null)) {
-			if (firstAnalysis.isStaticConstant() && lastAnalysis.isStaticConstant()) {
-				context.addStaticConstant();
-			}
-			if (firstAnalysis.isConstant() && lastAnalysis.isConstant()) {
-				context.addLocalConstant();
-			}
-			thisAnalysis.addInvalidSources(firstAnalysis.getInvalidSources());
-			thisAnalysis.addInvalidSources(lastAnalysis.getInvalidSources());
-//		}
+//		thisAnalysis.addInvalidSources(firstAnalysis.getInvalidSources());
+//		thisAnalysis.addInvalidSources(lastAnalysis.getInvalidSources());
 		return thisAnalysis;
 	}
 
@@ -147,8 +129,7 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 	@Override
 	public @Nullable CodeGenAnalysis visitEnumLiteralExp(@NonNull EnumLiteralExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-		thisAnalysis.setHashSource(element.getReferredEnumLiteral());
-		context.addStaticConstant();
+		thisAnalysis.initHashSource(element.getReferredEnumLiteral());
 		return thisAnalysis;
 	}
 
@@ -158,15 +139,7 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 		OCLExpression bodyExpression = DomainUtil.nonNullModel(element.getBodyExpression());
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 		CodeGenAnalysis bodyAnalysis = context.descend(bodyExpression);
-//		if (body != null) {
-			if (bodyAnalysis.isStaticConstant()) {
-				context.addStaticConstant();
-			}
-			else if (bodyAnalysis.isLocalConstant()) {
-				context.addLocalConstant();
-			}
-			thisAnalysis.addInvalidSources(bodyAnalysis.getInvalidSources());
-//		}
+//		thisAnalysis.addInvalidSources(bodyAnalysis.getInvalidSources());
 		return thisAnalysis;
 	}
 
@@ -188,13 +161,13 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 //		assignment.addDependency(elseAssignment);
 //		thenAssignment.addConditionalDependency(conditionAssignment);
 //		elseAssignment.addConditionalDependency(conditionAssignment);
-		Set<CodeGenAnalysis> invalidConditionSources = conditionAnalysis.getInvalidSources();
-		if (invalidConditionSources != null) {
-			thisAnalysis.addInvalidSources(invalidConditionSources);
-		}
-		Set<CodeGenAnalysis> invalidThenSources = thenAnalysis.getInvalidSources();
-		Set<CodeGenAnalysis> invalidElseSources = elseAnalysis.getInvalidSources();
-		if ((invalidThenSources != null) || (invalidElseSources != null)) {
+//		Set<CodeGenAnalysis> invalidConditionSources = conditionAnalysis.getInvalidSources();
+//		if (invalidConditionSources != null) {
+//			thisAnalysis.addInvalidSources(invalidConditionSources);
+//		}
+//		Set<CodeGenAnalysis> invalidThenSources = thenAnalysis.getInvalidSources();
+//		Set<CodeGenAnalysis> invalidElseSources = elseAnalysis.getInvalidSources();
+/*		if ((invalidThenSources != null) || (invalidElseSources != null)) {
 			if ((invalidThenSources != null) && (invalidElseSources != null)) {
 				Set<CodeGenAnalysis> invalidCommonSources = new HashSet<CodeGenAnalysis>(invalidThenSources);
 				invalidCommonSources.retainAll(invalidElseSources);
@@ -204,24 +177,22 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 				invalidUncommonSources.removeAll(invalidCommonSources);
 				thisAnalysis.addInvalidSource(thisAnalysis);
 			}
-		}
+		} */
 		return thisAnalysis;
 	}
 
 	@Override
 	public @Nullable CodeGenAnalysis visitIntegerLiteralExp(@NonNull IntegerLiteralExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-		thisAnalysis.setHashSource(element.getIntegerSymbol());
-		context.addStaticConstant();
+		thisAnalysis.initHashSource(element.getIntegerSymbol());
 		return thisAnalysis;
 	}
 
 	@Override
 	public @Nullable CodeGenAnalysis visitInvalidLiteralExp(@NonNull InvalidLiteralExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-		thisAnalysis.addInvalidSource(thisAnalysis);
+//		thisAnalysis.addInvalidSource(thisAnalysis);
 		thisAnalysis.setInlineable();
-		context.addStaticConstant();
 		return thisAnalysis;
 	}
 
@@ -253,14 +224,18 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 //		CodeGenAssignment inAssignment = inAnalysis.getAssignment();
 //		thisAnalysis.setAssignment(inAssignment);
 //		inAssignment.addDependency(initAssignment);
-//		if ((initAnalysis != null) && (inAnalysis != null)) {
-			if (initAnalysis.isStaticConstant() && inAnalysis.isStaticConstant()) {
-				context.addStaticConstant();
-			} else if (initAnalysis.isConstant() && inAnalysis.isConstant()) {
-				context.addLocalConstant();
-			}
-			thisAnalysis.addInvalidSources(inAnalysis.getInvalidSources());
-//		}
+		
+		
+		thisAnalysis.initHashSource(letVariable);
+//		context.addNamedElement(letVariable);
+//		thisAnalysis.addDependency(letVariable);
+		thisAnalysis.setDelegateTo(inAnalysis);
+		initAnalysis.setVariable(letVariable);
+
+		
+		
+		
+//		thisAnalysis.addInvalidSources(inAnalysis.getInvalidSources());
 		return thisAnalysis;
 	}
 
@@ -274,16 +249,15 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 	@Override
 	public @Nullable CodeGenAnalysis visitNullLiteralExp(@NonNull NullLiteralExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-		thisAnalysis.addNullSource(thisAnalysis);
+//		thisAnalysis.addNullSource(thisAnalysis);
 		thisAnalysis.setInlineable();
-		context.addStaticConstant();
 		return thisAnalysis;
 	}
 
 	@Override
 	public @Nullable CodeGenAnalysis visitOperationCallExp(@NonNull OperationCallExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-		thisAnalysis.setHashSource(element.getReferredOperation());
+		thisAnalysis.initHashSource(element.getReferredOperation());
 //		context.addNamedElement(element.getReferredOperation());
 		OCLExpression source = element.getSource();
 		if (source != null) {
@@ -292,7 +266,6 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 		else {
 			context.descendAll(element.getArgument());
 		}
-		thisAnalysis.resetConstant();					// FIXME test aid to force CG of deep constants
 		return thisAnalysis;
 	}
 
@@ -300,19 +273,18 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 	public @Nullable CodeGenAnalysis visitPropertyCallExp(@NonNull PropertyCallExp element) {
 		OCLExpression source = DomainUtil.nonNullModel(element.getSource());
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-		thisAnalysis.setHashSource(element.getReferredProperty());
+		thisAnalysis.initHashSource(element.getReferredProperty());
 		context.addNamedElement(element.getReferredProperty());
 		context.descend(source);
-		thisAnalysis.addInvalidSource(thisAnalysis);
-		thisAnalysis.addNullSource(thisAnalysis);
+//		thisAnalysis.addInvalidSource(thisAnalysis);
+//		thisAnalysis.addNullSource(thisAnalysis);
 		return thisAnalysis;
 	}
 
 	@Override
 	public @Nullable CodeGenAnalysis visitRealLiteralExp(@NonNull RealLiteralExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-		thisAnalysis.setHashSource(element.getRealSymbol());
-		context.addStaticConstant();
+		thisAnalysis.initHashSource(element.getRealSymbol());
 		return thisAnalysis;
 	}
 
@@ -326,8 +298,7 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 	@Override
 	public @Nullable CodeGenAnalysis visitStringLiteralExp(@NonNull StringLiteralExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-		thisAnalysis.setHashSource(element.getStringSymbol());
-		context.addStaticConstant();
+		thisAnalysis.initHashSource(element.getStringSymbol());
 		return thisAnalysis;
 	}
 
@@ -345,14 +316,7 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 		context.addNamedElement(element);
 		OCLExpression initExpression = DomainUtil.nonNullModel(element.getInitExpression());
 		CodeGenAnalysis itemAnalysis = context.descend(initExpression);
-//		if (itemAnalysis != null) {
-			if (itemAnalysis.isStaticConstant()) {
-				context.addStaticConstant();
-			} else if (itemAnalysis.isLocalConstant()) {
-				context.addLocalConstant();
-			}
-			thisAnalysis.addInvalidSources(itemAnalysis.getInvalidSources());
-//		}
+//		thisAnalysis.addInvalidSources(itemAnalysis.getInvalidSources());
 		return thisAnalysis;
 	}
 
@@ -361,21 +325,19 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 		Type referredType = element.getType();
 		if (referredType != null) {
-			thisAnalysis.setHashSource(referredType);
+			thisAnalysis.initHashSource(referredType);
 //			context.addNamedElement(referredType);
 		}
-		context.addLocalConstant();
 		return thisAnalysis;
 	}
 
 	@Override
 	public @Nullable CodeGenAnalysis visitUnlimitedNaturalLiteralExp(@NonNull UnlimitedNaturalLiteralExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-		thisAnalysis.setHashSource(element.getUnlimitedNaturalSymbol());
+		thisAnalysis.initHashSource(element.getUnlimitedNaturalSymbol());
 		if (element.getUnlimitedNaturalSymbol() == Unlimited.INSTANCE) {
 			thisAnalysis.setInlineable();
 		}
-		context.addStaticConstant();
 		return thisAnalysis;
 	}
 
@@ -393,17 +355,18 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 //		CodeGenAnalysis in = safeAccept(element.getIn());
 		VariableDeclaration referredVariable = element.getReferredVariable();
 		if (referredVariable != null) {
-			thisAnalysis.setHashSource(referredVariable);
+			thisAnalysis.initHashSource(referredVariable);
 			context.addNamedElement(referredVariable);
 			thisAnalysis.addDependency(referredVariable);
+			if (referredVariable instanceof Variable) {
+				OCLExpression initExpression = ((Variable)referredVariable).getInitExpression();
+				if (initExpression != null) {
+					CodeGenAnalysis initAnalysis = context.getAnalysis(initExpression);
+					thisAnalysis.setDelegateTo(initAnalysis);
+//					initAnalysis.setVariable((Variable)referredVariable);
+				}
+			}
 		}
-//		if (init.isStaticConstant() && in.isStaticConstant()) {
-//			addStaticConstant();
-//		}
-//		else if ((init.isLocalConstant() || init.isStaticConstant()) && (in.isLocalConstant() || in.isStaticConstant())) {
-//			addLocalConstant();
-//		}
-//		thisAnalysis.addInvalidSources(in.getInvalidSources());
 		return thisAnalysis;
 	}
 

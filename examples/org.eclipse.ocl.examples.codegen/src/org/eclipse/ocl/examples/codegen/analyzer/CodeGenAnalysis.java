@@ -25,6 +25,7 @@ import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
+import org.eclipse.ocl.examples.pivot.VariableExp;
 
 /**
  * A CodeGenAnalysis maintains the analysis results for a single Pivot AST element
@@ -35,9 +36,16 @@ public class CodeGenAnalysis
 	public static CodeGenAnalysis[] EMPTY_ARRAY = new CodeGenAnalysis[0];
 	
 	protected final @NonNull CodeGenAnalyzer analyzer;		// Overall analyzer context
+	protected final @NonNull TypedElement expression;		// Node to be code generated
+	//
+	//	Initial tree structure
+	//
 	protected final @Nullable CodeGenAnalysis parent;		// Parent node, null at depth 0
 	protected final int depth;								// Length of parent closure
-	protected final @NonNull TypedElement expression;		// Node to be code generated
+	// Defined by initChildren
+	private CodeGenAnalysis[] children = null;				// Child node analyses in generation order
+	// Defined by initHashSource()
+	private Object hashSource = null;						// Element that defines unique internal content
 	// Optional analysis contributions
 	/**
 	 * An inlineable element is able to be inlined when accessed and so should not be factored out
@@ -47,45 +55,58 @@ public class CodeGenAnalysis
 	 */
 	private boolean isInlineable = false;
 	
+//	private boolean childrenAreUnique = false;				// false when uniqueness needs enforcement for a SetLiteral
+//	private Set<CodeGenAnalysis> invalidSources = null;		// AST nodes that may propagate invalid to this node
+//	private Set<CodeGenAnalysis> nullSources = null;		// AST nodes that may propagate invalid to this node
+	private Set<VariableDeclaration> directDependencies = null;	// AST nodes that this depends on
+	private Set<VariableDeclaration> transitiveDependencies = null;	// AST nodes that this depends on
+//	private Set<CodeGenAnalysis> transitiveInvalidSources = null;		// AST nodes that may propagate invalid to this node
+//	private int structuralHashCode = 0;						// Structural hash code of self and children
+	private @Nullable CodeGenAnalysis delegateTo = null;	// Non-null to delegate the analysis to another node; e.g VariableExp delegates to its initExpression
+	private @Nullable Variable targetVariable = null;		// Non-null if the analyzed expression is assigned to a target variable
+	//
+	// DependencyAnalysis conclusions
+	//
+	//
+	// ConstantFolder analysis conclusions
+	//
 	/**
 	 * A element that is a static constant is independent of the user's meta-model configuration.
 	 * Static constants may therefore be generated directly into the class avoiding initialization
 	 * overhead for each execution.
 	 */
-	private boolean isStaticConstant = false;				// Node is a meta-model-independent constant 
+	private boolean isStaticConstant = false;						// Node is a meta-model-independent constant 
 	
 	/**
 	 * A element that is a local constant is dependent of the user's meta-model configuration.
 	 * Local constants must therefore be generated directly into the function pre-amble incurring
 	 * a shared overhead for each execution.
 	 */
-	private boolean isLocalConstant = false;				// Node is a meta-model-dependent constant
-//	private boolean childrenAreUnique = false;				// false when uniqueness needs enforcement for a SetLiteral
-	private Set<CodeGenAnalysis> invalidSources = null;		// AST nodes that may propagate invalid to this node
-	private Set<CodeGenAnalysis> nullSources = null;		// AST nodes that may propagate invalid to this node
-	private Set<VariableDeclaration> directDependencies = null;	// AST nodes that this depends on
-	private Set<VariableDeclaration> transitiveDependencies = null;	// AST nodes that this depends on
-	private Set<CodeGenAnalysis> transitiveInvalidSources = null;		// AST nodes that may propagate invalid to this node
-	private Object hashSource = null;						// Element that defines unique internal content
-	// Defined by setChildren
-	private CodeGenAnalysis[] children = null;				// Child node analyses in generation order
-//	private int structuralHashCode = 0;						// Structural hash code of self and children
-	// Analysis conclusions
+	private boolean isLocalConstant = false;						// Node is a meta-model-dependent constant
+	private Object constantValue = null;
+	//
+	// CommonSubExpressionEliminator analysis conclusions
+	//
+	/**
+	 * The structural hash code determined by the CommonSubExpressionEliminator. Equivalent trees share the same structural
+	 * hash code at their roots.
+	 */
+	private int structuralHashCode = 0;								// Initilaized by initStructuralHashCode()
 	private List<CommonSubExpression> commonSubExpressions = null;	// Non-null if one or more CSEs defined here
 	private CommonSubExpression referredCommonSubExpression = null;	// Non-null if value cached in a CSE
 
 	public CodeGenAnalysis(@NonNull CodeGenAnalyzer analyzer, @NonNull TypedElement expression) {
 		this.analyzer = analyzer;
+		this.expression = expression;
 		this.parent = null;
 		this.depth = 0;
-		this.expression = expression;
 	}
 
 	public CodeGenAnalysis(@NonNull CodeGenAnalysis parent, @NonNull TypedElement expression) {
 		this.analyzer = parent.analyzer;
+		this.expression = expression;
 		this.parent = parent;
 		this.depth = parent.depth + 1;
-		this.expression = expression;
 	}
 
 	public void addCommonSubExpression(@NonNull CommonSubExpression commonSubExpression) {
@@ -113,37 +134,37 @@ public class CodeGenAnalysis
 		}
 	}
 
-	public void addInvalidSource(@NonNull CodeGenAnalysis invalidSource) {
-		if (invalidSources == null) {
-			invalidSources = new HashSet<CodeGenAnalysis>();
-		}
-		invalidSources.add(invalidSource);
-	}
+//	public void addInvalidSource(@NonNull CodeGenAnalysis invalidSource) {
+//		if (invalidSources == null) {
+//			invalidSources = new HashSet<CodeGenAnalysis>();
+//		}
+//		invalidSources.add(invalidSource);
+//	}
 
-	public void addInvalidSources(@Nullable Set<? extends CodeGenAnalysis> invalidSources) {
-		if ((invalidSources != null) && (invalidSources.size() > 0)) {
-			if (this.invalidSources == null) {
-				this.invalidSources = new HashSet<CodeGenAnalysis>();
-			}
-			this.invalidSources.addAll(invalidSources);
-		}
-	}
+//	public void addInvalidSources(@Nullable Set<? extends CodeGenAnalysis> invalidSources) {
+//		if ((invalidSources != null) && (invalidSources.size() > 0)) {
+//			if (this.invalidSources == null) {
+//				this.invalidSources = new HashSet<CodeGenAnalysis>();
+//			}
+//			this.invalidSources.addAll(invalidSources);
+//		}
+//	}
 
-	public void addNullSource(@NonNull CodeGenAnalysis nullSource) {
-		if (nullSources == null) {
-			nullSources = new HashSet<CodeGenAnalysis>();
-		}
-		nullSources.add(nullSource);
-	}
+//	public void addNullSource(@NonNull CodeGenAnalysis nullSource) {
+//		if (nullSources == null) {
+//			nullSources = new HashSet<CodeGenAnalysis>();
+//		}
+//		nullSources.add(nullSource);
+//	}
 
-	public void addNullSources(@Nullable Set<? extends CodeGenAnalysis> nullSources) {
-		if ((nullSources != null) && (nullSources.size() > 0)) {
-			if (this.nullSources == null) {
-				this.nullSources = new HashSet<CodeGenAnalysis>();
-			}
-			this.nullSources.addAll(nullSources);
-		}
-	}
+//	public void addNullSources(@Nullable Set<? extends CodeGenAnalysis> nullSources) {
+//		if ((nullSources != null) && (nullSources.size() > 0)) {
+//			if (this.nullSources == null) {
+//				this.nullSources = new HashSet<CodeGenAnalysis>();
+//			}
+//			this.nullSources.addAll(nullSources);
+//		}
+//	}
 
 	private void gatherTransitiveDependencies(@NonNull Set<VariableDeclaration> knownDependencies, @NonNull Set<VariableDeclaration> newDependencies) {
 		for (VariableDeclaration newDependency : newDependencies) {
@@ -152,12 +173,10 @@ public class CodeGenAnalysis
 				if (newDependency instanceof Variable) {
 					OCLExpression initExpression = ((Variable)newDependency).getInitExpression();
 					if (initExpression != null) {
-						CodeGenAnalysis analysis = analyzer.getNode(initExpression);
-						if (analysis != null) {
-							Set<VariableDeclaration> nestedDependencies = analysis.getDirectDependencies();
-							if (nestedDependencies != null) {
-								gatherTransitiveDependencies(knownDependencies, nestedDependencies);
-							}
+						CodeGenAnalysis analysis = analyzer.getAnalysis(initExpression);
+						Set<VariableDeclaration> nestedDependencies = analysis.getDirectDependencies();
+						if (nestedDependencies != null) {
+							gatherTransitiveDependencies(knownDependencies, nestedDependencies);
 						}
 					}
 				}
@@ -186,17 +205,31 @@ public class CodeGenAnalysis
 		return directDependencies;
 	}
 
+	public @Nullable Object getConstantValue() {
+		if (delegateTo != null) {
+			return delegateTo.getConstantValue();
+		}
+		else if (!isConstant()) {
+			throw new IllegalStateException("getConstantValue of non-constant");
+		}
+		return constantValue;
+	}
+
 	public int getDepth() {
 		return depth;
+	}
+
+	public @Nullable CodeGenAnalysis getDelegatesTo() {
+		return delegateTo;
 	}
 
 	public @NonNull TypedElement getExpression() {
 		return expression;
 	}
 
-	public @Nullable Set<CodeGenAnalysis> getInvalidSources() {
-		return invalidSources;
-	}
+//	public @Nullable Set<CodeGenAnalysis> getInvalidSources() {
+//		return invalidSources;
+//	}
 
 	public int getLocalStructuralHashCode() {
 		int structuralHashCode = expression.getClass().hashCode();
@@ -206,9 +239,9 @@ public class CodeGenAnalysis
 		return structuralHashCode;
 	}
 
-	public @Nullable Set<CodeGenAnalysis> getNullSources() {
-		return nullSources;
-	}
+//	public @Nullable Set<CodeGenAnalysis> getNullSources() {
+//		return nullSources;
+//	}
 
 	public @Nullable CodeGenAnalysis getParent() {
 		return parent;
@@ -218,9 +251,9 @@ public class CodeGenAnalysis
 		return referredCommonSubExpression;
 	}
 
-//	public int getStructuralHashCode() {
-//		return structuralHashCode;
-//	}
+	public int getStructuralHashCode() {
+		return structuralHashCode;
+	}
 
 	public @NonNull Set<VariableDeclaration> getTransitiveDependencies() {
 		Set<VariableDeclaration> transitiveDependencies2 = transitiveDependencies;
@@ -233,7 +266,7 @@ public class CodeGenAnalysis
 		return transitiveDependencies2;
 	}
 
-	public @NonNull Set<CodeGenAnalysis> getTransitiveInvalidSources() {
+/*	public @NonNull Set<CodeGenAnalysis> getTransitiveInvalidSources() {
 		Set<CodeGenAnalysis> transitiveInvalidSources2 = transitiveInvalidSources;
 		if (transitiveInvalidSources2 == null) {
 			transitiveInvalidSources = transitiveInvalidSources2 = new HashSet<CodeGenAnalysis>();
@@ -244,34 +277,73 @@ public class CodeGenAnalysis
 				if (dependency instanceof Variable) {
 					OCLExpression initExpression = ((Variable)dependency).getInitExpression();
 					if (initExpression != null) {
-						CodeGenAnalysis analysis = analyzer.getNode(initExpression);
-						if (analysis != null) {
-							Set<CodeGenAnalysis> nestedInvalidSources = analysis.getInvalidSources();
-							if (nestedInvalidSources != null) {
-								transitiveInvalidSources2.addAll(nestedInvalidSources);
-							}
+						CodeGenAnalysis analysis = analyzer.getAnalysis(initExpression);
+						Set<CodeGenAnalysis> nestedInvalidSources = analysis.getInvalidSources();
+						if (nestedInvalidSources != null) {
+							transitiveInvalidSources2.addAll(nestedInvalidSources);
 						}
 					}
 				}
 			}
 		}
 		return transitiveInvalidSources2;
+	} */
+	
+	public void initChildren(@Nullable List<CodeGenAnalysis> children) {
+		if (children != null) {
+//			assert delegateTo == null;
+			this.children = children.toArray(new CodeGenAnalysis[children.size()]);
+		}
+		else {
+			this.children = EMPTY_ARRAY;
+		}
+	}
+
+	public void initHashSource(@NonNull Object hashSource) {
+		assert delegateTo == null;
+		this.hashSource = hashSource;
+	}
+
+	public void initStructuralHashCode(int structuralHashCode) {
+		assert this.structuralHashCode == 0;
+		assert this.children != null;
+		this.structuralHashCode = structuralHashCode;
 	}
 
 	public boolean isConstant() {
-		return this.isLocalConstant || this.isStaticConstant;
+		if (delegateTo != null) {
+			return delegateTo.isConstant();
+		}
+		else {
+			return this.isLocalConstant || this.isStaticConstant;
+		}
 	}
 
 	public boolean isInlineable() {
-		return this.isInlineable;
+		if (delegateTo != null) {
+			return delegateTo.isInlineable();
+		}
+		else {
+			return this.isInlineable;
+		}
 	}
 
 	public boolean isLocalConstant() {
-		return this.isLocalConstant;
+		if (delegateTo != null) {
+			return delegateTo.isLocalConstant();
+		}
+		else {
+			return this.isLocalConstant;
+		}
 	}
 
 	public boolean isStaticConstant() {
-		return this.isStaticConstant;
+		if (delegateTo != null) {
+			return delegateTo.isStaticConstant();
+		}
+		else {
+			return this.isStaticConstant;
+		}
 	}
 
 	public boolean isStructurallyEqualTo(@NonNull CodeGenAnalysis that) {
@@ -297,64 +369,115 @@ public class CodeGenAnalysis
 		return true;
 	}
 
-	@Deprecated			// This is just for testing
-	public void resetConstant() {
-		this.isLocalConstant = false;
-		this.isStaticConstant = false;
-	}
-	
-	public void setChildren(@Nullable List<CodeGenAnalysis> children) {
-//		int hash = expression.getClass().hashCode();
-//		if (hashSource != null) {
-//			hash += hashSource.hashCode();
-//		}
-		if (children != null) {
-			this.children = children.toArray(new CodeGenAnalysis[children.size()]);
-//			for (CodeGenAnalysis child : children) {
-//				hash = 3 * hash + child.hashCode();
-//			}
+	/**
+	 * Return true if the expression may be an invalid value thrown as an exception, such as propagated invalid.
+	 */
+	protected boolean mayBeException() {
+		if ((expression instanceof VariableExp) && !isInlineable()) {
+			return false;
 		}
-		else {
-			this.children = EMPTY_ARRAY;
-		}
-//		this.structuralHashCode = hash;
-//		return hash;
+		Set<VariableDeclaration> allDependencies = getTransitiveDependencies();
+		return allDependencies.size() > 0;
 	}
 
-//	public void setContent(int contentHashCode) {
-//		this.structuralHashCode = contentHashCode;
-//	}
+	/**
+	 * Return true if the expression may be an invalid value passed by value, such as a result cached in a let expression.
+	 */
+	protected boolean mayBeInvalidValue() {
+		if ((expression instanceof VariableExp) && isInlineable()) {
+			Set<VariableDeclaration> allDependencies = getTransitiveDependencies();
+			return allDependencies.size() > 0;
+		}
+		return false;
+/*		for (TypedElement element = expression; element instanceof VariableExp; ) {
+			VariableDeclaration referredVariable = ((VariableExp)element).getReferredVariable();
+			if (referredVariable instanceof Variable) {
+				element = ((Variable)referredVariable).getInitExpression();
+			}
+			else {
+				break;
+			}
+		}
+		if (anExpression == null) {
+			return false;
+		}
+		CodeGenAnalysis analysis = context.getAnalysis(anExpression);
+		Set<CodeGenAnalysis> invalidSources = analysis.getInvalidSources();
+		return (invalidSources != null) && (invalidSources.size() > 0); */
+	}
 
-	public void setHashSource(@Nullable Object hashSource) {
-		this.hashSource = hashSource;
+	public void setDelegateTo(@NonNull CodeGenAnalysis anAnalysis) {
+//		assert children == EMPTY_ARRAY;
+		assert constantValue == null;
+		assert delegateTo == null;
+		assert isInlineable == false;
+		assert isLocalConstant == false;
+		assert isStaticConstant == false;
+		delegateTo = anAnalysis;
 	}
 
 	public void setInlineable() {
+		assert delegateTo == null;
 		this.isInlineable = true;
 	}
 
 	public void setLocalConstant() {
+		assert delegateTo == null;
 		this.isLocalConstant = true;
 	}
 
+	public void setLocalConstantValue(@Nullable Object constantValue) {
+		assert delegateTo == null;
+		this.isLocalConstant = true;
+		this.constantValue = constantValue;	
+//		this.isInlineable = (constantValue == null) || (constantValue instanceof Boolean);
+		this.isInlineable = analyzer.getConstantHelper().isInlineable(constantValue);
+		if (!isInlineable) {				// null is always inlineable
+			assert constantValue != null;
+			@SuppressWarnings("unused") String name = analyzer.getCodeGenerator().getLocalConstantName(constantValue);
+		}
+	}
+
 	public void setReferredCommonSubExpression(@NonNull CommonSubExpression referredCommonSubExpression) {
+		assert delegateTo == null;
 		this.referredCommonSubExpression = referredCommonSubExpression;
 	}
 
 	public void setStaticConstant() {
+		assert delegateTo == null;
 		this.isStaticConstant = true;
+	}
+
+	public void setStaticConstantValue(@Nullable Object constantValue) {
+		assert delegateTo == null;
+		this.isStaticConstant = true;
+		this.constantValue = constantValue;	
+		this.isInlineable = analyzer.getConstantHelper().isInlineable(constantValue);
+		if (!isInlineable) {				// null is always inlineable
+			assert constantValue != null;
+			@SuppressWarnings("unused") String name = analyzer.getCodeGenerator().getStaticConstantName(constantValue);
+		}
+	}
+
+	public void setVariable(@NonNull Variable targetVariable) {
+		assert delegateTo == null;
+		assert this.targetVariable == null;
+		this.targetVariable  = targetVariable;
 	}
 
 	@Override
 	public String toString() {
+		if (delegateTo != null) {
+			return "=>" + delegateTo.toString();
+		}
 		StringBuilder s = new StringBuilder();
 		s.append(expression.toString() + ' ');
 		char prefix = '{';
-		if (isStaticConstant) { s.append(prefix + "Static"); prefix = ','; }
-		if (isLocalConstant) { s.append(prefix + "Local"); prefix = ','; }
+		if (isStaticConstant) { s.append(prefix + "Static=" + String.valueOf(constantValue)); prefix = ','; }
+		if (isLocalConstant) { s.append(prefix + "Local=" + String.valueOf(constantValue)); prefix = ','; }
 		if (isInlineable) { s.append(prefix + "Inline"); prefix = ','; }
-		if ((invalidSources != null) && (invalidSources.size() > 0)) { s.append(prefix + "Invalidable"); prefix = ','; }
-		if ((nullSources != null) && (nullSources.size() > 0)) { s.append(prefix + "Nullable"); prefix = ','; }
+//		if ((invalidSources != null) && (invalidSources.size() > 0)) { s.append(prefix + "Invalidable"); prefix = ','; }
+//		if ((nullSources != null) && (nullSources.size() > 0)) { s.append(prefix + "Nullable"); prefix = ','; }
 		if (prefix == '{') { s.append(prefix); }
 		s.append('}');
 		return s.toString();

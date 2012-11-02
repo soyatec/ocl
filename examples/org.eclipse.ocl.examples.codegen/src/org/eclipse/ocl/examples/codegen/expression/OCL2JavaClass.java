@@ -37,10 +37,10 @@ import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions;
@@ -52,25 +52,17 @@ import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
  */
 public class OCL2JavaClass extends AbstractOCLCodeGenerator
 {
-	protected final @NonNull NameManager nameManager;
 	protected final @NonNull CodeGenAnalyzer cgAnalyzer;
-	protected final @NonNull OCL2JavaExpressionVisitor expressionVisitor;
-	protected final @NonNull Id2JavaVisitor idVisitor;
-	protected final @NonNull OCL2JavaStatementVisitor statementVisitor;
 	protected final @NonNull ExpressionInOCL expInOcl;
 	private /*@LazyNonNull*/ String evaluatorName = null;
 	private /*@LazyNonNull*/ String standardLibraryName = null;
 	private @Nullable LinkedHashMap<ElementId, String> idConstants = null;
-	private @Nullable LinkedHashSet<Element> staticConstants = null;
-	private @Nullable LinkedHashSet<Element> localConstants = null;
+	private @Nullable LinkedHashSet<Object> staticConstants = null;
+	private @Nullable LinkedHashSet<Object> localConstants = null;
 
 	public OCL2JavaClass(@NonNull MetaModelManager metaModelManager, @NonNull ExpressionInOCL expInOcl) {
 		super(metaModelManager);
-		nameManager = new NameManager(metaModelManager);
-		cgAnalyzer = new CodeGenAnalyzer(nameManager, expInOcl);
-		expressionVisitor = new OCL2JavaExpressionVisitor(this);
-		idVisitor = new Id2JavaVisitor(this);
-		statementVisitor = new OCL2JavaStatementVisitor(this);
+		cgAnalyzer = new CodeGenAnalyzer(this, expInOcl);
 		this.expInOcl = expInOcl;
 		cgAnalyzer.analyze();
 		cgAnalyzer.optimize();
@@ -79,20 +71,16 @@ public class OCL2JavaClass extends AbstractOCLCodeGenerator
 	protected OCL2JavaClass(@NonNull MetaModelManager metaModelManager, @NonNull NameManager nameManager, @NonNull CodeGenAnalyzer cgAnalyzer,
 			@NonNull OCL2JavaExpressionVisitor expressionVisitor, @NonNull Id2JavaVisitor idVisitor, @NonNull OCL2JavaStatementVisitor statementVisitor,
 			@NonNull ExpressionInOCL expInOcl) {
-		super(metaModelManager);
+		super(metaModelManager, nameManager, expressionVisitor, idVisitor, statementVisitor);
 		this.expInOcl = expInOcl;
-		this.nameManager = nameManager;
 		this.cgAnalyzer = cgAnalyzer;
-		this.expressionVisitor = expressionVisitor;
-		this.idVisitor = idVisitor;
-		this.statementVisitor = statementVisitor;
 	}
 	
 	protected void appendCommonSubExpression(@NonNull CommonSubExpression commonSubExpression) {
 		CodeGenAnalysis analysis = commonSubExpression.getAnalysis();
 		Variable variable = commonSubExpression.getVariable();
 		String variableName = nameManager.getSymbolName(variable, variable.getName());
-		String initializer = analysis.getExpression().accept(expressionVisitor);			// FIXME append as statement
+		String initializer = expressionVisitor.visit(analysis.getExpression());			// FIXME append as statement
 		append("private ");
 		if (analysis.isStaticConstant()) {
 			append("static ");
@@ -128,8 +116,12 @@ public class OCL2JavaClass extends AbstractOCLCodeGenerator
 			
 	}
 
-	protected void appendStatements(@NonNull Element bodyExpression) {
-		bodyExpression.accept(statementVisitor);
+	protected void appendStatements(@NonNull Element element) {
+		statementVisitor.visit(element);
+	}
+
+	public @Nullable CodeGenAnalysis findAnalysis(@NonNull Element element) {
+		return cgAnalyzer.findAnalysis(element);
 	}
 
 	protected @NonNull String generateBody(@NonNull String className, @NonNull String baseClassName) {
@@ -174,7 +166,7 @@ public class OCL2JavaClass extends AbstractOCLCodeGenerator
 		String instanceName = nameManager.reserveName("INSTANCE", null);
 		append("public static " + atNonNull() + " " + className + " " + instanceName + " = new " + className + "();\n");
 		appendStaticConstants(analysis);
-		String functionString = generateEvaluateFunctionDefinition();
+		String functionString = generateEvaluateFunctionDefinition(expInOcl);
 		String staticConstantsString = generateStaticConstants();
 		String idConstantsString = generateIdConstants();
 		append(idConstantsString);
@@ -230,24 +222,48 @@ public class OCL2JavaClass extends AbstractOCLCodeGenerator
 		return getString();
 	}
 
-	protected String generateEvaluateFunctionBody(@NonNull OCLExpression bodyExpression) {
+	protected String generateEvaluateFunctionBody(@NonNull ExpressionInOCL expressionInOCL) {
 		pushStream();
-		appendStatements(bodyExpression);
+		appendStatements(expressionInOCL);
 		return popStream();
+/*		CodeGenAnalysis analysis = getAnalysis(expressionInOCL);
+		if (!analysis.isConstant()) {
+			appendStatements(expressionInOCL);
+		}
+		else {
+			Object constantValue = analysis.getConstantValue();
+			if (constantValue instanceof InvalidValue) {
+				String resultText = getDefiningText(expressionInOCL);
+//				append(resultText + ";\n");
+				append("throw (" + resultText + ").getException();\n");
+			}
+			else {
+				String resultText = getReferringText(expressionInOCL);
+				append("return " + resultText + ";\n");
+			}	// FIXME maybeInvalid check
+//			if (analysis.getTransitiveInvalidSources().size() > 0) {
+//				appendThrowCheck(symbolName);
+//			}
+		}
+		return popStream(); */
 	}
 
-	protected @NonNull String generateEvaluateFunctionDefinition() {
-		OCLExpression bodyExpression = DomainUtil.nonNullModel(expInOcl.getBodyExpression());
+	protected @NonNull String generateEvaluateFunctionDefinition(@NonNull ExpressionInOCL expressionInOCL) {
+		OCLExpression bodyExpression = DomainUtil.nonNullModel(expressionInOCL.getBodyExpression());
 		//
 		//	Reserve declaration names
 		//
 		String evaluatorName = getEvaluatorName();
 		String returnTypeIdName = nameManager.reserveName("returnTypeId", null);
-		String selfName = nameManager.reserveName("self", expInOcl.getContextVariable());
+		String selfName = nameManager.reserveName("self", expressionInOCL.getContextVariable());
+		CodeGenAnalysis bodyAnalysis = getAnalysis(bodyExpression);
+		if (!bodyAnalysis.isConstant()) {
+			nameManager.getSymbolName(bodyExpression, "result");
+		}
 		//
 		//	Generate body and discover local constant declarations
 		//
-		String generatedFunctionBody = generateEvaluateFunctionBody(bodyExpression);
+		String generatedFunctionBody = generateEvaluateFunctionBody(expressionInOCL);
 		//
 		pushStream();
 		CodeGenAnalysis analysis = cgAnalyzer.getCurrentAnalysis();
@@ -260,7 +276,7 @@ public class OCL2JavaClass extends AbstractOCLCodeGenerator
 		append(atNonNull() + " " + getImportedName("DomainEvaluator") + " " + evaluatorName);
 		append(", " + atNonNull() + " " + getImportedName("TypeId") + " " + returnTypeIdName);
 		append(", final " + atNullable() + " Object " + selfName);
-		for (Variable parameter : expInOcl.getParameterVariable()) {
+		for (Variable parameter : expressionInOCL.getParameterVariable()) {
 			String name = DomainUtil.nonNullModel(parameter.getName());
 			append(", final " + atNullable() + " Object " + nameManager.reserveName(name, parameter));
 		}
@@ -268,17 +284,20 @@ public class OCL2JavaClass extends AbstractOCLCodeGenerator
 		//
 		//	"evaluate" function body
 		//
-		String resultName = nameManager.getSymbolName(bodyExpression, "result");
 		pushIndentation();
 			appendLocalConstants(analysis);
 			if (localConstants != null) {
-				for (Element localConstant : localConstants) {
+				for (Object localConstant : localConstants) {
 					assert localConstant != null;
-					appendStatements(localConstant);
+					if (localConstant instanceof Element) {
+						appendStatements((Element) localConstant);
+					}
+					else {
+						append("final " + atNonNull() + " Object " + nameManager.getSymbolName(localConstant) + " = " + getConstantHelper().getNonInlineValue(localConstant) + ";\n");
+					}
 				}
 			}
 			append(generatedFunctionBody);
-			append("return " + resultName + ";\n");
 		popIndentation();
 		append("}\n");
 		return popStream();
@@ -307,16 +326,35 @@ public class OCL2JavaClass extends AbstractOCLCodeGenerator
 
 	protected String generateStaticConstants() {
 		pushStream();
-		LinkedHashSet<Element> staticConstants2 = staticConstants;
+/*		LinkedHashSet<Object> staticConstantValues2 = staticConstantValues;
+		if (staticConstantValues2 != null) {
+			pushIndentation("private static ");
+			for (Object staticConstant : staticConstantValues2) {
+				assert staticConstant != null;
+				append(atNonNull() + " Object " + nameManager.getSymbolName(null, staticConstant) + " = " + getConstantHelper().getNonInlineValue(staticConstant));
+//				appendStatements(staticConstant);
+			}
+			popIndentation();
+		} */
+		LinkedHashSet<Object> staticConstants2 = staticConstants;
 		if (staticConstants2 != null) {
 			pushIndentation("private static ");
-			for (Element staticConstant : staticConstants2) {
+			for (Object staticConstant : staticConstants2) {
 				assert staticConstant != null;
-				appendStatements(staticConstant);
+				if (staticConstant instanceof Element) {
+					appendStatements((Element) staticConstant);
+				}
+				else {
+					append("final " + atNonNull() + " Object " + nameManager.getSymbolName(staticConstant) + " = " + getConstantHelper().getNonInlineValue(staticConstant) + ";\n");
+				}
 			}
 			popIndentation();
 		}
 		return popStream();
+	}
+
+	public @NonNull CodeGenAnalysis getAnalysis(@NonNull Element element) {
+		return cgAnalyzer.getAnalysis(element);
 	}
 
 	public @NonNull String getEvaluatorName() {
@@ -325,10 +363,6 @@ public class OCL2JavaClass extends AbstractOCLCodeGenerator
 			evaluatorName = evaluatorName2 = nameManager.reserveName("evaluator", null);
 		}
 		return evaluatorName2;
-	}
-	
-	public @NonNull OCL2JavaExpressionVisitor getExpressionVisitor() {
-		return expressionVisitor;
 	}
 
 	public @NonNull String getIdName(@NonNull ElementId id) {
@@ -344,29 +378,16 @@ public class OCL2JavaClass extends AbstractOCLCodeGenerator
 		return name;
 	}
 
-	public @NonNull Id2JavaVisitor getIdVisitor() {
-		return idVisitor;
-	}
-
-	public @NonNull String getLocalConstantName(@NonNull Element element) {
-		LinkedHashSet<Element> localConstants2 = localConstants;
+	public @NonNull String getLocalConstantName(@NonNull Object anObject) {
+		if (anObject instanceof NumericValue) {
+			anObject = ((NumericValue)anObject).asNumber();
+		}
+		LinkedHashSet<Object> localConstants2 = localConstants;
 		if (localConstants2 == null) {
-			localConstants = localConstants2 = new LinkedHashSet<Element>();
+			localConstants = localConstants2 = new LinkedHashSet<Object>();
 		}
-		localConstants2.add(element);
-		return nameManager.getSymbolName(element, nameManager.getNameHint(element));
-	}
-
-	public @NonNull NameManager getNameManager() {
-		return nameManager;
-	}
-
-	public @NonNull CodeGenAnalysis getNode(@NonNull Element element) {
-		CodeGenAnalysis node = cgAnalyzer.getNode(element);
-		if (node == null) {
-			throw new IllegalArgumentException("No analysis of " + element.toString());
-		}
-		return node;
+		localConstants2.add(anObject);
+		return nameManager.getSymbolName(anObject, nameManager.getNameHint(anObject));
 	}
 
 	public @NonNull String getStandardLibraryName() {
@@ -378,17 +399,16 @@ public class OCL2JavaClass extends AbstractOCLCodeGenerator
 		return standardLibraryName2;
 	}
 
-	public @NonNull String getStaticConstantName(@NonNull Element element) {
-		LinkedHashSet<Element> staticConstants2 = staticConstants;
-		if (staticConstants2 == null) {
-			staticConstants = staticConstants2 = new LinkedHashSet<Element>();
+	public @NonNull String getStaticConstantName(@NonNull Object anObject) {
+		if (anObject instanceof NumericValue) {
+			anObject = ((NumericValue)anObject).asNumber();
 		}
-		staticConstants2.add(element);
-		return nameManager.getSymbolName(element, nameManager.getNameHint(element));
-	}
-
-	public @NonNull String getTypeName(@NonNull Type type) {
-		String displayName = type.getTypeId().getDisplayName();
-		return getImportedName(displayName);
+		LinkedHashSet<Object> staticConstants2 = staticConstants;
+		if (staticConstants2 == null) {
+			staticConstants = staticConstants2 = new LinkedHashSet<Object>();
+		}
+		staticConstants2.add(anObject);
+		String symbolName = nameManager.getSymbolName(anObject, nameManager.getNameHint(anObject));
+		return symbolName;
 	}
 }

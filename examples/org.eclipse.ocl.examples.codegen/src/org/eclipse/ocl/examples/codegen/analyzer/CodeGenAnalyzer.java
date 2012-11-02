@@ -25,70 +25,65 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.TypedElement;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 /**
  * A CodeGenAnalyzer performs the analysis of a Pivot AST in preparation for code generation.
  */
 public class CodeGenAnalyzer
 {	
+	protected final @NonNull OCLCodeGenerator codeGenerator;
+	protected final @NonNull MetaModelManager metaModelManager;
 	protected final @NonNull NameManager nameManager;
 	protected final @NonNull CodeGenAnalysisVisitor visitor;
 	protected final @NonNull TypedElement rootElement;
 	protected final @NonNull Map<Element, CodeGenAnalysis> element2node = new HashMap<Element, CodeGenAnalysis>();
+	private /*Lazy@NonNull*/ ConstantHelper constantHelper = null;
 	// Current context during tree traversal, final state is the root analysis
 	private List<CodeGenAnalysis> theseChildren = null;
 	private @NonNull CodeGenAnalysis thisAnalysis;
 	
-	public CodeGenAnalyzer(@NonNull NameManager nameManager, @NonNull TypedElement element) {
-		this.nameManager = nameManager;
+	public CodeGenAnalyzer(@NonNull OCLCodeGenerator codeGenerator, @NonNull TypedElement element) {
+		this.codeGenerator = codeGenerator;
+		this.metaModelManager = codeGenerator.getMetaModelManager();
+		this.nameManager = codeGenerator.getNameManager();
 		this.visitor = new CodeGenAnalysisVisitor(this);
 		this.rootElement = element;
 		this.thisAnalysis = new CodeGenAnalysis(this, element);
 	}
 
-	protected void addLocalConstant() {
-		thisAnalysis.setLocalConstant();
-//		localConstants.add(thisAnalysis);
-	}
-	
 	public void addNamedElement(@Nullable NamedElement namedElement) {
 		if (namedElement != null) {
 			nameManager.addNamedElement(namedElement);
 		}
 	}
 
-	protected void addStaticConstant() {
-		thisAnalysis.setStaticConstant();
-//		staticConstants.add(thisAnalysis);
-	}
-
 	public void analyze() {
 		element2node.put(rootElement, thisAnalysis);
 		rootElement.accept(visitor);
-		thisAnalysis.setChildren(theseChildren);
+		thisAnalysis.initChildren(theseChildren);
 	}
 	
 	/**
 	 * The descent pushes the current analysis and children, then creates a new analysis for the visit.
-	 * On completion of the visit, the children are installed establishing the structural hash code
-	 * and the former analysis and children are popped.
+	 * On completion of the visit, the children are installed and the former analysis and children are popped.
 	 * 
 	 * @param element to be visited, which may (but should not) be null
 	 * @return the elemental analysis or null if a null element
 	 */
-	protected @NonNull CodeGenAnalysis descend(@NonNull TypedElement expression) {
+	protected @NonNull CodeGenAnalysis descend(@NonNull TypedElement element) {
 		CodeGenAnalysis thisAnalysis2 = thisAnalysis;
 		assert thisAnalysis2 != null;
 		@NonNull CodeGenAnalysis savedAnalysis = thisAnalysis2;
 		@Nullable List<CodeGenAnalysis> savedChildren = theseChildren;
 		try {
-			thisAnalysis = thisAnalysis2 = new CodeGenAnalysis(thisAnalysis2, expression);
+			thisAnalysis = thisAnalysis2 = new CodeGenAnalysis(thisAnalysis2, element);
 			theseChildren = null;
-			CodeGenAnalysis oldAnalysis = element2node.put(expression, thisAnalysis2);
+			CodeGenAnalysis oldAnalysis = element2node.put(element, thisAnalysis2);
 			assert oldAnalysis == null;
 			CodeGenAnalysisVisitor visitor2 = visitor;
 			assert visitor2 != null;
-			expression.accept(visitor2);
+			element.accept(visitor2);
 			return thisAnalysis2;
 		}
 		finally {
@@ -97,6 +92,7 @@ public class CodeGenAnalyzer
 					thisAnalysis2.addDependencies(child.getDirectDependencies());
 				}
 			}
+			thisAnalysis.initChildren(theseChildren);
 			theseChildren = savedChildren;
 			List<CodeGenAnalysis> theseChildren2 = theseChildren;
 			if (theseChildren2 == null) {
@@ -107,26 +103,36 @@ public class CodeGenAnalyzer
 		}
 	}
 
-	protected void descendAll(Iterable<? extends TypedElement> expressions) {
-		boolean localConstant = true;
-		boolean staticConstant = true;
-		for (TypedElement expression : expressions) {
-			assert expression != null;
-			CodeGenAnalysis child = descend(expression);
-			thisAnalysis.addInvalidSources(child.getInvalidSources());
-			if (!child.isStaticConstant()) {
-				staticConstant = false;
-				if (!child.isLocalConstant()) {
-					localConstant = false;
-				}
-			}
+	protected void descendAll(@NonNull Iterable<? extends TypedElement> elements) {
+		for (TypedElement element : elements) {
+			assert element != null;
+			@SuppressWarnings("unused")CodeGenAnalysis child = descend(element);
+//			thisAnalysis.addInvalidSources(child.getInvalidSources());
 		}
-		if (staticConstant) {
-			addStaticConstant();
+	}
+
+	public @Nullable CodeGenAnalysis findAnalysis(@NonNull Element element) {
+		return element2node.get(element);
+	}
+
+	public @NonNull CodeGenAnalysis getAnalysis(@NonNull Element element) {
+		CodeGenAnalysis analysis = element2node.get(element);
+		if (analysis == null) {
+			throw new IllegalStateException("No analysis of " + element);
 		}
-		else if (localConstant) {
-			addLocalConstant();
+		return analysis;
+	}
+
+	public @NonNull OCLCodeGenerator getCodeGenerator() {
+		return codeGenerator;
+	}
+
+	public @NonNull ConstantHelper getConstantHelper() {
+		ConstantHelper constantHelper2 = constantHelper;
+		if (constantHelper2 == null) {
+			constantHelper = constantHelper2 = codeGenerator.getConstantHelper();
 		}
+		return constantHelper2;
 	}
 
 	public @NonNull CodeGenAnalysis getCurrentAnalysis() {
@@ -137,19 +143,17 @@ public class CodeGenAnalyzer
 		return theseChildren;
 	}
 
+	public @NonNull MetaModelManager getMetaModelManager() {
+		return metaModelManager;
+	}
+
 	public @NonNull NameManager getNameManager() {
 		return DomainUtil.nonNullState(nameManager);
 	}
 
-	public CodeGenAnalysis getNode(@NonNull Element element) {
-		return element2node.get(element);
-	}
-
-	public @NonNull String getUniqueName(@NonNull NamedElement element, @NonNull String... nameHints) {
-		return nameManager.getUniqueName(element, nameHints);
-	}
-
 	public void optimize() {
+		ConstantFolder constantFolder = new ConstantFolder(this, thisAnalysis, null);
+		constantFolder.optimize();
 		CommonSubExpressionEliminator commonSubExpressionEliminator = new CommonSubExpressionEliminator(this, thisAnalysis);
 		commonSubExpressionEliminator.optimize();
 	}

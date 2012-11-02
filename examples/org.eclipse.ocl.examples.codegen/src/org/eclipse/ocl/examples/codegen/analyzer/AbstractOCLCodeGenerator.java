@@ -33,7 +33,10 @@ import org.eclipse.ocl.examples.domain.library.LibraryTernaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.TypeExp;
 import org.eclipse.ocl.examples.pivot.TypedElement;
+import org.eclipse.ocl.examples.pivot.VariableDeclaration;
+import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 public abstract class AbstractOCLCodeGenerator implements OCLCodeGenerator
@@ -44,7 +47,12 @@ public abstract class AbstractOCLCodeGenerator implements OCLCodeGenerator
 	public static final @NonNull String TABLES_PACKAGE_NAME = "";
 	
 	protected final @NonNull MetaModelManager metaModelManager;
+	protected final @NonNull NameManager nameManager;
+	protected final @NonNull OCL2JavaExpressionVisitor expressionVisitor;
+	protected final @NonNull Id2JavaVisitor idVisitor;
+	protected final @NonNull OCL2JavaStatementVisitor statementVisitor;
 	private @NonNull final ImportManager importManager = new ImportManager(EmitQueries.knownClasses);
+	private /*Lazy@NonNull*/ ConstantHelper constantHelper = null;
 	//
 	private @NonNull Stack<StringBuilder> streamStack = new Stack<StringBuilder>();
 	private @NonNull StringBuilder s = new StringBuilder();
@@ -55,6 +63,19 @@ public abstract class AbstractOCLCodeGenerator implements OCLCodeGenerator
 
 	protected AbstractOCLCodeGenerator(@NonNull MetaModelManager metaModelManager) {
 		this.metaModelManager = metaModelManager;
+		nameManager = new NameManager(metaModelManager);
+		expressionVisitor = new OCL2JavaExpressionVisitor(this);
+		idVisitor = new Id2JavaVisitor(this);
+		statementVisitor = new OCL2JavaStatementVisitor(this);
+	}
+
+	protected AbstractOCLCodeGenerator(@NonNull MetaModelManager metaModelManager, @NonNull NameManager nameManager,
+			@NonNull OCL2JavaExpressionVisitor expressionVisitor, @NonNull Id2JavaVisitor idVisitor, @NonNull OCL2JavaStatementVisitor statementVisitor) {
+		this.metaModelManager = metaModelManager;
+		this.nameManager = nameManager;
+		this.expressionVisitor = expressionVisitor;
+		this.idVisitor = idVisitor;
+		this.statementVisitor = statementVisitor;
 	}
 	
 	public void append(@Nullable String string) {
@@ -98,6 +119,10 @@ public abstract class AbstractOCLCodeGenerator implements OCLCodeGenerator
 	public @NonNull String atNullable() {
 		return importManager.getImportedName("@Nullable");
 	}
+
+	protected @NonNull ConstantHelper createConstantHelper() {
+		return new ConstantHelper(this);
+	}
 	
 	public @NonNull Class<?> getAbstractOperationClass(@NonNull List<? extends TypedElement> parameters) {
 		switch (parameters.size()) {
@@ -112,6 +137,39 @@ public abstract class AbstractOCLCodeGenerator implements OCLCodeGenerator
 		return importManager.getAllImports();
 	}
 
+	public @NonNull ConstantHelper getConstantHelper() {
+		ConstantHelper constantHelper2 = constantHelper;
+		if (constantHelper2 == null) {
+			constantHelper = constantHelper2 = createConstantHelper();
+		}
+		return constantHelper2;
+	}
+
+	public @NonNull String getDefiningText(@NonNull TypedElement element) {
+		CodeGenAnalysis analysis = getAnalysis(element);
+		if (analysis.isInlineable()) {
+			return expressionVisitor.visit(element);
+		}
+		VariableDeclaration referredVariable = null;
+		CommonSubExpression referredCommonSubExpression = analysis.getReferredCommonSubExpression();
+		if (referredCommonSubExpression != null) {
+			referredVariable = referredCommonSubExpression.getVariable();
+		}
+		else if (element instanceof VariableExp) {
+			referredVariable = ((VariableExp)element).getReferredVariable();
+		}
+		if (referredVariable == null) {
+			return expressionVisitor.visit(element);
+		}
+		else {
+			return expressionVisitor.visit(referredVariable);
+		}
+	}
+	
+	public @NonNull OCL2JavaExpressionVisitor getExpressionVisitor() {
+		return expressionVisitor;
+	}
+
 	protected @Nullable GenPackage getGenPackage(@NonNull Type type) {
 		org.eclipse.ocl.examples.pivot.Package pPackage = type.getPackage();
 		if (pPackage == null) {
@@ -124,10 +182,14 @@ public abstract class AbstractOCLCodeGenerator implements OCLCodeGenerator
 		return metaModelManager.getGenPackage(nsURI);
 	}
 
+	public @NonNull Id2JavaVisitor getIdVisitor() {
+		return idVisitor;
+	}
+
 	public @NonNull String getImportedName(@NonNull String className) {
 		return importManager.getImportedName(className);
 	}
-
+	
 	@SuppressWarnings("null")
 	public @NonNull String getImportedName(@NonNull Class<?> className) {
 		return importManager.getImportedName(className.getName());
@@ -135,6 +197,10 @@ public abstract class AbstractOCLCodeGenerator implements OCLCodeGenerator
 
 	public @NonNull MetaModelManager getMetaModelManager() {
 		return metaModelManager;
+	}
+
+	public @NonNull NameManager getNameManager() {
+		return nameManager;
 	}
 
 	public @NonNull Class<?> getOperationInterface(@NonNull List<? extends TypedElement> parameters) {
@@ -176,9 +242,49 @@ public abstract class AbstractOCLCodeGenerator implements OCLCodeGenerator
 		return null;
 	}
 
+	public @NonNull String getReferringText(@NonNull TypedElement element) {			// FIXME simplify
+		CodeGenAnalysis analysis = getAnalysis(element);
+		if (analysis.isConstant()) {
+			if (analysis.isInlineable()) {
+				return expressionVisitor.visit(element);
+			}
+			Object constantValue = analysis.getConstantValue();
+			return getSymbolName(constantValue);
+		}
+		if (analysis.isInlineable()) {
+			return expressionVisitor.visit(element);
+		}
+		VariableDeclaration referredVariable = null;
+		CommonSubExpression referredCommonSubExpression = analysis.getReferredCommonSubExpression();
+		if (referredCommonSubExpression != null) {
+			referredVariable = referredCommonSubExpression.getVariable();
+		}
+		else if (element instanceof TypeExp) {
+			return getSymbolName(element.getType());
+		}
+		else if (element instanceof VariableExp) {
+			referredVariable = ((VariableExp)element).getReferredVariable();
+		}
+		if (referredVariable == null) {
+			return getSymbolName(element);
+		}
+		else {
+			return expressionVisitor.visit(referredVariable);
+		}
+	}
+
 	@SuppressWarnings("null")
 	protected @NonNull String getString() {
 		return s.toString();
+	}
+
+	protected @NonNull String getSymbolName(@Nullable Object element, @Nullable String... nameHints) {
+		return element != null ? nameManager.getSymbolName(element, nameHints) : "null";
+	}
+
+	public @NonNull String getTypeName(@NonNull Type type) {
+		String displayName = type.getTypeId().getDisplayName();
+		return getImportedName(displayName);
 	}
 	
 	public void popIndentation() {
