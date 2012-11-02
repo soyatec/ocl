@@ -24,15 +24,22 @@ import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
+import org.eclipse.ocl.examples.pivot.CollectionItem;
+import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
+import org.eclipse.ocl.examples.pivot.CollectionLiteralPart;
+import org.eclipse.ocl.examples.pivot.CollectionRange;
+import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
 import org.eclipse.ocl.examples.pivot.LetExp;
+import org.eclipse.ocl.examples.pivot.LiteralExp;
 import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -119,7 +126,11 @@ public class OCL2JavaStatementVisitor extends AbstractExtendingVisitor<String, O
 	 */
 	protected void appendThrowingStatement(@NonNull OCLExpression anExpression) {
 		CodeGenAnalysis analysis = context.getNode(anExpression);
-		if (isInlineable(anExpression)) { /* Nothing to do */}
+		if (isInlineable(anExpression)) {
+//			if (analysis.getTransitiveInvalidSources().size() > 0) {
+//				context.append("throwNewInvalidException();\n");
+//			}
+		}
 		else if (analysis.isStaticConstant()) {
 			if (analysis.getReferredCommonSubExpression() == null) {
 				context.getStaticConstantName(getConstant(anExpression));
@@ -356,6 +367,71 @@ public class OCL2JavaStatementVisitor extends AbstractExtendingVisitor<String, O
 //		return "static final " + atNonNull() + " Object " + getSymbolName(element) + " = " + super.visitBooleanLiteralExp(element) + ";";
 //	}
 
+	@Override
+	public @Nullable String visitCollectionItem(@NonNull CollectionItem element) {
+		OCLExpression item = element.getItem();
+		item.accept(this);
+		return getSymbolName(item);
+	}
+
+	@Override
+	public @Nullable String visitCollectionLiteralExp(@NonNull CollectionLiteralExp element) {
+		CodeGenAnalysis analysis = context.getNode(element);
+//		if (analysis.getTransitiveInvalidSources().size() > 0) {
+//			context.append("throwInvalidValueException();");
+//			return null;
+//		}
+		CollectionType collectionType = (CollectionType) element.getType();
+		StringBuilder partArgs = new StringBuilder();
+		List<CollectionLiteralPart> parts = element.getPart();
+		for (CollectionLiteralPart part : parts) {
+			partArgs.append(", " + part.accept(this));
+		}
+		String collectionName = getSymbolName(element);
+		String collectionTypeIdName = context.getIdName(collectionType.getTypeId());
+//		if (collectionType.isOrdered() && (parts.size() == 1) && (parts.get(0) instanceof CollectionRange)) {
+//			String createCollectionName = "create" + element.getKind() + "Range";
+//			CollectionRange range = (CollectionRange) parts.get(0);
+//			context.append("final " + atNonNull() + " Object " + collectionName + " = " + createCollectionName + "(" + collectionTypeIdName);
+//			context.append(", createRange(" + firstName + ", " + lastName + "));");
+//		}
+//		else {	// FIXME folding
+		String createCollectionName = "create" + element.getKind() + "Value";
+		context.append("final " + atNonNull() + " Object " + collectionName + " = " + createCollectionName + "(" + collectionTypeIdName + partArgs + ");\n");
+		return collectionName;
+//		}
+/*		[ast.type.emitConstants(genPackage, expInOcl)/]
+				[if (not ast.isConstantCollectionLiteralExp())]
+				[for (part : CollectionLiteralPart | ast.part)]
+				[part.emitConstants(genPackage, expInOcl)/]
+				[/for]
+				[debug(ast, 'nonConstant')/]
+				[elseif ((ast.part->size() = 1) and ast.type.oclIsKindOf(SequenceType) and ast.part->at(1).oclIsKindOf(CollectionRange))]
+				[for (part : CollectionLiteralPart | ast.part)]
+				[part.emitConstants(genPackage, expInOcl)/]
+				[/for]
+				[let range : CollectionRange = ast.part->at(1).oclAsType(CollectionRange)]
+				[debug(ast, 'oneRange')/]
+				static final @NonNull Object [ast.symbolName(expInOcl)/] = create[ast.kind.toString()/]Range([ast.type.typeId(expInOcl)/], createRange([range.first.symbolName(expInOcl)/], [range.last.symbolName(expInOcl)/]));[/let]
+				[else]
+				[let folded : CollectionLiteralExp = if ast.isFoldable() then ast.evaluate().oclAsType(CollectionLiteralExp) else ast endif]
+				[debug(folded, 'folded')/]
+				[for (part : CollectionLiteralPart | folded.part)]
+				[debug(part, 'foldedPart')/]
+				[part.emitConstants(genPackage, expInOcl)/]
+				[/for]
+				static final @NonNull Object [ast.symbolName(expInOcl)/] = create[folded.kind.toString()/]Value([folded.type.typeId(expInOcl)/][for (part : CollectionLiteralPart | folded.part)], [part.oclAsType(CollectionItem).item.symbolName(expInOcl)/][/for]);[/let]
+				[/if] */
+	}
+
+	@Override
+	public @Nullable String visitCollectionRange(@NonNull CollectionRange element) {
+		String firstName = element.getFirst().accept(this);
+		String lastName = element.getLast().accept(this);
+		String integerValueCast = "(" + context.getImportedName(IntegerValue.class) + ")";
+		return "createRange(" + integerValueCast + firstName + ", " + integerValueCast + lastName + ")";
+	}
+
 //	@Override
 //	public @Nullable String visitExpressionInOCL(@NonNull ExpressionInOCL element) {
 //		return element.getBodyExpression().accept(this);
@@ -390,6 +466,18 @@ public class OCL2JavaStatementVisitor extends AbstractExtendingVisitor<String, O
 		}
 		return null;
 	}
+
+	@Override
+	public @Nullable String visitLiteralExp(@NonNull LiteralExp element) {
+		CodeGenAnalysis analysis = context.getNode(element);
+//		if (analysis.getTransitiveInvalidSources().size() > 0) {
+//			context.append("throwInvalidValueException();");
+//			return null;
+//		}
+//		else {
+			return super.visitLiteralExp(element);
+//		}
+	}
 	
 	@Override
 	public @Nullable String visitMetaclass(@NonNull Metaclass element) {
@@ -398,24 +486,25 @@ public class OCL2JavaStatementVisitor extends AbstractExtendingVisitor<String, O
 		String evaluatorName = context.getEvaluatorName();
 		String typeIdName = element.getInstanceType().getTypeId().accept(context.getIdVisitor());
 		context.append("final " + atNonNull() + " " + typeValueName + " " + symbolName + " = createTypeValue(" + evaluatorName + ".getIdResolver().getType(" + typeIdName + ", null));\n");	
-		return null;
+		return symbolName;
 	}
 
 	@Override
 	public @Nullable String visitOCLExpression(@NonNull OCLExpression element) {
 		CodeGenAnalysis analysis = context.getNode(element);
 		String symbolName = getSymbolName(element);
-		context.append("final Object " + symbolName + " = " + getReferredValueText(element) + ";\n");	
+		context.append("final " + atNonNull() + " Object " + symbolName + " = " + getReferredValueText(element) + ";\n");	
 		if (analysis.getTransitiveInvalidSources().size() > 0) {
 			appendThrowCheck(symbolName);
 		}
-		return null;
+		return symbolName;
 	}
 
 	@Override
 	public @Nullable String visitOperation(@NonNull Operation element) {
-		context.append("final " + atNonNull() + " " + context.getImportedName(ExecutorOperation.class) + " " + getSymbolName(element) + " = " + context.getQualifiedLiteralName(element) + ";\n");	
-		return null;
+		String symbolName = getSymbolName(element);
+		context.append("final " + atNonNull() + " " + context.getImportedName(ExecutorOperation.class) + " " + symbolName + " = " + context.getQualifiedLiteralName(element) + ";\n");	
+		return symbolName;
 	}
 
 	@Override
@@ -489,17 +578,17 @@ public class OCL2JavaStatementVisitor extends AbstractExtendingVisitor<String, O
 			}
 			context.append(");\n");
 		}
-		return null;
+		return resultSymbolName;
 	}
 	
 	@Override
 	public @Nullable String visitPrimitiveType(@NonNull PrimitiveType element) {
 		String symbolName = getSymbolName(element);
 		context.append("final " + atNonNull() + " " + context.getImportedName(ExecutorType.class) + " " + symbolName + " = " + "context.getQualifiedLiteralName(element)" + ";\n");	
-		return null;
+		return symbolName;
 	}
 
 	public @NonNull String visiting(@NonNull Visitable visitable) {
-		throw new UnsupportedOperationException(visitable.getClass().getName());
+		throw new UnsupportedOperationException("Statement: " + visitable.getClass().getName());
 	}
 }

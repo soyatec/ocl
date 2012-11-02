@@ -19,6 +19,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.LambdaTypeId;
 import org.eclipse.ocl.examples.domain.ids.NestedPackageId;
@@ -38,6 +39,7 @@ import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.ids.UnspecifiedId;
+import org.eclipse.xtext.util.Strings;
 
 public class Id2JavaVisitor implements IdVisitor<String>
 {
@@ -47,6 +49,12 @@ public class Id2JavaVisitor implements IdVisitor<String>
 	public Id2JavaVisitor(@NonNull OCLCodeGenerator codeGenerator) {
 		this.codeGenerator = codeGenerator;
 		typeIdName = codeGenerator.getImportedName(TypeId.class);
+	}
+	
+	public @NonNull String visit(@NonNull ElementId id) {
+		String name = id.accept(this);
+		assert name != null;
+		return name;
 	}
 	
 	public @Nullable String visitCollectionId(@NonNull CollectionTypeId id) {
@@ -176,13 +184,25 @@ public class Id2JavaVisitor implements IdVisitor<String>
 	}
 
 	public @Nullable String visitTuplePartId(@NonNull TuplePartId id) {
-		// TODO Auto-generated method stub
-		return visiting(id);
+		String typeString = codeGenerator.getIdName(id.getTypeId());
+		String nameString = Strings.convertToJavaString(id.getName());
+		return codeGenerator.getImportedName(IdManager.class) + ".INSTANCE.createTuplePartId(\"" + nameString + "\", " + typeString + ");\n";
 	}
 
 	public @Nullable String visitTupleTypeId(@NonNull TupleTypeId id) {
-		// TODO Auto-generated method stub
-		return visiting(id);
+		StringBuilder s = new StringBuilder();
+		s.append(codeGenerator.getImportedName(IdManager.class) + ".INSTANCE.getTupleTypeId(");
+		boolean isFirst = true;
+		for (TuplePartId partId : id.getPartIds()) {
+			assert partId != null;
+			if (!isFirst) {
+				s.append(", ");
+			}
+			s.append(codeGenerator.getIdName(partId));
+			isFirst = false;
+		}
+		s.append(");\n");
+		return s.toString();
 	}
 
 	public @Nullable String visitUnspecifiedId(@NonNull UnspecifiedId id) {
@@ -191,6 +211,6 @@ public class Id2JavaVisitor implements IdVisitor<String>
 	}
 	
 	public @Nullable String visiting(@NonNull ElementId id) {
-		throw new UnsupportedOperationException(id.getClass().getName());
+		throw new UnsupportedOperationException("Id: " + id.getClass().getName());
 	}
 }

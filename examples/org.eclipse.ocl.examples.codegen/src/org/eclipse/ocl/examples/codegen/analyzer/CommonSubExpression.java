@@ -26,8 +26,8 @@ import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.Variable;
 
 /**
- * A CommonSubExpression maintains the analysis results for a single Pivot AST element
- * on behalf of a CodeGenAnalyzer.
+ * A CommonSubExpression provides the unifying state of the multiple analyses that are combined and possibly hoisted
+ * to eliminate the redundant compuations.
  */
 public class CommonSubExpression
 {

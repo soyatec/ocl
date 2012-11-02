@@ -16,6 +16,7 @@ package org.eclipse.ocl.examples.codegen.expression;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 
@@ -32,6 +33,9 @@ import org.eclipse.ocl.examples.codegen.analyzer.OCL2JavaStatementVisitor;
 import org.eclipse.ocl.examples.codegen.common.CodeGenHelper;
 import org.eclipse.ocl.examples.codegen.common.PivotQueries;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -43,7 +47,7 @@ import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 
 /**
- * OCL2JavaClass supports generation of the content of a JavaClassFile to provide the polymorphic imp[lementation
+ * OCL2JavaClass supports generation of the content of a JavaClassFile to provide the polymorphic implementation
  * of an ExpressionInOCL.
  */
 public class OCL2JavaClass extends AbstractOCLCodeGenerator
@@ -56,6 +60,7 @@ public class OCL2JavaClass extends AbstractOCLCodeGenerator
 	protected final @NonNull ExpressionInOCL expInOcl;
 	private /*@LazyNonNull*/ String evaluatorName = null;
 	private /*@LazyNonNull*/ String standardLibraryName = null;
+	private @Nullable LinkedHashMap<ElementId, String> idConstants = null;
 	private @Nullable LinkedHashSet<Element> staticConstants = null;
 	private @Nullable LinkedHashSet<Element> localConstants = null;
 
@@ -170,20 +175,36 @@ public class OCL2JavaClass extends AbstractOCLCodeGenerator
 		append("public static " + atNonNull() + " " + className + " " + instanceName + " = new " + className + "();\n");
 		appendStaticConstants(analysis);
 		String functionString = generateEvaluateFunctionDefinition();
-		LinkedHashSet<Element> staticConstants2 = staticConstants;
-		if (staticConstants2 != null) {
-			pushIndentation("private static ");
-			for (Element staticConstant : staticConstants2) {
-				assert staticConstant != null;
-				appendStatements(staticConstant);
-			}
-			popIndentation();
-		}
+		String staticConstantsString = generateStaticConstants();
+		String idConstantsString = generateIdConstants();
+		append(idConstantsString);
+		append(staticConstantsString);
 		append("\n");
 		append(functionString);
 	}
 	
 	public @NonNull String generateClassFile(@NonNull CodeGenHelper codeGenHelper, @NonNull String packageName, @NonNull String className) {
+/*		CodeGenAssignment rootAssignment = getAssignment(expInOcl);
+		Map<CodeGenAssignment, String> codeSnippets = rootAssignment.computeCodeSnippets(statementVisitor);
+		Map<CodeGenAssignment, Integer> dependencySizes = rootAssignment.computeDependencySizes();
+		List<Map.Entry<CodeGenAssignment, Integer>> orderedDependencies = new ArrayList<Map.Entry<CodeGenAssignment, Integer>>(dependencySizes.entrySet());
+		Collections.sort(orderedDependencies, new Comparator<Map.Entry<CodeGenAssignment, Integer>>()
+		{
+			public int compare(Entry<CodeGenAssignment, Integer> o1, Entry<CodeGenAssignment, Integer> o2) {
+				return o2.getValue() - o1.getValue();		// Largest first
+			}
+		});
+		List<CodeGenAssignment> staticAssignments = new ArrayList<CodeGenAssignment>(orderedDependencies.size());
+		List<CodeGenAssignment> localAssignments = new ArrayList<CodeGenAssignment>(orderedDependencies.size());
+		for (Map.Entry<CodeGenAssignment, Integer> entry : orderedDependencies) {
+			CodeGenAssignment assignment = entry.getKey();
+			if (assignment.isStaticConstant()) {
+				staticAssignments.add(assignment);
+			}
+			if (assignment.isStaticConstant()) {
+				localAssignments.add(assignment);
+			}
+		} */
 		List<Variable> parameterVariable = DomainUtil.nonNullEMF(expInOcl.getParameterVariable());
 		String baseClassName = getImportedName(getAbstractOperationClass(parameterVariable));
 		append("/**\n");
@@ -263,6 +284,41 @@ public class OCL2JavaClass extends AbstractOCLCodeGenerator
 		return popStream();
 	}
 
+	protected String generateIdConstants() {
+		pushStream();
+		LinkedHashMap<ElementId, String> idConstants2 = idConstants;
+		if (idConstants2 != null) {
+			pushIndentation("private static final " + atNonNull() + " ");
+			for (ElementId idConstants : idConstants2.keySet()) {
+				assert idConstants != null;
+				Class<?> typeIdClass;
+				if (idConstants instanceof CollectionTypeId) {
+					typeIdClass = CollectionTypeId.class;
+				}
+				else {
+					typeIdClass = TypeId.class;
+				}
+				append(getImportedName(typeIdClass) + " " + idConstants2.get(idConstants) + " = " + idVisitor.visit(idConstants) + ";\n");
+			}
+			popIndentation();
+		}
+		return popStream();
+	}
+
+	protected String generateStaticConstants() {
+		pushStream();
+		LinkedHashSet<Element> staticConstants2 = staticConstants;
+		if (staticConstants2 != null) {
+			pushIndentation("private static ");
+			for (Element staticConstant : staticConstants2) {
+				assert staticConstant != null;
+				appendStatements(staticConstant);
+			}
+			popIndentation();
+		}
+		return popStream();
+	}
+
 	public @NonNull String getEvaluatorName() {
 		String evaluatorName2 = evaluatorName;
 		if (evaluatorName2 == null) {
@@ -273,6 +329,19 @@ public class OCL2JavaClass extends AbstractOCLCodeGenerator
 	
 	public @NonNull OCL2JavaExpressionVisitor getExpressionVisitor() {
 		return expressionVisitor;
+	}
+
+	public @NonNull String getIdName(@NonNull ElementId id) {
+		LinkedHashMap<ElementId, String> typeIdConstants2 = idConstants;
+		if (typeIdConstants2 == null) {
+			idConstants = typeIdConstants2 = new LinkedHashMap<ElementId, String>();
+		}
+		String name = typeIdConstants2.get(id);
+		if (name == null) {
+			name = "TID_" + typeIdConstants2.size();
+			typeIdConstants2.put(id, name);		
+		}
+		return name;
 	}
 
 	public @NonNull Id2JavaVisitor getIdVisitor() {

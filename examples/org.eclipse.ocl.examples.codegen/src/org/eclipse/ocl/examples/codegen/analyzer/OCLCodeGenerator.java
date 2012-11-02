@@ -18,6 +18,7 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -31,6 +32,7 @@ public interface OCLCodeGenerator
 	@NonNull String atNullable();
 	@NonNull String getEvaluatorName();
 	@NonNull OCL2JavaExpressionVisitor getExpressionVisitor();
+	@NonNull String getIdName(@NonNull ElementId id);
 	@NonNull IdVisitor<String> getIdVisitor();
 	@NonNull String getImportedName(@NonNull Class<?> className);
 	@NonNull String getImportedName(@NonNull String qualifiedClassName);

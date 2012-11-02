@@ -16,10 +16,8 @@ package org.eclipse.ocl.examples.codegen.analyzer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -32,77 +30,12 @@ import org.eclipse.ocl.examples.pivot.TypedElement;
  * A CodeGenAnalyzer performs the analysis of a Pivot AST in preparation for code generation.
  */
 public class CodeGenAnalyzer
-{
-	/**
-	 * Names that will not be allocated to temporary variables.
-	 */
-	public static final Set<String> reservedNames = new HashSet<String>();
-	{
-//		reservedNames.add("endif");
-//		reservedNames.add("in");
-//		reservedNames.add("invalid");
-//		reservedNames.add("let");
-//		reservedNames.add("unlimited");
-//		reservedNames.add("and");
-//		reservedNames.add("not");
-//		reservedNames.add("or");
-//		reservedNames.add("xor");
-		
-		reservedNames.add("Boolean");
-		reservedNames.add("Class");
-		reservedNames.add("Integer");
-		reservedNames.add("List");
-		reservedNames.add("Long");
-		reservedNames.add("Map");
-		reservedNames.add("Package");
-		reservedNames.add("String");
-		
-		reservedNames.add("boolean");
-		reservedNames.add("byte");
-		reservedNames.add("char");
-		reservedNames.add("class");
-		reservedNames.add("enum");
-		reservedNames.add("int");
-		reservedNames.add("long");
-		reservedNames.add("package");
-		reservedNames.add("short");
-		reservedNames.add("void");
-		
-		reservedNames.add("break");
-		reservedNames.add("case");
-		reservedNames.add("catch");
-		reservedNames.add("do");
-		reservedNames.add("else");
-		reservedNames.add("finally");
-		reservedNames.add("for");
-		reservedNames.add("goto");
-		reservedNames.add("if");
-		reservedNames.add("new");
-		reservedNames.add("private");
-		reservedNames.add("protected");
-		reservedNames.add("public");
-		reservedNames.add("return");
-		reservedNames.add("switch");
-		reservedNames.add("throw");
-		reservedNames.add("throws");
-		reservedNames.add("try");
-		reservedNames.add("while");
-
-		reservedNames.add("false");
-		reservedNames.add("null");
-		reservedNames.add("super");
-		reservedNames.add("this");
-		reservedNames.add("true");
-	}
-	
+{	
 	protected final @NonNull NameManager nameManager;
 	protected final @NonNull CodeGenAnalysisVisitor visitor;
 	protected final @NonNull TypedElement rootElement;
 	protected final @NonNull Map<Element, CodeGenAnalysis> element2node = new HashMap<Element, CodeGenAnalysis>();
-	protected final @NonNull Map<Integer, List<List<CodeGenAnalysis>>> hash2nodes = new HashMap<Integer, List<List<CodeGenAnalysis>>>();
-//	protected final @NonNull List<CodeGenAnalysis> staticConstants = new ArrayList<CodeGenAnalysis>();
-//	protected final @NonNull List<CodeGenAnalysis> localConstants = new ArrayList<CodeGenAnalysis>();
-	// Current context during tree traversal
+	// Current context during tree traversal, final state is the root analysis
 	private List<CodeGenAnalysis> theseChildren = null;
 	private @NonNull CodeGenAnalysis thisAnalysis;
 	
@@ -143,10 +76,7 @@ public class CodeGenAnalyzer
 	 * @param element to be visited, which may (but should not) be null
 	 * @return the elemental analysis or null if a null element
 	 */
-	protected @Nullable CodeGenAnalysis descend(@Nullable TypedElement expression) {
-		if (expression == null) {
-			return null;
-		}
+	protected @NonNull CodeGenAnalysis descend(@NonNull TypedElement expression) {
 		CodeGenAnalysis thisAnalysis2 = thisAnalysis;
 		assert thisAnalysis2 != null;
 		@NonNull CodeGenAnalysis savedAnalysis = thisAnalysis2;
@@ -167,29 +97,6 @@ public class CodeGenAnalyzer
 					thisAnalysis2.addDependencies(child.getDirectDependencies());
 				}
 			}
-			int structuralHashCode = thisAnalysis2.setChildren(theseChildren);
-			List<List<CodeGenAnalysis>> hashedAnalyses = hash2nodes.get(structuralHashCode);
-			if (hashedAnalyses == null) {
-				hashedAnalyses = new ArrayList<List<CodeGenAnalysis>>();
-				hash2nodes.put(structuralHashCode, hashedAnalyses);
-			}
-			boolean gotIt = false;
-			for (List<CodeGenAnalysis> hashedAnalysis : hashedAnalyses) {
-				CodeGenAnalysis analysis = hashedAnalysis.get(0);
-				assert analysis != null;
-				if (thisAnalysis2.isStructurallyEqualTo(analysis)) {
-					if (!hashedAnalyses.contains(thisAnalysis2)) {
-						hashedAnalysis.add(thisAnalysis2);
-					}
-					gotIt = true;
-					break;
-				}
-			}
-			if (!gotIt) {
-				List<CodeGenAnalysis> hashedAnalysis = new ArrayList<CodeGenAnalysis>();
-				hashedAnalyses.add(hashedAnalysis);
-				hashedAnalysis.add(thisAnalysis2);
-			}
 			theseChildren = savedChildren;
 			List<CodeGenAnalysis> theseChildren2 = theseChildren;
 			if (theseChildren2 == null) {
@@ -204,14 +111,13 @@ public class CodeGenAnalyzer
 		boolean localConstant = true;
 		boolean staticConstant = true;
 		for (TypedElement expression : expressions) {
+			assert expression != null;
 			CodeGenAnalysis child = descend(expression);
-			if (child != null) {
-				thisAnalysis.addInvalidSources(child.getInvalidSources());
-				if (!child.isStaticConstant()) {
-					staticConstant = false;
-					if (!child.isLocalConstant()) {
-						localConstant = false;
-					}
+			thisAnalysis.addInvalidSources(child.getInvalidSources());
+			if (!child.isStaticConstant()) {
+				staticConstant = false;
+				if (!child.isLocalConstant()) {
+					localConstant = false;
 				}
 			}
 		}
@@ -220,123 +126,6 @@ public class CodeGenAnalyzer
 		}
 		else if (localConstant) {
 			addLocalConstant();
-		}
-	}
-
-	/**
-	 * Compute a map from each common subexpression to a list of all structurally equal sub-expressions.
-	 * @return
-	 */
-	protected Map<CodeGenAnalysis, CommonSubExpression> findCommonSubExpressions() {
-		//
-		//	Locate all candidate CSEs; the identical structural trees that are constant or used more than once.
-		//
-		List<List<CodeGenAnalysis>> candidates = new ArrayList<List<CodeGenAnalysis>>();
-		for (List<List<CodeGenAnalysis>> hashedAnalyses : hash2nodes.values()) {
-			for (List<CodeGenAnalysis> hashedAnalysis : hashedAnalyses) {
-				int iSize = hashedAnalysis.size();
-				CodeGenAnalysis analysis = hashedAnalysis.get(0);
-				if (!analysis.isInlineable() && ((iSize > 1) /*|| analysis.isConstant()*/)) {
-					candidates.add(hashedAnalysis);
-				}
-			}
-		}
-		//
-		//	Prune the candidate CSEs by reducing the CSE children to a single copy for each shared common node.
-		//
-		Map<List<CodeGenAnalysis>, List<CodeGenAnalysis>> allCommonNodes = new HashMap<List<CodeGenAnalysis>, List<CodeGenAnalysis>>();
-		for (List<CodeGenAnalysis> candidate : candidates) {
-			List<CodeGenAnalysis> commonNodes = new ArrayList<CodeGenAnalysis>();
-			allCommonNodes.put(candidate, commonNodes);
-			int iSize = candidate.size();
-			CodeGenAnalysis firstAnalysis = candidate.get(0);
-			if (firstAnalysis.isStaticConstant()) {
-				commonNodes.add(firstAnalysis.getAnalysisAt(0));
-				for (int i = 1; i < iSize; i++) {			// Omit first analysis
-					CodeGenAnalysis secondAnalysis = candidate.get(i);
-					assert secondAnalysis != null;
-					CodeGenAnalysis[] children = secondAnalysis.getChildren();
-					if ((children != null) && (children.length > 0)) {
-						findCommonSubExpressionsPrune(children);
-					}
-				}
-			}
-			else {
-				commonNodes.add(firstAnalysis);
-				for (int i = 1; i < iSize; i++) {			// Omit first analysis
-					CodeGenAnalysis secondAnalysis = candidate.get(i);
-					CodeGenAnalysis commonerNode = null;
-					for (CodeGenAnalysis commonNode : commonNodes) {
-						assert commonNode != null;
-						assert secondAnalysis != null;
-						commonerNode = findCommonNode(commonNode, secondAnalysis);	// FIXME dependency validity
-						if (commonerNode != null) {
-							if (commonerNode != commonNode) {
-								commonNodes.remove(commonNode);
-								commonNodes.add(commonerNode);
-							}
-							CodeGenAnalysis[] children = secondAnalysis.getChildren();
-							if ((children != null) && (children.length > 0)) {
-								findCommonSubExpressionsPrune(children);
-							}
-							break;
-						}
-					}
-					if (commonerNode == null) {
-						commonNodes.add(secondAnalysis);
-					}
-				}
-			}
-		}
-		//
-		//	Install a CommonSubExpression for each common node or residual CSE.
-		//
-		Map<CodeGenAnalysis, CommonSubExpression> commonSubExpressions = new HashMap<CodeGenAnalysis, CommonSubExpression>();
-		for (List<CodeGenAnalysis> candidate : candidates) {
-			int iSize = candidate.size();
-			CodeGenAnalysis candidate0 = candidate.get(0);
-			if (!candidate0.isInlineable() && ((iSize > 1) /*|| candidate0.isConstant()*/)) {
-				CommonSubExpression cse = new CommonSubExpression(this, candidate);
-				for (CodeGenAnalysis analysis : candidate) {
-					commonSubExpressions.put(analysis, cse);
-				}
-				for (CodeGenAnalysis commonNode : allCommonNodes.get(candidate)) {
-					assert cse != null;
-					commonNode.addCommonSubExpression(cse);
-				}
-			}
-		}
-		return commonSubExpressions;
-	}
-
-	private CodeGenAnalysis findCommonNode(@NonNull CodeGenAnalysis firstAnalysis, @NonNull CodeGenAnalysis secondAnalysis) {
-		int firstDepth = firstAnalysis.getDepth();
-		int secondDepth = secondAnalysis.getDepth();
-		int candidateDepth = Math.min(firstDepth, secondDepth);
-		CodeGenAnalysis firstCandidate = firstAnalysis.getAnalysisAt(candidateDepth);
-		CodeGenAnalysis secondCandidate = secondAnalysis.getAnalysisAt(candidateDepth);
-		while ((firstCandidate != null) && (secondCandidate != null)) {
-			if (firstCandidate == secondCandidate) {
-				return firstCandidate;
-			}
-			firstCandidate = firstCandidate.getParent();
-			secondCandidate = secondCandidate.getParent();
-		}
-		return null;
-	}
-
-	private void findCommonSubExpressionsPrune(@NonNull CodeGenAnalysis[] analyses) {
-		for (CodeGenAnalysis child : analyses) {
-			List<List<CodeGenAnalysis>> hashedAnalyses = hash2nodes.get(child.getStructuralHashCode());
-			if (hashedAnalyses != null) {
-				for (List<CodeGenAnalysis> hashedAnalysis : hashedAnalyses) {
-					hashedAnalysis.remove(child);
-				}
-			}
-			CodeGenAnalysis[] children = child.getChildren();
-			if ((children != null) && (children.length > 0)) {
-				findCommonSubExpressionsPrune(children);
-			}
 		}
 	}
 
@@ -361,9 +150,7 @@ public class CodeGenAnalyzer
 	}
 
 	public void optimize() {
-		Map<CodeGenAnalysis, CommonSubExpression> cseMap = findCommonSubExpressions();
-		for (CommonSubExpression cse : new HashSet<CommonSubExpression>(cseMap.values())) {
-			cse.createVariable();
-		}
+		CommonSubExpressionEliminator commonSubExpressionEliminator = new CommonSubExpressionEliminator(this, thisAnalysis);
+		commonSubExpressionEliminator.optimize();
 	}
 }

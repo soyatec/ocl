@@ -98,7 +98,7 @@ public abstract class AbstractOCLCodeGenerator implements OCLCodeGenerator
 	public @NonNull String atNullable() {
 		return importManager.getImportedName("@Nullable");
 	}
-
+	
 	public @NonNull Class<?> getAbstractOperationClass(@NonNull List<? extends TypedElement> parameters) {
 		switch (parameters.size()) {
 			case 0: return AbstractUnaryOperation.class;

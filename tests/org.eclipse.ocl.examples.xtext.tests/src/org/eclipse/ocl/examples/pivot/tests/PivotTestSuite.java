@@ -519,14 +519,10 @@ public abstract class PivotTestSuite extends PivotTestCase
 	protected Value assertQueryInvalid(Object context, String expression) {
 		try {
 			Object value = evaluate(helper, context, expression);
-//			if (!ValuesUtil.isInvalid(value)) {
-				fail(expression + " expected: invalid but was: " + value);
-//			}
-//		} catch (InvalidValueException e) {
-//			assertEquals("Invalid Value Reason", reason, e.getMessage());
-//			assertEquals("Invalid Value Throwable", exceptionClass, e.getCause().getClass());
-		} catch (Exception e) {
-//			failOn(expression, e);
+			fail(expression + " expected: invalid but was: " + value);
+		} catch (InvalidValueException e) {		// OCL invalid is always an InvalidValueException
+		} catch (Exception e) {					// Something else is nasty
+			failOn(expression, e);
 		}
 		return null;
 	}

@@ -125,7 +125,7 @@ public abstract class ValuesUtil
 
 	@SuppressWarnings("null")
 	public static final @NonNull Boolean FALSE_VALUE = Boolean.FALSE;
-	public static final @NonNull InvalidValue INVALID_VALUE = new InvalidValueImpl(new Exception("invalid")); 
+	public static final @NonNull InvalidValue INVALID_VALUE = new InvalidValueImpl(new InvalidValueException("invalid")); 
 	public static final @NonNull IntegerValue ONE_VALUE = integerValueOf(1);
 	@SuppressWarnings("null")
 	public static final @NonNull Boolean TRUE_VALUE = Boolean.TRUE;

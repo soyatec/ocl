@@ -55,8 +55,6 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
     @Override
     @Before public void setUp() throws Exception {
         super.setUp();
-//      helper.setContext(getMetaclass("Package"));
-        helper.setContext(getMetaclass("String"));
     }
 
 	@Override
@@ -1408,7 +1406,7 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 	}
 
 	@Test public void testCollectionReverse() {
-		assertQueryInvalid(null, "Bag{1,3,null,2}->reverse()");
+		assertSemanticErrorQuery("Bag{1,3,null,2}->reverse()", OCLMessages.UnresolvedOperation_ERROR_, "reverse", "Bag(UnlimitedNatural)");
 		assertQueryResults(null, "OrderedSet{}", "OrderedSet{}->reverse()");
 		assertQueryResults(null, "OrderedSet{null}", "OrderedSet{null}->reverse()");
 		assertQueryResults(null, "OrderedSet{2,1}", "OrderedSet{1,2}->reverse()");
@@ -1418,7 +1416,7 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 		assertQueryResults(null, "Sequence{2,null,3,1}", "Sequence{1,3,null,2}->reverse()");
 		assertQueryResults(null, "Sequence{21,20,19,18,17,16,15,14,13,24,23,22,4,15,14,12,11,10,9,null,8,7,6,5,4,3,4,3,2,1}", "Sequence{1..4,3..8,null,9..12,14..15,4,22..24,13..21}->reverse()");
 		assertQueryResults(null, "Sequence{Set{1..3},Sequence{1..3},OrderedSet{1,3},Bag{1,1,1}}", "Sequence{Bag{1,1,1},OrderedSet{1,3},Sequence{1..3},Set{1..3}}->reverse()");
-		assertQueryInvalid(null, "Set{}->reverse()");
+		assertSemanticErrorQuery("Set{}->reverse()", OCLMessages.UnresolvedOperation_ERROR_, "reverse", "Set(<unspecified:4>)");
 	}
 
 	@Test public void testCollectionSelectByKind() {

@@ -140,26 +140,16 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 
 	public @Nullable Object evaluate(@NonNull DomainExpression body) {
 		Object value = ((OCLExpression) body).accept(this);
-//		if (value == null) {
-//			throw new InvalidValueException("null evaluation result");
-//		}
-//		else {
-			assert !(value instanceof Number);			// Make sure Integer/Real are boxed
-			assert !(value instanceof NullValue);		// Make sure invalid is an exception, null is null
-			return value;
-//		}
+		assert !(value instanceof Number);			// Make sure Integer/Real are boxed
+		assert !(value instanceof NullValue);		// Make sure invalid is an exception, null is null
+		return value;
 	}
 
 	public @Nullable Object evaluate(@NonNull ExpressionInOCL expressionInOCL) {
 		Object value = expressionInOCL.accept(this);
-		if (value == null) {
-			throw new InvalidValueException("null evaluation result");
-		}
-		else {
-			assert !(value instanceof Number);			// Make sure Integer/Real are boxed
-			assert !(value instanceof InvalidValue);	// Make sure invalid is an exception
-			return value;
-		}
+		assert !(value instanceof Number);			// Make sure Integer/Real are boxed
+		assert !(value instanceof NullValue);		// Make sure invalid is an exception, null is null
+		return value;
 	}
 
 	public @NonNull EvaluationVisitor getEvaluator() {
@@ -431,7 +421,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 
 	@Override
     public Object visitInvalidLiteralExp(@NonNull InvalidLiteralExp invalidLiteralExp) {
-		throw new InvalidValueException(EvaluatorMessages.InvalidLiteral, invalidLiteralExp);
+		throw ValuesUtil.INVALID_VALUE.getException();
 	}
 
 	/**
@@ -918,8 +908,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		}
 		Object value = evaluationEnvironment.getValueOf(variableDeclaration);
 		if (value instanceof InvalidValue) {
-			Exception e = ((InvalidValue)value).getException();
-			throw new InvalidValueException(e, "Invalid variable '" + variableDeclaration.getName() +"'", e, null, variableExp);
+			throw ((InvalidValue)value).getException();
 		}
 		else {
 			return value;

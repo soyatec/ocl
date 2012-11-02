@@ -182,6 +182,6 @@ public class OCL2JavaExpressionVisitor extends AbstractExtendingVisitor<String, 
 	}
 	
 	public @NonNull String visiting(@NonNull Visitable visitable) {
-		throw new UnsupportedOperationException(visitable.getClass().getName());
+		throw new UnsupportedOperationException("Expression: " + visitable.getClass().getName());
 	}
 }

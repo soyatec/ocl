@@ -23,12 +23,18 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.pivot.BagType;
+import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
+import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.LiteralExp;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.OrderedSetType;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
+import org.eclipse.ocl.examples.pivot.SequenceType;
+import org.eclipse.ocl.examples.pivot.SetType;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeExp;
@@ -43,12 +49,17 @@ import org.eclipse.ocl.examples.pivot.util.Nameable;
  */
 public class NameManager
 {
+	public static final String BAG_NAME_HINT_PREFIX = "BAG";
+	public static final String COLLECTION_NAME_HINT_PREFIX = "COL";
 	public static final String DEFAULT_NAME_PREFIX = "symbol";
-	public static final String INTEGER_NAME_HINT_PREFIX = "I_";
-	public static final String OPERATION_NAME_HINT_PREFIX = "O_";
-	public static final String REAL_NAME_HINT_PREFIX = "R_";
-	public static final String STRING_NAME_HINT_PREFIX = "S_";
-	public static final String TYPE_NAME_HINT_PREFIX = "T_";
+	public static final String INTEGER_NAME_HINT_PREFIX = "INT_";
+	public static final String OPERATION_NAME_HINT_PREFIX = "OP_";
+	public static final String ORDERED_SET_NAME_HINT_PREFIX = "ORD";
+	public static final String REAL_NAME_HINT_PREFIX = "REA_";
+	public static final String SEQUENCE_NAME_HINT_PREFIX = "SEQ";
+	public static final String SET_NAME_HINT_PREFIX = "SET";
+	public static final String STRING_NAME_HINT_PREFIX = "STR_";
+	public static final String TYPE_NAME_HINT_PREFIX = "TYP_";
 	
 	/**
 	 * Names that will not be allocated to temporary variables.
@@ -191,7 +202,10 @@ public class NameManager
 	 * The returned name is not guaranteed to be unique. Uniqueness is enforced when the hint is passed to getSymbolName(). 
 	 */
 	public @Nullable String getNameHint(@NonNull Object anObject) {
-		if (anObject instanceof IntegerLiteralExp) {
+		if (anObject instanceof CollectionLiteralExp) {
+			return getTypeNameHint(((CollectionLiteralExp)anObject).getType());
+		}
+		else if (anObject instanceof IntegerLiteralExp) {
 			Number numberSymbol = ((IntegerLiteralExp)anObject).getIntegerSymbol();
 			return numberSymbol != null ? getNumericNameHint(numberSymbol) : null;
 		}
@@ -267,6 +281,23 @@ public class NameManager
 	}
 
 	public String getTypeNameHint(@NonNull Type aType) {
+		if (aType instanceof CollectionType) {
+			if (aType instanceof OrderedSetType) {
+				return ORDERED_SET_NAME_HINT_PREFIX;
+			}
+			else if (aType instanceof SetType) {
+				return SET_NAME_HINT_PREFIX;
+			}
+			else if (aType instanceof SequenceType) {
+				return SEQUENCE_NAME_HINT_PREFIX;
+			}
+			else if (aType instanceof BagType) {
+				return BAG_NAME_HINT_PREFIX;
+			}
+			else {
+				return COLLECTION_NAME_HINT_PREFIX;
+			}
+		}
 		@SuppressWarnings("null") @NonNull String string = aType.toString();
 		return TYPE_NAME_HINT_PREFIX + getValidJavaIdentifier(string);
 	}
