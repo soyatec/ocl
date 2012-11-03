@@ -17,7 +17,7 @@
 [comment encoding = UTF-8 /]
 [module org::eclipse::ocl::examples::codegen::common::expressionTemplates('http://www.eclipse.org/ocl/3.1.0/Pivot','http://www.eclipse.org/emf/2002/GenModel','http://www.eclipse.org/ocl/3.1.0/OCL4Acceleo')/]
 
-[import org::eclipse::ocl::examples::codegen::common::constantTemplates/]
+[import org::eclipse::ocl::examples::codegen::common::constantQueries/]
 [import org::eclipse::ocl::examples::codegen::common::elementQueries/]
 [import org::eclipse::ocl::examples::codegen::common::emitQueries/]
 [import org::eclipse::ocl::examples::codegen::common::genPackageQueries/]
@@ -69,15 +69,14 @@ Object [ast.symbolName(expInOcl)/] = valueOf(unboxed_[ast.symbolName(expInOcl)/]
 
 [template public emitExpression(ast : CollectionItem, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [if (not ast.item.isConstant())]
-[ast.item.emitExpression(importer, genPackage, expInOcl)/]
-[/if]
+[ast.item.emitExpression(importer, genPackage, expInOcl)/][/if]
 [/template]
 
 [template public emitExpression(ast : CollectionLiteralExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ? (not ast.isConstant())]
 [for (part : CollectionLiteralPart | ast.part->reject(isConstantCollectionLiteralPart()))]
 [part.emitExpression(importer, genPackage, expInOcl)/]
 [/for]
-[ast.emitLiteral(genPackage, expInOcl, false)/]
+@NonNull Object [ast.symbolName(expInOcl)/] = standardLibrary.create[ast.kind.toString()/]ValueOf([ast.type.typeId(expInOcl)/][for (part : CollectionLiteralPart | ast.part)], [(if part.oclIsKindOf(CollectionItem) then part.oclAsType(CollectionItem).item.symbolName(expInOcl) else 'createRange((<%IntegerValue%>)'+part.oclAsType(CollectionRange).first.symbolName(expInOcl)+', (<%IntegerValue%>)'+part.oclAsType(CollectionRange).last.symbolName(expInOcl)+')' endif)/][/for]);
 [/template]
 
 [template public emitExpression(ast : CollectionRange, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
@@ -121,6 +120,9 @@ else if ([ast.condition.symbolName(expInOcl)/] == <%ValuesUtil%>.FALSE_VALUE) {
 else {
 	throw new <%InvalidValueException%>("non-Boolean if condition");
 }[/let][/template]
+
+[template public emitExpression(ast : InvalidLiteralExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
+Object [ast.symbolName(expInOcl)/] = throwInvalidValueException();[/template]
 
 [template public emitExpression(ast : IterateExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [let arity : OCLInteger = ast.iterator->size()]
@@ -231,26 +233,22 @@ final Object [ast.symbolName(expInOcl)/] = [ast._in.symbolName(expInOcl)/];[/tem
 
 [template public emitExpression(ast : OperationCallExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ? ((ast.referredOperation.owningType.name = 'Boolean') and (ast.referredOperation.ownedParameter->size() = 1))]
 [let astName : String = ast.symbolName(expInOcl)]
-[if (not ast.source.isConstant())]
-Object left[astName/];
+[if (not ast.source.isConstant() and not ast.source.oclIsKindOf(VariableExp))]
+Object [ast.source.symbolName(expInOcl)/];
 try {
 	[ast.source.emitExpression(importer, genPackage, expInOcl)/]
-	left[astName/] = [ast.source.symbolName(expInOcl)/];
 } [ast.resetFlags()/]catch (Exception e) {
-	left[astName/] = new <%InvalidValueImpl%>(e);
+	[ast.source.symbolName(expInOcl)/] = new <%InvalidValueImpl%>(e);
 }
-Object [ast.source.symbolName(expInOcl)/] = left[astName/];
 [/if]
 [let right : OCLExpression = ast.argument->at(1)]
-[if (not right.isConstant())]
-Object right[astName/];
+[if (not right.isConstant() and not right.oclIsKindOf(VariableExp))]
+Object [right.symbolName(expInOcl)/];
 try {
 	[right.emitExpression(importer, genPackage, expInOcl)/]
-	right[astName/] = [right.symbolName(expInOcl)/];
 } [ast.resetFlags()/]catch (Exception e) {
-	right[astName/] = new <%InvalidValueImpl%>(e);
+	[right.symbolName(expInOcl)/] = new <%InvalidValueImpl%>(e);
 }
-Object [right.symbolName(expInOcl)/] = right[astName/];
 [/if]
 [/let]
 [ast.generateCall(importer, genPackage, expInOcl)/][/let][/template]
@@ -293,6 +291,11 @@ Object [astName/] = dynamic_[astName/].evaluate(evaluator, [ast.type.typeId(expI
 [let tuplePartName : String = ast.referredProperty.name]
 [let tuplePartIndex : OCLInteger = tupleType.ownedAttribute.name->sortedBy(n|n)->indexOf(tuplePartName)]
 Object [ast.symbolName(expInOcl)/] = ((<%TupleValue%>)[ast.source.symbolName(expInOcl)/]).getValue([tuplePartIndex - 1/]);[/let][/let][/let]
+[elseif (ast.referredProperty.isStatic)]
+[let astName : String = ast.symbolName(expInOcl)]
+[let className : String = if ast.referredProperty.implementationClass <> null then '<%' + ast.referredProperty.implementationClass + '%>.INSTANCE' else genPackage.getImplementationName(ast.referredProperty) endif]
+Object [astName/] = [className/].evaluate(evaluator, [ast.type.typeId(expInOcl)/], [ast.source.symbolName(expInOcl)/]);
+[/let][/let]
 [else]
 if ([ast.source.symbolName(expInOcl)/] == null) { throw new <%InvalidValueException%>("Null property source"); }
 [ast.source.emitUnbox(ast, genPackage, expInOcl)/][genPackage.getEscapedPropertyType(ast.referredProperty)/] [ast.defineFlag('unboxed_' + ast.symbolName(expInOcl))/] = unboxed_[ast.source.symbolName(expInOcl)/].[genPackage.getPropertyGetter(ast.referredProperty)/]();
@@ -303,7 +306,7 @@ if ([ast.source.symbolName(expInOcl)/] == null) { throw new <%InvalidValueExcept
 [for (part : TupleLiteralPart | ast.part->reject(initExpression.isConstant()))]
 [part.initExpression.emitExpression(importer, genPackage, expInOcl)/]
 [/for]
-[ast.emitLiteral(genPackage, expInOcl, false)/][/template]
+<%TupleValue%> [ast.symbolName(expInOcl)/] = createTupleValue([ast.type.typeId(expInOcl)/][for (part : TupleLiteralPart | ast.part)], [part.initExpression.symbolName(expInOcl)/][/for]);[/template]
 
 [template public emitExpression(ast : TypeExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)][/template]
 

@@ -597,7 +597,11 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		else if (object.getClass().isArray()) {
 			try {
 				Object[] objects = (Object[])object;
-				TypeId elementTypeId = getIdResolver().getDynamicTypeOf(objects).getTypeId();
+				DomainType dynamicType = getIdResolver().getDynamicTypeOf(objects);
+				if (dynamicType == null) {
+					dynamicType = getOclInvalidType();
+				}
+				TypeId elementTypeId = dynamicType.getTypeId();
 				CollectionTypeId collectedTypeId = TypeId.SEQUENCE.getSpecializedId(elementTypeId);
 				return ValuesUtil.createSequenceValue(collectedTypeId, (Object[])object);
 			} 
@@ -605,7 +609,11 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		}
 		else if (object instanceof Iterable<?>) {
 			Iterable<?> objects = (Iterable<?>)object;
-			TypeId elementTypeId = getIdResolver().getDynamicTypeOf(objects).getTypeId();
+			DomainType dynamicType = getIdResolver().getDynamicTypeOf(objects);
+			if (dynamicType == null) {
+				dynamicType = getOclInvalidType();
+			}
+			TypeId elementTypeId = dynamicType.getTypeId();
 			CollectionTypeId collectedTypeId = TypeId.SEQUENCE.getSpecializedId(elementTypeId);
 			if ((object instanceof LinkedHashSet) || (object instanceof OrderedSet)) {
 				return ValuesUtil.createOrderedSetValue(collectedTypeId, objects);

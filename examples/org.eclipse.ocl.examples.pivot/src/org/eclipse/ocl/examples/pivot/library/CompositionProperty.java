@@ -34,9 +34,13 @@ import org.eclipse.ocl.examples.pivot.Type;
  */
 public class CompositionProperty extends AbstractProperty
 {
-	public static final @NonNull CompositionProperty INSTANCE = new CompositionProperty();
-
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @NonNull DomainProperty property) {
+	protected @NonNull DomainProperty property;
+	
+	public CompositionProperty(@NonNull DomainProperty property) {
+		this.property = property;
+	}
+	
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 		EObject eObject = asNavigableObject(sourceValue); 
 		Object eValue;
 		EClass eClass = eObject.eClass();

@@ -85,14 +85,12 @@
       </parameter>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Template" name="symbolName" visibility="Public">
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="X_"/>
       <body xsi:type="mtl:QueryInvocation">
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-        <definition href="nameQueries.emtl#/0/defineSymbolName"/>
+        <definition href="nameQueries.emtl#/0/getSymbolName"/>
         <argument xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/symbolName.3/ast">
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//InvalidLiteralExp"/>
-        </argument>
-        <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="Invalid">
-          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         </argument>
       </body>
       <parameter name="ast">
@@ -1353,22 +1351,22 @@
     </eAnnotations>
     <eAnnotations source="positions.26" references="/0/symbolName.3">
       <details key="start" value="1280"/>
-      <details key="end" value="1407"/>
+      <details key="end" value="1397"/>
       <details key="line" value="36"/>
     </eAnnotations>
     <eAnnotations source="positions.27" references="/0/symbolName.3/@body.0">
-      <details key="start" value="1363"/>
-      <details key="end" value="1394"/>
+      <details key="start" value="1362"/>
+      <details key="end" value="1364"/>
+      <details key="line" value="37"/>
+    </eAnnotations>
+    <eAnnotations source="positions.28" references="/0/symbolName.3/@body.1">
+      <details key="start" value="1365"/>
+      <details key="end" value="1384"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.28" references="/0/symbolName.3/@body.0/ast">
-      <details key="start" value="1363"/>
-      <details key="end" value="1366"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.29" references="/0/symbolName.3/@body.0/@argument.1">
-      <details key="start" value="1384"/>
-      <details key="end" value="1393"/>
+    <eAnnotations source="positions.29" references="/0/symbolName.3/@body.1/ast">
+      <details key="start" value="1365"/>
+      <details key="end" value="1368"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.30" references="/0/symbolName.3/ast">
@@ -1382,608 +1380,608 @@
       <details key="line" value="36"/>
     </eAnnotations>
     <eAnnotations source="positions.32" references="/0/symbolName.4">
-      <details key="start" value="1409"/>
-      <details key="end" value="1530"/>
+      <details key="start" value="1399"/>
+      <details key="end" value="1520"/>
       <details key="line" value="39"/>
     </eAnnotations>
     <eAnnotations source="positions.33" references="/0/symbolName.4/@body.0">
-      <details key="start" value="1489"/>
-      <details key="end" value="1517"/>
+      <details key="start" value="1479"/>
+      <details key="end" value="1507"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.34" references="/0/symbolName.4/@body.0/ast">
-      <details key="start" value="1489"/>
-      <details key="end" value="1492"/>
+      <details key="start" value="1479"/>
+      <details key="end" value="1482"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.35" references="/0/symbolName.4/@body.0/@argument.1">
-      <details key="start" value="1510"/>
-      <details key="end" value="1516"/>
+      <details key="start" value="1500"/>
+      <details key="end" value="1506"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.36" references="/0/symbolName.4/ast">
-      <details key="start" value="1437"/>
-      <details key="end" value="1457"/>
+      <details key="start" value="1427"/>
+      <details key="end" value="1447"/>
       <details key="line" value="39"/>
     </eAnnotations>
     <eAnnotations source="positions.37" references="/0/symbolName.4/expInOcl">
-      <details key="start" value="1459"/>
-      <details key="end" value="1485"/>
+      <details key="start" value="1449"/>
+      <details key="end" value="1475"/>
       <details key="line" value="39"/>
     </eAnnotations>
     <eAnnotations source="positions.38" references="/0/symbolName.5">
-      <details key="start" value="1532"/>
-      <details key="end" value="1649"/>
+      <details key="start" value="1522"/>
+      <details key="end" value="1639"/>
       <details key="line" value="42"/>
     </eAnnotations>
     <eAnnotations source="positions.39" references="/0/symbolName.5/@body.0">
-      <details key="start" value="1606"/>
-      <details key="end" value="1608"/>
+      <details key="start" value="1596"/>
+      <details key="end" value="1598"/>
       <details key="line" value="43"/>
     </eAnnotations>
     <eAnnotations source="positions.40" references="/0/symbolName.5/@body.1">
-      <details key="start" value="1609"/>
-      <details key="end" value="1636"/>
+      <details key="start" value="1599"/>
+      <details key="end" value="1626"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.41" references="/0/symbolName.5/@body.1/expInOcl">
-      <details key="start" value="1609"/>
-      <details key="end" value="1617"/>
+      <details key="start" value="1599"/>
+      <details key="end" value="1607"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.42" references="/0/symbolName.5/@body.1/ast">
-      <details key="start" value="1632"/>
-      <details key="end" value="1635"/>
+      <details key="start" value="1622"/>
+      <details key="end" value="1625"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.43" references="/0/symbolName.5/ast">
-      <details key="start" value="1560"/>
-      <details key="end" value="1575"/>
+      <details key="start" value="1550"/>
+      <details key="end" value="1565"/>
       <details key="line" value="42"/>
     </eAnnotations>
     <eAnnotations source="positions.44" references="/0/symbolName.5/expInOcl">
-      <details key="start" value="1577"/>
-      <details key="end" value="1603"/>
+      <details key="start" value="1567"/>
+      <details key="end" value="1593"/>
       <details key="line" value="42"/>
     </eAnnotations>
     <eAnnotations source="positions.45" references="/0/symbolName.6">
-      <details key="start" value="1651"/>
-      <details key="end" value="1856"/>
+      <details key="start" value="1641"/>
+      <details key="end" value="1846"/>
       <details key="line" value="45"/>
     </eAnnotations>
     <eAnnotations source="positions.46" references="/0/symbolName.6/@body.0">
-      <details key="start" value="1724"/>
-      <details key="end" value="1845"/>
+      <details key="start" value="1714"/>
+      <details key="end" value="1835"/>
       <details key="line" value="46"/>
     </eAnnotations>
     <eAnnotations source="positions.47" references="/0/symbolName.6/@body.0/@body.0">
-      <details key="start" value="1769"/>
-      <details key="end" value="1771"/>
+      <details key="start" value="1759"/>
+      <details key="end" value="1761"/>
       <details key="line" value="47"/>
     </eAnnotations>
     <eAnnotations source="positions.48" references="/0/symbolName.6/@body.0/@body.1">
-      <details key="start" value="1772"/>
-      <details key="end" value="1799"/>
+      <details key="start" value="1762"/>
+      <details key="end" value="1789"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.49" references="/0/symbolName.6/@body.0/@body.1/expInOcl">
-      <details key="start" value="1772"/>
-      <details key="end" value="1780"/>
+      <details key="start" value="1762"/>
+      <details key="end" value="1770"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.50" references="/0/symbolName.6/@body.0/@body.1/ast">
-      <details key="start" value="1795"/>
-      <details key="end" value="1798"/>
+      <details key="start" value="1785"/>
+      <details key="end" value="1788"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.51" references="/0/symbolName.6/@body.0/@ifExpr">
-      <details key="start" value="1728"/>
-      <details key="end" value="1767"/>
+      <details key="start" value="1718"/>
+      <details key="end" value="1757"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.52" references="/0/symbolName.6/@body.0/@ifExpr/@source">
-      <details key="start" value="1728"/>
-      <details key="end" value="1744"/>
+      <details key="start" value="1718"/>
+      <details key="end" value="1734"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.53" references="/0/symbolName.6/@body.0/@ifExpr/@source/ast">
-      <details key="start" value="1728"/>
-      <details key="end" value="1731"/>
+      <details key="start" value="1718"/>
+      <details key="end" value="1721"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.54" references="/0/symbolName.6/@body.0/@ifExpr/@argument.0">
-      <details key="start" value="1757"/>
-      <details key="end" value="1766"/>
+      <details key="start" value="1747"/>
+      <details key="end" value="1756"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.55" references="/0/symbolName.6/@body.0/@else">
-      <details key="start" value="1801"/>
-      <details key="end" value="1840"/>
+      <details key="start" value="1791"/>
+      <details key="end" value="1830"/>
       <details key="line" value="47"/>
     </eAnnotations>
     <eAnnotations source="positions.56" references="/0/symbolName.6/@body.0/@else/@body.0">
-      <details key="start" value="1808"/>
-      <details key="end" value="1810"/>
+      <details key="start" value="1798"/>
+      <details key="end" value="1800"/>
       <details key="line" value="48"/>
     </eAnnotations>
     <eAnnotations source="positions.57" references="/0/symbolName.6/@body.0/@else/@body.1">
-      <details key="start" value="1811"/>
-      <details key="end" value="1838"/>
+      <details key="start" value="1801"/>
+      <details key="end" value="1828"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.58" references="/0/symbolName.6/@body.0/@else/@body.1/expInOcl">
-      <details key="start" value="1811"/>
-      <details key="end" value="1819"/>
+      <details key="start" value="1801"/>
+      <details key="end" value="1809"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.59" references="/0/symbolName.6/@body.0/@else/@body.1/ast">
-      <details key="start" value="1834"/>
-      <details key="end" value="1837"/>
+      <details key="start" value="1824"/>
+      <details key="end" value="1827"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.60" references="/0/symbolName.6/ast">
-      <details key="start" value="1679"/>
-      <details key="end" value="1693"/>
+      <details key="start" value="1669"/>
+      <details key="end" value="1683"/>
       <details key="line" value="45"/>
     </eAnnotations>
     <eAnnotations source="positions.61" references="/0/symbolName.6/expInOcl">
-      <details key="start" value="1695"/>
-      <details key="end" value="1721"/>
+      <details key="start" value="1685"/>
+      <details key="end" value="1711"/>
       <details key="line" value="45"/>
     </eAnnotations>
     <eAnnotations source="positions.62" references="/0/symbolName.7">
-      <details key="start" value="1858"/>
-      <details key="end" value="2064"/>
+      <details key="start" value="1848"/>
+      <details key="end" value="2054"/>
       <details key="line" value="50"/>
     </eAnnotations>
     <eAnnotations source="positions.63" references="/0/symbolName.7/@body.0">
-      <details key="start" value="1937"/>
-      <details key="end" value="1939"/>
+      <details key="start" value="1927"/>
+      <details key="end" value="1929"/>
       <details key="line" value="51"/>
     </eAnnotations>
     <eAnnotations source="positions.64" references="/0/symbolName.7/@body.1">
-      <details key="start" value="1940"/>
-      <details key="end" value="2051"/>
+      <details key="start" value="1930"/>
+      <details key="end" value="2041"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.65" references="/0/symbolName.7/@body.1/@source">
-      <details key="start" value="1940"/>
-      <details key="end" value="2022"/>
+      <details key="start" value="1930"/>
+      <details key="end" value="2012"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.66" references="/0/symbolName.7/@body.1/@source/@source">
-      <details key="start" value="1940"/>
-      <details key="end" value="1993"/>
+      <details key="start" value="1930"/>
+      <details key="end" value="1983"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.67" references="/0/symbolName.7/@body.1/@source/@source/@source">
-      <details key="start" value="1940"/>
-      <details key="end" value="1964"/>
+      <details key="start" value="1930"/>
+      <details key="end" value="1954"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.68" references="/0/symbolName.7/@body.1/@source/@source/@source/ast">
-      <details key="start" value="1940"/>
-      <details key="end" value="1943"/>
+      <details key="start" value="1930"/>
+      <details key="end" value="1933"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.69" references="/0/symbolName.7/@body.1/@source/@source/@argument.0">
-      <details key="start" value="1976"/>
-      <details key="end" value="1981"/>
+      <details key="start" value="1966"/>
+      <details key="end" value="1971"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.70" references="/0/symbolName.7/@body.1/@source/@source/@argument.1">
-      <details key="start" value="1983"/>
-      <details key="end" value="1992"/>
+      <details key="start" value="1973"/>
+      <details key="end" value="1982"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.71" references="/0/symbolName.7/@body.1/@source/@argument.0">
-      <details key="start" value="2005"/>
-      <details key="end" value="2010"/>
+      <details key="start" value="1995"/>
+      <details key="end" value="2000"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.72" references="/0/symbolName.7/@body.1/@source/@argument.1">
-      <details key="start" value="2012"/>
-      <details key="end" value="2021"/>
+      <details key="start" value="2002"/>
+      <details key="end" value="2011"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.73" references="/0/symbolName.7/@body.1/@argument.0">
-      <details key="start" value="2034"/>
-      <details key="end" value="2039"/>
+      <details key="start" value="2024"/>
+      <details key="end" value="2029"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.74" references="/0/symbolName.7/@body.1/@argument.1">
-      <details key="start" value="2041"/>
-      <details key="end" value="2050"/>
+      <details key="start" value="2031"/>
+      <details key="end" value="2040"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.75" references="/0/symbolName.7/ast">
-      <details key="start" value="1886"/>
-      <details key="end" value="1906"/>
+      <details key="start" value="1876"/>
+      <details key="end" value="1896"/>
       <details key="line" value="50"/>
     </eAnnotations>
     <eAnnotations source="positions.76" references="/0/symbolName.7/expInOcl">
-      <details key="start" value="1908"/>
-      <details key="end" value="1934"/>
+      <details key="start" value="1898"/>
+      <details key="end" value="1924"/>
       <details key="line" value="50"/>
     </eAnnotations>
     <eAnnotations source="positions.77" references="/0/symbolName.8">
-      <details key="start" value="2066"/>
-      <details key="end" value="2203"/>
+      <details key="start" value="2056"/>
+      <details key="end" value="2193"/>
       <details key="line" value="53"/>
     </eAnnotations>
     <eAnnotations source="positions.78" references="/0/symbolName.8/@body.0">
-      <details key="start" value="2147"/>
-      <details key="end" value="2149"/>
+      <details key="start" value="2137"/>
+      <details key="end" value="2139"/>
       <details key="line" value="54"/>
     </eAnnotations>
     <eAnnotations source="positions.79" references="/0/symbolName.8/@body.1">
-      <details key="start" value="2150"/>
-      <details key="end" value="2190"/>
+      <details key="start" value="2140"/>
+      <details key="end" value="2180"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.80" references="/0/symbolName.8/@body.1/expInOcl">
-      <details key="start" value="2150"/>
-      <details key="end" value="2158"/>
+      <details key="start" value="2140"/>
+      <details key="end" value="2148"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.81" references="/0/symbolName.8/@body.1/@argument.1">
-      <details key="start" value="2173"/>
-      <details key="end" value="2189"/>
+      <details key="start" value="2163"/>
+      <details key="end" value="2179"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.82" references="/0/symbolName.8/@body.1/@argument.1/ast">
-      <details key="start" value="2173"/>
-      <details key="end" value="2176"/>
+      <details key="start" value="2163"/>
+      <details key="end" value="2166"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.83" references="/0/symbolName.8/ast">
-      <details key="start" value="2094"/>
-      <details key="end" value="2116"/>
+      <details key="start" value="2084"/>
+      <details key="end" value="2106"/>
       <details key="line" value="53"/>
     </eAnnotations>
     <eAnnotations source="positions.84" references="/0/symbolName.8/expInOcl">
-      <details key="start" value="2118"/>
-      <details key="end" value="2144"/>
+      <details key="start" value="2108"/>
+      <details key="end" value="2134"/>
       <details key="line" value="53"/>
     </eAnnotations>
     <eAnnotations source="positions.85" references="/0/symbolName.9">
-      <details key="start" value="2205"/>
-      <details key="end" value="2329"/>
+      <details key="start" value="2195"/>
+      <details key="end" value="2319"/>
       <details key="line" value="56"/>
     </eAnnotations>
     <eAnnotations source="positions.86" references="/0/symbolName.9/@body.0">
-      <details key="start" value="2286"/>
-      <details key="end" value="2288"/>
+      <details key="start" value="2276"/>
+      <details key="end" value="2278"/>
       <details key="line" value="57"/>
     </eAnnotations>
     <eAnnotations source="positions.87" references="/0/symbolName.9/@body.1">
-      <details key="start" value="2289"/>
-      <details key="end" value="2316"/>
+      <details key="start" value="2279"/>
+      <details key="end" value="2306"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.88" references="/0/symbolName.9/@body.1/expInOcl">
-      <details key="start" value="2289"/>
-      <details key="end" value="2297"/>
+      <details key="start" value="2279"/>
+      <details key="end" value="2287"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.89" references="/0/symbolName.9/@body.1/ast">
-      <details key="start" value="2312"/>
-      <details key="end" value="2315"/>
+      <details key="start" value="2302"/>
+      <details key="end" value="2305"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.90" references="/0/symbolName.9/ast">
-      <details key="start" value="2233"/>
-      <details key="end" value="2255"/>
+      <details key="start" value="2223"/>
+      <details key="end" value="2245"/>
       <details key="line" value="56"/>
     </eAnnotations>
     <eAnnotations source="positions.91" references="/0/symbolName.9/expInOcl">
-      <details key="start" value="2257"/>
-      <details key="end" value="2283"/>
+      <details key="start" value="2247"/>
+      <details key="end" value="2273"/>
       <details key="line" value="56"/>
     </eAnnotations>
     <eAnnotations source="positions.92" references="/0/symbolName.10">
-      <details key="start" value="2331"/>
-      <details key="end" value="2448"/>
+      <details key="start" value="2321"/>
+      <details key="end" value="2438"/>
       <details key="line" value="59"/>
     </eAnnotations>
     <eAnnotations source="positions.93" references="/0/symbolName.10/@body.0">
-      <details key="start" value="2405"/>
-      <details key="end" value="2407"/>
+      <details key="start" value="2395"/>
+      <details key="end" value="2397"/>
       <details key="line" value="60"/>
     </eAnnotations>
     <eAnnotations source="positions.94" references="/0/symbolName.10/@body.1">
-      <details key="start" value="2408"/>
-      <details key="end" value="2435"/>
+      <details key="start" value="2398"/>
+      <details key="end" value="2425"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.95" references="/0/symbolName.10/@body.1/expInOcl">
-      <details key="start" value="2408"/>
-      <details key="end" value="2416"/>
+      <details key="start" value="2398"/>
+      <details key="end" value="2406"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.96" references="/0/symbolName.10/@body.1/ast">
-      <details key="start" value="2431"/>
-      <details key="end" value="2434"/>
+      <details key="start" value="2421"/>
+      <details key="end" value="2424"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.97" references="/0/symbolName.10/ast">
-      <details key="start" value="2359"/>
-      <details key="end" value="2374"/>
+      <details key="start" value="2349"/>
+      <details key="end" value="2364"/>
       <details key="line" value="59"/>
     </eAnnotations>
     <eAnnotations source="positions.98" references="/0/symbolName.10/expInOcl">
-      <details key="start" value="2376"/>
-      <details key="end" value="2402"/>
+      <details key="start" value="2366"/>
+      <details key="end" value="2392"/>
       <details key="line" value="59"/>
     </eAnnotations>
     <eAnnotations source="positions.99" references="/0/symbolName.11">
-      <details key="start" value="2450"/>
-      <details key="end" value="2562"/>
+      <details key="start" value="2440"/>
+      <details key="end" value="2552"/>
       <details key="line" value="62"/>
     </eAnnotations>
     <eAnnotations source="positions.100" references="/0/symbolName.11/@body.0">
-      <details key="start" value="2519"/>
-      <details key="end" value="2521"/>
+      <details key="start" value="2509"/>
+      <details key="end" value="2511"/>
       <details key="line" value="63"/>
     </eAnnotations>
     <eAnnotations source="positions.101" references="/0/symbolName.11/@body.1">
-      <details key="start" value="2522"/>
-      <details key="end" value="2549"/>
+      <details key="start" value="2512"/>
+      <details key="end" value="2539"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.102" references="/0/symbolName.11/@body.1/expInOcl">
-      <details key="start" value="2522"/>
-      <details key="end" value="2530"/>
+      <details key="start" value="2512"/>
+      <details key="end" value="2520"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.103" references="/0/symbolName.11/@body.1/ast">
-      <details key="start" value="2545"/>
-      <details key="end" value="2548"/>
+      <details key="start" value="2535"/>
+      <details key="end" value="2538"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.104" references="/0/symbolName.11/ast">
-      <details key="start" value="2478"/>
-      <details key="end" value="2488"/>
+      <details key="start" value="2468"/>
+      <details key="end" value="2478"/>
       <details key="line" value="62"/>
     </eAnnotations>
     <eAnnotations source="positions.105" references="/0/symbolName.11/expInOcl">
-      <details key="start" value="2490"/>
-      <details key="end" value="2516"/>
+      <details key="start" value="2480"/>
+      <details key="end" value="2506"/>
       <details key="line" value="62"/>
     </eAnnotations>
     <eAnnotations source="positions.106" references="/0/symbolName.12">
-      <details key="start" value="2564"/>
-      <details key="end" value="2679"/>
+      <details key="start" value="2554"/>
+      <details key="end" value="2669"/>
       <details key="line" value="65"/>
     </eAnnotations>
     <eAnnotations source="positions.107" references="/0/symbolName.12/@body.0">
-      <details key="start" value="2637"/>
-      <details key="end" value="2666"/>
+      <details key="start" value="2627"/>
+      <details key="end" value="2656"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.108" references="/0/symbolName.12/@body.0/@argument.0">
-      <details key="start" value="2637"/>
-      <details key="end" value="2645"/>
+      <details key="start" value="2627"/>
+      <details key="end" value="2635"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.109" references="/0/symbolName.12/@body.0/@argument.0/ast">
-      <details key="start" value="2637"/>
-      <details key="end" value="2640"/>
+      <details key="start" value="2627"/>
+      <details key="end" value="2630"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.110" references="/0/symbolName.12/@body.0/expInOcl">
-      <details key="start" value="2657"/>
-      <details key="end" value="2665"/>
+      <details key="start" value="2647"/>
+      <details key="end" value="2655"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.111" references="/0/symbolName.12/ast">
-      <details key="start" value="2592"/>
-      <details key="end" value="2605"/>
+      <details key="start" value="2582"/>
+      <details key="end" value="2595"/>
       <details key="line" value="65"/>
     </eAnnotations>
     <eAnnotations source="positions.112" references="/0/symbolName.12/expInOcl">
-      <details key="start" value="2607"/>
-      <details key="end" value="2633"/>
+      <details key="start" value="2597"/>
+      <details key="end" value="2623"/>
       <details key="line" value="65"/>
     </eAnnotations>
     <eAnnotations source="positions.113" references="/0/symbolName.13">
-      <details key="start" value="2681"/>
-      <details key="end" value="2871"/>
+      <details key="start" value="2671"/>
+      <details key="end" value="2861"/>
       <details key="line" value="68"/>
     </eAnnotations>
     <eAnnotations source="positions.114" references="/0/symbolName.13/@body.0">
-      <details key="start" value="2754"/>
-      <details key="end" value="2860"/>
+      <details key="start" value="2744"/>
+      <details key="end" value="2850"/>
       <details key="line" value="69"/>
     </eAnnotations>
     <eAnnotations source="positions.115" references="/0/symbolName.13/@body.0/@body.0">
-      <details key="start" value="2806"/>
-      <details key="end" value="2814"/>
+      <details key="start" value="2796"/>
+      <details key="end" value="2804"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.116" references="/0/symbolName.13/@body.0/@body.0/ast">
-      <details key="start" value="2806"/>
-      <details key="end" value="2809"/>
+      <details key="start" value="2796"/>
+      <details key="end" value="2799"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.117" references="/0/symbolName.13/@body.0/@ifExpr">
-      <details key="start" value="2758"/>
-      <details key="end" value="2803"/>
+      <details key="start" value="2748"/>
+      <details key="end" value="2793"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.118" references="/0/symbolName.13/@body.0/@ifExpr/@source">
-      <details key="start" value="2758"/>
-      <details key="end" value="2774"/>
+      <details key="start" value="2748"/>
+      <details key="end" value="2764"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.119" references="/0/symbolName.13/@body.0/@ifExpr/@source/ast">
-      <details key="start" value="2758"/>
-      <details key="end" value="2761"/>
+      <details key="start" value="2748"/>
+      <details key="end" value="2751"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.120" references="/0/symbolName.13/@body.0/@ifExpr/@argument.0">
-      <details key="start" value="2787"/>
-      <details key="end" value="2802"/>
+      <details key="start" value="2777"/>
+      <details key="end" value="2792"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.121" references="/0/symbolName.13/@body.0/@else">
-      <details key="start" value="2816"/>
-      <details key="end" value="2855"/>
+      <details key="start" value="2806"/>
+      <details key="end" value="2845"/>
       <details key="line" value="70"/>
     </eAnnotations>
     <eAnnotations source="positions.122" references="/0/symbolName.13/@body.0/@else/@body.0">
-      <details key="start" value="2823"/>
-      <details key="end" value="2825"/>
+      <details key="start" value="2813"/>
+      <details key="end" value="2815"/>
       <details key="line" value="71"/>
     </eAnnotations>
     <eAnnotations source="positions.123" references="/0/symbolName.13/@body.0/@else/@body.1">
-      <details key="start" value="2826"/>
-      <details key="end" value="2853"/>
+      <details key="start" value="2816"/>
+      <details key="end" value="2843"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.124" references="/0/symbolName.13/@body.0/@else/@body.1/expInOcl">
-      <details key="start" value="2826"/>
-      <details key="end" value="2834"/>
+      <details key="start" value="2816"/>
+      <details key="end" value="2824"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.125" references="/0/symbolName.13/@body.0/@else/@body.1/ast">
-      <details key="start" value="2849"/>
-      <details key="end" value="2852"/>
+      <details key="start" value="2839"/>
+      <details key="end" value="2842"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.126" references="/0/symbolName.13/ast">
-      <details key="start" value="2709"/>
-      <details key="end" value="2723"/>
+      <details key="start" value="2699"/>
+      <details key="end" value="2713"/>
       <details key="line" value="68"/>
     </eAnnotations>
     <eAnnotations source="positions.127" references="/0/symbolName.13/expInOcl">
-      <details key="start" value="2725"/>
-      <details key="end" value="2751"/>
+      <details key="start" value="2715"/>
+      <details key="end" value="2741"/>
       <details key="line" value="68"/>
     </eAnnotations>
     <eAnnotations source="positions.128" references="/0/symbolName.14">
-      <details key="start" value="2873"/>
-      <details key="end" value="3004"/>
+      <details key="start" value="2863"/>
+      <details key="end" value="2994"/>
       <details key="line" value="73"/>
     </eAnnotations>
     <eAnnotations source="positions.129" references="/0/symbolName.14/@body.0">
-      <details key="start" value="2950"/>
-      <details key="end" value="2991"/>
+      <details key="start" value="2940"/>
+      <details key="end" value="2981"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.130" references="/0/symbolName.14/@body.0/@argument.0">
-      <details key="start" value="2950"/>
-      <details key="end" value="2970"/>
+      <details key="start" value="2940"/>
+      <details key="end" value="2960"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.131" references="/0/symbolName.14/@body.0/@argument.0/ast">
-      <details key="start" value="2950"/>
-      <details key="end" value="2953"/>
+      <details key="start" value="2940"/>
+      <details key="end" value="2943"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.132" references="/0/symbolName.14/@body.0/expInOcl">
-      <details key="start" value="2982"/>
-      <details key="end" value="2990"/>
+      <details key="start" value="2972"/>
+      <details key="end" value="2980"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.133" references="/0/symbolName.14/ast">
-      <details key="start" value="2901"/>
-      <details key="end" value="2918"/>
+      <details key="start" value="2891"/>
+      <details key="end" value="2908"/>
       <details key="line" value="73"/>
     </eAnnotations>
     <eAnnotations source="positions.134" references="/0/symbolName.14/expInOcl">
-      <details key="start" value="2920"/>
-      <details key="end" value="2946"/>
+      <details key="start" value="2910"/>
+      <details key="end" value="2936"/>
       <details key="line" value="73"/>
     </eAnnotations>
     <eAnnotations source="positions.135" references="/0/symbolName.15">
-      <details key="start" value="3006"/>
-      <details key="end" value="3258"/>
+      <details key="start" value="2996"/>
+      <details key="end" value="3248"/>
       <details key="line" value="76"/>
     </eAnnotations>
     <eAnnotations source="positions.136" references="/0/symbolName.15/@body.0">
-      <details key="start" value="3097"/>
-      <details key="end" value="3246"/>
+      <details key="start" value="3087"/>
+      <details key="end" value="3236"/>
       <details key="line" value="77"/>
     </eAnnotations>
     <eAnnotations source="positions.137" references="/0/symbolName.15/@body.0/@body.0">
-      <details key="start" value="3139"/>
-      <details key="end" value="3172"/>
+      <details key="start" value="3129"/>
+      <details key="end" value="3162"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.138" references="/0/symbolName.15/@body.0/@body.0/ast">
-      <details key="start" value="3139"/>
-      <details key="end" value="3142"/>
+      <details key="start" value="3129"/>
+      <details key="end" value="3132"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.139" references="/0/symbolName.15/@body.0/@body.0/@argument.1">
-      <details key="start" value="3160"/>
-      <details key="end" value="3171"/>
+      <details key="start" value="3150"/>
+      <details key="end" value="3161"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.140" references="/0/symbolName.15/@body.0/@ifExpr">
-      <details key="start" value="3101"/>
-      <details key="end" value="3136"/>
+      <details key="start" value="3091"/>
+      <details key="end" value="3126"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.141" references="/0/symbolName.15/@body.0/@ifExpr/@source">
-      <details key="start" value="3102"/>
-      <details key="end" value="3130"/>
+      <details key="start" value="3092"/>
+      <details key="end" value="3120"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.142" references="/0/symbolName.15/@body.0/@ifExpr/@source/ast">
-      <details key="start" value="3102"/>
-      <details key="end" value="3105"/>
+      <details key="start" value="3092"/>
+      <details key="end" value="3095"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.143" references="/0/symbolName.15/@body.0/@ifExpr/@argument.0">
-      <details key="start" value="3133"/>
-      <details key="end" value="3135"/>
+      <details key="start" value="3123"/>
+      <details key="end" value="3125"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.144" references="/0/symbolName.15/@body.0/@else">
-      <details key="start" value="3174"/>
-      <details key="end" value="3241"/>
+      <details key="start" value="3164"/>
+      <details key="end" value="3231"/>
       <details key="line" value="78"/>
     </eAnnotations>
     <eAnnotations source="positions.145" references="/0/symbolName.15/@body.0/@else/@body.0">
-      <details key="start" value="3182"/>
-      <details key="end" value="3239"/>
+      <details key="start" value="3172"/>
+      <details key="end" value="3229"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.146" references="/0/symbolName.15/@body.0/@else/@body.0/ast">
-      <details key="start" value="3182"/>
-      <details key="end" value="3185"/>
+      <details key="start" value="3172"/>
+      <details key="end" value="3175"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.147" references="/0/symbolName.15/@body.0/@else/@body.0/@argument.1">
-      <details key="start" value="3203"/>
-      <details key="end" value="3238"/>
+      <details key="start" value="3193"/>
+      <details key="end" value="3228"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.148" references="/0/symbolName.15/@body.0/@else/@body.0/@argument.1/@source">
-      <details key="start" value="3203"/>
-      <details key="end" value="3207"/>
+      <details key="start" value="3193"/>
+      <details key="end" value="3197"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.149" references="/0/symbolName.15/@body.0/@else/@body.0/@argument.1/@argument.0">
-      <details key="start" value="3210"/>
-      <details key="end" value="3238"/>
+      <details key="start" value="3200"/>
+      <details key="end" value="3228"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.150" references="/0/symbolName.15/@body.0/@else/@body.0/@argument.1/@argument.0/ast">
-      <details key="start" value="3210"/>
-      <details key="end" value="3213"/>
+      <details key="start" value="3200"/>
+      <details key="end" value="3203"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.151" references="/0/symbolName.15/ast">
-      <details key="start" value="3034"/>
-      <details key="end" value="3066"/>
+      <details key="start" value="3024"/>
+      <details key="end" value="3056"/>
       <details key="line" value="76"/>
     </eAnnotations>
     <eAnnotations source="positions.152" references="/0/symbolName.15/expInOcl">
-      <details key="start" value="3068"/>
-      <details key="end" value="3094"/>
+      <details key="start" value="3058"/>
+      <details key="end" value="3084"/>
       <details key="line" value="76"/>
     </eAnnotations>
   </ecore:EAnnotation>

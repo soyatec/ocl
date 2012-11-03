@@ -15,8 +15,9 @@
  * $Id$
  **/]
 [comment encoding = UTF-8 /]
-[module org::eclipse::ocl::examples::codegen::common::constantTemplates('http://www.eclipse.org/ocl/3.1.0/Pivot','http://www.eclipse.org/emf/2002/GenModel')/]
+[module org::eclipse::ocl::examples::codegen::common::constantTemplates('http://www.eclipse.org/ocl/3.1.0/Pivot','http://www.eclipse.org/emf/2002/GenModel','http://www.eclipse.org/ocl/3.1.0/OCL4Acceleo')/]
 
+[import org::eclipse::ocl::examples::codegen::common::constantQueries/]
 [import org::eclipse::ocl::examples::codegen::common::elementQueries/]
 [import org::eclipse::ocl::examples::codegen::common::emitQueries/]
 [import org::eclipse::ocl::examples::codegen::common::genPackageQueries/]
@@ -26,6 +27,7 @@
 [import org::eclipse::ocl::examples::codegen::common::stringQueries/]
 [import org::eclipse::ocl::examples::codegen::common::symbolTemplates/]
 [import org::eclipse::ocl::examples::codegen::common::typeIdTemplates/]
+[import org::eclipse::ocl::examples::codegen::common::valueQueries/]
 
 [template public emitConstants(expInOcl : ExpressionInOCL, genPackage : GenPackage)]
 [let constants : String = expInOcl.bodyExpression.emitConstants(genPackage, expInOcl)]
@@ -35,9 +37,13 @@
 
 [template public gatherConstants(ast : Element, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [ast.emitConstants(genPackage, expInOcl)/]
-[for (pElement : Element | ast.eAllContents()->filter(Element))]
+[let allElements : Sequence(Element) = ast.eAllContents()->filter(Element)]
+[debug(allElements, 'allElements')/]
+[let allCandidates : Sequence(Element) = allElements->reject(oclIsKindOf(CollectionLiteralPart) or oclIsKindOf(TupleLiteralPart) or let container : OclAny = eContainer() in container.oclIsKindOf(CollectionLiteralPart) or container.oclIsKindOf(TupleLiteralPart))]
+[debug(allCandidates, 'allCandidates')/]
+[for (pElement : Element | allCandidates)]
 [pElement.emitConstants(genPackage, expInOcl)/]
-[/for]
+[/for][/let][/let]
 [/template]
 
 [template public emitConstants(dummy : OclAny, constants : String)]
@@ -48,13 +54,13 @@
 
 [template public emitNonStatics(dummy : OclAny, constants : String)]
 [let uniqueConstants : OrderedSet(String) = constants.tokenize('\n').trim()->excluding('')->asOrderedSet()]
-[for (uniqueConstant : String | uniqueConstants->reject(startsWith('static')))]
+[for (uniqueConstant : String | uniqueConstants->reject(indexOf('static ') > 0))]
 [uniqueConstant/]
 [/for][/let][/template]
 
 [template public emitStatics(dummy : OclAny, constants : String)]
 [let uniqueConstants : OrderedSet(String) = constants.tokenize('\n').trim()->excluding('')->asOrderedSet()]
-[for (uniqueConstant : String | uniqueConstants->select(startsWith('static')))]
+[for (uniqueConstant : String | uniqueConstants->select(indexOf('static ') > 0))]
 [uniqueConstant/]
 [/for][/let][/template]
 
@@ -68,28 +74,33 @@ static final @NonNull <%CollectionTypeId%> [ast.symbolName(expInOcl)/] = <%TypeI
 static final @NonNull Object [ast.symbolName(expInOcl)/] = [if (ast.booleanSymbol)]true[else]false[/if];
 [/template]
 
-[template protected emitConstants(ast : CollectionLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL) ? ((ast.part->size() = 1) and (ast.part->filter(CollectionRange)->size() = 1))]
-[ast.type.emitConstants(genPackage, expInOcl)/]
-[if (ast.isConstantCollectionLiteralExp())]
-[for (part : CollectionLiteralPart | ast.part)]
-[part.emitConstants(genPackage, expInOcl)/]
-[/for]
-[ast.emitLiteral(genPackage, expInOcl, true)/]
-[/if]
-[/template]
-
-[template protected emitConstants(ast : CollectionLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL) ? ((ast.part->size() <> 1) or (ast.part->filter(CollectionRange)->size() <> 1))]
-[ast.type.emitConstants(genPackage, expInOcl)/]
-[if (ast.isConstantCollectionLiteralExp())]
-[for (part : CollectionLiteralPart | ast.part)]
-[part.emitConstants(genPackage, expInOcl)/]
-[/for]
-[ast.emitLiteral(genPackage, expInOcl, true)/]
-[/if]
-[/template]
-
 [template protected emitConstants(ast : CollectionItem, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [ast.item.emitConstants(genPackage, expInOcl)/]
+[/template]
+
+[template protected emitConstants(ast : CollectionLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
+[ast.type.emitConstants(genPackage, expInOcl)/]
+[if (not ast.isConstantCollectionLiteralExp())]
+[for (part : CollectionLiteralPart | ast.part)]
+[part.emitConstants(genPackage, expInOcl)/]
+[/for]
+[debug(ast, 'nonConstant')/]
+[elseif ((ast.part->size() = 1) and ast.type.oclIsKindOf(SequenceType) and ast.part->at(1).oclIsKindOf(CollectionRange))]
+[for (part : CollectionLiteralPart | ast.part)]
+[part.emitConstants(genPackage, expInOcl)/]
+[/for]
+[let range : CollectionRange = ast.part->at(1).oclAsType(CollectionRange)]
+[debug(ast, 'oneRange')/]
+static final @NonNull Object [ast.symbolName(expInOcl)/] = create[ast.kind.toString()/]Range([ast.type.typeId(expInOcl)/], createRange([range.first.symbolName(expInOcl)/], [range.last.symbolName(expInOcl)/]));[/let]
+[else]
+[let folded : CollectionLiteralExp = if ast.isFoldable() then ast.evaluate().oclAsType(CollectionLiteralExp) else ast endif]
+[debug(folded, 'folded')/]
+[for (part : CollectionLiteralPart | folded.part)]
+[debug(part, 'foldedPart')/]
+[part.emitConstants(genPackage, expInOcl)/]
+[/for]
+static final @NonNull Object [ast.symbolName(expInOcl)/] = create[folded.kind.toString()/]Value([folded.type.typeId(expInOcl)/][for (part : CollectionLiteralPart | folded.part)], [part.oclAsType(CollectionItem).item.symbolName(expInOcl)/][/for]);[/let]
+[/if]
 [/template]
 
 [template protected emitConstants(ast : CollectionRange, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
@@ -117,7 +128,6 @@ static final @NonNull <%IntegerValue%> [ast.symbolName(expInOcl)/] = integerValu
 [/template]
 
 [template protected emitConstants(ast : InvalidLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
-static final @NonNull <%InvalidValue%> [ast.symbolName(expInOcl)/] = INVALID_VALUE;
 [/template]
 
 [template protected emitConstants(ast : IterateExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
@@ -193,11 +203,11 @@ static final @NonNull Object [ast.symbolName(expInOcl)/] = "[ast.javaString()/]"
 [/template]
 
 [template protected emitConstants(ast : TupleLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
-[if (ast.isConstantTupleLiteralExp())]
 [for (part : TupleLiteralPart | ast.part)]
 [part.emitConstants(genPackage, expInOcl)/]
 [/for]
-[ast.emitLiteral(genPackage, expInOcl, true)/]
+[if (ast.isConstantTupleLiteralExp())]
+static final @NonNull <%TupleValue%> [ast.symbolName(expInOcl)/] = createTupleValue([ast.type.typeId(expInOcl)/][for (part : TupleLiteralPart | ast.part)], [part.initExpression.symbolName(expInOcl)/][/for]);
 [/if]
 [/template]
 
@@ -226,98 +236,6 @@ static final @NonNull <%IntegerValue%> [ast.symbolName(expInOcl)/] = integerValu
 [/if]
 [/template]
 
-[template public emitLiteral(ast : BagType, genPackage : GenPackage, expInOcl : ExpressionInOCL, isStatic : Boolean)]
-standardLibrary.getBagType([ast.elementType.emitLiteral(genPackage, expInOcl, isStatic)/])[/template]
-
-[template public emitLiteral(ast : Metaclass, genPackage : GenPackage, expInOcl : ExpressionInOCL, isStatic : Boolean)]
-standardLibrary.getMetaclass([ast.instanceType.emitLiteral(genPackage, expInOcl, isStatic)/])[/template]
-
-[template public emitLiteral(ast : CollectionItem, genPackage : GenPackage, expInOcl : ExpressionInOCL, isStatic : Boolean)]
-l[ast.eContainer().oclAsType(Element).symbolName(expInOcl)/].add([ast.item.symbolName(expInOcl)/]); // [ast.symbolName(expInOcl)/]
-[/template]
-
-[template public emitLiteral(ast : CollectionLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL, isStatic : Boolean) ? (ast.rangesAreUnused())]
-[let astName : String = ast.symbolName(expInOcl)]
-[if (isStatic)]static [/if]final @NonNull Object [astName/] = create[ast.kind.toString()/]Value([ast.type.typeId(expInOcl)/][for (part : CollectionItem | ast.part->filter(CollectionItem))], [part.item.symbolName(expInOcl)/][/for]);[/let][/template]
-
-[template public emitLiteral(ast : CollectionLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL, isStatic : Boolean) ? (ast.rangesAreSimple())]
-[let astName : String = ast.symbolName(expInOcl)]
-[let range : CollectionRange = ast.part->at(1).oclAsType(CollectionRange)]
-[if (isStatic)]static [/if]final @NonNull <%IntegerRange%> r[astName/] = createRange([range.first.symbolName(expInOcl)/].asIntegerValue(), [range.last.symbolName(expInOcl)/].asIntegerValue());
-[if (isStatic)]static [/if]final @NonNull Object [astName/] = create[ast.kind.toString()/]Range([ast.type.typeId(expInOcl)/], r[astName/]);[/let][/let][/template]
-
-[template public emitLiteral(ast : CollectionLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL, isStatic : Boolean) ? (not ast.rangesAreUnused() and not ast.rangesAreSimple())]
-[let astName : String = ast.symbolName(expInOcl)]
-[if (isStatic)]static [/if]final @NonNull <%java.util.List%><Object> l[astName/] = new <%java.util.ArrayList%><Object>();
-[for (part : CollectionLiteralPart | ast.part)]
-[part.emitLiteral(genPackage, expInOcl, isStatic)/]
-[/for]
-[if (isStatic)]static [/if]final @NonNull Object [astName/] = standardLibrary.create[ast.kind.toString()/]ValueOf([ast.type.typeId(expInOcl)/], l[astName/]);
-[/let][/template]
-
-[template public emitLiteral(ast : CollectionLiteralPart, genPackage : GenPackage, expInOcl : ExpressionInOCL, isStatic : Boolean)][/template]
-
-[template public emitLiteral(ast : CollectionRange, genPackage : GenPackage, expInOcl : ExpressionInOCL, isStatic : Boolean)]
-for (long [ast.symbolName(expInOcl)/] = [ast.first.symbolName(expInOcl)/].asInteger(), z[ast.symbolName(expInOcl)/] = [ast.last.symbolName(expInOcl)/].asInteger(); [ast.symbolName(expInOcl)/] <= z[ast.symbolName(expInOcl)/]; [ast.symbolName(expInOcl)/]++) {
-	l[ast.eContainer().oclAsType(Element).symbolName(expInOcl)/].add(integerValueOf([ast.symbolName(expInOcl)/]));
-} // [ast.symbolName(expInOcl)/]
-[/template]
-
-[template public emitLiteral(ast : OrderedSetType, genPackage : GenPackage, expInOcl : ExpressionInOCL, isStatic : Boolean)]
-standardLibrary.getOrderedSetType([ast.elementType.emitLiteral(genPackage, expInOcl, isStatic)/])[/template]
-
-[template public emitLiteral(ast : SequenceType, genPackage : GenPackage, expInOcl : ExpressionInOCL, isStatic : Boolean)]
-standardLibrary.getSequenceType([ast.elementType.emitLiteral(genPackage, expInOcl, isStatic)/])[/template]
-
-[template public emitLiteral(ast : SetType, genPackage : GenPackage, expInOcl : ExpressionInOCL, isStatic : Boolean)]
-standardLibrary.getType([ast.elementType.emitLiteral(genPackage, expInOcl, isStatic)/])[/template]
-
-[template public emitLiteral(ast : TupleLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL, isStatic : Boolean)]
-[let astName : String = ast.symbolName(expInOcl)]
-<%TupleValue%> [astName/] = createTupleValue([ast.type.typeId(expInOcl)/][for (part : TupleLiteralPart | ast.part)], [part.initExpression.symbolName(expInOcl)/][/for]);[/let][/template]
-
-[template public emitLiteral(ast : Type, genPackage : GenPackage, expInOcl : ExpressionInOCL, isStatic : Boolean)]
-[ast.emitQualifiedLiteralName(genPackage)/][/template]
-
 [template protected emitStandardLibrary(dummy : OclAny)]
 final @NonNull <%DomainStandardLibrary%> standardLibrary = evaluator.getStandardLibrary();
 [/template]
-
-[query public isConstant(ast : OCLExpression) : Boolean =
-if ast.oclIsKindOf(PrimitiveLiteralExp) then isConstantPrimitiveLiteralExp(ast.oclAsType(PrimitiveLiteralExp))
-else if ast.oclIsKindOf(CollectionLiteralExp) then isConstantCollectionLiteralExp(ast.oclAsType(CollectionLiteralExp))
-else if ast.oclIsKindOf(TupleLiteralExp) then isConstantTupleLiteralExp(ast.oclAsType(TupleLiteralExp))
-else if ast.oclIsKindOf(TypeExp) then isConstantTypeExp(ast.oclAsType(TypeExp))
-else false
-endif endif endif endif /]
-
-[query public isConstantCollectionItem(ast : CollectionItem) : Boolean =
-ast.item.isConstant() /]
-
-[query public isConstantCollectionLiteralExp(ast : CollectionLiteralExp) : Boolean =
-ast.part->forAll(isConstantCollectionLiteralPart()) /]
-
-[query public isConstantCollectionLiteralPart(ast : CollectionLiteralPart) : Boolean =
-if ast.oclIsKindOf(CollectionItem) then isConstantCollectionItem(ast.oclAsType(CollectionItem))
-else if ast.oclIsKindOf(CollectionRange) then isConstantCollectionRange(ast.oclAsType(CollectionRange))
-else false
-endif endif /]
-
-[query public isConstantCollectionRange(ast : CollectionRange) : Boolean =
-ast.first.isConstant() and ast.last.isConstant() /]
-
-[query public isConstantPrimitiveLiteralExp(ast : PrimitiveLiteralExp) : Boolean =
-true /]
-
-[query public isConstantTupleLiteralExp(ast : TupleLiteralExp) : Boolean =
-ast.part->forAll(isConstantTupleLiteralPart()) /]
-
-[query public isConstantTupleLiteralPart(ast : TupleLiteralPart) : Boolean =
-ast.initExpression.isConstant() /]
-
-[query public isConstantTypeExp(ast : TypeExp) : Boolean =
-true /]
-
-[query public rangesAreSimple(ast : CollectionLiteralExp) : Boolean = (ast.part->size() = 1) and (ast.part->filter(CollectionRange)->size() = 1)/]
-
-[query public rangesAreUnused(ast : CollectionLiteralExp) : Boolean = ast.part->filter(CollectionRange)->size() = 0/]

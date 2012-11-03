@@ -34,9 +34,14 @@ import org.eclipse.ocl.examples.pivot.Type;
  */
 public class ExplicitNavigationProperty extends AbstractProperty
 {
+	protected @NonNull DomainProperty property;
 	private EStructuralFeature eFeature = null;
 	
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @NonNull DomainProperty property) {
+	public ExplicitNavigationProperty(@NonNull DomainProperty property) {
+		this.property = property;
+	}
+	
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 		EObject eObject = asNavigableObject(sourceValue); 
 		EStructuralFeature eFeature2 = eFeature;
 		if (eFeature2 == null) {

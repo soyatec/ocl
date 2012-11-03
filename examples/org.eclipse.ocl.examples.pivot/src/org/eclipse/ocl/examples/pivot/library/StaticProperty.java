@@ -30,9 +30,13 @@ import org.eclipse.ocl.examples.domain.library.AbstractProperty;
  */
 public class StaticProperty extends AbstractProperty
 {
-	public static final @NonNull StaticProperty INSTANCE = new StaticProperty();
+	protected @NonNull DomainProperty property;
 	
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @NonNull DomainProperty property) {
+	public StaticProperty(@NonNull DomainProperty property) {
+		this.property = property;
+	}
+	
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 		DomainType type = property.getType(); 
 		if (type != null) {
 			return createTypeValue(type);

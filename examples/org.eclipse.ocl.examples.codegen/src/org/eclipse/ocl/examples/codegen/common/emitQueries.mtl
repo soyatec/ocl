@@ -17,8 +17,11 @@
 [comment encoding = UTF-8 /]
 [module org::eclipse::ocl::examples::codegen::common::emitQueries('http://www.eclipse.org/ocl/3.1.0/Pivot')/]
 
-[query public debug(element : OclAny) : String =
-invoke('org.eclipse.ocl.examples.codegen.common.EmitQueries', 'debug(java.lang.Object)', Sequence{element}) /]
+[query public debug(element : OclAny, debugContext : String) : String =
+invoke('org.eclipse.ocl.examples.codegen.common.EmitQueries', 'debug(java.lang.Object, java.lang.String)', Sequence{element, debugContext}) /]
+
+[query public evaluate(expression : OCLExpression) : OCLExpression =
+invoke('org.eclipse.ocl.examples.codegen.common.EmitQueries', 'evaluate(org.eclipse.ocl.examples.pivot.OCLExpression)', Sequence{expression}) /]
 
 [query public expandKnownImports(dummy : OclAny, knownImports : String, classText : String) : String =
 invoke('org.eclipse.ocl.examples.codegen.common.EmitQueries', 'expandKnownImports(java.lang.String, java.lang.String)', Sequence{knownImports, classText}) /]

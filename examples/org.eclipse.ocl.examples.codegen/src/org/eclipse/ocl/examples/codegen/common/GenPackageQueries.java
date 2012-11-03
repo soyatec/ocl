@@ -101,6 +101,9 @@ public class GenPackageQueries
 					return genFeature.getQualifiedObjectType(genClass);
 				}
 			}
+			else {
+				return "Object";
+			}
 		}
 		return "";
 	}
@@ -358,6 +361,9 @@ public class GenPackageQueries
 	
 	public String getPropertyGetter(@NonNull GenPackage genPackage, @NonNull Property property) {
 		Type owningType = property.getOwningType();
+		if (property.isStatic()) {
+//			owningType.getMetaTypeName()
+		}
 		if (owningType != null) {
 			GenClass genClass = getGenClass(genPackage, owningType);
 			if (genClass != null) {
@@ -365,6 +371,10 @@ public class GenPackageQueries
 				if (genFeature != null) {
 					return genFeature.getGetAccessor();
 				}
+			}
+			else {
+				String name = property.getName();
+				return "get" + name.substring(0,1).toUpperCase() + name.substring(1,name.length()-1);
 			}
 		}
 		return "";

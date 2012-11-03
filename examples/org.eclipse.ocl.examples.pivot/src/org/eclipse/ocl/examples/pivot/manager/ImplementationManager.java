@@ -138,10 +138,10 @@ public class ImplementationManager
 		}
 		Property opposite = property.getOpposite();
 		if ((opposite != null) && opposite.isComposite()) {
-			return CompositionProperty.INSTANCE;
+			return new CompositionProperty(property);
 		}
 		if (property.isImplicit()) {
-			return ImplicitNonCompositionProperty.INSTANCE;
+			return new ImplicitNonCompositionProperty(property);
 		}
 		else if (property.getOwningType() instanceof TupleType) {
 			TupleType tupleType = (TupleType)property.getOwningType();
@@ -152,10 +152,10 @@ public class ImplementationManager
 			return new TuplePartProperty(tuplePartId);
 		}
 		else if (property.isStatic()) {
-			return StaticProperty.INSTANCE;
+			return new StaticProperty(property);
 		}
 		else {
-			return new ExplicitNavigationProperty();
+			return new ExplicitNavigationProperty(property);
 		}
 	}
 	

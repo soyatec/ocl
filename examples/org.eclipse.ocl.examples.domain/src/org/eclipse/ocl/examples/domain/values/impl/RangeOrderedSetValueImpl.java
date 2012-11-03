@@ -47,9 +47,8 @@ public class RangeOrderedSetValueImpl extends OrderedSetValueImpl
 		}
 		else {
 			List<Object> elements = createElements();
-			if (!elements.contains(value)) {
-				elements.add(value);
-			}
+			elements.remove(value);
+			elements.add(value);
 			return createOrderedSetValue(getTypeId(), elements);
 		}
 	}

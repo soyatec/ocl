@@ -104,6 +104,9 @@ public class IdResolver implements IdVisitor<DomainElement>
 		if (value instanceof CollectionValue) {
 			CollectionValue collectionValue = (CollectionValue) value;
 			DomainType elementType = getDynamicTypeOf(collectionValue.iterable());
+			if (elementType == null) {
+				elementType = getType(collectionValue.getTypeId().getElementTypeId(), null);
+			}
 			CollectionTypeId collectedId = collectionValue.getTypeId();
 			CollectionTypeId collectionId = collectedId.getGeneralizedId();
 			TypeId elementTypeId = elementType.getTypeId();
@@ -115,10 +118,9 @@ public class IdResolver implements IdVisitor<DomainElement>
 		}
 	}
 	
-	public @NonNull DomainType getDynamicTypeOf(@NonNull Object... values) {
+	public @Nullable DomainType getDynamicTypeOf(@NonNull Object... values) {
 		DomainType elementType = null;
 		for (Object value : values) {
-			assert value != null;
 			DomainType valueType = getDynamicTypeOf(value);
 			if (elementType == null) {
 				elementType = valueType;
@@ -133,10 +135,9 @@ public class IdResolver implements IdVisitor<DomainElement>
 		return elementType;
 	}
 	
-	public @NonNull DomainType getDynamicTypeOf(@NonNull Iterable<?> values) {
+	public @Nullable DomainType getDynamicTypeOf(@NonNull Iterable<?> values) {
 		DomainType elementType = null;
 		for (Object value : values) {
-			assert value != null;
 			DomainType valueType = getDynamicTypeOf(value);
 			if (elementType == null) {
 				elementType = valueType;
@@ -144,9 +145,6 @@ public class IdResolver implements IdVisitor<DomainElement>
 			else {
 				elementType = elementType.getCommonType(standardLibrary, valueType);
 			}
-		}
-		if (elementType == null) {
-			elementType = standardLibrary.getOclInvalidType();
 		}
 		return elementType;
 	}

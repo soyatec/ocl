@@ -331,7 +331,7 @@ public class EmployeeBodies
 		/*
 		Employee.allInstances()->select(reportsTo(self))
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self, @NonNull DomainProperty property) throws Exception {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull Employee unboxed_self = (Employee)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -388,7 +388,7 @@ public class EmployeeBodies
 		/*
 		company.employees->select(manager = self)
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self, @NonNull DomainProperty property) throws Exception {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull Employee unboxed_self = (Employee)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -459,7 +459,7 @@ public class EmployeeBodies
 		/*
 		name <> null
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self, @NonNull DomainProperty property) throws Exception {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull Employee unboxed_self = (Employee)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
@@ -496,7 +496,7 @@ public class EmployeeBodies
 	else manager.reportingChain->prepend(manager)
 	endif
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self, @NonNull DomainProperty property) throws Exception {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull Employee unboxed_self = (Employee)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();

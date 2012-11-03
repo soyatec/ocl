@@ -39,12 +39,16 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
  */
 public class ImplicitNonCompositionProperty extends AbstractProperty
 {
-	public static final @NonNull ImplicitNonCompositionProperty INSTANCE = new ImplicitNonCompositionProperty();
-
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @NonNull DomainProperty thisProperty) {
+	protected @NonNull DomainProperty property;
+	
+	public ImplicitNonCompositionProperty(@NonNull DomainProperty property) {
+		this.property = property;
+	}
+	
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 		DomainModelManager modelManager = evaluator.getModelManager();
-		DomainProperty thatProperty = thisProperty.getOpposite();
-		DomainType thatType = DomainUtil.nonNullModel(thisProperty.getType());		
+		DomainProperty thatProperty = property.getOpposite();
+		DomainType thatType = DomainUtil.nonNullModel(property.getType());		
 		List<Object> results = new ArrayList<Object>();
 		for (EObject eObject : modelManager.get(thatType)) {	// FIXME Use a cache
 			EClass eClass = eObject.eClass();

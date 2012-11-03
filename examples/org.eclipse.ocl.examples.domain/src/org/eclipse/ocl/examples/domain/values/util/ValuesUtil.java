@@ -786,7 +786,7 @@ public abstract class ValuesUtil
 //			return ((Value)aValue).toString();
 //		}
 		else if (aValue instanceof String) {
-			stringValue = "'" + ((String)aValue).toString() + "'";
+			stringValue = "'" + ((String)aValue).toString() + "'";		// FIXME Escapes
 		}
 //		else if (aValue instanceof DomainType) {
 //			return String.valueOf(aValue);
@@ -813,6 +813,13 @@ public abstract class ValuesUtil
 		return stringValue != null ? stringValue : "<<null>>"; 
 	}
 
+	/**
+	 * Throw an InvalidValueException without subsequent code appearing to be unreachable.
+	 */
+	public static Object throwInvalidValueException() {
+		throw new InvalidValueException("invalid");
+	}
+	
 	public static void toString(@Nullable Object value, @NonNull StringBuilder s, int sizeLimit) {
 		if (value instanceof Value) {
 			((Value)value).toString(s, sizeLimit);

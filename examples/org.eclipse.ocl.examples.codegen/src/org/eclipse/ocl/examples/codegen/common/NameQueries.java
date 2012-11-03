@@ -541,7 +541,7 @@ public class NameQueries
 	}
 
 	public static String resetFlags(Object elem) {
-		System.out.println("resetFlags");
+//		System.out.println("resetFlags");
 		if (elem instanceof ExpressionInOCL) {
 			definedFlags.clear();
 		}

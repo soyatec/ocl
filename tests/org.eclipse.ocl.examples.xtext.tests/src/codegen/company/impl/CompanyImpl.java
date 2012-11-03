@@ -173,7 +173,7 @@ public class CompanyImpl extends EObjectImpl implements Company
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
 		final @NonNull TypeId T_company__CompanySizeKind = CodegencompanyTables.Types._CompanySizeKind.getTypeId();
 		try {
-			final Object result = CompanyBodies._size_derivation_.INSTANCE.evaluate(evaluator, T_company__CompanySizeKind, this, CodegencompanyTables.Properties._Company__size);
+			final Object result = CompanyBodies._size_derivation_.INSTANCE.evaluate(evaluator, T_company__CompanySizeKind, this);
 			final codegen.company.CompanySizeKind ecoreResult = (codegen.company.CompanySizeKind)(result != null ? ((Value)result).asEcoreObject() : null);
 			return ecoreResult;
 		} catch (InvalidValueException e) {

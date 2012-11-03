@@ -117,7 +117,7 @@ public class CompanyBodies
 	in
 	  table->any(range->includes(employees->size())).size
 		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self, @NonNull DomainProperty property) throws Exception {
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
 			assert self != null;
 			final @NonNull Company unboxed_self = (Company)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();

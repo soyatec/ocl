@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.codegen.tests.interactive;
 
 import java.io.File;
+import java.io.IOException;
 
 import junit.framework.TestCase;
 
@@ -74,7 +75,7 @@ public class TestExpr extends TestCase
         assertEquals(expectedResult, result);
 	}
 
-	public CodeGenHelper getCodeGenHelper(@NonNull MetaModelManager metaModelManager) {
+	public CodeGenHelper getCodeGenHelper(@NonNull MetaModelManager metaModelManager) throws IOException {
 		URI genModelURI = URI.createPlatformResourceURI(
 				"/org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel",
 				true);

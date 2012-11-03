@@ -14,15 +14,39 @@
  */
 package org.eclipse.ocl.examples.codegen.common;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
+import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.RealValue;
+import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
+import org.eclipse.ocl.examples.domain.values.impl.IntIntegerValueImpl;
+import org.eclipse.ocl.examples.domain.values.impl.LongIntegerValueImpl;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
+import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
+import org.eclipse.ocl.examples.pivot.CollectionItem;
+import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
+import org.eclipse.ocl.examples.pivot.CollectionType;
+import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
+import org.eclipse.ocl.examples.pivot.NullLiteralExp;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
+import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
+import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
+import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitorImpl;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 public class EmitQueries
 {
@@ -108,10 +132,76 @@ public class EmitQueries
 		return known2external;
 	}	
 
-	public String debug(Object element) {
+	public String debug(Object element, String context) {
 		return null;
-	}	
+	}
 	
+	/**
+	 * Evaluate a constant-expression, folding it to a constant value
+	 */
+	public OCLExpression evaluate(@NonNull OCLExpression expression) {
+		MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(expression);
+		PivotEnvironmentFactory factory = new PivotEnvironmentFactory(null, metaModelManager);
+		Environment env = factory.createEnvironment();
+		EvaluationEnvironment evalEnv = factory.createEvaluationEnvironment();
+		DomainModelManager modelManager = evalEnv.createModelManager(null);
+		EvaluationVisitorImpl evaluator = new EvaluationVisitorImpl(env, evalEnv, modelManager);
+		Object constantResult = expression.accept(evaluator);		
+		return createConstant(constantResult, metaModelManager);
+	}
+	
+	private OCLExpression createConstant(Object value, MetaModelManager metaModelManager) {
+		if (value instanceof String) {
+			StringLiteralExp result = PivotFactory.eINSTANCE.createStringLiteralExp();
+			result.setStringSymbol((String)value);
+			result.setType(metaModelManager.getStringType());
+			return result;
+		}
+		else if (value instanceof Boolean) {
+			BooleanLiteralExp result = PivotFactory.eINSTANCE.createBooleanLiteralExp();
+			result.setBooleanSymbol((Boolean)value);
+			result.setType(metaModelManager.getBooleanType());
+			return result;
+		}
+		else if (value == null) {
+			NullLiteralExp result = PivotFactory.eINSTANCE.createNullLiteralExp();
+			result.setType(metaModelManager.getOclVoidType());
+			return result;
+		}
+		else if (value instanceof RealValue) {
+			RealLiteralExp result = PivotFactory.eINSTANCE.createRealLiteralExp();
+			result.setRealSymbol(((RealValue)value).bigDecimalValue());	// FIXME use Number
+			result.setType(metaModelManager.getRealType());
+			return result;
+		}
+		else if (value instanceof IntegerValue) {
+			IntegerLiteralExp result = PivotFactory.eINSTANCE.createIntegerLiteralExp();
+			result.setIntegerSymbol(((IntegerValue)value).bigIntegerValue());	// FIXME use Number
+			result.setType(metaModelManager.getIntegerType());
+			return result;
+		}
+		else if (value instanceof UnlimitedValue) {
+			UnlimitedNaturalLiteralExp result = PivotFactory.eINSTANCE.createUnlimitedNaturalLiteralExp();
+			result.setUnlimitedNaturalSymbol(-1);
+			result.setType(metaModelManager.getUnlimitedNaturalType());
+			return result;
+		}
+		else if (value instanceof CollectionValue) {
+			CollectionValue collectionValue = (CollectionValue)value;
+			CollectionLiteralExp result = PivotFactory.eINSTANCE.createCollectionLiteralExp();
+			CollectionType type = (CollectionType) metaModelManager.getDynamicTypeOf(collectionValue);
+			result.setType(type);
+			result.setKind(PivotUtil.getCollectionKind(type));
+			for (Object element : collectionValue.getElements()) {
+				CollectionItem part = PivotFactory.eINSTANCE.createCollectionItem();
+				part.setItem(createConstant(element, metaModelManager));
+				result.getPart().add(part);
+			}
+			return result;
+		}
+		throw new UnsupportedOperationException(value.getClass().getName());
+	}
+
 	/**
 	 * Replace all embedded <%xxx%> embedded import paths using unqualified names
 	 * for knownImports by fully qualified names so that the return value may be
@@ -144,30 +234,34 @@ public class EmitQueries
 		return s.toString();
 	}
 	
-	public String integerValueOfInitializer(IntegerLiteralExp literal) {
-		Number number = literal.getIntegerSymbol();
-		if (number instanceof Integer) {
-			return ((Integer)number).toString();
+	protected String integerValueOfInitializer(Number number) {
+		IntegerValue value;
+		if (number instanceof Integer){
+			 value = ValuesUtil.integerValueOf(number.intValue());
 		}
 		else if (number instanceof Long) {
-			return ((Long)number).toString() + "L";
+			 value = ValuesUtil.integerValueOf(number.longValue());
 		}
 		else {
-			return "\"" + number.toString() + "\"";
+			 value = ValuesUtil.integerValueOf((BigInteger)number);
+		}
+		if (value instanceof IntIntegerValueImpl) {
+			return value.toString();
+		}
+		else if (value instanceof LongIntegerValueImpl) {
+			return value.toString() + "L";
+		}
+		else {
+			return "\"" + value.toString() + "\"";
 		}
 	}
 	
+	public String integerValueOfInitializer(IntegerLiteralExp literal) {
+		return integerValueOfInitializer(literal.getIntegerSymbol());
+	}
+	
 	public String integerValueOfInitializer(UnlimitedNaturalLiteralExp literal) {
-		Number number = literal.getUnlimitedNaturalSymbol();
-		if (number instanceof Integer) {
-			return ((Integer)number).toString();
-		}
-		else if (number instanceof Long) {
-			return ((Long)number).toString() + "L";
-		}
-		else {
-			return "\"" + number.toString() + "\"";
-		}
+		return integerValueOfInitializer(literal.getUnlimitedNaturalSymbol());
 	}
 	
 	/**

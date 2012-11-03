@@ -231,7 +231,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		final @NonNull TypeId T_company__Employee = CodegencompanyTables.Types._Employee.getTypeId();
 		final @NonNull CollectionTypeId T_OrderedSet_company__Employee_ = TypeId.ORDERED_SET.getSpecializedId(T_company__Employee);
 		try {
-			final Object result = EmployeeBodies._directReports_derivation_.INSTANCE.evaluate(evaluator, T_OrderedSet_company__Employee_, this, CodegencompanyTables.Properties._Employee__directReports);
+			final Object result = EmployeeBodies._directReports_derivation_.INSTANCE.evaluate(evaluator, T_OrderedSet_company__Employee_, this);
 			final org.eclipse.emf.common.util.EList<codegen.company.Employee> ecoreResult = (org.eclipse.emf.common.util.EList<codegen.company.Employee>)(result != null ? ((Value)result).asEcoreObject() : null);
 			return ecoreResult;
 		} catch (InvalidValueException e) {
@@ -255,7 +255,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		final @NonNull TypeId T_company__Employee = CodegencompanyTables.Types._Employee.getTypeId();
 		final @NonNull CollectionTypeId T_Set_company__Employee_ = TypeId.SET.getSpecializedId(T_company__Employee);
 		try {
-			final Object result = EmployeeBodies._allReports_derivation_.INSTANCE.evaluate(evaluator, T_Set_company__Employee_, this, CodegencompanyTables.Properties._Employee__allReports);
+			final Object result = EmployeeBodies._allReports_derivation_.INSTANCE.evaluate(evaluator, T_Set_company__Employee_, this);
 			final org.eclipse.emf.common.util.EList<codegen.company.Employee> ecoreResult = (org.eclipse.emf.common.util.EList<codegen.company.Employee>)(result != null ? ((Value)result).asEcoreObject() : null);
 			return ecoreResult;
 		} catch (InvalidValueException e) {
@@ -282,7 +282,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		final @NonNull TypeId T_company__Employee = CodegencompanyTables.Types._Employee.getTypeId();
 		final @NonNull CollectionTypeId T_OrderedSet_company__Employee_ = TypeId.ORDERED_SET.getSpecializedId(T_company__Employee);
 		try {
-			final Object result = EmployeeBodies._reportingChain_derivation_.INSTANCE.evaluate(evaluator, T_OrderedSet_company__Employee_, this, CodegencompanyTables.Properties._Employee__reportingChain);
+			final Object result = EmployeeBodies._reportingChain_derivation_.INSTANCE.evaluate(evaluator, T_OrderedSet_company__Employee_, this);
 			final org.eclipse.emf.common.util.EList<codegen.company.Employee> ecoreResult = (org.eclipse.emf.common.util.EList<codegen.company.Employee>)(result != null ? ((Value)result).asEcoreObject() : null);
 			return ecoreResult;
 		} catch (InvalidValueException e) {
@@ -304,7 +304,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		try {
-			final Object result = EmployeeBodies._hasNameAsAttribute_derivation_.INSTANCE.evaluate(evaluator, T_Boolean, this, CodegencompanyTables.Properties._Employee__hasNameAsAttribute);
+			final Object result = EmployeeBodies._hasNameAsAttribute_derivation_.INSTANCE.evaluate(evaluator, T_Boolean, this);
 			final java.lang.Boolean ecoreResult = (java.lang.Boolean)result;
 			if (ecoreResult != null) {
 				return ecoreResult;

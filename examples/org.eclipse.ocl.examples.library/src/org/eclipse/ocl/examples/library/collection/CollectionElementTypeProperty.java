@@ -33,7 +33,7 @@ public class CollectionElementTypeProperty extends AbstractProperty
 {
 	public static final @NonNull CollectionElementTypeProperty INSTANCE = new CollectionElementTypeProperty();
 
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @NonNull DomainProperty property) {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 		DomainCollectionType sourceType = asCollectionType(sourceValue);
 		DomainType elementType = DomainUtil.nonNullModel(sourceType.getElementType());
 		return createTypeValue(elementType);

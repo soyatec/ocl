@@ -34,7 +34,7 @@ A_[ast.getSymbolName()/][/template]
 [ast.defineSymbolName('I_' + ast.asIntegerStringOrEmpty())/][/template]
 
 [template public symbolName(ast : InvalidLiteralExp, expInOcl : ExpressionInOCL)]
-[ast.defineSymbolName('Invalid')/][/template]
+X_[ast.getSymbolName()/][/template]
 
 [template public symbolName(ast : NullLiteralExp, expInOcl : ExpressionInOCL)]
 [ast.defineSymbolName('Null')/][/template]

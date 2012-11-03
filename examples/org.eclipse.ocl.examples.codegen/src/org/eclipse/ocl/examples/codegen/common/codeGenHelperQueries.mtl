@@ -20,7 +20,7 @@
 [query public getCopyright(codeGenHelper : CodeGenHelper, indentation : String) : String =
 invoke('org.eclipse.ocl.examples.codegen.common.CodeGenHelper', 'getCopyright(org.eclipse.ocl.examples.codegen.common.CodeGenHelper, java.lang.String)', Sequence{codeGenHelper, indentation}) /]
 	
-[query public getEscapedName(codeGenHelper : CodeGenHelper, type : Type) : String =
+[query public zzgetEscapedName(codeGenHelper : CodeGenHelper, type : Type) : String =
 invoke('org.eclipse.ocl.examples.codegen.common.CodeGenHelper', 'getEscapedName(org.eclipse.ocl.examples.codegen.common.CodeGenHelper, org.eclipse.ocl.examples.pivot.Type)', Sequence{codeGenHelper, type}) /]
 	
 [query public getGenPackage(codeGenHelper : CodeGenHelper, type : Type) : GenPackage =

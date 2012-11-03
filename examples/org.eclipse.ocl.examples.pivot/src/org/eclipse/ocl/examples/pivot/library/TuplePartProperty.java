@@ -18,7 +18,6 @@ package org.eclipse.ocl.examples.pivot.library;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
@@ -35,12 +34,12 @@ public class TuplePartProperty extends AbstractProperty
 		this.tuplePartId = tuplePartId;
 	}
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @NonNull DomainProperty property) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 		TupleValue tupleValue = asTupleValue(sourceValue);
 		Object resultValue = tupleValue.getValue(tuplePartId);
 		if (resultValue != null) {
 			return resultValue;		// null is a static type error so no need to diagnose dynamically
 		}
-		throw new InvalidValueException(DomainUtil.bind("part '" + property + "' is not a part of '" + sourceValue));
+		throw new InvalidValueException(DomainUtil.bind("part '" + tuplePartId + "' is not a part of '" + sourceValue));
 	}
 }

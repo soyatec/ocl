@@ -757,7 +757,6 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		OCLExpression source = propertyCallExp.getSource();
 		Property referredProperty = propertyCallExp.getReferredProperty();
 		Type propertyType = propertyCallExp.getType();
-		assert source != null;
 		assert referredProperty != null;
 		assert propertyType != null;
 		LibraryProperty implementation;
@@ -775,9 +774,9 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 			}
 		}
 		EvaluationVisitor evaluationVisitor = getUndecoratedVisitor();
-		Object sourceValue = evaluationVisitor.evaluate(source);
+		Object sourceValue = source != null ? evaluationVisitor.evaluate(source) : null;
 		try {
-			return implementation.evaluate(this, propertyType.getTypeId(), sourceValue, referredProperty);
+			return implementation.evaluate(this, propertyType.getTypeId(), sourceValue);
 		}
 		catch (InvalidValueException e) {
 			throw e;
