@@ -26,6 +26,7 @@ import java.util.Set;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
+import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.pivot.Type;
 
 public class FinalAnalysis
@@ -54,15 +55,19 @@ public class FinalAnalysis
 			for (DomainOperation domainOperation : domainInheritance.getLocalOperations()) {
 				String opName = domainOperation.getName();
 				DomainParameterTypes parameterTypes = domainOperation.getParameterTypes();
+				LibraryFeature domainImplementation = domainOperation.getImplementation();
 				Set<DomainOperation> overrides = null;
 				for (DomainInheritance subInheritance : subInheritances) {
 					if (subInheritance != domainInheritance) {
 						for (DomainOperation subOperation : subInheritance.getLocalOperations()) {
 							if (opName.equals(subOperation.getName()) && parameterTypes.equals(subOperation.getParameterTypes())) {
-								if (overrides == null) {
-									overrides = new HashSet<DomainOperation>();
+								LibraryFeature subImplementation = subOperation.getImplementation();
+								if (domainImplementation != subImplementation) {
+									if (overrides == null) {
+										overrides = new HashSet<DomainOperation>();
+									}
+									overrides.add(subOperation);
 								}
-								overrides.add(subOperation);
 							}
 						}
 					}
