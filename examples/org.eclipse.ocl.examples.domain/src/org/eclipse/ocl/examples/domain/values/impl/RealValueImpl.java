@@ -129,12 +129,8 @@ public class RealValueImpl extends ValueImpl implements RealValue
 	}
 
 	public int compareTo(NumericValue o) {
-		try {
-			RealValue that = o.asRealValue();
-			return value.compareTo(that.bigDecimalValue());
-		} catch (InvalidValueException e) {
-			throw new IllegalArgumentException(e);
-		}
+		RealValue that = o.asRealValue();
+		return value.compareTo(that.bigDecimalValue());
 	}
 
 	public @NonNull RealValue divide(@NonNull RealValue right) {

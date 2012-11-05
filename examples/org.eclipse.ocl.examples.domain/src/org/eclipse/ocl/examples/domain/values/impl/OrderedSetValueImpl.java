@@ -280,15 +280,15 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
         upper = upper - 1;
         
         if (lower < 0) {
-			throw new IndexOutOfBoundsException("lower: " + (lower + 1)); //$NON-NLS-1$
+			throw new InvalidValueException(new IndexOutOfBoundsException("lower: " + (lower + 1))); //$NON-NLS-1$
         } else if (upper >= elements.size()) {
-			throw new IndexOutOfBoundsException(
+			throw new InvalidValueException(new IndexOutOfBoundsException(
 				"upper: " + (upper + 1) + ", size: " //$NON-NLS-1$ //$NON-NLS-2$
-					+ size());
+					+ size()));
         } else if (upper < lower) {
-			throw new IllegalArgumentException(
+			throw new InvalidValueException(new IllegalArgumentException(
 				"lower: " + (lower + 1) + ", upper: " //$NON-NLS-1$ //$NON-NLS-2$
-					+ (upper + 1));
+					+ (upper + 1)));
         }
         
         OrderedSet<Object> result = new OrderedSetImpl<Object>();

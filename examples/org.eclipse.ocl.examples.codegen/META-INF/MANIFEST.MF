@@ -15,6 +15,7 @@ Export-Package: org.eclipse.ocl.examples.codegen.analyzer,
  org.eclipse.ocl.examples.codegen.common,
  org.eclipse.ocl.examples.codegen.ecore,
  org.eclipse.ocl.examples.codegen.expression,
+ org.eclipse.ocl.examples.codegen.generator,
  org.eclipse.ocl.examples.codegen.ocl4acceleo,
  org.eclipse.ocl.examples.codegen.tables
 Bundle-Vendor: %providerName

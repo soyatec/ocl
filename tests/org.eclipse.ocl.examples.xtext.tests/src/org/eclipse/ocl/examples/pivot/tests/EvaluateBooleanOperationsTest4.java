@@ -70,8 +70,6 @@ public class EvaluateBooleanOperationsTest4 extends PivotTestSuite
 	}
 
 	@Test public void testBooleanAnd() {
-		assertQueryFalse(null, "let b : Boolean = null in false and b");
-//
 		assertQueryFalse(null, "false and false");
 		assertQueryFalse(null, "false and true");
 		assertQueryFalse(null, "true and false");

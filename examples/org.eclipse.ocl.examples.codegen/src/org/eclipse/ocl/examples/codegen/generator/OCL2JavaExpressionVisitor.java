@@ -12,10 +12,12 @@
  *
  * </copyright>
  */
-package org.eclipse.ocl.examples.codegen.analyzer;
+package org.eclipse.ocl.examples.codegen.generator;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
+import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
@@ -57,7 +59,7 @@ public class OCL2JavaExpressionVisitor extends AbstractExtendingVisitor<String, 
 			return string;
 		}
 		else if (analysis.isInlineable()) {
-			String literalText = context.getConstantHelper().getInlineValue(analysis.getConstantValue());
+			String literalText = context.getConstantHelper().getInlineValueAndType(analysis.getConstantValue()).getName();
 			return literalText;	
 		}
 		else {
@@ -110,7 +112,7 @@ public class OCL2JavaExpressionVisitor extends AbstractExtendingVisitor<String, 
 	public @Nullable String visitTypeExp(@NonNull TypeExp element) {
 		Type referredType = element.getReferredType();
 		TypeId typeId = referredType.getTypeId();
-		return typeId.accept(context.getIdVisitor());
+		return context.getIdVisitor().visit(typeId).getName();
 	}
 
 //	@Override

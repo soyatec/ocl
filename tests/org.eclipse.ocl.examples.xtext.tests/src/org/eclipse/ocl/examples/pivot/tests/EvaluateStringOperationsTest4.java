@@ -57,8 +57,6 @@ public class EvaluateStringOperationsTest4 extends PivotTestSuite
     @Override
     @Before public void setUp() throws Exception {
         super.setUp();
-//        helper.setContext(getMetaclass("Package"));
-        helper.setContext(metaModelManager.getMetaclassType());
     }
 
 	@Override

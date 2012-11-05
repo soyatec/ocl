@@ -20,9 +20,13 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.CallExp;
+import org.eclipse.ocl.examples.pivot.CollectionRange;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.LetExp;
@@ -73,7 +77,7 @@ public class ConstantFolder
 		if ((expression instanceof OperationCallExp) && (((OperationCallExp)expression).getArgument().size() > 0)) {
 			return false;
 		}
-		return (expression instanceof DomainExpression) /*|| (expression instanceof ExpressionInOCL)*/;
+		return (expression instanceof DomainExpression) || (expression instanceof CollectionRange) /*|| (expression instanceof ExpressionInOCL)*/;
 	}
 	
 	/**
@@ -117,6 +121,22 @@ public class ConstantFolder
 		try {
 			if (expression instanceof DomainExpression) {
 				constantValue = evaluator.evaluate((DomainExpression) expression);
+			}
+			else if (expression instanceof CollectionRange) {
+				CollectionRange collectionRange = (CollectionRange) expression;
+				Object firstValue = evaluator.evaluate(DomainUtil.nonNullModel(collectionRange.getFirst()));
+				Object lastValue = evaluator.evaluate(DomainUtil.nonNullModel(collectionRange.getLast()));
+				if ((firstValue instanceof IntegerValue) && (lastValue instanceof IntegerValue)) {
+					if (firstValue.equals(lastValue)) {
+						constantValue = firstValue;
+					}
+					else {
+						constantValue = ValuesUtil.createRange((IntegerValue)firstValue, (IntegerValue)lastValue);
+					}
+				}
+				else {
+					return false;
+				}
 			}
 //			else if (expression instanceof ExpressionInOCL) {
 //				constantValue = evaluator.evaluate((ExpressionInOCL) expression);

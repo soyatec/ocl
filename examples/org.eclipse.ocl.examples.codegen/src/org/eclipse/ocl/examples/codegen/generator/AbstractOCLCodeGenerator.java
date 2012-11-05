@@ -12,15 +12,20 @@
  *
  * </copyright>
  **/
-package org.eclipse.ocl.examples.codegen.analyzer;
+package org.eclipse.ocl.examples.codegen.generator;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
+import org.eclipse.ocl.examples.codegen.analyzer.CommonSubExpression;
+import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.codegen.common.EmitQueries;
 import org.eclipse.ocl.examples.codegen.common.NameQueries;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
@@ -31,7 +36,9 @@ import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryTernaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeExp;
 import org.eclipse.ocl.examples.pivot.TypedElement;
@@ -60,6 +67,7 @@ public abstract class AbstractOCLCodeGenerator implements OCLCodeGenerator
 	private @NonNull Stack<String> indentationStack = new Stack<String>();
 	private @NonNull String defaultIndent = "    ";
 	private boolean indentPending = false;
+	private @NonNull Map<Object, CodeGenSnippet> snippets = new HashMap<Object, CodeGenSnippet>();
 
 	protected AbstractOCLCodeGenerator(@NonNull MetaModelManager metaModelManager) {
 		this.metaModelManager = metaModelManager;
@@ -111,6 +119,17 @@ public abstract class AbstractOCLCodeGenerator implements OCLCodeGenerator
 			}
 		}
 	}
+	
+	public void append(@NonNull CodeGenSnippet aSnippet) {
+		for (Object content : aSnippet.getContents()) {
+			if (content instanceof String) {
+				append((String)content);
+			}
+			else if (content instanceof CodeGenSnippet){
+				append((CodeGenSnippet)content);
+			}
+		}
+	}
 
 	public @NonNull String atNonNull() {
 		return importManager.getImportedName("@NonNull");
@@ -143,6 +162,10 @@ public abstract class AbstractOCLCodeGenerator implements OCLCodeGenerator
 			constantHelper = constantHelper2 = createConstantHelper();
 		}
 		return constantHelper2;
+	}
+
+	public @NonNull String getDefaultIndent() {
+		return defaultIndent;
 	}
 
 	public @NonNull String getDefiningText(@NonNull TypedElement element) {
@@ -227,6 +250,21 @@ public abstract class AbstractOCLCodeGenerator implements OCLCodeGenerator
 		return null;
 	}
 
+	public @Nullable String getQualifiedPropertyImplementationName(@NonNull Property aProperty, @NonNull String stereotype) {
+		Type type = aProperty.getOwningType();
+		if (type != null) {
+			GenPackage genPackage = getGenPackage(type);
+			if (genPackage != null) {
+				String qualifiedPackageName = genPackage.getQualifiedPackageName() + BODIES_PACKAGE_NAME;
+				String outerClassName = type.getName() + BODIES_CLASS_SUFFIX;
+				String qualifiedClassName = getImportedName(qualifiedPackageName) + "." + outerClassName;
+				String innerClassName = "_" + aProperty.getName() + "_" + stereotype + "_";
+				return qualifiedClassName + "." + innerClassName + ".INSTANCE";
+			}
+		}
+		return null;
+	}
+
 	public @Nullable String getQualifiedLiteralName(@NonNull Operation anOperation) {
 		Type type = anOperation.getOwningType();
 		if (type != null) {
@@ -242,14 +280,34 @@ public abstract class AbstractOCLCodeGenerator implements OCLCodeGenerator
 		return null;
 	}
 
-	public @NonNull String getReferringText(@NonNull TypedElement element) {			// FIXME simplify
+	public @Nullable String getQualifiedLiteralName(@NonNull Property aProperty) {
+		Type type = aProperty.getOwningType();
+		if (type != null) {
+			GenPackage genPackage = getGenPackage(type);
+			if (genPackage != null) {
+				String qualifiedPackageName = genPackage.getQualifiedPackageName() + TABLES_PACKAGE_NAME;
+				String tablesClassName = genPackage.getPrefix() + TABLES_CLASS_SUFFIX;
+				String qualifiedClassName = getImportedName(qualifiedPackageName + "." + tablesClassName) + ".Properties";
+				String operationName = "_" + type.getName() + "__" + NameQueries.encodeName(aProperty);
+				return qualifiedClassName + "." + operationName;
+			}
+		}
+		return null;
+	}
+
+	public @NonNull String getReferringText(@NonNull CodeGenSnippet referringSnippet, @NonNull TypedElement element) {			// FIXME simplify
 		CodeGenAnalysis analysis = getAnalysis(element);
 		if (analysis.isConstant()) {
 			if (analysis.isInlineable()) {
 				return expressionVisitor.visit(element);
 			}
-			Object constantValue = analysis.getConstantValue();
-			return getSymbolName(constantValue);
+			else {
+				Object constantValue = analysis.getConstantValue();
+				assert constantValue != null;
+				CodeGenSnippet constantSnippet = getConstant(constantValue);
+				referringSnippet.addDependsOn(constantSnippet);
+				return constantSnippet.getName();
+			}
 		}
 		if (analysis.isInlineable()) {
 			return expressionVisitor.visit(element);
@@ -258,6 +316,7 @@ public abstract class AbstractOCLCodeGenerator implements OCLCodeGenerator
 		CommonSubExpression referredCommonSubExpression = analysis.getReferredCommonSubExpression();
 		if (referredCommonSubExpression != null) {
 			referredVariable = referredCommonSubExpression.getVariable();
+			return referredCommonSubExpression.getSymbolName();
 		}
 		else if (element instanceof TypeExp) {
 			return getSymbolName(element.getType());
@@ -271,6 +330,15 @@ public abstract class AbstractOCLCodeGenerator implements OCLCodeGenerator
 		else {
 			return expressionVisitor.visit(referredVariable);
 		}
+	}
+	
+	public @NonNull CodeGenSnippet getSnippet(@NonNull Object element) {
+		CodeGenSnippet snippet = snippets.get(element);
+		if (snippet == null) {
+			snippet = new CodeGenSnippet(this, element);
+			snippets.put(element, snippet);
+		}
+		return snippet;
 	}
 
 	@SuppressWarnings("null")
@@ -318,5 +386,9 @@ public abstract class AbstractOCLCodeGenerator implements OCLCodeGenerator
 		indentationStack.push("");
 		streamStack.push(s);
 		s = new StringBuilder();
+	}
+	
+	public void setSnippet(@NonNull Element element, @NonNull CodeGenSnippet snippet) {
+		snippets.put(element, snippet);
 	}
 }

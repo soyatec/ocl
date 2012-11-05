@@ -55,7 +55,9 @@ public class CommonSubExpression
 		}
 		assert element != null;
 		@SuppressWarnings("null") @NonNull String[] nameHintArray = nameHints.toArray(new String[nameHints.size()]);
-		String name = nameManager.getUniqueName(variable2, nameHintArray);
+		CodeGenAnalysis firstAnalysis = getAnalysis();
+		String name = analyzer.getCodeGenerator().getConstant(firstAnalysis.getExpression() /*nameHints*/).getName();
+//		String name = nameManager.getUniqueName(variable2, nameHintArray);
 		variable2.setName(name);
 		variable2.setType(element.getType());
 		for (CodeGenAnalysis analysis : analyses) {
@@ -66,6 +68,10 @@ public class CommonSubExpression
 
 	public CodeGenAnalysis getAnalysis() {
 		return analyses.iterator().next();
+	}
+
+	public @NonNull String getSymbolName() {
+		return analyzer.getNameManager().getSymbolName(getAnalysis().getExpression());
 	}
 
 	public Variable getVariable() {

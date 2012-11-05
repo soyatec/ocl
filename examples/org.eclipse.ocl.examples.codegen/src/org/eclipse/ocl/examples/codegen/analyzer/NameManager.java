@@ -24,12 +24,17 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.pivot.BagType;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
+import org.eclipse.ocl.examples.pivot.CollectionRange;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.LiteralExp;
@@ -55,10 +60,12 @@ public class NameManager
 	public static final String BAG_NAME_HINT_PREFIX = "BAG";
 	public static final String COLLECTION_NAME_HINT_PREFIX = "COL";
 	public static final String DEFAULT_NAME_PREFIX = "symbol";
+	public static final String ID_NAME_HINT_PREFIX = "TID";
 	public static final String INTEGER_NAME_HINT_PREFIX = "INT_";
 	public static final String OPERATION_NAME_HINT_PREFIX = "OP_";
 	public static final String ORDERED_SET_NAME_HINT_PREFIX = "ORD";
 	public static final String REAL_NAME_HINT_PREFIX = "REA_";
+	public static final String RANGE_NAME_HINT_PREFIX = "RNG";
 	public static final String SEQUENCE_NAME_HINT_PREFIX = "SEQ";
 	public static final String SET_NAME_HINT_PREFIX = "SET";
 	public static final String STRING_NAME_HINT_PREFIX = "STR_";
@@ -199,6 +206,28 @@ public class NameManager
 		object2name.put(namedElement, name);
 	}
 
+	public String getIdNameHint(ElementId id) {
+		return ID_NAME_HINT_PREFIX;
+	}
+
+	public String getKindHint(@NonNull String kind) {
+		if (TypeId.BAG_NAME.equals(kind)) {
+			return BAG_NAME_HINT_PREFIX;
+		}
+		else if (TypeId.ORDERED_SET_NAME.equals(kind)) {
+			return ORDERED_SET_NAME_HINT_PREFIX;
+		}
+		else if (TypeId.SEQUENCE_NAME.equals(kind)) {
+			return SEQUENCE_NAME_HINT_PREFIX;
+		}
+		else if (TypeId.SET_NAME.equals(kind)) {
+			return SET_NAME_HINT_PREFIX;
+		}
+		else {
+			return COLLECTION_NAME_HINT_PREFIX;
+		}
+	}
+
 	/**
 	 * Return a suggestion for the name of anObject.
 	 * <p>
@@ -208,6 +237,19 @@ public class NameManager
 		if (anObject instanceof CollectionLiteralExp) {
 			Type type = ((CollectionLiteralExp)anObject).getType();
 			return type != null ? getTypeNameHint(type) : null;
+		}
+		else if (anObject instanceof CollectionRange) {
+			return RANGE_NAME_HINT_PREFIX;
+		}
+		else if (anObject instanceof IntegerRange) {
+			return RANGE_NAME_HINT_PREFIX;
+		}
+		else if (anObject instanceof CollectionValue) {
+			String kind = ((CollectionValue)anObject).getKind();
+			return kind != null ? getKindHint(kind) : null;
+		}
+		else if (anObject instanceof ElementId) {
+			return getIdNameHint((ElementId)anObject);
 		}
 		else if (anObject instanceof IntegerLiteralExp) {
 			Number numberSymbol = ((IntegerLiteralExp)anObject).getIntegerSymbol();

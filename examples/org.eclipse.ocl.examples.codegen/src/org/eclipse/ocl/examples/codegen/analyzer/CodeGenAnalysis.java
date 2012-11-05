@@ -21,6 +21,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -372,7 +373,7 @@ public class CodeGenAnalysis
 	/**
 	 * Return true if the expression may be an invalid value thrown as an exception, such as propagated invalid.
 	 */
-	protected boolean mayBeException() {
+	public boolean mayBeException() {
 		if ((expression instanceof VariableExp) && !isInlineable()) {
 			return false;
 		}
@@ -383,7 +384,7 @@ public class CodeGenAnalysis
 	/**
 	 * Return true if the expression may be an invalid value passed by value, such as a result cached in a let expression.
 	 */
-	protected boolean mayBeInvalidValue() {
+	public boolean mayBeInvalidValue() {
 		if ((expression instanceof VariableExp) && isInlineable()) {
 			Set<VariableDeclaration> allDependencies = getTransitiveDependencies();
 			return allDependencies.size() > 0;
@@ -431,11 +432,11 @@ public class CodeGenAnalysis
 		this.isLocalConstant = true;
 		this.constantValue = constantValue;	
 //		this.isInlineable = (constantValue == null) || (constantValue instanceof Boolean);
-		this.isInlineable = analyzer.getConstantHelper().isInlineable(constantValue);
-		if (!isInlineable) {				// null is always inlineable
-			assert constantValue != null;
-			@SuppressWarnings("unused") String name = analyzer.getCodeGenerator().getLocalConstantName(constantValue);
-		}
+//		this.isInlineable = analyzer.getConstantHelper().isInlineable(constantValue);
+//		if (!isInlineable) {				// null is always inlineable
+//			assert constantValue != null;
+			@SuppressWarnings("unused") String name = analyzer.getCodeGenerator().getConstant(constantValue).getName();
+//		}
 	}
 
 	public void setReferredCommonSubExpression(@NonNull CommonSubExpression referredCommonSubExpression) {
@@ -452,11 +453,12 @@ public class CodeGenAnalysis
 		assert delegateTo == null;
 		this.isStaticConstant = true;
 		this.constantValue = constantValue;	
-		this.isInlineable = analyzer.getConstantHelper().isInlineable(constantValue);
-		if (!isInlineable) {				// null is always inlineable
-			assert constantValue != null;
-			@SuppressWarnings("unused") String name = analyzer.getCodeGenerator().getStaticConstantName(constantValue);
-		}
+//		this.isInlineable = analyzer.getConstantHelper().isInlineable(constantValue);
+//		if (!isInlineable) {				// null is always inlineable
+//			assert constantValue != null;
+			CodeGenSnippet constantSnippet = analyzer.getCodeGenerator().getConstant(constantValue);
+			@SuppressWarnings("unused") String name = constantSnippet.getName();
+//		}
 	}
 
 	public void setVariable(@NonNull Variable targetVariable) {
