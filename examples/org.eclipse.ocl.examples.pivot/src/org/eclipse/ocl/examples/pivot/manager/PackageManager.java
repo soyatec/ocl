@@ -285,6 +285,11 @@ public class PackageManager implements PackageServerParent
 	}
 
 	public @Nullable PackageServer getPackageByURI(@NonNull String nsURI) {
+		int lastIndex = nsURI.lastIndexOf("#/");
+		if (lastIndex > 0) {
+			@SuppressWarnings("null") @NonNull String substring = nsURI.substring(0, lastIndex);
+			nsURI = substring;
+		}
 		return uri2package.get(nsURI);
 	}
 
