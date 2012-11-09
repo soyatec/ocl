@@ -376,7 +376,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 					constraint.setSpecification(specification);
 //						constraint.setExprString(entry.getValue());
 					constraints.add(constraint);
-					pivotElement.setImplementation(new EObjectOperation(eObject2, specification));
+					pivotElement.setImplementation(new EObjectOperation(pivotElement, eObject2, specification));
 				}
 			}				
 		}

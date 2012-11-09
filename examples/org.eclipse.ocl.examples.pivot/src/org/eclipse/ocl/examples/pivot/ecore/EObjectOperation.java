@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.pivot.ecore;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -50,13 +51,25 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
  */
 public class EObjectOperation extends AbstractPolyOperation
 {
+	protected final @NonNull Operation operation;
 	protected final @NonNull EOperation eFeature;
 	protected @NonNull ValueSpecification specification;
 	private ExpressionInOCL expressionInOCL = null;
 
+	public EObjectOperation(@NonNull Operation operation, @NonNull EOperation eFeature, @NonNull ValueSpecification specification) {
+		this.operation = operation;
+		this.eFeature = eFeature;
+		this.specification = specification;
+	}
+
+	@Deprecated
 	public EObjectOperation(@NonNull EOperation eFeature, @NonNull ValueSpecification specification) {
 		this.eFeature = eFeature;
 		this.specification = specification;
+		EObject constraint = specification.eContainer();
+		EObject dynamicOperation = constraint.eContainer();
+		assert dynamicOperation instanceof Operation;
+		operation = (Operation) dynamicOperation;
 	}
 
 	@Override
@@ -130,18 +143,15 @@ public class EObjectOperation extends AbstractPolyOperation
 		}
 		else {
 			if (specification instanceof OpaqueExpression) {
-				Operation operation = ((OperationCallExp)callExp).getReferredOperation();
-				if (operation != null) {
-					String string = PivotUtil.getBody((OpaqueExpression) specification);
-					if (string != null) {
+				String string = PivotUtil.getBody((OpaqueExpression) specification);
+				if (string != null) {
+					try {
 						EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
 						MetaModelManager metaModelManager = evaluationVisitor.getMetaModelManager();
-						try {
-							ParserContext operationContext = new OperationContext(metaModelManager, null, operation, null);
-							expressionInOCL = operationContext.parse(string);
-						} catch (ParserException e) {
-							throw new InvalidValueException("parse failure", e, evaluator.getEvaluationEnvironment(), sourceValue, callExp);
-						}
+						ParserContext operationContext = new OperationContext(metaModelManager, null, operation, null);
+						expressionInOCL = operationContext.parse(string);
+					} catch (ParserException e) {
+						throw new InvalidValueException(e, "parse failure", evaluator.getEvaluationEnvironment(), sourceValue, callExp);
 					}
 				}
 			}
