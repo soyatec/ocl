@@ -26,6 +26,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -36,11 +37,16 @@ import org.eclipse.ocl.examples.pivot.BagType;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionRange;
 import org.eclipse.ocl.examples.pivot.CollectionType;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
+import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LiteralExp;
-import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.OrderedSetType;
+import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
 import org.eclipse.ocl.examples.pivot.SequenceType;
 import org.eclipse.ocl.examples.pivot.SetType;
@@ -48,6 +54,8 @@ import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeExp;
 import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
+import org.eclipse.ocl.examples.pivot.VariableDeclaration;
+import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.Nameable;
 
@@ -61,15 +69,20 @@ public class NameManager
 	public static final String COLLECTION_NAME_HINT_PREFIX = "COL";
 	public static final String DEFAULT_NAME_PREFIX = "symbol";
 	public static final String ID_NAME_HINT_PREFIX = "TID";
+	public static final String EXPRESSION_IN_OCL_NAME_HINT_PREFIX = "result";
 	public static final String INTEGER_NAME_HINT_PREFIX = "INT_";
+	public static final String ITERATION_NAME_HINT_PREFIX = "";
 	public static final String OPERATION_NAME_HINT_PREFIX = "OP_";
+	public static final String OPERATION_CALL_EXP_NAME_HINT_PREFIX = "";
 	public static final String ORDERED_SET_NAME_HINT_PREFIX = "ORD";
+	public static final String PROPERTY_NAME_HINT_PREFIX = "";
 	public static final String REAL_NAME_HINT_PREFIX = "REA_";
 	public static final String RANGE_NAME_HINT_PREFIX = "RNG";
 	public static final String SEQUENCE_NAME_HINT_PREFIX = "SEQ";
 	public static final String SET_NAME_HINT_PREFIX = "SET";
 	public static final String STRING_NAME_HINT_PREFIX = "STR_";
 	public static final String TYPE_NAME_HINT_PREFIX = "TYP_";
+	public static final String VARIABLE_DECLARATION_NAME_HINT_PREFIX = "";
 	
 	/**
 	 * Names that will not be allocated to temporary variables.
@@ -182,7 +195,7 @@ public class NameManager
 //		this.metaModelManager = metaModelManager;
 	}
 	
-	public void addNamedElement(@NonNull NamedElement namedElement) {
+/*	public void addNamedElement(@NonNull NamedElement namedElement) {
 		String name = namedElement.getName();
 		if (name != null) {
 			Object oldNamedElement = name2object.get(name);
@@ -204,13 +217,18 @@ public class NameManager
 			}
 		}
 		object2name.put(namedElement, name);
-	}
+	} */
 
-	public String getIdNameHint(ElementId id) {
+	protected String getIdNameHint(ElementId id) {
 		return ID_NAME_HINT_PREFIX;
 	}
 
-	public String getKindHint(@NonNull String kind) {
+	protected String getIterationNameHint(@NonNull Iteration anIteration) {
+		@SuppressWarnings("null") @NonNull String string = anIteration.getName();
+		return ITERATION_NAME_HINT_PREFIX + getValidJavaIdentifier(string, ITERATION_NAME_HINT_PREFIX.length() > 0);
+	}
+
+	protected String getKindHint(@NonNull String kind) {
 		if (TypeId.BAG_NAME.equals(kind)) {
 			return BAG_NAME_HINT_PREFIX;
 		}
@@ -241,9 +259,6 @@ public class NameManager
 		else if (anObject instanceof CollectionRange) {
 			return RANGE_NAME_HINT_PREFIX;
 		}
-		else if (anObject instanceof IntegerRange) {
-			return RANGE_NAME_HINT_PREFIX;
-		}
 		else if (anObject instanceof CollectionValue) {
 			String kind = ((CollectionValue)anObject).getKind();
 			return kind != null ? getKindHint(kind) : null;
@@ -251,19 +266,37 @@ public class NameManager
 		else if (anObject instanceof ElementId) {
 			return getIdNameHint((ElementId)anObject);
 		}
+		else if (anObject instanceof ExpressionInOCL) {
+			return EXPRESSION_IN_OCL_NAME_HINT_PREFIX;
+		}
 		else if (anObject instanceof IntegerLiteralExp) {
 			Number numberSymbol = ((IntegerLiteralExp)anObject).getIntegerSymbol();
 			return numberSymbol != null ? getNumericNameHint(numberSymbol) : null;
 		}
+		else if (anObject instanceof IntegerRange) {
+			return RANGE_NAME_HINT_PREFIX;
+		}
 		else if (anObject instanceof IntegerValue) {
 			Number numberSymbol = ((IntegerValue)anObject).asNumber();
 			return getNumericNameHint(numberSymbol);
+		}
+		else if (anObject instanceof LoopExp) {
+			Iteration referredIteration = ((LoopExp)anObject).getReferredIteration();
+			return referredIteration != null ? getIterationNameHint(referredIteration) : null;
 		}
 		else if (anObject instanceof Number) {
 			return getNumericNameHint((Number)anObject);
 		}
 		else if (anObject instanceof Operation) {
 			return getOperationNameHint((Operation)anObject);
+		}
+		else if (anObject instanceof OperationCallExp) {
+			Operation referredOperation = ((OperationCallExp)anObject).getReferredOperation();
+			return referredOperation != null ? getOperationCallExpNameHint(referredOperation) : null;
+		}
+		else if (anObject instanceof PropertyCallExp) {
+			Property referredProperty = ((PropertyCallExp)anObject).getReferredProperty();
+			return referredProperty != null ? getPropertyNameHint(referredProperty) : null;
 		}
 		else if (anObject instanceof RealLiteralExp) {
 			Number numberSymbol = ((RealLiteralExp)anObject).getRealSymbol();
@@ -295,38 +328,53 @@ public class NameManager
 			Number numberSymbol = ((UnlimitedNaturalLiteralExp)anObject).getUnlimitedNaturalSymbol();
 			return numberSymbol != null ? getNumericNameHint(numberSymbol) : null;
 		}
+		else if (anObject instanceof VariableExp) {
+			VariableDeclaration referredVariable = ((VariableExp)anObject).getReferredVariable();
+			return referredVariable != null ? getVariableDeclarationNameHint(referredVariable) : null;
+		}
 		else if (anObject instanceof LiteralExp) {
 			return "literal";
 		}
 		else if (anObject instanceof Nameable) {
-			return ((Nameable)anObject).getName();
+			String name = ((Nameable)anObject).getName();
+			return name != null ? getValidJavaIdentifier(name, false) : null;
 		}
 		else {
 			return null;
 		}
 	}
 
-	public String getNumericNameHint(@NonNull Number aNumber) {
+	protected String getNumericNameHint(@NonNull Number aNumber) {
 		@SuppressWarnings("null") @NonNull String string = aNumber.toString();
 		if ((aNumber instanceof BigInteger) || (aNumber instanceof Long) || (aNumber instanceof Integer) || (aNumber instanceof Short)) {
 			return INTEGER_NAME_HINT_PREFIX + string;
 		}
 		else if ((aNumber instanceof BigDecimal) || (aNumber instanceof Double) || (aNumber instanceof Float)) {
-			return REAL_NAME_HINT_PREFIX + getValidJavaIdentifier(string, true);
+			return REAL_NAME_HINT_PREFIX + getValidJavaIdentifier(string, REAL_NAME_HINT_PREFIX.length() > 0);
 		}
 		else {
 			return null;
 		}
 	}
 
-	public String getOperationNameHint(@NonNull Operation anOperation) {
+	protected String getOperationNameHint(@NonNull Operation anOperation) {
 		@SuppressWarnings("null") @NonNull String string = anOperation.toString();
-		return OPERATION_NAME_HINT_PREFIX + getValidJavaIdentifier(string, true);
+		return OPERATION_NAME_HINT_PREFIX + getValidJavaIdentifier(string, OPERATION_NAME_HINT_PREFIX.length() > 0);
 	}
 
-	public String getStringNameHint(@NonNull String aString) {
+	protected String getOperationCallExpNameHint(@NonNull Operation anOperation) {
+		@SuppressWarnings("null") @NonNull String string = anOperation.getName();
+		return OPERATION_CALL_EXP_NAME_HINT_PREFIX + getValidJavaIdentifier(string, OPERATION_CALL_EXP_NAME_HINT_PREFIX.length() > 0);
+	}
+
+	protected String getPropertyNameHint(@NonNull Property aProperty) {
+		@SuppressWarnings("null") @NonNull String string = aProperty.getName();
+		return PROPERTY_NAME_HINT_PREFIX + getValidJavaIdentifier(string, PROPERTY_NAME_HINT_PREFIX.length() > 0);
+	}
+
+	protected String getStringNameHint(@NonNull String aString) {
 		@SuppressWarnings("null") @NonNull String string = aString.length() > 20 ? aString.substring(0, 20) : aString;
-		return STRING_NAME_HINT_PREFIX + getValidJavaIdentifier(string, true);
+		return STRING_NAME_HINT_PREFIX + getValidJavaIdentifier(string, STRING_NAME_HINT_PREFIX.length() > 0);
 	}
 
 	public @NonNull String getSymbolName(@Nullable Object anObject, @Nullable String... nameHints) {
@@ -338,7 +386,7 @@ public class NameManager
 		}
 	}
 
-	public String getTypeNameHint(@NonNull DomainType aType) {
+	protected String getTypeNameHint(@NonNull DomainType aType) {
 		if (aType instanceof CollectionType) {
 			if (aType instanceof OrderedSetType) {
 				return ORDERED_SET_NAME_HINT_PREFIX;
@@ -357,7 +405,7 @@ public class NameManager
 			}
 		}
 		@SuppressWarnings("null") @NonNull String string = aType.toString();
-		return TYPE_NAME_HINT_PREFIX + getValidJavaIdentifier(string, true);
+		return TYPE_NAME_HINT_PREFIX + getValidJavaIdentifier(string, TYPE_NAME_HINT_PREFIX.length() > 0);
 	}
 
 	/**
@@ -491,6 +539,11 @@ public class NameManager
 		}
 		@SuppressWarnings("null") @NonNull String string = s.toString();
 		return string;
+	}
+
+	protected String getVariableDeclarationNameHint(@NonNull VariableDeclaration aVariableDeclaration) {
+		String string = DomainUtil.nonNullModel(aVariableDeclaration.getName());
+		return VARIABLE_DECLARATION_NAME_HINT_PREFIX + getValidJavaIdentifier(string, VARIABLE_DECLARATION_NAME_HINT_PREFIX.length() > 0);
 	}
 	
 	private void install(@NonNull String name, @Nullable Object anObject) {

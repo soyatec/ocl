@@ -56,7 +56,7 @@ public class CommonSubExpression
 		assert element != null;
 		@SuppressWarnings("null") @NonNull String[] nameHintArray = nameHints.toArray(new String[nameHints.size()]);
 		CodeGenAnalysis firstAnalysis = getAnalysis();
-		String name = analyzer.getCodeGenerator().getConstant(firstAnalysis.getExpression() /*nameHints*/).getName();
+		String name = analyzer.getCodeGenerator().getSnippet(firstAnalysis.getExpression() /*nameHints*/).getName();
 //		String name = nameManager.getUniqueName(variable2, nameHintArray);
 		variable2.setName(name);
 		variable2.setType(element.getType());

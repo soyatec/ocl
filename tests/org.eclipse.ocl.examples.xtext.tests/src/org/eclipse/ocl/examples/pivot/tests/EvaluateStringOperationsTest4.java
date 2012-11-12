@@ -27,6 +27,7 @@ import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.osgi.util.NLS;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -53,6 +54,10 @@ public class EvaluateStringOperationsTest4 extends PivotTestSuite
 	protected String getTestPackageName() {
 		return "EvaluateStringOperations";
 	}
+	
+	@BeforeClass public static void resetCounter() throws Exception {
+		PivotTestSuite.resetCounter();
+    }
 
     @Override
     @Before public void setUp() throws Exception {

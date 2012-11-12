@@ -22,6 +22,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -84,6 +85,9 @@ public class CodeGenAnalysis
 	 * a shared overhead for each execution.
 	 */
 	private boolean isLocalConstant = false;						// Node is a meta-model-dependent constant
+
+	private boolean isInvalid = false;
+	
 	private Object constantValue = null;
 	//
 	// CommonSubExpressionEliminator analysis conclusions
@@ -329,6 +333,15 @@ public class CodeGenAnalysis
 		}
 	}
 
+	public boolean isInvalid() {
+		if (delegateTo != null) {
+			return delegateTo.isInvalid();
+		}
+		else {
+			return isInvalid || (this.constantValue instanceof InvalidValue);
+		}
+	}
+
 	public boolean isLocalConstant() {
 		if (delegateTo != null) {
 			return delegateTo.isLocalConstant();
@@ -422,6 +435,11 @@ public class CodeGenAnalysis
 		this.isInlineable = true;
 	}
 
+	public void setInvalid() {
+//		assert delegateTo == null;
+		this.isInvalid = true;
+	}
+
 	public void setLocalConstant() {
 		assert delegateTo == null;
 		this.isLocalConstant = true;
@@ -435,7 +453,7 @@ public class CodeGenAnalysis
 //		this.isInlineable = analyzer.getConstantHelper().isInlineable(constantValue);
 //		if (!isInlineable) {				// null is always inlineable
 //			assert constantValue != null;
-			@SuppressWarnings("unused") String name = analyzer.getCodeGenerator().getConstant(constantValue).getName();
+			@SuppressWarnings("unused") String name = analyzer.getCodeGenerator().getSnippet(constantValue).getName();
 //		}
 	}
 
@@ -450,13 +468,13 @@ public class CodeGenAnalysis
 	}
 
 	public void setStaticConstantValue(@Nullable Object constantValue) {
-		assert delegateTo == null;
+		assert (delegateTo == null) || (isInvalid && (constantValue instanceof InvalidValue));
 		this.isStaticConstant = true;
 		this.constantValue = constantValue;	
 //		this.isInlineable = analyzer.getConstantHelper().isInlineable(constantValue);
 //		if (!isInlineable) {				// null is always inlineable
 //			assert constantValue != null;
-			CodeGenSnippet constantSnippet = analyzer.getCodeGenerator().getConstant(constantValue);
+			CodeGenSnippet constantSnippet = analyzer.getCodeGenerator().getSnippet(constantValue);
 			@SuppressWarnings("unused") String name = constantSnippet.getName();
 //		}
 	}
@@ -478,6 +496,7 @@ public class CodeGenAnalysis
 		if (isStaticConstant) { s.append(prefix + "Static=" + String.valueOf(constantValue)); prefix = ','; }
 		if (isLocalConstant) { s.append(prefix + "Local=" + String.valueOf(constantValue)); prefix = ','; }
 		if (isInlineable) { s.append(prefix + "Inline"); prefix = ','; }
+		if (isInvalid) { s.append(prefix + "Invalid"); prefix = ','; }
 //		if ((invalidSources != null) && (invalidSources.size() > 0)) { s.append(prefix + "Invalidable"); prefix = ','; }
 //		if ((nullSources != null) && (nullSources.size() > 0)) { s.append(prefix + "Nullable"); prefix = ','; }
 		if (prefix == '{') { s.append(prefix); }

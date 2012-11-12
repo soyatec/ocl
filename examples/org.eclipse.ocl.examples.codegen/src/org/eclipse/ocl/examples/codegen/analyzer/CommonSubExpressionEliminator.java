@@ -104,7 +104,7 @@ public class CommonSubExpressionEliminator
 			for (List<CodeGenAnalysis> hashedAnalysis : hashedAnalyses) {
 				int iSize = hashedAnalysis.size();
 				CodeGenAnalysis analysis = hashedAnalysis.get(0);
-				if (!analysis.isConstant() && ((iSize > 1) /*|| analysis.isConstant()*/)) {
+				if (!analysis.isConstant() && !analysis.isInvalid() && ((iSize > 1) /*|| analysis.isConstant()*/)) {
 					candidates.add(hashedAnalysis);
 				}
 			}

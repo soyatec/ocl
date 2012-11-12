@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -51,6 +52,10 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 	protected String getTestPackageName() {
 		return "EvaluateCollectionOperations";
 	}
+	
+	@BeforeClass public static void resetCounter() throws Exception {
+		PivotTestSuite.resetCounter();
+    }
 
     @Override
     @Before public void setUp() throws Exception {
@@ -196,6 +201,8 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 	}
 
 	@Test public void testCollectionAt() {
+		assertQueryInvalid(null, "Sequence{'a', invalid}->at(1)");
+//
 		assertQueryEquals(null, "a", "Sequence{'a', 'b'}->at(1)");
 		assertQueryEquals(null, "b", "OrderedSet{'a', 'b'}->at(2)");
 		assertQueryEquals(null, -3, "Sequence{-3..-1}->at(1)");
@@ -1420,6 +1427,8 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 	}
 
 	@Test public void testCollectionSelectByKind() {
+		assertQueryResults(null, "Sequence{'TEST'}", "Sequence{4, 4, 5.0, 'test'}->selectByKind(String).toUpper()");
+//
 		assertQueryResults(null, "Bag{4,4}", "Bag{4, 4, 5.0, 'test', null}->selectByKind(Integer)");
 		assertQueryResults(null, "OrderedSet{4}", "OrderedSet{4, 4, 5.0, 'test', null}->selectByKind(Integer)");
 		assertQueryResults(null, "Sequence{4,4}", "Sequence{4, 4, 5.0, 'test', null}->selectByKind(Integer)");

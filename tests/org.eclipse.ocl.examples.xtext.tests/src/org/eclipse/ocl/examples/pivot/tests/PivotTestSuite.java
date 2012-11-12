@@ -113,7 +113,6 @@ import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
-import org.junit.BeforeClass;
 
 /**
  * Default test framework.
@@ -1383,7 +1382,7 @@ public abstract class PivotTestSuite extends PivotTestCase
         return pkg;
 	}
 	
-	@BeforeClass public static void resetCounter() throws Exception {
+	public static void resetCounter() throws Exception {
         testCounter = 0;
     }
 

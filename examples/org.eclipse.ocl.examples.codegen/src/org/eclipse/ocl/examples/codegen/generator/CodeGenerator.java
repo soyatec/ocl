@@ -14,47 +14,40 @@
  **/
 package org.eclipse.ocl.examples.codegen.generator;
 
-import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
+import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
-public interface OCLCodeGenerator
+public interface CodeGenerator
 {
-	void append(@Nullable String string);
+	public static final @NonNull String GLOBAL_ROOT = "GLOBAL_ROOT";
+	public static final @NonNull String LOCAL_ROOT = "LOCAL_ROOT";
+	
+	void addProblem(@NonNull Exception e);
+	void addDependency(@NonNull String onLabel, @NonNull CodeGenSnippet snippet);
 	@NonNull String atNonNull();
 	@NonNull String atNullable();
+	@NonNull CodeGenSnippet createCodeGenSnippet(@Nullable String indentation);
 	@Nullable CodeGenAnalysis findAnalysis(@NonNull Element element);
-	@NonNull Class<?> getAbstractOperationClass(@NonNull List<? extends TypedElement> parameters);
 	@NonNull CodeGenAnalysis getAnalysis(@NonNull Element element);
-	@NonNull CodeGenSnippet getConstant(@Nullable Object anObject);
 	@NonNull ConstantHelper getConstantHelper();
 	@NonNull String getDefaultIndent();
-	@NonNull String getDefiningText(@NonNull TypedElement element);
 	@NonNull String getEvaluatorName();
-	@NonNull OCL2JavaExpressionVisitor getExpressionVisitor();
-	@NonNull Id2JavaVisitor getIdVisitor();
+	@NonNull GenModelHelper getGenModelHelper();
+	@NonNull IdVisitor<CodeGenSnippet> getIdVisitor();
+	@NonNull ImportManager getImportManager();
 	@NonNull String getImportedName(@NonNull Class<?> className);
-	@NonNull String getImportedName(@NonNull String qualifiedClassName);
 	@NonNull MetaModelManager getMetaModelManager();
 	@NonNull NameManager getNameManager();
-	@NonNull Class<?> getOperationInterface(@NonNull List<? extends TypedElement> parameters);
-	@Nullable String getQualifiedOperationImplementationName(@NonNull Operation anOperation, @NonNull String stereotype);
-	@Nullable String getQualifiedPropertyImplementationName(@NonNull Property aProperty, @NonNull String stereotype);
-	@Nullable String getQualifiedLiteralName(@NonNull Operation anOperation);
-	@Nullable String getQualifiedLiteralName(@NonNull Property aProperty);
-	@NonNull String getReferringText(@NonNull CodeGenSnippet referringSnippet, @NonNull TypedElement element);
-	@NonNull CodeGenSnippet getSnippet(@NonNull Object object);
+	@NonNull CodeGenSnippet getSnippet(@Nullable Object object);
+	@NonNull CodeGenLabel getSnippetLabel(@NonNull String label);
 	@NonNull CodeGenSnippet getStandardLibrary(@NonNull CodeGenSnippet referringSnippet);
-	void popIndentation();
-	void pushIndentation();
-	void pushIndentation(@NonNull String moreIndentation);
+	boolean isFinal(@NonNull Operation anOperation);
+	boolean mayEvaluateForInvalid(@NonNull Operation anOperation);
 	void setSnippet(@NonNull Element element, @NonNull CodeGenSnippet snippet);
 }

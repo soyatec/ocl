@@ -55,7 +55,9 @@ public class EmitQueries
 	 * in a Java form to reduce the impact of refactoring on Acceleo templates.
 	 */
 	public static final @NonNull Class<?>[] knownClasses = {
+		java.lang.Class.class,
 		java.lang.Object.class,
+		java.lang.Package.class,
 		java.util.Iterator.class,
 		org.eclipse.ocl.examples.domain.elements.DomainElement.class,
 		org.eclipse.ocl.examples.domain.elements.DomainMetaclass.class,

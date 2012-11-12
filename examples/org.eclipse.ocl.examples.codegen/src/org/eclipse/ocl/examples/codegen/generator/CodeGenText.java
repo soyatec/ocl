@@ -16,11 +16,15 @@ package org.eclipse.ocl.examples.codegen.generator;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.examples.pivot.Type;
 
-/**
- * A ConstantHelper provides textual representations of constant values.
- */
-public interface ConstantHelper
-{
-	@NonNull CodeGenSnippet createSnippet(@Nullable Object anObject);
+public interface CodeGenText extends CodeGenNode
+{ 
+	void append(@NonNull String string);
+	void appendReferenceTo(@NonNull Object element);
+	void appendReferenceTo(@NonNull OCLExpression element, @NonNull Type requiredType);
+	void appendCommentWithOCL(@Nullable String title, @NonNull Element element);
+	@NonNull CodeGenSnippet getSnippet();
 }

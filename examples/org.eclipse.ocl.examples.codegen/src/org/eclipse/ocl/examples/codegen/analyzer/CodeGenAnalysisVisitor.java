@@ -14,8 +14,6 @@
  */
 package org.eclipse.ocl.examples.codegen.analyzer;
 
-import java.util.Collections;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -24,6 +22,7 @@ import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
+import org.eclipse.ocl.examples.pivot.CollectionLiteralPart;
 import org.eclipse.ocl.examples.pivot.CollectionRange;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
@@ -38,6 +37,7 @@ import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.MessageExp;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
@@ -55,8 +55,6 @@ import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
-
-import com.google.common.collect.Iterables;
 
 /**
  * A CodeGenAnalysisVisitor handles the Pivot AST visits on behalf of a CodeGenAnalyzer.
@@ -88,7 +86,6 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 		OCLExpression item = DomainUtil.nonNullModel(element.getItem());
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 		CodeGenAnalysis itemAnalysis = context.descend(item);
-//		thisAnalysis.addInvalidSources(itemAnalysis.getInvalidSources());
 		thisAnalysis.setDelegateTo(itemAnalysis);
 		return thisAnalysis;
 	}
@@ -96,7 +93,13 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 	@Override
 	public @Nullable CodeGenAnalysis visitCollectionLiteralExp(@NonNull CollectionLiteralExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-		context.descendAll(DomainUtil.nonNullEMF(element.getPart()));
+		for (CollectionLiteralPart part : element.getPart()) {
+			assert part != null;
+			CodeGenAnalysis partAnalysis = context.descend(part);
+			if (partAnalysis.isInvalid()) {
+				thisAnalysis.setInvalid();
+			}
+		}
 		return thisAnalysis;
 	}
 
@@ -105,10 +108,11 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 		OCLExpression first = DomainUtil.nonNullModel(element.getFirst());
 		OCLExpression last = DomainUtil.nonNullModel(element.getLast());
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-		@SuppressWarnings("unused") CodeGenAnalysis firstAnalysis = context.descend(first);
-		@SuppressWarnings("unused") CodeGenAnalysis lastAnalysis = context.descend(last);		// FIXME first..first optimization
-//		thisAnalysis.addInvalidSources(firstAnalysis.getInvalidSources());
-//		thisAnalysis.addInvalidSources(lastAnalysis.getInvalidSources());
+		CodeGenAnalysis firstAnalysis = context.descend(first);
+		CodeGenAnalysis lastAnalysis = context.descend(last);		// FIXME first..first optimization
+		if (firstAnalysis.isInvalid() || lastAnalysis.isInvalid()) {
+			thisAnalysis.setInvalid();
+		}
 		return thisAnalysis;
 	}
 
@@ -140,8 +144,21 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 	CodeGenAnalysis visitExpressionInOCL(@NonNull ExpressionInOCL element) {
 		OCLExpression bodyExpression = DomainUtil.nonNullModel(element.getBodyExpression());
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-		@SuppressWarnings("unused") CodeGenAnalysis bodyAnalysis = context.descend(bodyExpression);
-//		thisAnalysis.addInvalidSources(bodyAnalysis.getInvalidSources());
+		CodeGenAnalysis contextVariableAnalysis = context.descend(DomainUtil.nonNullModel(element.getContextVariable()));
+		if (contextVariableAnalysis.isInvalid()) {
+			thisAnalysis.setInvalid();
+		}
+		for (Variable parameterVariable : element.getParameterVariable()) {
+			assert parameterVariable != null;
+			CodeGenAnalysis parameterVariableAnalysis = context.descend(parameterVariable);
+			if (parameterVariableAnalysis.isInvalid()) {
+				thisAnalysis.setInvalid();
+			}
+		}
+		CodeGenAnalysis bodyAnalysis = context.descend(bodyExpression);
+		if (bodyAnalysis.isInvalid()) {
+			thisAnalysis.setInvalid();
+		}
 		return thisAnalysis;
 	}
 
@@ -151,35 +168,15 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 		OCLExpression thenExpression = DomainUtil.nonNullModel(element.getThenExpression());
 		OCLExpression elseExpression = DomainUtil.nonNullModel(element.getElseExpression());
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-		@SuppressWarnings("unused") CodeGenAnalysis conditionAnalysis = context.descend(condition);
-		@SuppressWarnings("unused") CodeGenAnalysis thenAnalysis = context.descend(thenExpression);
-		@SuppressWarnings("unused") CodeGenAnalysis elseAnalysis = context.descend(elseExpression);
-//		CodeGenAssignment assignment = thisAnalysis.createAssignment();
-//		CodeGenAssignment conditionAssignment = conditionAnalysis.getAssignment();
-//		CodeGenAssignment thenAssignment = thenAnalysis.getAssignment();
-//		CodeGenAssignment elseAssignment = elseAnalysis.getAssignment();
-//		assignment.addDependency(conditionAssignment);
-//		assignment.addDependency(thenAssignment);
-//		assignment.addDependency(elseAssignment);
-//		thenAssignment.addConditionalDependency(conditionAssignment);
-//		elseAssignment.addConditionalDependency(conditionAssignment);
-//		Set<CodeGenAnalysis> invalidConditionSources = conditionAnalysis.getInvalidSources();
-//		if (invalidConditionSources != null) {
-//			thisAnalysis.addInvalidSources(invalidConditionSources);
-//		}
-//		Set<CodeGenAnalysis> invalidThenSources = thenAnalysis.getInvalidSources();
-//		Set<CodeGenAnalysis> invalidElseSources = elseAnalysis.getInvalidSources();
-/*		if ((invalidThenSources != null) || (invalidElseSources != null)) {
-			if ((invalidThenSources != null) && (invalidElseSources != null)) {
-				Set<CodeGenAnalysis> invalidCommonSources = new HashSet<CodeGenAnalysis>(invalidThenSources);
-				invalidCommonSources.retainAll(invalidElseSources);
-				thisAnalysis.addInvalidSources(invalidCommonSources);
-				Set<CodeGenAnalysis> invalidUncommonSources = new HashSet<CodeGenAnalysis>(invalidThenSources);
-				invalidUncommonSources.addAll(invalidElseSources);
-				invalidUncommonSources.removeAll(invalidCommonSources);
-				thisAnalysis.addInvalidSource(thisAnalysis);
-			}
-		} */
+		CodeGenAnalysis conditionAnalysis = context.descend(condition);
+		if (conditionAnalysis.isInvalid()) {
+			thisAnalysis.setInvalid();
+		}
+		CodeGenAnalysis thenAnalysis = context.descend(thenExpression);
+		CodeGenAnalysis elseAnalysis = context.descend(elseExpression);
+		if (thenAnalysis.isInvalid() && elseAnalysis.isInvalid()) {
+			thisAnalysis.setInvalid();
+		}
 		return thisAnalysis;
 	}
 
@@ -193,16 +190,35 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 	@Override
 	public @Nullable CodeGenAnalysis visitInvalidLiteralExp(@NonNull InvalidLiteralExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-//		thisAnalysis.addInvalidSource(thisAnalysis);
 		thisAnalysis.setInlineable();
+		thisAnalysis.setInvalid();
 		return thisAnalysis;
 	}
 
 	@Override
 	public @Nullable CodeGenAnalysis visitIterateExp(@NonNull IterateExp element) {
-//		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-		context.addNamedElement(element.getReferredIteration());
-		// TODO Auto-generated method stub
+		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
+//		context.addNamedElement(element.getReferredIteration());
+		CodeGenAnalysis sourceAnalysis = context.descend(DomainUtil.nonNullModel(element.getSource()));
+		if (sourceAnalysis.isInvalid()) {
+			thisAnalysis.setInvalid();
+		}
+		for (Variable iterator : element.getIterator()) {
+			assert iterator != null;
+			CodeGenAnalysis iteratorAnalysis = context.descend(iterator);
+			if (iteratorAnalysis.isInvalid()) {
+				thisAnalysis.setInvalid();
+			}
+		}
+		CodeGenAnalysis resultAnalysis = context.descend(DomainUtil.nonNullModel(element.getResult()));
+		if (resultAnalysis.isInvalid()) {
+			thisAnalysis.setInvalid();
+		}
+		CodeGenAnalysis bodyAnalysis = context.descend(DomainUtil.nonNullModel(element.getBody()));
+		thisAnalysis.setDelegateTo(resultAnalysis);
+		if (bodyAnalysis.isInvalid()) {
+			thisAnalysis.setInvalid();
+		}
 		return super.visitIterateExp(element);
 	}
 
@@ -210,13 +226,20 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 	public @Nullable CodeGenAnalysis visitIteratorExp(@NonNull IteratorExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 		thisAnalysis.initHashSource(DomainUtil.nonNullModel(element.getReferredIteration()));
-		OCLExpression source = element.getSource();
-		if (source != null) {
-			context.descendAll(Iterables.concat(Collections.singletonList(source), /*element.getIterator(),*/ Collections.singletonList(element.getBody())));
+		CodeGenAnalysis sourceAnalysis = context.descend(DomainUtil.nonNullModel(element.getSource()));
+		if (sourceAnalysis.isInvalid()) {
+			thisAnalysis.setInvalid();
 		}
-		else {
-//			context.descendAll(Iterables.concat(/*element.getIterator(),*/ Collections.singletonList(element.getBody())));
-			context.descend(element.getBody());
+		for (Variable iterator : element.getIterator()) {
+			assert iterator != null;
+			CodeGenAnalysis iteratorAnalysis = context.descend(iterator);
+			if (iteratorAnalysis.isInvalid()) {
+				thisAnalysis.setInvalid();
+			}
+		}
+		CodeGenAnalysis bodyAnalysis = context.descend(DomainUtil.nonNullModel(element.getBody()));
+		if (bodyAnalysis.isInvalid()) {
+			thisAnalysis.setInvalid();
 		}
 		return thisAnalysis;
 	}
@@ -229,22 +252,12 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 		CodeGenAnalysis initAnalysis = context.descend(initExpression);
 		CodeGenAnalysis inAnalysis = context.descend(in);
-//		CodeGenAssignment initAssignment = initAnalysis.getAssignment();
-//		CodeGenAssignment inAssignment = inAnalysis.getAssignment();
-//		thisAnalysis.setAssignment(inAssignment);
-//		inAssignment.addDependency(initAssignment);
-		
-		
 		thisAnalysis.initHashSource(letVariable);
-//		context.addNamedElement(letVariable);
-//		thisAnalysis.addDependency(letVariable);
 		thisAnalysis.setDelegateTo(inAnalysis);
 		initAnalysis.setVariable(letVariable);
-
-		
-		
-		
-//		thisAnalysis.addInvalidSources(inAnalysis.getInvalidSources());
+		if (inAnalysis.isInvalid()) {
+			thisAnalysis.setInvalid();
+		}
 		return thisAnalysis;
 	}
 
@@ -258,7 +271,6 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 	@Override
 	public @Nullable CodeGenAnalysis visitNullLiteralExp(@NonNull NullLiteralExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-//		thisAnalysis.addNullSource(thisAnalysis);
 		thisAnalysis.setInlineable();
 		return thisAnalysis;
 	}
@@ -266,27 +278,35 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 	@Override
 	public @Nullable CodeGenAnalysis visitOperationCallExp(@NonNull OperationCallExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-		thisAnalysis.initHashSource(element.getReferredOperation());
+		Operation referredOperation = DomainUtil.nonNullModel(element.getReferredOperation());
+		boolean mayEvaluateForInvalid = context.getCodeGenerator().mayEvaluateForInvalid(referredOperation);
+		thisAnalysis.initHashSource(referredOperation);
 		OCLExpression source = element.getSource();
 		if (source != null) {
-			context.descendAll(Iterables.concat(Collections.singletonList(source), element.getArgument()));
+			CodeGenAnalysis sourceAnalysis = context.descend(source);
+			if (sourceAnalysis.isInvalid() && !mayEvaluateForInvalid) {
+				thisAnalysis.setInvalid();
+			}
 		}
-		else {
-			context.descendAll(DomainUtil.nonNullEMF(element.getArgument()));
+		for (OCLExpression argument : element.getArgument()) {
+			CodeGenAnalysis argumentAnalysis = context.descend(DomainUtil.nonNullModel(argument));
+			if (argumentAnalysis.isInvalid() && !mayEvaluateForInvalid) {
+				thisAnalysis.setInvalid();
+			}
 		}
 		return thisAnalysis;
 	}
 
 	@Override
 	public @Nullable CodeGenAnalysis visitPropertyCallExp(@NonNull PropertyCallExp element) {
-		OCLExpression source = DomainUtil.nonNullModel(element.getSource());
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 		Property referredProperty = DomainUtil.nonNullModel(element.getReferredProperty());
 		thisAnalysis.initHashSource(referredProperty);
-		context.addNamedElement(referredProperty);
-		context.descend(source);
-//		thisAnalysis.addInvalidSource(thisAnalysis);
-//		thisAnalysis.addNullSource(thisAnalysis);
+//		context.addNamedElement(referredProperty);
+		CodeGenAnalysis sourceAnalysis = context.descend(DomainUtil.nonNullModel(element.getSource()));
+		if (sourceAnalysis.isInvalid()) {
+			thisAnalysis.setInvalid();
+		}
 		return thisAnalysis;
 	}
 
@@ -314,18 +334,26 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 	@Override
 	public @Nullable CodeGenAnalysis visitTupleLiteralExp(@NonNull TupleLiteralExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-		context.addNamedElement(element.getType());
-		context.descendAll(DomainUtil.nonNullEMF(element.getPart()));
+//		context.addNamedElement(element.getType());
+		for (TupleLiteralPart part : element.getPart()) {
+			assert part != null;
+			CodeGenAnalysis partAnalysis = context.descend(part);
+			if (partAnalysis.isInvalid()) {
+				thisAnalysis.setInvalid();
+			}
+		}
 		return thisAnalysis;
 	}
 
 	@Override
 	public @Nullable CodeGenAnalysis visitTupleLiteralPart(@NonNull TupleLiteralPart element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-		context.addNamedElement(element);
+//		context.addNamedElement(element);
 		OCLExpression initExpression = DomainUtil.nonNullModel(element.getInitExpression());
-		@SuppressWarnings("unused") CodeGenAnalysis itemAnalysis = context.descend(initExpression);
-//		thisAnalysis.addInvalidSources(itemAnalysis.getInvalidSources());
+		CodeGenAnalysis itemAnalysis = context.descend(initExpression);
+		if (itemAnalysis.isInvalid()) {
+			thisAnalysis.setInvalid();
+		}
 		return thisAnalysis;
 	}
 
@@ -358,21 +386,45 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 	}
 
 	@Override
+	public @Nullable CodeGenAnalysis visitVariable(@NonNull Variable element) {
+		// LoopExp iterator, IterateExp result, but not LetExp
+		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
+		thisAnalysis.initHashSource(element);
+//		context.addNamedElement(element);
+		OCLExpression initExpression = element.getInitExpression();
+		if (initExpression != null) {
+			CodeGenAnalysis initAnalysis = context.getAnalysis(initExpression);
+			thisAnalysis.setDelegateTo(initAnalysis);
+			if (initAnalysis.isInvalid()) {
+				thisAnalysis.setInvalid();
+			}
+		}
+		return thisAnalysis;
+	}
+
+	@Override
 	public @Nullable CodeGenAnalysis visitVariableExp(@NonNull VariableExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-//		CodeGenAnalysis init = safeAccept(element.getVariable().getInitExpression());
-//		CodeGenAnalysis in = safeAccept(element.getIn());
 		VariableDeclaration referredVariable = element.getReferredVariable();
 		if (referredVariable != null) {
 			thisAnalysis.initHashSource(referredVariable);
-			context.addNamedElement(referredVariable);
+//			context.addNamedElement(referredVariable);
 			thisAnalysis.addDependency(referredVariable);
 			if (referredVariable instanceof Variable) {
 				OCLExpression initExpression = ((Variable)referredVariable).getInitExpression();
 				if (initExpression != null) {
 					CodeGenAnalysis initAnalysis = context.getAnalysis(initExpression);
 					thisAnalysis.setDelegateTo(initAnalysis);
-//					initAnalysis.setVariable((Variable)referredVariable);
+					if (initAnalysis.isInvalid()) {
+						thisAnalysis.setInvalid();
+					}
+				}
+				else {
+					CodeGenAnalysis variableAnalysis = context.getAnalysis(referredVariable);
+					thisAnalysis.setDelegateTo(variableAnalysis);
+					if (variableAnalysis.isInvalid()) {
+						thisAnalysis.setInvalid();
+					}
 				}
 			}
 		}

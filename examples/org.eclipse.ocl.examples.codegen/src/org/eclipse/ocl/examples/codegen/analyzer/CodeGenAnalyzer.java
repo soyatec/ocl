@@ -22,10 +22,9 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.generator.ConstantHelper;
-import org.eclipse.ocl.examples.codegen.generator.OCLCodeGenerator;
+import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
@@ -34,7 +33,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
  */
 public class CodeGenAnalyzer
 {	
-	protected final @NonNull OCLCodeGenerator codeGenerator;
+	protected final @NonNull CodeGenerator codeGenerator;
 	protected final @NonNull MetaModelManager metaModelManager;
 	protected final @NonNull NameManager nameManager;
 	protected final @NonNull CodeGenAnalysisVisitor visitor;
@@ -45,7 +44,7 @@ public class CodeGenAnalyzer
 	private List<CodeGenAnalysis> theseChildren = null;
 	private @NonNull CodeGenAnalysis thisAnalysis;
 	
-	public CodeGenAnalyzer(@NonNull OCLCodeGenerator codeGenerator, @NonNull TypedElement element) {
+	public CodeGenAnalyzer(@NonNull CodeGenerator codeGenerator, @NonNull TypedElement element) {
 		this.codeGenerator = codeGenerator;
 		this.metaModelManager = codeGenerator.getMetaModelManager();
 		this.nameManager = codeGenerator.getNameManager();
@@ -54,11 +53,11 @@ public class CodeGenAnalyzer
 		this.thisAnalysis = new CodeGenAnalysis(this, element);
 	}
 
-	public void addNamedElement(@Nullable NamedElement namedElement) {
-		if (namedElement != null) {
-			nameManager.addNamedElement(namedElement);
-		}
-	}
+//	public void addNamedElement(@Nullable NamedElement namedElement) {
+//		if (namedElement != null) {
+//			nameManager.addNamedElement(namedElement);
+//		}
+//	}
 
 	public void analyze() {
 		element2node.put(rootElement, thisAnalysis);
@@ -105,14 +104,6 @@ public class CodeGenAnalyzer
 		}
 	}
 
-	protected void descendAll(@NonNull Iterable<? extends TypedElement> elements) {
-		for (TypedElement element : elements) {
-			assert element != null;
-			@SuppressWarnings("unused")CodeGenAnalysis child = descend(element);
-//			thisAnalysis.addInvalidSources(child.getInvalidSources());
-		}
-	}
-
 	public @Nullable CodeGenAnalysis findAnalysis(@NonNull Element element) {
 		return element2node.get(element);
 	}
@@ -125,7 +116,7 @@ public class CodeGenAnalyzer
 		return analysis;
 	}
 
-	public @NonNull OCLCodeGenerator getCodeGenerator() {
+	public @NonNull CodeGenerator getCodeGenerator() {
 		return codeGenerator;
 	}
 

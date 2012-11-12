@@ -14,13 +14,16 @@
  */
 package org.eclipse.ocl.examples.codegen.generator;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
+import java.util.LinkedHashMap;
+import java.util.Set;
 
-/**
- * A ConstantHelper provides textual representations of constant values.
- */
-public interface ConstantHelper
-{
-	@NonNull CodeGenSnippet createSnippet(@Nullable Object anObject);
+import org.eclipse.jdt.annotation.NonNull;
+
+public interface CodeGenNode
+{ 
+	void appendException(@NonNull Exception e);
+	boolean flatten(@NonNull Set<CodeGenSnippet> knownSnippets, @NonNull LinkedHashMap<CodeGenText, String> textContents, @NonNull String outerIndentation);
+	@NonNull CodeGenerator getCodeGenerator();
+	@NonNull String getIndentation();
+	void toString(@NonNull StringBuilder s, @NonNull String indentation);
 }

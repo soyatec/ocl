@@ -19,6 +19,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -66,6 +67,7 @@ import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
+import org.eclipse.ocl.examples.domain.values.OrderedSet;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
@@ -88,6 +90,7 @@ import org.eclipse.ocl.examples.domain.values.impl.IntegerRangeImpl;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.JavaObjectValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.LongIntegerValueImpl;
+import org.eclipse.ocl.examples.domain.values.impl.OrderedSetImpl;
 import org.eclipse.ocl.examples.domain.values.impl.RangeOrderedSetValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.RangeSequenceValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.RealValueImpl;
@@ -343,6 +346,19 @@ public abstract class ValuesUtil
 		}
 	}
 
+	public static @NonNull BagValue createBagRange(@NonNull CollectionTypeId typeId, @NonNull Object... values) {
+		Bag<Object> allValues = new BagImpl<Object>();
+		for (Object value : values) {
+			if (value instanceof IntegerRange) {
+				allValues.addAll((IntegerRange)value);
+			}
+			else {
+				allValues.add(value);
+			}
+		}
+		return new BagValueImpl(typeId, allValues);
+	}
+
 	public static @NonNull BagValue createBagValue(@NonNull CollectionTypeId typeId, @NonNull Bag<? extends Object> values) {
 		return new BagValueImpl(typeId, values);
 	}
@@ -487,6 +503,19 @@ public abstract class ValuesUtil
 		return new RangeOrderedSetValueImpl(typeId, range);
 	}
 
+	public static @NonNull OrderedSetValue createOrderedSetRange(@NonNull CollectionTypeId typeId, @NonNull Object... values) {
+		OrderedSet<Object> allValues = new OrderedSetImpl<Object>();
+		for (Object value : values) {
+			if (value instanceof IntegerRange) {
+				allValues.addAll((IntegerRange)value);
+			}
+			else {
+				allValues.add(value);
+			}
+		}
+		return new SparseOrderedSetValueImpl(typeId, allValues);
+	}
+
 	public static @NonNull OrderedSetValue createOrderedSetValue(@NonNull CollectionTypeId typeId, @NonNull Object... values) {
 		return new SparseOrderedSetValueImpl(typeId, values);
 	}
@@ -507,6 +536,19 @@ public abstract class ValuesUtil
 		return new RangeSequenceValueImpl(typeId, range);
 	}
 
+	public static @NonNull SequenceValue createSequenceRange(@NonNull CollectionTypeId typeId, @NonNull Object... values) {
+		List<Object> allValues = new ArrayList<Object>();
+		for (Object value : values) {
+			if (value instanceof IntegerRange) {
+				allValues.addAll((IntegerRange)value);
+			}
+			else {
+				allValues.add(value);
+			}
+		}
+		return new SparseSequenceValueImpl(typeId, allValues);
+	}
+
 	public static @NonNull SequenceValue createSequenceValue(@NonNull CollectionTypeId typeId, @NonNull Object... values) {
 		return new SparseSequenceValueImpl(typeId, values);
 	}
@@ -517,6 +559,19 @@ public abstract class ValuesUtil
 
 	public static @NonNull SequenceValue createSequenceValue(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> values) {
 		return new SparseSequenceValueImpl(typeId, values);
+	}
+
+	public static @NonNull SetValue createSetRange(@NonNull CollectionTypeId typeId, @NonNull Object... values) {
+		Set<Object> allValues = new HashSet<Object>();
+		for (Object value : values) {
+			if (value instanceof IntegerRange) {
+				allValues.addAll((IntegerRange)value);
+			}
+			else {
+				allValues.add(value);
+			}
+		}
+		return new SetValueImpl(typeId, allValues);
 	}
 
 	public static @NonNull SetValue createSetValue(@NonNull CollectionTypeId typeId, @NonNull Collection<? extends Object> values) {

@@ -19,6 +19,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
@@ -31,6 +32,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.common.CodeGenHelper;
 import org.eclipse.ocl.examples.codegen.expression.OCL2JavaClass;
+import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
+import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.domain.library.LibraryOperation;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
@@ -147,7 +150,13 @@ public class JavaGenModelCodeGenHelper implements CodeGenHelper
 		String qualifiedName = packageName + "." + className;
 
 		OCL2JavaClass expressionInOCL2Class = new OCL2JavaClass(metaModelManager, query);
-		String javaCodeSource = expressionInOCL2Class.generateClassFile(this, packageName, className);
+		CodeGenSnippet rootSnippet = expressionInOCL2Class.generateClassFile(this, packageName, className);
+		LinkedHashMap<CodeGenText, String> flatContents = rootSnippet.flatten();
+		StringBuilder s = new StringBuilder();
+		for (Map.Entry<CodeGenText, String> entry : flatContents.entrySet()) {
+			entry.getKey().toString(s, entry.getValue());
+		}
+		String javaCodeSource = s.toString();
 //		System.out.println(javaCodeSource);
 /*		List<Object> arguments = new ArrayList<Object>();
 		arguments.add(this);

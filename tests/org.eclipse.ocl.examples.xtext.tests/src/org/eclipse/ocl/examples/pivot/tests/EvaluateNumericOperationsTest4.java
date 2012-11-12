@@ -28,6 +28,7 @@ import org.eclipse.ocl.examples.domain.values.impl.LongIntegerValueImpl;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -57,6 +58,10 @@ public class EvaluateNumericOperationsTest4 extends PivotTestSuite
 	protected String getTestPackageName() {
 		return "EvaluateNumericOperations";
 	}
+	
+	@BeforeClass public static void resetCounter() throws Exception {
+		PivotTestSuite.resetCounter();
+    }
 	
     @Override
     @Before public void setUp() throws Exception {

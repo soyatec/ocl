@@ -33,6 +33,7 @@ import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
+import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitorImpl;
@@ -68,6 +69,9 @@ public class ConstantFolder
 		if (expression instanceof ExpressionInOCL) {
 			return false;									// Need to generate at least return
 		}
+		if (expression instanceof VariableExp) {
+			return expression.eContainer() instanceof LetExp;
+		}
 		if (expression instanceof CallExp) {
 			return false;									// FIXME CG test aid to prevent all JUnit tests being folded to constants
 		}
@@ -86,6 +90,10 @@ public class ConstantFolder
 	 * Returns true if thisAnalysis is a constant.
 	 */
 	protected boolean foldConstants(@NonNull CodeGenAnalysis thisAnalysis) {
+		if (thisAnalysis.isInvalid()) {
+			thisAnalysis.setStaticConstantValue(ValuesUtil.INVALID_VALUE);
+			return true;
+		}
 		TypedElement expression = thisAnalysis.getExpression();
 		boolean allChildrenAreConstant = true;
 		CodeGenAnalysis[] childAnalyses = thisAnalysis.getChildren();

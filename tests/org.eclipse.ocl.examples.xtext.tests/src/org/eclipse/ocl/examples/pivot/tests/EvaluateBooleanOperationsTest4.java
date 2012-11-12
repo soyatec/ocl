@@ -22,6 +22,7 @@ import java.util.Collection;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -48,6 +49,10 @@ public class EvaluateBooleanOperationsTest4 extends PivotTestSuite
 	protected String getTestPackageName() {
 		return "EvaluateBooleanOperations";
 	}
+	
+	@BeforeClass public static void resetCounter() throws Exception {
+		PivotTestSuite.resetCounter();
+    }
 
     @Override
     @Before public void setUp() throws Exception {
@@ -176,8 +181,6 @@ public class EvaluateBooleanOperationsTest4 extends PivotTestSuite
 	}
 
 	@Test public void testBooleanXor() {
-		assertQueryInvalid(null, "let b : Boolean = invalid in false xor b");
-//
 		assertQueryFalse(null, "false xor false");
 		assertQueryTrue(null, "false xor true");
 		assertQueryTrue(null, "true xor false");

@@ -15,12 +15,16 @@
 package org.eclipse.ocl.examples.codegen.generator;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
+
 
 /**
- * A ConstantHelper provides textual representations of constant values.
+ * A CodeGenLabel is a CodeGenNode future, indirecting the requirement for a node upon which constants and
+ * expressions are dependent and the node resolving that dependence. The future is needed since dependencies
+ * are established during analysis, but the target is not created till the final code generation. 
  */
-public interface ConstantHelper
-{
-	@NonNull CodeGenSnippet createSnippet(@Nullable Object anObject);
+public interface CodeGenLabel
+{ 
+	void addDependency(@NonNull CodeGenSnippet cgElement);
+	@NonNull CodeGenSnippet pop();
+	void push(@NonNull CodeGenSnippet cgElement);
 }

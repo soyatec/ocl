@@ -14,13 +14,19 @@
  */
 package org.eclipse.ocl.examples.codegen.generator;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
-/**
- * A ConstantHelper provides textual representations of constant values.
- */
-public interface ConstantHelper
+public class GenModelException extends CodeGenException
 {
-	@NonNull CodeGenSnippet createSnippet(@Nullable Object anObject);
+	private static final long serialVersionUID = 1L;
+
+	public GenModelException(String message) {
+		super(message);
+	}
+
+	public GenModelException(Throwable cause) {
+		super(cause);
+	}
+	
+	public GenModelException(String message, Throwable cause) {
+		super(message, cause);
+	}
 }
