@@ -272,7 +272,8 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 						if (prefix != null) {
 							context.next(null, prefix, " ");
 						}
-						safeVisit(iterator);
+//						safeVisit(iterator);
+						context.appendName(iterator);
 						prefix = ",";
 						hasExplicitIterator = true;
 					}
@@ -345,7 +346,8 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 							if (prefix != null) {
 								context.next(null, prefix, " ");
 							}
-							safeVisit(iterator);
+//							safeVisit(iterator);
+							context.appendName(iterator);
 							prefix = ",";
 							hasExplicitIterator = true;
 						}
