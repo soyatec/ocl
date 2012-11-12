@@ -17,24 +17,53 @@
 
 package org.eclipse.ocl.examples.pivot.tests;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 
 /**
  * Tests for collection operations.
  */
 @SuppressWarnings("nls")
+@RunWith(value = Parameterized.class)
 public class EvaluateCollectionOperationsTest extends PivotTestSuite
 {
+	@Parameters
+	public static Collection<Object[]> data() {
+		Object[][] data = new Object[][]{{false}, {true}};
+		return Arrays.asList(data);
+	}
+
+	public EvaluateCollectionOperationsTest() {
+		super(false);
+	}
+
+	public EvaluateCollectionOperationsTest(boolean useCodeGen) {
+		super(useCodeGen);
+	}
+
     @Override
-    protected void setUp() throws Exception {
+    @Before public void setUp() throws Exception {
         super.setUp();
 //      helper.setContext(getMetaclass("Package"));
         helper.setContext(getMetaclass("String"));
     }
 
-	public void testCollectionAppend() {
+	@Override
+	@After public void tearDown() throws Exception {
+		super.tearDown();
+	}
+
+	@Test public void testCollectionAppend() {
 		assertQueryResults(null, "Sequence{'a', 'b', 'c'}", "Sequence{'a', 'b'}->append('c')");
 		assertQueryResults(null, "OrderedSet{'a', 'b', 'c'}", "OrderedSet{'a', 'b'}->append('c')");
 		assertQueryResults(null, "Sequence{1..4,0}", "Sequence{1..4}->append(0)");
@@ -65,7 +94,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryResults(null, "OrderedSet{'1..2', null}", "OrderedSet{'1..2'}->append(null)");
 	}
 
-	public void testCollectionAsBag() {
+	@Test public void testCollectionAsBag() {
 		assertQueryEquals(null, getEmptyBagValue(), "Sequence{}->asBag()");
 		assertQueryEquals(null, getEmptyBagValue(), "Bag{}->asBag()");
 //		assertQueryEquals(null, getEmptyBagValue(), "Set{}->asBag()");
@@ -89,7 +118,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let o : OrderedSet(Integer) = null in o->asBag()");
 	}
 
-	public void testCollectionAsOrderedSet() {
+	@Test public void testCollectionAsOrderedSet() {
 		assertQueryEquals(null, getEmptyOrderedSetValue(), "Sequence{}->asOrderedSet()");
 		assertQueryEquals(null, getEmptyOrderedSetValue(), "Bag{}->asOrderedSet()");
 		assertQueryEquals(null, getEmptyOrderedSetValue(), "Set{}->asOrderedSet()");
@@ -116,7 +145,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let o : OrderedSet(Integer) = null in o->asOrderedSet()");
 	}
 
-	public void testCollectionAsSequence() {
+	@Test public void testCollectionAsSequence() {
 		assertQueryEquals(null, getEmptySequenceValue(), "Sequence{}->asSequence()");
 		assertQueryEquals(null, getEmptySequenceValue(), "Bag{}->asSequence()");
 		assertQueryEquals(null, getEmptySequenceValue(), "Set{}->asSequence()");
@@ -145,7 +174,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let o : OrderedSet(Integer) = null in o->asSequence()");
 	}
 
-	public void testCollectionAsSet() {
+	@Test public void testCollectionAsSet() {
 		assertQueryEquals(null, getEmptySetValue(), "Sequence{}->asSet()");
 		assertQueryEquals(null, getEmptySetValue(), "Bag{}->asSet()");
 		assertQueryEquals(null, getEmptySetValue(), "Set{}->asSet()");
@@ -167,7 +196,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let o : OrderedSet(Integer) = null in o->asSet()");
 	}
 
-	public void testCollectionAt() {
+	@Test public void testCollectionAt() {
 		assertQueryEquals(null, "a", "Sequence{'a', 'b'}->at(1)");
 		assertQueryEquals(null, "b", "OrderedSet{'a', 'b'}->at(2)");
 		assertQueryEquals(null, -3, "Sequence{-3..-1}->at(1)");
@@ -195,7 +224,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "Sequence{-1..-3}->at(4)");
 	}
 
-	public void testCollectionCount() {
+	@Test public void testCollectionCount() {
 		assertQueryEquals(null, 1, "Sequence{3, 'test', 4.0, 4, 4.0, 'test'}->count(3)");
 		assertQueryEquals(null, 3, "Sequence{3, 'test', 4.0, 4, 4.0, 'test'}->count(4)");
 		assertQueryEquals(null, 3, "Sequence{3, 'test', 4.0, 4, 4.0, 'test'}->count(-(-4))");
@@ -263,7 +292,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryEquals(null, 1, "OrderedSet{3, null, 4.0, null, 'test'}->count(null)");
 	}
 
-	public void testCollectionEqual() {		
+	@Test public void testCollectionEqual() {		
 		assertQueryFalse(null, "Bag{1} = 1");
 		assertQueryFalse(null, "OrderedSet{1} = 1");
 		assertQueryFalse(null, "Sequence{1} = 1");
@@ -309,7 +338,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryTrue(null, "Set{Set{null}} = Set{Set{null}}");
 	}
 
-	public void testCollectionEqualOrderedXOrdered() {
+	@Test public void testCollectionEqualOrderedXOrdered() {
 		// same order, same quantities
 		assertQueryTrue(null, "Sequence{4, 5, 'test'} = Sequence{4, 5, 'test'}");
 		assertQueryTrue(null, "Sequence{4, 5, 'test', 5} = Sequence{4, 5, 'test', 5}");
@@ -330,7 +359,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryFalse(null, "OrderedSet{4, 5, 'test', 5} = Sequence{4, 5, 'test', 5}");
 	}
 
-	public void testCollectionEqualOrderedXUnordered() {
+	@Test public void testCollectionEqualOrderedXUnordered() {
 		// same quantities
 		assertQueryFalse(null, "Sequence{4, 5, 'test'} = Set{4, 'test', 5, 4}");
 		assertQueryFalse(null, "Sequence{4, 5, 'test', 4} = Bag{4, 'test', 5, 4}");
@@ -343,7 +372,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryFalse(null, "OrderedSet{4, 5, 'test', 4} = Bag{4, 'test', 5, 4}");
 	}
 
-	public void testCollectionEqualUnorderedXUnordered() {
+	@Test public void testCollectionEqualUnorderedXUnordered() {
 		// same quantities
 		assertQueryFalse(null, "Bag{4, 5, 'test'} = Set{4, 'test', 5, 4}");
 		assertQueryTrue(null, "Bag{4, 5, 'test', 4} = Bag{4, 'test', 5, 4}");
@@ -356,7 +385,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryFalse(null, "Set{4, 5, 'test', 4} = Bag{4, 'test', 5, 4}");
 	}
 
-	public void testCollectionEqualInvalid() {
+	@Test public void testCollectionEqualInvalid() {
 		assertQueryInvalid(null, "let s : Sequence(Integer) = invalid in s = Sequence{5}");
 		assertQueryInvalid(null, "let b : Bag(Integer) = invalid in Bag{5} = b");
 		assertQueryInvalid(null, "let s : Set(Integer) = invalid in s = Set{5}");
@@ -368,7 +397,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let o1 : OrderedSet(Integer) = invalid, o2 : OrderedSet(Integer) = invalid in o1 = o2");
 	}
 
-	public void testCollectionEqualNull() {				
+	@Test public void testCollectionEqualNull() {				
 		assertQueryFalse(null, "Bag{} = null");
 		assertQueryFalse(null, "OrderedSet{} = null");
 		assertQueryFalse(null, "Sequence{} = null");
@@ -392,7 +421,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryTrue(null, "let o1 : OrderedSet(Integer) = null, o2 : OrderedSet(Integer) = null in o1 = o2");
 	}
 
-	public void testCollectionExcludes() {
+	@Test public void testCollectionExcludes() {
 		assertQueryFalse(null, "Sequence{3, 4.0, 'test'}->excludes(3)");
 		assertQueryFalse(null, "Sequence{3, 4.0, 'test'}->excludes(3.0)");
 		assertQueryFalse(null, "Sequence{3, 4.0, 'test'}->excludes(4)");
@@ -454,7 +483,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryTrue(null, "OrderedSet{}->excludes(null)");
 	}
 
-	public void testCollectionExcludesAll() {
+	@Test public void testCollectionExcludesAll() {
 		assertQueryFalse(null, "Sequence{3, 4.0, 'test'}->excludesAll(Sequence{3, 'test'})");
 		assertQueryFalse(null, "Sequence{3, 4.0, 'test'}->excludesAll(Bag{3, 'test'})");
 		assertQueryFalse(null, "Sequence{3, 4.0, 'test'}->excludesAll(Set{3, 'test'})");
@@ -532,7 +561,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryTrue(null, "OrderedSet{3, 4, 'test'}->excludesAll(Sequence{'TEST', null})");
 	}
 
-	public void testCollectionExcluding() {
+	@Test public void testCollectionExcluding() {
 		/*
 		 * FIXME OMG-issue to add OrderedSet::excluding
 		 * since it's defined in oclstdlib.ecore. However the defined
@@ -569,7 +598,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryResults(null, "OrderedSet{'a', 'b'}", "OrderedSet{'a', null, 'b'}->excluding(null)");
 	}
 
-	public void testCollectionFirst() {
+	@Test public void testCollectionFirst() {
 		assertQueryEquals(null, 1, "Sequence{1, 2.0, '3'}->first()");
 		assertQueryEquals(null, 1, "OrderedSet{1, 2.0, '3'}->first()");
 		// empty
@@ -589,7 +618,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryNull(null, "OrderedSet{null}->first()");
 	}
 
-	public void testCollectionFlatten() {
+	@Test public void testCollectionFlatten() {
 		assertQueryEquals(null, getEmptySequenceValue(), "Sequence{}->flatten()");
 		assertQueryEquals(null, getEmptyBagValue(), "Bag{}->flatten()");
 		assertQueryEquals(null, getEmptySetValue(), "Set{}->flatten()");
@@ -637,7 +666,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryResults(null, "Set{1}", "let o : OrderedSet(Integer) = null in 1->flatten()");
 	}
 
-	public void testCollectionIncludes() {
+	@Test public void testCollectionIncludes() {
 		assertQueryTrue(null, "Sequence{3, 4.0, 'test'}->includes(3)");
 		assertQueryTrue(null, "Sequence{3, 4.0, 'test'}->includes(3.0)");
 		assertQueryTrue(null, "Sequence{3, 4.0, 'test'}->includes(4)");
@@ -699,7 +728,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryFalse(null, "OrderedSet{}->includes(null)");
 	}
 
-	public void testCollectionIncludesAll() {
+	@Test public void testCollectionIncludesAll() {
 		assertQueryTrue(null, "Sequence{3, 4.0, 'test'}->includesAll(Sequence{3, 'test'})");
 		assertQueryTrue(null, "Sequence{3, 4.0, 'test'}->includesAll(Bag{3, 'test'})");
 		assertQueryTrue(null, "Sequence{3, 4.0, 'test'}->includesAll(Set{3, 'test'})");
@@ -776,7 +805,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryFalse(null, "OrderedSet{3, 4, 'test'}->includesAll(Sequence{'test', null})");
 	}
 
-	public void testCollectionIncluding() {
+	@Test public void testCollectionIncluding() {
 		/*
 		 * FIXME OMG-issue to add OrderedSet::including
 		 * since it's defined in oclstdlib.ecore. However the defined
@@ -821,7 +850,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryResults(null, "OrderedSet{'1..4', null}", "OrderedSet{'1..4'}->including(null)");
 	}
 
-	public void testCollectionIndexOf() {
+	@Test public void testCollectionIndexOf() {
 		assertQueryEquals(null, 1, "Sequence{'a', 'b'}->indexOf('a')");
 		assertQueryEquals(null, 2, "OrderedSet{'a', 'b'}->indexOf('b')");
 		// invalid collection
@@ -841,7 +870,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "OrderedSet{'a'}->indexOf('b')");
 	}
 
-	public void testCollectionInsertAt() {
+	@Test public void testCollectionInsertAt() {
 		// For now resolve Issue 14980 semantics by by first removing an existing content
 		assertQueryResults(null, "Sequence{'c', 'a', 'b'}", "Sequence{'a', 'b'}->insertAt(1, 'c')");
 		assertQueryResults(null, "OrderedSet{'a', 'c', 'b'}", "OrderedSet{'a', 'b'}->insertAt(2, 'c')");
@@ -880,7 +909,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "OrderedSet{'a', 'b', 'c'}->insertAt(4, 'b')");
 	}
 
-	public void testCollectionIntersection() {
+	@Test public void testCollectionIntersection() {
 		// No duplicates
 		assertQueryEquals(null, getEmptySetValue(), "Set{'a', 'b'}->intersection(Set{'c', 'd'})");
 		assertQueryEquals(null, getEmptySetValue(), "Set{'a', 'b'}->intersection(Sequence{'c', 'd'})");
@@ -976,13 +1005,13 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryResults(null, "Bag{null, null}", "Bag{3, 4, null, null}->intersection(Bag{null, 2, null})");
 	}
 
-	public void testCollectionIntersectionReturnType() {
+	@Test public void testCollectionIntersectionReturnType() {
 		assertQueryResults(null, "Set{'c'}", "Set{'a'}->intersection(Set{'b'})->including('c')");
 		assertQueryResults(null, "Set{'c'}", "let domainVars: Set(String) = Set{'a'}, whenVars: Set(String) = Set{'b'}, tev: String = 'c' in domainVars->intersection(whenVars)->including(tev)");
 		assertQueryTrue(null, "let domainTopVars: Set(String) = Set{'c'}, domainVars: Set(String) = Set{'a'}, whenVars: Set(String) = Set{'b'}, tev: String = 'c' in domainTopVars = domainVars->intersection(whenVars)->including(tev)");
 	}
 
-	public void testCollectionIsEmpty() {
+	@Test public void testCollectionIsEmpty() {
 		assertQueryTrue(null, "Sequence{}->isEmpty()");
 		assertQueryTrue(null, "Bag{}->isEmpty()");
 		assertQueryTrue(null, "Set{}->isEmpty()");
@@ -1024,7 +1053,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryFalse(null, "OrderedSet{null}->isEmpty()");
 	}
 
-	public void testCollectionLast() {
+	@Test public void testCollectionLast() {
 		assertQueryEquals(null, "3", "Sequence{1, 2.0, '3'}->last()"); //$NON-NLS-2$
 		assertQueryEquals(null, "3", "OrderedSet{1, 2.0, '3'}->last()"); //$NON-NLS-2$
 		// empty
@@ -1044,7 +1073,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryNull(null, "OrderedSet{null}->last()");
 	}
 
-	public void testCollectionElementType() {
+	@Test public void testCollectionElementType() {
 		assertQueryEquals(null, metaModelManager.getOclAnyType(), "Sequence{1, 2.0, '3'}->oclType().elementType");
 		assertQueryEquals(null, metaModelManager.getUnlimitedNaturalType(), "Sequence{1, 2, 3}->oclType().elementType");
 		assertQueryEquals(null, metaModelManager.getUnlimitedNaturalType(), "Sequence{1, 2, 3}->oclAsType(Collection(Real))->oclType().elementType");
@@ -1054,13 +1083,13 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 //				assertQueryEquals(null, metaModelManager.getOclAnyType(), "Sequence{Set{1}, Set{2.0}, Set{'3'}}.elementType");
 	}
 
-	public void testCollectionLower() {
+	@Test public void testCollectionLower() {
 		assertQueryEquals(null, 0, "Sequence{1, 2.0, '3'}->oclType().lower");
 		assertQueryEquals(null, 0, "Sequence{1, 2.0, 3}->oclAsType(Collection(Real))->oclType().lower");
 		assertQueryEquals(null, 0, "Set{1, 2.0, 3}->oclAsType(Collection(Real)[2..4])->oclType().lower"); // no change to dynamic bound
 	}
 
-	public void testCollectionMax() {
+	@Test public void testCollectionMax() {
 		assertQueryEquals(null, 2, "Sequence{1, 2}->max()");
 		assertQueryEquals(null, 5.0, "Set{5, 4.0, 3.0, 2, 1}->max()");
 		assertQueryEquals(null, 1, "Bag{1}->max()");
@@ -1080,7 +1109,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		// FIXME Bug 301351 Subtest-not-implemented user-defined max
 	}
 
-	public void testCollectionMin() {
+	@Test public void testCollectionMin() {
 		assertQueryEquals(null, 1, "Sequence{1, 2}->min()");
 		assertQueryEquals(null, 1.0, "Set{5, 4.0, 3.0, 2, 1}->min()");
 		assertQueryEquals(null, 1, "Bag{1}->min()");
@@ -1099,7 +1128,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		// FIXME Bug 301351 Subtest-not-implemented user-defined min
 	}
 
-	public void testCollectionMinus() {
+	@Test public void testCollectionMinus() {
 		assertQueryResults(null, "Set{'b'}", "Set{'a', 'b', 'c'} - Set{'c', 'a'}");
 		/*
 		 * FIXME OMG-issue generalise to UniqueCollection::-
@@ -1124,7 +1153,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryResults(null, "Set{null}", "Set{'a', null} - Set{'c', 'a'}");
 	}
 
-	public void testCollectionNotEmpty() {
+	@Test public void testCollectionNotEmpty() {
 		assertQueryFalse(null, "Sequence{}->notEmpty()");
 		assertQueryFalse(null, "Bag{}->notEmpty()");
 		assertQueryFalse(null, "Set{}->notEmpty()");
@@ -1162,7 +1191,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryTrue(null, "OrderedSet{null}->notEmpty()");
 	}
 
-	public void testCollectionNotEqual() {		
+	@Test public void testCollectionNotEqual() {		
 		assertQueryTrue(null, "Bag{1} <> 1");
 		assertQueryTrue(null, "OrderedSet{1} <> 1");
 		assertQueryTrue(null, "Sequence{1} <> 1");
@@ -1193,7 +1222,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryTrue(null, "Sequence{1..2} <> OrderedSet{1,2}");
 	}
 
-	public void testCollectionNotEqualInvalid() {
+	@Test public void testCollectionNotEqualInvalid() {
 		assertQueryInvalid(null, "let s : Sequence(Integer) = invalid in s <> Sequence{5}");
 		assertQueryInvalid(null, "let b : Bag(Integer) = invalid in Bag{5} <> b");
 		assertQueryInvalid(null, "let s : Set(Integer) = invalid in s <> Set{5}");
@@ -1205,7 +1234,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let o1 : OrderedSet(Integer) = invalid, o2 : OrderedSet(Integer) = invalid in o1 <> o2");
 	}
 
-	public void testCollectionNotEqualNull() {
+	@Test public void testCollectionNotEqualNull() {
 		assertQueryTrue(null, "let s : Sequence(Integer) = null in s <> Sequence{5}");
 		assertQueryTrue(null, "let b : Bag(Integer) = null in Bag{5} <> b");
 		assertQueryTrue(null, "let s : Set(Integer) = null in s <> Set{5}");
@@ -1217,7 +1246,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryFalse(null, "let o1 : OrderedSet(Integer) = null, o2 : OrderedSet(Integer) = null in o1 <> o2");
 	}
 
-	public void testCollectionNotEqualOrderedXOrdered() {
+	@Test public void testCollectionNotEqualOrderedXOrdered() {
 		// same order, same quantities
 /*		assertQueryFalse(null, "Sequence{4, 5, 'test'} <> Sequence{4, 5, 'test'}");
 		assertQueryFalse(null, "Sequence{4, 5, 'test', 5} <> Sequence{4, 5, 'test', 5}");
@@ -1238,7 +1267,7 @@ public class EvaluateCollectionOperationsTest extends PivotTestSuite
 		assertQueryTrue(null, "OrderedSet{4, 5, 'test', 5} <> Sequence{4, 5, 'test', 5}");
 	}
 
-public void testCollectionNotEqualOrderedXUnordered() {
+@Test public void testCollectionNotEqualOrderedXUnordered() {
 		// same quantities
 		assertQueryTrue(null, "Sequence{4, 5, 'test'} <> Set{4, 'test', 5, 4}");
 		assertQueryTrue(null, "Sequence{4, 5, 'test', 4} <> Bag{4, 'test', 5, 4}");
@@ -1251,7 +1280,7 @@ public void testCollectionNotEqualOrderedXUnordered() {
 		assertQueryTrue(null, "OrderedSet{4, 5, 'test', 4} <> Bag{4, 'test', 5, 4}");
 	}
 
-	public void testCollectionNotEqualUnorderedXUnordered() {
+	@Test public void testCollectionNotEqualUnorderedXUnordered() {
 		// same quantities
 		assertQueryTrue(null, "Bag{4, 5, 'test'} <> Set{4, 'test', 5, 4}");
 		assertQueryFalse(null, "Bag{4, 5, 'test', 4} <> Bag{4, 'test', 5, 4}");
@@ -1264,7 +1293,7 @@ public void testCollectionNotEqualOrderedXUnordered() {
 		assertQueryTrue(null, "Set{4, 5, 'test', 4} <> Bag{4, 'test', 5, 4}");
 	}
 
-	public void testCollectionPrepend() {
+	@Test public void testCollectionPrepend() {
 		assertQueryResults(null, "Sequence{'c', 'a', 'b'}", "Sequence{'a', 'b'}->prepend('c')");
 		assertQueryResults(null, "OrderedSet{'c', 'a', 'b'}", "OrderedSet{'a', 'b'}->prepend('c')");
 		// invalid collection
@@ -1281,7 +1310,7 @@ public void testCollectionNotEqualOrderedXUnordered() {
 		assertQueryResults(null, "OrderedSet{null, 'a', 'b'}", "OrderedSet{'a', 'b'}->prepend(null)");
 	}
 
-	public void testCollectionProduct() {
+	@Test public void testCollectionProduct() {
 //		Abstract2Moniker.TRACE_MONIKERS.setState(true);
 		String expectedResultExpression = "Set{Tuple{first = 3, second = 3.0}, Tuple{first = 3, second = 4.0}, Tuple{first = 4, second = 3.0}, Tuple{first = 4, second = 4.0}}";
 
@@ -1343,7 +1372,7 @@ public void testCollectionNotEqualOrderedXUnordered() {
 		assertQueryInvalid(null, "OrderedSet{invalid, 4}->product(Sequence{3})");
 	}
 
-	public void testCollectionProductNull() {
+	@Test public void testCollectionProductNull() {
 		assertQueryInvalid(null, "let s : Sequence(Integer) = null in OrderedSet{3, 4}->product(s)");
 		assertQueryInvalid(null, "let b : Bag(Integer) = null in Set{3, 4}->product(b)");
 		assertQueryInvalid(null, "let s : Set(Integer) = null in Bag{3, 4}->product(s)");
@@ -1355,7 +1384,7 @@ public void testCollectionNotEqualOrderedXUnordered() {
 		assertQueryInvalid(null, "let o : OrderedSet(Integer) = null in o->product(Sequence{3, 4})");
 	}
 
-	public void testCollectionProductNullValue() {
+	@Test public void testCollectionProductNullValue() {
 		assertQueryResults(null, "Set{Tuple{first = 3, second = null}, Tuple{first = 4, second = null}}", "Sequence{3, 4}->product(OrderedSet{null})");
 		assertQueryResults(null, "Set{Tuple{first = 3, second = null}, Tuple{first = 4, second = null}}", "Bag{3, 4}->product(Set{null})");
 		assertQueryResults(null, "Set{Tuple{first = 3, second = null}, Tuple{first = 4, second = null}}", "Set{3, 4}->product(Bag{null})");
@@ -1377,11 +1406,11 @@ public void testCollectionNotEqualOrderedXUnordered() {
 		assertQueryResults(null, "let n : UnlimitedNatural = null in Set{Tuple{first = n, second = 3}, Tuple{first = 4, second = 3}}", "OrderedSet{null, 4}->product(Sequence{3})");
 	}
 
-	public void testCollectionReverse() {
+	@Test public void testCollectionReverse() {
 		// FIXME Test-not-implemented
 	}
 
-	public void testCollectionSelectByKind() {
+	@Test public void testCollectionSelectByKind() {
 		assertQueryResults(null, "Bag{4,4}", "Bag{4, 4, 5.0, 'test', null}->selectByKind(Integer)");
 		assertQueryResults(null, "OrderedSet{4}", "OrderedSet{4, 4, 5.0, 'test', null}->selectByKind(Integer)");
 		assertQueryResults(null, "Sequence{4,4}", "Sequence{4, 4, 5.0, 'test', null}->selectByKind(Integer)");
@@ -1417,7 +1446,7 @@ public void testCollectionNotEqualOrderedXUnordered() {
 		assertQueryEquals(null, 4, "Set{4, 4, 5.0, 'test'}->selectByKind(UnlimitedNatural)->sum()");
 	}
 
-	public void testCollectionSelectByType() {
+	@Test public void testCollectionSelectByType() {
 		assertQueryResults(null, "Bag{}", "Bag{4, 4, 5.0, 'test', null}->selectByType(Integer)");
 		assertQueryResults(null, "OrderedSet{}", "OrderedSet{4, 4, 5.0, 'test', null}->selectByType(Integer)");
 		assertQueryResults(null, "Sequence{}", "Sequence{4, 4, 5.0, 'test', null}->selectByType(Integer)");
@@ -1453,7 +1482,7 @@ public void testCollectionNotEqualOrderedXUnordered() {
 		assertQueryEquals(null, 4, "Set{4, 4, 5.0, 'test'}->selectByType(UnlimitedNatural)->sum()");
 	}
 
-	public void testCollectionSize() {
+	@Test public void testCollectionSize() {
 		assertQueryEquals(null, 4, "Sequence{4, 4, 5, 'test'}->size()");
 		assertQueryEquals(null, 4, "Bag{4, 4, 5, 'test'}->size()");
 		assertQueryEquals(null, 3, "Set{4, 4, 5, 'test'}->size()");
@@ -1482,7 +1511,7 @@ public void testCollectionNotEqualOrderedXUnordered() {
 		assertQueryEquals(null, 3, "OrderedSet{'a', 'b', null, null}->size()");
 	}
 
-	public void testCollectionSubOrderedSet() {
+	@Test public void testCollectionSubOrderedSet() {
 		assertQueryResults(null, "OrderedSet{'a'}", "OrderedSet{'a', 'b', 'c', 'd'}->subOrderedSet(1, 1)");
 		assertQueryResults(null, "OrderedSet{'b', 'c'}", "OrderedSet{'a', 'b', 'c', 'd'}->subOrderedSet(2, 3)");
 		assertQueryResults(null, "OrderedSet{'d'}", "OrderedSet{'a', 'b', 'c', 'd'}->subOrderedSet(4, 4)");
@@ -1497,7 +1526,7 @@ public void testCollectionNotEqualOrderedXUnordered() {
 		assertQueryInvalid(null, "OrderedSet{'a', 'b', 'c', 'd'}->subOrderedSet(2, 1)");
 	}
 
-	public void testCollectionSubSequence() {
+	@Test public void testCollectionSubSequence() {
 		assertQueryResults(null, "Sequence{'a'}", "Sequence{'a', 'b', 'c', 'd'}->subSequence(1, 1)");
 		assertQueryResults(null, "Sequence{'b', 'c'}", "Sequence{'a', 'b', 'c', 'd'}->subSequence(2, 3)");
 		assertQueryResults(null, "Sequence{'d'}", "Sequence{'a', 'b', 'c', 'd'}->subSequence(4, 4)");
@@ -1512,7 +1541,7 @@ public void testCollectionNotEqualOrderedXUnordered() {
 		assertQueryInvalid(null, "Sequence{'a', 'b', 'c', 'd'}->subSequence(2, 1)");
 	}
 
-	public void testCollectionSum() {
+	@Test public void testCollectionSum() {
 		assertQueryEquals(null, 0, "let s : Sequence(Integer) = Sequence{} in s->sum()");
 		assertQueryEquals(null, 0.0, "let b : Bag(Real) = Bag{} in b->sum()");
 		assertQueryEquals(null, 0.0, "let s : Set(Real) = Set{} in s->sum()");
@@ -1551,7 +1580,7 @@ public void testCollectionNotEqualOrderedXUnordered() {
 		// FIXME Bug 301351 Subtest-not-implemented user-defined +
 	}
 
-	public void testCollectionSymmetricDifference() {
+	@Test public void testCollectionSymmetricDifference() {
 		assertQueryResults(null, "Set{'a', 'c'}", "Set{'a', 'b'}->symmetricDifference(Set{'b', 'c'})");
 		// invalid collection
 		assertQueryInvalid(null, "let s : Set(String) = invalid in s->symmetricDifference(Set{'a'})");
@@ -1563,7 +1592,7 @@ public void testCollectionNotEqualOrderedXUnordered() {
 		assertQueryResults(null, "Set{'a', null, 'c'}", "Set{'a', null, 'b'}->symmetricDifference(Set{'b', 'c'})");
 	}
 
-	public void testCollectionUnionDuplicates() {
+	@Test public void testCollectionUnionDuplicates() {
 		assertQueryResults(null, "Set{'a', 'b', 'c'}", "Set{'a', 'b', 'a'}->union(Set{'b', 'c'})");
 		assertQueryResults(null, "Bag{'a', 'b', 'b', 'c'}", "Set{'a', 'b', 'a'}->union(Bag{'b', 'c'})");
 		assertQueryResults(null, "Bag{'a', 'b', 'a', 'b', 'c'}", "Bag{'a', 'b', 'a'}->union(Bag{'b', 'c'})");
@@ -1572,7 +1601,7 @@ public void testCollectionNotEqualOrderedXUnordered() {
 		assertQueryResults(null, "Sequence{'a', 'b', 'a', 'b', 'c'}", "Sequence{'a', 'b', 'a'}->union(Sequence{'b', 'c'})");
 	}
 
-	public void testCollectionUnionEmptyCollection() {
+	@Test public void testCollectionUnionEmptyCollection() {
 		assertQueryResults(null, "Set{3, 4}", "Set{3, 4}->union(Set{})");
 //		assertQueryResults(null, "Bag{3, 4}", "Set{3, 4}->union(Bag{})");
 		assertQueryResults(null, "Set{3, 4}", "Set{3, 4}->union(Bag{})");
@@ -1588,7 +1617,7 @@ public void testCollectionNotEqualOrderedXUnordered() {
 		assertQueryResults(null, "Sequence{3, 4}", "Sequence{}->union(Sequence{3, 4})");
 	}
 
-	public void testCollectionUnionInvalid() {
+	@Test public void testCollectionUnionInvalid() {
 		assertQueryInvalid(null, "let s : Set(String) = invalid in s->union(Set{'a'})");
 		assertQueryInvalid(null, "let s : Set(String) = invalid in s->union(Bag{'a'})");
 		assertQueryInvalid(null, "let b : Bag(String) = invalid in b->union(Bag{'a'})");
@@ -1602,7 +1631,7 @@ public void testCollectionNotEqualOrderedXUnordered() {
 		assertQueryInvalid(null, "let s : Sequence(String) = invalid in Sequence{'a'}->union(s)");
 	}
 
-	public void testCollectionUnionInvalidValue() {
+	@Test public void testCollectionUnionInvalidValue() {
 		assertQueryInvalid(null, "Set{'a', invalid}->union(Set{'b', invalid})");
 		assertQueryInvalid(null, "Set{'a', invalid}->union(Bag{'b', invalid})");
 		assertQueryInvalid(null, "Bag{'a', invalid}->union(Bag{'b', invalid})");
@@ -1610,7 +1639,7 @@ public void testCollectionNotEqualOrderedXUnordered() {
 		assertQueryInvalid(null, "Sequence{'a', invalid}->union(Sequence{'b', invalid})");
 	}
 
-	public void testCollectionUnionNoDuplicates() {
+	@Test public void testCollectionUnionNoDuplicates() {
 		/*
 		 * FIXME OMG-issue generalise to Collection::union
 		 * the specification defines operations Set::union(Set),
@@ -1631,7 +1660,7 @@ public void testCollectionNotEqualOrderedXUnordered() {
 		assertQueryResults(null, "Sequence{'a', 'b', 'c', 'd'}", "Sequence{'a', 'b'}->union(Sequence{'c', 'd'})");
 	}
 
-	public void testCollectionUnionNull() {
+	@Test public void testCollectionUnionNull() {
 		assertQueryInvalid(null, "let s : Set(String) = null in s->union(Set{'a'})");
 		assertQueryInvalid(null, "let s : Set(String) = null in s->union(Bag{'a'})");
 		assertQueryInvalid(null, "let b : Bag(String) = null in b->union(Bag{'a'})");
@@ -1645,7 +1674,7 @@ public void testCollectionNotEqualOrderedXUnordered() {
 		assertQueryInvalid(null, "let s : Sequence(String) = null in Sequence{'a'}->union(s)");
 	}
 
-	public void testCollectionUnionNullValue() {
+	@Test public void testCollectionUnionNullValue() {
 		assertQueryResults(null, "Set{'a', null, 'b'}", "Set{'a', null}->union(Set{'b', null})");
 		assertQueryResults(null, "Bag{'a', null, 'b', null}", "Set{'a', null}->union(Bag{'b', null})");
 		assertQueryResults(null, "Bag{'a', null, 'b', null}", "Bag{'a', null}->union(Bag{'b', null})");
@@ -1653,7 +1682,7 @@ public void testCollectionNotEqualOrderedXUnordered() {
 		assertQueryResults(null, "Sequence{'a', null, 'b', null}", "Sequence{'a', null}->union(Sequence{'b', null})");
 	}
 
-	public void testCollectionUpper() {
+	@Test public void testCollectionUpper() {
 		assertQueryEquals(null, ValuesUtil.UNLIMITED_VALUE, "Sequence{1, 2.0, '3'}->oclType().upper");
 		assertQueryEquals(null, ValuesUtil.UNLIMITED_VALUE, "Sequence{1, 2.0, 3}->oclAsType(Collection(Real))->oclType().upper");
 		assertQueryEquals(null, ValuesUtil.UNLIMITED_VALUE, "Set{1, 2.0, 3}->oclAsType(Collection(Real)[2..4])->oclType().upper"); // no change to dynamic bound

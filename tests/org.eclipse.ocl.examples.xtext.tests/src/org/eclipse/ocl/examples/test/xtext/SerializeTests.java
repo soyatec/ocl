@@ -23,7 +23,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Root;
@@ -44,14 +43,6 @@ import org.eclipse.xtext.resource.XtextResource;
  */
 public class SerializeTests extends XtextTestCase
 {
-	private static ProjectMap projectMap = null;
-	public static ProjectMap getProjectMap() {
-		if (projectMap == null) {
-			projectMap = new ProjectMap();
-		}
-		return projectMap;
-	}
-	
 	public XtextResource doSerialize(String stem) throws Exception {
 		return doSerialize(stem, stem, null, true, true);
 	}

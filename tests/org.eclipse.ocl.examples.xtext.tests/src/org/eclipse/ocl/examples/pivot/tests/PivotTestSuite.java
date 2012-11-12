@@ -20,6 +20,7 @@
 
 package org.eclipse.ocl.examples.pivot.tests;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -39,6 +40,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.SimpleLayout;
 import org.apache.log4j.spi.LoggingEvent;
 import org.apache.log4j.spi.ThrowableInformation;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -52,17 +54,24 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.common.CodeGenHelper;
+import org.eclipse.ocl.examples.codegen.dynamic.GenModelCodeGenHelper;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.library.LibraryOperation;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
+import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -75,10 +84,12 @@ import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SemanticException;
@@ -90,6 +101,7 @@ import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
 import org.eclipse.ocl.examples.pivot.manager.AbstractMetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
@@ -155,6 +167,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	protected static boolean noDebug = false;
 	protected static ResourceSet resourceSet;
 	private static ArrayList<Resource> standardResources;
+	private static int testCounter = 0;
 
 	private static boolean initialized = false;
 	
@@ -184,7 +197,17 @@ public abstract class PivotTestSuite extends PivotTestCase
 	protected OCL ocl;
 	protected Environment environment;
 	protected OCLHelper helper;
+	protected final boolean useCodeGen;
 
+	protected PivotTestSuite() {
+		this.useCodeGen = false;
+		System.out.println(getName());
+	}
+
+	protected PivotTestSuite(boolean useCodeGen) {
+		this.useCodeGen = useCodeGen;
+	}
+	
 	public void addSupertype(org.eclipse.ocl.examples.pivot.Class aClass, org.eclipse.ocl.examples.pivot.Class superClass) {
 		aClass.getSuperClass().add(superClass);
 	}
@@ -538,7 +561,13 @@ public abstract class PivotTestSuite extends PivotTestCase
 				assertEquals("Invalid Value Throwable", exceptionClass, ex.getClass());
 			}
 		} catch (Exception e) {
-			failOn(expression, e);
+			if (exceptionClass != null) {
+				assertEquals("Invalid Value Throwable", exceptionClass, e.getClass());
+			}
+			if (reason != null) {
+				assertEquals("Invalid Value Reason", reason, e.getMessage());
+			}
+//			failOn(expression, e);
 		}
 		return null;
 	}
@@ -1059,38 +1088,60 @@ public abstract class PivotTestSuite extends PivotTestCase
 		return result;
 	}
 
-	protected Object evaluate(OCLHelper aHelper, Object context, String expression) throws ParserException {
+	protected Object evaluate(OCLHelper aHelper, Object context, String expression) throws Exception {
 		setHelperContext(aHelper, context);
 		ExpressionInOCL query = aHelper.createQuery(expression);
 //        @SuppressWarnings("unused")
 //		String s = query.toString();
         try {
-        	return ocl.evaluate(context, query);
-        } finally {
+//        	return ocl.evaluate(context, query);
+        	return evaluate(query, context);
+//        } catch (Exception e) {
+//			fail("Evaluation failed: " + e.getLocalizedMessage());
+//			return null;
+		} finally {
 			metaModelManager.getPivotResourceSet().getResources().remove(query.eResource());
 		}
     }
 	
+	@Deprecated
 	protected Object evaluate(ExpressionInOCL expr) {
-		Object result = null;
-		
 		try {
-			result = ocl.evaluate(null, expr);
-		} catch (RuntimeException e) {
+			return evaluate(expr, null);
+		} catch (Exception e) {
 			fail("Evaluation failed: " + e.getLocalizedMessage());
+			return null;
 		}
-		
-		return result;
 	}
     
-	protected Object evaluate(ExpressionInOCL expr, Object self) {
+	protected Object evaluate(ExpressionInOCL expr, Object self) throws Exception {
 		Object result = null;
 		
-		try {
-			result = ocl.evaluate(self, expr);
-		} catch (RuntimeException e) {
-			fail("Evaluation failed: " + e.getLocalizedMessage());
-		}
+//		try {
+			if (!useCodeGen) {
+				result = ocl.evaluate(self, expr);
+			}
+			else {
+				ProjectMap projectMap = getProjectMap();
+				projectMap.initializeResourceSet(resourceSet);
+				resourceSet.getPackageRegistry().put(org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eNS_URI, org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eINSTANCE);
+				resourceSet.getPackageRegistry().put(org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage.eNS_URI, org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage.eINSTANCE);
+
+				CodeGenHelper genModelHelper = getCodeGenHelper(metaModelManager);
+
+				File targetFolder = new File("src-gen");
+				String packageName = "test_package";			// FIXME need to create this
+				String className = "TestClass" + testCounter++;
+				
+				LibraryOperation testInstance = genModelHelper.loadClass(expr, targetFolder, packageName, className, true);
+				DomainEvaluator evaluator = new EcoreExecutorManager(metaModelManager.getOclAnyType(), PivotTables.LIBRARY);
+				OperationCallExp callExp = PivotFactory.eINSTANCE.createOperationCallExp();
+				callExp.setType(expr.getType());
+				result = testInstance.evaluate(evaluator, callExp, self);
+			}
+//		} catch (Exception e) {
+//			fail("Evaluation failed: " + e.getLocalizedMessage());
+//		}
 		
 		return result;
 	}
@@ -1107,6 +1158,22 @@ public abstract class PivotTestSuite extends PivotTestCase
 			return null;
 		// check type
 		return feature;
+	}
+
+	public CodeGenHelper getCodeGenHelper(@NonNull MetaModelManager metaModelManager) {
+		URI genModelURI = URI.createPlatformResourceURI(
+				"/org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel",
+				true);
+//		ResourceSet resourceSet = getResourceSet();
+		Resource genModelResource = resourceSet.getResource(genModelURI, true);
+		String errorsString = PivotUtil.formatResourceDiagnostics(
+				genModelResource.getErrors(), "Loading " + genModelURI, "\n");
+		if (errorsString != null) {
+			// issues.addError(this, errorsString, null, null, null);
+			return null;
+		}
+		GenModel genModel = (GenModel) genModelResource.getContents().get(0);
+		return new GenModelCodeGenHelper(genModel, metaModelManager);
 	}
    
     /**
@@ -1343,6 +1410,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		if (resourceSet == null) {
 			initializeResourceSet();
 		}
+		MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
 //		debugPrintln("==> Start  " + getName());
 		ocl = createOCL();
 		environment = ocl.getEnvironment();

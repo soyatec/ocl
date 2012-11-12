@@ -17,20 +17,50 @@
 
 package org.eclipse.ocl.examples.pivot.tests;
 
+import java.util.Arrays;
+import java.util.Collection;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
 /**
  * Tests for Boolean operations.
  */
 @SuppressWarnings("nls")
+@RunWith(value = Parameterized.class)
 public class EvaluateBooleanOperationsTest extends PivotTestSuite
 {
+	@Parameters
+	public static Collection<Object[]> data() {
+		Object[][] data = new Object[][]{{false}, {true}};
+		return Arrays.asList(data);
+	}
+
+	public EvaluateBooleanOperationsTest() {
+		super(false);
+	}
+
+	public EvaluateBooleanOperationsTest(boolean useCodeGen) {
+		super(useCodeGen);
+	}
+
     @Override
-    protected void setUp() throws Exception {
+    @Before public void setUp() throws Exception {
         super.setUp();
 //        helper.setContext(getMetaclass("Package"));
         helper.setContext(getMetaclass("String"));
     }
 
-	public void testBooleanAnd() {
+	@Override
+	@After public void tearDown() throws Exception {
+		super.tearDown();
+	}
+
+	@Test public void testBooleanAnd() {
 		assertQueryFalse(null, "false and false");
 		assertQueryFalse(null, "false and true");
 		assertQueryFalse(null, "true and false");
@@ -49,7 +79,7 @@ public class EvaluateBooleanOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let a : Boolean = null, b : Boolean = null in a and b");
 	}
 
-	public void testBooleanEqual() {
+	@Test public void testBooleanEqual() {
 		assertQueryFalse(null, "true = false");
 
 		assertQueryTrue(null, "true = true");
@@ -66,7 +96,7 @@ public class EvaluateBooleanOperationsTest extends PivotTestSuite
 		assertQueryTrue(null, "let b1 : Boolean = null, b2 : Boolean = null in b1 = b2");
 	}
 
-	public void testBooleanImplies() {
+	@Test public void testBooleanImplies() {
 		assertQueryTrue(null, "false implies false");
 		assertQueryTrue(null, "false implies true");
 		assertQueryFalse(null, "true implies false");
@@ -85,7 +115,7 @@ public class EvaluateBooleanOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let a : Boolean = null, b : Boolean = null in a implies b");
 	}
 
-	public void testBooleanNot() {
+	@Test public void testBooleanNot() {
 		assertQueryTrue(null, "not false");
 		assertQueryFalse(null, "not true");
 		// invalid
@@ -94,7 +124,7 @@ public class EvaluateBooleanOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let a : Boolean = null in not a");
 	}
 
-	public void testBooleanNotEqual() {
+	@Test public void testBooleanNotEqual() {
 		assertQueryTrue(null, "true <> false");
 
 		assertQueryFalse(null, "true <> true");
@@ -111,7 +141,7 @@ public class EvaluateBooleanOperationsTest extends PivotTestSuite
 		assertQueryFalse(null, "let b1 : Boolean = null, b2 : Boolean = null in b1 <> b2");
 	}
 
-	public void testBooleanOr() {
+	@Test public void testBooleanOr() {
 		assertQueryFalse(null, "false or false");
 		assertQueryTrue(null, "false or true");
 		assertQueryTrue(null, "true or false");
@@ -130,13 +160,13 @@ public class EvaluateBooleanOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let a : Boolean = null, b : Boolean = null in a or b");
 	}
 
-	public void testBooleanToString() {
+	@Test public void testBooleanToString() {
 		assertQueryEquals(null, "false", "false.toString()");
 		assertQueryEquals(null, "true", "true.toString()");
 		assertQueryEquals(null, "true", "(not false).toString()");
 	}
 
-	public void testBooleanXor() {
+	@Test public void testBooleanXor() {
 		assertQueryFalse(null, "false xor false");
 		assertQueryTrue(null, "false xor true");
 		assertQueryTrue(null, "true xor false");

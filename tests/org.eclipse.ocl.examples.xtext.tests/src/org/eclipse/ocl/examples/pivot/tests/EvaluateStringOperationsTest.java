@@ -17,27 +17,55 @@
 
 package org.eclipse.ocl.examples.pivot.tests;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.regex.PatternSyntaxException;
 
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.osgi.util.NLS;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Tests for String operations.
  */
 @SuppressWarnings("nls")
+@RunWith(value = Parameterized.class)
 public class EvaluateStringOperationsTest extends PivotTestSuite
 {
+	@Parameters
+	public static Collection<Object[]> data() {
+		Object[][] data = new Object[][]{{false}, {true}};
+		return Arrays.asList(data);
+	}
+
+	public EvaluateStringOperationsTest() {
+		super(false);
+	}
+
+	public EvaluateStringOperationsTest(boolean useCodeGen) {
+		super(useCodeGen);
+	}
+
     @Override
-    protected void setUp() throws Exception {
+    @Before public void setUp() throws Exception {
         super.setUp();
 //        helper.setContext(getMetaclass("Package"));
         helper.setContext(metaModelManager.getMetaclassType());
     }
 
-	public void testStringAt() {
+	@Override
+	@After public void tearDown() throws Exception {
+		super.tearDown();
+	}
+
+	@Test public void testStringAt() {
 		assertQueryEquals(null, "t", "'test'.at(1)");
 		assertQueryEquals(null, "e", "'test'.at(2)");
 		assertQueryEquals(null, "t", "'test'.at(4)");
@@ -51,7 +79,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let s : String = null in s.at(1)");
 	}
 
-	public void testStringCharacters() {
+	@Test public void testStringCharacters() {
 		assertQueryEquals(null, new String[] {}, "''.characters()");
 		assertQueryEquals(null, new String[] {"a"}, "'a'.characters()");
 		assertQueryEquals(null, new String[] {"a", "\r", "\n", "b"}, "'a\\r\nb'.characters()");
@@ -61,7 +89,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let s : String = null in s.characters()");
 	}
 
-	public void testStringConcat() {
+	@Test public void testStringConcat() {
 		assertQueryEquals(null, "concatenationTest", "'concatenation'.concat('Test')");
 		assertQueryEquals(null, "concatenation\n", "'concatenation'.concat('\\n')");
 		// invalid
@@ -72,7 +100,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let s : String = null in s.concat('concatenation')");
 	}
 
-	public void testStringEndsWith() {
+	@Test public void testStringEndsWith() {
 		assertQueryFalse(null, "'abcdef'.endsWith('aabcdef')");
 		assertQueryTrue(null, "'abcdef'.endsWith('abcdef')");
 		assertQueryTrue(null, "'abcdef'.endsWith('cdef')");
@@ -92,7 +120,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let s : String = null in ''.endsWith(s)");
 	}
 
-	public void testStringEqual() {
+	@Test public void testStringEqual() {
 		assertQueryFalse(null, "'test' = 'se'");
 		assertQueryTrue(null, "'test' = 'test'");
 		assertQueryFalse(null, "'tESt' = 'TesT'");
@@ -106,7 +134,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryTrue(null, "let s1 : String = null, s2 : String = null in s1 = s2");
 	}
 
-	public void testStringEqualIgnoresCase() {
+	@Test public void testStringEqualIgnoresCase() {
 		assertQueryFalse(null, "'test'.equalsIgnoreCase('se')");
 		assertQueryTrue(null, "'test'.equalsIgnoreCase('test')");
 		assertQueryTrue(null, "'Test'.equalsIgnoreCase('tEst')");
@@ -115,7 +143,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryTrue(null, "'test'.equalsIgnoreCase('TEST')");
 	}
 
-	public void testStringGreaterThan() {
+	@Test public void testStringGreaterThan() {
 		// FIXME Analyzer-extraOperation String::> should not be defined
 		assertQueryFalse(null, "'3' > '4'");
 		assertQueryFalse(null, "'a' > 'b'");
@@ -138,7 +166,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let s1 : String = null, s2 : String = null in s1 > s2");
 	}
 
-	public void testStringGreaterThanOrEqual() {
+	@Test public void testStringGreaterThanOrEqual() {
 		// FIXME Analyzer-extraOperation String::>= should not be defined
 		assertQueryFalse(null, "'3' >= '4'");
 		assertQueryFalse(null, "'a' >= 'b'");
@@ -161,7 +189,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let s1 : String = null, s2 : String = null in s1 >= s2");
 	}
 
-	public void testStringIndexOf() {
+	@Test public void testStringIndexOf() {
 		assertQueryEquals(null, 1, "'test'.indexOf('t')");
 		assertQueryEquals(null, 1, "'test'.indexOf('te')");
 		assertQueryEquals(null, 2, "'test'.indexOf('es')");
@@ -182,7 +210,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let s : String = null in s.indexOf('s')");
 	}
 
-	public void testStringLastIndexOf() {
+	@Test public void testStringLastIndexOf() {
 		assertQueryEquals(null, 4, "'test'.lastIndexOf('t')");
 		assertQueryEquals(null, 1, "'test'.lastIndexOf('te')");
 		assertQueryEquals(null, 2, "'test'.lastIndexOf('es')");
@@ -204,7 +232,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let s : String = null in s.lastIndexOf('s')");
 	}
 
-	public void testStringLessThan() {
+	@Test public void testStringLessThan() {
 		// FIXME Analyzer-extraOperation String::< should not be defined
 		assertQueryTrue(null, "'3' < '4'");
 		assertQueryTrue(null, "'a' < 'b'");
@@ -227,7 +255,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let s1 : String = null, s2 : String = null in s1 < s2");
 	}
 
-	public void testStringLessThanOrEqual() {
+	@Test public void testStringLessThanOrEqual() {
 		// FIXME Analyzer-extraOperation String::<= should not be defined
 		assertQueryTrue(null, "'3' <= '4'");
 		assertQueryTrue(null, "'a' <= 'b'");
@@ -250,7 +278,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let s1 : String = null, s2 : String = null in s1 <= s2");
 	}
 
-	public void testStringMatches() {
+	@Test public void testStringMatches() {
 		assertQueryTrue(null, "'characters and spaces'.matches('[\\\\w\\\\s]+')");		// *2 for Java, *2 for OCL
 		assertQueryFalse(null, "'characters and 3 digits'.matches('[\\\\p{Alpha}\\\\s]+')");
 		//
@@ -268,7 +296,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "'repla ce operation'.matches(invalid)");
 	}
 
-	public void testStringNotEqual() {
+	@Test public void testStringNotEqual() {
 		assertQueryTrue(null, "'test' <> 'se'");
 		assertQueryFalse(null, "'test' <> 'test'");
 		// invalid
@@ -281,7 +309,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryFalse(null, "let s1 : String = null, s2 : String = null in s1 <> s2");
 	}
 
-	public void testStringOclAsType() {
+	@Test public void testStringOclAsType() {
 		assertQueryInvalid(null, "'test'.oclAsType(Integer)");
 		assertQueryEquals(null, "test", "'test'.oclAsType(String)");
 		assertQueryEquals(null, "test", "'test'.oclAsType(OclAny)");
@@ -289,12 +317,12 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "'test'.oclAsType(OclInvalid)");
 	}
 
-	public void testStringOclIsInvalid() {
+	@Test public void testStringOclIsInvalid() {
 		assertQueryFalse(null, "'test'.oclIsInvalid()");
 		assertQueryFalse(null, "''.oclIsInvalid()");
 	}
 
-	public void testStringOclIsKindOf() {
+	@Test public void testStringOclIsKindOf() {
 		assertQueryFalse(null, "'test'.oclIsKindOf(Integer)");
 		assertQueryTrue(null, "'test'.oclIsKindOf(String)");
 		assertQueryTrue(null, "'test'.oclIsKindOf(OclAny)");
@@ -302,7 +330,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryFalse(null, "'test'.oclIsKindOf(OclInvalid)");
 	}
 
-	public void testStringOclIsTypeOf() {
+	@Test public void testStringOclIsTypeOf() {
 		assertQueryFalse(null, "'test'.oclIsTypeOf(Integer)");
 		assertQueryTrue(null, "'test'.oclIsTypeOf(String)");
 		assertQueryFalse(null, "'test'.oclIsTypeOf(OclAny)");
@@ -310,12 +338,12 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryFalse(null, "'test'.oclIsTypeOf(OclInvalid)");
 	}
 
-	public void testStringOclIsUndefined() {
+	@Test public void testStringOclIsUndefined() {
 		assertQueryFalse(null, "'test'.oclIsUndefined()");
 		assertQueryFalse(null, "''.oclIsUndefined()");
 	}
 
-	public void testStringPlus() {
+	@Test public void testStringPlus() {
 		assertQueryEquals(null, "concatenationTest", "'concatenation' + 'Test'");
 		assertQueryEquals(null, "concatenation\n", "'concatenation' + '\\n'");
 		// invalid
@@ -326,7 +354,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let s : String = null in s + 'concatenation'");
 	}
 
-	public void testStringReplaceAll() {
+	@Test public void testStringReplaceAll() {
 		assertQueryEquals(null, "rePlaceAll oPeration", "'replaceAll operation'.replaceAll('p', 'P')");
 		assertQueryEquals(null, "ReplaceAllOperation", "'Repla ce All Operation'.replaceAll('(\\\\w+)\\\\s*', '$1')");
 		//
@@ -347,7 +375,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "'repla ce operation'.replaceAll('(\\\\w+)\\\\s*', invalid)");
 	}
 
-	public void testStringReplaceFirst() {
+	@Test public void testStringReplaceFirst() {
 		assertQueryEquals(null, "rePlace operation", "'replace operation'.replaceFirst('p', 'P')");
 		assertQueryEquals(null, "replace operation", "'repla ce operation'.replaceFirst('(\\\\w+)\\\\s*', '$1')");
 		//
@@ -368,7 +396,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "'repla ce operation'.replaceFirst('(\\\\w+)\\\\s*', invalid)");
 	}
 
-	public void testStringSize() {
+	@Test public void testStringSize() {
 		assertQueryEquals(null, Integer.valueOf(4), "'test'.size()"); //$NON-NLS-2$
 		assertQueryEquals(null, Integer.valueOf(0), "''.size()"); //$NON-NLS-2$
 		// invalid
@@ -377,7 +405,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let s : String = null in s.size()"); //$NON-NLS-2$
 	}
 
-	public void testStringStartsWith() {
+	@Test public void testStringStartsWith() {
 		assertQueryFalse(null, "'abcdef'.startsWith('abcdefg')");
 		assertQueryTrue(null, "'abcdef'.startsWith('abcdef')");
 		assertQueryTrue(null, "'abcdef'.startsWith('abcd')");
@@ -397,7 +425,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let s : String = null in ''.startsWith(s)");
 	}
 
-	public void testStringSubstituteAll() {
+	@Test public void testStringSubstituteAll() {
 		assertQueryEquals(null, "subsTiTuTeAll operaTion", "'substituteAll operation'.substituteAll('t', 'T')");
 		//
 		assertQueryEquals(null, "xx", "''.replaceAll('', 'xx')");
@@ -414,7 +442,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "'repla ce operation'.substituteAll('(\\\\w+)\\\\s*', invalid)");
 	}
 
-	public void testStringSubstituteFirst() {
+	@Test public void testStringSubstituteFirst() {
 		assertQueryEquals(null, "subsTiTuTeFirst operaTion", "'substiTuTeFirst operaTion'.substituteFirst('t', 'T')");
 		assertQueryEquals(null, "SubstiTuTeFirst operaTion", "'substiTuTeFirst operaTion'.substituteFirst('s', 'S')");
 		assertQueryEquals(null, "substiTuTeFirst operaTioN", "'substiTuTeFirst operaTion'.substituteFirst('n', 'N')");
@@ -438,7 +466,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "'repla ce operation'.substituteFirst('(\\\\w+)\\\\s*', invalid)");
 	}
 
-	public void testStringSubstring() {
+	@Test public void testStringSubstring() {
 		assertQueryEquals(null, "t", "'test'.substring(1, 1)");
 		assertQueryEquals(null, "es", "'test'.substring(2, 3)");
 		assertQueryEquals(null, "t", "'test'.substring(4, 4)");
@@ -456,7 +484,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let s : String = null in s.substring(5, 5)");
 	}
 
-	public void testStringToBoolean() {
+	@Test public void testStringToBoolean() {
 		assertQueryTrue(null, "'true'.toBoolean()");
 		assertQueryFalse(null, "' true'.toBoolean()");
 		assertQueryFalse(null, "'true '.toBoolean()");
@@ -469,7 +497,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let s : String = null in s.toBoolean()");
 	}
 
-	public void testStringToInteger() {
+	@Test public void testStringToInteger() {
 		assertQueryEquals(null, Integer.valueOf(4), "'4'.toInteger()");
 		assertQueryEquals(null, Integer.valueOf(-4), "'-4'.toInteger()");
 		assertQueryInvalid(null, "'4.0'.toInteger()", NLS.bind(EvaluatorMessages.InvalidInteger, "4.0"), NumberFormatException.class);
@@ -482,7 +510,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let s : String = null in s.toInteger()");
 	}
 
-	public void testStringToLowerCase() {
+	@Test public void testStringToLowerCase() {
 //		checkForUTF8Encoding()		
 		assertQueryEquals(null, "4", "'4'.toLowerCase()"); //$NON-NLS-2$
 		assertQueryEquals(null, "mixed", "'MiXeD'.toLowerCase()"); //$NON-NLS-2$
@@ -496,7 +524,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let s : String = null in s.toLowerCase()");
 	}
 
-	public void testStringToReal() {
+	@Test public void testStringToReal() {
 		assertQueryEquals(null, 4.0, "'4'.toReal()", 0.0);
 		assertQueryEquals(null, -4.0, "'-4'.toReal()", 0.0);
 		assertQueryEquals(null, 4.0, "'4.0'.toReal()", 0.0);
@@ -509,12 +537,12 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let s : String = null in s.toReal()");
 	}
 
-	public void testStringToString() {
+	@Test public void testStringToString() {
 		assertQueryEquals(null, "4.0", "'4.0'.toString()");
 		assertQueryEquals(null, "4.0\t4", "('4.0' + '\t' + '4').toString()");
 	}
 
-	public void testStringToUpperCase() {
+	@Test public void testStringToUpperCase() {
 //		checkForUTF8Encoding();
 		assertQueryEquals(null, "4", "'4'.toUpperCase()");
 		assertQueryEquals(null, "MIXED", "'MiXeD'.toUpperCase()");
@@ -533,7 +561,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let s : String = null in s.toUpperCase()");
 	}
 
-	public void testStringTokenize() {
+	@Test public void testStringTokenize() {
 //		assertQueryResults(null, "Sequence{'', 'a','b','c','d', ''}", "'\na b\tc\fd\r'.tokenize()");
 		assertQueryResults(null, "Sequence{'a','b','c','d'}", "'\na b\tc\fd\r'.tokenize()");
 		assertQueryResults(null, "Sequence{'a','b','c','d'}", "' \t\n\r\fa b\tc\fd \t\n\r\f'.tokenize()");
@@ -561,7 +589,7 @@ public class EvaluateStringOperationsTest extends PivotTestSuite
 		assertSemanticErrorQuery("''.tokenize('',false,null)", OCLMessages.UnresolvedOperationCall_ERROR_, "tokenize", "String", "String, Boolean, OclVoid");
 	}
 
-	public void testStringTrim() {
+	@Test public void testStringTrim() {
 		assertQueryEquals(null, "ab", "'ab'.trim()");
 		assertQueryEquals(null, "a", "'a'.trim()");
 		assertQueryEquals(null, "", "''.trim()");

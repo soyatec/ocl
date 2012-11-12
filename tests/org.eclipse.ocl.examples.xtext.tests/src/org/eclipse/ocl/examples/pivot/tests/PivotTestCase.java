@@ -348,11 +348,16 @@ public class PivotTestCase extends TestCase
 	        throw new Error("Failure for \"" + expression + "\"", e);
 		}
 	}
-	
-	public URI getTestModelURI(String localFileName) {
+
+	public static ProjectMap getProjectMap() {
 		if (projectMap == null) {
 			projectMap = new ProjectMap();
 		}
+		return projectMap;
+	}
+	
+	public URI getTestModelURI(String localFileName) {
+		ProjectMap projectMap = getProjectMap();
 		String urlString = projectMap.getLocation(PLUGIN_ID).toString();
 		TestCase.assertNotNull(urlString);
 		return URI.createURI(urlString + "/" + localFileName);

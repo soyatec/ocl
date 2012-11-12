@@ -35,7 +35,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
-import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -202,14 +201,6 @@ public class LoadTests extends XtextTestCase
 //		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " saved()");
 //		assertNoResourceErrors("Save failed", xmiResource);
 		return xmiResource;
-	}
-
-	private static ProjectMap projectMap = null;
-	public static ProjectMap getProjectMap() {
-		if (projectMap == null) {
-			projectMap = new ProjectMap();
-		}
-		return projectMap;
 	}
 	
 	public void doLoadEcore(URI inputURI) throws IOException {

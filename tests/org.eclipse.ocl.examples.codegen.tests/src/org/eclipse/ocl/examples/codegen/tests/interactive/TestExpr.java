@@ -15,9 +15,6 @@
 package org.eclipse.ocl.examples.codegen.tests.interactive;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import junit.framework.TestCase;
 
@@ -26,12 +23,19 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.ocl.examples.codegen.common.GenModelCodeGenHelper;
-import org.eclipse.ocl.examples.codegen.expression.Ast2class;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.common.CodeGenHelper;
+import org.eclipse.ocl.examples.codegen.dynamic.GenModelCodeGenHelper;
+import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.library.LibraryOperation;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
+import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
-import org.eclipse.ocl.examples.pivot.ParserException;
+import org.eclipse.ocl.examples.pivot.OperationCallExp;
+import org.eclipse.ocl.examples.pivot.PivotFactory;
+import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
@@ -49,35 +53,41 @@ public class TestExpr extends TestCase
 //	private boolean genOCLstdlib = false;	
 //	protected String genModelFile;
 
-	private void assertCgEquals(Object expectedResult, String expression) throws ParserException, IOException {
+	private void assertCgEquals(Object expectedResult, String expression) throws Exception {
 		OCL ocl = OCL.newInstance();
 		OCLHelper helper = ocl.createOCLHelper();
 		MetaModelManager metaModelManager = ocl.getMetaModelManager();
 		helper.setContext(metaModelManager.getOclAnyType());
 		ExpressionInOCL query = helper.createQuery(expression);
-		File targetFolder = new File("src-gen/test");
 		
+		CodeGenHelper genModelHelper = getCodeGenHelper(metaModelManager);
+
+		File targetFolder = new File("src-gen");
+		String packageName = "test_package";
+		String className = getName();
 		
-		
-		URI genModelURI = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel", true);
+		LibraryOperation testInstance = genModelHelper.loadClass(query, targetFolder, packageName, className, true);
+		DomainEvaluator evaluator = new EcoreExecutorManager(metaModelManager.getOclAnyType(), PivotTables.LIBRARY);
+		OperationCallExp callExp = PivotFactory.eINSTANCE.createOperationCallExp();
+		callExp.setType(query.getType());
+		Object result = testInstance.evaluate(evaluator, callExp, testInstance);
+        assertEquals(expectedResult, result);
+	}
+
+	public CodeGenHelper getCodeGenHelper(@NonNull MetaModelManager metaModelManager) {
+		URI genModelURI = URI.createPlatformResourceURI(
+				"/org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel",
+				true);
 		ResourceSet resourceSet = getResourceSet();
 		Resource genModelResource = resourceSet.getResource(genModelURI, true);
-		String errorsString = PivotUtil.formatResourceDiagnostics(genModelResource.getErrors(), "Loading " + genModelURI, "\n");
+		String errorsString = PivotUtil.formatResourceDiagnostics(
+				genModelResource.getErrors(), "Loading " + genModelURI, "\n");
 		if (errorsString != null) {
-//			issues.addError(this, errorsString, null, null, null);
-			return;
+			// issues.addError(this, errorsString, null, null, null);
+			return null;
 		}
 		GenModel genModel = (GenModel) genModelResource.getContents().get(0);
-		
-		
-		
-		
-		List<Object> arguments = new ArrayList<Object>();
-		arguments.add(new GenModelCodeGenHelper(genModel, metaModelManager));
-		arguments.add("test_package");
-		arguments.add("TestClass");
-		Ast2class ast2class = new Ast2class(query, targetFolder, arguments);
-		ast2class.doGenerate(null);
+		return new GenModelCodeGenHelper(genModel,metaModelManager);
 	}
 
 	public ResourceSet getResourceSet() {
@@ -87,8 +97,6 @@ public class TestExpr extends TestCase
 			projectMap.initializeResourceSet(resourceSet);
 			resourceSet.getPackageRegistry().put(org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eNS_URI, org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eINSTANCE);
 			resourceSet.getPackageRegistry().put(org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage.eNS_URI, org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage.eINSTANCE);
-//			Resource r = resourceSet.getResource(URI.createPlatformResourceURI("/org.eclipse.ocl.examples.codegen/model/OCL4Acceleo.ecore", true), true);
-//			((ResourceSetImpl)resourceSet).getURIResourceMap().put(URI.createURI(((EPackage)r.getContents().get(0)).getNsURI()), r);
 		}
 		return resourceSet;
 	}
@@ -99,7 +107,15 @@ public class TestExpr extends TestCase
 		OCLstdlib.install();
 	}
 
-	public void testTrue() throws ParserException, IOException {
+	public void testFalse() throws Exception, IllegalArgumentException, ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
+		assertCgEquals(Boolean.FALSE, "false");
+	}
+
+	public void testSum() throws Exception, IllegalArgumentException, ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
+		assertCgEquals(ValuesUtil.integerValueOf(3), "1+2");
+	}
+
+	public void testTrue() throws Exception, IllegalArgumentException, ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
 		assertCgEquals(Boolean.TRUE, "true");
 	}
 }

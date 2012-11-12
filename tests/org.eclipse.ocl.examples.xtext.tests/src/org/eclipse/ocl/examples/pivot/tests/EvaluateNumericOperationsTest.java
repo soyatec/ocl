@@ -19,29 +19,57 @@ package org.eclipse.ocl.examples.pivot.tests;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.Collection;
 
 import org.eclipse.ocl.examples.domain.values.impl.BigIntegerValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.IntIntegerValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.LongIntegerValueImpl;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 
 /**
  * Tests for numeric operations.
  */
 @SuppressWarnings("nls")
+@RunWith(value = Parameterized.class)
 public class EvaluateNumericOperationsTest extends PivotTestSuite
-{
-	protected double doubleEpsilon = Math.pow(0.5, Double.SIZE-12);
+{	 
+	@Parameters
+	public static Collection<Object[]> data() {
+		Object[][] data = new Object[][]{{false}, {true}};
+		return Arrays.asList(data);
+	}
 
+	protected double doubleEpsilon = Math.pow(0.5, Double.SIZE - 12);
+
+	public EvaluateNumericOperationsTest() {
+		super(false);
+	}
+
+	public EvaluateNumericOperationsTest(boolean useCodeGen) {
+		super(useCodeGen);
+	}
+	
     @Override
-    protected void setUp() throws Exception {
+    @Before public void setUp() throws Exception {
         super.setUp();
 //      helper.setContext(getMetaclass("Package"));
         helper.setContext(metaModelManager.getMetaclassType());
     }
 
-	public void testIntValue() {
+	@Override
+	@After public void tearDown() throws Exception {
+		super.tearDown();
+	}
+
+	@Test public void testIntValue() {
 		assert ValuesUtil.integerValueOf(Integer.MAX_VALUE) instanceof IntIntegerValueImpl;
 		assert ValuesUtil.integerValueOf((long)Integer.MAX_VALUE) instanceof IntIntegerValueImpl;
 		assert ValuesUtil.integerValueOf(BigInteger.valueOf(Integer.MAX_VALUE)) instanceof IntIntegerValueImpl;
@@ -61,15 +89,15 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assert ValuesUtil.integerValueOf(BigInteger.valueOf(Long.MIN_VALUE).subtract(BigInteger.ONE)) instanceof BigIntegerValueImpl;
     }
 
-    public void testIntPlus() {
+    @Test public void testIntPlus() {
 		// hashCode, equals
     }
 
-    public void testIntMinus() {
+    @Test public void testIntMinus() {
 		// hashCode, equals
     }
     
-	public void testNumber() {
+	@Test public void testNumber() {
 		assertQueryEquals(null, 0, "0");
 //		assertSemanticErrorQuery("00", "extraneous input ''{0}'' expecting EOF", "0");
 //		assertSemanticErrorQuery("01", "extraneous input ''{0}'' expecting EOF", "1");
@@ -104,7 +132,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertSemanticErrorQuery("3.1e+ 1", "missing EOF at ''{0}''", "e");
 	}
     
-	public void testNumberAbs() {
+	@Test public void testNumberAbs() {
 		// Integer::abs()
 		assertQueryEquals(null, 3, "3.abs()");
 		assertQueryEquals(null, 3, "(-3).abs()");
@@ -131,7 +159,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let r : Real = null in r.abs()");
 	}
 
-	public void testNumberDiv() {
+	@Test public void testNumberDiv() {
 		assertQueryEquals(null, 1, "3.div(2)");
 		assertQueryEquals(null, -1, "(-3).div(2)");
 		assertQueryEquals(null, -1, "3.div(-2)");
@@ -148,7 +176,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let i1 : Integer = null, i2 : Integer = null in i1.div(i2)");
 	}
 
-	public void testNumberDivide() {
+	@Test public void testNumberDivide() {
 		// A.2.1.3 Contrary to other operations, "Integer x Integer -> Real"
 		// Integer::/(Integer)
 		assertQueryEquals(null, 1.0, "1 / 1", 0.0);
@@ -191,7 +219,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let r1 : Real = null, r2 : Real = null in r1 / r2");
 	}
 
-	public void testNumberEqual() {
+	@Test public void testNumberEqual() {
 		assertQueryFalse(null, "4 = 5");
 		assertQueryFalse(null, "1 = 4.0");
 		assertQueryFalse(null, "1.0 = 4");
@@ -220,7 +248,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryTrue(null, "let r1 : Real = null, r2 : Real = null in r1 = r2");
 	}
 
-	public void testNumberFloor() {
+	@Test public void testNumberFloor() {
 		// Integer::floor()
 		assertQueryEquals(null, 3, "3.floor()");
 		assertQueryEquals(null, -3, "(-3).floor()");
@@ -237,7 +265,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let r : Real = null in r.floor()");
 	}
 
-	public void testNumberGreaterThan() {
+	@Test public void testNumberGreaterThan() {
 		// Integer::greaterThan(Integer)
 		assertQueryTrue(null, "3 > 2");
 		assertQueryFalse(null, "-3 > 2");
@@ -291,7 +319,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let r1 : Real = null, r2 : Real = null in r1 > r2");
 	}
 
-	public void testNumberGreaterThanOrEqual() {
+	@Test public void testNumberGreaterThanOrEqual() {
 		// Integer::greaterThanOrEqual(Integer)
 		assertQueryTrue(null, "3 >= 2");
 		assertQueryFalse(null, "-3 >= 2");
@@ -345,7 +373,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let r1 : Real = null, r2 : Real = null in r1 >= r2");
 	}
 
-	public void testNumberLessThan() {
+	@Test public void testNumberLessThan() {
 		// Integer::lessThan(Integer)
 		assertQueryFalse(null, "3 < 2");
 		assertQueryTrue(null, "-3 < 2");
@@ -399,7 +427,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let r1 : Real = null, r2 : Real = null in r1 < r2");
 	}
 
-	public void testNumberLessThanOrEqual() {
+	@Test public void testNumberLessThanOrEqual() {
 		// Integer::lessThanOrEqual(Integer)
 		assertQueryFalse(null, "3 <= 2");
 		assertQueryTrue(null, "-3 <= 2");
@@ -453,7 +481,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let r1 : Real = null, r2 : Real = null in r1 <= r2");
 	}
 
-	public void testNumberMax() {
+	@Test public void testNumberMax() {
 		// Integer::max(Integer)
 		assertQueryEquals(null, 3, "3.max(2)");
 		assertQueryEquals(null, 2, "(-3).max(2)");
@@ -507,7 +535,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let r1 : Real = null, r2 : Real = null in r1.max(r2)");
 	}
 
-	public void testNumberMin() {
+	@Test public void testNumberMin() {
 		// Integer::min(Integer)
 		assertQueryEquals(null, 2, "3.min(2)");
 		assertQueryEquals(null, -3, "(-3).min(2)");
@@ -561,7 +589,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let r1 : Real = null, r2 : Real = null in r1.min(r2)");
 	}
 
-	public void testNumberMinus() {
+	@Test public void testNumberMinus() {
 		// Integer::-(Integer)
 		assertQueryEquals(null, 0, "1 - 1");
 		assertQueryEquals(null, 5, "1 - -4");
@@ -607,7 +635,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let r1 : Real = null, r2 : Real = null in r1 - r2");
 	}
 
-	public void testNumberMod() {
+	@Test public void testNumberMod() {
 		assertQueryEquals(null, 1, "3.mod(2)");
 		assertQueryEquals(null, -1, "(-3).mod(2)");
 		assertQueryEquals(null, 1, "3.mod(-2)");
@@ -629,7 +657,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let i1 : Integer = null, i2 : Integer = null in i1.mod(i2)");
 	}
 
-	public void testNumberNegate() {
+	@Test public void testNumberNegate() {
 		assertQueryEquals(null, -1, "-1");
 		assertQueryEquals(null, -1.0, "-1.0", 0.0);
 
@@ -648,7 +676,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let r : Real = null in -r");
 	}
 
-	public void testNumberNotEqual() {
+	@Test public void testNumberNotEqual() {
 		assertQueryTrue(null, "4 <> 5");
 		assertQueryTrue(null, "1 <> 4.0");
 		assertQueryTrue(null, "1.0 <> 4");
@@ -678,7 +706,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 	}
 
 
-	public void testNumberPlus() {
+	@Test public void testNumberPlus() {
 		// Integer::+(Integer)
 		assertQueryEquals(null, 2, "1 + 1");
 		assertQueryEquals(null, -3, "1 + -4");
@@ -724,7 +752,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let r1 : Real = null, r2 : Real = null in r1 + r2");
 	}
 
-	public void testNumberRound() {
+	@Test public void testNumberRound() {
 		// Integer::round()
 		assertQueryEquals(null, 3, "3.round()");
 		assertQueryEquals(null, -3, "(-3).round()");
@@ -741,7 +769,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let r : Real = null in r.round()");
 	}
 
-	public void testNumberTimes() {
+	@Test public void testNumberTimes() {
 		// Integer::*(Integer)
 		assertQueryEquals(null, 1, "1 * 1");
 		assertQueryEquals(null, -4, "1 * -4");
@@ -780,7 +808,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let r1 : Real = null, r2 : Real = null in r1 * r2");
 	}
 
-	public void testNumberToString() {
+	@Test public void testNumberToString() {
 		assertQueryEquals(null, "1", "1.toString()");
 		assertQueryEquals(null, "3.0", "3.0.toString()");
 		assertQueryEquals(null, "4.0", "(1.0+3.0).toString()");
@@ -790,7 +818,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryEquals(null, "*", "*.toString()");
 	}
 
-	public void testUnlimitedAbs() {
+	@Test public void testUnlimitedAbs() {
 		assertQueryInvalid(null, "*.abs()");
 		// invalid
 		assertQueryInvalid(null, "let u : UnlimitedNatural = invalid in u.abs()");
@@ -798,7 +826,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let u : UnlimitedNatural = null in u.abs()");
 	}
 
-/* FIXME	public void testUnlimitedDiv() {
+/* FIXME	@Test public void testUnlimitedDiv() {
 		/ *
 		 * FIXME I'm expecting the UnlimitedNatural to conform to Integer, div
 		 * and mod calls should then at least parse for them even though they
@@ -816,7 +844,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let u : UnlimitedNatural = null in u.div(1)");
 	} */
 
-	public void testUnlimitedDivide() {
+	@Test public void testUnlimitedDivide() {
 		assertQueryInvalid(null, "1 / *");
 		assertQueryInvalid(null, "* / 1");
 
@@ -842,7 +870,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let u1 : UnlimitedNatural = null, u2 : UnlimitedNatural = null in u1 / u2");
 	}
 
-	public void testUnlimitedEqual() {
+	@Test public void testUnlimitedEqual() {
 		assertQueryFalse(null, "* = 1");
 		assertQueryFalse(null, "1 = *");
 		assertQueryFalse(null, "* = 1.0");
@@ -863,7 +891,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryTrue(null, "let u1 : UnlimitedNatural = null, u2 : UnlimitedNatural = null in u1 = u2");
 	}
 
-	public void testUnlimitedFloor() {
+	@Test public void testUnlimitedFloor() {
 		assertQueryInvalid(null, "*.floor()");
 
 		// invalid
@@ -873,7 +901,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let u : UnlimitedNatural = null in u.floor()");
 	}
 
-	public void testUnlimitedGreaterThan() {
+	@Test public void testUnlimitedGreaterThan() {
 		assertQueryFalse(null, "1 > *");
 		assertQueryTrue(null, "* > 1");
 		assertQueryFalse(null, "* > *");
@@ -891,7 +919,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let u1 : UnlimitedNatural = null, u2 : UnlimitedNatural = null in u1 > u2");
 	}
 
-	public void testUnlimitedGreaterThanOrEqual() {
+	@Test public void testUnlimitedGreaterThanOrEqual() {
 		/*
 		 * FIXME "(* = *) == true" but "(* >= *) == false" ? something's amiss
 		 * and since this behavior isn't defined in the specification, we'll
@@ -915,7 +943,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let u1 : UnlimitedNatural = null, u2 : UnlimitedNatural = null in u1 >= u2");
 	}
 
-	public void testUnlimitedLessThan() {
+	@Test public void testUnlimitedLessThan() {
 		assertQueryTrue(null, "1 < *");
 		assertQueryFalse(null, "* < 1");
 		assertQueryFalse(null, "* < *");
@@ -933,7 +961,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let u1 : UnlimitedNatural = null, u2 : UnlimitedNatural = null in u1 < u2");
 	}
 
-	public void testUnlimitedLessThanOrEqual() {
+	@Test public void testUnlimitedLessThanOrEqual() {
 		/*
 		 * FIXME "(* = *) == true" but "(* <= *) == false" ? something's amiss
 		 * and since this behavior isn't defined in the specification, we'll
@@ -957,7 +985,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let u1 : UnlimitedNatural = null, u2 : UnlimitedNatural = null in u1 <= u2");
 	}
 
-	public void testUnlimitedMax() {
+	@Test public void testUnlimitedMax() {
 		assertQueryUnlimited(null, "1.max(*)");
 		assertQueryUnlimited(null, "*.max(1)");
 
@@ -979,7 +1007,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let u1 : UnlimitedNatural = null, u2 : UnlimitedNatural = null in u1.max(u2)");
 	}
 
-	public void testUnlimitedMin() {
+	@Test public void testUnlimitedMin() {
 		assertQueryEquals(null, 1, "1.min(*)");
 		assertQueryEquals(null, 1, "*.min(1)");
 
@@ -1001,7 +1029,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let u1 : UnlimitedNatural = null, u2 : UnlimitedNatural = null in u1.min(u2)");
 	}
 
-	public void testUnlimitedMinus() {
+	@Test public void testUnlimitedMinus() {
 		assertQueryInvalid(null, "1 - *");
 		assertQueryInvalid(null, "* - 1");
 
@@ -1023,7 +1051,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let u1 : UnlimitedNatural = null, u2 : UnlimitedNatural = null in u1 - u2");
 	}
 
-/* FIXME	public void testUnlimitedMod() {
+/* FIXME	@Test public void testUnlimitedMod() {
 		/ *
 		 * FIXME I'm expecting the UnlimitedNatural to conform to Integer, div
 		 * and mod calls should then at least parse for them even though they
@@ -1043,14 +1071,14 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let u : UnlimitedNatural = null in u.mod(1)");
 	} */
 
-	public void testUnlimitedNegate() {
+	@Test public void testUnlimitedNegate() {
 		assertQueryInvalid(null, "-*");
 		// invalid
 		assertQueryInvalid(null, "let u : UnlimitedNatural = invalid in -u");
 		// null
 	}
 
-	public void testUnlimitedNotEqual() {
+	@Test public void testUnlimitedNotEqual() {
 		assertQueryTrue(null, "* <> 1");
 		assertQueryTrue(null, "1 <> *");
 		assertQueryTrue(null, "* <> 1.0");
@@ -1071,7 +1099,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryFalse(null, "let u1 : UnlimitedNatural = null, u2 : UnlimitedNatural = null in u1 <> u2");
 	}
 
-	public void testUnlimitedPlus() {
+	@Test public void testUnlimitedPlus() {
 		assertQueryInvalid(null, "1 + *");
 		assertQueryInvalid(null, "* + 1");
 
@@ -1089,7 +1117,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let u1 : UnlimitedNatural = null, u2 : UnlimitedNatural = null in u1 + u2");
 	}
 
-	public void testUnlimitedRound() {
+	@Test public void testUnlimitedRound() {
 		assertQueryInvalid(null, "*.round()");
 		// invalid
 		assertQueryInvalid(null, "let u : UnlimitedNatural = invalid in u.round()");
@@ -1097,7 +1125,7 @@ public class EvaluateNumericOperationsTest extends PivotTestSuite
 		assertQueryInvalid(null, "let u : UnlimitedNatural = null in u.round()");
 	}
 
-	public void testUnlimitedTimes() {
+	@Test public void testUnlimitedTimes() {
 		assertQueryInvalid(null, "1 * *");
 		assertQueryInvalid(null, "* * 1");
 
