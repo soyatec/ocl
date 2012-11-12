@@ -577,7 +577,8 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	protected String text(LoopExp ele) {
-		return text(ele.getReferredIteration());
+		Iteration referredIteration = ele.getReferredIteration();
+		return referredIteration != null ? text(referredIteration) : "<<null>>";
 	}
 
 	protected String image(MessageExp ele) {
@@ -636,7 +637,8 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	protected String text(OperationCallExp ele) {
-		return text(ele.getReferredOperation());
+		Operation referredOperation = ele.getReferredOperation();
+		return referredOperation != null ? text(referredOperation) : "<<null>>";
 	}
 
 	protected String image(OrderedSetType ele) {
@@ -710,7 +712,8 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	protected String text(PropertyCallExp ele) {
-		return text(ele.getReferredProperty());
+		Property referredProperty = ele.getReferredProperty();
+		return referredProperty != null ? text(referredProperty) : "<<null>>";
 	}
 
 	protected String image(RealLiteralExp ele) {
@@ -738,7 +741,8 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	protected String text(TemplateParameter ele) {
-		return text(ele.getParameteredElement());
+		ParameterableElement parameteredElement = ele.getParameteredElement();
+		return parameteredElement != null ? text(parameteredElement) : "<<null>>";
 	}
 
 	protected String image(TemplateParameterType ele) {
