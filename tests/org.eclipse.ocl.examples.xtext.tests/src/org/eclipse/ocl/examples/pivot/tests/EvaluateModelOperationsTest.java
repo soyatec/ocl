@@ -279,4 +279,42 @@ public class EvaluateModelOperationsTest extends PivotTestSuite
         assertQueryResults(a, "Bag{'c1','c2'}", "bs.c->collect(j : C | j.oclAsSet()).name");
         assertQueryResults(a, "Bag{'c1','c2'}", "bs->collect(i : B | i.c)->collect(j : C | j.oclAsSet())->collect(k : C | k.name)");
 	}
+
+	/**
+	 * Test multi-container navigation inspired by Bug 394152.
+	 */
+	public void test_multi_container_394152() throws IOException {
+		String metaModelText =
+			"package bug394152 : pfx = 'http://bug394152'\n" +
+			"{\n" +
+			"	class Parent\n" +
+			"	{\n" +
+			"		property left#left : Child[+] { ordered composes };\n" +
+			"		property right#right : Child[+] { ordered composes };\n" +
+			"	}\n" +
+			"	class Child\n" +
+			"	{\n" +
+			"		property left#left : Parent[?] { ordered };\n" +
+			"		property right#right : Parent[?] { ordered };\n" +
+			"	}\n" +
+			"}\n";
+		Resource metaModel = cs2ecore(ocl, metaModelText, null);
+		EPackage ePackage = (EPackage) metaModel.getContents().get(0);
+		EClass parentClass = (EClass) ePackage.getEClassifier("Parent");
+		EClass childClass = (EClass) ePackage.getEClassifier("Child");
+        EObject parent = eCreate(parentClass);
+        EObject leftChild = eCreate(childClass);
+        EObject rightChild = eCreate(childClass);
+        eAdd(parent, "left", leftChild);
+        eAdd(parent, "right", rightChild);
+
+         Type childType = (Type) metaModelManager.getType(childClass);
+		//
+		helper.setContext(childType);
+		//
+		assertQueryEquals(leftChild, parent, "left");
+		assertQueryEquals(leftChild, null, "right");
+		assertQueryEquals(rightChild, null, "left");
+		assertQueryEquals(rightChild, parent, "right");
+	}
 }

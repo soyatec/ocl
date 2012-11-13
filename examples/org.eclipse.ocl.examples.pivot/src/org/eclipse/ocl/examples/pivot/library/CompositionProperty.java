@@ -54,15 +54,14 @@ public class CompositionProperty extends AbstractProperty
 			}
 			eValue = eObject.eGet(eFeature);
 		}
-		else {		
-			eValue = eObject.eContainer();		// FIXME this only works for single container type
+		else {									// Never happens; eFeature always exists
+			eValue = eObject.eContainer();		// Simple approach that only works for single container type
 		}
 		if (eValue == null) {
 			return valueFactory.getNull();
 		}
 		else {
-	//		EReference eContainmentFeature = eObject.eContainmentFeature();
-			return valueFactory.valueOf(eValue /*, eContainmentFeature.getEContainingClass()*/);
+			return valueFactory.valueOf(eValue);
 		}
 		// ??? Type conformance check
 	}
