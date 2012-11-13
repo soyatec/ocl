@@ -37,6 +37,7 @@ import org.eclipse.ocl.examples.pivot.VoidType;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -63,6 +64,10 @@ public class EvaluateOclAnyOperationsTest4 extends PivotSimpleTestSuite
 	protected String getTestPackageName() {
 		return "EvaluateOclAnyOperations";
 	}
+	
+	@BeforeClass public static void resetCounter() throws Exception {
+		PivotTestSuite.resetCounter();
+    }
 
     @Override
     @Before public void setUp() throws Exception {

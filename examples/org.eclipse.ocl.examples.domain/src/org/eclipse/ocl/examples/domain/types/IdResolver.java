@@ -11,6 +11,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
+import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
+import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
@@ -147,6 +149,12 @@ public class IdResolver implements IdVisitor<DomainElement>
 			}
 		}
 		return elementType;
+	}
+
+	public @NonNull DomainEnumerationLiteral getEnumerationLiteral(@NonNull EnumerationLiteralId enumerationLiteralId, @Nullable DomainElement context) {
+		DomainElement element = enumerationLiteralId.accept(this);
+		assert element != null;
+		return (DomainEnumerationLiteral)element;
 	}
 
 	public @NonNull DomainType getStaticTypeOf(@Nullable Object value) {
@@ -343,8 +351,16 @@ public class IdResolver implements IdVisitor<DomainElement>
 		return getCollectionType(id);
 	}
 
-	public @Nullable DomainType visitEnumerationLiteralId(@NonNull EnumerationLiteralId id) {
-		throw new UnsupportedOperationException();
+	public @NonNull DomainEnumerationLiteral visitEnumerationLiteralId(@NonNull EnumerationLiteralId id) {
+		DomainElement parent = id.getParentId().accept(this);
+		if (!(parent instanceof DomainEnumeration)) {
+			throw new UnsupportedOperationException();
+		}
+		DomainEnumerationLiteral enumerationLiteral = ((DomainEnumeration)parent).getEnumerationLiteral(id.getName());
+		if (enumerationLiteral == null) {
+			throw new UnsupportedOperationException();
+		}
+		return enumerationLiteral;
 	}
 
 	public @NonNull DomainType visitInvalidId(@NonNull OclInvalidTypeId id) {

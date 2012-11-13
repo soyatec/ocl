@@ -23,6 +23,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
 import org.eclipse.ocl.examples.codegen.analyzer.CommonSubExpression;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
+import org.eclipse.ocl.examples.codegen.generator.CodeGenLabel;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.GenModelException;
@@ -459,6 +460,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		head.append("final " + atNonNull() + " " + operationTypeName + " " + bodyName + " = new " + operationTypeName + "()\n");
 		head.append("{\n");
 		CodeGenSnippet evaluateBody = snippet.appendIndentedNodes(null);
+			CodeGenLabel localLabel = context.getSnippetLabel(CodeGenerator.LOCAL_ROOT);
 			CodeGenText text = evaluateBody.appendIndentedText("");
 			text.appendCommentWithOCL(null, bodyExpression);
 			text.append("@Override\n");
@@ -466,10 +468,12 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 				atNonNull + " " + domainEvaluatorName + " " + evaluatorName + ", " +
 				atNonNull + " " + typeIdName + " returnTypeId, " +
 				atNullable + " Object sourceValue");
+			CodeGenSnippet evaluateNodes = evaluateBody.appendIndentedNodes(null);
+			localLabel.push(evaluateNodes);
 			for (int i = 0; i < arity; i++) {
 				text.append(", " + atNullable + " Object ");
 				Variable iterator = iterators.get(i);
-				CodeGenSnippet iteratorSnippet = evaluateBody.getSnippet(iterator);
+				CodeGenSnippet iteratorSnippet = evaluateNodes.getSnippet(iterator);
 				text.append(iteratorSnippet.getName());
 			}
 			text.append(") throws Exception {\n");
@@ -477,6 +481,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 				iteratorBody.appendContentsOf(context.getSnippet(bodyExpression));
 				iteratorBody.append("return " + getSymbolName(bodyExpression) + ";\n");
 				evaluateBody.append("}\n");
+			localLabel.pop();
 		snippet.append("};\n");
 		if (source != null) {
 //			if (mayEvaluateFor(referredProperty, metaModelManager.getOclInvalidType())) {		// If property processes invalid, must catch any incoming exceptions as invalid values.
