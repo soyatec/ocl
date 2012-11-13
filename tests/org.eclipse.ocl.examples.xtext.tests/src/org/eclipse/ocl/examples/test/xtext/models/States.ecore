@@ -17,7 +17,7 @@
       <details key="constraints" value="HasInitialState"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="HasInitialState" value="states->exists(s : State | s.initial)"/>
+      <details key="HasInitialState" value="states->exists(s | s.initial)"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="initial" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
