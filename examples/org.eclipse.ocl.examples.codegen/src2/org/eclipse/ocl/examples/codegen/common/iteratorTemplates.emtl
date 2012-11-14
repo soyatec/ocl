@@ -588,7 +588,7 @@
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" = "/>
         <body xsi:type="mtl:TemplateInvocation">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-          <definition href="symbolTemplates.emtl#/0/symbolName.13"/>
+          <definition href="symbolTemplates.emtl#/0/symbolName.14"/>
           <argument xsi:type="ocl.ecore:OperationCallExp">
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable"/>
             <source xsi:type="ocl.ecore:PropertyCallExp" eType="/4/OrderedSet(Variable)">
@@ -1254,27 +1254,23 @@
     <ownedModuleElement xsi:type="mtl:Template" name="emitIterator_updateAccumulator" visibility="Public">
       <body xsi:type="mtl:LetBlock">
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="if (acc_"/>
-        <body xsi:type="ocl.ecore:VariableExp" name="astName" referredVariable="/0/emitIterator_updateAccumulator.5/@body.0/astName.6">
+        <body xsi:type="ocl.ecore:VariableExp" name="astName" referredVariable="/0/emitIterator_updateAccumulator.5/@body.0/astName.5">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".includes("/>
-        <body xsi:type="ocl.ecore:VariableExp" name="astName" referredVariable="/0/emitIterator_updateAccumulator.5/@body.0/astName.6">
+        <body xsi:type="ocl.ecore:VariableExp" name="astName" referredVariable="/0/emitIterator_updateAccumulator.5/@body.0/astName.5">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="_bodyVal) == TRUE_VALUE) {&#xA;&#x9;"/>
-        <body xsi:type="ocl.ecore:VariableExp" name="astName" referredVariable="/0/emitIterator_updateAccumulator.5/@body.0/astName.6">
+        <body xsi:type="ocl.ecore:VariableExp" name="astName" referredVariable="/0/emitIterator_updateAccumulator.5/@body.0/astName.5">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         </body>
-        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" = FALSE_VALUE;&#x9;&#x9;// Abort after second find&#xA;&#x9;break;&#xA;}&#xA;else if ("/>
-        <body xsi:type="ocl.ecore:VariableExp" name="astName" referredVariable="/0/emitIterator_updateAccumulator.5/@body.0/astName.6">
-          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-        </body>
-        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="_bodyVal == null) {&#xA;&#x9;throw new &lt;%InvalidValueException%>(&lt;%EvaluatorMessages%>.UndefinedBody, &quot;isUnique&quot;);&#xA;}&#xA;else {&#xA;&#x9;acc_"/>
-        <body xsi:type="ocl.ecore:VariableExp" name="astName" referredVariable="/0/emitIterator_updateAccumulator.5/@body.0/astName.6">
+        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" = FALSE_VALUE;&#x9;&#x9;// Abort after second find&#xA;&#x9;break;&#xA;}&#xA;else {&#xA;&#x9;acc_"/>
+        <body xsi:type="ocl.ecore:VariableExp" name="astName" referredVariable="/0/emitIterator_updateAccumulator.5/@body.0/astName.5">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".add("/>
-        <body xsi:type="ocl.ecore:VariableExp" name="astName" referredVariable="/0/emitIterator_updateAccumulator.5/@body.0/astName.6">
+        <body xsi:type="ocl.ecore:VariableExp" name="astName" referredVariable="/0/emitIterator_updateAccumulator.5/@body.0/astName.5">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="_bodyVal);&#xA;}"/>
@@ -1312,7 +1308,7 @@
       </guard>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Comment">
-      <body startPosition="8956" endPosition="9076" value=" --- one ---------------------------------------------------------------------------------------------------------------"/>
+      <body startPosition="8828" endPosition="8948" value=" --- one ---------------------------------------------------------------------------------------------------------------"/>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Template" name="emitIterator_createAccumulatorValue" visibility="Public">
       <body xsi:type="mtl:LetBlock">
@@ -1454,7 +1450,7 @@
       </guard>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Comment">
-      <body startPosition="10180" endPosition="10303" value=" --- reject ---------------------------------------------------------------------------------------------------------------"/>
+      <body startPosition="10052" endPosition="10175" value=" --- reject ---------------------------------------------------------------------------------------------------------------"/>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Template" name="emitIterator_createAccumulatorValue" visibility="Public">
       <body xsi:type="mtl:LetBlock">
@@ -1567,7 +1563,7 @@
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".add("/>
         <body xsi:type="mtl:TemplateInvocation">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-          <definition href="symbolTemplates.emtl#/0/symbolName.13"/>
+          <definition href="symbolTemplates.emtl#/0/symbolName.14"/>
           <argument xsi:type="ocl.ecore:OperationCallExp">
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable"/>
             <source xsi:type="ocl.ecore:PropertyCallExp" eType="/4/OrderedSet(Variable)">
@@ -1624,7 +1620,7 @@
       </guard>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Comment">
-      <body startPosition="11398" endPosition="11521" value=" --- select ---------------------------------------------------------------------------------------------------------------"/>
+      <body startPosition="11270" endPosition="11393" value=" --- select ---------------------------------------------------------------------------------------------------------------"/>
     </ownedModuleElement>
     <ownedModuleElement xsi:type="mtl:Template" name="emitIterator_createAccumulatorValue" visibility="Public">
       <body xsi:type="mtl:LetBlock">
@@ -1737,7 +1733,7 @@
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".add("/>
         <body xsi:type="mtl:TemplateInvocation">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-          <definition href="symbolTemplates.emtl#/0/symbolName.13"/>
+          <definition href="symbolTemplates.emtl#/0/symbolName.14"/>
           <argument xsi:type="ocl.ecore:OperationCallExp">
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable"/>
             <source xsi:type="ocl.ecore:PropertyCallExp" eType="/4/OrderedSet(Variable)">
@@ -1991,7 +1987,7 @@
           <contents xsi:type="ocl.ecore:Constraint"/>
         </eAnnotations>
         <eAnnotations source="MTL">
-          <references href="symbolTemplates.emtl#/0/symbolName.13"/>
+          <references href="symbolTemplates.emtl#/0/symbolName.14"/>
         </eAnnotations>
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         <eParameters name="ast">
@@ -2070,6 +2066,11 @@
     <eClassifiers xsi:type="ecore:EClass" name="Operation_Class">
       <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
         <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Package_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Package"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Property_Class">
@@ -2619,9 +2620,6 @@
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-  </ocl.ecore:Variable>
-  <ocl.ecore:Variable name="self">
-    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp"/>
@@ -4989,12 +4987,12 @@
     </eAnnotations>
     <eAnnotations source="positions.421" references="/0/emitIterator_updateAccumulator.5">
       <details key="start" value="8406"/>
-      <details key="end" value="8946"/>
+      <details key="end" value="8818"/>
       <details key="line" value="152"/>
     </eAnnotations>
     <eAnnotations source="positions.422" references="/0/emitIterator_updateAccumulator.5/@body.0">
       <details key="start" value="8572"/>
-      <details key="end" value="8935"/>
+      <details key="end" value="8807"/>
       <details key="line" value="153"/>
     </eAnnotations>
     <eAnnotations source="positions.423" references="/0/emitIterator_updateAccumulator.5/@body.0/@body.0">
@@ -5029,992 +5027,982 @@
     </eAnnotations>
     <eAnnotations source="positions.429" references="/0/emitIterator_updateAccumulator.5/@body.0/@body.6">
       <details key="start" value="8698"/>
-      <details key="end" value="8761"/>
+      <details key="end" value="8764"/>
       <details key="line" value="155"/>
     </eAnnotations>
     <eAnnotations source="positions.430" references="/0/emitIterator_updateAccumulator.5/@body.0/astName.3">
-      <details key="start" value="8762"/>
-      <details key="end" value="8769"/>
+      <details key="start" value="8765"/>
+      <details key="end" value="8772"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.431" references="/0/emitIterator_updateAccumulator.5/@body.0/@body.8">
-      <details key="start" value="8771"/>
-      <details key="end" value="8892"/>
-      <details key="line" value="158"/>
+      <details key="start" value="8774"/>
+      <details key="end" value="8779"/>
+      <details key="line" value="159"/>
     </eAnnotations>
     <eAnnotations source="positions.432" references="/0/emitIterator_updateAccumulator.5/@body.0/astName.4">
-      <details key="start" value="8893"/>
-      <details key="end" value="8900"/>
+      <details key="start" value="8780"/>
+      <details key="end" value="8787"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.433" references="/0/emitIterator_updateAccumulator.5/@body.0/@body.10">
-      <details key="start" value="8902"/>
-      <details key="end" value="8907"/>
-      <details key="line" value="162"/>
+      <details key="start" value="8789"/>
+      <details key="end" value="8801"/>
+      <details key="line" value="159"/>
     </eAnnotations>
     <eAnnotations source="positions.434" references="/0/emitIterator_updateAccumulator.5/@body.0/astName.5">
-      <details key="start" value="8908"/>
-      <details key="end" value="8915"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.435" references="/0/emitIterator_updateAccumulator.5/@body.0/@body.12">
-      <details key="start" value="8917"/>
-      <details key="end" value="8929"/>
-      <details key="line" value="162"/>
-    </eAnnotations>
-    <eAnnotations source="positions.436" references="/0/emitIterator_updateAccumulator.5/@body.0/astName.6">
       <details key="start" value="8577"/>
       <details key="end" value="8620"/>
       <details key="line" value="153"/>
     </eAnnotations>
-    <eAnnotations source="positions.437" references="/0/emitIterator_updateAccumulator.5/@body.0/astName.6/@initExpression">
+    <eAnnotations source="positions.435" references="/0/emitIterator_updateAccumulator.5/@body.0/astName.5/@initExpression">
       <details key="start" value="8597"/>
       <details key="end" value="8621"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.438" references="/0/emitIterator_updateAccumulator.5/@body.0/astName.6/@initExpression/ast">
+    <eAnnotations source="positions.436" references="/0/emitIterator_updateAccumulator.5/@body.0/astName.5/@initExpression/ast">
       <details key="start" value="8597"/>
       <details key="end" value="8600"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.439" references="/0/emitIterator_updateAccumulator.5/@body.0/astName.6/@initExpression/expInOcl">
+    <eAnnotations source="positions.437" references="/0/emitIterator_updateAccumulator.5/@body.0/astName.5/@initExpression/expInOcl">
       <details key="start" value="8612"/>
       <details key="end" value="8620"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.440" references="/0/emitIterator_updateAccumulator.5/ast">
+    <eAnnotations source="positions.438" references="/0/emitIterator_updateAccumulator.5/ast">
       <details key="start" value="8454"/>
       <details key="end" value="8471"/>
       <details key="line" value="152"/>
     </eAnnotations>
-    <eAnnotations source="positions.441" references="/0/emitIterator_updateAccumulator.5/importer">
+    <eAnnotations source="positions.439" references="/0/emitIterator_updateAccumulator.5/importer">
       <details key="start" value="8473"/>
       <details key="end" value="8496"/>
       <details key="line" value="152"/>
     </eAnnotations>
-    <eAnnotations source="positions.442" references="/0/emitIterator_updateAccumulator.5/genPackage">
+    <eAnnotations source="positions.440" references="/0/emitIterator_updateAccumulator.5/genPackage">
       <details key="start" value="8498"/>
       <details key="end" value="8521"/>
       <details key="line" value="152"/>
     </eAnnotations>
-    <eAnnotations source="positions.443" references="/0/emitIterator_updateAccumulator.5/expInOcl">
+    <eAnnotations source="positions.441" references="/0/emitIterator_updateAccumulator.5/expInOcl">
       <details key="start" value="8523"/>
       <details key="end" value="8549"/>
       <details key="line" value="152"/>
     </eAnnotations>
-    <eAnnotations source="positions.444" references="/0/emitIterator_updateAccumulator.5/@guard">
+    <eAnnotations source="positions.442" references="/0/emitIterator_updateAccumulator.5/@guard">
       <details key="start" value="8553"/>
       <details key="end" value="8569"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.445" references="/0/emitIterator_updateAccumulator.5/@guard/ast">
+    <eAnnotations source="positions.443" references="/0/emitIterator_updateAccumulator.5/@guard/ast">
       <details key="start" value="8553"/>
       <details key="end" value="8556"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.446" references="/0/@ownedModuleElement.34">
-      <details key="start" value="8948"/>
-      <details key="end" value="9078"/>
+    <eAnnotations source="positions.444" references="/0/@ownedModuleElement.34">
+      <details key="start" value="8820"/>
+      <details key="end" value="8950"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.447" references="/0/emitIterator_createAccumulatorValue.6">
-      <details key="start" value="9080"/>
-      <details key="end" value="9345"/>
-      <details key="line" value="167"/>
+    <eAnnotations source="positions.445" references="/0/emitIterator_createAccumulatorValue.6">
+      <details key="start" value="8952"/>
+      <details key="end" value="9217"/>
+      <details key="line" value="164"/>
     </eAnnotations>
-    <eAnnotations source="positions.448" references="/0/emitIterator_createAccumulatorValue.6/@body.0">
-      <details key="start" value="9246"/>
-      <details key="end" value="9334"/>
-      <details key="line" value="168"/>
+    <eAnnotations source="positions.446" references="/0/emitIterator_createAccumulatorValue.6/@body.0">
+      <details key="start" value="9118"/>
+      <details key="end" value="9206"/>
+      <details key="line" value="165"/>
     </eAnnotations>
-    <eAnnotations source="positions.449" references="/0/emitIterator_createAccumulatorValue.6/@body.0/@body.0">
-      <details key="start" value="9296"/>
-      <details key="end" value="9308"/>
-      <details key="line" value="169"/>
+    <eAnnotations source="positions.447" references="/0/emitIterator_createAccumulatorValue.6/@body.0/@body.0">
+      <details key="start" value="9168"/>
+      <details key="end" value="9180"/>
+      <details key="line" value="166"/>
     </eAnnotations>
-    <eAnnotations source="positions.450" references="/0/emitIterator_createAccumulatorValue.6/@body.0/astName">
-      <details key="start" value="9309"/>
-      <details key="end" value="9316"/>
+    <eAnnotations source="positions.448" references="/0/emitIterator_createAccumulatorValue.6/@body.0/astName">
+      <details key="start" value="9181"/>
+      <details key="end" value="9188"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.451" references="/0/emitIterator_createAccumulatorValue.6/@body.0/@body.2">
-      <details key="start" value="9318"/>
-      <details key="end" value="9328"/>
-      <details key="line" value="169"/>
-    </eAnnotations>
-    <eAnnotations source="positions.452" references="/0/emitIterator_createAccumulatorValue.6/@body.0/astName.1">
-      <details key="start" value="9251"/>
-      <details key="end" value="9294"/>
-      <details key="line" value="168"/>
-    </eAnnotations>
-    <eAnnotations source="positions.453" references="/0/emitIterator_createAccumulatorValue.6/@body.0/astName.1/@initExpression">
-      <details key="start" value="9271"/>
-      <details key="end" value="9295"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.454" references="/0/emitIterator_createAccumulatorValue.6/@body.0/astName.1/@initExpression/ast">
-      <details key="start" value="9271"/>
-      <details key="end" value="9274"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.455" references="/0/emitIterator_createAccumulatorValue.6/@body.0/astName.1/@initExpression/expInOcl">
-      <details key="start" value="9286"/>
-      <details key="end" value="9294"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.456" references="/0/emitIterator_createAccumulatorValue.6/ast">
-      <details key="start" value="9133"/>
-      <details key="end" value="9150"/>
-      <details key="line" value="167"/>
-    </eAnnotations>
-    <eAnnotations source="positions.457" references="/0/emitIterator_createAccumulatorValue.6/importer">
-      <details key="start" value="9152"/>
-      <details key="end" value="9175"/>
-      <details key="line" value="167"/>
-    </eAnnotations>
-    <eAnnotations source="positions.458" references="/0/emitIterator_createAccumulatorValue.6/genPackage">
-      <details key="start" value="9177"/>
+    <eAnnotations source="positions.449" references="/0/emitIterator_createAccumulatorValue.6/@body.0/@body.2">
+      <details key="start" value="9190"/>
       <details key="end" value="9200"/>
-      <details key="line" value="167"/>
+      <details key="line" value="166"/>
     </eAnnotations>
-    <eAnnotations source="positions.459" references="/0/emitIterator_createAccumulatorValue.6/expInOcl">
-      <details key="start" value="9202"/>
-      <details key="end" value="9228"/>
-      <details key="line" value="167"/>
+    <eAnnotations source="positions.450" references="/0/emitIterator_createAccumulatorValue.6/@body.0/astName.1">
+      <details key="start" value="9123"/>
+      <details key="end" value="9166"/>
+      <details key="line" value="165"/>
     </eAnnotations>
-    <eAnnotations source="positions.460" references="/0/emitIterator_createAccumulatorValue.6/@guard">
-      <details key="start" value="9232"/>
-      <details key="end" value="9243"/>
+    <eAnnotations source="positions.451" references="/0/emitIterator_createAccumulatorValue.6/@body.0/astName.1/@initExpression">
+      <details key="start" value="9143"/>
+      <details key="end" value="9167"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.461" references="/0/emitIterator_createAccumulatorValue.6/@guard/ast">
-      <details key="start" value="9232"/>
-      <details key="end" value="9235"/>
+    <eAnnotations source="positions.452" references="/0/emitIterator_createAccumulatorValue.6/@body.0/astName.1/@initExpression/ast">
+      <details key="start" value="9143"/>
+      <details key="end" value="9146"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.462" references="/0/emitIterator_resolveTerminalValue.6">
-      <details key="start" value="9347"/>
-      <details key="end" value="9607"/>
-      <details key="line" value="172"/>
-    </eAnnotations>
-    <eAnnotations source="positions.463" references="/0/emitIterator_resolveTerminalValue.6/@body.0">
-      <details key="start" value="9511"/>
-      <details key="end" value="9596"/>
-      <details key="line" value="173"/>
-    </eAnnotations>
-    <eAnnotations source="positions.464" references="/0/emitIterator_resolveTerminalValue.6/@body.0/astName">
-      <details key="start" value="9562"/>
-      <details key="end" value="9569"/>
+    <eAnnotations source="positions.453" references="/0/emitIterator_createAccumulatorValue.6/@body.0/astName.1/@initExpression/expInOcl">
+      <details key="start" value="9158"/>
+      <details key="end" value="9166"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.465" references="/0/emitIterator_resolveTerminalValue.6/@body.0/@body.1">
-      <details key="start" value="9571"/>
-      <details key="end" value="9578"/>
+    <eAnnotations source="positions.454" references="/0/emitIterator_createAccumulatorValue.6/ast">
+      <details key="start" value="9005"/>
+      <details key="end" value="9022"/>
+      <details key="line" value="164"/>
+    </eAnnotations>
+    <eAnnotations source="positions.455" references="/0/emitIterator_createAccumulatorValue.6/importer">
+      <details key="start" value="9024"/>
+      <details key="end" value="9047"/>
+      <details key="line" value="164"/>
+    </eAnnotations>
+    <eAnnotations source="positions.456" references="/0/emitIterator_createAccumulatorValue.6/genPackage">
+      <details key="start" value="9049"/>
+      <details key="end" value="9072"/>
+      <details key="line" value="164"/>
+    </eAnnotations>
+    <eAnnotations source="positions.457" references="/0/emitIterator_createAccumulatorValue.6/expInOcl">
+      <details key="start" value="9074"/>
+      <details key="end" value="9100"/>
+      <details key="line" value="164"/>
+    </eAnnotations>
+    <eAnnotations source="positions.458" references="/0/emitIterator_createAccumulatorValue.6/@guard">
+      <details key="start" value="9104"/>
+      <details key="end" value="9115"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.459" references="/0/emitIterator_createAccumulatorValue.6/@guard/ast">
+      <details key="start" value="9104"/>
+      <details key="end" value="9107"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.460" references="/0/emitIterator_resolveTerminalValue.6">
+      <details key="start" value="9219"/>
+      <details key="end" value="9479"/>
+      <details key="line" value="169"/>
+    </eAnnotations>
+    <eAnnotations source="positions.461" references="/0/emitIterator_resolveTerminalValue.6/@body.0">
+      <details key="start" value="9383"/>
+      <details key="end" value="9468"/>
+      <details key="line" value="170"/>
+    </eAnnotations>
+    <eAnnotations source="positions.462" references="/0/emitIterator_resolveTerminalValue.6/@body.0/astName">
+      <details key="start" value="9434"/>
+      <details key="end" value="9441"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.463" references="/0/emitIterator_resolveTerminalValue.6/@body.0/@body.1">
+      <details key="start" value="9443"/>
+      <details key="end" value="9450"/>
+      <details key="line" value="171"/>
+    </eAnnotations>
+    <eAnnotations source="positions.464" references="/0/emitIterator_resolveTerminalValue.6/@body.0/astName.1">
+      <details key="start" value="9451"/>
+      <details key="end" value="9458"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.465" references="/0/emitIterator_resolveTerminalValue.6/@body.0/@body.3">
+      <details key="start" value="9460"/>
+      <details key="end" value="9462"/>
+      <details key="line" value="171"/>
+    </eAnnotations>
+    <eAnnotations source="positions.466" references="/0/emitIterator_resolveTerminalValue.6/@body.0/astName.2">
+      <details key="start" value="9388"/>
+      <details key="end" value="9431"/>
+      <details key="line" value="170"/>
+    </eAnnotations>
+    <eAnnotations source="positions.467" references="/0/emitIterator_resolveTerminalValue.6/@body.0/astName.2/@initExpression">
+      <details key="start" value="9408"/>
+      <details key="end" value="9432"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.468" references="/0/emitIterator_resolveTerminalValue.6/@body.0/astName.2/@initExpression/ast">
+      <details key="start" value="9408"/>
+      <details key="end" value="9411"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.469" references="/0/emitIterator_resolveTerminalValue.6/@body.0/astName.2/@initExpression/expInOcl">
+      <details key="start" value="9423"/>
+      <details key="end" value="9431"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.470" references="/0/emitIterator_resolveTerminalValue.6/ast">
+      <details key="start" value="9270"/>
+      <details key="end" value="9287"/>
+      <details key="line" value="169"/>
+    </eAnnotations>
+    <eAnnotations source="positions.471" references="/0/emitIterator_resolveTerminalValue.6/importer">
+      <details key="start" value="9289"/>
+      <details key="end" value="9312"/>
+      <details key="line" value="169"/>
+    </eAnnotations>
+    <eAnnotations source="positions.472" references="/0/emitIterator_resolveTerminalValue.6/genPackage">
+      <details key="start" value="9314"/>
+      <details key="end" value="9337"/>
+      <details key="line" value="169"/>
+    </eAnnotations>
+    <eAnnotations source="positions.473" references="/0/emitIterator_resolveTerminalValue.6/expInOcl">
+      <details key="start" value="9339"/>
+      <details key="end" value="9365"/>
+      <details key="line" value="169"/>
+    </eAnnotations>
+    <eAnnotations source="positions.474" references="/0/emitIterator_resolveTerminalValue.6/@guard">
+      <details key="start" value="9369"/>
+      <details key="end" value="9380"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.475" references="/0/emitIterator_resolveTerminalValue.6/@guard/ast">
+      <details key="start" value="9369"/>
+      <details key="end" value="9372"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.476" references="/0/emitIterator_updateAccumulator.6">
+      <details key="start" value="9481"/>
+      <details key="end" value="10042"/>
       <details key="line" value="174"/>
     </eAnnotations>
-    <eAnnotations source="positions.466" references="/0/emitIterator_resolveTerminalValue.6/@body.0/astName.1">
-      <details key="start" value="9579"/>
-      <details key="end" value="9586"/>
+    <eAnnotations source="positions.477" references="/0/emitIterator_updateAccumulator.6/@body.0">
+      <details key="start" value="9642"/>
+      <details key="end" value="10031"/>
+      <details key="line" value="175"/>
+    </eAnnotations>
+    <eAnnotations source="positions.478" references="/0/emitIterator_updateAccumulator.6/@body.0/@body.0">
+      <details key="start" value="9692"/>
+      <details key="end" value="9696"/>
+      <details key="line" value="176"/>
+    </eAnnotations>
+    <eAnnotations source="positions.479" references="/0/emitIterator_updateAccumulator.6/@body.0/astName">
+      <details key="start" value="9697"/>
+      <details key="end" value="9704"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.467" references="/0/emitIterator_resolveTerminalValue.6/@body.0/@body.3">
-      <details key="start" value="9588"/>
-      <details key="end" value="9590"/>
-      <details key="line" value="174"/>
+    <eAnnotations source="positions.480" references="/0/emitIterator_updateAccumulator.6/@body.0/@body.2">
+      <details key="start" value="9706"/>
+      <details key="end" value="9738"/>
+      <details key="line" value="176"/>
     </eAnnotations>
-    <eAnnotations source="positions.468" references="/0/emitIterator_resolveTerminalValue.6/@body.0/astName.2">
-      <details key="start" value="9516"/>
-      <details key="end" value="9559"/>
-      <details key="line" value="173"/>
-    </eAnnotations>
-    <eAnnotations source="positions.469" references="/0/emitIterator_resolveTerminalValue.6/@body.0/astName.2/@initExpression">
-      <details key="start" value="9536"/>
-      <details key="end" value="9560"/>
+    <eAnnotations source="positions.481" references="/0/emitIterator_updateAccumulator.6/@body.0/astName.1">
+      <details key="start" value="9739"/>
+      <details key="end" value="9746"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.470" references="/0/emitIterator_resolveTerminalValue.6/@body.0/astName.2/@initExpression/ast">
-      <details key="start" value="9536"/>
-      <details key="end" value="9539"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.471" references="/0/emitIterator_resolveTerminalValue.6/@body.0/astName.2/@initExpression/expInOcl">
-      <details key="start" value="9551"/>
-      <details key="end" value="9559"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.472" references="/0/emitIterator_resolveTerminalValue.6/ast">
-      <details key="start" value="9398"/>
-      <details key="end" value="9415"/>
-      <details key="line" value="172"/>
-    </eAnnotations>
-    <eAnnotations source="positions.473" references="/0/emitIterator_resolveTerminalValue.6/importer">
-      <details key="start" value="9417"/>
-      <details key="end" value="9440"/>
-      <details key="line" value="172"/>
-    </eAnnotations>
-    <eAnnotations source="positions.474" references="/0/emitIterator_resolveTerminalValue.6/genPackage">
-      <details key="start" value="9442"/>
-      <details key="end" value="9465"/>
-      <details key="line" value="172"/>
-    </eAnnotations>
-    <eAnnotations source="positions.475" references="/0/emitIterator_resolveTerminalValue.6/expInOcl">
-      <details key="start" value="9467"/>
-      <details key="end" value="9493"/>
-      <details key="line" value="172"/>
-    </eAnnotations>
-    <eAnnotations source="positions.476" references="/0/emitIterator_resolveTerminalValue.6/@guard">
-      <details key="start" value="9497"/>
-      <details key="end" value="9508"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.477" references="/0/emitIterator_resolveTerminalValue.6/@guard/ast">
-      <details key="start" value="9497"/>
-      <details key="end" value="9500"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.478" references="/0/emitIterator_updateAccumulator.6">
-      <details key="start" value="9609"/>
-      <details key="end" value="10170"/>
+    <eAnnotations source="positions.482" references="/0/emitIterator_updateAccumulator.6/@body.0/@body.4">
+      <details key="start" value="9748"/>
+      <details key="end" value="9868"/>
       <details key="line" value="177"/>
     </eAnnotations>
-    <eAnnotations source="positions.479" references="/0/emitIterator_updateAccumulator.6/@body.0">
-      <details key="start" value="9770"/>
-      <details key="end" value="10159"/>
-      <details key="line" value="178"/>
-    </eAnnotations>
-    <eAnnotations source="positions.480" references="/0/emitIterator_updateAccumulator.6/@body.0/@body.0">
-      <details key="start" value="9820"/>
-      <details key="end" value="9824"/>
-      <details key="line" value="179"/>
-    </eAnnotations>
-    <eAnnotations source="positions.481" references="/0/emitIterator_updateAccumulator.6/@body.0/astName">
-      <details key="start" value="9825"/>
-      <details key="end" value="9832"/>
+    <eAnnotations source="positions.483" references="/0/emitIterator_updateAccumulator.6/@body.0/astName.2">
+      <details key="start" value="9869"/>
+      <details key="end" value="9876"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.482" references="/0/emitIterator_updateAccumulator.6/@body.0/@body.2">
-      <details key="start" value="9834"/>
-      <details key="end" value="9866"/>
-      <details key="line" value="179"/>
-    </eAnnotations>
-    <eAnnotations source="positions.483" references="/0/emitIterator_updateAccumulator.6/@body.0/astName.1">
-      <details key="start" value="9867"/>
-      <details key="end" value="9874"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.484" references="/0/emitIterator_updateAccumulator.6/@body.0/@body.4">
-      <details key="start" value="9876"/>
-      <details key="end" value="9996"/>
+    <eAnnotations source="positions.484" references="/0/emitIterator_updateAccumulator.6/@body.0/@body.6">
+      <details key="start" value="9878"/>
+      <details key="end" value="9884"/>
       <details key="line" value="180"/>
     </eAnnotations>
-    <eAnnotations source="positions.485" references="/0/emitIterator_updateAccumulator.6/@body.0/astName.2">
-      <details key="start" value="9997"/>
-      <details key="end" value="10004"/>
+    <eAnnotations source="positions.485" references="/0/emitIterator_updateAccumulator.6/@body.0/astName.3">
+      <details key="start" value="9885"/>
+      <details key="end" value="9892"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.486" references="/0/emitIterator_updateAccumulator.6/@body.0/@body.6">
-      <details key="start" value="10006"/>
-      <details key="end" value="10012"/>
-      <details key="line" value="183"/>
+    <eAnnotations source="positions.486" references="/0/emitIterator_updateAccumulator.6/@body.0/@body.8">
+      <details key="start" value="9894"/>
+      <details key="end" value="9966"/>
+      <details key="line" value="181"/>
     </eAnnotations>
-    <eAnnotations source="positions.487" references="/0/emitIterator_updateAccumulator.6/@body.0/astName.3">
-      <details key="start" value="10013"/>
-      <details key="end" value="10020"/>
+    <eAnnotations source="positions.487" references="/0/emitIterator_updateAccumulator.6/@body.0/astName.4">
+      <details key="start" value="9967"/>
+      <details key="end" value="9974"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.488" references="/0/emitIterator_updateAccumulator.6/@body.0/@body.8">
-      <details key="start" value="10022"/>
-      <details key="end" value="10094"/>
-      <details key="line" value="184"/>
+    <eAnnotations source="positions.488" references="/0/emitIterator_updateAccumulator.6/@body.0/@body.10">
+      <details key="start" value="9976"/>
+      <details key="end" value="10025"/>
+      <details key="line" value="185"/>
     </eAnnotations>
-    <eAnnotations source="positions.489" references="/0/emitIterator_updateAccumulator.6/@body.0/astName.4">
-      <details key="start" value="10095"/>
-      <details key="end" value="10102"/>
+    <eAnnotations source="positions.489" references="/0/emitIterator_updateAccumulator.6/@body.0/astName.5">
+      <details key="start" value="9647"/>
+      <details key="end" value="9690"/>
+      <details key="line" value="175"/>
+    </eAnnotations>
+    <eAnnotations source="positions.490" references="/0/emitIterator_updateAccumulator.6/@body.0/astName.5/@initExpression">
+      <details key="start" value="9667"/>
+      <details key="end" value="9691"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.490" references="/0/emitIterator_updateAccumulator.6/@body.0/@body.10">
-      <details key="start" value="10104"/>
-      <details key="end" value="10153"/>
-      <details key="line" value="188"/>
-    </eAnnotations>
-    <eAnnotations source="positions.491" references="/0/emitIterator_updateAccumulator.6/@body.0/astName.5">
-      <details key="start" value="9775"/>
-      <details key="end" value="9818"/>
-      <details key="line" value="178"/>
-    </eAnnotations>
-    <eAnnotations source="positions.492" references="/0/emitIterator_updateAccumulator.6/@body.0/astName.5/@initExpression">
-      <details key="start" value="9795"/>
-      <details key="end" value="9819"/>
+    <eAnnotations source="positions.491" references="/0/emitIterator_updateAccumulator.6/@body.0/astName.5/@initExpression/ast">
+      <details key="start" value="9667"/>
+      <details key="end" value="9670"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.493" references="/0/emitIterator_updateAccumulator.6/@body.0/astName.5/@initExpression/ast">
-      <details key="start" value="9795"/>
-      <details key="end" value="9798"/>
+    <eAnnotations source="positions.492" references="/0/emitIterator_updateAccumulator.6/@body.0/astName.5/@initExpression/expInOcl">
+      <details key="start" value="9682"/>
+      <details key="end" value="9690"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.494" references="/0/emitIterator_updateAccumulator.6/@body.0/astName.5/@initExpression/expInOcl">
-      <details key="start" value="9810"/>
-      <details key="end" value="9818"/>
+    <eAnnotations source="positions.493" references="/0/emitIterator_updateAccumulator.6/ast">
+      <details key="start" value="9529"/>
+      <details key="end" value="9546"/>
+      <details key="line" value="174"/>
+    </eAnnotations>
+    <eAnnotations source="positions.494" references="/0/emitIterator_updateAccumulator.6/importer">
+      <details key="start" value="9548"/>
+      <details key="end" value="9571"/>
+      <details key="line" value="174"/>
+    </eAnnotations>
+    <eAnnotations source="positions.495" references="/0/emitIterator_updateAccumulator.6/genPackage">
+      <details key="start" value="9573"/>
+      <details key="end" value="9596"/>
+      <details key="line" value="174"/>
+    </eAnnotations>
+    <eAnnotations source="positions.496" references="/0/emitIterator_updateAccumulator.6/expInOcl">
+      <details key="start" value="9598"/>
+      <details key="end" value="9624"/>
+      <details key="line" value="174"/>
+    </eAnnotations>
+    <eAnnotations source="positions.497" references="/0/emitIterator_updateAccumulator.6/@guard">
+      <details key="start" value="9628"/>
+      <details key="end" value="9639"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.495" references="/0/emitIterator_updateAccumulator.6/ast">
-      <details key="start" value="9657"/>
-      <details key="end" value="9674"/>
-      <details key="line" value="177"/>
-    </eAnnotations>
-    <eAnnotations source="positions.496" references="/0/emitIterator_updateAccumulator.6/importer">
-      <details key="start" value="9676"/>
-      <details key="end" value="9699"/>
-      <details key="line" value="177"/>
-    </eAnnotations>
-    <eAnnotations source="positions.497" references="/0/emitIterator_updateAccumulator.6/genPackage">
-      <details key="start" value="9701"/>
-      <details key="end" value="9724"/>
-      <details key="line" value="177"/>
-    </eAnnotations>
-    <eAnnotations source="positions.498" references="/0/emitIterator_updateAccumulator.6/expInOcl">
-      <details key="start" value="9726"/>
-      <details key="end" value="9752"/>
-      <details key="line" value="177"/>
-    </eAnnotations>
-    <eAnnotations source="positions.499" references="/0/emitIterator_updateAccumulator.6/@guard">
-      <details key="start" value="9756"/>
-      <details key="end" value="9767"/>
+    <eAnnotations source="positions.498" references="/0/emitIterator_updateAccumulator.6/@guard/ast">
+      <details key="start" value="9628"/>
+      <details key="end" value="9631"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.500" references="/0/emitIterator_updateAccumulator.6/@guard/ast">
-      <details key="start" value="9756"/>
-      <details key="end" value="9759"/>
+    <eAnnotations source="positions.499" references="/0/@ownedModuleElement.38">
+      <details key="start" value="10044"/>
+      <details key="end" value="10177"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.501" references="/0/@ownedModuleElement.38">
-      <details key="start" value="10172"/>
-      <details key="end" value="10305"/>
+    <eAnnotations source="positions.500" references="/0/emitIterator_createAccumulatorValue.7">
+      <details key="start" value="10179"/>
+      <details key="end" value="10528"/>
+      <details key="line" value="191"/>
+    </eAnnotations>
+    <eAnnotations source="positions.501" references="/0/emitIterator_createAccumulatorValue.7/@body.0">
+      <details key="start" value="10348"/>
+      <details key="end" value="10517"/>
+      <details key="line" value="192"/>
+    </eAnnotations>
+    <eAnnotations source="positions.502" references="/0/emitIterator_createAccumulatorValue.7/@body.0/@body.0">
+      <details key="start" value="10398"/>
+      <details key="end" value="10434"/>
+      <details key="line" value="193"/>
+    </eAnnotations>
+    <eAnnotations source="positions.503" references="/0/emitIterator_createAccumulatorValue.7/@body.0/astName">
+      <details key="start" value="10435"/>
+      <details key="end" value="10442"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.502" references="/0/emitIterator_createAccumulatorValue.7">
-      <details key="start" value="10307"/>
-      <details key="end" value="10656"/>
-      <details key="line" value="194"/>
+    <eAnnotations source="positions.504" references="/0/emitIterator_createAccumulatorValue.7/@body.0/@body.2">
+      <details key="start" value="10444"/>
+      <details key="end" value="10480"/>
+      <details key="line" value="193"/>
     </eAnnotations>
-    <eAnnotations source="positions.503" references="/0/emitIterator_createAccumulatorValue.7/@body.0">
-      <details key="start" value="10476"/>
-      <details key="end" value="10645"/>
-      <details key="line" value="195"/>
-    </eAnnotations>
-    <eAnnotations source="positions.504" references="/0/emitIterator_createAccumulatorValue.7/@body.0/@body.0">
-      <details key="start" value="10526"/>
-      <details key="end" value="10562"/>
-      <details key="line" value="196"/>
-    </eAnnotations>
-    <eAnnotations source="positions.505" references="/0/emitIterator_createAccumulatorValue.7/@body.0/astName">
-      <details key="start" value="10563"/>
-      <details key="end" value="10570"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.506" references="/0/emitIterator_createAccumulatorValue.7/@body.0/@body.2">
-      <details key="start" value="10572"/>
-      <details key="end" value="10608"/>
-      <details key="line" value="196"/>
-    </eAnnotations>
-    <eAnnotations source="positions.507" references="/0/emitIterator_createAccumulatorValue.7/@body.0/@body.3">
-      <details key="start" value="10609"/>
-      <details key="end" value="10634"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.508" references="/0/emitIterator_createAccumulatorValue.7/@body.0/@body.3/@argument.0">
-      <details key="start" value="10609"/>
-      <details key="end" value="10617"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.509" references="/0/emitIterator_createAccumulatorValue.7/@body.0/@body.3/@argument.0/ast">
-      <details key="start" value="10609"/>
-      <details key="end" value="10612"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.510" references="/0/emitIterator_createAccumulatorValue.7/@body.0/@body.3/expInOcl">
-      <details key="start" value="10625"/>
-      <details key="end" value="10633"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.511" references="/0/emitIterator_createAccumulatorValue.7/@body.0/@body.4">
-      <details key="start" value="10636"/>
-      <details key="end" value="10639"/>
-      <details key="line" value="196"/>
-    </eAnnotations>
-    <eAnnotations source="positions.512" references="/0/emitIterator_createAccumulatorValue.7/@body.0/astName.1">
+    <eAnnotations source="positions.505" references="/0/emitIterator_createAccumulatorValue.7/@body.0/@body.3">
       <details key="start" value="10481"/>
-      <details key="end" value="10524"/>
-      <details key="line" value="195"/>
-    </eAnnotations>
-    <eAnnotations source="positions.513" references="/0/emitIterator_createAccumulatorValue.7/@body.0/astName.1/@initExpression">
-      <details key="start" value="10501"/>
-      <details key="end" value="10525"/>
+      <details key="end" value="10506"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.514" references="/0/emitIterator_createAccumulatorValue.7/@body.0/astName.1/@initExpression/ast">
-      <details key="start" value="10501"/>
-      <details key="end" value="10504"/>
+    <eAnnotations source="positions.506" references="/0/emitIterator_createAccumulatorValue.7/@body.0/@body.3/@argument.0">
+      <details key="start" value="10481"/>
+      <details key="end" value="10489"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.515" references="/0/emitIterator_createAccumulatorValue.7/@body.0/astName.1/@initExpression/expInOcl">
-      <details key="start" value="10516"/>
-      <details key="end" value="10524"/>
+    <eAnnotations source="positions.507" references="/0/emitIterator_createAccumulatorValue.7/@body.0/@body.3/@argument.0/ast">
+      <details key="start" value="10481"/>
+      <details key="end" value="10484"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.516" references="/0/emitIterator_createAccumulatorValue.7/ast">
-      <details key="start" value="10360"/>
-      <details key="end" value="10377"/>
-      <details key="line" value="194"/>
-    </eAnnotations>
-    <eAnnotations source="positions.517" references="/0/emitIterator_createAccumulatorValue.7/importer">
-      <details key="start" value="10379"/>
-      <details key="end" value="10402"/>
-      <details key="line" value="194"/>
-    </eAnnotations>
-    <eAnnotations source="positions.518" references="/0/emitIterator_createAccumulatorValue.7/genPackage">
-      <details key="start" value="10404"/>
-      <details key="end" value="10427"/>
-      <details key="line" value="194"/>
-    </eAnnotations>
-    <eAnnotations source="positions.519" references="/0/emitIterator_createAccumulatorValue.7/expInOcl">
-      <details key="start" value="10429"/>
-      <details key="end" value="10455"/>
-      <details key="line" value="194"/>
-    </eAnnotations>
-    <eAnnotations source="positions.520" references="/0/emitIterator_createAccumulatorValue.7/@guard">
-      <details key="start" value="10459"/>
-      <details key="end" value="10473"/>
+    <eAnnotations source="positions.508" references="/0/emitIterator_createAccumulatorValue.7/@body.0/@body.3/expInOcl">
+      <details key="start" value="10497"/>
+      <details key="end" value="10505"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.521" references="/0/emitIterator_createAccumulatorValue.7/@guard/ast">
-      <details key="start" value="10459"/>
-      <details key="end" value="10462"/>
+    <eAnnotations source="positions.509" references="/0/emitIterator_createAccumulatorValue.7/@body.0/@body.4">
+      <details key="start" value="10508"/>
+      <details key="end" value="10511"/>
+      <details key="line" value="193"/>
+    </eAnnotations>
+    <eAnnotations source="positions.510" references="/0/emitIterator_createAccumulatorValue.7/@body.0/astName.1">
+      <details key="start" value="10353"/>
+      <details key="end" value="10396"/>
+      <details key="line" value="192"/>
+    </eAnnotations>
+    <eAnnotations source="positions.511" references="/0/emitIterator_createAccumulatorValue.7/@body.0/astName.1/@initExpression">
+      <details key="start" value="10373"/>
+      <details key="end" value="10397"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.522" references="/0/emitIterator_resolveTerminalValue.7">
-      <details key="start" value="10658"/>
-      <details key="end" value="10921"/>
-      <details key="line" value="199"/>
-    </eAnnotations>
-    <eAnnotations source="positions.523" references="/0/emitIterator_resolveTerminalValue.7/@body.0">
-      <details key="start" value="10825"/>
-      <details key="end" value="10910"/>
-      <details key="line" value="200"/>
-    </eAnnotations>
-    <eAnnotations source="positions.524" references="/0/emitIterator_resolveTerminalValue.7/@body.0/astName">
-      <details key="start" value="10876"/>
-      <details key="end" value="10883"/>
+    <eAnnotations source="positions.512" references="/0/emitIterator_createAccumulatorValue.7/@body.0/astName.1/@initExpression/ast">
+      <details key="start" value="10373"/>
+      <details key="end" value="10376"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.525" references="/0/emitIterator_resolveTerminalValue.7/@body.0/@body.1">
-      <details key="start" value="10885"/>
-      <details key="end" value="10892"/>
-      <details key="line" value="201"/>
-    </eAnnotations>
-    <eAnnotations source="positions.526" references="/0/emitIterator_resolveTerminalValue.7/@body.0/astName.1">
-      <details key="start" value="10893"/>
-      <details key="end" value="10900"/>
+    <eAnnotations source="positions.513" references="/0/emitIterator_createAccumulatorValue.7/@body.0/astName.1/@initExpression/expInOcl">
+      <details key="start" value="10388"/>
+      <details key="end" value="10396"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.527" references="/0/emitIterator_resolveTerminalValue.7/@body.0/@body.3">
-      <details key="start" value="10902"/>
-      <details key="end" value="10904"/>
-      <details key="line" value="201"/>
+    <eAnnotations source="positions.514" references="/0/emitIterator_createAccumulatorValue.7/ast">
+      <details key="start" value="10232"/>
+      <details key="end" value="10249"/>
+      <details key="line" value="191"/>
     </eAnnotations>
-    <eAnnotations source="positions.528" references="/0/emitIterator_resolveTerminalValue.7/@body.0/astName.2">
-      <details key="start" value="10830"/>
-      <details key="end" value="10873"/>
-      <details key="line" value="200"/>
+    <eAnnotations source="positions.515" references="/0/emitIterator_createAccumulatorValue.7/importer">
+      <details key="start" value="10251"/>
+      <details key="end" value="10274"/>
+      <details key="line" value="191"/>
     </eAnnotations>
-    <eAnnotations source="positions.529" references="/0/emitIterator_resolveTerminalValue.7/@body.0/astName.2/@initExpression">
-      <details key="start" value="10850"/>
-      <details key="end" value="10874"/>
+    <eAnnotations source="positions.516" references="/0/emitIterator_createAccumulatorValue.7/genPackage">
+      <details key="start" value="10276"/>
+      <details key="end" value="10299"/>
+      <details key="line" value="191"/>
+    </eAnnotations>
+    <eAnnotations source="positions.517" references="/0/emitIterator_createAccumulatorValue.7/expInOcl">
+      <details key="start" value="10301"/>
+      <details key="end" value="10327"/>
+      <details key="line" value="191"/>
+    </eAnnotations>
+    <eAnnotations source="positions.518" references="/0/emitIterator_createAccumulatorValue.7/@guard">
+      <details key="start" value="10331"/>
+      <details key="end" value="10345"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.530" references="/0/emitIterator_resolveTerminalValue.7/@body.0/astName.2/@initExpression/ast">
-      <details key="start" value="10850"/>
-      <details key="end" value="10853"/>
+    <eAnnotations source="positions.519" references="/0/emitIterator_createAccumulatorValue.7/@guard/ast">
+      <details key="start" value="10331"/>
+      <details key="end" value="10334"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.531" references="/0/emitIterator_resolveTerminalValue.7/@body.0/astName.2/@initExpression/expInOcl">
-      <details key="start" value="10865"/>
-      <details key="end" value="10873"/>
+    <eAnnotations source="positions.520" references="/0/emitIterator_resolveTerminalValue.7">
+      <details key="start" value="10530"/>
+      <details key="end" value="10793"/>
+      <details key="line" value="196"/>
+    </eAnnotations>
+    <eAnnotations source="positions.521" references="/0/emitIterator_resolveTerminalValue.7/@body.0">
+      <details key="start" value="10697"/>
+      <details key="end" value="10782"/>
+      <details key="line" value="197"/>
+    </eAnnotations>
+    <eAnnotations source="positions.522" references="/0/emitIterator_resolveTerminalValue.7/@body.0/astName">
+      <details key="start" value="10748"/>
+      <details key="end" value="10755"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.532" references="/0/emitIterator_resolveTerminalValue.7/ast">
-      <details key="start" value="10709"/>
-      <details key="end" value="10726"/>
-      <details key="line" value="199"/>
+    <eAnnotations source="positions.523" references="/0/emitIterator_resolveTerminalValue.7/@body.0/@body.1">
+      <details key="start" value="10757"/>
+      <details key="end" value="10764"/>
+      <details key="line" value="198"/>
     </eAnnotations>
-    <eAnnotations source="positions.533" references="/0/emitIterator_resolveTerminalValue.7/importer">
-      <details key="start" value="10728"/>
-      <details key="end" value="10751"/>
-      <details key="line" value="199"/>
+    <eAnnotations source="positions.524" references="/0/emitIterator_resolveTerminalValue.7/@body.0/astName.1">
+      <details key="start" value="10765"/>
+      <details key="end" value="10772"/>
+      <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.534" references="/0/emitIterator_resolveTerminalValue.7/genPackage">
-      <details key="start" value="10753"/>
+    <eAnnotations source="positions.525" references="/0/emitIterator_resolveTerminalValue.7/@body.0/@body.3">
+      <details key="start" value="10774"/>
       <details key="end" value="10776"/>
-      <details key="line" value="199"/>
+      <details key="line" value="198"/>
     </eAnnotations>
-    <eAnnotations source="positions.535" references="/0/emitIterator_resolveTerminalValue.7/expInOcl">
-      <details key="start" value="10778"/>
-      <details key="end" value="10804"/>
-      <details key="line" value="199"/>
+    <eAnnotations source="positions.526" references="/0/emitIterator_resolveTerminalValue.7/@body.0/astName.2">
+      <details key="start" value="10702"/>
+      <details key="end" value="10745"/>
+      <details key="line" value="197"/>
     </eAnnotations>
-    <eAnnotations source="positions.536" references="/0/emitIterator_resolveTerminalValue.7/@guard">
-      <details key="start" value="10808"/>
-      <details key="end" value="10822"/>
+    <eAnnotations source="positions.527" references="/0/emitIterator_resolveTerminalValue.7/@body.0/astName.2/@initExpression">
+      <details key="start" value="10722"/>
+      <details key="end" value="10746"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.537" references="/0/emitIterator_resolveTerminalValue.7/@guard/ast">
-      <details key="start" value="10808"/>
-      <details key="end" value="10811"/>
+    <eAnnotations source="positions.528" references="/0/emitIterator_resolveTerminalValue.7/@body.0/astName.2/@initExpression/ast">
+      <details key="start" value="10722"/>
+      <details key="end" value="10725"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.538" references="/0/emitIterator_updateAccumulator.7">
-      <details key="start" value="10923"/>
-      <details key="end" value="11388"/>
-      <details key="line" value="204"/>
-    </eAnnotations>
-    <eAnnotations source="positions.539" references="/0/emitIterator_updateAccumulator.7/@body.0">
-      <details key="start" value="11087"/>
-      <details key="end" value="11377"/>
-      <details key="line" value="205"/>
-    </eAnnotations>
-    <eAnnotations source="positions.540" references="/0/emitIterator_updateAccumulator.7/@body.0/@body.0">
-      <details key="start" value="11137"/>
-      <details key="end" value="11141"/>
-      <details key="line" value="206"/>
-    </eAnnotations>
-    <eAnnotations source="positions.541" references="/0/emitIterator_updateAccumulator.7/@body.0/astName">
-      <details key="start" value="11142"/>
-      <details key="end" value="11149"/>
+    <eAnnotations source="positions.529" references="/0/emitIterator_resolveTerminalValue.7/@body.0/astName.2/@initExpression/expInOcl">
+      <details key="start" value="10737"/>
+      <details key="end" value="10745"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.542" references="/0/emitIterator_updateAccumulator.7/@body.0/@body.2">
-      <details key="start" value="11151"/>
-      <details key="end" value="11183"/>
-      <details key="line" value="206"/>
+    <eAnnotations source="positions.530" references="/0/emitIterator_resolveTerminalValue.7/ast">
+      <details key="start" value="10581"/>
+      <details key="end" value="10598"/>
+      <details key="line" value="196"/>
     </eAnnotations>
-    <eAnnotations source="positions.543" references="/0/emitIterator_updateAccumulator.7/@body.0/astName.1">
-      <details key="start" value="11184"/>
-      <details key="end" value="11191"/>
+    <eAnnotations source="positions.531" references="/0/emitIterator_resolveTerminalValue.7/importer">
+      <details key="start" value="10600"/>
+      <details key="end" value="10623"/>
+      <details key="line" value="196"/>
+    </eAnnotations>
+    <eAnnotations source="positions.532" references="/0/emitIterator_resolveTerminalValue.7/genPackage">
+      <details key="start" value="10625"/>
+      <details key="end" value="10648"/>
+      <details key="line" value="196"/>
+    </eAnnotations>
+    <eAnnotations source="positions.533" references="/0/emitIterator_resolveTerminalValue.7/expInOcl">
+      <details key="start" value="10650"/>
+      <details key="end" value="10676"/>
+      <details key="line" value="196"/>
+    </eAnnotations>
+    <eAnnotations source="positions.534" references="/0/emitIterator_resolveTerminalValue.7/@guard">
+      <details key="start" value="10680"/>
+      <details key="end" value="10694"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.544" references="/0/emitIterator_updateAccumulator.7/@body.0/@body.4">
-      <details key="start" value="11193"/>
-      <details key="end" value="11198"/>
-      <details key="line" value="207"/>
-    </eAnnotations>
-    <eAnnotations source="positions.545" references="/0/emitIterator_updateAccumulator.7/@body.0/@body.5">
-      <details key="start" value="11199"/>
-      <details key="end" value="11239"/>
+    <eAnnotations source="positions.535" references="/0/emitIterator_resolveTerminalValue.7/@guard/ast">
+      <details key="start" value="10680"/>
+      <details key="end" value="10683"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.546" references="/0/emitIterator_updateAccumulator.7/@body.0/@body.5/@argument.0">
-      <details key="start" value="11199"/>
-      <details key="end" value="11218"/>
-      <details key="line" value="0"/>
+    <eAnnotations source="positions.536" references="/0/emitIterator_updateAccumulator.7">
+      <details key="start" value="10795"/>
+      <details key="end" value="11260"/>
+      <details key="line" value="201"/>
     </eAnnotations>
-    <eAnnotations source="positions.547" references="/0/emitIterator_updateAccumulator.7/@body.0/@body.5/@argument.0/@source">
-      <details key="start" value="11199"/>
-      <details key="end" value="11211"/>
-      <details key="line" value="0"/>
+    <eAnnotations source="positions.537" references="/0/emitIterator_updateAccumulator.7/@body.0">
+      <details key="start" value="10959"/>
+      <details key="end" value="11249"/>
+      <details key="line" value="202"/>
     </eAnnotations>
-    <eAnnotations source="positions.548" references="/0/emitIterator_updateAccumulator.7/@body.0/@body.5/@argument.0/@source/ast">
-      <details key="start" value="11199"/>
-      <details key="end" value="11202"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.549" references="/0/emitIterator_updateAccumulator.7/@body.0/@body.5/@argument.0/@argument.0">
-      <details key="start" value="11216"/>
-      <details key="end" value="11217"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.550" references="/0/emitIterator_updateAccumulator.7/@body.0/@body.5/expInOcl">
-      <details key="start" value="11230"/>
-      <details key="end" value="11238"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.551" references="/0/emitIterator_updateAccumulator.7/@body.0/@body.6">
-      <details key="start" value="11241"/>
-      <details key="end" value="11255"/>
-      <details key="line" value="207"/>
-    </eAnnotations>
-    <eAnnotations source="positions.552" references="/0/emitIterator_updateAccumulator.7/@body.0/astName.2">
-      <details key="start" value="11256"/>
-      <details key="end" value="11263"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.553" references="/0/emitIterator_updateAccumulator.7/@body.0/@body.8">
-      <details key="start" value="11265"/>
-      <details key="end" value="11371"/>
-      <details key="line" value="209"/>
-    </eAnnotations>
-    <eAnnotations source="positions.554" references="/0/emitIterator_updateAccumulator.7/@body.0/astName.3">
-      <details key="start" value="11092"/>
-      <details key="end" value="11135"/>
-      <details key="line" value="205"/>
-    </eAnnotations>
-    <eAnnotations source="positions.555" references="/0/emitIterator_updateAccumulator.7/@body.0/astName.3/@initExpression">
-      <details key="start" value="11112"/>
-      <details key="end" value="11136"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.556" references="/0/emitIterator_updateAccumulator.7/@body.0/astName.3/@initExpression/ast">
-      <details key="start" value="11112"/>
-      <details key="end" value="11115"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.557" references="/0/emitIterator_updateAccumulator.7/@body.0/astName.3/@initExpression/expInOcl">
-      <details key="start" value="11127"/>
-      <details key="end" value="11135"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.558" references="/0/emitIterator_updateAccumulator.7/ast">
-      <details key="start" value="10971"/>
-      <details key="end" value="10988"/>
-      <details key="line" value="204"/>
-    </eAnnotations>
-    <eAnnotations source="positions.559" references="/0/emitIterator_updateAccumulator.7/importer">
-      <details key="start" value="10990"/>
+    <eAnnotations source="positions.538" references="/0/emitIterator_updateAccumulator.7/@body.0/@body.0">
+      <details key="start" value="11009"/>
       <details key="end" value="11013"/>
+      <details key="line" value="203"/>
+    </eAnnotations>
+    <eAnnotations source="positions.539" references="/0/emitIterator_updateAccumulator.7/@body.0/astName">
+      <details key="start" value="11014"/>
+      <details key="end" value="11021"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.540" references="/0/emitIterator_updateAccumulator.7/@body.0/@body.2">
+      <details key="start" value="11023"/>
+      <details key="end" value="11055"/>
+      <details key="line" value="203"/>
+    </eAnnotations>
+    <eAnnotations source="positions.541" references="/0/emitIterator_updateAccumulator.7/@body.0/astName.1">
+      <details key="start" value="11056"/>
+      <details key="end" value="11063"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.542" references="/0/emitIterator_updateAccumulator.7/@body.0/@body.4">
+      <details key="start" value="11065"/>
+      <details key="end" value="11070"/>
       <details key="line" value="204"/>
     </eAnnotations>
-    <eAnnotations source="positions.560" references="/0/emitIterator_updateAccumulator.7/genPackage">
-      <details key="start" value="11015"/>
-      <details key="end" value="11038"/>
+    <eAnnotations source="positions.543" references="/0/emitIterator_updateAccumulator.7/@body.0/@body.5">
+      <details key="start" value="11071"/>
+      <details key="end" value="11111"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.544" references="/0/emitIterator_updateAccumulator.7/@body.0/@body.5/@argument.0">
+      <details key="start" value="11071"/>
+      <details key="end" value="11090"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.545" references="/0/emitIterator_updateAccumulator.7/@body.0/@body.5/@argument.0/@source">
+      <details key="start" value="11071"/>
+      <details key="end" value="11083"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.546" references="/0/emitIterator_updateAccumulator.7/@body.0/@body.5/@argument.0/@source/ast">
+      <details key="start" value="11071"/>
+      <details key="end" value="11074"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.547" references="/0/emitIterator_updateAccumulator.7/@body.0/@body.5/@argument.0/@argument.0">
+      <details key="start" value="11088"/>
+      <details key="end" value="11089"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.548" references="/0/emitIterator_updateAccumulator.7/@body.0/@body.5/expInOcl">
+      <details key="start" value="11102"/>
+      <details key="end" value="11110"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.549" references="/0/emitIterator_updateAccumulator.7/@body.0/@body.6">
+      <details key="start" value="11113"/>
+      <details key="end" value="11127"/>
       <details key="line" value="204"/>
     </eAnnotations>
-    <eAnnotations source="positions.561" references="/0/emitIterator_updateAccumulator.7/expInOcl">
-      <details key="start" value="11040"/>
-      <details key="end" value="11066"/>
-      <details key="line" value="204"/>
-    </eAnnotations>
-    <eAnnotations source="positions.562" references="/0/emitIterator_updateAccumulator.7/@guard">
-      <details key="start" value="11070"/>
-      <details key="end" value="11084"/>
+    <eAnnotations source="positions.550" references="/0/emitIterator_updateAccumulator.7/@body.0/astName.2">
+      <details key="start" value="11128"/>
+      <details key="end" value="11135"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.563" references="/0/emitIterator_updateAccumulator.7/@guard/ast">
-      <details key="start" value="11070"/>
-      <details key="end" value="11073"/>
+    <eAnnotations source="positions.551" references="/0/emitIterator_updateAccumulator.7/@body.0/@body.8">
+      <details key="start" value="11137"/>
+      <details key="end" value="11243"/>
+      <details key="line" value="206"/>
+    </eAnnotations>
+    <eAnnotations source="positions.552" references="/0/emitIterator_updateAccumulator.7/@body.0/astName.3">
+      <details key="start" value="10964"/>
+      <details key="end" value="11007"/>
+      <details key="line" value="202"/>
+    </eAnnotations>
+    <eAnnotations source="positions.553" references="/0/emitIterator_updateAccumulator.7/@body.0/astName.3/@initExpression">
+      <details key="start" value="10984"/>
+      <details key="end" value="11008"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.564" references="/0/@ownedModuleElement.42">
-      <details key="start" value="11390"/>
-      <details key="end" value="11523"/>
+    <eAnnotations source="positions.554" references="/0/emitIterator_updateAccumulator.7/@body.0/astName.3/@initExpression/ast">
+      <details key="start" value="10984"/>
+      <details key="end" value="10987"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.565" references="/0/emitIterator_createAccumulatorValue.8">
-      <details key="start" value="11525"/>
-      <details key="end" value="11874"/>
-      <details key="line" value="215"/>
-    </eAnnotations>
-    <eAnnotations source="positions.566" references="/0/emitIterator_createAccumulatorValue.8/@body.0">
-      <details key="start" value="11694"/>
-      <details key="end" value="11863"/>
-      <details key="line" value="216"/>
-    </eAnnotations>
-    <eAnnotations source="positions.567" references="/0/emitIterator_createAccumulatorValue.8/@body.0/@body.0">
-      <details key="start" value="11744"/>
-      <details key="end" value="11780"/>
-      <details key="line" value="217"/>
-    </eAnnotations>
-    <eAnnotations source="positions.568" references="/0/emitIterator_createAccumulatorValue.8/@body.0/astName">
-      <details key="start" value="11781"/>
-      <details key="end" value="11788"/>
+    <eAnnotations source="positions.555" references="/0/emitIterator_updateAccumulator.7/@body.0/astName.3/@initExpression/expInOcl">
+      <details key="start" value="10999"/>
+      <details key="end" value="11007"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.569" references="/0/emitIterator_createAccumulatorValue.8/@body.0/@body.2">
-      <details key="start" value="11790"/>
-      <details key="end" value="11826"/>
-      <details key="line" value="217"/>
+    <eAnnotations source="positions.556" references="/0/emitIterator_updateAccumulator.7/ast">
+      <details key="start" value="10843"/>
+      <details key="end" value="10860"/>
+      <details key="line" value="201"/>
     </eAnnotations>
-    <eAnnotations source="positions.570" references="/0/emitIterator_createAccumulatorValue.8/@body.0/@body.3">
-      <details key="start" value="11827"/>
-      <details key="end" value="11852"/>
+    <eAnnotations source="positions.557" references="/0/emitIterator_updateAccumulator.7/importer">
+      <details key="start" value="10862"/>
+      <details key="end" value="10885"/>
+      <details key="line" value="201"/>
+    </eAnnotations>
+    <eAnnotations source="positions.558" references="/0/emitIterator_updateAccumulator.7/genPackage">
+      <details key="start" value="10887"/>
+      <details key="end" value="10910"/>
+      <details key="line" value="201"/>
+    </eAnnotations>
+    <eAnnotations source="positions.559" references="/0/emitIterator_updateAccumulator.7/expInOcl">
+      <details key="start" value="10912"/>
+      <details key="end" value="10938"/>
+      <details key="line" value="201"/>
+    </eAnnotations>
+    <eAnnotations source="positions.560" references="/0/emitIterator_updateAccumulator.7/@guard">
+      <details key="start" value="10942"/>
+      <details key="end" value="10956"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.571" references="/0/emitIterator_createAccumulatorValue.8/@body.0/@body.3/@argument.0">
-      <details key="start" value="11827"/>
-      <details key="end" value="11835"/>
+    <eAnnotations source="positions.561" references="/0/emitIterator_updateAccumulator.7/@guard/ast">
+      <details key="start" value="10942"/>
+      <details key="end" value="10945"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.572" references="/0/emitIterator_createAccumulatorValue.8/@body.0/@body.3/@argument.0/ast">
-      <details key="start" value="11827"/>
-      <details key="end" value="11830"/>
+    <eAnnotations source="positions.562" references="/0/@ownedModuleElement.42">
+      <details key="start" value="11262"/>
+      <details key="end" value="11395"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.573" references="/0/emitIterator_createAccumulatorValue.8/@body.0/@body.3/expInOcl">
-      <details key="start" value="11843"/>
-      <details key="end" value="11851"/>
+    <eAnnotations source="positions.563" references="/0/emitIterator_createAccumulatorValue.8">
+      <details key="start" value="11397"/>
+      <details key="end" value="11746"/>
+      <details key="line" value="212"/>
+    </eAnnotations>
+    <eAnnotations source="positions.564" references="/0/emitIterator_createAccumulatorValue.8/@body.0">
+      <details key="start" value="11566"/>
+      <details key="end" value="11735"/>
+      <details key="line" value="213"/>
+    </eAnnotations>
+    <eAnnotations source="positions.565" references="/0/emitIterator_createAccumulatorValue.8/@body.0/@body.0">
+      <details key="start" value="11616"/>
+      <details key="end" value="11652"/>
+      <details key="line" value="214"/>
+    </eAnnotations>
+    <eAnnotations source="positions.566" references="/0/emitIterator_createAccumulatorValue.8/@body.0/astName">
+      <details key="start" value="11653"/>
+      <details key="end" value="11660"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.574" references="/0/emitIterator_createAccumulatorValue.8/@body.0/@body.4">
-      <details key="start" value="11854"/>
-      <details key="end" value="11857"/>
-      <details key="line" value="217"/>
+    <eAnnotations source="positions.567" references="/0/emitIterator_createAccumulatorValue.8/@body.0/@body.2">
+      <details key="start" value="11662"/>
+      <details key="end" value="11698"/>
+      <details key="line" value="214"/>
     </eAnnotations>
-    <eAnnotations source="positions.575" references="/0/emitIterator_createAccumulatorValue.8/@body.0/astName.1">
+    <eAnnotations source="positions.568" references="/0/emitIterator_createAccumulatorValue.8/@body.0/@body.3">
       <details key="start" value="11699"/>
-      <details key="end" value="11742"/>
-      <details key="line" value="216"/>
-    </eAnnotations>
-    <eAnnotations source="positions.576" references="/0/emitIterator_createAccumulatorValue.8/@body.0/astName.1/@initExpression">
-      <details key="start" value="11719"/>
-      <details key="end" value="11743"/>
+      <details key="end" value="11724"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.577" references="/0/emitIterator_createAccumulatorValue.8/@body.0/astName.1/@initExpression/ast">
-      <details key="start" value="11719"/>
-      <details key="end" value="11722"/>
+    <eAnnotations source="positions.569" references="/0/emitIterator_createAccumulatorValue.8/@body.0/@body.3/@argument.0">
+      <details key="start" value="11699"/>
+      <details key="end" value="11707"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.578" references="/0/emitIterator_createAccumulatorValue.8/@body.0/astName.1/@initExpression/expInOcl">
-      <details key="start" value="11734"/>
-      <details key="end" value="11742"/>
+    <eAnnotations source="positions.570" references="/0/emitIterator_createAccumulatorValue.8/@body.0/@body.3/@argument.0/ast">
+      <details key="start" value="11699"/>
+      <details key="end" value="11702"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.579" references="/0/emitIterator_createAccumulatorValue.8/ast">
-      <details key="start" value="11578"/>
-      <details key="end" value="11595"/>
-      <details key="line" value="215"/>
-    </eAnnotations>
-    <eAnnotations source="positions.580" references="/0/emitIterator_createAccumulatorValue.8/importer">
-      <details key="start" value="11597"/>
-      <details key="end" value="11620"/>
-      <details key="line" value="215"/>
-    </eAnnotations>
-    <eAnnotations source="positions.581" references="/0/emitIterator_createAccumulatorValue.8/genPackage">
-      <details key="start" value="11622"/>
-      <details key="end" value="11645"/>
-      <details key="line" value="215"/>
-    </eAnnotations>
-    <eAnnotations source="positions.582" references="/0/emitIterator_createAccumulatorValue.8/expInOcl">
-      <details key="start" value="11647"/>
-      <details key="end" value="11673"/>
-      <details key="line" value="215"/>
-    </eAnnotations>
-    <eAnnotations source="positions.583" references="/0/emitIterator_createAccumulatorValue.8/@guard">
-      <details key="start" value="11677"/>
-      <details key="end" value="11691"/>
+    <eAnnotations source="positions.571" references="/0/emitIterator_createAccumulatorValue.8/@body.0/@body.3/expInOcl">
+      <details key="start" value="11715"/>
+      <details key="end" value="11723"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.584" references="/0/emitIterator_createAccumulatorValue.8/@guard/ast">
-      <details key="start" value="11677"/>
-      <details key="end" value="11680"/>
+    <eAnnotations source="positions.572" references="/0/emitIterator_createAccumulatorValue.8/@body.0/@body.4">
+      <details key="start" value="11726"/>
+      <details key="end" value="11729"/>
+      <details key="line" value="214"/>
+    </eAnnotations>
+    <eAnnotations source="positions.573" references="/0/emitIterator_createAccumulatorValue.8/@body.0/astName.1">
+      <details key="start" value="11571"/>
+      <details key="end" value="11614"/>
+      <details key="line" value="213"/>
+    </eAnnotations>
+    <eAnnotations source="positions.574" references="/0/emitIterator_createAccumulatorValue.8/@body.0/astName.1/@initExpression">
+      <details key="start" value="11591"/>
+      <details key="end" value="11615"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.585" references="/0/emitIterator_resolveTerminalValue.8">
-      <details key="start" value="11876"/>
-      <details key="end" value="12139"/>
-      <details key="line" value="220"/>
-    </eAnnotations>
-    <eAnnotations source="positions.586" references="/0/emitIterator_resolveTerminalValue.8/@body.0">
-      <details key="start" value="12043"/>
-      <details key="end" value="12128"/>
-      <details key="line" value="221"/>
-    </eAnnotations>
-    <eAnnotations source="positions.587" references="/0/emitIterator_resolveTerminalValue.8/@body.0/astName">
-      <details key="start" value="12094"/>
-      <details key="end" value="12101"/>
+    <eAnnotations source="positions.575" references="/0/emitIterator_createAccumulatorValue.8/@body.0/astName.1/@initExpression/ast">
+      <details key="start" value="11591"/>
+      <details key="end" value="11594"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.588" references="/0/emitIterator_resolveTerminalValue.8/@body.0/@body.1">
-      <details key="start" value="12103"/>
-      <details key="end" value="12110"/>
-      <details key="line" value="222"/>
-    </eAnnotations>
-    <eAnnotations source="positions.589" references="/0/emitIterator_resolveTerminalValue.8/@body.0/astName.1">
-      <details key="start" value="12111"/>
-      <details key="end" value="12118"/>
+    <eAnnotations source="positions.576" references="/0/emitIterator_createAccumulatorValue.8/@body.0/astName.1/@initExpression/expInOcl">
+      <details key="start" value="11606"/>
+      <details key="end" value="11614"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.590" references="/0/emitIterator_resolveTerminalValue.8/@body.0/@body.3">
-      <details key="start" value="12120"/>
-      <details key="end" value="12122"/>
-      <details key="line" value="222"/>
+    <eAnnotations source="positions.577" references="/0/emitIterator_createAccumulatorValue.8/ast">
+      <details key="start" value="11450"/>
+      <details key="end" value="11467"/>
+      <details key="line" value="212"/>
     </eAnnotations>
-    <eAnnotations source="positions.591" references="/0/emitIterator_resolveTerminalValue.8/@body.0/astName.2">
-      <details key="start" value="12048"/>
-      <details key="end" value="12091"/>
-      <details key="line" value="221"/>
+    <eAnnotations source="positions.578" references="/0/emitIterator_createAccumulatorValue.8/importer">
+      <details key="start" value="11469"/>
+      <details key="end" value="11492"/>
+      <details key="line" value="212"/>
     </eAnnotations>
-    <eAnnotations source="positions.592" references="/0/emitIterator_resolveTerminalValue.8/@body.0/astName.2/@initExpression">
-      <details key="start" value="12068"/>
-      <details key="end" value="12092"/>
+    <eAnnotations source="positions.579" references="/0/emitIterator_createAccumulatorValue.8/genPackage">
+      <details key="start" value="11494"/>
+      <details key="end" value="11517"/>
+      <details key="line" value="212"/>
+    </eAnnotations>
+    <eAnnotations source="positions.580" references="/0/emitIterator_createAccumulatorValue.8/expInOcl">
+      <details key="start" value="11519"/>
+      <details key="end" value="11545"/>
+      <details key="line" value="212"/>
+    </eAnnotations>
+    <eAnnotations source="positions.581" references="/0/emitIterator_createAccumulatorValue.8/@guard">
+      <details key="start" value="11549"/>
+      <details key="end" value="11563"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.593" references="/0/emitIterator_resolveTerminalValue.8/@body.0/astName.2/@initExpression/ast">
-      <details key="start" value="12068"/>
-      <details key="end" value="12071"/>
+    <eAnnotations source="positions.582" references="/0/emitIterator_createAccumulatorValue.8/@guard/ast">
+      <details key="start" value="11549"/>
+      <details key="end" value="11552"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.594" references="/0/emitIterator_resolveTerminalValue.8/@body.0/astName.2/@initExpression/expInOcl">
-      <details key="start" value="12083"/>
-      <details key="end" value="12091"/>
+    <eAnnotations source="positions.583" references="/0/emitIterator_resolveTerminalValue.8">
+      <details key="start" value="11748"/>
+      <details key="end" value="12011"/>
+      <details key="line" value="217"/>
+    </eAnnotations>
+    <eAnnotations source="positions.584" references="/0/emitIterator_resolveTerminalValue.8/@body.0">
+      <details key="start" value="11915"/>
+      <details key="end" value="12000"/>
+      <details key="line" value="218"/>
+    </eAnnotations>
+    <eAnnotations source="positions.585" references="/0/emitIterator_resolveTerminalValue.8/@body.0/astName">
+      <details key="start" value="11966"/>
+      <details key="end" value="11973"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.595" references="/0/emitIterator_resolveTerminalValue.8/ast">
-      <details key="start" value="11927"/>
-      <details key="end" value="11944"/>
-      <details key="line" value="220"/>
+    <eAnnotations source="positions.586" references="/0/emitIterator_resolveTerminalValue.8/@body.0/@body.1">
+      <details key="start" value="11975"/>
+      <details key="end" value="11982"/>
+      <details key="line" value="219"/>
     </eAnnotations>
-    <eAnnotations source="positions.596" references="/0/emitIterator_resolveTerminalValue.8/importer">
-      <details key="start" value="11946"/>
-      <details key="end" value="11969"/>
-      <details key="line" value="220"/>
+    <eAnnotations source="positions.587" references="/0/emitIterator_resolveTerminalValue.8/@body.0/astName.1">
+      <details key="start" value="11983"/>
+      <details key="end" value="11990"/>
+      <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.597" references="/0/emitIterator_resolveTerminalValue.8/genPackage">
-      <details key="start" value="11971"/>
+    <eAnnotations source="positions.588" references="/0/emitIterator_resolveTerminalValue.8/@body.0/@body.3">
+      <details key="start" value="11992"/>
       <details key="end" value="11994"/>
-      <details key="line" value="220"/>
+      <details key="line" value="219"/>
     </eAnnotations>
-    <eAnnotations source="positions.598" references="/0/emitIterator_resolveTerminalValue.8/expInOcl">
-      <details key="start" value="11996"/>
-      <details key="end" value="12022"/>
-      <details key="line" value="220"/>
+    <eAnnotations source="positions.589" references="/0/emitIterator_resolveTerminalValue.8/@body.0/astName.2">
+      <details key="start" value="11920"/>
+      <details key="end" value="11963"/>
+      <details key="line" value="218"/>
     </eAnnotations>
-    <eAnnotations source="positions.599" references="/0/emitIterator_resolveTerminalValue.8/@guard">
-      <details key="start" value="12026"/>
-      <details key="end" value="12040"/>
+    <eAnnotations source="positions.590" references="/0/emitIterator_resolveTerminalValue.8/@body.0/astName.2/@initExpression">
+      <details key="start" value="11940"/>
+      <details key="end" value="11964"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.600" references="/0/emitIterator_resolveTerminalValue.8/@guard/ast">
-      <details key="start" value="12026"/>
-      <details key="end" value="12029"/>
+    <eAnnotations source="positions.591" references="/0/emitIterator_resolveTerminalValue.8/@body.0/astName.2/@initExpression/ast">
+      <details key="start" value="11940"/>
+      <details key="end" value="11943"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.601" references="/0/emitIterator_updateAccumulator.8">
-      <details key="start" value="12141"/>
-      <details key="end" value="12605"/>
-      <details key="line" value="225"/>
-    </eAnnotations>
-    <eAnnotations source="positions.602" references="/0/emitIterator_updateAccumulator.8/@body.0">
-      <details key="start" value="12305"/>
-      <details key="end" value="12594"/>
-      <details key="line" value="226"/>
-    </eAnnotations>
-    <eAnnotations source="positions.603" references="/0/emitIterator_updateAccumulator.8/@body.0/@body.0">
-      <details key="start" value="12355"/>
-      <details key="end" value="12359"/>
-      <details key="line" value="227"/>
-    </eAnnotations>
-    <eAnnotations source="positions.604" references="/0/emitIterator_updateAccumulator.8/@body.0/astName">
-      <details key="start" value="12360"/>
-      <details key="end" value="12367"/>
+    <eAnnotations source="positions.592" references="/0/emitIterator_resolveTerminalValue.8/@body.0/astName.2/@initExpression/expInOcl">
+      <details key="start" value="11955"/>
+      <details key="end" value="11963"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.605" references="/0/emitIterator_updateAccumulator.8/@body.0/@body.2">
-      <details key="start" value="12369"/>
-      <details key="end" value="12400"/>
-      <details key="line" value="227"/>
+    <eAnnotations source="positions.593" references="/0/emitIterator_resolveTerminalValue.8/ast">
+      <details key="start" value="11799"/>
+      <details key="end" value="11816"/>
+      <details key="line" value="217"/>
     </eAnnotations>
-    <eAnnotations source="positions.606" references="/0/emitIterator_updateAccumulator.8/@body.0/astName.1">
-      <details key="start" value="12401"/>
-      <details key="end" value="12408"/>
+    <eAnnotations source="positions.594" references="/0/emitIterator_resolveTerminalValue.8/importer">
+      <details key="start" value="11818"/>
+      <details key="end" value="11841"/>
+      <details key="line" value="217"/>
+    </eAnnotations>
+    <eAnnotations source="positions.595" references="/0/emitIterator_resolveTerminalValue.8/genPackage">
+      <details key="start" value="11843"/>
+      <details key="end" value="11866"/>
+      <details key="line" value="217"/>
+    </eAnnotations>
+    <eAnnotations source="positions.596" references="/0/emitIterator_resolveTerminalValue.8/expInOcl">
+      <details key="start" value="11868"/>
+      <details key="end" value="11894"/>
+      <details key="line" value="217"/>
+    </eAnnotations>
+    <eAnnotations source="positions.597" references="/0/emitIterator_resolveTerminalValue.8/@guard">
+      <details key="start" value="11898"/>
+      <details key="end" value="11912"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.607" references="/0/emitIterator_updateAccumulator.8/@body.0/@body.4">
-      <details key="start" value="12410"/>
-      <details key="end" value="12415"/>
-      <details key="line" value="228"/>
-    </eAnnotations>
-    <eAnnotations source="positions.608" references="/0/emitIterator_updateAccumulator.8/@body.0/@body.5">
-      <details key="start" value="12416"/>
-      <details key="end" value="12456"/>
+    <eAnnotations source="positions.598" references="/0/emitIterator_resolveTerminalValue.8/@guard/ast">
+      <details key="start" value="11898"/>
+      <details key="end" value="11901"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.609" references="/0/emitIterator_updateAccumulator.8/@body.0/@body.5/@argument.0">
-      <details key="start" value="12416"/>
-      <details key="end" value="12435"/>
-      <details key="line" value="0"/>
+    <eAnnotations source="positions.599" references="/0/emitIterator_updateAccumulator.8">
+      <details key="start" value="12013"/>
+      <details key="end" value="12477"/>
+      <details key="line" value="222"/>
     </eAnnotations>
-    <eAnnotations source="positions.610" references="/0/emitIterator_updateAccumulator.8/@body.0/@body.5/@argument.0/@source">
-      <details key="start" value="12416"/>
-      <details key="end" value="12428"/>
-      <details key="line" value="0"/>
+    <eAnnotations source="positions.600" references="/0/emitIterator_updateAccumulator.8/@body.0">
+      <details key="start" value="12177"/>
+      <details key="end" value="12466"/>
+      <details key="line" value="223"/>
     </eAnnotations>
-    <eAnnotations source="positions.611" references="/0/emitIterator_updateAccumulator.8/@body.0/@body.5/@argument.0/@source/ast">
-      <details key="start" value="12416"/>
-      <details key="end" value="12419"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.612" references="/0/emitIterator_updateAccumulator.8/@body.0/@body.5/@argument.0/@argument.0">
-      <details key="start" value="12433"/>
-      <details key="end" value="12434"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.613" references="/0/emitIterator_updateAccumulator.8/@body.0/@body.5/expInOcl">
-      <details key="start" value="12447"/>
-      <details key="end" value="12455"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.614" references="/0/emitIterator_updateAccumulator.8/@body.0/@body.6">
-      <details key="start" value="12458"/>
-      <details key="end" value="12472"/>
-      <details key="line" value="228"/>
-    </eAnnotations>
-    <eAnnotations source="positions.615" references="/0/emitIterator_updateAccumulator.8/@body.0/astName.2">
-      <details key="start" value="12473"/>
-      <details key="end" value="12480"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.616" references="/0/emitIterator_updateAccumulator.8/@body.0/@body.8">
-      <details key="start" value="12482"/>
-      <details key="end" value="12588"/>
-      <details key="line" value="230"/>
-    </eAnnotations>
-    <eAnnotations source="positions.617" references="/0/emitIterator_updateAccumulator.8/@body.0/astName.3">
-      <details key="start" value="12310"/>
-      <details key="end" value="12353"/>
-      <details key="line" value="226"/>
-    </eAnnotations>
-    <eAnnotations source="positions.618" references="/0/emitIterator_updateAccumulator.8/@body.0/astName.3/@initExpression">
-      <details key="start" value="12330"/>
-      <details key="end" value="12354"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.619" references="/0/emitIterator_updateAccumulator.8/@body.0/astName.3/@initExpression/ast">
-      <details key="start" value="12330"/>
-      <details key="end" value="12333"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.620" references="/0/emitIterator_updateAccumulator.8/@body.0/astName.3/@initExpression/expInOcl">
-      <details key="start" value="12345"/>
-      <details key="end" value="12353"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.621" references="/0/emitIterator_updateAccumulator.8/ast">
-      <details key="start" value="12189"/>
-      <details key="end" value="12206"/>
-      <details key="line" value="225"/>
-    </eAnnotations>
-    <eAnnotations source="positions.622" references="/0/emitIterator_updateAccumulator.8/importer">
-      <details key="start" value="12208"/>
+    <eAnnotations source="positions.601" references="/0/emitIterator_updateAccumulator.8/@body.0/@body.0">
+      <details key="start" value="12227"/>
       <details key="end" value="12231"/>
-      <details key="line" value="225"/>
+      <details key="line" value="224"/>
     </eAnnotations>
-    <eAnnotations source="positions.623" references="/0/emitIterator_updateAccumulator.8/genPackage">
-      <details key="start" value="12233"/>
-      <details key="end" value="12256"/>
-      <details key="line" value="225"/>
-    </eAnnotations>
-    <eAnnotations source="positions.624" references="/0/emitIterator_updateAccumulator.8/expInOcl">
-      <details key="start" value="12258"/>
-      <details key="end" value="12284"/>
-      <details key="line" value="225"/>
-    </eAnnotations>
-    <eAnnotations source="positions.625" references="/0/emitIterator_updateAccumulator.8/@guard">
-      <details key="start" value="12288"/>
-      <details key="end" value="12302"/>
+    <eAnnotations source="positions.602" references="/0/emitIterator_updateAccumulator.8/@body.0/astName">
+      <details key="start" value="12232"/>
+      <details key="end" value="12239"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.626" references="/0/emitIterator_updateAccumulator.8/@guard/ast">
+    <eAnnotations source="positions.603" references="/0/emitIterator_updateAccumulator.8/@body.0/@body.2">
+      <details key="start" value="12241"/>
+      <details key="end" value="12272"/>
+      <details key="line" value="224"/>
+    </eAnnotations>
+    <eAnnotations source="positions.604" references="/0/emitIterator_updateAccumulator.8/@body.0/astName.1">
+      <details key="start" value="12273"/>
+      <details key="end" value="12280"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.605" references="/0/emitIterator_updateAccumulator.8/@body.0/@body.4">
+      <details key="start" value="12282"/>
+      <details key="end" value="12287"/>
+      <details key="line" value="225"/>
+    </eAnnotations>
+    <eAnnotations source="positions.606" references="/0/emitIterator_updateAccumulator.8/@body.0/@body.5">
+      <details key="start" value="12288"/>
+      <details key="end" value="12328"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.607" references="/0/emitIterator_updateAccumulator.8/@body.0/@body.5/@argument.0">
+      <details key="start" value="12288"/>
+      <details key="end" value="12307"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.608" references="/0/emitIterator_updateAccumulator.8/@body.0/@body.5/@argument.0/@source">
+      <details key="start" value="12288"/>
+      <details key="end" value="12300"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.609" references="/0/emitIterator_updateAccumulator.8/@body.0/@body.5/@argument.0/@source/ast">
       <details key="start" value="12288"/>
       <details key="end" value="12291"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.610" references="/0/emitIterator_updateAccumulator.8/@body.0/@body.5/@argument.0/@argument.0">
+      <details key="start" value="12305"/>
+      <details key="end" value="12306"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.611" references="/0/emitIterator_updateAccumulator.8/@body.0/@body.5/expInOcl">
+      <details key="start" value="12319"/>
+      <details key="end" value="12327"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.612" references="/0/emitIterator_updateAccumulator.8/@body.0/@body.6">
+      <details key="start" value="12330"/>
+      <details key="end" value="12344"/>
+      <details key="line" value="225"/>
+    </eAnnotations>
+    <eAnnotations source="positions.613" references="/0/emitIterator_updateAccumulator.8/@body.0/astName.2">
+      <details key="start" value="12345"/>
+      <details key="end" value="12352"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.614" references="/0/emitIterator_updateAccumulator.8/@body.0/@body.8">
+      <details key="start" value="12354"/>
+      <details key="end" value="12460"/>
+      <details key="line" value="227"/>
+    </eAnnotations>
+    <eAnnotations source="positions.615" references="/0/emitIterator_updateAccumulator.8/@body.0/astName.3">
+      <details key="start" value="12182"/>
+      <details key="end" value="12225"/>
+      <details key="line" value="223"/>
+    </eAnnotations>
+    <eAnnotations source="positions.616" references="/0/emitIterator_updateAccumulator.8/@body.0/astName.3/@initExpression">
+      <details key="start" value="12202"/>
+      <details key="end" value="12226"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.617" references="/0/emitIterator_updateAccumulator.8/@body.0/astName.3/@initExpression/ast">
+      <details key="start" value="12202"/>
+      <details key="end" value="12205"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.618" references="/0/emitIterator_updateAccumulator.8/@body.0/astName.3/@initExpression/expInOcl">
+      <details key="start" value="12217"/>
+      <details key="end" value="12225"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.619" references="/0/emitIterator_updateAccumulator.8/ast">
+      <details key="start" value="12061"/>
+      <details key="end" value="12078"/>
+      <details key="line" value="222"/>
+    </eAnnotations>
+    <eAnnotations source="positions.620" references="/0/emitIterator_updateAccumulator.8/importer">
+      <details key="start" value="12080"/>
+      <details key="end" value="12103"/>
+      <details key="line" value="222"/>
+    </eAnnotations>
+    <eAnnotations source="positions.621" references="/0/emitIterator_updateAccumulator.8/genPackage">
+      <details key="start" value="12105"/>
+      <details key="end" value="12128"/>
+      <details key="line" value="222"/>
+    </eAnnotations>
+    <eAnnotations source="positions.622" references="/0/emitIterator_updateAccumulator.8/expInOcl">
+      <details key="start" value="12130"/>
+      <details key="end" value="12156"/>
+      <details key="line" value="222"/>
+    </eAnnotations>
+    <eAnnotations source="positions.623" references="/0/emitIterator_updateAccumulator.8/@guard">
+      <details key="start" value="12160"/>
+      <details key="end" value="12174"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.624" references="/0/emitIterator_updateAccumulator.8/@guard/ast">
+      <details key="start" value="12160"/>
+      <details key="end" value="12163"/>
       <details key="line" value="0"/>
     </eAnnotations>
   </ecore:EAnnotation>

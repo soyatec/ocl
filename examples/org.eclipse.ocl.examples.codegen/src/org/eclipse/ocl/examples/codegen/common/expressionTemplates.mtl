@@ -89,7 +89,8 @@ final @NonNull Object [ast.symbolName(expInOcl)/] = standardLibrary.create[ast.k
 [/template]
 
 [template public emitExpression(ast : ConstructorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
-final <%DomainType%> type_[ast.symbolName(expInOcl)/] = [ast.type.typeIdLiteral(genPackage, expInOcl)/];
+final <%TypeId%> typeId_[ast.symbolName(expInOcl)/] = [ast.type.typeIdLiteral(genPackage, expInOcl)/];
+final <%DomainType%> type_[ast.symbolName(expInOcl)/] = evaluator.getIdResolver().getType(typeId_[ast.symbolName(expInOcl)/], null);
 final <%Object%> [ast.symbolName(expInOcl)/] = type_[ast.symbolName(expInOcl)/].createInstance(standardLibrary[if (ast.value <> null)], "[ast.javaString()/]"[/if]);
 [for (part : ConstructorPart | ast.part)]
 [part.initExpression.emitExpression(importer, genPackage, expInOcl)/]
@@ -262,7 +263,9 @@ try {
 [/if]
 [/let]
 [/if]
-[ast.generateCall(importer, genPackage, expInOcl, if (not ast.source.isConstant() and not ast.source.oclIsKindOf(VariableExp)) then 'a' else '' endif)/][/let][/template]
+[if (not ast.source.isConstant() and not ast.source.oclIsKindOf(VariableExp))]
+[ast.generateCall(importer, genPackage, expInOcl, 'a')/]
+[else][ast.generateCall(importer, genPackage, expInOcl, '')/][/if][/let][/template]
 
 [template public emitExpression(ast : OperationCallExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ? (not ast.referredOperation.usesInvalid())]
 [if (not ast.source.isConstant())]

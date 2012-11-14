@@ -86,7 +86,7 @@ public class GenPackageQueries
 				return "<%" + genClass.getQualifiedInterfaceName() + "%>";
 			}
 		}
-		return "";
+		return "org.eclipse.ocl.examples.pivot.Type";			// FIXME
 	}
 	
 	public String getEscapedInterfacePackageName(@NonNull GenPackage genPackage, @NonNull org.eclipse.ocl.examples.pivot.Package package1) {
@@ -94,7 +94,7 @@ public class GenPackageQueries
 		if (genPackage2 != null) {
 			return "<%" + genPackage2.getQualifiedPackageInterfaceName() + "%>";
 		}
-		return "";
+		return "<%org.eclipse.ocl.examples.pivot.PivotPackage%>";	// FIXME
 	}
 	
 	public String getEscapedLiteralsName(@NonNull GenPackage genPackage, @NonNull Type type) {
