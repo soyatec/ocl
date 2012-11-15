@@ -23,17 +23,20 @@ package org.eclipse.ocl.examples.pivot.bodies;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
+import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
+import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
-import org.eclipse.ocl.examples.pivot.PivotTables;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 
 /**
  * CollectionItemBodies provides the Java implementation bodies of OCL-defined CollectionItem operations and properties.
@@ -50,8 +53,10 @@ public class CollectionItemBodies
 		public static @NonNull _invariant_TypeIsItemType INSTANCE = new _invariant_TypeIsItemType();
 		static final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		static final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
-		static final @NonNull TypeId T_Type = OCLstdlibTables.Types._Type.getTypeId();
-		static final @NonNull TypeId T_pivot__OCLExpression = PivotTables.Types._OCLExpression.getTypeId();
+		static final @NonNull PackageId Pk_ocl = IdManager.INSTANCE.getPackageId(OCLstdlibPackage.eINSTANCE);
+		static final @NonNull TypeId T_Type = Pk_ocl.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "Type");
+		static final @NonNull PackageId Pk_pivot = IdManager.INSTANCE.getPackageId(PivotPackage.eINSTANCE);
+		static final @NonNull TypeId T_pivot__OCLExpression = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "OCLExpression");
 		
 	
 		/*
@@ -65,23 +70,21 @@ public class CollectionItemBodies
 			
 			if (self == null) { throw new InvalidValueException("Null property source"); }
 			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol_ = unboxed_self.getType();
-			Object A_symbol_ = createTypeValue(unboxed_A_symbol_);
+			final Object A_symbol_ = createTypeValue(unboxed_A_symbol_);
 			
 			
 			
 			if (self == null) { throw new InvalidValueException("Null property source"); }
 			org.eclipse.ocl.examples.pivot.OCLExpression unboxed_A_symbol__1 = unboxed_self.getItem();
-			Object A_symbol__1 = valueOf(unboxed_A_symbol__1); // OCLExpression
+			final Object A_symbol__1 = valueOf(unboxed_A_symbol__1); // OCLExpression
 			
 			
 			if (A_symbol__1 == null) { throw new InvalidValueException("Null property source"); }
 			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__2 = unboxed_A_symbol__1.getType();
-			Object A_symbol__2 = createTypeValue(unboxed_A_symbol__2);
+			final Object A_symbol__2 = createTypeValue(unboxed_A_symbol__2);
 			
 			
-			DomainType static_A_symbol__3 = evaluator.getStaticTypeOf(A_symbol_, A_symbol__2);
-			LibraryBinaryOperation dynamic_A_symbol__3 = (LibraryBinaryOperation)static_A_symbol__3.lookupImplementation(standardLibrary, O_OclAny__eq_);
-			Object A_symbol__3 = dynamic_A_symbol__3.evaluate(evaluator, T_Boolean, A_symbol_, A_symbol__2);
+			Object A_symbol__3 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol_, A_symbol__2);
 			return A_symbol__3;
 		}
 	}

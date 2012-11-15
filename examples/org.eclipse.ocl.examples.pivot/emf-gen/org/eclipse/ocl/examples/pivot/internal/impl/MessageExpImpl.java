@@ -337,7 +337,7 @@ public class MessageExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateOneCallOrOneSend(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateOneCallOrOneSend(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		calledOperation->size() + sentSignal->size() = 1
@@ -368,7 +368,7 @@ public class MessageExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateTargetIsNotACollection(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateTargetIsNotACollection(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		not target.type.oclIsKindOf(CollectionType)

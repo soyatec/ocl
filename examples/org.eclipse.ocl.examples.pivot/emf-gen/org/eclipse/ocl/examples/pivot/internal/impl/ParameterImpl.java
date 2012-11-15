@@ -81,7 +81,7 @@ public class ParameterImpl
 	 */
 	public Operation getOperation() {
 		if (eContainerFeatureID() != PivotPackage.PARAMETER__OPERATION) return null;
-		return (Operation)eContainer();
+		return (Operation)eInternalContainer();
 	}
 
 	/**

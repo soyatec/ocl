@@ -23,17 +23,21 @@ package org.eclipse.ocl.examples.pivot.bodies;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
+import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
+import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
+import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.IfExp;
-import org.eclipse.ocl.examples.pivot.PivotTables;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 
 /**
  * IfExpBodies provides the Java implementation bodies of OCL-defined IfExp operations and properties.
@@ -50,9 +54,10 @@ public class IfExpBodies
 		public static @NonNull _invariant_ConditionTypeIsBoolean INSTANCE = new _invariant_ConditionTypeIsBoolean();
 		static final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		static final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
-		static final @NonNull TypeId T_Type = OCLstdlibTables.Types._Type.getTypeId();
-		static final @NonNull TypeId T_pivot__OCLExpression = PivotTables.Types._OCLExpression.getTypeId();
-		static final @NonNull Object T_Metaclass_Boolean_ = createTypeValue(OCLstdlibTables.Types._Boolean);
+		static final @NonNull PackageId Pk_ocl = IdManager.INSTANCE.getPackageId(OCLstdlibPackage.eINSTANCE);
+		static final @NonNull TypeId T_Type = Pk_ocl.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "Type");
+		static final @NonNull PackageId Pk_pivot = IdManager.INSTANCE.getPackageId(PivotPackage.eINSTANCE);
+		static final @NonNull TypeId T_pivot__OCLExpression = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "OCLExpression");
 		
 	
 		/*
@@ -62,21 +67,20 @@ public class IfExpBodies
 			assert self != null;
 			final @NonNull IfExp unboxed_self = (IfExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
+			final TypeValue Te_Metaclass_Boolean_ = createTypeValue(evaluator.getIdResolver().getType(T_Boolean, null));
 			
 			
 			if (self == null) { throw new InvalidValueException("Null property source"); }
 			org.eclipse.ocl.examples.pivot.OCLExpression unboxed_A_symbol_ = unboxed_self.getCondition();
-			Object A_symbol_ = valueOf(unboxed_A_symbol_); // OCLExpression
+			final Object A_symbol_ = valueOf(unboxed_A_symbol_); // OCLExpression
 			
 			
 			if (A_symbol_ == null) { throw new InvalidValueException("Null property source"); }
 			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__1 = unboxed_A_symbol_.getType();
-			Object A_symbol__1 = createTypeValue(unboxed_A_symbol__1);
+			final Object A_symbol__1 = createTypeValue(unboxed_A_symbol__1);
 			
 			
-			DomainType static_A_symbol__2 = evaluator.getStaticTypeOf(A_symbol__1, T_Metaclass_Boolean_);
-			LibraryBinaryOperation dynamic_A_symbol__2 = (LibraryBinaryOperation)static_A_symbol__2.lookupImplementation(standardLibrary, O_OclAny__eq_);
-			Object A_symbol__2 = dynamic_A_symbol__2.evaluate(evaluator, T_Boolean, A_symbol__1, T_Metaclass_Boolean_);
+			Object A_symbol__2 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__1, Te_Metaclass_Boolean_);
 			return A_symbol__2;
 		}
 	}

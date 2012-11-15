@@ -28,7 +28,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
@@ -129,7 +132,7 @@ public abstract class TypedMultiplicityElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean CompatibleBody(ValueSpecification bodySpecification)
+	public boolean CompatibleBody(final ValueSpecification bodySpecification)
 	{
 		/*
 		bodySpecification.type.conformsTo(self.type)
@@ -161,7 +164,8 @@ public abstract class TypedMultiplicityElementImpl
 		Parameter{name = 'name'}
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-		final @NonNull TypeId T_pivot__Parameter = PivotTables.Types._Parameter.getTypeId();
+		final @NonNull PackageId Pk_pivot = IdManager.INSTANCE.getPackageId(PivotPackage.eINSTANCE);
+		final @NonNull TypeId T_pivot__Parameter = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "Parameter");
 		try {
 			final Object result = TypedMultiplicityElementBodies._makeParameter_body_.INSTANCE.evaluate(evaluator, T_pivot__Parameter, this);
 			final org.eclipse.ocl.examples.pivot.Parameter ecoreResult = (org.eclipse.ocl.examples.pivot.Parameter)result;

@@ -179,7 +179,7 @@ public abstract class ValueSpecificationImpl
 	 */
 	public TemplateParameter getOwningTemplateParameter() {
 		if (eContainerFeatureID() != PivotPackage.VALUE_SPECIFICATION__OWNING_TEMPLATE_PARAMETER) return null;
-		return (TemplateParameter)eContainer();
+		return (TemplateParameter)eInternalContainer();
 	}
 
 	/**
@@ -240,7 +240,7 @@ public abstract class ValueSpecificationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isCompatibleWith(ParameterableElement p)
+	public boolean isCompatibleWith(final ParameterableElement p)
 	{
 		/*
 		p.oclIsKindOf(self.oclType())

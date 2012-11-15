@@ -236,7 +236,7 @@ public class ConstraintImpl
 	 */
 	public NamedElement getContext() {
 		if (eContainerFeatureID() != PivotPackage.CONSTRAINT__CONTEXT) return null;
-		return (NamedElement)eContainer();
+		return (NamedElement)eInternalContainer();
 	}
 
 	/**
@@ -277,7 +277,7 @@ public class ConstraintImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateUniqueName(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateUniqueName(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		context.ownedRule->excluding(self)

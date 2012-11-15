@@ -45,12 +45,15 @@ import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
+import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
@@ -319,7 +322,7 @@ public class TypeImpl
 	 */
 	public org.eclipse.ocl.examples.pivot.Package getPackage() {
 		if (eContainerFeatureID() != PivotPackage.TYPE__PACKAGE) return null;
-		return (org.eclipse.ocl.examples.pivot.Package)eContainer();
+		return (org.eclipse.ocl.examples.pivot.Package)eInternalContainer();
 	}
 
 	/**
@@ -478,7 +481,7 @@ public class TypeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isCompatibleWith(ParameterableElement p)
+	public boolean isCompatibleWith(final ParameterableElement p)
 	{
 		/*
 		p.oclIsKindOf(self.oclType())
@@ -504,13 +507,14 @@ public class TypeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Type resolveSelfType(Type selfType)
+	public Type resolveSelfType(final Type selfType)
 	{
 		/*
 		self
 		*/
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-		final @NonNull TypeId T_Type = OCLstdlibTables.Types._Type.getTypeId();
+		final @NonNull PackageId Pk_ocl = IdManager.INSTANCE.getPackageId(OCLstdlibPackage.eINSTANCE);
+		final @NonNull TypeId T_Type = Pk_ocl.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "Type");
 		try {
 			final Object result = TypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, T_Type, this, ValuesUtil.valueOf(selfType));
 			final org.eclipse.ocl.examples.pivot.Type ecoreResult = (org.eclipse.ocl.examples.pivot.Type)result;
@@ -603,7 +607,7 @@ public class TypeImpl
 	 */
 	public TemplateParameter getOwningTemplateParameter() {
 		if (eContainerFeatureID() != PivotPackage.TYPE__OWNING_TEMPLATE_PARAMETER) return null;
-		return (TemplateParameter)eContainer();
+		return (TemplateParameter)eInternalContainer();
 	}
 
 	/**

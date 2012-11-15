@@ -245,7 +245,7 @@ public class TemplateParameterImpl
 	 */
 	public TemplateSignature getSignature() {
 		if (eContainerFeatureID() != PivotPackage.TEMPLATE_PARAMETER__SIGNATURE) return null;
-		return (TemplateSignature)eContainer();
+		return (TemplateSignature)eInternalContainer();
 	}
 
 	/**

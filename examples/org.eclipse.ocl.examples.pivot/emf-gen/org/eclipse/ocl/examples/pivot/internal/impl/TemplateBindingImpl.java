@@ -169,7 +169,7 @@ public class TemplateBindingImpl
 	 */
 	public TemplateableElement getBoundElement() {
 		if (eContainerFeatureID() != PivotPackage.TEMPLATE_BINDING__BOUND_ELEMENT) return null;
-		return (TemplateableElement)eContainer();
+		return (TemplateableElement)eInternalContainer();
 	}
 
 	/**

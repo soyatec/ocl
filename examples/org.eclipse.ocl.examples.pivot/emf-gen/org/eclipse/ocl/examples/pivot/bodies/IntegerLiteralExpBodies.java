@@ -23,14 +23,18 @@ package org.eclipse.ocl.examples.pivot.bodies;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
+import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
+import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
+import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 
@@ -49,8 +53,9 @@ public class IntegerLiteralExpBodies
 		public static @NonNull _invariant_TypeIsInteger INSTANCE = new _invariant_TypeIsInteger();
 		static final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		static final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
-		static final @NonNull TypeId T_Type = OCLstdlibTables.Types._Type.getTypeId();
-		static final @NonNull Object T_Metaclass_Integer_ = createTypeValue(OCLstdlibTables.Types._Integer);
+		static final @NonNull PackageId Pk_ocl = IdManager.INSTANCE.getPackageId(OCLstdlibPackage.eINSTANCE);
+		static final @NonNull TypeId T_Type = Pk_ocl.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "Type");
+		static final @NonNull PrimitiveTypeId T_Integer = TypeId.INTEGER;
 		
 	
 		/*
@@ -60,16 +65,15 @@ public class IntegerLiteralExpBodies
 			assert self != null;
 			final @NonNull IntegerLiteralExp unboxed_self = (IntegerLiteralExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
+			final TypeValue Te_Metaclass_Integer_ = createTypeValue(evaluator.getIdResolver().getType(T_Integer, null));
 			
 			
 			if (self == null) { throw new InvalidValueException("Null property source"); }
 			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol_ = unboxed_self.getType();
-			Object A_symbol_ = createTypeValue(unboxed_A_symbol_);
+			final Object A_symbol_ = createTypeValue(unboxed_A_symbol_);
 			
 			
-			DomainType static_A_symbol__1 = evaluator.getStaticTypeOf(A_symbol_, T_Metaclass_Integer_);
-			LibraryBinaryOperation dynamic_A_symbol__1 = (LibraryBinaryOperation)static_A_symbol__1.lookupImplementation(standardLibrary, O_OclAny__eq_);
-			Object A_symbol__1 = dynamic_A_symbol__1.evaluate(evaluator, T_Boolean, A_symbol_, T_Metaclass_Integer_);
+			Object A_symbol__1 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol_, Te_Metaclass_Integer_);
 			return A_symbol__1;
 		}
 	}

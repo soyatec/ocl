@@ -474,7 +474,7 @@ public class PropertyImpl
 	 */
 	public TemplateParameter getOwningTemplateParameter() {
 		if (eContainerFeatureID() != PivotPackage.PROPERTY__OWNING_TEMPLATE_PARAMETER) return null;
-		return (TemplateParameter)eContainer();
+		return (TemplateParameter)eInternalContainer();
 	}
 
 	/**
@@ -941,7 +941,7 @@ public class PropertyImpl
 	public Type getOwningType()
 	{
 		if (eContainerFeatureID() != PivotPackage.PROPERTY__OWNING_TYPE) return null;
-		return (Type)eContainer();
+		return (Type)eInternalContainer();
 	}
 
 	/**
@@ -1012,7 +1012,7 @@ public class PropertyImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isCompatibleWith(ParameterableElement p)
+	public boolean isCompatibleWith(final ParameterableElement p)
 	{
 		/*
 		p.oclIsKindOf(self.oclType())
@@ -1038,7 +1038,7 @@ public class PropertyImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isAttribute(Property p)
+	public boolean isAttribute(final Property p)
 	{
 		/*
 		let container : OclElement = oclContainer()
@@ -1068,7 +1068,7 @@ public class PropertyImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateCompatibleInitialiser(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateCompatibleInitialiser(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		isDerived implies

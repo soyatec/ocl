@@ -268,7 +268,7 @@ public class TemplateParameterSubstitutionImpl
 	 */
 	public TemplateBinding getTemplateBinding() {
 		if (eContainerFeatureID() != PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__TEMPLATE_BINDING) return null;
-		return (TemplateBinding)eContainer();
+		return (TemplateBinding)eInternalContainer();
 	}
 
 	/**

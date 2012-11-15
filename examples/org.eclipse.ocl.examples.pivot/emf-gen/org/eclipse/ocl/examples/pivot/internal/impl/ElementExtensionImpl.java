@@ -138,7 +138,7 @@ public class ElementExtensionImpl extends TypeImpl implements ElementExtension
 	public Element getBase()
 	{
 		if (eContainerFeatureID() != PivotPackage.ELEMENT_EXTENSION__BASE) return null;
-		return (Element)eContainer();
+		return (Element)eInternalContainer();
 	}
 
 	/**

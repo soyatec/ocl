@@ -21,6 +21,7 @@
 package org.eclipse.ocl.examples.pivot;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -28,7 +29,6 @@ import org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumeration;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumerationLiteral;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorType;
-import org.eclipse.ocl.examples.library.ecore.EcoreExecutorVoidType;
 import org.eclipse.ocl.examples.library.ecore.EcoreLibraryOppositeProperty;
 import org.eclipse.ocl.examples.library.ecore.EcoreLibraryProperty;
 import org.eclipse.ocl.examples.library.executor.ExecutorFragment;
@@ -39,6 +39,7 @@ import org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
 import org.eclipse.ocl.examples.library.executor.ExecutorTypeParameter;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.examples.pivot.PivotTables;
 
 /**
  * PivotTables provides the dispatch tables for the pivot for use by the OCL dispatcher.
@@ -139,7 +140,7 @@ public class PivotTables
 	    public static final @NonNull EcoreExecutorType _OclSummable = new EcoreExecutorType("OclSummable", PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _OclTuple = new EcoreExecutorType("OclTuple", PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _OclType = new EcoreExecutorType("OclType", PACKAGE, 0);
-	    public static final @NonNull EcoreExecutorType _OclVoid = new EcoreExecutorVoidType(TypeId.OCL_VOID, PACKAGE, 0);
+	    public static final @NonNull EcoreExecutorType _OclVoid = new EcoreExecutorType(TypeId.OCL_VOID, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _OpaqueExpression = new EcoreExecutorType(PivotPackage.Literals.OPAQUE_EXPRESSION, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _Operation = new EcoreExecutorType(PivotPackage.Literals.OPERATION, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _OperationCallExp = new EcoreExecutorType(PivotPackage.Literals.OPERATION_CALL_EXP, PACKAGE, 0);
@@ -1590,9 +1591,9 @@ public class PivotTables
 			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericTimesOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Integer___add_ = new ExecutorOperation("+", Parameters._OclSelf, Types._Integer,
 			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.integer.IntegerPlusOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Integer__0__sub_ = new ExecutorOperation("-", Parameters._, Types._Integer,
+		public static final @NonNull ExecutorOperation _Integer___neg_ = new ExecutorOperation("-", Parameters._, Types._Integer,
 			2, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericNegateOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Integer__1__sub_ = new ExecutorOperation("-", Parameters._OclSelf, Types._Integer,
+		public static final @NonNull ExecutorOperation _Integer___sub_ = new ExecutorOperation("-", Parameters._OclSelf, Types._Integer,
 			3, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.integer.IntegerMinusOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Integer___div_ = new ExecutorOperation("/", Parameters._OclSelf, Types._Integer,
 			4, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericDivideOperation.INSTANCE);
@@ -1623,9 +1624,9 @@ public class PivotTables
 			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericTimesOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Real___add_ = new ExecutorOperation("+", Parameters._OclSelf, Types._Real,
 			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.real.RealPlusOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real__0__sub_ = new ExecutorOperation("-", Parameters._, Types._Real,
+		public static final @NonNull ExecutorOperation _Real___neg_ = new ExecutorOperation("-", Parameters._, Types._Real,
 			2, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericNegateOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real__1__sub_ = new ExecutorOperation("-", Parameters._OclSelf, Types._Real,
+		public static final @NonNull ExecutorOperation _Real___sub_ = new ExecutorOperation("-", Parameters._OclSelf, Types._Real,
 			3, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.real.RealMinusOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Real___div_ = new ExecutorOperation("/", Parameters._OclSelf, Types._Real,
 			4, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericDivideOperation.INSTANCE);

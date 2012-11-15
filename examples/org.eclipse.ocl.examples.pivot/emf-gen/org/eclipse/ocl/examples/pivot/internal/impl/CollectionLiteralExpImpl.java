@@ -201,7 +201,7 @@ public class CollectionLiteralExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateCollectionKindIsConcrete(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateCollectionKindIsConcrete(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		kind <> CollectionKind::Collection
@@ -232,7 +232,7 @@ public class CollectionLiteralExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateSetKindIsSet(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateSetKindIsSet(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		kind = CollectionKind::Set implies type.oclIsKindOf(SetType)
@@ -263,7 +263,7 @@ public class CollectionLiteralExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateOrderedSetKindIsOrderedSet(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateOrderedSetKindIsOrderedSet(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		kind = CollectionKind::OrderedSet implies
@@ -295,7 +295,7 @@ public class CollectionLiteralExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateSequenceKindIsSequence(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateSequenceKindIsSequence(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		kind = CollectionKind::Sequence implies
@@ -327,7 +327,7 @@ public class CollectionLiteralExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateBagKindIsBag(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateBagKindIsBag(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		kind = CollectionKind::Bag implies type.oclIsKindOf(BagType)

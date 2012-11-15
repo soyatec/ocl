@@ -256,7 +256,7 @@ public abstract class LoopExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateSourceIsCollection(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateSourceIsCollection(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		source.type.oclIsKindOf(CollectionType)
@@ -287,7 +287,7 @@ public abstract class LoopExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateNoInitializers(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateNoInitializers(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		self.iterator->forAll(initExpression->isEmpty())

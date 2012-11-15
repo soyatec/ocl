@@ -304,7 +304,7 @@ public class OperationImpl
 	 */
 	public TemplateParameter getOwningTemplateParameter() {
 		if (eContainerFeatureID() != PivotPackage.OPERATION__OWNING_TEMPLATE_PARAMETER) return null;
-		return (TemplateParameter)eContainer();
+		return (TemplateParameter)eInternalContainer();
 	}
 
 	/**
@@ -542,7 +542,7 @@ public class OperationImpl
 	public Type getOwningType()
 	{
 		if (eContainerFeatureID() != PivotPackage.OPERATION__OWNING_TYPE) return null;
-		return (Type)eContainer();
+		return (Type)eInternalContainer();
 	}
 
 	/**
@@ -613,7 +613,7 @@ public class OperationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isCompatibleWith(ParameterableElement p)
+	public boolean isCompatibleWith(final ParameterableElement p)
 	{
 		/*
 		p.oclIsKindOf(self.oclType())
@@ -639,7 +639,7 @@ public class OperationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateCompatibleReturn(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateCompatibleReturn(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		let
@@ -676,7 +676,7 @@ public class OperationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateLoadableImplementation(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateLoadableImplementation(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		true

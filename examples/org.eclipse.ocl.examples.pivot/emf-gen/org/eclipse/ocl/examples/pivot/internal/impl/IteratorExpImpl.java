@@ -187,7 +187,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateAnyHasOneIterator(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateAnyHasOneIterator(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'any' implies iterator->size() = 1
@@ -218,7 +218,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateAnyTypeIsSourceElementType(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateAnyTypeIsSourceElementType(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'any' implies type = source.type.oclAsType(CollectionType).elementType
@@ -249,7 +249,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateAnyBodyTypeIsBoolean(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateAnyBodyTypeIsBoolean(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'any' implies body.type = 'Boolean'
@@ -280,7 +280,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateClosureHasOneIterator(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateClosureHasOneIterator(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'closure' implies iterator->size() = 1
@@ -311,7 +311,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateClosureTypeIsUniqueCollection(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateClosureTypeIsUniqueCollection(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'closure' implies
@@ -348,7 +348,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateClosureSourceElementTypeIsBodyElementType(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateClosureSourceElementTypeIsBodyElementType(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'closure' implies
@@ -384,7 +384,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateClosureElementTypeIsSourceElementType(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateClosureElementTypeIsSourceElementType(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'closure' implies
@@ -417,7 +417,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateCollectHasOneIterator(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateCollectHasOneIterator(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'collect' implies iterator->size() = 1
@@ -448,7 +448,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateCollectTypeIsUnordered(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateCollectTypeIsUnordered(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'collect' implies
@@ -485,7 +485,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateCollectElementTypeIsSourceElementType(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateCollectElementTypeIsSourceElementType(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'collect' implies
@@ -518,7 +518,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateCollectNestedHasOneIterator(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateCollectNestedHasOneIterator(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'collectNested' implies iterator->size() = 1
@@ -549,7 +549,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateCollectNestedTypeIsBag(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateCollectNestedTypeIsBag(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'collectNested' implies type.oclIsKindOf(BagType)
@@ -580,7 +580,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateCollectNestedTypeIsBodyType(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateCollectNestedTypeIsBodyType(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'collectNested' implies type = body.type
@@ -611,7 +611,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateExistsTypeIsBoolean(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateExistsTypeIsBoolean(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'exists' implies type = Boolean
@@ -642,7 +642,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateExistsBodyTypeIsBoolean(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateExistsBodyTypeIsBoolean(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'exists' implies body.type = Boolean
@@ -673,7 +673,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateForAllTypeIsBoolean(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateForAllTypeIsBoolean(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'forAll' implies type = Boolean
@@ -704,7 +704,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateForAllBodyTypeIsBoolean(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateForAllBodyTypeIsBoolean(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'forAll' implies body.type = Boolean
@@ -735,7 +735,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateIsUniqueHasOneIterator(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateIsUniqueHasOneIterator(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'isUnique' implies iterator->size() = 1
@@ -766,7 +766,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateIsUniqueTypeIsBoolean(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateIsUniqueTypeIsBoolean(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'isUnique' implies type = Boolean
@@ -797,7 +797,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateOneHasOneIterator(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateOneHasOneIterator(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'one' implies iterator->size() = 1
@@ -828,7 +828,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateOneTypeIsBoolean(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateOneTypeIsBoolean(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'one' implies type = Boolean
@@ -859,7 +859,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateOneBodyTypeIsBoolean(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateOneBodyTypeIsBoolean(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'one' implies body.type = Boolean
@@ -890,7 +890,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateRejectOrSelectHasOneIterator(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateRejectOrSelectHasOneIterator(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'reject' or name = 'select' implies iterator->size() = 1
@@ -921,7 +921,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateRejectOrSelectTypeIsSourceType(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateRejectOrSelectTypeIsSourceType(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'reject' or name = 'select' implies type = source.type
@@ -952,7 +952,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateRejectOrSelectTypeIsBoolean(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateRejectOrSelectTypeIsBoolean(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'reject' or name = 'select' implies type = Boolean
@@ -983,7 +983,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateSortedByHasOneIterator(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateSortedByHasOneIterator(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'sortedBy' implies iterator->size() = 1
@@ -1014,7 +1014,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateSortedByIsOrderedIfSourceIsOrdered(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateSortedByIsOrderedIfSourceIsOrdered(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'sortedBy' implies
@@ -1051,7 +1051,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateSortedByElementTypeIsSourceElementType(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateSortedByElementTypeIsSourceElementType(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		name = 'sortedBy' implies
@@ -1084,7 +1084,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateIteratorTypeIsSourceElementType(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateIteratorTypeIsSourceElementType(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		self.iterator->forAll(type =

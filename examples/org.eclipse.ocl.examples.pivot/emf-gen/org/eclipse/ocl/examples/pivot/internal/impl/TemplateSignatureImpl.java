@@ -146,7 +146,7 @@ public class TemplateSignatureImpl
 	 */
 	public TemplateableElement getTemplate() {
 		if (eContainerFeatureID() != PivotPackage.TEMPLATE_SIGNATURE__TEMPLATE) return null;
-		return (TemplateableElement)eContainer();
+		return (TemplateableElement)eInternalContainer();
 	}
 
 	/**

@@ -186,7 +186,7 @@ public class OperationCallExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateArgumentCount(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateArgumentCount(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		argument->size() = referredOperation.ownedParameter->size()

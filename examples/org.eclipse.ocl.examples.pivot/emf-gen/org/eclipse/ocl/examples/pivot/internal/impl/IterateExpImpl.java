@@ -168,7 +168,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateTypeIsResultType(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateTypeIsResultType(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		type = result.type
@@ -199,7 +199,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateBodyTypeConformsToResultType(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateBodyTypeConformsToResultType(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		body.type.conformsTo(result.type)
@@ -230,7 +230,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateOneInitializer(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateOneInitializer(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		self.result.initExpression->size() = 1

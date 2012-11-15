@@ -410,7 +410,7 @@ public class PackageImpl
 	 */
 	public org.eclipse.ocl.examples.pivot.Package getNestingPackage() {
 		if (eContainerFeatureID() != PivotPackage.PACKAGE__NESTING_PACKAGE) return null;
-		return (org.eclipse.ocl.examples.pivot.Package)eContainer();
+		return (org.eclipse.ocl.examples.pivot.Package)eInternalContainer();
 	}
 
 	/**

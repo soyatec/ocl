@@ -102,7 +102,7 @@ public class EnumerationLiteralImpl
 	 */
 	public Enumeration getEnumeration() {
 		if (eContainerFeatureID() != PivotPackage.ENUMERATION_LITERAL__ENUMERATION) return null;
-		return (Enumeration)eContainer();
+		return (Enumeration)eInternalContainer();
 	}
 
 	/**

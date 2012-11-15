@@ -25,7 +25,10 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
@@ -33,12 +36,12 @@ import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
-import org.eclipse.ocl.examples.pivot.PivotTables;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 
 /**
  * ParameterableElementBodies provides the Java implementation bodies of OCL-defined ParameterableElement operations and properties.
  */
-@SuppressWarnings({"nls", "unused"})
+@SuppressWarnings({"nls", "null", "unused"})
 public class ParameterableElementBodies
 {
 
@@ -50,7 +53,8 @@ public class ParameterableElementBodies
 		public static @NonNull _isCompatibleWith_body_ INSTANCE = new _isCompatibleWith_body_();
 		static final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		static final @NonNull ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
-		static final @NonNull TypeId T_pivot__ParameterableElement = PivotTables.Types._ParameterableElement.getTypeId();
+		static final @NonNull PackageId Pk_pivot = IdManager.INSTANCE.getPackageId(PivotPackage.eINSTANCE);
+		static final @NonNull TypeId T_pivot__ParameterableElement = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "ParameterableElement");
 		static final @NonNull CollectionTypeId T_Metaclass_pivot__ParameterableElement_ = TypeId.METACLASS.getSpecializedId(T_pivot__ParameterableElement);
 		static final @NonNull ExecutorOperation O_OclAny_oclType = OCLstdlibTables.Operations._OclAny__oclType;
 		
@@ -62,7 +66,6 @@ public class ParameterableElementBodies
 			assert self != null;
 			final @NonNull ParameterableElement unboxed_self = (ParameterableElement)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			
 			
 			
 			Object A_symbol_ = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, T_Metaclass_pivot__ParameterableElement_, self);

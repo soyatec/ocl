@@ -132,7 +132,7 @@ public class IntegerLiteralExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateTypeIsInteger(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateTypeIsInteger(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		self.type = Integer

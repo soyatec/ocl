@@ -22,18 +22,24 @@ package org.eclipse.ocl.examples.pivot.bodies;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import java.lang.Object;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorProperty;
+import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
@@ -53,7 +59,8 @@ public class TypedMultiplicityElementBodies
 		public static @NonNull _CompatibleBody_body_ INSTANCE = new _CompatibleBody_body_();
 		static final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		static final @NonNull ExecutorOperation O_OclType_conformsTo = OCLstdlibTables.Operations._OclType__conformsTo;
-		static final @NonNull TypeId T_Type = OCLstdlibTables.Types._Type.getTypeId();
+		static final @NonNull PackageId Pk_ocl = IdManager.INSTANCE.getPackageId(OCLstdlibPackage.eINSTANCE);
+		static final @NonNull TypeId T_Type = Pk_ocl.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "Type");
 		
 	
 		/*
@@ -68,13 +75,13 @@ public class TypedMultiplicityElementBodies
 			if (bodySpecification == null) { throw new InvalidValueException("Null property source"); }
 			ValueSpecification unboxed_bodySpecification = (ValueSpecification)bodySpecification;	// ValueSpecification
 			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol_ = unboxed_bodySpecification.getType();
-			Object A_symbol_ = createTypeValue(unboxed_A_symbol_);
+			final Object A_symbol_ = createTypeValue(unboxed_A_symbol_);
 			
 			
 			
 			if (self == null) { throw new InvalidValueException("Null property source"); }
 			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__1 = unboxed_self.getType();
-			Object A_symbol__1 = createTypeValue(unboxed_A_symbol__1);
+			final Object A_symbol__1 = createTypeValue(unboxed_A_symbol__1);
 			
 			
 			Object A_symbol__2 = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol_, A_symbol__1);
@@ -88,6 +95,8 @@ public class TypedMultiplicityElementBodies
 	public static class _makeParameter_body_ extends AbstractUnaryOperation
 	{
 		public static @NonNull _makeParameter_body_ INSTANCE = new _makeParameter_body_();
+		static final @NonNull PackageId Pk_pivot = IdManager.INSTANCE.getPackageId(PivotPackage.eINSTANCE);
+		static final @NonNull TypeId T_pivot__Parameter = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "Parameter");
 		static final @NonNull ExecutorProperty P_NamedElement_name = PivotTables.Properties._NamedElement__name;
 		static final @NonNull Object S_name = "name";
 		
@@ -100,7 +109,9 @@ public class TypedMultiplicityElementBodies
 			final @NonNull TypedMultiplicityElement unboxed_self = (TypedMultiplicityElement)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 			
-			Object A_symbol__3 = PivotTables.Types._Parameter.createInstance(standardLibrary);
+			final TypeId typeId_A_symbol__3 = PivotTables.Types._Parameter.getTypeId();
+			final DomainType type_A_symbol__3 = evaluator.getIdResolver().getType(typeId_A_symbol__3, null);
+			final Object A_symbol__3 = type_A_symbol__3.createInstance(standardLibrary);
 			
 			P_NamedElement_name.initValue(standardLibrary, A_symbol__3, S_name);
 			

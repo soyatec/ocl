@@ -26,7 +26,10 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -35,7 +38,7 @@ import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
-import org.eclipse.ocl.examples.pivot.PivotTables;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 
 /**
  * OperationCallExpBodies provides the Java implementation bodies of OCL-defined OperationCallExp operations and properties.
@@ -54,11 +57,12 @@ public class OperationCallExpBodies
 		static final @NonNull ExecutorOperation O_Real__eq_ = OCLstdlibTables.Operations._Real___eq_;
 		static final @NonNull PrimitiveTypeId T_Integer = TypeId.INTEGER;
 		static final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
-		static final @NonNull TypeId T_pivot__OCLExpression = PivotTables.Types._OCLExpression.getTypeId();
+		static final @NonNull PackageId Pk_pivot = IdManager.INSTANCE.getPackageId(PivotPackage.eINSTANCE);
+		static final @NonNull TypeId T_pivot__OCLExpression = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "OCLExpression");
 		static final @NonNull CollectionTypeId T_OrderedSet_pivot__OCLExpression_ = TypeId.ORDERED_SET.getSpecializedId(T_pivot__OCLExpression);
-		static final @NonNull TypeId T_pivot__Parameter = PivotTables.Types._Parameter.getTypeId();
+		static final @NonNull TypeId T_pivot__Parameter = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "Parameter");
 		static final @NonNull CollectionTypeId T_OrderedSet_pivot__Parameter_ = TypeId.ORDERED_SET.getSpecializedId(T_pivot__Parameter);
-		static final @NonNull TypeId T_pivot__Operation = PivotTables.Types._Operation.getTypeId();
+		static final @NonNull TypeId T_pivot__Operation = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "Operation");
 		
 	
 		/*
@@ -80,7 +84,7 @@ public class OperationCallExpBodies
 			
 			if (self == null) { throw new InvalidValueException("Null property source"); }
 			org.eclipse.ocl.examples.pivot.Operation unboxed_A_symbol__2 = unboxed_self.getReferredOperation();
-			Object A_symbol__2 = valueOf(unboxed_A_symbol__2); // Operation
+			final Object A_symbol__2 = valueOf(unboxed_A_symbol__2); // Operation
 			
 			
 			if (A_symbol__2 == null) { throw new InvalidValueException("Null property source"); }

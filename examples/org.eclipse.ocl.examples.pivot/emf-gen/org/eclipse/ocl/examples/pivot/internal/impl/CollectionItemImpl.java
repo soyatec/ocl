@@ -161,7 +161,7 @@ public class CollectionItemImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateTypeIsItemType(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateTypeIsItemType(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		type = item.type

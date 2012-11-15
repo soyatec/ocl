@@ -165,7 +165,7 @@ public class BooleanLiteralExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateTypeIsBoolean(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateTypeIsBoolean(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		self.type = Boolean

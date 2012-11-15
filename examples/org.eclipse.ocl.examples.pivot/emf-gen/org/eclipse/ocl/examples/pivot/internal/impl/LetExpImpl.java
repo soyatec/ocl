@@ -230,7 +230,7 @@ public class LetExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateTypeIsInType(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateTypeIsInType(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		type = _'in'.type

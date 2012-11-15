@@ -297,7 +297,7 @@ public class IfExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateConditionTypeIsBoolean(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateConditionTypeIsBoolean(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		self.condition.type = Boolean

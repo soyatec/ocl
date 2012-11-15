@@ -23,18 +23,23 @@ package org.eclipse.ocl.examples.pivot.bodies;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
+import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation;
+import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
+import org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
+import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -56,11 +61,13 @@ public class CollectionLiteralExpBodies
 		static final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		static final @NonNull ExecutorOperation O_Boolean_implies = OCLstdlibTables.Operations._Boolean__implies;
 		static final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
-		static final @NonNull TypeId T_pivot__CollectionKind = PivotTables.Types._CollectionKind.getTypeId();
+		static final @NonNull PackageId Pk_pivot = IdManager.INSTANCE.getPackageId(PivotPackage.eINSTANCE);
+		static final @NonNull TypeId T_pivot__CollectionKind = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "CollectionKind");
 		static final @NonNull Object A_symbol_ = createEnumerationLiteralValue(PivotTables.EnumerationLiterals._CollectionKind__Bag);
 		static final @NonNull ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
-		static final @NonNull TypeId T_Type = OCLstdlibTables.Types._Type.getTypeId();
-		static final @NonNull Object T_Metaclass_pivot__BagType_ = createTypeValue(PivotTables.Types._BagType);
+		static final @NonNull PackageId Pk_ocl = IdManager.INSTANCE.getPackageId(OCLstdlibPackage.eINSTANCE);
+		static final @NonNull TypeId T_Type = Pk_ocl.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "Type");
+		static final @NonNull TypeId T_pivot__BagType = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "BagType");
 		
 	
 		/*
@@ -70,39 +77,37 @@ public class CollectionLiteralExpBodies
 			assert self != null;
 			final @NonNull CollectionLiteralExp unboxed_self = (CollectionLiteralExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
+			final TypeValue Te_Metaclass_pivot__BagType_ = createTypeValue(evaluator.getIdResolver().getType(T_pivot__BagType, null));
 			
-			Object leftA_symbol__1;
+			Object aA_symbol__2;
 			try {
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
-				org.eclipse.ocl.examples.pivot.CollectionKind unboxed_A_symbol__2 = unboxed_self.getKind();
-				Value A_symbol__2 = createEnumerationLiteralValue(unboxed_A_symbol__2, PivotPackage.Literals.COLLECTION_KIND);
+				org.eclipse.ocl.examples.pivot.CollectionKind unboxed_A_symbol__3 = unboxed_self.getKind();
+				final Value A_symbol__3 = createEnumerationLiteralValue(unboxed_A_symbol__3, PivotPackage.Literals.COLLECTION_KIND);
 				
 				
 				
-				DomainType static_A_symbol__3 = evaluator.getStaticTypeOf(A_symbol__2, A_symbol_);
-				LibraryBinaryOperation dynamic_A_symbol__3 = (LibraryBinaryOperation)static_A_symbol__3.lookupImplementation(standardLibrary, O_OclAny__eq_);
-				Object A_symbol__3 = dynamic_A_symbol__3.evaluate(evaluator, T_Boolean, A_symbol__2, A_symbol_);
-				leftA_symbol__1 = A_symbol__3;
+				Object A_symbol__2 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__3, A_symbol_);
+				aA_symbol__2 = A_symbol__2;
 			} catch (Exception e) {
-				leftA_symbol__1 = new InvalidValueImpl(e);
+				aA_symbol__2 = new InvalidValueImpl(e);
 			}
-			Object A_symbol__3 = leftA_symbol__1;
-			Object rightA_symbol__1;
+			Object aA_symbol__4;
 			try {
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
-				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__4 = unboxed_self.getType();
-				Object A_symbol__4 = createTypeValue(unboxed_A_symbol__4);
+				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__5 = unboxed_self.getType();
+				final Object A_symbol__5 = createTypeValue(unboxed_A_symbol__5);
 				
 				
-				Object A_symbol__5 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__4, T_Metaclass_pivot__BagType_);
-				rightA_symbol__1 = A_symbol__5;
+				Object A_symbol__4 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__5, Te_Metaclass_pivot__BagType_);
+				aA_symbol__4 = A_symbol__4;
 			} catch (Exception e) {
-				rightA_symbol__1 = new InvalidValueImpl(e);
+				aA_symbol__4 = new InvalidValueImpl(e);
 			}
-			Object A_symbol__5 = rightA_symbol__1;
-			Object A_symbol__1 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__3, A_symbol__5);
+			Object A_symbol__1 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, T_Boolean, aA_symbol__2, aA_symbol__4);
+			
 			return A_symbol__1;
 		}
 	}
@@ -115,7 +120,8 @@ public class CollectionLiteralExpBodies
 		public static @NonNull _invariant_CollectionKindIsConcrete INSTANCE = new _invariant_CollectionKindIsConcrete();
 		static final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		static final @NonNull ExecutorOperation O_OclAny__lt__gt_ = OCLstdlibTables.Operations._OclAny___lt__gt_;
-		static final @NonNull TypeId T_pivot__CollectionKind = PivotTables.Types._CollectionKind.getTypeId();
+		static final @NonNull PackageId Pk_pivot = IdManager.INSTANCE.getPackageId(PivotPackage.eINSTANCE);
+		static final @NonNull TypeId T_pivot__CollectionKind = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "CollectionKind");
 		static final @NonNull Object A_symbol__6 = createEnumerationLiteralValue(PivotTables.EnumerationLiterals._CollectionKind__Collection);
 		
 	
@@ -130,13 +136,11 @@ public class CollectionLiteralExpBodies
 			
 			if (self == null) { throw new InvalidValueException("Null property source"); }
 			org.eclipse.ocl.examples.pivot.CollectionKind unboxed_A_symbol__7 = unboxed_self.getKind();
-			Value A_symbol__7 = createEnumerationLiteralValue(unboxed_A_symbol__7, PivotPackage.Literals.COLLECTION_KIND);
+			final Value A_symbol__7 = createEnumerationLiteralValue(unboxed_A_symbol__7, PivotPackage.Literals.COLLECTION_KIND);
 			
 			
 			
-			DomainType static_A_symbol__8 = evaluator.getStaticTypeOf(A_symbol__7, A_symbol__6);
-			LibraryBinaryOperation dynamic_A_symbol__8 = (LibraryBinaryOperation)static_A_symbol__8.lookupImplementation(standardLibrary, O_OclAny__lt__gt_);
-			Object A_symbol__8 = dynamic_A_symbol__8.evaluate(evaluator, T_Boolean, A_symbol__7, A_symbol__6);
+			Object A_symbol__8 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__7, A_symbol__6);
 			return A_symbol__8;
 		}
 	}
@@ -150,11 +154,13 @@ public class CollectionLiteralExpBodies
 		static final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		static final @NonNull ExecutorOperation O_Boolean_implies = OCLstdlibTables.Operations._Boolean__implies;
 		static final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
-		static final @NonNull TypeId T_pivot__CollectionKind = PivotTables.Types._CollectionKind.getTypeId();
+		static final @NonNull PackageId Pk_pivot = IdManager.INSTANCE.getPackageId(PivotPackage.eINSTANCE);
+		static final @NonNull TypeId T_pivot__CollectionKind = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "CollectionKind");
 		static final @NonNull Object A_symbol__9 = createEnumerationLiteralValue(PivotTables.EnumerationLiterals._CollectionKind__OrderedSet);
 		static final @NonNull ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
-		static final @NonNull TypeId T_Type = OCLstdlibTables.Types._Type.getTypeId();
-		static final @NonNull Object T_Metaclass_pivot__OrderedSetType_ = createTypeValue(PivotTables.Types._OrderedSetType);
+		static final @NonNull PackageId Pk_ocl = IdManager.INSTANCE.getPackageId(OCLstdlibPackage.eINSTANCE);
+		static final @NonNull TypeId T_Type = Pk_ocl.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "Type");
+		static final @NonNull TypeId T_pivot__OrderedSetType = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "OrderedSetType");
 		
 	
 		/*
@@ -165,39 +171,37 @@ public class CollectionLiteralExpBodies
 			assert self != null;
 			final @NonNull CollectionLiteralExp unboxed_self = (CollectionLiteralExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
+			final TypeValue Te_Metaclass_pivot__OrderedSetType_ = createTypeValue(evaluator.getIdResolver().getType(T_pivot__OrderedSetType, null));
 			
-			Object leftA_symbol__10;
+			Object aA_symbol__11;
 			try {
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
-				org.eclipse.ocl.examples.pivot.CollectionKind unboxed_A_symbol__11 = unboxed_self.getKind();
-				Value A_symbol__11 = createEnumerationLiteralValue(unboxed_A_symbol__11, PivotPackage.Literals.COLLECTION_KIND);
+				org.eclipse.ocl.examples.pivot.CollectionKind unboxed_A_symbol__12 = unboxed_self.getKind();
+				final Value A_symbol__12 = createEnumerationLiteralValue(unboxed_A_symbol__12, PivotPackage.Literals.COLLECTION_KIND);
 				
 				
 				
-				DomainType static_A_symbol__12 = evaluator.getStaticTypeOf(A_symbol__11, A_symbol__9);
-				LibraryBinaryOperation dynamic_A_symbol__12 = (LibraryBinaryOperation)static_A_symbol__12.lookupImplementation(standardLibrary, O_OclAny__eq_);
-				Object A_symbol__12 = dynamic_A_symbol__12.evaluate(evaluator, T_Boolean, A_symbol__11, A_symbol__9);
-				leftA_symbol__10 = A_symbol__12;
+				Object A_symbol__11 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__12, A_symbol__9);
+				aA_symbol__11 = A_symbol__11;
 			} catch (Exception e) {
-				leftA_symbol__10 = new InvalidValueImpl(e);
+				aA_symbol__11 = new InvalidValueImpl(e);
 			}
-			Object A_symbol__12 = leftA_symbol__10;
-			Object rightA_symbol__10;
+			Object aA_symbol__13;
 			try {
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
-				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__13 = unboxed_self.getType();
-				Object A_symbol__13 = createTypeValue(unboxed_A_symbol__13);
+				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__14 = unboxed_self.getType();
+				final Object A_symbol__14 = createTypeValue(unboxed_A_symbol__14);
 				
 				
-				Object A_symbol__14 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__13, T_Metaclass_pivot__OrderedSetType_);
-				rightA_symbol__10 = A_symbol__14;
+				Object A_symbol__13 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__14, Te_Metaclass_pivot__OrderedSetType_);
+				aA_symbol__13 = A_symbol__13;
 			} catch (Exception e) {
-				rightA_symbol__10 = new InvalidValueImpl(e);
+				aA_symbol__13 = new InvalidValueImpl(e);
 			}
-			Object A_symbol__14 = rightA_symbol__10;
-			Object A_symbol__10 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__12, A_symbol__14);
+			Object A_symbol__10 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, T_Boolean, aA_symbol__11, aA_symbol__13);
+			
 			return A_symbol__10;
 		}
 	}
@@ -211,11 +215,13 @@ public class CollectionLiteralExpBodies
 		static final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		static final @NonNull ExecutorOperation O_Boolean_implies = OCLstdlibTables.Operations._Boolean__implies;
 		static final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
-		static final @NonNull TypeId T_pivot__CollectionKind = PivotTables.Types._CollectionKind.getTypeId();
+		static final @NonNull PackageId Pk_pivot = IdManager.INSTANCE.getPackageId(PivotPackage.eINSTANCE);
+		static final @NonNull TypeId T_pivot__CollectionKind = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "CollectionKind");
 		static final @NonNull Object A_symbol__15 = createEnumerationLiteralValue(PivotTables.EnumerationLiterals._CollectionKind__Sequence);
 		static final @NonNull ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
-		static final @NonNull TypeId T_Type = OCLstdlibTables.Types._Type.getTypeId();
-		static final @NonNull Object T_Metaclass_pivot__SequenceType_ = createTypeValue(PivotTables.Types._SequenceType);
+		static final @NonNull PackageId Pk_ocl = IdManager.INSTANCE.getPackageId(OCLstdlibPackage.eINSTANCE);
+		static final @NonNull TypeId T_Type = Pk_ocl.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "Type");
+		static final @NonNull TypeId T_pivot__SequenceType = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "SequenceType");
 		
 	
 		/*
@@ -226,39 +232,37 @@ public class CollectionLiteralExpBodies
 			assert self != null;
 			final @NonNull CollectionLiteralExp unboxed_self = (CollectionLiteralExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
+			final TypeValue Te_Metaclass_pivot__SequenceType_ = createTypeValue(evaluator.getIdResolver().getType(T_pivot__SequenceType, null));
 			
-			Object leftA_symbol__16;
+			Object aA_symbol__17;
 			try {
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
-				org.eclipse.ocl.examples.pivot.CollectionKind unboxed_A_symbol__17 = unboxed_self.getKind();
-				Value A_symbol__17 = createEnumerationLiteralValue(unboxed_A_symbol__17, PivotPackage.Literals.COLLECTION_KIND);
+				org.eclipse.ocl.examples.pivot.CollectionKind unboxed_A_symbol__18 = unboxed_self.getKind();
+				final Value A_symbol__18 = createEnumerationLiteralValue(unboxed_A_symbol__18, PivotPackage.Literals.COLLECTION_KIND);
 				
 				
 				
-				DomainType static_A_symbol__18 = evaluator.getStaticTypeOf(A_symbol__17, A_symbol__15);
-				LibraryBinaryOperation dynamic_A_symbol__18 = (LibraryBinaryOperation)static_A_symbol__18.lookupImplementation(standardLibrary, O_OclAny__eq_);
-				Object A_symbol__18 = dynamic_A_symbol__18.evaluate(evaluator, T_Boolean, A_symbol__17, A_symbol__15);
-				leftA_symbol__16 = A_symbol__18;
+				Object A_symbol__17 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__18, A_symbol__15);
+				aA_symbol__17 = A_symbol__17;
 			} catch (Exception e) {
-				leftA_symbol__16 = new InvalidValueImpl(e);
+				aA_symbol__17 = new InvalidValueImpl(e);
 			}
-			Object A_symbol__18 = leftA_symbol__16;
-			Object rightA_symbol__16;
+			Object aA_symbol__19;
 			try {
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
-				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__19 = unboxed_self.getType();
-				Object A_symbol__19 = createTypeValue(unboxed_A_symbol__19);
+				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__20 = unboxed_self.getType();
+				final Object A_symbol__20 = createTypeValue(unboxed_A_symbol__20);
 				
 				
-				Object A_symbol__20 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__19, T_Metaclass_pivot__SequenceType_);
-				rightA_symbol__16 = A_symbol__20;
+				Object A_symbol__19 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__20, Te_Metaclass_pivot__SequenceType_);
+				aA_symbol__19 = A_symbol__19;
 			} catch (Exception e) {
-				rightA_symbol__16 = new InvalidValueImpl(e);
+				aA_symbol__19 = new InvalidValueImpl(e);
 			}
-			Object A_symbol__20 = rightA_symbol__16;
-			Object A_symbol__16 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__18, A_symbol__20);
+			Object A_symbol__16 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, T_Boolean, aA_symbol__17, aA_symbol__19);
+			
 			return A_symbol__16;
 		}
 	}
@@ -272,11 +276,13 @@ public class CollectionLiteralExpBodies
 		static final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		static final @NonNull ExecutorOperation O_Boolean_implies = OCLstdlibTables.Operations._Boolean__implies;
 		static final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
-		static final @NonNull TypeId T_pivot__CollectionKind = PivotTables.Types._CollectionKind.getTypeId();
+		static final @NonNull PackageId Pk_pivot = IdManager.INSTANCE.getPackageId(PivotPackage.eINSTANCE);
+		static final @NonNull TypeId T_pivot__CollectionKind = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "CollectionKind");
 		static final @NonNull Object A_symbol__21 = createEnumerationLiteralValue(PivotTables.EnumerationLiterals._CollectionKind__Set);
 		static final @NonNull ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
-		static final @NonNull TypeId T_Type = OCLstdlibTables.Types._Type.getTypeId();
-		static final @NonNull Object T_Metaclass_pivot__SetType_ = createTypeValue(PivotTables.Types._SetType);
+		static final @NonNull PackageId Pk_ocl = IdManager.INSTANCE.getPackageId(OCLstdlibPackage.eINSTANCE);
+		static final @NonNull TypeId T_Type = Pk_ocl.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "Type");
+		static final @NonNull TypeId T_pivot__SetType = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "SetType");
 		
 	
 		/*
@@ -286,39 +292,37 @@ public class CollectionLiteralExpBodies
 			assert self != null;
 			final @NonNull CollectionLiteralExp unboxed_self = (CollectionLiteralExp)self;
 			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
+			final TypeValue Te_Metaclass_pivot__SetType_ = createTypeValue(evaluator.getIdResolver().getType(T_pivot__SetType, null));
 			
-			Object leftA_symbol__22;
+			Object aA_symbol__23;
 			try {
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
-				org.eclipse.ocl.examples.pivot.CollectionKind unboxed_A_symbol__23 = unboxed_self.getKind();
-				Value A_symbol__23 = createEnumerationLiteralValue(unboxed_A_symbol__23, PivotPackage.Literals.COLLECTION_KIND);
+				org.eclipse.ocl.examples.pivot.CollectionKind unboxed_A_symbol__24 = unboxed_self.getKind();
+				final Value A_symbol__24 = createEnumerationLiteralValue(unboxed_A_symbol__24, PivotPackage.Literals.COLLECTION_KIND);
 				
 				
 				
-				DomainType static_A_symbol__24 = evaluator.getStaticTypeOf(A_symbol__23, A_symbol__21);
-				LibraryBinaryOperation dynamic_A_symbol__24 = (LibraryBinaryOperation)static_A_symbol__24.lookupImplementation(standardLibrary, O_OclAny__eq_);
-				Object A_symbol__24 = dynamic_A_symbol__24.evaluate(evaluator, T_Boolean, A_symbol__23, A_symbol__21);
-				leftA_symbol__22 = A_symbol__24;
+				Object A_symbol__23 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__24, A_symbol__21);
+				aA_symbol__23 = A_symbol__23;
 			} catch (Exception e) {
-				leftA_symbol__22 = new InvalidValueImpl(e);
+				aA_symbol__23 = new InvalidValueImpl(e);
 			}
-			Object A_symbol__24 = leftA_symbol__22;
-			Object rightA_symbol__22;
+			Object aA_symbol__25;
 			try {
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
-				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__25 = unboxed_self.getType();
-				Object A_symbol__25 = createTypeValue(unboxed_A_symbol__25);
+				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__26 = unboxed_self.getType();
+				final Object A_symbol__26 = createTypeValue(unboxed_A_symbol__26);
 				
 				
-				Object A_symbol__26 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__25, T_Metaclass_pivot__SetType_);
-				rightA_symbol__22 = A_symbol__26;
+				Object A_symbol__25 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__26, Te_Metaclass_pivot__SetType_);
+				aA_symbol__25 = A_symbol__25;
 			} catch (Exception e) {
-				rightA_symbol__22 = new InvalidValueImpl(e);
+				aA_symbol__25 = new InvalidValueImpl(e);
 			}
-			Object A_symbol__26 = rightA_symbol__22;
-			Object A_symbol__22 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__24, A_symbol__26);
+			Object A_symbol__22 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, T_Boolean, aA_symbol__23, aA_symbol__25);
+			
 			return A_symbol__22;
 		}
 	}

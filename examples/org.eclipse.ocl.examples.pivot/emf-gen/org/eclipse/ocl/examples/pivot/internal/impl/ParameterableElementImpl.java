@@ -175,7 +175,7 @@ public abstract class ParameterableElementImpl
 	 */
 	public TemplateParameter getOwningTemplateParameter() {
 		if (eContainerFeatureID() != PivotPackage.PARAMETERABLE_ELEMENT__OWNING_TEMPLATE_PARAMETER) return null;
-		return (TemplateParameter)eContainer();
+		return (TemplateParameter)eInternalContainer();
 	}
 
 	/**
@@ -236,7 +236,7 @@ public abstract class ParameterableElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isCompatibleWith(ParameterableElement p)
+	public boolean isCompatibleWith(final ParameterableElement p)
 	{
 		/*
 		p.oclIsKindOf(self.oclType())

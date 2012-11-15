@@ -143,7 +143,7 @@ public class EnumLiteralExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateTypeIsEnumerationType(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateTypeIsEnumerationType(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/*
 		self.type = referredEnumLiteral.enumeration
