@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.ConstantHelper;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
@@ -59,7 +60,7 @@ public class JavaConstantHelper implements ConstantHelper
 	}
 
 	protected @NonNull CodeGenText configureLocalDependency(@NonNull CodeGenSnippet snippet, @NonNull Class<?> javaClass) {
-		snippet.setIsLocal();
+//		snippet.setIsLocal();
 		snippet.setJavaClass(javaClass);
 		codeGenerator.addDependency(CodeGenerator.LOCAL_ROOT, snippet);
 		String atNonNull = codeGenerator.atNonNull();
@@ -69,7 +70,7 @@ public class JavaConstantHelper implements ConstantHelper
 	}
 
 	protected @NonNull CodeGenText configureGlobalDependency(@NonNull CodeGenSnippet snippet, @NonNull Class<?> javaClass) {
-		snippet.setIsStatic();
+//		snippet.setIsStatic();
 		snippet.setJavaClass(javaClass);
 		codeGenerator.addDependency(CodeGenerator.GLOBAL_ROOT, snippet);
 		String atNonNull = codeGenerator.atNonNull();
@@ -81,19 +82,19 @@ public class JavaConstantHelper implements ConstantHelper
 	public @NonNull CodeGenSnippet createSnippet(@Nullable Object anObject) {
 		CodeGenSnippet snippet;
 		if (anObject == null) {
-			snippet = new JavaSnippet("null", null, codeGenerator, "");
+			snippet = new JavaSnippet("null", TypeId.OCL_VOID, null, codeGenerator, "");
 			snippet.setIsInlined();
-			snippet.setIsStatic();
+//			snippet.setIsStatic();
 		}
 		else if (anObject instanceof Boolean) {
-			snippet = new JavaSnippet(((Boolean)anObject).booleanValue() ? "Boolean.TRUE" : "Boolean.FALSE", Boolean.class, codeGenerator, "");
+			snippet = new JavaSnippet(((Boolean)anObject).booleanValue() ? "Boolean.TRUE" : "Boolean.FALSE", TypeId.BOOLEAN, Boolean.class, codeGenerator, "");
 			snippet.setIsInlined();
-			snippet.setIsStatic();
+//			snippet.setIsStatic();
 		}
 		else if (anObject == ValuesUtil.UNLIMITED_VALUE) {
-			snippet = new JavaSnippet("UNLIMITED_VALUE", UnlimitedValue.class, codeGenerator, "");
+			snippet = new JavaSnippet("UNLIMITED_VALUE", TypeId.UNLIMITED_NATURAL, UnlimitedValue.class, codeGenerator, "");
 			snippet.setIsInlined();
-			snippet.setIsStatic();
+//			snippet.setIsStatic();
 		}
 		else if (anObject instanceof InvalidValue) {
 			String text;
@@ -104,12 +105,12 @@ public class JavaConstantHelper implements ConstantHelper
 			else {
 				text = "new " + codeGenerator.getImportedName(InvalidValueImpl.class) + "(" + Strings.convertToJavaString(exception.getMessage()) + ")";
 			}
-			snippet = new JavaSnippet(text, InvalidValue.class, codeGenerator, "");
+			snippet = new JavaSnippet(text, TypeId.OCL_INVALID, InvalidValue.class, codeGenerator, "");
 			snippet.setIsInlined();
-			snippet.setIsStatic();
+//			snippet.setIsStatic();
 		}
 		else {
-			snippet = new JavaSnippet(codeGenerator, "", anObject);
+			snippet = new JavaSnippet(codeGenerator, "", TypeId.OCL_ANY, anObject);
 			CodeGenText cgText = getNonInlineValueAndType(snippet, anObject);			// Type is set on snippet as a side-effect
 			cgText.append(";\n");
 		}

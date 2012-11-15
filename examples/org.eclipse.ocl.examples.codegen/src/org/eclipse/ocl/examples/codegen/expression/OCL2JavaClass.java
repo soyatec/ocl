@@ -24,9 +24,6 @@ import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.codegen.common.CodeGenHelper;
-import org.eclipse.ocl.examples.codegen.common.EmitQueries;
-import org.eclipse.ocl.examples.codegen.generator.AbstractGenModelHelper;
-import org.eclipse.ocl.examples.codegen.generator.AbstractCodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.ConstantHelper;
@@ -34,12 +31,8 @@ import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.ImportManager;
 import org.eclipse.ocl.examples.codegen.generator.java.AST2JavaSnippetVisitor;
 import org.eclipse.ocl.examples.codegen.generator.java.Id2JavaSnippetVisitor;
-import org.eclipse.ocl.examples.codegen.generator.java.JavaConstantHelper;
-import org.eclipse.ocl.examples.codegen.generator.java.JavaImportManager;
-import org.eclipse.ocl.examples.codegen.generator.java.JavaSnippet;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
+import org.eclipse.ocl.examples.codegen.generator.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
@@ -48,18 +41,15 @@ import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
 
 /**
  * OCL2JavaClass supports generation of the content of a JavaClassFile to provide the polymorphic implementation
  * of an ExpressionInOCL.
  */
-public class OCL2JavaClass extends AbstractCodeGenerator
+public class OCL2JavaClass extends JavaCodeGenerator
 {
 	protected final @NonNull CodeGenAnalyzer cgAnalyzer;
 	protected final @NonNull ExpressionInOCL expInOcl;
-	private /*@LazyNonNull*/ String evaluatorName = null;
-	private /*@LazyNonNull*/ CodeGenSnippet standardLibraryName = null;
 	protected final CodeGenSnippet fileSnippet = createCodeGenSnippet("");
 
 	public OCL2JavaClass(@NonNull MetaModelManager metaModelManager, @NonNull ExpressionInOCL expInOcl) {
@@ -76,54 +66,6 @@ public class OCL2JavaClass extends AbstractCodeGenerator
 		super(metaModelManager, nameManager, constantHelper, importManager, genModelHelper, idVisitor, astVisitor);
 		this.expInOcl = expInOcl;
 		this.cgAnalyzer = cgAnalyzer;
-	}
-	
-/*	protected void appendSnippet(@NonNull CodeGenSnippet s) {
-		for (Object content : s.getContents()) {
-			if (content instanceof String) {
-				append((String)content);
-			}
-			else if (content instanceof CodeGenSnippet) {
-				appendSnippet((CodeGenSnippet)content);
-			}
-			else {
-				throw new UnsupportedOperationException();
-			}
-		}
-	} */
-
-	@Override
-	protected @NonNull Visitor<CodeGenSnippet> createAST2SnippetVisitor() {
-		return new AST2JavaSnippetVisitor(this);
-	}
-
-	public @NonNull JavaSnippet createCodeGenSnippet(@Nullable String indentation) {
-		return new JavaSnippet(this, indentation != null ? indentation : getDefaultIndent());
-	}
-
-	@Override
-	protected @NonNull ConstantHelper createConstantHelper() {
-		return new JavaConstantHelper(this);
-	}
-
-	@Override
-	protected @NonNull GenModelHelper createGenModelHelper() {
-		return new AbstractGenModelHelper(this);
-	}
-
-	@Override
-	protected @NonNull IdVisitor<CodeGenSnippet> createId2SnippetVisitor() {
-		return new Id2JavaSnippetVisitor(this);
-	}
-
-	@Override
-	protected @NonNull ImportManager createImportManager() {
-		return new JavaImportManager(EmitQueries.knownClasses);
-	}
-
-	@Override
-	protected @NonNull NameManager createNameManager() {
-		return new NameManager(metaModelManager);
 	}
 
 	public @Nullable CodeGenAnalysis findAnalysis(@NonNull Element element) {
@@ -238,24 +180,5 @@ public class OCL2JavaClass extends AbstractCodeGenerator
 
 	public @NonNull CodeGenAnalysis getAnalysis(@NonNull Element element) {
 		return cgAnalyzer.getAnalysis(element);
-	}
-
-	public @NonNull String getEvaluatorName() {
-		String evaluatorName2 = evaluatorName;
-		if (evaluatorName2 == null) {
-			evaluatorName = evaluatorName2 = nameManager.reserveName("evaluator", null);
-		}
-		return evaluatorName2;
-	}
-
-	public @NonNull CodeGenSnippet getStandardLibrary(@NonNull CodeGenSnippet referringSnippet) {
-		CodeGenSnippet standardLibraryName2 = standardLibraryName;
-		if (standardLibraryName2 == null) {
-			String name = nameManager.reserveName("standardLibrary", null);
-			standardLibraryName = standardLibraryName2 = new JavaSnippet(name, DomainStandardLibrary.class, this, "");
-			standardLibraryName.append("final " + atNonNull() + " " + getImportedName(DomainStandardLibrary.class) + " " + name + " = " + getEvaluatorName() + ".getStandardLibrary();\n");
-		}
-		referringSnippet.addDependsOn(standardLibraryName2);
-		return standardLibraryName2;
 	}
 }

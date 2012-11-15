@@ -23,6 +23,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -35,19 +36,24 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 	private static int snippetCounter = 0;
 
 	protected final @NonNull String name;										// Symbol name allocated to this content
+	protected final @NonNull TypeId typeId;										// TypeId of this content
 	protected @Nullable Class<?> javaClass = null;								// Java class of this content
 	protected @NonNull Set<Object> elements = new HashSet<Object>();			// Elements for which this snippet defines name and content
 	private final @NonNull List<CodeGenNode> contents = new ArrayList<CodeGenNode>();	// Text/nested Snippet contributing to result
-	private boolean isLocal = false;
-	private boolean isStatic = false;
+//	private boolean isLocal = false;
+//	private boolean isStatic = false;
 	private boolean isInlined = false;
 	protected final @NonNull String indentation;
-	private /*@LazyNonNull*/ Set<CodeGenSnippet> dependsOn = null;			// Snippets that must be emitted before this one.
-	private /*@LazyNonNull*/ Set<CodeGenSnippet> dependants = null;		// That require this Snippet to be emitted before them.
+	private /*@LazyNonNull*/ Set<CodeGenSnippet> dependsOn = null;				// Snippets that must be emitted before this one.
+	private /*@LazyNonNull*/ Set<CodeGenSnippet> dependants = null;				// That require this Snippet to be emitted before them.
+	private /*@LazyNonNull*/ CodeGenSnippet boxedSnippet = null;				// Boxed variant of this snippet, which may be this snippet itself
+	private /*@LazyNonNull*/ CodeGenSnippet finalSnippet = null;				// Final variant of this snippet, which may be this snippet itself
+	private /*@LazyNonNull*/ CodeGenSnippet unboxedSnippet = null;				// Unboxed variant of this snippet, which may be this snippet itself
 	
-	public AbstractCodeGenSnippet(@NonNull CodeGenerator codeGenerator, @NonNull String indentation, @NonNull Object... elements) {
+	public AbstractCodeGenSnippet(@NonNull CodeGenerator codeGenerator, @NonNull String indentation, @NonNull TypeId typeId, @NonNull Object... elements) {
 		super(codeGenerator);
 		this.indentation = indentation;
+		this.typeId = typeId;
 		if (elements.length > 0) {
 			Object firstObject = elements[0];
 			if (firstObject instanceof Element) {
@@ -72,10 +78,11 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		}
 	}
 
-	public AbstractCodeGenSnippet(@NonNull String name, @Nullable Class<?> javaClass, @NonNull CodeGenerator codeGenerator, @NonNull String indentation) {
+	public AbstractCodeGenSnippet(@NonNull String name, @NonNull TypeId typeId, @Nullable Class<?> javaClass, @NonNull CodeGenerator codeGenerator, @NonNull String indentation) {
 		super(codeGenerator);
 		this.indentation = indentation;
 		this.name = name;
+		this.typeId = typeId;
 		this.javaClass = javaClass;
 	}
 
@@ -161,7 +168,13 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		return true;
 	}
 
+	protected abstract @NonNull CodeGenSnippet createBoxedSnippet();
+
 	protected abstract @NonNull AbstractCodeGenText createCodeGenText(@NonNull String indentation);
+
+	protected abstract @NonNull CodeGenSnippet createFinalSnippet();
+
+	protected abstract @NonNull CodeGenSnippet createUnboxedSnippet();
 
 	/**
 	 * Return all used code snippets in dependency order (this last).
@@ -196,6 +209,32 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		return addedOne;
 	}
 
+	public @NonNull CodeGenSnippet getBoxedSnippet() {
+		CodeGenSnippet boxedSnippet2 = boxedSnippet;
+		if (boxedSnippet2 == null) {
+			boxedSnippet = boxedSnippet2 = createBoxedSnippet();
+			((AbstractCodeGenSnippet)boxedSnippet).unboxedSnippet = this;
+		}
+		return boxedSnippet2;
+	}
+
+	public @NonNull CodeGenSnippet getFinalSnippet() {
+		CodeGenSnippet finalSnippet2 = finalSnippet;
+		if (finalSnippet2 == null) {
+			finalSnippet = finalSnippet2 = createFinalSnippet();
+		}
+		return finalSnippet2;
+	}
+
+	public @NonNull CodeGenSnippet getUnboxedSnippet() {
+		CodeGenSnippet unboxedSnippet2 = unboxedSnippet;
+		if (unboxedSnippet2 == null) {
+			unboxedSnippet = unboxedSnippet2 = createUnboxedSnippet();
+			((AbstractCodeGenSnippet)unboxedSnippet).boxedSnippet = this;
+		}
+		return unboxedSnippet2;
+	}
+
 	public @NonNull List<CodeGenNode> getContents() {
 		return contents;
 	}
@@ -228,6 +267,10 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		return getSnippet(anObject).getName();
 	}
 
+	public @NonNull TypeId getTypeId() {
+		return typeId;
+	}
+
 	public void internalAddDependant(@NonNull CodeGenSnippet cgNode) {
 		if (dependants == null) {
 			dependants = new HashSet<CodeGenSnippet>();
@@ -235,48 +278,50 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		dependants.add(cgNode);
 	}
 
+	public boolean isBoxed() {
+		return boxedSnippet == this;
+	}
+
+	public boolean isFinal() {
+		return finalSnippet == this;
+	}
+
 	public boolean isInlined() {
 		return isInlined;
 	}
 
-	public boolean isStatic() {
-		return isStatic ;
+	public boolean isUnboxed() {
+		return unboxedSnippet == this;
 	}
 
-/*	public void popIndentation() {
-		if (!indentationStack.isEmpty()) {
-			indentationStack.pop();
-		}
-	}
-
-	public void pushIndentation() {
-		pushIndentation(codeGenerator.getDefaultIndent());
-	}
-
-	public void pushIndentation(@NonNull String moreIndentation) {
-		if (indentationStack.isEmpty()) {
-			indentationStack.push(moreIndentation);
-		}
-		else {
-			indentationStack.push(indentationStack.peek() + moreIndentation);
-		}
-	} */
-
-	public void setJavaClass(@NonNull Class<?> javaClass) {
+	public void setBoxed(@NonNull Class<?> boxedClass) {
 		assert this.javaClass == null;
-		this.javaClass = javaClass;
+		assert boxedSnippet == null;
+		boxedSnippet = this;
+		this.javaClass = boxedClass;
+	}
+
+	public void setIsFinal() {
+		assert finalSnippet == null;
+		finalSnippet = this;
 	}
 
 	public void setIsInlined() {
 		isInlined = true;
 	}
 
-	public void setIsLocal() {
-		isLocal = true;
+	public void setJavaClass(@NonNull Class<?> javaClass) {
+		assert this.javaClass == null;
+		this.javaClass = javaClass;
+		boxedSnippet = this;
+		unboxedSnippet = this;
 	}
 
-	public void setIsStatic() {
-		isStatic = true;
+	public void setUnboxed(@NonNull Class<?> unboxedClass) {
+		assert this.javaClass == null;
+		assert unboxedSnippet == null;
+		unboxedSnippet = this;
+		this.javaClass = unboxedClass;
 	}
 
 	@Override
@@ -291,12 +336,12 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 	public String toString(@NonNull String indent) {
 		StringBuilder s = new StringBuilder();
 		s.append(name);
-		if (isStatic) {
-			s.append("{Static} ");
-		}
-		if (isLocal) {
-			s.append("{Local} ");
-		}
+//		if (isStatic) {
+//			s.append("{Static} ");
+//		}
+//		if (isLocal) {
+//			s.append("{Local} ");
+//		}
 		if (isInlined) {
 			s.append("{Inlined} ");
 		}

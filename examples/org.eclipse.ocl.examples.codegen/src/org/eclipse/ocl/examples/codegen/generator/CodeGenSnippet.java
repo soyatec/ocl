@@ -20,6 +20,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.Element;
 
 /**
@@ -57,13 +58,22 @@ public interface CodeGenSnippet extends CodeGenNode
 	@NonNull String getName();
 	@NonNull Class<?> getJavaClass();
 	@NonNull String getJavaClassName();
+	@NonNull CodeGenSnippet getBoxedSnippet();
+	@NonNull CodeGenSnippet getFinalSnippet();
 	@NonNull CodeGenSnippet getSnippet(@Nullable Object anObject);
 	@NonNull String getSnippetName(@Nullable Object anObject);
+	@NonNull TypeId getTypeId();
+	@NonNull CodeGenSnippet getUnboxedSnippet();
 	void internalAddDependant(@NonNull CodeGenSnippet cgNode);
+	boolean isBoxed();
+	boolean isFinal();
 	boolean isInlined();
-	boolean isStatic();
+	boolean isUnboxed();
+	void setBoxed(@NonNull Class<?> boxedClass);
+//	void setIsBoxed();
+	void setIsFinal();
 	void setIsInlined();
-	void setIsLocal();
-	void setIsStatic();
+//	void setIsUnboxed();
 	void setJavaClass(@NonNull Class<?> javaClass);
+	void setUnboxed(@NonNull Class<?> unboxedClass);
 }

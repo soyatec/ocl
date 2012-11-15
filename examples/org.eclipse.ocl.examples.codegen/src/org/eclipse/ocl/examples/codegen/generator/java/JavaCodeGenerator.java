@@ -1,0 +1,126 @@
+/**
+ * <copyright>
+ *
+ * Copyright (c) 2011,2012 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial API and implementation
+ *
+ * </copyright>
+ **/
+package org.eclipse.ocl.examples.codegen.generator.java;
+
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
+import org.eclipse.ocl.examples.codegen.common.EmitQueries;
+import org.eclipse.ocl.examples.codegen.generator.AbstractCodeGenerator;
+import org.eclipse.ocl.examples.codegen.generator.AbstractGenModelHelper;
+import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
+import org.eclipse.ocl.examples.codegen.generator.ConstantHelper;
+import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
+import org.eclipse.ocl.examples.codegen.generator.ImportManager;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
+import org.eclipse.ocl.examples.domain.ids.IdVisitor;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.util.Visitor;
+
+/**
+ * OCL2JavaClass supports generation of the content of a JavaClassFile to provide the polymorphic implementation
+ * of an ExpressionInOCL.
+ */
+public abstract class JavaCodeGenerator extends AbstractCodeGenerator
+{
+	private /*@LazyNonNull*/ String evaluatorName = null;
+	private /*@LazyNonNull*/ CodeGenSnippet standardLibraryName = null;
+
+	public JavaCodeGenerator(@NonNull MetaModelManager metaModelManager) {
+		super(metaModelManager);
+	}
+	
+	protected JavaCodeGenerator(@NonNull MetaModelManager metaModelManager, @NonNull NameManager nameManager, @NonNull ConstantHelper constantHelper,
+			@NonNull ImportManager importManager, @NonNull GenModelHelper genModelHelper,
+			@NonNull Id2JavaSnippetVisitor idVisitor, @NonNull AST2JavaSnippetVisitor astVisitor) {
+		super(metaModelManager, nameManager, constantHelper, importManager, genModelHelper, idVisitor, astVisitor);
+	}
+
+	@Override
+	protected @NonNull Visitor<CodeGenSnippet> createAST2SnippetVisitor() {
+		return new AST2JavaSnippetVisitor(this);
+	}
+
+	public @NonNull JavaSnippet createCodeGenSnippet(@Nullable String indentation) {
+		return new JavaSnippet(this, indentation != null ? indentation : getDefaultIndent(), TypeId.OCL_ANY);
+	}
+
+	@Override
+	protected @NonNull ConstantHelper createConstantHelper() {
+		return new JavaConstantHelper(this);
+	}
+
+	@Override
+	protected @NonNull GenModelHelper createGenModelHelper() {
+		return new AbstractGenModelHelper(this);
+	}
+
+	@Override
+	protected @NonNull IdVisitor<CodeGenSnippet> createId2SnippetVisitor() {
+		return new Id2JavaSnippetVisitor(this);
+	}
+
+	@Override
+	protected @NonNull ImportManager createImportManager() {
+		return new JavaImportManager(EmitQueries.knownClasses);
+	}
+
+	@Override
+	protected @NonNull NameManager createNameManager() {
+		return new NameManager(metaModelManager);
+	}
+
+	public @NonNull Class<?> getBoxedClass(@NonNull TypeId typeId) {
+		IdVisitor<Class<?>> id2BoxedClassVisitor = getId2BoxedClassVisitor();
+		Class<?> javaClass = typeId.accept(id2BoxedClassVisitor);
+		assert javaClass != null;
+		return javaClass;
+	}
+
+	public @NonNull String getEvaluatorName() {
+		String evaluatorName2 = evaluatorName;
+		if (evaluatorName2 == null) {
+			evaluatorName = evaluatorName2 = nameManager.reserveName("evaluator", null);
+		}
+		return evaluatorName2;
+	}
+
+	public @NonNull IdVisitor<Class<?>> getId2BoxedClassVisitor() {
+		return Id2BoxedJavaClassVisitor.INSTANCE;
+	}
+
+	public @NonNull IdVisitor<Class<?>> getId2UnboxedClassVisitor() {
+		return Id2UnboxedJavaClassVisitor.INSTANCE;
+	}
+
+	public @NonNull CodeGenSnippet getStandardLibrary(@NonNull CodeGenSnippet referringSnippet) {
+		CodeGenSnippet standardLibraryName2 = standardLibraryName;
+		if (standardLibraryName2 == null) {
+			String name = nameManager.reserveName("standardLibrary", null);
+			standardLibraryName = standardLibraryName2 = new JavaSnippet(name, TypeId.OCL_ANY, DomainStandardLibrary.class, this, "");
+			standardLibraryName.append("final " + atNonNull() + " " + getImportedName(DomainStandardLibrary.class) + " " + name + " = " + getEvaluatorName() + ".getStandardLibrary();\n");
+		}
+		referringSnippet.addDependsOn(standardLibraryName2);
+		return standardLibraryName2;
+	}
+
+	public @NonNull Class<?> getUnboxedClass(@NonNull TypeId typeId) {
+		IdVisitor<Class<?>> id2UnboxedClassVisitor = getId2UnboxedClassVisitor();
+		Class<?> javaClass = typeId.accept(id2UnboxedClassVisitor);
+		assert javaClass != null;
+		return javaClass;
+	}
+}

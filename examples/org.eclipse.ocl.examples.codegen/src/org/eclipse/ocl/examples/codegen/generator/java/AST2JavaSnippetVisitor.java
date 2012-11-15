@@ -26,9 +26,9 @@ import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenLabel;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
+import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.GenModelException;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
-import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -175,6 +175,21 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		return context.atNullable();
 	}
 
+	protected @NonNull String getBoxedSymbolName(@Nullable Object element, @Nullable String... nameHints) {
+		if (element instanceof Element) {
+			CodeGenAnalysis analysis = context.getAnalysis((Element) element);
+			CommonSubExpression referredCommonSubExpression = analysis.getReferredCommonSubExpression();
+			if (referredCommonSubExpression != null) {
+				return referredCommonSubExpression.getSymbolName();
+			}
+		}
+		if (element == null) {
+			return "null";
+		}
+		CodeGenSnippet snippet = context.getSnippet(element);
+		return snippet.getBoxedSnippet().getName();
+	}
+
 	public @NonNull String getCastSymbolName(@NonNull Class<TupleValue> javaClassName, @NonNull Object element) {
 		return "(" + context.getImportedName(javaClassName) + ")" + getSymbolName(element);
 	}
@@ -304,8 +319,8 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		if (analysis.isConstant()) {
 			return context.getSnippet(analysis.getConstantValue());
 		}
-		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element);
 		CollectionType collectionType = (CollectionType) element.getType();
+		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", collectionType.getTypeId(), element);
 		StringBuilder partArgs = new StringBuilder();
 		List<CollectionLiteralPart> parts = element.getPart();
 		String integerRangeCast = null;
@@ -343,7 +358,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 
 	@Override
 	public @NonNull CodeGenSnippet visitCollectionRange(@NonNull CollectionRange element) {
-		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element);
+		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element.getTypeId(), element);
 		snippet.setJavaClass(IntegerRange.class);
 		String firstName = snippet.getSnippetName(element.getFirst());
 		String lastName = snippet.getSnippetName(element.getLast());
@@ -359,7 +374,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 
 	@Override
 	public @NonNull CodeGenSnippet visitExpressionInOCL(@NonNull ExpressionInOCL element) {
-		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element);
+		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element.getTypeId(), element);
 		OCLExpression bodyExpression = DomainUtil.nonNullModel(element.getBodyExpression());
 		CodeGenAnalysis bodyAnalysis = context.getAnalysis(bodyExpression);
 		CodeGenSnippet bodySnippet = context.getSnippet(bodyExpression);
@@ -398,7 +413,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 
 	@Override
 	public @NonNull CodeGenSnippet visitIfExp(@NonNull IfExp element) {
-		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element);
+		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element.getTypeId(), element);
 		CodeGenText head = snippet.appendIndentedText("");
 		head.append("if (");
 		head.appendReferenceTo(DomainUtil.nonNullModel(element.getCondition()));
@@ -426,7 +441,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 
 	@Override
 	public @NonNull CodeGenSnippet visitIteratorExp(@NonNull IteratorExp element) {
-		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element);
+		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element.getTypeId(), element);
 		Iteration referredIteration = DomainUtil.nonNullModel(element.getReferredIteration());
 		OCLExpression source = element.getSource();
 		OCLExpression bodyExpression = element.getBody();
@@ -435,7 +450,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		String operationTypeName = context.getImportedName(genModelHelper.getAbstractOperationClass(iterators));
 		String iterationTypeName = context.getImportedName(LibraryIteration.class);
 		String astName = snippet.getName();
-		String sourceName = getSymbolName(source);
+		String sourceName = getBoxedSymbolName(source);
 		String typeId = snippet.getSnippetName(element.getTypeId());
 		String bodyType = snippet.getSnippetName(bodyExpression.getTypeId());
 		String referredIterationName = genModelHelper.getQualifiedLiteralName(referredIteration);
@@ -537,7 +552,7 @@ Object [astName/] = dynamic_[astName/].evaluateIteration(manager_[astName/]);[/l
 
 	@Override
 	public @NonNull CodeGenSnippet visitLetExp(@NonNull LetExp element) {
-		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element);
+		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element.getTypeId(), element);
 		Variable letVariable = element.getVariable();
 		OCLExpression initExpression = letVariable.getInitExpression();
 		if (initExpression != null) {
@@ -602,7 +617,7 @@ Object [astName/] = dynamic_[astName/].evaluateIteration(manager_[astName/]);[/l
 
 	@Override
 	public @NonNull CodeGenSnippet visitOperationCallExp(@NonNull OperationCallExp element) {
-		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element);
+		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element.getTypeId(), element);
 		Operation referredOperation = DomainUtil.nonNullModel(element.getReferredOperation());
 		OCLExpression source = element.getSource();
 		List<OCLExpression> arguments = DomainUtil.nonNullEMF(element.getArgument());
@@ -707,7 +722,6 @@ Object [astName/] = dynamic_[astName/].evaluateIteration(manager_[astName/]);[/l
 
 	@Override
 	public @NonNull CodeGenSnippet visitPropertyCallExp(@NonNull PropertyCallExp element) {
-		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element);
 		Property referredProperty = DomainUtil.nonNullModel(element.getReferredProperty());
 		OCLExpression source = element.getSource();
 		if (source != null) {
@@ -719,6 +733,7 @@ Object [astName/] = dynamic_[astName/].evaluateIteration(manager_[astName/]);[/l
 		if (referredProperty.isStatic()) {
 			return visitStaticPropertyCallExp(element);
 		}
+		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element.getTypeId(), element);
 		//
 		//	Assign each source and argument to a Java variable, unless the source/argument is simple enough to be inlineable.
 		//
@@ -730,9 +745,12 @@ Object [astName/] = dynamic_[astName/].evaluateIteration(manager_[astName/]);[/l
 //				appendThrowingStatement(s, source);
 //			}
 			CodeGenText text = snippet.appendIndentedText("");
+			TypeId targetTypeId = DomainUtil.nonNullModel(referredProperty.getType()).getTypeId();
+			Class<?> unboxedClass = context.getUnboxedClass(targetTypeId);
+			String unboxedClassName = context.getImportedName(unboxedClass);
 			String resultName = snippet.getName();
 //			String typeIdName = snippet.getSnippetName(element.getTypeId());
-			text.append("final Object " + resultName + " = ");
+			text.append("final " + unboxedClassName + " " + resultName + " = ");
 			Type owningType = DomainUtil.nonNullModel(referredProperty.getOwningType());
 			text.appendReferenceTo(source, owningType);
 			text.append(".");
@@ -744,6 +762,8 @@ Object [astName/] = dynamic_[astName/].evaluateIteration(manager_[astName/]);[/l
 				text.appendException(e);				
 			}
 			text.append("();\n");
+			snippet.setUnboxed(unboxedClass);
+			snippet.setIsFinal();
 		}
 //		+ className + ".evaluate(" + evaluatorName + ", " + typeIdName + ", ");
 /*		String className = getImplementationName(referredProperty);
@@ -775,7 +795,7 @@ if ([ast.source.symbolName(expInOcl)/] == null) { throw new <%InvalidValueExcept
 	}
 
 	protected @NonNull CodeGenSnippet visitStaticPropertyCallExp(@NonNull PropertyCallExp element) {
-		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element);
+		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element.getTypeId(), element);
 		Property referredProperty = DomainUtil.nonNullModel(element.getReferredProperty());
 		OCLExpression source = element.getSource();
 		assert source != null;
@@ -788,11 +808,16 @@ if ([ast.source.symbolName(expInOcl)/] == null) { throw new <%InvalidValueExcept
 		else {
 			className = genModelHelper.getQualifiedLiteralName(referredProperty);
 		}
+		TypeId targetTypeId = DomainUtil.nonNullModel(referredProperty.getType()).getTypeId();
+		Class<?> unboxedClass = context.getUnboxedClass(targetTypeId);
+		String unboxedClassName = context.getImportedName(unboxedClass);
 		String typeIdName = snippet.getSnippetName(element.getTypeId());
 		String resultName = snippet.getName();
 		String sourceName = getSymbolName(source);
 		String evaluatorName = context.getEvaluatorName();
-		snippet.append("final Object " + resultName + " = " + className + ".evaluate(" + evaluatorName + ", " + typeIdName + ", " + sourceName + ");\n");
+		snippet.append("final " + unboxedClassName + " " + resultName + " = " + className + ".evaluate(" + evaluatorName + ", " + typeIdName + ", " + sourceName + ");\n");
+		snippet.setUnboxed(unboxedClass);
+		snippet.setIsFinal();
 		return snippet;
 	}
 
@@ -812,7 +837,7 @@ if ([ast.source.symbolName(expInOcl)/] == null) { throw new <%InvalidValueExcept
 		if (analysis.isConstant()) {
 			return context.getSnippet(analysis.getConstantValue());
 		}
-		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element);
+		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element.getTypeId(), element);
 		TupleType tupleType = (TupleType) element.getType();
 		StringBuilder partArgs = new StringBuilder();
 		List<TupleLiteralPart> parts = element.getPart();
@@ -833,10 +858,9 @@ if ([ast.source.symbolName(expInOcl)/] == null) { throw new <%InvalidValueExcept
 	}
 
 	protected @NonNull CodeGenSnippet visitTuplePartCallExp(@NonNull PropertyCallExp element) {
-		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element);
+		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element.getTypeId(), element);
 		Property referredProperty = DomainUtil.nonNullModel(element.getReferredProperty());
-		OCLExpression source = element.getSource();
-		assert source != null;
+		OCLExpression source = DomainUtil.nonNullModel(element.getSource());
 		String tuplePartName = referredProperty.getName();
 		TupleType tupleType = (TupleType) source.getType();
 		List<String> names = new ArrayList<String>(tupleType.getOwnedAttribute().size());
@@ -864,7 +888,7 @@ if ([ast.source.symbolName(expInOcl)/] == null) { throw new <%InvalidValueExcept
 
 	@Override
 	public @NonNull CodeGenSnippet visitVariable(@NonNull Variable element) {
-		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element);
+		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element.getTypeId(), element);
 		return snippet;
 //		VariableDeclaration referredVariable = element.getReferredVariable();
 //		if (referredVariable)
@@ -878,7 +902,7 @@ if ([ast.source.symbolName(expInOcl)/] == null) { throw new <%InvalidValueExcept
 		if (delegatesTo != null) {
 			return context.getSnippet(delegatesTo.getExpression());
 		}
-		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element);
+		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element.getTypeId(), element);
 		return snippet;
 //		VariableDeclaration referredVariable = element.getReferredVariable();
 //		if (referredVariable)

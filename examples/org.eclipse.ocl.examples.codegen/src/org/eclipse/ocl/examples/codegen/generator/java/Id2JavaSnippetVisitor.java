@@ -59,16 +59,16 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 		atNonNull = codeGenerator.atNonNull();
 	}
 
-	protected @NonNull CodeGenSnippet createInlinedSnippet(@NonNull String name, @NonNull Class<? extends ElementId> javaClass) {
-		CodeGenSnippet s = new JavaSnippet(name, javaClass, codeGenerator, "");
+	protected @NonNull CodeGenSnippet createInlinedSnippet(@NonNull String name, @NonNull TypeId typeId, @NonNull Class<? extends ElementId> javaClass) {
+		CodeGenSnippet s = new JavaSnippet(name, typeId, javaClass, codeGenerator, "");
 		s.setIsInlined();
-		s.setIsStatic();
+//		s.setIsStatic();
 		return s;
 	}
 
 	protected @NonNull <T extends ElementId> CodeGenText createNonInlinedSnippet(@NonNull T id, @NonNull Class<? extends T> javaClass) {
-		CodeGenSnippet s = new JavaSnippet(codeGenerator, "", id);
-		s.setIsStatic();
+		CodeGenSnippet s = new JavaSnippet(codeGenerator, "", TypeId.METACLASS.getSpecializedId(id), id);
+//		s.setIsStatic();
 		return s.append("private static final " + atNonNull + " " + codeGenerator.getImportedName(javaClass) + " " + s.getName() + " = ");
 	}
 	
@@ -116,7 +116,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 	}
 
 	public @NonNull CodeGenSnippet visitInvalidId(@NonNull OclInvalidTypeId id) {
-		return createInlinedSnippet(typeIdName + ".OCL_INVALID", OclInvalidTypeId.class);
+		return createInlinedSnippet(typeIdName + ".OCL_INVALID", TypeId.OCL_INVALID, OclInvalidTypeId.class);
 	}
 
 	public @NonNull CodeGenSnippet visitLambdaTypeId(@NonNull LambdaTypeId id) {
@@ -177,7 +177,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 	}
 
 	public @NonNull CodeGenSnippet visitNullId(@NonNull OclVoidTypeId id) {
-		return createInlinedSnippet(typeIdName + ".OCL_VOID", OclVoidTypeId.class);
+		return createInlinedSnippet(typeIdName + ".OCL_VOID", TypeId.OCL_VOID, OclVoidTypeId.class);
 	}
 
 	public @NonNull CodeGenSnippet visitOperationId(@NonNull OperationId id) {
@@ -212,7 +212,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 			name = typeIdName + ".UNLIMITED_NATURAL";
 		}
 		if (name != null) {
-			return createInlinedSnippet(name, PrimitiveTypeId.class);
+			return createInlinedSnippet(name, id, PrimitiveTypeId.class);
 		}
 		return visiting(id);
 	}
