@@ -17,12 +17,15 @@
 package org.eclipse.ocl.examples.build.utilities;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.WorkflowComponentWithModelSlot;
@@ -49,6 +52,14 @@ public class ResourceWriter extends WorkflowComponentWithModelSlot
 		return contentTypeIdentifier;
 	}
 
+	protected Map<?, ?> getSaveOptions() {
+		Map<Object, Object> result = new HashMap<Object, Object>();
+		result.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
+		result.put(XMLResource.OPTION_LINE_WIDTH, Integer.valueOf(132));
+		result.put(XMLResource.OPTION_LINE_DELIMITER, "\n");
+		return result;
+	}
+
 	public String getUri() {
 		return uri;
 	}
@@ -62,12 +73,12 @@ public class ResourceWriter extends WorkflowComponentWithModelSlot
 				log.info("Writing '" + fileURI + "'");
 				Resource saveResource = resourceSet.createResource(fileURI, contentTypeIdentifier);
 				saveResource.getContents().addAll(inputResource.getContents());
-				saveResource.save(null);
+				saveResource.save(getSaveOptions());
 				inputResource.getContents().addAll(saveResource.getContents());
 			}
 			else {
 				log.info("Writing '" + inputResource.getURI() + "'");
-				inputResource.save(null);
+				inputResource.save(getSaveOptions());
 			}
 		} catch (IOException e) {
 			throw new RuntimeException("Problems running " + getClass().getSimpleName(), e);

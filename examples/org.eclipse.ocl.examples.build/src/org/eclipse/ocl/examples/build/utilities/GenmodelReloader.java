@@ -161,34 +161,34 @@ public class GenmodelReloader extends AbstractProjectComponent
 //		this.modelImporter = modelImporter;
 //	}
 	  
-	  public static List<Resource> computeResourcesToBeSaved(ModelImporter modelImporter)
-	  { // This is a clone of the protected ModelImporter method
-	    List<Resource> resources = new UniqueEList.FastCompare<Resource>();
-	    Resource genModelResource = modelImporter.getGenModel().eResource();
-	    resources.add(genModelResource);
-	    for (GenPackage genPackage : modelImporter.getGenModel().getGenPackages())
-	    {
-	      resources.add(genPackage.getEcorePackage().eResource());
-	    }
-	    
-	    // Handle application genmodel stub
-	    //
-	    for (GenPackage genPackage : modelImporter.getGenModel().getUsedGenPackages())
-	    {
-	      if (genPackage.eResource() == genModelResource)
-	      {
-	        resources.add(genPackage.getEcorePackage().eResource());
-	      }
-	    }
-	    
-	    return resources;
-	  }
-	  
-	  protected Map<?, ?> getGenModelSaveOptions()
-	  { // This is an extended clone of the protected ModelImporter method
-	    Map<Object, Object> result = new HashMap<Object, Object>();
-	    result.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
-	    result.put(XMLResource.OPTION_LINE_WIDTH, Integer.valueOf(80));
-	    return result;
-	  }
+	public static List<Resource> computeResourcesToBeSaved(
+			ModelImporter modelImporter) { // This is a clone of the protected
+											// ModelImporter method
+		List<Resource> resources = new UniqueEList.FastCompare<Resource>();
+		Resource genModelResource = modelImporter.getGenModel().eResource();
+		resources.add(genModelResource);
+		for (GenPackage genPackage : modelImporter.getGenModel()
+			.getGenPackages()) {
+			resources.add(genPackage.getEcorePackage().eResource());
+		}
+
+		// Handle application genmodel stub
+		//
+		for (GenPackage genPackage : modelImporter.getGenModel()
+			.getUsedGenPackages()) {
+			if (genPackage.eResource() == genModelResource) {
+				resources.add(genPackage.getEcorePackage().eResource());
+			}
+		}
+
+		return resources;
+	}
+
+	protected Map<?, ?> getGenModelSaveOptions() {
+		Map<Object, Object> result = new HashMap<Object, Object>();
+		result.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
+		result.put(XMLResource.OPTION_LINE_WIDTH, Integer.valueOf(132));
+		result.put(XMLResource.OPTION_LINE_DELIMITER, "\n");
+		return result;
+	}
 }
